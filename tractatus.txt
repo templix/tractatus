@@ -4662,19 +4662,25 @@ Paletas (.gpl)	/usr/share/gimp/2.0/palettes
 Degradados(.ggr)/usr/share/gimp/2.0/gradients 
 
 
-git (git-core) 
-Software de control de versiones. Servidor donde se suben los archivos de un proyecto y donde se van registrando las modificaciones y cambios. Para el ejemplo usaremos dos directorios uno en nuestra $HOME [repositorio] y otro en Dropbox [git] 
-$ git init repositorio (Crear el repositorio local) 
-$ cd repositorio 
-$ git clone . /home/USER/Dropbox/git (Sincronizar los directorios) 
-$ git add archivo (Añadir el proyecto) 
+git
+[git-core]
+Manual completo en español: <http://www-cs-students.stanford.edu/~blynn/gitmagic/intl/es/book.html#_hosting_git_gratuito> 
+Software de control de versiones. Una vez registrados en Github [<http://github.com>], crear un nuevo repositorio con el nombre escogido y github nos facilitará los datos de acceso [https://github.com/templix/tractatus.git] y en local:
+$ mkdir tractatus (Crear el repositorio local)
+$ cd tractatus (Entrar en él)
+$ git init (Inicializar git)
+$ mv /home/templix/tractatus.txt . (Mover el archivo al repositorio)
+$ git add tractatus.txt (Añadir el fichero a git)
+$ git commit -m 'Inicio del proyecto' (Realizar el primer commit que es una especie de copia de seguridad que nos permite ver los cambios en el pryecto y si es necesario regresar a una versión anterior)
+$ git remote add origin https://github.com/templix/tractatus.git (Decirle a nuestra copia local el repositorio remoto donde se alojará)
+$ git push origin master (Enviar los cambios al servidor remoto)
+Otros comandos útiles:
+$ git clone https://github.com/templix/tractatus.git (Bajar un fichero de github)
 $ git config --global user.name "nombre_usuario" (Entrar datos del usuario) 
 $ git config --global user.mail mail@direccion.com   (Entrar mail)
 $ git config -l (Comprobar los datos del usuario)
 $ git status (Comprobar si se han efectuado cambios) 
-$ git commit -m "modifico" archivo (Registrar las modificaciones) 
 $ git rm archivo (Eliminar archivo) 
-$ git commit -m "Eliminado" archivo (registrar la eliminación)
 $ git diff --color-words archivo1 archivo2  (Mostrar las diferencias en color)
 
 
