@@ -4679,8 +4679,13 @@ $ git clone https://github.com/templix/tractatus.git (Bajar un fichero de github
 $ git config --global user.name "nombre_usuario" (Entrar datos del usuario) 
 $ git config --global user.mail mail@direccion.com   (Entrar mail)
 $ git config -l (Comprobar los datos del usuario)
-$ git status (Comprobar si se han efectuado cambios) 
-$ git rm archivo (Eliminar archivo) 
+$ git log (Ver historial de commits)
+$ git status (Comprobar si se han efectuado cambios)
+$ git config --global credential.helper cache (guarda la contraseña en caché durante 15 min)
+$ git config --global credential.helper 'cache --timeout=3600' (guarda la contraseña durante una hora)
+$ git rm archivo (Eliminar archivo)
+$ git fetch origin (este comando junto con el siguiente elimina todos los cambios locales y pone la versión del servidor)
+$ git reset --hard origin/master
 $ git diff --color-words archivo1 archivo2  (Mostrar las diferencias en color)
 
 
