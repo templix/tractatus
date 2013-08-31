@@ -11656,6 +11656,11 @@ $ split -d -b 100m archivo otro_archivo. (Que tengan extensión con números: .0
 $ cat prefijo* > archivo  (volver a unirlos)
 
 
+splitvt
+Lanzar dos shells simultaneas partiendo en dos ventanas una terminal.
+$ splitvt -t "linux es genial" -upper ls -lower top (Con un título [-t] lanzando un ls en la ventana superior y top en la inferior)
+
+
 sponge
 [moreutils]
 herramienta que guarda todo el contenido a escribir hasta que recibe el EOF y luego lo escribe por lo que permite procesar un fichero y reescribirlo en el propio fichero sin perdida de datos.
