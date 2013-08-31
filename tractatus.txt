@@ -2506,6 +2506,15 @@ Método de ejecutar ddrescue en dos pasadas, de forma que la primera sólo recup
 Luego comprobar errores con fsck.
 
 
+deallocvt
+Libera memoria y estructuras de datos del núcleo para todas las consolas virtuales que no se usen. Una consola virtual se considera en desuso si no es la consola en primer plano, ni  ningún  proceso  la  tiene  abierta  para  lectura  o escritura, ni se ha seleccionado ningún texto en su pantalla. Ver openvt
+# deallocvt (Las desasigna todas)
+# deallocvt 5 (Sólo desasigna la /dev/tty5)
+Un ejemplo de uso:
+# openvt -s ls (lanzara el comando ls en la primera consola virtual libre. Normalmente la /dev/tty8 si no se especifica con el argumento -c 9 [lanzará la /dev/tty9])
+# deallocvt 8 
+
+
 deb
 Extensión de los paquetes para distros Debian.
 1.-
@@ -9395,6 +9404,11 @@ $ openssl enc -d -des3 -in cifrado.tar.bz2.ssl -out archivo.tar.bz2
 $ openssl rand -base64 6  (generar una contraseña)
 $ openssl enc -base64 -in imagen.jpg (Codificar una imagen)
 Nota.- la opción "a" indica que codificará con base64. "-salt" Añade potencia al cifrado.
+
+
+openvt
+lanza un programa en una nueva consola virtual [ttyX]. Ver deallocvt
+# openvt -c 9 ifconfig (Lanzar ifconfig en la /dev/tty9)
 
 
 opera
