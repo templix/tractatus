@@ -9676,6 +9676,13 @@ Ruta para acceder a los datos contenidos en una unidad de almacenamiento.
 # echo $PATH | tr : \\n   (mostrará los dirs de los ejecutables)
 
 
+pathchk
+[coreutils]
+Comprueba si un nombre de fichero es válido o portable en sistemas POSIX.
+$ pathchk -p Juegos del niño
+pathchk: el nombre del fichero «niño» contiene el caracter no portable «ñ»
+
+
 pbzip2
 Comprensión en paralelo que puede usarse en máquinas de más de un nucleo. Las opciones de uso son las mismas que bzip2.
 
