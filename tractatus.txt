@@ -9517,6 +9517,20 @@ Sistema de detección de intrusos. Durante la instalación, una vez escogido el 
 # /var/ossec/bin/ossec-control start (Arrancar el demonio caso de no colocarlo en /etc/init.d/ossec)
 
 
+opkg
+Gestor de paquetes de OpenWRT, firmware linux para routers.
+# opkg update (actualiza la lista de paquetes)
+# opkg install paquete (instalar un paquete)
+# opkg upgrade paquete (actualiza un paquete)
+# opkg remove paquete (elimina un paquete)
+# opkg list (ver paquetes disponibles)
+# opkg list-installed (ver paquetes instalados)
+# opkg list-upgradable (ver paquetes actualizables)
+# opkg files paquete (Ver ficheros instalados de un paquete y la versión del mismo)
+# opkg info paquete (ver información de un paquete)
+# opkg find palabra (buscar paquetes por nombre y descripción)
+
+
 otp
 Generador de contraseñas.
 $ otp -c6 -S3 -n5 (Creará 5 contraseñas [-n] por defecto son 50, de 6 letras mayúsculas [-c] separadas por un guión de 3 en 3 [-S] por defecto son de 4 en 4)
