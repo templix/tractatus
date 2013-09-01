@@ -9522,6 +9522,20 @@ Sistema de detección de intrusos. Durante la instalación, una vez escogido el 
 # /var/ossec/bin/ossec-control start (Arrancar el demonio caso de no colocarlo en /etc/init.d/ossec)
 
 
+opkg
+Gestor de paquetes de OpenWRT, firmware linux para routers.
+# opkg update (actualiza la lista de paquetes)
+# opkg install paquete (instalar un paquete)
+# opkg upgrade paquete (actualiza un paquete)
+# opkg remove paquete (elimina un paquete)
+# opkg list (ver paquetes disponibles)
+# opkg list-installed (ver paquetes instalados)
+# opkg list-upgradable (ver paquetes actualizables)
+# opkg files paquete (Ver ficheros instalados de un paquete y la versión del mismo)
+# opkg info paquete (ver información de un paquete)
+# opkg find palabra (buscar paquetes por nombre y descripción)
+
+
 otp
 Generador de contraseñas.
 $ otp -c6 -S3 -n5 (Creará 5 contraseñas [-n] por defecto son 50, de 6 letras mayúsculas [-c] separadas por un guión de 3 en 3 [-S] por defecto son de 4 en 4)
@@ -10673,6 +10687,7 @@ Algunas opciones:
 	-z (comprime los datos que serán transferidos) 
 	--exclude=tmp  (Excluir archivos o directorios. /tmp en este caso)
 	--delete-during  (Borrar los archivos de origen a medida que son transferidos) 
+$ rsync -aHxv root@dirección_IP:/* /carpeta_destino --exclude=/dev --exclude=/proc --exclude=/sys --exclude=/tmp (copia/clonación en vivo de todo un sistema remoto a un directorio local. Se recomienda parar todos los servicios en ejecución de la máquina remota y repetir el comando varias veces hasta que no haya ningún fichero copiado, para evitar ficheros corrompidos. Se deben crear las carpetas "/dev", "/proc", "/sys" y "/tmp" en la carpeta de destino).
 
 
 rtcwake 
