@@ -70,6 +70,13 @@ Convertir textos a imagen .png
 $ a2png texto.txt texto.png
 
 
+aa3d
+Generador de arte ASCII a partir de textos o imagenes.
+$ aa3d$ aa3d < texto.tx < texto.txt
+$ aa3d -w 100 -t "linux es un sistema genial" < imagen.png (Con anchura de 100 espacios [por defecto 80] y usando un determinado texto)
+$ aa3d -d < texto.txt (Usando solo números) 
+
+
 aafire
 [caca-utils]
 Fuego animado en ascii. En algunas distros cacafire [ver]
@@ -2773,6 +2780,11 @@ $ diff -q fichero1 fichero2   (Informa si los ficheros difieren sin mostrar deta
 $ diff -y fichero1 fichero2   (Muestra la salida a dos columnas)
 $ diff –urp dir1 dir2 (Compara recursivamente el contenido de 2 directorios.)
 $ diff -u <(grep -vE '^(#|$)' file1) <(grep -vE '^(#|$)' file2) (Los compara ignorando comentarios y lineas en blanco)
+
+
+diffpdf
+Compara dos archivos pdf.
+$ diffpdf archivo1.pdf archivo2.pdf
 
 
 dig (dnsutils)
