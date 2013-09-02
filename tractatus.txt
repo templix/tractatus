@@ -72,7 +72,7 @@ $ a2png texto.txt texto.png
 
 aa3d
 Generador de arte ASCII a partir de textos o imagenes.
-$ aa3d$ aa3d < texto.tx < texto.txt
+$ aa3d$ aa3d < texto.tx
 $ aa3d -w 100 -t "linux es un sistema genial" < imagen.png (Con anchura de 100 espacios [por defecto 80] y usando un determinado texto)
 $ aa3d -d < texto.txt (Usando solo números) 
 
@@ -4458,6 +4458,21 @@ nouser (Solo el usuario root podrá montar el sistema de archivos)
 defaults (Utiliza las opciones por defecto: rw,exec,auto,nouser) 
 * Respaldo. Es el comando que utiliza dump para hacer respaldos del sistema de archivos. Cero desactiva la opción.
 * Orden. indica el orden en que la aplicación fsck revisará la partición en busca de errores durante el inicio, si es cero el dispositivo no se revisa.
+
+
+fswebcam
+Capturas con la webcam.
+$ fswebcam --crop 200x100 --save out (Especificando medidas y archivo de salida)
+$ fswebcam -r 600x500 out1.jpeg --greyscale out2.jpeg (Dos capturas, especificando resolución y la otra en escala de grises)
+$ fswebcam --banner-colour "#FF0000" --save out (Con el baner de color rojo)
+Algunas opciones:
+	-d  (Especificar el dispositivo de video. Por defecto /dev/video0)
+	--no-banner (Que la captura no muestre el baner. Por defecto sale en la parte inferior)
+	--top-banner (Que el baner salga en parte superior)
+	--title "linux es genial" (Mostrando un texto en el baner)
+	--timestamp "%d-%m-%Y" (Mostrando en el baner la fecha en formato dia-mes-año)
+	--info "Linux es un sistema genial" (Añadir un texto que se muestra debajo de la fecha con letra más pequeña)
+	--invert (Haciendo un negativo de la imagen)
 
 
 fte
