@@ -4087,6 +4087,7 @@ $ find ./ -name .svn -exec rm -rf {} \; (eliminar todos los directorios y subdir
 $ find . -name "*.html" -exec grep -i -H "Tractatus elementalis" {} \; (Buscar en todos los archivos html del directorio actual con un texto concreto)
 $ find . -name \*.txt -exec sed -i "s/cosa/casa/g" {} \; (Substituir “cosa” por “casa” en todos los .txt del presente directorio)
 $ find ~/ -depth -type f -empty (Buscar archivos vacios. Con -type d buscará directorios vacios)
+$ find / -name "algo" -a ! -path "/media/servidor/*" -exec echo {} \; 2>/dev/null (Buscar "algo" descartando el directorio /media/servidor/)
 
 
 findfs
