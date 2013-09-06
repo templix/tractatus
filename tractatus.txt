@@ -6044,10 +6044,12 @@ Monitor de tráfico IP. Mide el uso del ancho de banda.
 
 
 iptraf
-Para poder verificar el ancho de banda entre los clientes de una red local.Se instala en todas las máquinas de la red.
-# iperf -s  (en el servidor)
-# iperf -c 192.168.1.1 (en los clientes)
-# iptraf -d eth0 (monitorizar estadistica del trafico)
+Muestra información en tiempo real sobre el tráfico de red. 
+# iptraf -i eth0 (Analiza todo el trafico de la red eth0)
+# iptraf -i all (Analiza el de todas las redes)
+# iptraf -s eth0 (Analiza el tráfico agrupandolo por protocolo y puerto)
+# iptraf -z eth0 (Contabiliza paquetes y agrupa por tamaño)
+Una vez lanzada la aplicación, para salir pulsar X
 
 
 irb
