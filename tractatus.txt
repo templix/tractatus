@@ -5995,6 +5995,17 @@ Algunas opciones:
 -p   (pid) 
 
 
+iperf
+Para poder verificar el ancho de banda entre los clientes de una red local. Se instala en todas las máquinas de la red.
+# iperf -s (Poner el servidor a la escucha por el puerto 5001)
+# iperf -c 192.168.1.10 (Conectar los clientes con el servidor)
+Alguna sopciones que pueden añadirse:
+-f B (Mostrar el resultado en Bytes por segundo [b: bytes/s, k:kilobits/s, m:megabytes/s, B:Bytes/s, K:KiloBytes/s, M:MegaBytes/s] esta opción sirva igual para el cliente que para el servidor)
+-t 120 (Tiempo en segundos de duración de la transmisión. Sólo para el cliente)
+-D (Lanzarlo como servicio. Sólo en el servidor)
+-i 10 (Tempo en segundos entre mediciones. Sólo cliente)
+
+
 ipscan 
 Escanea la red en busca de máquinas activas. 
 $ ipscan -s -f:range 192.168.1.1 192.168.1.255 (todo el rango de ips) 
