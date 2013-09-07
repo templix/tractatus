@@ -70,6 +70,13 @@ Convertir textos a imagen .png
 $ a2png texto.txt texto.png
 
 
+aa3d
+Generador de arte ASCII a partir de textos o imagenes.
+$ aa3d$ aa3d < texto.tx
+$ aa3d -w 100 -t "linux es un sistema genial" < imagen.png (Con anchura de 100 espacios [por defecto 80] y usando un determinado texto)
+$ aa3d -d < texto.txt (Usando solo números) 
+
+
 aafire
 [caca-utils]
 Fuego animado en ascii. En algunas distros cacafire [ver]
@@ -618,6 +625,8 @@ ar
 Crea, modifica y extrae archivos
 $ ar crv libfoo.a bill.o fred.o (Añade librerias objeto a un archivo de librería estática)
 $ ar vx paquete.deb (extrae un .deb convirtiendolo en un tar.gz)
+$ ar x finalterm_0.1-0~64~saucy1_amd64.deb (Extraer los 3 archivos de un paquete deb)
+$ ar p finalterm_0.1-0~64~saucy1_amd64.deb data.tar.gz | tar xz (Extraer y descomprimir uno de los archivos de un paquete deb)
 
 
 arch
@@ -1187,6 +1196,13 @@ $ bg %3 (mover el proceso 3 a background)
 bin2iso
 Convierte una imagen bin/cue a iso
 $ bin2iso imagen.cue  imagen.iso 
+
+
+binclock
+Reloj en formato binario para la consola.
+$ binclock
+$ binclock -l -t (En formato tradicional [hora, minuto, segundo] y actualizando cada segundo)
+$ binclock -l -n (Añadiendo la hora en formato humano)
 
 
 bind 
@@ -2021,6 +2037,11 @@ comodines
 Ver “signos y comodines”
 
 
+comparepdf
+Comparar dos archivos pdf.
+$ comparepdf archivo1.pdf archivo2.pdf
+
+
 compgen
 Comando para listar comandos disponibles.
 $ compgen -c (Lista comando)
@@ -2768,6 +2789,11 @@ $ diff -q fichero1 fichero2   (Informa si los ficheros difieren sin mostrar deta
 $ diff -y fichero1 fichero2   (Muestra la salida a dos columnas)
 $ diff –urp dir1 dir2 (Compara recursivamente el contenido de 2 directorios.)
 $ diff -u <(grep -vE '^(#|$)' file1) <(grep -vE '^(#|$)' file2) (Los compara ignorando comentarios y lineas en blanco)
+
+
+diffpdf
+Compara dos archivos pdf.
+$ diffpdf archivo1.pdf archivo2.pdf
 
 
 dig (dnsutils)
@@ -3772,6 +3798,10 @@ faillog
 $ faillog
 
 
+false
+Este comando no hace nada excepto devolver un estado de salida 1 (fail). Se utiliza como marcador de posición en scripts.
+
+
 fbgrab
 Realizar pantallazos desde las X y desde las tty1-6
 $ fbgrab -s 2 pantallazo.png   (pantallazo despues de 2 segundos)
@@ -4061,6 +4091,7 @@ $ find ./ -name .svn -exec rm -rf {} \; (eliminar todos los directorios y subdir
 $ find . -name "*.html" -exec grep -i -H "Tractatus elementalis" {} \; (Buscar en todos los archivos html del directorio actual con un texto concreto)
 $ find . -name \*.txt -exec sed -i "s/cosa/casa/g" {} \; (Substituir “cosa” por “casa” en todos los .txt del presente directorio)
 $ find ~/ -depth -type f -empty (Buscar archivos vacios. Con -type d buscará directorios vacios)
+$ find / -name "algo" -a ! -path "/media/servidor/*" -exec echo {} \; 2>/dev/null (Buscar "algo" descartando el directorio /media/servidor/)
 
 
 findfs
@@ -4441,6 +4472,21 @@ nouser (Solo el usuario root podrá montar el sistema de archivos)
 defaults (Utiliza las opciones por defecto: rw,exec,auto,nouser) 
 * Respaldo. Es el comando que utiliza dump para hacer respaldos del sistema de archivos. Cero desactiva la opción.
 * Orden. indica el orden en que la aplicación fsck revisará la partición en busca de errores durante el inicio, si es cero el dispositivo no se revisa.
+
+
+fswebcam
+Capturas con la webcam.
+$ fswebcam --crop 200x100 --save out (Especificando medidas y archivo de salida)
+$ fswebcam -r 600x500 out1.jpeg --greyscale out2.jpeg (Dos capturas, especificando resolución y la otra en escala de grises)
+$ fswebcam --banner-colour "#FF0000" --save out (Con el baner de color rojo)
+Algunas opciones:
+	-d  (Especificar el dispositivo de video. Por defecto /dev/video0)
+	--no-banner (Que la captura no muestre el baner. Por defecto sale en la parte inferior)
+	--top-banner (Que el baner salga en parte superior)
+	--title "linux es genial" (Mostrando un texto en el baner)
+	--timestamp "%d-%m-%Y" (Mostrando en el baner la fecha en formato dia-mes-año)
+	--info "Linux es un sistema genial" (Añadir un texto que se muestra debajo de la fecha con letra más pequeña)
+	--invert (Haciendo un negativo de la imagen)
 
 
 fte
@@ -5958,6 +6004,17 @@ Algunas opciones:
 -p   (pid) 
 
 
+iperf
+Para poder verificar el ancho de banda entre los clientes de una red local. Se instala en todas las máquinas de la red.
+# iperf -s (Poner el servidor a la escucha por el puerto 5001)
+# iperf -c 192.168.1.10 (Conectar los clientes con el servidor)
+Alguna sopciones que pueden añadirse:
+-f B (Mostrar el resultado en Bytes por segundo [b: bytes/s, k:kilobits/s, m:megabytes/s, B:Bytes/s, K:KiloBytes/s, M:MegaBytes/s] esta opción sirva igual para el cliente que para el servidor)
+-t 120 (Tiempo en segundos de duración de la transmisión. Sólo para el cliente)
+-D (Lanzarlo como servicio. Sólo en el servidor)
+-i 10 (Tempo en segundos entre mediciones. Sólo cliente)
+
+
 ipscan 
 Escanea la red en busca de máquinas activas. 
 $ ipscan -s -f:range 192.168.1.1 192.168.1.255 (todo el rango de ips) 
@@ -6008,10 +6065,12 @@ Monitor de tráfico IP. Mide el uso del ancho de banda.
 
 
 iptraf
-Para poder verificar el ancho de banda entre los clientes de una red local.Se instala en todas las máquinas de la red.
-# iperf -s  (en el servidor)
-# iperf -c 192.168.1.1 (en los clientes)
-# iptraf -d eth0 (monitorizar estadistica del trafico)
+Muestra información en tiempo real sobre el tráfico de red. 
+# iptraf -i eth0 (Analiza todo el trafico de la red eth0)
+# iptraf -i all (Analiza el de todas las redes)
+# iptraf -s eth0 (Analiza el tráfico agrupandolo por protocolo y puerto)
+# iptraf -z eth0 (Contabiliza paquetes y agrupa por tamaño)
+Una vez lanzada la aplicación, para salir pulsar X
 
 
 irb
@@ -7633,6 +7692,12 @@ $ mkntfs -L win -F /dev/sdb2 (con etiqueta “win” y forzando)
 mkswap
 Crear un espacio de intercambio.
 # mkswap /dev/sda5 (Luego añadir la entrada en /etc/fstab: /dev/sda4 none swap sw 0 0)
+
+
+mktemp
+Crear archivos o directorios temporales.
+$ mktemp (Crea un archivo en /tmp)
+$ mktemp -d (Crea un directorio en /tmp)
 
 
 mlabel
@@ -9522,6 +9587,20 @@ Sistema de detección de intrusos. Durante la instalación, una vez escogido el 
 # /var/ossec/bin/ossec-control start (Arrancar el demonio caso de no colocarlo en /etc/init.d/ossec)
 
 
+opkg
+Gestor de paquetes de OpenWRT, firmware linux para routers.
+# opkg update (actualiza la lista de paquetes)
+# opkg install paquete (instalar un paquete)
+# opkg upgrade paquete (actualiza un paquete)
+# opkg remove paquete (elimina un paquete)
+# opkg list (ver paquetes disponibles)
+# opkg list-installed (ver paquetes instalados)
+# opkg list-upgradable (ver paquetes actualizables)
+# opkg files paquete (Ver ficheros instalados de un paquete y la versión del mismo)
+# opkg info paquete (ver información de un paquete)
+# opkg find palabra (buscar paquetes por nombre y descripción)
+
+
 otp
 Generador de contraseñas.
 $ otp -c6 -S3 -n5 (Creará 5 contraseñas [-n] por defecto son 50, de 6 letras mayúsculas [-c] separadas por un guión de 3 en 3 [-S] por defecto son de 4 en 4)
@@ -10673,6 +10752,7 @@ Algunas opciones:
 	-z (comprime los datos que serán transferidos) 
 	--exclude=tmp  (Excluir archivos o directorios. /tmp en este caso)
 	--delete-during  (Borrar los archivos de origen a medida que son transferidos) 
+$ rsync -aHxv root@dirección_IP:/* /carpeta_destino --exclude=/dev --exclude=/proc --exclude=/sys --exclude=/tmp (copia/clonación en vivo de todo un sistema remoto a un directorio local. Se recomienda parar todos los servicios en ejecución de la máquina remota y repetir el comando varias veces hasta que no haya ningún fichero copiado, para evitar ficheros corrompidos. Se deben crear las carpetas "/dev", "/proc", "/sys" y "/tmp" en la carpeta de destino).
 
 
 rtcwake 
@@ -12958,6 +13038,12 @@ $ uname -r (... versión instalada del kernel)
 undbx
 Herramienta para exportar los correos de Outlook en formato DBX al formato EML para posteriormente importar en Thunderbird
 $ undbx carpeta-origen carpeta-exportacion (Primero se define la carpeta origen donde se encuentran los ficheros DBX y a continuación se especifica el directorio de salida)
+
+
+unexpand
+Convertir espacios en tabulaciones.
+$ unexpand -t 4 -a texto.txt (Sólo las lineas que tengan 4 espacios en blanco, sea al inicio o entre palabras)
+$ unexpand -t 2  --first-only texto.txt (Sólo las que empiecen por 2 espacios en blanco)
 
 
 unhide
