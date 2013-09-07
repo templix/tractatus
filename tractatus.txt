@@ -3750,6 +3750,13 @@ $ cat lista
 	$ grep -E '^[a-zA-Z._-]+@.[a-zA-Z.0-9]+\.[[:alpha:]]{2,3}$' lista (Sólo mostrará las que terrminen con 2 o 3 letras)
 
 
+ext4magic
+Recuperación de ficheros ext3 y ext4 borrados o sobrescritos.
+# ext4magic /dev/sda2 -m -d . -f user (recuperar sólo los archivos borrados [-m] de nuestra $HOME [/dev/sda2], el resultado en el presente directorio [-d .] y del usuario "user" [-f])
+Algunas opciones:
+-M (Emplear esta opción cuando se ha borrado todo el sistema de ficheros)
+
+
 factor
 Sacar todos los factores de un número.
 $ factor 100
