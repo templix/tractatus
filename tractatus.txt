@@ -3798,6 +3798,10 @@ faillog
 $ faillog
 
 
+false
+Este comando no hace nada excepto devolver un estado de salida 1 (fail). Se utiliza como marcador de posición en scripts.
+
+
 fbgrab
 Realizar pantallazos desde las X y desde las tty1-6
 $ fbgrab -s 2 pantallazo.png   (pantallazo despues de 2 segundos)
@@ -7683,6 +7687,12 @@ $ mkntfs -L win -F /dev/sdb2 (con etiqueta “win” y forzando)
 mkswap
 Crear un espacio de intercambio.
 # mkswap /dev/sda5 (Luego añadir la entrada en /etc/fstab: /dev/sda4 none swap sw 0 0)
+
+
+mktemp
+Crear archivos o directorios temporales.
+$ mktemp (Crea un archivo en /tmp)
+$ mktemp -d (Crea un directorio en /tmp)
 
 
 mlabel
@@ -13023,6 +13033,12 @@ $ uname -r (... versión instalada del kernel)
 undbx
 Herramienta para exportar los correos de Outlook en formato DBX al formato EML para posteriormente importar en Thunderbird
 $ undbx carpeta-origen carpeta-exportacion (Primero se define la carpeta origen donde se encuentran los ficheros DBX y a continuación se especifica el directorio de salida)
+
+
+unexpand
+Convertir espacios en tabulaciones.
+$ unexpand -t 4 -a texto.txt (Sólo las lineas que tengan 4 espacios en blanco, sea al inicio o entre palabras)
+$ unexpand -t 2  --first-only texto.txt (Sólo las que empiecen por 2 espacios en blanco)
 
 
 unhide
