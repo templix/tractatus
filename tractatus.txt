@@ -190,6 +190,20 @@ Reiniciar apache:
 Aceder con http://localhost/ajaxplorer y, como primer paso, modificar la contraseña por defecto [admin/admin] 
 
 
+ajaxterm
+Proporciona una shell web por un puerto dado aceptando peticiones del mismo equipo desde el navegador.
+$ ajaxterm -d (Lanza como demonio, colocando el puerto 8022 [si no se ha modificado] a la escucha)
+Se accede en local colocando en la barra del navegador: http://localhost:8022
+$ ajaxterm -p 12500 (Modificando el puerto por defecto)
+1.-
+Modificar las medidas de la terminal:
+# nano /usr/share/ajaxterm/ajaxterm.py
+Modificar la linea con las medidas escogidas:
+	def __init__(self,width=150,height=60):
+# nano /usr/share/ajaxterm/ajaxterm.html
+	t=ajaxterm.Terminal("term",150,60);
+
+
 akregator
 Lector RSS
 Teclas de control:
