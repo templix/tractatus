@@ -5669,6 +5669,40 @@ Ejecuta uno o varios comandos dependiendo de si una condición se cumple o no. A
 	else
 		    echo $B "es el mayor"
 	fi
+Con varias opciones [elif]
+5.-
+	#!/bin/bash
+	ls
+	echo
+	read -p "Cual leer: " LEER
+	echo
+	if [ -f $LEER ]
+	then
+		echo
+		cat $LEER
+		echo
+	elif [ -d $LEER ]
+	then
+		echo
+		echo "Es un directorio...."
+	else
+		echo
+		f_echo "¡¡NO EXISTE!!"
+		echo
+	fi
+6.-
+	#!/bin/bash 
+	echo "Diga si o no:"
+	read RESPUESTA 
+	if  [ "$RESPUESTA" = si ]; then 
+		echo "Has escrito si" 
+	elif [ "$RESPUESTA" = no ]; then 
+		echo "Has escrito no" 
+	elif [ "$RESPUESTA" = "" ]; then 
+		echo "No has escrito nada" 
+	else 
+		echo "Has escrito una cosa no permitida" 
+	fi 
 
 
 ifconfig (net-tools)
