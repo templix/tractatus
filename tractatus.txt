@@ -5489,12 +5489,12 @@ hg (paquete mercurial)
 Mercurial es un potente programa de control de versiones para nuestros proyectos. Previamente crear en la carpeta personal, el archivo:
 $ nano .hgrc
 Con el siguiente contenido:
-[ui]
-username = Juanito Perez juanitoperez@gmail.com
-$ hg init [directorio] . (crea un repositorio en el directorio actual o en el que se especifique)
+	[ui]
+	username = Juanito Perez juanitoperez@gmail.com
+$ hg init repositorio . (crea un repositorio en el directorio actual o en el que se especifique)
 $ hg add  (añade los ficheros existentes en el directorio a nuestro proyecto)
 $ hg clone http://servidor.com/hg (clona un repositorio a la carpeta actual)
-$ hg clone ssh://usuario@servidor.com/carpeta repositorio (clona carpeta usando ssh en el directorio repositorio de el directorio actual)
+$ hg clone ssh://usuario@servidor.com/carpeta repositorio (clona "carpeta" usando ssh en el directorio "repositorio" del directorio actual)
 $ hg status (muestra el estado de los ficheros del proyecto)
 $ hg commit (realizamos un commit al proyecto)
 $ hg push (enviamos los cambios al repositorio remoto)
@@ -13977,6 +13977,14 @@ $ wget –ftp-user=usuario –ftp-password=contraseña URL (Lo mismo con protoco
 whatis
 Mostrar una breve descripción de un comando.
 $ whatis ifconfig
+
+
+whatweb
+Identifica sitios web: tecnología web, sistemas de gestión de contenidos [CMS], plataformas de blogs, estadística, bibliotecas JavaScript, servidores, dispositivos embebidos, direcciones de correo, versiones, errores SQL.... cuenta con más de 1600 plugins.
+$ whatweb -l (Muestra listado de plugins)
+$ whatweb URL (Uso básico)
+$ whatweb -a 3 -p -v URL (Con un nivel agresivo [-a 3, 1: pasivo y 4: heavy] que use todos los plugins, opción por defecto [-p] y que muestre toda la información [v])
+$ whatweb 192.168.1.0/24 (Que analice toda una red)
 
 
 when
