@@ -3103,6 +3103,46 @@ $ du -s (Solo suma total, en lugar del tamaño de cada directorio)
 $ du fichero (Muestra el tamaño de fichero)
 
 
+duckduckgo
+Buscador alternativo que respeta la privacidad del usuario.
+Filtros:
+	site:lapipaplena.net (Busca en la url especificada)
+	qrcode "linux es un sistema genial" (Crear código QR de un texto)
+	md5 lapipaplena (Generar un hash de un texto en md5)
+	base64 encode "Un texto" (Generar un hash en base64)
+	anagram "linux es genial" (Generar un anagrama [cambio de posición de los carácteres)
+	shorten http://lapipaplena.net (Acortador de URL)
+	maps ibiza (Muestra el mapa solicitado)
+	@templix (De un usuario de twitter)
+	recipes "tortilla de patatas" (Recetas de cocina)
+	color codes (Muestra los códigos de los colores)
+Algunos comandos para utilizar en buscadores externos [Bangs] 
+	!wes (Busca en la wikipedia en español)
+	!github (En github)
+	!b (En bing)
+	!meneame (En meneame)
+	!tw (En twitter)
+	!fb (En facebook)
+	!flickr (En flickr)
+	!grooveshark (En grooveshark)
+	!y (En yahoo)
+	!enes (En google translate inglés-español)
+	!gplus (En google+)
+	!g (En google)
+	!gi (En google images)
+	!m (En google maps)
+	!gmail (En gmail)
+	!ebay (En ebay) 
+Algunos atajos:
+	d (Busca más resultados en el sitio web resaltado)
+	Ctrl+enter (Abre resultado en una nueva ventana)
+	Ees (Sale de la caja de búsqueda y va a los resultados)
+	h (Coloca el cursor en la caja de búsqueda)
+	r (Si existe, va a los relacionados)
+	s (Si existe, va al enlace sugerido
+	t (Va al inicio de la página) 
+
+
 dump 
 Copia de seguridad de archivos, directorios o particiones. Para restaurar la copia de seguridad ver comando “restore”.
 $ dump -0vf home.bak /home/usuario/ (Completo [0], incremental sería 1, mostrando información [v] y especificando fichero [f]
@@ -10579,6 +10619,28 @@ reflector
 Optimizador del mirrorlist de pacman.
 # reflector (Mostrará todos los mirrors de archlinux.org/mirrors/status/json/)
 # reflector --sort rate -l 10 -f 5 --save /etc/pacman.d/mirrorlist (Que tome los 5 mejores [f] de los 10 más actualizados [l], los ordene por velocidad de descarga [sort] y que sobreescriba el archivo mirrorlist [save])
+
+
+regionset
+Los discos dvd contienen un código que indica la región geográfica donde el dvd fue publicado imposibilitando que los comprados en unas regiones, puedan reproducirse en otras: 
+Códigos de región:
+	1 Norte América (USA y Canadá)
+	2 Europa, Medio-oriente, Sudáfrica y Japón
+	3 Sudeste Asiático, Taiwan, Corea
+	4 Hispano América, Brasil, Australia, Nueva Zelanda
+	5 Antigua URSS (Rusia, Ucrania, etc.), resto de África, India
+	6 China
+Esta aplicación permite cambiar dicho código del reproductor, no en el disco dvd y en la mayoría de los casos sólo permite hacer 5 cambios y en algunos casos, sólo 2.
+# regionset
+	regionset version 0.1 -- reads/sets region code on DVD drives
+	Current Region Code settings:
+	RPC Phase: II
+	type: NONE
+	vendor resets available: 4
+	user controlled changes resets available: 5
+	drive plays discs from region(s):, mask=0xFF
+	Would you like to change the region setting of your drive? [y/n]:
+vendor resets available: 4 (indica el número de cambios disponibles)
 
 
 reiserfsck
