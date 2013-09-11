@@ -10094,6 +10094,8 @@ $ ping -c 2 google.com (mandar solo dos paquetes)
 $ ping -n google.com  (Muestra las direcciones ip por su número y no por su nombre de host)
 $ ping -i 2 google.es (Establece un intérvalo de 2 segundos entre cada transmisión. Por defecto 1")
 $ ping -w 3 google.es (Salir de ping a los 3 segundos)
+# ping -f google.es (Envio masivo de pings. Por cada ECHO_REQUEST enviado se escribe un punto [.] y por cada ECO_REPLY recibido un baskspace [retroceso]. Puede colgar la red o la máquina objetivo mientras dura el ping)
+# ping -s 200 google.es (Especificando número de bytes de datos que se envian. Por defecto 56. Combinado con el parámetro -f puede ser letal para la máquina objetivo)
 
 
 pinky
