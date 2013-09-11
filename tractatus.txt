@@ -13940,6 +13940,11 @@ Y añadir:
 	0 0 * * * /usr/bin/webalizer -c /etc/webalizer.conf -d
 
 
+webcheck
+Revisa una URL, siguiendo sus enlaces y genera un informe index.html en el presente directorio.
+# webcheck http://lapipaplena.net
+
+
 webfsd 
 Sencillo servidor HTTP para contenido estático. Carece de archivos de configuración por lo que todas sus funcionalidades se pueden controlar por parámetro. Acceso por navegador con http://url_o_ip:puerto.
 $ webfsd -r /home/usuario/videos -p 12001 (Compartir el directorio "videos" por el puerto 12001 y actuando como demonio. Matar el proceso con killall webfsd) 
