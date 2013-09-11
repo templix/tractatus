@@ -6087,18 +6087,27 @@ Calcular las ips y mascaras de una red a partir de una ip dada o un rango.
 
 
 ipcs
-facilita información sobre los mecanismos utilizados por nuestro sistema, informando de a quién están asignados, permisos, información estadística, etc.  
+Informa sobre la comunicación entre procesos [espacios de memoria, buffers, semaforos..] listando los recursos compartidos que están creados en ese momento. Ver ipcrm. La columna "shmid" muestra el ID, la "owner" el propietario, "perms" los permisos y "bytes" el tamaño en bytes  
 # ipcs -s | grep postgres  (Muestra los recursos compartidos de postgres) 
-# ipcrm sem id (Elimina el recurso mencionado [id] con el comando anterior) 
 # ipcs -lm (determinar los limites de memoria compartida del sistema) 
 # ipcs -ls (Límites actuales del contador que se utiliza para acceder a los recursos compartidos del sistema)
 # ipcs -u  (Proporciona información sobre la comunicación entre procesos)
+# ipcs -m (despliega los segmentos de memoria compartida)
+# ipcs -mu (muestra un breve resumen)
+# ipcs -ml (muestra los límites en contraposición a los valores actuales)
+# ipcs -m -i 950288 (obtener detalle de un segmento de memoria compartida [valor shmid])
+# ipcs -s (Muestra los semforos en el sistema) 
 Algunas opciones:
 -m  (segmentos de memoria compartida )
 -q   (colas de mensajes )
 -s   (matrices de semáforos )
 -a   (todos. Opción por defecto) 
--p   (pid) 
+-p   (pid)
+
+
+ipcrm
+Permite eliminar la comunicación entre procesos [ver ipcs]. Si paramos el programa con un Ctrl-C o simplemente sale de forma anormal, el recurso [la memoria compartida] no se libera y queda en el sistema. Con este comando es posible borrarla. 
+# ipcrm -m 950288 (eliminar un segmento de memoria compartida)
 
 
 iperf
