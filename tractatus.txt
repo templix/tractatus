@@ -3088,6 +3088,26 @@ Snifer de imagenes y video
 # driftnet -i wlan2
 
 
+dropbox
+Interfaz en linea de comandos para el servicio Dropbox.
+$ dropbox status (Muestra el estado actual del demonio)
+$ dropbox help update (Muestra información sobre el comando que se especifique)
+$ dropbox puburl archivo (Muestra una URL de "archivo" para compartir)
+$ dropbox stop (Para el servicio)
+$ dropbox running (Comprobar si está activo el demonio)
+$ dropbox update (Descargar la última versión de dropbox)
+$ dropbox start (Arranca el servicio)
+$ dropbox start -i (Arranca el servicio e instala el demonio dropboxd si no está disponible en el sistema)
+$ dropbox filestatus -l -a directorio (Lista los archivos del directorio especificado incljuso los ocultos)
+$ dropbox filestatus fichero (Muestra el estado del fichero)
+$ dropbox autostart (Si respondemos "n" dropbox no se iniciará automáticamente al iniciar la sesión. Por defecto "y": si)
+$ dropbox exclude list (Muestra los directorios excluidos de la sincronización)
+$ dropbox exclude add dir1 (Excluir un directorio de la sincronización)
+$ dropbox exclude add dir1 dir2 (Excluir varios directorios)
+$ dropbox exclude remove dir1 (Elimina un directorio de la lista de exclusión)
+$ dropbox lansync (Por defecto usa sincronización LAN. Si respondemos "n" no la usará)
+
+
 dstat
 Monitor  de trafico de red
 # dstat 
