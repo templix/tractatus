@@ -1329,6 +1329,29 @@ btscanner
 Escanear dispositivos bluetooth
 
 
+btsync
+Compartir carpetas. Descargar el archivo que corresponda a nuestra arquitectura de http://labs.bittorrent.com/experiments/sync.html. No precisa instalación.
+$ cd btsync_x64
+Si no queremos modificar los datos, podemos acceder a la aplicación con la dirección del navegador: http://0.0.0.0:8888 con nombre de usuario: "admin" y contraseña: "password". Si queremos personalizar los datos, matar el proceso:
+$ kill -9 PID
+Y crear el archivo de configuración:
+$ ./btsync --dump-sample-config > sync.conf
+Editar y modificar los parámetros indicados según conveniencias:
+$ nano sync.conf
+	"storage_path" : "/home/USUARIO/.sync"
+	"listen" : "127.0.0.1:8888",
+    	"login" : "USUARIO",
+    	"password" : "CONTRASEÑA"
+Guardar y lanzar la aplicación:
+$ ./btsync --config sync.conf
+Acceder por el navegador con la dirección: http://127.0.0.1:8888
+Colocar en el cron para que queda activo al reiniciar:
+$ crontab -e
+Colocar la linea:
+	@reboot /home/USUARIO/btsync_x64/btsync --config /home/USUARIO/btsync_x64/sync.conf
+Guardar. Para compartir una carpeta: clic en "Add Folder", seleccionar la carpeta, generar la clave pulsando en "generate" y finalizar clicando en "Add". En el pc que sincronizará la carpeta, abrir la misma dirección, clic en "add folder" y, sin clicar en "generate", introducir la clave generada antes y seleccionar la carpeta donde se copiará.
+
+
 builtin
 Cuando introducimos un comando en Bash el orden de preferencia en la búsqueda del símbolo por parte de Bash es: Primero las funciones, luego los comandos internos y por último los ficheros de scripts y ejecutables. builtin es más restrictivo que command [ver] y hace que no se busquen alias ni funciones, sólo comando internos [ver tambien comando enable]:
 $ builtin cd /
