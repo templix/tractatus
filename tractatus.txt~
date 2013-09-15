@@ -8586,12 +8586,19 @@ $ nano usuarios.txt
 Juan	Borras	contable	m	1964-05-12	1988-03-27 
 Maria	Gil	administrativo	f	1983-10-03	2004-08-05 
 Antonio Gomez	portero		m	\N		2006-11-01 
+	Nota.- El final del archivo no ha de contener ninguna linea en blanco. 
 Para cargarlo en la BD: 
-mysql> LOAD DATA LOCAL INFILE "usuarios.txt" INTO TABLE datos; 
+mysql> LOAD DATA LOCAL INFILE "usuarios.txt" INTO TABLE datos;
+	Nota.- En caso de que salga el error: The used command is not allowed with this MySQL version:
+	# nano /etc/mysql/my.cnf
+	Y en la sección [mysql] añadir la linea "local-infile": 
+		[mysql]
+		local-infile
+	Reinciar mysql. 
 LOAD DATA (Permite especificar cuál es el separador de columnas y el separador de registros. Por defecto el tabulador es el separador de columnas (campos) y el salto de línea es el separador de registros) 
 Para añadir un nuevo registro a la BD anterior: 
-mysql> INSERT INTO usuarios 
-    -> VALUES('Jose','Robles','administrativo','m',NULL,'2012-12-01'); 
+	mysql> INSERT INTO usuarios 
+	    -> VALUES('Jose','Robles','administrativo','m',NULL,'2012-12-01'); 
 Valores y fechas entre comillas simples y valores desconocidos NULL y no \N como entrando un archivo. 
 mysql> SELECT * FROM usuarios; (Ver toda la tabla para comprobar si se ha añadido el último registro) 
 Para modificar un registro puede realizarse borrando toda la tabla de datos y entrando nuevamente el archivo usuarios.txt si este está actualizado: 
