@@ -8555,7 +8555,7 @@ $ mv -f (Sobreescribe sin preguntar)
 
 
 mysql
-Gestor de bases de datos [BDs]. Todas las sentencias han de terminar con un punto y coma [;] menos la sentencia "USE" 
+Gestor de bases de datos [BDs]. Las BDs se guardan en el directorio /var/lib/mysql/
 $ mysqldump -u root -p proveedores > fichero.sql (Crear un backup de la BD "proveedores".) 
 $ mysql proveedores < fichero.sql (Restaurar la BD "proveedores" de un archivo) 
 $ mysqlimport -u root -p clientes fichero.sql (Otra forma de restaurar una BD si esta ya existe) 
@@ -8565,7 +8565,7 @@ $ mysqldump -u root -p proveedores --ignore-table=antiguos > fichero.sql (Backup
 $ mysql -u root -p1234 (Acceder a la BD con el usuario "root" y contraseña "1234"[nótese que la contraseña está junto a la "p") 
 $ mysql -u root -p (Pedirá contraseña para acceder a la BD con el usuario "root") 
 $ mysql -u root -p datos (Entrar en mysql y directamente en la BD "datos" [notese que la BDs está separada de la "p" por un espacio, sinó se tomaría como la contraseña]) 
-Una vez en el prompt de mysql: 
+Una vez en el prompt de mysql [Todas las sentencias han de terminar con un punto y coma [;] menos la sentencia "USE"]: 
 mysql> show databases; (Mostrar las BDs existentes) 
 mysql> create database datos; (Crear la BD "datos") 
 mysql> USE datos (Entrar en la BD "datos". Sin punto y coma final) 
