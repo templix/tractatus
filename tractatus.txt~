@@ -8622,6 +8622,8 @@ mysql> SELECT nombre, nacimiento FROM usuarios ORDER BY nacimiento; (Ordenar por
 mysql> SELECT * FROM la_tabla ORDER BY la_columna; (Ordenar por el número de una columna) 
 mysql> drop table usuarios; (Eliminar una tabla)
 mysql> drop table if exists usuarios; (Eliminar tabla si existe)
+mysql> CHECK TABLE la_tabla EXTENDED; (Chequear la integridad de una tabla)
+mysql> REPAIR TABLE la_tabla; (Reparar una tabla)
 1.-
 En ciertos casos, para resolver el error: mysqldump: Got error: xxxx: Table 'xxxxxxxxx' doesn't exist when using LOCK TABLES:
 $ mysqldump -u root -p BDs --single-transaction > dump.sql
@@ -8646,6 +8648,24 @@ Ejemplo parecido al anterior pero ordenando el fichero por el segundo campo:
 	mysql> SELECTC campo1,campo2,campo3 FROM tabla ORDER BY campo2 INTO OUTFILE "campos.txt"
 	--> FIELDS TERMINATED BY ' '
 	--> LINES TERMINATED BY '\n\r';
+5.-
+Gestion de usuarios.
+Cuando creamos un nuevo usuario en MySQL, éste queda identificado por su nombre de usuario más el nombre o IP del ordenador desde el cual hemos dicho que accederá (el carácter comodín '%' representa varios ordenadores).
+Ejemplos:
+     juan
+     juan@'%'
+     juan@localhost
+     juan@'192.168.1.%'
+     juan@'%.dominio.org'
+mysql> SELECT User,Host,Password FROM mysql.user; (Ver los usuarios)
+mysql> CREATE USER juan@'%' IDENTIFIED BY '1234'; (Crear un usuario con la contraseña 1234)
+mysql> CREATE USER john IDENTIFIED BY '1234', peter IDENTIFIED BY '4321'; (Crear dos usuarios)
+mysql> RENAME USER john TO juan, peter TO pedro;
+mysql> DROP USER juan, pedro; (Borrar dos usuarios)
+mysql> SET PASSWORD FOR juan = PASSWORD('abcde') (Cambiar la contraseña de un usuario)
+mysql> SHOW GRANTS FOR pedro; (Ver los privilegios de un usuario)
+mysql> GRANT ALL ON *.* TO juan@localhost (Otorgar todos los privilegios a un usuario)
+mysql> REVOKE ALL ON *.* FROM juan@localhost; (Anular todos los privilegios de un usuario)
 
 
 namei

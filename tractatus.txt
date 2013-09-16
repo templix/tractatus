@@ -8664,8 +8664,8 @@ mysql> RENAME USER john TO juan, peter TO pedro;
 mysql> DROP USER juan, pedro; (Borrar dos usuarios)
 mysql> SET PASSWORD FOR juan = PASSWORD('abcde') (Cambiar la contraseña de un usuario)
 mysql> SHOW GRANTS FOR pedro; (Ver los privilegios de un usuario)
-mysql> GRANT ALL ON *.* TO juan@localhost (Otorgar todos los privilegios a un usuario)
-mysql> REVOKE ALL ON *.* FROM juan@localhost; (Anular todos los privilegios de un usuario)
+	mysql> GRANT ALL ON *.* TO juan@localhost (Otorgar todos los privilegios a un usuario)
+	mysql> REVOKE ALL ON *.* FROM juan@localhost; (Anular todos los privilegios de un usuario)
 
 
 namei
