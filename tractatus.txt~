@@ -8630,6 +8630,22 @@ Otro sistema para importar una base de datos. Primero crearla, entrar en ella y 
 	mysql> CREATE DATABASE datos;
 	mysql> USE datos;
 	mysql> SOURCE datos.sql;
+3.-
+Exportar una tabla a txt con determinado formato:
+	mysql> SELECT * SELECT tabla INTO OUTFILE "tabla.txt"
+	   --> FIELDS TERMINATED BY '   '
+	   --> LINES TERMINATED BY '\n\n\r';
+FIELDS TERMINATED BY '  ' (indica que los campos de cada línea terminarán con dos espacios.
+LINES TERMINATED BY '\n\n\r '(indica el carácter como acaba cada linea, en este caso dos saltos de línea y retorno de carro
+otras instrucciones de formato:
+ENCLOSED BY '"' (Que los campos de tipo char, text, binary y enum de cada línea se entrecomillan)
+IGNORE 1 LINES (No cargar la primera línea del fichero de texto)
+LINES STARTING BY '---' (Que todas las líneas empiezen con "---".
+4.-
+Ejemplo parecido al anterior pero ordenando el fichero por el segundo campo:
+	mysql> SELECTC campo1,campo2,campo3 FROM tabla ORDER BY campo2 INTO OUTFILE "campos.txt"
+	   --> FIELDS TERMINATED BY ' '
+           --> LINES TERMINATED BY '\n\r';
 
 
 namei
