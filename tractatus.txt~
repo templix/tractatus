@@ -8561,14 +8561,16 @@ $ mysql proveedores < fichero.sql (Restaurar la BD "proveedores" de un archivo)
 $ mysqlimport -u root -p clientes fichero.sql (Otra forma de restaurar una BD si esta ya existe) 
 $ mysqldump -u root -p --all-databases > fichero.sql (Backup de todas las BDs) 
 $ mysqldump -u root -p --databases clientes proveedores > fichero.sql (Backup de dos BDs) 
-$ mysqldump -u root -p proveedores --ignore-table=antiguos > fichero.sql (Backup ignorando una tabla) 
+$ mysqldump -u root -p proveedores --ignore-table=antiguos > fichero.sql (Backup ignorando una tabla)
+$ mysqldump -u root -p base_de_datos tabla1 tabla2 > tabla1_y_tabla2.sql (Exportar solo unas tablas de una BDs)
 $ mysql -u root -p1234 (Acceder a la BD con el usuario "root" y contraseña "1234"[nótese que la contraseña está junto a la "p") 
 $ mysql -u root -p (Pedirá contraseña para acceder a la BD con el usuario "root") 
 $ mysql -u root -p datos (Entrar en mysql y directamente en la BD "datos" [notese que la BDs está separada de la "p" por un espacio, sinó se tomaría como la contraseña]) 
 Una vez en el prompt de mysql [Todas las sentencias han de terminar con un punto y coma [;] menos la sentencia "USE"]:
 mysql> SHOW VARIABLES LIKE 'datadir'; (muestra el directorio donde se almacenan las BDs) 
 mysql> show databases; (Mostrar las BDs existentes) 
-mysql> create database datos; (Crear la BD "datos") 
+mysql> create database datos; (Crear la BD "datos")
+mysql> DROP DATABASE datos; (Borrar toda una base de datos) 
 mysql> USE datos (Entrar en la BD "datos". Sin punto y coma final) 
 mysql> show tables; (Mostrar las tablas de la BD en la que se ha entrado) 
 mysql> DESCRIBE una_tabla (Mostrar los campos de una tabla concreta) 
@@ -8616,9 +8618,18 @@ mysql> SELECT * FROM usuarios WHERE profesion="portero" OR profesion="contable";
 	    -> OR (nombre = "juan" AND sexo = "m"); (Filtrar distintas opciones encerradas entre parentesis) 
 mysql> SELECT apellido, nacimiento FROM usuarios; 
 mysql> SELECT antiguedad FROM usuarios; (Filtrar la columna "antiguedad") 
-mysql> SELECT nombre, nacimiento FROM usuarios ORDER BY nacimiento; (Ordenar por fecha nacimiento) 
+mysql> SELECT nombre, nacimiento FROM usuarios ORDER BY nacimiento; (Ordenar por fecha nacimiento)
+mysql> SELECT * FROM la_tabla ORDER BY la_columna; (Ordenar por el número de una columna) 
 mysql> drop table usuarios; (Eliminar una tabla)
 mysql> drop table if exists usuarios; (Eliminar tabla si existe)
+1.-
+En ciertos casos, para resolver el error: mysqldump: Got error: xxxx: Table 'xxxxxxxxx' doesn't exist when using LOCK TABLES:
+$ mysqldump -u root -p BDs --single-transaction > dump.sql
+2.-
+Otro sistema para importar una base de datos. Primero crearla, entrar en ella y ejecutar el source sobre el fichero sql: 
+	mysql> CREATE DATABASE datos;
+	mysql> USE datos;
+	mysql> SOURCE datos.sql;
 
 
 namei
