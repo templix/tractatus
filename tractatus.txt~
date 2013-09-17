@@ -4832,20 +4832,21 @@ Degradados(.ggr)/usr/share/gimp/2.0/gradients
 git
 [git-core]
 Manual completo en español: <http://www-cs-students.stanford.edu/~blynn/gitmagic/intl/es/book.html#_hosting_git_gratuito> 
-Software de control de versiones. Una vez registrados en Github [<http://github.com>], crear un nuevo repositorio con el nombre escogido y github nos facilitará los datos de acceso [https://github.com/templix/tractatus.git] y en local:
-$ mkdir tractatus (Crear el repositorio local)
-$ cd tractatus (Entrar en él)
-$ git init (Inicializar git)
-$ mv /home/usuario/tractatus.txt . (Mover el archivo al repositorio)
-$ git add tractatus.txt (Añadir el fichero a git)
-$ git commit -m 'Inicio del proyecto' (Realizar el primer commit que es una especie de copia de seguridad que nos permite ver los cambios en el pryecto y si es necesario regresar a una versión anterior)
-$ git remote add origin https://github.com/templix/tractatus.git (Decirle a nuestra copia local el repositorio remoto donde se alojará)
-$ git push origin master (Enviar los cambios al servidor remoto)
-Otros comandos útiles:
+Software de control de versiones. Una vez registrados en Github [<http://github.com>], crear un nuevo repositorio con el nombre escogido y github nos facilitará los datos de acceso [https://github.com/templix/tractatus.git].
+Crear el repositorio local de un proyecto alojado en github:
+	$ mkdir tractatus (Crear el directorio local)
+	$ cd tractatus (Entrar en él)
+	$ git init (Inicializar git)
+	$ git config --global user.name "nombre_usuario" (Entrar datos del usuario) 
+	$ git config --global user.mail mail@direccion.com   (Entrar mail)
+	$ mv /home/usuario/tractatus.txt . (Mover el archivo al repositorio)
+	$ git add tractatus.txt (Añadir el fichero a git)
+	$ git commit -m 'Inicio del proyecto' (Realizar el primer commit que es una especie de copia de seguridad que nos permite ver los cambios en el pryecto y si es necesario regresar a una versión anterior)
+	$ git remote add origin https://github.com/templix/tractatus.git (Decirle a nuestra copia local el repositorio remoto donde se alojará)
+	$ git push origin master (Enviar los cambios al servidor remoto)
+Otros comandos:
 $ git clone https://github.com/templix/tractatus.git (Bajar un fichero de github)
 $ git clone ssh://usuario@host.com/home/templix/repositorio repositorio (Clonar por ssh un directorio remoto en local)
-$ git config --global user.name "nombre_usuario" (Entrar datos del usuario) 
-$ git config --global user.mail mail@direccion.com   (Entrar mail)
 $ git config -l (Comprobar los datos del usuario)
 $ git log (Ver historial de commits)
 $ git status (Comprobar si se han efectuado cambios)
@@ -4868,6 +4869,12 @@ Con el contenido que queremos excluir [Algunos ejemplos]:
 	Thumbs.db
 Si el archivo .gitignore lo colocamos en el directorio $HOME afectará a todos los proyectos de git. Para ello lanzar:
 $ git config --global core.excludesfile ~/.gitignore
+2.-
+Descartar modificaciones.
+Si una vez realizadas modificaciones en un archivo, antes de lanzar el commit, queremos verlas y descartarlas:
+$ git status
+$ git diff
+$ git checkout -- archivo
 
 
 gksu
@@ -8664,8 +8671,8 @@ mysql> RENAME USER john TO juan, peter TO pedro;
 mysql> DROP USER juan, pedro; (Borrar dos usuarios)
 mysql> SET PASSWORD FOR juan = PASSWORD('abcde') (Cambiar la contraseña de un usuario)
 mysql> SHOW GRANTS FOR pedro; (Ver los privilegios de un usuario)
-mysql> GRANT ALL ON *.* TO juan@localhost (Otorgar todos los privilegios a un usuario)
-mysql> REVOKE ALL ON *.* FROM juan@localhost; (Anular todos los privilegios de un usuario)
+	mysql> GRANT ALL ON *.* TO juan@localhost (Otorgar todos los privilegios a un usuario)
+	mysql> REVOKE ALL ON *.* FROM juan@localhost; (Anular todos los privilegios de un usuario)
 
 
 namei
