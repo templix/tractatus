@@ -2187,6 +2187,8 @@ Establecer norma en el sistema de que la contraseña tenga como nímino 8 caract
 # nano /etc/pam.d/common-password
 Y dejar la linea:
 password        [success=2 default=ignore]      pam_unix.so obscure sha512 min=8
+5.-
+Página donde comprobar la fortaleza de una contraseña: <https://howsecureismypassword.net/>
 
 
 convert (imagemagick)
@@ -14271,7 +14273,8 @@ whiptail
 Muestra ventanas en consola. Parecido a dialog con menos opciones.
 
 
-who (whowatch) 
+who
+[whowatch] 
 Muestra información sobre los usuarios que están conectados al equipo.
 $ who -b (Tiempo desde el último arranque del sistema)
 $ who -d (Procesos truncados)
