@@ -2726,6 +2726,24 @@ El error [descriptor 2] se mostrará por pantalla y listado.txt permanecerá vac
 $ ls -zy >> listado.txt 2>&1
 
 
+devilspie
+Permite especificar el comportamiento de las ventanas para que determinadas aplicaciones se abran en un escritorio concreto. Ha de colocarse en las aplicaciones de inicio.
+$ mkdir .devilspie (Crear el directorio)
+Crear por cada aplicación un archivo .ds en el directorio:
+$ nano .devilspie/firefox.ds
+Con el siguiente contenido a modo de ejemplo:
+	(if
+	  (is (application_name) "firefox")
+	  (set_workspace 3)
+	)
+Cada vez que arranquemos firefox, se abrirá en el escritorio número 3.
+Para saber el nombre de las aplicaciones que corren en cada escritorio:
+$ nano .devilspie/debug.ds
+Con el siguiente contenido:
+	(debug)
+Cuando arranquemos devilspie por consola, nos las mostrará.
+
+
 df
 Mostrar información de las particiones 
 $ df -h (los resultados en M y G, por defecto son en bytes) 
