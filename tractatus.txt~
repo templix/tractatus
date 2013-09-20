@@ -11267,6 +11267,24 @@ screenkey
 Aplicacion que, durante una grabacion de escritorio en la que salen terminales y comandos, muestra por pantalla una franja negra en la que se puede apreciar las teclas que se pulsan para que las puedan ver mejor los televidentes. Iniciar la aplicacion (Se mostrara en el area del tray) y la grabacion del escritorio con alguna de las herramientas (gtk-recordMyDesktop, kazam, etc) y pararla con killall -9 screenkey cuando finalice la grabacion. 
  
 
+scribes
+Editor minimalista especial para programadores.
+Algunos atajos:
+Ctrl + o (Abrir archivo)
+Ctrl + s (Guardar)
+Ctrl + Mayus + s (Renombrar)
+Ctrl + p (Imprimir)
+Ctrl + t (Indentar lineas seleccionadas)
+Ctrl + Mayus + t (Suprimir indentación)
+Alt +t (Convertir espacios en tabulaciones)
+Alt + Mayus + t (Convertir tabulaciones a espacios)
+Alt + r (Suprimir espacios al final de linea)
+Alt + d (Suprimir linea)
+Alt + F4 (Cerrar el editor)
+F1 (Abrir la ayuda)
+F12 (Abrir preferencias)
+
+
 script (scriptreplay)
 Copia en un fichero toda la actividad tecleada en consola hasta cesar con "exit" 
 $ script -a fichero.txt
@@ -14379,6 +14397,24 @@ net user /add admin
 net localgroup administrators admin /add 
 net user admin * 
 Reiniciar win y entrar con el usuario creado.
+
+
+wine
+Ejecuta programas de Windows en tu Linux
+$ wine programa.exe
+Anotaciones:
+1 - En distros de 64 bits, ejecutar wine en modo 32 bits
+Se debe eliminar o mover la carpeta ~/.wine y recrearla de nuevo. Primero se realiza un export de la variable WINEARCH en la terminal
+$ export WINEARCH=win32
+Y luego se ejecuta wine de nuevo
+$ wine programa32bits.exe 
+
+
+winetricks
+Herramienta para instalar librerias y complementos para wine
+$ winetricks (ejecuta la interfaz gráfica del programa)
+$ winetricks corefonts (Instala fuentes como Arial y Verdana)
+Más referencias de winetricks aqui: <http://wiki.winehq.org/winetricks>
 
 
 wkhtmltopdf
