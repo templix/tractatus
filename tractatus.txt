@@ -14453,6 +14453,12 @@ Muestra gusanos en la terminal.
 $ worms -d 200 -n 4 -l 4 (lento [-d] por defecto 0. 200 máximo, mostrando 4 gusanos [-n] Por defecto 3 y con longitud de 4 caracteres [-l]. Por defecto 16. 
 
 
+wput
+Subir ficheros a un servidor ftp.
+$ wput file ftp://USER:PASS@192.168.1.10/home/usuario/dir/
+$ wput *.txt ftp://USER:PASS@host.com/home/usuario/ (Subir todos los .txt del directorio local al host remoto)
+
+
 write
 Enviar mensajes a la terminal de usuarios conectados remotamente a nuestra máquina.
 $ write usuario /dev/pts/15  (Iniciar el promt para la comunicación con el usuario de la terminal número 15. Este a su vez, para responder, debe lanzar write hacia la consola del otro usuario)
