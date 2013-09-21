@@ -8694,6 +8694,19 @@ mysql> SET PASSWORD FOR juan = PASSWORD('abcde') (Cambiar la contraseña de un u
 mysql> SHOW GRANTS FOR pedro; (Ver los privilegios de un usuario)
 	mysql> GRANT ALL ON *.* TO juan@localhost (Otorgar todos los privilegios a un usuario)
 	mysql> REVOKE ALL ON *.* FROM juan@localhost; (Anular todos los privilegios de un usuario)
+6.-
+Acceso remoto a musql con el usuario root:
+# nano /etc/mysql/my.cnf
+Comentar la linea:
+	#bind-address           = 127.0.0.1
+Reiniciar el servicio:
+# /etc/init.d/mysql restart
+Entrar en el prompt de mysql y otorgar privilegios:
+# mysql -u root -p
+Entrar la contraseña y:
+	mysql> GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'la_contraseña' WITH GRANT OPTION;
+	mysql> FLUSH PRIVILEGES;
+	mysql> exit
 
 
 namei
