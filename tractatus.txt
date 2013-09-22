@@ -6801,6 +6801,51 @@ Ver el momento exacto que los usuarios han entrado por última vez
 $ lastlog -u usuario  (solo ver a "usuario")
 
 
+latex
+[texlive-lang-spanish]
+Sistema de composición de textos, orientado especialmente a la creación de libros, documentos científicos y técnicos que contengan fórmulas matemáticas. La elaboración del documento requiere normalmente de dos etapas: en la primera hay que crear mediante cualquier editor de texto llano un fichero fuente que, con las órdenes y comandos adecuados, contenga el texto que queramos imprimir. La segunda consiste en procesar este fichero; el procesador de textos interpreta las órdenes escritas en él y compila el documento, dejándolo preparado para que pueda ser enviado a la salida correspondiente. LaTeX ofrece siempre la misma salida, con independencia del dispositivo (impresora, pantalla, etc.) o el sistema operativo (MS Windows, MacOS, Unix, GNU/Linux, etc.) y puede ser exportado a partir de una misma fuente a numerosos formatos [Ps, PDF, SGML, HTML, RTF, etc.]. Otra ventaja de LaTeX es que calcula la cantidad óptima de caracteres por línea para optimizar la lectura, 66 por defecto. Existen miles de instrucciones. Aquí una pequeña muestra para no morir en el intento.
+A continuación una estructura elemental de un documento:
+Los comentarios van precedidos por el signo de porcentaje [%]
+La primera linea puede especificar el papel [A4], tamaño de la letra [10pt, 11pt, 12pt], tipo de texto [article, report, book, letter, slides...], cantidad de columnas [twocolumn]:
+	\documentclass[a4paper, 12pt]{article} 
+	\documentclass[12pt,twocolumn]{report}
+Activar el soporte Unicode [para  dieresis, eñes...]
+	\usepackage[utf8]{inputenc}
+	\usepackage[spanish]{babel}
+Especificar título, autor, fecha. "date", si no se especifica, pone la fecha actual:
+	\title{Lorem Ipsum} 
+	\author{La Pipa Plena} 
+	\date{ }
+El cuerpo del documento se inicia con \maketitle
+Inicio y final de texto. Entre párrafos ha de dejarse una linea en blanco. El primer párrafo de una subsección, sección o capítulo no está sangrado, pero los restantes sí.:
+	\begin{document}
+	Est et quia non voluptatum. Aspernatur facilis excepturi aut. Voluptatem perspiciatis id cum ab nostrum. Qui rerum nisi vitae quae. Quam consequatur eaque minima ipsum distinctio. Est dolorem tempore perspiciatis quisquam accusantium exercitationem consequatur.
+	\end{document}
+Secciones y subsecciones del texto:
+	\section{Introducción}
+	\section{Historia}
+	\subsection{Historia inicios}
+	\subsection{Historia continuación}
+Formatos de texto:
+	\texbf{texto en negrita}
+	\emph{destaca el texto}
+	\texit{texto en cursiva}
+	\underline{texto subrayado}
+	\texsc{texto en versalita}
+Tamaño de la letra. Estos comandos afectan a todo el texto que les sigue mientras no se modifique nuevamente y sin necesidad de encerrarlo entre llaves. De más pequeña a más grande: \tiny, \scriptsize, \footnotesize, \small, \normalsize (la normal), \large, \Large, \LARGE, \huge, \Huge 
+	\normalsize Ipsam \tiny iusto odio commodi \scriptsize inventore rem. \footnotesize Qui maiores minima \small dignissimos aut mollitia et. \normalsize Voluptates \large magnam autem similique quas. \LARGE nihil aspernatur nisi blanditiis. \huge Ad repudiandae fuga blanditiis. \Huge Est voluptate in ipsam sint \ normalsize optio.
+Centrar un párrafo:
+	\begin{center}
+	Est et quia non voluptatum. Aspernatur facilis excepturi aut. Voluptatem perspiciatis id cum ab nostrum. Qui rerum nisi vitae quae. Quam consequatur eaque minima ipsum distinctio. Est dolorem tempore perspiciatis quisquam accusantium exercitationem consequatur.
+	\end{center}	
+alinear texto:
+	\centering {Texto a centrar}
+	\raggedleft {Texto a la derecha}
+	\raggedright {Texto a la izquierda}
+Para escritir en latex puede usarse cualquier editor [vim, nano, gedit...] y para convertirlo a pdf compilarlo con:
+$ pdflatex texto.tex
+
+
 lazygal
 Generar una galería web.
 $ lazygal directorio_con_las_imagenes  (Creará todos los archivos en el presente directorio por lo que es preferible estar en un directorio vacio)
