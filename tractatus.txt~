@@ -12348,9 +12348,9 @@ $ ssh-keygen -lvf ~/.ssh/known_hosts (Ver todas las huellas digitales y las imá
 $ ssh-keygen -t rsa -C newserver -f .ssh/newkey (Generar el par de llaves publica y privada. Caso de exitir preguntará si se sobreescribe)
 $ ssh-keygen -B -f .ssh/id_rsa.pub (Muestra la huella digital de la llave especificada en formato SHA-1)
 1.-
-Para ve la huella digital cada vez que se ingresa en un host remoto:
+Para ver la huella digital cada vez que se ingresa en un host remoto:
 # nano /etc/ssh/ssh_config
-Descomentar la linea i dejarla:
+Descomentar la linea y dejarla:
 VisualHostKey yes
 
 

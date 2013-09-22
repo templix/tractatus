@@ -7071,6 +7071,16 @@ Muestra fallos en construcción de paquetes .deb [según la política de Debian]
 $ lintian paquete.deb
 
 
+linuxlogo
+Muestra datos de la cpu junto al logo de distintas distros. Listado en /etc/linux_logo.conf
+$ linuxlogo -a (En monocromo ascii)
+$ linuxlogo -b (tipo banner)
+$ linuxlogo -L ubuntu (De una distro concreta)
+$ linuxlogo -L randon_xy (logo aleatorio dentro de los disponibles en /etc/linux_logo.conf)
+$ linuxlogo -L random_ba (aleatorio y en ascii)
+$ linuxlogo -L redhat -F "Redhat linux 5.2\nkernel version 3.2.0-4-amd64" (Especificando logo y texto)
+
+
 lmbench
 Herramienta para probar el rendimiento de un sistema. La primera vez que se ejecute hará varias preguntas [las opciones por defecto son suficientes] y algunos chequeos. Su ejecución lleva bastante tiempo.
 # lmbench-run
