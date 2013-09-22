@@ -6802,7 +6802,7 @@ $ lastlog -u usuario  (solo ver a "usuario")
 
 
 latex
-[texlive-lang-spanish]
+[texlive texlive-lang-spanish]
 Sistema de composición de textos, orientado especialmente a la creación de libros, documentos científicos y técnicos que contengan fórmulas matemáticas. La elaboración del documento requiere normalmente de dos etapas: en la primera hay que crear mediante cualquier editor de texto llano un fichero fuente que, con las órdenes y comandos adecuados, contenga el texto que queramos imprimir. La segunda consiste en procesar este fichero; el procesador de textos interpreta las órdenes escritas en él y compila el documento, dejándolo preparado para que pueda ser enviado a la salida correspondiente. LaTeX ofrece siempre la misma salida, con independencia del dispositivo (impresora, pantalla, etc.) o el sistema operativo (MS Windows, MacOS, Unix, GNU/Linux, etc.) y puede ser exportado a partir de una misma fuente a numerosos formatos [Ps, PDF, SGML, HTML, RTF, etc.]. Otra ventaja de LaTeX es que calcula la cantidad óptima de caracteres por línea para optimizar la lectura, 66 por defecto. Existen miles de instrucciones. Aquí una pequeña muestra para no morir en el intento.
 A continuación una estructura elemental de un documento:
 Los comentarios van precedidos por el signo de porcentaje [%]
@@ -6842,8 +6842,15 @@ alinear texto:
 	\centering {Texto a centrar}
 	\raggedleft {Texto a la derecha}
 	\raggedright {Texto a la izquierda}
-Para escritir en latex puede usarse cualquier editor [vim, nano, gedit...] y para convertirlo a pdf compilarlo con:
+Para confeccionar un documento en latex puede usarse cualquier editor [vim, nano, gedit...] y para convertirlo a pdf compilarlo con:
 $ pdflatex texto.tex
+Tambien podemos visualizar directamente el .dvi con la aplicación evince o usar gummi que, al tener la pantalla dividida en dos partes, permite crear el documento y visualizarlo en tiempo real.
+
+
+latex2html
+Covierte un archivo latex a formato html. Crea un directorio con el mismo nombre del archivo.
+$ latex2html archivo.tex
+$ latex2html -dir DIR archivo.tex (Creará los archivos html en el directorio especificado [tiene que existir])
 
 
 lazygal
