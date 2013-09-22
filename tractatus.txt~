@@ -10431,6 +10431,57 @@ Informa a Debian de los paquetes más populares. Normalmente esta aplicación es
 # popularity-contest > listado
 
 
+postgres
+[postgresql php5-pgsql]
+Gestión de base de datos. En caso de querer aceptar conexiones externas:
+# nano /etc/postgresql/9.1/main/postgresql.conf
+Substituir la linea:
+	listen_addresses = 'localhost'
+por:
+	listen_addresses = '*'
+1.-
+Pasos previos para la creación del usuario y la base de datos: 
+	$ sudo -s
+	# su postgres (Cambiar a la cuenta del usuario por defecto)
+	$ createuser NOMBRE_DEL_USUARIO (Crear un usuario. Pregunta si con privilegios o sin [Shall the new role be a superuser? (y/n)])
+	$ createdb NOMBRE_BASE_DE_DATOS -E utf8 -O NOMBRE_DEL_USUARIO (Crear una base de datos especificando propietario y codificación)
+	$ psql
+	postgres=# alter user NOMBRE_DEL_USUARIO with passwrd 'LA_CONTRASEÑA'; (Establecer contraseña de un usuario)
+2.-
+Para crear un usuario que sea el mismo que el sistema operativo y con privilegios de administrador:
+	$ sudo -u postgres createuser --superuser $USER
+	$ sudo -u postgres psql
+	$ postgres=# \password USUARIO
+3.-
+Creación de un base de datos [la llamaremos "misdatos"]:
+	$ createdb misdatos (Si se ha creado el mismo usuario que el sistema operativo)
+	$ sudo -u postgres createdb misdatos (En caso de sólo existir el usuario por defecto [postgres])
+	$ createdb (Crea una base de datos con el mismo nombre que el usuario)
+	$ createdb misdatos (Crea una base de datos con un nombre concreto)
+	$ dropdb misdatos (Eliminar una base de datos)
+4.-
+Acceso a una base de datos:
+	$ sudo -u usuario psql base_de_datos (Cuando el usuario no es el mismo del sistema)
+	$ psql misdatos (Entrar en el prompt de la base de datos especificada)
+	misdatos=# (Prompt de la base de datos de administrador)
+	misdatos=> (Prompt de la base de datos sin privilegios)
+5.-
+Creación de una tabla (igual que para mysql [ver]):
+	CREATE TABLE usuario(
+	nombre VARCHAR(20), apellido VARCHAR(20),
+	profesión VARCHAR(20), sexo CHAR(1), nacimiento DATE,
+	antiguedad DATE);
+misdatos=# DROP TABLE nombre_de_la_tabla; (Borrar una tabla)
+misdatos=# INSERT INTO usuario VALUES ('juan antonio', 'gomez', 'admin', 'h', '1985-10-06', '2008-03-11'); (Entrar datos en el mismo orden en el que se ha creado la tabla)
+misdatos=# SELECT * FROM usuario; (Ver el contenido de una tabla)
+misdatos=# SELECT nombre FROM usuario; (Seleccionar una columna de una tabla)
+misdatos=# SELECT * FROM usuario ORDER BY nombre; (Mostrar una tabla ordenado segun una columna)
+Las metaordenes de psql son un conjunto de órdenes internas, no propiamente órdenes SQL. Todas empiezan con la barra invertida [\].
+	\h (Muestra la ayuda. Pulsando "q" salimos de la ayuda)
+	\? (Ver todas las ordenes internas)
+	\q (Salir de psql)
+
+
 poweroff
 Apagar el ordenador.
 
