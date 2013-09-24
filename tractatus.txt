@@ -14586,6 +14586,11 @@ $ winetricks corefonts (Instala fuentes como Arial y Verdana)
 Más referencias de winetricks aqui: <http://wiki.winehq.org/winetricks>
 
 
+wipe
+Borrado de archivos, directorios, particiones o discos de forma segura.
+$ wipe -f -r -q -Q 10 -i -c DIR/ (Que no pida confirmación [f], que suprima los subdirectorios [r], que haga 10 pasadas y no sólo 4 [-q -Q 10], que muestre detalles [-i] y por si tienen permisos que chmod entre en acción [c]
+
+
 wkhtmltopdf
 Pasar una página web o un archivo html a pdf
 $ wkhtmltopdf tuxapuntes.com tuxapuntes.pdf
