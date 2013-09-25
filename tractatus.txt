@@ -4258,7 +4258,7 @@ Navegador.
 $ firefox --private (Nota.- Son dos guiones. Arrancar en modo privado. Para incluir por defecto este modo en la propiedades: firefox --private %U)
 $ firefox 'data:text/html, texto que queremos mostrar' (Visualizar un texto en una ventana del navegador)
 Cambios para optimizar las conexiones y para aprovechar otros parámetros. Escribir en la barra de direcciones: "about:config" y pulsar enter. Cambiar los siguientes valores. Para ello, hacer doble click encima de la línea a modificar y en el cuadro de diálogo que aparece, escribir el valor nuevo:
-Ajustes generales: 
+Ajustes generales [dependen de la versión instalada]: 
 network.dns.disableIPv6 true 
 network.http.max-connections 128 
 network.http.max-connections-per-server 48 
@@ -4340,6 +4340,8 @@ Ver listado de todos los idn habilitados [todos en true]:
 	network.IDN.whitelist
 Habilitar lector de pdfs:
 	pdfjs.disabled true 
+Habilitar soporte para H.264, AAC y mp3:
+	media.gstreamer.enabled true
 Acceso a los diálogos de firefox:
 	chrome://browser/content/bookmarks/bookmarksPanel.xul  (las direcciones de interés)
 	chrome://browser/content/history/history-panel.xul  (historial)
