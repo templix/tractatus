@@ -15025,6 +15025,11 @@ Pegar el contenido:
 $ xrdb -merge .Xresources (Aplicar los cambios, en caso contrario no se aplicaran hasta el siguiente reinicio)
 
 
+xtrlock
+Bloquea el servidor de las X hasta que el usuario no introduce la contraseña y pulsa enter. El cursor se convierte en un candado y el teclado no reponde. Antes de introducir la contraseña es preferible clicar "esc" para borrar todo lo que puede haberse pulsado en el teclado. La introducción de la contraseña no es visible en pantalla.
+$ xtrlock
+
+
 xvkbd
 Teclado virtual.
 
@@ -15055,7 +15060,7 @@ $ xxd -r -p  (Proceso inverso)
 
 
 xxxterm
-Navegadorminimalista con soporte para flash.
+Navegador minimalista con soporte para flash.
 Descomprimir  el archivo de configuración y copiarlo en el directorio personal:
 	$ cp /usr/share/doc/xxxterm/examples/xxxterm.conf.gz .
 	$ gzip -d xxxterm.conf.gz
