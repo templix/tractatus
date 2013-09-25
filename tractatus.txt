@@ -2409,6 +2409,7 @@ Otras opciones:
 	$ curl -s 'http://geoiplookup.wikimedia.org/' | sed 's/^.*=\s*//' | python3 -mjson.tool (muestra la situación geográfica)
 	$ curl -s http://geoiplookup.wikimedia.org/ | python3 -c 'import sys, json, string, webbrowser; webbrowser.open(string.Template("http://maps.google.com/maps?q=$lat,$lon").substitute(json.loads(sys.stdin.read().split("=")[-1])))' (Lo mismo pero abriendo una pestaña en el navegador)
 	$ curl -s http://www.census.gov/popclock/data/population/world | awk -F'[:,]' '{print $7}' (Muestra el número de habitantes de la tierra)
+	$ curl -s https://help.github.com/articles/generating-ssh-keys | grep -Po  --color=never "RSA key fingerprint is (:?[A-z0-9]\:?){32}" (Imprime la clave RSA de github.com)
 
 
 curlftpfs
@@ -15051,6 +15052,32 @@ xxd
 convertir textos de ASCII a hexadecimal o viceversa.
 $ xxd -p  (entra en el prompt de la aplicación. Teclear la palabra o frase y darle a intro para la conversión. Ctrl+c para salir del prompt)
 $ xxd -r -p  (Proceso inverso)
+
+
+xxxterm
+Navegadorminimalista con soporte para flash.
+Descomprimir  el archivo de configuración y copiarlo en el directorio personal:
+	$ cp /usr/share/doc/xxxterm/examples/xxxterm.conf.gz .
+	$ gzip -d xxxterm.conf.gz
+	$ mv xxxterm.conf .xxxterm.conf (Hacerlo oculto)
+Editarlo para la configuración. A título de muestra:
+$ nano xxxterm.conf
+	home                    = http://google.es
+	window_width            = 1524
+	window_height           = 768
+	encoding                = UTF-8
+algunos atajos:
+F6 (Barra de navegación)
+i (Buscador de la página)
+Ctrl + t (Nueva pestaña)
+Ctrl + w (Cerrar pestaña)
+Alt + h (Historial)
+F5 (Recargar página)
+/ (Buscar un termino)
+n (Siguiente termino)
+N (Anterior termino)
+Alt + q ()Reiniciar el navegador)
+Ctrl + q (Cerrar el navegador)
 
 
 yacy
