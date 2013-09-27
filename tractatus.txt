@@ -11672,9 +11672,13 @@ Mostrar un listado de las particiones con sus características exactas.
 # sfdisk /dev/sda < tabla.bak (Restaurar tabla de particiones)
 
 
-sfill (paquete secure-delete)
-Borrado de todos los rastros de datos del espacio libre del disco.
-$ sfill
+sfill
+[paquete secure-delete]
+Borrado de todos los rastros de datos del espacio libre del disco. Parecidos parámetros de srm [ver]. Sobreescribe 38 veces el espacio.
+# sfill -f dir (Borrado rápito pero inseguro)
+# sfill -l dir (Como lanzar dos veces sfill -f)
+# sfill -i dir (Borrar solamente inodos en directorio)
+# sfill -zv dir (Sobreescribiendo ceros en el último borrado y mostrando el proceso)
 
 
 sftp
@@ -12256,10 +12260,13 @@ Configuración de usuarios (/etc/squid/passwd):
 # htpasswd /etc/squid3/passwd usuario2 (Sin parámetro -c porque el archivo ya está creado. Otro usuario y contraseña)
 
 
-srm (paquete secure-delete)
-Aplicación para eliminar de forma segura datos de disco
-$ srm archivo.txt
-$ srm -r dir_a_eliminar
+srm
+[secure-delete]
+Aplicación para eliminar de forma segura datos de disco sobreescribiendo su espacio. Es de funcionamiento lento, pero por eso se le considera el más efectivo
+$ srm -f dir (Modo rápido i el más inseguro)
+$ srm -l dir (Como realizar dos veces srm -f)
+$ srm archivo.txt (Se sobreescribe 38 veces)
+$ srm -rzv dir (se sobreescriben 38 veces los archivos y subdirectorios incluidos [r], sobreescribnedo ceros en el último borrado [z] y mostrando el proceso [v])
 
 
 ss
@@ -12407,9 +12414,11 @@ Visionar en tiempo real los paquetes capturados:
 #  tail -f archivo.log 
 
 
-sswap (paquete secure-delete)
-Borrado seguro de swap. previamente desactivar con swapoff /dev/sda7
-$ sswap /dev/sda7  (activar nuevamente la swap con swapon /dev/sda7)
+sswap
+[secure-delete]
+Borrado seguro de swap. Previamente desactivar con swapoff /dev/sda7 y al finalizar el proceso volver a activarla con swapon /dev/sda7 [Si no sabemos donde se encuentra la swap: cat /proc/swaps. Argumentos paracidos a srm [ver] y sfill [ver]. El espacio se sobreescribe 38 veces.
+$ sswap -f /dev/sda7 (Modo rápido e inseguro)
+$ sswap -lv /dev/sda7 (Como lanzar dos veces sswap -f y mostrando el proceso)  
 
 
 st
@@ -14591,7 +14600,9 @@ Más referencias de winetricks aqui: <http://wiki.winehq.org/winetricks>
 
 wipe
 Borrado de archivos, directorios, particiones o discos de forma segura.
-$ wipe -f -r -q -Q 10 -i -c DIR/ (Que no pida confirmación [f], que suprima los subdirectorios [r], que haga 10 pasadas y no sólo 4 [-q -Q 10], que muestre detalles [-i] y por si tienen permisos que chmod entre en acción [c]
+$ wipe archivo (Sobreescribiendo 34 veces el espacio)
+$ wipe -fq (Sin pedir confirmación y sólo reescribiendo 4 veces)
+$ wipe -rq -Q 10 -i -c DIR/ (Que suprima los subdirectorios [r], que haga 10 pasadas y no sólo 4 [-q -Q 10], que muestre detalles [-i] y por si tienen permisos que chmod entre en acción [c]
 
 
 wkhtmltopdf
