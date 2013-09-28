@@ -10872,6 +10872,11 @@ Inicia o para servicios en Arch Linux
 # rc.d stop servicio (Para el servicio)
 
 
+rdesktop
+Conexión a escritorio remoto.
+$ rdesktop -k es -g 1024×768 -u USER -p PASS -a 15 -T tux -D client (Especificando telcado español [k], medidas de la ventana [g], usuario [u] y contraseña [p], especificar un mobre para la ventana [T] y suprimiendo la decoración de la ventana [D])
+
+
 rdiff-backup
 Backups incrementales locales o remotos. La aplicación ha de estar instalada en el cliente y en el servidor.
 $ rdiff-backup --force 192.168.1.20::/home/USER/dir_remoto /home/USER/dir_local (Realiza un backup del dir_remota de la máquina 20 de la red y lo guarda en nuestro dir_local sin comprimir)
@@ -12579,7 +12584,7 @@ Defaults passprompt=”mi frase solicitando la contraseña...”
 Defaults badpass_message=”mi frase si se entra erronea...” 
 usuario    ALL=(ALL) ALL  (Añadir el usuario a sudo) 
 Defaults:usuario !authenticate  (si no queremos que nos pida la contraseña) 
-usuario ALL= NOPASSWD: /usr/sbin/firestarter (Para que no pida contraseña al arrancar una aplicación concreta) 
+usuario ALL=NOPASSWD: /usr/sbin/firestarter (Para que no pida contraseña al arrancar una aplicación concreta) 
 O añadir a la linea Defaults, algunos parámetros separados por comas: 
 timestamp_timeout=5   (La contraseña se guardará 5 minutos.) 
 insults    (Te mostrará insultos si fallas la contraseña) 
