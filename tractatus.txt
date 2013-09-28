@@ -5619,9 +5619,20 @@ $ hodie -c -v (De forma clásica)
 
 
 host
-Determina la ip de un nombre o el nombre de una ip 
-$ host -v -a telefonica.com  
-$ host google.com|grep address | awk '{print $NF}' (Muestra la propia)
+Determina la ip de un registro DNS o, a partir de una ip, el nombre de registro
+$ host -v -a telefonica.com
+$ host -t SOA google.com
+$ host -R 3 google.es (Eleva a 3 el número de intentos para obtener respuesta. Por defecto 1)
+$ host -C google.es (Muestra los registros SOA y los servidores de nombres autorizados.)
+Tipos de registros
+	A (Registro de dirección que resuelve un nombre de un anfitrión hacia una dirección IPv4)
+	AAA (Registro de dirección que resuelve un nombre de un anfitrión hacia una dirección IPv6)
+	MX (Registro de servidor de correo que sirve para definir una lista de servidores de correo para un dominio, así como la prioridad, el que tiene el número más bajo de los servidores de correo es el que tiene mayor prioridad.)
+	PTR (Registro de apuntador que resuelve direcciones IPv4 hacia el nombre anfitriones. Es decir, hace lo contrario al registro A. Se utiliza en zonas de Resolución Inversa)
+	NS (Registro de servidor de nombres que sirve para definir una lista de servidores de nombres con autoridad para un dominio)
+	SOA (Registro de inicio de autoridad que especifica el Servidor DNS Maestro (o Primario) que proporcionará la información con autoridad acerca de un dominio de Internet, dirección de correo electrónico del administrador, número de serie del dominio y parámetros de tiempo para la zona)
+	SRV (Registro de servicios que especifica información acerca de servicios disponibles a través del dominio)
+	CNAME (Registro de nombre canónico que hace que un nombre sea alias de otro)
 
 
 hostid
