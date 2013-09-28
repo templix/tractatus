@@ -2304,7 +2304,6 @@ $ crontab -e      (idem para el usuario no root)
 # crontab -l -u usuario  (muestra el de usuario)
 $ crontab -l       (idem para el usuario no root) 
 # crontab -r       (Borra el contenido de crontab)
-$ crontab -v (Muestra la última vez que fue editado el archivo crontab) 
 Crontab consta de 6 campos separados por un espacio que indican:
 minuto (0-59), hora (0-23), dia del mes (1-31), mes (1-12), dia de la semana (0-6, domingo=0), y comando a ejecutar. Un asterisco * como valor en los primeros cinco campos, indicará todos (todos los minutos, todas las horas ...) 
 	01 * * * *       (Se ejecuta el primer minuto de cada hora todos los dias)
@@ -2410,6 +2409,7 @@ Otras opciones:
 	$ curl -s 'http://geoiplookup.wikimedia.org/' | sed 's/^.*=\s*//' | python3 -mjson.tool (muestra la situación geográfica)
 	$ curl -s http://geoiplookup.wikimedia.org/ | python3 -c 'import sys, json, string, webbrowser; webbrowser.open(string.Template("http://maps.google.com/maps?q=$lat,$lon").substitute(json.loads(sys.stdin.read().split("=")[-1])))' (Lo mismo pero abriendo una pestaña en el navegador)
 	$ curl -s http://www.census.gov/popclock/data/population/world | awk -F'[:,]' '{print $7}' (Muestra el número de habitantes de la tierra)
+	$ curl -s https://help.github.com/articles/generating-ssh-keys | grep -Po  --color=never "RSA key fingerprint is (:?[A-z0-9]\:?){32}" (Imprime la clave RSA de github.com)
 
 
 curlftpfs
@@ -4259,7 +4259,7 @@ Navegador.
 $ firefox --private (Nota.- Son dos guiones. Arrancar en modo privado. Para incluir por defecto este modo en la propiedades: firefox --private %U)
 $ firefox 'data:text/html, texto que queremos mostrar' (Visualizar un texto en una ventana del navegador)
 Cambios para optimizar las conexiones y para aprovechar otros parámetros. Escribir en la barra de direcciones: "about:config" y pulsar enter. Cambiar los siguientes valores. Para ello, hacer doble click encima de la línea a modificar y en el cuadro de diálogo que aparece, escribir el valor nuevo:
-Ajustes generales: 
+Ajustes generales [dependen de la versión instalada]: 
 network.dns.disableIPv6 true 
 network.http.max-connections 128 
 network.http.max-connections-per-server 48 
@@ -4341,6 +4341,8 @@ Ver listado de todos los idn habilitados [todos en true]:
 	network.IDN.whitelist
 Habilitar lector de pdfs:
 	pdfjs.disabled true 
+Habilitar soporte para H.264, AAC y mp3:
+	media.gstreamer.enabled true
 Acceso a los diálogos de firefox:
 	chrome://browser/content/bookmarks/bookmarksPanel.xul  (las direcciones de interés)
 	chrome://browser/content/history/history-panel.xul  (historial)
@@ -5617,9 +5619,20 @@ $ hodie -c -v (De forma clásica)
 
 
 host
-Determina la ip de un nombre o el nombre de una ip 
-$ host -v -a telefonica.com  
-$ host google.com|grep address | awk '{print $NF}' (Muestra la propia)
+Determina la ip de un registro DNS o, a partir de una ip, el nombre de registro
+$ host -v -a telefonica.com
+$ host -t SOA google.com
+$ host -R 3 google.es (Eleva a 3 el número de intentos para obtener respuesta. Por defecto 1)
+$ host -C google.es (Muestra los registros SOA y los servidores de nombres autorizados.)
+Tipos de registros
+	A (Registro de dirección que resuelve un nombre de un anfitrión hacia una dirección IPv4)
+	AAA (Registro de dirección que resuelve un nombre de un anfitrión hacia una dirección IPv6)
+	MX (Registro de servidor de correo que sirve para definir una lista de servidores de correo para un dominio, así como la prioridad, el que tiene el número más bajo de los servidores de correo es el que tiene mayor prioridad.)
+	PTR (Registro de apuntador que resuelve direcciones IPv4 hacia el nombre anfitriones. Es decir, hace lo contrario al registro A. Se utiliza en zonas de Resolución Inversa)
+	NS (Registro de servidor de nombres que sirve para definir una lista de servidores de nombres con autoridad para un dominio)
+	SOA (Registro de inicio de autoridad que especifica el Servidor DNS Maestro (o Primario) que proporcionará la información con autoridad acerca de un dominio de Internet, dirección de correo electrónico del administrador, número de serie del dominio y parámetros de tiempo para la zona)
+	SRV (Registro de servicios que especifica información acerca de servicios disponibles a través del dominio)
+	CNAME (Registro de nombre canónico que hace que un nombre sea alias de otro)
 
 
 hostid
@@ -7069,6 +7082,16 @@ I (Descargar imagen del enlace actual si el enlace apunta a una imagen)
 lintian
 Muestra fallos en construcción de paquetes .deb [según la política de Debian]. Puede que algunos “warnings” [W] y “errores” [E] solo significan que el paquete no sigue los estandares marcados pero no afectan a su ejecución:
 $ lintian paquete.deb
+
+
+linuxlogo
+Muestra datos de la cpu junto al logo de distintas distros. Listado en /etc/linux_logo.conf
+$ linuxlogo -a (En monocromo ascii)
+$ linuxlogo -b (tipo banner)
+$ linuxlogo -L ubuntu (De una distro concreta)
+$ linuxlogo -L randon_xy (logo aleatorio dentro de los disponibles en /etc/linux_logo.conf)
+$ linuxlogo -L random_ba (aleatorio y en ascii)
+$ linuxlogo -L redhat -F "Redhat linux 5.2\nkernel version 3.2.0-4-amd64" (Especificando logo y texto)
 
 
 lmbench
@@ -10037,6 +10060,15 @@ $ pal -c 10 (Muestra el calendario con 10 lineas. Por defecto 5)
 $ pal --color (Lo muestra a color. --nocolor para blanco y negro)
 
 
+pandoc
+Conversor de formatos de documentos. La entrada puede ser cualquier documento en haskell, markdown, rst, html, txt o latex y la salida, txt, haskell, markdown, rst, html, latex,man, context, texinfo, docbook, opendocument, odt, s5 o rtf.
+$ pandoc -o salida.html entrada.md (Convertir markdown a html)
+$ pandoc entrada.txt -o salida.pdf (Convertir txt a pdf)
+$ pandoc texto.txt -o libro.epub (Convertir a epub)
+$ pandoc -f html -t markdown -o pagina.md pagina.html (Convertir de html a markdown)
+$ pandoc -f markdown -t latex -o texto_latex.tex texto_markdown.md (Convertir texto en markdown a latex)
+
+
 paplay
 Reproducción de audio en formatos pulseaudio (flac)
 $ paplay archivo.flac
@@ -10404,6 +10436,15 @@ pmap
 Muestra la memoria consumida por todos los archivo que corren en determinado PID
 # pmap -x PID
 # pmap -d PID
+
+
+png2html
+Convertir imagenes png a html. Dado que la conversión asume 1 pixel por cada caracter, las imagenes resultantes se ven alargadas. Para una visualización más decente han de achatarse. A modo de ejemplo una imagen de 115x115 no se ha visualizado correctamente hasta 155x115. 
+$ png2html imagen.png texto.txt salida.html 1
+El archivo texto.txt contiene una palabra, frase o párrafo con el que se confeccionará la imagen. El último número indica:
+0 = fuente pequeña incompatible en algunos navegadores.
+1 = fuente mediana.
+2 = fuente grande.
 
 
 pngcrush
@@ -10829,6 +10870,11 @@ Inicia o para servicios en Arch Linux
 # rc.d start servicio (inicia el demonio o servicio)
 # rc.d restart servicio (Reinicia el demonio)
 # rc.d stop servicio (Para el servicio)
+
+
+rdesktop
+Conexión a escritorio remoto.
+$ rdesktop -k es -g 1024×768 -u USER -p PASS -a 15 -T tux -D client (Especificando telcado español [k], medidas de la ventana [g], usuario [u] y contraseña [p], especificar un mobre para la ventana [T] y suprimiendo la decoración de la ventana [D])
 
 
 rdiff-backup
@@ -11642,9 +11688,13 @@ Mostrar un listado de las particiones con sus características exactas.
 # sfdisk /dev/sda < tabla.bak (Restaurar tabla de particiones)
 
 
-sfill (paquete secure-delete)
-Borrado de todos los rastros de datos del espacio libre del disco.
-$ sfill
+sfill
+[paquete secure-delete]
+Borrado de todos los rastros de datos del espacio libre del disco. Parecidos parámetros de srm [ver]. Sobreescribe 38 veces el espacio.
+# sfill -f dir (Borrado rápito pero inseguro)
+# sfill -l dir (Como lanzar dos veces sfill -f)
+# sfill -i dir (Borrar solamente inodos en directorio)
+# sfill -zv dir (Sobreescribiendo ceros en el último borrado y mostrando el proceso)
 
 
 sftp
@@ -12226,10 +12276,13 @@ Configuración de usuarios (/etc/squid/passwd):
 # htpasswd /etc/squid3/passwd usuario2 (Sin parámetro -c porque el archivo ya está creado. Otro usuario y contraseña)
 
 
-srm (paquete secure-delete)
-Aplicación para eliminar de forma segura datos de disco
-$ srm archivo.txt
-$ srm -r dir_a_eliminar
+srm
+[secure-delete]
+Aplicación para eliminar de forma segura datos de disco sobreescribiendo su espacio. Es de funcionamiento lento, pero por eso se le considera el más efectivo
+$ srm -f dir (Modo rápido i el más inseguro)
+$ srm -l dir (Como realizar dos veces srm -f)
+$ srm archivo.txt (Se sobreescribe 38 veces)
+$ srm -rzv dir (se sobreescriben 38 veces los archivos y subdirectorios incluidos [r], sobreescribnedo ceros en el último borrado [z] y mostrando el proceso [v])
 
 
 ss
@@ -12377,9 +12430,11 @@ Visionar en tiempo real los paquetes capturados:
 #  tail -f archivo.log 
 
 
-sswap (paquete secure-delete)
-Borrado seguro de swap. previamente desactivar con swapoff /dev/sda7
-$ sswap /dev/sda7  (activar nuevamente la swap con swapon /dev/sda7)
+sswap
+[secure-delete]
+Borrado seguro de swap. Previamente desactivar con swapoff /dev/sda7 y al finalizar el proceso volver a activarla con swapon /dev/sda7 [Si no sabemos donde se encuentra la swap: cat /proc/swaps. Argumentos paracidos a srm [ver] y sfill [ver]. El espacio se sobreescribe 38 veces.
+$ sswap -f /dev/sda7 (Modo rápido e inseguro)
+$ sswap -lv /dev/sda7 (Como lanzar dos veces sswap -f y mostrando el proceso)  
 
 
 st
@@ -12529,7 +12584,7 @@ Defaults passprompt=”mi frase solicitando la contraseña...”
 Defaults badpass_message=”mi frase si se entra erronea...” 
 usuario    ALL=(ALL) ALL  (Añadir el usuario a sudo) 
 Defaults:usuario !authenticate  (si no queremos que nos pida la contraseña) 
-usuario ALL= NOPASSWD: /usr/sbin/firestarter (Para que no pida contraseña al arrancar una aplicación concreta) 
+usuario ALL=NOPASSWD: /usr/sbin/firestarter (Para que no pida contraseña al arrancar una aplicación concreta) 
 O añadir a la linea Defaults, algunos parámetros separados por comas: 
 timestamp_timeout=5   (La contraseña se guardará 5 minutos.) 
 insults    (Te mostrará insultos si fallas la contraseña) 
@@ -13495,6 +13550,11 @@ Opciones
 proc (compara /proc con la salida de /bin/ps.)
 sys (compara la info de /bin/ps con la obtenida de las llamadas al sistema.)
 brute (Identifica por fuerza bruta todos los procesos) 
+
+
+unhtml
+Elimina todo el formato HTML que encuentra e un fichero e imprime el texto limpio.
+$ unhtml index.html > /home/usuario/index.txt (Si no se facilita el archivo de destino, lo muestra en pantalla)
 
 
 uniq
@@ -14554,6 +14614,13 @@ $ winetricks corefonts (Instala fuentes como Arial y Verdana)
 Más referencias de winetricks aqui: <http://wiki.winehq.org/winetricks>
 
 
+wipe
+Borrado de archivos, directorios, particiones o discos de forma segura.
+$ wipe archivo (Sobreescribiendo 34 veces el espacio)
+$ wipe -fq (Sin pedir confirmación y sólo reescribiendo 4 veces)
+$ wipe -rq -Q 10 -i -c DIR/ (Que suprima los subdirectorios [r], que haga 10 pasadas y no sólo 4 [-q -Q 10], que muestre detalles [-i] y por si tienen permisos que chmod entre en acción [c]
+
+
 wkhtmltopdf
 Pasar una página web o un archivo html a pdf
 $ wkhtmltopdf tuxapuntes.com tuxapuntes.pdf
@@ -14985,6 +15052,11 @@ Pegar el contenido:
 $ xrdb -merge .Xresources (Aplicar los cambios, en caso contrario no se aplicaran hasta el siguiente reinicio)
 
 
+xtrlock
+Bloquea el servidor de las X hasta que el usuario no introduce la contraseña y pulsa enter. El cursor se convierte en un candado y el teclado no reponde. Antes de introducir la contraseña es preferible clicar "esc" para borrar todo lo que puede haberse pulsado en el teclado. La introducción de la contraseña no es visible en pantalla.
+$ xtrlock
+
+
 xvkbd
 Teclado virtual.
 
@@ -15012,6 +15084,44 @@ xxd
 convertir textos de ASCII a hexadecimal o viceversa.
 $ xxd -p  (entra en el prompt de la aplicación. Teclear la palabra o frase y darle a intro para la conversión. Ctrl+c para salir del prompt)
 $ xxd -r -p  (Proceso inverso)
+
+
+xxxterm
+Navegador minimalista con soporte para flash.
+Descomprimir  el archivo de configuración y copiarlo en el directorio personal:
+	$ cp /usr/share/doc/xxxterm/examples/xxxterm.conf.gz .
+	$ gzip -d xxxterm.conf.gz
+	$ mv xxxterm.conf .xxxterm.conf (Hacerlo oculto)
+Editarlo para la configuración. A título de muestra:
+$ nano xxxterm.conf
+	home                    = http://google.es
+	window_width            = 1524
+	window_height           = 768
+	encoding                = UTF-8
+algunos atajos:
+F6 (Barra de navegación)
+i (Buscador de la página)
+Ctrl + t (Nueva pestaña)
+Ctrl + w (Cerrar pestaña)
+Alt + h (Historial)
+F5 (Recargar página)
+/ (Buscar un termino)
+n (Siguiente termino)
+N (Anterior termino)
+Alt + q ()Reiniciar el navegador)
+Ctrl + q (Cerrar el navegador)
+
+
+yacpi
+Herramienta de monitoreo para portátiles.
+$ yacpi
+$ yacpi -n (Mostrar hasta los que no estan activos)
+$ yacpi -d 2 (Actualizar los datos cada 2 segundos)
+$ yacpi -b (De la bateria)
+$ yacpi -f (Cel ventilador)
+$ yacpi -t (La temperatura)
+$ yacpi -c (De la cpu)
+Para salir pulsar "q" y para actualizar datos "r"
 
 
 yacy

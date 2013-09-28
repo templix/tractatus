@@ -12395,6 +12395,18 @@ Montar un sistema de archivos remoto en local.
 # fusermount -u /home/usuario/remoto  (Desmontarlo)
 
 
+sshguard
+Demonio que protege SSH y otros servicios contra ataques de fuerza bruta. Funciona observando los cambios en /var/log/auth.log, verificando si alguien esta fallando varias veces al autentificarse. Luego de varios errores de autentificacion (por defecto 14) el host ofensivo sera bloqueado por 7 minutos y se duplicará cada vez que el host ofensivo repita el ataque. Carece de archivo de configuración y puede complementarse con iptables:
+# iptables -A INPUT -j sshguard (Para activarlo en todos los puertos)
+# iptables -A INPUT -m multiport -p tcp --destination-ports 21,22 -j sshguard (Para puertos concretos [ftp y ssh])
+El archivo para colocar las direcciones no afectadas por sshguard:
+# nano /etc/sshguard/whitelist
+Con el siguiente formato:
+	192.168.1.53 (Una ip)
+	192.168.1.0/24 (Un rango)
+	lapipaplena.net (Un host)
+
+
 ssh-keygen
 Creación, gestión y conversión de claves utilizadas para la autenticación de cliente y servidor. Cuando no se especifica ninguna opción, ssh-keygen genera un par de claves RSA de 2048 bits y solicita un nombre de clave y una frase de paso para proteger la clave privada. Las claves públicas se crean usando el mismo nombre base que la clave privada con una extensión .pub añadida. La ubicación de la clave se muestra cuando se completa la generación de claves. Ver ssh
 $ ssh-keygen -lvf ~/.ssh/known_hosts (Ver todas las huellas digitales y las imágenes randomart)
