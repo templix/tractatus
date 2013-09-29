@@ -3020,8 +3020,29 @@ Si nuestra IP es dinámica, NetworkManager nos modificará cada cierto tiempo el
 */3 * * * * cp /etc/resolv.conf.local /etc/resolv.conf (actualizar cada 3 minutos)
 
 
+dnstop
+Monitorear el tráfico dns.
+# dnstop -i 192.168.1.3 -p -r 2 eth0 (Excluir la propia máquina [i], en modo no promiscuo [p], actualizando cada 2 segundos [r] y la red objetivo)
+En la mayoria de los casos, lo normal en lanzar:
+# dnstop eth0
+Y realizar las consultas de forma interactiva pulsando las siguientes teclas:
+s (visualizar las direcciones de origen)
+d (visualizar las direcciones de destino)
+t (desglosar por tipo)
+r (mostrar el desglose de los códigos de respuesta)
+1 (mostrar consulta de primer nivel [.com, .net, .info])
+2 (mostrar consulta de segundo nivel) 
+3 (mostrar consulta de tercer nivel)
+! (mostrar fuente y consulta de primer nivel)
+@ (mostrar fuente y consulta de segundo nivel)
+# (mostrar fuente y consulta de tercer nive
+Ctrl + r (Reinicia el contador)
+? (Muestra la ayuda)
+Ctrl + x (Salir)
+
+
 dnstracer
-Consultas DNS desde una ip o un host. dnstracer determina cuando un Servidor de Nombres de Dominio [DNS] obtiene información de un nombre de anfitrión dado, y a continuación el servidor DNS manda la respuesta de autorización.
+Consultas DNS desde una ip o un host. dnstracer determina cuando un servidor de nombres de dominio [DNS] obtiene información de un nombre de anfitrión dado, y a continuación el servidor DNS manda la respuesta de autorización.
 $ dnstracer host
 
 
