@@ -14926,6 +14926,11 @@ xfm
 Gestor de archivos minimalista.
 
 
+xfpt
+Crear un xml a partir de un texto plano.
+$ xfpt -o archivo.txt
+
+
 xfrun4
 Lanzador de aplicaciones propio de xfce.
 
@@ -14949,6 +14954,20 @@ Matar aplicaciones rebeldes.
 $ xkill (El cursor se convierte en una calavera y donde se clica mata la aplicación)
 
 
+xli
+Visor de imágenes.
+$ xli imagen.jpg
+Teclas de control:
+l (Rotar 1/4 a la izquierda)
+r (Rotar 1/4 a la derecha)
+. (Actualizar la imagen)
+números del 5 al 2 (Aclarar la imagen)
+números del 6 al 9 (Oscurecer la imagen)
+< (Empequeñecer)
+> (Agrandar)
+q (salir)
+
+
 xlock (xclockmore)
 Activar el protector de pantalla. Solicitará contraseña para salir.
 $ xlock -mode anemona
@@ -14960,6 +14979,17 @@ Lista las aplicaciones que se están ejecutando en una sesión.
 # xlsclients -display :0   (Especificando sesión)
 # xlsclients -a      (Lo mismo de la sesión actual)
 # xlsclients -l  (Lista extendida)
+
+
+xmem
+Monitoriza el uso de ram y de swap.
+$ xmem -update 1 -codecolor black -nolabel (Que actualice resultados cada segundo, mostraqr en negro la memoria usada y sin mostrar el hostname) 
+Colores por defecto:
+-codecolor red (Color de la memoria usada)
+-cachecolor yellow (De la memoria caché)
+-buffercolor blue (Memoria del buffer)
+-freecolor green (de la memoria libre)
+-swapcolor red (de la memoria swap. Mismo color que la memoria usada)
 
 
 xmll (libxml2)
