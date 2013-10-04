@@ -5667,6 +5667,18 @@ Tipos de registros
 	CNAME (Registro de nombre canónico que hace que un nombre sea alias de otro)
 
 
+host.conf
+[/etc/host.conf]
+Archivo que contiene el orden de cómo serán ejecutadas las resoluciones que requiera el "Host". Algunos parámetros:
+**order hosts,bind,nis** (que cualquier tipo de resolución de nombres primeramente debe ser ejecutada en el archivo /etc/hosts , posteriormente se debe consultar a BIND y si aún no se ha logrado la resolución, intentar con NIS)
+bind (Llamada al seridor de nombres)
+nis ("Network Information Server" es un sistema de resolución desarrollado por Sun Microsystem's , su implementación generalmente esta limitada a Intranets y utiliza una metodología diferente a la usada por BIND
+**multi on** (Que devuelva más de un resultado si existen alias ya que un host puede tener varias direcciones IP y la dirección IP puede coincidir con varios nombres de host. Por defecto es off [sólo se muestra el primero] )
+**spoofalert on** (Intentar encontrar el nombre de host de una dirección IP. Si la aplicación no devuelve el resultado correcto, puede significar que una máquina intenta hacerse pasar por lo que no es.)
+**nospoof on** (rechaza los resultados que no pasan la prueba de robo de identidad)
+**reorder on** (intenta reordenar las direcciones de host para que las direcciones locales [misma subred] se listen en primer lugar)   
+
+
 hostid
 Muestra la identificación en hexadecimal del presente host.
 $ hostid
@@ -5679,7 +5691,13 @@ $ hostname -i                 (la IP del ordenador)
 $ hostname -s                 (el nombre de la maquina) 
 
 
-hosts (archivo /etc/hosts)
+hosts
+[/etc/hosts]
+[/etc/hosts]
+Contiene la resolución de "Hosts" definidos localmente. La estructura es: IP, nombre del host y alias.
+192.168.1.10 mi_servidor.com servidor
+127.0.0.1 localhost mipc
+1.-
 Configurar bloqueo de páginas web:
 	# nano /etc/hosts
 Y debajo de:
