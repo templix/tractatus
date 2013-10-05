@@ -15027,6 +15027,19 @@ $ xterm -display :20 (Abrirá exterm en el interior de la sesión 20)
 $ Xnest :20 -geometry 800x600 & (Especificando medidas de la ventana)
 
 
+xpra
+Permite ejecutar en un equipo una aplicación remota desde un servidor X, manteniendo la conexión aunque esta se hay interrumpido. Posibilita la comunicación remota con aplicaciones individuales sin que sea obligatorio cargar todo el escritorio remoto.
+	@client:~$ ssh usuario@servidor.com (Establecer conexión con el servidor)
+	@server:~$ xpra start :5 (Arrancar el Display 5)
+	@server:~$ DISPLAY=:5 midori & (Lanzar una aplicación [midori] en el display 5)
+	@server:~$ logout (Cerrar la conexión con el servidor)
+	Realizar una nueva conexión con el servidor esta vez con xpra y contra el display 5:
+	@client:~$ xpra attach ssh:usuario@servidor.com:5 (Después de entrar la contraseña, se abrirá la aplicación midori del servidor en el cliente)
+@server:~$ xpra list (Lista las sesiones xpra abiertas)
+@server:~$ xpra stop :5 (Cierra el display 5)
+@server:~$ xpra attach :5 (Entra en el display 5)
+
+
 xprobe
 Intenta identificar sistemas operativos remotos enviando una serie de tests y determinando su tipo en base a las respuestas recibidas.
 # xprobe2 ip
