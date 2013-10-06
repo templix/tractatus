@@ -13463,7 +13463,8 @@ Arrancar la aplicación con el número que muestra:
 $ tv3 4226490
 
 
-TVenLinux.sh (mplayer, zenity, rtmpdump y curl) 
+TVenLinux.sh
+[mplayer, zenity, rtmpdump y curl] 
 Script para poder ver prácticamente todos los canales de la TDT a través de Internet. Descarga: http://www.tvenlinux.com/TVenLinux.sh. Despues de otorgar permisos [chmod +x TVenLinux.sh) ejecutar con ./TVenLinux.sh. 
 Atajos 
 q (Salir para cambiar de programa o finalizar) 
@@ -13523,6 +13524,16 @@ configurar nuevamente la zona horaria
 tzselect
 Pregunta al usuario información sobre la localización actual y muestra la descripción de la zona horaria correspondiente.
 $ tzselect
+
+
+tzwatch
+Muestra las zonas horarias especificadas por el usuario y las guarda en el archivo ~/.tzlist. 
+$ tzwatch -c (Lanzar tantas veces como de zonas horarias se quiere disponer de información y seguir las instrucciones: Add Zone, Americas, 26 [Guatemala], mostrará la información y preguntará si es correcta, 1 [yes] y Done [salir])
+$ tzwatch (Mostrará hora local de cada una de las zonas elegidas)
+	[~]$ tzwatch
+	Mon Oct  7 02:39:39 CST 2013   Australia/Adelaide
+	Sun Oct  6 18:09:39 CEST 2013   Europe/Madrid
+	Sun Oct  6 10:09:39 CST 2013   America/Guatemala
 
 
 udiskie
