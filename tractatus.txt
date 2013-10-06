@@ -7313,7 +7313,7 @@ $ ls -i (Muestra todos los archivos no ocultos)
 $ ls -a (Muestra todos los archivos, incluso los ocultos) 
 $ ls -l (Muestra permisos, último acceso i propietarios) 
 $ ls -1 (muestra en un listado)
-$ ls -F (Muestra a continuación de cada elemento si se trata de un directorio [/], un archivo [*] o un en lace [@])
+$ ls -F (Muestra a continuación de cada elemento si se trata de un directorio [/], un ejecutable [*] o un enlace [@])
 $ ls -L (En los enlaces, se muestra el archivo al que apuntan)
 $ ls -l PID (Muestra qué está corriendo con el PID especificado)
 $ ls -R	(recursivamente)
@@ -14463,7 +14463,7 @@ Comandos básicos (Comunes para aplicaciones relacionadas con chat irc):
 wget
 Realizar descargas de una web. Soporta protocolo http, https y ftp.
 $ wget http://www.ubuntu.org/ubuntu.iso  (descarga básica)
-$  wget http://www.tuxapuntes.com (descargar página incial del sitio web)
+$ wget http://www.tuxapuntes.com (descargar página incial del sitio web)
 $ wget http://www.ubuntu.org/ubuntu.iso ftp://www.debian.org/debian5.iso (varias descargas)
 $ wget -i archivo.txt  (Realizar las descargas enumeradas en archivo.txt)
 $ wget --limit-rate=60k ftp://ftp.ubuntu.org/hardy.iso (limitar ancho banda)
@@ -14486,8 +14486,10 @@ $ whatis ifconfig
 whatweb
 Identifica sitios web: tecnología web, sistemas de gestión de contenidos [CMS], plataformas de blogs, estadística, bibliotecas JavaScript, servidores, dispositivos embebidos, direcciones de correo, versiones, errores SQL.... cuenta con más de 1600 plugins.
 $ whatweb -l (Muestra listado de plugins)
+$ whatweb -I nginx (Información sobre los plugins relacionados con "nginx")
 $ whatweb URL (Uso básico)
-$ whatweb -a 3 -p -v URL (Con un nivel agresivo [-a 3, 1: pasivo y 4: heavy] que use todos los plugins, opción por defecto [-p] y que muestre toda la información [v])
+$ whatweb -a 3 -p -v URL (Con un nivel agresivo [a 1: pasivo, a 3: agresivo y a 4: muys agresivo] que use todos los plugins, opción por defecto [-p] y que muestre toda la información [v])
+$ $ whatweb -p nginx URL (Sólo usar un plugin)
 $ whatweb 192.168.1.0/24 (Que analice toda una red)
 
 
