@@ -10551,6 +10551,12 @@ $ pngnq -n 256 imagen.png (Pasando de ARGB de 32 bits por píxel a formato de pa
 $ pngnq -n 64 imagen.png (Indicando numero de colores)
 
 
+pngphoon
+Crea una imagen png de la fase actual de la luna.
+$ pngphoon -h 1060px -w 1060px -f lluna.png -s 50 (Los parámetros h [altura de la imagen], w [anchura] y f [archivo de salida] son obligatorios. "s" es la densidad de puntos)
+$ pngphoon -h 1060px -w 1060px -f lluna.png -b (En negro la superficie de la luna no iluminada)
+
+
 pngquant
 Optimizacion de imagenes .png. Comprime reduciendo el número de colores disponible. El tamaño del archivo resultante es mucho menor, pero hay una perdida de calidad.
 $ pngquant 256 imagen.png
@@ -15109,6 +15115,12 @@ $ Xnest :20 -ca & (Sesion número 20)
 Para mandar instancias al servidor xnest: 
 $ xterm -display :20 (Abrirá exterm en el interior de la sesión 20) 
 $ Xnest :20 -geometry 800x600 & (Especificando medidas de la ventana)
+
+
+xphoon
+Muestra las fases de la luna como fondo de pantalla. Para que se visualice ha de matarse el fondo de pantalla activo.
+$ xphoon -demo (Muestra una demo rápida de todas las fases de la luna)
+$ xphoon -t 10 -i (Que actualice la imagen cada 10 minutos y muestre el identificador del proceso [PID])
 
 
 xpra
