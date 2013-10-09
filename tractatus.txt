@@ -6335,6 +6335,25 @@ Permitir (ACCEPT)
 	# iptables -A INPUT -p tcp --dport ssh -j ACCEPT (Un servicio concreto)
 	# iptables -A INPUT -p tcp -i eth0 -m multiport --destination-port 22,80,443 -j ACCEPT (Todas las entradas a varios puertos)
 	# iptables -A OUTPUT -o eth0 -p tcp -d 192.168.101.0/24 --dport 22 -j ACCEPT  (Permitir trafico ssh saliente para la red especificada)  
+1.-
+Salvar unas reglas de iptables y restablecerlas manualmente:
+# iptables-save -c > /etc/iptables.rules
+# iptables-restore < /etc/iptables.rules
+2.-
+Salvar unas reglas de iptables para que se activen automaticamente tras un reinicio:
+Salvar las reglas:
+# iptables-save > /etc/iptables/rules.v4
+Crear el archivo: 
+# nano /etc/network/if-pre-up.d/iptables (Crear archivo)
+Con el siguiente contenido:
+	#!/bin/bash
+	/sbin/iptables-restore < /etc/iptables/rules.v4
+Otorgar permisos:
+# chmod +x /etc/network/if-pre-up.d/iptables
+3.-
+Otra opción para salvar las reglas y que se activen tras un reinicio:
+# /etc/init.d/iptables-persistent save (Guardar las reglas existentes)
+# /etc/init.d/iptables-persistent flush (Reseteará todas las reglas)
 
 
 iptotal 
