@@ -3982,6 +3982,38 @@ Y pegar:
 	maxretry = 1
 	bantime = -1
 Nota.- el bantime = -1 indica bloquear permanentemente. 
+2.-
+Algunos ajustes de jail.conf para el caso de usar nginx y no apache:
+# nano /etc/fail2ban/jail.conf
+Prevenir ataques de inyeccion de codigo
+	[php-url-fopen]
+	enabled = true
+	port    = http,https
+	filter  = php-url-fopen
+	logpath = /var/log/nginx/access_log
+	maxretry = 1
+Bloquea por iptables un día a los hosts que se conectan haciendo  uso de un "User Agent" sospechoso
+	[nginx-badbots]
+	enabled  = true
+	filter = apache-badbots
+	action = iptables-multiport[name=BadBots, port="http,https"]
+	logpath = /var/log/nginx*/*access*.log
+	bantime = 86400
+	maxretry = 1
+Solicitar 240 páginas en 1 minuto o 4 paginas segundo, bloqueo por dos dias
+	[nginx-dos]
+	enabled = true
+	port    = http,8090
+	filter  = nginx-dos
+	logpath = /var/log/nginx/access.log
+	findtime = 60
+	bantime  = 172800
+	maxretry = 240
+Fallar la autentificación en el servidor web, blloqueo por 10 minutos
+	[nginx-auth]
+	enabled = true
+	port = http
+	filter = nginx-auth
 
 
 faillog
