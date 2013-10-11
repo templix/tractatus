@@ -4598,6 +4598,43 @@ Formatea la salida de un archivo a una determinada longitud.
 $ fold  -w50 -s archivo (50 caracteres de largo por linea y que corte por los espacios entre palabras y no por las palabras)
 
 
+for
+[bucle]
+Ejecuta un trozo de códico si la expresión de control es verdadera y sólo se para cuando es falsa.
+Ejemplos:
+1.-
+ 	#!/bin/bash
+        for i in $( ls ); do
+            echo item --> $i
+        done
+2.-
+	#!/bin/bash
+	for i in `seq 1 10`;
+	do
+		echo $i
+	done
+Nota.- Si los números los quisieramos en una misma linea, encerrar la variable entre comillas ["`seq 1 10`"]
+3.-
+	#!/bin/bash
+	for i in 1 2 3 4 5
+	do
+	   echo "Es el número $i "
+	done
+4.-
+	#!/bin/bash
+	for i in {1..5}
+	do
+	   echo "Es el número $i "
+	done
+5.-
+Del 1 al 10 de 2 en 2:
+	#!/bin/bash
+	for i in {1..10..2}
+	do
+		echo "Es el número $i "
+	done
+
+
 foremost
 Recuperación de datos
 # foremost -i /dev/sda -o /recovery
