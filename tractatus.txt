@@ -13922,6 +13922,30 @@ $ unsort -M archivo1.txt archivo2.txt (Uniendo en la salida los dos archivos)
 $ unsort -n archivo1.txt archivo2.txt (Mezcla las lineas de forma aleatoria sin alterar el orden)
 
 
+until
+Estructura muy parecida a while [until, do, done], pero con la forma de evaluar la condición al revés, es decir, se ejecuta mientras la condición sea falsa.
+Algunos ejemplos:
+1.-
+Decrecer un contador hasta llegar a 5
+	#!/bin/bash
+	CONTADOR=10
+	until [  $CONTADOR -lt 5 ]; do
+	   echo "El contador a $CONTADOR"
+	   let CONTADOR-=1
+	done
+2.-
+	#!/bin/bash
+	SALIR=si
+	until [ "$OPCION" = "$SALIR" ]
+	do
+	  echo "Pulsar teclas... "
+	  echo "(\"$SALIR\" para salir)"
+	  read OPCION
+	  echo "Pulsada la opción salir ($OPCION)"
+	  echo
+	done
+
+
 unzip
 Descomprimir archivos zip.
 $ unzip archivo.zip
