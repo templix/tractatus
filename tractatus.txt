@@ -1605,50 +1605,50 @@ case
 El conjunto de palabras case ... esac conforman un selector en función de un resultado.
 Algunos ejemplos:
 1.-
-  #!/bin/bash
-  read -p "Pon un número del 1 al 3 " NUM
-  case $NUM in
-    1)
-      echo "uno"
-    ;;
-    2)
-      echo "dos"
-    ;;
-    3)
-      echo "tres"
-    ;;
-    *)
-      echo "No es del 1 al 3"
-    ;;
-  esac
+	#!/bin/bash
+	read -p "Pon un número del 1 al 3 " NUM
+	case $NUM in
+		1)
+		  echo "uno"
+		;;
+		2)
+		  echo "dos"
+		;;
+		3)
+		  echo "tres"
+		;;
+		*)
+		  echo "No es del 1 al 3"
+		;;
+	esac
 2.-
 Combinado con un while para crear un menú:
-  #!/bin/bash
-  while [ "$OPCION" != 3 ]
-  do
-  echo
-  echo "[1] ¿Saber el host? "
-  echo "[2] ¿Directorio dondo estás? "
-  echo "[3] Salir "
-  echo
-  read -p "Escoger una opción " OPCION
-  echo
-  case $OPCION in
-     1)
-        echo $HOSTNAME
-     ;;
-     2)
-        pwd
-     ;;
-     3)
-        echo "Abortando..."
-     ;;
-     *)
-        echo "La opción no es válida"
-     exit
-     ;;
-  esac
-  done
+	#!/bin/bash
+	while [ "$OPCION" != 3 ]
+	do
+	echo
+	echo "[1] ¿Saber el host? "
+	echo "[2] ¿Directorio dondo estás? "
+	echo "[3] Salir "
+	echo
+	read -p "Escoger una opción " OPCION
+	echo
+	case $OPCION in
+		1)
+		    echo $HOSTNAME
+		;;
+		2)
+		    pwd
+		;;
+		3)
+		    echo "Abortando..."
+		;;
+		*)
+		    echo "La opción no es válida"
+		exit
+		;;
+	esac
+	done
 
 
 cat
