@@ -4898,6 +4898,22 @@ Instalador de paquetes .deb
 # gdebi paquete.deb
 
 
+gdisk
+Herramienta para particionar discos rígidos de cualquier tamaño con una tabla de particiones GPT de GUID (Globally Unique Identifier) imprescindible para los discos mayores de 2 TB. Para el caso de discos rígidos SSD, por defecto gdisk asegura que sus particiones estén correctamente alineadas [discos duros que no tienen 512 bytes por sectors]. El uso de particiones GPT, elimina la necesidad de basarse en particiones primarias, extendidas o lógicas propias del sistema MBR. GPT puede soportar un número casi ilimitado de particiones y tiene solamente el límite de la cantidad de espacio reservado para las entradas de las particiones en el disco GPT, por defecto gdisk tiene un límite 128 particiones.
+# gdisk /dev/sda
+Algunos comandos:
+	i (información de las particiones)
+	l (listar particiones)
+	m (volver al menú principal)
+	d (borrar partición)
+	n (crear nueva partición)
+	o (crear nueva tabla de particiones GUID)
+	t (cambiar tipo de partición)
+	c (cambiar de partición)
+	q (salir guardando los cambios)
+	? (mostar menú de opciones)
+
+
 gdm
 Pantalla de login para entrar en el sistema
 1-
