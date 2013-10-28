@@ -1826,6 +1826,14 @@ $ check-language-support -l es
 $ check-language-support -a (todos)
 
 
+checkrestart
+[debian-goodies]
+Muestra procesos activos que están utilizando una versión anterior de algún fichero que haya sido actualizado.
+	$ checkrestart -v
+	Found 0 processes using old versions of upgraded files
+Nota.- Aunque la salida muestre gran cantidad de paquetes [por ejemplo por tener una "testing" o por una actualización del navegador mientras este está activo] no es preciso reiniciar el sistema o la aplicación.
+
+
 cherokee
 Servidor web
 # cherokee-admin -b (iniciar el gestor. En el navegador: localhost:9090)
@@ -2703,6 +2711,23 @@ instalarlo:
 Lo encontraremos en aplicaciones/juegos
 
 
+debget
+[debian-goodies]
+Descarga un paquete del repositorio o, caso de estar instalado, muestra la versión.
+$ debget debian-goodies
+$ debget 0ad
+
+
+debian-history
+Historia de la distro Debian. Los idiomas disponibles son: Inglés, francés, alemán, italiano, japonés, coreano, portugués, ruso y lituano. Colocar en la barra de navegación [para el idioma francés]:
+	http://usr/share/doc/debian-history/fr/index.fr.html
+
+
+debian-timeline
+Línea de tiempo del proyecto Debian basado en Javascript y HTML: Versiones, bugs, lanzamientos importantes... Colocar en la barra de navegación:
+	http://usr/share/debian-timeline/index.html
+
+
 deborphan
 Visualizar paquetes huerfanos 
 $ deborphan --guess-all   (Los muestra todos) 
@@ -2810,6 +2835,12 @@ Cliente DHCP
 dhcpcd
 Configuración automática de la red dhcp
 $ dhcpcd eth0
+
+
+dhomepage
+[debian-goodies]
+Abre, si existe, en el navegador la página de información de un paquete debian.
+$ dhomepage debian-history
 
 
 di
@@ -3137,6 +3168,14 @@ Bajar versión a un programa instalado.
 # downgrade firefox 
 Mostrará la salida: “please choose a version, [s]earch A.R.M., or [q]uit:”
 Pulsando “s” mostrará las versiones disponibles para ser instaladas.
+
+
+dpigs
+[debian-goodies]
+Muestra los paquetes que ocupan más espacio.
+$ dpigs (Los primeros diez 10. Opción por defecto)
+$ dpigs -n 20 (Los primeros 20)
+$ dpigs -S (Muestra los paquetes fuente más grandes instalados en el sistema)
 
 
 dpkg
@@ -8212,9 +8251,11 @@ Crear un espacio de intercambio.
 
 
 mktemp
+[coreutils]
 Crear archivos o directorios temporales.
-$ mktemp (Crea un archivo en /tmp)
-$ mktemp -d (Crea un directorio en /tmp)
+$ mktemp (Crea un fichero temporal en /tmp)
+$ mktemp -d (Crea un directorio en tmp y en su interior un archivo)
+$ mktemp --tmpdir=documentos (crea un archivo temporal en el interior del directorio "documentos")
 
 
 mlabel
