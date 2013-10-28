@@ -8245,6 +8245,14 @@ Crear particiones ntfs.
 $ mkntfs -L win -F /dev/sdb2 (con etiqueta “win” y forzando)
 
 
+mkpasswd
+Encriptar contraseñas. Si la contraseña no se especifica, la pedirá por pantalla
+$ mkpasswd (Uso básico)
+$ mkpasswd password (Encripta "passwrd". Si no se especifica "method" [-m] se usa md5 por defecto)
+$ mkpasswd -m help (Muestra las opciones de encriptación)
+$ mkpasswd -m sha-512 password (Usando sha-512 para la contraseña "password")
+
+
 mkswap
 Crear un espacio de intercambio.
 # mkswap /dev/sda5 (Luego añadir la entrada en /etc/fstab: /dev/sda4 none swap sw 0 0)
