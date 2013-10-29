@@ -10661,6 +10661,21 @@ Reformatear palabras o frases entradas en el prompt a un lenguaje macarrónico.
 $ pig (entra en el prompt. Entrar cualquier frase pulsar enter y comprobar el resultado)
 
 
+pigz
+Compresión de ficheros. Permite lanzar varias instancias en paralelo para un único proceso de compresión. Sobrreescribe el fichero dándole extensión gz a menos que lo usemos con el parámetro -k. Pigz es casi lo mismo que gzip solo que aprovecha los múltiples cores a diferencia de gzip que solo usa un core. Al comprimir sólo ficheros, si queremos comprimir un directorio, primero se ha de empaquetar con tar (ver). Descarga y compilación:
+	wget http://zlib.net/pigz/pigz-2.3.1.tar.gz
+	$ tar -xzvf pigz-2.3.1.tar.gz
+	$ make
+Nota.- Si no se desea arrancar la aplicación con ./pigz crear un enlace directo en el path [ln -s pigz-2.3.1/pigz /usr/bin/]
+$ pigz -p 4 fichero (Especificando número de procesos a levantar. Por defecto utiliza todos los cores i procesadores de la máquina)
+$ pigz -k fichero (Sin sobreescrir el fichero)
+$ pigz -d fichero.gz (Descomprimir el fichero creado)
+$ pigz -r carpeta (Comprimir todos los archivos de la carpeta. No la carpeta)
+Algunas opciones:
+--fast (Nivel mínimo de compresión)
+--best (Nivel máximo de compresión)
+
+
 ping
 Para saber si existe conexión con un host 
 $ ping ip (Uso básico) 
