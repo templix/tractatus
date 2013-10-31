@@ -5063,6 +5063,13 @@ disabled [inhabilitado] (Desactivado)
 	SETLOCALDEFS=0
 
 
+getent
+Obtiene entradas de la base de datos administrativa (ahosts, passwd, group, hosts, services, protocols, networks, aliases y rpc)
+$ getent passwd (lista los usuarios creados en el sistema)
+$ getend group users (Ver los usuarios del grupo users)
+$ getent services 22 (Muestra el servicio que corre por el puerto especificado. Si no se especifica puerto los lista todos)
+
+
 getsebool
 Permite listar polí­ticas y determinar si estan activas o inactivas en SELinux, implementación de seguridad para GNU/Linux que provee una variedad de políticas de seguridad a través del uso de módulos de Seguridad en el nucleo de Linux. Ver setsebool
 # getsebool -a (Lista todas las políticas, activa o inactivas)
