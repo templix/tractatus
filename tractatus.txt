@@ -11543,6 +11543,7 @@ $ rsync -av /home/usuario/Dropbox /home/usuario/Copias_seguridad/ (Copiar todo e
 $ rsync -av --exclude=Dropbox /media/servidor /home/usuario/servidor/ (Sincronizar un servidor con un directorio local excluyendo el dir Dropbox)
 Nota.- Pueden excluirse varios directorios [--exclude=Dropbox --exclude=isos --exclcude=public ...]
 $ rsync -arvuz Documentos usuario@192.168.1.5:/home/usuario/ (Copiar el directorio en otra máquina)
+$ rsync -arvuz -e 'ssh -p 30567' Documentos usuario@192.168.1.5:/home/usuario/ (Copiar el directorio en otra máquina pero especificando otro puerto SSH)
 Algunas opciones:
 	-a (respaldar recursivamente directorios y subdirectorios) 
 	-g (conserva el atributo “group” de los archivos originales) 
@@ -14430,6 +14431,17 @@ h (Muestra las teclas de ayuda)
 n (Buscar) 
 Flecha derecha (Renombrar) 
 q (Salir) 
+
+
+vglconnect
+Crear conexión para el uso de VirtualGL entre la maquina cliente y la remota (la que ejecutará las aplicaciones OpenGL). Funciona como una conexión SSH pero con la redirección de aplicaciones gráficas activada.
+$ vglconnect usuaro@1.2.3.4
+
+
+vglrun
+Ejecuta aplicaciones utilizando las librerias de VirtualGL
+$ vglrun programa
+$ vglrun -q 70 programa (Baja la calidad de los JPG enviados entre la máquina remota y la local)
 
 
 vim
