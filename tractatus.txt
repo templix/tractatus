@@ -10407,13 +10407,6 @@ $ parallel -- who pwd "echo ++++++++++++++++++"
 $ parallel sh -c "echo linux es genial; sleep 2; echo ... o no" -- n 2 (dos veces)
 
 
-parche 
-1.-
-Aplicar un parche a una aplicación instalada. 
-$ wget http://host/parche.patch 
-# patch --backup /usr/bin/aplicacion_a_parchear ~/parche.patch
-
-
 partprobe
 Releer la tabla de particiones después de alguna modificación en ella, sin necesidad de reiniciar.
 # partprobe
@@ -10438,6 +10431,44 @@ Cambiar contraseñas
 paste
 Combina archivos, juntando las primeras lineas con las primeras, las segundas con las segundas...
 $ paste 1.txt 2.txt > 3.txt
+
+
+patch
+Herramienta que permite aplicar un parche a un determinado fichero o directorio. Toma un fichero que contiene un listado de diferencias producidas por el programa diff y esas diferencias se aplica a uno o más archivos. Los nombres de los archivos para ser parcheado por lo general se toman del fichero del parche, pero si hay un solo archivo para ser parcheado puede ser especificado en la línea de comandos como originalfile. 
+1.-
+Aplicar un parche a una aplicación instalada. 
+$ wget http://host/parche.patch  (Descargar el parche)
+# patch --backup /usr/bin/aplicacion_a_parchear ~/parche.patch
+Un ejemplo completo en archivos de texto:
+Tenemos dos ficheros, file1 (archivo original) y file2 (archivo modificado) con el siguiente contenido:
+	$ cat file1
+	Me gusta linux
+	$ cat file2
+	Me gusta la libertad
+Generar el parche parche con el comando diff:
+	$ diff -u file1 file2 > file.patch
+	$ cat file.patch 
+	--- file1	2013-11-02 03:14:28.466555864 +0100
+	+++ file2	2013-11-02 03:14:46.230555684 +0100
+	@@ -1 +1 @@
+	-Me gusta linux
+	+Me gusta la libertad
+Tenemos un tercer fichero con el siguiente contenido:
+	$ cat file3
+	Me gusta linux
+	No uso programario privativo
+Y queremos parchearlo con el archivo que hemos creado previamente. El resultado sería el siguiente:
+	$ patch file3 < file.patch
+	patching file file3
+	$ cat file3
+	Me gusta la libertad
+	No uso programario privativo
+Para anular un parche previamente aplicado:
+	$ patch -R file3 < file.patch
+	patching file file3
+	$ cat file3
+	Me gusta la libertad
+	No uso programario privativo
 
 
 path
