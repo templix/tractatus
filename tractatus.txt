@@ -11506,6 +11506,14 @@ PKGMGR=DPKG
 Nota.- Otras opciones para distros no debian o para desactivar la opción: RPM, BSD,SOLARIS y NONE 
 
 
+rl
+[randomize-lines]
+Muestra lineas o de la entrada satandard de forma aleatoria.
+$ rl /etc/fstab (Forma básica)
+$ seq 10 | rl --count 2 (2 números del 0 al 10)
+$ rl -n /etc/fstab -o archivo (Numerando las lineas, colocandolas de forma aleatoria y guardando el resultado en "archivo")
+
+
 rlogin
 Conecta con un host remoto
 $ rlogin usuario@host
