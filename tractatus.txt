@@ -5406,7 +5406,7 @@ Mejorar busquedas :
 . define – Buscar la definición de una palabra [define:palabra]
 . inurl - Buscar por algun detalle en la url [inurl:pipa]
 . all inurl - Las que contengan varias palabras en su url
-. linux 2012..2013 - Buscar ena palabra en artículos entre un rango de años.
+. linux 2012..2013 - Buscar una palabra en artículos entre un rango de años.
 . 58*13 - Usar google como calculadora
 . 100USD a EUR - Conversor de divisas [EUR = Euro, USD = Dólar, JPY = Yen, GBP = Libra esterlina, CHF = Franco suizo ...]
 . 42km/h a m/s - Convertir km/hora a metros/segundo
@@ -11224,6 +11224,13 @@ rankmirrors
 Optimiza los mirrors de pacman.
 # cp mirrorlist mirrorlist.backup
 # rankmirrors mirrorlist.backup >> mirrorlist
+
+
+randtype
+Utilidad para leer un archivo y mostrar la salida carácter por carácter o línea por línea a intervalos aleatorios.
+$ randtype archivo (forma básica con valores por defecto)
+$ randtype -t 10,100000 archivo (Retarda la salida de forma aleatoria entre 10 y 100000 microsegundos)
+$ echo "Linux es un sistema genial" | randtype -m 4 (Simulando 4 errores en el tecleo de la frase)
 
 
 rar 
