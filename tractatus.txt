@@ -12320,7 +12320,8 @@ $ shred -u -z -n 20 archivo.txt  (suprime un archivo y reescribe el espacio 20 v
 
 
 shuf
-Generador de numeros aleatorio
+Genera numeros aleatorio y muestra lineas de archivo de fiorma aleatoria.
+$ shuf -n 4 /etc/fstab -o archivo (Muestra 4 lineas aleatorias del archivo y manda el resultado a "archivo")
 $ shuf -i 1-49 -n 6 (para la loto)
 -i [x-y]  rango de números
 -n   Cantidad de numeros a visualizar
