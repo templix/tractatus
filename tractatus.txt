@@ -2373,6 +2373,11 @@ Define el perfil de la CPU [powersave, performance, conservative, userspace, ond
 # cpufreq-set -f 1600000 (Especificamos que queremos que la CPU trabaje a la velocidad deseada. Requiere que estemos usando el perfil userspace)
 
 
+cpuid
+Muestra el IP del proveedor, caracteristicas del procesador, información de caché, etc de procesadores Intel y AMD x86. No tiene opciones.
+$ cpuid
+
+
 cpulimit
 Limitar el uso de la cpu para determinados procesos.
 # cpulimit -e yes -l 20 (el de “yes”a un 20% de la cpu. Valor entre 0 y 100)
