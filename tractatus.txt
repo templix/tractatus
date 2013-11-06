@@ -7553,6 +7553,35 @@ Guardar la salida de una orden en un archivo de registro.
 $ logsave -a file.log ifconfig (Añadiendo la salida al contenido existente)
 
 
+logwatch
+Analiza los archivos de logs del sistema. El sistema está pensado para que toda la configuración sea especificada en /etc/logwatch y estas directivas sobreescriban a las que están en /usr/share/logwatch. Copiamos la configuación básica:
+# cp /usr/share/logwatch/default.conf/logwatch.conf /etc/logwatch/conf
+Los servicios y qué ficheros de log es capaz de procesar logwatch en /usr/share/logwatch/default.conf/logfiles y la configuración de logwatch para cada servicio en /usr/share/logwatch/default.conf/services.
+Configuración básica sin envio por email:
+# nano /etc/logwatch/conf/logwatch.conf
+# indica el directorio donde tomara los logs
+LogDir = /var/log
+# Salida {mail|stdout|file}
+Output = file
+# formato de la salida {html|text}
+Format = text
+# Indicar que busque información en los archivos /var/log/message.1 o /var/log/messages.1.gz y no solo en /var/log/messages
+Archives = Yes
+# Dia a analizar {Yestedary|Today|all}
+Range = All
+# Detalles de los logs (0-10)|(Low,Mid,High)
+Detail = 8
+# Servicios monitorizados {service_name|all}
+# Service = fail2ban (Especificando servicio o todos):
+Service = All
+Notas.- Es posible poner todos los servicios y descartar algunos con Service = --fail2ban. Si el archivo de logs no está en el fichero especificado editar el servicio concreto de /usr/share/logwatch/default.conf/services y modificarlo.
+# mkdir /var/cache/logwatch (Crear el directorio, si no existe, donde se guardarán las carpetas con los informes)
+Lanzar logwatch cada hora:
+# crontab -e
+Y colocar la linea:
+0 1  * * *   root       /usr/sbin/logwatch
+
+
 look
 Muestra entradas del diccionario que comienzan por esa palabra [/usr/share/dict/words]
 $ look palabra
