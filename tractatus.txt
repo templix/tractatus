@@ -6849,6 +6849,20 @@ Guardar y entrar como administrator en nuestra web con el nombre de usuario: adm
 Luego volver a modificar la contraseña desde el panel de control de joomla.
 
 
+jot
+[athena-jot]
+Mostrar secuencias de datos o datos aleatorios.
+$ jot 5 (Mostrar del 1 al 5)
+$ jot 5 20 (Mostrar 5 números consecutivos a partir del 20)
+$ jot 7 20 30 (Mostrar 7 números entre el 20 y el 30)
+$ jot 7 20.00 30.00 (Mostrar 7 números del 20 al 30 con 2 decimales)
+$ jot -p2 7 20 30 (Lo mismo con el parámetro p)
+$ jot - 20 30 2 (Omitiendo el parámetro de la cantidad de números [-] y del 20 al 30 saltando de 2 en 2)
+$ jot -r 4 10000 99999 (4 números aleatorios entre los especificados)
+$ jot -s " " -b "-x-" 20 (20 caracteres especificados [-b] separados por un espacio [-s])
+$ jot -s "" -c 26 a (26 letras [-c] empezando por la A y sin espacio entre ellas)
+
+
 jp2a
 Convertir imagenes jpeg a ascii.
 $ jp2a --background=light -b --colors imagen.jpg  (Sin fondo, con borde y color)
