@@ -5460,6 +5460,11 @@ gperiodic
 Muestra la tabla periódica de los elementos quimicos.
 
 
+gpe-taskmanager
+Abre una ventana en las X informando de las aplicaciones abiertas permitiendo matar el proceso que interesa o ha quedado colgado.
+$ gpe-taskmanager
+
+
 gpg
 Encriptación y autentificación de claves públicas
 # gpg --keyserver subkeys.pgp.net --recv-keys XXXXXXXXXXXXXX
@@ -11145,6 +11150,13 @@ psbook (psutils)
 Paginar un archivo ps para imprimir como libro. Ver ps2pdf.
 
 
+pslist
+Examina la lista de los procesos y muestra el ID y los PIDs de los procesos hijos.
+$ pslist (Muestra todo el listado)
+$ pslist chromium (Mostrará sólo el de la aplicación especificada)
+$ pslist 26995 (Mostrará sólo la del PID especificado)
+
+
 pstree                            
 Para ver el árbol de procesos
 $ pstree -al   (verlo con cada uno de sus hilos de ejecución)
@@ -11559,6 +11571,13 @@ PKGMGR=DPKG
 Nota.- Otras opciones para distros no debian o para desactivar la opción: RPM, BSD,SOLARIS y NONE 
 
 
+rkill
+[pslist]
+Herramienta similar a kill [ver]
+$ rkill -9 scribus (Matará la aplicación especificada. Igual que killall [ver])
+$ rkill -9 17424 (Matará la aplicación que corra en el PID especificado. Igual que kill)
+
+
 rl
 [randomize-lines]
 Muestra lineas o de la entrada satandard de forma aleatoria.
@@ -11648,6 +11667,11 @@ Gestor de paqueteria de distros basadas en Red Hat.
 # rpm -qf /etc/httpd/conf/httpd.conf (A qué paquete pertenece un archivo) 
 # rpm --checksig paquete (verificar integridad de un paquete) 
 # rpm -qa gpg-pubkey (verificar la integridad de todos los paquetes) 
+
+
+rrenice
+[pslist]
+Herramienta con uso igual que renice [ver]
 
 
 rsstail
@@ -12463,6 +12487,7 @@ $ sl -e  (permite la interrupción con ^C)
 slay
 Matar todos los procesos de un usuario.
 $ slay usuario 
+$ slay -9 usuario
 
 
 sleep
