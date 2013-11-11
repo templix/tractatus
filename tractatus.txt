@@ -162,6 +162,12 @@ LAST_UID=29999 (Rando final del rango de IDs)
 DIR_MODE=0755 (Permisos de entrada de todos los directorios creados)
 
 
+adminer
+Gestor de bases de datos via navegador más completa que phpmyadmin. Una vez instalado reiniciar apache:
+# /etc/init.d/apache2 restart
+Acceder a la aplicación con, http://localhost/adminer y entrar los datos de acceso (usuario, contraseña, servidor y gestor de la BD)
+
+
 aewan
 Editor de dibujos en ascii. Una vez lanzada la aplicacion con las teclas de funcion F1-F4, se accede a los menus. La aplicacion llama ^ a la tecla control y % a la tecla Alt.
 Algunas teclas de control:
@@ -6382,6 +6388,30 @@ Para conocer los módulos perl instalados. Entra en el prompt (cmd?) con 3 pregu
 l (List all installed modules)
 m <module> (Select a module)
 q (Quit the program)
+
+
+integrit
+Detectar cuando algún archivo del sistema ha sido alterado mediante la creación, la primera vez que se lanza, de una base de datos con la que confrontar los nuevos escaneos.
+Configuración:
+# /etc/integrit/integrit.con
+Descomentar las lineas:
+	root=/  
+	known=/var/lib/integrit/known.cdb       
+	current=/var/lib/integrit/current.cdb
+Y descartar los directorios que no se deseen incluir en el escaneo, descomentandolos ["cdrom" se descarta, "/dev" se escane, "/usr/src" no se escaneará de forma recursiva ]:
+	!/cdrom
+	# !/dev
+	=/usr/src
+Crear la base de datos inicial:
+# integrit -u -C /etc/integrit/integrit.conf
+Mover la base de datos a know.cdb:
+# mv /var/lib/integrit/current.cdb /var/lib/integrit/known.cdb
+Lanzar la comprobación:
+# integrit -C /etc/integrit/integrit.conf -c
+Si queremos colocar la orden en el cron para ser lanzada cada hora y que envie un correo al administrador:
+# crontab -e  
+Y colocamos la linea:
+	* 1 * * * integrit -C /etc/integrit/integrit.conf -c | mail root
 
 
 interfaces (/etc/network/interfaces)
