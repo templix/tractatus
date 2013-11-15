@@ -1939,6 +1939,7 @@ $ chmod -w archivo (Quitar permiso de escritura a un archivo)
 $ chmod +x archivo (Dar permiso de ejecución)
 $ chmod 744 archivo (Lectura, ecritura y ejecución para el usuario y sólo lectura para grupo y otros)
 $ chmod u=rwx go=rw archivo (Equivalente en alfabético)
+$ chmod --reference=file1 file2 (Otorgar los mismos permisos de file1 a file2)
 Código numérico (octal):
 1 = ejecución [x]
 2 = escritura [w]
@@ -1965,7 +1966,8 @@ chown
 Cambio de propietario de un archivo o directorio.
 # chown usuario archivo
 # chown -R usuario directorio (afecta al directorio y todos los subdirectorios) 
-# chown -R usuario:grupo directorio 
+# chown -R usuario:grupo directorio
+# chown --reference=file1 file2 (Mismo propietario y grupo para file2 que file1) 
 
 
 chpasswd
@@ -3349,6 +3351,7 @@ $ du -s (Muestra los totales del directorio o archivo especificados)
 $ du -x (Calcular tamaño sin sumar los puntos de montaje)
 $ du -s (Solo suma total, en lugar del tamaño de cada directorio)
 $ du fichero (Muestra el tamaño de fichero)
+$ du | sort -rn | head (Mostrar los 10 archivos que más ocupan)
 
 
 duckduckgo
