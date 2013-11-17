@@ -9952,6 +9952,14 @@ $ nslookup ip_o_nombre_host
 $ nslookup `curl ifconfig.me` (conocer la IP pública)
 
 
+nstat
+Muestra las estadísticas de la red.
+$ nstat
+$ nstat -z (Mostrando los contadores a cero. Por defecto no se muestran)
+$ nstat -a (Volcado absoluto de todos los contadores)
+$ nstat -r (Resetear los contadores)
+
+
 ntfs-3g (dependencia fuse.)
 Driver que permite modificar archivos en sistemas ntfs. La partición puede ser montada:
 # mount -t ntfs-3g /dev/hda3 /media/win
