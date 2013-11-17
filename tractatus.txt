@@ -2366,6 +2366,14 @@ Tambien puede cambiarse el nombre de la fuente por su archivo:
 -font /home/usuario/.fonts/Albert.ttf
 
 
+Copy
+Carpetas en la nuve tipo Dropbox. Entrar en http://www.copy.com despues de registrarse y logearse, clicar en la pestaña "Install App" con lo que se nos descargará la aplicacion de escritorio.
+$ tar -zvxf copy_agent-1.28.0657.tgz
+$ cd copy/x86_64/
+$ ./CopyAgent --install (Donde pondremos nombre de usuario y contraseña del registro y carpeta a compartir. Por defecto Copy)
+$ ./CopyConsole (Forzar actualizaciones)
+
+
 cowsay
 Muestra figuras en consola
 $ cowsay -l      (muestra todas las posibilidades de figuras)
@@ -4860,6 +4868,29 @@ Determina máquinas de una red activas
 free
 Listar la memoria RAM y swap utilizada y disponible
 $ free -m (muestra los resultados en megabytes)
+
+
+freeradius
+[libssl-dev freeradius-mysql freeradius-utils]
+Servidor.
+Configurar la base de datos:
+# nano /etc/freeradius/sites-enabled/default
+En los apartados "authorize" y "accouting" descomentar las lineas sql
+# nano /etc/freeradius/radius.conf
+Descomentar la linea $INCLUDE sql.conf
+Configurar usuario, contraseña y mensaje de bienvenida:
+# nano /etc/freeradius/users
+USUARIO Cleartext-Password := "CONTRASEÑA"
+        Reply-Message "Entrando en el servidor el usuario %{User_Name}"
+Configurar usuario y contraseña del router o punto de acceso:
+# nano /etc/freeradius/clients.conf
+client 192.168.1.0/24 {
+	secret		= CONTRASEÑA_ROUTER
+	shortname	= USUARIO_ROUTE
+Finalmente entrar en router y colocar la ip del equipo donde hemos instalado el servidor. Reiniciar el servicio.
+# /etc/init.d/freeradius restart
+# freeradius -X (Arrancar em modo debug)
+# radtest USUARIO testing 127.0.0.1 1812 testing123 (Testear si la configuración de un usuario está correcta)
 
 
 fsarchiver
@@ -11739,10 +11770,11 @@ $ rkill -9 17424 (Matará la aplicación que corra en el PID especificado. Igual
 
 rl
 [randomize-lines]
-Muestra lineas o de la entrada satandard de forma aleatoria.
+Muestra lineas de un archivo o de la entrada standard de forma aleatoria.
 $ rl /etc/fstab (Forma básica)
 $ seq 10 | rl --count 2 (2 números del 0 al 10)
 $ rl -n /etc/fstab -o archivo (Numerando las lineas, colocandolas de forma aleatoria y guardando el resultado en "archivo")
+$ rl -o archivo -c 5 archivo.txt (Guardar en archivo [-o] 5 lineas [-c] del texto archivo.txt)
 
 
 rlogin
@@ -11927,9 +11959,9 @@ Opciones:
 
 
 rzip
-Compresor/descompresor.
+Compresor/descompresor. Crea los comprimidos con extensión .rz
 $ rzip archivo.txt (Substituye archivo.txt por archivo.txt.rz)
-$ rzip -d archivo.txt.rz (Descomprimir)
+$ rzip -o archivo.txt -d archivo.txt.rz (Descomprimir. Imprescindible dar el nombre del archivo de salida [-o])
 
 
 saidar
