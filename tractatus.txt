@@ -15076,6 +15076,13 @@ Herramienta que guarda un registro del tráfico de nuestras conexiones de red se
 # vnstat -tr  (por un periodo de 5 segundos)
 
 
+vnstati
+[vnstat]
+Crea un png de la salida del comando vnstat.
+$ vnstati -s -vs -i eth1 -o vnstat.png (Mostrando resumen del tráfico de salida [s], incluyendo datos por hora en gráfica vertical [vs], especificando la red y guardando en vnstat.png [o])
+$ vnstati -h -c 15 -o vnstat2.png (por horas [h] y actualizando si han pasado 15 minutos del último reporte)
+
+
 vobcopy
 Ripear dvds.
 $ vobcopy -i /dev/dvdrom -o /home/usuario/musica 
