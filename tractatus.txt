@@ -5809,8 +5809,8 @@ if halignment == ALIGN_CENTER: (Centrada)
 
 
 gunzip
-Descomprime archivos gz.
-$ gunzip archivo.1.gz
+Descomprime archivos gz comprimidos con gzip.
+$ gunzip archivo.txt.gz
 
 
 gxmessage
@@ -7996,6 +7996,17 @@ $ lynx -source http://www.tuxapuntes.com (ver el codigo fuente)
 $ lynx -dump http://checkip.dyndns.com | cut -d ' ' -f7 (mostrar IP externa)
 $ lynx -dump http://www.tuxapuntes.com | awk '/http/{print $2}' | egrep "^https{0,1}"   (ver todos los enlaces de una web)
 $ lynx -dump http://www.lapipaplena.com/ | awk '/http/{print $2}' | sort -  (Lo mismo)
+
+lzip
+compresor/descompresor de archivos. Formato de salida .lz
+$ lzip archivo.txt (Lo substituye por archivo.txt.lz)
+$ lzip -d archivo.txt.lz (descomprimir)
+
+
+lzma
+Compresor/descompresor de archivos. Formato de salida .lzma
+$ lzma fichero.txt (Substituye fichero.txt por fichero.txt.lzma)
+$ lzma -d fichero.txt.lzma (Descomprimir)
 
 
 macchanger
