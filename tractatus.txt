@@ -1467,6 +1467,13 @@ bzdiff
 Busca las diferencias entre dos ficheros comprimidos con bzip2 (Ver diff)
 
 
+bzexe
+[bzip2]
+Comprimir/descomprimir ejecutables.
+# bzexe ejecutable
+# bzexe -d ejecutable (Descomprimir)
+
+
 bzgrep
 Imprime las lineas coincidentes con una expresión dada de un archivo comprimido con bzip2.
 $ bzgrep pedro archivo.bz2 (Imprime las las que coinciden con “pedro”)
@@ -1484,6 +1491,12 @@ $ bzip2 -dc archivo.tar.bz2 | tar -t  (Ver contenido)
 bzip2recover
 Intenta recuperar datos de ficheros bzip2 dañados.
 $ bzip2recover archivo.bz2
+
+
+bzless
+[bzip2]
+Muestra el contenido de un archivo .bz2 comprimido con bzip2 de forma parecida al comando less [ver]
+$ bzless archivo.txt.bz2
 
 
 bzmore
@@ -11911,6 +11924,12 @@ Opciones:
 -fg white (Color de fuente) 
 -cr blue  (Color del cursor) 
 -title "Consola linux" (especificar un título)
+
+
+rzip
+Compresor/descompresor.
+$ rzip archivo.txt (Substituye archivo.txt por archivo.txt.rz)
+$ rzip -d archivo.txt.rz (Descomprimir)
 
 
 saidar
