@@ -1991,6 +1991,7 @@ chronic
 Mostrará el error por la salida estándar si el comando falla, tiene salida nula o se bloquea. Si el comando se ejecuta correctamente se ocultará cualquier salida.
 $ chronic ls (No mostrará nada porque el comando ls se ejecuta correctamente)
 $ chronic lx (Mostrará el error)
+$ chronic man (Mostrará que necesita otro dato)
 
 
 chroot
@@ -2243,6 +2244,12 @@ $ composite -watermark 20% -gravity SouthWest marca.png imagen salida.png (Poner
 opciones:
 dissolve.- Indica el grado de fusión entre una y otra imagen. 
 gravity .- Indica dónde se mezclan las imágenes. Valores: SorthWest, North, NorthEast, West, Center, East, SouthWest, South y SouthEast
+
+
+compress
+Comprimir archivos. Substituye el fichero orginal añadiendole .Z. Este comando es el compresor original de Unix. Su algoritmo de compresión es bastante primitivo, pero se mantiene por razones históricas de compatibilidad. 
+$ compress fichero.txt (Creará fichero.txt.Z)
+$ uncompress fichero.txt.Z (Descomprmir)
 
 
 compton 
@@ -3768,6 +3775,13 @@ env
 Muestra las variables de entorno 
 $ env | grep DISPLAY
 Algunas opciones para grep: SHELL, USER, PATH, KEYBOARD, LANG..
+
+
+errno
+[moreutils]
+Muestra los errores de código y sus descripciones.
+$ errno -l (Todo el listado)
+$ errno -s desconocido (Busca del listado el que contenga la descripción "desconocido")
 
 
 escputil
@@ -10808,6 +10822,12 @@ fa (aceptar archivo que nos envian)
 fr (rechazar recepción de archivo)
 
 
+pee
+[moreutils]
+Parecido al comando tee [ver] ejecutando cada uno de los comandos
+$ pee ls pwd "ip a"
+
+
 pentbox
 http://www.pentbox.net/download-pentbox/
 Herramientas de penetración [verificar fortaleza de contraseñas cifradas en MD5, SHA1, SHA256, SHA512, generador de DoS i DDoS, generador de contraseñas seguras, honeypots, escaneo de puertos, ataque de fuerza bruta contra servidores HTTP, geolocalitzación de direcciones MAC...]
@@ -13896,6 +13916,12 @@ Nota.- "-d" subida y "-u" bajada
 $ trickle -d 50 -u 30 wget http://www.genbeta.com (limitación para un solo host)
 $ trickled -d 50 -u 30 (Lanzar la limitación como demonio con lo que todas las aplicaciones que se lancen con trickle tendran la limitación especificada)
 $ trickle wget http://www.genbeta.com 
+
+
+ts
+[moreutils]
+Añade una marca de tiempo al principio de cada línea de entrada.
+$ ts (Escribir cualquier cosa y al darle al intro mostrará la marca del tiempo y lo escrito)
 
 
 tset
