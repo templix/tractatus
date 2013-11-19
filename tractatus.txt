@@ -5120,6 +5120,15 @@ Exclude=usuario_a_ocultar,boinc,yacy
 2.-
 Entrada automática y otros ajustes:
 # gdmsetup
+3.-
+Cambiar fondo en la pantalla de login.
+# nano /etc/gdm3/greeter.gsettings
+Y modificando la linea "pictori-uri" para que apunte a la imagen deseada:
+	[org.gnome.desktop.background]
+	picture-uri='file:///path/a/fondo'
+	picture-options='zoom'
+Una vez modificado, aplicar los cambios con:
+# dpkg-reconfigure gdm3
 
 
 gedit
@@ -6701,6 +6710,7 @@ Algunos ejemplos generales:
 	# iptables -L -vn (mostrando los puertos e información detallada)
 	# iptables -L -t nat (Listar reglas de una tabla concreta)
 	# iptables -L fail2ban-ssh (comprobar las ips bloqueadas por fail2ban)
+	# iptables -D fail2ban-ssh 1 (Quitar la primera ip baneada de las ips bloqueadas)
 	# iptables -nL --line-numbers (muestra el orden de ejecución de las reglas)
 	# iptables -nL INPUT (Lista todas las reglas de entrada)
 	# iptables -nL FORWARD (Lista todas las reglas de salida)
