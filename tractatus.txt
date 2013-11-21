@@ -556,6 +556,13 @@ Donde se podrá apreciar su velocidad es principalmente con los argumentos "upda
 # apt-fast update
 
 
+apt-file
+Buscar un paquete que contiene un fichero o ver el contenido de un paquete. Una vez instalado, para realizar la caché,  lanzar en primer lugar:
+# apt-file update
+# apt-file search ifconfig
+# apt-file list ifconfig
+
+
 apt-get (aptitude)
 Gestor de programario de distribuciones Debian
 # apt-get update    (Actualiza la lista de paquetes)
@@ -654,13 +661,6 @@ En el equipo conexión:
 Otra vez en el equipo sin conexión:
 # apt-offline install offline.zip
 # apt-get install PAQUETE (Instalación del paquete)
-
-
-apt-file
-Buscar un paquete que contiene un fichero o ver el contenido de un paquete. Una vez instalado, para realizar la caché,  lanzar en primer lugar:
-# apt-file update
-# apt-file search ifconfig
-# apt-file list ifconfig
 
 
 ar
@@ -4362,34 +4362,6 @@ Nota.- Si al lanzar la aplicación nos muestra una salida: “Linux: can't open 
 (Parameter.set 'Audio_Method 'Audio_Command) 
 
 
-flexget
-[python2.6 python-pip]
-Descarga de series a partir de su direccion RSS. Archivo de configuración
-$ nano .flexget/config.yml
-Con un contenido parecido a:
-	presets:
-	  tv:
-	    series:
-	      settings:
-		hdtv:
-		  timeframe: 8 hours
-	      hdtv <720p:
-		- serie 1
-		- serie 2
-		- serie 3
-		- etc
-	    content_filter:
-	      require:
-		- '*.avi'
-	    download: "/media/discoext/Descargas/Torrents"
-	tasks:
-	  TvTorrent1:
-	    rss: http://showrss.karmorra.info/feeds/all.rss
-	    preset: tv
-$ flexget --test (Comprobar si la configuración es correcta)
-$ flexget (Lanzar la aplicación) 
-
-
 ffmpeg
 Conversor de archivos de audio y video
 $ ffmpeg -i archivo.mpg  (Obtener información de un archivo)
@@ -4762,6 +4734,34 @@ Otros atajos:
 	F7 (Navegación con cursor) 
 	F11 (Pantalla completa) 
 	^+ l (Barra de direcciones) 
+
+
+flexget
+[python2.6 python-pip]
+Descarga de series a partir de su direccion RSS. Archivo de configuración
+$ nano .flexget/config.yml
+Con un contenido parecido a:
+	presets:
+	  tv:
+	    series:
+	      settings:
+		hdtv:
+		  timeframe: 8 hours
+	      hdtv <720p:
+		- serie 1
+		- serie 2
+		- serie 3
+		- etc
+	    content_filter:
+	      require:
+		- '*.avi'
+	    download: "/media/discoext/Descargas/Torrents"
+	tasks:
+	  TvTorrent1:
+	    rss: http://showrss.karmorra.info/feeds/all.rss
+	    preset: tv
+$ flexget --test (Comprobar si la configuración es correcta)
+$ flexget (Lanzar la aplicación) 
 
 
 flunym0us
@@ -5484,19 +5484,19 @@ $ go2 -l carpeta (Hace la búsqueda pero sólo muestra el resultado saliendo al 
 $ /usr/lib/go2/go2.sh --setup (configura nuestro .bashrc para poder llamar al comando con go2 simplemente)
 
 
-gocr
-programa que imprime en la salida estándar todo el texto que puede leer de cualquier fichero gráfico de entrada. Usado especialmente para el descifrado de kapchas. El programa necesita cierto aprendizaje.
-$ mkdir ocrdb
-$ gocr -d 2 -p ./ocrdb/ -m 256 -m 130 kapcha.jpg (El aprendizaje. Lanzar varias veces)
-$ gocr -p ocrdb/ -m 2 kapcha.jpg (Comprobar si el programa lo resuelve solo)
-
-
 goaccess 
 Analiza el registro del servervidor web Apache 
 # goaccess -f /var/log/apache2/access.log (forma básica, especificando el fichero) 
 # goaccess -f /var/log/apache2/access.log -a -s -b (Habilitar lista de usuarios para el servidor seleccionado [a], activar respuesta de estado HTTP [s] y habilitar el consumo de ancho de banda total [b])
 # goaccess -f /var/log/apache2/access.log -a > reporte.html (Mandar resultado a un archivo html)
 Nota.- Con la aplicación en marxa, con F1 aparecen las teclas interactivas.
+
+
+gocr
+programa que imprime en la salida estándar todo el texto que puede leer de cualquier fichero gráfico de entrada. Usado especialmente para el descifrado de kapchas. El programa necesita cierto aprendizaje.
+$ mkdir ocrdb
+$ gocr -d 2 -p ./ocrdb/ -m 256 -m 130 kapcha.jpg (El aprendizaje. Lanzar varias veces)
+$ gocr -p ocrdb/ -m 2 kapcha.jpg (Comprobar si el programa lo resuelve solo)
 
 
 golismero
@@ -6667,6 +6667,11 @@ Calcular las ips y mascaras de una red a partir de una ip dada o un rango.
 # ipcalc 192.168.0.1/255.255.128.0
 
 
+ipcrm
+Permite eliminar la comunicación entre procesos [ver ipcs]. Si paramos el programa con un Ctrl-C o simplemente sale de forma anormal, el recurso [la memoria compartida] no se libera y queda en el sistema. Con este comando es posible borrarla. 
+# ipcrm -m 950288 (eliminar un segmento de memoria compartida)
+
+
 ipcs
 Informa sobre la comunicación entre procesos [espacios de memoria, buffers, semaforos..] listando los recursos compartidos que están creados en ese momento. Ver ipcrm. La columna "shmid" muestra el ID, la "owner" el propietario, "perms" los permisos y "bytes" el tamaño en bytes  
 # ipcs -s | grep postgres  (Muestra los recursos compartidos de postgres) 
@@ -6684,11 +6689,6 @@ Algunas opciones:
 -s   (matrices de semáforos )
 -a   (todos. Opción por defecto) 
 -p   (pid)
-
-
-ipcrm
-Permite eliminar la comunicación entre procesos [ver ipcs]. Si paramos el programa con un Ctrl-C o simplemente sale de forma anormal, el recurso [la memoria compartida] no se libera y queda en el sistema. Con este comando es posible borrarla. 
-# ipcrm -m 950288 (eliminar un segmento de memoria compartida)
 
 
 iperf
@@ -8863,6 +8863,11 @@ atajos:
 	q (Salir del programa)
 
 
+morse
+Codifica un texto a lenguaje morse.
+$ morse -s linux es un sistema genial
+
+
 mosaic
 El abuelo de los navegadores (1993)
 # apt-get install build-essential lesstif2-dev libjpeg62-dev libpng12-dev x11proto-print-dev libxmu-headers libxpm-dev libxmu-dev
@@ -8874,11 +8879,6 @@ $ cd ncsa-mosaic
 	make[1]: Leaving directory `/home/templix/ncsa-mosaic'
 $ cd src
 $ ./Mosaic
-
-
-morse
-Codifica un texto a lenguaje morse.
-$ morse -s linux es un sistema genial
 
 
 mosh
@@ -10516,20 +10516,6 @@ Verificar si un archivo pasado como argumento existe o no:
 	fi 
 
 
-optipng
-Optimizacion de imagenes .png. La reduccion de tamaño es poca pero no pierde calidad. Como modo indicativo, un directorio con 5 imagenes con un peso de 27,5 MB pasa a 25,8 MB.
-$ optipng imagen.png (Sobreescribe las imagenes)
-$ optipne imagen.png -out nueva_imagen.png (Guardar la salida con otro nombre)
-$ optipng -dir imagenes (De todas las imagenes de un directorio)
-
-
-ossec
-[wget http://www.ossec.net/files/ossec-hids-2.6.tar.gz]
-Sistema de detección de intrusos. Durante la instalación, una vez escogido el idioma, se realizan una serie de preguntas sobre si se desea recibir por correo las notificaciones [en este caso precisa postfix], lugar de instalación [/var/ossec], si la instalación va a ser local, servidor... y otras cuyos parámetros por defecto son suficientes. 
-# /var/ossec/etc/ossec.conf (Archivo de configuración:)
-# /var/ossec/bin/ossec-control start (Arrancar el demonio caso de no colocarlo en /etc/init.d/ossec)
-
-
 opkg
 Gestor de paquetes de OpenWRT, firmware linux para routers.
 # opkg update (actualiza la lista de paquetes)
@@ -10542,6 +10528,20 @@ Gestor de paquetes de OpenWRT, firmware linux para routers.
 # opkg files paquete (Ver ficheros instalados de un paquete y la versión del mismo)
 # opkg info paquete (ver información de un paquete)
 # opkg find palabra (buscar paquetes por nombre y descripción)
+
+
+optipng
+Optimizacion de imagenes .png. La reduccion de tamaño es poca pero no pierde calidad. Como modo indicativo, un directorio con 5 imagenes con un peso de 27,5 MB pasa a 25,8 MB.
+$ optipng imagen.png (Sobreescribe las imagenes)
+$ optipne imagen.png -out nueva_imagen.png (Guardar la salida con otro nombre)
+$ optipng -dir imagenes (De todas las imagenes de un directorio)
+
+
+ossec
+[wget http://www.ossec.net/files/ossec-hids-2.6.tar.gz]
+Sistema de detección de intrusos. Durante la instalación, una vez escogido el idioma, se realizan una serie de preguntas sobre si se desea recibir por correo las notificaciones [en este caso precisa postfix], lugar de instalación [/var/ossec], si la instalación va a ser local, servidor... y otras cuyos parámetros por defecto son suficientes. 
+# /var/ossec/etc/ossec.conf (Archivo de configuración:)
+# /var/ossec/bin/ossec-control start (Arrancar el demonio caso de no colocarlo en /etc/init.d/ossec)
 
 
 otp
@@ -11514,17 +11514,17 @@ $ echo $((5+RANDOM%15)) (Obtener un número de 5 a 15)
 $ VARIABLE=`echo $(($RANDOM))`
 
 
-rankmirrors
-Optimiza los mirrors de pacman.
-# cp mirrorlist mirrorlist.backup
-# rankmirrors mirrorlist.backup >> mirrorlist
-
-
 randtype
 Utilidad para leer un archivo y mostrar la salida carácter por carácter o línea por línea a intervalos aleatorios.
 $ randtype archivo (forma básica con valores por defecto)
 $ randtype -t 10,100000 archivo (Retarda la salida de forma aleatoria entre 10 y 100000 microsegundos)
 $ echo "Linux es un sistema genial" | randtype -m 4 (Simulando 4 errores en el tecleo de la frase)
+
+
+rankmirrors
+Optimiza los mirrors de pacman.
+# cp mirrorlist mirrorlist.backup
+# rankmirrors mirrorlist.backup >> mirrorlist
 
 
 rar 
@@ -13747,13 +13747,13 @@ $ time netstat -anpt
 $ time echo "scale=5000; 4*a(1)" | bc -l -q (Calcula 5000 decimales de pi para comprobar velocidad del procesador)
 
 
-times
-Muestra los tiempos de usuario y sistema acumulados para procesos ejecutados desde el interprete de comandos
-
-
 timeout
 Limita el tiempo de funcionamiento de un comando o aplicación.
 $ timeout 60 firefox (arrancará firefox y se cerrará a los 60 segundo)
+
+
+times
+Muestra los tiempos de usuario y sistema acumulados para procesos ejecutados desde el interprete de comandos
 
 
 timidity
@@ -14865,6 +14865,41 @@ $ vglrun programa
 $ vglrun -q 70 programa (Baja la calidad de los JPG enviados entre la máquina remota y la local)
 
 
+video
+1.- Descargar video flash:
+Iniciar la reproducción del vídeo. 
+$ lsof |grep Flash 
+chromium- 15931 lb 25u REG 8,2 2422656 656146 /tmp/FlashXXYX9waY (deleted) 
+Los datos que interesan son: 15931 y 25. Sin cerrar la página del vídeo y una vez finalizada su carga copiarlo: 
+$ cp /proc/15931/fd/25 video.flv 
+
+
+videotop (videotop-git, urwid, youtube-dl)
+Descarga de videos de youtube.
+$ videotop  (Para entrar en el prompt)
+Teclear:
+	:s queen (se mostrarán los videos en los que aparezca queen. Se selecciona con la flechas el que se quiera descargar y se pulsa intro. El video se encontrará en $HOME/.videotop/videos/)
+	:5 (Descargar el video 5)
+	:v (Muestra los videos descargados [ls $HOME/.videotop/videos])
+	:q (salir)
+	:delete (borrar video seleccionado)
+	:clear (limpia la busqueda y se entra en modo buscador.)
+		^r (limpia el listado)
+		^n (continuación de la misma busqueda)
+
+
+vidir
+[moreutils]
+Edita como un archivo de texto directorios o archivos.
+$ vidir /home/usuario
+$ vidir *.png
+
+
+view
+Ver en pantalla el contenido de un archivo.
+$ view fichero.txt
+
+
 vim
 Editor
 $ vim fichero (Abrir un fichero)
@@ -14991,41 +15026,6 @@ Y pegar el texto:
 	syntax on
 	colorscheme oceandeep
 En colorscheme poner el escogido, en este caso oceandeep. Guardar.
-
-
-video
-1.- Descargar video flash:
-Iniciar la reproducción del vídeo. 
-$ lsof |grep Flash 
-chromium- 15931 lb 25u REG 8,2 2422656 656146 /tmp/FlashXXYX9waY (deleted) 
-Los datos que interesan son: 15931 y 25. Sin cerrar la página del vídeo y una vez finalizada su carga copiarlo: 
-$ cp /proc/15931/fd/25 video.flv 
-
-
-videotop (videotop-git, urwid, youtube-dl)
-Descarga de videos de youtube.
-$ videotop  (Para entrar en el prompt)
-Teclear:
-	:s queen (se mostrarán los videos en los que aparezca queen. Se selecciona con la flechas el que se quiera descargar y se pulsa intro. El video se encontrará en $HOME/.videotop/videos/)
-	:5 (Descargar el video 5)
-	:v (Muestra los videos descargados [ls $HOME/.videotop/videos])
-	:q (salir)
-	:delete (borrar video seleccionado)
-	:clear (limpia la busqueda y se entra en modo buscador.)
-		^r (limpia el listado)
-		^n (continuación de la misma busqueda)
-
-
-vidir
-[moreutils]
-Edita como un archivo de texto directorios o archivos.
-$ vidir /home/usuario
-$ vidir *.png
-
-
-view
-Ver en pantalla el contenido de un archivo.
-$ view fichero.txt
 
 
 vipe
