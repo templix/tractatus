@@ -2414,6 +2414,7 @@ Opciones:
 -r (Dar nombre a los archivos que se están extrayendo de forma interactiva)
 -d (Extrae con la misma estructura de directorio, si así se creó el fichero)
 
+
 cpufreq-info
 Obtiene información del estado del demonio cpufreqd así como información de la CPU.
 $ cpufreq-info
@@ -5717,7 +5718,7 @@ El mismo comando con “+x” lo restituye.
 # update-grub2
 3.-
 Quitar lineas que hacen referencia a kernels antiguos:
-﻿# dpkg --get-selections | grep linux-image  (averiguar los instalados)
+# dpkg --get-selections | grep linux-image  (averiguar los instalados)
 # apt-get remove --purge linux-image-2.6.xx-xx-generic 
 El update-grub2 se hará de forma automática.
 4.-
@@ -7569,7 +7570,7 @@ allow-guest=false
 Entrar de forma automática:
 # nano /etc/lightdm/lightdm.conf
 autologin-user=USUARIO
-autologin-user-timeout=0﻿ 
+autologin-user-timeout=0 
 
 
 lilyterm
@@ -8751,7 +8752,7 @@ Monitorizador de procesos en ejecución, servicios, demonios, espacios de disco,
 Configuración: 
 	# nano /etc/monitrc 
 Las entradas globales empiezan por “set” y los servicios concretos por “check” 
-Tiempo d​e actualización de datos, por defecto: 
+Tiempo de actualización de datos, por defecto: 
 	set daemon  60 
 Especificar el archivo de eventos (logs) 
 	set logfile /var/log/monit.log 
@@ -8768,7 +8769,7 @@ Configurar para el envio de notificaciones:
 	set mailserver smtp.gmail.com port 587 
 	username usuario@gmail.com password Tfer7¿-6j 
 	using tlsv1 
-	with tim​eout 30 seconds 
+	with timeout 30 seconds 
 	set alert usuario@gmail.com 
 	Cambiar usuario y contraseña (por defecto: admin/monit) 
 	allow usuario:contraseña 
