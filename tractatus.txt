@@ -9941,6 +9941,10 @@ Servicio de redireccionamiento de ip dinamica a fija. Requiere registro en www.n
 # noip2 -M (permite multiple instancias de noip2)
 # noip2 -i 192.168.1.2 (Forzar a que noip2 actualice los dominios con la IP suministrada)
 # noip2 -I eth1 (Forzar que noip2 se conecte a internet con la tarjeta de red especificada)
+Nota.- En algunas distros, para iniciar el servicio al inicio:
+# nano /etc/rc.local
+Y colocar, según donde se encuentre el ejecutable, la linea:
+/usr/local/bin/noip2 &
 
 
 normalize
