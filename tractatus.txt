@@ -15462,6 +15462,25 @@ Ejecuta una seria de comandos mientras que una determinada condicion sea cumpla.
 	  echo "$a "
 	  let "a+=1"
 	done
+4.-
+	Leer un archivo linea a linea:
+	#!/bin/bash
+	while read linea
+	do
+	   echo "---> $linea "
+	done < archivo.txt
+5.-
+Especificando un separador [:]
+	#!/bin/bash
+	while IFS=: read user pass uid gid full home shell
+	do
+	echo -e "$full :\n\
+		    Pseudo : $user\n\
+		    UID :\t $uid\n\
+		    GID :\t $gid\n\
+		    Home :\t $home\n\
+		    Shell :\t $shell\n\n"
+	done < /etc/passwd
 
 
 whiptail
