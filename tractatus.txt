@@ -188,6 +188,14 @@ Algunas teclas de control:
         Ctrl c (Sale del programa)
 
 
+aide
+Sistema de detección de intrusos. No evita la intrusión, sólo informa que esta se ha producido y qué archivos fueron modificados. La primera vez que se ejecuta, crea una base de datos con los atributos, usuarios, permisos... de los archivos especificados aplicándoles una o varias funciones hash por lo que el mejor momento para instalar esta aplicación es con un sistema recien instalado.
+# aide -i (Crear la base de datos)
+# aide -u (Actualizar la base de datos)
+# aide -c (Hacer un chequeo del sistema para comprobar modificaciones)
+Nota.- Los archivos de configuración: /etc/aide/aide.conf.d/, /etc/aide/aide.conf y /etc/default/aide
+
+
 airmon (aircrack-ng)
 Utilidad que coloca la tarjeta de red en modo monitor.
 # airmon-ng start wlan0 (Iniciar el modo monitor)
@@ -8423,6 +8431,12 @@ $ mimms -t 2 mms://viplagardere.yacast.net/encodereurope2 (2 minutos)
 miniflux
 Lector RSS instalado en local o en un servidor. Simplemente se descarga la aplicación de <http://miniflux.net/> y, una vez descomprimida, se copia al directorio web (generalmente /var/www). Se accede colocando en la barra de direcciones: http://localhost/miniflux (Por defecto el nombre de usuario y contraseña son admin:admin)
 Atajos de teclado:
+gu (Ir a leídas)
+gb (Ir a marcadores)
+gh (Ir al historial)
+gs (Ir a suscripciones)
+gp (Ir a preferencias)
+s (Descargar contenido)
 p (Noticia anterior)
 n (Noticia siguiente)
 m (Marcar como leido)
@@ -9930,17 +9944,21 @@ $ kill -9 9215  (matar el proceso)
 noip2
 Servicio de redireccionamiento de ip dinamica a fija. Requiere registro en www.no-ip.com
 # noip2 -C    (Inicio de la configuración del servicio)
-Please enter the login/email string for no-ip.com (usuario registro no-ip.com) 
-Please enter the password for user ‘usuario@email.com’ (Contraseña no-ip) 
-Please enter an update interval:[30] (Intervalo de tiempo paractualización) 
-Do you wish to run something at successful update?[N] (y/N)  (intro) 
-New configuration file ‘/etc/no-ip2.conf’ created.
+	Please enter the login/email string for no-ip.com (usuario registro no-ip.com) 
+	Please enter the password for user ‘usuario@email.com’ (Contraseña no-ip) 
+	Please enter an update interval:[30] (Intervalo de tiempo para actualización) 
+	Do you wish to run something at successful update?[N] (y/N)  (intro) 
+	New configuration file ‘/etc/no-ip2.conf’ created.
 # ps aux | grep noip (Comprobar si está corriendo el servicio)
 # noip2 -S (Muestra información sobre el proceso activo)
 # noip2 -K 1234 (Mata el proceso de noip con el número que le indiquemos)
 # noip2 -M (permite multiple instancias de noip2)
 # noip2 -i 192.168.1.2 (Forzar a que noip2 actualice los dominios con la IP suministrada)
 # noip2 -I eth1 (Forzar que noip2 se conecte a internet con la tarjeta de red especificada)
+Nota.- En algunas distros, para iniciar el servicio al inicio:
+# nano /etc/rc.local
+Y colocar, según donde se encuentre el ejecutable, la linea:
+/usr/local/bin/noip2 &
 
 
 normalize
@@ -12982,9 +13000,10 @@ Muestra una imagen del cielo en la tty. Con las teclas del cursor permite movers
 $ spacedream
 
 
-speaker (→ aoss espeak)
+speaker
+[ver aoss espeak]
 Pruebas de sonido.
-# speaker-test -c 6           (para probar bocinas)
+# speaker-test -c 6 -t wav (probar altavoces usando voz [t])
 
 
 speedometer
@@ -15443,6 +15462,25 @@ Ejecuta una seria de comandos mientras que una determinada condicion sea cumpla.
 	  echo "$a "
 	  let "a+=1"
 	done
+4.-
+Leer un archivo linea a linea:
+	#!/bin/bash
+	while read linea
+	do
+	   echo "---> $linea "
+	done < archivo.txt
+5.-
+Especificando un separador [:]
+	#!/bin/bash
+	while IFS=: read user pass uid gid full home shell
+	do
+	echo -e "$full :\n\
+		    Pseudo : $user\n\
+		    UID :\t $uid\n\
+		    GID :\t $gid\n\
+		    Home :\t $home\n\
+		    Shell :\t $shell\n\n"
+	done < /etc/passwd
 
 
 whiptail
