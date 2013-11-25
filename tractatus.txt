@@ -1954,13 +1954,13 @@ $ chmod 744 archivo (Lectura, ecritura y ejecución para el usuario y sólo lect
 $ chmod u=rwx go=rw archivo (Equivalente en alfabético)
 $ chmod --reference=file1 file2 (Otorgar los mismos permisos de file1 a file2)
 Código numérico (octal):
-1 = ejecución [x]
-2 = escritura [w]
-3 (1+2) = escritura y ejecución [xw]
-4 = lectura [r]
-5 (4+1) = lectura y ejecución [rx]
-6 (4+2) = lectura y escritura [rw]
-7 (4+2+1) = lectura, escritura y ejecución [wxr]
+	1 = ejecución [x]
+	2 = escritura [w]
+	3 (1+2) = escritura y ejecución [xw]
+	4 = lectura [r]
+	5 (4+1) = lectura y ejecución [rx]
+	6 (4+2) = lectura y escritura [rw]
+	7 (4+2+1) = lectura, escritura y ejecución [wxr]
 Código alfabético:
 r (lectura), w (escritura), x (ejecución)
 u (usuario), g (grupo), o (otros), a (para todos)
