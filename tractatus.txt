@@ -6362,6 +6362,35 @@ $ find . -name archivo | ifne echo "Existe" (Si "archivo" existe se ejecutará e
 $ find . -name archivo | ifne -n echo "No existe" (Si "archivo" no existe se ejecutará el echo. Si existe, no)
 
 
+ifs
+Internal Field Separator (separador de campos internos) sirve para indicar cual es el valor que se usa como separador. Si no se especifica ninguno es el espacio.
+Algunos ejemplos:
+1.-
+	#!/bin/bash
+	# dividir una IP en 4 variables
+	# Guardar el separador de campos original
+	OLDIFS=$IFS
+	read -p "Dime la ip: " IP
+	# Establecemos el separador de campos en el punto
+	IFS=.
+	read IP1 IP2 IP3 IP4 <<< "$IP"
+	echo "$IP1 $IP2 $IP3 $IP4"
+	# Restablecemos el separador original (El espacio)
+	IFS=$OLDIFS
+2.-
+	#!/bin/bash
+	#Almacenamos el valor original de la variable IFS
+	OLDIFS=$IFS
+	#Cambiamos el valor del IFS a final de linea [\n]
+	IFS=$'\n'
+	for line in $(cat file.txt)
+	do
+		echo $line
+	done
+	#Restauramos el IFS
+	IFS=$OLDIFS
+
+
 ifstat
 Monitorización del trafico de red.
 $ ifstat -z (Descarta los interfaces sin actividad)
