@@ -6706,6 +6706,26 @@ ip-ajustes
 $ ifconfig (verificar la nueva ip) 
 
 
+ipband
+Mostrar datos de la conexión. Copiar el arxivo de configuración:
+# cp /usr/share/doc/ipband/examples/ipband.conf-simple /etc/ipband.conf
+Y descomentar o modificar los siguientes parámetros:
+	debug 0
+	interface eth1
+	fork yes
+	htmlfile /srv/www/htdocs/ipbandwidth/index.html
+	htmltitle Consumo de banda
+	average 10
+	accumulate no
+	maskbits 32
+	localrange 192.168.1.0/24
+Reiniciar el servicio:
+# /etc/init.d/ipband restart
+Arrancar la aplicación:
+# ipband
+Los informes se muestran poniendo en la barra del navegador: http://localhost/html/ipbandwidth/index.html
+
+
 ipcalc
 Calcular las ips y mascaras de una red a partir de una ip dada o un rango.
 # ipcalc 192.168.0.1/24
@@ -13665,6 +13685,19 @@ Matar o impedir conexiones tcp.
 # tcpkill -i eth1 host www.facebook.com (imposibilitará entrar en facebook) 
 # tcpkill -i eth0 host www.facebook twitter.com (especificar varias urls separadas por un espacio)
 # tcpkill -i eth0 port 22 (especificando un puerto)
+
+
+tcptrack
+aplicación que muestra el consumo de la conexión.
+# tcptrack -i eth1 port 22 -f (Especificando conexión, puerto y habilitar el algoritmo de velocidad media rápida [-f])
+# tcptrack -i eth1 port 21 or 80 (Especificando dos puertos)
+# tcptrack -i eth0 "dst port 80" (Sólo mostrar las conexiones destinadas al puerto 80)
+# tcptrack -i eth1 -r 10 -d (Mostrar las conexiones 10 segundos más de cuando se cierren, por defecto son 2 segundo [r] y sin rastrear las conexiones existentes [d])
+# tcptrack -T network.pcap > network.txt (Mandando el resultado a un archivo [-T])
+Algunas teclas de control:
+p (Pausar)
+q (salir)
+s (Cada vez que se pulsa la letra cambia a alguna de las 3 opciones de ordenación: sin ordenar (por defecto), por categoría y por bytes)
 
 
 teclado
