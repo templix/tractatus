@@ -1613,6 +1613,16 @@ $ cancel -u usuario  (del usuario especificado)
 $ cancel -a  (todos los trabajos)
 
 
+cansina
+Trata de descubrir directorios ocultos en los que poder encontrar información útil. Descarga:
+$ git clone https://github.com/deibit/cansina
+# python cansina.py -h (Ayuda)
+# python cansina.py -u URL -p fuzzdb/attack-payloads/all-attacks/all-attacks-unix.txt (Los parámetros mínimos son la URL y el peyload a usar)
+Una vez lanzado el fuzzer, crea un archivo .sqlite en el directorio data que puede convertirse en .html con:
+$ python viewer.py -p data/URL.sqlite
+Y vusualizarse en cualquier navegador.
+
+
 canto
 Lector de noticias rss. Configuración en .canto/conf.py para abrir las noticias con firefox, modificar la linea: link_handler("firefox \"%u\"")
 $ canto -i archivo.opml (Entrar archivo de fuentes)
