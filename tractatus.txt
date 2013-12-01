@@ -2144,6 +2144,31 @@ Compara dos ficheros octeto a octeto.
 $ cmp fichero1 fichero2
 
 
+cmus
+Reproductor de música.
+$ cmus --plugins (Listado de plugins disponibles)
+$ cmus
+Algunas teclas de control:
+	1 (Muestra la biblioteca)
+	2 (Muestra la biblioteca ordenada según los criterios del usuario)
+	4 (Muestra la cola de pistas que se reproducirá)
+	5 (Navegar por los directorios)
+	7 (Muestra todas las teclas de control)
+	+ (Sube el volumen un 10%)
+	- (Baja el volumen un 10%)
+	a (Añadir canción al listado)
+	b (siguiente canción)
+	c (Pausar la reproducción
+	i (Estando con la opción 5, muestra los directorios ocultos)
+	r (Repetir canción)
+Listado de temas de colores disponibles en /usr/share/cmus. Para modificar el el esquema de colores:
+	: colorscheme cyan
+Para que el cambio sea permanente:
+$ nano .cmus/rc
+Y colocar la linea:
+colorscheme cyan
+
+
 cnetworkmanager 
 Información sobre conexiones de red
 $ cnetworkmanager -d (información sobre las tarjetas de red) 
