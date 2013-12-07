@@ -5971,7 +5971,7 @@ Otras opciones:
 
 
 hash-identifier
-Identifica la encriptación de un hash. Descarga: https://code.google.com/p/hash-identifier/
+Identifica la encriptación de un hash. Descarga: <https://code.google.com/p/hash-identifier/>
 $ python Hash_ID_v1.1.py
 Cuando sale el promt pastear el hash:
 HASH: caf90169eefa5f807d577486b9f795ab86ae2983c5c20806cff959117e90af18
@@ -13291,6 +13291,15 @@ Después de reiniciar ssh, con el parámetro -X se visualizará la gui remota qu
 $ ssh -X usuario@host akregator
 
 
+ssconvert
+[gnumeric]
+Conversor de formatos de hoja de cálculo por línea de comandos.
+$ ssconvert --list-exporters (Listado de conversiones de salida)
+$ ssconvert --list-importers (Litado de conversiones de entrada)
+$ ssconvert entrada.xls salida.csv (De formato excel a csv)
+$ ssconvert -E utf-8 entrada.xls salida.csv (Especificando una codificación para la salida)
+
+
 sshd
 Demonio ssh
 $ sshd -t (Verificar si existen errores en el archivo de configuración)
@@ -14596,11 +14605,9 @@ El cliente podrá conectarse al servidor via filezilla, gftp...
 
 
 unoconv
-Exporta todos los formatos soportados por openoffice/libreoffice a otros formatos como pdf, txt... Para una lista detallada consultar este enlace:
-http://dag.wieers.com/home-made/unoconv/
+Exporta todos los formatos soportados por openoffice/libreoffice a otros formatos como pdf, txt... creando un archivo con el mismo nombre de origen pero con la nueva extensión. Para una lista detallada consultar este enlace: <http://dag.wieers.com/home-made/unoconv/>
 $ unoconv --show  (Visualizar formatos  soportados)
-$ unoconv archivo.odt
-$ unoconv *.odt
+$ unoconv -f xls archivo.csv (convertir un csv a xls)
 $ unoconv -f pdf *.odp *.odt (Convierte todos los .odt y .odp a pdfs)
 $ unoconv --format=txt document1.odt (convierte el documento a texto plano)
 $ unoconv --format=txt --stdout document1.odt > salida.txt (envia la salida al STDOUT para redireccionarla a un fichero cualquiera)
@@ -15541,7 +15548,7 @@ $ which firefox
 
 
 while
-Ejecuta una seria de comandos mientras que una determinada condicion sea cumpla. Algunos scripts de su uso:
+Ejecuta una seria de comandos mientras que una determinada condicion sea cumpla. Algunos scripts ilustrativos:
 1.-
 	#!/bin/bash
 	RESPUESTA=s
@@ -15606,6 +15613,25 @@ Especificando un separador [:]
 		    Home :\t $home\n\
 		    Shell :\t $shell\n\n"
 	done < /etc/passwd
+6.-
+Leer un archivo pasado como parámetro, descartar las lineas en blanco y colorear alternativamente las siguientes en amarillo y rojo.
+	#!/bin/bash
+	COLOR=1
+	while read linia
+	do
+		if [ -z "${linia}" ] 
+		then
+			continue
+		fi
+		if [ $COLOR -eq 0 ]
+		then
+			echo -e "\e[1;30;41m$linia\033[0m" #VERMELL - 0
+			COLOR=1
+		else
+			echo -e "\e[1;30;43m$linia\033[0m" #GROC - 1
+			COLOR=0
+		fi
+	done < $1
 
 
 whiptail
