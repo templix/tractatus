@@ -11905,6 +11905,7 @@ Buscador de rootkits instalados en el sistema
 # rkhunter --update  (Recargar la base de datos)
 # rkhunter -c  (iniciar la aplicación)
 # rkhunter -c -sk (iniciar la aplicación sin pedir confirmación para proseguir)
+# rkhunter -c -sk --propupd (Lanzar con la opción "propupd" si se ha modificado la función Hash o para reconstruir la base de datos y evitar "Warnings" tipo: Warning: The file properties have changed)
 # rkhunter --list (Ver las opciones)
 # rkhunter --enable group_accounts,system_commands  (Solo chequear estas dos opciones)
 # rkhunter --disable shared_libs  (Descartar esta opción del chequeo)
@@ -11924,7 +11925,7 @@ DISABLE_TESTS="suspscan hidden_procs deleted_files packet_cap_apps apps"
 Para suprimir falsa advertencias sobre posibles interfaces promiscuos [P.ejemplo de un servidor virtual], añadir "promisc" a la opción DISABLE_TESTS:
 DISABLE_TESTS="suspscan hidden_procs deleted_files packet_cap_apps apps promisc"
 4.-
-Para que los valores se obtengan del gestor de paquetes correspondiente:ç
+Para que los valores se obtengan del gestor de paquetes correspondiente:
 # nano /etc/rkhunter.conf
 Y descomentar y modificar la linea PKGMGR:
 PKGMGR=DPKG
