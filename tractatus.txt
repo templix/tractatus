@@ -911,6 +911,13 @@ Información sobre archivos multimedia y conversión de formatos.
 $ avconv -i video.avi video.mpeg  (Pasar de avi a mpeg)
 $ avconv -i video.avi (Información sobre un archivo)
 $ avconv -i archivo.avi -an nuevo.avi (Sacar el sonido de un avi)
+1.-
+Convertir varios archivos mp4 a mp3:
+	#!/bin/bash
+	for i in *.mp4
+	do
+		    avconv -i "$i" -b 256k "${i%.mp4}.mp3"
+	done
 
 
 avg 
@@ -1037,16 +1044,6 @@ Se ejecuta con:
 	$ awk -f validar lista 
 Aunque también podríamos añadir que lo ordenara por orden alfabetico del segundo campo (-k2) separado del primero por un espacio(-t” “):
 	$ awk -f validar lista | sort -t” “ -k2
-Creación de scripts con awk:
-$ cat hola
-#! /usr/bin/awk -f 
-# programa awk de ejemplo 
-BEGIN { print "Hola mundo cruel" } 
-$ chmod +x hola
-$ ./hola
-Hola mundo cruel
-Es resultado es el mismo que tecleando:
-	$ awk -f hola 
 Otros ejemplos: 
 	$ awk '/d.[0-9]/{print $4}' /proc/partitions  (listar todas las particiones)
 	$ cat 1.txt | awk '{print$1”\t”$2}'  (tabulando la salida)
@@ -1055,6 +1052,17 @@ Otros ejemplos:
 	$ who | awk '{print $1}'  (Mostrar todos los usuarios registrados)
 	$ awk '$1~/^DocumentRoot/{print $2}' /etc/apache2/sites-available/default (conocer la carpeta del servidor)
 	$ awk 'BEGIN { for (i = 1; i <= 7; i++) print int(101 * rand()) }' (Escribir 7 números aleatorios del 0 al 100)
+Creación de scripts con awk:
+1.-
+Imprimir el simple "Hola mundo cruel"
+	#! /usr/bin/awk -f 
+	BEGIN { print "Hola mundo cruel" } 
+Es resultado es el mismo que tecleando:
+	$ awk -f hola
+2.-
+Mandar el segundo campo de listado.txt a un archivo y el sexto a otro:
+	awk '{ print$2 > "lista_nombres"
+	       print$6 > "lista_telefonos" }' listado.txt 
 
 
 awstats (libnet-dns-perl libnet-ip-perl libnet-xwhois-perl)
