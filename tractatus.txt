@@ -963,8 +963,8 @@ Personas que no han trabajado:
 Buscar una entrada concreta:
 	$ awk '/Fuentes/ { print $0 }' lista
 Buscar los que cobran en metálico e impimir la 2ª columna:
-Buscar dos entradas en una misma linea separándolas con punto y coma (;):
 	$ awk ' /'metálico'/ {print$2}' lista 
+Buscar dos entradas en una misma linea separándolas con punto y coma (;):
 	$ awk '/Fuentes/ { print $0 }; /Cano/ { print$0 } ' lista
 Buscar las entradas en las que el primer campo empiece por “J”, imprimir el 2º campo y, entre parentesis el último:
 	$ awk '$1 ~ /^J/ {print$2, "("$NF")"}' lista
@@ -976,7 +976,7 @@ Añadir un nuevo campo ($6) con el producto del 3 y el 4:
 	$ awk '{ $6 = ($3*$4); print $0 }' lista
 print permite colocar texto: 
 	$ awk ' { print "El sueldo de ",$2," es de ",$3*$4," euros."} ' lista 
-Variables internas: 
+**Variables internas:** 
 Mostrar el número de campos de cada linea (NF): 
 	$ awk ' { print NF } ' lista 
 Mostrar el número de lineas (NR): 
@@ -989,9 +989,9 @@ Lo mismo con if:
 	$ awk '{ if (NF > 0) print }' lista
 Dar formato a la salida de datos: 
 	$ awk ' $4 > 0 { printf "%-8s .... %8.1f euros\n",$2,($3*$4) } ' lista 
-$4 > 0 (Que imprima los que la 4ª columna no sea cero.)
-%-8s (Que imprima una cadena (s) justificada a la izquierda (-) en un campo de 8 caracteres de ancho.)
-%8.1f (Que imprima un numero real (f), en un campo de ocho caracteres de ancho, con un decimal.)
+	$4 > 0 (Que imprima los que la 4ª columna no sea cero.)
+	%-8s (Que imprima una cadena (s) justificada a la izquierda (-) en un campo de 8 caracteres de ancho.)
+	%8.1f (Que imprima un numero real (f), en un campo de ocho caracteres de ancho, con un decimal(.))
 Imprimir cadena, justificada a la izquierda y en campos de 10 y 5 caracteres:
 $ awk '{ printf "%-10s %-10s %-5s %-5s %-5s\n", $1, $2, $3, $4, $5 }' lista
 Parecido con más florituras (todo en una sola linea)
