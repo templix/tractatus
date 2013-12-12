@@ -6823,6 +6823,26 @@ Alguna sopciones que pueden añadirse:
 -i 10 (Tempo en segundos entre mediciones. Sólo cliente)
 
 
+ipmitool
+[openipmi]
+Obtener datos del estado de un servidor [que lo soporte] tanto en local desde el propio servidor cómo en remoto. Se trata de un chipset que permite obtener información del estado de diferentes componentes hardware, temperaturas, voltajes, etc... Primero habilitar el demon ipmievd:
+# nano /etc/default/ipmievd
+Y modificar la linea:
+ENABLED=true
+En algunas distros es preciso cargar los módulos:
+	# ipmi_msghandler
+	# ipmi_si
+	# ipmi_devintf
+	# ipmi_watchdog
+	# ipmi_poweroff
+# /etc/init.d/ipmi start (Arrancar el servicio)
+# ipmitool sensor get "Ambient Temp" (Consulta de la temperatura ambiente)
+# ipmitool user list (Listado de usuarios configurados)
+# ipmitool -I lan -H 192.168.1.5 -U usuario sel elist (Litar los logs del sistema) 
+# ipmitool -H 192.168.1.10 -U usuario -P contraseña chassis status (Estado de chasis remoto)
+# ipmitool sdr type Temperature (Obtener la temperatura)
+
+
 ipscan 
 Escanea la red en busca de máquinas activas. 
 $ ipscan -s -f:range 192.168.1.1 192.168.1.255 (todo el rango de ips) 
