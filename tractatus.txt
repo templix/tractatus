@@ -11049,9 +11049,13 @@ Pasar un pdf a ps. Útil para imprimir archivos pdf protegidos contra escritura.
 $ pdftops archivo.pdf  (El archivo.ps resultante puede ser impreso aunque el archivo.pdf estuviera protegido)
 
 
-pdftotext (xpdf-utils)       
-Para pasar un pdf a txt
+pdftotext
+[xpdf-utils]       
+Para pasar un pdf a txt o a html.
+$ pdftotext -listenc (Lista las codificaciones soportadas)
 $ pdftotext -layout texto.pdf texto.txt
+$ pdftotext -htmlmeta texto.pdf text.html
+$ pdftotext -enc UTF-8 -htmlmeta texto.pdf texto.html (Especificando una codificación)
 
 
 pdfunite
