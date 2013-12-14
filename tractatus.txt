@@ -1055,15 +1055,30 @@ Otros ejemplos:
 Creación de scripts con awk:
 1.-
 Imprimir el simple "Hola mundo cruel"
-	#! /usr/bin/awk -f 
+	#!/usr/bin/awk -f 
 	BEGIN { print "Hola mundo cruel" } 
-Es resultado es el mismo que tecleando:
-	$ awk -f hola
+Lo mismo pero incluido en un script de bash:
+	#!/bin/bash
+	awk 'BEGIN { print "Hola mundo cruel" }'
 2.-
 Mandar el segundo campo de listado.txt a un archivo y el sexto a otro:
 	#! /usr/bin/awk -f	
 	awk '{ print$2 > "lista_nombres"
 	       print$6 > "lista_telefonos" }' listado.txt 
+3.-
+Pasar el comando date... a variable [getline dia_actual], cerrar el comando [close] e imprimirlo en pantalla:
+	#!/usr/bin/awk -f
+	BEGIN {
+               "date +%d-%m-%Y" | getline dia_actual
+               close("date +%d-%m-%Y")
+               print "Hoy estamos a " dia_actual
+    }
+En bash:
+	awk 'BEGIN {
+               "date +%d-%m-%Y" | getline dia_actual
+               close("date +%d-%m-%Y")
+               print "Hoy estamos a " dia_actual
+    }'
 
 
 awstats (libnet-dns-perl libnet-ip-perl libnet-xwhois-perl)
