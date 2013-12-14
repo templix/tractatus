@@ -937,13 +937,13 @@ awk
 Busca patrones y los procesa. Es practicamente un lenguaje de programación.
 Archivo base para ejemplo (Empleado -- Precio/hora -- Horas trabajadas – Cómo las cobra): 
 $ cat lista 
-Juan Gomez 6 10 banco 
-Clara Fuentes 7 12 banco 
-Antonio Cano 6 13 metálico 
-José Bueno 7 0 banco 
-Matías Crespo 5 8 metálico 
-Isabel Ruiz 7 0 metálico 
-María Monzón 9 16 metálico
+	Juan Gomez 6 10 banco 
+	Clara Fuentes 7 12 banco 
+	Antonio Cano 6 13 metálico 
+	José Bueno 7 0 banco 
+	Matías Crespo 5 8 metálico 
+	Isabel Ruiz 7 0 metálico 
+	María Monzón 9 16 metálico
 Imprimir la segunda columna (Apellidos):
 	$ awk ' { print $2 } ' lista
 Imprimir la última columna:
@@ -966,6 +966,12 @@ Buscar los que cobran en metálico e impimir la 2ª columna:
 	$ awk ' /'metálico'/ {print$2}' lista 
 Buscar dos entradas en una misma linea separándolas con punto y coma (;):
 	$ awk '/Fuentes/ { print $0 }; /Cano/ { print$0 } ' lista
+Imprimir lineas que tengan alguno de los campos o los dos:
+	$ awk '/Bueno/ || /Cano/' lista
+Imprimir lineas que tengan los dos campos:
+	$ awk '/Bueno/ && /7/' lista
+Imprimir las lineas que no tengan el cammpo:
+	$ awk '! /metálico/' lista
 Buscar las entradas en las que el primer campo empiece por “J”, imprimir el 2º campo y, entre parentesis el último:
 	$ awk '$1 ~ /^J/ {print$2, "("$NF")"}' lista
 Lo mismo con if:
@@ -976,6 +982,10 @@ Añadir un nuevo campo ($6) con el producto del 3 y el 4:
 	$ awk '{ $6 = ($3*$4); print $0 }' lista
 print permite colocar texto: 
 	$ awk ' { print "El sueldo de ",$2," es de ",$3*$4," euros."} ' lista 
+Mostar las veces que aparece "banco":
+	awk 'BEGIN { print "Veces que aparece banco" }
+	>        /banco/ { ++banco }
+	>         END       { print "banco aparece " banco " veces." }' lista
 **Variables internas:** 
 Mostrar el número de campos de cada linea (NF): 
 	$ awk ' { print NF } ' lista 
@@ -993,13 +1003,13 @@ Dar formato a la salida de datos:
 	%-8s (Que imprima una cadena (s) justificada a la izquierda (-) en un campo de 8 caracteres de ancho.)
 	%8.1f (Que imprima un numero real (f), en un campo de ocho caracteres de ancho, con un decimal(.))
 Imprimir cadena, justificada a la izquierda y en campos de 10 y 5 caracteres:
-$ awk '{ printf "%-10s %-10s %-5s %-5s %-5s\n", $1, $2, $3, $4, $5 }' lista
+	$ awk '{ printf "%-10s %-10s %-5s %-5s %-5s\n", $1, $2, $3, $4, $5 }' lista
 Parecido con más florituras (todo en una sola linea)
 	$ awk 'BEGIN {print "nombre\tapellido\tprecio\thoras\tpago"; print  "------\t--------\t------\t-----\t----"}; {print $1"\t"$2"\t"$3"\t"$4"\t"$5 }' lista
 Lo mismo más legible:
 	$ awk 'BEGIN {print "nombre\tapellido\tprecio\thoras\tpago" 
-	>                     print "------\t--------\t------\t-----\t----"} 
-	>                   {print  $1"\t"$2"\t"$3"\t"$4"\t"$5 }' lista
+	>             print "------\t--------\t------\t-----\t----"} 
+	>            {print  $1"\t"$2"\t"$3"\t"$4"\t"$5 }' lista
 BEGIN y END son patrones especiales usados para suministrar al script awk qué hacer antes de empezar a procesar y después de haber procesado los registros de la entrada.:
 	$ awk 'BEGIN {print “Cuantas veces aparece la palabra banco” } 
 	>       /banco/ { ++i } 
@@ -1052,7 +1062,7 @@ Otros ejemplos:
 	$ who | awk '{print $1}'  (Mostrar todos los usuarios registrados)
 	$ awk '$1~/^DocumentRoot/{print $2}' /etc/apache2/sites-available/default (conocer la carpeta del servidor)
 	$ awk 'BEGIN { for (i = 1; i <= 7; i++) print int(101 * rand()) }' (Escribir 7 números aleatorios del 0 al 100)
-Creación de scripts con awk:
+	Creación de scripts con awk:
 1.-
 Imprimir el simple "Hola mundo cruel"
 	#!/usr/bin/awk -f 
@@ -11449,7 +11459,7 @@ Algunas opciones:
 %c (Imprime el primer carácter de una variable cadena)
 %d (Imprime un número decimal)
 %s (Cadena)
-%b Interpreta las secuencias de escape del argumento cadena
+%b (Interpreta las secuencias de escape del argumento cadena)
 %q (Escribe el argumento cadena de forma que pueda ser usado como entrada a otro comando)
 %% (Escribe % literal)
 
