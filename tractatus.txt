@@ -1046,10 +1046,10 @@ Lo mismo usando BEGIN:
 	$ awk 'BEGIN { FS = " " } ; { print $2 }' lista
 El siguiente  programa  muestra  como  puede usarse awk para validación de datos. 
 $ cat validar 
-$3 < 6.5   { print $1,$2 " ===> precio por hora bajo", "("$3")" } 
-$3 > 8     { print $1,$2 " ===> precio por hora alto", "("$3")" } 
-$5 == "banco"    { print $1,$2 " ===> Cobra por banco" } 
-$5 == "metálico" { print $1,$2 " ===> Cobra en metálico" } 
+	$3 < 6.5   { print $1,$2 " ===> precio por hora bajo", "("$3")" } 
+	$3 > 8     { print $1,$2 " ===> precio por hora alto", "("$3")" } 
+	$5 == "banco"    { print $1,$2 " ===> Cobra por banco" } 
+	$5 == "metálico" { print $1,$2 " ===> Cobra en metálico" } 
 Se ejecuta con: 
 	$ awk -f validar lista 
 Aunque también podríamos añadir que lo ordenara por orden alfabetico del segundo campo (-k2) separado del primero por un espacio(-t” “):
@@ -1091,7 +1091,8 @@ En bash:
     }'
 
 
-awstats (libnet-dns-perl libnet-ip-perl libnet-xwhois-perl)
+awstats
+[libnet-dns-perl libnet-ip-perl libnet-xwhois-perl]
 Estadísticas de la red local
 En el fichero de configuración (/etc/awstats/awstats.conf) comprobar: 
 LogFile="/var/log/apache2/access.log" 
@@ -2364,6 +2365,19 @@ conspy
 Acceso a las tty1-6 en local o remoto.
 # conspy 1 (entra en la tty1)
 Para salir pulsar tres veces seguidas la tecla “Esc”
+
+
+continue
+Salta a la siguiente interacion en un bucle for, select, while o until. En el siguiente ejemplo se imprime del 1 al 5 pero saltándose el 3:
+	#!/bin/bash
+	for contador in 1 2 3 4 5
+	do
+	if [ "$contador" -eq 3 ]
+	then
+		continue
+	fi
+	echo "$contador"
+	done
 
 
 contraseñas
