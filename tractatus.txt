@@ -9498,7 +9498,7 @@ $ mysqldump -u root -p proveedores > fichero.sql (Crear un backup de la BD "prov
 $ mysql proveedores < fichero.sql (Restaurar la BD "proveedores" de un archivo) 
 $ mysqlimport -u root -p clientes fichero.sql (Otra forma de restaurar una BD si esta ya existe) 
 $ mysqldump -u root -p --all-databases > fichero.sql (Backup de todas las BDs) 
-$ mysqldump -u root -p --databases clientes proveedores > fichero.sql (Backup de dos BDs) 
+$ mysqldump -u root -p clientes proveedores > fichero.sql (Backup de dos BDs) 
 $ mysqldump -u root -p proveedores --ignore-table=antiguos > fichero.sql (Backup ignorando una tabla)
 $ mysqldump -u root -p base_de_datos tabla1 tabla2 > tabla1_y_tabla2.sql (Exportar solo unas tablas de una BDs)
 $ mysql -u root -p1234 (Acceder a la BD con el usuario "root" y contraseña "1234"[nótese que la contraseña está junto a la "p") 
@@ -9602,8 +9602,8 @@ mysql> RENAME USER john TO juan, peter TO pedro;
 mysql> DROP USER juan, pedro; (Borrar dos usuarios)
 mysql> SET PASSWORD FOR juan = PASSWORD('abcde') (Cambiar la contraseña de un usuario)
 mysql> SHOW GRANTS FOR pedro; (Ver los privilegios de un usuario)
-	mysql> GRANT ALL ON *.* TO juan@localhost (Otorgar todos los privilegios a un usuario)
-	mysql> REVOKE ALL ON *.* FROM juan@localhost; (Anular todos los privilegios de un usuario)
+mysql> GRANT ALL ON *.* TO juan@localhost (Otorgar todos los privilegios a un usuario)
+mysql> REVOKE ALL ON *.* FROM juan@localhost; (Anular todos los privilegios de un usuario)
 6.-
 Acceso remoto a mysql con el usuario root:
 # nano /etc/mysql/my.cnf
@@ -9617,6 +9617,15 @@ Entrar la contraseña y:
 	mysql> GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'la_contraseña' WITH GRANT OPTION;
 	mysql> FLUSH PRIVILEGES;
 	mysql> exit
+7.-
+Solucionar:ERROR 1045 (28000): Access denied for user 'root'@'localhost' (using password: NO)
+# /etc/init.d/mysql stop (Detener el servicio)
+# mysqld_safe --user=mysql --skip-grant-tables (Saltar privilegios de MySQL)
+$ mysql (En otra terminal entrar en MySQL)
+mysql> use mysql (Enrar en la BDs mysql)
+mysql> UPDATE user SET Password=PASSWORD('12345') WHERE user='root';(Actualizar el campo Password del usuario root)
+mysql> exit (Salir)
+$ mysql -u root -p (Entrar en MySQL)
 
 
 namei
