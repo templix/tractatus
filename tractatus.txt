@@ -9524,12 +9524,12 @@ CHAR(1) (Que el valor será fijo y solo tendrá un caracter)
 DATE (En formato YYYY-MM-DD) 
 Para entrar datos en la tabla anterior, podemos crear un archivo de texto "usuarios.txt" que contenga un registro por línea con valores separados por tabuladores, cuidando que el orden de las columnas sea el mismo que utilizamos en la sentencia CREATE TABLE. Para valores que no conozcamos podemos usar valores nulos usando \N. Ejemplo: 
 $ nano usuarios.txt 
-Juan	Borras	contable	m	1964-05-12	1988-03-27 
-Maria	Gil	administrativo	f	1983-10-03	2004-08-05 
-Antonio Gomez	portero		m	\N		2006-11-01 
-	Nota.- El final del archivo no ha de contener ninguna linea en blanco. 
+	Juan	Borras	contable	m	1964-05-12	1988-03-27 
+	Maria	Gil	administrativo	f	1983-10-03	2004-08-05 
+	Antonio Gomez	portero		m	\N		2006-11-01 
+Nota.- El final del archivo no ha de contener ninguna linea en blanco. El archivo tiene que estar en /var/lib/mysql/datos (En el directorio de la misma base de datos donde se carga) 
 Para cargarlo en la BD: 
-mysql> LOAD DATA LOCAL INFILE "usuarios.txt" INTO TABLE datos;
+mysql> LOAD DATA INFILE "usuarios.txt" INTO TABLE datos;
 	Nota.- En caso de que salga el error: The used command is not allowed with this MySQL version:
 	# nano /etc/mysql/my.cnf
 	Y en la sección [mysql] añadir la linea "local-infile": 
