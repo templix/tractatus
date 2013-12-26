@@ -13488,7 +13488,7 @@ Creación, gestión y conversión de claves utilizadas para la autenticación de
 $ ssh-keygen -lvf ~/.ssh/known_hosts (Ver todas las huellas digitales y las imágenes randomart)
 $ ssh-keygen -t rsa -C newserver -f .ssh/newkey (Generar el par de llaves publica y privada. Caso de exitir preguntará si se sobreescribe)
 $ ssh-keygen -B -f .ssh/id_rsa.pub (Muestra la huella digital de la llave especificada en formato SHA-1)
-$ ssh-keygen -f "/home/USER/.ssh/known_hosts" -R [La_URL.com]:22 (Suprimir un clave de un host por sufrir alguna modificación)
+$ ssh-keygen -f "$HOME/USER/.ssh/known_hosts" -R [La_URL.com_entre_corchetes]:22 (Suprimir un clave de un host por sufrir alguna modificación)
 1.-
 Para ver la huella digital cada vez que se ingresa en un host remoto:
 # nano /etc/ssh/ssh_config
