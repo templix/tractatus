@@ -8447,7 +8447,7 @@ $ manswitch uname -r
 markdown 
 Lenguaje orientado a la escritura de documentos de manera que sean fáciles de escribir y leer directamente en texto plano convirtiéndolos en documentos XHTML bien formados. La aplicación retext permite eleborar textos en markdown y visualizarlos en tiempo real.  
 Sintaxis elemental [las referencias son respecto de html]: 
-Notas: Cada signo afecta hasta el primer salto de linea. Un bloque HTML ha de estar precedido por una linea en blanco y con una sangría de 4 espacios y en su interior no actúa la sintaxis markdown. Para escapar un carácter se precede barra [\] . Los párrafos se delimitan con lineas en blanco.
+Notas: Cada signo afecta hasta el primer salto de linea. Un bloque HTML ha de estar precedido por una linea en blanco y con una sangría de 4 espacios y en su interior no actúa la sintaxis markdown. Para escapar un carácter se precede barra [\\] . Los párrafos se delimitan con lineas en blanco.
 	# (equivalente a H1. Mismo resultado subrayando el texto con el signo = en la linea inmediata inferior) 
 	## (equivalente a H2. Mismo resultado que subrayando el texto con el signo - en la linea inmediata inferior) 
 	> (muestra el texto que sigue como una cita) 
@@ -15268,6 +15268,8 @@ donde queramos pegar el fragmento y en modo normal:
 	p (Para pegar)
 Para buscar una palabra, escribimos en modo normal:
 	/palabra
+Bbuscar hacia adelante "palabra" sin importar mayúsculas o minúsculas
+	/palabra\c 
 Resalta la palabra encontrada o avisa de que no existe
 	n (Buscarla hacia delante)
 	N (Buscarla hacia atrás))
@@ -15324,8 +15326,6 @@ Imprimir:
 Guardar sesiones:
 	:mksession! archivo (Guarda la sesión actual en "archivo")
 	:source archivo (Restablece una sesión anterior)
-Crear atajos de teclado [mapping]. Colocar en ~/.vimrc:
-	map ,p :tabprevious (Ir a la pestaña anterior pulsando ,p
 algunos ajustes que pueden implementarse, bien durante la edición [en modo normal] o
 permanentemente en ~/.vimrc [en este caso quitar los dos puntos iniciales]:
 	:set ts=4 (Fija los tabulados a 4 espacios)
@@ -15341,6 +15341,12 @@ permanentemente en ~/.vimrc [en este caso quitar los dos puntos iniciales]:
 	:spell (Activa el corrector ortográfico)
 	:setlocal spell spelllang=es (Activa el idioma español del corrector ortográfico)
 	:set spellfile=~/.vimdic  (Fija diccionario de palabras desconocidas)
+	:set ruler (mostrar fila y columna actual en la esquina inferior derecha de la pantalla)
+	:set ignorecase (Que ignore mayúsculas y minúsculas en las busquedas)
+	:set linebreak (Para que las palabras no se corten al final de la linea)
+	:set encoding=utf-8  (Codificación que se usará [utf-8])
+	:set list (Mostrar los caracteres no imprimibles)
+	:set wrap (Activa el cortado de líneas largas en pantalla)
 1.-
 Poner un esquema de colores:
 $ mkdir -p ~/.vim/colors (Crear el directorio caso de no existir)
@@ -15350,6 +15356,12 @@ Y pegar el texto:
 	syntax on
 	colorscheme oceandeep
 En colorscheme poner el escogido, en este caso oceandeep. Guardar.
+2.-
+Crear atajos de teclado [mapping]. Colocar en ~/.vimrc para hacerlo permanente:
+Pulsar F2 para mostrar/ocultar los números de línea:
+	:map <F2> <Esc>:set invnumber<CR>
+Pulsar F3 para mostrar/ocultar los caracteres no imprimibles:
+	map <F3> <Esc>:set invlist listchars=eol:$,tab:>-,trail:-<CR>
 
 
 vipe
