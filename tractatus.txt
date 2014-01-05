@@ -5217,6 +5217,14 @@ $ gconftool-2 -t list --list-type string -s /apps/gedit-2/preferences/encodings/
 Parejas de valores [pairs]. Indica parejas de valores de los tipos anteriores. No he encontrado ningún ejemplo
 
 
+gcp
+Copiar archivos y directorios mostrando barra de progreso.
+$ gcp archivo dir (Copiar un archivo en un directorio)
+$ gcp file1 file2 file3 dir (Copiar varios archivos en un directorio)
+$ gcp -r dir1 dir2 (Copiar de forma recursiva)
+$ gcp -f -r dir1 dir2 (Copiar forzando sopbreescritura si ya existe el archivo)
+
+
 gdb
 Herramienta para depurar programas en C y C++
 Necesitamos que el programa haya sido compilado con modo debug (parámetro -g) en gcc o g++
@@ -5410,7 +5418,7 @@ Degradados(.ggr)/usr/share/gimp/2.0/gradients
 git
 [git-core]
 Manual completo en español: <http://www-cs-students.stanford.edu/~blynn/gitmagic/intl/es/book.html#_hosting_git_gratuito> 
-Software de control de versiones. Una vez registrados en Github [<http://github.com>], crear un nuevo repositorio con el nombre escogido y github nos facilitará los datos de acceso [https://github.com/templix/tractatus.git].
+Software de control de versiones. Una vez registrados en Github [<http://github.com>], crear un nuevo repositorio con el nombre escogido y github nos facilitará los datos de acceso [Al estilo: https://github.com/templix/tractatus.git].
 Crear el repositorio local de un proyecto alojado en github:
 	$ mkdir tractatus (Crear el directorio local)
 	$ cd tractatus (Entrar en él)
