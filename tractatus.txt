@@ -12339,7 +12339,19 @@ $ saidar -d 2 (actualizar datos cada 2 segundos. Por defecto cada 3)
 
 sakura
 Terminal
-$ sakura -e tail -f /var/log/fail2ban
+# sakura -e tail -f /var/log/fail2ban (Lanzar una aplicación)
+$ sakura -n 3 -c 50 -r 30 (Lanzar la terminal con 3 pestañas y 50 columnas por 30 lineas)
+Algunos atajos:
+	Ctrl + Shift + T (Nueva pestaña)
+	Ctrl + Shift + W (Cerrar pestaña)                  
+	Alt  + Flechas (Moverse entre las pestañas)
+	Alt  + [1-9] (Ir a la pestaña numero ..)
+	Ctrl + Shift + S (Mostrar barra de scroll)
+	Ctrl + Shift + RePag (Scroll arriba) 
+	Ctrl + Shift + AvPag (Scroll abajo)
+	F11 (Maximizar/minimizar la pantalla)                              
+	Ctrl + '+' (Aumentar la medida de la letra)
+	Ctrl + '-' (Disminuir la medida de la letra)     
 
 
 sar (sysstat)
@@ -15323,6 +15335,8 @@ pulsando esc y
 	v (Entra en modo visual y con los cursores seleccionar lo que queremos copiar)
 	c (Para cortar)
 	y (Para copiar)
+	"add (Cortar linea y guardarla en el bufer "a".)
+	"ap (Pegar la linea del bufer "a")
 Aparecerá debajo un mensaje informando de las lineas copiadas. Nos desplazamos
 donde queramos pegar el fragmento y en modo normal:
 	p (Para pegar)
@@ -15340,6 +15354,7 @@ texto que será reemplazado. la g final sustituirá todas las coincidencias
 que encuentre en todo el fichero
 Más operaciones de texto:
 	dd (Suprimir línea actual gaurdarla en el buffer. "p" para pegar)
+	5dd (Suprimir cinco lineas)
 	u (Deshacer el último cambio en el fichero)
 	Ctrl + r (Rehacer el último cambio en el fichero)
 	:25 (Ir a la linea 25)
