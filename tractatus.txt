@@ -13360,6 +13360,17 @@ Monitor de transferencia de ficheros [velocímetro].
 pulsar “q” para cerrar
 
 
+speedtest_cli
+script en python que se conecta a un servidor y realiza un test de velocidad de nuestra conexió.
+Descarga y permisos:
+    $ wget https://raw.github.com/sivel/speedtest-cli/master/speedtest_cli.py
+    $ chmod +x speedtest_cli.py
+$ ./speedtest_cli.py (Forma básica)
+$ ./speedtest_cli.py --sahre (Nos da una URL con la imagen en png de la conexión)
+$ ./speedtest_cli.py --list (Mostrará una lista ordenada de los servidores de Speedtest.net con los más cercanos en primer lugar.)
+$ ./speedtest_cli.py --server 804 (Especificar un servidor distinto al más cercano,     tomado del listado anterior)
+
+
 split
 Cortar archivos
 $ split -d -b 100m archivo otro_archivo. (Que tengan extensión con números: .00, .01, .02. Trozos de 200 MB, archivo de entrada y de salida terminado con un punto donde se añade la extension. En este ejemplo daría salidas tipo otro_archivo.00, otro_archivo.01....)
