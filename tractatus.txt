@@ -15454,6 +15454,14 @@ Pulsar F2 para mostrar/ocultar los números de línea:
 	:map <F2> <Esc>:set invnumber<CR>
 Pulsar F3 para mostrar/ocultar los caracteres no imprimibles:
 	map <F3> <Esc>:set invlist listchars=eol:$,tab:>-,trail:-<CR>
+3.-
+Copiar y pegar texto de vim a las X y viceversa:
+Comprobar si vim tiene soporte para xterm_clipboard lanzando vim y ejecutando:
+	:version
+Las opciones precedidas con "+" estan habilitadas y las con "-" deshabilitadas. La solución, si está deshabilitada, es compilar vim con dicha opción o instalar vim-gtk o gvim (según distro). El proceso en vim es seleccionar el texto a copiar y:
+	"+y
+Y pegar en cualquier editor (gedit, pico...) con Ctrl + v o con el botón derecho del mouse. El proceso inverso, o sea copiar en otro editor y pegar en vim será seleccionando y copiando el texto con el mouse y pegarlo en vim con:
+	"+p
 
 
 vipe
