@@ -15319,121 +15319,140 @@ $ vim fichero (Abrir un fichero)
 $ vim -x fichero (Poner contraseña a un fichero)
 $ vimtutor (Lanzar un tutorial elemental de vim)
 Algunas teclas para no morir en el intento:
-Teclas de modo:
+modo:
 	i (Entrar en modo edición)
 	esc (Salir modo edición y entrar en modo comando)
-Movimientos básicos con el cursor:
+	u (Deshacer el último cambio)
+Movimientos del cursor:
 	k (Arriba)
 	j (Abajo)
 	h (Derecha)
 	l (Izquierda)
-	b (Ir al principio de la palabra anterior)
 	w (Ir al principio de la palabra posterior)
-	e (Ir a la última letra de la palabra anterior)
+	b (Ir al principio de la palabra anterior)
 	$ (Ir al final de la linea)
 	0 (Ir al principio de la linea)
-	ge (Ir a la última letra de la palabra posterior)
-	20G (Ir a la linea 20)
-	gg (Ir al principio del ficherol)
-	G (Ir al final del fichero)
+	) (Ir a la frase siguiente)
+	( (Ir a la frase anterior)
 	{ (Pasar al siguiente párrafo)
 	} (Pasar al anterior párrafo)
+	H (Ir a la parte superior de la pantalla)
+	M (Ir a la parte media de la pantalla)
+	L (Ir a la parte inferior de la pantalla)
+	Crtl + d (Avanzar media pantalla)
+	Crtl + u (Retroceder media pantalla)
+	gg (Ir al principio del ficherol)
+	G (Ir al final del fichero)
+	:20 (Ir a la linea 20)
+Borrar:
+	dw (palabra)
+	d3w (3 palabras)
+	dd (Linea)
+	3dd (3 lineas)
+	d$ (Del cursor al final de la linea)
+	d0 (Del cursor al principio de la linea)
+Copiar, pegar e insertar:
+	yy (copiar línea)
+	p (pegar debajo del cursor)
+	yw (copiar del cursor al final de la palabra)
+	:r archivo (insertar "archivo")
+	:r! comando (insertar salida de comando)
+	o (Insertar linea en blanco y entrar en edición)
+Búsqueda:
+	/palabra (buscar hacia adelante "palabra")
+	/palabra\c (buscar "palabra" sin importar mayúsculas o minúsculas)
+	n (Siguiente coincidencia hacia delante)
+	N (Siguiente coincidencia hacia atras 
+	:%s/texto1/texto2/g (Substituir "texto1" por "texto2" en todo el archivo)
 Entrar y salir del vim:
 	:q! (Salir sin guardar)
 	:w (Guardar cambios sin salir)
 	:x (Guardar cambios y salir)
 	:w fichero (Guardar en un fichero distinto y seguir)
 	:e fichero2 (Cierra el fichero actual y abre fichero2)
-	:e . (Abre un navegador de ficheros en el directorio actual)
-Cortar, Copiar y Pegar.
-Con los cursores nos desplazamos por el fichero hasta llegar al inicio
-de la zona que queremos copiar. Salimos del modo edición (si estamos en él)
-pulsando esc y
-	v (Entra en modo visual y con los cursores seleccionar lo que queremos copiar)
-	c (Para cortar)
-	y (Para copiar)
-	"add (Cortar linea y guardarla en el bufer "a".)
-	"ap (Pegar la linea del bufer "a")
-Aparecerá debajo un mensaje informando de las lineas copiadas. Nos desplazamos
-donde queramos pegar el fragmento y en modo normal:
-	p (Para pegar)
-Para buscar una palabra, escribimos en modo normal:
-	/palabra
-Bbuscar hacia adelante "palabra" sin importar mayúsculas o minúsculas
-	/palabra\c 
-Resalta la palabra encontrada o avisa de que no existe
-	n (Buscarla hacia delante)
-	N (Buscarla hacia atrás))
-	Para sustituir un texto debemos escribir la secuencia:
-	:%s/texto1/texto2/g
-donde texto1 es el texto a buscar y texto2 el
-texto que será reemplazado. la g final sustituirá todas las coincidencias
-que encuentre en todo el fichero
-Más operaciones de texto:
-	dd (Suprimir línea actual gaurdarla en el buffer. "p" para pegar)
-	5dd (Suprimir cinco lineas)
-	u (Deshacer el último cambio en el fichero)
-	Ctrl + r (Rehacer el último cambio en el fichero)
-	:25 (Ir a la linea 25)
-	o (Añadir linea en blanco despues de la linea y entrar en edición)
-	O (Añadir linea en blanco antes de la linea y entrar en edición)
+	:e . (Abre un navegador de ficheros del directorio actual)
+	:e (Recarga el fichero)
+	ZZ (Guardar y salir)
+Modo visual:
+	v (Entra en modo visual para seleccionar texto)
+	c (Cortar)
+	y (Copiar)
+	p (Pegar)
+	"add (Cortar linea y guardarla con el nombre "a")
+	"ap (Pegar la linea guardada como "a")
+	"+3dd (Cortar 3 lineas y guardarlas en el portapapeles)
+	"+p (Pegar las lineas guardadas en el portapapeles)
+Dejar marcas en un texto:)	
+	ma (Marca una linea con la "a". las siguientes: mb, mc, md..)
+	'a (Ir a la linea marcada con la "a")
+	'. (Ir a la última linea modificada)
 Ejecución de comandos durante la edición:
 	:!ls (Muestra listado del directorio y con intro regresa al editor)
-	:shell (Pausa la edición y entra en modo shell)
-	:exit (Termina el modo shell y regresa a la edición)
-	Ctrl z (Suspende vim y entra en la shell. Con fg vuelve a vim)
-Dividir la pantalla:
+	:shell (Pausa la edición y entra en modo shell. Con "exit" vuelve a vim)
+	Ctrl z (Suspende vim y entra en la shell. Con "fg" vuelve a vim)
+Crear pestañas:
+	:tabnew fichero (Abrir un archivo en una nueva pestaña)
+	gt (Moverse entre pestañas)
+	:close (Cierra la ventana o la subdivision de la ventana)
+	:only (Cierra todas las ventanas menos la actual)
+Dividir la pantalla en distintos paneles:
 	:split fichero (Abrir un archivo en una division horizontal de la ventana)
 	:vsplit fichero (Abrir un archivo en una division vertical de la ventana)
-	Ctrl + w + flecha cursor (Moverse entre las distintas divisiones de una ventana)
-	:new (Crea una nueva ventana vacia)
-	:r archivo (Insertar "archivo" donde esté el cursor)
-Opciones con las ventanas:
-Pulsar Ctrl + w y a continuacion alguna de las siguientes opciones:
-	n (crear nueva ventana)
-	H (mover ventana hacia la izquierda)
-	J (mover ventana hacia abajo)
-	K (mover ventana hacia arriba)
-	L (mover ventana hacia la derecha)
-	h (ir a la ventana de la izquierda)
-	j (ir a la ventana de abajo)
-	k (ir a la ventana de arriba)
-	l (ir a la ventana de la derecha)
-	t (ir a la ventana de más arriba)
-	b (ir a la ventana de más abajo)
-	w (pasar a la siguiente ventana)
-	+ (aumentar el tamaño de la ventana en 1 linea)
-	- (disminuir el tamaño de la ventana en 1 linea)
-Para crear ventanas de anchura especifica:
-	10 Ctrl w _ (Crear nueva  de 10 lineas de ancho))
-	5 Ctrl w + (Aumenta 5 lineas la ventana actual)
-Crear pestañas:
-	:tabnew fichero 	 (Abrir un archivo en una nueva pestaña)
-	gt			 (Moverse entre pestañas)
-	:close 	(Cierra la ventana o la subdivision de la ventana)
-	:only 	(Cierra todas las ventanas menos la actual)
+	:new (Abre un nuevo panel vacio)
+	:close (Cerrar panel o ventana)
+	Ctrl + w flecha (Moverse entre los distintos paneles de una ventana)
+	Ctrl + w n (crear nueva ventana)
+	Ctrl + w h (ir a la ventana de la izquierda)
+	Ctrl + w j (ir a la ventana de abajo)
+	Ctrl + w k (ir a la ventana de arriba)
+	Ctrl + w l (ir a la ventana de la derecha)
+	Ctrl + w t (ir a la ventana de más arriba)
+	Ctrl + w b (ir a la ventana de más abajo)
+	Ctrl + w w (pasar a la siguiente ventana)
+	Ctrl + w + (aumentar el tamaño de la ventana en 1 linea)
+	Ctrl + w - (disminuir el tamaño de la ventana en 1 linea)
 Imprimir:
 	:ha (Imprimir todo el documento)
 	:ha > archivo.pdf (Imprimir a pdf)
 Guardar sesiones:
 	:mksession! archivo (Guarda la sesión actual en "archivo")
-	:source archivo (Restablece una sesión anterior)
+	:source archivo (Una vez abierto el archivo, carga la sesión guardada)
+Corrector ortográfico:
+	:set spell spelllang=es (Activar diccionario. spelllang=ca para catalan)
+	z= (Con el cursor en el error, muestra las sugerencias)
+	Ctrl + x s (Abre el menú de sugerencias sin salir del modo insertar)
+	:spellrepall (Corrige en todo el texto la que acabamos de corregir
+	zg (Añadir al corrector la palabra del cursor)
+	zw (Surpimir del corrector la palabra del cursor)
+Varios:
+	:buffers (Muestra buffers abiertos (actual [%], cerrado [#], activo [a], oculto [h]) 
+	:buffer 2 (salta al buffer 2)
+	:e /home/usuario (Abre vim en modo navegador de archivos)
+	:Ex (Abre el navegador de archivos en un nuevo panel de la ventana activa)
+	:ls (Lista los buffers)
 algunos ajustes que pueden implementarse, bien durante la edición [en modo normal] o
 permanentemente en ~/.vimrc [en este caso quitar los dos puntos iniciales]:
+	:set showmode/noshowmode (mostrar/no mostrar modo actual de vi) 
 	:set ts=4 (Fija los tabulados a 4 espacios)
 	:set sw=4 (Fija los indentados a 4 espacios)
 	:set number/nonumber (Activa/desactiva el numerado de lineas)
 	:set backup/nobackup (Activa/desactiva la copia de seguridad automática)
 	:set directory=dir (fija la carpeta donde se harán las copias)  
 	:syntax on/off (Activa/desactiva el resaltado de sintaxis)
+	:set hidden (Información sobre la columna y posición del cursor)
+	:set ignorecase (Ignorar mayúsculas y minúsculas en las busquedas)
+	:set showcmd (Mostrar la combinación de teclas que estamos entrando)
+	:set nocompatible (Permite usar funcionalidades de vim que vi no soporta)
+	:set hidden (Permite abandonar buffers sin guardarlos previamente)
 	:color darkblue (Cambia el color del vim [evening, desert, elflord, koehler, morning..])
 	:set cindent (Activa indentado automático)
+	:set history=500 (Aumentar el historial de comandos a 500)
+	:set undolevels=1000 (Aumentar pasos a deshacer a 1000)
 	:set mouse=a/mouse= (Activa/desactiva el uso del ratón)
 	:set paste/nopaste (Activa/desactiva el modo pegar texto literalmente)
 	:spell (Activa el corrector ortográfico)
-	:setlocal spell spelllang=es (Activa el idioma español del corrector ortográfico)
 	:set spellfile=~/.vimdic  (Fija diccionario de palabras desconocidas)
-	:set ruler (mostrar fila y columna actual en la esquina inferior derecha de la pantalla)
+	:set ruler (mostrar fila y columna del cursor y porcentaje del texto) 
 	:set ignorecase (Que ignore mayúsculas y minúsculas en las busquedas)
 	:set linebreak (Para que las palabras no se corten al final de la linea)
 	:set encoding=utf-8  (Codificación que se usará [utf-8])
@@ -15464,6 +15483,24 @@ Y pegar en cualquier editor (gedit, pico...) con Ctrl + v o con el botón derech
 	"+p
 Nota- Para que todo lo copiado en Vim se asigne automáticamente al portapapeles del sistema operativo, añadir a .vimrc:
 	set clipboard=unnamedplus
+4.-
+Algún ejemplo que mapeo de teclas para .vimrc:
+	" atajo para mostrar números de linea al pulsar F2:
+	map <F2> <Esc>:set invnumber<CR>
+	" atajo para mostrar caracteres no imprimibles al pulsar F3:
+	map <F3> <Esc>:set invlist listchars=eol:$,tab:>-,trail:-<CR>
+	" Activar el corrector ortográfico al pulsar F4
+	map <F4> <Esc>:set spell spelllang=es<CR>
+Nombre de las teclas especiales para el mapeo:
+	<up>		Flecha arriba				<down>		Flecha abajo
+	<right>		Flecha derecha				<left>		Flecha izquierda
+	<esc>		Escape						<cr>		Enter
+	<space>		Espacio						<tab>		Tabulador
+	<del>		Suprimir					<bs>		Backspace
+	<f1>..<f12>	Teclas de función			<insert>	Insert
+	<end>		Fin							<c-tecla>	Control + tecla
+	<RePag>		Página anterior				<AvPag>		Página siguiente
+	<s-tecla>	Shift + tecla				<c-s-tecla>	Control + shift + tecla
 
 
 vipe
