@@ -15473,23 +15473,7 @@ Pulsar F2 para mostrar/ocultar los números de línea:
 	:map <F2> <Esc>:set invnumber<CR>
 Pulsar F3 para mostrar/ocultar los caracteres no imprimibles:
 	map <F3> <Esc>:set invlist listchars=eol:$,tab:>-,trail:-<CR>
-3.-
-Copiar y pegar texto de vim a las X y viceversa:
-Comprobar si vim tiene soporte para xterm_clipboard lanzando vim y ejecutando:
-	:version
-Las opciones precedidas con "+" estan habilitadas y las con "-" deshabilitadas. La solución, si está deshabilitada, es compilar vim con dicha opción o instalar vim-gtk o gvim (según distro). El proceso en vim es seleccionar el texto a copiar y:
-	"+y
-Y pegar en cualquier editor (gedit, pico...) con Ctrl + v o con el botón derecho del mouse. El proceso inverso, o sea copiar en otro editor y pegar en vim será seleccionando y copiando el texto con el mouse y pegarlo en vim con:
-	"+p
-Nota- Para que todo lo copiado en Vim se asigne automáticamente al portapapeles del sistema operativo, añadir a .vimrc:
-	set clipboard=unnamedplus
-4.-
-Algún ejemplo que mapeo de teclas para .vimrc:
-	" atajo para mostrar números de linea al pulsar F2:
-	map <F2> <Esc>:set invnumber<CR>
-	" atajo para mostrar caracteres no imprimibles al pulsar F3:
-	map <F3> <Esc>:set invlist listchars=eol:$,tab:>-,trail:-<CR>
-	" Activar el corrector ortográfico al pulsar F4
+Pulsar F4 para activar el corrector ortográfico:
 	map <F4> <Esc>:set spell spelllang=es<CR>
 Nombre de las teclas especiales para el mapeo:
 	<up>		Flecha arriba				<down>		Flecha abajo
@@ -15501,6 +15485,16 @@ Nombre de las teclas especiales para el mapeo:
 	<end>		Fin							<c-tecla>	Control + tecla
 	<RePag>		Página anterior				<AvPag>		Página siguiente
 	<s-tecla>	Shift + tecla				<c-s-tecla>	Control + shift + tecla
+3.-
+Copiar y pegar texto de vim a las X y viceversa:
+Comprobar si vim tiene soporte para xterm_clipboard lanzando vim y ejecutando:
+	:version
+Las opciones precedidas con "+" estan habilitadas y las con "-" deshabilitadas. La solución, si está deshabilitada, es compilar vim con dicha opción o instalar vim-gtk o gvim (según distro). El proceso en vim es seleccionar el texto a copiar y:
+	"+y
+Y pegar en cualquier editor (gedit, pico...) con Ctrl + v o con el botón derecho del mouse. El proceso inverso, o sea copiar en otro editor y pegar en vim será seleccionando y copiando el texto con el mouse y pegarlo en vim con:
+	"+p
+Nota- Para que todo lo copiado en Vim se asigne automáticamente al portapapeles del sistema operativo, añadir a .vimrc:
+	set clipboard=unnamedplus
 
 
 vipe
