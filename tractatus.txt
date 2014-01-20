@@ -15366,7 +15366,7 @@ Búsqueda:
 	n (Siguiente coincidencia hacia delante)
 	N (Siguiente coincidencia hacia atras 
 	:%s/texto1/texto2/g (Substituir "texto1" por "texto2" en todo el archivo)
-Entrar y salir del vim:
+Abrir, guardar y salir del vim:
 	:q! (Salir sin guardar)
 	:w (Guardar cambios sin salir)
 	:x (Guardar cambios y salir)
@@ -15375,6 +15375,7 @@ Entrar y salir del vim:
 	:e . (Abre un navegador de ficheros del directorio actual)
 	:e (Recarga el fichero)
 	ZZ (Guardar y salir)
+	:w !sudo tee % (Guardar un archivo tras haberlo abierto sin “sudo”)
 Modo visual:
 	v (Entra en modo visual para seleccionar texto)
 	c (Cortar)
@@ -15426,12 +15427,16 @@ Corrector ortográfico:
 	:spellrepall (Corrige en todo el texto la que acabamos de corregir
 	zg (Añadir al corrector la palabra del cursor)
 	zw (Surpimir del corrector la palabra del cursor)
-Varios:
+Buffers:
 	:buffers (Muestra buffers abiertos (actual [%], cerrado [#], activo [a], oculto [h]) 
 	:buffer 2 (salta al buffer 2)
+	:bn (Ir al siguiente buffer)
+	:bp (Ir al anterior)
+	:bd (suprimir buffer [Cerrar archivo])
+	:ls (Lista los buffers)
+Varios:
 	:e /home/usuario (Abre vim en modo navegador de archivos)
 	:Ex (Abre el navegador de archivos en un nuevo panel de la ventana activa)
-	:ls (Lista los buffers)
 algunos ajustes que pueden implementarse, bien durante la edición [en modo normal] o
 permanentemente en ~/.vimrc [en este caso quitar los dos puntos iniciales]:
 	:set showmode/noshowmode (mostrar/no mostrar modo actual de vi) 
@@ -15503,7 +15508,6 @@ vipe
 [moreutils]
 Permite editar en medio de una tubería los datos que están siendo canalizadas entre programas.
 $ ls | vipe | ifdata -pb eth0
-
 
 
 virtualbox
