@@ -14218,8 +14218,8 @@ Atajos:
 	Ctrl+b [ (Entra en modo scroll con la teclas del cursor. Termina pulsando q)
 1.-
 Muestra para colorear los paneles:
-Crear en el directorio personal el archivo:
-$ touch tmux.conf
+Crear en el directorio personal el archivo oculto:
+$ touch .tmux.conf
 Con el siguiente contenido [modificar al gusto]
 	# default statusbar colors
 	set -g status-fg colour136
@@ -15540,6 +15540,7 @@ permanentemente en ~/.vimrc [en este caso quitar los dos puntos iniciales]:
 	:set encoding=utf-8  (Codificación que se usará [utf-8])
 	:set list (Mostrar los caracteres no imprimibles)
 	:set wrap (Activa el cortado de líneas largas en pantalla)
+	:set t_Co=256 (La terminal con 256 colores)
 1.-
 Poner un esquema de colores:
 $ mkdir -p ~/.vim/colors (Crear el directorio caso de no existir)
