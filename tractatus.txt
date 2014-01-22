@@ -14861,6 +14861,31 @@ crontab -e
 */5 * * * * /usr/bin/unison &> /dev/null
 
 
+units
+Conversor de unidades [metros, litros, millas, pulgadas, grados...]. Las unidades han de expresarse en inglés.
+$ units 
+Muestra "You have" para entrar lo que tenemos [1m, 10lb, 2hr, tempK(0)... ] y a continuación "You want", lo que queremos. Algunos ejemplos:
+De millas a kilómetros:
+	You have: 10mi
+	You want: km
+		* 16.09344
+		/ 0.062137119
+De libras a gramos:
+	You have: 1lb
+	You want: gr
+		* 7000
+		/ 0.00014285714
+De grados kelvin a celsius:
+	You have: tempK(0)
+	You want: tempC
+		-273.15
+De 3 horas más 16 minutos a segundos
+	You have: 3hr + 16min
+	You want: sec
+		* 11760
+		/ 8.5034014e-05
+
+
 unity
 Escritorio.
 $ unity --reset (Resetear la configuración de unity)
