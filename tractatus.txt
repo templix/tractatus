@@ -8495,6 +8495,7 @@ Notas: Cada signo afecta hasta el primer salto de linea. Un bloque HTML ha de es
 	**texto** (texto entre dos pares de asteriscos: en negrita)
 	*texto* (texto entre asteriscos: en cursiva)
 	***texto*** (Texto entre dos trios de asteriscos: negrita y cursiva)
+	2 espacios al final de una linea fuera salto de linea
 	<URL> (Modo de colocar un enlace. Igual para un email)
 	--- (3 guiones muestran una linea) 
 	[nombre del enlace](http://url "nombre que aparece al colocar el cursor") (Enlace a una URL. El entrecomillado es opcional) 
@@ -12662,6 +12663,10 @@ Contar lineas de un archivo [emulador de wc -l]:
 	sed -n '$=' lista
 Insertar 5 espacios en blanco delante de cada linea:
 	$ sed 's/^/     /' lista
+Insertar 1 linea en blanco despues de la primera linea:
+	$ sed '2i\ \' lista
+Insertar 1 linea en blanco despues de la primera linea y de la tercera:
+	$ sed '2i\ \' | sed '4i\ \' lista
 
 
 seeker 
