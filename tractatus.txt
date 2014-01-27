@@ -2084,7 +2084,7 @@ O en su defecto la ip del router [nameserver 192.168.1.1]
 
 
 chsh
-Permite cambiar la shell del usuario especificado.
+Permite cambiar la shell del usuario especificado o del sistema.
 $ chsh -l (Mostrar las shells disponibles en el sistema)
 $ chsh -s /bin/tcsh usuario
 
@@ -2107,7 +2107,7 @@ $ cjpeg -grayscale -quality 60 archivo.ppm > nuevo.jpg (a escala de grises y con
 
 
 ck-history 
-Listado de los logeos en el sistema (tty, pts, ssh...) 
+Listado de los logeos en el sistema [tty, pts, ssh...]
 $ ck-history --frequent 
 $ ck-history --last-compat 
 $ ck-history --last | less
@@ -2132,13 +2132,13 @@ Antivirus
 # sigtool --list-sigs > list (listado de virus y troyanos que detecta)
 # clamscan -v -r --bell --move=/home/usuario/cuarentena --log=/var/log/clamav/clamav.log /media/win
 Opciones:
--v (muestra la información)
--r  (revisa directorios y subdirectorios)
---bell  (aviso sonoro al detectar un virus)
---move  (confina los virus en el directorio especificado)
---log  (guarda los logs en el archivo especificado)
--i  (solo mostrará los archivos infectados)
--d  (arrancar en modo demonio)
+	-v (muestra la información)
+	-r  (revisa directorios y subdirectorios)
+	--bell  (aviso sonoro al detectar un virus)
+	--move  (confina los virus en el directorio especificado)
+	--log  (guarda los logs en el archivo especificado)
+	-i  (solo mostrará los archivos infectados)
+	-d  (arrancar en modo demonio)
 Archivo de logs: /var/log/clamav/clamav.log
 Configuración: /etc/clamav/clamd.conf 
 Reconfigurar paquete: # dpkg-reconfigure clamav-base
@@ -2151,16 +2151,16 @@ Limpiar la terminal.
 clex
 Administrador de archivos.
 Algunas teclas de control:
-Ctrl-c (salir de cada una de las opciones siguientes)
-alt-m (menú principal)
-alt-w (Cambiar de directorio)
-alt-s (Cambiar el tipo de visualización)
-alt-/ (entrar en el directorio raiz)
-alt-~ o alt-` (Entrar en el directorio $HOME)
-ctrl-r (Actualizar panel)
-F4 (Editar archivo [vim])
-F5 (Copiar)
-F8 (Borrar) 
+	Ctrl-c (salir de cada una de las opciones siguientes)
+	alt-m (menú principal)
+	alt-w (Cambiar de directorio)
+	alt-s (Cambiar el tipo de visualización)
+	alt-/ (entrar en el directorio raiz)
+	alt-~ o alt-` (Entrar en el directorio $HOME)
+	ctrl-r (Actualizar panel)
+	F4 (Editar archivo [vim])
+	F5 (Copiar)
+	F8 (Borrar) 
 
 
 clive
@@ -2239,7 +2239,7 @@ Listado de temas de colores disponibles en /usr/share/cmus. Para modificar el el
 Para que el cambio sea permanente:
 $ nano .cmus/rc
 Y colocar la linea:
-colorscheme cyan
+	colorscheme cyan
 
 
 cnetworkmanager 
@@ -2253,8 +2253,8 @@ $ cnetworkmanager -a (Lista puntos de acceso)
 $ cnetworkmanager -w true/false  (activar/desactivar la conexión)
 
 
-codificación de caracteres (html)
-Colocar según proceda al inicio del documento la linea:
+codificación de caracteres
+En documentos html, colocar según proceda al inicio del documento la linea:
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 
@@ -2282,8 +2282,7 @@ $ mount | column -t
 
 
 combine
-[moreutils]
-Cuatro formas de combinar dos archivos. 
+[moreutils]. Cuatro formas de combinar dos archivos. 
 $ combine archivo1 and archivo2 (Las lineas que están en los dos archivos)
 $ combine archivo1 not archivo2 (Las que estan en archivo1 pero no en archivo2)
 $ combine archivo1 or archivo2 (Las que están en archivo1 o archivo2)
@@ -2341,8 +2340,8 @@ $ compgen -A function (lista las funciones)
 $ compgen -ac | grep ifconfig (Para conocer si un comando existe)
 
 
-compilar (buildessential checkinstall) 
-Instalar aplicaciones a partir del codigo fuente . En general, los pasos a seguir son los siguientes: 
+compila
+[buildessential checkinstall]. Instalar aplicaciones a partir del codigo fuente . En general, los pasos a seguir son los siguientes: 
 Descargar el código fuente. 
 Descomprimir. 
 cd al directorio creado. 
@@ -2367,8 +2366,8 @@ $ compiz --replace (activar los efectos)
 $ metacity --replace (Desactivar los efectos)
 
 
-composite (imagemagick)
-Mezclar dos imágenes por consola
+composite
+[imagemagick]. Mezclar dos imágenes por consola
 $ composite -geometry 96x96+250+70 delante.jpg fondo.jpg imagen.jpg 
 $ composite -dissolve 50 -gravity Center una.png  dos.png salida.png
 $ composite -tile una.png dos.png salida.png (Cubre la dos.png con imagenes una.png
@@ -2399,7 +2398,7 @@ $ compton -cC -i 0.6 -e 0.6 -fF -I 0.065 -O 0.065 -D 6 -m 0.8 (Especificar la op
 
 
 consolochars
-Modificar las fuentes en las consolas reales [tty1-6]
+Modificar las fuentes en las consolas [tty1-6]
 # consolechars -f fuentes
 Nota.- Listado en /usr/share/consolefonts , /usr/lib/kbd/consolefonts, /usr/share/kbd/consolefonts según distro
 
