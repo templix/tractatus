@@ -2621,8 +2621,8 @@ Lista ficheros que presumiblemente sobran, faltan o están de alguna forma incor
 # cruft --ignore /home/usuario (Descartando un directorio)
 
 
-csscapture (python-cssutils)
-Capturar el css de una web.
+csscapture
+[python-cssutils]. Capturar el css de una web.
 $ csscapture -s web http://www.tuxapuntes.com (guarda en la carpeta “web”)
 
 
@@ -2633,19 +2633,18 @@ Montar una impresora en red:
 En la máquina servidor (la que tiene conectada la impresora)
 	# nano /etc/cups/cupsd.conf
 Comentar la linea “Listen localhost:631” y añadir la ip de la máquina: “Listen 192.168.2.3:631” y en el siguiente apartado añadir los parámetros de la red:
-# Restrict access to the server…
-<Location />
-Order allow,deny
-Allow localhost
-Allow @LOCAL
-# permisos a la red local
-Allow from 192.168.2.0/24
-</Location>
+	# Restrict access to the server…
+	<Location />
+		Order allow,deny
+		Allow localhost
+		Allow @LOCAL
+		# permisos a la red local
+		Allow from 192.168.2.0/24
+	</Location>
 Para activar la compartición de impresoras:
 Browsing on
 	# /etc/init.d/cupsd restart (reiniciar cups)
-Abrir el navegador y escribir http://localhost:631 después del logeo ir a la pestaña printers y seleccionar la impresora, con lo que nos quedará en la barra de navegación algo parecido a:
-http://localhost:631/printers/PSC-1100
+Abrir el navegador y escribir http://localhost:631 después del logeo ir a la pestaña printers y seleccionar la impresora, con lo que nos quedará en la barra de navegación algo parecido a: http://localhost:631/printers/PSC-1100
 Que sustituyendo “localhost” por la dirección ip de la máquina nos dará la dirección de la impresora:
 http://192.168.2.3:631/printers/PSC-1100
 En las máquinas cliente
