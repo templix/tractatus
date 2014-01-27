@@ -11296,6 +11296,22 @@ Arreglar el error: PHP Deprecated:  Comments starting with '#' are deprecated in
 	Y cambiar el “#” de los comentarios por un “;”
 
 
+phpshell
+[apache2 php5 libapache2-mod-auth-mysql php5-mysql]. Script en php que proporciona una terminal en el navegador. Descarga de http://sourceforge.net/projects/phpshell/?source=dlp. Para la      versión 2.4:
+$ wget http://sourceforge.net/projects/phpshell/files/phpshell/2.4/phpshell-2.4.zip
+$ unzip phpshell-2.4.zip
+Mover la carpeta al directorio web y darle un nombre:
+$ mv phpshell-2.4/ /var/www/shell
+Renombrar:
+$ cd /var/www/shell
+$ mv phpshell.php index.php
+Entrar en el navegador y acceder en la dirección: http://localhost/shell/pwhash.php para entrar un nombre de usuario y una contraseña. Completado el registro, pulsar "update". Copiar el hash  que muestra y pegarlo en el archivo de configuración:
+$ nano /var/www/shell/config.php
+Pegar el hash en el apartado [users]
+	templix = "sha1:2ud9a08b:27w6806b770f9716a9ec3f9b72a402e3b0a8b6e5"
+Entrar en phpshell colocando en el navegador: http://localhost/shell
+
+
 pi
 Calcula la cantidad de decimales de pi que se le indique.
 $ pi 100
