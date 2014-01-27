@@ -2718,18 +2718,18 @@ Cortar conexiones no deseadas
 # cutter 192.168.2.6   (solo IP)
 
 
-dansguardian (squid)
-Filtro de contenidos web (cliente) que trabaja conjuntamente con el servidor proxy squid (servidor).
+dansguardian
+[squid]. Filtro de contenidos web [cliente] que trabaja conjuntamente con el servidor proxy squid [servidor].
 Adaptar el archivo de configuración:
 # nano /etc/dansguardian/dansguardian.conf
-Algunos parámetros a especificar (caso de no estarlo):
-language = 'spanish'
-reportinglevel = 3 #valores de 1, 2 y 3
-filterport = 8080
-proxyip = 127.0.0.1 #La misma ip del proxy squid
-proxyport = 3128
+Algunos parámetros a especificar [caso de no estarlo]:
+	language = 'spanish'
+	reportinglevel = 3 #valores de 1, 2 y 3
+	filterport = 8080
+	proxyip = 127.0.0.1 #La misma ip del proxy squid
+	proxyport = 3128
 Guardar el archivo.
-El listado de conceptos (ip, nombre de dominio, frases... ) por los que se puede banear y conceptos excluidos en:
+El listado de conceptos [ip, nombre de dominio, frases... ] por los que se puede banear y conceptos excluidos en:
 # ls /etc/dansguardian/lists/
 Algunos de los más usuales:
 bannedextensionlist (extensiones no permitidas) 
@@ -2769,21 +2769,21 @@ $ date -s "2010-01-10 16:59"  (forma de establecer la fecha y hora actual)
 $ date –u 0110170210  (Otra forma de establecer la fecha. mes 01, día 10, hora 17:02 y año 2010) 
 $ date +"%A,%d-%m-%Y" 
 Algunas opciones:
-%D  .- fecha (mm/dd/yy)
-%T   .- hora:minutos:segundos (formato 24h)
-%R   .- hora:minutos (formato 24h)
-%d   .- día del mes (2 dígitos)
-%m  .- mes (2 digitos)
-%y   .- año (2 dígitos)
-%Y   .- año (4 dígitos)
-%a   .- nombre abreviado del día.
-%A   .- nombre completo del día.
-%b   .- nombre abreviado del mes.
-%B   .- nombre completo del mes.
-%H   .- hora (2 dígitos) (0-23h)
-%I    .- hora (2 digitos) (0-12h)
-%M  .- Solo los minutos
-%S   .- Solo los segundos
+	%D (fecha en formato mm/dd/yy)
+	%T (hora:minutos:segundos en formato 24h)
+	%R (hora:minutos en formato 24h)
+	%d (día del mes con 2 dígitos)
+	%m (mes con 2 digitos)
+	%y (año con 2 dígitos)
+	%Y (año con 4 dígitos)
+	%a (nombre abreviado del día)
+	%A (nombre completo del día)
+	%b (nombre abreviado del mes)
+	%B (nombre completo del mes)
+	%H (hora con 2 dígitos en formato 0-24h)
+	%I (hora con 2 digitos en formato 0-12h)
+	%M (Solo los minutos)
+	%S (Solo los segundos)
 $ date +"%A,%d-%m-%Y" --date '1966/4/20 20500 days' (Para saber cuando alguien cumplirá 20500 días desde su nacimiento)
 $ watch -n1 'banner `date +%T`' (Rejoj digital en ascii)
 1.-
@@ -2792,8 +2792,8 @@ $ TZ="America/Guatemala" date (Muestra la hora actual de Guatemala)
 $ TZ="Europe/Berlin" date (Muestra la de Berlin)
 
 
-dav (dav-text)
-Editor minimalista para ncurses.
+dav
+[dav-text]. Editor minimalista para ncurses.
 $ dav archivo.txt
 
 
@@ -2831,7 +2831,7 @@ $ ddate +%d-%B-%Y
 
 
 ddclient
-Configurar pc con una ip fija. Requiere registro en dyndns.org. Durante la instalación  ya preguntará los datos del registro en pero si se prefiere puede editarse el archivo de configuración y colocarlos a mano
+Configurar pc con una ip fija. Requiere registro en dyndns.org. Durante la instalación preguntará los datos del registro pero si se prefiere puede editarse el archivo de configuración y colocarlos a mano
 # gedit /etc/ddclient.conf
 Completar los campos login y password con los datos correspondientes: 
 protocol=dyndns2 
@@ -2842,8 +2842,8 @@ password='contraseña_de_dyndns'
 nombre_de_dominio.com
 
 
-ddrescue (make gcc g++)
-Recuperación de discos dañados. Proceso: 
+ddrescue
+[make gcc g++]. Recuperación de discos dañados. Proceso: 
 Descargar el paquete dd_rhelp (Comprobar si existe una versión posterior): 
 $ wget http://www.kalysto.org/pkg/dd_rhelp-0.1.2.tar.gz 
 $ cd dd_rhelp-0.1.2 
@@ -2947,8 +2947,7 @@ Lo encontraremos en aplicaciones/juegos
 
 
 debget
-[debian-goodies]
-Descarga un paquete del repositorio o, caso de estar instalado, muestra la versión.
+[debian-goodies]. Descarga un paquete del repositorio o, caso de estar instalado, muestra la versión.
 $ debget debian-goodies
 $ debget 0ad
 
@@ -3019,11 +3018,11 @@ Protege contra ataques.
 Configuración: 
 # nano /etc/denyhosts.conf 
 Algunas opciones: 
-SECURE_LOG = /var/log/auth.log (Ruta a los logs) 
-DENY_THRESHOLD_INVALID = 5 (Intentos fallidos permitidos con una cuenta que no existe) 
-DENY_THRESHOLD_VALID = 5 (Intentos falllidos con usuarios validos) 
-PURGE_DENY =5d (Tiempo de baneo de una IP. 5 dias en este caso) 
-BLOCK_SERVICE = sshd (Servicios que queremos proteger [ sshd, ALL...) 
+	SECURE_LOG = /var/log/auth.log (Ruta a los logs) 
+	DENY_THRESHOLD_INVALID = 5 (Intentos fallidos permitidos con una cuenta que no existe) 
+	DENY_THRESHOLD_VALID = 5 (Intentos falllidos con usuarios validos) 
+	PURGE_DENY =5d (Tiempo de baneo de una IP. 5 dias en este caso) 
+	BLOCK_SERVICE = sshd (Servicios que queremos proteger [ sshd, ALL...) 
 Nota.- Tambien es posible arrancar el servicio con la opción "purge"  [/etc/init.d/denyhosts start --purge] para eliminar las ips bloqueadas y que se muestran en /etc/hosts.deny 
 
 
@@ -3174,8 +3173,8 @@ Compara dos archivos pdf.
 $ diffpdf archivo1.pdf archivo2.pdf
 
 
-dig (dnsutils)
-Realizar consultas a los servidores DNS
+dig
+[dnsutils]. Realizar consultas a los servidores DNS
 $ dig tuxapuntes.com
 $ dig telefonica.net NS  (Mostrando los servidores DNS del dominio)
 $ dig -x 74.220.215.64 (Resolución inversa)
