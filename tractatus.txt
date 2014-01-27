@@ -20,8 +20,7 @@ Para el análisis del archivo dump.pcap  puedes usar wireshark entre otros.
 
 
 7zip
-[7zip-rar] 
-Compresor/descompresor
+[7zip-rar]. Compresor/descompresor
 $ 7z a fichero.7z fichero (comprime) 
 $ 7z e comprimido (Descomprime) 
 $ 7z l comprimido (Muestra las propiedades) 
@@ -79,12 +78,11 @@ $ aa3d -d < texto.txt (Usando solo números)
 
 
 aafire
-[caca-utils]
-Fuego animado en ascii. En algunas distros cacafire [ver]
+[caca-utils]. Fuego animado en ascii. En algunas distros cacafire [ver]
 
 
 aajm 
-Malabarista en la terminal 
+Malabarista en la terminal. 
 $ aajm -drive curses (para lanzarlo en las tty) 
 $ aajm -t Reverse (especificar el estilo. Las opciones de estilo son: Normal, Reverse, Shower, Mills Mess, Center, Windmill y Random) 
 Opciones durante la actuación: 
@@ -103,14 +101,14 @@ $ aaphoto --flipy imagen.png (espejo vertical)
 $ aaphoto --flipx --rotate180 imagen.png (espejo horizontal y rotandola 180º)
 
 
-ab (apache2-utils) 
-Mostrar la capacidad de respuesta de un servidor WEB 
+ab
+[apache2-utils]. Mostrar la capacidad de respuesta de un servidor WEB 
 $ ab -n 100 -c 10 localhost:80/index.html (Con 100 conexiones y 10 simultaneas) 
 $ ab -n 9000 -c 900 -e test.txt http://www.google.com/ (Escribe en un archivo el tiempo (milisegundos) que tomó para servir a ese porcentaje de las solicitudes)
 
 
-abcde (lame, cdparanoia, id3v2, vorbis-tools, cd-discid, normalize.)
-Extraer pistas de audio de un cd
+abcde
+[lame, cdparanoia, id3v2, vorbis-tools, cd-discid, normalize]. Extraer pistas de audio de un cd.
 $ abcde -d /dev/sdc1 -N -x -o mp3 (extrae disco completo en archivos mp3)
 $ abcde -d /dev/sdc1 -N -x -o ogg (extrae disco completo en archivos ogg)
 $ abcde -d /dev/sdc1 -N -x -o ogg tracks 1-3 5 (extrae las tres primeras canciones y la quinta)
@@ -131,8 +129,8 @@ Un montón de ejemplos de bash scripting. Listado en:
 $ ls /usr/share/doc/abs-guide/examples/
 
 
-ac (acct)
-Reporta los tiempos de conexión...
+ac
+[acct]. Reporta los tiempos de conexión...
 $ ac -d    (... del presente mes)
 $ ac -p    (... totales de cada usuario)
 
@@ -197,22 +195,22 @@ Sistema de detección de intrusos. No evita la intrusión, sólo informa que est
 Nota.- Los archivos de configuración: /etc/aide/aide.conf.d/, /etc/aide/aide.conf y /etc/default/aide
 
 
-airmon (aircrack-ng)
-Utilidad que coloca la tarjeta de red en modo monitor.
+airmon
+[aircrack-ng]. Utilidad que coloca la tarjeta de red en modo monitor.
 # airmon-ng start wlan0 (Iniciar el modo monitor)
 # airmon-ng stop wlan0 (Finalizarlo)
 # airmon-ng start wlan0 5 (Eespecificando un canal)
 Nota.- Confirmar que la tarjeta está en modo monitor con iwconfig. 
 
 
-airodump (aircrack-ng) 
-Escaneo wifi y captura de paquetes. Previamente la tarjeta tiene que estar en modo monitor [ver airmon]
+airodump
+[aircrack-ng]. Escaneo wifi y captura de paquetes. Previamente la tarjeta tiene que estar en modo monitor [ver airmon]
 # airodump-ng mon0 (Escanear redes disponibles. Para con Ctrl + c) 
 # airodump-ng -c 8 --bssid BSSID –w captura.cap mon0 (que guarde las capturas del canal 8 de la dirección MAC [BSSID] en el archivo "captura.cap" de la interfaz de red mon0)
 
 
 ajaxplorer
-Crear un owncloud (o dropbox) en local. Una vez instalado:
+Crear un owncloud [tipo dropbox] en local. Una vez instalado:
 # cp /usr/share/doc/ajaxplorer/apache2.sample.conf /etc/apache2/sites-enabled/ajaxplorer.conf
 Reiniciar apache:
 # service apache2 restart
@@ -333,8 +331,8 @@ $ rm -Rf .gnome2/keyrings/login.keyring
 # killall gnome-keyring-daemon  (matar el demonio)
 
 
-animate (imagemagick)
-visualizar gif
+animate
+[imagemagick]. visualizar gif.
 $ animate vuelo.gif
 
 
@@ -350,14 +348,14 @@ $ antiword archivo.doc | less (Visualiza un doc)
 $ antiword -p A4 archivo.doc > archivo.ps (Convierte a ps) 
 $ antiword -t -w 25 archivo.doc > archivo.txt (Convierte a txt) 
 Algunas opciones: 
--p (Formato PostScript. 10x14, A3, A4, A5, B4, B5, ejecutivo, folio...) 
--a (Formato Adobe. 10x14, A3, A4, A5, B4, B5, ejecutivo, folio...) 
--t (Salida en forma de texto con formato: negrita, subrayado...) 
--w (Anchura del texto)
+	-p (Formato PostScript. 10x14, A3, A4, A5, B4, B5, ejecutivo, folio...) 
+	-a (Formato Adobe. 10x14, A3, A4, A5, B4, B5, ejecutivo, folio...) 
+	-t (Salida en forma de texto con formato: negrita, subrayado...) 
+	-w (Anchura del texto)
 
 
-aoss (espeak, alsa-oss, mbrola)
-Para que la consola hable.
+aoss
+[espeak, alsa-oss, mbrola]. Para que la consola hable.
 $ aoss espeak --voices   (ver las opciones idiomáticas) 
 $ aoss espeak --voices=es (ver las variantes de un idioma)
 $ aoss espeak -v es+whisper -p30 linux,es,un,sistema,genial
@@ -365,13 +363,13 @@ $ aoss espeak -v es+f4 -p30 “linux es un sistema genial”  (lo mismo entre co
 $ aoss espeak -v es+m2 -f archivo.txt  (lee de un archivo txt)
 $ aoss espeak -v es -s50 -w archivo.wav "linux es un sistema genial" (Crear un wav)
 Opciones:
--v en (para que hable en inglés)
--s110 (variar velocidad de dicción. A número más alto, más velocidad)
--p90 (tesitura de voz. De 0 a 99. Valor alto: agudos. Por defecto 50)
--a50 (Volumen de salida. De 0 a 200. Por defecto 100)
--g15 (Silencio entre palabras. Por defecto 10 milisegundo)
--v es+croak [m1,m2,m3,m4,m5,m6 y whisper] (opciones de voz masculinas)
--v es+f1 [f2,f3 yf4]  (opciones de voz femeninas)
+	-v en (para que hable en inglés)
+	-s110 (variar velocidad de dicción. A número más alto, más velocidad)
+	-p90 (tesitura de voz. De 0 a 99. Valor alto: agudos. Por defecto 50)
+	-a50 (Volumen de salida. De 0 a 200. Por defecto 100)
+	-g15 (Silencio entre palabras. Por defecto 10 milisegundo)
+	-v es+croak [m1,m2,m3,m4,m5,m6 y whisper] (opciones de voz masculinas)
+	-v es+f1 [f2,f3 yf4]  (opciones de voz femeninas)
 
 
 apache2 
@@ -698,22 +696,21 @@ Conjunto de herramientas cliente-servidor, para el análisis de tráfico de red.
 # ra -a -c -L0 -nr skipe.arg - host IP (Filtrar una sola IP)
 
 
-arithmetic (bsd-games)
-Resolución de problemas matemáticos muy simples.
+arithmetic
+[bsd-games]. Resolución de problemas matemáticos muy simples.
 $ arithmetic -o +- -r 30 (Usando sumas y restas y del 0 al 30)
 $ arithmetic -o x/ (con multiplicaciones y divisiones del 0 al 10 [por defecto])
 
 
 arm
-[tor-arm]
-Herramienta que permite monitorizar el comportamiento y los eventos que usan la red tor [tor-browser, vidalia....]. Funciona de forma similar al comando top.
+[tor-arm]. Herramienta que permite monitorizar el comportamiento y los eventos que usan la red tor [tor-browser, vidalia....]. Funciona de forma similar al comando top.
 # arm
 Las teclas de control se muestran en la parte superior y son:
-m (Muestra el menú)
-p (Pausar)
-h (Ayuda)
-q (Salir)
-flechas derecha e izquierda (Va mostrando los distintos informes)
+	m (Muestra el menú)
+	p (Pausar)
+	h (Ayuda)
+	q (Salir)
+	flechas derecha e izquierda (Va mostrando los distintos informes)
 
 
 arp
@@ -828,11 +825,11 @@ aterm
 Emulador de terminal 
 $ aterm -e links2 http://google.es 
 Opciones: 
--geometry 100x15 (Especificando medidas) 
--pixmap imagen (Con una imagen de fondo) 
--bg red  (color de fondo) 
--fg white (color de fuente) 
--cr blue (Color del cursor) 
+	-geometry 100x15 (Especificando medidas) 
+	-pixmap imagen (Con una imagen de fondo) 
+	-bg red  (color de fondo) 
+	-fg white (color de fuente) 
+	-cr blue (Color del cursor) 
 
 
 atop
@@ -843,8 +840,8 @@ atsar
 Ver entrada sar
 
 
-auditd (audit) 
-Demonio especificamente diseñado para registrar cualquier modificación en ficheros y carpetas. Por ejemplo, para registrar todos los sucesos via ssh: 
+auditd
+[audit]. Demonio especificamente diseñado para registrar cualquier modificación en ficheros y carpetas. Por ejemplo, para registrar todos los sucesos via ssh: 
 # nano /etc/pam.d/sshd 
 Y añadir la linea: 
 session required pam_loginuid.so 
@@ -876,8 +873,7 @@ Nota.- son el nombre de usuario y contraseña del registro en https://aur.archli
 
 
 auth2db
-Análisis de los logs según lo especificado en /etc/auth2db/filters.conf
-http://localhost/auth2db  (usuario y contraseña por defecto: admin/admin)
+Análisis de logs según lo especificado en /etc/auth2db/filters.conf. Acceso http://localhost/auth2db [usuario y contraseña por defecto: admin/admin]
 
 
 automater
@@ -907,8 +903,8 @@ Convierte los datos de imagen de mapa de bits en gráficos vectoriales
 $ autotrace imagen.png --output-file imagen.svg
 
 
-avconv (avconvert)
-Información sobre archivos multimedia y conversión de formatos.
+avconv
+[avconvert]. Información sobre archivos multimedia y conversión de formatos.
 $ avconv -i video.avi video.mpeg  (Pasar de avi a mpeg)
 $ avconv -i video.avi (Información sobre un archivo)
 $ avconv -i archivo.avi -an nuevo.avi (Sacar el sonido de un avi)
@@ -928,8 +924,8 @@ Informa de la presencia de virus. No los suprime.  (descarga: http://free.avg.co
 # avgscan --clean /home/usuario (escanear)
 
 
-avimerge (transcode, transcode-utils)
-Unir varios videos en uno
+avimerge
+[transcode, transcode-utils]. Unir varios videos en uno.
 $ avimerge -o todos.avi -i 1.avi 2.avi 3.avi 
 $ avimerge -o todos.avi -i *.avi  (todos los videos de un directorio en uno)
 
@@ -1093,10 +1089,11 @@ En bash:
 
 
 awstats
-[libnet-dns-perl libnet-ip-perl libnet-xwhois-perl]
-Estadísticas de la red local
-En el fichero de configuración (/etc/awstats/awstats.conf) comprobar: 
-LogFile="/var/log/apache2/access.log" 
+[libnet-dns-perl libnet-ip-perl libnet-xwhois-perl]. Estadísticas de la red local.
+configuración mínima:
+$ nano /etc/awstats/awstats.conf
+Verificar: 
+LogFile="/var/log/apache2/access.log"
 SiteDomain=”tu_dominio.com” (entre comillas nombre del host)
 LogFormat=1 (El usado por apache)
 AllowToUpdateStatsFromBrowser=1 (Actualizar via navegador) 
@@ -1137,8 +1134,8 @@ connection_timeout = 30
 Que realice 10 conexiones por cada archivo y sin límite de descarga.
 
 
-badblocks (e2fsprogs)
-Utilidad para reparar sectores dañados del disco duro o pendrive. Trabajar con la unidad desmontada.
+badblocks
+[e2fsprogs]. Utilidad para reparar sectores dañados del disco duro o pendrive. Trabajar con la unidad desmontada.
 # badblocks -s -v -n -f /dev/sda  (recuperar y reparar sectores dañados)
 # badblocks -w -t random -s -v /dev/sda (Borrar un disco de forma segura)
 # badblocks -s -w archivo.txt (Borrar de forma segura un archivo [irrecuperable])
@@ -1168,8 +1165,8 @@ $ banner -l linux   (forma cada letra con la misma letra diminuta)
 $ banner -Cck linux  (centrado y con la letra “k” formando la palabra “linux”) 
 
 
-base64 (cl-base64)
-Codificador/descodificador de textos
+base64
+[cl-base64]. Codificador/descodificador de textos
 cat archivo| base64 > cifrado (cifrar "archivo" y volcarlo en "cifrado")
 cat cifrado | base64 -d > descifrado (descifrar "cifrado" y volcarlo en "descifrado")
 $ base64 archivo.txt  (codifica todo el texto de archivo.txt en consola)
@@ -1349,15 +1346,15 @@ $ ls -lF /dev/disk/by-uuid/
 # blkid -i /dev/sda (Información sobre los sectores)
 
 
-bluetooth (gnome-bluetooth bluez-utils bluez-passkey-gnome bluez-pin )
-Enviar archivos a dispositivos
+bluetooth
+[gnome-bluetooth bluez-utils bluez-passkey-gnome bluez-pin]. Enviar archivos a dispositivos externos.
 $ hcitool scan  (buscar dispositivo) 
 $ sdptool browse XX:XX:XX:XX:XX:XX (Con su identificador buscar el canal a utilizar) 
 $ obexftp -b XX:XX:XX:XX:XX:XX -B 2 -p foto.jpg  (mandar el archivo) 
 Opciones 
--b	indica el identificador del dispositivo. 
--B	canal. 
--p	Archivo a enviar. 
+	-b	indica el identificador del dispositivo. 
+	-B	canal. 
+	-p	Archivo a enviar. 
 En el dispositivo deberemos aceptar la transferencia
 1.- 
 En /etc/bluetooth/pin introducimos la clave de acceso, normalmente 1234. 
@@ -1390,14 +1387,14 @@ $ bookman -p -t “Paginas man” /usr/man/man1/* > man.pdf (en formato pdf [-p]
 bootchart
 Ver el proceso de arranque en una imagen png. En la entrada del kernel en el grub colocar: init=/sbin/bootchartd
 Ejemplo:
-title  Arch Linux
-root   (hd0,0)
-kernel /boot/vmlinuz26 root=/dev/sda2 init=/sbin/bootchartd ro
-initrd /boot/kernel26.img
+	title  Arch Linux
+	root   (hd0,0)
+	kernel /boot/vmlinuz26 root=/dev/sda2 init=/sbin/bootchartd ro
+	initrd /boot/kernel26.img
 Cuando el sistema haya arrancado lanzar:
 # bootchart-render
-Parsing /var/log/bootchart.tgz
-Wrote image: ./bootchart.png
+	Parsing /var/log/bootchart.tgz
+	Wrote image: ./bootchart.png
 Lo que convertirá el ilegible archivo bootchart.tgz en una imágen en nuestro home. El archivo de configuración en /etc/bootchartd.conf
 
 
@@ -1419,8 +1416,7 @@ Algunas otras opciones:
 
 
 bozocrack 
-https://github.com/juuso/BozoCrack 
-Craquear contraseñas de hash md5 a partir de los resultados de su busqueda en google. 
+Craquear contraseñas de hash md5 a partir de los resultados de su busqueda en google. Descarga de <https://github.com/juuso/BozoCrack 
 Proceso: 
 Copiar el hash o hashses uno debajo de otro en un archivo de texto 
 $ bozocrack archivo.txt 
@@ -1475,8 +1471,8 @@ Descomprime ficheros bz2.
 $ bunzip2 archivo.bz2
 
 
-burnP6 (cpuburn)
-Colocar la cpu al 100%. Si existen varios nucleos lanzar una instancia para cada uno. Existen varias opciones según el tipo de nucleo: burnBX, burnK6, burnK7, burnMMX, burnP5 y burnP6.
+burnP6
+[cpuburn]. Colocar la cpu al 100%. Si existen varios nucleos lanzar una instancia para cada uno. Existen varias opciones según el tipo de nucleo: burnBX, burnK6, burnK7, burnMMX, burnP5 y burnP6.
 $ burnP6   
 
 
@@ -1496,27 +1492,27 @@ Nota.- Si durante la ejecución pulsamos la tecla “h” accederemos a un menú
 byobu
 Terminal tipo screen [ver] o tmux [ver] con una barra inferior que muestra consumos de cpu, ram, hora, fecha...
 Algunas teclas de control:
-F2 (crear nueva pestaña)
-F3 (Ir a la pestaña anterior)
-F4 (Ir a la pestaña posterior)
-F5 (Refrescar estado)
-F6 (Salir dejando la terminal activa)
-F7 (Mostrar historial)
-F8 (Renombrar la pestaña)
-F9 (Configurar byobu)
-exit (Salir)
+	F2 (crear nueva pestaña)
+	F3 (Ir a la pestaña anterior)
+	F4 (Ir a la pestaña posterior)
+	F5 (Refrescar estado)
+	F6 (Salir dejando la terminal activa)
+	F7 (Mostrar historial)
+	F8 (Renombrar la pestaña)
+	F9 (Configurar byobu)
+	exit (Salir)
 
 
 byzanz 
 Grabar el escritorio o parte de él con salida en GIF animado, Theora, Ogg o Flash. 
 $ byzanz-record -c -d 20 archivo.gif (Incluyendo puntero [-c] y durante 20 segundos. por defecto 10 segundos) 
 algunas opciones: 
--a (tambien grabar sonido) 
---delay=5 (Empezar pasados 5 segundos. Por defecto 1) 
--w 500 (grabar rectángulo de 500 pixels de ancho) 
--h 400 (grabar rectángulo de 400 pixels de alto) 
--x 30 (coordenadas x para el rectángulo) 
--y 60 (coordenadas y para el rectángulo)
+	-a (tambien grabar sonido) 
+	--delay=5 (Empezar pasados 5 segundos. Por defecto 1) 
+	-w 500 (grabar rectángulo de 500 pixels de ancho) 
+	-h 400 (grabar rectángulo de 400 pixels de alto) 
+	-x 30 (coordenadas x para el rectángulo) 
+	-y 60 (coordenadas y para el rectángulo)
 
 
 bzcat
@@ -1533,8 +1529,7 @@ Busca las diferencias entre dos ficheros comprimidos con bzip2 (Ver diff)
 
 
 bzexe
-[bzip2]
-Comprimir/descomprimir ejecutables.
+[bzip2]. Comprimir/descomprimir ejecutables.
 # bzexe ejecutable
 # bzexe -d ejecutable (Descomprimir)
 
@@ -1546,11 +1541,11 @@ $ bzgrep pedro archivo.bz2 (Imprime las las que coinciden con “pedro”)
 
 bzip2
 comprime un fichero [ni empaqueta ni comprime directorios]
-$ bzip2 fichero                   (Comprimir)
-$ bzip2 -d fichero.bz2         (Descomprimir)
-$ bzip2 -c fichero.bz2          (Ver contenido)
-$ bzip2 -dc archivo.tar.bz2 | tar -xv  (Descomprime y desempaqueta)
-$ bzip2 -dc archivo.tar.bz2 | tar -t  (Ver contenido)
+$ bzip2 fichero (Comprimir)
+$ bzip2 -d fichero.bz2 (Descomprimir)
+$ bzip2 -c fichero.bz2 (Ver contenido)
+$ bzip2 -dc archivo.tar.bz2 | tar -xv (Descomprime y desempaqueta)
+$ bzip2 -dc archivo.tar.bz2 | tar -t (Ver contenido)
 
 
 bzip2recover
@@ -1559,8 +1554,7 @@ $ bzip2recover archivo.bz2
 
 
 bzless
-[bzip2]
-Muestra el contenido de un archivo .bz2 comprimido con bzip2 de forma parecida al comando less [ver]
+[bzip2]. Muestra el contenido de un archivo .bz2 comprimido con bzip2 de forma parecida al comando less [ver]
 $ bzless archivo.txt.bz2
 
 
@@ -1581,8 +1575,7 @@ $ cabextract archivo.cab
 
 
 cacaclock
-[caca-utils]
-Muestra un reloj digital en ascii
+[caca-utils]. Muestra un reloj digital en ascii
 
 
 cacademo
@@ -1590,13 +1583,11 @@ Demostración de arte ascii a color
 
 
 cacafire
-[caca-utils]
-Fuego animado a color en ascii
+[caca-utils]. Fuego animado a color en ascii
 
 
 cacaserver
-[caca-utils]
-Servidor telnet para librerias libcaca.
+[caca-utils]. Servidor telnet para librerias libcaca.
 En el servidor:
 $ CACA_DRIVER=raw cacafire | cacaserver
 En el remoto:
@@ -1604,37 +1595,36 @@ $ telnet IP_o_Host 51914
 
 
 cacaview
-[caca-utils]
-Visualizar imágenes en modo ascii y a color
+[caca-utils]. Visualizar imágenes en modo ascii y a color
 $ cacaview imagen.jpg  
 
 
 cadubi 
 Crear dibujos en la consola. 
 teclas: 
-i j k l    (Las que gobiernan el cursor: arriba [i], izquierda [j], derecha [l] y abajo [k]) 
-spacio     (la brocha)  
-del o `    (borrar caracter) 
-p          (Cambiar la letra de la brocha) 
-f      	   (Modificar el color de la letra) 
-b          (Modificar el color de fondo de la letra) 
-g          (Letra en negrita) 
-v          (Permutar los colores del fondo y la letra) 
-t          (Pasar a modo texto. "Esc" para salir de modo texto) 
-Crtl+r     (Abrir un archivo o un dibujo anterior) 
-Ctrl+o     (Guardar el archivo) 
-Ctrl+h     (Desplegar/ocultar la ayuda) 
-Ctrl+x     (Salir del prigrama) 
+	i j k l (Las que gobiernan el cursor: arriba [i], izquierda [j], derecha [l] y abajo [k]) 
+	spacio (la brocha)  
+	del o ` (borrar caracter) 
+	p (Cambiar la letra de la brocha) 
+	f (Modificar el color de la letra) 
+	b (Modificar el color de fondo de la letra) 
+	g (Letra en negrita) 
+	v (Permutar los colores del fondo y la letra) 
+	t (Pasar a modo texto. "Esc" para salir de modo texto) 
+	Crtl+r (Abrir un archivo o un dibujo anterior) 
+	Ctrl+o (Guardar el archivo) 
+	Ctrl+h (Desplegar/ocultar la ayuda) 
+	Ctrl+x (Salir del prigrama) 
 Teclas de color. Es indistinto pulsar el número o la letra entre parentesis: 
-0 (n)      (Texto standard) 
-1 (w)      (Blanco) 
-2 (r)      (Rojo) 
-3 (g)      (Verde) 
-4 (y)      (Amarillo) 
-5 (b)      (Azul) 
-6 (m)      (Magenta) 
-7 (c)      (Cian) 
-8 (k)      (Negro) 
+	0 (n) (Texto standard) 
+	1 (w) (Blanco) 
+	2 (r) (Rojo) 
+	3 (g) (Verde) 
+	4 (y) (Amarillo) 
+	5 (b) (Azul) 
+	6 (m) (Magenta) 
+	7 (c) (Cian) 
+	8 (k) (Negro) 
 
 
 cal
@@ -1658,7 +1648,7 @@ Organizador de tareas por consola.
 
 
 calife
-Convertirse en root u otro usuario (parecido a sudo con menos privilegios).
+Convertirse en root u otro usuario [parecido a sudo con menos privilegios].
 $ califa
 En /etc/calife.auth añadir el/los usuario/s y el shell que se les autoriza:
 usuario:/bin/bash
@@ -1684,17 +1674,17 @@ canto
 Lector de noticias rss. Configuración en .canto/conf.py para abrir las noticias con firefox, modificar la linea: link_handler("firefox \"%u\"")
 $ canto -i archivo.opml (Entrar archivo de fuentes)
 Atajos:
-j / k (Bajar / subir por las fuentes)
-g (Abrir noticia en el navegador para firefox)
-. / , (Siguiente / anterior noticia sin leer)
-sapce	 (abrir noticia)
-q (salir)
-r (marcar fuente como leída)
-R (marcar todas las fuentes como leídas)
-u (Volver a marcar fuente como no leída)
-U (Volver a marcar todas las fuentes como no leídas)
-Ctrl + r (Actualizar fuentes)
-f (Buscar palabra en las noticias)
+	j / k (Bajar / subir por las fuentes)
+	g (Abrir noticia en el navegador para firefox)
+	. / , (Siguiente / anterior noticia sin leer)
+	space	 (abrir noticia)
+	q (salir)
+	r (marcar fuente como leída)
+	R (marcar todas las fuentes como leídas)
+	u (Volver a marcar fuente como no leída)
+	U (Volver a marcar todas las fuentes como no leídas)
+	Ctrl + r (Actualizar fuentes)
+	f (Buscar palabra en las noticias)
 
 
 caracteres-especiales
@@ -1812,8 +1802,8 @@ $ cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 10 | sed 1q (generar una contr
 $ cat listado.txt / | sed -e :a -e 's/^.\{1,20\}$/&_/;ta'  (coloca los nombres del listado uno detrás de otro y completa hasta 20 caracteres [1,10] con un guión bajo [&_])
 
 
-cb- (crunchbang-bin-scripts)
-Conjunto de scripts propios de la distro crunchbang.
+cb-
+[crunchbang-bin-scripts]. Conjunto de scripts propios de la distro crunchbang.
 cb-exit (Lanza el dialogo de salida)
 cb-welcome (script para reconfigurar el sistema. Arranca recien instalado el S.O)
 cb-lock (protector de pantalla)
@@ -1838,7 +1828,7 @@ $ ccd2iso imagen.img imagen.iso
 
 
 ccrypt
-Utilidad para poner contraseña a un archivos o directorios (sustituye el original).
+Utilidad para poner contraseña a un archivos o directorios [sustituye el original].
 $ ccrypt -e fichero   (poner contraseña, confirmar y convierte el fichero en fichero.cpt)
 $ ccrypt -d fichero.cpt (abrirlo)
 $ ccrypt -c fichero.cpt (lo visualiza en consola. Como "cat")
@@ -1860,8 +1850,8 @@ $ cd ../.. (baja dos niveles)
 $ cd -   (entra en el último directorio en el que se ha estado)
 
 
-cdclose (cdtool)
-Cerrar el cd.
+cdclose
+[cdtool]. Cerrar el cd.
 $ cdclose -d /dev/sr0 (especificando el dispositivo [cdrom0...])
 
 
@@ -1871,18 +1861,18 @@ $ cdda2wav -B -H -D /dev/sdxx -s -x (extrae disco completo en archivos wav separ
 $ cdda2wav -H -D /dev/sdxx -s -x -t 5 (extrae la pista nº 5)
 
 
-cdeject (cdtool)
-Abrir el cd. Ver eject
+cdeject
+[cdtool]. Abrir el cd. Ver eject
 $ cdeject -d /dev/sr0 (especificando el dispositivo [cdrom0....])
 
 
-cdinfo (cdtool)
-Muestra Información del cd si se encuentra disponible.
+cdinfo
+[cdtool]. Muestra Información del cd si se encuentra disponible.
 $ cdinfo -d /dev/sr0
 
 
-cdir (cdtool)
-Información sobre el directorio del cd
+cdir
+[cdtool]. Información sobre el directorio del cd
 $ cdir -n (Duración de las canciones de un cd)
 $ cdir -d /dev/sr0 -r (Lo mismo especificando dispositivo)
 
@@ -1942,8 +1932,8 @@ Detector de codificación.
 $ chardet archivo
 
 
-chattr (ver lsattr)
-Cambia los atributos de ficheros (bloquea el fichero).
+chattr
+[ver lsattr]. Cambia los atributos de ficheros (bloquea el fichero).
 # chattr +i /etc/resolv.conf (impedirá modificaciones por  procesos o por root)
 # chattr -i /etc/resolv.conf    (lo desbloquea)
 # chattr -V -R +i /home/usuario/directorio (bloqueo recursivo y mostrando toda la información)
@@ -1963,8 +1953,7 @@ $ check-language-support -a (todos)
 
 
 checkrestart
-[debian-goodies]
-Muestra procesos activos que están utilizando una versión anterior de algún fichero que haya sido actualizado.
+[debian-goodies]. Muestra procesos activos que están utilizando una versión anterior de algún fichero que haya sido actualizado.
 	$ checkrestart -v
 	Found 0 processes using old versions of upgraded files
 Nota.- Aunque la salida muestre gran cantidad de paquetes [por ejemplo por tener una "testing" o por una actualización del navegador mientras este está activo] no es preciso reiniciar el sistema o la aplicación.
@@ -1978,14 +1967,14 @@ Servidor web
 
 
 chfn 
-modifica la información personal del usuario (nombre, domicilio, teléfono….) 
+modifica la información personal del usuario [nombre, domicilio, teléfono….] 
 $ chfn usuario (permite modificar todos los datos del usuario)
 Opciones 
--f nombre_completo 
--r domicilio 
--w teléfono_trabajo 
--h teléfono_particular 
--o otros datos 
+	-f nombre_completo
+	-r domicilio 
+	-w teléfono_trabajo 
+	-h teléfono_particular 
+	-o otros datos 
 
 
 chgrp
@@ -2008,8 +1997,8 @@ Buscar duplicados en ejecutables.
 $ chkdupexe
 
 
-chkrootkit (incluye las aplicaciones chktmp y chklastlog)
-Buscador de rootkits infiltrados en el sistema
+chkrootkit
+[incluye las aplicaciones chktmp y chklastlog]. Buscador de rootkits infiltrados en el sistema.
 # chkrootkit  (lanzar la aplicación)
 # chkrootkit -l  (visualizar las opciones de escaneo)
 # chkrootkit sshd tcpd  (verificar solo dos opciones)
@@ -2075,8 +2064,7 @@ $ chromium --incognito (Arrancar en modo privado. Para incluir por defecto este 
 
 
 chronic
-[moreutils]
-Mostrará el error por la salida estándar si el comando falla, tiene salida nula o se bloquea. Si el comando se ejecuta correctamente se ocultará cualquier salida.
+[moreutils]. Mostrará el error por la salida estándar si el comando falla, tiene salida nula o se bloquea. Si el comando se ejecuta correctamente se ocultará cualquier salida.
 $ chronic ls (No mostrará nada porque el comando ls se ejecuta correctamente)
 $ chronic lx (Mostrará el error)
 $ chronic man (Mostrará que necesita otro dato)
