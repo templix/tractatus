@@ -2456,13 +2456,13 @@ Por último, cambiar la clave de root ejecutando:
 Establecer norma en el sistema de que la contraseña tenga como nímino 8 caracteres:
 # nano /etc/pam.d/common-password
 Y dejar la linea:
-password        [success=2 default=ignore]      pam_unix.so obscure sha512 min=8
+	password        [success=2 default=ignore]      pam_unix.so obscure sha512 min=8
 5.-
 Página donde comprobar la fortaleza de una contraseña: <https://howsecureismypassword.net/>
 
 
-convert (imagemagick)
-redimensionar, cambiar formatos, extraer fotogramas, convertir blanco y negro imagenes. Este comando es tan extenso que él solo merecería un libro. Consulta más exhaustiva en http://www.imagemagick.org/script/convert.php o en español http://www.rpublica.net/imagemagick/intro.html#inicio_sec)
+convert
+[imagemagick]. Redimensionar, cambiar formatos, extraer fotogramas, convertir blanco y negro imagenes. Este comando es tan extenso que él solo merecería un libro. Consulta más exhaustiva en <http://www.imagemagick.org/script/convert.php> o en español <http://www.rpublica.net/imagemagick/intro.html#inicio_sec>
 $ convert *.jpg imagenes.pdf        (Crear un pdf con todas las imágenes)
 $ convert {1,2,3,4,5,6,7,8,9}.png imagenes.pdf (Lo mismo especificando páginas y orden)
 $ convert color.jpg -monochrome blanconegro.jpg (Convertir a blanco y negro)
@@ -2478,26 +2478,26 @@ $ convert imagen.png -pointsize 32 -gravity center -annotate 0 "Linux es genial"
 $ convert imagen.jpg -alpha set -channel A -fx 0.5 imagen.png (Aumentar la tranparencia de una imagen [valor de fx: 0 toda y 1 nada] y canviarla a jpg)
 $ convert -density 300 input.pdf -fill "rgb(255,255,255)" -opaque "rgb(29,5,114)" output.pdf  (convertir fondo negro a blanco para imprimir)
 $ convert entrada.jpg -font Bookman-Demi -pointsize 62 -stroke white -draw "text 5,60 'Texto'" salida.jpg (poner un texto en determinadas coordenadas [5,60] especificando fuente, medida y borde de las letras en blanco)
+Si quisieramos el texto en rojo añadiríamos: -fill red después de -stroke white)
 Algunas opciones:
--fill red (Letra roja)
--strokewidth 3 (Ancho del borde de letra)
--border 3 (Emmarcar la imagen con un borde de 3 pixels)
--frame  5x5+2+2 (Lo mismo estilo cuadro)
- Si quisieramos el texto en rojo añadiríamos: -fill red después de -stroke white)
-Notas.-”delay 60″ son 60 milisegundos por fotograma
-"resize 150×150" Respetará la proporción de la imagen.
-"imagen%02d"  Renombrará todas la imagenes con nombre “imagen” y dos dígitos.
-"imagen%03d"   Igual pero con tres dígitos.
+	-fill red (Letra roja)
+	-strokewidth 3 (Ancho del borde de letra)
+	-border 3 (Emmarcar la imagen con un borde de 3 pixels)
+	-frame  5x5+2+2 (Lo mismo estilo cuadro)
+	"delay 60" (son 60 milisegundos por fotograma)
+	"resize 150×150" (Respetará la proporción de la imagen.)
+	"imagen%02d" (Renombrará todas la imagenes con nombre “imagen” y dos dígitos.)
+	"imagen%03d" (Igual pero con tres dígitos.)
 $ ifconfig | convert -background yellow -fill black -font Courier -pointSize 14 label:@- ifconfig.png  (convertir la salida de un comando a imagen png)
-ifconfig .-	comando que se ejecuta
--background   .- color del fondo
--fill    .-	color del texto
--font  .-	fuente del texto
--pointSize .-tamaño del texto
-label:@-    .-Nombre del archivo a generar
+	ifconfig (comando que se ejecuta)
+	-background (color del fondo)
+	-fill (color del texto)
+	-font (fuente del texto)
+	-pointSize (tamaño del texto)
+	label:@- (Nombre del archivo a generar)
 Archivos nombre de fuentes, colores: /etc/ImageMagick/
 Tambien puede cambiarse el nombre de la fuente por su archivo:
--font /home/usuario/.fonts/Albert.ttf
+	-font /home/usuario/.fonts/Albert.ttf
 
 
 Copy
@@ -2542,11 +2542,11 @@ $ ls *.txt | cpio -ocv -O archivo.cpio (Creará [-o] "archivo.cpio" [-O] con tod
 cpio -icv < archivo.cpio (Extraer el contenido)
 $ cpio -it < file.cpio > indice (Crear un indice con el contenido de un archivo cpio) 
 Opciones:
--u (Sobreescribiendo si al extraer ya existe el fichero ya que sin este parámetro no lo hace)
--i (extraer archivos de un fichero)
--t (Desplegar sin extraer)
--r (Dar nombre a los archivos que se están extrayendo de forma interactiva)
--d (Extrae con la misma estructura de directorio, si así se creó el fichero)
+	-u (Sobreescribiendo si al extraer ya existe el fichero ya que sin este parámetro no lo hace)
+	-i (extraer archivos de un fichero)
+	-t (Desplegar sin extraer)
+	-r (Dar nombre a los archivos que se están extrayendo de forma interactiva)
+	-d (Extrae con la misma estructura de directorio, si así se creó el fichero)
 
 
 cpufreq-info
