@@ -6583,14 +6583,14 @@ Habilita la interfase especificada:
 $ ifup eth0
 
 
-img2txt (caca-utils, libcaca)
-Pasar una imagen a ascii 
+img2txt
+[caca-utils, libcaca]. Pasar una imagen a ascii.
 $ img2txt -f svg imagen.jpg > imagen.svg
 $ img2txt -f html imagen.jpg > imagen.html (código html de la imagen)
 
 
-import (imagemagick)
-Capturar la pantalla en cualquier formato
+import
+[imagemagick]. Capturar la pantalla en cualquier formato.
 $ import -window root captura.png (captura de pantalla completa)
 $ import -window `xwininfo | awk '/Window id/{print $4; exit}'` `uuidgen`.png (Lo mismo. El puntero se convierte en una cruz y captura el esritorio donde se clica)
 $ import captura.png (captura de un área concreta))
@@ -6687,8 +6687,8 @@ Y Agrega la siguiente linea:
 Siendo USUARIO el nombre de usuario que hará login automático.
 
 
-inputrc (archivo /etc/inputrc y ~/.inputrc) 
-Librería readline que permite editar líneas de texto usando los modos de emacs y vi. Esto permite estandarizar las combinaciones de teclas entre muchos comandos. 
+inputrc
+(archivo /etc/inputrc y ~/.inputrc). Librería readline que permite editar líneas de texto usando los modos de emacs y vi. Esto permite estandarizar las combinaciones de teclas entre muchos comandos. 
 $ nano .inputrc 
 Ajustes que pueden añadirse al archivo personal. 
 1.- 
@@ -6708,7 +6708,7 @@ Carga modulos.
 # insmod mudulo
 
 
-install-mbr (mbr)
+install-mbr
 Instala un nuevo código MBR al inicio del disco duro.
 # install-mbr /dev/sda (instala)
 # install-mbr -l /dev/sda (muestra información del código mbr)
@@ -6782,29 +6782,29 @@ managed=true
 
 
 inxi
-Muestra información del equipo (http://inxi.googlecode.com/svn/trunk/inxi).
+Muestra información del equipo (<http://inxi.googlecode.com/svn/trunk/inxi>).
 $ inxi -Fpur -c 4
 Algunas opciones (con inxi -h la lista completa):
--A (Audio y tarjetas de sonido)
--b (informacio básica)
--c (formato de color de 0 a 32 para la salida de datos)
--C (CPUs)
--d (drivers opticos)
--D (disco duro)
--F (salida extendida)
--G (tarjeta gráfica)
--i (Información de red)
--I (Procesos, uptime, memoria...)
--M (Datos de la máquina)
--N (tarjetas de red)
--o (particiones no montadas)
--p (particiones montadas)
--r (repositorios)
--s (sensors[temperaturas cpu])
--S (Host, Kernel,Escritorio y Distro) 
--t cm (Procesos que consumen más cpu [c] y memoria [m])
--u (UUID de las particiones. -uo las no montadas, -up las montadas)
--v 6 (Distintas etiquetas de información. Del 1 al 6)
+	-A (Audio y tarjetas de sonido)
+	-b (informacio básica)
+	-c (formato de color de 0 a 32 para la salida de datos)
+	-C (CPUs)
+	-d (drivers opticos)
+	-D (disco duro)
+	-F (salida extendida)
+	-G (tarjeta gráfica)
+	-i (Información de red)
+	-I (Procesos, uptime, memoria...)
+	-M (Datos de la máquina)
+	-N (	tarjetas de red)
+	-o (particiones no montadas)
+	-p (particiones montadas)
+	-r (repositorios)
+	-s (sensors[temperaturas cpu])
+	-S 	(Host, Kernel,Escritorio y Distro) 
+	-t cm (Procesos que consumen más cpu [c] y memoria [m])
+	-u (UUID de las particiones. -uo las no montadas, -up las montadas)
+	-v 6 (Distintas etiquetas de información. Del 1 al 6)
 
 
 iostat
@@ -6838,8 +6838,8 @@ $ iozone -a -g 2G -f /media/sda2
 -b (archivo que generará con los resultados)
 
 
-ip (comando)
-Configuración de red. Muestra dispositivos, enrutamientos, tuneles.
+ip
+(comando). Configuración de red. Muestra dispositivos, enrutamientos, tuneles.
 $ ip addr (Revisar tarjetas)
 $ ip route show (Información) 
 $ ip link show (Ver interfaces de red) 
@@ -6932,8 +6932,7 @@ Alguna sopciones que pueden añadirse:
 
 
 ipmitool
-[openipmi]
-Obtener datos del estado de un servidor [que lo soporte] tanto en local desde el propio servidor cómo en remoto. Se trata de un chipset que permite obtener información del estado de diferentes componentes hardware, temperaturas, voltajes, etc... Primero habilitar el demon ipmievd:
+[openipmi]. Obtener datos del estado de un servidor [que lo soporte] tanto en local desde el propio servidor cómo en remoto. Se trata de un chipset que permite obtener información del estado de diferentes componentes hardware, temperaturas, voltajes, etc... Primero habilitar el demon ipmievd:
 # nano /etc/default/ipmievd
 Y modificar la linea:
 ENABLED=true
@@ -7122,8 +7121,7 @@ $ cat /etc/issue.net
 
 
 isutf8
-[moreutils]
-No muestra salida si el archivo tiene una codificación UTF-8 válida. Si no es el caso muestra el aviso.
+[moreutils]. No muestra salida si el archivo tiene una codificación UTF-8 válida. Si no es el caso muestra el aviso.
 $ isutf8 archivo
 
 
@@ -7138,7 +7136,8 @@ Cuando está en ejecución, las teclas de control son:
 # itop -n 10 (Sólo muestra 10 procesos)
 
 
-ivstools (aircrack-ng)
+ivstools
+[aircrack-ng]
 Herramienta para unir/convertir archivos .ivs y .cap
 $ ivstools --merge captura1.ivs captura2.ivs captura3.ivs total.ivs
 $ ivstools --captura.cap nuevo.ivs
@@ -7258,8 +7257,7 @@ Luego volver a modificar la contraseña desde el panel de control de joomla.
 
 
 jot
-[athena-jot]
-Mostrar secuencias de datos o datos aleatorios.
+[athena-jot]. Mostrar secuencias de datos o datos aleatorios.
 $ jot 5 (Mostrar del 1 al 5)
 $ jot 5 20 (Mostrar 5 números consecutivos a partir del 20)
 $ jot 7 20 30 (Mostrar 7 números entre el 20 y el 30)
@@ -7424,8 +7422,8 @@ $ killall -INFO dd  (chequear el estado de un proceso dd)
 $ killall -u usuario (Matar los procesos de un	 usuario)
 
 
-kippo (python-foolscap pycrypto python2-zope-interface twisted python2-pyopenssl python-foolscap python2-pyasn1) 
-Construir un honeypot por ssh. 
+kippo
+[python-foolscap pycrypto python2-zope-interface twisted python2-pyopenssl python-foolscap python2-pyasn1]. Construir un honeypot por ssh. 
 Descargar y desenpaquetar kippo: 
 $ wget https://kippo.googlecode.com/files/kippo-0.5.tar.gz 
 $ tar xzf kippo-0.5.tar.gz 
@@ -7548,15 +7546,15 @@ Ctrl + Mayus + n (Entrar en modo privado)
 Ctrl + d (Entrar pagina en los marcadores)
 
 
-kvm-ok (check-bios-nx)
-Comprobar si la CPU  tiene soporte para extensiones KVM.
+kvm-ok
+[check-bios-nx]. Comprobar si la CPU  tiene soporte para extensiones KVM.
 # kvm-ok
 INFO: Your CPU does not support KVM extensions 
 KVM acceleration can NOT be used 
 
 
-kwin (kde-window-manager)
-Gestor de ventanas
+kwin
+[kde-window-manager]. Gestor de ventanas
 $ kwin --replace (Activar kwin)
 
 
@@ -7585,8 +7583,8 @@ Muestra los intentos de conexión fallidos (/var/log/btmp)
 # lastb   -20 (Muestra los últimos 20 intentos fallidos en logearse)
 
 
-lastcomm (acct)
-Muestra información acerca de comandos ejecutados y terminales abiertas. 
+lastcomm
+[acct)]. Muestra información acerca de comandos ejecutados y terminales abiertas. 
 $ lastcomm tmux tty1 (sólo muestra los epecificados)
 
 
@@ -7596,8 +7594,7 @@ $ lastlog -u usuario  (solo ver a "usuario")
 
 
 latex
-[texlive texlive-lang-spanish]
-Sistema de composición de textos, orientado especialmente a la creación de libros, documentos científicos y técnicos que contengan fórmulas matemáticas. La elaboración del documento requiere normalmente de dos etapas: en la primera hay que crear mediante cualquier editor de texto llano un fichero fuente que, con las órdenes y comandos adecuados, contenga el texto que queramos imprimir. La segunda consiste en procesar este fichero; el procesador de textos interpreta las órdenes escritas en él y compila el documento, dejándolo preparado para que pueda ser enviado a la salida correspondiente. LaTeX ofrece siempre la misma salida, con independencia del dispositivo (impresora, pantalla, etc.) o el sistema operativo (MS Windows, MacOS, Unix, GNU/Linux, etc.) y puede ser exportado a partir de una misma fuente a numerosos formatos [Ps, PDF, SGML, HTML, RTF, etc.]. Otra ventaja de LaTeX es que calcula la cantidad óptima de caracteres por línea para optimizar la lectura, 66 por defecto. Existen miles de instrucciones. Aquí una pequeña muestra para no morir en el intento.
+[texlive texlive-lang-spanish]. Sistema de composición de textos, orientado especialmente a la creación de libros, documentos científicos y técnicos que contengan fórmulas matemáticas. La elaboración del documento requiere normalmente de dos etapas: en la primera hay que crear mediante cualquier editor de texto llano un fichero fuente que, con las órdenes y comandos adecuados, contenga el texto que queramos imprimir. La segunda consiste en procesar este fichero; el procesador de textos interpreta las órdenes escritas en él y compila el documento, dejándolo preparado para que pueda ser enviado a la salida correspondiente. LaTeX ofrece siempre la misma salida, con independencia del dispositivo (impresora, pantalla, etc.) o el sistema operativo (MS Windows, MacOS, Unix, GNU/Linux, etc.) y puede ser exportado a partir de una misma fuente a numerosos formatos [Ps, PDF, SGML, HTML, RTF, etc.]. Otra ventaja de LaTeX es que calcula la cantidad óptima de caracteres por línea para optimizar la lectura, 66 por defecto. Existen miles de instrucciones. Aquí una pequeña muestra para no morir en el intento.
 A continuación una estructura elemental de un documento:
 Los comentarios van precedidos por el signo de porcentaje [%]
 La primera linea puede especificar el papel [A4], tamaño de la letra [10pt, 11pt, 12pt], tipo de texto [article, report, book, letter, slides...], cantidad de columnas [twocolumn]:
@@ -7654,8 +7651,7 @@ $ lazygal -o /var/www/ /home/usuario/fotos (Lo creará en la carpeta web a parti
 
 
 lckdo
-[moreutils]
-Bloquea la ejecución de un programa con el fin de evitar que otros procesos se ejecuten en paralelo. Se utiliza como nice [ver] y nohup [ver]
+[moreutils]. Bloquea la ejecución de un programa con el fin de evitar que otros procesos se ejecuten en paralelo. Se utiliza como nice [ver] y nohup [ver]
 
 
 ldd
@@ -7796,14 +7792,14 @@ Atajos (write)
 liferea
 Lector RSS.
 Atajos:
-Ctrl + u (Actualizar todos los feeds)
-Ctrl + r (Marcar feed como leído)
-Ctrl + n (Ir al siguiente feed no leído)
-u (Subir por los feeds)
-d (Bajar por los feeds)
-b (Moverse del feed a la noticias)
-f (Bajar por las noticias)
-Espacio (Abrir la noticia en el navegador)
+	Ctrl + u (Actualizar todos los feeds)
+	Ctrl + r (Marcar feed como leído)
+	Ctrl + n (Ir al siguiente feed no leído)
+	u (Subir por los feeds)
+	d (Bajar por los feeds)
+	b (Moverse del feed a la noticias)
+	f (Bajar por las noticias)
+	Espacio (Abrir la noticia en el navegador)
 
 
 lightdm
@@ -7825,10 +7821,10 @@ lilyterm
 Emulador de terminal.
 $ lilyterm -g 90x10 -T terminal -t 3 -d /home/usuario (Con determinadas medidas, título, 3 pestañas y abriendo en las tres un directorio)
 Algunos atajos:
-Ctrl + t (Abrir nueva pestaña)
-Ctrl + d (Cerrar pestaña)
-Ctrl + RePag (Ir a pestaña anterior)
-Ctrl + AvPag (Ir a pestañas siguiente)
+	Ctrl + t (Abrir nueva pestaña)
+	Ctrl + d (Cerrar pestaña)
+	Ctrl + RePag (Ir a pestaña anterior)
+	Ctrl + AvPag (Ir a pestañas siguiente)
 
 
 link
@@ -7840,24 +7836,24 @@ links2
 Navegador.
 # links2 -driver fb -g web.com (modo gráfico en el las tty con framebuffer)
 Atajos
-g (Especificar dirección URL a cargar)
-z (Retroceder en el historial, ir a la página anterior)
-Ctrl + r (Recargar la página) 
-s (Administrar marcadores) 
-Ctrl + s (Detener todas las conexiones)
-q (Salir del programa) 
-/ (Buscar un texto en la página, a partir de la posición actual)
-? (Buscar un texto en la página, desde la posición actual) 
-n (Ir a la coincidencia de búsqueda siguiente)
-N (Ir a la coincidencia de búsqueda anterior)
-\ (Alternar entre texto sin formato y HTML)
-= (Ver información de la página) 
-| (Ver información de cabecera. Etiquetas META del HTML))
-f (Ver marco (frame) actual en pantalla completa)
-c (Copiar dirección URL del enlace actual)
-d (Descargar contenido del enlace actual)
-i (Ver imagen del enlace actual si el enlace apunta a una imagen) 
-I (Descargar imagen del enlace actual si el enlace apunta a una imagen) 
+	g (Especificar dirección URL a cargar)
+	z (Retroceder en el historial, ir a la página anterior)
+	Ctrl + r (Recargar la página) 
+	s (Administrar marcadores) 
+	Ctrl + s (Detener todas las conexiones)
+	q (Salir del programa) 
+	/ (Buscar un texto en la página, a partir de la posición actual)
+	? (Buscar un texto en la página, desde la posición actual) 
+	n (Ir a la coincidencia de búsqueda siguiente)
+	N (Ir a la coincidencia de búsqueda anterior)
+	\ (Alternar entre texto sin formato y HTML)
+	= (Ver información de la página) 
+	| (Ver información de cabecera. Etiquetas META del HTML))
+	f (Ver marco (frame) actual en pantalla completa)
+	c (Copiar dirección URL del enlace actual)
+	d (Descargar contenido del enlace actual)
+	i (Ver imagen del enlace actual si el enlace apunta a una imagen) 
+	I (Descargar imagen del enlace actual si el enlace apunta a una imagen) 
 
 
 lintian
@@ -7888,8 +7884,8 @@ Herramienta para probar el rendimiento de un sistema. La primera vez que se ejec
 ln
 Cear enlaces de archivos o carpetas 
 $ ln -s /home/ct/videos /home/Desktop/videos (Crea un enlace a videos en Desktop) 
-$ ln -f       (Borra los ficheros de destino si ya existen) 
-$ ln -i       (Pregunta antes de borrar ficheros de destino existentes) 
+$ ln -f (Borra los ficheros de destino si ya existen) 
+$ ln -i (Pregunta antes de borrar ficheros de destino existentes) 
 $ ln -s /dev/null ~/.bash_history  (vincular historial a /dev/null)
 $ ln -sf /opt/metasploit/msf* /usr/bin (Crear un enlace a /usr/bin de todos los ejecutables que empizan por msf del directorio /opt/metasploit)
 
@@ -8090,8 +8086,8 @@ Herramienta de auditoria de seguridad. Emplea mucho tiempo y crea un fichero de 
 $ lsat
 
 
-lsattr (ver chattr)
-Muestra los atributos de los ficheros [no los permisos].
+lsattr
+Muestra los atributos de los ficheros [no los permisos]. (ver chattr)
 $ lsattr -R /home/usuario   (recursivamente)
 $ lsattr -a /home/usuario   (incluye a todos los archivos de los directorios)
 
@@ -8113,8 +8109,8 @@ lscpu
 Muestra información sobre la cpu 
 
 
-lsdev (procinfo)
-Lista los dispositivos presentes en el sistema y que IRQs y puertos IO (entrada/salida) usan.
+lsdev
+[procinfo]. Lista los dispositivos presentes en el sistema y que IRQs y puertos IO (entrada/salida) usan.
 $ lsdev
 
 
@@ -8159,11 +8155,11 @@ Listar ficheros o procesos abiertos
 # lsof -t -i :22 (Muestra el pid del puerto especificado)
 # lsof -nPi | txt2html  > lsof.html (Mandar la salida a un html para visualizarlo por el navegador)
 Opciones:
--P (Muestra los números de puerto en vez de la aplicación que corre en ellos)
--n (Para que no resuelva las IP de las conexiones)
--i (Hace referencia a los eventos utilizados por procesos de red)
--u usuario (Muestra los procesos abiertos por “usuario”)
--x (Sigue links y puntos de montaje)
+	-P (Muestra los números de puerto en vez de la aplicación que corre en ellos)
+	-n (Para que no resuelva las IP de las conexiones)
+	-i (Hace referencia a los eventos utilizados por procesos de red)
+	-u usuario (Muestra los procesos abiertos por “usuario”)
+	-x (Sigue links y puntos de montaje)
 
 
 lspci
@@ -8243,15 +8239,15 @@ Si una vez abierta la barra de navegación [con “o”, “t”..] colocamos:
 lxde
 Escritorio ligero. 
 Archivos de configuración de los elementos del escritorio lxde:
-~/.config/gtkrc-2.0 (Temas de escritorio GTK+ e iconos) 
-~/.config/leafpad/leafpadrc (Editor de textos Leafpad) 
-~/.config/lxpanel/LXDE/panels/panel (Paneles) 
-~/.config/lxpanel/LXDE/config (Lanzadores de aplicaciones del panel) 
-~/.config/lxsession/LXDE/config (Administrador de ventanas) 
-~/.config/lxterminal/lxterminal.conf (Terminal) 
-~/.config/openbox/lxde-rc.xml (Openbox) 
-~/.config/openbox/menu.xml (Menu de Openbox) 
-~/.config/pcmanfm/main.lxde (Pcmanfm)
+	~/.config/gtkrc-2.0 (Temas de escritorio GTK+ e iconos) 
+	~/.config/leafpad/leafpadrc (Editor de textos Leafpad) 
+	~/.config/lxpanel/LXDE/panels/panel (Paneles) 
+	~/.config/lxpanel/LXDE/config (Lanzadores de aplicaciones del panel) 
+	~/.config/lxsession/LXDE/config (Administrador de ventanas) 
+	~/.config/lxterminal/lxterminal.conf (Terminal) 
+	~/.config/openbox/lxde-rc.xml (Openbox) 
+	~/.config/openbox/menu.xml (Menu de Openbox) 
+	~/.config/pcmanfm/main.lxde (Pcmanfm)
 1.-
 Arrancar aplicaciones al inicio:
 # /etc/xdg/lxsession/LXDE/autostart
@@ -8303,9 +8299,9 @@ exit (Matarlo)
 
 lynis
 Busca en el sistema posibles debilidades de configuración sin realizar ninguna modificación. 
-# lynis      (Visualizar las opciones)
-# lynis --check-update    (descargar actualizaciones)
-# lynis -c      (lanzar el escaneo)
+# lynis (Visualizar las opciones)
+# lynis --check-update (descargar actualizaciones)
+# lynis -c (lanzar el escaneo)
 # lynis --cronjob (Lanzar el escaneo sin pedir confirmaciones en cada apartado)
 # cat /var/log/lynis.log | grep Warning (ver las vulnerabilidades)
 # cat /var/log/lynis.log | grep Suggestion (ver sugerencias que nos realiza lynis)
@@ -8544,8 +8540,8 @@ Genera números hexadecimales de 128 bits aleatorios.
 $ mcookie
 
 
-mcp (mmv) 
-Permite hacer copias de varios ficheros. 
+mcp
+[mmv)]. Permite hacer copias de varios ficheros. 
 $ mcp ";*.png" "#1#2.png.bak" (Realizará un .png.bak de todos los .png que encuentre en el presente directorio y sus subdirectorios)
 
 
@@ -8655,7 +8651,8 @@ muestra información sobre los dispositivos montados [dispositivo de bloques, pu
 $ mi
 
 
-microfono (activar micro del monitor)
+microfono
+(activar micro del monitor). 
 # gedit /etc/modprobe.d/alsa-base.conf
 Añadir:
 options snd_hda_intel model=laptop options snd-hda-intel position_fix=1 enable=yes
@@ -8683,22 +8680,22 @@ $ mimms -t 2 mms://viplagardere.yacast.net/encodereurope2 (2 minutos)
 miniflux
 Lector RSS instalado en local o en un servidor. Simplemente se descarga la aplicación de <http://miniflux.net/> y, una vez descomprimida, se copia al directorio web (generalmente /var/www). Se accede colocando en la barra de direcciones: http://localhost/miniflux (Por defecto el nombre de usuario y contraseña son admin:admin)
 Atajos de teclado:
-gu (Ir a leídas)
-gb (Ir a marcadores)
-gh (Ir al historial)
-gs (Ir a suscripciones)
-gp (Ir a preferencias)
-s (Descargar contenido)
-p (Noticia anterior)
-n (Noticia siguiente)
-m (Marcar como leido)
-v (Abrir la noticia original)
-o (Desplegar la noticia)
-f (Añadir a favoritos)
-h (Ir a página precedente)
-l (Ir a página anterior)
-? (Abrir la ayuda de los atajos de teclado)
-q (Cerrar la ayuda)
+	gu (Ir a leídas)
+	gb (Ir a marcadores)
+	gh (Ir al historial)
+	gs (Ir a suscripciones)
+	gp (Ir a preferencias)
+	s (Descargar contenido)
+	p (Noticia anterior)
+	n (Noticia siguiente)
+	m (Marcar como leido)
+	v (Abrir la noticia original)
+	o (Desplegar la noticia)
+	f (Añadir a favoritos)
+	h (Ir a página precedente)
+	l (Ir a página anterior)
+	? (Abrir la ayuda de los atajos de teclado)
+	q (Cerrar la ayuda)
 
 
 mirmon
@@ -8709,8 +8706,7 @@ Visualizarlos en el navegador con la ruta:
 
 
 mispipe
-[moreutils]
-mispipe se comporta como cualquier tuberia de la shell, incluyendo comandos independientes, pero a diferencia de las clásicas tuberias, que sólo devuelven el estado de salida del último comando, mispipe devuelve el estado de salida del primer comando si este falla.
+[moreutils]. mispipe se comporta como cualquier tuberia de la shell, incluyendo comandos independientes, pero a diferencia de las clásicas tuberias, que sólo devuelven el estado de salida del último comando, mispipe devuelve el estado de salida del primer comando si este falla.
 $ mispipe ls "echo "NO""
 
 
@@ -8718,11 +8714,11 @@ mjpg-streamer
 Streaming de video 
 $ mjpg_streamer -i "input_uvc.so -y -f 5" -o output_http.so -p 3000 -n -c USER:CONTRASEÑA -b
 Opciones:
--f  frames por segundo 
--y  cambiar formato mjpg por yuv (cuando mjpg da problemas)
--b  background 
--n  liberar terminal (conjuntamente con -b) 
--c  usuario:contraseña
+	-f  frames por segundo 
+	-y  cambiar formato mjpg por yuv (cuando mjpg da problemas)
+	-b  background 
+	-n  liberar terminal (conjuntamente con -b) 
+	-c  usuario:contraseña
 Y en el navegador: 
 http://localhost:3000/?action=snapshot  (tomar una foto) 
 http://localhost:3000/?action=stream    (reproducir video) 
@@ -8731,8 +8727,8 @@ $ kill -9 `pidof mjpg_streamer`
 
 
 mkdir
-Crear directorios 
-$ mkdir -p            (Crea el directorio y todos los subdirectorios especificados.) 
+Crear directorios. 
+$ mkdir -p A B C (Crea el directorio A en su interior el B y dentro de este el C) 
 $ mkdir -m=rwx      (Especifica los permisos del directorio que se crea) 
 $ mkdir -p -m=x /home/ct/videos/res/tot  (creará los nuevos directorios “videos”, “res” i “tot” y dará permisos de ejecución (x)  al usuario ct) 
 $ mkdir -p project/{lib/ext,bin,src,doc/{html,info,pdf},demo/stat/a} (creación de varios directorios y subdirectorios.)
@@ -8750,8 +8746,8 @@ Formatear a sistema de archivos ext2
 # mke2fs -c /dev/fd0         (formatea a ext2 el floppy)
 
 
-mkeot (eot-utils)
-Genera tipografías en formato EOT desde TTF y OTF. Comando necesario para convertir las fuentes en TTF al formato EOT para ser usado con la propiedad font-face de CSS3, formato requerido por Internet Explorer.
+mkeot
+[eot-utils]. Genera tipografías en formato EOT desde TTF y OTF. Comando necesario para convertir las fuentes en TTF al formato EOT para ser usado con la propiedad font-face de CSS3, formato requerido por Internet Explorer.
 $ mkeot neuropol_x_free.ttf > neuropol_x_free.eot 
 
 
@@ -8817,8 +8813,7 @@ Crear un espacio de intercambio.
 
 
 mktemp
-[coreutils]
-Crear archivos o directorios temporales.
+[coreutils]. Crear archivos o directorios temporales.
 $ mktemp (Crea un fichero temporal en /tmp)
 $ mktemp -d (Crea un directorio en tmp y en su interior un archivo)
 $ mktemp --tmpdir=documentos (crea un archivo temporal en el interior del directorio "documentos")
@@ -8960,7 +8955,7 @@ Información sobre módulos.
 $ modinfo sr_mod
 
 
-module-assistant (m-a)
+module-assistant
 Paquete especifico de Debian para la instalación de controladores.
 # m-a (abre la interficie ncuses del programa)
 # m-a a-i paquete (seleccionar un módulo)
@@ -8980,8 +8975,8 @@ Comandos relacionados con el manejo de los módulos del kernel
 # rmmod modulo.ko  (Elimina un modulo) 
 
 
-mogrify (imagemagick)
-Cambiar formato y redimensionar imágenes de directorios
+mogrify
+[imagemagick]. Cambiar formato y redimensionar imágenes de directorios
 $ mogrify -format jpg *.png   (Cambiar el formato de varias  imágenes)
 $ mogrify -format png -sample 20%x20% *.jpg   (Reducir varias imágenes)  
 $ mogrify -format png  -thumbnail 10% *jpg (Cambiar formato y crear miniaturas)
@@ -9106,8 +9101,8 @@ check system dominio.com
 if failed port 21 protocol ftp with 20 seconds then alert and exec “/ftp/script.sh” 
 
 
-montage (imagemagick)
-Crear una imagen con la unión de varias y modificar imágenes.
+montage
+[imagemagick]. Crear una imagen con la unión de varias y modificar imágenes.
 $ montage *.png salida.jpg (Con todas las imagenes del directorio)
 $ montage -adjoin imagen.png imagen.png resultado.png
 $ montage -monochrome entrada.png salida.png (convertir a blanco y negro)
@@ -9118,9 +9113,9 @@ $ montage *.png -tile 2x5 -geometry 227x147+1+1 salida.png (Colocará todos los 
 
 
 more
-Pagina el fichero que se especifique... 
-$ cat /etc/apt/sources.list | more (...como tuberia)
-$ more -5 -d /etc/apt/sources.list  (...de cinco en cinco lineas y mostrando teclas de ayuda)
+Pagina el fichero que se especifique 
+$ cat /etc/apt/sources.list | more (como tuberia)
+$ more -5 -d /etc/apt/sources.list  (de cinco en cinco lineas y mostrando teclas de ayuda)
 atajos:
 	espacio (adelanta una pantalla) 
 	enter (avanza una linea) 
@@ -9251,8 +9246,8 @@ $ mp3rename -i *.mp3 (muestra los id3 tag de todos los mp3)
 Nota.- No siempre los id3tag estan disponibles o están completos
 
 
-mpd (demonio) 
-Reproductor de audio con arquitectura servidor-cliente que gestiona listas de reproducción y bases de datos. Para hacer uso de una interfaz gráfica, es necesario un cliente tipo: sonata, ario, ncmpcpp o pms.Ajustes en la configuración: 
+mpd
+(demonio). Reproductor de audio con arquitectura servidor-cliente que gestiona listas de reproducción y bases de datos. Para hacer uso de una interfaz gráfica, es necesario un cliente tipo: sonata, ario, ncmpcpp o pms.Ajustes en la configuración: 
 # nano /etc/mpd.conf 
 music_directory	"/home/usuario/Musica" 
 playlist_directory "/home/usuario/.mpd/playlists" 
@@ -9280,8 +9275,7 @@ $ mpg123 archivo.mp3
 
 
 mpgtx
-[comandos derivados: mpgsplit, mpgcat, mpgjoin, mpginfo, mpgdemux]
-manipulación de archivos mpeg.
+[comandos derivados: mpgsplit, mpgcat, mpgjoin, mpginfo, mpgdemux]. Manipulación de archivos mpeg.
 mpgtx -i equivalente a mpginfo
 mpgtx -s equivalente a mpgsplit 
 mpgtx -j equivalente a mpgjoin 
@@ -9330,8 +9324,7 @@ Opciones:
 
 
 msfconsole
-[metasploit]
-Consola centralizada con acceso a todo las opciones disponibles de Metasploit Framework, única soportada y estable con soporte para de edición de lineas (readline), que permite tabulacion y ejecución de comandos externos.
+[metasploit]. Consola centralizada con acceso a todo las opciones disponibles de Metasploit Framework, única soportada y estable con soporte para de edición de lineas (readline), que permite tabulacion y ejecución de comandos externos.
 Uso de comandos externos: Lanzar un ping a un equipo o nmap:
 	msf > ping -c 1 192.168.1.10
 	msf > nmap 192.168.1.10
@@ -9695,22 +9688,22 @@ set tabstospaces (convierte tabulaciones en espacios)
 set nohelp (inhabilitar la ayuda de forma permanente) 
 set fill 60 (Número se caracteres por linea[wrap]) 
 Atajos 
-Ctrl + g (Menú ayuda) 
-Ctrl + j (Justificar el párrafo actual) 
-Ctrl + k (Cortar y guardar la línea actual) 
-Ctrl + m (Insertar un retorno de carro) 
-Ctrl + o (Escribir el fichero actual a disco) 
-Ctrl + u (Pegar la linea cortada) 
-Ctrl + v (Moverse hacia el final del documento) 
-Ctrl + w (Buscar una palabra en el texto) 
-[Ctrl + w] + [Ctrl + r] (Buscar palabra y reemplazarla por otra) 
-Ctrl + y (Moverse hacia el principio del documento) 
-Ctrl + x (Salir de nano) 
-Ctrl + d (Muestra número de palabras, lineas y caracteres) 
-Mayu + Insert (Insertar del portapapeles) 
-Alt + m (Soporte para ratón habilitar/deshabilitar. Precisa paquete gpm) 
-Alt + y (Coloreado de sintaxis habilitar/deshabilitar) 
-Alt + x (Suprimir/añadir la ayuda del final de página)
+	Ctrl + g (Menú ayuda) 
+	Ctrl + j (Justificar el párrafo actual) 
+	Ctrl + k (Cortar y guardar la línea actual) 
+	Ctrl + m (Insertar un retorno de carro) 
+	Ctrl + o (Escribir el fichero actual a disco) 
+	Ctrl + u (Pegar la linea cortada) 
+	Ctrl + v (Moverse hacia el final del documento) 
+	Ctrl + w (Buscar una palabra en el texto) 
+	[Ctrl + w] + [Ctrl + r] (Buscar palabra y reemplazarla por otra) 
+	Ctrl + y (Moverse hacia el principio del documento) 
+	Ctrl + x (Salir de nano) 
+	Ctrl + d (Muestra número de palabras, lineas y caracteres) 
+	Mayu + Insert (Insertar del portapapeles) 
+	Alt + m (Soporte para ratón habilitar/deshabilitar. Precisa paquete gpm) 
+	Alt + y (Coloreado de sintaxis habilitar/deshabilitar) 
+	Alt + x (Suprimir/añadir la ayuda del final de página)
 
 
 nast
@@ -9746,19 +9739,19 @@ Y pegar en la sección toolbar:
 	<toolitem name="New Tab" action="New Tab"/> 
 Reiniciar
 Atajos
-Ctrl+A (Seleccionar todo)
-Ctrl+C (Copiar)
-Ctrl+H (Muestra archivos ocultos)
-Ctrl+N (Abre nueva pantalla)
-Ctrl+T (Abre una nueva pestaña)
-Ctrl+Alt+D (Mostrar escritorio)
-Ctrl+Shft+N (Crear nueva carpeta)
-Shft+F10 (Activa el menú contextual para el elemento activo)
-Alt+Enter (Mostrar propiedades del elemento activo)
-Alt+Flechas (Desplazarse entre carpetas)
-Alt+tab (Navegar entre ventanas/documentos activos)
-Alt+espacio (Abre el menú de la ventana actual)
-F2 (Renombrar carpeta)
+	Ctrl+A (Seleccionar todo)
+	Ctrl+C (Copiar)
+	Ctrl+H (Muestra archivos ocultos)
+	Ctrl+N (Abre nueva pantalla)
+	Ctrl+T (Abre una nueva pestaña)
+	Ctrl+Alt+D (Mostrar escritorio)
+	Ctrl+Shft+N (Crear nueva carpeta)
+	Shft+F10 (Activa el menú contextual para el elemento activo)
+	Alt+Enter (Mostrar propiedades del elemento activo)
+	Alt+Flechas (Desplazarse entre carpetas)
+	Alt+tab (Navegar entre ventanas/documentos activos)
+	Alt+espacio (Abre el menú de la ventana actual)
+	F2 (Renombrar carpeta)
 
 
 nbtscan
@@ -9989,8 +9982,8 @@ $ nano .newsbeuter/config
 	color article cyan black
 
 
-nfs (nfs-kernel-server)
-Servidor de archivos.
+nfs
+[nfs-kernel-server]. Servidor de archivos.
 En el Servidor:
 # nano /etc/exports (Para especificar carpetas que se van a compartir)
 Formato de las carpetas que se comparte:
@@ -10031,14 +10024,14 @@ Otras usos:
 # ngrep -d1 -w -i “user|pass” port 21
 
 
-nice (→ renice)
-Prioridad de un comando o aplicación. Por defecto 10
+nice
+(Ver renice). Prioridad de un comando o aplicación. Por defecto 10
 # nice -n -10 cdrecord 
 Nota.- Valores, de mayor (-20) a menor (19). Sólo root puede establecer valores negativos.
 
 
-nikto (libnet-ssleay-perl libwhisker-perl)
-Escáner de servidores Web. 
+nikto
+[libnet-ssleay-perl libwhisker-perl]. Escáner de servidores Web. 
 # nikto -h host_a_analizar -p 80 (Especificando puerto)
 
 
@@ -10185,8 +10178,8 @@ Con scripts
 # nmap -sV -sC --script-args ftp-anon.maxlist=-1 IP (Comprueba si un servidor ftp permite conexiones anónimas. El "-1" para desactivar el límite de 20 archivos)
 
 
-nmblookup (samba))
-Resolución de nombres netbios
+nmblookup
+[samba]. Resolución de nombres netbios
 $ nmblookup -A 192.168.1.125
 
 
@@ -10229,8 +10222,8 @@ $ normalize-audio *.wav
 $ normalize-mp3 *.mp3 
 
 
-notify (libnotify-bin) 
-Aviso o notificación que lanza el sistema al producirse un evento o terminar una tarea.
+notify
+[libnotify-bin]. Aviso o notificación que lanza el sistema al producirse un evento o terminar una tarea.
 $ notify-send "Linus es un sistema genial" -t 5000
 Un ejemplo de uso para algunas tareas: 
 $ nano .bashrc 
@@ -10272,33 +10265,33 @@ $ nstat -a (Volcado absoluto de todos los contadores)
 $ nstat -r (Resetear los contadores)
 
 
-ntfs-3g (dependencia fuse.)
-Driver que permite modificar archivos en sistemas ntfs. La partición puede ser montada:
+ntfs-3g
+[fuse]. Driver que permite modificar archivos en sistemas ntfs. La partición puede ser montada:
 # mount -t ntfs-3g /dev/hda3 /media/win
 O en el /etc/fstab con la linea:
 /dev/hda3  /media/win ntfs-3g defaults 0 0
 
 
-ntfsclone (ntfsprogs)
-Permite la creación de particiones NTFS de Windows y su posterior restauración
+ntfsclone
+[ntfsprogs]. Permite la creación de particiones NTFS de Windows y su posterior restauración
 # ntfsclone -s -o imagen.img /dev/sda1 (crea el fichero imagen.img de la partición /dev/sda1)
 # ntfsclone -r -O /dev/sda1 imagen.img (Restaura la imagen en la partición que queramos)
 
 
-ntfsfix (ntfsprogs)
-Reparación de inconsistencias en sistemas de archivos ntfs.
+ntfsfix
+[ntfsprogs]. Reparación de inconsistencias en sistemas de archivos ntfs.
 # ntfsfix /dev/sdb1
 Finalizado el proceso, montarla:
 # mount -t ntfs-3g /dev/sdb1 /media/win -o force
 
 
-ntfslabel (ntfsprogs)
-Poner etiquetas a las particiones y dispositivos ntfs
+ntfslabel
+[ntfsprogs]. Poner etiquetas a las particiones y dispositivos ntfs
 # ntfslabel -f -v /dev/sda1 win
 
 
-ntop (graphviz gsfonts-x11)
-Monitor de red via navegador.
+ntop
+[graphviz gsfonts-x11]. Monitor de red via navegador.
 # ntop --set-admin-password   (contraseña para el usuario "admin") 
 # gedit /var/lib/ntop/init.cfg (Comprobar interfaz de red. Por defecto eth0)
 # /etc/init.d/ntop restart (reiniciar)
@@ -10310,8 +10303,8 @@ Actualiza la hora del sistema via NTP (Network Time Protocol)
 # ntpdate -u cl.pool.ntp.org
 
 
-number (bsd-games)
-Muestra como se muestran los números en inglés.
+number
+[bsd-games]. Muestra como se muestran los números en inglés.
 $ number -l 55
 $ number (Entra en el promt para ir entrando números. “q” [enter] para salir)
 
@@ -10347,8 +10340,7 @@ $ obmenugen
 
 
 octopress
-[git-core curl zlib1g-dev libssl-dev build-essential libreadline-dev libaml]
-CMS para gestión de contenido web que genera automaticamente los archivos html, css y javascript a partir de archivos de texto plano formateado en markdown (Ver) y sin utilizar base de datos. 
+[git-core curl zlib1g-dev libssl-dev build-essential libreadline-dev libaml]. CMS para gestión de contenido web que genera automaticamente los archivos html, css y javascript a partir de archivos de texto plano formateado en markdown (Ver) y sin utilizar base de datos. 
 Pasos previos para su instalación en Debian y derivados: 
 $ curl -L https://get.rvm.io | bash -s stable –ruby 
 $ source ~/.rvm/scripts/rvm 
@@ -10732,7 +10724,7 @@ Enable WebGL
 
 
 operadores
-[bash scripting]
+(Bash scripting). 
 lógicos o de comparación de cadenas alfanuméricas: 
 	= (Verdadero si las 2 cadenas son iguales)
 	!= (Verdadero si las 2 cadenas son distintas)
@@ -10819,8 +10811,8 @@ $ optipng -dir imagenes (De todas las imagenes de un directorio)
 
 
 ossec
-[wget http://www.ossec.net/files/ossec-hids-2.6.tar.gz]
 Sistema de detección de intrusos. Durante la instalación, una vez escogido el idioma, se realizan una serie de preguntas sobre si se desea recibir por correo las notificaciones [en este caso precisa postfix], lugar de instalación [/var/ossec], si la instalación va a ser local, servidor... y otras cuyos parámetros por defecto son suficientes. 
+$ wget http://www.ossec.net/files/ossec-hids-2.6.tar.gz
 # /var/ossec/etc/ossec.conf (Archivo de configuración:)
 # /var/ossec/bin/ossec-control start (Arrancar el demonio caso de no colocarlo en /etc/init.d/ossec)
 
@@ -10860,8 +10852,7 @@ $ owl orphans (Listar poquetes de AUR instalados y desatendidos)
 
 
 owncloud
-[apache2 php5 php-pear php-xml-parser php5-sqlite php5-json sqlite php5-mysql mp3info curl libcurl3 libcurl3-dev php5-curl zip php5-gd]
-Nube de almacenamiento tipo dropbox, minux, google-drive ... pero no comercial y libre, gestionado totalmente via web. Descargar de http://owncloud.org/ la última versión. Una vez bajado el paquete tar.bz2:
+[apache2 php5 php-pear php-xml-parser php5-sqlite php5-json sqlite php5-mysql mp3info curl libcurl3 libcurl3-dev php5-curl zip php5-gd]. Nube de almacenamiento tipo dropbox, minux, google-drive ... pero no comercial y libre, gestionado totalmente via web. Descargar de <http://owncloud.org/> la última versión. Una vez bajado el paquete tar.bz2:
 $ tar -xvf owncloud*.tar.bz2 (Descomprimir)
 $ mv owncloud /var/www/ (mover la carpeta al directorio web)
 # chown -R www-data:www-data /var/www/owncloud (Crear usuario y grupo)
@@ -10883,8 +10874,8 @@ pacdiffviewer
 En Arch, busca archivos de configuración nuevos y obsoletos [pacnew, pacsave] para gestionarlos [eliminarlos, reemplazarlos..]
 
 
-packer (gui: blinky)
-Gestor rápido de paquetes pacman y aur con funcionalidades básicas [-Ss , -S, -Syu y -Si]. Para evitar conflictos entre rutas de pacman y aur, instalar diffpac.
+packer
+(gui: blinky). Gestor rápido de paquetes pacman y aur con funcionalidades básicas [-Ss , -S, -Syu y -Si]. Para evitar conflictos entre rutas de pacman y aur, instalar diffpac.
 $ packer -S --noconfirm paquete  (Instalar sin pedir confirmación)
 $ packer -Syu --auronly (Actualizar y sincronizar sólo los paquetes de aur)
 $ packer -Si paquete (información sobre paquete)
@@ -10950,7 +10941,7 @@ Herramienta para comprobar la consistencia de la base de datos y arreglar paquet
 # pacworld -v --exec
 
 
-pads (demonio)
+pads
 Monitor de tráfico de red
 # pads -i eth0
 
@@ -11053,8 +11044,7 @@ Ruta para acceder a los datos contenidos en una unidad de almacenamiento.
 
 
 pathchk
-[coreutils]
-Comprueba si un nombre de fichero es válido o portable en sistemas POSIX.
+[coreutils]. Comprueba si un nombre de fichero es válido o portable en sistemas POSIX.
 $ pathchk -p Juegos del niño
 pathchk: el nombre del fichero «niño» contiene el caracter no portable «ñ»
 
@@ -11087,8 +11077,8 @@ Convertir pdfs en djvu.
 $ pdf2djvu -o salida.djvu archivo.pdf
 
 
-pdf2ps (psutils)
-Convertir pdf a postscript. Ver ps2pdf
+pdf2ps
+[psutils]. Convertir pdf a postscript. Ver ps2pdf
 $ pdf2ps fichero.pdf
 
 
@@ -11102,19 +11092,19 @@ $ pdfcrack archivo.pdf -n 6 -c abcdefghijklmnopqrstuvxyz -s
 -s     (Prueba el primer caracter en mayúscula)
 
 
-pdfimages (xpdf-utils)
-Extraer las imágenes de un pdf
+pdfimages
+[xpdf-utils]. Extraer las imágenes de un pdf
 $ pdfimages fichero.pdf fichero
 $ pdfimages -j fichero.pdf fichero (guardarlas en formato jpeg)
 
 
-pdfjoin (pdfjam)
-Unir varios pdf con el mismo formato de página en uno
+pdfjoin
+[pdfjam]. Unir varios pdf con el mismo formato de página en uno
 $ pdfjoin --fitpaper true 1.pdf 2.pdf --outfile 12.pdf 
 
 
-pdfnup (pdfjam)
-Compactar varias páginas de un pdf en una y viceversa.
+pdfnup
+[pdfjam]. Compactar varias páginas de un pdf en una y viceversa.
 $ pdfnup --nup 2×4 archivo.pdf (8 páginas)
 $ pdfnup --nup 2x1 --outfile output.pdf input.pdf (dos pàgines en una)
 $ pdfnup --nup 2x2 --outfile output.pdf input.pdf  (4 páginas)
@@ -11151,14 +11141,14 @@ $ pdftk archivo.pdf dump_data_fields output campos.lst (Lo mismo derivado a un a
 $ pdfcrack archivo.pdf [opciones] (Si se trata de archivos pdf con contraseña)
 $ pdfcrack archivo.pdf -n 6 -c abcdefghijklmnopqrstuvxyz -s
 Opciones:
--B: Realizar evaluación comparativa y salir
--C [CADENA]: Utiliza los caracteres indicados para la busqueda de la contraseña
--m [numero]: Se buscará hasta llegar a la longitud de caracteres de “numero”
--n [numero]: Se empezará a probar contraseñas de “numero” caracteres
--l [FILE]: Continuará desde el punto guardado en el archivo FILE.
--q: Ejecutar silenciosamente
--s: Realiza el crack permutando contraseñas
--u: Trabajar con el “userpassword” 
+	-B: Realizar evaluación comparativa y salir
+	-C [CADENA]: Utiliza los caracteres indicados para la busqueda de la contraseña
+	-m [numero]: Se buscará hasta llegar a la longitud de caracteres de “numero”
+	-n [numero]: Se empezará a probar contraseñas de “numero” caracteres
+	-l [FILE]: Continuará desde el punto guardado en el archivo FILE.
+	-q: Ejecutar silenciosamente
+	-s: Realiza el crack permutando contraseñas
+	-u: Trabajar con el “userpassword” 
 
 
 pdftohtml
@@ -11172,8 +11162,7 @@ $ pdftops archivo.pdf  (El archivo.ps resultante puede ser impreso aunque el arc
 
 
 pdftotext
-[xpdf-utils]       
-Para pasar un pdf a txt o a html.
+[xpdf-utils]. Maniupulación de pdfs.
 $ pdftotext -listenc (Lista las codificaciones soportadas)
 $ pdftotext -layout texto.pdf texto.txt
 $ pdftotext -htmlmeta texto.pdf text.html
@@ -11188,28 +11177,26 @@ $ pdfunite 1.pdf 2.pdf 1+2.pdf
 pebrot 
 Cliente msn en ncurses. Ingresar usuario y contraseña en /home/USUARIO/.pebrot/pebrotrc 
 Algunos atajos: 
-h (lista de comandos) 
-l (contactos conectados y enumerados) 
-numero  (abre conversación con el número del contacto) 
-i numero (invita al usuario del numero indicado a la conversación) 
-e (limpia la pantalla) 
-c (cierra la conversación activa) 
-a usuario (añade un usuario a contactos) 
-b usuario (bloquea a usuario) 
-f archivo (enviar archivo) 
-fa (aceptar archivo que nos envian) 
-fr (rechazar recepción de archivo)
+	h (lista de comandos) 
+	l (contactos conectados y enumerados) 
+	numero  (abre conversación con el número del contacto) 
+	i numero (invita al usuario del numero indicado a la conversación) 
+	e (limpia la pantalla) 
+	c (cierra la conversación activa) 
+	a usuario (añade un usuario a contactos) 
+	b usuario (bloquea a usuario) 
+	f archivo (enviar archivo) 
+	fa (aceptar archivo que nos envian) 
+	fr (rechazar recepción de archivo)
 
 
 pee
-[moreutils]
-Parecido al comando tee [ver] ejecutando cada uno de los comandos
+[moreutils]. Parecido al comando tee [ver] ejecutando cada uno de los comandos
 $ pee ls pwd "ip a"
 
 
 pentbox
-http://www.pentbox.net/download-pentbox/
-Herramientas de penetración [verificar fortaleza de contraseñas cifradas en MD5, SHA1, SHA256, SHA512, generador de DoS i DDoS, generador de contraseñas seguras, honeypots, escaneo de puertos, ataque de fuerza bruta contra servidores HTTP, geolocalitzación de direcciones MAC...]
+Descarga de <http://www.pentbox.net/download-pentbox/> . Herramientas de penetración [verificar fortaleza de contraseñas cifradas en MD5, SHA1, SHA256, SHA512, generador de DoS i DDoS, generador de contraseñas seguras, honeypots, escaneo de puertos, ataque de fuerza bruta contra servidores HTTP, geolocalitzación de direcciones MAC...]
 $ pentbox
 
 
@@ -11219,8 +11206,7 @@ $ pg archivo
 
 
 phoronix
-[phoronix-test-suite]
-suite de pruebas para medir el rendimiento de un sistema o componente del mismo [benchmarking]. Cuenta con un repositorio online con gran cantidad de pruebas y se ejecutan a través de un archivo de configuración XML.
+[phoronix-test-suite]. suite de pruebas para medir el rendimiento de un sistema o componente del mismo [benchmarking]. Cuenta con un repositorio online con gran cantidad de pruebas y se ejecutan a través de un archivo de configuración XML.
 # phoronix-test-suite list-available-tests (Lista los test disponibles y una pequeña descripción)
 # phoronix-test-suite list-available-suites (Lista las suites disponibles y una pequeña descripción)
 # phoronix-test-suite install pts/encode-flac (Instalar con sus dependencias un test o suite. En este caso el test pts/encode-flac)
@@ -11240,8 +11226,8 @@ $ photon directorio_con_las_imagenes  (Creará una nueva carpeta con todos los h
 $ photon -o /var/www/ /home/usuario/fotos (A partir de la carpeta fotos, lo creará en el directorio web)
 
 
-photorec (testdisk)
-Recuperar datos de discos, tarjetas, cds deteriorados... Precisa pantalla maximizada. 
+photorec
+[testdisk]. Recuperar datos de discos, tarjetas, cds deteriorados... Precisa pantalla maximizada. 
 # photorec
 
 
@@ -11292,8 +11278,8 @@ muestra el Pid del programa si está activo
 $ pidof firefox
 
 
-pidstat (sysstat)
-Muestra información relacionada con los procesos del sistema.
+pidstat
+[sysstat]. Muestra información relacionada con los procesos del sistema.
 $ pidstat  (informa del uso de la CPU)
 $ pidstat -u  (lo mismo)
 $ pidstat -d  (Muestra la tasa de lectura/escritura a los medios fisicos)
@@ -11305,8 +11291,8 @@ $ pidstat -d 5 2 (“5” es el intervalo de tiempo y “2” el número de vece
 $ pidstat -d 5  (omitiendo el numero de veces a ejecutar para producir un bucle infinito. Parar con ^C) 
 
 
-pig (bsd-games)
-Reformatear palabras o frases entradas en el prompt a un lenguaje macarrónico.
+pig
+[bsd-games]. Reformatear palabras o frases entradas en el prompt a un lenguaje macarrónico.
 $ pig (entra en el prompt. Entrar cualquier frase pulsar enter y comprobar el resultado)
 
 
@@ -11342,13 +11328,13 @@ $ pinky -l usuario
 $ pinky -b usuario root (shells abiertas por los usuarios especificados)
 
 
-pip (python-pip python-dev build-essential)
-Alternativa para la instalación de paquetes python.
+pip
+[python-pip python-dev build-essential]. Alternativa para la instalación de paquetes python.
 # pip install paquete
 
 
-pitidos (del pc)
-Señales de alerta sonora cuando algo falla. 
+pitidos
+(del pc). Señales de alerta sonora cuando algo falla. 
 Sin pitidos.-  Sin suministro eléctrico 
 Pitido constante ininterrumpido.-  Falla en el suministro eléctrico 
 Pitidos cortos y constantes.- Placa base defectuosa. 
@@ -11361,8 +11347,8 @@ Pitidos cortos y constantes.- Placa base defectuosa.
 2 pitidos largos + uno corto.- Error en la sincronización de imágenes
 
 
-pkaction (policykit o polkit según distros) 
-Herramienta para manejar politicas que permitan a los procesos sin privilegios "hablar" con procesos privilegiados. 
+pkaction
+[policykit o polkit según distros)]. Herramienta para manejar politicas que permitan a los procesos sin privilegios "hablar" con procesos privilegiados. 
 $ pkaction (Muestra todos los procesos a los que afecta esta politica) 
 # pkaction | grep power (Las que hacen referencia al proceso "power")
 
@@ -11385,18 +11371,18 @@ planets
 Simulador grabitacional del movimiento de los astros.
 $ planets
 Algunas teclas de control:
-j (Crea planetas orbitales aleatorios)
-r (Crea planetas aleatorios)
-c (Centra el sistema planetario)
-t (Muestra las trayectorias)
-e (Resetear el universo)
-s (Guardar)
-l (Cargar un universo)
-Flechas (Desplazan el conjunto)
+	j (Crea planetas orbitales aleatorios)
+	r (Crea planetas aleatorios)
+	c (Centra el sistema planetario)
+	t (Muestra las trayectorias)
+	e (Resetear el universo)
+	s (Guardar)
+	l (Cargar un universo)
+	Flechas (Desplazan el conjunto)
 
 
-play (sox)
-Reproductor
+play
+[sox]. Reproductor
 $ play archivo.wav
 
 
@@ -11462,8 +11448,7 @@ Informa a Debian de los paquetes más populares. Normalmente esta aplicación es
 
 
 postgres
-[postgresql php5-pgsql]
-Gestión de base de datos. En caso de querer aceptar conexiones externas:
+[postgresql php5-pgsql]. Gestión de base de datos. En caso de querer aceptar conexiones externas:
 # nano /etc/postgresql/9.1/main/postgresql.conf
 Substituir la linea:
 	listen_addresses = 'localhost'
@@ -11541,7 +11526,7 @@ PRELINKING=yes
 # prelink -au (Devolver el sistema a su punto de partida)
 
 
-preload (demonio)
+preload
 Demonio que se encarga de recoger información de las aplicaciones más usadas para que en el siguiente inicio estos estén cargados en memoria acelerando el tiempo de arranque de los mismos.
 
 
@@ -11605,8 +11590,7 @@ $ tail -f /var/log/proftpd  (monitorizar los logs)
 
 
 proxychains
-[tor privoxy]
-Convierte en anonima la conexión que realiza una aplicación determinada [Ver privoxy]
+[tor privoxy]. Convierte en anonima la conexión que realiza una aplicación determinada [Ver privoxy]
 # nano /etc/proxychains.conf
 Descomentar o añadir las lineas [usar el mismo puerto que en privoxy]:
 # defaults set to "tor"
@@ -11652,8 +11636,8 @@ TIME (tiempo de CPU que ha usado el proceso desde su inicio)
 COMMAND (nombre del comando que se está ejecutando)
 
 
-ps2pdf (psutils)
-Pasar un archivo ps a pdf
+ps2pdf
+[psutils]. Pasar un archivo ps a pdf
 $ man -t mount | ps2pdf -  mount.pdf   (salvar a pdf una página man del comando "mount") 
 Convertir pdf en formato A4 a A5 para imprimir como libro con las páginas ordenadas:
 $ pdftops archivo.pdf  (convertir el .pdf a .ps)
@@ -11661,13 +11645,13 @@ $ psbook archivo.ps | psnup -pa4 -2 > archivo_A5.ps (convertir el archivo genera
 $ ps2pdf archivo_A5.ps archivo_A5.pdf  (convertir nuevamente a pdf listo para imprimir)
 
 
-psad (demonio)
-Escaneador de ataques a puertos. Los resultados en /var/log/psad/analysis.out
+psad
+Demonio. Escaneador de ataques a puertos. Los resultados en /var/log/psad/analysis.out
 # psad -A -i eth0
 
 
-psbook (psutils)
-Paginar un archivo ps para imprimir como libro. Ver ps2pdf.
+psbook
+[psutils]. Paginar un archivo ps para imprimir como libro. Ver ps2pdf.
 
 
 pslist
@@ -11814,8 +11798,8 @@ $ quiz (Listara los temas posibles)
 $ quiz Europe capital (Preguntará capitales de Europa. Si no se sabe la respuesta pulsar intro en blanco y mostrará la respuesta)
 
 
-rain (bsdgames)
-Muestra chapoteo de agua en la terminal.
+rain
+[bsdgames]. Muestra chapoteo de agua en la terminal.
 $ rain -d 120 (El máximo de lento. Por defecto 0 [rápido])
 
 
@@ -12020,8 +12004,8 @@ renombrar archivos
 $ rename JPG jpg *.JPG (Renombrará todos los xxxx.JPG a xxxx.jpg)
 
 
-renice (→ nice)
-Cambiar la prioridad de un proceso en marcha.
+renice
+(Ver nice). Cambiar la prioridad de un proceso en marcha.
 # renice -10 PID
 
 
@@ -12121,15 +12105,13 @@ Nota.- Otras opciones para distros no debian o para desactivar la opción: RPM, 
 
 
 rkill
-[pslist]
-Herramienta similar a kill [ver]
+[pslist]. Herramienta similar a kill [ver]
 $ rkill -9 scribus (Matará la aplicación especificada. Igual que killall [ver])
 $ rkill -9 17424 (Matará la aplicación que corra en el PID especificado. Igual que kill)
 
 
 rl
-[randomize-lines]
-Muestra lineas de un archivo o de la entrada standard de forma aleatoria.
+[randomize-lines]. Muestra lineas de un archivo o de la entrada standard de forma aleatoria.
 $ rl /etc/fstab (Forma básica)
 $ seq 10 | rl --count 2 (2 números del 0 al 10)
 $ rl -n /etc/fstab -o archivo (Numerando las lineas, colocandolas de forma aleatoria y guardando el resultado en "archivo")
@@ -12220,8 +12202,7 @@ Gestor de paqueteria de distros basadas en Red Hat.
 
 
 rrenice
-[pslist]
-Herramienta con uso igual que renice [ver]
+[pslist]. Herramienta con uso igual que renice [ver]
 
 
 rsstail
@@ -12346,8 +12327,8 @@ Algunos atajos:
 	Ctrl + '-' (Disminuir la medida de la letra)     
 
 
-sar (sysstat)
-Controlando logs. Herramienta de monitorización del rendimiento. Cubre la mayoría de las áreas del sistema:  Uso de la CPU [opción -u, por defecto],  Colas de procesos y carga del sistema [opción -q],  Estadísticas por proceso [-x [PID | ALL]],  Creación de procesos [-c] y cambios de contexto [-w],  Actividad de los dispositivos de bloque [-d] y TTY [-y],  Uso de memoria y espacio de swap [-r],  Estadísticas de memoria [-R], de paginación [-B] y de swapping [-W],  Estadísticas de interrupciones [-I]. [/var/log/sysstat/sadd .-”dd” indica el dia]
+sar
+[sysstat]. Controlando logs. Herramienta de monitorización del rendimiento. Cubre la mayoría de las áreas del sistema:  Uso de la CPU [opción -u, por defecto],  Colas de procesos y carga del sistema [opción -q],  Estadísticas por proceso [-x [PID | ALL]],  Creación de procesos [-c] y cambios de contexto [-w],  Actividad de los dispositivos de bloque [-d] y TTY [-y],  Uso de memoria y espacio de swap [-r],  Estadísticas de memoria [-R], de paginación [-B] y de swapping [-W],  Estadísticas de interrupciones [-I]. [/var/log/sysstat/sadd .-”dd” indica el dia]
 $ sar -q 10 3 (3 muestras cada 10')
 $ sar -Ruy 5 2 (2 muestras cada 5')
 
@@ -12384,15 +12365,15 @@ Editar el archivo /etc/scalpel/scalpel.conf y descomentamos la linea de la exten
 # scalpel /dev/sda2 -o carpeta_recup (Se recuperará los avi de sda2 y se guardaran en carpeta_recup)
 
 
-scan (linuxtv-dvb-apps)
-Sintonizar canales de TV. El directorio /usr/share/dvb/dvb-t/ contiene las zonas de cobertura de la televisión digital terrestre.
+scan
+[linuxtv-dvb-apps]. Sintonizar canales de TV. El directorio /usr/share/dvb/dvb-t/ contiene las zonas de cobertura de la televisión digital terrestre.
 $ scan /usr/share/dvb/dvb-t/es-Rocacorba > channels.conf
 Copiar el archivo creado en el directorio .vlc/ [si no existe se crea] Abrir vlc con el siguiente comando:
 $ vlc .vlc/channels.conf (Bucar los canales en View/Play list) 
 
 
-scanimage (sane, sane-utils) 
-Escanear. Solo genera archivos tiff y pnm. 
+scanimage
+[sane, sane-utils]. Escanear. Solo genera archivos tiff y pnm. 
 	$ scanimage -L (Para conocer los datos del escaner) 
 	< device `hpaio:/usb/psc_1100_series?serial=MY387F93QWB0' is a Hewlett-Packard psc_1100_series all-in-one 
 $ scanimage -d hpaio:/usb/psc_1100_series?serial=MY387F93QWB0 (Especificando el escaner. Si solo existe uno no es necesaria esta opción) 
@@ -12426,32 +12407,32 @@ $ screen -r 	Retoma el proceso desacoplado con Ctrl+a Ctrl+d
 $ screen -r -S nombre	Retoma el proceso "nombre" 
 $ screen -R -D	Recupera screen despúes de un Ctrl+d
 La gestión de screen siempre empieza pulsando las teclas Ctrl+a:
-Ctrl+a c (Crear nueva ventana)
-Ctrl+a k (Matar pantalla activa / sesion activa)
-Ctrl+a X (Matar pantalla activa)
-Ctrl+a x (Bloquear terminal) 
-Ctrl+a w (Lista de ventanas)
-Ctrl+a 0-9 (Ir a la ventana numerada)
-Ctrl+a Ctrl+a (Cambiar a la última ventana)
-Ctrl+a Ctrl+p (Cambiar a la anterior ventana)
-Ctrl+a S (Dividir la terminal horizontal en regiones)
-Ctrl+a | (Dividir la terminal veticalmente)
-Ctrl+a Ctrl+n (Cambiar de región)
-Ctrl+a :resize (Redimensionar región)
-Ctrl+a F (Ajustar tamaño de la pantalla al tamaño de la nueva terminal)
-Ctrl+a K (Suprimir region)
-Ctrl+a Z (resetear screen)pi
-Ctrl+a tab (Moverse entre regiones)
-Ctrl+a d (Desacopla un proceso de una terminal, que continua en segundo plano) 
-Ctrl+a ? (Mostrar pantalla de ayuda)
-Ctrl+a Backspace (Regresar a la ventana previa)
-Ctrl+q (Si se ha pulsado una combinación erronea, desbloquea la terminal) 
-Ctrl+s (Lo mismo)
-Ctrl+a " (Muestra las shells activas)
-Ctrl+a A (Cambiar el título de la ventana)
-Ctrl+a Esc (Ver historial)
-Ctrl+a h (Guardar pantallazo en la carpeta actual con nombre hardcopy.número [0,1,2...]) 
-Ctrl+a H (Iniciar/parar registro de la ventana actual en la ventana con nombre screenlog.número [0,1,2...])
+	Ctrl+a c (Crear nueva ventana)
+	Ctrl+a k (Matar pantalla activa / sesion activa)
+	Ctrl+a X (Matar pantalla activa)
+	Ctrl+a x (Bloquear terminal) 
+	Ctrl+a w (Lista de ventanas)
+	Ctrl+a 0-9 (Ir a la ventana numerada)
+	Ctrl+a Ctrl+a (Cambiar a la última ventana)
+	Ctrl+a Ctrl+p (Cambiar a la anterior ventana)
+	Ctrl+a S (Dividir la terminal horizontal en regiones)
+	Ctrl+a | (Dividir la terminal veticalmente)
+	Ctrl+a Ctrl+n (Cambiar de región)
+	Ctrl+a :resize (Redimensionar región)
+	Ctrl+a F (Ajustar tamaño de la pantalla al tamaño de la nueva terminal)
+	Ctrl+a K (Suprimir region)
+	Ctrl+a Z (resetear screen)pi
+	Ctrl+a tab (Moverse entre regiones)
+	Ctrl+a d (Desacopla un proceso de una terminal, que continua en segundo plano) 
+	Ctrl+a ? (Mostrar pantalla de ayuda)
+	Ctrl+a Backspace (Regresar a la ventana previa)
+	Ctrl+q (Si se ha pulsado una combinación erronea, desbloquea la terminal) 
+	Ctrl+s (Lo mismo)
+	Ctrl+a " (Muestra las shells activas)
+	Ctrl+a A (Cambiar el título de la ventana)
+	Ctrl+a Esc (Ver historial)
+	Ctrl+a h (Guardar pantallazo en la carpeta actual con nombre hardcopy.número [0,1,2...]) 
+	Ctrl+a H (Iniciar/parar registro de la ventana actual en la ventana con nombre screenlog.número [0,1,2...])
 Para compartir screen via ssh: 
 	Activar el setuid de screen:
 	# chmod +s /usr/bin/screen 
@@ -12504,8 +12485,7 @@ $ ./screenfetch
 
 
 screenkey
-[python-xlib]
-Aplicacion que, durante una grabacion de escritorio en la que salen terminales y comandos, muestra por pantalla una franja negra en la que se puede apreciar las teclas que se pulsan para que las puedan ver mejor los televidentes. Iniciar la aplicacion (Se mostrara en el area del tray) y la grabacion del escritorio con alguna de las herramientas (gtk-recordMyDesktop, kazam, etc) y pararla con killall -9 screenkey cuando finalice la grabacion. 
+[python-xlib]. Aplicacion que, durante una grabacion de escritorio en la que salen terminales y comandos, muestra por pantalla una franja negra en la que se puede apreciar las teclas que se pulsan para que las puedan ver mejor los televidentes. Iniciar la aplicacion (Se mostrara en el area del tray) y la grabacion del escritorio con alguna de las herramientas (gtk-recordMyDesktop, kazam, etc) y pararla con killall -9 screenkey cuando finalice la grabacion. 
 
 
 scribes
@@ -12526,8 +12506,8 @@ Editor minimalista especial para programadores.
 	F12 (Abrir preferencias)
 
 
-script (scriptreplay)
-Copia en un fichero toda la actividad tecleada en consola hasta cesar con "exit" 
+script
+[scriptreplay]. Copia en un fichero toda la actividad tecleada en consola hasta cesar con "exit" 
 $ script -a fichero.txt
 $ script -t 2> sesion.con -a sesion.vid  (grabará la sesion. Parar el proceso con crtl+d)
 $ scriptreplay sesion.con sesion.vid  (reproduce la sesión grabada)
@@ -12710,8 +12690,7 @@ Algunos ejemplos:
 
 
 selinux
-[selinux-basics selinux-policy-default]
-SELinux proporciona una forma de acceso a recursos basada en políticas de control de acceso obligatorio [mandatory access control, MAC] incorporado en el kernel. Existen un conjunto de reglas de autorización [políticas] las cuales determinan si una operación sobre un objeto [Archivos, directorios, dispositivos...] realizada por un sujeto esta o no permitida basándose en los atributos de ambos. Linux utiliza por defecto el control de acceso a discreción [discretionary access control, DAC] basada en los propietarios y grupos a los que pertenece un objeto en los que un usuario normal puede cambiar los permisos de los archivos que posee con el comando chmod. Con selinux se limita el acceso que tienen las aplicaciones a otras aplicaciones y a los ficheros, impidiendo que un proceso pueda modificar cualquier fichero del usuario con el que se lanzó. En DAC el acceso esta descentralizado, siendo el propietario de cada objeto el encargado de asignar los permisos de los diversos grupos que accederán a ellas. En cambio con el MAC los objetos y los sujetos tan solo tienen atributos, pero son las políticas las que se encargan de autorizar o denegar una acción. Ver comandos getsebool y setsebool.
+[selinux-basics selinux-policy-default]. SELinux proporciona una forma de acceso a recursos basada en políticas de control de acceso obligatorio [mandatory access control, MAC] incorporado en el kernel. Existen un conjunto de reglas de autorización [políticas] las cuales determinan si una operación sobre un objeto [Archivos, directorios, dispositivos...] realizada por un sujeto esta o no permitida basándose en los atributos de ambos. Linux utiliza por defecto el control de acceso a discreción [discretionary access control, DAC] basada en los propietarios y grupos a los que pertenece un objeto en los que un usuario normal puede cambiar los permisos de los archivos que posee con el comando chmod. Con selinux se limita el acceso que tienen las aplicaciones a otras aplicaciones y a los ficheros, impidiendo que un proceso pueda modificar cualquier fichero del usuario con el que se lanzó. En DAC el acceso esta descentralizado, siendo el propietario de cada objeto el encargado de asignar los permisos de los diversos grupos que accederán a ellas. En cambio con el MAC los objetos y los sujetos tan solo tienen atributos, pero son las políticas las que se encargan de autorizar o denegar una acción. Ver comandos getsebool y setsebool.
 Los módulos SELinux disponibles se almacenan en el directorio /usr/share/selinux/default/.
 # semodule -i módulo.pp (habilitar un módulos en la configuración actual. La extensión pp significa paquete de política [«policy package»]).
 # semodule -r módulo (Elimina un módulo de la configuración actual)
@@ -12814,8 +12793,7 @@ Mostrar un listado de las particiones con sus características exactas.
 
 
 sfill
-[paquete secure-delete]
-Borrado de todos los rastros de datos del espacio libre del disco. Parecidos parámetros de srm [ver]. Sobreescribe 38 veces el espacio.
+[paquete secure-delete]. Borrado de todos los rastros de datos del espacio libre del disco. Parecidos parámetros de srm [ver]. Sobreescribe 38 veces el espacio.
 # sfill -f dir (Borrado rápito pero inseguro)
 # sfill -l dir (Como lanzar dos veces sfill -f)
 # sfill -i dir (Borrar solamente inodos en directorio)
@@ -12827,8 +12805,8 @@ Transferencia encriptada de archivos entre computadoras
 $ sftp host
 
 
-sg (sg3-utils)
-Identificar dispositivos /dev concectados
+sg
+[sg3-utils]. Identificar dispositivos /dev concectados
 # sg_scan -i
 # sg_map -i
 
@@ -12985,8 +12963,8 @@ $ for line in {0..17}; do for col in {0..15}; do code=$(( $col * 18 + $line )); 
 $ showrgb | grep red (Muestra el código)
 
 
-shred (secure-delete)
-Borrar de forma segura espacios de disco 
+shred
+[secure-delete]. Borrar de forma segura espacios de disco 
 $ shred -fuv  archivo    (Borra archivo y sobreescribe su espacio  25 veces)
 $ shred -zn10 /dev/sda (Borrar un disco sobreescribiendo 10 veces) 
 $ shred -fuv -n 50 archivo     (Lo mismo pero 50 veces)
@@ -13126,8 +13104,8 @@ Monitoriza la interfaz de red
 # slurm -i eth0 
 
 
-smartctl (smartmontools)
-Comprobar el estado de los discos duros. Si el disco es IDE, suprimir en todos los comandos el "-d ata"
+smartctl
+[smartmontools]. Comprobar el estado de los discos duros. Si el disco es IDE, suprimir en todos los comandos el "-d ata"
 # smartctl -i -d ata /dev/sda (Verificar si un disco ATA suporta smart)
 # smartctl -s on -d ata /dev/hda (activar el soporte smart)
 # smartctl -d ata -t short /dev/sda (lanzar el test corto)
@@ -13223,8 +13201,8 @@ Opciones
 -d y -e    Para obtener las cabeceras 
 
 
-socklist (procinfo)
-Lista conectores de red abiertos (sockets), mostrando tipo, número de puerto y otros datos específicos.
+socklist
+[procinfo]. Lista conectores de red abiertos (sockets), mostrando tipo, número de puerto y otros datos específicos.
 $ socklist
 
 
@@ -13343,8 +13321,7 @@ $ spacedream
 
 
 speaker
-[ver aoss espeak]
-Pruebas de sonido.
+(ver aoss espeak). Pruebas de sonido.
 # speaker-test -c 6 -t wav (probar altavoces usando voz [t])
 
 
@@ -13379,8 +13356,7 @@ $ splitvt -t "linux es genial" -upper ls -lower top (Con un título [-t] lanzand
 
 
 sponge
-[moreutils]
-herramienta que guarda todo el contenido a escribir hasta que recibe el EOF y luego lo escribe por lo que permite procesar un fichero y reescribirlo en el propio fichero sin perdida de datos.
+[moreutils]. Herramienta que guarda todo el contenido a escribir hasta que recibe el EOF y luego lo escribe por lo que permite procesar un fichero y reescribirlo en el propio fichero sin perdida de datos.
 $ tac archivo | sponge archivo (Lee al reves un archivo y lo guarda en el mismo archivo)
 $ column -t datos | sponge datos
 
@@ -13425,8 +13401,7 @@ Configuración de usuarios (/etc/squid/passwd):
 
 
 srm
-[secure-delete]
-Aplicación para eliminar de forma segura datos de disco sobreescribiendo su espacio. Es de funcionamiento lento, pero por eso se le considera el más efectivo
+[secure-delete]. Aplicación para eliminar de forma segura datos de disco sobreescribiendo su espacio. Es de funcionamiento lento, pero por eso se le considera el más efectivo
 $ srm -f dir (Modo rápido i el más inseguro)
 $ srm -l dir (Como realizar dos veces srm -f)
 $ srm archivo.txt (Se sobreescribe 38 veces)
@@ -13533,8 +13508,7 @@ $ ssh -X usuario@host akregator
 
 
 ssconvert
-[gnumeric]
-Conversor de formatos de hoja de cálculo por línea de comandos.
+[gnumeric]. Conversor de formatos de hoja de cálculo por línea de comandos.
 $ ssconvert --list-exporters (Listado de conversiones de salida)
 $ ssconvert --list-importers (Litado de conversiones de entrada)
 $ ssconvert entrada.xls salida.csv (De formato excel a csv)
@@ -13602,8 +13576,7 @@ Visionar en tiempo real los paquetes capturados:
 
 
 sswap
-[secure-delete]
-Borrado seguro de swap. Previamente desactivar con swapoff /dev/sda7 y al finalizar el proceso volver a activarla con swapon /dev/sda7 [Si no sabemos donde se encuentra la swap: cat /proc/swaps. Argumentos paracidos a srm [ver] y sfill [ver]. El espacio se sobreescribe 38 veces.
+[secure-delete]. Borrado seguro de swap. Previamente desactivar con swapoff /dev/sda7 y al finalizar el proceso volver a activarla con swapon /dev/sda7 [Si no sabemos donde se encuentra la swap: cat /proc/swaps. Argumentos paracidos a srm [ver] y sfill [ver]. El espacio se sobreescribe 38 veces.
 $ sswap -f /dev/sda7 (Modo rápido e inseguro)
 $ sswap -lv /dev/sda7 (Como lanzar dos veces sswap -f y mostrando el proceso)  
 
@@ -13790,27 +13763,27 @@ $ summain --output=summain.txt -c MD5 archivo (Lo guardará en summain.txt y sum
 $ summain --output=Comprobación_dir -c SHA512 /home/usuario/ (De todos los archivos del directorio del usuario)
 
 
-surf (dmenu, wget)
-Navegador 
+surf
+[dmenu, wget]. Navegador 
 $ surf -i URL (Deshabilitar imagenes) 
 $ surf -p URL (Deshabilitar plugins) 
 $ surf -s URL (Deshabilitar Javascript) 
 Atajos 
 Esc (Stop )
-^h (Historial) 
-^l (Hacia delante en el historial) 
-^k (ir hacia arriba de la página) 
-^j (ir hacia abajo de la página) 
-^K (Incrementar el zoom)shopt –s extglob
-^J (Disminuir el zoom) 
-^I (Resetear el zoom) 
-^n (ir al siguiente resultado de la busqueda)
-^N (ir al anterior resultado)
-^g (Abrir la barra de direcciones [demenu]) 
-^P (Abre dialogo de impresión)
-^r (Recargar página)
-^R (Recargar sin usar la caché)
-^o (Ver código fuente)
+	^h (Historial) 
+	^l (Hacia delante en el historial) 
+	^k (ir hacia arriba de la página) 
+	^j (ir hacia abajo de la página) 
+	^K (Incrementar el zoom)shopt –s extglob
+	^J (Disminuir el zoom) 
+	^I (Resetear el zoom) 
+	^n (ir al siguiente resultado de la busqueda)
+	^N (ir al anterior resultado)
+	^g (Abrir la barra de direcciones [demenu]) 
+	^P (Abre dialogo de impresión)
+	^r (Recargar página)
+	^R (Recargar sin usar la caché)
+	^o (Ver código fuente)
 
 
 surfraw (sr)
@@ -13988,8 +13961,8 @@ Ejemplo de un proceso:
 # tcpdump -r /tmp/port.80 -nn 'host !216.158.240.43' -w /tmp/port.80.b (Lo mismo enviando los nuevos datos a otro fichero)
 
 
-tcpkill (dsniff) 
-Matar o impedir conexiones tcp. 
+tcpkill
+[dsniff)]. Matar o impedir conexiones tcp. 
 # tcpkill -i eth1 host www.facebook.com (imposibilitará entrar en facebook) 
 # tcpkill -i eth0 host www.facebook twitter.com (especificar varias urls separadas por un espacio)
 # tcpkill -i eth0 port 22 (especificando un puerto)
@@ -14051,14 +14024,14 @@ terminator
 Terminal que puede dividirse horizontalmente y verticalmente.
 $ terminal -T linux –giometry 1150x250 (Especificando un titulo y medidas)
 Algunos atajos:
-Ctrl + Mayus + o (División horizontal)
-Ctrl + Mayus + e (División vertical)
-Ctrl + Mayus + w (Cerrar ventana)
-Ctrl + Mayus + cursores (Redimensionar ventana)
-Alt + cursores (Moverse por las ventanas)
-Ctrl + Mayus + t (Abrir nueva pestaña)
-Ctrl + RePag / AvPag (Moverse entre pestañas)
-Ctrl + Mayus + q (Cerrar terminator)
+	Ctrl + Mayus + o (División horizontal)
+	Ctrl + Mayus + e (División vertical)
+	Ctrl + Mayus + w (Cerrar ventana)
+	Ctrl + Mayus + cursores (Redimensionar ventana)
+	Alt + cursores (Moverse por las ventanas)
+	Ctrl + Mayus + t (Abrir nueva pestaña)
+	Ctrl + RePag / AvPag (Moverse entre pestañas)
+	Ctrl + Mayus + q (Cerrar terminator)
 
 
 termite
@@ -14082,8 +14055,8 @@ $ termsaver urlfetcher -u lapipaplena.org (Mostrará el código de la página in
 $ termsaver programmer -p script.sh (Mostrará el código indicado linea a linea) 
 
 
-testdisk (photorec)
-Escaneo y reparación de particiones.
+testdisk
+[photorec]. Escaneo y reparación de particiones.
 $ testdisk /list (Muestra todas las particiones incluso las no montadas)
 
 
@@ -14128,8 +14101,8 @@ Chequear vulnerabilidades del sistema. Informe en /var/log/tiger
 # tiger -H -l /home/user/logs (crear un html con los resultados y guardarlo en el directorio “logs”)
 
 
-tightvncserver (En el cliente: xtightvncviewer)
-Conexión remota.
+tightvncserver
+(En el cliente: xtightvncviewer). Conexión remota.
 En el Servidor: 
 # tightvncserver -depth 16 -geometry 640x480
 En el Cliente: 
@@ -14258,8 +14231,8 @@ Muestra de un archivo.yml:
 					- who; pwd
 
 
-toilet (figlet mejorado) 
-Edición de banners 
+toilet
+(figlet mejorado). Edición de banners 
 $ toilet -f future -F gay texto 
 $ toilet -t -f smblock -F metal -E html texto 
 Opciones 
@@ -14456,8 +14429,8 @@ $ jobs
 $ kill -9 %pid (Para matarlo definitivamente)
 
 
-trash (trash-cli)
-Enviar a la papelera un archivo o directorio
+trash
+[trash-cli]. Enviar a la papelera un archivo o directorio
 $ trash-put archivo (elimina archivo)
 $ trash-list (Lista los archivos eliminados)
 $ restore-trash (Pregunta el número del archivo a restaurar)
@@ -14618,8 +14591,8 @@ Indicando que la salida del comando find (las rutas en donde encontró el “arc
 directorio) el error se almacene en el archivo “errores”. Adicionalmente enviamos el comando a background para poder hacer uso de la terminal mientras se realiza el proceso.  
 
 
-tune2fs (tunefs)
-Chequeo de la tabla de particiones
+tune2fs
+[tunefs +. Chequeo de la tabla de particiones
 # tune2fs -c 80 /dev/sda1 (cada 80 reinicios) 
 # tune2fs -i 2m /dev/sda1 (cada 2 meses) 
 # tune2fs -i 2w /dev/hda3 (cada 2 semanas) 
@@ -14652,16 +14625,15 @@ $ tv3 4226490
 
 
 TVenLinux.sh
-[mplayer, zenity, rtmpdump y curl] 
-Script para poder ver prácticamente todos los canales de la TDT a través de Internet. Descarga: http://www.tvenlinux.com/TVenLinux.sh. Despues de otorgar permisos [chmod +x TVenLinux.sh) ejecutar con ./TVenLinux.sh. 
+[mplayer, zenity, rtmpdump y curl]. Script para poder ver prácticamente todos los canales de la TDT a través de Internet. Descarga: http://www.tvenlinux.com/TVenLinux.sh. Despues de otorgar permisos [chmod +x TVenLinux.sh) ejecutar con ./TVenLinux.sh. 
 Atajos 
-q (Salir para cambiar de programa o finalizar) 
-cursor izquierdo (Si el video y el audio están descompasados, podemos volver 10 segundos atrás y suele solucionar el problema) 
-cursor derecho (Avanza 10 segundos) 
-m (Silencia) 
-p (Pausa / inicia la reproducción. En casos de desconexiones frecuentes, pausar la reproducción permite aumentar la caché) 
-f (Pantalla completa) 
-Mays + t (Siempre encima)
+	q (Salir para cambiar de programa o finalizar) 
+	cursor izquierdo (Si el video y el audio están descompasados, podemos volver 10 segundos atrás y suele solucionar el problema) 
+	cursor derecho (Avanza 10 segundos) 
+	m (Silencia) 
+	p (Pausa / inicia la reproducción. En casos de desconexiones frecuentes, pausar la reproducción permite aumentar la caché) 
+	f (Pantalla completa) 
+	Mays + t (Siempre encima)
 
 
 twidge 
@@ -14865,8 +14837,8 @@ $ uniq -d archivo archivo2 (en archivo2 sólo las repetidas)
 $ uniq -c archivo (Muestra al principio de la linea el número de veces que se repite)
 
 
-unison (openssh-server ssh)
-Sincronización de carpetas remotas.
+unison
+[openssh-server ssh]. Sincronización de carpetas remotas.
 Previamente crear la clave y copiarla al otro pc:
 $ ssh-keygen -t dsa 
 $ ssh-copy-id -i $HOME/.ssh/id_dsa.pub root@ip_o_host 
@@ -14878,7 +14850,7 @@ root = /srv/http
 root = ssh://ip_o_host//srv/http
 Puede colocarse la orden en el cron para que se actualice cada 5 minutos:
 crontab -e 
-*/5 * * * * /usr/bin/unison &> /dev/null
+	*/5 * * * * /usr/bin/unison &> /dev/null
 
 
 units
@@ -15030,9 +15002,8 @@ uptime
 Tiempo transcurrido desde que se arrancó el sistema
 
 
-urlcrazy (ruby 1.8) 
-http://www.morningstarsecurity.com/research/urlcrazy 
-Herramienta que genera posibles URLs de un dominio que podrian ser usados para ataques de phising, malversing o fraudes varios. 
+urlcrazy
+[ruby 1.8)]. http://www.morningstarsecurity.com/research/urlcrazy . Herramienta que genera posibles URLs de un dominio que podrian ser usados para ataques de phising, malversing o fraudes varios. 
 $ ./urlcrazy (Muestra las opciones) 
 $ ./urlcrazy -o paypal.txt paypal.com (Redirigiendo el resultado a un archivo) 
 Otras opciones: 
@@ -15085,8 +15056,8 @@ Arrancarlo con alguno de los siguientes comandos:
 # usb_modeswitch -c /etc/usb_modeswitch.conf
 
 
-usbmount (+ autofs [demonio])
-Automontar dispositivos de almacenamiento externo. Editar:
+usbmount
+(+ autofs [demonio]). Automontar dispositivos de almacenamiento externo. Editar:
 # nano /etc/usbmount/usbmount.conf
 Y verificar/modificar según necesidades, las lineas:
 MOUNTPOINTS="/media/usb0 /media/usb1 /media/usb2 /media/usb3 /media/usb4 /media/usb5 /media/usb6 /media/usb7" 
@@ -15192,8 +15163,7 @@ Algunos atajos:
 
 
 uuencode
-[sharutils]
-Algoritmo utilizado para convertir datos binarios de 8 bits a formato de 7 bits. La codificación uuencoding se creó originalmente para enviar archivos binarios mediante el protocolo de correo electrónico uucp. Si no se especifica salida se muestra por pantalla (/dev/stdout)
+[sharutils]. Algoritmo utilizado para convertir datos binarios de 8 bits a formato de 7 bits. La codificación uuencoding se creó originalmente para enviar archivos binarios mediante el protocolo de correo electrónico uucp. Si no se especifica salida se muestra por pantalla (/dev/stdout)
 $ uuencode file1 file2 > file.uue ("file1": nombre del binario a codificar, "file2": Nombre que tendrá el binario una vez descodificado [puede ser el mismo que el binario original] y "file.uue" el nombre que se verá en el directorio.)
 $ uudecode file.uue (Descodificar el binario. Se verá con el nombre puesto en "file2")
 
@@ -15204,8 +15174,8 @@ $ uuidgen -r (Aleatorio)
 $ uuidgen -t (Crea un UUID basado en el reloj del sistema)
 
 
-uzbl-browser (uzbl-tabbed) 
-Navegador estilo vi. Arrancarlo con uzbl-tabbed para permitir pestañas.
+uzbl-browser
+[uzbl-tabbed)]. Navegador estilo vi. Arrancarlo con uzbl-tabbed para permitir pestañas.
 $ nano .config/uzbl/config (archivos de configuración)
 Atajos: 
 	j (descendeer en la página)
@@ -15353,8 +15323,8 @@ Los datos que interesan son: 15931 y 25. Sin cerrar la página del vídeo y una 
 $ cp /proc/15931/fd/25 video.flv 
 
 
-videotop (videotop-git, urwid, youtube-dl)
-Descarga de videos de youtube.
+videotop
+[videotop-git, urwid, youtube-dl]. Descarga de videos de youtube.
 $ videotop  (Para entrar en el prompt)
 Teclear:
 	:s queen (se mostrarán los videos en los que aparezca queen. Se selecciona con la flechas el que se quiera descargar y se pulsa intro. El video se encontrará en $HOME/.videotop/videos/)
@@ -15579,14 +15549,12 @@ Para abrir NERDTree pulsando F5 colocar en .vimrc la linea:
 
 
 vipe
-[moreutils]
-Permite editar en medio de una tubería los datos que están siendo canalizadas entre programas.
+[moreutils]. Permite editar en medio de una tubería los datos que están siendo canalizadas entre programas.
 $ ls | vipe | ifdata -pb eth0
 
 
 virtualbox
-[vitualbox-guest-utils] 
-Herramienta que permite la virtualización de sistemas operativos. 
+[vitualbox-guest-utils]. Herramienta que permite la virtualización de sistemas operativos. 
 En la página https://www.virtualbox.org/wiki/Downloads apartado "VirtualBox 4.2 Oracle VM VirtualBox Extension Pack" clicar en "All platforms" y Descargar el paquete de extensiones Oracle_VM_VirtualBox_Extension_Pack-4.2.0-80737.vbox-extpack. Para instalarlo, doble clic en el paquete y seguir instrucciones [aceptar condiciones y contraseña de root].
 # usermod -aG vboxusers USUARIO (Agregar usuario al grupo vboxusers) 
 # gpasswd -a $USER vboxsf (Agregar usuario al grupo vboxsf) 
@@ -15633,8 +15601,8 @@ Herramienta de monitorización del rendimiento. Proporciona información acerca 
 # vmstat 2  (actualización cada dos segundo)
 
 
-vncrec (xutils-dev libxt-dev libxmu-dev libxaw7-dev)
-Grabación de sesiones vnc. (https://wiki.ubuntu.com/ScreenCasts/VNCREC)
+vncrec
+[xutils-dev libxt-dev libxmu-dev libxaw7-dev]. Grabación de sesiones vnc. (https://wiki.ubuntu.com/ScreenCasts/VNCREC)
 $ wget http://ronja.twibright.com/utils/vncrec-twibright.tgz
 $ tar xzvf vncrec-twibright.tgz
 $ cd vncrec-twibright/
@@ -15674,8 +15642,7 @@ Herramienta que guarda un registro del tráfico de nuestras conexiones de red se
 
 
 vnstati
-[vnstat]
-Crea un png de la salida del comando vnstat.
+[vnstat]. Crea un png de la salida del comando vnstat.
 $ vnstati -s -vs -i eth1 -o vnstat.png (Mostrando resumen del tráfico de salida [s], incluyendo datos por hora en gráfica vertical [vs], especificando la red y guardando en vnstat.png [o])
 $ vnstati -h -c 15 -o vnstat2.png (por horas [h] y actualizando si han pasado 15 minutos del último reporte)
 
@@ -15723,8 +15690,7 @@ $ vte -g 60x10 -r red (Especificando medidas y color del cursor)
 
 
 w
-[who]
-Muestra quien está conectado y las sesiones que tiene abiertas.
+[who]. Muestra quien está conectado y las sesiones que tiene abiertas.
 
 
 w3m
@@ -15752,8 +15718,7 @@ $ wall << finmensaje (lo mismo pero lo envia al introducir “finmensaje”)
 
 
 wapiti
-[python, python-utidylib, tidy y python-ctypes]
-Permite auditar la seguridad de las aplicaciones web buscando secuencias de comandos y formas en las que se pueda inyectar datos.
+[python, python-utidylib, tidy y python-ctypes]. Permite auditar la seguridad de las aplicaciones web buscando secuencias de comandos y formas en las que se pueda inyectar datos.
 # wapiti http://URL -u -f html -o informe (Creará un archivo, index.html [f], mostrando las anomalias en color [u] en la carpeta "informe" [o])
 Algunas opciones:
 -f (otros formatos: json, txt, openvas y xml)
@@ -15784,8 +15749,8 @@ opciones:
 -L (la longitud de la línea más larga del texto)
 
 
-weather (weather-util)
-Estado del tiempo. Buscar el código de la ciudad en: 
+weather
+[weather-util]. Estado del tiempo. Buscar el código de la ciudad en: 
 http://www.nws.noaa.gov/tg/siteloc.shtml
 $ weather -m -v LEGE  (En decimal con la maxima información y para Gerona [España])
 
@@ -16036,8 +16001,7 @@ Muestra ventanas en consola. Parecido a dialog con menos opciones.
 
 
 who
-[whowatch] 
-Muestra información sobre los usuarios que están conectados al equipo.
+[whowatch]. Muestra información sobre los usuarios que están conectados al equipo.
 $ who -b (Tiempo desde el último arranque del sistema)
 $ who -d (Procesos truncados)
 $ who -r (Informa del runlevel activo)
@@ -16448,8 +16412,8 @@ Teclas de control:
 	q (salir)
 
 
-xlock (xclockmore)
-Activar el protector de pantalla. Solicitará contraseña para salir.
+xlock
+[xclockmore]. Activar el protector de pantalla. Solicitará contraseña para salir.
 $ xlock -mode anemona
 Existen muchas opciones de “mode”: atlantis, dragon, crystal...)
 
@@ -16472,8 +16436,8 @@ Colores por defecto:
 -swapcolor red (de la memoria swap. Mismo color que la memoria usada)
 
 
-xmll (libxml2)
-Formatear archivos xml
+xmll
+[libxml2]. Formatear archivos xml
 $ xmllint --format archivo.xml
 
 
@@ -16645,8 +16609,8 @@ xvkbd
 Teclado virtual.
 
 
-xwd (xbase-clients)
-Captura de pantalla
+xwd
+[xbase-clients]. Captura de pantalla
 $ xwd > pantalla.xwd  (Capturar la ventana al clicarla) 
 $ xwd -root -screen > pantalla.xwd  (Capturar la ventana inmediatamente)
 $ xwud -in pantalla.xwd  (Ver imágenes en formato xwd)
@@ -16709,8 +16673,7 @@ Para salir pulsar "q" y para actualizar datos "r"
 
 
 yacy
-[openjdk-6-jre-headless]
-Buscador libre y descentralizado. La red no almacenada las busquedas y no es posible censurar el contenido del indice compartido. Descarga de http://debian.yacy.net o añadiendo al sources.list la linea:
+[openjdk-6-jre-headless]. Buscador libre y descentralizado. La red no almacenada las busquedas y no es posible censurar el contenido del indice compartido. Descarga de <http://debian.yacy.net> o añadiendo al sources.list la linea:
 	deb http://debian.yacy.net ./
 Arrancar el demonio de forma clásica:
 # /etc/init.d/yacy start (restart para reiniciar y stop para parar)
@@ -16760,8 +16723,7 @@ $ yes | rm -i * (Pasado como entrada para que conteste "si" a todo)
 
 
 yetris
-[libncurses5-dev]
-Juego tetris para ncurses.
+[libncurses5-dev]. Juego tetris para ncurses.
 	$ git clone https://github.com/alexdantas/.git
 	$ cd yetris
 	$ make
@@ -16862,8 +16824,8 @@ zgrep
 imprime las líneas que cumplan la expresión regula sobre ficheros comprimidos (Ver grep)
 
 
-zip (unzip)
-comprime y empaqueta 
+zip
+[unzip]. comprime y empaqueta 
 $ zip archivo.zip fichero1 fichero2 (Comprimir varios ficheros)
 $ zip -r archivo.zip file1 file2 dir1 (comprimir varios files y directorios)
 
