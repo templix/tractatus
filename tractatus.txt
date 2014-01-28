@@ -3224,8 +3224,8 @@ $ disown -a (Desliga todos los procesos ejecutados desde la terminal)
 $ disown -r (Desliga los que esten en marcha [running])
 
 
-display (imagemagick)
-visualizar imagenes en las X
+display
+[imagemagick]. Visualizar imagenes en las X.
 $ display imagen.jpg
 $ DISPLAY=:0.0 gedit  (lanzado desde una tty, abre gedit en las X. Si solo tenemos una sesión X corriendo, puede suprimirse el “.0”)
 $ gmessage “Cierra el firefox” -display :0 (Lanzado desde una tty mostrará el mensaje en las X)
@@ -3416,8 +3416,7 @@ Pulsando “s” mostrará las versiones disponibles para ser instaladas.
 
 
 dpigs
-[debian-goodies]
-Muestra los paquetes que ocupan más espacio.
+[debian-goodies]. Muestra los paquetes que ocupan más espacio.
 $ dpigs (Los primeros diez 10. Opción por defecto)
 $ dpigs -n 20 (Los primeros 20)
 $ dpigs -S (Muestra los paquetes fuente más grandes instalados en el sistema)
@@ -3599,8 +3598,8 @@ $ dvdauthor -o directorio archivo_control.xml
 $ dvdauthor -o mi_dvd -T (crear table de contenidos)
 
 
-dvdbackup (dependencias: libdvdread, libdvdcss)
-Ripeo de dvds
+dvdbackup
+[dependencias: libdvdread, libdvdcss]. Ripeo de dvds.
 $ dvdbackup -i /dev/cdrom  (/información del dvd)
 $ dvdbackup -M -i/dev/cdrom -o/home/usuario/carpeta_destino (lanzar la aplicación)
 
@@ -3619,16 +3618,16 @@ Uso:
 $ dvgrab --buffers 500 (Los videos se almacenarán de forma secuencial [001.avi, 002.avi...] y 500 frames. Por defecto 100)
 $ dvgrab -f avi -s 0 videos/archivo.avi (Especificando formato, sin perdida de calidad y destino)
 Algunas opciones:
--a 30 (crear nuevo archivo cada 30 segundos
--csize 5 (divide el archivo de captura cuando llega a 5MB)
--debug all (mostrar información de la captura.
--d 10,20 (tiempo total a capturar en formato SMIL. Por defecto ilimitado
--every 50 (grabar un cuadro cada 50)
--f dif (formato de captura. Por defecto raw. Algunos formatos: dif [raw con extensión .dif], qt [formato QuickTime], mpeg2 [compresión MPEG-2], jpeg ]secuencia de imágenes]
--F 20 (cantidad máxima de fotogramas por archivo. Por defecto ilimitado)
--nostop (no detener la reproducción en el dispositivo al cerrar la captura)
--rewind (rebobina el MiniDV al finalizar)
--t (poner fecha y hora de registro como nombre del archivo)
+	-a 30 (crear nuevo archivo cada 30 segundos
+	-csize 5 (divide el archivo de captura cuando llega a 5MB)
+	-debug all (mostrar información de la captura.
+	-d 10,20 (tiempo total a capturar en formato SMIL. Por defecto ilimitado
+	-every 50 (grabar un cuadro cada 50)
+	-f dif (formato de captura. Por defecto raw. Algunos formatos: dif [raw con extensión .dif], qt [formato QuickTime], mpeg2 [compresión MPEG-2], jpeg [secuencia de imágenes]
+	-F 20 (cantidad máxima de fotogramas por archivo. Por defecto ilimitado)
+	-nostop (no detener la reproducción en el dispositivo al cerrar la captura)
+	-rewind (rebobina el MiniDV al finalizar)
+	-t (poner fecha y hora de registro como nombre del archivo)
 
 
 dvtm
@@ -3656,22 +3655,22 @@ Atajos: dwb:keys
 Configuración: dwb:settings 
 Las configuraciones en texto plano en .config/dwb/
 Algunos atajos: 
-o (Para entrar una url) 
-O (abrirla en una nueva pestaña) 
-J (Cambiar entre pestañas)
-j (bajar por la página)
-k (subir)
-d (cerrar pestaña)
-u (reabrir pestaña cerrada) 
-go (Editar la url) 
-r (Recargar la página) 
-R (Recargar sin usar la caché) 
-f (Marcar los enlaces para escoger el que proceda) 
-F (Marcar los enlaces y abrir el escogido en nueva pestaña) 
-i (Modo insert para insertar en algún cuadro de dialogo) 
-Esc (Volver a modo normal) 
-M (Entrar url en en laces de interés) 
-ctrl q (Para salir del navegador) 
+	o (Para entrar una url) 
+	O (abrirla en una nueva pestaña) 
+	J (Cambiar entre pestañas)
+	j (bajar por la página)
+	k (subir)
+	d (cerrar pestaña)
+	u (reabrir pestaña cerrada) 
+	go (Editar la url) 
+	r (Recargar la página) 
+	R (Recargar sin usar la caché) 
+	f (Marcar los enlaces para escoger el que proceda) 
+	F (Marcar los enlaces y abrir el escogido en nueva pestaña) 
+	i (Modo insert para insertar en algún cuadro de dialogo) 
+	Esc (Volver a modo normal) 
+	M (Entrar url en en laces de interés) 
+	ctrl q (Para salir del navegador) 
 
 
 e2fsck
@@ -3686,8 +3685,8 @@ Sscar una imagen de una partición.
 # e2image /dev/sda2 copia.img
 
 
-e2label (ntfsprogs)
-Poner etiquetas a las particiones y dispositivos ext3
+e2label
+[ntfsprogs]. Poner etiquetas a las particiones y dispositivos ext3
 # e2label /dev/dispositivo_usb mi_usb  (cuando se conecte, en el escritorio aparecerá el icono con el nombre “mi_usb”)
 # e2label /dev/sda5  (dirá si la partición sdb5 tiene nombre de etiqueta)
 
@@ -3696,8 +3695,8 @@ e2undo
 Cuando la aplicación e2fsprogs falla, e2undo restablece el sistema de ficheros  ext2/ext3/ext4 anterior del dispositivo.
 
 
-e4defrag (e2fsprogs)
-Desfragmentar particiones ext4.
+e4defrag
+[e2fsprogs]. Desfragmentar particiones ext4.
 # e4defrag /dev/sda2
 
 
@@ -3723,8 +3722,7 @@ $ echo "" > archivo.txt (Borra el contenido de archivo.txt. Para un borrado tota
 
 
 ecryptfs
-[ecryptfs-utils cryptsetup]
-Sistema de ficheros que permite encriptar la informacion. Puede ser montado en un sistema de ficheros convencional [ext4, ext3...] lo cual siginifica que no tenemos que preocuparnos por asignarle espacio: conforme añadimos o eliminamos archivos, el espacio crece o decrece. Se podría coger un solo fichero encriptado, enviarse a otro PC y acceder a la información de ese fichero usando la misma contraseña.
+[ecryptfs-utils cryptsetup]. Sistema de ficheros que permite encriptar la informacion. Puede ser montado en un sistema de ficheros convencional [ext4, ext3...] lo cual siginifica que no tenemos que preocuparnos por asignarle espacio: conforme añadimos o eliminamos archivos, el espacio crece o decrece. Se podría coger un solo fichero encriptado, enviarse a otro PC y acceder a la información de ese fichero usando la misma contraseña.
 1.-
 Encriptar un directorio:
 $ mkdir cripta (Crear directorio)
@@ -3784,20 +3782,19 @@ Teclas de control:
 
 
 egrep
-[extended grep]
-Busca expresiones regulares completas.
+[extended grep]. Busca expresiones regulares.
 	$ egrep -v '^$|^#' archivo (suprimir lineas en blanco y comentadas)
 	$ egrep -c '^#' /etc/fstab (Muestra el número de lineas comentadas)
-	$ egrep -in "palabra" *.txt (busca “palabra” en todos los .txt del directorio)
-	$ egrep 'UUID|proc' /etc/fstab (Muestra las lineas con las coincidencias) 
-	$ egrep --color '(vmx|svm)' /proc/cpuinfo (Averiguar si el equipo  admite la virtualización por hardware. Si el comando no devuelve nada es porque no lo soporta)
+$ egrep -in "palabra" *.txt (busca “palabra” en todos los .txt del directorio)
+$ egrep 'UUID|proc' /etc/fstab (Muestra las lineas con las coincidencias) 
+$ egrep --color '(vmx|svm)' /proc/cpuinfo (Averiguar si el equipo  admite la virtualización por hardware. Si el comando no devuelve nada es porque no lo soporta)
 Otras opciones: 
--h 	Muestra las líneas coincidentes pero no los nombres de archivo. 
--i 	Ignora los cambios mayúsculas y minúsculas. 
--n 	Muestra la línea y el número de línea. 
--r 	Lee en todos los archivos de los directorios y subdirectorios. 
--v 	Muestra todas las lineas que no coinciden. 
--w      Sólo coincidencia en palabras completas. 
+	-h 	Muestra las líneas coincidentes pero no los nombres de archivo. 
+	-i 	Ignora los cambios mayúsculas y minúsculas. 
+	-n 	Muestra la línea y el número de línea. 
+	-r 	Lee en todos los archivos de los directorios y subdirectorios. 
+	-v 	Muestra todas las lineas que no coinciden. 
+	-w      Sólo coincidencia en palabras completas. 
 
 
 eject
@@ -3939,8 +3936,7 @@ Algunas opciones para grep: SHELL, USER, PATH, KEYBOARD, LANG..
 
 
 errno
-[moreutils]
-Muestra los errores de código y sus descripciones.
+[moreutils]. Muestra los errores de código y sus descripciones.
 $ errno -l (Todo el listado)
 $ errno -s desconocido (Busca del listado el que contenga la descripción "desconocido")
 
@@ -3972,13 +3968,13 @@ eterm
 Terminal.
 $ Eterm -D 1 -f green -O (En el segundo escritorio [-D 1] con las fuentes en verde  [-f]  y transparente [-O]
 Algunas opciones:
---buttonbar false (Sin la barra del menú)
--T “titulo de la terminal” 
--b yellow (color de fondo)
--c red (Color del cursor)
--g 50x10 (Medidas. 50 de largo por 10 de ancho)
--S (Abrir en todos los escritorios)
--e comando (Cuando termine de ejecutar el comando se cierra)
+	--buttonbar false (Sin la barra del menú)
+	-T “titulo de la terminal” 
+	-b yellow (color de fondo)
+	-c red (Color del cursor)
+	-g 50x10 (Medidas. 50 de largo por 10 de ancho)
+	-S (Abrir en todos los escritorios)
+	-e comando (Cuando termine de ejecutar el comando se cierra)
 
 
 etherwake
@@ -4161,8 +4157,7 @@ $ sum=`expr 5 + 3`; expr $sum \* 2 (Enlazar operaciones)
 
 
 expresiones-regulares
-[regex o patrones]
-Buscar cadenas de texto que coinciden con un patrón. Los comandos más usuales que las emplean son grep, find, sed y awk y cada uno con sus pecualiaridades. Para ilustrar dichas expresiones se usa un archivo de texto al que llamo file.
+[regex o patrones]. Buscar cadenas de texto que coinciden con un patrón. Los comandos más usuales que las emplean son grep, find, sed y awk y cada uno con sus pecualiaridades. Para ilustrar dichas expresiones se usa un archivo de texto al que llamo file.
 $ cat file
 	# /etc/fstab: static file system information.
 	UUID=de1d7793-c3d2-4e03-b79d-1a76905619e6 /               ext4    errors=remount-ro 0       1
@@ -4278,8 +4273,7 @@ Algunas opciones:
 
 
 extundelete
-[e2fsprogs, e2fslibs, e2fslibs-dev, g++, build-essential]
-Recuperación de archivos o directorios borrados. La partición sobre la que se actua ha de estar desmontada. Descargar la aplicación de <http://extundelete.sourceforge.net/> e instalarla con el clasico ./configure, make, sudo make install.
+[e2fsprogs, e2fslibs, e2fslibs-dev, g++, build-essential]. Recuperación de archivos o directorios borrados. La partición sobre la que se actua ha de estar desmontada. Descargar la aplicación de <http://extundelete.sourceforge.net/> e instalarla con el clasico ./configure, make, sudo make install.
 # extundelete  /dev/sda11 --restore-directory /datos/dir_borrado (recuperar el directorio dir_borrado de la partición /dev/sda11. Lo guardará en el directorio RECOVERED_FILES)
 # extundelete  /dev/sda11 --restore-file /datos/imagenes/foto.png -o fotos/ (recuperar un archivo y guardarlo en el directorio fotos)
 # extundelete /dev/sda11 --restore-all (recuperar toda una partición)
@@ -4362,7 +4356,7 @@ Fallar la autentificación en el servidor web, blloqueo por 10 minutos
 
 
 faillog
-(/var/log/faillog) almacena todos los intentos "login" fallidos realizados a una maquina.
+(/var/log/faillog). Almacena todos los intentos "login" fallidos realizados a una maquina.
 $ faillog
 
 
@@ -4379,10 +4373,10 @@ fbgs
 Visualizar pdf usando framebuffer [sin X]
 $ fbgs -c archivo.pdf  (visualizarlo en color)
 Opciones:
--l  (Ampliación a 100 dpi (75 dpi por defecto)
--xl (a 12 dpi)
--xxl (a 150 dpi)
--p contraseña (Si el pdf requiera contraseña)
+	-l  (Ampliación a 100 dpi (75 dpi por defecto)
+	-xl (a 12 dpi)
+	-xxl (a 150 dpi)
+	-p contraseña (Si el pdf requiera contraseña)
 
 
 fbi
@@ -4494,13 +4488,12 @@ $ feh http://URL/imagen.png (Visualizar una imagen a partir de una URL)
 
 
 festival
-[festival festvox-ellpc11k]
-Sintetizador de voz.
+[festival festvox-ellpc11k]. Sintetizador de voz.
 $ echo “Linux es genial” | festival --tts --language spanish
 $ festival --tts --language spanish archivo.txt
 Nota.- Si al lanzar la aplicación nos muestra una salida: “Linux: can't open /dev/dsp”, crear el fichero .festivalrc en nuestra $HOME pegando el siguiente contenido:
-(Parameter.set 'Audio_Command "aplay -q -c 1 -t raw -f s16 -r $SR $FILE")
-(Parameter.set 'Audio_Method 'Audio_Command) 
+	(Parameter.set 'Audio_Command "aplay -q -c 1 -t raw -f s16 -r $SR $FILE")
+	(Parameter.set 'Audio_Method 'Audio_Command) 
 
 
 ffmpeg
@@ -4555,8 +4548,8 @@ Muestra el número de terminal activo.
 $ fgconsole
 
 
-fgrep (fast grep)
-Busca cadenas de texto fijas. Ignora el significado especial de los metacaracteres. 
+fgrep
+(fast grep). Busca cadenas de texto fijas. Ignora el significado especial de los metacaracteres. 
 
 
 figlet
@@ -4565,11 +4558,11 @@ $ figlet texto (forma básica)
 $ showfigfonts    (visualizar las tipografias del comando)
 $ figlet -f banner texto  (especificando tipografía) 
 Opciones
--c (centra el texto de salida) 
--l (alinea el texto a la izquierda) 
--r (alinea el texto a la derecha) 
--w (establece un tamaño máximo)
--t (Con la anchura máxima que permite la terminal)
+	-c (centra el texto de salida) 
+	-l (alinea el texto a la izquierda) 
+	-r (alinea el texto a la derecha) 
+	-w (establece un tamaño máximo)
+	-t (Con la anchura máxima que permite la terminal)
 
 
 file 
