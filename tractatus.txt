@@ -4871,8 +4871,7 @@ Otros atajos:
 
 
 flexget
-[python2.6 python-pip]
-Descarga de series a partir de su direccion RSS. Archivo de configuración
+[python2.6 python-pip]. Descarga de series a partir de su direccion RSS. Archivo de configuración:
 $ nano .flexget/config.yml
 Con un contenido parecido a:
 	presets:
@@ -4902,14 +4901,14 @@ flunym0us
 Pruebas de vulnarabilidad de webs basadas en wordpress. Descarga http://code.google.com/p/flunym0us/downloads/list
 $ flunym0us -H http://host -w /home/usuario/wordlist -wp -t 60 -r 1 -p 2 -T 2
 Opciones:
--wp (Scanear un sitio wordpress)
--mo (scanear un sitio Moodle)
--H http://host (Nombre del host wordpress a scanear)
--w /home/usuario/wordlist (Ruta al diccionario)
--t 60 (Tiempo de espera)
--r 1 (Reintentos de conexión)
--p 2 (Numero de procesos)
--T 2 (Número de subprocesos simultaneos por proceso)
+	-wp (Scanear un sitio wordpress)
+	-mo (scanear un sitio Moodle)
+	-H http://host (Nombre del host wordpress a scanear)
+	-w /home/usuario/wordlist (Ruta al diccionario)
+	-t 60 (Tiempo de espera)
+	-r 1 (Reintentos de conexión)
+	-p 2 (Numero de procesos)
+	-T 2 (Número de subprocesos simultaneos por proceso)
 
 
 fluxbox-generate_menu
@@ -4938,8 +4937,7 @@ $ fold  -w50 -s archivo (50 caracteres de largo por linea y que corte por los es
 
 
 for
-[bucle]
-Ejecuta un trozo de códico si la expresión de control es verdadera y sólo se para cuando es falsa.
+(ucle)]. Ejecuta un trozo de códico si la expresión de control es verdadera y sólo se para cuando es falsa.
 Ejemplos:
 1.-
  	#!/bin/bash
@@ -4981,10 +4979,10 @@ Recuperación de datos
 proceso sobre una imagen:
 # dd if=/dev/sda1 of=imagen.iso conv=noerror,sync (Crear la imagen iso del dispositivo a recuperar. “conv=noerror,sync” indica que ignore errores)
 # foremost -v -t all -o /home/usuario/recuperado -i imagen.iso
--v .- modo detallado
--o .- lugar donde almacenar los archivos recuperados
--t all .- tipo de archivo a buscar. Para recuperar solo jpg: -t jpg. Para una lista de extensiones: -t jpg,doc,png
--i .- lugar donde esta la iso a escanear.
+	-v .- modo detallado
+	-o .- lugar donde almacenar los archivos recuperados
+	-t all .- tipo de archivo a buscar. Para recuperar solo jpg: -t jpg. Para una lista de extensiones: -t jpg,doc,png
+	-i .- lugar donde esta la iso a escanear.
 
 
 fortune 
@@ -5005,8 +5003,7 @@ $ free -m (muestra los resultados en megabytes)
 
 
 freeradius
-[libssl-dev freeradius-mysql freeradius-utils]
-Servidor.
+[libssl-dev freeradius-mysql freeradius-utils]. Servidor.
 Configurar la base de datos:
 # nano /etc/freeradius/sites-enabled/default
 En los apartados "authorize" y "accouting" descomentar las lineas sql
@@ -5036,8 +5033,8 @@ Es una herramienta similar a partimage para crear imágenes de una o varias part
 # fsarchiver restfs /data/imagen2.fsa id=0,dest=/dev/sda1 id=1,dest=/dev/sdb1 (restauramos a la vez las dos particiones).
 
 
-fsck (recomendado dosfstools)
-Reparar/chequear/formatear una partición no montada 
+fsck
+[recomendado dosfstools]. Reparar/chequear/formatear una partición no montada.
 # fsck -fy /dev/hda1 
 # fsck.ext2 -vpf /dev/hda1 (Repara una partición ext2) 
 # fsck.ext3 -vpf /dev/hda1 (Repara una partición ext3) 
@@ -5045,21 +5042,21 @@ Reparar/chequear/formatear una partición no montada
 # fsck.ext4 -cDfty -C 0 /dev/sda1
 # fsck.ext4 -vpf /dev/sda1 (Muestra información sobre una partición: fragmentación, inodos, bloques, archivos...)
 Opciones:
--A .- Permitira una navegación en toda la estructura de /etc/fstab.
--V  .- información adicional sobre las acciones de fsck
--t   .- Imprimir estadísticas de estado (-tt para más información)
--a .- Repara cualquier problema que encuentra en el sistema de archivos sin preguntar (no recomendada)
--l .- Lista todos los nombres de archivos
--r .- Pide confirmación antes de reparar el sistema de archivos.
--s .- Lista el superblock antes de chequear el sistema de archivos.
-sis_arch .- Especifica el sistema de archivos a verificar 
--c .- Buscar bloques dañados con badblocks (ver badblocks)
--k .- Bloques dañados donde se almacenan con el comando anterior. 
--C 0 .- Muestra barra de progreso.
--p .- forzar verificación y reparar automaticamente errores
--D .- Obtimizar directorios si es posible
--f   .- Forzar el chequeo incluso si el sistema de archivos parece correcto
--Y   .- Asume respuesta "yes" a todas las preguntas
+	-A .- Permitira una navegación en toda la estructura de /etc/fstab.
+	-V  .- información adicional sobre las acciones de fsck
+	-t   .- Imprimir estadísticas de estado (-tt para más información)
+	-a .- Repara cualquier problema que encuentra en el sistema de archivos sin preguntar (no recomendada)
+	-l .- Lista todos los nombres de archivos
+	-r .- Pide confirmación antes de reparar el sistema de archivos.
+	-s .- Lista el superblock antes de chequear el sistema de archivos.
+	sis_arch .- Especifica el sistema de archivos a verificar 
+	-c .- Buscar bloques dañados con badblocks (ver badblocks)
+	-k .- Bloques dañados donde se almacenan con el comando anterior. 
+	-C 0 .- Muestra barra de progreso.
+	-p .- forzar verificación y reparar automaticamente errores
+	-D .- Obtimizar directorios si es posible
+	-f   .- Forzar el chequeo incluso si el sistema de archivos parece correcto
+	-Y   .- Asume respuesta "yes" a todas las preguntas
 
 
 fspy
@@ -5067,36 +5064,36 @@ Herramienta de monitorización de la actividad de un sistema de archivos.
 # fspy /home/usuario 
 
 
-fstab (/etc/fstab) 
-Lista todos los discos y particiones disponibles e indica cómo deben ser inicializados. Su estructura es: 
+fstab
+(/etc/fstab). Lista todos los discos y particiones disponibles e indica cómo deben ser inicializados. Su estructura es: 
 * Particion punto_de_montaje sistema_de_archivos opciones respaldos orden 
 Y un ejemplo seria: 
-/dev/sda5 /media/datos ext4 rw,users,exec,auto 0 0 (especificando el número de partición) 
-UUID=0e4d9ccb-93bb-4762-8b67-c23d181fc84a / ext4 errors=remount-ro 0 1 (especificando el UUID de la partición) 
-* El punto de montaje ha de existir en el sistema y normalmente se coloca en /media
-* Algunos sitemas de archivos puede ser:
-auto (intenta descubrir automáticamente el sistema de archivos). 
-ext2 (sistema de archivos común en Linux). 
-ext3 (igual que ext2 pero además añade journaling). 
-ext4 (introdujo significativas mejoras respecto a ext3) 
-reiserfs (otro sistema muy común en Linux) 
-msdos (para dispositivos que usen FAT16) 
-vfat (para dispositivos que usen FAT32).
-ntfs (sistema de archivos NTFS de Windows) 
-smbfs (sistema de archivos de Samba).
-nfs (sistema de archivos de red NFS)
-* Algunas opciones: 
-auto (el dispositivo será montado automáticamente durante el inicio. auto es el valor por defecto) 
-noauto (Si no se desea que el dispositivo se monte automáticamente) 
-exec (permite ejecutar binarios que están en la partición) 
-noexec (lo impide. ütil en particiones windows) 
-ro (Montar sólo lectura) 
-rw (Montar para lectura/esctritura) 
-user (Permite a cualquier usuario montar el sistema de archivos) 
-nouser (Solo el usuario root podrá montar el sistema de archivos) 
-defaults (Utiliza las opciones por defecto: rw,exec,auto,nouser) 
-* Respaldo. Es el comando que utiliza dump para hacer respaldos del sistema de archivos. Cero desactiva la opción.
-* Orden. indica el orden en que la aplicación fsck revisará la partición en busca de errores durante el inicio, si es cero el dispositivo no se revisa.
+	/dev/sda5 /media/datos ext4 rw,users,exec,auto 0 0 (especificando el número de partición) 
+	UUID=0e4d9ccb-93bb-4762-8b67-c23d181fc84a / ext4 errors=remount-ro 0 1 (especificando el UUID de la partición) 
+Los puntos de montaje han de existir en el sistema y normalmente se colocan en /media
+Algunos sitemas de archivos puede ser:
+	auto (intenta descubrir automáticamente el sistema de archivos). 
+	ext2 (sistema de archivos común en Linux). 
+	ext3 (igual que ext2 pero además añade journaling). 
+	ext4 (introdujo significativas mejoras respecto a ext3) 
+	reiserfs (otro sistema muy común en Linux) 
+	msdos (para dispositivos que usen FAT16) 
+	vfat (para dispositivos que usen FAT32).
+	ntfs (sistema de archivos NTFS de Windows) 
+	smbfs (sistema de archivos de Samba).
+	nfs (sistema de archivos de red NFS)
+Algunas opciones: 
+	auto (el dispositivo será montado automáticamente durante el inicio. auto es el valor por defecto) 
+	noauto (Si no se desea que el dispositivo se monte automáticamente) 
+	exec (permite ejecutar binarios que están en la partición) 
+	noexec (lo impide. ütil en particiones windows) 
+	ro (Montar sólo lectura) 
+	rw (Montar para lectura/esctritura) 
+	user (Permite a cualquier usuario montar el sistema de archivos) 
+	nouser (Solo el usuario root podrá montar el sistema de archivos) 
+	defaults (Utiliza las opciones por defecto: rw,exec,auto,nouser) 
+Respaldo. Es el comando que utiliza dump para hacer respaldos del sistema de archivos. Cero desactiva la opción.
+Orden. indica el orden en que la aplicación fsck revisará la partición en busca de errores durante el inicio, si es cero el dispositivo no se revisa.
 
 
 fswebcam
@@ -5118,9 +5115,9 @@ fte
 Editor. Según se lance desde las X o por consola se usará fte, xfte o sfte. F1 muestra todos los atajos y se accede a los menús de forma clásica con Alt+f... 
 
 
-ftff (whichman) 
-Busca archivos o directorios
-$ ftff -t2 logfile.txt    (busca  logfile con dos errores en el nombre. permite *)
+ftff
+[whichman]. Busca archivos o directorios
+$ ftff -t2 logfile.txt (busca  logfile con dos errores en el nombre. permite *)
 
 
 ftp
@@ -5176,8 +5173,8 @@ $ gcc -c bill.c (genera una biblioteca)
 $ gcc programa.c -o programa_compilado (crea el ejecutable)
 
 
-gconftool-2 (gconf-editor)
-Configurador de todos los parámetros de gnome
+gconftool-2
+[gconf-editor]. Configurador de todos los parámetros de gnome
 $ gconftool-2 --dump / > gconf_backup.xml  (realizar copia de seguridad de la configuración)
 $ gconftool-2 --load gconf_backup.xml /  (restablecer la copia de seguridad)
 $ gconftool-2 --recursive-unset /apps/panel (recuperar los paneles originales)
@@ -5185,8 +5182,8 @@ nota.- sustituiendo el “/apps/panel” por cualquier ruta del árbol de direct
 $ rm -rf .gconf/apps/panel (borra toda la configuración extra de los paneles)
 $ gconftool-2 –shutdown && rm -rf ~/.gconf/apps/panel && pkill gnome-panel (velver a una configuración anterior de los paneles)
 Notas:
--t (tipo de datos a utilizar. Los valores son {int|bool|float|string|list|pair}) 
--s (entrada a modificar)
+	-t (tipo de datos a utilizar. Los valores son {int|bool|float|string|list|pair}) 
+	-s (entrada a modificar)
 Los valores de –type pueden ser:
 lógicos [bool]. Cuando el parámetro puede ser verdadero [true] o falso [false]. P.e quitar papelera del escritorio: 
 $ gconftool-2 -t bool -s /apps/nautilus/desktop/trash_icon_visible false 
@@ -5278,12 +5275,12 @@ Editor de texto
 $ gedit --list-encodings  (Lista la codificación de caracteres)
 $ gedit --encoding UTF-8 archivo.txt  (Abre el archivo mencionado con la cofificación especificada)
 Atajos
-Ctrl+c (Copiar)
-Ctrl+s (Guarda documento)
-Ctrl+v (Pegar)
-Ctrl+x (Cortar)
-Ctrl+w (Cerrar ventana activa)
-Ctrl+Mayús+flecha  (seleccionar texto a derecha o izquierda)
+	Ctrl+c (Copiar)
+	Ctrl+s (Guarda documento)
+	Ctrl+v (Pegar)
+	Ctrl+x (Cortar)
+	Ctrl+w (Cerrar ventana activa)
+	Ctrl+Mayús+flecha  (seleccionar texto a derecha o izquierda)
 
 
 gelemental
