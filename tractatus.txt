@@ -70,6 +70,12 @@ Convertir textos a imagen .png
 $ a2png texto.txt texto.png
 
 
+a2x
+Convierte texto plano a formato PDF (por defecto), EPUB, DVI, PS, LaTeX, XHTML, página man...
+$ a2x -f epub archivo.epub (Convertir a epub. )
+$ a2x -f manpage archivo.txt (Convertir a página man)
+
+
 aa3d
 Generador de arte ASCII a partir de textos o imagenes.
 $ aa3d$ aa3d < texto.tx
@@ -12741,6 +12747,11 @@ $ set | more
 $ set -o vi (cambiar a las teclas del modo de edición de vi . Por defecto bash utiliza el modo emacs)
 $ set -o noclobber (activar la protección de sobreescritura en las tuberias si el archido ya existe [ls > lista] para saltarse esta protección puede hacerse con ls >|lista)
 $ set +o noclobber (Desactivar la protección. Opción por defecto)
+1.-
+Depurar partes de un script encerrando el código:
+	set -x
+	código a depurar
+	set +x
 
 
 setleds 
@@ -14052,6 +14063,28 @@ $ termsaver programmer --help (Muestra ejemplos de como usar la opción indicada
 $ termsaver randtxt --word linux_es_un_sistema_genial --delay 1 (Mostrará la frase cada segundo en un lugar distinto de la pantalla)
 $ termsaver urlfetcher -u lapipaplena.org (Mostrará el código de la página indicada)
 $ termsaver programmer -p script.sh (Mostrará el código indicado linea a linea) 
+
+
+test
+Comprobar tipos de archivos y comparar valores, devolviendo 1 si es cierto y o si es falsa.
+Sobre ficheros:
+	$ test -e archivo; echo $? (Devuelve 0 si archivo exist)
+	$ test -f archivo; echo $? (Devuelve 0 si archivo existe y es un archivo regular)
+	$ test -d archivo; echo $? (Devuelve 0 si existe y es un directorio)
+	$ test -s archivo; echo $? (Devuelve 0 si archivo existe y tiene un tamaño mayor que 0)
+	$ test archivo -nt archivo2; echo $? (Devuelve 0 si archivo se ha modificado con posterioridad a archivo2)
+	$ test archivo -ot archivo2; echo $? (Devuelve 0 si archivo se ha modificado con anterioridad a archivo2)
+Sobre caracteres numéricos:
+	$ test $int1 -eq $int2; echo $? (Devuelve 0 si los enteros son iguales)
+	$ test $int1 -ne $int2; echo $? (Devuelve 0 si los enteros NO son iguales)
+	$ test $int1 -lt $int2; echo $? (Devuelve 0 si int1 es menor que int2)
+	$ test $int1 -le $int2; echo $? (Devuelve 0 si int1 es menor o igual que int2)
+	$ test $int1 -gt $int2; echo $? (Devuelve 0 si int1 es mayor estricto que int2)
+	$ test $int1 -ge $int2; echo $? (Devuelve 0 si int1 es mayor o igual que int2)
+Sobre strings:
+	$ DIR=home; test $string; echo $? (Devuelve 0 si la cadena no es nula)
+	$ test -z $DIR; echo $? (Devuelve 0 si la longitud del string es 0)
+	$ test -n $DIR; echo $? (Devuelve 0 si la longitud del string NO es 0)
 
 
 testdisk
