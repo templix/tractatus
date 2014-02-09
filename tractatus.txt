@@ -3836,57 +3836,151 @@ Atajos:
 
 
 emacs
-Mucho más que un editor. Tratar sobre emacs es muy complejo, a parte de por la propia aplicación y por usar una terminologia propia [un fichero no se "abre" sino que se "visita"], porque las ordenes no coinciden si se lanza en una tty o sobre las X. Lo que sigue es un pequeño manual de primeros auxilios.
-Partes de la pantalla de emacs:
-	. Barra de menú
-	. Barra de herramienta [sólo modo gráfico]
-	. Área de edición [puede dividirse en áreas más pequeñas llamadas ventanas.]
-	. Área de eco (Donde salen los mensajes dirigidos al usuario)
-	. minibuffer (Donde el usuario entra información adicional para ejecutar un mandato)
-Aclarando el concepto búffer.- Se entiende por buffer una zona de memoria en la que se encuentra el texto objeto de edición. Cuando leemos un fichero, lo que hacemos es copiar su contenido a una zona de memoria [a un buffer] y durante la edición lo que modificamos es esa zona de memoria, el fichero como tal permanece inalterado hasta que explícitamente demos la orden de grabar en el disco las modificaciones. Cuando emacs se inicia se abren dos búffers que no están asociados a ningún fichero: *scratch* y *messages* [En ambos el nombre empieza y acaba por un asterisco, lo que indica que no es un búffer asociado a un fichero]
+<http://www.nongnu.org/emacs-man-es/> (Tutorial completo en español). Mucho más que un editor. Algunas ordenes no coinciden si se lanza en una tty o sobre las X. Lo que sigue es un pequeño manual de primeros auxilios. Emacs entiende por búffer una zona de memoria en la que se encuentra el texto objeto de edición. Cuando leemos un fichero, lo que hacemos es copiar su contenido a una zona de memoria [a un buffer] y durante la edición lo que modificamos es esa zona de memoria, el fichero como tal permanece inalterado hasta que explícitamente demos la orden de grabar en el disco las modificaciones. Cuando emacs se inicia se abren dos búffers que no están asociados a ningún fichero: *scratch* y *messages* [En ambos el nombre empieza y acaba por un asterisco, lo que indica que no es un búffer asociado a un fichero]
 Significado de algunas teclas en la terminologia de emacs:
 	Alt = M (meta)
 	Crtl= C (control)
 	SPC (Barra espacio)
 	RET (intro)
 	RETRO (retroceso)
-Algunas teclas básicas:
-	M-x (Saltar al minibuffer con el cursor listo para escribir un mandato. Después de pulsar algunas letras, con la tecla "espacio" aparecerán los mandatos asociados a lo escrito [autocompletado])
-	C-g (Cancelar el mandato que se está ejecutando o escribiendo en el minibuffer)
-	C-x u (Deshacer la última acción. Ejecutándolo varias veces se irán deshaciendo acciones)
-	C-x RET f (Para entrar la codificación de caracteres: latin-1-unix [latin1], utf-8-unix [utf8]..)
-	M-x help-with-tutorial-spec-language (Se abrirá un buffer con los idiomas disponibles para el manual. Escribir Spanish y pulsar intro)
-	C-h i (Abrir el manual)
-	C-espacio (Donde está el cursor, empieza la selección de una palabra o párrafo)
-Algunas ordenes en relación a los ficheros:
-	C-x C-f (Y escribir el nombre del archivo que se abrirá. Con TAB se autocompleta el nombre. Si el archivo no existe se creará)
-	C-x C-s (Guardar archivo)
-	C-x d (Abrir un directorio)
-	C-x k (Cerrar archivo - Destruir búffer -)	M-x (Saltar al minibuffer con el cursor listo para escribir un mandato. Después de pulsar algunas letras, con la tecla "espacio" aparecerán los mandatos asociados a lo escrito [autocompletado])
-	C-g (Cancelar el mandato que se está ejecutando o escribiendo en el minibuffer)
-	C-x u (Deshacer la última acción. Ejecutándolo varias veces se irán deshaciendo acciones)
-	C-x RET f (Para entrar la codificación de caracteres: latin-1-unix [latin1], utf-8-unix [utf8]..)
-	M-x help-with-tutorial-spec-language (Se abrirá un buffer con los idiomas disponibles para el manual. Escribir Spanish y pulsar intro)
-	C-h i (Abrir el manual)
-	C-espacio (Donde está el cursor, empieza la selección de una palabra o párrafo)
-	C-x C-b (Ver listado de búffers abiertos)
-	C-x b (Cambiar entre búffers)
-	C-x C-c (Salir de emacs preguntando por guardar documento)
-	C-x C-w (Salir y guardar con otro nombre)
-	C-x s (Con varios búffers editados, comprobará si han sido modificados y preguntará para cada uno si guardar los cambios)
-	C-z (Suspender)
-	C-k (Cortar texto hasta el final de la linea)
-	C-w (Cortar texto seleccionado)
-	C-y (Pegar el último texto cortado)
-	C-s (Buscar palabra hacia adelante)
-	C-r (Buscar palabra hacia atras)
-Algunas ordenes en relación con las ventanas:
-	C-x 0 (Borra la ventana activa)
-	C-x 1 (Borra todas las ventanas menos la activa)
-	C-x 2 (Divide horizontalmente la ventana activa en dos ventanas)
-	C-x 3 (Divide verticalmente la ventana activa en dos ventanas)
-	C-x o (Lleva el cursor a la próxima ventana)
-	C-M-v (Desplaza hacia abajo el texto de la próxima ventana como usando AvPág)
+$ emacs -nw (Lanzar emacs en consola. Para crear un alias: alias emacs='emacs -nw')
+$ emacs -nw --debug-ini (Modo debuger para comprobar errores de sintaxis en ~/.emacs)
+Teclas de socorro:
+	C-g (Cancelar algo: un comando, una combinación de teclas...)
+	C-x u (Deshacer)
+Movimiento por el texto:
+	C-a (ir al comienzo de una línea)
+	C-e (ir al final de una línea)
+	C-f (un caracter hacia adelante)
+	C-b (un caracter hacia atrás)
+	M-f (una palabra hacia adelante)
+	M-b (una palabra hacia atrás)
+	C-n (ir ala siguiente línea)
+	C-p (ir a la línea anterior)
+	M-a (Ir al inicio de la frase)
+	M-e (Ir al final de la frase)
+	C-v (Pagina siguiente)
+	M 8 C-v (baja 8 lineas la pantalla, NO 8 PÁGINAS)
+	M-v (Pagina anterior)
+	M 8 M-v (Sube 8 lineas la pantalla, NO 8 PÁGINAS)
+	M-< (Ir al principio del texto)
+	M-> (Ir al final del texto)
+	C-l (Redibuja la pantalla. La primera vez que se pulsa, coloca la linea del cursor en el centro, la segunda arriba y la tercera abajo)
+Salir:
+	C-x C-c (Salir de Emacs)
+	C-x C-s (Guardar sin salir)
+	C-x C-w (Salir y guardar como)
+	C-x s (Guardar todos los ficheros abiertos. Preguntará.)
+Copiar, cortar, pegar
+	C-Esp (Inicio del marcado de texto)
+	C-h (Marcar todo el buffer, "Seleccionar todo")
+	M-w (Copiar)
+	C-w (Cortar)
+	C-y (Pegar)
+Buscar:
+	C-s (busca hacia adelante)
+	C-r (busca hacia atras)
+	C-s C-s (repite la busqueda)
+Borrar:
+	M-d (Palabra despues del cursor)
+	M 3 M-d (Borra 3 palabras)
+	C-k (del cursor a fin de linea)
+	M 3 C-k (Borra 3 lineas)
+	M-k (todo el párrafo)
+	M 3 M-k (Borra 3 párrafos)
+Ventanas y buffers:
+	C-x 2 (división horizontal de la ventana en dos) 
+	C-x 3 (división vertical de la ventana en dos)
+	C-x 1 (Deja solo la ventana activa abierta)
+	C-x o (cambiar de ventana)
+	C-x k (cierra la buffer actual. Pide confirmación)
+	C-x b (Cambiar de buffer)
+	C-x 0 (Eliminar ventana actual)
+	C-x C-b (Listar buffers. Cada archivo se abre en un buffer)
+	C-x } (alarga la ventana activa en dirección horizontal)
+	C-x { (La acorta en dirección horizontal)
+	C-x ^ (La alarga en dirección vertical)
+Marcas:
+	C-x r m (Solicita nombre para la linea marcada)
+	C-x r b (Ir a la linea marcada con el nombre que entremos, en este caso la "b")
+	C-x r l (Lista todas las marcas)
+Imprimir:
+	C-u M-x ps-print-buffer-with-faces (Imprimir a ps. Luego con ps2pdf pasar a pdf)
+	M-x  print-buffer (Imprimir archivo con numeración y cabeceras)
+	M-x  lpr-buffer (Imprimir sin numeración ni cabeceras)
+	M-x  print-region (Imprimir trozo seleccionado con numeración y cabeceras)
+	M-x  lpr-region  (Imprimir trozo seleccionado sin numeración ni cabeceras)
+Varios:
+	C-x C-f (brir un archivo)
+	C-o (Inserta linea en blanco a continuación del cursor)
+	M-x tetris (Otros juegos: dunnet, snake, doctor, zone...)
+	M-x help-with-tutorial-spec-language (abre buffer con los idiomas disponibles para el manual)
+	F10 (Abre la ayuda)
+	C-x d (Abre un directorio que se especifique)
+	C-x RET f (Entrar codificación de caracteres: latin-1-unix [latin1], utf-8-unix [utf8]..) 
+Entrar comandos de shell:
+	C-z (Suspende la sesion emacs y entra en la shell. Volver a emacs con fg o con %emacs)
+	M-! (Muestra en el mini buffer un mensaje para entrar un comando y lo abre un una ventana)
+	C-u M-! (Inserta la salida del comando en la posición del cursor)
+Modo comando:
+	M-x recover file (levantar respaldo del archivo)
+	M-x describe-key INTRO (y presionando una combinación de teclas devuelve el comando asignado)
+	M-x apropos INTRO print (Muestra información de "print")
+	M-x list-faces-display (Ver lista y muestra de los estilos disponibles)
+	M-x set-foreground-color (Pedirá color en inglés para las fuentes.
+	M-x set-background-color (Pedirá color para el fondo)
+	M-x w3m-browser-url (Pedirá url para conectar. Precisa w3m-el)
+	M-x global-linum-mode (Mostras/esconder números de linea)
+	M-x global-visual-line-mode (Cortar/no cortar palabras al final de la pantalla)
+	M-x global-hl-line-mode (Resaltar la linea donde está el cursor)
+	M-x goto-line (Ir a una linea que se especifique)
+	M-x insert file (Para insertar en el cursor un archivo)
+Para hacer permanente cualquiera de las opciones anteriores, colocarla en ~/.emacs de la siguiente forma:
+   	(global-set-key (kbd "<f7>") 'global-linum-mode)
+Para mostrar u ocultar los numeros de linea pulsando F7
+1.-
+Abrir navegador de archivos. Precisa tenerlo instalado
+Instalar nav:
+Descarga de <http://code.google.com/p/emacs-nav/>. Una vez descomprimido copiar el directorio en .emacs.d/ y renombrar como nav
+$ emacs .emacs
+Completar configuración y que se abra pulsado F8, añadir las siguientes lineas:
+	(add-to-list 'load-path "/home/USER/.emacs.d/nav/")
+    (require 'nav)
+    (nav-disable-overeager-window-splitting)
+    (global-set-key [f8] 'nav-toggle)
+Abrir con M-x nav
+2.-
+Añadir una "lista negra" de bufferes a los que no interesar acceder (scratch, messages...).
+Añadir a .emacs las siguientes lineas:
+	(require 'iswitchb)
+	(iswitchb-mode)
+	(add-to-list 'iswitchb-buffer-ignore "^ ")
+	(add-to-list 'iswitchb-buffer-ignore "*Messages*")
+	(add-to-list 'iswitchb-buffer-ignore "*ECB")
+	(add-to-list 'iswitchb-buffer-ignore "*Buffer")
+	(add-to-list 'iswitchb-buffer-ignore "*Completions")
+	(add-to-list 'iswitchb-buffer-ignore "*scratch*")
+	(add-to-list 'iswitchb-buffer-ignore "*ftp ")
+	(add-to-list 'iswitchb-buffer-ignore "*bsh")
+	(add-to-list 'iswitchb-buffer-ignore "*jde-log")
+	(add-to-list 'iswitchb-buffer-ignore "^[tT][aA][gG][sS]$")
+Al pulsar C-x b (Listar buffers abiertos) El buffer que aparece en primer lugar, resaltado en otro color, es el que se mostrará al pulsar Enter. Si queremos cambiar a otro buffer pulsar C-s para rotar el orden de los elementos de la lista.
+3.-
+Mostrar consola al pulsar F5:
+Añadir a .emacs la linea:
+	(global-set-key (kbd "<f5>") 'eshell)
+4.-
+Escuchar música con emms.
+Instalar emms en el sistema mediante repositorio y descargar <http://www.gnu.org/software/emms/> y descomprimir en el directorio personal. En .emacs colocar las lineas:
+	(add-to-list 'load-path "~/emms/")
+	(require 'emms-setup)
+	(emms-standard)
+	(emms-default-players)
+Llamar com M-x emms (Pulsando TAB apareceran las opciones)
+5.-
+Especificar número de espacios en las tabulaciones.
+Colocar en .emacs la linea:
+	(setd-default  tab-width  4)
 
 
 emerge 
