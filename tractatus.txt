@@ -3923,6 +3923,7 @@ Entrar comandos de shell:
 	C-z (Suspende la sesion emacs y entra en la shell. Volver a emacs con fg o con %emacs)
 	M-! (Muestra en el mini buffer un mensaje para entrar un comando y lo abre un una ventana)
 	C-u M-! (Inserta la salida del comando en la posición del cursor)
+	M-x shell (Salir a la shell. C-x k para volver a edición)
 Modo comando:
 	M-x recover file (levantar respaldo del archivo)
 	M-x describe-key INTRO (y presionando una combinación de teclas devuelve el comando asignado)
@@ -3936,6 +3937,7 @@ Modo comando:
 	M-x global-hl-line-mode (Resaltar la linea donde está el cursor)
 	M-x goto-line (Ir a una linea que se especifique)
 	M-x insert file (Para insertar en el cursor un archivo)
+	M-x calendar (Mostrar mes actual, el anterior y el posterior)
 Para hacer permanente cualquiera de las opciones anteriores, colocarla en ~/.emacs de la siguiente forma:
    	(global-set-key (kbd "<f7>") 'global-linum-mode)
 Para mostrar u ocultar los numeros de linea pulsando F7
@@ -3967,10 +3969,6 @@ Añadir a .emacs las siguientes lineas:
 	(add-to-list 'iswitchb-buffer-ignore "^[tT][aA][gG][sS]$")
 Al pulsar C-x b (Listar buffers abiertos) El buffer que aparece en primer lugar, resaltado en otro color, es el que se mostrará al pulsar Enter. Si queremos cambiar a otro buffer pulsar C-s para rotar el orden de los elementos de la lista.
 3.-
-Mostrar consola al pulsar F5:
-Añadir a .emacs la linea:
-	(global-set-key (kbd "<f5>") 'eshell)
-4.-
 Escuchar música con emms.
 Instalar emms en el sistema mediante repositorio y descargar <http://www.gnu.org/software/emms/> y descomprimir en el directorio personal. En .emacs colocar las lineas:
 	(add-to-list 'load-path "~/emms/")
@@ -3978,10 +3976,21 @@ Instalar emms en el sistema mediante repositorio y descargar <http://www.gnu.org
 	(emms-standard)
 	(emms-default-players)
 Llamar com M-x emms (Pulsando TAB apareceran las opciones)
-5.-
-Especificar número de espacios en las tabulaciones.
-Colocar en .emacs la linea:
+4.-
+Otros ajustes que pueden incorporarse a .emacs precedidas con la explicación comentada:
+	;;Mostrar consola al pulsar F5:
+	(global-set-key (kbd "<f5>") 'eshell)
+	;;Especificar número de espacios en las tabulaciones.
 	(setd-default  tab-width  4)
+	;;Mostrar reloj y con formato 24 horas
+	(setq display-time-24hr-format t)
+	(display-time)
+	;;Descomprimir archivos.
+	(auto-compression-mode t)
+	;;Reemplazar "yes" y "no" por "y" y "n" en el prompt.
+	(fset 'yes-or-no-p 'y-or-n-p)
+	;;Sin copias de seguridad (torvalds-mode).
+	(setq make-backup-files nil)
 
 
 emerge 
