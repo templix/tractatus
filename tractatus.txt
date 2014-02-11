@@ -3865,6 +3865,7 @@ Movimiento por el texto:
 	M 8 M-v (Sube 8 lineas la pantalla, NO 8 PÁGINAS)
 	M-< (Ir al principio del texto)
 	M-> (Ir al final del texto)
+	M-g g (Ir a la linea)
 	C-l (Redibuja la pantalla. La primera vez que se pulsa, coloca la linea del cursor en el centro, la segunda arriba y la tercera abajo)
 Salir:
 	C-x C-c (Salir de Emacs)
@@ -3877,6 +3878,7 @@ Copiar, cortar, pegar
 	M-w (Copiar)
 	C-w (Cortar)
 	C-y (Pegar)
+	C-x C-t (Copiar linea)
 Buscar:
 	C-s (busca hacia adelante)
 	C-r (busca hacia atras)
@@ -3901,6 +3903,7 @@ Buffers:
 	C-x k (cierra la buffer actual. Pide confirmación)
 	C-x b (Cambiar de buffer)
 	C-x C-b (Listar buffers. Cada archivo se abre en un buffer)
+	C-x flechas derecha/izquierda (cambiar al siguiente/anterior)
 Marcas:
 	C-x r m (Solicita nombre para la linea marcada)
 	C-x r b (Ir a la linea marcada con el nombre que entremos, en este caso la "b")
@@ -3919,11 +3922,12 @@ Varios:
 	F10 (Abre la ayuda)
 	C-x d (Abre un directorio que se especifique)
 	C-x RET f (Entrar codificación de caracteres: latin-1-unix [latin1], utf-8-unix [utf8]..) 
-Entrar comandos de shell:
+Entrar comandos de shell e insertar:
 	C-z (Suspende la sesion emacs y entra en la shell. Volver a emacs con fg o con %emacs)
 	M-! (Muestra en el mini buffer un mensaje para entrar un comando y lo abre un una ventana)
 	C-u M-! (Inserta la salida del comando en la posición del cursor)
 	M-x shell (Salir a la shell. C-x k para volver a edición)
+	C-x i (Insertar archivo en la posición del cursor)
 Modo comando:
 	M-x recover file (levantar respaldo del archivo)
 	M-x describe-key INTRO (y presionando una combinación de teclas devuelve el comando asignado)
@@ -3935,8 +3939,6 @@ Modo comando:
 	M-x global-linum-mode (Mostras/esconder números de linea)
 	M-x global-visual-line-mode (Cortar/no cortar palabras al final de la pantalla)
 	M-x global-hl-line-mode (Resaltar la linea donde está el cursor)
-	M-x goto-line (Ir a una linea que se especifique)
-	M-x insert file (Para insertar en el cursor un archivo)
 	M-x calendar (Mostrar mes actual, el anterior y el posterior)
 Para hacer permanente cualquiera de las opciones anteriores, colocarla en ~/.emacs de la siguiente forma:
    	(global-set-key (kbd "<f7>") 'global-linum-mode)
@@ -3977,6 +3979,11 @@ Instalar emms en el sistema mediante repositorio y descargar <http://www.gnu.org
 	(emms-default-players)
 Llamar com M-x emms (Pulsando TAB apareceran las opciones)
 4.-
+Corrector ortográfico. apt-get install aspell-es dictionary-el
+	M-x ispell-buffer (Muestra las alternativas a la palabra mal escrita)
+	M-x dictionary (Una vez escogido el deseado, buscar traducciónsignificado...)
+	M-x flyspell-mode (Lanzado al inicio del texto, mostrará los errores al escribirlos)
+5.-
 Otros ajustes que pueden incorporarse a .emacs precedidas con la explicación comentada:
 	;;Mostrar consola al pulsar F5:
 	(global-set-key (kbd "<f5>") 'eshell)
