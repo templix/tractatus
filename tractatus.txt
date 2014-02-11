@@ -3922,7 +3922,6 @@ Varios:
 	M-x help-with-tutorial-spec-language (abre buffer con los idiomas disponibles para el manual)
 	C-x d (Abre un directorio que se especifique)
 	C-x RET f (Entrar codificación de caracteres: latin-1-unix [latin1], utf-8-unix [utf8]..) 
-	M-x command-history  (History de comandos entrados)
 Entrar comandos de shell e insertar:
 	C-z (Suspende la sesion emacs y entra en la shell. Volver a emacs con fg o con %emacs)
 	M-! (Muestra en el mini buffer un mensaje para entrar un comando y lo abre un una ventana)
@@ -3934,6 +3933,7 @@ ayuda:
 	F10 (Abre la ayuda general)
 	C-h k (Muestra información sobre un atajo)
 	C-h a (Todas las opciones de un comando)
+	C-h b (Ver todos los atajos)
 Modo comando:
 	M-x recover file (levantar respaldo del archivo)
 	M-x describe-key INTRO (y presionando una combinación de teclas devuelve el comando asignado)
@@ -3946,6 +3946,7 @@ Modo comando:
 	M-x global-visual-line-mode (Cortar/no cortar palabras al final de la pantalla)
 	M-x global-hl-line-mode (Resaltar la linea donde está el cursor)
 	M-x calendar (Mostrar mes actual, el anterior y el posterior)
+	M-x command-history  (History de comandos entrados)
 Para hacer permanente cualquiera de las opciones anteriores, colocarla en ~/.emacs de la siguiente forma:
    	(global-set-key (kbd "<f7>") 'global-linum-mode)
 Para mostrar u ocultar los numeros de linea pulsando F7
@@ -4008,6 +4009,21 @@ Otros ajustes que pueden incorporarse a .emacs precedidas con la explicación co
 	(fset 'yes-or-no-p 'y-or-n-p)
 	;;Sin copias de seguridad (torvalds-mode).
 	(setq make-backup-files nil)
+	;; Embellecer el calendario:
+	(setq view-diary-entries-initially t
+	     mark-diary-entries-in-calendar t
+	     number-of-diary-entries 7)
+	(add-hook 'diary-display-hook 'fancy-diary-display)
+	(add-hook 'today-visible-calendar-hook 'calendar-mark-today)
+	;; Poner en español el calendario:
+	(setq calendar-week-start-day 1
+		calendar-day-name-array
+         ["Domingo" "Lunes" "Martes" 
+         "Miercoles" "Jueves" "Viernes" "SÃ¡bado"]
+         calendar-month-name-array
+         ["Enero" "Febrero" "Marzo" "Abril"
+         "Mayo" "Junio" "Julio" "Agosto" "Septiembre"
+         "Octubre" "Noviembre" "Diciembre"])
 
 
 emerge 
