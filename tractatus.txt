@@ -3879,6 +3879,7 @@ Copiar, cortar, pegar
 	C-w (Cortar)
 	C-y (Pegar)
 	C-x C-t (Copiar linea)
+	M-h (Selecciona un párrafo)
 Buscar:
 	C-s (busca hacia adelante)
 	C-r (busca hacia atras)
@@ -3919,15 +3920,20 @@ Varios:
 	C-o (Inserta linea en blanco a continuación del cursor)
 	M-x tetris (Otros juegos: dunnet, snake, doctor, zone...)
 	M-x help-with-tutorial-spec-language (abre buffer con los idiomas disponibles para el manual)
-	F10 (Abre la ayuda)
 	C-x d (Abre un directorio que se especifique)
 	C-x RET f (Entrar codificación de caracteres: latin-1-unix [latin1], utf-8-unix [utf8]..) 
+	M-x command-history  (History de comandos entrados)
 Entrar comandos de shell e insertar:
 	C-z (Suspende la sesion emacs y entra en la shell. Volver a emacs con fg o con %emacs)
 	M-! (Muestra en el mini buffer un mensaje para entrar un comando y lo abre un una ventana)
 	C-u M-! (Inserta la salida del comando en la posición del cursor)
 	M-x shell (Salir a la shell. C-x k para volver a edición)
 	C-x i (Insertar archivo en la posición del cursor)
+ayuda:
+	C-h w (Muestra el atajo de la función que entremos)
+	F10 (Abre la ayuda general)
+	C-h k (Muestra información sobre un atajo)
+	C-h a (Todas las opciones de un comando)
 Modo comando:
 	M-x recover file (levantar respaldo del archivo)
 	M-x describe-key INTRO (y presionando una combinación de teclas devuelve el comando asignado)
@@ -3981,9 +3987,13 @@ Llamar com M-x emms (Pulsando TAB apareceran las opciones)
 4.-
 Corrector ortográfico. apt-get install aspell-es dictionary-el
 	M-x ispell-buffer (Muestra las alternativas a la palabra mal escrita)
-	M-x dictionary (Una vez escogido el deseado, buscar traducciónsignificado...)
+	M-x dictionary (Una vez escogido el deseado, buscar traducción, significado...)
 	M-x flyspell-mode (Lanzado al inicio del texto, mostrará los errores al escribirlos)
 5.-
+Recargar archivo de configuración .emacs despues de una modificación:
+	M-x load-file (Cuando solicite el nombre del archivo colocar .emacs)
+	M-x eval-buffer (Si el archivo .emacs se encuentra en un buffer)
+6.-
 Otros ajustes que pueden incorporarse a .emacs precedidas con la explicación comentada:
 	;;Mostrar consola al pulsar F5:
 	(global-set-key (kbd "<f5>") 'eshell)
