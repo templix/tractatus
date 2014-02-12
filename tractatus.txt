@@ -3954,7 +3954,7 @@ Para mostrar u ocultar los numeros de linea pulsando F7
 1.-
 Abrir navegador de archivos. Precisa tenerlo instalado
 Instalar nav:
-Descarga de <http://code.google.com/p/emacs-nav/>. Una vez descomprimido copiar el directorio en .emacs.d/ y renombrar como nav
+Descarga de <http://code.google.com/p/emacs-nav/>. Una vez descomprimido copiar el directorio en ~/.emacs.d/ y renombrar como nav
 $ emacs .emacs
 Completar configuración y que se abra pulsado F8, añadir las siguientes lineas:
 	(add-to-list 'load-path "/home/USER/.emacs.d/nav/")
@@ -3980,7 +3980,7 @@ Añadir a .emacs las siguientes lineas:
 Al pulsar C-x b (Listar buffers abiertos) El buffer que aparece en primer lugar, resaltado en otro color, es el que se mostrará al pulsar Enter. Si queremos cambiar a otro buffer pulsar C-s para rotar el orden de los elementos de la lista.
 3.-
 Escuchar música con emms.
-Instalar emms en el sistema mediante repositorio y descargar <http://www.gnu.org/software/emms/> y descomprimir en el directorio personal. En .emacs colocar las lineas:
+Instalar emms en el sistema mediante repositorio y descargar <http://www.gnu.org/software/emms/> , descomprimir y mover el directorio a ~/.emacs.d/l. En .emacs colocar las lineas:
 	(add-to-list 'load-path "~/emms/")
 	(require 'emms-setup)
 	(emms-standard)
@@ -3996,6 +3996,15 @@ Recargar archivo de configuración .emacs despues de una modificación:
 	M-x load-file (Cuando solicite el nombre del archivo colocar .emacs)
 	M-x eval-buffer (Si el archivo .emacs se encuentra en un buffer)
 6.-
+Conectar a un servidor ssh:
+Descargar tramp de <http://ftp.gnu.org/gnu/tramp/> descomprimir y mover la carpeta al directorio ~/emac.d/ . En el archivo de configuración .emacs añadir las lineas:
+	(require 'tramp)
+	(setq tramp-default-method "ssh")
+Abrir sesión de emacs y acceder al host remoto con:
+	C-x C-f /ssh:USER@host_remoto:/home/USER/
+Pedirá contraseña.
+Nota.- Después de pulsar el atajo, no olvidar borrar la referencia al directorio local ~/ dejándolo en /
+7.-
 Otros ajustes que pueden incorporarse a .emacs precedidas con la explicación comentada:
 	;;Mostrar consola al pulsar F5:
 	(global-set-key (kbd "<f5>") 'eshell)
