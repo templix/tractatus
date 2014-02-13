@@ -14193,7 +14193,7 @@ Descarga y compilación:
 	$ make
 Registro:
 	$ ./telegram -k tg.pub (Solicita el número de móvil con el prefijo del país [+34xxxxxxxxx], al momento recibimos un sms con el número de código [xxxxx] que introduciremos en la terminal)
-	$ ./telegram (Arrancar la aplicación)
+	$ ./telegram -N (Arrancar la aplicación lista para poder descargar fotos y videos)
 Algunas teclas de control:
 	help (Mostrar todos los comandos disponibles)
 	msg contacto texto_a_enviar (Enviar mensaje a un contacto. Han de escribirse las primeras letras del contacto y pulsar tabulador para autocompletar)
@@ -14213,7 +14213,9 @@ Algunas teclas de control:
 	rename_contact contacto nombre apellido (Renombrar un contacto)
 	create_secret_chat contacto (Crear un chat privado con un contacto)
 	set log_level 0 (Desactivar información de cuando se conectan los sontactos)
-	set msg_num 1 (Antiva la numeración de los mensajes. con un valor 0 los desactiva)	
+	set msg_num 1 (Antiva la numeración de los mensajes. con un valor 0 los desactiva)
+	load_photo ID (Descargar una photo especificando el ID. Crea el dir ~/.telegram/download)
+	load_video ID (Descarga un video)	
 	quit (Salir)
 Otros valores para log_level:
 	1 (imprime información acerca de los mensajes leídos) 
