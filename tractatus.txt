@@ -11994,6 +11994,36 @@ $ randtype -t 10,100000 archivo (Retarda la salida de forma aleatoria entre 10 y
 $ echo "Linux es un sistema genial" | randtype -m 4 (Simulando 4 errores en el tecleo de la frase)
 
 
+ranger
+[w3m]. Navegador de archivos estilo vim [ver]. Preferiblemente lanzarlo sobre xterm o urxvt.
+$ ranger --copy-config=all (Copiar configuración básica a .config/ranger/)
+$ ranger (Lanzar la aplicación)
+Algunos atajos ():
+	gg (Ir al principio)
+	G (Ir al final)
+	s (abre una consola en el directorio actual)
+	yy (copiar selección)
+	dd (Cortar selección)
+	pp (Pegar selección)
+	ma (crea un marcador con el nombre "a")
+	'a (Ir al marcador "a")
+	m (abre marcadores)
+	Espacio (marcar archivo)
+	gn (Abrir nueva pestaña)
+	TAB (Cambiar de pestaña)
+	:delete (borrar un archivo)
+	:rename (renombrar un archivo)
+	Ctrl+h (Ver archivos ocultos)
+	r (Abre el archivo con una aplicacion a elegir)
+	/ (buscar)
+	? (Ver la pagina man)
+	1? (Listado de atajos de teclado)
+	2? (Comandos de ayuda)
+	3? (Herramientas de ayuda)
+	R (Actualizar directorio)
+	Q (salir)
+
+
 rankmirrors
 Optimiza los mirrors de pacman.
 # cp mirrorlist mirrorlist.backup
