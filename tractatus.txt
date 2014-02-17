@@ -11389,6 +11389,18 @@ Descarga de <http://www.pentbox.net/download-pentbox/> . Herramientas de penetra
 $ pentbox
 
 
+peyote
+Reproductor de música tipo moc. <http://peyote.sourceforge.net/>
+$ peyote directory /home/USER/musica
+algunas teclas de control:
+	n (Siguiente canción)
+	s (reproducir el directorio de forma aleatoria)
+	r (Repetir)
+	espacio (Pausa)
+	q (Salvar la sesión y salir)
+	tab (Moverse entre los paneles)
+
+
 pg
 Muestra un texto tabulado a pantalla completa de la terminal. Con la tecla intro carga nuevo párrafo.
 $ pg archivo 
@@ -12015,11 +12027,16 @@ $ echo "Linux es un sistema genial" | randtype -m 4 (Simulando 4 errores en el t
 
 
 ranger
-[caca-utils highlight atool w3m poppler-utils mediainfo]. Navegador de archivos estilo vim [ver]. Preferible lanzarlo sobre xterm o urxvt. Antes de la primera configuración lanzar:
+[caca-utils highlight atool w3m poppler-utils mediainfo]. Navegador de archivos estilo vim [ver]. Preferible lanzarlo sobre xterm o urxvt. Algunos temas en < http://dotshare.it/category/fms/ranger/> . El directorio de temas está en /usr/lib/python2.6/dist-packages/ranger/colorschemes y los njuevos temas pueden colocarse en .config/ranger/colorschemes/ [Si no existe se crea] .Antes de la primera configuración lanzar:
 $ ranger (Creará los archivos necesarios en .config/ranger)
 $ ranger --copy-config=all (Copiar configuración básica en el directorio creado)
-$ ranger (Lanzar la aplicación)
-Algunos atajos ():
+Los ajustes en:
+$ nano .config/ranger/opntions.py
+Para modificar el tema:
+	colorscheme = 'jungle'
+Para bordes en los campos:
+	draw_borders = True
+Algunos atajos:
 	gg (Ir al principio)
 	G (Ir al final)
 	s (abre una consola en el directorio actual)
@@ -12034,8 +12051,8 @@ Algunos atajos ():
 	TAB (Cambiar de pestaña)
 	:delete (borrar un archivo)
 	:rename (renombrar un archivo)
-	Ctrl+h (Ver archivos ocultos)
 	r (Abre el archivo con una aplicacion a elegir)
+	Ctrl+H (Mostrar/ocultar archivos ocultos)
 	/ (buscar)
 	? (Ver la pagina man)
 	1? (Listado de atajos de teclado)
@@ -12043,7 +12060,7 @@ Algunos atajos ():
 	3? (Herramientas de ayuda)
 	R (Actualizar directorio)
 	! (Entrar comandos de shell)
-	Q (salir)
+	Q (salir. Tambien con F10)
 
 
 rankmirrors
