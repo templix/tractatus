@@ -13789,6 +13789,7 @@ $ ssh-keygen -lvf ~/.ssh/known_hosts (Ver todas las huellas digitales y las imá
 $ ssh-keygen -t rsa -C newserver -f .ssh/newkey (Generar el par de llaves publica y privada. Caso de exitir preguntará si se sobreescribe)
 $ ssh-keygen -B -f .ssh/id_rsa.pub (Muestra la huella digital de la llave especificada en formato SHA-1)
 $ ssh-keygen -f "$HOME/.ssh/known_hosts" -R [La_URL.com_entre_corchetes]:22 (Suprimir un clave de un host por sufrir alguna modificación y el puerto)
+$ ssh-keygen -R HOST (Otra forma de suprimir una clave de un host modificado)
 1.-
 Para ver la huella digital cada vez que se ingresa en un host remoto:
 # nano /etc/ssh/ssh_config
