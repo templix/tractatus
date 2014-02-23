@@ -12027,7 +12027,7 @@ $ echo "Linux es un sistema genial" | randtype -m 4 (Simulando 4 errores en el t
 
 
 ranger
-[caca-utils highlight atool w3m poppler-utils mediainfo]. Navegador de archivos estilo vim [ver]. Preferible lanzarlo sobre xterm o urxvt. Algunos temas en < http://dotshare.it/category/fms/ranger/> . El directorio de temas está en /usr/lib/python2.6/dist-packages/ranger/colorschemes y los njuevos temas pueden colocarse en .config/ranger/colorschemes/ [Si no existe se crea] .Antes de la primera configuración lanzar:
+[caca-utils highlight atool w3m poppler-utils mediainfo]. Navegador de archivos estilo vim [ver]. Preferible lanzarlo sobre xterm o urxvt. Algunos temas en < http://dotshare.it/category/fms/ranger/> . El directorio de temas está en /usr/lib/python2.6/dist-packages/ranger/colorschemes [puede ser tambien python2.7] y los nuevos temas pueden colocarse en .config/ranger/colorschemes/ [Si no existe se crea] .Antes de la primera configuración lanzar:
 $ ranger (Creará los archivos necesarios en .config/ranger)
 $ ranger --copy-config=all (Copiar configuración básica en el directorio creado)
 Los ajustes en:
@@ -12037,31 +12037,39 @@ Para modificar el tema:
 Para bordes en los campos:
 	draw_borders = True
 Algunos atajos:
-	gg (Ir al principio)
-	G (Ir al final)
-	s (abre una consola en el directorio actual)
-	yy (copiar selección)
-	dd (Cortar selección)
+	gg (Ir al principio del directorio)
+	G (Ir al final del directorio)
+	s (Arranca una shell en el directorio actual)
+    s -w comando (mostrará la salida de "comando y no cerrará la shell hasta pulsar intro)
+    s -r comando (Pedirá la contraseña para ejecutar "comando")
+	yy [F5] (copiar selección)
+	dd [F6] (Cortar selección)
 	pp (Pegar selección)
-	ma (crea un marcador con el nombre "a")
-	'a (Ir al marcador "a")
+	ma (crea un marcador del presente directorio con el nombre "a")
+	'a (Ir al directorio con marcador "a")
+	uv (Suprimir todas las marcas de archivos)
 	m (abre marcadores)
-	Espacio (marcar archivo)
-	gn (Abrir nueva pestaña)
-	TAB (Cambiar de pestaña)
-	:q (Cerrar una pestaña)
+	Espacio (marcar archivo desplazándolo un espacio en el listado)
+	gn (Abrir nueva pestaña. El número de pestañas se muestra en la parte superior derecha)
+	gt [TAB] (Cambiar de pestaña)
+	gc (Cerrar una pestaña)
 	:delete (borrar un archivo)
 	:rename (renombrar un archivo)
 	r (Abre el archivo con una aplicacion a elegir)
 	Ctrl+H (Mostrar/ocultar archivos ocultos)
-	/ (buscar)
-	? (Ver la pagina man)
+	/ (buscar archivo en el presente directorio)
+	? [F1] (Ver la pagina man)
 	1? (Listado de atajos de teclado)
 	2? (Comandos de ayuda)
 	3? (Herramientas de ayuda)
+	F3 (Mostrar archivo.Nueva pulsación de F3 salir)
+	F4 (Editar archivo)
+	F7 (Crear directorio)
+	F8 Suprimir selección de archivos
 	R (Actualizar directorio)
 	! (Entrar comandos de shell)
-	Q (salir. Tambien con F10)
+	Ctrl+z (Salir a la shell. "fg" para volver a ranger)
+	Q [F10](salir)
 
 
 rankmirrors
