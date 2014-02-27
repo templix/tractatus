@@ -10215,8 +10215,13 @@ Nota.- Valores, de mayor (-20) a menor (19). Sólo root puede establecer valores
 
 
 nikto
-[libnet-ssleay-perl libwhisker-perl]. Escáner de servidores Web. 
+[libnet-ssleay-perl libwhisker-perl nmap]. Herramienta de escaneo de servidores web que efectua diferentes comprobaciones tales como, detección de malas configuraciones y vulnerabilidades, detección de ficheros, estructura del servidor, versiones y fechas de actualizaciones de servidores, ataques de fuerza bruta por diccionario, reportes en formatos txt, csv, html, etc.
+# nikto -update (Actualizar la aplicación)
 # nikto -h host_a_analizar -p 80 (Especificando puerto)
+# nikto -h 127.0.0.1:80 (Otro modo de especificar host y puerto)
+# nikto -h localhost -p 443 -ssl (Especificando puerto y protocolo)
+# nikto	-h localhost -p	443,80 -Format html -output resultado (para dos puertos, salida en formato html y con nombre de archivo)
+# nikto -h archivo (a partir de un archivo con una ip o host por linea)
 
 
 nitrogen
