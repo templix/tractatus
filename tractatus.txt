@@ -2090,13 +2090,21 @@ $ chronic man (Mostrará que necesita otro dato)
 
 
 chroot
-Situarte virtualmente donde le indicas como raiz 
+Situarte virtualmente donde le indicas como raiz. 
 # chroot /media/sda3
-Nota.- En algunas ocaciones es necesario montar algunos sitemas de ficheros en la particion "chrootada". Debes hacer estos pasos antes de hacer chroot:
-# mount -o bind /dev/ /media/sda3/dev/
-# mount -o bind /sys/ /media/sda3/sys/
-# mount -o bind /proc/ /media/sda3/proc/
-Si no se establece conexión:
+1.-
+Ejemplo de un proceso para restituir grub2 despues de una instalación de un windows:
+Arrancar el live cd, abrir consola y (Asumimos que la partición que tiene el grub a instalar es la sda5:
+	$ sudo su
+	# mkdir /media/sda5
+	# mount /dev/sda5 /media/sda5
+	# mount -o bind /dev/ /media/sda5/dev/
+	# mount -o bind /sys/ /media/sda5/sys/
+	# mount -o bind /proc/ /media/sda5/proc/
+	# chroot /media/sda5
+	# update-grub
+	# grub-install /dev/sda
+Si precisamos conexión y esta no se realiza:
 # nano /etc/resolv.conf
 Y colocar:   nameserver 8.8.8.8
 O en su defecto la ip del router [nameserver 192.168.1.1]
