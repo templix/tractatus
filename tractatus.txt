@@ -9438,6 +9438,46 @@ $ mp3rename -i *.mp3 (muestra los id3 tag de todos los mp3)
 Nota.- No siempre los id3tag estan disponibles o están completos
 
 
+mpv
+Reproductor de video gobernado exclusivamente con el teclado.
+Instalación en el caso de que no se encuentre en los repos:
+	# apt-get install git
+	# git clone https://github.com/mpv-player/mpv-build.git
+	# cd mpv-build/
+	# ./update
+	# apt-get install devscripts equivs
+	# mk-build-deps
+	# dpkg -i mpv-build-deps_1.0_amd64.deb
+	# mk-build-deps
+	El comando anterior puede arrojar muchos errores. Ni caso.
+	# apt-get -f install
+	# debuild -uc -us -b -j2
+	# dpkg -i ../mpv_0.3.5_amd64.deb
+Archivo de configuración:
+$ nano .mpv/config
+Algunos ajustes:
+geometry=50%:50% (Medida de la pantalla)
+fs=yes (Iniciar con pantalla maximazada)
+volume=100 (Indicar el volumen por defecto)
+cache=50000 (cache de la aplicación)
+msgcolor=yes
+Algunos atajos:
+	q (Salir)
+	v (Mostrar /esconder los subtítulos)
+	r y t (Cambiar la posición vertical del subtítulo)
+	o (1ª pulsación muestra el tiempo transcurrido, 2ª porcentaje y tiempo total)
+	p (Pause / Renaudar)
+	s (Sacar una captura)
+	S (Sacar una captura con los subtítulos)
+	f (Pantalla completa)
+	m (Silenciar)
+	1 y 2 (Aumenta / disminuye constraste)
+	3 y 4 (Aclara / oscurece la imagen)
+	5 y 6 (Gamma)
+	7 y 8 (Aumentar / disminuir brillo)
+$ mpv video
+
+
 mpd
 (demonio). Reproductor de audio con arquitectura servidor-cliente que gestiona listas de reproducción y bases de datos. Para hacer uso de una interfaz gráfica, es necesario un cliente tipo: sonata, ario, ncmpcpp o pms.Ajustes en la configuración: 
 # nano /etc/mpd.conf 
