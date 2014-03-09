@@ -687,6 +687,18 @@ En el equipo conexión:
 Otra vez en el equipo sin conexión:
 # apt-offline install offline.zip
 # apt-get install PAQUETE (Instalación del paquete)
+5.- Instalar aplicaciones de arquitectura 386 en equipos amd64:
+# nano /etc/apt/sources.list
+Añadir las lineas:
+	deb http://ftp.debian.org/debian/ wheezy-updates main contrib
+	deb http://http.us.debian.org/debian/ wheezy contrib non-free main
+# apt-get update
+# apt-get upgrade
+Activar multiarquitectura:
+# dpkg --add-architecture i386
+# apt-get update
+Instalar librerías base para los sistemas de 32 bits:
+# apt-get install libc6:i386
 
 
 ar
@@ -8383,6 +8395,7 @@ Muestra información de los discos duros y unidades de DVD o tarjetas que tengam
 $ lsscsi (Muestra un resumen de las unidades)
 $ lsscsi -l (Muestra información extendida de las unidades)
 $ lsscsi -L (Muestra información aún más extensa de las unidades, en varias líneas)
+$ lsscsi -s (Mostrando la capacidad)
 
 
 lsusb
