@@ -2045,8 +2045,8 @@ $ chmod a+w archivo (permiso de escritura para todos)
 $ chmod 222 -R /home/usuario/directorio (Equivalente en octal)
 $ chmod -w archivo (Quitar permiso de escritura a un archivo)
 $ chmod +x archivo (Dar permiso de ejecución)
-$ chmod 744 archivo (Lectura, ecritura y ejecución para el usuario y sólo lectura para grupo y otros)
-$ chmod u=rwx,go=rw,archivo (Equivalente en alfabético)
+$ chmod 744 archivo (Lectura, escritura y ejecución para el usuario y sólo lectura y escritura para el grupo y otros)
+$ chmod u=rwx,go=rw archivo (Equivalente en alfabético)
 $ chmod --reference=file1 file2 (Otorgar los mismos permisos de file1 a file2)
 Código numérico (octal):
 	1 = ejecución [x]
