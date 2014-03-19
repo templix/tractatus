@@ -4047,6 +4047,24 @@ Abrir sesión de emacs y acceder al host remoto con:
 Pedirá contraseña.
 Nota.- Después de pulsar el atajo, no olvidar borrar la referencia al directorio local ~/ dejándolo en /
 7.-
+Temas de colores:
+Descargar el paquete tar.gz de:  <http://download.gna.org/color-theme/>
+Una vez decomprimido mover la carpeta a ~/.emacs.d:
+	~/.emacs.d/color-theme
+Y añadir a a .emacs las lineas:
+	(add-to-list 'load-path (expand-file-name "~/.emacs.d/color-theme/"))
+	(require 'color-theme)
+	(color-theme-initialize)
+Arrancar emacs y:
+	M-x color-theme-select                                                                                                                   
+Mostrará en un nuevo buffer una lista de temas disponibles que podrán probarse seleccionandolos con "intro" o la tecla "i". Una vez
+escogido el tema, pulsando la letra d, muestra la linea que ha de entrarse en .emacs. Supongamos que escogemos Charcoal Black,
+Añadiremos la linea (color-theme-charcoal-black) quedando toda la entrada:
+	(add-to-list 'load-path (expand-file-name "~/.emacs.d/color-theme/"))
+	(require 'color-theme)
+	(color-theme-initialize)
+	(color-theme-charcoal-black) 
+8.-
 Otros ajustes que pueden incorporarse a .emacs precedidas con la explicación comentada:
 	;;Mostrar consola al pulsar F5:
 	(global-set-key (kbd "<f5>") 'eshell)
