@@ -4063,6 +4063,30 @@ Mostrará en un nuevo buffer una lista de temas disponibles que podrán probarse
 	(color-theme-initialize)
 	(color-theme-charcoal-black) 
 8.-
+Consultando directorios: dired, navegador de archivos de emacs.
+	g (Despues de una modificación actualiza la pantalla)
+	v (Muestra el archivo en modo solo-lectura
+	q (Regresa al listado)
+	e [enter] (Editar el archivo)
+	d (Marca un archivo para su eliminación colocando una "D" en la 1ª columna)
+	u (Elimina la marca anterior)
+	x (Elimina los archivos marcados con una "D")
+	D (Eliminación inmediata)
+	C (Copiar)
+	3C (Copiar el archivo de la linea del cursor y los 3 siguientes)
+	R (Renombrar o mover)
+	Z (Comprimir descomprimir [compress (.z .Z) y gzip (.gz)])
+	X (Entrar comandos de shell [chmod, grep, find, sort ...])
+	+ (Crear directorio)
+	** (Marcar todos los ejecutables)
+	*/ (Marca todos los directorios)
+	*! (Desmarca todo)
+	M (Cambiar los permisos. Sólo poner la numeración [777, 755...])
+	O (Cambiar el propietario)
+	P (Imprimir el fichero. El comando lp imprimirá con la impresora predeterminada)
+	h (Muestra la ayuda y todos los atajos de teclado)
+	S (Crear un enlace simbólico)
+9.-
 Otros ajustes que pueden incorporarse a .emacs precedidas con la explicación comentada:
 	;;Mostrar consola al pulsar F5:
 	(global-set-key (kbd "<f5>") 'eshell)
@@ -4079,19 +4103,19 @@ Otros ajustes que pueden incorporarse a .emacs precedidas con la explicación co
 	(setq make-backup-files nil)
 	;; Embellecer el calendario:
 	(setq view-diary-entries-initially t
-	     mark-diary-entries-in-calendar t
-	     number-of-diary-entries 7)
+	mark-diary-entries-in-calendar t
+	number-of-diary-entries 7)
 	(add-hook 'diary-display-hook 'fancy-diary-display)
 	(add-hook 'today-visible-calendar-hook 'calendar-mark-today)
 	;; Poner en español el calendario:
 	(setq calendar-week-start-day 1
-		calendar-day-name-array
-         ["Domingo" "Lunes" "Martes" 
-         "Miercoles" "Jueves" "Viernes" "SÃ¡bado"]
-         calendar-month-name-array
-         ["Enero" "Febrero" "Marzo" "Abril"
-         "Mayo" "Junio" "Julio" "Agosto" "Septiembre"
-         "Octubre" "Noviembre" "Diciembre"])
+	calendar-day-name-array
+    ["Domingo" "Lunes" "Martes" 
+    "Miercoles" "Jueves" "Viernes" "SÃ¡bado"]
+    calendar-month-name-array
+    ["Enero" "Febrero" "Marzo" "Abril"
+    "Mayo" "Junio" "Julio" "Agosto" "Septiembre"
+    "Octubre" "Noviembre" "Diciembre"])
 
 
 emerge 
