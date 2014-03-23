@@ -3965,6 +3965,8 @@ Varios:
 	C-x d (Abre un directorio que se especifique)
 	C-x RET f (Entrar codificación de caracteres: latin-1-unix [latin1], utf-8-unix [utf8]..)
 	C-x custom (Personalizar numerosos aspectos de emacs) 
+	C-x C-+ (Agrandar la fuente)
+	C-x C-- (Disminuir la fuente)
 Entrar comandos de shell e insertar:
 	C-z (Suspende la sesion emacs y entra en la shell. Volver a emacs con fg o con %emacs)
 	M-! (Muestra en el mini buffer un mensaje para entrar un comando y lo abre un una ventana)
@@ -14312,6 +14314,7 @@ Opciones:
 	-f (archivo (nombre de archivo)
 	-x (extraer el contenido del archivo comprimido)
 	-t (listar contenido de un archivo)
+	-j  (comprime el fichero tar con bzip2)
 Otros casos:
 $ tar -cf - file/ | gpg -c > file.cript (empaquetar y encriptar un archivo)
 $ tar -c ficheros | bzip2 > archivo.tar.bz2 (Empaquetar ficheros y comprimir)
