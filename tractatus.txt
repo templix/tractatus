@@ -4089,6 +4089,22 @@ Consultando directorios: dired, navegador de archivos de emacs.
 	h (Muestra la ayuda y todos los atajos de teclado)
 	S (Crear un enlace simbólico)
 9.-
+M-x term [Emulador de terminal]
+Utiliza dos modos de entrada: El modo caracter que envia cada caracter de entrada directamente a la subshell, a excepción del carácter de escape [C-c] y el modo línea que actúa como modo Shell [Permite entrada de todas las combinaciones de teclas emacs, desplaza el cursor por la pantalla con las flechas, puede marcarse trozos de texto para copiar...]. Para alternar entre estos dos modos:
+	C-c C-j (Cambia a modo línea)
+	C-c C-k (Cambia a modo caracter)
+10.-
+Uso de sudo. Entrar el siguiente código en .emacs:
+	;; Uso de sudo: C-x C-f /sudo::/etc/hosts                                                                                           
+	;; C-x C-f /sudo:root@localhost:/etc/hosts  o C-x sudo-find-file                                                                         
+	(defun sudo-find-file (file-name)                                                                                                        
+	  "Like find file, but opens the file as root."                                                                                          
+	  (interactive "FSudo Find File: ")                                                                                                      
+	  (let ((tramp-file-name (concat "/sudo::" (expand-file-name file-name))))                                                               
+	  (find-file tramp-file-name)))                                                                                                        
+	;; Atajo de teclado para sudo:                                                                                                       
+	(global-set-key (kbd "C-x F") 'sudo-find-file)
+11.-
 Otros ajustes que pueden incorporarse a .emacs precedidas con la explicación comentada:
 	;;Mostrar consola al pulsar F5:
 	(global-set-key (kbd "<f5>") 'eshell)
@@ -14272,28 +14288,39 @@ $ talk usuario ttyx  (Conectar con usuarios locales)
 $ talk usuario@IP_o_Host (Con un usuario remoto [UNIX])
 
 
-tar (tar.bz2 [tbz], tar.gz [tgz])
-Empaquetar y comprimir
-$ tar -jvcf archivo.tbz directorio (Empaquetar y comprimir)
-$ tar -zvcf archivo.tgz directorio (Empaquetar dir y comprimir)
-$ tar -zvxf archivo.tgz (Desempaquetar y descomprimr)
-$ tar -jvxf archivo.tbz (Desempaquetar y descomprimir)
-$ tar -jvtf archivo.tbz (Ver contenido)
-$ tar -zvtf archivo.tgz (Ver contenido)
-$ tar -cf  - file/ | gpg -c > file.cript  (empaquetar y encriptar un archivo)
+tar
+Empaquetar y comprimir archivos y/o directorios.
+$ tar -cf archivo.tar dir (Crear paquete .tar)
+$ tar -xf archivo.tar (Descomprimir un .tar)
+$ tar -tf archivo.tar (Listar contenido)
+$ tar -cf archivo.tar.gz dir (Crear paquete tar.gz)
+$ tar -zf archive.tar.gz (Descomprimir paquete gzip)
+$ tar -cf archivo.tgz dir (Crear paquete .tgz)
+$ tar -xf archivo.tgz (Descomprimir un .tgz)
+$ tar -tf archivo.tgz (Listar contenido)
+$ tar -cf archive.xz dir (Crear paquete .xz)
+$ tar -xf archive.xz (Descomprimir paquete . xz)
+$ tar -cf archivo.tbz dir (Empaquetar y comprimir)
+$ tar -xf archivo.tbz (Desempaquetar y descomprimir)
+$ tar -tf archivo.tbz (Ver contenido)
+$ tar -cf archivo.tar.bz2 dir (Crear paquete .tar.bz2)
+$ tar -xf archivo.tar.bz2 (Descomprimir archivo .tar.bz2)
+Opciones:
+	-z (Comprimir archivos usando gzip)
+	-c (Crear un nuevo archivo)
+	-v (mostrar proceso)
+	-f (archivo (nombre de archivo)
+	-x (extraer el contenido del archivo comprimido)
+	-t (listar contenido de un archivo)
+Otros casos:
+$ tar -cf - file/ | gpg -c > file.cript (empaquetar y encriptar un archivo)
 $ tar -c ficheros | bzip2 > archivo.tar.bz2 (Empaquetar ficheros y comprimir)
 $ tar -cvzf archivo.tar.gz /home/usuario --exclude=videos (Empaquetar el directorio del usuario exluyendo el directorio videos)
-$ tar cvfz archivo.tgz --exclude="home/usuario/Descargas" /home/usuario/* (Lo mismo de otra forma)
+$ tar -cvfz archivo.tgz --exclude="home/usuario/Descargas" /home/usuario/* (Lo mismo de otra forma)
 $ tar -cvzf archivo.tar.gz –exclude={*.iso,videos} /home/usuario (Otra forma de empaquetar el direcotorio del usuario excluyendo todas las iso y la carpeta videos)
-$ tar jxf archivo.tbz -C /tmp (Descomprimir en otra carpeta)
-$ tar cvfz archivo.tgz --exclude="home/usuario/Descargas" --exclude=”home/usuario/videos  /home/usuario/* (Otra forma de especificar las carpetas excluidas)
-$ tar -cjvf archivo.tar.bz2 dir1 (crear un paquete comprimido en bzip2.)
-$ tar -xjvf archivo.tar.bz2 (descomprimir un archivo comprimido en bzip2)
-$ tar -cJvf archive.tar.xz dir1 (crear un paquete comprimido en xz)
-$ tar -xJvf archive.tar.xz (descomprimir un paquete comprimido en xz) 
-$ tar -czvf archive.tar.gz dir (crear un paquete comprimido en gzip)
-$ tar -xzvf archive.tar.gz (descomprimir un paquete comprimido en gzip)
-$ tar czf - Images | ssh 192.168.1.15 'cat > ~/Images.tar.tgz' (Crear un tar de un directorio y mandarlo a un host remoto por ssh donde creará en el directorio personal el paquete Images.tar.gz)
+$ tar -jxf archivo.tbz -C /tmp (Descomprimir en otra carpeta)
+$ tar -cvfz archivo.tgz --exclude="home/usuario/Descargas" --exclude=”home/usuario/videos /home/usuario/* (Otra forma de especificar las carpetas excluidas)
+$ tar -czf - Images | ssh 192.168.1.15 'cat > ~/Images.tar.tgz' (Crear un tar de un directorio y mandarlo a un host remoto por ssh donde creará en el directorio personal el paquete Images.tar.gz)
 
 
 tcpdump
