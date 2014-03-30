@@ -4069,7 +4069,7 @@ Mostrará en un nuevo buffer una lista de temas disponibles que podrán probarse
 	(color-theme-initialize)
 	(color-theme-charcoal-black) 
 8.-
-Consultando directorios: dired, navegador de archivos de emacs.
+Consultando directorios: dired, navegador de archivos de emacs [C-x d].
 	g (Despues de una modificación actualiza la pantalla)
 	v (Muestra el archivo en modo solo-lectura
 	q (Regresa al listado)
@@ -4109,6 +4109,25 @@ Uso de sudo. Entrar el siguiente código en .emacs:
 	;; Atajo de teclado para sudo:                                                                                                       
 	(global-set-key (kbd "C-x F") 'sudo-find-file)
 11.-
+Abrir archivos de dired con aplicaciones externas pulsando F8:
+Copiar en .emacs el siguiente código:
+	(defun external-app ()
+	 "In dired, open the file named on this line."
+	  (interactive)
+	  (let* ((file (dired-get-filename nil t)))
+		(call-process "xdg-open" nil 0 nil file)
+	(global-set-key (kbd "<f8>") 'external-app)
+12.-
+Abrir archivos de dired con determinadas aplicaciones externas:
+Descargar la libreria de <http://stud4.tuwien.ac.at/~e0225855/misc/openwith.el> y moverlo a la carpeta ~/.emacs.d/
+Y copiar el siguiente codigó en ~/.emacs:
+	(add-to-list 'load-path "~/.emacs.d/openwith.el")
+	(require 'openwith)
+	(setq openwith-associations '(("\\.pdf\\'" "evince" (file))))
+	(setq openwith-associations '(("\\.flv\\'" "vlc" (file))))
+	(openwith-mode t)
+Colocar tantas lineas del tipo "(setq openwith-associations '(("\\.flv\\'" "vlc" (file))))" como archivos queramos asociar. 
+13.-
 Otros ajustes que pueden incorporarse a .emacs precedidas con la explicación comentada:
 	;;Mostrar consola al pulsar F5:
 	(global-set-key (kbd "<f5>") 'eshell)
