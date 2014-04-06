@@ -4202,6 +4202,14 @@ Otros ajustes que pueden incorporarse a .emacs precedidas con la explicación co
 	(desktop-save-mode 1)
 	;; Ocultar caracteres al pedir un password:
 	(add-hook 'comint-output-filter-functions 'comint-watch-for-password-prompt)
+	;; Colocar el tipo de sistema
+	(defun insert-system-type()
+	(interactive)
+	(insert (format "%s" system-type)))
+	;; Colocar el nombre del sistema
+	(defun insert-system-name()
+	(interactive)
+	(insert (format "%s" system-name)))
 
 
 emerge
@@ -4696,6 +4704,28 @@ $ faillog
 
 false
 Este comando no hace nada excepto devolver un estado de salida 1 (fail). Se utiliza como marcador de posición en scripts.
+
+
+fbcmd
+[php5-cli php5-curl]. Cliente de línea de comandos para Facebook.
+$ php -r 'echo phpversion();' (Comprobar si php5 está instalado)
+$ php -r 'phpinfo();' | grep -i curl (Comprobar si php tiene soporte para curl)
+$ wget https://raw.github.com/dtompkins/fbcmd/master/fbcmd_update.php (Descargar fbcmd)
+$ php fbcmd_update.php (Preparar la instalación)
+$ php fbcmd_update.php sudo
+$ php fbcmd_update.php
+$ fbcmd (Arrancar la aplicación. Mostrará una url del tipo https://www.facebook.com/dialog/oauth?client_id=424....)
+Entrar en fecebook con la url mencionada y aceptar la conexión de la aplicación. Mostrará un código XXXXX
+$ fbcmd auth XXXXX (Autentificarse con el código)
+Aceptar los terminos que nos proponen y acabar la configuración.
+$ fbcmd update (Actualizar la versión)
+$ fbcmd post "Estoy posteando en consola" (Enviar una entrada)
+$ fbcmd target USER post "Texto al muro de USER"
+$ fbcmd @USER post "Texto al muro de USER"
+$ fbcmd fstatus (Ver estado de tus amigos)
+$ fbcmd fonline (Mostrar los amigos que están actualmente en línea)
+$ fbcmd stream (Mostrar streaming de los amigos)
+$ fbcmd comment 5 "texto de comentario" (Agregar un comentario)
 
 
 fbgrab
