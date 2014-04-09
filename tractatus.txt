@@ -3918,7 +3918,7 @@ Salir:
 	C-x s (Guardar todos los ficheros abiertos. Preguntará.)
 Copiar, cortar, pegar
 	C-Esp (Inicio del marcado de texto)
-	C-h (Marcar todo el buffer, "Seleccionar todo")
+	C-x h (Marcar todo el buffer, "Seleccionar todo")
 	M-w (Copiar)
 	C-w (Cortar)
 	C-y (Pegar)
@@ -4161,6 +4161,10 @@ Para poder copipastear de emacs a las X y viceversa colocar en .emacs el código
     (setq interprogram-cut-function 'xsel-cut-function)
     (setq interprogram-paste-function 'xsel-paste-function)))
 15.-
+Operar con trozos seleccionados [C-espacio]
+	C-x r s (Guardarla en un registro)
+	C-x TAB (Sangrar toda la selección)
+16.-
 Otros ajustes que pueden incorporarse a .emacs precedidas con la explicación comentada:
 	;;Mostrar consola al pulsar F5:
 	(global-set-key (kbd "<f5>") 'eshell)
@@ -10100,15 +10104,15 @@ header=1 (Valor 1 muestra la cabecera)
 color=1 (en color)
 idle=1 (que muestre los resultados de las consultas que están dormidas)
 Conceptos que muestra la pantalla de mytop:
-Queries (Número tatal de consultas)
-qps (Media de consultas por segundo)
-qps now (Número de consultas por segundo desde la última vez que se descargaron resultados)
-Slow (Número de consultas lentas)
-Slow qps (Consultas lentas desde la última descarga de resultados)
-Se/In/Up/De (indica cual es el porcentaje de Select, Insert, Update o Delete que se ejecutan en el servidor)
-key efficiency (Porcentaje de consultas que están utilizado una clave/índice en la consulta)
-Bps in/out (Media de bytes por segundo entrantes a la base de datos y media de bytes por segundo salientes)
-Now in/out (Media de bytes entrantes y salientes por segundo desde que mytop ha refrescado la página)
+	Queries (Número tatal de consultas)
+	qps (Media de consultas por segundo)
+	qps now (Número de consultas por segundo desde la última vez que se descargaron resultados)
+	Slow (Número de consultas lentas)
+	Slow qps (Consultas lentas desde la última descarga de resultados)
+	Se/In/Up/De (indica cual es el porcentaje de Select, Insert, Update o Delete que se ejecutan en el servidor)
+	key efficiency (Porcentaje de consultas que están utilizado una clave/índice en la consulta)
+	Bps in/out (Media de bytes por segundo entrantes a la base de datos y media de bytes por segundo salientes)
+	Now in/out (Media de bytes entrantes y salientes por segundo desde que mytop ha refrescado la página)
 Teclas interactivas:
 	d (Mostrar solo datos de una base de datos)
 	f (Mostrar información completa de una consulta)
