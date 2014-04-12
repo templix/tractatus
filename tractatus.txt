@@ -10082,6 +10082,19 @@ mysql> exit (Salir)
 $ mysql -u root -p (Entrar en MySQL)
 
 
+mysqladmin
+Cliente mysql para realizar operaciones administrativas.
+$ mysqladmin -u root -p version (Conocer la versión instalada)
+$ mysqladmin -u root password 1234 (Establecer un primera contraseña si no la establece al instalar)
+$ mysqladmin -u root -p1234 password 'abcd'(Cambiar la contraseña 1234 por abcd)
+$ mysqladmin -u root -p create BASE_DATOS (Crear una base de datos)
+$ mysqladmin -u root -p drop BASE_DATOS (Borrar una base de datos)
+$ mysqladmin -u root -p status (Mostrar conexiones del servidor mysql)
+$ mysqladmin -u root -p reload (Recargar privilegios)
+$ mysqladmin -u root -p flush-logs (Vuelca todos los logs)
+$ mysqladmin -u root -p flush-tables (Vuelca todas las tablas)
+
+
 mytop
 Monitorización del servidor de bases de datos mysql. "q" para salir. Comprobar la actividad ingresando en otra consola en mysql [mysql -u USER -p]
 $ mytop -u USER -p PASS -h localhost -P 3306 --color (Especificando host y puerto)
