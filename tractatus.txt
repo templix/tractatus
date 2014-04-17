@@ -574,6 +574,19 @@ $ apropos jpeg
 $ apropos “copy files”  (busca comandos relacionados)
 
 
+apt
+Aplicación que unifica las opciones y parámetros de apt-cache y apt-get. Tambien cuenta con una barra de progreso. Tiene casi los mismo parametros que el comando apt-get.
+# apt list (Muestra todos los paquetes disponibles
+# apt list --installed (Muestra todos los paquetes instalados)
+# apt list --upgradable (Muestra todos los paquetes instalables) 
+$ apt search paquete (Buscar un paquete)
+# apt update (Actualiza el listado de paquetes)
+# apt upgrade (Actualiza todos los paquetes del sistema)
+# apt install paquete (Instala un paquete)
+# apt remove paquete (Suprime un paquete)
+# apt edit-sources (Edita el sources.list)
+
+
 apt-fast
 [axel o aria]
 Paquete que incrementa la velocidad de descarga de paquetes respecto de apt-get mediante el uso de axel [ver] o aria. Descargar el scrpt de http://www.mattparnell.com/linux/apt-fast/apt-fast.sh o via github de https://github.com/ilikenwf/apt-fast. Para reconfigurar el paquete:
@@ -5009,6 +5022,7 @@ $ find . -name "*.html" -exec grep -i -H "Tractatus elementalis" {} \; (Buscar e
 $ find . -name \*.txt -exec sed -i "s/cosa/casa/g" {} \; (Substituir “cosa” por “casa” en todos los .txt del presente directorio)
 $ find ~/ -depth -type f -empty (Buscar archivos vacios. Con -type d buscará directorios vacios)
 $ find / -name "algo" -a ! -path "/media/servidor/*" -exec echo {} \; 2>/dev/null (Buscar "algo" descartando el directorio /media/servidor/)
+$ find /home/usuario -iname '*.odt' -exec cp '{}' /home/usuario/Documentos \; (Copiar todos los odt a la carpeta Documentos)
 
 
 findfs
@@ -7632,6 +7646,14 @@ Pruebas de detección de correcto funcionamiento.
 # cd ../run
 # ./john --test
 El fichero john.pot contiene los resultados encontrados por john. Si el fichero no está vacío significa que john ha encontrado la contraseña. El fichero john.rec contiene el estado actual de la búsqueda por si se produce una interrupción y es utilizado por el programa para reanudar la búsqueda.
+1.-
+Comprobación de la fortaleza de nuestra constraseñas:
+# unshadow /etc/passwd /etc/shadow > contraseñas.txt
+# john contraseñas.txt
+# john --single contraseñas.txt (usanólo el modo single)
+# john --incremental contraseñas.txt (Usando el modo incremental)
+# john --wordlist=diccionario.lst --rules contraseñas.txt (Usando un diccionario)
+# john --show contraseñas.txt (Ver resultados)
 
 
 join
