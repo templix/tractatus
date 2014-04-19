@@ -13178,6 +13178,8 @@ Borrar la segunda linea
 	$ sed '2d' lista
 Borrar la 1ª y la 2ª:
 	$  sed '1,2d' lista
+Borrar a partir del primer espacio en blanco:
+	$ sed -e 's/ .*//' lista
 Borrar desde la primera linea que empiece por "Ant" hasta el final:
 	$ sed -e '/^\Ant/,$d' lista
 Borrar desde la 2 linea hasta la que tenga "Ruiz":
