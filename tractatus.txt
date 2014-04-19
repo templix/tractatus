@@ -6776,6 +6776,13 @@ Ping específico para conexiones HTTP
 # httping -h localhost -p 80
 
 
+hydra
+Se utiliza para crackear los sistemas de login de diferentes servicios como HTTP, FTP, TELNET, IMAP, SMB, SSH, etc.
+# hydra 192.168.1.5 -l admin -p 1234 (Una ip con el usuario "admin" con la clave "1234")
+# hydra -M lista_ips ssh -s 22 (A un listado de ips a una por linea y sobre el puerto 22)
+# hydra 192.168.1.8 ftp -s 21 -l juan -P wordlist.txt (Una ip el puerto 21 del usuario "juan" y probando las contraseñas de un archivo de texto a una por linea)
+
+
 hwclock
 Ver fecha y hora de la BIOS
 # hwclock -D (Muestra toda la información))
