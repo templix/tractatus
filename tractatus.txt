@@ -1647,6 +1647,27 @@ cacti
 [php5 php5-gd php5-mysql mysql-server rrdtool snmp libjpeg62 libjpeg62-dev libpng12-0 libpng12-dev libgd2-xpm-dev]. Monitorizar y visualizar gráficas, estadísticas de dispositivos conectados a la red, ancho de banda consumido, detectar congestiones o picos de tráfico, monitorizar determinados puertos...  Cacti permite monitorizar cualquier equipo de red que soporte el protocolo SNMP, ya sea un switch, un router o un servidor Linux. Se accede al resto de la instalación con: http://192.168.1.5/cacti. Los datos por defecto: usuario: admin password: admin
 
 
+cadaver
+Cliente de WebDAV para linux. El modulo WebDav es un método que permite compartir, editar y manejar archivos en un servidor remoto via HTTP.
+$ cadaver 192.168.2.25 (Conectar con un host)
+	dav:/>
+$ cadaver https://www.sitio.com (Conectar a un host y requerimiento de usuario y contraseña)
+	Authentication required for webdav on server `sitio.com`:
+	Username: USER
+	Password: PASS
+	dav:/>
+Una vez conectado, algunos comandos disponibles son:
+	put archivo (Subir un archivo)
+	get archivo (Descargar un archivo)
+	move viejo nuevo (Cambiar el nombre de viejo a nuevo)
+	ls (Listar contenido)
+	edit archivo (Editar un archivo)
+	pwd (Mostrar directorio donde nos encontramos)
+	cd dir (Entrar en un directorio)
+	? (Muestra todos los comandos disponibles)
+	quit (Salir)
+
+
 cadubi
 Crear dibujos en la consola.
 teclas:
