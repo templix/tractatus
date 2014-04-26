@@ -13704,6 +13704,25 @@ $ sl -F  (El tren vuela)
 $ sl -e  (permite la interrupción con ^C)
 
 
+slackpkg
+Gestor de paquetes de Slackware sin resolución de dependencias. Como previa antes de su uso es preciso descomentar el repositorio de nuestra elección en /etc/slackpkg/mirrors
+# slackpkg update gpg (Bajar llaves publicas)
+# slackpkg update (Recargar listado)
+# slackpkg upgrade-all (Actualizar toda la distro)
+# slackpkg search paquete (buscar paquete)
+# slackpkg install paquete (instalar paquete)
+# slackpkg upgrade paquete (actualiza el paquete elegido)
+# slackpkg reinstall paquete (reinstala paquete)
+# slackpkg remove paquete (desinstala paquete)
+# slackpkg blacklist paquete (pone el paquete en lista negra)
+# slackpkg download paquete (descarga paquete sin instalarlo)
+# slackpkg info paquete (muestra informacion de paquete)
+# slackpkg clean-system (Lista los paquetes obsoletos)
+# slackpkg install-new (Lista los paquetes introducidos recientemente)
+# slackpkg generate-template (Generar una plantilla de los paquetes instalados en un pc)
+# slackpkg install-template (Instalar un slackware en un pc a partir de una plantilla))
+
+
 slay
 Matar todos los procesos de un usuario.
 $ slay usuario
