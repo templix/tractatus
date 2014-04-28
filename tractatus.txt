@@ -5561,16 +5561,29 @@ $ ftff -t2 logfile.txt (busca  logfile con dos errores en el nombre. permite *)
 
 ftp
 Conexión remota por linea de comandos
-# lftp -help (Para obtener ayuda)
-# lftp -u usuario,clave ftp.dominio.com (Para conectarnos con un servidor)
+# ftp -help (Para obtener ayuda)
+# ftp -u usuario,clave ftp.dominio.com (Para conectarnos con un servidor)
+# ftp dominio.com 20201 (Entrar especificando un puerto)
 Al entrar en el directorio raiz del servidor ftp remoto con un prompt al estilo de:
-lftp usuario@ftp.dominio.com:~>
+ftp usuario@ftp.dominio.com:~>
 Algunas opciones:
-lftp usuario@ftp.dominio.com:~> ls -l (listar el directorio)
-lftp usuario@ftp.dominio.com:~> mirror htdocs html (copiará todo el contenido de htdocs a la carpeta html del home. Si no existe la crea)
-lftp usuario@ftp.dominio.com:~> help mirror (opciones de mirror)
-lftp usuario@ftp.dominio.com:~> cd htdocs
-lftp usuario@ftp.dominio.con/htdocs:~> exit (salir del remoto)
+	get archivo (Recibir un fichero de la máquina remota)
+	mget file file file (Recibir varios ficheros de la máquina remota.
+	put archivo (Enviar un fichero desde nuestra máquina a la máquina remota)
+	mput file file file (Enviar varios archivos de nuestra máquina a la máquina remota)
+	quit (Para desconectarnos del servidor)
+	!ls (Ejecuta una shell que permite la entrada de comandos [ls] en nuestro sistema. Con "exit" volveremos al programa de FTP)
+	!xterm & (Lanzaría otra xterm)
+	bell (Indica al sistema que ejecute un pitido cuando finalice la ejecución de los comandos)
+	bye (Termina la ejecución de ftp)
+	quit (Termina la ejecución de ftp)
+	close (Termina la sesión ftp sin salir del programa)
+	delete file (Borra un archivo)
+	mdelete file file file (Borra varios archivos)
+	reget file(Continuar bajando un fichero cortado anteriormente)
+	open (conectar desde un ftp a otro)
+	? (Muestra todos los comandos disponibles)
+	cd, dir, ls, list, mkdir, rmdir, pwd, rename (Funionan igual que en la shell)
 
 
 funcoeszz
