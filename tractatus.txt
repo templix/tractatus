@@ -4757,6 +4757,19 @@ false
 Este comando no hace nada excepto devolver un estado de salida 1 (fail). Se utiliza como marcador de posición en scripts.
 
 
+fatattr
+Permite ver y/o modificar los atributos MSDOS en un sistema de archivos FAT empleando los signos + para otorgar y - para quitar. Dichos premisos son:
+    r (Solo lectura)
+    a (Archivo)
+    s (Archivo del sistema)
+    h (Oculto)
+    d (Directorio)
+    v (Etiqueta de volumen)
+$ fatattr /media/usb1/* (Muestra los atributos)
+$ fatattr -s /media/usb1/* (Quita el atributo oculto de todo el usb)
+$ fatattr +s /media/usb1/* (Oculta todos los archivos del usb)
+
+
 fbcmd
 [php5-cli php5-curl]. Cliente de línea de comandos para Facebook.
 $ php -r 'echo phpversion();' (Comprobar si php5 está instalado)
