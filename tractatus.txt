@@ -15533,7 +15533,12 @@ $ type -t cp (Conocer el tipo de un símbolo)
 
 
 typeset
-Define variables y les da atributos. Ver "declare"
+Define variables y les da atributos. Es necesario para operar con números y hacer cuentas con ellos. Ver "declare"
+Un ejemplo de uso en un script:
+	#! /bin/bash
+	typeset -i suma
+	suma=7+5
+	echo $suma
 
 
 tzconfig
