@@ -14173,6 +14173,7 @@ $ ssh -t usuario@host newsbeuter  (lo mismo si precisa consola)
 $ ssh -D 9999 usuario@host (abrir un puerto a partir del cual tunelar una conexión)
 $ ssh user@host_ip 'DISPLAY=":0.0" import -window root screenshot.png' (realizar pantallazo de una sesión remota. Se archiva en el remoto no en local)
 $ ssh usuario@host "tar -cf - /home/usuario/dir" | gzip dir.tar.gz (Comprimir un directorio remoto)
+$ ssh usuario@host cat /home/usuario/archivo.txt | xclip -selection (Copiar el contenido de un archivo remoto en el clipboard local)
 # gedit /var/run/motd   (modificar el mensaje de bienvenida de ssh)
 1.-
 conexión remota. El servidor ha de tener el archivo /etc/ssh/sshd_config con los siguientes parámetros:
