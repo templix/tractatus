@@ -13527,8 +13527,17 @@ sfill
 
 
 sftp
-Transferencia encriptada de archivos entre computadoras
-$ sftp host
+Transferencia encriptada de archivos entre computadoras por ssh.
+Ajustes previos:
+# nano /etc/ssh/sshd_config
+Y colocar las lineas:
+	Subsystem sftp internal-sftp
+	Match group USER
+	 ChrootDirectory /home/USER
+	 ForceCommand internal-sftp
+	 AllowTCPForwarding no
+	 X11Forwarding no
+$ sftp USER@host
 
 
 sg
