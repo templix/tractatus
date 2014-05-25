@@ -8326,6 +8326,35 @@ autologin-user=USUARIO
 autologin-user-timeout=0
 
 
+lilo
+Gestor de arranque. La configuración en:
+# nano /etc/lilo.conf
+Algunos parametros a especificar:
+# un disco:
+boot = /dev/sda
+# El sistema que arrancará por defecto [el especificado en la etiqueta [label]]
+default = Linux
+# Una imagen:
+bitmap = /boot/slack.bmp
+# un mensaje de inicio:
+message = /boot/boot_message.txt
+# tiempo de espera para arrancar la partición por defecto [en segundos]:
+timeout = 50
+# Una partición linux
+image = /boot/vmlinuz
+	root = /dev/sda2
+	label = Linux
+	read only
+# nota: read-only Indica que el sistema de ficheros raíz se montará en modo solo-lectura.
+# Por norma general, el proceso de arranque lo remonta luego en modo lectura-escritura. 
+# Una partición windows:
+other = /dev/hda1
+    label = Windows
+    table = /dev/sda1 
+Cualquier modificación en este archivo para guardar los cambios, implica lanzar:
+# lilo
+
+
 lilyterm
 Emulador de terminal.
 $ lilyterm -g 90x10 -T terminal -t 3 -d /home/usuario (Con determinadas medidas, título, 3 pestañas y abriendo en las tres un directorio)
