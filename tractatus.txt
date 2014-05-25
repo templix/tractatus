@@ -8330,11 +8330,13 @@ lilo
 Gestor de arranque. La configuración en:
 # nano /etc/lilo.conf
 Algunos parametros a especificar:
-# un disco:
+# Indica que se instale en determinado disco:
 boot = /dev/sda
 # El sistema que arrancará por defecto [el especificado en la etiqueta [label]]
 default = Linux
-# Una imagen:
+# Que muestre cualquier cosa que sea referenciado en la línea message:
+prompt
+# Una imagen. Medidas 640x480:
 bitmap = /boot/slack.bmp
 # un mensaje de inicio:
 message = /boot/boot_message.txt
@@ -8351,6 +8353,8 @@ image = /boot/vmlinuz
 other = /dev/hda1
     label = Windows
     table = /dev/sda1 
+Si queremos una contraseña para entrar en alguno de los sistemas colocamos en su entrada:
+	password = 12345
 Cualquier modificación en este archivo para guardar los cambios, implica lanzar:
 # lilo
 
