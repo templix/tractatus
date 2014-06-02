@@ -10853,6 +10853,8 @@ Ejemplos:
 # nmap -v -sP 192.168.1.0/24 | grep down | wc -l (Ips disponibles en una red)
 # nmap -p- localhost (rastrear todos los puertos)
 # nmap --iflist (Muestra la lista de interfaces de red y rutas)
+# nmap 192.168.0.* --exclude 192.168.0.100 (Excluir un host del escaneo de una red)
+# nmap --iflist (encontrar la interfaz y la información del propio host)
 Con scripts
 # nmap --script="http-* and not http-enum" IP (filtro AND y NOT. Para usar todos los scripts http pero no los de enumeración)
 # nmap --script malware IP (Usará todos los scripts de la categoria "malware")
