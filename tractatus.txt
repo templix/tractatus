@@ -12921,6 +12921,17 @@ Sitemap (Indica la ruta a un mapa del sitio en XML)
 	Sitemap: http://web.com/sitemap.xml
 Crawl-delay (Indica número de segundos que debe esperar para cada acceso a cada página)
 	Crawl-delay: 30
+Aspecto que puede presentar un archivo robots.txt:
+	User-agent: wget
+	Disallow: /
+	-- linea en blanco --  
+	User-agent: grub-client
+	Disallow: /
+	-- linea en blanco --
+	User-agent: *
+	Disallow: 
+	-- linea en blanco --
+	Sitemap: https://tractatuslapipaplena.herokuapp.com/sitemap.xml 
 
 
 route
