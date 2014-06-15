@@ -5803,6 +5803,20 @@ $ geoiplookup IP
 # geoip-database-contrib_update (actualizar la BD [/usr/share/GeoIP/])
 
 
+geolooc
+[weboob (Ver)]. Geolocalizar direcciones ip. Precisa módulo ipinfodb activado (ver weboob)
+$ geolooc 8.8.8.8
+	id: 8.8.8.8@ipinfodb
+	city: MOUNTAIN VIEW
+	region: CALIFORNIA
+	zipcode: NA
+	country: US 
+	lt: 37.405992
+	lg: -122.078515
+	host: google-public-dns-a.google.com
+	tld: com
+
+
 getconf
 Consulta las variables de configuración del sistema.
 $ getconf -a (Muestra el listado)
@@ -16297,7 +16311,7 @@ $ cp /proc/15931/fd/25 video.flv
 
 
 videoob
-[webood (ver)]. Visualización y descarga de videos.
+[webood (ver)]. Visualización y descarga de videos. Para activar nuevos módulos (youtube, vimeo...) ver weboob.
 $ videoob (Entrar en el prompt)
 videoob> search porn (Buscar videos ralacionados con "porn")
 videoob> info 3 (Información sobre el marcado con el número 3 en el listado anterior)
