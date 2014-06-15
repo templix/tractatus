@@ -16296,6 +16296,16 @@ Los datos que interesan son: 15931 y 25. Sin cerrar la página del vídeo y una 
 $ cp /proc/15931/fd/25 video.flv
 
 
+videoob
+[webood (ver)]. Visualización y descarga de videos.
+$ videoob (Entrar en el prompt)
+videoob> search porn (Buscar videos ralacionados con "porn")
+videoob> info 3 (Información sobre el marcado con el número 3 en el listado anterior)
+videoob> play 3 (Reproduce el número 3)
+videoob> download 3 (Descarga el número 3 en el directorio actual)
+videoob> quit (Salir del prompt)
+
+
 videotop
 [videotop-git, urwid, youtube-dl]. Descarga de videos de youtube.
 $ videotop  (Para entrar en el prompt)
@@ -16779,6 +16789,28 @@ $ webfsd -F -r /home/usuario/videos -p 12001 -b pepe:1234 (Solicitando nombre de
 webkit2pdf
 Descargar la portada de una página web y pasarla a pdf.
 $ webkit2pdf -f test.%02d.pdf -o web http://lapipaplena.net (Que la descargue y la guarde [f] en formato "test.00.pdf" y en el directorio web [o])
+
+
+webood
+[mplayer python-weboob-core] Colección de aplicaciones capaces de interactuar con los sitios web sin necesidad de que el usuario abra un navegador. Varias de las aplicaciones que lo integran son especificas para usuarios franceses. En el tractatus se han desarrolado sólo (Ver): geolooc (geolocalizar direcciones IP), videoob (búsqueda de vídeo), weboorrents (búsqueda de torrents) y wetboobs (pronóstico del tiempo). La instalación a partir de los repositorios (Debian) producía ciertos errores en la salida de algunos comandos. La solución pasa por descargar el zip de github:
+	$ wget https://github.com/frankrousseau/weboob/archive/master.zip
+	$ unzip master.zip
+	$ cd weboob-master
+	# python setup.py install
+$ weboob-config update (Actualizar)
+$ weboob-config disable geolocip (Desactivar un módulo. Este concretamente da errores. "enable" para activarlo)
+$ weboob-config list (Listar los módulos)
+$ weboob-config add youporn (Añadir un módulo)
+$ weboob-config info btmon (Información sobre un módulo)
+
+
+weboorrents
+[webood (Ver)]. Descarga de torrents.
+$ weboorrents (Entrar en el prompt)
+weboorrents> search kali (Mostrar salida para "kali")
+weboorrents> info 7 (Informaciónj sobre la salida "7" dels listado anterior)
+weboorrents> getfile 7 (descargar el torrent o magnet "7")
+weboorrents> quit (Salir del prompt)
 
 
 webp
