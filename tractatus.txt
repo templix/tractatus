@@ -11798,6 +11798,13 @@ $ pdf2ps entrada.pdf saliida.ps (Pasarlo a postcript)
 $ ps2pdf saliida.ps resultado_reducido.pdf (Pasar el postscript nuevamente a pdf)
 
 
+pdf2svg
+Convetir pdfs a svg.
+$ dpf2svg archivo.pdf salida.svg
+$ dpf2svg archivo.pdf salida.svg 5 (Sólo la página 5)
+$ dpf2svg archivo.pdf a%d.svg all (Convertir cada hoja en un svg con nombre tipo: a1.svg, a2.svg...)
+
+
 pdfcrack
 Craqueador de pdfs
 $ pdfcrack -f archivo.pdf   (Sin especificaciones)
