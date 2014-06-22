@@ -16913,6 +16913,25 @@ $ wget -O - -q http://checkip.dyndns.org/ | cut -d':' -f2 | cut -d'<' -f1| cut -
 $ wget -O - -q http://whatismyip.org/ (Lo mismo)
 $ wget –http-user=usuario –http-password=contraseña URL (Descargar con usuario y contraseña)
 $ wget –ftp-user=usuario –ftp-password=contraseña URL (Lo mismo con protocolo ftp)
+1.-
+Muestra para la descarga de una web completa:
+$ wget http://www.server.com/login.php --post-data "user=Usuario&password=Contraseña" --save-cookies website.cookie --no-check-certificate -O - > /dev/null
+Los argumentos:
+	post-data (Especificamos los parámetros a pasarle al script para que nos autentique, en este caso "user" y "password" pero esto varia según la web)
+	save-cookies (Indicamos donde guardar el archivo con la cookie, esta cookie será necesaria después para descargar la web con nuestra sesión iniciada)
+	no-check-certificate (No comprobar el certificado del servidor con las entidades emisoras de certificados)
+	-O - (No generar un archivo de salida ya que solo cogeremos la cookie)
+Una vez obtenido el cookie:
+$ wget -rkcp  -e robots=off -U Mozilla --limit-rate=80K --random-wait --load-cookies website.cookie --domains server.com --html-extension http://www.server.com
+Los argumentos:
+	-r (indica que descarge toda la web recursivamente)
+	-c (En caso de que queramos retomar la descarga después o si fallase, este parámetro le indica que retome la descarga por donde se interrumpió)
+	-e robots=off (Ignorar el archivo robots.txt, si existe en el servidor)
+	-U Mozilla (Especifica el User-Agent de Mozilla Firefox en las cabeceras HTTP, útil para ciertas webs que bloquean algunos User-Agents)
+	--random-wait (Espera un tiempo aleatorio entre una petición y otra para evitar un posible colapso en la web o ser detectados por algún sistema de seguridad)
+	--load-cookies (Carga la cookie de sesión previamente descargada)
+	--domains server.com (Indica que solo descarge el contenido de la web especificada y que no siga las urls externas encontradas)
+	--html-extension (Guarda todos los documentos en formato HTML)
 
 
 whatis
