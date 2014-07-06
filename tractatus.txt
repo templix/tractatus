@@ -14557,6 +14557,92 @@ $ stty size   (muestra número de columnas y lineas)
 $ stty speed  (velocidad en baudios)
 
 
+stumpwm
+Gestor de ventanas atilado escrito en common lisp y que solo usa el teclado. Los mesajes de texto, por defecto, aparecen en la parte superior derecha de la pantalla. El archivo de configuración de los atajos está en /usr/share/common-lisp/source/stumpwm/bindings.lisp.
+Atajos:
+	C-t C-g (Abortar lo que se haya pulsado)
+	C-t n [C-t Space] (Ir a la siguiente ventana de la lista)
+	C-t p (Ir a la ventana anterior de la lista)
+	C-t " (Seleccionar y enfocar una ventana de una lista)
+	C-t w (Imprime lista de ventanas, número y nombre)
+	C-t : (evalua [eval] expresiones: (+ 2 2): evalúa una suma de dos más dos, (loadrc): evalúa el fichero .stumpwmrc, (quit): sale de la sesión)
+	C-t o [C-t TAB] (En una ventana con varios paneles va saltando entre ellos)
+	C-t flechas (Mueve el foco de un panel hacia el panel del lado que se indique con las flechas)
+	C-t f (Seleccionar un panel por su número)
+	C-t s (Dividir una ventana o un panel horizontalmente)
+	C-t S (Dividir una ventana o un panel verticalmente)
+	C-t k (Mata el panel actual y el programa que ejecute)
+	C-t K (Equivalente a un kill -9 para el marco actual)
+	C-t c (Ejecutar una terminal. xterm por defecto)
+	C-t e (Ejecutar xemacs)
+	C-t a (Muestra hora y fecha)
+	C-t ! (Pregunta la aplicación gráfica que se quiere lanzar)
+	C-t R (Suprimir una división. Si sólo existe una se maximiza)
+	C-t b (Enviar el puntero del ratón a la esquina inferior derecha de la pantalla)
+	C-t - (Minimizar aplicaciones del panel o ventana y mostrar la "fondo raiz")
+	C-t Q (Eliminar todas la divisiones y maximizar el marco del foco)
+	C-t m (Ver el último mensaje. Pulsando nuevamente las teclas muestra los anteriores)
+	C-t t (Envia un C-t cuando se usan programas que usan esta combinación de teclas como firefox)
+grupos (equivalente a escritorios):
+	C-t g c (Crear nuevo grupo)
+	C-t g g (Mostrar la lista de grupos)
+	C-t g N [C-t g SPC](Ir al siguiente grupo de la lista)
+	C-t G (Ver todos los grupos y las ventanas de cada grupo)
+	C-t g p (Ir al grupo anterior de la lista)
+	C-t Fn (Salta al grupo "n" [F1, F2...])
+	C-t g k (Mata el grupo actual. todas las ventanas se fusionan con el siguiente grupo)
+	C-t g m (Mover la ventana actual al grupo que se le indique)
+	C-t g 2 (Ir al grupo con el dígito 2)
+	C-t g ' (Seleccionar un grupo por nombre o por número)
+	C-t g " (Seleccionar un grupo de una lista y cambiar a él)
+	C-t g A [C-t g r] (Cambiar el nombre del grupo actual)
+Información y ayuda:
+	C-t i (Muestra información sobre la ventana actual)
+	C-t w (Muestra unos segundos información de todas las ventanas)
+	C-t F (Informa del panel activo)
+	C-t ? (Muestra los comandos de ayuda)
+	C-t h ? (lista atajos)
+	C-t h k (Describe una combinación de teclas que se especifique)
+	C-t h f (Describe una función que se especifique)
+	C-t h v (Describe una variable que se especifique)
+	C-t h w (Enumerar todas las secuencias de teclas asociadas a la orden especificada)
+	C-t h c (Describe el comando que se especifique)
+	C-t v (Mostrar la versión de stumpwm)
+1.-
+Para que se muestre la opción en el gdm:
+	# nano /usr/share/xsessions/stumpwm.desktop
+Y pegar el siguiente texto:
+	[Desktop Entry]
+	Encoding=UTF-8
+	Name=StumpWM
+	Comment=Tiling Window Manager
+	Exec=/usr/bin/stumpwm
+	Icon=
+	loadType=Application
+2.-
+Colocar un fondo de pantalla:
+$ nano .stumpwmrc (Si no existe lo creamos)
+I añadimos fondo negro:
+	(set-bg-color "black")
+O bien una imagen:
+	(run-shell-command "xsetbg ~/fondos/fichero.png")
+3.-
+Abrir una sesión gráfica stumpwm junto a otra:
+Crear un usuario con su home (P.e. pedro)
+# useradd -d /home/pedro -s /bin/bash -m pedro
+Entrar la contraseña de pedro:
+# passwd pedro
+Crear en su /home el archivo:
+# nano .xinitrc
+Con el contenido de la ruta a stumpwm:
+	/usr/bin/stumpwm
+Entrar en una tty (P.e la tty3):
+	Crtl + Alt + F3
+Y logearse como pedro. Una vez entrado en el sistema lanzar:
+$ startx
+Y tendremos una sesion stumpwm en la tty8
+
+
 su
 Cambiar de usuario
 $ su -m           (Cambia de root [#] a usuario normal [$])
