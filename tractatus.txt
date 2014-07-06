@@ -7270,7 +7270,8 @@ Y colocamos la linea:
 	* 1 * * * integrit -C /etc/integrit/integrit.conf -c | mail root
 
 
-interfaces (/etc/network/interfaces)
+interfaces
+[/etc/network/interfaces]
 Archivo de configuración de la red en distros debian.
 1.-
 Con IP dinámica:
@@ -7302,8 +7303,12 @@ Añadir las siguientes lineas a las de la IP fija:
 Nota.- La instalación de nerwork-manager o wicd para la gestión de redes implica comentar las modificaciones de este archivo o en, en el caso de network-manager, editar:
 # nano  /etc/NetworkManager/NetworkManager.conf
 Y modificar la linea:
-[ifupdown]
-managed=true
+	[ifupdown]
+	managed=true
+4.-
+Obtener el módulo que usa una determinada interfaz de red:
+# ls /sys/class/net/ (Listar todas las interfaces de red del equipo)
+# ls -la /sys/class/net/eth1/device/driver (Ver el módulo del kernel que está usando una interfaz de red)
 
 
 inxi
