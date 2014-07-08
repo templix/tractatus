@@ -8784,7 +8784,10 @@ $ lsscsi -s (Mostrando la capacidad)
 
 
 lsusb
-Ver los puertos USB y los dispositivos conectados a ellos
+Ver los puertos USB y los dispositivos conectados a ellos. De vez en cuando ha de actualizarse la lista de los dispositivos reconocidos por nuestro equipo con:
+# update-usbids
+$ lsusb -d 046d:c00e (De un dispositivo determinado especificando fabricante y producto)
+$ lsusb -s 006:002 (De un dispositivo determinado especificando bus y número dispositivo)
 
 
 luakit
