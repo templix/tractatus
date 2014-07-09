@@ -11899,8 +11899,7 @@ $ pdftk archivo.pdf output descomprimido.pdf uncompress (Descomprimir pdf)
 $ pdftk input.pdf cat 1-endE output output.pdf (rotar 90 grados el pdf)
 $ pdftk archivo.pdf dump_data_fields (obtener campos de cualquier formulario pdf)
 $ pdftk archivo.pdf dump_data_fields output campos.lst (Lo mismo derivado a un archivo)
-$ pdfcrack archivo.pdf [opciones] (Si se trata de archivos pdf con contraseña)
-$ pdfcrack archivo.pdf -n 6 -c abcdefghijklmnopqrstuvxyz -s
+$ pdftk archivo.pdf burst (Generar un pdf de cada página)
 Opciones:
 	-B: Realizar evaluación comparativa y salir
 	-C [CADENA]: Utiliza los caracteres indicados para la busqueda de la contraseña
