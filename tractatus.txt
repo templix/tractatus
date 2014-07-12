@@ -4556,6 +4556,23 @@ $ exiftool -GPSLongitudeRef="E" foto.jpg
 $ exiftool -TagsFromFile imagen_datos.jpg imagenFinal.jpg (Copia los datos Exif de la foto "imagen_datos.jpg" a la foto "imagenFinal.jpg")
 
 
+exim
+Agente de transporte de correo.
+$ exim -bp (Lista los correos en cola)
+$ exim -bpc (Muestra la cantidad de correos en cola)
+$ exim -bp | exiqsumm (Muestra resumen de los correos en cola)
+$ exim -Mrm 1X62E1-0006CU-61 (Eliminar un correo concreto por su ID)
+$ exim -Mf 1X62E1-0006CU-61 (Congelar un correo)
+$ exim -M 1X62E1-0006CU-61 (Procesar un correo)
+$ exiqgrep -z -i | xargs exim -Mrm (Eliminar todos los correos congelados)
+$ exiwhat (Mostrar qué está haciendo exim en este momento)
+$ exim -bt 1X62E1-0006CU-61 (Hacer un traceroute a una dirección de correo)
+$ exim -Mvh 1X62E1-0006CU-61 (Ver cabeceras de un correo)
+$ exim -Mvb 1X62E1-0006CU-61 (Ver el cuerpo de un correo)
+$ exim -Mvl 1X62E1-0006CU-61 (Ver los logs de un correo)
+$ exim -qff (Forzar cola de correo)
+
+
 exit
 Salir del interprete de comandos.
 
