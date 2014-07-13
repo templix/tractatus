@@ -707,7 +707,8 @@ En el equipo conexión:
 Otra vez en el equipo sin conexión:
 # apt-offline install offline.zip
 # apt-get install PAQUETE (Instalación del paquete)
-5.- Instalar aplicaciones de arquitectura 386 en equipos amd64:
+5.-
+Instalar aplicaciones de arquitectura 386 en equipos amd64:
 # nano /etc/apt/sources.list
 Añadir las lineas:
 	deb http://ftp.debian.org/debian/ wheezy-updates main contrib
@@ -719,7 +720,7 @@ Activar multiarquitectura:
 # apt-get update
 Instalar librerías base para los sistemas de 32 bits:
 # apt-get install libc6:i386
-5.-
+6.-
 Configurar apt para que no descargue traducciones:
 # nano /etc/apt/apt.conf.d/99Translations
 Con el siguiente contenido:
