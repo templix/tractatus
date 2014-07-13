@@ -583,7 +583,7 @@ apt
 Aplicación que unifica las opciones y parámetros de apt-cache y apt-get. Tambien cuenta con una barra de progreso. Tiene casi los mismo parametros que el comando apt-get.
 # apt list (Muestra todos los paquetes disponibles
 # apt list --installed (Muestra todos los paquetes instalados)
-# apt list --upgradable (Muestra todos los paquetes instalables) 
+# apt list --upgradable (Muestra todos los paquetes instalables)
 $ apt search paquete (Buscar un paquete)
 # apt update (Actualiza el listado de paquetes)
 # apt upgrade (Actualiza todos los paquetes del sistema)
@@ -640,7 +640,7 @@ apt-get
 # apt-cache rdepend paquete     (Muestra dependencias inversas del paquete)
 # apt-cache policy paquete       (Ver vesiones de paquetes y la versión instalada)
 # apt-show-versions paquete (Muestra si un paquete es actualizable)
-# apt-show-versions -a paquete (Muestra todas las versiones disponibles del paquete) 
+# apt-show-versions -a paquete (Muestra todas las versiones disponibles del paquete)
 # apt-get --yes install paquete (Responder “si” a preguntas de la instalación)
 # aptitude search ~ilinux-image (Lista los kernels instalados)
 # aptitude search ~i -F %p (Lista los paquetes instalados)
@@ -3511,7 +3511,7 @@ dontzap -e      (Lo desactiva)
 do-release-upgrade
 Herramienta para actualizar por consola sistemas basados en Ubuntu a una nueva versión de la distribución. Para configurar si queremos actualizar entre versiones normales o versiones LTS, debemos modificar del fichero /etc/update-manager/release-upgrades la linea:
 Para versiones LTS:
-Prompt=lts 
+Prompt=lts
 Para versiones normales:
 Prompt=normal
 Para no verificar nunca nuevas versiones:
@@ -5844,7 +5844,7 @@ $ geolooc 8.8.8.8
 	city: MOUNTAIN VIEW
 	region: CALIFORNIA
 	zipcode: NA
-	country: US 
+	country: US
 	lt: 37.405992
 	lg: -122.078515
 	host: google-public-dns-a.google.com
@@ -8417,11 +8417,11 @@ image = /boot/vmlinuz
 	label = Linux
 	read only
 # nota: read-only Indica que el sistema de ficheros raíz se montará en modo solo-lectura.
-# Por norma general, el proceso de arranque lo remonta luego en modo lectura-escritura. 
+# Por norma general, el proceso de arranque lo remonta luego en modo lectura-escritura.
 # Una partición windows:
 other = /dev/hda1
     label = Windows
-    table = /dev/sda1 
+    table = /dev/sda1
 Si queremos una contraseña para entrar en alguno de los sistemas colocamos en su entrada:
 	password = 12345
 Cualquier modificación en este archivo para guardar los cambios, implica lanzar:
@@ -13060,14 +13060,14 @@ Crawl-delay (Indica número de segundos que debe esperar para cada acceso a cada
 Aspecto que puede presentar un archivo robots.txt:
 	User-agent: wget
 	Disallow: /
-	\\ linea en blanco  
+	\\ linea en blanco
 	User-agent: grub-client
 	Disallow: /
 	\\ linea en blanco
 	User-agent: *
-	Disallow: 
+	Disallow:
 	\\ linea en blanco
-	Sitemap: https://tractatuslapipaplena.herokuapp.com/sitemap.xml 
+	Sitemap: https://tractatuslapipaplena.herokuapp.com/sitemap.xml
 
 
 route
@@ -14775,7 +14775,7 @@ Defaults@192.168.1.2 !lecture,tty.... (Permitir ejecución sólo desde nuestra m
 Para que al entrar un contraseña en la terminal aparezcan asterisco:
 En la linea: Defaults env_reset
 Añadir "pwfeedback" dejándola:
-Defaults env_reset , pwfeedback 
+Defaults env_reset , pwfeedback
 
 
 sudosh
