@@ -4059,7 +4059,7 @@ Varios:
 	M-x tetris (Listado de juegos en /usr/share/emacs/24.3/lisp/play/. Lanzar sin la extensión)
 	M-x help-with-tutorial-spec-language (abre buffer con los idiomas disponibles para el manual)
 	C-x d (Abre un directorio que se especifique)
-	C-x RET f (Entrar codificación de caracteres: latin-1-unix [latin1], utf-8-unix [utf8]..)
+	C-x RET f (Entrar codificación de caracteres: iso-8859-1, utf-8..)
 	C-x custom (Personalizar numerosos aspectos de emacs)
 	C-x C-+ (Agrandar la fuente)
 	C-x C-- (Disminuir la fuente)
@@ -6932,10 +6932,9 @@ $ ibam -a
 
 
 iconv
-Modificar la codificación de un archivo
+Modificar la codificación de un archivo. Para saber la codificación de un archivo $ file --mime-encoding archivo.txt
 $ iconv -l   (Muestra todas las opciones posibles)
-$ iconv -t us-ascii -f utf-8 archivo.txt > re_codificado.txt (Para saber la codificación de un archivo: $ file --mime-encoding archivo.txt)
-$ iconv --from-code=ISO-8559-1 --to-code=UTF-8 viejo.txt -o nuevo.txt (Pasar viejo.txt de codificación ISO-8559-1 a UTF-8 en el nuevo.txt)
+$ iconv -f ISO85591 -t UTF8 viejo.txt -o nuevo.txt (Pasar viejo.txt de codificación ISO-8559-1 a UTF-8 en el nuevo.txt)
 
 
 id
