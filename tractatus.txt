@@ -4079,6 +4079,7 @@ ayuda:
 	C-h b (Ver todos los atajos)
 	C-h w (Muestra el atajo de la función que entremos)
 	C-h f (Información sobre una función)
+	C-h C RET (Muestra las codificaciones)
 Modo comando:
 	M-x recover file (levantar respaldo del archivo)
 	M-x apropos INTRO print (Muestra información de "print")
@@ -4291,11 +4292,6 @@ Otros ajustes que pueden incorporarse a .emacs precedidas con la explicación co
     "Octubre" "Noviembre" "Diciembre"])
 	;; Suprimir espacios al final de la linea y lineas en blanco del final:
 	(add-hook 'before-save-hook 'delete-trailing-whitespace)
-	;; Lenguage y codificación:
-	(set-terminal-coding-system 'utf-8)
-	(set-keyboard-coding-system 'utf-8)
-	(prefer-coding-system 'utf-8)
-	(set-language-environment "Spanish")
 	;; Guardar la sessión al cerrar emacs y restaurarla al arrancar nuevamente:
 	;; Colocar a cero [0] para desactivar:
 	(desktop-save-mode 1)
