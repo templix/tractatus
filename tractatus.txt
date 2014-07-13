@@ -7831,6 +7831,21 @@ $ jot -s " " -b "-x-" 20 (20 caracteres especificados [-b] separados por un espa
 $ jot -s "" -c 26 a (26 letras [-c] empezando por la A y sin espacio entre ellas)
 
 
+journalctl
+Sistema de registro [log] propio de systemd.
+# journalctl (Leer el registro)
+# journalctl -b (Mostrar todos los mesajes de arranque)
+# journalctl -b -0 (Muestra los mensajes del arranque actual)
+# journalctl -b -1 (Muestra los mensajes del arranque anterior)
+# journalctl -b -2 (Muestra los mensajes desde los dos últimos arranques)
+# journalctl -f (Seguir los mensajes nuevos)
+# journalctl _PID=1 (Mostrar mensajes por su PID)
+# journalctl -u netcfg (Mostrar mensajes de una unidad especifica)
+1.-
+Hacer que el demonio syslog funcione con journal
+# systemctl enable syslog-ng
+
+
 jp2a
 Convertir imagenes jpeg a ascii.
 $ jp2a --background=light -b --colors imagen.jpg  (Sin fondo, con borde y color)
@@ -14888,6 +14903,29 @@ $ syslinux /dev/sda1
 system-config-printer
 Gestor de impresoras. Lanza la gui.
 $ system-config-printer
+
+
+systemctl
+[systemd-sysv]. Systemd es un administrador del sistema y gestor de servicios compatible con SysV al que reemplaza.
+# systemctl reboot (Reiniciar el pc)
+# systemctl poweroff (Parar el sistema)
+# systemctl suspend (Suspender el sistema)
+# systemctl hibernate (Poner el sistema en hivernación)
+# systemctl (Listado de unidades activas)
+# systemctl list-units (Listado de unidades activas)
+# systemctl --failed (Listado de unidades que han tenido problemas)
+# systemctl list-unit-files (Listado de unidades instaladas)
+# systemctl start slim.service (Activa slim de inmediato)
+# systemctl stop sshd.service (Parar ssh de inmediato)
+# systemctl restart dhcpcd@eth0.service (Reiniciar conexión por dhcp)
+# systemctl reload wicd.service (Recargar la configuración de wicd)
+# systemctl status cronie.service (Muestra el estado de cron)
+# systemctl is-enabled vsftpd.service (Comprueba si vsftpd está habilitada o no)
+# systemctl enable NetworkManager.service (Activa el inicio automático de network-manager en el arranque)
+# systemctl disable smbd.service (Desactiva el inicio automático de samba en el arranque)
+# systemctl daemon-reload (Recarga systemd, escaneando en busca de unidades nuevas o modificadas)
+# systemctl isolate multi-user.target (Arrancar en runlevel 3)
+# systemctl isolate graphical.target (Arrancar en runlevel 5)
 
 
 sysv-rc-conf
