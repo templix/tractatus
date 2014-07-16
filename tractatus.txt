@@ -4072,6 +4072,7 @@ Entrar comandos de shell e insertar:
 	M-x shell (Salir a la shell. C-x k para volver a edición)
 	C-x i (Insertar archivo en la posición del cursor)
 	C-c C-l (Mostrar historial de comandos)
+	C-u M-x eshell (Lanzar otra eshell cuando ya existe una)
 ayuda:
 	F10 (Abre la ayuda general)
 	C-h k (Muestra información sobre un atajo)
@@ -4261,6 +4262,17 @@ Operar con trozos seleccionados [C-espacio]
 	C-x r s (Guardarla en un registro)
 	C-x TAB (Sangrar toda la selección)
 16.-
+Disponer de un bloc de notas (M-x remember) en emacs que se lance con C-c &
+$ cd ~/.emacs.d
+$ git clone git://repo.or.cz/remember-el.git remember
+Colocar en la configuración:
+$ nano .emacs
+Añadir las lineas:
+	(add-to-list 'load-path "~/.emacs.d/remember")
+	(require 'remember)
+	(global-set-key (kbd "C-x &") 'remember)
+Una vez entrado el texto pulsar C-c C-c para poner la fecha. Se guardan todas las notas en el fichero ~/.notes
+17.-
 Otros ajustes que pueden incorporarse a .emacs precedidas con la explicación comentada:
 	;;Mostrar consola al pulsar F5:
 	(global-set-key (kbd "<f5>") 'eshell)
