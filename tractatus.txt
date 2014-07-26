@@ -4273,6 +4273,18 @@ Añadir las lineas:
 	(global-set-key (kbd "C-x &") 'remember)
 Una vez entrado el texto pulsar C-c C-c para poner la fecha. Se guardan todas las notas en el fichero ~/.notes
 17.-
+Reemplazar texto:
+M-x query-replace (Busca y pregunta antes de substituir)
+Algunas opciones del comando:
+	y (Reemplazar la coincidencia actual)
+	n (No reemplazar la coincidencia actual)
+	q (Reemplazar la coincidencia actual y salir)
+	C-r (Ir al editor recursivo)
+	! (Reemplazar todo)
+	^ (Ir al anterior reemplazo)
+	E (Editar la norma de reemplazo
+M-x replace-string (Busca y reemplazar sin preguntar)
+18.-
 Otros ajustes que pueden incorporarse a .emacs precedidas con la explicación comentada:
 	;;Mostrar consola al pulsar F5:
 	(global-set-key (kbd "<f5>") 'eshell)
