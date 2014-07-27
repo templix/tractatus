@@ -14048,6 +14048,9 @@ $ sleep 3d && halt (para el pc a los 3 dias)
 
 slim
 Gestor de sesiones ligero. La configuración en el archivo /etc/slim.conf
+$ slim -p /usr/share/slim/themes/tema_a_probar
+Una vez escogido el tema lo colocamos en /etc/slim.conf substituyéndolo por el "default":
+    current_theme          default
 1.-
 Si al usar systemd el sistema no para ni reinicia, modificar las lineas existentes por las siguientes:
 halt_cmd /usr/bin/systemctl halt
