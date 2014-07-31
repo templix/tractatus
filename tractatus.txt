@@ -4151,8 +4151,15 @@ Conectar a un servidor ssh:
 Descargar tramp de <http://ftp.gnu.org/gnu/tramp/> descomprimir y mover la carpeta al directorio ~/emac.d/ . En el archivo de configuración .emacs añadir las lineas:
 	(require 'tramp)
 	(setq tramp-default-method "ssh")
-Abrir sesión de emacs y acceder al host remoto con:
+Y si queremos activar variables para debuggear problemas añadir:
+	(setq tramp-debug-buffer t)
+	(setq tramp-verbose 10)
+Abrir sesión de emacs y acceder al host remoto empleando alguno de los siguientes metodos según nuestro /etc/hosts:
 	C-x C-f /ssh:USER@host_remoto:/home/USER/
+	C-x C-f /USER@host_remoto:/home/USER
+	C-x C-f /host_remoto:/home/USER
+Y si el puerto es distinto del 22, añadiendo a las opciones anteriores #puerto al estilo:
+	C-x C-f /ssh:USER@host-remoto#2222:/home/USER
 Pedirá contraseña.
 Nota.- Después de pulsar el atajo, no olvidar borrar la referencia al directorio local ~/ dejándolo en /
 7.-
@@ -4201,7 +4208,7 @@ Utiliza dos modos de entrada: El modo caracter que envia cada caracter de entrad
 	C-c C-j (Cambia a modo línea)
 	C-c C-k (Cambia a modo caracter)
 10.-
-Uso de sudo. Entrar el siguiente código en .emacs:
+Uso de sudo. Los mismos ejemplos sirven para su. Precisa tramp [ver ssh]. Entrar el siguiente código en .emacs autoexplicativo:
 	;; Uso de sudo: C-x C-f /sudo::/etc/hosts
 	;; C-x C-f /sudo:root@localhost:/etc/hosts  o C-x sudo-find-file
 	(defun sudo-find-file (file-name)
