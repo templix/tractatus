@@ -3975,7 +3975,7 @@ Cuando Emacs abre un archivo lo abre en un buffer. Cuando leemos un fichero, lo 
 Significado de algunas teclas en la terminologia de emacs:
 	Alt = M (meta)
 	Crtl= C (control)
-	SPC (Barra espacio)
+	spc (Barra espacio)
 	RET (intro)
 	RETRO (retroceso)
 $ emacs -nw (Lanzar emacs en consola. Para crear un alias: alias emacs='emacs -nw')
@@ -4047,6 +4047,9 @@ Marcas:
 	C-x r m (Solicita nombre para la linea marcada)
 	C-x r b a (Ir a la linea marcada con el nombre que entremos, en este caso la "a". Si se encuentra la marca en un archivo no abierto, se abrirá)
 	C-x r l (Lista todas las marcas)
+	C-spc C-spc (marca el punto del cursor en el texto)
+	C-u C-spc (Va a la marca realizada con C-spc C-spc)
+	C-x C-spc (Va a la penultima marca realizada con C-spc C-spc)
 Imprimir:
 	C-u M-x ps-print-buffer-with-faces (Imprimir a ps. Luego con ps2pdf pasar a pdf)
 	M-x  print-buffer (Imprimir archivo con numeración y cabeceras)
