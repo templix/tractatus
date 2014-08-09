@@ -4318,6 +4318,28 @@ Algunas opciones del comando:
 	E (Editar la norma de reemplazo
 M-x replace-string (Busca y reemplazar sin preguntar)
 18.-
+Instalar extensiones de emacs a partir de repositorios. Descargar el archivo package.el:
+<http://repo.or.cz/w/emacs.git/blob_plain/1a0a666f941c99882093d7bd08ced15033bc3f0c:/lisp/emacs-lisp/package.el>
+Y copiarlo en .emacs.d/
+Colocar en .emacs las lineas:
+	(add-to-list 'load-path (expand-file-name "~/.emacs.d/package.el"))
+	(require 'package)
+	(package-initialize)
+	(setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
+	                         ("marmalade" . "http://marmalade-repo.org/packages/")
+	                         ("melpa" . "http://melpa.milkbox.net/packages/")))
+Teclas de control:
+	M-x describe-mode (Listado de teclas de control)
+	M-x package-list-package (Recargar la lista de paquetes)
+	M-x package-menu-mode (Entrar en modo package)
+Una vez entrado en el modo package:
+	enter (muest4ra ukna descripción del paquete)
+	i (Marcar para instalar)
+	u (Desmarcar)
+	d (Marcar para eliminar)
+	x (Instalar o desinstalar un paquete)
+	r (Resfrescar el listado)
+19.-
 Otros ajustes que pueden incorporarse a .emacs precedidas con la explicación comentada:
 	;;Mostrar consola al pulsar F5:
 	(global-set-key (kbd "<f5>") 'eshell)
