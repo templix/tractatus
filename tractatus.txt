@@ -4106,7 +4106,7 @@ ayuda:
 	C-h b (Ver todos los atajos)
 	C-h w (Muestra el atajo de la función que entremos)
 	C-h f (Información sobre una función)
-	C-h C RET (Muestra las codificaciones)
+	C-h C RET (Muestra información sobre las codificaciones)
 Modo comando:
 	M-x recover file (levantar respaldo del archivo)
 	M-x apropos INTRO print (Muestra información de "print")
@@ -4122,6 +4122,7 @@ Modo comando:
 	M-x command-history  (History de comandos entrados)
 	M-x calculator (Calculadora muy elemental)
 	M-x man (mostrar man de un comando)
+	M-x set-buffer-file-coding-system (Entrar codificación para el presente bufer)
 	M-x global-whitespace-mode (Mostrar/ocultar caracteres no imprimibles)
 Para hacer permanente cualquiera de las opciones anteriores, colocarla en ~/.emacs de la siguiente forma:
    	(global-set-key (kbd "<f7>") 'global-linum-mode)
@@ -4160,7 +4161,7 @@ Instalar emms en el sistema mediante repositorio y descargar <http://www.gnu.org
 	(require 'emms-setup)
 	(emms-standard)
 	(emms-default-players)
-Llamar com M-x emms (Pulsando TAB apareceran las opciones)
+Llamar com M-x emms (Pulsando TAB apareceran las opciones). Salir con M-x emms-stop
 4.-
 Corrector ortográfico. apt-get install aspell-es dictionary-el
 	M-x ispell-buffer (Muestra las alternativas a la palabra mal escrita)
