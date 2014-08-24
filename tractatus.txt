@@ -8728,11 +8728,15 @@ Carpeta donde el sistema almacena archivos marcados como dañados después de un
 
 
 lp
-Gestión de impresoras y trabajos de impresión.
+Gestión de impresoras y trabajos de impresión. Aunque los comandos lp y lpr son distintos pero relacionados se han tratado en el mismo espacio.
 $ lp fichero (imprime fichero con la impresora predeterminada)
+$ lpr fichero (Imprimir un fichero)
+$ lpr -P Otra_impresora fichero (Especificando una impresora)
 $ lp -d otra_impresora fichero (Imprime con una impresora especificada)
 $ lpq           (muestra los trabajos pendientes y les asigna un número)
 $ lprm 5      (borra el trabajo pendiente de impresión especificado [5])
+$ lprm -P HP_psc_1100_series - (Borrar todos los trabajos pendientes de la impresora especificada)
+$ lprm - (Borra todos los trabajos pendientes de la predeterminada)
 $ lpstat -p -d (muestra la impresora predeterminada)
 $ lpstat -a           (muestra todas las impresoras)
 $ lpstat -v           (indicando ubicación)
@@ -8753,6 +8757,19 @@ Cuando al intentar imprimir sale el mensaje: Error - Scheduler Not Responding:
 $ nano .bashrc
 Y añadir la linea:
 export CUPS_SERVER=localhost
+2.-
+Archivo de configuracion:
+$ nano /etc/printcap
+	lp|Generic dot-matrix printer entry:\
+        	:lp=/dev/lp0:\
+        	:sd=/var/spool/lpd/lp:\
+	        :af=/var/log/lp-acct:\
+	        :lf=/var/log/lp-errs:\
+	        :pl#66:\
+	        :pw#80:\
+	        :pc#150:\
+	        :mx#0:\
+	        :sh:
 
 
 ls
