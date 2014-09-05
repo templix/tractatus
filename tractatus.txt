@@ -4251,6 +4251,8 @@ M-x term [Emulador de terminal]
 Utiliza dos modos de entrada: El modo caracter que envia cada caracter de entrada directamente a la subshell, a excepción del carácter de escape [C-c] y el modo línea que actúa como modo Shell [Permite entrada de todas las combinaciones de teclas emacs, desplaza el cursor por la pantalla con las flechas, puede marcarse trozos de texto para copiar...]. Para alternar entre estos dos modos:
 	C-c C-j (Cambia a modo línea)
 	C-c C-k (Cambia a modo caracter)
+Nota.- Puede que para alternar entre modos sea preciso hacerlo con M-x term-mode
+Para substituir el nombre *terminal* por otro: M-x rename-buffer
 10.-
 Uso de sudo. Los mismos ejemplos sirven para su. Precisa tramp [ver ssh]. Entrar el siguiente código en .emacs autoexplicativo:
 	;; Uso de sudo: C-x C-f /sudo::/etc/hosts
