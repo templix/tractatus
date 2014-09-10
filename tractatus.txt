@@ -303,14 +303,14 @@ $ alien -i  --to-deb paquete   (convertirá “paquete” y lo instalará)
 alpine
 Gestor de correo. Antes de proseguir, si queremos que nos guarde la contraseña del correo crear el archivo:
 $ touch .pine-passfile
-La primera vez que lo lancemos creará el archivo .pinerc y mostrará un mensaje al que pulsaremos "intro" para entrar en el menú principal. Seleccionar "setup" y del montón de parámetros que pueden personalizarse, sólo son imprescindibles 4:
+La primera vez que lo lancemos creará el archivo .pinerc y mostrará un mensaje al que pulsaremos "intro" para entrar en el menú principal. Seleccionar "setup" y C. Del montón de parámetros que pueden personalizarse, sólo son imprescindibles 4:
 "Personal name" [Shift + c para editarlo y en la parte inferior aparecerá el editor con el cursor parpadeando] Entramos el nombre del correo:
 usuario@correo.com [intro]
 "User Domain". Lo editamos [Shft + c] y colocamos:
 correo.com [intro]
 (gmail.com, gmx.es.... según se trate)
 "SMTP Server". [Shft + c] y entramos:
-touch .pine-passfilesmtp.gmail.com:587/tls/novalidate-cert/user=usuario@correo.com [intro]
+smtp.correo.com:587/tls/novalidate-cert/user=usuario@correo.com [intro]
 "Inbox Path". [Shft + c] y ponemos:
 {pop.correo.com/pop3/ssl/novalidate-cert/user=usuario@correo.com}INBOX
 Intro y para salir de la configuración pulsar:
