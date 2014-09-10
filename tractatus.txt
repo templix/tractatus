@@ -4362,6 +4362,28 @@ Una vez entrado en el modo package:
 	x (Instalar o desinstalar un paquete)
 	r (Resfrescar el listado)
 19.-
+Modo markdown. Descarga de la extensión: git clone git://jblevins.org/git/markdown-mode.git y colocar en .emacs.d/
+	(add-to-list 'load-path "~/.emacs.d/markdown-mode")
+	(autoload 'markdown-mode "markdown-mode" t)
+	(add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
+	(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
+Algunos atajos
+	M-x markdown-mode (Entrar en modo markdown)
+	C-c C-t 1 (fuente de mayor tamaño. Números de 2 al 6 ir decreciendo el tamaño)
+	C-c C-h (Visualizar todas los comandos disponibles)
+	C-c C-a l (insertar link con la forma [texto](URL))
+	C-c C-a u (Insertar url)
+	C-c C-c p (Ver la versión html del texto en pantalla y visualizarla en el navegador)
+	C-c C-c L (insertar link referenciado)
+	C-c C-c v (Visualizar la página en el navegador y exportar archivo a html)
+	C-c - (Insertar linea)
+	C-c C-c e (Exportar archivo a formato html con el mismo nombre)
+	C-c C-x m (Insertar listado)
+	C-c C-s b (Insertar cita)
+	C-c C-s c (Insertar código)
+	C-c C-s p (Insertar literal)
+	C-c TAB i (Insertar imagen en formato: [texto](url))
+20.-
 Otros ajustes que pueden incorporarse a .emacs precedidas con la explicación comentada:
 	;;Mostrar consola al pulsar F5:
 	(global-set-key (kbd "<f5>") 'eshell)
