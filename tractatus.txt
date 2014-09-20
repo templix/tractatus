@@ -15218,6 +15218,15 @@ La linea:
 	GRUB_CMDLINE_LINUX_DEFAULT="quiet init=/bin/systemd"
 
 
+systemd-analyze
+Analiza la secuencia de arranque en sistemas basados en systemd (Ver systemctl)
+# systemd-analyze time (muestra el tiempo total del arranque del sistema, desglosando el tiempo en espacio de usuario, del kernel y en la carga del initrd)
+# systemd-analyze blame (procesos que se ejecutan y cuanto tiempo consumen)
+# systemd-analyze critical-chain (ver cuellos de botella en el arranque)
+# systemd-analyze plot > archivo.svg (mostrar un gráfico con los tiempos del arranque)
+# systemd-analyze dump (volcar todo el arranque)
+
+
 sysv-rc-conf
 Gestionar el arranque de las aplicaciones al inicio.
 # sysv-rc-conf
