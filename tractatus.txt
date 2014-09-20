@@ -13114,6 +13114,14 @@ $ cat file.txt | recode ISO_8859-1..UTF8 > nuevo.txt (De iso8859-1 a utf-8 )
 $ recode ..HTML < file.txt > file.html  (pasar un texto a html)
 
 
+recordmydesktop
+Grabar el escritorio.
+$ recordmydesktop -o video.ogv (Especificando nombre del archivo de salida. Si no consta por defecto es out.ogv)
+$ recordmydesktop --no-cursor (Sin grabar el cursor)
+$ recordmydesktop --follow-mouse (La brabación sigue al cursor)
+$ recordmydesktop --device pulse (Especificando dispositivo de sonido)
+
+
 red
 1.- Configurar IP fija
 # nano /etc/network/interfaces
