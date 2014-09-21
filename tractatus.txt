@@ -13580,8 +13580,11 @@ Copiar o transferir archivos o directorios entre una máquina remota y una local
 $ scp pepe@host_o_IP:/home/pepe/*.odt ./pendiente (Copiará todos los .odt del directorio /home/pepe del host remoto al directorio “pendiente” de la máquina local)
 $ scp *.odt pepe@host_o_IP:/home/pepe/pendiente (transferirá todos los odt del directorio actual al directorio especificado “pendiente” del host remoto.)
 $ scp archivo usuario@host_o_IP:/home/usuario/Desktop (copiará “archivo” en local al escritorio remoto)
-$ scp -r directorio pepe@host_o_IP:/home/usuario/Desktop (copiará el directorio al host remoto)
+$ scp -l 500 -r directorio pepe@host_o_IP:/home/usuario/Desktop (copiará el directorio al host remoto y limitando el ancho de banda a 500 Kbits/s)
 $ scp -P 12000 pep@chost_o_IP:/home/usuario/archivo . (especificando un puerto en el host remoto y copiar archivo al presente directorio)
+$ scp -q archivo.tar.gz usuario@host_o_IP: (Deshabilitando la salida del comando [barra de progreso y mensaje])
+$ scp -Cv archivo usuario@host_o_IP: (Activando compresión de datos y mostrando más información del proceso)
+$ scp -c aes128-cbc archivo.tar.gz usuario@host_o_IP: (Habilitar cifrado durante la transferencia [Cifrados posibles:3des-cbc, aes128-cbc, aes192-cbc, aes256-cbc, aes128-ctr, aes192-ctr, aes256-ctr, arcfour128,arcfour256, arcfour, blowfish-cbc y cast128-cbc])
 Nota.- Si quiere transferirse al $HOME remoto puede suprimirse la ruta relativa, quedando: scp archivo pepe@host_o_IP:
 
 
