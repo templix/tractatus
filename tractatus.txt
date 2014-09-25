@@ -16511,6 +16511,21 @@ update-menus
 Regenerar los menus de gnome.
 
 
+update-mime-database
+Al arrancar o en la instalación de paquetes puede salir mensajes del tipo:
+	Unknown media type in type 'all/all'
+	Unknown media type in type 'all/allfiles'
+	Unknown media type in type 'uri/mms'
+	Unknown media type in type 'uri/mmst'
+	Unknown media type in type 'uri/mmsu'
+	Unknown media type in type 'uri/pnm'
+	Unknown media type in type 'uri/rtspt'
+	Unknown media type in type 'uri/rtspu'
+Para solucionar estos errores que no afectan al funcionamiento del sistema:
+# rm /usr/share/mime/packages/kde.xml
+# update-mime-database /usr/share/mime
+
+
 update-pciids
 Si al ejecutar lspci nos muestra un mensaje "unknown device" es preciso actualizar la lista del archivo pci.ids [/usr/share/misc].
 # update-pciids
