@@ -15584,6 +15584,20 @@ $ timidity -Ow -s 44100 -o output.wav input.mid  (MIDI -> WAV)
 $ timidity -Og -s 44100 -o output.ogg input.mid  ( MIDI -> OGG)
 
 
+tinfoleak
+[tweepy]Mostrar información de twitter sobre un nick concreto. Descarga: <http://vicenteaguileradiaz.com/tools/>
+registro en twitter:
+	Una vez descargada requiera registrar la aplicación en twitter y obtener una Consumer Key y Consumer secret, así como un Token Key y Token Secret, que deberemos rellenar dentro del script .py. Para ello nos loggeamos en nuestra cuenta de twitter y vamos a <https://apps.twitter.com/app/new> y le damos un nombre personal, descripción y un sitio web tipo http://www.algo.com). Una vez creado aparecerá una pestaña llamada API Keys, en la que podremos obtener los valores API Key y API Secret (que son el Consumer Key y Consumer Secret, respectivamente, a rellenar en el script). Luego generar un Token Key y Token secret. Pulsar en el botón "Generate Access Token" y generará un par de valores Access Token y Access Token Secret. Con estos datos rellenamos las variables  CONSUMER_KEY = ‘ ‘, CONSUMER_SECRET = ‘’, ACCESS_TOKEN = ‘ ‘ y ACCESS_TOKEN_SECRET = ‘ ‘ del script.  
+$ python tinfoleak.py (Ayuda y muestra parámetros)
+$ python tinfoleak.py -n usuario -b (Información del usuario)
+$ python tinfoleak.py -n usuario -stc 500 (Mostrar aplicaciones usadas por el usuario analizando los últimos 500 twits)
+$ python tilfoleak.py -n usuario -gtc 1000 (Mostrar lugar y coordenadas del usuario, incluyendo fecha y hora analizando los últimos 1000 twits)
+$ python tinfoleak.py -n usuario -h (Mostrar hashtags usado por el usuario analizando los últimos 100 twits)
+$ python tinfoleak.py -n usuario -m (Mostrar menciones de otros usuario analizando los últimos 100 twits)
+$ python tinfoleak.py -n usuario -f palabra (Mostrar publicaiones del usuario que inclyen la palabra especificada de los últimos 1000 twits)
+$ python tinfoleak.py -n usuario -bsgthmc 1000 --sdate 2014/10/01 --stime 08:00:00 -etime 22:00:00 (Mostrar información básica del usuario, apps, hashtags usados, menciones, coordenadas, fehca y hora de cada twit, analizando los últimos 1000 twits desde la fehca especificada y en la franja horaria de 8 a 22 horas)
+
+
 tload
 Muestra el promedio de carga en el terminal en forma de dibujos de caracteres.
 $ tload -d 2 (Con actualizacion cada 2 segundos)
