@@ -4255,7 +4255,9 @@ Utiliza dos modos de entrada: El modo caracter que envia cada caracter de entrad
 	C-c C-j (Cambia a modo línea)
 	C-c C-k (Cambia a modo caracter)
 Nota.- Puede que para alternar entre modos sea preciso hacerlo con M-x term-mode
-Para substituir el nombre *terminal* por otro: M-x rename-buffer
+Algunos detalles:
+	Para substituir el nombre *terminal* por otro: M-x rename-buffer
+	Consultar el historial de comandos con M-p (Hacia atras) y M-n (Hacia adelante)
 10.-
 Uso de sudo. Los mismos ejemplos sirven para su. Precisa tramp [ver ssh]. Entrar el siguiente código en .emacs autoexplicativo:
 	;; Uso de sudo: C-x C-f /sudo::/etc/hosts
@@ -4297,6 +4299,8 @@ Usar bash en lugar de la shell de emacs:
 	(setq shell-file-name "/bin/bash")
 Modificar el mensaje de bienvenida al entrar en eshell:
 	(setq eshell-banner-message "\n... entrant a  emacs shell...\n\n")
+Incorporar colorines a las salidas de los comandos:
+	(add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 Nota.- Si ya tenemos una terminal [eshell o term] abierta no permite abrir ninguna más a menos de que le cambiemos el nombre:
 	M-x rename-buffer
 14.-
@@ -15587,7 +15591,7 @@ $ timidity -Og -s 44100 -o output.ogg input.mid  ( MIDI -> OGG)
 tinfoleak
 [tweepy]Mostrar información de twitter sobre un nick concreto. Descarga: <http://vicenteaguileradiaz.com/tools/>
 registro en twitter:
-Una vez descargada requiera registrar la aplicación en twitter y obtener una Consumer Key y Consumer secret, así como un Token Key y Token Secret, que deberemos rellenar dentro del script .py. Para ello nos loggeamos en nuestra cuenta de twitter y vamos a <https://apps.twitter.com/app/new> y le damos un nombre personal, descripción y un sitio web tipo http://www.algo.com). Una vez creado aparecerá una pestaña llamada API Keys, en la que podremos obtener los valores API Key y API Secret (que son el Consumer Key y Consumer Secret, respectivamente, a rellenar en el script). Luego generar un Token Key y Token secret. Pulsar en el botón "Generate Access Token" y generará un par de valores Access Token y Access Token Secret. Con estos datos rellenamos las variables  CONSUMER_KEY = ‘ ‘, CONSUMER_SECRET = ‘’, ACCESS_TOKEN = ‘ ‘ y ACCESS_TOKEN_SECRET = ‘ ‘ del script.  
+Una vez descargada requiera registrar la aplicación en twitter y obtener una Consumer Key y Consumer secret, así como un Token Key y Token Secret, que deberemos rellenar dentro del script .py. Para ello nos loggeamos en nuestra cuenta de twitter y vamos a <https://apps.twitter.com/app/new> y le damos un nombre personal, descripción y un sitio web tipo http://www.algo.com). Una vez creado aparecerá una pestaña llamada API Keys, en la que podremos obtener los valores API Key y API Secret (que son el Consumer Key y Consumer Secret, respectivamente, a rellenar en el script). Luego generar un Token Key y Token secret. Pulsar en el botón "Generate Access Token" y generará un par de valores Access Token y Access Token Secret. Con estos datos rellenamos las variables  CONSUMER_KEY = ‘ ‘, CONSUMER_SECRET = ‘’, ACCESS_TOKEN = ‘ ‘ y ACCESS_TOKEN_SECRET = ‘ ‘ del script.
 $ python tinfoleak.py (Ayuda y muestra parámetros)
 $ python tinfoleak.py -n usuario -b (Información del usuario)
 $ python tinfoleak.py -n usuario -stc 500 (Mostrar aplicaciones usadas por el usuario analizando los últimos 500 twits)
