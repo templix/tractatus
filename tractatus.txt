@@ -8010,6 +8010,13 @@ $ jpegjudga -b imagen.jpeg (Mostrar solo el número)
 Nota.- Puede observarse el deterioro pasando un jpeg a png y volver a pasarlo a jpeg y comparar los resultados del primer jpeg y el último.
 
 
+jpegoptim
+Optimizar archivos .jpeg. Por defecto se sobreescriben los originales. Si no es posible la optimización no produce salida.
+$ jpegoptim imagenes/*.jpg (Forma básica de todas las de un directorio)
+$ jpegoptim imagen.jpg -d optimizado (Colocando la optimización en otro directorio)
+$ jpegoptim -f imagen.jpg (Forzando optimización incluso si el resultado es más grande que el original)
+
+
 jpegtran
 Eliminar información y reducir, modificar o recortar tamaño de imagenes jpeg.
 $ jpegtran -copy none optimize original.jpg resultado.jpg (Eliminando información oculta [-copy none] y reduciendo la imagen [-optimize])
