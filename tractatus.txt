@@ -1,4 +1,4 @@
-TRACTATUS ELEMENTALIS
+bTRACTATUS ELEMENTALIS
 
 
 4g8
@@ -4056,9 +4056,6 @@ Copiar, cortar, pegar y reemplazar
 	C-x C-t (Copiar linea)
 	M-h (Selecciona un párrafo)
 	M-% (Primero entrar la palabra a cambiar i despues la que sustituye)
-	M-x copy-to-register (Despues de seleccionar un trozo de texto, pedirá nombre para el registro)
-	M-x insert-register (Insertará el registro que le indiquemos)
-	M-x view-register (ver el contenido de un registro)
 Buscar:
 	C-s (busca hacia adelante)
 	C-r (busca hacia atras)
@@ -4333,8 +4330,9 @@ Para poder copipastear de emacs a las X y viceversa colocar en .emacs el código
     (setq interprogram-paste-function 'xsel-paste-function)))
 15.-
 Operar con trozos seleccionados [C-espacio]
-	C-x r s (Guardarla en un registro)
-	C-x TAB (Sangrar toda la selección)
+	C-x r s (copy-to-register) Ponerle un nombre y guardarla en un registro
+	C-x r i (insert-register) Insertará el registro que le indiquemos
+	M-x view-register (ver el contenido de un registro)
 16.-
 Disponer de un bloc de notas (M-x remember) en emacs que se lance con C-c &
 $ cd ~/.emacs.d
@@ -4403,6 +4401,16 @@ Algunos atajos
 	C-c C-s p (Insertar literal)
 	C-c TAB i (Insertar imagen en formato: [texto](url))
 20.-
+Algunos atajos para el navegador w3m:
+	B (w3m-view-preview-page) Ir a la pagina anterior
+	N (w3m-view-next-page) Ir a la página siguiente
+	I (w3m-view-image) Ver imagen con una aplicación externa
+	A (w3m-bookmark-add-current-url) Afegir la url activa a les adreces d'interès
+	M-a (w3m-bookmark-add-this-url) Afegir una url a les adreces d'interès
+	v (w3m-bookmark-view) veure les adreces d'interès
+	E (w3m-bookmark-edit) (Visitar l'arxiu de les adreces d'interès)
+	C-k (w3m-bookmark-kill-entry) (Treure una url de les adreces d'interès)
+21.-
 Otros ajustes que pueden incorporarse a .emacs precedidas con la explicación comentada:
 	;;Mostrar consola al pulsar F5:
 	(global-set-key (kbd "<f5>") 'eshell)
@@ -4447,7 +4455,7 @@ Otros ajustes que pueden incorporarse a .emacs precedidas con la explicación co
 	(defun insert-system-name()
 	(interactive)
 	(insert (format "%s" system-name)))
-21.-
+22.-
 Uso de algunos paquetes:
 lorem-ipsum.- Coloca sentencias o párrafos en un archivo de texto:
 C-u 10 M-x lorem-ipsum-insert-paragraphs (Insertar 10 párrafos)
