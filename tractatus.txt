@@ -4056,6 +4056,9 @@ Copiar, cortar, pegar y reemplazar
 	C-x C-t (Copiar linea)
 	M-h (Selecciona un párrafo)
 	M-% (Primero entrar la palabra a cambiar i despues la que sustituye)
+	M-x copy-to-register (Despues de seleccionar un trozo de texto, pedirá nombre para el registro)
+	M-x insert-register (Insertará el registro que le indiquemos)
+	M-x view-register (ver el contenido de un registro)
 Buscar:
 	C-s (busca hacia adelante)
 	C-r (busca hacia atras)
@@ -4141,8 +4144,10 @@ Modo comando:
 	M-x command-history  (History de comandos entrados)
 	M-x calculator (Calculadora muy elemental)
 	M-x man (mostrar man de un comando)
+	M-x woman (mostrar man de un comando)
 	M-x set-buffer-file-coding-system (Entrar codificación para el presente bufer)
 	M-x global-whitespace-mode (Mostrar/ocultar caracteres no imprimibles)
+	M-x follow-mode (al dividir un buffer en dos pantallas [C-x 3] y activar este modo menor, hace que los paneles sean uno continuación del otro)
 Para hacer permanente cualquiera de las opciones anteriores, colocarla en ~/.emacs de la siguiente forma:
    	(global-set-key (kbd "<f7>") 'global-linum-mode)
 Para mostrar u ocultar los numeros de linea pulsando F7
