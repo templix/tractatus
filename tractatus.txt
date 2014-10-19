@@ -10373,20 +10373,23 @@ $ music123 -r /rock tema1.mp3 /folk tema2.wav (Reproducir dos temas de dos direc
 
 mutt
 Gestión del correo por consola
-Editar /home/usuario/.muttrc y añadir:
-set imap_user = 'tu-correo@gmail.com'
-set imap_pass = 'contraseña'
-set spoolfile = imaps://imap.gmail.com:993/INBOX
-set folder = imaps://imap.gmail.com:993
-set record=”imaps://imap.gmail.com/[Gmail]/Sent Mail”
-set postponed=”imaps://imap.gmail.com/[Gmail]/Drafts”
-set header_cache=”~/.mutt/cache/headers”
-set message_cachedir=”~/.mutt/cache/bodies”
-set certificate_file=~/.mutt/certificates
+$ nano /home/usuario/.muttrc
+y añadir:
+	set imap_user = 'tu-correo@gmail.com'
+	set imap_pass = 'contraseña'
+	set spoolfile = imaps://imap.gmail.com:993/INBOX
+	set folder = imaps://imap.gmail.com:993
+	set record=”imaps://imap.gmail.com/[Gmail]/Sent Mail”
+	set postponed=”imaps://imap.gmail.com/[Gmail]/Drafts”
+	set header_cache=”~/.mutt/cache/headers”
+	set message_cachedir=”~/.mutt/cache/bodies”
+	set certificate_file=~/.mutt/certificates
 Guardar.
-	# mutt  (Para arrancar la aplicación en ncurses)
-	$ echo | mutt -a paquete.tar.gz -s 'el paquete' -c juanito@gmail.com -b 	pedrito@gmail.com  (enviar un paquete[-a], asunto[-s], carbon copy[cc] y 	Blind Carbon Copy[bcc]
-	$ mutt -s “asunto” destinatario@correo.com <<< “mensaje a enviar”
+# mutt  (Para arrancar la aplicación en ncurses)
+$ echo | mutt -a paquete.tar.gz -s 'el paquete' -c juanito@gmail.com -b pedrito@correo.com  (enviar un paquete[-a], asunto[-s], otro destinatario[cc] y otro en copia oculta[bcc]
+$ mutt -s "asunto" destinatario@correo.com <<< "mensaje a enviar"
+$ echo "Esto es una prueba" | mutt  -s 'asunto' destinatario@correo.com
+$ cat texto.txt | mutt -s "asunto" destinatario@correo.com
 
 
 mv
