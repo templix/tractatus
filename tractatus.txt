@@ -5725,6 +5725,7 @@ fsck
 # fsck -fpC 0 /dev/sda1
 # fsck.ext4 -cDfty -C 0 /dev/sda1
 # fsck.ext4 -vpf /dev/sda1 (Muestra información sobre una partición: fragmentación, inodos, bloques, archivos...)
+# fsck.vfat -w -r -l -a -v -t (Reparar particion FAT32 con dirty bit activado)
 Opciones:
 	-A .- Permitira una navegación en toda la estructura de /etc/fstab.
 	-V  .- información adicional sobre las acciones de fsck
