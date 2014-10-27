@@ -4194,6 +4194,12 @@ Añadir a .emacs las siguientes lineas:
 	(add-to-list 'iswitchb-buffer-ignore "*jde-log")
 	(add-to-list 'iswitchb-buffer-ignore "^[tT][aA][gG][sS]$")
 Al pulsar C-x b (Listar buffers abiertos) El buffer que aparece en primer lugar, resaltado en otro color, es el que se mostrará al pulsar Enter. Si queremos cambiar a otro buffer pulsar C-s para rotar el orden de los elementos de la lista.
+Nota.- A partir de la versión emacs-24.4 iswitchb ha sido substituido por ido. Las lineas a añadir a .emacs son:
+	(require 'ido)
+	(ido-mode 'buffers) ;; only use this line to turn off ido for file names!
+	(setq ido-ignore-buffers '("^ " "*Completions*" "*Shell Command Output*"
+	                           "*Messages*" "Async Shell Command" "*scratch*"
+	                           "*tramp*"))
 3.-
 Escuchar música con emms.
 Instalar emms en el sistema mediante repositorio y descargar <http://www.gnu.org/software/emms/> , descomprimir y mover el directorio a ~/.emacs.d/l. En .emacs colocar las lineas:
