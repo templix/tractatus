@@ -11697,6 +11697,17 @@ $ openssl enc -base64 -in imagen.jpg (Codificar una imagen)
 Nota.- la opción "a" indica que codificará con base64. "-salt" Añade potencia al cifrado.
 
 
+openvpn
+Encapsular datos entre dos redes físicas usando una red privada virtual. Existen varios sitios de internet que ofrecen este servicio de forma gratuita. Aquí usaremos a modo de ejemplo frootvpn. Nos registramos en <https://www.frootvpn.com/> y descargamos el software:
+$ wget https://www.frootvpn.com/files/frootvpn.ovpn
+# mv frootvpn /etc/openvpn/
+# openvpn /etc/openvpn/frootvpn.ovpn (Arrancar el servicio)
+Opcionalmente pueden cambiarse las DNSs:
+# nano /etc/resolv.conf
+Y colocar:
+Nameserver 80.67.0.2
+
+
 openvt
 lanza un programa en una nueva consola virtual [ttyX]. Ver deallocvt
 # openvt -c 9 ifconfig (Lanzar ifconfig en la /dev/tty9)
