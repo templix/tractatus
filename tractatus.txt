@@ -9489,6 +9489,10 @@ Liberar memória física
 # echo 3 > /proc/sys/vm/drop_caches
 
 
+memtest86
+[memtest86+]. Software diseñado para encontrar problemas que pueden afectar a los módulos de memoria RAM del equipo. La aplicación requiere iniciarse independiente del sistema operativo y consiste en escribir una serie de datos con 9 patrones de escritura distintos a la totalidad de direcciones de la memoria RAM. Una vez realizada la escritura se leerá el contenido escrito en la memoria RAM y se comprobará que sea el mismo que el contenido original. La duración del test es infinita y por lo tanto deberemos ser nosotros mismos cuando decidimos pararlo, o sea que cada "pasada" significa escribir y leer los 9 patrones de escritura distintos una vez. Si se realizan 3 "pasadas" significa repetir el test completo 3 veces. Si no se desactiva la opción se encuentra en el gestor de arranque grub [ver]
+
+
 mencoder
 Procesador de video.
 $ mencoder mf://*.jpg -ovc lavc -o out.avi (Crear un video de las imágenes de un directorio)
