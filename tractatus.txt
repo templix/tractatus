@@ -8779,6 +8779,19 @@ logrotate
 Rotación, compresión y correos del sistema de logs.
 # logrotate -d /etc/logrotate.conf (Verificación del correcto funcionamiento)
 # logrotate -f /etc/logrotate.conf  (forzar la verificación)
+Ejemplo típico para rotar logs de fail2ban:
+# nano /etc/logrotate.d/fail2ban
+	/var/log/fail2ban.log {
+	weekly		# rotado semanal
+	rotate 4	# numero maximo de ficheros rotado
+	compress	# comprimir cuando se rote
+	notifempty      # no rotar el log si esta vacio
+	missingok	# continuar sin error si el fichero no existe
+	create 640 root adm	# permisos, propietario y grupo del fichero rotado
+	postrotate	# tarea a realizar despues del rotado
+		fail2ban-client flushlogs 1>/dev/null
+	endscript
+	}
 1.-
 Por defecto, se añade un numero al fichero rotado. Si queremos que se use la fecha:
 # nano /etc/logrotate.conf
