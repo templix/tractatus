@@ -16563,6 +16563,17 @@ $ unoconv --format=txt document1.odt (convierte el documento a texto plano)
 $ unoconv --format=txt --stdout document1.odt > salida.txt (envia la salida al STDOUT para redireccionarla a un fichero cualquiera)
 
 
+unopkg
+Instalador de extensiones libreoffice por consola.
+$ unopkg add -v extension.oxt (Instala para un usuario mnostrando toda la salida)
+$ unopkg add -f extension.oxt (Instala para todos los usuarios)
+$ unopkg add -s -f extension.oxt (Si la extension precisa aceptar licencia)
+$ unopkg list (Lista las instaladas)
+$ unopkg reinstall
+$ unopkg remove extension.oxt ()
+$ unopkg gui (abre en modo gráfico)
+
+
 unrar
 Descomprimir archivos rar.
 $ unrar x archivo.rar
