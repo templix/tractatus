@@ -4438,6 +4438,17 @@ Algunos atajos para el navegador w3m:
 	E (w3m-bookmark-edit) (Visitar l'arxiu de les adreces d'interès)
 	C-k (w3m-bookmark-kill-entry) (Treure una url de les adreces d'interès)
 21.-
+Dando un pequeño formato a un texto (enriched-mode)
+	M-x enriched-mode (Activa/desactiva el modo enriquecido)
+	M-o d (por defecto)
+	M-o b (negrita)
+	M-o i (cursiva)
+	M-o l (negrita y cursiva)
+	M-o u (subrallado)
+	M-x facemenu-set-foreground (cambiar el color de la letra del texto marcado y de lo que se escriba a continuación)
+	M-x facemenu-set-background (cambiar el color de fondo del texto marcado y de lo que se escriba a continuación.
+	M-x find-file-literally (abrir el fichero "literalmente" sin el modo "enriched" pero viendo los comandos de formato)
+22.-
 Otros ajustes que pueden incorporarse a .emacs precedidas con la explicación comentada:
 	;;Mostrar consola al pulsar F5:
 	(global-set-key (kbd "<f5>") 'eshell)
@@ -4482,7 +4493,7 @@ Otros ajustes que pueden incorporarse a .emacs precedidas con la explicación co
 	(defun insert-system-name()
 	(interactive)
 	(insert (format "%s" system-name)))
-22.-
+23.-
 Uso de algunos paquetes:
 lorem-ipsum.- Coloca sentencias o párrafos en un archivo de texto:
 C-u 10 M-x lorem-ipsum-insert-paragraphs (Insertar 10 párrafos)
