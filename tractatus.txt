@@ -12576,6 +12576,23 @@ $ plowdown lista_de_links.txt (descarga una lista de links)
 $ plowdown -a usuario:contraseña url (caso de precisar usuario y contraseña)
 
 
+pm
+[pm-utils]. Colección de comandos que permiten suspender, hibernar o pasar a modo de bajo consumo.
+# pm-is-supported (determinar qué modos de ahorro de energía son soportado por el sistema)
+# pm-powersave (activa o desactiva el modo de ahorro de energía, pasándolo a "L")
+# pm-suspend (suspende las operaciones en memoria y coloca el sistema al mínimo consumo posible)
+# pm-hibernate (hiberna el sistema bajando todos los datos de memoria al disco rígido)
+# pm-suspend-hybrid (Híbrido entre hibernación y suspensión. En caso de agotarse la batería, se mantiene en estado de hibernación, sin perder datos)
+Notas:
+	H (High) máxima utilización del sistema de enfriamiento.
+	A (Auto) sistema de regulación automática de temperatura.
+	L (Low) mínimo uso del sistema de enfriamiento. Cuando supera cierto límite, pasa a modo automático.
+1.-
+opciones que permite un ordenador.
+# cat /sys/power/state
+Si en la salida aparece "mem" significa que podemos suspender el ordenador. Si aparece "disk" significa que podemos hibernar.
+
+
 pmap
 Informa sobre el rendimiento de la memoria del sistema, tanto en general como la memoria que consume un proceso concreto.
 $ pmap -d PID (consumo de memoria de las librerías, comandos y archivos que está empleando el proceso indicado)
