@@ -4449,6 +4449,21 @@ Dando un pequeño formato a un texto (enriched-mode)
 	M-x facemenu-set-background (cambiar el color de fondo del texto marcado y de lo que se escriba a continuación.
 	M-x find-file-literally (abrir el fichero "literalmente" sin el modo "enriched" pero viendo los comandos de formato)
 22.-
+Algunas opciones posibles al listar buffer con C-x C-b
+	n (siguiente buffer de la lista)
+	p (buffer anterior de la lista)
+	d (marcar buffer para eliminación)
+	% (marcar o desmarcar buffer como sólo lectura)
+	m (marcar buffer para ser mostrado)
+	u (desmarcar buffer)
+	Del (desmarcar buffer marcado con "u")
+	o (reemplazar la otra ventana con el buffer actual)
+	1 (mostrar buffer en pantalla completa)
+	2 (mostrar los siguientes 2 buffers en ventana horizontal)
+	v (mostrar los buffers marcados por "m")
+	x (ejecutar comandos de marcado)
+	q (salir del listado de buffers)
+23.-
 Otros ajustes que pueden incorporarse a .emacs precedidas con la explicación comentada:
 	;;Mostrar consola al pulsar F5:
 	(global-set-key (kbd "<f5>") 'eshell)
@@ -4493,7 +4508,7 @@ Otros ajustes que pueden incorporarse a .emacs precedidas con la explicación co
 	(defun insert-system-name()
 	(interactive)
 	(insert (format "%s" system-name)))
-23.-
+24.-
 Uso de algunos paquetes:
 lorem-ipsum.- Coloca sentencias o párrafos en un archivo de texto:
 C-u 10 M-x lorem-ipsum-insert-paragraphs (Insertar 10 párrafos)
