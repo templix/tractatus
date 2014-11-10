@@ -4464,6 +4464,15 @@ Algunas opciones posibles al listar buffer con C-x C-b
 	x (ejecutar comandos de marcado)
 	q (salir del listado de buffers)
 23.-
+Algunas opciones al listar marcadores (C-x r l)
+	d (marcar para eliminar)
+	x (Ejecutar la eliminación)
+	r (cambiar nombre del marcador)
+	s (guardar listado)
+	f (mostrar el marcador)
+	t (Mostrar/ocultar la ruta a los ficheros)
+	q (salir)
+24.-
 Otros ajustes que pueden incorporarse a .emacs precedidas con la explicación comentada:
 	;;Mostrar consola al pulsar F5:
 	(global-set-key (kbd "<f5>") 'eshell)
@@ -4508,7 +4517,7 @@ Otros ajustes que pueden incorporarse a .emacs precedidas con la explicación co
 	(defun insert-system-name()
 	(interactive)
 	(insert (format "%s" system-name)))
-24.-
+25.-
 Uso de algunos paquetes:
 lorem-ipsum.- Coloca sentencias o párrafos en un archivo de texto:
 C-u 10 M-x lorem-ipsum-insert-paragraphs (Insertar 10 párrafos)
