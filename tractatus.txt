@@ -8649,6 +8649,16 @@ Entrar de forma automática:
 # nano /etc/lightdm/lightdm.conf
 autologin-user=USUARIO
 autologin-user-timeout=0
+3.-
+Para modificar la sesión por defecto:
+# nano /usr/share/xsessions/lightdm-xsession.desktop
+Y colocar en la linea Exec el deseado:
+	[Desktop Entry]
+	Version=1.0
+	Name=Default Xsession
+	Exec=mate-session
+	Icon=
+	Type=Application
 
 
 lilo
