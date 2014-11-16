@@ -4473,6 +4473,13 @@ Algunas opciones al listar marcadores (C-x r l)
 	t (Mostrar/ocultar la ruta a los ficheros)
 	q (salir)
 24.-
+Grabar macros
+	C-x ( (Empezar a grabar secuencia de caracteres)
+	C-x ) (Terminar la grabación)
+	C-x e (Reproducir la macro grabada)
+Si quremos un atajo para reproducir la última macro grabada con, por ejemplo Mayuscula F1, colocar en .emacs:
+	(global-set-key [(shift f1)] 'call-last-kbd-macro)
+25.-
 Otros ajustes que pueden incorporarse a .emacs precedidas con la explicación comentada:
 	;;Mostrar consola al pulsar F5:
 	(global-set-key (kbd "<f5>") 'eshell)
