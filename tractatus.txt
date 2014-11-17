@@ -12262,6 +12262,13 @@ Convertir pdfs en djvu.
 $ pdf2djvu -o salida.djvu archivo.pdf
 
 
+pdf2htmlex
+Convertir pdf a html sin perder texto ni formato. Soporta imágenes .png y .jpg.
+$ pdf2htmlEX archivo.pdf archivo.html
+$ pdf2htmlEX --split-pages 1 archivo.pdf (Guardando cada página en un archivo separado. Por defecto un solo archivo [0])
+$ pdf2htmlEX --hdpi 200 --vdpi 200 archivo.pdf archivo.html (Especificando DPI horizontal y vertical)
+
+
 pdf2ps
 [psutils]. Convertir pdf a postscript. Ver ps2pdf
 $ pdf2ps fichero.pdf
