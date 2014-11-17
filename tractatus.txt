@@ -71,10 +71,11 @@ $ a2png texto.txt texto.png
 
 
 a2ps
-Imprimir y manipular archivos postscript.
+Imprimir y manipular archivos postscript. La codificación por defecto es la inglesa. La más parecida a utf8 es la latin1
 $ a2ps -o final.ps --columns=2 original.ps (Convertir un archivo [original.ps] a 2 páginas en una y mandar el resultado a otro [final.ps])
 $ a2ps --printer=HP_psc_1100_series archivo.ps (mandar un archivo a imprimir)
 $ a2ps -l -o archivo.ps --no-header archivo.txt (Pasar un txt a ps y sin poner encabezados y apaisado[-l])
+$ a2ps -X latin1 -o archivo.ps archivo.txt (Especificando codificación)
 	Nota.- Para visualizar el ps puede usarse la aplicación gv
 
 
