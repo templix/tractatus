@@ -3672,6 +3672,10 @@ Otra forma de forzar la desinstalación de paquetes conflictivos:
 Otro modo de suprimir archivos de configuración huerfanos (rc):
 	# dpkg -l | grep ^rc (Comprobar si tenenos paquetes de estas caracteristicas)
 	# dpkg -P $(dpkg -l |awk '/^rc/ { print $2 }') (Eliminarlos)
+5.-
+Añadir arquitectura 386 a una máquina amd64 para permitir instalar paquetes sólo disponibles para aquella arquitectura:
+# dpkg --add-architecture i386
+# apt-get update
 
 
 driftnet
