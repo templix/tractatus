@@ -6937,6 +6937,12 @@ $ hal-device -r dispositivo   (borrar)
 $ hal-device | grep volume.label  (mostrar etiquetas de todos los volumenes)
 
 
+hardlink
+Herramienta que detecta archivos iguales y los reemplaza con enlaces duros.
+# hardlink -f -x /videos -t -o /home/usuaario (Enlazar archivos con el mismo nombre [f], excluyendo el directorio "videos" [x], comprobando aunque la fecha de modficación sea diferente [t], ignorando el propietario [o] y sobre la carpeta personal)
+# hardlink -n /home/usuario (Hacer una simulación)
+
+
 hasciicam
 Visualizar la webcam via ascii.
 $ hasciicam -m html -c 50 -o (En modo html, contraste 50 [de 0 a 100. Por defecto 4] y guardar el archivo)
