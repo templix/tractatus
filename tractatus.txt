@@ -17418,6 +17418,12 @@ Para abrir NERDTree pulsando F5 colocar en .vimrc la linea:
 	map <F5> :NERDTreeToggle<cr>
 
 
+vmkfstools
+Modificar por duplicidad [msg.disk.duplicateUUID:Virtual disks] o asignar por ausencia [disk does not have a UUID] un nuevo UUID a un disco VMDK.
+# vmkfstools -J getuuid virtual01.vmdk (Asignar nuevo UUID)
+# vmkfstools -J setuuid virtual01.vmdk (Modificar el UUID)
+
+
 vipe
 [moreutils]. Permite editar en medio de una tubería los datos que están siendo canalizadas entre programas.
 $ ls | vipe | ifdata -pb eth0
