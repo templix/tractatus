@@ -13012,7 +13012,17 @@ $ ps2pdf archivo_A5.ps archivo_A5.pdf  (convertir nuevamente a pdf listo para im
 
 psad
 Demonio. Escaneador de ataques a puertos. Los resultados en /var/log/psad/analysis.out
-# psad -A -i eth0
+Habilitar logs en iptables:
+# iptables -A INPUT -j LOG
+# iptables -A FORWARD -j LOG
+Lanzar los guignetes tres comandos:
+# psad -R (Reiniciar psad)
+# psad --sig-update (Recargar firmas)
+# psad -H (Releer archivo pad)
+Consultar estado con:
+# psad -Status
+# psad -A -i eth0 (Analizar a partir de los logs de iptables e indicando red)
+Archivo de configuración en /etc/psad/psad.conf
 
 
 psbook
