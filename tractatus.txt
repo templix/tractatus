@@ -4566,14 +4566,14 @@ Comandos externos.
         C-c ` (Muestra la linea en la que se ha producido un error)
 26.-
 Función que abre en firefox una url, un link o una imagen sobre la que se encuentra el cursor en un archivo de texto pulsado C-c b:
-(defun w3mext-open-link-or-image-or-url ()
-    (interactive)
-    (let (url)
-    (if (string= major-mode "w3m-mode")
-        (setq url (or (w3m-anchor) (w3m-image) w3m-current-url)))
-        (browse-url-generic (if url url (car (browse-url-interactive-arg "URL: "))))
-        ))
-(global-set-key (kbd "C-c b") 'w3mext-open-link-or-image-or-url)
+	(defun w3mext-open-link-or-image-or-url ()
+	    (interactive)
+	    (let (url)
+	    (if (string= major-mode "w3m-mode")
+	        (setq url (or (w3m-anchor) (w3m-image) w3m-current-url)))
+	        (browse-url-generic (if url url (car (browse-url-interactive-arg "URL: "))))
+	        ))
+	(global-set-key (kbd "C-c b") 'w3mext-open-link-or-image-or-url)
 27.-
 Otros ajustes que pueden incorporarse a .emacs precedidas con la explicación comentada:
 	;;Mostrar consola al pulsar F5:
