@@ -1294,8 +1294,10 @@ complete -cf sudo
 fi
 2.-
 Añadiendo o modificando las siguientes lineas se consigue que el history de bash se amplie al recuerdo a los últimos 3000 comandos usados, suprimiendo los repetidos y que ignore el espacio (Si se pone) de delante de un comando.
-export HISTFILESIZE=3000
-export HISTCONTROL=ignoredups:ignorespace
+	export HISTFILESIZE=3000
+	export HISTCONTROL=ignoredups:ignorespace
+Si queremos que la sesión de bash se cierre si está inactiva durante 600 segundos, colocar la linea:
+	export TMOUT=600
 3.-
 Establecer un proxy global a nuestro sistema
 $ nano ~/.bashrc
@@ -13000,6 +13002,7 @@ $ ps aux | sort -nrk 4 | head (Los 10 procesos que consumen más memoria)
 $ ps -C firefox (ver los procesos asociados a una aplicación)
 $ ps -l PID  (informa de la aplicación que corre por un PID)
 $ ps -p $$ (Informa del pid de la propia terminal)
+$ ps axo pid=,stat= | awk '$2~/^Z/ { print $1 }' (Ver PID de los procesos zombies)
 Opciones
 a (muestra lo que se está ejecutando en ttys conocidas)
 x (muestra lo que se se está ejecutando desconociendo en cual tty)
