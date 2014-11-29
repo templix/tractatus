@@ -13011,7 +13011,7 @@ $ ps aux | sort -nrk 4 | head (Los 10 procesos que consumen más memoria)
 $ ps -C firefox (ver los procesos asociados a una aplicación)
 $ ps -l PID  (informa de la aplicación que corre por un PID)
 $ ps -p $$ (Informa del pid de la propia terminal)
-$ ps axo pid=,stat= | awk '$2~/^Z/ { print $1 }' (Ver PID de los procesos zombies)
+	$ ps axo pid=,stat= | awk '$2~/^Z/ { print $1 }' (Ver PID de los procesos zombies)
 Opciones
 a (muestra lo que se está ejecutando en ttys conocidas)
 x (muestra lo que se se está ejecutando desconociendo en cual tty)
