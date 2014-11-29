@@ -770,8 +770,10 @@ $ arch
 
 
 arecord
-Grabador de archivos de sonido.
-$ arecord -l (Muestra los dispositivos disponibles)
+[alsa-utils]. Grabación de audio. Graba directamente de la tarjeta de sonido sin tener conectado los altavoces ni micro.
+$ arecord -l (Listado de dispositivos)
+$ arecord archivo.mp3 (Modo básico)
+$ arecord -t wav -f cd -d 15 archivo.wav (Tipo wav, formato cd, duración de la grabación 15 segundos y nombre con el que se guardará)
 
 
 argus
