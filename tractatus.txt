@@ -4579,6 +4579,18 @@ Función que abre en firefox una url, un link o una imagen sobre la que se encue
 	        ))
 	(global-set-key (kbd "C-c b") 'w3mext-open-link-or-image-or-url)
 27.-
+Navegador eww [nativo de emacs escrito en elisp y disponible a partir de la versión 24.4]. Se abre con M-x eww. Si el texto ingresado no tiene forma de URL realizará la busqueda en DuckDuckGo.
+Algunos atajos:
+	q (salir)
+	g (recargar la página)
+	w (copiar la URL actual al kill ring)
+	d (descargar la URL bajo el cursor)
+	l (ir  a la página anterior)
+	r (ir a la página siguiente)
+	H (ver historial de sitios visitados. Se pierde al cerrar eww)
+	& (abrir la URL actual en un navegador web externo)
+	v (ver código fuente. Se copia en un buffer nuevo y se activa html-mode si está disponible)
+28.-
 Otros ajustes que pueden incorporarse a .emacs precedidas con la explicación comentada:
 	;;Mostrar consola al pulsar F5:
 	(global-set-key (kbd "<f5>") 'eshell)
@@ -4623,7 +4635,7 @@ Otros ajustes que pueden incorporarse a .emacs precedidas con la explicación co
 	(defun insert-system-name()
 	(interactive)
 	(insert (format "%s" system-name)))
-28.-
+29.-
 Uso de algunos paquetes:
 lorem-ipsum.- Coloca sentencias o párrafos en un archivo de texto:
 C-u 10 M-x lorem-ipsum-insert-paragraphs (Insertar 10 párrafos)
