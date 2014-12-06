@@ -4495,7 +4495,7 @@ Si quremos un atajo para reproducir la última macro grabada con, por ejemplo Ma
 	(global-set-key [(shift f1)] 'call-last-kbd-macro)
 25.-
 Algunos atajos de latex-mode, auctex y reftex
-	C-c TAB (Página info de auctex)
+        C-c TAB (Página info de auctex)
         C-c * (Selecciona la sección actual)
         C-c ' (Marca como comentario todo el párrafo)
         C-c ; (Marca como comentario toda la zona previamente seleccionada)
@@ -4512,24 +4512,24 @@ Algunos atajos de latex-mode, auctex y reftex
         C-c C-s (Preguntará por tipo de unidad a insertar. Por defecto igual que la actual)
         C-u C-c C-s (sugerirá el nivel inmediatamente inferior al actual)
 Especificación de formatos para letras:
-	C-c C-f C-r (\textrm{} Inserta texto roman)
+        C-c C-f C-r (\textrm{} Inserta texto roman)
         C-c C-f C-f (\textsf{} Inserta texto sanserif)
         C-c C-f C-t (\texttt{} Inserta texto tipo máquina de escribir)
 Especificación por trazo e inclinación:
-	C-c C-f C-b (\textbf{} Inserta texto en negrita (trazo grueso))
+        C-c C-f C-b (\textbf{} Inserta texto en negrita (trazo grueso))
         C-c C-f RET (\textmd{} Inserta texto normal (trazo medio))
         C-c C-f C-i (\textit{} Inserta texto en cursiva)
         C-c C-f C-s (\textsl{} Inserta texto inclinado)
         C-c C-f C-e (\emph{} Inserta texto enfatizado)
-        Otras especificacion es de formato:
-        C-c C-f C-u (\textup{} Inserta texto de perfil recto)
+Otras especificacion es de formato:
+	C-c C-f C-u (\textup{} Inserta texto de perfil recto)
         C-c C-f C-c (\textsc{} Inserta texto en versales)
         C-c C-f C-n (\textnormal{} Inserta texto normal)
         C-c C-f C-d (Borra la especificación de formato actual)
         C-c C-q C-r (Indentar párrafo seleccionado)
         C-c C-q C-p (Reformatea un párrafo a 70 caracteres por linea)
 Activando el modo menor "outline" (M-x outline-minor-mode) podemos acceder a los siguientes atajos:
-	C-c @ C-t (Pliega las secciones)
+        C-c @ C-t (Pliega las secciones)
         C-c @ C-a (Despliega las secciones)
         C-c @ C-n (Próximo título)
         C-c @ C-p (Título anterior)
@@ -4537,9 +4537,9 @@ Activando el modo menor "outline" (M-x outline-minor-mode) podemos acceder a los
         C-c @ C-b (Anterior título del mismo nivel)
         C-c @ C-u (Título del nivel inmediatamente superior)
 Ver estructura del documento (M-x reftex-mode):
-	C-c = (Abre un ventana con la estructura del documento)
+        C-c = (Abre un ventana con la estructura del documento)
 Algunas teclas disponibles en esta ventana en reftex-mode:
-	? (Muestra sumário y opciones disponibles)
+        ? (Muestra sumário y opciones disponibles)
         q (Cierra la ventana)
         k (Cierra ventana y elimina el buffer)
         ESP (Muestra en la otra ventana lo seleccionado)
@@ -4548,9 +4548,9 @@ Algunas teclas disponibles en esta ventana en reftex-mode:
         RET (Oculta la ventana del indice y el cursor va al título seleccionado)
         g (Actualizar el buffer)
 Referencia a las etiquetas:
-	C-c ) (Abre una ventana con las referencias)
+        C-c ) (Abre una ventana con las referencias)
 Algunas teclas disponibles en la ventana de etiquetas:
-	RET (buscar etiquetas de todo tipo)
+        RET (buscar etiquetas de todo tipo)
         e (buscar etiquetas de tipo equation)
         f (buscar etiquetas de tipo figure)
         i (buscar etiquetas de tipo enumerate)
@@ -4559,16 +4559,16 @@ Algunas teclas disponibles en la ventana de etiquetas:
         s (buscar etiquetas de tipo section)
         t (buscar etiquetas de tipo table)
 Una vez escogida las etiquetas a mostrar se abre una ventana con las siguientes opciones:
-	? (Muestra opciones disponibles)
+        ? (Muestra opciones disponibles)
         q (Cierra el buffer)
         s (Cambia el tipo de etiqueta que se está buscando)
         SPC (Mostra en la otra ventana lugar de la etiqueta seleccionada)
         f (Activa/desactiva mostrar donde estamos en la otra ventana en tiempo real)
 Comandos externos.
-	C-c C-c (La primera vez que se ejecuta, compila. La segunda muestra el pdf)
+        C-c C-c (La primera vez que se ejecuta, compila. La segunda muestra el pdf)
         C-c C-v (Mostrar directamente el pdf)
         C-c C-w (Activa/desactiva mostrar como error desbordamientos de cajas de texto)
-        C-c ` (Muestra la linea en la que se ha producido un error)
+        C-c ` (Muestra la linea en la que se produce un error)
 26.-
 Función que abre en firefox una url, un link o una imagen sobre la que se encuentra el cursor en un archivo de texto pulsado C-c b:
 	(defun w3mext-open-link-or-image-or-url ()
