@@ -11145,32 +11145,48 @@ Algunos atajos [newsbeuter -h]:
 	/ (Abrir busqueda)
 	? (Abrir diálogo de ayuda)
 1.-
+Algunos ajustes en el archivo de configuración:
+$ nano .newsbeuter/config
+## Leer fuentes al arrancar la aplicación:
+auto-reload yes
+## Releer las fuentes cada 15 minutos:
+reload-time 15
+## Guardar los articulos 15 dias:
+keep-articles-days 15
+## Navegador que abre la noticia [elinks para ssh y firefox para las X]
+#browser "elinks %u"
+browser "firefox %u"
+## No usar sonido indicando nuevas noticias:
+notify-beep no
+## Salir sin confirmación:
+confirm-exit no
+## Usar mplayer para los videos [en las X]
+player "mplayer %u"
+#### colores soportados: black, red, green, yellow, blue, magenta, cyan y white.
+#### Los atributos que pueden especificarse son: standout [Cursiva],
+#### underline [Subrayar], reverse [Invertir colores de letra y fondo],
+#### blink [parpaderar], dim [oscurecer] y bold [negrita]
+## Fondo de pantalla: letra amarilla y fondo negro:
+color listnormal yellow black
+## Linea de foco: letra roja y fondo blanco:
+color listfocus red white
+## Primera linea superior y penúltima inferior: letra blanca en negrita y fondo rojo
+color info white red bold
+## Linea inferior de notificaciónes: letra azul en negrita con fondo negro
+color background blue black bold
+## Como se muestran los articulos: letra cyan con fondo negro:
+color article cyan black
+## Foco en nueva noticia no leida: letra blanca en cursiva con fondo amarillo:
+color listfocus_unread white yellow standout
+## Nuevas noticias no leidas: letra azul con fondo magenta:
+color listnormal_unread blue magenta
+2.-
 Para incorporar los feeds de google reader editar o crear si no existe:
 $ nano .newsbeuter/config
 texto que se tiene que agregar:
 	urls-source "googlereader"
 	googlereader-login "login_de_googlereader"
 	googlereader-password "contraseña"
-2.-
-Otros ajustes que pueden hacerse en este archivo:
-	auto-reload yes
-	reload-time 15
-	keep-articles-days 15
-	browser "elinks %u"
-	notify-beep yes
-Que relea las fuentes al arrancar, las actualice cada 15 minutos, que guarde las noticias 15 dias, las abra con elinks y que avise con un beep las nuevas noticias. Si las noticias se leen en las X puede especificarse como navegador firefox o chromium [browser firefox]
-3.-
-Configurar colores:
-Los colores soportados: black, red, green, yellow, blue, magenta, cyan y white.
-Los elementos sobre los que se puede actuar: listnormal [lista de las fuentes], listfocus [Fuente o articulo donde está el foco], info (Linea superior y penúltima de la pantalla que muestra información], background [última linea de la pantalla] y article [articulo que se abre para su lectura]
-Los atributos: standout, underline, reverse, blink, dim, bold, protect e invis [pueden especificarse uno, varios o ninguno]
-Muestra de mi configuración de color:
-$ nano .newsbeuter/config
-	color listnormal yellow black
-	color listfocus green blue bold
-	color info yellow blue bold
-	color background red black bold
-	color article cyan black
 
 
 nfs
