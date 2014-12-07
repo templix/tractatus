@@ -938,14 +938,15 @@ Ver entrada sar
 
 
 auditd
-[audit]. Demonio especificamente diseñado para registrar cualquier modificación en ficheros y carpetas. Por ejemplo, para registrar todos los sucesos via ssh:
-# nano /etc/pam.d/sshd
-Y añadir la linea:
-session required pam_loginuid.so
-Siguidamente añadir la regla:
-# auditctl -w /home/usuario -p w (Todo lo que se escriba [-p w] en el directorio del usuario [-w])
-Esto creará el fichero de logs: /var/log/audit/audit.log
-Nota.- Para una más completa monitorización ver: ssh [9]
+[audit]. Demonio que monitoriza accesos al sistema y modificación de ficheros y carpetas. Sin ninguna configuración adicional registrará en /var/log/audit/audit.log toda la actividad del sistema [ssh, vnc, cron...]. Si queremos controlar un directorio:
+# nano /etc/audit/audit.rules
+Y, para controlar todo el directorio personal, añadimos la linea:
+   -w /home/USUARIO -p wa
+Toda modificación del archivo de configuración implica reiniciar el servicio:
+# service auditd restart
+# ausearch -f /home/USUARIO (Muestra las incidencias del directorio)
+# auditctl -D (Suprime todas las reglas)
+# auditctl -w /home/USUARIO -p w (Monitorizar el directorio personal solo hasta el reinicio del servicio o del sistema)
 
 
 aumix
