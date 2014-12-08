@@ -12417,8 +12417,10 @@ Opciones:
 
 
 pdftohtml
-Pasar un pdf a html
+Pasar un pdf a html. Preferible lanzar en una carpeta sin contenido ya que, dependiendo de la medida del pdf, produce varios archivos.
 $ pdftohtml -i -stdout archivo.pdf | w3m -T text/html (leerlo por consola con w3m sin mostrar imagenes [-i])
+$ pdftohtml -s archivo.pdf (Crea un html de una sola página)
+$ pdftohtml -c archivo.pdf (Crea una página cada una del pdf)
 
 
 pdftops
