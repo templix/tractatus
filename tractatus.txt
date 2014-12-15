@@ -10289,11 +10289,13 @@ control_authentication juanito:password
 mount
 Montaje de particiones
 # mount -t ext3      (Lista las particones ext3 montados)
-# mount -a       (Monta todo lo que contengan la expresion  “auto” en el /etc/fstab)
+# mount -a       (Monta todo lo que contengan la expresion  "auto" en el /etc/fstab)
 # mount -s       (Tolera opciones de montaje medio malas en vez de fallar)
 # mount -o loop imagen.iso /directorio     (Montar una iso en un dir)
 # mount -t vfat /dev/sdf /media/disk -o force,rw   (Forzar montaje lectura y escritura)
 # mount | column -t  (muestra todo lo montado de forma ordenada)
+# mount -o remount / (Remontar una partición después de, por ejemplo modificar sus atributos (4ª columna) en el fstab)
+# mount -o remount,rw,relatime / (Remontar una partición modificando atributos sólo para la presente sesión)
 
 
 mp3blaster
