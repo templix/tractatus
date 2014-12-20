@@ -17290,6 +17290,12 @@ Ver en pantalla el contenido de un archivo.
 $ view fichero.txt
 
 
+vigr
+Editor que permite modificar el fichero /etc/group en modo seguro. La diferencia de editarlo con vigr o hacerlo con cualquier otro editor (gedit, nano...) es que vigr bloquea el fichero para evitar ediciones simultaneas y en el momento de guardar los cambios realiza un chequeo del fichero en busca de fallos de sintaxis.
+# vigr (Editar el fichero /etc/group)
+# vigr -s (Editar el fichero /etc/gshadow)
+
+
 vim
 Editor
 $ vim fichero (Abrir un fichero)
@@ -17489,15 +17495,15 @@ Para abrir NERDTree pulsando F5 colocar en .vimrc la linea:
 	map <F5> :NERDTreeToggle<cr>
 
 
-vmkfstools
-Modificar por duplicidad [msg.disk.duplicateUUID:Virtual disks] o asignar por ausencia [disk does not have a UUID] un nuevo UUID a un disco VMDK.
-# vmkfstools -J getuuid virtual01.vmdk (Asignar nuevo UUID)
-# vmkfstools -J setuuid virtual01.vmdk (Modificar el UUID)
-
-
 vipe
 [moreutils]. Permite editar en medio de una tubería los datos que están siendo canalizadas entre programas.
 $ ls | vipe | ifdata -pb eth0
+
+
+vipw
+Editor que permite modificar el fichero /etc/passwd en modo seguro. La diferencia de editarlo con vipw o hacerlo con cualquier otro editor (gedit, nano...) es que vipw bloquea el fichero para evitar ediciones simultaneas y en el momento de guardar los cambios realiza un chequeo del fichero en busca de fallos de sintaxis.
+# vipw (Edita el fichero /etc/passwd)
+# vipw -s (Editar el fichero /etc/shadow)
 
 
 virtualbox
@@ -17531,6 +17537,13 @@ Muestra estadisticas del sitio web local.
 # visitors -A /var/log/apache2/access.log -o html > report (Activar todas las opciones [-A] que guarde la salida en formato html [-o] y que base el informe en el archivo /var/log/apache2/access.log)
 
 
+visudo
+Editor que permite modificar el fichero /etc/sudoers en modo seguro. La diferencia de editarlo con visudo o hacerlo con cualquier otro editor (gedit, nano...) es que visudo bloquea el fichero para evitar ediciones simultaneas y en el momento de guardar los cambios realiza un chequeo del fichero en busca de fallos de sintaxis.
+# visudo (Edita el fichero /etc/sudoers)
+# visudo -c (Chequea si existen errores en /etc/sudoers)
+# visudo -f archivo (Especificando un archivo alternativo al por defecto de /etc/sudoers)
+
+
 vlc
 Reproductor de video y audio
 $ vlc -l  (listar opciones. La opción es “i” mayúscula)
@@ -17542,6 +17555,12 @@ vlock
 Aplicación para bloquear sesiones de consola.
 $ vlock -c    (La bloquea)
 Para desbloquearla, pulsar “enter” y la contraseña del usuario
+
+
+vmkfstools
+Modificar por duplicidad [msg.disk.duplicateUUID:Virtual disks] o asignar por ausencia [disk does not have a UUID] un nuevo UUID a un disco VMDK.
+# vmkfstools -J getuuid virtual01.vmdk (Asignar nuevo UUID)
+# vmkfstools -J setuuid virtual01.vmdk (Modificar el UUID)
 
 
 vmstat
