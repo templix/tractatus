@@ -4638,6 +4638,8 @@ Otros ajustes que pueden incorporarse a .emacs precedidas con la explicación co
 	(defun insert-system-name()
 	(interactive)
 	(insert (format "%s" system-name)))
+	;; Listar y posibilidad de abrir un buffer cerrado anteriormente
+	(require 'recentf)
 29.-
 Uso de algunos paquetes:
 lorem-ipsum.- Coloca sentencias o párrafos en un archivo de texto:
