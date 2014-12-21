@@ -4226,20 +4226,30 @@ Instalar emms en el sistema mediante repositorio y descargar <http://www.gnu.org
 	(emms-default-players)
 Llamar com M-x emms (Pulsando TAB apareceran las opciones). Salir con M-x emms-stop
 4.-
-Corrector ortográfico. apt-get install aspell-es dictionary-el
-	M-x dictionary (Escoger diccionario)
-	M-x ispell-change-dictionary (cambiar diccionario)
-	M-x ispell (Corregir un texto)
-		ESP (Saltar la palabra)
-		r (modificar personalmente)
-		dígito (Substituir palabra por la del dígito pulsado)
-		a (Aceptar la palabra incorrecta)
-		i (incorporar palabra al diccionario personal)
-		C-g (Salir de corrección. Con C-u M-$ vuelve a corrector)
-		q (Salir de corrector)
-		C-l (Actualizar pantalla)
-	M-x flyspell-mode (Corrector en timpo real)
-		M-$ (Sobre la palabra mal escrita para ver opciones)
+Corrector ortográfico. apt-get install aspell-es dictionary-el aspell-ca
+Emacs coge automaticamente el idioma por defecto del sistema. Para modificar el idiome:
+	M-x ispell-change-dictionary
+Corregir un texto:
+	M-x ispell
+Opciones en este modo:
+	ESP (Saltar la palabra)
+	r (modificar personalmente)
+	dígito (Substituir palabra por la del dígito pulsado)
+	a (Aceptar la palabra incorrecta)
+	i (incorporar palabra al diccionario personal)
+	C-g (Salir de corrección. Con C-u M-$ vuelve a corrector)
+	q (Salir de corrector)
+	C-l (Actualizar pantalla)
+Corregir un texto en tiempo real:
+	M-x flyspell-mode
+Opciones en este modo:
+	M-$ (Sobre la palabra mal escrita para ver opciones)
+Tambien podemos activar por defecto las correcciones añadiendo en .emacs:
+	(setq-default flyspell-mode t)
+Para los comentarios en los lenguajes de programación:
+	M-x flyspell-prog-mode
+Para los comentarios en modo latex añadir en .emacs:
+	(add-hook 'LaTeX-mode-hook 'flyspell-mode)
 5.-
 Recargar archivo de configuración .emacs despues de una modificación:
 	M-x load-file (Cuando solicite el nombre del archivo colocar .emacs)
