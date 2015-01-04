@@ -15934,6 +15934,12 @@ $ time netstat -anpt
 $ time echo "scale=5000; 4*a(1)" | bc -l -q (Calcula 5000 decimales de pi para comprobar velocidad del procesador)
 
 
+timedatectl
+Informa o ajusta la hora del sistema en sistemas Linux con SystemD
+$ timedatectl (Informa de la hora configurada mostrando el time zone, la hora universal y otros datos)
+# timedatectl set-time "yyyy-MM-dd hh:mm:ss" (Define el dia y la hora. Por ejemplo timedatectl set-time "2014-05-26 11:13:54")
+
+
 timeout
 Limita el tiempo de funcionamiento de un comando o aplicación.
 $ timeout 60 firefox (arrancará firefox y se cerrará a los 60 segundo)
