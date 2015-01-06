@@ -7112,6 +7112,7 @@ $ heroku apps:destroy mighty-fortress-6385 (Eliminar una app)
 $ heroku sharing --app tractatuslapipaplena (Ver los colaboradores de un proyecto)
 $ heroku auth:login (Pide los datos de registro)
 $ heroku keys:add ~/.ssh/id_rsa.pub (Subir la clave publica)
+$ heroku git:remote -a tractatuslapipaplena (Añadir una aplicación Heroku con control remoto Git)
 
 
 hexdump
@@ -7575,6 +7576,20 @@ interface eth0
 Los directorios "chats" y "debug" los crea la misma aplicación.
 Lanzar el sniffer de conversaciones msn:
 # imsniff
+
+
+inadyn
+Cliente que actualiza registros DNS de ips dinámicas.
+# nano /etc/inadyn.conf
+Y, para el caso de un registro no-ip, modificar los parámetros:
+	system default@no-ip.com
+	username Nombre_de_registro_en_no-ip
+	password Contraseña_del_registro_de_no-ip
+	alias Tu_host.no-ip.org
+El perido de actualización en segundos:
+	period 600
+Si existen errores se mostrarán la lanzar:
+# inadyn
 
 
 info
