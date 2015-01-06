@@ -7579,14 +7579,14 @@ Lanzar el sniffer de conversaciones msn:
 
 
 inadyn
-Cliente que actualiza registros DNS de ips dinámicas.
+Cliente que actualiza registros DNS de ips dinámicas tipo noip2 [ver].
 # nano /etc/inadyn.conf
 Y, para el caso de un registro no-ip, modificar los parámetros:
 	system default@no-ip.com
 	username Nombre_de_registro_en_no-ip
 	password Contraseña_del_registro_de_no-ip
 	alias Tu_host.no-ip.org
-El perido de actualización en segundos:
+El periodo de actualización en segundos:
 	period 600
 Si existen errores se mostrarán la lanzar:
 # inadyn
