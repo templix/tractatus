@@ -18933,6 +18933,17 @@ zmore
 Pagina la visualización de un fichero comprimido (Ver more)
 
 
+Zswap
+Módulo del kernel con la función principal de evitar la paginación en disco incrementando el rendimiento del sistema. Para activar este módulo se precisa una partición Swap y que la versión de kernel sea como mínimo la 3.11.
+# nano /etc/default/grub
+Y añadir la opción "zswap.enabled" en la linea:
+GRUB_CMDLINE_LINUX_DEFAULT="quiet zswap.enabled=1"
+Actualizar grup:
+# update-grub
+Una vez reiniciado comprobar su funcionamiento con:
+$ dmesg | grep zswap
+
+
 zypper
 Gestor de paquetes de opensuse (rpm)
 # zypper (Generar una lista de paquetes instalados)
