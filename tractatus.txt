@@ -16270,6 +16270,13 @@ Permite seguir la pista de un paquete desde un host a otro.
 # traceroute www.tuxapuntes.com
 
 
+trans
+[translate-shell] Traducir textos a algunos de los idiomas disponibles via google.
+$ trans -r (Muestra el listado de idiomas disponibles)
+$ cat archivo.txt | trans -b (Traducir un texto. Autodetecta el idioma de entrada y para el de salida usa el del sistema)
+$ trans -b "emacs is fantastic" (Traducir una frase)
+
+
 transmission-remote-cli
 Comando para conectar con un servidor de descargas de transmission y gestionarlo.
 $ transmission-remote-cli (conectar con transmission. Mira los ajustes de .config/transmission-remote-cli/settings.cfg)
