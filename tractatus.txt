@@ -16270,6 +16270,13 @@ Permite seguir la pista de un paquete desde un host a otro.
 # traceroute www.tuxapuntes.com
 
 
+transmission-remote-cli
+Comando para conectar con un servidor de descargas de transmission y gestionarlo.
+$ transmission-remote-cli (conectar con transmission. Mira los ajustes de .config/transmission-remote-cli/settings.cfg)
+$ transmission-remote-cli -f ruta/settings.cfg (especificar ruta fichero configuración)
+$ transmission-remote-cli --create-config (Crea un archivo de configuración de ejemplo dentro de .config/transmission-remote-cli/settings.cfg)
+
+
 trap
 Captura señales del teclado. Permite ejecutar un comando especificado cuando se produce una señal con un determinado valor.
 $ trap -l (Lista todos los valores)
@@ -17253,6 +17260,12 @@ Algunas de la variables globales:
 	$HISTFILE (ruta para el histórico de comandos ejecutados)
 	$UID     (Número de usuario para el sistema)
 	$RANDOM (números aleatorios entre 0 y 32767)
+
+
+vbetool
+Herramienta para apagar y encender la pantalla de un portatil (backlight)
+# vbetool dpms off (Apaga la pantalla)
+# vbetool dpms on (Enciende la pantalla)
 
 
 vdir
