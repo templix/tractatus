@@ -6612,6 +6612,20 @@ Gdrive (google-docs-fs)
 # gmount /media/gdrive cuenta@gmail.com -d (Pedirá contraseña de la cuenta y mostrando la salida del comando. Para desmontar: gumount /media/gdrive)
 
 
+goto
+Ir de un directorio a otro de forma rápida. Descarga e instalación:
+	$ wget -O goto.zip "https://github.com/ankitvad/goto/archive/master.zip"
+	$ unzip goto.zip
+	$ cd goto-master
+	# make install
+	# cp goto /usr/bin
+Uso:
+$ goto s descargas (Guardar el presente directorio con el nombre "descargas")
+$ goto descargas (Ir al dir "descargas")
+$ goto l (Listar los directorios guardados)
+$ goto d descargas (Suprimir el atajo guardado con el nombre "descargas")
+
+
 gpart
 Reparar la tabla de particiones.
 # gpart /dev/sda (escanear el disco)
@@ -15312,6 +15326,8 @@ Muestra/modifica las características del terminal
 $ stty -a  (muestra todas las teclas de control, algunas obsoletas. Las más útiles: ^c [para el comando actual], ^d [final de flujo de entrada], ^u [borrar desde la posición actual al principio de linea] y ^w [borrar desde la posición actual al principio de la palabra])
 $ stty size   (muestra número de columnas y lineas)
 $ stty speed  (velocidad en baudios)
+$ stty -a | sed -e 's/;/\n/g' | grep eof (Ver una en concreto)
+$ stty eof ^F (Modificar la conbinación de teclas de "eof" a Control+f. Por defecto seria Control+D)
 
 
 stumpwm
