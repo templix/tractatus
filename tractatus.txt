@@ -4222,8 +4222,8 @@ Nota.- A partir de la versión emacs-24.4 iswitchb ha sido substituido por ido. 
 	                           "*tramp*"))
 3.-
 Escuchar música con emms.
-Instalar emms en el sistema mediante repositorio y descargar <http://www.gnu.org/software/emms/> , descomprimir y mover el directorio a ~/.emacs.d/l. En .emacs colocar las lineas:
-	(add-to-list 'load-path "~/emms/")
+Instalar emms en el sistema mediante repositorio y descargar <http://ftp.gnu.org/gnu/emms/> , descomprimir y mover el directorio a ~/.emacs.d/. En .emacs colocar las lineas:
+	(add-to-list 'load-path "~/.emacs.d/emms-4.0/")
 	(require 'emms-setup)
 	(emms-standard)
 	(emms-default-players)
@@ -14320,7 +14320,9 @@ tabla de los usuarios estándar SELinux disponibles:
 
 
 sensors-detect
-Detecta, instala y carga sensores y módulos necesarios.
+[lm-sensors]. Monitorizar temperatura y voltage.
+$ sensors
+$ sensors -f (Muestra la temperatura en grados Fahrenheit)
 
 
 seq
