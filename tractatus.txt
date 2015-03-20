@@ -3149,6 +3149,13 @@ Línea de tiempo del proyecto Debian basado en Javascript y HTML: Versiones, bug
 	http://usr/share/debian-timeline/index.html
 
 
+debootstrap
+Instalar un sistema Debian dentro de un directorio de nuestro sistema para hacer pruebas o realizar instalaciones de otra arquitectura diferente.
+# mkdir /mnt/debian-i386/ (Crear el directorio)
+# debootstrap --arch=i386 wheezy /mnt/debian-i386/ http://ftp.debian.org/debian/
+# chroot /mnt/debian-i386 (Entrar en el nuevo sistema. Ver chroot)
+
+
 deborphan
 Visualizar paquetes huerfanos
 $ deborphan --guess-all   (Los muestra todos)
