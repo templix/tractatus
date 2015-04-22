@@ -14270,6 +14270,8 @@ Insertar 1 linea en blanco despues de la primera linea:
 	$ sed '2i\ \' lista
 Insertar 1 linea en blanco despues de la primera linea y de la tercera:
 	$ sed '2i\ \' | sed '4i\ \' lista
+Insertar texto entre una linea y otra. Por ejemplo en la linea 5:
+	$ sed "5i ---\n categories:tractatus\n date: 2015-05-22\n title: res\n ---\n" archivo.txt
 
 
 seeker
