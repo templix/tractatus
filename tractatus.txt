@@ -479,8 +479,12 @@ Y colocar en su interior:
 	deny from all
 	</Files>
 6.-
-Ver total de peticiones a nuestro servidor apache por dirección IP:
+Ver peticiones al servidor apache:
 # cat /var/log/apache2/access.log | awk '{print($1)}' | sort | uniq -c | sort
+# grep "resuming normal operations" /var/log/apache2/error.log | cut -d'[' -f2 | sed -e 's/]//' (La última vez que fué reiniciado)
+# ls -od --time-style=+%d-%m-%Y /proc/$(ps axo pid,cmd | grep apache | head -n 1 | sed -e 's/^ *//' | cut -d' ' -f1) | cut -d' ' -f 5 (otra forma)
+# (cat /var/log/apache2/*.log; zcat /var/log/apache2/*.gz) | grep "resuming normal operations" | cut -d'[' -f2 | sed -e 's/]//' | sort (Todas las veces que fue reiniciado)
+# (cat /var/log/apache2/*.log; zcat /var/log/apache2/*.gz) | grep "resuming normal operations" | wc -l (Cuantas veces se ha reiniciado)
 7.-
 Crear un directorio web privado:
 # nano /etc/apache2/apache2.conf
