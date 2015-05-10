@@ -17078,6 +17078,17 @@ Si al ejecutar lsusb nos muestra un mensaje "unknown device" es preciso actualiz
 # update-usbids
 
 
+upower
+[acpitool] Ver las propiedades de la bateria. Para ver las baterias disponibles en el sistema:
+	$ upower --enumerate
+	/org/freedesktop/UPower/devices/line_power_AC
+        /org/freedesktop/UPower/devices/battery_BAT0
+	/org/freedesktop/UPower/devices/DisplayDevice
+Nota.- /org no es un directorio físico, se tiene que llamar desde upower.
+$ upower -i /org/freedesktop/UPower/devices/battery_BAT0 (la capacidad)
+$ upower -v (Chequeo de la bateria)
+
+
 uptime
 Tiempo transcurrido desde que se arrancó el sistema
 
