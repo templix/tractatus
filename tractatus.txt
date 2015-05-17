@@ -15751,12 +15751,12 @@ $ talk usuario@IP_o_Host (Con un usuario remoto [UNIX])
 
 
 tar
-Empaquetar y comprimir archivos y/o directorios.
+[gzip bzip2 unzip tar unrar] Empaquetar y comprimir archivos y/o directorios.
 $ tar -cf archivo.tar dir (Crear paquete .tar)
 $ tar -xf archivo.tar (Descomprimir un .tar)
 $ tar -tf archivo.tar (Listar contenido)
 $ tar -cf archivo.tar.gz dir (Crear paquete tar.gz)
-$ tar -zf archive.tar.gz (Descomprimir paquete gzip)
+$ tar -xf archive.tar.gz (Descomprimir un tar.gz)
 $ tar -cf archivo.tgz dir (Crear paquete .tgz)
 $ tar -xf archivo.tgz (Descomprimir un .tgz)
 $ tar -tf archivo.tgz (Listar contenido)
@@ -15768,13 +15768,13 @@ $ tar -tf archivo.tbz (Ver contenido)
 $ tar -cf archivo.tar.bz2 dir (Crear paquete .tar.bz2)
 $ tar -xf archivo.tar.bz2 (Descomprimir archivo .tar.bz2)
 Opciones:
-	-z (Comprimir archivos usando gzip)
+	-z (Comprimir/descomprimir usando gzip)
 	-c (Crear un nuevo archivo)
 	-v (mostrar proceso)
 	-f (archivo (nombre de archivo)
 	-x (extraer el contenido del archivo comprimido)
 	-t (listar contenido de un archivo)
-	-j  (comprime el fichero tar con bzip2)
+	-j  (comprimir/descomprimir con bzip2)
 Otros casos:
 $ tar -cf - file/ | gpg -c > file.cript (empaquetar y encriptar un archivo)
 $ tar -c ficheros | bzip2 > archivo.tar.bz2 (Empaquetar ficheros y comprimir)
