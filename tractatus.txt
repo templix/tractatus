@@ -13764,6 +13764,10 @@ Para que los valores se obtengan del gestor de paquetes correspondiente:
 Y descomentar y modificar la linea PKGMGR:
 PKGMGR=DPKG
 Nota.- Otras opciones para distros no debian o para desactivar la opción: RPM, BSD,SOLARIS y NONE
+5.-
+Para evitar la nota: Warning: Suspicious file types found in /dev... añadir a /etc/rkhunter.conf la linea:
+	ALLOWDEVFILE=/dev/.../*
+Nota.- Substituir los puntos supensivos por el subdirectorio oportuno.
 
 
 rkill
