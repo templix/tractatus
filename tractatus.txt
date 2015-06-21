@@ -15174,6 +15174,12 @@ $ ssh -R 10000:localhost:22 usuario2@host2 (lanzado desde host1 hacia host2 crea
 $ ssh usuario2@host2 (Lanzado desde host3 hacia host2)
 Una vez entrado en host2, lanzar:
 $ ssh usuario1@localhost -p 10000 (Para conectar el host3 con el host1)
+Otro caso de tunel inverso:
+host1 no tiene acceso al router y lanza:
+$ ssh -N usuario@host2 -R 2222:127.0.0.1:22 (hacia el host2 para crear un tunel por el puerto 2222)
+$ ssh usuario@host2 (Usuario host3 se conecta a host2)
+$ ssh usuario@127.0.0.1 -p 2222 (Y una vez entrado en host2 se conecta por el tunel a host1)
+Nota.- Si host2 no corriera por el puerto 22 substituir por: usuario@host2 -p PUERTO
 4.-
 Crear clave publica para acceder a un remoto sin que pida identificación:
 $ ssh-keygen -b 4096 -t rsa  (Crear la clave)
