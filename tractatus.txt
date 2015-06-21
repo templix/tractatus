@@ -3525,6 +3525,13 @@ Muestra el nombre del dominio DNS del sistema.
 $ dnsdomainname
 
 
+dnsenum
+[cpanminus libnet-dns-perl libnet-netmask-perl libxml-writer-perl]. Herramienta diseñada con el propósito de consultar los servidores DNS de un dominio. Descarga: <https://github.com/fwaeytens/dnsenum> . Previamente lanzar:
+# cpanm String::Random
+# perl dnsenum.pl URL
+# perl dnsenum.pl --noreverse -o resultado.xml URL (Evitar operaciones de búsqueda inversa y guardando el resultado en un fichero)
+
+
 dnsmap
 Herramienta que, mediante fuerza bruta, permite obtener los subdominios de un dominio.
 $ dnsmap url (forma básica)
@@ -15568,6 +15575,11 @@ Para que al entrar un contraseña en la terminal aparezcan asterisco:
 En la linea: Defaults env_reset
 Añadir "pwfeedback" dejándola:
 Defaults env_reset , pwfeedback
+
+
+sudoedit
+Ejecutar un comando como otro usuario (ver sudo)
+$ sudoedit -u root /etc/sudoers
 
 
 sudosh
