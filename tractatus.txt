@@ -5534,6 +5534,12 @@ $ findmnt -m (en /etc/mtab)
 $ findmnt -l (Lista todos los archivos de sitema)
 
 
+findmyhash
+Busca hashes de contraseñas en diferentes servicios web gratuitos para tratar de romperlos. Descarga <https://code.google.com/p/findmyhash/downloads/list>
+$ python findmyhash.py MD5 -h "098f6bcd4621d373cade4e832627b4f6"
+$ python findmyhash.py SHA224 -h "e98da241a4504c5e52f0ef06f87a7598e7db22e1579326441fe7aa50"
+
+
 findsmb
 Busca máquinas en la red que respondan al protocolo samba.
 $ findsmb -r
@@ -7071,7 +7077,7 @@ Otras opciones:
 
 
 hash-identifier
-Identifica la encriptación de un hash. Descarga: <https://code.google.com/p/hash-identifier/>
+Se le especifica un hash y la herramienta lo estudia y muestra el tipo más probable que podría ser [Possible Hashs] y los menos probables [Least Possible Hashs]. Descarga: <https://code.google.com/p/hash-identifier/downloads/list>
 $ python Hash_ID_v1.1.py
 Cuando sale el promt pastear el hash:
 HASH: caf90169eefa5f807d577486b9f795ab86ae2983c5c20806cff959117e90af18
@@ -7088,6 +7094,14 @@ HASH: caf90169eefa5f807d577486b9f795ab86ae2983c5c20806cff959117e90af18
 	[+]  SNEFRU-256(HMAC)
 	[+]  SHA-256(md5($pass))
 	[+]  SHA-256(sha1($pass))
+
+
+hashalot
+Entrar una frase y muestra su hash. Soporta: ripemd160, rmd160, rmd160compat, sha256, sha384 y sha512
+$ hashalot -x -q sha256 (En binario [x])
+	Enter passphrase:
+	c9168d9f82c8d04dcaea564c9dfbdd4924b26cfec589e739fdac346af936a542
+Nota.- la frase entrada y que no se muestra en el prompt es: linux es genial
 
 
 hashtag
