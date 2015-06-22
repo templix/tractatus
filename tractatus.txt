@@ -5528,10 +5528,12 @@ $ findfs LABEL=datos
 
 
 findmnt
-Busca sistemas de archivos.
+Muestra una lista de sistemas de archivos montados.
+$ findmnt -A (En forma de arbol)
 $ findmnt -s (en /etc/fstab)
+$ findmnt -s -t ext4 (Especificando una extensión concreta)
 $ findmnt -m (en /etc/mtab)
-$ findmnt -l (Lista todos los archivos de sitema)
+$ findmnt -l (Los muestra como lista)
 
 
 findmyhash
