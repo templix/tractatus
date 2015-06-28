@@ -4636,6 +4636,25 @@ Algunos atajos:
 	& (abrir la URL actual en un navegador web externo)
 	v (ver código fuente. Se copia en un buffer nuevo y se activa html-mode si está disponible)
 28.-
+Sincronizar los marcadores de firefox con emacs:
+Para guardar los marcadores de firefox al pulsar una combinación de teclas en un fichero org de emacs y, simultaneamente, que el navegador interprete dicho fichero como enlaces clicables precisamos insalar dos plugins en firefox:
+     Org capture: http://chadok.info/firefox-org-capture/
+     Linkification: http://yellow5.us/firefox/linkification/
+Dejar visible la barra de marcadores (View -> Toolbars -> Bookmarks toolbar) y clicar sobre ella con el botón derecho, "Añadir dirección de interes" (Bookmarks toolbar), en "nombre" colocar el que se quiera, yo tengo Org_marcadores y en "ubicación" la ruta en la que queremos guardar el archivo de bookmarks: file:///home/usuario/.emacs.d/org/bookmarks.org o si hemos de sincronizar varios equipos, en dropbox: file:////home/usuario/Dropbox/org/bookmarks.org. Desactivar la casilla "Cargar este marcador en la barra lateral".
+Luego, indicar el atajo para guardar los bookmarks en firefox y qué aplicacion usaremos para llamar a emacs:
+"Herramientas" -> "Complementos" -> "Org mode capture" -> "Preferéncias", indicar en "emacsclient" la ruta al ejecutable "/usr/bin/emacsclient" y como "hotkey" el valor de "alt-r"
+Y para terminar añadir al archivo de configuración .emacs las lineas:
+  ;;; Bookmarks pulsando M-r en firefox colocará en el archivo mencionado
+  ;;; la url(%l), pequeña descripción(%c) y fecha(%t)
+  (server-start)
+  (require 'org-protocol)
+  (setq org-capture-templates
+      (quote (("f" "Firefox" entry (file "/home/pep/.emacs.d/org/bookmarks.org")
+                    "* %l %c %t\n")
+              )))
+Un listado de como usar los templates (%l, %c, %t...) en: https://www.gnu.org/software/emacs/manual/html_node/org/Template-expansion.html#Template-expansion
+Proceso: Con emacs abierto como servidor o lanzando desde el propio emacs M-x server-start, vamos a firefox y, estando en una página que queremos añadir a marcadores, pulsamos Alt-r. Se abrirá una ventana de emacs preguntando como queremos guardar el link y pulsamos "f" (firefox) ya continuación C-c C-c. Cerramos la ventana. Podemos acceder a los marcadores ya sea desde las direcciones de interés del navegador o desde el archivo .emacs.d/org/bookmarks.org de emacs.
+29.-
 Otros ajustes que pueden incorporarse a .emacs precedidas con la explicación comentada:
 	;;Mostrar consola al pulsar F5:
 	(global-set-key (kbd "<f5>") 'eshell)
@@ -4682,7 +4701,7 @@ Otros ajustes que pueden incorporarse a .emacs precedidas con la explicación co
 	(insert (format "%s" system-name)))
 	;; Listar y posibilidad de abrir un buffer cerrado anteriormente
 	(require 'recentf)
-29.-
+30.-
 Uso de algunos paquetes:
 lorem-ipsum.- Coloca sentencias o párrafos en un archivo de texto:
 C-u 10 M-x lorem-ipsum-insert-paragraphs (Insertar 10 párrafos)
