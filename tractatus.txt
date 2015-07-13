@@ -10587,7 +10587,7 @@ muestra estadísticas relacionadas con la CPU.
 
 mrename
 Añade un prefijo al nombre del archivo
-$ mrename '*.mp3' vacaciones -m  (sustituye los originales)
+vvv$ mrename '*.mp3' vacaciones -m  (sustituye los originales)
 $ mrename '*.mp3' vacaciones -c  (los copia con el prefijo)
 
 
@@ -16915,7 +16915,8 @@ Y en el parámetro maxlogins modificamos el número que deseemos:
 
 umask
 Fija los permisos de un fichero o directorio. Los permisos base para los directorios son 0777 (rwxrwxrwx) y para los archivos 0666 (rw-rw-rw-). Por tanto la cifra que proporciona umask ha de restarse de estos importes para conocer los permisos reales:
-$ umask (muestra permisos actuales. Normalmente 0022 por tanto los permisos reales son 755 para directorios y 644 para ficheros)
+$ umask (muestra permisos actuale en octals. Normalmente 0022 por tanto los permisos reales son 755 para directorios y 644 para ficheros)
+$ umask -S (muestra los permisos en notación simbolica)
 Ejemplo:
 	$ touch archivo.txt
 	$ mkdir dir
