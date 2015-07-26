@@ -12375,6 +12375,12 @@ $ parallel -- who pwd "echo ++++++++++++++++++"
 $ parallel sh -c "echo linux es genial; sleep 2; echo ... o no" -- n 2 (dos veces)
 
 
+partclone
+Software diseñado para realizar backups y restauración de particiones. Realizar las operaciones sobre particiones no montadas.
+$ partclone.ext4 -c -d -s /dev/sda1 -o ~/imagen.img (Crear la imagen de sda1)
+$ partclone.ext4 -r -d -s ~/imagen.img /dev/sda1 (Restaurar la imagen sobre la particion sda1)
+
+
 partprobe
 Releer la tabla de particiones después de alguna modificación en ella, sin necesidad de reiniciar.
 # partprobe
