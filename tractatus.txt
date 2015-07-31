@@ -7912,6 +7912,8 @@ $ ip n  (MAC e IP del router)
 $ ip link set dev eth1 address 00:03:44:88:00:11 (Modificdar la MAC. Previamente bajar la red)
 $ ip route del default (Eliminar puerta de enlace para crear una nueva)
 $ ip route add default via 192.168.1.10 (Crear nueva puerta de enlace)
+$ ip route add 192.168.1.53 via 192.168.0.33 (redirigir un pc a otro)
+$ ip route add 192.168.1.0/24 via 192.168.0.33 (redirigir una red a un pc)
 $ ip -f inet addr show eth0 (información de la dirección ip)
 $ ip route add 192.168.2.0/24 via 192.168.1.10 (Añadir una red a una puerta de enlace)
 Nota.- Verificar que /etc/resolv contenga una linea con el servidor DNS tipo: nameserver 8.8.8.8 [para las DNS de google]
@@ -13895,10 +13897,10 @@ route
 Para saber la IP del router
 $ route -n
 $ route add default gw 192.168.1.50 (Establecer los protocolos de conexión después de levantar una red manualmente con ifconfig)
-# ip route add 192.168.1.53 via 192.168.0.33 (redirigir un pc a otro)
-# ip route add 192.168.1.0/24 via 192.168.0.33 (redirigir una red a un pc)
 # route add --host 192.168.0.12 eth0 (agregar un host a una tabla de enrutamiento)
 # route add -host IP reject (Rechaza la conexión de una ip en concreto)
+$ route del -net 0.0.0.0 netmask 0.0.0.0 gw 192.168.1.10 (Eliminar una puerta de enlace)
+$ route add -net 0.0.0.0 netmask 0.0.0.0 gw 192.168.1.1 (Crear una nueva puerta de enlace)
 
 
 routef
