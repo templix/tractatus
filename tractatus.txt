@@ -13429,6 +13429,15 @@ Herramientas para extraer metadatos de imagenes. Soporta 32 formatos distintos d
 $ hachoir-metadata imagen
 
 
+qpdf
+Programa para analizar y modificar la estructura de los archivos PDF.
+# qpdf --decrypt protegido.pdf salida.pdf (eliminar toda la información relativa al cifrado)
+# qpdf --show-encryption test.pdf (Ver el tipo de seguridad y cifrado utilizado)
+# qpdf --empty --pages entrada.pdf 1-5 -- salida.pdf (Extraer las primeras cinco hojas de un documento)
+# qpdf --empty --pages entrada.pdf z-1 -- salida.pdf (Reordenar las páginas de un documento en orden inverso)
+# qpdf --empty --pages doc1.pdf 1-z doc2.pdf 1-6 -- salida.pdf (Unir todo un documento con las 6 primeras páginas de otro)
+
+
 qrencode
 Codifica datos de entrada en código QR y los guarda en una imatgen png.
 $ qrencode -o output.png 'linux es genial'
@@ -13894,7 +13903,7 @@ Aspecto que puede presentar un archivo robots.txt:
 
 
 route
-Para saber la IP del router
+Mostrar/manipular la tabla de enrutamiento ip.
 $ route -n
 $ route add default gw 192.168.1.50 (Establecer los protocolos de conexión después de levantar una red manualmente con ifconfig)
 # route add --host 192.168.0.12 eth0 (agregar un host a una tabla de enrutamiento)
