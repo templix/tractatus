@@ -7312,10 +7312,21 @@ $ hostid
 
 
 hostname
-Mostrar el nombre de ...
+Mostrar/modificar el hostname.
 $ hostname -a (el alias de la maquina)
 $ hostname -i (la IP del ordenador)
 $ hostname -s (el nombre de la maquina)
+1.-
+Pasos para modificar el hostname:
+# nano /etc/hosts
+Y modificar la segunda linea:
+127.0.0.1       localhost
+127.0.1.1       nuevo_nombre
+# nano /etc/hostname
+Suprimir el nombre existente por nuevo_nombre
+Lanzar el comando:
+# hostname nuevo_nombre
+Reiniciar.
 
 
 hosts
