@@ -4656,7 +4656,14 @@ Y para terminar añadir al archivo de configuración .emacs las lineas:
 Un listado de como usar los templates (%l, %c, %t...) en: https://www.gnu.org/software/emacs/manual/html_node/org/Template-expansion.html#Template-expansion
 Proceso: Con emacs abierto como servidor o lanzando desde el propio emacs M-x server-start, vamos a firefox y, estando en una página que queremos añadir a marcadores, pulsamos Alt-r. Se abrirá una ventana de emacs preguntando como queremos guardar el link y pulsamos "f" (firefox) ya continuación C-c C-c. Cerramos la ventana. Podemos acceder a los marcadores ya sea desde las direcciones de interés del navegador o desde el archivo .emacs.d/org/bookmarks.org de emacs.
 29.-
-Otros ajustes que pueden incorporarse a .emacs precedidas con la explicación comentada:
+Algunos notas sonre git: magit
+	M-x magit-status (Acceso a magit para activar los siguientes atajos)
+	s (Organizar archivos)
+	cc (escribir el mensaje del commit. Una vez entrado el texto con C-c C-c para el commit)
+	PP (git push [M-x magit-push-current])
+	FF (git pull [M-x magit-pull-current])
+	ll (git log [M-x magit-log-current])
+30.-Otros ajustes que pueden incorporarse a .emacs precedidas con la explicación comentada:
 	;;Mostrar consola al pulsar F5:
 	(global-set-key (kbd "<f5>") 'eshell)
 	;;Especificar número de espacios en las tabulaciones.
@@ -4702,7 +4709,7 @@ Otros ajustes que pueden incorporarse a .emacs precedidas con la explicación co
 	(insert (format "%s" system-name)))
 	;; Listar y posibilidad de abrir un buffer cerrado anteriormente
 	(require 'recentf)
-30.-
+31.-
 Uso de algunos paquetes:
 lorem-ipsum.- Coloca sentencias o párrafos en un archivo de texto:
 C-u 10 M-x lorem-ipsum-insert-paragraphs (Insertar 10 párrafos)
