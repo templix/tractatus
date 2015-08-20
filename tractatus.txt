@@ -9891,7 +9891,8 @@ $ mencoder -idx video_corrupto.avi -ovc copy -oac copy -o video_reparado.avi (Re
 $ mencoder -endpos 00:00:23 -ovc copy -oac copy entrada.avi -o salida.avi (Guardar los primeros 23 segundos de un video)
 $ mencoder -ss 00:00:02 -oac copy -ovc copy entrada.avi -o salida.avi (desechar los primeros 2 segundos de un video)
 $ mencoder -oac copy -ovc copy -o resultado.avi *.avi (Unir todos los .avi de un directorio en un video "resultado.avi")
-
+	-ovc copy (Se utilizará la misma codificación de video que en el original)
+	-oac copy (Se utilizará la misma codificación de audio que en el original)
 
 mesg
 Controla el acceso a la terminal por otros usuarios. Se utiliza para permitir o rechazar que otros usuarios escriban mensajes a la propia terminal
