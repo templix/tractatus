@@ -15821,6 +15821,11 @@ Para incorporar el arranque a grub2, modificar del archivo:
 # nano /etc/default/grub
 La linea:
 	GRUB_CMDLINE_LINUX_DEFAULT="quiet init=/bin/systemd"
+2.-
+Para que al bajar la tapa de un portatil el sistema no se supenda.
+# nano /etc/systemd/logind.conf
+Y modificar la linea:
+	HandleLidSwitch=ignore
 
 
 systemd-analyze
