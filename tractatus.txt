@@ -4650,14 +4650,14 @@ Dejar visible la barra de marcadores (View -> Toolbars -> Bookmarks toolbar) y c
 Luego, indicar el atajo para guardar los bookmarks en firefox y qué aplicacion usaremos para llamar a emacs:
 "Herramientas" -> "Complementos" -> "Org mode capture" -> "Preferéncias", indicar en "emacsclient" la ruta al ejecutable "/usr/bin/emacsclient" y como "hotkey" el valor de "alt-r"
 Y para terminar añadir al archivo de configuración .emacs las lineas:
-  ;;; Bookmarks pulsando M-r en firefox colocará en el archivo mencionado
-  ;;; la url(%l), pequeña descripción(%c) y fecha(%t)
-  (server-start)
-  (require 'org-protocol)
-  (setq org-capture-templates
-      (quote (("f" "Firefox" entry (file "/home/pep/.emacs.d/org/bookmarks.org")
-                    "* %l %c %t\n")
-              )))
+	;;; Bookmarks pulsando M-r en firefox colocará en el archivo mencionado
+	;;; la url(%l), pequeña descripción(%c) y fecha(%t)
+	(server-start)
+	(require 'org-protocol)
+	(setq org-capture-templates
+	(quote (("f" "Firefox" entry (file "/home/pep/.emacs.d/org/bookmarks.org")
+	         "* %l %c %t\n")
+	       )))
 Un listado de como usar los templates (%l, %c, %t...) en: https://www.gnu.org/software/emacs/manual/html_node/org/Template-expansion.html#Template-expansion
 Proceso: Con emacs abierto como servidor o lanzando desde el propio emacs M-x server-start, vamos a firefox y, estando en una página que queremos añadir a marcadores, pulsamos Alt-r. Se abrirá una ventana de emacs preguntando como queremos guardar el link y pulsamos "f" (firefox) ya continuación C-c C-c. Cerramos la ventana. Podemos acceder a los marcadores ya sea desde las direcciones de interés del navegador o desde el archivo .emacs.d/org/bookmarks.org de emacs.
 29.-
@@ -4669,6 +4669,33 @@ Algunos notas sobre git: magit
 	FF (git pull [M-x magit-pull-current])
 	ll (git log [M-x magit-log-current])
 30.-
+elfeed, lector de noticias
+elfeed-load-opml (Importar un archivo de feeds. El contenido se coloca en el archivo de configuración .emacs)
+	G (actualizar fuentes)
+	r (Marcar noticia como leída)
+	u (Marcar noticia como no leída)
+	REF (Abrir noticia en el buffer)
+	b (Abrir noticia en el navegador por defecto)
+Ejemplo de entradas:
+	(setq elfeed-feeds
+	  '("http://xiquetam.blogspot.com/feeds/posts/default"
+		"http://www.genbeta.com/atom.xml"
+		"http://www.linux-party.com/backend.php"
+		"http://www.theinquirer.es/feed/atom"
+		;; más entradas
+		))
+Aguardar respuesta del host 30 segundos:
+	 (setf url-queue-timeout 30)
+Modificar ciertas variables de color si no se visualizan bien:
+	  (custom-set-faces
+	   '(elfeed-search-date-face ((t (:background "black" :foreground "white"))))
+	   '(elfeed-asearch-date-format (quote ("%d-%m-%Y" 10 :left)))
+	   '(elfeed-search-feed-face ((t (:background "black" :foreground "white"))))
+	   '(elfeed-search-title-face ((t (:background "black" :foreground "white")))))
+Aumentar el espació para los titulares. Por defecto 70
+	(custom-set-variables
+	  '(elfeed-search-title-max-width 130))
+31.-
 Otros ajustes que pueden incorporarse a .emacs precedidas con la explicación comentada:
 	;;Mostrar consola al pulsar F5:
 	(global-set-key (kbd "<f5>") 'eshell)
@@ -4715,7 +4742,7 @@ Otros ajustes que pueden incorporarse a .emacs precedidas con la explicación co
 	(insert (format "%s" system-name)))
 	;; Listar y posibilidad de abrir un buffer cerrado anteriormente
 	(require 'recentf)
-31.-
+32.-
 Uso de algunos paquetes:
 lorem-ipsum.- Coloca sentencias o párrafos en un archivo de texto:
 C-u 10 M-x lorem-ipsum-insert-paragraphs (Insertar 10 párrafos)
@@ -9895,6 +9922,7 @@ $ mencoder -oac copy -ovc copy -o resultado.avi *.avi (Unir todos los .avi de un
 	-ovc copy (Se utilizará la misma codificación de video que en el original)
 	-oac copy (Se utilizará la misma codificación de audio que en el original)
 
+
 mesg
 Controla el acceso a la terminal por otros usuarios. Se utiliza para permitir o rechazar que otros usuarios escriban mensajes a la propia terminal
 $ mesg y   (autoriza)
@@ -14763,9 +14791,9 @@ $ shred -u -z -n 20 archivo.txt  (suprime un archivo y reescribe el espacio 20 v
 
 
 shuf
-Genera numeros aleatorio y muestra lineas de archivo de fiorma aleatoria.
+Genera numeros aleatorio y muestra lineas de archivo de forma aleatoria.
 $ shuf -n 4 /etc/fstab -o archivo (Muestra 4 lineas aleatorias del archivo y manda el resultado a "archivo")
-$ shuf -i 1-49 -n 6 (para la loto. Nñumeros aleatorios de 1 al 49 y que muestre 6)
+$ shuf -i 1-49 -n 6 (para la loto. Numeros aleatorios de 1 al 49 y que muestre 6)
 -i [x-y]  rango de números
 -n   Cantidad de numeros a visualizar
 
