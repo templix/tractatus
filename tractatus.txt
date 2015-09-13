@@ -9934,6 +9934,30 @@ $ mesg y   (autoriza)
 $ mesg n   (desautoriza)
 
 
+metacaracteres
+Son caracteres especiales de puntuación entre órdenes. Sirven para combinar varias órdenes con el objetivo de construir una única orden lógica. Ver tuberias.
+Separador entre ordenes que se ejecutan secuencialmente: ;
+	$ date ; who
+Separador de ordenes que forman parte de un cauce [pipe] La salida de la orden de la izquierda del separador es la entrada de la orden de la derecha: |
+	$ date | wc
+Posibilita escribir líneas de órdenes en varias líneas: \
+	$ date \
+	> | wc ; who
+Aislan ordenes separadas por ; o | y se ejecutan como una única orden: ()
+	$ (date | who) | wc
+Crea un bloque de código ejecutado en el propio interprete: {}
+	$ ls {*txt,*sh}
+Indica que ejecuta un trabajo en segundo plano [background] liberando la terminal donde se ha lanzado: &
+	$ gedit &
+Sólo se ejecuta la siguiente orden si la primera falla [OR]: ||
+	$ ld || date
+	ld: no input files
+	dg set 13 12:43:05 CEST 2015
+Sólo se ejecuta la siguiente orden si la primera tiene exito [AND]: &&
+	$ ld && date
+	ld: no input files
+
+
 metacity
 gestor de ventanas
 $ metacity --replace (activar metacity)
