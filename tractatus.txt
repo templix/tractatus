@@ -8814,6 +8814,15 @@ lckdo
 [moreutils]. Bloquea la ejecución de un programa con el fin de evitar que otros procesos se ejecuten en paralelo. Se utiliza como nice [ver] y nohup [ver]
 
 
+ld-linux
+Libreria que permite ejecutar binarios del sistema sin permiso de ejecución siempre que tengan activado el permiso de lectura. Según se trate de 32 bits o 64, la libreria será: /lib/ld-linux.so.2 o /lib64/ld-linux-x86-64.so.2. Solo funciona con binarios no con scripts.
+	# chmod -x /bin/ls
+	# ls
+	bash: /bin/ls: permiso denegado
+	# /lib64/ld-linux-x86-64.so.2 /bin/ls
+	a.jpg  b.jpg  captures  guia-sed.pdf ...
+
+
 ldd
 Para conocer las librerias compartidas que usa una aplicación.
 $ ldd /usr/bin/amarok
