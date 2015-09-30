@@ -4176,14 +4176,11 @@ Varios:
 	C-x C-- (Disminuir la fuente)
 	C-x z z z (Repite el último comando tantas veces como "zetas" pongamos. En este caso 3 veces )
 	& (Teniendo el cursor sobre un archivo en dired, permitirá entrar una aplicación para abrirla)
-	C-o (Inserta lineas en blanco)
 	C-x C-o (Sólo deja una linea en blanco)
-	C-c f (Con el cursor sobre una url la abre en el navegador por defecto)
 Entrar comandos de shell e insertar:
 	C-z (Suspende la sesion emacs y entra en la shell. Volver a emacs con fg o con %emacs)
 	M-! (Muestra en el mini buffer un mensaje para entrar un comando y lo abre un una ventana)
 	C-u M-! (Inserta la salida del comando en la posición del cursor)
-	M-x shell (Salir a la shell. C-x k para volver a edición)
 	C-x i (Insertar archivo en la posición del cursor)
 	C-c C-l (Mostrar historial de comandos)
 	C-u M-x eshell (Lanzar otra eshell cuando ya existe una)
@@ -4702,6 +4699,12 @@ Aumentar el espació para los titulares. Por defecto 70
 	(custom-set-variables
 	  '(elfeed-search-title-max-width 130))
 31.-
+Utilidades de red nativas de emacs (M-x ...)
+ifconfig, ipconfig, iwconfig, netstat, arp, route, traceroute, ping, nslookup-host, nslookup, dns-lookup-host, run-dig, dig, ftp, smbclient, smbclient-list-shares,
+finger, whois y whois-reverse-lookup
+No es necesario ajustes especiales en .emacs, pero puede personalizarse algún aspecto, por ejemplo que ping solo mande 3 paquetes:
+	(setq ping-program-options '("-c" "3"))
+32.-
 Otros ajustes que pueden incorporarse a .emacs precedidas con la explicación comentada:
 	;;Mostrar consola al pulsar F5:
 	(global-set-key (kbd "<f5>") 'eshell)
@@ -4748,7 +4751,7 @@ Otros ajustes que pueden incorporarse a .emacs precedidas con la explicación co
 	(insert (format "%s" system-name)))
 	;; Listar y posibilidad de abrir un buffer cerrado anteriormente
 	(require 'recentf)
-32.-
+33.-
 Uso de algunos paquetes:
 lorem-ipsum.- Coloca sentencias o párrafos en un archivo de texto:
 C-u 10 M-x lorem-ipsum-insert-paragraphs (Insertar 10 párrafos)
