@@ -4705,6 +4705,13 @@ finger, whois y whois-reverse-lookup
 No es necesario ajustes especiales en .emacs, pero puede personalizarse algún aspecto, por ejemplo que ping solo mande 3 paquetes:
 	(setq ping-program-options '("-c" "3"))
 32.-
+imptient-mode
+Permite mostrar los contenidos del búfer en una página web que se actualiza automáticamente cuando se realizan cambios.
+	M-x httpd-start (Arranca el servidor)
+Colocarse en el buffer que quiere compartirse y:
+	M-x impatient-mode
+En cualquier ordenador de la red se accede al buffer con la dirección: http://IP_o_host:8080/imp/
+33.-
 Otros ajustes que pueden incorporarse a .emacs precedidas con la explicación comentada:
 	;;Mostrar consola al pulsar F5:
 	(global-set-key (kbd "<f5>") 'eshell)
@@ -4751,7 +4758,7 @@ Otros ajustes que pueden incorporarse a .emacs precedidas con la explicación co
 	(insert (format "%s" system-name)))
 	;; Listar y posibilidad de abrir un buffer cerrado anteriormente
 	(require 'recentf)
-33.-
+34.-
 Uso de algunos paquetes:
 lorem-ipsum.- Coloca sentencias o párrafos en un archivo de texto:
 C-u 10 M-x lorem-ipsum-insert-paragraphs (Insertar 10 párrafos)
