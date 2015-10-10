@@ -3706,6 +3706,10 @@ Otro modo de suprimir archivos de configuración huerfanos (rc):
 Añadir arquitectura 386 a una máquina amd64 para permitir instalar paquetes sólo disponibles para aquella arquitectura:
 # dpkg --add-architecture i386
 # apt-get update
+6.-
+Limpiar paquetes obsoletos:
+# dpkg -l | grep -i ^rc (Para visualizarlos)
+# dpkg -l |grep -i ^rc | cut -d " " -f 3 | xargs dpkg --purge (Para eliminarlos)
 
 
 driftnet
@@ -3796,6 +3800,12 @@ Algunos atajos:
 	r (Si existe, va a los relacionados)
 	s (Si existe, va al enlace sugerido
 	t (Va al inicio de la página)
+
+
+duff
+Buscar archivos duplicados.
+$ duff -a (De forma recursiva en todo el presente directorio)
+$ duff -r Documentos (Especificando un directorio)
 
 
 dump
