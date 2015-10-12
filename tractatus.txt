@@ -13975,6 +13975,11 @@ $ rm -f           (Fuerza eliminación incluso si existen ficheros que no existe
 $ find . -type f -empty -exec rm {} \;  (Elimina todos los archivos vacios de un directorio)
 $ rm !(*.txt)  (Eliminar todos los archivos menos los .txt)
 $ rm !(tuto+([1-9]) (Borrar los ficheros excepto del tuto1 al tuto9
+1.-
+Para que todo lo eliminado con el comando rm vaya a la papelera del sistema:
+$ nano .bashrc
+Y añadimos el alias:
+alias rm='mv -t ~/.local/share/Trash/files'
 
 
 rmdir
