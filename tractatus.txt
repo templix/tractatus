@@ -5607,6 +5607,7 @@ $ find . -name \*.txt -exec sed -i "s/cosa/casa/g" {} \; (Substituir “cosa” 
 $ find ~/ -depth -type f -empty (Buscar archivos vacios. Con -type d buscará directorios vacios)
 $ find / -name "algo" -a ! -path "/media/servidor/*" -exec echo {} \; 2>/dev/null (Buscar "algo" descartando el directorio /media/servidor/)
 $ find /home/usuario -iname '*.odt' -exec cp '{}' /home/usuario/Documentos \; (Copiar todos los odt a la carpeta Documentos)
+$ find . -type f -amin -5 ! -path "./.*" (Buscar ficheros modificados los últimos 5 minutos descartando los ocultos)
 
 
 findfs
