@@ -7237,6 +7237,11 @@ El parámetro que indica si tenemos APM y la frecuencia de ciclo de carga-descar
 Advanced power management level: 128
 # smartctl -a /dev/sda | egrep 'ID|Load_Cycle'(El parámetro RAW_VALUE indica la  cantidad de ciclos que el HD ha consumido. La cantidad de ciclos oscila entre 300000 y 600000 por HD)
 # hdparm -B 254 /dev/sda (Disminuir la frecuencia de los ciclos a mínimo. El valor máximo sería 1 y desactivado 255)
+2.-
+Minimizar el ruido del disco duro:
+# hdparm -I /dev/sda |grep acoustic
+Muestra el valor recomendado y el valor actual. Si vemos que el recomendado es menor que el valor actual podemos modificarlo con:
+# hdparm -M (VALOR RECOMENDADO) /dev/sda
 
 
 head
