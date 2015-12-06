@@ -11671,6 +11671,15 @@ Con scripts
 # nmap --script ssh-hostkey --script-args ssh_hostkey=full host
 # nmap --script ssh-hostkey --script-args ssh_hostkey=all host
 # nmap -sV -sC --script-args ftp-anon.maxlist=-1 IP (Comprueba si un servidor ftp permite conexiones anónimas. El "-1" para desactivar el límite de 20 archivos)
+1.-
+Fortificando nmap con los scripts vulcan
+modulo que permite volver a NMAP en un escaneador de vulnerabilidades haciendo uso de un base de datos en formato .csv. Dichos csv son los siguientes: scipvuldb.csv (http://www.scip.ch/en/?vuldb), cve.csv (http://cve.mitre.org), osvdb.csv (http://www.osvdb.org), securityfocus.csv (http://www.securityfocus.com/bid/), securitytracker.csv (http://www.securitytracker.com), xforce.csv (http://xforce.iss.net), exploitdb.csv (http://www.exploit-db.com) y openvas.csv (http://www.openvas.org). Descargar vulcan de http://www.computec.ch/projekte/vulscan/ y descomprimir el tar.gz. En la carpta vulcan tendremos las bases de datos en formato cvs y un script nse. El nse lo colocamos con el resto de scripts de nmap en /usr/share/nmap/scripts/ y el resto de la carpeta vulcan la mevemos al mismo directorio d scripts:
+# mv vulcan/vulscan.nse /usr/share/nmap/scripts/
+# mv vulcan /usr/share/nmap/scripts/
+Algunas formas de uso:
+# nmap -sV --script=vulscan HOST (Comprobará todas las listas de vulnerabilidades))
+# nmap -sV --script-args vulscandb=exploitdb HOST -p 80 (Usando una base de datos concreta contra un puerto)
+Nota.- las bases de datos están completamente desactualizadas.
 
 
 nmblookup
