@@ -14528,6 +14528,9 @@ Insertar 1 linea en blanco despues de la primera linea y de la tercera:
 	$ sed '2i\ \' | sed '4i\ \' lista
 Insertar texto entre una linea y otra. Por ejemplo en la linea 5:
 	$ sed "5i ---\n categories:tractatus\n date: 2015-05-22\n title: res\n ---\n" archivo.txt
+Utilizar variables dentro de sed:
+	$ sed -i "/${VARIABLE}/d" archivo
+	$ sed -n "/^${NUM_BAIXA}/p" archivo (Que esté al principio de la linea)
 
 
 seeker
