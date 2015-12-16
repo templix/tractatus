@@ -14531,6 +14531,8 @@ Insertar texto entre una linea y otra. Por ejemplo en la linea 5:
 Utilizar variables dentro de sed:
 	$ sed -i "/${VARIABLE}/d" archivo
 	$ sed -n "/^${NUM_BAIXA}/p" archivo (Que esté al principio de la linea)
+Numerar lineas (cat -n archivo)
+	$ sed = fichero.txt | sed 'N;s/\n/\t/'
 
 
 seeker
