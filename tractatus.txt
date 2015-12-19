@@ -4712,8 +4712,7 @@ Aumentar el espació para los titulares. Por defecto 70
 	  '(elfeed-search-title-max-width 130))
 31.-
 Utilidades de red nativas de emacs (M-x ...)
-ifconfig, ipconfig, iwconfig, netstat, arp, route, traceroute, ping, nslookup-host, nslookup, dns-lookup-host, run-dig, dig, ftp, smbclient, smbclient-list-shares,
-finger, whois y whois-reverse-lookup
+ifconfig, ipconfig, iwconfig, netstat, arp, route, traceroute, ping, nslookup-host, nslookup, dns-lookup-host, run-dig, dig, ftp, smbclient, smbclient-list-shares, finger, whois y whois-reverse-lookup.
 No es necesario ajustes especiales en .emacs, pero puede personalizarse algún aspecto, por ejemplo que ping solo mande 3 paquetes:
 	(setq ping-program-options '("-c" "3"))
 32.-
@@ -4758,8 +4757,6 @@ Otros ajustes que pueden incorporarse a .emacs precedidas con la explicación co
 	;; Guardar la sessión al cerrar emacs y restaurarla al arrancar nuevamente:
 	;; Colocar a cero [0] para desactivar:
 	(desktop-save-mode 1)
-	;; Ocultar caracteres al pedir un password:
-	(add-hook 'comint-output-filter-functions 'comint-watch-for-password-prompt)
 	;; Colocar el tipo de sistema
 	(defun insert-system-type()
 	(interactive)
