@@ -15522,6 +15522,30 @@ Visionar en tiempo real los paquetes capturados:
 #  tail -f archivo.log
 
 
+ssmtp
+[mailutils]. Herramienta que permite enviar correos a partir de un servidor externo (p.g gmail). Como remitente constará "root" ya que, en algunas distros, es quien tiene que enviar los correos. Ajustes en el archivo de configuración:
+# nano /etc/ssmtp/ssmtp.conf
+Modificar las lineas:
+	root=correo@gmail.com
+	mailhub=smtp.gmail.com:587
+	hostname=el_hostname
+	UseSTARTTLS=YES
+	AuthUser=correo@gmail.com
+	AuthPass=Contraseña_del_usuario_de_gmail
+A continuación establecer permisos:
+# chmod 640 /etc/ssmtp/ssmtp.conf
+# chown root:mail /etc/ssmtp/ssmtp.conf
+Lanzar la aplicación:
+# ssmtp fulano@hotmail.com
+Y colocar el texto:
+	To: fulano
+	Subject: Asunto
+	---- Una linea en blanco ----
+	El cuerpo de texto del correo
+	Hasta la proxima.
+Ctrl+d para terminar. Cuando vuelva a salir el prompt del sistema es que el mensaje ya se ha enviado.
+
+
 sswap
 [secure-delete]. Borrado seguro de swap. Previamente desactivar con swapoff /dev/sda7 y al finalizar el proceso volver a activarla con swapon /dev/sda7 [Si no sabemos donde se encuentra la swap: cat /proc/swaps. Argumentos paracidos a srm [ver] y sfill [ver]. El espacio se sobreescribe 38 veces.
 $ sswap -f /dev/sda7 (Modo rápido e inseguro)
