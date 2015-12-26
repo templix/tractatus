@@ -661,9 +661,11 @@ apt-get
 # apt-setup                              (Crea un sources.list optimizado)
 # add-apt-repository ppa:repositorio   (añadir un repositorio ppa)
 # ppa-purge ppa:repositorio   (suprimirlo. Precisa el script ppa-purge))
-/etc/apt/sources.list               (Fichero de repositorios.)
-/var/cache/apt/archives          (Caché de los paquetes .deb instalados)
-/var/log/apt/term.log (Archivo de logs de la aplicación)
+# apt-get install --no-install-recommends paquete (No instalar los paquetes recomendados que no sean dependencias fuertes)
+Algunos archivos relacionados:
+	/etc/apt/sources.list (Fichero de repositorios.)
+	/var/cache/apt/archives (Caché de los paquetes .deb instalados)
+	/var/log/apt/term.log (Archivo de logs de la aplicación)
 1.-
 Para resolver problemas con  /var/lib/apt/lists/*  lanzar:
 # rm /var/lib/apt/lists/* -vf
