@@ -916,12 +916,15 @@ $ aspell --lang=ca dump master > lista.txt  (crea una lista de palabras del idio
 
 
 at
-Ejecuta aplicaciones o scripts a una hora especificada
+Ejecuta aplicaciones o scripts a una hora especificada.
 $ at 20:00   (se entra en el promt de at para programar una tarea. Xtrl + d para salir)
 $ atq  (muestra el listado de tareas programadas)
+$ at -f archivo (Lee las tareas a realizar desde un achivo)
 $ atrm número (elimina la especificada en “número”)
 $ at 8:30 <<< "xmms2 play"   (montar una alarma con at y xmms2)
 $ echo "xmms2 play" | at 6:00  (lo mismo)
+$ echo "mplayer The_Best.mp3" | at now + 15min (Relacionado. Reproducir con mplayer un mp3 de aquí a 15 minutos)
+Nota.- Si la configuración de comandos o el script intentan visualizar información, la salida de datos será enviada vía correo electrónico al usuario, pudiendo generar un "Subject: Delivery Status Notification (Failure)" si el correo no está bien configurado
 
 
 aterm
