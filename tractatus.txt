@@ -7634,6 +7634,17 @@ Con varias opciones [elif]
 	then
 	    echo "Uno de los dos es verdadero"
 	fi
+8.-
+	#!/bin/bash
+	# Comprobar si un directorio está vacio
+	DIR=~/polles
+	#
+	if [ "$(ls -A $DIR)" ]
+		then
+    	echo "Contiene archivos"
+	else
+        echo "Vacio (o no existe o es un archivo)"
+	fi
 
 
 ifconfig
