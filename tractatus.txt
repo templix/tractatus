@@ -18026,6 +18026,7 @@ Para la gestión de máquinas virtuales sin interfaz gráfica, se utiliza VboxHe
 $ VBoxManage createvm --name "maquina_virtual" --register (Creamos una máquina virtual con el nombre "maquina_virtual")
 $ VBoxManage modifyvm "maquina_virtual" --memory 780 --acpi on --boot1 dvd --nic1 bridged --bridgeadapter1 eth0 --ostype Ubuntu (Modificamos la máquina virtual que hemos creado, asignándole 780MB de RAM, activando ACPI, definiendo que arranque desde CD/DVD, indicando que la tarjeta de red sea en modo bridge y que el la tarjeta de red del sistema a usar es la eth0, y finalmente definiendo que la máquina será un Ubuntu.)
 $ VBoxManage createvdi --filename ~/VirtualBox\VMs/maquina_virtual/maquina_virtual-disk01.vdi --size 30000 (Creamos un disco duro en formato VDI de 30 GB)
+$ VBoxManage modifyhd maquina_virtual-disk01.vdi --resize 60000 (Redimensionar el espacio del fichero VDI en MB)
 $ VBoxManage storagectl "maquina_virtual" --name "IDE Controller" --add ide (Añadimos un controlador IDE para posteriormente conectar el disco duro)
 $ VBoxManage storageattach "maquina_virtual" --storagectl "IDE Controller" --port 0 --device 0 --type hdd --medium ~/VirtualBox\VMs/maquina_virtual/maquina_virtual-disk01.vdi (Asignamos el disco duro a la máquina virtual)
 $ VBoxManage storageattach "maquina_virtual" --storagectl "IDE Controller" --port 1 --device 0 --type dvddrive --medium ~/IS
