@@ -13905,6 +13905,13 @@ B: Reinicia la máquina.
 rename
 renombrar archivos
 $ rename JPG jpg *.JPG (Renombrará todos los xxxx.JPG a xxxx.jpg)
+1.-
+Substituir parte del nombre de unos archivos ("DSC") por otro ("Fotos")
+	$ ls
+	DSC_8362.jpg DSC_8374.jpg  DSC_8378.jpg  DSC_9112.jpg
+	$ rename 's/DSC/Fotos/' *.jpg
+	$ ls
+	Fotos_8362.jpg Fotos_8374.jpg Fotos_8378.jpg Fotos_9112.jpg
 
 
 renice
