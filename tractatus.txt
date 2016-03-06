@@ -14426,9 +14426,13 @@ Si deseamos tener una barra inferior donde aparecerá el nombre de las diferente
 
 
 screenfetch
-Muestra información del equipo junto al logo de la distro.
+Muestra información del equipo. En caso de no estar en los repositorios:
 $ wget -c https://raw.github.com/KittyKatt/screenFetch/master/screenfetch-dev -O screenfetch
 $ ./screenfetch
+$ ./screenfetch -s (Realiza una captura de pantalla)
+$ ./screenfetch -n (Muestra información sin el logo)
+$ ./screenfetch -c 9 -L (Que muestre solo el logo y en rojo. Colores del 0 al 9)
+$ ./screenfetch -E (Excluir los parámetros que dan error, si existen)
 
 
 screenkey
