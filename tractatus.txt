@@ -743,6 +743,15 @@ Con el siguiente contenido:
 	Acquire::Languages "none";
 
 
+apt-key
+Herramienta para la gestion de un anillo de claves de repositorios seguros. El anillo de claves se guarda en el archivo /etc/apt/trusted.gpg
+# apt-key list (listar todas las claves del anillo)
+# apt-key net-update (Actualizar utilizando la red)
+# apt-key exportall (Exportar todas las claves)
+# apt-key export xxxxxx (Exportar una clave)
+# apt-key del xxxxx (Eliminar una clave)
+
+
 apt-mirror
 [apache2]. Configurar un repositorio local. Seguidamente se muestra el proceso:
 $ mkdir repo (Crear el directorio)
