@@ -8135,6 +8135,18 @@ Alguna sopciones que pueden añadirse:
 -i 10 (Tempo en segundos entre mediciones. Sólo cliente)
 
 
+ipgeolocation
+Obtener geolocalización de una ip o un dominio. Descarga: <https://github.com/maldevel/IPGeoLocation>
+$ ./ipgeolocation.py -m (De la propia ip)
+$ ./ipgeolocation.py -t 216.58.210.131 (De una ip)
+$ ./ipgeolocation.py -t google.es (De un dominio)
+$ ./ipgeolocation.py -t microsoft.com -u "Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; rv:11.0) like Gecko" (Con un Use Agent personalizado)
+$ ./ipgeolocation.py -t debian.com -g (Obtener la geolocalización de una ip y abrir la localización en Google Maps a través del navegador por defecto)
+$ ./ipgeolocation.py -t lapipaplena.org --csv /consulta.csv (Exportando los datos a un fichero .csv)
+$ ./ipgeolocation.py -t lapipaplena.org -e /consulta.txt (Exportando los datos a un fichero .txt)
+$ ./ipgeolocation.py -T objetivos.txt (De una lista a raiz de una ip o dominio por linea)
+
+
 ipmitool
 [openipmi]. Obtener datos del estado de un servidor [que lo soporte] tanto en local desde el propio servidor cómo en remoto. Se trata de un chipset que permite obtener información del estado de diferentes componentes hardware, temperaturas, voltajes, etc... Primero habilitar el demon ipmievd:
 # nano /etc/default/ipmievd
