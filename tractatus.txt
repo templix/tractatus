@@ -3990,9 +3990,10 @@ $ echo $((10*2)) (Realiza el cálculo matemático)
 $ echo “ Buenas.. voy a reiniciar ¿Haces algo?” >> /dev/pts/23 (Manda el mensaje a la consola 23)
 $ echo rm *.png (lista lo que se va a borrar, antes de lanzar rm *.png)
 $ echo "" > archivo.txt (Borra el contenido de archivo.txt. Para un borrado total mejor usar $ :> archivo.txt)
-	$ echo -e "<?php\nphpinfo();\n?>" (la opción -e hace que se interprete los saltos de linea [\n], tabulaciones [\t] etc. en algunas distros es necesario lanzar: shopt -s extglob)
-	$ echo -e "linux\\tes\\tgenial" (tabular cada palabra con \\t. La primera barra [\] sirva para escapar el caracter \t)
-	$ echo -e "Dato1\n\tDato2\n\tDato3\n" > ejemplo.txt (entra datos en ejemplo.txt con salto de linea despues de cada dato)
+$ echo -e "<?php\nphpinfo();\n?>" (la opción -e hace que se interprete los saltos de linea [\n], tabulaciones [\t] etc. en algunas distros es necesario lanzar: shopt -s extglob)
+$ echo -e "linux\\tes\\tgenial" (tabular cada palabra con \\t. La primera barra [\] sirva para escapar el caracter \t)
+$ echo -e "Dato1\n\tDato2\n\tDato3\n" > ejemplo.txt (entra datos en ejemplo.txt con salto de linea despues de cada dato)
+$ echo "linux is beautiful" | tee -a *.txt (Mandar texto a varios archivos de texto)
 
 
 ecryptfs
@@ -14886,7 +14887,7 @@ shelr
 Realizar una grabación de la consola con la posibilidad de subirla a http://shelr.tv. Una vez registrados conseguimos el ID personal. La grabación termina al pulsar Ctrl + d y se almacena en .local/share/shelr/ del usuario o de root. Las medidas de la terminal optimas son 132x43 [lanzar, por ejemplo: lxterminal --geometry=132x43]
 $ shelr record (Inicia la grabación despues de solicitar el título)
 $ shelr record --sound (Grabar con sonido)
-$ shelr list (muestra todos los shellcasts [grabaciones])
+$ shelr list (muestra todos los shellcasts [grabaciones])
 $ shelr play ID (Reproduce el especificado en el número ID)
 $ shelr dump ID (Volcará la grabación en el directorio actual con extensión .json. Solicita nombre y etiqueta del shellcast)
 $ shelr play last (eproduce la última grabación)
@@ -14898,6 +14899,30 @@ $ shelr setup 4dbde740509f4591bab88ca2361a269 (Especificar el ID de usuario. Est
 $ shelr record (Empezar la grabación)
 $ shelr push last (Subirla a shelr.tv)
 $ shelr push last --private (Subirla a shelr.tv y mantenerla privada)
+
+
+shift
+En un script, permite desplazar los parámetros, de modo que el valor del 1er parámetro ($1) es reemplazado por el valor del 2do parámetro ($2), el del 2do parámetro ($2) por el del 3er parámetro ($3) y así sucesivamente. Veamos un ejemplo:
+	$ mkdir tmp (creamos directorio de trabajo)
+	$ cd tmp (entramos en él)
+	$ touch {1..5}.txt (creamos varios archivos de texto)
+Creamos un script con el siguiente contenido:
+	#!/bin/bash
+	#
+	## Entrar un numero variable de archivos
+	## como argumentos y comprimirlos con zip
+	i=1
+	while [ $# -gt 0 ]; do
+	    zip ${1%%.*}.zip $1
+	    i=$(($i+1))
+	    shift
+	done
+	echo
+Lo ejecutamos con algunos archivos como argumentos.
+	./script.sh 1.txt 2.txt 3.txt
+Comprobamos el resultado, los borramos:
+$ rm *.txt
+Y probamos con otro número de argumentos.
 
 
 shodan
