@@ -1211,6 +1211,12 @@ En bash:
                close("date +%d-%m-%Y")
                print "Hoy estamos a " dia_actual
     }'
+4.-
+Usar variables dentro de awk
+	variable="primera linea\nsegunda linea"
+	awk 'BEGIN {print "'"$variable"'"}'
+	primera linea
+	segunda linea
 
 
 awstats
