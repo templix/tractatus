@@ -1311,6 +1311,11 @@ $ basename /etc/rc.d/cupsd (devolverá “cupsd”)
 $ basename /etc/rc.d/cupsd start (También devolvera “cupsd”)
 
 
+bashbug
+Guión del shell para ayudar al usuario a componer y enviar informes de fallos concernientes a bash en un formato normalizado. bashbug llama al editor por defecto o, si no está definido a emacs. El usuario debe rellenar los campos apropiados y salir del editor. Entonces, bashbug envía el informe a bug-bash@prep.ai.mit.edu. Si el informe no puede ser enviado, se guarda en el fichero dead.bashbug en el directorio del usuario. La plantilla del informe consiste en varias secciones. La primera proporciona información sobre la máquina, el sistema operativo, la versión de bash y el entorno de compilación. La segunda sección debería rellenarse con una descripción del fallo. La tercera sección debería ser una descripción de cómo reproducir el fallo y la cuarta sección, opcional, es para una correción que se proponga.
+$ bashbug
+
+
 bashish
 Entorno para terminales de texto. Permite cambiar colores, tipo de letra, transparencias, imagen de fondo... Descarga de <http://sourceforge.net/projects/bashish/files/> . Se instala con el clásico:
 	$ ./configure && make && sudo make install
