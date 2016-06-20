@@ -14642,9 +14642,21 @@ Cambiar “Juan” por “Pedro” en todos los archivos .txt del presente direc
 Mostrar sólo las lineas con 4 dígitos seguidos:
 	$ sed '/[0-9]\{4\}/p' archivo
 Borrar todos los espacios delante de cada linea:
-	$sed 's/^[ ^t]*//' archivo
+	$ sed 's/^[ ^t]*//' archivo
+	$ echo "      Linux es genial" | sed 's/^ *//'
 Borrar todos los espacios detras de cada linea:
 	$ sed 's/[ ^t]*$//' archivo
+	$ echo "Linux es genial      " | sed 's/* $//'
+Borrar los últimos 6 caracteres de una linea:
+	$ echo "Linux es genial" | sed 's/......$//'
+Eliminar el primer caracter de cada linea de un archivo:
+	$ cat file.txt | sed 's/^.//'
+Borrar los primeros 5 caracteres de una linea:
+	$ echo "Linux es genial" | sed 's/^.....//'
+Eliminar los dos últimos caracteres de cada linea de un archivo:
+	$ cat file.txt | sed 's/..$//'
+Eliminar los tres primeros y tres últimos caracteres de cada linea de un archivo:
+	$ cat file.txt | sed 's/...$//;s/^...//'
 Borrar todos los espacios delante y detras de cada linea:
 	$ sed 's/^[ ^t]*//;s/[ ^]*$//' archivo
 Cambiar los números 3333 por 3.333. El parámetro -r sirva para activar las expresiones regulares extendidas de sed:
@@ -14674,6 +14686,16 @@ Utilizar variables dentro de sed:
 	$ sed -n "/^${NUM_BAIXA}/p" archivo (Que esté al principio de la linea)
 Numerar lineas (cat -n archivo)
 	$ sed = fichero.txt | sed 'N;s/\n/\t/'
+Reemplazar una cadena ("esto" por "aquello") en muchos archivos:
+	$ find . -type f -exec sed -i -e 's/esto/aquello/g' {} \;
+Lo mismo pero sólo en archivos txt:
+	$ find . -type f -exec -name '*.txt' sed -i -e 's/esto/aquello/g' {} \;
+Eliminar todas las lineas que coincidan la palabra "casa":
+	$ find . -type f -exec sed -i -e '/casa/d' {} \;
+Lo mismo pero sólo en archivos.txt:
+	$ find . -type f -exec -name '*.txt' sed -i -e '/pattern/d' {} \;
+Reemplazar "esto" por "aquello" de forma real en archivo.txt
+	$ sed -i "s|esto|aquello|' archivo.txt
 
 
 seeker
