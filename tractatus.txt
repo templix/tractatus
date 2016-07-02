@@ -9448,6 +9448,12 @@ $ nano /etc/printcap
 	        :sh:
 
 
+lpoptions
+Información sobre las impresoras en cups
+$ lpoptions -d HP_psc_1100_series (Establecer la impresora predeterminada)
+$ lpoptions -p HP_psc_1100_series -l (Ver las opciones de la impresora predeterminada)
+
+
 ls
 Listar archivos de un directorio.
 $ ls -i (Muestra todos los archivos no ocultos)
@@ -12148,14 +12154,13 @@ Buscar la variable $nav-bg, descomentarla (quitarle las dos //) y colocar el có
 	$nav-bg: desaturate(lighten(#C68800, 18), 5);
 	//$nav-bg-front: image-url('noise.png');
 11.-
-Colocar una imagen en el header que previamente habremos copiado en el directorio public/images:
-$ nano source/stylesheets/screen.css
-Y pegamos al final:
-	body > header {
-		background-image: url("/images/tux_gnu.png");
-		background-color: #333;
-		background-position: right center;
-		background-repeat: no-repeat;
+Colocar una imagen en el header que previamente habremos copiado en el directorio source/images/:
+$ nano sass/custom/_styles.scss
+Y pegamos:
+	header[role="banner"] {
+     	background-image: url(/images/tux.png);
+     	background-position:left;
+     	background-repeat: no-repeat;
 	}
 12.-
 Quitar la opción RSS de la barra de navegación:
@@ -16488,6 +16493,27 @@ Para incluir en el menú contextual la opción "Abrir como root", en "editar/Con
 Y en la pestaña "condiciones generales":
 	Patrón de archivos: *
 	Aparece si la selección contiene:  Macamos la casilla de directorio y la de archivo
+
+
+thunderbird
+Cliente de mensajeria. Algunos atajos:
+	f (Ir al siguiente mensaje)
+	b (Ir al mensaje anterior)
+	n (Ir al siguiente mensaje no leído)
+	p (Ir al anterior mensaje no leído)
+	m (Marcar mensaje como leído)
+	j (Eliminar mensaje como basura)
+	F6 (Alternar entre los tres paneles)
+	F8 (Expandir/desexpandir el panel del listado de mensajes)
+	Ctrl m (Redactar mensaje)
+	Ctrl Enter (Enviar mensaje)
+	Ctrl + (Aumentar tamaño del texto)
+	Ctrl - (Reducir el tamaño del texto)
+	Ctrl 0 (Restaurar el tamaño del texto)
+	Ctrl o (Abrir mensaje en una nueva ventana)
+	Ctrl w (Cerrar ventana)
+	Ctrl r (Responder al mensaje al remitente)
+	Ctrl q (Salir)
 
 
 tidy
