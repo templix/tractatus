@@ -606,6 +606,10 @@ $ apt search paquete (Buscar un paquete)
 # apt edit-sources (Edita el sources.list)
 
 
+apt-doc
+Muestra información sobre el comando apt. Colocar en el navegador: usr/share/doc/apt-doc/guide.es.html
+
+
 apt-fast
 [axel o aria]
 Paquete que incrementa la velocidad de descarga de paquetes respecto de apt-get mediante el uso de axel [ver] o aria. Descargar el scrpt de http://www.mattparnell.com/linux/apt-fast/apt-fast.sh o via github de https://github.com/ilikenwf/apt-fast. Para reconfigurar el paquete:
@@ -3324,6 +3328,8 @@ $ df  -T (de todas las particiones y el tipo)
 dhclient
 Cliente DHCP
 # dhclient eth0  (modifica la ip de la máquina)
+# dhclient -v -r eth0 (Limpiar la ip actual)
+# dhclient -v eth0 (solicitar ip)
 
 
 dhcpcd
@@ -6027,6 +6033,13 @@ Del 1 al 10 de 2 en 2:
 	for i in {1..10..2}
 	do
 		echo "Es el número $i "
+	done
+6.-
+	#!/bin/bash
+	# eliminar todos los archivos que no sean .txt
+	for a in `ls | grep -v txt`
+	do
+		rm -fr $a
 	done
 
 
@@ -19564,6 +19577,11 @@ Busca cadenas de texto fijas sobre archivos comprimidos (ver fgrep)
 
 zgrep
 imprime las líneas que cumplan la expresión regula sobre ficheros comprimidos (Ver grep)
+
+
+zile
+Pequeño, rápido y potente clon de Emacs útil para instalaciones en dispositivos de poca capacidad (disquettes) o para sesiones de edición rápida. La mayoría de las secuencias de teclas y nombres de función son iguales que las de Emacs.
+$ zile
 
 
 zip
