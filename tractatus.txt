@@ -1272,6 +1272,8 @@ Que realice 10 conexiones por cada archivo y sin límite de descarga.
 badblocks
 [e2fsprogs]. Utilidad para reparar sectores dañados del disco duro o pendrive. Trabajar con la unidad desmontada.
 # badblocks -s -v -n -f /dev/sda  (recuperar y reparar sectores dañados)
+# badblocks -nsv /dev/sda (Test de lectura y escritura no destructivo)
+# badblocks -wsv /dev/sda (Test de lectura y escritura destructivo)
 # badblocks -w -t random -s -v /dev/sda (Borrar un disco de forma segura)
 # badblocks -s -w archivo.txt (Borrar de forma segura un archivo [irrecuperable])
 # badblocks -sv /dev/sdb -o badblocks.log  (crear un informe)
@@ -3840,6 +3842,7 @@ $ du -x (Calcular tamaño sin sumar los puntos de montaje)
 $ du -s (Solo suma total, en lugar del tamaño de cada directorio)
 $ du fichero (Muestra el tamaño de fichero)
 $ du | sort -rn | head (Mostrar los 10 archivos que más ocupan)
+$ du -sch .[!.]* * |sort -h (Mostrar también las carpetas ocultas y ordenar el resultado)
 
 
 duckduckgo
