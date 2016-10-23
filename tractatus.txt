@@ -12731,6 +12731,23 @@ Combina archivos, juntando las primeras lineas con las primeras, las segundas co
 $ paste 1.txt 2.txt > 3.txt
 
 
+patat
+[cabal-install]. Herramienta que permite mostrar presentaciones en una terminal. Utiliza la librería Pandoc, la cuál, además de ofrecer soporte para Markdown, también permite una infinidad de formatos de entrada. No muestra imágenes y los para los resaltados (negrita, cursiva...) usa colores. Una vez instalado el paquete (apt-get install cabal-install) añadir a .bashrc la linea:
+	export PATH=$PATH:$HOME/.cabal/bin
+He instalar como usuario sin privilegios el paquete:
+	$ cabal install patat
+$ patat presentacin.md (arrancar la presentación)
+Teclas de control:
+    Siguiente: espacio, enter, l, →
+    Anterior: retroceso, h, ←
+    Adelantar 10 diapositivas: j, ↓
+    Retroceder 10 diapositivas: k, ↑
+    Ir a la primera: 0
+    Ir a la última: G
+    Actualizar: r
+    Finalizar: q
+
+
 patch
 Herramienta que permite aplicar un parche a un determinado fichero o directorio. Toma un fichero que contiene un listado de diferencias producidas por el programa diff y esas diferencias se aplica a uno o más archivos. Los nombres de los archivos para ser parcheado por lo general se toman del fichero del parche, pero si hay un solo archivo para ser parcheado puede ser especificado en la línea de comandos como originalfile.
 1.-
