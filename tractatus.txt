@@ -13620,6 +13620,12 @@ Servidor de sonido multiplataforma.
 $ pulseaudio -D  (Reiniciar el servicio)
 
 
+purge-old-kernels
+[bikeshed] Herramienta que elimina kernels antiguos, tanto los paquetes linux-image como los linux-headers, dejando por defecto solo los dos últimos .
+# purge-old-kernels (forma básica)
+# purge-old-kernels --keep 4 (Mantendrá los 4 últimos kernels)
+
+
 pushd
 Moverse al directorio especificado, como con cd, pero el directorio anterior se guarda en una pila al que puede volverse.
 [~]$ pushd /usr/share/apache2/icons (del dir personal entramos en icons)
