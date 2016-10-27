@@ -19069,6 +19069,13 @@ Modo de entrar un atajo:
 Abrirá la terminal pulsando las teclas “Win” + “t”
 
 
+xboxdrv
+Comando para arrancar el driver de los mandos (gamepad) para Xbox y Xbox360 (y compatibles). Requiere hacer blacklist del módulo xpad. Se puede hacer sin afectar al sistema haciendo lo siguiente:
+# rmmod xpad o añadiendo el driver al final del fichero /etc/modprobe.d/blacklist.conf con la línea siguiente: blacklist xpad
+# xboxdrv --silent (arrancar en modo silencioso)
+# xboxdrv --device-by-id 1234:1234 --type xbox360 (Arranca el driver para un gamepad con un ID específico. Puedes ver la ID ejecutando lsusb)
+
+
 xclip
 Copia al portapapeles la salida de cualquier comando.
 $ who | xclip
