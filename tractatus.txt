@@ -17353,6 +17353,14 @@ Consultar la guia de ubuntu des del navegador. Disponible tambien en español.
 	firefox file:///usr/share/doc/ubuntu-packaging-guide-html-es/singlehtml/index.html
 
 
+ubuntu-support-status
+Muestra el estado del soporte oficial de los paquetes instalados. Útil para determinar cuando será conveniente actualizar el servidor.
+$ ubuntu-support-status (Muestra un resumen del estado de los paquetes instalados)
+$ ubuntu-support-status --show-unsupported (Muestra una lista detallada de los paquetes que ya no estan soportados)
+$ ubuntu-support-status --show-supported (Muestra una lista detallada de los paquetes soportados así como la fecha hasta la que lo estan)
+$ ubuntu-support-status --show-all (Muestra una lista detallada de todos los paquetes, tanto los soportados como los que no)
+
+
 udiskie
 Herramienta  para montar automaticamente unidades en Archlinux. Debe arrancarse el servicio antes de ejecutarse el gestor de ventanas en el archivo .xinitrc. Un ejemplo:
 # nano .xinitrc
