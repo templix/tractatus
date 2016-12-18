@@ -9100,12 +9100,19 @@ $ lftp usuario@host
 # lftp -u usuario,clave ftp.dominio.com (Conectar con un servidor de FTP)
 Nota.- entrados en el directorio raiz del servidor ftp remoto el prompt adquiere un estilo:
 # lftp usuario@ftp.dominio.com:~>
-Algunas opciones que tenemos:
-~> ls -l  (listar el directorio)
-~> mirror htdocs html  (copiará el contenido de htdocs (remoto) a la carpeta donde estemos en local
+Algunas de las opciones que tenemos en el host remoto son las mismas que podemos emplear en bash:
+	mkdir, mv, ls, rm, exit, cat, more, chmod, pwd...
+Algunas opciones específicas:
+~> get archivo (Bajar un archivo del remoto al local)
+~> mget dir (Bajar un directorio del remoto al local)
+~> put archivo  (Subir un archivo del local al remoto)
+~> mput dir (Subir un directorio del local al remoto)
+~> mirror dir  (copiará el contenido de htdocs (remoto) a la carpeta donde estemos en local.
 ~> help mirror (opciones de mirror)
-~> cd htdocs
 ~> exit   (salir del remoto)
+~> !ls (listará el directorio local)
+~> !mkdir dir (crear un directorio en local)
+~> !pwd (En què directorio nos encontramos en local)
 1.-
 Resolver la nota "Fatal error: Certificate verification: Not trusted" que informa que el cliente no puede verificar la autenticidad del certificado que esta ofreciendo el servidor. Se ignora el error con:
 	set ssl:verify-certificate no
