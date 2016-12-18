@@ -9102,10 +9102,19 @@ Nota.- entrados en el directorio raiz del servidor ftp remoto el prompt adquiere
 # lftp usuario@ftp.dominio.com:~>
 Algunas opciones que tenemos:
 ~> ls -l  (listar el directorio)
-~> mirror htdocs html  (copiará el contenido de htdocs (remoto) a la carpeta html del home (local) y si no existe la crea
+~> mirror htdocs html  (copiará el contenido de htdocs (remoto) a la carpeta donde estemos en local
 ~> help mirror (opciones de mirror)
 ~> cd htdocs
 ~> exit   (salir del remoto)
+1.-
+Resolver la nota "Fatal error: Certificate verification: Not trusted" que informa que el cliente no puede verificar la autenticidad del certificado que esta ofreciendo el servidor. Se ignora el error con:
+	set ssl:verify-certificate no
+Para no tener que colocar la linea cada vez que nos conectamos, podemnos crear el archivo ./lftp/rc i colocarla en él.
+2.-
+Para no entrar cada vez nombre de usuario ni contraseña y además tener un alias para la conexión [servidor], podemos crear el archivo ./lftp/bookmarks y colocar la linea:
+	servidor	ftp://USER:PASS@HOST
+La conexión se realizarà con:
+$ lftp servidor
 
 
 lha
