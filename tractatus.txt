@@ -33,10 +33,10 @@ Crear un lanzador de aplicaciones en el escritorio.
 $ 9menu -label gimp gimp & (con el título “gimp” para lanzar “gimp”)
 $ 9menu 'xterm -e script.sh' & (lanzador para un script de bash)
 Opciones:
--geometry 30x20 (especificando medidas del lanzador)
--bg yellow (color de fondo)
--fg red (color de fuente)
--popup (Que se cierre el lanzador una vez clicado)
+	-geometry 30x20 (especificando medidas del lanzador)
+	-bg yellow (color de fondo)
+	-fg red (color de fuente)
+	-popup (Que se cierre el lanzador una vez clicado)
 
 
 a2dismod
@@ -135,9 +135,9 @@ abook
 Agenda personal.
 $ abook (Abre la aplicación)
 Algunas teclas de control:
-a (Añadir contacto y crear las pestañas para los datos. Usar las flechas para moverse entre pestañas y los números de los conceptos para entrar información)
-r (Suprimir contacto)
-q (Salir)
+	a (Añadir contacto y crear las pestañas para los datos. Usar las flechas para moverse entre pestañas y los números de los conceptos para entrar información)
+	r (Suprimir contacto)
+	q (Salir)
 
 
 abs-guide
@@ -169,12 +169,12 @@ Añadir repositorios a /etc/apt/sources.list o a /etc/apt/sources.list.d/
 
 adduser.conf
 Archivo que contiene las preferencias para los comandos adduser y addgroup [/etc/adduser.conf]. Algunos parámetros importantes:
-DSHELL=/bin/bash (shell para nuevos usuarios. Por defecto /bin/bash)
-DHOME=/home (donde se crean los directorios de los nuevos usuarios. Por defecto /home.
-SKEL=/etc/skel (directorio de donde se copian los ficheros de configuración base del usuario. Por defecto /etc/skel)
-FIRST_UID=1000 (Valor inicial del rango de IDs para usuarios normales)
-LAST_UID=29999 (Rando final del rango de IDs)
-DIR_MODE=0755 (Permisos de entrada de todos los directorios creados)
+	DSHELL=/bin/bash (shell para nuevos usuarios. Por defecto /bin/bash)
+	DHOME=/home (donde se crean los directorios de los nuevos usuarios. Por defecto /home.
+	SKEL=/etc/skel (directorio de donde se copian los ficheros de configuración base del usuario. Por defecto /etc/skel)
+	FIRST_UID=1000 (Valor inicial del rango de IDs para usuarios normales)
+	LAST_UID=29999 (Rando final del rango de IDs)
+	DIR_MODE=0755 (Permisos de entrada de todos los directorios creados)
 
 
 adminer
@@ -319,7 +319,7 @@ smtp.correo.com:587/tls/novalidate-cert/user=usuario@correo.com [intro]
 {pop.correo.com/pop3/ssl/novalidate-cert/user=usuario@correo.com}INBOX
 Intro y para salir de la configuración pulsar:
 Shift + e
-Preguntará si se salvan los datos. Pulsar "y" y regresamos al menú. Para entrar en el correo, seleccionar "FOLDER LIST" Preguntará la contraseña y si queremos guardarla [lo hace en el arhico .pine-passfile]
+Preguntará si se salvan los datos. Pulsar "y" y regresamos al menú. Para entrar en el correo, seleccionar "FOLDER LIST" Preguntará la contraseña y si queremos guardarla [lo hace en el archivo .pine-passfile]
 En "COMPOSE MESSAGE" se entran los correos separados por "," en el apartado Cc [copia oculta] o To. Ctrl + x para enviar.
 
 
@@ -327,7 +327,7 @@ altavoz
 Apagar el altavoz interno del pc
 # gedit /etc/modprobe.d/blacklist
 Y añadiremos la linea:
-blacklist pcspkr
+	blacklist pcspkr
 
 
 amidi
@@ -445,13 +445,13 @@ Reiniciar apache
 Para testear su efectividad:
 # perl test.pl
 Que viene en el mismo paquete descargado. El resultado correcto:
-HTTP/1.1 200 OK
-HTTP/1.1 200 OK
-HTTP/1.1 200 OK
-HTTP/1.1 2...
-HTTP/1.1 403 Forbidden
-HTTP/1.1 403 Forbidden
-HTTP/1.1 403 Forbi ...
+	HTTP/1.1 200 OK
+	HTTP/1.1 200 OK
+	HTTP/1.1 200 OK
+	HTTP/1.1 2...
+	HTTP/1.1 403 Forbidden
+	HTTP/1.1 403 Forbidden
+	HTTP/1.1 403 Forbi ...
 Los parámetros por defecto son suficientes en condiciones "normales". Si se precisa afinar más su configuración, pueden añadirse las siguientes lineas al archivo /etc/apache2/httpd.conf:
 	<IfModule mod_evasive20.c>
 	DOSHashTableSize    3097
@@ -530,13 +530,13 @@ apf
 Cortafuegos. Todos los parámetros se configuran en el archivo conf.apf.
 # nano /etc/apf/conf.apf
 La configuración básica:
-DEVEL_MODE="0" # 1 en pruebas, 0 en producción
-IFACE_IN="eth1" # Interfaces de red
-IFACE_OUT="eth1" # interfaces de red
-IFACE_TRUSTED="eth0" # Si existen interfaces locales
-IG_TCP_CPORTS="21,22,80,110" # Puertos permitidos
-IG_UDP_CPORTS=""IG_UDP_CPORTS="" # Puertos UDP permitidos [si existen]
-IG_ICMP_TYPES="3,5,11" 3 Puertos ICMP permitidos [si existen]
+	DEVEL_MODE="0" # 1 en pruebas, 0 en producción
+	IFACE_IN="eth1" # Interfaces de red
+	IFACE_OUT="eth1" # interfaces de red
+	IFACE_TRUSTED="eth0" # Si existen interfaces locales
+	IG_TCP_CPORTS="21,22,80,110" # Puertos permitidos
+	IG_UDP_CPORTS=""IG_UDP_CPORTS="" # Puertos UDP permitidos [si existen]
+	IG_ICMP_TYPES="3,5,11" 3 Puertos ICMP permitidos [si existen]
 Otros archivos importantes:
 /etc/apf/deny_host.rules (ips, rangos, etc denegados)
 /etc/apf/allow_host.rules (ips, rangos, etc permitidos)
@@ -548,15 +548,15 @@ Otros archivos importantes:
 
 apg
 Generador de contraseñas aleatorias
-$ apg -a 1 -n 8 -m 10 (Incluyendo signos, 8 propuestas y 10 caracteres)
+$ apg -a 1 -n 8 -m 10 (Incluyendo signos, 8 propuestas de 10 caracteres)
 Algunas opciones:
--a 0  (sin signos especiales [por defecto])
--m 10 (número mínimo de caracteres [8 por defecto])
--x 12 (número máximo de caracteres [10 por defecto])
--M S  (Incluyendo un signo)
--M N  (Incluyendo un número)
--M C  (Incluyendo mayúsculas)
--E aeiou9 (Excluyendo letras y números mencionados)
+	-a 0  (sin signos especiales [por defecto])
+	-m 10 (número mínimo de caracteres [8 por defecto])
+	-x 12 (número máximo de caracteres [10 por defecto])
+	-M S  (Incluyendo un signo)
+	-M N  (Incluyendo un número)
+	-M C  (Incluyendo mayúsculas)
+	-E aeiou9 (Excluyendo letras y números mencionados)
 
 
 aplay
@@ -1290,7 +1290,7 @@ Opciones
 
 bandwidthd
 Herramienta que analiza la utilización del ancho de banda disponible y genera reportes gráficos. Una vez instalado poner en la barra del navegador:
-file:///var/lib/bandwidthd/htdocs/index.html
+	file:///var/lib/bandwidthd/htdocs/index.html
 Para afinar la configuración en /etc/bandwidthd/bandwidthd.conf
 
 
@@ -1357,9 +1357,9 @@ Archivo de configuración de la terminal propia del usuario.
 Para que al escribir un comando que requiera permisos de root pueda autocompletarse presionando la tecla “Tab”.
 $ gedit /home/usuario/.bashrc
 Y añadir las líneas:
-if [ "$PS1" ]; then
-complete -cf sudo
-fi
+	if [ "$PS1" ]; then
+	    complete -cf sudo
+	fi
 2.-
 Añadiendo o modificando las siguientes lineas se consigue que el history de bash se amplie al recuerdo a los últimos 3000 comandos usados, suprimiendo los repetidos y que ignore el espacio (Si se pone) de delante de un comando.
 	export HISTFILESIZE=3000
@@ -1370,15 +1370,15 @@ Si queremos que la sesión de bash se cierre si está inactiva durante 600 segun
 Establecer un proxy global a nuestro sistema
 $ nano ~/.bashrc
 Y añadir las siguientes líneas:
-export http_proxy=”http://ip_del_servidor:puerto”
-export https_proxy=”http://ip_del_servidor:puerto”
-export ftp_proxy=”http://ip_del_servidor:puerto”
+	export http_proxy=”http://ip_del_servidor:puerto”
+	export https_proxy=”http://ip_del_servidor:puerto”
+	export ftp_proxy=”http://ip_del_servidor:puerto”
 4.-
 Para que el history indique fecha y hora en la que se ha lanzado el comando:
-export HISTTIMEFORMAT='- %F %T - '
+	export HISTTIMEFORMAT='- %F %T - '
 5.-
 Para guardar en /root un fichero de histórico por cada uno de los usuarios que se hayan pasado a root.
-export HISTFILE=/root/.bash_hist-$(who am i | awk '{print $1}';exit)
+	export HISTFILE=/root/.bash_hist-$(who am i | awk '{print $1}';exit)
 
 
 bb
