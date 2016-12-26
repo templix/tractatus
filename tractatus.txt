@@ -46,7 +46,7 @@ Desactiva modulos de apache.
 
 
 a2dssite
-Deshabilita sitios de apache
+Deshabilita sitios de apache.
 # a2dissite host_virtual.com
 
 
@@ -66,12 +66,12 @@ $ a2mp3 archivo.mp3
 
 
 a2png
-Convertir textos a imagen .png
+Convertir textos a imagen .png.
 $ a2png texto.txt texto.png
 
 
 a2ps
-Imprimir y manipular archivos postscript. La codificación por defecto es la inglesa. La más parecida a utf8 es la latin1 o la iso1 [ISO-8859-1]
+Imprimir y manipular archivos postscript. La codificación por defecto es la inglesa. La más parecida a utf8 es la latin1 o la iso1 [ISO-8859-1].
 $ a2ps -o final.ps --columns=2 original.ps (Convertir un archivo [original.ps] a 2 páginas en una y mandar el resultado a otro [final.ps])
 $ a2ps --printer=HP_psc_1100_series archivo.ps (mandar un archivo a imprimir)
 $ a2ps -l -o archivo.ps --no-header archivo.txt (Pasar un txt a ps y sin poner encabezados y apaisado[-l])
@@ -94,7 +94,7 @@ $ aa3d -d < texto.txt (Usando solo números)
 
 
 aafire
-[caca-utils]. Fuego animado en ascii. En algunas distros cacafire [ver]
+[caca-utils]. Fuego animado en ascii. En algunas distros cacafire [ver].
 
 
 aajm
@@ -118,7 +118,7 @@ $ aaphoto --flipx --rotate180 imagen.png (espejo horizontal y rotandola 180º)
 
 
 ab
-[apache2-utils]. Mostrar la capacidad de respuesta de un servidor WEB
+[apache2-utils]. Mostrar la capacidad de respuesta de un servidor WEB.
 $ ab -n 100 -c 10 localhost:80/index.html (Con 100 conexiones y 10 simultaneas)
 $ ab -n 9000 -c 900 -e test.txt http://www.google.com/ (Escribe en un archivo el tiempo (milisegundos) que tomó para servir a ese porcentaje de las solicitudes)
 
@@ -1358,7 +1358,7 @@ Para que al escribir un comando que requiera permisos de root pueda autocompleta
 $ gedit /home/usuario/.bashrc
 Y añadir las líneas:
 	if [ "$PS1" ]; then
-	    complete -cf sudo
+	    Complete -cf sudo
 	fi
 2.-
 Añadiendo o modificando las siguientes lineas se consigue que el history de bash se amplie al recuerdo a los últimos 3000 comandos usados, suprimiendo los repetidos y que ignore el espacio (Si se pone) de delante de un comando.
