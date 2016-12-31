@@ -11,11 +11,11 @@ Para conocer los parámetros [ips y MACs] que luego tendremos que entrar en 4g8 
 # nmap 192.168.1.0/24
 Para conocer los equipos de la red. Una vez escogida la victima, lanzar 4g8:
 # 4g8 -i eth0 -g 192.168.1.1 -G 64:69:0C:87:A8:DC -s 192.168.1.12 -S 00:19:01:54:F5:1F -w dump.pcap
-	-g (la ip del router)
-	-G (la MAC del router)
-	-s (la ip de la victima)
-	-S (la MAC de la victima)
-	-w (el archivo donde guardar las capturas)
+	-g (ip del router)
+	-G (MAC del router)
+	-s (ip de la victima)
+	-S (MAC de la victima)
+	-w (archivo donde guardar las capturas)
 Para el análisis del archivo dump.pcap  puedes usar wireshark entre otros.
 
 
@@ -35,7 +35,7 @@ $ 9menu 'xterm -e script.sh' & (lanzador para un script de bash)
 Opciones:
 	-geometry 30x20 (especificando medidas del lanzador)
 	-bg yellow (color de fondo)
-	-fg red (color de fuente)
+	-fg red (color de la fuente)
 	-popup (Que se cierre el lanzador una vez clicado)
 
 
@@ -128,7 +128,7 @@ abcde
 $ abcde -d /dev/sdc1 -N -x -o mp3 (extrae disco completo en archivos mp3)
 $ abcde -d /dev/sdc1 -N -x -o ogg (extrae disco completo en archivos ogg)
 $ abcde -d /dev/sdc1 -N -x -o ogg tracks 1-3 5 (extrae las tres primeras canciones y la quinta)
-Nota.- "-d" indica dispositivo, "-N" opciones por defecto y sin preguntar, "-x" expulsa el cd al acabar, "-o" tipo de archivo resultante
+	Nota.- "-d" indica dispositivo, "-N" opciones por defecto y sin preguntar, "-x" expulsa el cd al acabar, "-o" tipo de archivo resultante
 
 
 abook
@@ -208,7 +208,7 @@ Sistema de detección de intrusos. No evita la intrusión, sólo informa que est
 # aide -i (Crear la base de datos)
 # aide -u (Actualizar la base de datos)
 # aide -c (Hacer un chequeo del sistema para comprobar modificaciones)
-Nota.- Los archivos de configuración: /etc/aide/aide.conf.d/, /etc/aide/aide.conf y /etc/default/aide
+	Nota.- Los archivos de configuración: /etc/aide/aide.conf.d/, /etc/aide/aide.conf y /etc/default/aide
 
 
 airmon
@@ -216,7 +216,7 @@ airmon
 # airmon-ng start wlan0 (Iniciar el modo monitor)
 # airmon-ng stop wlan0 (Finalizarlo)
 # airmon-ng start wlan0 5 (Eespecificando un canal)
-Nota.- Confirmar que la tarjeta está en modo monitor con iwconfig.
+	Nota.- Confirmar que la tarjeta está en modo monitor con iwconfig.
 
 
 airodump
@@ -856,7 +856,7 @@ arp-scan
 Escanea la tabla arp.
 # arp-scan -I eth0 192.168.2.0/16
 # arp-scan -l -I eth1
-Nota.- En el primer ejemplo es una i mayúscula. En el segundo la primera opción la “ele” minúscula y la segunda la i mayúscula
+	Nota.- En el primer ejemplo es una i mayúscula. En el segundo la primera opción la “ele” minúscula y la segunda la i mayúscula
 
 
 arrays
@@ -944,7 +944,7 @@ $ atrm número (elimina la especificada en “número”)
 $ at 8:30 <<< "xmms2 play"   (montar una alarma con at y xmms2)
 $ echo "xmms2 play" | at 6:00  (lo mismo)
 $ echo "mplayer The_Best.mp3" | at now + 15min (Relacionado. Reproducir con mplayer un mp3 de aquí a 15 minutos)
-Nota.- Si la configuración de comandos o el script intentan visualizar información, la salida de datos será enviada vía correo electrónico al usuario, pudiendo generar un "Subject: Delivery Status Notification (Failure)" si el correo no está bien configurado
+	Nota.- Si la configuración de comandos o el script intentan visualizar información, la salida de datos será enviada vía correo electrónico al usuario, pudiendo generar un "Subject: Delivery Status Notification (Failure)" si el correo no está bien configurado
 
 
 aterm
@@ -1437,18 +1437,18 @@ Pitidos del altavoz
 # cat /etc/apt/sources.list | beep -c -f 311 -D 50 -l 10  (Emitirá un pitido despues de cada caracter[-c])
 Notas:
 Frecuencias de la escala musical (-f):
-Do > 261
-Do# > 277
-Re > 293
-Re# > 311
-Mi > 329
-Fa > 349
-Fa# > 369
-Sol > 392
-Sol# >415
-La > 440
-La# > 466
-Si > 493
+	Do > 261
+	Do# > 277
+	Re > 293
+	Re# > 311
+	Mi > 329
+	Fa > 349
+	Fa# > 369
+	Sol > 392
+	Sol# > 415
+	La > 440
+	La# > 466
+	Si > 493
 Si beep no emite sonidos, puede que el dispositivo esté en la lista negra:
 # nano /etc/modprobe.d/blacklist.conf (Comprobar si existe una linea: blacklist pcspkr)
 # lsmod | grep pcsp  (Otra forma de comprobar si existe como módulo)
@@ -1592,8 +1592,8 @@ $ echo -e "\nLinux\nes un sistema\ngenial" | boxes -d peek (Con saltos de linea 
 $ echo -e "\nLinux\nes un sistema\ngenial" | boxes -p a8t4 -d sunset (Con espacios en blanco alrededor del texto)
 $ echo -e "\nLinux\nes un sistema\ngenial" | boxes -a c -d sunset (texto alineado al centro [-a c])
 Algunas otras opciones:
--a l (texto alineado a la izquierda)
--a r (texto alineado a la derecha)
+	-a l (texto alineado a la izquierda)
+	-a r (texto alineado a la derecha)
 
 
 bozocrack
@@ -1601,7 +1601,7 @@ Craquear contraseñas de hash md5 a partir de los resultados de su busqueda en g
 Proceso:
 Copiar el hash o hashses uno debajo de otro en un archivo de texto
 $ bozocrack archivo.txt
-Nota.- dado que no usa diccionarios ni fuerza bruta sino solo busquedas de google, solamente se encontrarán las más usuales.
+	Nota.- dado que no usa diccionarios ni fuerza bruta sino solo busquedas de google, solamente se encontrarán las más usuales.
 
 
 brillo
@@ -19134,9 +19134,9 @@ xdaliclock
 Un reloj en el escritorio.
 $ xdaliclock -cycle -24 -title reloj -builtin1 (cambiando de color [cycle], formato 24 horas, con titulo i medida pequeña [de builtin0 a builtin4]
 Algunas opciones:
--transparent (transparente)
--noseconds (cin los segundos)
--geometry 670x15 (especificando medidas)
+	-transparent (transparente)
+	-noseconds (cin los segundos)
+	-geometry 670x15 (especificando medidas)
 
 
 xdg
@@ -19171,8 +19171,8 @@ Muestra información de las DPI disponibles de la sesión de Xorg actual.
 xephyr
 Contenedor para lanzar aplicaciones X en paralelo al servidor X en ejecución.
 $ Xephyr :1 -screen 1024x768 (Lanzar la aplicación)
-:1 (valor para la variable DISPLAY a la hora de querer mostrar la aplicación dentro de Xephyr)
--screen (resolución que tendrá la nueva pantalla)
+	:1 (valor para la variable DISPLAY a la hora de querer mostrar la aplicación dentro de Xephyr)
+	-screen (resolución que tendrá la nueva pantalla)
 $ DISPLAY=:1 startxfce4 (Arrancar una sesión xfce4 dentro de Xephyr)
 
 
@@ -19285,11 +19285,11 @@ xmem
 Monitoriza el uso de ram y de swap.
 $ xmem -update 1 -codecolor black -nolabel (Que actualice resultados cada segundo, mostraqr en negro la memoria usada y sin mostrar el hostname)
 Colores por defecto:
--codecolor red (Color de la memoria usada)
--cachecolor yellow (De la memoria caché)
--buffercolor blue (Memoria del buffer)
--freecolor green (de la memoria libre)
--swapcolor red (de la memoria swap. Mismo color que la memoria usada)
+	-codecolor red (Color de la memoria usada)
+	-cachecolor yellow (De la memoria caché)
+	-buffercolor blue (Memoria del buffer)
+	-freecolor green (de la memoria libre)
+	-swapcolor red (de la memoria swap. Mismo color que la memoria usada)
 
 
 xmll
@@ -19324,9 +19324,9 @@ Permite ejecutar en un equipo una aplicación remota desde un servidor X, manten
 	@server:~$ logout (Cerrar la conexión con el servidor)
 	Realizar una nueva conexión con el servidor esta vez con xpra y contra el display 5:
 	@client:~$ xpra attach ssh:usuario@servidor.com:5 (Después de entrar la contraseña, se abrirá la aplicación midori del servidor en el cliente)
-@server:~$ xpra list (Lista las sesiones xpra abiertas)
-@server:~$ xpra stop :5 (Cierra el display 5)
-@server:~$ xpra attach :5 (Entra en el display 5)
+	@server:~$ xpra list (Lista las sesiones xpra abiertas)
+	@server:~$ xpra stop :5 (Cierra el display 5)
+	@server:~$ xpra attach :5 (Entra en el display 5)
 
 
 xprobe
@@ -19363,10 +19363,10 @@ añadir el modo creado a la tarjeta conectada (VGA-0, LVDS1...)
 $ xrandr --addmode VGA-0 1128x999_60.00
 Para eliminar este modo: xnest
 Herramienta que permite abrir un servidor X dentro de otro servidor X
-$ Xnest :20 -ca & (Sesion número 20)
+$ xnest :20 -ca & (Sesion número 20)
 Para mandar instancias al servidor xnest:
 $ xterm -display :20 (Abrirá exterm en el interior de la sesión 20)
-$ Xnest :20 -geometry 800x600 & (Especificando medidas de la ventana)
+$ xnest :20 -geometry 800x600 & (Especificando medidas de la ventana)
 $ xrandr --rmmode VGA-0 1128x999_60.00
 Para predeterminar la nueva configuración:
 $ xrandr --output VGA-0 --mode 1128x999_60.00
@@ -19375,12 +19375,12 @@ $ xrandr --output VGA-0 --mode 1128x999_60.00 --rate 60,3
 Una vez comprobado que todo funciona para hacer permanentes los cambios:
 # nano /etc/gdm/Init/Default
 A continuación de las lineas:
-PATH=”/usr/bin:$PATH”
-OLD_IFS=$IFS
+	PATH=”/usr/bin:$PATH”
+	OLD_IFS=$IFS
 Añadir:
-xrandr --newmode "1128x999_60.00"   93.00  1128 1200 1312 1496  999 1002 1012 1037 -hsync +vsync
-xrandr --addmode VGA-0 1128x999_60.00
-xrandr --output VGA-0 --mode 1128x999_60.00 --rate 60,3
+	xrandr --newmode "1128x999_60.00"   93.00  1128 1200 1312 1496  999 1002 1012 1037 -hsync +vsync
+	xrandr --addmode VGA-0 1128x999_60.00
+	xrandr --output VGA-0 --mode 1128x999_60.00 --rate 60,3
 Reiniciar.
 
 
@@ -19398,8 +19398,8 @@ Mostrar un archivo en la pantalla del escritorio.
 $ xrootconsole archivo
 $ xrootconsole -bg black -fg red (especificando color de fondo y letra)
 Otras opciones:
--geometry 70x20 (Por defecto 80x10+0+0)
--fn fuente (Especificando fuente)
+	-geometry 70x20 (Por defecto 80x10+0+0)
+	-fn fuente (Especificando fuente)
 
 
 xscreensaver
@@ -19431,7 +19431,11 @@ Aplicación para establecer parámetros del servidor X
 # xset fp default (restaura el path de fuentes de X)
 # xset r rate 200 10 (establece retardo de 200 milisegundos y velocidad de repetición de 10 por segundo)
 # xset r rate (devuelve a los parámetros por defecto)
-# xset -b off/on  (Activa/desactiva los pitidos del altavoz interno. Mismo efecto que: # gedit /etc/inputrc        y desclicar la linea      set bell-style none)
+# xset -b off/on  (Activa/desactiva los pitidos del altavoz interno)
+Esto último tiene el mismo efecto que:
+# nano /etc/inputrc
+y desclicar la linea
+	set bell-style none)
 
 
 xterm
@@ -19440,9 +19444,9 @@ $ xterm -bg black -fg gray -bc -cr red -e ssh usuario@remoto.com
 $ xterm -fg white -bg blue -e links2 http://google.es & (Abrir navegador en una terminal con fondo azul y letra blanca)
 $ xterm -u8 (Arrancar la terminal con soporte utf-8 [equivalente a lanzarla con uxterm])
 Opciones:
--cr blue (cursor de color azul [white, yellow, grey, red...])
--geom 100x100 (especificar dimensiones)
--maximized  (Ventana maximizada)
+	-cr blue (cursor de color azul [white, yellow, grey, red...])
+    -geom 100x100 (especificar dimensiones)
+	-maximized  (Ventana maximizada)
 1.-
 Modificar las medidas por defecto:
 # nano /usr/share/vte/termcap/xterm
@@ -19511,17 +19515,17 @@ $ nano xxxterm.conf
 	window_height           = 768
 	encoding                = UTF-8
 algunos atajos:
-F6 (Barra de navegación)
-i (Buscador de la página)
-Ctrl + t (Nueva pestaña)
-Ctrl + w (Cerrar pestaña)
-Alt + h (Historial)
-F5 (Recargar página)
-/ (Buscar un termino)
-n (Siguiente termino)
-N (Anterior termino)
-Alt + q ()Reiniciar el navegador)
-Ctrl + q (Cerrar el navegador)
+	F6 (Barra de navegación)
+	i (Buscador de la página)
+	Ctrl + t (Nueva pestaña)
+	Ctrl + w (Cerrar pestaña)
+	Alt + h (Historial)
+	F5 (Recargar página)
+	/ (Buscar un termino)
+	n (Siguiente termino)
+	N (Anterior termino)
+	Alt + q ()Reiniciar el navegador)
+	Ctrl + q (Cerrar el navegador)
 
 
 yacpi
@@ -19557,8 +19561,8 @@ $ yaourt -B (Realizar una copia de seguridad de la base de datos de yaourt)
 Para que yaourt no pida confirmación y ver archivos:
 # nano /etc/yaourtrc
 Y colocar las siguientes lineas con los valores que se muestran:
-BUILD_NOCONFIRM=1
-EDITFILES=0
+	BUILD_NOCONFIRM=1
+	EDITFILES=0
 
 
 yasat
@@ -19568,10 +19572,10 @@ $ yasat -l (Listar plugins disponibles)
 # yasat -f (Auditoria más exhaustiva)
 # yasat -a (Sin pedir confirmaciones)
 Algunas opciones:
--H (Obtener el resultado en formato html. Por defecto en ~/.yasat/yasat.html)
---check-update (Verificar si existen actualizaciones de la aplicación)
---skip nfs,ntp (Sólo comprobar los servicios mencionados, separados por comas)
---html-output archivo.html (Mandar el resultado a un archivo que no sea el por defecto. Precisa tambien -H)
+	-H (Obtener el resultado en formato html. Por defecto en ~/.yasat/yasat.html)
+	--check-update (Verificar si existen actualizaciones de la aplicación)
+	--skip nfs,ntp (Sólo comprobar los servicios mencionados, separados por comas)
+	--html-output archivo.html (Mandar el resultado a un archivo que no sea el por defecto. Precisa tambien -H)
 Nota.- La visualización del archivo.html ha de realizarse como root [# firefox archivo.html]
 
 
@@ -19613,7 +19617,7 @@ $ youtube-dl -o nombre.flv url  (Guardar con nombre especificado)
 $ youtube-dl -a archivo_de_urls_de_youtube (bajar multiples videos)
 $ youtube -upepe -pcontraseña url (especificando usuario y contraseña)
 $ youtube-dl -t --extract-audio --audio-format mp3 url (Sacar el audio en formato mp3 a un video de youtube)
-Nota.- En algunas ocasiones muestra un error (ERROR: format not available for video) se soluciona bajando directamente el ejecutable de internet y suprimiendo el de los repositorios.
+	Nota.- En algunas ocasiones muestra un error (ERROR: format not available for video) se soluciona bajando directamente el ejecutable de internet y suprimiendo el de los repositorios.
 
 
 y-ppa-manager
