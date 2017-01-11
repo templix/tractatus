@@ -14517,6 +14517,7 @@ $ screen -S tux  (nombrar la sesión del que comparte consola)
 	There are screens on:
         19680.tux       (Attached)
         19684.xut       (Attached)
+# screen /dev/ttyACM0 115200 (conectar a una consola serie. En el ejemplo se usa la conexión serie del miniordenador VoCore2 (/dev/ttyACM0) y se le especifica la velocidad de 115200 bps. Si quieres usar una tty como usuario normal debes añadir tu usuario a los grupos uucp y dialout)
 2 Sockets in /tmp/screens/S-juanito.
 $ screen -x 19680.tux  (el que se conecta)
 $ screen -r 	Retoma el proceso desacoplado con Ctrl+a Ctrl+d
