@@ -788,6 +788,13 @@ Muestra la arquitectura de la máquina.
 $ arch
 
 
+archalien
+Convierte paquetes .deb en paquetes Archlinux. Descarga de https://github.com/Asher256/archalien
+$ python archalien.py arandr_0.1.9-1_all.deb
+El resultado es un paquete con el nombre arandr-0.1.9-1.pkg.tar.gz que puede instalarse en Arch Linux con:
+# pacman -U arandr-0.1.9-1.pkg.tar.gz
+
+
 arecord
 [alsa-utils]. Grabación de audio. Graba directamente de la tarjeta de sonido sin tener conectado los altavoces ni micro.
 $ arecord -l (Listado de dispositivos)
