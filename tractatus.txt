@@ -502,10 +502,10 @@ Agregar el contenido:
 	AuthType Basic
 	require valid-user
 Crear el archivo para el usuario con privilegios:
-htpasswd -c /var/www/.htpasswd juan
+# htpasswd -c /var/www/.htpasswd juan
 Entrar la contraseña y confirmación.
 Para añadir más usuario con privilegios, sin el parámetro -c:
-htpasswd /var/www/.htpasswd pedro
+# htpasswd /var/www/.htpasswd pedro
 8.-
 Para que las aplicaciones no aparezcan con caracteres extraños y simbolos raros:
 # nano /etc/apache2/conf.d/carhset
