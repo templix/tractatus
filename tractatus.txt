@@ -2950,6 +2950,7 @@ Otras opciones:
 	$ curl -s http://geoiplookup.wikimedia.org/ | python3 -c 'import sys, json, string, webbrowser; webbrowser.open(string.Template("http://maps.google.com/maps?q=$lat,$lon").substitute(json.loads(sys.stdin.read().split("=")[-1])))' (Lo mismo pero abriendo una pestaña en el navegador)
 	$ curl -s http://www.census.gov/popclock/data/population/world | awk -F'[:,]' '{print $7}' (Muestra el número de habitantes de la tierra)
 	$ curl -s https://help.github.com/articles/generating-ssh-keys | grep -Po  --color=never "RSA key fingerprint is (:?[A-z0-9]\:?){32}" (Imprime la clave RSA de github.com)
+	$ curl -H 'Accept-Language: es' -s wttr.in/figueras,girona | sed -n '1,7p' (el tiempo en una ciudad)
 
 
 curlftpfs
