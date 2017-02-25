@@ -8969,7 +8969,7 @@ Especificar título, autor, fecha. "date", si no se especifica, pone la fecha ac
 El cuerpo del documento se inicia con \maketitle
 Inicio y final de texto. Entre párrafos ha de dejarse una linea en blanco. El primer párrafo de una subsección, sección o capítulo no está sangrado, pero los restantes sí.:
 	\begin{document}
-	Est et quia non voluptatum. Aspernatur facilis excepturi aut. Voluptatem perspiciatis id cum ab nostrum. Qui rerum nisi vitae quae. Quam consequatur eaque minima ipsum distinctio. Est dolorem tempore perspiciatis quisquam accusantium exercitationem consequatur.
+	Est et quia non voluptatum. Aspernatur facilis excepturi aut. Voluptatem perspiciatis id cum ab nostrum. Qui rerum nisi vitae quae. Quam consequatur eaque minima ipsum distinctio.
 	\end{document}
 Secciones y subsecciones del texto:
 	\section{Introducción}
@@ -8982,16 +8982,19 @@ Formatos de texto:
 	\textit{texto en cursiva}
 	\underline{texto subrayado}
 	\textsc{texto en versalita}
-Tamaño de la letra. Estos comandos afectan a todo el texto que les sigue mientras no se modifique nuevamente y sin necesidad de encerrarlo entre llaves. De más pequeña a más grande: \tiny, \scriptsize, \footnotesize, \small, \normalsize (la normal), \large, \Large, \LARGE, \huge, \Huge
-	\normalsize Ipsam \tiny iusto odio commodi \scriptsize inventore rem. \footnotesize Qui maiores minima \small dignissimos aut mollitia et. \normalsize Voluptates \large magnam autem similique quas. \LARGE nihil aspernatur nisi blanditiis. \huge Ad repudiandae fuga blanditiis. \Huge Est voluptate in ipsam sint \ normalsize optio.
+Tamaño de la letra. Estos comandos afectan a todo el texto que les sigue mientras no se modifique nuevamente y sin necesidad de encerrarlo entre llaves. De más pequeña a más grande: tiny, scriptsize, footnotesize, small, normalsize (la normal), large, Large, LARGE, huge, Huge
 Centrar un párrafo:
 	\begin{center}
-	Est et quia non voluptatum. Aspernatur facilis excepturi aut. Voluptatem perspiciatis id cum ab nostrum. Qui rerum nisi vitae quae. Quam consequatur eaque minima ipsum distinctio. Est dolorem tempore perspiciatis quisquam accusantium exercitationem consequatur.
+	Est et quia non voluptatum. Aspernatur facilis excepturi aut. Voluptatem perspiciatis id cum ab nostrum. Qui rerum nisi vitae quae. Quam consequatur eaque minima ipsum distinctio.
 	\end{center}
 alinear texto:
 	\centering {Texto a centrar}
 	\raggedleft {Texto a la derecha}
 	\raggedright {Texto a la izquierda}
+Colocar código:
+	\begin{verbatim}
+	trozo de código
+	\end{verbatim}
 Para confeccionar un documento en latex puede usarse cualquier editor [vim, nano, gedit...] y para convertirlo a pdf compilarlo con:
 $ pdflatex texto.tex
 Tambien podemos visualizar directamente el .dvi con la aplicación evince o usar gummi que, al tener la pantalla dividida en dos partes, permite crear el documento y visualizarlo en tiempo real.
