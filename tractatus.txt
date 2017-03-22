@@ -1195,7 +1195,8 @@ Otros ejemplos:
 	$ who | awk '{print $1}'  (Mostrar todos los usuarios registrados)
 	$ awk '$1~/^DocumentRoot/{print $2}' /etc/apache2/sites-available/default (conocer la carpeta del servidor)
 	$ awk 'BEGIN { for (i = 1; i <= 7; i++) print int(101 * rand()) }' (Escribir 7 números aleatorios del 0 al 100)
-	Creación de scripts con awk:
+	$ awk ' { print "\"" $0 "\""} ' lista (Entrecomillar cada una de la lineas del archivo)
+Creación de scripts con awk:
 1.-
 Imprimir el simple "Hola mundo cruel"
 	#!/usr/bin/awk -f
