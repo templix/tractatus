@@ -2910,6 +2910,13 @@ Browsing on
 BrowseAllow 192.168.2.0/24
 	# /etc/init.d/cupsys restart
 Y configurar la impresora de la forma habitual ya sea en Sistema -> administración -> impresoras pestaña Configuración -> URI del dispositivo y poner la dirección de la impresora o via http://localhost:631
+2.-
+Que se muestre el nombre de usuario que imprime cada trabajo:
+# nano /etc/cups/cupsd.conf
+Substituir:
+	JobPrivateValues default
+Por:
+	JobPrivateValues none
 
 
 curl
