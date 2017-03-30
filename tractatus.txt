@@ -1312,10 +1312,9 @@ $ banner -Cck linux  (centrado y con la letra “k” formando la palabra “lin
 
 base64
 [cl-base64]. Codificador/descodificador de textos
-cat archivo| base64 > cifrado (cifrar "archivo" y volcarlo en "cifrado")
-cat cifrado | base64 -d > descifrado (descifrar "cifrado" y volcarlo en "descifrado")
-$ base64 archivo.txt  (codifica todo el texto de archivo.txt en consola)
-$ base64 -d codificado.txt (descodificar en consola)
+$ cat archivo| base64 > cifrado (cifrar "archivo" y volcarlo en "cifrado")
+$ base64 archivo.txt  (codifica todo el texto de archivo.txt)
+$ base64 -d codificado.txt (descodificar)
 $ echo "la_contraseña_secreta" | base64 > archivo.txt (Codificar palabra o frase)
 
 
