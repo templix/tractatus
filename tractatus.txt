@@ -13682,6 +13682,11 @@ $ pstree -al   (verlo con cada uno de sus hilos de ejecución)
 pulseaudio
 Servidor de sonido multiplataforma.
 $ pulseaudio -D  (Reiniciar el servicio)
+1.-
+Habilitar la salida de audio combinada a todos los dispositivos (analógicos y hdmi)
+# nano /etc/pulse/default.pa
+Y añadir la linea:
+	load-module module-combine-sink sink_name=combined
 
 
 purge-old-kernels
