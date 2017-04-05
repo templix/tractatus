@@ -6812,6 +6812,27 @@ Analiza el registro del servervidor web Apache
 Nota.- Con la aplicación en marxa, con F1 aparecen las teclas interactivas.
 
 
+gobrowser
+[golang git-core]Administrador de archivos basado en Web.
+Instalación:
+	# cd /opt
+	# git clone https://github.com/xataz/gobrowser.git
+	# cd gobrowser
+	# go build app.go
+Configuración:
+$ nano app.conf
+Y añadir:
+	{
+		"listen": ":6001", # Puerto de escucha
+		"webroot": "/files", # Si queremos añadir /files para acceder via http://URL:6001/files. En caso contrario dejar vacio ("")
+		"path": "/var/www/html/compartido", # Ruta al repositorio de archivos
+		"hiddenfile": false # Si no queremos listar lo acultos. "true" para incluirlos
+	}
+$ ./app (Arrancar el servidor)
+2017/04/05 15:14:08 Configfile found !!!
+2017/04/05 15:14:08 Starting goBrowser on :6001
+
+
 gocr
 programa que imprime en la salida estándar todo el texto que puede leer de cualquier fichero gráfico de entrada. Usado especialmente para el descifrado de kapchas. El programa necesita cierto aprendizaje.
 $ mkdir ocrdb
