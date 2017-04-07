@@ -7008,7 +7008,8 @@ $ grep -e 'fstab' -e 'dev' /etc/fstab (Forma de mostrar las lineas que contengan
 $ grep -r 'fstab' /etc (Buscar una palabra de un directorio y los subdirectorios)
 $ grep -l -r 'fstab' /etc (Sólo mostrar los archivos que contienen la palabra en el directorio y los subdirectorios)
 $ grep -n 'fstab' /etc/fstab (Mostrar la linea y el número de linea)
-$ grep -A 2 'swap' /etc/fstab (Mostrar la línea y las 2 siguientes)
+$ grep -A 2 'swap' /etc/fstab (Mostrar la línea de la ocurrencia [swap] y las 2 siguientes)
+$ grep -B 1 'swap' /etc/fstab (Mostrar la linea de la ocurrencia [swap] y la anterior)
 $ grep --color UUID /etc/fstab (Resaltar en color la palabra "UUID")
 Otras opciones:
 $ grep -Fx -f archivo1 archivo2 (Mostrar líneas que aparezcan en dos archivos)
