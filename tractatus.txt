@@ -1398,6 +1398,15 @@ bb
 demostración audiovisual de arte ascii
 
 
+bb.sh
+Servidor web integramente en bash. Descarga: <https://github.com/cfenollosa/bashblog>. Una vez copiado el script en la carpeta web, normalmente en /var/www o /var/www/html y otorgarle permisos de ejecución [chmod +x bb.sh] y, preferiblemente a partir de archivos markdown, lanzar:
+$ ./bb.sh post archivo.md (crear un post en html a partir de un archivo markdown)
+$ ./bb.sh edit -f archivo.html (Editar un archivo ya realizado para modificarlo)
+$ ./bb.sh rebuild (Actualizar después de una modificación)
+$ ./bb.sh list (Listar todos los post)
+$ ./bb.sh delete archivo.md (Eliminar archivo)
+
+
 bbcode
 Colección de etiquetas que se usan para cambiar la apariencia del texto en un blog (similar al lenguaje de marcas html). Su forma de uso es [etiqueta-1][etiqueta-2] texto [/etiqueta-1][/etiqueta-2]
 	[b]texto[/b] (Negrita)
