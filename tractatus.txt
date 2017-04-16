@@ -5997,6 +5997,15 @@ Otros atajos:
 	^+ l (Barra de direcciones)
 
 
+firejail
+[firetools]. Programa que reduce el riesgo de violaciones de seguridad restringiendo el entorno de ejecución de aplicaciones no confiables encerrandolas en "jaulas" [sanbox] aisladas del sistema operativo, esto incluye al proceso y todos sus descendientes.
+$ firejail transmission-gtk
+# firejail /etc/init.d/nginx start
+$ firejail --private --dns=8.8.8.8 --dns=8.8.4.4 firefox -no-remote
+$ firejail --net=eth0 firefox
+$ firejail --net=eth0 --ip=192.168.1.207 firefox
+
+
 flexget
 [python2.6 python-pip]. Descarga de series a partir de su direccion RSS. Archivo de configuración:
 $ nano .flexget/config.yml
