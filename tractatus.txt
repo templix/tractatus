@@ -3201,7 +3201,7 @@ Notas: En el nombre del paquete (Package) no se admiten espacios ni barras bajas
 Crear el paquete “menu” en el mismo directorio:
 	$ nano deb/DEBIAN/menu
 Y en su interior pegar:
-	?package(nombre_script):needs="X11" \
+    	?package(nombre_script):needs="X11" \
 		section="Applications/Network/Monitoring" \
 		title="Suport VNC" command="gnome-terminal -e script_que_sea" \
 		icon="/usr/share/pixmaps/gnome-term-linux2.png"
@@ -5421,6 +5421,11 @@ Fallar la autentificación en el servidor web, blloqueo por 10 minutos
 faillog
 (/var/log/faillog). Almacena todos los intentos "login" fallidos realizados a una maquina.
 $ faillog
+
+
+fakeroot
+[dpkg-repack]. Ejecuta comandos en un entorno que simula privilegios de root. No aumenta los privilegios de un usuario ni disminuye la seguridad del sistema.
+$ fakeroot -u dpkg-repack paquete (Crea un archivo .deb a partir de un paquete instalado en el sistema.
 
 
 false
