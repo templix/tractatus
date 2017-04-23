@@ -12646,6 +12646,13 @@ $ wget http://www.ossec.net/files/ossec-hids-2.6.tar.gz
 # /var/ossec/bin/ossec-control start (Arrancar el demonio caso de no colocarlo en /etc/init.d/ossec)
 
 
+otfinfo
+[lcdf-typetools]. Mostrar las características OpenType ofrecidas por una fuente.
+$ otfinfo -s /usr/share/fonts/truetype/freefont/FreeSans.ttf (Idiomas soportados)
+$ otfinfo -p .fonts/3Dumb.ttf (muestra el nombre postscript)
+$ otfinfo -f /usr/share/fonts/truetype/freefont/FreeMono.ttf (todas las opciones disponibles)
+
+
 otp
 Generador de contraseñas.
 $ otp -c6 -S3 -n5 (Creará 5 contraseñas [-n] por defecto son 50, de 6 letras mayúsculas [-c] separadas por un guión de 3 en 3 [-S] por defecto son de 4 en 4)
