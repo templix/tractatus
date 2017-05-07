@@ -12816,6 +12816,69 @@ $ partclone.ext4 -c -d -s /dev/sda1 -o ~/imagen.img (Crear la imagen de sda1)
 $ partclone.ext4 -r -d -s ~/imagen.img /dev/sda1 (Restaurar la imagen sobre la particion sda1)
 
 
+parted
+Formatear y crear particiones en discos y unidades extraibles. A continuación se muestra el proceso:
+Entrar en el prompt:
+	# parted
+	GNU Parted 3.2
+	Using /dev/sda
+	Welcome to GNU Parted! Type 'help' to view a list of commands.
+	(parted)
+Tecleando ? o help muestra todos los comandos. Identificar los discos.
+	(parted) print devices
+	/dev/sda (500GB)
+	/dev/sdc (2022MB)
+Imaginemos que queremos trabajar sobre el /dev/sdc. La seleccionamos:
+	(parted) select /dev/sdc
+	Using /dev/sdc
+A partir de ahora no es necesario especificar device puesto que todo será referido a /dev/sdc.
+	(parted) print
+	Model: Intenso Business (scsi)
+	Disk /dev/sdc: 2022MB
+	Sector size (logical/physical): 512B/512B
+	Partition Table: msdos
+	Disk Flags:
+	Number  Start   End     Size    Type     File system  Flags
+	 1      1049kB  2022MB  2021MB  primary  fat32
+	(parted)
+Borrar la tabla de particiones y comprobar que "print" no muestra datos como en el caso anterior:
+	(parted) rm 1
+	(parted) print
+	Model: Intenso Business (scsi)
+	Disk /dev/sdc: 2022MB
+	Sector size (logical/physical): 512B/512B
+	Partition Table: msdos
+	Disk Flags:
+	Number  Start  End  Size  Type  File system  Flags
+	(parted)
+Crear nueva etiqueta de disco (algunas opciones: bsd, gpt[IBM], mac, msdos...). Parted nos informa que a partir de este punto se perderan los datos de este disco y si queremos continuar (teclear "yes"):
+	(parted) mklabel msdos
+	Warning: The existing disk label on /dev/sdb will be destroyed and all data on this disk will be lost. Do you want to continue? Yes/No? yes
+	(parted)
+Creamos la nueva partición (sin sistema de archivos) contestando a cada pregunta y con "print" verificamos el resultado:
+	(parted) mkpart
+	Partition type?  primary/extended? primary
+	File system type?  [ext2]? ext4
+	Start? 1
+	End? 2022MB
+	(parted) print
+	Model: Intenso Business (scsi)
+	Disk /dev/sdc: 2022MB
+	Sector size (logical/physical): 512B/512B
+	Partition Table: msdos
+	Disk Flags:
+	Number  Start   End     Size    Type     File system  Flags
+	 1      1000kB  2022MB  2021MB  primary  ext4         lba
+	(parted)
+Con parted podemos dar formato a la partición pero recomiendan hacer uso de herramientas especificas para ello (mkfs.ext4, e2fsprogs), además no soporta ni ext3 ni ext4 (aunque como podemos ver en "File system" dice ext4), sólo ext2 y según el dispositivo, solo fat32. Otros comandos que podemos usar dentro del prompt de parted son:
+	print all (Para ver más información de los dispositivos conectados)
+	mklabel (Pregunta nuevo sistema de archivos [msdos, bsd, mac...])
+	print free (Ver espacio libre de los dispositivos)
+	check NUM (Chequear una partición especificada con NUM)
+	rescue INICIO FIN (Recuperar una partición especificando bytes del inicio y final)
+	quit (Salir del prompt)
+
+
 partprobe
 Releer la tabla de particiones después de alguna modificación en ella, sin necesidad de reiniciar.
 # partprobe
