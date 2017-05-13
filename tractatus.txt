@@ -2741,6 +2741,7 @@ $ convert --auto-orient in.jpg out.jpg  (Reorientar una foto)
 $ convert -resize 800x600 *.jpg %02d.jpg (Cambiar dimensiones de todas)
 $ convert -quality 40% imagen image_reducida         (lo mismo)
 $ convert -delay 60 1.jpg 2.jpg 3.jpg 123.gif (gif animado con varios jpg)
+$ convert -geometry 400 -delay 100 -loop 0 *.JPG resultado.gif (Otra forma de gif animado con varios parámetros)
 $ convert 123.gif -adjoin 1-2-3.jpg     (extraer los fotogramas de un gif)
 $ convert -resize 200 awk.pdf[0] awk.png (primera imagen pdf a imagen)
 $ convert file.pdf file.jpg  (convertir pdf en jpg)
@@ -7725,6 +7726,7 @@ identify
 [imagemagick]. Ver las propiedades de una imagen
 $ identify imagen.gif
 $ identify -verbose imagen.jpg   (Con mucha más información)
+$ identify -format %c imagen.png (Visualizar los comentarios)
 
 
 idesk
@@ -10634,7 +10636,15 @@ $ mogrify -resize 800 *.jpg (modificar todos los jpg de la carpeta y reducirlos 
 $ mogrify -comment "comentario para introducir" salida.jpg (Entrar un comentario en los metadatos)
 $ mogrify -label "Texto de la etiqueta" input.jpg (Entrar una etiqueta)
 $ mogrify -comment @firma.txt input (Entrar un comentario a partir de un archivo firma.txt)
-$ identify -format %c imagen.png (Visualizar los comentarios)
+1-
+Crear un gif animado de varias fotos jpg
+$ mogrify -delay 200 -quality 20 -size 200 -loop 0 *.jpg resultado.gif
+	delay 200 (pausa de 2 segundos entre frames)
+    quality 20 (reducir calidad de las imágenes)
+	size 200 (ancho de la imagen resultante de 200 píxeles)
+	loop 0 (repetir indefinidamente la animación. loop 1 para no repetir)
+	*.jpg (todas las imágenes jpg del directorio)
+	resultado.gif (nombre para el gif resultante9
 
 
 molly-guard
