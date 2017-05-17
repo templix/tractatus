@@ -9738,6 +9738,11 @@ Opciones:
 	-i (Hace referencia a los eventos utilizados por procesos de red)
 	-u usuario (Muestra los procesos abiertos por “usuario”)
 	-x (Sigue links y puntos de montaje)
+1.-
+Resolver salida:
+	lsof: WARNING: can't stat() tracefs file system /sys/kernel/debug/tracing
+Lanzar como root:
+# umount $(mount | grep debugfs | awk '{print $3}')
 
 
 lspci
