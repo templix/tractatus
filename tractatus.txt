@@ -10063,6 +10063,18 @@ $ manswitch ps -a
 $ manswitch uname -r
 
 
+mapscii
+google maps en la terminal. Descargar node de <https://nodejs.org/en/> y una vez descomprimido colocarlo en opt, crear un enlace a su ejecutable e instalar el paquete:
+	# mv node-v6.10.3-linux-x64 /opt
+	# ln -s /opt/node-v6.10.3-linux-x64/bin/npm /usr/bin/
+	# npm install -g mapscii
+$ mapscii (abre el mapa mundial)
+Teclas:
+	las flechas (para mover derecha, izquierda, arriba y abajo)
+	a (Acercar el zoom)
+	z (alejar el zoom)
+
+
 markdown
 Lenguaje orientado a la escritura de documentos de manera que sean fáciles de escribir y leer directamente en texto plano convirtiéndolos en documentos XHTML bien formados. La aplicación retext permite eleborar textos en markdown y visualizarlos en tiempo real.
 Sintaxis elemental [las referencias son respecto de html]:
@@ -15265,16 +15277,31 @@ Y probamos con otro número de argumentos.
 
 shodan
 Buscador no de sitios web como google, yahoo o bing, sinó de dispositivos conectados a la red [routers, impresoras, camaras ip...]. Precisa registro con lo que aumenta la cantidad de salidas de las busquedas de 10 [sin registro] a 50.
-Opciones generales en la barra de busquedas para usuarios sin cuaenta pro:
-apache country:ES (Buscar servidores apache en España)
-apache city:Madrid country:ES (Buscar servidores apache en Madrid - España)
-nginx hostname:.es (Buscar servidores nginx con .es en su hostname)
-proftpd port:21 os:linux (Buscar servidores proftpd especificando puerto y sistema operativo)
-net:18.7.7.0/24 (Buscar en un rango de ips)
-Algunos ejemplos concretos:
-dvr port:8080 (Buscar cámaras web. Una vez clicada la seleccionada de la busqueda, añadir a la ip /DVR.cfg, quedando la url: http://xx.xxx.xx.xx:8080/DVR.cfg, saldrá un archivo DVR.cfg para descargar. Descargarlo y editarlo. Buscar usuario y contraseña en USER1_USERNAME=XXXX y USER1_PASSWORD=XXXX)
-Server:SQ-WEBCAM country:es (Buscar webcams en España)
-netcam country:es (Cámaras ip en España)
+Opciones generales en la barra de busquedas para usuarios sin cuenta pro:
+	apache country:ES (Buscar servidores apache en España)
+	apache city:Madrid country:ES (Buscar servidores apache en Madrid - España)
+	nginx hostname:.es (Buscar servidores nginx con .es en su hostname)
+	proftpd port:21 os:linux (Buscar servidores proftpd especificando puerto y sistema operativo)
+	net:18.7.7.0/24 (Buscar en un rango de ips)
+	Algunos ejemplos concretos:
+	dvr port:8080 (Buscar cámaras web. Una vez clicada la seleccionada de la busqueda, añadir a la ip /DVR.cfg, quedando la url: http://xx.xxx.xx.xx:8080/DVR.cfg, saldrá un archivo DVR.cfg para descargar. Descargarlo y editarlo. Buscar usuario y contraseña en USER1_USERNAME=XXXX y USER1_PASSWORD=XXXX)
+	Server:SQ-WEBCAM country:es (Buscar webcams en España)
+	netcam country:es (Cámaras ip en España)
+
+
+shodan(cli)
+Buscador de dispositivos.
+# easy_install shodan (instalar paquete)
+# shodan init YOUR_API_KEY (Entrar la API. Se encuentra en el perfil de usuario en shodan.com)
+# shodan (Muestra las opciones)
+# shodan count microsoft iis 6.0 (Muestra número de resultados de la busqueda)
+# shodan download microsoft-data microsoft iis 6.0 (Guarda la busqueda en un fichero microsoft-data.json.gz)
+# shodan parse --fields ip_str,port,org --separator , microsoft-data.json.gz (Analiza el archivo que se generó con el comando anterior, separando los campos ip, puerto y host con ",")
+# shodan search --fields ip_str,port,org,hostnames microsoft iis 6.0 (Generar una busqueda separando los campos especificados)
+# shodan host IP (Analiza las vulnerabilidades del host especificado)
+# shodan myip (Muestra la propia ip)
+# cat archivo.txt | xargs -I% shodan download % % (download a partir de un listado. Pueden ser ips, modelos de router, camaras ip... una por linea)
+# dir *json.gz -1 | xargs -I% shodan parse --fields ip_str,port,org --separator , % (Ver los resultados del comando anterior)
 
 
 shopt
