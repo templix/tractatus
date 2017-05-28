@@ -14191,6 +14191,16 @@ $ readpst -o  -r miarchivo.pst
 $ readpst -M -b -e -o carpeta-destino miarchivo.pst (Generará los archivos EML en la carpeta-destino)
 
 
+reaver
+Herramienta que lleva a cabo un ataque de fuerza bruta contra el número pin de la configuración protegida de un punto de acceso wifi. Precisa poner nuestra targeta en modo monitor (airmon-ng start wlan0)
+# reaver -i mon0 -b 00:01:02:03:04:05 (Mínimo requerido, especificar nombre de la interfaz y BBSID)
+Algunas opciones:
+	--fixed (Fijando canal de la interfaz)
+	-t 2 (Tiempo de espera de la recepción de paquetes. Por defecto 5)
+	-d 0 (Desactivar tiempo de espera entre pins. Por defecto 1 segundo)
+	-vv (Incrementar el nivel de detalle)
+
+
 reboot
 Reiniciar el sistema.
 $ reboot -f (Fonzandolo)
