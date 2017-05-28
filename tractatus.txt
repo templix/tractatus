@@ -2143,8 +2143,9 @@ opciones
 
 
 cewl
-Generador de lista de palabras a partir de las palabras existentes en una página web.
+Generador de lista de palabras a partir de las palabras existentes en una página web y que pueden ser utilizadas por otros programas (Bruter, John the Ripper...), para realizar ataques de fuerza bruta.
 $ cewl -a -d 3 -m 5 -w wordlist.txt http://www.movistar.es (Incuir metadatos [a], profundidad 2 serían todas las palabras de la web principal y todas las de las webs enlazadas desde esta [-d 2], con un mínimo de 5 caracteres [-m 5] y que lo guarde en wordlist.txt [-w]
+$ cewl -w wordlist.txt -o -e URL (que escriba el resultado en wordlist.txt, que escanee enlaces externos y correos electrónicos [e])
 
 
 cftp
