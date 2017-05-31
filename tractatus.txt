@@ -11224,7 +11224,7 @@ $ mv -f (Sobreescribe sin preguntar)
 mysql
 Gestor de bases de datos [BDs]. Las BDs se guardan en el directorio /var/lib/mysql/
 $ mysqldump -u root -p proveedores > fichero.sql (Crear un backup de la BD "proveedores".)
-$ mysql proveedores < fichero.sql (Restaurar la BD "proveedores" de un archivo)
+$ mysql -u root -p proveedores < fichero.sql (Restaurar la BD "proveedores" de un archivo)
 $ mysqlimport -u root -p clientes fichero.sql (Otra forma de restaurar una BD si esta ya existe)
 $ mysqldump -u root -p --all-databases > fichero.sql (Backup de todas las BDs)
 $ mysqldump -u root -p clientes proveedores > fichero.sql (Backup de dos BDs)
