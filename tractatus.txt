@@ -11369,6 +11369,11 @@ $ mysql (En otra terminal entrar en MySQL)
 	mysql> UPDATE user SET Password=PASSWORD('12345') WHERE user='root';(Actualizar el campo Password del usuario root)
 	mysql> exit (Salir)
 $ mysql -u root -p (Entrar en MySQL)
+8.-
+Solucionar error: ERROR 1290 (HY000): The MySQL server is running with the --secure-file-priv option so it cannot execute this statement
+# nano /etc/mysql/my.cnf
+Y en el apartado mysqld añadir la linea:
+	secure-file-priv = ""
 
 
 mysqladmin
