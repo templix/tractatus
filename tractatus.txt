@@ -2852,6 +2852,11 @@ Limitar el uso de la cpu para determinados procesos.
 # cpulimit -p PID -l 50 (el proceso con el numero PID al 50%)
 
 
+cputool
+Limita el uso del CPU de un proceso.
+$ cputool -c 50 -p 15352 (Al 50% para el PID 15352)
+
+
 crontab
 configurar tareas para que se ejecuten automáticamente en el sistema
 # crontab -e      (editar el archivo crontab, si no existe se crea)
