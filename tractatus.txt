@@ -8895,6 +8895,11 @@ En el directorio de logs, los archivos que interesan son los .pcap que pueden vi
 # kismet   (lanzar la aplicación)
 
 
+kmod
+Mostrar módulos del kernel.
+# kmod list
+
+
 knockd
 El port knocking o golpeo de puertos es un mecanismo mediante la cual el cortafuegos, que mantiene cerrado un determinado puerto, detecta una secuencia preestablecida que procede de una conexión externa y abre dicho puerto para que el servicio asignado sea accesible. Este mecanismo permite añadir una capa adicional de seguridad [por oscuridad], de manera que para cualquier conexión externa no autorizada los puertos donde se brindan los servicios se muestran como cerrados, eliminando así la posibilidad de intentar la conexión y no ofreciendo información sobre el servicio configurado. Por su parte, el usuario autorizado necesita disponer de un cliente de port-knocking que envíe una secuencia de paquetes dirigidos a dicho puerto, con el fin de que el cortafuegos detecte la secuencia correcta y abra el puerto dejando accesible el servicio. Una vez desactivada esta capa de seguridad, el servicio está accesible para realizar ls conexión [por ejemplo SSH]. La aplicación precisa estar instalada en el servidor y en el cliente.
 Habilitar el servicio y especificar la red:
@@ -12082,6 +12087,11 @@ $ find /home/$USER -iname *.jpg; notify-send -i gtk-dialog-warning -t 4000 "ATEN
 opciones:
 -i especifica el icono a usar
 -t tiempo en milisegundos que se mostrará la nota
+
+
+nproc
+Muestra el número de procesos en el proceso actual.
+# nproc
 
 
 nrg2iso
