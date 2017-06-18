@@ -11399,7 +11399,7 @@ Solucionar error: ERROR 1290 (HY000): The MySQL server is running with the --sec
 # nano /etc/mysql/my.cnf
 Y en el apartado mysqld añadir la linea:
 	secure-file-priv = ""
-8.-
+9.-
 Modificar el promt de mysql
 Si solo se desea modificar para la presente sesión, puede hacerse directamente desde el prompt de mysql:
 	mysql> prompt \h [\d]>\_
@@ -11425,6 +11425,9 @@ Variables genéricas:
     \c Muestra un contador de sentencias ejecutadas. Continua aumentando a medida que introducimos comandos.
     \u Muestra el usuario
     \U Muestra el nombre de la cuenta de usuario en el formato usuario@servidor
+10.-
+Solucionar error: ERROR 1290 (HY000): The MariaDB server is running with the --skip-grant-tables option so it cannot execute this statement
+mysql> flush privileges;
 
 
 mysqladmin
