@@ -11275,6 +11275,7 @@ Resumen de comandos:
     REPLACE (añadir, cambiar o reemplazar datos nuevos o ya existentes)
     TRUNCATE (vaciar o borrar todos los datos de la plantilla)
 Modelo de creación de una tabla dentro de una BD mysql:
+Nota: en caso de equivocación podemos suspender la entrada de datos con \n . Si existe alguna comilla abierta, primero ha de cerrarse antes de lanzar \n
     mysql> CREATE TABLE usuarios(
     -> nombre VARCHAR(20), apellido VARCHAR(20),
     -> profesión VARCHAR(20), sexo CHAR(1), nacimiento DATE,
@@ -11400,10 +11401,14 @@ Y en el apartado mysqld añadir la linea:
 	secure-file-priv = ""
 8.-
 Modificar el promt de mysql
-Puede hacerse directamente desde el prompt de mysql:
+Si solo se desea modificar para la presente sesión, puede hacerse directamente desde el prompt de mysql:
 	mysql> prompt \h [\d]>
 	PROMPT set to '\h [\d]> '
 	localhost [(none)]>
+Para hacerlo permanente:
+# nano /etc/mysql/my.cnf
+Y en la sección [mysql] añadimos:
+	prompt=\h [\d]>
 Variables genéricas:
     \S muestra un punto y coma
     \' muestra comillas simples
