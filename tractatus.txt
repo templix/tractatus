@@ -11262,6 +11262,18 @@ Una vez en el prompt de mysql [Todas las sentencias han de terminar con un punto
 	mysql> exit (Salir de mysql. Tambien con "quid" o Ctrl+d)
 	mysql> select version(), current_date; (Mostrar versión de mysql y fecha)
 	mysql> SET lc_messages = 'es_ES'; (Que los mensajes de error salgan en español)
+Resumen de comandos:
+    CREATE DATABASE (rear nueva base de datos vacía)
+    DROP DATABASE (eliminar completamente una base de datos existente)
+    CREATE TABLE (crear nueva tabla)
+    ALTER TABLE (modificar una tabla ya existente)
+    DROP TABLE (eliminar por completo una tabla existente)
+    SELECT (leer o seleccionar datos)
+    INSERT (añadir o insertar nuevos datos)
+    UPDATE (cambiar o actualizar datos existentes)
+    DELETE (eliminar o borrar datos existentes)
+    REPLACE (añadir, cambiar o reemplazar datos nuevos o ya existentes)
+    TRUNCATE (vaciar o borrar todos los datos de la plantilla)
 Modelo de creación de una tabla dentro de una BD mysql:
     mysql> CREATE TABLE usuarios(
     -> nombre VARCHAR(20), apellido VARCHAR(20),
@@ -11386,6 +11398,28 @@ Solucionar error: ERROR 1290 (HY000): The MySQL server is running with the --sec
 # nano /etc/mysql/my.cnf
 Y en el apartado mysqld añadir la linea:
 	secure-file-priv = ""
+8.-
+Modificar el promt de mysql
+Puede hacerse directamente desde el prompt de mysql:
+	mysql> prompt \h [\d]>
+	PROMPT set to '\h [\d]> '
+	localhost [(none)]>
+Variables genéricas:
+    \S muestra un punto y coma
+    \' muestra comillas simples
+    \" muestra comillas dobles
+    \v muestra la versión del servidor
+    \p muestra el puerto de conexión
+    \\ Muestra una barra invertida
+    \n Inserta un salto de linea
+    \t Inserta una fabulación
+    \ Inserta un espacio (debe haber un espacio en blanco después de \ )
+    \_ Inserta un espacio (debe haber un _ después de \ )
+    \d Muestra la base de datos por defecto
+    \h Muestra el nombre del servidor
+    \c Muestra un contador de sentencias ejecutadas. Continua aumentando a medida que introducimos comandos.
+    \u Muestra el usuario
+    \U Muestra el nombre de la cuenta de usuario en el formato usuario@servidor
 
 
 mysqladmin
