@@ -11428,6 +11428,15 @@ Variables genéricas:
 10.-
 Solucionar error: ERROR 1290 (HY000): The MariaDB server is running with the --skip-grant-tables option so it cannot execute this statement
 mysql> flush privileges;
+11.-
+Colocar un contador de registros en una tabla:
+    mysql> CREATE TABLE usuarios(
+	-> id_image INT(3) NOT NULL AUTO_INCREMENT,
+    -> nombre VARCHAR(20), apellido VARCHAR(20),
+    -> profesión VARCHAR(20), sexo CHAR(1), nacimiento DATE,
+    -> antiguedad DATE),
+	-> PRIMARY KEY (id_image)
+	-> );
 
 
 mysqladmin
