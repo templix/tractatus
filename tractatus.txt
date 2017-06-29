@@ -19300,6 +19300,23 @@ Limitar el ancho de banda de la conexion de una red. Prioriza telnet y ssh sobre
 # wondershaper clear eth0  (Elimina los ajustes realizados en la red especificada)
 
 
+wormhole
+[magic-wormhole]. Envio de archivos o directorios entre computadoras usando un código de un solo uso. la máquina emisora genera y muestra el código, que debe ser escrito en la máquina receptora. El ejemplo que sigue es sacado de la pàgina del proyecto <https://github.com/warner/magic-wormhole>
+En la máquina emisora:
+	$ wormhole send README.md
+	Sending 7924 byte file named 'README.md'
+	On the other computer, please run: wormhole receive
+	Wormhole code is: 7-crossover-clockwork
+En la máquina receptora:
+	$ wormhole receive
+	Enter receive wormhole code: 7-crossover-clockwork
+	Receiving file (7924 bytes) into: README.md
+	ok? (y/n): y
+	Receiving (->tcp:10.0.1.43:58986)..
+	100%|===========================| 7.92K/7.92K [00:00<00:00, 120KB/s]
+	Received file written to README.md
+
+
 worms
 Muestra gusanos en la terminal.
 $ worms -d 200 -n 4 -l 4 (lento [-d] por defecto 0. 200 máximo, mostrando 4 gusanos [-n] Por defecto 3 y con longitud de 4 caracteres [-l]. Por defecto 16.
