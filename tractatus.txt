@@ -11957,24 +11957,24 @@ Entrada de los objetivos cuando no se realiza por la linea de ordenes:
 	-iL ips.txt (Desde una lista de ips colocadas una por linea en el archivo ips.txt)
 	-iR 100 (Scanear 100 ips aleatoria. Con -iR 0 el escaneo no termina nunca.)
 Técnicas de sondeos de puertos que soporta Nmap:
-	-sA [sondeo TCP ACK] (Este sondeo no puede determinar puertos abiertos o abiertos|filtrados. Se utiliza para mapear reglas de cortafuegos, y para determinar si son cortafuegos con inspección de estados y qué puertos están filtrados.
-	-sL [Sondeo de lista] (lista los objetivos a analizar sin enviar paquetes de ningún tipo a los objetivos)
-	-sM [sondeo TCP Maimon] (El sondeo Maimon debe su nombre a la persona que lo descubrió: Uriel Maimon. Describió la técnica en la revista Phrack número 49 (noviembre de 1996). Nmap, que incluye esta técnica, se publicó dos números más tarde. Esta técnica es exactamente la misma a los sondeos Null, FIN, y Xmas, pero en los que se envía una sonda FIN/ACK. Según el RFC 793 (TCP), se debería generar un paquete RST cuando se responde a dicha sonda independientemente de si el puerto está cerrado o abierto. Uriel se dio cuenta, sin embargo, de que muchos sistemas derivados de BSD simplemente descartan el paquete si el puerto está abierto.
-	-sN, -sF, -sX [sondeos TCP Null, FIN, y Xmas] (Estos sondeos aprovechan una indefinición en la RFC de TCP que diferencia los puertos abiertos y cerrados. La ventaja fundamental de este tipo de sondeos es que pueden atravesar algunos cortafuegos que no hagan inspección de estados o encaminadores que hagan filtrado de paquetes. Otra ventaja es que este tipo de sondeos son algo más sigilosos que, incluso, un sondeo SYN. Un problema de estos sondeos es que no se puede distinguir los puertos abiertos de algunos puertos filtrados, lo que resulta en la respuesta abierto|filtrado.
-	-sO [sondeo de protocolo IP] (Este sondeo permite determinar qué protocolos [TCP, ICMP, IGMP, etc.] soportan los sistemas objetivo. Esto no es, técnicamente, un sondeo de puertos, dado que cambia los números de protocolo IP en lugar de los números de puerto TCP ó UDP.
-	-sP [sondeo ping] (Sólo determina si el objetivo responde. Metodo intrusivo)
-	-sS [sondeo TCP SYN] (Es el utilizado por defecto. Puede sondear miles de puertos por segundo en una red rápida sin cortafuegos y es relativamente sigiloso y poco molesto, ya que no llega a completar las conexiones TCP)
-	-sT [sondeo TCP connect()] (Es el sondeo por omisión cuando no se puede utilizar el sondeo SYN. Al realizar conexiones completas para abrir los puertos objetivo en lugar de realizar el reseteo de la conexión medio abierta como hace el sondeo SYN implica que tarda más tiempo y son necesarios más paquetes para obtener la información y que muy probablemente el sistema objetivo va a registrar la conexión.)
-	-sU [sondeos UDP] (Los 3 servicios UDP más comunes son: DNS [53], SNMP [161/162], y DHCP [67/68].  Los sondeos UDP funcionan mediante el envío (sin datos) de una cabecera UDP para cada puerto objetivo. Si se obtiene un error ICMP indica que el puerto no es alcanzable y se marca como cerrado. Si se recibe cualquier error ICMP no alcanzable se marca el puerto como filtrado. Si se recibe una respuesta al paquete UDP el puerto está abierto. Si no se ha recibido ninguna respuesta después de algunas retransmisiones entonces se clasifica el puerto como abierto|filtrado. Esto significa que el puerto podría estar abierto o que hay un filtro de paquetes bloqueando la comunicación. Puede utilizarse el sondeo de versión (-sV) para diferenciar los puertos abiertos de los filtrados.
-	-sV [Sondear versiones] (Sondea puertos abiertos para obtener información de la versión del servicio.
-	-sW [sondeo de ventana TCP] (Aprovecha de un detalle de implementación de algunos sistemas que permite diferenciar puertos abiertos de los cerrados, en lugar de imprimir no filtrado cuando se devuelve un RST.)
-	--scanflags [Sondeo TCP a medida] (Esta opción permite diseñar su propio sondeo mediante la especificación de banderas TCP arbitrarias y puede ser un valor numérico como el 9 (PSH y FIN), aunque es más sencillo utilizar nombres simbólicos juntando la combinación de URG, ACK, PSH, RST, SYN, y FIN [--scanflags URGACKPSHRSTSYNFIN] donde se fijan todas las banderas, aunque no es muy útil para sondear. Este es un método de sondeo avanzado que permite hacer un sondeo de puertos TCP a ciegas de verdad lo que significa que no se envía ningún paquete al sistema objetivo desde su dirección IP real por lo que es extraordinariamente sigiloso)
+-sA [sondeo TCP ACK] (Este sondeo no puede determinar puertos abiertos o abiertos|filtrados. Se utiliza para mapear reglas de cortafuegos, y para determinar si son cortafuegos con inspección de estados y qué puertos están filtrados.
+-sL [Sondeo de lista] (lista los objetivos a analizar sin enviar paquetes de ningún tipo a los objetivos)
+-sM [sondeo TCP Maimon] (El sondeo Maimon debe su nombre a la persona que lo descubrió: Uriel Maimon. Describió la técnica en la revista Phrack número 49 (noviembre de 1996). Nmap, que incluye esta técnica, se publicó dos números más tarde. Esta técnica es exactamente la misma a los sondeos Null, FIN, y Xmas, pero en los que se envía una sonda FIN/ACK. Según el RFC 793 (TCP), se debería generar un paquete RST cuando se responde a dicha sonda independientemente de si el puerto está cerrado o abierto. Uriel se dio cuenta, sin embargo, de que muchos sistemas derivados de BSD simplemente descartan el paquete si el puerto está abierto.
+-sN, -sF, -sX [sondeos TCP Null, FIN, y Xmas] (Estos sondeos aprovechan una indefinición en la RFC de TCP que diferencia los puertos abiertos y cerrados. La ventaja fundamental de este tipo de sondeos es que pueden atravesar algunos cortafuegos que no hagan inspección de estados o encaminadores que hagan filtrado de paquetes. Otra ventaja es que este tipo de sondeos son algo más sigilosos que, incluso, un sondeo SYN. Un problema de estos sondeos es que no se puede distinguir los puertos abiertos de algunos puertos filtrados, lo que resulta en la respuesta abierto|filtrado.
+-sO [sondeo de protocolo IP] (Este sondeo permite determinar qué protocolos [TCP, ICMP, IGMP, etc.] soportan los sistemas objetivo. Esto no es, técnicamente, un sondeo de puertos, dado que cambia los números de protocolo IP en lugar de los números de puerto TCP ó UDP.
+-sP [sondeo ping] (Sólo determina si el objetivo responde. Metodo intrusivo)
+-sS [sondeo TCP SYN] (Es el utilizado por defecto. Puede sondear miles de puertos por segundo en una red rápida sin cortafuegos y es relativamente sigiloso y poco molesto, ya que no llega a completar las conexiones TCP)
+-sT [sondeo TCP connect()] (Es el sondeo por omisión cuando no se puede utilizar el sondeo SYN. Al realizar conexiones completas para abrir los puertos objetivo en lugar de realizar el reseteo de la conexión medio abierta como hace el sondeo SYN implica que tarda más tiempo y son necesarios más paquetes para obtener la información y que muy probablemente el sistema objetivo va a registrar la conexión.)
+-sU [sondeos UDP] (Los 3 servicios UDP más comunes son: DNS [53], SNMP [161/162], y DHCP [67/68].  Los sondeos UDP funcionan mediante el envío (sin datos) de una cabecera UDP para cada puerto objetivo. Si se obtiene un error ICMP indica que el puerto no es alcanzable y se marca como cerrado. Si se recibe cualquier error ICMP no alcanzable se marca el puerto como filtrado. Si se recibe una respuesta al paquete UDP el puerto está abierto. Si no se ha recibido ninguna respuesta después de algunas retransmisiones entonces se clasifica el puerto como abierto|filtrado. Esto significa que el puerto podría estar abierto o que hay un filtro de paquetes bloqueando la comunicación. Puede utilizarse el sondeo de versión (-sV) para diferenciar los puertos abiertos de los filtrados.
+-sV [Sondear versiones] (Sondea puertos abiertos para obtener información de la versión del servicio.
+-sW [sondeo de ventana TCP] (Aprovecha de un detalle de implementación de algunos sistemas que permite diferenciar puertos abiertos de los cerrados, en lugar de imprimir no filtrado cuando se devuelve un RST.)
+--scanflags [Sondeo TCP a medida] (Esta opción permite diseñar su propio sondeo mediante la especificación de banderas TCP arbitrarias y puede ser un valor numérico como el 9 (PSH y FIN), aunque es más sencillo utilizar nombres simbólicos juntando la combinación de URG, ACK, PSH, RST, SYN, y FIN [--scanflags URGACKPSHRSTSYNFIN] donde se fijan todas las banderas, aunque no es muy útil para sondear. Este es un método de sondeo avanzado que permite hacer un sondeo de puertos TCP a ciegas de verdad lo que significa que no se envía ningún paquete al sistema objetivo desde su dirección IP real por lo que es extraordinariamente sigiloso)
 Descubrimiento de sistemas:
-	-P0 [No realizar ping] (Nmap no realiza la etapa de descubrimiento y actua como si cada Ip objetivo se encontrara activa)
-	-PA22,445 [Ping TCP ACK] (Envía un paquete TCP vacío con la bandera ACK a una lista de puertos separados por comas para determinar si responden.
-	-PS21,22,25,80 [Ping TCP SYN] (Envía un paquete TCP vacío con la bandera SYN a una lista de puertos separados por comas para saber si el sistema responde.
-	-PU445,5000 [Ping UDP] (Envía paquetes UDP vacios a los puertos indicados para indicar si el sistema responde. Atraviesan cortafuegos y filtros que sólo analizan TCP)
-	-PR [Ping ARP] (El sondeo ARP detecta máquinas en la red local)
+-P0 [No realizar ping] (Nmap no realiza la etapa de descubrimiento y actua como si cada Ip objetivo se encontrara activa)
+-PA22,445 [Ping TCP ACK] (Envía un paquete TCP vacío con la bandera ACK a una lista de puertos separados por comas para determinar si responden.
+-PS21,22,25,80 [Ping TCP SYN] (Envía un paquete TCP vacío con la bandera SYN a una lista de puertos separados por comas para saber si el sistema responde.
+-PU445,5000 [Ping UDP] (Envía paquetes UDP vacios a los puertos indicados para indicar si el sistema responde. Atraviesan cortafuegos y filtros que sólo analizan TCP)
+-PR [Ping ARP] (El sondeo ARP detecta máquinas en la red local)
 Especificación de puertos:
 	-p 21,22 (Separados por comas)
 	-p- (Todos los puertos de 0 al 65535)
@@ -11998,19 +11998,19 @@ Otras opciones:
 nmap scripts
 funcionalidad de nmap que permite la realización de diversas tareas de descubrimiento, detección, expotación de diversas vulnerabilidades, etc. Listado en http://nmap.org/nsedoc/index.html y en local: /usr/share/nmap/scripts/:
 Categorias:
-	auth (Identifican credenciales de autenticación en el sistema objetivo frecuentemente por fuerza bruta [ftp-anon, snmp-brute, http-auth...])
-	broadcast (Realizan un escaneo broadcast en toda la red objetivo sin necesidad de indicar los host de forma manual. utilizando el argumento “newtargets” se indica a Nmap incluir los host descubiertos en la pila de escaneo.)
-	default (Conjunto de scripts que tratan de capturar la mayor cantidad de información de un objetivo a costa de generar mucho ruido en el sistema remoto.)
-	discovery (Tratan de mapear los host de la red [registros públicos, dispositivos SNMP, servicios de directorio...])
-	dos (Intentan causar denegación de servicio sobre un servicio determinado.)
-	exploit (Tratan de detectar y explotar algún tipo de vulnerabilidad sobre el objetivo.)
-	external (Los que se comunican con otros hosts distintos del local. Pueden enviar a una fuente externa la IP del objetivo y del atacante.)
-	fuzzer (Envían datos aleatorios, inesperados o incompletos, con el fin de detectar posibles vulnerabilidades en servicios)
-	intrusive (Intentan utilizar grandes recursos del sistema objetivo que pueden incluso inutilizarlo)
-	malware (Intentan determinar si el objetivo se encuentra infectado con maleware o backdoors [smtp-strangeport y auth-spoof])
-	safe (Scripts poco intrusivos diseñados para no afectar ni dañar el objetivo [ssh-hostkey o html-title])
-	version (Diseñados para identificar versiones concretas de servicios. Se ejecutan solo si el escaneo tiene la opción Scan Version [-sV])
-	vuln (Dedicados a la detección de vulnerabilidades pero no su explotación [realvnc-auth-bypass y afp-path-vuln])
+auth (Identifican credenciales de autenticación en el sistema objetivo frecuentemente por fuerza bruta [ftp-anon, snmp-brute, http-auth...])
+broadcast (Realizan un escaneo broadcast en toda la red objetivo sin necesidad de indicar los host de forma manual. utilizando el argumento “newtargets” se indica a Nmap incluir los host descubiertos en la pila de escaneo.)
+default (Conjunto de scripts que tratan de capturar la mayor cantidad de información de un objetivo a costa de generar mucho ruido en el sistema remoto.)
+discovery (Tratan de mapear los host de la red [registros públicos, dispositivos SNMP, servicios de directorio...])
+dos (Intentan causar denegación de servicio sobre un servicio determinado.)
+exploit (Tratan de detectar y explotar algún tipo de vulnerabilidad sobre el objetivo.)
+external (Los que se comunican con otros hosts distintos del local. Pueden enviar a una fuente externa la IP del objetivo y del atacante.)
+fuzzer (Envían datos aleatorios, inesperados o incompletos, con el fin de detectar posibles vulnerabilidades en servicios)
+intrusive (Intentan utilizar grandes recursos del sistema objetivo que pueden incluso inutilizarlo)
+malware (Intentan determinar si el objetivo se encuentra infectado con maleware o backdoors [smtp-strangeport y auth-spoof])
+safe (Scripts poco intrusivos diseñados para no afectar ni dañar el objetivo [ssh-hostkey o html-title])
+version (Diseñados para identificar versiones concretas de servicios. Se ejecutan solo si el escaneo tiene la opción Scan Version [-sV])
+vuln (Dedicados a la detección de vulnerabilidades pero no su explotación [realvnc-auth-bypass y afp-path-vuln])
 Opciones:
 # nmap --script-args <argumentos> (Se trata de un conjunto de argumentos que se suministran a los Scripts que admiten parámetros para configurar su ejecución.)
 # nmap --script citrix-brute-xml --script-args=userdbd=usernames.lst,passdb=passwords.lst,ntdomain=domain -p 80,443,8080 IP
@@ -14960,6 +14960,21 @@ Con estos datos lanzar:
 sdiff
 Muestra dos ficheros interactivamente.
 $ sdiff -W -B file1 file2 (Ignorando espacios [W] y lineas en blanco [B])
+
+
+seashells
+[python-pip]. Herramienta que canaliza la salida de un comando de la terminal a la web en tiempo real. Para instalar:
+# pip install seashells
+Uso básico:
+$ ip a | seashells
+	serving at https://seashells.io/v/NNbRnMCJ
+	1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1
+	    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+	    inet 127.0.0.1/8 scope host lo
+	       valid_lft forever preferred_lft forever
+	...
+Abriendo el navegador y colocando la url que da la linea "serving at https://seashells.io/v/NNbRnMCJ" mostrará la salida del comando.
+$ htop | seashells --delay 5 (con actualización automática cada espacio de tiempo indicado)
 
 
 sed
