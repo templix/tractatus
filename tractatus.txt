@@ -16609,6 +16609,9 @@ Para que al bajar la tapa de un portatil el sistema no se supenda.
 # nano /etc/systemd/logind.conf
 Y modificar la linea:
 	HandleLidSwitch=ignore
+3.-
+Para cambiar el nivel de ejecución predeterminado del sistema, que con sysvinit se hacía editando /etc/inittab y modificando la linea id:5:initdefault:, con systemd se hace:
+# ln -sf /lib/systemd/system/graphical.target /etc/systemd/system/default.target
 
 
 systemd-analyze
