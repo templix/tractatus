@@ -7705,6 +7705,12 @@ Ping específico para conexiones HTTP
 # httping -h localhost -p 80
 
 
+httrack
+[WebHTTrack]. Crea en local una copia navegable de una web que puede visualizarse con un navegador sin necesidad de conexión a internet.
+$ httrack sitio_escogido.com (Crea en el directorio personal una carpeta "sitio_escogido.com" con todos loa datos descargados del sitio original)
+$ httrack sitio_escogido.com -O /root/descargas/pelis (Especificando lugar de descarga)
+
+
 hydra
 Se utiliza para crackear los sistemas de login de diferentes servicios como HTTP, FTP, TELNET, IMAP, SMB, SSH, etc.
 # hydra 192.168.1.5 -l admin -p 1234 (Una ip con el usuario "admin" con la clave "1234")
