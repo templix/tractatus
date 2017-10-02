@@ -14580,7 +14580,8 @@ Mostrar/manipular la tabla de enrutamiento ip.
 $ route -n
 $ route add default gw 192.168.1.50 (Establecer los protocolos de conexión después de levantar una red manualmente con ifconfig)
 # route add --host 192.168.0.12 eth0 (agregar un host a una tabla de enrutamiento)
-# route add -host IP reject (Rechaza la conexión de una ip en concreto)
+# route add -host IP reject (bloquear una IP)
+# route del IP reject (desbloquear una ip)
 $ route del -net 0.0.0.0 netmask 0.0.0.0 gw 192.168.1.10 (Eliminar una puerta de enlace)
 $ route add -net 0.0.0.0 netmask 0.0.0.0 gw 192.168.1.1 (Crear una nueva puerta de enlace)
 
