@@ -15981,14 +15981,22 @@ $ srm -rzv dir (se sobreescriben 38 veces los archivos y subdirectorios incluido
 
 ss
 Utilidad para investigar sockets. Sustituye a netstat.
-# ss -r  (resolviendo las IPs)
-# ss -n  (sin resolver)
-# ss  (igual)
-# ss -l   (muestra los que estan esperando conexión)
-# ss -o  (con conexión establecida)
-# ss -p  (con la aplicación que los motiva)
-# ss -a | grep ssh  (De todas las conexiones, solo muestra las ssh)
+# ss -r (resolviendo las IPs)
+# ss -4 (muestra las conexiones IPv4)
+# ss -ta (conexiones TCP)
+# ss -ua (conexiones del protocolo UDP)
+# ss -n (sin resolver)
+# ss  (muestra todas las direcciones y puertos tanto en modo escucha como no)
+# ss -l (muestra los que estan esperando conexión)
+# ss -ltn (muestra los sockets TCP que estan en "listen" [escucha])
+# ss -lun (muestra los sockets UDP que estan en "listen")
+# ss -o (con conexión establecida)
+# ss -p (con la aplicación que los motiva)
+# ss -a | grep ssh (De todas las conexiones, solo muestra las ssh)
+# ss -s (estadísticas generales)
 # ss -tpan 'sport = :22' (ver conexiones por el puerto 22)
+# ss -n dst :443 (muestras las del puerto 443)
+# ss -o state established '( dport = :https )' (muestra las conexiones https)
 
 
 ssh
