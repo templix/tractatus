@@ -8845,6 +8845,18 @@ Borrar kernels antiguos de forma automática:
 	# apt-get purge $(dpkg -l 'linux-*' | sed '/^ii/!d;/'"$(uname -r | sed "s/\(.*\)-\([^0-9]\+\)/\1/")"'/d;s/^[^ ]* [^ ]* \([^ ]*\).*/\1/;/[0-9]/!d' | head -n -1) --assume-yes
 
 
+kickthemout
+[nmap]. Herramienta que usa el envenenamiento ARP o ARP Spoofing que mata la conectividad a Internet del o los dispositivos conectados a una red de área local, siempre que la configuración de seguridad de la red no impida dichos ataques.
+Descarga y requerimientos:
+$ git clone https://github.com/k4m4/kickthemout.git
+$ cd kickthemout/
+$ sudo -H python -m pip install -r requirements.txt
+$ sudo python kickthemout.py
+Al lanzar la aplicación:
+# python kickthemout.py
+Muestra 3 posibilidades, matar uno, varios o todos los dispositivos y el bloqueo dura mientras el comando está en ejecución por tanto el bloqueo es temporal.
+
+
 kill
 Enviar señales a los procesos.
 $ kill -l	    (lista todas las señales que pueden mandarse a un proceso)
