@@ -3112,6 +3112,11 @@ $ echo "4 6 + 2 * 4 / p" | dc
 $ echo "40034291 23 % p " | dc (Da el resto de la división)
 
 
+dconf
+Restablece los parámetros o configuración por defecto de entornos de escritorio Unity, GNOME y MATE.
+$ dconf reset -f /
+
+
 dcfldd
 Versión moderna de dd que muestra el progreso así como informar si se producen errores. Soporta en teoría los mismos parámetros que el comando dd original
 # dcfldd if=imagen.iso of=/dev/sde bs=1M
