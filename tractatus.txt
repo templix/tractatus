@@ -9938,6 +9938,16 @@ $ ls /usr/share/icons/ (Ver el listado de los disponibles)
 Y en apartado Inherits colocar el deseado:
 Inherits = ComixCursors-Red-Large
 Reiniciar.
+4.-
+Para no cambiar de escritorio con movimientos del mouse comentar el siguiente código del lxde-rc.xml con <!-- y -->:
+      <!--
+      <mousebind button="Up" action="Click">
+        <action name="DesktopPrevious"/>
+      </mousebind>
+      <mousebind button="Down" action="Click">
+        <action name="DesktopNext"/>
+      </mousebind>
+      -->
 
 
 lxpanelctl
