@@ -1,4 +1,3 @@
-
 TRACTATUS ELEMENTALIS
 
 4g8
@@ -13949,6 +13948,15 @@ Examina la lista de los procesos y muestra el ID y los PIDs de los procesos hijo
 $ pslist (Muestra todo el listado)
 $ pslist chromium (Mostrará sólo el de la aplicación especificada)
 $ pslist 26995 (Mostrará sólo la del PID especificado)
+
+
+ps_mem
+Script de Python para conocer la memoria RAM que consume cada aplicación de nuestro equipo aunque tenga abiertos varios procesos. Descarga:
+# wget https://raw.githubusercontent.com/pixelb/ps_mem/master/ps_mem.py
+# python ps-mem.py -S (De todos los programas que se estan ejecutando)
+# python ps_mem.py -w 5 (Actualizando datos cada 5 segundos)
+# python ps_mem.py -t (Mostrar el total de todos los procesos)
+# python ps_mem.py -p 5123 (Mostrar el consumo del PID mencionado)
 
 
 pstree
