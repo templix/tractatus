@@ -14573,6 +14573,13 @@ Para que todo lo eliminado con el comando rm vaya a la papelera del sistema:
 $ nano .bashrc
 Y añadimos el alias:
 alias rm='mv -t ~/.local/share/Trash/files'
+2.-
+Eliminar todo un directorio menos un subdirectorio, por ejemplo menos el dir HTMLS:
+	$ ls
+	dir3  file1.txt  HTMLS  dirpdfs  file2.txt
+	$ ls | grep -v HTMLS | xargs -d"\n" rm -rf
+	$ ls
+	HTMLS
 
 
 rmdir
