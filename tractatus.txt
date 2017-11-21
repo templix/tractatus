@@ -12119,6 +12119,15 @@ nmblookup
 $ nmblookup -A 192.168.1.125
 
 
+nmcli
+Herramienta de línea de comandos para controlar NetworkManager para conocer su estado.
+$ nmcli -m tabular device show (ver todos los dispositivos de red de forma tabulada. Otra opción es multiline)
+$ nmcli connection show (ver conexión activa)
+$ nmcli general status (estado)
+$ nmcli -p -f general,wifi-properties device show wlan0 (ver información extensa [p] y propiedades de los campos expecificados [f]
+$ nmcli general permissions (permisos)
+
+
 nmon
 Monitor del sistema
 # nmon   (arranca la aplicación y muestra las teclas de control para escoger lo que se monitorea. “q” para cerrar la aplicación)
