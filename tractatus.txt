@@ -2099,6 +2099,11 @@ $ cdda2wav -B -H -D /dev/sdxx -s -x (extrae disco completo en archivos wav separ
 $ cdda2wav -H -D /dev/sdxx -s -x -t 5 (extrae la pista nº 5)
 
 
+cd-drive
+[libcdio-utils]. Describe las características de la unidad de CD-ROM/DVD.
+$ cd-drive
+
+
 cdeject
 [cdtool]. Abrir el cd. Ver eject
 $ cdeject -d /dev/sr0 (especificando el dispositivo [cdrom0....])
@@ -2109,6 +2114,11 @@ cdinfo
 $ cdinfo -d /dev/sr0
 
 
+cd-info
+[libcdio-utils]. Muestra información del CD (número de pistas, formato ...)
+$ cd-info
+
+
 cdir
 [cdtool]. Información sobre el directorio del cd
 $ cdir -n (Duración de las canciones de un cd)
@@ -2116,7 +2126,7 @@ $ cdir -d /dev/sr0 -r (Lo mismo especificando dispositivo)
 
 
 cdparanoia
-Extraer pistas de audio de un cd
+Extraer pistas de audio de un cd.
 $ cdparanoia -B -d /dev/sdxx (extrae disco completo en archivos wav separados)
 $ cdparanoia 5 -d /dev/sdxx (extrae el track nº 5)
 
