@@ -11078,6 +11078,27 @@ muestra estadísticas relacionadas con la CPU.
 # mpstat 2 -P ALL (actualiza cada 2 segundos)
 
 
+mpsyt
+[mps-youtube]. Reproductor de videos de youtube. Precisa python3
+# pip install mps-youtube
+Hace uso de aplicaciones externas. Para las descargas aria2.
+# apt-get install aria2
+# set download_command aria2c --dir=%d --out=%f %u
+# set download_command aria2c -s4 -x4 --dir=%d --out=%f %u
+Y para la reproducción, mpv o mplayer.
+# apt-get install mpv mplayer
+# pip3 install mps-youtube --upgrade (actualizar)
+$ mpsyt (Lanzar la aplicación)
+$ set player mplayer (para que mplayer sea el reproductor)
+$ set player mpv (Para que lo sea mpv)
+$ set search_music false (Para que no busque archivos de música [por defecto])
+$ set show_video true (Para que los busque de video)
+Las busquedas se realizan anteponiendo un punto al video a buscar [.madonna] y el que se desea del listado que aparece se selecciona entrando el número que indica [1,2,3...] y para descargar:
+	d número
+Para más opciones:
+	h
+
+
 mrename
 Añade un prefijo al nombre del archivo
 $ mrename '*.mp3' vacaciones -m  (sustituye los originales)
