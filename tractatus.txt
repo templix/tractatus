@@ -11842,6 +11842,13 @@ $ nettlet-hash --list  (lista los algoritmos que pueden usarse)
 $ nettlet-hash -a sha224 fichero
 
 
+newgrp
+Al ingresar un usuario en el sistema tiene predeterminado un grupo principal con un gid concreto con unos permisos determinados para la creación de ficheros y directorios, pero puede estar asignado a más de un grupo con distinto gid. Para cambiarse a uno de estos otros grupos:
+$ newgrp grupo1
+Para volver a su grupo primario:
+# exit
+
+
 newsbeuter
 Lector RSS en consola
 $ newsbeuter -i archivo.opml  (cargar los feeds de otra aplicación)
