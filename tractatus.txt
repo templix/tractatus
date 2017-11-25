@@ -9455,6 +9455,14 @@ $ ln -s /dev/null ~/.bash_history  (vincular historial a /dev/null)
 $ ln -sf /opt/metasploit/msf* /usr/bin (Crear un enlace a /usr/bin de todos los ejecutables que empizan por msf del directorio /opt/metasploit)
 
 
+lnstat
+Proporciona estadísticas de redes. Es un sustituto del antiguo programa rtstat.
+# lnstat -c 3 (realiza 3 muestras)
+# lnstat -d (Lista de opciones)
+# lnstat -k entries (Muestra solo esta opción)
+# lbstat -i 2 (2 segundos entre muestra y muestra)
+
+
 lo
 Abrir documentos o herramientas de libreoffice
 $ lowriter -o archivo.odt
@@ -9825,14 +9833,6 @@ Ver los puertos USB y los dispositivos conectados a ellos. De vez en cuando ha d
 # update-usbids
 $ lsusb -d 046d:c00e (De un dispositivo determinado especificando fabricante y producto)
 $ lsusb -s 006:002 (De un dispositivo determinado especificando bus y número dispositivo)
-
-
-ltstat
-Proporciona estadísticas de redes. Es un sustituto del antiguo programa rtstat.
-# lnstat -c 3 (realiza 3 muestras)
-# lnstat -d (Lista de opciones)
-# lnstat -k entries (Muestra solo esta opción)
-# lbstat -i 2 (2 segundos entre muestra y muestra)
 
 
 luakit
@@ -14055,6 +14055,12 @@ $ cat /etc/apt/sources.list | pv -qL 10  (lo mismo de un archivo)
 $ pv archivo1 > archivo2  (copiar archivo mostrando el progreso)
 $ pv -tpreb /dev/urandom | dd of=file.img (ejemplo hacia un archivo)
 $ pv /dev/urandom -L 3m > /dev/null (otro ejemplo del comportamiento de pv)
+
+
+pvdisplay
+Ver características de un volúmen físico.
+# pvdisplay /dev/sda2
+# pvdisplay -s /dev/sda2 (conocer el espacio disponible en dicho un volúmen físico)
 
 
 pvesh
