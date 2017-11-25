@@ -14218,6 +14218,21 @@ $ quiz (Listara los temas posibles)
 $ quiz Europe capital (Preguntará capitales de Europa. Si no se sabe la respuesta pulsar intro en blanco y mostrará la respuesta)
 
 
+quota
+[quotacheck]. Limitar el uso del espacio de disco para cada usuario de un servidor. El proceso es como sigue:
+# nano /etc/fstab
+Modificar la linea parecida a:
+	/dev/hdb2    /home    ext2    errors=remount-ro   0    1
+añadiendo usrquota y grpquota com sigue:
+	/dev/hdb2    /home    ext2    errors=remount-ro,usrquota,grpquota  0    1
+Reiniciar el servidor.
+# quotacheck -avug (La primera vez muestra advertencia, prescindir de ellas)
+# quotaon /home (Activar las cuotas)
+# edquota USER1 (activar cuotas para un usuario)
+# edquota -p USER1 USER2 (Otorgar a USER2 la misma cuota que USER1)
+# quota USER2 (Comprobar si un usuario tiene cuota)
+
+
 rain
 [bsdgames]. Muestra chapoteo de agua en la terminal.
 $ rain -d 120 (El máximo de lento. Por defecto 0 [rápido])
