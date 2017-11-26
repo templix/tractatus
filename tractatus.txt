@@ -5634,6 +5634,14 @@ $ feh --bg-scale /home/usuario/imagenes/image.jpg (Colocar una imagen de fondo d
 $ feh http://URL/imagen.png (Visualizar una imagen a partir de una URL)
 
 
+fernapp
+[openjdk-6-jre unzip xvfb libxcomposite1 libxdamage1 x11-xkb-utils]. Acceso a aplicaciones gráficas desde el navegador. Descarga: https://bitbucket.org/MarkusKramer/fernapp/downloads/ una vez descomprimido el paquete:
+$ cd fernapp
+$ sudo chmod +x fernapp-server.sh
+$ ./fernapp-server.sh libreoffice (indicar la aplicacion que quiere compartirse)
+En el navegador remoto se accede por: http://localhost:8080/index.html y la contraseña 123
+
+
 festival
 [festival festvox-ellpc11k]. Sintetizador de voz.
 $ echo “Linux es genial” | festival --tts --language spanish
