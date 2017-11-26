@@ -5792,6 +5792,7 @@ $ find ~/ -depth -type f -empty (Buscar archivos vacios. Con -type d buscará di
 $ find / -name "algo" -a ! -path "/media/servidor/*" -exec echo {} \; 2>/dev/null (Buscar "algo" descartando el directorio /media/servidor/)
 $ find /home/usuario -iname '*.odt' -exec cp '{}' /home/usuario/Documentos \; (Copiar todos los odt a la carpeta Documentos)
 $ find . -type f -amin -5 ! -path "./.*" (Buscar ficheros modificados los últimos 5 minutos descartando los ocultos)
+$ find . ! -name "plantilla*" -type f -delete | find . ! -name HTMLS -type d -delete (borrar todos menos los "plantilla*" y el directorio "HTMLS")
 
 
 findfs
@@ -7082,7 +7083,9 @@ $ grep cups /etc/services (Conocer el puerto por el que corre un servicio)
 $ grep 631 /etc/services (Conocer el servicio por el que corre un puerto)
 $ grep -s 'palabra' * (Suprime los mensajes de error sobre ficheros que no existen o no se pueden leer)
 Buscar tres palabras al inicio de la linea [escapando la barra vertical] de un archivo:
-  $ mysqldump --help | grep ^routines\|^trigg\|^user -E
+	$ mysqldump --help | grep ^routines\|^trigg\|^user -E
+1.- Borrar directorios y/o archivos dejando alguno [borrar todo menos DIR3 i los archivos que contengan "archi"]:
+$ ls | grep -v DIR3 | grep -v archi | xargs -d"\n" rm -rf
 
 
 grive
