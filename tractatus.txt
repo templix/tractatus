@@ -16916,6 +16916,13 @@ Ejemplo de un proceso:
 # tcpdump -r /tmp/port.80 -nn 'host !216.158.240.43' -w /tmp/port.80.b (Lo mismo enviando los nuevos datos a otro fichero)
 
 
+tcpick
+Muestra información sobre conexiones, información, carga, datos FTP, HTTPS, download...
+http://www.linuxplanet.org/blogs/?cat=733
+# tcpick -i eth0 -C
+# tcpick -i eth0 -C -a "port 80" (muestrar en color [C] y nombres de host[a] en un puerto)
+
+
 tcpkill
 [dsniff)]. Matar o impedir conexiones tcp.
 # tcpkill -i eth1 host www.facebook.com (imposibilitará entrar en facebook)
