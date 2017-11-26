@@ -17207,6 +17207,18 @@ $ python tinfoleak.py -n usuario -f palabra (Mostrar publicaiones del usuario qu
 $ python tinfoleak.py -n usuario -bsgthmc 1000 --sdate 2014/10/01 --stime 08:00:00 -etime 22:00:00 (Mostrar información básica del usuario, apps, hashtags usados, menciones, coordenadas, fehca y hora de cada twit, analizando los últimos 1000 twits desde la fehca especificada y en la franja horaria de 8 a 22 horas)
 
 
+tinyproxy
+Crear un proxy HTTP. editar el archivo de configuración:
+# nano /etc/tinyproxy/tinyproxy.conf
+descomentar las lineas:
+	Allow 127.0.0.1 (Si solo queremos conexión en nuestra máquina)
+	Port 5023 (modificar el puerto). Por defecto 8888)
+	DisableViaHeader Yes (Desactivar la cabecera)
+# etc/init.d/tinyproxy restart (Reiniciar el servicio)
+Los errores se almacenan en /var/log/tinyproxy/tinyproxy.log
+Cuando se quiera usar con el navegador entrar los datos del proxy en Opciones -- Avanzado -- Red
+
+
 tload
 Muestra el promedio de carga en el terminal en forma de dibujos de caracteres.
 $ tload -d 2 (Con actualizacion cada 2 segundos)
