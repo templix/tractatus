@@ -16611,8 +16611,16 @@ $ sudoedit -u root /etc/sudoers
 
 
 sudosh
-Registra lo que hace un usuario en el sistema cuando requiere privilegios de administrador y lo almacena en dos ficheros de log, uno para los comandos y otro para los tiempos.
-[http://sourceforge.net/projects/sudosh2/]
+Registra lo que hace un usuario en el sistema cuando requiere privilegios de administrador y lo almacena en dos ficheros de log, uno para los comandos y otro para los tiempos. Descarga: <http://sourceforge.net/projects/sudosh2/> y el ejecutable se instala en /usr/local/bin/sudosh
+Ajustes
+# nano /etc/sudoers
+Y añadir la linea:
+	Cmnd_Alias SUDOSH=/usr/local/bin/sudosh
+Incluir sudosh en las shells:
+# echo "/usr/local/bin/sudosh" >> /etc/shells
+Añadimos la ruta al final del usuario que queremos monitorizar:
+# nano /etc/passwd
+	games:x:5:60:games:/usr/games:/usr/local/bin/sudosh
 # sudosh (Inicia la grabación de todo lo que ocurre en la consola)
 # sudosh-replay (Muestra las grabaciones archivadas en /var/log/sudosh/)
 # sudosh-replay templix-root-script-1353428989-Eji70wlZOAuIE4HM (Reproduce la escogida)
