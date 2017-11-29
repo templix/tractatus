@@ -8280,6 +8280,7 @@ $ ip link set dev eth0 down (bajar una red)
 $ ip route add default via 192.168.1.1 (establecer la ip del router)
 $ ip link set dev eth0 up (levantar una red)
 $ ip addr add 192.168.1.20 255.255.255.0 dev eth1 (establecer una ip estática)
+$ ip addr del 192.168.1.55/24 dev eth0 (bajar una ip
 $ ip n  (MAC e IP del router)
 $ ip link set dev eth1 address 00:03:44:88:00:11 (Modificdar la MAC. Previamente bajar la red)
 $ ip route del default (Eliminar puerta de enlace para crear una nueva)
@@ -8288,7 +8289,7 @@ $ ip route add 192.168.1.53 via 192.168.0.33 (redirigir un pc a otro)
 $ ip route add 192.168.1.0/24 via 192.168.0.33 (redirigir una red a un pc)
 $ ip -f inet addr show eth0 (información de la dirección ip)
 $ ip route add 192.168.2.0/24 via 192.168.1.10 (Añadir una red a una puerta de enlace)
-Nota.- Verificar que /etc/resolv contenga una linea con el servidor DNS tipo: nameserver 8.8.8.8 [para las DNS de google]
+Nota.- Verificar que /etc/resolv contenga una linea con el servidor DNS tipo: nameserver 8.8.8.8 [para las DNS de google] o la 127.0.0.1
 
 
 ip-ajustes
@@ -8302,7 +8303,7 @@ ip-ajustes
 	boadcast 192.168.2.255
 	gateway 192.168.x.1
 # /etc/init.d/networking restart (reiniciar el servicio)
-$ ifconfig (verificar la nueva ip)
+$ ip a (verificar la nueva ip)
 
 
 ipband
