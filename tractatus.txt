@@ -8022,15 +8022,22 @@ $ import -geometry 250×250! captura.png (indicando un tamaño respetando las pr
 
 impressive
 Visualizar documentos PDF e imágenes (jpg, tiff, png...)
-$ impressive documento.pdf
-$ impressive -l    (lista efectos disponibles)
+$ impressive archivo.pdf (uso basico)
+$ impressive -f -g 800x600 archivo.pdf (Sólo ocupando una ventana de la pantalla
+$ impressive -f -g 800x600 *.jpge todos los jpg del directorio)
+$ impressive -a 5 -w archivo.pdf (5 segundos por diapositiva y reiniciando la presentación cuando termine)
+$ impressive -i 10 archivo.pdf (empezando en la página 10)
+$ impressive --invert archivo.pdf (invirtiendo los colores existentes en el pdf)
+$ impressive -p 10-12 archivo.pdf (Sólo mostrar de las páginas 10 a la 12)
+$ impressive -l (lista efectos disponibles)
 $ impressive -t SqueezeLeft documento.pdf
 Algunas opciones:
-AvPág          Va a la página siguientes
-RePág          Va a la página anterior
-z                  zoom donde esté el cursor
-f                   Activa/Desactiva la pantalla completa
-q                  Salir de la aplicación
+AvPág (Va a la página siguiente)
+RePág (Va a la página anterior)
+z (zoom donde esté el cursor)
+f (Activa/Desactiva la pantalla completa)
+tab (mostrar miniaturas)
+q (Salir de la aplicación)
 
 
 imsniff
