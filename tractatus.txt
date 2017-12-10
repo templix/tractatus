@@ -8076,6 +8076,36 @@ Si existen errores se mostrarán la lanzar:
 # inadyn
 
 
+incron
+Monitorizar los cambios realizados en un directorio del sistema lo cual se refleja en /var/log/messages [tail -f /var/log/messages]. La configuración global y el monitoreo se realiza en /etc/incron.conf. Igual que con crontab [ver] puede abrirse como usuario normal o root [crontab -e]. Para arrancar el servicio:
+# service incron start
+Añadir las lineas de los archivos o directorios a monitorizar según los ejemplos siguientes en /etc/incron.conf
+	/home/USER/dir1 IN_MODIFY echo "$$ $@ $# $% $&" (datos ha indicar si se modifica dir1)
+	/etc/apache2/apache2.conf IN_MODIFY /usr/sbin/service apache2 stop (si se modifica apache2.conf parar el servicio)
+	/home/USER/Documentos IN_ACCES mplayer /home/USER/musica/cancion.mp3 (reproducir mp3 si alguien accede a un directorio)
+	/var/www/html IN_CREATE script_backup.sh (ejecutar un script si se crea un nuevo archivo o directorio en html)
+	/home/USER/emacs_tut.txt IN_MODIFY echo "$$ $@ $# $% $&" (si se ha modificado un fichero)
+Opciones de monitoreo de los archivos o directorios:
+    IN_ACCESS - Si se accedió a él.
+    IN_ATTRIB - Si se actualizó información.
+    IN_CLOSE_WRITE - Si se abrió para escritura y fue cerrado.
+    IN_CLOSE_NOWRITE - Archivo abierto fue cerrado.
+    IN_CREATE - Si se creo algún archivo o directorio.
+    IN_DELETE - Si se borró algún archivo o directorio.
+    IN_DELETE_SELF - Si se ha eliminado el archivo o el directorio.
+    IN_MODIFY - Si un archivo fue modificado.
+    IN_MOVE_SELF - Si se ha movido el archivo o el directorio.
+    IN_MOVED_FROM - Si se movio algún archivo de este directorio a otro.
+    IN_MOVED_TO - Si se movió algún archivo de otro directorio al presente
+    IN_OPEN - Si un archivo fue abierto.
+    IN_ALL_EVENTS - Todos los eventos anteriores.
+Significados de algunos datos que pueden incorporarse en el informe en /var/log/messages:
+	$$ (Imprimir un signo de dólar literalmente)
+	$@ (Agregar la ruta del sistema de archivos supervisados)
+	$# (Agregar el nombre del archivo)
+	$% (Agregar indicadores de eventos)
+
+
 info
 Páginas de manual para la mayoria de programas del proyecto GNU con una estructura jerarquizada. Ligeramente más complejo que las clásicas páginas man  [ver]
 $ info (MUestra la lista de los nodos disponibles en el primer nivel)
