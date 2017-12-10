@@ -12969,6 +12969,14 @@ $ packer -Si paquete (información sobre paquete)
 $ packer -G paquete (descargar sin instalar un tarbal de aur)
 
 
+packit
+Herramienta de auditoría de red. Puede inyectar, supervisar y manipular tráfico IP (TCP, UDP, ICMP, IP, ARP ...) útil para probar firewalls, sistemas de prevención, detección de intrusos, escaneo de puertos y simulación de tráfico de red
+# packit -m trace -t TCP -d www.google.com -S 80 (modo trace, protocolo TCP, origen y especificando puerto)
+# packit -m cap -c 10 'tcp and not port 22' -r captures (modo captura, 10 paquetes excepto puerto 22 y escribirlo en el archivo "captures")
+	Nota.- Para leer el archivo captures: tcpdump -r captures
+# packit -m cap -c 10 -w captures 'tcp' (modo captura, 10 paquetes, escribirlo en "captures" y especificando un flag [tcp])
+
+
 paclist
 Lista los paquetes instalados del repositorio especificado.
 $ paclist community (otras opciones: core, archlinuxfr, extra)
