@@ -851,6 +851,13 @@ $ arp -n
 # arp -s IP MAC (establecer una MAC estática a una IP)
 
 
+arptables
+Configurar, mantener e inspeccionar las tablas ARP gobernadas por el nucleo linux. Tiene un comportamiento parecido a iptables [ver] y las normas que se establecen son identicas pero opera en la capa ARP y no en la IP.
+# arptables -A INPUT -s 192.168.1.20 -j DROP (bloquea todo el tráfico de una ip especifica)
+# arptables --list -n (enumerar las reglas activas)
+# arptables -A INPUT --source-mac 00:11:22:33:44:55 -j DROP (bloquear una MAC concreta)
+
+
 arpalert
 Prevenir conexiones no autorizadas en la red local. Previamente especificar en en el archivo de configuración las ips i su correspondiente MAC:
 $ nano  /etc/arpon.sarpi
