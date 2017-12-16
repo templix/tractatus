@@ -17481,6 +17481,19 @@ PPID.-		 PID del proceso padre.
 UID.-		 ID del usuario que ha ejecutado el proceso.
 
 
+toplip
+Herramienta para encriptar archivos.
+$ toplip archivo.txt (encriptar pero solo viendolo por teminal)
+$ toplip archivo.txt > archivo.txt.cryp (encriptar y mardarlo a un archivo)
+$ toplip -d archivo.txt.cryp > archivo.txt (desencriptar)
+$ toplip -alt archivo1.txt archivo2.txt > archivo_global.crip (Encriptar dos archivos en uno pero con dos contraseñas para cada archivo encriptado)
+$ toplip -d archivo_global.crip > archivo1.txt (desencriptar si entramos la contraseña del primer archivo encriptado)
+$ toplip -c 2 archivo.txt > archivo.txt.crip (encriptar un archivo con dos contraseñas)
+$ toplip -c 2 -d archivo.txt.crip > archivo.txt (desencriptar un archivo con dos contraseñas)
+$ toplip -m imagen.jpg archivo.txt > imagen_crip.jpg
+$ toplip -d imagen_crip.png > archivo.txt
+
+
 torify
 Verificar si la navegación está torificada.
 $ torify elinks checkip.dyndns.org
