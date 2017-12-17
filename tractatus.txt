@@ -3843,6 +3843,7 @@ dpigs
 $ dpigs (Los primeros diez 10. Opción por defecto)
 $ dpigs -n 20 (Los primeros 20)
 $ dpigs -S (Muestra los paquetes fuente más grandes instalados en el sistema)
+$ dpigs -H -n 15 (en medidas entendibles y los 15 que ocupan más espacio)
 
 
 dpkg
@@ -19537,6 +19538,16 @@ $ whereis firefox
 which
 Para encontrar el ejecutable si está en el path
 $ which firefox
+
+
+which-pkg-broke
+Encontrar qué paquete podría haber roto otro.
+$ which-pkg-broke firefox
+
+
+which-pkg-broke-build
+Encontrar qué paquete podría haber roto la compilación de otro paquete.
+$ which-pkg-broke-build emacs
 
 
 while
