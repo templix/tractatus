@@ -12367,6 +12367,30 @@ Convertir imagen nrg a iso
 $ nrg2iso imagen.nrg imagen.iso
 
 
+nrss
+Lector de noticias rss. No acepta importación de archivos opml. La configuración en ~/.nrss/config. Un ejemplo:
+$ nano .nrss/config
+	default_rate "5"
+	default_show "30"
+	default_maxitems "50"
+	# add feeds
+	add "http://www.hackplayers.com/feeds/posts/default?alt=rss" "hackplayers"
+	add "https://andalinux.wordpress.com/feed/" "informatico de guardia"
+	add "https://ubuntulife.wordpress.com/feed/" "ubuntu life"
+	# navegador
+	browser "/usr/bin/firefox %u"
+Teclas de uso:
+	h (ver uso)
+	C (contraer todos los feeds)
+	Espacio (Contraer un feed o leer una historia)
+	g (ir a la url con el navegador definido)
+	x (Mostrar todas las noticias del feed)
+	r (Actualiza el feed actual)
+	R (Actualizar todos los feeds)
+	M (Marcar todo como leído)
+	q (salir)
+
+
 nscd
 Demonio que cada vez que se reinicia, elimina los datos de la caché DNS. Para mayor efectividad colocar en el cron.
 # /etc/init.d/nscd restart
