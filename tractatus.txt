@@ -12438,6 +12438,16 @@ $ number -l 55
 $ number (Entra en el promt para ir entrando números. “q” [enter] para salir)
 
 
+numfmt
+Convertir números a formatos legibles por humanos.
+$ numfmt --to=si 500000
+$ numfmt --to=iec-i 500000
+$ numfmt --from=si 1M
+$ numfmt --from=auto 1Mi
+$ numfmt --from=si --to=iec 1T
+$ numfmt --from=auto --to=iec 1T
+
+
 numlockx
 Activar el bloqueo numerico al inicio:
 $ numlockx on/off  (activarlo/desactivarlo)
