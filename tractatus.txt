@@ -14561,6 +14561,12 @@ $ readpst -o  -r miarchivo.pst
 $ readpst -M -b -e -o carpeta-destino miarchivo.pst (Generará los archivos EML en la carpeta-destino)
 
 
+realpath
+Muestra el path real de un enlace, un fichero o un directorio.
+$ realpath -P Musica (si es un enlace)
+$ realpath -e archivo (de un archivo)
+
+
 reaver
 Herramienta que lleva a cabo un ataque de fuerza bruta contra el número pin de la configuración protegida de un punto de acceso wifi. Precisa poner nuestra targeta en modo monitor (airmon-ng start wlan0)
 # reaver -i mon0 -b 00:01:02:03:04:05 (Mínimo requerido, especificar nombre de la interfaz y BBSID)
