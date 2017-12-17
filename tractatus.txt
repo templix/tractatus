@@ -14923,6 +14923,30 @@ rrenice
 [pslist]. Herramienta con uso igual que renice [ver]
 
 
+rsnapshot
+Script en Perl y basado en rsync que realiza copias de seguridad manualmente o mediante cron [ver].
+# cp /etc/rsnapshot.conf.default /etc/rsnapshot.conf (Copiar el archivo de configuración)
+# rsnapshot configtest (Comprobar la correctas configuración de la herramienta)
+# rsnapshot du (ver el espacio ocupado por las copias de seguridad)
+# rsnapshot -V diff daily.0 daily1 (ver las diferencias entre dos copias de seguridad)
+# rsnapshot -t hourly (no genera el backup sinó un sumulacro para comprobar que todo funciona)
+Ejemplo de archivo de configuración:
+# nano /etc/rsnapshot.conf
+	snapshot_root   /backup/ # directorio donde se guardan las copias
+	cmd_cp		/bin/cp # rutas a los ejecutables
+	cmd_rm		/bin/rm
+	cmd_rsync	/bin/bin/rsync
+	cmd_du		/usr/bin/du
+	cmd_rsnapshot_diff		/usr/bin/rsnapshot-diff
+	logfile	/var/log/rsnapshot.log # ruta a los logs de la aplicación
+	backup /home/* localhost/ # backups de nuestra home y guardados en localhost [/backup/]
+	retain hourly 6 (copia cada hora y se almacenan las últimas 6)
+	retain daily 7 (copia cada dia y se almacenan las últimas 7)
+	retain weekly 4 (cada semana y se almacenan las últimas 4)
+	retain monthly 6 (cada mes y se almacenan las últimas 6)
+	retain yearly 5 (cada año y se almacenan las últimas 5)
+
+
 rsstail
 Mostrar noticias rss en estilo multitail
 $ rsstail -n 1 -d -u http://web.com -u http://web1.com -u http://web3.com
