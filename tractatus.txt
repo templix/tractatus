@@ -1295,6 +1295,13 @@ connection_timeout = 30
 Que realice 10 conexiones por cada archivo y sin límite de descarga.
 
 
+b2sum
+Calcular els hash de ficheros o frases.
+$ echo -n "Linux es un sistema genial" | b2sum
+$ b2sum -l 380 .bashrc .emacs .authinfo .profile .stumpwmrc .bzr.log (sobre varios archivos y longitud de 380 bits)
+$ b2sum -b .bashrc (calcularlo en binario)
+
+
 badblocks
 [e2fsprogs]. Utilidad para reparar sectores dañados del disco duro o pendrive. Trabajar con la unidad desmontada.
 # badblocks -s -v -n -f /dev/sda  (recuperar y reparar sectores dañados)
