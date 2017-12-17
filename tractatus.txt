@@ -20239,7 +20239,7 @@ Xtables_addons
 # mkdir -p /usr/share/xt_geoip/ (crear el directorio en la ruta predeterminada)
 # /usr/lib/xtables-addons/xt_geoip_build -D /usr/share/xt_geoip/ GeoIPCountryWhois.csv (recargar el directorio anterior)
 # iptables -A INPUT -m geoip --src-cc CN -j DROP (crear las normas de iptables por ejemplo para negar todo el tráfico de la china)
-# iptables -A INPUT -p tcp -m tcp -m multiport --dports 80,443,22 -m geoip --src-cc A1 -j DROP (y el anonimo a determinados puertos)
+# iptables -A INPUT -p tcp -m tcp -m multiport --dports 80,443,22 -m geoip --src-cc A1 -j DROP (y el anonimo [A1], protocolo tpc y a determinados puertos)
 # iptables -L -n --line-numbers (verificación de las normas entradas)
 
 
