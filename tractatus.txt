@@ -3440,6 +3440,12 @@ $ dglob -a goodies (Buscar en todos los paquetes disponibles no solo en los inst
 $ dglob -n goodies (Buscar en todos los paquetes disponibles sin incluir los instalados)
 
 
+dgrep
+Busqueda a través de archivos que pertenecen a un paquete Debian instalado.
+$ dgrep goodies debian-goodies
+$ dgrep dpigs debian-goodies
+
+
 dhclient
 Cliente DHCP
 # dhclient eth0  (modifica la ip de la máquina)
@@ -4116,6 +4122,12 @@ Algunos atajos:
 
 dwww
 Visualizar documentación (páginas man, info, README...) en el navegador. El archivo de configuración en /etc/dwww/dwww.conf. Se accede con http://localhost/dwww/index.html
+
+
+dzgrep
+Busqueda a través de archivos que pertenecen a un paquete Debian instalado. Parecido a degrep
+$ dzgrep goodies debian-goodies
+$ dzgrep dpigs debian-goodies
 
 
 e2fsck
