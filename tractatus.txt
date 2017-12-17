@@ -16523,6 +16523,13 @@ Verifica si un servicio está activo o no.
 $ status ssh
 
 
+stdbuf
+Ejecutar comandos con operaciones modificadas para almacenamiento en búfer.
+$ tail -f /var/log/apache2/access.log | stdbuf -oL cut -d ' ' -f1 (ver accesos únicos)
+$ stdbuf -o 0 ls
+$ stdbuf -o0 -e0 ls >> log_file
+
+
 steghide
 Detectar y extraer mensajes incrustados dentro de una imagen o música
 $ steghide embed -cf imagen.jpg -ef archivo_texto  (incrustar un texto en una imagen)
