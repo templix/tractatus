@@ -6933,6 +6933,21 @@ co#80:it#8:li#24:\
 Y modificar los parámetros co (columnas) y li (lineas) con las nuevas medidas: co#100:it#8:li#10:\
 
 
+gnuplot
+Programa muy flexible para generar gráficas de funciones y datos.
+$ gnuplot (Entrar en el promp de gnuplot)
+Una vez en el promp de la aplicación mostrará de forma gráfica los siguientes datos entrados:
+gnuplot> help plot (información)
+gnuplot> help functions (funcioones soportadas)
+gnuplot> plot sin(x)*cos(x/3)
+gnuplot> plot sin(x)*cos(x/3), x/2
+gnuplot> plot [-10:10] sin(x), atan(x), cos(atan(x))
+	gnuplot> set title "Funciones" (establecer nombre de la gráfica)
+	gnuplot> set xlabel "x [grados]" (establecer nombre para las coordenadas)
+	gnuplot> set ylabel "y(x)"
+	gnuplot> plot [-pi:pi] sin(x) title "sen(x)" with linespoints linetype 4 linewidth 3, atan(x), cos(atan(x))
+
+
 go2
 Buscador de directorios. En Ubuntu es necesario hacer el “--setup”.
 $ go2 images (Mostrará una lista de todos los directorios “images” del directorio personal precedidos de una letra [a, b, c...] al pulsarla, entraremos directamente en el directorio especificado)
