@@ -14161,6 +14161,18 @@ forward-socks5 / 127.0.0.1:5060 .
 Nota.- No olvidar el punto final.
 
 
+procdump
+Herramienta para detectar picos de utilización de CPU en una aplicación y generar un volcado de memoria [dump] durante este pico.
+Lo siguiente creará un volcado de núcleo inmediatamente.
+# procdump -p PID (volcado inmediato)
+# procdump -n 3 -p PID (3 volcados separados por 10 segundos)
+# procdump -n -s 5 -p PID (3 volcados de núcleo separados por 5 segundos)
+# procdump -C 70 -n 3 -p PID (un volcado cada vez que el proceso llegue al 70% de uso de CPU, 3 veces, separados por 10 segundos)
+# procdump -C 70 -n 3 -s 5 -p PID (un volcado cada vez que el proceso llegue al 70% de uso de CPU, hasta 3 veces y con al menos 5 segundos entre volcados)
+# procdump -c 10 -C 65 -p PID (un volcado del núcleo cuando el uso de la CPU está fuera del rango entre 10 y 65)
+# procdump -C 70 -M 100 -p PID (un volcado cuando el uso de CPU llegue a 70% o el uso de memoria llegue a 100 MB)
+
+
 prozilla
 [libncurses5]. Gestor de descargas. La descarga se realiza en el directorio actual. Para modificar dicho directorio ha de editarse en el archivo de configuración (/etc/prozilla.conf) la opción: mainoutputdir = /home/usuario/tmp. Página: <http://old-releases.ubuntu.com/ubuntu/pool/universe/p/prozilla/>
 $ proz URL
