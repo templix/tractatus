@@ -12128,6 +12128,27 @@ texto que se tiene que agregar:
 	googlereader-password "contraseña"
 
 
+nftables
+Herramienta que proporciona filtrado y clasificación de paquetes que reemplaza frameworks existentes (iptables, ip6tables, arptables y ebtables). Podemos comprobar si la instalación se ha efectuado correctamente arrancando el modulo con:
+# modprobe nf_tables
+# modprobe nf_tables_ipv4
+Y verificando si está en uso:
+# lsmod | grep nf_tables
+Formas de uso:
+# nft list tables (ver el listado de tablas)
+# nft list tables ip (ver listado de la familia ip)
+# nft list table ip filter (ver el contenido de una tabla)
+# nft add table ip filter (agregar tablas)
+# nft delete table ip filter (eliminar tablas)
+# nft flush table ip filter (eliminar todas las reglas de una tabla)
+# nft add chain ip filter input { type filter hook input priority 0 \; } (agregar cadenas [nat, filter i route])
+# nft delete chain ip filter input (eliminar cadenas)
+# nft add rule ip filter input tcp dport 80 drop (agregar una regla)
+# nft delete rule ip filter input handle 2 (eliminar regla)
+# nft add rule filter input iifname eth0 tcp dport 80 counter accep (aceptar paquetes en el puerto 80)
+# nft add rule filter input tcp dport 1-1024 counter drop (bloquear tráfico en los puertos del 1 al 1024)
+
+
 nfs
 [nfs-kernel-server]. Servidor de archivos.
 En el Servidor:
