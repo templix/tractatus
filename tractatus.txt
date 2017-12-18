@@ -16585,6 +16585,13 @@ $ sshpass -f file_pas ssh -y usuario@host ifconfig (Ejecuta ifconfig en el remot
 $ sshpass -p 1234 ssh -t usuario@host "echo 1234 | sudo -S namp 192.168.1.0/24" (Ejecuta el comando "sudo nmap" en el host remoto que tiene por contraseña 1234.)
 
 
+sshuttle
+Levanta VPNs con SSH y enruta tráfico a travé de ellos
+# sshuttle -r usuario@servidor 0/0 (Ejecución básica para redireccionar la totalidad del tráfico)
+# sshuttle --dns -vvr usuario@servidor 0/0 (que las consultas DNS sean procesadas a través del servidor DNS del servidor al que se está conectado)
+# sshuttle --daemon usuario@servidor 0/0 --exclude 192.168.1.0/24 --exclude 90.173.123.64 (ejecutar el proceso en segundo plano y excluir una rango y una ip)
+
+
 sslstrip
 Herramienta para engañar al usuario haciéndole pensar que se encuentra en un sitio de Internet con cifrado SSL [HTTPS], cuando en realidad todos los datos están siendo transmitidos en abierto [HTTP].
 Configuración de reenvío de paquetes IP:
