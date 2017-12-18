@@ -15027,6 +15027,24 @@ Ejemplo de archivo de configuración:
 	retain yearly 5 (cada año y se almacenan las últimas 5)
 
 
+rssh
+Shell restrictiva que permite elegir el método de acceso de un usuario que se desea entre las opciones disponibles: scp, sftp, cvs, svn, rsync o rdist. Primero incluir la nueva shell como una shell válida en del sistema:
+# echo "/usr/bin/rssh" >> /etc/shells
+Crear un usuario con la shell restrictiva:
+# useradd -d /home/externo -m extern
+# nano /etc/passwd
+Y colocar la linea:
+	extern:x:1001:1001:extern,,,:/home/externo:/usr/bin/rssh
+A continuacion descomentar la o las opciones permitidas:
+# nano /etc/rssh.conf
+	allowscp
+	allowsftp
+	allowcvs
+	#allowrdist
+	allowrsync
+	allowsvnserve
+
+
 rsstail
 Mostrar noticias rss en estilo multitail
 $ rsstail -n 1 -d -u http://web.com -u http://web1.com -u http://web3.com
