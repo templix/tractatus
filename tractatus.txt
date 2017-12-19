@@ -8156,7 +8156,7 @@ Monitorizar los cambios realizados en un directorio del sistema lo cual se refle
 Añadir las lineas de los archivos o directorios a monitorizar según los ejemplos siguientes en /etc/incron.conf
 	/home/USER/dir1 IN_MODIFY echo "$$ $@ $# $% $&" (datos ha indicar si se modifica dir1)
 	/etc/apache2/apache2.conf IN_MODIFY /usr/sbin/service apache2 stop (si se modifica apache2.conf parar el servicio)
-	/home/USER/Documentos IN_ACCES mplayer /home/USER/musica/cancion.mp3 (reproducir mp3 si alguien accede a un directorio)
+	/home/USER/Documentos IN_ACCESS,IN_OPEN mplayer /home/USER/musica/cancion.mp3 (reproducir mp3 si alguien accede a un directorio)
 	/var/www/html IN_CREATE script_backup.sh (ejecutar un script si se crea un nuevo archivo o directorio en html)
 	/home/USER/emacs_tut.txt IN_MODIFY echo "$$ $@ $# $% $&" (si se ha modificado un fichero)
 Opciones de monitoreo de los archivos o directorios:
