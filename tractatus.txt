@@ -3345,6 +3345,14 @@ Nota.- Normalmente estas aplicaciones han de repetirse varias veces hasta que al
 # deborphan | xargs sudo apt-get -y remove --purge (otra forma de eliminar paquetes huerfanos)
 
 
+debsecan
+Efectúa una evaluación de seguridad del sistema y muestra las vulnerabilidades conocidas y asociadas a los paquetes instalados, notificando al administrador (root) los resultados.
+# debsecan-create-cron (ejecutar diariamente)
+# dpkg-reconfigure debsecan (realizar una correcta configuración)
+# debsecan  --suite stretch --format report --update-history (escaneos)
+# debsecan  --suite stretch --only-fixed (otro tipo de escaneo)
+
+
 debsums
 Verificar la integridad de los ficheros.
 # debsums -s &> log.txt  (Modo silencioso [-s] y redirigiendo el resultado a un archivo para posterior análisis)
