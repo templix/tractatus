@@ -8127,6 +8127,22 @@ Habilita la interfase especificada:
 $ ifup eth0
 
 
+imageindex
+Generar una galerías de imágenes en HTML estáticas de un directorio. Se generan miniaturas y puede personalizarse con hojas de css. Crear el archivo .imageindexrc
+$ nano .imageindexrc
+con un contenido que indican en su página man:
+	$framedateformat = "%F";
+	$frametimeformat = "%R";
+	$indexdateformat = "%F";
+	$indextimeformat = "%R";
+	$slidedateformat = "%F";
+	$slidetimeformat = "%R";
+	$detaildateformat = "%m/%y";
+Entrar en el directorio donde estan las imagenes y lanzar:
+$ imageindex (Crea los archivos y el index.html)
+Visualizar el index.html creado con el navegador.
+
+
 img2txt
 [caca-utils, libcaca]. Pasar una imagen a ascii.
 $ img2txt -f svg imagen.jpg > imagen.svg
