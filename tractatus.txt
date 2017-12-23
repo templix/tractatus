@@ -10134,6 +10134,14 @@ Para no cambiar de escritorio con movimientos del mouse comentar el siguiente c�
         <action name="DesktopNext"/>
       </mousebind>
       -->
+5.-
+Si queremos que alguna aplicación se abra en determinado escritorio:
+$ nano .config/openbox/lxde-rc.xml
+Colocar el siguiente código en el apartado applications:
+	<application class="Firefox">
+		<desktop>2</desktop>
+	</application>
+Esto abrirá firefox en el escritorio 2
 
 
 lxpanelctl
