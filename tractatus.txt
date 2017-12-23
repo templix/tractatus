@@ -7850,6 +7850,22 @@ $ httrack sitio_escogido.com (Crea en el directorio personal una carpeta "sitio_
 $ httrack sitio_escogido.com -O /root/descargas/pelis (Especificando lugar de descarga)
 
 
+hunspell
+Corrector ortográfico y morfológico. Permite modificar, incluir y ver opciones de palabras.
+	$ echo 'El pinguino es hun systema mui bonitoo' | hunspell -A -d es_ES (Tradudir una frase. Los asteriscos son palabras correntas)
+	@(#) International Ispell Version 3.2.06 (but really Hunspell 1.4.0)
+	*
+	& pinguino 1 3: pingüino
+	*
+	& hun 8 15: hin, un, huna, huno, han, aun, huí, huy
+	& systema 2 19: sistema, estema
+	& mui 12 27: muí, muo, mi, muir, muió, mua, mue, mus, tui, fui, mué, muy
+	& bonitoo 4 31: bonito, bonitos, bonito o, boniato
+$ hunspell -d es_ES -l archivo.txt (Carregir un texto)
+$ hunspell -d es_ES -l archivo.odt (un odt)
+$ hunspell -d es_ES -p unrecognized archivo.odt (palabra por palabra)
+
+
 hydra
 Se utiliza para crackear los sistemas de login de diferentes servicios como HTTP, FTP, TELNET, IMAP, SMB, SSH, etc.
 # hydra 192.168.1.5 -l admin -p 1234 (Una ip con el usuario "admin" con la clave "1234")
