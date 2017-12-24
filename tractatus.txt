@@ -17965,6 +17965,13 @@ $ trickled -d 50 -u 30 (Lanzar la limitación como demonio con lo que todas las 
 $ trickle wget http://www.genbeta.com
 
 
+trimage
+Herramienta para optimizar los archivos de imagen para sitios web, utilizando optipng, pngcrush, advpng y jpegoptim, dependiendo del tipo de archivo (actualmente, los archivos PNG y JPG son compatibles). Todos los archivos de imagen se comprimen sin pérdidas en los niveles de compresión más altos disponibles y EXIF y otros metadatos se eliminan.
+$ trimage -f image.png (un archivo)
+$ trimage -f *.png (varios)
+$ trimage -d imagenes (un directorio)
+
+
 true
 No realiza absolutamente nada de los comandos que le siguen.
 $ true rm * (no elimina nada)
