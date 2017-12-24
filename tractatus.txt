@@ -151,6 +151,14 @@ $ ac -d    (... del presente mes)
 $ ac -p    (... totales de cada usuario)
 
 
+aconnect
+Utilidad para conectar y desconectar dos puertos midi existentes en el sistema al secuenciador ALSA.
+$ aconnect 64:0 65:0 (conectar el puerto 64 al 65)
+$ aconnect -d 64:0 65:0 (desconectar)
+$ aconnect -l (lista de conexiones)
+$ aconnect -x (suprimir todas las conexiones exportadas)
+
+
 acpi
 Monitorizar estado de la bateria del portatil, si está conectado a la red y otras informaciones.
 $ acpi -c (ventiladores)
@@ -321,6 +329,12 @@ Intro y para salir de la configuración pulsar:
 	Shift + e
 Preguntará si se salvan los datos. Pulsar "y" y regresamos al menú. Para entrar en el correo, seleccionar "FOLDER LIST" Preguntará la contraseña y si queremos guardarla [lo hace en el archivo .pine-passfile]
 En "COMPOSE MESSAGE" se entran los correos separados por "," en el apartado Cc [copia oculta] o To. Ctrl + x para enviar.
+
+
+alsamixer
+Mezclador de tarjeta de sonido para el controlador ALSA
+$ alsamixer
+$ alsamixer -V all (ver todas las opciones de salida)
 
 
 altavoz
