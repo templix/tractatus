@@ -331,6 +331,22 @@ Preguntará si se salvan los datos. Pulsar "y" y regresamos al menú. Para entra
 En "COMPOSE MESSAGE" se entran los correos separados por "," en el apartado Cc [copia oculta] o To. Ctrl + x para enviar.
 
 
+alsa-info
+Información sobre los dispositivos alsa.
+$ alsa-info
+
+
+alsabat-test
+Testeo de la tarjeta de sonido
+$ alsabat-test
+
+
+alsactl
+Se usa para controlar la configuración avanzada de los controladores de la tarjeta de sonido ALSA.
+# alsactl store (guarda el estado del controlador actual para la tarjeta de sonido seleccionada en el archivo de configuración)
+# alsactl restore (carga el estado del controlador para la tarjeta de sonido seleccionada desde el archivo de configuración)
+
+
 alsamixer
 Mezclador de tarjeta de sonido para el controlador ALSA
 $ alsamixer
