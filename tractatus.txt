@@ -13162,9 +13162,10 @@ Gestor de paquetes de OpenWRT, firmware linux para routers.
 
 optipng
 Optimizacion de imagenes .png. La reduccion de tamaño es poca pero no pierde calidad. Como modo indicativo, un directorio con 5 imagenes con un peso de 27,5 MB pasa a 25,8 MB.
-$ optipng imagen.png (Sobreescribe las imagenes)
+$ optipng imagen.png (Sobreescribe la imagen.png)
 $ optipne imagen.png -out nueva_imagen.png (Guardar la salida con otro nombre)
 $ optipng -dir imagenes (De todas las imagenes de un directorio)
+$ optipng -k -o7 *.png (máxima compresión de todas las imagenes y sin sobreescribir las originales) [.bak]
 
 
 ossec
