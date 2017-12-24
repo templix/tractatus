@@ -9995,6 +9995,13 @@ lsattr
 Muestra los atributos de los ficheros [no los permisos]. (ver chattr)
 $ lsattr -R /home/usuario   (recursivamente)
 $ lsattr -a /home/usuario   (incluye a todos los archivos de los directorios)
+Un ejemplo completo:
+	$ touch archivo.txt (crear el fichero)
+	$ lsattr archivo.txt (ver los atributos)
+	--------------e---- archivo.txt (resultado)
+	# chattr +i -A archivo.txt (Agregar el atributo inmutable y que no se modifique el atime)
+	$ lsattr archivo.txt (ver los nuevos atributos)
+	----i--A------e---- archivo.txt
 
 
 lsblk
