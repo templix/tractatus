@@ -6276,6 +6276,22 @@ Muestra en pantalla archivos de texto de forma optimizada (Ver diferencia con ca
 $ fmt fichero.txt
 
 
+fnotifystat
+Programa que vuelca la actividad del sistema de archivos en un período de tiempo determinado. Se puede utilizar para identificar la actividad de determinados archivos y descubrir qué procesos están realizando operaciones de apertura, cierre, lectura y escritura en los archivos.
+# fnotifystat -D -T (ordenar estadisticas por dispositivo único y mostrando la fecha)
+# fnotifystat -p 16755 (solo muestra archivos tocados por el proceso pid mencionado)
+# fnotifystat -c -i /proc (volcar totales acumulados y especificar evento)
+# fnotifystat -n -i /sys,/proc (especificando 2 procesos y sin estadísticas)
+Algunas opciones:
+	-d (quitar la ruta completa del directorio de los nombres de archivo)
+	-h (muestra ayuda)
+	-l (estadísticas por dispositivo único e inodo)
+	-P (ordenar las estadísticas por pid, totales y nombre de archivo)
+	-s (deshabilita la escala de los conteos de archivos)
+	-t (solo muestra los archivos más activos)
+	-v (modo detallado)
+
+
 fntsample
 Generador de ejemplos de fuentes que permite visualizar si determinada letra incluye el tipo de grafía que requiere nuestro locale (acento, geminada...)
 $ fntsample -f .fonts/3Dumb.ttf -o 3Dumb.pdf (Espedificando la fuente y el archivo para la salida)
