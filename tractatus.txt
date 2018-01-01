@@ -3018,6 +3018,13 @@ Lista ficheros que presumiblemente sobran, faltan o están de alguna forma incor
 # cruft --ignore /home/usuario (Descartando un directorio)
 
 
+cruch
+Generador de listas de palabras. Puede especificarse un conjunto de caracteres y admite números, símbolos, mayúsculas, minúsculas, caracteres por separado y Unicode.
+$ crunch 6 6 0123456789abcdef -o 6caracteres.txt (generar palabras de un mínimo de 6 caracteres y máximo de 6 usando los especificados y guardandolo el el archivo menionado)
+$ crunch 3 5 ABC$%& -o caracteres.txt (mínimo de 3 y máximo de 5 usando los epecificados)
+$ crunch 4 5 -p mormo dama .com (usando permitaciónes de palabras especificadas.)
+
+
 csscapture
 [python-cssutils]. Capturar el css de una web.
 $ csscapture -s web http://www.tuxapuntes.com (guarda en la carpeta “web”)
