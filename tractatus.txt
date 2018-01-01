@@ -3133,9 +3133,10 @@ $ cut -s -d"(" -f1 archivo (“-s” suprime las lineas que no contengan el deli
 
 
 cutter
-Cortar conexiones no deseadas
-# cutter 192.168.2.6 80 (especificando IP y puerto)
-# cutter 192.168.2.6   (solo IP)
+Envia paquetes a ambos extremos de una conexión TCP/IP para cerrar la conexión. Está diseñado para desconectar conexiones no deseadas hacia o desde una dirección IP específica o par de direccioes IP o cerrar el servicio específico de un puerto.
+$ cutter 192.168.1.10 (cerrar la conexión de la ip especificada)
+$ cutter 192.168.1.10 22 (cerrar la conexión al puerto 22 de la ip especificada)
+$ cutter 448.22.71.130 192.168.1.10 22 (cerrar conexión entre dos computadoras por el puerto 22)
 
 
 cutycapt
@@ -5113,7 +5114,7 @@ Otros ajustes que pueden incorporarse a .emacs precedidas con la explicación co
 	(desktop-save-mode 1)
 	;; Colocar el tipo de sistema
 	(defun insert-system-type()
-	(interactive)
+v	(interactive)
 	(insert (format "%s" system-type)))
 	;; Colocar el nombre del sistema
 	(defun insert-system-name()
