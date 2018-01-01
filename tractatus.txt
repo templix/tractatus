@@ -2952,6 +2952,14 @@ Limitar el uso de la cpu para determinados procesos.
 # cpulimit -p PID -l 50 (el proceso con el numero PID al 50%)
 
 
+cpustat
+Información periódicamente sobre la utilización de la CPU.
+$ cpustat -l (Información extendida)
+$ cpustat -p PID (sobre un PID)
+$ cpustat -a
+$ cpustat -i
+
+
 cputool
 Limita el uso del CPU de un proceso.
 $ cputool -c 50 -p 15352 (Al 50% para el PID 15352)
