@@ -3760,6 +3760,26 @@ $ DISPLAY=:0.0 gedit  (lanzado desde una tty, abre gedit en las X. Si solo tenem
 $ gmessage “Cierra el firefox” -display :0 (Lanzado desde una tty mostrará el mensaje en las X)
 
 
+ditaa
+Transforma caracteres ascii en mapas de bips.
+$ nano grafic.txt
+    +--------+   +-------+    +-------+      /-------\
+    | c1FF   | --+ text  +--> | cBLK  |      | Text  |
+    |  Text  |   +-------+    | Text  | ---> |       |
+    |        |   | Text  |    |   +---+      |  cBLU |
+    |     {d}|   | cGRE  |    |   | B |      \-------/
+    +---+----+   +-------+    +---+---+
+        :              +----+    ^  |
+        |       text   |cRED|    |  |
+        +--------------+----+----+  |
+                       |cC02|       +-----------+
+                       +----+     +-+---+       |
+                                  |c1AB |       |
+                                  |text |<------+
+                                  +-----+
+$ ditaa grafic.txt grafic.png
+
+
 djvm
 Manipular documentos .djvu
 $ djvm -l fichero.djvm (Lista el contenido)
