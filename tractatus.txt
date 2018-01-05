@@ -3202,9 +3202,12 @@ $ darkhttp /home/usuario/share --port 12001 --log  archivo  --chroot  (Sin dejar
 
 
 darkstat
-Analizar el tráfico de red via navegador. Una vez instalado arrancar el demonio:
+Monitorizar el tráfico de red. Configurar la herramienta:
+# nano /etc/darkstat/init.cfg
+Descomentar los parámetros DIR, PORT, BINDIP y LOCAL y modificar START_DARKSTAT=yes
+Arrancar el servicio:
 # /etc/init.d/darkstat start
-Y pasado un tiempo visualizar los datos en: http://localhost:666
+En el navegador colocar la dirección: localhost:666
 
 
 date
