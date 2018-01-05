@@ -20243,6 +20243,15 @@ Enviar mensajes a la terminal de usuarios conectados remotamente a nuestra máqu
 $ write usuario /dev/pts/15  (Iniciar el promt para la comunicación con el usuario de la terminal número 15. Este a su vez, para responder, debe lanzar write hacia la consola del otro usuario)
 
 
+wttr
+Servicio de predicción meteorológica y fuentes de datos para la información del pronóstico del tiempo. Admite varios métodos de presentación (curl, httpie, wget, HTML para navegadores, png...)
+$ curl wttr.in/Figueras,Gerona (especificando ciudad y provincia)
+$ curl wttr.in/Moon?lang=es (ver estado de la luna y en español)
+$ curl wttr.in/~Eiffel+Tower (especificar algo que no es una población)
+$ curl wttr.in/@lapipaplena.org (la situación de un dominio)
+$ wget wttr.in/Figueras,Gerona.png (bajar una imagen de la población seleccionada)
+
+
 x11vnc
 Conexion remota. Comparte la misma ventana abierta. En el cliente: xvncviewer o xtightvnc
 En el servidor:
