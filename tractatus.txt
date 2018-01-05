@@ -10006,6 +10006,13 @@ $ lorem -w 10 (Generar 10 palabras)
 $ lorem -s 2 (Generar 2 sentencias)
 
 
+losetup
+Programa para mostrar información sobre los dispositivos /dev/loop. Útil para saber donde se montan ciertos ficheros .img
+$ losetup (muestra dispositivos /dev/loop y el fichero asociado)
+# losetup -a (muestra toda la información de los dispositivos /dev/loop)
+# losetup --find --show fichero.img (Encuentra y muestra a que dispositivo está asociado un fichero img)
+
+
 lost+found
 Carpeta donde el sistema almacena archivos marcados como dañados después de una comprobación de disco realizada con el comando fsck.
 
