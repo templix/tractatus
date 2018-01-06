@@ -2708,12 +2708,17 @@ $ comparepdf archivo1.pdf archivo2.pdf
 
 compgen
 Comando para listar comandos disponibles.
-$ compgen -c (Lista comando)
+$ compgen -c (Lista todos los comandos)
+$ compgen -ac (lista de todos los comandos y alias)
 $ compgen -a (Lista los alias)
 $ compgen -b (lista los comandos internos de bash)
 $ compgen -k (lista palabras reservadas)
 $ compgen -A function (lista las funciones)
-$ compgen -ac | grep ifconfig (Para conocer si un comando existe)
+$ compgen -c | grep sudo (las que hacen referencia a sudo)
+$ compgen -a
+$ compgen -c ls
+$ compgen -c rm
+$ compgen -A signal
 
 
 compilar
