@@ -10196,6 +10196,13 @@ lsmod
 Listar todos los módulos cargados del kernel, y alguna información adicional de ellos.
 
 
+lsns
+lista información sobre todos los espacios de nombres actualmente accesibles o sobre el espacio de nombres dado.
+$ lsns -t cgroup
+$ lsns -t pid
+$ lsns -l
+
+
 lsof
 Listar ficheros o procesos abiertos
 # lsof -i :4662  (servicios usados por el puerto 4662 aunque esten a la escucha)
