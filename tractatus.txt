@@ -12727,6 +12727,15 @@ Y colocar, según donde se encuentre el ejecutable, la linea:
 /usr/local/bin/noip2 &
 
 
+nologin
+Muestra un mensaje de que una cuenta no está habilitada. Está destinado como un campo de shell de reemplazo para las cuentas que estan deshabilitadas.
+# nano /etc/passwd
+...
+games:x:5:60:games:/usr/games:/usr/sbin/nologin
+man:x:6:12:man:/var/cache/man:/usr/sbin/nologin
+...
+
+
 normalize
 Ajustar volumen
 $ normalize-audio *.wav
