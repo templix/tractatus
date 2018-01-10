@@ -19614,6 +19614,11 @@ $ VBoxManage controlvm "maquina_virtual" poweroff (Para la máquina virtual. Rec
 $ VBoxManage clonehd Metasploitable.vmdk ../Metasploitable2-Linux.vdi -format VDI (Convertir una imagen vmdk en vdi)
 
 
+virtualenv
+Crea contenedores para Python. Similar al concepto de Docker para hacer la aplicación instalada dentro del contenedor independiente de las versiones de Python del sistema. 
+$ virtualenv nombre_contenedor (Crea el contenedor)
+
+
 visitors
 Muestra estadisticas del sitio web local.
 # visitors -A /var/log/apache2/access.log -o html > report (Activar todas las opciones [-A] que guarde la salida en formato html [-o] y que base el informe en el archivo /var/log/apache2/access.log)
