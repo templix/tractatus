@@ -10000,6 +10000,11 @@ Guardar la salida de una orden en un archivo de registro.
 $ logsave -a file.log ifconfig (Añadiendo la salida al contenido existente)
 
 
+logstalgia
+Software para visualizar ficheros de log que registra las peticiones de los visitantes al servidor web como si fueran pelotas que van llegando del lado izquierdo, el servidor simula ser una raqueta que devuelve las peticiones con códigos como 200 (OK) 302 (redirigido a…) o el 404 (no encontrado).
+# logstalgia /var/log/apache2/access.log
+
+
 logwatch
 Analiza los archivos de logs del sistema. El sistema está pensado para que toda la configuración sea especificada en /etc/logwatch y estas directivas sobreescriban a las que están en /usr/share/logwatch. Copiamos la configuación básica:
 # cp /usr/share/logwatch/default.conf/logwatch.conf /etc/logwatch/conf
