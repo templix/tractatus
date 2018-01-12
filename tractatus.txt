@@ -14341,8 +14341,12 @@ $ pom
 
 
 pompem
-Diseñada para automatizar la búsqueda de exploits y vulnerabilidades en las principales bases de datos (Exploit-db, 1337day, Packetstorm Security...)
-$ pompem -s ssh,mysql --txt (sobre ssh y mysql y que escriba el resultado en un atchivo de texto, por defecto out.txt)
+Herramienta diseñada para automatizar la búsqueda de vulnerabilidades en las bases de datos más importantes. Realiza búsquedas en seguridad PacketStorm, CXSecurity, ZeroDay, Vulners, base de datos de vulnerabilidades nacionales, base de datos de vulnerabilidades WPScan ...
+$ pompem -s Wordpress
+$ pompem -s Joomla --html (escribir el resultado en un archivo .html)
+$ pompem -s "Internet Explorer,joomla,wordpress" --html
+$ pompem -s FortiGate --txt (el resultado en un archivo .txt)
+$ pompem -s ssh,ftp,mysql
 
 
 popbugs
