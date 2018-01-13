@@ -17435,6 +17435,11 @@ $ synclient -l (Ver la configuración)
 $ synclient TapButton1=1 TapButton2=2 VertEdgeScroll=1 (Activar el click y el escroll. Para hacerlo permanente poner la linea en el inicio [en fluxbox sería en /.fluxbox/startup]
 
 
+sysbench
+Utilidad para medir el rendimiento de un ordenador. 
+$ sysbench --test=cpu --cpu-max-prime=50000 --num-threads=6 run (Con este test medimos la velocidad de la CPU. num-threads indica el número de núcleos a usar)
+
+
 sysctl
 Muestra la configuración de los parámetros del kernel
 # sysctl -a | more (Muestra todas las [muchisimas] variables)
