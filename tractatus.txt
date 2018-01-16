@@ -14017,11 +14017,13 @@ $ php --ini (Informa donde esta el archivo php.ini)
 $ php -S localhost:9000 -t /ruta/al/proyecto (Crear un servidor php ligero)
 1.-
 Configuración de php de forma segura (php.ini)
-	# nano /etc/php5/apache2/php.ini
+	# nano /etc/php/7.0/cli/php.ini
 	expose_php Off (Ocultar la versión de php)
 	session.use_trans_sid = Off (Que las URL no muestren los ID de sesiones)
 	allow_url_fopen = Off (Desactivar acceso a URL remotas en funciones de manejo de ficheros)
 	display_errors = Off (Evitar que los errores se muestren por pantalla)
+Nota.- Para conocer la situación de php.ini, porque puede variar segun la versión de php y distro:
+$ php -i | grep "Loaded Configuration File"
 2.-
 Arreglar el error: PHP Deprecated:  Comments starting with '#' are deprecated in /etc/php5/cli/conf.d/ming.ini on line 1 in Unknown on line 0
 	# nano /etc/php5/cli/conf.d/ming.ini
@@ -17441,7 +17443,7 @@ $ synclient TapButton1=1 TapButton2=2 VertEdgeScroll=1 (Activar el click y el es
 
 
 sysbench
-Utilidad para medir el rendimiento de un ordenador. 
+Utilidad para medir el rendimiento de un ordenador.
 $ sysbench --test=cpu --cpu-max-prime=50000 --num-threads=6 run (Con este test medimos la velocidad de la CPU. num-threads indica el número de núcleos a usar)
 
 
