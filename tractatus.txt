@@ -3051,6 +3051,16 @@ $ crunch 3 5 ABC$%& -o caracteres.txt (mínimo de 3 y máximo de 5 usando los ep
 $ crunch 4 5 -p mormo dama .com (usando permitaciónes de palabras especificadas.)
 
 
+cryptsetup
+Cifrar con LUKS una partición. LUKS especifica un formato estándar en disco, independiente de plataforma.
+# cryptsetup -y -v luksFormat /dev/sda3 (Pregunta la contraseña y confirmación para cifrar la partición. Borra todos los datos existentes [y] y modo verbose)
+# cryptsetup luksOpen /dev/sda3 backup (Desencriptar. Inprescindible darle un nombre para el mapeo [backup])
+Una vez entrada la contraseña asignada en el primer paso, escoger el formato según sistema [mkfs.vfat para fat32 o mkfs.ntfs para NTFS]:
+# mkfs.ext4 /dev/mapper/backup -L cripta (con el nombre "cripta")
+# cryptsetup luksClose backup (Cerrar la partición)
+# cryptsetup -v status backup (ver el estado de la asignación)
+
+
 csscapture
 [python-cssutils]. Capturar el css de una web.
 $ csscapture -s web http://www.tuxapuntes.com (guarda en la carpeta “web”)
