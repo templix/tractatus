@@ -8020,6 +8020,12 @@ Comprueba versiones, dependencia y permisos de HPLIP. Crea un log en el director
 $ hp-check -g (en modo debug. -t en texto plano.)
 
 
+hp-scan
+Herramienta de escaneo para una impresora HP.
+$ hp-scan -g -m color (scanea una HP en collor [gray para blanco y negro] y guarda el resultado por defecto con el nombre hpscan001.jpg)
+$ hp-scan -f scan.jpg --pdf=evince (guardarlo como scan.jpg y visualizarlo al final con evince)
+
+
 hping
 Herramienta de intrusión remota (ataque ICMP)
 # hping3 -I eth0 -S 192.169.2.2  (ping no silencioso)
