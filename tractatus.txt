@@ -17745,6 +17745,12 @@ tcpkill
 # tcpkill -i eth0 port 22 (especificando un puerto)
 
 
+tcpstat
+Informa de estadísticas de la red al igual que vmstat [ver] lo hace para las estadísticas del sistema. El valor predeterminado es 5 segundos.
+# smemstat 4 3 (monitorear 3 veces cada 4 segundos)
+# smemstat -dm -o smemstat.json (informe en megabytes, eliminando ruta del directorio y el resultado en el archivo smemstat.json)
+
+
 tcptrack
 aplicación que muestra el consumo de la conexión.
 # tcptrack -i eth1 port 22 -f (Especificando conexión, puerto y habilitar el algoritmo de velocidad media rápida [-f])
