@@ -5284,6 +5284,13 @@ $ env | grep DISPLAY
 Algunas opciones para grep: SHELL, USER, PATH, KEYBOARD, LANG..
 
 
+epylog
+Analizador syslog que se ejecuta periódicamente. Examina los registros procesando algunas de las entradas para presentarlas en un formato más comprensible. Puede enviar el resultado por correo.
+# epylog --last day (del último dia. Otras opciones: "hour" [h], "week" [w], "month" [m])
+# epylog --last 2w (de las últimas 2 semanas)
+# epylog --cron (ejecutarlo periodicamente)
+
+
 errno
 [moreutils]. Muestra los errores de código y sus descripciones.
 $ errno -l (Todo el listado)
