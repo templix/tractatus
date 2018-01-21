@@ -1734,6 +1734,13 @@ Y en intel:
 # cat /sys/class/backlight/intel_backlight/max_brightness
 
 
+bro
+Monitor de seguridad que inspecciona todo el tráfico para detectar signos de actividad sospechosa y mediciones de rendimiento.
+# mkdir bro && cd bro (crear el directorio y entrar en él porque genera varios archivos)
+# bro -i eth0 (analizar el tráfico en la red eth0.)
+Una vez cerrado el monitor con C-c listar los logs creados en el directorio [conn.log, dns.log, files.log, http.log,packet_filter.log, reporter.log, ssl.log, weird.log, x509.log] y visializarlos con cualquier editor.
+
+
 bropages
 Otra forma de visualizar las páginas man coloreando la sintaxis y mostrando ejemplos.
 $ bro ls
