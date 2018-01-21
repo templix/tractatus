@@ -11563,10 +11563,16 @@ mp3rename
 Renombra ficheros mp3 según sus propias etiquetas [id3 tag]
 $ mp3rename -s '&a_&t' (establecer las opciones predeterminadas las cuales quedan anotadas en ~/.mp3rename)
 Opciones:
-&a  (artista), &b (album), &k (pista), &t (título), &y (año)
+	&a  (artista), &b (album), &k (pista), &t (título), &y (año)
 $ mp3rename *.mp3  (renombrará segun las opciones predeterminadas)
 $ mp3rename -i *.mp3 (muestra los id3 tag de todos los mp3)
-Nota.- No siempre los id3tag estan disponibles o están completos
+	Nota.- No siempre los id3tag estan disponibles o están completos
+
+
+mp3report
+Programa para escanear una lista de directorios y subdirectorios creando un informe desde una plantilla HTML. También calcula varias estadísticas y duración de cada canción.
+$ mp3report --title=Titulos directorio (especificando un título)
+$ mp3report --title=Titulos --outfile=musica.html directorio (especificando archivo de salida)
 
 
 mpv
