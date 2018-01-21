@@ -16773,6 +16773,14 @@ Opciones
 -u : Suprime todas las líneas repetidas después de realizar la ordenación.
 
 
+sosreport
+Conjunto de herramientas que reúnen información sobre el sistema (hardware y configuración). La información puede ser utilizada para fines de diagnóstico y depuración.
+# sosreport -l (listado de módulos)
+# sosreport -n ntp,numa (desactivar los módulos ntp y numa)
+# sosreport -k virsh=off (desactivar un módulo)
+# sosreport -e virsh=on  (activarlo
+
+
 source
 Recarga o ejecuta el archivo de configuración indicado para aplicar cambios o el script de bash correspondiente.
 $ source .bashrc
