@@ -9972,6 +9972,12 @@ $ linuxlogo -L random_ba (aleatorio y en ascii)
 $ linuxlogo -L redhat -F "Redhat linux 5.2\nkernel version 3.2.0-4-amd64" (Especificando logo y texto)
 
 
+listres
+Genera una lista de la base de datos de recursos de un widget. La lista muestra la clase en la que se define por primera vez cada recurso, el tipo y la instancia. Si no se proporcionan widgets específicos se imprimirá una lista de nombres de widgets y sus jerarquías de clase.
+$ listres -all (todos)
+$ listres -variable core (que los widgets se identifiquen por los nombres de las variables de registro de clase)
+
+
 lmbench
 Herramienta para probar el rendimiento de un sistema. La primera vez que se ejecute hará varias preguntas [las opciones por defecto son suficientes] y algunos chequeos. Su ejecución lleva bastante tiempo.
 # lmbench-run
