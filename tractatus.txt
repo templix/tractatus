@@ -18082,15 +18082,17 @@ Comprobar con df -k [ver] o mount [ver] su correcto montaje
 
 tmux
 Terminal multiplexor
-$ tmux (Lanzar la aplicación)
-$ tmux ls (Listar las sesiones tmux abiertas)
-$ tmux attach -t 0 (Sincronizarse con la sesión 0 [attach] en local o en remoto via ssh)
-$ tmux rename-session -t 0 tty1 (Renombrar la sesion 0 a tty1)
-$ tmux kill-window -t 2 (Matar la sesión tmux número 2)
-$ tmux new-session -s hack_wifi (Abrir sesión con un nombre)
-$ tmux list-commands (Listar la sintaxis de todos los comandos soportados)
-$ tmux list-keys (Listado de todas las teclas de control)
-$ tmux new-session -d 'vi /etc/apt/sources.list' \; split-window -d 'newsbeuter' \; attach (Arrancar una sesión tmux con el sources.list en el panel superior y con el lector RSS newsbeuter en el inferior)
+$ tmux (lanzar la aplicación)
+$ tmux ls (listar las sesiones tmux abiertas)
+$ tmux attach -t 0 (sincronizarse con la sesión 0 [attach] en local o en remoto via ssh)
+$ tmux rename-session -t 0 tty1 (renombrar la sesion 0 a tty1)
+$ tmux kill-window -t 2 (matar una ventana con el número 2)
+$ tmux kill-session -t 2 (matar una sesión con el número 2)
+$ tmux new-session -s hack_wifi (abrir sesión con un nombre)
+$ tmux new-session -d 'htop' (lanzar un comando en una nueva sesión sin unirse a ella)
+$ tmux list-commands (listar la sintaxis de todos los comandos soportados)
+$ tmux list-keys (listado de todas las teclas de control)
+$ tmux new-session -d 'vi /etc/apt/sources.list' \; split-window -d 'newsbeuter' \; attach (arrancar una sesión tmux con el sources.list en el panel superior y con el lector RSS newsbeuter en el inferior)
 $ tmux new-session \; split-window \; split-window -h \; split-window -v \; attach (Arrancar la aplicación con varios panels horizontales y verticales)
 Un completo tutorial en: <http://www.openbsd.org/cgi-bin/man.cgi?query=tmux&sektion=1>
 Atajos:
