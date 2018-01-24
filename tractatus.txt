@@ -10475,6 +10475,13 @@ Si una vez abierta la barra de navegación [con “o”, “t”..] colocamos:
 	yu palabra (En youtube)
 
 
+luit
+Utilidad para traducir el conjunto de caracteres de un programa para que su salida se pueda mostrar correctamente en un emulador de terminal que usa un juego de caracteres diferente. El objetivo principal de luit es permitir que las aplicaciones "heredadas" que usan juegos de caracteres distintos de UTF-8 funcionen con emuladores de terminal contemporáneos.
+$ LC_ALL=ja_JP luit (modifica la terminal a la codificación japonesa. Es preciso tener instalada la codificación)
+$ luit -list | grep ISO885
+$ luit -encoding 'ISO 8859-1' xterm
+
+
 lxde
 Escritorio ligero. Sus componentes:
 	pcmanfm (gestor de archivos)
