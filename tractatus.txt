@@ -14062,6 +14062,11 @@ $ pdfresurrect -q archivo.pdf   (Muestra el número de versiones del pdf)
 $ pdfresurrect -s  archivo.pdf  (Limpia todos los datos del pdf)
 
 
+pdfseparate
+Separa cada página de un pdf en un pdf.
+$ pdfseparate sample.pdf sample-%d.pdf (si sample.pdf tiene 3 páginas crea sample-1.pdf, sample-2.pdf, sample-3.pdf)
+
+
 pdftk
 Manipulación de pdfs
 $ pdftk 1.pdf 2.pdf 3.pdf cat output 123.pdf (Unir PDFs y crear un pdf nuevo)
