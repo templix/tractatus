@@ -19136,6 +19136,11 @@ Programa que actualiza el directorio /etc/ssl/certs para contener certificados S
 # update-ca-certificates
 
 
+update-desktop-database
+Herramienta para construir una base de datos de la caché de los tipos MIME manejados por archivos. La base de datos de caché contiene la lista de tipos MIME que pueden manejar los archivos , así como, para cada tipo MIME, una lista de archivos que pueden manejar este tipo MIME. Esta base de datos de caché facilita el trabajo de las aplicaciones que necesitan encontrar una aplicación que puede abrir un documento de un tipo MIME específico y así esas aplicaciones no tendrán que analizar todos los archivos existentes en el sistema y en su lugar pueden analizar esta base de datos de caché.
+# update-desktop-database -v
+
+
 update-dictcommon-aspell
 Esta secuencia reconstruirá la base de datos de aspell, así como las cosas de squirrelmail, jed y emacsen. Según la página man existe esta nota: ADVERTENCIA: No debe usarse desde la línea de comando a menos que sepa muy bien lo que está haciendo.
 $ update-dictcommon-aspell
