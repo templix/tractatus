@@ -19182,6 +19182,12 @@ Esta secuencia reconstruirá la base de datos de aspell, así como las cosas de 
 $ update-dictcommon-aspell
 
 
+update-fonts-dir
+Crear un archivo fonts.dir en el directorio de fuentes X Windows System [/usr/share/fonts/X11]. Normalmente se invoca solo desde los scripts posteriores a la instalación y posteriores a la eliminación de un paquete que contiene fuentes para X Window System, pero puede invocarse en cualquier momento para reconstruir el archivos fonts.dir [/usr/share/fonts/X11/100dpi/fonts.dir]. Solo es preciso el último componente de la ruta ["75dpi" "100dp" o "misc"], update-fonts-dir generará /usr/share/fonts/X11/100dpi/fonts.dir o /usr/share/fonts/X11/75dpi/fonts.dir desde los archivos de fuentes que se encuentran dentro de él. Esto permite que múltiples paquetes proporcionen nombres para las fuentes en el mismo directorio. Ningún paquete de fuente realmente proporciona el archivo fonts.dir en el directorio de las fuentes X Windows System, por lo que no hay peligro de sobrescribir los nombres de fuente de un paquete con los de otro.
+# update-fonts-dir 75dpi
+# update-fonts-dir 100dpi
+
+
 update-geoip-database
 descarga la última versión de la base de datos MaxMind GeoIP Lite del sitio web MaxMind [/usr/share/GeoIP].
 $ update-geoip-database
