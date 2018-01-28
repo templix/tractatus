@@ -12866,6 +12866,18 @@ Monitor del sistema
 # nmon   (arranca la aplicación y muestra las teclas de control para escoger lo que se monitorea. “q” para cerrar la aplicación)
 
 
+noclobber
+Es una opción de la shell [ver set] que permite protegerse de un borrado involuntario de archivos. Esta opción se encuentra desactivada por defecto. Puede configurarse de forma permanente en el archivo .bashrc.
+$ set -o noclobber (activarla)
+$ set +o noclobber (desactivarla)
+Veamos todo un proceso activando la opción y viendo como saltarsela:
+	$ date > fecha.txt (escribir la fecha en un archivo)
+	$ set -o noclobber (activar la opción)
+	$ date > fecha.txt (intentar de nuevo escribir en el archivo sin lograrlo)
+	bash: fecha.txt: Cannot overwrite existing file
+	$ date >| fecha.txt (saltarse la protección con >|)
+
+
 nohup
 permite mantener activo un proceso, incluso después de haber cerrado la sesión de usuario.
 $ nohup sleep 10000 &   (lanzar el proceso)
@@ -15241,6 +15253,20 @@ Reiniciar red:
 # /etc/init.d/networking restart
 
 
+redireccionar
+Permite direccionar las salidas por pantalla a un archivo.
+$ pwd > archivo.txt (mandar la salida de un comando a un archivo. Si archivo.txt existe borra todo el contenido anterior)
+$ pwd 1> archivo.txt (lo mismo que el anterior)
+$ pwd >> archivo.txt (añadir la salida de un comando a un archivo. Si no existe lo crea)
+$ pwd 1>> archivo.txt (lo mismo que el anterior)
+$ ls -W 2> error.txt (mandar la salida de errores a un archivo)
+$ find / -name passwd 1> si.txt 2> no.txt (mandar la salida estandar a un fichero y la salida de errores a otro)
+$ pwd >| archivo.txt (si la opción noclobber [ver] está activada)
+$ mail usuario < archivo.txt (mandar un archivo a un usuario por mail)
+$ find / -name passwd 1> todo.txt 2>&1 (mandar salida y errores a un mismo archivo)
+$ find / -name passwd 2> todo.txt 1>&2 (lo mismo que el anterior)
+
+
 reflector
 Optimizador del mirrorlist de pacman.
 # reflector (Mostrará todos los mirrors de archlinux.org/mirrors/status/json/)
@@ -16207,8 +16233,13 @@ Devuelve el estado de SELinux y la política que se está usando. Ver selinux y 
 set
 desplegar todas las variables [y sus valores] que el shell controla y otorgar nuevas variables.
 $ set | more
+Algunas ejemplos que se muestran en la salida:
+$ set -o ignoreeof (evitar que la terminal se cierre al presionar Control-D)
+$ set -o noglob (desactivar caracteres especiales en la shell: ?, [, ], * y ~)
+$ set prompt = "%/ - %t - %u - $$$$" (que el prompt diga el directorio, la fecha, el usuario i sigan 4 signos de "$")
+$ set history=2000 (que el historial guarde los últimos 2000 comandos entrados)
 $ set -o vi (cambiar a las teclas del modo de edición de vi . Por defecto bash utiliza el modo emacs)
-$ set -o noclobber (activar la protección de sobreescritura en las tuberias si el archido ya existe [ls > lista] para saltarse esta protección puede hacerse con ls >|lista)
+$ set -o noclobber (activar la protección de sobreescritura en las tuberias si el archido ya existe [ver noclobber] )
 $ set +o noclobber (Desactivar la protección. Opción por defecto)
 1.-
 Depurar partes de un script encerrando el código:
