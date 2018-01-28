@@ -14920,6 +14920,13 @@ Hace invisible el archivo /etc/shadow que previamente se había hecho visible co
 # pwunconv
 
 
+pydoc
+Documentación de python.
+$ pydoc -p 13000 (Abrir la documentacion de python en el puerto 13000 para su acceso via navegador)
+$ pydoc dbhash (información sobre el comando dbhash de python)
+$ pydoc -w sha (crea el archivo sha.html para abrirlo con el navegador y modstrar la información sobre el módulo)
+
+
 pyphoon
 [python-dateutils] Muestra en ascii las fases de la luna. descarga: <https://github.com/chubin/pyphoon> . Acepta varios formatos de fecha (2017-02-01, 01/02/2017...)
 $ pyphoon (En el dia de hoy y con 30 lineas [por defecto])
@@ -14976,7 +14983,6 @@ $ python -m calendar (Mostrar calendario)
 $ python -m calendar 2013 07 (Mostrar un mes concreto de un año)
 $ python -c "help('modules')" (Muestra los módulos instalados)
 $ python -m platform (Como uname -a)
-$ python -m pydoc -p 13000 (Abrir la documentacion de python en el puerto 13000 para su acceso via navegador)
 $ echo "Linux es un sistema genial" | python -m encodings.rot_13 (Codificar simple en ROT_13 [rotar 13 veces])
 $ echo "Yvahk rf ha fvfgrzn travny" | python -m encodings.rot_13 (Descodificar en ROT_13)
 $ echo "Linux es un sistema genial" | python -m base64 -e (Codificar en base64)
