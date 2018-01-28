@@ -19126,7 +19126,7 @@ Modificar las aplicaciones por defecto cuando existen otras posibilidades
 $ ls /etc/alternatives  (Muestra todas las posibilidades)
 $ update-alternatives --list x-www-browser (muestra las alternativas al navegador por defecto)
 $ update-alternatives --display x-www-browser (Para ver, de las opciones, la utilizada)
-$ update-alternatives --config x-www-browser (Para modificarla)
+ update-alternatives --config x-www-browser (Para modificarla)
 $ update-alternatives --config x-cursor-theme (Modificar el tema del cursor)
 $ update-alternatives --install  /usr/bin/x-www-browser x-www-browser /usr/bin/firefox 100 (Incluir en el listado una aplicación que no está)
 
@@ -19134,6 +19134,11 @@ $ update-alternatives --install  /usr/bin/x-www-browser x-www-browser /usr/bin/f
 update-ca-certificates
 Programa que actualiza el directorio /etc/ssl/certs para contener certificados SSL y genera certificados ca-certificates.crt.
 # update-ca-certificates
+
+
+update-geoip-database
+descarga la última versión de la base de datos MaxMind GeoIP Lite del sitio web MaxMind [/usr/share/GeoIP].
+$ update-geoip-database
 
 
 update-initramfs
@@ -19170,7 +19175,7 @@ Para solucionar estos errores que no afectan al funcionamiento del sistema:
 
 
 update-pciids
-Si al ejecutar lspci nos muestra un mensaje "unknown device" es preciso actualizar la lista del archivo pci.ids [/usr/share/misc].
+Si al ejecutar lspci nos muestra un mensaje "unknown device" es preciso actualizar la lista del archivo pci.ids [/usr/share/misc]. Descarga la lista de la última versión del archivo pci.ids del sitio de la distribución principal y lo instala. Esta utilidad requiere curl, wget o lynx para ser instalado.
 # update-pciids
 
 
