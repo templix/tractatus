@@ -9935,6 +9935,24 @@ Algunos atajos:
 	Ctrl + AvPag (Ir a pestañas siguiente)
 
 
+line
+Utilidad que copia una línea desde el inicio hasta el final desde la entrada estándar a la salida estándar.  Siempre imprime al menos una nueva línea y devuelve un estado de salida distinto de 0 en EOF o error de lectura
+	$ line
+	linux es genial
+	linux es genial
+	---------------
+	$ echo $?
+	0
+	---------------
+	$ line
+	^C
+	---------------
+	$ echo $?
+	130
+	---------------
+	$
+
+
 link
 Crear enlaces entre ficheros.
 $ link fichero1 fichero2 (crea un enllace fichero2 que apunta a fichero 2)
