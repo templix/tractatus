@@ -19136,6 +19136,11 @@ Programa que actualiza el directorio /etc/ssl/certs para contener certificados S
 # update-ca-certificates
 
 
+update-dictcommon-aspell
+Esta secuencia reconstruirá la base de datos de aspell, así como las cosas de squirrelmail, jed y emacsen. Según la página man existe esta nota: ADVERTENCIA: No debe usarse desde la línea de comando a menos que sepa muy bien lo que está haciendo.
+$ update-dictcommon-aspell
+
+
 update-geoip-database
 descarga la última versión de la base de datos MaxMind GeoIP Lite del sitio web MaxMind [/usr/share/GeoIP].
 $ update-geoip-database
@@ -19187,7 +19192,7 @@ $ update-rc.d script defaults (coloca un script en el arranque)
 
 
 update-usbids
-[usbutils]. Si al ejecutar lsusb nos muestra un mensaje "unknown device" es preciso actualizar la lista del archivo /usr/share/misc/usb.ids.
+[usbutils]. Si al ejecutar lsusb nos muestra un mensaje "unknown device" es preciso actualizar la lista del archivo /usr/share/misc/usb.ids. Descarga la última versión del archivo del sitio web y la instala. Esta utilidad requiere wget o lynx.
 # update-usbids
 
 
