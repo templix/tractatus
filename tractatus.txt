@@ -14104,6 +14104,11 @@ Opciones:
 	-u: Trabajar con el “userpassword”
 
 
+pdftocairo
+Convierte spáginas de un pdf a cualquiera de los siguientes formatos de imagen: PNG, JPEG, TIFF, PDF, PS, EPS, SVG y Windows Printer
+$ pdftocairo -f 1 -l 3 -r 200 -png archivo.pdf (creará 3 .png de la primera página [-f 1]  a la tercera [-l 3] a 200 de resolución [por defecto 150] del archivo.pdf)
+
+
 pdftohtml
 Pasar un pdf a html. Preferible lanzar en una carpeta sin contenido ya que, dependiendo de la medida del pdf, produce varios archivos.
 $ pdftohtml -i -stdout archivo.pdf | w3m -T text/html (leerlo por consola con w3m sin mostrar imagenes [-i])
