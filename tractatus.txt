@@ -2279,6 +2279,17 @@ cftp> ? (Muestra los comandos disponibles.)
 Pulsando “exit” salimos del prompt
 
 
+chacl
+Cambia los permisos de archivos o directorios. Este comando de compatibilidad IRIX que se mantiene para aquellos usuarios que están familiarizados con el uso de XFS o IRIX pero lo habitual para estos casos es usar el comando chmod [ver].
+	$ chacl u::---,g::r-x,o::-w- archivo.txt
+	$ ls -al archivo.txt
+	----r-x-w- 1 pep pep 93 gen 30 18:11 archivo.txt
+Con el comando chomod seria:
+	$ chmod u=,g=rx,o=w newfile.txt
+	$ ls -al newfile.txt
+	----r-x-w- 1 pep pep 93 gen 30 18:11 newfile.txt
+
+
 chage
 Establece/visualiza el número de días para cambio de contraseña
 $ chage -l usuario   (muestras datos sobre la contraseña)
