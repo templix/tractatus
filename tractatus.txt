@@ -8216,6 +8216,14 @@ Ver fecha y hora de la BIOS
 # hwclock -r  (verifica desfase entre ambas)
 
 
+hwinfo
+Información sobre la máquina más completa que con lshw.
+$ hwinfo --disk (Información sobre los discos)
+$ hwinfo --short --block (descripción general)
+$ hwinfo --disk --only /dev/sdb (información de un disco solamente)
+$ hwinfo --short (mostrar un resumen)
+
+
 hwloc-info
 Muestra información sobre la topologia de la máquina, proporcionando una vista jerárquica de la máquina, nodos de memoria NUMA, enchufes, cachés compartidos, núcleos, etc.
 $ hwloc-info
