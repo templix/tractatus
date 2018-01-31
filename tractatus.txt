@@ -20985,6 +20985,10 @@ $ xhost + 32.125.3.12 (Permiter el acceso al servidor X a una ip)
 $ xhost - 32.125.3.12 (Anular el permiso)
 
 
+xinit
+Permite iniciar un servidor X. El script startx [ver] es un front-end para xinit. De forma predeterminada, xinit y startx inician un servidor X en la pantalla :0. Si no existe el archivo .xinitrc del usuario, xinit/startx lanza un servidor X en pantalla y después un emulador de terminal Xterm en ella. Cuando el Xterm finaliza, xinit/startx cierra el servidor X y, generalmente, inicia un script que a su vez ejecuta un número de programas dado y un gestor de ventanas.
+
+
 xinput
 Muestra las id de los dispositivos de entrada.
 $ xinput
