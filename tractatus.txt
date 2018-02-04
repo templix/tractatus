@@ -8236,12 +8236,14 @@ $ hwinfo --disk --only /dev/sdb (información de un disco solamente)
 $ hwinfo --short (mostrar un resumen)
 
 
-hwloc-ls
-Mostrar la topología del sistema. Comando parecido a lstopo-no-graphics y lstopo y con las mismas opciones.
-$ hwloc-ls -.ascii (muestra la topolocia en forma ascii)
-$ hwloc-ls -p (de forma lógica)
-$ hwloc-ls -c (de la cpu)
-$ hwloc-ls --whole-system (sin limitaciones de administración)
+hwloc-gather-topology
+Guarda los archivos de topología relevantes y la salida hwloc para uso posterior:
+$ hwloc-gather-topology --dmi hwloc
+	Topology files gathered in ./hwloc-topology.tar.bz2 and kept in /tmp/tmp.Mfv99mIHmB/hwloc/
+	Expected topology output stored in ./hwloc.output
+	WARNING: Do not post these files on a public list or website unless you
+	WARNING: are sure that no information about this platform is sensitive.
+El resultado nos advierte: "No publique estos archivos en una lista pública o sitio web a menos que estamos seguros de que ninguna información sobre esta plataforma es confidencial." y del directorio en el que los encontraremos: /tmp/tmp.Mfv99mIHmB/hwloc/
 
 
 hwloc-info
@@ -8249,6 +8251,14 @@ Muestra información sobre la topologia de la máquina, proporcionando una vista
 $ hwloc-info
 $ hwloc-info package:all
 $ hwloc-info -p core:2
+
+
+hwloc-ls
+Mostrar la topología del sistema. Comando parecido a lstopo-no-graphics y lstopo y con las mismas opciones.
+$ hwloc-ls -.ascii (muestra la topolocia en forma ascii)
+$ hwloc-ls -p (de forma lógica)
+$ hwloc-ls -c (de la cpu)
+$ hwloc-ls --whole-system (sin limitaciones de administración)
 
 
 hwloc-ps
