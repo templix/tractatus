@@ -21553,6 +21553,13 @@ $ zip archivo.zip fichero1 fichero2 (Comprimir varios ficheros)
 $ zip -r archivo.zip file1 file2 dir1 (comprimir varios files y directorios)
 
 
+zipinfo
+muestra información técnica sobre archivos ZIP. Dicha información incluye permisos de acceso a archivos, estado de cifrado, tipo de compresión, versión y sistema operativo o sistema de archivos del programa de compresión y similares.
+$ zipinfo -h archivo.zip (Se imprime el nombre del archivo, el tamaño real en bytes)y el número total de archivos)
+$ zipinfo -t archivo.zip (lista totales para todos los archivos, cantidad de archivos enumerados, tamaños totales sin comprimir y comprimidos y factor de compresión general)
+$ zipinfo -l archivo.zip (lista la información del archivo zip en formato largo)
+
+
 zless
 Pagina la visualización de un fichero comprimido (Ver less).
 
