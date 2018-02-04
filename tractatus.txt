@@ -2361,10 +2361,11 @@ $ checkbot --mailto usuario@correo.org http://google.com (enciar correo cuando t
 
 
 checkrestart
-[debian-goodies]. Muestra procesos activos que están utilizando una versión anterior de algún fichero que haya sido actualizado.
-	$ checkrestart -v
-	Found 0 processes using old versions of upgraded files
-Nota.- Aunque la salida muestre gran cantidad de paquetes [por ejemplo por tener una "testing" o por una actualización del navegador mientras este está activo] no es preciso reiniciar el sistema o la aplicación.
+[debian-goodies]. Muestra procesos activos que están utilizando una versión anterior de algún fichero que haya sido actualizado. A veces una actualización trae nuevas bibliotecas del sistema y los procesos que se esten ejecutando siguen utilizando las versiones anteriores de estas bibliotecas. En sistemas Debian GNU/Linux estables, generalmente se necesita para eliminar un exposición del sistema a una vulnerabilidad que podría haberse solucionado actualizando una biblioteca que utiliza algún proceso. Tambien se usa para encontrar versiones desactualizadas de bibliotecas en uso.
+# checkrestart -a (muestra todos)
+# checkrestart -p chromium (referente a un paquete)
+# checkrestart -i 1912 (referente a un PID)
+Nota.- Aunque la salida muestre gran cantidad de paquetes [por ejemplo por tener una "testing" o por una actualización del navegador mientras este está activo] no es preciso reiniciar el sistema o la aplicación pero es aconsejable.
 
 
 cherokee
