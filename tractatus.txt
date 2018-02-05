@@ -17723,13 +17723,13 @@ Esc (Stop )
 surfraw (sr)
 Buscador de significados en la web. Antes de usar, especificar los navegadores que se usarán en teminal y en las X, mostrando la ruta absoluta a los ejecutables:
 # nano /etc/xdg/surfraw/conf
-….
-# name/path of text browser executable
-# e.g links, lynx, w3m
-def   SURFRAW_text_browser /usr/bin/elinks
-# name/path of browser executable
-# e.g mozilla, netscape etc
-def   SURFRAW_graphical_browser /usr/bin/firefox
+	...
+	# name/path of text browser executable
+	# e.g links, lynx, w3m
+	def   SURFRAW_text_browser /usr/bin/elinks
+	# name/path of browser executable
+	# e.g mozilla, netscape etc
+	def   SURFRAW_graphical_browser /usr/bin/firefox
 $ sr wikipedia -l=es Palabra_a_buscar (buscar en wikipedia y en español)
 $ sr -elvi | less  (listar los sitios disponibles donde buscar)
 
