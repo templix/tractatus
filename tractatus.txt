@@ -15854,6 +15854,21 @@ $ rzip archivo.txt (Substituye archivo.txt por archivo.txt.rz)
 $ rzip -o archivo.txt -d archivo.txt.rz (Descomprimir. Imprescindible dar el nombre del archivo de salida [-o])
 
 
+s
+Motor de busqueda por consola que lo abre en el navegador predeterminado o en una pestaña del mismo si ya está abierto. Usa google como motor de busqueda predeterminado si no se especifica otro.
+$ s -l (listar todos los sitios web donde buscar)
+$ s --list-tags (Listar las etiquetas que tambien puden usarse. Por defecto en youtube)
+$ s -t video queen (Buscar por una etiqueta)
+$ s repositorio debian (Busqueda básica. Busca "repositorio debian")
+$ s -p duckduckgo repositorio debian (especificando que lo haga con el buscador duckduckgo)
+$ s -p amazon bash (buscar en Amazon "bash")
+$ s -p fa lapipaplena (Lo busca en facebook)
+$ s -b "midori" red had (buscar con otro navegador "red had")
+$ s -b "chromium --incognito" descargar torrents (en modo incognito con chromium)
+$ s -b "firefox --private-window" descargar torrents (en modo incognito con firefox)
+$ s -s (abrirlo como servidor en el puerto por defecto 8080)
+
+
 s-tui
 [python-pip stress]. Control de la temperatura, la frecuencia, la potencia y la utilización de la CPU, escrito en Python [pip install s-tui].
 # s-tui
