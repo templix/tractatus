@@ -4522,6 +4522,13 @@ Teclas de control:
 	s/cosa/casa/[g] (Busca las líneas que contienen "cosa" y substituye "cosa" por "casa"
 
 
+efibootmgr
+Averiguar si se está ejecutando UEFI o BIOS. Si el sistema es compatible con UEFI generará diferentes variables. En caso de no ser compatible con UEFI se verás un mensaje que dice que las variables no son compatibles.
+	# efibootmgr
+	EFI variables are not supported on this system.
+Tambien puede consultarse si exite en el sistema la carpeta /sys/firmware/efi, si no existe se está usando BIOS.
+
+
 egrep
 [extended grep]. Busca expresiones regulares.
 	$ egrep -v '^$|^#' archivo (suprimir lineas en blanco y comentadas)
