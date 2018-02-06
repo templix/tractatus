@@ -1730,6 +1730,18 @@ $ bozocrack archivo.txt
 	Nota.- dado que no usa diccionarios ni fuerza bruta sino solo busquedas de google, solamente se encontrarán las más usuales.
 
 
+brew
+[build-essential curl git python-setuptools ruby]. En Debian el paquete se denomina linuxbrew-wrapper. Bifurcación de Homebrew, el administrador de paquetes de Mac OS, para Linux. Algunas de sus caracteristicas principales son que no requiere acceso root, permite instalar software no empaquetado por la distribución nativa y pueden instalarse versiones actualizadas de software cuando la distribución nativa es antigua.
+$ brew doctor (Comprobar si linuxbrew esté instalado y funciona correctamente)
+$ brew update (actualizar linuxbrew)
+$ brew search (paquetes están disponibles)
+$ brew upgrade (actualizar paquetes obsoletos)
+$ brew upgrade paquete (actualizar un paquete especifico)
+$ brew --cache (donde están los paquetes descargados)
+$ brew install paquete (Instalar un paquete)
+$ brew remove (Eliminar un paquete)
+
+
 brillo
 Para definir el nivel de brillo de algunos portatiles podemos recurrir al siguiente comando:
 # echo 2000 > /sys/class/backlight/acpi_video0/brightness
