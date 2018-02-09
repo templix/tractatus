@@ -17878,6 +17878,12 @@ Y modificar la linea:
 3.-
 Para cambiar el nivel de ejecución predeterminado del sistema, que con sysvinit se hacía editando /etc/inittab y modificando la linea id:5:initdefault:, con systemd se hace:
 # ln -sf /lib/systemd/system/graphical.target /etc/systemd/system/default.target
+4.-
+Para acelerar el proceso de inicio y finalización:
+# /etc/systemd/system.conf
+Y descomentar y modificar las lineas siguientes de 90 segundos a 10:
+	DefaultTimeoutStartSec=10s
+	DefaultTimeoutStopSec=10s
 
 
 systemd-analyze
