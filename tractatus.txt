@@ -17120,6 +17120,13 @@ $ speaker-test (básico)
 $ speaker-test -Dplug:front -c2 (estereo)
 
 
+spd-conf
+Herramienta simple para la configuración básica de speech-dispatcher y diagnóstico de problemas. El paquete speech-dispatcher proporciona una capa independiente para síntesis de voz y salida por altavoces, es compatible con varios sintetizadores de voz (software y hardware) a través de los diferentes backends de las aplicaciones.
+$ spd-conf -d -e (para mensajes y diagnosis de los problemas)
+$ spd-conf -d --test-pulse (test de pulse audio)
+s spd-conf -d --test-alsa (test de alsa)
+
+
 speedometer
 Monitor de transferencia de ficheros [velocímetro].
 # speedometer -p -rx eth0  (tráfico recibido y el resultado en consola [-p])
