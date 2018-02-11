@@ -899,14 +899,21 @@ $ arj -v archivo.arj (Ver contenido)
 
 
 arm
-[tor-arm]. Herramienta que permite monitorizar el comportamiento y los eventos que usan la red tor [tor-browser, vidalia....]. Funciona de forma similar al comando top.
-# arm
+[tor-arm]. Herramienta que permite monitorizar el comportamiento y los eventos que usan la red tor [tor-browser, vidalia....]. Funciona de forma similar al comando top. Precisa tener al archivo ~/.arm/armrc un ejemplo del cual puede descargarse de <https://raw.githubusercontent.com/katmagic/arm/master/armrc.sample> y para que no salga la nota "Connection refused. Is the ControlPort enabled?" habilitar dicho puerto en:
+# nano /etc/tor/torrc
+Descomentado la linea:
+	ControlPort 9051
+Con el puerto usado por arm por defecto y reiniciar la red tor.
+# /etc/init.d/tor restart
+# arm (arrancar la aplicación)
 Las teclas de control se muestran en la parte superior y son:
 	m (Muestra el menú)
 	p (Pausar)
 	h (Ayuda)
 	q (Salir)
 	flechas derecha e izquierda (Va mostrando los distintos informes)
+En el archivo de configuración ya está especificado el puerto, el host y la ubicación del archivo por defecto, pero si ha de especificarse:
+# arm -c /home/usuario/.arm/armrc -i 127.0.0.1:9051
 
 
 arp
