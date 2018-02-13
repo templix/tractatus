@@ -12326,6 +12326,12 @@ $ mysqladmin -u root -p shutdown (Para el servidor de forma segura)
 $ mysqladmin -u root -p ping (Readlizar un ping al servidor mysql)
 
 
+mysqlreport
+Crea un informe de importantes valores del estado de MySQL. Interpreta y formatea los valores y presenta los valores básicos y muchos más valores inferidos en un formato legible por humanos.
+# mysqlreport --user root (del usuario root)
+# mysqlreport --outfile archivo (vuelca los datos en "archivo")
+
+
 mysql_secure_installation
 Mejorar la seguridad de la instalación de MariaDB. Este programa permite establecer contraseña para las cuentas,  puede eliminar el acceso remoto, eliminar cuentas anónimas y puede eliminar bases de datos de prueba, a las que los usuarios anónimos pueden acceder de forma predeterminada.
 $ mysql_secure_installation
