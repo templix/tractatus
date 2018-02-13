@@ -12309,6 +12309,11 @@ $ mysqladmin -u root -p shutdown (Para el servidor de forma segura)
 $ mysqladmin -u root -p ping (Readlizar un ping al servidor mysql)
 
 
+mysql_secure_installation
+Mejorar la seguridad de la instalación de MariaDB. Este programa permite establecer contraseña para las cuentas,  puede eliminar el acceso remoto, eliminar cuentas anónimas y puede eliminar bases de datos de prueba, a las que los usuarios anónimos pueden acceder de forma predeterminada.
+$ mysql_secure_installation
+
+
 mytop
 Monitorización del servidor de bases de datos mysql. "q" para salir. Comprobar la actividad ingresando en otra consola en mysql [mysql -u USER -p]
 $ mytop -u USER -p PASS -h localhost -P 3306 --color (Especificando host y puerto)
