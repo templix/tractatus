@@ -12331,6 +12331,13 @@ Mejorar la seguridad de la instalación de MariaDB. Este programa permite establ
 $ mysql_secure_installation
 
 
+mysqlshow
+Mstrar información de la base de datos, tablas y columnas.
+# mysqlshow
+# mysqlshow --count (Muestra el número de filas por tabla)
+# mysqlshow --debug-info (Muestra información de la memoria y las estadísticas de uso de la CPU)
+
+
 mytop
 Monitorización del servidor de bases de datos mysql. "q" para salir. Comprobar la actividad ingresando en otra consola en mysql [mysql -u USER -p]
 $ mytop -u USER -p PASS -h localhost -P 3306 --color (Especificando host y puerto)
