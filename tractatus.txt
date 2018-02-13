@@ -12292,6 +12292,23 @@ Colocar un contador de registros en una tabla. Incluir las lineas id_image... y 
     -> antiguedad DATE),
 	-> PRIMARY KEY (id_image)
 	-> );
+12.-
+Aumentar la seguridad de un servidor mysql
+# nano /etc/mysql/my.cnf
+Y modificar las siguientes lineas dejándolas:
+	bind-address=127.0.0.1
+	[mysqld]
+	local-infile            = 0
+	secure-file-priv        = /dev/null
+	update mysql.user set user="USER" where user="root";
+	flush privileges;
+La primera linea indica que el servidor MySQL solo reciba conexiones de localhost. Las tres siguientes evitan la lactura de los ficheros de configuración. Las dos siguientes renombran al usuario root con el nombre que digamos, que colocaremos donde poner "USER"
+Tambien es interesante realizar consultas para ver los privilegios de los usuarios y sus permisos dentro del prom de mysql:
+	> select distinct(grantee) from information_schema.user_privileges;
+Si solo queramos ver los permisos de un usuario:
+	> show grants for 'root'@'localhost';
+Otra herramienta importante es el script "mysql_secure_installation", el cual nos ayuda a eliminar usuarios anónimos, establecer una contraseña al administrador, eliminar las bases de datos de pruebas, habilitar o deshabilitar el acceso remoto del usuario administrador, etc.
+$ sudo mysql_secure_installation
 
 
 mysqladmin
