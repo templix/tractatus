@@ -2972,6 +2972,9 @@ $ ifconfig | convert -background yellow -fill black -font Courier -pointSize 14 
 Archivos nombre de fuentes, colores: /etc/ImageMagick/
 Tambien puede cambiarse el nombre de la fuente por su archivo:
 	-font /home/usuario/.fonts/Albert.ttf
+1.-
+Convertir todas las imágenes del directorio de formato .jpg a .png:
+$ for i in *.jpg;do convert "$i" "${i%.jpg}.png";done
 
 
 coproc
