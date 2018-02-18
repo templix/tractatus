@@ -17905,6 +17905,11 @@ Cuando es posible, suspender la shell actual.
 # suspend -f (Pasará de root a nuestro usuario)
 
 
+suspicious-source
+Script que genera una lista de archivos que no son archivos fuente comunes. Esto debe ejecutarse en la raíz de un árbol de fuentes para encontrar archivos que podrían no ser la "forma preferida de modificación" que requieren la licencia GPL y otras licencias.
+# suspicious-source -d /usr/bin
+
+
 swapoff
 Desactivar una partición swap.
 $ swapoff -a (Desactivar todas las especificadas en /etc/fstab)
