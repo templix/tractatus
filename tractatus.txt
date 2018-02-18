@@ -2397,6 +2397,11 @@ paquetes.
 $ check-support-status (Muestra los que no tienen soporte de seguridad)
 
 
+checkbashisms
+Realiza comprobaciones básicas en scripts de shell /bin/sh por la posible presencia de bashisms. La definición de bashism equivale a "una función de shell que no se requiere que sea soportada por POSIX "; esto significa que algunos problemas marcados pueden ser permitidos bajo secciones opcionales de POSIX. En los casos en que POSIX y Debian Policy no coincidan, los checkbashisms, de forma predeterminada, permiten extensiones permitidas por Policy pero también pueden proporcionar opciones para una verificación más estricta.
+$ checkbashims script.sh
+
+
 checkbot
 Verifica enlaces internos o externos de una url.
 $ checkbot http://google.com (básico)
