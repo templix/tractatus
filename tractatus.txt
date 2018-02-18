@@ -3112,6 +3112,18 @@ Aplicación que se basa en una serie de script que escribirán código aleatorio
 # crashme +2000 666 50 00:02:00 2 (2 minutos de proceso, mostrar información resumida del proceso)
 
 
+cronic
+Contenedor para trabajos de Cron. Chronic administra el resultado de otros programas y los organiza para mostrar solo ese resultado si el comando tiene un error o falla. Si el comando tiene éxito, se ocultará cualquier otra salida y eso significa que no habrá correo electrónico. Sólo se recibe un correo electrónico si no funciona. Un ejemo de estilo podria ser:
+$ crontab -e
+Añadir el script que se ejecutaria, por ejemplo, en cada reinicio:
+	@reboot cronic script.sh
+Pera comprobar si se ejecuta correctamente podemos realizar una prueba. Modificamos el crontab con un script que no existe:
+$ crontab -e
+Añadimos:
+	@reboot cronic scrit.sh
+Recibiremos un correo con algo parecido a "Cron <usuario@localhost> chronic scrit (failed)"
+
+
 crontab
 configurar tareas para que se ejecuten automáticamente en el sistema
 # crontab -e      (editar el archivo crontab, si no existe se crea)
