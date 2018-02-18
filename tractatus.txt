@@ -12369,6 +12369,22 @@ Mstrar información de la base de datos, tablas y columnas.
 # mysqlshow --debug-info (Muestra información de la memoria y las estadísticas de uso de la CPU)
 
 
+mysqltuner
+Optimiza el sistema para que el motor de las bases de datos (mysql o mariadb) sean más rápidos. En primer lugar preparamos el contexto creando el directorio y descargando el script y archivos necesarios:
+$ mkdir mysqltuner
+$ cd mysqltuner
+$ wget http://mysqltuner.pl/ -O mysqltuner.pl
+$ wget https://raw.githubusercontent.com/major/MySQLTuner-perl/master/basic_passwords.txt -O basic_passwords.txt
+$ wget https://raw.githubusercontent.com/major/MySQLTuner-perl/master/vulnerabilities.csv -O vulnerabilities.csv
+	$ ls
+	basic_passwords.txt  mysqltuner.pl  vulnerabilities.csv
+Otorgamos permisos de ejecución al script de perl:
+$ chmod +x mysqltuner.pl
+Ejecutamos:
+# ./mysqltuner
+Nos pedirá nombre de usuario mysql o de mariadb y contraseña y mostrará el informe.
+
+
 mytop
 Monitorización del servidor de bases de datos mysql. "q" para salir. Comprobar la actividad ingresando en otra consola en mysql [mysql -u USER -p]
 $ mytop -u USER -p PASS -h localhost -P 3306 --color (Especificando host y puerto)
