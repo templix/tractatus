@@ -12440,6 +12440,19 @@ Teclas interactivas:
 	u (Mostrar solamente de un usuario específico)
 
 
+namecheck
+Consulta nombres de proyectos que no esten tomados. Cada nuevo proyecto requiere un nombre y estos han de ser únicos. Proponer nombres es difícil para asegurarse que no esten ya en uso y esta herramienta contiene una lista de sitios y patrones para evaluar.
+$ namecheck tqñas-up84
+	Testing tqñas-up84.tuxfamily.org - Available
+	Testing    alioth.debian.org - Available
+	Testing        launchpad.net - Available
+	Testing     savannah.gnu.org - Available
+	Testing      sourceforge.net - Available
+	Testing        www.ohloh.net - Available
+	Testing  projects.apache.org - Available
+	The name 'tqñas-up84' doesn't appear to be in use.
+
+
 namei
 Mostrar la ruta desde el directorio raiz hasta donde especifiquemos.
 $ namei $(pwd) (hasta el presente directorio)
