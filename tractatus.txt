@@ -20755,6 +20755,12 @@ $ who -r (Informa del runlevel activo)
 $ who am i (usuario, número de terminal y fecha de entrada en dicha terminal)
 
 
+whodepends
+Comprueba qué paquetes dependen de un paquete dado y da los nombres y direcciones de correo electrónico de todos sus mantenedores
+$ whodepends firefox
+$ whodepends nano
+
+
 who-uploads
 Identifica las tres últimas versiones descargadas del paquete dado. Los cargadores se identifican utilizando sus llaves gpg o gpg2; la instalación de una versión reciente del paquete debian-keyring debería proporcionar la mayoría de las claves requeridas. Debido a que el PTS usa paquetes fuente, ha darse los nombres del paquete fuente, no los nombres del paquete binario.
 $ who-uploads -M 5 emacs25 (dando la fecha de cada versión y de las últimas 5 del paquete mencionado)
