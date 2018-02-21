@@ -11265,6 +11265,12 @@ Matar el proceso con:
 $ kill -9 `pidof mjpg_streamer`
 
 
+mk-build-deps
+Cea un paquete que satisfaga las dependencias de compilación de un paquete.
+$ mk-build-deps emacs25 (crea una paquete emacs25-build-deps_25.1+1-4+deb9u1_amd64.deb con todas las dependencias de emacs25)
+$ mk-build-deps -i emacs25 (lo instala todo)
+
+
 mkdir
 Crear directorios.
 $ mkdir -p A B C (Crea el directorio A en su interior el B y dentro de este el C)
