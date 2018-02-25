@@ -17390,7 +17390,8 @@ AllowTcpForwarding yes
 GatewayPorts yes
 Luego configurar Firefox para usar un servidor proxy 127.0.0.1 puerto 9999.
 2.-
-# gedit /etc/issue.net   (modificar el mensaje antes del login. Para activarlo, descomentar del archivo “/etc/ssh/sshd_config” la línea: Banner /etc/issue.net)
+Modificar el mensaje antes del login
+# gedit /etc/issue.net   (Para activarlo, descomentar del archivo “/etc/ssh/sshd_config” la línea: Banner /etc/issue.net)
 3.-
 Tunel inverso:
 $ ssh -R 10000:localhost:22 usuario2@host2 (lanzado desde host1 hacia host2 crea un tunel por el puerto 10000)
@@ -17407,6 +17408,8 @@ Nota.- Si host2 no corriera por el puerto 22 substituir por: usuario@host2 -p PU
 Crear clave publica para acceder a un remoto sin que pida identificación:
 $ ssh-keygen -b 4096 -t rsa  (Crear la clave)
 $ ssh-copy-id usuario@IP_o_HOST (enviar la clave al remoto)
+En caso de tener la conexión en un puerto distinto:
+$ ssh-copy-id -p 7000 USER@HOST
 5.-
 Para deshabilitar el acceso a todos los usuarios excepto a root:
 # touch /etc/nologin
