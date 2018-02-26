@@ -4242,6 +4242,12 @@ Limpiar paquetes obsoletos:
 # dpkg -l |grep -i ^rc | cut -d " " -f 3 | xargs dpkg --purge (Para eliminarlos)
 
 
+dpkg-depcheck
+Determina los paquetes utilizados para ejecutar un comando. Este programa ejecuta el comando especificado bajo strace y luego determina y saca los paquetes usados en el proceso.
+$ dpkg-depcheck -b ip a
+$ dpkg-depcheck -a ls
+
+
 driftnet
 Snifer de imagenes y video
 # driftnet -i wlan2
