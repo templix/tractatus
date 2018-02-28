@@ -17011,16 +17011,16 @@ Monitoriza la interfaz de red
 
 
 smartctl
-[smartmontools]. Comprobar el estado de los discos duros. Si el disco es IDE, suprimir en todos los comandos el "-d ata"
-# smartctl -i -d ata /dev/sda (Verificar si un disco ATA suporta smart)
-# smartctl -s on -d ata /dev/hda (activar el soporte smart)
-# smartctl -d ata -t short /dev/sda (lanzar el test corto)
-# smartctl -d ata -t long /dev/sda  (lanzar el test largo)
-# smartctl -d ata -l selftest -i /dev/sda (analizar la información de los comandos anteriores)
+[smartmontools]. Comprobar el estado de los discos duros. 
+# smartctl -i /dev/sda (Verificar si un disco ATA suporta smart)
+# smartctl -s on /dev/hda (activar el soporte smart)
+# smartctl -t short /dev/sda (lanzar el test corto)
+# smartctl -t long /dev/sda  (lanzar el test largo)
+# smartctl -l selftest -i /dev/sda (analizar la información de los comandos anteriores)
 LifeTime indica las horas que el disco ha estado encendido. LBA_of_First_error indica los errores.
-# smartctl -d ata -Hc /dev/sda (Si al final se lee PASSED, correcto, si FAILED cambiar disco)
-# smartctl -d ata -l error /dev/sda (Listar los errores)
-# smartctl -d ara -A /dev/sda (Listar atributos internos)
+# smartctl -Hc /dev/sda (Si al final se lee PASSED, correcto, si FAILED cambiar disco)
+# smartctl -l error /dev/sda (Listar los errores)
+# smartctl -A /dev/sda (Listar atributos internos)
 Listado de algunos atributos smart
 Power_Cycle_Count (RAW_Value).- Veces que le ha llegado   corriente.
 Temperature Celsius. (RAW_Value) .- Temperatura del disco
