@@ -3577,6 +3577,29 @@ instalarlo:
 Lo encontraremos en aplicaciones/juegos
 
 
+debcheckout
+Recupera la información sobre el sistema de control de versiones utilizado para mantener un paquete Debian dado y luego verifica la última versión del paquete de su repositorio.
+$ debcheckout nano
+	declared git repository at https://anonscm.debian.org/git/collab-maint/nano.git
+	git clone https://anonscm.debian.org/git/collab-maint/nano.git nano ...
+	S'està clonant a 'nano'...
+	remote: Counting objects: 3577, done.
+	remote: Compressing objects: 100% (2271/2271), done.
+	remote: Total 3577 (delta 2489), reused 2148 (delta 1163)
+	S'estan rebent objectes: 100% (3577/3577), 7.46 MiB | 527.00 KiB/s, fet.
+	S'estan resolent les deltes: 100% (2489/2489), fet.
+	$ ls | grep nano
+	nano
+	$ ls nano/
+	ABOUT-NLS            compile       COPYING       install-sh     nano.spec     syntax
+	aclocal.m4           config.guess  COPYING.DOC   lib            nano.spec.in  THANKS
+	ar-lib               config.h.in   debian        m4             NEWS          TODO
+	AUTHORS              config.rpath  depcomp       Makefile.am    po
+	ChangeLog            config.sub    doc           Makefile.in    README
+	ChangeLog.1999-2006  configure     IMPROVEMENTS  missing        README.GIT
+	ChangeLog.2007-2015  configure.ac  INSTALL       mkinstalldirs  src
+
+
 debget
 [debian-goodies]. Descarga un paquete .deb del repositorio o, caso de estar instalado, muestra la versión.
 $ debget scribus
@@ -4240,6 +4263,12 @@ Añadir arquitectura 386 a una máquina amd64 para permitir instalar paquetes s�
 Limpiar paquetes obsoletos:
 # dpkg -l | grep -i ^rc (Para visualizarlos)
 # dpkg -l |grep -i ^rc | cut -d " " -f 3 | xargs dpkg --purge (Para eliminarlos)
+
+
+dpkg-depcheck
+Determina los paquetes utilizados para ejecutar un comando. Este programa ejecuta el comando especificado bajo strace y luego determina y saca los paquetes usados en el proceso.
+$ dpkg-depcheck -b ip a
+$ dpkg-depcheck -a ls
 
 
 driftnet
@@ -18013,11 +18042,13 @@ systemctl
 # systemctl list-units (Listado de unidades activas)
 # systemctl --failed (Listado de unidades que han tenido problemas)
 # systemctl list-unit-files (Listado de unidades instaladas)
+# systemctl list-dependencies ssh.service (servicios que se han de iniciar antes de iniciar el servicio requerido)
 # systemctl start slim.service (Activa slim de inmediato)
 # systemctl stop sshd.service (Parar ssh de inmediato)
 # systemctl restart dhcpcd@eth0.service (Reiniciar conexión por dhcp)
 # systemctl reload wicd.service (Recargar la configuración de wicd)
 # systemctl status cronie.service (Muestra el estado de cron)
+# systemctl is-active ssh.service (verificar si un servicio está activo)
 # systemctl is-enabled vsftpd.service (Comprueba si vsftpd está habilitada o no)
 # systemctl enable NetworkManager.service (Activa el inicio automático de network-manager en el arranque)
 # systemctl disable smbd.service (Desactiva el inicio automático de samba en el arranque)
