@@ -937,7 +937,7 @@ Configurar, mantener e inspeccionar las tablas ARP gobernadas por el nucleo linu
 
 
 arpalert
-Prevenir conexiones no autorizadas en la red local. Previamente especificar en en el archivo de configuración las ips i su correspondiente MAC:
+Prevenir conexiones no autorizadas en la red local. Previamente especificar en el archivo de configuración las ips i su correspondiente MAC:
 $ nano  /etc/arpon.sarpi
 	192.168.1.130 00:21:97:23:9e:91
 	192.168.1.25 F4:CE:26:43:E8:C9
@@ -956,7 +956,7 @@ Enviar solicitud ARP a una ip de la red.
 
 
 arp-scan
-Escanea la tabla arp.
+Escanea en una red las direcciones IP y las MAC.
 # arp-scan -I eth0 192.168.2.0/16
 # arp-scan -l -I eth1
 	Nota.- En el primer ejemplo es una i mayúscula. En el segundo la primera opción la “ele” minúscula y la segunda la i mayúscula
