@@ -10048,6 +10048,14 @@ allow-guest=false
 # restart lightdm (Reiniciar servicio)
 2.-
 Entrar de forma automática:
+ - Para versiones modernas:
+Crear fichero /etc/lightdm/lightdm.conf.d/12-autologin.conf
+# nano /etc/lightdm/lightdm.conf.d/12-autologin.conf
+Insertar estas 3 líneas editando USUARIO por tu usuario:
+[Seat:*]
+autologin-user=USUARIO
+autologin-user-timeout=0
+ - En versiones antiguas
 # nano /etc/lightdm/lightdm.conf
 autologin-user=USUARIO
 autologin-user-timeout=0
