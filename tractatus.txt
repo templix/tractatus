@@ -19894,6 +19894,11 @@ Atajos:
 	N (ir a la busqueda anterior)
 
 
+validlocale
+Prueba si un locale determinado está disponible
+$ validlocale ca_ES.UTF-8
+
+
 variables
 Existen dos tipos de variables:
 Variables locales (tiene valor únicamente dentro de nuestra shell)
@@ -20449,11 +20454,6 @@ $ wait PID  (Indicando el PID)
 $ wait %2  (Indicando el número de proceso)
 
 
-validlocale
-Prueba si un locale determinado está disponible
-$ validlocale ca_ES.UTF-8
-
-
 wall
 Enviar mensajes a todas las terminales
 $ wall (al darle al enter, podrá escribirse un texto. Una vez finalizado se le da otra vez al enter y se pulsa Ctrl+d para enviarlo a todas las terminales, incluidas las tty abiertas)
@@ -20501,6 +20501,10 @@ opciones:
 -w (cantidad de palabras)
 -m (total de caracteres.)
 -L (la longitud de la línea más larga del texto)
+
+
+wcd
+Programa para cambiar de directorios rápidamente. Solo se precisa escribir una parte de un nombre de directorio y wcd saltarán a él. De manera predeterminada, wcd busca un directorio con un nombre que comienza con lo que se ha escrito. El uso de comodines también es totalmente compatible.
 
 
 weather
@@ -21164,10 +21168,6 @@ Comando para arrancar el driver de los mandos (gamepad) para Xbox y Xbox360 (y c
 También se puede hacer permanente el cambio añadiendo el driver al final del fichero /etc/modprobe.d/blacklist.conf con la línea siguiente: blacklist xpad
 # xboxdrv --silent (arrancar en modo silencioso)
 # xboxdrv --device-by-id 1234:1234 --type xbox360 (Arranca el driver para un gamepad con un ID específico. Puedes ver la ID ejecutando lsusb)
-
-
-wcd
-Programa para cambiar de directorios rápidamente. Solo se precisa escribir una parte de un nombre de directorio y wcd saltarán a él. De manera predeterminada, wcd busca un directorio con un nombre que comienza con lo que se ha escrito. El uso de comodines también es totalmente compatible.
 
 
 xclip
