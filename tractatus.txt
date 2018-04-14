@@ -14918,11 +14918,11 @@ Creación de una tabla (igual que para mysql [ver]):
 	nombre VARCHAR(20), apellido VARCHAR(20),
 	profesión VARCHAR(20), sexo CHAR(1), nacimiento DATE,
 	antiguedad DATE);
-misdatos=# DROP TABLE nombre_de_la_tabla; (Borrar una tabla)
-misdatos=# INSERT INTO usuario VALUES ('juan antonio', 'gomez', 'admin', 'h', '1985-10-06', '2008-03-11'); (Entrar datos en el mismo orden en el que se ha creado la tabla)
-misdatos=# SELECT * FROM usuario; (Ver el contenido de una tabla)
-misdatos=# SELECT nombre FROM usuario; (Seleccionar una columna de una tabla)
-misdatos=# SELECT * FROM usuario ORDER BY nombre; (Mostrar una tabla ordenado segun una columna)
+	misdatos=# DROP TABLE nombre_de_la_tabla; (Borrar una tabla)
+	misdatos=# INSERT INTO usuario VALUES ('juan antonio', 'gomez', 'admin', 'h', '1985-10-06', '2008-03-11'); (Entrar datos en el mismo orden en el que se ha creado la tabla)
+	misdatos=# SELECT * FROM usuario; (Ver el contenido de una tabla)
+	misdatos=# SELECT nombre FROM usuario; (Seleccionar una columna de una tabla)
+	misdatos=# SELECT * FROM usuario ORDER BY nombre; (Mostrar una tabla ordenado segun una columna)
 Las metaordenes de psql son un conjunto de órdenes internas, no propiamente órdenes SQL. Todas empiezan con la barra invertida [\].
 	\h (Muestra la ayuda. Pulsando "q" salimos de la ayuda)
 	\? (Ver todas las ordenes internas)
