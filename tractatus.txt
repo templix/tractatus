@@ -1,4 +1,894 @@
-argus -mJRU 1024 -r captura.pcap -w salida.arg (convertir un fichero pcap [wireshark, tshark, tcpdump...] a formato argus.)
+TRACTATUS ELEMENTALIS
+
+
+4g8
+Capturar paquetes de equipos de una red. Previamente preparar el equipo con los pasos previos para el envenenamiento arp lanzando en dos terminales y sin cerrarlas hasta terminar la captura:
+# arpspoof -i eth0 -t 192.168.1.12 192.168.1.1
+# arpspoof -i eth0 -t 192.168.1.1 192.168.1.12
+El “12” el sniffado, el "1" el router y el -i … la red. El paquete que contiene arpspoof es dsniff. Activar forwarding para que los paquetes vayan a su verdadero dueño:
+# echo 1 > /proc/sys/net/ipv4/ip_forward
+Para conocer los parámetros [ips y MACs] que luego tendremos que entrar en 4g8 lanzar:
+# nmap 192.168.1.0/24
+Para conocer los equipos de la red. Una vez escogida la victima, lanzar 4g8:
+# 4g8 -i eth0 -g 192.168.1.1 -G 64:69:0C:87:A8:DC -s 192.168.1.12 -S 00:19:01:54:F5:1F -w dump.pcap
+	-g (ip del router)
+	-G (MAC del router)
+	-s (ip de la victima)
+	-S (MAC de la victima)
+	-w (archivo donde guardar las capturas)
+Para el análisis del archivo dump.pcap puedes usar wireshark entre otros.
+
+
+7zip
+[7zip-rar]. Compresor/descompresor de archivos.
+$ 7z a fichero.7z fichero (comprime)
+$ 7z e comprimido (Descomprime)
+$ 7z l comprimido (Muestra las propiedades)
+$ 7z t fichero_comprimido (chequea contenido)
+$ 7z a -tgzip -p fichero.gz fichero (proteger con una contraseña)
+
+
+9menu
+Crear un lanzador de aplicaciones en el escritorio.
+$ 9menu -label gimp gimp & (con el título “gimp” para lanzar “gimp”)
+$ 9menu 'xterm -e script.sh' & (lanzador para un script de bash)
+Opciones:
+	-geometry 30x20 (especificando medidas del lanzador)
+	-bg yellow (color de fondo)
+	-fg red (color de la fuente)
+	-popup (Que se cierre el lanzador una vez clicado)
+
+
+a2dismod
+Desactiva modulos de apache.
+# a2dismod (Lista los módulos y pregunta cual desactivar)
+# a2dismod defensible (Desactiva el modulo defensible)
+
+
+a2dssite
+Deshabilita sitios de apache.
+# a2dissite host_virtual.com
+
+
+a2enmod
+Activa módulos de apache.
+# a2enmod defensible
+
+
+a2ensite
+Habilita sitios de apache. Crear link simbólico a  la carpeta sites-enabled.
+# a2ensite host_virtual.com
+
+
+a2mp3
+Optimizar y reducir al mínimo archivos mp3. Crea una carpeta con el archivo resultante en ~/a2mp3.
+$ a2mp3 archivo.mp3
+
+
+a2png
+Convertir textos a imagen .png.
+$ a2png texto.txt texto.png
+
+
+a2ps
+Imprimir y manipular archivos postscript. La codificación por defecto es la inglesa. La más parecida a utf8 es la latin1 o la iso1 [ISO-8859-1].
+$ a2ps -o final.ps --columns=2 original.ps (Convertir un archivo [original.ps] a 2 páginas en una y mandar el resultado a otro [final.ps])
+$ a2ps --printer=HP_psc_1100_series archivo.ps (mandar un archivo a imprimir)
+$ a2ps -l -o archivo.ps --no-header archivo.txt (Pasar un txt a ps y sin poner encabezados y apaisado[-l])
+$ a2ps -X latin1 -o archivo.ps archivo.txt (Especificando codificación)
+$ a2ps --list=encoding (Listado de codificaciones suportadas)
+	Nota.- Para visualizar el ps puede usarse la aplicación gv
+
+
+a2x
+Convierte texto plano a formato PDF [por defecto], EPUB, DVI, PS, LaTeX, XHTML, página man...
+$ a2x -f epub archivo.epub (Convertir a epub. )
+$ a2x -f manpage archivo.txt (Convertir a página man)
+
+
+aa3d
+Generador de arte ASCII a partir de textos o imagenes.
+$ aa3d$ aa3d < texto.tx
+$ aa3d -w 100 -t "linux es un sistema genial" < imagen.png (Con anchura de 100 espacios [por defecto 80] y usando un determinado texto)
+$ aa3d -d < texto.txt (Usando solo números)
+
+
+aafire
+[caca-utils]. Fuego animado en ascii. En algunas distros cacafire [ver].
+
+
+aajm
+Malabarista en la terminal.
+$ aajm -drive curses (para lanzarlo en las tty)
+$ aajm -t Reverse (especificar el estilo. Las opciones de estilo son: Normal, Reverse, Shower, Mills Mess, Center, Windmill y Random)
+Opciones durante la actuación:
+	s (modificar el número de bolas)
+	- + (disminuir o acelerar al artista)
+	h (muestra las opciones)
+	q (salir)
+
+
+aaphoto
+Ajuste del color automático para fotos.
+$ aaphoto -a --overwrite * (autoajuste y sobreescribiendo todas las fotos del directorio)
+$ aaphoto -r 200 --jpg imagen.png (ajustarla a 200 pixels i con salida a jpg)
+$ aaphoto -r 50% --rotate90 imagen.png (Ajustandola al 50% y girandola 90ª)
+$ aaphoto --flipy imagen.png (espejo vertical)
+$ aaphoto --flipx --rotate180 imagen.png (espejo horizontal y rotandola 180º)
+
+
+ab
+[apache2-utils]. Mostrar la capacidad de respuesta de un servidor WEB.
+$ ab -n 100 -c 10 localhost:80/index.html (Con 100 conexiones y 10 simultaneas)
+$ ab -n 9000 -c 900 -e test.txt http://www.google.com/ (Escribe en un archivo el tiempo [milisegundos] que tomó para servir a ese porcentaje de las solicitudes)
+
+
+abcde
+[lame, cdparanoia, id3v2, vorbis-tools, cd-discid, normalize]. Extraer pistas de audio de un cd.
+$ abcde -d /dev/sdc1 -N -x -o mp3 (extrae disco completo en archivos mp3)
+$ abcde -d /dev/sdc1 -N -x -o ogg (extrae disco completo en archivos ogg)
+$ abcde -d /dev/sdc1 -N -x -o ogg tracks 1-3 5 (extrae las tres primeras canciones y la quinta)
+	Nota.- "-d" indica dispositivo, "-N" opciones por defecto y sin preguntar, "-x" expulsa el cd al acabar, "-o" tipo de archivo resultante
+
+
+abiword
+Procesador de texto completo y rápido y con una interfaz muy simple. Dado que requiere pocos recursos técnicos puede usarse en equipos obsoletos. Tiene filtros de importación/exportación de documentos desde su formato nativo a XML, RTF, HTML, Microsoft Word, LaTeX y OpenDocument.
+$ abiword --to=doc nombre.pdf (pasar pdf a doc)
+$ abiword --geometry=1366x768 (Iniciar maximizado según la resolución de pantalla)
+
+
+abook
+Agenda personal.
+$ abook (Abre la aplicación)
+Algunas teclas de control:
+	a (Añadir contacto y crear las pestañas para los datos. Usar las flechas para moverse entre pestañas y los números de los conceptos para entrar información)
+	r (Suprimir contacto)
+	q (Salir)
+
+
+abs-guide
+Un montón de ejemplos de bash scripting. Listado en:
+$ ls /usr/share/doc/abs-guide/examples/
+
+
+ac
+[acct]. Reporta los tiempos de conexión...
+$ ac -d    (... del presente mes)
+$ ac -p    (... totales de cada usuario)
+
+
+aconnect
+Utilidad para conectar y desconectar dos puertos midi existentes en el sistema al secuenciador ALSA.
+$ aconnect 64:0 65:0 (conectar el puerto 64 al 65)
+$ aconnect -d 64:0 65:0 (desconectar)
+$ aconnect -l (lista de conexiones)
+$ aconnect -x (suprimir todas las conexiones exportadas)
+
+
+acpi
+Monitorizar estado de la bateria del portatil, si está conectado a la red y otras informaciones.
+$ acpi -c (ventiladores)
+$ acpi -t (temperaturas)
+$ acpi -b (bateria)
+$ acpi -i (Información adicional de la bateria)
+$ acpi -V (ver toda la información posible)
+$ watch acpi -V (en tiempo real)
+$ cat /proc/acpi/battery/BAT0/info (Muestra varios datos, los más importantes: design capacity y last full capacity. La diferencia entra ambas cantidades es la capacidad que ha perdido la beteria)
+
+
+add-apt-repository
+Añadir repositorios a /etc/apt/sources.list o a /etc/apt/sources.list.d/
+# add-apt-repository "deb http://packages.mate-desktop.org/repo/ubuntu $(lsb_release -cs) main" (Añade el repositorio del escritorio Mate según la versión de Ubuntu instalada [$(lsb_release -cs)]
+
+
+adduser.conf
+Archivo que contiene las preferencias para los comandos adduser y addgroup [/etc/adduser.conf]. Algunos parámetros importantes:
+	DSHELL=/bin/bash (shell para nuevos usuarios. Por defecto /bin/bash)
+	DHOME=/home (donde se crean los directorios de los nuevos usuarios. Por defecto /home.
+	SKEL=/etc/skel (directorio de donde se copian los ficheros de configuración base del usuario. Por defecto /etc/skel)
+	FIRST_UID=1000 (Valor inicial del rango de IDs para usuarios normales)
+	LAST_UID=29999 (Rando final del rango de IDs)
+	DIR_MODE=0755 (Permisos de entrada de todos los directorios creados)
+
+
+adminer
+Gestor de bases de datos via navegador más completa que phpmyadmin. Una vez instalado reiniciar apache:
+# /etc/init.d/apache2 restart
+Acceder a la aplicación con, http://localhost/adminer y entrar los datos de acceso (usuario, contraseña, servidor y gestor de la BD).
+
+
+aewan
+Editor de dibujos en ascii. Una vez lanzada la aplicacion con las teclas de funcion F1-F4, se accede a los menus. La aplicacion llama ^ a la tecla control y % a la tecla Alt.
+Algunas teclas de control:
+	Ctrl a (Abre un lienzo con las medidas por defecto)
+	Alt a (Pregunta por las medidas del lienzo)
+	Ctrl o (Abre un dibujo guardado previamente)
+	Ctrl s (Guarda el presente dibujo)
+	Ctrl w (Si tenemos mas de un dibujo, pasa al siguiente)
+	Ctrl q (Pasa al anterior)
+	Ctrl l (Muestra los lienzos abiertos y algunas opciones sobre ellos)
+	Ctrl d (Copiar el lienzo)
+	Ctrl r (Renombrar el lienzo)
+	Alt r (Modificar las medidas)
+	TAB (Abre el dialogo de colores)
+	Alt p (Seleciona el color de la celda donde esta el cursor)
+	Alt z (Llena la celda del color que se ha seleccionado con Alt p))
+	Ctrl e (Muestra los metadatos)
+	Ctrl c (Sale del programa)
+
+
+aide
+Sistema de detección de intrusos. No evita la intrusión, sólo informa que esta se ha producido y qué archivos fueron modificados. La primera vez que se ejecuta, crea una base de datos con los atributos, usuarios, permisos... de los archivos especificados aplicándoles una o varias funciones hash por lo que el mejor momento para instalar esta aplicación es con un sistema recien instalado.
+# aide -i (Crear la base de datos)
+# aide -u (Actualizar la base de datos)
+# aide -c (Hacer un chequeo del sistema para comprobar modificaciones)
+	Nota.- Los archivos de configuración: /etc/aide/aide.conf.d/, /etc/aide/aide.conf y /etc/default/aide
+
+
+airmon
+[aircrack-ng]. Utilidad que coloca la tarjeta de red en modo monitor.
+# airmon-ng start wlan0 (Iniciar el modo monitor)
+# airmon-ng stop wlan0 (Finalizarlo)
+# airmon-ng start wlan0 5 (Eespecificando un canal)
+	Nota.- Confirmar que la tarjeta está en modo monitor con iwconfig.
+
+
+airodump
+[aircrack-ng]. Escaneo wifi y captura de paquetes. Previamente la tarjeta tiene que estar en modo monitor [ver airmon].
+# airodump-ng mon0 (Escanear redes disponibles. Para con Ctrl + c)
+# airodump-ng -c 8 --bssid BSSID –w captura.cap mon0 (que guarde las capturas del canal 8 de la dirección MAC [BSSID] en el archivo "captura.cap" de la interfaz de red mon0)
+
+
+ajaxplorer
+Crear un owncloud [tipo dropbox] en local. Una vez instalado:
+# cp /usr/share/doc/ajaxplorer/apache2.sample.conf /etc/apache2/sites-enabled/ajaxplorer.conf
+Reiniciar apache:
+# service apache2 restart
+Aceder con http://localhost/ajaxplorer y, como primer paso, modificar la contraseña por defecto [admin/admin]
+
+
+ajaxterm
+Proporciona una shell web por un puerto dado aceptando peticiones del mismo equipo desde el navegador.
+$ ajaxterm -d (Lanza como demonio, colocando el puerto 8022 [si no se ha modificado] a la escucha)
+Se accede en local colocando en la barra del navegador: http://localhost:8022
+$ ajaxterm -p 12500 (Modificando el puerto por defecto)
+1.-
+Modificar las medidas de la terminal:
+# nano /usr/share/ajaxterm/ajaxterm.py
+Modificar la linea con las medidas escogidas:
+	def __init__(self,width=150,height=60):
+# nano /usr/share/ajaxterm/ajaxterm.html
+	t=ajaxterm.Terminal("term",150,60);
+
+
+akregator
+Lector RSS.
+Teclas de control:
+	Ctrl + r (Marcar fuente como leida)
+	Ctrl + q (Salir de la aplicacion)
+	Ctrl + l (Obtener todas las fuentes)
+	Ctrl + w (Cerrar pestaña)
+	- (Articulo previo sin leer)
+	+ (Articulo siguiente sin leer)
+	F2 (Editar la fuente)
+	F5 (Obtener la fuente)
+	p (Fuente anterior)
+	n (Fuente posterior)
+	Ctrl + Mayus + r (Marcar todas las fuentes como leidas)
+	Ctrl + Mayus + return (Abrir noticia en el navegador externo)
+	Mayus + return (Abrir noticia en una pestaña)
+
+
+album
+Crear una galeria de imagenes. En la carpeta de las imagenes:
+$ album
+Carpeta de temas en /usr/share/album/Themes/ pero es preferible copiarla en el directorio raiz del directorio web:
+$ cp -R /usr/share/album/Themes /var/www/.Themes
+$ album -theme Stars fotos/ (Usando el tema especificado con el directorio “fotos”. Listado en /usr/share/album/Themes/)
+$ album -columns 3 fotos/ (que la página principal tenga un terminado número de columnas con las imágenes)
+$ album -charset=UTF-8 fotos/ (Especificar codificación de caracteres)
+Para agregar pies de foto , crear el archivo captions.txt en el directorio y con el siguiente esquema:
+$ nano fotos/captions.txt
+foto1.jpg [una_tabulación] Texto
+foto2.jpg [una_tabulación] Texto
+foto3.jpg [una_tabulación] Texto
+Si deseamos esconder una foto, la comentamos [#] en captions.txt.
+Crear el archivo header.txt en el directorio con un texto:
+$ nano fotos/header.txt
+Fotos vacaciones en la playa
+Agregar un final de página (footer):
+$ nano fotos/footer.txt
+Imágenes libre
+Cualquier modificación de archivos o directorios implica actualizar la aplicación:
+$ album fotos/
+
+
+alias
+Permite que una cadena de palabras sea sustituida por una más corta.
+# alias update='sudo apt-get update' (Cuando se teclee "update" se ejecutará su equivalencia)
+# unalias update  (suprimir el alias)
+$ alias (listado de alias activos)
+
+
+alien
+Convertir formatos de distintas distribuciones.
+$ alien --to-deb paquete (convertir a .deb)
+$ alien  --to-rpm paquete (a .rpm)
+$ alien  --to-tgz paquete (a .tgs)
+$ alien -i  --to-deb paquete   (convertirá “paquete” y lo instalará)
+
+
+alpine
+Gestor de correo. Antes de proseguir, si queremos que nos guarde la contraseña del correo crear el archivo:
+$ touch .pine-passfile
+La primera vez que lo lancemos creará el archivo .pinerc y mostrará un mensaje al que pulsaremos "intro" para entrar en el menú principal. Seleccionar "setup" y C. Del montón de parámetros que pueden personalizarse, sólo son imprescindibles 4:
+"Personal name" [Shift + c para editarlo y en la parte inferior aparecerá el editor con el cursor parpadeando] Entramos el nombre del correo:
+usuario@correo.com [intro]
+"User Domain". Lo editamos [Shft + c] y colocamos:
+	correo.com [intro]
+(gmail.com, gmx.es.... según se trate)
+	"SMTP Server". [Shft + c] y entramos:
+	smtp.correo.com:587/tls/novalidate-cert/user=usuario@correo.com [intro]
+	"Inbox Path". [Shft + c] y ponemos:
+	{pop.correo.com/pop3/ssl/novalidate-cert/user=usuario@correo.com}INBOX
+Intro y para salir de la configuración pulsar:
+	Shift + e
+Preguntará si se salvan los datos. Pulsar "y" y regresamos al menú. Para entrar en el correo, seleccionar "FOLDER LIST" Preguntará la contraseña y si queremos guardarla [lo hace en el archivo .pine-passfile]
+En "COMPOSE MESSAGE" se entran los correos separados por "," en el apartado Cc [copia oculta] o To. Ctrl + x para enviar.
+
+
+alsa-info
+Información sobre los dispositivos alsa.
+$ alsa-info
+
+
+alsabat-test
+Testeo de la tarjeta de sonido
+$ alsabat-test
+
+
+alsactl
+Se usa para controlar la configuración avanzada de los controladores de la tarjeta de sonido ALSA.
+# alsactl store (guarda el estado del controlador actual para la tarjeta de sonido seleccionada en el archivo de configuración)
+# alsactl restore (carga el estado del controlador para la tarjeta de sonido seleccionada desde el archivo de configuración)
+
+
+alsamixer
+Mezclador de tarjeta de sonido para el controlador ALSA
+$ alsamixer
+$ alsamixer -V all (ver todas las opciones de salida)
+
+
+altavoz
+Apagar el altavoz interno del pc
+# gedit /etc/modprobe.d/blacklist
+Y añadiremos la linea:
+	blacklist pcspkr
+
+
+amidi
+Relativo a los dispositivos midi.
+$ amidi -l     (listar los dispositivos MIDI de ALSA-utils)
+
+
+amixer
+Bajar el volumen
+$ amixer sset Master 50%-   (Bajar un 50% del volumen)
+$ amixer sset Master 30%+  (Sube un 30% el volumen)
+
+
+an
+Generar anagramas para una palabra o frase proporcionada por el usuario.
+$ an -c 'lin' 'genial' (que empiece por las letras "lin" contenidas en "genial")
+$ an -l 4 'linux' (limitando el número de anagramas a los de máximo 4 palabras o silabas)
+$ an -m 3 'juan gomez' (solo poner grupos de palabras de 3 letres)
+
+
+analog
+Procesador de archivos de registro rápido que genera informes y estadísticas de uso de servidores web. Puede procesar millones de líneas por minuto, escalable, flexible, salida en HTML, maneja muchos formatos de archivos de registro y, además de por linea de comandos, puede utilizar una interfaz web.
+# analog +Oanalog.html ([letra "o" mayuscula y justo a continuación el nombre] Genera el informe "analog.html")
+# analog (Muestra la salida por consola)
+
+
+anarchism
+Historia del anarquismo en inglés. Acceder al contenido mediante el navegador.
+file:///usr/share/doc/anarchism/html/index.html
+
+
+anamnesis
+Gestor del portapapeles. Almacena el historial del portapapeles y ofrece una interfaz para hacer búsquedas de todo lo copiado. Descarga de: <http://sourceforge.net/projects/anamnesis/> Una	vez descomprimido copiar la carpeta en:
+    # cp anamnesis-1.0.4 /usr/local/
+Colocar	el ejecutable en el path:
+    # ln -s	/usr/local/anemnesis-1.0.4/source/anemnesis.py /usr/bin/anemnesis
+$ anamnesis --start (Arrancar sesión. Otras opciones: restart, stop)
+$ anamnesis -b (Ver el historial. Con intro o cambiando de escritorio desaparece)
+$ anamnesis -l 3 (Mostrar los últimos 3 datos guardados)
+$ anamnesis -l 5 --filter="palabra" (Buscar en los últimos 5 datos el que contine "palabra")
+$ anamnesis -a "Historial del Portapapeles" (Ponerle un título)
+$ anamnesis --remove = 5 (Eliminar el registro del ID número 5)
+
+
+anillo de claves
+Suprimir el “desbloquear anillo de claves”
+$ rm -Rf .gnome2/keyrings/login.keyring
+# killall gnome-keyring-daemon  (matar el demonio)
+
+
+animate
+[imagemagick]. visualizar gif.
+$ animate vuelo.gif
+
+
+anon-proxy
+Navegación anónima via proxy. los archivos de configuración en /etc/efault/anon-proxy.
+# /etc/init.d/anon-proxy start (Arrancar el proxy)
+Configurar el navegador con localhost y el puerto 4001
+
+
+ansi2html
+[colorized-logs]. Pasar textos a html.
+# ansi2html -w </var/log/apache2/access.log >acces.html (con el fondo blanco)
+
+
+ansi2txt
+[colorized-logs]. Guardar logs a txt.
+# ansi2txt </var/log/apache2/access.log >acces.txt
+
+
+antiword
+Conversor/lector de archivos .doc
+$ antiword archivo.doc | less (Visualiza un doc)
+$ antiword -p A4 archivo.doc > archivo.ps (Convierte a ps)
+$ antiword -t -w 25 archivo.doc > archivo.txt (Convierte a txt)
+Algunas opciones:
+	-p (Formato PostScript. 10x14, A3, A4, A5, B4, B5, ejecutivo, folio...)
+	-a (Formato Adobe. 10x14, A3, A4, A5, B4, B5, ejecutivo, folio...)
+	-t (Salida en forma de texto con formato: negrita, subrayado...)
+	-w (Anchura del texto)
+
+
+aoss
+[espeak, alsa-oss, mbrola]. Para que la consola hable.
+$ aoss espeak --voices   (ver las opciones idiomáticas)
+$ aoss espeak --voices=es (ver las variantes de un idioma)
+$ aoss espeak -v es+whisper -p30 linux,es,un,sistema,genial
+$ aoss espeak -v es+f4 -p30 “linux es un sistema genial”  (lo mismo entre comillas)
+$ aoss espeak -v es+m2 -f archivo.txt  (lee de un archivo txt)
+$ aoss espeak -v es -s50 -w archivo.wav "linux es un sistema genial" (Crear un wav)
+Opciones:
+	-v en (para que hable en inglés)
+	-s110 (variar velocidad de dicción. A número más alto, más velocidad)
+	-p90 (tesitura de voz. De 0 a 99. Valor alto: agudos. Por defecto 50)
+	-a50 (Volumen de salida. De 0 a 200. Por defecto 100)
+	-g15 (Silencio entre palabras. Por defecto 10 milisegundo)
+	-v es+croak [m1,m2,m3,m4,m5,m6 y whisper] (opciones de voz masculinas)
+	-v es+f1 [f2,f3 yf4]  (opciones de voz femeninas)
+
+
+apache2
+Ajustes de apache2
+# apache2ctl -M    (Visualizar todos los modulos de apache)
+# apache2ctl -S (visualizar el estatus de apache)
+# apache2ctl -t  (Comprobar que la configuracion de apache va bien)
+# apache2ctl -k graceful  (Reiniciar sin cortar las conexiones de los usuarios)
+# apache2ctl -k start  (arrancar el servidor. Equivale a /etc/init.d/apache2 start. Tambien acepta las opciones: stop, restart)
+# apache2ctl configtest (Otra forma de comprobar la configuración de apache)
+# tail -f /var/log/apache2/access.log  (muestra en tiempo real, accesos, ips...)
+# tail -f /var/log/apache2/error.log  (muestra los errores de acceso)
+Ajustes
+1.-
+Ajustes mínimos:
+# nano /etc/apache2/apache2.conf
+Epecificar la carpeta web y el nombre del servidor web:
+	DocumentRoot /var/www
+	ServerName localhost
+2.-
+Permisos de la carpeta web:
+# chmod -R 755 /var/www && find /var/www -type d -exec chmod 711 {} \;
+3.-
+mod_evasive:
+Descargar mod_evasive
+$ http://www.zdziarski.com/blog/wp-content/uploads/2010/02/mod_evasive_1.10.1.tar.gz
+Descomprimir y entrar en la carpeta:
+$ tar -zxf mod_evasive_1.10.1.tar.gz
+$ cd mod_evasive/
+Puede que tengamos que instalar:
+# apt-get install apache2-prefork-dev
+Compilar el módulo:
+# apxs2 -i -a -c mod_evasive20.c
+Para confirmar que se ha habilitado lo podemos buscar en:
+$ ls /usr/lib/apache2/modules/ | grep evasive
+mod_evasive20.so
+Reiniciar apache
+# /etc/init.d/apache2 restart
+Para testear su efectividad:
+# perl test.pl
+Que viene en el mismo paquete descargado. El resultado correcto:
+	HTTP/1.1 200 OK
+	HTTP/1.1 200 OK
+	HTTP/1.1 200 OK
+	HTTP/1.1 2...
+	HTTP/1.1 403 Forbidden
+	HTTP/1.1 403 Forbidden
+	HTTP/1.1 403 Forbi ...
+Los parámetros por defecto son suficientes en condiciones "normales". Si se precisa afinar más su configuración, pueden añadirse las siguientes lineas al archivo /etc/apache2/httpd.conf:
+	<IfModule mod_evasive20.c>
+	DOSHashTableSize    3097
+	DOSPageCount        1
+	DOSSiteCount        50
+	DOSPageInterval     1
+	DOSSiteInterval     1
+	DOSBlockingPeriod   600
+	</IfModule>
+Que significa que si una página o cualquier objeto de ella, recibe 50 peticiones por segundo cada segundo la IP será bloqueada durante 600 segundos.
+4.-
+Para que apache no informe del sistema operativo y versión de apache
+# nano /etc/apache2/apache2.conf
+Añadir las lineas:
+	ServerTokens ProductOnly
+	ServerSignature Off
+5.-
+Ocultar un archivo de la carpeta webapachetop
+Comando top [ver] especifico para servidores apache y lanzado al estilo de tail [ver]
+# apachetop -f /var/log/apache2/access.log (Monitorear en tiempo real)
+# nano /etc/apache2/apache2.conf
+Y colocar en su interior:
+	<Files archivo_a_ocultar>
+	order allow,deny
+	deny from all
+	</Files>
+6.-
+Ver peticiones al servidor apache:
+# cat /var/log/apache2/access.log | awk '{print($1)}' | sort | uniq -c | sort
+# grep "resuming normal operations" /var/log/apache2/error.log | cut -d'[' -f2 | sed -e 's/]//' (La última vez que fué reiniciado)
+# ls -od --time-style=+%d-%m-%Y /proc/$(ps axo pid,cmd | grep apache | head -n 1 | sed -e 's/^ *//' | cut -d' ' -f1) | cut -d' ' -f 5 (otra forma)
+# (cat /var/log/apache2/*.log; zcat /var/log/apache2/*.gz) | grep "resuming normal operations" | cut -d'[' -f2 | sed -e 's/]//' | sort (Todas las veces que fue reiniciado)
+# (cat /var/log/apache2/*.log; zcat /var/log/apache2/*.gz) | grep "resuming normal operations" | wc -l (Cuantas veces se ha reiniciado)
+7.-
+Crear un directorio web privado:
+# nano /etc/apache2/apache2.conf
+Agregar el siguiente contenido:
+	<Directory /var/www/privado>
+	AllowOverride AuthConfig
+	</Directory>
+Reiniciar apache:
+# /etc/init.d/apache2 restart
+Crear el archivo .htaccess en el interior del directorio privado:
+$ nano /var/www/privado/.htaccess
+Agregar el contenido:
+	AuthName "Acceso restringido"
+	AuthUserFile /var/www/.htpasswd
+	AuthType Basic
+	require valid-user
+Crear el archivo para el usuario con privilegios:
+# htpasswd -c /var/www/.htpasswd juan
+Entrar la contraseña y confirmación.
+Para añadir más usuario con privilegios, sin el parámetro -c:
+# htpasswd /var/www/.htpasswd pedro
+8.-
+Para que las aplicaciones no aparezcan con caracteres extraños y simbolos raros:
+# nano /etc/apache2/conf.d/carhset
+Y añadir las siguientes lineas:
+	AddDefaultCharset UTF-8
+	AddDefaultCharset latin1
+
+
+apachetop
+Comando top [ver] especifico para servidores apache y lanzado al estilo de tail [ver]
+# apachetop -f /var/log/apache2/access.log (Monitorear en tiempo real)
+
+
+apariencia
+Tener el escritorio root y de usuario con la misma apariencia . Crear enlaces entre las carpetas que contienen la apariencia de entorno del usuario y las de root:
+$ sudo ln -s /home/usuario/.themes /root/.themes
+$ sudo ln -s /home/usuario/.icons /root/.icons
+$ sudo ln -s /home/usuario/.fonts /root/.fonts
+
+
+apertium
+[apertium-en-es...] Traductor de archivos de texto a los legunajes especificados.
+$ apertium en-es -u -a file_ingles.txt (Marando las palabras desconocidas con * y las ambiguas con =)
+$ apertium en-es text_ingles.txt > traducido.txt
+
+
+apf
+Cortafuegos. Todos los parámetros se configuran en el archivo conf.apf.
+# nano /etc/apf/conf.apf
+La configuración básica:
+	DEVEL_MODE="0" # 1 en pruebas, 0 en producción
+	IFACE_IN="eth1" # Interfaces de red
+	IFACE_OUT="eth1" # interfaces de red
+	IFACE_TRUSTED="eth0" # Si existen interfaces locales
+	IG_TCP_CPORTS="21,22,80,110" # Puertos permitidos
+	IG_UDP_CPORTS=""IG_UDP_CPORTS="" # Puertos UDP permitidos [si existen]
+	IG_ICMP_TYPES="3,5,11" 3 Puertos ICMP permitidos [si existen]
+Otros archivos importantes:
+/etc/apf/deny_host.rules (ips, rangos, etc denegados)
+/etc/apf/allow_host.rules (ips, rangos, etc permitidos)
+/var/log/apf_log (Archivo de logs)
+# apf -s (arrancar)
+# apf -r (reiniciar)
+# apf -f (parar)
+
+
+apg
+Generador de contraseñas aleatorias
+$ apg -a 1 -n 8 -m 10 (Incluyendo signos, 8 propuestas de 10 caracteres)
+Algunas opciones:
+	-a 0  (sin signos especiales [por defecto])
+	-m 10 (número mínimo de caracteres [8 por defecto])
+	-x 12 (número máximo de caracteres [10 por defecto])
+	-M S  (Incluyendo un signo)
+	-M N  (Incluyendo un número)
+	-M C  (Incluyendo mayúsculas)
+	-E aeiou9 (Excluyendo letras y números mencionados)
+
+
+aplay
+Relacionado con ALSA
+# aplay /usr/share/sounds/alsa/Front_Center.wav  (prueba de alsa)
+# aplaymidi -l   (lista los puertos midi)
+$ aplay -l (saber el modelo de la tarjeta de sonido)
+# aplaymidi -p 65 archivo.mid  (reproduce el mid sin timidity)
+# aplay -fdat /dev/sda  (Escuchar el sonido del disco duro)
+
+
+apparmor
+Módulo de seguridad del kernel. Los perfiles estan: /etc/apparmor.d/
+# apparmor_status (Ver estado)
+# aa-complain /etc/apparmor.d/* (Activar todos los perfiles en modo complain, es decir, que no se bloquea ninguna aplicación y sólo registra sus eventos)
+# aa-complain /usr/bin/firefox (Lo mismo activandolo para una aplicación)
+# aa-genprof /usr/bin/firefox (Crear un perfil para una aplicación. Preguntará unos datos. Sin cerrar la terminal, abrir firefox y usar la aplicación como normalmente se usa. Al rato, volver a la terminal y pulsar "S". Se mostrará todos los ficheros a los cuales firefox ha accedido solicitando qué acción llevar a cabo)
+# cat /etc/apparmor.d/usr.lib.firefox-3.0.10.firefox.sh (Consultar el perfil creado. Substituir versión por la correcta)
+# apparmor_parser -R < /etc/apparmor.d/usr.lib.firefox-3.0.10.firefox.sh (Desactivar restricciones a un perfil)
+
+
+apport
+Herramienta encargada de capturar cualquier error que se produzca en una aplicación y recopilar información sobre el estado del sistema operativo en el momento de producirse el fallo. Para desactivarlo:
+# nano /etc/default/apport
+enable=0
+También:
+# service apport start forse_start=0
+Para activarlo substituir el 0 por un 1
+
+
+apropos
+Busca utilidades relacionadas con lo especificado.
+$ apropos jpeg
+$ apropos “copy files”  (busca comandos relacionados)
+
+
+apt
+Aplicación que unifica las opciones y parámetros de apt-cache y apt-get. Tambien cuenta con una barra de progreso. Tiene casi los mismo parametros que el comando apt-get.
+# apt list (Muestra todos los paquetes disponibles)
+# apt list --installed (Muestra todos los paquetes instalados)
+# apt list --upgradable (Muestra todos los paquetes actualizables)
+$ apt search paquete (Buscar un paquete)
+# apt update (Actualiza el listado de paquetes)
+# apt upgrade (Actualiza todos los paquetes del sistema)
+# apt install paquete (Instala un paquete)
+# apt remove paquete (Suprime un paquete)
+# apt edit-sources (Edita el sources.list)
+# apt show nano (ver detalles de un paquete)
+
+
+apt-clone
+Este paquete clona/restaura los paquetes instalados en un sistema por apt con el sources-list y las claves de los repositorios.
+# apt-clone clone paquetes (los guarda en el archivo paquetes)
+# apt-clone info paquetes (mostrar información sobre el archivo creado)
+# apt-clone restore paquetes (restaurar los paquetes)
+
+
+apt-doc
+Muestra información sobre el comando apt. Colocar en el navegador: usr/share/doc/apt-doc/guide.es.html
+
+
+apt-fast
+[axel o aria]
+Paquete que incrementa la velocidad de descarga de paquetes respecto de apt-get mediante el uso de axel [ver] o aria. Descargar el scrpt de http://www.mattparnell.com/linux/apt-fast/apt-fast.sh o via github de https://github.com/ilikenwf/apt-fast. Para reconfigurar el paquete:
+# dpkg-reconfigure apt-fast
+Donde se podrá apreciar su velocidad es principalmente con los argumentos "update", "upgrade" y "dist-upgrade".
+# apt-fast update
+
+
+apt-file
+Buscar un paquete que contiene un fichero o ver el contenido de un paquete. Una vez instalado, para realizar la caché,  lanzar en primer lugar:
+# apt-file update
+# apt-file search ifconfig
+# apt-file list ifconfig
+
+
+apt-get
+[aptitude y apt-cache]. Gestor de programario de distribuciones Debian. Listtado del historial de instalaciones y desinstalaciones en /var/log/apt/history.log
+# apt-get update    (Actualiza la lista de paquetes)
+# apt-get upgrade   (Actualiza todos los paquetes instalados)
+# apt-get upgrade paquete     (Solo actualiza “paquete”)
+# apt-get dist-upgrade    (Actualiza la distribución)
+# apt-get install paquete (Instala paquetes con resolución de depencias)
+# apt-get install paquete -y (instalar paquete sin pedir confirmación)
+# apt-get install --reinstall  paquete      (Reinstala un paquete)
+# apt-get autoremove  (Borra paquetes huérfanos)
+# apt-get remove paquete        (Elimina un paquete)
+# apt-get remove --purge paquete  (Desinstala con archivos de configuración)
+# apt-get remove $(deborphan)  (Elimina huerfanos. lanzar varias veces)
+# apt-get clean        (Elimina caché)
+# apt-get autoclean  (lo mismo de versiones antiguas de paquetes)
+# apt-get -f install   (sin especificar paquete, para reparar la aplicación)
+# apt-get -s install paquete        (simula la instalación)
+# apt-get --compile source paquete  (baja las fuentes, compila y crear un .deb)
+# apt-get check          (Verifica dependencias rotas)
+# apt-get build-dep paquete (instalar las dependencias necesarias para poder compilar un paquete fuente)
+# apt-get install network-manager=0.9.1.90-0ubuntu3 (version concreta)
+# apt-mark hold network-manager (Mantener una version concreta)
+# apt-get source paquete (buscar un paquete fuente para ser compilado)
+# apt-rdepends paquete (muestra todas las dependencias)
+# apt-rdepends -b paquete (muestra las dependencias directas)
+# apt-rdepends -f paquete  (muestra version y estado del paquete)
+# apt-cache search paquete       (Busca en la cache paquete)
+# apt-cache show paquete         (Muestra la descripción completa del paquete)
+# apt-cache showpkg paquete   (Muestra su relación con otros paquetes)
+# apt-cache depends paquete    (Muestra las dependencias del paquete)
+# apt-cache rdepend paquete     (Muestra dependencias inversas del paquete)
+# apt-cache policy paquete       (Ver vesiones de paquetes y la versión instalada)
+# apt-get --yes install paquete (Responder “si” a preguntas de la instalación)
+# aptitude search ~ilinux-image (Lista los kernels instalados)
+# aptitude search ~i -F %p (Lista los paquetes instalados)
+# apt-setup                              (Crea un sources.list optimizado)
+# add-apt-repository ppa:repositorio   (añadir un repositorio ppa)
+# ppa-purge ppa:repositorio   (suprimirlo. Precisa el script ppa-purge))
+# apt-get install --no-install-recommends paquete (No instalar los paquetes recomendados que no sean dependencias fuertes)
+Algunos archivos relacionados:
+	/etc/apt/sources.list (Fichero de repositorios.)
+	/var/cache/apt/archives (Caché de los paquetes .deb instalados)
+	/var/log/apt/term.log (Archivo de logs de la aplicación)
+1.-
+Para resolver problemas con  /var/lib/apt/lists/*  lanzar:
+# rm /var/lib/apt/lists/* -vf
+Y luego:
+# apt-get update
+2.-
+# apt-get -o "Acquire::Check-Valid-Until=false" update   (Saltarse el validador  que verifica la fecha de caducidad del archivo “Release” de debian [Error ” Release file expired, ignoring file”])
+3.-
+Añadir repositorios de distintas ramas en debian.
+Incluir en el sources.list los repositorios de las distintas ramas:
+# nano sources.list
+	## Debian Testing
+	deb http://ftp.de.debian.org/debian/ testing main contrib non-free
+	deb-src http://ftp.de.debian.org/debian/ testing main contrib non-free
+	## seguridad Debian Testing
+	deb http://security.debian.org/ testing/updates main contrib non-free
+	deb-src http://security.debian.org/ testing/updates main contrib non-free
+	## Debian Unstable
+	deb http://ftp.us.debian.org/debian unstable main non-free contrib
+	## Debian experimental
+	deb http://ftp.fr.debian.org/debian experimental main non-free contrib
+Editar o crear el fichero:
+# nano /etc/apt/apt.conf
+Con el siguiente contenido:
+	APT::Default-Release “testing”;
+	APT::Cache-Limit 55000000;
+	Apt::Get::Purge;
+	APT::Clean-Installed;
+	APT::Get::Fix-Broken;
+	APT::Get::Fix-Missing;
+	APT::Get::Show-Upgraded “true”;
+Con el que establecemos las siguientes caracteristicas: Definir Debian Testing como rama principal,Limitar la cache utilizada en el proceso de actualización,Borrar archivos de configuración de los paquetes desinstalados y Arreglar el sistema en caso de detectar dependencias rotas.
+Editar el archivo preferences:
+# nano /etc/apt/preferences
+Con el contenido:
+	Package: *
+	Pin: release a=testing
+	Pin-Priority: 900
+	Package: *
+	Pin: release a=unstable
+	Pin-Priority: 600
+	Package: *
+	Pin: release a=experimental
+	Pin-Priority: 50
+Que tiene por significado que si el paquete existe en la rama testing se enstalará este, en caso contrario, si existe en unstable se instalará el unstable y sólo si no existe en las otras dos, se instalará de la versión experimental.
+También podemos especificarlo en el comando:
+# apt-get install libreoffice/unstable (Firefox se instalará de la rma unstable, pero las dependencias, se buscarán en primer lugar en la rama testing)
+# apt-get -t unstable install firefox (Tanto firefox como las dependencias se instalarás de la rama unstable)
+4.-
+Instalación de aplicaciones sin conexión a internet. Ha de instalarse en dos equipos: el que tiene conexión y en el que no la tiene. Esta aplicación tiene muchas limitaciones ya que no instala dependencias por lo que puede usarse en pocos casos.
+En el equipo sin conexión:
+# apt-offline set apt.sig --update --upgrade --install-packages PAQUETE (genera el archivo apt.sig que ha de trasladarse al equipo que tiene conexión)
+En el equipo conexión:
+# apt-offline get apt.sig --threads 5 --bundle offline.zip (Crea el archivo offline.zip que se traslada al equipo sin conexión)
+Otra vez en el equipo sin conexión:
+# apt-offline install offline.zip
+# apt-get install PAQUETE (Instalación del paquete)
+5.-
+Instalar aplicaciones de arquitectura 386 en equipos amd64:
+# nano /etc/apt/sources.list
+Añadir las lineas:
+	deb http://ftp.debian.org/debian/ wheezy-updates main contrib
+	deb http://http.us.debian.org/debian/ wheezy contrib non-free main
+# apt-get update
+# apt-get upgrade
+Activar multiarquitectura:
+# dpkg --add-architecture i386
+# apt-get update
+Instalar librerías base para los sistemas de 32 bits:
+# apt-get install libc6:i386
+6.-
+Configurar apt para que no descargue traducciones:
+# nano /etc/apt/apt.conf.d/99Translations
+Con el siguiente contenido:
+	Acquire::Languages "none";
+
+
+apt-key
+Herramienta para la gestion de un anillo de claves de repositorios seguros. El anillo de claves se guarda en el archivo /etc/apt/trusted.gpg
+# apt-key list (listar todas las claves del anillo)
+# apt-key net-update (Actualizar utilizando la red)
+# apt-key exportall (Exportar todas las claves)
+# apt-key export xxxxxx (Exportar una clave)
+# apt-key del xxxxx (Eliminar una clave)
+
+
+apt-mirror
+[apache2]. Configurar un repositorio local. Seguidamente se muestra el proceso:
+$ mkdir repo (Crear el directorio)
+# nano /etc/apt/mirror.list
+Añadir al principio la linea del directorio:
+	set base_path /home/USER/repo
+# apt-mirror (Recargar/actualizar el repositorio)
+Crear el enlace para que esté disponible via web:
+$ cd /var/www/html
+$ ln -s /home/USER/distro/mirror/us.archive.ubuntu.com/ubuntu ubuntu
+Modificar el sources.list:
+# nano /etc/apt/sources.list
+Añadir la lineas:
+	deb http://192.168.1.2/ubuntu trusty universe
+	deb http://192.168.1.2/ubuntu trusty main restricted
+	deb http://192.168.1.2/ubuntu trusty-updates main restricted
+# apt-update (Actualizar el cliente)
+
+
+apt-show-versions
+Analiza las versiones instaladas de paquetes y si existen actualizaciones.
+$ apt-show-versions thunderbird (La version instalada de un paquete)
+$ apt-show-versiones -a thunderbird (Todas las versiones disponibles de un paquete)
+
+
+ar
+Crea, modifica y extrae archivos
+$ ar crv libfoo.a bill.o fred.o (Añade librerias objeto a un archivo de librería estática)
+$ ar vx paquete.deb (extrae un .deb convirtiendolo en un tar.gz)
+$ ar x finalterm_0.1-0~64~saucy1_amd64.deb (Extraer los 3 archivos de un paquete deb)
+$ ar p finalterm_0.1-0~64~saucy1_amd64.deb data.tar.gz | tar xz (Extraer y descomprimir uno de los archivos de un paquete deb)
+
+
+arch
+Muestra la arquitectura de la máquina.
+$ arch
+
+
+arch-test
+Detectar las arquitecturas soportadas por un pc.
+$ arch-test
+
+
+archalien
+Convierte paquetes .deb en paquetes Archlinux. Descarga de <https://github.com/Asher256/archalien>
+$ python archalien.py arandr_0.1.9-1_all.deb
+El resultado es un paquete con el nombre arandr-0.1.9-1.pkg.tar.gz que puede instalarse en Arch Linux con:
+# pacman -U arandr-0.1.9-1.pkg.tar.gz
+
+
+arecord
+[alsa-utils]. Grabación de audio. Graba directamente de la tarjeta de sonido sin tener conectado los altavoces ni micro.
+$ arecord -l (Listado de dispositivos)
+$ arecord archivo.mp3 (Modo básico)
+$ arecord -t wav -f cd -d 15 archivo.wav (Tipo wav, formato cd, duración de la grabación 15 segundos y nombre con el que se guardará)
+
+
+argus
+Conjunto de herramientas cliente-servidor, para el análisis de tráfico de red.
+# argus-i eth0 -w salida.arg  (capturar en tiempo real todo el trafico de red)
+# ra -L0 -nr salida.arg (Leer el fichero generado)
+# argus -mJRU 1024 -r captura.pcap -w salida.arg (convertir un fichero pcap [wireshark, tshark, tcpdump...] a formato argus.
 # ra -a -c -L0 -nr skipe.arg - host IP (Filtrar una sola IP)
 
 
@@ -9,9 +899,9 @@ $ arithmetic -o x/ (con multiplicaciones y divisiones del 0 al 10 [por defecto])
 
 
 arj
-Compresor/descompresor de archivos.
+Compresor/escompresor de archivos.
 $ arj -a archivo.arj ficheros (Comprimir)
-$ arj -x archivo.arj (Descomprimir. Tambien unarj archivo.arj)
+$ arj -x archivo.arj (Descomprimir. Tambien unarj) archivo.arj
 $ arj -v archivo.arj (Ver contenido)
 
 
