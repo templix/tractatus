@@ -21744,6 +21744,19 @@ yokadi> t_show 5 (abre el editor por defecto del sistema para modificar el texto
     yokadi> t_list (si no se entra la contraseña no mostrará los datos)
 
 
+you-get
+[python3, ffmpeg]. Descarga de videos y, en algunos casos audio o imágenes de sitios web populares (youtube, tumblr, vimeo...) consulta de sitios soportados en <https://you-get.org/#supported-sites> . Descarga:
+# pip3 install you-get
+O de github <https://github.com/soimort/you-get/archive/master.zip>
+$ you-get URL (descarga normal de video, audio o imagenes)
+$ you-get -i URL (informacion sobre la url)
+$ you-get --itag=243 URL (de la información anterior, descargar la itag 243)
+$ you-get Wagner (buscar sobre el termino especificado y empieza la descarga)
+$ you-get -p vlc URL (Transmitir el video por un reproductor especificado)
+$ you-get -p firefox URL (transmitirlo por el navegador)
+$ you-get -o /Vídeos -O titulo URL (descargar el video en un directorio y con un titulo concreto)
+
+
 youtube-dl
 Descargar videos de youtube
 $ youtube-dl url
