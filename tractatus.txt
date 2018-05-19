@@ -3272,10 +3272,8 @@ $ curl -z local.html hots/remote.html (Sólo se efectuará la descarga si remote
 Otras opciones:
 $ curl -Is google.com | grep Date (Conocer la fecha via web)
 $ curl ipinfo.io/183.61.164.202 (Conocer datos de una ip)
-$ curl ip.appspot.com (Conocer la IP externa)
-$ curl icanhazip.com (lo mismo)
+$ curl icanhazip.com (Conocer la IP externa)
 $ curl ifconfig.me (lo mismo)
-$ curl whatismyip.org (Otra)
 $ curl -u usuario:clave --silent "https://mail.google.com/mail/feed/atom" | perl -ne 'print "\t" if /<name>/; print "$2\n" if /<(title|name)>(.*)<\/\1>/;' (visualizar todos los mensajes no leidos de gmail)
 $ curl -s 'http://geoiplookup.wikimedia.org/' | sed 's/^.*=\s*//' | python3 -mjson.tool (muestra la situación geográfica)
 $ curl -s http://geoiplookup.wikimedia.org/ | python3 -c 'import sys, json, string, webbrowser; webbrowser.open(string.Template("http://maps.google.com/maps?q=$lat,$lon").substitute(json.loads(sys.stdin.read().split("=")[-1])))' (Lo mismo pero abriendo una pestaña en el navegador)
