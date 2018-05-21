@@ -7443,18 +7443,20 @@ $ gocr -p ocrdb/ -m 2 kapcha.jpg (Comprobar si el programa lo resuelve solo)
 
 
 golismero
-[python2.7 python2.7-dev python-pip python-docutils git perl nmap sslscan]. Framework para auditorías de seguridad y pentesting. Descarga e instalación:
+[python2.7 python2.7-dev python-pip python-docutils git perl nmap sslscan]. Framework para auditorías de seguridad y pentesting que se integra con un montón de soluciones como nmap,nikto,xserv,exploitdb,shodan,sqlmap,etc. Descarga e instalación:
 	$ git clone https://github.com/golismero/golismero.git
 	$ cd golismero
 	# pip install -r requirements.txt
 	# pip install -r requirements_unix.txt
+# python golismero.py 192.168.1.10 -o report.html (escaneo total de una ip y guardar resultados en report.html
+# python golismero.py URL -e sslscan -o report.html (usando un plugin concreto y resultados en report.html)
 # python golismero.py localhost -o prueba.html -o prueba.txt --audit-name prueba_localhost (Iniciar la uditoria, que guarde el resultado en .html y .txt y dándole un nombre)
-# python golismero.py URL -i nikto_output.csv -o report.html -d all (Importar el resultado de un scaneo con nikto [-i] y desactivando todos los plugins [-d])
+# python golismero.py URL -i nikto_output.csv -o report.html -d all (Importar el resultado de un scaneo con nikto [-i] y desactivando los otros plugins [-d])
 # python golismero.py URL -nd (Sin guardar los resultados en la base de datos. Por defecto lo hace automáticamente)
 # python golismero.py URL -db database.db -no (Realizar el scaneo y guardarlo en la basa de datos)
 # python golismero.py -db database.db -d all -o report.html (Generar un informe a partir de un scaneo guardado en la base de datos)
-# python golismero.py --plugin-list (Ver listado de plugins disponibles)
-# python golismero.py --plugin-info dns_analyzer (Ver detalles de un plugin concreto)
+# python golismero.py plugin (Ver listado de plugins disponibles)
+# python golismero.py info brute_* (Ver detalles de un plugin concreto)
 
 
 goobook
