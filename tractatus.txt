@@ -7443,9 +7443,11 @@ $ gocr -p ocrdb/ -m 2 kapcha.jpg (Comprobar si el programa lo resuelve solo)
 
 
 golismero
-Framework para auditorías de seguridad y pentesting.
-$ git clone https://github.com/golismero/golismero.git (Descargar la última versión)
-$ cd golismero
+[python2.7 python2.7-dev python-pip python-docutils git perl nmap sslscan]. Framework para auditorías de seguridad y pentesting. Descarga e instalación:
+	$ git clone https://github.com/golismero/golismero.git
+	$ cd golismero
+	# pip install -r requirements.txt
+	# pip install -r requirements_unix.txt
 # python golismero.py localhost -o prueba.html -o prueba.txt --audit-name prueba_localhost (Iniciar la uditoria, que guarde el resultado en .html y .txt y dándole un nombre)
 # python golismero.py URL -i nikto_output.csv -o report.html -d all (Importar el resultado de un scaneo con nikto [-i] y desactivando todos los plugins [-d])
 # python golismero.py URL -nd (Sin guardar los resultados en la base de datos. Por defecto lo hace automáticamente)
