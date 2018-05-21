@@ -17373,6 +17373,19 @@ Nota.- El archivo subt.xml con un contenido:
 La fuente Arial.ttf ha de estar [o tener un enlace] en el directorio ~/.spumux
 
 
+sqlmap
+Provee automatismos para testear la seguridad entre una aplicación web y la base de datos con la que interactúa. Descarga:
+	$ git clone git://github.com/sqlmapproject/sqlmap.git
+	$ cd sqlmap
+$ python sqlmap.py -u "http://una_url.com" (forma básica)
+$ python sqlmap.py --tor --tor-type=SOCKS5 --check-tor -v -u "http://una_url.com"
+Algunas opciones:
+--tor --tor-type=SOCKS5 (que use la red Tor para las peticiones)
+--check-tor (comprobar si Tor se usa correctamente)
+-v 6 (con la máxima información. Por defecto 1. Máximo 6)
+-a (Recuperar todo)
+
+
 squid
 Proxy caché (intermediario para nuestra conexion a internet, guardando las paginas visualizadas en una caché)
 # cp /etc/squid3/squid.conf{,.defaults} (Realizar copia de seguridad de la configuración)
