@@ -21,10 +21,10 @@ Para el análisis del archivo dump.pcap puedes usar wireshark entre otros.
 
 7zip
 [7zip-rar]. Compresor/descompresor de archivos.
-$ 7z a fichero.7z fichero (comprime)
+$ 7z a fichero.7z fichero (Comprime)
 $ 7z e comprimido (Descomprime)
 $ 7z l comprimido (Muestra las propiedades)
-$ 7z t fichero_comprimido (chequea contenido)
+$ 7z t fichero_comprimido (Chequea contenido)
 $ 7z a -tgzip -p fichero.gz fichero (proteger con una contraseña)
 
 
@@ -3272,10 +3272,8 @@ $ curl -z local.html hots/remote.html (Sólo se efectuará la descarga si remote
 Otras opciones:
 $ curl -Is google.com | grep Date (Conocer la fecha via web)
 $ curl ipinfo.io/183.61.164.202 (Conocer datos de una ip)
-$ curl ip.appspot.com (Conocer la IP externa)
-$ curl icanhazip.com (lo mismo)
+$ curl icanhazip.com (Conocer la IP externa)
 $ curl ifconfig.me (lo mismo)
-$ curl whatismyip.org (Otra)
 $ curl -u usuario:clave --silent "https://mail.google.com/mail/feed/atom" | perl -ne 'print "\t" if /<name>/; print "$2\n" if /<(title|name)>(.*)<\/\1>/;' (visualizar todos los mensajes no leidos de gmail)
 $ curl -s 'http://geoiplookup.wikimedia.org/' | sed 's/^.*=\s*//' | python3 -mjson.tool (muestra la situación geográfica)
 $ curl -s http://geoiplookup.wikimedia.org/ | python3 -c 'import sys, json, string, webbrowser; webbrowser.open(string.Template("http://maps.google.com/maps?q=$lat,$lon").substitute(json.loads(sys.stdin.read().split("=")[-1])))' (Lo mismo pero abriendo una pestaña en el navegador)
@@ -6246,6 +6244,8 @@ $ find . -type f  (Buscar ficheros)
 $ find . -type d  (Buscar directorios)
 $ find / -iname fichero 2>/dev/null  (buscar redireccionando los avisos de permiso denegado a /dev/null)
 $ find . -iname "*.txt" -or -iname "*.odt" -exec cp {} documentos \; (Buscar los txt y los odt y copiarlos a la carpeta documentos)
+$ find . -type d -exec chmod 0755 {} \; (Cambiar permisos de todos los directorios y subdirectorios)
+$ find . -type f -exec chmod 0644 {} \; (Cambiar permisos de todos los ficheros del directorio y de los subdirectorios)
 $ find . -type f -iname "*.bak" | xargs rm (buscar los ficheros acabados en .bak y borrarlos. xargs hace lo mismo que exec pero usando una tuberia.)
 $ find /home/usuario -iname '*.bak' -delete (Otra forma de borrar todos los .bak de un directorio)
 $ find . -type f -iname *.sla (buscará los ficheros .sla)
@@ -7444,16 +7444,20 @@ $ gocr -p ocrdb/ -m 2 kapcha.jpg (Comprobar si el programa lo resuelve solo)
 
 
 golismero
-Framework para auditorías de seguridad y pentesting.
-$ git clone https://github.com/golismero/golismero.git (Descargar la última versión)
-$ cd golismero
+[python2.7 python2.7-dev python-pip python-docutils git perl nmap sslscan]. Framework para auditorías de seguridad y pentesting que se integra con un montón de soluciones como nmap,nikto,xserv,exploitdb,shodan,sqlmap,etc. Descarga e instalación:
+	$ git clone https://github.com/golismero/golismero.git
+	$ cd golismero
+	# pip install -r requirements.txt
+	# pip install -r requirements_unix.txt
+# python golismero.py 192.168.1.10 -o report.html (escaneo total de una ip y guardar resultados en report.html
+# python golismero.py URL -e sslscan -o report.html (usando un plugin concreto y resultados en report.html)
 # python golismero.py localhost -o prueba.html -o prueba.txt --audit-name prueba_localhost (Iniciar la uditoria, que guarde el resultado en .html y .txt y dándole un nombre)
-# python golismero.py URL -i nikto_output.csv -o report.html -d all (Importar el resultado de un scaneo con nikto [-i] y desactivando todos los plugins [-d])
+# python golismero.py URL -i nikto_output.csv -o report.html -d all (Importar el resultado de un scaneo con nikto [-i] y desactivando los otros plugins [-d])
 # python golismero.py URL -nd (Sin guardar los resultados en la base de datos. Por defecto lo hace automáticamente)
 # python golismero.py URL -db database.db -no (Realizar el scaneo y guardarlo en la basa de datos)
 # python golismero.py -db database.db -d all -o report.html (Generar un informe a partir de un scaneo guardado en la base de datos)
-# python golismero.py --plugin-list (Ver listado de plugins disponibles)
-# python golismero.py --plugin-info dns_analyzer (Ver detalles de un plugin concreto)
+# python golismero.py plugin (Ver listado de plugins disponibles)
+# python golismero.py info brute_* (Ver detalles de un plugin concreto)
 
 
 goobook
@@ -9786,6 +9790,7 @@ Muestra los intentos de conexión fallidos (/var/log/btmp)
 lastcomm
 [acct)]. Muestra información acerca de comandos ejecutados y terminales abiertas.
 $ lastcomm tmux tty1 (sólo muestra los epecificados)
+$ lastcomm root (Del usuario root)
 
 
 lastlog
@@ -17369,6 +17374,19 @@ Nota.- El archivo subt.xml con un contenido:
 La fuente Arial.ttf ha de estar [o tener un enlace] en el directorio ~/.spumux
 
 
+sqlmap
+Provee automatismos para testear la seguridad entre una aplicación web y la base de datos con la que interactúa. Descarga:
+	$ git clone git://github.com/sqlmapproject/sqlmap.git
+	$ cd sqlmap
+$ python sqlmap.py -u "http://una_url.com" (forma básica)
+$ python sqlmap.py --tor --tor-type=SOCKS5 --check-tor -v -u "http://una_url.com"
+Algunas opciones:
+--tor --tor-type=SOCKS5 (que use la red Tor para las peticiones)
+--check-tor (comprobar si Tor se usa correctamente)
+-v 6 (con la máxima información. Por defecto 1. Máximo 6)
+-a (Recuperar todo)
+
+
 squid
 Proxy caché (intermediario para nuestra conexion a internet, guardando las paginas visualizadas en una caché)
 # cp /etc/squid3/squid.conf{,.defaults} (Realizar copia de seguridad de la configuración)
@@ -17470,15 +17488,21 @@ Deshabilitar/personalizar los mensajes que aparecen cuando nos logueamos en algu
 $ touch /home/usuario/.hushlogin (Creando este fichero vacio se deshabilitan los mensajes. Borrandolo vuelven a aparecer)
 # nano /etc/motd (Archivo para personalizar los mensaje de bienvenida a quien se loguea en el sistema)
 7.-
-Crear un atajo para la conexión a un servidor remoto:
+Crear un atajo para la conexión a servidores remotos:
 $ nano .ssh/config
-Y pegar el siguiente contenido debidamente modificado con nuestros datos:
+Y pegar el siguiente contenido debidamente modificado con nuestros datos referente e dos host remotos:
 	host servidor
 	 hostname 192.168.1.10
-	 user USUARIO_REMOTO
-Nota.- Delante de la segunda y tercera linea existe un espacio.
+	 port 22000
+	 user USUARIO_SERVIDOR
+	host maquina1
+	 hostname 192.168.1.15
+	 port 22100
+	 user USUARIO_MAQUINA1
+Nota.- Delante de las lineas hostname, port y user existe un espacio.
 Al crear este archivo, la conexión se realizará con:
 $ ssh servidor (Pedirá igualmente contraseña)
+$ ssh maquina1
 8.-
 Evitar desconexiones por inactividad:
 $ nano .ssh/config
@@ -17981,6 +18005,10 @@ Cuando es posible, suspender la shell actual.
 suspicious-source
 Script que genera una lista de archivos que no son archivos fuente comunes. Esto debe ejecutarse en la raíz de un árbol de fuentes para encontrar archivos que podrían no ser la "forma preferida de modificación" que requieren la licencia GPL y otras licencias.
 # suspicious-source -d /usr/bin
+
+
+swap
+Tambien llamado memoria de intercambio o memoria virtual, es la que se sirve del espacio en el disco duro en lugar del módulo de memoria. Las aplicaciones usan la memoria RAM para ejecutarse en el ordenador cuando no hay muchas ejecutandose pero si hay muchas o estas necesitan mucha RAM o no hay RAM suficiente para todas es cuando entra en acción la swap. Una de las desventajas de utilizar la swap es que el sistema se vuelve más lento ya que la velocidad de intercambio de información entre un disco duro y la RAM es abismalmente diferente. La memoria RAM es unas 1000 veces más rápida que un SSD y 100.000 veces más rápida que un HDD. El tamaño de una swap en un equipo con una memoria de 8 GB o más, como norma general es 2GB. Reservar para la swap más de 2 GB es esteril pero aunque un equipo no tenga 8 GB de memoria es aconsejable no dejar una swap inferior a 1GB.
 
 
 swapoff
@@ -21732,6 +21760,19 @@ yokadi> t_show 5 (abre el editor por defecto del sistema para modificar el texto
     yokadi> t_list (si no se entra la contraseña no mostrará los datos)
 
 
+you-get
+[python3, ffmpeg]. Descarga de videos y, en algunos casos audio o imágenes de sitios web populares (youtube, tumblr, vimeo...) consulta de sitios soportados en <https://you-get.org/#supported-sites> . Descarga:
+# pip3 install you-get
+O de github <https://github.com/soimort/you-get/archive/master.zip>
+$ you-get URL (descarga normal de video, audio o imagenes)
+$ you-get -i URL (informacion sobre la url)
+$ you-get --itag=243 URL (de la información anterior, descargar la itag 243)
+$ you-get Wagner (buscar sobre el termino especificado y empieza la descarga)
+$ you-get -p vlc URL (Transmitir el video por un reproductor especificado)
+$ you-get -p firefox URL (transmitirlo por el navegador)
+$ you-get -o /Vídeos -O titulo URL (descargar el video en un directorio y con un titulo concreto)
+
+
 youtube-dl
 Descargar videos de youtube
 $ youtube-dl url
@@ -21871,7 +21912,7 @@ $ zsync http://cdimage.ubuntu.com/daily-live/current/raring-desktop-amd64.iso.zs
 
 
 zypper
-Gestor de paquetes de opensuse (rpm)
+Gestor de paquetes de opensuse [rpm]
 # zypper (Generar una lista de paquetes instalados)
 # zypper repos (Listar repositorios)
 # zypper install paquete  (Instalar paquete)
