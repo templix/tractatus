@@ -14206,6 +14206,8 @@ Para anular un parche previamente aplicado:
 	$ cat file3
 	Me gusta la libertad
 	No uso programario privativo
+$ patch -p0 < parche.patch (Aplica un parche .patch en el directorio actual. El parámetro p indica a partir de que nivel inferior de subdirectorio hay que aplicar el parche. El 0 es para el directorio actual)
+$ patch -R -p0 < parche.patch (Deshace los cambios aplicados por el parche anterior)
 
 
 path
