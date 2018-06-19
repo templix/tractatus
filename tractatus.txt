@@ -12755,9 +12755,15 @@ Buscar máquinas [activas o pasivas] conectados  a una red.
 nethogs
 Visualiza procesos que están consumiendo más ancho de banda en el sistema
 # nethogs   (uso básico. Por defecto el dispositivo es eth0)
-# nethogs eth0 eth1 (especificando dos dispositivos)
-# nethogs -t eth1  (rastreando conexiones y especificando dispositivo)
+# nethogs eth0 eth1 (especificando dos redes)
+# nethogs -t eth1  (en modo traza y especificando red)
 # nethogs -d 5 eth1 (Actualizando datos cada 5 segundos)
+# nethogs -p (modo promiscuo. Segun documentación no recomendado)
+Pulsando:
+	m --> Se cambian las unidades de medida a KB/s, B/s y MB/s
+	s --> Ordenar por los datos enviados
+	r --> Ordenar por los datos recibidos
+	q --> Salir
 
 
 netpbm
