@@ -15548,11 +15548,15 @@ read
 Espera una entrada por teclado y le asigna una variable, aunque contenga espacios.
 	$ read -p "dime tu nombre " NOMBRE
 	$ echo $NOMBRE
+La opción "p" tambien permite entrar varias variables simultaneamente:
+	$ read -p "entra 3 nombres" PRIMERO SEGUNDO TERCERO
+	$ echo "Hola $PRIMERO $SEGUNDO $TERCERO"
 La opción -a permite leer las palabras como elementos de un array:
 	$ read -a frase
 	Hola que tal
 	$ declare -p frase
 	declare -a frase='([0]="Hola" [1]="que" [2]="tal")'
+$ read -s -p "entra la contraseña: " CONTRASEÑA (Para que no se vea en la pantalla lo que se escribe aunque si se efectua un echo $CONTRASEÑA se mostrará)
 Algunas opciones:
 -d (permite indicar un delimitador de fin de línea de forma que la línea se lee hasta encontrar este delimitador)
 -e (permite que se puedan usar todas las combinaciones de teclas de readline)
