@@ -3911,6 +3911,14 @@ $ cp default.config.php config.php
 Modificar lo que proceda. Todos los archivos o carpetas que pongamos en el directorio que contiene el index.php se verá reflejado cuando accedamos a htt://localhost/DirectoryLister.
 
 
+dirhunt
+Encontrar directorios en sitios web aunque el servicio no esté habilitado (<git://github.com/Nekmo/dirhunt>)
+$ dirhunt http://dominio.com http://dominio2.com (escanear dos urls)
+$ dirhunt http://dominio.com -e php,zip,sh (buscar determinadas extensiones. Por defecto php, zip, sh, asp, csv y log)
+$ dirhunt http://dominio.com -f access_log,error_log (buscar determinados archivos)
+$ dirhunt http://dominio.com --stdout-flags blank,not_found.fake,html > flags.txt (especificar flags y guardarlo en un fichero)
+
+
 dirname
 Eliminar el último componente de un archivo.
 $ dirname /usr/bin (Muestra sólo /usr)
