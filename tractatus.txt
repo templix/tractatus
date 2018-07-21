@@ -3197,7 +3197,8 @@ Una vez entrada la contraseña asignada en el primer paso, escoger el formato se
 csplit
 Dividir un archivo en varios archivos.
 $ csplit -f seccion archivo.txt /capitulo/ {*} (que cada uno use el sufijo "capitulo" [capitulo00, capitulo01...],  que la division se produzca cuando encuentre la palabra "capitulo" y que haga todas las divisiones que precise)
-$ csplit -n 4 archivo.txt (El sufijo por defecto [xx] y que use 4 dígitos [xx0001, xx0002...])
+$ csplit -n 4 archivo.txt 4 (El sufijo por defecto [xx] y que use 4 dígitos [xx0001, xx0002...] y parta en 4 archivos)
+$ csplit -b %03d archivo.txt 3 (lo mismo con 3 dígitos y parta en 3 archivos [xx001, xx002...])
 $ csplit archivo.txt 5 -f parte (Dividir en 5 archivos y cada uno con el sufijo "parte" [parte00, parte01...])
 Nota.- para unirlo usar:
 $ cat parte[0-5] > completo.txt
