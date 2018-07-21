@@ -3194,6 +3194,15 @@ Una vez entrada la contraseña asignada en el primer paso, escoger el formato se
 # cryptsetup -v status backup (ver el estado de la asignación)
 
 
+csplit
+Dividir un archivo en varios archivos.
+$ csplit -f seccion archivo.txt /capitulo/ {*} (que cada uno use el sufijo "capitulo" [capitulo00, capitulo01...],  que la division se produzca cuando encuentre la palabra "capitulo" y que haga todas las divisiones que precise)
+$ csplit -n 4 archivo.txt (El sufijo por defecto [xx] y que use 4 dígitos [xx0001, xx0002...])
+$ csplit archivo.txt 5 -f parte (Dividir en 5 archivos y cada uno con el sufijo "parte" [parte00, parte01...])
+Nota.- para unirlo usar:
+$ cat parte[0-5] > completo.txt
+
+
 csscapture
 [python-cssutils]. Capturar el css de una web.
 $ csscapture -s web http://www.tuxapuntes.com (guarda en la carpeta “web”)
