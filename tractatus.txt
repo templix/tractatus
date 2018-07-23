@@ -16696,6 +16696,12 @@ Depurar partes de un script encerrando el código:
 	set +x
 
 
+setarch
+Esta utilidad le dice al núcleo que informe de una arquitectura diferente a la actual a un programa, luego ejecutará dicho programa en este entorno.
+$ setarch --list (Listado de arquitecturas posible)
+$ setarch $(uname -m) --uname-2.6 script.sh (A partir de este momento, siempre que se llame a ese script pensará que se está ejecutando con un kernel 2.6)
+
+
 setleds
 Controla los leds del teclado
 $ setleds -D +num >> /dev/tty1  (activa el teclado numérico)
