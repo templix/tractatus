@@ -13720,6 +13720,16 @@ Procesador de textos de la suite ofimática openoffice.
 $ oowriter -pt pdf archivo.doc
 
 
+omv-initsystem
+Inicializa openmediavault en esta distribución de GNU/Linux basada en Debian. Es necesaria su ejecución para un correcto funcionamiento
+# omv-initsystem
+
+
+omv-sysinfo
+En la distribución OpenMediaVault basada en Debian GNU/Linux muestra la información del sistema en formato json
+# omv-sysinfo
+
+
 openbox
 Gestor de ventanas
 $ openbox –-replace (Activa openbox)
@@ -15384,6 +15394,11 @@ Muestra infromación sobre las versiones de python instaladas en el sistema.
 $ pyversions -d (muestra la por defecto)
 $ pyversions -s (las soportadas)
 $ pyversions -i (las instaladas)
+
+
+qemu-nbd
+Utilidad de Qemu para poder montar discos virtuales. Crea un disco de red. Es necesario cargar el módulo nbd (modprobe nbd)
+# qemu-nbd -c /dev/nbd0 fichero.vdi (Crear dispositivo de disco de red a partir del fichero vdi de VirtualBox. Ahora hay que montar la partición con mount /dev/nbd0p1 /mnt)
 
 
 qpdf
