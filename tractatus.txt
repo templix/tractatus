@@ -4529,7 +4529,7 @@ Nota.- "-c" buscar y marcar los bloques dañados, "-D" Optimiza, "-f" fuerza, "-
 e2image
 Genera una imagen de una partición ext2/ext3/ext4 y otros. También usado para redimensionar y mover particiones
 # e2image /dev/sda2 copia.img
-# e2image -ra -p -O 21623734272 /dev/sda1 (Mueve la partición al punto definido por el parametro -O)
+# e2image -ra -p -O 21623734272 /dev/sda1 (Mueve la partición al punto definido por el parametro -O. Se debe reducir la partición previamente con resize2fs)
 
 
 e2label
@@ -15775,6 +15775,7 @@ $ resize
 resize2fs
 Cambiar la medida de una partición.
 # resize2fs /dev/sda3 600M
+# resize2fs -p /dev/sda1 45288448K (Otro ejemplo pero que nos muestra el porcentage)
 
 
 resolveip
