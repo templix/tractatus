@@ -1,4 +1,4 @@
-TRACTATUS ELEMENTALIS
+ TRACTATUS ELEMENTALIS
 
 
 4g8
@@ -12935,6 +12935,15 @@ texto que se tiene que agregar:
 	urls-source "googlereader"
 	googlereader-login "login_de_googlereader"
 	googlereader-password "contraseña"
+
+
+newsboat
+Lector de noticias RSS. Descargar de <http://github.com/newsboat/newsboat.git>
+Los feeds se han de colocar en un archivo de texto, por ejemplo, feeds.txt con el siguiente formato:
+<a title="Linkification: https://site.com/feed/" href="https://site.com/feed/" class="linkification-ext">https://site.com/feed/</a>
+Lanzar la aplicación:
+$ newsboat -ru rss feeds.txt (-u es para indicar el archivo de texto que contiene los feeds y -r para que se actualicen)
+Para abrir noticia en el navegador pulsar "o" y para salir "q"
 
 
 nftables
