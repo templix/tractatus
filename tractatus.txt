@@ -10252,6 +10252,22 @@ $ ln -s /dev/null ~/.bash_history  (vincular historial a /dev/null)
 $ ln -sf /opt/metasploit/msf* /usr/bin (Crear un enlace a /usr/bin de todos los ejecutables que empizan por msf del directorio /opt/metasploit)
 
 
+lnav
+Visor avanzado de archivos de registro normalmente situados en /var/log/.
+# lnav /var/log/ (sobre todos los logs del sistema)
+# lnav /var/log/syslog (sobre un log concreto)
+# lnav -r /var/log/auth.log (incluir archivos comprimidos en la salida)
+# lnav /var/log/auth.log -d auth.txt (mandar la información de depuración a un archivo)
+Algunas teclas de control:
+    e (saltar al mensaje de error siguiente)
+    w (saltar al mensaje de advertencia siguiente)
+    b (página anterior)
+    Espacio (página siguiente)
+    g (moverse a la parte superior/inferior de la página)
+    p (detalle del log del cursor)
+    G (salir)
+
+
 lnstat
 Proporciona estadísticas de redes. Es un sustituto del antiguo programa rtstat.
 # lnstat -c 3 (realiza 3 muestras)
