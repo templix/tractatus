@@ -6555,6 +6555,16 @@ $ firejail --net=eth0 firefox
 $ firejail --net=eth0 --ip=192.168.1.207 firefox
 
 
+fkill
+Matar procesos de forma interactiva. Descarga <https://github.com/sindresorhus/fkill-cli>
+$ fkill
+Una vez mostrada la salida, empezar a teclear el nombre de la aplicación y cuando aparezca, al pulsar intro se cerrará.
+Otras formas de uso:
+$ fkill 54377 (por el pid del proceso)
+$ fkill chromium (por nombre directamente de la aplicación a cerrar)
+$ fkill :5050 (por numero de puerto)
+
+
 flexget
 [python2.6 python-pip]. Descarga de series a partir de su direccion RSS. Archivo de configuración:
 $ nano .flexget/config.yml
