@@ -18711,6 +18711,20 @@ Muestra el promedio de carga en el terminal en forma de dibujos de caracteres.
 $ tload -d 2 (Con actualizacion cada 2 segundos)
 
 
+tlp
+herramienta avanzada de administración de energía para Linux. Viene con un configuración predeterminada ya optimizada para la duración de la batería. Al mismo el tiempo es altamente personalizable. Puede habilitar o deshabilitar los dispositivos de radio bluetooth, WiFi y WWAN al iniciar el sistema.
+# tlp start (iuniciar la herramienta)
+# tlp-stat -b (información de la bateria)
+# tlp-stat -s (consultar estado)
+# tlp-stat -c (mostrar configuración)
+Otras opciones:
+	-u (Información de los dispositivos)
+	-g (de los gráficos)
+	-r (de la radio)
+	-t (temperaturas)
+	-w (errores)
+
+
 tmpfs
 Permite asignar parte de la memoria física para ser utilizada como una partición lo que permite una vez montada, leer o escribir archivos de la RAM como si de una partición de disco se tratara. Dado que se está escribiendo en la memoria RAM del sistema, esta se borra en un reinicio o en un cuelgue. Relacionado con ramfs [ver], se diferencia de este en que tmpfs usa swap y que no permite escribir más que el tamaño que se ha especificado en el montaje. El proceso:
 # mkdir /media/tmp
