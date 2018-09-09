@@ -14560,6 +14560,19 @@ $ pgrep -l -G group (del grupo especificado)
 $ pgrep -l -u user (del usuario especificado)
 
 
+phockup
+Organizar carpetas de fotos por año, mes y dia. Descarga: <https://github.com/ivandokov/phockup>
+$ phockup -d YYYY/M  carpeta_fotos carpeta_ordenada (por año y mes por nombre en inglés)
+$ phockup -l -d YYYY/MM  carpeta_fotos carpeta_ordenada (creando un link de las fotos en carpeta_ordenada hacia carpeta_fotos para no tenerlas duplicadas)
+Formatos soportados:
+    YYYY - 2017, 2018 ...
+    YY   - 17, 18 ...
+    MM   - 01, 02, ...
+    M    - July, August, September ...
+    m    - Jul, Aug, Sept ...
+    DD   - 20, 21, ...
+
+
 phoronix
 [phoronix-test-suite]. suite de pruebas para medir el rendimiento de un sistema o componente del mismo [benchmarking]. Cuenta con un repositorio online con gran cantidad de pruebas y se ejecutan a través de un archivo de configuración XML.
 # phoronix-test-suite list-available-tests (Lista los test disponibles y una pequeña descripción)
