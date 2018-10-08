@@ -16316,6 +16316,7 @@ Parecido a un chroot [ver] que se ha de usar como root, pero usuarios normaleso.
 
 scp
 Copiar o transferir archivos o directorios entre una máquina remota y una local
+$ scp -r textos pepe@IP: (copiará el directorio "textos" al host remoto en el directorio del usuario)
 $ scp pepe@host_o_IP:/home/pepe/*.odt ./pendiente (Copiará todos los .odt del directorio /home/pepe del host remoto al directorio “pendiente” de la máquina local)
 $ scp pepe@host_o_ip:Descargas/*.avi Pelis (Descargará todos los .avi del directorio "Descargas" del host remoto a la carpeta "Pelis" de la maquina local)
 $ scp *.odt pepe@host_o_IP:/home/pepe/pendiente (transferirá todos los odt del directorio actual al directorio especificado “pendiente” del host remoto.)
