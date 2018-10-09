@@ -6555,6 +6555,11 @@ $ firejail --net=eth0 firefox
 $ firejail --net=eth0 --ip=192.168.1.207 firefox
 
 
+fixparts
+[gdisk]. Repara ciertos tipos de problemas con la partición Master Boot Record (MBR). Puede eliminar datos de la tabla de particiones GUID (GPT), que se pueden dejar en un disco que alguna vez se usó como disco GPT, puede reparar particiones extendidas de tamaño incorrecto, ya sea particiones que se extiendan más allá del extremo físico del disco o que se superpongan con particiones primarias cercanas y tambien puede cambiar las particiones primarias en particiones lógicas o viceversa.
+# fixparts /dev/sda
+
+
 fkill
 Matar procesos de forma interactiva. Descarga <https://github.com/sindresorhus/fkill-cli>
 $ fkill
