@@ -929,11 +929,17 @@ $ arp -n
 # arp -s IP MAC (establecer una MAC estática a una IP)
 
 
-arptables
-Configurar, mantener e inspeccionar las tablas ARP gobernadas por el nucleo linux. Tiene un comportamiento parecido a iptables [ver] y las normas que se establecen son identicas pero opera en la capa ARP y no en la IP.
-# arptables -A INPUT -s 192.168.1.20 -j DROP (bloquea todo el tráfico de una ip especifica)
-# arptables --list -n (enumerar las reglas activas)
-# arptables -A INPUT --source-mac 00:11:22:33:44:55 -j DROP (bloquear una MAC concreta)
+arp-fingerprint
+Intenta determinar el sistema operativo.
+# arp-fingerprint -o "-I eth1" 192.168.1.10
+# arp-fingerprint -v 192.168.1.5 (Mostrando más información)
+
+
+arp-scan
+Escanea en una red las direcciones IP y las MAC.
+# arp-scan -I eth0 192.168.2.0/16
+# arp-scan -l -I eth1
+	Nota.- En el primer ejemplo es una i mayúscula. En el segundo la primera opción la “ele” minúscula y la segunda la i mayúscula
 
 
 arpalert
@@ -944,22 +950,17 @@ $ nano  /etc/arpon.sarpi
 # arpon -i eth0 -x 1 -s (Lanzar con actualización cada segundo)
 
 
-arp-fingerprint
-Intenta determinar el sistema operativo.
-# arp-fingerprint -o “-I eth1” 192.168.1.10
-
-
 arping
 Enviar solicitud ARP a una ip de la red.
 # arping -I eth0 IP
 # arping -D -I eth1 192.168.1.15; echo $? (Detectar ips duplicadas)
 
 
-arp-scan
-Escanea en una red las direcciones IP y las MAC.
-# arp-scan -I eth0 192.168.2.0/16
-# arp-scan -l -I eth1
-	Nota.- En el primer ejemplo es una i mayúscula. En el segundo la primera opción la “ele” minúscula y la segunda la i mayúscula
+arptables
+Configurar, mantener e inspeccionar las tablas ARP gobernadas por el nucleo linux. Tiene un comportamiento parecido a iptables [ver] y las normas que se establecen son identicas pero opera en la capa ARP y no en la IP.
+# arptables -A INPUT -s 192.168.1.20 -j DROP (bloquea todo el tráfico de una ip especifica)
+# arptables --list -n (enumerar las reglas activas)
+# arptables -A INPUT --source-mac 00:11:22:33:44:55 -j DROP (bloquear una MAC concreta)
 
 
 arrays
