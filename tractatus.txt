@@ -15542,7 +15542,7 @@ $ quiz Europe capital (Preguntará capitales de Europa. Si no se sabe la respues
 
 
 quota
-[quotacheck]. Limitar el uso del espacio de disco para cada usuario de un servidor. El proceso es como sigue:
+[quotatool]. Limitar el uso del espacio de disco para cada usuario de un servidor. El proceso es como sigue:
 # nano /etc/fstab
 Modificar la linea parecida a:
 	/dev/hdb2    /home    ext2    errors=remount-ro   0    1
@@ -15554,6 +15554,18 @@ Reiniciar el servidor.
 # edquota USER1 (activar cuotas para un usuario)
 # edquota -p USER1 USER2 (Otorgar a USER2 la misma cuota que USER1)
 # quota USER2 (Comprobar si un usuario tiene cuota)
+
+
+quotacheck
+[quota quotatool]. Cuando una máquina la usan varios usuarios o grupos y queremos controlar el espacio usado por cada uno de ellos, tenemos la opción de activar el sistema de quotas a nivel de sistema de ficheros de modo que podamos personalizar por usuario y grupo el espacio máximo o número de inodos que pueden utilizar.
+# quotacheck -c -u usuario (comprobar si un usuario tiene quotas)
+# quotacheck -cgumv / (mirar qi existen quotas en la raiz)
+Los parámetros son:
+    -c  (Escaneo del sistema de ficheros en busca de quotas)
+    -g  (Busca quotas de grupos)
+    -u  (Busca quotas de usuarios)
+    -m  (No intenta hacer un remount en sistemas read-only)
+    -v  (Verbose)
 
 
 radeontop
