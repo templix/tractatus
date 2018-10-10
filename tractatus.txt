@@ -1436,6 +1436,13 @@ $ banner -l linux   (forma cada letra con la misma letra diminuta)
 $ banner -Cck linux  (centrado y con la letra “k” formando la palabra “linux”)
 
 
+bar
+Mostrar barra de progreso de un proceso.
+$ bar file1 file2 file2 > file3 (equivalente a: cat file1 file2 file2 > file3)
+$ bar -o outfile infile (equivalente a: cp infile outfile)
+$ bar -n archivo.tar.gz | tar -xzpf - (de la descompresión de un archivo)
+
+
 base64
 [cl-base64]. Codificador/descodificador de textos
 $ cat archivo| base64 > cifrado (cifrar "archivo" y volcarlo en "cifrado")
