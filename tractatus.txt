@@ -3311,6 +3311,7 @@ $ curl -s http://geoiplookup.wikimedia.org/ | python3 -c 'import sys, json, stri
 $ curl -s http://www.census.gov/popclock/data/population/world | awk -F'[:,]' '{print $7}' (Muestra el número de habitantes de la tierra)
 $ curl -s https://help.github.com/articles/generating-ssh-keys | grep -Po  --color=never "RSA key fingerprint is (:?[A-z0-9]\:?){32}" (Imprime la clave RSA de github.com)
 $ curl -H 'Accept-Language: es' -s wttr.in/figueras,girona | sed -n '1,7p' (el tiempo en una ciudad)
+$ curl -s -w 'Test de velocidad para :%{url_effective}\n\nLookup Time:\t\t%{time_namelookup}\nConnect Time:\t\t%{time_connect}\nPre-transfer Time:\t%{time_pretransfer}\nStart-transfer Time:\t%{time_starttransfer}\n\nTotal Time:\t\t%{time_total}\n' -o /dev/null http://www.google.com (Tiempo de respuesta de un sitio web. Cmabiar la url final)
 
 
 curlftpfs
