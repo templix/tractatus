@@ -16166,6 +16166,13 @@ Nota.- El formato del archivo rsync_exclude para excluir los ficheros ocultos [.
 	Videos/alien
 
 
+rtacct
+Monitorear los contadores snmp del kernel y las estadísticas de la interfaz de red cuyo contenido se encuentra en /proc/net/rt_acct.
+# rtacct -a -s -z (volcar valores absolutos, no actualizar el historial y mostrar tambien los contadores a cero)
+# rtacct -n (solo actualizar el historial)
+# rtacct -d 5 (ejecutar en modo daemon y recolectando las estadisticas cada 5 segundos)
+
+
 rtcwake
 Suspender/hibernar el pc e iniciarlo a una hora determinada.
 # rtcwake -u -m disk -s 150 && deluge (Asume el tiempo UTC, suspende a disco y vuelve a activarse dentro de 150 minutos arrancando la aplicación deluge)
