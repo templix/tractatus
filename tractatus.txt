@@ -963,6 +963,17 @@ Configurar, mantener e inspeccionar las tablas ARP gobernadas por el nucleo linu
 # arptables -A INPUT --source-mac 00:11:22:33:44:55 -j DROP (bloquear una MAC concreta)
 
 
+arpwatch
+Ayuda a monitorear la actividad del tráfico en la red en lo que respecta al cambio de IP con su MAC asociada y mantiene una base de datos de dichos emparejamientos junto con una marca de tiempo, por lo que es posible comprobar cuando apareció actividad en el nuevo emparejamiento. Archivos principales: /var/arpwatch/arp.dat, base de datos donde se registran las direcciones IP/MAC y /var/log/messages, registro donde arpwatch escribe cualquier cambio o actividad inusual en IP/MAC [en lagunas distros en /var/log/syslog].
+# arpwatch -i eth0 (mostrar una interfaz concreta)
+Nota.- Analizar los logs con el clásico: tail -f /var/log/messages
+1-
+Si queremos que nos mando un correo:
+# nano /etc/sysconfig/arpwatch
+Y añadir la linea:
+	eth0 -a -n 192.168.1.0/24 -m usuario@url.com
+
+
 arrays
 También llamado vector, arreglo o alineación es un conjunto o agrupación de variables del mismo tipo cuyo acceso se realiza por índices. El primer indice de una array es el 0.
 Ejemplos de uso:
