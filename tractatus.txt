@@ -21665,6 +21665,23 @@ xmll
 $ xmllint --format archivo.xml
 
 
+xmlstarlet
+Utilidad que permite manipular, filtrar, editar, buscar, validar y aplicar hojas de estilo al contenido XML. Desafortunadamente es extremadamente poco intuitivo y muchos usuarios luchan con los parámetros de línea de comando ofuscados y el lenguaje peculiar de scripting. Aquí mostraremos algunas formas en que puede usarse para simplificar algunas tareas básicas diarias.
+$ xmlstarlet sel -t -v "count(//linux)" texto.xml (cuantas veces aparece la palabra "linux" en "texto.xml"
+$ xmlstarlet sel -t -m "//linux" -v "species" -o " " -v "@name" -n texto.xml
+$ xmlstarlet sel --net -t -m "//linux" -o "Title: " -v "title" -n -o "Author: " -v "author" -n  http://URL (de un sitio web)
+$ xmlstarlet sel --net --html -t -m "//linux" -v "@src" -n http://URL
+Algunas de las opciones:
+	sel (que planeamos extraer o filtrar datos)
+	-t (que los siguientes parámetros forman parte de la plantilla de salida)
+	-v (utiliza para generar el valor de una expresión xpath)
+	-m (que repita en todos los nodos que coincidan con la expresión xpath proporcionada [linux])
+	-o (que genere una cadena de texto y se usa en este ejemplo para incluir un espacio entre los dos valores asociados con cada "linux".)
+	-n (que incluya nueva línea. Si se omite todos los datos aparecerían en una línea de texto.)
+	--net (que descargue el contenido XML desde una ubicación remota.)
+	--html (extraer datos de un sitio web.)
+
+
 xmodmap
 Muestra la disposición del teclado
 $ xmodmap -pke
