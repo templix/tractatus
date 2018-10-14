@@ -21811,7 +21811,7 @@ $ xstarfish -d 300 (que se actualice cada 5 minutos)
 $ xstarfish -g 400x400 -o walpaper.png (de 400x400 pixels, por defecto 256x256 y que se guarde con el nombre indicado)
 
 
-Xtables_addons
+xtables_addons
 [libtext-csv-xs-perl]. GeoIP para Iptables. Bloqueo de ataques por paises o anonimos. El proceso de instalación es el siguiete:
 # cd /usr/lib/xtables-addons/
 # ./xt_geoip_dl (actualizar la base de datos)
@@ -21855,6 +21855,11 @@ $ xrdb -merge .Xresources (Aplicar los cambios, en caso contrario no se aplicara
 xtrlock
 Bloquea el servidor de las X hasta que el usuario no introduce la contraseña y pulsa enter. El cursor se convierte en un candado y el teclado no reponde. Antes de introducir la contraseña es preferible clicar "esc" para borrar todo lo que puede haberse pulsado en el teclado. La introducción de la contraseña no es visible en pantalla.
 $ xtrlock
+
+
+xvfb-run
+Ejecutar un comando X en un entorno de servidor virtual.
+$ xvfb-run --server-num=1 rdesktop -u USER -p PASS -g 1024x768 192.168.1.10 (abrir conexión de escritorio remoto sin X:)
 
 
 xvkbd
