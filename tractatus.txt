@@ -13085,6 +13085,11 @@ Si se desea en el fstab, colocar la linea:
 192.168.1.2:/home/usuario/datos /media/servidor nfs rw,user 0 0
 
 
+nfslogsum
+Resume los archivos de registro producidos por el programa nfswatch. Por defecto se resume el archivo de registro nfswatch.log
+# nfslogsum -n 10 (las 10 primeras entradas)
+
+
 nfsstat
 Consulta datos sobre el servidor NFS
 # nfsstat -m (Muestra datos de los puntos de montaje sólamente)
