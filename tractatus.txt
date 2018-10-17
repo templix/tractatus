@@ -22187,6 +22187,11 @@ $ zoo -x archivo.zoo (Descomprimir)
 $ zoo -v archivo.zoo (Ver contenido)
 
 
+zrun
+Hace que los archivos comprimidos que son argumentos de un comando se descompriman automáticamente. Soporta los tipos de compresión gz, bz2, Z, xz, lzma y lzo.
+$ zrun grep linux archivo.gz (buscar la palabra "linux" en el comrpimido "archivo.gz")
+
+
 zswap
 Módulo del kernel con la función principal de evitar la paginación en disco incrementando el rendimiento del sistema. Para activar este módulo se precisa una partición Swap y que la versión de kernel sea como mínimo la 3.11.
 # nano /etc/default/grub
