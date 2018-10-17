@@ -3194,6 +3194,10 @@ Y añadir la linea:
 LANG=es_ES.UTF-8
 Reiniciar cron:
 # /etc/rc.d/crond restart
+2.-
+Una forma de controlar si un script colocado en el cron funciona correctamente es:
+$ env -i /home/user/script.sh
+La condición de ejecución es similar a como lo hace cron.
 
 
 cruft
