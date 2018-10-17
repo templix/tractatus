@@ -13090,6 +13090,22 @@ Consulta datos sobre el servidor NFS
 # nfsstat -m (Muestra datos de los puntos de montaje sólamente)
 
 
+nfswatch
+Herramienta para monitorizar el tráfico NFS. Puede capturar y analizar los paquetes NFS en una interfaz de red particular o en todas las interfaces. También monitorea el tráfico de respuesta NFS desde un servidor para medir el tiempo de respuesta de cada RPC.
+# nfswatch (entra en el prompt de la aplicación)
+Una vez dentro pueden usarse algunas teclas:
+	a (mostrar estadísticas sobre usuarios individuales)
+	c (mostrar estadísticas sobre hosts de clientes)
+	p (mostrar estadísticas sobre procedimientos)
+	s (tomar una "instantánea" de la pantalla actual y guárdarla en un archivo)
+	- (disminuye el tiempo de ciclo. Por defecto diez segundos)
+	+ (aumenta el tiempo del ciclo)
+	< (disminuye el tiempo de ciclo en un segundo)
+	> (aumenta el tiempo del ciclo en un segundo)
+	q (salir)
+# nfswatch -all (todos los paquetes desde y hacia la red local)
+
+
 ngrep
 Herramienta para monitorear el tráfico de red. Grep para tráfico de red.
 # ngrep port 80  (captura todo lo que use el puerto 80)
