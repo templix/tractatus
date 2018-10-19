@@ -21890,14 +21890,20 @@ $ xstarfish -g 400x400 -o walpaper.png (de 400x400 pixels, por defecto 256x256 y
 
 
 xtables_addons
-[libtext-csv-xs-perl]. GeoIP para Iptables. Bloqueo de ataques por paises o anonimos. El proceso de instalación es el siguiete:
-# cd /usr/lib/xtables-addons/
-# ./xt_geoip_dl (actualizar la base de datos)
-# mkdir -p /usr/share/xt_geoip/ (crear el directorio en la ruta predeterminada)
-# /usr/lib/xtables-addons/xt_geoip_build -D /usr/share/xt_geoip/ GeoIPCountryWhois.csv (recargar el directorio anterior)
-# iptables -A INPUT -m geoip --src-cc CN -j DROP (crear las normas de iptables por ejemplo para negar todo el tráfico de la china)
-# iptables -A INPUT -p tcp -m tcp -m multiport --dports 80,443,22 -m geoip --src-cc A1 -j DROP (y el anonimo [A1], protocolo tpc y a determinados puertos)
-# iptables -L -n --line-numbers (verificación de las normas entradas)
+[libtext-csv-xs-perl xtables-addons-common xtables-addons-dkms]. GeoIP para Iptables. Bloqueo de ataques por paises o anonimos. El proceso de instalación es el siguiete:
+Configuración:
+	# cd /usr/lib/xtables-addons/
+	# ./xt_geoip_dl (actualizar las bases de datos)
+	# mkdir -p /usr/share/xt_geoip/ (crear directorio de almacen)
+	# /usr/lib/xtables-addons/xt_geoip_build -D /usr/share/xt_geoip/ *.csv (configurar todos los paises)
+Una vez configurada la base de datos podemos crear normas para iptables, por ejemplo para denegar el acceso de China y los proxis anonimos a los puertos 80 y 443:
+	# iptables -A INPUT -m geoip --src-cc CN -j DROP
+	# iptables -A INPUT -p tcp -m tcp -m multiport --dports 80,443 -m geoip --src-cc A1 -j DROP
+CN se corresponde con el código de China de la base de datos geoip que contendrá los rangos de IP que se denegarán (drop). En la segunda regla, añadiríamos el protocolo tcp, los puertos 80 (http) y 443 (https) y el rango A1 (proxies anónimos).
+Si la política por defecto es denegación de servicio a todos (DROP) y queremos permitir acceso para usuarios de España, la regla sería:
+	# iptables -A INPUT -p tcp -m tcp -m multiport --dports 80,443 -m geoip --src-cc ES -j ACCEPT
+Nota.- Para comprobar las reglas introducidas:
+	# iptables -L -n --line-numbers
 
 
 xterm
