@@ -14183,11 +14183,17 @@ $ packer -G paquete (descargar sin instalar un tarbal de aur)
 
 
 packit
-Herramienta de auditoría de red. Puede inyectar, supervisar y manipular tráfico IP (TCP, UDP, ICMP, IP, ARP ...) útil para probar firewalls, sistemas de prevención, detección de intrusos, escaneo de puertos y simulación de tráfico de red
-# packit -m trace -t TCP -d www.google.com -S 80 (modo trace, protocolo TCP, origen y especificando puerto)
-# packit -m cap -c 10 'tcp and not port 22' -r captures (modo captura, 10 paquetes excepto puerto 22 y escribirlo en el archivo "captures")
-	Nota.- Para leer el archivo captures: tcpdump -r captures
-# packit -m cap -c 10 -w captures 'tcp' (modo captura, 10 paquetes, escribirlo en "captures" y especificando un flag [tcp])
+Herramienta de auditoría de red [Packet toolkit]. Su valor se deriva de su capacidad para personalizar, inyectar, monitorear y manipular el tráfico IP. Al permitirle definir [spoof] casi todas las opciones de encabezado TCP, UDP, ICMP, IP, ARP, RARP y Ethernet, Packit puede ser útil para probar cortafuegos, sistemas de detección/prevención de intrusiones, escaneo de puertos, simulación de tráfico de red y auditoría general TCP/IP.
+# packit -t UDP -d 192.168.1.4 -D 1024 -i x10 -h (inyección de paquetes UDP con respuesta de host [-h])
+# packit -m cap 'tcp and not port 22' (imprimir todas las comunicaciones TCP que no giren en torno a SSH [puerto 22])
+# packit -m cap -c 10 -w /tmp/mylog 'icmp' (escribir los primeros 10 paquetes ICMP capturados en un archivo)
+# packit -t icmp -s 22.03.55.9 -d 192.168.0.1 -c 10 -h (Inyectar 10 paquetes ICMP tipo 8 [petición de eco] desde el host '22.03.55.9' al host '192.168.0.1' y esperar una respuesta)
+# packit -t icmp -K 18 -d 127.0.0.1 -N 211 -G 255.255.255.0 (Inyectar paquete de tipo ICMP 18 [respuesta de máscara] con un ID ICMP de 211 y máscara de dirección de 255.255.255.255.0)
+# packit -sR -d www.microsoft.com -F S -c 5 -W 666 -eR -E f:00:d:f:00:d -p 'HI BILL' -v  (Inyectar 5 paquetes TCP desde hosts aleatorios a 'www.microsoft.com' con el flag set SYN, con tamaño de ventana de 666, dirección ethernet de fuente aleatoria, una dirección ethernet de destino de f:00:d:f:00:d, con una carga útil de "HI BILL", mostrando cada paquete inyectado)
+# packit -s 192.168.0.1 -d 192.168.0.20 -S 403 -D 80 -F SR -q 12345678910 -c 1000 -b 20 -e 0:0:0:0:0:0  (Inyectar un total de 1000 paquetes TCP en ráfagas de 20 paquetes por segundo desde 192.168.0.1 en el puerto 403 hasta 192.168.0.20 en el puerto 80 con los indicadores SYN y RST configurados, un número de secuencia de 12345678910 y una dirección ethernet de origen de 0:0:0:0:0:0:0)
+# packit -s 10.22.41.6 -d 172.16.1.3 -D 1-1024 -F S -v (Inyectar paquetes TCP de 10.22.41.6 a 172.16.1.3 en puertos de 1-1024 con el indicador SYN activado, mostrando cada paquetes que enviamos)
+# packit -m trace -t UDP -d 192.168.2.35 -S 53 (Aparecer como una respuesta DNS utilizando el puerto de origen UDP 53)
+# packit -m trace -t TCP -d www.google.com -S 80 -FS (Aparecer como tráfico HTTP utilizando el puerto TCP 80)
 
 
 paclist
