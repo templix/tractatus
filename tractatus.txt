@@ -16300,6 +16300,14 @@ off (Apaga el ordenador completamente)
 no (No suspende inmediatamente, unicamente establece la hora en que despierta el sistema)
 
 
+rtkitctl
+[realtimekit]. Servicio del sistema D-Bus que cambia la política de programación de los hilos y procesos de usuario a modo de programación en tiempo real, a petición del usuario. Está concebido para ser utilizado como un mecanismo seguro que permita la programación en tiempo real para ser utilizado por los procesos normales.
+# rtkitctl --reset-known (restablecer el estado en tiempo real de los hilos conocidos)
+# rtkitctl --reset-all (restablecer el estado en tiempo real de todos los hilos)
+# rtkitctl --start (iniciar rtkitctl si aún no se está ejecutando)
+# rtkitcrl --exit (finalizar la ejecución del demonio RealtimeKit)
+
+
 rtmon
 Permite guardar/monitorizar la tabla de rutas.
 # rtmon file /var/log/rtmon.log (guardar en un fichero)
