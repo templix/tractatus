@@ -16936,6 +16936,13 @@ $ setarch --list (Listado de arquitecturas posible)
 $ setarch $(uname -m) --uname-2.6 script.sh (A partir de este momento, siempre que se llame a ese script pensará que se está ejecutando con un kernel 2.6)
 
 
+setfont
+Modificación de las fuentes en el arranque (arch)
+# setfont (cargar la por defecto)
+# setfont ter-114f (especificar una)
+Nota.- fuentes en /usr/share/consolefonts
+
+
 setleds
 Controla los leds del teclado
 $ setleds -D +num >> /dev/tty1  (activa el teclado numérico)
