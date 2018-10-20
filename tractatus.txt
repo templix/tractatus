@@ -12352,6 +12352,18 @@ $ sftp-verif (comprueba la existencia y los permisos de los distintos archivos)
 $ sftp-user list (muestra todas las cuentas de usuario habilitadas para SFTP)
 $ sftp-user delete USER (eliminar una cuenta de usuario SFTP)
 $ sftp-user create USER (crear un usuario)
+Un ejemplo de configuración básica:
+# nano /etc/ssh/sftp_config
+<Group sftp>
+        Download                50k     # limitar velocidad de descarga por conexión
+        Upload                  0       # Velocidad de subida ilimitada por conexión
+        StayAtHome              true    # limitar al usuario a su directorio home
+        VirtualChroot           true    # falsifica un chroot a la cuenta de inicio
+        LimitConnectionByUser   1       # conexión máxima para cada cuenta
+        LimitConnectionByIP     1       # conexión máxima por IP para cada cuenta
+        IdleTimeOut             300     # desconectar por inactividad (en segundos)
+        HideNoAccess            true    # ocultar archivo/directorio al que el usuario no tiene acceso
+</Group>
 
 
 mysql
