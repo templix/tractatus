@@ -12338,6 +12338,22 @@ $ mv -i (Pide confirmación de sobreescritura si existe el archivo o directorio)
 $ mv -f (Sobreescribe sin preguntar)
 
 
+mysecureshell
+Herramienta creada para aportar más funcionalidades al protocolo sftp/scp ofrecido por OpenSSH y ofrecer la potencia y seguridad de OpenSSH, con funciones mejoradas (como ACL) para restringir los usuarios conectados.
+Crear un usuario con la shell restringida. Tambien puede hacerse desde la propia aplicaicón (ver):
+	$ useradd -m -s /bin/MySecureShell USER
+	$ passwd USER
+$ MySecureShell --configtest (comprobacion de la configuración de un usuario)
+MySecureShell viene con algunas utilidades que facilitan la administración y el control de las cuentas SFTP y del mismo MySecureShell.
+$ sftp-who (muestra los usuarios SFTP que están conectados)
+$ sftp-kill USER (Desconectar a un usuario)
+$ sftp-state (vireficar el estado de la aplicación)
+$ sftp-verif (comprueba la existencia y los permisos de los distintos archivos)
+$ sftp-user list (muestra todas las cuentas de usuario habilitadas para SFTP)
+$ sftp-user delete USER (eliminar una cuenta de usuario SFTP)
+$ sftp-user create USER (crear un usuario)
+
+
 mysql
 Gestor de bases de datos [BDs]. Las BDs se guardan en el directorio /var/lib/mysql/
 $ mysqldump -u root -p proveedores > fichero.sql (Crear un backup de la BD "proveedores".)
