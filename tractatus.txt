@@ -17884,7 +17884,7 @@ $ sshpass -p 1234 ssh -t usuario@host "echo 1234 | sudo -S namp 192.168.1.0/24" 
 
 
 sshuttle
-Levanta VPNs con SSH y enruta tráfico a travé de ellos
+Levanta VPNs con SSH y enruta tráfico a través de ellos
 # sshuttle -r usuario@servidor 0/0 (Ejecución básica para redireccionar la totalidad del tráfico)
 # sshuttle --dns -vvr usuario@servidor 0/0 (que las consultas DNS sean procesadas a través del servidor DNS del servidor al que se está conectado)
 # sshuttle --daemon usuario@servidor 0/0 --exclude 192.168.1.0/24 --exclude 90.173.123.64 (ejecutar el proceso en segundo plano y excluir una rango y una ip)
