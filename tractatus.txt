@@ -5463,6 +5463,12 @@ Atajos básicos:
 	q (Salir)
 
 
+empty
+Proporciona una interfaz sencilla para ejecutar y/o interactuar con procesos en sesiones de pseudo-terminales. Esta herramienta es útil en la programación de scripts shell que se utilizan para comunicarse con programas interactivos como telnet o ftp.
+$ empty -f -L empty.log telnet localhost (mostrar la salida vacia pero las incidencias en empty.log)
+$ empty -l (lista los trabajos creados por la shell)
+
+
 enable
 Permutar la ejecución de un comando de bash como ejecutable interno [por ejemplo: cd] y ejecutable externo [por ejemplo: /bin/cd]. Algunas shells precisan que determinados comandos se ejecuten de forma externa, o sea indicando su ruta al ejecutable. Por defecto un comando siempre se ejecuta de forma interna.
 $ enable -a (Ver todos los comandos internos y si están habilitados)
