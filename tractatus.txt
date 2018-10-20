@@ -7895,6 +7895,15 @@ En este punto puede optarse por dos soluciones:
 	b) ponemos al final de la linea "single" [linux   /boot/vmlinuz-3.2.0-4-amd64 root=UUID=de1d7793-c3d2-4e03-b79d-1a76905619e6 ro  quiet single ]
 Y proseguir con el arranque pulsando F10 o Ctrl+x con lo que el sistema iniciará con una consola root.
 12.-
+Otra forma de entrar en el sistema cuando se ha perdido la contraseña de root y no se dispone de un live CD:
+	1.- Reiniciar y cuando aparece grub, pulsar la tecla "e"
+	2.- Buscar la linea en la que aparece algo como "init=/bin/bash" y modificar el parámetro de read-only (ro) por read-write (rw).
+	3.- Pulsar F10 para guardar cambios y reiniciar el equipo.
+	4.- Aparecerá un prompt shell en el que pondremos:
+	    mount -n -o remount,rw /
+	    passwd root (ponemos nueva contraseña)
+	    exec /sbin/init (reiniciamos)
+13.-
 Modificar el sistema que arranca primero.
 # gedit /boot/grub/grub.cfg
 Y modificar la linea que pone:
