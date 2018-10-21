@@ -10585,10 +10585,30 @@ $ nano /etc/printcap
 	        :sh:
 
 
+lpadmin
+Añadir impresoras.
+$ lpadmin -p nombre_local -v usb://dispositivo -m driver
+$ lpadmin -x nombre_local (eliminar una impresora)
+Opciones:
+-L (añadir una ubicación [-L "oficina"])
+-D (añadir descripción [-D "impresora compartica"])
+
+
+lpinfo
+Lista los dispositivos o controladores disponibles conocidos por el servidor CUPS. Comandos relacionados: lpstat, cupsreject, cupsenable, cupsaccept, cupsdisable y lpadmin.
+$ lpinfo -m (lista los drivers)
+$ lpinfo -v (lista los dispositivos)
+
+
 lpoptions
 Información sobre las impresoras en cups
 $ lpoptions -d HP_psc_1100_series (Establecer la impresora predeterminada)
 $ lpoptions -p HP_psc_1100_series -l (Ver las opciones de la impresora predeterminada)
+
+
+lpstat
+Comprobar el estado de la impresora.
+$ lpstat -t
 
 
 ls
