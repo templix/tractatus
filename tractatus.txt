@@ -342,6 +342,13 @@ Información sobre los dispositivos alsa.
 $ alsa-info
 
 
+alsabat
+Probador de sonido para controlador de tarjeta de sonido ALSA.
+$ alsabat (básico)
+$ alsabat -P plughw:0,0 -C plughw:0,0 --file 500Hz.wav
+$ alsabat -P plughw:0,0 -C plughw:0,0 -c 2 -f S32_LE -F 250
+
+
 alsabat-test
 Testeo de la tarjeta de sonido
 $ alsabat-test
@@ -353,10 +360,22 @@ Se usa para controlar la configuración avanzada de los controladores de la tarj
 # alsactl restore (carga el estado del controlador para la tarjeta de sonido seleccionada desde el archivo de configuración)
 
 
+alsaloop
+Permite crear un bucle de retorno PCM entre un dispositivo de captura de PCM y un dispositivo de reproducción de PCM.
+$ alsaloop -C hw:0,0 -P hw:1,0 -t 50000
+
+
 alsamixer
 Mezclador de tarjeta de sonido para el controlador ALSA
 $ alsamixer
 $ alsamixer -V all (ver todas las opciones de salida)
+
+
+alsaucm
+Permite a las aplicaciones acceder al hardware de forma abstracta
+$ alsaucm -n listcards (no abrir la primera tarjeta encontrada [-n] y enumerar las tarjetas disponibles)
+$ alsaucm -n reload (releer la configuración)
+$ alsaucm -n reset (restablecer la tarjeta de sonido al estado predeterminado)
 
 
 altavoz
