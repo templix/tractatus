@@ -20162,6 +20162,13 @@ Arrancarlo con alguno de los siguientes comandos:
 # usb_modeswitch -c /etc/usb_modeswitch.conf
 
 
+usbhid-dump
+[usbutils]. Volcar descriptores de informe y flujos de interfaces HID de todos los dispositivos USB conectados.
+$ usbhid-dump (básico)
+$ usbhid-dump -m 5543:0005 -es (Volcar flujo de informes para un dispositivo con ID de proveedor 0x5543 e ID de producto 0x0005)
+$ usbhid-dump -es (Volcar flujos de informes de todas las interfaces HID de todos los dispositivos USB [precaución: perderá el control sobre el terminal si usa un teclado USB])
+
+
 usbmount
 (+ autofs [demonio]). Automontar dispositivos de almacenamiento externo. Editar:
 # nano /etc/usbmount/usbmount.conf
