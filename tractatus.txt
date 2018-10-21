@@ -652,6 +652,12 @@ $ aplay -l (saber el modelo de la tarjeta de sonido)
 # aplay -fdat /dev/sda  (Escuchar el sonido del disco duro)
 
 
+aplaymidi
+Utilidad de línea de comandos que reproduce los archivos MIDI especificados en uno o más puertos del secuenciador ALSA
+$ aplaymidi -l (imprime una lista de posibles puertos de salida)
+$ aplaymidi -p 14:0 archivo.mid
+
+
 apparmor
 Módulo de seguridad del kernel. Los perfiles estan: /etc/apparmor.d/
 # apparmor_status (Ver estado)
