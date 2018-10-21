@@ -3243,6 +3243,12 @@ csscapture
 $ csscapture -s web http://www.tuxapuntes.com (guarda en la carpeta “web”)
 
 
+cupp
+Herramienta que puede generar un diccionario para ataques de fuerza bruta o ataques de diccionario con una lista de palabras a partir de información como un cumpleaños, apodo, dirección, nombre de una mascota o familiar, o una palabra común.
+$ cupp3 -i (Realiza varias preguntas sobre cual es el nombre, el nik, el hijo... y al final creau un diccionario con los datos entrados .txt)
+$ cupp3 -l (bajar el diccionario del idioma que se entre)
+
+
 cups
 Gestión de impresoras.
 # cupsenable Hewlett-Packard-HP-LaserJet-Professional-P1606dn (Activar una impresora)
@@ -3280,10 +3286,24 @@ Por:
 	JobPrivateValues none
 
 
-cupp
-Herramienta que puede generar un diccionario para ataques de fuerza bruta o ataques de diccionario con una lista de palabras a partir de información como un cumpleaños, apodo, dirección, nombre de una mascota o familiar, o una palabra común.
-$ cupp3 -i (Realiza varias preguntas sobre cual es el nombre, el nik, el hijo... y al final creau un diccionario con los datos entrados .txt)
-$ cupp3 -l (bajar el diccionario del idioma que se entre)
+cupsaccept
+Que una impresora acepte trabajos.
+$ cupsaccept nombre_impresora
+
+
+cupsdisable
+Desactivar impresoras.
+$ cupsdisable nombre_impresora
+
+
+cupsenable
+Activar impresoras.
+$ cupsenable nombre_impresora
+
+
+cupsreject
+Que la impresora deje de aceptar trabajos.
+$ cupsreject nombre_impresora
 
 
 curl
