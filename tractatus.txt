@@ -17800,6 +17800,11 @@ $ split -d -b 100m archivo otro_archivo. (Que tengan extensión con números: .0
 $ cat prefijo* > archivo  (volver a unirlos)
 
 
+split-logfile
+Los archivos de registro se crearán, en el directorio donde se ejecuta el script, para cada nombre de host virtual que aparezca en el archivo de registro combinado. Estos archivos de registro llevarán el nombre del nombre del host, con una extensión de archivo.log. El archivo de registro combinado se lee desde la entrada estándar. Los registros leídos se añadirán a cualquier archivo de registro existente.
+# split-logfile < /var/log/apache2/access.log (creará un archivo para cada ip distinta que encuentre en access.log por lo que es mejor lanzar el comando en un dir vacio)
+
+
 splitvt
 Lanzar dos shells simultaneas partiendo en dos ventanas una terminal.
 $ splitvt -t "linux es genial" -upper ls -lower top (Con un título [-t] lanzando un ls en la ventana superior y top en la inferior)
