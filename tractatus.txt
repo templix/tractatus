@@ -14467,6 +14467,12 @@ pbzip2
 Comprensión en paralelo que puede usarse en máquinas de más de un nucleo. Las opciones de uso son las mismas que bzip2.
 
 
+pcimodules
+[pciutils]. Enumera todos los módulos de controladores para todos los dispositivos PCI conectados.
+# pcimodules (básico)
+# pcimodules --class 0x20000 --classmask 0xffff00 (los correspondientes a eternet)
+
+
 pcmanfm
 Gestor de archivos
 $ pcmanfm --set-wallpaper /home/USER/images/limagen.jpg (colocar fondo)
@@ -16977,6 +16983,11 @@ Controla los leds del teclado
 $ setleds -D +num >> /dev/tty1  (activa el teclado numérico)
 $ setleds -D -caps >> /dev/tty1 (desactiva las mayúsculas)
 $ setleds -D +scroll >> /dev/tty1 (activa el scroll)
+
+
+setpci
+[pciutils]. Utilidad para consultar y configurar dispositivos PCI.
+# setpci --dumpregs (lista de todos los registros y capacidades PCI conocidos)
 
 
 setsebool
