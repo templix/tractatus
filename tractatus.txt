@@ -909,6 +909,12 @@ $ arecord archivo.mp3 (Modo básico)
 $ arecord -t wav -f cd -d 15 archivo.wav (Tipo wav, formato cd, duración de la grabación 15 segundos y nombre con el que se guardará)
 
 
+arecordmidi
+[alsa-utils]. Graba un archivo MIDI estándar desde uno o más puertos del secuenciador ALSA.
+$ arecordmidi -l (lista de posibles puertos)
+$ arecordmidi -p 14:0 archivo.mid
+
+
 argus
 Conjunto de herramientas cliente-servidor, para el análisis de tráfico de red.
 # argus-i eth0 -w salida.arg  (capturar en tiempo real todo el trafico de red)
