@@ -1069,7 +1069,8 @@ $ asciiview imagen.jpg
 
 aseqdump
 Mostrar los eventos recibidos en un puerto secuenciador ALSA.
-$ aseqdump -l
+$ aseqdump -l (listar puestos)
+$ aseqdump -p 14:0 (mostrar los de un puerto)
 
 
 asoundconf
@@ -2466,6 +2467,12 @@ checkbot
 Verifica enlaces internos o externos de una url.
 $ checkbot http://google.com (básico)
 $ checkbot --mailto usuario@correo.org http://google.com (enciar correo cuando termine el escaneo)
+
+
+checkgid
+Programa que verifica si el usuario se puede establecer en el grupo de apache2. Esto es para ver si es un grupo válido para que apache2 lo use en tiempo de ejecución. Ha de ejecutarse como superusuario.
+# checkgid (si no devuelve nada es correcto)
+# checkgid user (si no devuelve nada, user está en el grupo y puede configurarlo)
 
 
 checkrestart
