@@ -21773,6 +21773,14 @@ $ Xephyr :1 -screen 1024x768 (Lanzar la aplicación)
 $ DISPLAY=:1 startxfce4 (Arrancar una sesión xfce4 dentro de Xephyr)
 
 
+xev
+Conocer el código asociado a la tecla.
+$ xev (una vez lanzada la aplicación, pulsar la tecla de la que se quiera conocer el código asociado)
+	...
+	keycode 134 (keysym 0xffec, Super_R)
+	...
+
+
 xfburn
 Grabador de cds i dvds.
 $ xfburn -a (grabar cd de audio)
@@ -21926,6 +21934,8 @@ Algunas de las opciones:
 xmodmap
 Muestra la disposición del teclado
 $ xmodmap -pke
+$ xmodmap -e 'keycode 134 = Super_L' (acoplar una tecla a determinada asignación)
+Nota.- el keycode [código de la tecla] se averigua lanzando xev [ver]
 
 
 xnest
