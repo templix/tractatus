@@ -14370,6 +14370,7 @@ $ pal --color (Lo muestra a color. --nocolor para blanco y negro)
 pandoc
 Conversor de formatos de documentos. La entrada puede ser cualquier documento en haskell, markdown, rst, html, txt o latex y la salida, txt, haskell, markdown, rst, html, latex,man, context, texinfo, docbook, opendocument, odt, s5 o rtf.
 $ pandoc -o salida.html entrada.md (Convertir markdown a html)
+$ pandoc -f markdown -t org -o salida.org entrada.md (Convertir markdown a org-mode)
 $ pandoc entrada.txt -o salida.pdf (Convertir txt a pdf)
 $ pandoc texto.txt -o libro.epub (Convertir a epub)
 $ pandoc -f html -t markdown -o pagina.md pagina.html (Convertir de html a markdown)
