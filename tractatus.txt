@@ -181,6 +181,11 @@ Añadir repositorios a /etc/apt/sources.list o a /etc/apt/sources.list.d/
 # add-apt-repository "deb http://packages.mate-desktop.org/repo/ubuntu $(lsb_release -cs) main" (Añade el repositorio del escritorio Mate según la versión de Ubuntu instalada [$(lsb_release -cs)])
 
 
+add-shell
+[debianutils]. Agrega shells a la lista de shells de inicio de sesión válidos. copia /etc/shells a /etc/shells.tmp y agrega los shells dados a este archivo si aún no están presentes y copia este archivo temporal de nuevo a /etc/shells. Deben proporcionarse rutas de acceso completas de las shells.
+$ add-shell /bin/rbash
+
+
 adduser.conf
 Archivo que contiene las preferencias para los comandos adduser y addgroup [/etc/adduser.conf]. Algunos parámetros importantes:
 	DSHELL=/bin/bash (shell para nuevos usuarios. Por defecto /bin/bash)
