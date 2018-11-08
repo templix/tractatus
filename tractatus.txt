@@ -17032,6 +17032,11 @@ Algunos ejemplos:
 	done
 
 
+select-editor
+Proporciona un mecanismo coherente para seleccionar y almacenar un editor sensible preferido por el usuario.
+$ select-editor (Muestra los instalados y marca el predeterminado. Solicita el número del que se desea)
+
+
 selinux
 [selinux-basics selinux-policy-default]. SELinux proporciona una forma de acceso a recursos basada en políticas de control de acceso obligatorio [mandatory access control, MAC] incorporado en el kernel. Existen un conjunto de reglas de autorización [políticas] las cuales determinan si una operación sobre un objeto [Archivos, directorios, dispositivos...] realizada por un sujeto esta o no permitida basándose en los atributos de ambos. Linux utiliza por defecto el control de acceso a discreción [discretionary access control, DAC] basada en los propietarios y grupos a los que pertenece un objeto en los que un usuario normal puede cambiar los permisos de los archivos que posee con el comando chmod. Con selinux se limita el acceso que tienen las aplicaciones a otras aplicaciones y a los ficheros, impidiendo que un proceso pueda modificar cualquier fichero del usuario con el que se lanzó. En DAC el acceso esta descentralizado, siendo el propietario de cada objeto el encargado de asignar los permisos de los diversos grupos que accederán a ellas. En cambio con el MAC los objetos y los sujetos tan solo tienen atributos, pero son las políticas las que se encargan de autorizar o denegar una acción. Ver comandos getsebool y setsebool.
 Los módulos SELinux disponibles se almacenan en el directorio /usr/share/selinux/default/.
