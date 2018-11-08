@@ -9490,6 +9490,15 @@ Agregar el siguiente contenido:
 	}
 
 
+ischroot
+Detectar si se está ejecutando en un chroot. El estado de salida es:
+	0 (si actualmente se ejecuta en un chroot)
+	1 (si actualmente no se está ejecutando en un chroot)
+	2 (si la detección no es posible)
+# ischroot -f (Salir con el estado 1 si la detección no es posible)
+# ischroot -t (Salir con estado 0 si la detección no es posible.
+
+
 isoinfo
 Información sobre una iso
 $ isoinfo -d -i archivo.iso
