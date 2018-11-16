@@ -6413,6 +6413,7 @@ $ find / -iname archivo     (Busca en / archivo sin distinguir minusculas y mayu
 $ find /home -name *.png -print      (Buscará en /home todos los archivos “.png” y mostrará la ruta)
 $ find . -name "*.bak" -exec rm {} \; (buscará en el directorio todos los acabados en .bak y los borrará. la instrucción "-exec" seguido del comando a ejecutar. los corchetes {} se refiere a los ficheros que find ha encontrado y la barra invertida seguido de punto y coma \; indica el final de la instrucción)
 $ find . ! -iname “*.png” ! -name “*.jpg”  (Buscar en el directorio actual todos los archivos menos los acabados en png y jpg)
+$ find . -type f -iname '*.txt' -o -iname '*.pdf' (buscar en el directorio actual y subdirectorios todos los .txt y los .pdf)
 $ find . -amin -15 (Buscar los que se ha accedido en los últimos 15 minutos)
 $ find . -atime 15 (Buscar los que se accedió por última vez hace 15 dias)
 $ find / -amin -10 (Los que se ha accedido los últimos 10 minutos)
