@@ -14528,6 +14528,24 @@ Informa sobre particiones y discos.
 # partx -l /dev/sda (Listar las particiones)
 
 
+pass
+Gestión de archivos de contraseñas. Cada contraseña está dentro de un archivo encriptado gpg cuyo nombre de archivo es el título del sitio web o recurso que requiere la contraseña. Todas las contraseñas se guardan en ~/.password-store y pass proporciona comandos para añadir, editar, generar o recuperar contraseñas.www.DeepL.com/Translator
+$ pass init "Cripta supersecreta" (primer paso para crear el archivo .password-store. Pedirá contraseña y confirmación)
+$ pass insert Mails/nombre@site.com (guardar en la carpeta "Mails" un correo. Pedirá contraseña y confirmación)
+$ pass nombre@site.com (despues de introducir la contraseña entrada en "init", pondra la de nombre@site.com)
+$ pass -c nombre@site.com (despues de introducir la contraseña entrada en "init" guardará la contraseña de nombre@site.com en el portapapeles)
+$ pass generate Mails/registro.com 12 (generar una contraseña de 12 caracteres del sitio "registro.com" y la guardar en la capeta "Mails" de pass)
+$ pass generate -i Mails/registro.com 18 (subsdtituirá la que exista por otra de 18 caracteres)
+$ pass rm Mails/nombre@site.com (eliminar los datos de un email guardado)
+$ pass (ver la estructura del archivo .password-store)
+$ pass ls (lo mismo)
+$ pass show Mails (mostrar todos los correos de la carpeta "Mails")
+$ pass grep contraseña (busca "contraseña" y muestra a qué sitio pertenece y en que carpeta está)
+$ pass find .com (muestra los sitios entrados con *.com)
+$ pass search .com (lo mismo)
+$ pass insert -m /varios/datos_que_entro (esperará las lineas que convenga entrando datos. Finalizar con C-d)
+
+
 passwd
 Cambiar contraseñas
 # passwd -f usuario        (Cambia por completo los datos del usuario)
