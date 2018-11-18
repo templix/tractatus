@@ -7777,6 +7777,14 @@ $ gpg --gen-key (Crear las claves. Preguntará algoritmo [RSA/RSA], longitud [20
 $ gpg --list-keys (Ver listado )
 
 
+gpgconf
+Utilidad para consultar y modificar los archivos de configuración en el directorio .gnupg.
+$ gpgconf --reload gpg-agent (informar a gpg-agent de la nueva configuración)
+$ gpgconf --list-components (Enumera todos los componentes. Comando por defecto si no se especifica ninguno)
+$ gpgconf --check-programs (Enumera todos los programas disponibles y comprueba si se pueden ejecutar)
+$ gpgconf --list-dirs (Enumera los directorios usados por gpgconf)
+
+
 gpm
 Activar el mouse en las tty1-6. Si al arrancar el servicio [/etc/init.d/gpm start] marca error [fail] buscar el dispositivo:
 # find /dev -iname psaux
