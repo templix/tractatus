@@ -7627,6 +7627,11 @@ Otro ejemplo a partir de un archivo [en el mismo directorio o especificando la r
 	gnuplot> plot "datos" using 1:2 with lines
 
 
+gnutls-cli-debug
+Configura múltiples conexiones TLS a un servidor y consulta sus capacidades. Fue creado para ayudar a depurar GnuTLS, pero puede ser útil para extraer las capacidades de un servidor TLS.  Se conecta a un servidor TLS, realiza pruebas e imprime un archivo con las capacidades del servidor.
+$ gnutls-cli-debug -p 80 -v localhost (por el puerto 80 y con las máximas comprobaciones)
+
+
 go2
 Buscador de directorios. En Ubuntu es necesario hacer el “--setup”.
 $ go2 images (Mostrará una lista de todos los directorios “images” del directorio personal precedidos de una letra [a, b, c...] al pulsarla, entraremos directamente en el directorio especificado)
