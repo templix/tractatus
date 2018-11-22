@@ -15604,6 +15604,12 @@ psbook
 [psutils]. Paginar un archivo ps para imprimir como libro. Ver ps2pdf.
 
 
+psktool
+[gnutls]. Programa que genera claves aleatorias para uso TLS-PSK. Las claves se almacenan en formato hexadecimal en un archivo de claves.
+$ psktool -u USER (genera clave para el usuario mencionado y la guarda en /etc/passwd.psk)
+$ psktool -u USER -p clave.psk (la guarda en el archivo clave.psk)
+
+
 pslist
 Examina la lista de los procesos y muestra el ID y los PIDs de los procesos hijos.
 $ pslist (Muestra todo el listado)
