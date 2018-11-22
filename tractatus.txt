@@ -18015,6 +18015,13 @@ $ srm archivo.txt (Se sobreescribe 38 veces)
 $ srm -rzv dir (se sobreescriben 38 veces los archivos y subdirectorios incluidos [r], sobreescribnedo ceros en el último borrado [z] y mostrando el proceso [v])
 
 
+srptool
+[gnutls]. Programa simple que emula los programas de las librerías SRP (Secure Remote Password).  Está pensado para su uso en lugares donde no se espera que la autenticación SRP sea la utilizada por los usuarios del sistema. Para utilizar SRP es necesario crear dos ficheros, el archivo de contraseñas que contiene los usuarios y los verificadores asociados a ellos y el archivo de configuración que contiene los parámetros del grupo.
+# srptool --create-conf /etc/tpasswd.conf (crear el archivo de configuración)
+# srptool --passwd /etc/tpasswd --passwd-conf /etc/tpasswd.conf -u root (creará /etc/tpasswd y añadirá el usuario root. Pedirá contraseña)
+# srptool --passwd /etc/tpasswd --passwd-conf /etc/tpasswd.conf --verify -u root (entrar contraseña y verificar si coincide con la entrada en /etc/tpasswd obtendrá)
+
+
 ss
 Utilidad para investigar sockets. Sustituye a netstat.
 # ss -r (resolviendo las IPs)
