@@ -5615,6 +5615,15 @@ Hablando la terminal. Mismas opciones que aoss espeak.
 $ echo {1..3}" sistemas quedaron y naturalmente eran linux  " | espeak -ves -s 100
 
 
+et
+[Eternal Terminal]. Shell remoto, que a diferencia de una sesión normal ssh, aunque se tenga un cambio de ip o un corte de red, se vuelve a conectar automáticamente sin interrumpir la sesión. En debian, añadir a /etc/apt/sources.list la linea:
+	deb https://mistertea.github.io/debian-et/debian-source/ stretch main
+Y añadir la clave:
+# curl -sS https://mistertea.github.io/debian-et/et.gpg | sudo apt-key add -
+Instalar con el clásico:
+# apt install et
+
+
 eterm
 Terminal.
 $ Eterm -D 1 -f green -O (En el segundo escritorio [-D 1] con las fuentes en verde  [-f]  y transparente [-O]
