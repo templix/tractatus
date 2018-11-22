@@ -2372,6 +2372,12 @@ opciones
 -dummy .- simula la grabación
 
 
+certtool
+[gnutls]. Herramienta para analizar y generar certificados, solicitudes y claves privadas X.509. Se puede utilizar de forma interactiva o no interactiva.
+$ certtool --generate-privkey --outfile key.pem --rsa (crear una clave RSA [otras opciones: dsa, ecc] privada i que se guarde en key.pem)
+$ certtool --certificate-info --infile cert.pem (información sobre un certificado)
+
+
 cewl
 Generador de lista de palabras a partir de las palabras existentes en una página web y que pueden ser utilizadas por otros programas (Bruter, John the Ripper...), para realizar ataques de fuerza bruta.
 $ cewl -a -d 3 -m 5 -w wordlist.txt http://www.movistar.es (Incuir metadatos [a], profundidad 2 serían todas las palabras de la web principal y todas las de las webs enlazadas desde esta [-d 2], con un mínimo de 5 caracteres [-m 5] y que lo guarde en wordlist.txt [-w]
@@ -7628,7 +7634,7 @@ Otro ejemplo a partir de un archivo [en el mismo directorio o especificando la r
 
 
 gnutls-cli-debug
-Configura múltiples conexiones TLS a un servidor y consulta sus capacidades. Fue creado para ayudar a depurar GnuTLS, pero puede ser útil para extraer las capacidades de un servidor TLS.  Se conecta a un servidor TLS, realiza pruebas e imprime un archivo con las capacidades del servidor.
+[gnutls]. Configura múltiples conexiones TLS a un servidor y consulta sus capacidades. Fue creado para ayudar a depurar GnuTLS, pero puede ser útil para extraer las capacidades de un servidor TLS.  Se conecta a un servidor TLS, realiza pruebas e imprime un archivo con las capacidades del servidor.
 $ gnutls-cli-debug -p 80 -v localhost (por el puerto 80 y con las máximas comprobaciones)
 
 
