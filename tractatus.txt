@@ -14362,6 +14362,15 @@ identifica huellas de sistemas operativos de forma pasiva (solo escuchando)
 Nota.- Lanzar la aplicación, visitar distintas páginas con el navegador y mirar en la consola lo que aparece.
 
 
+p11tool
+[gnutls]. Programa que permite operar con tarjetas inteligentes PKCS #11 y módulos de seguridad. Para usar los tokens de PKCS #11 con GnuTLS, los archivos de configuración de p11-kit necesitan ser configurados, es decir, crear un fichero en /etc/pkcs11/module con el contenido módule /path/to/pkcs11.so. Alternativamente, el archivo de configuración /etc/gnutls/pkcs11.conf tiene que existir y contener un número de líneas de la forma 'load=/usr/lib/opensc-pkcs11.so'.
+$ p11tool --list-tokens (enumera todos los códigos disponibles)
+$ p11tool --list-token-urls (enumera las URLs de los códigos disponibles)
+$ p11tool --list-all (enumerar todos los objetos disponibles en un código)
+$ p11tool --list-all-certs (todos los certificados disponibles en un código)
+$ p11tool --list-all-privkeys (las claves privadas disponibles en un código)
+
+
 pacdiffviewer
 En Arch, busca archivos de configuración nuevos y obsoletos [pacnew, pacsave] para gestionarlos [eliminarlos, reemplazarlos..]
 
