@@ -16595,6 +16595,14 @@ conocer el nivel de ejecución actual del sistema [gráfico, monousuario...]
 $ runlevel
 
 
+run-parts
+[debianutils]. Ejecuta todos los ejecutables que se encuentran en el directorio especificado.
+$ run-parts --list --regex '.*sh$' scripts (lista todos los .sh del directorio "scripts")
+$ run-parts --test --regex '^p.*sh$' scripts (lista los que se ejecutacian del directorio "scripts", que empiecen por "p" y terminen con "sh" pero no los ejecuta realmente)
+$ run-parts --reverse scritps (los ejecuta en orden inverso)
+$ run-parts --exit-on-error scripts (salir cuando muestre un código de salida distinto de cero)
+
+
 rvm
 Paquete de gestión para entornos ruby y las gemas de cada proycto.
 $ rvm install 1.9.2 (Instalar una versión de ruby)
