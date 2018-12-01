@@ -9119,6 +9119,10 @@ Instala un nuevo código MBR al inicio del disco duro.
 # install-mbr -l /dev/sda (muestra información del código mbr)
 
 
+installkernel
+Instala una nueva imagen del kernel en el sistema desde el árbol de fuentes de Linux. Es llamado por los makefiles del núcleo de Linux cuando make install es invocado. El nuevo núcleo se instala en /boot/vmlinuz-{version}. Si ya existe un enlace simbólico /boot/vmlinuz, se actualiza haciendo un enlace desde /boot/vmlinuz al nuevo núcleo y el núcleo previamente instalado está disponible como /boot/vmlinuz.old. installkernel se instala en /sbin porque los makefiles del núcleo de Linux lo llaman allí y no en /usr/sbin.
+
+
 instmodsh
 Para conocer los módulos perl instalados. Entra en el prompt (cmd?) con 3 preguntas:
 l (List all installed modules)
