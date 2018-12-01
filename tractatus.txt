@@ -5981,11 +5981,11 @@ $ factor 100
 
 fail2ban
 Cortafuegos. Habilitar los servicios en los que se quiera que actue el cortafuegos [ssh, apache2, ftp....] editando /etc/fail2ban/jail.conf y substituyendo el “false” por “true”. Algunos parámetros de este archivo son:
-ignoreip  (lista de IPs separadas por un espacio en blanco que no serán bloqueadas)
-bantime (tiempo en segundos que un host permanecerá bloqueado)
-maxretry (número máximo de intentos de login fallidos antes de ser bloqueado)
-filter (filtro usado según el archivo /etc/fail2ban/filter.d)
-logpath (archivo que utiliza para revisar los intentos de login)
+	ignoreip  (lista de IPs separadas por un espacio en blanco que no serán bloqueadas)
+	bantime (tiempo en segundos que un host permanecerá bloqueado)
+	maxretry (número máximo de intentos de login fallidos antes de ser bloqueado)
+	filter (filtro usado según el archivo /etc/fail2ban/filter.d)
+	logpath (archivo que utiliza para revisar los intentos de login)
 Un ejemplo muestra de configuración para el servicio ssh:
 	[ssh]
 	enabled  = true
@@ -5996,6 +5996,10 @@ Un ejemplo muestra de configuración para el servicio ssh:
 # tail -f /var/log/fail2ban.log | grep Ban    (monitorizar las ip baneadas)
 # awk '($(NF-1) = /Ban/){print $NF}' /var/log/fail2ban.log | sort | uniq -c | sort (Solo muestra las Ips.)
 # awk '($(NF-1) = /Ban/){print $NF,"("$NF")"}' /var/log/fail2ban.log | sort | logresolve | uniq -c | sort  (Mostrando el nombre del host)
+# systemctl status fail2ban (comprobar el estado de fail2ban)
+# fail2ban-client status (comprobar los servicios activos)
+# fail2ban-client status sshd (comprobar bloqueos de ips por ataques a ssh)
+# fail2ban-client set mysqld-auth unbanip IP (borrar una ip bloqueada del servicio mysql-auth)
 1.-
 Bloquear errores w00tw00t.at.ISC.SANS en los logs de apache. En realidad estas peticiones no acaban en ningún ataque concreto. Estan producidos por el escaner de puertos Dfind que al generar sus peticiones coloca "w00tw00t.at.ISC.SANS.DFind".
 Crear el archivo:
@@ -6042,7 +6046,7 @@ Solicitar 240 páginas en 1 minuto o 4 paginas segundo, bloqueo por dos dias
 	findtime = 60
 	bantime  = 172800
 	maxretry = 240
-Fallar la autentificación en el servidor web, blloqueo por 10 minutos
+Fallar la autentificación en el servidor web, bloqueo por 10 minutos
 	[nginx-auth]
 	enabled = true
 	port = http
