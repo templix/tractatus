@@ -16769,6 +16769,14 @@ schroot
 Parecido a un chroot [ver] que se ha de usar como root, pero usuarios normaleso. schroot permite el acceso a chroots para usuarios normales que utilizan el mismo mecanismo, pero con la comprobación de permisos y permite la configuración automática adicional del entorno chroot, como el montaje de sistemas de archivos adicionales y otras tareas de configuración.
 
 
+scout_realtime
+[rubygems]. Herramienta para monitorizar métricas del servidor Linux, ya sea en local o remoto via web. Muestra gráficos de la CPU, memoria, disco, red y procesos. Al ser una aplicación en Ruby ha de instalarse:
+# gem install scout_realtime
+Abrir el navegador y colocar:
+	http://localhost:5555
+Si el monitoreo se realiza en remoto, ha de abrirse el puerto 5555 de la maquina a monitorizar.
+
+
 scp
 Copiar o transferir archivos o directorios entre una máquina remota y una local
 $ scp -r textos pepe@IP: (copiará el directorio "textos" al host remoto en el directorio del usuario)
