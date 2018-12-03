@@ -8311,6 +8311,15 @@ $ head -50 /var/log/maillog  (las primeras 50)
 $ head -5 archivo1 archivo2 (Muestra las 5 primeras lineas de los dos archivos)
 
 
+hegemon
+[libsensors4-dev cargo]. Monitoreo del sistema: Velocidad del ventilado, temperatura, CPU, memoria y uso de swap. El intervalo de monitorización es 3 segundos. Al estar escrito en lenguaje RUST, una vez instñalado:
+$ cargo install hegemon
+Puede requerir incluir la ruta de los ejecutables que usa RUST en el patch:
+$ export PATH="$HOME/.cargo/bin:$PATH"
+Para ejecutarlo:
+$ hegemon
+
+
 hello
 Muestra el clásico "Hola, mundo" o un saludo personalizable.
 $ hello -t (El tradicional "Hola, mundo")
