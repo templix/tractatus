@@ -21218,6 +21218,38 @@ Algunos atajos:
     s (Abrir historial reciente)
 
 
+wajig
+Herramienta que engloba apt, apt-cache, dpkg, aptitude, apt-get y otros.
+# wajig list-commands
+	daily-upgrade (Ejecuta «update», después «dist-upgrade»)
+	install (Instala un paquete)
+	installrs (Instala un paquete y los que este sugiere y recomienda)
+	auto-download (Ejecuta «update» y se descarga todos los paquetes actualizados)
+	available (Muestra las versiones del paquete disponibles para su instalación)
+	bug (Revisar los informes de error usando Debian Bug Tracker)
+	detail (Ofrece una detallada descripción del paquete)
+	file-find (Busca un archivo contenido en un paquete instalado)
+	find-pkg (Busca un paquete Debian no oficial en apt-get.org)
+	hold (Retiene los paquetes para evitar que se actualicen)
+	last-update (Identifica el momento en que se realizo la última actualización)
+	list-hold (Muestra los paquetes retenidos)
+	new (Muestra los paquetes disponibles desde la última actualización)
+	news (Obtiene las últimas noticias relativas al paquete)
+	orphans (Muestra las bibliotecas que ningún paquete requiere)
+	package (Generaa un archivo .deb de un archivo instalado)
+	purge-depend (Purga paquete y aquellos que de el dependen, o que otros no requieren)
+	readme (Muestra el archivo README de «/usr/share/doc»)
+	restart (Detiene y reinicia un demonio, [wajig restart ssh])
+	rpminstall (Instala un paquete .rpm de RedHat)
+	search-apt (Busca archivos de Debian apropiados para sources.list)
+	showinstall (Muestra los pasos que tomará una instalación)
+	status (Muestra la versión y versiones disponibles de un paquete)
+	toupgrade (Muestra paquetes susceptibles de ser actualizados)
+# wajig install xclip
+# wajig auto-download (eqivalente al apt update)
+# wajig toupgrade (equivalente al apt upgrade)
+
+
 wait
 Indica el estado de un proceso que se está ejecutando o se ha ejecutado en background o espera a que se realice determinado proceso o trabajo para continuar.
 $ wait
