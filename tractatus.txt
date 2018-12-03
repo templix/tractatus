@@ -3739,6 +3739,22 @@ $ debcheckout nano
 	ChangeLog.2007-2015  configure.ac  INSTALL       mkinstalldirs  src
 
 
+debfoster
+Mantiene una lista de paquetes instalados que fueron explícitamente solicitados en lugar de ser instalados como una dependencia. Los argumentos son totalmente opcionales y debfoster puede ser invocado después de lanzar dpkg y/o apt-get.
+# debfoster
+Las opciones son:
+       y (guardar paquete. opción por defecto)
+       n (borrar paquete)
+       p (que también elimine todos los paquetes que sólo están instalados porque este paquete depende de ellos. Si los hubiera se muestran en la parte superior de la ventana)
+       s (omitir pregunta. La próxima vez que se ejecute preguntará de nuevo sobre este paquete)
+       h (imprimir mensaje de ayuda)
+       i o ? (mostrar información sobre el paquete)
+       u (deshacer la última opción)
+       q (salir sin quitar paquetes. Todos los cambios se perderán)
+       x (Guardar cambios, eliminar los paquetes no deseados y salir)
+# debfoster -u (recargar la base de datos)
+
+
 debget
 [debian-goodies]. Descarga un paquete .deb del repositorio o, caso de estar instalado, muestra la versión.
 $ debget scribus
