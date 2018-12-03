@@ -16772,9 +16772,12 @@ Parecido a un chroot [ver] que se ha de usar como root, pero usuarios normaleso.
 scout_realtime
 [rubygems]. Herramienta para monitorizar métricas del servidor Linux, ya sea en local o remoto via web. Muestra gráficos de la CPU, memoria, disco, red y procesos. Al ser una aplicación en Ruby ha de instalarse:
 # gem install scout_realtime
+# scout-realtime (Lanzar el daemon)
 Abrir el navegador y colocar:
 	http://localhost:5555
-Si el monitoreo se realiza en remoto, ha de abrirse el puerto 5555 de la maquina a monitorizar.
+# scout_realtime stop (detener el daemon)
+Si el monitoreo se realiza en remoto, ha de abrirse el puerto 5555 de la maquina a monitorizar. Visualizar los logs:
+$ cat .scout/scout_realtime.log
 
 
 scp
