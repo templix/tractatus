@@ -4446,6 +4446,13 @@ $ dpkg-depcheck -b ip a
 $ dpkg-depcheck -a ls
 
 
+dpkg-query
+Herramienta para buscar información del paquete referenciado en la base de datos.
+$ dpkg-query -l gedit (Muestra arquitectura, versión y descripción de gedit)
+$ dpkg-query -L gedit (archivos instalados en el sistema desde el nombre del paquete)
+$ dpkg-query -s gedit (muestra el estado del paquete)
+
+
 driftnet
 Snifer de imagenes y video
 # driftnet -i wlan2
