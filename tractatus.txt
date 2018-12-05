@@ -15254,6 +15254,18 @@ $ pkaction (Muestra todos los procesos a los que afecta esta politica)
 # pkaction | grep power (Las que hacen referencia al proceso "power")
 
 
+pkcon
+[packagekit]. Gestión de paquetes para varios sistemas (apt-get, rpm...). Permite realizar tareas simples de administración de software, por ejemplo, actualizando la caché, instalando y eliminando paquetes de software o buscando codecs multimedia. Su interfaz gráfica, packagekit,  no pretende reemplazar herramientas avanzadas como Synaptic.
+# pkcon update (equivalente al apt update)
+# pkcon install paquete (instalar "paquete")
+# pkcon remove paquete (eliminar "paquete")
+# pkcon upgrade-system complete (actualizar toda la distro)
+# pkcon get-updates (muestra los paquetes actualizables)
+# pkcon get-packages (listar todos los paquetes disponibles e instalables)
+# pkcon repo-list (listar todos los repos de lso paquetes instalados)
+# pkcon repair (reparar la base de datos de los repositorios)
+
+
 pkill
 matar procesos.
 # pkill -x scribus (equivalente a: # killall scribus)
