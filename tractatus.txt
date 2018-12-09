@@ -17413,6 +17413,12 @@ $ sh -e script (Obliga a terminar el script aunque algún comando falle)
 $ sh -v script (Imprime las lineas de entrada según se leen)
 
 
+shadow
+[/etc/shadow]. Es el archivo donde se guardan las contraseñas de todos los usuarios del sistema y normalmente se compone del nombre de usuario de la cuenta, seguido del hash del password. Como medida de seguridad, el sistema, después de generar el hash del password, agrega un salt y luego genera un nuevo hash. Este proceso funciona genera un algoritmo en un solo sentido, no hay forma de sacar ni "desencriptar" la contraseña real del hash. La única manera de intentar crackear esta contraseña es por medio de diccionarios o fuerza bruta.
+# cat /etc/shadow | grep USER (ver el Hash del usuario "USER")
+# cat /etc/shadow | grep -E 'USER|root' (ver el Hash del usuario "USER" y el de root)
+
+
 shasum
 Muestra el hash sha de un fichero con el objetivo de verificar si se producen cambios.
 $ shasum -a 512 -t fichero (Usando el algoritmo de 512 bits. Otras opciones: 32 [por defecto] 224, 256, 384, 512224, 512256)
