@@ -6779,6 +6779,14 @@ $ firejail transmission-gtk
 $ firejail --private --dns=8.8.8.8 --dns=8.8.4.4 firefox -no-remote
 $ firejail --net=eth0 firefox
 $ firejail --net=eth0 --ip=192.168.1.207 firefox
+$ firejail firefox&
+$ firejail vlc
+$ firejail --net=none vlc (ejecutar vlc sin que tenga acceso a internet)
+$ firejail --list (lista de programas que se estan ejecutando en el sandbox)
+$ firejail --top (monitorizar el consumo de recursos de los programas del sandbox)
+Nota.- el ampersand [&] permite cerrar la terminal y que el programa se siga ejecutando
+La totalidad de perfiles disponibles se muestra en:
+	$ ls /etc/firejail/
 
 
 fixfiles
