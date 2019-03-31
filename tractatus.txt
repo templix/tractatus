@@ -8555,19 +8555,18 @@ $ hostnamectl status (lo mismo que la anterior)
 
 
 hosts
-(/etc/hosts). Contiene la resolución de "Hosts" definidos localmente. La estructura es: IP, nombre del host y alias.
-192.168.1.10 mi_servidor.com servidor
-127.0.0.1 localhost mipc
+(/etc/hosts). Contiene la resolución de "Hosts" definidos localmente. La estructura es: IP, nombre del host.
+	127.0.0.1       localhost
+	127.0.1.1       tux
+	192.168.1.10    crontux.zzzz.org
 1.-
 Configurar bloqueo de páginas web:
 	# nano /etc/hosts
 Y debajo de:
-127.0.0.1 localhost
-127.0.1.1 tux
+	127.0.0.1 localhost
+	127.0.1.1 tux
 Añadimos, después de la ip local, las que se quieran bloquear separadas por un espacio:
-127.0.0.1 localhost
-127.0.1.1 tux
-127.0.0.1 www.porn.net www.google.es
+	127.0.0.1 www.porn.net www.google.es www.microsoft.com
 
 
 hp-check
