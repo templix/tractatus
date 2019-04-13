@@ -18126,6 +18126,29 @@ Nota.- El archivo subt.xml con un contenido:
 La fuente Arial.ttf ha de estar [o tener un enlace] en el directorio ~/.spumux
 
 
+sqlite
+Gestor de bases de datos.
+$ sqlite (entrar en el prompt)
+sqlite> .help (mostrar comandos para usar)
+sqlite> .database (ver las bases de datos existentes)
+sqlite> .tables (ver las tablas de las que constan en la base de datos)
+sqlite> .schema nombre (ver conceptes de la tabla "nombre")
+sqlite> drop table nombre; (eliminar una tabla)
+sqlite> .quit (salir de sqlite)
+sqlite> select * from nombre; (muestra los datos de la tabla "nombre")
+sqlite> .mode tabs nombre (La proxima vez que se lance el comando anterior mostrará la tabla tabulada)
+sqlite> .headers on (si queremos mostrar el nombre de cada columna)
+1- Un ejemplo de creación de una tabla:
+	sqlite> CREATE TABLE Datos (
+	...> id integer primary key autoincrement,
+	...> Apellido char(30) not null,
+	...> Nombre char(30) not null,
+	...> Observaciones char(60));
+Nota.- id es un número que se va ingrementando con cada entrada y entre parentesis los espacios reversados para cada dato.
+	sqlite> insert into Datos(Nombre, Apellido, Observaciones) Values('juan', 'Sanchez', 'Un amigo de la infancia');
+	sqlite> insert into Datos(Nombre, Apellido, Observaciones) Values('josé Antonio', 'Rodriguez', 'Primo de mi tio Carlos');
+
+
 sqlmap
 Provee automatismos para testear la seguridad entre una aplicación web y la base de datos con la que interactúa. Descarga:
 	$ git clone git://github.com/sqlmapproject/sqlmap.git
