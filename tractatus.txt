@@ -4531,6 +4531,13 @@ $ du | sort -rn | head (Mostrar los 10 archivos que más ocupan)
 $ du -sch .[!.]* * | sort -h (Mostrar también las carpetas ocultas y ordenar el resultado)
 
 
+duc
+[libncursesw5-dev libcairo2-dev libpango1.0-dev build-essential]. Herramienta que permite examinar el contenido de nuestro disco. Esta herramienta genera una base de datos con la cual podemos analizar mejor el contenido almacenado.
+# duc index /etc (generar la base de datos del directorio /etc)
+# duc ls -Fg /etc (ver el contenido y el peso de cada carpeta del directorio del que se ha creado la base de datos)
+# duc gui /etc (mostrarlo de forma gráfica)
+
+
 duckduckgo
 Buscador alternativo que respeta la privacidad del usuario.
 Filtros:
