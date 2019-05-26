@@ -4459,6 +4459,13 @@ Añadir arquitectura 386 a una máquina amd64 para permitir instalar paquetes s�
 Limpiar paquetes obsoletos:
 # dpkg -l | grep -i ^rc (Para visualizarlos)
 # dpkg -l |grep -i ^rc | cut -d " " -f 3 | xargs dpkg --purge (Para eliminarlos)
+7.-
+Otro proceso para reparar paquetes rotos en el sistema
+    # dpkg --configure -a (recomfigurar posibles paquetes pendientes)
+    # apt-get clean && sudo apt-get autoclean (limpiar caché)
+    # rm /var/lib/apt/lists/lock && rm /var/cache/apt/archives/lock && rm /var/lib/dpkg/lock
+    # apt-get update --fix-missing (regenerar listados de paquetes de los repositorios)
+    # apt-get install -f (corregir dependencias rotas
 
 
 dpkg-depcheck
