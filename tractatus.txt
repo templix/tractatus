@@ -2045,6 +2045,19 @@ cacaview
 $ cacaview imagen.jpg
 
 
+cache
+(Memoria cache o memoria RAM). Cuando se ejecuta una aplicación, la misma es cargada primero en la memoria RAM. Parte de la información del aplicativo queda en memoria RAM Cache, para cuando se vuelva ha ejecutar, no sea necesario cargarlo todo nuevamente y el proceso sea múcho más rápido. Otra forma de utilizar memoria RAM Cache, es cuando tenemos mucha escritura en Disco, ya que el Kernel de Linux graba primero en la memoria caché, para luego, cada cierto tiempo, hacer un volcado en el disco. La limpieza y el manejo de la memoria RAM la hace el SO de forma automática, pero hay casos donde se hace necesario efectuar una limpieza manual.
+# free -m (comprobación del uso de la memoria)
+# sync; echo 3 >'/proc/sys/vm/drop_caches' && swapoff -a && swapon -a
+# free -m (volver a lanzar para comprobar los cambios)
+Los posibles valores asignados a drop_caches son:
+    0 - Cede el control al Kernel para que administre la memoria
+    1 - Se obliga al sistema a vaciar las páginas del cache (pagecache).
+    2 - Se obliga al sistema a vaciar las entradas de directorios (dentries) y nodos índice (inodos).
+    3 - Se obliga al sistema a vaciar pagecache, dentries y inodos.
+El comando sync sirve para forzar la grabación de información pendiente en la memoria caché. Los dentries representan la relación de forma estructurada que existe entre directorios-archivos. Los inode con los nodos índice de archivos y directorios que usa el Sistema de Archivos para administrar las actividades posibles de dichos archivos y directorios guardados en disco o memoria. Contiene la metadata de los archivos y directorios: permisos, tamaño, propietario, última fecha de acceso, creación, modificación, entre otros.
+
+
 cacti
 [php5 php5-gd php5-mysql mysql-server rrdtool snmp libjpeg62 libjpeg62-dev libpng12-0 libpng12-dev libgd2-xpm-dev]. Monitorizar y visualizar gráficas, estadísticas de dispositivos conectados a la red, ancho de banda consumido, detectar congestiones o picos de tráfico, monitorizar determinados puertos...  Cacti permite monitorizar cualquier equipo de red que soporte el protocolo SNMP, ya sea un switch, un router o un servidor Linux. Se accede al resto de la instalación con: http://192.168.1.5/cacti. Los datos por defecto: usuario: admin password: admin
 
