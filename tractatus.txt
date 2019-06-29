@@ -14283,11 +14283,12 @@ $ openssl aes-128-cbc -salt -in texto -out encriptado.aes128  (encriptar)
 $ openssl aes-256-cbc -d -salt -in encriptado.txt -out desencriptado.txt  (desencriptar)
 $ cat texto.txt | gzip | openssl des3 -salt -k clave > texto.txt.des3
 $ openssl list-cipher-commands  (listar todas las opciones de encriptado)
-$ hexdump -C ejemplo.aes128 (visualizar el resultado del encriptado)
 $ openssl enc -des3 -in archivo.tar.bz2 -out cifrado.tar.bz2.ssl  (cifrar paquetes)
 $ openssl enc -d -des3 -in cifrado.tar.bz2.ssl -out archivo.tar.bz2
 $ openssl rand -base64 6  (generar una contraseña)
 $ openssl enc -base64 -in imagen.jpg (Codificar una imagen)
+Para visualizar el resultado del encriptado:
+	$ hexdump -C ejemplo.aes128
 Nota.- la opción "a" indica que codificará con base64. "-salt" Añade potencia al cifrado.
 
 
