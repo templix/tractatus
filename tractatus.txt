@@ -19850,7 +19850,10 @@ $ trueprint -H all-options (Muestra todas las opciones de ayuda)
 
 truncate
 Reducir o extender el tamaño de un archivo al tamaño especificado. Si se reduce no se recuperan las partes reducidas.
-$ truncate --size=60 archivo.txt
+$ truncate -s 60 archivo.txt (truncar archivo.txt a 60 bytes)
+$ truncate -s -60k archivo.txt (Reducir archivo.txt a 60 k)
+$ truncate -s +60k archivo.txt (Aumentar archivo.txt a 60 k)
+$ truncate -s 0 archivo.txt (Borrar todo el contenido de archivo.txt)
 
 
 ts
