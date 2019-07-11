@@ -4065,9 +4065,9 @@ $ diff -w fichero1 fichero2  (Descarta espacios en blanco)
 $ diff -q fichero1 fichero2   (Informa si los ficheros difieren sin mostrar detalles)
 $ diff -y fichero1 fichero2   (Muestra la salida a dos columnas)
 $ diff –urp dir1 dir2 (Compara recursivamente el contenido de 2 directorios.)
-$ diff -u <(grep -vE '^(#|$)' file1) <(grep -vE '^(#|$)' file2) (Los compara ignorando comentarios y lineas en blanco)
 $ diff -ru carpeta_original carpeta_modificada > parche.patch (Compara de forma recursiva dos directorios y genera un parche en un fichero .patch con formato unificado de diff)
-
+	$ diff -u <(grep -vE '^(#|$)' file1) <(grep -vE '^(#|$)' file2)
+        (Los compara ignorando comentarios y lineas en blanco)
 
 diffpdf
 Compara dos archivos pdf.
