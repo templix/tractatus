@@ -11099,10 +11099,34 @@ luakit
 Navegador web
 $ luakit
 $ torify luakit (si queremos invisibilidad))
+En antiguas versiones la configuración era:
 Copiar los archivos de configuración:
 	$ cp -r /etc/xdg/luakit .config/
 El archivo de configuración de los parámetros generales (página de inicio, motor de busqueda, …):
 	$ nano .config/luakit/globals.lua
+Pero a partir de la versión del mayo de 2018 solo se precisa el archivo:
+$ nano  .config/luakit/userconf.lua
+con el siguiente contenido como ejemplo:
+    -- Settings (the commented ones do not [yet] work)
+    local settings = require "settings"
+    settings.window.home_page                             = "https://lapipaplena.wordpress.com"
+    settings.window.scroll_step                           = 60
+    settings.window.zoom_step                             = 0.2
+    settings.window.new_window_size                       = "1200x600"
+    settings.window.load_etc_hosts                        = false
+    -- settings.vertical_tabs.sidebar_width                  = 200
+    settings.webview.zoom_level                           = 120
+    settings.webview.zoom_text_only                       = true
+    settings.webview.enable_webgl                         = true
+    settings.on["youtube.com"].webview.enable_javascript  = true
+    settings.on["youtube.com"].webview.enable_plugins     = true
+    settings.window.search_engines.archwiki               = "https://wiki.archlinux.org/?search=%s"
+    settings.window.search_engines.aur                    = "https://aur.archlinux.org/packages.php?O=0&K=%s&do_Search=Go"
+    settings.window.search_engines.duckduckgo             = "https://duckduckgo.com/?q=%s"
+    settings.window.search_engines.github                 = "https://github.com/search?q=%s"
+    settings.window.search_engines.google                 = "https://google.com/search?q=%s"
+    settings.window.search_engines.imdb                   = "http://www.imdb.com/find?s=all&q=%s"
+    settings.window.search_engines.ncbi                   = "https://www.ncbi.nlm.nih.gov/gquery/?term=%s"
 Atajos de teclado en:
 	$ nano .config/luakit/binds.lua
 Algunos de los mismos son:
