@@ -3116,7 +3116,7 @@ Algunas opciones:
 	-frame  5x5+2+2 (Lo mismo estilo cuadro)
 	"delay 60" (son 60 milisegundos por fotograma)
 	"resize 150×150" (Respetará la proporción de la imagen.)
-	"imagen%02d" (Renombrará todas la imagenes con nombre “imagen” y dos dígitos.)
+	"imagen%02d" (Renombrará todas la imagenes con nombre "imagen" y dos dígitos.)
 	"imagen%03d" (Igual pero con tres dígitos.)
 $ ifconfig | convert -background yellow -fill black -font Courier -pointSize 14 label:@- ifconfig.png  (convertir la salida de un comando a imagen png)
 	ifconfig (comando que se ejecuta)
@@ -14611,6 +14611,7 @@ $ pandoc entrada.txt -o salida.pdf (Convertir txt a pdf)
 $ pandoc texto.txt -o libro.epub (Convertir a epub)
 $ pandoc -f html -t markdown -o pagina.md pagina.html (Convertir de html a markdown)
 $ pandoc -f markdown -t latex -o texto_latex.tex texto_markdown.md (Convertir texto en markdown a latex)
+$ pandoc -f gfm -o salida.html entrada.txt (Desactiva el soporte de TEX a la hora de leer [no interpreta codigo TeX])
 
 
 paplay
@@ -14799,7 +14800,7 @@ $ patch -R -p0 < parche.patch (Deshace los cambios aplicados por el parche anter
 
 path
 Ruta para acceder a los datos contenidos en una unidad de almacenamiento.
-# echo $PATH | tr : \\n   (mostrará los dirs de los ejecutables)
+# echo $PATH | tr ':' '\\n'   (mostrará los dirs de los ejecutables)
 
 
 pathchk
