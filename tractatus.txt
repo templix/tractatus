@@ -5851,6 +5851,27 @@ $ nano ejemplo.sh
 Descomentar la linea del "echo" y comentar la de "eval" y observar la diferencia entre ambas salidas.
 
 
+evillimiter
+Análisis de la red local.
+Descarga e instalación:
+	$ git clone https://github.com/bitbrute/evillimiter.git
+	$ cd evillimiter
+	# python3 setup.py install
+# evillimiter (entrar en el prompt de la aplicación)
+>>> ? (muestra la ayuda)
+>>> scan (escaner toda la red)
+>>> scan --range 192.168.1.1-192.168.1.50 (escanear un rango de la red)
+>>> scan --range 192.168.1.1/24
+>>> hosts (ver los resultados del scan con la columna ID)
+>>> limit 0,3 300kbit (Limita velocidad de las máquinas con ID 0 i 3 a 300kbits)
+>>> limit all 1gbit (Limita la velocidad de todas las máquinas de la red a 1gbit))
+>>> block 2 (Bloquea la máquina 3)
+>>> free 3 (Libera el bloqueo de la máquina 3)
+>>> free all (Libera todas las máquinas bloqueadas)
+>>> clear (Limpiar la terminal)
+>>> quit (Salir de la aplicación)
+
+
 exec
 Ejecuta comandos.
 $ exec firefox
@@ -11105,7 +11126,7 @@ Copiar los archivos de configuración:
 El archivo de configuración de los parámetros generales (página de inicio, motor de busqueda, …):
 	$ nano .config/luakit/globals.lua
 Pero a partir de la versión del mayo de 2018 solo se precisa el archivo:
-$ nano  .config/luakit/userconf.lua
+	$ nano  .config/luakit/userconf.lua
 con el siguiente contenido como ejemplo:
     -- Settings (the commented ones do not [yet] work)
     local settings = require "settings"
