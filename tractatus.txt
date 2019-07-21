@@ -11501,6 +11501,17 @@ Notas: Cada signo afecta hasta el primer salto de linea. Un bloque HTML ha de es
 	<img class="[clases asignadas]" src="/ruta/a/la/imagen" title="[ancho] [alto] [el title [alt de la imagen]]" > (Colocar una imagen)
 
 
+masscan
+Escaner de puertos. Produce resultados similares a "Nmap". Tiene permanentemente activada las siguientes opciones: "-sS" realiza un escaneo de tipo TCP SYN, "-Pn" trata todos los hosts como si estuviesen en funcionamiento, "-n" no hace una resolución al DNS, "--randomize-hosts" aplica aleatoriedad al orden de los host a escanear, "-v" genera verbosidad y la opción "--send-eth" utiliza para el envío paquetes ethernet en bruto.
+# masscan --regress (autotest integrado)
+# masscan 192.168.1.0/24 -p80,443 (escanea los puertos 80 y 443 en toda la red))
+# masscan 192.168.1.0/24 -p22-150 (escanea el rango de puertos del 22 al 150)
+# masscan 192.168.1.0/16 -p80 --rate 10000 --router-mac 66-55-44-33-22-11 (escaneando un pueto de una red con una MAC falsa del router para no salir a internet y enviardo 10000 pàquetes por segundo)
+# masscan 192.168.1.0/16 ‐‐top-ports 100 > escaner.txt (escanear los 100 puertos más comunes según nmap y guardarlo en el archivo escaner.txt)
+# masscan 192.168.1.5 -p0-65535 --rate 1000000 (escanear todos los puertos de una IP))
+# masscan -p80 --banners 0.0.0.0/24 (obtener los baners de todas las ips de una red con el puerto abierto 80)
+
+
 mate-screensaver-command
 Mismas opciones que gnome-screensaver-command (ver)
 
