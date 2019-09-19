@@ -17963,6 +17963,20 @@ Informa del uso de la memoria física en consideración con la memoria compartid
 # smemstat -g -p tmux,firefox57 (el resultado en gigabytes. -m en megabytes -k en kilobytes)
 
 
+snapd
+Sistema de instalación de paquetes creado por canonical pero que puede usarse en casi todas las distros (Debian, arch, gentoo, fedora, opensuse...). Consiste basicamente en incluir las dependencias junto con el paquete. Es como un sistema de paqueteria universal para todas las distros linux. Los programas se instalan en /snap/bin y pueden convivir junto a los del mnismo nombre en el sistema. Si por ejemplo, lanzamos:
+$ emacs
+Se ejecutará la aplicación del sistema. Sli queremos el instalado con snap, lanzamos la ruta aboluta:
+$ /snap/bin/emacs
+# snap install programa
+# snap find nombre_programa (buscar un programa)
+# snap list (listo los instalados)
+# snap info paquete
+# snap revert paquete (instalar una versón anterior de un paquete)
+# snap remove programa (eliminar un programa)
+# snap refresh (update)
+
+
 snarf
 Descarga páginas web o listado de archivos compartidos por ftp.
 $ snarf lapipaplena.net (Creará un archivo index.html)
