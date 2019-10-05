@@ -12637,13 +12637,14 @@ Tar para máquinas con multiples cores. La sintaxis es igual que la de tar [ver]
 
 mtr
 Aplicación que combina las funcionalidades de traceroute y ping, probando cada uno de los saltos que hay desde que un paquete se envía hasta que llega a su destino.
-$ mtr -f tuxapuntes.com (sin el -f se muestra de forma gráfica)
+# mtr -f tuxapuntes.com (sin el -f se muestra de forma gráfica)
+# mtr --tcp --port 80 --report --report-cycles 10
 Atajos mientras está la aplicación ejecutándose:
-h ayuda
-d modo de visualización
-r reiniciar
-o orden de los campos
-q salir
+	h ayuda
+	d modo de visualización
+	r reiniciar
+	o orden de los campos
+	q salir
 
 
 multitail
