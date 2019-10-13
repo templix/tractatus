@@ -375,6 +375,11 @@ alsamixer
 Mezclador de tarjeta de sonido para el controlador ALSA
 $ alsamixer
 $ alsamixer -V all (ver todas las opciones de salida)
+1.-
+Guardar la configuración del volumen:
+# nano /etc/pulse/default.pa
+Comentar, como se muestra, la linea:
+#load-module module-device-restore
 
 
 alsaucm
