@@ -17910,6 +17910,10 @@ smartctl
 [smartmontools]. Comprobar el estado de los discos duros.
 # smartctl -i /dev/sda (Verificar si un disco duro soporta smart)
 # smartctl -s on /dev/sda (activar el soporte smart)
+# smartctl -a /dev/nvme0n1p1 (comprobar si el disco es HDD o SSD)
+ Nota- Tambien podemos lanzar
+ # cat /sys/block/loop0/queue/rotational
+ Si el resultado es 1 es HDD si es 0 es SSD
 # smartctl -t short /dev/sda (lanzar el test corto)
 # smartctl -t long /dev/sda  (lanzar el test largo)
 # smartctl -l selftest -i /dev/sda (analizar la información de los comandos anteriores)
