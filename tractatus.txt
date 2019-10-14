@@ -17922,14 +17922,14 @@ LifeTime indica las horas que el disco ha estado encendido. LBA_of_First_error i
 # smartctl -l error /dev/sda (Listar los errores)
 # smartctl -A /dev/sda (Listar atributos internos)
 Listado de algunos atributos smart
-Power_Cycle_Count (RAW_Value).- Veces que le ha llegado   corriente.
-Temperature Celsius. (RAW_Value) .- Temperatura del disco
-Reallocated_Sector_Ct (RAW_Value).-  número de sectores de repuesto que ha usado el disco para sustituir sectores dañados
-Raw_Read_Error_Rate (RAW_Value).- Frequencia de errores en la lectura del disco.
-Start_Stop_Count: Cantidad de veces que se ha parado y arrancado el disco
-Seek_Error_Rate: Tasa de errores de colocación de la aguja
-Power_On_Seconds: Tiempo funcionando
-Spin_Retry_Count: Numero de reintentos de arrancada
+	Power_Cycle_Count (RAW_Value).- Veces que le ha llegado   corriente.
+	Temperature Celsius. (RAW_Value) .- Temperatura del disco
+	Reallocated_Sector_Ct (RAW_Value).-  número de sectores de repuesto que ha usado el disco para sustituir sectores dañados
+	Raw_Read_Error_Rate (RAW_Value).- Frequencia de errores en la lectura del disco.
+	Start_Stop_Count: Cantidad de veces que se ha parado y arrancado el disco
+	Seek_Error_Rate: Tasa de errores de colocación de la aguja
+	Power_On_Seconds: Tiempo funcionando
+	Spin_Retry_Count: Numero de reintentos de arrancada
 El campo VALUE [valor] va del número 1 al 253, siendo 1 el peor. Los valores normales son los que estan entre 100 y 200. El campo WHEN_FAILED indica cuando se produjo una falla de algún atributo.
 1.-
 Para activar el demonio que nos avisa si se produce un error en disco:
