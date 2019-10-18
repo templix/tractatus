@@ -9577,7 +9577,7 @@ Si se quiere añadir reglas a las existentes:
 
 
 iptables-persistent
-Al instalar el paquete pregunta por guardar las reglas existentes, las cuales se guardan en /etc/iptables/rules.v4 y /etc/iptables/rules.v6. Si modificamos, añadimos o suprimimos reglas podemos, para volver a guardar las nuevas lanzar:
+Otra forma de guardas reglas de iptables. Al instalar el paquete pregunta por guardar las reglas existentes, las cuales se guardan en /etc/iptables/rules.v4 y /etc/iptables/rules.v6. Si modificamos, añadimos o suprimimos reglas podemos, para volver a guardarlas lanzando:
 # dpkg-reconfigure iptables-persistent
 En realidad este paquete lo que hace es:
 # iptables-save > /etc/iptables/rules.v4
@@ -9585,6 +9585,11 @@ En realidad este paquete lo que hace es:
 Y para restituirlas despues de un reinicio:
 # iptables-restore < /etc/iptables/rules.v4
 # ip6tables-restore < /etc/iptables/rules.v6
+Tambien puede usarse cuando se se pueden gardar y releer el archivo con netfilter-persisten que viene con el mismo paquete iptables-persisten:
+# netfilter-persistent reload
+# netfilter-persistent save
+O borrar las reglas de iptables:
+# netfilter-persistent flush
 
 
 iptotal
@@ -13311,6 +13316,10 @@ netdiscover
 Buscar máquinas [activas o pasivas] conectados  a una red.
 # netdiscover -i eth0
 # netdiscover -r 192.168.1.0/24 -i eth1 (especificando rango de ips)
+
+
+netfilter-persistent
+[iptables-persistent] Ver este paquete.
 
 
 nethogs
