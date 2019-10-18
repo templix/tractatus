@@ -10772,8 +10772,9 @@ $ login -f  usuario (Inicia nueva sesión dentro de la actual)
 logkeys
 Registrar las pulsaciones que se realizan en el teclado. Descarga de <https://github.com/kernc/logkeys>
 $ touch test.log (crear el fichero donde gaurdar las pulsaciones)
-$ logkeys --start --output test.log (arrancar la aplicación)
-$ logkeys --stop (parar y consultar test.log)
+$ logkeys -s -m es.map -o test.log (arrancar la aplicación, con teclado español y guardar en el archivo creado)
+$ logkeys -k (parar y consultar test.log)
+Nota.- Los mapas de teclado para descargar estan en <https://github.com/kernc/logkeys/tree/master/keymaps>
 
 
 logname
