@@ -6545,8 +6545,21 @@ $ echo "make tech easier is cool" | kenny
 
 
 fim
-Visualizador de imagenes con framebuffer
-# fim –vt 01 imagen.png (Si no se visualiza suprimir el “-v 01”)
+Herramienta que utiliza el framebuffer del sistema para mostrar imágenes directamente desde la línea de comandos.
+$ fim imagen.jpg (uso básico)
+$ fim -a *.jpg (abrir todas las imagenes jpg del directorio actual con zoom automático)
+$ fim -R Imagenes/ --sort (Para abrir las imagenes de la carpeta y subcarpetas recursivamente y despues ordenarlas)
+$ fim -t imagen.jpg (randerizar una imagen en formato ASCII)
+Atajos de teclado
+    AvPág/AvPág		Prev/Imagen siguiente.
+    +/-			Acercar/Alejar la imagen.
+    a			Autoescalar
+    w			Ajustar al ancho.
+    h			Ajustar a la altura.
+    j/k			Desplegar/subir.
+    f/m			Voltear/espejo.
+    r/R			Girar (en sentido del reloj y en sentido contrario)
+    q			Salir
 
 
 finch
