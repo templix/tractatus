@@ -13983,6 +13983,12 @@ Activar el bloqueo numerico al inicio:
 $ numlockx on/off  (activarlo/desactivarlo)
 
 
+nvme-cli
+Medir la temperatura del SSD entre otros parámetros.
+# nvme smart-log /dev/nvme0 (uso básico)
+# nvme smart-log /dev/nvme0 | grep 'temperature'
+
+
 nwrite
 Enviar mensajes entre terminales
 $ nwrite usuario /dev/pts/numero_consola
