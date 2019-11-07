@@ -17567,6 +17567,17 @@ $ setxkbmap -layout es
 $ setxkbmap es (configurarlo en español)
 
 
+sexy-bash-prompt
+Prompt para bash que también puede usarse para status y ramas en git. Utiliza tput, un programa para configurar terminales usadas por la shell. Antes de la instalación es preciso hacer copia de seguridad de .bashrc ya que la instalación de este paquete crea una archivo a su medida.
+$ cp ~/.bashrc ~/.bashrc_old
+Instalación y descarga:
+$ git clone https://github.com/twolfson/sexy-bash-prompt
+$ cd sexy-bash-prompt
+# make intall
+$ source ~/.bashrc
+Terminada la relectura de .bashrc, veremos los cambios al abrir una terminal.
+
+
 sfdisk
 Mostrar un listado de las particiones con sus características exactas.
 # sfdisk -d /dev/sda (Muestra la tabla de particiones de sda)
