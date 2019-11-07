@@ -4545,7 +4545,8 @@ Paquete obsoleto sustituido por aptitude.
 
 dstat
 Monitor  de trafico de red
-# dstat
+# dstat (uso básico)
+# dstat -c --top-cpu -dn --top-mem (uso de CPU, proceso que más usa la CPU, estadistica de disco y red y proceso que consume más memoria)
 
 
 dtrx
@@ -19056,6 +19057,11 @@ $ synclient TapButton1=1 TapButton2=2 VertEdgeScroll=1 (Activar el click y el es
 
 sysbench
 Utilidad para medir el rendimiento de un ordenador.
+Descarga e instalación:
+	$ curl -s https://packagecloud.io/install/repositories/akopytov/sysbench/script.deb.sh | sudo bash
+	# apt -y install sysbench
+$ sysbench --test=cpu --cpu-max-prime=20000 run (test para la CPU)
+$ sysbench memory --threads=2 run (testear la memoria)
 $ sysbench --test=cpu --cpu-max-prime=50000 --num-threads=6 run (Con este test medimos la velocidad de la CPU. num-threads indica el número de núcleos a usar)
 
 
