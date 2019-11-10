@@ -19366,6 +19366,23 @@ Modifica o cambia el runlevel [inittab].
 # telinit q (releer archivo de configuración si se ha modificado)
 
 
+telnet
+Protocolo que sirve para emular una terminal remota, con lo que permite ejecutar comandos introducidos con un teclado en un equipo remoto.
+# telnet 123.86.22.190 (conectarse a un equipo remoto)
+# telnet maquina_remota.com (especificando nombre del host)
+# telnet 123.86.22.190 80 (conectarse a un equipo remoto con un puerto especifico)
+Tambien puede usarse para comprobar localmente si un puerto está abierto:
+# telnet 192.168.0.27 3000
+Si la conexión está abierto muestra una salida:
+	Trying 192.168.0.27...
+	Connected to 192.168.0.27...
+Si el puerto está abierto pero no hay ningún demonio atendiendo peticiones:
+	Trying 192.168.0.27..
+	telnet: Unable to connect to remote host: Connection refused
+Si el puerto está protegido por un cortafuegos no obtengamos respuesta:
+	Trying 192.168.0.10...
+
+
 tempfile
 [debianutils]. Crea un archivo temporal de una manera segura.
 $ tempfile
