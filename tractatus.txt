@@ -13405,7 +13405,7 @@ Proto.- protocolo, Recv-Q.- paquetes recibidos, Send-Q.- paquetes enviados, Loca
 # netstat -pan | grep ESTABLISHED
 # netstat -luntp | grep LISTEN | awk '{print $7}'
 # netstat -l | grep tcp
-# netstat -antp | grep 22  (preguntar como está el puerto 22)
+# netstat -antp | grep ssh  (preguntar como está un servicio)
 # netstat | awk '/EST/{print $5}' | sort  (lista de conexiones establecidas)
 # netstat -an | grep -Ec '^tcp.+ESTABLISHED$'  (Muestra conexiones tcp)
 # netstat -tpee    (información sobre las conexiones a internet)
@@ -13420,18 +13420,18 @@ Proto.- protocolo, Recv-Q.- paquetes recibidos, Send-Q.- paquetes enviados, Loca
 (Muestra el número de peticiones al puerto 80 por cada IP)
 # netstat -plutn
 Explicación de los Flags:
-G (La ruta utiliza una pasarela)
-U (La interfaz está activa)
-H (Esta interfaz permite el acceso a una sola máquina)
-D (Esta ruta es creada dinámicamente)
-M (estee registro ha sido modificado por un mensaje de redirección ICMP)
-! (La ruta es una ruta de rechazo y los datagramas serán descartados)
+	G (La ruta utiliza una pasarela)
+	U (La interfaz está activa)
+	H (Esta interfaz permite el acceso a una sola máquina)
+	D (Esta ruta es creada dinámicamente)
+	M (estee registro ha sido modificado por un mensaje de redirección ICMP)
+	! (La ruta es una ruta de rechazo y los datagramas serán descartados)
 Nota.- la dirección externa si no es 0.0.0.0.* significa que alguien le está hablando activamente.
 Otras opciones:
--o (indica el número del proceso asignado a la conexión)
--s (muestra las estadísticas detalladas para cada protocolo)
--t (muestra solo las conexiones activas por TCP)
--u (muestra solo las conexiones activas por UDC)
+	-o (indica el número del proceso asignado a la conexión)
+	-s (muestra las estadísticas detalladas para cada protocolo)
+	-t (muestra solo las conexiones activas por TCP)
+	-u (muestra solo las conexiones activas por UDC)
 
 
 nettlet-hash
