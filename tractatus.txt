@@ -10778,6 +10778,15 @@ $ locate parida.txt
 $ locate firefox/plugins
 
 
+logcheck
+Herramienta que analiza periódicamente todos los logs del sistema. En la instalación ya se instala como una tarea en el cron en el fichero /etc/cron.d/logcheck.
+Para recibir correos con los informes,Editar el fichero:
+# nano /etc/logcheck/logcheck.conf
+y descomentar o completar las líneas:
+	DATE="$(date +'%d-%m-%Y %H:%M')"
+	SENDMAILTO="tu@direccion.com"
+
+
 logger
 Enviar mensajes al demonio syslogd
 $ logger -i -t gnome-terminal -f /var/log/messages inicio terminal (escribirá en el registro el mesaje “inicio terminal” como remitido por “gnome-terminal” y guardando el PID)
