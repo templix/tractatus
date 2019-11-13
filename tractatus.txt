@@ -6124,8 +6124,10 @@ Un ejemplo muestra de configuración para el servicio ssh:
 # awk '($(NF-1) = /Ban/){print $NF,"("$NF")"}' /var/log/fail2ban.log | sort | logresolve | uniq -c | sort  (Mostrando el nombre del host)
 # systemctl status fail2ban (comprobar el estado de fail2ban)
 # fail2ban-client status (comprobar los servicios activos)
+# fail2ban-client -i (entrar en el prompt de fail2ban)
 # fail2ban-client status sshd (comprobar bloqueos de ips por ataques a ssh)
 # fail2ban-client set mysqld-auth unbanip IP (borrar una ip bloqueada del servicio mysql-auth)
+# fail2ban-testcases (realizar un test general))
 1.-
 Bloquear errores w00tw00t.at.ISC.SANS en los logs de apache. En realidad estas peticiones no acaban en ningún ataque concreto. Estan producidos por el escaner de puertos Dfind que al generar sus peticiones coloca "w00tw00t.at.ISC.SANS.DFind".
 Crear el archivo:
