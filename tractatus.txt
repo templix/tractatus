@@ -2594,6 +2594,23 @@ chkrootkit
 # chklastlog  (Lo mismo)
 
 
+chkservice
+Systemd es un daemon del sistema que permite administrar los servicios que corren en la distribución Linux y se trata de un reemplazo de init que se ha convertido en estándar. En realidad chkservice hace lo mismo que systemctl para administrar dichos servicios.
+# chkservice
+La información que muestra en la primera linea indica:
+	[x] (unidad habilitada)
+	[ ] (unidad deshabilitada)
+	[s] (unidad estática)
+	-m- (unidad enmascarada)
+	=   (unidad que se ha detenido)
+	>   (unidad funcionando)
+Claves para interactuar con los servicios:
+	r      (Actualizar o recargar información)
+	Space  (Habilitar o deshabilitar una unidad)
+	s      (Iniciar o detener una unidad)
+	q      (salir)
+
+
 chmod
 Gestión de permisos de los ficheros y directorios.
 $ chmod ugo+rwx -R /home/usuario/directorio  (todos los permisos a todos los usuarios sobre el directorio y subdirectorios)
