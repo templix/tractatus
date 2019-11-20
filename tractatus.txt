@@ -7603,7 +7603,7 @@ $ git diff
 $ git checkout -- archivo
 3.-
 Imprimir todos los repositorios git de un usuario
-$ curl -s https://api.github.com/users/USERNAME/repos?per_page=1000 |grep git_url |awk '{print $2}'| sed 's/"\(.*\)",/\1/'
+	$ curl -s https://api.github.com/users/USERNAME/repos?per_page=1000 |grep git_url |awk '{print $2}'| sed 's/"\(.*\)",/\1/'
 
 
 gksu
