@@ -7584,7 +7584,6 @@ $ git instaweb --httpd=webrick --stop (Cierra la visualización del proyecto con
 $ git config --help (Mostrar ayuda de un comando)
 $ git log --pretty=oneline (Mostrar listado de push a uno por linea)
 $ git commit --amend (editar el último commit para modificarlo)
-$ curl -s https://api.github.com/users/USERNAME/repos?per_page=1000 |grep git_url |awk '{print $2}'| sed 's/"\(.*\)",/\1/' (Imprimir todos los repositorios git de un usuario)
 1.-
 Indicar a git archivos o directorios que quedemos excluir del control de versiones.
 $ touch .gitignore (Crear el fichero en el directorio raiz del proyecto)
@@ -7602,6 +7601,9 @@ Si una vez realizadas modificaciones en un archivo, antes de lanzar el commit, q
 $ git status
 $ git diff
 $ git checkout -- archivo
+3.-
+Imprimir todos los repositorios git de un usuario
+$ curl -s https://api.github.com/users/USERNAME/repos?per_page=1000 |grep git_url |awk '{print $2}'| sed 's/"\(.*\)",/\1/'
 
 
 gksu
