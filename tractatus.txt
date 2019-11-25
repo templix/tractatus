@@ -11462,6 +11462,15 @@ Utilidades relacionadas con el correo
 $ mailutil transfer {imap.gmail.com/ssl/user=usuario@gmail.com} Gmail/ -v (hacer copia de seguridad de los correos de gmail)
 
 
+mailx
+Programa para enviar y recibir correo (versión mejorada de 'mail' en Unix).
+	$ mailx -s "pruebas" usuario@gmail.com
+	Cc otro_correo@gmail.com
+	Cuerpo del texto del correo
+Ctrl D (para envio)
+$ mailx -s "un adjunto" usuario@gmail.com < texto_para_enviar.txt (enviar un adjunto)
+
+
 makeinfo
 Compilar archivos texinfo a distintos formatos.
 $ makeinfo --html archivo.texi (a html)
