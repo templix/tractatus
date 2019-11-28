@@ -1010,17 +1010,33 @@ Escanea en una red las direcciones IP y las MAC.
 
 
 arpalert
-Prevenir conexiones no autorizadas en la red local. Previamente especificar en el archivo de configuración las ips i su correspondiente MAC:
-$ nano  /etc/arpon.sarpi
-	192.168.1.130 00:21:97:23:9e:91
-	192.168.1.25 F4:CE:26:43:E8:C9
-# arpon -i eth0 -x 1 -s (Lanzar con actualización cada segundo)
+Prevenir conexiones no autorizadas en la red local. Colocar las MAC, las ips de las máquinas autorizadas y la interfice:
+# /etc/arpalert/maclist.allow
+	F4:CE:26:43:E8:C9       192.168.1.1    eth0
+	00:21:97:23:9e:91       192.168.1.14   eth0
+	19:F0:8G:66:10:E5       192.168.1.26   eth0
+Reiniciar el servicio:
+# /etc/init.d/arpalert restart
 
 
 arping
 Enviar solicitud ARP a una ip de la red.
 # arping -I eth0 IP
 # arping -D -I eth1 192.168.1.15; echo $? (Detectar ips duplicadas)
+
+
+arpon
+Herramienta para securizar ARP en nuestra red, un demonio que ha de instalarse en cada equipo que interviene en la conexión. Previamente especificar en el archivo de configuración las ips y su correspondiente MAC:
+# nano  /etc/arpon.conf
+	192.168.1.1 32:F4:66:C8:41:12
+	192.168.1.130 00:21:97:23:9e:91
+	192.168.1.25 F4:CE:26:43:E8:C9
+Colocando la ip de las máquinas y su MAC y la ip y MAC del router. La interface  la colocamos en:
+# nano /etc/dafault/arpon
+Y añadir:
+	INTERFACES="enp1s0"
+O la que proceda (eth0, eth1...)
+# tail -f /var/log/arpon/arpon.log (ver la actividad de la herramienta)
 
 
 arptables
@@ -1035,7 +1051,7 @@ Ayuda a monitorear la actividad del tráfico en la red en lo que respecta al cam
 # arpwatch -i eth0 (mostrar una interfaz concreta)
 Nota.- Analizar los logs con el clásico: tail -f /var/log/messages
 1-
-Si queremos que nos mando un correo:
+Si queremos que nos mandoe un correo:
 # nano /etc/arpwatch.conf
 Y añadir la linea:
 	eth0 -a -n 192.168.1.0/24 -m usuario@url.com
