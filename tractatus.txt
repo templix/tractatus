@@ -605,7 +605,7 @@ Y añadir las siguientes lineas:
 
 apachetop
 Comando top [ver] especifico para servidores apache y lanzado al estilo de tail [ver]
-# apachetop -f /var/log/apache2/access.log (Monitorear en tiempo real)
+# apachetop -r 10 -f /var/log/apache2/access.log (Monitorear en tiempo real y refrescar datos cada 10 segundos)
 
 
 apariencia
@@ -10130,6 +10130,11 @@ $ uname -r
 4.-
 Borrar kernels antiguos de forma automática:
 	# apt-get purge $(dpkg -l 'linux-*' | sed '/^ii/!d;/'"$(uname -r | sed "s/\(.*\)-\([^0-9]\+\)/\1/")"'/d;s/^[^ ]* [^ ]* \([^ ]*\).*/\1/;/[0-9]/!d' | head -n -1) --assume-yes
+
+
+kerneltop
+muestra el uso del kernel en estilo interactivo como top [ver]
+# kerneltop -l 45 -s 5 (Que muestre 45 lineas [por defecto 50] y actualización cada 5 segundos [por defecto 1])
 
 
 kickthemout
