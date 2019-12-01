@@ -1216,6 +1216,16 @@ $ python automater.py 44A6A7D4A039F7CC2DB6E85601F6D8C1 (De un hash)
 $ python automater.py ips.txt -o informe.txt -w informe.html -c informe.csv (Enviando el resultado a un archivo de texto y a una en html y a uno csv)
 
 
+automysqlbackup
+Realizar copias de seguridad de MySQL. El archivo de configuración se encuentra en /etc/default/automysqlbackup. Las copias de seguridad se guardan en /var/lib/automysqlbackup/
+# automysqlbackup
+
+
+autopostgresqlbackup
+Script de shell (generalmente que se ejecuta desde cron) totalmente automatizada para realizar copias de seguridad periódicas de las Bases de datos PostgreSQL. Las copias de seguridad se guardan en carpetas diarias/semanales/mensuales en /var/lib/autopostgresqlbackup. Para configurar parámetros como host, bases de datos restringidas para copia de seguridad, tipo de compresión, etc, ha de especificarse en el archivo /etc/default/autopostgresqlbackup.
+# autopostgresqlbackup
+
+
 autossh
 Similar a ssh pero reanudando la conexión en caso de corte o suspensión del trafico. Para que se realice esta reconexión, ha de tenerse la clave publica entrada en la máquina remota [ver ssh [4]]. Las opciones son las mismas que ssh.
 
