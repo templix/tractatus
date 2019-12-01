@@ -9049,13 +9049,32 @@ Otras opciones:
 ifdown
 Deshabilita la interfase especificada:
 # ifdown eth0
-# ifdown -a (Deshabilita todas las redes)
+# ifdown -a (Deshabilita todas las redes
+
+
+ifmetric
+Permite Cambiar la prioridad de enrutamiento.
+# ifmetric wlan0 1 (Dar a todas las demás interfaces una prioridad más alta que wlan0)
+# ifmetric wlan0 0 (restablecer las prioridades)
 
 
 ifne
 [moreutils]. Se ejecuta si la entrada estandar no está vacia.
 $ find . -name archivo | ifne echo "Existe" (Si "archivo" existe se ejecutará el echo. Si no existe, no)
 $ find . -name archivo | ifne -n echo "No existe" (Si "archivo" no existe se ejecutará el echo. Si existe, no)
+
+
+ifplugd
+Indica las interfaces de red conectadas.
+# ifplugstatus (de todas)
+# ifplugstatus eth0 (de la especificada)
+
+
+ifquery
+Lista rápida de interfaces de red.
+$ ifquery -l (Muestra las especificadas en /etc/network/interfaces y el orden en que se levantarán)
+$ ifquery --state (Muestra el orden en que se levantaron según /run/network/ifstate)
+$ ifquery enp1s0 (muestra información de la interface especificada)
 
 
 ifs
@@ -9106,6 +9125,7 @@ Muestra el ancho de banda que está usando una red.
 ifup
 Habilita la interfase especificada:
 $ ifup eth0
+$ ifup -a (levanta las especificadas en /etc/network/interfaces)
 
 
 imageindex
