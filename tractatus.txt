@@ -14041,6 +14041,13 @@ ntop
 Visualizar los informes en el navegador <http://localhost:3000>
 
 
+ntopng
+Muestra el uso de la red.
+# ntopng -i eth0
+# ntopng -d  (especifica el directorio de datos. Por defecto /var/lib/ntopng)
+# ntopng -i tcp://192.168.1.1:5556 (especificando protocolo, host y puerto)
+
+
 ntpdate
 Actualiza la hora del sistema via NTP (Network Time Protocol)
 # ntpdate -u cl.pool.ntp.org
