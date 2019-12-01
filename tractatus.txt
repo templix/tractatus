@@ -10928,6 +10928,11 @@ Software para visualizar ficheros de log que registra las peticiones de los visi
 # logstalgia /var/log/apache2/access.log
 
 
+logtop
+Herramienta para analizar el archivo de registro de logs como entrada.
+# tail -f /var/log/apache2/access.log | logtop
+
+
 logwatch
 Analiza los archivos de logs del sistema. El sistema está pensado para que toda la configuración sea especificada en /etc/logwatch y estas directivas sobreescriban a las que están en /usr/share/logwatch. Copiamos la configuación básica:
 # cp /usr/share/logwatch/default.conf/logwatch.conf /etc/logwatch/conf
