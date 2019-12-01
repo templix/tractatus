@@ -15277,6 +15277,11 @@ $ pgrep -l -G group (del grupo especificado)
 $ pgrep -l -u user (del usuario especificado)
 
 
+pgtop
+Monitorear la base de datos de postgres.
+# pgtop -h localhost -s 10 -p 6543 -d BASE_DE_DATOS -u USER -p PASS (del host localhost, actualización cada 10 segundos [por defecto 5], puerto 6543 [por defecto 3306] de la base de datos especificada, usuario USER y la contraseña)
+
+
 phockup
 Organizar carpetas de fotos por año, mes y dia. Descarga: <https://github.com/ivandokov/phockup>
 $ phockup -d YYYY/M  carpeta_fotos carpeta_ordenada (por año y mes por nombre en inglés)
