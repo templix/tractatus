@@ -1245,6 +1245,15 @@ Convierte los datos de imagen de mapa de bits en gráficos vectoriales
 $ autotrace imagen.png --output-file imagen.svg
 
 
+autotrash
+Automatizar el limpiado o vaciado de la papelera de reciclaje.
+$ autotrash -d 20 (limpiado de los archivos que tengan 20 dias)
+$ autotrash -td 20 (lo mismo pero de todos los usuarios del sistema)
+$ autotrash --max-free 1024 -d 20 (eliminar los que tengan más de 20 días de antigüedad si queda menos de 1 GB de espacio)
+$ autotrash --min-free 1024 (purgar archivos, desde el el más antiguo, hasta que quede 1 GB de espacio nen la papelera)
+$ autotrash --max-free 2048 --min-free 1024 -d 20 (eliminar en función del espacio máximo y mínimo que queda en la papelera)
+
+
 avconv
 [avconvert]. Información sobre archivos multimedia y conversión de formatos.
 $ avconv -i video.avi video.mpeg  (Pasar de avi a mpeg)
