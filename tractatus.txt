@@ -3844,6 +3844,13 @@ $ debcheckout nano
 	ChangeLog.2007-2015  configure.ac  INSTALL       mkinstalldirs  src
 
 
+debdate
+Convertir fechas gregorianas en fechas respecto de las versiones de Debian.
+	$ debdate -d 2020-05-20
+	Today is day 141 of year 2 of the Buster
+$ debdate
+
+
 debfoster
 Mantiene una lista de paquetes instalados que fueron explícitamente solicitados en lugar de ser instalados como una dependencia. Los argumentos son totalmente opcionales y debfoster puede ser invocado después de lanzar dpkg y/o apt-get.
 # debfoster
@@ -4229,6 +4236,13 @@ display
 $ display imagen.jpg
 $ DISPLAY=:0.0 gedit  (lanzado desde una tty, abre gedit en las X. Si solo tenemos una sesión X corriendo, puede suprimirse el “.0”)
 $ gxmessage “Cierra el firefox” -display :0 (Lanzado desde una tty mostrará el mensaje en las X)
+
+
+distro-info
+Información sobre las versiones de Debian.
+$ distro-info --all (muestra todas las que se han publicado)
+$ distro-info --stable (la stable actual)
+$ distro-info --testing (la testing atual)
 
 
 ditaa
@@ -14748,6 +14762,10 @@ $ p11tool --list-all-privkeys (las claves privadas disponibles en un código)
 
 pacdiffviewer
 En Arch, busca archivos de configuración nuevos y obsoletos [pacnew, pacsave] para gestionarlos [eliminarlos, reemplazarlos..]
+
+
+package-update-indicator
+Utilidad que comprueba periódicamente las actualizaciones de software y notifica al usuario sobre las actualizaciones disponibles mediante notificaciones de escritorio y/o un icono de notificación de estado o un icono en la bandeja del sistema.
 
 
 packer
