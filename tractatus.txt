@@ -3648,10 +3648,11 @@ $ TZ="Europe/Berlin" date (Muestra la de Berlin)
 
 
 datefudge
-Pretende que el tiempo del sistema sea diferente.
-$ datefudge "2017-10-23 11:20" date -R
-$ datefudge "23 Oct 2017" date -R
-$ datefudge "2017-10-23 09:33" sh -c "sleep 3; date -R"
+Pretende que el tiempo del sistema sea diferente. No lo altera.
+$ datefudge "2115-10-23 11:20" date -R
+$ datefudge "2127-03-05 12:30" date +%s
+$ datefudge "23 Oct 2210" date -R
+$ datefudge "2136-10-23 09:33" sh -c "sleep 3; date -R"
 
 
 dav
