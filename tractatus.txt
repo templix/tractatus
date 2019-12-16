@@ -20949,6 +20949,15 @@ Para solucionar estos errores que no afectan al funcionamiento del sistema:
 # update-mime-database /usr/share/mime
 
 
+update-passwd
+Actualiza /etc/passwd, /etc/shadow y /etc/group de forma segura.
+# update-passwd -s (Realiza comprobaciones pero no hace nada)
+Algunas opciones:
+        -P fichero (Si no es el predeterminado /etc/passwd)
+        -S fichero (Si no es el predeterminado /etc/shadow)
+        -G fichero (Si no es el predeterminado /etc/group)
+
+
 update-pciids
 Si al ejecutar lspci nos muestra un mensaje "unknown device" es preciso actualizar la lista del archivo pci.ids [/usr/share/misc]. Descarga la lista de la última versión del archivo pci.ids del sitio de la distribución principal y lo instala. Esta utilidad requiere curl, wget o lynx para ser instalado.
 # update-pciids
