@@ -10202,6 +10202,16 @@ muestra el uso del kernel en estilo interactivo como top [ver]
 # kerneltop -l 45 -s 5 (Que muestre 45 lineas [por defecto 50] y actualización cada 5 segundos [por defecto 1])
 
 
+kickpass
+Forma simple de crear contraseñas seguras
+# kickpass init (inicia un nuevo directorio seguro de contraseña. Predeterminado a ~/.kickpass)
+# kickpass create -pgl palabra (Crea una nueva contraseña segura)
+# kickpass open pass (Abrir una contraseña segura e imprimir su contenido en stdout)
+# kickpass list (lista contraseñas disponibles)
+# kickpass delete pass (Eliminar contraseña)
+# kickpass rename antiga nueva (Cambiar el nombre de una contraseña)
+
+
 kickthemout
 [nmap]. Herramienta que usa el envenenamiento ARP o ARP Spoofing que mata la conectividad a Internet del o los dispositivos conectados a una red de área local, siempre que la configuración de seguridad de la red no impida dichos ataques.
 Descarga y requerimientos:
@@ -20916,12 +20926,22 @@ descarga la última versión de la base de datos MaxMind GeoIP Lite del sitio we
 $ update-geoip-database
 
 
+update-grub
+Actualiza el menú de arranque grub2
+# update-grub2
+
+
 update-initramfs
 Initramfs es un archivo cpio comprimido. En el momento del arranque, el kernel desempaqueta ese archivo en el disco RAM, lo monta y lo usa como raíz inicial del sistema de archivos.
 # update-initramfs -u (actualizar un initramfs existente)
 # update-initramfs -c (crea un initramfs nuevo)
 # update-initramfs -d (elimina uno)
 # update-initramfs -c -k 4.9.0-4-amd64 (crea uno nuevo con los datos especificados [k])
+
+
+update-locale
+[base-pass]. Actualizar el archivo por defecto del idioma /etc/default/locale que puede hacerse manualmente o con:
+$ update-locale LANG=ca_ES.UTF-8
 
 
 update-manager
