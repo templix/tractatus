@@ -1559,6 +1559,10 @@ $ base64 -d codificado.txt (descodificar)
 $ echo "la_contraseña_secreta" | base64 > archivo.txt (Codificar palabra o frase)
 
 
+base-files
+Este paquete contiene la jerarquía básica del sistema de archivos de un sistema Debian y varios archivos importantes, como /etc/debian_version, /etc/host.conf, /etc/issue, /etc/motd, /etc/profile, y otros, y el texto de varias licencias comunes en uso en sistemas Debian.
+
+
 basename
 Mostrar el archivo “pelado” suprimiendo su ruta y sufijos.
 $ basename /etc/rc.d/cupsd (devolverá “cupsd”)
@@ -6614,6 +6618,12 @@ $ file --mime-encoding archivo.txt (Mostrar codificación)
 filefrag
 Visualizar la fragmentación de un fichero [ext2,3 y 4].
 # filefrag -v fichero (Con resultado “1 extent found” no está fragmentado, en caso contrario, si)
+
+
+fileschanged
+Utilidad que informa cuando los archivos han sido alterados. Cuando descubre que un archivo ha sido alterado, muestra el nombre del archivo en la salida estándar.
+$ fileschanged -r ~/ (controla el directorio home del usuario de forma recursiva)
+$ fileschanged /var/log/messages
 
 
 filters
@@ -22937,6 +22947,10 @@ Pegar el contenido:
 	XTerm*HiForeColor: white
 	XTerm*HiBackColor: #c06077
 $ xrdb -merge .Xresources (Aplicar los cambios, en caso contrario no se aplicaran hasta el siguiente reinicio)
+
+
+xtermcontrol
+Utilidad para comprobar y modificar dinámicamente las propiedades de xterm, facilitando la consulta y el cambio de colores, título, fuente y geometría de un xterm en ejecución. También se admiten manipulaciones de ventanas como subir/bajar, maximizar/restaurar y reajustar. El archivo de configuración en ~/.xtermcontrol
 
 
 xtrlock
