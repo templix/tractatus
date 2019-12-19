@@ -3400,6 +3400,15 @@ $ crunch 3 5 ABC$%& -o caracteres.txt (mínimo de 3 y máximo de 5 usando los ep
 $ crunch 4 5 -p mormo dama .com (usando permitaciónes de palabras especificadas.)
 
 
+cryptmount
+Utilidad para crear sistemas de archivos cifrados y que permite a un usuario común montar/desmontar sistemas de archivos sin requerir privilegios de superusuario.
+# cryptmount-setup (configurar Cryptmount y crear un sistema de archivos encriptado )
+$ cryptmount dir-secreto (acceder al dir cifrado. Pedirá contraseña)
+$ cryptmount -u dir-seccreto (desmontar el dir cifrado)
+$ cryptmount -l (listar todos los directorios cifrados)
+$ cryptmount -c dir-secreto (cambiar la contraseña del dior cifrado)
+
+
 cryptsetup
 Cifrar con LUKS una partición. LUKS especifica un formato estándar en disco, independiente de plataforma.
 # cryptsetup -y -v luksFormat /dev/sda3 (Pregunta la contraseña y confirmación para cifrar la partición. Borra todos los datos existentes [y] y modo verbose)
@@ -11857,6 +11866,11 @@ Gestión de raids.
 mdf2iso
 Convertir imágenes MDF a ISO
 $ mdf2iso archivo.mdf archivo.iso
+
+
+mdk3
+Herramienta de ataque para redes IEEE 802.11
+# mdk3 wlan0 a (Utilizar la interfaz wireless [wlan0] para ejecutar un test DoS [a])
 
 
 mdm
