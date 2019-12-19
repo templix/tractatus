@@ -10969,6 +10969,11 @@ Cerrar sesión de usuario. En las ttys, las cerrará para volver a entrar el log
 $ logout
 
 
+logresolve
+Resolver direcciones IP a nombres de host en archivos de registro de Apache. Para minimizar el impacto del servidor de nombres, logresolve tiene su propia caché interna de tablas de control. Esto significa que cada número IP sólo se buscará la primera vez que se encuentre en el archivo de registro.
+# logresolve < /var/log/apache2/access.log > logresoslve.txt
+
+
 logrotate
 Rotación, compresión y correos del sistema de logs.
 # logrotate -d /etc/logrotate.conf (Verificación del correcto funcionamiento)
@@ -18959,6 +18964,10 @@ strings
 Analizar la memoria o una particion
 $ strings /dev/mem
 $ strings /dev/sda5
+
+
+stterm
+En realidad el paquete se llama st pero en Debian se llama stterm por razones históricas. Es un emulador de terminal con un enfoque en la simplicidad, claridad y frugalidad. La filosofía del proyecto es mantener las cosas simples, mínimas y utilizables. st admite mannejo del portapapeles, atajos de mouse y teclado, UTF-8, ancho de caracteres, redimensionar, 256 colores.
 
 
 stty
