@@ -3575,7 +3575,7 @@ $ cut -d: -f1 archivo  (Muestra el primer campo delimitado por “:”)
 $ cut -d” “ -f1,5 archivo  (Mostrar el primero y el quinto, separados por espacio)
 $ cut -d” “ -f 2- archivo (Mostrar todo menos la primera columna)
 $ cut -s -d"(" -f1 archivo (“-s” suprime las lineas que no contengan el delimitador [(]). De las que sí lo contengan, mostraría el 1er campo)
-	$ echo $RANDOM | cut -c1,2 (Coger los 2 primeros números de un número aleatorio [$RANDOM])
+$ echo $RANDOM | cut -c1,2 (Coger los 2 primeros números de un número aleatorio [$RANDOM])
 
 
 cutter
@@ -4081,6 +4081,7 @@ Cliente DHCP
 dhcpcd
 Configuración automática de la red dhcp
 $ dhcpcd eth0
+
 
 dhcping
 Enviar una solicitud DHCP a un servidor DHCP para ver si está activo.
