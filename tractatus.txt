@@ -709,6 +709,16 @@ $ apt search paquete (Buscar un paquete)
 # apt show nano (ver detalles de un paquete)
 
 
+apt-cache
+Empleado para buscar en la base de datos provista por la lista de fuentes [dpkg solo busca los contenidos de los paquetes instalados].
+# apt-cache search paquete       (Busca en la cache paquete)
+# apt-cache show paquete         (Muestra la descripción completa del paquete)
+# apt-cache showpkg paquete   (Muestra su relación con otros paquetes)
+# apt-cache depends paquete    (Muestra las dependencias del paquete)
+# apt-cache rdepend paquete     (Muestra dependencias inversas del paquete)
+# apt-cache policy paquete       (Ver vesiones de paquetes y la versión instalada)
+
+
 apt-clone
 Este paquete clona/restaura los paquetes instalados en un sistema por apt con el sources-list y las claves de los repositorios.
 # apt-clone clone paquetes (los guarda en el archivo paquetes)
@@ -849,16 +859,6 @@ Configurar apt para que no descargue traducciones:
 # nano /etc/apt/apt.conf.d/99Translations
 Con el siguiente contenido:
 	Acquire::Languages "none";
-
-
-apt-cache
-Empleado para buscar en la base de datos provista por la lista de fuentes [dpkg solo busca los contenidos de los paquetes instalados].
-# apt-cache search paquete       (Busca en la cache paquete)
-# apt-cache show paquete         (Muestra la descripción completa del paquete)
-# apt-cache showpkg paquete   (Muestra su relación con otros paquetes)
-# apt-cache depends paquete    (Muestra las dependencias del paquete)
-# apt-cache rdepend paquete     (Muestra dependencias inversas del paquete)
-# apt-cache policy paquete       (Ver vesiones de paquetes y la versión instalada)
 
 
 apt-key
