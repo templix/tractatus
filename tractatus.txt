@@ -4184,8 +4184,7 @@ $ diff -q fichero1 fichero2   (Informa si los ficheros difieren sin mostrar deta
 $ diff -y fichero1 fichero2   (Muestra la salida a dos columnas)
 $ diff –urp dir1 dir2 (Compara recursivamente el contenido de 2 directorios.)
 $ diff -ru carpeta_original carpeta_modificada > parche.patch (Compara de forma recursiva dos directorios y genera un parche en un fichero .patch con formato unificado de diff)
-	$ diff -u <(grep -vE '^(#|$)' file1) <(grep -vE '^(#|$)' file2)
-        (Los compara ignorando comentarios y lineas en blanco)
+$ diff -u <(grep -vE '^(#|$)' file1) <(grep -vE '^(#|$)' file2)  (Los compara ignorando comentarios y lineas en blanco)
 
 
 diffpdf
@@ -4211,7 +4210,7 @@ $ ding in 1h 15m (que avise en una hora y cuarto)
 $ ding at 14:45:30 (A una hora, minuto y segundo concreto)
 
 
-DirectoryLister
+directorylister
 Un simple script en PHP creado para compartir el contenido de un directorio y sus subdirectorios via web. Descarga: <http://www.directorylister.com/> Colocar la carpeta en el directorio web.
 $ cd DirectoryLister
 $ mv README.md COMPYING resources
