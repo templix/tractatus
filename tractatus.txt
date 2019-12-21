@@ -1601,14 +1601,14 @@ $ evince /usr/share/doc/bash/bash.pdf
 $ ls /usr/share/doc/bash/examples
 
 
-bashburn
-Grabador de CDs en bash. Una vez lanzada la aplicación y creado el archivo de configuración, sale un bonito menú de opciones del que se desplegaran nuevos submenús según la selección.
-$ bashburn
-
-
 bashbug
 Guión del shell para ayudar al usuario a componer y enviar informes de fallos concernientes a bash en un formato normalizado. bashbug llama al editor por defecto o, si no está definido a emacs. El usuario debe rellenar los campos apropiados y salir del editor. Entonces, bashbug envía el informe a bug-bash@prep.ai.mit.edu. Si el informe no puede ser enviado, se guarda en el fichero dead.bashbug en el directorio del usuario. La plantilla del informe consiste en varias secciones. La primera proporciona información sobre la máquina, el sistema operativo, la versión de bash y el entorno de compilación. La segunda sección debería rellenarse con una descripción del fallo. La tercera sección debería ser una descripción de cómo reproducir el fallo y la cuarta sección, opcional, es para una correción que se proponga.
 $ bashbug
+
+
+bashburn
+Grabador de CDs en bash. Una vez lanzada la aplicación y creado el archivo de configuración, sale un bonito menú de opciones del que se desplegaran nuevos submenús según la selección.
+$ bashburn
 
 
 bashdb
@@ -1983,7 +1983,7 @@ Descomprime ficheros bz2.
 $ bunzip2 archivo.bz2
 
 
-burnP6
+burnp6
 [cpuburn]. Colocar la cpu al 100%. Si existen varios nucleos lanzar una instancia para cada uno. Existen varias opciones según el tipo de nucleo: burnBX, burnK6, burnK7, burnMMX, burnP5 y burnP6.
 $ burnP6
 
@@ -2441,13 +2441,8 @@ $ cdeject -d /dev/sr0 (especificando el dispositivo [cdrom0....])
 
 
 cdinfo
-[cdtool]. Muestra Información del cd si se encuentra disponible.
+[cdtool libcdio-utils]. Muestra Información del cd si se encuentra disponible. En algunas distros cd-info
 $ cdinfo -d /dev/sr0
-
-
-cd-info
-[libcdio-utils]. Muestra información del CD (número de pistas, formato ...)
-$ cd-info
 
 
 cdir
