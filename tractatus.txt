@@ -4891,7 +4891,7 @@ Cuando la aplicación e2fsprogs falla, e2undo restablece el sistema de ficheros 
 e3
 Editor que según como se lance usa la monenclatura de teclas de emacs, vi, pico ...
 $ e3em archivo.txt (Usará las teclas de emacs)
-$ s3vi archivo.txt (Usará las teclas de vi)
+$ e3vi archivo.txt (Usará las teclas de vi)
 
 
 e4defrag
@@ -5714,7 +5714,7 @@ Otros ajustes que pueden incorporarse a .emacs precedidas con la explicación co
 	(desktop-save-mode 1)
 	;; Colocar el tipo de sistema
 	(defun insert-system-type()
-v	(interactive)
+	(interactive)
 	(insert (format "%s" system-type)))
 	;; Colocar el nombre del sistema
 	(defun insert-system-name()
@@ -6074,9 +6074,9 @@ $ export TMOUT=60 (Establece 60 segundos de inactividad antes de cerrar una sesi
 $ export HISTCONTROL=”ignoreboth:erasedups” (no escribir en el history ni los comandos que empiecen por espacio, ni los duplicados y que además los elimine, dejando siempre el último)
 Opciones para HISTCONTROL:
 ignorespace: No guarda en history los comandos que empiecen por espacio.
-ignoredups: No guarda los comandos repetidos.
-ignoreboth: Alias para los dos parámetros anteriores.
-erasedups: Elimina los comandos duplicados dejando el último ejecutado.
+	ignoredups: No guarda los comandos repetidos.
+	ignoreboth: Alias para los dos parámetros anteriores.
+	erasedups: Elimina los comandos duplicados dejando el último ejecutado.
 $ export HISTFILE=/home/usuario/histfile.txt (redirigir los comandos ejecutados durante una sesión a un archivo)
 $ export HISTFILE=/dev/null (Para no guardar el history de la sesión)
 $ export HISTFILE=/dev/null bash (abrir otra sesión que no almacene los comandos sin perder los de la actual)
@@ -6191,7 +6191,6 @@ $ cat lista
 	@yahoo.es
 	ant.rodri-perez@hotmail.nadadenada
 	pedro@blog.empresa.travel
----
 	$ grep -E '^[a-zA-Z._-]+@[a-zA-Z0-9.]+\.[a-z]+$' lista
 		^[a-zA-Z._-]+ (Que empiece con una palabra que pueda contener mayúsculas, minúsculas, puntos, guiones o guiones bajos)
 		@ (Seguida de una @ literal)
@@ -8402,7 +8401,7 @@ Colocar al final de la parte comentada (#):
 set superusers="NOMBRE_USUARIO"
 password_pbkdf2 NOMBRE_USUARIO grub.pbkdf2.sha512.10000.F2FE383.....
 Especificando el nombre del usuario y copipasteando la clave codificada que nos ha dado el comando anterior. Finalmente en la entrada [menuentry] que se quiere proteger inmediatamente después de las comillas ['....'] indicando el nombre del sistema operatico:
---users NOMBRE_USUARIO
+	--users NOMBRE_USUARIO
 El resultado sería:
 menuentry 'Ubuntu, amb Linux 3.2.0-24-generic (mode de restabliment)' --users NOMBRE_USUARIO --class ubuntu --class gnu-linux ....
 
