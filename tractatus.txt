@@ -20639,8 +20639,7 @@ $ ubuntu-support-status --show-all (Muestra una lista detallada de todos los paq
 udiskie
 Herramienta  para montar automaticamente unidades en Archlinux. Debe arrancarse el servicio antes de ejecutarse el gestor de ventanas en el archivo .xinitrc. Un ejemplo:
 # nano .xinitrc
-udiskie &
-exec openbox-session
+udiskie & exec openbox-session
 
 
 udisks
@@ -21193,8 +21192,8 @@ Borrar usuarios
 # userdel -f usuario (Borra al usuario y su directorio personal incluso aunque esté logeado en el sistema)
 
 
-user-dirs.dirs (archivo $HOME/.config/user-dirs.dirs)
-Archivo donde se especifican los directorios que saldran por defecto en el $HOME:
+user-dirs.dirs
+[archivo $HOME/.config/user-dirs.dirs] Archivo donde se especifican los directorios que saldran por defecto en el $HOME:
 XDG_DESKTOP_DIR=”$HOME/Escritorio”
 XDG_DOWNLOAD_DIR=”$HOME/Descargas”
 XDG_TEMPLATES_DIR=”$HOME/Plantillas”
@@ -21345,7 +21344,7 @@ Si al llamar a una variable, esta va seguida de un carácter que sea otra letra,
 	echo "${ARCHIVO}_2011.txt"
 	registro_2011.txt
 Cuando bash encuentra en una palabra el signo "$" todo lo que va a continuación se considera el nombre de una variable y todos los caracteres desde el "$" hasta el final de la palabra son sustituidos por dicha variable:
-	COSA="mastro"
+	COSA="camastro"
 	echo "ca$COSA"
 	camastro
 Otra forma de entrar variables es mostrando un promt:
@@ -22188,13 +22187,8 @@ $ which firefox
 
 
 which-pkg-broke
-Encontrar qué paquete podría haber roto otro.
+Encontrar qué paquete podría haber roto otro. En algunas distros  puede aparecer como which-pkg-broke-build
 $ which-pkg-broke firefox
-
-
-which-pkg-broke-build
-Encontrar qué paquete podría haber roto la compilación de otro paquete.
-$ which-pkg-broke-build emacs
 
 
 while
