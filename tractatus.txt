@@ -153,8 +153,14 @@ $ ls /usr/share/doc/abs-guide/examples/
 
 ac
 [acct]. Reporta los tiempos de conexión...
-$ ac -d    (... del presente mes)
-$ ac -p    (... totales de cada usuario)
+$ ac -d    (del presente mes)
+$ ac -p    (totales de cada usuario)
+
+
+acct
+Aplicacion que se ejecuta en segundo plano y realiza un seguimiento de la actividad de cada usuario en el sistema, así como de los recursos que se están consumiendo. Normalmente se levanta el servicio durante la instalación pero si no se ha levantado:
+# /etc/init.d/acct start
+Luego podran lanzarse aplicaciones que vienen en el mismo paquete tales como ac, lastcomm [ver] y otras.
 
 
 aconnect
@@ -15520,7 +15526,6 @@ Algunas teclas para moverse por el fichero:
 
 pidof
 muestra el Pid del programa si está activo.
-$ pidof firefox
 
 
 pidstat
