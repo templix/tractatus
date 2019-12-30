@@ -20306,6 +20306,16 @@ $ trimage -f *.png (varios)
 $ trimage -d imagenes (un directorio)
 
 
+tripwire
+Herramienta para la detección de intrusos (IDS). Tripwire es una herramienta de comprobación de la integridad del sistema que permite detectar alteraciones en los archivos.
+# tripwire --init (iniciar el servicio)
+# tripwire --check (chequear el sistema)
+# tripwire --check /usr (chequear un directorio especifico)
+# tripwire --update (actualizar la base de datos)
+# tripwire --test --email user@correo.com (realizar un test y enviarlo por correo al user)
+# twprint --print-report --twrfile /var/lib/tripwire/report/Debian-20191230-190624.twr > report.txt (escribir un reporte de informe)
+
+
 true
 No realiza absolutamente nada de los comandos que le siguen.
 $ true rm * (no elimina nada)
