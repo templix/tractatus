@@ -18117,6 +18117,11 @@ showfigfonts
 Muestra las fuentes disponibles para el comando figlet.
 
 
+showfsck
+Mostrar el número de reinicios que faltan hasta forzar un chequeo fsck.
+# showfsck
+
+
 showkey
 Muestra el código de la tecla pulsada.
 $ showkey -a (arranca el prompt y mostrarà el código ascii de cada tecla que se pulse hasta finalizar con ctrl+d)
@@ -20568,7 +20573,6 @@ tune2fs
 # tune2fs -l /dev/hda3 | grep ‘Last checked’ (ver fecha del último escaneo)
 # tune2fs -l /dev/hda3 | grep -i check (veces que se fuerza el chequeo)
 # tune2fs -i 0 /dev/hda3 (desactivar chequeo)
-# showfsck (saber cuantas reiniciadas faltan hasta el proximo chequeo)
 # tune2fs -l /dev/hda3 | grep -i ‘mount count’ (lo mismo que el anterior)
 # tune2fs -m 1 /dev/sda1 (modificar el espacio reservado para root al 1%. Por defecto es del 5%. Ver dumpe2fs)
 # tune2fs -O ^has_journal /dev/sda1 (Desactivar journaling en una partición)
