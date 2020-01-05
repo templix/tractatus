@@ -6459,6 +6459,11 @@ $ fc-list > lista_fuentes.txt   (redirigir la lista de fuentes a un fichero)
 $ fc-list | wc -l  (muestra el número de fuentes disponibles)
 
 
+fcgistarter
+Iniciar un programa FastCGI. FastCGI es un protocolo para interconectar programas interactivos con un servidor web. El principal objetivo de FastCGI es reducir la carga asociada con el hecho de interconectar el servidor web y los programas Common Gateway Interface, permitiéndole a un servidor atender más peticiones a la vez.
+# fcgistarter -c command.cgi -p port -i eth0 -N num
+
+
 fcrackzip
 Craquear zips protegidos
 $ fcrackzip -c aA1 -l 5 archivo_protegido.zip
