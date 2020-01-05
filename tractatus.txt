@@ -12541,6 +12541,13 @@ $ montage -geometry +1+1 -tile 2x2 *.png salida.png
 $ montage *.png -tile 2x5 -geometry 227x147+1+1 salida.png (Colocará todos los png de la carpeta y los colocará en páginas de 10 con la geometria indicada y con una separación de 1 pixel entre ellos
 
 
+modprobe
+Utilidad que se usa para agregar y quitar módulos del kernel. Los módulos del kernel de Linux tienen .ko como extensión del nombre del módulo.
+# modprobe -n (lista los modulos cargados)
+# modprobe -r nombre_modulo (excluir cargar nombre_modulo)
+# modprobe -q nombre_modulo (excluir información de error respecto de un nombre_modulo)
+
+
 more
 Pagina el fichero que se especifique
 $ cat /etc/apt/sources.list | more (como tuberia)
@@ -20564,7 +20571,7 @@ directorio) el error se almacene en el archivo “errores”. Adicionalmente env
 
 
 tune2fs
-[tunefs +. Chequeo de la tabla de particiones
+[tunefs]. Chequeo de la tabla de particiones
 # tune2fs -c 80 /dev/sda1 (cada 80 reinicios)
 # tune2fs -i 2m /dev/sda1 (cada 2 meses)
 # tune2fs -i 2w /dev/hda3 (cada 2 semanas)
