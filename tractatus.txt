@@ -17759,9 +17759,9 @@ tabla de los usuarios estándar SELinux disponibles:
 	unconfined_u 	Usado cuando la directriz es targeted, este usuario SELinux tiene muchos privilegios (esencialmente no está limitado en sus acciones, aunque todavía se gestiona través de SELinux con una directriz "muy abierta").
 
 
-sendemail
+sendmail
 [libnet-ssleay-perl libio-socket-ssl-perl]. Herramienta que permite enviar correos a partir de un servidor externo (p.g gmail). El principal inconveniente es que la contraseña queda expuesta en texto plano en la terminal.
-$ sendemail -f nombrecuenta@gmail.com -t destinatario@hotmail.com -s smtp.gmail.com:587 -u "Asunto" -m "Cuerpo del mensaje" -a archivo_adjunto -v -xu nombrecuenta -xp clavecuenta -o tls=yes
+$ sendmail -f nombrecuenta@gmail.com -t destinatario@hotmail.com -s smtp.gmail.com:587 -u "Asunto" -m "Cuerpo del mensaje" -a archivo_adjunto -v -xu nombrecuenta -xp clavecuenta -o tls=yes
 	Nota.- Tanto el asunto como el Cuerpo del mensaje entre comillas
 Si queremos poner más destinatarios, separar los correos con punto y coma [;]:
 	-t usuario1@hotmail.com;usuario2@gmx.es;usuario3@gmail.com
