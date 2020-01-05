@@ -8887,6 +8887,14 @@ $ hsetroot -flipv imagen.jpg (Refleja la imagen vertical. -fliph: horizontal y -
 $ hsetroot -alpha 150 imagen.jpg
 
 
+htcacheclean
+Se usa para mantener el tamaño del almacenamiento de mod_disk_cache dentro de un cierto límite. Esta herramienta puede ejecutarse manualmente o en modo demonio. Cuando se ejecuta en modo daemon, actua en segundo plano y comprueba los directorios de la caché a intervalos regulares para ver si el contenido de la caché se ha eliminado.
+# htcacheclean -v -t -p/var/cache/apache2/mod_cache_disk -l1024M (de forma detallada [v], eliminando directorios vacios [t] del pDIR y con limite lLIMIT)
+Alguna opción:
+	-r (Limpiar a fondo. Esto supone que el servidor web Apache no se está ejecutando)
+        -n (provoca un procesamiento más lento en favor de otros procesos)
+
+
 html
 Lenguaje de marcado predominante en la elaboración de páginas web.
 Las etiquetas básicas de HTML de obligada presencia en todo documento son:
