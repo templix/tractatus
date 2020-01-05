@@ -2667,6 +2667,11 @@ Buscar duplicados en ejecutables.
 $ chkdupexe
 
 
+chklastlog
+[chkrootkit]. Lee las entradas en el archivo /var/log/wtmp (archivo con información sobre inicios y cierres de sesión) y comprueba cada usuario encontrado en este archivo si también hay una entrada en el archivo /var/log/lastlog. El programa se quejará de los ID de un usuario con inicios de sesión pero sin información de cierre de sesión.
+# chklastlog
+
+
 chkrootkit
 [incluye las aplicaciones chktmp y chklastlog]. Buscador de rootkits infiltrados en el sistema.
 # chkrootkit  (lanzar la aplicación)
@@ -2691,6 +2696,11 @@ Claves para interactuar con los servicios:
 	Space  (Habilitar o deshabilitar una unidad)
 	s      (Iniciar o detener una unidad)
 	q      (salir)
+
+
+chkwtmp
+[chkrootkit]. Examina el archivo /var/log/wtmp en busca de entradas sin información y que solo contengan bytes nulos. Si se encuentran tales entradas las imprime.
+# chkwtmp (Verificar alteración de logs. Si no muestra nada: bien)
 
 
 chmod
