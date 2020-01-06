@@ -18222,6 +18222,8 @@ siggen
 Utilidad que muestra los valores de la función hash para los archivos especificados.
 $ siggen -a archivo.txt (muestra el hash en MD5, SHA, HAVAL y CRC32)
 $ siggen -h archivo.txt (Los mismos hash pero en hexadecimal)
+$ siggen -M archivo.txt (el hash solo en MD5. -S para SHA, -C para CRC32 y -H para HAVAL)
+$ siggen -a archivo.txt archivo2.txt (para dos archivos)
 
 
 sigtool
