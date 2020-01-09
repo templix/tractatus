@@ -3919,14 +3919,6 @@ Convertir fechas gregorianas en fechas respecto de las versiones de Debian.
 $ debdate
 
 
-debsecan
-Herramienta para generar una lista de vulnerabilidades que afectan una instalación particular de Debian. debsecan se ejecuta en el host que se debe verificar y descarga información de vulnerabilidad a través de Internet
-# debsecan --suite buster (listar paquetes de seguridad disponibles para nuestro sistema)
-# debsecan --only-fixed --suite=buster (listar vulnerabilidades para las que hay solución disponible)
-# debsecan-create-cron (ejecutarlo diariamente a través de cron. Los resultados se envían al administrador del sistema o por email si se ha configurado)
-# debsecan --update-history (actualizar el archivo histórico después de la presentación de informes)
-
-
 debfoster
 Mantiene una lista de paquetes instalados que fueron explícitamente solicitados en lugar de ser instalados como una dependencia. Los argumentos son totalmente opcionales y debfoster puede ser invocado después de lanzar dpkg y/o apt-get.
 # debfoster
@@ -3990,8 +3982,9 @@ debsecan
 Efectúa una evaluación de seguridad del sistema y muestra las vulnerabilidades conocidas y asociadas a los paquetes instalados, notificando al administrador (root) los resultados.
 # debsecan-create-cron (ejecutar diariamente)
 # dpkg-reconfigure debsecan (realizar una correcta configuración)
-# debsecan  --suite stretch --format report --update-history (escaneos)
-# debsecan  --suite stretch --only-fixed (otro tipo de escaneo)
+# debsecan  --suite buster --format report --update-history (escaneos)
+# debsecan  --suite buster --only-fixed (otro tipo de escaneo)
+# debsecan --update-history (actualizar el archivo histórico después de la presentación de informes)
 
 
 debsums
