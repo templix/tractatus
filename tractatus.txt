@@ -7226,8 +7226,11 @@ Supervisa la actividad fork, exec y exit del proceso.
 
 
 fortune
-Mostrar frases aleatorias al abrir la terminal.
+Mostrar frases aleatorias.
 $ fortune
+$ fortune -l (muestra citas largas)
+$ fortune -s (citas cortas)
+$ fortune -o (citas obscenas)
 Si queremos que al abrir la terminal muestre la fecha, añadir al final de /home/usuario/.bashrc:
 	fortune -a date
 Las frases se encuentran en /usr/share/games/fortune
