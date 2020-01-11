@@ -3681,7 +3681,7 @@ Monitorizar el tráfico de red. Configurar la herramienta:
 Descomentar los parámetros DIR, PORT, BINDIP y LOCAL y modificar START_DARKSTAT=yes
 Arrancar el servicio:
 # /etc/init.d/darkstat start
-En el navegador colocar la dirección: localhost:666
+En el navegador colocar la dirección: localhost:667
 
 
 date
@@ -3801,6 +3801,20 @@ Método de ejecutar ddrescue en dos pasadas, de forma que la primera sólo recup
 # ddrescue -v -n /dev/sda /dev/sdb sda.txt
 # ddrescue -v -r2 -d /dev/sda /dev/sdb sda.txt
 Luego comprobar errores con fsck.
+
+
+ddupdate
+Actualiza las direcciones IP dinámicas que normalmente se obtienen mediante DHCP con servicios DNS dinámicos como changeip.com, duckdns.org o no-ip.com entre otros. Crear el archivo:
+# nano /etc/ddupdate.conf
+Con el siguiente contenido:
+	[update]
+	address-plugin = default-if
+	service-plugin = dry-run
+	hostname = NOMBRE.duckdns.org
+	ip-version = v4
+	loglevel = warning
+# ddupdate -H NOMRE.duckdns.org
+# ddupdate -S (mostrar servicios de dns)
 
 
 deallocvt
@@ -10841,7 +10855,7 @@ Cualquier modificación en este archivo para guardar los cambios, implica lanzar
 
 lilypond-doc-html-es
 Documentación HTML en español del software de composición tipográfica de música lilypond. Acceder con el navegador a la dirección:
-	<file:///usr/share/doc/lilypond/html/Documentation/changes/index.es.html>
+	file:///usr/share/doc/lilypond/html/Documentation/changes/index.es.html
 
 
 lilyterm
