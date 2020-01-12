@@ -8083,6 +8083,11 @@ $ gocr -d 2 -p ./ocrdb/ -m 256 -m 130 kapcha.jpg (El aprendizaje. Lanzar varias 
 $ gocr -p ocrdb/ -m 2 kapcha.jpg (Comprobar si el programa lo resuelve solo)
 
 
+goldeneye
+Es una herramienta de prueba HTTP DoS. Esta herramienta se puede usar para probar si un sitio es susceptible a ataques de denegación de servicio (DoS). Es posible abrir varias conexiones paralelas contra una URL para verificar si el servidor web puede verse comprometido. El programa prueba la seguridad en las redes y utiliza 'HTTP Keep Alive + NoCache' como vector de ataque.
+# goldeneye http://lapipaplena.org -m random -d (con metodo HTTP "random", por defecto "get" y debug )
+
+
 golismero
 [python2.7 python2.7-dev python-pip python-docutils git perl nmap sslscan]. Framework para auditorías de seguridad y pentesting que se integra con un montón de soluciones como nmap,nikto,xserv,exploitdb,shodan,sqlmap,etc. Descarga e instalación:
 	$ git clone https://github.com/golismero/golismero.git
