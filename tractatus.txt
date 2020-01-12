@@ -9329,9 +9329,13 @@ $ find . -name archivo | ifne -n echo "No existe" (Si "archivo" no existe se eje
 
 
 ifplugd
-Indica las interfaces de red conectadas.
-# ifplugstatus (de todas)
-# ifplugstatus eth0 (de la especificada)
+Es un demonio que configura automáticamente un dispositivo ethernet cuando se conecta un cable y lo desconfigura automáticamente si se extrae el cable.
+
+
+ifplugstatus
+[ifplugd]. Indica todos los dispositivos conectados al pc.
+# ifplugstatus (de todos)
+# ifplugstatus eth0 (el especificado)
 
 
 ifquery
