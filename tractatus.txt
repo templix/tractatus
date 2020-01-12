@@ -4453,6 +4453,10 @@ Para evitar que network-manager sobreescriba el archivo resolv.conf, bloquear el
 # chattr +i /etc/resolv.conf (Para desbloquearlo -i)
 
 
+dnsdiag
+Herramientas [dnseval, dnsping y dnstraceroute] para realizar auditorías básicas de solicitudes y respuestas DNS.
+
+
 dnsdomainname
 Muestra el nombre del dominio DNS del sistema.
 $ dnsdomainname
@@ -4463,6 +4467,12 @@ dnsenum
 # cpanm String::Random
 # perl dnsenum.pl URL
 # perl dnsenum.pl --noreverse -o resultado.xml URL (Evitar operaciones de búsqueda inversa y guardando el resultado en un fichero)
+
+
+dnseval
+[dnsdiag]. Evalúa múltiples resoluciones de DNS y ayuda a elegir el mejor servidor DNS para su red. Se recomienda utilizar su propio dispositivo de resolución de DNS en lugar de un servidor DNS de terceros, pero en caso de que necesite elegir el mejor reenviador de DNS para su red, dnseval le permite comparar diferentes servidores DNS en relación al rendimiento, lae latencia y la fiabilidad.
+# dnseval -T facebook.com (forma básica)
+# dnseval -t A -f public-servers.txt -c 20 yahoo.com (Clase de registro "A", de una lista de servicios DNS y 20 solicitudes a enviar a yahoo.com)
 
 
 dnsmap
@@ -4491,6 +4501,12 @@ Si nuestra IP es dinámica, NetworkManager nos modificará cada cierto tiempo el
 */3 * * * * cp /etc/resolv.conf.local /etc/resolv.conf (actualizar cada 3 minutos)
 
 
+dnsping
+[dnsdiag]. Se usa para medir el tiempo de respuesta de un servidor DNS dado para solicitudes arbitrarias. Al igual que una utilidad de ping tradicional, proporciona una funcionalidad similar para las solicitudes de DNS.
+# dnsping dnsdiag.org (forma básica)
+# dnsping -c 3 -t A -s 8.8.8.8 dnsdiag.org (3 solicitudes de registro "A" usando las DNSs de google)
+
+
 dnstop
 Monitorear el tráfico dns.
 # dnstop -i 192.168.1.3 -p -r 2 eth0 (Excluir la propia máquina [i], en modo no promiscuo [p], actualizando cada 2 segundos [r] y la red objetivo)
@@ -4515,6 +4531,12 @@ Y realizar las consultas de forma interactiva pulsando las siguientes teclas:
 dnstracer
 Consultas DNS desde una ip o un host. dnstracer determina cuando un servidor de nombres de dominio [DNS] obtiene información de un nombre de anfitrión dado, y a continuación el servidor DNS manda la respuesta de autorización.
 $ dnstracer host
+
+
+dnstraceroute
+[dnsdiag]. Se utiliza para rastrear la ruta que toma una solicitud DNS de origen al destino. Su propósito es detectar si una solicitud es redirigida o secuestrada. Esto se puede hacer comparando diferentes consultas DNS que se envían al mismo servidor DNS usando dnstraceroute y observar si hay alguna diferencia en la ruta.
+# dnstraceroute facebook.com (forma básica)
+# dnstraceroute -e -C -t A -s 8.8.4.4 facebook.com (impimiendo las sugerencias de los expertos si eestan disponibles, a todo color y usando las DNSs de google))
 
 
 dochelp
