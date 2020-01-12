@@ -16783,6 +16783,23 @@ Reiniciar el sistema.
 $ reboot -f (Fonzandolo)
 
 
+recap
+Vuelca información periódica sobre la ejecución de aplicaciones y el uso de recursos. Se almacena en el archivo /var/log/recap/recap.log. Los valores para los que se generan los informes y cuántos informes se almacenan se pueden especificar en /etc/recap.conf.
+
+
+recaplog
+[recap]. Maneja los registros generados por recap, comprimiendo y/o borrando los archivos de registro de /var/log/recap/recap.log
+# recaplog -n
+
+
+recaptool
+[recap]. Analiza los registros e imprime información específica sobre la memoria, los procesos, las conexiones de red o las consultas a una base de datos mysql.
+# recaptool -b ssh (la memoria del servicio ssh)
+# recaptool -e 80 (del puerto 80)
+# recaptool -q (de la base de datos mysql)
+# recaptool -m http -e 80 -q (del servicio html del puerto 80 y la base de datos mysql)
+
+
 recode
 Convierte archivos a distintos formatos de caracteres
 $ recode -l | less	(listado de conversiones disponibles)
