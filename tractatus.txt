@@ -13825,6 +13825,10 @@ Medir el rendimiento de la red. Ha de instalarse en el cliente y en el servidor.
 # netperf -H localhost
 
 
+netplug
+Demonio que monitorea el estado del enlace de las tarjetas de red y configura la red en eventos de conexión y desconexión. Es similar a ifplugd, pero usa NETLINK en lugar de sondear regularmente el estado del enlace. Esto mejora el consumo de energía con las computadoras portátiles, pero no funciona con todas las tarjetas.
+
+
 netstat
 Puertos y conexiones.
 # netstat --inet --all
