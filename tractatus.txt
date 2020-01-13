@@ -13807,7 +13807,7 @@ Pulsando:
 
 
 netload
-[netdiag]. Muestra la carga en la interfaz de red sin usar la propia interfaz. netload simplemente accede a las estadísticas del kernel.
+[netdiag]. Muestra la carga en la interfaz de red sin usar la propia interfaz. netload simplemente accede a las estadísticas del kernel. El archivo $HOME/.netloadrc permite agregar cualquier cantidad de interfaces de red, modificar la configuración de alarma y las preferencias de correo electrónico.
 # netload eth0 -t 2 (actualizando cada 2 segundos)
 
 
@@ -20478,6 +20478,11 @@ $ tr " " . < archivo (substituir los espacios por puntos)
 traceroute
 Permite seguir la pista de un paquete desde un host a otro.
 # traceroute www.tuxapuntes.com
+
+
+trafshow
+[netliag[. Es un programa interactivo que reúne el tráfico de red de todas las interfaces con capacidad de libpcap para acumularlo en la memoria caché.
+# trafshow -R 1 -p (actualizar cada segundo y no poner en modo promiscuo)
 
 
 trans
