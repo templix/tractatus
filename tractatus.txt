@@ -13829,6 +13829,18 @@ netplug
 Demonio que monitorea el estado del enlace de las tarjetas de red y configura la red en eventos de conexión y desconexión. Es similar a ifplugd, pero usa NETLINK en lugar de sondear regularmente el estado del enlace. Esto mejora el consumo de energía con las computadoras portátiles, pero no funciona con todas las tarjetas.
 
 
+netsniff-ng
+Es un sniffer de red de alto rendimiento para la inspección de paquetes. Se puede usar para análisis de protocolo, ingeniería inversa o red de depuración. El kit de herramientas netsniff-ng actualmente consta de las siguientes utilidades:
+  - netsniff-ng - analizador de paquetes de zero-copy. Herramienta de captura/reproducción pcap
+  - trafgen - generador de paquetes de red multiproceso de bajo nivel y zero-copy
+  - mausezahn - generador de paquetes de alto nivel para dispositivos con Cisco-CLI
+  - ifpps - herramienta de estadísticas de sistema y redes de kernel de primer nivel
+  - curvetun - túnel IP multiusuario ligero basado en la curva25519
+  - Astraceroute - ruta de seguimiento del sistema autónomo y utilidad de prueba DPI
+  - Flowtop - herramienta de seguimiento de conexión de filtro de red superior
+  - bpfc - compilación BPF (filtro de paquete Berkeley), desmontaje JIT
+
+
 netstat
 Puertos y conexiones.
 # netstat --inet --all
