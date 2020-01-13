@@ -2626,6 +2626,11 @@ Programa que verifica si el usuario se puede establecer en el grupo de apache2. 
 # checkgid user (si no devuelve nada, user está en el grupo y puede configurarlo)
 
 
+checkint
+[netdiag]. Muestra todas las interfaces de red activas
+$ checking
+
+
 checkrestart
 [debian-goodies]. Muestra procesos activos que están utilizando una versión anterior de algún fichero que haya sido actualizado. A veces una actualización trae nuevas bibliotecas del sistema y los procesos que se esten ejecutando siguen utilizando las versiones anteriores de estas bibliotecas. En sistemas Debian GNU/Linux estables, generalmente se necesita para eliminar un exposición del sistema a una vulnerabilidad que podría haberse solucionado actualizando una biblioteca que utiliza algún proceso. Tambien se usa para encontrar versiones desactualizadas de bibliotecas en uso.
 # checkrestart -a (muestra todos)
@@ -13773,6 +13778,10 @@ opciones
 -z	.-	mostrar puertos a la escucha
 
 
+netdiag
+Colección de pequeñas herramientas para analizar el tráfico de red y la configuración de hosts remotos. Es de gran ayuda si su sistema muestra un comportamiento extraño en la red y desea saber qué es lo que ocurre.
+
+
 netdiscover
 Buscar máquinas [activas o pasivas] conectados  a una red.
 # netdiscover -i eth0
@@ -13795,6 +13804,11 @@ Pulsando:
 	s --> Ordenar por los datos enviados
 	r --> Ordenar por los datos recibidos
 	q --> Salir
+
+
+netload
+[netdiag]. Muestra la carga en la interfaz de red sin usar la propia interfaz. netload simplemente accede a las estadísticas del kernel.
+# netload eth0 -t 2 (actualizando cada 2 segundos)
 
 
 netpbm
