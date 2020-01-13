@@ -13882,6 +13882,11 @@ $ nettlet-hash --list  (lista los algoritmos que pueden usarse)
 $ nettlet-hash -a sha224 fichero
 
 
+netwatch
+[netdiag]. Examina todos los paquetes que viajan en una red Ethernet y analiza los paquetes IP. La información se cuenta de acuerdo con los hosts de origen y destino. Una pantalla ncurses indica un estado de lista dual para todos los hosts. La zona izquierda se refiere a hosts LOCALES. La lista de la derecha se refiere a hosts REMOTOS. Es posible examinar estadísticas sobre el número de paquetes, bytes, tipo de servicio IP y último host de comunicación para cada host. Con las teclas de flecha (izquierda y derecha) se cambia la visualización.
+# netwatch -n -e eth0 (no resolviendo las ips de la interfaz eth0)
+
+
 newgrp
 Al ingresar un usuario en el sistema tiene predeterminado un grupo principal con un gid concreto con unos permisos determinados para la creación de ficheros y directorios, pero puede estar asignado a más de un grupo con distinto gid. Para cambiarse a uno de estos otros grupos:
 $ newgrp grupo1
