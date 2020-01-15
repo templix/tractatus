@@ -14086,6 +14086,10 @@ Imprime estadísticas de red para todas las tarjetas de red.
 # nicstat -i eth0,eth1 3 (Imprimir estadísticas cada 3 segundos solo para las interfaces eth0 y eth1)
 
 
+nield
+Daemon para recibir notificaciones del núcleo a través del socket de enlace de red y generar registros relacionados con las interfaces NIC. Una vez arrancado el daemon [/etc/init.d/nield start] visualizar los logs en /var/log/nield.log.
+
+
 nikto
 [libnet-ssleay-perl libwhisker-perl nmap]. Herramienta de escaneo de servidores web que efectua diferentes comprobaciones tales como, detección de malas configuraciones y vulnerabilidades, detección de ficheros, estructura del servidor, versiones y fechas de actualizaciones de servidores, ataques de fuerza bruta por diccionario, reportes en formatos txt, csv, html, etc.
 # nikto -update (Actualizar la aplicación)
