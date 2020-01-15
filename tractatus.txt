@@ -17424,6 +17424,14 @@ $ run-parts --reverse scritps (los ejecuta en orden inverso)
 $ run-parts --exit-on-error scripts (salir cuando muestre un código de salida distinto de cero)
 
 
+ruptime
+Muestra el estado de cada host en una red. El comando ruptime proporciona una línea de estado como tiempo de actividad para cada máquina en la red local; Estos se forman a partir de paquetes emitidos por cada host en la red una vez por minuto.
+# ruptime -l (ordena la lista por el promedio de carga)
+# ruptime -a (incluye a todos los usuarios. Sin esta opción, los usuarios cuyas sesiones estén inactivas una hora o más no están incluidos)
+# ruptime -t (ordena por el tiempo de actividad)
+# ruptime -u (ordena la lista por el número de usuarios)
+
+
 rusers
 Produce una salida similar a who [ver], pero para la lista de hosts o todas las máquinas de la red local. Para cada host que responde a la consulta, se imprime el nombre del host con los nombres de los usuarios actualmente conectados. El comando rusers esperará un minuto para atrapar a los que responden tarde.
 # rusers (muestra unna lista de los usuarios de la red registrados en máquinas remotas)
