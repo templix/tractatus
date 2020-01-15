@@ -14076,6 +14076,16 @@ nice
 Nota.- Valores, de mayor (-20) a menor (19). Sólo root puede establecer valores negativos.
 
 
+nicstat
+Imprime estadísticas de red para todas las tarjetas de red.
+# nicstat -x (ver salida extendida)
+# nicstat 5 4 (Imprimir estadísticas para todas las interfaces cada 5 segundos 4 veces)
+# nicstat -t (ver estadísticas TCP)
+# nicstat -u (ver estadísticas UDP)
+# nicstat -a (muestra las estadísticas x, t i u)
+# nicstat -i eth0,eth1 3 (Imprimir estadísticas cada 3 segundos solo para las interfaces eth0 y eth1)
+
+
 nikto
 [libnet-ssleay-perl libwhisker-perl nmap]. Herramienta de escaneo de servidores web que efectua diferentes comprobaciones tales como, detección de malas configuraciones y vulnerabilidades, detección de ficheros, estructura del servidor, versiones y fechas de actualizaciones de servidores, ataques de fuerza bruta por diccionario, reportes en formatos txt, csv, html, etc.
 # nikto -update (Actualizar la aplicación)
