@@ -14087,7 +14087,7 @@ Imprime estadísticas de red para todas las tarjetas de red.
 
 
 nield
-Daemon para recibir notificaciones del núcleo a través del socket de enlace de red y generar registros relacionados con las interfaces NIC. Una vez arrancado el daemon [/etc/init.d/nield start] visualizar los logs en /var/log/nield.log.
+Daemon para recibir notificaciones del núcleo a través del socket de enlace de red y generar registros relacionados con las interfaces NIC [network information service]. Una vez arrancado el daemon [/etc/init.d/nield start] visualizar los logs en /var/log/nield.log.
 
 
 nikto
@@ -17422,6 +17422,15 @@ $ run-parts --list --regex '.*sh$' scripts (lista todos los .sh del directorio "
 $ run-parts --test --regex '^p.*sh$' scripts (lista los que se ejecutacian del directorio "scripts", que empiecen por "p" y terminen con "sh" pero no los ejecuta realmente)
 $ run-parts --reverse scritps (los ejecuta en orden inverso)
 $ run-parts --exit-on-error scripts (salir cuando muestre un código de salida distinto de cero)
+
+
+rusers
+Produce una salida similar a who [ver], pero para la lista de hosts o todas las máquinas de la red local. Para cada host que responde a la consulta, se imprime el nombre del host con los nombres de los usuarios actualmente conectados. El comando rusers esperará un minuto para atrapar a los que responden tarde.
+# rusers (muestra unna lista de los usuarios de la red registrados en máquinas remotas)
+# rusers -h (lista usuarios ordenados alfabéticamente por nombre de host)
+# rusers -h oficina (produce una lista de usuarios en el host oficina)
+# rusers -u (genera lista de usuarios conectados a máquinas remotas y ordenados por el número de usuarios conectados)
+# rusers -i (genera lista de usuarios registrados en máquinas remotas y ordenados de acuerdo con el tiempo de inactividad de cada máquina)
 
 
 rvm
