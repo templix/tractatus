@@ -17445,6 +17445,11 @@ $ rvm gemset use NOMBRE_GEMSET (Utilizar un gemset)
 $ rvm gemset use VERSION@NOMBRE_GEMSET (Especificar versión de ruby y el gemset a cambiar)
 
 
+rwho
+Produce una salida similar a who [ver], pero para todas las máquinas de la red local. La información de estado se emite una vez cada 3 minutos por cada host de la red que ejecuta el demonio rwhod. Cualquier actividad (como el inicio o el cierre de sesión de un usuario) que tenga lugar entre las emisiones no se refleja hasta la siguiente emisión.
+# rwho -a (Incluye todos los usuarios. Sin este indicador, los usuarios cuyas sesiones estén inactivas una hora o más no se incluyen en el informe)
+
+
 rxvt
 Emulador de terminal
 $ rxvt -geometry 100x40 -e links2 http://google.es
