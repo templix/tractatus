@@ -19789,6 +19789,15 @@ muestra las últimas 10 lineas de un fichero (si no se especifica otra cantidad)
 # tail -s 5 archivo.log (Actualiza cada 5 segundos)
 
 
+taktuk
+Permite ejecutar comandos en paralelo en un conjunto potencialmente grande de nodos remotos, usando ssh para conectarse a cada nodo.
+# taktuk -s -m host_remoto.com broadcast exec [ hostname ] (autopropagar [s] en host_remoto.com [m] el comando "hostname")
+Nota- "broadcast exec [ ... ]" es un comando que será ejecutado por el intérprete de taktuk y "autopropagar" se refiere a si en los host remotos no está instalado taktuk
+# taktuk -m host_remoto.com (modo interactivo y estando taaktuk instalado en host_remoto.com)
+# taktuk -s -m host1 -m host2 -m host3 broadcast exec { uptime } (autopropagar a tres host especificados el comando "uptime")
+# taktuk -s -f hosts broadcast exec { uptime } (Lo mismo pero los host estan especificados en el archivo hosts [f])
+
+
 talk
 Entablar conversaciones con usuarios conectados a nuestro sistema o remotos
 $ talk usuario ttyx  (Conectar con usuarios locales)
