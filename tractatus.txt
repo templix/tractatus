@@ -19349,6 +19349,14 @@ Opciones:
 -t 20s (Tiempo que durará el proceso, 20 segundos. Opciones: s,m,h,d,y)
 
 
+stressant
+Colocar en varias partes del sistema (CPU, RAM, disco, red) una gran carga para detectar fallas y así asegurarse de que funcionen de manera confiable.
+# stressant (prueba por defecto)
+# stressant --fileSize 1M --cpuBurnTime 1s --iperfTime 1 (Prueba muy rápida, útil para ejecutar si está preocupado por el bloqueo de la máquina)
+# stressant --diskPercent 100% --overwrite --cpuBurnTime 24h --smart (Prueba exhaustiva con limpieza completa del disco y prueba larga SMART)
+# stressant --no-information --no-cpu --no-disk --iperfServer servidor.net (Prueba de red solo en un servidor dedicado)
+
+
 stressapptest
 Herramienta para realizar un test de carga del sistema.
 # stressapptest -s 20 -M 256 -m 8 -C 8 -W
