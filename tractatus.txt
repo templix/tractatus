@@ -19612,6 +19612,13 @@ $ sr wikipedia -l=es Palabra_a_buscar (buscar en wikipedia y en español)
 $ sr -elvi | less  (listar los sitios disponibles donde buscar)
 
 
+suricata
+Sistema de detección de intrusiones de red (IDS). Se basa en reglas para detectar una variedad de ataques/sondeos mediante la búsqueda de contenido de paquetes. Este nuevo motor admite la detección automática de múltiples subprocesos (IP, TCP, UDP, ICMP, HTTP, TLS, FTP y SMB), descompresión de Gzip y coincidencia rápida de IP.
+# suricata --list-runmodes (listar los run modos posibles)
+# suricata -c /etc/suricata/suricata.yaml -i eth0 -D (forma básica, activando el daemon)
+# tail -f /var/log/suricata/fast.log (comprobar las alertas)
+
+
 suspend
 Cuando es posible, suspender la shell actual.
 # suspend -f (Pasará de root a nuestro usuario)
