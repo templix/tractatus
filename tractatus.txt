@@ -23626,6 +23626,16 @@ yelp
 Navegador de ayuda de gnome. Incluye documentación detallada sobre la mayoría de aplicaciones y utilidades [panel, gestor de archivos...]
 
 
+yersinia
+Es un marco para realizar ataques de capa 2. Esta diseñado para aprovechar algunas debilidades en diferentes protocolos de red. Pretende ser un marco sólido para analizar y probar las redes y sistemas desplegados. Puede realizar ataques para los siguientes protocolos de red:  Protocolo Spanning Tree (STP), Protocolo de descubrimiento de Cisco (CDP), Protocolo de enlace dinámico (DTP), Protocolo de configuración dinámica de host (DHCP),  Protocolo de enrutador Hot Standby (HSRP), 802.1q, 802.1x, Protocolo de enlace entre conmutadores (ISL), Protocolo de enlace de VLAN (VTP).
+# yersinia -G (arrancar el modo gráfico)
+# yersinia -I (modo interactiivo ncurses)
+# yersinia -D (como daemon)
+# yersinia stp -attack 0 -version 2 -flags 5c -portid 3000 -interface eth1
+# yersinia stp -attack 4
+# yersinia stp -attack 3 -source 66:66:66:66:66:66
+
+
 yes
 Repetición indefinida, hasta matar el proceso con Ctrl + c,  de una palabra o frase.
 $ yes linux es genial
