@@ -16399,12 +16399,12 @@ Demonio. Escaneador de ataques a puertos. Los resultados en /var/log/psad/analys
 Habilitar logs en iptables:
 # iptables -A INPUT -j LOG
 # iptables -A FORWARD -j LOG
-Lanzar los guignetes tres comandos:
+Lanzar los siguientes tres comandos:
 # psad -R (Reiniciar psad)
 # psad --sig-update (Recargar firmas)
 # psad -H (Releer archivo pad)
 Consultar estado con:
-# psad -Status
+# psad -status
 # psad -A -i eth0 (Analizar a partir de los logs de iptables e indicando red)
 Archivo de configuración en /etc/psad/psad.conf
 
