@@ -3016,7 +3016,25 @@ $ man less | col -b > less.txt
 
 
 collectd
-Recoge métricas de varias fuentes (del sistema operativo, aplicaciones, de los archivos de registro y los dispositivos externos) y almacena la información. Estas estadísticas pueden ser utilizadas para monitorear los sistemas, encontrar cuellos de botella, predecir carga futura del sistema o confeccionar gráficos del servidor privado. Funciona en modo cliente/servidor. Ejemplos en /usr/share/doc/collectd/examples/
+Es un daemon que recopila información del sistema [sistema operativo, aplicaciones, archivos de registro y dispositivos externos] periódicamente y proporciona mecanismos para monitorear y almacenar los valores de varias maneras. Dado que el demonio no necesita iniciarse cada vez que quiere actualizar los valores es muy rápido y las estadísticas son muy precisas ya que los archivos se actualizan cada 10 segundos de forma predeterminada. Abrir el archivo:
+# nano /etc/collectd/collectd.conf
+Y desclicar las siguientes lineas:
+	Hostname "localhost"
+	FQDNLookup true
+Y en la sección # LoadPlugin section descomentar las que se crean oporturnas además de las activadas por defecto. Activar el servicio:
+# /etc/init.d/collectd start
+Crear en apache el archivo:
+# nano /etc/apache2/mods-available/mod_status.conf
+con el siguiente contenido:
+	<Location /mod_status>
+	  SetHandler server-status
+	  Order Deny,Allow
+	  Deny from all
+	  Allow from 127.0.0.1
+	</Location>
+Reiniciar apache:
+# /etc/init.d/apache2 restart
+Y en el navegador colocar la dirección: http://127.0.0.1/server-status
 
 
 colordiff
