@@ -12634,7 +12634,6 @@ Cuando se intente parar o reiniciar el equipo vía ssh, saldrá una nota pidiend
 
 mon
 Herramienta para monitorear la disponibilidad de los servicios.  Los servicios pueden estar relacionados con la red, las condiciones ambientales o cualquier cosa que pueda ser probada con el software.  Si un servicio no está disponible mon puede avisarle con syslog, correo electrónico, su buscapersonas o un script de su elección. Puede controlar quién recibe cada alerta en función de la hora del día o del día de la semana y puede controlar la frecuencia con la que se vuelve a alertar de un problema existente. Logs en /var/log/mon/
-# mon --full (solo mostrar los servicios que fallan)
 Monitorear datos con la dirección http://127.0.0.1:2583/ en el navegador
 
 
@@ -12737,6 +12736,11 @@ check system dominio.com
     if loadavg (1min) > 20 then exec "/bin/bash /root/script.sh"
 2.- Si falla el servidor ftp [puerto 21], al pasar 20 segundos alertará  y ejecutará el script
 if failed port 21 protocol ftp with 20 seconds then alert and exec “/ftp/script.sh”
+
+
+monshow
+[mon]. Mostrar el estado operativo del servidor mon. Están disponibles tanto con la interfaz de línea de comandos como la interfaz web [http://127.0.0.1:2583/].
+# monshow --full (solo mostrar los servicios que fallan)
 
 
 montage
