@@ -12632,6 +12632,12 @@ ALWAYS_QUERY_HOSTNAME=true
 Cuando se intente parar o reiniciar el equipo vía ssh, saldrá una nota pidiendo el nombre de la máquina. Una vez introducida, se ejecutará el shutdown o reboot.
 
 
+mon
+Herramienta para monitorear la disponibilidad de los servicios.  Los servicios pueden estar relacionados con la red, las condiciones ambientales o cualquier cosa que pueda ser probada con el software.  Si un servicio no está disponible mon puede avisarle con syslog, correo electrónico, su buscapersonas o un script de su elección. Puede controlar quién recibe cada alerta en función de la hora del día o del día de la semana y puede controlar la frecuencia con la que se vuelve a alertar de un problema existente. Logs en /var/log/mon/
+# mon --full (solo mostrar los servicios que fallan)
+Monitorear datos con la dirección http://127.0.0.1:2583/ en el navegador
+
+
 monit
 Monitorizador de procesos en ejecución, servicios, demonios, espacios de disco, PIDs, checksums, archivos....
 # monit status (Acceder a los informes)
