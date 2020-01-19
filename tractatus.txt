@@ -12748,6 +12748,13 @@ check system dominio.com
 if failed port 21 protocol ftp with 20 seconds then alert and exec “/ftp/script.sh”
 
 
+monitorix
+Herramienta para monitorizar sistemas y diseñada para controlar la mayor cantidad posible de servicios y recursos. Una vez activado el servicio con::
+# service monitorix start
+Se accede a los informes con el navegador y la dirección http://localhost:8080/monitorix
+Podemois ajustar título y otros parámetros en el archivo /etc/monitorix/monitorix.conf
+
+
 monshow
 [mon]. Mostrar el estado operativo del servidor mon. Están disponibles tanto con la interfaz de línea de comandos como la interfaz web [http://127.0.0.1:2583/].
 # monshow --full (solo mostrar los servicios que fallan)
