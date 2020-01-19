@@ -8981,6 +8981,13 @@ Alguna opción:
         -n (provoca un procesamiento más lento en favor de otros procesos)
 
 
+htdbm
+Se usa para manipular los archivos de formato DBM que se usan para almacenar nombres de usuario y contraseñas para la autenticación básica de usuarios HTTP a través de mod_authn_dbm de apache.
+# htdbm -c /etc/apache2/.htdbm pepe (pedira contraseña y con firmación y creará el archivo .htdbm encriptado)
+# htdbm /etc/apache2/.htdbm pepe (pide la nueva contraseña y confirmación de "pepe")
+# htdbm -x /etc/apache2/.htdbm pepe (suprime al usuario "pepe"))
+
+
 html
 Lenguaje de marcado predominante en la elaboración de páginas web.
 Las etiquetas básicas de HTML de obligada presencia en todo documento son:
