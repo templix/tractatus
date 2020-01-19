@@ -17536,6 +17536,16 @@ $ sac -a (información promedio)
 $ sac -U (por niveles de uso simultaneo)
 
 
+sadf
+[sysstat]. Herramienta que se utiliza para mostrar los datos recogidos con diferentes herramientas de sysstat como sar, iostat, pidstat etc y que también soporta la exportación en diferentes formatos como CSV, XML, etc. Activar sysstat::
+# nano /etc/default/sysstat
+Y colocar:
+ENABLED="true"
+# sadf -d (mostrar datos del archivo separados por punto y coma)
+# sadf -d /var/log/sysstat/sa19 -- -r (indica los parámetros de memoria)
+# sadf -x /var/log/sysstat/sa19 (exportar los datos a XML))
+
+
 saidar
 Visualizar estadisticas del sistema
 $ saidar -c (en color)
