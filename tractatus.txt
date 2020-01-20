@@ -1805,18 +1805,18 @@ $ bind -x "\"\C-l\": ls -la" (asignar combinaciones de teclas que ejecutan coman
 
 bing-ip2hosts
 Buscar sitios web alojados en una dirección IP específica o en un nombre de host. Descarga de <http://www.morningstarsecurity.com/research/bing-ip2hosts>
-[bing-ip2hosts-0.4]$ ./bing-ip2hosts -n microsoft.com (Sin mostrar el progreso [n])
+$ ./bing-ip2hosts -n microsoft.com (Sin mostrar el progreso [n])
 	www.answers.microsoft.com
 	www.microsoft.com
 	www.msdn.microsoft.com
 	www.research.microsoft.com
-[bing-ip2hosts-0.4]$ ./bing-ip2hosts -n -i microsoft.com (Mostrando la ip [i])
+$ ./bing-ip2hosts -n -i microsoft.com (Mostrando la ip [i])
 	64.4.11.37,msdn.microsoft.com
 	64.4.11.37,www.answers.microsoft.com
 	64.4.11.37,www.microsoft.com
 	64.4.11.37,www.msdn.microsoft.com
 	64.4.11.37,www.research.microsoft.com
-[bing-ip2hosts-0.4]$ ./bing-ip2hosts -n -i -p microsoft.com (Anteponiendo al nombre de host http:// [p])
+$ ./bing-ip2hosts -n -i -p microsoft.com (Anteponiendo al nombre de host http:// [p])
 	64.4.11.37,http://msdn.microsoft.com
 	64.4.11.37,http://www.answers.microsoft.com
 	64.4.11.37,http://www.microsoft.com
@@ -15072,6 +15072,11 @@ Verificar si un archivo pasado como argumento existe o no:
 			echo "archivo no existe"
 		fi
 	fi
+
+
+oping
+Utiliza paquetes ping para probar la accesibilidad de los hosts de red.
+$ oping -4 -i 2 host1 host2 host3 (usando IPv4, con un intervalo de 2 segundos y a los hosts especificados))
 
 
 opkg
