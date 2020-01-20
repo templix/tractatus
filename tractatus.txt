@@ -9054,10 +9054,11 @@ $ httpd -V (versión y parámetros compilados)
 
 
 httping
-Ping específico para conexiones HTTP
-# httping -g http://www.tuxapuntes.com
-# httping -h localhost
-# httping -h localhost -p 80
+Ping específico para conexiones HTTP. Envía solicitudes a un nombre de host o una URL remota y muestra cuánto tiempo lleva conectarse, enviar una solicitud HTTP y recuperar la respuesta.
+$ httping -g http://www.tuxapuntes.com (forma básica)
+$ httping -l -g https://localhost/ (usando una conexiḉon SSL)
+$ httping -h localhost -p 80 (ping a localhost usando el puerto 80)
+$ httping -g http://localhost/ -U username -P password (usando autentificación)
 
 
 httrack
@@ -9769,6 +9770,13 @@ Algunas opciones (con inxi -h la lista completa):
 	-t cm (Procesos que consumen más cpu [c] y memoria [m])
 	-u (UUID de las particiones. -uo las no montadas, -up las montadas)
 	-v 6 (Distintas etiquetas de información. Del 1 al 6)
+
+
+ioping
+Supervisa la latencia del disco en tiempo real. La idea principal detrás de ioping es tener una utilidad similar al ping, que mostrará la latencia del disco de la misma manera que ping muestra la latencia de la red.
+$ ioping -i 2 -c 5 / (medir la latencia del disco duro en un periodo de 5 veces con 2 segundos de separación)
+$ ioping -c 10 -s 1M /tmp (Medir la latencia en /tmp utilizando 10 solicitudes de 1 megabyte cada una)
+$ ioping -RL /dev/sda (Medir la velocidad secuencial del disco)
 
 
 iostat
