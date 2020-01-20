@@ -17133,6 +17133,12 @@ $ replace files DIRS  --  archivo (“files” por “DIRS” en archivo)
 $ replace DIRS dirs files FILES -- archivo (“DIRS” por ”dirs” y “files” por “FILES”)
 
 
+reportbug
+Herramienta diseñada para enviar informes de errores a Debian o a las distribuciones derivadas. reportbug está diseñado para usarse en sistemas con un agente de transporte de correo instalado, como exim o sendmail; sin embargo, puede editarse el archivo de configuración y enviar informes utilizando cualquier servidor de correo disponible.
+# reportbug lynx-ssl (Informa un error en el paquete lynx-ssl)
+# reportbug --path --filename=ls (Informa un error en el paquete instalado que incluye un programa en su ruta llamado ls)
+
+
 reset
 Restablece la configuración de la terminal cuando al intentar abrir algún fichero se nos ha llenado de caracteres raros. Aunque no veamos el cursor o el prompt, tecleando "reset" y clicar "intro", se restablece la terminal.
 
