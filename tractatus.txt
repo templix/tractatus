@@ -4751,6 +4751,14 @@ Snifer de imagenes y video
 # driftnet -i wlan2
 
 
+droopy
+Mini web server para recibir archivos.
+$ mkdir fotos (crear el directorio donde recibir las imagenes que nos han de enviar)
+$ cd fotos
+$ droopy -m "Buenassssss, puedes enviarme las fotos que quieras" -p ~/gnu.png -d ~/imagenes (con el texto que queremos [m], ilustrado con la imagen deseada [p] y que lo que nos envien se guarde en la carpeta especificada [d])
+Accedemos en local con la dirección http://localhost:8000 y en remoto han de acceder, si no tenemos nombre de host registrado, con http://nuestra_ip:8000/fotos
+
+
 dropbox
 Almacenamiento en la nube. Linea de comandos para el servicio Dropbox.
 $ dropbox status (Muestra el estado actual del demonio)
