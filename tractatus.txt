@@ -8957,27 +8957,31 @@ Añadimos, después de la ip local, las que se quieran bloquear separadas por un
 
 
 hp-check
-Comprueba versiones, dependencia y permisos de HPLIP de la impresora HP. Crea un log en el directorio en el que se lanza con el nombre hp-check.log
+[hplip]. Comprueba versiones, dependencia y permisos de HPLIP de la impresora HP. Crea un log en el directorio en el que se lanza con el nombre hp-check.log
 $ hp-check -g (en modo debug. -t en texto plano.)
 
 
 hp-doctor
-Herramienta que comprueba versiones en desuso, complementos, dependencias, colas, permisos y proporciona procedimientos de autodiagnóstico de la impresora HP.
+[hplip]. Herramienta que comprueba versiones en desuso, complementos, dependencias, colas, permisos y proporciona procedimientos de autodiagnóstico de la impresora HP.
 $ hp-doctor -g (modo debug)
 
 
-hp-levels
-Muestra información gráfica sobre la carga de tinta de la impresora HP.
-$ hp-levels -c -a '$' (en color y que use el simbolo "$" para el gráfico)
-
-
 hp-info
-Muestra parametros de información de la impresora HP.
+[hplip]. Muestra parametros de información de la impresora HP.
 $ hp-info -g (en modo debug)
 
 
+hp-levels
+[hplip]. Muestra información gráfica sobre la carga de tinta de la impresora HP.
+$ hp-levels -c -a '$' (en color y que use el simbolo "$" para el gráfico)
+
+
+hplip:
+Soporte de HP para la mayoría de las impresoras de inyección de tinta HP y muchas LaserJets, tanto para escanear, enviar faxes y para el acceso a tarjetas fotográficas en la mayoría de las impresoras multifuncionales de la marca. Algunos de los comandos disponibles, a parte de algunos que estan directamente relacionados son: hp-align, hp-clean, hp-colorcal, hp-config_usb_printer, hp-firmware, hp-logcapture, hp-makeuri, hp-pkservice, hp-plugin, hp-probe, hp-query, hp-setup, hp-testpage y hp-timedate.
+
+
 hp-scan
-Herramienta de escaneo para una impresora HP.
+[hplip]. Herramienta de escaneo para una impresora HP.
 $ hp-scan -g -m color (scanea una HP en collor [gray para blanco y negro] y guarda el resultado por defecto con el nombre hpscan001.jpg)
 $ hp-scan -f scan.jpg --pdf=evince (guardarlo como scan.jpg y visualizarlo al final con evince)
 
