@@ -3485,11 +3485,12 @@ create-cracklib-dict
 
 cron-apt
 Herramienta que ejecuta un trabajo cron a intervalos regulares. Por defecto, solo actualiza la lista de paquetes y descarga nuevos paquetes sin instalar. Puede indicarle que ejecute cualquier cosa que pueda hacer con apt-get o aptitude. Editar el archivo:
-# nano /etc/cron-apt/config
+# nano /etc/cron-apt.conf
 Y modificar las lineas:
 	MAILON="always"
 	MAILTO="usuario@example.com"
 # cron-apt (comprobar que el software se ejecute sin problemas)
+Para comprobar los logs en el archivo /var/log/cron-apt/log
 
 
 cronic
@@ -3549,7 +3550,7 @@ Lista ficheros que presumiblemente sobran, faltan o están de alguna forma incor
 # cruft --ignore /home/usuario (Descartando un directorio)
 
 
-cruch
+crunch
 Generador de listas de palabras. Puede especificarse un conjunto de caracteres y admite números, símbolos, mayúsculas, minúsculas, caracteres por separado y Unicode.
 $ crunch 6 6 0123456789abcdef -o 6caracteres.txt (generar palabras de un mínimo de 6 caracteres y máximo de 6 usando los especificados y guardandolo el el archivo menionado)
 $ crunch 3 5 ABC$%& -o caracteres.txt (mínimo de 3 y máximo de 5 usando los epecificados)
