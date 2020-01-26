@@ -1,6 +1,12 @@
 TRACTATUS ELEMENTALIS
 
 
+2ping
+Utilidad de ping bidireccional para determinar si ocurre una perdida de paquetes en un sentido o en otro.
+$ 2ping -c 5 -i 2  nombre_host.com (con 5 peticiones y a intervalos de 2 segundos)
+Nota.- si no se especifica número de peticiones, finalizar con ^C
+
+
 4g8
 Capturar paquetes de equipos de una red. Previamente preparar el equipo con los pasos previos para el envenenamiento arp lanzando en dos terminales y sin cerrarlas hasta terminar la captura:
 # arpspoof -i eth0 -t 192.168.1.12 192.168.1.1
