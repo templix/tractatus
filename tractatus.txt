@@ -144,8 +144,9 @@ $ abiword --geometry=1366x768 (Iniciar maximizado según la resolución de panta
 
 
 abook
-Agenda personal.
-$ abook (Abre la aplicación)
+Muestra una plantilla de libreta de direcciones. Proporciona muchos campos diferentes de información del usuario como nombre, email, dirección y varios campos de teléfono. abook está diseñado para usar con mutt, pero se puede usar de forma independiente.
+$ abook (forma básica)
+$ abook -C archivo (Usando una plantilla diferente. Por defecto  en ~/.abook/abookrc)
 Algunas teclas de control:
 	a (Añadir contacto y crear las pestañas para los datos. Usar las flechas para moverse entre pestañas y los números de los conceptos para entrar información)
 	r (Suprimir contacto)
@@ -193,7 +194,12 @@ $ acpi -b (bateria)
 $ acpi -i (información adicional de la bateria)
 $ acpi -V (ver toda la información posible)
 $ watch acpi -V (en tiempo real)
-$ cat /proc/acpi/battery/BAT0/info (Muestra varios datos, los más importantes: design capacity y last full capacity. La diferencia entra ambas cantidades es la capacidad que ha perdido la beteria)
+$ cat /proc/acpi/battery/BAT0/info (Muestra varios datos, los más importantes: design capacity y last full capacity. La diferencia entra ambas cantidades es la capacidad que ha perdido la bateria)
+
+
+acpitail
+Muestra información del estado de ACPI sobre la batería, el ventilador y la temperatura.
+$ acpitail -B 60 -F 10 (de la bateria cada 60 segundos. Por defecto 15 y del ventidador cada 10. Por defecto 5)
 
 
 add-apt-repository
