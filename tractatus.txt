@@ -3394,6 +3394,14 @@ Opciones:
 	-d (Extrae con la misma estructura de directorio, si así se creó el fichero)
 
 
+cpipe
+Copia la entrada estándar a la salida estándar mientras mide el tiempo que tarda en leer un búfer de entrada y escribir un búfer de salida. Las estadísticas del promedio de rendimiento y la cantidad total de bytes copiados se imprimen en la salida de error estándar.
+# find /usr -iname network | cpipe -vr -vw -vt > /dev/null (mostrar tiempos de lectura, escritura y rendimiento y los demás datos a /dev/null)
+	in: 887.446ms at     720B/s (    720B/s avg)     639B   (bsize=639)
+	out:   0.002ms at  304.7MB/s ( 304.7MB/s avg)     639B
+	thru: 887.496ms at     720B/s (    720B/s avg)     639B
+
+
 cpu
 reemplazo para las utilidades useradd/usermod/userdel para administradores que utilizan un servidor LDAP y que desean tener un conjunto de herramientas de línea de comando para hacer la administración.
 
