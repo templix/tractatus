@@ -3197,6 +3197,23 @@ $ conky (Arrancar la aplicación. Se muestra en el escritorio)
 $ conky -d (arrancarla como daemon)
 
 
+conntrack
+Permite replicar el estado de las conexiones que están siendo actualmente procesadas por el firewall. Conntrackd también puede ejecutarse como daemon de estadísticas.
+# conntrack -C (Para contar el número total de conexiones de red en este momento)
+# conntrack -E -e NEW (monitorear las conexiones de red recién creadas como eventos en tiempo real)
+# conntrack -L -p tcp --state ESTABLISHED (mostrar conexiones TCP abiertas)
+# conntrack -L -p udp --dport 500 (mostrar conexiones UDP con el puerto de destino 500)
+# conntrack -E -e NEW -p tcp --dport 22 (monitorear nuevas conexiones SSH en tiempo real)
+
+
+conntrackd
+Proporciona una interfaz flexible para el sistema de seguimiento de conexiones que /proc/net/ip_conntrack
+# conntrackd -d (Ejecuta en modo daemon)
+# conntrackd -s (volcar las estadísticas recopiladas por el daemon)
+# conntrackd -i (Volcar los estados contenidos en la memoria caché interna, es decir, los manejados por este firewall)
+# conntrackd -e (Volcar los estados contenidos en la memoria caché externa, es decir, aquellos manejados por otros firewalls)
+
+
 consolochars
 Modificar las fuentes en las consolas [tty1-6]
 # consolechars -f fuentes
