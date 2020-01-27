@@ -18022,6 +18022,12 @@ Muestra dos ficheros interactivamente.
 $ sdiff -W -B file1 file2 (Ignorando espacios [W] y lineas en blanco [B])
 
 
+sdmem
+[secure-delete]. Diseñado para eliminar los datos que pueden permanecer en la memoria RAM de forma segura y que no puedan ser recuperados. Es preciso recordar que en las SDRAMs los datos no se borran, sino que se mantienen estáticos y por tanto es fácil extraerles la información necesaria.
+# sdmem -f -v (en modo rápido [f] y verbose [v])
+# sdmem -v -l -l (producirá un terminal llena de asteriscos **** para mostrar actividad mientras se sobrescribe el espacio libre en RAM)
+
+
 seashells
 [python-pip]. Herramienta que canaliza la salida de un comando de la terminal a la web en tiempo real. Para instalar:
 # pip install seashells
@@ -24026,6 +24032,12 @@ $ zenity --info --text="Este PC va a explotar en 10 segundos. Date por muerto."
 $ zenity --password --username (Muestra diálogo entrar usuario y contraseña)
 $ zenity --calendar (Muestra el calendario)
 $ zenity --scale (Muestra la escala)
+
+
+zerofree
+Suprimir bloques libres de los sistemas de archivos ext2, ext3 y ext4, por defecto con ceros. El sistema sobre el que se actue ha de estar desmontado.
+# zerofree /dev/sda1
+# zerofree -n /dev/sda3 (Realizar un simulacro sin modificar el sistema de archivos)
 
 
 zfgrep
