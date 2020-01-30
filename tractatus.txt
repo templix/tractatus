@@ -23539,6 +23539,11 @@ Colores por defecto:
 	-swapcolor red (de la memoria swap. Mismo color que la memoria usada)
 
 
+xmltoman
+Script para convertir archivos .xml a páginas man en formato groff o html. Presenta los elementos habituales de la página de manual, como "description", "options", "see also", etc.
+xmltoman archivo.xml > archivo.html
+
+
 xmll
 [libxml2]. Formatear archivos xml
 $ xmllint --format archivo.xml
@@ -23708,6 +23713,7 @@ xstarfish
 Generador de imágenes aleatorias coloridas y en mosaico para fondo de escritorio usando funciones matemáticas. No usa imagen de origen.
 $ xstarfish -d 300 (que se actualice cada 5 minutos)
 $ xstarfish -g 400x400 -o walpaper.png (de 400x400 pixels, por defecto 256x256 y que se guarde con el nombre indicado)
+$ xstarfish -s full -o image.png (del tamaño predeterminado del monitor y nombre de salida)
 
 
 xtables_addons
