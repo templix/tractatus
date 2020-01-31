@@ -23165,6 +23165,15 @@ Limitar el ancho de banda de la conexion de una red. Prioriza telnet y ssh sobre
 # wondershaper clear eth0  (Elimina los ajustes realizados en la red especificada)
 
 
+wordplay
+Buscador de anagramas o sea buscar una palabra o frase hecha al transponer las letras de otra palabra o frase. El idioma empleado es el inglés. Cada letra del anagrama debe aparecer con la misma frecuencia que en la cadena original.
+$ wordplay university (Anagrama de la cadena "university")
+$ wordplay university -lx (lista las palabras que se pueden deletrear usando las letras "university")
+$ wordplay university -n3m8 (Anagrama de la cadena "university" usando palabras de más de 3 letras y menos de 8)
+$ wordplay university -ld3m10 -f /usr/share/dict/words (Imprimir anagramas que contengan hasta 3 palabras, sin considerar ninguna palabra de más de 10 caracteres y utilizando el archivo "/usr/share/dict/words" en lugar de "words721.txt".
+$ wordplay university -slx (Imprime la lista de palabras de la cadena "university". La salida consistirá sólo en las palabras [s])
+
+
 wormhole
 [magic-wormhole]. Envio de archivos o directorios entre computadoras usando un código de un solo uso. la máquina emisora genera y muestra el código, que debe ser escrito en la máquina receptora. El ejemplo que sigue es sacado de la pàgina del proyecto <https://github.com/warner/magic-wormhole>
 En la máquina emisora:
