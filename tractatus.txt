@@ -22639,6 +22639,10 @@ watchcatd
 Daemon que monitoriza los procesos registrados, matándolos en caso de que se bloqueen. El archivo de configuración está en /etc/watchcatd.conf
 
 
+watchdog
+Es un daemon que escribe en /dev/watchdog cada diez segundos. Si el dispositivo se abre pero no se escribe en un minuto, la máquina se reiniciará. Esta característica está disponible cuando el kernel está construido con soporte de "watchdog de software" (estándar en los núcleos Debian) o si la máquina está equipada con hardware watchdog. La capacidad de reiniciar del software del kernel dependerá de estado de la máquina. La herramienta en sí misma ejecuta varias comprobaciones y actúa de manera adecuada si el sistema no está en buen estado.
+
+
 watson
 Controlar los tiempos que se dedican a un proyecto.
 	$ watson start proyecto1 (iniciar el control del proyecto1)
