@@ -22592,6 +22592,12 @@ $ wait PID  (Indicando el PID)
 $ wait %2  (Indicando el número de proceso)
 
 
+wait-for-it
+Script de bash que esperará la disponibilidad de un host y un puerto TCP.
+$ wait-for-it www.google.com:80 --echo "google está activo"
+$ wait-for-it -t 1 www.google.com:80 --echo "google está activo" (activo después de 1 segundo)
+
+
 wall
 Enviar mensajes a todas las terminales
 $ wall (al darle al enter, podrá escribirse un texto. Una vez finalizado se le da otra vez al enter y se pulsa Ctrl+d para enviarlo a todas las terminales, incluidas las tty abiertas)
@@ -22610,11 +22616,12 @@ $ wallstreet
 
 
 wapiti
-[python, python-utidylib, tidy y python-ctypes]. Permite auditar la seguridad de las aplicaciones web buscando secuencias de comandos y formas en las que se pueda inyectar datos.
-# wapiti http://URL -u -f html -o informe (Creará un archivo, index.html [f], mostrando las anomalias en color [u] en la carpeta "informe" [o])
-Algunas opciones:
--f (otros formatos: json, txt, openvas y xml)
--a user:pass (Modo de especificar usuario y contraseña si se precisa)
+Permite auditar la seguridad de aplicaciones web. Realiza escaneos "black-box", es decir, no estudia el código fuente de la aplicación, pero escaneará las páginas web de las aplicaciones web desplegadas, buscando secuencias de comandos y formularios donde pueda inyectar datos. Una vez que obtiene esta lista, wapiti actúa como un fuzzer, inyectando cargas útiles para ver si un script es vulnerable.
+$ wapiti --list-modules (listar modulos)
+$ wapiti -u http://site.com/ -m sql --color (resaltar parámetros vulnerables [--color] y especificando un módulo [m])
+$ wapiti -u http://site.com -m "-all,xss:get,exec:post" -v 1 (especificando varios módulos y nivel verbose 1 [imprimir cada url])
+$ wapiti -u http://site.com -n 10 -b folder -v 2 -f html -o informe (limite de urls para leer [10] con el mismo patrón [evitar bucles interminables] y destino [o])
+Nota.- el parámetro "v" puede ser: 0: quiet (default), 1: imprimir cada url y 2: imprimir cada ataque. El formato "f" puede ser txt, xml o json. El parámetro "b" puede ser "page": analizar sólo la página dada como URL raíz, "folder": analizar todos los URLs bajo la URL raíz [por defecto] y "domain": analizar todos los enlaces a las páginas que están en el mismo dominio que el URL pasada.
 
 
 wapua
