@@ -22433,6 +22433,14 @@ Herramienta de monitorización del rendimiento. Proporciona información acerca 
 # vmstat 2  (actualización cada dos segundo)
 
 
+vmtouch
+Herramienta para controlar la memoria caché del sistema.
+$ vmtouch /bin/ (cantidad del directorio /bin que está es caché)
+$ vmtouch -vt archivo.txt (cuanto del archivo especificado está en memoria caché y mostrando progreso)
+$ vmtouch -ve video.mp4 (desalojar video.mp4 de la memoria caché)
+$ vmtouch -dl /vat/log/ (Daemoniza y bloquea todos los archivos de un directorio en la memoria física)
+
+
 vncrec
 [xutils-dev libxt-dev libxmu-dev libxaw7-dev]. Grabación de sesiones vnc. (https://wiki.ubuntu.com/ScreenCasts/VNCREC)
 $ wget http://ronja.twibright.com/utils/vncrec-twibright.tgz
@@ -22488,6 +22496,21 @@ vol_id
 Mostrar tipo de fichero y uuid de una partición
 # vol_id --export /dev/sda2
 # vol_id --uuid /dev/sda2  (solo muestra el uuid)
+
+
+vramsteg
+Proporciona una barra de progreso que puede mostrar el tiempo transcurrido, el tiempo restante estimado, el porcentaje completado y las etiquetas.
+ejemplo en un script:
+$ nano vramsteg.sh
+	#! /bin/bash
+	for i in {0..10}
+	do
+         vramsteg --min 0 --max 10 --style text --current $i
+	 sleep 1
+	done
+	echo
+        vramsteg -r
+Nota.- style puede ser "mono" [progreso en color blanco] o "text" [progreso con asteriscos] si no se especifica es en color [default]. -r es borrar la barra de progreso.
 
 
 vrms
