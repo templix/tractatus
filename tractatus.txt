@@ -22353,6 +22353,14 @@ Para abrir NERDTree pulsando F5 colocar en .vimrc la linea:
 	map <F5> :NERDTreeToggle<cr>
 
 
+vinetto
+Programa para extraer imágenes en miniatura y sus metadatos de los archivos Thumbs.db que se generan en Microsoft Windows.
+Aquí hay algunos ejemplos de cómo usar el comando vinetto :
+$ vinetto archivo_thumbs.db (forma básica)
+$ vinetto -o vinetto_output /dir_thumbs.db/* (extraer miniaturas de un dir y guardarlas en el dir vinetto_output)
+$ vinetto -Ho vinetto_output /dir_tThumbs.db/* (extraer miniaturas en el dir vinetto_output y producir un informe html para previsualizarlas en el navegador)
+
+
 vipe
 [moreutils]. Permite editar en medio de una tubería los datos que están siendo canalizadas entre programas.
 $ ls | vipe | ifdata -pb eth0
