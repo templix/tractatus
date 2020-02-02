@@ -22417,9 +22417,13 @@ $ vlc -I ncurses cdda://sr0/ (lo mismo indicando dispositivo del CD)
 
 
 vlock
-Aplicación para bloquear sesiones de consola.
-$ vlock -c    (La bloquea)
-Para desbloquearla, pulsar “enter” y la contraseña del usuario
+Bloquea la terminal actual local o remota o bloquea todo el sistema de consola virtual, deshabilitando completamente todo el acceso a la consola. vlock cancela estos bloqueos cuando se escribe la contraseña del usuario que inició vlock o la contraseña de root. vlock es interesante en entornos de sistemas de múltiples usuarios permitiendo a unos usuarios bloquear sus sesiones mientras que otros pueden usar el mismo sistema a través de otro terminal virtual.
+$ vlock (bloquear una sesión de consola)
+$ vlock -c (bloquear la consola de la sesión actual [default])
+$ vlock -a (bloquear todas las consolas. Si se está en una virtual bloquea todas las virtuales)
+# vlock -n (bloquea todas la consolas de X)
+# vlock -s (deshabilitar vlock)
+Para desbloquearla, pulsar “enter” y la contraseña del usuario que la ha bloqueado.
 
 
 vmkfstools
