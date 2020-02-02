@@ -22531,6 +22531,17 @@ Opciones:
      q (salir)
 
 
+vzrestore
+Restaurar maquinas virtuales [ver vzdump]
+
+
+vzdump
+Realizar copias de seguridad y restaurar imágenes openvz. Vzdump es un programa de respaldo basado en shell para máquinas virtuales OpenVZ. Está hecho para contenedores que usan el sistema de archivos tradicional "simfs", no se puede usar para contenedores con sistema de archivos "ploop".
+# vzdump --compress --dumpdir /home/USER/backup 101 (crear copia de seguridad de la máquina virtual [contenedor] comprimida, en el dir especificado y con el ID 101)
+# vzdump --compress --dumpdir /home/USER/backup --all (crear copia de seguridad de todos los contenedores)
+# vzrestore /home/USER/backup/vzdump-101.tgz 104 (restaurar la máquina virtual 101 desde la copia de seguridad con la nueva ID 104)
+
+
 w3m
 Navegador
 $ w3m -v URL (Para visualizar las url con imágenes en las tty)
