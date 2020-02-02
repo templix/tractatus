@@ -22531,6 +22531,21 @@ Opciones:
      q (salir)
 
 
+vuls
+Escáner de vulnerabilidades. Automatiza el análisis de vulnerabilidad de seguridad del software instalado en un sistema. Utiliza múltiples bases de datos de vulnerabilidades de renombre, como la National Vulnerability Database (NVD). Crear en el directorio personal el archivo::
+$ nano config.toml
+Con, como mínimo, el siguiente contenido:
+	[servers]
+	[servers.localhost]
+	host = "localhost"
+	port = "local"
+$ vuls commands (listado de comandos que pueden usarse)
+$ vuls configtest (realizar un test)
+$ vuls scan (realizar el escaneo de lo especificado en config.toml)
+$ vuls report (ver el informe)
+$ vuls tui (analizar vulnerabilidades)
+
+
 vzrestore
 Restaurar maquinas virtuales [ver vzdump]
 
