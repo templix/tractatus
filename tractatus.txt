@@ -3010,9 +3010,9 @@ Algunas teclas de control:
 	i (Estando con la opción 5, muestra los directorios ocultos)
 	r (Repetir canción)
 	q (salir)
-Para empezar aqgregar la ruta al directorio de música:
+Para empezar agregar la ruta al directorio de música:
 	:add ~/música/
-Listado de temas de colores disponibles en /usr/share/cmus. Para modificar el el esquema de colores:
+Listado de temas de colores disponibles en /usr/share/cmus. Para modificar el esquema de colores:
 	:colorscheme cyan
 Para que el cambio sea permanente:
 $ nano .cmus/rc
@@ -3309,7 +3309,7 @@ $ convert -delay 200 -quality 20 -size 200 -loop 0 *.jpg resultado.gif (Otra for
 $ convert 123.gif -adjoin 1-2-3.jpg     (extraer los fotogramas de un gif)
 $ convert -resize 200 awk.pdf[0] awk.png (primera imagen pdf a imagen)
 $ convert file.pdf file.jpg  (convertir pdf en jpg)
-$ convert imagen.png -pointsize 32 -gravity center -annotate 0 "Linux es genial" salida.png (Colocar un texto con medida 32 sin inclinación [-annnotate 0] en el centro [-gravity center] de una imagen )
+$ convert imagen.png -pointsize 32 -gravity center -annotate 0 "Linux es genial" salida.png (Colocar un texto con medida 32 sin inclinación [-annotate 0] en el centro [-gravity center] de una imagen )
 $ convert imagen.jpg -alpha set -channel A -fx 0.5 imagen.png (Aumentar la tranparencia de una imagen [valor de fx: 0 toda y 1 nada] y canviarla a jpg)
 $ convert -density 300 input.pdf -fill "rgb(255,255,255)" -opaque "rgb(29,5,114)" output.pdf  (convertir fondo negro a blanco para imprimir)
 $ convert entrada.jpg -font Bookman-Demi -pointsize 62 -stroke white -draw "text 5,60 'Texto'" salida.jpg (poner un texto en determinadas coordenadas [5,60] especificando fuente, medida y borde de las letras en blanco)
@@ -14460,6 +14460,21 @@ $ nmcli general permissions (permisos)
 nmon
 Monitor del sistema
 # nmon   (arranca la aplicación y muestra las teclas de control para escoger lo que se monitorea. “q” para cerrar la aplicación)
+
+
+nnn
+Administrador de archivos. Muestra en primer lugar los directorios y luego los archivos. La configuración personal se realiza en el archivo ~/.nnncp al estilo:
+$ nano .nnncp
+	PWD: /home/USER
+	SHELL: /bin/bash (null)
+	EDITOR: nano (null)
+$ nnn
+Algunas teclas:
+	flechas derecha/izquierda (entrar/salir del directorio hacia/desde directorios superiores o inferiores)
+	flechas arriba/abajo (subir/bajar en el arbol del directorio)
+	enter (abrir un archivo)
+	q (salir)
+	? (muestra las teclas de control))
 
 
 noclobber
