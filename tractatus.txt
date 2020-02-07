@@ -9185,45 +9185,6 @@ $ hunspell -d es_ES -l archivo.odt (un odt)
 $ hunspell -d es_ES -p unrecognized archivo.odt (palabra por palabra)
 
 
-hxtools
-Colección de herramientas y scripts que se han acumulado a lo largo de los años y cada uno de los cuales parece ser demasiado pequeño para garantizar su propio proyecto. El listado es:
- - bsvplay          - convertir archivos de música BASICA a PCM
- - cctypeinfo       - muestra los tamaños de los tipos C en la implementación con la que se compiló
- - checkbrack       - comprobación de paréntesis y recuento de paréntesis
- - declone          - romper los enlaces duros
- - diff2php         - transformar el parche en un archivo PHP de autoservicio
- - fd0ssh           - tubo para soporte de password-over-stdin a ssh
- - fnt2bdf          - convertir fuentes VGA sin procesar a X11 BDF
- - gpsh             - grep en listas de seguimiento y reproducción de archivos de audio
- - logontime        - muestra el tiempo de conexión acumulado de wtmp
- - mailsplit        - divide una mbox en ficheros individuales
- - mod2opus         - envoltura para el módulo de seguimiento/transcodificación de MIDI a Opus
- - hxnetload        - muestra la utilización de la interfaz de red
- - ofl              - abre el archivo lister (reemplaza el fusor y lsof -m)
- - paddrspacesiz    - tamaño de impresión de los espacios de dirección de los procesos
- - pesubst          - sustitución de la corriente perl-regexp (reemplaza la sed por sub-sustituciones)
- - pmap_dirty       - muestra la cantidad de RAM que un proceso usa con fuerza
- - proc_iomem_count - mostrar los tamaños de las regiones MMIO
- - qplay            - convierte las cadenas de reproducción de QBASIC a PCM
- - qtar             - interfaz más rápida para tar con pedido de archivos
- - Recurssive_lower - todos los nombres de ficheros en minúsculas recursivas
- - sourcefuncsize   - análisis estadístico del código
- - spec-beautifier  - programa para limpiar los archivos RPM .spec
- - stxdb            - Base de datos de archivos A/V
- - su1              - lo que el sudo debería haber hecho
- - utmp_register    - hacer entradas en la base de datos utmp/wtmp
- - vcsaview         - mostrar un volcado de pantalla en formato VCSA
- - vfontas          - Ensamblador de archivos de fuentes VGA
- - wktimer          - temporizador de trabajo
-
-
-hydra
-Se utiliza para crackear los sistemas de login de diferentes servicios como HTTP, FTP, TELNET, IMAP, SMB, SSH, etc.
-# hydra 192.168.1.5 -l admin -p 1234 (Una ip con el usuario "admin" con la clave "1234")
-# hydra -M lista_ips ssh -s 22 (A un listado de ips a una por linea y sobre el puerto 22)
-# hydra 192.168.1.8 ftp -s 21 -l juan -P wordlist.txt (Una ip el puerto 21 del usuario "juan" y probando las contraseñas de un archivo de texto a una por linea)
-
-
 hwb
 Hardware Book contiene información técnica diversa sobre computadoras y otros dispositivos electrónicos. Tambien hay muchos conectores comunes y poco comunes disponibles, así como
 información sobre cómo construir cables. Colocar en el navegador file:///usr/share/doc/hwb/html/about/index.html
@@ -9274,6 +9235,45 @@ Listar los procesos que se esta ejecutando o los hilos que los enlazan.
 $ hwloc-ps -a (Todos)
 $ hwloc-ps -e (informa de los últimos procesadores donde se ejecutó un proceso o subproceso.)
 Nota.- El resultado puede estar desactualizado ya que el sistema operativo puede mover las tareas a otros procesadores en cualquier momento de acuerdo con el enlace.
+
+
+hxtools
+Colección de herramientas y scripts que se han acumulado a lo largo de los años y cada uno de los cuales parece ser demasiado pequeño para garantizar su propio proyecto. El listado es:
+ - bsvplay          - convertir archivos de música BASICA a PCM
+ - cctypeinfo       - muestra los tamaños de los tipos C en la implementación con la que se compiló
+ - checkbrack       - comprobación de paréntesis y recuento de paréntesis
+ - declone          - romper los enlaces duros
+ - diff2php         - transformar el parche en un archivo PHP de autoservicio
+ - fd0ssh           - tubo para soporte de password-over-stdin a ssh
+ - fnt2bdf          - convertir fuentes VGA sin procesar a X11 BDF
+ - gpsh             - grep en listas de seguimiento y reproducción de archivos de audio
+ - logontime        - muestra el tiempo de conexión acumulado de wtmp
+ - mailsplit        - divide una mbox en ficheros individuales
+ - mod2opus         - envoltura para el módulo de seguimiento/transcodificación de MIDI a Opus
+ - hxnetload        - muestra la utilización de la interfaz de red
+ - ofl              - abre el archivo lister (reemplaza el fusor y lsof -m)
+ - paddrspacesiz    - tamaño de impresión de los espacios de dirección de los procesos
+ - pesubst          - sustitución de la corriente perl-regexp (reemplaza la sed por sub-sustituciones)
+ - pmap_dirty       - muestra la cantidad de RAM que un proceso usa con fuerza
+ - proc_iomem_count - mostrar los tamaños de las regiones MMIO
+ - qplay            - convierte las cadenas de reproducción de QBASIC a PCM
+ - qtar             - interfaz más rápida para tar con pedido de archivos
+ - Recurssive_lower - todos los nombres de ficheros en minúsculas recursivas
+ - sourcefuncsize   - análisis estadístico del código
+ - spec-beautifier  - programa para limpiar los archivos RPM .spec
+ - stxdb            - Base de datos de archivos A/V
+ - su1              - lo que el sudo debería haber hecho
+ - utmp_register    - hacer entradas en la base de datos utmp/wtmp
+ - vcsaview         - mostrar un volcado de pantalla en formato VCSA
+ - vfontas          - Ensamblador de archivos de fuentes VGA
+ - wktimer          - temporizador de trabajo
+
+
+hydra
+Se utiliza para crackear los sistemas de login de diferentes servicios como HTTP, FTP, TELNET, IMAP, SMB, SSH, etc.
+# hydra 192.168.1.5 -l admin -p 1234 (Una ip con el usuario "admin" con la clave "1234")
+# hydra -M lista_ips ssh -s 22 (A un listado de ips a una por linea y sobre el puerto 22)
+# hydra 192.168.1.8 ftp -s 21 -l juan -P wordlist.txt (Una ip el puerto 21 del usuario "juan" y probando las contraseñas de un archivo de texto a una por linea)
 
 
 i7z
