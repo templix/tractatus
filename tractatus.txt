@@ -20537,6 +20537,8 @@ $ timelimit -t10 tail -f /var/log/apache2/access.log (mostrará el archivo duran
 timeout
 Limita el tiempo de funcionamiento de un comando o aplicación.
 $ timeout 60m firefox (arrancará firefox y se cerrará a los 60 minutos ["s" para segundos, "h" para horas y "d" para dias])
+$ timeout 0.5m top (arrancará el comando top durante 30 segundos)
+$ timeout -s SIGINT 6s ping google.com (enviar señal SIGINT en lugar de SIGTERM al alcanzar 6 segundos)
 
 
 times
