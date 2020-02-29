@@ -8230,6 +8230,17 @@ $ gocr -d 2 -p ./ocrdb/ -m 256 -m 130 kapcha.jpg (El aprendizaje. Lanzar varias 
 $ gocr -p ocrdb/ -m 2 kapcha.jpg (Comprobar si el programa lo resuelve solo)
 
 
+gocryptfs
+Cifrado de archivos en un directorio que se puede montar. Cada archivo almacena un archivo cifrado correspondiente en el disco duro.
+$ mkdir dir_cifrado lugar (Crear directorios, el cifrado y donde se montará [lugar])
+$ gocryptfs -init dir_cifrado (Iniciar el proceso. Pedirá contraseña y confirmación)
+$ gocryptfs dir_cifrado lugar (montar dir_cifrado en "lugar")
+$ touch lugar/archivo.txt (crear un archivo en el dir montado)
+$ fusermount -u lugar (desmontar el directorio montado)
+$ gocryptfs -passwd dir_cifrado (modificar la contraseña. Primero pide la antigua y luego la nueva y confirmación)
+$ gocryptfs -fsck dir_cifrat (chequear la consitencia del directorio cifrado [fsck summary: no problems found])
+
+
 goldeneye
 Es una herramienta de prueba HTTP DoS. Esta herramienta se puede usar para probar si un sitio es susceptible a ataques de denegación de servicio (DoS). Es posible abrir varias conexiones paralelas contra una URL para verificar si el servidor web puede verse comprometido. El programa prueba la seguridad en las redes y utiliza 'HTTP Keep Alive + NoCache' como vector de ataque.
 # goldeneye http://lapipaplena.org -m random -d (con metodo HTTP "random", por defecto "get" y debug )
