@@ -16352,7 +16352,10 @@ $ pngphoon -h 1060px -w 1060px -f lluna.png -b (En negro la superficie de la lun
 
 pngquant
 Optimizacion de imagenes .png. Comprime reduciendo el número de colores disponible. El tamaño del archivo resultante es mucho menor, pero hay una perdida de calidad.
-$ pngquant 256 imagen.png
+$ pngquant imagen.png
+$ pngquant --quality=40-90 imagen.png (con una cualidad de 40 minima y 90 maxima)
+$ pngquant *.png (todas las imágenes del directorio)
+$ pngquant imagen1.png imagen2.png imagen3.png (con varias imágenes a la vez)
 
 
 pom (bsdgames)
