@@ -8750,6 +8750,30 @@ Información en inglés del comando gawk. Acceder a la misma con el navegador co
 	file:///usr/share/doc/gawk-doc/gawkworkflow-html/index.html
 
 
+guessnet
+Herramienta de detección de redes no agresiva para usar cuando se mueve una máquina entre redes que no necesariamente proporcionan DHCP. Al hacer ifup eth0, guessnet verificara si eth0 tiene que activarse como hogar o oficina. Para ello utiliza la información almacenada en las definiciones de las interfaces lógicas. En el archivo /etc/network/interfaces han de constar los datos de las redes.
+# nano /etc/network/interfaces
+auto eth0
+mapping eth0
+        script guessnet-ifupdown
+        map timeout: 10
+        map default: none
+iface hogar inet static
+        address 192.168.1.16
+        netmask 255.255.255.0
+        gateway 192.168.1.1
+        test1 peer address 192.168.1.1 mac 00:11:22:33:44:55
+        test2 peer address 192.168.1.2 mac 00:55:44:33:22:11
+iface oficina inet static
+	address 192.168.0.45
+	netmask 255.255.255.0
+	gateway 192.168.0.254
+	test1 peer address 192.168.0.254 mac 00:55:66:77:88:99
+	test2 peer address 192.168.0.1   mac 00:99:88:77:66:55
+# default dhcp for none
+        iface none inet dhcp
+
+
 gxmessage
 Dejar mensajes en la pantalla
 $ gxmessage -center -fg red -bg black "No cierren la terminal"
