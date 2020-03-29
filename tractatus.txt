@@ -4216,6 +4216,11 @@ Pasar un archivo latex a txt.
 $ detex -n archivo.tex > archivo.txt
 
 
+deurlname
+[renameutils]. Elimina los caracteres codificados en la URL (como %20 que representa el espacio) de los nombres de los archivos. Algunos programas, por ejemplo w3m, tienden a mantener esos caracteres codificados en los archivos guardados. Útil para guardar archivos que se han descargado de Internet limpiando su URL.
+$ deurlname omg%20ponnu%20ily%20kannu.mp3
+
+
 devilspie
 Permite especificar el comportamiento de las ventanas para que determinadas aplicaciones se abran en un escritorio concreto. Ha de colocarse en las aplicaciones de inicio.
 $ mkdir .devilspie (Crear el directorio)
@@ -9333,6 +9338,11 @@ $ iconv -l   (Muestra todas las opciones posibles)
 $ iconv -f ISO85591 -t UTF8 viejo.txt -o nuevo.txt (Pasar viejo.txt de codificación ISO-8559-1 a UTF-8 en el nuevo.txt)
 
 
+icp
+[renameutils]. Igual que imv[ver], pero copia los archivos en lugar de moverlos.
+$ icp dir/archivo.txt
+
+
 id
 Conocer el uid y el gid del usuario especificado
 $ id root
@@ -9668,6 +9678,11 @@ interface eth0
 Los directorios "chats" y "debug" los crea la misma aplicación.
 Lanzar el sniffer de conversaciones msn:
 # imsniff
+
+
+imv
+[renameutils]. Permite renombrar interactivamente los nombres de los archivos uno por uno.
+$ imv dir/archivo.txt
 
 
 inadyn
@@ -16938,9 +16953,20 @@ $ pyversions -s (las soportadas)
 $ pyversions -i (las instaladas)
 
 
+qcp
+[renameutils]. Funciona como qmv [ver], pero copia los archivos en lugar de renombrarlos. Mantendrá tanto los archivos originales como los duplicados.
+$ qcp dir
+
+
 qemu-nbd
 Utilidad de Qemu para poder montar discos virtuales. Crea un disco de red. Es necesario cargar el módulo nbd (modprobe nbd)
 # qemu-nbd -c /dev/nbd0 fichero.vdi (Crear dispositivo de disco de red a partir del fichero vdi de VirtualBox. Ahora hay que montar la partición con mount /dev/nbd0p1 /mnt)
+
+
+qmv
+[renaameutils]. Abrirá los nombres de los archivos en un directorio con elu editor de texto predeterminado y permitirá editarlos.
+$ qmv dir (renombrar los nombres de los archivos del directorio)
+$ qmv -f do dir (mostrar sólo la columna del archivo de destino [f], 'do' se refiere al destino y el directorio)
 
 
 qpdf
