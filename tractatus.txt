@@ -13865,6 +13865,13 @@ Atajos
 	Alt + m (Soporte para ratón habilitar/deshabilitar. Precisa paquete gpm)
 	Alt + y (Coloreado de sintaxis habilitar/deshabilitar)
 	Alt + x (Suprimir/añadir la ayuda del final de página)
+1- Solución al problema:
+	$ nano .bashrc
+	Error reading /home/<username>/.nano_history: Permission denied
+	Press Enter to continue starting nano.
+# nano /etc/nanorc
+Y comentar la entrada:
+	#set historylog
 
 
 nast
