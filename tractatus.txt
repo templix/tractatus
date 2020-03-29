@@ -8012,6 +8012,13 @@ Código de los colores:
 	rojo (crítico)
 
 
+glimpse
+Aplicación [GLobal IMPlicit SEarch] consistente en un sistema de indexación y consulta de UNIX que permite buscar rápidamente en un gran conjunto de archivos. Glimpse admite la mayoría de las opciones de agrep, incluida la coincidencia aproximada.
+$ glimpse -F '*.sh$' palabra (encuentra "palabra" en todos los archivos .sh)
+$ glimpse -2 -F html palabra (todas las ocurrencias de "palabra" con dos errores en los archivos html en algún lugar de su nombre completo.)
+$ glimpse -l -F '\.c$' palabra (enumera los nombres de todos los archivos .c que contienen "palabra")
+
+
 glxinfo
 Información sobre las bibliotecas gráficas
 $ glxinfo | grep  rendering  ("yes" indica que la tarjeta gráfica soporta aceleración 3D)
