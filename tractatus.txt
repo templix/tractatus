@@ -3871,6 +3871,13 @@ dav
 $ dav archivo.txt
 
 
+dbmmanage
+Se utiliza para crear y actualizar los archivos de formato DBM utilizados para almacenar los nombres de usuario y la contraseña para la autenticación básica de los usuarios HTTP a través de mod_authn_dbm. Los recursos disponibles en el servidor Apache HTTP pueden ser restringidos sólo a los usuarios listados en los archivos creados por dbmmanage. Este programa sólo puede ser usado cuando los nombres de usuario están almacenados en un archivo DBM. Para usar una base de datos de archivo plano, ver htpasswd. Otra herramienta para mantener una base de datos de contraseñas DBM es htdbm.
+# dbmmanage archivo view USER (archivo de formato DBM sin la extensión .db, .pag, o .dir del usuario especificado)
+# dbmmanage archivo adduser USER (añadir un usuario a una base de datos "archivo")
+# dbmmanage archivo delete USER (eliminar un usuario)
+
+
 dc
 calculadora. Los operadores se colocan antes que sus operandos.
 $ echo "5 2 + p" | dc (Se introducen dos números [5 y 2] se indica la operación a realizar [+] y que muestre el resultado [p])
