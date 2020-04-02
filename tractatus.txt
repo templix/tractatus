@@ -2850,6 +2850,11 @@ $ cat /etc/shells (Mostrar las shells disponibles en el sistema)
 $ chsh -s /bin/tcsh usuario
 
 
+cifsiostat
+[sysstat]. Muestra estadísticas sobre las operaciones de lectura y escritura en los sistemas de archivos CIFS. Podría decirse que CIFS es una versión más reciente de SMB.
+# cifsiostat -m 2 3 (en megabites por segundo cada 2 segundos y 3 informes)
+
+
 chvt
 Cambiar de consola virtual.Si, estando en la /dev/tty1, se teclea:
 $ chvt 3  (Se irá a la /dev/tty3. Lo mismo que con Ctrl+Alt+F3)
@@ -13243,9 +13248,10 @@ $ mplayer -nolirc http://5253.live.streamtheworld.com/VIRGINRADIO_DUBAIAAC (Otra
 $ mplayer http://192.168.1.115/img/video.asf -frames 1 -vo jpeg:quality=100:maxfiles=1  (Tomar una imagen [frames 1] de una ubicación en la red)
 
 
-mpstat (sysstat)
-muestra estadísticas relacionadas con la CPU.
-# mpstat 2 -P ALL (actualiza cada 2 segundos)
+mpstat
+[sysstat]. Escribe en la salida estándar las actividades de cada procesador disponible, siendo el primero el procesador 0. Si no se ha seleccionado ninguna actividad, entonces el informe por defecto es el informe de utilización de la CPU.
+# mpstat -P ALL 2 5 (informes de todos los procesadores a intervalos de 2 segundo 5 veces)
+# mpstat -u 2 3 (informe de la cpu cada 2 segundos 3 informes)
 
 
 mpsyt
