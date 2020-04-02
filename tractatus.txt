@@ -7596,7 +7596,7 @@ Editor. Según se lance desde las X o por consola se usará fte, xfte o sfte. F1
 
 ftff
 [whichman]. Busca archivos o directorios
-$ ftff -t2 logfile.txt (busca  logfile con dos errores en el nombre. permite *)
+$ ftff -t2 logfile.txt (busca  logfile con dos errores en el nombre. permite asterisco [*])
 
 
 ftp
@@ -24515,6 +24515,11 @@ Suprimir bloques libres de los sistemas de archivos ext2, ext3 y ext4, por defec
 
 zfgrep
 Busca cadenas de texto fijas sobre archivos comprimidos (ver fgrep)
+
+
+zforce
+Fuerza una extensión .gz en todos los archivos gzip para que gzip no los comprima dos veces. En los sistemas con una limitación de 14 caracteres en los nombres de archivo, el nombre original se trunca para dejar espacio para el sufijo .gz. Por ejemplo, 12345678901234 se renombra a 12345678901.gz. Un nombre de archivo como foo.tgz se deja intacto.
+$ zforce archivo archivo
 
 
 zgrep
