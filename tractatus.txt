@@ -3308,6 +3308,21 @@ Y dejar la linea:
 Página donde comprobar la fortaleza de una contraseña: <https://howsecureismypassword.net/>
 
 
+control-
+[^c, ^z] Cancelar o suspender la ejecución de comandos en primer plano.
+Cancelar:
+	$ sleep 5000
+	^C
+Suspender:
+	$ sleep 5000
+	^Z
+	[1]+  Detenido       sleep 5000
+Nota.- En caso de volver a llevar a primer plano un comando detenido:
+	$ fg %1
+En caso de querer continuar con su ejecución en segundo plano:
+	$ bg %1
+
+
 convert
 [imagemagick]. Redimensionar, cambiar formatos, extraer fotogramas, convertir blanco y negro imagenes. Este comando es tan extenso que él solo merecería un libro. Consulta más exhaustiva en <http://www.imagemagick.org/script/convert.php> o en español <http://www.rpublica.net/imagemagick/intro.html#inicio_sec>
 $ convert *.jpg imagenes.pdf        (Crear un pdf con todas las imágenes)
