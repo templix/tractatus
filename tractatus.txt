@@ -1852,6 +1852,26 @@ binutils
 Los programas en este paquete se utilizan para ensamblar, vincular y manipular archivos binarios y de objeto. Pueden ser utilizados en conjunto con un compilador y varias bibliotecas para construir programas. Consta de la siguientes aplicaciones: addr2line, ar, as, c++filt, dwp, elfedit, gold, gprof, ld, ld.bfd, ld.gold, nm, objcopy, objdump, ranlib, readelf, size, strings y strip
 
 
+bld
+Es un demonio que escucha las peticiones en el puerto 2905 y recoge la información cada 10 segundos escribiendo los resultados en un archivo RRD. Las estadísticas recopiladas incluyen: Uso de CPU y memoria, carga del sistema, latencia de la red (ping), tráfico de la interfaz de la red, y temperaturas del sistema (usando sensores lm), y uso del disco. Las peticiones son o bien presentaciones de direcciones IP o comprobaciones con la lista negra. bld utiliza un algoritmo muy simple para decidir si agregar o no las direcciones IP a la lista negra. La primera vez que una dirección IP es enviada, se agrega a una lista interna con una marca de tiempo y todas las solicitudes posteriores incrementan un contador para esta IP. Tan pronto como el intervalo de tiempo mínimo es transcurrido (por defecto: 30 segundos), y si se alcanza un ratio máximo de solicitudes (por defecto: 10 envíos en el intervalo de 30 segundos), la IP es puesta en la lista negra. A continuación se pone en la lista negra durante un tiempo configurable (por defecto: 900 segundos).
+# /etc/init.d/bld stop (parar el demonio)
+# bld -u root (indicar el usuario de bld)
+# bld -a localhost (indicar el host de escucha)
+# bld -p 2905 (indicar el puerto de escucha)
+# bld -P /root/bld (indicar el archivo donde guardar el PID)
+# bld -B /root/bld_lista_negra (donde guardar la lista negra)
+# bld -I /root/bld_lista_ips (donde guardar la lista de ips)
+# bld -W /root/bld_lista_blanca (donde guardar la lista blanca de ips)
+# /etc/init.d/bld force-reload (reiniciar el demonio con todo lo especificado)
+Otros comando relacionados y del mismo paquete o bld-tools:
+# bldread /root/bld_lista_negra (leer informes si existen)
+bld-mrtg (lee los archivos de volcado del demonio e imprime estadísticas sobre la cantidad de IP actualmente en la lista negra y la cantidad de IP agregadas en los últimos 5 minutos)
+# blddecr localhost:10000 192.168.1.58 (disminuye el contador de una dirección IP en un host y un puerto determinado. Por defecto localhost:2905)
+# bldinsert localhost:10000 192.168.1.104 (Agrega una ip a la lista negra en un host concreto y un puerto determinado. Por defecto localhost:2905)
+# bldquery localhost:10000 192.168.1.39 (pregunta al demonio que escucha en determinado host y puerto si una ip está en la lista negra por defecto localhost:2905)
+# bldsubmit localhost:10000 192.168.1.46 (envía una ip al demonio que escucha en el host y puerto determinado (por defecto en localhost:2905)
+
+
 blkid
 Muestra uuid de cada partición y el tipo de formato.
 # blkid
