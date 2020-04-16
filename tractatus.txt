@@ -3076,26 +3076,10 @@ Normalmente este comando se utiliza para eliminar caracteres raros o no necesari
 $ man less | col -b > less.txt
 
 
-collectd
-Es un daemon que recopila información del sistema [sistema operativo, aplicaciones, archivos de registro y dispositivos externos] periódicamente y proporciona mecanismos para monitorear y almacenar los valores de varias maneras. Dado que el demonio no necesita iniciarse cada vez que quiere actualizar los valores es muy rápido y las estadísticas son muy precisas ya que los archivos se actualizan cada 10 segundos de forma predeterminada. Abrir el archivo:
-# nano /etc/collectd/collectd.conf
-Y desclicar las siguientes lineas:
-	Hostname "localhost"
-	FQDNLookup true
-Y en la sección # LoadPlugin section descomentar las que se crean oporturnas además de las activadas por defecto. Activar el servicio:
+collectd Es un demonio que recoge información del sistema periódicamente y proporciona mecanismos para vigilar y almacenar los valores de diversas maneras. Las estadísticas, por defecto, se actualizan 
+cada 10 segundos. Este paquete contiene el archivo principal del programa y los plugins listados en /usr/share/doc/collectd-core/README.Debian.plugins [algunos plugins requieren bibliotecas adicionales]. 
+Antes de lanzar el demonio es preciso configurar el archivo de configuración que se encuentra en /etc/collect.conf. Existen ejemplos en <https://gist.github.com/uffsalot/2edca3a47c600b2341f45cb845af0308>
 # /etc/init.d/collectd start
-Crear en apache el archivo:
-# nano /etc/apache2/mods-available/mod_status.conf
-con el siguiente contenido:
-	<Location /mod_status>
-	  SetHandler server-status
-	  Order Deny,Allow
-	  Deny from all
-	  Allow from 127.0.0.1
-	</Location>
-Reiniciar apache:
-# /etc/init.d/apache2 restart
-Y en el navegador colocar la dirección: http://127.0.0.1/server-status
 
 
 colordiff
