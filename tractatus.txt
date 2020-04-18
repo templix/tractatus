@@ -2056,6 +2056,13 @@ Cuando introducimos un comando en Bash el orden de preferencia en la búsqueda d
 $ builtin cd /
 
 
+bundlewrap
+Sistema de gestión de configuración descentralizada. Mientras que la mayoría de los sistemas de gestión de configuración se basan en una arquitectura cliente-servidor, bundlewrap funciona a partir de un repositorio clonado en la máquina local.
+$ bw apply -i mynode (aplicar la configuración al nodo preguntando interactivamente antes de hacer cada cambio)
+$ bw run nodo1,grupo2,nodo3 "uname -a" (ejecutar comandos en los nodos y grupos especificados)
+$ bw test (paquete de pruebas útil después de cada confirmación. Intentará detectar cualquier error en paquetes y plantillas de archivos inicializando cada elemento de cada nodo)
+
+
 bunzip2
 Descomprime ficheros bz2.
 $ bunzip2 archivo.bz2
