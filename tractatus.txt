@@ -8005,7 +8005,7 @@ $ git checkout -- archivo
 Imprimir todos los repositorios git de un usuario
 	$ curl -s https://api.github.com/users/USERNAME/repos?per_page=1000 |grep git_url |awk '{print $2}'| sed 's/"\(.*\)",/\1/'
 4.-
-Cuando se formatea el disco y se instala nuevamente la distro y git produce un error porqué los datos del usuario han variado respecto de los que tenia::
+Cuando se formatea el disco y se instala nuevamente la distro y git produce un error porqué los datos del usuario y la máquina desde la que se comunicaba han variado respecto de los que constaban:
 $ git clone git@github.com:tem... (clonar)
 $ git config --global --edit
 $ git commit --amend --reset-author
