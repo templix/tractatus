@@ -14446,6 +14446,12 @@ Imprime estadísticas de red para todas las tarjetas de red.
 # nicstat -i eth0,eth1 3 (Imprimir estadísticas cada 3 segundos solo para las interfaces eth0 y eth1)
 
 
+nictools-pci
+Herramientas que pueden ayudar a diagnosticar problemas con tarjetas Ethernet o, en algunos casos, darles a esas tarjetas la pista final para que funcionen en la red. El paquete está intregado por los siguientes comandos: alta-diag, eepro100-diag, epic-diag, myson-diag, natsemi-diag ne2k-pci-diag, ns820-diag, pci-config, pcnet-diag, rtl8139-diag, starfire-diag, tulip-diag, via-diag, vortex-diag, winbond-diag y yellowfin-diag.
+# pci-config
+# rtl8139-diag -a
+
+
 nield
 Daemon para recibir notificaciones del núcleo a través del socket de enlace de red y generar registros relacionados con las interfaces NIC [network information service]. Una vez arrancado el daemon [/etc/init.d/nield start] visualizar los logs en /var/log/nield.log.
 
