@@ -2056,6 +2056,30 @@ Cuando introducimos un comando en Bash el orden de preferencia en la búsqueda d
 $ builtin cd /
 
 
+buku
+Gestión de marcadores. Importación automática de firefox, chrome y chromium, exporta/importa de html, markdown y org, los abre en el navegador...
+$ buku -u (actualizar campos de los marcadores, comentarios, tags, título...)
+$ buku --ui (importa los marcadores de los navegadores)
+$ buku -a http://lapipaplena.duckdns.org/tractatus/ (entrar una url)
+$ buku -a https://www.deepl.com/es/translator -c traductor --title Deepl traductor (entrar un marcador con comentario y título)
+$ buku -a https://www.facebook.com/ -c redes de mierda --title una de las redes -t redes (entrar marcador con comentario, título y tag)
+$ buku -a https://www.facebook.com/ -c redes de mierda --title una de las redes -t redes --immutable 1 (que no se actualicen com el argumento -u)
+$ buku -p -15 (ver los 15 primeros del listado)
+$ buku -d (borrar todos los marcadores)
+$ buku -d 7-12 () borar los marcadores del 7 al 12)
+$ buku -d 5 (suprimir el marcador num. 5)
+$ buku -S debian (mostrar los marcadores con el tag "debian")
+$ buku -e bookmarks.html (crear un .html con todos los marcadores)
+$ buku -i bookmarks.html (importar un .html con los marcadores)
+$ buku -e bookmarks.org (crear un archivo .org con todos los marcadores)
+$ buku -S blank (listar los marcadores que no tienen ni título ni tag)
+$ buku -w nano (indicar que el editor en nano)
+$ buku -u 1 -c tractatus elementalis (actualizar el num. 1 y añadir un comentario)
+$ buku -l (pedirá contraseña y confirmación para encriptar el archivo)
+$ buku -k (desencriptar el archivo)
+Nota.- Los nuevos comentario, tags o título sustituyen a los que constan en la entrada.
+
+
 bundlewrap
 Sistema de gestión de configuración descentralizada. Mientras que la mayoría de los sistemas de gestión de configuración se basan en una arquitectura cliente-servidor, bundlewrap funciona a partir de un repositorio clonado en la máquina local.
 $ bw apply -i mynode (aplicar la configuración al nodo preguntando interactivamente antes de hacer cada cambio)
