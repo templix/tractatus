@@ -1266,6 +1266,12 @@ Para limpiar todos los directorios entrados en autojump:
 $ j --purge
 
 
+autolog
+El programa lee el archivo utmp, entrada por entrada. El nombre de usuario para cada 'proceso de usuario' se compara con las entradas en el archivo de configuración.
+# autolog (iniciar el daemon. También /etc/init.d/autolog start)
+# autolog -a -d (Imprimir información en todas las entradas utmp, no solo de los procesos del usuario y en modo debug)
+
+
 automater
 (python3-httplib2 python2.6-argparse)
 Obtener información de ips y urls inclusive si estan bloqueadas en algún blocklist. Copiar el script en python de: <https://github.com/1aN0rmus/TekDefense-Automater.git>
@@ -10319,53 +10325,51 @@ Paquete que contiene una colección de programas utilizados para operaciones de 
 
 irssi
 Chatear via terminal.
-$ irssi (Arrancar la aplicacuó)n
-set nick el_nick (establecer nick habitual)
-set quit_message Mi Mensaje de salida (mensaje que se mostrará al salir del xat)
-save (Obligatorio para guardar todos los cambios)
-network list (lista de las redes existentes)
-network remove nombre_de_red (borrar una red)
-server list  (lista de todos los servidores guardados)
-server remove nombre_de_servidor  (borrar un servidor)
-connect la_red  (Conectar a una red))
-channel add -auto #canal la_red (Conexión automática a determinado canal de una red)
-list *linux *   (ver listado de canales que tengan “linux” por titulo)
-join #canal (Después de conectar con una red, entrar en determinado canal)
-part  #canal mensaje (salir de un canal con un mensaje)
-quit (cierra la aplicación)
-disconnect servidor  (desconecta de un servidor)
-msg usuario un_mensaje  (Manda un mensaje privado a un usuario)
-nick  otro_nick> (Cambiar de nick)
-close usuario  (cierra la ventana de un usuario)
-dcc usuario fichero  (inicia la transferencia de un archivo con usuario)
-exit (desconecta el servidor)
-channel (muestra informacion sobre un canal y los usuarios conectados)
-win #ventana  (cambiar de ventana. igual que con ESC + num de ventana)
-script list   (Listado)
-help script (ayuda)
-nick el_nick:contraseña (logearse con nombre de usuario y contraseña)
-msg el_nick set la_contraseña nueva_contraseña (modificar contraseña)
-crear una red y servidores:
-network add mi_red (crear una red local [mi_red])
-server add -auto -network mi_red la_red 6667 password  (Establecer que la red local [mi_red] se conecte automaticamente al arrancar a una red externa [la_red], especificando puerto y contraseña si procede,en caso contrario suprimir estos dos últimos parámetros).
-save
+$ irssi (Arrancar la aplicacuón)
+	set nick el_nick (establecer nick habitual)
+	set quit_message Mi Mensaje de salida (mensaje que se mostrará al salir del xat)
+	save (Obligatorio para guardar todos los cambios)
+	network list (lista de las redes existentes)
+	network remove nombre_de_red (borrar una red)
+	server list  (lista de todos los servidores guardados)
+	server remove nombre_de_servidor  (borrar un servidor)
+	connect la_red  (Conectar a una red))
+	channel add -auto #canal la_red (Conexión automática a determinado canal de una red)
+	list *linux *   (ver listado de canales que tengan “linux” por titulo)
+	join #canal (Después de conectar con una red, entrar en determinado canal)
+	part  #canal mensaje (salir de un canal con un mensaje)
+	quit (cierra la aplicación)
+	disconnect servidor  (desconecta de un servidor)
+	msg usuario un_mensaje  (Manda un mensaje privado a un usuario)
+	nick  otro_nick> (Cambiar de nick)
+	close usuario  (cierra la ventana de un usuario)
+	dcc usuario fichero  (inicia la transferencia de un archivo con usuario)
+	exit (desconecta el servidor)
+	channel (muestra informacion sobre un canal y los usuarios conectados)
+	win #ventana  (cambiar de ventana. igual que con ESC + num de ventana)
+	script list   (Listado)
+	help script (ayuda)
+	nick el_nick:contraseña (logearse con nombre de usuario y contraseña)
+	msg el_nick set la_contraseña nueva_contraseña (modificar contraseña)
+	crear una red y servidores:
+	network add mi_red (crear una red local [mi_red])
+	server add -auto -network mi_red la_red 6667 password  (Establecer que la red local [mi_red] se conecte automaticamente al arrancar a una red externa [la_red], especificando puerto y contraseña si procede, en caso contrario suprimir estos dos últimos parámetros).
 Instalar nuevos themes:
 Descargar de la pagina oficial de irssi (http://irssi.org/themes) y moverlos a la carpeta ~/.irssi. Para instalarlos:
-set theme nombre.theme
-save
-Instalacion de Scripts:
-Descargarlos de la pagina oficial (http://scripts.irssi.org/) y moverlos a la carpeta ~/.irssi/scripts/ si deseamos cargarlos o descargarlos manualmente:
-script load nombre_script   (Cargarlo)
-script unload nombre_script (Descargarlo)
+	set theme nombre.theme
+	save
+Para la instalacion de Scripts, descargarlos de la pagina oficial (<http://scripts.irssi.org/>) y moverlos a la carpeta ~/.irssi/scripts/ si deseamos cargarlos o descargarlos manualmente:
+	script load nombre_script   (Cargarlo)
+	script unload nombre_script (Descargarlo)
 0 moverlos a la carpeta ~/.irssi/scripts/autorun para que se carguen automaticamente.
 Nota.- Algunos de estos scripts necesitan para funcionar correctamente de algunas librerias.
 Habilitar un registro de las conversaciones:
 # mkdir /var/log/irssi  (Crear la carpeta)
 # chown usuario:users /var/log/irssi (Asignar permisos)
 Arrancar irssi y teclear:
-set autolog ON
-set autolog_path /var/log/irssi/$tag/$0.log
-save
+	set autolog ON
+	set autolog_path /var/log/irssi/$tag/$0.log
+	save
 # touch /etc/logrotate.d/irssi
 # nano /etc/logrotate.d/irssi
 Agregar el siguiente contenido:
