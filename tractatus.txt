@@ -2710,6 +2710,13 @@ $ check-language-support -l es
 $ check-language-support -a (todos)
 
 
+checksec
+script diseñado para probar qué características estándar de seguridad del sistema operativo Linux y PaX se están utilizando.
+# checksec -k (del kernel)
+# checksec -fp 1 (comprueba el proceso con PID 1)
+# checksec -o xml -pa (de todos los procesos y la salida como .xml)
+
+
 check-support-status
 [debian-security-support]. Comprueba los paquetes instalados si tienen soporte de seguridad. Según Debian: Desafortunadamente, ha sido necesario limitar el soporte de seguridad para algunos
 paquetes.
