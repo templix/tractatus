@@ -1829,6 +1829,13 @@ $ bind -p (Otra forma)
 $ bind -x "\"\C-l\": ls -la" (asignar combinaciones de teclas que ejecutan comandos. ls -la al pulsar Ctrl+l)
 
 
+bindechexascii
+Comvertir el número entrado como argumento a distintos formatos y viceversa [binario a decimal, binario a hexadecimal, binario a ASCII, decimal a binario...]
+$ bindechexascii --d2b 2020 (convierte el num indicado a binario)
+$ bindechexascii --d2h 2020 (lo convierte a hexadecimal)
+$ bindechexascii --b2d 11111100100 (convierte el num binario a decimal)
+
+
 bing-ip2hosts
 Buscar sitios web alojados en una dirección IP específica o en un nombre de host. Descarga de <http://www.morningstarsecurity.com/research/bing-ip2hosts>
 $ ./bing-ip2hosts -n microsoft.com (Sin mostrar el progreso [n])
@@ -6322,6 +6329,16 @@ Descarga e instalación:
 (Main) >>> free all (Libera todas las máquinas bloqueadas)
 (Main) >>> clear (Limpiar la terminal)
 (Main) >>> quit (Salir de la aplicación)
+
+
+exa
+Lista el contenido de un directorio de forma mejorada respecto al comando "ls", coloreando de distintos tipos los archivos, metadatos, astributos, enlace simbólicos, git...
+$ exa -T (de forma recursiva en forma de arbol)
+$ exa -R (de forma recursiva)
+$ exa -l (mostrando los metadatos de forma extendida)
+$ exa -x (como el comando ls pero más coloreado)
+$ exa -F (clasifica el listado según tipo de archivo [* = ejecutable, .../ = directorio, @ = enlace...])
+$ exa -a (mostrando archivos ocultos)
 
 
 exec
