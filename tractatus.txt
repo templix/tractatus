@@ -2665,6 +2665,12 @@ $ chage -d 0 usuario (en la siguiente entrada al sistema pedirá al usuario camb
 -E días: especifica fecha del bloqueo de la cuenta (formato YYYY-MM-DD)
 
 
+changetrack
+Muestra los cambios que se producen en un conjunto de archivos especificado. Está diseñado para ejecutarse como un trabajo cron. Descomentar los directorios que queremos monitorizar si se produce algun cambio en:
+# nano /etc/changetrack.conf
+# changetrack (lanzar la aplicación)
+
+
 chardet
 Detector de codificación.
 $ chardet archivo
@@ -4476,6 +4482,11 @@ $ diff -y fichero1 fichero2   (Muestra la salida a dos columnas)
 $ diff –urp dir1 dir2 (Compara recursivamente el contenido de 2 directorios.)
 $ diff -ru carpeta_original carpeta_modificada > parche.patch (Compara de forma recursiva dos directorios y genera un parche en un fichero .patch con formato unificado de diff)
 $ diff -u <(grep -vE '^(#|$)' file1) <(grep -vE '^(#|$)' file2)  (Los compara ignorando comentarios y lineas en blanco)
+
+
+diffmon
+Monitorear archivos del sistema. El archivo donde especificar lo que se han de controlar es /etc/diffmon/diffmon.cf. Está diseñado para ejecutarse como un trabajo cron
+$ diffmon
 
 
 diffpdf
@@ -7008,6 +7019,11 @@ fileschanged
 Utilidad que informa cuando los archivos han sido alterados. Cuando descubre que un archivo ha sido alterado, muestra el nombre del archivo en la salida estándar.
 $ fileschanged -r ~/ (controla el directorio home del usuario de forma recursiva)
 $ fileschanged /var/log/messages
+
+
+filetraq
+Script de shell que informa sobre alguna modificación en algún archivo que se ha producido. Está diseñado para ejecutarse como un trabajo cron, además mantiene una copia de seguridad con fecha del original.
+# filetraq
 
 
 filters
