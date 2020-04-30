@@ -18852,6 +18852,12 @@ $ shellcheck -s bash -e SC1003,SC2035 script.sh (especificando el lenguaje y exc
 Nota.- Los códigos de error generados pueden ser consultados en la Wiki del proyecto (<https://github.com/koalaman/shellcheck>) y por su código en <https://github.com/koalaman/shellcheck/wiki/Directive>
 
 
+shelltestrunner
+Herramienta para probar programas de línea de comandos [o comandos de shell arbitrarios]. Lee pruebas declarativas simples que especifican un comando, alguna entrada y la salida esperada, salida de error y estado de salida.
+$ shelltest -c script.sh (mostrando en color las anomalias)
+$ shelltest -c dir/* (de todos los scripts del directorio)
+
+
 shelr
 Realizar una grabación de la consola con la posibilidad de subirla a http://shelr.tv. Una vez registrados conseguimos el ID personal. La grabación termina al pulsar Ctrl + d y se almacena en .local/share/shelr/ del usuario o de root. Las medidas de la terminal optimas son 132x43 [lanzar, por ejemplo: lxterminal --geometry=132x43]
 $ shelr record (Inicia la grabación despues de solicitar el título)
