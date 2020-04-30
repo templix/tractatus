@@ -3303,11 +3303,14 @@ Permite replicar el estado de las conexiones que están siendo actualmente proce
 
 
 conntrackd
-Proporciona una interfaz flexible para el sistema de seguimiento de conexiones que /proc/net/ip_conntrack
+Proporciona una interfaz flexible para el sistema de seguimiento de conexiones que /proc/net/ip_conntrack. Puede replicar el estado de las conexiones que actualmente procesa el firewall.
 # conntrackd -d (Ejecuta en modo daemon)
 # conntrackd -s (volcar las estadísticas recopiladas por el daemon)
 # conntrackd -i (Volcar los estados contenidos en la memoria caché interna, es decir, los manejados por este firewall)
 # conntrackd -e (Volcar los estados contenidos en la memoria caché externa, es decir, aquellos manejados por otros firewalls)
+$ conntrackd -c (convierte la caché interna en el sistema de seguimiento de la conexión del núcleo)
+$ conntrackd -k (matar el demonio)
+$ conntrackd -s network (muestra las conexiones de red)
 
 
 consolochars
