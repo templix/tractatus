@@ -17655,6 +17655,16 @@ Buscar el host de una ip o la ip de un host
 $ resolveip -s www.google.com
 
 
+restic
+Programa que hace copias de seguridad de forma fácil, simple de configurar, rápido de ejecutar y restaurar, verificable, utiliza criptografíca para garantizar la confidencialidad y con el crecimiento de los datos, las instantáneas adicionales solo almacenan el incremento real.
+$ restic init -r /tmp/prueba-restic (inicio del directorio del backup. Pide contraseña y confirmación)
+$ restic -r /tmp/prueba-restic backup . (realizar el backup del presente directorio en el especificado con el init. Pide contraseña)
+$ restic -r /tmp/prueba-restic snapshots (ver el contenido del directorio de los backups. Pide contraseña)
+$ restic -r /tmp/prueba-restic backup . --exclude="*.sh" --exclude-file=logs.txt (excluyendo los .sh y logs.txt)
+$ restic -r /srv/prueba-restic diff 9fb7d0ca 3bec06c1 (comparando las diferencias entre dos snapshots)
+$ restic -r /tmp/prueba-restic restore 9d0c9446 --target /tmp/restore/ (restaurar un backup en el directorio especificado)
+
+
 restore
 Restaurar una copia de seguridad realizada con dump.
 $  restore -rf home.bak (restaurar la copia completa [r] del archivo especificado [f])
