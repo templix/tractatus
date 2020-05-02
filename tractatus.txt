@@ -2737,6 +2737,11 @@ script diseñado para probar qué características estándar de seguridad del si
 # checksec -o xml -pa (de todos los procesos y la salida como .xml)
 
 
+checksecurity
+Realiza comprobaciones de seguridad muy básicas del sistema tales como: sistemas de archivos remotos montados de forma insegura, cambios en los programas setuid, cambios en los puertos abiertos para detectar programas maliciosos, cuentas del sistema vacías o duplicadas, sistemas de archivos montados cercanos a su capacidad, registros generados por iptables con intentos de intrusión... Los informes se guardan en /var/log/setuid/setuid.changes. Si se desea que la información se envie a root, descomentar la linea #CHECKSECURITY_EMAIL="root" en el archivo de configuración /etc/checksecurity.conf
+# checksecurity
+
+
 check-support-status
 [debian-security-support]. Comprueba los paquetes instalados si tienen soporte de seguridad. Según Debian: Desafortunadamente, ha sido necesario limitar el soporte de seguridad para algunos
 paquetes.
@@ -18189,7 +18194,7 @@ $ scanimage -p | convert - imagen.png (Redirigiendo la salida a convert que pasa
 
 
 schroot
-Parecido a un chroot [ver] que se ha de usar como root, pero usuarios normaleso. schroot permite el acceso a chroots para usuarios normales que utilizan el mismo mecanismo, pero con la comprobación de permisos y permite la configuración automática adicional del entorno chroot, como el montaje de sistemas de archivos adicionales y otras tareas de configuración.
+Parecido a un chroot [ver] que se ha de usar como root, pero para usuarios normales. schroot permite el acceso a chroots para usuarios normales que utilizan el mismo mecanismo, pero con la comprobación de permisos y permite la configuración automática adicional del entorno chroot, como el montaje de sistemas de archivos adicionales y otras tareas de configuración.
 
 
 scout_realtime
