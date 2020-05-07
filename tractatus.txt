@@ -17757,6 +17757,11 @@ Nota.- Otras opciones para distros no debian o para desactivar la opción: RPM, 
 Para evitar la nota: Warning: Suspicious file types found in /dev... añadir a /etc/rkhunter.conf la linea:
 	ALLOWDEVFILE=/dev/.../*
 Nota.- Substituir los puntos supensivos por el subdirectorio oportuno.
+6.-
+Evitar el error: Invalid BINDIR configuration option: Not a directory: /snap/bin/kesty-whatsapp
+He suprimio el programa que lo causaba:
+# snap remove kesty-whatsapp
+O dicen que suprimir la ruta al ejecutable /snap/bin/kesty-whatsapp que la tengo en .bashrc
 
 
 rkill
