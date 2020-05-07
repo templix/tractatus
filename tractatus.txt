@@ -2677,6 +2677,11 @@ $ chage -d 0 usuario (en la siguiente entrada al sistema pedirá al usuario camb
 -E días: especifica fecha del bloqueo de la cuenta (formato YYYY-MM-DD)
 
 
+chalow
+Convierte los archivos chagelog a páginas html para visualizar con el navegador.
+$ chalow -d /home/pep/dades/arxius_importants/dotemacs.d/.emacs.d/elpa/muse-3.20.2/ChangeLog
+
+
 changetrack
 Muestra los cambios que se producen en un conjunto de archivos especificado. Está diseñado para ejecutarse como un trabajo cron. Descomentar los directorios que queremos monitorizar si se produce algun cambio en:
 # nano /etc/changetrack.conf
@@ -2949,16 +2954,16 @@ $ cat /etc/shells (Mostrar las shells disponibles en el sistema)
 $ chsh -s /bin/tcsh usuario
 
 
-cifsiostat
-[sysstat]. Muestra estadísticas sobre las operaciones de lectura y escritura en los sistemas de archivos CIFS. Podría decirse que CIFS es una versión más reciente de SMB.
-# cifsiostat -m 2 3 (en megabites por segundo cada 2 segundos y 3 informes)
-
-
 chvt
 Cambiar de consola virtual.Si, estando en la /dev/tty1, se teclea:
 $ chvt 3  (Se irá a la /dev/tty3. Lo mismo que con Ctrl+Alt+F3)
 $ chvt 1; sleep 10; chvt 7 (Ir a la tty1 durante 10 segundos y volver a las X)
 Nota.- Si se está en una terminal en las X con el mismo comando se irá a la misma terminal /dev/tty3.
+
+
+cifsiostat
+[sysstat]. Muestra estadísticas sobre las operaciones de lectura y escritura en los sistemas de archivos CIFS. Podría decirse que CIFS es una versión más reciente de SMB.
+# cifsiostat -m 2 3 (en megabites por segundo cada 2 segundos y 3 informes)
 
 
 cjb2
