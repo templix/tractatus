@@ -203,9 +203,15 @@ $ acpitail -B 60 -F 10 (de la bateria cada 60 segundos. Por defecto 15 y del ven
 
 
 add-apt-repository
-Añadir repositorios a /etc/apt/sources.list o a /etc/apt/sources.list.d/
+Simplifica la adición de repositorios concretos al sistema de aplicaciones que no se encuantran todavia en los repos oficiales. Instalar esta aplicación de Ubuntu en Debian mediante un script:
+$ wget http://blog.anantshri.info/content/uploads/2010/09/add-apt-repository.sh.txt (descarga)
+# cp add-apt-repository.sh.txt /usr/sbin/add-apt-repository (copiar al directorio /usr/sbin)
+# chmod o+x /usr/sbin/add-apt-repository (otorgar permisos de ejecución)
+# chown root:root /usr/sbin/add-apt-repository (otorgar la propiedad a root)
+# add-apt-repository ppa:ppa-name (instalar una aplicación)
+1.-
+Otra forma de añadir repositorios a /etc/apt/sources.list o a /etc/apt/sources.list.d/ en el ejemplo añade el repositorio del escritorio Mate según la versión de Ubuntu instalada
 	# add-apt-repository deb http://packages.mate-desktop.org/repo/ubuntu $(lsb_release -cs) main
-        (Añade el repositorio del escritorio Mate según la versión de Ubuntu instalada)
 
 
 add-shell
