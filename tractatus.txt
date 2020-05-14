@@ -16887,9 +16887,11 @@ Lo siguiente creará un volcado de núcleo inmediatamente.
 # procdump -C 70 -M 100 -p PID (un volcado cuando el uso de CPU llegue a 70% o el uso de memoria llegue a 100 MB)
 
 
-prozilla
-[libncurses5]. Gestor de descargas. La descarga se realiza en el directorio actual. Para modificar dicho directorio ha de editarse en el archivo de configuración (/etc/prozilla.conf) la opción: mainoutputdir = /home/usuario/tmp. Página: <http://old-releases.ubuntu.com/ubuntu/pool/universe/p/prozilla/>
-$ proz URL
+procenv
+Vuelca todos los atributos de entorno en un formato analizable.
+$ procenv -C (los procesos de la CPU)
+$ procenv -l (mostrar los limites de los atributos de entorno)
+$ procenv --format=xml --signals (mostrar todos los datos en formato XML)
 
 
 procinfo
@@ -16926,6 +16928,11 @@ Otros ejemplos:
 # proxychains nessusd -D
 # proxychains msfconsole
 # proxychains ssh -D 127.0.0.1:9050 usuario@host
+
+
+prozilla
+[libncurses5]. Gestor de descargas. La descarga se realiza en el directorio actual. Para modificar dicho directorio ha de editarse en el archivo de configuración (/etc/prozilla.conf) la opción: mainoutputdir = /home/usuario/tmp. Página: <http://old-releases.ubuntu.com/ubuntu/pool/universe/p/prozilla/>
+$ proz URL
 
 
 ps
