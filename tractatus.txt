@@ -17826,6 +17826,8 @@ dará como resultado algo tipo:
 	  Checking file i18n/tr                                      [ Skipped ]
 	  Checking file i18n/tr.utf8                                 [ Skipped ]
 	  ...
+10.-
+Paquetes opcionales adicionales son: unhide para encontrar procesos y puertos ocultos y skdet (wget http://dvgevers.home.xs4all.nl/skdet/skdet) para verificaciones adicionales de Suckit Rookit.
 
 
 rkill
@@ -19213,6 +19215,13 @@ Instalar las X en UbuntuServer
 # apt-get install language-pack-es language-pack-es-base language-pack-gnome-es language-pack-gnome-es-base language-selector language-support-es  (instalar los paquetes de idiomas en la instalación mínima))
 # apt-get install gksu gnome-system-tools gnome-nettool (herramientas de red  y paquetes necesarios en la instalación mínima)
 $ startx
+
+
+skdet
+Busca rootkits y puertos abiertos. Descarga <wget http://dvgevers.home.xs4all.nl/skdet/skdet>
+# skdet -c (rootkits)
+# skdet -p PID (sobre un PID)
+# skdet -s (puertos abiertos)
 
 
 skel
