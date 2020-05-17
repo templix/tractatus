@@ -2817,6 +2817,14 @@ Cambia el grupo al que pertenece un archivo.
 $ chgrp grupo archivo
 
 
+chkboot
+Busca modificaciones no deseadas en el archivo /boot. El archivo de configuración esta en /etc/default/chkboot
+# chkboot-check (imprime los cambios detectados en archivos de arranque)
+# chkboot-desktopalert (notifica cambios detectados en archivos de arranque)
+# chkboot -u (Marcar los cambios como válidos. La próxima ejecución no advertirá sobre las diferencias)
+# chkboot (forma básica)
+
+
 chkconfig
 Para activar y desactivar servicios, ver su estado y runlevel
 # chkconfig --list (muestra listado de todos los servicios y nivel de ejecución)
@@ -19218,7 +19226,7 @@ $ startx
 
 
 skdet
-Busca rootkits y puertos abiertos. Descarga <wget http://dvgevers.home.xs4all.nl/skdet/skdet>
+Busca rootkits y puertos abiertos. Descarga wget http://dvgevers.home.xs4all.nl/skdet/skdet
 # skdet -c (rootkits)
 # skdet -p PID (sobre un PID)
 # skdet -s (puertos abiertos)
