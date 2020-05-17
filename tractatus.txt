@@ -17755,6 +17755,7 @@ Buscador de rootkits instalados en el sistema
 # rkhunter --disable shared_libs  (descartar esta opción del chequeo)
 # cat /var/log/rkhunter.log | grep Warning (visualizar los "Warnings")
 # egrep -i "warning:|\[ warning \]" /var/log/rkhunter.log && awk '/System checks summary/ {f=1}f' /var/log/rkhunter.log (otra forma de visualizar "warnings")
+# rkhunter -C (ver las últimas modificaciones del archivo de configuración /etc/rkhunter.conf)
 1.-
 Para solucionar el error: Warning: Hidden directory found: /etc/.java
 # nano /etc/rkhunter.conf
