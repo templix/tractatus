@@ -17810,6 +17810,20 @@ Editar el archivo de configuración /etc/rkhunter.conf y modificar los apartados
 Que por defecto son:
 	UPDATE_MIRRORS=0
 	MIRRORS_MODE=1
+Luego la ejecución de:
+# rkhunter --update
+dará como resultado algo tipo:
+	Checking rkhunter data files...
+	  Checking file mirrors.dat                                  [ No update ]
+	  Checking file programs_bad.dat                             [ No update ]
+	  Checking file backdoorports.dat                            [ No update ]
+	  Checking file suspscan.dat                                 [ No update ]
+	  Checking file i18n/cn                                      [ Skipped ]
+	  Checking file i18n/de                                      [ Skipped ]
+	  Checking file i18n/en                                      [ No update ]
+	  Checking file i18n/tr                                      [ Skipped ]
+	  Checking file i18n/tr.utf8                                 [ Skipped ]
+	  ...
 
 
 rkill
