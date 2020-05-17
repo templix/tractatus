@@ -17743,14 +17743,17 @@ $ ripit --span 0-25 (Copiar solo los primeros 25 segundos de cada pista)
 
 rkhunter
 Buscador de rootkits instalados en el sistema
-# rkhunter --update  (Recargar la base de datos)
+# rkhunter --update  (recargar la base de datos)
+# rkhunter --propupd (si se ha modificado la función Hash o para reconstruir la base de datos y evitar "Warnings" tipo: Warning: The file properties have changed)
 # rkhunter -c  (iniciar la aplicación)
-# rkhunter -c -sk (iniciar la aplicación sin pedir confirmación para proseguir)
-# rkhunter -c -sk --propupd (Lanzar con la opción "propupd" si se ha modificado la función Hash o para reconstruir la base de datos y evitar "Warnings" tipo: Warning: The file properties have changed)
-# rkhunter --list (Ver las opciones)
-# rkhunter --enable group_accounts,system_commands  (Solo chequear estas dos opciones)
-# rkhunter --disable shared_libs  (Descartar esta opción del chequeo)
-# cat /var/log/rkhunter.log | grep Warning (Visualizar los "Warnings")
+# rkhunter -c -sk (iniciar la aplicación sin pedir confirmación para proseguir después de cada sección)
+# rkhunter -c -sk --rwo (sin mostrar salida excepto los "Warnings")
+# rkhunter --list (ver todas las opciones)
+# rkhunter --list rootkits (ver el listado se rootkits que busca)
+# rkhunter --list tests (listado de chequeos)
+# rkhunter --enable group_accounts,system_commands  (solo chequear estas dos opciones)
+# rkhunter --disable shared_libs  (descartar esta opción del chequeo)
+# cat /var/log/rkhunter.log | grep Warning (visualizar los "Warnings")
 1.-
 Para solucionar el error: Warning: Hidden directory found: /etc/.java
 # nano /etc/rkhunter.conf
@@ -17780,6 +17783,33 @@ Evitar el error: Invalid BINDIR configuration option: Not a directory: /snap/bin
 He suprimido el programa que lo causaba:
 # snap remove kesty-whatsapp
 O dicen que suprimir la ruta al ejecutable /snap/bin/kesty-whatsapp que la tengo en .bashrc
+7.-
+Para evitar falsos "Warnings" del tipo: Warning: The following suspicious (large) shared memory segments have been found, que significa que existen procesos que usan segmentos de memoria compartida y que pueden comprobarse en el archivo de resultados /var/log/rkhunter.log, colocar en el archivo de configuración /etc/rkhunter.conf:
+	ALLOWIPCPROC=/usr/bin/firefox
+	ALLOWIPCPROC=/usr/lib/chromium/chromium
+	ALLOWIPCPROC=/usr/bin/liferea
+	ALLOWIPCPROC=/usr/bin/pcmanfm
+	...
+Nota.- Pueden especificarse varios.
+8.-
+Puede que algunas utilidades principales que han sido reemplazadas por scripts produzcan falsas advertencias. Estas que pueden silenciarse a través de la lista blanca en /etc/rkhunter.conf:
+	SCRIPTWHITELIST=/usr/bin/egrep
+	SCRIPTWHITELIST=/usr/bin/fgrep
+	SCRIPTWHITELIST=/usr/bin/which
+9.-
+Para evitar problemas con el --update tipo:
+	Checking rkhunter data files...
+	Checking file mirrors.dat        [ Skipped ]
+	Checking file programs_bad.dat   [ Update failed ]
+	Checking file backdoorports.dat  [ Update failed ]
+	Checking file suspscan.dat       [ Update failed ]
+	Checking file i18n versions      [ Update failed ]
+Editar el archivo de configuración /etc/rkhunter.conf y modificar los apartados siguientes de la forma especificada:
+	UPDATE_MIRRORS=1
+	MIRRORS_MODE=0
+Que por defecto son:
+	UPDATE_MIRRORS=0
+	MIRRORS_MODE=1
 
 
 rkill
