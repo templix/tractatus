@@ -3016,6 +3016,8 @@ Antivirus
 # clamscan -r -l test_clamav.txt  (manda el resultado a un archivo)
 # sigtool --list-sigs > list (listado de virus y troyanos que detecta)
 # clamscan -v -r --bell --move=/home/usuario/cuarentena --log=/var/log/clamav/clamav.log /media/win
+# clamdtop (monitorear análisis con ncurses)
+# clamconf (muestra la configuración cumpleta)
 Opciones:
 	-v (muestra la información)
 	-r  (revisa directorios y subdirectorios)
@@ -3027,6 +3029,11 @@ Opciones:
 Archivo de logs: /var/log/clamav/clamav.log
 Configuración: /etc/clamav/clamd.conf
 Reconfigurar paquete: # dpkg-reconfigure clamav-base
+1.-
+Para asegurarse de que clamav y las definiciones estén instaladas correctamente, se pñuede escanear el archivo de prueba EICAR [una firma inofensiva sin código de virus]:
+$ curl https://secure.eicar.org/eicar.com.txt | clamscan -
+La salida debe incluir:
+	stdin: Win.Test.EICAR_HDB-1 FOUND
 
 
 clamscan
