@@ -4541,6 +4541,13 @@ Monitorear archivos del sistema. El archivo donde especificar lo que se han de c
 $ diffmon
 
 
+diffoscope
+Comparar de forma recursiva archivos de muchos tipos [binarios, tarbals, imágenes ISO, pdfs...]. Las diferencias se pueden mostrar como texto o HTML. Los diversos comparadores dependen de comandos externos.
+$ diffoscope --list-tools (lista los comandos expernos que se precisan)
+$ diffoscope --html salida.html archivo1.txt archivo2.txt
+$ diffoscope --text salida.txt archivo1.txt archivo2.txt
+
+
 diffpdf
 Compara dos archivos pdf.
 $ diffpdf archivo1.pdf archivo2.pdf
