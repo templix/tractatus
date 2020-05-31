@@ -4004,6 +4004,12 @@ $ datefudge "23 Oct 2210" date -R
 $ datefudge "2136-10-23 09:33" sh -c "sleep 3; date -R"
 
 
+dateutils.dzone
+Convierte fecha/hora entre zonas horarias. Si se omite fecha/hora, el valor predeterminado es 'ahora'.
+$ dateutils.dzone Europe/Madrid Australia/Sydney America/Bogota today
+$ dateutils.dzone Europe/Madrid Australia/Sydney
+
+
 dav
 [dav-text]. Editor minimalista para ncurses.
 $ dav archivo.txt
