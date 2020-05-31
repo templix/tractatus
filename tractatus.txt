@@ -790,6 +790,7 @@ Buscar un paquete que contiene un fichero o ver el contenido de un paquete. Una 
 apt-ftparchive
 Genera ficheros de índice de paquetes .deb
 $ apt-ftparchive contents /var/cache/apt/archives/python* (genera un fichero de contenidos a partir del directorio especificado)
+$ apt-ftparchive packages directorio | gzip > Packages.gz (crear un fichero «Packages» comprimido para un directorio que contenga paquetes deb)
 
 
 apt-get
