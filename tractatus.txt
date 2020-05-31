@@ -767,9 +767,14 @@ apt-doc
 Muestra información sobre el comando apt. Colocar en el navegador: usr/share/doc/apt-doc/guide.es.html
 
 
+apt-extracttemplates
+[apt-utils]. Toma un paquete Debian como entrada y escribirá en un directorio temporal o en el especificado con -t, los scripts de configuración y archivos de plantilla asociados. Para cada paquete aprobado que contenga scripts de configuración y plantillas, se generará una línea de salida en el formato: package, version, template-file y config-script.
+$ apt-extracttemplates cups_2.2.1-8+deb9u5_amd64.deb
+cups 2.2.10-6+deb10u3 /tmp/user/1000/cups.template.3UbTXr /tmp/user/1000/cups.config.HtrJO2
+
+
 apt-fast
-[axel o aria]
-Paquete que incrementa la velocidad de descarga de paquetes respecto de apt-get mediante el uso de axel [ver] o aria. Descargar el scrpt de http://www.mattparnell.com/linux/apt-fast/apt-fast.sh o via github de https://github.com/ilikenwf/apt-fast. Para reconfigurar el paquete:
+[axel o aria]. Paquete que incrementa la velocidad de descarga de paquetes respecto de apt-get mediante el uso de axel [ver] o aria. Descargar el scrpt de http://www.mattparnell.com/linux/apt-fast/apt-fast.sh o via github de https://github.com/ilikenwf/apt-fast. Para reconfigurar el paquete:
 # dpkg-reconfigure apt-fast
 Donde se podrá apreciar su velocidad es principalmente con los argumentos "update", "upgrade" y "dist-upgrade".
 # apt-fast update
