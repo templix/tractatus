@@ -9363,6 +9363,19 @@ $ hsetroot -flipv imagen.jpg (Refleja la imagen vertical. -fliph: horizontal y -
 $ hsetroot -alpha 150 imagen.jpg
 
 
+hstr
+Herramienta que mejora la búsqueda hacia atras [history], haciendo esta búsqueda mucho mas fácil que con el C-r convencional. Debemos entrar en source.list el repositorio:
+	deb https://www.mindforger.com/debian stretch main
+E incorporamos la key GPG:
+# wget -qO - https://www.mindforger.com/gpgpubkey.txt | sudo apt-key add -
+Recargamos e instalamos:
+# apt update
+# apt install hstr
+Uso:
+$ hstr rkhunter git (mostrará los comandos del historial con los argumentos especificados)
+$ hstr -s (ver la configuración por si se desea incorporar a ~/.bashrc. En caso afirmativo lanzar: $ hstr --show-configuration >> ~/.bashrc)
+
+
 htcacheclean
 Se usa para mantener el tamaño del almacenamiento de mod_disk_cache dentro de un cierto límite. Esta herramienta puede ejecutarse manualmente o en modo demonio. Cuando se ejecuta en modo daemon, actua en segundo plano y comprueba los directorios de la caché a intervalos regulares para ver si el contenido de la caché se ha eliminado.
 # htcacheclean -v -t -p/var/cache/apache2/mod_cache_disk -l1024M (de forma detallada [v], eliminando directorios vacios [t] del pDIR y con limite lLIMIT)
