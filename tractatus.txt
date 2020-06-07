@@ -18341,6 +18341,11 @@ Copiar el archivo creado en el directorio .vlc/ [si no existe se crea] Abrir vlc
 $ vlc .vlc/channels.conf (Bucar los canales en View/Play list)
 
 
+scanadf
+[sane]. Controlar dispositivos de adquisición de imágenes capaces de devolver series de imágenes, por ejemplo, de un escáner con alimentador automático de documentos [ADF].
+$ scanadf -o %02d (con salida con dos dígitos [01, 02, 03...] por defecto: image-%04d [image-0001, image-0002...])
+
+
 scanimage
 [sane, sane-utils]. Escanear. Por defecto genera archivos tiff y pnm.
 $ scanimage -L (Para conocer los datos del escaner)
