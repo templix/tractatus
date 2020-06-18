@@ -9197,6 +9197,7 @@ Lista los comandos utilizados por el usuario
 $ history 20       (Lista los últimos 20)
 $ history -c        (Elimina el historial)
 $ history -d 125 (Eliminar la orden 125. útil si se escribió la contraseña y esta queda visible en el historial)
+$ history -d 100-125 (Eliminar las ordenes de la 100 a la 125)
 $ history | awk '{print $2}' | sort | uniq -c | sort -rn | head -10 (lista los 10 comandos más usados y numero de veces)
 $ !354  (ejecutará el comando 354 del listado de history)
 $ history | grep cp  (Buscar en el historial las veces que se ha lanzado “cp”)
