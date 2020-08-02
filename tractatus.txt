@@ -3887,9 +3887,9 @@ cut
 Permite buscar y/o seleccionar columnas o campos dentro de un archivo estructurado. Entre campo y campo debe existir obligatoriamente un delimitador [dos puntos, un espacio en blanco u otro carácter].
 $ cut -c1-4 archivo  (muestra los 4 primeros caracteres de cada linea)
 $ cut -d: -f1 archivo  (Muestra el primer campo delimitado por “:”)
-$ cut -d” “ -f1,5 archivo  (Mostrar el primero y el quinto, separados por espacio)
-$ cut -d” “ -f 2- archivo (Mostrar todo menos la primera columna)
-$ cut -s -d"(" -f1 archivo (“-s” suprime las lineas que no contengan el delimitador [(]). De las que sí lo contengan, mostraría el 1er campo)
+$ cut -d" " -f1,5 archivo  (Mostrar el primero y el quinto, separados por espacio)
+$ cut -d" " -f 2- archivo (Mostrar todo menos la primera columna)
+$ cut -s -d"(" -f1 archivo ("-s" suprime las lineas que no contengan el delimitador [(]). De las que sí lo contengan, mostraría el 1er campo)
 $ echo $RANDOM | cut -c1,2 (Coger los 2 primeros números de un número aleatorio [$RANDOM])
 
 
