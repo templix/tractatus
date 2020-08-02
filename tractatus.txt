@@ -8135,7 +8135,8 @@ Otros comandos:
 $ git clone git@github.com:templix/tractatus.git (Clonar un repositorio por protocolo git)
 $ git clone https://github.com/templix/tractatus.git (Clonar un repositorio por protocolo https)
 $ git clone ssh://usuario@host.com/home/templix/repositorio repositorio (Clonar por ssh un directorio remoto en local)
-$ git config -l (Comprobar los datos del usuario)
+$ git config -l (Comprobar todos los parámetros configurados)
+$ git config user.email (comrpobar el mail del usuario)
 $ git config remote.origin.url (Ver cual es el repositorio remoto)
 $ git log (Ver historial de commits)
 $ git status (Comprobar si se han efectuado cambios)
@@ -8175,6 +8176,9 @@ Cuando se formatea el disco y se instala nuevamente la distro y git produce un e
 $ git clone git@github.com:tem... (clonar)
 $ git config --global --edit
 $ git commit --amend --reset-author
+5.-
+Normalmente los datos del usuario se guardan en ~/.gitconfig con lo que pueden visualizarse con:
+$ cat .gitconfig
 
 
 git-doc
