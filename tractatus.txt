@@ -17937,14 +17937,15 @@ $ rlogin usuario@host
 
 
 rm
-Borrar archivos
+Borrar archivos. Puede que con algunas de las opciones tenga que activarse extglob (shopt -s extglob).
 $ rm -R directorio         (Borra directorios y los subdirectorios)
 $ rm -i   archivo        (Pide confirmación antes de borrar)
 $ rm file1 file2  (Borrar varios archivos)
 $ rm -R dir1 dir2 dir3 (Lo mismo con varios directorios)
 $ rm -f           (Fuerza eliminación incluso si existen ficheros que no existen)
 $ find . -type f -empty -exec rm {} \;  (Elimina todos los archivos vacios de un directorio)
-$ rm !(*.txt)  (Eliminar todos los archivos menos los .txt)
+$ rm -v !(*.txt)  (Eliminar todos los archivos menos los .txt)
+$ rm -v !(*.txt|*.png) (Elimina todos menos los .txt y .png)
 $ rm !(tuto+([1-9]) (Borrar los ficheros excepto del tuto1 al tuto9
 1.-
 Para que todo lo eliminado con el comando rm vaya a la papelera del sistema:
