@@ -7191,6 +7191,7 @@ $ find . -iname "*.txt" -or -iname "*.odt" -exec cp {} documentos \; (Buscar los
 $ find . -type d -exec chmod 0755 {} \; (Cambiar permisos de todos los directorios y subdirectorios)
 $ find . -type f -exec chmod 0644 {} \; (Cambiar permisos de todos los ficheros del directorio y de los subdirectorios)
 $ find . -type f -iname "*.bak" | xargs rm (buscar los ficheros acabados en .bak y borrarlos. xargs hace lo mismo que exec pero usando una tuberia.)
+$ find /home/usuario -name * | xargs grep "tractatus" (buscar cadena de caracteres "tractatus" dentro de todos los archivos de /home/usuario)
 $ find /home/usuario -iname '*.bak' -delete (Otra forma de borrar todos los .bak de un directorio)
 $ find . -type f -iname *.sla (buscará los ficheros .sla)
 $ find . -type f -mtime 0 (Buscará los ficheros creados o modificados hoy)
