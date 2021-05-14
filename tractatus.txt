@@ -20119,10 +20119,11 @@ $ startx -- :1 (una segunda sesión gráfica accesible en ^Alt + F8)
 stat
 Estadísticas de archivo, directorios y sistemas
 # stat /etc/passwd
+# stat -c '%A %a' /etc/passwd (Mostrar los permisos de forma clásica i en formato octal)
 # stat /usr
 # stat -f /
 $ stat -c "%s" archivo (medida del archivo)
-$ stat -c '%n %U:%G-%a' * (Mostrar nombre archivo, propietario, grupo y permisos)
+$ stat -c '%n %U:%G-%a' * (Mostrar nombre archivo, propietario, grupo y permisos en formato octal)
 
 
 status
