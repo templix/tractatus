@@ -2168,8 +2168,10 @@ $ busybox su
 
 
 bwm-ng
-Muestra uso del ancho de banda de nuestra conexión [por defecto en KB por cada medio segundo]
-# bwm-ng
+Muestra uso del ancho de banda de nuestra conexión o de nuestros discos duros [por defecto en KB por cada medio segundo]
+# bwm-ng (Por defecto nos muestra el ancho de banda de las conexiones de red)
+# bwm-ng -i disk (Con la opción -i disk especificamos que queremos ver las estadísticas para los discos duros)
+# bwm-ng -i disk -d (si añadimos la opción -d se hace más legible mostrando datos en Bytes, KB o MB)
 Nota.- Si durante la ejecución pulsamos la tecla “h” accederemos a un menú de opciones.
 
 
