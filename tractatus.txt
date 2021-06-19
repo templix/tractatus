@@ -7211,6 +7211,7 @@ $ find . -type f -amin -5 ! -path "./.*" (Buscar ficheros modificados los últim
 $ find . ! -name "plantilla*" -type f -delete | find . ! -name HTMLS -type d -delete (borrar todos menos los "plantilla*" y el directorio "HTMLS")
 $ find -L /sys/bus/pci/devices/*/ata*/host*/target* -maxdepth 3 -name "sd*" 2>/dev/null | egrep block |egrep --colour '(ata[0-9]*)|(sd.*)' (Encontrar qué /dev/sda, sdb, etc. corresponde al ATA/SATA declarado en dmesg, etc para determinar qué disco duro es)
 
+
 findfs
 Busca el sistema de ficheros por su etiqueta (LABEL) o UUID.
 $ findfs UUID=388dda65-2432-4684-8cd9-b1649006fe30
