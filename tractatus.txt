@@ -7253,6 +7253,7 @@ firefox
 Navegador.
 $ firefox --private (Nota.- Son dos guiones. Arrancar en modo privado. Para incluir por defecto este modo en la propiedades: firefox --private %U)
 $ firefox 'data:text/html, texto que queremos mostrar' (Visualizar un texto en una ventana del navegador)
+$ MOZ_ALLOW_DOWNGRADE=1 firefox -P (En caso de desactualizar firefox necesitaremos pasar el MOZ_ALLOW_DOWNGRADE=1 para poder usar el perfil de usuario que teníamos. Con el -P seleccionamos qué perfil queremos, saldrá una ventanita. Testeado con versión 89.0.1 hacia 88.0)
 Cambios para optimizar las conexiones y para aprovechar otros parámetros. Escribir en la barra de direcciones: "about:config" y pulsar enter. Cambiar los siguientes valores. Para ello, hacer doble click encima de la línea a modificar y en el cuadro de diálogo que aparece, escribir el valor nuevo:
 Ajustes generales [dependen de la versión instalada]:
 network.dns.disableIPv6 true
