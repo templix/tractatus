@@ -8065,6 +8065,12 @@ get-oui
 # get-oui -f oui.txt (que escriba el resultado en el archivo especificado. Por defecto en ieee-oui.txt)
 
 
+getcat
+buscar archivos con capabilities y que son  las funcionalidades que pueden asignarse a un ejecutable y que muchas veces pueden otorgar permisos demasiado altos durante la ejecución de dicho programa. Con "man capabilities" obtendremos un listado de las capabilities implementadas y las operaciones o comportamientos que permite cada capacidad.
+$ getcap -r / 2>/dev/null (de forma recursiva)
+$ getcap -v  /usr/bin/ping (permite mostrar todas las entradas buscadas, aunque no tengan capabilities)
+
+
 getconf
 Consulta las variables de configuración del sistema.
 $ getconf -a (Muestra el listado)
