@@ -8067,9 +8067,10 @@ get-oui
 
 
 getcat
-buscar archivos con capabilities y que son  las funcionalidades que pueden asignarse a un ejecutable y que muchas veces pueden otorgar permisos demasiado altos durante la ejecución de dicho programa. Con "man capabilities" obtendremos un listado de las capabilities implementadas y las operaciones o comportamientos que permite cada capacidad.
+Buscar archivos con capabilities y que son  las funcionalidades que pueden asignarse a un ejecutable y que muchas veces pueden otorgar permisos demasiado altos durante la ejecución de dicho programa. Con "man capabilities" obtendremos un listado de las capabilities implementadas y las operaciones o comportamientos que permite cada capacidad.
 $ getcap -r / 2>/dev/null (de forma recursiva)
 $ getcap -v  /usr/bin/ping (permite mostrar todas las entradas buscadas, aunque no tengan capabilities)
+Nota.- +ep significa que la capability es efectiva y permitida.
 
 
 getconf
