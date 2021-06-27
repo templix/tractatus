@@ -8066,11 +8066,10 @@ get-oui
 # get-oui -f oui.txt (que escriba el resultado en el archivo especificado. Por defecto en ieee-oui.txt)
 
 
-getcat
-Buscar archivos con capabilities y que son  las funcionalidades que pueden asignarse a un ejecutable y que muchas veces pueden otorgar permisos demasiado altos durante la ejecución de dicho programa. Con "man capabilities" obtendremos un listado de las capabilities implementadas y las operaciones o comportamientos que permite cada capacidad.
+getcap
+Buscar archivos con capabilities y que son  las funcionalidades que pueden asignarse a un ejecutable y que muchas veces pueden otorgar permisos demasiado altos durante la ejecución de dicho programa. Con "man capabilities" obtendremos un listado de las capabilities implementadas y las operaciones o comportamientos que permite cada una. [entrada relacionada con setcap]
 $ getcap -r / 2>/dev/null (de forma recursiva)
-$ getcap -v  /usr/bin/ping (permite mostrar todas las entradas buscadas, aunque no tengan capabilities)
-Nota.- +ep significa que la capability es efectiva [e] y permitida [p].
+$ getcap -v  /usr/bin/ping (permite mostrar las capabilitys otorgadas)
 
 
 getconf
@@ -18916,6 +18915,15 @@ setarch
 Esta utilidad le dice al núcleo que informe de una arquitectura diferente a la actual a un programa, luego ejecutará dicho programa en este entorno.
 $ setarch --list (Listado de arquitecturas posible)
 $ setarch $(uname -m) --uname-2.6 script.sh (A partir de este momento, siempre que se llame a ese script pensará que se está ejecutando con un kernel 2.6)
+
+
+setcap
+Permite asignar permisos especiales para que una aplicación se pueda ejecutar en un puerto por debajo del 1024 por un usuario sin permisos de administrador. [relacionada con getcap]
+# setcap cap_net_raw+ep /usr/bin/ping (dar los permisos)
+# setcap -r /usr/bin/ping (quitarlos)
+$ setcap cap_net_bind_service-ep /usr/bin/ping (otra forma de quitarlos)
+$ setcap cap_net_admin,cap_net_raw+ep /usr/bin/wireshark (otorgar dos capabilitys)
+Nota.- +ep significa que la capability es efectiva [e] y permitida [p].
 
 
 setfont
