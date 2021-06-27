@@ -8115,6 +8115,11 @@ $ getfacl -c /var/www (Sólo muestra los permisos)
 $ getfacl -R /var/www (De forma recursiva en todos los archivos y subdirectorios)
 
 
+getpcaps
+Lista las capabilities de un proceso. [relacionado con getcap y setcap]
+$ getpcaps ping
+
+
 getsebool
 Permite listar polí­ticas y determinar si estan activas o inactivas en SELinux, implementación de seguridad para GNU/Linux que provee una variedad de políticas de seguridad a través del uso de módulos de Seguridad en el nucleo de Linux. Ver setsebool
 # getsebool -a (Lista todas las políticas, activa o inactivas)
