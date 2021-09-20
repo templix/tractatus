@@ -17365,11 +17365,12 @@ $ qmv -f do dir (mostrar sólo la columna del archivo de destino [f], 'do' se re
 
 qpdf
 Programa para analizar y modificar la estructura de los archivos PDF.
-# qpdf --decrypt protegido.pdf salida.pdf (eliminar toda la información relativa al cifrado)
-# qpdf --show-encryption test.pdf (Ver el tipo de seguridad y cifrado utilizado)
-# qpdf --empty --pages entrada.pdf 1-5 -- salida.pdf (Extraer las primeras cinco hojas de un documento)
-# qpdf --empty --pages entrada.pdf z-1 -- salida.pdf (Reordenar las páginas de un documento en orden inverso)
-# qpdf --empty --pages doc1.pdf 1-z doc2.pdf 1-6 -- salida.pdf (Unir todo un documento con las 6 primeras páginas de otro)
+$ qpdf --decrypt protegido.pdf salida.pdf (eliminar toda la información relativa al cifrado)
+$ qpdf --show-encryption test.pdf (Ver el tipo de seguridad y cifrado utilizado)
+$ qpdf --empty --pages entrada.pdf 1-5 -- salida.pdf (Extraer las primeras cinco hojas de un documento)
+$ qpdf --empty --pages entrada.pdf z-1 -- salida.pdf (Reordenar las páginas de un documento en orden inverso)
+$ qpdf --empty --pages doc1.pdf 1-z doc2.pdf 1-6 -- salida.pdf (Unir todo un documento con las 6 primeras páginas de otro)
+$ qpdf --optimize-images entrada.pdf salida.pdf (optimiza las imágenes del PDF para optimizar el tamaño del archivo. Útil para documentos escaneados con xsane u otros programas)
 
 
 qrencode
