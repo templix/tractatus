@@ -20604,6 +20604,9 @@ systemctl
 # systemctl isolate multi-user.target (Arrancar en runlevel 3)
 # systemctl isolate graphical.target (Arrancar en runlevel 5)
 # systemctl -r --type service --all (mostrar los servicios, activos o no, disponibles en el sistema)
+# systemctl --type=service --state=running (los servicios que estan activos)
+# systemctl --type=service --state=running | grep cups.service (ver si un servicio está activo)
+# systemctl --type=service --state=failed,exited (ver estado de dos servicios)
 1.-
 Para incorporar el arranque a grub2, modificar del archivo:
 # nano /etc/default/grub
