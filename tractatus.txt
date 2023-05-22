@@ -160,22 +160,21 @@ $ ls /usr/share/doc/abs-guide/examples/
 
 ac
 [acct]. Reporta los tiempos de conexión...
-$ ac -d    (del presente mes)
-$ ac -p    (totales de cada usuario)
-
+$ ac -p (totales de cada usuario)
+$ ac -f ~/Documents/text.txt (horas de uso del archivo especificado)
+# ac -d -y (conexión por dias y total año del usuario root)
+# ac --reboots (desde el reinicio)
 
 acct
-Aplicacion que se ejecuta en segundo plano y realiza un seguimiento de la actividad de cada usuario en el sistema, así como de los recursos que se están consumiendo. Normalmente se levanta el servicio durante la instalación pero si no se ha levantado:
+Conjunto de utilidades (ac, lastcom, accton, dump-acct, dump-atmp y sa) que se ejecutan en segundo plano y realizan un seguimiento de la actividad de cada usuario en el sistema, tiempos de conexión (en horas) así como de los recursos que se están consumiendo. Normalmente se levanta el servicio durante la instalación pero si no se ha levantado:
 # /etc/init.d/acct start
-Luego podran lanzarse aplicaciones que vienen en el mismo paquete tales como ac, lastcomm [ver] y otras.
+Luego podran lanzarse las aplicaciones del paquete.
 
 
 accton
 [acct]. Activar o desactivar la contabilidad de los procesos para la aplicación acct [ver].
-	# accton on
-	Turning on process accounting, file set to the default '/var/log/account/pacct'.
-	# accton off
-	Turning off process accounting.
+# accton on (activar registros)
+# accton off (parar registros)
 
 
 aconnect
