@@ -7886,10 +7886,13 @@ $ gcalctool -s 5*4/2+5
 
 
 gcc
-Compilador de programas de C*
+(GNU Compiler Collections). Compilador de lenguaje C y C++.
+$ gcc source.c (compilará source.c y creará el archivo a.out de salida)
 $ gcc -c archivo.c (genera una biblioteca)
 $ gcc programa.c -o programa_compilado (crea el ejecutable)
-$ gcc -x c archivo (Especificando el lenguaje para compilar [c]))
+$ gcc -x c archivo (Especificando el lenguaje para compilar [c])
+$ gcc source.c -W -o linux (Compilará mostrando advertencias y errores y creará la salida linux)
+Nota.-la ejecución de la salida será de forma clásica en linux: ./linux
 
 
 gconftool-2
