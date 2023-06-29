@@ -168,7 +168,14 @@ $ ac -f ~/Documents/text.txt (horas de uso del archivo especificado)
 acct
 Conjunto de utilidades (ac, lastcom, accton, dump-acct, dump-atmp y sa) que se ejecutan en segundo plano y realizan un seguimiento de la actividad de cada usuario en el sistema, tiempos de conexión (en horas) así como de los recursos que se están consumiendo. Normalmente se levanta el servicio durante la instalación pero si no se ha levantado:
 # /etc/init.d/acct start
-Luego podran lanzarse las aplicaciones del paquete.
+Luego podran lanzarse las aplicaciones del paquete y los logs se guardarán en el archivo /var/log/account/pacct.
+# ac (muestra el total de horas)
+# ac -d (por dias)
+# ac -p (de cada usuario)
+# dump-acct /var/log/account/pacct (ver el contenido de logs)
+# dump-utmp /var/log/account/pacct
+# lastcomm root (del usuario root)
+# sa -a (comandos que fueron ejecutados por los usuarios)
 
 
 accton
