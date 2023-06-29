@@ -22553,7 +22553,8 @@ modifica propiedades de los usuarios [directorio base, el shell, grupos a los qu
 
 users
 Quien está conectado al sistema
-$ users | xargs -n1 echo | sort | uniq -c  (número de sesiones abierta por los usuarios.
+$ users (ejecución básica)
+$ users | xargs -n1 echo | sort | uniq -c  (número de sesiones abierta por los usuarios)
 
 
 utorrent
@@ -23263,6 +23264,11 @@ Realizar copias de seguridad y restaurar imágenes openvz. Vzdump es un programa
 # vzdump --compress --dumpdir /home/USER/backup 101 (crear copia de seguridad de la máquina virtual [contenedor] comprimida, en el dir especificado y con el ID 101)
 # vzdump --compress --dumpdir /home/USER/backup --all (crear copia de seguridad de todos los contenedores)
 # vzrestore /home/USER/backup/vzdump-101.tgz 104 (restaurar la máquina virtual 101 desde la copia de seguridad con la nueva ID 104)
+
+
+w
+Ver los usuarios conectados (ESER) y desde qué teminal (TTY) y equipo remoto (FROM), el tiempo que hace que no está realizando ninguna acción (IDLE), el tiempo utilizado por todos los procesos conectados al terminal (JCPU) y el utilizado por el proceso actual (PCPU) y el útimo comando ejecutado (WHAT) y qué estan haciendo. El comando interpreta la información del fichero /var/run/utmp.
+# w
 
 
 w3m
