@@ -4033,10 +4033,13 @@ $ datefudge "23 Oct 2210" date -R
 $ datefudge "2136-10-23 09:33" sh -c "sleep 3; date -R"
 
 
-dateutils.dzone
-Convierte fecha/hora entre zonas horarias. Si se omite fecha/hora, el valor predeterminado es 'ahora'.
-$ dateutils.dzone Europe/Madrid Australia/Sydney America/Bogota today
-$ dateutils.dzone Europe/Madrid Australia/Sydney
+dateutils
+Varias herramientas que giran en torno a fechas y horas entre zonas horarias (dateutils.dadd, dateutils.ddiff, dateutils.dround, dateutils.dsort, dateutils.dzone, dateutils.dconv, dateutils.dgrep, dateutils.dseq, dateutils.dtest, dateutils.strptime). Si se omite fecha/hora, el valor predeterminado es 'ahora'.
+$ dateutils.dzone Europe/Madrid Australia/Sydney America/Bogota today (fecha exacta de varias ciudades)
+$ dateutils.dzone Europe/Madrid Australia/Sydney (lo mismo)
+$ dateutils.ddiff 2022-02-15 2023-01-05 (muestra los dias de diferencia entre dos fechas)
+$ dateutils.ddiff 9:00:00 13:05:00 -f '%H:%M:%S' (mostrará la diferencia en horas, minutos y segundos)
+$ dateutils.dround -n 10:02:00 5s (aumenta la fecha en 5 segundos)
 
 
 dav
