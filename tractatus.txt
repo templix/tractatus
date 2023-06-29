@@ -3648,7 +3648,8 @@ Programa para localizar vulnerabilidades en archivos de contraseñas escaneando 
 # crack -nice 10 /etc/passwd (con prioridad reducida para que otros programas tengan prioridad sobre la cpu)
 
 
-cracklib-check
+cracklib
+(libcrack2) Verifica la fortaleza de una contraseña, procesa archivos de palabras, crea bases de datos, etc. El paqueta contiene varias herramienta: cracklib-chec, cracklib-format, cracklib-packer, cracklib-unpacker y update-cracklib.
 Mide la fortaleza de una contraseña.
 	$ echo "LinUx_f1nt1stic0" | cracklib-check
 	LinUx_f1nt1stic0: OK
@@ -3662,6 +3663,9 @@ Puede usar el modo interactivo:
 	linux2: it is based on a dictionary word
 	HueñPP9-?"HgfR
 	HueñPP9-?"HgfR: OK
+# update-cracklib (actualizar los diccionarios de la aplicación)
+# cracklib-format datos (convierte cada linea en una palabra independiente de las que tenga y las coloca por orden alfabetico)
+# cracklib-format datos > datos2 (lo anterior mandándolo a un archivo)
 
 
 crashme
