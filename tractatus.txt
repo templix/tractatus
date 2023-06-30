@@ -17059,6 +17059,11 @@ $ procinfo -D (mostrar estadísticas como totales)
 $ procinfo -H (en formato KiB, MiB, GiB en lugar de los Kbytes predeterminados)
 
 
+procs
+Herramienta básicamente como el comando ps [ver] pero más coloreado, más legible, por columnas y vista en árbol. Descarga de https://github.com/dalance/procs/releases/tag/v0.14.0
+$ procs
+
+
 proftpd
 Servidor ftp local.
 # nano /etc/proftp/proftpd.conf
@@ -21212,7 +21217,8 @@ $ tiptop (arrancar el monitoreo. "q" para cerrar)
 
 
 tldr
-Muestra información de un comando como las páginas man pero más simplificada. Muestra como si fueran versiones resumidas de man.
+Muestra información de un comando como las páginas man pero más simplificada. Muestra como si fueran versiones resumidas de man com más ejemplos.
+$ tldr --update (primero despues de instalarla, recargar la base de datos y lanzarlo periodicamente)
 $ tldr comando
 
 
