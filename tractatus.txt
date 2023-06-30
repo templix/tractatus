@@ -14324,7 +14324,7 @@ $ ncal -B 2 (los anteriores tres meses [2, 1 y 0])
 
 
 ncdu
-Muestra el espacio usado por los archivos y directorios del directorio actual. Como “du” pero basado en ncurses.
+Muestra el espacio usado por los archivos y directorios del directorio actual. Como “du” pero mostrando graficos y color.
 $ ncdu /home/usuario
 
 
@@ -25083,6 +25083,16 @@ Compresor/descompresor de archivos.
 $ zoo -a archivo.zoo ficheros (Comprimir)
 $ zoo -x archivo.zoo (Descomprimir)
 $ zoo -v archivo.zoo (Ver contenido)
+
+
+zoxide
+Herramienta que permite moverse entre directorios como el clásico cd. Se trata de una herramienta que aprende de tus movimientos y ayuda a desplazarse con el mínimo número de saltos. Es una herramienta que está inspirada en z y autojump, pero que está disponible para las shell mas utilizadas, como Bash, Zsh o Fish.
+Colocar en ~/.bashrc la linea
+  eval "$(zoxide init bash)"
+Y recargar bashrc:
+  $ source ~/.bashrc
+$ z Documentos/datos
+$ z-
 
 
 zrun
