@@ -7889,6 +7889,11 @@ $ fuser -v archivo  (Muestra los procesos usados por un fichero o directorio)
 # fuser -n tcp -s 22 && echo "abierto" (Indica si un puerto está abierto)
 
 
+gawk-doc
+Información en inglés del comando gawk. Acceder a la misma con el navegador con la dirección:
+	file:///usr/share/doc/gawk-doc/gawkworkflow-html/index.html
+
+
 gcalccmd
 Calculadora.
 $ gcalccmd (Entra en el prompt y se teclea por ejemplo 5*4 y dará el resultado)
@@ -9014,11 +9019,6 @@ Descomprime archivos gz comprimidos con gzip.
 $ gunzip archivo.txt.gz
 
 
-gawk-doc
-Información en inglés del comando gawk. Acceder a la misma con el navegador con la dirección:
-	file:///usr/share/doc/gawk-doc/gawkworkflow-html/index.html
-
-
 guessnet
 Herramienta de detección de redes no agresiva para usar cuando se mueve una máquina entre redes que no necesariamente proporcionan DHCP. Al hacer ifup eth0, guessnet verificara si eth0 tiene que activarse como hogar o oficina. Para ello utiliza la información almacenada en las definiciones de las interfaces lógicas. En el archivo /etc/network/interfaces han de constar los datos de las redes.
 # nano /etc/network/interfaces
@@ -9061,11 +9061,12 @@ Creará dos archivos: "/bin/ls" y "/bin/ls~". El original es el ls~ que podrá b
 
 
 gzip
-(gz). Comprime un fichero (ni empaqueta ni comprime directorios)
+(gz). Comprime un fichero substituyendolo por un .gz (ni empaqueta ni comprime directorios). Consta de varios ejecutables: gunzip (descomprimir .gz), gzexe (codifica porcentajes de un ejecutable sin modificar el nombre y se ejecutan igualmente), zcat (muestra el contenido de un .gz por la pantalla), zcmp (ejecuta cmp en comprimidos .gz), zdiff (ejecuta diff entre un archivo .gz y el mismo descomprimido si existe en existe en el directorio), zegrep (ejecuta egrep en archivos .gz), zfgrep (ejecuta fgrep en archivos .gz), zforce (fuerza una extensión .gz para que gzip no los comprima de nuevo. Esto puede ser útil cuando los nombres de los archivos se truncaron durante una transferencia de archivos), zgrep (ejecuta grep en archivos .gz), zless (ejecuta less en archivos .gz), zmore (muestra el contenido de un .gz por la pantalla), znew (recomprime archivos de formato compress [.Z] a formato gzip [.gz])
 $ gzip -r fichero (Comprimir)
 $ gzip -9 archivo (Con compresión máxima)
 $ gzip -d fichero.gz (Descomprimir)
 $ gzip -c fichero.gz (Ver contenido)
+$ gzexe datos.sh (si lo abrimos con un editor veremos parte codificada pero podrá ejecutarse normalmente con ./datos.sh)
 
 
 hachoir-metadata
