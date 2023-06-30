@@ -17396,7 +17396,7 @@ Utilidad de Qemu para poder montar discos virtuales. Crea un disco de red. Es ne
 
 
 qmv
-[renaameutils]. Abrirá los nombres de los archivos en un directorio con elu editor de texto predeterminado y permitirá editarlos.
+[renameutils]. Abrirá los nombres de los archivos en un directorio con el editor de texto predeterminado y permitirá editarlos.
 $ qmv dir (renombrar los nombres de los archivos del directorio)
 $ qmv -f do dir (mostrar sólo la columna del archivo de destino [f], 'do' se refiere al destino y el directorio)
 
@@ -19806,6 +19806,15 @@ $ ./speedtest_cli.py --sahre (Nos da una URL con la imagen en png de la conexió
 $ ./speedtest_cli.py --list (Mostrará una lista ordenada de los servidores de Speedtest.net con los más cercanos en primer lugar.)
 $ ./speedtest_cli.py --server 804 (Especificar un servidor distinto al más cercano,     tomado del listado anterior)
 $ ./speedtest-cli --simple (velocidad de la red)
+
+
+spew
+Medir el rendimiento de E/S de dispositivos de caracteres, dispositivos de bloque y archivos normales. También se puede usar para generar altas cargas de E/S para los sistemas de tensión mientras se verifica la integridad de los datos. No necesita archivos de configuración. Muestra la velocidad de transferencia de escritura en kibibytes por segundo y el tiempo de transferencia de escritura en segundos. Incluye gorge y regorge
+$ spew -b 32k 1m /tmp/spewfile (escribe 32 mebibytes [1 mebibyte = 1048576 Bytes] en el archivo especificado)
+$ spew -u m -i 10 -b 1k 256k /dev/sda1 (Escribe 256 kibibytes utilizando peticiones de 1 kibibibyte en el archivo de dispositivo de bloque /dev/sda1 10 veces utilizando el patrón predeterminado (aleatorio). Las tasas de transferencia de escritura iterativa y acumulativa se muestran en mebibytes por segundo y los tiempos de transferencia de escritura iterativa y acumulativa se muestran en segundos.)
+$ regorge -s -o 1m -b 16m 1g /tmp/bigfile (Escribe 1 gibibyte (1 gibibyte = 1024*1024*1024 bytes) comenzando en un offset de 1 mebibyte usando 16 peticiones de mebibyte al fichero /tmp/bigfile usando el patrón por defecto (aleatorio). Los datos se escriben de forma sincrónica y se vacían al cerrar el archivo. Luego se leen los mismos datos usando el mismo tamaño de petición y offset. Se comprueba que los datos leídos coinciden con los leídos. Las tasas de transferencia de escritura y lectura se muestran en kibibytes/segundo. Los tiempos de transferencia de lectura y escritura se muestran en segundos.)
+$ gorge -i 0 -u M -p zeros -b 512 1m /dev/zero (Lee 1 mebibyte de datos utilizando peticiones de 512 bytes del archivo /dev/zero un número infinito de veces utilizando el patrón de ceros (no comprueba los datos). Las tasas de transferencia de lectura iterativa y acumulativa se muestran en megabytes (1 megabyte = 1.000.000 bytes) por segundo y los tiempos de transferencia de lectura iterativa y acumulativa se muestran en segundos.)
+$ regorge -g -r -b 1k -B 256K 1t /dev/md1 (Escribe 1 tebibyte (1 tebibyte = 1024*1024*1024*1024 bytes) utilizando peticiones de 1-256 kibibytes en el dispositivo de bloques /dev/md1 utilizando el patrón aleatorio. Se realizan búsquedas aleatorias antes de cada transferencia, pero cada bloque entre el inicio y el final de los datos se escribe exactamente una vez. Los tamaños de las peticiones se eligen aleatoriamente. A continuación se leen los mismos datos utilizando los mismos tamaños de petición y búsquedas en la misma secuencia. Repita la secuencia anterior un número infinito de veces hasta que se le indique que abandone [mediante señal o comando TUI])
 
 
 split
