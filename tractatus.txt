@@ -19108,6 +19108,16 @@ shadow
 # cat /etc/shadow | grep -E 'USER|root' (ver el Hash del usuario "USER" y el de root)
 
 
+shar
+[shareutils]. Producir un solo archivo a partir de muchos aunque sean todos distintos [png, html, txt, odtn binarios...]. Si se ejecuta un archivo shar recreará los archivos a partir de los que se generó. Tambien pueden extraerse son la aplicación unshar incluyda en shareutils
+$ shar * > datos.shar (empaqueta todos los archivos del directorio en el archivo datos.shar)
+Primera forma de extraerlos:
+        $ chmod +x datos.shar
+        $ ./datos.shar
+Segunda:
+        S unshar datos.shar
+
+
 shasum
 Muestra el hash sha de un fichero con el objetivo de verificar si se producen cambios.
 $ shasum -a 512 -t fichero (Usando el algoritmo de 512 bits. Otras opciones: 32 [por defecto] 224, 256, 384, 512224, 512256)
