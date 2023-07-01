@@ -11725,6 +11725,12 @@ LANG="es_ES.UTF-8"
 El idioma tiene que estar descomentado en /etc/locale.gen y luego generado por locale-gen
 
 
+localectl
+Controlar la configuración regional del sistema y la distribución del teclado
+$ localectl status
+$ localectl list-locales
+
+
 locale-gen
 Reconfiguración automática de los locales
 $ locale-gen
@@ -22718,8 +22724,9 @@ Atajos:
 
 
 validlocale
-Prueba si un locale determinado está disponible
-$ validlocale ca_ES.UTF-8
+Comprobar si una configuración regional determinada está disponible.
+          $ validlocale ca_ES.UTF-8
+          locale 'ca_ES.UTF-8' valid and available
 
 
 variables
