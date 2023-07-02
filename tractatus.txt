@@ -19062,6 +19062,11 @@ $ setleds -D -caps >> /dev/tty1 (desactiva las mayúsculas)
 $ setleds -D +scroll >> /dev/tty1 (activa el scroll)
 
 
+setlogcons
+Enviar mensajes del kernel a la consola especificada.
+# setlogcons 1 (enviar todos los mensajes del kernel a tty1)
+
+
 setpci
 [pciutils]. Utilidad para consultar y configurar dispositivos PCI.
 # setpci --dumpregs (lista de todos los registros y capacidades PCI conocidos)
@@ -21825,10 +21830,6 @@ Webcam en consola y ascii
 tty
 Muestra el número de terminal
 $ tty
-1.-
-Invertir una consola. No sirve para las terminales virtuales de las X.
-$ /sys/class/graphics/fbcon/rotate
-Borrar el 0 y poner un 2 (180º). Con un 1 la invertimos 90º a la derecha y con un 3 90º a la izquierda.
 
 
 tty-clock
