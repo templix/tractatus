@@ -20859,6 +20859,12 @@ $ tar -cvfz archivo.tgz --exclude="home/usuario/Descargas" --exclude=”home/usu
 $ tar -czf - Images | ssh 192.168.1.15 'cat > ~/Images.tar.tgz' (Crear un tar de un directorio y mandarlo a un host remoto por ssh donde creará en el directorio personal el paquete Images.tar.gz)
 
 
+tarcat
+Concatena por pantalla los contenidos de archivos de texto o comprimidos con tar.
+$ tarcat file1.tar file2.tar file3.tar
+$ tarcat file1.txt file2.txt file3.txt
+
+
 tcpdump
 Capturar el trafico de la red.
 # tcpdump -D (Ver las distintas redes disponibles)
