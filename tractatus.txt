@@ -18430,6 +18430,12 @@ Verificar integridad y un sistema de detección de intrusiones en grandes redes 
 # samhain -t check -D (iniciar samhain en modo demonio para revisar el sistema en intervalos especificados en el archivo de configuración)
 
 
+sane-find-scanner
+Herramienta para encontrar escáneres SCSI y USB incluso si no son compatibles con ningún backend SANE.
+$ sane-find-scanner (forma básica)
+$ sane-find-scanner -q (Imprime solo los dispositivos, sin comentarios.)
+
+
 sar
 [sysstat]. Controlando logs. Herramienta de monitorización del rendimiento. Cubre la mayoría de las áreas del sistema:  Uso de la CPU [opción -u, por defecto],  Colas de procesos y carga del sistema [opción -q],  Estadísticas por proceso [-x [PID | ALL]],  Creación de procesos [-c] y cambios de contexto [-w],  Actividad de los dispositivos de bloque [-d] y TTY [-y],  Uso de memoria y espacio de swap [-r],  Estadísticas de memoria [-R], de paginación [-B] y de swapping [-W],  Estadísticas de interrupciones [-I]. [/var/log/sysstat/sadd .-”dd” indica el dia]
 $ sar -q 10 3 (3 muestras cada 10')
