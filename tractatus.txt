@@ -19037,6 +19037,17 @@ $ setcap cap_net_admin,cap_net_raw+ep /usr/bin/wireshark (otorgar dos capability
 Nota.- +ep significa que la capability es efectiva [e] y permitida [p].
 
 
+setfacl
+Establece, modifica o elimina la lista de control de acceso a un archivo.
+$ setfacl -m u:usuario:rx archivo (Conceder acceso de lectura y ejecución a un usuario sobre un archivo)
+$ setfacl -x u:usuario file (Eliminar el acceso a un archivo a un usuario)
+$ setfacl -b archivo (elimina toda la lista de control de acceso a archivo)
+$ setfacl -d -m u::rw archivo  (Modifica la lista de control de acceso por defecto de archivo para todos los usuarios)
+$ setfacl -a archivo (muestra la lista de control de acceso de un archivo)
+$ getfacl -d archivo (ver la lista de control de acceso por defecto)
+$ getfacl -R dir (lista el control de acceso a todos los archivos,  directorios y subdirectorios del directorio mencionado)
+
+
 setfont
 Modificación de las fuentes en el arranque (arch)
 # setfont (cargar la por defecto)
