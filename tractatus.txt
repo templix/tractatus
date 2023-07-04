@@ -11026,6 +11026,8 @@ $ killall -9 scribus
 $ killall gnome-panel (reiniciar los paneles)
 $ killall -INFO dd  (chequear el estado de un proceso dd)
 $ killall -u usuario (Matar los procesos de un	 usuario)
+$ killall -l (listado de todas las señales)
+$ killall -s SEGV
 
 
 kippo
@@ -23554,6 +23556,15 @@ Daemon que monitoriza los procesos registrados, matándolos en caso de que se bl
 
 watchdog
 Es un daemon que escribe en /dev/watchdog cada diez segundos. Si el dispositivo se abre pero no se escribe en un minuto, la máquina se reiniciará. Esta característica está disponible cuando el kernel está construido con soporte de "watchdog de software" (estándar en los núcleos Debian) o si la máquina está equipada con hardware watchdog. La capacidad de reiniciar del software del kernel dependerá de estado de la máquina. La herramienta en sí misma ejecuta varias comprobaciones y actúa de manera adecuada si el sistema no está en buen estado.
+
+
+watchgnupg
+Escuchar un socket de dominio Unix creado por cualquiera de las herramientas GnuPG
+$ watchgnupg --force (Elimina un archivo de socket ya existente. Esta opción se utiliza si no se ha dado ningún nombre de socket en la línea de comandos)
+$ watchgnupg --homedir DIR (si no se da un nombre de socket, pase DIR a gpgconf para que se use el socket de un GnuPG que se esté ejecutando en suu directorio home)
+$ watchgnupg --tcp n (En lugar de leer de un socket local, escucha conexiones en el puerto TCP n. Opcionalmente, también se puede dar un socket de dominio Unix como segunda fuente)
+$ watchgnupg --time-only SOCKET (No imprima la parte de la fecha de la marca de tiempo)
+$ watchgnupg --verbose SOCKET (Activar la salida de información adicional.)
 
 
 watson
