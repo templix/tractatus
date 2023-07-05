@@ -1677,6 +1677,13 @@ $ basename /etc/rc.d/cupsd (devolverá “cupsd”)
 $ basename /etc/rc.d/cupsd start (También devolvera “cupsd”)
 
 
+basenc
+Codificar/decodificar datos e imprimirlos por pantalla.
+$ basenc --base16 text.txt > cifrado.txt (cifrar con base64)
+$ cat cifrado.txt | basenc -d --base16 (descifrar)
+$ printf 'linux es un sistema genial' | basenc --base64 (cifrar)
+
+
 bash-doc
 Manuales de bash (en).
 $ firefox file:////usr/share/doc/bash/bashref.html
@@ -25244,13 +25251,14 @@ $ zoo -v archivo.zoo (Ver contenido)
 
 
 zoxide
-Herramienta que permite moverse entre directorios como el clásico cd. Se trata de una herramienta que aprende de tus movimientos y ayuda a desplazarse con el mínimo número de saltos. Es una herramienta que está inspirada en z y autojump, pero que está disponible para las shell mas utilizadas, como Bash, Zsh o Fish.
-Colocar en ~/.bashrc la linea
+Herramienta que permite moverse entre directorios como el clásico cd. Se trata de una herramienta que aprende de tus movimientos y ayuda a desplazarse con el mínimo número de saltos. Es una herramienta que está inspirada en z y autojump, pero que está disponible para las shell mas utilizadas, como Bash, Zsh o Fish. Esta aplicación se puede lanzar de varias formas: z, za y zi son otra forma de utilizar zoxide de forma intereactiva. De esta forma se combina la potencia de zoxide con la potencia de fzf.
+Rn bash colocar en ~/.bashrc la linea y recargar:
   eval "$(zoxide init bash)"
-Y recargar bashrc:
   $ source ~/.bashrc
-$ z Documentos/datos
-$ z-
+$ z Documentos/datos (ir al directorio especificado)
+$ zoxide add .emacs.d/elpa (entrar un nuevo directorio a la base de datos)
+$ z (ir al directorio /home/usuario)
+$ zi (ver directorios de la base de datos)
 
 
 zrun
