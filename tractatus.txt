@@ -1763,6 +1763,11 @@ $ batcat -A text.txt (mostrando, espacios, tabulaciones, nueva linea...)
 $ batcat -p text.txt (mostrar en texto plano)
 $ batcat -n scrip.sh (mostrando número de lina)
 $ batcat -L (todos los lenguajes soportados)
+$ batcat --list-themes (ver temas con sus muestras disponibles)
+$ batcat --theme TwoDark archivo (ver archivo con el tema seleccionado)
+Si queremos usar un tema concreto por defecto, colocar en .bashrc la linea y recargar:
+   export BAT_THEME="DarkNeon"
+   $ source ~/.bashrc
 
 
 bats
