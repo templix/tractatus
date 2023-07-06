@@ -2720,6 +2720,11 @@ opciones
 -dummy .- simula la grabación
 
 
+cert-sync
+Importar certificados. Ver update-ca-certificates
+$ cert-sync --user /etc/ssl/certs/ca-certificates.crt
+
+
 certtool
 [gnutls]. Herramienta para analizar y generar certificados, solicitudes y claves privadas X.509. Se puede utilizar de forma interactiva o no interactiva.
 $ certtool --generate-privkey --outfile key.pem --rsa (crear una clave RSA [otras opciones: dsa, ecc] privada i que se guarde en key.pem)
@@ -22479,6 +22484,7 @@ $ update-alternatives --install  /usr/bin/x-www-browser x-www-browser /usr/bin/f
 update-ca-certificates
 Programa que actualiza el directorio /etc/ssl/certs para contener certificados SSL y genera certificados ca-certificates.crt.
 # update-ca-certificates
+# update-ca-certificates -f (actualizar)
 
 
 update-desktop-database
