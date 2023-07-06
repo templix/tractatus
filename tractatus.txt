@@ -3604,6 +3604,14 @@ Actualizar la información de copyright en un conjunto de archivos.
 # copyright-update -v -r -t * (con más información y de forma recursiva)
 
 
+corelist
+Proporciona información sobre los módulos core y dual-life incluidos en cada versión de perl.
+$ corelist -v (enumera todas las versiones de perl)
+$ corelist -r (lista todas las versiones de perl y cuándo se publicaron)
+$ corelist -a Unicode (lista todas las versiones del módulo dado)
+$ corelist --utils -v 5.8.3 (De la version)
+
+
 cowpatty
 Aplicación de ataque de diccionario contra contraseñas WPA2.
 $ cowpatty -f diccionario -r ataque.cap -s SSID (lista de palabras a usar, guardar en el archivo expecificado y el SSID encontrado)
