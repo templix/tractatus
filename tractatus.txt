@@ -3296,7 +3296,7 @@ $ colored_dmesg
 colrm
 Corta columnas de un texto.
 $ cat /etc/passwd | colrm 10 (Corta desde el caracter número 10 al final de la linea)
-$ cat /etc/passwd | colrm 10 50 (Borra los aracteres del 10 al 50. Sólo deja los 10 primeros y los del 50 al final)
+$ cat /etc/passwd | colrm 10 50 (Borra los caracteres del 10 al 50. Sólo deja los 10 primeros y los del 50 al final)
 
 
 column
@@ -3369,7 +3369,7 @@ $ compgen -A signal
 
 
 compilar
-[libncurses libncurses-fdev build-essential]. Instalar aplicaciones a partir del codigo fuente .	Los comandos standard que se utilizan son: ./configure, make, sudo make install y han de ejecutarse desde el directorio que contiene las fuentes. Configure y make se pueden ejecutar como usuario normal, pero make install generalmente se tiene que ejecutar como administrador por cuestión de permisos.
+[libncurses libncurses-fdev build-essential]. Instalar aplicaciones a partir del codigo fuente . Los comandos standard que se utilizan son: ./configure, make, sudo make install y han de ejecutarse desde el directorio que contiene las fuentes. Configure y make se pueden ejecutar como usuario normal, pero make install generalmente se tiene que ejecutar como administrador por cuestión de permisos.
 El script configure [configuración] sirve para comprobar las dependencias y las versiones de las librerias del paquete a instalar creando el archivo makefile que constituye la base de la compilación. Si configure falla no se creará makefile. Configure, normalmente, puede ejecutarse con algunos parametros que, en caso de existir, se especifican en el fichero INSTALL o README y que siempre acompaña al paquete de las fuentes. Tambien puede ejecutarse:
 $ ./configure --help
 para listar los parametros que se pueden usar. Si en el	paquete	de fuentes a intalar ya existe un archivo makefile no habrá el configure y consecuentemente si se lanza ./configure dará error [No existe el fichero ó directorio] en estos casos puede pasarse directamente al make. Algunas opciones para	configure:
@@ -3430,6 +3430,15 @@ conky
 $ cp /etc/conky/conky.conf ~/.conkyrc
 $ conky (Arrancar la aplicación. Se muestra en el escritorio)
 $ conky -d (arrancarla como daemon)
+
+
+connmanctl
+Esta aplicación puede ejecutarse en dos modos: una entrada de comandos síncrona simple y una shell interactiva asíncrona. Para ejecutar un comando específico el usuario puede introducir connmanctl comando [opciones] o simplemente connmanctl, en este último caso se iniciará un shell interactivo. Connmanctl puede manejar la mayoría de las conexiones de red. Se puede utilizar para activar/desactivar cualquier tecnología que exista en el sistema, mostrar una lista de servicios disponibles, conectar/desconectar redes, mostrar propiedades del sistema, las tecnologías y cualquier servicio individual y configurar todas las propiedades. También es capaz de monitorizar los cambios en las propiedades de los servicios, las tecnologías y el sistema.
+$ connmanctl state
+$ connmanctl technologies
+$ connmanctl enable wifi
+$ connmanctl services
+$ connmanctl vpnconnections
 
 
 conntrack
@@ -3877,9 +3886,9 @@ Comentar la linea “Listen localhost:631” y añadir la ip de la máquina: “
 		Allow from 192.168.2.0/24
 	</Location>
 Para activar la compartición de impresoras:
-Browsing on
-	# /etc/init.d/cupsd restart (reiniciar cups)
-Abrir el navegador y escribir http://localhost:631 después del logeo ir a la pestaña printers y seleccionar la impresora, con lo que nos quedará en la barra de navegación algo parecido a: http://localhost:631/printers/PSC-1100
+     Browsing on
+     # /etc/init.d/cupsd restart (reiniciar cups)
+Abrir el navegador y poner http://localhost:631 después del logeo ir a la pestaña printers y seleccionar la impresora, con lo que nos quedará en la barra de navegación algo parecido a:         http://localhost:631/printers/PSC-1100
 Que sustituyendo “localhost” por la dirección ip de la máquina nos dará la dirección de la impresora:
 http://192.168.2.3:631/printers/PSC-1100
 En las máquinas cliente
