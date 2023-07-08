@@ -4440,10 +4440,14 @@ Verificar la integridad de los ficheros.
 debugfs
 Depurador de sistemas ext. Permite consultar datos del sistema en tiempo real.
 # debugfs (Entra en el promt de la aplicación. Pulsar letra "q" para salir del promt)
-debugfs 1.42 (29-Nov-2011)
-debugfs: help (Muestra un listado de todas las opciones)
-debugfs: open /dev/sda2 (Abre un sistema de archivos)
-debugfs: stats (información de los superbloques)
+  debugfs 1.42 (29-Nov-2011)
+  debugfs: help (Muestra un listado de todas las opciones)
+  debugfs: open /dev/sda2 (Abre un sistema de archivos)
+  debugfs: stats (información de los superbloques)
+# debugfs /dev/hda4
+# debugfs -R 'stat <1706790>' /var/log/syslog
+Nota.- El nodo lanzando:
+       # stat /var/log/syslog
 
 
 declare
