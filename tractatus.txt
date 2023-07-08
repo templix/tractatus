@@ -4494,6 +4494,11 @@ Elimina un usuario del sistema sin borrar su directorio.
 # deluser usuario
 
 
+delv
+Utilidad de búsqueda y validación DNS. La aplicación enviará a un servidor de nombres especificado todas las consultas necesarias para obtener y validar los datos solicitados. La forma básica de ejecución es:
+$ delv servidor nombre tipo (el servodor puede ser una dirección IP, una dirección IPv4 en notación decimal con puntos o una dirección IPv6 en notación delimitada por dos puntos. El nombre es el nombre de dominio que debe buscarse. El tipo de consulta puede ser cualquiera válido [ANY, A, MX, etc]. Si no se proporciona ninguno realizará una búsqueda de un registro A)
+
+
 denyhosts
 Protege contra ataques.
 Configuración:
