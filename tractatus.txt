@@ -4465,6 +4465,20 @@ $ decode-dimms (información por pantalla)
 $ decode-dimms -f (en formato .html)
 
 
+defaults
+Permite leer y modificar los valores predeterminados de un usuario. Este programa reemplaza los antiguos programas dread, dwrite y dremove. Si se tiene acceso a la base de datos predeterminada de otro usuario, se puede incluir '-u nombre de usuario' antes de cualquier otra opción para usar la base de datos de ese usuario en lugar de la suya.
+$ defaults readkey key (leer nombre predeterminado de todos los dominios)
+$ defaults write domain key 'value' (escriba 'value' como 'key' predeterminada en el dominio [entre comillas simples])
+$ defaults write domain dictionary (escriba 'diccionary' como reemplazo del dominio especificado. 'diccionary' debe ser una lista de propiedades entre comillas simples)
+$ defaults write (lee la entrada estándar para valores predeterminados y los escribe en la base de datos)
+$ defaults delete [ domain [ key] ] (eliminar los valores predeterminados especificados del 'domain'. Si no se proporciona ninguna 'key', elimine todo el dominio)
+$ defaults delete (eliminar los valores predeterminados)
+$ defaults domains (enumera los dominios en la base de datos uno por línea)
+$ defaults find word (busca nombres de dominio, nombres predeterminados y cadenas de valores predeterminados iguales a la palabra 'word' y los enumera por pantalla)
+$ defaults plist (información sobre las listas de propiedades)
+$ defaults help (lista de opciones)
+
+
 delgroup
 Elimina un grupo del sistema
 # delgroup grupo
