@@ -4459,6 +4459,12 @@ $ declare -p var (Saber el tipo de la variable "var")
 $ declare -i var=5 (Declarar una variable de tipo entero)
 
 
+decode-dimms
+Herramienta para decodificar la información que se encuentra en las EEPROMs SPD de los módulos de memoria. La herramienta requiere que se cargue un módulo del núcleo: eeprom, at24 o ee1004 (para DDR4 SDRAM.)
+$ decode-dimms (información por pantalla)
+$ decode-dimms -f (en formato .html)
+
+
 delgroup
 Elimina un grupo del sistema
 # delgroup grupo
