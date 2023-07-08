@@ -4340,6 +4340,11 @@ $ debcheckout nano
 	ChangeLog.2007-2015  configure.ac  INSTALL       mkinstalldirs  src
 
 
+debconf
+Es un sistema de configuración para paquetes Debian. Debconf proporciona una interfaz consistente para configurar paquetes, permitiéndo elegir entre varias interfaces de usuario. Permite preconfigurar paquetes antes de instalarlos.
+$ debconf -f readline sh -x script.sh (con la interfaz [f] y la orden de ejecución [x] para el script mencionado)
+
+
 debdate
 Convertir fechas gregorianas en fechas respecto de las versiones de Debian.
 	$ debdate -d 2020-05-20
