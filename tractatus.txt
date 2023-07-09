@@ -6955,6 +6955,12 @@ $ fatattr -s /media/usb1/* (Quita el atributo oculto de todo el usb)
 $ fatattr +s /media/usb1/* (Oculta todos los archivos del usb)
 
 
+fatlabel
+Establecer u obtener la etiqueta del sistema de archivos MS-DOS o la ID del volumen.
+$ fatlabel /dev/sda1 (Obtener la etiqueta de una partición FAT32)
+$ fatlabel /dev/sda1 Nueva-etiqueta (establecer nueva-etiqueta a la partición)
+
+
 fbcmd
 [php5-cli php5-curl]. Cliente de línea de comandos para Facebook.
 $ php -r 'echo phpversion();' (Comprobar si php5 está instalado)
