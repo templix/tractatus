@@ -5345,6 +5345,12 @@ Copia de seguridad de archivos, directorios o particiones. Para restaurar la cop
 $ dump -0vf home.bak /home/usuario/ (Completo [0], incremental sería 1, mostrando información [v] y especificando fichero [f]
 
 
+dump-acct
+Imprime una lista de todos los inicios de sesión. La lista está, generalmente, en /var/log/wtmp. Todos los campos estan separados por una linea vertical y son: user, name, tty, type, id, pid, hostaddr, host, time.
+# dump-acct /var/log/wtmp
+# dump-acct -n 10 /var/log/wtmp (solo imprimir en pantalla 10 lineas)
+
+
 dumpe2fs
 Muestra información de ficheros ext2/3
 # dumpe2fs /dev/sda1
