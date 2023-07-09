@@ -4518,6 +4518,11 @@ Algunas opciones:
 Nota.- Tambien es posible arrancar el servicio con la opción "purge"  [/etc/init.d/denyhosts start --purge] para eliminar las ips bloqueadas y que se muestran en /etc/hosts.deny
 
 
+depmod
+Analiza los módulos del núcleo [/lib/modules/*] y crea una lista de dependencias. De forma predeterminada, esta lista se escribe en módulos.dep y una versión binaria con hash denominada módulos.dep.bin, en el mismo directorio.
+$ depmod -a (Sondear todos los módulos. Opción predeterminada si no se proporcionan nombres de archivo en la línea de comandos)
+
+
 descriptor
 Toda aplicación tiene siempre tres descriptores de fichero abiertos, el 0 para la entrada estándar [stdin], el 1 para la salida estándar [stdout], y el 2 para la salida de errores estándar [stderr]. Del 3 al 9 son descriptores adicionales [ver tuberias]. En el ejemplo:
 $ ls -a >> listado.txt
