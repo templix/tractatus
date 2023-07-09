@@ -4712,6 +4712,11 @@ $ diff -ru carpeta_original carpeta_modificada > parche.patch (Compara de forma 
 $ diff -u <(grep -vE '^(#|$)' file1) <(grep -vE '^(#|$)' file2)  (Los compara ignorando comentarios y lineas en blanco)
 
 
+diffimg
+Genera una imagen donde cada píxel es la diferencia entre el píxel correspondiente en cada una de las dos imágenes de origen. Por lo tanto, si las imágenes de origen son las mismas, la imagen resultante será negra; de lo contrario, tendrá regiones no negras donde las imágenes difieren. Accepta .png, .gif y .jpg.
+$ diffimg imagen1.png imagen2.png
+
+
 diffmon
 Monitorear archivos del sistema. El archivo donde especificar lo que se han de controlar es /etc/diffmon/diffmon.cf. Está diseñado para ejecutarse como un trabajo cron
 $ diffmon
