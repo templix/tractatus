@@ -5369,6 +5369,12 @@ Permite obtener el mapa de teclas (Keymap) utilizado por el controlador de tecla
 # dumpkeys -f (completo)
 
 
+dumppdf
+Vuelca el contenido interno de un archivo PDF a formato pseudo-XML.
+$ dumppdf -a file.pdf (Volcar todos los encabezados y contenidos, excepto los objetos de flujo)
+$ dumppdf -T file.pdf (Volcar la tabla de contenido)
+
+
 duplicity
 Herramienta para realizar backups tanto en modo local como remoto
 # duplicity full /home file:///backups/ (realiza un backup copmpleto [full] en modo local de la carpeta /home en la carpeta /backups)
