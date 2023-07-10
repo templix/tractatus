@@ -962,7 +962,7 @@ Añadir al principio la linea del directorio:
 # apt-mirror (Recargar/actualizar el repositorio)
 Crear el enlace para que esté disponible via web:
 $ cd /var/www/html
-$ ln -s /home/USER/distro/mirror/us.archive.ubuntu.com/ubuntu ubuntu
+$ ln -s /home/USER/distro/mirror/us.archive.ubunu.com/ubuntu ubuntu
 Modificar el sources.list:
 # nano /etc/apt/sources.list
 Añadir la lineas:
@@ -6941,9 +6941,17 @@ Fallar la autentificación en el servidor web, bloqueo por 10 minutos
 	filter = nginx-auth
 
 
+faillock
+Herramienta para visualizar y modificar la autenticación archivos de registro de fallas. Muy parecida a faillog.
+# faillock --dir /var/log (directorio donde se guardan los registros de intentos fallidos)
+# faillock --user USER
+
+
 faillog
-(/var/log/faillog). Almacena todos los intentos "login" fallidos realizados a una maquina.
-$ faillog
+El módulo pam_faillock.so mantiene una lista de intentos fallidos de autentificación por usuario durante un intervalo especificado y bloquea la cuenta en caso de que hubiera varios intentos consecutivos de autentificaciones fallidas.
+# faillog -u USER (de un usuario)
+# faillog -r -u USER (borrar los registros del usuario mencionado)
+# faillog -a (todos)
 
 
 fakeroot
