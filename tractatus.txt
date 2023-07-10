@@ -6955,8 +6955,9 @@ El módulo pam_faillock.so mantiene una lista de intentos fallidos de autentific
 
 
 fakeroot
-[dpkg-repack]. Ejecuta comandos en un entorno que simula privilegios de root. No aumenta los privilegios de un usuario ni disminuye la seguridad del sistema.
+Ejecuta comandos en un entorno que simula privilegios de root. No aumenta los privilegios de un usuario ni disminuye la seguridad del sistema. Este paquete consta de los ejecutable: faked-sysv, faked-tcp, fakeroot-sysv y fakeroot-tcp
 $ fakeroot -u dpkg-repack paquete (Crea un archivo .deb a partir de un paquete instalado en el sistema.)
+$ fakeroot /bin/bash (ejecutar bash como root)
 
 
 false
