@@ -1982,16 +1982,17 @@ $ blockfinder -v -t SP (buscar el recurso deseado en el país de su elección)
 $ blockfinder -v -t SP:ipv4 (filtrar los resultados de un protocolo específico)
 
 
-bluetooth
-[gnome-bluetooth bluez-utils bluez-passkey-gnome bluez-pin]. Enviar archivos a dispositivos externos.
-$ hcitool scan  (buscar dispositivo)
-$ sdptool browse XX:XX:XX:XX:XX:XX (Con su identificador buscar el canal a utilizar)
-$ obexftp -b XX:XX:XX:XX:XX:XX -B 2 -p foto.jpg  (mandar el archivo)
-Opciones
-	-b	indica el identificador del dispositivo.
-	-B	canal.
-	-p	Archivo a enviar.
-En el dispositivo deberemos aceptar la transferencia
+bluez
+Es una herramienta que se puede utilizar para manipular atributos de un dispositivo Bluetooth Low Energy [BLE]. Es principalmente útil para averiguar los servicios y características de un dispositivo BLE disponible para que los datos de la víctima puedan ser leídos/escritos según el atacante. consta de varios ejecutables; bluemoon, bluetoothctl, btattach, btmgmt, btmon, ciptool, gatttool, hciattach, hcitool, hex2hcd, l2ping, l2test, mpris-proxy, obexctl, rctest, rfcomm, sdptool y bluetoothd
+$ hcitool dev (averiguar los dispositivos accesibles)
+$ hcitool lescan (escaneo de baja energía. El resultado puede ser F2:C5:F2:0A:BF:C8)
+$ gatttool -b F2:C5:F2:0A:BF:C8 -I (conectar al dispositivo encontrado)
+$ gatttool --help-all (todas las opciones)
+$ gatttool -i (iniciar la aplicación en modo interactivo)
+$ gatttool --primary (Comprobación de los servicios disponibles del dispositivo BLE conectado)
+$ sdptool browse F2:C5:F2:0A:BF:C8 (Con su identificador buscar el canal a utilizar)
+$ obexftp -b F2:C5:F2:0A:BF:C8 -B 2 -p foto.jpg  (b, el dispositivo, B, el canal y p el archivo a mandar)
+Nota.- En el dispositivo deberemos aceptar la transferencia
 1.-
 En /etc/bluetooth/pin introducimos la clave de acceso, normalmente 1234.
 # /etc/init.d/bluetooth restart    (reiniciar el demonio)
