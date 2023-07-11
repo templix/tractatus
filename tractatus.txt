@@ -8086,6 +8086,13 @@ $ fuser -v archivo  (Muestra los procesos usados por un fichero o directorio)
 # fuser -n tcp -s 22 && echo "abierto" (Indica si un puerto está abierto)
 
 
+gawkbug
+Es un script de shell para ayudar al usuario a redactar y enviar informes de errores relacionados con gawk en un formato estándar. gawkbug invoca el editor especificado por la variable de entorno EDITORs.
+$ gawkbug (El usuario debe completar los campos correspondientes y salir del editor)
+$ gawkbug correo (envía por correo el informe completo a bug-gawk@gnu.org, o a la dirección de correo que se especifique)
+Nota.-  Si el informe no se puede enviar por correo, se guarda en el archivo dead.gawkbug en el directorio del usuario que invoca.
+
+
 gawk-doc
 Información en inglés del comando gawk. Acceder a la misma con el navegador con la dirección:
 	file:///usr/share/doc/gawk-doc/gawkworkflow-html/index.html
