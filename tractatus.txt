@@ -9471,6 +9471,10 @@ Gestionar dispositivos blueetoth
 # hidd --connect 0A:1B:2C:4D:5E:6F (Conectar a un dispositivo)
 
 
+hishrink
+Convierte un archivo ASCII HINT, generalmente con la extensión .hint, en un archivo binario HINT, con la extensión .hnt. El formato de archivo HINT basado en ASCII, también llamado formato 'largo', está optimizado para facilitar la lectura. Se puede editar con un editor de texto. Por lo tanto, permite modificaciones simples que serían difíciles de lograr utilizando el formato binario. También es conveniente al depurar. El formato de archivo binario HINT, también llamado formato 'corto', está optimizado para mostrar archivos HINT. El formato de archivo HINT binario está diseñado para la lectura en pantalla de documentos.
+
+
 history
 Lista los comandos utilizados por el usuario
 $ history 20       (Lista los últimos 20)
@@ -9482,6 +9486,10 @@ $ !354  (ejecutará el comando 354 del listado de history)
 $ history | grep cp  (Buscar en el historial las veces que se ha lanzado “cp”)
 $ history -a (Guardar el historial sin cerrar la sesión)
 $ echo $HISTCMD (número de comandos registrados en history)
+
+
+histretch
+Traducción de archivos HINT binarios a archivos ASCII. La inversa de los que hace el comando hishrink [ver]
 
 
 hodie
