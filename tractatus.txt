@@ -9218,6 +9218,14 @@ width = 80 (Modificar archura, por defecto 100% de la pantalla)
 if halignment == ALIGN_CENTER: (Centrada)
 
 
+guake-indicator
+permite administrar comandos personalizados. guake-indicator construye el menú de acuerdo con el archivo XML ~/.guake.indicator/guake-indicator.xml, si este archivo de configuración no existe, se creará uno predeterminado. Aunque guake-indicator tiene un editor de menú incorporado, se puede personalizar este archivo según necesidades con un editor de texto como base para agregar nuevas entradas. Los campos se explican por sí mismos, sin embargo, daré una pequeña descripción de cada uno:
+        menu_name (nombre que aparecerá en el propio indicador)
+        tab_name (nombre de la pestaña de la terminal de guake una vez que se abre)
+        command_after_login (comando para enviar a Guake a través de la interfaz DBUS)
+        dont_show_guake (Si se establece en yes, guake-indicator no pedirá que muestre su ventana principal)
+
+
 gunzip
 Descomprime archivos gz comprimidos con gzip.
 $ gunzip archivo.txt.gz
