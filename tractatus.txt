@@ -9284,6 +9284,12 @@ $ hal-device -r dispositivo   (borrar)
 $ hal-device | grep volume.label  (mostrar etiquetas de todos los volumenes)
 
 
+halt
+[poweroff, reboot]. Se puede utilizar para detener, apagar o reiniciar la máquina. Los tres  comandos tienen las mismas opciones.
+$ halt --halt (Detener la máquina, independientemente de cuál de los tres comandos se invoque)
+$ halt --reboot (Reiniciar la máquina, independientemente de cuál de los tres comandos se invoque)
+
+
 hardlink
 Herramienta que detecta archivos iguales y los reemplaza con enlaces duros.
 # hardlink -f -x /videos -t -o /home/usuaario (Enlazar archivos con el mismo nombre [f], excluyendo el directorio "videos" [x], comprobando aunque la fecha de modficación sea diferente [t], ignorando el propietario [o] y sobre la carpeta personal)
@@ -17174,7 +17180,9 @@ Las metaordenes de psql son un conjunto de órdenes internas, no propiamente ór
 
 
 poweroff
-Apagar el ordenador.
+[halt, reboot]. Apagar el ordenador. Los 3 comandos tienen las mismas opciones.
+$ poweroff --halt (Detener la máquina independientemente de que comando de los tres se use)
+$ poweroff --reboot (Reinicie la máquina, independientemente de cuál de los tres comandos se invoque)
 
 
 powertop
