@@ -11446,6 +11446,11 @@ $ for i in *.mp3; do lame -q 0 -b 160 -m j "$i" "directorio/$i"; done (Modificar
 -m j	Activar joint stereo.
 
 
+laptop-detect
+Detecta si nos encontramos en un portatil. Retorna "0" si lo más probable es que si, "1" si probablemente es que no y "2" si es una opción desconocida.
+$ laptot-detect -v
+
+
 last
 Muestra la ultima vez que se conecto un usuario [/var/log/wtmp].
 $ last -n 10 (Muestra los últimos 10 eventos. )
