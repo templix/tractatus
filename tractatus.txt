@@ -7703,7 +7703,7 @@ Intérprete de comandos.
 $ fish (entra en la shell)
   pep@Deb ~> help (abre las instrucciones sobre fish en el navegador por defecto)
   help: Help is being displayed in xdg-open.
-pep@Deb ~> exit (salir de fish)
+  pep@Deb ~> exit (salir de fish)
 
 
 fixfiles
@@ -25339,9 +25339,9 @@ $ you-get -o /Vídeos -O titulo URL (descargar el video en un directorio y con u
 
 
 youtube-dl
-Descargar videos de youtube
-$ youtube-dl url
-$ youtube-dl url (Descarga básica)
+Utilidad basada en Python que permite descargar videos de sitios populares como YouTube, Dailymotion, Photobucket, Facebook, Yahoo, Metacafe y más. Admite varios formatos de medios, incluidos MP4, WebM, etc. Esta aplicación está siendo substituida por yt-dlp [ver]
+$ youtube-dl url (forma básica)
+$ youtube-dl -U (actualizar la aplicación)
 $ youtube-dl -o nombre.flv url  (Guardar con nombre especificado)
 $ youtube-dl -a archivo_de_urls_de_youtube (bajar multiples videos)
 $ youtube -upepe -pcontraseña url (especificando usuario y contraseña)
@@ -25354,6 +25354,13 @@ y-ppa-manager
 utilidad para gestionar los PPA en Launchpad.
 # y-ppa-cmd (Lanza las formas de usar el comando)
 # y-ppa-manager (abre la interfaz gráfica)
+
+
+yt-dlp
+[FFmpeg]. Utilidad escrita en python [pip install yt-dlp] para descargar audio y video de servicios como YouTube. Es un fork de youtube-dl que actualmente parece que no se está desarrollando.
+$ yt-dlp url (forma básica)
+$ yt-dlp -F url (muestra diferentes formatos de descarga)
+$ yt-dlp -f 137 url (especificando formato según listado anterior)
 
 
 ytree
