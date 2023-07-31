@@ -11615,6 +11615,21 @@ Atajos:
 	q (Salir del programa)
 
 
+lessfile
+Programa que modifica la forma en que se muestra los contenidos de un archivo el comando less, lo que significa es que less podrá abrir automáticamente archivos tar, tar.bz2, gzip, bz, 7z, pdf, jar, deb, iso e incluso mostrar características básicas de archivos gráficos tipo .gif, .png, .jpg, .tif, etc.  Colocar en ~/.bashrc una de las siguientes lineas:
+    eval "$(lessfile)"
+    eval "$(lesspipe)"
+Actualizar el archivo:
+    $ source ./.bashrc
+Antes de actualizar .bashrc si se lanza.
+$ less archivo.rar (mostrará caracteres raros)
+Después de actualizar .bashrc mostrará el contenido del archivo.
+
+
+lesspipe
+Exactamente igual que lessfile [ver]
+
+
 let
 Permite asignar el resultado de una expresión aritmética a una variable.
 $ let a=4*3; echo $a
