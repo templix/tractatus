@@ -11886,6 +11886,11 @@ Muestra fallos en construcción de paquetes .deb [según la política de Debian]
 $ lintian paquete.deb
 
 
+linux-check-removal
+comprobar si la eliminación de un núcleo es segura. está pensado para ser llamado desde los scripts prerm maintainer de los paquetes del núcleo Linux. Los scripts preinst, postinst, prerm y postrm de Debian son scripts que se ejecutan automáticamente antes o después de instalar o eliminar un paquete.
+# linux-check-removal 5.10.0-8-amd64 (si se quiere eliminar manualmente un kernel viejo)
+
+
 linuxinfo
 Muestra información del sistema: versión del kernel, número y tipo de procesadores, versión de la biblioteca del sistema (libc o glibc).
 $ linuxinfo
@@ -11904,7 +11909,7 @@ $ linuxlogo -L redhat -F "Redhat linux 5.2\nkernel version 3.2.0-4-amd64" (Espec
 linux-version
 Muestra los kernels instalados en el sistema.
 $ linux-version list (los lista todos)
-$ linux-version list | linux-version sort --reverse (lista los kernels y ordena el más nuevo al más viejo)
+$ linux-version list | linux-version sort --reverse (lista los kernels y ordena del más nuevo al más viejo)
 
 
 listres
