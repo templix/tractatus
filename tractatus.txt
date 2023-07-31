@@ -13047,27 +13047,27 @@ $ mesg n   (desautoriza)
 
 
 metacaracteres
-Son caracteres especiales de puntuación entre órdenes. Sirven para combinar varias órdenes con el objetivo de construir una única orden lógica. Ver tuberias.
-Separador entre ordenes que se ejecutan secuencialmente: ;
-	$ date ; who
-Separador de ordenes que forman parte de un cauce [pipe] La salida de la orden de la izquierda del separador es la entrada de la orden de la derecha: |
-	$ date | wc
-Posibilita escribir líneas de órdenes en varias líneas: \
-	$ date \
-	> | wc ; who
-Aislan ordenes separadas por ; o | y se ejecutan como una única orden: ()
-	$ (date | who) | wc
-Crea un bloque de código ejecutado en el propio interprete: {}
-	$ ls {*txt,*sh}
-Indica que ejecuta un trabajo en segundo plano [background] liberando la terminal donde se ha lanzado: &
-	$ gedit &
-Sólo se ejecuta la siguiente orden si la primera falla [OR]: ||
-	$ ld || date
-	ld: no input files
-	dg set 13 12:43:05 CEST 2015
-Sólo se ejecuta la siguiente orden si la primera tiene exito [AND]: &&
-	$ ld && date
-	ld: no input files
+Permiten ampliar comandos o combinar varios para construir una única orden lógica. Son varios: la tuberia [|], redirección [<>], el asterisco [*], la tilde [~], el simbolo dolar [$], el circunflejo [^], el interrogante [?], la almoadilla [#], los corchetes [[]], parentesis [()], llaves [{}], arroba [@]...
+$ date ; who (semicolon-punto y coma [;] es un separador entre ordenes que se ejecutan secuencialmente)
+$ date | wc -m (pipe-tuberia [|] mandar la salida de un comando a otro)
+$ date \ (Backslash-barra inversa [\] posibiita escribir ordenes en la siguiente linea)
+> | wc -m
+$ ls \*textos*/ (tambien permite escapar un carácter. Por ejemplo listara el directorio llamado *textos-largos)
+$ (date | who) | wc (parentesis [()] aislan ordenes separadas por punto y coma o tuberia y se ejecutan como una única orden)
+$ ls {*txt,*sh} (llaves [{}] Crea un bloque de código ejecutado en el propio interprete. Listará todos los .txt y .sh)
+$ htop & (Ampersand-et [&] Indica que ejecuta un trabajo en segundo plano [background] liberando la terminal donde se ha lanzado)
+  $ jobs
+  [1]+  Aturat                  htop
+  $ %1
+  htop
+$ ld || date (OR [||] Sólo se ejecuta la siguiente orden si la primera falla)
+$ ld && date (AND [&&] Sólo se ejecuta la siguiente orden si la primera tiene exito)
+$ date > ~/fecha.txt (redirigir la salida del comando date a un archivo [>] en el directorio del usuario [~])
+$ ls | grep png$ (dolar [$] buscar los archivos que terminan con png)
+$ ls | grep ^c (caret-circunflejo [^] buscar los que empiezan por c)
+$ ls | grep ??? (interrogante [?] substituye un coracter, por tanto en el ejemplo buscar los archivos con 3 caracteres)
+Nota.- Algunos metacaracteres, según el contexto, pueden tener otros significados. Por ejemplo el dolar [$] puede referirse a una funcion:
+$ echo $HOME
 
 
 metacity
