@@ -11886,6 +11886,12 @@ Muestra fallos en construcción de paquetes .deb [según la política de Debian]
 $ lintian paquete.deb
 
 
+linux-boot-prober
+Intentará averiguar cómo arrancar la partición raíz de linux especificada.
+          # linux-boot-prober /dev/sda1
+          /dev/sda2:/dev/sda1:Linux:/vmlinuz:/initrd.gz:root=/dev/sda1
+
+
 linux-check-removal
 comprobar si la eliminación de un núcleo es segura. está pensado para ser llamado desde los scripts prerm maintainer de los paquetes del núcleo Linux. Los scripts preinst, postinst, prerm y postrm de Debian son scripts que se ejecutan automáticamente antes o después de instalar o eliminar un paquete.
 # linux-check-removal 5.10.0-8-amd64 (si se quiere eliminar manualmente un kernel viejo)
