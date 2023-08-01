@@ -2599,6 +2599,11 @@ $ cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 10 | sed 1q (generar una contr
 $ cat listado.txt / | sed -e :a -e 's/^.\{1,20\}$/&_/;ta'  (coloca los nombres del listado uno detrás de otro y completa hasta 20 caracteres [1,10] con un guión bajo [&_])
 
 
+catimg
+Ver imagenes ascii
+$ catimg -r 2 imagen.png (con mejor resolución que -r 1)
+
+
 cb-
 [crunchbang-bin-scripts]. Conjunto de scripts propios de la distro crunchbang.
 cb-exit (Lanza el dialogo de salida)
@@ -2759,6 +2764,13 @@ Con el comando chomod seria:
 	$ chmod u=,g=rx,o=w newfile.txt
 	$ ls -al newfile.txt
 	----r-x-w- 1 pep pep 93 gen 30 18:11 newfile.txt
+
+
+chafa
+Visor de imágenes en ascii
+$ chafa -C on -c full imagen.png (centrada y el máxino de color)
+$ chafa -c 240 -s 50 imagen.png (a 240 colores y estableciendo mdedia de columnas y filas a 50)
+$ chafa imagen.gif
 
 
 chage
@@ -10203,6 +10215,7 @@ Visualizar el index.html creado en el navegador.
 
 img2txt
 [caca-utils, libcaca]. Pasar una imagen a ascii.
+$ img2txt imagen.png (forma básica)
 $ img2txt -f svg imagen.jpg > imagen.svg
 $ img2txt -f html imagen.jpg > imagen.html (código html de la imagen)
 
@@ -21398,6 +21411,8 @@ Algunos atajos:
 
 terminology
 Emulador de terminal para sistemas Linux/BSD/UNIX que usa EFL. Se usa como su emulador de terminal vt100 normal con todas las características habituales, como compatibilidad con 256 colores. Terminology está diseñada para emular Xterm en la mayoría de los aspectos.
+$ terminology (arrancar el emulador)
+$ tycat imagen.png (muestra la imgen en el emulador)
 
 
 termit
