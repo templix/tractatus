@@ -1363,6 +1363,12 @@ $ autotrash --min-free 1024 (purgar archivos, desde el el más antiguo, hasta qu
 $ autotrash --max-free 2048 --min-free 1024 -d 20 (eliminar en función del espacio máximo y mínimo que queda en la papelera)
 
 
+avahi-browse
+Herramienta que se utiliza para navegar por la red en busca de servicios disponibles que se anuncian utilizando el protocolo de descubrimiento de servicios Avahi. Avahi permite a los dispositivos de una red local descubrir automáticamente y comunicarse entre sí sin necesidad de un servidor central o de configuración. avahi-browse puede utilizarse para descubrir servicios en la red local, como impresoras, servidores web o servidores de archivos y mostrar información sobre ellos, como su tipo, nombre y dirección IP.
+$ avahi-browse --all --resolve --ignore-local (Enumera todos los servicios disponibles en la red local junto con sus direcciones y puertos, ignorando los locales)
+$ avahi-browse --browse-domains (lista todos los dominios)
+
+
 avconv
 [avconvert]. Información sobre archivos multimedia y conversión de formatos.
 $ avconv -i video.avi video.mpeg  (Pasar de avi a mpeg)
