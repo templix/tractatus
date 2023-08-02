@@ -15393,8 +15393,14 @@ man:x:6:12:man:/var/cache/man:/usr/sbin/nologin
 ...
 
 
+nanoid
+Crea contraseñas.
+$ nanoid -s 10 (de 10 letras mayúsculas y minúsculas)
+$ nanoid -s 15 -a .,-rtadls:_ (de 15 aracteres usando los signos y letras especificados con -a)
+
+
 normalize
-Ajustar volumen
+Ajustar volumen.
 $ normalize-audio *.wav
 $ normalize-mp3 *.mp3
 
