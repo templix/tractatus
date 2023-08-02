@@ -12887,7 +12887,7 @@ Escaner de puertos. Produce resultados similares a "Nmap". Tiene permanentemente
 
 
 match_parens
-Encontrar en textos paréntesis, llaves, corchetes, comillas, etc desaparejados.
+Encontrar en textos paréntesis, llaves, corchetes, comillas, etc desparejados.
 $ match_parens --test texto.txt
 
 
@@ -15397,6 +15397,12 @@ normalize
 Ajustar volumen
 $ normalize-audio *.wav
 $ normalize-mp3 *.mp3
+
+
+normalizer
+Informa de la codificación de origen utilizada en un archivo de texto. Normaliza el texto a Unicode.
+$ normalizer text.txt
+$ normalizer -n text.txt (normaliza el archivo de entrada. Si no se establece, el programa no escribe nada.)
 
 
 notify
