@@ -13519,6 +13519,20 @@ $ mogrify -label "Texto de la etiqueta" input.jpg (Entrar una etiqueta)
 $ mogrify -comment @firma.txt input (Entrar un comentario a partir de un archivo firma.txt)
 
 
+moggsplit
+divide un flujo Ogg multiplexado en archivos separados. Por ejemplo, puede separar un OGM en flujos separados Ogg DivX y Ogg Vorbis, o un archivo  Ogg Vorbis encadenado en dos archivos separados.
+$ moggsplit file.ogg
+
+
+mokutil
+Herramienta para importar o borrar las claves de propietario de máquina (MOK) almacenadas en la base de datos de shim. shim es un sencillo paquete de software diseñado para funcionar como cargador de arranque de primera etapa en sistemas UEFI. Una parte clave del diseño de shim es permitir a los usuarios controlar sus propios sistemas. La clave distro CA está integrada en el propio binario shim, pero también hay una base de datos adicional de claves que puede ser gestionada por el usuario, la llamada Machine Owner Key [MOK] Clave del Propietario de la Máquina. El usuario puede añadir y eliminar claves de la lista MOK, de forma totalmente independiente a la clave CA de la distro. La utilidad mokutil puede usarse para ayudar a gestionar las claves aquí desde la zona de usuario de Linux, pero los cambios en las claves MOK sólo pueden confirmarse directamente desde la consola en el momento del arranque. Esto elimina el riesgo de que el malware de la zona del usuario pueda registrar nuevas claves y, por tanto, eludir todo el punto de Secure Boot.
+        $ mokutil --sb-state
+        SecureBoot disabled
+        Platform is in Setup Mode
+$ mokutil --disable-validation
+$ mokutil --enable-validation
+
+
 molly-guard
 Evitar paradas o reinicios de servidores desde consola remota. Editar:
 # nano /etc/molly-guard/rc
