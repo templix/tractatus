@@ -779,6 +779,11 @@ $ apt search paquete (Buscar un paquete)
 # apt show nano (ver detalles de un paquete)
 
 
+apt-cdrom
+Agregar un cd-rom archivo sources.list.
+# apt-cdrom -d /home/user/mycdrom add
+
+
 apt-cache
 Empleado para buscar en la base de datos provista por la lista de fuentes [dpkg solo busca los contenidos de los paquetes instalados].
 # apt-cache search paquete       (Busca en la cache paquete)
@@ -966,6 +971,16 @@ Mostrará las diferencias o parches, entre las fuentes de todos los paquetes a m
 $ apt-listdifferences --initialize (descargar la base de datos en función de los paquetes instalados)
 $ apt-listdifferences --apt (mostrar lista de paquetes, uno por línea, por pantalla)
 $ apt-listdifferences firefox-esr (de la aplicación especificada)
+
+
+apt-mark
+Marca o desmarca un paquete como instalado automáticamente como dependencia por la instalación de otro.  ejemplo, marcar un paquete como de instalación automática o manual o cambiar las selecciones de dpkg como retener, instalar, desinstalar y purgar que son respetadas por apt-get, dselect-upgrade o aptitude.
+# apk-mark hold openssl (para que no se actualice el paquete openssl)
+# apk-mark unhold openssl (disponible para actualizar)
+# apt-mark showhold (ver todos los paquetes que no se actualizaran)
+# apt-mark manual ruby (marcar ruby para instalación manual. substituir "manual" por "auto" para volver a instalación autormática)
+# apt-mark showremove (los marcados para eliminar)
+# apt-mark showmanual (los marcados para instalar manualmente)
 
 
 apt-mirror
