@@ -6709,6 +6709,11 @@ $ evince -s archivo.pdf (en modo presentación)
 $ evince -p 5 archivo.pdf (abrir la página 5 del pdf)
 
 
+evince-previewer
+Mostrar vista previa de impresión para documentos PostScript y PDF.
+$ evince-previewer archivo.pdf
+
+
 exa
 Lista el contenido de un directorio de forma mejorada respecto al comando "ls", coloreando de distintos tipos los archivos, metadatos, astributos, enlace simbólicos, git...
 $ exa -T (de forma recursiva en forma de arbol)
@@ -13768,9 +13773,11 @@ $ montage *.png -tile 2x5 -geometry 227x147+1+1 salida.png (Colocará todos los 
 
 modprobe
 Utilidad que se usa para agregar y quitar módulos del kernel. Los módulos del kernel de Linux tienen .ko como extensión del nombre del módulo.
-# modprobe -n (lista los modulos cargados)
-# modprobe -r nombre_modulo (excluir cargar nombre_modulo)
+# modprobe --dry-run --verbose ac97_bus
+# modprobe -r pcspkr (excluir cargar módulo emncionado [pitido del pc])
 # modprobe -q nombre_modulo (excluir información de error respecto de un nombre_modulo)
+# modprobe -c | grep pcspkr (comprobar un módulo concreto)
+# lsmod | grep pcspkr (ver si un módulo esta cargado)
 
 
 more
