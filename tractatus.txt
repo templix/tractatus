@@ -6729,6 +6729,14 @@ Extraer metadatos de imagenes
 $ exif -d imagen  (mostrar todos los datos)
 $ exif -e imagen  (extraer la foto miniatura)
 $ exif -r imagen   (suprimir la foto miniatura)
+Nota.- Cuando se toma una iamgen con una cámara fotográfica, esperamos que la imagen resultante tenga la misma orientación que pretendíamos. Esto significa que las imágenes de paisajes se muestran horizontalmente y las imágenes de retratos se muestran verticalmente en la pantalla. Pero, ¿cómo sabe la computadora (o la cámara) cómo se ha tomado una imagen?. La mayoría de los formatos de imagen contienen no solo el contenido, sino también información adicional sobre el contenido: los metadatos de la imagen. El formato de imagen JPEG puede contener metadatos EXIF [Exchangeable Image File Format], entre otras cosas como la lente, el modelo de cámara y la orientación de la imagen.
+La orientación canónica es 1. Un valor de orientación de 1 significa que el contenido de la imagen existe exactamente en la forma en que queremos verlo en la pantalla. Supongamos que tenemos una cámara de fotos cuyo sensor tiene una relación de aspecto de 4:3. Cuando usamos la cámara para tomar una imagen en orientación horizontal, la imagen JPEG resultante tendrá un valor de orientación de 1. Sin embargo, cuando disparamos en modo retrato, los sensores de la cámara notan que la orientación ha cambiado. Los metadatos EXIF de la imagen resultante tendrán un valor de orientación de 8, si la cámara se giró en el sentido de las agujas del reloj, o 6, si la cámara se giró en el sentido contrario a las agujas del reloj. Asimismo, 3 es la orientación correspondiente para imágenes de paisajes al revés.
+Hay casos en los que la cámara produce una imagen invertida, debido a restricciones del hardware de la cámara o a defectos del firmware. Por este motivo, existen otros cuatro valores de orientación posibles, Herramientas como exifautotran [ver] o ImageMagick permiten normalizar la orientación de las imágenes.
+
+
+exifautotran
+Transforma los metadatos exif referentes a la orientación [vertical, horizontal ...] de una lista archivos Exif [ver nota exif] para que la orientación sea 1.
+$ exifautotran file1 file2 file3
 
 
 exiftags
