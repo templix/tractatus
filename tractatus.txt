@@ -6515,6 +6515,10 @@ Analizador syslog que se ejecuta periódicamente. Examina los registros procesan
 # epylog --cron (ejecutarlo periodicamente)
 
 
+equivs-build
+Es un programa que crea paquetes Debian que pueden usarse para informar a dpkg sobre los paquetes instalados localmente y sus dependencias. También con equivs se pueden crear paquetes vacíos que sólo requieren otros paquetes. Éstos pueden usarse como paquetes de "perfil" que sólo marcan a otros para su instalación. Por favor, tenga en cuenta que este es un hack rudimentario y que si se usa irreflexivamente, podría dañar su sistema de empaquetado. Tenga en cuenta también que no es la forma recomendada de tratar con dependencias rotas. Mejor envíe un informe de error
+
+
 errno
 [moreutils]. Muestra los errores de código y sus descripciones.
 $ errno -l (Todo el listado)
