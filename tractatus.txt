@@ -10022,6 +10022,11 @@ Parecido a diff [ver], pero en lugar de tratar de ser un reemplazo de diff para 
 $ icdiff -N archivo archivo1 (mostrando el número de linea)
 
 
+iceauth
+Se utiliza para editar y mostrar la información de autorización utilizada en la conexión con Internet Communications Engine [ICE] que se trata de marco RPC orientado a objetos que ayuda a crear aplicaciones distribuidas con un esfuerzo mínimo. Este programa generalmente se usa para extraer registros de autorización de una máquina y fusionarlos en otra (como es el caso cuando se usan inicios de sesión remotos o se otorga acceso a otros usuarios). Los comandos se pueden ingresar de forma interactiva, en la línea de comandos de iceauth o en scripts.
+$ iceauth -v (entrar en el prompt y mostrar mensajes detallados, "q" para salir del prompt)
+
+
 iconv
 Modificar la codificación de un archivo. Para saber la codificación de un archivo $ file --mime-encoding archivo.txt
 $ iconv -l   (Muestra todas las opciones posibles)
@@ -10201,6 +10206,11 @@ ifmetric
 Permite Cambiar la prioridad de enrutamiento.
 # ifmetric wlan0 1 (Dar a todas las demás interfaces una prioridad más alta que wlan0)
 # ifmetric wlan0 0 (restablecer las prioridades)
+
+
+ifnames
+Escanear archivos fuente en C (o la entrada estándar, si no se proporciona ninguno) y mostrar por pantalla una lista ordenada de todos los identificadores que aparecen en esos archivos en las directivas "#if", "#elif", "#ifdef" o "#ifndef". Imprime cada identificador en una línea, seguido de una lista separada por espacios de los archivos en los que aparece ese identificador.
+$ ifnames file.c
 
 
 ifne
