@@ -10625,6 +10625,15 @@ Algunas opciones (con inxi -h la lista completa):
 	-v 6 (Distintas etiquetas de información. Del 1 al 6)
 
 
+ionice
+El programa establece u obtiene la clase de programación de I/O y su prioridad. Si no se dan argumentos o solo "-p", ionice consultará la clase de programación de E/S actual y la prioridad para ese proceso. Si no se especifica ninguna clase, el comando se ejecutará con la clase de programación de "mejor esfuerzo". El nivel de prioridad predeterminado es 4.
+$ ionice -c 3 -p 103 (Establece el proceso con PID 103 como un proceso de I/O inactivo [-c 3, 0 para ninguno, 1 para tiempo real y 2 para el mejor esfuerzo])
+$ ionice -c 3 ls (el comando "ls" se lanzará con proceso I/O inactivo)
+$ ionice -c 2 -n 0 bash (Ejecuta 'bash' como un programa de mejor esfuerzo con la máxima prioridad [-n 0, de 0 a 7, siendo 7 el de menos prioridad])
+$ ionice -p 103 145 173 (Imprime la clase y prioridad de los procesos con PID 103, 145 y 173)
+# ionice -c3 -p `pidof sshd` (reinicar un servicio dandole un PID)
+
+
 ioping
 Supervisa la latencia del disco en tiempo real. La idea principal detrás de ioping es tener una utilidad similar al ping, que mostrará la latencia del disco de la misma manera que ping muestra la latencia de la red.
 $ ioping -i 2 -c 5 / (medir la latencia del disco duro en un periodo de 5 veces con 2 segundos de separación)
@@ -10803,7 +10812,7 @@ $ ipscan -s -f:range 192.168.1.9 192.168.1.16 -o resultat.txt (Derivando el resu
 
 
 iptables
-herramienta de cortafuegos y trafico de red.
+[= ip6tables]. Herramienta de cortafuegos y trafico de red.
 Algunos ejemplos generales:
 	# iptables -F (eliminar todas las reglas)
 	# iptables -L (si está activo y con qué reglas)
@@ -10847,7 +10856,7 @@ Si se quiere añadir reglas a las existentes:
 
 
 iptables-persistent
-Otra forma de guardas reglas de iptables. Al instalar el paquete pregunta por guardar las reglas existentes, las cuales se guardan en /etc/iptables/rules.v4 y /etc/iptables/rules.v6. Si modificamos, añadimos o suprimimos reglas podemos, para volver a guardarlas lanzando:
+Otra forma de guardas reglas de iptables. Al instalar el paquete pregunta por guardar las reglas existentes, las cuales se guardan en /etc/iptables/rules.v4 y /etc/iptables/rules.v6 [versión más actual de ip6tables]. Si modificamos, añadimos o suprimimos reglas podemos, para volver a guardarlas lanzando:
 # dpkg-reconfigure iptables-persistent
 En realidad este paquete lo que hace es:
 # iptables-save > /etc/iptables/rules.v4
