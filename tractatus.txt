@@ -8736,6 +8736,14 @@ Opciones
 	-d (Desactivarlo)
 
 
+gnome-screenshot
+Capturar la pantalla, una ventana o un área definida por el usuario y guardar la imagen instantánea en un archivo.
+$ gnome-screenshot -B -w -t captura.png (sin bordes, de la terminal activa y con el nombre mencionado)
+$ gnome-screenshot -d 2 -f captura.png (después de pulsar intro, 2 segundos para la captura)
+$ gnome-screenshot -b -p -d 3 -f captura.png (con bordes, con el puntero, 3 segundos para la captura y guardada como captura.png)
+$ gnome-screenshot -a -f captura.png (el puntero se convierte en una cruz para marcar el area de la captura)
+
+
 gnome-terminal
 Emulador de terminal de gnome.
 $ gnome-terminal --hide-menubar --geometry=200x70+0+0 -e "sh -c 'links2 http://google.es'"& (arrancar una terminal, sin menús, con unas medidas concretas y en ella, arrancar el navegador)
