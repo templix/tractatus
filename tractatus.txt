@@ -16089,6 +16089,12 @@ En la distribución OpenMediaVault basada en Debian GNU/Linux muestra la informa
 # omv-sysinfo
 
 
+open
+[xdg-open] Abrir archivos o URLs con la aplicación predeterminada.
+$ open http://google.com (abre con el navegador predeterminado)
+$ open archivo.txt (con el editor predeterminado)
+
+
 openbox
 Gestor de ventanas
 $ openbox –-replace (Activa openbox)
@@ -22753,6 +22759,14 @@ Informa de la ...
 $ uname -a (... versión instalada del kernel y otros datos)
 $ uname -m (... arquitectura de la máquina)
 $ uname -r (... versión instalada del kernel)
+
+
+unar
+Extraer archivos de un paquete.
+        $ unar bashrc.tar
+        bashrc.tar: Gzip
+          bashrc... OK.
+          Successfully extracted to "./bashrc".
 
 
 unattended-upgrades
