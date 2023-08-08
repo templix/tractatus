@@ -22804,9 +22804,11 @@ Herramienta forense para encontrar procesos y puertos TCP/UDP ocultos por rootki
 # unhide-linux procfs (comparar la información recopilada de /bin/ps con la información recopilada en los procfs)
 # unhide quick (combina las técnicas proc, procfs y sys. Es aproximadamente 20 veces más rápido, pero puede dar más falsos positivos.)
 # unhide-posix proc
+# unhide-linux reverse
 Opciones
 sys (compara la info de /bin/ps con la obtenida de las llamadas al sistema.)
 brute (Identifica por fuerza bruta todos los procesos)
+reverse (consiste en verificar que todos los subprocesos vistos por ps también se ven en procfs y por llamadas al sistema. Su objetivo es verificar que un rootkit no haya matado una herramienta de seguridad [ID u otra] y hacer que ps muestre un proceso falso en su lugar)
 
 
 unhtml
@@ -23195,6 +23197,11 @@ Y verificar/modificar según necesidades, las lineas:
 MOUNTPOINTS="/media/usb0 /media/usb1 /media/usb2 /media/usb3 /media/usb4 /media/usb5 /media/usb6 /media/usb7"
 FILESYSTEMS="vfat ext2 ext3 ext4 hfsplus"
 MOUNTOPTIONS="sync,noexec,nodev,noatime,users,umask=000"
+
+
+uscan
+Se ejecuta sin argumentos desde la raíz del árbol de fuentes donde se ve el directorio debian/, o un directorio que contiene varios árboles de fuentes.
+$ uscan
 
 
 useradd
