@@ -22796,11 +22796,15 @@ $ unexpand -t 2  --first-only texto.txt (Sólo las que empiecen por 2 espacios e
 
 
 unhide
-Herramienta forense para encontrar procesos y puertos TCP/UDP ocultos por rootkits, módulos del kernel o por otras técnicas. Incluye dos utilidades: unhide y unhide-tcp.
-$ unhide-tcp (identifica los puertos TCP/UDP que están escuchando, pero no figuran en /bin/netstat a través de fuerza bruta)
-$ unhide proc
+Herramienta forense para encontrar procesos y puertos TCP/UDP ocultos por rootkits, módulos del kernel o por otras técnicas. Incluye utilidades: unhide, unhide-tcp, unhide-linux y unhide-posix.
+# unhide-tcp (identifica los puertos TCP/UDP que están escuchando, pero no figuran en /bin/netstat a través de fuerza bruta)
+# unhide proc (compara /proc con la salida de /bin/ps)
+# unhide -m -d sys proc brute (más comprobaciones y hacer una doble comprobación en la prueba bruta sobre sys, proc y brute)
+# unhide-linux procall (combina pruebas proc y procfs)
+# unhide-linux procfs (comparar la información recopilada de /bin/ps con la información recopilada en los procfs)
+# unhide quick (combina las técnicas proc, procfs y sys. Es aproximadamente 20 veces más rápido, pero puede dar más falsos positivos.)
+# unhide-posix proc
 Opciones
-proc (compara /proc con la salida de /bin/ps.)
 sys (compara la info de /bin/ps con la obtenida de las llamadas al sistema.)
 brute (Identifica por fuerza bruta todos los procesos)
 
