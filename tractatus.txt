@@ -23301,6 +23301,13 @@ uuidcdef
 Genera un nuevo identificador uuid. [ver uuidgen]
 
 
+uuidd
+Demonio utilizado por la biblioteca UUID para generar identificadores únicos universales de una manera segura y única garantizada, incluso frente a un gran número de subprocesos que se ejecutan en diferentes CPUs.
+$ uuidd -p /tmp/uuidd.pid -s /tmp/uuidd.socket (Especificando ruta donde escribir el archivo pid y no creando un socket, sino esperando que lo proporcione el proceso)
+$ uuidd -d -r -n 42 -s /tmp/uuidd.socket (Ejecutar uuidd en modo de depuración, intentando conectarse a un demonio uuidd en ejecución y solicitarle que devuelva un UUID aleatorio, al emitir una solicitud de prueba a un uuidd en ejecución, solicitar una respuesta masiva de UUID numéricos y no creando un socket sino esperando que lo proporcione el proceso)
+$ uuidd -d -k -s /tmp/uuidd.socket (modo depuración, eliminar el daemon si se está ejecutando y esperando a que lo proporcione el proceso)
+
+
 uuidgen
 [uuid-runtime]. Crear nuevo valor uuid
 $ uuidgen -r (Aleatorio)
