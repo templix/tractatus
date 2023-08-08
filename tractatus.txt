@@ -23001,14 +23001,19 @@ Programa que actualiza el directorio /etc/ssl/certs para contener certificados S
 # update-ca-certificates -f (actualizar)
 
 
-update-desktop-database
-Herramienta para construir una base de datos de la caché de los tipos MIME manejados por archivos. La base de datos de caché contiene la lista de tipos MIME que pueden manejar los archivos , así como, para cada tipo MIME, una lista de archivos que pueden manejar este tipo MIME. Esta base de datos de caché facilita el trabajo de las aplicaciones que necesitan encontrar una aplicación que puede abrir un documento de un tipo MIME específico y así esas aplicaciones no tendrán que analizar todos los archivos existentes en el sistema y en su lugar pueden analizar esta base de datos de caché.
-# update-desktop-database -v
+update-catalog
+Inserta, actualiza o elimina entradas en los catálogos centralizados de SGML [Standard Generalized Markup Language]. ISO 8879: 1986 es un estándar para definir lenguajes de marcado generalizados para documentos ubicado en /etc/sgml. Para cambiar el supercatálogo SGML ubicado en /etc/sgml/catalog modifique el contenido del directorio de /etc/sgml para que contenga nuevos archivos o enlaces simbólicos que tengan una extensión cat o elimine (o mueva) los catálogos existentes y regenere el catálogo.
+# update-catalog --update-super (regenerar el catálogo)
 
 
 update-cracklib
 Crear una versión comprimida y acumulada de las listas de palabras almacenadas en los directorios proporcionados en el archivo de configuración de cracklib /etc/cracklib/cracklib.conf.
 $ update-cracklib
+
+
+update-desktop-database
+Herramienta para construir una base de datos de la caché de los tipos MIME manejados por archivos. La base de datos de caché contiene la lista de tipos MIME que pueden manejar los archivos , así como, para cada tipo MIME, una lista de archivos que pueden manejar este tipo MIME. Esta base de datos de caché facilita el trabajo de las aplicaciones que necesitan encontrar una aplicación que puede abrir un documento de un tipo MIME específico y así esas aplicaciones no tendrán que analizar todos los archivos existentes en el sistema y en su lugar pueden analizar esta base de datos de caché.
+# update-desktop-database -v
 
 
 update-dictcommon-aspell
@@ -23089,6 +23094,11 @@ Activar/desactivar aplicaciones o scripts en el arranque del sistema.
 $ update-rc.d -f gdm remove (desactivarlo)
 $ update-rc.d gdm defaults  (activarlo)
 $ update-rc.d script defaults (coloca un script en el arranque)
+
+
+update-shells
+Localiza los shells provistos por los paquetes de /usr/share/debianutils/shells.d y actualiza /etc/shells con shells recién agregados o eliminados. Para realizar un seguimiento de los cambios realizados por el administrador, consulta un archivo de estado en /var/lib/shells.state.
+$ update-shell --verbose (mostrar las shells que se van a añadir o quitar)
 
 
 update-system
