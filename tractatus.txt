@@ -22995,6 +22995,13 @@ $ update-alternatives --config x-cursor-theme (Modificar el tema del cursor)
 $ update-alternatives --install  /usr/bin/x-www-browser x-www-browser /usr/bin/firefox 100 (Incluir en el listado una aplicación que no está)
 
 
+update-binfmts
+Las versiones 2.1.43 y posteriores del kernel de Linux han contenido el módulo binfmt_misc. Esto permite al administrador del sistema registrar intérpretes para varios formatos binarios en función de un número o su extensión de archivo y hacer que se invoque al intérprete apropiado cada vez que se ejecute un archivo coincidente. Piense en ello como una versión más flexible del #! ejecutable, o como algo que puede comportarse un poco como "asociaciones" en otros sistemas operativos aunque en GNU/Linux la tendencia es mantener este tipo de cosas en otro lugar, como en su administrador de archivos. update-binfmts gestiona una base de datos persistente de estos intérpretes.
+# update-binfmts --package openjdk-6 --remove jar /usr/bin/jexec (eliminar el enlace de formatos binarios con openjdk-6)
+# update-binfmts --display (información sobre todos los formatos binarios y si están habilitados o deshabilitados)
+# update-binfmts --disable python3.11 (deshabilitar un formato)
+
+
 update-ca-certificates
 Programa que actualiza el directorio /etc/ssl/certs para contener certificados SSL y genera certificados ca-certificates.crt.
 # update-ca-certificates
