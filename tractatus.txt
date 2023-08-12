@@ -6480,6 +6480,13 @@ $ enable -p (lista todos los comandos que se ejecutan internamente)
 $ enable -n (muestra los desactivados).
 
 
+encguess
+Adivina la codificación de caracteres de archivos.
+$ encguess texto.txt
+$ encguess -s UTF-32LE,US-ASCII text.epub (especificando codificación para ver si uno el correcto en el texto mencionado)
+$ encguess -su UTF-32LE:US-ASCII:7bit-jis *.txt (varios tipos de codificación y varios textos y no mostrar los datos de los no identificados)
+
+
 encfs
 Encriptar directorios.
 # mkdir .cripta cripta  (Crear los directorios)
@@ -11148,10 +11155,10 @@ Entrar al directorio del programa:
 # cd john-1.7.3.4
 Aplicar el parche:
 # gzip -dc ../john-1.7.3.1-generic-crypt-1.diff.gz | patch -p1
-patching file src/Makefile
-patching file src/crypt_fmt.c
-patching file src/john.c
-Hunk #2 succeeded at 67 (offset 2 lines).
+  patching file src/Makefile
+  patching file src/crypt_fmt.c
+  patching file src/john.c
+  Hunk #2 succeeded at 67 (offset 2 lines).
 El directorio donde se encuentra el código fuente es src:
 # cd src
 # make
@@ -11167,7 +11174,7 @@ El fichero john.pot contiene los resultados encontrados por john. Si el fichero 
 Comprobación de la fortaleza de nuestra constraseñas:
 # unshadow /etc/passwd /etc/shadow > contraseñas.txt
 # john contraseñas.txt
-# john --single contraseñas.txt (usanólo el modo single)
+# john --single contraseñas.txt (usandolo el modo single)
 # john --incremental contraseñas.txt (Usando el modo incremental)
 # john --wordlist=diccionario.lst --rules contraseñas.txt (Usando un diccionario)
 # john --show contraseñas.txt (Ver resultados)
