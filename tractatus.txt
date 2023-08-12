@@ -6480,13 +6480,6 @@ $ enable -p (lista todos los comandos que se ejecutan internamente)
 $ enable -n (muestra los desactivados).
 
 
-encguess
-Adivina la codificación de caracteres de archivos.
-$ encguess texto.txt
-$ encguess -s UTF-32LE,US-ASCII text.epub (especificando codificación para ver si uno el correcto en el texto mencionado)
-$ encguess -su UTF-32LE:US-ASCII:7bit-jis *.txt (varios tipos de codificación y varios textos y no mostrar los datos de los no identificados)
-
-
 encfs
 Encriptar directorios.
 # mkdir .cripta cripta  (Crear los directorios)
@@ -11038,6 +11031,11 @@ $ isosize archivo.iso
 issue.net
 Muestra la distro instalada.
 $ cat /etc/issue.net
+
+
+isympy
+Es un shell de Python para SymPy. Es solo un shell python normal [ipython shell si está instalado el paquete ipython]. Para salir: exit()
+$ isympy -p no -c python (iniciar la shell sin decoración extra)
 
 
 isutf8
