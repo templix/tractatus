@@ -19441,6 +19441,18 @@ En todos los archivos html del directorio:
         $  sed -i 's/localhost\/tractatus/localhost\/emacs/g' *.html
 Cuando existen barras entre palabras han de escaparse:
         $ echo " href=http://localhost/tractatus/2ping.html" | sed 's/localhost\/tractatus/localhost\/emacs/'
+Substituir la segunda coincidencia de cada linea [si fuera de un archivo]:
+        $ echo "la casa es casa de todos los sin casa" | sed 's/casa/piso/2'
+Reemplaza desde la tercera coincidencia a la última de cada linea:
+        $ echo "la casa, una casa, se casa, gran casa, no casa, la casa, se casa, mas casa" | sed 's/casa/pìso/3g'
+Poner entre parentesis la primera letra de cada palabra que empieza por mayuscula:
+        $ echo "Linux es un Sistema Genial" | sed 's/\(\b[A-Z]\)/\(\1\)/g'
+Imprimir solo las líneas reemplazadas. La opción -n suprime las filas duplicadas generadas por el indicador /p e imprime las líneas reemplazadas solo una vez.
+        $ sed -n 's/Fuentes/Ruiz/p' lista
+Reemplazar solo en la 5ª linea el caracter "#" por un espació
+        $ cat ab.html |  sed -n '5 s/#/ /p'
+Escribe la 2 linea de texto.txt en el archivo texto2.txt borrando su contenido:
+        $ sed '2~2 w texto2.txt' texto.txt
 
 
 see
