@@ -19435,8 +19435,12 @@ Eliminar todas las lineas que coincidan la palabra "casa":
 	$ find . -type f -exec sed -i -e '/casa/d' {} \;
 Lo mismo pero sólo en archivos.txt:
 	$ find . -type f -exec -name '*.txt' sed -i -e '/pattern/d' {} \;
-Reemplazar "esto" por "aquello" de forma real en archivo.txt
+Reemplazar "esto" por "aquello" de forma real en archivo.txt:
 	$ sed -i "s|esto|aquello|' archivo.txt
+En todos los archivos html del directorio:
+        $  sed -i 's/localhost\/tractatus/localhost\/emacs/g' *.html
+Cuando existen barras entre palabras han de escaparse:
+        $ echo " href=http://localhost/tractatus/2ping.html" | sed 's/localhost\/tractatus/localhost\/emacs/'
 
 
 see
