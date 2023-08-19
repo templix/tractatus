@@ -270,8 +270,7 @@ Algunas teclas de control:
 
 aide
 Sistema de detección de intrusos. No evita la intrusión, sólo informa que esta se ha producido y qué archivos fueron modificados. La primera vez que se ejecuta, crea una base de datos con los atributos, usuarios, permisos... de los archivos especificados aplicándoles una o varias funciones hash por lo que el mejor momento para instalar esta aplicación es con un sistema recien instalado.
-# aideinit (al iniciar por  primera vez y evitar: Couldn't open file /var/lib/aide/please-dont-call-aide-without-parameters/aide.db.new for writing)
-# aide -i (Crear la base de datos)
+# aide -i (Crear la base de datos. Al iniciar por  primera vez y evitar: Couldn't open file /var/lib/aide/please-dont-call-aide-without-parameters/aide.db.new for writing)
 # aide -u (Actualizar la base de datos)
 # aide -c (Hacer un chequeo del sistema para comprobar modificaciones)
 	Nota.- Los archivos de configuración: /etc/aide/aide.conf.d/, /etc/aide/aide.conf y /etc/default/aide
