@@ -19458,6 +19458,18 @@ Reemplazar solo en la 5ª linea el caracter "#" por un espació
         $ cat ab.html |  sed -n '5 s/#/ /p'
 Escribe la 2 linea de texto.txt en el archivo texto2.txt borrando su contenido:
         $ sed '2~2 w texto2.txt' texto.txt
+Insertar una linea en blanco cada 2 lineas:
+        sed -i 'n;G;' listado.txt
+Insertar linea en blanco despues de un patron [plantilla en este caso]
+        sed -i '/plantilla/G' listado.txt
+Insertar una linea en blanco antes de un patron [plantilla en este caso]
+        sed -i '/plantilla/{x;p;x;}' listado.txt
+Insertar una linea en blanco antes y dispues de aparecer un patron [plantilla]
+        sed -i '/plantilla/{x;p;x;G;}' listado.txt
+Añadir número de linea al principio de cada una
+        sed = listado.txt | sed 'N;s/\n/\t/' > listado-numerado.txt
+Añadir número de linea al principio si no está en blanco
+        sed '/./=' listado.txt | sed '/./N; s/\n/- /' > listado-numerado.txt
 
 
 see
