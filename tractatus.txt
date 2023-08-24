@@ -19338,8 +19338,10 @@ Mostrar desde la primera linea que empiece por “Ant” hasta el final:
 	$ sed -n '/^\Ant/,$p' lista
 Mostrar sólo los parrafos desde “Clara” hasta “Bueno”:
 	$ sed -n '/Clara/,/Bueno/p' lista
-Mostrar cada linea a doble espacio:
+Mostrar cada linea seguida de una linea en blanco:
 	$ sed G lista
+Suprimir las lineas en blanco:
+        $ sed “n;d” text.txt
 Mostrar las lineas que cumplen el patrón “Ju” en alguno de sus campos:
 	$  sed -n '/Ju/p' lista
 Borrar la 4ª linea del fichero:
