@@ -19328,150 +19328,80 @@ Archivo base para ejemplo (Empleado -- Precio/hora -- Horas trabajadas – Cómo
 	Matías Crespo 5 8 metálico
 	Isabel Ruiz 7 0 metálico
 	María Monzón 9 16 metálico
-Mostrar la linea 4 del fichero:
-	$ sed -n 4p lista
-Mostrar la 4ª y la 5ª:
-	$ sed -n 4,5p lista
-Mostrar de la 3ª al final del fichero:
-	$ sed -n '4,$p' lista
-Mostrar desde la primera linea que empiece por “Ant” hasta el final:
-	$ sed -n '/^\Ant/,$p' lista
-Mostrar sólo los parrafos desde “Clara” hasta “Bueno”:
-	$ sed -n '/Clara/,/Bueno/p' lista
-Mostrar cada linea seguida de una linea en blanco:
-	$ sed G lista
-Suprimir las lineas en blanco:
-        $ sed “n;d” text.txt
-Mostrar las lineas que cumplen el patrón “Ju” en alguno de sus campos:
-	$  sed -n '/Ju/p' lista
-Borrar la 4ª linea del fichero:
-	$  sed '4d' lista
-Borrar la última linea del fichero:
-	$  sed -e \$d lista
-Lo mismo:
-	$ sed '$d' lista
-Borrar las lineas que empiecen por "J":
-	$ sed -e '/J/d' lista
-Borrar la segunda linea
-	$ sed '2d' lista
-Borrar la 1ª y la 2ª:
-	$  sed '1,2d' lista
-Borrar a partir del primer espacio en blanco:
-	$ sed -e 's/ .*//' lista
-Borrar desde la primera linea que empiece por "Ant" hasta el final:
-	$ sed -e '/^\Ant/,$d' lista
-Borrar desde la 2 linea hasta la que tenga "Ruiz":
-	$ sed '2,/Ruiz/d' lista
-Borrar las lineas en blanco de un archivo (en "lista" no procede):
-	$  sed '/^$/d lista
-Cambiar "metálico" por "gratis" excepto en la 3 linea:
-	$ sed '3!s/metálico/gratis/' lista
-Cambiar "met" por "tem" en las lineas que no tengan "Cano":
-	$ sed '/Cano/!s/met/tem/' lista
-Cambiar campos (banco por cheque):
-	$ sed 's/banco/cheque/' lista
-Cambiar las "J" y la "C" mayúsculas por minúsculas:
-	$ sed 'y/J-C/j-c/' lista
-Substituye las vocales por "u":
-	$ sed -e "s/[aeio]/u/g" lista
-Substituir los espacios por tabulaciones:
-	$ sed -e 's/ /\t/g' lista
-Alinear al centro:
-	$ sed -e :a -e 's/^.\{1,77\}$/ &/;ta' -e 's/\( *\)\1/\1/' lista
-Todas las opciones pueden usarse como tubería substituyendo "lista" por “cat lista |”:
-	$ cat lista | sed -n '4,$p'
+$ sed -n 4p lista (Mostrar la linea 4 del fichero)
+$ sed -n 4,5p lista (Mostrar la 4ª y la 5ª)
+$ sed -n '4,$p' lista (Mostrar de la 3ª al final del fichero)
+$ sed -n '/^\Ant/,$p' lista (Mostrar desde la primera linea que empiece por “Ant” hasta el final)
+$ sed -n '/Clara/,/Bueno/p' lista (Mostrar sólo los parrafos desde “Clara” hasta “Bueno”)
+$ sed G lista (Mostrar cada linea seguida de una linea en blanco)
+$ sed “n;d” lista (Suprimir las lineas en blanco)
+$ sed -n '/Ju/p' lista (Mostrar las lineas que cumplen el patrón “Ju” en alguno de sus campos)
+$ sed '4d' lista (Borrar la 4ª linea del fichero)
+$ sed -e \$d lista (Borrar la última linea del fichero)
+$ sed '$d' lista (Lo mismo)
+$ sed -e '/J/d' lista (Borrar las lineas que empiecen por "J")
+$ sed '2d' lista (Borrar la segunda linea)
+$ sed '1,2d' lista (Borrar la 1ª y la 2ª)
+$ sed -e 's/ .*//' lista (Borrar a partir del primer espacio en blanco)
+$ sed -e '/^\Ant/,$d' lista (Borrar desde la primera linea que empiece por "Ant" hasta el final)
+$ sed '2,/Ruiz/d' lista (Borrar desde la 2 linea hasta la que tenga "Ruiz")
+$ sed '/^$/d lista (Borrar las lineas en blanco de un archivo. En "lista" no procede)
+$ sed '3!s/metálico/gratis/' lista (Cambiar "metálico" por "gratis" excepto en la 3 linea)
+$ sed '/Cano/!s/met/tem/' lista (Cambiar "met" por "tem" en las lineas que no tengan "Cano")
+$ sed 's/banco/cheque/' lista (Cambiar campos: banco por cheque)
+$ sed 'y/J-C/j-c/' lista (Cambiar las "J" y la "C" mayúsculas por minúsculas)
+$ sed -e "s/[aeio]/u/g" lista (Substituye las vocales por "u")
+$ sed -e 's/ /\t/g' lista (Substituir los espacios por tabulaciones)
+$ sed -e :a -e 's/^.\{1,77\}$/ &/;ta' -e 's/\( *\)\1/\1/' lista (Alinear al centro)
+$ cat lista | sed -n '4,$p' (Todas las opciones pueden usarse como tubería substituyendo "lista" por “cat lista |”)
+$ sed -n '$=' lista (Contar lineas de un archivo [emulador de wc -l])
+$ sed 's/^/     /' lista (Insertar 5 espacios en blanco delante de cada linea)
+$ sed '2i\ \' lista (Insertar una linea en blanco despues de la primera linea)
+$ sed '2i\ \' | sed '4i\ \' lista (Insertar una linea en blanco despues de la primera linea y de la tercera)
+$ sed -n 's/Fuentes/Ruiz/p' lista (Imprimir solo líneas reemplazadas. La opción -n suprime filas duplicadas generadas por el indicador /p e imprime las líneas reemplazadas solo una vez)
+sed -i 'n;G;' lista (Insertar una linea en blanco cada 2 lineas)
 Otros ejemplos:
-Mostrar lineas no comentadas de un archivo:
-	$ sed -e '/^#/d' /etc/fstab
-Substituir "foto" por "FOTO" en todo los archivos del directorio:
-	$ ls * | sed -e 'p;s/foto/FOTO/' | xargs -n2 mv
-Cambiar “Juan” por “Pedro” en todos los archivos .txt del presente directorio:
-	$ sed -i 's/Juan/Pedro/g' *.txt
-Mostrar sólo las lineas con 4 dígitos seguidos:
-	$ sed '/[0-9]\{4\}/p' archivo
-Borrar todos los espacios delante de cada linea:
-	$ sed 's/^[ ^t]*//' archivo
-	$ echo "      Linux es genial" | sed 's/^ *//'
-Borrar todos los espacios detras de cada linea:
-	$ sed 's/[ ^t]*$//' archivo
-	$ echo "Linux es genial      " | sed 's/* $//'
-Borrar los últimos 6 caracteres de una linea:
-	$ echo "Linux es genial" | sed 's/......$//'
-Eliminar el primer caracter de cada linea de un archivo:
-	$ cat file.txt | sed 's/^.//'
-Borrar los primeros 5 caracteres de una linea:
-	$ echo "Linux es genial" | sed 's/^.....//'
-Eliminar los dos últimos caracteres de cada linea de un archivo:
-	$ cat file.txt | sed 's/..$//'
-Eliminar los tres primeros y tres últimos caracteres de cada linea de un archivo:
-	$ cat file.txt | sed 's/...$//;s/^...//'
-Borrar todos los espacios delante y detras de cada linea:
-	$ sed 's/^[ ^t]*//;s/[ ^]*$//' archivo
-Cambiar los números 3333 por 3.333. El parámetro -r sirva para activar las expresiones regulares extendidas de sed:
-	$ sed -r "s/\<(reg|exp)[a-z]+/\U&/g"
-Contar lineas de un archivo [emulador de wc -l]:
-	sed -n '$=' lista
-Insertar 5 espacios en blanco delante de cada linea:
-	$ sed 's/^/     /' lista
-Insertar 1 linea en blanco despues de la primera linea:
-	$ sed '2i\ \' lista
-Insertar 1 linea en blanco despues de la primera linea y de la tercera:
-	$ sed '2i\ \' | sed '4i\ \' lista
-Insertar texto entre una linea y otra. Por ejemplo en la linea 5:
-	$ sed "5i ---\n categories:tractatus\n date: 2015-05-22\n title: res\n ---\n" archivo.txt
-Insertar texto al pricipio de la 2ª linea:
-	$ sed -i "2 s|^|texto al principio|" archivo
-Insertar texto al principio de todas las lineas:
-	$ sed -i "s|^|texto al principio|g" archivo
-Insertar texto al final de la linea 5:
-	$ sed -i "5 s|$|texto al final|" archivo
-Insertar texto al final de todas las lineas:
-	$ sed -i "s|$|texto al final|g" archivo
-Mostrar el número de línea que contiene una ocurrencia
-	$ sed -n '/Texto/=' archivo
-Utilizar variables dentro de sed:
-	$ sed -i "/${VARIABLE}/d" archivo
-	$ sed -n "/^${NUM_BAIXA}/p" archivo (Que esté al principio de la linea)
-Numerar lineas (cat -n archivo)
-	$ sed = fichero.txt | sed 'N;s/\n/\t/'
-Reemplazar una cadena ("esto" por "aquello") en muchos archivos:
-	$ find . -type f -exec sed -i -e 's/esto/aquello/g' {} \;
-Lo mismo pero sólo en archivos txt:
-	$ find . -type f -exec -name '*.txt' sed -i -e 's/esto/aquello/g' {} \;
-Eliminar todas las lineas que coincidan la palabra "casa":
-	$ find . -type f -exec sed -i -e '/casa/d' {} \;
-Lo mismo pero sólo en archivos.txt:
-	$ find . -type f -exec -name '*.txt' sed -i -e '/pattern/d' {} \;
-Reemplazar "esto" por "aquello" de forma real en archivo.txt:
-	$ sed -i "s|esto|aquello|' archivo.txt
-En todos los archivos html del directorio:
-        $  sed -i 's/localhost\/tractatus/localhost\/emacs/g' *.html
-Cuando existen barras entre palabras han de escaparse:
-        $ echo " href=http://localhost/tractatus/2ping.html" | sed 's/localhost\/tractatus/localhost\/emacs/'
-Substituir la segunda coincidencia de cada linea [si fuera de un archivo]:
-        $ echo "la casa es casa de todos los sin casa" | sed 's/casa/piso/2'
-Reemplaza desde la tercera coincidencia a la última de cada linea:
-        $ echo "la casa, una casa, se casa, gran casa, no casa, la casa, se casa, mas casa" | sed 's/casa/pìso/3g'
-Poner entre parentesis la primera letra de cada palabra que empieza por mayuscula:
-        $ echo "Linux es un Sistema Genial" | sed 's/\(\b[A-Z]\)/\(\1\)/g'
-Imprimir solo las líneas reemplazadas. La opción -n suprime las filas duplicadas generadas por el indicador /p e imprime las líneas reemplazadas solo una vez.
-        $ sed -n 's/Fuentes/Ruiz/p' lista
-Reemplazar solo en la 5ª linea el caracter "#" por un espació
-        $ cat ab.html |  sed -n '5 s/#/ /p'
-Escribe la 2 linea de texto.txt en el archivo texto2.txt borrando su contenido:
-        $ sed '2~2 w texto2.txt' texto.txt
-Insertar una linea en blanco cada 2 lineas:
-        sed -i 'n;G;' listado.txt
-Insertar linea en blanco despues de un patron [plantilla en este caso]
-        sed -i '/plantilla/G' listado.txt
-Insertar una linea en blanco antes de un patron [plantilla en este caso]
-        sed -i '/plantilla/{x;p;x;}' listado.txt
-Insertar una linea en blanco antes y dispues de aparecer un patron [plantilla]
-        sed -i '/plantilla/{x;p;x;G;}' listado.txt
-Añadir número de linea al principio de cada una
-        sed = listado.txt | sed 'N;s/\n/\t/' > listado-numerado.txt
-Añadir número de linea al principio si no está en blanco
-        sed '/./=' listado.txt | sed '/./N; s/\n/- /' > listado-numerado.txt
+$ sed -e '/^#/d' /etc/fstab (Mostrar lineas no comentadas de un archivo)
+$ ls * | sed -e 'p;s/foto/FOTO/' | xargs -n2 mv (Substituir "foto" por "FOTO" en todo los archivos del directorio)
+$ sed -i 's/Juan/Pedro/g' *.txt (Cambiar “Juan” por “Pedro” en todos los archivos .txt del presente directorio)
+$ sed '/[0-9]\{4\}/p' archivo (Mostrar sólo las lineas con 4 dígitos seguidos)
+$ sed 's/^[ ^t]*//' archivo (Borrar todos los espacios delante de cada linea)
+$ echo "      Linux es genial" | sed 's/^ *//' (lo mismo)
+$ sed 's/[ ^t]*$//' archivo (Borrar todos los espacios detras de cada linea)
+$ echo "Linux es genial      " | sed 's/* $//' (Lo mismo)
+$ echo "Linux es genial" | sed 's/......$//' (Borrar los últimos 6 caracteres de una linea)
+$ cat file.txt | sed 's/^.//' (Eliminar el primer caracter de cada linea de un archivo)
+$ echo "Linux es genial" | sed 's/^.....//' (Borrar los primeros 5 caracteres de una linea)
+$ cat file.txt | sed 's/..$//' (Eliminar los dos últimos caracteres de cada linea de un archivo)
+$ cat file.txt | sed 's/...$//;s/^...//' (Eliminar los tres primeros y tres últimos caracteres de cada linea de un archivo)
+$ sed 's/^[ ^t]*//;s/[ ^]*$//' archivo (Borrar todos los espacios delante y detras de cada linea)
+$ sed -r "s/\<(reg|exp)[a-z]+/\U&/g" archivo (Cambiar números 3333 por 3.333. Parámetro -r sirva activa las expresiones regulares extendidas de sed)
+$ sed "5i ---\n categories:tractatus\n date: 2015-05-22\n title: res\n ---\n" archivo.txt (Insertar texto entre una linea y otra. Por ejemplo en la linea 5)
+$ sed -i "2 s|^|texto al principio|" archivo (Insertar texto al pricipio de la 2ª linea)
+$ sed -i "s|^|texto al principio|g" archivo (Insertar texto al principio de todas las lineas)
+$ sed -i "5 s|$|texto al final|" archivo (Insertar texto al final de la linea 5)
+$ sed -i "s|$|texto al final|g" archivo (Insertar texto al final de todas las lineas)
+$ sed -n '/Texto/=' archivo (Mostrar el número de línea que contiene una ocurrencia)
+$ sed -i "/${VARIABLE}/d" archivo (Utilizar variables dentro de sed)
+$ sed -n "/^${NUM_BAIXA}/p" archivo (Que la variable esté al principio de la linea)
+$ sed = fichero.txt | sed 'N;s/\n/\t/' (Numerar lineas [ como cat -n archivo])
+$ find . -type f -exec sed -i -e 's/esto/aquello/g' {} \; (Reemplazar una cadena "esto" por "aquello" en muchos archivos)
+$ find . -type f -exec -name '*.txt' sed -i -e 's/esto/aquello/g' {} \; (Lo mismo pero sólo en archivos txt)
+$ find . -type f -exec sed -i -e '/casa/d' {} \; (Eliminar todas las lineas que coincidan la palabra "casa")
+$ find . -type f -exec -name '*.txt' sed -i -e '/pattern/d' {} \; (Lo mismo pero sólo en archivos.txt)
+$ sed -i "s|esto|aquello|' archivo.txt (Reemplazar "esto" por "aquello" de forma real en archivo.txt)
+$ sed -i 's/localhost\/tractatus/localhost\/emacs/g' *.html (En todos los archivos html del directorio)
+$ echo " href=http://localhost/tractatus/2ping.html" | sed 's/localhost\/tractatus/localhost\/emacs/' (Cuando existen barras entre palabras han de escaparse)
+$ echo "la casa es casa de todos los sin casa" | sed 's/casa/piso/2' (Substituir la segunda coincidencia de cada linea)
+$ echo "la casa, una casa, se casa, gran casa, no casa, la casa, se casa, mas casa" | sed 's/casa/pìso/3g' (Reemplaza desde la tercera coincidencia a la última de cada linea)
+$ echo "Linux es un Sistema Genial" | sed 's/\(\b[A-Z]\)/\(\1\)/g' (Poner entre parentesis la primera letra de cada palabra que empieza por mayuscula)
+$ cat ab.html |  sed -n '5 s/#/ /p' (Reemplazar solo en la 5ª linea el caracter "#" por un espació)
+$ sed '2~2 w texto2.txt' texto.txt (Escribe la 2 linea de texto.txt en el archivo texto2.txt borrando su contenido)
+$ sed -i '/plantilla/G' listado.txt (Insertar linea en blanco despues de un patron [plantilla en este caso])
+$ sed -i '/plantilla/{x;p;x;}' listado.txt (Insertar una linea en blanco antes de un patron [plantilla en este caso])
+$ sed -i '/plantilla/{x;p;x;G;}' listado.txt (Insertar una linea en blanco antes y dispues de aparecer un patron [plantilla])
+$ sed = listado.txt | sed 'N;s/\n/\t/' > listado-numerado.txt (Añadir número de linea al principio de cada una)
+$ sed '/./=' listado.txt | sed '/./N; s/\n/- /' > listado-numerado.txt (Añadir número de linea al principio si no está en blanco)
 
 
 see
