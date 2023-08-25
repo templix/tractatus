@@ -19359,7 +19359,7 @@ $ sed 's/^/     /' lista (Insertar 5 espacios en blanco delante de cada linea)
 $ sed '2i\ \' lista (Insertar una linea en blanco despues de la primera linea)
 $ sed '2i\ \' | sed '4i\ \' lista (Insertar una linea en blanco despues de la primera linea y de la tercera)
 $ sed -n 's/Fuentes/Ruiz/p' lista (Imprimir solo líneas reemplazadas. La opción -n suprime filas duplicadas generadas por el indicador /p e imprime las líneas reemplazadas solo una vez)
-sed -i 'n;G;' lista (Insertar una linea en blanco cada 2 lineas)
+$ sed -i 'n;G;' lista (Insertar una linea en blanco cada 2 lineas)
 Otros ejemplos:
 $ sed -e '/^#/d' /etc/fstab (Mostrar lineas no comentadas de un archivo)
 $ ls * | sed -e 'p;s/foto/FOTO/' | xargs -n2 mv (Substituir "foto" por "FOTO" en todo los archivos del directorio)
