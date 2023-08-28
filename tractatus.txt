@@ -23138,6 +23138,13 @@ Si al ejecutar lspci nos muestra un mensaje "unknown device" es preciso actualiz
 # update-pciids
 
 
+update-perl-sax-parsers
+Inserta, actualiza y elimina archivos de información de módulos del analizador Perl SAX en el directorio /var/lib/libxml-sax-perl/ParserDetails.d y el archivo de información general de módulos perl /etc/perl/XML/SAX/ParserDetails.ini.
+$ update-perl-sax-parsers --update (actualiza el archivo de información general de los módulos)
+$ update-perl-sax-parsers --add modulo (Agrega el archivo de información para el módulo indicado)
+$ update-perl-sax-parsers --remove modulo (Elimina el archivo de información del módulo indicado)
+
+
 update-rc.d
 Activar/desactivar aplicaciones o scripts en el arranque del sistema.
 $ update-rc.d -f gdm remove (desactivarlo)
