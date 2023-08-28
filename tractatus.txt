@@ -23070,6 +23070,12 @@ script para actualizar las cachés de iconos en una lista de directorios. En cad
 $ gtk-update-icon-cache /usr/share/icons/gnome/
 
 
+update-ieee-data
+Obtiene la versión actual de las listas OUI e IAB de IEEE Standards Association [IEEE-SA lleva desarrollando estándares durante más de un siglo a nivel mundial] y las instala si las versiones instaladas tienen más de 5 días. Esta utilidad requiere la instalación de curl, wget o libwww-perl.
+# update-ieee-data (forma básica)
+# update-ieee-data -f (Forzar la actualización, incluso si el archivo tiene más de 5 días)
+
+
 update-info-dir
 Actualiza o crea el directorio del archivo de índice de la documentación disponible en /usr/share/info/ [el predeterminado] o en el DIRECTORIO dado. La información del archivo de índice es el directorio que generalmente presentan los navegadores de información al inicio.
 # update-info-dir /usr/share/info/
