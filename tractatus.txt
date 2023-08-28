@@ -25929,6 +25929,14 @@ Hace que los archivos comprimidos que son argumentos de un comando se descomprim
 $ zrun grep linux archivo.gz (buscar la palabra "linux" en el comrpimido "archivo.gz")
 
 
+zstd
+Comprimir y descomprimir archivos. Incorpora 3 ejecutables: zstdmt [equivale a zstd -T0], unzstd [equivale a zstd -d] y zstdcat [que equivale a zstd -dcf]
+$ zstd -z file1 file2 file3 (crear los comprimidos file1.zst, file2.zst y file3.zst)
+$ zstd -d *.zst (los descomprime sin borrar los comprimidos)
+$ zstd -T0 -z archivo -o nombre.zst (comprimir un archivo con otro nombre e intente detectar y utilizar la cantidad de núcleos de CPU físicos [T0])
+$ zstd -dct archivo (descomprimir, agregar verificación de integridad calculada a partir de datos sin comprimir y probar la integridad de los archivos comprimidos)
+
+
 zswap
 Módulo del kernel con la función principal de evitar la paginación en disco incrementando el rendimiento del sistema. Para activar este módulo se precisa una partición Swap y que la versión de kernel sea como mínimo la 3.11.
 # nano /etc/default/grub
