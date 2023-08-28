@@ -22826,6 +22826,17 @@ Elimina todo el formato HTML que encuentra e un fichero e imprime el texto limpi
 $ unhtml index.html > /home/usuario/index.txt (Si no se facilita el archivo de destino, lo muestra en pantalla)
 
 
+unicode_start
+Pondrá el teclado y la consola en modo Unicode [UTF-8].
+$ unicode_start [font] [umap]
+Nota.- El parámetro "font" es una fuente que está cargada. Debe tener un mapa Unicode incorporado o, si no lo tiene, dicho mapa se puede proporcionar explícitamente como segundo parámetro. Cuando no se especificó ninguna fuente, se mantiene la fuente actual. Unicode es la codificación de caracteres estándar para la mayoría de las computadoras del mundo. Garantiza que el texto, incluidas letras, símbolos, emojis e incluso caracteres de control, aparezca igual en diferentes dispositivos, plataformas y documentos digitales, independientemente del sistema operativo o el software que se utilice.
+
+
+unicode_stop
+Deshará el efecto de unicode_start. Pone el teclado en modo ASCII y borra el modo UTF-8 de la consola.
+$ unicode_stop
+
+
 unimatrix
 Lluvia de código y simbolos que aparecen en el película matrix escrito en python. Descarga: <https://github.com/will8211/unimatrix#install>
 $ unimatrix (por defecto)
