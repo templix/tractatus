@@ -22398,12 +22398,17 @@ $ tsort archivo.txt
 
 
 ttv
-Webcam en consola y ascii
+Webcam en consola y ascii.
 
 
 tty
-Muestra el número de terminal
+Muestra el número de terminal.
 $ tty
+1- Para entrar en las consolas virtuales, de la Crtl-Alt-F1 a la Crtl-Alt-F6, de forma automática sin tener que logearnos en cada una:
+# nano /etc/init.d/agetty-autologin (Crear el archivo de autologin)
+Y en su interior poner la linea:
+# agetty_options=»–autologin <user> –noclear» (en user poner el que corresponda)
+Reiniciar.
 
 
 tty-clock
