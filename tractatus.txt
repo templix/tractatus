@@ -10872,7 +10872,7 @@ $ ippfind -p (imprimir la dirección de la URI)
 
 
 ipptool
-Envía solicitudes IPP a la impresora-uri especificada y prueba y/o muestra los resultados. Cada archivo de prueba con nombre define una o más solicitudes, incluido el estado de respuesta, los atributos y los valores esperados. La salida es un informe de texto sin formato, texto formateado, CSV o XML en la salida estándar, con un estado de salida distinto de cero indica que una o más pruebas han fallado.
+Envía solicitudes IPP arbitrarias a un servidor o a una impresora IPP. Cada archivo de prueba con nombre define una o más solicitudes, incluido el estado de respuesta, los atributos y los valores esperados. La salida es un informe de texto sin formato, texto formateado, CSV o XML en la salida estándar, con un estado de salida distinto de cero indica que una o más pruebas han fallado. ipptool y se puede utilizar para enviar solicitudes IPP arbitrarias a un servidor CUPS o una impresora IPP.
 $ ipptool -t -v -f test ipp://localhost:631/printers/HP_psc_1100_series text.txt (informe de prueba CUPS [-t], atributos de solicitud y respuesta en modo de prueba CUPS [-v] y nombre de archivo de solicitud predeterminado para las pruebas [-f])
 
 
