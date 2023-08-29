@@ -11072,6 +11072,11 @@ muestra el tamaño de un sistema de ficheros iso9660 en bytes
 $ isosize archivo.iso
 
 
+ispell-autobuildhash
+Es un script que gestionará los archivos hash de ispell autobuild, destinados a ser llamados desde las herramientas comunes de los diccionarios. Dependiendo del nivel de compatibilidad ispell y del nivel de compatibilidad utilizado para el archivo hash si está presente, decidirá si debe ser reconstruido o no. Este script solo funcionará en paquetes ispell preparados para usarlo, no hará nada por otros paquetes de diccionarios ispell.
+# ispell-autobuildhash --force
+
+
 issue.net
 Muestra la distro instalada.
 $ cat /etc/issue.net
