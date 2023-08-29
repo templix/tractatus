@@ -6526,6 +6526,22 @@ $ env | grep DISPLAY
 Algunas opciones para grep: SHELL, USER, PATH, KEYBOARD, LANG..
 
 
+envsubst
+En el modo de funcionamiento normal, la entrada estándar se copia en la salida estándar y las referencias a las variables de entorno de la forma $VARIABLE o ${VARIABLE} se reemplazan por los valores correspondientes. Si se proporciona SHELL-FORMAT, solo se sustituyen las variables de entorno a las que se hace referencia en SHELL-FORMAT; de lo contrario, se sustituyen todas las referencias de variables de entorno que aparecen en la entrada estándar. Cuando se usa --variables, la entrada estándar se ignora y la salida consta de las variables de entorno a las que se hace referencia en SHELL-FORMAT, una por línea.
+Ejemplo
+Crear el archivo buendia.txt con el siguiente texto:
+$ echo "Hola usuario $USER estás con $DESKTOP_SESSION. Que tengas $BUEN!" > buendia.txt
+Exportar la variable y luego lanzar:
+  $ export BUEN="buen dia"
+  $ envsubst < buendia.txt
+  Hola usuario templix estás con LXDE. Que tengas buen dia!
+Eliminanos la variable:
+  $ unset BUEN
+Volvemos a lanzar envsubst
+  $ envsubst < buendia.txt
+  Hola usuario templix estás con LXDE. Que tengas !
+
+
 epylog
 Analizador syslog que se ejecuta periódicamente. Examina los registros procesando algunas de las entradas para presentarlas en un formato más comprensible. Puede enviar el resultado por correo.
 # epylog --last day (del último dia. Otras opciones: "hour" [h], "week" [w], "month" [m])
