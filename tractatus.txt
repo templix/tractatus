@@ -10055,6 +10055,17 @@ $ ./ibmonitor
 $ ./ibmonitor --bytes --max --avg --data (Los valores de salida en KBytes/seg, los máximos por interfaz y datos transferidos)
 
 
+ibus
+Utilidad en línea de comandos que puede reiniciar o salir de ibus-daemon, obtener o configurar el motor ibus actual o enumerar los motores ibus.
+$ ibus engine (obtiene el motor ibus)
+$ ibus list-engine (muestra los disponibles)
+$ ibus restart (reiniciar el daemon)
+$ ibus start (arrancar el daemon)
+$ ibus exit (salir de ibus daemon)
+$ ibus address (muesttra la dirección D-bus del daemon ibus)
+$ ibus reset-config (restablece los valores de la configuración)
+
+
 icdiff
 Parecido a diff [ver], pero en lugar de tratar de ser un reemplazo de diff para todas las circunstancias, el objetivo de icdiff es ser una herramienta que pueda alcanzar para obtener una mejor idea de lo que cambió cuando no es inmediatamente obvio desde diff.
 $ icdiff -N archivo archivo1 (mostrando el número de linea)
