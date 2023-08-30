@@ -6782,13 +6782,20 @@ $ evince-previewer archivo.pdf
 
 
 exa
-Lista el contenido de un directorio de forma mejorada respecto al comando "ls", coloreando de distintos tipos los archivos, metadatos, astributos, enlace simbólicos, git...
+Lista el contenido de un directorio de forma mejorada respecto al comando "ls" escrito en rust, coloreando de distintos tipos los archivos, metadatos, atributos, enlace simbólicos, git...
+$ exa (forma básica)
 $ exa -T (de forma recursiva en forma de arbol)
 $ exa -R (de forma recursiva)
+$ exa -D (muestra el listado de directorios)
 $ exa -l (mostrando los metadatos de forma extendida)
+$ exa -l archivo (información de un fichero especifico)
 $ exa -x (como el comando ls pero más coloreado)
 $ exa -F (clasifica el listado según tipo de archivo [* = ejecutable, .../ = directorio, @ = enlace...])
 $ exa -a (mostrando archivos ocultos)
+$ exa -G -l /var (información de un  directorio concreto y en varias columnas)
+$ exa -a --group-directories-first (el listado que empiece por los directorios)
+$ exa -G -l --octal-permissions /etc (incluir loa permisos en octal)
+$ exa -R -s size (de forma recursiva y ordenar por tamaño)
 
 
 exec
