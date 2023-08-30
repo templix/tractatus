@@ -4990,6 +4990,24 @@ Para solucionarlo:
 # chmod 644 /home/usuario/.dmrc
 
 
+dnf
+Sistema de administración de paquetes predeterminado en la mayoría de distribuciones basadas en RPM.
+# dnf upgrade (actualizar listado)
+# dnf group list (listar todos los grupos de paquetes)
+# dnf group info "nombre grupo" (información de un grupo)
+# dnf group install "nombre grupo" (instalar todos los paquetes de un grupo)
+# dnf group remove "nombre grupo" (eliminar un grupo de paquetes)
+# dnf list all (listar todos los paquetes instalados y disponibles)
+# dnf list installed (listar todos los instalados)
+# dnf list available (listar todos los disponibles)
+# dnf list available paquete (ver todos los paquetes relacionados con "paquete" disponibles)
+# dnf info paquete (buscar información sobre "paquete")
+# dnf search paquete (buscar paquete)
+# dnf install paquete (instalar "paquete")
+# dnf remove paquete (desinstalar "paquete")
+# dnf install paquete1 paquete2 paquete3 (instalar varios paquetes)
+
+
 dns
 El servidor DNS traduce los numeros ip a nombres inteligibles para los seres humanos. Estos servicios estan vinculados a los ISP, es decir, a nuestros proveedores de acceso a Internet. Sin embargo estas ips pueden ser modificadas para conseguir mejores rendimientos o por manias personales con algunas opciones mas libres o profesionales. La manera de saber si el servidor DNS responde correctamente es hacer un ping consistente en enviar una pequeña cantidad de información al servidor y medir la velocidad en milisegundos de la respuesta. Valores inferiores a 70 ms (Al final de la linea [time=62.9 ms]) son razonables:
 $ ping -c 3 8.8.8.8
