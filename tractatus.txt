@@ -207,6 +207,18 @@ Simulación pelín subrealista de vida artificial y evolución.
 $ achilles -x 4 -z 4 -f 5 (número de bloques en el eje y y en el x y número de alimentos iniciales)
 
 
+ack
+Está diseñado como una alternativa de grep. ack es inteligente en cuanto a los archivos que busca. Conoce ciertos tipos de archivos, según la extensión del archivo y, en algunos casos, el contenido del archivo. Para paginar la salida:
+     $ echo '--pager=less -RFX' >> ~/.ackrc
+$ ack palabra (averiguar todas las instancias en las que se encuentra el patrón)
+$ ack -w palabra (palabra textual)
+$ ack -c palabra (que indique solo el número de lines coincidentes)
+$ ack -ch palabra (-h suprime el prefijo del nombre de archivo en la salida y elimina los archivos con cero resultados. Mostrara número de líneas donde se realizó la búsqueda)
+$ ack -f palabra (imprimir solo los archivos que tienen coincidencias del directorio)
+$ ack -g log --cc (todos los archivos de lenguaje C que tienen el patrón "log" en algún lugar de su ruta)
+$ ack -f --cc (muestrar todos los archivos en lenguaje C)
+
+
 aconnect
 Utilidad para conectar y desconectar dos puertos midi existentes en el sistema al secuenciador ALSA.
 $ aconnect 64:0 65:0 (conectar el puerto 64 al 65)
