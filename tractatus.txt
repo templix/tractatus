@@ -280,6 +280,13 @@ Archivo que contiene las preferencias para los comandos adduser y addgroup [/etc
 	DIR_MODE=0755 (Permisos de entrada de todos los directorios creados)
 
 
+adequate
+comprobaciones adecuadas de los paquetes instalados en el sistema e informes de errores y violaciones de políticas.
+$ adequate --all (comprobacion de todos los paquetes instalados)
+$ adequate coreutils (comprobar un paquete)
+$ adequate --tags obsolete-conffile --all (comprobar paquetes obsoletos)
+
+
 adminer
 Gestor de bases de datos via navegador más completa que phpmyadmin. Una vez instalado reiniciar apache:
 # /etc/init.d/apache2 restart
