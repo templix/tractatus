@@ -2676,6 +2676,20 @@ $ ccal -a (formato americano: primer dia semana, domingo)
 $ ccal -e 2011 (mostrar todo el 2011)
 
 
+ccat
+Como el comando cat pero con más colorido. Si se prefiere ccat a cat poner en ~/.bashrc la linea:
+     alias cat=ccat
+     $ source ~/.bashrc (recargar .bashrc)
+Descarga:
+     $ wget https://github.com/jingweno/ccat/releases/download/v1.1.0/linux-amd64-1.1.0.tar.gz
+     $ tar xfz linux-amd64-1.1.0.tar.gz
+     $ cd linux-amd64-1.1.0
+     # cp linux-amd64-1.1.0/ccat /usr/local/bin/
+$ ccat fichero1 fichero2 (abrir varios ficheros)
+$ ccat fichero1 fichero2 --html > fichero.html (crear un html)
+$ ccat --palette (colores disponibles)
+
+
 ccd2iso
 Convierte una imagen img/ccd/sub/cue a iso
 $ ccd2iso imagen.img imagen.iso
