@@ -24733,6 +24733,13 @@ $ whodepends firefox
 $ whodepends nano
 
 
+who-permits-upload
+Busca los permisos de carga del Mantenedor de Debian (DM) proporcionados desde ftp-master.debian.org y los analiza de forma legible por humanos. La herramienta puede buscar por nombre de DM, patrocinador (la persona que otorgó el permiso) y por paquete.
+$ who-permits-upload -s sponsor "Marco d'Itri"
+$ who-permits-upload -s uid whois
+$ who-permits-upload apache2
+
+
 who-uploads
 Identifica las tres últimas versiones descargadas del paquete dado. Los cargadores se identifican utilizando sus llaves gpg o gpg2; la instalación de una versión reciente del paquete debian-keyring debería proporcionar la mayoría de las claves requeridas. Debido a que el PTS usa paquetes fuente, ha darse los nombres del paquete fuente, no los nombres del paquete binario.
 $ who-uploads -M 5 emacs25 (dando la fecha de cada versión y de las últimas 5 del paquete mencionado)
