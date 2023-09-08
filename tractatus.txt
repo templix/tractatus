@@ -10017,6 +10017,13 @@ Las etiquetas básicas de HTML de obligada presencia en todo documento son:
 Excepto algunas pocas etiquetas, la mayoría requieren ser cerradas con la misma etiqueta precedida de una barra: <html>....</html>
 
 
+html2text
+Lee documentos HTML en los archivos de entrada y los convierte en texto sin formato.
+$ html2text -o salida.txt archivo.html (especificando nombre del archivo de salida)
+$ cat entrada.html | html2text -o salida.txt (en forma de tuberia)
+$ echo q | htop -C | aha --line-fix | html2text -width 999 | grep -v "F1Help" | grep -v "xml version=" > file.txt (Especificando un ancho distinto de 79 caracteres)
+
+
 htop
 Muestra el consumo de CPU, RAM y SWAP y debajo de estos los diferentes procesos  organizados por defecto de mayor a mejor consumo de CPU. Pulsando “u” podremos introducir el usuario a monitorizar y pulsando “k” e introduciendo el PID, materemos el proceso.
 
