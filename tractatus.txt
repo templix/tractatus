@@ -570,6 +570,13 @@ ansi2txt
 # ansi2txt </var/log/apache2/access.log >acces.txt
 
 
+ansiweather
+Mostrar información actual de las condiciones meteorológicas, con soporte para colores ANSI y símbolos Unicode. Los datos meteorológicos provienen de OpenWeatherMap
+$ ansiweather -l "Olot,ES" -u metric (forma básica)
+$ ansiweather -l "Olot,ES" -u metric -s true -f 5 -d true (mostrando pequeños simbolos, luz diurna y previsión para los próximos 5 dias)
+$ ansiweather -l "Olot,ES" -u metric -s true -d true -w true -h true (mostrando, viento, luz diurna, humedad, presión, hora amanecer, hora puesta)
+
+
 antiword
 Conversor/lector de archivos .doc
 $ antiword archivo.doc | less (Visualiza un doc)
