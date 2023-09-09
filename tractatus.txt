@@ -312,6 +312,13 @@ Algunas teclas de control:
 	Ctrl c (Sale del programa)
 
 
+aha
+Lee el texto de entrada, lo convierte a HTML en color y lo escribe en la salida.
+$ echo q | htop | aha -b -l > htop.html (Cree un archivo HTML con un fondo negro a partir de la salida de htop. La opción -l anula otros comandos de nueva línea que usa htop)
+$ man age | aha -b -t 'manual de age' -y 'font-size:1.875em' > aha-age.html (con fondo negro, especificando título y una fuente concreta)
+$ ls -al --color=force | aha --pink > ls.htm (ls coloreado y pasado a html)
+
+
 aide
 Sistema de detección de intrusos. No evita la intrusión, sólo informa que esta se ha producido y qué archivos fueron modificados. La primera vez que se ejecuta, crea una base de datos con los atributos, usuarios, permisos... de los archivos especificados aplicándoles una o varias funciones hash por lo que el mejor momento para instalar esta aplicación es con un sistema recien instalado.
 # aide -i (Crear la base de datos. Al iniciar por  primera vez y evitar: Couldn't open file /var/lib/aide/please-dont-call-aide-without-parameters/aide.db.new for writing)
