@@ -575,6 +575,15 @@ Mostrar información actual de las condiciones meteorológicas, con soporte para
 $ ansiweather -l "Olot,ES" -u metric (forma básica)
 $ ansiweather -l "Olot,ES" -u metric -s true -f 5 -d true (mostrando pequeños simbolos, luz diurna y previsión para los próximos 5 dias)
 $ ansiweather -l "Olot,ES" -u metric -s true -d true -w true -h true (mostrando, viento, luz diurna, humedad, presión, hora amanecer, hora puesta)
+Para personalizar la ciudad, traducción y datos concretos para no tener que entrarlos cada vez, bajar el archivo https://github.com/fcambus/ansiweather/blob/master/ansiweatherrc.example y colocarlo como ~/.ansiweather.
+   $ cat .ansiweather
+   location:Olot,ES
+   units:metric
+   ...
+   humidity_text:Humedad
+   pressure_text:Presión
+   sunrise_text:Salida
+   ...
 
 
 antiword
