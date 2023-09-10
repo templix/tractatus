@@ -8371,6 +8371,12 @@ $ fuser -v archivo  (Muestra los procesos usados por un fichero o directorio)
 # fuser -n tcp -s 22 && echo "abierto" (Indica si un puerto está abierto)
 
 
+fzf
+Buscador que se integra con muchas herramientas y que sirve para buscar con pocas letras entre muchas opciones: procesos, archivos, historial de comandos... Descarga e instalación [preferible a la de los repositorios de la distro]:
+$ curl -o- https://raw.githubusercontent.com/junegunn/fzf/master/install | bash
+$ fzf (lanza la aplicación)
+
+
 gawkbug
 Es un script de shell para ayudar al usuario a redactar y enviar informes de errores relacionados con gawk en un formato estándar. gawkbug invoca el editor especificado por la variable de entorno EDITORs.
 $ gawkbug (El usuario debe completar los campos correspondientes y salir del editor)
