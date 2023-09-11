@@ -1473,6 +1473,10 @@ NoDisplay true
 # cp /usr/share/applications/guake.desktop /etc/xdg/autostart/ (colocar una aplicación)
 
 
+autosuspend
+Daemon para suspender y reactivar automáticamente el sistema. Los tiempos de inactividad y de activación se determinan mediante un conjunto de comprobaciones configurables. Autosuspend ejecuta periódicamente estas comprobaciones y si ninguna de ellas indica actividad, el sistema se suspende y se activa automáticamente si es necesario. El archivo de configuración en /etc/autosuspend.conf
+
+
 autotrace
 Convierte los datos de imagen de mapa de bits en gráficos vectoriales
 $ autotrace imagen.png --output-file imagen.svg
