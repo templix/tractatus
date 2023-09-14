@@ -2535,6 +2535,14 @@ Una vez conectado, algunos comandos disponibles son:
 	quit (Salir)
 
 
+cado
+Permite al administrador del sistema delegar capacidades a los usuarios. Cado es un sudo basado en capacidades. Sudo permite a los usuarios autorizados ejecutar programas como root o como otro usuario, cado permite a los usuarios autorizados ejecutar programas con capacidades específicas. Es más selectivo que sudo, los usuarios pueden ser autorizados a tener solo capacidades específicas y no otras. El archivo /etc/cado.conf es donde se configuran las capacidades de los usuarios.
+Permitir al usuario user1 y a todos los miembros del grupo usernet ejecutar programas que necesitan la capacidad net_admin. El usuario user1 también puede ejecutar programas que requieren cap_kill:
+    net_admin: @usernet,user1
+    cap_kill: user1
+    setgid,setuid: user2,@group1
+
+
 cadubi
 Crear dibujos en la consola.
 teclas:
