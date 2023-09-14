@@ -1475,7 +1475,13 @@ NoDisplay true
 
 autosuspend
 Daemon para suspender y reactivar automáticamente el sistema. Los tiempos de inactividad y de activación se determinan mediante un conjunto de comprobaciones configurables. Autosuspend ejecuta periódicamente estas comprobaciones y si ninguna de ellas indica actividad, el sistema se suspende y se activa automáticamente si es necesario. El archivo de configuración en /etc/autosuspend.conf
-
+$ autosuspend -d daemon (activar el daemon)
+Para iniciar la suspensión automática a través de systemd, ejecute:
+# systemctl enable autosuspend.service (han de activarse esta y la siguiente)
+# systemctl enable autosuspend-detect-suspend.service
+# systemctl status autosuspend.service (comprobar si se encuentra activo)
+Opciones del archivo de configuración:
+   # man autosuspend.conf
 
 autotrace
 Convierte los datos de imagen de mapa de bits en gráficos vectoriales
@@ -7149,8 +7155,9 @@ extundelete
 
 eza
 Moderno reemplazo del clásico ls y el no mantenido exa.
+$ eza (mostrar archivos y directorios sin los ocultos)
 $ eza -D (solo mostrar los directorios)
-$ eza -a (mostrar todos los ocultos)
+$ eza -a (mostrar todos incluidos los ocultos)
 $ eza -T (en forma de arbol)
 
 
