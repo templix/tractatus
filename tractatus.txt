@@ -2592,7 +2592,7 @@ Organizador de tareas por consola.
 
 
 calife
-Convertirse en root u otro usuario [parecido a sudo con menos privilegios].
+Alternativa ligera a Sudo. Permite a los usuarios seleccionados obtener un shell con la identidad de root u otro usuario, después de ingresar su propia contraseña. Esto permite al administrador del sistema otorgar privilegios de root sin compartir la contraseña.
 $ califa
 En /etc/calife.auth añadir el/los usuario/s y el shell que se les autoriza:
 usuario:/bin/bash
@@ -2634,6 +2634,12 @@ Atajos:
 capsh
 Permita probar y explorar el uso de capabilities. [relacionado con getcap, setcap y getpcaps]
 $ capsh --print (Lista de capabilities actuales)
+
+
+capstans
+Herramienta para recopilar estadísticas sobre la carga actual de una interfaz de red.
+$ capstans -i eth1 -I 2 (actualizar cada 2 segundos)
+$ capstans -l (Imprimir resultados en syslog y no por pantalla)
 
 
 caracteres-especiales
