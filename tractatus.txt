@@ -12755,8 +12755,8 @@ Muestra información sobre la cpu
 
 lsd
 listar directorios. Un comando ls con más colorido.
-$ lsd -a (mostrar archivos ocultos)
-$ lsd -l -R (mostrar los archivos,  directorios y subdirectorios son sus atributos)
+$ lsd -a (mostrar todo incluso los archivos y directorios ocultos)
+$ lsd -l -R (mostrar los archivos, directorios y subdirectorios con sus atributos)
 $ lsd --tree (en forma de arbol)
 $ lsd -d --tree (solo mostrar los directorios y en forma de arbol)
 $ lsd --classic (mostrar parecido a ls)
@@ -22856,7 +22856,8 @@ $ txt2tags -t html fichero.txt   (convierte .txt en .html)
 
 
 type
-Buscar la ubicación del ejecutable e informar si el comando es un alias.
+Buscar la ubicación del ejecutable e informar si el comando es un alias, un comando interno o externo.
+$ type cd (informa que es interno)
 $ type mplayer
 $ type -a algo (Conocer todas las definiciones de “algo”, teniendo en cuenta que si “algo” es una alias, una función y un script prevalece este orden)
 $ type -t cp (Conocer el tipo de un símbolo)
