@@ -2854,6 +2854,18 @@ $ cd ../.. (baja dos niveles)
 $ cd -   (entra en el último directorio en el que se ha estado)
 
 
+cdargs
+Herramienta que mejora la navegación por el sistema de archivos desde la shell. Se conecta al comando de CD a través de una función de shell o un alias y le agrega marcadores y un navegador que permite moverse a un lugar muy distante en el sistema de archivos con solo unas pocas pulsaciones de teclas.
+$ cdargs -a path (agregar una ruta a la lista de marcadores)
+$ cdargs -u user (ver los marcadores de un usuario. Para eliminar una entrada pulsar "d". Pulsar "q" para salir)
+$ cdargs (si solo hay un usuario entra en su listado como en el caso anterior)
+$ cv xxx (con las primeras letras y tab se entra en el directorio que se ha entrado en el listado)
+$ ca (al entrar en un directorio y pulsar ca se incorpora el directorio en la lista de marcadores)
+Para incorporar cdargs en .bashrc:
+     cp /usr/share/doc/cdargs/examples/cdargs-bash.sh ~/.bashrc-cdargs
+     echo '. ~/.bashrc-cdargs' >> ~/.bashrc
+
+
 cdclose
 [cdtool]. Cerrar el cd.
 $ cdclose -d /dev/sr0 (especificando el dispositivo [cdrom0...])
