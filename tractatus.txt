@@ -10637,7 +10637,8 @@ $ img2txt -f html imagen.jpg > imagen.html (código html de la imagen)
 import
 [imagemagick]. Capturar la pantalla en cualquier formato.
 $ import -window root captura.png (captura de pantalla completa)
-$ import -window `xwininfo | awk '/Window id/{print $4; exit}'` `uuidgen`.png (Lo mismo. El puntero se convierte en una cruz y captura el esritorio donde se clica)
+$ import -window `xwininfo | awk '/Window id/{print $4; exit}'` `uuidgen`.png (Lo mismo. El puntero se convierte en una cruz y captura el escritorio donde se clica)
+$ import -frame -strip -quality 75 "$HOME/$(date +%s).png" (seleccionar el trozo a capturar)
 $ import captura.png (captura de un área concreta))
 $ import 2 captura.png (realizar 2 capturas)
 $ import -pause 5 captura.png (Para retardar la captura 5 segundos)
