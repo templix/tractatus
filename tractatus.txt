@@ -3514,6 +3514,17 @@ Colorea la salida de algunas herramientas tales como: ansi2html[ver], ansi2txt[v
 $ pipetty dmesg
 
 
+colormake
+Esta herramienta analiza el resultado de make para colorearlo y facilitar su lectura. Contiene dos ejecutables: colormake y clmake que se pueden invocar en lugar de make con salida coloreada [configure, clmake, clmake install].
+
+
+colortest
+Incluye un conjunto de utilidades para ayudar a probar cuántos colores puede mostrar un terminal. Estas configuraciones de color dependen de la variable de entorno $TERM y de la entrada termcap
+$ colortest-8
+$ colortest-256
+$ colortest-16
+
+
 colrm
 Corta columnas de un texto.
 $ cat /etc/passwd | colrm 10 (Corta desde el caracter número 10 al final de la linea)
