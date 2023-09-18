@@ -1896,7 +1896,7 @@ $ bashtop
 
 bastet
 Clon libre de Tetris que intenta calcular qué tan útiles son los bloques que necesitas y te da el peor posible.
-
+$ bastet
 
 batcat
 Parecido al comando cat pero mejorado. En algunas distribuciones se llama simplemente bat.
@@ -22470,6 +22470,7 @@ $ ls |tr '\t' '\n' (Substituye la tabulación vertical [\t] por salto de linea [
 $ tr -dc A-Za-z0-9_ < /dev/urandom | head -c 8 | xargs   (contraseñas de 8 caracteres aleatorias)
 $ echo "El boxeador está OK." | tr O m | tr K a | tr . l (varios tr)
 $ tr " " . < archivo (substituir los espacios por puntos)
+$ tr -c "[:digit:]" " " < /dev/urandom | dd cbs=$COLUMNS conv=lcase,unblock | GREP_COLOR="1;32" grep --color "[^ ]" (salvapantallas como matrix)
 
 
 traceroute
