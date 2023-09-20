@@ -4893,7 +4893,7 @@ $ dhomepage debian-history
 
 
 di
-Muestra información sobre las particiones [un “df” mejorado]. Ver mi.
+Muestra información sobre las particiones com  df [ver] mejorado.
 $ di
 $ di -c (Salida en CSV, para importar una hoja de cálculo)
 
@@ -4966,6 +4966,12 @@ E=`cat $TMPFILE`
 # Borrar tmpfile
 rm -f $TMPFILE
 dialog --infobox "$N tiene $E años" 3 50
+
+
+diceware
+Generador de frases de contraseña concatenando palabras seleccionadas al azar de un fichero con una lista de palabras que es opcional.
+$ diceware
+$ diceware -n 3 -c -s 4 -d ? (concatenando 3 palabras, con mayusculas, insertar 4 caracteres especiales y seprando las palabras con un ?)
 
 
 dict
