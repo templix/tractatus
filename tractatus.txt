@@ -8202,8 +8202,9 @@ $ flvstreamer -r rtmp://mp4-500-str.tv3.cat/ondemand/mp4:g/tvcatalunya/2/9/13070
 
 
 fmt
-Muestra en pantalla archivos de texto de forma optimizada (Ver diferencia con cat)
-$ fmt fichero.txt
+Eliminar saltos de linea de un archivo y uniendo párrafos.
+$ fmt -w 80 fichero.txt (limitando el número de caracteres por linea)
+$ fmt -s 10 fichero.txt (solo une las lineas inferiores a 10 caracteres)
 
 
 fnotifystat
