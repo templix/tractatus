@@ -1997,7 +1997,7 @@ Frecuencias de la escala musical (-f):
 	La# > 466
 	Si > 493
 Si beep no emite sonidos, puede que el dispositivo esté en la lista negra:
-# nano /etc/modprobe.d/blacklist.conf (Comprobar si existe una linea: blacklist pcspkr)
+# nano /etc/modprobe.d/blacklist (Comprobar si existen alguna linea: blacklist pcspkr o  blacklist snd_pcsp)
 # lsmod | grep pcsp  (Otra forma de comprobar si existe como módulo)
 # modprobe pcspkr  (para cargarlo)
 # modprobe -r pcspkr  (Para eliminarlo nuevamente)
