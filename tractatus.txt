@@ -13810,6 +13810,48 @@ $ mk-build-deps emacs25 (crea una paquete emacs25-build-deps_25.1+1-4+deb9u1_amd
 $ mk-build-deps -i emacs25 (lo instala todo)
 
 
+mkcert
+Generar certificados SSL [https] firmados localmente.
+$ apt install wget curl libnss3-tools
+$ mkcert -install (generar el Certificate of Authority [CA])
+$ mkcert -CAROOT (localizar donde se guarda el CA)
+$ mkcert localhost (generar el certificado para localhost)
+El comando anterior genera en el directorio donde se lanza los archivos localhost.pem y localhost-key.pem. A continuación crear el archivo:
+# nano /etc/apache2/conf-available/ssl-params.conf
+Con el contenido:
+    SSLCipherSuite EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH
+    SSLProtocol All -SSLv2 -SSLv3 -TLSv1 -TLSv1.1
+    SSLHonorCipherOrder On
+    # Disable preloading HSTS for now.  You can use the commented out header line that includes
+    # the "preload" directive if you understand the implications.
+    # Header always set Strict-Transport-Security "max-age=63072000; includeSubDomains; preload"
+    Header always set X-Frame-Options DENY
+    Header always set X-Content-Type-Options nosniff
+    # Requires Apache >= 2.4
+    SSLCompression off
+    SSLUseStapling on
+    SSLStaplingCache "shmcb:logs/stapling-cache(150000)"
+    # Requires Apache >= 2.4.11
+    SSLSessionTickets Off
+A continuación editar y modificar/añadir en el archivo:
+# ano /etc/apache2/sites-available/default-ssl.conf
+los poarámetros:
+    ServerAdmin usuario@localhost
+    ServerName localhost
+Para redireccionar todo el tráfico http a cifrado SSL [https]
+# nano /etc/apache2/sites-available/000-default.conf
+Y en el apartado correspondiente descomentamos o modificamos la linea:
+    Redirect permanent  "/" "https://localhost/"
+Habilitar los módulos de apache necesarios para SSL y el host virtual:
+    # a2enmod ssl
+    # a2enmod headers
+    # a2ensite default-ssl
+Comprobar que no existan errores de sintaxis en los archivos:
+    # apache2ctl configtest
+# systemctl restart apache2 (reiniciar apache2)
+Si existen cortafuegos tipo ufw han de reconfigurarse [ufw allow 'Apache Full']. Podemos comprobar si se ha realizado todo el proceso correctamente colocando en la barra del navegador la dirección https://localhost. El certificado creado no está firmado por una de las autoridades de confianza del navegador y es probable que se vea una alguna advertencia al respecto. clicmos en “ADVANCED” y luego en el enlace proporcionado para acceder a su host
+
+
 mkdir
 Crear directorios.
 $ mkdir -p A B C (Crea el directorio A en su interior el B y dentro de este el C)
