@@ -17670,10 +17670,17 @@ $ pinky -b usuario root (shells abiertas por los usuarios especificados)
 
 
 pip
-[python-pip python-dev build-essential]. Alternativa para la instalación de paquetes python.
+[python3-pip python-dev build-essential]. Herramienta para instalar, actualizar, eliminar y buscar paquetes de Python.
 # pip install paquete
 # pip uninstall paquete (desinstala el paquete)
 # pip search paquete (Busca información sobre el paquete)
+# pip freeze (Listar la totalidad de paquetes python instalados y su versión)
+# pip list --outdated (listar paquetes abosoletos)
+# pip show paquete (información de un paquete)
+# pip check (verificar paquetes instalados si están bien instalados y no tienen problemas de dependencias)
+# pip install --upgrade paquete (actualizar un paquete a su última versión)
+# pip freeze | grep -v '^\-e' | cut -d = -f 1 | xargs -n1 pip install -U (actualizar todos los paquetes)
+# pip cache dir (Ver la ubicación del directorio que almacena copias en forma de cache de los paquetes que se descargan)
 
 
 pitidos
