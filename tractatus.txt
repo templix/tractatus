@@ -5037,8 +5037,8 @@ $ digut (scanea el directorio y entra en el prompt de digup)
   Command (see help)? new (imprime los archivos modificados. Si es la primera vez que se lanza los pondrá todos)
 Si al cabo de unos dias se vuelve a lanzar.
   Command (see help)? changed (mostrará los modificados)
-  Command (see help)? deleted (mostrará los elimindaos)
-  Command (see help)? help (ver las opciones diponibles)
+  Command (see help)? deleted (mostrará los eliminados)
+  Command (see help)? help (ver las opciones disponibles)
   Command (see help)? exit (salir)
 
 
@@ -25766,9 +25766,11 @@ Script para convertir archivos .xml a páginas man en formato groff o html. Pres
 xmltoman archivo.xml > archivo.html
 
 
-xmll
-[libxml2]. Formatear archivos xml
-$ xmllint --format archivo.xml
+xmlint
+[libxml]. Hace más legible el lenguaje XML. También incluye la aplicacion ament_xmllint que solo indica si el archivo está bien formado.
+$ ament_xmllint archivo.xml
+$ xmllint archivo.xml
+$ xmllint --html archivo.xml (con salida como html)
 
 
 xmlstarlet
