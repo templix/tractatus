@@ -5628,6 +5628,7 @@ duc
 # duc index /etc (generar la base de datos del directorio /etc)
 # duc ls -Fg /etc (ver el contenido y el peso de cada carpeta del directorio del que se ha creado la base de datos)
 # duc gui /etc (mostrarlo de forma gráfica)
+# duc graph (muestra un gráfico del presente directorio con el nombre duc.png)
 
 
 duckduckgo
@@ -5734,6 +5735,16 @@ Algunas opciones:
 dust
 Mostrar espacio usado por archivos y directorios. Como du más colorido.
 $ dust
+
+
+dutree
+Analisis del uso del disco duro en forma de arbol. De forma predeterminada, dutree muestra un tamaño de archivo de 1 M
+$ dutree (forma básica)
+$ dutree -s -H (resumen completo y sin mostrar archivos ocultos)
+$ dutree -u (ver el uso real del disco duro en lugar del tamaño del archivo)
+$ dutree -d 3 (hasta una profundidad de 3 subdirectorios)
+$ dutree -f (omitiendo directorios)
+$ dutree -a (ver incluso los de menor tamaño que 1 M)
 
 
 dvdauthor
