@@ -5732,6 +5732,15 @@ Algunas opciones:
 	--remove-all-but-n-full 1 --force (Sólo dejará en destino la última copia "full", borrando la anterior y las incrementales que dependen de ella)
 
 
+durep
+Monitorear el uso del disco. Genera una salida con texto y barras gráficas.
+$ durep /var/www (uso básico)
+$ durep -td 2 (hasta una profundidad de 2 subdirectorios del directorio actual)
+$ durep -f /var/www/html (escanear solo archivos sin descender a directorios)
+$ durep -c /var -sf /var/lib/durep/(generando un archivo .cds de /var y guardarlo en el directorio especificado)
+$ durep -lf /var/lib/durep/durep.cds (cargar los resultados del archivo)
+
+
 dust
 Mostrar espacio usado por archivos y directorios. Como du más colorido.
 $ dust
