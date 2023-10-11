@@ -7330,6 +7330,18 @@ $ eza -a (mostrar todos incluidos los ocultos)
 $ eza -T (en forma de arbol)
 
 
+f3
+[Fight Flash Fraud o Fight Fake Flash]. Prueba la capacidad total de una tarjeta flash [unidad flash, disco flash, pendrive]) para comprobar si coincide con las características que deberia tener. f3 escribe en la tarjeta y luego comprueba si puede leerla. No respeta los contenidos de la unidad o sea que es preferible que este vacia. Consta de varios ejecutables: f3brew, f3fix, f3probe, f3read y f3write.
+# f3brew /dev/sda (detecta si el dispositivo es una unidad falsa)
+# f3probe /dev/sda (identificar de forma rápida los falsos pendrives/tarjetas y ver su tamaño real)
+# f3fix /dev/sda (comprobar la capacidad real del dispositivo que podemos utilizar para no perder datos)
+# f3write /dev/sda (escribe archivos de gran tamaño en el dispositivo)
+# f3read /dev/sda (Se encarga de comprobar que lo que ha escrito es correcto)
+Algunas opciones que pueden aplicarse a cada ejecutable:
+        --destructive (obvia el contenido de la unidad para que el teste sea más rápido)
+        --time-ops (mostrar información sobre la duración de la comprobación)
+
+
 facter
 Muestra información del sistema tanto aspectos de hardware como de software.
 $ facter (Muestra la totalidad de la información)
