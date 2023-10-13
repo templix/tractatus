@@ -7742,7 +7742,7 @@ Teclas para la gestión:
 
 
 ffmpeg
-Conversor de archivos de audio y video
+Conversor de archivos de audio y video. La aplicación contiene otros ejecutables: ffplay, ffprobe y qt-faststart
 $ ffmpeg -i archivo.mpg  (Obtener información de un archivo)
 $ ffmpeg -i archivo1.avi archivo2.mpg  (Convertir de un formato a otro)
 $ ffmpeg -i archivo1.3gp -vcodec mpeg4 -acodec mp3 archivo2.avi (Convertir videos en formato 3gp del móvil a avi)
@@ -7764,9 +7764,6 @@ $ ffmpeg -f image2 -i imagenes%d.jpg video.mpeg  (Convertir una secuencia de ima
 $ ffmpeg -i video -sameq -r 1 %d.png (sacar un fotograma png cada segundo de un video)
 $ ffmpeg -i video.avi video.mpg -s 640×480 -b 800  (convertir de avi mpg especificando resolución y bitrate)
 $ ffmpeg -i video.mpeg -pix_fmt rgb24 imagenes.gif (Convertir imagenes de un video a .gif animado)
-	$ ffmpeg -i video1.avi -sameq video1.mpeg (Unir varios videos. Primero convertirlos a mpeg))
-	$ ffmpeg -i video2.avi -sameq video2.mpeg
-	$ cat video1.mpeg video2.mpeg > nuevo_video.mpeg (Unir los videos resultantes usando cat)
 $ ffmpeg -i nuevo_video.mpeg -sameq nuevo_video.avi (de mpeg a avi)
 $ ffmpeg -i video.avi -an video_sin_sonido.avi (Suprimir el audio de un video)
 $ ffmpeg -i video.avi audio.mp3 (Separar para guardar el sonido de un video)
@@ -7780,6 +7777,10 @@ $ ffmpeg -itsoffset -4 -i video.avi -vcodec mjpeg -vframes 1 -an -f rawvideo -s 
 $ ffmpeg -ss 5 -i video.mpegi -vframes 1 -s 320x240 thumb.jpg (lo mismo)
 $ ffmpeg -i http://192.168.1.115/img/video.asf -vcodec copy -b 900k salida.asf (Grabar un video de una ubicación en la red [cámara ip])
 $ ffmpeg -i ./PELICULA_ENTRADA.MOV -s 800x450 -vcodec libxvid -acodec aac -strict experimental -ac 2 -r 25 -ab 44100 -b 500k -aspect 16:9 fichero_salida.mp4 (Convertir un vídeo a un formato reconocido por Android)
+1. Unir varios videos
+$ ffmpeg -i video1.avi -sameq video1.mpeg (Primero convertirlos a mpeg))
+$ ffmpeg -i video2.avi -sameq video2.mpeg
+$ cat video1.mpeg video2.mpeg > nuevo_video.mpeg (Unir los videos resultantes usando cat)
 
 
 fg
