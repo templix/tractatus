@@ -8209,6 +8209,33 @@ La totalidad de perfiles disponibles se muestra en:
 	$ ls /etc/firejail/
 
 
+firewalld
+es un demonio de firewall administrado dinámicamente con soporte para zonas de red/firewall para definir el nivel de confianza de las conexiones o interfaces de red. De modo predeterminado Firewalld tiene diferentes tipos de zonas. Cada una tiene un distinto nivel de seguridad: Para redes públicas: drop, block y public [predeterminada], redes externas: external, redes para hogar: work, home y internal y trusted en que todas las conexiones son aceptadas. En la mayoria se descartan los paquetes entrantes no solicitados y el resto son rechazados.
+# systemctl enable firewalld (iniciar firewalld automaaticamente al inicio del sistema)
+# firewall-cmd --state (comprobar si esta activo. Más información: systemctl status firewalld)
+# firewall-cmd --check-config (si el archivo de configuración tiene errores)
+# firewall-cmd --get-log-denied (imprimir el registro de valores denegados)
+# firewall-cmd --list-all (visión completa de la configuración de firewalld)
+# firewall-cmd --list-all --zone=home (de una zona concreta)
+# firewall-cmd --add-service=ssh --timeout 15m (incluir ssh durante 15 minutos al firewall)
+# firewall-cmd --permanent --get-zones
+# firewall-cmd --reload (releer configuración después de algún cambio)
+# firewall-cmd --panic-on (desactivar inmediatamente el trafico de red)
+# firewall-cmd --panic-off (volver a activarlo)
+# firewall-cmd --query-panic (comprobar si está activado o no el modo panic)
+# firewall-cmd --list-services (servicios no permitidos)
+# firewall-cmd --get-services (numerar todos los servicios predefinidos)
+# firewall-cmd --add-service=samba (añadir un servicio a los permitidos)
+# firewall-cmd --runtime-to-permanent (que la nueva configuración sea permanente)
+# firewall-cmd --list-ports (listar los puertos permitidos)
+# firewall-cmd --add-port=22/tcp (añadir un puerto y tipo a los permitidos)
+# firewall-cmd --remove-port=22/tcp (cerrar un puerto)
+# firewall-cmd --list-all-zones (información detallada de todas las zonas)
+# firewall-cmd --zone=public --list-all (información detallada de una zona concreta)
+# firewall-cmd --get-default-zone (verificar qué zona es la utilizada por el firewalld)
+# firewall-cmd --get-active-zone (ver los interfaces asociados a cada zona)
+
+
 fish
 Intérprete de comandos.
 $ fish (entra en la shell)
