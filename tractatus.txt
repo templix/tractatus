@@ -8201,7 +8201,7 @@ Otras opciones:
 	0 (No permitir que el tráfico preestablecido continúe mientras el firewall esté activado)
         "optimal" (óptimo)
 	"accurate" (preciso)
-# firehol helpme > /tmp /firehol.conf (crea una configuración adaptada a nuestro pc)
+# firehol helpme > /tmp/firehol.conf (crea una configuración adaptada a nuestro pc y la guarda en un archivo)
 # firehol try /tmp/firehol.conf (después de parar la aplicación [firehol stop] probar la configuración anterior y si nos satisface, copiarla en /etc/firehol/firehol.conf)
 # fireqos start (tambien se tiene que arrancar)
 # firehol stop  (parar servicio)
@@ -8675,6 +8675,18 @@ $ fuser -n tcp 3389  (indica PID que corre en el puerto 3389)
 $ fuser -k 80/tcp   (cerrar todo el tráfico tcp del puerto 80)
 $ fuser -v archivo  (Muestra los procesos usados por un fichero o directorio)
 # fuser -n tcp -s 22 && echo "abierto" (Indica si un puerto está abierto)
+
+
+fwlogwatch
+Analizador de registros. Los mensajes en /var/log/messages y la configuración en /etc/fwlogwatch.config en el que se han de descomentar los conceptos que interesen aunque muchos se pueden habilitar lanzando la aplicacion con argumentos. Por ejemplo:
+           stateful_start = yes
+           bind_to = 127.0.0.1
+           listen_port = 888
+           show_log_times
+# fwlogwatch
+# fwlogwatch -w -o log.html
+# fwlogwatch -v -b -t -e -z -w -o fwlogw.html
+# fwlogwatch -v -n -N -b -t -e -z -w -o fwlogw.html
 
 
 fzf
