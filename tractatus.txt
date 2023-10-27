@@ -8193,7 +8193,7 @@ Otros atajos:
 
 
 firehol
-Genera firewalls genéricos basados en iptables. Implica la instalación de FireQOS, un modelador de ancho de banda. El archivo de configuración se encuentra en /etc/firehol/firehol.conf. Primero activar la configuración básica:
+Genera firewalls genéricos basados en iptables. El archivo de configuración se encuentra en /etc/firehol/firehol.conf. Primero activar la configuración básica:
        START_FIREHOL=YES
        WAIT_FOR_IFACE="enp1s0" (la interfaz de red [eth0, wlan0 ...)
        FIREHOL_ESTABLISHED_ACTIVATION_ACCEPT=1 (permitir tráfico preestablecido mientras el firewall esté activado)
@@ -8203,7 +8203,6 @@ Otras opciones:
 	"accurate" (preciso)
 # firehol helpme > /tmp /firehol.conf (crea una configuración adaptada a nuestro pc)
 # firehol try /tmp/firehol.conf (después de parar la aplicación [firehol stop] probar la configuración anterior y si nos satisface, copiarla en /etc/firehol/firehol.conf)
-# firehol start (arrancar servicio)
 # fireqos start (tambien se tiene que arrancar)
 # firehol stop  (parar servicio)
 # firehol status (estado de las conexiones)
