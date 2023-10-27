@@ -8678,7 +8678,7 @@ $ fuser -v archivo  (Muestra los procesos usados por un fichero o directorio)
 
 
 fwlogwatch
-Analizador de registros. Los mensajes en /var/log/messages y la configuración en /etc/fwlogwatch.config en el que se han de descomentar los conceptos que interesen aunque muchos se pueden habilitar lanzando la aplicacion con argumentos. Por ejemplo:
+Analizador de registros. Los mensajes en /var/log/messages y la configuración en /etc/fwlogwatch.config en el que se han de descomentar los conceptos que interesen aunque muchos se pueden habilitar lanzando la aplicacion con argumentos. Incluye los ejecutables fwlw_notify y fwlw_respond. Un ejemplo de configuración:
            stateful_start = yes
            bind_to = 127.0.0.1
            listen_port = 888
@@ -8687,6 +8687,12 @@ Analizador de registros. Los mensajes en /var/log/messages y la configuración e
 # fwlogwatch -w -o log.html
 # fwlogwatch -v -b -t -e -z -w -o fwlogw.html
 # fwlogwatch -v -n -N -b -t -e -z -w -o fwlogw.html
+
+
+fwupd-test
+Proporciona un conjunto de pruebas instaladas que se pueden ejecutar para validar el demonio en un sistema de integración continua. Consta de varias aplicaciones que han de lanzarse especificando toda la ruta que se encuentran en /usr/libexec/installed-tests/fwupd.
+# /usr/libexec/installed-tests/fwupd/acpi-dmar-self-test
+# /usr/libexec/installed-tests/fwupd/linux-swap-self-test
 
 
 fzf
