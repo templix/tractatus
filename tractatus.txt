@@ -8192,6 +8192,50 @@ Otros atajos:
 	^+ l (Barra de direcciones)
 
 
+firehol
+Genera firewalls genéricos basados en iptables. Implica la instalación de FireQOS, un modelador de ancho de banda. El archivo de configuración se encuentra en /etc/firehol/firehol.conf. Primero activar la configuración básica:
+       START_FIREHOL=YES
+       WAIT_FOR_IFACE="enp1s0" (la interfaz de red [eth0, wlan0 ...)
+       FIREHOL_ESTABLISHED_ACTIVATION_ACCEPT=1 (permitir tráfico preestablecido mientras el firewall esté activado)
+Otras opciones:
+	0 (No permitir que el tráfico preestablecido continúe mientras el firewall esté activado)
+        "optimal" (óptimo)
+	"accurate" (preciso)
+# firehol helpme > /tmp /firehol.conf (crea una configuración adaptada a nuestro pc)
+# firehol try /tmp/firehol.conf (después de parar la aplicación [firehol stop] probar la configuración anterior y si nos satisface, copiarla en /etc/firehol/firehol.conf)
+# firehol start (arrancar servicio)
+# fireqos start (tambien se tiene que arrancar)
+# firehol stop  (parar servicio)
+# firehol status (estado de las conexiones)
+# firehol cstatus (estado de las conexiones de forma interactiva)
+# firehol panic (bloquear toda la comunicación IP)
+# firehol restore (volver al estado normal de la aplicación)
+# firehol restart (reiniciar despues de un cambio en la configuración)
+# firehol explain (ingresar al modo interactivo y probar directivas. También proporciona los comandos de iptables para cada directiva junto con el razonamiento. No modifica ningún archivo de configuración)
+  FireHOL [:] >
+Después de entrar en modo interactivo con la aplicación, podemos probar entrando algunos conceptos:
+  FireHOL [:] > interface eth0 world
+  FireHOL [interface:world] > server smtp accept
+  FireHOL [interface:world] > server ssh accept
+  FireHOL [interface:world] > client http accept
+  FireHOL [interface:world] > quit
+Si alguno nos interesa podemos entrarlo en el archivo de configuración /etc/firehol/firehol.conf
+1.- Muestra de un archivo de configuración
+# nano /etc/firehol/firehol.conf
+...
+# Acepta todo el trafico entrante
+interface any world
+# Rechazar todos los paquetes entrantes
+policy drop
+# Todas las politicas de proteccion activas.
+protection all
+# Politicas de servicios que ofrecemos [web y torrents]
+#server "http https" accept
+#server p2p accept
+# Todo el trafico saliente aceptado
+client all accept
+
+
 firejail
 [firetools]. Programa que reduce el riesgo de violaciones de seguridad restringiendo el entorno de ejecución de aplicaciones no confiables encerrandolas en "jaulas" [sanbox] aisladas del sistema operativo, esto incluye al proceso y todos sus descendientes.
 $ firejail transmission-gtk
