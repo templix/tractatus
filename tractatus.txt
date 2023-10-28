@@ -10040,10 +10040,16 @@ HASH: caf90169eefa5f807d577486b9f795ab86ae2983c5c20806cff959117e90af18
 
 hashalot
 Entrar una frase y muestra su hash. Soporta: ripemd160, rmd160, rmd160compat, sha256, sha384 y sha512
-$ hashalot -x -q sha256 (En binario [x])
+$ hashalot -x sha256 (En binario [x])
 	Enter passphrase:
 	c9168d9f82c8d04dcaea564c9dfbdd4924b26cfec589e739fdac346af936a542
 Nota.- la frase entrada y que no se muestra en el prompt es: linux es genial
+
+
+hashid
+Identificar diferentes tipos de hashes utilizados para cifrar datos y especialmente contraseñas. es una herramienta escrita en Python 3.x que admite la identificación de más de 175 tipos de hash únicos mediante expresiones regulares. Es capaz de identificar un único hash o analizar un archivo e identificar los hashes que contiene. También hay disponible una versión nodejs de hashID que se configura fácilmente para proporcionar identificación de hash en línea.
+$ hashid -e caf90169eefa5f807d577486b9f795ab86ae2983c5c20806cff959117e90af18
+$ hashid -m 89939edf840d6edd260dcf326eb71beed79f776d -o file (incluir el modo hashcat en la salida y guardarla en file)
 
 
 hashtag
