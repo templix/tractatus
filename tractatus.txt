@@ -7678,6 +7678,27 @@ $ feh --bg-scale /home/usuario/imagenes/image.jpg (Colocar una imagen de fondo d
 $ feh http://URL/imagen.png (Visualizar una imagen a partir de una URL)
 
 
+ferm
+Cortafuegos que en realidad tiene debajo a iptables . El archivo de configuración se crea en /etc/ferm/ferm.conf y las reglas personales se pueden organizar en /etc/ferm/ferm.d/local.conf.
+# import-ferm > /etc/ferm/ferm.d/personal.conf (importar reglas de iptables)
+# import-ferm /etc/iptables/rules.v4 > /etc/ferm/ferm.d/personal.conf (importar reglas de iptables-persistent)
+# ferm -i  -t 10 /etc/ferm/ferm.conf (cargar la aplicación en 10 segundos [predeterminado 30 segundos])
+# ferm -nl /etc/ferm/ferm.d/personal.conf (ver las reglas importadas de iptables)
+# ferm --flush /etc/ferm/ferm.conf (eliminar todas las reglas)
+Ejemplo de archivo de configuración. Con iptables sería de la siguiente forma:
+        iptables -A INPUT -p tcp -j ACCEPT
+        iptables -A OUTPUT -p tcp -j ACCEPT
+        iptables -A INPUT -p udp -j ACCEPT
+        iptables -A OUTPUT -p udp -j ACCEPT
+Con Ferm:
+    domain ip {
+           table filter {
+           chain (INPUT OUTPUT) {
+           proto (udp tcp) ACCEPT;}
+           }
+    }
+
+
 fernapp
 [openjdk-6-jre unzip xvfb libxcomposite1 libxdamage1 x11-xkb-utils]. Acceso a aplicaciones gráficas desde el navegador. Descarga: https://bitbucket.org/MarkusKramer/fernapp/downloads/ una vez descomprimido el paquete:
 $ cd fernapp
