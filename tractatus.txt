@@ -12501,6 +12501,12 @@ $ lha -x archivo.lha (Descompimir)
 $ lha -v archivo.lha (Ver el contenido)
 
 
+libaa-bin
+Biblioteca de gráficos artísticos ASCII. Comprende los ejecutables: aafire [ver], aainfo, aasavefont y aatest
+$ aainfo
+$ aatest
+
+
 libpam-tmpdir
 Muchos programas usan $TMPDIR para almacenar archivos temporales. No todos son buenos para asegurar los permisos de esos archivos. libpam-tmpdir establece $TMPDIR y $TMP para sesiones PAM y establece los permisos bastante estrictos. Esto ayuda a la seguridad del sistema al tener una capa adicional de seguridad, lo que hace que tales ataques de enlaces simbólicos y otros ataques basados en tmp sean más difíciles o imposibles. El módulo pam_tmpdir, invoca pam-tmpdir-helper para crear un directorio temporal seguro para el usuario que lo invoca. No es dañino llamarlo a mano, pero no dará ningún diagnóstico ni mensaje de error aparte de su valor de retorno. Se registra en syslog.
 $ pam-tmpdir-helper
@@ -12733,10 +12739,22 @@ $ linux-version list (los lista todos)
 $ linux-version list | linux-version sort --reverse (lista los kernels y ordena del más nuevo al más viejo)
 
 
+liquidprompt
+Ofrece un promt modificado con información y coloreado.
+$ liquidprompt_activate
+$ liquidprompt_on (activarlo)
+$ liquidprompt_off (desactivarlo)
+
+
 listres
 Genera una lista de la base de datos de recursos de un widget. La lista muestra la clase en la que se define por primera vez cada recurso, el tipo y la instancia. Si no se proporcionan widgets específicos se imprimirá una lista de nombres de widgets y sus jerarquías de clase.
 $ listres -all (todos)
 $ listres -variable core (que los widgets se identifiquen por los nombres de las variables de registro de clase)
+
+
+listserialportsc
+Listar los puertos serie del pc. La salida contiene campos vid/pid/iserial.
+$ listserialportsc
 
 
 lmbench
