@@ -11520,6 +11520,18 @@ Muestra información en tiempo real sobre el tráfico de red.
 Una vez lanzada la aplicación, para salir pulsar X
 
 
+ipwatchd
+Demonio que analiza todos los paquetes ARP entrantes para detectar conflictos de IP. Se puede configurar para escuchar en una o más interfaces en modo activo o pasivo. En modo activo, IPwatchD protege el host antes de que se apodere de la IP respondiendo solicitudes ARP gratuitas recibidas de sistemas en conflicto. En modo pasivo, simplemente registra información sobre conflictos a través de la interfaz syslog estándar. La mencionada configuración ha de realizarse en el archivo:
+# nano /etc/ipwatch.conf
+  iface_configuration automatic
+  #iface eth0 active
+  #iface eth0:0 passive
+  defend_interval 10
+  user_script /usr/sbin/ipwatchd-script
+  syslog_facility daemon
+# ipwatchd -c /etc/ipwatchd.conf -d (activar el daemon)
+
+
 irb
 Interprete de comandos interactivo de ruby. Para entrar en la shell:
 	$ irb
