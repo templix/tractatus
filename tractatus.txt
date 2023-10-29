@@ -10109,6 +10109,12 @@ $ head -50 /var/log/maillog  (las primeras 50)
 $ head -5 archivo1 archivo2 (Muestra las 5 primeras lineas de los dos archivos)
 
 
+health-check
+monitorea los procesos y, opcionalmente, sus procesos secundarios y subprocesos durante un período de tiempo determinado. Al final del monitoreo, mostrará el tiempo de CPU utilizado, los eventos de activación generados y las operaciones de E/S de los procesos dados.
+$ health-check -d 10 -p ,emac (monitorear 10 segundos [por defecto 60] el proceso emacs)
+$ health-check -d 10 -p 9809 (lo mismo especificando PID)
+
+
 hegemon
 [libsensors4-dev cargo]. Monitoreo del sistema: Velocidad del ventilado, temperatura, CPU, memoria y uso de swap. El intervalo de monitorización es 3 segundos. Al estar escrito en lenguaje RUST, una vez instñalado:
 $ cargo install hegemon
