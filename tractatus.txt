@@ -11871,9 +11871,9 @@ Algunas opciones:
 
 jpeginfo
 Información y test de integridad de imagenes jpeg.
-$ jpeginfo -c imagen.jpeg
+$ jpeginfo -c imagen.jpeg (comprobar el archivo en busca de errores)
 $ jpeginfo -5 imagen.jpeg (Muestra el md5 de la imagen)
-$ jpeginfo -i imagen.jpeg
+$ jpeginfo -i -v imagen.jpeg (maxima información de archivo especificado)
 
 
 jpegjudge
@@ -11887,6 +11887,7 @@ Optimizar archivos .jpeg. Por defecto se sobreescriben los originales. Si no es 
 $ jpegoptim imagenes/*.jpg (Forma básica de todas las de un directorio)
 $ jpegoptim imagen.jpg -d optimizado (Colocando la optimización en otro directorio)
 $ jpegoptim -f imagen.jpg (Forzando optimización incluso si el resultado es más grande que el original)
+$ jpegoptim -t imagen.jpeg (borrando los marcadores en el archivo de salida)
 
 
 jpegtran
