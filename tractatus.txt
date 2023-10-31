@@ -12876,6 +12876,15 @@ y descomentar o completar las líneas:
 	MAILASATTACH=1
 
 
+loggedfs
+Sistema que puede registrar cada operación que ocurre dentro de un directorio y sus subdirectorios. loggedfs está basado en fuse y solo envía un mensaje a syslog cuando lo llama fuse.
+$ loggedfs -f -p /home/user/Documentos (probar el comando sin instalar un archivo de configuración. Mostrar ruta absoluta al directorio)
+$ loggedfs -c .config/loggedfs/loggedfs.xml -p /home/user/Documentos (especificando el archivo de configuración)
+$ loggedfs -l /var/log/loggedfs.log -c .config/loggedfs/loggedfs.xml -p /home/user/Documentos (especificando archivos de logs)
+$ fusermount -u /home/user/Documentos (terminar el registro)
+Nota.- Descomentar la linea "user_allow_other" en el archivo /etc/fuse.conf
+
+
 logger
 Enviar mensajes al demonio syslogd
 $ logger -i -t gnome-terminal -f /var/log/messages inicio terminal (escribirá en el registro el mesaje “inicio terminal” como remitido por “gnome-terminal” y guardando el PID)
