@@ -12957,6 +12957,11 @@ Software para visualizar ficheros de log que registra las peticiones de los visi
 # logstalgia /var/log/apache2/access.log
 
 
+logtool
+Analizador de archivos de registro y generador de informes de estilo syslog, capaz de producir ANSI, ASCII, CSV, HTML o simplemente resultados sin formato.
+$ cat /var/log/messages | logtool -t -s -p short -o HTML > /home/pep/logs/messages.html (formato de la hora corto [HH:MM] y no mostrar el campo "fuente" ni el campo "programa")
+
+
 logtop
 Herramienta para analizar el archivo de registro de logs como entrada.
 # tail -f /var/log/apache2/access.log | logtop
