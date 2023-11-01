@@ -12865,6 +12865,14 @@ $ locate parida.txt
 $ locate firefox/plugins
 
 
+location
+Consultar la base de datos de IPFire [base de datos de geolocalización de Internet] y determinar la ubicación en función de su dirección IP.
+$ location update (recargar la base de datos)
+$ location list-countries --show-continent --show-name (listado de todos los paises con su nombre y continente al que pertenecen)
+$ location lookup 2.142.97.159 (localizar una IP)
+$ location search-as "linux" (Buscar un sistema por nombre)
+
+
 logcheck
 Herramienta que analiza periódicamente todos los logs del sistema. En la instalación ya se instala como una tarea en el cron en el fichero /etc/cron.d/logcheck.
 Para recibir correos con los informes,Editar el fichero:
