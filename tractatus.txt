@@ -13767,6 +13767,23 @@ Monitorea las temperaturas, voltajes y rpm de ventiladores de refrigeración de 
 # mbmon -t -u -n (informando de la hora, el sistema y el hostname)
 
 
+mbw
+Determina el ancho de banda de la memoria de "copia" disponible para los programas del espacio de usuario.
+$ mbw 1000 (tamaño de la matriz para las pruebas de 1000 [ARRAY_SIZE])
+$ mbw -t 1 -n 3 1000 (3 ejecuciones por prueba y solo en la DUMB ["-t 0" para la MEMCY y "-t 2" para la MCBLOCK)
+mbw proporcionará tres métricas principales en los resultados:
+     MEMCPY: Mide el ancho de banda de la memoria al copiar datos utilizando la función memcpy estándar.
+     DUMB: Mide el ancho de banda de la memoria mediante un bucle simple para copiar datos.
+     MCBLOCK: Mide el ancho de banda de la memoria utilizando funciones de memoria con tamaños de bloque específicos.
+Más o menos los resultados pueden ser:
+    ...
+    Method: MEMCPY	Elapsed: 0.20857	MiB: 1000.00000	Copy: 4794.588 MiB/s
+    ...
+    Method: DUMB	Elapsed: 0.14374	MiB: 1000.00000	Copy: 6956.909 MiB/s
+    ...
+    Method: MCBLOCK	Elapsed: 0.09181	MiB: 1000.00000	Copy: 10892.356 MiB/s
+
+
 mc
 Gestor de archivos. La pantalla de Midnight Commander está divida en cuatro partes. La mayor parte de la pantalla está ocupada por los dos paneles de directorio. Por defecto, la segunda línea inferior de la pantalla es la línea de órdenes del sistema y la línea inferior muestra las etiquetas de las teclas de función. La línea superior es la barra de menú que si no está visible puede verse pulsando F9. MC pone a la vista dos directorios al mismo tiempo. Uno de los paneles es el panel actual. Algunas operaciones con archivos como Renombrar y Copiar utilizan por defecto el directorio del panel no seleccionado como destino, pero siempre solicitan una confirmación previa y podemos cambiarlo. Podemos ejecutar comandos del sistema desde MC simplemente escribiéndolos. Todo lo que escribamos aparecerá en la línea de órdenes del sistema y cuando pulsemos Intro, Midnight Commander ejecutará estos comandos. Si tenemos el ratón activado [ver gpm] para seleccionar texto mantener pulsada la tecla Mayúsculas mientras se selecciona.
 $ mc -S gotar.ini /media/servidor /home/usuario (Especificando un skin [Listado en /usr/share/mc/skins] y directorio de cada panel)
