@@ -13889,6 +13889,11 @@ Gestión de raids.
 /dev/sdb1 /dev/sdc1 (los dispositivos que vamos a usar)
 
 
+mdetect
+Herramienta para configurar automáticamente mouses
+$ mdetect -v
+
+
 mdf2iso
 Convertir imágenes MDF a ISO
 $ mdf2iso archivo.mdf archivo.iso
@@ -13908,6 +13913,11 @@ Entrada automática:
 [daemon]
 AutomaticLoginEnable=true
 AutomaticLogin=USUARIO
+
+
+mdns-scan
+Herramienta para buscar servicios mDNS/DNS-SD publicados en la red local. Recupera una lista de todos los servicios registrados en el enlace local.
+$ mdns-scan
 
 
 mdp
@@ -13961,6 +13971,12 @@ opciones:
 -M module (Especificar un módulo de los disponibles)
 
 
+melt
+Editor de video y reproductor de audio.
+$ melt video.mp4
+$ melt audio.wav
+
+
 members
 Muestra los miembros del grupo especificado.
 $ members -a grupo  (todos sus miembros)
@@ -13968,13 +13984,37 @@ $ members -p grupo  (el usuario primario)
 $ members -s grupo  (los secundarios)
 
 
-memória
+memoria
 Liberar memória física
 # echo 3 > /proc/sys/vm/drop_caches
 
 
+memstat
+Enumera todos los procesos, ejecutables y bibliotecas compartidas que están consumiendo memoria virtual.
+$ memstat -v
+$ memstat -p PID
+
+
 memtest86
 [memtest86+]. Software diseñado para encontrar problemas que pueden afectar a los módulos de memoria RAM del equipo. La aplicación requiere iniciarse independiente del sistema operativo y consiste en escribir una serie de datos con 9 patrones de escritura distintos a la totalidad de direcciones de la memoria RAM. Una vez realizada la escritura se leerá el contenido escrito en la memoria RAM y se comprobará que sea el mismo que el contenido original. La duración del test es infinita y por lo tanto deberemos ser nosotros mismos cuando decidimos pararlo, o sea que cada "pasada" significa escribir y leer los 9 patrones de escritura distintos una vez. Si se realizan 3 "pasadas" significa repetir el test completo 3 veces. Si no se desactiva la opción se encuentra en el gestor de arranque grub [ver]
+
+
+memtester
+Utilidad para probar el subsistema de memoria en busca de fallas.
+$ memtester 10 2 (con 10 MB y 2 bucles)
+
+
+mencal
+Calendario de ciclos menstruales. El archivo de configuración si no lo crea la misma aplicación despues de lanzarse con los datos de la opción -c. Puede configurarse personalmente editando el archivo:
+$ nano ~/.mencalrc
+  length 28
+  duration 4
+  name periodo
+  color yellow
+$ mencal -m -3 (calendario empieza el lunes, mostrar 3 meses)
+$ mencal -m -y (que muestre todo el año actual)
+$ mencal -m -y 2025 (el año especificado)
+$ mencal -m -3 -c s=20231101,l=28,d=4,n=periodo,f=~/.mencalrc,c=yellow (sin archivo de configuración)
 
 
 mencoder
