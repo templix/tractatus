@@ -14796,6 +14796,11 @@ Atajos
 	3 (Avanzar canción)
 
 
+mp3check
+Utilidad para la detección de mp3 incompletos o con errores.
+$ mp3check 3 -e -r . (sólo los mp3 del presente directorio de forma recursiva y verificar la coherencia y encabezados e imprimir los mensajes de error)
+
+
 mp3gain
 Analiza y ajusta archivos MP3 para que tengan el mismo nivel de volumen.
 $ mp3gain -r -k *.mp3 (Normaliza todos los archivos  del directorio)
@@ -14824,45 +14829,6 @@ mp3report
 Programa para escanear una lista de directorios y subdirectorios creando un informe desde una plantilla HTML. También calcula varias estadísticas y duración de cada canción.
 $ mp3report --title=Titulos directorio (especificando un título)
 $ mp3report --title=Titulos --outfile=musica.html directorio (especificando archivo de salida)
-
-
-mpv
-Reproductor de video gobernado exclusivamente con el teclado.
-Instalación en el caso de que no se encuentre en los repos:
-	# apt-get install git
-	# git clone https://github.com/mpv-player/mpv-build.git
-	# cd mpv-build/
-	# ./update
-	# apt-get install devscripts equivs
-	# dpkg -i mpv-build-deps_1.0_amd64.deb
-	# mk-build-deps
-	El comando anterior puede arrojar muchos errores. Ni caso.
-	# apt-get -f install
-	# debuild -uc -us -b -j2
-	# dpkg -i ../mpv_0.3.5_amd64.deb
-Archivo de configuración:
-$ nano .mpv/config
-Algunos ajustes:
-geometry=50%:50% (Medida de la pantalla)
-fs=yes (Iniciar con pantalla maximazada)
-volume=100 (Indicar el volumen por defecto)
-cache=50000 (cache de la aplicación)
-msgcolor=yes
-Algunos atajos:
-	q (Salir)
-	v (Mostrar /esconder los subtítulos)
-	r y t (Cambiar la posición vertical del subtítulo)
-	o (1ª pulsación muestra el tiempo transcurrido, 2ª porcentaje y tiempo total)
-	p (Pause / Renaudar)
-	s (Sacar una captura)
-	S (Sacar una captura con los subtítulos)
-	f (Pantalla completa)
-	m (Silenciar)
-	1 y 2 (Aumenta / disminuye constraste)
-	3 y 4 (Aclara / oscurece la imagen)
-	5 y 6 (Gamma)
-	7 y 8 (Aumentar / disminuir brillo)
-$ mpv video
 
 
 mpd
@@ -14946,6 +14912,45 @@ Las busquedas se realizan anteponiendo un punto al video a buscar [.madonna] y e
 Para más opciones:
 	h
 # pip3 install mps-youtube --upgrade (actualizar la aplicación)
+
+
+mpv
+Reproductor de video gobernado exclusivamente con el teclado.
+Instalación en el caso de que no se encuentre en los repos:
+	# apt-get install git
+	# git clone https://github.com/mpv-player/mpv-build.git
+	# cd mpv-build/
+	# ./update
+	# apt-get install devscripts equivs
+	# dpkg -i mpv-build-deps_1.0_amd64.deb
+	# mk-build-deps
+	El comando anterior puede arrojar muchos errores. Ni caso.
+	# apt-get -f install
+	# debuild -uc -us -b -j2
+	# dpkg -i ../mpv_0.3.5_amd64.deb
+Archivo de configuración:
+$ nano .mpv/config
+Algunos ajustes:
+geometry=50%:50% (Medida de la pantalla)
+fs=yes (Iniciar con pantalla maximazada)
+volume=100 (Indicar el volumen por defecto)
+cache=50000 (cache de la aplicación)
+msgcolor=yes
+Algunos atajos:
+	q (Salir)
+	v (Mostrar /esconder los subtítulos)
+	r y t (Cambiar la posición vertical del subtítulo)
+	o (1ª pulsación muestra el tiempo transcurrido, 2ª porcentaje y tiempo total)
+	p (Pause / Renaudar)
+	s (Sacar una captura)
+	S (Sacar una captura con los subtítulos)
+	f (Pantalla completa)
+	m (Silenciar)
+	1 y 2 (Aumenta / disminuye constraste)
+	3 y 4 (Aclara / oscurece la imagen)
+	5 y 6 (Gamma)
+	7 y 8 (Aumentar / disminuir brillo)
+$ mpv video
 
 
 mrename
@@ -15089,11 +15094,17 @@ Atajos mientras está la aplicación ejecutándose:
 	q salir
 
 
+mtd-utils
+Utilidades para manipular dispositivos con tecnología de memoria, como memoria flash, Disk-On-Chip o ROM. Incluye las siguientes herramientas: docfdisk, doc_loadbios, flashcp, flash_erase, flash_eraseall, flash_lock, flash_otp_dump, flash_otp_info, flash_otp_lock, flash_otp_write, flash_unlock, ftl_check, ftl_format, jffs2dump, jffs2reader, lsmtd, mkfs.jffs2, mkfs.ubifs, mtd_debug, mtdinfo, mtdpart, nanddump, nandtest, nandwrite, nftldump, nftl_format, recv_image, rfddump, rfdformat, serve_image, sumtool, ubiattach, ubiblock, ubicrc32, ubidetach, ubiformat, ubihealthd, ubimkvol, ubinfo, ubinize, ubirename, ubirmvol, ubirsvol, ubiupdatevol.
+
+
 multitail
 Abrir en una ventana varios procesos tail.
 $ multitail /var/log/messagess /var/log/apache2/access.log
 $ multitail -R 2 -l "netstat -t" -ci green /var/log/apache2/access.log -ci yellow /var/log/apache2/error.log
 $ multitail -a netstat.log -R 2 -l "netstat -t tcp" /var/log/apache/access.log
+# multitail -n 20 /var/log/dpkg.log (ver las últimas 20 lineas)
+# multitail -n 20 -iw 2 /var/log/syslog -i /var/log/sudo.log (ver las 20 últimas filas de dos archivos y actualizar cada 2 segundos)
 Algunas opciones:
 -ci red (muestra los log en rojo)
 -R 2     (actualiza cada 2 segundo)
