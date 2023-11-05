@@ -16400,6 +16400,18 @@ Veamos todo un proceso activando la opción y viendo como saltarsela:
 	$ date >| fecha.txt (saltarse la protección con >|)
 
 
+nodau
+sencillo programa para tomar notas basado en consola. Le permite crear, editar y ver notas fácilmente, y buscarlas por nombre o fecha
+$ nodau new linux (crear una nueva nota con el nombre "linux")
+$ nodau edit linux (editar la nota "linux")
+$ nodau list (listar todas las entradas)
+$ nodau list linux (ver si existe una nota llamada "linux")
+$ nodau show linux (muestra el contenido de la nota "linux")
+$ nodau encrypt emacs (encriptar la nota "emacs". Pide contraseña y confirmación)
+$ nodau decrypt emacs (pide contraseña y lo desencripta sin mostrar)
+$ nodau del linux (elimina la nota "linux")
+
+
 nohup
 permite mantener activo un proceso, incluso después de haber cerrado la sesión de usuario.
 $ nohup sleep 10000 &   (lanzar el proceso)
