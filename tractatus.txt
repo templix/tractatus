@@ -15809,7 +15809,7 @@ opciones
 
 
 netdiag
-Colección de pequeñas herramientas para analizar el tráfico de red y la configuración de hosts remotos. Es de gran ayuda si su sistema muestra un comportamiento extraño en la red y desea saber qué es lo que ocurre.
+Colección de pequeñas herramientas para analizar el tráfico de red y la configuración de hosts remotos. Incluye los ejecutables: tcpblast, netload, trafshow, netwatch, statnet y tcpspray.
 
 
 netdiscover
@@ -15859,8 +15859,25 @@ netplug
 Demonio que monitorea el estado del enlace de las tarjetas de red y configura la red en eventos de conexión y desconexión. Es similar a ifplugd, pero usa NETLINK en lugar de sondear regularmente el estado del enlace. Esto mejora el consumo de energía con las computadoras portátiles, pero no funciona con todas las tarjetas.
 
 
+netproc
+monitorea el tráfico de la red e intenta averiguar a qué proceso pertenece este tráfico; esto es útil para identificar los procesos que consumen recursos de la red y solucionar problemas.
+# netproc -i enp1s0 (forma básica especificando la interfaz. Por defecto todas)
+# netproc -p tcp -c -f "netproc.txt" (visualizar cada acción activa del proceso tcp y guardar datos en el archivo especificado en el directorio actual)
+
+
+netr
+Monitor de interfaz de red simple que muestra estadísticas de tráfico
+$ netr
+
+
 netrik
 Navegador WWW avanzado en modo texto. Su propósito es dar acceso a la mayor cantidad de Web posible en modo texto, sin renunciar a ninguna comodidad. La interfaz de usuario se parece más o menos a una combinación de gVim y PINE. El problema actual [2020] es que netrik no admite HTTPS ni IPv6 todavía.
+
+
+netselect
+Probar la velocidad de los servidores de red para elegir el más rápido. Puede procesar una lista de servidores y elegir el más rápido/más cercano automáticamente.
+# netselect -vv -t 20 http://deb.debian.org/debian/ (más cantidad de información [-v, -vv, -vvv] y probando 20 paquetes de envio [por defecto 10])
+# netselect -vv -s 5 http.us.debian.or (que muestre los 3 mejores servidores y el del final sea el mejor)
 
 
 netsniff-ng
