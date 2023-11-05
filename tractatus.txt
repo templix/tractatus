@@ -15713,6 +15713,12 @@ $ ncal -A 2 (los proximos tres meses [0,1 y 2])
 $ ncal -B 2 (los anteriores tres meses [2, 1 y 0])
 
 
+ncdt
+Muestra un árbol de directorios muy parecido al árbol estándar del comando tree[ver]. Imprime información resumida en lugar del tamaño de archivo especial del directorio e información sobre archivos mp3.
+Es particularmente útil para indexar CDs.
+$ ncdt -d -b (mostrar sólo los directorios e imprimir información de su tasa de bits)
+
+
 ncdu
 Muestra el espacio usado por los archivos y directorios del directorio actual. Como “du” pero mostrando graficos y color.
 $ ncdu /home/usuario
@@ -15747,9 +15753,20 @@ ncurses-examples
 Contiene programas que demuestran las posibilidades de ncurses y prueban la biblioteca. Los ejemplos incluyen varios programas clásicos como solitario, batallas, reloj, ajedrez, las torres de Hanoi y muchos otros. Colocar en el navegador: file:///usr/lib/ncurses/examples/
 
 
+ne
+Editor. Admite caracteres UTF-8, varias columnas y resaltado de sintaxis. Utiliza combinaciones de teclas breves, intuitivas y fáciles de recordar y, al mismo tiempo, proporciona todas las funciones que debería tener un editor. Es totalmente configurable, lo que permite al usuario cambiar el contenido de los distintos menús, crear fácilmente pequeñas macros y cambiar fácilmente las combinaciones de teclas existentes, siendo al mismo tiempo un editor pequeño y rápido. F1 para abrir menús y Esc para cerrarlos
+$ ne --read-only --utf8 file.txt (solo lectura y codificación utf8)
+
+
 needrestart
 Comprueba qué demonios deben reiniciarse después de las actualizaciones de alguna biblioteca como actualizaciones del kernel, actualizaciones pendientes de microcódigo para CPU Intel, reiniciosd necesarios de contenedores o basados en interpretes... Está inspirado en checkrestart del paquete debian-goodies [ver].
 # needrestart
+
+
+neo
+Recrea el efecto de lluvia digital de "The Matrix". Secuencias de caracteres aleatorios que se desplazan sin cesar por la pantalla de la terminal.
+$ neo (forma básica)
+$ neo -c red -m "linux es un sistema genial" (las letras en rojo y creando un mensaje en el centro de la pantalla)
 
 
 neofetch
@@ -15839,6 +15856,12 @@ Pulsando:
 netload
 [netdiag]. Muestra la carga en la interfaz de red sin usar la propia interfaz. netload simplemente accede a las estadísticas del kernel. El archivo $HOME/.netloadrc permite agregar cualquier cantidad de interfaces de red, modificar la configuración de alarma y las preferencias de correo electrónico.
 # netload eth0 -t 2 (actualizando cada 2 segundos)
+
+
+netmask
+Determina el conjunto más pequeño de máscaras de red para especificar un rango de hosts. Programa útil si se trabaja con firewalls o enrutadores.
+$ netmask -d -s -c localhost (máxima información, salida estandar y formato CIDR de salida)
+Nota.- El sistema de direcciones IP tal como lo utilizamos actualmente [IPv4[, hace tiempo que está agotado. Todas las direcciones posibles [al menos 4.294.967.296] ya han sido asignadas. Hace unas décadas hubo que pensar en una solución para resolver el problema. CIDR ayuda a ampliar la cantidad de direcciones disponibles.
 
 
 netpbm
