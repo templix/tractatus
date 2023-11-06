@@ -19773,13 +19773,36 @@ Monitorear los contadores snmp del kernel y las estadísticas de la interfaz de 
 
 
 rtcwake
-Suspender/hibernar el pc e iniciarlo a una hora determinada.
-# rtcwake -u -m disk -s 150 && deluge (Asume el tiempo UTC, suspende a disco y vuelve a activarse dentro de 150 minutos arrancando la aplicación deluge)
-Otros modos [m]:
-standby (Modo por defecto y el que menos energia ahorra)
-mem (Suspende a RAM. Más ahorrativo)
-off (Apaga el ordenador completamente)
-no (No suspende inmediatamente, unicamente establece la hora en que despierta el sistema)
+Entrar en un estado de suspensión del sistema hasta la hora de activación especificada.
+# rtcwake -m show -v (Mostar si una suspensión o arranque está activo o no)
+# rtcwake -m mem -s 10 (suspender la RAM y reiciciar en 10 segundos)
+# rtcwake -m no -l -t `date +%s -d 'today 18:30:00'` ([-m no] no suspender, [-l] hardware configurado en hora local y [-t] hora de arrancar, hoy a las 6,30 de la tarde)
+# rtcwake -m disk -u -s 60 (-u asume que el reloj del hardware está configurado en UTC, [-m disk] suspende en disco y -s lo reactiva un minuto después [en segundos])
+# rtcwake --list-modes
+Los modos son los siguientes:
+    freeze (Los procesos están congelados, todos los dispositivos suspendidos y todos los procesadores inactivos. Ahorra menos energía que suspender a RAM, porque el sistema todavía está en estado de ejecución)
+    mem (Suspensión a RAM. Ofrece ahorros de energía ya que todo el sistema se pone en un estado de bajo consumo, excepto la memoria, que se coloca en modo de actualización automática para conservar su contenido.
+    disk (Suspensión en disco. Este estado ofrece el mayor ahorro de energía. Funciona de manera similar a suspender en RAM, pero incluye un paso final de escribir el contenido de la memoria en el disco)
+    off (Poweroff. Esto se hace llamando a /sbin/shutdown. No cuenta con el apoyo oficial de ACPI, pero normalmente funciona)
+    no (No suspender, solo configurar la hora de activación RTC)
+    on (No suspender, pero lee el dispositivo RTC hasta que aparezca la hora de activación)
+    disable (Desactiva una activación previamente configurada)
+    show (Imprima la información de la alarma en formato: "alarm: off|on <time>". "Time" está en formato de salida ctime, por ejemplo, "alarm: on Tue Nov 16 04:48:45 2010")
+Nota.- La opción -a lee de forma automática la configuración del reloj del hardware esté configurado en UTC [-u] o en hora local [-l]. Este es el valor predeterminado.
+# rtcwake -m mem -s 120 && firefox (suspende el pc a RAM, la activa dos minutos más tarde y luego inicia Firefox)
+# rtcwake -m disk --date +15min (Suspender en disco y reactivarse 15 minutos después)
+# rtcwake -m freeze --date 202311051230 (Congele el sistema y recupérelo en una fecha y hora determinadas [2023/11/05 12:30])
+# rtcwake -m disable (Desactivar una alarma previamente configurada)
+# rtcwake -m on --date 20:30 (Realizar ensayo para reactivar la computadora en un momento determinado. Cancelar con Ctrl+c)
+La marca de tiempo puede ser cualquiera de las siguientes:
+   AAAAMMDDhhmmss
+   AAAA-MM-DD hh:mm:ss
+   AAAA-MM-DD hh:mm (los segundos se establecerán en 00)
+   AAAA-MM-DD (la hora se establecerá en 00:00:00)
+   hh:mm:ss (la fecha será hoy)
+   hh:mm (la fecha se establecerá en hoy, los segundos en 00)
+   tomorrow (la hora está establecida en 00:00:00)
+   +5min
 
 
 rtkitctl
