@@ -19796,7 +19796,7 @@ Entrar en un estado de suspensión del sistema hasta la hora de activación espe
 # rtcwake -m disk -u -s 60 (-u asume que el reloj del hardware está configurado en UTC, [-m disk] suspende en disco y -s lo reactiva un minuto después [en segundos])
 # rtcwake --list-modes
 Los modos son los siguientes:
-    freeze (Procesos congelados, dispositivos suspendidos y procesadores inactivos. Ahorra menos energía que suspender a RAM, porque el sistema está ejecución)
+    freeze (Procesos congelados, dispositivos suspendidos y procesadores inactivos. Ahorra menos energía porque el sistema está ejecución)
     mem (Suspensión a RAM. Ahorra energía ya que el sistema se pone en un estado de bajo consumo, excepto la memoria para conservar su contenido.
     disk (Suspensión en disco. Mayor ahorro de energía. Similar a suspender en RAM, pero incluye escribir el contenido de la memoria en el disco)
     off (Poweroff. Esto se hace llamando a /sbin/shutdown. No cuenta con el apoyo oficial de ACPI, pero normalmente funciona)
