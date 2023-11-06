@@ -19772,6 +19772,22 @@ Monitorear los contadores snmp del kernel y las estadísticas de la interfaz de 
 # rtacct -d 5 (ejecutar en modo daemon y recolectando las estadisticas cada 5 segundos)
 
 
+rtc
+[Real Time Clock]. Dispositivo que se encarga de mantener la hora y fecha del sistema actualizados incluso cuando este está apagado. Para comprobar si el pc tiene RTC:
+# grep -i rtc /boot/config-6.1.0-13-amd64 (substituir por el kernel real instalado lanzando el comando: uname -r)
+...
+CONFIG_RTC_HCTOSYS_DEVICE="rtc0"
+...
+# cat /sys/class/rtc/rtc0/wakealarm (verificar si hay algún arranque configurado. Si no devuelve ningún valor significa que no se ha configurado ningún arranque)
+Para probar si el arranque programado funciona, primero se restablece el arranque a cero y luego se establece que arranque el pc en 3 minutos al cerrar:
+# echo 0 > /sys/class/rtc/rtc0/wakealarm
+# echo `date '+%s' -d '+ 3 minutes'` > /sys/class/rtc/rtc0/wakealarm
+Si ahora volvemos a lanzar:
+# /sys/class/rtc/rtc0/wakealarm
+Nos da un número parecido a 1699298144 que son la cantidad de segundos transcurridos desde la medianoche UTC del 1 de enero de 1970 [inicio de la época unix] hasta el momento que se lanza el comando. A los 3 minutos de cerrar el pc ha de reiniciarse. Más información sobre el driver rtc:
+$ cat /proc/driver/rtc
+
+
 rtcwake
 Entrar en un estado de suspensión del sistema hasta la hora de activación especificada.
 # rtcwake -m show -v (Mostar si una suspensión o arranque está activo o no)
