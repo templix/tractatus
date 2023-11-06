@@ -19796,14 +19796,14 @@ Entrar en un estado de suspensión del sistema hasta la hora de activación espe
 # rtcwake -m disk -u -s 60 (-u asume que el reloj del hardware está configurado en UTC, [-m disk] suspende en disco y -s lo reactiva un minuto después [en segundos])
 # rtcwake --list-modes
 Los modos son los siguientes:
-    freeze (Los procesos están congelados, todos los dispositivos suspendidos y todos los procesadores inactivos. Ahorra menos energía que suspender a RAM, porque el sistema todavía está en estado de ejecución)
-    mem (Suspensión a RAM. Ofrece ahorros de energía ya que todo el sistema se pone en un estado de bajo consumo, excepto la memoria, que se coloca en modo de actualización automática para conservar su contenido.
-    disk (Suspensión en disco. Este estado ofrece el mayor ahorro de energía. Funciona de manera similar a suspender en RAM, pero incluye un paso final de escribir el contenido de la memoria en el disco)
+    freeze (Procesos congelados, dispositivos suspendidos y procesadores inactivos. Ahorra menos energía que suspender a RAM, porque el sistema está ejecución)
+    mem (Suspensión a RAM. Ahorra energía ya que el sistema se pone en un estado de bajo consumo, excepto la memoria para conservar su contenido.
+    disk (Suspensión en disco. Mayor ahorro de energía. Similar a suspender en RAM, pero incluye escribir el contenido de la memoria en el disco)
     off (Poweroff. Esto se hace llamando a /sbin/shutdown. No cuenta con el apoyo oficial de ACPI, pero normalmente funciona)
     no (No suspender, solo configurar la hora de activación RTC)
     on (No suspender, pero lee el dispositivo RTC hasta que aparezca la hora de activación)
     disable (Desactiva una activación previamente configurada)
-    show (Imprima la información de la alarma en formato: "alarm: off|on <time>". "Time" está en formato de salida ctime, por ejemplo, "alarm: on Tue Nov 16 04:48:45 2010")
+    show (Imprima la información de la alarma en formato: "alarm: off|on <time>". Por ejemplo, "alarm: on Tue Nov 16 04:48:45 2010")
 Nota.- La opción -a lee de forma automática la configuración del reloj del hardware esté configurado en UTC [-u] o en hora local [-l]. Este es el valor predeterminado.
 # rtcwake -m mem -s 120 && firefox (suspende el pc a RAM, la activa dos minutos más tarde y luego inicia Firefox)
 # rtcwake -m disk --date +15min (Suspender en disco y reactivarse 15 minutos después)
