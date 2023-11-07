@@ -18507,16 +18507,6 @@ Herramienta para mostrar información sobre reguladores, sensores y relojes.
 # powerdebug -d (volcar info por pantalla)
 
 
-poweroff
-[halt, reboot]. Apagar el ordenador. Los 3 comandos tienen las mismas opciones.
-$ poweroff --halt (Detener la máquina independientemente de que comando de los tres se use)
-$ poweroff --reboot (Reinicie la máquina, independientemente de cuál de los tres comandos se invoque)
-
-
-powertop
-visualiza las aplicaciones que más energía consumen. Abre varias pestañas a las que se accede con las teclas del cursor.
-
-
 powerline
 [fonts-powerline]. Utilidad escrita en python que muestra otra forma de ver el prompt de la shell.
 $ mkdir ~/.config/powerline
@@ -18530,6 +18520,22 @@ Recargar la configuración:
 para tener la misma configucación como root:
 	# cp -f .bashrc /root/.bashrc
 El resultado se observa al abrir una nueva terminal.
+
+
+poweroff
+[halt, reboot]. Apagar el ordenador. Los 3 comandos tienen las mismas opciones.
+$ poweroff --halt (Detener la máquina independientemente de que comando de los tres se use)
+$ poweroff --reboot (Reinicie la máquina, independientemente de cuál de los tres comandos se invoque)
+
+
+powerstat
+Utilidat para medir el consumo de energía de un portatil con fuente de alimentación por batería. Proporciona información sobre el consumo de energía del sistema.
+$ powerstat (Mida la potencia con el valor predeterminado de 10 muestras con un intervalo de 10 segundos)
+$ powerstat interval 20 (Mida la potencia con un número especificado de muestras)
+
+
+powertop
+visualiza las aplicaciones que más energía consumen. Abre varias pestañas a las que se accede con las teclas del cursor.
 
 
 ppt
