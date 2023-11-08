@@ -17467,6 +17467,12 @@ Monitor de tráfico de red
 # pads -i eth0
 
 
+pagein
+Herramienta que obliga a las páginas que están en intercambio a volver a paginarse en la memoria. Es principalmente útil para probar el subsistema VM e intercambiar subsistemas con fines de prueba.
+# pagein -p 2977 (epecificando el PID)
+# pagein -a -v (a todos los PIDs y mostrando el proceso)
+
+
 pagemon
 Herramienta de monitoreo de memoria interactiva basada en ncurses que permite explorar el mapa de memoria de un proceso activo en ejecución.
 # pagemon -p PID
