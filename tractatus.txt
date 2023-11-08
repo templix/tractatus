@@ -18737,18 +18737,20 @@ $ ps2pdf archivo_A5.ps archivo_A5.pdf  (convertir nuevamente a pdf listo para im
 
 
 psad
-Demonio. Escaneador de ataques a puertos. Los resultados en /var/log/psad/analysis.out
+Analiza logs de iptables para detectar y opcionalmente bloquear IPs infractoras. Herramienta formada por tres demonios del sistema que se ejecutan y analizan mensajes de registro de iptables para detectar escaneos de puertos y el resto de tráfico sospechoso. Incluye 4 herramientas: nf2csv, fwcheck_psad, kmsgsd y psadwatchd. El archivo de configuración, por defecto, se encuentra en "/etc/psad/psad.conf". Los resultados en /var/log/psad/analysis.out.
 Habilitar logs en iptables:
 # iptables -A INPUT -j LOG
 # iptables -A FORWARD -j LOG
 Lanzar los siguientes tres comandos:
 # psad -R (Reiniciar psad)
-# psad --sig-update (Recargar firmas)
+# psad --sig-update (Recargar firmas para que pueda reconocer correctamente los tipos de ataques conocidos)
 # psad -H (Releer archivo pad)
 Consultar estado con:
 # psad -status
+# psad -A (analizar los logs de iptables en busca de scaneos)
 # psad -A -i eth0 (Analizar a partir de los logs de iptables e indicando red)
-Archivo de configuración en /etc/psad/psad.conf
+# psad -F (eliminar cualquier bloqueo de firewall generado automáticamente)
+# psad -S (Muestra el estado de cualquier proceso psad que pueda estar ejecutándose. La salida muestra una lista de los paquetes que psad ha procesado, junto con todas las direcciones IP y los niveles de peligro correspondientes que han escaneado la red)
 
 
 psbook
