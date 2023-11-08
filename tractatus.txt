@@ -17112,6 +17112,16 @@ $ firefox /usr/share/openclipart/svg/electronics/battery/battery_snuatautisticid
 $ firefox /usr/share/openclipart/png/animals/birds/acquila_architetto_franc_01.png
 
 
+opendoas
+[doas] Versión  del comando doas de OpenBSD que es un reemplazo mínimo de sudo. Ejemplos de archivo de configuración /usr/share/doc/opendoas/examples/doas.conf y el archivo real de configuración:
+# nano /etc/doas.conf
+Colocar el contenido que deseemos: al usuario de forma persistente, cmd nombre_del_comando args argumento_deseado y el grupo del usuario:
+permit persist usuario
+permit nopass usuario as root cmd apt args update
+permit nopass usuario as root cmd apt args upgrade
+permit :grupo_usuario
+
+
 openoffice
 Suite ofimática
 $ soffice --writer (--calc, --impress, --draw, --math, --base) Arrancar el programa
