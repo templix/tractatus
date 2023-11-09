@@ -9025,6 +9025,10 @@ $ getfacl -c /var/www (Sólo muestra los permisos)
 $ getfacl -R /var/www (De forma recursiva en todos los archivos y subdirectorios)
 
 
+getopt
+se utiliza para analizar las opciones en líneas de comando para facilitar su análisis por parte de los procedimientos del shell y para comprobar si las opciones son válidas. Por ejemplo, si tiene un script que acepta las opciones -a, -b y -c, getopts permite combinarlas como -abc, -bca o -bac, etc.
+
+
 getpcaps
 Muestra las capacidades en los procesos indicados por el valor pid indicado. Un pid  0 muestra las capacidades del propio proceso que está ejecutando getpcaps.
 $ getpcaps --verbose 1247 (del PID mencionado)
