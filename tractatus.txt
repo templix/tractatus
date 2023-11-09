@@ -12061,6 +12061,16 @@ $ snap install kesty-whatsapp
 $ snap run kesty-whatsapp (arrancar kesty-whatsapp. Pide ingresar el código QT en el móvil para activar la aplicación)
 
 
+keyctl
+[keyutils]. Este programa se utiliza para controlar la instalación de administración de claves de varias maneras usando una variedad de subcomandos.
+$ keyctl list @us (Enumerar las claves actuales en la sesión predeterminada del usuario)
+$ keyctl show
+$ keyctl read 898972716 (Leer una clave de la salida anterior y formatearla en hexadecimal si no se puede imprimir)
+$ keuctl pipe 898972716 (Leer una clave y formatearla tal como está)
+$ keyctl session
+$ keyctl (muestra la gran variedad de subcomandos que pueden emplearse)
+
+
 kickpass
 Forma simple de crear contraseñas seguras
 # kickpass init (inicia un nuevo directorio seguro de contraseña. Predeterminado a ~/.kickpass)
