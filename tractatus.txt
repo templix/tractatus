@@ -312,6 +312,16 @@ Algunas teclas de control:
 	Ctrl c (Sale del programa)
 
 
+agetty
+Alternativa a getty. Abre un puerto tty, pide un nombre de usuario e invoca el comando /bin/login. Es un programa que se ejecuta en una computadora host que administra terminales físicos o virtuales para permitir el acceso de múltiples usuarios. Tiene algunas características no-estandar que son útiles para líneas de cable y líneas telefónicas.
+$ agetty 9600 ttyS1
+$ agetty -8 – linux (opciones para tty de 8 bits, '-' la entrada estándar ya está conectada a una tty y 'linux' es el valor de la variable de entorno TERM)
+$ agetty -8 -t 5 linux (tiempo de espera del proceso de inicio de sesión 5 segundos)
+$ agetty --local-line 9600 ttyS1 vt100
+$ agetty --extract-baud --timeout 60 ttyS1 9600,2400,1200 (Para una línea de marcación de estilo antiguo con un módem de 9600/2400/1200 baudios)
+$ agetty --wait-cr --init-string 'ATE0Q1&D2&C1S0=1\015' 115200 ttyS1 (Para un módem Hayes con una interfaz fija de 115200 bps a la máquina. La cadena de inicio de ejemplo desactiva el eco del módem y los códigos de resultado, hace que el módem/computadora rastree el módem/módem DCD, hace que una caída de DTR cause una desconexión y activa la respuesta automática después de 1 pitido)
+
+
 aha
 Lee el texto de entrada, lo convierte a HTML en color y lo escribe en la salida.
 $ echo q | htop | aha -b -l > htop.html (Cree un archivo HTML con un fondo negro a partir de la salida de htop. La opción -l anula otros comandos de nueva línea que usa htop)
