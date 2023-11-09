@@ -9016,8 +9016,19 @@ $ getfacl -R /var/www (De forma recursiva en todos los archivos y subdirectorios
 
 
 getpcaps
-Lista las capabilities de un proceso. [relacionado con getcap y setcap]
-$ getpcaps ping
+Muestra las capacidades en los procesos indicados por el valor pid indicado. Un pid  0 muestra las capacidades del propio proceso que está ejecutando getpcaps.
+$ getpcaps --verbose 1247 (del PID mencionado)
+Otra forma de ver las capacidades de un proceso:
+$  cat /proc/1247/status | grep Cap
+$ capsh --decode=00000000a80425fb (para decodificar el número hexadecimal de la salida anterior en CapInh)
+Nota.- Cada cláusula consta de una lista de nombres de capacidades separados por comas o la palabra "all" [especifica todas las capacidades], seguida de una lista de acciones. Una lista de acciones consta de una secuencia de pares de indicadores de operador. Los operadores legales son: `=', '+' y `-'. Los flags son: 'e', 'i' y 'p' [Effective, Inheritable y Permitted , Efectivo, Heredable y Permitido ]. all=p" significa reducir todas las capacidades en los conjuntos Effective y Inheritable pero aumentar todas las capacidades Permitted; o "cap_fowner=ep" significa aumentar la capacidad de anulación de propiedad de archivos Effective y Permitted mientras se reduce la capacidad Inheritable. Podemos profundizar en cada capacidad para comprender su significado y función:
+     cap_chown: permite que el proceso cambie la propiedad de los archivos
+     cap_dac_override: permite que el proceso omita los controles de acceso discrecionales [DAC], lo que le permite acceder a archivos incluso si las comprobaciones de permisos estándar denegarían el acceso.
+     cap_audit_write: permite que el proceso escriba registros de auditoría para monitorear y rastrear la actividad del sistema
+     cap_setfcap: permite que el proceso establezca capacidades de archivos, que son controles de acceso adicionales más allá de los permisos tradicionales.
+     +i – : significa las capacidades heredables que se pueden pasar a procesos secundarios
+En el caso de que el operador principal sea '=' o "all=" y no se proporcione una lista de capacidades, se supone que la lista de acciones se refiere a 'todas' las capacidades.
+
 
 
 getsebool
