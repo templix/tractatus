@@ -529,6 +529,25 @@ $ an -l 4 'linux' (limitando el número de anagramas a los de máximo 4 palabras
 $ an -m 3 'juan gomez' (solo poner grupos de palabras de 3 letres)
 
 
+anacron
+Puede utilizarse para ejecutar comandos periódicamente, con una frecuencia especificada en días.  A diferencia de cron [ver], no asume que la máquina esté funcionando continuamente.  Por lo tanto, puede usarse en máquinas que no funcionan 24 horas al día, para controlar tareas diarias, semanales y mensuales que normalmente se usa cron. Si cuando ha llevarse a cabo la tarea la máquina está apagada, la próxima vez que sea iniciada esperara los minutos especificados en "delay" y realizara la tarea indicada sin esperar al día siguiente. En el archivo de configuración /etc/anacrontab se han de specificar las tareas con el siguiente esquema: periodo_tarea retardo_ejecución identificador comando
+    periodad_tarea: frecuencia con la cual se realizará la tarea: @daily o 1 [diario], @weekly o 7 [semanal],  @monthly o 30 [mensual] o 50 [cada 50 dias]
+    retarde_ejecución: Indica la cantidad de minutos antes de ser ejecutada la tarea.
+    identificador: Nombre que damos a la tarea.
+    Comando: Comando o script que será ejecutado.
+En el archivo /etc/anacrontab, si debajo de LOGNAME= root añadimos START_HOURS_RANGE=23-6, entonces los trabajos únicamente se ejecutarán entre las 23 de la noche y las 6 de la madrugada. Otra opción es añadir el parámetro RANDOM_DELAY=15 que lo que hará este parámetro es añadir un retardo aleatorio adicional de 0 a 15 minutos a cada una de las tareas que se van a ejecutar para repartir mejor la carga del sistema.
+# anacron -f (forzar la ejecución de las tareas, igorando las marcas de tiempo)
+# anacron -u ( actualiza las marcas de tiempo de los trabajos, a la fecha actual, pero no ejecuta nada)
+# anacron -n (Ejecute las tareas ahora, ignorando cualquier retraso)
+# anacron -d -s (realizar las tareas ahora de forma secuenciada, primero las diarias, luego las semanales y al final las mensuales)
+# cat /var/spool/anacron/cron.daily (consultar la fecha en que se ejecutaron la totalidad de scripts guardados en, por ejemplo, cron.daily, igual para  cron.monthly y cron.weekly)
+Ejemplo de bakup semanal:
+# nano /etc/anacrontab
+Y colocar la linea:
+  7 5 backup.semanal /bin/bash /home/user/bin/backup.sh
+Significa que cada 7 dias, 5 minutos arriba o abajo y con el nombre backup.semanal se lanzando el script backup.sh ejecutado por bash.
+
+
 analog
 Procesador de archivos de registro rápido que genera informes y estadísticas de uso de servidores web. Puede procesar millones de líneas por minuto, escalable, flexible, salida en HTML, maneja muchos formatos de archivos de registro y, además de por linea de comandos, puede utilizar una interfaz web.
 # analog +Oanalog.html ([letra "o" mayuscula y justo a continuación el nombre] Genera el informe "analog.html")
