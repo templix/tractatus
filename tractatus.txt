@@ -2005,6 +2005,19 @@ Formatea un texto en forma de tarjeta perforada.
 $ bcd linux es genial
 
 
+bd
+Sustituye los clásicos cd ../../.. para ir varios directorios atras en la misma ruta por una forma más simple y solo colocando las primeras letras del directorio al que queremos ir..
+$ cd /Documentos/linux/emacs/org/presentaciones/css
+@Deb:~/Documentos/linux/emacs/org/presentaciones/css > bd e
+@Deb:~/Documentos/linux/emacs/ > bd D
+@Deb:~/Documentos/ >
+Nota.- Precisa algunos ajustes en configuración del sistema:
+$ echo 'alias bd=". bd -si"' >> ~/.bashrc
+$ source .bashrc
+# wget -O /etc/bash_completion.d/bd https://raw.github.com/vigneshwaranr/bd/master/bash_completion.d/bd
+# source /etc/bash_completion.d/bd
+
+
 bchunk
 Convertir imagenes CUE/BIN a ISO:
 $ bchunk archivo.cue archivo.iso
@@ -22982,9 +22995,11 @@ $ tiptop (arrancar el monitoreo. "q" para cerrar)
 
 
 tldr
-Muestra información de un comando como las páginas man pero más simplificada. Muestra como si fueran versiones resumidas de man com más ejemplos.
+Muestra información de un comando como las páginas man pero más simplificada,como si fueran versiones resumidas de man com más ejemplos.
 $ tldr --update (primero despues de instalarla, recargar la base de datos y lanzarlo periodicamente)
 $ tldr comando
+$ tldr -l (listar)
+$ tldr --color auto tar
 
 
 tleds
