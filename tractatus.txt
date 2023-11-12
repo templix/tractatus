@@ -1508,6 +1508,16 @@ Script de shell (generalmente que se ejecuta desde cron) totalmente automatizada
 # autopostgresqlbackup
 
 
+autorandr
+Herramientas para administrar configuraciones de xrandr basadas en dispositivos conectados. Se puede configurar para que cambie automáticamente a una configuración almacenada cada vez que se detecte un cambio en la configuración.
+$ autorandr --save mobile (guardar la configuración actual de la pantalla)
+$ autorandr --save printer (de la impresora)
+$ autorandr --list (listar las configuraciones gardadas)
+$ autorandr --load printer --force (intenta evitar recargar una configuración idéntica para forzar la reconfiguración)
+$ autorandr -d printer (establecer perfil determinado)
+$ autorandr -l printer (cambiar de perfil)
+
+
 autossh
 Similar a ssh pero reanudando la conexión en caso de corte o suspensión del trafico. Para que se realice esta reconexión, ha de tenerse la clave publica entrada en la máquina remota [ver ssh [4]]. Las opciones son las mismas que ssh.
 
