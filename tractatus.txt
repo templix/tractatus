@@ -3081,7 +3081,7 @@ ok: the NX bit is operational on this CPU.
 
 
 check-enhancements
-[debian-googies]. Muestra paquetes con versiones mejoradas. És un proceso lento.
+[debian-goodies]. Muestra paquetes con versiones mejoradas. És un proceso lento.
 # check-enhancemets -ip
 
 
@@ -18734,8 +18734,9 @@ $ procinfo -H (en formato KiB, MiB, GiB en lugar de los Kbytes predeterminados)
 
 
 procs
-Herramienta básicamente como el comando ps [ver] pero más coloreado, más legible, por columnas y vista en árbol. Descarga de https://github.com/dalance/procs/releases/tag/v0.14.0
-$ procs
+Herramienta que se comporta básicamente como el comando ps [ver] pero más coloreado, más legible, por columnas y vista en árbol. Descarga de https://github.com/dalance/procs/releases/tag/v0.14.0 o instalar mediante snap: snap install procs
+$ procs (lanzar la aplicación)
+$ procs cpu (ver datos de las cpus)
 
 
 proftpd
@@ -21306,12 +21307,10 @@ Informa del uso de la memoria física en consideración con la memoria compartid
 
 
 snapd
-Sistema de instalación de paquetes creado por canonical pero que puede usarse en casi todas las distros (Debian, arch, gentoo, fedora, opensuse...). Consiste basicamente en incluir las dependencias junto con el paquete. Es como un sistema de paqueteria universal para todas las distros linux. Los programas se instalan en /snap/bin y pueden convivir junto a los del mismo nombre en el sistema. Si por ejemplo, lanzamos:
+Sistema de instalación de paquetes creado por canonical pero que puede usarse en casi todas las distros (Debian, arch, gentoo, fedora, opensuse...). Consiste basicamente en incluir las dependencias junto con el paquete. Es como un sistema de paqueteria universal para todas las distros linux. Los paquetes de instalan en /snap/nombre_paquete y lo ejecutables en /snap/bin y pueden convivir junto a los del mismo nombre en el sistema. Si por ejemplo, lanzamos:
 $ emacs
 Se ejecutará la aplicación del sistema. Si queremos el instalado con snap, lanzamos la ruta aboluta:
 $ /snap/bin/emacs
-Los contenidos de los paquetes está en:
-$ /snap/nombre_paquete
 # snap install programa
 # snap find nombre_programa (buscar un programa)
 # snap list (lista los instalados)
