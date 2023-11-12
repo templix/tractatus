@@ -312,6 +312,13 @@ Algunas teclas de control:
 	Ctrl c (Sale del programa)
 
 
+age
+Cifrar y descifrar archivo. Si no se especifica archivo de salida lo hace por pantalla.
+$ age -e -p -o salida archivo_entrada (encriptar con contraseña con el nombre de salida especificado el archivo_entrada)
+$ age -o desencriptado -d encriptado (desencriptar un archivo encriptado)
+$ age-keygen | age -p > clave.age (crear un clave y guardarla en clave.age)
+
+
 agetty
 Alternativa a getty. Abre un puerto tty, pide un nombre de usuario e invoca el comando /bin/login. Es un programa que se ejecuta en una computadora host que administra terminales físicos o virtuales para permitir el acceso de múltiples usuarios. Tiene algunas características no-estandar que son útiles para líneas de cable y líneas telefónicas.
 $ agetty 9600 ttyS1
