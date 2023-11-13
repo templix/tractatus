@@ -16683,6 +16683,16 @@ Demonio que cada vez que se reinicia, elimina los datos de la caché DNS. Para m
 # /etc/init.d/nscd restart
 
 
+nsenter
+Utilidad de Linux que permite ejecutar un comando en el espacio de nombres de un proceso en ejecución. Los espacios de nombres son una característica del kernel de Linux que proporciona entornos aislados para procesos y son utilizados por ejemplo, por Docker para crear contenedores aislados.
+# nsenter --target pid --all command command_arguments (Ejecutar un comando utilizando los mismos espacios de nombres que un proceso existente)
+# nsenter --target pid --net command command_arguments (Ejecutar un comando en el espacio de nombres de red de un proceso existente)
+# nsenter --target pid --pid command command_arguments (Ejecutar un comando en el espacio de nombres PID de un proceso existente)
+# nsenter --target pid --ipc command command_arguments (Ejecutar un comando en el espacio de nombres IPC de un proceso existente)
+# nsenter --target pid --uts --time --ipc -- command command_arguments (Ejecutar un comando en los espacios de nombres UTS, time e IPC de un proceso existente)
+# nsenter --pid=/proc/325/pagemap -- command command_arguments (Ejecutar un comando en el espacio de nombres de un proceso existente haciendo referencia a procfs)
+
+
 nslookup
 saber si las DNS resuelven correctamente los nombres y las IP
 $ nslookup ip_o_nombre_host
@@ -17589,9 +17599,9 @@ Monitor de tráfico de red
 
 
 pagein
-Herramienta que obliga a las páginas que están en intercambio a volver a paginarse en la memoria. Es principalmente útil para probar el subsistema VM e intercambiar subsistemas con fines de prueba.
-# pagein -p 2977 (epecificando el PID)
-# pagein -a -v (a todos los PIDs y mostrando el proceso)
+Herramienta para forzar que las páginas que estan en swap vuelvan a la memoria.
+# pagein -a (Intentar paginar en todos los procesos. No se puede utilizar con la opción -p)
+# pagein -p 949 (indicando el PID de un proceso)
 
 
 pagemon
