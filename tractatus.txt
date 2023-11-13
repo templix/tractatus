@@ -17651,6 +17651,13 @@ Nueva versión de la herramienta traceroute [ver].
 # paris-traceroute lapipaplena.org
 
 
+parsero
+Es un script escrito en Python que lee el archivo Robots.txt de un servidor web a través de la red y examina las entradas Disallow. Las entradas Disallow indican a los motores de búsqueda qué directorios o archivos alojados en un servidor web no deben indexarse. Por ejemplo, "Disallow: /portal/login" significa que el contenido de www.example.com/portal/login no puede ser indexado por rastreadores como Google, Bing, Yahoo o el proceda
+$ parsero -u localhost
+$ parsero -sb -u google.es
+$ parsero -f archivo.txt (de varias url, una por linea, de un archivo)
+
+
 partclone
 Software diseñado para realizar backups y restauración de particiones. Realizar las operaciones sobre particiones no montadas.
 $ partclone.ext4 -c -d -s /dev/sda1 -o ~/imagen.img (Crear la imagen de sda1)
