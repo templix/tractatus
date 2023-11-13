@@ -17652,7 +17652,7 @@ Nueva versión de la herramienta traceroute [ver].
 
 
 parsero
-Es un script escrito en Python que lee el archivo Robots.txt de un servidor web a través de la red y examina las entradas Disallow. Las entradas Disallow indican a los motores de búsqueda qué directorios o archivos alojados en un servidor web no deben indexarse. Por ejemplo, "Disallow: /portal/login" significa que el contenido de www.example.com/portal/login no puede ser indexado por rastreadores como Google, Bing, Yahoo o el proceda
+Es un script escrito en Python que lee el archivo Robots.txt de un servidor web a través de la red y examina las entradas Disallow. Las entradas Disallow indican a los motores de búsqueda qué directorios o archivos alojados en un servidor web no deben indexarse. Por ejemplo, "Disallow: /portal/login" significa que el contenido de www.example.com/portal/login no puede ser indexado por rastreadores como Google, Bing, Yahoo o el que proceda.
 $ parsero -u localhost
 $ parsero -sb -u google.es
 $ parsero -f archivo.txt (de varias url, una por linea, de un archivo)
@@ -18370,6 +18370,11 @@ pip
 # pip install --upgrade paquete (actualizar un paquete a su última versión)
 # pip freeze | grep -v '^\-e' | cut -d = -f 1 | xargs -n1 pip install -U (actualizar todos los paquetes)
 # pip cache dir (Ver la ubicación del directorio que almacena copias en forma de cache de los paquetes que se descargan)
+
+
+pipes
+[pipes.sh]. Muestra tuberías que se dibujan en la terminal. Hay varios tipos de tuberías disponibles.
+$ pipes -t 5 -p 10 (10 tuberias, por defecto 1 y con el modelo de caracteres 7)
 
 
 pitidos
