@@ -17876,6 +17876,22 @@ Debuger de código python.
 $ pdb archivo.py
 
 
+pdd
+Utilidad para calcular la diferencias entre fechas y horas. Si no se especifican argumentos, muestra la fecha, hora y zona horaria actuales.
+$ pdd (forma básica para la fecha y hora actual actual)
+$ pdd 2022 03 25 (calcular la ñdiferencia entre la fecha especificada y el dia de hoy)
+$ pdd 23:05:00 (calcular la diferencia hasta el momento actual)
+$ pdd 0 (hora actual)
+$ pdd -d 1956 03 16 2023 11 23 (calcular la diferencia entre dos fechas)
+$ pdd -t 01:50:00 09:55:00 (calcular la diferencia entre dos horas)
+$ pdd -d 2023 11 14 1 1 10 --add (añadir 1 año, 1 mes y a0 dias a la fecha especificada)
+$ pdd 1 1 10 --add (añadir 1 año, 1 mes y 10 dias a la fecha actual)
+$ pdd -t 11:27:00 05:10:10 --add (añadir 5 horas, 10 minutos y 10 segundos a la hora especificada)
+$ pdd 01:05:00 --add (mostrar la hora que será añadiendo 1 hora 5 minutos)
+$ pdd -d 2023 03 02 0 0 2 --sub (restar un dia a la fecha especificada)
+$ pdd --day 1956 03 16 (que dia de la semana era en la fecha especificada)
+
+
 pdf2djvu
 Convertir pdfs en djvu.
 $ pdf2djvu -o salida.djvu archivo.pdf
