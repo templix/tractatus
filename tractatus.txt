@@ -3304,6 +3304,17 @@ Quitar o modificar contraseñas en sistemas windows.
 Aparece un menú de 5 opciones. Borrar contraseña es la opción 1 modificarla la 2.
 
 
+choose
+Proporciona una manera de extraer datos de archivos de texto.
+$ cat archivo.txt | choose 4 (Imprima el quinto elemento de todas las línea del texto especificado. "0" sería el primero)
+$ cat /etc/passwd | choose --field-separator ':' 0 2 4 (Imprima el primer, tercer y quinto elementos de cada línea, donde los elementos están separados por ':' en lugar de espacios en blanco)
+$ cat archivo.txt | choose 1:4 (imprime desde el segundo al quinto elemento de cada línea, incluido el quinto)
+$ cat archivo.txt | choose :2 (Imprime desde el comienzo de cada línea hasta el tercer elemento)
+$ cat archivo.txt | choose --exclusive :2 (Imprimir desde el principio de cada línea hasta el segundo elemento excluyendo a partir del tercero)
+$ cat archivo.txt | choose 2: (Imprimir todos los elementos desde el tercero hasta el final de cada línea)
+$ cat archivo.txt | choose -1 (Imprima el último elemento de cada línea)
+
+
 chown
 Cambio de propietario de un archivo o directorio.
 # chown usuario archivo
