@@ -8833,6 +8833,16 @@ Analizador de registros. Los mensajes en /var/log/messages y la configuración e
 # fwlogwatch -v -n -N -b -t -e -z -w -o fwlogw.html
 
 
+fwsnort
+Traduce las reglas de Snort en reglas de iptables equivalentes y genera un script de shell que implementa los comandos de iptables resultantes. La generación de scripts en modo de registro, los errores de análisis escritos en el archivo de registro de fwsnort y la verificación de políticas de iptables están habilitados de forma predeterminada sin tener que especificar ningún argumento de línea de comando.
+# fwsnort (traducir las reglas de Snort)
+# fwsnort -6 (Generar reglas de ip6tables para ataques a través de IPv6)
+# fwsnort --include-type ddos,backdoor (Generar reglas de iptables solo para ddos y backdoors)
+# fwsnort --snort-sid 2008475,2003268 (Genere reglas de iptables para los ID de Snort 2008475 y 2003268 (de emergente-all.rules))
+# fwsnort --restrict-intf eth0,eth1 (indicar que solo inspeccione el tráfico eth0 y eth1)
+# fwsnort --ipt-sync --verbose (Generar reglas de iptables para Snort que estan permitidas por la política local de iptables y escribir las de snort originales en el script de iptables como comentario)
+
+
 fwupd-test
 Proporciona un conjunto de pruebas instaladas que se pueden ejecutar para validar el demonio en un sistema de integración continua. Consta de varias aplicaciones que han de lanzarse especificando toda la ruta que se encuentran en /usr/libexec/installed-tests/fwupd.
 # /usr/libexec/installed-tests/fwupd/acpi-dmar-self-test
