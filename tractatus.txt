@@ -3616,6 +3616,12 @@ colormake
 Esta herramienta analiza el resultado de make para colorearlo y facilitar su lectura. Contiene dos ejecutables: colormake y clmake que se pueden invocar en lugar de make con salida coloreada [configure, clmake, clmake install].
 
 
+colormgr
+Ver y cambiar el perfil de color a las asignaciones de dispositivos. RGB es una escala relativa que normalmente tiene sólo 256 estados por canal.
+$ colormgr get-devices display (listados de todos los dispositivos)
+$ colormgr get-devices-by-kind display (del monitor. Sustituir "display" por printer, scanner, webcam...)
+
+
 colortest
 Incluye un conjunto de utilidades para ayudar a probar cuántos colores puede mostrar un terminal. Estas configuraciones de color dependen de la variable de entorno $TERM y de la entrada termcap
 $ colortest-8
