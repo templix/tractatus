@@ -8821,6 +8821,13 @@ $ fuser -v archivo  (Muestra los procesos usados por un fichero o directorio)
 # fuser -n tcp -s 22 && echo "abierto" (Indica si un puerto está abierto)
 
 
+fusermount
+[Filesystem in Userspace-FUSE]. El sistema de archivos en el espacio de usuario [FUSE] es un método seguro para que usuarios sin privilegios creen y monten sus propias implementaciones de sistemas de archivos.
+# fusermount -o /media/punto_montaje (montar un sistema de archivos)
+# fusermount -z /media/punto_montaje (Desmontar el sistema de archivos tan pronto como deje de usarse)
+# fusermount -u /media/punto_montaje (Desmonta un sistema de archivos)
+
+
 fwlogwatch
 Analizador de registros. Los mensajes en /var/log/messages y la configuración en /etc/fwlogwatch.config en el que se han de descomentar los conceptos que interesen aunque muchos se pueden habilitar lanzando la aplicacion con argumentos. Incluye los ejecutables fwlw_notify y fwlw_respond. Un ejemplo de configuración:
            stateful_start = yes
