@@ -4917,6 +4917,17 @@ El error [descriptor 2] se mostrará por pantalla y listado.txt permanecerá vac
 $ ls -zy >> listado.txt 2>&1
 
 
+desktop-file-utils
+Incluye los siguientes ejecutables: desktop-file-edit, desktop-file-install [instala un archivo de escritorio y lo ejecuta en el camino.], desktop-file-validate [ver] [valida un archivo de escritorio] y update-desktop-database [actualiza la asignación desktop-MIME]
+
+
+desktop-file-validate
+Herramienta para validar archivos de entrada de escritorio de acuerdo con la especificación Desktop Entry 1.0. La especificación describe un formato de archivo para proporcionar información como el nombre, el icono y la descripción de una aplicación.
+$ desktop-file-validate --no-hints file.desktop(No proporcionar sugerencias sobre cosas que podrían mejorarse en el archivo de escritorio)
+$ desktop-file-validate --no-warn-deprecated file.desktop (No adviertir sobre el uso de elementos obsoletos)
+$ desktop-file-validate --warn-kde file.desktop (Advierte si se utilizan extensiones de KDE para la especificación)
+
+
 desproxy
 Permite realizar conexiones TCP/IP a través de proxies que solo ofrecen servicio http [puerto 80], de forma que, aunque el proxy este configurado para permitir únicamente la navegación web, podremos usarlo para acceder a otros servicios.
 
