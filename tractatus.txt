@@ -13372,13 +13372,14 @@ $ lsdev
 
 
 lshal
-Muestra información del firmware, serial server, Bios, kernel, procesador, discos, puntos de montaje, particiones, usb, pci...
+Mostrar elementos en la base de datos del dispositivo HAL [Hardware Abstraction Layer]. Muestra información del firmware, serial server, Bios, kernel, procesador, discos, puntos de montaje, particiones, usb, pci... HAL está en desuso en la mayoría de las distribuciones Linux. La funcionalidad se está fusionando en udev.
 $ lshal  (Información de los dispositivos de HAL en formato largo y detallado))
 $ lshal -l (Lo mismo que el anterior)
 $ lshal -s (Muestra el UDI [Dispositivo identificador único])
 $ lshal -st (Lo mismo pero en forma de arbol)
 $ lshal -m (Monitor de los dispositivos de HAL mostrando cambios de estado en tiempo real al conectar un dispositivo)
 $ lshal -u UDI (Muestra información de un dispositivo específico)
+# lshal -t (visualizar los dispositivos organizados en árbol)
 
 
 lshell
