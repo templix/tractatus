@@ -18579,6 +18579,13 @@ $ pmap -x PID (Muestra información adicional y la memoria consumida por todos l
 $ pmap -p PID (Mostrar ruta en el mapeo)
 
 
+pmdk-tools
+Paquete que proporciona al usuario un conjunto de utilidades para el análisis y manipulación fuera de línea de grupos creados por bibliotecas pmem. Incluye las aplicaciones daxio y pmempool.
+# daxio --zero /dev/dax (Poner a cero el dispositivo de salida)
+# daxio --input=/dev/zero --output=/dev/dax --skip=4096 (número de bytes que se deben omitir en la entrada antes de realizar una lectura)
+Nota.- Un dispositivo DAX [devdax] proporciona un medio para que las aplicaciones accedan directamente al almacenamiento, sin la participación de un sistema de archivos. El beneficio del dispositivo DAX es que proporciona una granularidad de fallas garantizada. Debe haber al menos un dispositivo DAX como entrada o salida. Si no se especifica, el valor predeterminado será stdin o stdout respectivamente. Para las arquitecturas Intel 64 y AMD64, se admiten las siguientes granularidades: 4KB, 2MIB y 1GB
+
+
 pmie
 Motor de inferencia para métricas de rendimiento.
 $ pmie archivo
@@ -18590,6 +18597,7 @@ Permite a usuarios sin privilegios montar dispositivos extraíbles sin una entra
 # pmount --type iso9660 --read-only /dev/cdrom (Montar un CD-ROM con el tipo de sistema de archivos ISO9660 en modo solo lectura)
 # pmount --type ntfs --read-write /dev/sdc (Montar un disco formateado en NTFS, forzando el acceso de lectura y escritura)
 # pmount --type ext4 /dev/sda1 label (Montar un dispositivo con un tipo de sistema de archivos ext4 en /media/label)
+# pumount /dev/sda1 (desmontar una particion)
 
 
 pmt-
