@@ -12698,6 +12698,11 @@ Este paquete contiene utilidades para analizar y configurar las capacidades de l
 # filecap
 
 
+libnetcfg
+Libnet es una API que ayuda con la construcción e inyección de paquetes de red de bajo nivel. La utilidad libnetcfg se puede utilizar para configurar libnet.
+$ libnetcfg
+
+
 libpam-tmpdir
 Muchos programas usan $TMPDIR para almacenar archivos temporales. No todos son buenos para asegurar los permisos de esos archivos. libpam-tmpdir establece $TMPDIR y $TMP para sesiones PAM y establece los permisos bastante estrictos. Esto ayuda a la seguridad del sistema al tener una capa adicional de seguridad, lo que hace que tales ataques de enlaces simbólicos y otros ataques basados en tmp sean más difíciles o imposibles. El módulo pam_tmpdir, invoca pam-tmpdir-helper para crear un directorio temporal seguro para el usuario que lo invoca. No es dañino llamarlo a mano, pero no dará ningún diagnóstico ni mensaje de error aparte de su valor de retorno. Se registra en syslog.
 $ pam-tmpdir-helper
