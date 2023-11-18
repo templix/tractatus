@@ -18578,6 +18578,7 @@ $ pmap -d PID (consumo de memoria de las librerías, comandos y archivos que est
 $ pmap -x PID (Muestra información adicional y la memoria consumida por todos los archivo que corren en determinado PID
 $ pmap -p PID (Mostrar ruta en el mapeo)
 
+
 pmie
 Motor de inferencia para métricas de rendimiento.
 $ pmie archivo
@@ -18601,6 +18602,15 @@ $ ./pmt-rmessage.sh -m lapipaplena (Muestra mensajes de un usuario)
 $ ./pmt-rmessage.sh -l lapipaplena (Muestra el último mensaje de un usuario)
 $ ./pmt-screenshot.sh -f lapipaplena (captura de pantalla de un perfil. Se guarda en la carpeta screenshots)
 
+
+pm-utils
+Herramienta de línea de comandos de shell para suspender e hibernar la computadora. Incluye los ejecutables: pm-is-supported, pm-hibernate, pm-powersave, pm-suspend y pm-suspend-hybrid
+$ pm-is-supported (muestra las acciones soportadas [--suspend | --hibernate | --suspend-hybrid])
+# pm-suspend --quirk-* --help (ver las opciones de suspender)
+# pm-suspend-hybrid --quirk-* --help (ver las suspension hibrida)
+# pm-hibernate --help (ver los parámetros de la opción que puede especificarse para hibernar el pc)
+# pm-powersave false (desactiva las funciones de ahorro de energía)
+# pm-powersave true (activa las funciones de ahorro de energía)
 
 
 png2html
