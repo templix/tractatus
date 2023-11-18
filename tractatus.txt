@@ -1410,12 +1410,17 @@ Opciones:
 
 
 atop
-Monitor del sistema
-$ atop
+Monitor interactivo para ver la carga del sistema. Muestra la ocupación de los recursos de la CPU, memoria, disco y red. Incluye los ejecutables atopcat, atopconvert, atopsar y atopacctd. Pulsando las mismas letras en la pantalla de atop activa, se modifican los mismos parámetros de visualización.
+$ atop -s 5 -a -c (cada 5 segundos actualización. Por defecto 10 y solo los procesos activos y uno por linea)
+$ atop -u -m (del usuario que lo lanza y mostrando memoria)
 
 
-atsar
-Ver entrada sar
+atopsar
+Elabora informes de las estadísticas del sistema. Ver entrada sar
+$ atopsar -w (Informe sobre el tráfico de red IP)
+$ atopsar -m -r 20231118 -b 09:00 -e 10:30 (de la memoria, guardado en el archivo "fecha" [YYYYMMDD] empezando a las 9 horas y terminando a las 10,30)
+$ atopsar -A -r 20231118 (mostrando todo el reporte)
+$ atopsar -t 30 5 (informe sobre el tráfico de red, 5 muestras con un intervalo de 30 segundos)
 
 
 auditd
