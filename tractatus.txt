@@ -18584,6 +18584,14 @@ Motor de inferencia para métricas de rendimiento.
 $ pmie archivo
 
 
+pmount
+Permite a usuarios sin privilegios montar dispositivos extraíbles sin una entrada /etc/fstab coincidente.
+# pmount (Muestrar todos los dispositivos extraíbles montados)
+# pmount --type iso9660 --read-only /dev/cdrom (Montar un CD-ROM con el tipo de sistema de archivos ISO9660 en modo solo lectura)
+# pmount --type ntfs --read-write /dev/sdc (Montar un disco formateado en NTFS, forzando el acceso de lectura y escritura)
+# pmount --type ext4 /dev/sda1 label (Montar un dispositivo con un tipo de sistema de archivos ext4 en /media/label)
+
+
 pmt-
 [coreutils, cutycapt, xvfb, imagemagick, twidge, html2text, wget] Pequeña suite para extraer información de usuarios de twitter. Listado de scripts de la suite: pmt-avatar.sh  pmt-followers.sh  pmt-hashtags.sh  pmt-nicks.sh  pmt-people.sh  pmt-rmessage.sh  pmt-screenshot.sh
 	$ wget http://elbinario.net/wp-content/uploads/2015/05/puppetmastertweet-wip.tar5.gz
