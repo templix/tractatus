@@ -18677,6 +18677,14 @@ pngsplit
 $ pngsplit --verbose --force foto.png (mostrando mensajes y sobrescribir archivos de salida existentes)
 
 
+pngtools
+Conjunto de utilidades para trabajar con archivos PNG. Incluye las aplicaciones pngchunkdesc, pngchunks, pngcp y pnginfo
+$ pngchunkdesc imagen.png (Los archivos PNG se basan en una serie de fragmentos que incorporan la información almacenada en el archivo de imagen. Estos fragmentos tienen nombres ASCII de cuatro caracteres, donde el caso de cada letra almacena información adicional. Este programa decodifica la información del caso en los nombres de los fragmentos y la muestra)
+$ pngchunks imagen.png (imprimir información incrustada en un archivo PNG)
+$ pngcp entrada.png salida.png (crear un nuevo archivo PNG, cambiado algunos atributos como las transparencias)
+$ pnginfo imagen.png (muesra información sobre la imagen expecificada)
+
+
 pom (bsdgames)
 Informa de las fases de la luna.
 $ pom
