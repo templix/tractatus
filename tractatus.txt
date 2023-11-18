@@ -12167,6 +12167,11 @@ Borrar kernels antiguos de forma automática:
 	# apt-get purge $(dpkg -l 'linux-*' | sed '/^ii/!d;/'"$(uname -r | sed "s/\(.*\)-\([^0-9]\+\)/\1/")"'/d;s/^[^ ]* [^ ]* \([^ ]*\).*/\1/;/[0-9]/!d' | head -n -1) --assume-yes
 
 
+kernel-install
+Se usa para instalar o eliminar imágenes del kernel en initrd hacia y desde la partición del cargador de arranque, denominado $BOOT. Por lo general, será /boot/, /efi/ o /boot/efi/. Kernel-Install ejecutará los archivos ejecutables [plugins] ubicados en el directorio /usr/lib/kernel/install.d/ y el directorio de administración local /etc/kernel/install.d/. Todos los archivos se clasifican y ejecutan colectivamente en orden léxico, independientemente del directorio en el que esten. Los archivos de /etc/kernel/install.d/ tienen prioridad sobre archivos con el mismo nombre en /usr/lib/kernel/install.d/. Esto se puede usar para anular un sistema suministrado con un archivo local si es necesario, con un enlace simbólico en /etc/kernel/install.d/ con el mismo nombre que un ejecutable de /usr/lib/kernel/install.d/, señalando a /dev/null, deshabilita completamente el ejecutable. Los ejecutables deben tener la extensión ".install"; Se ignoran otras extensiones. Un ejecutable colocado en estos directorios debería devolver 0 en caso de éxito. También puede devolver 77 para provocar que finalice toda la operación (se omitirán los ejecutables posteriores en orden léxico). Para ver versiones del kernel instaladas:
+$ ls /usr/lib/modules/
+
+
 kerneltop
 muestra el uso del kernel en estilo interactivo como top [ver]
 # kerneltop -l 45 -s 5 (Que muestre 45 lineas [por defecto 50] y actualización cada 5 segundos [por defecto 1])
@@ -13859,7 +13864,7 @@ Algunas teclas de control:
 
 
 man2html
-Pasar páginas de manual a formato html.
+Pasar páginas de manual a formato html. Tambien pueden visualizarse con el navegador con http://localhost/cgi-bin/man/man2html.
 $ man ls | man2html > man_ls.html
 
 
