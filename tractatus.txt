@@ -18651,6 +18651,11 @@ $ pngcrush -rem allb -brute -reduce original.png modificada.png (Quitando inform
 $ optipng -o7 *.png (Todos las imagenes del directorio a su nivel mas alto posible)
 
 
+pngmeta
+Programa de filtrado que extrae metadatos de imágenes PNG y los muestra como HTML, SOIF, RDF/XML o campos y valores simples.
+$ pngmeta --all --html imagen.png (Imprimir toda la información sobre el tamaño de la imagen, la profundidad, etc y salida en html.)
+
+
 pngnq
 Optimizacion de imagenes .png. Comprime reduciendo el número de colores disponible. El tamaño del archivo resultante es mucho menor, pero hay perdida de calidad.
 $ pngnq imagen.png (No sobreescribe la imagen. Añade al nombre una extension para distinguirla [-nq8])
