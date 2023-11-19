@@ -18691,6 +18691,13 @@ $ pngcp entrada.png salida.png (crear un nuevo archivo PNG, cambiado algunos atr
 $ pnginfo imagen.png (muesra información sobre la imagen expecificada)
 
 
+pnscan
+Es un escáner de puertos de subprocesos múltiples.
+$ pnscan 192.168.1 5/24 22 (escanear el puerto 22 de la red mencionada)
+$ pnscan 192.168.1.5/24 1:65525 (todos los puertos de la red))
+$ pnscan -w"HEAD / HTTP/1.0\r\n\r\n" -r"Server:" localhost 1:65525 (escanear todos los puertos de localhost)
+
+
 pom (bsdgames)
 Informa de las fases de la luna.
 $ pom
