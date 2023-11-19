@@ -18726,6 +18726,19 @@ Informa a Debian de los paquetes más populares. Normalmente esta aplicación es
 # popularity-contest > listado
 
 
+porg
+Es un programa para ayudar a la gestión de paquetes de software instalados desde el código fuente. Después de la instalación de dichos paquetes, generalmente uno no tiene idea de qué se instaló y adónde fue, lo que dificulta la desinstalación del paquete en el futuro. Porg fue escrito para resolver este problema de una manera bastante sencilla. Al instalar un paquete desde las fuentes, porg encapsula el comando de instalación (por ejemplo, "make install") y guarda la información de instalación en su propia base de datos de texto sin formato.
+La siguiente secuencia de comandos ejemplifica una instalación típica de un paquete llamado foo-1.3:
+$ tar xvf foo-1.3.tar.gz
+$ cd foo-1.3
+$ ./configure
+$ make
+# porg -lp foo-1.3 "make install" (Especificar el nombre del paquete que se registrará y activar logs)
+Después de los comandos anteriores, y siempre que todo haya ido bien, el programa foo-1.3 se instalará en el sistema y se registrará en la base de datos de porg. Se puede verificar simplemente escribiendo el siguiente comando, que enumerará los archivos instalados por el paquete:
+$ porg -f foo-1.3 (activando listado [-f]. Sin nombre de archivo, lista todos los instalados mediante porg)
+$ porg -i foo-1.3 (información del paquete)
+
+
 portsentry
 Herramienta de seguridad que detecta escaneo de puertos y permite monitorizar rastreos tipo NULL, SYN, TCP, ARP... Su configuración se realiza en el archivo /etc/portsentry/portsentry.conf, las opciones [tcp y/o udp] del demonio en /etc/default/portsentry y las máquinas i interficies a ignorar en /etc/portsentry/portsentry.ignore.static. Sin tocar del archivo de configuración el parámetro TCP_PORTS y UDC_PORTS portsentry simula que todos los especificados están abiertos, lo cual puede verificarse con un nmap:
 # nmap 192.168.1.x
