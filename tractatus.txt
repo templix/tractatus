@@ -5994,6 +5994,10 @@ Optimizar y reparar particones ext2 y ext3. Preciso desmontarla.
 Nota.- "-c" buscar y marcar los bloques dañados, "-D" Optimiza, "-f" fuerza, "-p" repara y "-v" informa
 
 
+e2fsprogs
+Utilidades para los sistemas de ficheros ext2 y ext3. Incluye los ejecutables: badblocks [buscar bloques dañados en un dispositivo ], blkid [mostrar atributos de dispositivos de bloque], compile_et [compilador de tablas de error], debugfs [depurador de sistemas de ficheros], dumpe2fs [información del superbloque y de los grupos de bloques], e2fsck [chequear y reparar sistemas de ficheros], e2image [salvar información de un sistema de ficheros], e2label [muestra o cambia la etiqueta de un sistema de ficheros], findfs [encuentra un sistema de ficheros por su etiqueta o UUID], fsck, fsck.ext2 y fsck.ext3, [chequear y reparar un sistema de ficheros], logsave [salva la salida de un comando en un fichero de registro], mk_cmds [convierte tabla de nombres de comandos y mensajes de ayuda en un fichero fuente], mke2fs, mkfs.ext2 y mkfs.ext3 [crear sistemas de ficheros ext2 y ext3 en un dispositivo], mklost+found [crear un directorio lost+found en un sistema de ficheros], resize2fs [redimensionar sistemas de ficheros], lsattr [muestra los atributos de un fichero en un sistema de ficheros], chattr [cambia los atributos de los ficheros], tune2fs [ajusta los parámetros de un sistema de ficheros] y uuidgen [crea un nuevo identificador UUID].
+
+
 e2image
 Genera una imagen de una partición ext2/ext3/ext4 y otros. También usado para redimensionar y mover particiones
 # e2image /dev/sda2 copia.img
@@ -21665,7 +21669,7 @@ Escuchar cualquiera de las emisoras de somafm desde la terminal. Bajar el script
 $ wget https://raw.githubusercontent.com/rockymadden/somafm-cli/master/src/somafm
 $ chmod +x somafm
 O instalarlo con pip:
-$ pip3 install somafem
+$ pip3 install somafm
 $ somafm -l (listar las emisoras)
 $ somafm -s (mostrar oyentes actuales)
 $ somafm -p beatblender (conectar la escogida)
