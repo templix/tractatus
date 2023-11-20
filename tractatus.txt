@@ -13876,6 +13876,10 @@ Algunas teclas de control:
 	n (Elemento siguiente en la busqueda)
 	N (Elemento previo en la busqueda)
 	q (Salir)
+Nota.- Normalmente "man" formatea el contenido para que coincida con el ancho del terminal. Redirige su salida a una tubería, que no tiene "ancho de pantalla", por lo tanto, formatea utilizando el ancho predeterminado de 80 caracteres. Algunas páginas de manual tienen tablas de más de 80 caracteres de ancho, por lo que aparece esta advertencia de "no se puede romper la línea".
+       <standard input>:602: warning [p 7, 11.3i, div 'an-div', 0.2i]: cannot adjust line
+Para solucionarlo:
+$ MANWIDTH=1250 man $COMANDO | wc -l
 
 
 man2html
@@ -17871,6 +17875,13 @@ Teclas de control:
     Ir a la última: G
     Actualizar: r
     Finalizar: q
+
+
+patator
+Para ataques de adivinación de contraseñas por fuerza bruta. Incluye varios modulos que empiezan por el protocoll al que atacan: ftp_, ssh_, telnet_,http_, mysql_ ...
+# patator mysql_login user=root password=FILE0 0=/root/passes.txt host=127.0.0.1 -x ignore:fgrep='Access denied for user' (ataque de fuerza bruta MySQL [mysql_login] con el usuario root [usuario=root] y las contraseñas contenidas en un archivo [password=FILE0 0=/root/passes.txt] contra el host dado [host=127.0.0.1], ignorando la cadena especificada [-x ignore:fgrep='Acceso denegado al usuario'])
+# patator http_fuzz auth_type=basic url=http://10.1.1.15 user_pass=FILE0 0=./passwd_lists/user_pass.txt -x ignore:code=401 (ataque html básico, a la url especificada con las contraseñas contenidas en ./passwd_lists/user_pass.txt, ignorando la cadena mencionada)
+# ssh_login host=10.0.0.1 user=FILE0 0=logins.txt password=$(perl -e "print 'A'x50000") --max-retries 0 --timeout 10 -x ignore:time=0-3
 
 
 patch
