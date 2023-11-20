@@ -18721,6 +18721,28 @@ popd
 Ver pushd.
 
 
+poppassd
+Es un script CGI escrito para permitir a los usuarios cambiar sus contraseñas de una forma más divertida:
+# poppassd
+  200 poppassd v1.8.4 hello, who are you?
+  user nombre_usuario
+  200 Your password please.
+  pass 1234567
+  200 Your new password please.
+  newpass 987654
+  200 Password changed, thank-you.
+  quit
+  200 Bye.
+Nota.- Como puede verse en el ejemplo anterior, las contraseñas no cifradas se transmiten a través de la red. Debido a esto, se recomienda utilizar este demonio solo para cambiar la contraseña del loopback local y bloquear todo acceso no local al puerto 106 [localhost:106], ya sea a través de /etc/hosts.deny:
+# nano /etc/hosts.allow
+Y colocar la linea:
+ALL: 127.0.0.1
+Y en:
+# nano /etc/hosts.deny
+ALL : 127.0.0.1:106
+O con reglas de firewall apropiadas.
+
+
 popularity-contest
 Informa a Debian de los paquetes más populares. Normalmente esta aplicación es lanzada por cron (/etc/cron.daily/popularity-contest). El archivo de configuración se encuentra en /etc/popularity-contest.conf. Si queremos ver el listado de lo que manda a Debian:
 # popularity-contest > listado
