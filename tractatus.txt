@@ -18968,7 +18968,7 @@ $ powerstat interval 20 (Mida la potencia con un número especificado de muestra
 
 powertop
 Es una herramienta para diagnosticar problemas con el consumo y la administración de energía. Además de ser una herramienta de diagnóstico, también tiene un modo interactivo que puede usar para experimentar con varias configuraciones de administración de energía, en los casos en que la distribución de Linux no haya habilitado esas configuraciones. powertop informa qué componentes del sistema tienen más probabilidades de ser responsables de un consumo de energía superior al necesario, desde aplicaciones de software hasta componentes activos del sistema. Hay pantallas detalladas disponibles para los estados C y P de la CPU, la actividad del dispositivo y la actividad del software.
-# powertop -t 10 --debug -c -r (generar un informe durante 10 segundose, jecutar en modo calibración y el resultado en .html [powertop.html])
+# powertop -t 10 --debug -c -r (generar un informe durante 10 segundose, ejecutar en modo calibración y el resultado en .html [powertop.html])
 
 
 ppp
@@ -19010,6 +19010,11 @@ PRELINKING=yes
 
 preload
 Demonio que se encarga de recoger información de las aplicaciones más usadas para que en el siguiente inicio estos estén cargados en memoria acelerando el tiempo de arranque de los mismos.
+
+
+prettyping
+Herramienta para mostrar la latencia entre los hosts de envío y de destino. Es una envoltura de la herramienta de ping estándar con el objetivo de hacer que la salida sea más bonita, más colorida, más compacta y más fácil de leer. Prettyping ejecuta el ping estándar en segundo plano y analiza su salida, mostrando las respuestas al ping de forma gráfica mediante el uso de colores y caracteres Unicode.
+$ prettyping google.com
 
 
 primes
