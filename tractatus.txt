@@ -19106,6 +19106,12 @@ Indicamos que el directorio raiz de los usuarios del grupo “users” es /home/
 $ tail -f /var/log/proftpd  (monitorizar los logs)
 
 
+progress
+Herramienta que busca comandos básicos de Coreutils [cp, mv, dd, tar, gzip/gunzip, cat, etc.] que se estan ejecutando en su sistema y muestra el porcentaje de datos copiados. También puede mostrar el tiempo estimado y el rendimiento. Simplemente escanea /proc en busca de comandos para encontrar archivos abiertos e informa de su estado.
+$ progreess (forma básica)
+$ progress -m (monitoreo interactivo)
+
+
 proxychains
 [tor privoxy]. Convierte en anonima la conexión que realiza una aplicación determinada [Ver privoxy]
 # nano /etc/proxychains.conf
