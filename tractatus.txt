@@ -18907,7 +18907,8 @@ $ powerstat interval 20 (Mida la potencia con un número especificado de muestra
 
 
 powertop
-visualiza las aplicaciones que más energía consumen. Abre varias pestañas a las que se accede con las teclas del cursor.
+Es una herramienta para diagnosticar problemas con el consumo y la administración de energía. Además de ser una herramienta de diagnóstico, también tiene un modo interactivo que puede usar para experimentar con varias configuraciones de administración de energía, en los casos en que la distribución de Linux no haya habilitado esas configuraciones. powertop informa qué componentes del sistema tienen más probabilidades de ser responsables de un consumo de energía superior al necesario, desde aplicaciones de software hasta componentes activos del sistema. Hay pantallas detalladas disponibles para los estados C y P de la CPU, la actividad del dispositivo y la actividad del software.
+# powertop -t 10 --debug -c -r (generar un informe durante 10 segundose, jecutar en modo calibración y el resultado en .html [powertop.html])
 
 
 ppp
@@ -20387,6 +20388,12 @@ ENABLED="true"
 # sadf -d (mostrar datos del archivo separados por punto y coma)
 # sadf -d /var/log/sysstat/sa19 -- -r (indica los parámetros de memoria)
 # sadf -x /var/log/sysstat/sa19 (exportar los datos a XML))
+
+
+sagan
+Monitor de logs del sistema. El informe en /var/log/sagan/sagan.log
+# sagan -d syslog -u user (del archivo syslog y el usuario especificado)
+# sagan -d malformed (de los malformados)
 
 
 saidar
