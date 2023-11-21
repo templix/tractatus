@@ -14313,6 +14313,66 @@ $ metapixel-prepare --width=10 --height=10 -r Imatges/ collage (Copiar con las m
 $ metapixel --metapixel Imagenes/imagen.jpeg destino.jpg --library collage/ (Que coja la imágen.jpg del directorio Imagenes y la convierta en destino.jpg usando el directorio "collage")
 
 
+metasploit
+Herramienta utilizada para realizar pentesting, tanto para comprometer sistemas como para obtener datos antes y después de comprometerlo. Los módulos auxiliares se pueden usar para el escaneo de puertos, la identificación del servicio, el rastreo de contraseñas y la enumeración de parches. Para empezar es necesario tener activado el servicio postgresql, crear la configuración inicial y luego iniciar Metasploit Framework:
+# service postgresql start
+$ msfd
+# msfconsole ()crea la base de datos en /home/usuario/.msf4/db
+Cada exploit tiene uno de siete posible rangos; excelente (mejor elección), grandioso, bueno, normal, promedio, bajo, y manual (peor elección). Un rango bajo del exploit, implica la probabilidad de causar algún daño en el objetivo, o no estar en la capacidad de entregar el payload seleccionado. Unos comandos básicos:
+msf6 > help show (mostrar los parámetros disponibles para el comando show)
+msf6 > show exploits (Mostrar todos los exploits del Framework)
+msf6 > show payloads (Mostrar todos los payloads del Framework)
+msf6 > show targets (lista de sistemas operativos que son vulnerables al exploit seleccionado)
+msf6 > set payload nom_paylo (cargar un payload especifico)
+msf6 > show auxiliary (Mostrar todos los módulos auxiliares del Framework)
+msf6 > help search (búsqueda con exploits con palabras clave)
+msf6 > search name:2018 (buscar módulos con un ID de NAME de 2018)
+msf6 > search nom_explo (Búsqueda por nombre del exploit)
+msf6 > search localhost (encontrar herramientas relacionadas con localhost)
+msf6 > search type:[exploit, payload, auxiliary, encoder, post] [nom_explo] (Búsqueda por tipo y nombre del exploit)
+msf6 > use nom_explo (Carga el exploit indicado)
+msf6 > show options (Muestra las opciones de un exploit)
+msf6 > info (Muestra información acerca de un exploit cargado)
+msf6 > set RHOSTS 192.168.154.0/24 (asignar valor a las variables)
+msf6 > set SRVPORT 80 (asignar puerto)
+msf6 > run (realizar la ejecución del módulo/auxiliary cargado)
+msf6 > back (salir del exploit que se está usando)
+msf6 > connect 192.168.1.34 23 (conectar a un host)
+msf6 > jobs (Se trata de módulos que se encuentran en ejecución en segundo plano. Permite listar y terminar trabajos existentes.
+msf6 > connect -s 192.168.1.34 22 (conectar con SSL a un host por el puerto 22)
+msf6 > load -l (listar los plugins disponibles)
+msf6 > load Plugin (cargar un plugin del listado anterior)
+msf6 > unload Plugin (descargar el plugin)
+msf6 > show encoders (mostrar codificadores compatibles)
+msf6 > use exploit/windows/http/struts2_rest_xstream (usar un exploit concreto)
+msf6 > sessions -l (ver sesiones activas)
+msf6 > sessions -l -v (Muestra la lista de sesiones disponibles en modo verbose)
+msf6 > sessions -i <session-id> (entrar en una sesión específica)
+msf6 > sessions -i 1 (interactuar con la primera sesión)
+msf6 > sessions -s script (Ejecuta un script específico en todas las sesiones activas)
+msf6 > sessions -K (Mata todas las sesiones activas)
+msf6 > sessions -c cmd (Ejecuta un comando en todas las sesiones activas)
+msf6 > exploit -j (Ejecuta un exploit en background)
+msf6 > exploit -z (No interactúa con la sesión después de acceder con éxito)
+msf6 > exploit -e encoder (Especifica el encoder a usar con el payload)
+msf6 > exploit -h (Muestra la ayuda para el exploit especificado)
+msf6 > db_create nombre (Crea una base de datos)
+msf6 > db_connect nombre (Crea y se conecta a una base de datos)
+msf6 > db_nmap (Usa y carga los resultados de Nmap en una base de datos)
+msf6 > db_autopwn -h (Muestra la ayuda para usar db_autopwn)
+msf6 > db_autopwn -p -r -e (Ejecuta db_autopwn contra todos los puertos encontrados, usa una shell reversa y los explota)
+msf6 > db_destroy (Elimina la actual base de datos)
+msf6 > db_destroy usuario:contraseña@host:puerto/base_de_datos (Borra una base de datos concreta)
+msf6 > db_status (Verificar el estado operativo de la base de datos)
+msf6 > hosts (todos los hosts registrados en la base de datos)
+msf6 > services (enumerar los servicios registrados en la base de datos)
+msf6 > vulns (Detallar todas las vulnerabilidades registradas en la base de datos)
+msf6 > upload ./localpath/data.txt C:\Temp\data.txt (transferir un archivo local al remoto)
+msf6 > download C:\Temp\data.txt ./localpath/data.txt (descargar un archivo del remoto a local)
+msf6 > exit (salir de metasploit)
+# msfupdate (actualizar la base de datos de exploits)
+
+
 mgen
 Ofrece la capacidad de realizar pruebas y mediciones de rendimiento de la red IP utilizando el tráfico TCP y UDP/IP. Los mensajes de prueba se pueden generar, recibir y registrar. mgen ofrece control sobre todos los parámetros de red y la sincronización de estos mensajes. Información: https://github.com/USNavalResearchLaboratory/mgen/blob/master/doc/mgen.pdf
 
