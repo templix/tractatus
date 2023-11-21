@@ -18900,6 +18900,15 @@ powertop
 visualiza las aplicaciones que más energía consumen. Abre varias pestañas a las que se accede con las teclas del cursor.
 
 
+ppp
+El protocolo Point-to-Point proporciona una forma estándar de transmitir datagramas a través de un enlace serie, así como una forma estándar para que las máquinas en cada extremo del enlace negocien varias características opcionales del enlace. Este paquete se utiliza más comúnmente para administrar un módem para acceso telefónico o ciertos tipos de conexiones de banda ancha. Incluye los ejecutables: plog, poff y # pon (ejecuta el archivo /etc/ppp/ppp_on_boot, si existe y es ejecutable. De lo contrario, se iniciará una conexión PPP utilizando la configuración de /etc/ppp/peers/provider)
+# poff (cierra una conexión PPP)
+# poff conec (Si existe más de una conexión PPP, se eliminará la que se menciona en el argumento)
+# plog (muestra las últimas líneas de /var/log/ppp.log. Si ese archivo no existe, muestra las últimas líneas del archivo /var/log/syslog, pero excluyendo las líneas no generadas por pppd)
+Nota.-  Para tener toda la información generada por pppd en un archivo de registro que pueda mostrar ese plog, se necesita la siguiente línea en el archivo /etc/syslog.conf:
+        local2.*       -/var/log/ppp.log
+
+
 ppt
 Formatea un texto a cintas de papel.
 $ ppt linux es un sistema genial
@@ -18908,6 +18917,13 @@ $ ppt linux es un sistema genial
 pr
 Muestra en pantalla un archivo de texto en modo “Previsualización de impresión”
 $ pr fichero.txt
+
+
+prads
+Es un Sistema Pasivo de Detección de Activos en Tiempo Real [Passive Real-time Asset Detection System]. Escucha pasivamente el tráfico de la red y recopila información sobre los hosts y servicios que ve. Esta información se puede utilizar para mapear la red, permitiéndo saber qué servicios y hosts están siendo activos o utilizados. Incluye la aplicaciones prads-asset-report y prads2snort.
+# prads -v -u user -i eth1 (con la máxima información, del usurio "user" [por defecto root] y la interfaz eth1 [por defecto eth0] los logd se guardan por defecto en /var/log/prads-asset.log)
+# prads2snort -v -i /var/log/prads-asset.log -o /etc/snort/host_attributes.xml ()
+# prads-asset-report -r /var/log/prads-asset.log -w asset-report.txt (enviar el informe de log [-r] al archivo especificado [-w])
 
 
 prelink
