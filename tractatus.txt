@@ -19238,6 +19238,11 @@ Para ver el árbol de procesos
 $ pstree -al   (verlo con cada uno de sus hilos de ejecución)
 
 
+ptop
+Muestra una lista ordenada de procesos del sistema. Los procesos se ordenan con los usuarios con mayor cantidad de CPU en la parte superior. Es capaz de decodificar líneas de comando de Python, Ruby, Perl, Node, Java, bash, sh, zsh y mostrar lo que realmente se está ejecutando. Muestra una salida estable al contar el tiempo de CPU desde que se inició ptop. Proporciona un histograma de carga del sistema, tiempos de actividad y muestra la carga del sistema en relación con la cantidad de núcleos lógicos y físicos del sistema.
+$ ptop
+
+
 ptx
 genera un índice permutado de los contenidos de un fichero, con cada palabra clave en su contexto.
 $ ptx archivo.txt
@@ -19449,6 +19454,13 @@ Muestra infromación sobre las versiones de python instaladas en el sistema.
 $ pyversions -d (muestra la por defecto)
 $ pyversions -s (las soportadas)
 $ pyversions -i (las instaladas)
+
+
+px
+analiza las líneas de comando de Python, Ruby, Node, Perl, Java, bash, zh, sh y le muestra lo que realmente se está ejecutando. px puede filtrar procesos por propietario ("px root"), buscar procesos por línea de comando y enumerar los procesos en un orden útil.
+$ px user
+$ px root
+$ px --debug firefox
 
 
 qcp
