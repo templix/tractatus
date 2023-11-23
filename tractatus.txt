@@ -19604,6 +19604,13 @@ Permite asignar parte de la memoria física para ser utilizada como una partici�
 Comprobar con df -k [ver] o mount [ver]su correcto montaje
 
 
+randmac
+imprime una dirección MAC aleatoria para interfaces de máquinas virtuales.
+$ randmac -l -e (local y con dirección EUI64)
+$ randmac -g -u (global y para unicast)
+$ randmac -U -m (para multidifusión y dígitos hexadecimales en mayúsculas)
+
+
 random
 Función interna de Bash que devuelve un número entero pseudoaleatorio en el rango: 0 - 32767. Para establecer un límite superior se utiliza la función módulo [%] y para un número inferior se le suma el propio número inferior.
 $ echo $RANDOM (Cualquier número aleatorio dentro del rango)
