@@ -19369,6 +19369,26 @@ opciones:
 	-s     (totalmente aleatoria)
 
 
+pwman3
+Interfaz para la gestión de contraseñas. Le permite almacenar su contraseña en una base de datos sqlite bloqueada por una contraseña maestra.
+Algunas opciones a modificar o incorporar en el archivo de configuración:
+# nano ~/.config/pwman3/config
+  [Global]
+  cls_timeout = 0 # (Sin borrar la pantalla. Con un número, por ejemplo 10, se borrará a los 10 segundos)
+  xsel = yes
+  [Generator]
+  numerics = true # (crear una contraseña a partir del carácter numérico y el carácter alfabético [A-Za-z0-9])
+  special_signs = true # (aceptar signos especiales tipo: "@", "#", "?", "!", '\\', "|", "$", "%", "^", "&" ...)
+  default_pw_length = 40 # (longitud de la contraseña)
+# pwman3 (lanzar la aplicación y entrar en el prompt)
+pwman3> h (muestra las opciones disponibles)
+pwman3> tags (enumera todas las etiqueta)
+pwman3> l tags (los usuario englobados en la etiqueta)
+pwman3> n (entrar nuevo usuario, contraseña, url y tag)
+pwman3> p 2 (mostrar los datos del número 2 del listado)
+pwman3> exit (salir)
+
+
 pwunconv
 Hace invisible el archivo /etc/shadow que previamente se había hecho visible con el comando pwconv.
 # pwunconv
