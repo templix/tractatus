@@ -1353,6 +1353,12 @@ $ asciidoc --help syntax (muestra todas las formas sintacticas que pueden usarse
 $ asciidoc -b html5 -d manpage asciidoc.1.txt  (Genera página man usando html5)
 
 
+ascii-image-converter
+Convertir imagenes de formatos estandard [png, jpg, jprg...] a imagen ascii.
+$ ascii-image-converter imagen.png -Cb -s . (en color, en código braille y guardar la imagen en el presente directorio con el nombre por defecto image-ascii-art.png)
+$ ascii-image-converter --formats (formatos soportados)
+
+
 asciinema
 Grabación de la terminal. Requiere registro en asciinema.org. Visualizar videos de otros usuarios en <https://asciinema.org/browse/featured>
 $ asciinema auth (Para utentificarse en asciinema.org)
