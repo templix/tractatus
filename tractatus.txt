@@ -19713,6 +19713,36 @@ raspi-config
 Acceso a los parámetros de configuración de la placa RaspberriPi
 
 
+ratpoison
+Es un administrador de ventanas simple, sin gráficos sofisticados, sin decoraciones en las ventanas y sin dependencia de mouse. Está inspirado en gran medida en GNU Screen. La pantalla se puede dividir en cuadros que no se superpongan. Todas las ventanas se mantienen maximizadas dentro de sus marcos para aprovechar al máximo el valioso espacio de su pantalla. Toda la interacción con el administrador de ventanas se realiza mediante pulsaciones de teclas. ratpoison tiene un mapa de prefijos para minimizar la manipulación de teclas.
+# startx $(which ratpoison) (arrancar el administrador de ventanas)
+Teclas útiles
+C-t . (menú)
+C-t ? (ayuda)
+C-t c (abrir una terminal)
+C-t a (visualización de la fecha)
+C-t w (listar todas las ventanas)
+C-t A (establece título de la ventana)
+C-t k (mata la ventana actual)
+C-t ! (ejecutar un comando de shell)
+C-t ' (seleccionar ventana por número o el comienzo de su nombre sin distingue entre mayúsculas y minúsculas)
+C-t 1 (ir a la ventana número 1. Lo mismo para con los números de 2 al 9)
+C-t s (dividir marco horizontalmente)
+C-t S (dividir marco verticalmente)
+C-t Tab (cambia el foco a la siguiente ventana en el marco)
+C-t Q (hacer que la ventana enfocada actual sea la única en el marco)
+C-t r (cambiar tamaño del marco usando las teclas del cursor y enter)
+C-t R (eliminar la ventana actual del marco)
+C-t f (seleccionar una ventana en el marco actual usando números)
+C-t u (deshacer un comando anterior)
+C-t U (rehacer el comando deshecho)
+C-t x (intercambiar la ventana actual con una seleccionada por otra en el cuadro actual)
+C-t F (muestra la ventana actual)
+C-t C-t (va al último frame)
+C-t : comando (ejecutar un comando que tambien puede agregarse al archivo ~/.ratpoisonrc)
+C-t b (destierra el mouse a una esquina de la pantalla)
+
+
 rbash
 shell restringido. Se usa para imponer a un usuario un entorno severamente limitado en el que, por ejemplo, no podrá cambiar de directorio [cd], especificar nombre que contengan la /, redirigir la salida usando operadores de redirección [>, <, >>], reemplazar la shell, desactivar el modo restringido, etc. Equivalente a "bash -c"
 # adduser -s /bin/rbash juan (Crear un usuario con shell restringido)
