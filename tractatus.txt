@@ -19879,6 +19879,12 @@ $ find / -name passwd 1> todo.txt 2>&1 (mandar salida y errores a un mismo archi
 $ find / -name passwd 2> todo.txt 1>&2 (lo mismo que el anterior)
 
 
+ree
+Verifica si el firmware del pc y la tarjeta de red puede arrancar la máquina en red.
+# strings *.rom | grep UNDI > /dev/null && echo "Si puede" || echo No
+# ree
+
+
 reflector
 Optimizador del mirrorlist de pacman.
 # reflector (Mostrará todos los mirrors de archlinux.org/mirrors/status/json/)
