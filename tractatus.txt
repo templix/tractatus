@@ -20263,6 +20263,12 @@ Programa de rotación de logs de apache en función de un intervalo de tiempo o 
 # logrotate -vf /etc/logrotate.conf (comprobar el correcto funcionamiento de forma manual rotando todos los registros)
 
 
+rotix
+Permite generar ofuscaciones rotacionales.
+$ rotix -a -t "linux es un sistema genial"
+$ rotix -f archivo.txt -o otro_archivo.txt (ofusca un archivo y lo guarda en otro_archivo.txt)
+
+
 route
 Mostrar/manipular la tabla de enrutamiento ip.
 $ route -n
