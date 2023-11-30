@@ -20614,9 +20614,8 @@ Monitor de logs del sistema. El informe en /var/log/sagan/sagan.log
 
 
 saidar
-Visualizar estadisticas del sistema
-$ saidar -c (en color)
-$ saidar -d 2 (actualizar datos cada 2 segundos. Por defecto cada 3)
+Aplicación para mostrar estadísticas del sistema, tales cono de la CPU, procesos, carga, memoria, intercambio, I/O de red y de discos junto con su espacio libre. Pulsar "q" para salir.
+$ saidar -d 2 -c (actualización cada 2 segundos [por defecto 3] y a color)
 
 
 sakura
@@ -20642,10 +20641,14 @@ Verificar integridad y un sistema de detección de intrusiones en grandes redes 
 # samhain -t check -D (iniciar samhain en modo demonio para revisar el sistema en intervalos especificados en el archivo de configuración)
 
 
+sane
+[Scanner Access Now Easy]. Se trata de una interfaz que proporciona acceso estandarizado a cualquier hardware de escáner de imágenes rasterizadas [escáner de superficie plana, escáner de mano, cámaras de vídeo y fotográficas, captadores de fotogramas, etc]. Incluye las aplicaciones gamma4scanimage, sane-find-scanner [ver], scanimage [ver] y umax_pp.
+
+
 sane-find-scanner
 Herramienta para encontrar escáneres SCSI y USB incluso si no son compatibles con ningún backend SANE.
 $ sane-find-scanner (forma básica)
-$ sane-find-scanner -q (Imprime solo los dispositivos, sin comentarios.)
+$ sane-find-scanner -q (Imprime solo los dispositivos, sin comentarios)
 
 
 sar
