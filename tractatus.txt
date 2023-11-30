@@ -20657,6 +20657,21 @@ $ sar -q 10 3 (3 muestras cada 10')
 $ sar -Ruy 5 2 (2 muestras cada 5')
 
 
+sarg
+Generador de informes html de análisis de Squid con campos para: usuarios, direcciones IP, bytes, sitios y tiempos. Algunas opciones del archivo de configuración:
+# nano /etc/sarg/sarg.conf
+Descomentamos o agregamos las lineas
+    output_dir /var/www/html/squid-reports
+    date_format e
+    overwrite_report no
+Que por defecto son
+    output_dir /var/lib/sarg
+    date_format u (fecha en inglés)
+    overwrite_report yes (sobreescribir archivo)
+# sarg -x (lanzar la aplicación)
+Aceder a los informes con el navegador en http://localhost/squid-reports
+
+
 sbws
 Escanea la red Tor y genera archivos de lista de ancho de banda
 # sbws scanner (escaner la red con la configuración por defecto)
