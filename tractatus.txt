@@ -20671,6 +20671,15 @@ Descomentamos o modificamos las lineas
 Aceder a los informes con el navegador en http://localhost/squid-reports
 
 
+sash
+Sirve como un sustituto interactivo de /bin/sh, para usar cuando este no se puede utilizar. Incluye muchas utilidades estándar como rm, kill, mkdir, chown... Si esta instalado en el sistema y por algún problema este no puedira iniciarse, es posible que lo pueda reparar usando init=/bin/sash en el indicador de inicio.
+# sash (entrar en el prompt de la aplicación)
+> help (muestra los comandos permitidos)
+> help comando (como se usa "comando" del listado anterior)
+> cd DIR (se entra en el DIR pero no lo muestra en el prompt)
+> exit (salir del prompt)
+
+
 sbws
 Escanea la red Tor y genera archivos de lista de ancho de banda
 # sbws scanner (escaner la red con la configuración por defecto)
