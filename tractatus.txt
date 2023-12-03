@@ -18860,7 +18860,7 @@ $ porg -i foo-1.3 (información del paquete)
 
 
 portsentry
-Herramienta de seguridad que detecta escaneo de puertos y permite monitorizar rastreos tipo NULL, SYN, TCP, ARP... Su configuración se realiza en el archivo /etc/portsentry/portsentry.conf, las opciones [tcp y/o udp] del demonio en /etc/default/portsentry y las máquinas i interficies a ignorar en /etc/portsentry/portsentry.ignore.static. Sin tocar del archivo de configuración el parámetro TCP_PORTS y UDC_PORTS portsentry simula que todos los especificados están abiertos, lo cual puede verificarse con un nmap:
+Herramienta de seguridad que detecta escaneo de puertos y permite monitorizar rastreos tipo NULL, SYN, TCP, ARP... Su configuración se realiza en el archivo /etc/portsentry/portsentry.conf, las opciones [tcp y/o udp] del demonio en /etc/default/portsentry y las máquinas y interficies a ignorar en /etc/portsentry/portsentry.ignore.static. Sin tocar del archivo de configuración el parámetro TCP_PORTS y UDC_PORTS portsentry simula que todos los especificados están abiertos, lo cual puede verificarse con un nmap:
 # nmap 192.168.1.x
 La configuración por defecto con la explicación a modo de comentario:
 	# Puertos que se simularán abiertos y que monitorizarán ataques:
@@ -18879,16 +18879,22 @@ La configuración por defecto con la explicación a modo de comentario:
 	BLOCKED_FILE="/var/lib/portsentry/portsentry.blocked"
 	# No resolver la ip del host atacante [con valor 1 lo resuelve]:
 	RESOLVE_HOST = "0"
-	BLOCK_UDP="0"
-	BLOCK_TCP="0"
+        # Bloquear scaneos udp y tcp. valor 0 no bloquear
+	BLOCK_UDP="1"
+	BLOCK_TCP="1"
 	# Configurar la actuación de los distintos intentos de intrusión [0=no bloquear, 1=Bloquear y 2=Ejecutar un comando externo]:
 	KILL_ROUTE="/sbin/route add -host $TARGET$ reject"
 	# Opción para los atacantes insistentes [bloqueo total por TCPwrappers]:
 	KILL_HOSTS_DENY="ALL: $TARGET$ : DENY"
-	Pu# Indica qué tan rápido marcar una intento fallido de conexión como un ataque. 0=paranoico, 1 y 2=permite algunos errores. Valores superiores a 2 mejor descartarlos]
+	# qué tan rápido marca una intento fallido como un ataque. 0=paranoico, 1 y 2=permite algín error. Valores superiores descartar]
 	SCAN_TRIGGER="0"
 	# Comunicar un mensaje al atacante:
 	PORT_BANNER="** UNAUTHORIZED ACCESS PROHIBITED *** IP LOGGED"
+# service portsentry stop
+# service portsentry start
+# service portsentry status
+# grep "attackalert" /var/log/syslog (ver alerta de ataques)
+# grep -n Blocked /var/lib/portsentry/portsentry.history (ver ips bloqueadas)
 
 
 postgres
