@@ -20390,7 +20390,7 @@ Nota.- El formato del archivo rsync_exclude para excluir los ficheros ocultos [.
 
 
 rsyslog
-Brinda soporte para el registro de mensajes del sistema tales como almacenamiento en búfer de disco bajo demanda, alertas por correo electrónico, escribir en bases de datos MySQL o PostgreSQL, listas de remitentes permitidos...
+Demonio responsable de recopilar mensajes provenientes de las aplicaciones y el kernel y enviarlos a los archivos de registro, almacenados generalmente en el directorio /var/log/. Los mensaje de las aplicaciones están asociadas a unos subsistemas; auth y authpriv [para autentificación], cron [tareas programadas], demon [afecta a algún demonio], ftp [al servidor FTP], kern [proveniente del kernel], lpr [proviene del subsistema de impresión], mail [del subsistema de correo electrónico], news [mensaje del subsistema Usenet], syslog [mensajes del propio servidor syslogd], user [mensajes de usuario genérico], uucp [del servidor UUCP] y local0 a local7 [reservado para uso local] y tambien estan asociados a un nivel de prioridad: emerg [emergencia extrema del sistema], alert [alerta importante], crit [condición critica], err [error], warn [advertencia, posible error], notice [aviso importante], info [mensaje informacivo] y debug [mensaje de depuración]
 # rsyslogd -dn (modo debug)
 # rsyslogd -n (de forma interactiva)
 
