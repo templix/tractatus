@@ -8138,6 +8138,14 @@ $ finger -s
 $ finger -l
 
 
+finit
+Alternativa a SysV init y systemd.
+# finit 0 (cerrar el sistema. Equivalente a "init 0")
+# finit 6 (reiniciar el sistema. Equivalente a "init 6")
+# finit 1 (entrar en modo recuperar sistema)
+# finit q (releer la configuración si se ha modificado)
+
+
 firebuild
 Funciona almacenando en caché las salidas de los comandos ejecutados y reproduciendo los resultados cuando los mismos comandos se ejecutan con los mismos parámetros dentro del mismo entorno.
 # firebuild -r htop (genera un informe con nombre firebuild-build-report.html sobre el comando htop)
@@ -15930,12 +15938,15 @@ Y comentar la entrada:
 
 
 nast
-Conocer usuarios (inalámbricos o no) de una red local
-# nast -m  (conocer las máquinas que estan en la LAN)
-# nast -g   (muestra los candidatos a gateway con un “Yep”)
-opciones:
--p   (modo promiscuo)
--i  eth0 (especificando red)
+Detectar usuarios, inalámbricos o no, de una red local. Como herramienta de análisis, tiene muchas características como:  Crear lista de hosts LAN, Seguir secuencias TCP-DATA, Encontrar puertas de enlace a Internet LAN, Descubre nodos promiscuos, Restablece conexiones establecidas, Realizar escáner de puertos medio abiertos, Buscar tipos de enlaces, Capturar banners del demonio de los nodos LAN, Controlar respuestas arp para descubrir posibles suplantaciones ...
+      # nast (de forma interactiva informa de paquetes recibidos y los descartados por el kernel)
+      Packets Received: 		581690
+      Packets Dropped by kernel:	0
+# nast -m (los que estan en la misma LAN)
+# nast -g (dónde hay un gateway)
+# nast -S (especificando una ip y un puerto. Acepta rango de puertos 1-400 o varios separados por comas 20,22,23,50-70)
+# nast -C any (sin utilizar ningún filtro)
+# nast -c -B (comprueba si alguien está envenenando con arp)
 
 
 nautilus
