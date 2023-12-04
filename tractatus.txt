@@ -21927,6 +21927,12 @@ Monitorizar el archivo log de registro com:
 # tail -f /var/log/auth.log
 
 
+snooze
+Herramienta parecida a cron. Ejecutar un comando en un momento determinado.
+$ snooze -H 22 -M 10 musica.wav (empezar a sonar la música mencionada a las 22'10)
+$ snooze -d 15 -m 3 -H 20 -M 30 -- ~/script.sh (ejecutar el script mencionado el 15 de marzo a las 8'30 de la tarde)
+
+
 snort
 Sniffer de paquetes y detector de intrusos
 # snort -v -i eth0 (Para inspeccionar el tráfico de una red)
