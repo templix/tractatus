@@ -21988,6 +21988,16 @@ $ sockstat -p 443 (las del puerto indicado)
 $ sockstat -U USER (las del usuario especificado)
 
 
+softflowd
+Analizador de tráfico de red basado en flujo capaz de exportar datos de Cisco Netflow. Rastrea los flujos de tráfico registrados escuchando en una interfaz de red o leyendo un archivo de captura de paquetes.
+$ softflowd -i enp1s0 (que escuche en la interfaz enp1s0 y se ejecute solo en modo de recopilación de estadísticas)
+$ softflowd -i enp1s0 -n 10.1.0.2:4432 (de la interfaz enp1s0 y exporte datagramas a un recopilador que se ejecuta en 10.1.0.2 4432)
+$ softflowd -i enp1s0 -n 10.1.0.2:4432,10.1.0.3:4432 (de la interfaz y se exporten datagramas que se ejecutan en los puertos 4432 10.1.0.2 y 4432 10.1.0.3)
+$ softflowd -i enp1s0 -l -n 10.1.0.2:4432,10.1.0.3:4432 (enviando los paquetes netflow impares al puerto 10.1.0.2 4432 y los pares al puerto 10.1.0.3 4432)
+$ softflowd -v 5 -i enp1s0 -n 10.1.0.2:4432 -m 65536 -t udp=1m30s (aumenta la cantidad de flujos simultáneos a rastrear a 65536 y el tiempo de espera a 90'')
+$ softflowd -i enp1s0 -p /var/run/sfd.pid.enp1s0 -c /var/run/sfd.ctl.enp1s0 ( especifica ubicaciones alternativas para el socket de control y el archivo pid)
+
+
 somafm
 Escuchar cualquiera de las emisoras de somafm desde la terminal. Bajar el script de github y darle permisos
 $ wget https://raw.githubusercontent.com/rockymadden/somafm-cli/master/src/somafm
