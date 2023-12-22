@@ -8081,6 +8081,8 @@ $ find . -type f -mtime 0 (Buscará los ficheros creados o modificados hoy)
 $ find / -type f -mtime -1 -print (Los modificados las últimas 24 horas)
 $ find / -mtime +2 -print (Los modificados hace más de dos dias)
 $ find -L . -type l  (Buscar enlaces rotos)
+$ find -name "#*#" -print -delete (suprimir todos los que empiecen por *)
+$ find -name "*~undo-tree~" -print -delete (en emacs todos los bufers que han dejado rastros *undo-tree*)
 $ find . –type l (lo mismo)
 $ find . -type l -delete (eliminat todos los enlaces rotos)
 $ find . -type f -size +300k > masde300k.txt (buscar .sh mayores de 300k)
@@ -18876,8 +18878,8 @@ Herramienta de seguridad que detecta escaneo de puertos y permite monitorizar ra
 # nmap 192.168.1.x
 La configuración por defecto con la explicación a modo de comentario:
 	# Puertos que se simularán abiertos y que monitorizarán ataques:
-	TCP_PORTS="1,11,15,79,111,119,143,540,635, 1080, 1524,2000,5742,6667,12345,12346,20034, 27665,31337,32771,32772,32773,32774, 40421,49724,54320"
-	UDP_PORTS="1,7,9,69,161,162,513,635,640,641, 700,37444,34555,31335,32770,32771,32772, 32773,32774,31337,54321"
+	TCP_PORTS="1,11,15,79,111,119,143,540,635,1080,1524,2000,5742,6667,12345,12346,20034,27665,31337,32771,32772,32773,32774,40421,49724,54320"
+	UDP_PORTS="1,7,9,69,161,162,513,635,640,641,700,37444,34555,31335,32770,32771,32772,32773,32774,31337,54321"
 	# Monitorizar los servicios del rango de puertos del 1 al especificado [1024]:
 	ADVANCED_PORTS_TCP="1024"
 	ADVANCED_PORTS_UDP="1024"
