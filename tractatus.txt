@@ -18900,16 +18900,17 @@ La configuración por defecto con la explicación a modo de comentario:
 	KILL_ROUTE="/sbin/route add -host $TARGET$ reject"
 	# Opción para los atacantes insistentes [bloqueo total por TCPwrappers]:
 	KILL_HOSTS_DENY="ALL: $TARGET$ : DENY"
-	# qué tan rápido marca una intento fallido como un ataque. 0=paranoico, 1 y 2=permite algín error. Valores superiores descartar]
+	# qué tan rápido marca una intento fallido como un ataque. 0=paranoico, 1 y 2=permite algún error. Valores superiores descartar]
 	SCAN_TRIGGER="0"
 	# Comunicar un mensaje al atacante:
 	PORT_BANNER="** UNAUTHORIZED ACCESS PROHIBITED *** IP LOGGED"
-Ha de especificarse, como mínimo en /etc/portsentry/portsentry.ignore, la ip localhost, 127.0.0.1 y las IPs de las interfaces locales si existen.
+Ha de especificarse, si no consta ya, como mínimo en /etc/portsentry/portsentry.ignore, la ip localhost, 127.0.0.1 y las IPs de las interfaces locales si existen.
 # service portsentry stop
 # service portsentry start
 # service portsentry status
 # grep "attackalert" /var/log/syslog (ver alerta de ataques)
-# grep -n Blocked /var/lib/portsentry/portsentry.history (ver ips bloqueadas)
+# grep -n Blocked /var/lib/portsentry/portsentry.history (ver historial de ips bloqueadas)
+# nano /var/lib/portsentry/portsentry.blocked (ver ips bloqueadas)
 
 
 postgres
