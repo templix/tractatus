@@ -18904,6 +18904,7 @@ La configuración por defecto con la explicación a modo de comentario:
 	SCAN_TRIGGER="0"
 	# Comunicar un mensaje al atacante:
 	PORT_BANNER="** UNAUTHORIZED ACCESS PROHIBITED *** IP LOGGED"
+Ha de especificarse, como mínimo en /etc/portsentry/portsentry.ignore, la ip localhost, 127.0.0.1 y las IPs de las interfaces locales si existen.
 # service portsentry stop
 # service portsentry start
 # service portsentry status
@@ -26172,7 +26173,7 @@ $ wget --limit-rate=60k ftp://ftp.ubuntu.org/hardy.iso (limitar ancho banda)
 $ wget -p http://www.tuxapuntes.com (todos los elementos extras)
 $ wget -c http://direccion_de_la_descarga.com (reiniciar descarga interrumpida)
 $ wget --spider  --no-parent -r -o log.txt http://web.com (lista enlaces rotos)
-$ wget -m -p -k -P archivo http://www.tuxapuntes.com (descargar todo un sitio recursivamente [-m], todo tipo de recursos, css, imágenes y demás para que se vea localmente [-p] y convierte los enlaces a accesibles de forma local [-k])
+$ wget -m -p -k -P DIR http://www.tuxapuntes.com (descargar todo un sitio recursivamente [-m], todo tipo de recursos, css, imágenes y demás para que se vea localmente [-p] y convierte los enlaces a accesibles de forma local [-k] y se guarde en el directorio "DIR")
 $ wget --wait=20 --limit-rate=20K -r -p -U Mozilla http://url.com (lo mismo pero haciendo pausas entre páginas y simulando ser un navegador)
 $ wget -O - -q http://checkip.dyndns.org/ | cut -d':' -f2 | cut -d'<' -f1| cut -c2- (Conocer la ip publica)
 $ wget -O - -q http://whatismyip.org/ (Lo mismo)
