@@ -22965,6 +22965,11 @@ Uso de la swap por parte del sistema. Ver sysctl.
 $  cat /proc/sys/vm/swappiness
 
 
+swapspace
+Complemento del sistema que adapta de forma continua y automática el espacio de memoria virtual disponible a las necesidades de memoria reales. Reclama espacio en disco para usarlo como espacio de intercambio cuando sea necesario y lo libera para que lo utilice el sistema de archivos cuando deja de ser necesario.
+$ systemctl status swapspace.service (comprobar si está activo)
+
+
 sxiv
 Visor de imágenes con las funciones básicas necesarias para una visualización rápida.
 $ sxiv imagen.png
