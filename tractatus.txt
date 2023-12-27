@@ -23100,6 +23100,11 @@ systune
 Este programa escribe los parámetros del núcleo, previamente guardados en un archivo de configuración, en el sistema de archivos /proc. Esto permite ajustar el rendimiento del kernel sin volver a compilarlo. Systune se inicia después de la mayoría de los demonios y otros scripts de init.d, por lo que puede usarse como sysctl de "segunda etapa".
 
 
+sysvbanner
+Muestra, horizontalmente, un texto de 'banner' de la misma manera que lo hace el banner de System V. Este paquete proporciona los comandos banner y sysvbanner
+$ sysvbanner linux
+
+
 sysv-rc-conf
 Gestionar el arranque de las aplicaciones al inicio.
 # sysv-rc-conf
@@ -23138,6 +23143,11 @@ tapestat
 [sysstat]. Utilidad para supervisar la actividad de las unidades de cinta conectadas a un sistema.
 # tapestat -y (omitir el tiempo transcurrido desde que se inició el sistema)
 # tapestat --human (presentación en formato legible [23M, 55k...])
+
+
+taptempo
+Presionar la tecla Intro al ritmo de una canción que se está escuchando se obtiene el número correspondiente de latidos por minuto [bpm=beats-per-minute]. Equivale al tempo ejecutado por un metrónomo.
+$ taptempo
 
 
 tar
