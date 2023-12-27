@@ -3205,6 +3205,13 @@ Servidor web
 # cherokee-admin -b -p 9091 (especificar un puerto para la gestión)
 
 
+chflags
+Cambiar flags de un archivo o carpeta.
+$ chflags -R nouchg DIR (de forma recursiva y que el archivo se puede cambiar)
+$ chflags -r uchg file (recursiva y que el archivo no se puede cambiar)
+$ chflags -R -L DIR (recursiva y siguiendo enlaces simbolicos)
+
+
 chfn
 modifica la información personal del usuario [nombre, domicilio, teléfono….]
 $ chfn usuario (permite modificar todos los datos del usuario)
