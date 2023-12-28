@@ -23984,6 +23984,14 @@ trafshow
 # trafshow -R 1 -p (actualizar cada segundo y no poner en modo promiscuo)
 
 
+tran
+Herramienta que permite transliterar una palabra o una frase a otros tipos de escritura. La conversión permite comprender texto o, al menos los nombres, pero no el significado,
+$ tran list (listado)
+$ echo linux es genial | tran devanagari
+$ echo linux es genial | tran greek
+$ echo линукс эс гэнял | tran latin (salida anterior a latrin)
+
+
 trans
 [translate-shell] Traducir textos a algunos de los idiomas disponibles via google.
 $ trans -r (Muestra el listado de idiomas disponibles)
@@ -24032,7 +24040,7 @@ $ tree -o archivo (Enviar el resultado a un archivo)
 
 
 treil
-Generador de una imagen en azulejo a partir de los archivos de un directorio.
+Produce una imagen de mosaicos a partir de una estructura de árbol de un directorio.
 $ treil -g 800x600 -o imagen.png /usr/share (Con una geometria determinada [g], que la imagen se guarde como imagen.png [o] y el directorio del cual crear la imagen)
 
 
