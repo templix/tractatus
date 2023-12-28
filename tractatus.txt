@@ -23445,6 +23445,17 @@ $ termsaver urlfetcher -u lapipaplena.org (Mostrará el código de la página in
 $ termsaver programmer -p script.sh (Mostrará el código indicado linea a linea)
 
 
+termtosvg
+Graba todo lo que vamos escribiendo en la terminal y sus salidas, en formato SVG, desde que lanzamos la aplicación hasta que escribamos "exit". La grabación se guarda en /tmp.
+      $ termtosvg
+      Recording started, enter "exit" command or Control-D to end
+      $   (empezamos a escribir comandos y cuando terminemos:)
+      $ exit
+      Rendering ended, SVG animation is /tmp/termtosvg_6nxfvxdm.svg
+La visualizamos, por ejemplo:
+$ firefox /tmp/termtosvg_6nxfvxdm.svg
+
+
 test
 Comprobar tipos de archivos y comparar valores, devolviendo 1 si es cierto y o si es falsa.
 Sobre ficheros:
