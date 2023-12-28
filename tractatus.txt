@@ -2459,6 +2459,11 @@ Monitorear de D-bus
 # busctl --quiet
 
 
+bustle-pcap
+Herramienta para trazar y proporcionar información de llamadas D-Bus.
+# bustle-pcap -v monitor.pcap (con la máxima información de la sesión y guardado en el archivo monitor.pcap)
+
+
 busybox
 Herramienta que integra los comandos linux más comunes. Útil en móviles con sistema Android.
 $ busybox (Mostrará la forma de uso y los comando disponibles. En Android entra en el prompt. “exit” para salir)
@@ -24024,11 +24029,12 @@ $ jobs
 $ kill -9 %pid (Para matarlo definitivamente)
 
 
-trash
-[trash-cli]. Enviar a la papelera un archivo o directorio. Alternativa al clásico rm con la particularidad de recuperar lo borrado.
-$ trash-put archivo (elimina archivo)
+trash-cli
+Proporciona una utilidad de papelera en línea de comandos. Recuerda el nombre, la ruta original, la fecha de eliminación y los permisos de cada archivo eliminado. Consta de varias aplicaciones trash-empty, trash-list, trash-put, trash-restore y trash-rm.
+$ trash archivo (elimina archivo)
+$ trash-put archivo (lo mismo)
 $ trash-list (Lista los archivos eliminados)
-$ restore-trash (Pregunta el número del archivo a restaurar)
+$ trash-restore (Pregunta el número del archivo a restaurar)
 $ trash-rm *.txt (borrar todos los txt de la papelera)
 $ trash-empty (Vacia la papelera)
 
