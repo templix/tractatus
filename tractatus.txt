@@ -24069,6 +24069,17 @@ Herramienta para la detección de intrusos (IDS). Tripwire es una herramienta de
 # twprint --print-report --twrfile /var/lib/tripwire/report/Debian-20191230-190624.twr > report.txt (escribir un reporte de informe)
 
 
+trocla
+Generar contraseñas aleatorias y almacenarlas en varios formatos [normal, MD5, bcrypt] y poder recuperarlas.
+$ trocla formats (listado de opciones)
+$ trocla create usuario1 plain (creará una contraseña aleatoria y almacenará su texto sin formato en la clave usuario1. La contraseña también se mostrará en la salida)
+$ trocla create usuario1 mysql (creará una contraseña aleatoria sha1 y estilo mysql se almacenará y mostrará su hash)
+$ trocla create usuario2 plain 'charset: alphanumeric'
+$ trocla get usuario1 plain (devuelve la contraseña almacenada para usuario1)
+$ trocla delete usuario1 plain (eliminar la contraseña de usuario1 y la muestra)
+$ trocla create usuario1 plain 'encode: sha512crypt'
+
+
 true
 No realiza absolutamente nada de los comandos que le siguen.
 $ true rm * (no elimina nada)
