@@ -24482,8 +24482,8 @@ $ tzwatch (Mostrará hora local de cada una de las zonas elegidas)
 
 
 ubuntu-packaging-guide-html
-Consultar la guia de ubuntu des del navegador. Disponible tambien en español.
-	firefox file:///usr/share/doc/ubuntu-packaging-guide-html-es/singlehtml/index.html
+Conjunto de artículos en español fáciles y sencillos, que ayudan a entender el empaquetado y desarrollo de Ubuntu.
+$ firefox file:///usr/share/doc/ubuntu-packaging-guide-html-es/index.html
 
 
 ubuntu-support-status
@@ -24516,6 +24516,16 @@ Comando para montar y desmontar volumenes usando el demonio que llaman programas
 $ udisks --mount /dev/sda1 (montará esta partición).
 $ udisks --unmount /dev/sda1 (desmontará esta partición).
 $ udisks --monitor (Monitoriza la actividad del demonio. Muy útil para verificar si una partición es montada o no)
+
+
+udisks2
+Actualización del anterior comando. Demonio que permite operaciones como consultar, montar, desmontar, formatear o desconectar dispositivos de almacenamiento como discos duros o memorias USB.
+$ udisksctl status (comprobar todos los discos duros y usbs conectados)
+$ udisksctl status nvme0n1 (comprobar si determinado disco está conectado)
+$ udisksctl mount -b /dev/sdd1 (montar dispositivo. Equivalente al clásico mount /dev/sdd1)
+$ udisksctl unmount -b /dev/sdd1 (desmontar dispositivo. Equivalente al clásico umount /dev/sdd1)
+$ udisksctl dump (mostrar toda la información de todos los dispositivos con detalle)
+$ udisksctl info -b /dev/sda (mostrar información sobre un dispositivo)
 
 
 ufw
