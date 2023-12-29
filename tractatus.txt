@@ -24234,11 +24234,17 @@ Reiniciar.
 
 
 tty-clock
-Reloj digital por consola
-$ tty-clock -s -c -C 1 (marcando los segundo [s] en el centro de la consola [c] y en color rojo [1]
-Algunas opciones:
--r	Que rebote por los lados de la terminal.
-Colores: 2: verde, 3: amarillo, 4: azul, 5: rosa, 6:turquesa, 7: blanco
+Reloj digital por consola.
+$ tty-clock -s -c -C 1 (marcando los segundos [s] en el centro de la consola [c] y en color rojo [1])
+$ tty-clock -r -s -C 2 (que rebote por los lados de la terminal y de color verde)
+Nota.- Otros colores: 3: amarillo, 4: azul, 5: rosa, 6:turquesa, 7: blanco
+
+
+ttygif
+A partir de una grabación de una sesión tty con ttyrec [ver] crea un gif.
+  $ ttygif file
+  Creating Animated GIF ... this can take a while
+  Created: tty.gif in the current directory!
 
 
 ttyrec
