@@ -24505,6 +24505,13 @@ Demonio que crea y elimina dinámicamente nodos de dispositivos de /dev/, maneja
 $ systemctl status udev (comprobar si está activo)
 
 
+udevil
+Monta y desmonta dispositivos extraíbles y recursos compartidos de red sin requerir una contraseña, muestra información del dispositivo y monitorea los cambios del dispositivo. Incluye el script de montaje automático devmon.
+$ udevil mount /dev/sda1
+$ udevil unmount /dev/sda1
+$ udevil info /dev/sda
+
+
 udiskie
 Herramienta  para montar automaticamente unidades en Archlinux. Debe arrancarse el servicio antes de ejecutarse el gestor de ventanas en el archivo .xinitrc. Un ejemplo:
 # nano .xinitrc
