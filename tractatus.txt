@@ -24693,6 +24693,16 @@ Elimina todo el formato HTML que encuentra e un fichero e imprime el texto limpi
 $ unhtml index.html > /home/usuario/index.txt (Si no se facilita el archivo de destino, lo muestra en pantalla)
 
 
+unicode
+Utilidad que muestra propiedades para un carácter determinado o búsquedas en la base de datos Unicode para un nombre determinado.
+$ unicode --list (listado de codificaciones)
+$ unicode --ascii (tabla ascii)
+$ unicode --brexit
+$ unicode -d 9 (propiedades del caracter numerico "9")
+$ unicode -a ñ (de forma automática determinar las caracteristicas del caracter colocado [ñ])
+$ unicode -w tkñs (busqueda en la wikipedia los caracteres mencionados)
+
+
 unicode_start
 Pondrá el teclado y la consola en modo Unicode [UTF-8].
 $ unicode_start [font] [umap]
