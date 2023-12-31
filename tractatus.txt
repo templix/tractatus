@@ -25311,6 +25311,15 @@ $ uuencode file1 file2 > file.uue ("file1": nombre del binario a codificar, "fil
 $ uudecode file.uue (Descodificar el binario. Se verá con el nombre puesto en "file2")
 
 
+uuid
+Los UUID son números de 128 bits que pretenden tener una alta probabilidad de unicidad en el espacio y el tiempo y son computacionalmente difíciles de adivinar. Son identificadores únicos a nivel mundial que pueden generarse localmente sin contactar a una autoridad de registro global. Los UUID están pensados como identificadores únicos tanto para el etiquetado masivo de objetos con una vida útil extremadamente corta como para la identificación confiable de objetos muy persistentes en una red.
+$ uuid -m (Fuerza el uso de una dirección MAC de multidifusión aleatoria)
+$ uuid -F STR (representación de cadena ASCII hexadecimal de 36 caracteres de un UUID)
+$ uuid -F SIV (representación de un valor entero único de 39 caracteres de longitud máxima de un UUID)
+$ uuid -v1 (generar uuid de la versión 1 de uuid)
+$ uuid -d 8ce17124-a813-11ee-a715-8fccac721c4c (decodificar un UUID determinado)
+
+
 uuidcdef
 Genera un nuevo identificador uuid. [ver uuidgen]
 
