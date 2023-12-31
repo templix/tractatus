@@ -24666,6 +24666,14 @@ Herramienta para exportar los correos de Outlook en formato DBX al formato EML p
 $ undbx carpeta-origen carpeta-exportacion (Primero se define la carpeta origen donde se encuentran los ficheros DBX y a continuación se especifica el directorio de salida)
 
 
+undertime
+Muestra una tabla simple de 24 horas con horarios coincidentes en diferentes zonas horarias o ciudades.
+$ undertime -l (listado de las zonas posibles)
+$ undertime -t Europe/Madrid (horas en una zona)
+$ undertime --timezones Europe/Madrid Europe/Moscow (en dos zonas especificadas)
+$ undertime --no-default-zone (muestra varias zonas)
+
+
 unexpand
 Convertir espacios en tabulaciones.
 $ unexpand -t 4 -a texto.txt (Sólo las lineas que tengan 4 espacios en blanco, sea al inicio o entre palabras)
