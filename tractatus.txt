@@ -24661,6 +24661,12 @@ Descargar e instalar actualizaciones de seguridad de forma automática y desaten
 Y contestar "yes"
 
 
+unbound
+Servidor DNS de almacenamiento en caché solo recursivo que puede realizar la validación de resultados DNSSEC [Extensiones de seguridad DNS]. Implementa solo una cantidad mínima de servicio autorizado para evitar fugas a los servidores de nombres raíz: búsquedas directas para localhost, inversas para 127.0.0.1 y ::1, y NXDOMAIN [que no se pueda resolver el nombre del dominio] para zonas atendidas por AS112 [grupo de operadores de servidores de nombres de voluntarios que se unieron en un sistema autónomo].
+$ unbound-checkconf (averiguar si existen errores en el archivo de configuración /etc/unbound/unbound.conf)
+$ unbound (activa el daemon)
+
+
 undbx
 Herramienta para exportar los correos de Outlook en formato DBX al formato EML para posteriormente importar en Thunderbird
 $ undbx carpeta-origen carpeta-exportacion (Primero se define la carpeta origen donde se encuentran los ficheros DBX y a continuación se especifica el directorio de salida)
