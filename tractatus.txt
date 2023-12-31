@@ -25153,6 +25153,17 @@ FILESYSTEMS="vfat ext2 ext3 ext4 hfsplus"
 MOUNTOPTIONS="sync,noexec,nodev,noatime,users,umask=000"
 
 
+usbutils
+Paquete que contiene varias utilidades para inspeccionar los dispositivos conectados al bus USB. Incluye los comandos lsusb [ver], usb-devices [ver], usbhid-dump [ver] y usbreset.
+Primero ha de lanzarse:
+$ lsusb (para conocer el bus y el device)
+  ...
+  Bus 001 Device 006: ID 0930:652a Toshiba Corp. TravelDrive
+  ...
+$ usbreset 001/006 (con los datos anteriores [bbb/ddd], resetear un usb)
+$ usbreset 0930:652a (lo mismo pero con los datos ID de la salida lsusb)
+
+
 uscan
 Se ejecuta sin argumentos desde la raíz del árbol de fuentes donde se ve el directorio debian/, o un directorio que contiene varios árboles de fuentes.
 $ uscan
