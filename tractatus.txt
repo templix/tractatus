@@ -5551,6 +5551,18 @@ Estas modificaciones son válidas también para update-manager [ver]
 # do-release-upgrade -d
 
 
+doas
+Primero crear el archivo:
+# nano /etc/doas.conf
+Y entrar el usuario con permisos root:
+  permit persist :USER as root
+Especificar los permisos y propietario del archivo:
+# chown -c root:root /etc/doas.conf
+# chmod -c 0400 /etc/doas.conf
+Luego el usuario especificado en el archivo podrá, por ejemplo, ejecutar:
+$ doas -u root apt update
+
+
 dos2unix
 Convertir un formato de fichero texto MSDOS a UNIX.
 $ dos2unix filedos.txt fileunix.txt
