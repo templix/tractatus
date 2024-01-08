@@ -1471,11 +1471,13 @@ Control del funcionamiento de los daemons de montaje automático. Los daemons de
 
 
 autojump
-Forma rápida de navegar por el sistema de archivos. Funciona manteniendo una base de datos de los directorios que más se utilizan desde la línea de comandos y permite saltar directamente hacia directorios concretos sin importar en absoluto en cual estamos posicionados. Los directorios deben visitarse primero antes de poder saltar a ellos. j es una función de autojump. Cualquier opción que se pueda usar con autojump se puede usar con j y viceversa. Primero entrar:
+Forma rápida de navegar por el sistema de archivos. Funciona manteniendo una base de datos de los directorios que más se utilizan desde la línea de comandos y permite saltar directamente hacia directorios concretos sin importar en absoluto en cual estamos posicionados. Los directorios deben visitarse primero antes de poder saltar a ellos. j es una función de autojump. Cualquier opción que se pueda usar con autojump se puede usar con j y viceversa. Para activar la aplicación, primero lanzar como usuario normal:
+$ source /usr/share/autojump/autojump.bash on startup
+Y luego entrar en .bashrc:
 $ nano .bashrc
 la linea:
 	. /usr/share/autojump/autojump.sh
-Una muestra de todo un proceso:
+Recargar el archivo de configuración [source .bashrc]. Una muestra de todo un proceso:
 	$ cd labores/liquidaciones/xlss
 	[~/labores/liquidaciones/xlss]$ cd
 	$ j xlss
@@ -1485,13 +1487,14 @@ Una muestra de todo un proceso:
 	$ j pdfs
 	[~/labores/liquidaciones/pdfs]$ j xlss
 	[~/labores/liquidaciones/xlss]$
-Tambien podemos entrar directorios marcando su ruta absoluta y el argumento -a:
+Tambien podemos entrar directorios marcando su ruta absoluta con el argumento -a:
 $ autojump -a ~/descargas/videos/tutoriales/emacs
 Y luego podremos entrar en el directorio anterior pulsando en cualquier directorio "j emacs"
 $ j --purge (Para limpiar todos los directorios entrados en autojump)
 $ jc Videos (Saltar a un subdirectorio del directorio actual)
 $ jo music (Abrir el Administrador de archivos en el directorio actual)
 $ jco images (También se admite la apertura de un administrador de archivos en un subdirectorio)
+$ j -s (ver listados de los directorios que contiene la aplicación)
 
 
 autolog
