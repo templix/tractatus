@@ -7762,6 +7762,11 @@ Regenerar la cache de fuentes instaladas
 $ fc-cache -f -v
 
 
+fchdir
+Es idéntico a chdir con la única diferencia de que el directorio se proporciona como un descriptor de archivo abierto, es decir que devuelve 0 si puede ir al directorio especificado o 1 si no.
+$ fchdir /ust/local/bin (devolverá 1)
+
+
 fc-list
 Listar todas las fuentes disponibles.
 $ fc-list | cut -d ':' -f 1 | sort -u  (de forma más clara)
