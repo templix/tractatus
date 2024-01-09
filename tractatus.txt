@@ -27273,6 +27273,11 @@ $ xhost + 32.125.3.12 (Permiter el acceso al servidor X a una ip)
 $ xhost - 32.125.3.12 (Anular el permiso)
 
 
+xininfo
+Utilidad para consultar el diseño y tamaño actual del monitor o monitores configurados.
+$ xininfo -print (información del monitor)
+
+
 xinit
 Permite iniciar un servidor X. El script startx [ver] es un front-end para xinit. De forma predeterminada, xinit y startx inician un servidor X en la pantalla :0. Si no existe el archivo .xinitrc del usuario, xinit/startx lanza un servidor X en pantalla y después un emulador de terminal Xterm en ella. Cuando el Xterm finaliza, xinit/startx cierra el servidor X y, generalmente, inicia un script que a su vez ejecuta un número de programas dado y un gestor de ventanas.
 
@@ -27300,7 +27305,7 @@ $ xkcd-dl --download-all (Descargar la colección completa)
 
 xkcdpass
 Generador de contraseñas relacionadas con frases [en inglés].
-$ xkcdpass -C alternating --count=5 -a 'shit' -d '&' --min=6 --max=8 --valid-chars='[a-z,A-Z]' (5 palabras alternando mayúsculas y minúsculas, relacionadas con "shit", separadas con & y entre 6 y 8 letras)
+$ xkcdpass -C alternating --count=5 -a 'shit' -d '&' --min=6 --max=8 --valid-chars='[a-z,A-Z]' (5 palabras alternando mayúsculas y minúsculas, que la primera letra de cada palabra deletreen "shit", separadas con & y entre 6 y 8 letras)
 
 
 xkill
