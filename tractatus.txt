@@ -27273,6 +27273,11 @@ $ xhost + 32.125.3.12 (Permiter el acceso al servidor X a una ip)
 $ xhost - 32.125.3.12 (Anular el permiso)
 
 
+xidle
+Ejecuta un programa específico después de un cierto tiempo de inactividad o cuando el cursor del mouse se mueve a un borde de la pantalla durante un tiempo determinado.
+$ xidle -delay 10 -sw -area 10 -program /usr/bin/lxlock -timeout 200 (Ejecutar lxlock si no se detecta actividad en 200 segundos o si el puntero permanece en una area de 10 pixels de la esquina de abajo a la izquierda durante más de 10 segundos)
+
+
 xininfo
 Utilidad para consultar el diseño y tamaño actual del monitor o monitores configurados.
 $ xininfo -print (información del monitor)
