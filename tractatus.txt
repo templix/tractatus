@@ -27609,6 +27609,21 @@ xtermcontrol
 Utilidad para comprobar y modificar dinámicamente las propiedades de xterm, facilitando la consulta y el cambio de colores, título, fuente y geometría de un xterm en ejecución. También se admiten manipulaciones de ventanas como subir/bajar, maximizar/restaurar y reajustar. El archivo de configuración en ~/.xtermcontrol
 
 
+xtitle
+Establece el título de la ventana y/o el nombre del icono de la ventana del terminal en la que se ejecuta como argumentos de la línea de comandos. A menos que se supriman los mensajes, xtitle también informará las configuraciones que ha realizado.
+$ sakura (lanzamos una terminal)
+$ xtitle linux (cambia el titulo de la terminal y del icono)
+$ xtitle -t sakura-linux (solo lo cambia en la termminal)
+$ xtitle -i linux (solo en el icono)
+$ xtitle -q sakura (vuelve a dejar el título de la terminal y el icono como estaban sin mostrar la salida)
+
+
+xttitle
+Estable el título de la terminal y, si se indica, del icono.
+$ xttitle linux linux (estable el título de la terminal y del icono)
+$ xttitle bash (solo de la terminal)
+
+
 xtrlock
 Bloquea el servidor de las X hasta que el usuario no introduce la contraseña y pulsa enter. El cursor se convierte en un candado y el teclado no reponde. Antes de introducir la contraseña es preferible clicar "esc" para borrar todo lo que puede haberse pulsado en el teclado. La introducción de la contraseña no es visible en pantalla.
 $ xtrlock
