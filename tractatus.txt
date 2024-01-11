@@ -27609,6 +27609,11 @@ xtermcontrol
 Utilidad para comprobar y modificar dinámicamente las propiedades de xterm, facilitando la consulta y el cambio de colores, título, fuente y geometría de un xterm en ejecución. También se admiten manipulaciones de ventanas como subir/bajar, maximizar/restaurar y reajustar. El archivo de configuración en ~/.xtermcontrol
 
 
+xtermset
+Permite cambiar título, color, fuente, geometría... de una ventana de terminal. Puede aplicarse a algunas terminales como sakura, guake, xterm... No a todas. En una terminal tecleamos:
+$ xtermset -n linux -T linux -fg green -cr white (título de la terminal y el icono con nombre "linux", letra verde y cursor blanco)
+
+
 xtitle
 Establece el título de la ventana y/o el nombre del icono de la ventana del terminal en la que se ejecuta como argumentos de la línea de comandos. A menos que se supriman los mensajes, xtitle también informará las configuraciones que ha realizado.
 $ sakura (lanzamos una terminal)
