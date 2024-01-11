@@ -27490,6 +27490,13 @@ Añadir:
 Reiniciar.
 
 
+xrdb
+Permite administrar la base de datos de recursos X. La base de datos de recursos X, comúnmente conocida como Xresources, es utilizada por el sistema X Window para almacenar las preferencias del usuario y los ajustes de configuración para aplicaciones X, esto proporciona una manera de cambiar dinámicamente la apariencia o el comportamiento de las aplicaciones sin reiniciarlas. Xrdb no carga ningún archivo por sí solo, pero muchos entornos de escritorio usan xrdb para cargar archivos ~/.Xresources al inicio de la sesión para inicializar la base de datos de recursos, como un reemplazo generalizado de los archivos ~/.Xdefaults.
+$ xrdb .Xresources (recargar la configuración de .Xresources)
+$ xrdb -query (Consulta la base de datos de recursos e imprime los valores establecidos)
+$ xrdb -load ~/.Xresources (recargar los nuevos valores si se ha modificado el archivo)
+
+
 xrefresh
 Refresca la imagen del servidor Xorg
 
