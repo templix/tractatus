@@ -27832,6 +27832,19 @@ Algunas teclas de control:
 	q (salir)
 
 
+ylva
+Gestión de datos en un archivo encriptado con permisos chmod 600.
+$ ylva -i file.db (Crea una nueva base de datos)
+$ ylva -a (una entrada de datos. Pide: "Title" [único dato obligatorio los demás son opcionales], "Username", "Url", "Notes" y "Password"
+$ ylva -A (listar entradas si todavia no está encriptada)
+$ ylva -E (encriptar la base de datos. Pide contraseña)
+$ ylva -D file.db (desencriptar la base de datos. Pide la contraseña entrada para encriptarla)
+$ ylva -e 2 (editar la entrada con ID 2. Los campos que permanecen igual pulsar "intro" y modificar el que corresponda)
+$ ylva -l 2 (lista toda la entrada con ID 2)
+$ ylva -r 2 (eliminar la entra con ID 2)
+$ ylva -p (mostrar nombre de la base de datos)
+
+
 yokadi
 Herramienta para organizar tareas tipo agenda. Crea una base de datos sqlite en el directorio personal [~/.yokade.db].
 $ yokadi (Entra en el prompt. La primera vez que se ejecuta crea la base de datos)
