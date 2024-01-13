@@ -10283,6 +10283,9 @@ Otras opciones:
 hash
 Lista de los últimos comandos usados y la frecuencia.
 $ hash
+$ hash -l
+$ hash -d date (borrar la entrada date del listado)
+$ hash -r (borrar todo el listado)
 
 
 hash-identifier
@@ -21330,7 +21333,7 @@ Devuelve el estado de SELinux y la política que se está usando. Ver selinux y 
 
 set
 desplegar todas las variables [y sus valores] que el shell controla y otorgar nuevas variables.
-$ set | more
+$ set -o (listado de todas las variables y si estan o no activadas)
 Algunas ejemplos que se muestran en la salida:
 $ set -o ignoreeof (evitar que la terminal se cierre al presionar Control-D)
 $ set -o noglob (desactivar caracteres especiales en la shell: ?, [, ], * y ~)
