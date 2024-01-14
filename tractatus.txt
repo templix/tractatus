@@ -13215,6 +13215,15 @@ $ location lookup 2.142.97.159 (localizar una IP)
 $ location search-as "linux" (Buscar un sistema por nombre)
 
 
+lockout
+Herramienta que impone disciplina para que pueda realizar algún trabajo. Por ejemplo, el bloqueo se puede utilizar para instalar un firewall que no le permita navegar por la Web. El bloqueo cambia la contraseña de root durante un período específico; esto le impide eliminar secretamente el firewall y luego navegar por la Web de todos modos. En caso de emergencia, puede reiniciar su computadora para deshacer los efectos del bloqueo y restaurar la contraseña de root original.
+$ lockout (muestras varios advertimientos sobre la aplicación:)
+   !! ADVERTENCIA !!
+      Este programa es MUY PELIGROSO.
+$ lockout lock 2h30m (cerrar en 2 horas 30 minutos)
+$ lockout status (mirar el estado de la aplicación)
+
+
 logcheck
 Herramienta que analiza periódicamente todos los logs del sistema. En la instalación ya se instala como una tarea en el cron en el fichero /etc/cron.d/logcheck.
 Para recibir correos con los informes,Editar el fichero:
