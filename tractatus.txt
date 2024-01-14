@@ -14144,6 +14144,7 @@ Monitorea las temperaturas, voltajes y rpm de ventiladores de refrigeración de 
 mbw
 Determina el ancho de banda de la memoria de "copia" disponible para los programas del espacio de usuario.
 $ mbw 1000 (tamaño de la matriz para las pruebas de 1000 [ARRAY_SIZE])
+$ mbw -a -n 2 1000 (dos números por prueba con 1 G de memoria y no mostrar promedio [-a])
 $ mbw -t 1 -n 3 1000 (3 ejecuciones por prueba y solo en la DUMB ["-t 0" para la MEMCY y "-t 2" para la MCBLOCK)
 mbw proporcionará tres métricas principales en los resultados:
      MEMCPY: Mide el ancho de banda de la memoria al copiar datos utilizando la función memcpy estándar.
@@ -16947,6 +16948,11 @@ $ find /home/$USER -iname *.jpg; notify-send -i gtk-dialog-warning -t 4000 "ATEN
 opciones:
 -i especifica el icono a usar
 -t tiempo en milisegundos que se mostrará la nota
+
+
+notus-scanner
+Detecta productos vulnerables en el entorno de sistema. El método de escaneo consiste en evaluar la información interna del sistema detectando incluso productos inactivos porque no necesita interactuar con cada uno de los productos.
+# notus-scanner
 
 
 npm
