@@ -8565,6 +8565,23 @@ $ fkill chromium (por nombre directamente de la aplicación a cerrar)
 $ fkill :5050 (por numero de puerto)
 
 
+flatpak
+Instalar, obtener, administrar y ejecutar paquetes de aplicaciones, alojadas en flathub, lugar central de aplicaciones linux. Para habilitar flathub lanzar en una terminal:
+# flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+Reiniciar el sistema y ya podran usarse los argumentos especificos que procedan.
+$ flatpak update (actualizar las aplicaciones)
+$ faltpak list (listar aplicaciones instaladas)
+$ flatpak history (mostrar historial)
+$ flatpak config (lenguajes configurados)
+$ flatpak repair (reparar la instalación de flatpak)
+$ flatpak info (mostrar información de una aplicacion instalada)
+$ faltpak uninstall paquete (desinstalar una aplicacion)
+$ flatpak search paquete (buscar apliaciones)
+$ flatpak kill aplicacion (detener una aplicación flatpak en ejecución)
+$ flatpak ps (ver las aplicaiones faltpak ejecutándose)
+$ flatpak run aplicacion (ejecutar una aplicación flatpak)
+
+
 flexget
 [python2.6 python-pip]. Descarga de series a partir de su direccion RSS. Archivo de configuración:
 $ nano .flexget/config.yml
