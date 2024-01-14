@@ -1231,8 +1231,9 @@ En el archivo de configuración ya está especificado el puerto, el host y la ub
 
 arp
 Supervisa la tabla ip y MAC.
-$ arp -n
+# arp -n
 # arp -s IP MAC (establecer una MAC estática a una IP)
+# arp -d IP (eliminar una ip de la entrada arp)
 
 
 arp-fingerprint
@@ -1279,8 +1280,13 @@ O la que proceda (eth0, eth1...)
 
 
 arptables
-Configurar, mantener e inspeccionar las tablas ARP gobernadas por el nucleo linux. Tiene un comportamiento parecido a iptables [ver] y las normas que se establecen son identicas pero opera en la capa ARP y no en la IP.
-# arptables -A INPUT -s 192.168.1.20 -j DROP (bloquea todo el tráfico de una ip especifica)
+Herramienta analoga a iptables [ver] que se utiliza para configurar y mantener las tablas de reglas ARP en el kernel Linux y permite controlar el tráfico ARP que envía, recibe o passa por la máquina. Incluye las aplicaciones arptables-legacy, arptables-legacy-restore y arptables-legacy-save. La herramienta consta de una sola tabla [filter] y dos cadenas: INPUT y OUTPUT y las acciones básicas se reducen a ACCEPT, DROP y RETURN para el origen del paquete [-s] o su destino [-d]. Ejemplo:
+# arptables -A INPUT -s 192.168.1.10 -j DROP (bloquear las entradas de la ip especificada)
+# arptables -A OUTPUT -d 192.168.1.10 -j DROP (bloquear las salidas de la ip especificada)
+Tambien puede especificarse la interfaz [-i] si tenemos varias:
+# arptables -A INPUT -i eth0 -s 192.168.1.10 -j DROP (las que salen por eth0)
+# arptables -A INPUT -o eth0 -d 192.168.1.10 -j DROP (las que entran por eth0)
+# arptables -A INPUT -i eth0 -p tcp --dport 22 -j DROP (bloquear entradas por el puerto 22)
 # arptables --list -n (enumerar las reglas activas)
 # arptables -A INPUT --source-mac 00:11:22:33:44:55 -j DROP (bloquear una MAC concreta)
 
@@ -27310,6 +27316,15 @@ $ xgamma -gamma 1.0 (Vuelve a la situación anterior)
 $ xgamma -rgamma 2.0 (aumentar rojos)
 $ xgamma -bgamma 2.2 (aumentar azules)
 $ xgamma -ggamma 2.2 (aumentar los verdes)
+
+
+xh
+Herramienta para enviar solicitudes HTTP. Descargar:
+# curl -sfL https://raw.githubusercontent.com/ducaale/xh/master/install.sh | sh
+$ xh http://localhost/emacs
+$ xh example.com (no es necesario colocar http://)
+$ xhs example.com (no es necesario colocar https://)
+$ xh -d url -o archivo (descargar y guardar en un archivo)
 
 
 xhost
