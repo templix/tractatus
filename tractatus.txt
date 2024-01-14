@@ -16777,12 +16777,22 @@ $ nmblookup -A 192.168.1.125
 
 
 nmcli
-Herramienta de línea de comandos para controlar NetworkManager para conocer su estado.
+Herramienta de línea de comandos para controlar NetworkManager y para conocer su estado.
+$ nmcli device wifi list (listar wifis cercanas)
 $ nmcli -m tabular device show (ver todos los dispositivos de red de forma tabulada. Otra opción es multiline)
-$ nmcli connection show (ver conexión activa)
+$ nmcli connection show (ver conexiones activas)
+$ nmcli connection (lo mismo)
 $ nmcli general status (estado)
-$ nmcli -p -f general,wifi-properties device show wlan0 (ver información extensa [p] y propiedades de los campos expecificados [f]
+$ nmcli device wifi connect SSID_or_BSSID password password (conectarse a una wifi)
+$ nmcli device wifi connect SSID_or_BSSID password password hidden yes (conectarse a una wifi oculta)
+$ nmcli connection up name_or_uuid (conectarse a una red)
+$ nmcli -p -f general,wifi-properties device show wlan0 (ver información extensa [p] y propiedades de los campos expecificados [f])
 $ nmcli general permissions (permisos)
+$ nmcli device (listado de dispositivos de red y su estado)
+$ nmcli device disconnect ifname eth0 (desconectarse de una interfaz)
+$ nmcli connection delete name_or_uuid (eliminar una conexion)
+$ nmcli radio wifi off (desactivar una wifi)
+$ nmcli general reload (reiniciar servicio despues de modificar una conexión)
 
 
 nmon
