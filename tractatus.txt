@@ -852,9 +852,12 @@ Permite marcar directorios y luego saltar a ellos usando la marca. Por defecto a
 $ apparix
 [apparix] created bookmark file /home/pep/.apparixrc
 [apparix] created expansion file /home/pep/.apparixexpand
---- portals
---- expansions
---- bookmarks
+$ apparix --shell-examples (muestra el código que ha entrarse en .bashrc para que los atajos "to" y "bm" tengan efecto)
+Ejemplo:
+  $ cd Documentos/bash
+  [~/Documentos/bash]$ apparix --add-mark bash (añadir directorio un marcador "bash" en bookmarks.)
+$ apparix -l (ver listados de los directorios guardados para un acceso rápido)
+$ apparix -u 3 (eliminar del listado el número 3)
 
 
 apparmor
@@ -23314,6 +23317,14 @@ tarcat
 Concatena por pantalla los contenidos de archivos de texto o comprimidos con tar.
 $ tarcat file1.tar file2.tar file3.tar
 $ tarcat file1.txt file2.txt file3.txt
+
+
+tc
+Controlar, clasificar, dar forma y programar el tráfico de la red.
+# tc qdisc
+# tc -c -d qdisc
+# tc -g class show dev enp1s0 (Muestra clases como gráfico ASCII en la interfaz enp1s0)
+# tc qdisc show dev enp0s0
 
 
 tcpdump
