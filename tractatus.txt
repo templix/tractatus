@@ -4895,6 +4895,13 @@ Verificar la integridad de los ficheros.
 # apt-get install --reinstall `(cat reinstall.txt)`  (para instalarlos a partir del listado)
 
 
+debtree
+Genera gráficos en forma de archivo .dot de las dependencia de un paquete .deb.
+$ deptree apt > apt.dot
+$ dot -Tpng -o apt.png apt.dot (crear el png con dot)
+$ gpicview apt.png (visualizar el gráfico generado con deptree)
+
+
 debugfs
 Depurador de sistemas ext. Permite consultar datos del sistema en tiempo real.
 # debugfs (Entra en el promt de la aplicación. Pulsar letra "q" para salir del promt)
