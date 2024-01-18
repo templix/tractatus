@@ -11996,6 +11996,12 @@ Detectar si se está ejecutando en un chroot. El estado de salida es:
 # ischroot -t (Salir con estado 0 si la detección no es posible.
 
 
+iso_8859-1
+El estándar ISO 8859-1 es un conjunto de caracteres codificados en octal, decimal y hexadecimal para el juego de caracteres ASCII que son los más utilizados por muchos idiomas de Europa occidental. También conocida como Latin1
+$ man iso_8859-1 (muestra los caracteres unicode)
+$ µ (ctrl-shift-u b5 intro)
+
+
 isoinfo
 Información sobre una iso
 $ isoinfo -d -i archivo.iso
@@ -24918,13 +24924,15 @@ $ unhtml index.html > /home/usuario/index.txt (Si no se facilita el archivo de d
 
 
 unicode
-Utilidad que muestra propiedades para un carácter determinado o búsquedas en la base de datos Unicode para un nombre determinado.
+Es un estándar de codificación de 4 caracteres que engloba todos los caracteres de uso común y en la actualidad, cuenta con alrededor de 150.000 caracteres provenientes de diversos alfabetos [chino, cuneiforme ,rúnico...], sistemas ideográficos y colecciones de símbolos [matemáticas, tecnología, música, iconografía...]. Además de los caracteres alfabéticos, Unicode también incluye una variedad de caracteres, como  fichas de juegos como el dominó, flechas, iconos, etc. Una tabla completa en https://symbl.cc/es/unicode/table/
 $ unicode --list (listado de codificaciones)
 $ unicode --ascii (tabla ascii)
 $ unicode --brexit
 $ unicode -d 9 (propiedades del caracter numerico "9")
 $ unicode -a ñ (de forma automática determinar las caracteristicas del caracter colocado [ñ])
 $ unicode -w t (busqueda en la wikipedia [abre la página en el navegador] el caracter mencionado [t])
+$ 月(ctrl-shift-u 6708 intro)
+$ Ǣ (ctrl-shift-u 01e2 intro
 
 
 unicode_start
