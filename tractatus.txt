@@ -18227,6 +18227,17 @@ $ pathchk -p Juegos del niño
 pathchk: el nombre del fichero «niño» contiene el caracter no portable «ñ»
 
 
+patool
+puede crear, extraer, probar, enumerar, comparar, buscar y recomprimir varios formatos de archivo. El formato de archivo se determina con el archivo y como alternativa por la extensión del archivo.
+patool admite 7z (.7z), ACE (.ace), ADF (.adf), ALZIP (.alz), AR (.a), ARC (.arc), ARJ (.arj), BZIP2 (.bz2), CAB (.cab), comprimir (.Z), CPIO (.cpio), DEB (.deb), DMS (.dms), FLAC (.flac), GZIP (.gz), ISO (.iso), LZH ( .lha, .lzh), LZIP (.lz), LZMA (.lzma), LZOP (.lzo), RAR (.rar), RPM (.rpm), RZIP (.rz), SHAR (.shar), SHN Formatos (.shn), TAR (.tar), XZ (.xz), ZIP (.zip, .jar) y ZOO (.zoo). Se basa en aplicaciones auxiliares para manejar esos formatos de archivo (por ejemplo, bzip2 para archivos BZIP2). Los formatos de archivo TAR, ZIP, BZIP2 y GZIP son compatibles de forma nativa y no requieren la instalación de aplicaciones auxiliares.
+$ patool extract archivo.zip archivo.rar (crear un directorio de cada archivo especificado)
+$ patool --verbose test ubuntu.iso (reealizar un test de una iso)
+$ patool list package.deb (ver el contenido de un .deb)
+$ patool diff file.rar file.zip (comparar si exiten diferencias entre dos archivos comprimidos)
+$ patool repack archivo.zip archivo.rar (reparar un .zip y guardar como .rar)
+$ patool recompress archivo.rar (recomprimir un archivo)
+
+
 pbzip2
 Comprensión en paralelo que puede usarse en máquinas de más de un nucleo. Las opciones de uso son las mismas que bzip2.
 
