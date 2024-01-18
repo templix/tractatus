@@ -5643,6 +5643,38 @@ Comprobar y reparar sistemas de archivos MS-DOS
 -V  (Realiza una pasada de verificación)
 
 
+dot
+Lenguaje de descripción de gráficos. Los gráficos generalmente se almacenan con la extensión de nombre de archivo .gv o .dot aunque se prefiere .gv para evitar confusiones.
+$ gpicview output.svg (Para visualizar los gráficos de los siguientes ejemplos)
+$ echo 'digraph { a -> b }' | dot -Tsvg -o output.svg
+$ echo 'digraph { a -> b }' | dot -Tpng -Gfontcolor=red -Glabel="Gráfico importante" -o output.png
+$ echo 'digraph { a -> b }' | dot -Tsvg -Nfontcolor=red -Nshape=rect -o out.svg
+$ echo 'digraph { a -> b }' | dot -Tsvg -Ecolor=red -Earrowhead=diamond -o out.svg
+$ echo 'digraph { a -> b }' | dot -Tsvg -o output.svg
+$ dot -Tsvg -O ~/graph1.gv ~/graph2.gv (generar automaticamente graph1.svg y graph2.svg)
+$ dot -P -Tsvg -o plugins.svg (ver gráfico de todos los plugins del ejecutable)
+Algunos ejemplos más complejos:
+1.-
+$ echo 'digraph sample3 {
+A -> {B ; C ; D}
+C -> {B ; A}
+}' | dot -Tpng -Nfontcolor=red -Nshape=oval -Glabel="Gráfico importante" -Nstyle=bold -o output.png
+2.-
+$ echo 'digraph test123 {
+               a -> b -> c;
+               a -> {x y};
+               b [shape=box];
+               c [label="hello\nworld",color=blue,fontsize=24,
+                    fontname="Palatino-Italic",fontcolor=red,style=filled];
+               a -> z [label="hi", weight=100];
+               x -> z [label="multi-line\nlabel"];
+               edge [style=dashed,color=red];
+               b -> x;
+               {rank=same; b x}
+       }
+' | dot -Tpng -Nfontcolor=red -Nshape=box -Glabel="Gráfico importante" -Nstyle=invis -o output.png
+
+
 downgrade
 Bajar versión a un programa instalado.
 # downgrade firefox
@@ -9887,7 +9919,7 @@ El puntero del ratón de convierte en una cruz y al clicar obtiene el color.
 
 
 graphviz
-(meta paquete). Genera gráficos a partir de archivos de texto. Ver pactree. Generar un archivo con pactree:
+(meta paquete). Genera gráficos a partir de archivos de texto. Ver pactree o dot porque la apñlicación incluye varios ejecutables: acyclic, bcomps, ccomps, circo, cluster, diffimg, dijkstra, dot, dot2gxl, dot_builtins, dotty, edgepaint, fdp, gc, gml2gv, graphml2gv, gv2gml, gv2gxl, gvcolor, gvgen, gvmap, gvmap.shn, gvpack, gvpr, gxl2dot, gxl2gv, lefty, lneato, mingle, mm2gv, neato, nop, osage, patchwork, prune, sccmap, sfdp, tred, twopi, unflatten y vimdot. Generar un archivo con pactree:
 $ pactree -g htop > htop
 $ dotty htop (muestra el gráfico)
 
