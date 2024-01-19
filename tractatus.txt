@@ -15027,8 +15027,10 @@ Cuando se intente parar o reiniciar el equipo vía ssh, saldrá una nota pidiend
 
 
 mon
-Herramienta para monitorear la disponibilidad de los servicios.  Los servicios pueden estar relacionados con la red, las condiciones ambientales o cualquier cosa que pueda ser probada con el software.  Si un servicio no está disponible mon puede avisarle con syslog, correo electrónico, su buscapersonas o un script de su elección. Puede controlar quién recibe cada alerta en función de la hora del día o del día de la semana y puede controlar la frecuencia con la que se vuelve a alertar de un problema existente. Logs en /var/log/mon/
-Monitorear datos con la dirección http://127.0.0.1:2583/ en el navegador
+Herramienta para monitorear la disponibilidad de servicios y enviar alertas sobre eventos prescritos o fallas en un entorno servidor-cliente. Los servicios se definen como cualquier cosa probada por un programa de "monitorización", que puede ser algo tan simple como hacer ping a un sistema o tan complejo como analizar los resultados de una transacción a nivel de aplicación. Logs en /var/log/mon/ si está activo el servicio se puede monitorear datos con la dirección http://127.0.0.1:2583/ en el navegador.
+# monshow --full
+# mon -d -S (en modo debug e iniciar con el planificador detenido)
+# mon -s /home/USER (epecificando ruta para monitorear scripts)
 
 
 monfailures
@@ -21226,6 +21228,10 @@ sdcv
 Utilidad basada en texto para trabajar con diccionarios en formato StarDict.
 $ sdcv -l (listar los diccionarios que se instalan)
 $ sdcv palabra (Buscar "palabra" en los direccionarios)
+
+
+sdf
+[Simple Document Format]. Sistema de desarrollo de documentos en una variedad de formatos desde una única fuente. Los formatos de salida admitidos son PostScript, PDF, HTML, plain text, POD, man pages, LaTeX, MIF, SGML, RTF,MIMS F6 help y MIMS HTX help. Incluye las aplicaciones fm2ps, mif2rtf, pod2sdf, poddiff, prn2ps, sdf, sdfapi, sdfbatch, sdfcli, sdfget y sdngen.
 
 
 sdiff
