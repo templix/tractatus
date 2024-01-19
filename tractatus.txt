@@ -20647,8 +20647,23 @@ Nota.- El formato del archivo rsync_exclude para excluir los ficheros ocultos [.
 
 rsyslog
 Demonio responsable de recopilar mensajes provenientes de las aplicaciones y el kernel y enviarlos a los archivos de registro, almacenados generalmente en el directorio /var/log/. Los mensaje de las aplicaciones están asociadas a unos subsistemas; auth y authpriv [para autentificación], cron [tareas programadas], demon [afecta a algún demonio], ftp [al servidor FTP], kern [proveniente del kernel], lpr [proviene del subsistema de impresión], mail [del subsistema de correo electrónico], news [mensaje del subsistema Usenet], syslog [mensajes del propio servidor syslogd], user [mensajes de usuario genérico], uucp [del servidor UUCP] y local0 a local7 [reservado para uso local] y tambien estan asociados a un nivel de prioridad: emerg [emergencia extrema del sistema], alert [alerta importante], crit [condición critica], err [error], warn [advertencia, posible error], notice [aviso importante], info [mensaje informacivo] y debug [mensaje de depuración]
-# rsyslogd -dn (modo debug)
+Modificar el archivo:
+# nano /etc/rsyslog.conf
+Desconmentando las lineas:
+  module(load="imudp")
+  input(type="imudp" port="514")
+  module(load="imtcp")
+  input(type="imtcp" port="514")
+Que todos los mensajes de alerta se manden a los usuarios “root” y “USER”
+  *.alert      root,USER
+Comprobar si el archivo de configuración está correcto:
+# rsyslogd -N1 -f /etc/rsyslog.conf
+Para que los cambios surtan efecto reiniciar el servicio:
+# systemctl restart rsyslog
+Verificar que el servicio rsyslog esté escuchando en los puertos especificados.
+# ss -tunlp | grep 514# rsyslogd -dn (modo debug)
 # rsyslogd -n (de forma interactiva)
+# rsyslogd -dn (modo debug)
 
 
 rtacct
@@ -20998,6 +21013,15 @@ $ scanimage --format=png > imagen.png (escanear imagen y guardarla como png)
 $ scanimage -d hpaio:/usb/psc_1100_series?serial=MY387F93QWB --format=jpg > image.jpg (con el dispositivom especificado y guardar como jpg)
 $ scanimage -T (realizar un test de la imagen a escanear)
 $ scanimage -A (ver todas las opciones de escaneo)
+
+
+scanlogd
+Detecta escaneos de puertos y escribe una línea por escaneo a través del mecanismo syslog. scanlogd solo registra escaneos de puertos. No los impide. Sólo envia información resumida al registro del sistema. Obviamente, la dirección de origen de los escaneos de puertos puede ser falsificada. No tome ninguna medida contra la fuente de los ataques a menos que haya otra evidencia disponible. Crear o  añadir al archivo:
+# nano /etc/syslog.conf
+La linea
+daemon.alert   /var/log/alert
+# systemctl restart scanlogd.service
+# systemctl status scanlogd.service
 
 
 schroot
