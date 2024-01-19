@@ -20507,6 +20507,13 @@ $ ronn archivo.md (crea la página de manual archivo y archivo.html)
 $ ronn --html --style=dark file.md (crea la versión man en html con fondo negro del md especificado)
 
 
+root-tail
+Programa que muestra y sigue el contenido más reciente de uno o más archivos de registro y utiliza el fondo de escritorio para mostrar las salidas.
+$ journalctl -f | root-tail - (canalizar systemd a root-tail)
+$ root-tail /var/log/firewalld (uso básico)
+$ root-tail -font 10x20 /var/log/postgresql/postgresql-15-main.log,green -font 12x24 /var/log/firewalld,red,'ALERT'
+
+
 rotatelogs
 Programa de rotación de logs de apache en función de un intervalo de tiempo o tamaño máximo del registro. Es un demonio que se ejecuta de forma autónoma.
 # logrotate -vf /etc/logrotate.conf (comprobar el correcto funcionamiento de forma manual rotando todos los registros)
