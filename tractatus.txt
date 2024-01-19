@@ -12209,15 +12209,19 @@ journalctl
 Sistema de registro [log] propio de systemd.
 # journalctl (Leer el registro)
 # journalctl -b (Mostrar todos los mesajes de arranque)
+# journalctl -n (muestra los últimos 10)
+# journalctl -n 20 (muestra los últimos 20=
 # journalctl -b -0 (Muestra los mensajes del arranque actual)
 # journalctl -b -1 (Muestra los mensajes del arranque anterior)
 # journalctl -b -2 (Muestra los mensajes desde los dos últimos arranques)
 # journalctl --list-boots (Muestra los últimos arranques guardados por el sistema. Si el sistema no guarda los registros de arranque hay que editar el fichero /etc/systemd/journald.conf y añadir/editar la línea Storage=persistent dentro de la sección [Journal])
 # journalctl -b 27487d1e4b1241df93a55949aef01161 (También se puede consultar los mensajes de un arranque en concreto poniendo el identificador que aparece con --list-boots)
 # journalctl -f (Seguir los mensajes nuevos)
+# journalcrl -k (registro de mensajes del kernel desde el último inicio)
+# journalctl -p crit (ver los registros según su prioridad crítica)
 # journalctl _PID=1 (Mostrar mensajes por su PID)
-# journalctl -u netcfg (Mostrar mensajes de una unidad especifica)
-# journalctl --since yesterday (Muestra los mensajes des de el día de ayer)
+# journalctl -u sshd (Mostrar mensajes de una unidad especifica)
+# journalctl --since yesterday (Muestra los mensajes des de el día de ayer. Los de hoy "today")
 # journalctl --since "2016-09-13" (Muestra los mensajes des de el día especificado en el formato YYYY-MM-DD)
 1.-
 Hacer que el demonio syslog funcione con journal
