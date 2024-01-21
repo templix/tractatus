@@ -24498,7 +24498,7 @@ $ tty
 1- Para entrar en las consolas virtuales, de la Crtl-Alt-F1 a la Crtl-Alt-F6, de forma automática sin tener que logearnos en cada una:
 # nano /etc/init.d/agetty-autologin (Crear el archivo de autologin)
 Y en su interior poner la linea:
-# agetty_options=autologin <user> –noclear (en user poner el que corresponda)
+# agetty_options="--autologin <user> –-noclear" (en user poner el que corresponda)
 Reiniciar.
 
 
@@ -24837,6 +24837,9 @@ ulimit
 Permite  visualizar o limitar los recursos del sistema.
 # ulimit -f 512000 (limita a los usuarios para que no puedan crear archivos de mayor tamaño que 512000 Kb [500 #Mb])
 $ ulimit -a   (ver todos los parámetros)
+$ ulimit -n (cantidad máxima de ficheros que se pueden abrir)
+$ ulimit -SHn (ver la cantidad máxima de ficheros que se pueden abrir, blandos [por el usuario] y duros [por root])
+$ ulimit -Sn 10000 (modificarlo a 10000 mientras no se cierre la sesión)
 Parámetros:
 	core (Tamaño máximo de los ficheros core [KB])
 	data (Tamaño máximo para el segmento de datos [KB])
@@ -24875,6 +24878,7 @@ En ciertas ocasiones, al procesar muchos archivos, se produce un error "for outp
 Y añadir las siguientes lineas:
 	*    soft    nofile    9000
 	*    hard    nofile    65000
+Los asteriscos pueden sustituirse por el nombre de usuario.
 3.-
 Limitar la cantidad de usuarios conectados al sistema:
 # nano /etc/security/limits.conf
