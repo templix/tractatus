@@ -24498,7 +24498,7 @@ $ tty
 1- Para entrar en las consolas virtuales, de la Crtl-Alt-F1 a la Crtl-Alt-F6, de forma automática sin tener que logearnos en cada una:
 # nano /etc/init.d/agetty-autologin (Crear el archivo de autologin)
 Y en su interior poner la linea:
-# agetty_options=»–autologin <user> –noclear» (en user poner el que corresponda)
+# agetty_options=autologin <user> –noclear (en user poner el que corresponda)
 Reiniciar.
 
 
@@ -24517,7 +24517,7 @@ A partir de una grabación de una sesión tty con ttyrec [ver] crea un gif.
 
 
 ttyrec
-Grabación de una sesión tty
+Grabación de una sesión tty.
 $ ttyrec archivo  (A partir de cuando vuelva a salir el prompt se grabará todo en “archivo”. Finalizar con “killall ttyrec”)
 $ ttyplay -s2 archivo (reproducir lo grabado a doble velocidad. Pulsando las telcas “-” y “+”, baja o sube la velocidad de reproducción)
 $ ttyrec -a archivo  (Añadir nueva grabación a continuación de archivo. No sobreescribe archivo)
