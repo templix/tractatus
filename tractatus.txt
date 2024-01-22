@@ -20633,7 +20633,7 @@ Algunas opciones:
 
 
 rsync
-Sincronizar archivos o directorios. Trabasjar con el directorio montado.
+Sincronizar archivos o directorios. Trabajar con el directorio montado. En las rutas a copiar, no colocar * si queremos tambien copiar ficheros y directorios ocultos.
 $ rsync -av /home/usuario/Dropbox /home/usuario/Copias_seguridad/ (Copiar todo el directorio “Dropbox” en el directorio “Copias_seguridad”)
 $ rsync -av --exclude=Dropbox /media/servidor /home/usuario/servidor/ (Sincronizar un servidor con un directorio local excluyendo el dir Dropbox)
 Nota.- Pueden excluirse varios directorios [--exclude=Dropbox --exclude=isos --exclcude=public ...]
@@ -20648,7 +20648,7 @@ Algunas opciones:
 	-h (mostrar salida entendible para humanos)
 	--exclude=tmp  (Excluir archivos o directorios. /tmp en este caso)
 	--delete-during  (Borrar los archivos de origen a medida que son transferidos)
-$ rsync -aHxv root@dirección_IP:/* /carpeta_destino --exclude=/dev --exclude=/proc --exclude=/sys --exclude=/tmp (copia/clonación en vivo de todo un sistema remoto a un directorio local. Se recomienda parar todos los servicios en ejecución de la máquina remota y repetir el comando varias veces hasta que no haya ningún fichero copiado, para evitar ficheros corrompidos. Se deben crear las carpetas "/dev", "/proc", "/sys" y "/tmp" en la carpeta de destino).
+$ rsync -aHxv root@dirección_IP:/ /carpeta_destino --exclude=/dev --exclude=/proc --exclude=/sys --exclude=/tmp (copia/clonación en vivo de todo un sistema remoto a un directorio local. Se recomienda parar todos los servicios en ejecución de la máquina remota y repetir el comando varias veces hasta que no haya ningún fichero copiado, para evitar ficheros corrompidos. Se deben crear las carpetas "/dev", "/proc", "/sys" y "/tmp" en la carpeta de destino).
 $ rsync -avz --exclude-from 'rsync_exclude' /home/usuario/ /media/sda11/copa_seguridad (Copia de seguridad del /home/usuario a otra partición excluyendo los archivos especificados en el archivo rsync_exclude)
 Nota.- El formato del archivo rsync_exclude para excluir los ficheros ocultos [.*] todos los de la carpeta Dropbox y el video alien de la carpeta Videos será:
 	.*
