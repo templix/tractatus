@@ -24542,6 +24542,11 @@ A partir de una grabación de una sesión tty con ttyrec [ver] crea un gif.
   Created: tty.gif in the current directory!
 
 
+ttylog
+Imprime todo lo que proviene de un dispositivo serie a la salida estándar. Se puede especificar el dispositivo y la velocidad en baudios y se puede establecer un tiempo de espera en lugar de simplemente finalizar el proceso para detenerlo.
+$ ttylog -t 60 -d /dev/ttyS0 (lo que proviene del dispositivo especificado durante 60 segundos)
+
+
 ttyrec
 Grabación de una sesión tty.
 $ ttyrec archivo  (A partir de cuando vuelva a salir el prompt se grabará todo en “archivo”. Finalizar con “killall ttyrec”)
