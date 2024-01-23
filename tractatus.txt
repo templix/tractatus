@@ -13963,6 +13963,13 @@ $ lynx -dump http://www.tuxapuntes.com | awk '/http/{print $2}' | egrep "^https{
 $ lynx -dump http://www.lapipaplena.com/ | awk '/http/{print $2}' | sort -  (Lo mismo)
 
 
+lz4
+Comprimir y descomprimir ficheros.
+$ lz4 file (forma básica para comprimir un fichero)
+$ lz4 -d file.lz4 (descomprimir)
+$ lz4 -t file.lz (test de integridad de un archivo comprimido)
+
+
 lzip
 compresor/descompresor de archivos. Formato de salida .lz
 $ lzip archivo.txt (Lo substituye por archivo.txt.lz)
