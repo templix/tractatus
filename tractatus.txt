@@ -24659,7 +24659,10 @@ Convertir sistema de archivos de ext3 a ext4. Desde un livecd o una partición n
 
 
 tuned
-Se trata de un daemon que ajusta dinámicamente la configuración del sistema. Lo hace monitoreando periódicamente el uso de varios componentes del sistema. En base a esa información, los componentes se colocarán en modo de ahorro de energía más bajos o más altos para adaptarse al uso actual. Actualmente, solo se implementan para la red Ethernet y los dispositivos de disco duro ATA.
+Demonio que ajusta dinámicamente la configuración del sistema. Lo hace monitoreando periódicamente el uso de varios componentes del sistema y en base a esa información, los componentes se colocarán en modos de ahorro de energía más bajos o más altos para adaptarse a su uso.
+# systemctl status tuned.service (comprobar si está activo)
+# tuned (lanzarlo si no está activo)
+# tuned-adm list (listado de componentes que pueden optimizarse manualmente)
 
 
 tuptime
