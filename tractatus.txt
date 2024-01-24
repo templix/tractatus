@@ -22293,6 +22293,7 @@ $ somafm -s (mostrar oyentes actuales)
 $ somafm -p beatblender (conectar la escogida)
 $ somafm -p "Groove Salad Classic" (lo mismo)
 $ somafm -r (seleccione aleatoriamente uno de los canales actualmente activos)
+$ curl -s -H 'Accept: application/json' https://somafm.com/channels.json | jq -r '.channels | sort_by(.listeners | tonumber) | reverse | .[]' | jq -r '.id + " | " + .listeners + " listeners | " + .description' | column -t -s\| (listado de forma más bonita)
 
 
 sonic
