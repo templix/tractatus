@@ -20799,6 +20799,13 @@ $ run-parts --reverse scritps (los ejecuta en orden inverso)
 $ run-parts --exit-on-error scripts (salir cuando muestre un código de salida distinto de cero)
 
 
+ruplacer
+Reemplazar texto en archivos o directorios.
+$ ruplacer 'texto a reemplazar' 'texto de reemplazo' archivo
+$ ruplacer --subvert 'texto a reemplazar' 'texto de reemplazo' directorio (en todos los archivos del directorio y dar la opción de si con mayúscula o minúscula)
+$ ruplacer --no-regex 'texto viejo' 'texto nuevo' (sustitución literal)
+
+
 ruptime
 Muestra el estado de cada host en una red. El comando ruptime proporciona una línea de estado como tiempo de actividad para cada máquina en la red local; Estos se forman a partir de paquetes emitidos por cada host en la red una vez por minuto.
 # ruptime -l (ordena la lista por el promedio de carga)
