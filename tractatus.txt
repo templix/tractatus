@@ -28353,6 +28353,15 @@ Descargar partes nuevas de un archivo del que ya se tiene una copia anterior en 
 $ zsync http://cdimage.ubuntu.com/daily-live/current/raring-desktop-amd64.iso.zsync
 
 
+zulucrypt-cli
+Herramienta para crear y administrar volúmenes cifrados con luks, Plain, truecrypt y veracrypt.
+$ zuluCrypt-cli -c -d /dev/sda1 -z ext4 -t luks -p contraseña (crear un volumen encriptado de la partición especificada, tipo ext4, tipo de volumen y contraseña existente)
+$ zuluCrypt-cli -o -d /dev/sda1 -m sda1 -e ro -p contraseña (abrir volumen, componente que se agregará al prefijo del punto de montaje, solo lectura y contraseña existente)
+$ zuluCrypt-cli -q -d /dev/sda1 (cerrar volumen)
+$ zuluCrypt-cli -r -d /dev/sda1 -p contraseña (suprimir contraseña de un volument)
+$ zuluCrypt-cli -a -d /dev/sda1 -y contraseña -l nueva (añadir contraseña a la existente en un volumen luks)
+
+
 zutils
 Conjunto de herramientas capaces de procesar cualquier combinación de ficheros comprimidos y sin comprimir. Los ficheros comprimidos se descomprimen sobre la marcha; no se crean ficheros temporales. Actualmente, los compresores compatibles son gzip, bzip2, lzip, xz y zstd. Incluye las aplicaciones zcat [Descomprime y copia ficheros], zcmp [Descomprime y compara dos ficheros byte a byte], zdiff [Descomprime y compara dos ficheros línea a línea], zgrep [Descomprime y busca en ficheros una expresión regular], ztest [Comprueba la integridad de ficheros comprimidos] y zupdate [Recomprime ficheros al formato lzip].
 
