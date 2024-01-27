@@ -28296,6 +28296,13 @@ $ zoo -x archivo.zoo (Descomprimir)
 $ zoo -v archivo.zoo (Ver contenido)
 
 
+zopfli
+Compresor de archivos. El paquete incluye la aplicación zopflipng.
+$ zopfli --zlib archivo (crea archivo.zlib. Si no se especifica salida [zlib] lo hace en formato gzip)
+$ zopfli --deflate archivo (crea archivo.deflate)
+$ zopflipng entrada.png salida.png (optimizar un archivo y escribir salida si es más pequeño)
+
+
 zoxide
 Herramienta que permite moverse entre directorios como el clásico cd. Se trata de una herramienta que aprende de tus movimientos y ayuda a desplazarse con el mínimo número de saltos. Es una herramienta que está inspirada en z y autojump, pero que está disponible para las shell mas utilizadas, como Bash, Zsh o Fish. Esta aplicación se puede lanzar de varias formas: z, za y zi son otra forma de utilizar zoxide de forma intereactiva. De esta forma se combina la potencia de zoxide con la potencia de fzf.
 En bash colocar en ~/.bashrc la linea y recargar:
