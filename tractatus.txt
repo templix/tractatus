@@ -28276,6 +28276,13 @@ $ zipinfo -t archivo.zip (lista totales para todos los archivos, cantidad de arc
 $ zipinfo -l archivo.zip (lista la información del archivo zip en formato largo)
 
 
+ziptool
+Utilidad para manipular archivos zip modificando detalles como marcas de tiempo u otros metadatos.
+$ ziptool archivo.zip add texto.txt \"Linux es un sistema genial\" (incluir en archivo.zip un texto.txt con el contenido especificado)
+$ ziptool archivo.zip delete 8 (eliminar el archivo 8 del .zip especificado)
+$ ziptool -c archivo.zip (verificar la coherencia del .zip al abrirlo por terminal)
+
+
 zless
 Pagina la visualización de un fichero comprimido (Ver less).
 
