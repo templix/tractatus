@@ -28305,6 +28305,11 @@ $ zipinfo -t archivo.zip (lista totales para todos los archivos, cantidad de arc
 $ zipinfo -l archivo.zip (lista la información del archivo zip en formato largo)
 
 
+zipmerge
+Fusiona un archivo zip de origen con un archivo zip de destino. De forma predeterminada, los archivos que forman parte del zip de origen sobrescriben los archivos existentes con el mismo nombre en el archivo zip de destino.
+$ zipmerge -l -i origen.zip destino.zip (ignorar diferencias mayúsculas/minúsculas y preguntar antes de sobreescribir)
+
+
 ziptime
 Reemplaza las marcas de tiempo en los encabezados Zip con una hora estática (1 de enero de 2008). Los campos adicionales no se modifican.
 $ ziptime archivo.zip
