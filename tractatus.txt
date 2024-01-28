@@ -27422,6 +27422,12 @@ $ xclock (analogico)
 $ xclock -d (digital)
 
 
+xcwd
+Herramienta que abre una terminal de la ventana enfocada. Cambia el directorio de trabajo para la conexión a la ruta solicitada. Si, por ejemplo, tenemos thunar con la dirección /var/www/html/tractatus, y abrimos una terminal y tecleamos:
+$ urxvt -cd "$(xcwd)"
+Se abrirá otra terminal con la ruta indicada por thunar.
+
+
 xdg
 Establece o abre archivos y url con las aplicaciones establecidas por defecto. Estas se encuentran definidas en /usr/share/applications/defaults.list.
 $ xdg-mime query default text/html    (Mostrar la aplicación que por defecto abre un html)
