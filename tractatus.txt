@@ -13318,9 +13318,15 @@ $ login -f  usuario (Inicia nueva sesión dentro de la actual)
 
 
 loginctl
-Realizar una introspección y controlar el estado del administrador de inicio de sesión.
+Realizar una introspección y controlar el estado del administrador de inicio de sesión de systemd.
 $ loginctl list-sessions
 $ loginctl session-status 1
+$ loginctl lock-sessions (pide contraseña y suspende pantalla)
+$ loignctl -a (muestra las propiedades de sesión/usuario independientemente de si están configuradas o no)
+$ loginctl list-users (lista los usuarios con sesión abierta)
+$ loginctl -psessions (muestra todas las sesiones abiertas)
+$ loginctl seat-status (muestra todos los procesos que están relacionados con el asiento)
+Nota.- "Seat" permite conectar varios conjuntos de hardware (ratón, teclado, pantalla) y utilizarlo por varios usuarios al mismo tiempo. Por lo general, esta función no se utiliza y la utilidad muestra solo un "asiento".
 
 
 logkeys
@@ -27834,6 +27840,13 @@ Esto último tiene el mismo efecto que:
 # nano /etc/inputrc
 y desclicar la linea
 	set bell-style none)
+
+
+xss-lock
+Herramienta para escuchar eventos XScreenSaver para suspender, hibernar, bloquear o desbloquear sesión con las acciones apropiadas.
+$ nano ~/.profile
+Añadir la linea
+xss-lock -- /usr/bin/xscreensaver-command -lock &
 
 
 xstarfish
