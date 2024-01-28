@@ -27948,6 +27948,17 @@ $ xwininfo -all (nos proporciona toda la información acerca de una ventana)
 $ xwininfo -all -root (nos da información de todo el entorno y ventanas existentes en la sesión de Xorg)
 
 
+xwrits
+Programa recordatorio diseñado para hacer saber al usuario que es hora de tomar un descanso de la escritura para evitar daños en la muñecas.
+$ xwrits --multiscreen +once -t 30 -b 10 +lock (muestra en todas las pantallas, hacer clic en la ventana de advertencia, trabajar 30', por defecto 55', descanso de 10', por defecto 5' y bloquea el teclado)
+Algunas otras opciones:
+        password=12345 (colocar una contraseña)
+        +mouse (la máquina controla los movimientos del ratón)
+        minbreaktime=15 (duración mínima del descanso 15')
+        +cheat=30 (permitir 30 pulsaciones antes del bloqueo)
+        ct=5 (permitir 5' después de cancelar un trabajo, por defecto 10')
+
+
 xymon
 Sistema de monitorización de hosts y redes, inspirado en el sistema Big Brother. Proporciona monitorización en tiempo real, una sencilla interfaz web, datos históricos, informes de disponibilidad y gráficos de rendimiento. Acceder a los informes con el navegador <http://localhost/xymon>
 
