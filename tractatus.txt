@@ -17576,11 +17576,6 @@ Lector rss
 $ olive archivo.opml (importar las fuentes)
 
 
-oowrite
-Procesador de textos de la suite ofimática openoffice.
-$ oowriter -pt pdf archivo.doc
-
-
 omv-initsystem
 Inicializa openmediavault en esta distribución de GNU/Linux basada en Debian. Es necesaria su ejecución para un correcto funcionamiento
 # omv-initsystem
@@ -17600,6 +17595,20 @@ oneko
 Un gato persigue el cursor por la pantalla mientras trabajas. Alternativamente, un perro persigue un hueso. Hay opciones de menú para iniciar y detener el programa fácilmente en los modos perro y gato. Otras variaciones y configuraciones detalladas están disponibles a través de opciones de línea de comando.
 $ oneko -dog -fg yellow -speed 20 (un perro, amarillo y a 20 de velocidad, por defecto 16)
 $ oneko -neko (un gato. Otras alternativas: -sakura y -tomoyo)
+
+
+only
+Herramienta que permite buscar según patrones de palabras o patrones de líneas.
+$ only -l palabra text.txt (muestra la linea donde sale "palabra")
+$ only -w /palabra/0:5 text.txt (muestra "palabra" y las siguientes 5 palabras)
+$ only -w 2/palabra/0:4 text.txt (muestra la 2ª vez que salie "palabra" y las siguientes 4 palabras)
+$ only -l 3/palabra text.txt (muestra la 3ª linea donde sale "palabra")
+$ only -l 3/palabra/0:2 text.txt (muestra la 3ª vez que sale "palabra" y las siguientes 2 lineas)
+
+
+oowrite
+Procesador de textos de la suite ofimática openoffice.
+$ oowriter -pt pdf archivo.doc
 
 
 open
