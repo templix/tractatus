@@ -14297,7 +14297,10 @@ Y modificar las que procedan. Ejemplo:
 
 
 mcfly
-Reemplaza la búsqueda predeterminada en el historial. Una vez instalado, abriendo un terminal y tecleando Ctrl-r abre un motor de búsqueda inteligente que tiene en cuenta el directorio de trabajo y el contexto de los comandos ejecutados recientemente. Las sugerencias de McFly se priorizan en tiempo real.
+Reemplaza la búsqueda predeterminada en el historial. Una vez instalado, abriendo un terminal y tecleando Ctrl-r abre un motor de búsqueda inteligente que tiene en cuenta el directorio de trabajo y el contexto de los comandos ejecutados recientemente. Las sugerencias de McFly se priorizan en tiempo real. Añadir a archivo:
+$ nano ~/.bashrc
+La linea:
+eval "$(mcfly init bash)"
 
 
 mcookie
@@ -23385,7 +23388,7 @@ Para incorporar el arranque a grub2, modificar del archivo:
 La linea:
 	GRUB_CMDLINE_LINUX_DEFAULT="quiet init=/bin/systemd"
 2.-
-Para que al bajar la tapa de un portatil el sistema no se supenda.
+Para que al bajar la tapa de un portatil el sistema no se suspenda.
 # nano /etc/systemd/logind.conf
 Y modificar la linea:
 	HandleLidSwitch=ignore
