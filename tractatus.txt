@@ -3664,9 +3664,8 @@ $ man less | col -b > less.txt
 
 
 collectd
-Es un demonio que recoge información del sistema periódicamente y proporciona mecanismos para vigilar y almacenar los valores de diversas maneras. Las estadísticas, por defecto, se actualizan cada 10 segundos. Este paquete contiene el archivo principal del programa y los plugins listados en /usr/share/doc/collectd-core/README.Debian.plugins [algunos plugins requieren bibliotecas adicionales]. Antes de lanzar el demonio es preciso configurar el archivo de configuración que se encuentra en /etc/collect.conf. Existen ejemplos en
-<https://gist.github.com/uffsalot/2edca3a47c600b2341f45cb845af0308>
-# /etc/init.d/collectd start
+Demonio que recopila información del sistema periódicamentes. Las estadísticas se actualizan cada 10 segundos de forma predeterminada y pueden modificarse en el archivo /etc/collectd/collectd.conf. Ejemplos de configuraciónes en /usr/share/doc/collectd/examples/. Los datos recogidos se visualizan en http://localhost/server-status
+# systemctl start collectd.service (pide contraseña de forma gráfica y activa el demonio)
 
 
 colordiff
@@ -22949,6 +22948,13 @@ Ejecutar comandos con operaciones modificadas para almacenamiento en búfer.
 $ tail -f /var/log/apache2/access.log | stdbuf -oL cut -d ' ' -f1 (ver accesos únicos)
 $ stdbuf -o 0 ls
 $ stdbuf -o0 -e0 ls >> log_file
+
+
+stdsyslog
+La utilidad ejecuta un programa, lee todo lo que genera en un conjunto de descriptores de archivos y los muestra de forma predeterminada por la salida estándar y error estándar y lo registra en el registro del sistema [/var/log/syslog o si existen errores en /var/log/error].
+$ stdsyslog -l (lista los niveles de syslog disponibles)
+$ stdsyslog -p archivo (archivo en el que escribir el ID)
+$ stdsyslog -p archivo -d 1:alert -d 2:crit -d 3:info programa
 
 
 steghide
