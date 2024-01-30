@@ -18938,6 +18938,15 @@ opciones que permite un ordenador.
 Si en la salida aparece "mem" significa que podemos suspender el ordenador. Si aparece "disk" significa que podemos hibernar.
 
 
+pmacct
+Herramienta diseñada para recopilar información de tráfico [bytes y número de paquetes]. Incluye las aplicaciones: nfacctd, pmacctd, pmbgpd, pmbmpd, pmtelemetryd, sfacctd y uacctd. El archivo de configuración esta en /etc/pmacct/pmacctd.conf.
+# pmacctd (activar el demonio)
+# pmacct -a (muestra todos los campos de la tabla)
+# pmacct -s (mostrar todas las estadísticas)
+# pmacct -t (mostrar estado de la tabla de memoria)
+# pmacct -e (limpiar la tabla de estadísticas)
+
+
 pmap
 Informa sobre el rendimiento de la memoria del sistema, tanto en general como la memoria que consume un proceso concreto.
 $ pmap -d PID (consumo de memoria de las librerías, comandos y archivos que está empleando el proceso indicado)
