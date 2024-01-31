@@ -21657,7 +21657,7 @@ Permite activar/desactivar las políticas en selinux. Ver getsebool
 
 
 setserial
-Muestra información sobre los puertos serial.
+Establecer y/o reportar la información de configuración asociada con un puerto serie. Esta información incluye qué puerto de I/O y qué IRQ está utilizando un puerto serie particular.
 $ setserial -G /dev/ttyS0
 
 
@@ -22792,6 +22792,12 @@ $ ssconvert --export-type=Gnumeric_stf:stf_assistant -O 'separator=| format=pres
 
 ssed
 Versión mejorada de GNU sed [ver] con algunos argumentos nuevos.
+
+
+ssft
+Biblioteca de funciones de Shell. La biblioteca define un conjunto de varias funciones y ha sido diseñada para usarse obteniendo el código de la biblioteca de otros scripts. El ejecutable incorpora .sh.
+$ ssft.sh -d (listado de funciones diponibles)
+$ ssft.sh -d ssft_file_selection (descripción de una función)
 
 
 sshd
