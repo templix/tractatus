@@ -24818,6 +24818,15 @@ Convertir texto a html.
 $ txt2html archivo.txt --outfile archivo.html
 
 
+txt2man
+Convierte textos simples en páginas de manual. La sintaxis del texto debe parecerse a la salida proporcionada por el programa man. Incluye las aplicaciones bookman y src2man
+$ txt2man -p texto.txt > texto.1
+1.-
+Ejemplo de un pdf con varias entradas man relacionadas
+$ cd /usr/share/man/man1
+$ bookman -p -t "Referencias gtk" gtk4* > ~/gtk.pdf
+
+
 txt2tags
 Convertir archivos de texto a distintos formatos.
 $ txt2tags -t html fichero.txt   (convierte .txt en .html)
