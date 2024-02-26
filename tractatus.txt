@@ -22946,6 +22946,8 @@ Estadísticas de archivo, directorios y sistemas
 # stat -f /
 $ stat -c "%s" archivo (medida del archivo)
 $ stat -c '%n %U:%G-%a' * (Mostrar nombre archivo, propietario, grupo y permisos en formato octal)
+$ stat / | awk '/Naixement: /{print $2 " " substr($3,1,5)}' (fecha de instalación del sistema)
+Nota.- Si la instalación fue en castellano sustituir "Naixement" por "Creación" o "Bird" si en inglés)
 
 
 status
