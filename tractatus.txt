@@ -21770,6 +21770,37 @@ Segunda:
         S unshar datos.shar
 
 
+sharness
+Biblioteca de shell portátil para escribir, ejecutar y analizar pruebas automatizadas para programas Unix. El catálogo de bibliotecas de software que pueden actuar como productores de TAP [Test Anything Protocol], agrupadas por lenguaje de programación es: Ada, C, C++, C#, Common Lisp, Crystal, Elixir, Erlang, Fish, Forth, Fortran, Gambas, Go, Haskell, Igor Pro, Java, JavaScript, Limbo, Lua, MATLAB, OCaml, Omnis Studio, Pascal, Perl5, Perl6, PHP, Prolog, Python, Ruby, Rust, Sass, Shell, SQL, and TypeScript. El ejemplo del funcionamiento de la aplicación sacado de github y adaptado a Debian es:
+$ cat simple.t
+  #!/bin/sh
+  test_description='Mostrar características básicas de Sharness'
+  . /usr/share/sharness/sharness.sh
+  test_expect_success 'El éxito se informa así' '
+      echo hello world | grep hello
+      '
+  test_expect_success 'o así' '
+      ip a | grep 192 | cut -d " " -f 6
+      '
+  test_expect_success 'Los comandos están encadenados de esta manera' '
+      test x = "x" &&
+      test 2 -gt 1 &&
+      echo success
+      '
+  test_expect_failure 'Esperamos que esto falle' '
+      cd /home/inexistente
+      '
+  test_done
+Despues de darle permisos [chmod +x simple.t], cuando se ejecute [./simple.t] creará el directorio test-results y en su interior el archivo de texto con el resultado.
+$ cat test-results
+total 4
+success 3
+fixed 0
+broken 1
+failed 0
+Nota.- "test_expect_success" dice "OK" en caso de éxito o "FAIL" en caso de error. "test_expect_failure" dirá "FIXED" en caso de éxito y "known breakage" en caso de error.
+
+
 shasum
 Muestra el hash sha de un fichero con el objetivo de verificar si se producen cambios.
 $ shasum -a 512 -t fichero (Usando el algoritmo de 512 bits. Otras opciones: 32 [por defecto] 224, 256, 384, 512224, 512256)
