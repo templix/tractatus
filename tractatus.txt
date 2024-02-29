@@ -21777,19 +21777,15 @@ $ cat simple.t
   test_description='Mostrar características básicas de Sharness'
   . /usr/share/sharness/sharness.sh
   test_expect_success 'El éxito se informa así' '
-      echo hello world | grep hello
-      '
+      echo hello world | grep hello '
   test_expect_success 'o así' '
-      ip a | grep 192 | cut -d " " -f 6
-      '
+      ip a | grep 192 | cut -d " " -f 6 '
   test_expect_success 'Los comandos están encadenados de esta manera' '
       test x = "x" &&
       test 2 -gt 1 &&
-      echo success
-      '
+      echo success '
   test_expect_failure 'Esperamos que esto falle' '
-      cd /home/inexistente
-      '
+      cd /home/inexistente '
   test_done
 Despues de darle permisos [chmod +x simple.t], cuando se ejecute [./simple.t] creará el directorio test-results y en su interior el archivo de texto con el resultado.
 $ cat test-results
