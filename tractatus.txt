@@ -20332,6 +20332,15 @@ Cambiar la medida de una partición.
 # resize2fs -p /dev/sda1 45288448K (Otro ejemplo pero que nos muestra el porcentage)
 
 
+resolvectl
+[systemd-resolve]. Herramienta para la administración de DNSs [Domain Name Service, son los responsables de traducir los nombres de dominio a sus respectivas IPs y viceversa]
+# resolvectl statistics (verificar estadísticas DNS)
+# resolvectl flush-caches (Vacía todas las cachés de registros de recursos DNS que el servicio mantiene localmente)
+# resolvectl status (configuración de DNS global actualmente vigente)
+# resolvectl reset-statistics (establece a cero los contadores de estadísticas)
+# resolvectl monitor (Mostrar flujo continuo de consultas de resolución de clientes locales y sus respuestas)
+
+
 resolveip
 Buscar el host de una ip o la ip de un host
 $ resolveip -s www.google.com
