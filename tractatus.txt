@@ -10705,6 +10705,13 @@ Añadimos, después de la ip local, las que se quieran bloquear separadas por un
 	127.0.0.1 www.porn.net www.google.es www.microsoft.com
 
 
+hostsed
+Herramienta para editar el archivo de hosts (por defecto /etc/hosts), puede agregar o eliminar una entrada DNS a través del shell de línea de comando. Hotsed proporciona una experiencia de línea de comandos idemponente con sus comandos 'agregar' y 'eliminar' que evitan entradas duplicadas o faltantes en el archivo de hosts.
+$ hostsed add hostname (añadir un host en /etc/hosts)
+$ hostsed del hostname (suprimir un host de /etc/hosts. Con el mismo resultado puede usarse ademas de "del", "rm", delete y "remove")
+$ hostsed drop hostname (Eliminar líneas con IP o nombre de host especificado del archivo /etc/hosts)
+
+
 hp-check
 [hplip]. Comprueba versiones, dependencia y permisos de HPLIP de la impresora HP. Crea un log en el directorio en el que se lanza con el nombre hp-check.log
 $ hp-check -g (en modo debug. -t en texto plano.)
