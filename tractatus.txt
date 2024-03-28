@@ -441,10 +441,14 @@ $ album fotos/
 alias
 Permite que una cadena de palabras sea sustituida por una más corta.
 $ alias ls='ls --color=auto' (Cuando se teclee "ls" se ejecutará su equivalencia)
-$ \ls (si "ls" es un alias se ejcutarà sin serlo)
+$ \ls (si "ls" es un alias se ejcutarà sin serlo [ver nota])
 # unalias ls  (suprimir el alias)
 $ alias (listado de alias activos)
-
+Nota.- Para ejecutar un comando que coincida con un alias pero sin su equivalencia, además de precedirlo con una barra invertida [\] usando como ejemplo el mismo alias ls mencionado, tambien puede hacerse:
+$ "ls"
+$ 'ls'
+$ command ls
+$ /usr/bin/ls
 
 
 alien
