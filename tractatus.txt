@@ -24474,10 +24474,12 @@ $ echo линукс эс гэнял | tran latin (salida anterior a latin)
 
 
 trans
-[translate-shell] Traducir textos a algunos de los idiomas disponibles via google.
-$ trans -r (Muestra el listado de idiomas disponibles)
-$ cat archivo.txt | trans -b (Traducir un texto. Autodetecta el idioma de entrada y para el de salida usa el del sistema)
-$ trans -b "emacs is fantastic" (Traducir una frase)
+[translate-shell]. Anteriormente Google Translate CLI. Es un traductor de línea de comandos impulsado por Google Translate (predeterminado), Bing Translator, Yandex.Translate y Apertium.
+$ trans -list-all (listado de todos los lenguajes soportados)
+$ trans -T (ademas del listado de lenguajes soportados, su código correspondiente)
+$ trans -list-all (listado de lenguajes y codigos)
+$ trans -S (motores de traducción disponibles)
+$ trans -i entrada.txt -o salida.txt (especificando un archivo con el texto de entrada y que muestre la traducción en salida.txt)
 
 
 transmission-remote-cli
