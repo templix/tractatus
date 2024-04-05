@@ -4647,6 +4647,12 @@ $ ddate +%d-%B-%Y
 $ ddate +'Hoy es %{%A, el %e de %B%}, %Y. %N%nCelebrate %H'
 
 
+ddccontrol
+Herramienta que se utiliza para controlar los parámetros del monitor, como el brillo y el contraste.
+# ddccontrol -p (sondear dispositivos i2c)
+# ddccontrol -r 0x10 dev:/dev/i2c-4 (leer el valor del control 0x10 [brillo en monitores compatibles con VESA] para el dispositivo dev:/dev/i2c-4)
+
+
 ddclient
 Configurar pc con una ip fija. Requiere registro en dyndns.org. Durante la instalación preguntará los datos del registro pero si se prefiere puede editarse el archivo de configuración y colocarlos a mano
 # gedit /etc/ddclient.conf
