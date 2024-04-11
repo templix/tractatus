@@ -3434,6 +3434,21 @@ $ chronic lx (Mostrará el error)
 $ chronic man (Mostrará que necesita otro dato)
 
 
+chrony
+Sincronizar el reloj del sistema. Primero incluir los servidores en el archivo de configuración:
+# nano /etc/chrony/chrony.conf
+Añadir las lineas:
+       pool 3.es.pool.ntp.org iburst
+       pool ntp.redimadrid.es iburst
+       pool europe.pool.ntp.org iburst
+Reinicar el servicio y comprobar que está activo:
+# systemctl restart chronyd
+# systemctl status chronyd
+# chronyc makestep (forzar la sincronización)
+# chronyc tracking (comprobar el seguimiento)
+# chronyc sources (ver una lista de las fuentes de servidores de hora)
+
+
 chroot
 Situarte virtualmente donde le indicas como raiz.
 # chroot /media/sda3
@@ -24072,8 +24087,10 @@ $ time echo "scale=5000; 4*a(1)" | bc -l -q (Calcula 5000 decimales de pi para c
 
 
 timedatectl
-Informa o ajusta la hora del sistema en sistemas Linux con SystemD
-$ timedatectl (Informa de la hora configurada mostrando el time zone, la hora universal y otros datos)
+Informa o ajusta la hora del sistema en sistemas Linux con Systemd
+# timedatectl status (Informa de la hora configurada mostrando el time zone, la hora universal y otros datos)
+# timedatectl list-timezones (consultar todas las zonas horarias)
+# timedatectl show  (Muestra la configuración actual del reloj del sistema)
 # timedatectl set-time "yyyy-MM-dd hh:mm:ss" (Define el dia y la hora. Por ejemplo timedatectl set-time "2014-05-26 11:13:54")
 
 
@@ -28173,7 +28190,7 @@ algunos atajos:
 
 
 xz
-Comprimir y descomprimir archivos. Programas incluidos en el paquete: unxz [xz --decompress], xzcat [xz --decompress --stdout], lzma [xz --format=lzma], unlzma [xz --format=lzma --decompress] y lzcat [xz --format=lzma --decompress --stdout]
+[xz-utils]. Comprimir y descomprimir archivos. Programas incluidos en el paquete: unxz [xz --decompress], xzcat [xz --decompress --stdout], lzma [xz --format=lzma], unlzma [xz --format=lzma --decompress] y lzcat [xz --format=lzma --decompress --stdout]
 $ xz -z file (comprimir)
 $ xz -d file (descomprimir)
 $ xz -l file1.xz file2.lzma file3.txz (información sobre archivos comprimidos)
