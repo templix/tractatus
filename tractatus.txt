@@ -27617,12 +27617,15 @@ También se puede hacer permanente el cambio añadiendo el driver al final del f
 xclip
 Copia al portapapeles la salida de cualquier comando.
 $ who | xclip
+$ xclip -selection clipboard -o (mostrar el contenido del portapapeles)
 $ xclip -o (Lo pegará en la terminal [pst-tty] donde lo lancemos)
 $ xclip -i /etc/fstab (copiará el fstab)
 $ xclip -o -d :0 wicd(Para pegarlo en las tty)
+$ echo "linux es genial" | xclip -selection clipboard (copiar un texto en el portapepeles)
 $ xclip -o fichero (Lo pega en fichero)
 $ who | xclip -sel clip  (Lo pega en cualquier aplicación de las X)
 $ xclip archivo (Enviar el contenido de un archivo al portapapeles)
+$ xclip -selection clipboard /dev/null (borrar contenido del portapapeles)
 
 
 xclock
@@ -28020,9 +28023,11 @@ $ /usr/lib/xscreensaver/bsod
 xsel
 Permite manipular el portapapeles de las X desde la línea de comandos.
 $ xsel -p | more  (Mostrar todo lo copiado al portapapeles)
+$ xsel --clipboard --output (otra forma)
 $ xsel --clipboard > archivo.txt (Volcar el contenido del portapapeles)
 $ cat /etc/apt/sources.list | xsel -b  (Copiar al portapapeles)
 $ xsel --clipboard  (Pegar lo copiado)
+$ xsel --clipboard --clear (borrar el contenido del portapapeles)
 
 
 xset
