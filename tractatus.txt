@@ -10636,7 +10636,8 @@ $ history | awk '{print $2}' | sort | uniq -c | sort -rn | head -10 (lista los 1
 $ !354  (ejecutará el comando 354 del listado de history)
 $ history | grep cp  (Buscar en el historial las veces que se ha lanzado “cp”)
 $ history -a (Guardar el historial sin cerrar la sesión)
-$ echo $HISTCMD (número de comandos registrados en history)
+$ echo $HISTCMD (número de comandos registrados en history y este tambien queda reflejado en history)
+$ history -d $HISTCMD && ip a (ejecuta "ip a" pero no se muestra en el historial)
 
 
 histretch
