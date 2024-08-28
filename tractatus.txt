@@ -14890,6 +14890,11 @@ $ ifconfig > pipe  (La consola se bloqueará esperando soltar la tuberia)
 $ cat pipe  (Ejecutado desde otra terminal pst o tty ejecutará la tuberia)
 
 
+mkhomedir_helper
+Crear directorios de inicio. El valor predeterminado de umask es 0022. El asistente no toca los directorios de inicio si ya existen.
+# mkhomedir_helper USER (formas básica que creará el dir /home/USER)
+
+
 mkfs
 Formatear dispositivos a sistemas de archivo ext2,3,4, vfat....
 # mkfs -t ext3 /dev/sda4  (Formatea a ext3 la particion indicada)
