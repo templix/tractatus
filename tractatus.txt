@@ -5630,6 +5630,18 @@ dnstraceroute
 # dnstraceroute -e -C -t A -s 8.8.4.4 facebook.com (impimiendo las sugerencias de los expertos si eestan disponibles, a todo color y usando las DNSs de google))
 
 
+do-release-upgrade
+Herramienta para actualizar por consola sistemas basados en Ubuntu a una nueva versión de la distribución. Para configurar si queremos actualizar entre versiones normales o versiones LTS, debemos modificar del fichero /etc/update-manager/release-upgrades la linea:
+Para versiones LTS:
+Prompt=lts
+Para versiones normales:
+Prompt=normal
+Para no verificar nunca nuevas versiones:
+Prompt=never
+Estas modificaciones son válidas también para update-manager [ver]
+# do-release-upgrade -d
+
+
 doc-debian
 El Proyecto Debian es una asociación de individuos que han hecho causa común para crear un sistema operativo libre. En este paquete, se encuentra: Manifiesto de Debian Linux, Constitución del Proyecto Debian, Contrato Social de Debian, Directrices de Software Libre de Debian, Documentación del Sistema de Seguimiento de Fallos de Debian y una introducción a las listas de correo de Debian. Todos estos archivos están disponibles en http://ftp.debian.org/debian/doc/.
 
@@ -5650,18 +5662,6 @@ dontzap -d     (Lo activa)
 dontzap -e      (Lo desactiva)
 
 
-do-release-upgrade
-Herramienta para actualizar por consola sistemas basados en Ubuntu a una nueva versión de la distribución. Para configurar si queremos actualizar entre versiones normales o versiones LTS, debemos modificar del fichero /etc/update-manager/release-upgrades la linea:
-Para versiones LTS:
-Prompt=lts
-Para versiones normales:
-Prompt=normal
-Para no verificar nunca nuevas versiones:
-Prompt=never
-Estas modificaciones son válidas también para update-manager [ver]
-# do-release-upgrade -d
-
-
 doas
 Primero crear el archivo:
 # nano /etc/doas.conf
@@ -5672,6 +5672,14 @@ Especificar los permisos y propietario del archivo:
 # chmod -c 0400 /etc/doas.conf
 Luego el usuario especificado en el archivo podrá, por ejemplo, ejecutar:
 $ doas -u root apt update
+
+
+dool
+Herramienta para monitorear muchos aspectos del sistema: CPU, memoria, red, promedio de carga, etc.
+$ dool --more 3  (actualizar datos cada 3 segundos. Por defecto cada segundo)
+$ dool --net -N enp1s0 (del tráfico de red de la interfaz espedificada)
+$ dool --cpu --time 2 (cada 2 segundos)
+$ dool --full (monitorear todos los aspectos de la aplicación)
 
 
 dos2unix
