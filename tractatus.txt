@@ -20221,6 +20221,12 @@ Conexión a escritorio remoto.
 $ rdesktop -k es -g 1024×768 -u USER -p PASS -a 15 -T tux -D client (Especificando teclado español [k], medidas de la ventana [g], usuario [u] y contraseña [p], especificar un mobre para la ventana [T] y suprimiendo la decoración de la ventana [D])
 
 
+rdfind
+programa para buscar archivos duplicados y, opcionalmente, enumerarlos, eliminarlos o reemplazarlos con enlaces simbólicos o físicos.  Si se encuentran dos (o más) archivos iguales, el programa decide cuál de ellos es el original y el resto se consideran duplicados.  De forma predeterminada, no se realiza ninguna acción aparte de crear un archivo con los archivos detectados
+$ rdfind -deleteduplicates true ~/Documents (eliminar duplicacdos del directorio especificado)
+$ rdfind /home/USER /home/USER/Documents
+
+
 rdiff-backup
 Backups incrementales locales o remotos. La aplicación ha de estar instalada en el cliente y en el servidor.
 $ rdiff-backup --force 192.168.1.20::/home/USER/dir_remoto /home/USER/dir_local (Realiza un backup del dir_remota de la máquina 20 de la red y lo guarda en nuestro dir_local sin comprimir)
