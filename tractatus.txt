@@ -20450,6 +20450,13 @@ Cambiar la medida de una partición.
 # resize2fs -p /dev/sda1 45288448K (Otro ejemplo pero que nos muestra el porcentage)
 
 
+resolvconf
+Framework para mantener actualizada la información del sistema sobre servidores de nombres. Se erige en intermediario entre programas que proporcionan esta información (como ifup y ifdown, clientes DHCP, el demonio PPP y servidores de nombres locales) y programas que utilizan esta información (como cachés DNS y bibliotecas de resolución).
+$ resolvconf -i eth0 (interfaces y protocolos opcionalmente coincidiendo con el patrón)
+$ resolvconf -l eth0 (enumera los archivos resolv.conf)
+$ resolvconf -u (actualizar todos los suscriptores. No los actualiza cuando agrega un resolv.conf que coincide con lo que ya tiene para la interfaz)
+
+
 resolvectl
 [systemd-resolve]. Herramienta para la administración de DNSs [Domain Name Service, son los responsables de traducir los nombres de dominio a sus respectivas IPs y viceversa]
 # resolvectl statistics (verificar estadísticas DNS)
