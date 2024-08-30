@@ -5331,6 +5331,17 @@ $ cp default.config.php config.php
 Modificar lo que proceda. Todos los archivos o carpetas que pongamos en el directorio que contiene el index.php se verá reflejado cuando accedamos a htt://localhost/DirectoryLister.
 
 
+direnv
+Permitir variables de entorno específicas de un proyecto sin tener que añadirlas a ~/.profile o archivos relacionados para no saturarlos y comprueba la existencia de un archivo ".envrc" en el directorio actual, si el archivo existe, se carga en un subshell y direnv captura todas las variables y las pone a disposición de la shell.
+$ direnv stdlib (genera un script bash llamado stdlib que carga .envrc y el archivo ~/.config/direnv/direnvrc si existe)
+$ direnc prune (elimina archivos antiguos permitidos)
+$ direnv reload (recarga de entorno)
+$ direnv status (imprime información de estado de depuración)
+$ direnv allow (cada vez que se modifiquen .envrc y .secrets.)
+$ direnv edit (muestra el contenido de .envrc)
+$ direnv grant (cargar el archivo .envrc o .env)
+
+
 dirhunt
 Encontrar directorios en sitios web aunque el servicio no esté habilitado (<https://github.com/Nekmo/dirhunt>)
 $ dirhunt http://dominio.com http://dominio2.com (escanear dos urls)
