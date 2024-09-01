@@ -22170,6 +22170,10 @@ $ shutdown -r now     (reiniciar ya)
 # shutdown -h 20:30 -k "Se apagará a las 20 horas 30 minutos" (apagar a las 20,30 y mandando un mensaje a los usuarios)
 
 
+shutdown-at-night
+Programar apagados regulares de estaciones de trabajo. La secuencia de apagado se iniciará a través de CRON. Sin embargo, solo se apagarán las máquinas que aparezcan inactivas o sin uso. Las máquinas que estén en uso permanecerán en funcionamiento. El archivo de configuración en /usr/lib/shutdown-at-night/shutdown-at-night.
+
+
 sic
 Cliente IRC [protocolo para comunicación basada en texto en tiempo real, comúnmente utilizado para discusiones grupales, intercambio de archivos y juegos en línea]
 $ sic -h host -n nickname -k pasword (Conéctese a un host determinado con el nickname y el password)
