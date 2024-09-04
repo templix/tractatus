@@ -22230,6 +22230,15 @@ $ siggen -M archivo.txt (el hash solo en MD5. -S para SHA, -C para CRC32 y -H pa
 $ siggen -a archivo.txt archivo2.txt (para dos archivos)
 
 
+signify-openbsd
+Firmar y verificar archivos criptográficamente.
+$ signify-openbsd -G -p clave.pub -s clave.sec -c "Pequeñas pruebas de claves" (Crear un par de claves con un mensaje)
+$ signify-openbsd -S -s clave.sec -m bashrc -x bashrc.sig (Firmar una copia de .bashrc especificando un nombre de firma)
+$ signify-openbsd -V -p clave.pub -m bashrc (Verificar una firma utilizando el nombre de firma predeterminado)
+$ signify-openbsd -C -p clave.pub -x firma.sig (cualquiera que tenga la clave pública, puede verificar la firma)
+Nota.- El archivo de clave privada ".sec" no debe compartirse con nadie. El archivo de clave pública ".pub" se puede compartir con cualquiera.
+
+
 sigtool
 Ver clamav
 
