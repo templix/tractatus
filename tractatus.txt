@@ -23608,6 +23608,16 @@ Liberar memoria ram:
 # watch -n 1 free -m (Volver a lanzar el primer comando para ver la diferencia)
 
 
+sysdig
+herramienta de análisis del sistema en ejecución.
+# csysdig (monitoreo de procesos y uso de CPU)
+# sysdig -cl (listado de opciones disponibles)
+# sysdig -c netstat (monitorearlas conexiones de red)
+# sysdig -c httplog (visualización de registros HTTP)
+# sysdig -c topprocs_cpu (monitoreo de procesos por uso de CPU)
+# sysdig -c spy_users (monitoreo de la actividad de los usuarios)
+
+
 syslinux
 Hacer particiones arrancables
 $ syslinux /dev/sda1
