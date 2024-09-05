@@ -269,6 +269,15 @@ add-shell
 $ add-shell /bin/rbash
 
 
+adduser
+Crear nuevo usuarios [ver useradd].
+# adduser USER (crear el usuario USER y por defecto su home en /home/USER)
+# adduser --home /home/users/USER --shell /bin/zsh USER (crea el usuario USER con su home en /home/users/USER y su shell zsh)
+Otras caracteristicas que podemos especificar:
+--disabled-password USER (sin contraseña para USER)
+--disabled-login USER (sin permisos para iniciar sesión)
+
+
 adduser.conf
 Archivo que contiene las preferencias para los comandos adduser y addgroup [/etc/adduser.conf]. Algunos parámetros importantes:
 	DSHELL=/bin/bash (shell para nuevos usuarios. Por defecto /bin/bash)
