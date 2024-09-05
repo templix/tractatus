@@ -21869,6 +21869,15 @@ Mostrar un listado de las particiones con sus características exactas.
 # sfdisk /dev/sda < tabla.bak (Restaurar tabla de particiones)
 
 
+sfeed
+Analizador RSS y Atom y algunos programas de formato. Convierte fuentes RSS o Atom de XML a un archivo separado por TAB. Se incluyen programas de formateo para convertir este formato separado por TAB a varios otros formatos. También se incluyen algunos programas y scripts para importar y exportar OPML y para buscar, filtrar, fusionar y ordenar elementos del feed. Incluye las aplicaciones: sfeed_atom, sfeed_content, sfeed_curses, sfeed_frames, sfeed_gopher, sfeed_html, sfeed_markread, sfeed_mbox, sfeed_opml_export, sfeed_opml_import, sfeed_plain, sfeed_twtxt, sfeed_update, sfeed_web y sfeed_xmlenc
+$ mkdir -p "$HOME/.sfeed/feeds" (crear el directorio)
+$ sfeed_opml_import < file.opml > "$HOME/.sfeed/sfeedrc" (importar el listado de feeds)
+$ sfeed_update (actualizar feeds)
+$ sfeed_plain $HOME/.sfeed/feeds/* > "$HOME/.sfeed/feeds.txt" (exportar los feeds en formato txt)
+$ sfeed_curses ~/.sfeed/feeds/* (lanzar el lector)
+
+
 sfill
 [paquete secure-delete]. Borrado de todos los rastros de datos del espacio libre del disco. Parecidos parámetros de srm [ver]. Sobreescribe 38 veces el espacio.
 # sfill -f dir (Borrado rápito pero inseguro)
