@@ -20774,6 +20774,13 @@ Para saber los servicios que estan en marcha
 $ rpcinfo -p
 
 
+rpl
+Utilidad de búsqueda y reemplazo que cambia cadenas con cadenas nuevas en varios archivos de texto al mismo tiempo.
+$ rpl -w F A 'docs/*.txt' (Reemplaza todas las apariciones de la palabra ‘F’ por ‘A’ en todos los archivos con extensión .txt en el directorio dcos/)
+$ rpl -i -w 'más' 'menos' docs/file_* (Reemplaza todos los "más" sin importar mayúsculas o minúsculas por "menos" en los archivos "file_*" en el directorio dcos/)
+$ rpl -m -w 'mala cosa' 'excelente caso'(Ignorar mayúsculas y minúsculas al buscar, pero intentar hacer coincidir las mayúsculas y minúsculas del reemplazo)
+
+
 rpm
 Gestor de paqueteria de distros basadas en Red Hat.
 # rpm -ivh paquete (instalar un paquete)
