@@ -25307,8 +25307,13 @@ Extraer archivos de un paquete.
 
 unattended-upgrades
 Descargar e instalar actualizaciones de seguridad de forma automática y desatendida. Aunque esté activado, notificará acerca de las actualizaciones "normales", pero solo se instalaran automáticamente las actualizaciones de seguridad. Para activar lanzar:
-# dpkg-reconfigure unattended-upgrades
-Y contestar "yes"
+# dpkg-reconfigure -plow  unattended-upgrades
+Y contestar "yes". El parámetro "-plou" indica que solo se hagan preguntas esenciales durante la configuración. Se crea el archivo de configuración en /etc/apt/apt.conf.d/20auto-upgrades con el siguiente contenido (los comentarios han sido añadidos):
+  # Asegura que las listas de paquetes se actualicen regularmente:
+  APT::Periodic::Update-Package-Lists "1";
+  # Que se instalen automáticamente las actualizaciones disponibles y los parches de seguridad críticos:
+  APT::Periodic::Unattended-Upgrade "1";
+
 
 
 unbound
