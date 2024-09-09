@@ -20778,6 +20778,7 @@ rpl
 Utilidad de búsqueda y reemplazo que cambia cadenas con cadenas nuevas en varios archivos de texto al mismo tiempo.
 $ rpl -i -w 'más' 'menos' docs/file_* (Reemplaza todos los "más" sin importar mayúsculas o minúsculas por "menos" en los archivos "file_*" en el directorio docs/)
 $ rpl -m -w 'mala cosa' 'excelente caso' docs/file_* (Ignorar mayúsculas y minúsculas al buscar, pero intentar hacer coincidir las mayúsculas y minúsculas del reemplazo)
+$ rpl -i -- '-x3' '+x5' docs/file_* (si una de las cadenas comienza con "-", se debe colocar "--" como último argumento ANTES de la cadena)
 
 
 rpm
