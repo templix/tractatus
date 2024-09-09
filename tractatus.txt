@@ -23215,6 +23215,24 @@ Algunas opciones:
 -p (Posición de la ventana [valores: top, bottom, left, right])
 
 
+stow
+Es un administrador de instalación de software para /usr/local. Usando enlaces simbólicos, Stow ayuda a mantener las instalaciones separadas (/usr/local/stow/emacs vs. /usr/local/stow/perl, por ejemplo) mientras mantiene que todas están bajo /usr/local. Incluye la aplicación chkstow.
+$ echo "alias stow='sudo STOW_DIR=/usr/local/stow /usr/bin/stow'" >> ~/.bashrc
+$ source ~/.bashrc
+Si vamos a instalar, por ejemplo emacs, los descargamos y compilamos:
+$ ./configure --prefix=/usr/local/stow/emacs
+$ make
+# make install
+La instalación crea un enlace simbólico de /usr/local/bin/emacs a /usr/local/stow/emacs/bin/emacs.
+$ stow emacs (informar a stow de la instalación)
+$ stow -R emacs (actualizar la aplicación instalada)
+$ stow -D emacs (desinstalar)
+# rm -r /usr/local/stow/emacs (eliminar su directorio)
+# stow -D emacs-21.3 -S emacs-21.4a (actualizar una versión de emacs)
+$ chkstow (de vez en cuando limpiar el árbol de destinos)
+$ chkstow -b (Comprueba el directorio de destino en busca de enlaces simbólicos falsos [que apuntan a archivos inexistentes])
+
+
 strace
 Muestra las llamadas al sistema originadas por un proceso.
 $ strace comando
