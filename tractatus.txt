@@ -16586,11 +16586,11 @@ Es un sniffer de red de alto rendimiento para la inspección de paquetes. Se pue
 netstat
 Puertos y conexiones.
 # netstat --inet --all
-Proto Recv-Q Send-Q Local Address           Foreign Address         State
-tcp        0        0          localhost:832                 *:*                     LISTEN
-tcp        0        0          localhost:2208               *:*                     LISTEN
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name
+tcp        0      0 127.0.0.1:53            0.0.0.0:*               LISTEN      852/connmand
+tcp        0      0 127.0.0.1:631           0.0.0.0:*               LISTEN      21928/cupsd
 ...
-Proto.- protocolo, Recv-Q.- paquetes recibidos, Send-Q.- paquetes enviados, Local Address.- direccion local, Foreign Address.- direccion remota, State.- estado de la conexión (listen = a la escucha).
+Proto.- protocolo, Recv-Q.- paquetes recibidos, Send-Q.- paquetes enviados, Local Address.- direccion local, Foreign Address.- direccion remota, State.- estado de la conexión (listen = a la escucha), PID/Program name:* el ID y el nombre del proceso, así como la ubicación del puerto.
 # netstat -ac   (puertos abiertos,donde se dirigen y de donde  vienen)
 # netstat -atu | grep '*.*'   (Ver todos los servicios que ofrece la máquina)
 # netstat -ta  (Lista los servidores que estén corriendo en el sistema)
@@ -16616,8 +16616,7 @@ Proto.- protocolo, Recv-Q.- paquetes recibidos, Send-Q.- paquetes enviados, Loca
 # netstat -n -p|grep SYN_REC | wc -l  (Muestra si estamos sufriendo un ataque ddos)
 # netstat -lantp | grep ESTABLISHED |awk '{print $5}' | awk -F: '{print $1}' | sort -u (Todas las ip conectadas a nuestro host)
 # netstat -plan | grep :80 |  grep ESTABLISHED | awk {'print $5'} | cut -d: -f 1 | sort | uniq -c | sort -n (Otra forma de mostralas)
-# netstat -plan | grep :80 | awk {'print $5'} | cut -d: -f 1 | sort | uniq -c | sort -n
-(Muestra el número de peticiones al puerto 80 por cada IP)
+# netstat -plan | grep :80 | awk {'print $5'} | cut -d: -f 1 | sort | uniq -c | sort -n (número de peticiones al puerto 80 por cada IP)
 # netstat -plutn
 Explicación de los Flags:
 	G (La ruta utiliza una pasarela)
@@ -22458,18 +22457,24 @@ Informa del uso de la memoria física en consideración con la memoria compartid
 # smemstat -g -p tmux,firefox57 (el resultado en gigabytes. -m en megabytes -k en kilobytes)
 
 
-snapd
-Sistema de instalación de paquetes creado por canonical pero que puede usarse en casi todas las distros (Debian, arch, gentoo, fedora, opensuse...). Consiste basicamente en incluir las dependencias junto con el paquete. Es como un sistema de paqueteria universal para todas las distros linux. Los paquetes de instalan en /snap/nombre_paquete y lo ejecutables en /snap/bin y pueden convivir junto a los del mismo nombre en el sistema. Si por ejemplo, lanzamos:
+snap
+[snapd]. Formato de paquete universal desarrollado por Canonical que tienen como objetivo proporcionar una forma fácil y segura de distribuir software en cualquier distribución Linux, eliminando las dependencias del sistema y asegurando que las aplicaciones funcionen sin problemas en diferentes entornos porque incluyen todas las dependencias del paquete. Los paquetes de instalan en /snap/nombre_paquete y lo ejecutables en /snap/bin y pueden convivir junto a los del mismo nombre en el sistema. Si por ejemplo, lanzamos:
 $ emacs
-Se ejecutará la aplicación del sistema. Si queremos el instalado con snap, lanzamos la ruta aboluta:
+Se ejecutará la aplicación del sistema. Si queremos el instalado con snap, lanzamos la ruta absoluta:
 $ /snap/bin/emacs
-# snap install programa
-# snap find nombre_programa (buscar un programa)
-# snap list (lista los instalados)
-# snap info paquete
+Una ves instalado el programa snap:
+# systemctl enable --now snapd.socket (habilitar el servicio)
+# systemctl status snapd (comprobar si esta habilitado)
+# snap install core (componente esencial para ejecutar paquetes Snap)
+# snap refresh (actualizar todas las aplicaciones)
+# snap install vlc (instalar una aplicación)
+$ snap info vlc (información sobre una aplicación)
+$ snap find telegram (buscar si un paquete existe en snap)
+@ snap refresh vlc (actualizar una aplicación)
+# snap remove vlc --purge (eliminar una aplicación)
+$ snap list (listar aplicaciones snap instaladas)
+$ snap changes (ver si existen detalles de actualizaciones)
 # snap revert paquete (instalar una versón anterior de un paquete)
-# snap remove programa (eliminar un programa)
-# snap refresh (update)
 
 
 snarf
