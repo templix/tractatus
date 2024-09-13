@@ -2135,6 +2135,11 @@ Si beep no emite sonidos, puede que el dispositivo esté en la lista negra:
 # rmmod pcspkr  (Otra forma de quitar el módulo)
 
 
+bfbtester
+Realizar comprobaciones de seguridad rápidas y proactivas de programas binarios. BFBTester realizará comprobaciones de desbordamientos de línea y múltiples, así como desbordamientos de variables de entorno. También puede observar la actividad de creación de archivos temporales para alertar al usuario sobre cualquier programa que utilice nombres de archivos temporales no seguros. Si bien no puede probar todos los desbordamientos en el software, es útil para detectar errores iniciales que pueden alertar sobre software peligroso.
+$ bfbtester -a /home/user/bin/* (todas las comprobaciones de los scripts del directorio mencionado en el home del usuario)
+
+
 bg
 Pasa un proceso a segundo plano.
 $ bg PID
@@ -4687,7 +4692,8 @@ use=web, web=checkip.dyndns.com, web-skip='IP Address'
 server=members.dyndns.org
 login=Nombre_registrado_en_dyndns
 password='contraseña_de_dyndns'
-nombre_de_dominio.com
+nombre_de_dominio.dyndns.com
+# ddclient -daemon=0 -debug -verbose -noquiet (forzar la ejecución de ddclient)
 
 
 ddcutil
