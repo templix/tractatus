@@ -8663,10 +8663,11 @@ La totalidad de perfiles disponibles se muestra en:
 
 
 firewalld
-es un demonio de firewall administrado dinámicamente con soporte para zonas de red/firewall para definir el nivel de confianza de las conexiones o interfaces de red. De modo predeterminado Firewalld tiene diferentes tipos de zonas. Cada una tiene un distinto nivel de seguridad: Para redes públicas: drop, block y public [predeterminada], redes externas: external, redes para hogar: work, home y internal y trusted en que todas las conexiones son aceptadas. En la mayoria se descartan los paquetes entrantes no solicitados y el resto son rechazados.
+es un demonio de firewall administrado dinámicamente con soporte para zonas de red/firewall para definir el nivel de confianza de las conexiones o interfaces de red. De modo predeterminado Firewalld tiene diferentes tipos de zonas. Cada una tiene un distinto nivel de seguridad: Para redes públicas: drop, block y public [predeterminada], redes externas: external, redes para hogar: work, home y internal y trusted en que todas las conexiones son aceptadas. En la mayoria se descartan los paquetes entrantes no solicitados y el resto son rechazados. Los registros en /var/log/firewalld.
 # systemctl enable firewalld (iniciar firewalld automaaticamente al inicio del sistema)
 # firewall-cmd --state (comprobar si esta activo. Más información: systemctl status firewalld)
 # firewall-cmd --check-config (si el archivo de configuración tiene errores)
+# firewall-cmd --set-log-denied=all (registrar todos los paquetes descartados [unicast, broadcast, multicast])
 # firewall-cmd --get-log-denied (imprimir el registro de valores denegados)
 # firewall-cmd --list-all (visión completa de la configuración de firewalld)
 # firewall-cmd --list-all --zone=home (de una zona concreta)
@@ -8687,6 +8688,7 @@ es un demonio de firewall administrado dinámicamente con soporte para zonas de 
 # firewall-cmd --zone=public --list-all (información detallada de una zona concreta)
 # firewall-cmd --get-default-zone (verificar qué zona es la utilizada por el firewalld)
 # firewall-cmd --get-active-zone (ver los interfaces asociados a cada zona)
+# dmesg | grep -i REJECT (ver los paquetes rechazados)
 
 
 firewall-tests
