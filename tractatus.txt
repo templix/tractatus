@@ -8677,6 +8677,9 @@ es un demonio de firewall administrado dinámicamente con soporte para zonas de 
 # firewall-cmd --panic-on (desactivar inmediatamente el trafico de red)
 # firewall-cmd --panic-off (volver a activarlo)
 # firewall-cmd --query-panic (comprobar si está activado o no el modo panic)
+# firewall-cmd --query-lockdown (consultar si el bloqueo está habilitado)
+# firewall-cmd --lockdown-on (desbloquear bloqueo del firewall. Solo las aplicaciones en la lista blanca puedan solicitar cambios)
+# firewall-cmd --lockdown-off (habilitar el bloqueo)
 # firewall-cmd --list-services (servicios no permitidos)
 # firewall-cmd --get-services (numerar todos los servicios predefinidos)
 # firewall-cmd --add-service=samba (añadir un servicio a los permitidos)
@@ -8688,6 +8691,10 @@ es un demonio de firewall administrado dinámicamente con soporte para zonas de 
 # firewall-cmd --zone=public --list-all (información detallada de una zona concreta)
 # firewall-cmd --get-default-zone (verificar qué zona es la utilizada por el firewalld)
 # firewall-cmd --get-active-zone (ver los interfaces asociados a cada zona)
+# firewall-cmd --add-lockdown-whitelist-user=USER (añadir USER a la lista blanca)
+# firewall-cmd --remove-lockdown-whitelist-user=USER (suprimir USER de la lista blanca)
+# firewall-cmd --query-lockdown-whitelist-user=USER (consultar si USER esta en la lista blanca)
+# firewall-cmd --list-lockdown-whitelist-users (consultar listado de usuarios de la lista blanca)
 # dmesg | grep -i REJECT (ver los paquetes rechazados)
 
 
