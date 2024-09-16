@@ -23264,6 +23264,13 @@ Algunas opciones:
 -s 8192 (Valor de 8192 como limite de longitud de las cadenas. Por defecto 32)
 
 
+streamer
+Herramienta para capturar imágenes individuales o múltiples de un video y grabar películas desde un dispositivo.
+$ streamer -o captura.ppm  (capturar un frame)
+$ streamer -t 10 -r 2 -o capturas.jpeg (capturar 10 frames y 2 por segundo)
+$ streamer -t 0:30 -F stereo -o soundtrack.wav (grabar 30 segundos con sonido estereo)
+
+
 streamripper
 Ripear a partir de emisoras icecast (www.icecast.com) y showcast (www.showtcast.com). Crea una carpeta en el presente directorio.
 $ streamrippwer http://yp.shoutcast.com/sbin/tunein-station.pls?id=321414 -l 4000 (grabar durante 4000 segundos)
