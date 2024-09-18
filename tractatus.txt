@@ -22434,24 +22434,24 @@ slurm
 Monitoriza la interfaz de red
 # slurm -i eth0
 
-
-smartctl
-[smartmontools]. Comprobar el estado de los discos duros.
-# smartctl -i /dev/sda (Verificar si un disco duro soporta smart)
-# smartctl -s on /dev/sda (activar el soporte smart)
-# smartctl -a /dev/nvme0n1p1 (comprobar si el disco es HDD o SSD)
-Nota- Tambien podemos lanzar
-# cat /sys/block/loop0/queue/rotational
-Si el resultado es 1 es HDD si es 0 es SSD
-# smartctl -t short /dev/sda (lanzar el test corto)
-# smartctl -t long /dev/sda  (lanzar el test largo)
-# smartctl -l selftest -i /dev/sda (analizar la información de los comandos anteriores)
-LifeTime indica las horas que el disco ha estado encendido. LBA_of_First_error indica los errores.
+smartmontools
+Comprobar el estado de los discos duros. Contiene los programas smartctl y smartd para controlar y supervisar los sistemas de almacenamiento mediante el sistema S.M.A.R.T. [Self-Monitoring, Analysis and Reporting Technology System]
+# smartctl --scan (información relevante sobre los dispositivos de almacenamiento disponibles)
+# smartctl --all /dev/nvme0n1p5 (imprime toda la información SMART de la partición nvme0n1p5)
+# smartctl -iHs on /dev/nvme0n1p5 ("i" información, "H" estado de salud del dispositivo y "s on" habilita o deshabilita SMART en el dispositivo )
+# smartctl -c /dev/nvme0n1p5 (verificar las capacidades SMART del dispositivo)
 # smartctl -Hc /dev/sda (Si al final se lee PASSED, correcto, si FAILED cambiar disco)
+# smartctl -t short /dev/sda (lanzar el test corto)
+# smartctl -t long /dev/sda (ejecutar un test largo)
 # smartctl -l error /dev/sda (Listar los errores)
+# smartctl -l selftest /dev/nvme0n1p5 (muestra una lista con los resultados de las autopruebas recientes en orden cronológico inverso)
+Nota- "LifeTime" indica las horas que el disco ha estado encendido. "LBA_of_First_error" indica los errores.
+# update-smart-drivedb (actualiza /var/lib/smartmontools/drivedb/drivedb.h o DESTFILE desde branch/RELEASE_7_3_DRIVEDB del repositorio SVN de smartmontools)
+# smartd (arrancar el daemon)
+# sed -i 's/DEVICESCAN -d removable -n standby -m root -M exec/#DEVICESCAN -d removable -n standby -m root -M exec/' /etc/smartd.conf (comentar la opción DEVICESCAN en el archivo de configuración predeterminado para evitar que smartd intente buscar dispositivos conectados de forma indiscriminada)
 # smartctl -A /dev/sda (Listar atributos internos)
 Listado de algunos atributos smart
-	Power_Cycle_Count (RAW_Value).- Veces que le ha llegado   corriente.
+	Power_Cycle_Count (RAW_Value).- Veces que le ha llegado corriente.
 	Temperature Celsius. (RAW_Value) .- Temperatura del disco
 	Reallocated_Sector_Ct (RAW_Value).-  número de sectores de repuesto que ha usado el disco para sustituir sectores dañados
 	Raw_Read_Error_Rate (RAW_Value).- Frequencia de errores en la lectura del disco.
@@ -22461,12 +22461,18 @@ Listado de algunos atributos smart
 	Spin_Retry_Count: Numero de reintentos de arrancada
 El campo VALUE [valor] va del número 1 al 253, siendo 1 el peor. Los valores normales son los que estan entre 100 y 200. El campo WHEN_FAILED indica cuando se produjo una falla de algún atributo.
 1.-
-Para activar el demonio que nos avisa si se produce un error en disco:
-# apt-get install smart-notifier
+Otra forma de activar el demonio que nos avisa si se produce un error en disco:
+# apt install smart-notifier
 Editar el archivo de configuración:
 # nano /etc/default/smartmontools
 Y descomentar la linea:
 start_smartd=yes
+2.- El propósito de SMART es supervisar la confiabilidad del disco duro y predecir fallas del disco y realizar diferentes tipos de pruebas automáticas del disco. La ubicación predeterminada para estas notificaciones y advertencias SYSLOG normalmente se realizan en /var/log/messages o /var/log/syslog
+3.- Comprobar si el disco es HDD o SSD
+# smartctl -a /dev/nvme0n1p1 (comprobar si el disco es HDD o SSD)
+Nota- Tambien podemos lanzar
+# cat /sys/block/loop0/queue/rotational
+Si el resultado es 1 es HDD si es 0 es SSD
 
 
 smbclient
