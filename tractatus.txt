@@ -9164,10 +9164,14 @@ Traduce las reglas de Snort en reglas de iptables equivalentes y genera un scrip
 # fwsnort --ipt-sync --verbose (Generar reglas de iptables para Snort que estan permitidas por la política local de iptables y escribir las de snort originales en el script de iptables como comentario)
 
 
+fwupd
+Demonio que permite que el software de sesión actualice el firmware del dispositivo.
+# fwupdmgr get-devices (mostrar todos los dispositivos detectados)
+# fwupdmgr refresh (descargar metadatos recientes del Linux Vendor firmware Service [Servicio de firmware del proveedor de Linux]-LVFS)
+# fwupdmgr get-updates (enumerar las actualizaciones disponibles para cualquier dispositivo en el sistema)
+# fwupdmgr update (instalar actualizaciones)
+# fwupdmgr report-history (enviar información a los administradores de LVFS y a los desarrolladores OEM sobre la eficacia del proceso de actualización del firmware)
 fwupd-test
-Proporciona un conjunto de pruebas instaladas que se pueden ejecutar para validar el demonio en un sistema de integración continua. Consta de varias aplicaciones que han de lanzarse especificando toda la ruta que se encuentran en /usr/libexec/installed-tests/fwupd.
-# /usr/libexec/installed-tests/fwupd/acpi-dmar-self-test
-# /usr/libexec/installed-tests/fwupd/linux-swap-self-test
 
 
 fzf
