@@ -26909,6 +26909,17 @@ $ watchgnupg --time-only SOCKET (No imprima la parte de la fecha de la marca de 
 $ watchgnupg --verbose SOCKET (Activar la salida de información adicional.)
 
 
+watchman
+Herramienta para observar archivos o directorios y registrar cuándo cambian realmente. Existe una amplia información en <http://facebook.github.io/watchman/docs/install>
+$ watchman watch-project /home/user/docs (raíz lógica de un conjunto de archivos relacionados en el que consolidar las vigilancias)
+Nota- Es preferible usar la opción "watch-project" a la "watch" que está desactualizada
+$ watchman watch-list (muestra listado de registros)
+$ watchman log debug "esto es una nota" (genera una línea de registro en el registro de watchman)
+$ watchman find ~/docs/ notas.txt (busca los archivos que coinciden con el patrón "nota.txt" en el directorio especificado)
+$ watchman watch-del ~/docs (elimina un reloj y cualquier disparador asociado)
+$ watchman watch-del-all (elimina todos los relojes y activadores asociados)
+
+
 watson
 Controlar los tiempos que se dedican a un proyecto.
 	$ watson start proyecto1 (iniciar el control del proyecto1)
