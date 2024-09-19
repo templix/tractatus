@@ -25537,6 +25537,15 @@ $ unity --reset-icons (eliminar iconos agregados al launcher)
 $ unity --replace (reiniciar)
 
 
+uniutils
+Conjunto de herramientas útiles cuando se trabaja con archivos Unicode si se desconoce el sistema de escritura, no se tiene la fuente necesaria, se necesita inspeccionar caracteres invisibles, se necesita averiguar si se han combinado caracteres o en qué orden aparecen, o se necesitan estadísticas sobre qué caracteres aparecen. Consta de los siguientes ejecutables: ExplicateUTF8 [depurar o aprender sobre Unicode. Determina y explica la validez de una secuencia de bytes como una codificación UTF8], unidesc [rangos de caracteres a los que pertenecen las diferentes partes del texto. También se puede utilizar para identificar codificaciones Unicode], unifuzz [Emite cadenas diseñadas para probar el manejo de Unicode], unihist [genera un histograma de los caracteres en su entrada], uniname [imprime de forma predeterminada el desplazamiento de cada carácter, su desplazamiento de bytes, su valor de código hexadecimal, su codificación, el glifo en sí y su nombre. También se puede utilizar para validar la entrada UTF-8], unireverse [invierte cada línea de entrada carácter por carácter] y utf8lookup [buscar caracteres Unicode]
+$ ExplicateUTF8 texto.txt
+$ unidesc -l (rangos unicode en orden alfabético)
+$ uniname -r texto.txt (imprimir el rango unicode)
+$ echo -e "\x54\xCE\x95\x53\xD0\xA2\x45\x52\x2E\x74\x78\x74" | uniname
+$ unireverse (se entra frase y al pulsar intro la escribe a la inversa)
+
+
 unix2dos
 Convertir formatos unix a msdos
 $ unix2dos fichero_unix fichero_dosServidor de archivos ftp. Toda la configuración de encuentra en el archivo:
