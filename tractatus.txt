@@ -1970,7 +1970,7 @@ Entra en el prompt de la aplicación.
 
 bashish
 Entorno para terminales de texto. Permite cambiar colores, tipo de letra, transparencias, imagen de fondo... Descarga de <http://sourceforge.net/projects/bashish/files/> . Se instala con el clásico:
-	$ ./configure && make && sudo make install
+$ ./configure && make && sudo make install
 $ bashish list (Muestra el listado de temas)
 $ bashish fire (Abre la terminal col el tema fire)
 $ BASHISH_DISABLED=1 un_comando (Lanza el comando que especifiquemos deshabilitando bashish)
@@ -18176,6 +18176,19 @@ $ pacmd
 pacsearch
 Buscar paquetes arch (Equivalente a pacman -Ss )
 $ pacsearch mail
+
+
+pactl
+Se utiliza para gestionar la reproducción de audio, controlar los dispositivos de audio y manejar el servidor de sonido PulseAudio.
+$ pactl list sinks short (ver lista de dispositivos de audio disponibles conectados con el sistema)
+$ pactl get-default-sink (tarjeta por defecto)
+$ pactl get-default-source (nombre simbólico de la fuente por defecto)
+$ pactl set-default-sink alsa_output.pci-0000_00_1f.3.analog-stereo (cambiar el dispositivo de audio por defecto)
+$ pactl set-sink-volume 0 +5% (gestionar el volumen del sonido)
+$ pactl set-sink-volume 0 -5%
+$ pactl set-sink-mute 0 toggle (silenciar)
+$ pactl list cards (información sobre la tarjeta de sonido)
+$ pactl info (información del dispositivo)
 
 
 pactree
