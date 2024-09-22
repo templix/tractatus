@@ -21462,6 +21462,12 @@ Si deseamos tener una barra inferior donde aparecerá el nombre de las diferente
 	caption always "%{wk}%?%-Lw%?%{bw}%n*%f %t%?(%u)%?%{wk}%?%+Lw%? %= %{= kw}%110`%109`%111` %H | %D %d-%m-%Y %0c:%s"
 
 
+screendump
+Vuelca el contenido de una consola virtual a stdout. Abrimos la consola /dev/tty1 y en ella lanzamos, por ejemplo, "htop" y en una terminal de las X lanzamos:
+# screendump 1
+Y nos mostrará un pantallazo de lo que ocurre en la terminal /dev/tty1
+
+
 screenfetch
 Muestra información del equipo. En caso de no estar en los repositorios:
 $ wget -c https://raw.github.com/KittyKatt/screenFetch/master/screenfetch-dev -O screenfetch
