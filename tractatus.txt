@@ -22447,6 +22447,20 @@ $ sleep 3h && halt (para el pc a las 3 horas)
 $ sleep 3d && halt (para el pc a los 3 dias)
 
 
+sleepenh
+Programa especialmente diseñado para ejecutar algunas funciones periódicamente en un script de shell. No fue diseñado para ser preciso lanzarlo como un comando de consola, sino para ser útil en una secuencia que precisa "sleeps" sucesivos. Un ejemplo de scritp:
+#!/usr/bin/env bash
+#
+TIMESTAMP=$(sleepenh 0)
+while true; do
+# Imprimir en pantalla el texto
+echo -n "Linux es genial ";
+sleepenh 0;
+# mostrar cada 2 segundos el texto
+TIMESTAMP=$(sleepenh $TIMESTAMP 2.0);
+done
+
+
 slim
 Gestor de sesiones ligero. La configuración en el archivo /etc/slim.conf
 $ slim -p /usr/share/slim/themes/tema_a_probar
