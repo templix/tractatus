@@ -14283,6 +14283,9 @@ Nota.- Normalmente "man" formatea el contenido para que coincida con el ancho de
        <standard input>:602: warning [p 7, 11.3i, div 'an-div', 0.2i]: cannot adjust line
 Para solucionarlo:
 $ MANWIDTH=1250 man $COMANDO | wc -l
+1- Para crear una página man a partir de un .md:
+$ pandoc archivo.md -s -t man -o archivo.1
+# mv archivo.1 /usr/local/share/man/ca/man1/ (si no estan los directorios "ca/man1" se crean)
 
 
 man2html
@@ -18727,6 +18730,14 @@ perftest
 Es una colección de pruebas destinadas a usarse como microevaluación de rendimiento como medir la latencia y el ancho de banda de las estructuras Infiniband. Incluye varios ejecutables: ib_atomic_bw, ib_atomic_lat, ib_read_bw, ib_read_lat, ib_send_bw, ib_send_lat, ib_write_bw, ib_write_lat, raw_ethernet_burst_lat, raw_ethernet_bw, raw_ethernet_fs_rate, raw_ethernet_lat, run_perftest_loopback y run_perftest_multi_devices
 
 
+periodic
+Ejecutar un programa con un intervalo determinado. Descargar de https://github.com/josch/periodic
+$ periodic -n 2 -c 3 -s -f echo "linux es genial" (cada 2 segundos, con 3 intervalos o sea imprimirá 4 veces el texto y sin imprimir el contador)
+Otras opciones:
+-d (contar hacia abajo, predeterminado hacia arriba)
+-b BEGIN (iniciar el conteo en BEGIN, predeterminado 0)
+
+
 pev
 Herramienta para obtener información de los ejecutables PE32/PE32+ (EXE, DLL, OCX etc) como cabeceras, secciones, recursos y más.
 $ pev -p putty..exe (ver solo la versión de putty.exe)
@@ -22445,6 +22456,10 @@ $ sleep 20m; yes > /dev/dsp (alarma. En 20 minutos suena un pitido)
 $ sleep 3s && aoss espeak -v es "Levantate gandul....." 2>/dev/null (Otra forma de programar una alarma)
 $ sleep 3h && halt (para el pc a las 3 horas)
 $ sleep 3d && halt (para el pc a los 3 dias)
+
+
+sleepd
+Demonio que pone un portátil en modo de suspensión si no se está utilizando o si la batería está baja.
 
 
 sleepenh
