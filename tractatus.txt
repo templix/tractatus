@@ -666,6 +666,38 @@ convierte la imagen de entrada, que puede estar en cualquiera de los aproximadam
 $ anytopnm imagen.jpeg > imagen
 
 
+aosd_cat
+Herramienta de visualización en pantalla. Se puede utilizar para notificaciones en scripts de shell. El archivo "prueba.txt" del ejemplo solo tiene el texto "linux es un sistema genial".
+$ aosd_cat -p 3 -R red -S green -u 10000 -f 3000 -o 3000 -a 10 -e 5 -n "Open Sans Extrabold" -i prueba.txt
+Opciones de geometría:
+         -p, --position (posición en la ventana. El rango válido es de 0 a 8, donde 0 es la esquina superior izquierda y 8 es la esquina inferior derecha. El valor predeterminado es 6)
+         -x, --x-offset (desplazamiento de la ventana del eje x desde el punto (0,0). Predeterminado es 50)
+         -y, --y-offset (desplazamiento de la ventana del eje y desde el punto (0,0). Predeterminado es -50)
+         -e, --shadow-offset (desplazamiento de la sombra. Predeterminado es 2)
+         -d, --padding (margen desde el borde hasta el contenido. Predeterminado es 0)
+Opciones de apariencia:
+         -t, --transparency (modo de transparencia. 0=ninguno, 1=falso, 2=compuesto. Predeterminado es 2)
+         -n, --font (fuente. No hay valor predeterminado)
+         -w, --width (ancho de ajuste en píxeles. cero, ajustará al ancho de la pantalla o no se ajustará si otros parámetros lo hacen imposible. Predeterminado es 0)
+Opciones de coloración:
+         -B, --back-color (color de fondo. No hay valor predeterminado)
+         -S, --shadow-color (color de la sombra. Predeterminado negro)
+         -R, --fore-color (color del primer plano. predeterminado verde)
+Opciones de opacidad:
+         -b, --back-opacity (opacidad del fondo. Predeterminado es 0)
+         -s, --shadow-opacity (opacidad de las sombras. Predeterminado es 192)
+         -r, --fore-opacity (opacidad del primer plano. Predeterminado es 255)
+Opciones de tiempo:
+         -f, --fade-in (tiempo de entrada gradual. Predeterminado es 300)
+         -u, --fade-full (tiempo para mostrar con opacidad completa. Predeterminado es 3000)
+         -o, --fade-out (tiempo de salida gradual. Predeterminado es 300)
+Opciones de desplazamiento hacia atrás:
+         -a, --age (límite de eliminación de la antigüedad de las líneas. Predeterminado es 0)
+         -l, --lines (límite de eliminación de la cantidad de líneas. Predeterminado es 1)
+Opciones de la aplicación:
+         -i, --input (fuente del texto de entrada. Predeterminado es -)
+
+
 aoss
 [espeak, alsa-oss, mbrola]. Para que la consola hable.
 $ aoss espeak --voices   (ver las opciones idiomáticas)
