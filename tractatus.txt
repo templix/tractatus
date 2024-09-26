@@ -666,6 +666,29 @@ convierte la imagen de entrada, que puede estar en cualquiera de los aproximadam
 $ anytopnm imagen.jpeg > imagen
 
 
+aoeui
+Editor de pantalla muy pequeño y eficiente.
+$ aoeui -r file.txt (abrir solo lectura)
+$ aoeui -s -u file.txt (usar espacios, no tabulaciones, para la sangría automática y tratar file.txt como UTF-8 incluso si contienen codificaciones UTF-8 no válidas)
+$ aoeui -t 6 script (establecer la tabulación en 6)
+Algunas teclas de control con el editor abierto:
+        Ctrl g (ir al princio de la linea)
+        Ctrl c (ir al final de la linea)
+        Ctrl espacio Ctrl g (ir al principio del párrafo. Si ya está allí, vuelve al principio del párrafo anterior)
+        Ctrl espacio Ctrl c (ir al final del párrafo. Si ya está allí, vuelve añ principio del párrafo anterior)
+        Ctrl l (mueve la ventana hacia adelante en pantallas completas)
+        Ctrl r (mueve la ventana hacia atrás en pantallas completas)
+        Ctrl espacio Ctrl r (ir al principio del texto)
+        Ctrl espacio Ctrl l (ir al final del texto)
+        Ctrl k (con varios textos abiertos, guarda todos los textos modificados)
+        Ctrl v (inicia selección. Una vez seleccionado otra vez con "Crtl v" se anula la selección)
+        Ctrl d (corta selección)
+        Ctrl b (pega selección)
+        Ctrl u (deshacer el último comando)
+        Ctrl q (salir sin guardar)
+        Ctrl espacio Ctrl q (guardar y salir)
+
+
 aosd_cat
 Herramienta de visualización en pantalla. Se puede utilizar para notificaciones en scripts de shell. El archivo "prueba.txt" del ejemplo solo tiene el texto "linux es un sistema genial".
 $ aosd_cat -p 3 -R red -S green -u 10000 -f 3000 -o 3000 -a 10 -e 5 -n "Open Sans Extrabold" -i prueba.txt
