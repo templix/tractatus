@@ -24833,6 +24833,12 @@ Permite seguir la pista de un paquete desde un host a otro.
 # traceroute www.tuxapuntes.com
 
 
+tracepath
+Similar a la utilidad traceroute [ver], pero también intenta descubrir la MTU de la ruta. En las redes, la unidad de transmisión máxima [MTU] es una medida que representa el tamaño máximo de paquetes de datos que un dispositivo conectado a una red aceptará. Los paquetes que exceden la MTU [1500 bytes de medida máxima] de una red no pueden atravesarla. Admite IPv4 e IPv6.
+$ tracepath -p 80 localhost (del puerto 80 de localhost)
+$ tracepath google.es
+
+
 trafshow
 [netliag[. Es un programa interactivo que reúne el tráfico de red de todas las interfaces con capacidad de libpcap para acumularlo en la memoria caché.
 # trafshow -R 1 -p (actualizar cada segundo y no poner en modo promiscuo)
