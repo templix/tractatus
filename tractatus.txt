@@ -2450,6 +2450,15 @@ Monitor de seguridad que inspecciona todo el tráfico para detectar signos de ac
 Una vez cerrado el monitor con C-c listar los logs creados en el directorio [conn.log, dns.log, files.log, http.log,packet_filter.log, reporter.log, ssl.log, weird.log, x509.log] y visializarlos con cualquier editor.
 
 
+broot
+Enfoque moderno para generar árboles de directorios. Descarga:
+$ curl -o broot -L https://dystroy.org/broot/download/x86_64-linux/broot
+# mv broot /usr/local/bin
+# chmod +x /usr/local/bin/broot
+$ broot (para salir pulsar :q como en vim)
+$ broot --sort-by-type-dirs-first -H (directorios primero y sin archivos ocultos)
+
+
 bropages
 Otra forma de visualizar las páginas man coloreando la sintaxis y mostrando ejemplos.
 $ bro ls
