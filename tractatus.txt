@@ -19105,6 +19105,23 @@ pipes
 $ pipes -t 5 -p 10 (10 tuberias, por defecto 1 y con el modelo de caracteres 7)
 
 
+pipx
+[python3-venv]. Gestor de paquete python.
+$ pipx ensurepath (añadir el directorio que usa la aplicación [~/.local/bin] al $PATH)
+$ pipx install shell-genie (instalar un paquete)
+$ pipx list (lista los paquetes instalados en /home/USER/.local/bin)
+$ pipx list --short (solo listando paquetes y versión)
+$ pipx list --json > pipx.json (crae un archivo de los paquetes instalados)
+$ pipx install-all pipx.json (instalar los paquetes del listado anterior)
+$ pipx environment (variables de entrono)
+$ pipx completions (muestra lo que tiene que agregarse para autocompletado a .bashrc en el caso de bash y en otras shells)
+$ pipx run cowsay check . (chequear como se comportaria un comando [cowsay] sin instalarlo)
+$ pipx upgrade shell-genie (actualizar una aplicación)
+$ pipx upgrade-all (actualizar todas las aplicaciones instaladas)
+$ pipx uninstall shell-genie (desinstalar una aplicación)
+$ pipx uninstall-all (desinstalar todas las aplicaciones instaladas)
+
+
 pitidos
 (del pc). Señales de alerta sonora cuando algo falla.
 Sin pitidos.-  Sin suministro eléctrico
@@ -22158,6 +22175,25 @@ Revisión y análisis de código de shell scripts. Realiza una comprobación de 
 $ shellcheck script.sh (Forma básica. Si no muestra nada todo es perfecto)
 $ shellcheck -s bash -e SC1003,SC2035 script.sh (especificando el lenguaje y excluir 2 tipos de errores)
 Nota.- Los códigos de error generados pueden ser consultados en la Wiki del proyecto (<https://github.com/koalaman/shellcheck>) y por su código en <https://github.com/koalaman/shellcheck/wiki/Directive>
+
+
+shell-genie
+Dota la consola de Inteligencia Artificial centrada en responder únicamente preguntas sobre el sistema operativo GNU/Linux y sus comandos. Instalar y configurar:
+$ python3 -m venv .venv (crear un entorno virtual en tu ubicación)
+$ source .venv/bin/activate (activar entorno virtua)
+$ pipx install shell-genie (instalar)
+$ shell-genie init (inicializar la herramienta)
+Produce varias preguntas:
+        Select backend: [openai-gpt-3.5-turbo/free-genie]: free-genie
+        Note that this server will store the requested command, OS, and shell version to improve the model. Also, I cannot guarantee that the server will be up and running 24/7.
+        Do you want to continue? [y/n]:
+        Do you want to continue? [y/n]:
+        Do you want to provide feedback about the generated commands to improve the models? [y/n]:
+        Is your OS Debian GNU/Linux 12 (bookworm)? [y/n]:
+        The following configuration will be saved:
+        {'backend': 'free-genie', 'os': 'Linux', 'os_fullname': 'Debian GNU/Linux 12 (bookworm)', 'shell': 'bash', 'training-feedback': True}
+Nota.- Si elegimos la opción “openai-gpt3” tendremos que hacernos una cuenta en su página y recuperar la llave API para proporcionarla. Eligiendo la opción “free-genie” podemos disfrutar de la forma gratuita y participar o no a mejorar la herramienta.
+$ shell-genie ask "la pregunta que hacemos" (Para preguntar)
 
 
 shelltestrunner
