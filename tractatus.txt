@@ -3498,6 +3498,15 @@ usuario1:passwd1
 usuario2:passwd2
 
 
+chpst
+[runit]. Se utiliza para cambiar ciertos aspectos del entorno de ejecución de un proceso, como el usuario, grupo, límites de recursos, etc.
+$ chpst -u www-data:www-data /usr/sbin/nginx (ejecutar nginx como un usuario y grupo especificos)
+$ chpst -M 512M /usr/bin/python script.py (limitar la cantidad máxima de memoria física y virtual que un proceso)
+$ chpst -u www-data -o 100 /usr/sbin/nginx (limita a Nginx a abrir un máximo de 100 archivos simultáneamente)
+$ chpst -u www-data -D /var/www/ /usr/sbin/nginx (ejecuta Nginx en un entorno chroot dentro del directorio /var/www)
+$ chpst -c 100 /usr/bin/python script.py (uso de CPU al 100% [que el proceso podrá usar completamente un núcleo de la CPU])
+
+
 chromium
 Navegador web. El perfil por defecto está en /home/usuario/.config/chromium, para crear nuevos perfiles [El inicio del parámetro son 2 guiones]:
 $ mkdir /home/usuario/.config/chromium-dos
