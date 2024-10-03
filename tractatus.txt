@@ -21170,6 +21170,21 @@ $ ruby -e "puts Dir.glob('*').count" (la opción -e permite introducir directame
 $ ruby -v (Versión de ruby)
 
 
+runit
+Colección de herramientas para proporcionar supervisión y gestión de servicios en el sistema: iniciar y detener servicios y supervisar los daemons mientras se ejecutan, enviar señales a daemons de servicio sin la necesidad de archivos pid, registro con rotación automática de archivos de registro y límites de espacio en disco. Consta de las siguientes aplicaciones: chpst [ver], cpsv, runsv [se ejecuta dentro de un directorio de servicio, donde controlará y mantendrá el servicio en ejecución. runsv se ocupa de iniciar, detener, reiniciar el servicio y también de monitorizar su estado], runsvdir [se encarga de supervisar varios servicios a la vez], sv [ver], svlogd, mk-runscript, runsvchdir, update-service, utmpset.
+$ svlogd /home/USER/Documentos/ (daemon que activa la monitorización del directorio especificado)
+# runsv /etc/service/nginx (si el proceso de nginx se detiene, runsv lo volverá a iniciar automáticamente)
+# runsvdir /etc/service/ (todos los servicios del directorio serán supervisados automáticamente)
+# update-service --add nginx (creará un enlace simbólico en /etc/service/mi_servicio, lo que hará que runit comience a gestionarlo)
+# update-service --delete nginx (eliminará el enlace simbólico y runit dejará de gestionar ese servicio)
+# update-service --list (servicios que están habilitados y gestionados por runit)
+# utmpset add USER tty7 (añade una entrada para USER en el terminal tty7)
+# utmpset delete USER tty7 (eliminar la entrada anterior)
+# utmpset check (verificar si hay entradas duplicadas o inconsistentes en utmp)
+# svlogd /var/log/un_servicio (que los logs se guarden en determinado directorio)
+# svlogd -tt -b 10000000 -l 5 /var/log/un_servicio (rotación de logs con un límite de tamaño de 10 MB y que guarde hasta 5 archivos de logs antiguos)
+
+
 runlevel
 conocer el nivel de ejecución actual del sistema [gráfico, monousuario...]
 $ runlevel
