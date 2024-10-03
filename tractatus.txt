@@ -23791,6 +23791,21 @@ Script que genera una lista de archivos que no son archivos fuente comunes. Esto
 # suspicious-source -d /usr/bin
 
 
+sv
+[runit]. Controlar y gestionar servicios monitoreados.
+$ sv start nginx (iniciar un servicio)
+$ sv stop nginx (parar un servicio)
+$ sv restart nginx (reinicar un servicio)
+$ sv status nginx (consultar estado de un servicio)
+$ sv supervise nginx (supervisar un servicio)
+$ sv down nginx (pausar un servicio)
+$ sv up nginx (reanudar un servicio)
+$ sv hup nginx (reiniciar un servicio si ya está en ejecución)
+$ sv force-stop nginx (forzar parar un servicio)
+$ sv reload nom_del_servei (recargar la configuración de un servicio sin pararlo)
+$ sv status /etc/service/* (listar servicios)
+
+
 swap
 Tambien llamado memoria de intercambio o memoria virtual, es la que se sirve del espacio en el disco duro en lugar del módulo de memoria. Las aplicaciones usan la memoria RAM para ejecutarse en el ordenador cuando no hay muchas ejecutandose pero si hay muchas o estas necesitan mucha RAM o no hay RAM suficiente para todas es cuando entra en acción la swap. Una de las desventajas de utilizar la swap es que el sistema se vuelve más lento ya que la velocidad de intercambio de información entre un disco duro y la RAM es abismalmente diferente. La memoria RAM es unas 1000 veces más rápida que un SSD y 100.000 veces más rápida que un HDD. El tamaño de una swap en un equipo con una memoria de 8 GB o más, como norma general es 2GB. Reservar para la swap más de 2 GB es esteril pero aunque un equipo no tenga 8 GB de memoria es aconsejable no dejar una swap inferior a 1GB.
 
