@@ -23804,6 +23804,36 @@ $ summain --output=summain.txt -c MD5 archivo (Lo guardará en summain.txt y sum
 $ summain --output=Comprobación_dir -c SHA512 /home/usuario/ (De todos los archivos del directorio del usuario)
 
 
+super
+Permite a usuarios específicos ejecutar scripts u otros comandos con privilegios de root sin usar "sudo".
+S super (comandos permitidos)
+$ super -H (lista comandos correctos)
+$ super -c /etc/super.tab (verifica si existen errores en el archivo de configuración)
+$ super service apache2 restart (si se tiene permisos para usar "super", podrá reinicarse un servicio que requiere privilegios de root)
+Para entrar un usuario en el archivo de configuración para usar, por ejemplo, apache2:
+# nano /etc/super.tab
+Y añadir la linea:
+apache2  /sbin/apache2  USER
+
+
+supervisor
+Herramienta de control de procesos que permite administrar y monitorear servicios y demonios. Es un sistema para controlar y mantener el estado del proceso. Por ejemplo, si tenemos un script que siempre está corriendo, creamos un archivo de configuración para él:
+            # nano /etc/supervisor/conf.d/mi_proceso.conf
+            [program:mi_proceso]
+            command=python3 ~/scripts/script1.sh
+            autostart=true
+            autorestart=true
+            stderr_logfile=/var/log/mi_proceso.err.log
+            stdout_logfile=/var/log/mi_proceso.out.log
+Este archivo dice a supervisor que ejecute el script de bash, que lo reinicie si se detiene y registrar tanto los errores como la salida estándar en archivos de log.
+# supervisorctl reread (recargar la configuración)
+# supervisorctl update
+# supervisorctl status (controlar los procesos que gestiona la aplicación)
+# supervisorctl start mi_proceso (iniciar el proceso)
+# supervisorctl stop mi_proceso (pararlo)
+# supervisorctl restart mi_proceso (reiniciar)
+
+
 surf
 [dmenu, wget]. Navegador
 $ surf -i URL (Deshabilitar imagenes)
