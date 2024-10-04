@@ -16412,6 +16412,12 @@ Y comentar la entrada:
 	#set historylog
 
 
+nanoid
+Crea contraseñas.
+$ nanoid -s 10 (de 10 letras mayúsculas y minúsculas)
+$ nanoid -s 15 -a .,-rtadls:_ (de 15 aracteres usando los signos y letras especificados con -a)
+
+
 nast
 Detectar usuarios, inalámbricos o no, de una red local. Como herramienta de análisis, tiene muchas características como:  Crear lista de hosts LAN, Seguir secuencias TCP-DATA, Encontrar puertas de enlace a Internet LAN, Descubre nodos promiscuos, Restablece conexiones establecidas, Realizar escáner de puertos medio abiertos, Buscar tipos de enlaces, Capturar banners del demonio de los nodos LAN, Controlar respuestas arp para descubrir posibles suplantaciones ...
       # nast (de forma interactiva informa de paquetes recibidos y los descartados por el kernel)
@@ -17250,12 +17256,6 @@ man:x:6:12:man:/var/cache/man:/usr/sbin/nologin
 ...
 
 
-nanoid
-Crea contraseñas.
-$ nanoid -s 10 (de 10 letras mayúsculas y minúsculas)
-$ nanoid -s 15 -a .,-rtadls:_ (de 15 aracteres usando los signos y letras especificados con -a)
-
-
 normalize
 Ajustar volumen.
 $ normalize-audio *.wav
@@ -17375,6 +17375,12 @@ Conocer las DNS del equipo:
 nss-passwords
 Programa que lee las contraseñas en las claves utilizados por los productos de Mozilla, como Firefox y Thunderbird.
 $ nss-passwords -d ~/pass -p pwdecrypt nombre (especificando el directorio del perfil. Por defecto el de Firefox, usando el programa pwdecrypt. Por defecto pinentry y "nombre" que se buscará en las entradas de claves)
+
+
+nsswitch
+El archivo de configuración del conmutador de servicio de nombres (NSS), /etc/nsswitch.conf, es utilizado por la biblioteca C de GNU y algunas otras aplicaciones para determinar las fuentes de las que se obtiene información sobre el servicio de nombres en una serie de categorías y en qué orden. Cada categoría de información se identifica mediante un nombre de base de datos. El archivo es texto ASCII simple, con columnas separadas por espacios o caracteres de tabulación. La primera columna especifica el nombre de la base de datos. Las columnas restantes describen el orden de las fuentes a consultar y un conjunto limitado de acciones que se pueden realizar según el resultado de la búsqueda. El archivo /etc/nsswitch.conf define el orden en el que el sistema comprueba los archivos /etc/hosts y /etc/resolv.conf. Este archivo también define el orden de búsqueda predeterminado para muchos otros servicios, como nombre de host, usuarios, grupos, contraseñas, etc.
+# cat /etc/nsswitch.conf | grep hosts
+Donde "files" representa el archivo /etc/hosts, "dns" indica el servidor DNS configurado en el archivo /etc/resolv.conf y "myhostname" es el valor predeterminado. Si las opciones "files" y "dns" no funcionan, Linux utiliza este valor como el nombre predeterminado para la máquina local.
 
 
 nstat
@@ -20310,9 +20316,10 @@ $ rar a archivo.rar fichero -hp   (empaquetar un fichero con contraseña)
 $ rar a archivo.rar file1 file2 dir1 (comprimir varios ficheros y directorios simultáneamente)
 
 
-rarcrack
-crequear archivos encriptados.
-# rarcrack archivo --type zip --threads 5 (especificando el tipo de compresión y con hasta 5 caracteres)
+rarcrak
+Crequear archivos encriptados y descifrador de contraseñas para archivos rar, zip y 7z.
+$ rarcrack --type zip file.zip ()
+$ rarcrack --threads 6 file.rar (utilizar 6 subprocesos)
 
 
 rarp
