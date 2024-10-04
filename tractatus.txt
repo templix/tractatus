@@ -22814,6 +22814,15 @@ socklist
 $ socklist
 
 
+socklog
+Herramienta utilizada para gestionar los registros [logs] del sistema. Incluye las aplicaciones socklog-check , tryto (intenta ejecutar un comando limitado por un tiempo de espera o un número de intentos), uncat y socklog-conf (configura un servicio)
+# socklog-check (comprueba la disponibilidad de un servicio. En caso de éxito, devuelve 0)
+# socklog -r inet 127.0.0.1 80 (activar mensajes sin formato del servicio inet de la ip y puerto mencionados)
+# uncat -v -t 20 -s 2048 inet (verbose, tiempo, 20 segundos [por defecto 300], 2048 de tamaño [por defecto 1024] y servicio inet)
+# tryto nginx (si el comando falla devuelve código de salida 0)
+# socklog-conf USER GRUPO directorio_de_servicio directorio_de_log (los que ejcutaran el servicio, donde se crearán los directorios de supervisión y donde se almacenan los registros)
+
+
 sockperf
 Utilidad de evaluación comparativa de red diseñada para probar el rendimiento y latencia de la red.
 $ sockperf tp -i 127.0.0.1 (prueba de rendimiento unidireccional a la ip mencionada)
