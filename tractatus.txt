@@ -23494,6 +23494,13 @@ $ steghide embed -cf archivo.wav -ef archivo_texto (incrustar un texto en un arc
 $ steghide extract -sf imagen.jpg  (extraer el archivo incrustado)
 
 
+sticky
+Cuando todos los ficheros del directorio solo pueden ser modificables por sus propietarios, naturalmente dejando a parte a root.
+       $ ls -ld /tmp
+       drwxrwxrwt 20 root root 540  4 d’oct.   12:18 /tmp
+Se muestra con la última "t" en lugar de la "x" en los permisos de grupo.
+
+
 stjerm
 Consola tipo guake.
 $ stjerm -k f12 -s left -o 70 -h 250 -w 1280 (Que aparezca pulsando F12, con barra de escroll a la izquierda, opacidad del 70% y especificando ancho y largo)
