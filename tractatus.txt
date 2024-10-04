@@ -22018,6 +22018,13 @@ Modificación de las fuentes en el arranque (arch)
 Nota.- fuentes en /usr/share/consolefonts
 
 
+setgid
+Ejecutar un proceso como el grupo que posee el archivo.
+        $ ls -l /usr/bin/crontab
+        -rwxr-sr-x 1 root crontab 43648  2 de març   2023 /usr/bin/crontab
+Donde se observa que los permisos del grupo son "r-s" en lugar de "r-x".
+
+
 setleds
 Controla los leds del teclado
 $ setleds -D +num >> /dev/tty1  (activa el teclado numérico)
@@ -22064,6 +22071,14 @@ Opciones:
 -foreground green (Color de texto. [black|blue|green|cyan|red|magenta|yellow|white|default])
 -background red  (Color de fondo)
 -inversescreen on (Intercambia los colores del texto y el fondo)
+
+
+setuid
+Configuración de permisos de un archivo que permite a un usuario ejecutar ese archivo o programa con el permiso del propietario de ese archivo
+              $ ls -l /usr/bin/sudo
+              -rwsr-xr-x 1 root root 281624 27 de juny   2023 /usr/bin/sudo
+Donde se observa que en los permisos del usuario root, son "rws" en lugar de "rwx" y que es ejecutable por todo el mundo por la última "x'"en los permisos. La "s" que sustituye a la "x" indica que cuando un usuario ejecuta este programa, el sistema operativo ejecutará ese archivo no como el usuario que lo ejecuta, sino como el usuario root. Si la "s" fuera mayúscula [S] significa que el usuario que posee el archivo no tiene permisos de ejecución. Podemos agregar ese permiso usando el comando
+# chmod u+x archivo
 
 
 setxkbmap
