@@ -28168,6 +28168,19 @@ Pasos para controlar la sesión:
 deberíamos ver las cookies del usuario.
 
 
+xawtv
+Ver y grabar canales de televisión y cámaras web. Consta de las siguientes aplicaciones: mtt [visor de teletexto], ntsc-cc, rootv, subtitles, v4lctl y xawtv-remote [Control remoto].
+$ xawtv (abrir la ventana y comenzar a mostrar el video del dispositivo de captura de TV configurado, si existe alguno)
+$ xawtv -hwscan (lista de dispositivos reconocidos)
+$ xawtv -c /dev/video0 (especificar el dispositivo a usar)
+$ xawtv -c /dev/video0 -channel 5 (abrir el dispositivo especificado y sintonizar el canal 5)
+$ xawtv -grab (capturar un fotograma)
+$ xawtv -f (pasar a pantalla completa
+$ xawtv -record archivo (grabar la salida de video a un archivo)
+$ xawtv -config ~/.xawtv (archivo de configuración)
+$ xawtv -channels channels.conf (cargar los canales desde el archivo)
+
+
 xbacklight
 Ajustar el brillo de la pantalla
 $ xbacklight -set 100  (la pone al máximo)
