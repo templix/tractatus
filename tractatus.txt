@@ -25616,6 +25616,16 @@ Cortafuegos
 # ufw reset (resetear completamente el cortafuegos)
 
 
+uidmap
+Estos programas ayudan a los usuarios sin privilegios a crear espacios de usuario [uid] y de grupo [gid] en contenedores o en configuraciones que requieren el aislamiento de permisos . Incluye los comandos getsubuids, newgidmap y newuidmap
+$ getsubuids user (lista de UID subordinados asignados al usuario del tipo "username:100000:65536" [que tiene asignado el rango de UID desde 100000 y puede usar hasta 65536 UIDs])
+$ getsubgids user (lo mismo para el grupo)
+$ newuidmap 1234 0 100000 65536 (que dentro del proceso con PID 1234, el UID 0 [root] será mapeado al UID 100000 en el sistema host y se le asignarán un total de 65536 UIDs, es decir, desde 100000 hasta 165535
+$ newuidmap 1234 0 100000 1000 1000 200000 1000 (que dentro del PID 1234, el UID 0 en el namespace se mapeará a 100000 en el host y se mapearán 1000 UIDs a partir de ese y el UID 1000 en el namespace se mapeará a 200000 en el host y se mapearán 1000 UIDs a partir de ese)
+$ newgidmap 1234 0 100000 65536 (el GID 0 dentro del namespace del proceso con PID 1234 será mapeado a 100000 en el host, con un rango de 65536 GIDs)
+$ newgidmap 1234 0 100000 1000 1000 200000 1000 (que dentro del proceso 1234 el GID 0 en el namespace se mapeará a 100000 en el host, con 1000 GIDs yque el GID 1000 en el namespace se mapeará a 200000 en el host con 1000 GIDs)
+
+
 ul
 Subrayado de palabras en la terminal.
 	$ echo $'linux es g\b_e\b_n\b_i\b_a\b_l\b_ ' | ul (Cada letra a subrayar ha de ir seguida de \b_)
