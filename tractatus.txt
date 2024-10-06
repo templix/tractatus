@@ -10589,6 +10589,14 @@ $ hash -d date (borrar la entrada date del listado)
 $ hash -r (borrar todo el listado)
 
 
+hashcat
+herramienta de recuperación de contraseñas utilizada para realizar ataques de fuerza bruta sobre hashes.
+$ hashcat -a 3 -m 0 hash.txt ?d?d?d?d?d ("a 3" que se realizará un ataque de fuerza bruta a un hash MD5 "m 0", con contraseñas numéricas de 5 dígitos "?d?d?d?d?d")
+$ hashcat -a 0 -m 1400 hash.txt diccionario.txt ("a 0" que se hará un ataque de diccionario a un hash SHA-256 "m 1400". diccionario.txt contiene las posibles contraseña)
+$ hashcat -a 3 -m 0 hash.txt ?1?1?1?1?1?1?1 (combinando mayúsculas, minúsculas y números. "?1" define un conjunto de caracteres a utilizar)
+$ hashcat -a 0 -m 0 hash.txt diccionario.txt --force (recuperar contraseña con "force" permite a hashcat usar la GPU)
+
+
 hash-identifier
 Se le especifica un hash y la herramienta lo estudia y muestra el tipo más probable que podría ser [Possible Hashs] y los menos probables [Least Possible Hashs]. Descarga: <https://code.google.com/p/hash-identifier/downloads/list>
 $ python Hash_ID_v1.1.py
@@ -24174,6 +24182,16 @@ $ tarcat file1.tar file2.tar file3.tar
 $ tarcat file1.txt file2.txt file3.txt
 
 
+tardy
+Se utiliza para manipular las cabeceras dentro de archivos comprimidos [.tar, .zip, etc].
+$ tardy -eXtract archivo.tar archivo
+$ tardy --modify /new/path/ /archive.tar (cambia la ruta interna de los archivos dentro del .tar para que estén en el directorio /new/path/ sin modificar el contenido real)
+$ tardy --list archive.tar (lista las cabeceras de los archivos dentro del .tar para ver la estructura interna del archivo comprimido)
+$ tardy --set-date "2024-15-05" archive.tar (modificar la fecha del archivo comprimido)
+$ tardy --strip 2 archive.tar (elimina los dos primeros niveles de directorios en las rutas de los archivos dentro del .tar)
+$ tardy --create --modify /new/path/ /nuevo.tar file1 file2 (crea nuevo.tar donde los archivos file1 y file2 se encuentran bajo /new/path/)
+
+
 tc
 Controlar, clasificar, dar forma y programar el tráfico de la red.
 # tc qdisc
@@ -25179,9 +25197,13 @@ Descomprimir y ejecutar:
 
 
 trueprint
-Pasar varios lenguajes de programación a postscript. Pueden visualizarse con la aplicación gv
-$ trueprint --K --W -n -f -F -t sh file.sh -s file.ps (Sin cabeceras [--K], ajuste de lineas inteligente [--W], sin numeración de lineas [-n], sin índice de funciones [-f], sin indice de archivo [--F], en lenguaje shell [-t sh] y redirigido a un fichero [-s])
+Se utiliza para imprimir archivos de texto con formato. Es muy útil para revisar archivos de código fuente o texto con mayor legibilidad. Pueden visualizarse con la aplicación gv
+$ trueprint --K --W -n -f -F -t sh file.sh -s file.ps (Sin cabeceras [--K], ajuste de lineas inteligente [--W], sin numeración de lineas [-n], sin índice de funciones [-f], sin indice de archivo [--F], en lenguaje shell [-t sh] y redirigido a un fichero postscript [-s])
 $ trueprint -H all-options (Muestra todas las opciones de ayuda)
+$ trueprint -ln archivo.txt (imprimir números de linea sin recortar espacio en blanco del archivo.txt)
+$ trueprint -k archivo.c (resaltar palabras clave del c´digo fuente de C)
+$ trueprint -w 80 archivo.txt (para que la salida se ajuste a un ancho de 80 columnas)
+$ trueprint -c archivo.py (resaltar los bloques de comentarios del archivo.py)
 
 
 truncate
@@ -26163,6 +26185,29 @@ $ urlwatch (Lanzar la aplicación)
 usb-devices
 [usbutils]. Script de shell que puede mostrar detalles de los buses USB en el sistema y los dispositivos conectados a ellos. El script está destinado principalmente para ser utilizado si el archivo /usb/devices no está disponible. A diferencia del archivo usb/devices este script solo muestra las interfaces activas (las marcadas con un "*" en el archivo usb/devices).
 $ usb-devices
+
+
+usbguard
+Proteger el sistema contra dispositivos USB no autorizados [BadUSB].
+# systemctl status usbguard (controlar el estado del servicio)
+# usbguard list-devices (listar dispositivos USB conectados, si estan permitidos, bloqueados o rechazados y ver sus IDs)
+# usbguard allow-device <ID_del_dispositivo> (permitir un dispositivo)
+# usbguard block-device <ID_del_dispositivo> (bloquear un dispositivo)
+# usbguard monitor (monitorizar en tiempo real los eventos de dispositivos USB)
+# usbguard generate-policy > /ruta/a/politica.conf (generar archivo de configuración que puede reutilizarse en otros sistema)
+Se pueden crear reglas para dispositivos USB en el archivo:
+# nano /etc/usbguard/rules.conf
+Con la linea:
+    allow id 1d6b:0002 (para autorizar)
+Y si se quere bloquear todo:
+# nano /etc/usbguard/usbguard-daemon.conf
+    PresentDevicePolicy=block
+Para cambiar cómo se tratan los dispositivos USB ya conectados cuando el servicio USBGuard se inicia:
+# nano /etc/usbguard/usbguard-daemon.conf
+Y en las opciones en "PresentDevicePolicy":
+    apply-policy: aplica las reglas existentes a los dispositivos ya conectados.
+    allow: permite todos los dispositivos ya conectados.
+    block: bloquea todos los dispositivos ya conectados.
 
 
 usb_modeswitch
