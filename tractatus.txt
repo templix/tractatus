@@ -981,6 +981,11 @@ $ apt search paquete (Buscar un paquete)
 # apt remove paquete (Suprime un paquete)
 # apt edit-sources (Edita el sources.list)
 # apt show nano (ver detalles de un paquete)
+1- significado de algunas salidas de apt update
+   Hit (significa que apt comprobó las marcas de tiempo en la lista de paquetes, éstas coinciden y no hay cambios.)
+   Ign (significa que no hay cambios en el archivo de índice pdiff, no se molestará en descargarlo de nuevo.)
+   Obj (en la versión del paquete no hay cambios respecto a la versión anterior)
+   Get (hubo cambios y se descargarán.)
 
 
 apt-cdrom
@@ -27349,6 +27354,11 @@ http://www.nws.noaa.gov/tg/siteloc.shtml
 $ weather -m -v LEGE  (En decimal con la maxima información y para Gerona [España])
 
 
+web2disk
+Herramienta que permite descargar un sitio web, incluyendo imágenes, hojas de estilo y otros contenidos incrustados,  para navegar sin conexión.
+$ web2disk URL
+
+
 webalizer
 Genera reportes en formato html de los accesos a una página web instalada en la misma máquina.
 Configuración mínima:
@@ -27373,9 +27383,22 @@ Revisa una URL, siguiendo sus enlaces y genera un informe index.html en el prese
 # webcheck URL
 
 
-web2disk
-Herramienta que permite descargar un sitio web, incluyendo imágenes, hojas de estilo y otros contenidos incrustados,  para navegar sin conexión.
-$ web2disk URL
+webdruid
+Programa de análisis de archivos de registro de sitios web que produce estadísticas detalladas de visitas a sitios basadas en los registros de servidores como Apache o Nginx y en formato HTML para ver con un navegador. Contiene la aplicacion webdruid-resolve.
+# webdruid /var/log/apache2/access.log (generar estadísticas sobre un archivo de logs web)
+# webdruid -n www.mi_sitio_web.com -o /var/www/html/weblogs/ /var/log/apache2/access.log (-n: nombre del host que aparecerá en los informes y -o: directorio de salida donde se guardarán los informes)
+Configuración básica:
+# nano /etc/webdruid/webdruid.conf.
+con el contenido:
+    LogFile /var/log/apache2/access.log    # Archivo de log a analizar
+    LogType clf                            # Tipo de log (clf para "Common Log Format" formato común de Apache)
+    OutputDir /var/www/html/weblogs/       # Directorio de salida para los informes HTML
+    HostName www.mi_sitio_web.com          # Nombre del sitio para los informes
+    Incremental yes                        # Habilita el modo incremental (procesa solo los nuevos logs)
+# webdruid -c /var/log/apache2/access.log (analizar solo las nuevas líneas que se agregan al archivo de logs)
+Los informes en el ejemplo expuesto se abren con el navegador en la ruta /var/www/html/weblogs/index.html
+1- Se puede usar com cron, por ejemplo, para que resalice un informe cada dia a las 00:00 horas
+   0 0 * * * /usr/bin/webdruid -c /var/log/apache2/access.log
 
 
 webfsd
