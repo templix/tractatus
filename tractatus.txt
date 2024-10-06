@@ -21316,6 +21316,14 @@ s-tui
 # s-tui
 
 
+s5
+formato de presentación de diapositivas basado completamente en XHTML, CSS y JavaScript. Con un archivo, normalmente con HTML estructurado de una forma específica, se puede ejecutar una presentación de diapositivas completa y también tener una versión para imprimir.
+$ s5 new presentacion.html (crear nueva presentación a partir de un archivo html con la estructura básica de un archivo s5 con diapositivas separadas por elementos <div> con clases específicas)
+$ s5 update presentacion.html (actualizar una presentación)
+$ s5 serve presentacion.html (iniciar un servidor para ver la presentación en el navegador en tiempo real mientras editas)
+$ s5 export presentacion.html --output=presentacion.pdf (exportar la presentación a PDF)
+
+
 sa
 [acct]. Se utiliza para imprimir el resumen de los comandos ejecutados por los usuarios.
 $ sa -a (todos)
