@@ -25960,6 +25960,17 @@ $ unp -s (Listado de formatos soportados)
 $ unp archivo.tar (descomprimir un archivo)
 
 
+unpaper
+Herramienta de posprocesamiento para hojas escaneadas, especialmente para páginas de libros que han sido escaneadas a partir de fotocopias creadas previamente. El objetivo principal es hacer que las páginas de libros escaneadas sean mejor legibles en la pantalla después de la conversión a PDF, limpiando manchas y enderezando páginas torcidas. De forma predeterminada, unpaper coloca un archivo de imagen de entrada en una hoja y guarda un archivo de imagen de salida en otra.
+$ unpaper pagina1.pnm pagina1_procesada.pnm (proceso básico)
+$ unpaper --deskew pagina1.pnm pagina1_enderezada.pnm (Enderezar una página)
+$ unpaper --border 50 pagina1.pnm pagina1_sin_bordes.pnm (Eliminar manchas oscuras o bordes negros de las imágenes recortando 50 píxeles los bordes de la imagen)
+$ unpaper --output-format=p%d.pnm pagina%d.pnm pagina_procesada%d.pnm (procesará pagina1.pnm, pagina2.pnm, etc y las guardará como pagina_procesada1.pnm, pagina_procesada2.pnm, y así sucesivamente)
+$ unpaper --noisefilter=5 pagina1.pnm pagina1_menos_ruido.pnm (aplicar un filtro de ruido con una intensidad de 5)
+$ unpaper --brightness=0.8 --contrast=1.2 pagina1.pnm pagina1_mejorada.pnm (reducir el brillo y aumentará el contraste de la imagen)
+$ unpaper --precut --overwrite --layout double paginalibro%d.pnm paginalibro_procesada%d.pnm (cortar los márgenes en páginas dobles, permitiendo que las páginas en blanco se ignoren)
+
+
 unrar
 Descomprimir archivos rar.
 $ unrar x archivo.rar
