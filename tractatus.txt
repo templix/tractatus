@@ -25535,6 +25535,14 @@ $ ubuntu-support-status --show-supported (Muestra una lista detallada de los paq
 $ ubuntu-support-status --show-all (Muestra una lista detallada de todos los paquetes, tanto los soportados como los que no)
 
 
+ucf
+La política de Debian exige que los cambios de los usuarios en los archivos de configuración se preserven durante las actualizaciones de paquetes. La manera de lograr este comportamiento es que en este caso dpkg los maneje especialmente durante las actualizaciones, avisando al usuario según sea necesario. Contiene las aplicaciones: lcf, ucfq y ucfr
+# ucf archivo_user.conf /etc/archivo.conf (gestionar el archivo de configuración en /etc/archivo.conf, preservando los cambios que el usuario ha realizado en archivo_user.conf)
+# ucf --force archivo_user.conf /etc/archivo.conf (sobrescribir archivo_user.conf en /etc/archivo.conf)
+# ucf --purge /etc/archivo.conf (quitar un archivo de la gestión de ucf)
+# ucf --three-way archivo_user.conf /etc/archivo.conf (asegurarse de que los cambios locales se preserven)
+
+
 uchardet
 Detecta la codificación de un texto.
         $ uchardet texto.txt
