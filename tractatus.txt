@@ -28318,6 +28318,15 @@ $ urxvt -cd "$(xcwd)"
 Se abrirá otra terminal con la ruta indicada por thunar.
 
 
+xd
+Programa [eXtra fast Directory changer] que se utiliza para cambiar rápidamente entre directorios siempre que se incluya el argumento --input, sinó, solo los muestra.
+$ xd /ulb (la "/" indica que partimos del directorio raiz. En el ejemplo podría ser /usr/local/bin)
+$ xd .Dl (el "." que partimos del directorio de inicio del usuario. En el ejemplo podría ser ~/Documentos/libros)
+$ cd 0le (el "0" indica que partimos del directorio en el que estemos. En el ejemplo, si estamos en ~/Documentos, podría tratarse de libros/emacs)
+$ xd --input /ulb (entra en el directorio /usr/local/bin)
+Si existen varios con las mismas iniciales mostraría la lista para escoger el número del que corresponda al que queremos.
+
+
 xdg
 Establece o abre archivos y url con las aplicaciones establecidas por defecto. Estas se encuentran definidas en /usr/share/applications/defaults.list.
 $ xdg-mime query default text/html    (Mostrar la aplicación que por defecto abre un html)
