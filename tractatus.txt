@@ -7270,6 +7270,22 @@ $ enscript -2 texto.txt (imprimir texto.txt a dos columnas)
 $ enscript -B -2r texto.txt (Imprimir texto.txt sin cabecera [B], a dos columnas y hacerlo apaisado)
 
 
+entropybroker
+Infraestructura para distribuir números aleatorios criptográficamente seguros desde uno o más servidores a uno o más clientes. Es un servidor que recolecta datos de entropía desde diferentes clientes. Para utilizar este comando, normalmente se configura el servidor y luego conectar a varios clientes para que envíen datos de entropía al servidor. Consta de los ejecutables: eb_client_egd, eb_client_file, eb_client_kernel_generic, eb_client_linux_kernel, eb_proxy_knuth_b, eb_proxy_knuth_m, eb_server_Araneus_Alea, eb_server_ComScire_R2000KU, eb_server_audio, eb_server_egd, eb_server_ext_proc, eb_server_linux_kernel, eb_server_push_file, eb_server_smartcard, eb_server_stream, eb_server_timers, eb_server_usb, eb_server_v4l y entropy_broker
+# entropybroker (iniciar el servidor en el servidor central en el puerto 8080)
+Configuración del servidor:
+# nano /etc/entropybroker.conf
+Con el contenido:
+[global]
+port = 9000
+verbosity = 2
+Y luego iniciar el servidor especificando este archivo de configuración:
+# entropybroker -f /etc/entropybroker.conf
+Los clientes son programas que generan entropía y la envían al servidor.
+# entropybroker-client --host <servidor_ip> --port <puerto> (la dirección IP del servidor que ejecuta entropybroker y <puerto> con el puerto que configurado o el predeterminado [8080])
+# entropybroker -s (verificar las estadísticas y el estado del servidor que mostrará cuántos clientes están conectados y cuánta entropía está siendo generada y procesada)
+
+
 env
 Muestra las variables de entorno
 $ env | grep DISPLAY
