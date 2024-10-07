@@ -13876,6 +13876,14 @@ lsdev
 $ lsdev
 
 
+lsfd
+[util-linux-extra]. Lista de descriptores de archivos. Está pensado para ser un reemplazo de lsof pero centrado en el núcleo de Linux
+# lsfd --summary=only (informa de los números de descriptores de sockets netlink y descriptores de sockets unix)
+# lsfd --pid "$(pidof firefox)" (listar los archivos descriptores asociados con "firefox")
+# lsfd -Q 'DELETED' (lista de archivos descriptores eliminados asociados a procesos)
+# lsfd -Q 'TYPE != "REG"' (lista de archivos descriptores no regulares)
+
+
 lshal
 Mostrar elementos en la base de datos del dispositivo HAL [Hardware Abstraction Layer]. Muestra información del firmware, serial server, Bios, kernel, procesador, discos, puntos de montaje, particiones, usb, pci... HAL está en desuso en la mayoría de las distribuciones Linux. La funcionalidad se está fusionando en udev.
 $ lshal  (Información de los dispositivos de HAL en formato largo y detallado))
