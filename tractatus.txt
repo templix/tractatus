@@ -14324,6 +14324,28 @@ Opciones disponibles:
 	q (sale de mail)
 
 
+mailcap
+Se usa para definir cómo los programas manejan diferentes tipos de archivos MIME. Básicamente, utiliza un archivo de configuración, generalmente ubicado en /etc/mailcap o en el directorio del usuario, ~/.mailcap, para mapear tipos MIME a programas específicos que se deben utilizar para visualizar, editar o manipular esos archivos.
+$ cat /etc/mailcap (lista de qué programa debe ejecutarse cuando se encuentra un tipo MIME particular)
+Por ejemplo, supongamos que se quiere configurar el tipo MIME text/html para que se abra con el navegador de texto lynx:
+$ nano ~/.mailcap
+Y colocar la linea:
+  text/html; lynx %s"
+$ run-mailcap file.html (El sistema detectará que es un archivo text/html y lo abrirá con el programa asociado, en este caso lynx)
+Si quisiéramos abrir los pdf con evince:
+$ nano ~/.mailcap
+Y poner la linea:
+  application/pdf; evince %s
+Si luego lanzáramos:
+$ run-mailcap documento.pdf
+El documento se abriria con evince
+Si se quiere añadir instrucciones más complejas. Por ejemplo, que los archivos de imagen image/jpeg se abran con feh, pero también definir opciones adicionales:
+$ nano ~/.mailcap
+Y poner la linea:
+image/jpeg; feh --auto-zoom --borderless %s
+$ run-mailcap --test (verificar que el archivo mailcap está correctamente configurado)
+
+
 mailutil
 Utilidades relacionadas con el correo
 $ mailutil transfer {imap.gmail.com/ssl/user=usuario@gmail.com} Gmail/ -v (hacer copia de seguridad de los correos de gmail)
