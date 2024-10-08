@@ -5777,15 +5777,24 @@ dontzap -e      (Lo desactiva)
 
 
 doas
-Primero crear el archivo:
+Permite ejecutar comandos como otro usuario, generalmente con privilegios de root similar a sudo. Primero crear el archivo:
 # nano /etc/doas.conf
-Y entrar el usuario con permisos root:
-  permit persist :USER as root
+  - entrar el grupo del usuario con permisos root para ejecutar algún comando [cmd apt]:
+  permit :USER as root cmd apt
+  - permitir a usuario ejecutar todos los comandos como root
+  permit nopass USER as root
+  - Prohibir al usuario juan ejecutar el comando fdisk
+  deny juan cmd fdisk
 Especificar los permisos y propietario del archivo:
 # chown -c root:root /etc/doas.conf
 # chmod -c 0400 /etc/doas.conf
 Luego el usuario especificado en el archivo podrá, por ejemplo, ejecutar:
-$ doas -u root apt update
+$ doas apt update (en el primer caso)
+$ doas -u root bash (iniciar sesión como root)
+Algunas opciones que podemos colocar en el archivo de configuración:
+        permit nopass :otros (Permitir que todos los usuarios del grupo "otros" realicen acciones como root sin autenticación)
+        permit persist USER (Una vez que el usuario se autentica exitosamente, no solicitar una contraseña nuevamente por algún tiempo.
+
 
 
 dool
