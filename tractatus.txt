@@ -12360,6 +12360,34 @@ iwlist
 # iwlist s    (Lo mismo para todas las interficies)
 
 
+jackd
+[jackd2]. JACK [JACK Audio Connection Kit] es un servidor de sonido de baja latencia que permite que varias aplicaciones se conecten a un dispositivo de audio y compartan audio entre ellas. Incluye los siguientes ejecutables: alsa_in, alsa_out, jack_alias, jack_bufsize, jack_connect, jack_control, jack_cpu, jack_cpu_load, jack_disconnect, jack_evmon, jack_freewheel, jack_iodelay, jack_latent_client, jack_load, jack_lsp, jack_metro, jack_midi_dump, jack_midi_latency_test, jack_midiseq, jack_midisine, jack_monitor_client, jack_multiple_metro, jack_net_master, jack_net_slave, jack_netsource, jack_property, jack_rec, jack_sampleraten, jack_server_control, jack_session_notify, jack_showtime, jack_simdtests, jack_simple_client, jack_simple_session_client, jack_test, jack_thru, jack_transport, jack_unload, jack_wait, jack_zombie, jackd y jackdbus. Crear el archivo:
+# nano /etc/security/limits.d/audio.conf
+Y en el pegar las lineas:
+USER   -  rtprio     95
+USER   -  memlock    unlimited
+En USER el que corresponda.
+$ jackd -d alsa (inicia el servidor jackd utilizando el controlador ALSA)
+$ jackd -d alsa -d hw:0 (especificar qué interfaz de audio deseas usar. hw:0, que corresponde a la primera tarjeta de sonido)
+$ jackd -d alsa -r 48000 -p 256 (ajustar la latencia y calidad del audio a una tasa de muestreo de 48 kHz y un tamaño de búfer de 256 muestras)
+$ jackd -d firewire (iniciar jackd con el controlador firewire)
+$ jackd -d dummy (útil cuando no necesitas audio físico, pero aún deseas realizar conexiones entre aplicaciones. Se utiliza normalmente para pruebas)
+$ jackd -R -d alsa (mejorar el rendimiento ejecutando jackd en modo tiempo real)
+$ jackd -d alsa -r 44100 -p 512 & (que las aplicaciones que usan PulseAudio, como los reproductores de música, es común iniciar JACK y luego conectar ambos servidores)
+$ pactl load-module module-jack-source
+$ pactl load-module module-jack-sink
+$ jackd -d alsa -P hw:0 -C hw:1 (seleccionar dispositivos de entrada y salida, -P: especifica el dispositivo de salida y -C: especifica el dispositivo de entrada)
+El argumento "help" se puede usar con el dispositivo elegido:
+              jackd -d alsa --help
+              jackd -d coreaudio --help
+              jackd -d net --help
+              jackd -d dummy --help
+              jackd -d firewire --help
+              jackd -d oss --help
+              jackd -d sun --help
+              jackd -d portaudio --help
+
+
 jargon
 Compendio completo de jerga hacker que ilumina muchos aspectos de la tradición, el folklore y el humor hackish en lengua inglesa. El archivo está en formato de información, pero incluye una página HTML con enlaces al sitio de inicio. Este paquete está desactualizado porque el autor ya no mantiene una versión informativa del archivo.
 $ jargon
