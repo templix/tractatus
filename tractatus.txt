@@ -14876,7 +14876,7 @@ metasploit
 Herramienta utilizada para realizar pentesting, tanto para comprometer sistemas como para obtener datos antes y después de comprometerlo. Los módulos auxiliares se pueden usar para el escaneo de puertos, la identificación del servicio, el rastreo de contraseñas y la enumeración de parches. Para empezar es necesario tener activado el servicio postgresql, crear la configuración inicial y luego iniciar Metasploit Framework:
 # service postgresql start
 $ msfd
-# msfconsole ()crea la base de datos en /home/usuario/.msf4/db
+# msfconsole (crea la base de datos en /home/usuario/.msf4/db)
 Cada exploit tiene uno de siete posible rangos; excelente (mejor elección), grandioso, bueno, normal, promedio, bajo, y manual (peor elección). Un rango bajo del exploit, implica la probabilidad de causar algún daño en el objetivo, o no estar en la capacidad de entregar el payload seleccionado. Unos comandos básicos:
 msf6 > help show (mostrar los parámetros disponibles para el comando show)
 msf6 > show exploits (Mostrar todos los exploits del Framework)
@@ -24591,6 +24591,13 @@ $ texi2html archivo.texi
 tfortune
 Al igual que fortune, tfortune es una utilidad que imprime un epigrama aleatorio en inglés.
 $ tfortuna print
+
+
+tgpg
+Útil para iniciar una conversación interactiva con ChatGPT en la terminal y realizar multiples preguntas sin salir del entorno. Descarga e instalación:
+# curl -sSL https://raw.githubusercontent.com/aandrew-me/tgpt/main/install | bash -s /usr/local/bin
+$ tgpt (iniciar la conversación)
+  > explicame que es un script de bash
 
 
 thefuck
