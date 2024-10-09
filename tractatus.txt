@@ -23145,17 +23145,18 @@ Monitor de transferencia de ficheros [velocímetro].
 pulsar “q” para cerrar
 
 
-speedtest_cli
-script en python que se conecta a un servidor y realiza un test de velocidad de nuestra conexió.
-Si no està en lños repositorios, descarga y permisos:
-    $ wget https://raw.github.com/sivel/speedtest-cli/master/speedtest_cli.py
-    $ chmod +x speedtest_cli.py
-En Debian está en los repos y contiene dos ejecutables: speedtest_cli y speedtest.
-$ speedtest (Forma básica)
+speedtest
+[= speedtest-cli]. Medir la velocidad de conexión a internet directamente desde el terminal tanto de descarga como de subida.
+$ speedtest (mostrar velocidad de descarga [download], de subida [upload] y la latencia [ping])
+$ speedtest --simple (mostrar salida sin detalles. Sólo mostrará el ping, la velocidad de descarga y la velocidad de subida)
+$ speedtest --bytes > resultados.txt (resultado en bytes y mandarlo a un archivo)
+$ speedtest --list (muestra una lista de servidores de speedtest.net ordenados por distancia)
+$ speedtest --server ID_server (seleccionar un servidor del listado anterior)
+$ speedtest --csv (guardar los resultados en formato CSV)
+$ speedtest --no-upload (sólo medir la velocidad de descarga)
+$ speedtest --no-download (sólo medir la de subida)
+$ speedtest --no-pre-allocate (probar la velocidad sin utilizar la geolocalización o la búsqueda de servidores cercanos)
 $ speedtest --share (Nos da una URL con la imagen en png de la conexión)
-$ speedtest --list (Mostrará una lista ordenada de los servidores de Speedtest.net con los más cercanos en primer lugar.)
-$ speedtest --server 804 (Especificar un servidor distinto al más cercano, tomado del listado anterior)
-$ speedtest --simple (velocidad de la red)
 
 
 spew
