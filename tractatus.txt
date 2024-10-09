@@ -24501,6 +24501,15 @@ $ tempfile -p 4463 (lo crea con un prefijo especificado. El resultado es parecid
 $ tempfile -s nota (lo crea con un sufijo especificado. El resualtado es parecido a /tmp/fileKpYlf4nota)
 
 
+termdebug
+Utilidades que ayudan a grabar, reproducir y comparar sesiones interactivas en la terminal. Incluye las aplicaciones: tdcompare, tdrecord, tdreplay, tdrerecord y tdview.
+$ tdrecord salida (iniciará la grabación de la sesión de terminal y almacenará los comandos ejecutados y las salidas en "salida")
+$ tdreplay salida (reproduce la sesión del archivo grabado)
+$ tdrerecord salida nueva_salida (tomar la sesión grabada en "salida" y creará una nueva grabación en nueva_salida)
+$ tdcompare salida nueva_salida (muestra las diferencias entre las dos sesiones grabadas)
+$ tdview salida (visualizar el contenido de una grabación sin reproducirla en la terminal)
+
+
 terminal
 Nombre de la consola propia de xfce. El archivo de configuración se encuentra en:
 $ nano .config/Terminal/terminalrc
