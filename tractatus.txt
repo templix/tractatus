@@ -16897,10 +16897,12 @@ Control-c para cerrar el menú
 
 
 newgrp
-Al ingresar un usuario en el sistema tiene predeterminado un grupo principal con un gid concreto con unos permisos determinados para la creación de ficheros y directorios, pero puede estar asignado a más de un grupo con distinto gid. Para cambiarse a uno de estos otros grupos:
-$ newgrp grupo1
-Para volver a su grupo primario:
-# exit
+Permite cambiar el grupo primario de la sesión actual de shell sin necesidad de cerrar sesión o usar "su" para cambiar de usuario. No pide contraseña a menos que el grupo al que se intenta acceder esté protegido y tambien es necesario que el usuario esté incluido en el grupo al que se intenta cambiar. Se puede verificar con el comando.
+$ groups
+$ newgrp scripts (para unirte a un grupo llamado "scripts", puedes cambiar temporalmente tu grupo primario a ese grupo)
+$ id (Ver tu grupo actual)
+$ newgrp scripts -c 'touch archivo.txt' (ejecutar un solo comando bajo otro grupo)
+$ exit (te devolverá al grupo original antes de usar newgrp)
 
 
 newpid
@@ -23875,13 +23877,21 @@ Ejemplos:
 	Defaults	 !lecture,tty_tickets,!fqdn,timestamp_timeout=0,insults
 	Defaults@192.168.1.2 !lecture,tty.... (Permitir ejecución sólo desde nuestra máquina)
 1.-
+Añadir un usuario con privilegios de root:
+# nano /etc/sudoers.d/10-installer
+Y añadir la linea:
+USER     ALL=(ALL) NOPASSWD: ALL
+2.-
 Para que al entrar un contraseña en la terminal aparezcan asterisco:
 En la linea: Defaults env_reset
 Añadir "pwfeedback" dejándola:
 Defaults env_reset , pwfeedback
-2.-
+3.-
 Ver la totalidad de acciones realizadas con el comando sudo
 # journalctl _COMM=sudo
+4.-
+Significado de: %sudo ALL=(ALL:ALL) ALL
+Un % especifica que se trata de un grupo, en este caso el grupo sudo. ALL=(ALL) o ALL=(ALL:ALL) especifica que en cualquier host que pueda tener este archivo, sudo puede ejecutar cualquier comando. El ALL final especifica que sudo puede ejecutar esos comandos como cualquier usuario en el sistema.
 
 
 sudoedit
