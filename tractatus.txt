@@ -1015,6 +1015,15 @@ Programa interno utilizado por varias partes de la suite APT para proporcionar u
 # apt-config dump (muestra la configuración establecida)
 
 
+apt-config-auto-update
+Permite que APT está configurado para actualizar la caché de forma automática. Esto significa que, cada vez que se instala o actualiza un paquete, APT verificará la disponibilidad de nuevas versiones sin tener que actualizar manualmente la caché con comandos como apt update. Este paquete no tiene un comando ejecutable como tal. Su función es mantener la caché de APT actualizada automáticamente. Genera archivos de configuración en [los comentarios son mios]:
+# nano nano /etc/apt/apt.conf.d/20auto-upgrades
+  # Asegura que las listas de paquetes se actualicen regularmente:
+  APT::Periodic::Update-Package-Lists "1";
+  # Que se instalen automáticamente las actualizaciones disponibles y los parches de seguridad críticos:
+  APT::Periodic::Unattended-Upgrade "1";
+
+
 apt-doc
 Muestra información sobre el comando apt. Colocar en el navegador: usr/share/doc/apt-doc/guide.es.html
 
@@ -1233,6 +1242,16 @@ $ apt-show-versions -u (sólo mostrar los paquetes que tienen nueva version)
 apt-sortpkgs
 Herramienta para ordenar los ficheros del índice de paquetes.
 # apt-sortpkgs -s /var/lib/dpkg/available (orden por el campo de índice de fuentes)
+
+
+apt-src
+Herramienta en sistemas basados en Debian diseñada para trabajar con el código fuente de los paquetes. A diferencia de apt-get, que instala paquetes binarios precompilados, apt-src permite descargar, compilar, instalar, y administrar paquetes a nivel de código fuente. Para que apt-src funcione correctamente, han de tenese habilitados los repositorios de código fuente en el archivo /etc/apt/sources.list [deb-src].
+# apt-src install vim (descargará el código fuente del paquete al directorio de trabajo actual, en lugar de instalar el paquete binario)
+# apt-src update vim (actualizar el código fuente a la última versión disponible de un paquete ya descargado)
+# apt-src build vim  (compilar el código fuente descargado)
+# apt-src remove vim (desinstalar un paquete compilado usando apt-src)
+# apt-src list (listar paquetes instalados mediante apt-src)
+# apt-src diff (Este comando creará un archivo de parche con las diferencias entre la versión original y los cambios realizados por ti)
 
 
 ar
@@ -2000,6 +2019,21 @@ Intérprete de comandos compatible con sh que ejecuta comandos leídos desde la 
 $ bash -n script (comprueba todo un script sin ejecutar comandos solo los comprueba)
 $ bash -v script (Imprime las líneas de entrada del shell a medida que se leen)
 $ bash -x script (Imprime los comandos y sus argumentos a medida que se ejecutan)
+1.-
+Encabezar un script de bash con la linea
+          #!/bin/bash
+Si queremos que el script bash se ejecute en modo "depuración"
+          #!/bin/bash -x
+2.-
+Los parámetros que se pueden usar dentro de un script bash son:
+    $# 	Nº de parametros recibidos
+    $0 	Nombre y ruta del propio script
+    $1 ... $9 	Parámetros del 1 al 9 recibidos
+    ${N} 	Parámetro de la posicion N recibido
+    $* 	Todos los parámetros recibidos [excepto $0]
+    $@ 	Array de parámetros recibidos [excepto $0]
+    $$ 	El PID [numero de proceso] del script
+    $? 	El código de error del ultimo comando ejecutado
 
 
 bash-doc
