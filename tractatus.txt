@@ -1024,6 +1024,37 @@ Permite que APT está configurado para actualizar la caché de forma automática
   APT::Periodic::Unattended-Upgrade "1";
 
 
+apt-dater
+Forma fácil para administrar actualizaciones de paquetes en una gran cantidad de hosts remotos mediante SSH y apt-dater-host. Incluye la apalicación adsh que es un programa auxiliar interno para apt-dater y no está destinado a utilizarse. Antes de usar, es necesario configurarlo correctamente:
+# ssh-keygen -t rsa -b 4096 -C "tu_email@example.com" (generar clave SSH en el servidor)
+# ssh-copy-id -i ~/.ssh/apt-dater usuario@host1 (distribuir la clave pública a los hosts que se desean gestionar)
+# ssh-copy-id -i ~/.ssh/apt-dater usuario@host2
+En cada host, crear un usuario específico para las actualizaciones:
+# nano /etc/sudoers
+Y añadir la linea:
+  USER ALL=(ALL) NOPASSWD: /usr/bin/apt-get, /usr/bin/needrestart
+Crear archivos de configuración: ~/.config/apt-dater/apt-dater.conf, ~/.config/apt-dater/hosts.conf (contiene todos los hosts que se desea administrar) y ~/.config/apt-dater/screenrc
+$ apt-dater (actualizar todos los hosts. iniciará sesión en los hosts especificados y ejecutará "apt-get update" y "apt-get upgrade" en cada uno de ellos)
+$ apt-dater --auto-refresh (actualizar solo los paquetes necesarios)
+$ apt-dater -r (crear un informe XML de la última actualización)
+$ apt-dater -n -r (evitar que se refresquen los hosts antes de crear el informe XML)
+Configuración avanzada:
+$ ~/.config/apt-dater/apt-dater.conf
+...
+[Paths]
+HostsFile=$XDG_CONFIG_HOME/apt-dater/hosts.conf
+StatsDir=$XDG_DATA_HOME/apt-dater
+[SSH]
+Cmd=/usr/bin/ssh
+SpawnAgent=true
+AddKeys=~/.ssh/apt-dater
+[Commands]
+CmdRefresh=apt-dater-host refresh
+CmdUpgrade=apt-dater-host upgrade
+CmdInstall=apt-dater-host install %s
+```
+
+
 apt-doc
 Muestra información sobre el comando apt. Colocar en el navegador: usr/share/doc/apt-doc/guide.es.html
 
