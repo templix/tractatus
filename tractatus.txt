@@ -5104,6 +5104,14 @@ Esta referencia de Debian está destinada a proporcionar una visión general del
 file:///usr/share/debian-reference/apa.es.html
 
 
+debian-security-support
+Para algunos paquetes Debian, no es posible mantener un soporte de seguridad completo para todos los casos de uso durante todo el ciclo de lanzamiento de la distribución. Este paquete proporciona un programa para identificar los paquetes instalados para los que se ha tenido que limitar o finalizar prematuramente el soporte y para alertar al administrador. Se proporcionarán nuevas versiones de este paquete con listas de verificación actualizadas a través del soporte de seguridad estándar y/o extendido.
+$ debian-security-support check openssh-server (verificar el soporte de seguridad para un paquete)
+$ debian-security-support list --unsupported (listar todos los paquetes sin soporte completo de seguridad)
+$ debian-security-support list --limited (paquetes con soporte limitado de seguridad)
+$ debian-security-support info openssh-server (mostrar detalles detallados de un paquete específico)
+
+
 debian-timeline
 Línea de tiempo del proyecto Debian basado en Javascript y HTML: Versiones, bugs, lanzamientos importantes... Colocar en la barra de navegación:
 	http://usr/share/debian-timeline/index.html
