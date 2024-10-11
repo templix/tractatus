@@ -4728,6 +4728,17 @@ Arrancar el servicio:
 En el navegador colocar la dirección: localhost:667
 
 
+datalad
+Plataforma de distribución y gestión de datos que brinda acceso a una amplia gama de recursos de datos que están disponibles en línea.
+$ datalad create mi_dataset (crear un nuevo dataset en la carpeta actual con el nombre "mi_dataset")
+$ datalad install https://example.com/mi_dataset.git (descargar e instalar un dataset existente en la máquina local)
+$ datalad get mi_dataset/carpeta/archivos (obtener todos los archivos de una carpeta específica)
+$ datalad publish mi_dataset (que el dataset se publique en un servidor conocido por DataLad)
+$ datalad update mi_dataset (actualizar un dataset existente en la máquina local)
+$ datalad search palabra ("palabra" es la clave que se desea buscar)
+$ datalad clone mi_dataset (clonar un dataset existente)
+
+
 date
 Relacionado con fechas y calendarios.
 $ date +%s  (en tiempo unix - desde el 1 de enero de 1970-)
@@ -5031,6 +5042,15 @@ Convertir fechas gregorianas en fechas respecto de las versiones de Debian.
 $ debdate
 
 
+debdelta
+Herramienta diseñada para calcular cambios entre paquetes Debian. Significa que en lugar de descargar un paquete completo, solo se descarga el cambio necesario entre la versión actual instalada y la nueva versión disponible.
+# debdelta-upgrade (actualizar la base de datos buscando en los servidores los paquetes instalados y las versiones nuevas, descargando solo los cambios)
+# debdelta download vim (conseguir un delta especifico para un paquete)
+# debdelta paquete_1.0.deb paquete_1.1.deb (generar un archivo delta que contiene los cambios entre las dos versiones)
+# debpatch vim_8.1.deb vim_8.1-to-8.2.delta  (aplicará el delta al paquete original, generando la nueva versión sin tener que descargar el paquete)
+# debdelta-clean (elimina los archivos delta que ya no son necesarios)
+
+
 debfoster
 Mantiene una lista de paquetes instalados que fueron explícitamente solicitados en lugar de ser instalados como una dependencia. Los argumentos son totalmente opcionales y debfoster puede ser invocado después de lanzar dpkg y/o apt-get.
 # debfoster
@@ -5060,6 +5080,11 @@ Preguntas más frecuentes con sus respuestas sobre la distribución de Debian GN
 
 debian-goodies
 Conjunto de herramientas diseñadas para integrarse con la shell estándar, extendiéndola para operar en el sistema de empaquetado de Debian. Algunas de las dependencias de algunos paquetes que intégran esta aplicación son opcionales, sugeridas o obligatorias. Los paquetes que integra son: check-enhancements, debget, debman, debmany, degrep, dfgrep, dglob, dgrep, dhomepage, dman, dpigs, dzegrep, dzfgrep, dzgrep, find-dbgsym-packages, popbugs, which-pkg-broke, which-pkg-broke-build y checkrestart.
+
+
+debian-handbook
+Accesible para todos, el Manual del administrador de Debian enseña los aspectos esenciales a todo aquel que quiera convertirse en un administrador de Debian GNU/Linux eficaz e independiente. Abarca todos los temas que un administrador competente de Linux debería dominar, desde la instalación y actualización del sistema, hasta la creación de paquetes y la compilación del núcleo, pero también la monitorización, las copias de seguridad y la migración, sin olvidar temas avanzados como la configuración de SELinux/AppArmor para proteger servicios, instalaciones automatizadas o virtualización con Xen, KVM o LXC. El Manual del administrador de Debian ha sido escrito por dos administradores de Debian.
+$ firefox file:///usr/share/doc/debian-handbook/html/
 
 
 debian-history
