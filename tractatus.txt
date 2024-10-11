@@ -5137,6 +5137,33 @@ Las opciones:
     --noverbose: Reduce la cantidad de información mostrada durante la ejecución
 
 
+debomatic
+Es una máquina de compilación fácil de usar para paquetes fuente de Debian basada en sbuild y schroot, escrita en Python. Proporciona una herramienta simple para automatizar la compilación de paquetes fuente con interacción limitada del usuario y una configuración simple. Tiene algunas características útiles como actualización automática de chroots, escaneo automático y selección de paquetes fuente para compilar y compatibilidad con módulos. Está pensada para ayudar a los desarrolladores a compilar sus paquetes sin preocuparse demasiado por la compilación, ya que se ejecutará en segundo plano y no se requiere retroalimentación del usuario durante todo el proceso. Primero el archivo de configuración:
+# nano /etc/debomatic/main
+  [default]
+  builder: pbuilder
+  packagedir: /home/usuario/debomatic
+  configdir: /etc/debomatic/distributions
+  maxbuilds: 3
+  inotify: 1
+  sleep: 60
+  logfile: /var/log/debomatic.log
+  gpg: 1 # Para habilitar el control de firmas
+  gpgkey: /ruta/a/tu/clave_privada.asc
+  [distributions]
+  unstable:
+    dist: sid
+    arch: amd64
+  testing:
+    dist: bullseye
+    arch: arm64
+# debomatic add <nombre-del-paquete> (agregar un nuevo paquete a construir)
+# debomatic start (iniciar los procesos de construcción)
+# debomatic stop (parar los procesos)
+# debomatic status (ver el estado actual)
+# debomatic remove <nombre-del-paquete> (eliminar un paquete de la cola)
+
+
 debootstrap
 Instalar un sistema Debian dentro de un directorio de nuestro sistema para hacer pruebas o realizar instalaciones de otra arquitectura diferente.
 # mkdir /mnt/debian-i386/ (Crear el directorio)
