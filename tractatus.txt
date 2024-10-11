@@ -5122,6 +5122,21 @@ Proporciona una serie de pequeñas utilidades que son utilizadas principalmente 
 ischroot, savelog, which.debianutils, add-shell, remove-shell y update-shells.
 
 
+debmirror
+Este programa descarga y mantiene un espejo local parcial de Debian. Puede reflejar cualquier combinación de arquitecturas, distribuciones y secciones. Los archivos se transfieren por FTP, HTTP, HFTP o rsync, y los grupos de paquetes son totalmente compatibles. También realiza el bloqueo y actualiza los archivos de seguimiento.
+# debmirror --method http --host ftp.debian.org --dist sid --dir /var/spool/apt-mirror/mirrors/sid --arch "amd64 i386" --ignoremissing --noverbose (crea un espejo del repositorio "sid" [desarrollo] para arquitecturas amd64 e i386 en el directorio especificado)
+# debmirror --method http --host ftp.debian.org --dist bullseye --dir /var/spool/apt-mirror/mirrors/bullseye --arch amd64 --components main contrib non-free --ignoremissing --noverbose (crea un espejo más específico y detallado de Bullseye para la arquitectura amd64, incluyendo los componentes main, contrib y non-free)
+Las opciones:
+    --method: Especifica el método de acceso (http, ftp, etc.)
+    --host: Dirección del servidor del repositorio
+    --dist: Nombre del repositorio (por ejemplo, "bullseye", "stable", "unstable")
+    --dir: Directorio local donde se almacenará el espejo
+    --components: Los componentes que incluye [main, contrib y non-free]
+    --arch: Arquitecturas a incluir
+    --ignoremissing: Ignora paquetes que ya existen en el espejo
+    --noverbose: Reduce la cantidad de información mostrada durante la ejecución
+
+
 debootstrap
 Instalar un sistema Debian dentro de un directorio de nuestro sistema para hacer pruebas o realizar instalaciones de otra arquitectura diferente.
 # mkdir /mnt/debian-i386/ (Crear el directorio)
