@@ -9626,6 +9626,10 @@ $ geoiplookup IP
 geoipupdate
 Actualiza las bases de datos GeoIP2 y GeoIP Legacy para clientes de MaxMind. El programa se conecta al servidor de actualización MaxMind GeoIP para buscar nuevas bases de datos. Si hay una nueva base de datos disponible, el programa la descargará e instalará.
 # geoipupdate
+Nota.- En el archivo de configuración se ha reemplazar YOUR_ACCOUNT_ID_HERE y YOUR_LICENSE_KEY_HERE por una combinación de clave de licencia e ID de cuenta activa asociada con su cuenta de MaxMind. Estos números están disponibles en https://www.maxmind.com/en/my_license_key y descomentar las lineas:
+# nano /etc/GeoIP.conf
+  AccountID YOUR_ACCOUNT_ID_HERE
+  LicenseKey YOUR_LICENSE_KEY_HERE
 
 
 geolooc
