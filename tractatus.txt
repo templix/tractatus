@@ -10264,7 +10264,7 @@ $ gpe-taskmanager
 
 
 gpg
-Encriptación y autentificación de claves públicas
+[gnupg]. Encriptación y autentificación de claves públicas
 # gpg --keyserver subkeys.pgp.net --recv-keys XXXXXXXXXXXXXX
 # gpg --export --armor XXXXXXXXXXXX | apt-key add -
 # gpg --passphrase 1234 -c archivo.txt (Encriptar un archivo con la clave 1234)
@@ -10277,6 +10277,14 @@ $ gpg --gen-random --armor 1 8 (Crear una clave aleatoria de 8 caracteres)
 $ gpg -ab fichero.txt (Crear una firma para un fichero)
 $ gpg --gen-key (Crear las claves. Preguntará algoritmo [RSA/RSA], longitud [2048 bits], caducidad, nombre y correo [opcional])
 $ gpg --list-keys (Ver listado )
+1.-
+Para evitar que la contraseña permanezca en memoria caché  mucho tiempo:
+# nano ~/.gnupg/gpg-agent.conf
+Y añadir las lineas:
+default-cache-ttl 60
+max-cache-ttl 120
+Luego, recarga la configuración
+# gpgconf --reload all
 
 
 gpgconf
