@@ -1501,6 +1501,7 @@ $ asciidoc -b html5 -d manpage asciidoc.1.txt  (Genera página man usando html5)
 
 ascii-image-converter
 Convertir imagenes de formatos estandard [png, jpg, jprg...] a imagen ascii.
+$ ascii-image-converter imagen.png > imagen.txt (forma básica y guardarla en imagen.txt)
 $ ascii-image-converter imagen.png -Cb -s . (en color, en código braille y guardar la imagen en el presente directorio con el nombre por defecto image-ascii-art.png)
 $ ascii-image-converter --formats (formatos soportados)
 
@@ -18108,6 +18109,19 @@ ogg123
 [vorbis-tools]. Reproductor de música para archivos .ogg
 $ ogg123 archivo.ogg (forma básica)
 $ ogg123 ~/Música/* (reproducirá todos los .ogg de la carpeta mencionada)
+
+
+oh-my-posh
+Temas varios para el prompt.
+$ curl -s https://ohmyposh.dev/install.sh | bash -s (descarga e instalación))
+$ oh-my-posh get shell (muestra la shell que se esta usando)
+$ oh-my-posh font install (muestra listado para escoger cual)
+Descarga e instalación de temas:
+$ wget https://github.com/JanDeDobbeleer/oh-my-posh/releases/latest/download/themes.zip -O ~/.poshthemes/themes.zip
+$ unzip ~/.poshthemes/themes.zip -d ~/.poshthemes (descomprimir el .zip)
+Una vez escogido el tema [en el ejemplo el tema "dracula" añadir a .bashrc la linea:
+eval "$(oh-my-posh --init --shell bash --config ~/.poshthemes/dracula.omp.json)"
+$ $ oh-my-posh upgrade (que el nuevo prompt tenga efecto)
 
 
 olive
