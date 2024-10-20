@@ -18119,7 +18119,8 @@ $ oh-my-posh font install (muestra listado para escoger cual)
 Descarga e instalación de temas:
 $ wget https://github.com/JanDeDobbeleer/oh-my-posh/releases/latest/download/themes.zip -O ~/.poshthemes/themes.zip
 $ unzip ~/.poshthemes/themes.zip -d ~/.poshthemes (descomprimir el .zip)
-Una muestra se pùede visualizar en https://ohmyposh.dev/docs/themes y una vez escogido el tema [en el ejemplo el tema "dracula"] añadir a .bashrc la linea:
+$ chmod u+rw ~/.poshthemes/*.json (permisos para los temas)
+Una muestra se puede visualizar en https://ohmyposh.dev/docs/themes y una vez escogido el tema [en el ejemplo el tema "dracula"] añadir a .bashrc la linea:
 eval "$(oh-my-posh --init --shell bash --config ~/.poshthemes/dracula.omp.json)"
 $ $ oh-my-posh upgrade (que el nuevo prompt tenga efecto)
 
