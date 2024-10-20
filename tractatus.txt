@@ -11871,6 +11871,14 @@ $ info2pod /usr/share/info/nano.info.gz > nano.txt
 $ info2man /usr/share/info/nano.info.gz > nano.txt
 
 
+infocmp
+Herramienta que se utiliza para comparar o mostrar información sobre descripciones de terminal en sistemas que utilizan el sistema de gestión de terminales terminfo.
+$ infocmp (muestra la descripción completa de la terminal actual)
+$ infocmp xterm (mostrar información sobre el tipo de terminal xterm)
+$ infocmp aterm xterm (Comparar dos descripciones de terminal)
+$ infocmp -L > infor.txt (convertir y mostrar la descripción en formato de texto legible y mandarlo a un archivo)
+
+
 init
 Para o reinicia el sistema
 $ init 0    (para)
