@@ -3159,6 +3159,25 @@ Para incorporar cdargs en .bashrc:
      echo '. ~/.bashrc-cdargs' >> ~/.bashrc
 
 
+cdcd
+Utilidad para controlar reproductores de CD de música. Permite tanto comandos directos como un modo interactivo.
+$ cdcd (la primera vez que se ejecuta hace algunas preguntas con el dispositivo reproductor /dev/cdrom y entra en modo interactivo)
+$ cdcd play (empezar a reproducir un CD)
+$ cdcd stop (detener la reproducción)
+$ cdcd next (asvanzar a la siguiente pista)
+$ cdcd prev (retroceder a la pista anterior)
+$ cdcd track 4 (elegir una pista específica)
+$ cdcd eject (expulsar el cd)
+En modo interactivo los comandos son los mismo pero con el prompt de cdcd:
+        $ cdcd
+        > play
+        > next
+        > eject
+1- Configurar una alarma con cron para que cdcd empiece a reproducir un CD a una hora específica, añadir una linea en contrab parecida a:
+              0 7 * * * cdcd play
+Este ejemplo haría que el CD comenzara a reproducirse todos los días a las 7:00 AM.
+
+
 cdclose
 [cdtool]. Cerrar el cd.
 $ cdclose -d /dev/sr0 (especificando el dispositivo [cdrom0...])
