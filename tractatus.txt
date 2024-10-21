@@ -20010,6 +20010,72 @@ $ progreess (forma básica)
 $ progress -m (monitoreo interactivo)
 
 
+prompt
+Sección de texto que aparece en la pantalla cuando un usuario abre una terminal o consola informática tratando de avisar al usuario de que está lista para recibir una entrada. Normalmente muestra información como nombre del usuario,  ruta donde se encuentra, símbolo del sistema operativo utilizado, instrucciones para realizar ciertas tareas o diagnósticos. Bash tiene cuatro "cadenas de prompt" que se pueden personalizar: PS0 se muestra después de cada orden, antes de cualquier salida, PS1 es el prompt principal que se muestra antes de cada orden, PS2 es el prompt secundario que se muestra cuando una orden se aplica con varias lineas de entrada, PS3 para el comando de selección y PS4 cuando se ejecuta un script de shell en modo de depuración, normalmente el signo "+". Todos los ejemplos siguientes solo se aplican a la terminal hasta que se cierre. Para hacerlos permanentes ha de colocarse la linea en .bashrc.
+$ export PS1="\u@\H \W:\$ "
+$ export PS1="\u@\H>\t "
+$ export PS1="\u@\H>\T "
+$ export PS1="\u \H\a \t "
+$ export PS1="Hola \u " (Escribimos el texto o carácter que deseamos que aparezca sin la barra "\")
+Algunas de las opciones para incorporar:
+        \a – Un carácter ASCII
+        \d – fecha actual en formato "dia_sem mes día", "dl. d’oct. 21"
+        \e – Carácter de escape
+        \h – Nombre de host (corto)
+        \H – Nombre de host completo
+        \j – Número de trabajos que administra el shell
+        \l – El nombre base del dispositivo terminal del shell
+        \n – Nueva línea
+        \r – Retorno de carro
+        \s – El nombre del shell
+        \t – Hora (hora:minuto:segundo)
+        \@ – Hora, 12 horas AM/PM
+        \A – Hora, 24 horas, sin segundos
+        \u – Nombre de usuario actual
+        \v – Versión de BASH
+        \V – Información adicional sobre la versión de BASH
+        \w – Directorio de trabajo actual
+        \W – El nombre base del directorio de trabajo ($HOME se representa con ~)
+        \! – Muestra el número de este comando en el historial
+        \# – Número de comando de este comando
+        \$ – Especifica si el usuario es root (#) o ($)
+        \\ – Barra invertida
+        \[ – inicio de una secuencia de caracteres no imprimibles
+        \] – fin de la secuencia de caracteres no imprimibles
+Un ejemplo para ver la cadena PS2 podria ser:
+   $ echo "linux es un sistema RET
+   > genial" RET
+   linux es un sistema
+   genial
+Si modificamos la PS2:
+   $ export PS2='---> '
+   $ echo "linux es un sistema RET
+   ---> genial" RET
+   linux es un sistema
+   genial
+También se puede personalizar el color del prompt
+$ export PS1="\e[1;31m[\u@\h \W]\$ \e[0m"
+El desglose del comando es:
+   \e[ – Comienza los cambios de color
+   1;31m – texto en negrita y color rojo [31]
+   [\u@\h \W]\$ – usuario@host directorio de trabajo $
+   \e[0m – Salir del modo cambio de color
+El primer número del código de color especifica el tipo de letra:
+   0 – Normal
+   1 – Negrita
+   2 – Tenue
+   4 – Subrayado
+El segundo número indica el color:
+   30 – Negro
+   31 – Rojo
+   32 – Verde
+   33 – Marrón
+   34 – Azul
+   35 – Púrpura
+   36 – Cian
+   37 – Gris claro
+
+
 proxychains
 [tor privoxy]. Convierte en anonima la conexión que realiza una aplicación determinada [Ver privoxy]
 # nano /etc/proxychains.conf
