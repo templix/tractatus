@@ -20016,7 +20016,7 @@ $ export PS1="\u@\H \W:\$ "
 $ export PS1="\u@\H>\t "
 $ export PS1="\u@\H>\T "
 $ export PS1="\u \H\a \t "
-$ export PS1="Hola \u " (Escribimos el texto o carácter que deseamos que aparezca sin la barra "\")
+$ export PS1="Hola \u " (Escribimos el texto o carácter que deseamos que aparezca sin la barra invertida)
 Algunas de las opciones para incorporar:
         \a – Un carácter ASCII
         \d – fecha actual en formato "dia_sem mes día", "dl. d’oct. 21"
@@ -20043,37 +20043,37 @@ Algunas de las opciones para incorporar:
         \[ – inicio de una secuencia de caracteres no imprimibles
         \] – fin de la secuencia de caracteres no imprimibles
 Un ejemplo para ver la cadena PS2 podria ser:
-   $ echo "linux es un sistema RET
-   > genial" RET
-   linux es un sistema
-   genial
+         $ echo "linux es un sistema RET
+         > genial" RET
+         linux es un sistema
+         genial
 Si modificamos la PS2:
-   $ export PS2='---> '
-   $ echo "linux es un sistema RET
-   ---> genial" RET
-   linux es un sistema
-   genial
+      $ export PS2='---> '
+      $ echo "linux es un sistema RET
+         ---> genial" RET
+         linux es un sistema
+         genial
 También se puede personalizar el color del prompt
 $ export PS1="\e[1;31m[\u@\h \W]\$ \e[0m"
 El desglose del comando es:
-   \e[ – Comienza los cambios de color
-   1;31m – texto en negrita y color rojo [31]
-   [\u@\h \W]\$ – usuario@host directorio de trabajo $
-   \e[0m – Salir del modo cambio de color
+      \e[ – Comienza los cambios de color
+      1;31m – texto en negrita y color rojo [31]
+      [\u@\h \W]\$ – usuario@host directorio de trabajo $
+      \e[0m – Salir del modo cambio de color
 El primer número del código de color especifica el tipo de letra:
-   0 – Normal
-   1 – Negrita
-   2 – Tenue
-   4 – Subrayado
+      0 – Normal
+      1 – Negrita
+      2 – Tenue
+      4 – Subrayado
 El segundo número indica el color:
-   30 – Negro
-   31 – Rojo
-   32 – Verde
-   33 – Marrón
-   34 – Azul
-   35 – Púrpura
-   36 – Cian
-   37 – Gris claro
+      30 – Negro
+      31 – Rojo
+      32 – Verde
+      33 – Marrón
+      34 – Azul
+      35 – Púrpura
+      36 – Cian
+      37 – Gris claro
 
 
 proxychains
