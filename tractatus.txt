@@ -15288,6 +15288,18 @@ minfo
 Herramienta que imprime los parámetros de un sistema de archivos MS-DOS, como el número de sectores, cabezas y cilindros. También imprime una línea de comandos mformat que puede utilizarse para crear un sistema de archivos MS-DOS similar en otro soporte.
 
 
+minguetty
+Programa minimalista que se utiliza para iniciar sesión en consolas
+$ mingetty --autologin usuario console (iniciar automáticamente una sesión de login para el usuario especificado)
+$ mingetty --login-graphical console (mostrará una interfaz gráfica de login en lugar de la consola estándar)
+$ ps aux | grep mingetty (mostrará si hay procesos mingetty corriendo)
+1.-
+Para crear un archivo de configuración personalizado:
+$ echo "console /dev/ttyS0" > ~/.mingettyrc
+Y luego ejecutar:
+$ mingetty console
+
+
 miniflux
 [libreadline-dev libconfig-dev libssl-dev lua5.2 liblua5.2-dev libevent-dev libjansson-dev libpython-dev make]. Lector RSS instalado en local o en un servidor. Simplemente se descarga la aplicación de <http://miniflux.net/> y, una vez descomprimida, se copia al directorio web (generalmente /var/www). Se accede colocando en la barra de direcciones: http://localhost/miniflux (Por defecto el nombre de usuario y contraseña son admin:admin)
 Atajos de teclado:
