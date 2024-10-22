@@ -9263,6 +9263,43 @@ Determina máquinas de una red activas
 # fping -g 192.168.2./24 2> /dev/null | grep alive
 
 
+francine
+Programa de inicio de sesión que se basa en el archivo de configuración /etc/francine.sl. Adicionalmente, para comprobar la autenticación de inicio de sesión se utilizan los archivos del directorio /etc/securetty/. Este programa no acepta ninguna opción.
+# nano /etc/francine.sl
+       % la mayoría de las entradas de configuración son modificadores; 1 significa sí (o verdadero),
+       % 0 significa no (o falso).
+       %
+       % establece si se debe evaluar /etc/securetty.
+       support_securetty = 1;
+       %
+       % establece si se debe establecer un entorno $PATH estándar.
+       % activarlo significa un mejor cumplimiento del inicio de sesión estándar.
+       set_path_env = 1;
+       %
+       % establece si se debe verificar el buzón del sistema para ver si hay correo electrónico nuevo.
+       check_email = 1;
+       %
+       % establece si se debe admitir la salida de voz a /dev/speech.
+       speech_support = 0;
+       %
+       % establece el dispositivo de voz (predeterminado: /dev/speech)
+       % set_speech_device("/dev/speech");
+       %
+       % establece la cantidad de segundos después de los cuales francine debe expirar.
+       % 0 significa que no hay tiempo de espera.
+       timeout = 0;
+       %
+       % establece otra cadena de introducción (la cadena que se imprime durante 1 segundo
+       % al iniciar el programa).
+       % set_intro_string("¡Bienvenido al pc Deb!\n");
+       %
+       % establece el directorio del tema (predeterminado: /usr/share/francine/default.theme).
+       % modifica esto si instalaste otro tema.
+       set_theme_dir("/usr/share/francine/default.theme");
+       %
+$ francine (prueba sin efecto real)
+
+
 free
 Listar la memoria RAM y swap utilizada y disponible
 $ free -m (muestra los resultados en megabytes)
