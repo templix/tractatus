@@ -3194,6 +3194,15 @@ cd-drive
 $ cd-drive
 
 
+cdebconf
+Parte del sistema de configuración Debconf y se utiliza para interactuar con la interfaz de configuración de paquetes Debian.
+# cdebconf debconf-string/hostname string "mihost" (configura el nombre del host en la instalación)
+# cdebconf debconf-select/multiple select "miopcion" otraopcion" (configurar varias opciones en la configuración)
+# cdebconf debconf-defaults boolean true (establece un valor booleano como verdadero por defecto)
+# cdebconf debconf-show hostname (muestra el valor actual del campo de configuración "hostname")
+# cdebconf debconf-set debconf-string/hostname string "nuevoNombre" (cambia el valor del campo "hostname" a "nuevoNombre")
+
+
 cdeject
 [cdtool]. Abrir el cd. Ver eject
 $ cdeject -d /dev/sr0 (especificando el dispositivo [cdrom0....])
