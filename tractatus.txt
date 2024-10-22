@@ -3762,6 +3762,35 @@ Imprime la información disponible sobre todas las plataformas OpenCL disponible
 $ clinfo -l (enumerar plataformas y dispositivos por nombre, sin otras propiedades)
 
 
+clitest
+Busca fragmentos de texto que se parezcan a líneas de comandos interactivas de Unix y luego ejecuta esas líneas de comandos para verificar que funcionen exactamente como se muestran.
+$ cat test.txt
+      $ echo "linux es un sistema genial"
+      linux es un sistema genial
+$ clitest test.txt (el archivo indica que al ejecutar el comando echo "linux es un sistema genial", la salida esperada es linux es un sistema genial)
+      #1	echo "linux es un sistema genial"
+      OK: 1 of 1 test passed
+Con un error en el comando "echo" [ech]:
+$ cat test.txt
+      $ ech "linux es un sistema genial"
+      linux es un sistema genial
+$ clitest test.txt
+      #1	ech "linux es un sistema genial"
+      ------------------------------------------------------
+      [FAILED #1, line 1] ech "linux es un sistema genial"
+      @@ -1 +1 @@
+      -linux es un sistema genial
+      +/usr/bin/clitest: 1: eval: ech: Permission denied
+      ------------------------------------------------------
+      FAIL: 1 of 1 test failed
+Otras pruebas que se pueden realizar:
+$ clitest -l test.txt (Listar sin ejecutar todas las pruebas)
+$ clitest -1 test.txt (detener a la primera prueba fallida)
+$ clitest -L test.txt (muestra en verde las pruebas OK y en rojo las FAIL)
+$ clitest -P none test.txt (establecer indicador de prueba [test, number, dot, none])
+$ clitest --color auto --post-flight 'echo "prueba realizada"' -P test test.txt (Ejecutar un comando después de ejecutar la última prueba)
+
+
 clive
 Descarga de videos de youtube.
 $ clive http://video -O titulo (Dándole un titulo al vídeo)
