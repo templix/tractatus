@@ -12265,9 +12265,12 @@ Los informes se muestran poniendo en la barra del navegador: http://localhost/ht
 
 
 ipcalc
-Calcular las ips y mascaras de una red a partir de una ip dada o un rango.
-# ipcalc 192.168.0.1/24
-# ipcalc 192.168.0.1/255.255.128.0
+Se utiliza para realizar cálculos relacionados con direcciones IP y subredes. Permite obtener información útil como la dirección de red, la máscara de red, el rango de hosts y más. Originalmente, ipcalc estaba pensado para usarse desde el indicador de shell, pero se proporciona un contenedor CGI para permitir la visualización de HTML colorido a través de un servidor web. Puede encontrarlo en el directorio /usr/share/doc/ipcalc/examples.
+# ipcalc 192.168.1.10 255.255.255.0 (información básica de una dirección IP y máscara de red)
+# ipcalc 192.168.18.4/24 (usando notación CIDR en la cual la cantidad de bits de la máscara de red  es /24 equivalente a 255.255.255.0)
+# ipcalc -c 192.168.1.50 192.168.1.0/24 (verificar si una IP pertenece a una subred)
+# ipcalc -b 192.168.1.10/24 (solo mostrar información esencial)
+# ipcalc 10.0.0.0/16 (mostrar el rango de hosts disponibles en una subred)
 
 
 ipcrm
