@@ -49,6 +49,16 @@ Opciones:
 	-popup (Que se cierre el lanzador una vez clicado)
 
 
+9mount
+forma parte de las herramientas SUID para montar sistemas de archivos v9fs en Linux.
+Ejemplo 1: Montar un sistema de archivos v9fs
+# 9mount -o trans=net,port=5640 IP_servidor:ruta punto_de_montaje (montar un sistema de archivos v9fs)
+# 9mount -o trans=net,port=5640,rw <servidor>:<ruta> <punto_de_montaje> (montar el sistema con acceso de lectura y escritura)
+# umount <punto_de_montaje> (desmontar el sistema de archivos)
+# mount | grep <punto_de_montaje> (mostrar si el punto de montaje está activo)
+# 9mount -o trans=net,port=5640,ro <servidor>:<ruta> <punto_de_montaje> (montar con "ro" establece el sistema de archivos como solo lectura)
+
+
 a2dismod
 Desactiva modulos de apache.
 # a2dismod (Lista los módulos y pregunta cual desactivar)
@@ -19403,6 +19413,13 @@ pilfile
 Identificar archivos de imagenes.
 $ pilfile -l (listado de archivos soportados)
 $ pilfile -i grafic.png
+
+
+pinentry-tty
+Programa que permite la entrada segura de PIN o frases de contraseña.
+# pinentry-tty (uso básico)
+# gpg --passphrase-fd 0 | pinentry-tty (con gpg)
+# ssh-keygen -t rsa -b 4096 -C "el_email@example.com" -f ~/.ssh/id_rsa (con ssh)
 
 
 pinfo
