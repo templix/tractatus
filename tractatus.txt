@@ -208,6 +208,15 @@ $ ac -f ~/Documents/text.txt (horas de uso del archivo especificado)
 # ac -d -y (conexión por dias y total año del usuario root)
 # ac --reboots (desde el reinicio)
 
+
+accountservice
+Se usa para gestionar información de cuentas de usuario en sistemas Linux a través de interfaces D-Bus.
+$ dbus-send --system --print-reply --dest=org.freedesktop.Accounts /org/freedesktop/Accounts org.freedesktop.Accounts.ListCachedUsers (muestra las cuentas de usuario que están en caché en el sistema)
+$ dbus-send --system --print-reply --dest=org.freedesktop.Accounts /org/freedesktop/Accounts/User$UID org.freedesktop.DBus.Properties.Get string:"org.freedesktop.Accounts.User" string:"UserName" (información sobre un usuario específico del que debes saber nombre y UID)
+$ dbus-send --system --print-reply --dest=org.freedesktop.Accounts /org/freedesktop/Accounts/User$UID org.freedesktop.Accounts.User.SetIconFile string:"/imagen.jpg" (establecer nueva imagen de perfil para un usuario)
+$ dbus-send --system --print-reply --dest=org.freedesktop.Accounts /org/freedesktop/Accounts/User$UID org.freedesktop.Accounts.User.SetRealName string:"Nuevo_Nombre" (cambiar el nombre de usuario)
+
+
 acct
 Conjunto de utilidades (ac, lastcom, accton, dump-acct, dump-atmp y sa) que se ejecutan en segundo plano y realizan un seguimiento de la actividad de cada usuario en el sistema, tiempos de conexión (en horas) así como de los recursos que se están consumiendo. Normalmente se levanta el servicio durante la instalación pero si no se ha levantado:
 # /etc/init.d/acct start
@@ -257,20 +266,21 @@ Reloj digital en la pantalla.
 $ AClock
 
 
+acmetool
+Herramienta para adquirir automáticamente certificados TLS de servidores ACME [Automated Certificate Management Environment].
+$ acmetool init --email correo@dominio.com --domain dominio.com (configuración inicial)
+$ acmetool get --domain dominio.com (obtener un certificado nuevo)
+$ acmetool renew --domain dominio.com (renovar un certificado existente)
+$ acmetool list --domain dominio.com (verificar los certificados obtenidos)
+Nota.- Es necesario tener configurado un proveedor de nombres de dominio y un servidor web para que acmetool pueda realizar los cambios necesarios en el registro DNS y en el archivo .well-known/acme-challenge/ del sitio web.
+
+
 aconnect
 Utilidad para conectar y desconectar dos puertos midi existentes en el sistema al secuenciador ALSA.
 $ aconnect 64:0 65:0 (conectar el puerto 64 al 65)
 $ aconnect -d 64:0 65:0 (desconectar)
 $ aconnect -l (lista de conexiones)
 $ aconnect -x (suprimir todas las conexiones exportadas)
-
-
-accountservice
-Se usa para gestionar información de cuentas de usuario en sistemas Linux a través de interfaces D-Bus.
-$ dbus-send --system --print-reply --dest=org.freedesktop.Accounts /org/freedesktop/Accounts org.freedesktop.Accounts.ListCachedUsers (muestra las cuentas de usuario que están en caché en el sistema)
-$ dbus-send --system --print-reply --dest=org.freedesktop.Accounts /org/freedesktop/Accounts/User$UID org.freedesktop.DBus.Properties.Get string:"org.freedesktop.Accounts.User" string:"UserName" (información sobre un usuario específico del que debes saber nombre y UID)
-$ dbus-send --system --print-reply --dest=org.freedesktop.Accounts /org/freedesktop/Accounts/User$UID org.freedesktop.Accounts.User.SetIconFile string:"/imagen.jpg" (establecer nueva imagen de perfil para un usuario)
-$ dbus-send --system --print-reply --dest=org.freedesktop.Accounts /org/freedesktop/Accounts/User$UID org.freedesktop.Accounts.User.SetRealName string:"Nuevo_Nombre" (cambiar el nombre de usuario)
 
 
 acpi
@@ -3320,14 +3330,15 @@ Pulsando “exit” salimos del prompt
 
 
 chacl
-Cambia los permisos de archivos o directorios. Este comando de compatibilidad IRIX que se mantiene para aquellos usuarios que están familiarizados con el uso de XFS o IRIX pero lo habitual para estos casos es usar el comando chmod [ver].
-	$ chacl u::---,g::r-x,o::-w- archivo.txt
-	$ ls -al archivo.txt
-	----r-x-w- 1 pep pep 93 gen 30 18:11 archivo.txt
-Con el comando chomod seria:
-	$ chmod u=,g=rx,o=w newfile.txt
-	$ ls -al newfile.txt
-	----r-x-w- 1 pep pep 93 gen 30 18:11 newfile.txt
+[acl]. Cambiar la lista de control [acl, Access Control Lists] de acceso de un archivo o directorio permitiendo establecer permisos detallados para usuarios y grupos específicos, más allá de los permisos tradicionales
+       $ chacl -l archivo.txt
+       archivo.txt [u::rw-,g::r--,o::r--]
+$ chacl u::r-x,g::r-x,o::--x archivo.txt (cambia permisos de archivo.txt a propietario: lectura y ejecución, grupo: lectura y ejecución y otros solo ejecución)
+$ chacl u:user:rwx archivo.txt (da al usuario "user" permisos de lectura, escritura y ejecución en el archivo archivo.txt)
+$ chacl g:users:rw archivo.txt (al grupo "users" se le otorgan permisos de lectura y escritura en archivo.txt)
+$ chacl -B archivo.txt (borra todas las ACL del archivo archivo.txt, dejando solo los permisos estándar de propietario, grupo y otros)
+$ chacl -R u:user:r directorio/ (otorgar permiso de solo lectura al usuario "user" en el directorio "directorio/" y en todos los archivos y subdirectorios contenidos en él)
+$ chacl d:u:user:rw directorio/ (establece una ACL por defecto para el usuario "user" en directorio/. Esta ACL se aplicará automáticamente a cualquier archivo nuevo que se cree dentro de ese directorio)
 
 
 chafa
