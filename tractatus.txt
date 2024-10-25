@@ -227,6 +227,14 @@ accton
 # accton off (parar registros)
 
 
+acheck
+Útil para revisar y corregir errores de localización en archivos de distintos formatos.
+$ acheck archivo.po (mostrará los errores o advertencias comunes que encuentre, como incoherencias de traducción o problemas de formato)
+$ acheck /dir (revisar un directorio completo y generar un informe de errores encontrados en cada uno)
+$ acheck --mode=strict archivo.po (ejecutar el análisis en un modo más exhaustivo)
+$ acheck archivo.po > errores.txt (errores.txt contiene las advertencias y errores detallados encontrados en el archivo)
+
+
 achilles
 Simulación pelín subrealista de vida artificial y evolución.
 $ achilles -x 4 -z 4 -f 5 (número de bloques en el eje y y en el x y número de alimentos iniciales)
