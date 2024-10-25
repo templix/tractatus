@@ -257,6 +257,14 @@ $ aconnect -l (lista de conexiones)
 $ aconnect -x (suprimir todas las conexiones exportadas)
 
 
+accountservice
+Se usa para gestionar información de cuentas de usuario en sistemas Linux a través de interfaces D-Bus.
+$ dbus-send --system --print-reply --dest=org.freedesktop.Accounts /org/freedesktop/Accounts org.freedesktop.Accounts.ListCachedUsers (muestra las cuentas de usuario que están en caché en el sistema)
+$ dbus-send --system --print-reply --dest=org.freedesktop.Accounts /org/freedesktop/Accounts/User$UID org.freedesktop.DBus.Properties.Get string:"org.freedesktop.Accounts.User" string:"UserName" (información sobre un usuario específico del que debes saber nombre y UID)
+$ dbus-send --system --print-reply --dest=org.freedesktop.Accounts /org/freedesktop/Accounts/User$UID org.freedesktop.Accounts.User.SetIconFile string:"/imagen.jpg" (establecer nueva imagen de perfil para un usuario)
+$ dbus-send --system --print-reply --dest=org.freedesktop.Accounts /org/freedesktop/Accounts/User$UID org.freedesktop.Accounts.User.SetRealName string:"Nuevo_Nombre" (cambiar el nombre de usuario)
+
+
 acpi
 Monitorizar estado de la bateria del portatil, si está conectado a la red y otras informaciones.
 $ acpi -c (ventiladores)
