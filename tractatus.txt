@@ -180,6 +180,12 @@ Utilidad para manipular archivos de imagen de partición que se utilizan en disp
 # abootimg --decompress ed_boot.img (descomprimir)
 
 
+abr2gbr
+Herramienta para convertir archivos de pincel ABR de Adobe PhotoShop y Corel Paint Shop Pro JBR al formato GBR de GIMP.
+$ gimp --batch-process --process=abr2gbr entrada.abr salida.gbr
+$ gimp --batch-process --process=abr2gbr --brushes-only --flatten output_file.gbr input_file.abr
+
+
 abs-guide
 Un montón de ejemplos de bash scripting. Listado en:
 $ ls /usr/share/doc/abs-guide/examples/
