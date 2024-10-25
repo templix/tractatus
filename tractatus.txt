@@ -170,6 +170,16 @@ Algunas teclas de control:
 	q (Salir)
 
 
+abootimg
+Utilidad para manipular archivos de imagen de partición que se utilizan en dispositivos Android para arrancar sistemas operativos.
+# abootimg --create my_boot.img --kernel .bin --ramdisk ramdisk.cpio.gz (crear imágen de partición desde cero)
+# abootimg --extract my_boot.img (extraer componentes de una imagen existente)
+# abootimg --info my_boot.img (verificar la estructura de una imagen)
+# abootimg --modify my_boot.img --set-kernel new_kernel.bin (modificar componentes de una imagen existente)
+# abootimg --compress my_boot.img (comprimir imagenes)
+# abootimg --decompress ed_boot.img (descomprimir)
+
+
 abs-guide
 Un montón de ejemplos de bash scripting. Listado en:
 $ ls /usr/share/doc/abs-guide/examples/
