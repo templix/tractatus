@@ -294,6 +294,15 @@ $ watch acpi -V (en tiempo real)
 $ cat /proc/acpi/battery/BAT0/info (Muestra varios datos, los más importantes: design capacity y last full capacity. La diferencia entra ambas cantidades es la capacidad que ha perdido la bateria)
 
 
+acpid
+Demonio que gestiona eventos de ACPI [Advanced Configuration and Power Interface] relacionados con la energía y el hardware del sistema, como estado de la batería, conexiones de corriente, botón de encendido y cierre de la tapa en portátiles.
+# systemctl status acpid (comprobar si está activo)
+# systemctl start acpid (si no lo está acivarlo)
+# acpi_listen (ver qué eventos están disponibles y cómo se reconocen)
+# journalctl -u acpid (consultar los registros del sistema donde se registran los eventos de ACPI)
+# acpid reload (recargar acpid sin necesidad de reiniciar el servicio)
+
+
 acpitail
 Muestra información del estado de ACPI sobre la batería, el ventilador y la temperatura.
 $ acpitail -B 60 -F 10 (de la bateria cada 60 segundos. Por defecto 15 y del ventidador cada 10. Por defecto 5)
