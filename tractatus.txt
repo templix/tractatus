@@ -319,6 +319,24 @@ $ acpitool -S (información detallada sobre el estado de suspensión)
 $ acpitool -l (lista completa de componentes disponible en el sistema)
 
 
+adb
+[Android Debug Bridge]. Herramienta que permite comunicar con instancias de emuladores o dispositivos Android conectados para ejecutar comandos, transferir archivos, depurar aplicaciones, etc.
+$ adb devices (mostrar una lista de los dispositivos conectados y sus estados, como "device" [conectado y listo para usar] o "offline" [no responde])
+$ adb install aplicacion.apk (instalar una aplicación. Envía la aplicación desde el ordenador al dispositivo)
+$ adb pull /ruta/del/archivo/en/dispositivo /ruta/de/destino/en/ordenador (copiar un archivo desde el dispositivo al ordenador)
+$ adb push /ruta/del/archivo/en/ordenador /ruta/de/destino/en/dispositivo (copiar un archivo desde el ordenador al dispositivo)
+$ adb shell (acceder a una sesión de shell en el dispositivo)
+$ adb reboot (reiniciar el dispositivo)
+$ adb reboot recovery (reiniciar en modo recuperación)
+$ adb reboot bootloader (reiciciar en el cargador de arranque)
+$ adb exec-out screencap -p > captura.png (capturar la pantalla del dispositivo y guardarla en el ordenador y guardarla en el directorio actual)
+$ adb shell screenrecord video.mp4 (grabar la pantalla del dispositivo y guardarla en el dispositivo mismo. Despues se puede transferir al pc con "adb pull")
+$ adb uninstall paquete (desinstalar una aplicación usando su nombre de paquete)
+$ adb logcat (ver los logs del sistema en tiempo real)
+$ adb kill-server (si adb no detecta los dispositivos conectados, probar a reiniciar el servidor)
+$ adb start-server
+
+
 add-apt-repository
 Simplifica la adición de repositorios concretos al sistema de aplicaciones que no se encuantran todavia en los repos oficiales. Instalar esta aplicación de Ubuntu en Debian mediante un script:
 $ wget http://blog.anantshri.info/content/uploads/2010/09/add-apt-repository.sh.txt (descarga)
