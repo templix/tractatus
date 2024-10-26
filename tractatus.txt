@@ -354,6 +354,15 @@ Si GnuPG se instala en un sistema con cuentas de usuario existentes, es necesari
 # addgnupghome cuenta_user1 cuenta_user2
 
 
+addresses-googies-for-ngustep
+Herramientas diseñadas para integrar contactos en entornos basados en GNUstep. Incluye las herramientas; adgnumailconverter, adserver, y adtool.
+$ adgnumailconverter -i archivo_correo.mbox -o archivo_contactos.abook (convertir contactos desde archivos de correos GNU Mail en un formato compatible con AddressBook de GNUstep)
+$ adserver --port 1234 (permitir que otros usuarios o aplicaciones se conecten al servidor de direcciones a través del puerto especificado. Por defecto 1234)
+$ adtool --add --name "Juan Pérez" --email juan.perez@example.com (agregar un contacto)
+$ adtool --list (listar contactos)
+$ adtool --search "Juan Pérez" (buscar un contacto)
+
+
 add-shell
 [debianutils]. Agrega shells a la lista de shells de inicio de sesión válidos. copia /etc/shells a /etc/shells.tmp y agrega los shells dados a este archivo si aún no están presentes y copia este archivo temporal de nuevo a /etc/shells. Deben proporcionarse rutas de acceso completas de las shells.
 $ add-shell /bin/rbash
@@ -385,19 +394,15 @@ $ adequate coreutils (comprobar un paquete)
 $ adequate --tags obsolete-conffile --all (comprobar paquetes obsoletos)
 
 
+adjtimex
+Utilidad para manipular las variables de tiempo del núcleo. Para una máquina conectada a Internet la mejor manera de mantener la precisión del reloj del sistema es utilizando NTP [Network Time Protocol]. Es importante tener en cuenta que el uso de este comando puede afectar negativamente el rendimiento del sistema si se utiliza excesiva o incorrectamente. Se recomienda su uso con precaución y solo cuando sea absolutamente necesario.
+$ adjtimex /dev/rtc0 --set-system-time=2024-10-24 20:00:00 (establece la hora del sistema al 24 de octubre de 2024 a las 20:00:00.)
+
+
 adminer
 Gestor de bases de datos via navegador más completa que phpmyadmin. Una vez instalado reiniciar apache:
 # /etc/init.d/apache2 restart
 Acceder a la aplicación con, http://localhost/adminer y entrar los datos de acceso (usuario, contraseña, servidor y gestor de la BD).
-
-
-addresses-googies-for-ngustep
-Herramientas diseñadas para integrar contactos en entornos basados en GNUstep. Incluye las herramientas; adgnumailconverter, adserver, y adtool.
-$ adgnumailconverter -i archivo_correo.mbox -o archivo_contactos.abook (convertir contactos desde archivos de correos GNU Mail en un formato compatible con AddressBook de GNUstep)
-$ adserver --port 1234 (permitir que otros usuarios o aplicaciones se conecten al servidor de direcciones a través del puerto especificado. Por defecto 1234)
-$ adtool --add --name "Juan Pérez" --email juan.perez@example.com (agregar un contacto)
-$ adtool --list (listar contactos)
-$ adtool --search "Juan Pérez" (buscar un contacto)
 
 
 aewan
