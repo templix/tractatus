@@ -308,6 +308,17 @@ Muestra información del estado de ACPI sobre la batería, el ventilador y la te
 $ acpitail -B 60 -F 10 (de la bateria cada 60 segundos. Por defecto 15 y del ventidador cada 10. Por defecto 5)
 
 
+acpitool
+Información en laptops sobre el estado de la batería, la temperatura y la capacidad de suspender.
+$ acpitool -c (información general)
+$ acpitool -b (información detallada del estado de la bateria)
+$ acpitool -t (verificar estado térmico)
+$ acpitool -T (información detallada sobre el sistema térmico)
+$ acpitool -s (verificar si el sistema está suspendido)
+$ acpitool -S (información detallada sobre el estado de suspensión)
+$ acpitool -l (lista completa de componentes disponible en el sistema)
+
+
 add-apt-repository
 Simplifica la adición de repositorios concretos al sistema de aplicaciones que no se encuantran todavia en los repos oficiales. Instalar esta aplicación de Ubuntu en Debian mediante un script:
 $ wget http://blog.anantshri.info/content/uploads/2010/09/add-apt-repository.sh.txt (descarga)
