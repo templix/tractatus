@@ -454,6 +454,27 @@ Algunas teclas de control:
 	Ctrl c (Sale del programa)
 
 
+afio
+Útil para crear y gestionar archivos en formato de compresión propio.
+$ find /directorio | afio -o -Z -F -z9 -O archivo.afio (crear un archivo comprimido de un directorio)
+$ afio -i -Z -F -z9 -O archivo.afio -D /directorio_destino (descomprimir)
+$ find /nuevos_archivos | afio -o -a -O archivo.afio (agregar archivos a un archivo afio ya existente)
+$ afio -t -Z archivo.afio (ver contenido sis extraerlo)
+$ find /dir_respaldo | afio -o -Z -O archivo.afio && scp archivo.afio usuario@servidor:/destino/ (realiza un respaldo y luego transfiere el archivo al servidor de destino)
+$ find /ruta -name "*.txt" | afio -o -Z -O textfiles.afio (comprimir solo archivos de un tipo específico como .tx)
+$ afio -i -Z -O archivo.afio "*.txt" (extraer solo archivos específicos como los .txt)
+Las opciones expuestas:
+    -o: indica que se va a crear un archivo.
+    -Z: usa compresión gzip.
+    -F: guarda rutas absolutas.
+    -z9: usa la máxima compresión.
+    -O archivo.afio: especifica el nombre del archivo de salida.
+    -i: indica que afio va a leer el archivo y extraer los contenidos.
+    -D /directorio_destino: especifica el directorio de destino para los archivos extraídos.
+    -a: indica que los archivos se van a añadir al archivo ya existente.
+    -t: lista los archivos dentro del archivo .afio sin extraerlos.
+
+
 age
 Cifrar y descifrar archivo. Si no se especifica archivo de salida lo hace por pantalla.
 $ age -e -p -o salida archivo_entrada (encriptar con contraseña con el nombre de salida especificado el archivo_entrada)
