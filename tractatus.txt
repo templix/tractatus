@@ -405,6 +405,22 @@ Gestor de bases de datos via navegador más completa que phpmyadmin. Una vez ins
 Acceder a la aplicación con, http://localhost/adminer y entrar los datos de acceso (usuario, contraseña, servidor y gestor de la BD).
 
 
+adns-tools
+Hacer consultas DNS. Incluye las aplicaciones adnsheloex, adnshost, adnslogres y adnsresfilter
+$ echo "ejemplo.com" | adnsresfilter (consulta básica)
+$ echo "ejemplo.com" | adnsresfilter -t 5000 (ajustando tiempo de espera a 5 segundos para resolver ejemplo.com)
+$ adnsresfilter -t 3000 < lista_de_dominios.txt (con una lista de dominios, a uno por linea y una espera de 3 segundos por consulta)
+$ adnsresfilter < lista_de_dominios.txt > resultados_dns.txt (redirigiendo la lista de entrada a un archivo de resultados)
+$ adnsheloex mail.ejemplo.com cliente.ejemplo.com 192.168.1.1 (envía un saludo HELO desde cliente.ejemplo.com al servidor mail.ejemplo.com usando la dirección IP 192.168.1.1. Útil para verificar correo electrónico o autenticaciones)
+$ adnshost ejemplo.com (mostrar las direcciones IP asociadas al dominio ejemplo.com)
+$ cat archivo.log | adnslogres (leer el archivo de registro [logs] y resolver direcciones IP en nombres de dominio)
+$ adnshost -t a google.com (devolver la dirección IP v4 asuciada al dominio google.com)
+$ adnshost -t aaaa google.com (muestra la dirección IPv6 del dominio especificado)
+$ adnshost -t ns google.com (mostrar la lista de servidores DNS que gestionan el dominio)
+$ adnshost -t txt google.com (obtiener el registro TXT)
+$ adnshost -t soa google.com (información sobre el servidor principal, el contacto administrativo y otros detalles técnicos del dominio)
+
+
 advancecomp
 Contiene utilidades de recompresión para archivos .zip, imágenes .png, videoclips .mng y archivos .gz. Para la recompresión, se utiliza 7-Zip sin pérdida de calidad.
 $ advzip -z archivo.zip (recomprime un .zip y reduce su tamaño optimizando la compresión)
