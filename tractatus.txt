@@ -5687,6 +5687,16 @@ Diccionario en inglés.
 $ dict linux
 
 
+dictzip
+Utilidad para comprimir bases de datos de diccionarios [.dict] con el algoritmo LZ77, útil para reducir su tamaño y hacer que sean más eficientes de almacenar y transferir. Incluye dictunzip [descomprimir] y dictzcat [visualizar archivos comprimidos].
+$ dictzip diccionario.dict (genera un archivo comprimido llamado diccionario.dict.dz)
+$ dictzip -d diccionario.dict.dz (devuelve el archivo a su forma original)
+$ dictzip -l diccionario.dict.dz (muestra detalles como el tamaño comprimido y descomprimido del archivo)
+$ dictzip -c 9 diccionario.dict (aplica la compresión máxima al archivo)
+$ dictzip -k diccionario.dict (comprimir un archivo y mantener el original sin cambios)
+$ dictzip -c diccionario.dict > nuevo_diccionario.dict.dz (redirige el archivo comprimido a nuevo_diccionario.dict.dz en lugar de usar el nombre predeterminado)
+
+
 didiwiki
 wiki rápida y ligera para uso personal.
 $ didiwiki -h /home/USER -l 127.0.0.1 -p 5000
@@ -9621,6 +9631,17 @@ funzip
 Muestra los datos de un archivo comprimido en zip o gz.
 $ funzip archivo.zip
 $ funzip -contraseña archivo.gz (En caso de tener contraseña. No es muy aconsejable porque queda en el history)
+
+
+fuse-zip
+Sistema de archivos FUSE para navegar, extraer, crear y modificar archivos ZIP como si fueran directorios reales.
+$ fuse-zip archive.zip /mnt/zipfs (montar el archivo ZIP en /mnt/zipfs)
+$ fusermount -u /mnt/zipfs (desmontar)
+$ ls /mnt/zipfs (listar contenido)
+$ cp /mnt/zipfs/file.txt /tmp/ (extraer un archivo y dejarlo en /tmp)
+$ echo "Nuevas cosas..." >> /mnt/zipfs/nuevo_file.txt (añadir nuevo archivo al zip)
+$ rm /mnt/zipfs/nuevo_file.txt (eliminar un archivo de un zip)
+$ mv /mnt/zipfs/original.txt /mnt/zipfs/nuevo_nombre.txt (renombrar un archivo de un zip)
 
 
 fuser
