@@ -805,6 +805,18 @@ animate
 $ animate vuelo.gif
 
 
+anonip
+Comando útil para anonimizar direcciones IP en registros, enmascarando los últimos bits de direcciones IPv4 e IPv6.
+# anonip -f /var/log/auth.log (procesará todas las direcciones IP en el archivo especificado, enmascarando los últimos bits y anonimizando las direcciones)
+# anonip -f /var/log/auth.log -4 8 (dejar las direcciones IPv4 con los últimos 8 bits enmascarados, como 192.168.1.0)
+# anonip -f /var/log/auth.log -6 32 (enmascarar los últimos 32 bits de las direcciones IPv6)
+# cat /var/log/auth.log | anonip (enmascarar las direcciones IP de la salida del comando cat directamente en la consola)
+# anonip -f /var/log/auth.log -o /var/log/auth_anonimizado.log (anonimizar y guardar en un archivo de salida)
+# anonip -f /var/log/auth.log -v (ver más detalles del proceso mientras se ejecuta)
+Un ejemplo completo sería anonimizar un archivo de registro /var/log/apache2/access.log, enmascarando los últimos 16 bits de las direcciones IPv4 y los últimos 48 bits de las direcciones IPv6, y guardando el resultado en un archivo de salida anonimizando todas las IPs que encuentre:
+# anonip -f /var/log/apache2/access.log -4 16 -6 48 -o /var/log/apache2/access_anonimizado.log -v
+
+
 anon-proxy
 Navegación anónima via proxy. los archivos de configuración en /etc/efault/anon-proxy.
 # /etc/init.d/anon-proxy start (Arrancar el proxy)
