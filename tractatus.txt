@@ -646,6 +646,10 @@ Información sobre los dispositivos alsa.
 $ alsa-info
 
 
+alsa-utils
+[Advanced Linux Sound Architecture]. Modulo del nucleo de Linux que sustituye diferentes controladores de targetas de sonido con un solo dispositivo de controlador el cual tiene la capacidad de controlar diversas targetas. Incluye las siguientes herramientas: alsactl [controles avanzados para controladores de sonido ALSA], alsaloop [crea loopbacks entre dispositivos de captura y reproducción PCM], alsamixer [mezclador de curses], alsaucm [administrador de casos de uso de alsa], amixer [mezclador de línea de comandos], amidi [lee y escribe en puertos RawMIDI de ALSA], aplay [reproducción], arecord [grabación], aplaymidi [reproducción], arecordmidi [grabación de MIDI], aconnect, aseqnet, aseqdump [control de secuenciador MIDI], iecset [establece o descarga bits de estado IEC958] y speakers-test [generador de tonos de prueba de altavoces]
+
+
 alsabat
 Probador de sonido para controlador de tarjeta de sonido alsa.
 $ alsabat (básico)
@@ -692,6 +696,19 @@ Apagar el altavoz interno del pc
 # gedit /etc/modprobe.d/blacklist
 Y añadiremos la linea:
 	blacklist pcspkr
+
+
+amideco
+Herramienta que se utiliza para crear y gestionar proyectos de desarrollo de software en Python
+$ amideco create /project (crear un proyecto)
+Entrar en el directorio y en él:
+$ amideco run (iniciar un servidor local)
+$ amideco install requests (instalar dependencias)
+$ amideco update (actualizar dependencias)
+$ amideco test (ejecutar pruebas)
+$ amideco docs generate (generar documentación)
+$ amideco nfig set ENVIRONMENT_VARIABLE=value (configurar variables de entorno)
+$ amideco cache clear (limpiar caché)
 
 
 amidi
