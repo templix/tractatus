@@ -716,6 +716,18 @@ Relativo a los dispositivos midi.
 $ amidi -l     (listar los dispositivos MIDI de ALSA-utils)
 
 
+amispammer
+Herramienta que se utiliza para analizar archivos de registros de correo electrónico y detectar patrones de comportamiento que puedan indicar actividad de spam o comprobar si una o más direcciones IP o todos los registros de dominios MX aparecen en las listas negras más importantes.
+$ amispammer -f /archivo.log (analizar un archivo de registro de correos)
+$ amispammer -f /archivo.log -t 100 (que marque las direcciones IP que hayan enviado al menos 100 mensajes)
+$ amispammer -f /archivo.log -i 60 (buscará actividad de spam dentro del último período de 60 minutos en los registros)
+$ amispammer -f /archivo.log -o /reporte.txt (generar un reporte detallado en un archivo)
+$ amispammer -f /archivo.log -v (obtener más detalles)
+$ amispammer -f /archivo.log --exclude 192.168.1.1 (ignorar direcciones IP específicas conocidas y confiables)
+Supongamos un ejemplo completo en el que se quiere analizar el archivo /var/log/mail.log para detectar IPs que enviaron más de 50 mensajes en los últimos 120 minutos, guardando el resultado en un archivo de reporte y excluyendo una IP específica:
+$ amispammer -f /var/log/mail.log -t 50 -i 120 -o /var/log/reporte_spam.txt --exclude 203.0.113.5 -v
+
+
 amixer
 Bajar el volumen
 $ amixer sset Master 50%-   (Bajar un 50% del volumen)
