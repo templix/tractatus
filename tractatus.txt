@@ -9381,6 +9381,15 @@ Determina máquinas de una red activas
 # fping -g 192.168.2./24 2> /dev/null | grep alive
 
 
+fpzip
+Utilidad para la compresión sin pérdida y opcionalmente con pérdida de matrices de punto flotante 2D y 3D. fpzip asume datos escalares correlacionados espacialmente, como funciones continuas muestreadas regularmente, y no es adecuado para comprimir secuencias no estructuradas de números de punto flotante.
+$ fpzip -i entrada.dat -o salida.fpzip (forma básica)
+$ fpzip -d comprimido.fpzip -o descomprimido.dat (descomprimir)
+$ fpzip -i entrada.dat -o salida.fpzip -p 4 (comprimir con un nivel de precisión de 4)
+$ fpzip -v salida.fpzip (mostrar información sobre el archivo comprimido)
+$ fpzip -i entrada.dat -o salida.fpzip -H (comprimir archivos muy grandes que no caben  memoria y que se debe incluir la cabecera en el archivo de salida)
+
+
 francine
 Programa de inicio de sesión que se basa en el archivo de configuración /etc/francine.sl. Adicionalmente, para comprobar la autenticación de inicio de sesión se utilizan los archivos del directorio /etc/securetty/. Este programa no acepta ninguna opción.
 # nano /etc/francine.sl
@@ -14692,9 +14701,15 @@ $ lz4 -t file.lz (test de integridad de un archivo comprimido)
 
 
 lzip
-compresor/descompresor de archivos. Formato de salida .lz
-$ lzip archivo.txt (Lo substituye por archivo.txt.lz)
-$ lzip -d archivo.txt.lz (descomprimir)
+Compresor de archivos que utiliza la técnica de compresión LZMA2 y ofrece una alta compresión sin pérdida de datos. Lzip descomprime casi tan rápido como gzip y comprime mejor que bzip2.
+$ lzip archivo.txt (comprimirá el archivo archivo.txt en un archivo llamado archivo.txt.lz)
+$ lzip archivo1.txt archivo2.txt archivo3.txt (Comprimir todos los archivos especificados en archivos comprimidos con sufijo .lz)
+$ echo "linux es sistema genial" | lzip - (comprimir la salida estándar del echo)
+$ unlzip archivo.txt.lz > descompresion.txt (descomprimir)
+$ lzip --test archivo.txt.lz (verificar si el archivo comprimido está intacto)
+$ lzip -I archivo.txt (permitir interactivamente seleccionar qué partes del archivo se comprimen)
+$ lzip -9 archivo.txt (usa el nivel más alto de compresión)
+$ lzip -e archivo.txt (comprimir y eliminar original)
 
 
 lzma
