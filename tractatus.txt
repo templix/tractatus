@@ -886,6 +886,33 @@ Para personalizar la ciudad, traducción y datos concretos para no tener que ent
    ...
 
 
+ant
+Herramienta de automatización para proyectos Java que permite compilar, construir y gestionar dependencias a través de archivos XML llamados build.xml.
+$ ant (ejecutar una tarea Predeterminada definida en el archivo build.xml)
+$ ant compile (si en build.xml existen varias tareas definidas, ejecutar la llamada "compile")
+Un archivo build.xml básico para compilar un proyecto podría verse así:
+   <project name="miProyecto" default="compile" basedir=".">
+       <target name="compile">
+               <mkdir dir="build/classes"/>
+               <javac srcdir="src" destdir="build/classes"/>
+       </target>
+   </project>
+Esto compilará el código Java desde el directorio src y pondrá los archivos .class en build/classes. Para eliminar archivos temporales y carpetas de compilación previas, se puede definir una tarea clean:
+     <target name="clean">
+         <delete dir="build/classes"/>
+     </target>
+Y luego ejecutarla:
+$ ant clean
+Para empaquetar el proyecto en un archivo JAR, se puede agregar una tarea jar:
+     <target name="jar" depends="compile">
+         <mkdir dir="build/jar"/>
+         <jar destfile="build/jar/miProyecto.jar" basedir="build/classes"/>
+     </target>
+Y ejecutarla:
+$ ant jar
+que generará el archivo miProyecto.jar en el directorio build/jar.
+
+
 antiword
 Conversor/lector de archivos .doc
 $ antiword archivo.doc | less (Visualiza un doc)
