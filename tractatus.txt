@@ -863,6 +863,13 @@ ansible-connection es un plugin de conexión interna que, generalmente, no se us
                    server1 ansible_connection=ssh
 
 
+ansilove
+Herramienta útil para convertir archivos de texto en formato ANSI o ASCII a imágenes PNG.
+$ ansilove texto.txt -o text.png (tomar el contenido del archivo input.txt que debe estar en formato ANSI y lo convertirá a una imagen PNG)
+$ ansilove -f cp737 -m ced input.txt -o output.png (con la fuente cp737 y negro sobre gris, con 78 columnas.)
+$ ansilove -i input.txt -o output.png (activar color)
+
+
 ansiweather
 Mostrar información actual de las condiciones meteorológicas, con soporte para colores ANSI y símbolos Unicode. Los datos meteorológicos provienen de OpenWeatherMap
 $ ansiweather -l "Olot,ES" -u metric (forma básica)
