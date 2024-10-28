@@ -823,6 +823,16 @@ Navegación anónima via proxy. los archivos de configuración en /etc/efault/an
 Configurar el navegador con localhost y el puerto 4001
 
 
+anope
+Conjunto de servicios diseñado para facilitar la administración de redes IRC [Internet Relay Chat], proporcionando herramientas para gestionar canales, usuarios y permisos.
+# anope --services (iniciar en modo servicios para una red IRC)
+# anope --debug (ver información detallada del funcionamiento)
+        /msg NickServ REGISTER <password> <email> (registrar el nick actual bajo tu cuenta)
+        /msg ChanServ REGISTER #canal <password> <descripción> (asigna el control del canal especificado)
+        /msg BotServ ASSIGN #canal <botname> (asignar bots a canales y administrar acciones automáticas)
+        /msg OperServ STATS (verificar el estado de la red incluyendo conexiones y actividad reciente)
+
+
 ansi2html
 [colorized-logs]. Pasar textos a html.
 # ansi2html -w </var/log/apache2/access.log >acces.html (con el fondo blanco)
