@@ -843,6 +843,26 @@ ansi2txt
 # ansi2txt </var/log/apache2/access.log >acces.txt
 
 
+ansible
+Sistema de ejecución de tareas remotas, implementación de múltiples nodos y administración de configuración basada en modelos radicalmente simples. Ansible funciona a través de SSH y no requiere que se instale ningún software ni daemon en los nodos remotos. Los módulos de extensión se pueden escribir en cualquier lenguaje y se transfieren a las máquinas administradas automáticamente. Este paquete contiene las colecciones de Ansible: ansible-config, ansible-console, ansible-galaxy, ansible-playbook, ansible-test, ansible-community, ansible-connection, ansible-doc, ansible-inventory, ansible-pull y ansible-vault.
+$ ansible-config list (lista todas las opciones de configuración junto con sus valores predeterminados)
+$ ansible-config dump --only-changed (muestra solo las configuraciones modificadas respecto a los valores predeterminados)
+$ ansible-console -i inventory.yml (abre una consola interactiva con el inventario especificado en inventory.yml, permitiéndo ejecutar comandos directamente)
+$ ansible-galaxy install USER.nginx (instala el rol nginx del usuario USER)
+$ ansible-galaxy list (muestra los roles y colecciones instalados en el sistema)
+$ ansible-playbook playbook.yml --syntax-check (revisa la sintaxis del playbook para asegurar que no haya errores antes de ejecutarlo)
+$ ansible-test sanity (ejecuta pruebas de validación estática sobre los módulos y roles definidos)
+$ ansible-community init project_name (crea la estructura de carpetas estándar para un nuevo proyecto)
+$ ansible-doc apt (muestra la documentación completa del módulo apt)
+$ ansible-doc -l (lista todos los módulos disponibles, con una breve descripción de cada uno)
+$ ansible-inventory -i inventory.yml --list (muestra el inventario en un formato JSON, útil para validar su configuracion)
+$ ansible-pull -U https://github.com/user/repo.git playbook.yml (clona el repositorio especificado de Git y ejecuta playbook.yml en el nodo local
+$ ansible-vault create secrets.yml (crear un archivo secrets.yml cifrado, solicitando una contraseña para protegerlo)
+$ ansible-vault edit secrets.yml (abrir el archivo secrets.yml para editarlo, solicitando la contraseña configurada)
+ansible-connection es un plugin de conexión interna que, generalmente, no se usa directamente sinó que se configura en el archivo de inventario con la linea:
+                   server1 ansible_connection=ssh
+
+
 ansiweather
 Mostrar información actual de las condiciones meteorológicas, con soporte para colores ANSI y símbolos Unicode. Los datos meteorológicos provienen de OpenWeatherMap
 $ ansiweather -l "Olot,ES" -u metric (forma básica)
