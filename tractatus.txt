@@ -1156,6 +1156,19 @@ $ sudo ln -s /home/usuario/.icons /root/.icons
 $ sudo ln -s /home/usuario/.fonts /root/.fonts
 
 
+apcupsd
+Proporciona administración de energía UPS [Uninterruptible Power Supply] a los productos APC, incluidos la mayoría de los modelos de la serie BackUPS (incluido USB), SmartUPS V/S, SmartUPS (NET/RM) y la serie Matrix. Controla y monitorea el estado del UPS y permite que la computadora funcione durante un período de tiempo específico con energía UPS y luego ejecuta un apagado controlado en caso de una falla de energía prolongada.
+# systemctl start apcupsd (activa el monitoreo de energía, manteniendo el UPS en vigilancia para responder ante caídas de voltaje u otros eventos)
+# systemctl stop apcupsd (desactiva el monitoreo, por lo que no se realizarán acciones de respaldo en caso de fallas de energía)
+# apcaccess status (muestra detalles como el nivel de carga de la batería, tiempo estimado de respaldo, voltaje y otros parámetros importantes)
+apcupsd permite configurar el sistema para que se apague automáticamente cuando la batería llegue a un nivel crítico. Esto se define en el archivo de configuración, generalmente ubicado en /etc/apcupsd/apcupsd.conf. Un parámetro clave es MINUTES, que se puede modificar:
+# nano /etc/apcupsd/apcupsd.conf
+Y poner la linea:
+  MINUTES 5
+Que hará que el sistema se apague cuando queden 5 minutos de carga de batería.
+# apcupsd --killpower (probar cómo respondería el sistema ante un corte de energía real)
+
+
 apertium
 [apertium-en-es...] Traductor de archivos de texto a los legunajes especificados.
 $ apertium en-es -u -a file_ingles.txt (Marando las palabras desconocidas con * y las ambiguas con =)
