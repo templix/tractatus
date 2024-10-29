@@ -1208,6 +1208,27 @@ Algunas opciones:
 	-E aeiou9 (Excluyendo letras y números mencionados)
 
 
+apitrace
+es un conjunto de herramientas para depurar aplicaciones y controladores OpenGL. Incluye una herramienta para generar un seguimiento de todas las llamadas OpenGL que realiza una aplicación y una herramienta para reproducir estos seguimientos e inspeccionar la representación y el estado de OpenGL durante la ejecución del programa. Incluye las herramientas eglretrace, glretrace y gltrim
+$ apitrace trace -o aplicacion.trace brave-browser (crea un archivo aplicacion.trace que contiene las llamadas de OpenGL que realiza la aplicación brave-browser)
+$ glretrace aplicacion.trace (ejecuta la traza grabada y muestra visualmente cómo se renderiza en la pantalla)
+            /opt/brave.com/brave/brave
+            Rendered 0 frames in 0.0115168 secs, average of 0 fps
+$ gltrim -o aplicacion_trim.trace aplicacion.trace (elimina llamadas redundantes de aplicacion.trace, generando una traza más optimizada [aplicacion_trim.trace], que es útil para analizar solo los eventos gráficos esenciales)
+$ apitrace dump mi_aplicacion.trace (muestra detalles sobre cada llamada en la traza, lo cual es útil para el análisis de rendimiento y depuración)
+$ apitrace info aplicacion.trace (muestra información de los archivos de traza)
+
+
+apkinfo
+Herramienta que muestra información de metadatos sobre archivos APK de Android tales como información de paquete, versión y nombre.
+$ apkinfo miapp.apk (mostrar información general sobre un archivo)
+$ apkinfo --package miapp.apk (ver solo el nombre del paquete)
+$ apkinfo --version miapp.apk (ver solo la versión)
+$ apkinfo --permissions miapp.apk (ver los permisos solicitados por el paquete)
+$ apkinfo --manifest miapp.apk (ver el contenido del AndroidManifest.xml)
+$ apkinfo --all miapp.apk (obtener una vista completa de la información disponible incluyendo actividades, servicios, componentes, recursos, etc)
+
+
 aplay
 Relacionado con ALSA
 # aplay /usr/share/sounds/alsa/Front_Center.wav  (prueba de alsa)
