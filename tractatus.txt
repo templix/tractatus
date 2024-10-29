@@ -930,6 +930,15 @@ convierte la imagen de entrada, que puede estar en cualquiera de los aproximadam
 $ anytopnm imagen.jpeg > imagen
 
 
+anytun
+Implementación del protocolo de tunelización segura anycast. Utiliza una interfaz de estilo openvpn y permite construir clústeres de VPN redundantes con equilibrio de carga entre servidores. Incluye las herramientas anytun-config, anytun-controld y anytun-showtables.
+# anytun -D -u USER (iniciar un túnel VPN, que se ejecute en primer plano en lugar de convertirse en un demonio [predeterminada] y se ejecuta como USER)
+# anytun --local-port 5000 --remote 192.168.1.1 --remote-port 5001 --shared-secret "clave_compartida" (crea un túnel VPN con puerto local 5000, el remoto 192.168.1.1 en el 5001 y clave compartida para la autenticación)
+# anytun-config --shared-secret "clave" > anytun.conf (genera un archivo de configuración con la clave compartida y guarda el resultado en anytun.conf)
+# anytun-controld --stop --id IP (detiene el túnel identificado con la IP)
+# anytun-showtables (mostrar la configuración actual de rutas y las conexiones activas del túnel)
+
+
 aoeui
 Editor de pantalla muy pequeño y eficiente.
 $ aoeui -r file.txt (abrir solo lectura)
