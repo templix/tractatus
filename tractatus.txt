@@ -1282,6 +1282,17 @@ $ appres tty
 $ appres  XTerm.VT100  xterm.vt100  -1 (listará los recursos de los widgets de la jerarquía xman topBox específicos de la jerarquía [-1])
 
 
+apprise
+Permite enviar notificaciones a más de 70 servicios. Con énfasis en: Apprise API, AWS SES, Telegram, Discord, Slack,amazon SNS, Gotify, Google Chat, Faast, IFTTT, Matrix, Microsoft Teams, etc. Hay un pequeño Administrador de configuración integrado al que se puede acceder opcionalmente a través de su navegador web, lo que le permite crear y guardar tantas configuraciones como desee. Cada configuración se diferencia por una {KEY} única que usted decide.
+$ apprise -t "Título de la Notificación" -b "Este es el mensaje de la notificación" slack://TOKEN_DE_AUTENTICACION/CANAL (envía una notificación a Slack usando el TOKEN_DE_AUTENTICACION y el canal especificado)
+$ apprise -t "Aviso Importante" -b "Este es el mensaje enviado a múltiples servicios" \
+    tgram://TOKEN/CHAT_ID \
+    discord://WEBHOOK_ID/WEBHOOK_TOKEN (enviará el mensaje a ambos servicios de notificación)
+$ apprise -t "Notificación desde archivo" -b "Este mensaje usa una configuración externa" --config archivo_config.yml (configurar varios servicios en un archivo y luego utilizarlo para enviar notificaciones de manera centralizada)
+Nota.- el archivo archivo_config.yml contiene las URL de los servicios configurados
+$ apprise -t "Prueba de Notificación" -b "Este es un mensaje de prueba" -v (muestra información detallada del proceso de envío y si los servicios están configurados correctamente)
+
+
 apropos
 Busca utilidades relacionadas con lo especificado.
 $ apropos jpeg
