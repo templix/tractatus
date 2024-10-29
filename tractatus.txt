@@ -1137,6 +1137,13 @@ $ apache2ctl fullstatus (muestra un informe de estado completo)
 $ apache2ctl status (muestra un breve informe de estado. Similar a la opción fullstatus, excepto que se omite la lista de solicitudes que se están atendiendo actualmente)
 
 
+apacheds
+Servidor de directorios basado en Java que implementa el protocolo LDAP y que resulta útil para la gestión de directorios de red.
+# apacheds start default (inicia la instancia de ApacheDS llamada default que puede reemplazarse con cualquier otra instancia configurada)
+# apacheds stop default (detener una instancia específica de ApacheDS)
+# apacheds status default (indica si la instancia "default" está activa o no)
+
+
 apachetop
 Comando top [ver] especifico para servidores apache y lanzado al estilo de tail [ver]
 # apachetop -r 10 -f /var/log/apache2/access.log (Monitorear en tiempo real y refrescar datos cada 10 segundos)
