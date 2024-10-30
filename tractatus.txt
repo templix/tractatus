@@ -1654,6 +1654,17 @@ Herramienta basada en FUSE que permite explorar los paquetes fuente de Debian co
 # umount /mnt/aptfs (desmontar el sistema de archivos aptfs)
 
 
+aptly
+Gestión de repositorios de paquetes Debian en local.
+# aptly repo create -distribution=bullseye -component=main mi-repo (crea un repositorio local mi-repo con la distribución bullseye y el componente main)
+# aptly repo add mi-repo /paquete.deb (añadir paquetes .deb al repositorio mi-repo)
+# aptly publish repo -architectures=amd64 i-repo (hace accesible un servidor web local en la ruta /aptly/public)
+# aptly mirror create -architectures=amd64 debian-mirror http://deb.debian.org/debian bullseye main (sincronizar aptly con repositorios externos, por ejemplo, el repositorio principal de Debian)
+# aptly mirror update debian-mirror (actualizar un espejo creado previamente)
+# aptly repo remove mi-repo nombre-del-paquete (eliminar un paquete específico del repositorio)
+# aptly snapshot export tar mi-repo /exportada/mi-repo.tar (exportar un repositorio a un archivo tar para distribuirlo)
+
+
 ar
 Crea, modifica y extrae archivos
 $ ar crv libfoo.a bill.o fred.o (Añade librerias objeto a un archivo de librería estática)
