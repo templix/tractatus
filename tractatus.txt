@@ -1296,8 +1296,17 @@ $ apprise -t "Prueba de Notificación" -b "Este es un mensaje de prueba" -v (mue
 appstream
 Permite obtener información detallada de componentes de software. El proyecto AppStream proporciona facilidades para acceder y transformar fácilmente estos metadatos, así como algunos servicios adicionales para permitir la creación de centros de software con numerosas funciones y aplicaciones similares. Este paquete proporciona herramientas para generar, mantener y consultar el conjunto de datos de AppStream del software instalado y disponible, y permite la integración con el administrador de paquetes APT.
 $ appstreamcli search firefox (buscar información sobre un paquete)
+$ appstreamcli search firefox --details (salida más detallada sobre firefox)
 # appstreamcli refresh (refescar la memoria de los metadatos actuales)
 $ appstreamcli status (información del estado de todos los metadatos disponibles)
+
+
+appstream-util
+# appstream-util add-language es /mi_app.appdata.xml (con un archivo AppStream [.appdata.xml] agregar una nueva traducción de idioma [es] en el archivo especificado)
+# appstream-util appdata-to-news /mi_app.appdata.xml (genera un archivo de noticias a partir de las versiones y las notas especificadas en el archivo AppStream)
+# appstream-util dump /mi_app.appdata.xml (desglosa la estructura del archivo, mostrando campos como nombre, descripción, licencias y versiones)
+# appstream-util validate /mi_app.appdata.xml (muestra advertencias o errores si el archivo no cumple con las especificaciones necesarias)
+# appstream-util list-languages /mi_app.appdata.xml (lista los idiomas integrados en el archivo)
 
 
 apropos
