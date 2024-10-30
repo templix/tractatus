@@ -1665,6 +1665,35 @@ Gestión de repositorios de paquetes Debian en local.
 # aptly snapshot export tar mi-repo /exportada/mi-repo.tar (exportar un repositorio a un archivo tar para distribuirlo)
 
 
+aptly-publisher
+Herramienta que complementa a aptly para automatizar la publicación y organización de repositorios Debian en entornos de producción.  Primero configurar un archivo de configuración básico para definir cómo se gestionarán los repositorios.
+# nano config.yml
+Y añadir las lineas:
+         rootDir: /path/to/aptly/root
+         publishEndpoints:
+            myRepo:
+                distribution: bullseye
+                components:
+                      - main
+                architectures:
+                      - amd64
+         cleanupOldPublications: true
+Este archivo define un punto de publicación para bullseye con el componente main y arquitectura amd64. La última linea es para eliminar publicaciones antiguas automaticamente.
+# aptly-publisher -config=config.yml publish (publicar los paquetes del repositorio o actualizar un repositorio publicado para reflejar nuevos cambios)
+Si se pretende publicar múltiples repositorios, en el archivo config.yml incluir las siguientes lineas:
+      publishEndpoints:
+        repo1:
+                distribution: bullseye
+                components: [main]
+                architectures: [amd64]
+        repo2:
+                distribution: buster
+                components: [main]
+                architectures: [i386]
+Con esta configuración, se puede gestionar y publicar los dos repositorios [repo1 y repo2] con un solo comando:
+# aptly-publisher -config=config.yml publish
+
+
 ar
 Crea, modifica y extrae archivos
 $ ar crv libfoo.a bill.o fred.o (Añade librerias objeto a un archivo de librería estática)
