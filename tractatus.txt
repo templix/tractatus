@@ -1293,6 +1293,13 @@ Nota.- el archivo archivo_config.yml contiene las URL de los servicios configura
 $ apprise -t "Prueba de Notificación" -b "Este es un mensaje de prueba" -v (muestra información detallada del proceso de envío y si los servicios están configurados correctamente)
 
 
+appstream
+Permite obtener información detallada de componentes de software. El proyecto AppStream proporciona facilidades para acceder y transformar fácilmente estos metadatos, así como algunos servicios adicionales para permitir la creación de centros de software con numerosas funciones y aplicaciones similares. Este paquete proporciona herramientas para generar, mantener y consultar el conjunto de datos de AppStream del software instalado y disponible, y permite la integración con el administrador de paquetes APT.
+$ appstreamcli search firefox (buscar información sobre un paquete)
+# appstreamcli refresh (refescar la memoria de los metadatos actuales)
+$ appstreamcli status (información del estado de todos los metadatos disponibles)
+
+
 apropos
 Busca utilidades relacionadas con lo especificado.
 $ apropos jpeg
