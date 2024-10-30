@@ -1642,6 +1642,18 @@ Herramienta en sistemas basados en Debian diseñada para trabajar con el código
 # apt-src diff (Este comando creará un archivo de parche con las diferencias entre la versión original y los cambios realizados por ti)
 
 
+aptfs
+Herramienta basada en FUSE que permite explorar los paquetes fuente de Debian como si fueran archivos en un sistema de archivos. Esto facilita el acceso a los archivos fuente de los paquetes directamente desde la estructura de directorios, sin necesidad de descargarlos y extraerlos manualmente.
+# mkdir /mnt/aptfs (crear el directorio)
+# aptfs /mnt/aptfs (montar el sistema de archivos aptfs en el directorio /mnt/aptfs, permitiendo navegar por los paquetes fuente)
+        $ cd /mnt/aptfs
+        $ ls (lista de directorios, cada uno representando un paquete disponible)
+        $ cd /mnt/aptfs/coreutils
+        $ ls (ver todos los archivos fuente del paquete coreutils disponibles en ese directorio)
+        $ find /mnt/aptfs/coreutils -name "archivo.c" (buscar dentro del sistema de archivos para encontrar el archivo archivo.c)
+# umount /mnt/aptfs (desmontar el sistema de archivos aptfs)
+
+
 ar
 Crea, modifica y extrae archivos
 $ ar crv libfoo.a bill.o fred.o (Añade librerias objeto a un archivo de librería estática)
