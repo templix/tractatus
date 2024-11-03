@@ -11526,10 +11526,14 @@ $ history -d 125 (Eliminar la orden 125. útil si se escribió la contraseña y 
 $ history -d 100-125 (Eliminar las ordenes de la 100 a la 125)
 $ history | awk '{print $2}' | sort | uniq -c | sort -rn | head -10 (lista los 10 comandos más usados y numero de veces)
 $ !354  (ejecutará el comando 354 del listado de history)
+$ !354:p (lo mostrará sin ejecutarlo)
+$ !ls (ejecutará el último "ls" del historial)
+$ !ls:p (lo mostrará sin ejecutar)
 $ history | grep cp  (Buscar en el historial las veces que se ha lanzado “cp”)
 $ history -a (Guardar el historial sin cerrar la sesión)
 $ echo $HISTCMD (número de comandos registrados en history y este tambien queda reflejado en history)
 $ history -d $HISTCMD && ip a (ejecuta "ip a" pero no se muestra en el historial)
+$ ip a # un comentario (en history aparecerá "ip a # un comentario")
 
 
 histretch
