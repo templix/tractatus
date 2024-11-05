@@ -13643,6 +13643,16 @@ Ctrl + Mayus + n (Entrar en modo privado)
 Ctrl + d (Entrar pagina en los marcadores)
 
 
+kpsewhich
+Herramienta utilizada en sistemas TeX [como LaTeX] para localizar archivos específicos, como una clase [.cls] o un paquete [.sty] dentro del árbol de directorios de TeX y expandir rutas de manera independiente en el sistema.
+$ kpsewhich beamercolorthemefly.sty (devolverá la ruta completa al archivo especificado en el sistema)
+$ kpsewhich cmr10.tfm (encontrará el archivo cmr10.tfm, que pertenece a la familia Computer Modern Roman)
+$ kpsewhich --expand-var '$TEXMF' (mostrará el valor expandido de la variable $TEXMF, que apunta al directorio principal de archivos de TeX)
+$ kpsewhich texmf.cnf (devuelve la ubicación del archivo de configuración texmf.cnf que contiene variables y rutas)
+$ kpsewhich example.pdf (ver dónde se ha generado un archivo de salida [como un .pdf o .log])
+$ kpsewhich --format='TeX system documentation' file.txt (limitar la búsqueda a tipos específicos de archivos. Por ejemplo, para buscar solo archivos de ayuda [.doc o .txt])
+
+
 kvm-ok
 [check-bios-nx]. Comprobar si la CPU  tiene soporte para extensiones KVM.
 # kvm-ok
