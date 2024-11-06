@@ -13313,13 +13313,18 @@ Hacer que el demonio syslog funcione con journal
 
 jp2a
 Convertir imagenes jpeg a ascii.
+$ jp2a imagen.jpg (forma básica)
+$ jp2a imagen1.jpg imagen2.jpg imagen3.jpg (convertir varias imágenes)
+$ jp2a imagen.jpg --output=imagen_ascii (redirigir la salida a un archivo)
 $ jp2a --background=light -b --colors imagen.jpg  (Sin fondo, con borde y color)
-$ jp2a --color --html --fill --background=dark entrada.jpg –output=salida.html (con un html de salida)
-$ jp2a URL/imagen.jpg  (Con una URL de entrada)
-Algunas opciones:
-	--size=40x25   (Especificando medidas)
-	--html-title=Imagen  (con un titulo)
-	--html-no-bold (Sin caracteres en negrita)
+$ jp2a --color --html --fill --html-title=Imagen --background=dark entrada.jpg –output=salida.html (con un html de salida lcon título)
+$ jp2a --html-no-bold URL/imagen.jpg  (Con una URL de entrada y sin caracteres en negrita)
+$ jp2a --height=30 imagen.jpg (con una altura de 30 filas)
+$ jp2a --weight=30 imagen.jpg (con una anchura de 30 filas)
+$ jp2a --height=30 --width=50 imagen.jpg (con una altura de 30 y una anchura de 50)
+$ jp2a --size=50x30 --border imagen.jpg (con borde)
+$ jp2a --background=dark imagen.jpg (con fondo oscuro)
+$ jp2a --background=light imagen.jpg (con fondo claro)
 
 
 jpeginfo
