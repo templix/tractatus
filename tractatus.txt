@@ -1717,6 +1717,15 @@ Muestra la arquitectura del pc.
 $ arch
 
 
+arch-install-scripts
+Están diseñados para facilitar la instalación de sistemas Arch Linux, pero también pueden resultar útiles en sistemas Debian para gestionar particiones, formatear discos, o preparar sistemas base. Contiene los paquetes: arch-chroot,  genfstab y pacstrap
+# pacstrap /mnt base (instala el sistema base de Arch Linux en /mnt)
+# mount-chroot /mnt (monta las particiones y dispositivos necesarios en /mnt)
+# genfstab -U /mnt >> /mnt/etc/fstab (detecta automáticamente las particiones montadas y las configura en el archivo fstab del sistema en /mnt)
+# arch-chroot /mnt (permite operar dentro del entorno chroot de manera similar al comando chroot de Debian)
+# arch-chroot /mnt pacman -S vim (instala vim en el entorno de Arch)
+
+
 arch-test
 Detectar las arquitecturas soportadas por un pc.
 $ arch-test
