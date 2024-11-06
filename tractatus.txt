@@ -1702,6 +1702,16 @@ $ ar x finalterm_0.1-0~64~saucy1_amd64.deb (Extraer los 3 archivos de un paquete
 $ ar p finalterm_0.1-0~64~saucy1_amd64.deb data.tar.gz | tar xz (Extraer y descomprimir uno de los archivos de un paquete deb)
 
 
+arcanist
+Herramienta para interactuar  con Phabricator, colección de aplicaciones web para el desarrollo de software, que desde el 1 de junio de 2021, ya no recibe mantenimiento activo. La herramienta permite realizar operaciones relacionadas con el flujo de trabajo de desarrollo de software, como enviar revisiones de código, actualizar revisiones y ejecutar pruebas.
+$ arc diff (escanear los cambios en una rama actual y generar una revisión de código, que se sube al servidor de Phabricator y abrirá una interfaz interactiva para agregar detalles, etiquetas, etc)
+$ arc diff --update D1234 (con una revisión creada y se desea actualizar con nuevos cambios adicionales a esa revisión específica)
+$ arc patch D1234 (descarga y aplica los cambios de la revisión indicada (D1234) al repositorio local)
+$ arc unit (ejecuta conjunto de pruebas especificado en la configuración de Phabricator para asegurarse de que los cambios no rompan nada antes de enviarlos)
+$ arc lint (analiza el código y muestra recomendaciones de estilo, errores potenciales y advertencias)
+$ arc help diff (mostrar auyda para un comando especifico)
+
+
 arch
 Muestra la arquitectura del pc.
 $ arch
