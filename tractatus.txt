@@ -1729,6 +1729,15 @@ El resultado es un paquete con el nombre arandr-0.1.9-1.pkg.tar.gz que puede ins
 # pacman -U arandr-0.1.9-1.pkg.tar.gz
 
 
+archivemount
+Sistema de archivos basado en FUSE [Filesystem in Userspace] que permite montar archivos comprimidos tales como .zip, .tar, .rar, etc. como si fueran sistemas de archivos normales pudiendo acceder a su contenido sin descomprimirlos. Su propósito es montar archivos en un punto de montaje desde donde se puedan leer o escribir como en cualquier otro sistema de archivos.
+# archivemount archivo.zip mnt/ (montar un archivo .zip en la carpeta /mnt)
+# archivemount -o ro archivo.tar.gz mnt/ (montar un .tar.gz de solo lectura)
+# fusermount -u mnt/ (desmontar un archivo como: umount mnt/)
+# archivemount archivo.iso mnt/ (montar una .iso)
+# archivemount -o attr_timeout=60 archivo.zip mnt/ (mantener en caché la información de los archivos, muy útil en archivos grandes)
+
+
 arecord
 [alsa-utils]. Grabación de audio. Graba directamente de la tarjeta de sonido sin tener conectado los altavoces ni micro.
 $ arecord -l (Listado de dispositivos)
