@@ -1722,6 +1722,7 @@ El resultado es un paquete con el nombre arandr-0.1.9-1.pkg.tar.gz que puede ins
 arecord
 [alsa-utils]. Grabación de audio. Graba directamente de la tarjeta de sonido sin tener conectado los altavoces ni micro.
 $ arecord -l (Listado de dispositivos)
+$ arecord -f cd -d 10 --device="hw:0,0" test.wav (seleccionar un dispositivo de entrada de audio de la lista, grabar un audio de 10 segundos y guardar en test.wav)
 $ arecord archivo.mp3 (Modo básico)
 $ arecord -t wav -f cd -d 15 archivo.wav (Tipo wav, formato cd, duración de la grabación 15 segundos y nombre con el que se guardará)
 
