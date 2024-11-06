@@ -1293,6 +1293,24 @@ Nota.- el archivo archivo_config.yml contiene las URL de los servicios configura
 $ apprise -t "Prueba de Notificación" -b "Este es un mensaje de prueba" -v (muestra información detallada del proceso de envío y si los servicios están configurados correctamente)
 
 
+approx
+Proxy de paquetes para sistemas Debian que ayuda a almacenar en caché los paquetes .deb, lo cual ahorra ancho de banda y reduce los tiempos de descarga al instalar o actualizar en múltiples máquinas dentro de una red local.  Cada paquete se descarga desde un sitio remoto solo una vez, independientemente de cuántos clientes locales lo instalen. Las ubicaciones de los repositorios solo deben cambiarse en el archivo de configuración de approx, no en el archivo /etc/apt/sources.list de cada cliente. Primero configurar el servidor approx:
+# nano /etc/approx/approx.conf
+Y añadir las lineas deseadas. Cada línea en este archivo indica un alias para un repositorio.
+         debian   http://deb.debian.org/debian
+         security http://security.debian.org/debian-security
+         max_age 30d
+En este caso, debian y security son alias que apuntan a los repositorios oficiales. approx almacenará en caché los paquetes que se descarguen desde estos alias. La linea "max_age" es para hacer que los paquetes caduquen en 30 días.
+# systemctl start approx (iniciar el servicio)
+# systemctl status approx (confirmar si está activo)
+Después en cada máquina cliente de la red, se modifica el archivo /etc/apt/sources.list para que apunte al servidor approx. Por ejemplo si el servidor proxy tiene la IP 192.168.1.100, el archivo podría verse así:
+        deb http://192.168.1.100:9999/debian stable main
+        deb http://192.168.1.100:9999/security stable/updates main
+Ahora, cada vez que se descarguen paquetes desde este cliente, approx almacenará los paquetes en caché en el servidor.
+# approx-gc (elimina los paquetes que ya no son necesarios)
+# tail -f /var/log/approx.log (ver los registros de actividad)
+
+
 appstream
 Permite obtener información detallada de componentes de software. El proyecto AppStream proporciona facilidades para acceder y transformar fácilmente estos metadatos, así como algunos servicios adicionales para permitir la creación de centros de software con numerosas funciones y aplicaciones similares. Este paquete proporciona herramientas para generar, mantener y consultar el conjunto de datos de AppStream del software instalado y disponible, y permite la integración con el administrador de paquetes APT.
 $ appstreamcli search firefox (buscar información sobre un paquete)
