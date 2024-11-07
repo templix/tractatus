@@ -1948,6 +1948,23 @@ $ ¾ (ctrl-shift-u be intro)
 $ æ (ctrl-shift-u e6 intro)
 
 
+ascii2binary
+lee la entrada que consiste en números ascii o hexadecimales separados por espacios y produce como salida los equivalentes binarios. Incluye el comando binary2ascii que lee la entrada que consiste en números binarios y los convierte a su representación ascii o hexadecimal.
+$ echo "65 66 67" | ascii2binary (65 66 67 son los valores ASCII de las letras A, B y C)
+$ echo "41 42 43" | ascii2binary -b h (41 42 43 representan en hexadecimal las letras A, B y C)
+$ echo "72 101 108 108 111" | ascii2binary (toma la secuencia de números ASCII de la palabra "Hello")
+$ echo "150 151" | ascii2binary -b 8 (que cada número ASCII se convierta a una salida binaria de 8 bits)
+
+
+asciiart
+Convertir imágenes en arte ASCII.
+$ asciiart -i imagen.jpg -o salida.txt (tomar una imagen, convertirla a ascii y guardarla en un archivo)
+$ asciiart -i imagen.jpg -o salida.txt -w 100 (establece el ancho de la imagen ASCII en 100 caracteres)
+$ asciiart -i imagen.jpg -o salida.txt --invert (invierte los colores)
+$ asciiart -i imagen.jpg -o salida.txt --grayscale (se genera utilizando tonos de gris)
+$ asciiart -i imagen.jpg -o salida.txt -c " .:-=+*%@#" (especifica una lista de caracteres a usar, de menos a más densidad)
+
+
 asciidoc
 Es un formato de documento de texto para escribir artículos, libros, manuales y páginas de manual de UNIX. Los archivos AsciiDoc se pueden traducir a HTML [con o sin hojas de estilo], DocBook [artículos, libros y documentos] y LinuxDoc usando el comando asciidoc. Se escribe un documento AsciiDoc de la misma manera que se escribiría un documento de texto normal, no hay etiquetas de marcado ni notaciones de formato extrañas. Los archivos AsciiDoc están diseñados para verse, editarse e imprimirse directamente o traducirse a otros formatos de presentación.
 $ asciidoc file.txt
