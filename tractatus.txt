@@ -294,6 +294,14 @@ $ watch acpi -V (en tiempo real)
 $ cat /proc/acpi/battery/BAT0/info (Muestra varios datos, los más importantes: design capacity y last full capacity. La diferencia entra ambas cantidades es la capacidad que ha perdido la bateria)
 
 
+acpi_fakekey
+Se usa para enviar eventos de teclas específicas al sistema, lo cual puede ser útil para simular pulsaciones de teclas en casos donde un script o aplicación necesite activar ciertas funciones. Este comando suele estar presente en sistemas Linux con soporte ACPI y requiere privilegios de superusuario para ejecutarse.
+# acpi_fakekey 114 (simular la tecla de bajar volumen)
+# acpi_fakekey 224 (simular la tecla de reducir el brillo)
+# acpi_fakekey 99 (simula la tecla ImprPant)
+Nota.- Para ver los códigos de las teclas puede hacerse con la aplicación showkey [ver]
+
+
 acpid
 Demonio que gestiona eventos de ACPI [Advanced Configuration and Power Interface] relacionados con la energía y el hardware del sistema, como estado de la batería, conexiones de corriente, botón de encendido y cierre de la tapa en portátiles.
 # systemctl status acpid (comprobar si está activo)
