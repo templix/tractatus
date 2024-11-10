@@ -19210,6 +19210,14 @@ $ p11tool --list-all-certs (todos los certificados disponibles en un código)
 $ p11tool --list-all-privkeys (las claves privadas disponibles en un código)
 
 
+paccache
+[pacman-contrib]. Limpiar caché de paquetes en Manjaro.
+# paccache -r (eliminar versiones antiguas y mantener solo la versión más reciente de cada paquete)
+# paccache -r -k 2 (mantener las dos versiones más recientes de cada paquete)
+# paccache -c -r (simular limpieza sin eliminar nada)
+# paccache -r -k 1 --keep-uninstalled (eliminar caché de paquetes no instalados)
+
+
 pacdiffviewer
 En Arch, busca archivos de configuración nuevos y obsoletos [pacnew, pacsave] para gestionarlos [eliminarlos, reemplazarlos..]
 
