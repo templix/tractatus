@@ -2043,6 +2043,29 @@ Opciones:
 	-cr blue (Color del cursor)
 
 
+atfs
+Sistema de almacenamiento de archivos que permite gestionar múltiples versiones. Lo hace sin necesidad de realizar modificaciones en el núcleo y sin imponer ninguna restricción a las aplicaciones del sistema de archivos existentes. Es parte de hapeTools, un sistema de gestión de configuración de software.
+$ vfcreate nombre_archivo (crea una primera versión del archivo en el sistema de versiones)
+$ vflist nombre_archivo (muestra todas las versiones del archivo en el repositorio ATFS)
+$ vfget nombre_archivo -r numero_versión -o nombre_archivo_salida (archivo y versión que se desea recuperar y nombre que tendrá el archivo descargado)
+$ vfdelete nombre_archivo -r numero_versión (elimina la versión específica indicada por numero_versión)
+$ vfdiff nombre_archivo -r version1 -R version2 (ver las diferencias entre dos versiones de un archivo)
+$ vflock nombre_archivo (bloquear una versión de un archivo)
+$ vfunlock nombre_archivo (desbloquear un archivo)
+
+
+atftp
+Implementación del protocolo trivial de transferencia de archivos [Trivial File Transfer Protocol (TFTP)] que se usa para transferir archivos entre sistemas. Este protocolo es común en redes locales y útil para tareas de configuración de red y despliegue de sistemas operativos en equipos sin disco.
+$ atftp --get --remote-file config.txt --local-file config_local.txt 192.168.1.10 (conectar con el servidor 192.168.1.10 y descargar config.txt, guardándolo como config_local.txt en el sistema local)
+$ atftp --put --remote-file backup.cfg --local-file backup.cfg 192.168.1.10 (carga el archivo backup.cfg desde tu equipo al servidor 192.168.1.10)
+$ atftp 192.168.1.10 (conectarse al servidor y abrir una interfaz interactiva)
+  tftp> get archivo.txt (descargar archivo)
+  tftp> put nuevo_archivo.cfg (cargar archivo)
+  tftp> quit (salir)
+$ atftp --get --mode octet --remote-file firmware.bin --local-file firmware_local.bin 192.168.1.10 (--mode octet asegura la transferencia en modo binario)
+$ atftp --get --remote-file config.txt --local-file config_local.txt --port 8069 192.168.1.10 (descargar config.txt desde el puerto 8069 en el servidor 192.168.1.10)
+
+
 atop
 Monitor interactivo para ver la carga del sistema. Muestra la ocupación de los recursos de la CPU, memoria, disco y red. Incluye los ejecutables atopcat, atopconvert, atopsar y atopacctd. Pulsando las mismas letras en la pantalla de atop activa, se modifican los mismos parámetros de visualización.
 $ atop -s 5 -a -c (cada 5 segundos actualización. Por defecto 10 y solo los procesos activos y uno por linea)
@@ -11818,17 +11841,6 @@ Se usa para manipular los archivos de formato DBM que se usan para almacenar nom
 # htdbm -c /etc/apache2/.htdbm pepe (pedira contraseña y con firmación y creará el archivo .htdbm encriptado)
 # htdbm /etc/apache2/.htdbm pepe (pide la nueva contraseña y confirmación de "pepe")
 # htdbm -x /etc/apache2/.htdbm pepe (suprime al usuario "pepe"))
-
-
-atfs
-Sistema de almacenamiento de archivos que permite gestionar múltiples versiones. Lo hace sin necesidad de realizar modificaciones en el núcleo y sin imponer ninguna restricción a las aplicaciones del sistema de archivos existentes. Es parte de hapeTools, un sistema de gestión de configuración de software.
-$ vfcreate nombre_archivo (crea una primera versión del archivo en el sistema de versiones)
-$ vflist nombre_archivo (muestra todas las versiones del archivo en el repositorio ATFS)
-$ vfget nombre_archivo -r numero_versión -o nombre_archivo_salida (archivo y versión que se desea recuperar y nombre que tendrá el archivo descargado)
-$ vfdelete nombre_archivo -r numero_versión (elimina la versión específica indicada por numero_versión)
-$ vfdiff nombre_archivo -r version1 -R version2 (ver las diferencias entre dos versiones de un archivo)
-$ vflock nombre_archivo (bloquear una versión de un archivo)
-$ vfunlock nombre_archivo (desbloquear un archivo)
 
 
 html
