@@ -11820,6 +11820,17 @@ Se usa para manipular los archivos de formato DBM que se usan para almacenar nom
 # htdbm -x /etc/apache2/.htdbm pepe (suprime al usuario "pepe"))
 
 
+atfs
+Sistema de almacenamiento de archivos que permite gestionar múltiples versiones. Lo hace sin necesidad de realizar modificaciones en el núcleo y sin imponer ninguna restricción a las aplicaciones del sistema de archivos existentes. Es parte de hapeTools, un sistema de gestión de configuración de software.
+$ vfcreate nombre_archivo (crea una primera versión del archivo en el sistema de versiones)
+$ vflist nombre_archivo (muestra todas las versiones del archivo en el repositorio ATFS)
+$ vfget nombre_archivo -r numero_versión -o nombre_archivo_salida (archivo y versión que se desea recuperar y nombre que tendrá el archivo descargado)
+$ vfdelete nombre_archivo -r numero_versión (elimina la versión específica indicada por numero_versión)
+$ vfdiff nombre_archivo -r version1 -R version2 (ver las diferencias entre dos versiones de un archivo)
+$ vflock nombre_archivo (bloquear una versión de un archivo)
+$ vfunlock nombre_archivo (desbloquear un archivo)
+
+
 html
 Lenguaje de marcado predominante en la elaboración de páginas web.
 Las etiquetas básicas de HTML de obligada presencia en todo documento son:
