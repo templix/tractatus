@@ -2066,6 +2066,19 @@ $ atftp --get --mode octet --remote-file firmware.bin --local-file firmware_loca
 $ atftp --get --remote-file config.txt --local-file config_local.txt --port 8069 192.168.1.10 (descargar config.txt desde el puerto 8069 en el servidor 192.168.1.10)
 
 
+atheme-services
+Conjunto de servicios de IRC que facilita la gestión de redes al ofrecer herramientas para la administración de canales, usuarios y permisos. El núcleo de atheme-services es minimalista y solo ofrece la funcionalidad básica.
+$ atheme-services (iniciar y cargar la configuración predeterminada del archivo atheme.conf)
+$ atheme-console (conectar a la consola de administración)
+  /msg NickServ REGISTER <contraseña> <email> (solicitud al servicio NickServ para registrar un nuevo usuario con la contraseña y correo especificados)
+  /msg ChanServ REGISTER #canal (registra #canal y lo asocia con el usuario, quien podrá administrar los permisos y configuraciones del canal)
+  /msg ChanServ FLAGS #canal <usuario> +o (da al usuario permisos de operador [+o] en #canal)
+$ atheme-console set password <usuario> <nueva-contraseña> (cambia la contraseña del usuario)
+$ atheme-console suspend <usuario> "Razón de la suspensión" (suspender la cuenta de un usuario y la razón)
+$ atheme-checkconf (revisar el archivo de configuración atheme.conf en busca de errores)
+$ atheme-services restart (reiniciar servicios)
+
+
 atop
 Monitor interactivo para ver la carga del sistema. Muestra la ocupación de los recursos de la CPU, memoria, disco y red. Incluye los ejecutables atopcat, atopconvert, atopsar y atopacctd. Pulsando las mismas letras en la pantalla de atop activa, se modifican los mismos parámetros de visualización.
 $ atop -s 5 -a -c (cada 5 segundos actualización. Por defecto 10 y solo los procesos activos y uno por linea)
