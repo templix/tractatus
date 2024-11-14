@@ -11866,6 +11866,24 @@ Comando con el que definimos usuario y contraseñas para el servidor apache.
 $ htpasswd -c /home/USER/public_html/.htpasswd USUARIO (Creando el archivo  .htpasswd en la ruta especificada con los datos de usuario)
 
 
+httest
+Suite para realizar pruebas HTTP personalizadas. herramienta basada en scripts para probar y evaluar comparativamente aplicaciones web, servidores web, servidores proxy y navegadores web. httest puede emular clientes y servidores incluso en el mismo script de prueba. La emulación de servidores es una característica única, muy útil para probar servidores proxy, navegadores web y navegadores y clientes HTTP. Incluye las herramientas htntlm, htproxy y htremote.
+$ httest -T "GET / HTTP/1.1\r\nHost: example.com\r\n\r\n" (envía una solicitud GET a example.com y muestra la respuesta del servidor)
+$ httest -T "GET /secure HTTP/1.1\r\nAuthorization: Basic <base64-encoded-credentials>\r\n\r\n" (solicitud GET autentificada [con credenciales en formato Base64] para acceder a una ruta protegida en el servidor)
+Definir una serie de pruebas en un script con la ejecución más estructurada:
+$ cat prueba.hts
+    cat <<EOF > prueba.hts
+    GET / HTTP/1.1
+    Host: example.com
+    \n
+    EOF
+    httest prueba.hts
+$ htntlm -u USER -p PASSW -d http://example.com/secure (intenta autentificarse usando NTLM con las credenciales proporcionadas para acceder a una URL protegida)
+$ htproxy -P http://proxy.example.com:8080 -T "GET http://example.com HTTP/1.1\r\nHost: example.com\r\n\r\n" (envía la solicitud HTTP a través de proxy.example.com en el puerto 8080)
+$ htproxy -P http://proxy.example.com:8080 -T "GET http://example.com HTTP/1.1\r\nHost: example.com\r\nProxy-Authorization: Basic <encoded_credentials>\r\n\r\n" (solicitud a través de proxy con autenticación básica)
+$ htremote -H remote.example.com -u usuario -p contraseña -s prueba.hts (envía el archivo prueba.hts para que se ejecute en remote.example.com usando autenticación y muestra los resultados)
+
+
 httpd
 Servicio de protocolo de transferencia de apache
 $ httpd -l  (visualizar los módulos activos de apache)
@@ -25196,6 +25214,19 @@ Analiza la secuencia de arranque en sistemas basados en systemd (Ver systemctl)
 # systemd-analyze critical-chain (ver cuellos de botella en el arranque)
 # systemd-analyze plot > archivo.svg (mostrar un gráfico con los tiempos del arranque)
 # systemd-analyze dump (volcar todo el arranque)
+
+
+systemd-resolved
+Herramienta para gestionar y consultar la configuración del resolver DNS en sistemas que usan systemd. La instalación de este paquete automáticamente sobreescribe /etc/resolv.conf y cambia para ser administrado por systemd-resolved. Incluye las herramientas resolvconf [herramienta principal para consultar y modificar la configuración DNS en tiempo real en un sistema que utiliza systemd-resolved] y resolvectl [gestionar dinámicamente el archivo /etc/resolv.conf agregando o eliminando servidores DNS].
+$ resolvectl status (muestra una visión general de la configuración de DNS y resolución de nombres, incluyendo los servidores DNS configurados, los dominios de búsqueda y el modo de resolución)
+$ resolvectl query example.com (devuelve la dirección IP asociada con example.com)
+$ resolvectl dns eth0 8.8.8.8 1.1.1.1 (asigna los servidores DNS 8.8.8.8 y 1.1.1.1 a la interfaz eth0)
+$ resolvectl revert eth0 (elimina cualquier configuración DNS personalizada en la interfaz eth0, volviendo a la configuración predeterminada)
+$ resolvectl domain eth0 example.com (configura example.com como el dominio de búsqueda predeterminado para la interfaz eth0)
+# echo "nameserver 8.8.8.8" | resolvconf -a eth0 (agregar 8.8.8.8 como servidor DNS para la interfaz eth0 en /etc/resolv.conf)
+# resolvconf -d eth0 (elimina cualquier configuración DNS específica de la interfaz eth0)
+Para verificar el contenido de resolv.conf:
+# cat /etc/resolv.conf
 
 
 systune
