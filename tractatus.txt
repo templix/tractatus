@@ -11070,15 +11070,19 @@ $ qrterminal http://github.com
 
 
 grub
-Para restituir un gestor de arranque
-# grub
-	grub>
-	grub> find /boot/grub/stage1    (saber los grubs que tenemos en el PC)
-	grub> root (hd0,1)     (escogemos el que queremos instalar)
-	grub> setup (hd0)     (y donde lo queremos instalar)
-	grub> quit                 (salir)
+Gestor de arranque de sistemas operativos del pc.
+# update-grub (reconfigurar grub)
 # grub-install --root-directory=/media/floppy fd0 (crear un disquete de arranque)
 # grub-install --root-directory=/mnt/sda1 --recheck /dev/sda (indica el directorio donde procede grub, parecido al comando anterior)
+1.- Si grub no ve algún sistema operativo del pc.
+# nano /etc/default/grub
+Asegurarse que está decomentada la siguiente linea:
+           GRUB_DISABLE_OS_PROBER=false
+Y luego:
+# apt install os-prober (si no está instalado)
+# os-prober (detectar los sitemas operativos del pc)
+# grub-mkconfig -o /boot/grub/grub.cfg (entrarlos en grub)
+# update-grub (reconfigurar grub)
 
 
 grub2
