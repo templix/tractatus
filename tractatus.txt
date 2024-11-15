@@ -4130,6 +4130,11 @@ $ mkdir /home/usuario/.config/chromium-dos
 $ chromium --user-data-dir=/home/usuario/.config/chromium-dos
 $ chromium --proxy-server="socks://localhost:9050" (Arrancar la aplicación a través de un proxy)
 $ chromium --incognito (Arrancar en modo privado. Para incluir por defecto este modo en las propiedades del navegador: chromium --incognito %U)
+1.-
+Cuando al lanzar chromium no da la salida:
+       ... ERROR:process_singleton_posix.cc(358)] The profile appears to be in use by another Chromium process...
+Lanzar:
+$ rm ~/.config/chromium/Singleton*
 
 
 chronic
