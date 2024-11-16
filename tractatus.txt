@@ -20051,6 +20051,72 @@ Algunas teclas para moverse por el fichero:
     ^x                   guardar y salir
 
 
+picom
+Es un compositor en Xorg más avanzado que picon [ver] y con más opciones de personalización, soporte para efectos avanzados y mayor compatibilidad con entornos modernos y que también aplica efectos gráficos, sombras, transparencias, difumninados y animaciones.
+$ picom & (se ejecuta con sus valores predeterminados y aplica efectos básicos como sombras y transparencias)
+$ picom --active-opacity=1.0 --inactive-opacity=0.8 & (con las ventanas activas totalmente opacas y las inactivas serán un 80% opacas)
+$ picom --shadow=true --shadow-radius=15 --shadow-opacity=0.75 & (activa las sombras, establece su radio y ajusta su opacidad)
+$ picom --blur-method=dual_kawase --blur-strength=7 & (con método avanzado de difuminado y ajuste de su intensidad)
+$ picom --shadow-exclude "class_g = 'Conky'" --opacity-rule "90:class_g = 'Firefox'" & (no aplica sombras a ventanas con la clase "Conky" y las de "Firefox" a un 90% de opacidad)
+$ picom --log-level=debug --log-file=picom.log  (diagnosticar problemas y guarda un registro detallado en el archivo picom.log)
+Crear un archivo de configuración detallado. Sirva de ejemplo:
+$ nano  ~/.config/picom.conf
+  # General
+  backend = "glx";
+  vsync = true;
+  #
+  # Sombras
+  shadow = true;
+  shadow-radius = 12;
+  shadow-opacity = 0.8;
+  #
+  # Transparencias
+  inactive-opacity = 0.85;
+  active-opacity = 1.0;
+  #
+  # Difuminado
+  blur-method = "dual_kawase";
+  blur-strength = 5;
+  #
+  # Exclusiones
+  shadow-exclude = [
+      "class_g = 'Conky'",
+      "_GTK_FRAME_EXTENTS@:c"
+  ];
+$ picom --config ~/.config/picom.conf & (iniciar la aplicación con este archivo)
+$ picom --experimental-backends --no-fading-openclose --log-level=info (activa nuevas características experimentales, desactiva el desvanecimiento al abrir/cerrar ventanas y muestra más información para depuración)
+Para habilitar o deshabilitar ciertos efectos mientras picom está en ejecución se usa señales de Unix:
+$ pkill -USR1 picom (desactivar sombras)
+$ pkill -USR2 picom (rehabilitar efectos)
+$ pkill picom (detener la aplicación)
+
+
+picon
+compositor independiente para el sistema de ventanas Xorg, que gestiona y aplica efectos gráficos, como sombras y  transparencias a las ventanas y su entorno. Los compositores como picon son útiles para mejorar la apariencia visual y la experiencia del escritorio en sistemas basados en Xorg. La principal diferencia entre picon y picom [ver] radica en que picon es una implementación más minimalista y básica que picom, que es un compositor más avanzado.
+$ picon & (iniciar el compositor. El símbolo & asegura que picon se ejecute en segundo plano y habilitará efectos básicos como sombras y transparencias según su configuración)
+$ picon --inactive-opacity=0.85 --active-opacity=1.0 & (las ventanas inactivas serán un 85% opacas y las activas serán completamente opacas)
+$ picon --shadow=true --shadow-radius=12 --shadow-opacity=0.7 & (activa las sombras, ajusta su tamaño y define su opcacidad)
+$ picon --shadow-exclude "class_g = 'Notification'" & (excluye ventanas con la clase "Notification" útil para sistemas de notificaciones como Dunst)
+Personalizar la aplicación utilizando el archivo de configuración. Un ejemplo podría ser:
+$ nano ~/.config/picon/picon.conf
+  # Transparencias
+  inactive-opacity = 0.85;
+  active-opacity = 1.0;
+  #
+  # Sombras
+  shadow = true;
+  shadow-radius = 10;
+  shadow-opacity = 0.7;
+  #
+  # Exclusiones
+  shadow-exclude = [
+      "class_g = 'Notification'",
+      "class_g = 'Conky'"
+  ];
+$ picon --config ~/.config/picon/picon.conf & (iniciar picon indicando este archivo de configuración)
+$ picon --log-level=debug (ejecutarlo con un mayor nivel de detalle)
+
+
 pidof
 muestra el Pid del programa si está activo.
 
