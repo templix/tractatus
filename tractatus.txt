@@ -30242,6 +30242,24 @@ $ cp /usr/share/yash/initialization/sample .yashrc
 $ yashrc (entrar en la shell)
 
 
+yeahconsole
+pone una ventana X un emulador de terminal en la parte superior de la pantalla que desplegable como una consola. Actualmente soporta xterm, urxvt y mrxvt.
+$ yeahconsole (iniciar un emulador de terminal en la parte superior de la pantalla)
+$ yeahconsole -geometry 80x20 (iniciar una terminal con 80 columnas y 20 filas)
+$ yeahconsole -e htop (ejecutar htop en el terminal flotante)
+Personalizar la apariencia configurando las opciones en ~/.Xresources o ~/.Xdefaults:
+$ nano ~/.Xresources
+Y pegar las lineas:
+  yeahconsole*background: black
+  yeahconsole*foreground: white
+  yeahconsole*font: 10x20
+  yeahconsole*toggleKey: F12
+$ xrdb ~/.Xresources (recargar la configuración)
+$ yeahconsole -b (ejecutar sin bordes visibles)
+$ yeahconsole -s (iniciar minimizado)
+$ yeahconsole -T F12 (mostrar/ocultar el terminal, si no consta el el archivo de configuración)
+
+
 yelp
 Navegador de ayuda de gnome. Incluye documentación detallada sobre la mayoría de aplicaciones y utilidades [panel, gestor de archivos...]
 
