@@ -2079,6 +2079,23 @@ $ atheme-checkconf (revisar el archivo de configuración atheme.conf en busca de
 $ atheme-services restart (reiniciar servicios)
 
 
+atool
+Herramienta versátil para gestionar archivos comprimidos en diferentes formatos [zip, tar, gzip, etc...]. Incluye los comandos apack [crear archivos comprimidos]), als [enumerar archivos en archivos comprimidos] y acat [extraer archivos a la salida estándar].
+$ apack archivo.zip archivo.txt (crear archivo.zip con el archivo archivo.txt)
+$ apack archivo.tar.gz file1.txt file2.txt (crear un comprimido con varios archivos)
+$ apack directorio.tar.gz ~/Documentos (comprimir todo el directorio Documentos)
+$ als archivo.zip (listar el contenido de un .zip)
+$ atool -x archivo.zip (extrae todos los archivos del .zip en el directorio actual)
+$ atool -x archivo.zip -d /Documentos/emacs/ (los extrae en un directorio especifico)
+$ atool -x archivo.7z (extraer un archivo .7z)
+$ atool -xf archivo.zip (forzar la extracción a un directorio sin sobreescribir)
+$ acat archivo.tar.gz (mostrar el contenido de un archivo comprimido sin extraer)
+$ acat archivo.zip documento.txt (ver un archivo específico dentro de un archivo comprimido)
+$ apack ~/Comprimidos/archivo.zip documento.txt (comprimir y mover directamente el archivo comprimido a una ubicación específica)
+$ als archivo.tar.gz (listar el contenido)
+$ als archivo (identificar automáticamente el formato del archivo sin necesidad de especificarlo y listar el contenido)
+
+
 atop
 Monitor interactivo para ver la carga del sistema. Muestra la ocupación de los recursos de la CPU, memoria, disco y red. Incluye los ejecutables atopcat, atopconvert, atopsar y atopacctd. Pulsando las mismas letras en la pantalla de atop activa, se modifican los mismos parámetros de visualización.
 $ atop -s 5 -a -c (cada 5 segundos actualización. Por defecto 10 y solo los procesos activos y uno por linea)
