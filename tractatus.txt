@@ -2110,6 +2110,21 @@ $ atopsar -A -r 20231118 (mostrando todo el reporte)
 $ atopsar -t 30 5 (informe sobre el tráfico de red, 5 muestras con un intervalo de 30 segundos)
 
 
+audiofile-tools
+Utilidad para trabajar con archivos de audio [actualmente AIFF, AIFF-C, WAVE, NeXT/Sun, BICS y datos sin procesar]. Este paquete contiene las herramientas sfinfo y sfconvert.
+$ sfinfo archivo.wav  (muestra información de formato, canales y duración de un archivo de audio)
+$ sfinfo -v archivo.wav (muestra información más extendida como los metadatos del archivo)
+$ sfconvert entrada.wav salida.mp3 (convertir un .wav a .mp3)
+$ sfconvert entrada.wav salida.wav -r 48000 (cambiar la tasa de muestreo a 48 kHz)
+$ sfconvert entrada.wav salida_mono.wav -c 1 (convertir un archivo a mono)
+$ sfconvert entrada.wav salida_8bit.wav -b 8 (cambiar el formato de datos a 8 bits)
+$ sfconvert entrada.wav salida.mp3 -c 1 -r 22050 (convertir un archivo estéreo WAV a mono MP3 con una tasa de muestreo de 22.05 kHz)
+script para convertir todos los archivos WAV de un directorio a MP3:
+       for file in *.wav; do
+         sfconvert "$file" "${file%.wav}.mp3"
+       done
+
+
 auditd
 [audit]. Demonio que monitoriza accesos al sistema y modificación de ficheros y carpetas. Sin ninguna configuración adicional registrará en /var/log/audit/audit.log toda la actividad del sistema [ssh, vnc, cron...]. Si queremos controlar un directorio:
 # nano /etc/audit/audit.rules
