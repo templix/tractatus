@@ -2125,6 +2125,16 @@ script para convertir todos los archivos WAV de un directorio a MP3:
        done
 
 
+audiolink
+es una herramienta que facilita y agiliza la búsqueda de música en su medio de almacenamiento local. Sus búsquedas pueden incluir una variedad de criterios, como artistas masculinos, artistas femeninas, banda, género, etc. Funciona con archivos MP3 y Ogg Vorbis y crea una base de datos MySQL en la que almacena la información sobre los archivos de música. Crea enlaces simbólicos a los archivos de música reales en función de los resultados de la búsqueda. Puede buscar por múltiples campos, como artista, banda, compositor, letrista, etc.
+$ audiolink search /musica (buscar archivos de música en el directorio especificado)
+$ audiolink search --title "rock" (busca canciones cuyo título incluya "rock")
+$ audiolink search --artist "The Beatles" (encuentra todas las canciones de "The Beatles" en el almacenamiento local)
+$ audiolink search --type mp3 /musica (busca solo archivos con extensión .mp3 en el directorio especificado)
+$ audiolink play --title "Imagine" (reproduciría la canción "Imagine" si está disponible en los resultados)
+$ audiolink info /musica/cancion.mp3 (muestra detalles de los metadatos de la canción seleccionada)
+
+
 auditd
 [audit]. Demonio que monitoriza accesos al sistema y modificación de ficheros y carpetas. Sin ninguna configuración adicional registrará en /var/log/audit/audit.log toda la actividad del sistema [ssh, vnc, cron...]. Si queremos controlar un directorio:
 # nano /etc/audit/audit.rules
