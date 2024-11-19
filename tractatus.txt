@@ -2135,6 +2135,20 @@ $ audiolink play --title "Imagine" (reproduciría la canción "Imagine" si está
 $ audiolink info /musica/cancion.mp3 (muestra detalles de los metadatos de la canción seleccionada)
 
 
+audiotools
+Conjunto de herramientas quue se utilizan para trabajar con CDs de audio como extracción de CD, conversión de pistas de un formato de audio a otro, cambio de nombre y etiquetado de pistas, identificación de pistas, grabación de CD a partir de pistas y más. Incluye varios comandos: audiotools-config, cdda2track, cddainfo, cddaplay, coverdump, covertag, coverview, track2cdda, track2track, trackcat. trackcmp, trackinfo, tracklength, tracklint, trackplay, trackrename, tracksplit, tracktag y trackverify.
+$ cdda2track --device /dev/cdrom --format wav --output-dir ./output (extrae todas las pistas del CD ubicado en /dev/cdrom y las guarda como archivos .wav en el directorio ./output)
+$ cddainfo --device /dev/cdrom (información sobre las pistas del CD en el dispositivo especificado)
+$ cddaplay --device /dev/cdrom --track 1 (reproduce la primera pista del CD en el dispositivo /dev/cdrom)
+$ cddainfo --list --device /dev/cdrom (lista numerada de las pistas disponibles en el CD)
+$ cdda2track --device /dev/cdrom --track 3 --format flac --output ./track3.flac (extrae solo la pista 3 del CD y la guarda en formato .flac como track3.flac)
+$ cdda2track --device /dev/cdrom --format mp3 --bitrate 192k --output-dir ./mp3_output (convierte todas las pistas del CD a archivos .mp3 con un bitrate de 192 kbps y los guarda en el directorio ./mp3_output)
+$ cddaplay --device /dev/cdrom --all (reproduce todas las pistas del CD en orden)
+$ cddaplay --device /dev/cdrom --volume 75 (ajusta el volumen al 75% mientras reproduce)
+Para explorar más opciones añadir al comando específico la opción --help:
+$ coverdump --help
+
+
 auditd
 [audit]. Demonio que monitoriza accesos al sistema y modificación de ficheros y carpetas. Sin ninguna configuración adicional registrará en /var/log/audit/audit.log toda la actividad del sistema [ssh, vnc, cron...]. Si queremos controlar un directorio:
 # nano /etc/audit/audit.rules
