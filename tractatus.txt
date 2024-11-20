@@ -2206,6 +2206,18 @@ auth2db
 Análisis de logs según lo especificado en /etc/auth2db/filters.conf. Acceso http://localhost/auth2db [usuario y contraseña por defecto: admin/admin]
 
 
+authbind
+Herramienta que permite ejecutar procesos en puertos restringidos, menores a 1024 sin necesidad de permisos de root. Necesita permisos configurados para un ejecutable, por ejemplo, para permitir que un programa use el puerto 80:
+$ sudo touch /etc/authbind/byport/80
+$ sudo chmod 500 /etc/authbind/byport/80
+$ sudo chown USER /etc/authbind/byport/80
+$ authbind --deep ./servidor (iniciar un servidor en el puerto 80 y que escuche en puertos restringidos)
+$ authbind --deep node servidor.js (iniciar un servidor web con Node.js en el puerto 80)
+$ authbind --deep apachectl start (iniciar Apache HTTP Server)
+$ authbind python3 -m http.server 80 (lanzar aplicaciones que requieren menos complejidad)
+$ netstat -tuln | grep :80 (virificar que el programa está usando el puerto asignado)
+
+
 autofs
 Control del funcionamiento de los daemons de montaje automático. Los daemons de montaje automático montan automáticamente los sistemas de archivos cuando se utilizan y los desmontan después de un período de inactividad.
 
