@@ -2218,6 +2218,31 @@ $ authbind python3 -m http.server 80 (lanzar aplicaciones que requieren menos co
 $ netstat -tuln | grep :80 (virificar que el programa está usando el puerto asignado)
 
 
+authrpogs
+Herramienta que permite decidir si los comandos solicitados a través de SSH deben ejecutarse o rechazarse según el archivo de configuración authprogs. authprogs se configura en el servidor SSH editando el archivo ~/.ssh/authorized_keys. Agrega una línea con la palabra clave command para vincularla a un script o a authprogs.
+# nano ~/.ssh/authorized_keys
+Con la linea:
+    command="/usr/bin/authprogs" ssh-ed25519 AAAAB3... USER@example.com (que todos los comandos ejecutados mediante esta clave SSH pasen primero por authprogs)
+Crear un archivo de configuración para definir qué comandos permitir o rechazar, por ejemplo:
+# nano ~/.authrpogs/authrpogs.conf
+Con el contenido [un comando por linea]:
+    # Permitir listar archivos
+    allow ls
+    # Rechazar borrar archivos
+    deny rm
+    # Permitir comandos relacionados con Git
+    allow git*
+Luego vincularlo en authorized_keys y solo se permitirán las acciones especificadas:
+# nano ~/.ssh/authorized_keys
+command="/usr/bin/authprogs --config ~/.authrpogs/authrpogs.conf" ssh-ed25519 AAAAB3... USER@example.com
+Si un cliente quere ejecutar algo no autorizado:
+   ssh USER@servidor whoami
+El comando será rechazado.
+# authprogs --test --config ~/.authrpogs/authrpogs.conf --command "ls" (muestra si el comando sería permitido o rechazado sin ejecutarlo realmente)
+# authprogs --config ~/.authrpogs/authrpogs.conf (ejecutar la aplicación con esta configuración)
+# authprogs --config ~/.authrpogs/authrpogs.conf --log /var/log/authprogs.log (habilitar registros de auditoría)
+
+
 autofs
 Control del funcionamiento de los daemons de montaje automático. Los daemons de montaje automático montan automáticamente los sistemas de archivos cuando se utilizan y los desmontan después de un período de inactividad.
 
