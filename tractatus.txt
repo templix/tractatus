@@ -2161,6 +2161,14 @@ Toda modificación del archivo de configuración implica reiniciar el servicio:
 # auditctl -w /home/USUARIO -p w (Monitorizar el directorio personal solo hasta el reinicio del servicio o del sistema)
 
 
+audtool
+[audacious]. Pequeña herramienta para controlar Audacious desde la línea de comandos
+$ audtool --playback-pause (pausar/activar la reproducción)
+$ audtool --playback-next (reproducir la siguiente canción)
+$ audtool --current-song (consultar el título de la canción actual)
+$ audtool --playback-stopped (salir)
+
+
 audtty
 Interfaz para controlar el reproductor Audacious. El archivo de configuración en ~/.audtty.
 $ audtty (abrir la interfaz en la terminal)
@@ -2171,9 +2179,6 @@ Dentro de su interfaz pueden emplearse atajos de teclado, algunos:
     +: Aumentar volumen.
     -: Disminuir volumen.
     q: salir
-$ audtool --playback-pause (pausar/activar la reproducción)
-$ audtool --playback-next (reproducir la siguiente canción)
-$ audtool --current-song (consultar el título de la canción actual)
 
 
 aumix
