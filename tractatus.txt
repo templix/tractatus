@@ -2243,6 +2243,23 @@ El comando será rechazado.
 # authprogs --config ~/.authrpogs/authrpogs.conf --log /var/log/authprogs.log (habilitar registros de auditoría)
 
 
+autoconf
+Estándar para los paquetes fuente de la FSF. Esto sólo es útil si se escribe los propios programas o si se modifica extensamente los programas de otras personas. Todos los comandos deben ejecutarse desde la carpeta raíz del paquete en el que se está trabajando. Para obtener una biblioteca extensa de macros Autoconf adicionales, ha de instalarse el paquete "autoconf-archive".
+Crear archivo configure.ac con las lineas:
+$ nano configure.ac
+...
+AC_INIT([nombre del paquete], [versión])
+AM_INIT_AUTOMAKE
+AC_PROG_CXX
+AC_OUTPUT(Makefile)
+```
+$ autoconf (generar el archivo configure en la misma carpeta)
+$ ./configure --version (verificar si los requisitos están instalados)
+$ make
+# make install
+$ autoconf --foreign (generar archivos de configuración en múltiples plataformas)
+
+
 autofs
 Control del funcionamiento de los daemons de montaje automático. Los daemons de montaje automático montan automáticamente los sistemas de archivos cuando se utilizan y los desmontan después de un período de inactividad.
 
