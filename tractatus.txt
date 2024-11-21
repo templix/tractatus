@@ -2358,6 +2358,41 @@ Script de shell (generalmente que se ejecuta desde cron) totalmente automatizada
 # autopostgresqlbackup
 
 
+autoproject
+Sólo se ejecuta una vez cuando se comienza un nuevo proyecto y hace varias preguntas al usuario y luego crea un nuevo directorio y lo llena con archivos estándar de programación de GNU, personalizados para el nuevo proyecto. A modo de ejemplo:
+$ mkdir mi_proyecto_bash (crear un nuevo directorio para el proyecto)
+$ cd mi_proyecto_bash (entrar en él)
+$ autoproject -n nombre_script -a USER -e USER@ejemplo.es -d "Gestion de scripts de bash" -l sh
+What command line parser generator will be used?
+    select from:  argp autogen clig none  [none]:
+Please indicate which of the following standard options gestrac will use:
+    dry-run? [yN]
+    no-warn? [yN]
+    output? [yN]
+    brief? [yN]
+    quiet? [yN]
+    verbose? [yN]
+    directory? [yN]
+    cd? [yN]
+    interactive? [yN]
+Program Name		: nombre_script
+Description	        : Gestion de scripts de bash
+Version			: 0.1.0
+Language		: sh
+Interface		: cli
+Parser Generator	: none
+Long Options		:
+Author      		: USER
+Email-Address		: USER@ejemplo.es
+Date		        : November 21, 2024
+13 files processed
+...
+$ cd nombre_script
+$ ls
+ls
+aclocal.m4  AUTHORS  autom4te.cache  ChangeLog	configure.in  COPYING  gpl.texinfo  Makefile.am  NEWS  nombre_script.1	nombre_script.in  nombre_script.lsm.in	nombre_script.spec.in  nombre_script.texinfo  README
+
+
 autorandr
 Herramientas para administrar configuraciones de xrandr basadas en dispositivos conectados. Se puede configurar para que cambie automáticamente a una configuración almacenada cada vez que se detecte un cambio en la configuración.
 $ autorandr --save mobile (guardar la configuración actual de la pantalla)
