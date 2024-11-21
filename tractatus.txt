@@ -2260,8 +2260,45 @@ $ make
 $ autoconf --foreign (generar archivos de configuración en múltiples plataformas)
 
 
+autodep8
+Detectará tipos conocidos de paquetes y generará archivos de control de pruebas compatibles con DEP-8 para ellos. Tipos de paquetes admitidos actualmente: Ruby que utilizan gem2deb/gem2deb-test-runner, Perl, Python, Python que utilizan pybuild, NodeJS, módulos del kernel que utilizan DKMS, R, Emacs Lisp ELPA, Go y Octave-Forge. Si tiene que estar en el directorio del código fuente del paquete Debian en los ejemplos siguientes.
+$ autodep8 > tests/control (generará un archivo de control de pruebas basado en el tipo del paquete, python, ruby..., ver la salida del archivo de control de pruebas propuesto y guardar en un archivo)
+$ autopkgtest -- tests/control (una vez generado el archivo de control de pruebas, se puede ejecutar las pruebas con autopkgtest)
+$ autodep8 --package paquete (generar el archivo de pruebas y ver si tiene pruebas DEP-8 compatibles)
+$ autodep8 --print-type (devuelve el tipo de paquete detectado)
+$ autodep8 --type python (si el tipo de tu paquete no es reconocido automáticamente, se puede forzar un tipo específico)
+
+
+autodir
+Gestionar directorios personales dinámicamente y de forma automática y transparente, ideal para entornos multiusuario para garantizar que cada usuario tenga un directorio personal sin necesidad de configurarlos manualmente.
+# autodir --daemon (para que funcione, se debe iniciar su demonio)
+# autodir --basedir=/mnt/home --logfile=/var/log/autodir.log (creará los directorios personales automáticamente cuando un usuario acceda a ellos en /mnt/home)
+# autodir --basedir=/mnt/home --logfile=/var/log/autodir.log --default-perm=700 --default-user=USER --default-group=GRUPO (asegura que los nuevos directorios sean privados y asignados al usuario y grupo deseados)
+# tail -f /var/log/autodir.log (monitorear actividad)
+# umount /mnt/home/USER (desmontar directorios dinámicos)
+
+
 autofs
-Control del funcionamiento de los daemons de montaje automático. Los daemons de montaje automático montan automáticamente los sistemas de archivos cuando se utilizan y los desmontan después de un período de inactividad.
+Controla el funcionamiento de los daemons de montaje automático.
+Configurar:
+        # anano  /etc/auto.master
+con la linea:
+        /mnt/automount --timeout=300 --ghost
+Crear un archivo de configuración específico para los sistemas Windows:
+        # nano /etc/auto.smb
+Y añadir [Reemplazar USER y PASSW con las credenciales de red]:
+        /mnt/windows/%m -fstype=cifs,guest,iocharset=utf8,file_mode=0777,dir_mode=0777,username=USER,password=PASSW
+Configurar el archivo para permitir el acceso remoto
+        # nano /etc/smb.conf
+añadir:
+        ```
+        [global]
+           workgroup = YOUR_WORKGROUP
+           security = guest
+           map to guest = Bad User
+        ```
+# systemctl restart autofs (riniciar el servicio)
+# mount -a (permite montar sistemas Windows en Debian automáticamente)
 
 
 autojump
