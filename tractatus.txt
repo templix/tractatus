@@ -2508,6 +2508,14 @@ $ avimerge -o todos.avi -i 1.avi 2.avi 3.avi
 $ avimerge -o todos.avi -i *.avi  (todos los videos de un directorio en uno)
 
 
+away
+Programa simple que bloquea tu terminal, verifica si hay correo nuevo en un número determinado de buzones y permite que otros usuarios sepan por qué estás inactivo. Solo verifica si hay correo en el archivo $MAIL de un usuario, pero al usar el archivo awayrc, un usuario puede configurar cualquier número dado de casillas de correo para que se verifiquen.
+$ away (bloquear la terminal hasta que se presione una tecla)
+$ away 5m (bloquea la terminal por 5 minutos)
+$ away 10m && echo "Terminal desbloqueada" (terminal bloqueada por 10 minutos, después de lo cual se ejecutará el mensaje y la terminal se desbloqueará automáticamente)
+$ echo "Iniciando proceso largo..." && away 30s && echo "Proceso terminado" (después de ejecutar el primer echo, la terminal se bloqueará por 30 segundos antes de mostrar el segundo echo)
+
+
 awk
 Busca patrones y los procesa. Es practicamente un lenguaje de programación.
 Archivo base para ejemplo (Empleado -- Precio/hora -- Horas trabajadas – Cómo las cobra):
