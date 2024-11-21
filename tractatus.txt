@@ -2339,6 +2339,32 @@ El programa lee el archivo utmp, entrada por entrada. El nombre de usuario para 
 # autolog -a -d (Imprimir información en todas las entradas utmp, no solo de los procesos del usuario y en modo debug)
 
 
+automake
+Herramienta que genera automáticamente archivos Makefile.in a partir de archivos Makefile.am. Estos archivos son esenciales en proyectos que utilizan la suite GNU Autotools para automatizar la configuración, construcción e instalación de software. Facilita la portabilidad y hace que sea más sencillo definir reglas de construcción.
+Ejemplo de iniciar un proyecto desde cero:
+$ touch Makefile.am configure.ac
+$ nano configure.am
+bin_PROGRAMS = hello
+hello_SOURCES = hello.c
+SUBDIRS = src doc (en cada subdirectorio, crea su propio Makefile.am)
+$ nano configure.ac
+AC_INIT([hello], [1.0], [example@example.com])
+AM_INIT_AUTOMAKE
+AC_PROG_CC
+AC_CONFIG_FILES([Makefile])
+AC_OUTPUT
+$ autoreconf --install
+$ automake --add-missing
+$ ./configure (generar el script configure)
+$ make (compilar)
+Si falta algún archivo estándar
+$ automake --add-missing --copy (copiará los archivos necesarios en el proyecto)
+$ automake --silent (ejecutar en modo silencioso)
+Si se ha modificado los archivos Makefile.am o configure.ac, vuelver a ejecutar:
+$ autoreconf --install
+$ automake --add-missing
+
+
 automater
 (python3-httplib2 python2.6-argparse)
 Obtener información de ips y urls inclusive si estan bloqueadas en algún blocklist. Copiar el script en python de: <https://github.com/1aN0rmus/TekDefense-Automater.git>
