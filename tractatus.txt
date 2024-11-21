@@ -2301,6 +2301,11 @@ añadir:
 # mount -a (permite montar sistemas Windows en Debian automáticamente)
 
 
+autoimport
+Durante el desarrollo de un programa Python, es necesario gestionar continuamente las declaraciones de importación de Python, ya sea porque se necesita un objeto nuevo o porque ya no se necesita. Esto significa que es necesario dejar de escribir lo que se estaba escribiendo, ir al principio del archivo, crear o eliminar la declaración de importación y luego reanudar la codificación. Esta interrupción del flujo de trabajo es molesta y casi siempre innecesaria.
+$ autoimport (resolver el problema si se ejecuta siempre que existes un error de importación o, por ejemplo, configurando el editor para que lo ejecute al guardar el archivo)
+
+
 autojump
 Forma rápida de navegar por el sistema de archivos. Funciona manteniendo una base de datos de los directorios que más se utilizan desde la línea de comandos y permite saltar directamente hacia directorios concretos sin importar en absoluto en cual estamos posicionados. Los directorios deben visitarse primero antes de poder saltar a ellos. j es una función de autojump. Cualquier opción que se pueda usar con autojump se puede usar con j y viceversa. Para activar la aplicación, primero lanzar como usuario normal:
 $ source /usr/share/autojump/autojump.bash on startup
