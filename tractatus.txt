@@ -2867,6 +2867,21 @@ $ bar -o outfile infile (equivalente a: cp infile outfile)
 $ bar -n archivo.tar.gz | tar -xzpf - (de la descompresión de un archivo)
 
 
+barrier
+Permite compartir fácilmente un único ratón y teclado entre varios ordenadores con distintos sistemas operativos, cada uno con su propia pantalla, sin necesidad de hardware especial. Está pensado para usuarios con varios ordenadores en su escritorio, ya que cada sistema utiliza su propia pantalla. Redireccionar el ratón y el teclado es tan sencillo como mover el ratón fuera del borde de la pantalla. Barrier también fusiona los portapapeles de todos los sistemas en uno solo, lo que permite cortar y pegar entre sistemas. Además, sincroniza los protectores de pantalla para que todos se inicien y finalicen juntos y, si el bloqueo de pantalla está habilitado, solo una pantalla requiere una contraseña para desbloquearlos todos.
+$ barrier --master=pc1 --slave=pc2 (compartir una única pantalla y entrada entre dos computadoras, PC1 como el maestro y PC2 como el esclavo)
+$ barrier --master=pc1 --slave=pc2 pc3 pc4 (conecta PC1 como maestro con PC2, PC3 y PC4 como esclavos)
+$ barrier --master=pc1 --slave=pc2 --shared-key=KEY (especifica un clave compartida para asegurar la conexión entre los nodos barrier)
+$ barrier --status (muestra el estado actual de todas las conexiones barrier activas)
+$ barrier --stop (detiene completamente la sesión barrier en ejecución)
+
+
+base58
+Herramienta útil para codificar y decodificar datos en formato Base58.
+$ echo "linuxgenial" | base58 (codificar)
+$ echo "33f9yRbkMB4uknG9f" | base58 --decode (descodificar)
+
+
 base64
 [cl-base64]. Codificador/descodificador de textos
 $ cat archivo| base64 > cifrado (cifrar "archivo" y volcarlo en "cifrado")
