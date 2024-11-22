@@ -2681,6 +2681,25 @@ Usar variables dentro de awk
 	segunda linea
 
 
+awscli
+Proporciona acceso directo a las API públicas de los servicios de AWS. Configuración inicial:
+# aws configure (configurar credenciales, pedirá: access key ID, secret access key, región predeterminada [ej.: us-east-1] y formato de salida [ej.: json, table, o text])
+# aws s3 ls (ver todos los buckets en S3)
+# aws s3 cp archivo.txt s3://mi-bucket/archivo.txt (subir un archivo local a un bucket)
+# aws s3 cp s3://mi-bucket/archivo.txt archivo_local.txt (Descargar un archivo desde un bucket)
+# aws ec2 run-instances --image-id ami-0abcdef1234567890 --count 1 --instance-type t2.micro --key-name MiClave --security-group-ids sg-0123456789abcdef --subnet-id subnet-0123456789abcdef (lanzar nueva instancia usando una AMI específica)
+# aws ec2 describe-instances (mostrar todas las instancias EC2 en la cuenta)
+# aws logs get-log-events --log-group-name MiGrupoLogs --log-stream-name MiFlujoLogs (consultar los logs de un grupo de logs en CloudWatch)
+# aws dynamodb create-table --table-name MiTabla --attribute-definitions AttributeName=Id,AttributeType=S --key-schema AttributeName=Id,KeyType=HASH --provisioned-throughput ReadCapacityUnits=1,WriteCapacityUnits=1 (crear una tabla básica)
+# aws dynamodb get-item --table-name MiTabla --key '{"Id": {"S": "12345"}}' (consultar un elemento por su clave primaria)
+# aws sqs send-message --queue-url https://sqs.us-east-1.amazonaws.com/123456789012/MiCola --message-body "Hola desde AWS CLI" (enviar un mensaje a una cola de SQS)
+# aws iam create-user --user-name USER (crear un nuevo usuario en IAM)
+# aws s3 sync ./mi-directorio s3://mi-bucket (sincronizar un directorio con S3)
+# aws s3 help (ayuda con algún comando específico)
+# aws ec2 stop-instances --instance-ids $(aws ec2 describe-instances --query "Reservations[*].Instances[*].InstanceId" --output text) (detener todas las instancias EC2)
+# aws s3api put-bucket-policy --bucket mi-bucket --policy file://policy.json (cambiar la política de un bucket)´
+
+
 awstats
 [libnet-dns-perl libnet-ip-perl libnet-xwhois-perl]. Estadísticas de la red local.
 configuración mínima:
@@ -2734,9 +2753,78 @@ $ b2sum -l 380 .bashrc .emacs .authinfo .profile .stumpwmrc .bzr.log (sobre vari
 $ b2sum -b .bashrc (calcularlo en binario)
 
 
+b3sum
+Calcula el hash criptográfico BLAKE3, función mucho más rápida que MD5, SHA-1, SHA-2, SHA-3 y BLAKE2 y segura, a diferencia de MD5 y SHA-1.
+$ b3sum archivo.txt > archivo.txt.b3sum (obtener el hash de un archivo y guardarlo en un archivo)
+$ b3sum archivo1.txt archivo2.txt (calcular el hash de varios archivos)
+$ echo "linux es un sisteme genial" | b3sum (leer datos desde la entrada estánda)
+$ b3sum -c archivo.txt.b3sum (verificar la integridad de un archivo)
+$ b3sum --num-threads 4 archivo_grande.dat (con archivos grandes usa múltiples núcleos de CPU automáticamente, el comando verifica que se está utilizando paralelismo)
+$ b3sum --no-names archivo.txt (la salida solo mostrará el hash sin el nombre del archivo)
+$ find /directorio -type f -exec b3sum {} + (calcular el hash para cada archivo del /directorio)
+
+
 backup-manager
 Realiza copias de seguridad. Puede comprimir en tar, tar.gz, tar.bz2, y zip. El archivo de configuración está en /etc/backup-manager.conf.
 # backup-manager
+
+
+backupninja
+Permite realizar copias de seguridad de bases de datos, directorios y más, de manera automática. Configuración Básica:
+# nano /etc/backupninja.conf
+    loglevel = 4    # Nivel de detalle en los registros (1-5)
+    reportemail = tuemail@ejemplo.com  # Recibe informes de las tareas
+# backupninja --check (probar las configuraciones sin ejecutarlas)
+# tail -f /var/log/backupninja.log (ver los registros)
+Ejemplos para crear un respaldo de un directorio local. Las tareas individuales se almacenan en /etc/backup.d/. Cada archivo define una tarea específica en formato YAML:
+1.-
+# nano /etc/backup.d/10-backup-directorio.dup
+Con las lineas:
+    log: short
+    action: rdiff
+    source: /home/usuario/
+    destination: /media/backup/
+# backupninja --run (ejecutarlo)
+2.-
+Respaldo de una base de datos MySQL:
+# nano /etc/backup.d/20-backup-mysql.sql
+Con el contenido:
+    log: short
+    action: mysql
+    database: midatabase
+    username: root
+    password: mipassword
+    backupdir: /media/backup/mysql
+    compress: gzip
+# backupninja --run (ejecutarlo)
+3.-
+ Enviar copias de seguridad a un servidor remoto (rsync)
+# nano  /etc/backup.d/30-backup-remoto.rsync
+Con el contenido:
+    log: verbose
+    action: rsync
+    source: /var/www/
+    destination: usuario@servidorremoto:/backups/www/
+    sshoptions: -i /home/usuario/.ssh/id_rsa
+# backupninja --run (ejecutar la tarea)
+4.-
+ Respaldar un archivo completo del sistema (tar)
+# nano /etc/backup.d/40-backup-sistema.tar
+Con el contenido:
+    log: verbose
+    action: tar
+    backupdir: /backups
+    files:
+      - /etc
+      - /home
+      - /var/log
+    compress: gzip
+# backupninja --run (ejecutarlo)
+5.-
+ Configurar tareas automáticas
+Para que las tareas se ejecuten automáticamente, backupninja utiliza cron. Por defecto, está configurado en /etc/cron.d/backupninja para ejecutarse diariamente:
+     0 3 * * * root backupninja --run
+Esto ejecutará todas las tareas a las 3:00 AM.
 
 
 badblocks
