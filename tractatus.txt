@@ -3150,6 +3150,16 @@ Formatea un texto en forma de tarjeta perforada.
 $ bcd linux es genial
 
 
+bcftools
+Conjunto de utilidades que manipulan las llamadas de variantes en Variant Call Format [VCF] y su contraparte binaria BCF.
+$ bcftools view -r ch1:100000-200000 input.vcf.gz > output.vcf (extrae las variantes en la región del cromosoma 1 entre las posiciones 100000 y 200000)
+$ bcftools view -i "QUAL > 30 && DP > 10" input.vcf.gz > output.vcf (filtra las variantes con calidad superior a 30 y profundidad de mapeo mayr a 10)
+$ bcftools query -f '%POS\n' input.vcf.gz | wc -l (extrae solo las posiciones y cuenta el número de líneas, lo que equivale al número de variantes)
+$ bcftools query -f '%INFO/AF\n' input.vcf.gz > af_info.txt (extrae la frecuencia alélica [AF] de los campos INFO y la guarda en un archivo separado
+$ bcftools view -a 'T' input.vcf.gz > output.vcf (filtra las variantes donde el alelo alternativo es 'T')
+$ bcftools view -i "(DP > 50 || QUAL > 40) && (AF > 0.05)" input.vcf.gz > output.vcf (filtra variantes con profundidad de mapeo superir a 50 o calidad superior a 40, y frecuencia alélica mayor a 0.05)
+
+
 bd
 Sustituye los clásicos cd ../../.. para ir varios directorios atras en la misma ruta por una forma más simple y solo colocando las primeras letras del directorio al que queremos ir..
 $ cd /Documentos/linux/emacs/org/presentaciones/css
