@@ -3174,8 +3174,9 @@ $ source .bashrc
 
 
 bchunk
-Convertir imagenes CUE/BIN a ISO:
-$ bchunk archivo.cue archivo.iso
+Convierte una imagen de CD en formato .bin/.cue o, a veces .raw/.cue en un conjunto de pistas .iso y .cdr/.wav. El formato .bin/.cue lo utilizan algunos programas de escritura de CD que no son UNIX, pero no es compatible con la mayoría de los demás programas de escritura de CD.
+$ bchunk -v imagen.bin imagen.cue salida (creará un archivo iso llamado "salida.iso" con los datos del disco y modo verbose)
+$ bchunk -w imagen.bin imagen.cue salida (con el audio en formato WAV
 
 
 beep
