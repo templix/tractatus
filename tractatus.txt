@@ -3052,8 +3052,9 @@ Nota.- wlan0: interfaz de red configurada en modo ad-hoc y bat0: interfaz virtua
 
 
 bats
-Marco de prueba que proporciona una forma simple de verificar que los programas escritos en bash se comportan como se esperaba. Tambien puede usarse para probar cualquier programa UNIX.
+Este comando [Bash Automated Testing System] es un marco de pruebas para Bash que permite escribir scripts y generar salidas compatibles con TAP [Test Anything Protocol] para verificar que se comporten como se espera. Bats es más útil cuando se prueba software escrito en Bash, pero puede usarse para probar cualquier programa UNIX.
 $ bats script.sh
+$ bats -t script.sh (prubea detallada)
 
 
 bb
@@ -3086,6 +3087,22 @@ Colección de etiquetas que se usan para cambiar la apariencia del texto en un b
 	[quote="Frase popular"]A quien madruga Dios le ayuda[/quote] (Cita)
 	[quote]A quien madruga Dios le ayuda[/quote] (Cita sin mostrar autor)
 	[code]texto[/code] (citar código fuente)
+
+
+bbe
+Editor [Binary Block Editor] como sed, pero para archivos binarios lo que permite realizar modificaciones, inserciones, y reemplazos en bloques de datos.
+$ bbe -e 'i 0xABCD' < entrada.bin > salida.bin (inserta los bytes AB CD al inicio del archivo de entrada y lo guasrda en salida.bin
+$ bbe -e 's 0x1234 0x5678' < entrada.bin > salida.bin (reemplaza todas las ocurrencias del patrón 12 34 por 56 78)
+$ bbe -e 'd 0 10' < entrada.bin > salida.bin (elimina 10 bytes desde el inicio)
+$ bbe -e 'c 0xFF 5' < entrada.bin > salida.bin (cambia el byte en la posición 5 por FF)
+$ bbe -e 's 0xDEAD 0xBEEF' < entrada.bin | hexdump -C (muestra el archivo modificado en formato hexadecimal.)
+$ bbe -e 'p 0xCAFEBABE' < entrada.bin > salida.bin (añade los bytes CA FE BA BE al inicio)
+$ bbe -e 'a 0x12345678' < entrada.bin > salida.bin (añade los bytes 12 34 56 78 al final)
+$ bbe -e 'c 0xFF 0; c 0xAA 10' < entrada.bin > salida.bin (cambia el byte en la posición 0 a FF y el byte en la posición 10 a AA)
+$ bbe -e 'r 0x00 5 10' < entrada.bin > salida.bin (Rellena los 10 bytes comenzando desde la posición 5 con 00)
+$ bbe -e 'x 0 5 20' < entrada.bin > salida.bin (copia los 5 primeros bytes al desplazamiento 20)
+$ echo "Datos adicionales" | bbe -e 'p 0xCAFEBABE' > salida.bin (modificar un archivo desde stdin)
+$ bbe -e 's 0x1111 0x2222' < entrada.bin > temp.bin && mv temp.bin entrada.bin (modificar un archivo directamente y sobrescribirlo)
 
 
 bbpager
