@@ -3015,7 +3015,7 @@ $ bastet
 
 
 batcat
-Parecido al comando cat pero mejorado. En algunas distribuciones se llama simplemente bat.
+Reemplazo de cat con resaltado de sintaxis para una gran cantidad de idiomas, integración con git y paginación automática. En este paquete, el ejecutable y su página de manual han cambiado de nombre de "bat" a "batcat" debido a un conflicto de nombres de archivo con otro paquete Debian.
 $ batcat -A text.txt (mostrando, espacios, tabulaciones, nueva linea...)
 $ batcat -p text.txt (mostrar en texto plano)
 $ batcat -n script.sh (mostrando número de lina)
@@ -3026,6 +3026,29 @@ $ batcat --theme TwoDark archivo (ver archivo con el tema seleccionado)
 Si queremos usar un tema concreto por defecto, colocar en .bashrc la linea y recargar:
    export BAT_THEME="DarkNeon"
    $ source ~/.bashrc
+
+
+batctl
+Herramienta para interactuar con B.A.T.M.A.N [Better Approach To mobile Ad-hoc Networking) protocolo que permite crear redes de malla dinámicas y distribuidas. Antes de usar batctl, se ha de configurar una interfaz de red como parte de la malla:
+            # ip link set wlan0 down
+            # iwconfig wlan0 mode ad-hoc
+            # iwconfig wlan0 essid batman-mesh
+            # ip link set wlan0 up
+            # batctl if add wlan0
+            # ip link set up dev bat0
+Nota.- wlan0: interfaz de red configurada en modo ad-hoc y bat0: interfaz virtual que representa la red B.A.T.M.A.N.
+# batctl if add eth0 (asocia la interfaz eth0 a la red de malla gestionada por batman-adv)
+# batctl if (muestra las interfaces asociadas a batman-adv)
+# batctl o (muestra los vecinos y rutas aprendidas dentro de la red de malla)
+# batctl ping 02:12:34:56:78:90 (hacer un ping a través de la malla)
+# batctl td bat0 (inicia la captura de paquetes en la interfaz bat0)
+# batctl n (muestra los nodos vecinos y su calidad de enlace)
+# batctl ap 1 (habilitar el modo puente)
+# batctl ap 0 (deshabilitar el modo puente)
+# batctl gw_mode server 20 (configura el nodo como un gateway con un TTL de 20)
+# batctl loglevel 2 (activa un nivel más detallado de registro para depuración)
+# batctl tp 02:12:34:56:78:90 (ver estadísticas de origen de paquetes y el rendimiento entre nodos)
+# modprobe batman-adv (asegúrar de que el módulo del kernel esté cargado)
 
 
 bats
