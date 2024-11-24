@@ -2907,6 +2907,13 @@ $ cat cifrado.txt | basenc -d --base16 (descifrar)
 $ printf 'linux es un sistema genial' | basenc --base64 (cifrar)
 
 
+basez
+Codificar/descodificar archivos. Incluye los ejecutables: hex, base16, base32plain, base32hex, base64plain, base64url, base64mime y base64pem. Todos los ejecutables se usan con los mismos argumentos:
+$ basez -i archivo.txt -o salida.txt (mandar la codificación a salida.txt)
+$ basez -d salida.txt (lo muestra en pantalla descodificado)
+$ base64url archivo.txt (muestra la codificación en pantalla)
+
+
 bash
 Intérprete de comandos compatible con sh que ejecuta comandos leídos desde la entrada estándar o desde un archivo.
 $ bash -n script (comprueba todo un script sin ejecutar comandos solo los comprueba)
