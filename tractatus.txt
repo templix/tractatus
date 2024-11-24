@@ -3121,6 +3121,24 @@ $ echo "(1409302/28186042)*100" | bc -l
 $ echo "scale = 6; 13.397/12" | bc (Resultado con 6 decimales)
 
 
+bcache-tools
+Herramienta que permite utilizar unidades SSD como caché para dispositivos de almacenamiento más lentos, como discos duros [HDD], mejorando el rendimiento del sistema.
+# make-bcache -C /dev/sdX (formatea el SSD como caché [verificar la unidad SDD con: fdisk -l])
+# make-bcache -B /dev/sdY (formatea el dispositivo HDD que será almacenado en caché)
+  $ ls /sys/fs/bcache (identifica los UUIDs generados al crear el caché y el backend)
+  $ echo <cache-UUID> | sudo tee /sys/block/bcache0/bcache/attach (conectar el caché al backend)
+# echo writethrough | sudo tee /sys/block/bcache0/bcache/cache_mode (escribe en caché y backend simultáneamente.)
+Nota.- Otras opciones: Writeback: Escribe primero en caché, luego en el backend y Writearound: Escribe directamente en el backend.
+# mount /dev/bcache0 /mnt (montar el dispositivo bcache)
+# bcache-super-show /dev/sdX (comprobar rendimiento o estadísticas del caché)
+# echo 1 | sudo tee /sys/block/bcache0/bcache/detach (desconectar un dispositivo de caché)
+# ls /sys/fs/bcache/ (listar dispositivos gestionados por bcache)
+# echo 1 | tee /sys/block/bcache0/bcache/stop (detener el caché)
+# wipefs -a /dev/sdX (borrar el superblock)
+$ make-bcache --help (explorar más comandos y opciones)
+$ bcache-super-show --help (explorar más comandos y opciones)
+
+
 bcd
 Formatea un texto en forma de tarjeta perforada.
 $ bcd linux es genial
