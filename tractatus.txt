@@ -3327,6 +3327,16 @@ binutils
 Los programas en este paquete se utilizan para ensamblar, vincular y manipular archivos binarios y de objeto. Pueden ser utilizados en conjunto con un compilador y varias bibliotecas para construir programas. Consta de la siguientes aplicaciones: addr2line, ar, as, c++filt, dwp, elfedit, gold, gprof, ld, ld.bfd, ld.gold, nm, objcopy, objdump, ranlib, readelf, size, strings y strip
 
 
+binwalk
+Herramienta para buscar archivos incrustados y código ejecutable en una imagen binaria determinada. Específicamente, está diseñada para identificar archivos y código incrustados dentro de imágenes de firmware.
+# binwalk archivo.bin (mostrará cualquier patrón o estructura conocida encontrado en el archivo)
+# binwalk -e archivo.bin (extraer automáticamente todos los archivos conocidos dentro de un archivo binario)
+# binwalk --extract --directory /codigos/incrustados archivo.bin (especificando un directorio de salida para los archivos extraídos)
+# binwalk --entropy archivo.bin (calcular y visualizar la entropía del archivo que puede ayudar a detectar datos comprimidos)
+# binwalk --signature --opcodes archivo.bin (análisis de firmas y opcodes)
+# binwalk --dd 'png image:png' archivo.bin (escanear solo por ciertas firmas específicas)
+
+
 biosdecode
 Analiza la memoria de la BIOS e imprime información sobre todas las estructuras que conoce.
 # biosdecode
