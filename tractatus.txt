@@ -3367,6 +3367,20 @@ Los clientes deben conectarse al puerto especificado en bip.conf, por defecto 77
 Donde "nombre_conexión" corresponde al nombre definido en la sección "connection" del archivo bip.conf.
 
 
+bird
+Demonio de enrutamiento de Internet con soporte completo para todos los principales protocolos.
+$ birdc (abre una sesión interactiva con el cliente remoto de BIRD)
+  birdc> show status (muestra la versión de BIRD, tiempo de ejecución y última actualización)
+  birdc> show interfaces (muestra una lista de interfaces con sus estados y configuraciones)
+  birdc> show protocols (muestra los protocolos activados y su estado)
+  birdc> show route (muestra el contenido de las tablas de rutas, incluyendo destinos, próximos saltos y protocolos)
+  birdc> show ospf state (muestra información detallada sobre el estado del protocolo OSPF)
+  birdc> show bfd sessions (información sobre las sesiones BFD activas)
+  birdc> show route filter (información sobre los filtros de rutas definidos)
+  birdc> enable bgp1 (activa o desactiva un protocolo específico)
+  birdc> show route stats (estadísticas detalladas sobre las rutas, como número de redes y rutas antes/después del filtrado)
+
+
 bitmap
 Editor de mapas de bits y utilidades de conversión para el sistema X Window. El mapa de bits puede especificarse como una lista de datos o una cadena de texto que se convierte en un mapa de bits.
 
