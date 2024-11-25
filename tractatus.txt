@@ -3337,6 +3337,15 @@ Herramienta para buscar archivos incrustados y código ejecutable en una imagen 
 # binwalk --dd 'png image:png' archivo.bin (escanear solo por ciertas firmas específicas)
 
 
+biobambam2
+BAM [Business Activity Monitoring] es un conjunto de software y aplicaciones tecnológicas e informáticas que permiten monitorizar las actividades de negocio y los procesos de una organización ofreciendo principalmente resúmenes, reportes e informes en tiempo real del conjunto de las operaciones que se llevan a cabo. Consta de varios comandos: bamsormadup [ordenamiento paralelo y marcado de duplicados], bamcollate2 [lee BAM y escribe BAM reordenado de forma que se alinee o se intercale por nombre de consulta], bammarkduplicates [lee BAM y escribe BAM con alineaciones duplicadas marcadas utilizando el campo de indicadores BAM], bammaskflags [lee BAM y escribe BAM mientras enmascara (elimina) bits de la columna de indicadores], bamrecompress [lee BAM y escribe BAM con una configuración de compresión definida. Esta herramienta es capaz de realizar subprocesos múltiples], bamsort [lee BAM y escribe BAM ordenado por coordenadas o nombre de consulta] y bamtofastq [lee BAM y escribe FastQ; la salida se puede intercalar o desintercalar por nombre de consulta] y varios más. Las opciones se pasan como pares key=value y muchos programas tienen dos modos de operación, por ejemplo, SO=coordinate vs SO=queryname.
+$ bamsort -h (obtener ayuda específica sobre un comando)
+$ bamsort input.bam output.bam
+$ bamsormadup SO=coordinate threads=4 input.bam output.bam
+$ bamsormadup SO=coordinate threads=8 input.cram output.bam (procesar archivos CRAM)
+$ blastnxmltobam ref.fasta query.fasta > query.bam (convertir XML a BAM)
+
+
 biosdecode
 Analiza la memoria de la BIOS e imprime información sobre todas las estructuras que conoce.
 # biosdecode
