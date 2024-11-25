@@ -3410,6 +3410,21 @@ bitmap
 Editor de mapas de bits y utilidades de conversión para el sistema X Window. El mapa de bits puede especificarse como una lista de datos o una cadena de texto que se convierte en un mapa de bits.
 
 
+bitmeter
+Herramienta diseñada para diagnosticar problemas en configuraciones de audio que utilizan el servidor JACK. Ayuda a verificar si las conexiones de audio están funcionando correctamente y detectar posibles errores o distorsiones en las señales de audio.
+$ jackd -d alsa (el servidor JACK tiene que estar activo)
+$ bitmeter (arrancar la aplicación con el servidor JACK activo y detectará automáticamente las conexiones JACK y comenzará a monitorear señales de audio)
+$ bitmeter -p system:playback_1 (monitorea el puerto de salida de audio playback_1)
+$ bitmeter -r 16 (cambiar el rango de bits que se muestran en la salida a 16)
+$ bitmeter -v (muestra información detallada)
+$ bitmeter -a (analiza automáticamente todas las conexiones disponibles y todos los puertos que están conectados al servidor)
+$ bitmeter --noise (genera ruido blanco para verificar la integridad de las conexiones)
+$ bitmeter --duration 30 (finaliza el monitoreo automáticamente después de 30 segundos)
+$ bitmeter > resultados_diagnostico.txt (guardar la salida de bitmeter en un archivo)
+$ bitmeter -p system:capture_1 (monitorea la señal del puerto de entrada capture_1)
+$ killall bitmeter (parar la aplicación. También con Ctrl+c)
+
+
 bld
 Es un demonio que escucha las peticiones en el puerto 2905 y recoge la información cada 10 segundos escribiendo los resultados en un archivo RRD. Las estadísticas recopiladas incluyen: Uso de CPU y memoria, carga del sistema, latencia de la red (ping), tráfico de la interfaz de la red, y temperaturas del sistema (usando sensores lm), y uso del disco. Las peticiones son o bien presentaciones de direcciones IP o comprobaciones con la lista negra. bld utiliza un algoritmo muy simple para decidir si agregar o no las direcciones IP a la lista negra. La primera vez que una dirección IP es enviada, se agrega a una lista interna con una marca de tiempo y todas las solicitudes posteriores incrementan un contador para esta IP. Tan pronto como el intervalo de tiempo mínimo es transcurrido (por defecto: 30 segundos), y si se alcanza un ratio máximo de solicitudes (por defecto: 10 envíos en el intervalo de 30 segundos), la IP es puesta en la lista negra. A continuación se pone en la lista negra durante un tiempo configurable (por defecto: 900 segundos).
 # /etc/init.d/bld stop (parar el demonio)
