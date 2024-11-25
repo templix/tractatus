@@ -3351,6 +3351,22 @@ Analiza la memoria de la BIOS e imprime información sobre todas las estructuras
 # biosdecode
 
 
+bip
+Proxy IRC que permite reproducir conversaciones registradas cuando un cliente se conecta a varios clientes en una conexión de servidor IRC.
+# /etc/init.d/bip start (iniciar el servicio)
+# bipgenconfig (generar configuración automáticamente)
+# bipmkpw USER (crear un usuario y contraseña. Copiar la salida hashada y pegarla en el archivo bip.conf)
+# openssl req -new -newkey rsa:4096 -nodes -x509 -keyout bip.pem -out bip.pem (generar un certificado SSL, opcional pero recomendado)
+Mover el certificado a /var/lib/bip y ajustar permisos:
+      # mv bip.pem /var/lib/bip
+      # chown bip:bip /var/lib/bip/bip.pem
+      # chmod 600 /var/lib/bip/bip.pem
+      # /etc/init.d/bip start (iniciar bip con)
+Los clientes deben conectarse al puerto especificado en bip.conf, por defecto 7778, usando la siguiente estructura de contraseña:
+    nombre_usuario:contraseña_hashada:nombre_conexión
+Donde "nombre_conexión" corresponde al nombre definido en la sección "connection" del archivo bip.conf.
+
+
 bitmap
 Editor de mapas de bits y utilidades de conversión para el sistema X Window. El mapa de bits puede especificarse como una lista de datos o una cadena de texto que se convierte en un mapa de bits.
 
