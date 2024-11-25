@@ -3395,6 +3395,17 @@ $ birthday -c (muestra el calendario)
 $ birthday -L (muestra el dia y el mes despues de los dias que faltan
 
 
+bitlbee
+Este programa se puede utilizar como un servidor IRC que reenvía todo lo que dices a personas en otras redes de chat: Jabber (que incluye Google Talk) y Twitter. Precisa configurar los usuarios permitidos y posiblemente establecer contraseñas.
+# systemctl start bitlbee (que esté ejecutando el servicio)
+# systemctl enable bitlbe
+$ bitlbee -c juan_perez (conectar con un usuario desde el cliente IRC. Para desconectar, presiona Ctrl+c)
+$ bitlbee -l (ver los usuarios conectados y sus estados)
+$ bitlbee -m juan_perez Hola, cómo estás? (enviar un mensaje a un usuario conectado)
+$ bitlbee -k (ver los canales si Hay configurado alguno)
+$ bitlbee -d juan_perez (desconectar un usuario específico)
+
+
 bitmap
 Editor de mapas de bits y utilidades de conversión para el sistema X Window. El mapa de bits puede especificarse como una lista de datos o una cadena de texto que se convierte en un mapa de bits.
 
