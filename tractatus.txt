@@ -3281,6 +3281,19 @@ Con esta linea tambien puede montarse con:
 # mount /mnt/docs
 
 
+bing
+Herramienta de medición de ancho de banda entre dos puntos en una red utilizando el comportamiento de paquetes ICMP, similar a ping. Bing determina el rendimiento real, en bruto, en contraposición al disponible o promedio en un enlace midiendo los tiempos de ida y vuelta de las solicitudes de eco ICMP para diferentes tamaños de paquetes en cada extremo del enlace. Puede no ser completamente preciso debido a la latencia de red y el tráfico concurrente.
+# bing host1 host2 (envía paquetes de diferentes tamaños entre los dos hosts y estima el ancho de banda)
+# bing -s 56 host1 host2 (con un tamaño inicial de 56 bytes para los paquetes ICMP)
+# bing -c 20 host1 host2 (realiza 20 pruebas por tamaño. Por defecto 10)
+# bing -v host1 host2 (proporciona más detalles sobre cada paquete y cálculo)
+# bing -4 host1 host2 (especificar la versión de IP que se debe usar, -6 para IPv6)
+# bing -m 8 host1 host2 (limita la diferencia entre los tamaños de paquetes probados a 8 bytes)
+# bing -l 64 -u 1500 host1 host2 (tamaño mínimo de los paquetes como 64 bytes y tamaño máximo como 1500 bytes)
+# bing -p 5 host1 host2 (envía solo 5 paquetes por prueba)
+# bing -f host1 host2 (evita que los paquetes se fragmenten)
+
+
 bing-ip2hosts
 Buscar sitios web alojados en una dirección IP específica o en un nombre de host. Descarga de <http://www.morningstarsecurity.com/research/bing-ip2hosts>
 $ ./bing-ip2hosts -n microsoft.com (Sin mostrar el progreso [n])
