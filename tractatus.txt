@@ -3259,6 +3259,28 @@ $ bindechexascii --d2h 2020 (lo convierte a hexadecimal)
 $ bindechexascii --b2d 11111100100 (convierte el num binario a decimal)
 
 
+bindfs
+Herramienta basada en FUSE que permite montar un directorio en otro con opciones específicas, como cambiar permisos, usuarios, grupos o comportamientos del sistema de archivos. Es muy útil para gestionar permisos sin alterar los originales o para configurar accesos específicos.
+$ bindfs ~/Documentos /mnt/docs (montar un directorio en otro)
+$ bindfs --owner=USER ~/Documentos /mnt/docs (cambia el propietario de los archivos en el punto de montaje. Esto no afecta los archivos originales, solo los reflejados)
+$ bindfs --group=grupo ~/Documentos /mnt/docs (simular que los archivos pertenecen a un grupo específico como el caso anterior)
+$ bindfs --perms=a-w ~/Documentos /mnt/docs (montar un directorio como solo lectura)
+$ bindfs --perms=644 ~/Documentos /mnt/docs (cambiar los permisos reflejados)
+$ bindfs --uid=1000 --gid=1000 ~/Documentos /mnt/docs (simular que los archivos tienen un usuario y grupo específicos)
+$ bindfs --force-user=otro_usuario ~/Documentos /mnt/docs (que todos los accesos sean tratados como si vinieran de otro_usuario)
+$ bindfs --create-with-perms=775 --create-with-group=grupo ~/Documentos /mnt/docs (que los nuevos archivos tengan permisos 775 y pertenezcan al grupo grupo)
+$ bindfs --hide-files='*.log' ~/Documentos /mnt/docs (montar un directorio y ocultar archivos .log)
+$ bindfs --force-group=grupo --mirror-only=usuario1,usuario2 ~/Documentos /mnt/docs (limitar accesos a los reflejados solo a ciertos usuarios del grupo)
+$ fusermount -u /mnt/docs (desmontar el sistema de archivos)
+$ mount | grep bindfs (verificar información sobre el montaje)
+1.- Para montar un directorio automáticamente al iniciar:
+# nano /etc/fstab
+Y añadir la linea:
+  bindfs#/home/USER/Documentos /mnt/docs fuse defaults 0 0
+Con esta linea tambien puede montarse con:
+# mount /mnt/docs
+
+
 bing-ip2hosts
 Buscar sitios web alojados en una dirección IP específica o en un nombre de host. Descarga de <http://www.morningstarsecurity.com/research/bing-ip2hosts>
 $ ./bing-ip2hosts -n microsoft.com (Sin mostrar el progreso [n])
@@ -10450,6 +10472,20 @@ funzip
 Muestra los datos de un archivo comprimido en zip o gz.
 $ funzip archivo.zip
 $ funzip -contraseña archivo.gz (En caso de tener contraseña. No es muy aconsejable porque queda en el history)
+
+
+fuse
+[Filesystem in Userspace] Permitir montajes seguros para que los usuarios sin privilegios creen y monten sus propias implementaciones de sistemas de archivos.
+$ fuse /home/USER/archivos /mnt/files (montar un sistema de archivos)
+$ fusermount -u /mnt/files (desmontar)
+$ df -T | grep fuse (verificar el estado del montaje)
+$ fuse -o allow_other /home/USER/archivos /mnt/files (permite acceso a todos los usuarios)
+Nota.- Para usar "-o" ha de descomentarse user_allow_other en /etc/fuse.conf
+$ fuse -s allow_other /home/USER/archivos /mnt/files & (ejecutar en segundo plano)
+1.- Para que los usuarios sin privilegios puedan acceder a todas las funciones:
+# nano /etc/fuse.conf
+Y descomentar:
+user_allow_other
 
 
 fuse-zip
