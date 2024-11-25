@@ -3381,6 +3381,20 @@ $ birdc (abre una sesión interactiva con el cliente remoto de BIRD)
   birdc> show route stats (estadísticas detalladas sobre las rutas, como número de redes y rutas antes/después del filtrado)
 
 
+birthday
+Dada una lista de las fechas de varios eventos diferentes, calcula y muestra una lista de aquellos que se realizarán en las próximas semanas. Esto fue diseñado originalmente para cumpleaños, pero también se puede usar para recordatorios sobre eventos anuales o para un diario de actividades. El archivo de datos:
+$ nano ~/.birthdays
+Con un contenido de ejemplo:
+    Navidad=25/12/2024 ev
+    Juan Perez=07/10/2024 bd
+    Fiesta del trabajo=01/05/2024 ann
+Nota.- "ev" = evento, "ann" = aniversario y "bd" = cumpleaños (por defecto)
+$ birthday -w (muestra los dias que faltan para los acontecimientos de los proximos 21 dias - Por defecto)
+$ birthday -W 5 (muestra los acontecimientos de los proximos 5 dias)
+$ birthday -c (muestra el calendario)
+$ birthday -L (muestra el dia y el mes despues de los dias que faltan
+
+
 bitmap
 Editor de mapas de bits y utilidades de conversión para el sistema X Window. El mapa de bits puede especificarse como una lista de datos o una cadena de texto que se convierte en un mapa de bits.
 
