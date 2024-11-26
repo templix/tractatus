@@ -3466,6 +3466,27 @@ Otros comando relacionados y del mismo paquete o bld-tools:
 # bldsubmit localhost:10000 192.168.1.46 (envía una ip al demonio que escucha en el host y puerto determinado (por defecto en localhost:2905)
 
 
+bleachbit
+elimina archivos innecesarios para liberar espacio valioso en el disco, mantener la privacidad y eliminar archivos basura. Elimina la memoria caché, el historial de Internet, los archivos temporales, las cookies y los accesos directos rotos. Se encarga de la limpieza de Adobe Reader, Bash, Beagle, Epiphany, Firefox, Flash, GIMP, Google Earth, Java, KDE, OpenOffice.org, Opera, RealPlayer, rpmbuild, Second Life Viewer, VIM, XChat y más. Además de simplemente borrar archivos basura, BleachBit limpia el espacio libre en el disco (para ocultar archivos eliminados previamente para mayor privacidad y para mejorar la compresión de imágenes), limpia las bases de datos de Firefox (para mejorar el rendimiento sin eliminar datos) y destruye de forma segura archivos arbitrarios.
+$ bleachbit (uso básico)
+$ bleachbit --list (opciones disponibles)
+$ bleachbit --cleaner=browser-cache (limpiar caché de navegadores)
+$ bleachbit --preview firefox.cache (previsualizar qué se eliminará sin eliminarlo)
+$ bleachbit --clean firefox.cache (eliminar los archivos del comando anterior)
+$ bleachbit --cleaner=system-files (eliminar archivos temporales)
+$ bleachbit --shrink (liberar espacio en disco)
+$ bleachbit --delete-large-files (eliminar archivos grandes)
+$ bleachbit --cleaner=application-configurations (limpiar configuraciones de aplicaciones)
+$ bleachbit --cleaner=duplicate-files (eliminar archivos duplicados)
+$ bleachbit --preview firefox.cache opera.cache (combinar varias opciones. Previsualizar lo que se limpiará de la cache de firefox y opera)
+$ bleachbit --clean firefox.cache opera.cache (realmente eliminar los archivos seleccionados)
+$ bleachbit --delete firefox.* (eliminar todos los archivos relacionados con Firefox)
+$ bleachbit --clean firefox.config (limpiar las configuraciones de una aplicación específica)
+$ bleachbit --shrink (liberar espacio en disco)
+$ bleachbit --overwrite --clean firefox.cache (sobrescribir los contenidos de los archivos eliminados para evitar su recuperación)
+Usar "--preview" antes de "--clean" para asegurarse de qué se eliminará. Algunas de las opciones pueden requerir permisos de administrador.
+
+
 blkid
 Muestra uuid de cada partición y el tipo de formato.
 # blkid
