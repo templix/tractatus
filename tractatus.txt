@@ -3437,6 +3437,15 @@ Está diseñado para complementar a tcpdump, que por sí solo ha hecho un gran t
 # bittwist -r captue.pcap (leer una captura existente y mostrarla)
 
 
+bitwise
+es una calculadora interactiva de múltiples bases que admite la conversión de bases dinámicas y la manipulación de bits. Es una herramienta útil para hackers de bajo nivel, desarrolladores de kernel y desarrolladores de controladores de dispositivos. Algunas de las características incluyen: Interfaz interactiva de ncurses, Calculadora de línea de comandos, Manipulador de bits individual y Operaciones bit a bit como NOT, OR, AND, XOR y desplazamientos.
+$ bitwise (abrirá una interfaz interactiva donde se podrá ingresar números y realizar operaciones)
+$ bitwise 12345 (convertirá el número decimal 12345 a diferentes bases binaria, octal y hexadecimal)
+$ bitwise 0x563d (convertirá el número hexadecimal 0x563d a sus representaciones decimal, binaria y octal)
+$ bitwise "0x123 + 0x20 - 30 / 50" (evaluará la expresión matemática en hexadecimal y mostrará el resultado)
+$ bitwise &0x1 > 0 (verificar si un número es par o impar)
+
+
 bld
 Es un demonio que escucha las peticiones en el puerto 2905 y recoge la información cada 10 segundos escribiendo los resultados en un archivo RRD. Las estadísticas recopiladas incluyen: Uso de CPU y memoria, carga del sistema, latencia de la red (ping), tráfico de la interfaz de la red, y temperaturas del sistema (usando sensores lm), y uso del disco. Las peticiones son o bien presentaciones de direcciones IP o comprobaciones con la lista negra. bld utiliza un algoritmo muy simple para decidir si agregar o no las direcciones IP a la lista negra. La primera vez que una dirección IP es enviada, se agrega a una lista interna con una marca de tiempo y todas las solicitudes posteriores incrementan un contador para esta IP. Tan pronto como el intervalo de tiempo mínimo es transcurrido (por defecto: 30 segundos), y si se alcanza un ratio máximo de solicitudes (por defecto: 10 envíos en el intervalo de 30 segundos), la IP es puesta en la lista negra. A continuación se pone en la lista negra durante un tiempo configurable (por defecto: 900 segundos).
 # /etc/init.d/bld stop (parar el demonio)
