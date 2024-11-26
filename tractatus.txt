@@ -10345,6 +10345,19 @@ Este paquete proporciona los componentes adicionales para un entorno forense. To
 aircrack-ng, bfbtester, binutils, binwalk, bruteforce-luks, bzip2, cabextract, chntpw, clamav, cmospwd, crunch, cryptmount, cupp, dcfldd, disktype, dnsutils, ethstatus, ethtool, exfat-fuse, exfat-utils, exif, exiftags, libimage-exiftool-perl, exiv2, fatcat, fdupes, flasm, foremost, gdisk, geoip-bin, gifshuffle, hashcat, hashid, hexcompare, hexedit, hydra, jdupes, john, lcrack, less, maskprocessor, mc, mdadm, medusa, memstat, mpack, nasm, ncrack, neopi, netcat, nmap, ntfs-3g, ophcrack-cli, outguess, p7zip-full, parted, patator, pcapfix, pdfcrack, poppler-utils (provides pdfinfo), pecomato, pev, polenum, pyrit, rarcrack, samdump2, sipcrack, smb-nat, snowdrop, statsprocessor, stegosuite, stegsnow, sucrack, sxiv, tcpdump, tcpflow, tcpick, tcpreplay, tcpxtract, telnet, testdisk, tshark, uni2ascii, unrar-free, unzip, wamerican, wamerican-huge, wamerican-insane, wamerican-large, wamerican-small, wbrazilian, wbritish, wbritish-huge, wbritish-insane, wbritish-large, wbritish-small, wbulgarian, wcanadian, wcanadian-huge, wcanadian-insane, wcanadian-large, wcanadian-small, wcatalan, weplab, wfrench, wgaelic, wgerman-medical, whois, wifite, wirish, witalian, wmanx, wpolish, wportuguese, wspanish, wswedish, wukrainian, xxd.
 
 
+fork
+[fork bomb]. Consumir los recursos disponibles del sistema, como la CPU y la memoria, hasta el punto en que este queda inutilizable. El comando más representativo asociado a una fork bomb es el siguiente:
+      :(){ :|:& };:
+Explicación:
+    : ----- nombre de la función.
+    () { }- define la función sin ningún parámetro.
+    :|: --- la función se llama a sí misma y el operador | redirige su salida a una nueva instancia de sí misma.
+    & ----- ejecuta las llamadas en segundo plano, permitiendo la creación simultánea de procesos.
+    ; ----- separador entre la definición de la función y su ejecución inicial.
+    : ----- ejecuta la función, lo que inicia la cascada de procesos.
+Una vez en marcha, la fork bomb consume rápidamente los recursos del sistema, bloqueando la capacidad de ejecutar nuevos procesos y usualmente obligando a un reinicio forzado del equipo.
+
+
 forkstat
 Supervisa la actividad fork, exec y exit del proceso.
 # forkstat -S -e all (mostrar estadisticas de eventos al final de la ejecución i sobre todos los procesos)
@@ -23307,6 +23320,17 @@ daemon.alert   /var/log/alert
 # systemctl status scanlogd.service
 
 
+scanssh
+Scanea una lista de direcciones y redes en busca de servidores de protocolo SSH en ejecución y sus números de versión, así como puertos y servidores proxy abiertos.
+# scanssh 192.168.0.0/24 (escaneará toda la red 192.168.0.0/24 buscando servidores SSH en ejecución)
+# scanssh -n 22 192.168.0.0/24 (escaneará solo el puerto 22 en la red especificada)
+# scanssh -p 192.168.0.0/24 (detectar proxies abiertos en la red especificada)
+# scanssh -s ssh,socks5,http-proxy,telnet-proxy 192.168.0.0/24 (ejecutará múltiples escaneadores simultáneamente [SSH, SOCKS5, HTTP proxy y TELNET proxy] en la red especificada)
+# scanssh -u socks.example.com:9050 192.168.0.0/24 (usará SOCKS proxies para escanear la red especificada)
+# scanssh 'random(1000)/0.0.0.0/0' (escaneará aleatoriamente 1000 direcciones en la red 0.0.0.0/0)
+# scanssh 192.168.18.0/24 -I -r 3 (sin cadena de identificación ssh y 3 pruebas por segundo
+
+
 schroot
 Parecido a un chroot [ver] que se ha de usar como root, pero para usuarios normales. schroot permite el acceso a chroots para usuarios normales que utilizan el mismo mecanismo, pero con la comprobación de permisos y permite la configuración automática adicional del entorno chroot, como el montaje de sistemas de archivos adicionales y otras tareas de configuración.
 
@@ -25033,6 +25057,25 @@ Crea certificados "autofirmados" más seguros.
      Wrote Diffie-Hellman parameters to /home/USER/dhparams.pem
 
 
+ssconvert
+[gnumeric]. Conversor de formatos de hoja de cálculo por línea de comandos.
+$ ssconvert --list-exporters (Listado de conversiones de salida)
+$ ssconvert --list-importers (Litado de conversiones de entrada)
+$ ssconvert entrada.xls salida.csv (De formato excel a csv)
+$ ssconvert -E utf-8 entrada.xls salida.csv (Especificando una codificación para la salida)
+$ ssconvert --export-type=Gnumeric_stf:stf_assistant -O 'separator=| format=preserve charset=unicode' entrada.xls salida.csv (Especificando opcionalmente un exportador [--export-type] que permite exportar a txt, especificando un separador de campos que no sea el por defecto [el espacio] sinó la barra vertical [|], preservando el formato de las celdas del original [format], otras opciones de format son "automatic" [por defecto] y "raw" [sin formato] y con codificación de salida en unicode [por defecto UTF-8])
+
+
+ssed
+Versión mejorada de GNU sed [ver] con algunos argumentos nuevos.
+
+
+ssft
+Biblioteca de funciones de Shell. La biblioteca define un conjunto de varias funciones y ha sido diseñada para usarse obteniendo el código de la biblioteca de otros scripts. El ejecutable incorpora .sh.
+$ ssft.sh -d (listado de funciones diponibles)
+$ ssft.sh -d ssft_file_selection (descripción de una función)
+
+
 ssh
 Comunicación cifrada entre dos máquinas.
 $ ssh usuario@host (básica)
@@ -25135,25 +25178,6 @@ En la máquina cliente:
 	ForwardX11Trusted yes
 Después de reiniciar ssh, con el parámetro -X se visualizará la gui remota que tambien tiene que estar instalada en local.
 $ ssh -X usuario@host akregator
-
-
-ssconvert
-[gnumeric]. Conversor de formatos de hoja de cálculo por línea de comandos.
-$ ssconvert --list-exporters (Listado de conversiones de salida)
-$ ssconvert --list-importers (Litado de conversiones de entrada)
-$ ssconvert entrada.xls salida.csv (De formato excel a csv)
-$ ssconvert -E utf-8 entrada.xls salida.csv (Especificando una codificación para la salida)
-$ ssconvert --export-type=Gnumeric_stf:stf_assistant -O 'separator=| format=preserve charset=unicode' entrada.xls salida.csv (Especificando opcionalmente un exportador [--export-type] que permite exportar a txt, especificando un separador de campos que no sea el por defecto [el espacio] sinó la barra vertical [|], preservando el formato de las celdas del original [format], otras opciones de format son "automatic" [por defecto] y "raw" [sin formato] y con codificación de salida en unicode [por defecto UTF-8])
-
-
-ssed
-Versión mejorada de GNU sed [ver] con algunos argumentos nuevos.
-
-
-ssft
-Biblioteca de funciones de Shell. La biblioteca define un conjunto de varias funciones y ha sido diseñada para usarse obteniendo el código de la biblioteca de otros scripts. El ejecutable incorpora .sh.
-$ ssft.sh -d (listado de funciones diponibles)
-$ ssft.sh -d ssft_file_selection (descripción de una función)
 
 
 sshd
