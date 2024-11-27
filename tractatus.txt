@@ -3559,6 +3559,16 @@ $ ls -lF /dev/disk/by-uuid/
 # blkid -i /dev/sda (Información sobre los sectores)
 
 
+blkreplay
+es una utilidad que controla la capa de bloques del sistema operativo mientras mide la latencia y el rendimiento de las operaciones de I/O para su posterior visualización.
+# blkreplay /dev/sda (reproducir una carga simple en un dispositivo específico)
+# blkreplay --fill-random=100 /dev/sdb (reproducir una carga artificial de lecturas y escrituras aleatorias)
+# blkreplay --replay-start=0 --replay-end=60 /dev/sdc (reproducir una carga durante un período específico)
+# blkreplay --verbose --with-verify /dev/sdd (reproducir con la máxima información y verificación de datos)
+# blkreplay --acc-factor=2 /dev/sde (reproducir con un factor de aceleración)
+# blkreplay --no-stalls /dev/sdf (reproducir sin esperas entre grupos)
+
+
 blockfinder
 Enumera la información de red por países.
 $ blockfinder -i (actualizar la caché)
@@ -11672,7 +11682,7 @@ El puntero del ratón de convierte en una cruz y al clicar obtiene el color.
 
 
 graphviz
-(meta paquete). Genera gráficos a partir de archivos de texto. Ver pactree o dot porque la apñlicación incluye varios ejecutables: acyclic, bcomps, ccomps, circo, cluster, diffimg, dijkstra, dot, dot2gxl, dot_builtins, dotty, edgepaint, fdp, gc, gml2gv, graphml2gv, gv2gml, gv2gxl, gvcolor, gvgen, gvmap, gvmap.shn, gvpack, gvpr, gxl2dot, gxl2gv, lefty, lneato, mingle, mm2gv, neato, nop, osage, patchwork, prune, sccmap, sfdp, tred, twopi, unflatten y vimdot. Generar un archivo con pactree:
+(meta paquete). Genera gráficos a partir de archivos de texto. Ver pactree o dot porque la aplicación incluye varios ejecutables: acyclic, bcomps, ccomps, circo, cluster, diffimg, dijkstra, dot, dot2gxl, dot_builtins, dotty, edgepaint, fdp, gc, gml2gv, graphml2gv, gv2gml, gv2gxl, gvcolor, gvgen, gvmap, gvmap.shn, gvpack, gvpr, gxl2dot, gxl2gv, lefty, lneato, mingle, mm2gv, neato, nop, osage, patchwork, prune, sccmap, sfdp, tred, twopi, unflatten y vimdot. Generar un archivo con pactree:
 $ pactree -g htop > htop
 $ dotty htop (muestra el gráfico)
 
