@@ -3484,6 +3484,73 @@ $ bleachbit --overwrite --clean firefox.cache (sobrescribir los contenidos de lo
 Usar "--preview" antes de "--clean" para asegurarse de qué se eliminará. Algunas de las opciones pueden requerir permisos de administrador.
 
 
+bliss
+Herramienta para calcular grupos de automorfismos y formas canónicas de grafos.
+$ bliss grafo.bliss -v (calculará el grupo de automorfismos del grafo y la forma canónica y mostrará el resultado con información detallada por pantalla)
+$ bliss grafo.bliss -p (ordena los nodos del grafo de acuerdo con el grado de cada uno)
+$ bliss grafo.bliss -o grafo.dot (genera un archivo de salida llamado grafo.dot en formato compatible con Graphviz)
+$ time bliss grafo.bliss (ejecutará el comando y mostrará cuánto tiempo tomó calcular los automorfismos)
+1.- Comparar dos grafos verificando si son isomorfos. Por ejemplo:
+$ bliss grafo1.bliss -c > canon1.txt
+$ bliss grafo2.bliss -c > canon2.txt
+$ diff canon1.txt canon2.txt
+Si las formas canónicas de los dos grafos son iguales, el resultado será un archivo vacío, indicando que los grafos son isomorfos.
+2.- Ejemplo completo para la creación de grafos en formato DIMACS:
+$ echo -e "p edge 6 5\ne 1 2\ne 1 3\ne 2 4\ne 2 5\ne 3 6" > grafo.dimacs
+$ cat grafo.dimacs
+  p edge 6 5
+  e 1 2
+  e 1 3
+  e 2 4
+  e 2 5
+  e 3 6
+La línea "p edge 6 5" indica que hay 6 vértices y 5 aristas. Cada línea que comienza con "e" describe una arista entre dos vértices numerados a partir de 1.
+$ bliss grafo.dimacs
+  Generator: (4,5)
+  Nodes:          3
+  Leaf nodes:     3
+  Bad nodes:      0
+  Canrep updates: 1
+  Generators:     1
+  Max level:      1
+  |Aut|:          2
+  Total time:	0.00 seconds
+Verificar que grafo.dimacs no ha variado:
+$ cat -A grafo.dimacs
+  p edge 6 5
+  e 1 2
+  e 1 3
+  e 2 4
+  e 2 5
+  e 3 6
+bliss no tiene capacidades de visualización gráfica; su propósito es calcular automorfismos y formas canónicas de grafos. Sin embargo, se puede visualizar el grafo utilizando herramientas externas como Graphviz, convirtiendo el archivo DIMACS en un formato legible por Graphviz como DOT mediante un script de conversión a .dot:
+$ nano dimacs_to_dot.sh
+  #!/bin/bash
+  input="$1"
+  output="$2"
+  #
+  echo "graph Grafo {" > "$output"
+  grep "^e" "$input" | while read -r line; do
+      node1=$(echo "$line" | awk '{print $2}')
+      node2=$(echo "$line" | awk '{print $3}')
+      echo "    $node1 -- $node2;" >> "$output"
+  done
+  echo "}" >> "$output"
+$ chmod +x dimacs_to_dot.sh
+$ ./dimacs_to_dot.sh grafo.dimacs grafo.dot
+Una vez generado el archivo grafo.dot con laherramienta dot de Graphviz se genera una imagen .png
+$ cat grafo.dot
+  graph Grafo {
+      1 -- 2;
+      1 -- 3;
+      2 -- 4;
+      2 -- 5;
+      3 -- 6;
+      }
+$ dot -Tpng grafo.dot -o grafo.png (creado grafo.png se puede abrir con cualquier visor de imágenes)
+$ dot -Tx11 grafo.dot (o desde la terminal)
+
+
 blkid
 Muestra uuid de cada partición y el tipo de formato.
 # blkid
