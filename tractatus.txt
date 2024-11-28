@@ -3560,13 +3560,25 @@ $ ls -lF /dev/disk/by-uuid/
 
 
 blkreplay
-es una utilidad que controla la capa de bloques del sistema operativo mientras mide la latencia y el rendimiento de las operaciones de I/O para su posterior visualización.
+Utilidad que controla la capa de bloques del sistema operativo mientras mide la latencia y el rendimiento de las operaciones de I/O para su posterior visualización.
 # blkreplay /dev/sda (reproducir una carga simple en un dispositivo específico)
 # blkreplay --fill-random=100 /dev/sdb (reproducir una carga artificial de lecturas y escrituras aleatorias)
 # blkreplay --replay-start=0 --replay-end=60 /dev/sdc (reproducir una carga durante un período específico)
 # blkreplay --verbose --with-verify /dev/sdd (reproducir con la máxima información y verificación de datos)
 # blkreplay --acc-factor=2 /dev/sde (reproducir con un factor de aceleración)
 # blkreplay --no-stalls /dev/sdf (reproducir sin esperas entre grupos)
+
+
+blktool
+Se utiliza para consultar o cambiar la configuración de un dispositivo de bloque que funciona en dispositivos SCSI, IDE y SATA. Asegúrarse de conocer lo que se está modificando antes de hacer cambios..
+# blktool /dev/sda (obtener información general sobre un dispositivo de bloque como su tamaño, tipo, estado, etc.)
+# blktool /dev/sda geometry (ver la geometría del disco)
+# blktool /dev/sda sector-sz (ver el tamaño del sector)
+# blktool /dev/sda pio-mode 4 (cambiar el modo de transferencia de datos en ATA)
+# blktool /dev/sda wcache on (habilitar/deshabilitar el caché de escritura)
+# blktool /dev/sda sleep (poner el dispositivo en modo de sueño)
+# blktool -t scsi /dev/sdb (especificando tipo de dispositivo)
+# blktool -f /dev/sdc reset (deshabilita la escritura forzosa de buffers)
 
 
 blockfinder
