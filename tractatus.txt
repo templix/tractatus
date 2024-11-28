@@ -3695,6 +3695,13 @@ Este ejemplo configura el directorio root para el cliente "client" en el servido
 $ bootparamd -d (iniciará el servidor en modo depuració y se podrán ver los mensajes cuando reciba solicitudes)
 
 
+bootpc
+Cliente de protocolo de arranque que se utiliza para obtener el número de IP de las máquinas, configurar servidores de nombres DNS y otra información útil.
+$ bootpc -f archivo.cfg (solicitar un archivo de configuración al servidor DHCP)
+$ bootpc -b archivo.bin (solicita una imagen de arranque)
+$ bootpc (solicita información general de los servidores DHCP en la red)
+
+
 bottom
 Muestra información (CPU, red, memoria RAM, procesos, temperaturas...) del equipo en tiempo real. Página del proyecto: https://github.com/ClementTsang/bottom
 $ btm
