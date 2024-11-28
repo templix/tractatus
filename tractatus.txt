@@ -3702,6 +3702,21 @@ $ bootpc -b archivo.bin (solicita una imagen de arranque)
 $ bootpc (solicita información general de los servidores DHCP en la red)
 
 
+borgbackup
+Herramienta para realizar copias de seguridad seguras y eficientes mediante deduplicación, compresión y cifrado. La técnica de deduplicación de datos utilizada hace que sea adecuado para copias de seguridad diarias, ya que solo se almacenan los cambios.
+$ borg init --encryption=repokey /home/USER/repositorio (antes de crear copias de seguridad se debe inicializar un repositorio con una clave cifrada)
+$ borg create --progress --stats /home/USER/repositorio::docs-2024-11-28 /home/USER/Documentos (muestra progreso, proporciona estadisticas del respaldo)
+$ borg list /home/USER/repositorio (muestra todos los respaldos existentes en un repositorio)
+$ borg extract /home/USER/repositorio::docs-2024-11-28 --destination /home/USER/restauracion (restaura un respaldo a una ubicación especificada)
+$ borg check /home/USER/repositorio (comprobar la integridad del repositorio)
+$ borg delete /home/USER/repositorio::docs-2024-11-28 (elimina una copia de seguridad específica)
+$ borg prune --keep-daily=7 --keep-weekly=4 --keep-monthly=6 /home/USER/repositorio (conserva los últimos 7 respaldos diarios, 4 semanales y 6 mensuales)
+$ borg compact /home/USER/repositorio (compacta el espacio del repositorio tras eliminar archivos o datos redundantes)
+# borg mount /home/USER/repositorio /mnt/backups (montar un repositorio y explorar sus respaldos como un sistema de archivos)
+# borg umount /mnt/backups (desmontar)
+$ borg create user@servidor:/home/USER/repositorio::respaldo-remoto /home/USER/datos (respaldar datos en un servidor remoto)
+
+
 bottom
 Muestra información (CPU, red, memoria RAM, procesos, temperaturas...) del equipo en tiempo real. Página del proyecto: https://github.com/ClementTsang/bottom
 $ btm
