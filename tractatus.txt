@@ -3602,8 +3602,22 @@ $ blockfinder -v -t SP (buscar el recurso deseado en el país de su elección)
 $ blockfinder -v -t SP:ipv4 (filtrar los resultados de un protocolo específico)
 
 
+bluemon
+Monitorea la calidad del enlace de un dispositivo Bluetooth.
+$ hcitool scan (identificar la dirección o nombre del dispositivo Bluetooth que quieres monitorear)
+          Scanning ...
+          	00:1A:7D:DA:71:13	Teclado-Bluetooth
+$ bluemon -d 00:1A:7D:DA:71:13 (monitorea la conexión con el dispositivo cuya MAC se ha especificado)
+$ bluemon -d 00:1A:7D:DA:71:13 -c "notify-send 'Bluetooth conectado' 'El dispositivo se ha conectado'" (mostrar mensaje cuando se conecta)
+$ bluemon -d 00:1A:7D:DA:71:13 -x "notify-send 'Bluetooth desconectado' 'El dispositivo se ha desconectado'" (cuando se desconecta)
+$ bluemon -d 00:1A:7D:DA:71:13 -s 10 (define el umbral de calidad. Valores bajos hacen que bluemon sea más sensible a la pérdida de calidad)
+$ bluemon -d 00:1A:7D:DA:71:13 -c "echo 'Teclado conectado'" & (para monitorear varios dispositivos ejecutar en segundo plano)
+$ bluemon -d 00:1B:63:84:45:67 -c "echo 'Auriculares conectados'" &
+$ bluemon -d 00:1A:7D:DA:71:13 >> ~/bluemon.log 2>&1 & (monitoreo detallado en segundo plano y gardado en un registro)
+
+
 bluez
-Es una herramienta que se puede utilizar para manipular atributos de un dispositivo Bluetooth Low Energy [BLE]. Es principalmente útil para averiguar los servicios y características de un dispositivo BLE disponible para que los datos de la víctima puedan ser leídos/escritos según el atacante. consta de varios ejecutables; bluemoon, bluetoothctl, btattach, btmgmt, btmon, ciptool, gatttool, hciattach, hcitool, hex2hcd, l2ping, l2test, mpris-proxy, obexctl, rctest, rfcomm, sdptool y bluetoothd
+Es una herramienta que se puede utilizar para manipular atributos de un dispositivo Bluetooth Low Energy [BLE]. Es principalmente útil para averiguar los servicios y características de un dispositivo BLE disponible para que los datos de la víctima puedan ser leídos/escritos según el atacante. Consta de varios ejecutables; bluemoon, bluetoothctl, btattach, btmgmt, btmon, ciptool, gatttool, hciattach, hciconfig, hcitool, hex2hcd, l2ping, l2test, mpris-proxy, obexctl, rctest, rfcomm, sdptool y bluetoothd
 $ hcitool dev (averiguar los dispositivos accesibles)
 $ hcitool lescan (escaneo de baja energía. El resultado puede ser F2:C5:F2:0A:BF:C8)
 $ gatttool -b F2:C5:F2:0A:BF:C8 -I (conectar al dispositivo encontrado)
