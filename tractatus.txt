@@ -3617,9 +3617,10 @@ $ bluemon -d 00:1A:7D:DA:71:13 >> ~/bluemon.log 2>&1 & (monitoreo detallado en s
 
 
 bluez
-Es una herramienta que se puede utilizar para manipular atributos de un dispositivo Bluetooth Low Energy [BLE]. Es principalmente útil para averiguar los servicios y características de un dispositivo BLE disponible para que los datos de la víctima puedan ser leídos/escritos según el atacante. Consta de varios ejecutables; bluemoon, bluetoothctl, btattach, btmgmt, btmon, ciptool, gatttool, hciattach, hciconfig, hcitool, hex2hcd, l2ping, l2test, mpris-proxy, obexctl, rctest, rfcomm, sdptool y bluetoothd
+Es una herramienta que se puede utilizar para manipular atributos de un dispositivo Bluetooth Low Energy [BLE]. Es principalmente útil para averiguar los servicios y características de un dispositivo BLE disponible para que los datos de la víctima puedan ser leídos/escritos según el atacante. Consta de varios ejecutables; bluemoon, bluetoothctl, btattach, btmgmt, btmon, ciptool, gatttool, hciattach, hciconfig, hcidump, hcitool, hex2hcd, l2ping, l2test, mpris-proxy, obexctl, rctest, rfcomm, sdptool y bluetoothd
 $ hcitool dev (averiguar los dispositivos accesibles)
 $ hcitool lescan (escaneo de baja energía. El resultado puede ser F2:C5:F2:0A:BF:C8)
+$ hcidump (monitorear la actividad de Bluetooth)
 $ gatttool -b F2:C5:F2:0A:BF:C8 -I (conectar al dispositivo encontrado)
 $ gatttool --help-all (todas las opciones)
 $ gatttool -i (iniciar la aplicación en modo interactivo)
@@ -5331,13 +5332,17 @@ $ conky (Arrancar la aplicación. Se muestra en el escritorio)
 $ conky -d (arrancarla como daemon)
 
 
-connmanctl
-Esta aplicación puede ejecutarse en dos modos: una entrada de comandos síncrona simple y una shell interactiva asíncrona. Para ejecutar un comando específico el usuario puede introducir connmanctl comando [opciones] o simplemente connmanctl, en este último caso se iniciará un shell interactivo. Connmanctl puede manejar la mayoría de las conexiones de red. Se puede utilizar para activar/desactivar cualquier tecnología que exista en el sistema, mostrar una lista de servicios disponibles, conectar/desconectar redes, mostrar propiedades del sistema, las tecnologías y cualquier servicio individual y configurar todas las propiedades. También es capaz de monitorizar los cambios en las propiedades de los servicios, las tecnologías y el sistema.
-$ connmanctl state
-$ connmanctl technologies
-$ connmanctl enable wifi
-$ connmanctl services
-$ connmanctl vpnconnections
+connman
+Utilidad para gestionar las conexiones a Internet y otros servicios de red. Implementa resolución y almacenamiento en caché de DNS, clientes DHCP para IPv4 e IPv6, manejo de direcciones IPv4 locales de enlace y conexión compartida a clientes a través de USB, Ethernet, WiFi, celular y Bluetooth.
+$ connmanctl state (verificar el estado actual de las conexiones activas y disponibles)
+$ connmanctl enable wifi_0 (activar la interfaz Wi-Fi)
+$ connmanctl connect wifi_0 (y luego conectar a una red)
+$ connmanctl disconnect wifi_0 (desconectar una red)
+$ connmanctl services (muestrae todas las redes disponibles para conectar)
+$ connmanctl config wifi_0 --manual --security=none --autoconnect=yes (establece un perfil manual de conexión sin seguridad)
+$ connmanctl state wifi_0 (muestra el estado actual de la interfaz Wi-Fi)
+$ connmanctl agent on (activa el agente de conexión)
+$ connmanctl connect vpn_0 (y luego se conecta a un servicio VPN especifico)
 
 
 conntrack
