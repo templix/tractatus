@@ -3581,6 +3581,20 @@ Se utiliza para consultar o cambiar la configuración de un dispositivo de bloqu
 # blktool -f /dev/sdc reset (deshabilita la escritura forzosa de buffers)
 
 
+blktrace
+Herramienta avanzada para rastrear eventos en dispositivos de bloques del kernel, como discos duros, SSD, o dispositivos NVMe. Incluye herramientas adicionales como blkparse [para analizar los datos generados] e iowatcher [para generar gráficos visuales del rendimiento],
+# blktrace -d /dev/sda (especifica el dispositivo de bloque a rastrear y genera archivos "sda.blktrace.*" en el directorio actual. Para detener Ctrl+c)
+# blktrace -d /dev/sda -o - | blkparse -i - (enviar los datos de salida, como lecturas, escrituras, y sincronizaciones a la pantalla y analizar la salida en tiempo real)
+# blkparse -i sda.blktrace.0 -o resultado.txt (especifica el archivo de rastreo generado previamente por blktrace y guarda el análisis en resultado.txt)
+# iowatcher -t sda.blktrace.0 -o rendimiento.svg (especifica el archivo de rastreo y genera un gráfico .SVG que muestra la actividad y que se puede visonar con el navegador o un visor)
+# blktrace -d /dev/sda -d /dev/sdb (rastrea varios dispositivos a la vez y genera archivos separados sda.blktrace.* y sdb.blktrace.*)
+# blkparse -i sda.blktrace.0 -i sdb.blktrace.0 -o combinado.txt (crea un archivo combinado.txt con el análisis combinado de ambos dispositivos)
+# blktrace -d /dev/sda -w 10 (rastrea durante 10 segundos y luego se detiene automáticamente)
+# blktrace -d /dev/sda | blkparse -a write -o escrituras.txt (filtra eventos relacionados con escrituras y guarda en escrituras.txt)
+# blktrace -d /dev/sda -o - | blkparse | grep "latency" (busca problemas de latencia en los eventos)
+# blkparse -i sda.blktrace.0 -s (muestra un resumen de estadísticas como latencias promedio y número de operaciones)
+
+
 blockfinder
 Enumera la información de red por países.
 $ blockfinder -i (actualizar la caché)
