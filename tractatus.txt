@@ -3686,6 +3686,15 @@ Grabar los mensajes de inicio de sesión.
 # bootlogd -l inicio.log (Especificando archivo. Por defecto en /var/log/boot)
 
 
+bootparamd
+Servidor que proporciona inforamción necesaria para el arranque de clientes sin disco. Antes de iniciar el servidor, se debe configurar el archivo:
+# nano /etc/bootparams
+Añadir la linea, por ejemplo:
+       client root=nfsserver:/export/client/root
+Este ejemplo configura el directorio root para el cliente "client" en el servidor NFS "nfsserver:/export/client/root".
+$ bootparamd -d (iniciará el servidor en modo depuració y se podrán ver los mensajes cuando reciba solicitudes)
+
+
 bottom
 Muestra información (CPU, red, memoria RAM, procesos, temperaturas...) del equipo en tiempo real. Página del proyecto: https://github.com/ClementTsang/bottom
 $ btm
