@@ -3721,18 +3721,18 @@ borgmatic
 es un script contenedor de Python simple para el software de respaldo Borg que inicia un respaldo, elimina los respaldos antiguos según una política de retención y valida los respaldos para verificar su coherencia. El script permite especificar la configuración en un archivo de configuración declarativo en lugar de tener que colocarlos todos en la línea de comandos y maneja errores comunes. permite configurar y ejecutar las tareas típicas de BorgBackup mediante un único archivo de configuración, en lugar de depender de comandos individuales.
 # borgmatic config generate (crea un archivo de configuración en /etc/borgmatic/config.yaml)
 Un ejemplo de contenido básico podría ser:
-   location:
+    location:
        source_directories:
                - /ruta/a/respaldar
        repositories:
                - /ruta/a/repositorio
-   storage:
+    storage:
        encryption_passphrase: "mi-contraseña-segura"
-   retention:
+    retention:
        keep_daily: 7
        keep_weekly: 4
        keep_monthly: 6
-   consistency:
+    consistency:
        checks:
                - repository
                - archives
