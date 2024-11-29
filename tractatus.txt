@@ -3744,6 +3744,14 @@ Y agregar una línea como esta para respaldos diarios a las 2 a.m.:
           0 2 * * * /usr/bin/borgmatic
 
 
+bosh
+[Browsable Output SHell]. Herramienta diseñada para navegar y manipular de manera interactiva y eficiente sistemas de archivos y otros recursos. Se describe como una shell de salida navegable porque combina características de una shell estándar, como Bash, con una interfaz interactiva para navegar por directorios, ejecutar comandos y gestionar salidas. Con el navegador en file:///usr/share/doc/bosh/examples muestra 3 scripts: bof, bops y boss que pueden copiarse en /usr/local/bin y que implementan nuevas caracteristicas a la aplicación. Para salir de todas, Crl-x.
+$ ls -al | bosh
+$ ls -al | bops
+$ cat archivo.txt | bosh
+$ cat archivo.txt | bof
+
+
 botan
 Se utiliza para realizar diversas operaciones criptográficas, como cifrado, descifrado, generación de claves, hashes y firmas digitales. Admite una amplia variedad de algoritmos, como RSA, DSA, DES, AES, MD5 y SHA-1.
 $ botan list (lista todos los algoritmos compatibles)
