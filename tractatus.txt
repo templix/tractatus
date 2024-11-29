@@ -3744,6 +3744,32 @@ Y agregar una línea como esta para respaldos diarios a las 2 a.m.:
           0 2 * * * /usr/bin/borgmatic
 
 
+botan
+Se utiliza para realizar diversas operaciones criptográficas, como cifrado, descifrado, generación de claves, hashes y firmas digitales. Admite una amplia variedad de algoritmos, como RSA, DSA, DES, AES, MD5 y SHA-1.
+$ botan list (lista todos los algoritmos compatibles)
+$ botan hash --algo=SHA-256 --output-format=hex archivo.txt (calcular el hash de un archivo usando el algoritmo SHA-256)
+$ echo -n "Linux es un sistema genial" | botan hash --algo=SHA-256 --output-format=hex (calcular un hash para una cadena de texto)
+$ botan gen_rsa --key-size=2048 > clave_privada.pem (generar un par de claves RSA con una longitud específica)
+$ botan pubkey --pub --pem clave_privada.pem > clave_publica.pem (extraer la clave pública del comando anterior)
+$ botan encrypt rsa clave_publica.pem archivo.txt > archivo_cifrado.bin (cifrar un archivo usando RSA)
+$ botan decrypt rsa clave_privada.pem archivo_cifrado.bin > archivo_descifrado.txt (descifrar el archivo cifrado)
+$ botan sign rsa clave_privada.pem archivo.txt > firma.bin (firmar un archivo usando RSA)
+$ botan verify rsa clave_publica.pem archivo.txt firma.bin (verificar la firma)
+$ botan pbkdf2 --algo=PBKDF2 --hash=SHA-256 --iter=100000 "contraseña" --salt=sal > clave_derivada.bin (usar una contraseña para derivar una clave segura)
+$ botan rng 16 (generar 16 bytes de datos aleatorios)
+$ botan keyinfo clave_privada.pem (ver detalles de una clave)
+$ botan pkcs8 --pem clave_privada.der > clave_privada.pem (convertir una clave privada entre formatos PEM y DER)
+1.-
+Cifrar un archivo con AES en modo CBC:
+Primero generar una clave y un IV [vector de inicialización]:
+$ botan rng 32 > aes_key.bin
+$ botan rng 16 > aes_iv.bin
+Luego, cifra el archivo:
+$ botan encrypt aes-256-cbc aes_key.bin aes_iv.bin archivo.txt > archivo_cifrado.bin
+Descifrar el archivo cifrado:
+$ botan decrypt aes-256-cbc aes_key.bin aes_iv.bin archivo_cifrado.bin > archivo_descifrado.txt
+
+
 bottom
 Muestra información (CPU, red, memoria RAM, procesos, temperaturas...) del equipo en tiempo real. Página del proyecto: https://github.com/ClementTsang/bottom
 $ btm
