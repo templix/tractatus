@@ -3803,6 +3803,16 @@ $ bozocrack archivo.txt
 	Nota.- dado que no usa diccionarios ni fuerza bruta sino solo busquedas de google, solamente se encontrarán las más usuales.
 
 
+bpfmon
+[Berkeley Packet Filter MONitor]. Monitorea la cantidad de bytes y paquetes que pasan por una interfaz de red específica.
+# bpfmon enp1s0 "arp or ip" (cuenta los paquetes arp o ip en enp1s0)
+# bpfmon any " " (cuenta todos los paquetes en todas las interfaces)
+# bpfmon iptables "FORWARD 1" (cuenta los paquetes que coinciden con la primera regla en la tabla filter, chain FORWARD)
+# bpfmon -z enp1s0 ip (muetra el gráfico en horizontal)
+# bpfmon -N iptables "nat chn 3" (con los colores invertidos y cuenta los paquetes que coinciden con la tercera regla en la tabla nat, chain chn)
+# bpfmon iptables (cuenta los paquetes que coinciden con una regla de iptables)
+
+
 bpytop
 Monitor de recursos tipo top o htop escrito en python. La descarga es:
 # apt install snapd
