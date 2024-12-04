@@ -3825,6 +3825,27 @@ Monitor de recursos que muestra el uso y las estadísticas del procesador, la me
 $ bpytop
 
 
+braa
+Escáner para realizar consultas SNMP [Simple Network Management Protocol] a varios dispositivos de red de manera rápida y eficiente.
+$ braa public@192.168.1.1 system.sysDescr.0 (a la comunidad "public", dirección ip del dispositivo y al identificador de objeto [OID] que representa la descripción del sistema)
+$ braa public@192.168.1.1,192.168.1.2,192.168.1.3 system.sysUpTime.0 (la herramienta consultará el tiempo de actividad [sysUpTime] de tres dispositivos separando las direcciones IP con comas)
+$ braa public@192.168.1.1:162 system.sysName.0 (especificando el puerto 162 del dispositivo)
+$ braa -t 5000 public@192.168.1.1 system.sysDescr.0 (tiempo de espera de 5 segundos para esperar respuesta de algún dispositivo)
+$ braa -v public@192.168.1.1 system.sysContact.0 > resultados.txt (guardar los resultados en un archivo y con la máxima información)
+$ braa public@192.168.1.1-192.168.1.5 system.sysLocation.0 (consultará el OID sysLocation en todos los dispositivos dentro del rango)
+$ braa private@192.168.1.1 system.sysDescr.0 (si se utiliza una comunidad diferente de public ha de especificarse)
+$ braa -d public@192.168.1.1 system.sysDescr.0 (activa el modo de depuración y muestra detalles adicionales y si algo no funciona correctamente)
+1.- Leer dispositivos y OIDs desde archivos
+$  cat devices.txt
+	public@192.168.1.1
+	public@192.168.1.2
+	public@192.168.1.3
+$ cat oids.txt
+	system.sysDescr.0
+	system.sysUpTime.0
+$ braa -f devices.txt -o oids.txt
+
+
 brew
 [build-essential curl git python-setuptools ruby]. En Debian el paquete se denomina linuxbrew-wrapper. Bifurcación de Homebrew, el administrador de paquetes de Mac OS, para Linux. Algunas de sus caracteristicas principales son que no requiere acceso root, permite instalar software no empaquetado por la distribución nativa y pueden instalarse versiones actualizadas de software cuando la distribución nativa es antigua.
 $ brew doctor (Comprobar si linuxbrew esté instalado y funciona correctamente)
