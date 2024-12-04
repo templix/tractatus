@@ -3702,13 +3702,6 @@ $ bootpc -b archivo.bin (solicita una imagen de arranque)
 $ bootpc (solicita información general de los servidores DHCP en la red)
 
 
-bpm-tools
-Herramienta para calcular el tempo BPM [Beats-Per-Minute, pulsaciones por minuto] de la música. Incluye las herramientas bpm-graph y bpm-tag.
-$ bpm-tag -f archivo.mp3 (solo muestra las BPM)
-$ mpv archivo.mp3 | bpm -g file.dat
-$ bpm-graph file.dat (ver el gráfico)
-
-
 borgbackup
 Herramienta para realizar copias de seguridad seguras y eficientes mediante deduplicación, compresión y cifrado. La técnica de deduplicación de datos utilizada hace que sea adecuado para copias de seguridad diarias, ya que solo se almacenan los cambios.
 $ borg init --encryption=repokey /home/USER/repositorio (antes de crear copias de seguridad se debe inicializar un repositorio con una clave cifrada)
@@ -3820,11 +3813,15 @@ bpfmon
 # bpfmon iptables (cuenta los paquetes que coinciden con una regla de iptables)
 
 
+bpm-tools
+Herramienta para calcular el tempo BPM [Beats-Per-Minute, pulsaciones por minuto] de la música. Incluye las herramientas bpm-graph y bpm-tag.
+$ bpm-tag -f archivo.mp3 (solo muestra las BPM)
+$ mpv archivo.mp3 | bpm -g file.dat
+$ bpm-graph file.dat (ver el gráfico)
+
+
 bpytop
-Monitor de recursos tipo top o htop escrito en python. La descarga es:
-# apt install snapd
-# snap install bpytop
-Se lanza con:
+Monitor de recursos que muestra el uso y las estadísticas del procesador, la memoria, los discos, la red y los procesos.
 $ bpytop
 
 
