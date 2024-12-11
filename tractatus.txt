@@ -3846,6 +3846,14 @@ $ cat oids.txt
 $ braa -f devices.txt -o oids.txt
 
 
+brebis
+Herramienta diseñada para analizar copias de seguridad con el objetivo de verificar su integridad, detectar duplicados y obtener informes sobre los datos respaldados.
+$ brebis -G /backups/backup.tar.gz (generar el archivo de configuración [.conf] y la lista de archivos [.list] para la copia de seguridad)
+$ brebis -c /backups/backup.conf -l /var/log/brebis.log (indicando archivo de configuración y de registro)
+$ brebis -g /backups/backup.tar.gz   (generar una lista de archivos dentro de una copia de seguridad)
+$ brebis -d \( -g /backups/backup.tar.gz  (cambia el delimitador predeterminado de la lista de archivos generado por "-g" a "(")
+
+
 brew
 [build-essential curl git python-setuptools ruby]. En Debian el paquete se denomina linuxbrew-wrapper. Bifurcación de Homebrew, el administrador de paquetes de Mac OS, para Linux. Algunas de sus caracteristicas principales son que no requiere acceso root, permite instalar software no empaquetado por la distribución nativa y pueden instalarse versiones actualizadas de software cuando la distribución nativa es antigua.
 $ brew doctor (Comprobar si linuxbrew esté instalado y funciona correctamente)
