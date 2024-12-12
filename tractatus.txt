@@ -3914,6 +3914,20 @@ Otra forma de visualizar las páginas man coloreando la sintaxis y mostrando eje
 $ bro ls
 
 
+brotli
+Algoritmo de compresión de datos desarrollado por Google, para comprimir y descomprimir archivos, mediante una combinación de una variante moderna del algoritmo LZ77, codificación Huffman y modelado de contexto de segundo orden.
+$ brotli archivo.txt (comprimir, substituye archivo.txt por archivo.txt.br)
+$ brotli -q 11 archivo.txt (ajustando el nivel de compresión: de 1 a 11, donde 11 es el más alto y más lento)
+$ brotli --keep archivo.txt (mantener el archivo original sin eliminarlo después de la compresión)
+$ brotli -d archivo.txt.br (descomprimir)
+$ brotli archivo.txt -o comprimido.br (especificando nombre de salida del comprimido)
+$ brotli -d comprimido.br -o descomprimido.txt (especificando nombre de salida del descomprimido)
+$ brotli archivo1.txt archivo2.txt (comprimir varios archivos)
+$ cat archivo.txt | brotli > archivo_comprimido.br (comprimir desde la entrada estándar)
+$ cat archivo_comprimido.br | brotli -d > archivo_descomprimido.txt (descomprimir desde la entrada estándar)
+$ brotli --test archivo.txt.br (verificará si el archivo comprimido es válido)
+
+
 bsd-from
 Imprime los encabezados de los correos del usuario que existen en el buzón del sistema.
 $ bsd-from -c (La cantidad de mensajes que existen)
