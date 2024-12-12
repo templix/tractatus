@@ -3928,6 +3928,16 @@ $ cat archivo_comprimido.br | brotli -d > archivo_descomprimido.txt (descomprimi
 $ brotli --test archivo.txt.br (verificará si el archivo comprimido es válido)
 
 
+brutespray
+Este script de Python toma la salida GNMAP/XML de nmap, JSON separado por nuevas líneas, la salida `XML Export` de Nexpose o las exportaciones `.nessus` de Nessus y automáticamente fuerza bruta los servicios con credenciales predeterminadas usando Medusa. BruteSpray puede incluso encontrar puertos no estándar usando -sV dentro de Nmap.
+$ brutespray --file results.gnmap -U user.txt -P pass.txt --threads 5 --hosts 5 (realiza un ataque de fuerza bruta contra los servicios abiertos detectados por Nmap, utilizando las credenciales especificadas)
+$ brutespray --file results.gnmap --service ftp,ssh,telnet --threads 5 --hosts 5 (limita el ataque solo a los servicios FTP, SSH y Telnet)
+$ brutespray --file results.gnmap -u admin -p password --threads 5 --hosts 5 (intenta atacar la cuenta de administrador con la contraseña especificada)
+$ brutespray --file results.gnmap --threads 5 --hosts 5 -c (continúa el ataque incluso si se encuentra una combinación de credenciales válidas)
+$ brutespray --file results.xml --threads 5 --hosts 5 (utiliza un archivo XML de Nmap para escaneo y ataque de fuerza bruta)
+$ brutespray --file results.xml -i (abre el modo interactivo de Brutespray)
+
+
 bsd-from
 Imprime los encabezados de los correos del usuario que existen en el buzón del sistema.
 $ bsd-from -c (La cantidad de mensajes que existen)
