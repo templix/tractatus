@@ -3953,6 +3953,21 @@ bsdmainutils
 Paquete que contiene programas pequeños para el sistema BSD-style Unix. Proporciona banner (como printerbanner), calendar, col, colcrt, colrm, column, from (como bsd-from), hexdump (o hd), look, lorder, ncal (o cal), ul y write (como bsd-write).
 
 
+btest
+Herramienta diseñada para facilitar la ejecución y verificación de pruebas en proyectos de software. Su objetivo es proporcionar un controlador para un conjunto de pruebas basadas en shell. Cada prueba consta de un conjunto de líneas de comando que se ejecutarán y el éxito se determina en función de sus códigos de salida. Los comandos incluidos son utilidades complementarias que automatizan tareas relacionadas con la ejecución, comparación de resultados y manejo de pruebas y son las siguientes: btest-ask-update, btest-bg-run, btest-bg-run-helper, btest-bg-wait, btest-diff, btest-diff-rst, btest-progress, btest-rst-cmd, btest-rst-include, btest-rst-pipe y btest-setsid.
+$ btest-ask-update resultado_actual.txt resultado_esperado.txt (comparará los dos archivos y pedirá confirmación para actualizar el archivo esperado si son diferentes)
+$ btest-bg-run -- ./script_prueba.sh (ejecutará script_prueba.sh en segundo plano y generará archivos temporales para rastrear la prueba)
+$ btest-bg-run-helper --start ./comando --opciones (comando interno que generalmente no se ejecuta manualmente, sino que es invocado por btest-bg-run para manejar procesos en segundo plano)
+$ btest-bg-wait (asegura que las pruebas lanzadas con btest-bg-run se completen antes de continuar)
+$ btest-diff resultado_actual.txt resultado_esperado.txt (compara archivos generados en una prueba y resalta las diferencias)
+$ btest-diff-rst archivo1.rst archivo2.rst (compara archivos en formato RST [reStructuredText] y muestra diferencias específicas para este formato)
+$ btest-progress (muestra el progreso de ejecución de las pruebas en tiempo real)
+$ btest-rst-cmd ls -l (ejecuta ls -l y genera un bloque de salida en formato RST)
+$ btest-rst-include archivo.txt (convierte el contenido de archivo.txt en un bloque RST)
+$ echo "Hola Mundo" | btest-rst-pipe (convierte la salida estándar de un comando en un bloque RST)
+$ btest-setsid ./script_prueba.sh (ejecuta script_prueba.sh en un nuevo grupo de sesión, evitando interferencias de señales externas)
+
+
 btop
 Monitor de recursos de línea de comandos parecido a top y htop más moderno y colorido que muestra el uso y las estadísticas del procesador, la memoria, discos, red y procesos.
 $ btop
