@@ -4015,6 +4015,40 @@ Y colocar la linea:
     0 2 * * * /usr/bin/btrbk run
 
 
+btrfs
+Herramienta para gestionar subvolúmenes, instantáneas, cuotas, y más en el sistema de archivos Btrfs.
+# mkfs.btrfs /dev/sdX (formatea una partición o dispositivo con el sistema de archivos Btrfs)
+# mount -t btrfs /dev/sdX /mnt (montar un partición)
+# mount -t btrfs -o compress=zstd /dev/sdX /mnt (habilitar una compresión)
+# btrfs subvolume create /mnt/home (crear un subvolúmene con los dos subvolúmenes llamados home y data en el punto de montaje /mnt)
+# btrfs subvolume create /mnt/data
+# btrfs subvolume list /mnt (listar los subvolúmenes mostrando ruta, ID y generación de cada subvolumen)
+# btrfs subvolume delete /mnt/home (eliminar un subvolumen)
+# btrfs subvolume snapshot -r /mnt/home /mnt/snapshots/home_backup (crear una instantánea de solo lectura)
+# btrfs subvolume snapshot /mnt/home /mnt/snapshots/home_backup (crear una de lectura-escritura)
+# btrfs filesystem df /mnt (verificar espació y otra información)
+# btrfs filesystem usage /mnt (lo mismo)
+# btrfs check /dev/sdX ( comprobar integridad del sistema de archivos)
+# btrfs check --repair /dev/sdX (intentar reparar errores)
+# btrfs device add /dev/sdY /mnt (permite agrupar varios discos en un único volumen, esto añade /dev/sdY al sistema montado en /mnt)
+# btrfs device remove /dev/sdY /mnt (eliminar un dispositivo del conjunto)
+# btrfs balance start -dconvert=raid1 -mconvert=raid1 /mnt (convierte los datos [dconvert]y metadatos [mconvert]a RAID 1)
+# btrfs filesystem show (ver información detallada de dispositivos y configuraciónes)
+# btrfs balance start /mnt (optimizar la distribución de datos en los dispositivos)
+# btrfs balance start -dusage=50 /mnt (reequilibra bloques de datos con al menos el 50% de uso)
+# btrfs filesystem defragment /mnt/home (defragmentar un subvolumen)
+# btrfs filesystem defragment -czstd /mnt/home (desfragmentar con la compresión activada)
+1.-
+Para restaurar datos desde una instantánea:
+# btrfs subvolume delete /mnt/home (eliminar la antigua)
+# btrfs subvolume snapshot /mnt/snapshots/home_backup /mnt/home
+2.-
+Habilitar cuotas y verificar uso por subvolumen. Primero, activar las cuotas para habilitar el seguimiento del uso de espacio:
+# btrfs quota enable /mnt
+Luego, consulta el uso por subvolumen:
+# btrfs qgroup show /mnt
+
+
 btscanner
 Escanear dispositivos bluetooth
 $ btscanner
