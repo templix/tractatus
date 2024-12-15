@@ -4113,6 +4113,22 @@ bwrap --bind / / --tmpfs /tmp --ro-bind /usr /usr --unshare-net --chdir /tmp bas
 Y lanzarlo cada vez que se necesite un entorno aislado.
 
 
+bucardo
+Sistema de replicación asincrónico de PostgreSQL que permite operaciones con múltiples maestros y múltiples esclavos.
+$ bucardo add database test1 dbname=test1 (conocer cada base de datos con la que se necesita comunicar)
+$ bucardo add database test2 dbname=test2
+$ bucardo add all tables db=test1 -T pgbench_history --relgroup=pgbench --verbose (agregar todas las tablas a test1 con el nombre "pgbench", excluyendo pgbench_history)
+$ bucardo add sync benchdelta relgroup=pgbench dbs=test1,test2 (sincronizar pgbench)
+$ bucardo list dbs (distintos listados posibles)
+$ bucardo list dbgroups
+$ bucardo list relgroups
+$ bucardo list syncs
+$ bucardo list tables
+$ bucardo start (arrancar el servicio)
+$ bucardo status (el estados)
+$ bucardo stop (parar servicio)
+
+
 builtin
 Cuando introducimos un comando en Bash el orden de preferencia en la búsqueda del símbolo por parte de Bash es: Primero las funciones, luego los comandos internos y por último los ficheros de scripts y ejecutables. builtin es más restrictivo que command [ver] y hace que no se busquen alias ni funciones, sólo comando internos [ver tambien comando enable]:
 $ builtin cd /
