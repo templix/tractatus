@@ -4077,6 +4077,42 @@ Colocar la linea:
 Guardar. Para compartir una carpeta: clic en "Add Folder", seleccionar la carpeta, generar la clave pulsando en "generate" y finalizar clicando en "Add". En el pc que sincronizará la carpeta, abrir la misma dirección, clic en "add folder" y, sin clicar en "generate", introducir la clave generada antes y seleccionar la carpeta donde se copiará.
 
 
+bubblewrap
+Herramienta ligera para crear contenedores sin privilegios. Permite aislar procesos del sistema anfitrión configurando un espacio de nombres y puntos de montaje personalizados, ideal para tareas como empaquetado, pruebas o ejecución de software en entornos limitados.
+# bwrap --dev /dev --proc /proc --bind / / sh (monta /dev y /proc dentro del contenedor, une el sistema anfitrión [/] al contenedor y inicia un shell aislado)
+# bwrap --bind /path/to/directory / --dev /dev --proc /proc bash (ejecutar "bash" en /path/to/directory como la raíz del contenedor)
+# bwrap --unshare-net --bind / / bash (crea un espacio de nombres de red independiente, aislando al proceso del sistema anfitrión)
+# bwrap --tmpfs /tmp --bind / / bash (crea un directorio /tmp como un sistema de archivos temporal y usa el resto del sistema anfitrión como base)
+# bwrap --ro-bind /bin /bin --ro-bind /lib /lib --ro-bind /usr /usr --dev /dev --proc /proc bash (monta /bin, /lib y /usr como solo lectura e incluye /dev y /proc para que los programas funcionen correctamente)
+# bwrap --unshare-user --uid 1000 --gid 1000 --bind / / bash (ejecuta un shell con el UID y GID 1000 dentro del contenedor, independientemente del usuario anfitrión)
+# bwrap --unshare-pid --bind / / bash (que los procesos dentro del contenedor no puedan ver ni interactuar con los del sistema anfitrión)
+# bwrap --ro-bind /etc /etc --dev /dev --proc /proc bash (monta /etc como solo lectura dentro del contenedor)
+# bwrap --bind / / --chdir /home/user bash (establece /home/user como el directorio de trabajo del contenedor)
+# bwrap --unshare-ipc --bind / / bash (asegurar que las colas de mensajes y memoria compartida no sean visibles para procesos externos)
+# bwrap --dev /dev --proc /proc --tmpfs /tmp bash (el contenedor no tiene acceso al sistema anfitrión más allá de /dev y /proc)
+# bwrap --bind / / --dev /dev --proc /proc /usr/bin/ls (uso combinado con flatpak)
+1.-
+Probar un programa en un entorno restringido:
+# bwrap \
+  --bind /usr/bin /usr/bin \
+  --bind /usr/lib /usr/lib \
+  --bind /etc /etc \
+  --ro-bind /var /var \
+  --tmpfs /tmp \
+  --dev /dev \
+  --proc /proc \
+  --unshare-net \
+  /usr/bin/python3 --version
+Permite acceso limitado a /usr/bin, /usr/lib y /etc, monta /var como solo lectura y crea un nuevo /tmp, aísla la red y ejecuta Python dentro del contenedor.
+2.-
+Crear un script para ejecutar aplicaciones con restricciones repetidamente. Por ejemplo:
+# nano sandbox.sh
+#!/bin/bash
+bwrap --bind / / --tmpfs /tmp --ro-bind /usr /usr --unshare-net --chdir /tmp bash
+# chmod +x sandbox.sh  (hacerlo ejecutable)
+Y lanzarlo cada vez que se necesite un entorno aislado.
+
+
 builtin
 Cuando introducimos un comando en Bash el orden de preferencia en la búsqueda del símbolo por parte de Bash es: Primero las funciones, luego los comandos internos y por último los ficheros de scripts y ejecutables. builtin es más restrictivo que command [ver] y hace que no se busquen alias ni funciones, sólo comando internos [ver tambien comando enable]:
 $ builtin cd /
