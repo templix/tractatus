@@ -4151,6 +4151,19 @@ $ tar cf - /directorio | buffer -s 256k -p 4096 | gzip > /dev/st0 (empaqueta el 
 $ yes "Prueba de datos" | buffer -s 16k -p 1024 > /dev/null (probar la transferencia de datos en un entorno controlado)
 
 
+bugz
+Herramienta que facilita la contribución rápida a proyectos utilizando el rastreador de errores de Bugzilla.
+$ bugz create --product=MiProyecto --component=MiComponente --version=1.0 --priority=P4 --severity=M2 --summary="Descripción del problema" (crea un nuevo bug en Bugzilla con los detalles especificados)
+$ bugz update --id=12345 --status=RESOLVED --resolution=FIXED --comment="Se ha solucionado el problema" (actualiza el estado y la resolución de un bug específico)
+$ bugz search --title="error en la conexión" (buscar bugs por título)
+$ bugz show --id=67890 (buscar bugs por ID)
+$ bugz assign --id=12345 --assignee=johndoe@example.com (asignar un bug a un desarrollador)
+$ bugz status --id=67890 (verificar el estado de un bug)
+$ bugz link --id=12345 --link-type=DEPENDS --target-id=67890 (agregar una dependencia entre bugs)
+$ bugz unlink --id=12345 --link-type=DEPENDS --target-id=67890 (eliminar una dependencia)
+$ bugz info --id=12345 (obtener información detallada de un bug)
+
+
 bugzilla-cli
 Herramienta para interactuar con el sistema Bugzilla, que es una plataforma para gestión de bugs y seguimiento de proyectos.
 $ bugzilla-cli --url https://bugs.example.com login (pedirá tu nombre de usuario y contraseña para conectarte al servidor Bugzilla especificado)
