@@ -4151,6 +4151,37 @@ $ tar cf - /directorio | buffer -s 256k -p 4096 | gzip > /dev/st0 (empaqueta el 
 $ yes "Prueba de datos" | buffer -s 16k -p 1024 > /dev/null (probar la transferencia de datos en un entorno controlado)
 
 
+bugzilla-cli
+Herramienta para interactuar con el sistema Bugzilla, que es una plataforma para gestión de bugs y seguimiento de proyectos.
+$ bugzilla-cli --url https://bugs.example.com login (pedirá tu nombre de usuario y contraseña para conectarte al servidor Bugzilla especificado)
+$ bugzilla-cli --url https://bugs.example.com show-bug 1234 (mostrará los detalles del bug con el ID 1234)
+$ bugzilla-cli --url https://bugs.example.com stats (mostrará resúmenes de estadísticas de bugs como número total, bugs abiertos, cerrados, etc)
+1.-
+Crear un nuevo bug de ejemplo:
+$ bugzilla-cli --url https://bugs.example.com create-bug \
+    --product "Mi Proyecto" \
+    --component "Desarrollo Web" \
+    --version "1.0" \
+    --summary "Nuevo defecto encontrado en la página principal" \
+    --description "El problema se produce cuando se intenta acceder a la página principal."
+2.-
+Actualizar un bug:
+$ bugzilla-cli --url https://bugs.example.com update-bug \
+    --bug-id 1234 \
+    --comment "Se ha actualizado la descripción del problema"
+3.-
+Cerrar un defecto:
+$ bugzilla-cli --url https://bugs.example.com close-bug \
+    --bug-id 1234 \
+    --resolution RESOLVED \
+    --status CLOSED
+4.-
+Buscar defectos por título o descripción:
+$ bugzilla-cli --url https://bugs.example.com search \
+    --query "error en página principal" \
+    --output-format json
+
+
 builtin
 Cuando introducimos un comando en Bash el orden de preferencia en la búsqueda del símbolo por parte de Bash es: Primero las funciones, luego los comandos internos y por último los ficheros de scripts y ejecutables. builtin es más restrictivo que command [ver] y hace que no se busquen alias ni funciones, sólo comando internos [ver tambien comando enable]:
 $ builtin cd /
