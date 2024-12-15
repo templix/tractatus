@@ -3974,6 +3974,47 @@ Monitor de recursos de línea de comandos parecido a top y htop más moderno y c
 $ btop
 
 
+btrbk
+Herramienta de copia de seguridad para subvolúmenes del sistema de archivos btrfs. Permite sincronizar subvolúmenes locales o remotos, crear instantáneas y gestionar su retención. Primero crear un archivo de configuración para definir qué subvolúmenes respaldar, dónde guardarlos y cómo manejarlos. Un ejemplo básico de configuración:
+# nano /etc/btrbk/btrbk.conf
+target /backup/btrbk
+target user@remote:/path/to/backup
+snapshot_dir .snapshots
+volume /mnt/btrfs
+  subvolume home
+  subvolume data
+snapshot_preserve_min 3
+snapshot_preserve_daily 7
+snapshot_preserve_weekly 4
+snapshot_preserve_monthly 12
+Indica que se respaldarán los subvolúmenes "home" y "data" desde /mnt/btrfs hacia /backup/btrbk, si se trata de respaldar un servidor remoto, dejar el segundo"target". Las instantáneas se almacenarán en un subdirectorio llamado .snapshots y los snapshot_preserve que indican los snapshots a conservar [déjese el que se desea y suprimir los otros]: Las últimas 3 instantáneas, las últimas 7 diarias, las últimas 4 semanales o as últimas 12 mensuales.
+# btrbk run (una vez configurado el archivo, realizar una copia de seguridad local o remoto, usando ssh, según proceda y eliminará las instantáneas antiguas según la política definida)
+# btrbk run --dry-run (forma de virificar la configuración y mostrará las operaciones planeadas sin realizarlas)
+# btrbk -v run (imprime información detallada sobre las operaciones)
+1.-
+Forma de sincronizar instantáneas desde un disco fuente /mnt/source a un disco destino /mnt/destination, con el archivo de confirugación:
+# cat /etc/btrbk/btrbk.conf
+volume /mnt/source
+  target /mnt/destination
+  subvolume home
+  subvolume data
+# btrbk run
+2.-
+Configuración para múltiples volúmenes:
+# cat /etc/btrbk/btrbk.conf
+volume /mnt/btrfs1
+  subvolume home
+  target /backup/btrfs1
+volume /mnt/btrfs2
+  subvolume data
+  target /backup/btrfs2
+3.-
+Automatización con cron
+# crontab -e
+Y colocar la linea:
+    0 2 * * * /usr/bin/btrbk run
+
+
 btscanner
 Escanear dispositivos bluetooth
 $ btscanner
