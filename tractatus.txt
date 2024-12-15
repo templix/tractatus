@@ -26580,6 +26580,27 @@ $ tardy --strip 2 archive.tar (elimina los dos primeros niveles de directorios e
 $ tardy --create --modify /new/path/ /nuevo.tar file1 file2 (crea nuevo.tar donde los archivos file1 y file2 se encuentran bajo /new/path/)
 
 
+taskwarrior
+Gestor de tareas minimalista.
+$ task add Titulo Entrada (añadir una tarea)
+$ task list (ver la lista de tareas)
+$ task 1 done (marcar una entrada como completada)
+$ task add project:DocsPendientes Titulo Entrada (organizar en proyectos)
+$ task add recur:monthly (programar tareas que se repiten en el tiempo)
+$ task add pri:H Titulo Entrada (establecer prioridades: H=high, M=medium, L=low)
+$ $ task all (ver incluso las taareas vencidas)
+$ task 5 start (indicar que la tarea 5 ha empazado)
+$ task 5 modify due:'2024-12-15' (o que la dejamos para otro dia)
+$ task project:DocsPendientes (ver todas las tareas dentro del proyecto mencionado)
+$ task -tag list (lista todas las tareas sin el tag "tag")
+$ task +tag list (lista todas las tareas con el tag "tag")
+$ task long (ver las tareas en formato largo)
+$ task +WEEK list (lista las tareas con el deadline de esta semana)
+$ task +DUETODAY list (lista todas las tareas con el deadline de hoy)
+$ task due.after:yesterday and due.before:thursday (filtraar de forma más especifica)
+$ task 5 project:DocsPendientes (añadir a la tarea 5 al proyecto DocsPendientes)
+
+
 tc
 Controlar, clasificar, dar forma y programar el tráfico de la red.
 # tc qdisc
