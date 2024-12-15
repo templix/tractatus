@@ -4134,6 +4134,23 @@ Emula el sonido de un antiguo teclado con resortes de IBM Model-M mientras se es
 $ buckle (empieza la emulación de todo lo que se escribe)
 
 
+buffer
+Herramienta diseñada para gestionar la velocidad de transferencia de datos mediante almacenamiento en búfer. Es especialmente útil en operaciones de copia de seguridad con cintas o en situaciones donde se desea optimizar la transmisión de datos entre procesos y convertir una tasa de datos de entrada variable a una tasa de datos de salida constante.
+$ cat archivo_grande | buffer > archivo_salida (lee datos de la entrada estándar y los pasa a la salida estándar con almacenamiento en búfer)
+$ cat archivo_grande | buffer -s 64k > archivo_salida (el tamaño del búfer se establece en 64 KB para optimizar la transmisión de datos)
+$ dd if=/dev/zero bs=1M count=100 | buffer -b 512 > salida.bin (configura bloques de 512 bytes en lugar del tamaño predeterminado)
+$ cat archivo_grande | buffer -p 1024 > archivo_salida (limita la transferencia a 1 MB/s - 1024 KB/s)
+$ cat archivo_grande | buffer -t > archivo_salida (muestra estadísticas en tiempo real sobre la cantidad de datos transferidos)
+$ tar cf - /directorio | buffer -s 128k -p 4096 > /dev/st0 (con cintas de copia de seguridad, como /dev/st0. Crear una copia del directorio con tamaño de bufer de 128 y limite a 4MB/s)
+$ dd if=/dev/sda bs=1M | buffer -s 256k -p 8192 > /dev/st0 (copia del disco /dev/sda a la cinta /dev/st0)
+$ tar cf - /directorio | gzip | buffer > copia.tar.gz (los datos son comprimidos y almacenados en un archivo utilizando buffer para optimizar la transferencia)
+$ nc -l 12345 | buffer -s 1M > archivo_recibido (escuchar en el puerto 12345 y tamaño de búfer de 1 MB para optimiza la recepción)
+$ cat archivo_grande | buffer | gzip > archivo_comprimido.gz (asegura un flujo constante entre cat y gzip, reduciendo interrupciones)
+$ dd if=archivo.iso bs=1M | buffer -s 128k -p 2048 > /dev/sdb (optimiza la escritura al disco /dev/sdb utilizando un búfer de 128 KB y una velocidad límite de 2 MB/s)
+$ tar cf - /directorio | buffer -s 256k -p 4096 | gzip > /dev/st0 (empaqueta el directorio, optimiza el flujo hacia la cinta y comprime los datos antes de almacenarlos)
+$ yes "Prueba de datos" | buffer -s 16k -p 1024 > /dev/null (probar la transferencia de datos en un entorno controlado)
+
+
 builtin
 Cuando introducimos un comando en Bash el orden de preferencia en la búsqueda del símbolo por parte de Bash es: Primero las funciones, luego los comandos internos y por último los ficheros de scripts y ejecutables. builtin es más restrictivo que command [ver] y hace que no se busquen alias ni funciones, sólo comando internos [ver tambien comando enable]:
 $ builtin cd /
