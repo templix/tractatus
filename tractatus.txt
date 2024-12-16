@@ -4151,6 +4151,59 @@ $ tar cf - /directorio | buffer -s 256k -p 4096 | gzip > /dev/st0 (empaqueta el 
 $ yes "Prueba de datos" | buffer -s 16k -p 1024 > /dev/null (probar la transferencia de datos en un entorno controlado)
 
 
+bugwarrior
+Utilidad para actualizar la base de datos local de TaskWarrior desde los rastreadores de problemas de forjas de software como GitHub, GitLab, Bitbucket, Bugzilla, Debian, Gmail, etc. Primero configurar el archivo, un ejemplo:
+$ nano ~/.bugwarriorrc
+       [general]
+       taskwarrior_taskrc = ~/.taskrc
+       taskwarrior_taskdata = ~/.task
+       cache_path = ~/.cache/bugwarrior
+       update_interval = 15
+       [github]
+       enabled = yes
+       username = tu_usuario_github
+       password = tu_token_github
+       repositories = owner/repo1, owner/repo2
+       priority_map = low:low, medium:medium, high:high
+       task_attributes = description:issue.body, tags:issue.labels, due:issue.due_on
+       [gitlab]
+       enabled = yes
+       url = https://gitlab.com
+       username = tu_usuario_gitlab
+       password = tu_token_personal
+       projects = owner/repo1, owner/repo2
+       filter = label:important, label:bug
+$ bugwarrior --check (si la configuración está correcta, mostrará los servicios habilitados y las conexiones exitosas)
+$ bugwarrior (descargará todas las tareas abiertas y las actualiza si hubo cambios)
+$ bugwarrior --dry-run (mostrará en pantalla las tareas detectadas y los cambios que se aplicarían sin modificar la base de datos)
+$ bugwarrior --config-section github (sincronizar un rastreador específico definido en la configuración)
+$ bugwarrior --no-sync (descargar y almacenar en caché las tareas desde los rastreadores, pero sin añadirlas a Taskwarrior)
+$ bugwarrior --verbose (obtener información detallada sobre qué está haciendo bugwarrior durante la sincronización)
+Nota.- Filter = label... sincronizará solo tareas etiquetadas como important o bug y task_attributes el cuerpo del issue de GitHub se convierte en la descripción de la tarea.
+1.-
+Ejecutar automáticamente con cron añadiendo la linea a crontab -e:
+*/15 * * * * /usr/bin/bugwarrior >> ~/.bugwarrior.log 2>&1
+2.-
+Ejecutar automáticamente con systemd. Crear un archivo de servicio
+# nano ~/.config/systemd/user/bugwarrior.service
+Con las lineas:
+    [Unit]
+    Description=Actualización de Taskwarrior desde Bugwarrior
+    [Service]
+    ExecStart=/usr/bin/bugwarrior
+# nano ~/.config/systemd/user/bugwarrior.timer
+    [Unit]
+    Description=Ejecutar Bugwarrior cada 15 minutos
+    [Timer]
+    OnBootSec=5m
+    OnUnitActiveSec=15m
+    [Install]
+    WantedBy=timers.target
+Habilitar y activar el timer:
+# systemctl --user enable bugwarrior.timer
+# systemctl --user start bugwarrior.timer
+
+
 bugz
 Herramienta que facilita la contribución rápida a proyectos utilizando el rastreador de errores de Bugzilla.
 $ bugz create --product=MiProyecto --component=MiComponente --version=1.0 --priority=P4 --severity=M2 --summary="Descripción del problema" (crea un nuevo bug en Bugzilla con los detalles especificados)
