@@ -4302,6 +4302,43 @@ Descomprime ficheros bz2.
 $ bunzip2 archivo.bz2
 
 
+bup
+Herramienta de respaldo que almacena las copias de seguridad en un sistema basado en el formato packfile de git. Esto permite que las copias de seguridad sean deduplicadas, incrementales y extremadamente eficientes en el uso del espacio.
+$ bup init (antes de empezar, se debe inicializar un repositorio donde se almacenarán las copias de seguridad y que por defecto es en ~/.bup)
+$ bup index ~/Documentos (indexar un directorio antes de respaldarlo)
+$ bup save -n mis_docs ~/Documentos (crea un respaldo del directorio en el repositorio)
+$ bup ls (listar los respaldos realizados y sus nombres)
+$ bup restore -C ~/Restaurados mis_docs (restaurar un respaldo completo)
+$ bup restore -C ~/Restaurados mis_docs/archivo.txt (restaurar un archivo específico dentro del respaldo)
+$ bup save --gzip -n respaldo_comprimido ~/Documentos (comprimir respaldos)
+$ bup save --lzo -n respaldo_rapido ~/Documentos (comprimir respaldos con lzo)
+$ bup ftp (inicia un servidor FTP local que permite navegar por los respaldos usando un cliente FTP o incluso con un navegador web)
+$ bup save -n respaldo_incremental ~/directorio (deduplicará y almacenará únicamente los cambios)
+$ bup fsck (revisa el sistema de respaldo y reporta errores si los hay)
+$ bup diff respaldo1 respaldo2 (comparar respaldos)
+$ bup rm respaldo_nombre (eliminar respaldos antiguos)
+$ bup save -n respaldo_correo ~/Maildir (crea respaldos incrementales y deduplicados de los correos electrónicos)
+1.-
+Respaldar sobre SSH. Para realizar respaldos en un servidor remoto vía SSH:
+$ ssh usuario@servidor "bup init" (configurar bup en el servidor remoto)
+$ bup save -n respaldo_remoto -r usuario@servidor:/ruta/al/repositorio /ruta/del/directorio (realizar el respaldo)
+2.-
+Automatizar respaldos con cron
+$ crontab -e
+Añadir la línea:
+     0 2 * * * bup index /ruta/del/directorio && bup save -n respaldo_diario /ruta/del/directorio
+Esto realiza el respaldo a las 2:00 AM todos los días.
+3.-
+Realizar copias de seguridad de sistemas enteros excluyendo directorios como /proc, /sys, /dev.
+# bup index /
+# bup save -n respaldo_sistema /
+4.-
+Exportar un respaldo como un archivo tar para compartir o mover un respaldo:
+$ bup fuse /punto/de/montaje
+$ tar -cf respaldo.tar -C /punto/de/montaje respaldo_nombre
+$ fusermount -u /punto/de/montaje
+
+
 burnp6
 [cpuburn]. Colocar la cpu al 100%. Si existen varios nucleos lanzar una instancia para cada uno. Existen varias opciones según el tipo de nucleo: burnBX, burnK6, burnK7, burnMMX, burnP5 y burnP6.
 $ burnP6
