@@ -4252,6 +4252,15 @@ build-essential
 Contiene una lista de paquetes esenciales para el sistema y la compilación. En el navegador colocar file:///usr/share/build-essential/essential-packages-list
 
 
+buildah
+Herramienta que se utiliza para tratar con contenedores compatibles con la Open Container Initiative [OCI].
+$ buildah from centos:8 (crea una nueva imagen de contenedor basada en la imagen especificada)
+$ buildah bud -t <nombre-imagen> (construye una imagen personalizada desde el directorio actual)
+$ buildah run mi-contenedor echo "Hola desde el contenedor" (ejecuta un comando dentro de la imagen de contenedor especificada)
+$ buildah inspect mi-contenedor (muestra información detallada sobre la imagen de contenedor)
+$ buildah rm mi-contenedor (eliminar la imagen de un contenedor)
+
+
 builtin
 Cuando introducimos un comando en Bash el orden de preferencia en la búsqueda del símbolo por parte de Bash es: Primero las funciones, luego los comandos internos y por último los ficheros de scripts y ejecutables. builtin es más restrictivo que command [ver] y hace que no se busquen alias ni funciones, sólo comando internos [ver tambien comando enable]:
 $ builtin cd /
