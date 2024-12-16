@@ -4344,6 +4344,19 @@ burnp6
 $ burnP6
 
 
+burp
+Sistema de copia de seguridad cliente-servidor que utiliza librsync para ahorrar espacio y uso de red.
+$ burp --config "use_librsync=yes" (configurar el uso de librsync)
+$ burp --create /ruta/original /ruta/copia (crear copia de seguridad)
+$ burp --restore /ruta/copia /ruta/original (restaurar desde una copia de seguridad)
+$ burp --verify /ruta/copia (verificar la integridad de una copia de seguridad)
+$ burp --delete /ruta/copia (eliminar una copia de seguridad)
+$ burp --list (listar todas las copias de seguridad)
+$ burp --config "max_block_size=1048576" (configurar el tamaño máximo de bloque
+$ burp --config "max_blocks=1000000" (configurar el número máximo de bloques)
+$ burp --config "backup_dir=~/backups" (configurar el directorio de copias de seguridad)
+
+
 burpsuite
 Plataforma integral para pruebas de seguridad de aplicaciones web inncluidas pruebas de seguridad, evaluación de vulnerabilidades y pruebas de penetración. Es una herramienta comercial, pero también está disponible una versión gratuita con funciones limitadas.
 # burpsuite (arrancar la aplicación)
