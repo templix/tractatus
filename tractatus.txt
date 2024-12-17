@@ -4402,6 +4402,27 @@ $ busybox ls -a (lanzará ls -a desde el entorno busybox)
 $ busybox su
 
 
+busybox-syslogd
+Demonio de registro del sistema responsable de proporcionar el registro de los mensajes recibidos de los programas y las funciones del host local, así como de los hosts remotos.
+$ busybox-syslogd (iniciar el servicio y recopilará los registros del sistema y los almacenará en /var/log/messages)
+$ busybox-syslogd -O /var/log/busybox/syslog.log (si queremos los registros en otro lugar)
+$ busybox-syslogd -R servidor.remoto:514 (reenviar los registros del sistema a un servidor remoto y por el puerto 514)
+$ busybox-syslogd -C (registrar los mensajes directamente en la consola para depuración en tiempo real)
+$ busybox-syslogd -l 3 (limita los registros a mensajes con prioridad 3 o menor: errores, advertencias, etc)
+$ busybox-syslogd -S 1048576 (que los registros se sobrescriban cuando se alcance un límite de tamaño, 1 MB en este caso)
+$ busybox-syslogd -D (ejecutar el demonio en segundo plano como un servicio)
+$ busybox-syslogd -O /var/log/syslog.log -R 192.168.1.100:514 -C (los registros localmente en /var/log/syslog.log, reenviarlos a un servidor remoto en 192.168.1.100:514 y registrar mensajes en la consola para monitoreo)
+$ tail -f /var/log/syslog.log (verificar el estado de los registros)
+
+
+buthead
+[but not head - excepto el encabezado]. Programa para copiar líneas excepto las N primeras o últimas.
+$ buthead 5 < archivo.txt (muestra en pantalla archivo.txt sin las primeras 5 lineas)
+$ buthead 5 < archivo.txt > nuevo_archivo.txt (lo manda a un archivo)
+$ cat archivo.txt | buthead 10 | grep "palabra" (elimina las primeras 10 líneas de archivo.txt y en el resto busca "palabra")
+$ buthead -5 < archivo.txt > ultimo_5_líneas.txt (eliminar todas las líneas excepto las últimas 5)
+
+
 bwm-ng
 Muestra uso del ancho de banda de nuestra conexión o de nuestros discos duros [por defecto en KB por cada medio segundo]
 # bwm-ng (Por defecto nos muestra el ancho de banda de las conexiones de red)
