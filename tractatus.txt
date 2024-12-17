@@ -4423,6 +4423,10 @@ $ cat archivo.txt | buthead 10 | grep "palabra" (elimina las primeras 10 líneas
 $ buthead -5 < archivo.txt > ultimo_5_líneas.txt (eliminar todas las líneas excepto las últimas 5)
 
 
+bvi
+Editor orientado a la visualización de archivos binarios basado en el editor de texto vi.
+
+
 bwm-ng
 Muestra uso del ancho de banda de nuestra conexión o de nuestros discos duros [por defecto en KB por cada medio segundo]
 # bwm-ng (Por defecto nos muestra el ancho de banda de las conexiones de red)
@@ -14172,6 +14176,15 @@ Alguna sopciones que pueden añadirse:
 -t 120 (Tiempo en segundos de duración de la transmisión. Sólo para el cliente)
 -D (Lanzarlo como servicio. Sólo en el servidor)
 -i 10 (Tempo en segundos entre mediciones. Sólo cliente)
+
+
+ipfm
+Cuenta la cantidad de datos enviados y recibidos por hosts específicos a través de un enlace de Internet. Antes de iniciar el servicio, en el archivo de configuración:
+# nano /etc/ipfm.conf
+Comentar la linea:
+         #DISABLED
+Los informes en el navegador con la dirección file:///var/log/ipfm/
+# ipfm (arrancar el servicio)
 
 
 ipgeolocation
