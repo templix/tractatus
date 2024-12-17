@@ -4380,6 +4380,21 @@ Herramienta para trazar y proporcionar información de llamadas D-Bus.
 # bustle-pcap -v monitor.pcap (con la máxima información de la sesión y guardado en el archivo monitor.pcap)
 
 
+bustools
+Herramienta especializada en la manipulación de datos generados por tecnologías de secuenciación de ARN de alto rendimiento, particularmente en análisis de datos de código de barras celulares [cell barcodes] y etiquetas moleculares únicas [UMIs]. Es muy útil para trabajar con datos procesados mediante kallisto en experimentos de transcriptómica de células individuales.
+$ bustools correct -w whitelist.txt -o corrected.bus input.bus (-w: Lista blanca de códigos de barras válidos, -o: Salida con los códigos de barras corregidos y input.bus: Archivo de entrada generado por kallisto)
+$ bustools sort -T tmp/ -o ordenado.bus input.bus (generar un índice para input bus. -T: Directorio temporal para operaciones intermedias)
+$ bustools filter -o filtered.bus -e 0 input.bus (limpiar datos. -e los elimina -o archivo con los datos depurados)
+$ bustools count -o counts.mtx -g transcripts_to_genes.txt -e matrix.ec -t transcripts.txt sorted.bus (-o: salida en formato Matrix Market, -g: Mapeo de transcripciones a genes, -e: Archivo de equivalencia generado por kallisto y -t: Lista de transcripciones.)
+$ bustools merge -o merged.bus file1.bus file2.bus (fusionar varios archivos bus en merged.bus)
+$ bustools text -o output.txt input.bus (convierte los datos procesados en una matriz de expresión génica, un formato utilizado para análisis de transcriptómica)
+$ bustools capture -o simulated.bus -c capture.txt -e matrix.ec -t transcripts.txt input.bus (crea un archivo simulated.bus con datos simulados para pruebas)
+$ bustools capture -o errors.bus -c error_patterns.txt input.bus (identificar lecturas con errores en UMIs o códigos de barras)
+$ bustools sort -T tmp/ -o sorted.bus input.bus (indexar y ordenar datos)
+$ bustools correct -w whitelist.txt -o corrected.bus sorted.bus (corregir códigos de barras celulares)
+$ bustools count -o counts.mtx -g transcripts_to_genes.txt -e matrix.ec -t transcripts.txt corrected.bus (calcular la matriz de expresión génica)
+
+
 busybox
 Herramienta que integra los comandos linux más comunes. Útil en móviles con sistema Android.
 $ busybox (Mostrará la forma de uso y los comando disponibles. En Android entra en el prompt. “exit” para salir)
