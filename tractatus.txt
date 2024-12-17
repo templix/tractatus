@@ -11160,6 +11160,12 @@ Es una herramienta similar a partimage para crear imágenes de una o varias part
 # fsarchiver restfs /data/imagen2.fsa id=0,dest=/dev/sda1 id=1,dest=/dev/sdb1 (restauramos a la vez las dos particiones).
 
 
+fscache
+[cachefilesd]. Administrador de almacenamiento en caché genérico en el núcleo de Linux que puede ser utilizado por sistemas de archivos de red y otros para almacenar datos en caché de forma local. Esta funcionalidad se utiliza en conjunción con sistemas de archivos específicos como AFS, NFS, y Ceph, que pueden beneficiarse del almacenamiento en caché local.
+# rm -rf /var/cache/fscache/* (limpiar caché)
+# systemctl status cachefilesd (verificar si está activo)
+
+
 fsck
 [recomendado dosfstools]. Reparar/chequear/formatear una partición no montada.
 # fsck -fy /dev/hda1
