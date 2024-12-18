@@ -4578,24 +4578,30 @@ cacti
 
 
 cadaver
-Cliente de WebDAV para linux. El modulo WebDav es un método que permite compartir, editar y manejar archivos en un servidor remoto via HTTP.
-$ cadaver 192.168.2.25 (Conectar con un host)
-	dav:/>
-$ cadaver https://www.sitio.com (Conectar a un host y requerimiento de usuario y contraseña)
-	Authentication required for webdav on server `sitio.com`:
-	Username: USER
-	Password: PASS
-	dav:/>
-Una vez conectado, algunos comandos disponibles son:
-	put archivo (Subir un archivo)
-	get archivo (Descargar un archivo)
-	move viejo nuevo (Cambiar el nombre de viejo a nuevo)
-	ls (Listar contenido)
-	edit archivo (Editar un archivo)
-	pwd (Mostrar directorio donde nos encontramos)
-	cd dir (Entrar en un directorio)
-	? (Muestra todos los comandos disponibles)
-	quit (Salir)
+Cliente para WebDAV (Protocolo de Autoría y Versionado Distribuido basado en HTTP) que permite gestionar archivos en servidores. Su funcionamiento es similar al de un cliente FTP o SMB, con comandos para navegar, cargar, descargar y manipular archivos en servidores remotos.
+$ cadaver https://servidor (si requiere autenticación, pedirá nombre de usuario y contraseña)
+Una vez conectado, se puede usar comandos similares a los de FTP: ls, cd, put, get, mkdir, delete, mget, mput, quit
+1.-
+Supongamos que se necesita subir y descargar archivos desde un servidor WebDAV alojado en https://webdav.example.com. Los pasos serían:
+$ cadaver https://webdav.example.com
+Introducir tu usuario y contraseña si se solicita.
+> cd documentos (ir al directorio remoto)
+> put informe.pdf (subir un archivo local al servidor)
+> get reporte.docx (descargar un archivo del servidor al sistema local)
+> edit archivo (Editar un archivo)
+> move viejo nuevo (Cambiar el nombre de viejo a nuevo)
+> delete archivo-viejo.txt (borrar un archivo del servidor)
+> ? (Muestra todos los comandos disponibles)
+> quit (cierra la sesión)
+
+
+caddy
+Servidor web escrito en Go con HTTPS automático de forma predeterminada y ZeroSSL y Let's Encrypt para nombres públicos.
+$ caddy (iniciará un servidor web en modo estándar, sirviendo archivos desde el directorio actual)
+$ caddy run --config Caddyfile (si se tiene un archivo de configuración)
+$ caddy status (verificar estado)
+$ pkill caddy (detener caddy)
+$ caddy reload (reiniciar caddy)
 
 
 cado
