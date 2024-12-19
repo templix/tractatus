@@ -4688,7 +4688,7 @@ $ calcurse
 calendar
 Muestra hechos relevantes en inglés sobre el dia actual o el especificado con amplia variedad de calendarios. Puede personalizarse editando el archivo:
 # nano /usr/share/calendar/calendar.all
-Y suprimiendo las lineas de los calendarios que no se deseen y eliminando los archivos correspondientes deldirectorio /usr/share/calendar/
+Y suprimiendo las lineas de los calendarios que no se deseen y eliminando los archivos correspondientes del directorio /usr/share/calendar/
 $ calendar
 
 
@@ -4697,6 +4697,17 @@ Alternativa ligera a Sudo. Permite a los usuarios seleccionados obtener un shell
 $ califa
 En /etc/calife.auth añadir el/los usuario/s y el shell que se les autoriza:
 usuario:/bin/bash
+
+
+callaudiod
+Demonio que se encarga de gestionar el enrutamiento de audio entre diferentes aplicaciones y dispositivos. Proporciona una interfaz D-Bus que permite a otros programas: cambiar los perfiles de audio, enviar audio al altavoz o de vuelta a su puerto original y silenciar el micrófono. Algunos de estos controles pueden ser gestionados por alsamixer. El paquete contiene el demonio y la definición de la interfaz D-Bus y su configuración en /etc/asound.conf o en ~/.asoundrc
+$ ps aux | grep callaudiod (verificar el estado)
+$ cat /var/log/audio.log (ver el registro de eventos de audio)
+$ aplay -D plughw:1 ~/ (redirigir el audio de una aplicación)
+$ cat /proc/asound/card0/pcm0p/sub0/status (verificar el estado de un dispositivo de audio)
+# systemctl restart pulseaudio (reiniciar la aplicación)
+$ pacmd list-sinks (verificar los dispositivos de audio disponibles)
+Nota.- En sistemas modernos, callaudiod es parte del sistema PulseAudio, que ha reemplazado a otros sistemas como ALSA.
 
 
 cancel
@@ -20700,6 +20711,7 @@ Reagrupa archivos fragmentados de la base de datos de pacman
 pacmd
 Herramienta para reconfigurar un servidor de sonido PulseAudio.
 $ pacmd
+$ pacmd list-sinks (verificar los dispositivos de audio disponibles)
 
 
 pacsearch
