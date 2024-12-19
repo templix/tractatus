@@ -4650,6 +4650,20 @@ $ cal -3  (Muestra el mes actual el anterior y el posterior)
 $ cal -m |grep -A7 -B7 --color=auto $(date +%d) (Muestra el mes actual y coloreado el día actual)
 
 
+calamaris
+Script de Perl que genera estadísticas a partir de archivos de registro generados por proxies HTTP, como Squid y Oops y produce informes detallados de rendimiento, estadísticas de uso y patrones de acceso.
+$ calamaris -f text /var/log/squid/access.log (generar un informe en texto plano)
+$ calamaris -f html /var/log/squid/access.log > squid_report.html (generar un informe en HTML)
+$ calamaris -f text -d /var/log/squid/access.log (mostrará una lista detallada de los dominios más accedidos junto con el número de solicitudes)
+$ calamaris -f text -a -r /var/log/squid/access.log (proporciona un desglose de las solicitudes agrupadas por rangos de direcciones IP de todo el archivo de registro)
+$ calamaris -f text -m 10 /var/log/squid/access.log (restringe la salida a las 10 entradas más frecuentes en cada categoría)
+1.-
+Agregar un cron job para generar informes automáticamente con la linea:
+$ crontar -e
+     0 3 * * * /usr/bin/calamaris -f html /var/log/squid/access.log > /var/www/html/squid_report.html
+Que genera un informe HTML cada día a las 3:00 a.m. y lo guarda en un directorio accesible desde un servidor web.
+
+
 calc
 Calculadora.
 $ calc (Entra en el prompt. Su uso es el clásico: 5*2, 80/4... “Exit” para salir)
