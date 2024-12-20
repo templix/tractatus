@@ -1435,7 +1435,7 @@ AddKeys=~/.ssh/apt-dater
 CmdRefresh=apt-dater-host refresh
 CmdUpgrade=apt-dater-host upgrade
 CmdInstall=apt-dater-host install %s
-```
+...
 
 
 apt-doc
@@ -2252,7 +2252,7 @@ AC_INIT([nombre del paquete], [versión])
 AM_INIT_AUTOMAKE
 AC_PROG_CXX
 AC_OUTPUT(Makefile)
-```
+...
 $ autoconf (generar el archivo configure en la misma carpeta)
 $ ./configure --version (verificar si los requisitos están instalados)
 $ make
@@ -2485,7 +2485,7 @@ Convertir varios archivos mp4 a mp3:
 	#!/bin/bash
 	for i in *.mp4
 	do
-		    avconv -i "$i" -b 256k "${i%.mp4}.mp3"
+	    avconv -i "$i" -b 256k "${i%.mp4}.mp3"
 	done
 
 
@@ -5867,7 +5867,7 @@ para listar los parametros que se pueden usar. Si en el	paquete	de fuentes a int
       $ ./configure --prefix=/usr  (donde inslalar el programa)
       $ ./configure --syscinfdir=/etc  (donde colocar los archivos de configuración)
       $ ./configure --locatestatedir=/var/lib  (donde colocar las librerías)
-El make se encarga de leer el makefile donde se indica los archivos a compilar y el orden en el que deben ser compilados. La ejecución de make genera varios archivos necesarios para la compilación	y que pueden ser eliminados, ya sea al final del proceso	o si este ha de reiniciarse por algún error, con:
+El make se encarga de leer el makefile donde se indica los archivos a compilar y el orden en el que deben ser compilados. La ejecución de make genera varios archivos necesarios para la compilación y que pueden ser eliminados, ya sea al final del proceso o si este ha de reiniciarse por algún error, con:
 $ make clean
 Si el archivo makefile no se ha borrado, Una vez instalado el programa, puede eliminarse con:
 $ make uninstall
@@ -12582,7 +12582,7 @@ menuentry 'Ubuntu, amb Linux 3.2.0-24-generic (mode de restabliment)' --users NO
 
 
 grun
-Lanador de aplicaciones GTK.
+Lanzador de aplicaciones GTK.
 
 
 gs
@@ -21671,7 +21671,7 @@ $ pipx uninstall-all (desinstalar todas las aplicaciones instaladas)
 
 
 pitidos
-(del pc). Señales de alerta sonora cuando algo falla.
+[del pc]. Señales de alerta sonora cuando algo falla.
 Sin pitidos.-  Sin suministro eléctrico
 Pitido constante ininterrumpido.-  Falla en el suministro eléctrico
 Pitidos cortos y constantes.- Placa base defectuosa.
@@ -28409,7 +28409,6 @@ Y contestar "yes". El parámetro "-plou" indica que solo se hagan preguntas esen
   APT::Periodic::Update-Package-Lists "1";
   # Que se instalen automáticamente las actualizaciones disponibles y los parches de seguridad críticos:
   APT::Periodic::Unattended-Upgrade "1";
-
 
 
 unbound
