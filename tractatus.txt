@@ -4743,6 +4743,16 @@ Atajos:
 	f (Buscar palabra en las noticias)
 
 
+capistrano
+Automatizar tareas a través de SSH en servidores remotos, como instalación de software, implementación de aplicaciones, administración de configuración, monitoreo de servidores ad hoc y más.
+$ cap install (crear un nuevo proyecto)
+$ cap custom:check_disk (ejecuta la tarea en todos los servidores configurados en Capfile o en /lib/capistrano/tasks/custom_tasks.rake)
+$ cap production deploy (para configurar los servidores y rutas en config/deploy.rb)
+$ cap nginx:restart (reiniciar un servicio. Tiene que estar establecido en la configuración)
+$ cap commands:execute (ejecutar un comando en múltiples servidores. Tiene que estar establecido en la configuración)
+$ cap production deploy --trace (modo verbose para obtener más detalles)
+
+
 capsh
 Permita probar y explorar el uso de capabilities. [relacionado con getcap, setcap y getpcaps]
 $ capsh --print (Lista de capabilities actuales)
