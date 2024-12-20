@@ -4753,6 +4753,23 @@ $ cap commands:execute (ejecutar un comando en múltiples servidores. Tiene que 
 $ cap production deploy --trace (modo verbose para obtener más detalles)
 
 
+cappuccino
+Ejecute este software en su computadora cuando no esté motivado para trabajar y disfrute haciendo algo diferente. Este comando es un programa de distracción diseñado para ayudar a las personas a tomar pausas y reducir el tiempo de concentración durante el trabajo.
+$ cappuccino --auto-start --threshold 50 --activity-type games (ejecutar automáticamente cuando la productividad disminuya)
+$ cappuccino --duration 30m --activity-type videos (ejecutar durante un tiempo específico)
+$ cappuccino --auto-start --threshold 60 --activity-type games,puzzles,music (configurar múltiples actividades)
+1.-
+Un ejemplo de archivo de configuración básico podría ser:
+# nano ~/.config/cappuccino/config.yml
+auto_start: true
+threshold: 50
+duration: 15m
+activities:
+ - games
+ - puzzles
+ - music
+
+
 capsh
 Permita probar y explorar el uso de capabilities. [relacionado con getcap, setcap y getpcaps]
 $ capsh --print (Lista de capabilities actuales)
