@@ -4764,6 +4764,14 @@ $ capstans -i eth1 -I 2 (actualizar cada 2 segundos)
 $ capstans -l (Imprimir resultados en syslog y no por pantalla)
 
 
+capstats
+Herramienta para recopilar estadísticas sobre la carga actual de una interfaz de red, ya sea mediante libpcap o la interfaz nativa de Endace. Informa estadísticas por intervalo de tiempo o por el tiempo de ejecución total de la herramienta.
+$ capstats captura.pcap (con un archivo captura.pcap generado por herramientas como tcpdump, se puede analizar el tráfico)
+$ capstats -m captura.pcap (mostrar estadísticas en megabytes por segundo [Mbps])
+$ capstats -s 2 captura.pcap (estadísticas en intervalos de 2 segundos)
+$ tcpdump -i eth0 -w - | capstats - (redirige el tráfico capturado por tcpdump directamente a capstats para analizarlo)
+
+
 caracteres-especiales
 Son signos con un caracter especial en bash:
 	~ (Directorio home)
