@@ -4830,6 +4830,16 @@ Utilidad para ordenadores portátiles de control de tarjetas PCMCIA [Tarjetas de
 # cardctl insert (La activa nuevamente)
 
 
+care
+Supervisa la ejecución del comando especificado para crear un archivo que contiene todo el material necesario para volver a ejecutarlo en el mismo contexto. De esa manera, el comando será reproducible en todas partes, incluso en sistemas Linux que se supone que no son compatibles con el sistema Linux original.
+$ care -o contexto-ls.tar ls /etc (crea un archivo contexto-ls.tar que contiene todo lo necesario para ejecutar el comando ls /etc en otro sistema)
+$ care -v -o contexto-apache.tar apachectl start (modo detallado de captura del contexto necesario para iniciar Apache, lo que incluye los archivos de configuración utilizados y cualquier otro recurso accedido durante la ejecución)
+1.-
+Supongamos que se tiene un script llamado mi_script.sh que depende de variables de entorno y archivos específicos:
+$ care -o contexto-script.tar ./mi_script.sh
+El archivo contexto-script.tar contendrá lass variables de entorno usadas durante la ejecución y los archivos abiertos o modificados por el script.
+
+
 cargo
 Gestor de paquetes del lenguaje Rust. Crea el directorio ~/.cargo.
 $ cargo install paquete (instalar un paquete)
