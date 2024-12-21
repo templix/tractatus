@@ -4942,6 +4942,14 @@ $ catdoc archivo.doc > contenido.txt (guardar el texto en contenido.txt)
 $ head -n 10 | catdoc archivo.doc (mostrar solo las primeras 10 líneas del documento como texto sin formato)
 
 
+catdvi
+Herramienta para visualizar en texto plano archivos DVI [Device Independent] generados por LaTeX y otros procesadores de TeX.
+$ catdvi archivo.dvi > contenido.txt (crea un archivo llamado `contenido.txt` con el contenido del archivo DVI)
+$ catdvi archivo.dvi (visualizar el contenido en pantalla)
+$ catdvi -p 5 -l 10 archivo.dvi (mostrar páginas de la 5 a la 10 del archivo DVI. También puede especificarse "-p 5:10")
+$ catdvi -s archivo.dvi (ignora caracteres especiales)
+
+
 catimg
 Ver imagenes ascii
 $ catimg -r 2 imagen.png (con mejor resolución que -r 1)
