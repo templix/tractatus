@@ -4924,6 +4924,17 @@ $ cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 10 | sed 1q (generar una contr
 $ cat listado.txt / | sed -e :a -e 's/^.\{1,20\}$/&_/;ta'  (coloca los nombres del listado uno detrás de otro y completa hasta 20 caracteres [1,10] con un guión bajo [&_])
 
 
+catatonic
+Proceso de inicialización para contenedores de aplicaciones. Este sistema está diseñado para simplificar la administración de contenedores de aplicaciones y mejorar la eficiencia en el arranque y su ejecución.
+# catatonic list (listar todos los contenedores)
+# catatonic status (mostrar el estado actual de todos los contenedores gestionados)
+# catatonic start <nombre_del_contenedor> (iniciar un contenedor específico por su nombre o ID)
+# catatonic stop <nombre_del_contenedor> (parar un contenedor)
+# catatonic restart <nombre_del_contenedor> (reiniciar)
+# catatonic remove <nombre_del_contenedor> (eliminar un contenedor)
+# catatonic inspect <nombre_del_contenedor> (mostrar detalles de un contenedor específico)
+
+
 catimg
 Ver imagenes ascii
 $ catimg -r 2 imagen.png (con mejor resolución que -r 1)
