@@ -4935,6 +4935,13 @@ Proceso de inicialización para contenedores de aplicaciones. Este sistema está
 # catatonic inspect <nombre_del_contenedor> (mostrar detalles de un contenedor específico)
 
 
+catdoc
+Lee archivos Microsoft Word [.doc, .dot, .rtf y .xml]. y envía su contenido a la salida estándar como texto. Incluye las herramientas xls2csv [convierte formatos de hojas de cálculo de Excel] y catppt [utilidad para extraer información textual de archivos de PowerPoint]
+$ catdoc archivo.doc (uso básico)
+$ catdoc archivo.doc > contenido.txt (guardar el texto en contenido.txt)
+$ head -n 10 | catdoc archivo.doc (mostrar solo las primeras 10 líneas del documento como texto sin formato)
+
+
 catimg
 Ver imagenes ascii
 $ catimg -r 2 imagen.png (con mejor resolución que -r 1)
