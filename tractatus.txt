@@ -4950,6 +4950,14 @@ $ catdvi -p 5 -l 10 archivo.dvi (mostrar páginas de la 5 a la 10 del archivo DV
 $ catdvi -s archivo.dvi (ignora caracteres especiales)
 
 
+catfishq
+Herramienta diseñada para trabajar con archivos de secuencias FASTQ, un formato ampliamente utilizado en bioinformática para almacenar información sobre lecturas de secuencias de ADN. La herramienta permite concatenar e imprimir archivos FASTQ, ya sea comprimidos, por ejemplo, en formato GZIP o no.
+$ catfishq archivo1 archivo2 archivo3 (concatena y imprime en la salida estándar los contenidos de los archivos especificados)
+$ catfishq file1.fastq file2.fastq > combined.fastq (combined.fastq contendrá las secuencias de ambos archivos concatenadas en el mismo formato)
+$ catfishq file1.fastq.gz file2.fastq.gz > combined.fastq (descomprime automáticamente los archivos, los concatena y los guarda en combined.fastq)
+$ catfishq large1.fastq.gz large2.fastq.gz | gzip > combined.fastq.gz (concatena los archivos directamente y los comprime nuevamente en el formato GZIP)
+
+
 catimg
 Ver imagenes ascii
 $ catimg -r 2 imagen.png (con mejor resolución que -r 1)
