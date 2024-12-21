@@ -4968,6 +4968,31 @@ Ver imagenes ascii
 $ catimg -r 2 imagen.png (con mejor resolución que -r 1)
 
 
+catkin
+Este paquete es parte de ROS [Robot Operating System - sistema operativo para robots] técnicamente se trata de un conjunto de bibliotecas y herramientas que ayudan a desarrollar aplicaciones de software para robots. Para usar Catkin, se necesita configurar un "workspace" [espacio de trabajo], que es una carpeta donde se gestionarán todos sus paquetes y la estructura básica es:
+$ mkdir -p ~/catkin_ws/{src,build,devel,install}
+$ cd ~/catkin_ws
+En el que dentro del directorio raíz del espacio de trabajo se incluyan los directorios src [para el código fuente de los paquetes], build [para los archivos de construcción generados por Catkin], devel [para los archivos de desarrollo, librerías, scripts, etc.] y install [con los archivos instalados después de construir el workspace]
+$ catkin_make (en el interior del directorio raiz, genera, si no estan, los directorios build y devel)
+Para crear un nuevo paquete dentro del espacio de trabajo
+$ cd ~/my_catkin_ws/src
+$ catkin_create_pkg mi_robot std_msgs roscpp
+Esto genera una estructura básica para el paquete mi_robot que depende de std_msgs y roscpp, crea un archivo de configuración CMakeList.txt para la construcción yotro package.xml con información sobre el paquete [nombre, descripción, dependencias, etc.].
+Una vez creado un paquete o añadido código, se debe construir el espacio de trabajo para generar los binarios necesarios:
+$ cd ~/my_catkin_ws
+$ catkin_make
+Que compila todos los paquetes en src/ y genera los archivos correspondientes en las carpetas build/ y devel/.
+Después de construir el espacio de trabajo, se necesita configurar el entorno para poder ejecutar los nodos y scripts:
+$ source ~/my_catkin_ws/devel/setup.bash (actualiza las variables de entorno para incluir los archivos generados por Catkin)
+Si el paquete mi_robot tiene un nodo llamado controlador:
+$ rosrun mi_robot controlador
+Si se precisa agregar nuevas dependencias a un paquete, editar el archivo package.xml y agregar las nuevas dependencias. Por ejemplo:
+      <depend>geometry_msgs</depend>
+      <depend>sensor_msgs</depend>
+Después, reconstruir el espacio de trabajo con catkin_make.
+$ catkin_make
+
+
 cb-
 [crunchbang-bin-scripts]. Conjunto de scripts propios de la distro crunchbang.
 cb-exit (Lanza el dialogo de salida)
