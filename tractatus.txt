@@ -5047,6 +5047,14 @@ $ cbp2make -in mi_workspace.workspace (genera un Makefile que incluye las reglas
 $ cbp2make -in mi_proyecto.cbp -v (ver más detalles sobre el proceso de conversión si el Makefile generado no funciona como se esperaba)
 
 
+ccache
+Es un caché de compiladores. Acelera la recompilación almacenando en caché compilaciones anteriores y detectando cuándo se vuelve a realizar la misma compilación.
+$ ccache gcc -o ejecutable archivo.c (compila un archivo C usando 'gcc' y almacena la salida en el caché)
+$ ccache -s (ver qué archivos están almacenados en el caché)
+$ ccache -C (limpiar caché)
+$ ccache -z mi_codigo.c (verificar si determinado archivo está en el cache)
+
+
 ccal
 Calendario colorizado
 $ ccal -e (formato europeo: primer dia semana,  lunes)
