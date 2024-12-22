@@ -5028,6 +5028,15 @@ $ cbonsai -l (lo va creando)
 $ cbonsai -i (va mostrando varios bonsais)
 
 
+cbootimage
+Este paquete contiene dos programas para analizar la boot config table [bct - tabla de configuración de arranque] de dispositivos basados en SoC Tegra y para generar una nueva bct con un gestor de arranque adjunto. por ejemplo, u-boot, que se leerá para ser flasheado en un dispositivo de almacenamiento. La tabla de configuración de arranque se utiliza en el proceso de arranque inicial para configurar el controlador de memoria DRAM sdhci y también indica la posición del gestor de arranque.
+$ cbootimage -i /ruta/a/imagen.bin -o bct.txt (analizar una imagen específica y mostrar información detallada)
+$ cbootimage -i /ruta/a/imagen.bin --bct-only > bct_contents.txt (mostrar solo el contenido de la tabla BCT)
+$ cbootimage -i magen1.bin imagen2.bin --compare-bct (comparar dos imágenes y mostrar las diferencias en la BCT)
+$ cbootimage -i /ruta/a/imagen.bin --extract-info (extraer información específica de la BCT)
+$ cbootimage --check-compatibility /ruta/a/imagen.bin (verificar si un dispositivo es compatible con cbootimage)
+
+
 ccal
 Calendario colorizado
 $ ccal -e (formato europeo: primer dia semana,  lunes)
