@@ -5037,6 +5037,16 @@ $ cbootimage -i /ruta/a/imagen.bin --extract-info (extraer información específ
 $ cbootimage --check-compatibility /ruta/a/imagen.bin (verificar si un dispositivo es compatible con cbootimage)
 
 
+cbp2make
+Herramienta diseñada para convertir archivos de proyectos o espacios de trabajo de Code::Blocks [un IDE para desarrollo en C y C++] en archivos Makefile compatibles con GNU Make.
+$ cbp2make -in mi_proyecto.cbp (generará un archivo Makefile en el directorio actual)
+$ cbp2make -in mi_proyecto.cbp -out /proyectos/mi_proyecto/ (el archivo Makefile se guardará en la ruta proporcionada)
+$ make (después de generar el archivo Makefile, compila el proyecto con GNU Make)
+Nota.- Si el proyecto tubiera múltiples configuraciones, por ejemplo, Debug y Release, se puede especificar al ejecutar make: make CONFIG=Release ; make CONFIG=Debug
+$ cbp2make -in mi_workspace.workspace (genera un Makefile que incluye las reglas para construir todos los proyectos contenidos en el espacio de trabajo)
+$ cbp2make -in mi_proyecto.cbp -v (ver más detalles sobre el proceso de conversión si el Makefile generado no funciona como se esperaba)
+
+
 ccal
 Calendario colorizado
 $ ccal -e (formato europeo: primer dia semana,  lunes)
