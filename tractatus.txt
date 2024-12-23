@@ -5261,6 +5261,28 @@ Programa que detecta cuando una unidad de CD/DVD-ROM tiene un disco insertado. C
          </cdde>
 
 
+cde
+[Code, Data, and Environment]. Herramienta que empaqueta automáticamente todo el entorno necesario para ejecutar un comando de Linux y empaquetarlo en un archivo portátil. Esto incluye binarios, bibliotecas, scripts y otros recursos, de manera que puedas reproducir la ejecución en otra máquina sin necesidad de configuración adicional y sin ninguna instalación. El único requisito es que la otra computadora ha de tener la misma arquitectura de hardware [por ejemplo, x86_64] y la misma versión principal del kernel [por ejemplo, 2.6.X]
+$ cde ls (crea un directorio llamado cde-package que contiene todos los archivos necesarios para ejecutar el comando "ls" en otro sistema)
+Una vez copiado el directorio cde-package a la otra máquina se ejecuta el programa:
+$ cd cde-package
+$ ./cde-exec ls
+Para empaquetar un programa con múltiples dependencias, como python3 ejecutando un script:
+$ cde python3 script.py
+Esto creará un paquete que incluye: El intérprete de Python, el script y cualquier archivo que lea y las bibliotecas necesarias. En la máquina de destino, simplemente se copia el directorio y se ejecuta:
+$ cd cde-package
+$ ./cde-exec python3 script.py
+También se puede empaquetar aplicaciones gráficas como gedit:
+$ cde gedit (capturará las bibliotecas relacionadas con el entorno gráfico y los recursos necesarios)
+Y, una vez copiado cde-package en la otra máquina, se ejecuta:
+$ cd cde-package
+$ ./cde-exec gedit
+Para empaquetar un servidor es exactamente igual:
+$ cde python3 -m http.server
+Para empaquetar compilaciones y entornos de desarrollo:
+$ cde gcc main.c -o main
+
+
 cdebconf
 Parte del sistema de configuración Debconf y se utiliza para interactuar con la interfaz de configuración de paquetes Debian.
 # cdebconf debconf-string/hostname string "mihost" (configura el nombre del host en la instalación)
