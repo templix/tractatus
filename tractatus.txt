@@ -5242,6 +5242,25 @@ $ cdda2wav -B -H -D /dev/sdxx -s -x (extrae disco completo en archivos wav separ
 $ cdda2wav -H -D /dev/sdxx -s -x -t 5 (extrae la pista nº 5)
 
 
+cdde
+Programa que detecta cuando una unidad de CD/DVD-ROM tiene un disco insertado. Cuando encuentra un disco insertado en la unidad, intentará determinar el tipo de disco y ejecutará un comando específico. Esto significa que se puede insertar un DVD y se iniciará un software de DVD determinado, o se puede montar automáticamente un CD de datos, etc. Los comandos se definen en un archivo de configuración que por defecto es ~/.cdde.xml. Un  ejemplo podría sera:
+         <?xml version="1.0"?>
+         <cdde delay="5000000">
+           <drive path="/dev/cdroms/cdrom0"/>
+             <audio command="xmms %mnt%"/>
+             <data command="mount %mnt%"/>
+             <dvd
+              command="xterm -iconic -e mplayer -fs -xineramascreen 1 -dvd 1"/>
+             <vcd
+              command="xterm -iconic -e mplayer -fs -xineramascreen 1 -vcd 1"/>
+             <svcd
+              command="xterm -iconic -e mplayer -fs -xineramascreen 1 -vcd 1"/>
+             <blank command="gcombust"/>
+             <mixed command="mount %mnt%"/>
+           </drive>
+         </cdde>
+
+
 cdebconf
 Parte del sistema de configuración Debconf y se utiliza para interactuar con la interfaz de configuración de paquetes Debian.
 # cdebconf debconf-string/hostname string "mihost" (configura el nombre del host en la instalación)
