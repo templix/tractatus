@@ -5130,6 +5130,24 @@ Para realizar consultas a traveés de internet sobre CDDB [CD Database] que es u
 $ cd-discid /dev/cdrom/
 
 
+cd-paranoia
+Herramienta para extraer pistas de audio de discos compactos [CDs] en formato CDDA [Compact Disc Digital Audio]. Permite leer directamente el disco óptico sin necesidad de un sistema operativo o software de lectura de CD integrado. Esto lo hace útil para recuperar datos de CDs antiguos o dañados.
+$ cd-paranoia (forma básica estando en el directorio del CD [/media/cdrom])
+$ cd-paranoia -vb -C 0x41 (modo detallado, saltarse errores de lectura y código de error específico)
+$ cd-paranoia -B (extraer todas las pistas de un CD)
+$ cd-paranoia -t 5 (extraer una pista específica)
+$ cd-paranoia -V (verificación de datos)
+
+
+cd5
+Herramienta para verificar la integridad de un CD-ROM de múltiples pistas calculando el checksum MD5 y reportando el tamaño de cada pista. Esto permite asegurarse de que los datos en el CD-ROM no se hayan corrompido durante el proceso de grabación. La aplicación usa una ruta fija al dispositivo que actualmente es /dev/cdrom para acceder al CD-ROM, si el dispositivo está en otra ubicación, por ejemplo, /dev/sr0, se debe crear un enlace simbólico:
+# ln -s /dev/sr0 /dev/cdrom
+$ cd5 (verificar un CD-ROM, mostrando checksum y tamaño de cada pista en bytes)
+      Track 01: MD5=abcdef1234567890abcdef1234567890  Size=12345678 bytes
+      Track 02: MD5=1234567890abcdef1234567890abcdef  Size=98765432 bytes
+      ...
+
+
 cdargs
 Herramienta que mejora la navegación por el sistema de archivos desde la shell. Se conecta al comando de CD a través de una función de shell o un alias y le agrega marcadores y un navegador que permite moverse a un lugar muy distante en el sistema de archivos con solo unas pocas pulsaciones de teclas.
 $ cdargs -a path (agregar una ruta a la lista de marcadores)
