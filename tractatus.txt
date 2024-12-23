@@ -5434,6 +5434,24 @@ $ cdrestore -v /dev/cdrw backup.iso (modo detallado, restaurar una iso a un CD
 Nota.- la opción -d ejecuta la operación en modo dry-run [sin escribir datos]
 
 
+cdrskin
+Alternativa a cdrecord, que se utiliza para grabar datos en medios ópticos como CD y DVD. Ofrece una interfaz compatible con cdrecord y funciona bien para muchas tareas relacionadas con la grabación de discos.
+$ cdrskin --devices (identifica los dispositivos ópticos disponibles en el sistema)
+$ cdrskin -v dev=/dev/sr0 fs=16m speed=16 -eject /ruta/a/imagen.iso (salida detallada, especifica el dispositivo óptico, tamaño de bufer, expulsar el disco al finalizar y ruta del archivo de imagen que se desea grabar
+Si se tiene un conjunto de archivos o carpetas que se desea grabar en un CD/DVD, primero se ha des crear un sistema de archivos ISO y luego grabarlo:
+$ mkisofs -o disco_datos.iso /ruta/del/directorio
+$ cdrskin -v dev=/dev/sr0 disco_datos.iso
+Para grabar un CD de audio, se necesita archivos en formato WAV.
+$ cdrskin dev=/dev/sr0 -audio -swab track1.wav track2.wav track3.wav (grabar un disco de audio desde archivos WAV -audio: Indica que se está grabando un CD de audio y -swab: Cambia el orden de bytes si los archivos WAV lo requieren)
+$ cdrskin dev=/dev/sr0 blank=fast (borrado rápido)
+$ cdrskin dev=/dev/sr0 blank=all (borrado completo)
+1.-
+Crear un disco híbrido para que puede ser leído tanto en sistemas Linux como en Windows:
+$ mkisofs -o disco_hibrido.iso -J -r /ruta/del/directorio (-J: Activa el soporte para nombres largos en Windows y -r: Activa el soporte para permisos en Linux)
+$ cdrskin -v dev=/dev/sr0 disco_hibrido.iso (graba la .iso)
+$ cdrskin dev=/dev/sr0 -atip (verificar el estado del disco y el dispositivo mostrando información téxnica, capacidad y tipo)
+
+
 cert-sync
 Importar certificados. Ver update-ca-certificates
 $ cert-sync --user /etc/ssl/certs/ca-certificates.crt
