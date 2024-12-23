@@ -5318,6 +5318,44 @@ cdinfo
 $ cdinfo -d /dev/sr0
 
 
+cdist
+Sistema de gestión de configuración utilizable. A diferencia de otras herramientas, cdist utiliza scripts shell para definir y aplicar configuraciones. Asegúrate de que se tiene acceso SSH al host remoto que deseas gestionar. Crear un directorio para almacenar las configuraciones de cdist:
+# mkdir -p cdist-configs/{conf,bin,type}
+# cd ~/cdist-configs
+conf: Contiene las configuraciones declarativas , bin: Los scripts personalizados y type: Define tipos de configuraciones reutilizables.
+1.-
+Como ejemplo, imaginemos que se precisa instalar nginx en un servidor remoto: Definir un script de configuración en:
+# nano  ~/cdist-configs/conf/manifest/init
+#!/bin/sh
+__package nginx
+Aquí, __package es un tipo predefinido que instala un paquete en el sistema remoto.
+$ cdist deploy --host 192.168.1.100 --user user (aplicar la configuración al host remoto)
+Para asegurarte de que un archivo de configuración específico está presente en un servidor:
+# nano ~/cdist-configs/conf/manifest/init
+#!/bin/sh
+__file /etc/nginx/nginx.conf \
+--source /path/to/nginx.conf
+El tipo __file asegura que el archivo /etc/nginx/nginx.conf tenga el contenido especificado en source.
+$ cdist deploy --host server.example.com (aplicar la configuración)
+Si se necesita crear un usuario en el sistema remoto llamado deploy:
+# nano ~/cdist-configs/conf/manifest/init
+#!/bin/sh
+__user deploy \
+--home /home/deploy \
+--shell /bin/bash
+El tipo __user crea usuarios en el sistema remoto.
+$ cdist deploy --host 192.168.1.200 (aplicar la configuración)
+Se puede combinar varios tipos en un manifiesto para aplicar configuraciones complejas. Por ejemplo, para instalar nginx, configurar su archivo de configuración y reiniciar el servicio:
+# nano ~/cdist-configs/conf/manifest/init
+#!/bin/sh
+__package nginx
+__file /etc/nginx/nginx.conf \
+--source /path/to/nginx.conf
+__service nginx --state restarted
+$ cdist deploy --host 192.168.1.100 (aplicar la configuración)
+$ cdist list-types (lista todos los tipos disponibles en la instalación)
+
+
 cdir
 [cdtool]. Información sobre el directorio del cd
 $ cdir -n (Duración de las canciones de un cd)
