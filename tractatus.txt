@@ -5391,6 +5391,15 @@ $ cdparanoia 5 -d /dev/sdxx (extrae el track nº 5)
 $ cdparanoia  "2[:35.00]-2[2:30.00]" (extraer solo de la pista 2 del minuto 1,35 al 2,35)
 
 
+cdpr
+Escucha en interfaces de red específicas los paquetes de CDP [Cisco Discovery Protocol - Protocolo Cisco Discovery] que es un protocolo de propiedad de Cisco que permite a sus dispositivos comunicarse independientemente de la conectividad de la capa de red. Luego, decodifica esos paquetes y genera la información.
+# cdpr -i eth0 (escucharía los paquetes CDP en la interfaz de red eth0)
+# cdpr (escuvhar los paquetes en todas las interfaces)
+# cdpr -d (mostrar información detallada de los dispositivos CDP)
+# cdpr -n "Nombre del dispositivo" (filtrar por un nombre específico o dirección MAC)
+# cdpr -t 60 (escuchar durante un período de tiempo específico)
+
+
 cdrdao
 Extraer / grabar pistas de CD en modo DAO (Disk at once)
 # cdrdao read-cd -v 2 --device /dev/cdrom --read-raw --datafile imagen.bin imagen.toc (Extraer junto a su tabla de contenidos)
