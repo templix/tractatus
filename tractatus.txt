@@ -5362,6 +5362,14 @@ $ cdir -n (Duración de las canciones de un cd)
 $ cdir -d /dev/sr0 -r (Lo mismo especificando dispositivo)
 
 
+cdlabelgen
+Fue diseñado para simplificar el proceso de generación de etiquetas para CD y DVD. Se originó como un programa que permitía la generación automática de tarjetas frontales y de bandeja para CD grabados mediante un mecanismo automatizado, pero ahora se ha vuelto popular para etiquetar compilaciones de CD de archivos mp3 y copias de CD. Tenga en cuenta que cdlabelgen en realidad no imprime nada, solo genera PostScript, con el que puede hacer lo que se quiera. Las imágenes se pueden encontrar en /usr/share/cdlabelgen o /usr/local/share/cdlabelgen.
+$ cdlabelgen -c "Mi Álbum Favorito" -s "Música Rock" -i "Track 1%Track 2%Track 3" -e postscript/recycle.epsi -o mi_album.ps (genera un archivo PostScript con la etiqueta del álbum, incluyendo los tracks y usando el ícono de reciclaje como imagen de fondo)
+$ cdlabelgen -c "Proyecto de Programación" -s "Código Fuente" -i "Archivo1.cpp%Archivo2.h%Main.cpp" -e /ruta/a/mi_magen_personalizada.epsi -E /ruta/a/otra_imagen.epsi > proyecto_programacion.ps (usa imágenes personalizadas tanto para la cubierta como para el trayecto)
+$ cdlabelgen -c "Mi Proyecto" -s "Subproyecto" -i "Archivo1%Archivo2%Archivo3" -b > sin_titulo_trayecto.ps (omite el título y subtítulo del trayecto, permitiendo más espacio para los items)
+$ cdlabelgen -c "Mi Álbum" -s "Rock Clásico" -e postscript/mp3.epsi -S 1.5 -E postscript/cd.eps -T 0.8 > album_rock.ps (escala automáticamente la imagen del MP3 para que ocupe toda la cubierta y ajusta la imagen del CD en el trayecto)
+
+
 cdparanoia
 Extraer pistas de audio de un cd.
 $ cdparanoia -B -d /dev/sdxx (extrae disco completo en archivos wav separados)
