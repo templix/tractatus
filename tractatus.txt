@@ -5130,6 +5130,11 @@ Para realizar consultas a traveés de internet sobre CDDB [CD Database] que es u
 $ cd-discid /dev/cdrom/
 
 
+cd-drive
+[libcdio-utils]. Describe las características de la unidad de CD-ROM/DVD.
+$ cd-drive
+
+
 cd-paranoia
 Herramienta para extraer pistas de audio de discos compactos [CDs] en formato CDDA [Compact Disc Digital Audio]. Permite leer directamente el disco óptico sin necesidad de un sistema operativo o software de lectura de CD integrado. Esto lo hace útil para recuperar datos de CDs antiguos o dañados.
 $ cd-paranoia (forma básica estando en el directorio del CD [/media/cdrom])
@@ -5160,6 +5165,13 @@ Para incorporar cdargs en .bashrc:
      echo '. ~/.bashrc-cdargs' >> ~/.bashrc
 
 
+cdbackup
+Utilidad específica para crear copias de seguridad de discos CD-R/W. Incluye la aplicación cdrestore [ver]
+$ cdbackup /dev/cdrom backup.iso (copiar un disco CD a una imagen ISO)
+$ cdbackup -v -b 2048M /dev/dvd backup_dvd.iso (copiar un disco DVD a una imagen ISO en modo verbose y tamaño máximo de cada bloque 2048)
+$ cdbackup -s /dev/cdrom backup_data.iso (copiar solo los datos útiles sin estructura de directorios de un disco CD)
+
+
 cdcd
 Utilidad para controlar reproductores de CD de música. Permite tanto comandos directos como un modo interactivo.
 $ cdcd (la primera vez que se ejecuta hace algunas preguntas con el dispositivo reproductor /dev/cdrom y entra en modo interactivo)
@@ -5188,11 +5200,6 @@ cdda2wav
 Extraer pistas de audio de un cd
 $ cdda2wav -B -H -D /dev/sdxx -s -x (extrae disco completo en archivos wav separados.)
 $ cdda2wav -H -D /dev/sdxx -s -x -t 5 (extrae la pista nº 5)
-
-
-cd-drive
-[libcdio-utils]. Describe las características de la unidad de CD-ROM/DVD.
-$ cd-drive
 
 
 cdebconf
@@ -5248,6 +5255,12 @@ opciones
 -speed .- especifica la velocidad de grabación
 -dev .- número de dispositivo [0,1,0] obtenido con cdrecord -scanbus
 -dummy .- simula la grabación
+
+
+cdrestore
+Utilidad diseñada para facilitar la transmisión de copias de seguridad hacia discos CD-R(W).
+$ cdrestore -v /dev/cdrw backup.iso (modo detallado, restaurar una iso a un CD
+Nota.- la opción -d ejecuta la operación en modo dry-run [sin escribir datos]
 
 
 cert-sync
