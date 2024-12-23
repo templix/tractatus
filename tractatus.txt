@@ -5172,6 +5172,32 @@ $ cdbackup -v -b 2048M /dev/dvd backup_dvd.iso (copiar un disco DVD a una imagen
 $ cdbackup -s /dev/cdrom backup_data.iso (copiar solo los datos útiles sin estructura de directorios de un disco CD)
 
 
+cdbs
+[Common Debian Build System]. Sistema de compilación basado en Makefile y que proporciona un conjunto de reglas predeterminadas sobre las que se pueden compilar los paquetes. Su principal objetivo es reducir la cantidad de reglas que un mantenedor de paquetes necesita escribir en el archivo debian/rules. Para usar la aplicación, en el archivo debian/rules se incluye lo siguiente:
+            #!/usr/bin/make -f
+            include /usr/share/cdbs/1/rules/debhelper.mk
+Esto carga un conjunto de reglas estándar de debhelper para la construcción del paquete. Si se está empaquetando un proyecto simple con un script de configuración basado en Autotools, se puede usar el módulo autotools.mk de cdbs. Este es un ejemplo de debian/rules:
+           #!/usr/bin/make -f
+           include /usr/share/cdbs/1/class/autotools.mk
+           include /usr/share/cdbs/1/rules/debhelper.mk
+autotools.mk maneja automáticamente los pasos de configuración, compilación e instalación usando ./configure, make, y make install y debhelper.mk gestiona tareas adicionales como la instalación de archivos de documentación. Si el paquete es un módulo de Python que utiliza distutils, el archivo debian/rules podría verse así:
+           #!/usr/bin/make -f
+           include /usr/share/cdbs/1/class/python-distutils.mk
+           include /usr/share/cdbs/1/rules/debhelper.mk
+El módulo python-distutils.mk compila el paquete de Python automáticamente usando setup.py. Si el proyecto usa CMake, puedes usar el módulo cmake.mk:
+           #!/usr/bin/make -f
+           include /usr/share/cdbs/1/class/cmake.mk
+           include /usr/share/cdbs/1/rules/debhelper.mk
+Esto maneja automáticamente la configuración (cmake), la compilación (make), y la instalación (make install). Se puede especificar documentación adicional en debian/docs:
+            README.md
+            CHANGELOG
+            LICENSE
+El contenido del archivo debian/rules no necesita cambiar para que estos archivos sean instalados en /usr/share/doc/<nombre-del-paquete>. Para crear los archivos de Debian se precisa: debian/control que define las dependencias del paquete, debian/changelog que registra los cambios y debian/rules que usa los módulos cdbs necesarios. Una vez creado el paquete para instalar el .deb:
+# dpkg-buildpackage -us -uc
+y verificar su funcionalidad.
+
+
+
 cdcd
 Utilidad para controlar reproductores de CD de música. Permite tanto comandos directos como un modo interactivo.
 $ cdcd (la primera vez que se ejecuta hace algunas preguntas con el dispositivo reproductor /dev/cdrom y entra en modo interactivo)
