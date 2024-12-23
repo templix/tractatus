@@ -5217,6 +5217,15 @@ En modo interactivo los comandos son los mismo pero con el prompt de cdcd:
 Este ejemplo haría que el CD comenzara a reproducirse todos los días a las 7:00 AM.
 
 
+cdck
+Herramienta de verificación de la calidad de CD/DVD.
+$ cdck (verifica los sectores del disco y da un reporte indicando si hay sectores corruptos o ilegibles. Por defecto lo busca en /dev/cdrom)
+$ cdck -i (obtener información del disco)
+$ cdck -q (prueba de calidad más detallada y obtener un informe sobre cada sector)
+$ cdck -d /dev/sr0 (si el no es el por defecto en /dev/cdrom, ha de especificarse)
+$ cdck -f (forzar una lectura más agresiva de los sectores del disco)
+
+
 cdclose
 [cdtool]. Cerrar el cd.
 $ cdclose -d /dev/sr0 (especificando el dispositivo [cdrom0...])
