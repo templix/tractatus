@@ -5370,6 +5370,20 @@ $ cdlabelgen -c "Mi Proyecto" -s "Subproyecto" -i "Archivo1%Archivo2%Archivo3" -
 $ cdlabelgen -c "Mi Álbum" -s "Rock Clásico" -e postscript/mp3.epsi -S 1.5 -E postscript/cd.eps -T 0.8 > album_rock.ps (escala automáticamente la imagen del MP3 para que ocupe toda la cubierta y ajusta la imagen del CD en el trayecto)
 
 
+cdo
+[Climate Data Operators - operadores de datos climáticos]. Son una colección de operadores para manipular y analizar datos de modelos climáticos. Los formatos de datos admitidos son GRIB, netCDF, SERVICE, EXTRA e IEG. Hay más de 400 operadores disponibles.
+$ cdo list *nc (listar archivos)
+$ cdo merge file1.nc file2.nc merged_file.nc (combinar múltiples archivos)
+$ cdo selvar,vname=temperature file.nc temperature_only.nc (extraer variables específicas)
+$ cdo mulc,3600 file.nc file_seconds.nc (cambiar unidades)
+$ cdo mean file.nc mean_file.nc (calcular promedios)
+$ cdo remdim time file.nc reduced_dim_file.nc (eliminar dimensiones)
+$ cdo copy file.grb file.nc (convertir entre formatos)
+$ cdo sub,file.nc another_file.nc result.nc (aplicar funciones matemáticas)
+$ cdo selbox,lon=-50:0,lat=30:40 file.nc selected_data.nc (extracción de datos por coordenadas)
+$ cdo showance file.nc image.png (crear gráficos)
+
+
 cdparanoia
 Extraer pistas de audio de un cd.
 $ cdparanoia -B -d /dev/sdxx (extrae disco completo en archivos wav separados)
