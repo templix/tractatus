@@ -5300,6 +5300,14 @@ Genera sistemas desde cero para Debian y derivados. Esta implementación es dife
 La variante build instala essential, apt y build-essential, la minimal, instala essential y apt y la standard [predeterminada] instala paquetes de prioridad importantes y requeridos.
 
 
+cdecl
+Es un programa que convierte frases de programación en C++ a frases similares del inglés.
+$ cdecl "void (*foo[3])(int)" (se traducirá como "array of pointers to functions taking an integer parameter")
+$ cdecl "struct foo { int x; char y; }" (se traducirá como "structure containing an integer and a character")
+$ cdecl "int *x[10]" (resultará en "array of 10 pointers to integers")
+$ cdecl "typedef struct { int (*f)(char); double d; } S;" (se traducirá como "typedef structure containing a pointer to function taking a character parameter and returning an integer, and a double")
+
+
 cdeject
 [cdtool]. Abrir el cd. Ver eject
 $ cdeject -d /dev/sr0 (especificando el dispositivo [cdrom0....])
