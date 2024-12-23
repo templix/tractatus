@@ -5292,6 +5292,14 @@ Parte del sistema de configuración Debconf y se utiliza para interactuar con la
 # cdebconf debconf-set debconf-string/hostname string "nuevoNombre" (cambia el valor del campo "hostname" a "nuevoNombre")
 
 
+cdebootstrap
+Genera sistemas desde cero para Debian y derivados. Esta implementación es diferente a la de debootstrap [ver]. La configuración de cdebootstrap es más sencilla, pero la configuración de debootstrap tiene la ventaja de ser más explícita con listas completas de paquetes.
+# cdebootstrap --variant=minimal bullseye rootfs.tar.gz http://deb.ian.org/debian/ (nombre de la versión de Debian, el archivo resultante que contendrá el sistema operativo y la URL del repositorio de Debian)
+# cdebootstrap --variant=standard bullseye rootfs.tar.gz http://deb.ian.org/debian/ --include=firmware-linux-nonfree
+# cdebootstrap --variant=build bullseye rootfs.tar.gz http://deb.ian.org/debian/ --include=firmware-linux-free
+La variante build instala essential, apt y build-essential, la minimal, instala essential y apt y la standard [predeterminada] instala paquetes de prioridad importantes y requeridos.
+
+
 cdeject
 [cdtool]. Abrir el cd. Ver eject
 $ cdeject -d /dev/sr0 (especificando el dispositivo [cdrom0....])
