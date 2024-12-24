@@ -5472,6 +5472,27 @@ Interfaz de curses para configurar interfaces de red.
 # Ceni
 
 
+ceph
+Sistema de almacenamiento distribuido y escalable.
+# ceph -s (mostrará información sobre el estado de los nodos, OSDs [Object Storage Daemons], monitores y otros componentes)
+# ceph -w
+# ceph osd tree (muestra una jerarquía de los OSDs, incluyendo sus estados y capacidades)
+# ceph df (verificar el espacio utilizado por los OSDs)
+# ceph-osd --id=X --data-dir=/path/to/osd create (agregar un nuevo OSD)
+# ceph-osd --id=X remove (eliminar un OSD)
+# ceph mon status (verificar el estado de los monitores)
+# ceph-mon --id=X create (agregar un nuevo monitor)
+# ceph-mon --id=X remove (eliminar un monitor)
+# ceph status (verificar el estado de los clientes)
+Archivo de configuración de ejemplo:
+# nano /etc/ceph/ceph.conf
+[global]
+fsid=$FSID
+mon initial members = mesh-a
+mon host = 192.168.18.4
+cluster network = 192.168.18.0/24
+
+
 cert-sync
 Importar certificados. Ver update-ca-certificates
 $ cert-sync --user /etc/ssl/certs/ca-certificates.crt
