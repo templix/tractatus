@@ -5519,6 +5519,37 @@ cfiles
 Gestor de archivos de terminal con teclas tipo vim, escrito en C usando la biblioteca ncurses. Su objetivo es proporcionar una interfaz como ranger, siendo al mismo tiempo ligero, rápido y mínimo. Se puede descargar de <https://github.com/mananapr/cfiles.git>
 
 
+cfingerd
+Servicio de red que proporciona información sobre usuarios remotos y puede habilitar o deshabilitar los servicios de finger para usuarios individuales, en lugar de para todos los usuarios de un host determinado. El archivo de configuración está en /etc/cfingerd.conf
+# systemctl status cfingerd (verificar si cfingerd está ejecutándose)
+# systemctl start cfingerd (iniciar el servicio si no lo está)
+Un ejemplo de archivo de configuración podría ser:
+# nano /etc/cfingerd.conf
+# Configuración general
+CFINGERD_OPTS="-l /var/log/cfingerd.log"
+#
+# Servicios permitidos
+ALLOWED_SERVICES="ssh,imap,smtp"
+#
+# Direcciones IP permitidas
+ALLOWED_IPS="192.168.1.0/24 10.0.0.0/8"
+#
+# Uso de DNS
+USE_DNS=Yes
+#
+# Timeout para conexiones
+CONNECT_TIMEOUT=30
+#
+# Timeout para respuestas
+RESPONSE_TIMEOUT=60
+#
+# Loglevel (debug, info, warn, error)
+LOGLEVEL=info
+#
+# Directorio de certificados
+CERT_DIR="/etc/cfingerd/certs"
+
+
 cfourcc
 identifica y cambia el código descripción de FourCC en archivos AVI [*.avi].
 $ cfourcc archivo.avi (mostrará el FourCC del archivo AVI especificado)
