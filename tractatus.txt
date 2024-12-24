@@ -5452,6 +5452,21 @@ $ cdrskin -v dev=/dev/sr0 disco_hibrido.iso (graba la .iso)
 $ cdrskin dev=/dev/sr0 -atip (verificar el estado del disco y el dispositivo mostrando información téxnica, capacidad y tipo)
 
 
+cdtool
+Colección de herramientas para gestionar y controlar la reproducción de CDs de audio en unidades de CD-ROM. Las herramientas son cdadd [Agrega pistas de un CD de audio a la lista de reproducción actual], cdclose [Cierra la bandeja de la unidad de CD], cdctrl [Controla la reproducción del CD: reproducir, pausar, saltar pistas], cdeject [Expulsa la bandeja del CD], cdinfo [Muestra información sobre el CD actual], cdir [], cdloop, cdown, cdpause [Pausa la reproducción], cdplay [Reproduce el CD], cdreset, cdshuffle, cdstop [Detiene la reproducción], cdtool2cddb y cdvolume [Ajusta el volumen].
+$ cdplay 3 (reproducir una pista específica)
+$ cdctrl next (saltar a la siguiente pista)
+$ cdctrl prev (retroceder a la pista anterior)
+$ cdvolume 200 (ajustar el volumen. Niveles de 0 a 255)
+$ cdadd 1 2 5 (agregar pistas específicas a una lista de reproducción)
+$ cdplay && cdvolume 150 (reproducir un CD y ajustar el volumen)
+
+
+cdw
+Puede gestionar la grabación de CD de audio y datos, a través de una imagen de CD o directamente desde los archivos.
+$ cdw (abrirá la interfaz de la aplicación desde la que se puede gestionar todo)
+
+
 cert-sync
 Importar certificados. Ver update-ca-certificates
 $ cert-sync --user /etc/ssl/certs/ca-certificates.crt
@@ -25428,6 +25443,9 @@ $ shuf -n 4 /etc/fstab -o archivo (Muestra 4 lineas aleatorias del archivo y man
 $ shuf -i 1-49 -n 6 (para la loto. Numeros aleatorios de 1 al 49 y que muestre 6)
 -i [x-y]  rango de números
 -n   Cantidad de numeros a visualizar
+1.-
+Reproducir un CD al azar. Precisa cdtool :
+$ for track in $(seq $(cdinfo | grep 'Number of tracks' | awk '{print $NF}') | shuf); do cdplay "$track"; done
 
 
 shutdown
