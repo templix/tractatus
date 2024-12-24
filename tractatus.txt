@@ -5519,6 +5519,15 @@ cfiles
 Gestor de archivos de terminal con teclas tipo vim, escrito en C usando la biblioteca ncurses. Su objetivo es proporcionar una interfaz como ranger, siendo al mismo tiempo ligero, rápido y mínimo. Se puede descargar de <https://github.com/mananapr/cfiles.git>
 
 
+cfourcc
+identifica y cambia el código descripción de FourCC en archivos AVI [*.avi].
+$ cfourcc archivo.avi (mostrará el FourCC del archivo AVI especificado)
+$ cfourcc -c nuevo_fourcc archivo.avi (nuevo_fourcc es el código descripción de FourCC que se desea aplicar)
+$ cfourcc --list (ver todos los códigos descripción de FourCC disponibles)
+$ cfourcc -i archvo.avi (información detallada sobre el FourCC de un archivo)
+$ for file in *.avi; do cfourcc -c nuevo_fourcc "$file"; done (cambia el FourCC de todos los archivos .avi en el directorio actual)
+
+
 cftp
 Conexión remota por ftp.
 $ cftp usuario@host (Despues de solicitar contraseña, entra en el prompt)
