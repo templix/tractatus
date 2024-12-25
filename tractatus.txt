@@ -5624,6 +5624,18 @@ Ejemplos prácticos:
 Nota.- Asegurarse de que el subsistema requerido esté montado en /sys/fs/cgroup. Si no, montarlo manualmente: # mount -t cgroup -o cpu,memory none /sys/fs/cgroup
 
 
+cgroupfs-mount
+Facilita el montaje de los subsistemas de cgroups en los directorios adecuados dentro de /sys/fs/cgroup donde los cgroups no están configurados automáticamente, sin realizar ninguna gestión ni clasificación de tareas en ellos.
+# cgroupfs-mount (montar los subsistemas de cgroups)
+Si se necesita montar solo algunos subsistemas, se puede especificar manualmente en lugar de usar cgroupfs-mount. Por ejemplo:
+# mount -t cgroup -o cpu none /sys/fs/cgroup/cpu
+# mount -t cgroup -o memory none /sys/fs/cgroup/memory
+# findmnt | grep cgroup (mostrará las entradas montadas en /sys/fs/cgroup)
+# umount /sys/fs/cgroup/cpu (desmontar los subsistemas manualmente)
+# umount /sys/fs/cgroup/memory
+Nota.- En sistemas modernos que usan systemd, los cgroups suelen estar gestionados automáticamente por systemd, y el uso de cgroupfs-mount puede no ser necesario.
+
+
 chacl
 [acl]. Cambiar la lista de control [acl, Access Control Lists] de acceso de un archivo o directorio permitiendo establecer permisos detallados para usuarios y grupos específicos, más allá de los permisos tradicionales
        $ chacl -l archivo.txt
