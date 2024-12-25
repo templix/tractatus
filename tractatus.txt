@@ -5510,6 +5510,15 @@ $ certmonger-setup-ca --ca-name "MyCustomCA" --url "http://my-ca.example.com/sub
 $ getcert request -w -C "/usr/bin/certbot renew && systemctl reload nginx" (aunque certmonger no tiene integración directa con Let's Encrypt, se puede configurar para trabajar con scripts personalizados como certbot)
 
 
+certspotter
+Monitor de registros de transparencia de certificados de SSLMate que avisa cuando se emite un certificado SSL/TLS para un dominio.
+$ certspotter --domain example.com (buscará notificaciones de certificados SSL/TLS emitidos por SSLMate para el dominio especificado)
+$ certspotter --domain example.com --days 30 --output json --verbose (limita los resultados a los últimos 30 días, produce salida en formato JSON y muestra información adicional)
+$ certspotter --domain example.com example.org subdomain.example.com (información sobre varios dominios)
+$ certspotter --domain example.com --auth "user:password" (identificarte para acceder a ciertos dominios)
+$ certspotter --domain example.com --interval 1h (actualizará automticamente cada hora)
+
+
 certtool
 [gnutls]. Herramienta para analizar y generar certificados, solicitudes y claves privadas X.509. Se puede utilizar de forma interactiva o no interactiva.
 $ certtool --generate-privkey --outfile key.pem --rsa (crear una clave RSA [otras opciones: dsa, ecc] privada i que se guarde en key.pem)
