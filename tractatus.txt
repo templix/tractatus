@@ -5593,6 +5593,17 @@ $ cgdb ./mi_programa (abrirá la interfaz de cgdb para que se pueda comenzar a d
 $ cgdb ./mi_programa rg1 arg2 (pasar argumentos a mi_programa al ejecutarlo con cgdb)
 
 
+cgpt
+Herramienta para manipular la tabla de particiones GUID [GPT]
+# cgpt show (verificar información general de las particiones GPT)
+# cgpt show /dev/sda3 (mostrar detalles de una partición específica)
+# cgpt create -t gpt /dev/sda4 (creará una nueva partición GPT en el dispositivo /dev/sda4)
+# cgpt delete /dev/sda5 (eliminará la partición GPT especificada)
+# cgpt change-type -t nfs /dev/sdb1 (cambiar el tipo de partición de /dev/sdb1 a NTFS)
+# cgpt get-partition-number /dev/sdc (devuelve el número de partición GPT en el dispositivo especificado)
+# cgpt list-by-number (mostrará las particiones ordenadas por su número GPT)
+
+
 chacl
 [acl]. Cambiar la lista de control [acl, Access Control Lists] de acceso de un archivo o directorio permitiendo establecer permisos detallados para usuarios y grupos específicos, más allá de los permisos tradicionales
        $ chacl -l archivo.txt
