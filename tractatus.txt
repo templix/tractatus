@@ -5498,6 +5498,18 @@ Importar certificados. Ver update-ca-certificates
 $ cert-sync --user /etc/ssl/certs/ca-certificates.crt
 
 
+certmonger
+Herramienta y servicio que funciona en segundo plano para gestionar certificados en sistemas con infraestructura de clave pública (PKI). Se integra con D-Bus para simplificar la obtención, renovación y monitoreo de certificados emitidos por autoridades de certificación (CA). El comando getcert se usa para interactuar con certmonger y gestionar certificados.
+$ getcert list (lista todos los certificados su estado y cualquier información relevante como fecha de vencimiento o renovación)
+$ getcert request -k /etc/pki/tls/private/mykey.key -f /etc/pki/tls/certs/mycert.crt -C "/bin/systemctl reload nginx" (-k: ruta al archivo de clave privada, -f: Ruta donde se guardará el certificado emitido y -C: Comando a ejecutar después de que el certificado sea renovado, por ejemplo, recargar un servicio como Nginx o Apache)
+$ getcert start-tracking -k /etc/pki/tls/private/mykey.key -f /etc/pki/tls/certs/mycert.crt (monitorear certificados y renovarlos automáticamente antes de que expiren)
+$ getcert stop-tracking -f /etc/pki/tls/certs/mycert.crt (desactiva la supervisión del certificado especificado)
+$ getcert request -c ipa -k /etc/pki/tls/private/ipa.key -f /etc/pki/tls/certs/ipa.crt (solicitar un certificado usando una CA externa configurada [-c])
+$ getcert status -f /etc/pki/tls/certs/mycert.crt (mostrará información detallada sobre el certificado, como el estado, validez, y posibles problemas)
+$ certmonger-setup-ca --ca-name "MyCustomCA" --url "http://my-ca.example.com/submit" (antes de solicitar certificados, se puede registrar una CA personalizada)
+$ getcert request -w -C "/usr/bin/certbot renew && systemctl reload nginx" (aunque certmonger no tiene integración directa con Let's Encrypt, se puede configurar para trabajar con scripts personalizados como certbot)
+
+
 certtool
 [gnutls]. Herramienta para analizar y generar certificados, solicitudes y claves privadas X.509. Se puede utilizar de forma interactiva o no interactiva.
 $ certtool --generate-privkey --outfile key.pem --rsa (crear una clave RSA [otras opciones: dsa, ecc] privada i que se guarde en key.pem)
