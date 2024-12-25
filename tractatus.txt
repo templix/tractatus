@@ -5604,6 +5604,26 @@ Herramienta para manipular la tabla de particiones GUID [GPT]
 # cgpt list-by-number (mostrará las particiones ordenadas por su número GPT)
 
 
+cgroup-tools
+Conjunto de herramientas para gestionar y trabajar con grupos de control [cgroups+. Los cgroups son una característica del kernel de Linux que permite agrupar procesos y asignarles recursos del sistema como CPU, memoria, ancho de banda de red, etc. Incluye las herramientas cgclassify [Clasifica procesos dentro de un cgroup existente], cgcreate [Crea nuevos cgroups], cgdelete [Elimina cgroups existentes], cgexec [Ejecuta un comando dentro de un cgroup], cgget [Obtiene información sobre un cgroup], cgset [Configura parámetros de un cgroup], cgsnapshot, lscgroup, lssubsys, cgclear, cgconfigparser y cgrulesengd.
+# cgcreate -g cpu,memory:/example (crear un cgroup llamado example que gestione la CPU [/sys/fs/cgroup/cpu/example] y la memoria [/sys/fs/cgroup/memory/example])
+# cgset -r cpu.shares=512 example (definir límites de recursos al valor 512 que representa el 50% de la CPU disponible, el valor predeterminado es 1024 para el 100%)
+# cgexec -g cpu,memory:/example stress --cpu 2 (inicia el programa "stress" dentro del cgroup "example", aplicando las restricciones definidas)
+# cgclassify -g cpu,memory:/example 12345 (mover un proceso con PID 12345 al cgroup "example")
+# cgget -r cpu.shares example (muestra el valor actual del parámetro cpu.shares del cgroup "example")
+# cgdelete -g cpu,memory:/example (elimina el cgroup example para los subsistemas cpu y memory)
+1.-
+Ejemplos prácticos:
+# cgcreate -g memory:/lowmem (crear un cgroup llamado lowmen)
+# cgset -r memory.limit_in_bytes=100M lowmem (limitar la memoria a 100 MB)
+# cgexec -g memory:/lowmem your_command (ejecutar un proceso dentro de este cgroup)
+2.-
+# cgcreate -g cpu:/lowcpu (crear un cgroup llamado lowcpu)
+# cgset -r cpu.shares=256 lowcpu (configurar el uso de CPU al 25%)
+# cgexec -g cpu:/lowcpu stress --cpu 1 (ejecutar un proceso dentro de este cgroup)
+Nota.- Asegurarse de que el subsistema requerido esté montado en /sys/fs/cgroup. Si no, montarlo manualmente: # mount -t cgroup -o cpu,memory none /sys/fs/cgroup
+
+
 chacl
 [acl]. Cambiar la lista de control [acl, Access Control Lists] de acceso de un archivo o directorio permitiendo establecer permisos detallados para usuarios y grupos específicos, más allá de los permisos tradicionales
        $ chacl -l archivo.txt
