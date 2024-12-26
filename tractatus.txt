@@ -5732,6 +5732,13 @@ O editar el archivo ~/.changetrackrc y colocar la ruta absoluta de cada archivo 
 # ls .changetrack (visualizar los archivos modificados)
 
 
+chaos-marmosets
+Este proyecto contiene pequeños programas que se comportan mal y se pueden utilizar para la ingeniería del caos para probar el comportamiento del sistema y la configuración de la infraestructura para esos casos. Incluye las herramientas: divide-by-zero [intenta dividir un número por cero. Saldrá inmediatamente con la señal 4 - SIGILL], leak-memory [probar las limitaciones de memoria] y seg-fault [probar la configuración del volcado de núcleo de un proceso]
+$ divide-by-zero
+$ leak-memory (memoria a asignar en MiB, 42 TiB por defecto)
+$ seg-fault
+
+
 chardet
 Detector de codificación.
 $ chardet archivo
