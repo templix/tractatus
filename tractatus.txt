@@ -5724,6 +5724,14 @@ Convierte los archivos changelog a páginas html para visualizar con el navegado
 $ chalow -d /home/pep/dades/arxius_importants/dotemacs.d/.emacs.d/elpa/muse-3.20.2/ChangeLog
 
 
+changeme
+Este paquete contiene un escáner de credenciales predeterminado. Los escáneres de vulnerabilidades comerciales no detectan las credenciales predeterminadas más comunes. Agregar credenciales predeterminadas a los escáneres comerciales suele ser difícil y lento. changeme está diseñado para que sea sencillo agregar nuevas credenciales sin tener que escribir ningún código ni módulo. changeme mantiene los datos de las credenciales separados del código. Todas las credenciales se almacenan en archivos yaml para que puedan ser leídas y procesadas.
+$ changeme 192.168.18.4 --timeout 14 (scaneo de una sola host y con tiempo de espera para las conexiones de 15 segundos. Por defecto 10)
+$ changeme --protocols ssh,ssh_key 192.168.59.0/24 (uso con diferentes protocolos)
+$ changeme 192.168.59.0/24 -o scan.txt (escaneo de un rango de ips y gardar en scan.txt)
+$ changeme --shodan_query "Server: SQ-WEBCAM" --shodan_key keygoeshere -c amera (escaneo utilizando una consulta Shodan)
+
+
 changetrack
 Muestra los cambios que se producen en un conjunto de archivos especificado. Está diseñado para ejecutarse como un trabajo cron. Descomentar los directorios que queremos monitorizar si se produce algun cambio en:
 # nano /etc/changetrack.conf
