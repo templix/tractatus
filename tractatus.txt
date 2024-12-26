@@ -5679,6 +5679,46 @@ $ chage -d 0 usuario (en la siguiente entrada al sistema pedirá al usuario camb
 -E días: especifica fecha del bloqueo de la cuenta (formato YYYY-MM-DD)
 
 
+chake
+Permite gestionar varios hosts a través de SSH combinando chef [sistema de gestión de configuración que automatiza el despliegue y la administración de infraestructura] y rake [herramienta para la automatización de tareas basada en Ruby]. Es una herramienta útil para automatizar tareas relacionadas con la configuración y mantenimiento de servidores.
+$ chake init (comenzar un nuevo proyecto y con una estructura de directorios básica con hosts.yml: Archivo donde se define los servidores y sus roles y Rakefile: Donde se define las tareas a ejecutar)
+$ chake web:restart (conectará a los servidores definidos en hosts.yml con el rol web y ejecutará el comando para reiniciar Nginx)
+$ chake exec "uptime" --roles web (ejecutará el comando uptime en todos los servidores con el rol web)
+$ chake task_name --hosts web1 (ejecuta la tarea solo en un host específico)
+$ chake task_name --roles db (filtra los hosts por rol)
+$ chake deploy:app --dry-run (simula la ejecución de las tareas sin ejecutarlas realmente)
+Un ejemplo de hosts.yml podría ser:
+           hosts:
+             web1:
+                 address: web1.example.com
+                 roles: [web, app]
+             db1:
+                 address: db1.example.com
+                 roles: [db]
+Un ejemplo de Rakefile para agregar tareas específicas. Por ejemplo, una tarea para reiniciar un servicio web:
+           namespace :web do
+             desc "Reinicia el servidor web"
+             task :restart do
+                 on roles(:web) do |host|
+             run "sudo systemctl restart nginx"
+                 end
+             end
+           end
+Ejemplo usando variables:
+        namespace :deploy do
+          desc "Despliega la aplicación"
+          task :app, [:branch] do |t, args|
+              branch = args[:branch] || "main"
+              on roles(:app) do |host|
+                    run "git pull origin #{branch}"
+                    run "bundle install"
+                    run "rails db:migrate"
+              end
+          end
+        end
+$ chake deploy:app[feature-branch] (pasar variables para personalizar las tareas)
+
+
 chalow
 Convierte los archivos changelog a páginas html para visualizar con el navegador.
 $ chalow -d /home/pep/dades/arxius_importants/dotemacs.d/.emacs.d/elpa/muse-3.20.2/ChangeLog
