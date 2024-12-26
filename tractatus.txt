@@ -5636,6 +5636,16 @@ Si se necesita montar solo algunos subsistemas, se puede especificar manualmente
 Nota.- En sistemas modernos que usan systemd, los cgroups suelen estar gestionados automáticamente por systemd, y el uso de cgroupfs-mount puede no ser necesario.
 
 
+cgvg
+Son un par de scripts de Perl, "cg" [Context Grep"] que realiza búsquedas contextuales en los archivos del código fuente y "vg" [Vim Grep] que permite abrir los resultados de búsqueda directamente en vim.
+$ cg -C 3 main (buscará la palabra "main" en los archivos del directorio y mostrará 3 lineas arriba y 3 abajo. Por defecto 2)
+$ cg -i main (busqueda insensible a mayúsculas)
+$ cg --exclude=*.min.js --exclude=*.log main (excluye archivos o directorios específicos de la búsqueda)
+$ vg (después de buscar, abrir los resultados en vim)
+Nota.- Si se prefiere usar otro editor que no sea vim se puedes configurar el entorno con:
+$ export EDITOR=nano
+
+
 chacl
 [acl]. Cambiar la lista de control [acl, Access Control Lists] de acceso de un archivo o directorio permitiendo establecer permisos detallados para usuarios y grupos específicos, más allá de los permisos tradicionales
        $ chacl -l archivo.txt
