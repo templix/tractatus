@@ -5777,6 +5777,52 @@ Detector de codificación.
 $ chardet archivo
 
 
+charon-cmd
+Parte de la suite StrongSwan y es una herramienta para gestionar conexiones IPsec utilizando la pila nativa de IPsec del kernel estándar de Linux sin necesidad de un demonio persistente. Admite los protocolos IKEv1 e IKEv2.
+$ charon-cmd --file config.json (conectar a un servidor IPsec especificando un archivo de configuración en formato JSON)
+Ejemplo de archivo config.json que configura una conexión hacia un servidor remoto con autenticación basada en un secreto compartido:
+        {
+            "remote": "192.168.1.1",
+            "local": "0.0.0.0",
+            "auth": {
+                "id": "client@example.com",
+                "secret": "mypassword"
+            },
+            "ike": {
+                "encryption": "aes128gcm16",
+                "prf": "sha256",
+                "dhgroup": "modp2048"
+            },
+            "esp": {
+                "encryption": "aes128gcm16",
+                "integrity": "sha256"
+            }
+        }
+
+
+charon-systemd
+Implementación de StrongSwan que se ejecuta como un servicio gestionado por systemd. Se utiliza para configurar y gestionar conexiones IPsec en sistemas que emplean un enfoque persistente, integrando configuraciones detalladas en /etc/ipsec.conf y /etc/ipsec.secrets.
+# systemctl start charon-systemd (habilita el servicio)
+# systemctl enable charon-systemd ( al inicio del sistema al inicio del sistema)
+Ejemplo de conexio IPsec:
+# nano /etc/ipsec.conf
+       conn myvpn
+           keyexchange=ikev2
+           left=%defaultroute
+           leftid=@client.example.com
+           leftauth=psk
+           right=192.168.1.1
+           rightid=@server.example.com
+           rightauth=psk
+           auto=start
+Luego, se añade el secreto compartido en
+# nano /etc/ipsec.secrets
+client.example.com : PSK "mypassword"
+# ipsec reload (recargar las configuraciones
+# ipsec up myvpn (iniciar una conexión)
+# ipsec down myvpn (cerrar la conexión)
+
+
 chase
 Utilidad para rastrear el archivo real al que apunta un enlace simbólico.
 $ chase link
