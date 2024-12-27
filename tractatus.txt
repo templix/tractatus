@@ -5747,6 +5747,18 @@ $ leak-memory (memoria a asignar en MiB, 42 TiB por defecto)
 $ seg-fault
 
 
+chaosread
+Utilidad que extrae datos de un dispositivo de tipo /dev/chaos. Este dispositivo proporciona números aleatorios generados por el núcleo del sistema.
+$ chaosread (obtener un único número aleatorio)
+Nota.- Si aparece el mensaje "No chaoskey" indica que el comando chaosread no puede encontrar un dispositivo de hardware llamado ChaosKey conectado al sistema. El ChaosKey es un dispositivo físico de generación de números aleatorios, que se conecta típicamente a través de USB y que proporciona una fuente de entropía al sistema operativo.
+$ chaosread --length=100 (definir la cantidad de datos a leer. Por ejemplo, para leer 100 bytes)
+$ chaosread --infinite (generar datos hasta que lo detengas manualmente con Ctrl-c)
+$ chaosread --raw (obtener datos sin procesar)
+$ chaosread --cooked (datos procesados o interpretados de manera predeterminada)
+$ chaosread --bytes (extraer datos en formato binario)
+$ chaosread --serial=123456 (especificar el serial de un dispositivo concreto)
+
+
 chardet
 Detector de codificación.
 $ chardet archivo
