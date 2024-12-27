@@ -5953,6 +5953,12 @@ Es parte de SELinux [Security-Enhanced Linux], parche del núcleo y se utiliza p
 # checkpolicy -Z (muestra el estado actual de las políticas cargadas)
 
 
+checkpw
+Verificar contraseñas de cuentas de correo electrónico.
+# checkpw username (verificar la contraseña de un usuario específico)
+# checkpw -f /var/mail/user1 username (verificar la contraseña de un usuario específico en un directorio de correo)
+
+
 checkrestart
 [debian-goodies]. Muestra procesos activos que están utilizando una versión anterior de algún fichero que haya sido actualizado. A veces una actualización trae nuevas bibliotecas del sistema y los procesos que se esten ejecutando siguen utilizando las versiones anteriores de estas bibliotecas. En sistemas Debian GNU/Linux estables, generalmente se necesita para eliminar un exposición del sistema a una vulnerabilidad que podría haberse solucionado actualizando una biblioteca que utiliza algún proceso. Tambien se usa para encontrar versiones desactualizadas de bibliotecas en uso.
 # checkrestart -a (muestra todos)
