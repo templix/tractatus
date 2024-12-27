@@ -5865,21 +5865,10 @@ Con python-pip instalado tambien podemos instalarla con:
 # pip install cheat
 
 
-checkbashisms
-Realiza comprobaciones básicas en scripts de shell /bin/sh por la posible presencia de bashisms. La definición de bashism equivale a "una función de shell que no se requiere que sea soportada por POSIX "; esto significa que algunos problemas marcados pueden ser permitidos bajo secciones opcionales de POSIX. En los casos en que POSIX y Debian Policy no coincidan, los checkbashisms, de forma predeterminada, permiten extensiones permitidas por Policy pero también pueden proporcionar opciones para una verificación más estricta.
-$ checkbashims script.sh
-
-
 check-bios-nx
 Determinar si la BIOS ha bloqueado las capacidades NX de la CPU.
 $ check-bios-nx –verbose
 ok: the NX bit is operational on this CPU.
-
-
-checkbot
-Verifica enlaces internos o externos de una url.
-$ checkbot http://google.com (básico)
-$ checkbot --mailto usuario@correo.org http://google.com (enciar correo cuando termine el escaneo)
 
 
 check-enhancements
@@ -5892,10 +5881,36 @@ Comprueba en el registro de las solicitudes a apache las que no se completaron c
 # check_forensic /var/log/apache2/access.log
 
 
+check-support-status
+[debian-security-support]. Comprueba los paquetes instalados si tienen soporte de seguridad. Según Debian: Desafortunadamente, ha sido necesario limitar el soporte de seguridad para algunos
+paquetes.
+$ check-support-status (Muestra los que no tienen soporte de seguridad)
+
+
+checkbashisms
+Realiza comprobaciones básicas en scripts de shell /bin/sh por la posible presencia de bashisms. La definición de bashism equivale a "una función de shell que no se requiere que sea soportada por POSIX "; esto significa que algunos problemas marcados pueden ser permitidos bajo secciones opcionales de POSIX. En los casos en que POSIX y Debian Policy no coincidan, los checkbashisms, de forma predeterminada, permiten extensiones permitidas por Policy pero también pueden proporcionar opciones para una verificación más estricta.
+$ checkbashims script.sh
+
+
+checkbot
+Verifica enlaces internos o externos de una url.
+$ checkbot http://google.com (básico)
+$ checkbot --mailto usuario@correo.org http://google.com (enciar correo cuando termine el escaneo)
+
+
 checkgid
 Programa que verifica si el usuario se puede establecer en el grupo de apache2. Esto es para ver si es un grupo válido para que apache2 lo use en tiempo de ejecución. Ha de ejecutarse como superusuario.
 # checkgid (si no devuelve nada es correcto)
 # checkgid user (si no devuelve nada, user está en el grupo y puede configurarlo)
+
+
+checkinstall
+lleva un registro de todos los archivos creados o modificados por el script de instalación ["make install", "make install_modules", "setup", etc.], crea un paquete binario estándar y lo instala en el sistema, lo que permite desinstalarlo con las utilidades de administración de paquetes estándar.
+# checkinstall --pkgname=miaplicacion --maintainer="Tu Nombre <tu@email.com>" --dependency-install=yes --dependency-tracking=yes --install=no --no-edit ./configure && make && make install (instalar una aplicación desde fuente)
+# checkinstall --pkgname=otraaplicacion --maintainer="Tu Nombre <tu@email.com>" --dependency-install=yes --dependency-tracking=yes --install=no /ruta/a/tu/script/de-instalacion.sh (usar con scripts de instalación existentes)
+# checkinstall --pkgname=modulosadicionales --maintainer="Tu Nombre <tu@email.com>" --dependency-install=yes --dependency-tracking=yes --install=no make install_modules (instalar módulos adicionale)
+# checkinstall --pkgname=miaplicacion-pip --maintainer="Tu Nombre <tu@email.com>" --dependency-install=yes --dependency-tracking=yes --install=no python setup.py install (usar con setup.py)
+Notas.- En los ejemplos, "--pkgname" define el nombre del paquete que se creará, "--maintainer" especifica el mantenedor y su correo electrónico, "--dependency-install=yes" instala las dependencias, "--dependency-tracking=yes" registra las dependencias, "--install=no" evita la ejecución automática de la instalación y los comandos después de `&&` son los pasos de compilación o ejecución del script.
 
 
 checkint
@@ -5938,12 +5953,6 @@ script diseñado para probar qué características estándar de seguridad del si
 checksecurity
 Realiza comprobaciones de seguridad muy básicas del sistema tales como: sistemas de archivos remotos montados de forma insegura, cambios en los programas setuid, cambios en los puertos abiertos para detectar programas maliciosos, cuentas del sistema vacías o duplicadas, sistemas de archivos montados cercanos a su capacidad, registros generados por iptables con intentos de intrusión... Los informes se guardan en /var/log/setuid/setuid.changes. Si se desea que la información se envie a root, descomentar la linea #CHECKSECURITY_EMAIL="root" en el archivo de configuración /etc/checksecurity.conf
 # checksecurity
-
-
-check-support-status
-[debian-security-support]. Comprueba los paquetes instalados si tienen soporte de seguridad. Según Debian: Desafortunadamente, ha sido necesario limitar el soporte de seguridad para algunos
-paquetes.
-$ check-support-status (Muestra los que no tienen soporte de seguridad)
 
 
 checkupdates
