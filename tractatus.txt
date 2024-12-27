@@ -6033,6 +6033,16 @@ Cambia el grupo al que pertenece un archivo.
 $ chgrp grupo archivo
 
 
+chiark-backup
+Sistema de respaldo para pequeños sistemas y redes. Estos son los scripts de respaldo que utilizan chiark.greenend.org.uk y otros sistemas que pertenecen a la Sinister Greenend Organisation.
+# chiark-backup init ~/respaldo (iniciar una nueva copia de seguridad)
+# chiark-backup back ~/respaldo (realizar una copia de seguridad completa)
+# chiark-backup restore ~/respaldo (restaurar desde una copia de seguridad)
+# chiark-backup status ~/respaldo (verificar el estado de un respaldo específico)
+# chiark-backup remove ~/respaldo (eliminar un respaldo)
+# chiark-backup schedule ~/respaldo --daily (configurar una tarea programada para realizar copias de seguridad diarias)
+
+
 chkboot
 Busca modificaciones no deseadas en el archivo /boot. El archivo de configuración esta en /etc/default/chkboot
 # chkboot-check (imprime los cambios detectados en archivos de arranque)
