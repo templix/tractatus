@@ -5881,6 +5881,12 @@ Comprueba en el registro de las solicitudes a apache las que no se completaron c
 # check_forensic /var/log/apache2/access.log
 
 
+check-language-support
+Listado de paquetes de idiomas instalados en el sistema.
+$ check-language-support -l es
+$ check-language-support -a (todos)
+
+
 check-support-status
 [debian-security-support]. Comprueba los paquetes instalados si tienen soporte de seguridad. Según Debian: Desafortunadamente, ha sido necesario limitar el soporte de seguridad para algunos
 paquetes.
@@ -5918,10 +5924,12 @@ checkint
 $ checking
 
 
-check-language-support
-Listado de paquetes de idiomas instalados en el sistema.
-$ check-language-support -l es
-$ check-language-support -a (todos)
+checkit_tiff
+Verificar la conformidad de archivos TIFF.
+$ checkit_tiff /ruta/al/archivo.tif (analizará el archivo especificado y mostrará los resultados)
+$ find /ruta/carpeta/ -name "*.tif" -exec checkit_tiff {} \; (verificar múltiples archivos TIFF en una carpeta)
+$ checkit_tiff /ruta/al/archivo.tif --verbose | grep -i error (mostrará solo las líneas que contienen errores)
+$ checkit_tiff /ruta/al/archivo.tif --ignore=error_type1,error_type2 (especificar qué tipos de errores ignorar si no son críticos)
 
 
 checklink
