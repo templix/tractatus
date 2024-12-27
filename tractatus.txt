@@ -5943,6 +5943,16 @@ Herramienta para auditar la seguridad del sistema, verificando configuraciones, 
 $ checklistlinux (al acabar la auditoria muestra el nombre de los .html donde se han guardar lo resultados)
 
 
+checkpolicy
+Es parte de SELinux [Security-Enhanced Linux], parche del núcleo y se utiliza principalmente para verificar políticas de seguridad. SELinux tiene que estar habilitado en el sistema.
+# checkpolicy -V /etc/selinux/targeted/policy/policy.28 (verifica si existe la política especificada)
+# checkpolicy -M /etc/selinux/targeted/policy/policy.28 (muestra detalles sobre la política, como su versión y fecha de creación)
+# checkpolicy -c ustom_policy.te (validar una política personalizada, "custom_policy.te" sería un archivo de este tipo)
+# checkpolicy -s cutom_policy.te (analiza la sintaxis de la política personalizada)
+# checkpolicy -D /etc/selinux/targeted/policy/policy.28 (muestra las dependencias de la política)
+# checkpolicy -Z (muestra el estado actual de las políticas cargadas)
+
+
 checkrestart
 [debian-goodies]. Muestra procesos activos que están utilizando una versión anterior de algún fichero que haya sido actualizado. A veces una actualización trae nuevas bibliotecas del sistema y los procesos que se esten ejecutando siguen utilizando las versiones anteriores de estas bibliotecas. En sistemas Debian GNU/Linux estables, generalmente se necesita para eliminar un exposición del sistema a una vulnerabilidad que podría haberse solucionado actualizando una biblioteca que utiliza algún proceso. Tambien se usa para encontrar versiones desactualizadas de bibliotecas en uso.
 # checkrestart -a (muestra todos)
