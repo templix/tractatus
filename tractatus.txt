@@ -5759,6 +5759,19 @@ $ chaosread --bytes (extraer datos en formato binario)
 $ chaosread --serial=123456 (especificar el serial de un dispositivo concreto)
 
 
+chaosreader
+Herramienta para analizar capturas de tráfico de red en formato de registros tcpdump o snoop [.pcap, .cap, o .snoop]. Puede reconstruir sesiones TCP/UDP y extraer datos relevantes como archivos, imágenes, correos electrónicos o tráfico HTTP. Se crea un archivo de índice html que vincula a todos los detalles de la sesión, incluidos los programas de reproducción en tiempo real para sesiones telnet, rlogin, IRC, X11 y VNC.
+$ chaosreader capture.pcap (genera un conjunto de archivos HTML y directorios con el análisis de las sesiones rastreadas)
+$ chaosreader -p 80 capture.pcap (reconstruye sesiones relacionadas solo con ese puerto)
+$ chaosreader -s "2024-12-25 14:00:00" -e "2024-12-25 15:00:00" capture.pcap (analizar solo las ocurridas en un rango de tiempo específico con la opción -s [inicio] y -e [fin])
+$ chaosreader capture.pcap --http (reconstruir las páginas web transferidas en las sesiones)
+$ chaosreader -o /path/to/output capture.pcap (por defecto, crea un directorio en el lugar donde se ejecuta, con la opción "-o" se especifica otro)
+$ chaosreader --verbose capture.pcap (ver las sesiones activas mientrasse analiza en tiempo real)
+$ chaosreader --ip 192.168.1.100 capture.pcap (limitar el análisis a un rango o una dirección IP específica alas que involucren 192.168.1.100)
+Nota.- Se puede capturar tráfico usando herramientas como tcpdump:
+# tcpdump -w capture.pcap
+
+
 chardet
 Detector de codificación.
 $ chardet archivo
