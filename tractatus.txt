@@ -5985,6 +5985,15 @@ Utilidad que se utiliza para comprobar si hay actualizaciones de paquetes dispon
 # checkupdates --download (Enumerar las actualizaciones pendientes y descargar los paquetes al caché de pacman)
 
 
+chemeq
+Al entar una cadena genera su código LaTeX
+$ echo "H2 + SO4 ---> H2SO4" | chemeq -lc
+       \mathrm{H}_{2}\,+\,\mathrm{S}\mathrm{O}_{4}\,\longrightarrow\,\mathrm{H}_{2}\mathrm{S}\mathrm{O}_{4}
+       OK
+$ echo "(OH)2P(O)OP(O)(OH)2" | chemeq (del acido pirofosfórico)
+$ echo "MnO4^- + 8H3O^+ + 5e- --> Mn^2+ + 12 H2O" | chemeq -w
+
+
 cherokee
 Servidor web
 # cherokee-admin -b (iniciar el gestor. En el navegador: localhost:9090)
