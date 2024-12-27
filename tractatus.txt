@@ -6001,6 +6001,15 @@ Servidor web
 # cherokee-admin -b -p 9091 (especificar un puerto para la gestión)
 
 
+chezdav
+Cliente WebDAV implementado en Rust que permite compartir directorios y gestionar archivos remotos.
+$ chezdav ls https://example.com/webdav --username yourusername --password yourpassword (mostrará los archivos y directorios disponibles en la URL proporcionada)
+$ chezdav put /path/to/local/file.txt https://example.com/webdav/remote/file.txt --username yourusername --password yourpassword (subirá file.txt desde el sistema local al servidor en la ubicación especificada)
+$ chezdav get https://example.com/webdav/remote/file.txt /path/to/local/file.txt --username yourusername --password yourpassword (guarda el archivo remoto file.txt en el directorio local especificado)
+$ chezdav delete https://example.com/webdav/remote/file.txt --username yourusername --password yourpassword (elimina file.txt del servidor)
+$ chezdav mkdir https://example.com/webdav/new-directory --username yourusername --password yourpassword (crea el directorio "new-directory" en la ruta especificada)
+
+
 chflags
 Cambiar flags de un archivo o carpeta.
 $ chflags -R nouchg DIR (de forma recursiva y que el archivo se puede cambiar)
