@@ -23801,6 +23801,14 @@ $ readpst -o  -r miarchivo.pst
 $ readpst -M -b -e -o carpeta-destino miarchivo.pst (Generará los archivos EML en la carpeta-destino)
 
 
+really
+[chiark-really]. Programa que permite a ciertos usuarios convertirse en el usuario que deseen si así lo solicitan. Es un poco como sudo en ese aspecto. A diferencia de sudo, no pretende que la cuenta llamada pueda ser más segura que la cuenta que llama, por lo que nunca es necesaria una contraseña. Además, a diferencia de sudo, solo funciona si se supone que el usuario que llama es equivalente a root. Pero, también puede ser utilizado por usuarios equivalentes a root para convertirse en cualquier usuario, no solo root; de esta manera, puede ser un reemplazo para ciertos usos de su.
+# really -u USER (establece el uid, gid y la lista de grupos suplementarios de USER en las bases de datos de contraseñas y grupos)
+# really -i USER (establece únicamente el uid según la entrada del nombre_usuario en la base de datos de contraseñas)
+# really -g GRUPO (busca en la base de datos de grupos y su gid se añade a la lista de grupos suplementarios del proceso)
+# really -R ~/dir (establece el directorio raiz del proceso)
+
+
 realpath
 Muestra el path real de un enlace, un fichero o un directorio.
 $ realpath -P Musica (si es un enlace)
@@ -29783,6 +29791,11 @@ XDG_PICTURES_DIR=”$HOME/Imágenes”
 XDG_VIDEOS_DIR=”$HOME/Vídeos”
 
 
+user-setup
+Normalmente cuando se instala una distro, durante la instalación se crea un primer usuario. Si por alguna de las cosas poco probables, no se ha creado, con este paquete puede hacerse.
+$ user-setup
+
+
 usermod
 modifica propiedades de los usuarios [directorio base, el shell, grupos a los que pertenece, expiración, bloqueo/desbloqueo de la cuenta]
 # usermod -G grupo1,grupo2 usuario (añade usuario a grupos)
@@ -29808,9 +29821,17 @@ $ users (ejecución básica)
 $ users | xargs -n1 echo | sort | uniq -c  (número de sesiones abierta por los usuarios)
 
 
-user-setup
-Normalmente cuando se instala una distro, durante la instalación se crea un primer usuario. Si por alguna de las cosas poco probables, no se ha creado, con este paquete puede hacerse.
-$ user-setup
+userv
+Permite ejecutar comandos o scripts con privilegios de otro usuario. Configurar un archivo de reglas para el usuario al que se va a delegar la ejecución que debe estar ubicado en ~/.userv/ del usuario destino:
+# nano /home/targetuser/.userv/reglas
+      command: /usr/bin/some-command
+      user: alloweduser
+      group: allowedgroup
+      options: allow_stderr_output
+Esto permite que el usuario alloweduser ejecute /usr/bin/some-command en nombre de targetuser.
+$ userv targetuser reglas (el usuario en cuyo nombre se ejecutará el comando y la regla definida en ~/.userv/)
+$ userv targetuser reglas arg1 arg2 (Si el comando de la regla admite argumentos se pueden pasar directamente)
+$ userv --dry-run targetuser reglas (probar la configuración sin ejecutar el comando)
 
 
 util-linux
