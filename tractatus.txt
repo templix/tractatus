@@ -6236,6 +6236,13 @@ Y colocar:   nameserver 8.8.8.8
 O en su defecto la ip del router [nameserver 192.168.1.1]
 
 
+chrpath
+Permite cambiar el rpath [donde la aplicación busca bibliotecas] de una aplicación. No permite aún agregar un rpath si no existe uno ya.
+# chrpath --delete /ruta/aplicacion (eliminará cualquier rpath existente del ejecutable)
+# chrpath --add /ruta/librerias:/ruta/nuevas/librerias /ruta/aplicacion (agrega un nuevo rpath al ejecutable)
+# chrpath --list /ruta/aplicacion (verificar el rpath actualizado de un ejecutable)
+
+
 chsh
 Permite cambiar la shell del usuario especificado o del sistema.
 $ cat /etc/shells (Mostrar las shells disponibles en el sistema)
