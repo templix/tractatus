@@ -6302,6 +6302,14 @@ $ cil fsck (verificar la integridad del rastreador)
 $ cil summary (resumen general)
 
 
+circos
+Herramienta especializada en la creación de gráficos circulares para visualizar relaciones complejas entre datos, como conexiones, jerarquías, o distribuciones. El archivo de configuración en /etc/circos/circos.conf
+$ circos -modules (mostrar todos los modulos disponibles)
+$ circos ~/Documents (crea un gráfico del directorio con nombre circos.png y otro circos.svg)
+$ circos -outputfile grafico.png -nosvg (los crea y nombra gráfico.png y sin crear el .svg)
+$ circos -outputfile gráfico.svg -nopng (en formato .svg para visualizar con el navegador)
+
+
 cjb2
 Convierte formatos .PBM o .TIFF a DJVU
 $ cjb2 -dpi 500 entrada.pbm salida.djvu (especificando resolución [parámetros entre 25 y 1200. Por defecto 300])
