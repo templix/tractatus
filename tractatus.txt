@@ -6236,6 +6236,18 @@ Y colocar:   nameserver 8.8.8.8
 O en su defecto la ip del router [nameserver 192.168.1.1]
 
 
+chrootuid
+facilita la ejecución de un servicio de red con un nivel de privilegios bajo y con acceso restringido al sistema de archivos. Los daemons tienen acceso solo a su propio árbol de directorios y se ejecutan bajo un ID de usuario con privilegios bajos.
+$ chrootuid /var/www/ www-data /usr/sbin/nginx -g "daemon off;" (ejecutar un servidor web desde un entorno restringido, con un usuario no privilegiado [www-data] y ejecutando nginx dentro del entorno restringido)
+$ chrootuid /opt/restricted/ nobody /usr/bin/python3 /scripts/network_task.py (asegura que el script solo tenga acceso a los recursos dentro de /opt/restricted/ y se ejecute como el usuario nobody)
+$ chrootuid /srv/ftp/ ftp /usr/sbin/vsftpd /etc/vsftpd.conf (Usar /srv/ftp/ como raíz del sistema de archivos para el servidor FTP y ejecuta el servicio vsftpd como el usuario ftp)
+$ chrootuid /tmp/sandbox nobody /bin/bash (proporciona un shell restringido bajo el usuario nobody en el entorno /tmp/sandbox)
+$ chrootuid /var/restricted/ nobody /usr/bin/ls /bin (lista los archivos disponibles en /bin dentro del entorno restringido)
+Nota.- los binarios y bibliotecas necesarios han de estar presentes en el directorio chroot. Con ldd [ver] se puede verificar las dependencias. Por ejemplo copiandolo en el directorio chroot:
+      cp /usr/sbin/nginx /var/www/usr/sbin/
+      cp /lib/x86_64-linux-gnu/libc.so.6 /var/www/lib/
+
+
 chrpath
 Permite cambiar el rpath [donde la aplicación busca bibliotecas] de una aplicación. No permite aún agregar un rpath si no existe uno ya.
 # chrpath --delete /ruta/aplicacion (eliminará cualquier rpath existente del ejecutable)
