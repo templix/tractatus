@@ -6256,6 +6256,18 @@ $ chvt 1; sleep 10; chvt 7 (Ir a la tty1 durante 10 segundos y volver a las X)
 Nota.- Si se está en una terminal en las X con el mismo comando se irá a la misma terminal /dev/tty3.
 
 
+cicle-term
+El script Circle::FE::Term y el módulo Circle::FE::Term proporcionan una interfaz de terminal para el host de la aplicación Circle. Antes de usar circle-term, se necesita tener un host de aplicaciones Circle configurado y en ejecución. Esto incluye aplicaciones que utilizan el framework Circle.
+$ circle-term (abrirá la interfaz de terminal y permitirá interactuar con el sistema Circle)
+$ circle-term --host 192.168.1.100 (conectará al host en la dirección 192.168.1.100)
+$ circle-term --exec "list-apps" (ejecutará el comando list-apps en el host Circle y mostrará el resultado)
+$ circle-term --host 192.168.1.100 --port 8080 (establece una conexión al host en el puerto 8080)
+Una vez conectado, se puede usar comandos Circle específicos en el terminal interactivo. Por ejemplo:
+> list-apps
+> start-app MyApp
+> stop-app MyApp
+
+
 cifsiostat
 [sysstat]. Muestra estadísticas sobre las operaciones de lectura y escritura en los sistemas de archivos CIFS. Podría decirse que CIFS es una versión más reciente de SMB.
 # cifsiostat -m 2 3 (en megabites por segundo cada 2 segundos y 3 informes)
