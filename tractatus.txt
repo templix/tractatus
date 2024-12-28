@@ -6310,6 +6310,12 @@ $ circos -outputfile grafico.png -nosvg (los crea y nombra gráfico.png y sin cr
 $ circos -outputfile gráfico.svg -nopng (en formato .svg para visualizar con el navegador)
 
 
+cisco7crack
+Herramienta para descifrar contraseñas de tipo 7 de Cisco. Se puede utilizar para cifrar y descifrar contraseñas de dispositivos Cisco. Las contraseñas de tipo 7, que originalmente se diseñaron para permitir el descifrado rápido de contraseñas almacenadas, no son una forma segura de almacenamiento de contraseñas. Hay muchas herramientas disponibles que pueden descifrar fácilmente estas contraseñas. Se debe evitar el uso de contraseñas de tipo 7 a menos que lo requiera una función que esté en uso en el dispositivo Cisco IOS.
+$ cisco7crack -q -c "contraseña terrible" (cifrar sin mostrar el texto plano)
+$ cisco7crack -d 00071C0810490A150AFFFFFF82FFFFFF9D4F490D000500020E082F (descifrar)
+
+
 cjb2
 Convierte formatos .PBM o .TIFF a DJVU
 $ cjb2 -dpi 500 entrada.pbm salida.djvu (especificando resolución [parámetros entre 25 y 1200. Por defecto 300])
