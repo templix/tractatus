@@ -6254,6 +6254,23 @@ cifsiostat
 # cifsiostat -m 2 3 (en megabites por segundo cada 2 segundos y 3 informes)
 
 
+cil
+Permite crear un rastreador de problemas. Guarda cada problema de forma local y en texto sin formato.
+$ cil init (inicialización del rastreador)
+$ cil list (listar todos los problemas)
+$ cil list --is-open (ver solo los problemas abiertos)
+$ cil list --status=New (filtrar por un estado específico)
+$ cil add (agregar un nuevo problema con detalles como título, descripción, etc)
+$ cil show iffconfig (mostrar detalles de un problema)
+$ cil edit <ID_DEL_PROBLEMA> (editar un problema)
+$ cil status <ID_DEL_PROBLEMA> InProgress (cambiar el estado de un problema)
+$ cil comment <ID_DEL_PROBLEMA> (agregar comentarios a un problema)
+$ cil attach <ID_DEL_PROBLEMA> archivo.txt (subir archivos adjuntos)
+$ cil extract <ID_DEL_PROBLEMA> (extraer información de un archivo adjunto)
+$ cil fsck (verificar la integridad del rastreador)
+$ cil summary (resumen general)
+
+
 cjb2
 Convierte formatos .PBM o .TIFF a DJVU
 $ cjb2 -dpi 500 entrada.pbm salida.djvu (especificando resolución [parámetros entre 25 y 1200. Por defecto 300])
