@@ -6468,6 +6468,16 @@ Tenga la linea:
 SMTPD_USER=clamav
 
 
+clamz
+Está pensado para servir como sustituto del descargador de MP3 oficial de Amazon, que no es un software gratuito. Clamz se puede utilizar para descargar canciones individuales o álbumes completos que se hayan comprado en Amazon.
+$ clamz album.amz (descargará automáticamente todos los archivos MP3 incluidos en el archivo album.amz)
+$ clamz song.amz (archivo MP3 se descargará en el directorio actual)
+$ clamz -o /Musica/amazon/ album.amz (guarda los archivos descargados en el directorio mencionado)
+$ clamz *.amz (descargar todos los archivos .amz)
+$ clamz -q album.amz (minimizará la información mostrada en la terminal)
+$ clamz -r 3 album.amz (intentará descargar el álbum hasta 3 veces en caso de fallo)
+
+
 clear
 Limpiar la terminal.
 
