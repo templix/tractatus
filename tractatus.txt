@@ -6350,6 +6350,11 @@ Suma de comprobación y número de bytes de un archivo.
 $ cksum archivo
 
 
+clamassassin
+Script para escanear un mensaje de correo electrónico en busca de virus y malware. Un mensaje de correo electrónico se lee en la entrada estándar, se escanea en busca de virus con el motor antivirus ClamAV y se anotan los resultados del escaneo en la salida estándar. Si un mensaje está infectado con un virus, el encabezado X-Virus-Status se establece en Sí y el encabezado X-Virus Report se establece en los virus encontrados. Si el mensaje está bien, se envía con X-Virus-Status establecido en No.
+$ clamassassin Fra-_12-24.pdf (analizar un adjunto a un correo)
+
+
 clamav
 Detecta troyanos, virus, malware y otras amenazas maliciosas.
 # freshclam -v (actualizar la lista de virus viendo detalles)
