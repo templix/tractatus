@@ -6360,6 +6360,15 @@ set port=23
 ...
 
 
+cksfv
+[SFV - Simple File Verification]. Utilitadad para verificar la integridad de archivos utilizando sumas de comprobación CRC32.
+$ cksfv -c arhivo.txt (calculará una suma CRC32 del archivo "archivo.txt" y la comparará con el valor almacenado en el archivo mismo, si existe. Si los valores coinciden, el archivo está intacto)
+$ cksfv -c arhivo1.txt archivo2.txt archivo3.txt (verificar varios archivos)
+$ cksfv -c arhivo.txt > checksum.txt (creará un archivo llamado "checksum.txt" que contiene la suma CRC32 calculada para "archivo.txt")
+$ cksfv -v archio.txt < checksum.txt (verificará si el archivo "archivo.txt" coincide con la suma CRC32 almacenada en "checksum.txt")
+$ cksfv -r /ruta/del/directorio (verificará la integridad de todos los archivos en el directorio especificado y sus subdirectorios)
+
+
 cksum
 Suma de comprobación y número de bytes de un archivo.
 $ cksum archivo
