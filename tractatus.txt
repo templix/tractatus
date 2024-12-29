@@ -6360,6 +6360,19 @@ set port=23
 ...
 
 
+ckon
+Programa que se encarga automáticamente de la compilación, la generación de diccionarios y la vinculación de programas y bibliotecas desarrollados para análisis de datos dentro del marco de análisis ROOT de CERN. Esto incluye el análisis de encabezados de inclusión para determinar a qué bibliotecas deben vincularse los programas principales. Utiliza automake/autoconf para ser independiente de la plataforma y compatible con la instalación de GNU. Además, las macros m4 se descargan automáticamente y se incluyen los indicadores de compilador correspondientes según una lista de bibliotecas boost proporcionada en el archivo de configuración. Para el uso de la base de datos YAML, se puede descargar una macro m4 durante la configuración para vincularla con la biblioteca yaml-cpp.
+$ ckon example.C (del archivo fuente example.C generará un archivo ejecutable llamado example, vinculado automáticamente con las bibliotecas necesarias
+$ ckon main.C utils.C (compilará múltiples archivos fuente y vinculará los archivos)
+$ ckon -cflags "-O2 -Wall" -ldflags "-lm" myprogram.C (especifica flags para el compilador y para el vinculador)
+$ ckon -libs "-lMyLibrary" myprogram.C (asegura que ckon enlace el programa con la biblioteca libMyLibrary)
+$ ckon -dict MyClass.h (crea un archivo de diccionario necesario para las clases definidas en MyClass.h)
+$ ckon -libs "-L/path/to/lib -lMyLibrary" myprogram.C (una biblioteca compartida desarrollada previamente, se puede vincular al programa)
+$ ckon --clean (limpiar los archivos generados durante la compilación)
+$ ckon -debug myprogram.C (genera un ejecutable con símbolos de depuración)
+$ ckon -j4 myprogram.C (utiliza 4 núcleos durante la compilación)
+
+
 cksfv
 [SFV - Simple File Verification]. Utilitadad para verificar la integridad de archivos utilizando sumas de comprobación CRC32.
 $ cksfv -c arhivo.txt (calculará una suma CRC32 del archivo "archivo.txt" y la comparará con el valor almacenado en el archivo mismo, si existe. Si los valores coinciden, el archivo está intacto)
