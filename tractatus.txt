@@ -6482,6 +6482,19 @@ clanlib
 ofrece una interfaz independiente de la plataforma para escribir juegos. Si un juego está escrito con ClanLib, debería ser posible compilarlo en cualquier plataforma (compatible con ClanLib, claro está) sin cambiar el código fuente de la aplicación. Pero ClanLib no es solo una biblioteca contenedora, que proporciona una interfaz común para bibliotecas de bajo nivel como DirectFB, DirectX, OpenGL, X11, etc. Si bien la independencia de la plataforma es el objetivo principal de ClanLib, también intenta ser un SDK de juegos orientado al servicio. En otras palabras, se ha puesto un gran esfuerzo en el diseño de la API, para garantizar la facilidad de uso de ClanLib, manteniendo al mismo tiempo su potencia. Este paquete contiene documentación html [file:///usr/share/doc/clanlib-doc/Overview/index.html] para la API de ClanLib y algunos tutoriales para facilitar la curva de aprendizaje para programar con ella.
 
 
+classified-ads
+Herramienta diseñada para emular la funcionalidad de los antiguos anuncios clasificados en Usenet News que desapareció cuando Usenet News dejó de existir. Este intento intenta solucionar el problema de la desaparición de los servidores de noticias para que no se requieran servidores; el almacenamiento de datos se implementa dentro de las aplicaciones cliente que ejecutan los usuarios. Aunque no reemplaza completamente a Usenet, classified-ads intenta emular la simplicidad y accesibilidad de sus funciones.
+$ classified-ads post --title "Venta de bicicleta" --category "Deportes" --body "Bicicleta de montaña en excelente estado. Precio: $200. Contacto: email@example.com" (publica un anuncio en la categoría "Deportes" con el título y cuerpo especificados)
+$ classified-ads list (mostrará una lista de anuncios clasificados publicados en todas las categorías)
+$ classified-ads list --category "Electrónica" (mostrará todos los anuncios clasificados en la categoría "Electrónica")
+$ classified-ads list --search "bicicleta" (mostrará todos los anuncios que contengan la palabra "bicicleta" en el título o en el cuerpo)
+$ classified-ads delete --id 12345 (elimina el anuncio con el ID 12345. Generalmente, se necesita algún tipo de autenticación o token para confirmar que eres el autor del anuncio)
+$ classified-ads edit --id 12345 --title "Venta de bicicleta usada" --body "Bicicleta de montaña usada, buen estado. Precio negociable. Contacto: nuevoemail@example.com" (actualizará el anuncio con el ID 12345, cambiando el título y el cuerpo según lo indicado)
+$ classified-ads export --output anuncios.txt (guarda todos los anuncios en un archivo llamado anuncios.txt)
+$ classified-ads server --host 0.0.0.0 --port 8080 (inicia un servidor que permite a otros usuarios conectarse y publicar o buscar anuncios)
+$ classified-ads post --title "Venta de coche" --category "Automóviles" --body "Coche en buen estado, modelo 2015. Precio: $8000." --server http://servidor-remoto:8080 (publica el anuncio en el servidor especificado)
+
+
 clear
 Limpiar la terminal.
 
