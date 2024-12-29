@@ -6345,6 +6345,21 @@ ckeditor
 Editor WYSIWYG que se puede incrustar en páginas web. WYSIWYG significa que el texto que se está editando se ve lo más similar posible a los resultados que obtienen los usuarios al publicarlo.
 
 
+ckermit
+Paquete combinado de software de comunicación en red y serial que ofrece un enfoque multiplataforma seguro, consistente e independiente del medio para el establecimiento de conexiones, sesiones de terminal, transferencia de archivos, traducción de conjuntos de caracteres y automatización de tareas de comunicación.
+$ ckermit -l /dev/ttyS0 -b 115200 (intentará conectar ckermit a la interfaz serial /dev/ttyS0 a una velocidad de 115200 baudios)
+$ ckermit -s file.txt > /dev/ttyS0 (transferir desde el hosts al dispositivo conectado)
+$ ckermit < /dev/ttyS0 > file.txt (transferirr desde el dispositivo conectado al host)
+Crear o editar un archivo de configuración con opciones como:
+$ nano  ~/.ckermitrc
+...
+set login user=mi_usuario
+set password=mia_contraseña
+set host=192.168.1.100
+set port=23
+...
+
+
 cksum
 Suma de comprobación y número de bytes de un archivo.
 $ cksum archivo
@@ -6398,8 +6413,8 @@ Descarga, prueba e instala la base de datos de firmas ClamAV de terceros.
 
 
 clamfs
-Sistema de archivos basado en FUSE para Linux con escaneo de archivos con antivirus en tiempo real a través del demonio clamd. Clamd (clamav-daemon) es un servicio de escaneo de archivos desarrollado por el proyecto ClamAV.
-# clamfs /etc/clamfs/home.xml (Iniciar el demonio del monitoreo del sistema de archivos)
+Sistema de archivos basado en FUSE para Linux con escaneo de archivos con antivirus en tiempo real a través del demonio clamd. Clamd (clamav-daemon) es un servicio de escaneo de archivos desarrollado por el proyecto ClamAV. El archivo /etc/clamfs/clamfs.xml se puede bajar de https://sourceforge.net/p/clamfs/code/HEAD/tree/tags/clamfs-1.0.1/doc/clamfs.xml
+# clamfs /etc/clamfs/clamfs.xml (Iniciar el demonio del monitoreo del sistema de archivos)
 # clamfs -c /etc/clamfs.conf /mnt/clamfs (Montar el sistema de archivos)
 # clamfs -o srcdir=/data/incoming,ro /mnt/clamfs (montar en modo de solo lectura)
 # systemctl status clamav-daemon (que el demonio clamd esté en ejecución antes de usar clamfs)
