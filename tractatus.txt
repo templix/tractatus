@@ -6397,6 +6397,29 @@ Descarga, prueba e instala la base de datos de firmas ClamAV de terceros.
 # clamav-unofficial-sigs
 
 
+clamfs
+Sistema de archivos basado en FUSE para Linux con escaneo de archivos con antivirus en tiempo real a través del demonio clamd. Clamd (clamav-daemon) es un servicio de escaneo de archivos desarrollado por el proyecto ClamAV.
+# clamfs /etc/clamfs/home.xml (Iniciar el demonio del monitoreo del sistema de archivos)
+# clamfs -c /etc/clamfs.conf /mnt/clamfs (Montar el sistema de archivos)
+# clamfs -o srcdir=/data/incoming,ro /mnt/clamfs (montar en modo de solo lectura)
+# systemctl status clamav-daemon (que el demonio clamd esté en ejecución antes de usar clamfs)
+Crear un archivo de configuración:
+# nano /etc/clamfs.conf:
+srcdir=/data/incoming
+logfile=/var/log/clamfs.log
+# clamfs -o srcdir=/data/incoming,logfile=/var/log/clamfs.log /mnt/clamfs (directorio de origen que será monitoreado, donde se registrarán las operaciones y punto de montaaje)
+Si se necesita monitorear varios directorios, puedes montar cada uno con diferentes configuraciones.
+# clamfs -o srcdir=/data/incoming,logfile=/var/log/clamfs_incoming.log /mnt/clamfs_incoming
+# clamfs -o srcdir=/data/uploads,logfile=/var/log/clamfs_uploads.log /mnt/clamfs_uploads
+# fusermount -u /mnt/clamfs (desmontar el sistema de archivos)
+ClamFS puede configurarse para realizar escaneos más exhaustivos:
+# nano /etc/clamd.conf
+MaxScanSize 50M
+ArchiveMaxRecursion 5
+# systemctl restart clamav-daemon (reiniciar el demonio)
+# clamfs -d -o srcdir=/data/incoming /mnt/clamfs (activa mensajes detallados de depuración)
+
+
 clamscan
 Ver clamav
 
