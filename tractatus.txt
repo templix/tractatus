@@ -6439,6 +6439,13 @@ clamscan
 Ver clamav
 
 
+clamsmtp
+Demonio proxy SMTP que busca virus mediante el software antivirus ClamAV para buscar virus en los mensajes de correo electrónico. Puede actuar como un proxy SMTP tradicional con puertos de acceso público o como un proxy transparente, donde el tráfico SMTP se redirige a ClamSMTP a través de su enrutador. Asegurarse que el archivo de configuración:
+# nano /etc/clamav/main.conf
+Tenga la linea:
+SMTPD_USER=clamav
+
+
 clear
 Limpiar la terminal.
 
