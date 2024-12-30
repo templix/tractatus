@@ -6586,6 +6586,20 @@ cli-spinner
 Línea de comando simple que muestra un indicador de barra inclinada. El binario cli-spinner no es realmente funcional, es un ejemplo de línea de comandos.
 
 
+click
+Formato de paquete simplificado que se instala en una parte separada del sistema de archivos, adecuado para aplicaciones de terceros.
+Crear una aplicación CLI usando click de ejemplo:
+$ mkdir mi_app_cli
+$ cd mi_app_cli
+$ touch main.py
+Editar main.py y agregar el siguiente código
+from click import command
+@command()
+def mi_comando():
+    print("Hola desde mi comando personalizado!")
+$ python main.py mi_comando (ejecutar la aplicación)
+
+
 clinfo
 Imprime la información disponible sobre todas las plataformas OpenCL disponibles en el sistema y los dispositivos que exponen. Enumera todas las plataformas posibles y propiedades del dispositivo inspirado por el programa de AMD del mismo nombre e intenta generar toda la información posible
 $ clinfo -l (enumerar plataformas y dispositivos por nombre, sin otras propiedades)
