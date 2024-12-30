@@ -6495,6 +6495,22 @@ $ classified-ads server --host 0.0.0.0 --port 8080 (inicia un servidor que permi
 $ classified-ads post --title "Venta de coche" --category "Automóviles" --body "Coche en buen estado, modelo 2015. Precio: $8000." --server http://servidor-remoto:8080 (publica el anuncio en el servidor especificado)
 
 
+clazy
+Complemento de Clang que amplía el compilador con más de 50 advertencias relacionadas con las mejores prácticas de Qt, que van desde asignaciones de memoria innecesarias hasta usos incorrectos de API.
+$ clazy -c -o main.o main.cpp (analiza el archivo main.cpp, genera advertencias específicas de Qt y produce un objeto compilado main.o)
+$ clazy -c -o main.o main.cpp -Wclazy-qstring-arg (se activa la advertencia qstring-arg, que detecta el uso ineficiente de QString::arg)
+$ clazy -c -o main.o main.cpp -Wno-clazy-qstring-arg (deshabilita la advertencia qstring-arg para el archivo main.cpp)
+$ clazy -list-checks(lista con todas las verificaciones que clazy puede realizar)
+$ clazy -c -fdiagnostics-format=detailed -o main.o main.cpp (mostrará información más detallada sobre cada advertencia, incluyendo el tipo y la ubicación exacta)
+$ clazy -c -o main.o main.cpp -Wclazy-all (habilitar todas las verificaciones disponibles que permiten realizar un análisis exhaustivo del código fuente)
+$ clazy -c -o main.o main.cpp -Wclazy-use-std-move (detectar usos incorrectos de std::move o std::forward)
+$ clazy -c -o main.o main.cpp -Wclazy-range-loop (iteraciones ineficientes sobre contenedores Qt)
+Para analizar un proyecto completo basado en Qt, se combina clazy con herramientas como cmake o make utilizando el entorno de compilación Clang:
+$ cmake -DCMAKE_CXX_COMPILER=clazy ..
+$ make
+Configurará el proyecto para usar clazy como compilador C++, integrando sus advertencias durante la compilación.
+
+
 clear
 Limpiar la terminal.
 
