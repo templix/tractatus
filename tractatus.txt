@@ -6521,6 +6521,14 @@ $ clazy-test --file nuevo_test.cpp --check nueva-regla (permite verificar que si
 $ clazy-test --all --output resultados.txt (guardar los resultados del test en un archivo para referencia futura)
 
 
+cldump
+permite extraer el contenido de una base de datos Clarion, un IDE de Windows similar a Delphi y otros y tiene su propio formato de base de datos. Puede exportar el contenido de la base de datos a CSV o SQL, además de su propio "formato" que vuelca todos los metadatos junto con los datos contenidos en la base de datos. Al utilizar la salida SQL, se obtendrá un volcado casi listo para usar de la base de datos que creará la tabla y los índices e insertará los datos en la tabla.
+$ cldump -a rchivo_clarion > salida.txt (extraer todos los registros)
+$ cldump -t abla1 tabla2 archivo_clarion > salida.tabla1.txt salida.tabla2.txt (extraer solo ciertas tablas)
+$ cldump -s archivo_clarion (mostrar estructura de la base de datos)
+$ cldump -f campo1,campo2 archivo_clarion > salida.csv (extraer datos específicos de una tabla)
+
+
 clear
 Limpiar la terminal.
 
