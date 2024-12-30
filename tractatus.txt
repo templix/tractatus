@@ -6511,6 +6511,16 @@ $ make
 Configurará el proyecto para usar clazy como compilador C++, integrando sus advertencias durante la compilación.
 
 
+clazy-test
+Ejecutar y verificar los tests relacionados con las verificaciones de clazy.
+$ clazy-test --all (ejecutará todas las pruebas disponibles y mostrará los resultados en la terminal)
+$ clazy-test --test qstring-arg (ejecutará el test relacionado con la advertencia qstring-arg)
+$ clazy-test --path ~/dirs/tests (ejecutar tests desde un directorio personalizado)
+$ clazy-test --verbose (mostrará información adicional, como el código analizado, las advertencias generadas y las posibles fallas)
+$ clazy-test --file nuevo_test.cpp --check nueva-regla (permite verificar que si una regla personalizada funciona correctamente)
+$ clazy-test --all --output resultados.txt (guardar los resultados del test en un archivo para referencia futura)
+
+
 clear
 Limpiar la terminal.
 
