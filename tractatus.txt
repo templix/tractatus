@@ -6604,6 +6604,19 @@ click-man
 Crear páginas de manual para aplicaciones basadas en click en función de sus cadenas de ayuda.
 
 
+clickhouse-client
+Sistema de gestión de bases de datos orientado a columnas que permite generar informes de datos analíticos en tiempo real.
+$ clickhouse-client --host <hostname> --port <port> --user <username> --password <password> (conectar al servidor de ClickHouse. Por defecto, localhost y puerto 9000. Si no precisa especificar usuario o contraseña se puede omitir)
+$ clickhouse-client -q "SELECT * FROM my_table LIMIT 10" (consulta SQL para seleccionar datos de una tabla llamada my_table)
+$ clickhouse-client -q "CREATE TABLE my_table (id UInt32, name String) ENGINE = MergeTree() ORDER BY id" (crear una tabla)
+$ clickhouse-client -q "INSERT INTO my_table (id, name) VALUES (1, 'Alice'), (2, 'Bob')" (insertar datos en la tabla my_table)
+$ clickhouse-client -q "SELECT COUNT(*) FROM my_table" (contar el número de registros)
+$ clickhouse-client -q "SELECT * FROM my_table" --format CSV > output.csv (exportar resultados de consultas a un archivo)
+$ clickhouse-client --query "INSERT INTO my_table FORMAT CSV" < input.csv (cargar datos desde un archivo CSV a una tabla)
+$ clickhouse-client --database=my_database -q "SHOW TABLES" (con múltiples bases de datos en ClickHouse, se ha de especificar cual)
+$ clickhouse-client --queries-file=script.sql (ejecutar directamente un script SQL)
+
+
 clinfo
 Imprime la información disponible sobre todas las plataformas OpenCL disponibles en el sistema y los dispositivos que exponen. Enumera todas las plataformas posibles y propiedades del dispositivo inspirado por el programa de AMD del mismo nombre e intenta generar toda la información posible
 $ clinfo -l (enumerar plataformas y dispositivos por nombre, sin otras propiedades)
