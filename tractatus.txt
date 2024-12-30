@@ -6547,6 +6547,26 @@ Utilidad para reproducir comandos de shell pregrabados en una demostración en v
 $ cleo demo.txt (leerá el archivo demo.txt, mostrará cada comando, uno por linea, al pulsar alguna tecla se escribirá el comando, otra pulsación lo ejecutara en la terminal)
 
 
+clevis
+Herramienta para gestionar el descifrado automático de datos. Se puede utilizar para proporcionar descifrado automático de datos o incluso desbloqueo automático de volúmenes LUKS. Si aún no se tiene un volumen LUKS, se crea y se configura para desbloqueo automático:
+Crear el volumen cifrado
+# cryptsetup luksFormat /dev/sdX
+# cryptsetup open /dev/sdX my_encrypted_volume
+# mkfs.ext4 /dev/mapper/my_encrypted_volume
+Configurar clevis con TPM
+# clevis luks bind -d /dev/sdX tpm2 '{}' (configura el volumen para desbloqueo automático en el hardware actual)
+# clevis luks unlock -d /dev/sdX (desbloquear el volumen automáticamente utilizando las credenciales almacenadas en el TPM)
+# clevis luks bind -d /dev/sdX http '{"url":"http://example.com/unlock"}' (el servidor remoto debe devolver un token o clave válida para desbloquear el volumen)
+# clevis luks unlock -d /dev/sdX (el comando contactará con el servidor configurado para obtener la clave de desbloqueo)
+# clevis luks list -d /dev/sdX (muestra detalles sobre los métodos configurados como TPM o HTTP)
+# clevis luks unbind -d /dev/sdX -s <slot_number> (reemplazar <slot_number> con el número del slot configurado por clevis que puede obtenerse con el comando list)
+Se puede usar clevis para cifrar y descifrar datos sin LUKS, por ejemplo, usando un archivo.
+# echo "My secret data" | clevis encrypt 'pass' '{"key":"my_password"}' > secret.txt (cifrar un archivo con una contraseña)
+# cat secret.txt | clevis decrypt (pedirá la contraseña para descifrar los datos)
+# clevis luks bind -d /dev/sdX -s 1 http '{"url":"http://example.com/unlock"}' (configura el volumen para desbloquearse con HTTP además del TPM)
+# clevis tpm2 status (verificar si el sistema tiene un TPM disponible y es compatible con clevis)
+
+
 clex
 Administrador de archivos. Para cerrar el programa pulsar "Esc Q"
 Algunas teclas de control:
