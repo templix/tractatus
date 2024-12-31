@@ -6693,6 +6693,12 @@ $ sudo tail -f /var/log/auth.log | clog -d 2024-12-15 (especificar una fecha en 
 $ sudo tail -f /var/log/auth.log | clog -t 01:05:01 (especificar una hora, minuto y segundo de hoy)
 
 
+cloudflare-ddns
+Es un programa one-shot: lo ejecutas, actualiza el registro DNS y finaliza. Utiliza la API de Cloudflare, por lo que para ejecutar la herramienta se necesita un token de API y el ID de la zona DNS que se desea actualizar. Este paquete contiene la herramienta y un conjunto de unidades systemd que la hacen ejecutarse periódicamente cuando tienes una dirección IP dinámica.
+$ cloudflare-ddns (ejecutará el programa una vez y actualizará el registro DNS con tu dirección IP actual)
+$ cloudflare-ddns --api-token YOUR_API_TOKEN --record-name your-record.example.com (ejecutar el comando pasando los parámetros API Token y nombre del registro como argumentos y actualizará específicamente ese registro DNS)
+
+
 colores
 Cuadro de colores. Las primeras dos cifras [0;30] afectan al color de las letras de la terminal, las segundas [0;40], una decena superior que las anteriores, corresponden al color de fondo.
 	Negro          0;30	0;40
