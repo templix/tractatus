@@ -6749,6 +6749,15 @@ $ clzip --test archivo.lzma (verifica si el archivo comprimido está intacto sin
 $ cluncompress archivo.lzma (descomprimir archivos creados con clzip)
 
 
+cmark
+Es la implementación de referencia de C de CommonMark, una versión racionalizada de la sintaxis Markdown
+$ cmark input.md > output.html (convierte input.md al formato HTML y lo guarda en output.html)
+$ cmark input.md | cmark-pdf > output.pdf (convierte input.md al formato PDF y lo guarda en output.pdf)
+$ echo "# Título" | cmark --smart (muestra cómo se renderiza el Markdown en la salida estándar)
+$ cmark --smart --xhtml input.md > output.html (usa opciones adicionales para mejorar la conversión)
+$ cat input.md | cmark --gfm > output.html (filtra el contenido de un archivo y luego lo procesa con cmark)
+
+
 colores
 Cuadro de colores. Las primeras dos cifras [0;30] afectan al color de las letras de la terminal, las segundas [0;40], una decena superior que las anteriores, corresponden al color de fondo.
 	Negro          0;30	0;40
