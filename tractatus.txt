@@ -6708,6 +6708,16 @@ $ clpeak --device 0 --image-size 256x256 --iterations 1000000 --verbose (proporc
 $ clpeak --device 0 --image-size 512x512 --iterations 500000 --profile (genera un perfil del tiempo de ejecución para cada operación OpenCL)
 
 
+clsync
+Comando específico de Debian que se utiliza para sincronizar archivos entre dos directorios. Si se usa otro sistema operativo puede usarse "rsync" [ver]
+$ clsync /ruta/original /ruta/destino (buscará todos los archivos en el directorio original y los copiará al directorio destino)
+$ clsync -f /ruta/original /ruta/destino (fuerza la sobrescritura de archivos existentes en el directorio destino)
+$ clsync -m /ruta/original /ruta/destino (solo sincroniza los archivos que han sido modificados desde la última sincronización)
+$ clsync -p /ruta/original /ruta/destino (mantiene los permisos de los archivos durante la sincronización)
+$ clsync -t /ruta/original /ruta/destino (asegura que los archivos más recientes se mantengan en el directorio destino)
+$ clsync -r /ruta/original /ruta/destino (que el comando busque y sincronice todos los subdirectorios de forma recursiva)
+
+
 colores
 Cuadro de colores. Las primeras dos cifras [0;30] afectan al color de las letras de la terminal, las segundas [0;40], una decena superior que las anteriores, corresponden al color de fondo.
 	Negro          0;30	0;40
