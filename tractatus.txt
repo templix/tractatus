@@ -6722,6 +6722,23 @@ cltl
 Instala la versión HTML del libro de Guy L. Steele Common Lisp the Language, segunda edición. Este libro describe una instantánea del lenguaje Common Lisp durante el período en el que se creó el estándar ANSI Common Lisp. Por lo tanto, este libro describe una versión NO ESTÁNDAR de Common Lisp que es similar a, pero NO es, ANSI Common Lisp. En el navegador file:///usr/share/doc/cltl/clm/node1.html#SECTION00100000000000000000
 
 
+cluster-glue
+Forma parte del ecosistema de Linux HA [High Availability - Alta disponibilidad] y proporciona herramientas útiles para gestionar nodos en un clúster. Incluye utilidades para el cercado de nodos, gestión de recursos y diagnóstico de problemas en configuraciones de alta disponibilidad. Consta de la siguientes herramientas: ha_logger, hb_report, lrmadmin, meatclient y stonith
+$ stonith_admin --list-installed (lista de dispositivos STONITH disponibles como controladores IPMI, dispositivos de energía, etc)
+$ stonith_admin --test --device fencing-device (verifica si el dispositivo de cercado fencing-device está configurado correctamente)
+$ stonith_admin --reboot --node node1 (reinicia el nodo node1 utilizando el método de cercado configurado)
+$ ocf-tester -n my-resource -o param1=value1 -o param2=value2 /usr/lib/ocf/resource.d/heartbeat/IPaddr2 (prueba el script IPaddr2 con los parámetros especificados)
+$ ocf-tester -n my-resource -o ip=192.168.1.100 /usr/lib/ocf/resource.d/heartbeat/IPaddr2 --all (ejecuta todas las operaciones compatibles [start, stop, monitor, etc.] en el agente especificado)
+$ crm_attribute --node node1 --lifetime forever --query (muestra todos los atributos permanentes asignados al nodo node1)
+$ crm_attribute --node node1 --name maintenance --update true (pone el nodo node1 en modo de mantenimiento)
+$ crm_attribute --node node1 --name maintenance --delete (elimina el atributo maintenance del nodo)
+$ hb_report /tmp/cluster-report (crea un informe detallado del clúster en el directorio /tmp/cluster-report)
+$ clustat (muestra información como estado de los nodos [activos o inactivos], recursos asignados a cada nodo y fallos recientes)
+$ clufter conf2pcs old_ha.cf > new_pcs.conf (convertir una configuración en formato antiguo de Heartbeat a Pacemaker)
+$ cibadmin --query > cluster-config.xml (exportar la configuración actual)
+$ cibadmin --replace --xml-file cluster-config.xml (edita el archivo exportado y aplica los cambios)
+
+
 colores
 Cuadro de colores. Las primeras dos cifras [0;30] afectan al color de las letras de la terminal, las segundas [0;40], una decena superior que las anteriores, corresponden al color de fondo.
 	Negro          0;30	0;40
