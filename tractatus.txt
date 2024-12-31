@@ -6821,6 +6821,13 @@ $ cmdtest echo_tests
       0/1 tests OK, 1 failures
 
 
+cmospwd
+Herramienta para descifrar contraseñas almacenadas en CMOS que se utilizan para acceder a la configuración BIOS de una computadora. Esta aplicación debería funcionar de inmediato en la mayoría de los sistemas modernos, pero es posible que algunas BIOS más complejas no sean compatibles o requieran pasos adicionales.
+$ cmospwd -c "contraseña_cmos" (descifrar con una contraseña específica)
+$ cmospwd -p "palabra_secreta" (probar diferentes contraseña)
+$ cmospwd -d (volcar información por pantalla)
+
+
 colores
 Cuadro de colores. Las primeras dos cifras [0;30] afectan al color de las letras de la terminal, las segundas [0;40], una decena superior que las anteriores, corresponden al color de fondo.
 	Negro          0;30	0;40
