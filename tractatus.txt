@@ -6699,6 +6699,15 @@ $ cloudflare-ddns (ejecutará el programa una vez y actualizará el registro DNS
 $ cloudflare-ddns --api-token YOUR_API_TOKEN --record-name your-record.example.com (ejecutar el comando pasando los parámetros API Token y nombre del registro como argumentos y actualizará específicamente ese registro DNS)
 
 
+clpeak
+Herramienta de evaluación comparativa sintética para medir las capacidades máximas de los dispositivos OpenCL. Solo mide las métricas máximas que se pueden lograr mediante operaciones vectoriales y no representa un caso de uso del mundo real.
+$ clpeak --device 0 --image-size 256x256 --iterations 1000000 (Este comando evalúa el rendimiento del dispositivo OpenCL en la operación de copiar datos)
+$ clpeak --device 0 --image-size 512x512 --iterations 500000 --vector-size 16 --local-work-size 64 --global-work-size 1024 (especifica un tamaño de imagen más grande y añade algunas opciones avanzadas para ajustar el trabajo local y global)
+$ clpeak --device 0 --device 1 --image-size 256x256 --iterations 1000000 (compara el rendimiento entre dos dispositivos OpenCL)
+$ clpeak --device 0 --image-size 256x256 --iterations 1000000 --verbose (proporciona un salida más detallada con información adicional sobre el rendimiento)
+$ clpeak --device 0 --image-size 512x512 --iterations 500000 --profile (genera un perfil del tiempo de ejecución para cada operación OpenCL)
+
+
 colores
 Cuadro de colores. Las primeras dos cifras [0;30] afectan al color de las letras de la terminal, las segundas [0;40], una decena superior que las anteriores, corresponden al color de fondo.
 	Negro          0;30	0;40
