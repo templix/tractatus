@@ -6798,6 +6798,29 @@ Salida:
 $ cmdreader --arg1=123 --arg2=abc --validate (si alguno de los argumentos no cumple las reglas de validación definidas, el programa devuelve un error)
 
 
+cmdtest
+Prueba herramientas de línea de comandos de Unix. Básicamente, se le proporciona un script, sus archivos de entrada y los archivos de salida esperados. cmdtest ejecuta el script y verifica que la salida sea la esperada.
+$ mkdir echo_tests
+$ nano echo_tests/hello.script
+       echo hello, world
+$ nano hello.stdout
+       hello, world
+Correr las pruebas:
+$ $ cmdtest echo_tests
+       test 1/1
+       1/1 tests OK, 0 failures
+Si se cambia el archivo "hello.stdout", cmdtest mostrará las diferencias:
+$ cmdtest echo_tests
+      FAIL: hello: stdout diff:
+      --- echo_tests/hello.stdout	2021-01-01 12:00:00 +0000
+      +++ echo_tests/hello.stdout-actual	2021-01-01 12:00:02 +0000
+      @@ -1 +1 @@
+      -hello, world
+      +something else
+      test 1/1
+      0/1 tests OK, 1 failures
+
+
 colores
 Cuadro de colores. Las primeras dos cifras [0;30] afectan al color de las letras de la terminal, las segundas [0;40], una decena superior que las anteriores, corresponden al color de fondo.
 	Negro          0;30	0;40
