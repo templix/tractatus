@@ -6674,6 +6674,25 @@ $ cloc --by-file dir/ (de todos los scripts de un directorio)
 $ clod --out=info.txt (guardar la salida en un fichero)
 
 
+clog
+Útil para revisar archivos de registro con tail [ver]. Puede detectar patrones en un flujo de entrada y colorear o suprimir las líneas. También puede decorar las líneas con marcas de fecha o hora.
+$ nano .clogrc
+       # Standard syslog entries.
+              default rule /warn|debug/   --> yellow line
+              default rule /error|severe/ --> red line
+              default rule /critical/     --> bold red line
+              default rule /critical/     --> blank
+              default rule /ignore/       --> suppress
+
+              # Apache access.log status codes
+              apache rule / 2[0-9][0-9] / --> green match
+              apache rule / 3[0-9][0-9] / --> yellow match
+              apache rule / 4[0-9][0-9] / --> red match
+              apache rule / 5[0-9][0-9] / --> bold red match
+$ sudo tail -f /var/log/auth.log | clog -d 2024-12-15 (especificar una fecha en formato inglés)
+$ sudo tail -f /var/log/auth.log | clog -t 01:05:01 (especificar una hora, minuto y segundo de hoy)
+
+
 colores
 Cuadro de colores. Las primeras dos cifras [0;30] afectan al color de las letras de la terminal, las segundas [0;40], una decena superior que las anteriores, corresponden al color de fondo.
 	Negro          0;30	0;40
