@@ -6739,6 +6739,16 @@ $ cibadmin --query > cluster-config.xml (exportar la configuración actual)
 $ cibadmin --replace --xml-file cluster-config.xml (edita el archivo exportado y aplica los cambios)
 
 
+clzip
+Versión en lenguaje C de lzip un compresor de datos sin pérdida basado en el algoritmo LZMA, con una comprobación de integridad muy segura y una interfaz de usuario similar a la de gzip o bzip2.
+$ clzip archivo.txt (comprimir un archivo)
+$ clzip archivo1.txt archivo2.txt archivo3.txt (comprimirá todos los archivos especificados en una sola compresión)
+$ clzip directorio/ (comprimirá todos los archivos en el directorio especificado y sus subdirectorios)
+$ clzip archivo.txt -o cmprimido.lzma (especifica un nombre de salida personalizado para el archivo comprimido)
+$ clzip --test archivo.lzma (verifica si el archivo comprimido está intacto sin descomprimirlo)
+$ cluncompress archivo.lzma (descomprimir archivos creados con clzip)
+
+
 colores
 Cuadro de colores. Las primeras dos cifras [0;30] afectan al color de las letras de la terminal, las segundas [0;40], una decena superior que las anteriores, corresponden al color de fondo.
 	Negro          0;30	0;40
