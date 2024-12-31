@@ -6758,6 +6758,46 @@ $ cmark --smart --xhtml input.md > output.html (usa opciones adicionales para me
 $ cat input.md | cmark --gfm > output.html (filtra el contenido de un archivo y luego lo procesa con cmark)
 
 
+cmdreader
+Analiza los argumentos de la línea de comandos para convertir cadenas complicadas simplificandolas para usarlas de manera más directa en scripts o aplicaciones.
+Si se ejecuta cmdreader con una lista de argumentos, el programa los desglosa y muestra un formato más fácil de procesar. Ejemplo:
+$ cmdreader --arg1=value1 --arg2=value2
+Salida:
+        arg1: value1
+        arg2: value2
+Útil en scripts para interpretar argumentos más fácilmente.
+Se puede utilizar un archivo de configuración para definir los parámetros que se desea aceptar y cómo procesarlos.
+$ nano config.txt
+arg1 default_value1
+arg2 default_value2
+$ cmdreader -f config.txt --arg1=new_value
+Salida:
+        arg1: new_value
+        arg2: default_value2
+$ cmdreader --json='{"arg1":"value1","arg2":"value2"}' (combinar con otros comandos para procesar argumentos en formato JSON)
+Salida:
+        arg1: value1
+        arg2: value2
+El verdadero poder de cmdreader se nota al usarlo en scripts para manejar cadenas complejas. Aquí tienes un ejemplo de cómo usarlo:
+$ nano process.sh
+#!/bin/bash
+#
+# Leer argumentos con cmdreader
+output=$(cmdreader --arg1=value1 --arg2=value2)
+#
+# Extraer valores
+arg1=$(echo "$output" | grep "arg1" | awk '{print $2}')
+arg2=$(echo "$output" | grep "arg2" | awk '{print $2}')
+#
+# Usar las variables
+echo "El valor de arg1 es: $arg1"
+echo "El valor de arg2 es: $arg2"
+Salida:
+        El valor de arg1 es: value1
+        El valor de arg2 es: value2
+$ cmdreader --arg1=123 --arg2=abc --validate (si alguno de los argumentos no cumple las reglas de validación definidas, el programa devuelve un error)
+
+
 colores
 Cuadro de colores. Las primeras dos cifras [0;30] afectan al color de las letras de la terminal, las segundas [0;40], una decena superior que las anteriores, corresponden al color de fondo.
 	Negro          0;30	0;40
