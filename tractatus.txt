@@ -6863,6 +6863,22 @@ $ codecgraph -f /codecs/codec_description.txt (usar un archivo de descripción d
 $ codecgraph -c ALC892 -o png (generará una imagen en formato PNG del gráfico correspondiente al códec)
 
 
+codecrypt
+Herramienta de criptografía que puede utilizarse para cifrar, descifrar, firmar y verificar documentos y comunicaciones de manera similar a GnuPG o PGP.
+Antes de cifrar o firmar documentos, se necesita generar un par de claves: pública y privada:
+$ codecrypt --generate-key --email usuario@ejemplo.com (generará una clave NTRU [criptosistema de clave pública] y la almacenará en el directorio predeterminado: ~/.codecrypt/keys)
+$ codecrypt --list-keys (listar todas las claves almacenadas)
+$ codecrypt --export-key --email usuario@ejemplo.com --output usuario_publica.key (guardará la clave pública en el archivo usuario_publica.key)
+$ codecrypt --import-key --file clave_otra_persona.key (importar clave pública)
+$ codecrypt --encrypt --recipient usuario@ejemplo.com --input documento.txt --output documento.cifrado (generará un archivo cifrado llamado documento.cifrado)
+$ codecrypt --decrypt --input documento.cifrado --output documento_descifrado.txt (descifrar un archivo cifrado)
+$ codecrypt --sign --input documento.txt --output firma.sig --email usuario@ejemplo.com (genera una firma digital para el archivo)
+$ codecrypt --verify --signature firma.sig --input documento.txt (si la firma es válida, mostrará un mensaje indicando que la verificación fue exitosa)
+$ codecrypt --delete-key --email usuario@ejemplo.com (eliminar una clave)
+$ codecrypt --encrypt --sign --recipient usuario@ejemplo.com --input documento.txt --output documento_cifrado_y_firmado (cifrar y firmar un archivo simultáneamente)
+$ echo "Mensaje confidencial" | codecrypt --encrypt --recipient usuario@ejemplo.com --output mensaje.cifrado (automatizar procesos)
+
+
 colores
 Cuadro de colores. Las primeras dos cifras [0;30] afectan al color de las letras de la terminal, las segundas [0;40], una decena superior que las anteriores, corresponden al color de fondo.
 	Negro          0;30	0;40
