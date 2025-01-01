@@ -6925,6 +6925,16 @@ $ collectl -sd (del uso del disco)
 $ collectl -c1 -sZ -i:1 (información sobre los procesos del sistema)
 
 
+colmap
+Se trata de una secuencia de comandos de propósito general de Structure-from-Motion (SfM) y Multi-View Stereo (MVS) con una interfaz gráfica y de línea de comandos. Ofrece una amplia gama de funciones para la reconstrucción de colecciones de imágenes ordenadas y desordenadas.
+$ colmap database create my_project.db (iniciar un nuevo proyecto)
+$ colmap add_images --database my_project.db --images-path /carpeta/imágenes (añadir imágenes al proyecto)
+$ colmap compute_pose_and_timeshift --database my_project.db (calcular la estructura del movimiento)
+$ colmap per --database my_project.db --output_path /ruta/a/salir/mapper_output (calcular las coordenadas 3D de los puntos)
+$ colmap mvs --database my_project.db --input_path /ruta/a/salir/mapper_output --output_path /ruta/a/salir/mvs_output (calcular el modelo de profundidad)
+$ colmap viewer --mvs-output /ruta/a/salir/mvs_output (visualizar los resultados)
+
+
 colores
 Cuadro de colores. Las primeras dos cifras [0;30] afectan al color de las letras de la terminal, las segundas [0;40], una decena superior que las anteriores, corresponden al color de fondo.
 	Negro          0;30	0;40
