@@ -6916,6 +6916,15 @@ $ coinst-scc -f modelo.cmodel > componentes.txt (genera un archivo componentes.t
 $ coinst-scheck -f modelo.cmodel --graph | dot -Tpng -o conflictos.png (genera un archivo conflictos.png que muestra visualmente las relaciones entre paquetes y sus conflictos)
 
 
+collectl
+Herramienta de evaluación comparativa y monitoreo de rendimiento de un amplio conjunto de subsistemas que actualmente incluyen buddyinfo, cpu, disco, inodos, infiniband, lustre, memoria, red, nfs, procesos, quadrics, slabs, sockets y tcp.
+$ collectl -all (mostrar estadísticas de todos los subsistemas)
+$ collectl --top (opcion parecida al comando top [ver])
+$ collectl -sc (resumen de la CPU)
+$ collectl -sd (del uso del disco)
+$ collectl -c1 -sZ -i:1 (información sobre los procesos del sistema)
+
+
 colores
 Cuadro de colores. Las primeras dos cifras [0;30] afectan al color de las letras de la terminal, las segundas [0;40], una decena superior que las anteriores, corresponden al color de fondo.
 	Negro          0;30	0;40
