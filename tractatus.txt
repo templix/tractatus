@@ -6841,7 +6841,27 @@ $ cobertura-merge /proyecto/src -o resultado.cobertura (combinará múltiples ar
 
 
 cockpit
-permite a los usuarios administrar servidores GNU/Linux mediante un navegador web. Ofrece configuración de red, inspección de registros, informes de diagnóstico, resolución de problemas de SELinux, sesiones de línea de comandos interactivas y más.
+Permite a los usuarios administrar servidores GNU/Linux mediante un navegador web. Ofrece configuración de red, inspección de registros, informes de diagnóstico, resolución de problemas de SELinux, sesiones de línea de comandos interactivas y más.
+
+
+code2html
+Script de Perl que convierte el código fuente de un programa a HTML
+$ code2html -l python mi_script.py salida.html (de python a html)
+$ code2html -p index.html mi_codigo.py (insertará el código fuente de mi_codigo.py enmascarado en el archivo index.html, dentro de una etiqueta <pre>)
+
+
+codec2
+Códec de audio especialmente diseñado para comprimir voz, no música, a velocidades de bits muy bajas para aplicaciones como la radio de voz digital. Probar diferentes tamaños de bits para encontrar el equilibrio entre tamaño de archivo y calidad de audio adecuado para la aplicación.
+$ codec2 -c 3200 input.wav output.codec2 (codifica el archivo input.wav usando el modo 3200 bps y lo guarda como output.codec2)
+$ codec2 -d 3200 input.codec2 output.wav (decodifica el archivo input.codec2 y lo guarda como output.wav)
+Nota.- Otros tamaños de bits son 700, 2400...
+
+
+codecgraph
+Herramienta que se utiliza para generar gráficos que representan la topología de un códec de audio de alta definición [HD Audio] utilizando la información del subsistema ALSA [Advanced Linux Sound Architecture]. El analizador de Codecgraph lee la descripción del códec de /proc/asound/card*/codec#0 y los datos analizados se envían a Graphviz para la generación del gráfico real.
+$ codecgraph -c ALC892 (generar un gráfico básico de un códec específico)
+$ codecgraph -f /codecs/codec_description.txt (usar un archivo de descripción de códec en lugar de especificar su nombre)
+$ codecgraph -c ALC892 -o png (generará una imagen en formato PNG del gráfico correspondiente al códec)
 
 
 colores
