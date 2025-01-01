@@ -6903,6 +6903,19 @@ $ codespell -e .py . (verificar en el presente directorio solo los archivos .py)
 $ codespell -L palabra1,palabra2 -e .sh . (igonorar las palabras mencionadas en todos los .sh del directorio)
 
 
+coinst
+Este paquete es útil cuando se está interesado en analizar la co-instalabilidad de paquetes en un repositorio de paquetes grande. Un conjunto de paquetes se denomina co-instalable si se puede ampliar a un conjunto que satisface todas las relaciones entre paquetes (dependencias, conflictos, etc.). Esta herramienta reduce un repositorio a uno mucho más pequeño, su llamado núcleo de co-instalabilidad, que se comporta exactamente igual en lo que respecta a la co-instalabilidad de paquetes. Esto se logra: - eliminando todas las relaciones que no son relevantes para este propósito - identificando todos los paquetes que se comportan de la misma manera. El núcleo es típicamente órdenes de magnitud más pequeño que el repositorio original.
+Requiere un archivo Packages para analizar la co-instalabilidad de paquetes. Puede obtenerse este archivo desde el repositorio de Debian o Ubuntu:
+$ wget http://ftp.us.debian.org/debian/dists/stable/main/binary-amd64/Packages.gz
+$ gunzip Packages.gz
+$ coinst-genmodel -f Packages > modelo.cmodel (convierte el archivo Packages en un modelo legible por coinst)
+$ coinst-scheck -f modelo.cmodel > resultados.txt (generará un informe de los paquetes que no pueden ser co-instalados y las razones de los conflictos en resultados.txt)
+$ coinst-scheck -f modelo.cmodel --incompatible (muestra los pares de paquetes que no se pueden instalar juntos)
+$ coinst-scheck -f modelo.cmodel --unsatisfied (ayuda a identificar problemas específicos relacionados con las dependencias)
+$ coinst-scc -f modelo.cmodel > componentes.txt (genera un archivo componentes.txt con los detalles de los componentes)
+$ coinst-scheck -f modelo.cmodel --graph | dot -Tpng -o conflictos.png (genera un archivo conflictos.png que muestra visualmente las relaciones entre paquetes y sus conflictos)
+
+
 colores
 Cuadro de colores. Las primeras dos cifras [0;30] afectan al color de las letras de la terminal, las segundas [0;40], una decena superior que las anteriores, corresponden al color de fondo.
 	Negro          0;30	0;40
