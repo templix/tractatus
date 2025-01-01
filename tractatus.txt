@@ -6879,6 +6879,12 @@ $ codecrypt --encrypt --sign --recipient usuario@ejemplo.com --input documento.t
 $ echo "Mensaje confidencial" | codecrypt --encrypt --recipient usuario@ejemplo.com --output mensaje.cifrado (automatizar procesos)
 
 
+codegroup
+convierte cualquier archivo, de cualquier formato, incluido el binario sin procesar, en un conjunto de grupos de códigos de cinco letras mayúsculas. El formato de grupo de códigos incluye un CRC de 16 bits y la longitud del archivo para verificar la integridad del mensaje. Codegroup NO HACE CRIPTOMONEDAS. Es simplemente un conversor de formatos de archivo, como base64 o uuencoding. A diferencia de otros algoritmos de codificación de archivos tradicionales, como base64 o uuencoding, Codegroup utiliza exclusivamente el alfabeto de 26 letras. Codegroup es ideal para transferir archivos binarios cortos a través de un canal de voz o código morse.
+$ codegroup -e archivo archivo_codificado (codificar)
+$ codegroup -d archivo_codificado archivo_sin_codificar (descodificar)
+
+
 colores
 Cuadro de colores. Las primeras dos cifras [0;30] afectan al color de las letras de la terminal, las segundas [0;40], una decena superior que las anteriores, corresponden al color de fondo.
 	Negro          0;30	0;40
