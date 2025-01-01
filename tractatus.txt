@@ -7045,6 +7045,18 @@ Demonio que recopila información del sistema periódicamentes. Las estadística
 # systemctl start collectd.service (pide contraseña de forma gráfica y activa el demonio)
 
 
+colord
+Servicio del sistema que facilita la administración, instalación y generación de perfiles de color para gestionar con precisión el color de los dispositivos de entrada y salida. Proporciona una API D-Bus para que los marcos del sistema realicen consultas, un almacén de datos persistente y un mecanismo para que las aplicaciones de sesión establezcan políticas del sistema. Contiene las herramientas cd-create-profile, cd-fix-profile, cd-iccdump, cd-it8 y colormgr
+$ cd-create-profile /dev/usb/your-calibrator (crear un perfil de color a partir de un dispositivo de calibración)
+$ cd-fix-profile /home/user/profiles/my-monitor.icc (reparar perfiles de color que pueden estar dañados o incorrectos, por ejemplo de un monitor)
+$ cd-iccdump /home/user/profiles/my-monitor.icc (mostrar la información contenida en un perfil de color ICC como el espacio de color, el tipo de perfil y más)
+$ cd-it8 /home/user/data/my-profile.it8 (crear un perfil de color a partir de datos en formato IT8)
+$ colormgr get-device <device-id> (Obtener información sobre un dispositivo específico)
+$ colormgr create-profile <device-id> /path/to/your/profile.icc (crear un nuevo perfil de color para un dispositivo específico)
+$ colormgr get-devices (listar dispositivos)
+$ colormgr get-profiles (listar perfiles disponibles)
+
+
 colordiff
 Muestra las diferencias entre dos ficheros de forma coloreada.
 $ colordiff -y archivo1 archivo2  (en dos columnas)
@@ -7070,7 +7082,7 @@ Esta herramienta analiza el resultado de make para colorearlo y facilitar su lec
 
 
 colormgr
-Ver y cambiar el perfil de color a las asignaciones de dispositivos. RGB es una escala relativa que normalmente tiene sólo 256 estados por canal.
+[colord]. Ver y cambiar el perfil de color a las asignaciones de dispositivos. RGB es una escala relativa que normalmente tiene sólo 256 estados por canal.
 $ colormgr get-devices display (listados de todos los dispositivos)
 $ colormgr get-devices-by-kind display (del monitor. Sustituir "display" por printer, scanner, webcam...)
 
