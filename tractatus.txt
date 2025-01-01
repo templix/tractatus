@@ -7094,6 +7094,11 @@ $ colormgr get-devices display (listados de todos los dispositivos)
 $ colormgr get-devices-by-kind display (del monitor. Sustituir "display" por printer, scanner, webcam...)
 
 
+colortail
+Funciona como tail pero usa expresiones regulares para determinar qué líneas y partes de líneas imprimir en qué colores.
+$ sudo colortail -f /var/log/auth.log
+
+
 colortest
 Incluye un conjunto de utilidades para ayudar a probar cuántos colores puede mostrar un terminal. Estas configuraciones de color dependen de la variable de entorno $TERM y de la entrada termcap
 $ colortest-8
