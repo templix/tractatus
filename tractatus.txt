@@ -6894,6 +6894,15 @@ $ codesearch -filetype:c ^get_[a-zA-Z] (usar expresiones regulares para buscar p
 $ codesearch -filetype=c++ global\s+[a-zA-Z0-9_]+; (buscar variables globales en C++)
 
 
+codespell
+Diseñado para encontrar y corregir errores ortográficos comunes especialmente en el código fuente y en inglés.
+$ codespell . (verificar todos los scripts del directorio. Si los nombres de funciones, variables... no estan en inglés los marca como error)
+$ codespell script.sh
+$ codespell -w script.py (que realice automáticamente las correcciones encontradas)
+$ codespell -e .py . (verificar en el presente directorio solo los archivos .py)
+$ codespell -L palabra1,palabra2 -e .sh . (igonorar las palabras mencionadas en todos los .sh del directorio)
+
+
 colores
 Cuadro de colores. Las primeras dos cifras [0;30] afectan al color de las letras de la terminal, las segundas [0;40], una decena superior que las anteriores, corresponden al color de fondo.
 	Negro          0;30	0;40
