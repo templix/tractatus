@@ -7072,8 +7072,15 @@ Como dmesg pero coloreado. El algunas distros el guión en medio [colored-dmesg]
 $ colored_dmesg
 
 
+colorize
+Colorea el texto leído desde un flujo de entrada o archivo estándar mediante el uso de secuencias de escape ANSI (y también viceversa, es decir, limpiando el texto de las secuencias) e imprime la salida resultante en la terminal.
+$ colorize green /etc/apt/sources.list (ver con el texto en verde)
+$ colorize --attr=bold green /etc/apt/sources.list (en negrita verde)
+$ colorize red/yellow /etc/apt/sources.list (texto en rojo y fondo amarillo)
+
+
 colorized-logs
-Colorea la salida de algunas herramientas tales como: ansi2html[ver], ansi2txt[ver], lesstty, pipetty y ttyrec2ansi
+Colorea la salida de algunas herramientas [dmesg, ccze, gcc...]. Consta de los siguientes ejecutables: ansi2html[ver], ansi2txt[ver], lesstty, pipetty y ttyrec2ansi
 $ pipetty dmesg
 
 
