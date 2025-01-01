@@ -6885,6 +6885,15 @@ $ codegroup -e archivo archivo_codificado (codificar)
 $ codegroup -d archivo_codificado archivo_sin_codificar (descodificar)
 
 
+codesearch
+Herramienta para indexar y luego realizar búsquedas de expresiones regulares en grandes cantidades de código fuente. Es un conjunto de programas de línea de comandos escritos en Go.
+$ codesearch -filetype:c malloc (buscar la función "malloc" en todos los archivos C)
+$ codesearch -filetype:py def -limit 10 (buscar "def" en Python, limitando a 10 resultados)
+$ codesearch -from 100 main (Buscar "main" desde la línea 100 hasta el final del archivo)
+$ codesearch -filetype:c ^get_[a-zA-Z] (usar expresiones regulares para buscar patrones más específicos)
+$ codesearch -filetype=c++ global\s+[a-zA-Z0-9_]+; (buscar variables globales en C++)
+
+
 colores
 Cuadro de colores. Las primeras dos cifras [0;30] afectan al color de las letras de la terminal, las segundas [0;40], una decena superior que las anteriores, corresponden al color de fondo.
 	Negro          0;30	0;40
