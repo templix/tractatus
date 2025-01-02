@@ -7268,6 +7268,16 @@ $ compress fichero.txt (Creará fichero.txt.Z)
 $ uncompress fichero.txt.Z (Descomprmir)
 
 
+comprez
+Herramienta para comprimir/descomprimir archivos y directorios de la utilidades compress, uncompress, gzip, bzip2, tar, zip y unzip.
+$ comprez archivo.txt (comprimir un archivo usando la herramienta más adecuada según el tipo de archivo)
+$ comprez -d archivo_comprimido.gz (descomprimir)
+$ comprez -c directorio (comprimirá todo el contenido del directorio especificado)
+$ comprez archivo1.txt archivo2.pdf archivo3.doc (comprimirá los tres archivos mencionados usando la herramienta más adecuada para cada uno)
+$ comprez -s archivo_comprimido.tar.gz (mostrará el tamaño reducido del archivo después de ser comprimido)
+Nota.- Si queremos indicar la herramienta a comprimir: -gz y -z [gzip], -I [bzip], -lz [lzip], -Z [compress], -zip y -jar [zip] y -s [tar]
+
+
 compton
 Agregar transparencias, sombras, marcos... a las ventanas . Todos los parámetros pueden establecerse creando el archivo .compton.conf
 $ compton & (Empleará los parámetros por defecto)
