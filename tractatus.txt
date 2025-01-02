@@ -7288,6 +7288,13 @@ $ comprez -s archivo_comprimido.tar.gz (mostrará el tamaño reducido del archiv
 Nota.- Si queremos indicar la herramienta a comprimir: -gz y -z [gzip], -I [bzip], -lz [lzip], -Z [compress], -zip y -jar [zip] y -s [tar]
 
 
+comptext
+Herramienta para comparar textos y analizar diferencias basándose en métricas específicas, como CER [Character Error Rate] y BER [Bit Error Rate].
+$ comptext original.txt transcrito.txt (mostrará la cantidad total de errores, la tasa de errores de caracteres y la tasa de errores de bits entre original.txt y transcrito.txt)
+$ comptext --verbose original.txt transcrito.txt (muestra un desglose más completo de las diferencias entre los textos)
+$ comptext --cer original.txt transcrito.txt (enfocarse solo en CER)
+
+
 compton
 Agregar transparencias, sombras, marcos... a las ventanas . Todos los parámetros pueden establecerse creando el archivo .compton.conf
 $ compton & (Empleará los parámetros por defecto)
