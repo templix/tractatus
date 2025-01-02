@@ -7146,6 +7146,12 @@ comillas
 	dg mar 17 20:53:17 CET 2013
 
 
+comitup
+Intentará conectarse a Wi-Fi mediante una conexión establecida. Si no lo logra, creará un punto de acceso y un servicio web para ayudar a configurar la conexión. La información detallada en /var/log/comitup.log.
+# comitup -c (verificar la configuración del dispositivo wifi)
+# comitup -i (imprimir información sobre la configuración actual)
+
+
 comm
 Comparación de dos ficheros. Muestra tres columnas, en la primera están las lineas que solo estan en el primer archivo, el la segunda los que solo están en el segundo y la tercera los comunes.
 $ comm archivo1 archivo2
@@ -7165,6 +7171,12 @@ Activar las sugerencias sobre el paquete que puede tener un comando que erramos 
 	lt: command not found
 
 
+commit-patch
+Normalmente, los sistemas de control de versiones no permiten confirmaciones de granularidad fina. commit-patch permite al usuario controlar exactamente qué se confirma, ya que permite al usuario proporcionar un parche para confirmar en lugar de utilizar los archivos en el directorio de trabajo actual. commit-patch es compatible con repositorios Darcs, Git, Mercurial, Bazaar, Monotone, Subversion o CVS.
+$ commit-patch patch
+$ commit-patch -m "Este es un mensaje de confirmación" patch
+
+
 comodines
 Ver “signos y comodines”
 
@@ -7172,6 +7184,18 @@ Ver “signos y comodines”
 comparepdf
 Comparar dos archivos pdf.
 $ comparepdf archivo1.pdf archivo2.pdf
+
+
+compartment
+Herramienta útil para ejecutar servicios o programas en un entorno seguro y aislado, minimizando los riesgos de seguridad.
+$ compartment -- ls -l (ejecuta ls -l en un entorno con restricciones de seguridad)
+$ compartment --user=nobody --group=nogroup -- ls -l (asegura que el comando se ejecute con los privilegios mínimos, evitando riesgos de escalación)
+$ compartment --no-net -- curl http://example.com (fallará porque se ha deshabilitado el acceso a la red)
+$ compartment --cap-drop=all -- ls /etc (ejecuta ls /etc con todas las capacidades eliminadas, reduciendo los riesgos)
+$ sudo compartment --chroot=/path/to/chroot -- ls -l (ejecutar ls -l dentro de un entorno chroot para mayor aislamiento)
+$ sudo compartment --daemonize --user=nobody --group=nogroup -- program_name (ejecutará program_name como un demonio con privilegios mínimos)
+$ compartment --log=/var/log/compartment.log -- ls -l (registra la ejecución del comando ls -l en el archivo /var/log/compartment.log)
+$ compartment --no-net --cap-drop=all --chroot=/secure/chroot --user=nobody -- /bin/bash (abre una shell de Bash en un entorno completamente aislado, sin acceso a la red y con capacidades limitadas)
 
 
 compgen
