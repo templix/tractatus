@@ -9358,18 +9358,6 @@ $ dpkg -l inkscape  (Conocer si un paquete está instalado y su versión)
 # dpkg --status paquete  (Info, dependencias, recomendaciones, sugerencias)
 # dpkg -install paquete --force-conflicts (instalar un paquete conflicitivo)
 # dpkg --print-architecture (mostrar la arquitectura de un pc)
-# dpkg-reconfigure paquete    (Reconfigura paquetes instalados)
-# dpkg-reconfigure -phigh -a   (Reconfigurar todo el sistema)
-# dpkg-reconfigure debconf    (R. interfaz de configuración)
-# dpkg-reconfigure xserver-xorg  (R. el servidor X)
-# dpkg-reconfigure console-common (R. el teclado)
-# dpkg-reconfigure console-setup (mismo que lo anterior)
-# dpkg-reconfigure locales     (R. el lenguaje)
-# dpkg-reconfigure tzdata      (R. la zona horaria)
-# dpkg-reconfigure console-data (R. las tty)
-# dpkg-reconfigure -a (Borra paquetes de configuraciones)
-# dpkg-reconfigure fontconfig-config  (R. fuentes. Seguir con:)
-# dpkg-reconfigure fontconfig  (R. fuentes)
 # dpkg --configure -a  (R. inconsistencias o procesos despues de un cuelgue)
 # dpkg-query -W paquete (Ver versión de un paquete)
 # dpkg -i --force-overwrite /var/cache/apt/archives/paquete.deb (forzar install)
@@ -9405,7 +9393,7 @@ Limpiar paquetes obsoletos:
 # dpkg -l |grep -i ^rc | cut -d " " -f 3 | xargs dpkg --purge (Para eliminarlos)
 7.-
 Otro proceso para reparar paquetes rotos en el sistema
-    # dpkg --configure -a (recomfigurar posibles paquetes pendientes)
+    # dpkg --configure -a (reconfigurar posibles paquetes pendientes)
     # apt-get clean && sudo apt-get autoclean (limpiar caché)
     # rm /var/lib/apt/lists/lock && rm /var/cache/apt/archives/lock && rm /var/lib/dpkg/lock
     # apt-get update --fix-missing (regenerar listados de paquetes de los repositorios)
@@ -9427,6 +9415,22 @@ Herramienta para buscar información del paquete referenciado en la base de dato
 $ dpkg-query -l gedit (Muestra arquitectura, versión y descripción de gedit)
 $ dpkg-query -L gedit (archivos instalados en el sistema desde el nombre del paquete)
 $ dpkg-query -s gedit (muestra el estado del paquete)
+
+
+dpkg-reconfigure
+Reconfigura los paquetes después de que ya se hayan instalado.
+# dpkg-reconfigure network-manager (reconfigurar un paquete específico)
+# dpkg-reconfigure -n nombre_del_paquete (obtener información sobre cómo se configura un paquete específico, sin aplicarla realmente)
+# dpkg-reconfigure debconf (Reconfigura la interfaz de configuración)
+# dpkg-reconfigure xserver-xorg (Reconfigura el servidor X)
+# dpkg-reconfigure console-common (Rreconfigura el teclado)
+# dpkg-reconfigure console-setup (mismo que lo anterior)
+# dpkg-reconfigure locales (Rreconfigura el lenguaje)
+# dpkg-reconfigure tzdata  (Reconfigura la zona horaria)
+# dpkg-reconfigure console-data (Reconfigura las tty)
+# dpkg-reconfigure -a (mostrará una lista de todos los paquetes que requieren configuración y permitirá reconfigurarlos uno por uno)
+# dpkg-reconfigure fontconfig-config  (Reconfigurar fuentes. Seguir con el comando siguiente)
+# dpkg-reconfigure fontconfig  (Reconfigurar fuentes)
 
 
 driftnet
