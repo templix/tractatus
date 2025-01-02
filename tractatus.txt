@@ -7198,6 +7198,12 @@ $ compartment --log=/var/log/compartment.log -- ls -l (registra la ejecución de
 $ compartment --no-net --cap-drop=all --chroot=/secure/chroot --user=nobody -- /bin/bash (abre una shell de Bash en un entorno completamente aislado, sin acceso a la red y con capacidades limitadas)
 
 
+compface
+Convierte archivos de formato .xbm de 48 x 48 a un formato comprimido que se puede colocar en el encabezado de correo de X-Face: Algunos lectores de correo, como exmh, mostrarán esta imagen cuando el usuario lea su correo.
+$ compface -c imagen.xbm > imagen.xcfaced (comprimirá el archivo imagen.xbm y lo guardará como imagen.xcfaced)
+$ compface -d imagen.xcfaced > imagen_descomprimida.xbm (descomprimir)
+
+
 compgen
 Comando para listar comandos disponibles.
 $ compgen -c (Lista todos los comandos)
@@ -7232,6 +7238,14 @@ compiz
 efectos escritorio.
 $ compiz --replace (activar los efectos)
 $ metacity --replace (Desactivar los efectos)
+
+
+complexity
+Herramienta para analizar la complejidad de funciones de los programas en C.
+$ complexity archivo.c (analiza todas las funciones de archivo-c)
+$ complexity archivo.c funcion_analizar (solo analiza la función especificada)
+$ complexity archivo1.c funcion1 archivo2.c funcion2 archivo3.c funcion3 (analizando funciones específicas de diferentes archivos)
+$ complexity -d archivo.c (informción más detallada sobre la complejidad de cada función)
 
 
 composite
