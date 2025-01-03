@@ -7394,6 +7394,25 @@ $ conky (Arrancar la aplicación. Se muestra en el escritorio)
 $ conky -d (arrancarla como daemon)
 
 
+conmux
+Se utiliza para administrar múltiples consolas y proporcionarles una interfaz coherente para acceso y control. Presenta cualquier consola con una ubicación, un nombre y una semántica coherentes. Incluye de las siguientes herramientas: conmux-attach, conmux-console y conmux-registry.
+# conmuxd (inicia el demonio y configura el entorno para que conmux pueda administrar las consolas)
+# conmux -a my_console /dev/ttyS0 (agregar la consola con nombre "my_console"  al sistema y el dispositivo serial al que corresponde)
+# conmux my_console (abre una sesión interactiva con la consola nombrada "my_console")
+$ echo "ls -l" | conmux -w my_console (ejecutará ls -l en la consola "my_console" y devolverá la salida)
+$ conmux -l (mostrará una lista de consolas registradas y su estado)
+# conmux -d my_console (desasocia "my_console" del sistema)
+$ conmux -s my_console (muestra detalles como el dispositivo asociado y el estado actual)
+$ conmux -r log.txt my_console (guarda todo lo que ocurre en "my_console" en log.txt)
+# conmux -a remote_console ssh user@remote-host (administrar consolas remotas)
+Se puedes crear un archivo de configuración para definir múltiples consolas. Por ejemplo;
+# nano conmux.conf
+       [my_console]
+       device=/dev/ttyS0
+       baud=9600
+# conmux -c conmux.conf (para arrancar)
+
+
 connman
 Utilidad para gestionar las conexiones a Internet y otros servicios de red. Implementa resolución y almacenamiento en caché de DNS, clientes DHCP para IPv4 e IPv6, manejo de direcciones IPv4 locales de enlace y conexión compartida a clientes a través de USB, Ethernet, WiFi, celular y Bluetooth.
 $ connmanctl state (verificar el estado actual de las conexiones activas y disponibles)
