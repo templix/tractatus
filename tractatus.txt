@@ -7,6 +7,17 @@ $ 2ping -c 5 -i 2  nombre_host.com (con 5 peticiones y a intervalos de 2 segundo
 Nota.- si no se especifica número de peticiones, finalizar con ^C
 
 
+2to3
+es un programa Python que lee el código fuente de Python 2.x y aplica una serie de correcciones para transformarlo en código Python 3.x válido.
+$ 2to3 ejemplo.py (convertir un archivo individual)
+$ 2to3 -w ejemplo.py (convertir y escribir cambios directamente en el archivo)
+$ 2to3 -f imports -f has_key ejemplo.py (convertir solo ciertos archivos específicos)
+$ 2to3 -l (ver lista completa de opciones disponibles)
+$ 2to3 -x apply ejemplo.py (deshabilitar un archivo específico)
+$ 2to3 -v ejemplo.py (ver más información durante el proceso de conversión)
+$ 2to3 -n -W --add-suffix=3 ejemplo.py (agregar sufijo a los archivos convertidos)
+
+
 4g8
 Capturar paquetes de equipos de una red. Previamente preparar el equipo con los pasos previos para el envenenamiento arp lanzando en dos terminales y sin cerrarlas hasta terminar la captura:
 # arpspoof -i eth0 -t 192.168.1.12 192.168.1.1
@@ -26838,7 +26849,7 @@ Una vez instalado el programa snap:
 # snap install vlc (instalar una aplicación)
 $ snap info vlc (información sobre una aplicación)
 $ snap find telegram (buscar si un paquete existe en snap)
-@ snap refresh vlc (actualizar una aplicación)
+$ snap refresh vlc (actualizar una aplicación)
 # snap remove vlc --purge (eliminar una aplicación)
 $ snap list (listar aplicaciones snap instaladas)
 $ snap changes (ver si existen detalles de actualizaciones)
@@ -31490,6 +31501,10 @@ Lista de algunos comandos útiles:
 wavemon
 Permite observar los niveles de señal y ruido, paquetes estadísticas, configuración del dispositivo y parámetros de red de su hardware de red inalámbrica.
 $ wavemon (abre el monitoreo)
+
+
+waveterm
+Wave es una terminal que combina las características tradicionales de una terminal con capacidades gráficas como vistas previas de archivos, navegación web y asistencia de IA. El desarrollo moderno implica cambiar constantemente entre terminales y navegadores: consultar documentación, obtener vistas previas de archivos, monitorear sistemas y usar herramientas de IA. Wave lleva estas herramientas gráficas directamente a la terminal, lo que permite controlarlas desde la línea de comandos.
 
 
 wc
