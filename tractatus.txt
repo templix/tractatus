@@ -7340,6 +7340,29 @@ Calculadora.
 $ concalc 5*3 (Sin especificar números se accede al promt interactivo)
 
 
+condure
+Servicio que administra las conexiones de red para los protocolos HTTP/1 y WebSockets, en nombre de las aplicaciones del servidor, con el fin de permitir el control de las conexiones desde múltiples procesos.
+Crear un archivo de configuración, que a modo de ejemplo podría ser:
+# nano /etc/condure/config.yml
+server:
+  port: 8080
+  host: 0.0.0.0
+upstream:
+  - name: app1
+    url: http://localhost:3000
+  - name: app2
+    url: http://localhost:4000
+routes:
+  - path: /app1
+    upstream: app1
+  - path: /app2
+    upstream: app2
+# systemctl start condure (iniciar el servicio)
+Con condure en funcionamiento, se puede acceder a las aplicaciones a través de las rutas configuradas. Por ejemplo:
+        Para acceder a la aplicación en http://localhost:8080/app1, condure redirigirá la solicitud a http://localhost:3000.
+        Para acceder a la aplicación en http://localhost:8080/app2, condure redirigirá la solicitud a http://localhost:4000.
+
+
 confget
 Examina un archivo de configuración de estilo INI y recupera el valor de las variables especificadas de la sección especificada.
 $ confget -f /etc/apache2/apache2.conf -s global server_root (recuperar el valor de la variable "server_root" de la sección "global" del archivo especificado))
