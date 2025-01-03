@@ -7306,6 +7306,35 @@ $ compton -cC -i 0.6 -e 0.6 -fF -I 0.065 -O 0.065 -D 6 (Especificar tiempo de op
 $ compton -cC -i 0.6 -e 0.6 -fF -I 0.065 -O 0.065 -D 6 -m 0.8 (Especificar la opacidad de los menús)
 
 
+comskip
+Herramienta que analiza archivos de video para identificar y marcar automáticamente los segmentos publicitarios, especialmente útil para quienes graban programas de televisión y desean omitir los anuncios ya que estos tienen características claras.
+$ comskip video.mpg (analiza el archivo de video y genera un .txt con detalles de los anuncios detectados, un .edl, archivo de corte para usar con reproductores y un .log de registro del análisis realizado)
+$ comskip --ini=/home/user/.config/comskip/comskip.ini video.mpg (con un archivo de configuración, permite usar opciones específicas)
+Nota.- Los archivos .edl permiten a reproductores como Kodi o VLC omitir automáticamente los anuncios.
+Ejemplo de comskit-ini que puede colocarse en:
+$ nano ~/.config/comskip/comskip.ini
+cc_correct_type_modifier=1
+length_nonstrict_modifier=1.5           ; Se requiere antes de lo siguiente debido a un error de análisis de comskip.ini
+combined_length_nonstrict_modifier=1
+cut_on_ar_change=2			; Establezca en 1 para cortar también en cambios de relación de aspecto cuando el logotipo está presente, 2 para forzar cortes en cambios de relación de aspecto. 0 para deshabilitar
+delete_logo_file=1			; Establezca en 1 si desea que comskip limpie después de terminar
+detect_method=127			; 1=black frame, 2=logo, 4=scene change, 8=fuzzy logic, 16=closed captions, 32=aspect ration, 64=silence, 128=cutscenes, 255=all
+logo_at_bottom=1			; Establezca en 1 para buscar solo el logotipo en la mitad inferior del video, no combine con la configuración de subtítulos
+logo_fraction=0.39
+lowers=1
+max_commercial_size=242			; Tiempo máximo en segundos para un solo comercial o varios comerciales si no hay cortes entre ellos.
+min_commercialbreak=15			; Duración mínima en segundos para considerar un segmento como una pausa publicitaria.
+min_show_segment_length=242             ; cualquier segmento más largo que esto será puntuado para la exhibición.
+output_edl=1
+output_ffmeta=1
+output_ffsplit=1
+output_vdr=1
+punish_no_logo=0			; Predeterminado, establecido en 0 para evitar que se puntúen los segmentos sin logotipo para fines comerciales.
+thread_count=3
+use_existing_logo_file=0
+verbose=10
+
+
 concalc
 Calculadora.
 $ concalc 5*3 (Sin especificar números se accede al promt interactivo)
