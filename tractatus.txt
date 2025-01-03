@@ -7340,6 +7340,14 @@ Calculadora.
 $ concalc 5*3 (Sin especificar números se accede al promt interactivo)
 
 
+confget
+Examina un archivo de configuración de estilo INI y recupera el valor de las variables especificadas de la sección especificada.
+$ confget -f /etc/apache2/apache2.conf -s global server_root (recuperar el valor de la variable "server_root" de la sección "global" del archivo especificado))
+$ confget -f /etc/php.ini -s php_admin -l (listar todos los nombres y valores de variables en una sección)
+$ confget -f /etc/mysql/my.cnf -s myqld -m 'max_*' (buscar variables que coincidan con un patrón)
+$ confget -f /etc/apache2/apache2.conf -l (mostrará todos los nombres y valores de variables en el archivo de configuración de Apache)
+
+
 configure-debian
 Programa que presenta una lista de paquetes que utilizan Debconf, el sistema de gestión de configuración de Debian. Debconf proporciona asistentes de instalación inicial que se ejecutan cuando se instala un paquete pero que puede hacerse más tarde.
 # configure-debian -l (muestra en una interfaz por consola todos los paquetes que utilizan Debconf para reconfigurar los que se indiquen)
