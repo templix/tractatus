@@ -7538,6 +7538,12 @@ Este paquete es un daemon que proporciona soporte para copiar, pegar y desplazar
 $ systemctl status consolation (comprobar si está activo)
 
 
+console-common
+Este paquete contiene la utilidad install-keymap, que es la herramienta recomendada para especificar un mapa de teclas en el momento del arranque del sistema, así como kbd-config  para uso interno de paquetes que proporcionan mapas de teclas.
+# kbd-config (abre la interfaz para configurar el teclado en versiones antiguas)
+# install-keymap (modo actual)
+
+
 console-data
 Este paquete proporciona los archivos de datos estándar para las herramientas de consola de Linux. Esto incluye definiciones de teclado [mapas de teclas], fuentes de consola para varias codificaciones, mapas que definen los conjuntos de caracteres estándar para su uso en aplicaciones de texto y tablas de respaldo que permiten aproximar el glifo de un carácter no disponible con el glifo de otro carácter en la fuente actual.
 # dpkg-reconfigure console-data (abrirá un asistente interactivo donde se podrá seleccionar tipo de teclado, disposición [layout] y otras configuraciones)
