@@ -7394,6 +7394,43 @@ $ conky (Arrancar la aplicación. Se muestra en el escritorio)
 $ conky -d (arrancarla como daemon)
 
 
+conman
+Programa para conectarse a consolas seriales remotas. Los nombres de las consolas se pueden separar con espacios y/o comas. Incluye conmen.
+El uso de globbing se usa de manera predeterminada para hacer coincidir los nombres de las consolas con la configuración, pero se puede habilitar la coincidencia de expresiones regulares con la opción '-r'.
+Un ejemplo de archivo de configuración:
+# nano /etc/conman.conf
+console my_console {
+    device /dev/ttyS0;
+    baud 9600;
+}
+Se especifica el nombre de la consola [my_console], el puerto serial que corresponde a la consola [/dev/tty0] y la velocidad de transición en baudios. Después de modificar el archivo de configuración:
+# systemctl restart conman (reiniciar el servicio)
+$ conman -q (ver las consolas configuradas y disponibles)
+$ conman my_console (conecta a la consola my_console. Para salir, Ctrl+])
+$ conman -s my_console (abrir varias consolas en sesiones separadas)
+$ conman -s another_console
+$ echo "ls -l" | conman my_console (ejecutará el comando en la consola especificada y devolverá la salida)
+$ conman -r my_console (el registro se guardará en la ubicación predeterminada de registros, normalmente /var/log/conman/)
+$ conman -k my_console (desconecta a otros usuarios que estén usando la consola my_console)
+$ conman -l (verificar el estado actual de las consolas administradas)
+
+
+conmon
+Herramienta que se utiliza principalmente como un monitor para contenedores en ejecución que cumplen con la especificación OCI (Open Container Initiative). Su función principal es manejar la entrada/salida de los contenedores y gestionar su estado, permitiendo que la API de contenedores  (como podman o docker) interactúe con ellos. Generalmente se usa de manera interna por otras herramientas, por lo que no se suele invocar directamente por los usuarios.
+Lanzar manualmente un contenedor:
+$ conmon --socket-dir /run/user/1000 --cid my-container-id --exit-dir /var/run/conmon/exit --log-path /var/log/my-container.log --log-level debug /usr/bin/my-container-runtime -- my-container-image
+En este comando:
+       --socket-dir: Especifica el directorio donde se almacenarán los sockets de comunicación.
+       --cid: Especifica el ID del contenedor.
+       --exit-dir: Directorio donde se almacenarán los datos de salida del contenedor.
+       --log-path: Ruta al archivo de log donde conmon escribirá los logs.
+       --log-level: Nivel de detalle de los logs.
+       /usr/bin/my-container-runtime: Es el runtime del contenedor que se está utilizando, puede ser runc, crun, etc.
+       my-container-image: Nombre de la imagen del contenedor que se desea ejecutar.
+Monitorear la salida de un contenedor redirigiendo la salida estándar y el error estándar a conmon, se podría hacer de la siguiente manera:
+$ conmon --socket-dir /run/user/1000 --cid my-container-id --exit-dir /var/run/conmon/exit --log-path /var/log/my-container.log --log-level debug --stdout /dev/stdout --stderr /dev/stderr /usr/bin/my-container-runtime --my-container-image
+
+
 conmux
 Se utiliza para administrar múltiples consolas y proporcionarles una interfaz coherente para acceso y control. Presenta cualquier consola con una ubicación, un nombre y una semántica coherentes. Incluye de las siguientes herramientas: conmux-attach, conmux-console y conmux-registry.
 # conmuxd (inicia el demonio y configura el entorno para que conmux pueda administrar las consolas)
@@ -7413,6 +7450,27 @@ Se puedes crear un archivo de configuración para definir múltiples consolas. P
 # conmux -c conmux.conf (para arrancar)
 
 
+connect-proxy
+Programa para realizar conexiones TCP a través de servidores proxy SOCKS o HTTPS
+$ connect-proxy -S firewall 1080 example.com 80 (conexión básica usando un servidor SOCKS5)
+$ connect-proxy -H proxyserver:8080 example.com 80 (conexión usando un servidor HTTP como proxy)
+$ connect-proxy -p 5550 -S firewall 1080 google.com 80 (enviar tráfico de red a través del proxy)
+Para usar el proxy con ssh de forma transparente:
+$ nano ~/.ssh/config
+Y colocar las lineas:
+          Host *
+           ProxyCommand connect-proxy -H proxyserver:8080 %h %p
+Para usar el proxy con wget:
+$ export HTTP_PROXY="http://proxyserver:port"
+$ wget http://example.com
+Configurar el proxy para todos los usuarios:
+# nano /etc/environment
+       HTTP_PROXY="http://proxyserver:port"
+       HTTPS_PROXY="https://proxyserver:port"
+       FTP_PROXY="ftp://proxyserver:port"
+       NO_PROXY="localhost,127.0.0.1"
+
+
 connman
 Utilidad para gestionar las conexiones a Internet y otros servicios de red. Implementa resolución y almacenamiento en caché de DNS, clientes DHCP para IPv4 e IPv6, manejo de direcciones IPv4 locales de enlace y conexión compartida a clientes a través de USB, Ethernet, WiFi, celular y Bluetooth.
 $ connmanctl state (verificar el estado actual de las conexiones activas y disponibles)
@@ -7427,8 +7485,16 @@ $ connmanctl connect vpn_0 (y luego se conecta a un servicio VPN especifico)
 
 
 conntrack
-Permite replicar el estado de las conexiones que están siendo actualmente procesadas por el firewall. Conntrackd también puede ejecutarse como daemon de estadísticas.
+Permite ver y administrar la tabla de estado de seguimiento de conexiones internas del núcleo.
 # conntrack -C (Para contar el número total de conexiones de red en este momento)
+# conntrack -L (mostrar todas las entradas en la tabla)
+# conntrack -F (eliminar todas las entradas de la tabla)
+# conntrack -s IP_ADDRESS (verificar si una conexión específica está siendo seguida por el kernel)
+# conntrack -d ID (mostrar información detallada sobre una conexión específica)
+# conntrack -E STABLISHED (ver las conexiones establecidas)
+# conntrack -P (mostrar el número de entradas por protocolo: TCP, UDP, ICMP)
+# conntrack -F --proto=TCP (limpiar solo las entradas relacionadas con un protocolo específico)
+# conntrack -S IP_ADDRESS (verificar si una dirección IP está siendo seguida)
 # conntrack -E -e NEW (monitorear las conexiones de red recién creadas como eventos en tiempo real)
 # conntrack -L -p tcp --state ESTABLISHED (mostrar conexiones TCP abiertas)
 # conntrack -L -p udp --dport 500 (mostrar conexiones UDP con el puerto de destino 500)
