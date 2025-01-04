@@ -7512,9 +7512,44 @@ $ conntrackd -k (matar el demonio)
 $ conntrackd -s network (muestra las conexiones de red)
 
 
+conserver-client
+[concerver-server]. Utilidad que permite que varios usuarios puedan acceder, supervisar o interactuar con consolas seriales al mismo tiempo y en tiempo real. Asegúrar que conserver-server esté configurado en la máquina que administra las consolas:
+# nano /etc/conserver/conserver.cf
+     console my_serial_console {
+        logfile /var/log/conserver/my_serial_console.log;
+        device /dev/ttyS0;
+     baud 9600;
+     }
+Después de configurar, reiniciar el servicio del servidor:
+# systemctl restart conserver
+$ console -l (muestra los nombres de las consolas y su estado actual)
+$ console my_serial_console (abre una sesión interactiva con la consola my_serial_console. Se puede observar lo que ocurre en la consola o interactuar con ella. Para salir Ctrl+])
+$ console -r my_serial_console (observar la actividad de la consola sin interactuar con ella)
+$ echo "reboot" | console my_serial_console (enviar un comando a una consola sin abrir una sesión interactiva)
+$ console -M remote-server my_serial_console (conecta a la consola my_serial_console en el servidor remoto remote-server)
+$ console -l | grep "serial" (muestra solo las consolas que contienen el texto "serial" en su nombre)
+$ tail -f /var/log/conserver/my_serial_console.log (muestra en tiempo real lo que ocurre en la consola)
+$ console -k my_serial_console (desconectará a cualquier usuario que esté utilizando la consola my_serial_console)
+$ console -p my_serial_console (prueba la conexión a la consola y devuelve un estado)
+
+
 consolation
 Este paquete es un daemon que proporciona soporte para copiar, pegar y desplazarse en la consola de Linux. Se basa en la biblioteca libinput y admite todos los dispositivos de puntero y configuraciones proporcionadas por esta biblioteca. Una vez instalado, con dos clics del ratón selecciona la palabra sobre la que está el puntero y con 3, toda la linea.
 $ systemctl status consolation (comprobar si está activo)
+
+
+console-data
+Este paquete proporciona los archivos de datos estándar para las herramientas de consola de Linux. Esto incluye definiciones de teclado [mapas de teclas], fuentes de consola para varias codificaciones, mapas que definen los conjuntos de caracteres estándar para su uso en aplicaciones de texto y tablas de respaldo que permiten aproximar el glifo de un carácter no disponible con el glifo de otro carácter en la fuente actual.
+# dpkg-reconfigure console-data (abrirá un asistente interactivo donde se podrá seleccionar tipo de teclado, disposición [layout] y otras configuraciones)
+# loadkeys /usr/share/keymaps/i386/qwerty/es.map.gz (cargar un mapa de teclado directamente utilizando loadkeys, herramienta que utiliza los datos proporcionados por console-data)
+$ ls /usr/share/keymaps (explorar los mapas de teclado que están disponibles en el sistema)
+# setfont /usr/share/consolefonts/Lat2-Terminus16.psf.gz (cambiar la fuente de la consola utilizando setfons que también se apoya en datos proporcionados por console-data)
+$ ls /usr/share/consolefonts (explorar más fuentes)
+Para establecer el mapa de teclado al inicio:
+# nano /etc/default/keyboard
+       XKBLAYOUT="es"
+       XKBVARIANT=""
+# setupcon (aplica cambios si se han modificado sobre la marcha)
 
 
 consolochars
