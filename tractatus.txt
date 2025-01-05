@@ -7570,6 +7570,24 @@ Acceso a las tty1-6 en local o remoto.
 Para salir pulsar tres veces seguidas la tecla “Esc”
 
 
+containers-storage
+Utilidad CLI que interactúa con la biblioteca de almacenamiento de contenedores de Go. Se utiliza principalmente para administrar capas de sistemas de archivos, imágenes de contenedores y contenedores en un entorno manual o mediante scripts. El archivo de configuración que suele estar en /etc/containers/storage.conf.
+$ containers-storage --graphdir=/var/lib/containers init (inicializar un área de almacenamiento para los datos de los contenedores donde se almacenará la información)
+$ containers-storage layers (devuelve información sobre todas las capas de sistemas de archivos disponibles en el almacenamiento)
+$ containers-storage images (muestra las imágenes que están almacenadas, junto con detalles como ID de imagen, etiquetas y tamaño)
+$ containers-storage import --type=image --name=nginx /tmp/nginx-image.tar (agregar una nueva imagen desde un archivo tar)
+$ containers-storage layer create --parent=alpine-base --name=app-layer (crear una nueva capa de sistema de archivos basada en una capa base)
+$ containers-storage image remove nginx (eliminar una imagen)
+$ containers-storage layer remove layer-name (eliminar una capa)
+$ containers-storage layer mount app-layer /mnt/container-layer (montar una capa en un directorio para inspección o modificación)
+$ containers-storage export --type=image --name=nginx /tmp/nginx-export.tar (exportar una imagen)
+$ containers-storage export --type=layer --name=layer-name /path/to/export.tar (exportar una capa)
+$ containers-storage image inspect nginx (inspeccionar los metadatos de una capa)
+$ containers-storage image inspect image-name (inspeccionar los metadatos de una imagen)
+$ containers-storage layer inspect layer-name (inspeccionar una capa)
+$ containers-storage cleanup (eliminar capas, imágenes y datos para liberar espacio y mantener limpio el almacenamiento)
+
+
 continue
 Salta a la siguiente interacion en un bucle for, select, while o until. En el siguiente ejemplo se imprime del 1 al 5 pero saltándose el 3:
 	#!/bin/bash
@@ -7637,6 +7655,14 @@ En caso de querer continuar con su ejecución en segundo plano:
 	$ bg %1
 
 
+conv-tools
+Convertir la codificación de caracteres de 8 bits en nombres de archivos y contenido de texto a UTF-8
+$ conv-tools --to=utf-8 archivo.txt (convertirá el archivo especificado de codificación de 8 bits a UTF-8)
+$ file -i archivo.txt (verificar la codificación de un archivo antes de convertirlo)
+$ conv-tools --to=utf-8 archivo1.txt archivo2.txt archivo3.txt (convertir múltiples archivos al mismo tiempo)
+$ conv-tools --to=utf-8 --no-header archivo.txt > nuevo_archivo.txt (convertir solo el contenido de un archivo sin modificar el encabezado
+
+
 convert
 [imagemagick]. Redimensionar, cambiar formatos, extraer fotogramas, convertir blanco y negro imagenes. Este comando es tan extenso que él solo merecería un libro. Consulta más exhaustiva en <http://www.imagemagick.org/script/convert.php> o en español <http://www.rpublica.net/imagemagick/intro.html#inicio_sec>
 $ convert *.jpg imagenes.pdf        (Crear un pdf con todas las imágenes)
@@ -7679,6 +7705,15 @@ Tambien puede cambiarse el nombre de la fuente por su archivo:
 1.-
 Convertir todas las imágenes del directorio de formato .jpg a .png:
 $ for i in *.jpg;do convert "$i" "${i%.jpg}.png";done
+
+
+cookietool
+Herramienta útil para manejar cookies en bases de datos de navegación. Elimina las entradas duplicadas, ordena las cookies alfabéticamente o por tamaño.
+$ cookietool --remove-duplicates /ruta/base_de_datos.cookie (eliminará todas las entradas duplicadas en la base de datos de cookies especificada)
+$ cookietool --sort-alphabetical /ruta/base_de_datos.cookie (ordenará las cookies en orden alfabético dentro de la base de datos)
+$ cookietool --sort-by-size /ruta/base_de_datos.cookie (ordenará las cookies basándose en su tamaño, desde los más pequeños hasta los más grandes)
+$ cookietool --split /ruta/base_de_datos.cookie --output=/ruta/a/nuevo_archivo.cookie (extraerá una parte de la base de datos y la escribirá en un nuevo archivo especificado)
+Nota.- La base de datos en Firefox está en ~/.mozilla/firefox/57vii5dd.default-release/cookies.sqlite (el nombre de perfil 57vii5... varia en todas las máquinas) en chromium en ~/.config/chromium/Default/Cookies
 
 
 cool-retro-term
