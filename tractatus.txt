@@ -7663,6 +7663,15 @@ $ conv-tools --to=utf-8 archivo1.txt archivo2.txt archivo3.txt (convertir múlti
 $ conv-tools --to=utf-8 --no-header archivo.txt > nuevo_archivo.txt (convertir solo el contenido de un archivo sin modificar el encabezado
 
 
+converseen
+Podrás convertir un número ilimitado de imágenes y/o crear miniaturas en cualquiera de los formatos más populares: DPX, EXR, GIF, JPEG, JPEG-2000, PDF, PhotoCD, PNG, Postscript, SVG y TIFF. Gracias a las bibliotecas de imágenes Magick++, es compatible con más de 100 formatos de imagen.
+$ converseen imagen.jpg png:0 (convertir una imagen JPG a PNG)
+$ converseen ~/Images/*.jpg png:0 --create-thumbnail=300x200 (crea miniaturas de 300x200 píxeles para todas las imágenes JPG en el directorio especificado)
+$ converseen ~/Images/*.{jpg,png,gif} png:0 (convierte todos los archivos JPG, PNG e GIF en el directorio a formato PNG)
+$ converseen ~/Images/*.{jpg,png,gif} png:0 --create-thumbnail=100x75 (convierte los archivos a PNG y también crea miniaturas de 100x75 píxeles)
+$ converseen /ruta/a/imagen.jpg png:0 --quality=90 --optimize (convierte el archivo a PNG con calidad del 90% y optimiza el archivo resultante
+
+
 convert
 [imagemagick]. Redimensionar, cambiar formatos, extraer fotogramas, convertir blanco y negro imagenes. Este comando es tan extenso que él solo merecería un libro. Consulta más exhaustiva en <http://www.imagemagick.org/script/convert.php> o en español <http://www.rpublica.net/imagemagick/intro.html#inicio_sec>
 $ convert *.jpg imagenes.pdf        (Crear un pdf con todas las imágenes)
@@ -7721,6 +7730,15 @@ puede convertir un nombre de archivo, un árbol de directorios o todos los archi
 $ convmv -f ut-8 -t iso-8859-1 archivo.txt (convierte el nombre del archivo `archivo.txt` de codificación UTF-8 a ISO-8859-1)
 $ convmv -R -f ut-8 -t iso-8859-1 /directorio (convierte los nombres de todos los archivos y subcarpetas del directorio de codificación UTF-8 a ISO-8859-1)
 $ convmv -f ut-8 -t iso-8859-1 / (ambiar la codificación de todo el sistema de archivos de codificación UTF-8 a ISO-8859-1)
+
+
+cookiecutter
+Herramienta muy útil para crear proyectos a partir de plantillas. La creación de plantillas se realiza con J2cli y no hay ninguna limitación en cuanto al lenguaje utilizado por los proyectos con plantillas (Python, Ruby, Javascript, C, HTML, Postscript...).
+$ cookiecutter gh:cookiecutter/cookiecutter-pypackage (crear un proyecto Python a partir de una plantilla que se encuentra en GitHub. Pedirá algunos parámetros como nombre del proyecto, versión, autor, etc)
+$ cookiecutter gh:cookiecutter/cookiecutter-django (rear un proyecto Django con la plantilla cookiecutter-django)
+$ cookiecutter gh:cookiecutter/cookiecutter-flask (crear un proyecto Flask, con otra plantilla específica para Flask)
+$ cookiecutter gh:cookiecutter/cookiecutter-django --checkout <branch_name> (algunas plantillas permiten especificar opciones adicionales. Aquí, --checkout permite especificar una rama particular de la plantilla)
+$ cookiecutter /ruta/a/tu/plantilla (generará un nuevo proyecto basado en la plantilla especificada en la ruta)
 
 
 cookietool
