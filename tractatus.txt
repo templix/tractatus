@@ -7707,6 +7707,22 @@ Convertir todas las imágenes del directorio de formato .jpg a .png:
 $ for i in *.jpg;do convert "$i" "${i%.jpg}.png";done
 
 
+convertall
+Puede convertir cualquier unidad a cualquier otra unidad compatible.
+$ convertall -i (entra en la interfaz de la aplicación)
+             Enter from unit -> km
+             Enter to unit -> milla
+             1.0 km = 0.62137119 milla
+             Enter number, [n]ew, [r]everse or [q]uit -> q
+
+
+convmv
+puede convertir un nombre de archivo, un árbol de directorios o todos los archivos de un sistema de archivos a una codificación diferente. Solo convierte la codificación de los nombres de archivo, no el contenido de los archivos. Una característica especial de convmv es que también se ocupa de los enlaces simbólicos: la codificación del destino del enlace simbólico se convertirá si se convierte el enlace simbólico en sí.
+$ convmv -f ut-8 -t iso-8859-1 archivo.txt (convierte el nombre del archivo `archivo.txt` de codificación UTF-8 a ISO-8859-1)
+$ convmv -R -f ut-8 -t iso-8859-1 /directorio (convierte los nombres de todos los archivos y subcarpetas del directorio de codificación UTF-8 a ISO-8859-1)
+$ convmv -f ut-8 -t iso-8859-1 / (ambiar la codificación de todo el sistema de archivos de codificación UTF-8 a ISO-8859-1)
+
+
 cookietool
 Herramienta útil para manejar cookies en bases de datos de navegación. Elimina las entradas duplicadas, ordena las cookies alfabéticamente o por tamaño.
 $ cookietool --remove-duplicates /ruta/base_de_datos.cookie (eliminará todas las entradas duplicadas en la base de datos de cookies especificada)
