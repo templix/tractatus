@@ -7871,6 +7871,16 @@ Actualizar la información de copyright en un conjunto de archivos.
 # copyright-update -v -r -t * (con más información y de forma recursiva)
 
 
+coreboot-utils
+Proyecto de software libre cuyo objetivo es reemplazar el BIOS [firmware] propietario que se encuentra en la mayoría de las computadoras. Cuidado al modificar el firmware, ya que puede afectar la funcionalidad del sistema.
+# cbmem -l (muestra información detallada del sistema, incluyendo la memoria y los dispositivos)
+# cbfstool /dev/sda1 add-lpc-devices /usr/share/coreboot/3rdparty/lpc-devices.bin (agrega los dispositivos LPC al firmware)
+# cbmem -l | grep "LPC" (muestra la configuración del chipset LPC)
+# cbfstool /dev/sda1 create-image /usr/share/coreboot/3rdparty/romstage.bin (crea una imagen de ROMStage en el dispositivo especificado)
+# cbfstool /dev/sda1 dump -b 0x10000 0x200000 (muestra los datos del firmware en el rango especificado)
+# flash-kernel --kernel=/path/to/kernel --ramdisk=/path/to/initrd (actualiza el kernel y el initrd en el firmware)
+
+
 corelist
 Proporciona información sobre los módulos core y dual-life incluidos en cada versión de perl.
 $ corelist -v (enumera todas las versiones de perl)
