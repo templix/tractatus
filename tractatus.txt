@@ -7824,6 +7824,20 @@ $ cool-retro-term (forma básica)
 $ cool-retro-term --fullscreen -e htop (a pantalla completa y comando a ejecutar)
 
 
+coolkey
+Se utiliza como un middleware para habilitar el soporte de tarjetas inteligentes [smartcards] en aplicaciones basadas en NSS [Network Security Services], como Firefox, Thunderbird, etc. Aunque no es un programa que se ejecute directamente como un comando en la terminal para realizar operaciones específicas, su configuración permite la integración de tarjetas inteligentes con las aplicaciones que lo soportan.
+1.-
+Configurar Coolkey con Firefox.
+Acceder a las preferencias de seguridad [about:preferences] y en la sección Privacidad & Seguridad, Seguridad de dispositivos, cargar, proporcionar nombre para el módulo, como "CoolKey", indicar la ruta al módulo PKCS#11 proporcionado por Coolkey. En Debian, esto suele ser en /usr/lib/x86_64-linux-gnu/pkcs11/libcoolkeypk11.so y guardar. Al insertar la tarjeta inteligente Firefox debería detectar automáticamente la tarjeta bajo la sección Dispositivos de seguridad.
+2.-
+Configurar Coolkey con Thunderbird
+El procedimiento es similar al de Firefox, acceder a Configuración de cuentas, Configuración de seguridad y cargar el módulo PKCS#11 usando la misma ruta que en Firefox.
+3.-
+Para confirmar que la tarjeta inteligente es compatible, se puede usar opensc
+# pkcs11-tool --module /usr/lib/x86_64-linux-gnu/pkcs11/libcoolkeypk11.so --list-slots (listará las ranuras disponibles y debería mostrar detalles de la tarjeta inteligente si está correctamente configurada)
+Una vez configurado, cualquier aplicación basada en NSS puede usar el soporte de tarjetas inteligentes para autenticación, firma digital y para iniciar sesión en sitios web que requieran autenticación con certificado.
+
+
 coproc
 Inicia un comando en segundo plano configurando tuberías conectadas a su stdin y stdout para que pueda interactuar con él bidireccionalmente.
 $ coproc ls
