@@ -24225,6 +24225,19 @@ Muestra una lista ordenada de procesos del sistema. Los procesos se ordenan con 
 $ ptop
 
 
+ptrepack
+[pytables]. Biblioteca de Python para el manejo eficiente de grandes conjuntos de datos. Este comando permite reorganizar o comprimir los datos almacenados en archivos HDF5.
+$ ptrepack input_file.h5 output_file.h5 (reorganiza un archivo HDF5 para mejorar su rendimiento o reducir el tamaño del archivo)
+$ ptrepack --complevel=5 --complib=zlib input_file.h5 output_file.h5 (Aplica un nivel de compresión específico al copiar datos)
+$ ptrepack --chunkshape=100 input_file.h5 output_file.h5 (reorganizar los datos para mejorar el acceso especificando un tamaño de bloque)
+$ ptrepack input_file.h5:/ruta/archivo/data output_file.h5:/new/path (copiar solo una hoja o subárbol específico, puedes especificar la ruta en el archivo)
+$ ptrepack --no-attrs input_file.h5 output_file.h5 (ignora metadatos para evitar copiar atributos específicos)
+$ ptrepack --show-progress input_file.h5 output_file.h5 (comprobar qué estructura será empaquetada)
+$ ptrepack --complib=lzo --complevel=3 input_file.h5 output_file.h5 (usar un filtro como LZO en lugar de zlib)
+$ ptrepack --complevel=0 input_file.h5 output_file.h5 (hacer una copia rápida sin compresión)
+$ ptrepack --h5out-version=2 input_file.h5 output_file.h5 (convierte un archivo PyTables más antiguo al formato HDF5 más reciente)
+
+
 ptx
 genera un índice permutado de los contenidos de un fichero, con cada palabra clave en su contexto.
 $ ptx archivo.txt
