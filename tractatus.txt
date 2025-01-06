@@ -3877,6 +3877,31 @@ $ brew install paquete (Instalar un paquete)
 $ brew remove (Eliminar un paquete)
 
 
+bridge
+[iproute2]. Mostrar y manipular direcciones y dispositivos puente comunmente utilizados en redes virtuales y contenedores.
+$ bridge link (listar todos los bridges configurados en el sistema)
+$ bridge show (mostrar detalles de todos los dispositivos de red conectados)
+$ bridge link show dev br0 (información específica de un bridge llamado br0)
+# ip link add name br0 type bridge (crear un nuevo dispositivo bridge)
+# ip addr add 192.168.1.1/24 dev br0 (configurar una dirección IP para el bridge)
+# ip link set br0 up (activar el dispositivo bridge)
+# ip link set eth0 master br0 (añadir una interfaz física al bridge)
+# ip link set eth0 nomaster (eliminar una interfaz del bridge)
+$ bridge fdb show dev br0 (listar direcciones MAC de las interfaces conectadas al bridge)
+# bridge fdb add 00:11:22:33:44:55 dev br0 master (añadir una entrada estática en la tabla de direcciones)
+# bridge fdb del 00:11:22:33:44:55 dev br0 (eliminar una entrada fija)
+# ip link set br0 type bridge stp_state 1 (habilitar STP [Spanning Tree Protocol] en un dispositivo bridge)
+# ip link set br0 type bridge stp_state 0 (deshabilitar STP)
+$ bridge vlan show (mostrar las VLANs configuradas en un bridge)
+# bridge vlan add vid 100 dev eth0 (añadir una VLAN específica a un puerto del bridge)
+# bridge vlan del vid 100 dev eth0 (eliminar una VLAN de un puerto)
+Otras formas de manipular bridges:
+# ip link set br0 down (desactuvar un bridge)
+# ip link del br0 (eliminar un bridge)
+# ip link set br0 type bridge ageing_time 300 (cambiar el tiempo de un bridge)
+# ip link set br0 type bridge forward_delay 15 (configurar el retraso de reenvío)
+
+
 bridge-utils
 Herramientas para configurar puentes Ethernet, útiles en redes virtuales y configuraciones de contenedores o máquinas virtuales. La conexión es completamente transparente: los hosts conectados a un dispositivo Ethernet ven a los hosts conectados a los otros dispositivos Ethernet directamente.
 # brctl addbr br0 (crea un nuevo puente llamado br0)
@@ -5207,6 +5232,15 @@ El contenido del archivo debian/rules no necesita cambiar para que estos archivo
 # dpkg-buildpackage -us -uc
 y verificar su funcionalidad.
 
+
+cdbsplit
+extrae partes de la base de datos de cookies a un archivo separado, por palabra clave, por tamaño, por número o grupos de cookies similares.
+$ cdbsplit -k "cookie_name" cookie_database.db (extraer cookies por palabra clave creando archivos separados por cada valor de "cookie_name")
+$ cdbsplit -s 1024 cookie_database.db (dividirá los cookies en archivos de hasta 1024 bytes)
+$ cdbsplit -n 50 cookie_database.db (creará 50 archivos con igual número de cookies cada uno)
+$ cdbsplit -g "domain" cookie_database.db (dividirá los cookies en grupos basados en su dominio)
+$ cdbsplit -t "$(date +%Y-%m-%d)" cookie_database.db (creará archivos separados por fecha, usando la fecha actual como referencia)
+$ cdbsplit -r 100-500 cookie_database.db (dividirá los cookies en archivos donde cada uno tenga entre 100 y 500 bytes)
 
 
 cdcd
@@ -6747,6 +6781,40 @@ $ clustat (muestra información como estado de los nodos [activos o inactivos], 
 $ clufter conf2pcs old_ha.cf > new_pcs.conf (convertir una configuración en formato antiguo de Heartbeat a Pacemaker)
 $ cibadmin --query > cluster-config.xml (exportar la configuración actual)
 $ cibadmin --replace --xml-file cluster-config.xml (edita el archivo exportado y aplica los cambios)
+
+
+clustershell
+Herramienta para gestionar y ejecutar comandos en nodos de clúster locales o distantes en paralelo. Incluye tanto la biblioteca de Python como el comando CLI clush.
+$ clush -w nodo1,nodo2,nodo3 uptime (ejecutará uptime en los nodos nodo1, nodo2 y nodo3, mostrando el tiempo de actividad del sistema en cada nodo)
+$ clush -w nodo[1-5] hostname (ejecuta hostname en los nodos nodo1, nodo2, nodo3, nodo4 y nodo5)
+$ clush -g mi_grupo uptime (donde mi_grupo es un archivo en el directorio predeterminado ~/.clustershell/groups que contiene: nodo1, nodo1, nodo3)
+$ clush -w nodo[1-3] --copy archivo_local --dest /ruta/remota/ (copiará archivo_local a /ruta/remota/ en los nodos nodo1, nodo2 y nodo3)
+$ clush -w nodo[1-10] -b 5 df -h (ejecuta df -h en 10 nodos con un máximo de 5 conexiones paralelas)
+$ clush --list (consultar los grupos de nodos definidos en el sistema)
+
+
+clusterssh
+[cssh]. Permite administrar múltiples sesiones SSH, RSH o Telnet de manera simultánea desde una única ventana de entrada de la que se puede enviar comandos a todas las sesiones activas, lo que resulta ideal para gestionar clústeres de servidores.
+$ cssh server1.example.com server2.example.com server3.example.com (abrirá una ventana principal para enviar comandos simultáneamente y una ventana separada para cada servidor)
+$ cssh --hostfile servidores.txt (leer servidores desde un archivo con un archivo a uno por linea)
+$ cssh user@server1.example.com user@server2.example.com (especificar el usuario para las conexiones SSH)
+$ cssh user@server1.example.com:2222 user@server2.example.com:2200 (si un servidor SSH está configurado para un puerto no estándar, se puede especificar)
+$ cssh --telnet server1.example.com server2.example.com (cambiar el programa de conexión a telnet)
+$ cssh --tile-layout (modificar cómo se distribuyen las ventanas)
+$ cssh --layout 2x2 server1.example.com server2.example.com server3.example.com server4.example.com (definir un diseño específico, por ejemplo, 2x2)
+$ cssh --command "uptime" server1.example.com server2.example.com (ejecutar un comando inmediatamente después de abrir las sesiones)
+$ cssh --no-master server1.example.com server2.example.com (controlar las sesiones manualmente sin la ventana maestra)
+Se puede definir clústeres en el archivo de configuración, por ejemplo:
+$ nano ~/.clusterssh/clusters
+       [web_servers]
+        server1.example.com
+        server2.example.com
+        server3.example.com
+       [db_servers]
+        db1.example.com
+        db2.example.com
+Y para conectarte a un grupo específico:
+$ cssh web_servers
 
 
 clzip
@@ -16240,6 +16308,15 @@ $ ifconfig wlan0 xx.xx.xx.xx netmask yy.yy.yy.yy
 iwlist
 # iwlist eth0 scan  (scaneo de los puntos de acceso cercanos)
 # iwlist s    (Lo mismo para todas las interficies)
+
+
+j2cli
+Comando para crear plantillas en scripts de shell
+$ j2cli -f template.j2 -o output.sh (generar un script de inicio)
+$ j2cli -f template.j2 -o output.sh --var "variable_name=value" (generar un script de inicio con variables)
+$ j2cli -f /path/to/template.j2 -o /path/to/output.sh --var "variable1=value1" --var "variable2=value2" (y con multiples variables)
+$ j2cli -f /path/to/template.j2 -o /path/to/output_*.sh --count 3 (generará tres archivos con nombres como output_0.sh, output_1.sh y output_2.sh)
+Nota.- Se necesita tener un archivo .j2 [Jinja2] con la estructura del script de shell para que j2cli pueda procesarlo y generar el resultado final.
 
 
 jackd
