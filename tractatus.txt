@@ -7893,6 +7893,25 @@ coreutils
 Contiene las utilidades básicas de manipulación de archivos, shell y texto que se espera que existan en todos los sistemas operativos. Incluye más de 100 aplicaciones [chroot, cat, chgrp, chmod...]
 
 
+corkscrew
+Herramienta para tunelar conexiones TCP a través de un proxy HTTP compatible con el método CONNECT. Lee la entrada estándar y escribe en la salida estándar durante la conexión, al igual que netcat. Se puede utilizar, por ejemplo, para conectarse a un servidor SSH que se ejecuta en un puerto 443 remoto a través de un proxy HTTPS estricto.
+$ corkscrew proxy.example.com 8080 host.example.com 80 (intentará establecer una conexión a host.example.com sobre puerto 80, pero primero pasará por el proxy proxy.example.com en puerto 8080)
+$ ssh -o PrxyCommand="corkscrew proxy.example.com 8080 %h %p" user@remote_host (conectando a un servidor SSH usando corkscrew)
+$ openssl s_client -connect example.com:443 | corkscrew proxy.example.com 8080 - (usando corkscrew con SSL/TLS)
+1.-
+Configurando corkscrew:
+# nano /etc/corkscrew.conf
+Y colocar las lineas:
+          [Proxy]
+           Host = proxy.example.com
+           Port = 8080
+          [Target]
+           Host = target.example.com
+           Port = 443
+Luego puede usarae así:
+$ corkscrew /etc/corkscrew.conf
+
+
 cowpatty
 Aplicación de ataque de diccionario contra contraseñas WPA2.
 $ cowpatty -f diccionario -r ataque.cap -s SSID (lista de palabras a usar, guardar en el archivo expecificado y el SSID encontrado)
