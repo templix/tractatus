@@ -7952,7 +7952,7 @@ $ cpaldjvu -colors 5 -dpi 50 -verbose entrada.jpg salida (especificando colores 
 
 
 cpio
-Herramienta para copiar, crear, extrar archivos.
+[CoPy In, copy Out]. Utilidad que se utiliza para procesar archivos comprimidos.
 $ ls *.txt | cpio -ocv -O archivo.cpio (Creará [-o] "archivo.cpio" [-O] con todos los .txt del directorio, mostrando toda la salida [-v] y que escriba la información del encabezado en ASCII para facilitar el traspaso entre plataformas)
 cpio -icv < archivo.cpio (Extraer el contenido)
 $ cpio -it < file.cpio > indice (Crear un indice con el contenido de un archivo cpio)
@@ -7971,8 +7971,25 @@ Opciones:
 
 
 cpipe
-Copia la entrada estándar a la salida estándar mientras mide el tiempo que tarda en leer un búfer de entrada y escribir un búfer de salida. Las estadísticas del promedio de rendimiento y la cantidad total de bytes copiados se imprimen en la salida de error estándar.
-# find /usr -iname network | cpipe -vr -vw -vt > /dev/null (mostrar tiempos de lectura, escritura y rendimiento y los demás datos a /dev/null)
+Herramienta útil para medir el rendimiento de las operaciones de entrada/salida (I/O) en una tubería. Toma la entrada estándar, la copia a la salida estándar y proporciona estadísticas como el tiempo de lectura/escritura y el rendimiento en términos de velocidad en bytes por segundo.
+$ cat archivo_grande | cpipe -vt > /dev/null (medir la velocidad de copia de un archivo grande, -v: muestra estadísticas [velocidad, tiempo, etc.] en la salida estándar de error y -t: muestra estadísticas acumuladas al final)
+$ cat archivo_grande | cpipe -vt | gzip > archivo_grande.gz (muestra el rendimiento durante la compresión del archivo)
+$ curl -s http://example.com/archivo_grande | cpipe -vt > archivo_grande (muestra cuánto tiempo toma recibir los datos)
+$ dd if=/dev/sdX bs=1M | cpipe -vt > /dev/null (muestra la velocidad de lectura desde el dispositivo /dev/sdX)
+$ cat archivo_grande | cpipe -b 64k -vt > /dev/null (usa un búfer de 64 KB en lugar del tamaño predeterminado de 4 KB)
+$ cp archivo_grande /ruta/destino | cpipe -vt (copiar un archivo de un directorio a otro y medir el rendimiento)
+$ cat /dev/zero | cpipe -vt > archivo_prueba (crea un archivo de prueba con datos generados, mientras mide la velocidad de escritura)
+$ cat archivo_grande | cpipe -u 1 -vt > /dev/null (actualiza las estadísticas cada segundo)
+Nota.- cpipe genera estadísticas en la salida estándar de error. Por ejemplo:
+       bufcount: 1024, readtime: 0.123s, writetime: 0.145s, bytes: 1048576, bytes/sec: 7340032
+Con los siguientes significados:
+        bufcount: Número de búferes procesados.
+        readtime: Tiempo total de lectura.
+        writetime: Tiempo total de escritura.
+        bytes: Cantidad total de bytes procesados.
+        bytes/sec: Velocidad promedio de transferencia.
+Otro ejemplo:
+$ find /usr -iname network | cpipe -vr -vw -vt > /dev/null (mostrar tiempos de lectura, escritura y rendimiento y los demás datos a /dev/null)
 	in: 887.446ms at     720B/s (    720B/s avg)     639B   (bsize=639)
 	out:   0.002ms at  304.7MB/s ( 304.7MB/s avg)     639B
 	thru: 887.496ms at     720B/s (    720B/s avg)     639B
