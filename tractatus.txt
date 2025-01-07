@@ -7952,10 +7952,16 @@ $ cpaldjvu -colors 5 -dpi 50 -verbose entrada.jpg salida (especificando colores 
 
 
 cpio
-Copiar archivos a un contenedor de manera más eficiente que tar. Los respaldos se pueden restaurar en cualquier sistema UNIX.
+Herramienta para copiar, crear, extrar archivos.
 $ ls *.txt | cpio -ocv -O archivo.cpio (Creará [-o] "archivo.cpio" [-O] con todos los .txt del directorio, mostrando toda la salida [-v] y que escriba la información del encabezado en ASCII para facilitar el traspaso entre plataformas)
 cpio -icv < archivo.cpio (Extraer el contenido)
 $ cpio -it < file.cpio > indice (Crear un indice con el contenido de un archivo cpio)
+$ find ~/Documents/emacs -type f > listado.txt (crear un archivo cpio desde una lista de archivos)
+$ cpio -ov < listado.txt > salida.cpio
+$ cpio -idv < salida.cpio (extraer archivos de un archivo cpio)
+$ find ~/Documents/emacs -type f | cpio -pdm ~/emacs (copiar archivos de un directorio a otro)
+$ find . -type f | cpio --create --format=cpio > archivo.cpio.gz (comprimir archivos)
+$ gunzip -c arhivo.cpio.gz | cpio --extract --make-directories (descomprimir)
 Opciones:
 	-u (Sobreescribiendo si al extraer ya existe el fichero ya que sin este parámetro no lo hace)
 	-i (extraer archivos de un fichero)
