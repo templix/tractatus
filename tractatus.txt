@@ -8001,7 +8001,22 @@ $ cplay-ng
 
 
 cpu
-reemplazo para las utilidades useradd/usermod/userdel para administradores que utilizan un servidor LDAP y que desean tener un conjunto de herramientas de línea de comando para hacer la administración.
+Herramienta de administración de usuarios LDAP [Lightweight Directory Access Protocol - protocolo ligero de acceso a directorios]. Archivo de configuración en /etc/cpu/cpu.conf
+# cpu -m ldap (la otra opción es "passwd")
+
+
+cpu-checker
+Herramientas para ayudar a evaluar ciertas características de la CPU o BIOS. Hay algunas características de la CPU que están filtradas o deshabilitadas por la BIOS del sistema. Este conjunto de herramientas busca ayudar a identificar cuándo ciertas características se encuentran en este estado, en función de los valores del kernel, los indicadores de la CPU y otras condiciones.
+# check-bios-nx --verbose (determinar si el BIOS ha bloqueado las capacidades NX de la CPU)
+         ok: the NX bit is operational on this CPU.
+# kvm-ok (si el sistema es capaz de ejecutar máquinas virtuales KVM aceleradas por hardware es decir, posee tecnología de virtualización)
+         INFO: Your CPU does not support KVM extensions
+         KVM acceleration can NOT be used
+
+
+cpufetch
+Muestra información de la CPU con el logotipo del fabricante de la CPU.
+$ cpufetch
 
 
 cpufreq-info
