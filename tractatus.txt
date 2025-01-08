@@ -7958,6 +7958,17 @@ $ cpan-listchanges nombre_del_paquete 1.0.0 1.1.0 (comparará la versión 1.0.0 
 $ cpan-listchanges nombre_del_paquete 2.5.0 (comparará la versión actual con la versión 2.5.0 disponible en CPAN)
 
 
+cepanminus
+script para obtener, descomprimir, compilar e instalar módulos PERL desde CPAN.
+$ cpanm Moose (descargará y compilará el módulo Moose desde CPAN)
+$ cpanm Moo::Role JSON::Maybe (instalará los módulos Moo::Role y JSON::Maybe)
+$ cpanm --force Some::Module (forzará la recompilación del módulo incluso si ya está instalado)
+$ cpanm https://cpan.metacpan.org/authors/id/C/CH/CHOCOLATE/Some-Module-0.01.tar.gz (instalar desde una URL específica)
+$ cpanm --look Some::Module (mostrará información sobre el módulo sin instalarlo)
+$ cpanm --quiet Some::Module (instalar en modo silencioso)
+$ cpanm -i Some::Module (instalar en modo interactivo)
+
+
 cpio
 [CoPy In, copy Out]. Utilidad que se utiliza para procesar archivos comprimidos.
 $ ls *.txt | cpio -ocv -O archivo.cpio (Creará [-o] "archivo.cpio" [-O] con todos los .txt del directorio, mostrando toda la salida [-v] y que escriba la información del encabezado en ASCII para facilitar el traspaso entre plataformas)
