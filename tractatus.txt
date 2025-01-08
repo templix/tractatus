@@ -22732,7 +22732,7 @@ Informa sobre particiones y discos.
 
 
 pass
-Gestión de archivos de contraseñas. Cada contraseña está dentro de un archivo encriptado gpg cuyo nombre de archivo es el título del sitio web o recurso que requiere la contraseña. Todas las contraseñas se guardan en ~/.password-store y pass proporciona comandos para añadir, editar, generar o recuperar contraseñas.www.DeepL.com/Translator
+Gestión de archivos de contraseñas. Cada contraseña está dentro de un archivo encriptado gpg cuyo nombre de archivo es el título del sitio web o recurso que requiere la contraseña. Todas las contraseñas se guardan en ~/.password-store y pass proporciona comandos para añadir, editar, generar o recuperar contraseñas.
 $ pass init "Cripta supersecreta" (primer paso para crear el archivo .password-store. Pedirá contraseña y confirmación)
 $ pass insert Mails/nombre@site.com (guardar en la carpeta "Mails" un correo. Pedirá contraseña y confirmación)
 $ pass nombre@site.com (despues de introducir la contraseña entrada en "init", pondra la de nombre@site.com)
@@ -22748,6 +22748,14 @@ $ pass find .com (muestra los sitios entrados con *.com)
 $ pass search .com (lo mismo)
 $ pass insert -m Mails/nombre@site.com (una vez entrada la contraseña podrán entrarse datos hasta finalizar con C-d)
 $ pass Mails/nombre@site.com (Muestra los datos auxiliares que se han entrado menos la contraseña)
+
+
+passmgr
+Administrador de contraseñas.
+$ passmgr (forma básica de abrir la interfaz con los parámetros por defecto)
+$ passmgr -clipboardTTL 20 (que en la sesión actual la contraseña esté en el portapapeles 20 segundos. Por defecto 15)
+$ passmgr -appTTL 180 (que la sesión actual no se cierre hasta los 180 segundos de inactividad. Por defecto 120)
+$ passmgr -change-key (cambiar la contraseña de la aplicación. Pide la contraseña antigua y despues entrar la nueva y confirmarla)
 
 
 passwd
