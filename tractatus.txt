@@ -7951,6 +7951,13 @@ Convierte documentos pdf o imagenes a formato djvu
 $ cpaldjvu -colors 5 -dpi 50 -verbose entrada.jpg salida (especificando colores [por defecto 256] y resolución [entre 25 y 6000.Por defecto 300])
 
 
+cpan-listchanges
+es una aplicación de línea de comandos que compara el archivo de cambios entre versiones arbitrarias de un paquete. Es similar a apt-listchanges y, de forma predeterminada, compara la versión instalada actualmente con la última versión disponible en CPAN.
+$ cpan-listchanges paquete_instalado (comparará la versión actualmente instalada del paquete con la última versión disponible en CPAN)
+$ cpan-listchanges nombre_del_paquete 1.0.0 1.1.0 (comparará la versión 1.0.0 con la versión 1.1.0 del paquete)
+$ cpan-listchanges nombre_del_paquete 2.5.0 (comparará la versión actual con la versión 2.5.0 disponible en CPAN)
+
+
 cpio
 [CoPy In, copy Out]. Utilidad que se utiliza para procesar archivos comprimidos.
 $ ls *.txt | cpio -ocv -O archivo.cpio (Creará [-o] "archivo.cpio" [-O] con todos los .txt del directorio, mostrando toda la salida [-v] y que escriba la información del encabezado en ASCII para facilitar el traspaso entre plataformas)
@@ -8021,7 +8028,10 @@ $ cpufetch
 
 cpufreq-info
 Obtiene información del estado del demonio cpufreqd así como información de la CPU.
-$ cpufreq-info
+$ cpufreq-info (toda la información de las CPUs)
+$ cpufreq-info -o (imprime información como la proporcionada por la interfaz /proc/cpufreq)
+$ cpufreq-info -p (obtiene la política cpufreq utilizada actualmente)
+$ cpufreq-info -d (determina el controlador del kernel cpufreq utilizado)
 
 
 cpufreq-selector
