@@ -25746,6 +25746,14 @@ Produce una salida similar a who [ver], pero para la lista de hosts o todas las 
 # rusers -i (genera lista de usuarios registrados en máquinas remotas y ordenados de acuerdo con el tiempo de inactividad de cada máquina)
 
 
+rustscan
+Escáner de puertos.
+$ rustscan -a 127.0.0.1,0.0.0.0 (escanear varias IP utilizando una lista separada por comas)
+$ rustscan -a www.google.com, 127.0.0.1 (escanear hosts)
+$ rustscan -a 127.0.0.1 -p 53 (escaneo de puertos individuales)
+$ rustscan -a 127.0.0.1 (todos los puertos del host)
+
+
 rvm
 Paquete de gestión para entornos ruby y las gemas de cada proycto.
 $ rvm install 1.9.2 (Instalar una versión de ruby)
