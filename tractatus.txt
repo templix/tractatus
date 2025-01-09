@@ -28746,13 +28746,8 @@ $ tardy --strip 2 archive.tar (elimina los dos primeros niveles de directorios e
 $ tardy --create --modify /new/path/ /nuevo.tar file1 file2 (crea nuevo.tar donde los archivos file1 y file2 se encuentran bajo /new/path/)
 
 
-tasksel
-Interfaz para la instalación de grupos de paquetes relacionados con un propósito común, como pilas LAMP, servidores de correo, entornos de escritorio...
-$ tasksel (abre la interfaz)
-
-
-taskwarrior
-Gestor de tareas minimalista.
+task
+[taskwarrior]. Gestor de tareas minimalista.
 $ task add Titulo Entrada (añadir una tarea)
 $ task list (ver la lista de tareas)
 $ task 1 done (marcar una entrada como completada)
@@ -28770,6 +28765,14 @@ $ task +WEEK list (lista las tareas con el deadline de esta semana)
 $ task +DUETODAY list (lista todas las tareas con el deadline de hoy)
 $ task due.after:yesterday and due.before:thursday (filtraar de forma más especifica)
 $ task 5 project:DocsPendientes (añadir a la tarea 5 al proyecto DocsPendientes)
+
+
+tasksel
+Interfaz para la instalación de grupos de paquetes relacionados con un propósito común, como pilas LAMP, servidores de correo, entornos de escritorio...
+# tasksel (abre la interfaz)
+# tasksel --list (mostrará una lista de todos los paquetes disponibles)
+# tasksel install lxde-desktop (instalar un determinado escritorio)
+# tasksel remove lxde-desktop (desinstalarlo)
 
 
 tc
