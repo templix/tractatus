@@ -8147,6 +8147,10 @@ create-cracklib-dict
 # create-cracklib-dict archivo
 
 
+cricket
+Es un motor de configuración, sondeo y visualización de datos integrado en la herramienta RRD. Consta de tres partes visibles para el usuario: cricket-compile [compila el árbol de configuración de Cricket [en /etc/cricket] en el formato leído por el recopilador. Normalmente se ejecuta después de editar los archivos en el árbol de configuración. No se necesitan opciones], collector [lee una configuración de /etc/cricket, compilada por el comando cricket-compile y recopila y almacena datos de acuerdo con la información que encuentra allí. Normalmente se ejecuta desde un trabajo cron] y grapher.cgi [muestra los datos recopilados por Cricket en un formato gráfico. Generalmente se accede a él mediante un navegador web en http://localhost/cgi-bin/cricket/grapher.cgi]. Documentación de la aplicación con el navegador abrir /usr/share/doc/cricket/html/index.html.
+
+
 cron-apt
 Herramienta que ejecuta un trabajo cron a intervalos regulares. Por defecto, solo actualiza la lista de paquetes y descarga nuevos paquetes sin instalar. Puede indicarle que ejecute cualquier cosa que pueda hacer con apt-get o aptitude. Editar el archivo:
 # nano /etc/cron-apt.conf
