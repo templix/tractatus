@@ -8096,7 +8096,7 @@ $ cputool -c 50 -p 15352 (Al 50% para el PID 15352)
 
 crack
 Programa para localizar vulnerabilidades en archivos de contraseñas escaneando los contenidos y buscando usuarios que hayan elegido una contraseña de inicio de sesión débil.
-# crack -nice 10 /etc/passwd (con prioridad reducida para que otros programas tengan prioridad sobre la cpu)
+# Crack -nice 10 /etc/passwd (con prioridad reducida para que otros programas tengan prioridad sobre la cpu. El ejecutable va con C mayuscula)
 
 
 cracklib
@@ -8117,6 +8117,22 @@ Puede usar el modo interactivo:
 # update-cracklib (actualizar los diccionarios de la aplicación)
 # cracklib-format datos (convierte cada linea en una palabra independiente de las que tenga y las coloca por orden alfabetico)
 # cracklib-format datos > datos2 (lo anterior mandándolo a un archivo)
+
+
+crash
+Herramienta de depuración diseñada para analizar volcados de memoria del núcleo y sistemas en ejecución.
+$ crash /usr/lib/debug/boot/vmlinux-$(uname -r) /var/crash/2025-01-01-12:34/vmcore (volcado de memoria especificando ruta al binario de depuración del núcleo y archivo de volcado de memoria generado por kexec o una herramienta similar)
+Dentro de la interfaz de crash:
+> ps (listar todas las tareas en ejecución)
+> struct task_struct 0xffff88007b7c0400 (inspeccionar una estructura task_struct específica usando la dirección de memoria)
+> bt 1234 (ver el backtrace de una tarea específica con su PID)
+> mod (listar todos los módulos del núcleo cargados)
+> files 0xffff88007b7c0400 (examinar los archivos abiertos por un proceso)
+> rd -p 0xffff88007b7c0400 (inspeccionar regiones específicas de memoria. -p: Lectura física y 0xffff88007b7c0400: Dirección de memoria)
+> kmem -i (mostrar información del sistema, incluyendo memoria física, memoria de intercambio y zonas de memoria relacionada con el uso de memoria)
+> disassemble schedule (desensamblar una función)
+> disassemble 0xffffffff81012345 (desensamblar una dirección específica)
+> exit (salir del programa)
 
 
 crashme
