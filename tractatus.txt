@@ -8138,6 +8138,8 @@ Dentro de la interfaz de crash:
 crashme
 Aplicación que se basa en una serie de script que escribirán código aleatorio en secciones aleatorias de la memoria para ver qué tal responde el sistema operativo y poder detectar posibles fallos, vulnerabilidad o simplemente comprobar qué tal responde a escrituras forzadas en secciones de la memoria utilizadas. Por defecto los tests de Crashme están limitados a 30 segundos, tras los cuales se cierran y se guardan los registros. Advertencia: Si bien se sabe que el kernel Linux sobrevive días y semanas de crashme, no se garantiza que el sistema sobreviva a varios de estos procesos.
 # crashme +2000 666 50 00:02:00 2 (2 minutos de proceso, mostrar información resumida del proceso)
+$ crashme-- --bytes=1024 --seed=666 --worker (modo de trabajo)
+$ crashme-- --bytes=1024 --seed=666 --fork=4 (modo supervisor  que genera una cantidad específica de elementos secundarios en el modo de trabajo)
 
 
 create-cracklib-dict
