@@ -7969,6 +7969,11 @@ $ cpanm --quiet Some::Module (instalar en modo silencioso)
 $ cpanm -i Some::Module (instalar en modo interactivo)
 
 
+cpanoutdated
+Imprime la lista de módulos CPAN obsoletos en su máquina. Este script se puede integrar con el comando cpanm.
+$ cpanoutdated
+
+
 cpio
 [CoPy In, copy Out]. Utilidad que se utiliza para procesar archivos comprimidos.
 $ ls *.txt | cpio -ocv -O archivo.cpio (Creará [-o] "archivo.cpio" [-O] con todos los .txt del directorio, mostrando toda la salida [-v] y que escriba la información del encabezado en ASCII para facilitar el traspaso entre plataformas)
@@ -8149,6 +8154,27 @@ create-cracklib-dict
 
 cricket
 Es un motor de configuración, sondeo y visualización de datos integrado en la herramienta RRD. Consta de tres partes visibles para el usuario: cricket-compile [compila el árbol de configuración de Cricket [en /etc/cricket] en el formato leído por el recopilador. Normalmente se ejecuta después de editar los archivos en el árbol de configuración. No se necesitan opciones], collector [lee una configuración de /etc/cricket, compilada por el comando cricket-compile y recopila y almacena datos de acuerdo con la información que encuentra allí. Normalmente se ejecuta desde un trabajo cron] y grapher.cgi [muestra los datos recopilados por Cricket en un formato gráfico. Generalmente se accede a él mediante un navegador web en http://localhost/cgi-bin/cricket/grapher.cgi]. Documentación de la aplicación con el navegador abrir /usr/share/doc/cricket/html/index.html.
+
+
+crip
+Herramienta que se utiliza principalmente para trabajar con imágenes de CD y DVD, permitiendo la extracción, codificación y etiquetado. Es ideal para crear muchos archivos a partir de CD y tenerlos todos etiquetados correctamente y con calidad profesional y tener flexibilidad y control total sobre todo. Las versiones actuales de crip solo admiten Ogg Vorbis y FLAC. Permite ajustar el volumen para que sea lo más alto posible sin distorsión/saturación y etiquetado de grupo, lo que facilita que un grupo de pistas se trate como una sola pieza. También puede recortar el silencio al principio y al final de estas pistas/grupos.
+$ crip -e /dev/cdrom ~/Videos/salida (extraer todos los archivos de un CD y guardarlos en un directorio específico)
+$ crip -e -t /dev/cdrom ~/Videos/salida (extraer archivos de un CD y etiquetarlos automáticamente)
+$ crip -c ~/Videos/original ~/Videos/codificado (codificar un archivo, por ejemplo, convertir a otro formato)
+$ crip -l /dev/cdrom (listar los archivos que están en un CD sin extraerlos)
+$ crip -e -f *.mp3 /dev/cdrom ~/Videos/salida (extraer archivos de un tipo específico, por ejemplo, solo archivos .mp3)
+
+
+criu
+contiene las utilidades para realizar puntos de control [checkpoint] y restaurar procesos.
+# criu dmp -D checkpoint -t <PID> (realiza un punto de control del proceso <PID> y guarda los archivos de imagen en la carpeta checkpoint)
+# criu restore -D checkpoint (restaurar un proceso desde un punto de control)
+# criu check (verifica si el kernel es compatible con las funcionalidades necesarias)
+# criu --unprivileged <comando> (ejecutar como usuario no privilegiado)
+1.-
+Usar un script de acción personalizado:
+# criu dmp --action-script pre-dump post-dump <PID>
+# criu restore --action-script pre-restore post-restore
 
 
 cron-apt
