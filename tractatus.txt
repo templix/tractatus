@@ -8196,6 +8196,11 @@ $ crm cluster upgrade (actualiza todos los nodos del clúster)
 Nota.- "exit" para salir del shell de cmr
 
 
+cron
+Demonio de programación de procesos. Este demonio es un proceso en segundo plano que ejecuta programas específicos en momentos específicos, por ejemplo, cada minuto, día, semana o mes, como se especifica en un crontab [ver].
+$ systemctl status cron.service (saber si está activo)
+
+
 cron-apt
 Herramienta que ejecuta un trabajo cron a intervalos regulares. Por defecto, solo actualiza la lista de paquetes y descarga nuevos paquetes sin instalar. Puede indicarle que ejecute cualquier cosa que pueda hacer con apt-get o aptitude. Editar el archivo:
 # nano /etc/cron-apt.conf
