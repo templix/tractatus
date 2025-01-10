@@ -8177,6 +8177,25 @@ Usar un script de acción personalizado:
 # criu restore --action-script pre-restore post-restore
 
 
+crmsh
+Este shell es una interfaz avanzada para la administración de clústeres de alta disponibilidad [HA]. También proporciona funciones avanzadas como configuración de clústeres de bajo nivel, administración de paquetes y scripts de clústeres y herramientas de exploración del historial que brindan una vista instantánea de lo que está haciendo el clúster.
+$ crm (abrirá el shell interactivo, donde se puede ejecutar comandos para administrar y monitorear el clúster)
+$ crm cluster init --name mi_cluster (inicializa un nuevo clúster con el nombre mi_cluster y configura automáticamente los servicios de alta disponibilidad)
+$ crm cluster join --node nodo2 (agrega un nodo llamado nodo2 al clúster existente)
+$ crm configure primitive mi_recurso ocf:heartbeat:IPaddr2 params ip=192.168.1.100 cidr_netmask=24 op monitor interval=30s (define un recurso de alta disponibilidad para la dirección 192.168.1.100 utilizando el agente IPaddr2)
+$ crm configure group mi_grupo recurso1 recurso2 recurso3 (crea un grupo de recursos llamado mi_grupo que contiene los recursos recurso1, recurso2 y recurso3 que se gestionan conjuntamente)
+$ crm configure location pref_mi_recurso mi_recurso 100: nodo1 (configura una preferencia para que el recurso mi_recurso se ejecute en el nodo nodo1 con una puntuación de 100)
+$ crm status (muestra el estado actual del clúster, incluyendo nodos, recursos y su estado)
+$ crm resource stop mi_recurso (detiene el recurso mi_recurso)
+$ crm configure save archivo_config.crm (guarda la configuración actual del clúster en un archivo llamado archivo_config.crm)
+$ crm configure load replace archivo_config.crm (carga y reemplaza la configuración actual del clúster con la configuración guardada en archivo_config.crm)
+$ crm configure delete mi_recurso (elimina el recurso llamado mi_recurso del clúster)
+$ crm history (muestra un resumen histórico de los eventos recientes del clúster)
+$ crm_mon -1 (muestra el estado del clúster una sola vez en formato legible)
+$ crm cluster upgrade (actualiza todos los nodos del clúster)
+Nota.- "exit" para salir del shell de cmr
+
+
 cron-apt
 Herramienta que ejecuta un trabajo cron a intervalos regulares. Por defecto, solo actualiza la lista de paquetes y descarga nuevos paquetes sin instalar. Puede indicarle que ejecute cualquier cosa que pueda hacer con apt-get o aptitude. Editar el archivo:
 # nano /etc/cron-apt.conf
