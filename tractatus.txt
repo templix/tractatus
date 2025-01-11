@@ -8282,6 +8282,13 @@ $ env -i /home/user/script.sh
 La condición de ejecución es similar a como lo hace cron.
 
 
+cronutils
+Utilidades para complementar la funcionalidad de cron facilitando la gestión y el control de trabajos programados. Incluye las herramientas runalarm, runlock y runstat
+$ runalarm 10m backup.sh (ejecutar el script backup.sh 10 minutos después de invocarlo)
+$ runlock /tmp/process_data.lock process_data.sh (si process_data.sh no debe ejecutarse si ya está en ejecución. /tmp/process_data.lock es un archivo de bloqueo [lock file] que runlock crea. Si alguien intenta ejecutar el script process_data.sh mientras ya está en ejecución, no podrá hacerlo hasta que termine de ejecutarse y el archivo de bloqueo se elimine)
+$ runstat cleanup.sh (ejecutará el script y registrará información sobre cuánto tiempo tomó ejecutarlo y si tuvo éxito o falló)
+
+
 cruft
 Lista ficheros que presumiblemente sobran, faltan o están de alguna forma incorrectos, tomando principalmente la información de la base de datos de dpkg
 # cruft -d /var/www
