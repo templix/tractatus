@@ -8341,9 +8341,20 @@ $ crunch 4 5 -p mormo dama .com (usando permitaciónes de palabras especificadas
 
 
 cryfs
-Cifra archivos para que puedan almacenarse de forma segura en cualquier lugar. Funciona bien junto con servicios en la nube como Dropbox, iCloud, OneDrive y otros
-# cryfs --show-ciphers (cifrados disponibles)
-# cryfs archivo_a_cifrar archivo_descifrado (forma básica)
+Cifra archivos para almacénarlos en la nube como Dropbox, iCloud, OneDrive y otros.
+$ cryfs --show-ciphers (cifrados disponibles)
+Configurar un directorio cifrado:
+       $ cryfs basedir mountdir
+Hará algunas preguntas sobre la configuración del directorio cifrado. Decimos que sí a todo y a utilizar la configuración predeterminada. También solicitará una contraseña.
+"mountdir" es el directorio en el que podremos trabajar como si fuera un directorio real [aunque sea virtual] y cryfs cifrará y almacenará el contenido en el directorio "basedir". Se puede trabajar en mountdir como en un directorios normal: agregarle archivos, modificarlos, agregar subdirectorios y hacer lo que quiera con él. Todo lo que se guarde dentro se encriptará y almacenará en basedir. El contenido no encriptado de mountdir nunca se almacenará en el disco duro, por lo que todo lo que se encuentre en el disco duro se encripta. CryFS utiliza un esquema de encriptación que no solo encripta el contenido de los archivos, sino que también se encriptan los tamaños de los archivos, los metadatos y la estructura del directorio.
+Cuando se haya terminado de trabajar en el directorio "mountdir" creando archivos, subdirectorios o lo que proceda, para desmontar:
+       $ fusermount -u mountdir
+Con lo que cryfs ya no se estará ejecutando, lo que significa que ya no se podrá acceder a los datos como si el directorio de montaje estubiera vacío:
+       $ ls mountdir
+       [no hay salida porque el directorio está vacío]
+Si volvemos a lanzar:
+       $ cryfs basedir mountdir
+Volveremos a disponer de todo lo que tengamos en "mountdir".
 
 
 cryptmount
@@ -8363,6 +8374,20 @@ Una vez entrada la contraseña asignada en el primer paso, escoger el formato se
 # mkfs.ext4 /dev/mapper/backup -L cripta (con el nombre "cripta")
 # cryptsetup luksClose backup (Cerrar la partición)
 # cryptsetup -v status backup (ver el estado de la asignación)
+
+
+cs
+[CloudStack] Herramienta diseñado para implementar y administrar grandes redes de máquinas virtuales.
+$ cs login (iniciar sesión en CloudStack)
+$ cs status (verificar el estado general)
+$ cs create zone --name=mi_zona --displaytext="Mi Zona" (crear una nueva zona)
+$ cs create cluster --zoneid=<ID_ZONA> --name=mi_cluster --hypervisor=xen (rear un nuevo cluster)
+$ cs create vm --clusterid=<ID_CLUSTER> --name=mi_vm --template=centos7_64 (agregar una nueva VM)
+$ cs list zones (istar todas las zonas)
+$ cs describe zone <ID_ZONA> (mostrar detalles de una zona específica)
+$ cs delete zone <ID_ZONA> (eliminar una zona)
+$ cs update (actualizar una zona)
+$ cs tail /var/log/cloudstack/manager.log (verificar logs de CloudStack)
 
 
 csplit
