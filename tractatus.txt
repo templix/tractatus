@@ -8289,6 +8289,22 @@ $ runlock /tmp/process_data.lock process_data.sh (si process_data.sh no debe eje
 $ runstat cleanup.sh (ejecutará el script y registrará información sobre cuánto tiempo tomó ejecutarlo y si tuvo éxito o falló)
 
 
+crudini
+Utilidad que simplifica la lectura y actualización de archivos ini desde scripts de shell, llamada así porque proporciona funcionalidad CRUD [Create, Read, Update, and Delete]. Puede manejar la mayoría de las variantes de ini.
+$ crudini --set config_file sección parameter valor (agregar/actualizar una variable)
+$ crudini --set config_file "" parámetro valor (agregar/actualizar una variable en la raíz o área global, ss decir, que no esté bajo una [sección])
+$ crudini --set --existing config_file seccion parameter valor (actualizar una variable existente)
+$ crudini --set config_file section parameter1 value --set config_file section parameter2 value --del config_file section parameter3 (agregar/actualizar/eliminar múltiples variables)
+$ crudini --set --list config_file section parameter a_value (agregar un valor a una lista separada por comas. Cualquier espacio en blanco alrededor de las comas se ignora)
+$ crudini --set --list --list-sep= config_file section parameter a_value (agregar un valor a una lista separada por espacios en blanco. Se admiten listas de varias líneas ya que la nueva línea es un espacio en blanco)
+$ crudini --del config_file section parameter (eliminar una variable)
+$ crudini --del config_file section (eliminar una sección)
+$ crudini --get config_file section parameter (generar un valor)
+$ crudini --get config_file "" parameter (generar un valor global que no está en una sección)
+$ crudini --get config_file section (generar una sección)
+$ crudini --merge config_file < another.ini (fusionar un archivo ini desde otro ini)
+
+
 cruft
 Lista ficheros que presumiblemente sobran, faltan o están de alguna forma incorrectos, tomando principalmente la información de la base de datos de dpkg
 # cruft -d /var/www
