@@ -8415,6 +8415,15 @@ csscapture
 $ csscapture -s web http://www.tuxapuntes.com (guarda en la carpeta “web”)
 
 
+cssmin
+[python-cssmin python3-cssmin]. Algoritmo de compresión CSS [Cascading Style Sheet] de YUI [Yahoo User Interface]. El compresor se puede utilizar para reducir el tamaño de los documentos CSS para su implementación..
+$ cssmin input.css > output.min.css (comprimir un archivo CSS existente y lo escribirá en output.min.css)
+$ cssmin file1.css file2.css file3.css > combined.min.css (se comprimen varios archivos CSS y se combinan en uno solo)
+$ cat input.css | cssmin > output.min.css (procesar el contenido de un archivo sin guardar primero en una variable intermedia)
+$ cssmin input.css | less (mostrará el resultado de la compresión sin sobrescribir el archivo original)
+$ cssmin input.css | uglifyjs -m > output.min.js (comprime el CSS y luego lo pasa por uglifyjs para minificarlo aún más)
+
+
 csstoxslfo
 Herramienta útil para convertir documentos XML estilizados con CSS2 en documentos XSL-FO, que posteriormente puedes procesar para obtener formatos como PDF o PostScript mediante un procesador XSL-FO como Apache FOP.
 $ csstoxslfo -i documento.xml -c estilo.css -o documento.fo (especifica el archivo .xml de entrada, la hoja de estilo CSS y define el archivo XSL-FO de salida)
