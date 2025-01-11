@@ -8223,6 +8223,27 @@ Añadimos:
 Recibiremos un correo con algo parecido a "Cron <usuario@localhost> chronic scrit (failed)"
 
 
+cronolog
+Rotador de archivos de registro para servidores web. Lee mensajes desde su entrada y los escribe en un conjunto de archivos de salida, cuyos nombres se construyen utilizando una plantilla y la fecha y hora actuales. La plantilla utiliza los mismos especificadores de formato que el comando date de Unix. Incluye la aplicación cronosplit.
+$ servidor_web | cronolog /var/log/webserver/%Y/%m/%d/access.log (creará un archivo de registro en la ruta /var/log/webserver/ con una estructura de carpetas organizada por año [%Y], mes [%m] y día [%d] sel servidor web especificado)
+$ servidor_web | cronolog /var/log/webserver/%Y/%m/%d/%H.log (creará un archivo nuevo para cada hora, con una estructura como: /var/log/webserver/2025/01/11/14.log [para las 14:00 del 11 de enero de 2025])
+$ servidor_web | cronolog /var/log/webserver/%Y/week-%U.log (creará archivos basados en el número de la semana (%U) del año [/var/log/webserver/2025/week-02.log])
+$ servidor_web | cronolog /var/log/webserver/prefix-%Y%m%d.log (agregar un prefijo personalizado a los nombres de archivo [/var/log/webserver/prefix-20250111.log])
+$ servidor_web | cronolog /var/log/webserver/%Y/%m/%d/%H-%M.log (dividir los registros en intervalos de 10 minutos [/var/log/webserver/2025/01/11/14-50.log para registros de las 14:50])
+$ servidor_web | cronolog /var/log/webserver/%Y/%m/%d/access.log | gzip > /var/log/webserver/%Y/%m/%d/access.log.gz (combinar con una herramienta de compresión como gzip para ahorrar espacio en disco)
+1.-
+Para un servidor Apache, se puede usar cronolog en el archivo de configuración [/etc/apache2/apache2.conf] para manejar los registros de acceso o error. Por ejemplo añadiendo/modificando las lineas:
+       CustomLog "|/usr/bin/cronolog /var/log/apache2/%Y/%m/%d/access.log" combined
+       ErrorLog "|/usr/bin/cronolog /var/log/apache2/%Y/%m/%d/error.log"
+Nota.- El formato de tiempo, resumido es:
+       %Y - Año (2025)
+       %m - Mes (01)
+       %d - Día (11)
+       %H - Hora (14)
+       %M - Minuto (50)
+       %U - Número de la semana del año (02)
+
+
 crontab
 configurar tareas para que se ejecuten automáticamente en el sistema
 # crontab -e      (editar el archivo crontab, si no existe se crea)
