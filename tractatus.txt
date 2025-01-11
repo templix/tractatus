@@ -8322,6 +8322,17 @@ Lista ficheros que presumiblemente sobran, faltan o están de alguna forma incor
 # cruft --ignore /home/usuario (Descartando un directorio)
 
 
+crun
+Ejecutor de contenedores que sigue el formato OCI [Open Container Initiative]
+$ crun create mycontainer (crear un contenedor)
+$ crun r mycontainer (ejecutar un contenedor existente)
+$ crun stop mycontainer (detener un contenedor en ejecución)
+$ crun rm mycontainer (eliminar un contenedor)
+$ crun list (listar todos los contenedores)
+$ crun status mycontainer (verificar el estado de un contenedor)
+$ crun config --memory=512 mycontainer (configurar opciones del contenedor, por ejemplo, limitaciones de recursos)
+
+
 crunch
 Generador de listas de palabras. Puede especificarse un conjunto de caracteres y admite números, símbolos, mayúsculas, minúsculas, caracteres por separado y Unicode.
 $ crunch 6 6 0123456789abcdef -o 6caracteres.txt (generar palabras de un mínimo de 6 caracteres y máximo de 6 usando los especificados y guardandolo el el archivo menionado)
