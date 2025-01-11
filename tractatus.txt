@@ -7974,6 +7974,16 @@ Imprime la lista de módulos CPAN obsoletos en su máquina. Este script se puede
 $ cpanoutdated
 
 
+cpigs
+[cruft-ng]. Herramienta que proporciona información sobre los paquetes más volátiles de un sistema Debian. Su principal propósito es identificar paquetes que están cambiando con frecuencia, como los relacionados con apt, plocate, entre otros, para ayudar a realizar análisis de estado del sistema o depuración.
+$ cpigs (muestra una lista de los paquetes más volátiles en el sistema, ordenados por actividad)
+$ cpigs -n 10 (limitar la salida a un número específico de paquetes)
+$ cpigs -o paquetes_volatiles.csv (genera un archivo CSV con datos sobre los paquetes volátiles, que puede usarse para análisis posterior)
+$ cpigs | grep apt (filtrar para concentrarse en ciertos paquetes)
+$ cpigs --dump-state (volcar todo el estado interno en la terminal)
+$ cpigs | sort -k2 -n -r | head -n 10 (encontrar los paquetes con los valores más altos de actividad)
+
+
 cpio
 [CoPy In, copy Out]. Utilidad que se utiliza para procesar archivos comprimidos.
 $ ls *.txt | cpio -ocv -O archivo.cpio (Creará [-o] "archivo.cpio" [-O] con todos los .txt del directorio, mostrando toda la salida [-v] y que escriba la información del encabezado en ASCII para facilitar el traspaso entre plataformas)
