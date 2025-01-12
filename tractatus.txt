@@ -7958,7 +7958,7 @@ $ cpan-listchanges nombre_del_paquete 1.0.0 1.1.0 (comparará la versión 1.0.0 
 $ cpan-listchanges nombre_del_paquete 2.5.0 (comparará la versión actual con la versión 2.5.0 disponible en CPAN)
 
 
-cepanminus
+cpanminus
 script para obtener, descomprimir, compilar e instalar módulos PERL desde CPAN.
 $ cpanm Moose (descargará y compilará el módulo Moose desde CPAN)
 $ cpanm Moo::Role JSON::Maybe (instalará los módulos Moo::Role y JSON::Maybe)
@@ -7972,6 +7972,14 @@ $ cpanm -i Some::Module (instalar en modo interactivo)
 cpanoutdated
 Imprime la lista de módulos CPAN obsoletos en su máquina. Este script se puede integrar con el comando cpanm.
 $ cpanoutdated
+
+
+cpdb-backend-file
+Es parte del ecosistema de OpenPrinting y se utiliza como backend para gestionar la impresión en archivos desde aplicaciones que implementan Common Print Dialog Backends [CPDB].
+$ cpdb-backend-file (ejecutará el backend y lo hará disponible para cualquier diálogo de impresión que lo soporte)
+$ DEBUG=1 cpdb-backend-file (generará un log más detallado que puede ser útil para diagnosticar problemas en la integración con aplicaciones)
+$ cpdb-list (comprobar qué backends están disponibles en el sistema para los diálogos de impresión incluirá cpdb-backend-file si está correctamente instalado y en funcionamiento)
+Nota.- Es un componente backend que no se utiliza directamente en la línea de comandos más allá de iniciarlo, las aplicaciones como LibreOffice o cualquier software que use CPDB lo detectarán automáticamente.
 
 
 cpigs
@@ -8500,6 +8508,16 @@ Sincroniza archivos en un clúster mediante el algoritmo rsync.
 # csync2 --config /etc/csync2/csync2.cfg --dir /home/user/documents (sincroniza solo el directorio /home/user/documents según la configuración)
 # csync2 --config /etc/csync2/csync2.cfg --verbose (proporciona más detalles sobre el proceso de sincronización)
 Nota.- En el archivo de configuración /etc/csync2/csync2.cfg es donde se definen los nodos participantes, las rutas de sincronización y otras opciones específicas.
+
+
+ctdb
+[Cluster Trivial Database]. Implementación en clúster de la base de datos TDB [Trivial Database] que utilizan Samba y otros proyectos para almacenar datos temporales. Archivo de configuración en /etc/ctdb/ctdbd.conf.
+# ctdbd --config (verificar la configuración actual)
+# ctdb-tcpdump --clear-cache (limpiar el caché)
+# ctdb-nodelist (mostrar información sobre nodos en el cluster)
+# ctdb-recover (verificar el estado de replicación)
+# systemctl status ctdb (verificar el estado del servicio)
+# journalctl -u ctdb (verificar los logs de ctdb)
 
 
 cupp
