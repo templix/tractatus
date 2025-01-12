@@ -8681,7 +8681,12 @@ $ cutter 448.22.71.130 192.168.1.10 22 (cerrar conexión entre dos computadoras 
 
 
 cutycapt
-Utilidad para capturar renderizado WebKit de una página web.
+utilidad para capturar la representación de una página web por parte de WebKit. Es una pequeña utilidad de línea de comandos multiplataforma para capturar la representación de una página web por parte de WebKit en una variedad de formatos vectoriales y de mapa de bits, incluidos SVG, PDF, PS, PNG, JPEG, TIFF, GIF y BMP
+$ cutycapt --url=http://www.example.com --out=example.png (captura de una página completa y la guarda como imagen PNG)
+$ cutycapt --url=http://www.example.com --min-width=1024 --min-height=768 --out=example.png (captura de una página con un tamaño mínimo de 1024x768)
+$ cutycapt --url=http://www.example.com --javascript=off --out=example-no-js.png (captura con ejecución de JavaScript deshabilitada)
+$ cutycapt --url=http://www.example.com --plugins=on --out=example-with-plugins.png (captura con plugins habilitados)
+$ cutycapt --url=http://www.example.com --delay=5000 --out=example-with-delay.png (captura con un tiempo de espera después del carga)
 $ cutycapt --url=google.es --out=localfile.png (especificando la url y nombre del archivo para la salida)
 
 
@@ -8697,6 +8702,20 @@ Algunas teclas de control:
 	Ctrl + mayusc + flechas abajo (Bajar volumen)
 	Ctrl + mayusc + m (Silenciar)
 	Ctrl + mayusc + q (Salir)
+
+
+cvs
+[Concurrent Versions System]. Es un sistema de control de versiones que permite mantener el acceso a versiones antiguas de archivos (normalmente código fuente), mantener un registro de quién, cuándo y por qué se produjeron los cambios, etc. Es una herramienta antigua y ha sido superada por sistemas como Git o SVN en muchos aspectos.
+$ cvs init (inicializar un repositorio CVS. Crea un directorio `.cvsignore`, un archivo `CVS/Root`, y un archivo `CVS/Entries`.)
+$ cvs add directory_name (añadir un directorio al control de CVS)
+$ cvs add file1.c file2.h (añadir archivos individuales al control de CVS)
+$ cvs commit -m "Mensaje de commit inicial" (hacer un commit inicial)
+$ cvs update (Actualizar el repositorio local)
+$ cvs checkout module_name (obtener una copia del repositorio desde un servidor remoto)
+$ cvs commit -d (enviar cambios al servidor remoto)
+$ cvs status (verificar el estado de los archivos)
+$ cvs remove file_to_remove.c (eliminar un archivo del control de CVS)
+$ cvs log file_to_check.c (verificar la historia de cambios de un archivo)
 
 
 cwcp
