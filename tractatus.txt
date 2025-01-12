@@ -8534,8 +8534,8 @@ $ cthumb fotos.album
 
 
 cupp
-Herramienta que puede generar un diccionario para ataques de fuerza bruta o ataques de diccionario con una lista de palabras a partir de información como un cumpleaños, apodo, dirección, nombre de una mascota o familiar, o una palabra común.
-$ cupp3 -i (Realiza varias preguntas sobre cual es el nombre, el nik, el hijo... y al final creau un diccionario con los datos entrados .txt)
+[Common User Passwords Profiler]. Herramienta que puede generar un diccionario para ataques de fuerza bruta o ataques de diccionario con una lista de palabras a partir de información como un cumpleaños, apodo, dirección, nombre de una mascota o familiar, o una palabra común.
+$ cupp3 -i (Realiza varias preguntas sobre cual es el nombre, el nik, el hijo... y al final crea un diccionario con los datos entrados .txt)
 $ cupp3 -l (bajar el diccionario del idioma que se entre)
 
 
@@ -8642,6 +8642,25 @@ Montar directorios remotos en local.
 # curlftpfs usuario:contraseña@192.168.1.10 /media/servidor
 Para automatizar el proceso, añadir al /etc/fstab la linea:
 curlftpfs#usuario:contraseña@192.168.1.10 /media/servidor fuse defaults 0 0
+
+
+custodia
+Herramienta utilizada para gestionar y almacenar secretos como claves, certificados, contraseñas de manera segura para aplicaciones distribuidas. Es útil para aplicaciones distribuidas y sin estado que utilizan un enfoque basado en archivos de imagen como imágenes basadas en contenedores. Pero también es útil para administrar la distribución de material clave en varias máquinas de una red.
+$ custodia --config /etc/custodia/custodia.conf (ejecuta el servidor utilizando el archivo de configuración ubicado en /etc/custodia/custodia.conf)
+$ custodia --config /etc/custodia/custodia.conf --add-secret my_secret "valor_del_secreto" (almacena el secreto identificado como my_secret con el valor proporcionado)
+$ custodia --config /etc/custodia/custodia.conf --list-secrets (muestra las claves disponibles en el servidor Custodia)
+$ custodia --config /etc/custodia/custodia.conf --verbose (genera información adicional sobre el estado y los errores encontrados)
+1.-
+El archivo de configuración se puede personalizar para especificar opciones como el almacenamiento de backend o los certificados utilizados. Por ejemplo:
+# nano /etc/custodia/custodia.conf
+       [main]
+        listen = https://0.0.0.0:8000
+        certfile = /etc/custodia/cert.pem
+        keyfile = /etc/custodia/key.pem
+       [secrets]
+        backend = file
+        path = /var/lib/custodia/secrets
+Este archivo configura el servidor para escuchar en el puerto 8000 y utiliza un backend basado en archivos.
 
 
 cut
