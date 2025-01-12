@@ -8460,6 +8460,36 @@ $ cstream -OD -o myfile (escribe a myfile usando O_DIRECT y O_SYNC, lo que puede
 $ cat input_file | cstream -b 10000 | awk '{print $1}' (crear una tubería con "cstream" y "awk" para filtrar y transformar datos)
 
 
+csvkit
+Conjunto de herramientas para convertir, limpiar, transformar y analizar datos en formato CSV [Comma-Separated Values]. Incluye las herramientas csvclean, csvcut, csvformat, csvgrep, csvjoin, csvjson, csvlook, csvpy, csvsort, csvsql, csvstack, csvstat, in2csv y sql2csv
+$ csvclean archivo.csv (elimina caracteres no válidos y correge problemas de formato y generará un nuevo archivo limpio, generalmente con un sufijo -clean en el nombre)
+$ csvcut -c nombre_columna1,nombre_columna2 archivo.csv (mostrará solo las columnas especificadas)
+$ csvformat -T archivo.csv (convertirá el archivo CSV en un archivo TSV [Tab-Separated Values])
+$ csvgrep -c nombre_columna -m valor archivo.csv (mostrará solo las filas en las que nombre_columna tenga el valor especificado)
+$ csvjoin -c columna_comun archivo1.csv archivo2.csv (combinará los archivos en función de columna_comun)
+$ csvlook archivo.csv (presentará el contenido del archivo en una tabla en la terminal)
+$ csvsort -c nombre_columna archivo.csv (ordenará el archivo según nombre_columna)
+$ csvstat archivo.csv (mostrará estadísticas sobre cada columna en el archivo)
+$ csvgrep -c nombre_columna -m valor archivo.csv | csvlook (filtrar y luego mostrar el resultado en formato tabular)
+
+
+csvtool
+Biblioteca para leer y escribir archivos CSV. También admite todas las extensiones utilizadas por Excel, por ejemplo, comillas, saltos de línea, caracteres de 8 bits en campos, etc.
+$ csvtool col 1,3,5 input.csv > output.csv (Devuelve las columnas espcificadas de input.csv y la escribe en output.csv)
+$ csvtool namedcol Account,Cost input.csv > output.csv (Suponiendo que la primera fila del .csv es una lista de encabezados de columnas, esto devuelve las columnas con los encabezados nombrados)
+$ csvtool drop 1 input.csv > output.csv (para eliminar los encabezados de un archivo CSV)
+$ csvtool drop 10 input.csv | csvtool take 10 - > output.csv (extraer las filas 11 a 20 de un archivo)
+$ csvtool -t TAB -u COMMA cat input.tsv > output.csv (concatena los archivos de entrada y los escribe en la salida)
+$ csvtool paste input1.csv input2.csv > output.csv (Concatena las columnas de los archivos y los escríbe en la salida)
+$ csvtool pastecol 2-3 1- input.csv update.csv.csv > output.csv (Reemplazar el contenido de las columnas referenciadas en el archivo input.csv con el de la columna correspondiente especificada en update.csv)
+$ csvtool square input.csv > input-square.csv (que las filas tengan la misma longitud)
+$ csvtool trim tb input.csv (Recorta filas vacías en la parte superior e inferior)
+Nota.- Otras opciones:
+       t   - recorta filas vacías solo en la parte superior
+       lr  - recorta columnas vacías a la izquierda y a la derecha
+       tlrb- recorta filas/columnas vacías por todos lados
+
+
 cupp
 Herramienta que puede generar un diccionario para ataques de fuerza bruta o ataques de diccionario con una lista de palabras a partir de información como un cumpleaños, apodo, dirección, nombre de una mascota o familiar, o una palabra común.
 $ cupp3 -i (Realiza varias preguntas sobre cual es el nombre, el nik, el hijo... y al final creau un diccionario con los datos entrados .txt)
