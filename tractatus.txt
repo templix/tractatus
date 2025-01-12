@@ -8718,6 +8718,17 @@ $ cvs remove file_to_remove.c (eliminar un archivo del control de CVS)
 $ cvs log file_to_check.c (verificar la historia de cambios de un archivo)
 
 
+cvsps
+Es un programa para generar información de "conjunto de parches" a partir de un repositorio CVS. En este caso, un conjunto de parches se define como un conjunto de cambios realizados en una colección de archivos, todos confirmados al mismo tiempo usando un único comando "cvs commit".
+$ cvsps -v /ruta/al/repositorio (información básica de parches. Generará una salida detallada con información sobre cada cambio)
+$ cvsps -v /ruta/al/repositorio | grep 'file1.c' (mostrar solo los cambios de archivos específicos)
+$ cvsps -d 2023-01-01 /ruta/al/repositorio (obtener información de parches de una fecha específica)
+$ cvsps -a /ruta/al/repositorio | sort | uniq -c (generar un resumen de cambios por autor)
+$ cvsps -v /ruta/al/repositorio | awk '$3=="A:0"' (filtrar por tipo de cambio [A:0 para eliminaciones])
+$ cvsps -v /ruta/al/repositorio > patches_info.csv (exportar la salida a un formato CSV)
+$ cvsps -v /ruta/al/repositorio | awk '{print $1,$2}' | sort | uniq -c (combinar con otros comandos)
+
+
 cwcp
 Proporciona soporte para aprender a usar el código Morse. Este paquete proporciona un tutor interactivo de código Morse con una interfaz de usuario de pantalla completa basada en texto (ncurses).
 $ cwcp
