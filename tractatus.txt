@@ -8520,6 +8520,27 @@ ctdb
 # journalctl -u ctdb (verificar los logs de ctdb)
 
 
+cthumb
+Generar álbumes de imágenes web con miniaturas, temas y subtitulos. Además, te permite opcionalmente tener varias vistas de la colección de imágenes. Un álbum se compone de una serie de páginas, cada una compuesta por una colección de imágenes. Para cada página (y cada imagen), puedes tener varias anotaciones por imagen. cthumb generará varias versiones de la página, para cada tipo de anotación.
+$ cthumb -d album mis_imagenes/*.jpg (genera un álbum web en el directorio de salida album a partir de las imágenes en el directorio mis_imagenes)
+$ cthumb -d album -t blue_theme mis_imagenes/*.png (usar un tema personalizado)
+$ cthumb -d album -s 150x150 mis_imagenes/*.jpg (generar un álbum con una resolución específica para las miniaturas, cada una a 150x150 píxels
+$ cthumb -d album -b "Volver al índice" mis_imagenes/*.jpg (que cada página del álbum incluya un enlace al índice principal)
+$ cthumb -d album -T "Mi Álbum Personal" mis_imagenes/*.jpg (especificar el título del álbum que aparece en la página principal)
+$ cthumb -d album -n mis_imagenes/*.jpg (no sobrescribir archivos en el directorio de salida)
+$ cthumb -d album -v mis_imagenes/*.jpg (ver cómo se generará el álbum sin crear archivos)
+$ cthumb -d album -r directorio_principal/ (con las imágenes organizadas en subdirectorios, se puede generar un álbum con categorías)
+$ cthumb -d album -p thumb_ mis_imagenes/*.jpg (usar un prefijo en los nombres de las miniaturas generadas)
+1.-
+Para agregar subtítulos a las imágenes colocarlas en un archivo de texto, una por linea, seguido del subtitulo:
+$ nano subtitulos.txt
+imagen1.jpg=Este es el primer subtítulo
+imagen2.jpg=Subtítulo para la segunda imagen
+...
+El comando sería:
+$ cthumb -d album -c subtitulos.txt mis_imagenes/*.jpg
+
+
 cupp
 Herramienta que puede generar un diccionario para ataques de fuerza bruta o ataques de diccionario con una lista de palabras a partir de información como un cumpleaños, apodo, dirección, nombre de una mascota o familiar, o una palabra común.
 $ cupp3 -i (Realiza varias preguntas sobre cual es el nombre, el nik, el hijo... y al final creau un diccionario con los datos entrados .txt)
