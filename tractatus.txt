@@ -8490,6 +8490,18 @@ Nota.- Otras opciones:
        tlrb- recorta filas/columnas vacías por todos lados
 
 
+csync2
+Sincroniza archivos en un clúster mediante el algoritmo rsync.
+# csync2 --config /etc/csync2/csync2.cfg (ejecuta la sincronización completa basada en la configuración definida en /etc/csync2/csync2.cfg)
+# csync2 --config /etc/csync2/csync2.cfg --exclude=*.tmp (excluye todos los archivos con extensión .tmp durante la sincronización)
+# csync2 --config /etc/csync2/csync2.cfg --mode incremental (sincroniza solo los archivos modificados desde la última sincronización)
+# csync2 --config /etc/csync2/csync2.cfg --status (muestra el estado actual de la sincronización y qué archivos están listos para ser transferidos)
+# csync2 --config /etc/csync2/csync2.cfg --force (fuerza una sincronización completa ignorando la base de datos de archivos modificados)
+# csync2 --config /etc/csync2/csync2.cfg --dir /home/user/documents (sincroniza solo el directorio /home/user/documents según la configuración)
+# csync2 --config /etc/csync2/csync2.cfg --verbose (proporciona más detalles sobre el proceso de sincronización)
+Nota.- En el archivo de configuración /etc/csync2/csync2.cfg es donde se definen los nodos participantes, las rutas de sincronización y otras opciones específicas.
+
+
 cupp
 Herramienta que puede generar un diccionario para ataques de fuerza bruta o ataques de diccionario con una lista de palabras a partir de información como un cumpleaños, apodo, dirección, nombre de una mascota o familiar, o una palabra común.
 $ cupp3 -i (Realiza varias preguntas sobre cual es el nombre, el nik, el hijo... y al final creau un diccionario con los datos entrados .txt)
