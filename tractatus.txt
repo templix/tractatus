@@ -8739,6 +8739,79 @@ Calendario para mujeres. Dada una duración del ciclo o estadísticas de varios 
 $ cycle
 
 
+daemon
+Hay muchas tareas que se deben realizar para configurar correctamente un proceso demonio. Daemon realiza estas tareas y además, resulta útil para escribir demonios en lenguajes distintos de C, C++ o Perl, por ejemplo, sh, Java.
+$ daemon --name=script-daemon --output=/var/log/mi-script.log script.sh (asigna un nombre al demonio y especifica un archivo de registro del script.sh que se ejecutará como demonio)
+$ daemon --name=criptt-daemon --respawn -- mi-script.sh (reinicia el proceso automáticamente si termina inesperadamente)
+$ daemon --name=apli-java java -jar mi-aplicacion.jar (ejecutar una aplicación Java como demonio)
+$ daemon --name=mi-script --user=usuario --group=grupo mi-script.sh (ejecutar el demonio bajo un usuario y grupo específicos)
+$ daemon --name=mi-script --nice=10 mi-script.sh (ejecutar un proceso con una prioridad de CPU ajustada por ejemplo a 10 [valores positivos reducen la prioridad])
+$ daemon --stop --name=script-daemon (detener un demonio que se está ejecutando)
+$ daemon --running --name=script-daemon (verificar si un demonio está en ejecución)
+1.-
+Si se desea ejecutar varios scripts y registrar su salida en diferentes archivos:
+$ daemon --name=script1 --output=/var/log/script1.log script1.sh
+$ daemon --name=script2 --output=/var/log/script2.log script2.sh
+
+
+daemonize
+Un demonio es un proceso que se ejecuta en segundo plano, es decir, sin una terminal asociada o shell de inicio de sesión ya sea esperando que ocurra algún evento o esperando realizar alguna tarea específica de manera periódica. La mayoría de los programas que están diseñados para ejecutarse como demonios hacen ese trabajo por sí mismos. Sin embargo, ocasionalmente se puede encontrar con uno que no lo hace. Cuando un programa demonio no se convierte correctamente en un verdadero demonio de Unix, es cuando se puede usar daemonize para obligarlo a ejecutarse como un verdadero demonio.
+$ daemonize script.sh (ejecutará script.sh como un demonio)
+$ daemonize --name=mi_demonio --pidfile=/var/run/mi_demonio.pid script.sh (especifica un nombre para el demonio y un archivo PID)
+$ daemonize --stdout=/var/log/mi_demonio.log --stderr=/var/log/mi_demonio.err script.sh (se redireccionan las salidas estándar y de error a archivos específicos)
+$ daemonize --restart=60 script.sh (hará que el demonio se reinicie cada 60 segundos si falla)
+$ daemonize --background script.sh (ejecutará el script en segundo plano)
+Nota.- El script tiene que estar diseñado para funcionar como un demonio, por ejemplo, usando fork(),  exec()...
+
+
+daemonlogger
+Registrador de paquetes y un demonio de soft tap. Es capaz de funcionar en dos modos: rastreando paquetes y registrándolos directamente en el disco o en Reflect mode [modo de "soft tap" - toque suave] donde refleja los paquetes en otra interfaz, útil para la monitorización en tiempo real sin interrumpir el tráfico de red. Daemonlogger se puede ejecutar en primer plano o en segundo plano como un demonio.
+$ daemonlogger -i eth0 -f /var/log/packets.log (captura paquetes de una interfaz de red y los registra en un archivo en el disco)
+$ daemonlogger -i eth0 -o eth1 (refleja los paquetes capturados [eth0] a otra interfaz de red [eth1])
+$ daemonlogger -i eth0 -f /var/log/packets.log -o eth1 (captura los paquetes de eth0, los registra en /var/log/packets.log y también los envia a eth1)
+
+
+daemontools
+Colección de herramientas para administrar y supervisar servicios UNIX: envdir, envuidgid, fghack, multilog, pgrphack, readproctitle, setlock, setuidgid, softlimit, supervise, svc, svok, svscan, svscanboot, svstat, tai64n y tai64nlocal
+- envdir permite configurar las variables de entorno de un programa a partir de archivos en un directorio, por ejemplo con un directorio myenv con los archivos:
+$ ls mienv
+     VAR1 (contenido: "valor1")
+     VAR2 (contenido: "valor2")
+Se puede ejecutar:
+$ envdir ./myenv env (imprimirá las variables de entorno configuradas: VAR1=valor1 y VAR2=valor2)
+- envuidgid configura las variables de entorno UID y GID basadas en el usuario especificado.
+$ envuidgid nobody env (imprimirá las variables UID y GID para el usuario nobody)
+- fghack permite que un programa en segundo plano use la terminal estándar.
+$ fghack your-daemon (redirigirá la salida de un programa daemon a tu terminal
+- multilog es una herramienta para registrar mensajes de forma eficiente.
+$ myservice | multilog t ./logs (escribirá los mensajes en el directorio ./logs y aplicará la opción t para incluir marcas de tiempo)
+- pgrphack ayuda a ejecutar un programa sin que sea el líder de su grupo de procesos.
+$ pgrphack myprogram (cambia el grupo de procesos para nno causar problemas con otros supervisores)
+- setuidgid ejecuta un programa como un usuario específico, configurando las variables UID y GID.
+$ setuidgid nobody ls -la (ejecutará ls -la como el usuario nobody)
+- supervise supervisa un servicio ejecutándolo continuamente y reiniciándolo si falla.
+Crear un directorio que contenga un script run para iniciar el servicio.
+$ cat ~/service/myservice
+      #!/bin/sh
+      exec myprogram
+$ supervise ~/service/myservice
+- svok comprueba si un servicio supervisado por supervise está funcionando.
+$ svok /service/myservice (devuelve un código de salida 0 si el servicio está activo)
+- svc controla un servicio supervisado: iniciar, detener, recargar, etc.
+$ svc -u /service/myservice (-u inicia el servicio, -d lo detiene y -t lo reinicia)
+- svscan escanea un directorio para supervisar todos los servicios contenidos en él.
+$ svscan /service (escanea el directorio, busca subdirectorios con scripts run, y los supervisa)
+
+
+daemontools-run
+Inicia svscanboot desde inittab y proporciona el directorio /etc/service/ para que los servicios sean supervisados ​​por daemontools.
+# daemontools-run /etc/service/myservice (iniciar un servicio específico)
+# daemontools-run -d /etc/service/ (iniciar todos los servicios en el directorio /etc/service/)
+# daemontools-run /etc/service/myservice status (verificar el estado de un servicio específico)
+# daemontools-run /etc/service/myservice stop (detener un servicio)
+# daemontools-run /etc/service/myservice restart (reiniciar un servicio)
+
+
 dansguardian
 [squid]. Filtro de contenidos web [cliente] que trabaja conjuntamente con el servidor proxy squid [servidor].
 Adaptar el archivo de configuración:
@@ -8807,15 +8880,88 @@ Arrancar el servicio:
 En el navegador colocar la dirección: localhost:667
 
 
+das_watchdog
+Junto con test_rt estan diseñados para administrar y supervisar sistemas en tiempo real, asegurando que estos procesos no puedan colgar la máquina. das_watchdog es un daemon que monitorea el sistema para evitar bloqueos causados por procesos en tiempo real. Si detecta que un proceso en tiempo real está consumiendo todos los recursos y bloqueando al sistema, el daemon toma medidas para restaurar la estabilidad. test_rt es una herramienta auxiliar que simula un proceso en tiempo real. Se Puede usar para probar la configuración del sistema y verificar que el daemon das_watchdog responde correctamente a un proceso en tiempo real mal comportado.
+# das_watchdog (iniciar el daemon)
+# das_watchdog --test (efectuar un test para ver si el mensage de la pantalla esta funcionando, se puede cerrar)
+# das_watchdog -v (mostrará información sobre los procesos monitoreados y cualquier intervención del watchdog)
+# journalctl -u das_watchdog (mientras el daemon está en ejecución, se puede monitorear los logs del sistema para observar si intervino en algún proceso)
+# test_rt (inicia un proceso que simula una carga en tiempo real. Si el proceso interfiere con el sistema, das_watchdog debería intervenir)
+# test_rt 5000 (ejecutará el proceso en tiempo real durante 5 segundos)
+# test_rt --stress (fuerza un uso más intensivo de los recursos)
+# das_watchdog --min-priority 50 (ajusta la prioridad mínima de los procesos que das_watchdog monitorea)
+
+
+dash
+[Debian Almquist SHell]. Shell compatible con POSIX derivado de ash. Dado que ejecuta scripts más rápido que bash y tiene menos dependencias de bibliotecas, lo que lo hace más robusto frente a fallos de software o hardware, se utiliza como shell de sistema predeterminado en los sistemas Debian.
+
+
 datalad
 Plataforma de distribución y gestión de datos que brinda acceso a una amplia gama de recursos de datos que están disponibles en línea.
 $ datalad create mi_dataset (crear un nuevo dataset en la carpeta actual con el nombre "mi_dataset")
-$ datalad install https://example.com/mi_dataset.git (descargar e instalar un dataset existente en la máquina local)
+$ datalad install https://example.com/mi_dataset.git (descargar e instalar un dataset existente desde una URL)
 $ datalad get mi_dataset/carpeta/archivos (obtener todos los archivos de una carpeta específica)
 $ datalad publish mi_dataset (que el dataset se publique en un servidor conocido por DataLad)
 $ datalad update mi_dataset (actualizar un dataset existente en la máquina local)
 $ datalad search palabra ("palabra" es la clave que se desea buscar)
 $ datalad clone mi_dataset (clonar un dataset existente)
+$ datalad install ssh://mi_usuario@mi_servidor/mi_ruta/dataset.git (descargarlo desde un servidor remoto)
+$ datalad add archivo.txt otro_archivo.txt directorio/ (agregar nuevos archivos o directorios a un dataset existente)
+$ datalad diff mi_dataset (ver los cambios realizados en un dataset)
+
+
+datamash
+Herramienta de estadísticas. Realiza operaciones numéricas y estadísticas básicas en archivos de datos textuales de entrada. Incluye la herramienta decorate. Los ejemplos en el directorio /usr/share/doc/datamash/examples/. Algunas opciones: count [num de elementos], sum [suma], min [elemento más bajo], max [el mayor], mean [la media], median [el del medio]...
+$ seq 7 12 | datamash count 1 (el número de elementos de la primera parte es 6)
+$ seq 3 | datamash max 1 min 1 mean 1 median 1 (el máximo, el minimo, la media y el del medio)
+$ datamash -g 2 min 3 max 3 < /usr/share/doc/datamash/examples/scores.txt (encuentre el puntaje más bajo [mín.] y más alto [máx.] para cada especialidad universitaria, la especialidad está en la columna 2, los valores de puntaje están en la columna 3)
+$ datamash -g 2 mean 3 sstdev 3 < /usr/share/doc/datamash/examples/scores.txt (encuentre el número de estudiantes, la puntuación media y la desviación estándar de la muestra para cada especialidad universitaria)
+Una línea de encabezado es una primera línea opcional en los archivos de entrada o salida, que etiqueta cada columna. Datamash puede generar una línea de encabezado en el archivo de salida, incluso si el archivo de entrada no tiene una línea de encabezado (scores.txt no tiene una línea de encabezado, la primera línea del archivo contiene datos). Use --header-out para agregar una línea de encabezado a la salida (cuando la entrada no contiene una línea de encabezado):
+$ datamash --header-out -g 2 count 3 mean 3 pstdev 3 < /usr/share/doc/datamash/examples/scores.txt
+$ datamash -s -g 13 count 2 < /usr/share/doc/datamash/examples/genes.txt (agrupar por columna 13 y, para cada grupo, cuente los valores en la columna 2. -s para ordenar automáticamente el archivo de entrada)
+$ datamash -s -g 13 count 2 collapse 2 < /usr/share/doc/datamash/examples/genes.txt (usando la operación de collapse, datamash puede imprimir todas las isoformas de cada gen)
+$ datamash -H -s -g 13 count 2 collapse 2 < /usr/share/doc/datamash/examples/genes.txt (al utilizar un archivo con una línea de encabezado, agregar -H)
+$ echo -e '1.0\n2.5\n3.1\n4.3\n5.6\n5.7' | tr '.' ',' | datamash mean 1 (Obtener la media de una sola columna de números flotantes, los flotantes deben usar "," y no ".")
+$ echo -e '1\n2\nNa\n3\nNaN' | datamash --narm mean 1 (Obtener la media de una sola columna de números ignorando las cadenas "Na" y "NaN" literales)
+$ echo '3,14 42 1000 -51' | tr ' ' '\n' | datamash sum 1
+1.-
+$ cat table.txt
+brown bread mat hair 42
+blue cake mug shirt -7
+yellow banana window shoes 3.14
+$ datamash -t' ' sum 5 <table.txt (caracteres separados por espacios, sumar el 5º)
+38.14
+2.-
+$ cat scores.csv
+Name,Maths,Physics,Chemistry
+Ith,100,100,100
+Cy,97,98,95
+Lin,78,83,80
+Er,60,70,90
+$ datamash -t, transpose <scores.csv
+Name,Ith,Cy,Lin,Er
+Maths,100,97,78,60
+Physics,100,98,83,70
+Chemistry,100,95,80,90
+3.-
+$ cat toys.txt
+car blue
+car red
+car yellow
+truck brown
+bus green
+bus maroon
+rocket white
+$ datamash -t' ' -g1 collapse 2 <toys.txt
+car blue,red,yellow
+truck brown
+bus green,maroon
+rocket white
+$ datamash -t' ' -g1 count 2 rand 2 <toys.txt
+car 3 red
+truck 1 brown
+bus 2 green
+rocket 1 white
 
 
 date
@@ -8871,9 +9017,92 @@ dav
 $ dav archivo.txt
 
 
+davfs2
+Montar un recurso WebDAV como un sistema de archivos normal. WebDAV [Web Distributed Authoring and Versioning], es una extensión del protocolo HTTP que permite la creación de recursos en un servidor web remoto. davfs2 proporciona la capacidad de acceder a dichos recursos como si fueran un sistema de archivos típico, lo que permite su uso por parte de aplicaciones estándar sin soporte integrado para WebDAV.
+# davfs2 /path/to/mountpoint (montar un recurso WebDAV)
+# umount /path/to/mountpoint (desmontar un recurso WebDAV)
+# davfs2 -o max_read_ahead=131072 /path/to/mountpoint (montar un recurso WebDAV con opciones adicionales)
+# davfs2-info /path/to/mountpoint (mostrar información detallada sobre un recurso WebDAV)
+# davfs2-clean (limpiar caché de davfs2)
+1.-
+Configurar autenticación básica para un recurso WebDAV:
+# echo "username:password" | sudo tee /etc/davfs2/secrets
+# chmod 600 /etc/davfs2/secrets
+
+
+davix
+Kit de herramientas [davix-cp, davix-get, davix-http, davix-ls, davix-mkdir, davix-mv, davix-put y davix-rm] diseñado para operaciones con archivos con protocolos basados en http (WebDav, Amazon S3, ... Cada ejecutable está especializado en una operación específica similar a los comandos tradicionales de Unix, pero diseñados para entornos remotos basados en HTTP.
+$ davix-cp https://example.com/archivo.txt ./archivo_local.txt (descargar un archivo remoto)
+$ davix-get https://example.com/datos.json (descargar un archivo desde un servidor HTTP)
+$ davix-get --cert client.pem https://secure.example.com/archivo.txt (descargar un archivo desde un servidor protegido con autenticación)
+$ davix-http GET https://example.com/ (realizar una solicitud GET para comprobar un servidor)
+$ davix-ls https://example.com/directorio/ (listar el contenido de un directorio en un servidor)
+$ davix-ls -l https://example.com/directorio/ (listar con detalles)
+$ davix-mkdir https://example.com/nuevo_directorio/ (crear un directorio en un servidor)
+$ davix-mv davs://webdav.example.com/viejo.txt davs://webdav.example.com/nuevo.txt (mueve o renombra archivos en un servidor remoto)
+$ davix-mv davs://webdav.example.com/archivo.txt davs://webdav.example.com/backup/archivo.txt (mover un archivo a otro directorio remoto)
+$ davix-put ./archivo_local.txt davs://webdav.example.com/archivo_remoto.txt (subir un archivo al servidor remoto)
+$ davix-rm davs://webdav.example.com/archivo.txt (eliminar un archivo en un servidor WebDAV)
+$ davix-rm -r davs://webdav.example.com/directorio/ (eliminar un directorio completo)
+
+
 davpass
 Sistema de archivos virtual para acceder a archivos, imágenes de disco y ubicaciones remotas
 $ davpass -h HOST -u usuario -p paswdr
+
+
+db-util
+Utilidades de base de datos de Berkeley. Este paquete vacío [dummy package] no contiene archivos funcionales ni ejecutables por sí mismo. Su propósito es proporcionar dependencias que instalan otros paquetes relacionados o facilitar transiciones entre versiones de software. Cuandose instala db-util, este no contiene las herramientas en sí, pero depende del paquete que sí las incluye, como db5.3-util u otra versión de Berkeley DB Utility. Esto ayuda a gestionar versiones y dependencias sin que el usuario tenga que preocuparse por instalar cada utilidad individualmente.. Incluye las herramientas db_archive [Archivar archivos de log obsoletos], db_checkpoint [Crear puntos de control], db_deadlock [Detección de bloqueos], db_dump [Exportar una base de datos], db_hotbackup, db_load, db_log_verify, db_printlog, db_recover, db_replicate, db_stat [Ver estadísticas de la base de datos], db_upgrade y db_verify
+$ db_archive -a (muestra todos los archivos de registro necesarios para recuperar la base de datos)
+$ db_archive -h /var/lib/db -d /backup/logs (mover archivos de registro no necesarios a un directorio de respaldo)
+$ db_checkpoint -h /var/lib/db -k 20 (crea un punto de control si no se ha creado uno en los últimos 20 KB de operaciones)
+$ db_deadlock -h /var/lib/db -a (detecta y selecciona automáticamente una transacción para terminar si hay un bloqueo)
+$ db_dump -h /var/lib/db mydb.db > backup.db (convierte una base de datos binaria en un archivo de texto para realizar copias de seguridad)
+$ db_load -h /var/lib/db -f backup.db newdb.db (importar el volcado)
+$ db_stat -h /var/lib/db -m (muestra información detallada sobre el uso de memoria)
+
+
+dbab
+[Don't Be A Bitch - No seas perro]. Bloqueo de anuncios basado en dnsmasq. Bloquea sitios de publicidad a nivel de DNS. La lista de bloqueos de anuncios se puede descargar periódicamente desde pgl.yoyo.org y se puede ajustar localmente. Acelera la navegación en dispositivos móviles sin instalar ninguna aplicación en ellos. Incluye las herramientas dbab-add-list, dbab-chk-list [esta lista puede ayudar a comprobar si la propia lista ya está cubierta por pgl.yoyo.org], dbab-get-list, dbab-svr y dhcp-add-wpad.
+$ dbab-add-list (gregar tu propia lista de bloqueo de anuncios)
+$ dbab-get-list (obtener/actualizar lista de bloqueo de anuncios)
+# ln -s /usr/sbin/dbab-get-list /etc/cron.weekly/ (Para actualizar semanalmente con cron)
+# nano /etc/dbab/dbab.list- (para quitar de la lista algun host que nos ha bloqueado)
+# nano /etc/dbab/dbab.list+ (para incluir alguno)
+
+
+dbar
+Barra de progreso/medidor de porcentaje gráfico ASCII de propósito general. dbar le permite definir marcas estáticas de 0% y 100% o puede definir estas marcas dinámicamente en tiempo de ejecución. Las marcas estáticas y dinámicas se pueden mezclar, en este caso el valor especificado en tiempo de ejecución tendrá una prioridad más alta. Puede especificar rangos de números, negativos, positivos o rangos con un valor mínimo negativo y un valor máximo positivo.
+$ seq 100 | dbar -s x -l linux (usando "x" y con el texto "linux" al principio)
+
+
+dbconfig-common
+Sistema utilizado en Debian y sus derivados para facilitar la configuración de bases de datos para aplicaciones que la requieren durante su instalación. Este sistema permite que varios paquetes de software compartan la misma infraestructura de configuración de base de datos. Cuando se instala un paquete que utiliza dbconfig-common, este se encargará automaticamente de gestionar la creación y configuración de la base de datos necesaria como MySQL, PostgreSQL, etc. así como de almacenar las credenciales necesarias para que la aplicación pueda acceder a la base de datos.
+1.-
+Ejemplo: Instalación del paquete phpmyadmin que utiliza dbconfig-common y que requiere una base de datos MySQL. Durante la instalación, el sistema pedirá configurar la base de datos.
+# apt install phpmyadmin
+dbconfig-common se encargará de configurar automáticamente la base de datos según las respuestas.
+2.-
+Configuración manual con el comando:
+# dpkg-reconfigure dbconfig-common
+Abrirá un asistente para configurar los detalles de la base de datos.
+
+
+dbconfig-no-thanks
+Paquete que se puede instalar si no se desea que dbconfig-common [ver] configure automáticamente la base de datos para un paquete específico permitiéndo hacerlo manualmente o utilizar otro método de configuración.
+1.-
+Ejemplo: Instalación del paquete phpmyadmin sin que dbconfig-common configure la base de datos automáticamente:
+# apt install dbconfig-no-thanks
+# apt install phpmyadmin
+Cuando se instale phpmyadmin, no se activará la configuración automática de la base de datos, y se tendrá que configurarla manualmente.
+
+
+dbeacon
+Programa de monitoreo de redes que se utiliza principalmente para supervisar la accesibilidad de otros dispositivos en una red y recopilar estadísticas sobre su funcionamiento, pérdida de paquetes, retraso en la transmisión y fluctuaciones en la conexión. Es multidifusión o sea que admite múltiples fuentes de difusión, lo que permite una mayor flexibilidad en la configuración. Es capaz de operar tanto con protocolos IPv4 como IPv6.
+$ dbeacon (iniciará dbeacon en modo normal, donde comenzará a escuchar por defecto en el puerto 11111)
+$ dbeacon -i 5 (establecerá un intervalo de 5 segundos entre los updates)
+$ dbeacon -p 12345 (escuchar en el puerto 12345)
+$ dbeacon -6 (activa el soporte para IPv6)
 
 
 dbmmanage
