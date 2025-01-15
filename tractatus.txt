@@ -9105,6 +9105,28 @@ $ dbeacon -p 12345 (escuchar en el puerto 12345)
 $ dbeacon -6 (activa el soporte para IPv6)
 
 
+dbench
+Simula cargas de trabajo para el sistema de archivos local. Es útil para probar el rendimiento de sistemas de archivos y almacenamiento.
+$ dbench 4 (simula 4 clientes que acceden simultáneamente al sistema de archivos)
+$ dbench 8 > resultados_dbench.log (simula 8 clientes y guarda los resultados en el archivo resultados_dbench.log)
+$ dbench -t 60 16 (simula 16 clientes durante 60 segundos)
+$ dbench -c custom.config 8 (utiliza el archivo de configuración custom.config para definir el comportamiento de la prueba y simula 8 clientes)
+
+
+dbf2mysql
+Este programa toma un archivo xBase [DBF] y envía consultas a un servidor MySQL para insertarlo en una tabla MySQL y viceversa, volcar una tabla MySQL a un archivo dbf para lo cual se usa la aplicación incluida en el paquete llamada mysql2dbf.
+$ dbf2mysql -u usuario -p contraseña -d mi_base_de_datos -t clientes clientes.dbf (Un archivo "clientes.dbf" que  se quiere importar a una tabla llamada "clientes" en una base de datos MySQL llamada "mi_base_de_datos")
+
+
+dblatex
+Herramienta que convierte documentos DocBook SGML/XML en formatos de salida como DVI, PostScript y PDF.
+$ dblatex -f pd mi_documento.xml (generar PDF desde un archivo XML)
+$ dblatex -f dvi -o documento.dvi mi_documento.sgml (generar DVI con nombre documento.dvi desde un archivo SGML)
+$ dblatex -f ps mi_documento.xml (generar PostScript desde un archivo XML)
+$ dblatex -f pd,dvi,ps mi_documento.xml (generar múltiples formatos simultáneamente)
+$ dblatex -f pd,dvi,ps -o salida_ mi_documento.xml --doctype book --language es_ES --with-figures --with-tables (generará PDF, DVI y PostScript del documento `mi_documento.xml`, usando el lenguaje español, incluyendo figuras y tablas en la salida)
+
+
 dbmmanage
 Se utiliza para crear y actualizar los archivos de formato DBM utilizados para almacenar los nombres de usuario y la contraseña para la autenticación básica de los usuarios HTTP a través de mod_authn_dbm. Los recursos disponibles en el servidor Apache HTTP pueden ser restringidos sólo a los usuarios listados en los archivos creados por dbmmanage. Este programa sólo puede ser usado cuando los nombres de usuario están almacenados en un archivo DBM. Para usar una base de datos de archivo plano, ver htpasswd. Otra herramienta para mantener una base de datos de contraseñas DBM es htdbm.
 # dbmmanage archivo view USER (archivo de formato DBM sin la extensión .db, .pag, o .dir del usuario especificado)
@@ -14783,6 +14805,7 @@ $ grep -l -r 'fstab' /etc (Sólo mostrar los archivos que contienen la palabra e
 $ grep -n 'fstab' /etc/fstab (Mostrar la linea y el número de linea)
 $ grep -A 2 'swap' /etc/fstab (Mostrar la línea de la ocurrencia [swap] y las 2 siguientes)
 $ grep -B 1 'swap' /etc/fstab (Mostrar la linea de la ocurrencia [swap] y la anterior)
+$ grep -C 2 'fstab' /etc (Saca las 2 líneas antes y después de la búsqueda del patrón)
 $ grep --color UUID /etc/fstab (Resaltar en color la palabra "UUID")
 Otras opciones:
 $ grep -Fx -f archivo1 archivo2 (Mostrar líneas que aparezcan en dos archivos)
@@ -21090,6 +21113,11 @@ Si solo queramos ver los permisos de un usuario:
 	> show grants for 'root'@'localhost';
 Otra herramienta importante es el script "mysql_secure_installation", el cual nos ayuda a eliminar usuarios anónimos, establecer una contraseña al administrador, eliminar las bases de datos de pruebas, habilitar o deshabilitar el acceso remoto del usuario administrador, etc.
 $ sudo mysql_secure_installation
+
+
+mysql2dbf
+Toma los datos de una tabla de MySQL y los vuelca a un archivo en formato DBF.
+$ mysql2dbf -u usuario -p contraseña -d mi_base_de_datos -t clientes clientes_exportado.dbf (Una tabla llamada clientes en la base de datos mi_base_de_datos y se exportaa a un archivo DBF llamado clientes_exportado.dbf)
 
 
 mysqladmin
@@ -29335,6 +29363,14 @@ Interfaz para la instalación de grupos de paquetes relacionados con un propósi
 # tasksel --list (mostrará una lista de todos los paquetes disponibles)
 # tasksel install lxde-desktop (instalar un determinado escritorio)
 # tasksel remove lxde-desktop (desinstalarlo)
+
+
+tbench
+Herramienta utilizada para simular cargas de trabajo en servidores de archivos utilizando un modelo cliente-servidor. Esta herramienta es útil para medir el rendimiento del almacenamiento o la red en un entorno de pruebas.
+$ tbench_srv (inicia el servidor que tbench utilizará para las pruebas)
+$ tbench 4 localhost (en otra terminal, se ejecuta el cliente, en este caso simula 4 clientes conectados al servidor en localhost)
+$ tbench -t 60 8 localhost (ejecuta la prueba durante 60 segundos con 8 clientes conectados al servidor)
+$ tbench 8 servidor-remoto (simula 8 clientes conectándose a un servidor remoto)
 
 
 tc
