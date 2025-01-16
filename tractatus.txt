@@ -9180,17 +9180,21 @@ Versión parcheada de GNU dd con funciones forenses. dc3dd es una versión parch
 # dc3dd if=/path/entrada.img of=/path/destino.img bs=512 log=forensic_log.txt (establece un tamaño de bloque de 512 bytes, tamaño estándar en discos duros)
 
 
+dcache
+Es un sistema de almacenamiento masivo distribuido que permite gestionar grandes volúmenes de datos a través de una arquitectura de red. El comando dcache es una colección de herramientas que permiten a los usuarios interactuar con un sistema dCache. Estas herramientas permiten realizar operaciones como cargar, descargar, listar o eliminar datos en el entorno.
+$ dcache ls /path/to/dcache/directory (listará todos los archivos y directorios en la ubicación especificada dentro del sistema dCache)
+$ dcache put /local/path/to/file.txt /path/to/dcache/directory/ (subir file.txt desde una ruta local al directorio especificado en dCache)
+$ dcache get /path/to/dcache/directory/file.txt /local/path/to/save/ (descargará file.txt desde dCache a la ruta local indicada)
+$ dcache rm /path/to/dcache/directory/file.txt (eliminará file.txt del sistema dCache)
+$ dcache stat /path/to/dcache/directory/file.txt (obtener información detallada sobre el archivo, como su tamaño, fecha de modificación, etc)
+
+
 dcarw
 Utilidad que convierte el formato nativo [RAW] de varias cámaras digitales en imágenes netpbm portable pixmap (.ppm) o TIFF.
 $ dcarw input.raw output.ppm (convierte el archivo input.raw a un archivo output.ppm)
 $ dcarw input.raw output.tiff (convierte el archivo input.raw a un archivo output.tiff)
 $ dcarw *.raw output_%03d.ppm (convierte todos los .raw en la carpeta actual y los guarda como archivos PPM con nombres numerados: output_001.ppm, output_002.ppm, etc.)
 $ dcarw -s 800x600 input.raw output.ppm (convierte el archivo input.raw a un archivo output.ppm, ajustando el tamaño de la imagen a 800x600 píxeles)
-
-
-dconf
-Restablece los parámetros o configuración por defecto de entornos de escritorio Unity, GNOME y MATE.
-$ dconf reset -f /
 
 
 dcfldd
@@ -9200,6 +9204,39 @@ Versión mejorada de dd para análisis forense y seguridad.
 # dcfldd if=/dev/sdX of=destino.img split=1G (divide la salida en partes de 1 GB cada una, útil para manejar grandes volúmenes de datos)
 # dcfldd if=/dev/sdX pattern="confidencial" log=pattern_log.txt (busca la palabra "confidencial" en el dispositivo y guarda los resultados en un log)
 # dcfldd if=/dev/sdX of=/dev/null (probar o analizar la velocidad de lectura sin escribir datos)
+
+
+dcmtk
+Forma parte del DICOM Toolkit desarrollado por OFFIS y ofrece herramientas para trabajar con archivos de imágenes médicas en formato DICOM. Estas herramientas son útiles para tareas como visualizar, manipular, convertir, validar y transmitir archivos DICOM.
+$ dcm2xml input.dcm output.xml (convierte el archivo DICOM input.dcm al formato XML y lo guarda en output.xml)
+$ xml2dcm input.xml output.dcm (convierte input.xml en un archivo DICOM output.dcm)
+$ dcmdump input.dcm (muestra los encabezados y el contenido del archivo DICOM input.dcm)
+$ dcmj2pnm --write-jpeg input.dcm output.jpg (convierte el archivo DICOM input.dcm a una imagen JPEG output.jpg)
+$ dcmj2pnm --write-dicom output.dcm input.jpg (convierte input.jpg a un archivo DICOM output.dcm)
+$ storescu -aet MyAE -aec PACS_AE 192.168.1.100 104 input.dcm (envía input.dcm al servidor PACS dirección IP 192.168.1.100, puerto 104, con el nombre de aplicación local MyAE y el AE Title del servidor PACS_AE)
+$ movescu -aet MyAE -aec PACS_AE -aem MyMoveAE 192.168.1.100 104 -k PatientID=12345 (solicita al servidor PACS todas las imágenes del paciente con ID 12345 y las almacena localmente usando el AE Title MyMoveAE)
+$ findscu -aet MyAE -aec PACS_AE 192.168.1.100 104 -k PatientName=Smith (busca pacientes con el nombre Smith en el servidor PACS)
+$ dcmqrscp -c dcmqrscp.cfg (inicia un servidor PACS utilizando el archivo de configuración dcmqrscp.cfg)
+$ dcmodify -m "PatientName=John Doe" input.dcm (cambia el nombre del paciente en el archivo input.dcm a John Doe)
+$ dcmconv --write-pixel-sequence input.dcm output.dcm (convierte el archivo input.dcm en output.dcm)
+$ dcmdump -E input.dcm (imprime información detallada sobre el archivo DICOM y sus encabezados)
+$ findscu -aec PACS_AE 192.168.1.100 104 -k StudyDescription (lista todas las descripciones de estudios disponibles en el servidor PACS)
+
+
+dconf
+Restablece los parámetros o configuración por defecto de entornos de escritorio Unity, GNOME y MATE.
+$ dconf reset -f /
+
+
+dcraw
+Herramienta para procesar chivos RAW de cámaras digitales y convertirlos en formatos más comunes como PPM o TIFF.
+$ dcraw -c arhivo.raw (extrae información básica del archivo RAW sin procesar la imagen)
+$ dcraw -D archivo.raw > imagen.ppm (convierte el archivo RAW a formato PPM [Portable Pixmap])
+$ dcraw -T archivo.raw > imagen.tiff (convierte el archivo RAW a formato TIFF)
+$ dcraw -j archivo.raw > imagen.jpg (convierte el archivo RAW a formato JPEG)
+$ dcraw -d x=100,y=100,w=200,h=300 archivo.raw > imagen.ppm (extrae una subimagen del tamaño 200x300 desde las coordenadas (100,100) del archivo RAW)
+$ dcraw -c arhivo.raw | ppmtopnm | pnmquant 255 | pnmtopgm > imagen.pgm (extrae información básica del archivo RAW, convierte la imagen a PGM y aplica una cuantización de color)
+$ dcraw -T archivo.raw > imagen.tiff && dcraw -D archivo.raw > imagen.ppm (convierte el archivo RAW a TIFF y PPM simultáneamente)
 
 
 dd
