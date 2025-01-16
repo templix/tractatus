@@ -9134,6 +9134,23 @@ Se utiliza para crear y actualizar los archivos de formato DBM utilizados para a
 # dbmmanage archivo delete USER (eliminar un usuario)
 
 
+dbtoepub
+Convertir documentos DocBook al formato .epub [Electronic PUBlication], un estándar abierto para libros y publicaciones digitales.
+$ dbtoepub documento.xml (generará un archivo llamado documento.epub en el mismo directorio)
+$ dbtoepub --output-dir=epub_output documento.xml (colocará el archivo documento.epub en el directorio epub_output)
+$ dbtoepub --title="Mi libro" --author="Autor Ejemplo" --language="es" --date="2025-01-16" documento.xml (especificar metadatos como el título, autor, idioma o fecha)
+Nota.- Para verificar el archivo generado
+$ epubcheck documento.epub
+
+
+dbus-test
+Sistema de mensajería entre procesos que permite que las aplicaciones interactúen tre sí.
+$ dbus-test --address unix:abstract=/tmp/dbus-test (Probar la conexión)
+$ echo "Hola mundo" | dbus-send --session --dest=org.example.HelloWorld --type=method_call /HelloWorld org.example.HelloWorld.Hello string:"Hola" (enviar un mensaje)
+$ dbus-monitor --session (escuchar por eventos)
+$ dbus-test --system --session --dest=org.freedesktop.DBus --type=method_call /org/freedesktop/DBus org.freedesktop.DBus.ListNames (probar un servicio específico)
+
+
 dbus-test-runner
 Ejecutable para ejecutar un par de programas bajo una nueva sesión DBus. Esta herramienta hace pruebas unitarias de código de acceso a DBus en tiempo de ejecución.
 $ dbus-test-runner (de todos los parámetros por defecto)
@@ -30234,6 +30251,14 @@ tracepath
 Similar a la utilidad traceroute [ver], pero también intenta descubrir la MTU de la ruta. En las redes, la unidad de transmisión máxima [MTU] es una medida que representa el tamaño máximo de paquetes de datos que un dispositivo conectado a una red aceptará. Los paquetes que exceden la MTU [1500 bytes de medida máxima] de una red no pueden atravesarla. Admite IPv4 e IPv6.
 $ tracepath -p 80 localhost (del puerto 80 de localhost)
 $ tracepath google.es
+
+
+tracker
+Sistema de indexación y búsqueda de archivos que permite gestionar y buscar metadatos de manera eficiente. Se encarga de indexar los archivos en el sistema, capturando información como nombres de archivos, tipos de archivos, contenido de documentos, etiquetas, y otros metadatos. Cuando se instala Tracker, automáticamente comienza a indexar los archivos en las ubicaciones predeterminadas como el directorio de inicio. No se necesita ejecutar un comando específico para iniciar la indexación
+$ tracker3 search nombre_archivo (buscará archivos que coincidan con "nombre_archivo" en los metadatos indexados)
+$ tracker3 index (mostrará información sobre los directorios indexados)
+$ tracker3 info archivo (mostrará información de archivo)
+$ tracker3 tag archivo (muestra la etiqueta de archivo)
 
 
 trafshow
