@@ -9156,11 +9156,36 @@ Ejecutable para ejecutar un par de programas bajo una nueva sesión DBus. Esta h
 $ dbus-test-runner (de todos los parámetros por defecto)
 
 
+dbview
+Herramienta para visualizar y manipular archivos de bases de datos en formato dBase III y IV, que son formatos de archivo de base de datos bastante antiguos. Además, sirve para convertir archivos .dbf a otros formatos.
+$ dbview archivo.dbf > salida.txt (creará salida.txt que contendrá los datos del archivo .dbf en un formato de texto)
+$ dbview -c archivo.dbf > salida.csv (conversión a CSV)
+
+
 dc
 calculadora. Los operadores se colocan antes que sus operandos.
 $ echo "5 2 + p" | dc (Se introducen dos números [5 y 2] se indica la operación a realizar [+] y que muestre el resultado [p])
 $ echo "4 6 + 2 * 4 / p" | dc
 $ echo "40034291 23 % p " | dc (Da el resto de la división)
+
+
+dc3dd
+Versión parcheada de GNU dd con funciones forenses. dc3dd es una versión parcheada de GNU dd con funciones adicionales para la investigación forense informática.
+# dc3dd if=/dev/sdX of=/path/destino.img hash=md5 log=logfile.txt (copiar el dispositivo "if" en la salida "of" calculando el hash MG5 y guardar un registro detallado en un archivo de log)
+# dc3dd if=/dev/sdX of=/path/destino.img split=2G log=split_log.txt (divide la salida en partes de 2 GB cada una útil para almacenar grandes imágenes en varios discos o medios)
+# dc3dd if=/dev/sdX pattern="password123" log=pattern_log.txt (pattern="password123": busca "password123" dentro de los datos del dispositivo y los resultados se registran en pattern_log.txt)
+# dc3dd if=/dev/sdX of=/path/destino.img conv=noerror,sync log=error_log.txt (continúa el proceso incluso si encuentra errores de lectura y los guarda en el log)
+# dc3dd if=/dev/sdX of=/path/destino.img hash=md5,sha256 log=hash_log.txt (calcula hashes MD5 y SHA-256 simultáneamente para mayor verificación)
+# dc3dd if=/path/destino.img hash=md5,sha256 hashlog=verify_log.txt (guarda los valores hash para comparación futura)
+# dc3dd if=/path/entrada.img of=/path/destino.img bs=512 log=forensic_log.txt (establece un tamaño de bloque de 512 bytes, tamaño estándar en discos duros)
+
+
+dcarw
+Utilidad que convierte el formato nativo [RAW] de varias cámaras digitales en imágenes netpbm portable pixmap (.ppm) o TIFF.
+$ dcarw input.raw output.ppm (convierte el archivo input.raw a un archivo output.ppm)
+$ dcarw input.raw output.tiff (convierte el archivo input.raw a un archivo output.tiff)
+$ dcarw *.raw output_%03d.ppm (convierte todos los .raw en la carpeta actual y los guarda como archivos PPM con nombres numerados: output_001.ppm, output_002.ppm, etc.)
+$ dcarw -s 800x600 input.raw output.ppm (convierte el archivo input.raw a un archivo output.ppm, ajustando el tamaño de la imagen a 800x600 píxeles)
 
 
 dconf
@@ -9169,8 +9194,12 @@ $ dconf reset -f /
 
 
 dcfldd
-Versión moderna de dd que muestra el progreso así como informar si se producen errores. Soporta en teoría los mismos parámetros que el comando dd original
-# dcfldd if=imagen.iso of=/dev/sde bs=1M
+Versión mejorada de dd para análisis forense y seguridad.
+# dcfldd if=/dev/sdX of=/path/destino.img hash=md5 hashlog=hash_log.txt (copia un disco mientras genera un hash MD5 y lo guarda en un log)
+# dcfldd if=/dev/sdX of=/path/destino.img hash=md5,sha256 hashlog=hashes_log.txt (generar múltiples hashes al mismo tiempo)
+# dcfldd if=/dev/sdX of=destino.img split=1G (divide la salida en partes de 1 GB cada una, útil para manejar grandes volúmenes de datos)
+# dcfldd if=/dev/sdX pattern="confidencial" log=pattern_log.txt (busca la palabra "confidencial" en el dispositivo y guarda los resultados en un log)
+# dcfldd if=/dev/sdX of=/dev/null (probar o analizar la velocidad de lectura sin escribir datos)
 
 
 dd
