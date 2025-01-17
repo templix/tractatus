@@ -8739,6 +8739,15 @@ Calendario para mujeres. Dada una duración del ciclo o estadísticas de varios 
 $ cycle
 
 
+dadadodo
+Herramienta que genera texto aleatorio basado en un análisis estadístico del texto proporcionado. Se utiliza para crear cadenas de palabras que no tienen mucho sentido lógico pero pueden ser gramaticalmente correctas o casi correctas, dependiendo del texto fuente. Esto se logra utilizando cadenas de Markov, un enfoque probabilístico para modelar el texto.
+$ dadadodo -c 1 texto.txt (genera una sola oración aleatoria basada en el texto del archivo)
+$ dadadodo -c 5 texto.txt -o dada_texto.txt (generar 5 oraciones aleatorias y guardandolo en un archivo)
+$ dadadodo -a texto.txt (muestra información como las palabras únicas, su frecuencia, y cómo se conectan en el modelo de Markov)
+$ echo "La vida es un carnaval lleno de colores." | dadadodo -c 3 (genera 3 oraciones con el texto)
+$ dadadodo -c 10 poesia.txt noticias.txt (genera 10 oraciones con los textos de los dos archivos combinados)
+
+
 daemon
 Hay muchas tareas que se deben realizar para configurar correctamente un proceso demonio. Daemon realiza estas tareas y además, resulta útil para escribir demonios en lenguajes distintos de C, C++ o Perl, por ejemplo, sh, Java.
 $ daemon --name=script-daemon --output=/var/log/mi-script.log script.sh (asigna un nombre al demonio y especifica un archivo de registro del script.sh que se ejecutará como demonio)
@@ -8844,6 +8853,23 @@ Muestra lista de paquetes ingresados recientemente al repositorio y lista los pa
 # daptup --pre
 # daptup --post
 # daptup --last
+
+
+dar
+crea, prueba, enumera, extrae, compara, fusiona, aísla y repara archivos dar. Archivador con todas las funciones, compatible con copias de seguridad diferenciales, porciones, compresión y compatibilidad con ATTR/ACL [/Access Control List]. Incluye las herramientas dar_cp, dar_manager, dar_slave, dar_split y dar_xform.
+$ dar_cp origen.dar /ruta/destino (copiar archivos o directorios desde un archivo DAR a otro)
+$ dar_manager create nombre_archivo.dar (gestionar archivos DAR, como crear, listar, extraer y eliminar archivos DAR)
+$ dar_manager list nombre_archivo.dar (listar contenido de un archivo DAR)
+$ dar_manager extract nombre_archivo.dar (extraer archivos de un DAR)
+$ dar_slave -x nombre_archivo.dar (se ejecuta en segundo plano para realizar operaciones en archivos DAR sin bloquear el terminal principal)
+$ dar_split -s 100M archivo_original.dar ptes_* (divide archivos DAR en múltiples partes para facilitar su manejo y transferencia)
+$ dar_xform -c nombre_archivo.dar (comprimir un archivo DAR)
+$ dar_xform -d nombre_archivo.dar (descomprimir un archivo DAR)
+$ dar_manager enum nombre_archivo.dar (enumerar archivos)
+$ dar_manager compare archivo1.dar chivo2.dar (comparar archivos DAR)
+$ dar_manager merge archivo1.dar chivo2.dar resultado.dar (fusionar chivos DAR)
+$ dar_manager isolate nombre_archivo.dar /ruta/destino (aislar un archivos DAR)
+$ dar_manager repair nombre_archivo.dar (reparación de archivos DAR)
 
 
 darcs
@@ -9322,6 +9348,14 @@ $ ddgr linux emacs
 Las teclas que se usan son las del navegador escogido.
 
 
+ddir
+Muestra árbol de directorios como tree [ver].
+$ ddir -R -l -a ~/Documents (ver el contenido del directorio y subdirectorios [-R+, incluso con nombres largos [-l] y ocultos [-a])
+$ ddir -R --type=f | grep '\.x$' (mostrar solo archivos ejecutables)
+$ ddir -c /path/to/directory (contar archivos y directorios)
+$ ddir -Rh /path/to/directory | sort -k5 -n -r | head -n 10 (ordenará los resultados por tamaño descendente y mostrará los 10 archivos más grandes)
+
+
 ddpt
 Se utiliza principalmente para copiar datos entre dispositivos de almacenamiento, especialmente cuando se trabaja con discos, particiones o archivos.
 # ddpt if=/dev/sda3 of=/dev/sdb3 bs=4M status=progress (copiar de dispositivo de salida [if=] al de destino [of=] con un tamaño del bloque de lectura/escritura de 4 megabytes y mostrando progreso de la operación)
@@ -9345,6 +9379,31 @@ Método de ejecutar ddrescue en dos pasadas, de forma que la primera sólo recup
 # ddrescue -v -n /dev/sda /dev/sdb sda.txt
 # ddrescue -v -r2 -d /dev/sda /dev/sdb sda.txt
 Luego comprobar errores con fsck.
+
+
+dds2tar
+Herramienta utilizada para trabajar con cintas DAT [Digital Audio Tape]. Permite identificar y manejar dispositivos SCSI desconocidos mediante el uso de cintas de datos compatibles con el formato DDS [Digital Data Storage]. También puede extraer información o interactuar con los datos almacenados en dichas cintas.
+$ dds2tar -i /dev/st0 (descubrir un dispositivo SCSI desconocido y proporcionar detalles como modelo, fabricante y compatibilidad [/dev/st0 es el dispositivo de cinta típico en un sistema Linux])
+$ dds2tar -l /dev/st0 (leer el contenido de una cinta y listar los archivos almacenados sin extraerlos)
+$ dds2tar -x /dev/st0 (extraer los archivos almacenados en una cinta en el directorio actual)
+$ tar cf - /ruta/a/datos | dds2tar -w /dev/st0 (crea un archivo tar desde /ruta/a/datos y lo envía y los escribe  en la cinta conectada en /dev/st0)
+$ dds2tar -v /dev/st0 (verificación de los datos almacenados en la cinta)
+
+
+ddrutility
+Conjunto de herramientas que se utiliza para ayudar en la recuperación de datos relacionados con sectores defectuosos y está diseñado para complementar a gnuddrescue. Este conjunto de utilidades se centra en facilitar operaciones que pueden ser necesarias durante el proceso de recuperación de datos, como la creación de imágenes de disco, la verificación de integridad de datos...
+$ ddrescue /dev/sdX /path/to/imagefile.img /path/to/logfile.log (intenta recuperar datos del dispositivo /dev/sdX y los escribe en imagefile.img, usando logfile.log para registrar el progreso)
+$ ddrutil --create-image /dev/sdX /path/to/disk.img (creará una imagen del dispositivo /dev/sdX y la guardaría en disk.img)
+$ ddrverify /path/to/imagefile.img (comprobará la integridad del archivo de imagen especificado)
+$ ddrinfo /dev/sdX (mostrará información detallada sobre el dispositivo de almacenamiento especificado)
+
+
+ddtc
+[Debian Description Translation Coordinator - Coordinador de traducción de descripciones de Debian].Herramienta diseñada para ayudar a los traductores y revisores en la gestión de correos electrónicos relacionados con el sistema de traducción de descripciones de paquetes Debian [DDTS, Debian Description Translation System]. Automatiza tareas como analizar correos, separar traducciones por paquetes, enviar traducciones revisadas y corregir errores en las traducciones.
+$ ddtc --analyze ddts-email.txt (generará varios archivos de traducción, uno para cada paquete mencionado en el correo)
+$ ddtc --review paquete_es.po (Abrirá el archivo de traducción en español del paquete que se desea revisar para que se realicen ajustes)
+$ ddtc --correct paquete_es.po (intentará corregir errores automáticamente, como formatos incorrectos o caracteres no válidos)
+$ ddtc --send paquete_es.po (enviará la traducción al sistema y notificará que está lista para su integración)
 
 
 ddupdate
@@ -9445,6 +9504,15 @@ Listar los ficheros que serán instalados:
 instalarlo:
 	# dpkg -i picpuz_2.2-1_i386.deb
 Lo encontraremos en aplicaciones/juegos
+
+
+debarchiver
+Herramienta diseñada específicamente para organizar y estructurar archivos de paquetes Debian de manera eficiente. Su propósito principal es crear una estructura de directorios que otras herramientas como apt-get y similares puedan utilizar fácilmente para instalar o actualizar paquetes.  Los archivos de paquetes ubicados en el directorio de entrada de debarchiver junto con el archivo ".changes" generado correspondiente serán ordenados por un cronjob en el directorio apropiado del repositorio.
+$ debarchiver create-pkg /ruta/al/archivo.deb /ruta/destino/ (crea un nuevo paquete a partir de un archivo .deb existente y lo coloca en la estructura correcta)
+$ debarchiver extract-pkg /ruta/paquete.deb /ruta/extraer/ (extrae todos los archivos contenidos en el paquete .deb a la ruta especificada)
+$ debarchiver list-pkg /ruta/paquete.deb (muestra un resumen detallado de los archivos incluidos en el paquete)
+$ debarchiver check-pkg /ruta/paquete.deb (verifica si el paquete está intacto y no ha sido modificado durante la transferencia)
+$ debarchiver clean-pkg /ruta/paquete.deb (elimina archivos temporales y comprime el paquete para ahorrar espacio)
 
 
 debcheckout
