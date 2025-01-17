@@ -9239,6 +9239,16 @@ $ dcraw -c arhivo.raw | ppmtopnm | pnmquant 255 | pnmtopgm > imagen.pgm (extrae 
 $ dcraw -T archivo.raw > imagen.tiff && dcraw -D archivo.raw > imagen.ppm (convierte el archivo RAW a TIFF y PPM simultáneamente)
 
 
+dctrl
+Conjunto de utilidades diseñadas para manipular y consultar archivos en el formato dctrl [control de Debian]. Este formato se utiliza comúnmente para almacenar metadatos relacionados con los paquetes de Debian, como los contenidos de Packages, Sources y otros archivos relacionados.  Se incluyen las herramientas: grep-dctrl [Buscar información en archivos con formato dctrl], grep-available [Buscar la base de datos disponible de DPKG], grep-status [Buscar la base de datos de estado de DPKG], grep-aptavail [Buscar la base de datos disponible de APT], grep-debtags [Buscar la base de datos de paquetes Debtags], sort-dctrl [Ordenar archivos con formato dctrl], tbl-dctrl [Extrae y concatena entradas de archivos dctrl] y sync-available [Sincroniza /var/lib/dpkg/available con los datos actuales]
+$ grep-dctrl -F Depends -s Package python3 /var/lib/apt/lists/*_Packages (busca en el campo Depends todos los paquetes que dependen de python3 en el archivo Packages)
+$ grep-status -F Status -s Package "hold ok installed" /var/lib/dpkg/status (busca en el campo Status y muestra los paquetes encontrados que estan en estado hold del archivo status)
+$ sort-dctrl -k Package /var/lib/apt/lists/*_Packages (ordena las entradas según el campo Package)
+$ tbl-dctrl -s Package,Version,Architecture /var/lib/apt/lists/*_Packages (selecciona los campos que se desea mostrar en la tabla)
+$ cat-dctrl -F Package linux /var/lib/apt/lists/*_Packages (Busca en el campo Package y muestra todas las entradas que contienen linux)
+# sync-available (sincronizar con los datos actuales de los repositorios)
+
+
 dd
 Crea imagenes de discos, particiones ...
 $ dd if=/dev/zero of=/dev/hda  (escribe ceros en todo el disco)
@@ -9265,6 +9275,16 @@ Convierte fechas gregorianas en fechas subrealistas. Algunas opciones coinciden 
 $ ddate (forma básica)
 $ ddate +%d-%B-%Y
 $ ddate +'Hoy es %{%A, el %e de %B%}, %Y. %N%nCelebrate %H'
+
+
+ddcci-dkms
+Este conjunto de módulos del núcleo proporciona un controlador DDC/CI [Display Data Channel Command Interface] para monitores compatibles y la integración en la clase de sistema de retroiluminación. Útil para controlar características de los monitores, como el brillo, el contraste y otros parámetros, directamente desde el sistema operativo.
+$ lsmod | grep ddcci (Para verificar después de la instalación si los módulos del núcleo se han cargado automáticamente)
+Una vez que ddcci-dkms está instalado y los módulos están cargados, se puede utilizar la herramienta ddcutil [apt install ddcutil] para interactuar con el monitor.
+$ ddcutil detect (ver los monitores conectados y su información)
+$ ddcutil getvcp 10 (leer propiedades específicas del monitor, como el brillo. 10 es el código VCP [Virtual Control Protocol] para el brillo)
+$ ddcutil setvcp 10 50 (ajusta el brillo al 50%)
+Nota.- Es importante mencionar que no todos los monitores son compatibles con DDC/CI. Si después de ejecutar los comandos no se obtiene resultados o el monitor no responde a los ajustes, puede que el monitor no soporte esta funcionalidad o que haya un problema de configuración.
 
 
 ddccontrol
@@ -9300,6 +9320,13 @@ Utilidad para hacer busquedas con DuckDuckGo desde la terminal. Abrira las busqu
 $ export BROWSER=w3m
 $ ddgr linux emacs
 Las teclas que se usan son las del navegador escogido.
+
+
+ddpt
+Se utiliza principalmente para copiar datos entre dispositivos de almacenamiento, especialmente cuando se trabaja con discos, particiones o archivos.
+# ddpt if=/dev/sda3 of=/dev/sdb3 bs=4M status=progress (copiar de dispositivo de salida [if=] al de destino [of=] con un tamaño del bloque de lectura/escritura de 4 megabytes y mostrando progreso de la operación)
+# ddpt if=/ruta/al/archivo.iso of=/dev/sdb bs=4M status=progress (copiar desde un archivo a un dispositivo)
+# ddpt if=/dev/sda of=/ruta/nuevo_archivo.img bs=4M status=progress (copiar desde un dispositivo a un archivo)
 
 
 ddrescue
