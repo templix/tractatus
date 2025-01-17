@@ -7985,6 +7985,26 @@ Imprime la lista de módulos CPAN obsoletos en su máquina. Este script se puede
 $ cpanoutdated
 
 
+cpants_lint
+Herramienta utilizada para analizar la calidad de una distribución de Perl CPAN antes de cargarla. El objetivo principal es identificar problemas y mejorar la calidad de un paquete antes de su publicación en CPAN.
+$ cpants_lint My-Module-1.0.tar.gz (mostrará un informe detallado sobre la calidad del paquete)
+$ cpants_lint /ruta/a/mi/modulo/ (Si se está desarrollando un módulo y con los archivos sin comprimir en un directorio, analizarlo directamente)
+$ cpants_lint --json My-Module-1.0.tar.gz (generar un informe en formato JSON)
+$ cpants_lint Module1-0.1.tar.gz Module2-0.2.tar.gz /ruta/a/otro/modulo/ (analizar varios archivos o directorios a la vez)
+1.-
+Si se está desarrollando un módulo, se puede empaquetar primero con make dist o similar y luego verificarlo:
+$ perl Makefile.PL
+$ make dist
+$cpants_lint My-Module-1.0.tar.gz
+Una salida típica podría incluir lineas como:
+      Checking prerequisites... OK
+      Checking for README... MISSING
+      Checking for META.yml... OK
+      Checking POD coverage... OK
+      Checking for tests... OK
+Cada elemento indica si cumple con las expectativas de calidad. Los elementos marcados como "MISSING" o "FAIL" requieren atención.
+
+
 cpdb-backend-file
 Es parte del ecosistema de OpenPrinting y se utiliza como backend para gestionar la impresión en archivos desde aplicaciones que implementan Common Print Dialog Backends [CPDB].
 $ cpdb-backend-file (ejecutará el backend y lo hará disponible para cualquier diálogo de impresión que lo soporte)
@@ -8765,6 +8785,17 @@ d-itg
 # d-itg stop (parar el generador de tráfico)
 
 
+d-shlibs
+Herramienta utilizada en el sistema operativo Debian para ayudar en la creación de paquetes de bibliotecas compartidas [shared libraries] que intentan ayudar a automatizar el proceso y detectar errores simples. Consta de "d-shlibmove" que mueve el binario de la biblioteca compartida [.so] desde el directorio de instalación temporal al directorio del paquete de destino y "d-devlibdeps" que intenta enumerar las dependencias de la biblioteca de desarrollo necesarias para usar el paquete -dev.
+$ d-shlibmove /usr/src/package/lib/*.so /usr/lib/ (moverá todas las bibliotecas compartidas en /usr/src/package/lib/ al directorio /usr/lib`)
+$ d-evlibdeps package_1.0-1.dsc (analizará el paquete package_1.0-1.dsc y generará un archivo package_1.0-1.deb-deps con las dependencias desarrollo encontradas)
+
+
+daa2iso
+Herramienta de conversión de archivos DAA [Direct Access Archive] a ISO. DAA2ISO es una herramienta de línea de comandos de código abierto para convertir imágenes de archivos DAA de una o varias partes al formato ISO original. La imagen DAA es, de hecho, simplemente un ISO comprimido que se puede crear a través del programa comercial PowerISO.
+$ daa2iso archivo.daa output.iso
+
+
 dadadodo
 Herramienta que genera texto aleatorio basado en un análisis estadístico del texto proporcionado. Se utiliza para crear cadenas de palabras que no tienen mucho sentido lógico pero pueden ser gramaticalmente correctas o casi correctas, dependiendo del texto fuente. Esto se logra utilizando cadenas de Markov, un enfoque probabilístico para modelar el texto.
 $ dadadodo -c 1 texto.txt (genera una sola oración aleatoria basada en el texto del archivo)
@@ -8878,6 +8909,14 @@ exceptionuserlist (Lista de excepciones de nombres de usuarios que no serán fil
 # /etc/init.d/dansguardian restart
 
 
+daps
+Suite de creación y publicación de DocBook (DAPS). DAPS contiene un conjunto de hojas de estilo, scripts y archivos make que le permiten crear HTML, PDF, EPUB y otros formatos a partir de DocBook XML con un solo comando. También contiene herramientas para generar archivos tar de fuentes perfilados para distribuir sus fuentes XML para su traducción o revisión. DAPS también incluye herramientas que lo ayudan a escribir DocBook XML: verificador de enlaces, validador, corrector ortográfico, macros de edición y hojas de estilo para convertir DocBook XML.
+$ daps -d DC-example html --single (generar una sola página HTML)
+$ daps -d DC-example --styleroot /usr/share/xml/docbook/stylesheets/daps2013 epub (generar ePUB utilizando hojas de estilo personalizadas)
+$ daps -d DC-example pdf --formmatter=xep --grayscale --cropmarks (generar PDF utilizando el formateador XEP)
+$ daps -d DC-example linkcheck --show (verificar enlaces y mostrar el resultado en un navegador)
+
+
 daptup
 Muestra lista de paquetes ingresados recientemente al repositorio y lista los paquetes que han tenido actualizaciones. Este comando no necesita ser llamado explícitamente ya que se llama automaticamente por todos los gestores de paquetes compatibles.
 # daptup --pre
@@ -8925,6 +8964,19 @@ darkhttpd
 Servidor de archivos via web. Acceso por navegador con http://url_o_ip:puerto.
 $ darkhttp /home/usuario/share --port 12001 --daemon (Directorio, puerto de escucha 12001 y dejando como demonio. Matar con killall darkhttpd)
 $ darkhttp /home/usuario/share --port 12001 --log  archivo  --chroot  (Sin dejar en background. Creando un archivo con las incidencias y bloqueando el servidor en el directorio especificado. Matar con ctrl+c)
+
+
+darkslide
+Generador de presentaciones HTML5. Puede escribir el contenido de la diapositivas utilizando Markdown, ReStructuredText y Textile, tambien admite temas CSS/JS, incrustación de imágenes con Base64 y transiciones elegantes.
+Mientras se está visualizando con la flechas para pasar las diapositivas:
+h -- visualización de la ayuda
+t -- alternar la tabla de contenidos de la presentación.
+ESC- visualizar la descripción general de la presentación
+n -- alternar la visibilidad del número de diapositiva
+b -- alternar la puesta en blanco de la pantalla
+c -- alternar la visualización de diapositivas dobles [diapositiva actual y próxima]
+S -- alternar la visualización del enlace al archivo de origen de cada diapositiva
+2 -- alternar las notas en sus diapositivas especificado con la macro .notes
 
 
 darkstat
