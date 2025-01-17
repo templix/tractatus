@@ -9004,6 +9004,12 @@ dash
 [Debian Almquist SHell]. Shell compatible con POSIX derivado de ash. Dado que ejecuta scripts más rápido que bash y tiene menos dependencias de bibliotecas, lo que lo hace más robusto frente a fallos de software o hardware, se utiliza como shell de sistema predeterminado en los sistemas Debian.
 
 
+datafudge
+Falsificar la fecha del sistema. Este programa y la biblioteca de precarga falsifica la fecha del sistema para que los programas piensen que el reloj es diferente. La falsificación no es completa; las marcas de tiempo en los archivos no se ven afectadas de ninguna manera.
+$ datafudge -s "2025-05-07 12:31" date -R (siempre marcará la misma fecha)
+$ datefudge "2025-05-07 12:31" date -R
+
+
 datalad
 Plataforma de distribución y gestión de datos que brinda acceso a una amplia gama de recursos de datos que están disponibles en línea.
 $ datalad create mi_dataset (crear un nuevo dataset en la carpeta actual con el nombre "mi_dataset")
