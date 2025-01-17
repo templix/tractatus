@@ -2121,6 +2121,17 @@ $ atopsar -A -r 20231118 (mostrando todo el reporte)
 $ atopsar -t 30 5 (informe sobre el tráfico de red, 5 muestras con un intervalo de 30 segundos)
 
 
+attr
+Un conjunto de herramientas para manipular atributos extendidos en objetos del sistema de archivos. Está diseñado para ser compatible con la herramienta SGI IRIX del mismo nombre.
+$ getfattr /ruta/al/objeto (mostrará todos los atributos y sus valores asociados al objeto especificado)
+$ setfattr -n user.myattribute -v "mi valor" /home/user/archivo.txt (establecer un nuevo atributo)
+$ setfattr -n ombre.del.atributo -v nueo_valor /ruta/al/objetto (modificar un atributo existente)
+$ rmfattr -n ombre.del.atributo /ruta/al/objetto (eliminar un atributo)
+$ attr -C /ruta/al/objetto (mostrará todos los atributos del objeto)
+$ attr -E nombre.del.atributo /ruta/al/objetto (establecerá o modificará el atributo especificado)
+$ attr -R nombre.del.atributo /ruta/al/objetto (eliminará el atributo especificado)
+
+
 audiofile-tools
 Utilidad para trabajar con archivos de audio [actualmente AIFF, AIFF-C, WAVE, NeXT/Sun, BICS y datos sin procesar]. Este paquete contiene las herramientas sfinfo y sfconvert.
 $ sfinfo archivo.wav  (muestra información de formato, canales y duración de un archivo de audio)
@@ -8729,6 +8740,13 @@ $ cvsps -v /ruta/al/repositorio > patches_info.csv (exportar la salida a un form
 $ cvsps -v /ruta/al/repositorio | awk '{print $1,$2}' | sort | uniq -c (combinar con otros comandos)
 
 
+cw
+Tutor de código Morse. én incluye archivos de ejemplo (con la extensión "cw") que contienen comandos que se pueden usar para cambiar propiedades como la velocidad, el tono y el espaciado de los caracteres.
+$ cw (espera la palabra que se introduce y al pulsar "intro" se escucha por los altavoces en código Morse y por pantalla se indica la letra que dice)
+$ cwgen (genera grupos de caracteres aleatorios para practicar el código Morse)
+$ cw -w 5 -v 50 (produce los sonidos más espaciados. De 4 a 60 lo más rápido y a menos volumen. De 0 a 100 el más alto)
+
+
 cwcp
 Proporciona soporte para aprender a usar el código Morse. Este paquete proporciona un tutor interactivo de código Morse con una interfaz de usuario de pantalla completa basada en texto (ncurses).
 $ cwcp
@@ -8739,6 +8757,14 @@ Calendario para mujeres. Dada una duración del ciclo o estadísticas de varios 
 $ cycle
 
 
+d-itg
+(Distributed Internet Traffic Generator) es una plataforma capaz de producir tráfico a nivel de paquete replicando con precisión los procesos estocásticos adecuados para las variables aleatorias IDT (Inter Departure Time) y PS (Packet Size) (exponencial, uniforme, cauchy, normal, pareto, ...). D-ITG admite la generación de tráfico tanto IPv4 como IPv6 y es capaz de generar tráfico a nivel de red, transporte y aplicación.
+# d-itg (iniciar el generador de tráfico)
+# d-itg --tcp (configurar el tipo de tráfico, por ejemplo, TCP)
+# d-itg --size=1500 --rate=1000000 (configurar el tamaño de paquete y velocidad de transmisión)
+# d-itg stop (parar el generador de tráfico)
+
+
 dadadodo
 Herramienta que genera texto aleatorio basado en un análisis estadístico del texto proporcionado. Se utiliza para crear cadenas de palabras que no tienen mucho sentido lógico pero pueden ser gramaticalmente correctas o casi correctas, dependiendo del texto fuente. Esto se logra utilizando cadenas de Markov, un enfoque probabilístico para modelar el texto.
 $ dadadodo -c 1 texto.txt (genera una sola oración aleatoria basada en el texto del archivo)
@@ -8746,6 +8772,10 @@ $ dadadodo -c 5 texto.txt -o dada_texto.txt (generar 5 oraciones aleatorias y gu
 $ dadadodo -a texto.txt (muestra información como las palabras únicas, su frecuencia, y cómo se conectan en el modelo de Markov)
 $ echo "La vida es un carnaval lleno de colores." | dadadodo -c 3 (genera 3 oraciones con el texto)
 $ dadadodo -c 10 poesia.txt noticias.txt (genera 10 oraciones con los textos de los dos archivos combinados)
+
+
+dacco-common
+El acrónimo DACCO significa 'Diccionari Anglès-Català de Codi Obert', o 'Diccionario inglés-catalán de código abierto'. El diccionario contiene traducciones, ejemplos y otros detalles gramaticales en ambos idiomas en archivos XML utilizados para otros proyectos como qdacco.
 
 
 daemon
