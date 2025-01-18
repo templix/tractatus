@@ -8564,6 +8564,40 @@ Cada vez que se edita y modifica el archivo fotos.album ha de volver a lanzarse 
 $ cthumb fotos.album
 
 
+cu
+[Call UNIX]. Es una herramienta que se utiliza para comunicarse con otros sistemas, principalmente a través de conexiones de línea serial. Su función principal es actuar como un terminal para conectarse a otros dispositivos o sistemas, permitiendo la interacción con ellos como si se estuviera usando un terminal local. Además, también puede ser utilizado para transferir archivos simples.
+$ cu -l /dev/ttyS0 -s 9600 (especifica el dispositivo de línea serial al que se desea conectar y la velocidad de conexión en baudios)
+Una vez ejecutado este comando, se estará conectado al dispositivo /dev/ttyS0 y se podrá enviar y recibir datos como si se estuviera usando un terminal. Aunque cu no es la herramienta más común para transferencias de archivos debido a su falta de verificación de errores, puede usarse para enviar y recibir archivos de manera simple. Para enviar, por ejemplo, un archivo desde un sistema A a un sistema B conectado a través de un puerto serial, primero se abre cu en el sistema A:
+$ cu -l /dev/ttyS0 -s 9600
+Luego, utilizar el comando send dentro de cu para enviar el archivo:
+sistema A> send archivo.txt
+Para recibir un archivo eEn el sistema B, también se necesita estar en cu y se puede usar el comando receive:
+sistema B> receive archivo.txt
+
+
+cuetools
+Herramientas para manipular archivos CUE/TOC. Estos archivos contienen información sobre la disposición de pistas en un CD, incluyendo tiempos de inicio, títulos, intérpretes, etc. Los archivos CUE y TOC son una forma de representar el diseño de un CD de datos o audio en un formato ASCII. El paquete incluye estas utilidades: cueconvert [convierte entre formatos CUE y TOC], cuebreakpoints [imprime los puntos de interrupción de un archivo CUE o TOC],
+cueprint [imprime información de pista y disco para un archivo CUE o TOC] y cuetag [etiqueta archivos según la información del archivo CUE/TOC]
+$ cue2toc archivo.cue > archivo.toc (crea un archivo archivo.toc con el mismo diseño del CD descrito en el archivo CUE)
+$ toc2cue archivo.toc > archivo.cue (genera el archivo archivo.cue equivalente al archivo TOC)
+$ cueprint -d "%p - %t\n" archivo.cue (imprimirá cada pista en el formato Intérprete - Título)
+$ cuebreakpoints archivo.cue > breakpoints.txt (guarda los tiempos de división en el archivo breakpoints.txt)
+$ cueconvert archivo.cue > archivo_convertido.toc (detecta automáticamente el formato de entrada y genera la salida en el otro formato)
+$ cuebreakpoints archivo.cue | shnsplit -o flac archivo_audio.flac (dividirá el archivo de audio en archivos individuales correspondientes a las pistas descritas en el archivo CUE)
+
+
+cumin
+Herramienta scrita en python que ofrece un marco para ejecutar comandos en múltiples destinos de manera simultánea y eficiente. Es especialmente útil para la gestión de sistemas distribuidos, ya que permite realizar tareas masivas en varios servidores o máquinas.
+$ cumin 'web_servers' 'hostname' (es un listar un grupo de destinos configurado en cumin, como un conjunto de servidores web y mostrando el nombre del host de cada máquina objetivo)
+$ cumin 'databases' 'df -h' (ejecutar el comando df -h en cada uno de los sitemas en el grupo predefinido que representa varios servidores de bases de datos los destinos)
+$ cumin 'A:group1 and R:region2' 'uptime' (selecciona todos los hosts en group1, selecciona hosts dentro de la región region2 y muestra cuánto tiempo ha estado en funcionamiento cada host)
+$ cumin -t mosh 'all' 'ls /var/log' (cambia el método de transporte a mosh, una alternativa a SSH e indica que el comando se ejecuta en todos los sistemas configurados)
+$ cumin --batch-size 10 'A:group2' 'echo "Batch execution"' (ejecuta el comando en lotes de 10 hosts a la vez en el grupo de destino A:group2)
+$ cumin --input-file targets.txt 'uptime' (targets.txt contiene una lista de destinos)
+$ cumin 'A:group3' 'whoami' > output.log (guardar salida en un archivo)
+$ cumin 'A:admin_servers' 'bash -c "echo $(date) - Service restarted"' (ejecuta un comando de Bash en cada servidor administrador, mostrando la fecha y un mensaje personalizado)
+
+
 cupp
 [Common User Passwords Profiler]. Herramienta que puede generar un diccionario para ataques de fuerza bruta o ataques de diccionario con una lista de palabras a partir de información como un cumpleaños, apodo, dirección, nombre de una mascota o familiar, o una palabra común.
 $ cupp3 -i (Realiza varias preguntas sobre cual es el nombre, el nik, el hijo... y al final crea un diccionario con los datos entrados .txt)
@@ -9126,9 +9160,9 @@ $ dateutils.ddiff 9:00:00 13:05:00 -f '%H:%M:%S' (mostrará la diferencia en hor
 $ dateutils.dround -n 10:02:00 5s (aumenta la fecha en 5 segundos)
 
 
-dav
-[dav-text]. Editor minimalista para ncurses.
-$ dav archivo.txt
+dav-text
+Editor de texto minimalista pensado para proporcionar un editor de texto estable que sea eficiente tanto en el uso de la memoria como del procesador.
+$ dav archivo.txt (si el archivo no existe, se creará uno nuevo)
 
 
 davfs2
@@ -33025,6 +33059,7 @@ $ wget -p http://www.tuxapuntes.com (todos los elementos extras)
 $ wget -c http://direccion_de_la_descarga.com (reiniciar descarga interrumpida)
 $ wget --spider  --no-parent -r -o log.txt http://web.com (lista enlaces rotos)
 $ wget -m -p -k -P DIR http://www.tuxapuntes.com (descargar todo un sitio recursivamente [-m], todo tipo de recursos, css, imágenes y demás para que se vea localmente [-p] y convierte los enlaces a accesibles de forma local [-k] y se guarde en el directorio "DIR")
+$ wget -r -p -U Mozilla https://blog.desdelinux.net/ (para burlar los sitios web que verifican la identidad del navegador para aplicar diversas restricciones)
 $ wget --wait=20 --limit-rate=20K -r -p -U Mozilla http://url.com (lo mismo pero haciendo pausas entre páginas y simulando ser un navegador)
 $ wget -O - -q http://checkip.dyndns.org/ | cut -d':' -f2 | cut -d'<' -f1| cut -c2- (Conocer la ip publica)
 $ wget -O - -q http://whatismyip.org/ (Lo mismo)
