@@ -8833,6 +8833,13 @@ $ cvsps -v /ruta/al/repositorio > patches_info.csv (exportar la salida a un form
 $ cvsps -v /ruta/al/repositorio | awk '{print $1,$2}' | sort | uniq -c (combinar con otros comandos)
 
 
+cvsweb
+Es un script CGI WWW que proporciona acceso remoto a un repositorio CVS. Permite explorar el árbol completo, con controles de acceso configurables. Mostrará el historial de revisiones de un archivo, así como también generará diferencias entre revisiones y permitirá descargar cualquier revisión del archivo completo.
+$ firefox http://tu_servidor/cvsweb/ (abrirá la interfaz gráfica de cvsweb en el navegador)
+$ firefox http://tu_servidor/cvsweb/directorio/ (acceder a un directorio específico)
+$ firefox http://tu_servidor/cvsweb/directorio/archivo.c (ver el contenido de un archivo específico)
+
+
 cw
 Tutor de código Morse. én incluye archivos de ejemplo (con la extensión "cw") que contienen comandos que se pueden usar para cambiar propiedades como la velocidad, el tono y el espaciado de los caracteres.
 $ cw (espera la palabra que se introduce y al pulsar "intro" se escucha por los altavoces en código Morse y por pantalla se indica la letra que dice)
