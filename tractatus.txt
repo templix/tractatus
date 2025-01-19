@@ -9847,6 +9847,13 @@ Instalar un sistema Debian dentro de un directorio de nuestro sistema para hacer
 # chroot /mnt/debian-i386 (Entrar en el nuevo sistema. Ver chroot)
 
 
+debootstick
+Convierte un entorno chroot en una imagen de arranque. Esto significa que se puede tomar una instalación de Linux ya configurada por ejemplo, en una partición y convertirla en una imagen ISO que se pueda usar copiándola en un USB o disco, como un disco de arranque.
+# debootstick --format=iso /dev/sdX1 output.iso (crea una imagen de arranque desde una instalación existente)
+# debootstick --device=/dev/sdX output.iso (escribirá la imagen ISO en el dispositivo /dev/sdX)
+# debootstick --status (verificar el estado del proceso)
+
+
 deborphan
 Visualizar paquetes huerfanos
 $ deborphan --guess-all   (Los muestra todos)
