@@ -7923,6 +7923,27 @@ Luego puede usarae así:
 $ corkscrew /etc/corkscrew.conf
 
 
+cowbuilder
+[cowbuilder pbuilder debootstrap cowdancer]. Herramienta que actúa como contenedor para pbuilder aplicación que crea un entorno aislado [chroot] para construir paquetes Debian, pero con soporte para cowdancer, una herramienta que usa copias en escritura [copy-on-write] para optimizar la creación y manipulación de entornos de construcción [chroo]).
+# mkdir -p /var/cache/pbuilder (configurar un entorno base que se usará como plantilla para construir paquetes)
+# cowbuilder --create --basepath /var/cache/pbuilder/base.cow --distribution bookworm --architecture amd64 (Ruta donde se almacenará el entorno base, distribución de Debian y arquitectura para el entorno)
+# cowbuilder --build nombre_paquete.dsc --basepath /var/cache/pbuilder/base.cow (descargará todas las dependencias necesarias y compilará el paquete en el entorno aislado)
+# cowbuilder --update --basepath /var/cache/pbuilder/base.cow (mantener el entorno actualizado con las últimas dependencias y paquetes)
+# cowbuilder --login --basepath /var/cache/pbuilder/base.cow (dará acceso a un entorno chroot limpio donde se puede instalar y probar el paquete con dpkg -i paquete.deb)
+# cowbuilder --create --basepath /var/cache/pbuilder/base-arm64.cow --distribution bookworm --architecture arm64 (construyendo paquetes para una arquitectura diferente por ejemplo, arm64)
+# cowbuilder --build nombre_paquete.dsc --basepath /var/cache/pbuilder/base-arm64.cow (construir paquetes para esa arquitectura)
+# cowbuilder --clean --basepath /var/cache/pbuilder/base.cow (si ocurre algún error durante la construcción o se quiere limpiar el entorno)
+El comportamiento de cowbuilder puede personalizarse mediante un archivo de configuración, por ejemplo:
+$ nano ~/.pbuilderrc
+# Ruta al entorno base
+BASETGZ=/var/cache/pbuilder/base.cow
+# Distribución por defecto
+DISTRIBUTION=bookworm
+# Espejo para descargar paquetes
+MIRRORSITE=http://deb.debian.org/debian
+Guardar y cowbuilder usará estas configuraciones por defecto.
+
+
 cowpatty
 Aplicación de ataque de diccionario contra contraseñas WPA2.
 $ cowpatty -f diccionario -r ataque.cap -s SSID (lista de palabras a usar, guardar en el archivo expecificado y el SSID encontrado)
@@ -8336,6 +8357,20 @@ Utilidades para complementar la funcionalidad de cron facilitando la gestión y 
 $ runalarm 10m backup.sh (ejecutar el script backup.sh 10 minutos después de invocarlo)
 $ runlock /tmp/process_data.lock process_data.sh (si process_data.sh no debe ejecutarse si ya está en ejecución. /tmp/process_data.lock es un archivo de bloqueo [lock file] que runlock crea. Si alguien intenta ejecutar el script process_data.sh mientras ya está en ejecución, no podrá hacerlo hasta que termine de ejecutarse y el archivo de bloqueo se elimine)
 $ runstat cleanup.sh (ejecutará el script y registrará información sobre cuánto tiempo tomó ejecutarlo y si tuvo éxito o falló)
+
+
+cross-config
+Proporciona configuraciones para arquitecturas cruzadas, diseñadas para facilitar el uso de herramientas como Autotools [autoconf, automake...] en entornos de compilación cruzada. La compilación cruzada implica compilar software en una arquitectura de máquina para que se ejecute en otra, por ejemplo, compilar en un sistema x86 para ARM o RISC-V.
+Usar el archivo de configuración de cross-config al invocar un ./configure:
+$ ./configure --host=arm-linux-gnueabi --build=x86_64-linux-gnu --with-sysroot=/usr/arm-linux-gnueabi (--host: Define la arquitectura destino, --build: Define la arquitectura del sistema en el que se trabaja y --with-sysroot: Especifica el sistema de archivos raíz para la arquitectura cruzada.)
+$ ls /usr/share/cross-config/ (listar las configuraciones soportadas)
+1.-
+Compilación cruzada con Autotools. Si se está trabajando en un proyecto que usa autoconf y automake, primero generar el script de configuración:
+$ autoreconf -i
+Luego, configurar el proyecto utilizando una arquitectura cruzada:
+$ ./configure --host=aarch64-linux-gnu --build=x86_64-linux-gnu
+Y finalmente compilar el proyecto:
+$ make
 
 
 crudini
