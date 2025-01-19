@@ -30207,6 +30207,21 @@ $ python tinfoleak.py -n usuario -f palabra (Mostrar publicaiones del usuario qu
 $ python tinfoleak.py -n usuario -bsgthmc 1000 --sdate 2014/10/01 --stime 08:00:00 -etime 22:00:00 (Mostrar información básica del usuario, apps, hashtags usados, menciones, coordenadas, fehca y hora de cada twit, analizando los últimos 1000 twits desde la fehca especificada y en la franja horaria de 8 a 22 horas)
 
 
+tinycdb
+Es parte de una biblioteca que permite trabajar con bases de datos de solo lectura llamadas CDB [Constant DataBase - datos constantes]. Una vez que se crea una base de datos CDB, no se puede modificar.
+$ cdb -d ejemplo.cdb > extraidos.dat (extrae los datos almacenados en "ejemplo.cdb" y los guarda en el nuevo archivo "extraidos.dat")
+$ cdb -q ejemplo.cdb "clave" > valor (busca la clave "clave" en el archivo "ejemplo.cdb" y guarda su valor en el archivo "valor")
+$ cdbdump base.cdb (mostrará el contenido de la base de datos)
+1.-
+Un ejemplo sobre base de datos CDB
+Con un archivo de texto llamado data.txt con el siguiente contenido:
+clave1 valor1
+clave2 valor2
+clave3 valor3
+$ cdbmake base.cdb < data.txt (se crea la base de datos)
+$ cdb -r base.cdb clave1 (busca un valor asociado a una clave específica)
+
+
 tinyproxy
 Crear un proxy HTTP. editar el archivo de configuración:
 # nano /etc/tinyproxy/tinyproxy.conf
