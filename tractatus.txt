@@ -9869,6 +9869,33 @@ Nota.- Normalmente estas aplicaciones han de repetirse varias veces hasta que al
 # deborphan | xargs sudo apt-get -y remove --purge (otra forma de eliminar paquetes huerfanos)
 
 
+debos
+Crear imágenes de sistemas operativos basados en Debian de manera flexible y modular. Está diseñado para desarrolladores y administradores que necesitan personalizar imágenes para entornos específicos, como dispositivos embebidos, servidores, o entornos de prueba.
+Ejemplo básico de un archivo recipe.yaml:
+        architecture: arm64
+              actions:
+                - action: debootstrap
+                  suite: buster
+                  mirror: http://deb.debian.org/debian
+                - action: apt
+                  packages:
+                    - openssh-server
+                    - curl
+                    - wget
+                - action: overlay
+                  source: ./overlay
+                - action: filesystem
+                    filetype: ext4
+                    partitiontype: gpt
+                    size: 2G
+architecture: Especifica la arquitectura del sistema operativo (por ejemplo, amd64, arm64, etc.).
+debootstrap: Descarga e instala un sistema Debian básico desde un espejo especificado.
+apt: Instala paquetes adicionales en la imagen (en este caso, vim, curl y wget).
+overlay: Copia archivos desde un directorio local (./overlay) hacia la imagen creada.
+filesystem: Configura el sistema de archivos de salida como ext4 con un tamaño de 2 GB.
+$ debos recipe.yaml (generará una imagen en la arquitectura y configuración especificadas)
+
+
 debsecan
 Efectúa una evaluación de seguridad del sistema y muestra las vulnerabilidades conocidas y asociadas a los paquetes instalados, notificando al administrador (root) los resultados.
 # debsecan-create-cron (ejecutar diariamente)
