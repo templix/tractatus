@@ -7923,6 +7923,10 @@ Luego puede usarae así:
 $ corkscrew /etc/corkscrew.conf
 
 
+cow-shell
+[cowdancer]. Invoca una sesión de shell, bajo el directorio en el que se invocó la aplicación. Durante esta sesión, cualquier modificación que se realice en los archivos o directorios dentro del entorno de trabajo se lleva a cabo en una copia temporal de los archivos, en lugar de modificarlos directamente. Esto se logra a través de la técnica de Copy on Write [COW] que permite trabajar con archivos y directorios sin riesgos de perder datos o corromper los originales.
+
+
 cowbuilder
 [cowbuilder pbuilder debootstrap cowdancer]. Herramienta que actúa como contenedor para pbuilder aplicación que crea un entorno aislado [chroot] para construir paquetes Debian, pero con soporte para cowdancer, una herramienta que usa copias en escritura [copy-on-write] para optimizar la creación y manipulación de entornos de construcción [chroo]).
 # mkdir -p /var/cache/pbuilder (configurar un entorno base que se usará como plantilla para construir paquetes)
