@@ -9928,6 +9928,12 @@ filesystem: Configura el sistema de archivos de salida como ext4 con un tamaño 
 $ debos recipe.yaml (generará una imagen en la arquitectura y configuración especificadas)
 
 
+debram
+[Debian Reference and Archive Management]. Catálogo ramificado de comandos disponibles. Debian GNU/Linux ofrece miles y miles de comandos. Al clasificarlos en clases amplias y luego dividirlos y redividirlos en ramas más finas y específicas, Debram ramifica los comandos de Debian de la misma manera que una biblioteca universitaria ramifica sus libros. Si sabe lo que quiere que haga su computadora pero aún no conoce el comando para hacerlo, puede encontrarlo aquí. (El paquete Debram solía incluir también --de hecho principalmente-- una ramificación mucho más grande e importante de *paquetes* Debian, junto con una herramienta de navegación; pero Debtags ha reemplazado a Debram en esos aspectos. Lo que el paquete Debram aún incluye es la Guía de selección de comandos, que aunque algo desactualizada todavía puede ser útil).
+$ zcat /usr/share/doc/debram/cmdsel.txt.gz > cmdsel.txt
+$ firefox cmdsel.txt (ver el contenido del archivo)
+
+
 debsecan
 Efectúa una evaluación de seguridad del sistema y muestra las vulnerabilidades conocidas y asociadas a los paquetes instalados, notificando al administrador (root) los resultados.
 # debsecan-create-cron (ejecutar diariamente)
@@ -9943,6 +9949,18 @@ Verificar la integridad de los ficheros.
 # cat log.txt | grep "mismatch" | cut -d " " -f4 | uniq > reinstall.txt (A partir del archivo anterior, listar los que se han de reinstalar)
 # debsums -s | grep "mismatch" | cut -d " " -f4 | uniq > reinstall.txt (Lo mismo)
 # apt-get install --reinstall `(cat reinstall.txt)`  (para instalarlos a partir del listado)
+
+
+debtags
+Herramientas de soporte para etiquetas de paquetes de Debian. debtags extrae información de etiquetas de la base de datos de apt y la pone a disposición del sistema, ya sea en /var/lib/debtags/package-tags o a través de apt-xapian-index. Las etiquetas de paquetes son categorías para los paquetes de Debian. debtags también proporciona algunos comandos útiles para consultar información de etiquetas.
+$ debtags cat | less (todo el listado de comandos)
+$ debtags dumpavail  | less
+$ debtags check (Comprueba que todas las etiquetas en la colección estén presentes en el vocabulario de etiquetas)
+$ debtags tagcat (Muestra el vocabulario de etiquetas)
+$ debtags search interface::commandline (busca paquetes etiquetados como interface::commandline [que tienen interfaz de línea de comandos])
+$ debtags tagshow interface::commandline (información sobre una etiqueta)
+# debtags update (actualizar la base de datos local de etiquetas)
+$ debtags search "role::program && devel::editor" (encuentra paquetes que sean programas role::program y que estén relacionados con edición de desarrollo devel::editor)
 
 
 debtree
