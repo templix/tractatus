@@ -6748,6 +6748,33 @@ $ sudo tail -f /var/log/auth.log | clog -d 2024-12-15 (especificar una fecha en 
 $ sudo tail -f /var/log/auth.log | clog -t 01:05:01 (especificar una hora, minuto y segundo de hoy)
 
 
+cloud_enum
+Herramienta que se utiliza para enumerar recursos públicos en nubes públicas con diferentes proveedores como AWS, Azure y Google Cloud, y devolver información sobre los recursos que están disponibles públicamente, identificando aquellos que coinciden con palabras clave específicas.
+$ cloud_enum --keyword "test" --provider aws (buscaría instancias, buckets y otros recursos en AWS que tengan "test" en su configuración o nombre)
+$ cloud_enum --keyword "demo" --provider azure (revisaría los recursos públicos en Azure que coincidan con "demo")
+$ cloud_enum --keyword "production" --provider gcp (enumeraría los recursos que contienen "production" en Google Cloud)
+
+
+cloud-guest-utils
+Utilidades diseñadas para facilitar la interacción y gestión de instancias de nube. Estas herramientas están optimizadas para entornos virtualizados o basados en la nube como AWS, GCP, Azure y OpenStack. Su objetivo es simplificar tareas comunes, como la gestión de discos, particiones y datos de instancia. El paquete suele complementarse con cloud-init [ver], que automatiza tareas de configuración inicial en instancias de nube.
+# growpart /dev/sda1 (extender la partición sda1 para utilizar todo el espacio disponible)
+Una vez que la partición ha sido extendida, también se debe redimensionar el sistema de archivos.
+# resize2fs /dev/sda1
+Y comprobar que las particiones están intactas tras un redimensionamiento y detectar el nuevo tamaño del disco:
+$  fsck -f /dev/sda1
+$ lsblk
+
+
+cloud-init
+Permite configurar y personalizar máquinas virtuales [VMs] al inicio. Es compatible con varias plataformas de Infraestructura como Servicio (IaaS), como AWS, Azure, Google Cloud, OpenStack, entre otras. Por ejemplo, puede establecer una configuración regional y un nombre de host predeterminados, generar claves de host privadas SSH, instalar claves públicas SSH para iniciar sesión en una cuenta predeterminada, configurar puntos de montaje efímeros y ejecutar scripts proporcionados por el usuario.
+# cloud-init status (muestra el estado actual de cloud-init)
+# cloud-init init (reinicializar las configuraciones de cloud-init desde cero útil si se ha limpiado configuraciones anteriores)
+# cloud-init clean (limpiar los datos actuales)
+# cloud-init clean --logs (limpieza de logs)
+# cloud-init query ds.meta_data.hostname (devuelve el nombre del host configurado por el proveedor de nube)
+# cloud-init analyze blame (muestra un desglose de cuánto tiempo tomó cada módulo)
+
+
 cloudflare-ddns
 Es un programa one-shot: lo ejecutas, actualiza el registro DNS y finaliza. Utiliza la API de Cloudflare, por lo que para ejecutar la herramienta se necesita un token de API y el ID de la zona DNS que se desea actualizar. Este paquete contiene la herramienta y un conjunto de unidades systemd que la hacen ejecutarse periódicamente cuando tienes una dirección IP dinámica.
 $ cloudflare-ddns (ejecutará el programa una vez y actualizará el registro DNS con tu dirección IP actual)
@@ -7394,6 +7421,11 @@ $ compton -cC -i 0.6 -e 0.6 (especificar la transparencia de las ventanas inacti
 $ compton -cC -i 0.6 -e 0.6 -fF (habilitar efectos suaves de transición en ventanas y menús)
 $ compton -cC -i 0.6 -e 0.6 -fF -I 0.065 -O 0.065 -D 6 (Especificar tiempo de opacidad al desvanecerse las ventanas)
 $ compton -cC -i 0.6 -e 0.6 -fF -I 0.065 -O 0.065 -D 6 -m 0.8 (Especificar la opacidad de los menús)
+
+
+comptty
+se utiliza para comparar dos secuencias RTTY [Radio TeleTYpe] y determinar la similitud entre ellas.. Su función de comparación utiliza una técnica de programación lineal. Calcula el número total de errores, la tasa CER [Character Error Rate - errores de caracteres] y la BER [Bit Error Rate - errores de bits].https://www.nonstopsystems.com/radio/frank_radio_rtty.htm
+$ comptty -o resultado.txt rtty1.txt rtty2.txt (imprimirá en resultado.txt un análisis de las diferencias y similitudes entre los archivos que contienen laa dos secuencia RTTY)
 
 
 comskip
@@ -29595,6 +29627,13 @@ Analiza la secuencia de arranque en sistemas basados en systemd (Ver systemctl)
 # systemd-analyze critical-chain (ver cuellos de botella en el arranque)
 # systemd-analyze plot > archivo.svg (mostrar un gráfico con los tiempos del arranque)
 # systemd-analyze dump (volcar todo el arranque)
+
+
+systemd-coredump
+Herramientas para almacenar en un formato estructurado y recuperar, con herramientas como gdb, volcados de memoria [core dumps] de aplicaciones que fallan. Estos volcados de memoria son instantáneas del espacio de memoria de un proceso en el momento en que se produce un fallo, y son útiles para el análisis de errores y la depuración y se almacenan en /var/lib/systemd/coredump/.
+$ coredumpctl list (lista de los volcados de memoria disponibles, junto con información sobre el proceso que falló)
+$ coredumpctl gdb <PID> (<PID> es el identificador del proceso que aparece en la lista de coredumpctl list. Esto abrirá gdb con el binario correspondiente y el core dump cargado)
+$ coredumpctl dump <PID> > mi_volcado.core (guardará el core dump en un archivo llamado mi_volcado.core)
 
 
 systemd-resolved
