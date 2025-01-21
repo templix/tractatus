@@ -1738,6 +1738,7 @@ $ ar crv libfoo.a bill.o fred.o (Añade librerias objeto a un archivo de librer�
 $ ar vx paquete.deb (extrae un .deb convirtiendolo en un tar.gz)
 $ ar x finalterm_0.1-0~64~saucy1_amd64.deb (Extraer los 3 archivos de un paquete deb)
 $ ar p finalterm_0.1-0~64~saucy1_amd64.deb data.tar.gz | tar xz (Extraer y descomprimir uno de los archivos de un paquete deb)
+$ ar t paquete.deb (ver los componentes del paquete, incluidas las secciones de firma)
 
 
 arcanist
@@ -9935,6 +9936,11 @@ $ zcat /usr/share/doc/debram/cmdsel.txt.gz > cmdsel.txt
 $ firefox cmdsel.txt (ver el contenido del archivo)
 
 
+debroster
+inicia un eterm con el logotipo de Debian como fondo, con una lista aleatoria de los desarrolladores actuales desplazándose desde arriba de la pantalla.
+$ debroster
+
+
 debsecan
 Efectúa una evaluación de seguridad del sistema y muestra las vulnerabilidades conocidas y asociadas a los paquetes instalados, notificando al administrador (root) los resultados.
 # debsecan-create-cron (ejecutar diariamente)
@@ -9942,6 +9948,15 @@ Efectúa una evaluación de seguridad del sistema y muestra las vulnerabilidades
 # debsecan  --suite buster --format report --update-history (escaneos)
 # debsecan  --suite buster --only-fixed (otro tipo de escaneo)
 # debsecan --update-history (actualizar el archivo histórico después de la presentación de informes)
+
+
+debsigs
+Herramienta que permite firmar criptográficamente paquetes .deb utilizando GPG. La firma se incorpora directamente dentro del archivo .deb, lo que asegura la integridad y autenticidad del paquete al permitir verificar su procedencia. Estas firmas pueden verificarse posteriormente mediante herramientas de recuperación e instalación de paquetes para garantizar la autenticidad de los contenidos del paquete.
+# debsigs --sign=origin -k [ID_CLAVE] paquete.deb (firmado como el originador del paquete y con la ID de la clave GPG utilizada para firmar. Si no se proporciona, usa clave predeterminada)
+# debsigs --verify paquete.deb (mostrará información sobre la validez de las firmas del paquete)
+# debsigs --check paquete.deb (comprobar si un paquete tiene una firma válida)
+# debsigs --sign=maint -k [ID_CLAVE] paquete.deb (agregar una firma de mantenedor del paquete)
+$ ar t paquete.deb (ver los componentes del paquete, incluidas las secciones de firma)
 
 
 debsums
