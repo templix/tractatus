@@ -5556,6 +5556,35 @@ Importar certificados. Ver update-ca-certificates
 $ cert-sync --user /etc/ssl/certs/ca-certificates.crt
 
 
+certbot
+Certbot es una Herramienta utilizada para gestionar certificados SSL/TLS emitidos por Let's Encrypt y otros proveedores que utilizan el protocolo ACME [Automatic Certificate Management Environment]. Su objetivo principal es facilitar la configuración de servidores HTTPS con certificados confiables de manera automatizada. Para configuraciones específicas de servidores como Apache o Nginx, han de instalarse los plugins correspondientes: python3-certbot-apache para Apache o python3-certbot-nginx para Nginx. Incluye la aplicación letsencrypt
+# certbot --apache (obtendrá un certificado para el dominio configurado en Apache y configurará automáticamente HTTPS en los archivos de configuración)
+# certbot --nginx (el mismo caso para Nginx)
+# certbot certonly --standalone -d ejemplo.com -d www.ejemplo.com (obtener el certificado sin configuración automática si no se desea que Certbot configure el servidor)
+# certbot renew (renovar certificados automáticamente)
+# certbot renew --dry-run (simular una renovación para probar cómo funcionará)
+# certbot revoke --cert-path /etc/letsencrypt/live/ejemplo.com/cert.pem (revocar un certificado)
+# certbot -d "*.example.com" --manual --preferred-challenges dns certonly (para usar con DNS para dominios wildcard,  requiere validación DNS en la que pedirá crear un registro TXT)
+1.-
+Añadir un cron job para automatizar completamente la renovación
+# crontab -e
+Añadir la linea:
+           0 0 * * * /usr/bin/certbot renew --quiet
+2.-
+Ejemplo complero de Certbot + Apache:
+# apt install certbot python3-certbot-apache (Instalar Certbot y el plugin de Apache)
+Configurar Apache con el dominio.
+# certbot --apache -d ejemplo.com -d www.ejemplo.com (ejecutar Certbot para obtener y configurar HTTPS)
+Verifica que HTTPS esté funcionando correctamente.
+Nota.- certonly: Obtiene el certificado pero no realiza configuraciones y --standalone: Usa un servidor web temporal integrado para realizar el desafío ACME)
+3.-
+Ejemplo completo Certbot + Nginx:
+# apt install certbot python3-certbot-nginx (instalar Certbot y el plugin de Nginx)
+Configurar Nginx con el dominio.
+# certbot --nginx -d ejemplo.com -d www.ejemplo.com (ejecutar Certbot para obtener y configurar HTTPS)
+Verifica que HTTPS esté funcionando correctamente.
+
+
 certmonger
 Herramienta y servicio que funciona en segundo plano para gestionar certificados en sistemas con infraestructura de clave pública (PKI). Se integra con D-Bus para simplificar la obtención, renovación y monitoreo de certificados emitidos por autoridades de certificación (CA). El comando getcert se usa para interactuar con certmonger y gestionar certificados.
 $ getcert list (lista todos los certificados su estado y cualquier información relevante como fecha de vencimiento o renovación)
