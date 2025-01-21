@@ -10032,6 +10032,19 @@ Emulador de terminal avanzado con espacio de trabajo, múltiples ventanas, admin
 $ deepin-terminal
 
 
+deets
+Herramienta de administración descentralizada basada en modelos. Deets ofrece una forma de administrar paquetes y archivos Debian en sus sistemas utilizando archivos de configuración basados en Lua. Un intérprete especializado de Lua llamado luau es capaz de validar sus especificaciones y, opcionalmente, hacerlas cumplir. Además, puede escanear su sistema y generar una configuración de modelo básica basada en el estado actual de la base de datos de paquetes Debian y todos los archivos de configuración.
+$ luau --no-audit --rectify --report /usr/share/deets/inventory.lua > /tmp/model.lua (mardar el informe al archivo /tmp/model.lus)
+$ luau /tmp/model.lua (ver el resultado)
+Opciones:
+        audit (informar el índice de conformidad, predeterminado)
+        rectify (hacer que el sistema cumpla con el modelo)
+        report (imprimir lo que --rectify debe hacer)
+        dep-trace (mostrar el orden de las dependencias)
+        delete-tmpdir (eliminar deets tmpdir, predeterminado)
+Cualquier opción puede tener como prefijo 'no' para deshabilitarla, por ejemplo: --no-audit
+
+
 defaults
 Permite leer y modificar los valores predeterminados de un usuario. Este programa reemplaza los antiguos programas dread, dwrite y dremove. Si se tiene acceso a la base de datos predeterminada de otro usuario, se puede incluir '-u nombre de usuario' antes de cualquier otra opción para usar la base de datos de ese usuario en lugar de la suya.
 $ defaults readkey key (leer nombre predeterminado de todos los dominios)
