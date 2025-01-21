@@ -10065,6 +10065,57 @@ $ ispell -F defmt-sh (para scripts shell)
 $ ispell -F defmt-c (para C y C++)
 
 
+dehydrated
+Cliente ACME que permite firmar certificados con un servidor ACME, como el que proporciona la autoridad de certificación Let’s Encrypt [letsencrypt.org]. Permite automatizar la generación, renovación y gestión de certificados TLS/SSL. El protocolo ACME [Automated Certificate Management Environment], escrito en Bash permite obtener automáticamente certificados de confianza para el navegador. En primer lugar, personalizar las opciones:
+# nano /etc/dehydrated/config
+       CONFIG_D=/etc/dehydrated/conf.d
+       BASEDIR=/var/lib/dehydrated
+       WELLKNOWN="${BASEDIR}/acme-challenges"
+       DOMAINS_TXT="/etc/dehydrated/domains.txt"
+       CA=letsencrypt.org
+       CONTACT_EMAIL=user@gmail.com
+Crear el archivo de dominios y subdominios, a modo de ejemplo:
+# nano /etc/dehydrated/domains.txt
+example.org
+example.com www.example.com
+example.net www.example.net wiki.example.net
+$ dehydrated --register --accept-terms (aceptar los términos del servicio y registrar la cuenta con el servidor ACME)
+$ dehydrated --cron (emitir certificados para los dominios listados en domains.txt, validar los dominios y generar certificados en /var/lib/dehydrated/certs/)
+# dehydrated --force --cron (forzar la renovación de un certificado)
+# dehydrated --cleanup (eliminar certificados)
+# dehydrated --list (verificar los certificados gestionados)
+1.-
+Para renovar certificados automáticamente.
+Let's Encrypt recomienda renovar certificados al menos cada 60 días.
+# crontab -e
+Y agregar la linea:
+          0 2 * * * /usr/bin/dehydrated --cron >> /var/log/dehydrated.log 2>&1
+2.-
+Para validación HTTP-01 (requiere que se pueda colocar un archivo en el servidor web), colocar un archivo en la carpeta pública del servidor web para manejar esto automáticamente. Un ejemplo de hook sería:
+# nano /etc/dehydrated/hook.sh
+deploy_challenge() {
+    local DOMAIN="${1}" TOKEN_FILENAME="${2}" TOKEN_VALUE="${3}"
+    mkdir -p /var/www/html/.well-known/acme-challenge
+    echo "${TOKEN_VALUE}" > /var/www/html/.well-known/acme-challenge/${TOKEN_FILENAME}
+}
+clean_challenge() {
+    local DOMAIN="${1}" TOKEN_FILENAME="${2}" TOKEN_VALUE="${3}"
+    rm -f /var/www/html/.well-known/acme-challenge/${TOKEN_FILENAME}
+}
+Luego especificar este hook en el archivo de configuración añadiendo la linea:
+# nano /etc/dehydrated/config
+       HOOK=/etc/dehydrated/hook.sh
+3.-
+Para validación DNS-01 que requiere crear registros DNS específicos, se necesita un script para actualizarlos. Por ejemplo:
+# nano validación.sh
+deploy_challenge() {
+    local DOMAIN="${1}" TOKEN_FILENAME="${2}" TOKEN_VALUE="${3}"
+    echo "Añade este registro DNS:"
+    echo "_acme-challenge.${DOMAIN} IN TXT \"${TOKEN_VALUE}\""
+}
+Nota.- Archivos importantes de los certificados son los directorio /var/lib/dehydrated/certs
+
+
 delgroup
 Elimina un grupo del sistema
 # delgroup grupo
