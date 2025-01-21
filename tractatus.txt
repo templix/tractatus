@@ -9999,6 +9999,13 @@ Nota.- El nodo lanzando:
        # stat /var/log/syslog
 
 
+debvm
+Herramienta que se usa para facilitar la creación y ejecución de entornos de prueba aislados para software en sistemas basados en Debian. Utiliza QEMU, un emulador y virtualizador de hardware, para crear estos entornos de forma que las pruebas se realicen en un entorno controlado sin interferir con el sistema operativo principal. Incluye las herramientas debvm-create y debvm-run.
+$ debvm-create my-test-vm (generará una máquina virtual llamada my-test-vm con la configuración predeterminada)
+$ debvm-run my-test-vm -- sudo apt-get install nombre-del-paquete (ejecutará el comando de instalación dentro de la máquina virtual, de manera que no afecte al sistema base)
+$ debvm-run my-test-vm -- ./script.sh (ejecutará script.sh dentro de my-test-vm, permitiéndo observar el comportamiento de la aplicación en un entorno controlado)
+
+
 declare
 Listar las variables de entorno. En caso de que una función tenga el mismo nombre que un script tiene preferencia la función. Usado principalmente en scripts.
 $ declare -f (Imprime las funciones alfabeticamente y su definición)
@@ -10012,6 +10019,12 @@ decode-dimms
 Herramienta para decodificar la información que se encuentra en las EEPROMs SPD de los módulos de memoria. La herramienta requiere que se cargue un módulo del núcleo: eeprom, at24 o ee1004 (para DDR4 SDRAM.)
 $ decode-dimms (información por pantalla)
 $ decode-dimms -f (en formato .html)
+
+
+decopy
+Automatiza la escritura y actualización del archivo debian/copyright. Lee todos los archivos en el árbol de código fuente, analiza las licencias y los mensajes de copyright incluidos y genera el archivo debian/copyright correspondiente.
+Cuando el archivo ya existe, decopy lo analiza para generar una salida más completa.
+$ decopy --copyright /ruta/al/paquete/debian/copyright (actualiza y muestra el archivo copyright)
 
 
 deepin-terminal
