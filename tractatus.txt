@@ -10229,6 +10229,12 @@ $ deken search my-pd-package (buscar paquetes por nombre)
 $ deken install my-pd-package (instalar un paquete Pd en el repositorio oficial)
 
 
+delay
+Herramienta que introduce un retardo constante entre la entrada estándar [stdin] y la salida estándar [stdout]. Los datos de su entrada estándar se almacenarán hasta que se hayan escrito en la salida estándar.
+$ echo -e "Linux es un sistema genial" | delay 2s (tarda 2 segundos en mostrar la frase)
+$ (echo "Hola"; sleep 1; echo "Mundo") | delay 2s (empezar a reproducir el comando inicial 2 segundos)
+
+
 delgroup
 Elimina un grupo del sistema
 # delgroup grupo
