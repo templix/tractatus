@@ -10245,6 +10245,23 @@ Pide al núcleo Linux que se olvide de un dispositivo en la partición especific
 # delpart dispositivo partición
 
 
+delta
+Reduce un archivo, por ejemplo, de texto, JSON, o código fuente, eliminando partes innecesarias. El objetivo es que el archivo reducido siga causando determinado comportamiento, como un error, un fallo en un programa o un resultado relevante para la prueba usando reglas o aproximaciones [heurísticas] que son las que deciden qué partes del archivo se pueden eliminar sin perder el "interés" del archivo. Un archivo es "interesante" si causa un comportamiento específico, como un fallo en un programa, un error de compilación, o reproduce un error que estamos investigando. Supongamos que se tiene un archivo de código fuente muy grande [program.c] y se descubre que al compilarlo, el compilador muestra un error inesperado. Usar delta ayudará a reducir ese archivo al mínimo tamaño que sigue provocando el mismo error. Un ejemplo:
+$ delta test.c -- gcc test.c
+delta probará diferentes versiones reducidas de test.c eliminando líneas o bloques de código. Cada vez que elimina algo, ejecuta gcc test.c para verificar si el archivo reducido sigue causando el error. El proceso termina cuando encuentra la versión más pequeña de test.c que provoca el mismo error.
+Algunas opciones útiles:
+        --keep-tmp: No elimina los archivos temporales generados durante la minimización. Útil para analizar el proceso.
+        --timeout=N: Termina la prueba si toma más de N segundos. Esto evita que un comando lento bloquee la minimización.
+        --cpus=N: Usa N núcleos de CPU para acelerar el proceso.
+
+
+deltarpm
+Herramienta que contiene las diferencias entre una versión antigua y una nueva de un RPM [Red Hat Package Manager]. Esto hace posible recrear el nuevo RPM a partir del deltarpm y el RPM antiguo. En Debian y sistemas derivados, estas herramientas pueden ser útiles para crear y mantener repositorios de paquetes RPM utilizados por administradores de sistemas que trabajan con múltiples formatos de paquetes o que necesitan compatibilidad entre diferentes distribuciones.
+$ deltarmp --old-version=1.0-1.el7.x86_64.rpm --new-version=1.1-1.el7.x86_64.rpm > cambios.deltarpm (compara las dos versiones epecificados y genera un archivo llamado "cambios.deltarpm" con las diferencias)
+$ rpm --repackage cambios.deltarpm -o nuev-paquete-1.1-1.el7.x86_64.rpm (crea un nuevo paquete RPM basado en el deltarpm generado anteriormente)
+$ rpm -qp --changelog cambios.deltarpm (muestra la lista de cambios incluidos en el deltarpm)
+
+
 deluser
 Elimina un usuario del sistema sin borrar su directorio.
 # deluser usuario
