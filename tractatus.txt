@@ -10145,6 +10145,57 @@ deploy_challenge() {
 Nota.- Archivos importantes de los certificados son los directorio /var/lib/dehydrated/certs
 
 
+dehydrated-apache2
+Utilidad para la obtención de certificados SSL/TLS a través del protocolo ACME [Automatic Certificate Management Environment], que es utilizado por Let's Encrypt y otros proveedores de certificados. La instalación de este paquete junto con dehydrated [ver] es suficiente para tener un cliente ACME completamente funcional para el servidor web Apache2. Se encarga de gestionar las respuestas a los desafíos http-01 que dehydrated envía al servidor. Es decir, cuando dehydrated necesita verificar que tienes control sobre un dominio, el paquete dehydrated-apache2 asegura que Apache pueda responder adecuadamente a la solicitud de verificación.
+Configuración inicial:
+# mkdir -p /etc/dehydrated (crear el directorio donde almacenar la configuración)
+# cd /etc/dehydrated
+# nano config (crear el archivo de configuración con el siguiente ejemplo de contenido)
+           CA="https://acme-v02.api.letsencrypt.org/directory"
+           ACCOUNT_KEY="account.key"
+           CHALLENGE="http-01"
+           DOMAINS_TXT="domains.txt"
+# dehydrated -c (iniciará el proceso de obtención del certificado)
+
+
+dehydrated-hook-ddns-tsig
+[dehydrated]. Implementa la validación del desafío DNS-01, que requiere que el propietario de un dominio demuestre el control sobre él mediante la creación de un registro TXT en el DNS. Este script utiliza la biblioteca dnspython para realizar actualizaciones dinámicas de DNS mediante el mecanismo TSIG [Transaction SIGnature], que asegura la autenticidad de las actualizaciones, creando un registro TXT temporal para el dominio determinado, lo que demuestra la propiedad del dominio. Requiere un servidor DNS capaz de realizar actualizaciones dinámicas de DNS, como bind9.
+Se necesita un archivo de configuración especificando los detalles del servidor DNS y la clave TSIG. Unejemplo:
+# nano /etc/dehydrated/hook-config.sh
+      DNS_SERVER="ns.example.com"          # Servidor DNS
+      DNS_PORT="53"                        # Puerto DNS (53 por defecto)
+      TSIG_KEY_NAME="update-key"           # Nombre de la clave TSIG
+      TSIG_KEY="abcd1234=="                # Valor base64 de la clave TSIG
+      TSIG_ALGORITHM="hmac-sha256"         # Algoritmo TSIG (por ejemplo, hmac-sha256)
+1.-
+Crear y probar un registro TXT temporal, por ejemplo para validar el dominio example.com se puede usar el hook para crear el registro TXT temporal requerido por el desafío:
+$ export HOOK_CONFIG=/etc/dehydrated/hook-config.sh
+$ dehydrated-hook-ddns-tsig add _acme-challenge.example.com "some_random_string"
+Esto conectara con el servidor DNS especificado en el archivo de configuración y creará un registro TXT llamado _acme-challenge.example.com con el valor some_random_string. Una vez que el servidor de Let's Encrypt confirme la propiedad, se puede eliminar el registro con:
+$ dehydrated-hook-ddns-tsig clean _acme-challenge.example.com "some_random_string"
+2.-
+Integración con Dehydrated mediante un script que puede ser utilizado como un hook durante el proceso de solicitud de certificados. Por ejemplo:
+# nano /etc/dehydrated/hooks/ddns-hook.sh
+#!/bin/bash
+#
+HOOK_CONFIG=/etc/dehydrated/hook-config.sh
+export HOOK_CONFIG
+#
+case "$1" in
+    deploy_challenge)
+        dehydrated-hook-ddns-tsig add "$2" "$4"
+        ;;
+    clean_challenge)
+        dehydrated-hook-ddns-tsig clean "$2" "$4"
+        ;;
+    *)
+        echo "Unknown hook command: $1"
+        exit 0
+        ;;
+esac
+Este hook llama a dehydrated-hook-ddns-tsig para añadir o eliminar registros TXT según sea necesario.
+
+
 delgroup
 Elimina un grupo del sistema
 # delgroup grupo
