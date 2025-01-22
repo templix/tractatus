@@ -10181,19 +10181,52 @@ Integración con Dehydrated mediante un script que puede ser utilizado como un h
 HOOK_CONFIG=/etc/dehydrated/hook-config.sh
 export HOOK_CONFIG
 #
-case "$1" in
-    deploy_challenge)
-        dehydrated-hook-ddns-tsig add "$2" "$4"
+        case "$1" in
+            deploy_challenge)
+            dehydrated-hook-ddns-tsig add "$2" "$4"
         ;;
-    clean_challenge)
-        dehydrated-hook-ddns-tsig clean "$2" "$4"
+        clean_challenge)
+            dehydrated-hook-ddns-tsig clean "$2" "$4"
         ;;
-    *)
-        echo "Unknown hook command: $1"
-        exit 0
+        *)
+            echo "Unknown hook command: $1"
+            exit 0
         ;;
-esac
+        esac
 Este hook llama a dehydrated-hook-ddns-tsig para añadir o eliminar registros TXT según sea necesario.
+
+
+dejagnu
+Es un marco de trabajo para ejecutar conjuntos de pruebas en herramientas de software y probar otros programas. Su propósito es proporcionar una única interfaz para todas las pruebas. DejaGnu proporciona una capa de abstracción que permite escribir pruebas que sean portables a cualquier host o destino donde se deba probar un programa.
+Un archivo típico de configuración podría tener el siguiente contenido:
+# nano /etc/dejagnu/site.exp
+           set test_program "/usr/local/bin/gestrac"
+           set timeout 300
+Y el de pruebas que se han de ejecutar:
+# nano /etc/tests.exp
+      load_libs
+      set tests {
+        "test_case_1" {
+            # Comando a ejecutar
+            exec $test_program arg1 arg2
+            # Verifica la salida
+            set result $?
+            if {$result != 0} {
+                fail "test_case_1 failed"
+            } else {
+                pass "test_case_1 passed"
+            }
+        }
+# runtest (ejecutar las pruebas y ver los resultados directamente en la terminal, donde se indicará si cada prueba pasó o falló)
+
+
+deken
+Gestor de paquetes diseñado para trabajar con paquetes Pure Data [Pd] en sistemas basados en Debian. Facilita la creación y carga de sus propios paquetes al repositorio oficial puredata.info.
+$ deken new my-pd-package.pd (crear un nuevo paquete a partir de un archivo Pd)
+$ deken upload /ruta/al/mi-paquete.pd (cargar un paquete existente al repositorio)
+$ deken update (actualizar la base de datos local de paquetes)
+$ deken search my-pd-package (buscar paquetes por nombre)
+$ deken install my-pd-package (instalar un paquete Pd en el repositorio oficial)
 
 
 delgroup
