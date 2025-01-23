@@ -10314,9 +10314,35 @@ desproxy
 Permite realizar conexiones TCP/IP a través de proxies que solo ofrecen servicio http [puerto 80], de forma que, aunque el proxy este configurado para permitir únicamente la navegación web, podremos usarlo para acceder a otros servicios.
 
 
+detachtty
+Permite ejecutar programas interactivos de forma no interactiva y conectarse a través de la red cuando se necesita interactuar con ellos. Permite conectarse a programas que se ejecutan en hosts remotos mediante conexiones SSH seguras como si se tratara de una "pantalla virtual".
+$ detachtty /tmp/vim_session vim (lanza vim de forma no interactiva, y su sesión se almacena en el archivo /tmp/vim_session)
+$ detachtty /tmp/vim_session (para reconectarte más tarde)
+$ ssh usuario@servidor "detachtty /tmp/remote_session top" (ejecuta top en el servidor remoto y almacena la sesión en /tmp/remote_session)
+$ ssh usuario@servidor "detachtty /tmp/remote_session" (reconectarse más tarde)
+$ detachtty -d /tmp/sesion_fondo bash (iniciar un programa en segundo plano sin conexión interactiva inicial)
+
+
 detex
 Pasar un archivo latex a txt.
 $ detex -n archivo.tex > archivo.txt
+
+
+detox
+Se utiliza para limpiar y renombrar archivos eliminando o reemplazando caracteres problemáticos en los nombres de archivos. Esto es especialmente útil cuando se trabaja con archivos que pueden tener espacios, caracteres especiales o que no son compatibles con ciertos sistemas o aplicaciones. No sobrescribirá un archivo que ya existe y no toca archivos especiales si no se lo solicitan.
+Supongamos un directorio con el siguiente contenido:
+$ nano pruebas
+       Archivo con espacios.txt
+       Archivo@con#caracteres!raros.txt
+       Ejemplo (1).txt
+$ detox pruebas/* (renombra todos esos archivos a una forma más manejable)
+       Archivo_con_espacios.txt
+       Archivo_con_caracteres_raros.txt
+       Ejemplo_1.txt
+$ detox -n * (mostrará cómo se renombrarían los archivos sin realmente renombrarlos)
+$ detox -p "mp3_" * (agregar un prefijo a los nombres de archivo)
+$ detos -s "_rock" * (agregar un sufijo a los nombres de archivo)
+$ detox -r * (también procesesar los archivos de subdirectorios)
 
 
 deurlname
@@ -10340,6 +10366,39 @@ $ nano .devilspie/debug.ds
 Con el siguiente contenido:
 	(debug)
 Cuando arranquemos devilspie por consola, nos las mostrará.
+
+
+devio
+Leer o escribir correctamente una región de un dispositivo de bloques como discos duros, SSDs. Es un programa para leer correctamente desde dispositivos de bloques y otros de caracteres MTD [Memory Technology Devices] como memorias flash. Esto puede ser útil en varias situaciones, como la recuperación de datos, la manipulación directa de dispositivos de almacenamiento, o el análisis de dispositivos de memoria flash.
+$ devio -r /dev/mtd0 0 512 (leer los primeros 512 bytes del dispositivo /dev/mtd0)
+$ devio -w /dev/mtd0 0 512 < archivo_de_datos (escribir 512 bytes de datos de la posición 0 en adelante en /dev/mtd0 y el archivo que contiene los datos que se escribiran)
+$ devio -r /dev/sda 1000 512 (leerá 512 bytes del sector 1000 de /dev/sda)
+
+
+devsripts
+Casi 80 scripts para facilitar la vida a los encargados de los paquetes Debian. Un listado en https://github.com/Debian/devscripts
+
+
+devtodo
+Herramienta que permite gestionar tareas de manera jerárquica, lo que significa que se puede crear tareas principales y subtareas. También permite organizar las tareas por prioridad y ofrece una interfaz colorida en la terminal para facilitar la visualización. Además, tiene funciones que permiten exportar la lista de tareas en diferentes formatos de texto. Viene con hojas de estilo XSLT para convertir archivos XML y .todo a HTML y PDF.
+$ devtodo add "Comprar leche" (crear una nueva tarea)
+$ devtodo add "Hacer la compra" --parent "Comprar leche" (agregar una subtarea)
+$ devtodo list (listar tareas)
+$ devtodo done "Comprar leche" (marcar una tarea como completada)
+$ devtodo remove "Hacer la compra" (eliminar una tarea)
+$ devtodo edit "Comprar leche" "Comprar leche y pan" (cambiar el nombre de una tarea)
+$ devtodo export markdown > tareas.md (exportar la lista de tareas)
+Un ejemplo práctico podría ser:
+$ devtodo add "Proyecto casa"
+Agregar subtareas
+$ devtodo add "Comprar materiales" --parent "Proyecto casa"
+$ devtodo add "Contratar a un electricista" --parent "Proyecto casa"
+$ devtodo add "Planificar el diseño" --parent "Proyecto casa"
+$ devtodo list
+      Proyecto casa
+        - Comprar materiales
+        - Contratar a un electricista
+        - Planificar el diseño
 
 
 dex
