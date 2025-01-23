@@ -10402,10 +10402,31 @@ $ devtodo list
 
 
 dex
-Programa para generar y ejecutar archivos DesktopEntry del tipo de Aplicación.
-$ dex -ad (informa de los programas que se ejecutan en un arranque automático regular)
-$ dex -a (Ejecutar todos los programas en el inicio automático)
+[DesktopEntry eXecution]. Herramienta que se utiliza para gestionar el inicio automático de aplicaciones mediante archivos .desktop. Estos archivos son parte de la especificación de Freedesktop.org y son ampliamente utilizados en entornos de escritorio como GNOME, KDE, XFCE y otros.
+$ dex -ad (verificar qué aplicaciones serían iniciadas sin ejecutarlas realmente)
+$ dex -a (iniciar automáticamente todas las aplicaciones definidas en los directorios estándar ~/.config/autostart/ y /etc/xdg/autostart/)
+$ dex -a -e GNOME (indicar un entorno específico)
+$ dex -r /path/to/directory (ejecutar recursivamente todos los archivos .desktop en un directorio y subdirectorios)
 $ dex -c /usr/bin/skype (Crear una DesktopEntry para un programa en el directorio actual)
+$ dex ~/scripts/myapp.desktop (iniciar un archivo .desktop en una ubicación específica)
+Nota.- Si se crean archivos .desktop es preferible colocarlos en los directorios estándar mencionados más arriba.
+1.-
+Para un administrador de ventanas como Openbox o similar, incluir dex en el archivo de configuración para iniciar las aplicaciones automáticamente:
+$ nano ~/.config/openbox/autostart
+Y poner la linea:
+        dex --autostart &
+2.-
+Un archivo .desktop típico podría lucir así:
+$ nano ~/.config/autostart/telegram.desktop
+       [Desktop Entry]
+       Type=Application
+       Name=telegram-desktop
+       Exec=/usr/bin/telegram-desktop
+       Icon=/usr/share/icons/hicolor/16x16/apps/telegram.png
+       Comment=Qué se cuenta la gente
+       X-GNOME-Autostart-enabled=true
+La aplicación telegram sera iniciada con
+$ dex -a
 
 
 df
