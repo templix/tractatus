@@ -29362,6 +29362,43 @@ $ steghide embed -cf archivo.wav -ef archivo_texto (incrustar un texto en un arc
 $ steghide extract -sf imagen.jpg  (extraer el archivo incrustado)
 
 
+step
+Herramienta para construir, operar y automatizar sistemas y flujos de trabajo de Infraestructura de clave pública [PKI]. step actúa como interfaz front-end para Certificate Manager y step-ca, una autoridad de certificación [CA] X.509 y SSH en línea.
+$ wget https://dl.smallstep.com/cli/docs-cli-install/latest/step-cli_amd64.deb
+# dpkg -i step-cli_amd64.deb
+$ useradd step (crear un usuario que se utilizará para ejecutar el servicio con su directorio personal [/home/step])
+# nano  /etc/systemd/system/step-ca.service
+[Unit]
+        Description=step-ca
+        After=syslog.target network.target
+[Service]
+        User=step
+        Group=step
+        ExecStart=/bin/sh -c '/bin/step-ca /home/step/.step/config/ca.json --password-file=/home/step/.step/pwd >> /var/log/step-ca/output.log 2>&1'
+        Type=simple
+        Restart=on-failure
+        RestartSec=10
+[Install]
+        WantedBy=multi-user.target
+# chown -R step:step /home/step (asegurarse de que se haya creado el directorio de inicio para el usuario step)
+$ step ca init (solicitarán detalles de la CA que se está creando: nombre, nombres DNS o direcciones IP para agregar, puerto de escucha, email, contraseña)
+Nota.- La contraseña se apunta en /home/step/.step/pwd y preferible que solo tenga permisos de lectura:
+$ chmod 400 /home/step/.step/pwd
+$ step ca provisioner add acme --type ACME (agregar el aprovisionador de ACME a la configuración)
+1.-
+Para que los certificados sean válidos por más de 24 horas, modificar el archivo:
+$ nano /home/step/.step/config/ca.json
+Y agregue la siguiente configuración en la sección acme y extenderá la vida útil de los certificados a 90 días:
+          "type": "ACME",
+          "name": "acme",
+          "claims": {
+              "maxTLSCertDuration": "2160h",
+              "defaultTLSCertDuration": "2160h"
+              }
+Despues de cambios en la configuración reiniciar el servidor
+# systemctl start step-ca
+
+
 sticky
 Cuando todos los ficheros del directorio solo pueden ser modificables por sus propietarios, naturalmente dejando a parte a root.
        $ ls -ld /tmp
