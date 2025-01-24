@@ -10350,22 +10350,34 @@ deurlname
 $ deurlname omg%20ponnu%20ily%20kannu.mp3
 
 
-devilspie
-Permite especificar el comportamiento de las ventanas para que determinadas aplicaciones se abran en un escritorio concreto. Ha de colocarse en las aplicaciones de inicio.
-$ mkdir .devilspie (Crear el directorio)
-Crear por cada aplicación un archivo .ds en el directorio:
-$ nano .devilspie/firefox.ds
-Con el siguiente contenido a modo de ejemplo:
-	(if
-	  (is (application_name) "firefox")
-	  (set_workspace 3)
-	)
-Cada vez que arranquemos firefox, se abrirá en el escritorio número 3.
-Para saber el nombre de las aplicaciones que corren en cada escritorio:
-$ nano .devilspie/debug.ds
+devilspie2
+Herramienta para gestionar ventanas en el entorno gráfico de forma automática. Utiliza scripts en lenguaje Lua en el directorio ~/.config/devilspie2/ para describir las acciones que deben realizarse cuando se detectan ventanas específicas a medida que se crean, como cambiar el tamaño, moverlas a otro espacio de trabajo o fijarlas.
+$ devilspie2 & (iniciar en segundo plano)
+las reglas se escriben en un archivo .lua dentro del directorio de configuración, por ejemplo supongamos que se quiere que "Firefox" se abra en el espacio de trabajo 2:
+$ nano ~/.config/devilspie2/firefox.lua (crear el archivo)
 Con el siguiente contenido:
-	(debug)
-Cuando arranquemos devilspie por consola, nos las mostrará.
+       if (get_window_name() == "Mozilla Firefox") then
+           set_workspace(2)
+       end
+Para mover una ventana llamada "Terminal" a la esquina superior izquierda y cambiar su tamaño a 800x600 píxeles:
+$ nano ~/.config/devilspie2/terminal.lua (crear el archivo)
+       if (get_window_name() == "Terminal") then
+           set_window_geometry(0, 0, 800, 600)
+       end
+Para que la ventana llamada "Music Player" esté disponible en todos los espacios de trabajo:
+       if (get_window_name() == "Music Player") then
+           pin_window()
+       end
+Para aplicar reglas a todas las ventanas de "Gedit"
+       if (get_application_name() == "gedit") then
+           set_workspace(3)
+           maximize()
+       end
+$ devilspie2 --debug (ejecutar en modo de prueba para verificar que las reglas funcionan correctamente)
+Para que devilpie2 inicie al arrancar el pc, por ejemplo en LXDE:
+# nano /etc/xdg/lxsession/LXDE/autostart
+Y añadir la linea
+@devilpie2
 
 
 devio
