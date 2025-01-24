@@ -1680,6 +1680,16 @@ Herramienta en sistemas basados en Debian diseñada para trabajar con el código
 # apt-src diff (Este comando creará un archivo de parche con las diferencias entre la versión original y los cambios realizados por ti)
 
 
+apt-xapian-index
+Herramienta que se utiliza en sistemas Debian y derivados para crear y mantener un índice de información sobre los paquetes disponibles en /var/lib/apt-xapian-index, y axi-cache, una herramienta de búsqueda que utiliza el índice update-apt-xapian-index y permite instalar complementos para indexar todo tipo de información adicional, como etiquetas Debtags, información de popcon, calificaciones de paquetes y cualquier otra cosa que encaje.
+# update-apt-xapian-index (actualizar el índice)
+# axi-cache info (Imprimir información sobre el entorno apt-xapian-index)
+# axi-cache search vim (buscar paquetes relacionados con "vim")
+# axi-cache show gimp (mostrar toda la información del paquete)
+# axi-cache depends gedit (mostrar las dependencias y paquetes recomendados del comando especificado)
+# axi-cache policy emacs gedit vim (información de los tres comandos especificados)
+
+
 aptfs
 Herramienta basada en FUSE que permite explorar los paquetes fuente de Debian como si fueran archivos en un sistema de archivos. Esto facilita el acceso a los archivos fuente de los paquetes directamente desde la estructura de directorios, sin necesidad de descargarlos y extraerlos manualmente.
 # mkdir /mnt/aptfs (crear el directorio)
