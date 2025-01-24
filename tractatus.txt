@@ -749,9 +749,12 @@ $ amispammer -f /var/log/mail.log -t 50 -i 120 -o /var/log/reporte_spam.txt --ex
 
 
 amixer
-Bajar el volumen
-$ amixer sset Master 50%-   (Bajar un 50% del volumen)
-$ amixer sset Master 30%+  (Sube un 30% el volumen)
+Control del volumen.
+$ amixer set Master 50%-   (Bajar un 50% del volumen)
+$ amixer set Master 30%+  (Sube un 30% el volumen)
+$ amixer -D pulse set Master 50% (establece Pulseaudio como dispositivo predeterminado
+$ amixer set Master mute (silenciar)
+$ amixer set Master unmute (no silenciar)
 
 
 ample
