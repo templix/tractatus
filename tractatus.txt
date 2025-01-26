@@ -2890,6 +2890,18 @@ Opciones
 	-t random (escribe de forma aleatoria en el disco)
 
 
+balloon
+Proporciona una implementación eficiente y segura de hashes de contraseñas basada en Go.
+$ balloon -passwd "linuxgenial"
+      Salt: 206ce7b0cfd53074
+      Hash: a8e81862d75f9281db061c08984e11f45fe5925d0ce3719ac7a6bad5be661c6a87e4c4648d3ad337a084441ae64d3b13690c589621c5ea9fcb9a392381397f4f
+      Encoded: $balloon$h=sha512,s=65536,t=3,p=1$IGznsM/VMHQ$qOgYYtdfkoHbBhwImE4R9F/lkl0M43Gax6a61b5mHGqH5MRkjTrTN6CERBrmTTsTaQxYliHF6p/LmjkjgTl/Tw
+$ balloon -salt 206ce7b0cfd53074
+      Salt: 206ce7b0cfd53074
+      Hash: 79d5a9453d93693dc3d076f79dd2dc194f0922a836f665e8f2d4ca9f4487d71dd3374698c09fe064987157d79f3ff61a9b7838bf2d5b13a6b00265900f9ca6dc
+      Encoded: $balloon$h=sha512,s=65536,t=3,p=1$IGznsM/VMHQ$edWpRT2TaT3D0Hb3ndLcGU8JIqg29mXo8tTKn0SH1x3TN0aYwJ/gZJhxV9efP/Yam3g4vy1bE6awAmWQD5ym3
+
+
 bandwidthd
 Herramienta que analiza la utilización del ancho de banda disponible y genera reportes gráficos. Una vez instalado poner en la barra del navegador:
 	file:///var/lib/bandwidthd/htdocs/index.html
@@ -7973,6 +7985,12 @@ Proyecto de software libre cuyo objetivo es reemplazar el BIOS [firmware] propie
 # cbfstool /dev/sda1 create-image /usr/share/coreboot/3rdparty/romstage.bin (crea una imagen de ROMStage en el dispositivo especificado)
 # cbfstool /dev/sda1 dump -b 0x10000 0x200000 (muestra los datos del firmware en el rango especificado)
 # flash-kernel --kernel=/path/to/kernel --ramdisk=/path/to/initrd (actualiza el kernel y el initrd en el firmware)
+
+
+corekeeper
+Diseñado para gestionar de manera eficiente los archivos de núcleo [core dumps] generados por aplicaciones que se bloquean. A pesar de no tener un ejecutable, realiza su función principalmente en configuraciones automáticas del sistema o a través de scripts. Informa de fallas y elimina archivos de núcleo antiguos después de 7 días.
+$ systemctl status corekeeper (verificar si está activo)
+$ journalctl -u corekeeper (verificar el comportamiento de los logs del servicio)
 
 
 corelist
