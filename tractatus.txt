@@ -2864,6 +2864,13 @@ Para que las tareas se ejecuten automáticamente, backupninja utiliza cron. Por 
 Esto ejecutará todas las tareas a las 3:00 AM.
 
 
+backuppc
+Sistema avanzado de copias de seguridad basado en disco que utiliza deduplicación y copias automáticas para gestionar respaldos de múltiples máquinas. Es ideal para redes locales y está diseñado para gestionarse con la interfaz de red que, normalmente se encuentra en http://localhost/backuppc
+$ htpasswd /etc/backuppc/htpasswd backuppc (establecer la contraseña. El usuario es backuppc, que tambien puede cambiarse en el archivo /etc/backuppc/htpasswd)
+$ systemctl start backuppc.service (arrancar el servicio)
+$ firefox localhost/backuppc
+
+
 badblocks
 [e2fsprogs]. Utilidad para reparar sectores dañados del disco duro o pendrive. Trabajar con la unidad desmontada.
 # badblocks -s -v -n -f /dev/sda  (recuperar y reparar sectores dañados)
