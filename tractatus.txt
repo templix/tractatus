@@ -7762,6 +7762,12 @@ $ containers-storage layer inspect layer-name (inspeccionar una capa)
 $ containers-storage cleanup (eliminar capas, imágenes y datos para liberar espacio y mantener limpio el almacenamiento)
 
 
+content-hub
+Infraestructura y servicio de intercambio y selección de contenido, diseñado para permitir que las aplicaciones intercambien contenido de forma segura y eficiente especialmente en sistemas con múltiples aplicaciones que necesitan acceder a contenido compartido, como imágenes, textos o archivos. La aplicaciones de este paquete son content-hub-send y content-hub-service.
+$ content-hub-service start (iniciaría el servicio, permitiendo que las aplicaciones comiencen a interactuar con Content Hub para enviar y recibir contenido)
+$ content-hub-send --type image/jpeg --file imagen.jpg (se está enviando una imagen JPEG al Content Hub para que otras aplicaciones que estén configuradas para recibir contenido de tipo image/jpeg puedan acceder a ella)
+
+
 continue
 Salta a la siguiente interacion en un bucle for, select, while o until. En el siguiente ejemplo se imprime del 1 al 5 pero saltándose el 3:
 	#!/bin/bash
@@ -15539,9 +15545,10 @@ Luego, recarga la configuración
 gpgconf
 Utilidad para consultar y modificar los archivos de configuración en el directorio .gnupg.
 $ gpgconf --reload gpg-agent (informar a gpg-agent de la nueva configuración)
-$ gpgconf --list-components (Enumera todos los componentes. Comando por defecto si no se especifica ninguno)
-$ gpgconf --check-programs (Enumera todos los programas disponibles y comprueba si se pueden ejecutar)
-$ gpgconf --list-dirs (Enumera los directorios usados por gpgconf)
+$ gpgconf --list-components (enumera todos los componentes. Comando por defecto si no se especifica ninguno)
+$ gpgconf --check-programs (enumera todos los programas disponibles y comprueba si se pueden ejecutar)
+$ gpgconf --list-dirs (enumera los directorios usados por gpgconf)
+$ gpgconf --list-options gpg-agent (las opciones de gpg-agent)
 
 
 gping
