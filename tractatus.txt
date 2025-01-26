@@ -8173,6 +8173,16 @@ Reproductor de música minimalista con una interfaz de usuario textual escrita e
 $ cplay-ng
 
 
+cpm
+Gestor de contraseñas que utiliza una interfaz en curses [modo texto] que utiliza cifrado PGP. Herramienta para gestionar contraseñas y almacenarlas cifradas con clave pública en un archivo. Los datos se almacenan como XML comprimido zlib. El software utiliza CDK [ncurses] para gestionar la interfaz de usuario, libxml2 para almacenar la información, la biblioteca zlib para comprimir los datos y la biblioteca GpgMe para cifrar y descifrar los datos de forma segura.
+Configuración previa. Si no se tiene ninguna clave pública, crear una:
+$ gpg --full-generate-key
+$ gpg --list-keys (para obtener la clave pública si ya se tiene)
+$ export CPM_KEYID="TU_KEY_ID" (Sustituir TU_KEY_ID por el ID de la clave pública obtenida con el comando anterior)
+$ cpm --configtest (verificar el archivo de configuración)
+$ cpm (abre la interfaz donde se puede agregar, buscar, editar y eliminar entradas de contraseñas)
+
+
 cpu
 Herramienta de administración de usuarios LDAP [Lightweight Directory Access Protocol - protocolo ligero de acceso a directorios]. Archivo de configuración en /etc/cpu/cpu.conf
 # cpu -m ldap (la otra opción es "passwd")
