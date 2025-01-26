@@ -34262,6 +34262,40 @@ extension=php_openssl.dll
 En caso de que no aparezca esa línea añadirla final del archivo
 
 
+xapian
+[xapian-tools]. Biblioteca de motor de búsqueda que permite a los desarrolladores integrar capacidades de búsqueda y recuperación de información en sus aplicaciones. Implementa el modelo probabilístico de recuperación de información y proporciona funciones para realizar búsquedas de texto libre clasificadas, retroalimentación de relevancia, búsqueda de frases, búsqueda booleana, derivación y actualización y búsqueda simultáneas. Incluye las herramientas copydatabase, quest, xapian-check, xapian-compact, xapian-delve, xapian-metadata, xapian-pos, xapian-progsrv, xapian-replicate, xapian-replicate-server y xapian-tcpsrv.
+$ xapian-check /ruta/al/indice (verificar la integridad de un índice de xapian para asegurar de que no este corrupto)
+$ xapian-compact /ruta/al/indice /ruta/al/nuevo_indice (herramienta se utiliza para compactar un índice si se han eliminado muchos documentos del índice)
+$ xapian-delve /ruta/al/indice (herramienta permite explorar el contenido de un índice y ver la información sobre los documentos que contiene  para depurar y comprender cómo se han indexado los documentos)
+$ xapian-metadata /ruta/al/indice (permite mostrar y modificar metadatos en un índicen como incluir información adicional sobre el índice, como su tamaño o estadísticas de uso)
+Ejemplo:
+# update-apt-xapian-index (crear una base de datos con apt-xapian-index)
+# xapian-check /var/lib/apt-xapian-index/index (verifica que esté todo OK)
+       docdata:
+       blocksize=8K items=65693 firstunused=202 revision=7 levels=1 root=2
+       B-tree checked okay
+       docdata table structure checked OK
+       #
+       termlist:
+       blocksize=8K items=131386 firstunused=3108 revision=7 levels=2 root=958
+       B-tree checked okay
+       termlist table structure checked OK
+       ...
+# xapian-delve /var/lib/apt-xapian-index/index
+       UUID = 95ca8cb8-7513-4f89-80d9-631574ffaa4e
+       number of documents = 65693
+       average document length = 28.1853
+       document length lower bound = 9
+       document length upper bound = 997
+       highest document id ever used = 65693
+       has positional information = false
+       revision = 7
+       currently open for writing = false
+# copydatabase /var/lib/apt-xapian-index/index ~/Docs/apt-xapian/
+# ls ~/Docs/apt-xapian
+       docdata.glass  flintlock  iamglass  postlist.glass  spelling.glass  synonym.glass  termlist.glass
+
+
 xarclock
 Reloj invertido [de iquierda a derecha]
 $ xarclock -roman -chime -fg white -bg blue -hd red -hl yellow -update 1 -geometry 200x200 (Con los números romanos [roman] en blanco [fg], que marque con un "clin" las medias horas y con dos las horas [chime], fondo azul [bg], manecillas en rojo [hd], borde de las manecillas amarillas [hl], marcando los segundos [update] y geometria 200x200)
