@@ -19938,6 +19938,16 @@ Pasar páginas del manual a formato html.
 $ man2web ifconfig > ifconfig.html
 
 
+mandoc
+[manual document]. Conjunto de herramientas para procesar y mostrar páginas de manual en los formatos de macro mdoc y man, ampliamente usados en sistemas BSD y UNIX. Además el conjunto de herramientas incluye varias utilidades complementarias para buscar, indexar y manipular estas páginas. Incluye las aplicaciones demandoc, mapropos, mman, msoelim, mwhatis, makewhatis, mandocd y mcatman
+$ mandoc /usr/share/man/man1/ls.1 (procesar una página de manual y verla en el terminal)
+$ demandoc /usr/share/man/man1/ls.1 (convierte una página de manual a texto plano, eliminando todo el formato)
+$ mapropos disk (buscar comandos relacionados con "disk")
+$ mman ls (ver las páginas de manual utilizando la base de datos de mandoc. Reemplaza a man en entornos configurados para usar mandoc)
+$ msoelim /usr/share/man/man1/ls.1 (procesar una página de manual que incluye macros .so que suelen ser referencias a otras partes del manual)
+$ mwhatis ls (ver descripción exacta del comando ls)
+
+
 manpage-alert
 Comprobar ejecutables sin página de manual.
 $ manpage-alert -p (por su nombre)
