@@ -2992,6 +2992,11 @@ Los parámetros que se pueden usar dentro de un script bash son:
     $? 	El código de error del ultimo comando ejecutado
 
 
+bash-argsparse
+reemplazar las funciones de análisis de opciones y descripción de uso que se suelen reescribir en todos los scripts. El listado puede verse con el navegador: file:///usr/share/doc/bash-argsparse/html. Para usar o adaptar alguna función, en el script que estamos realizando ha de incluirse la lineaa:
+           source /usr/share/bash-argsparse/argsparse.sh
+
+
 bash-builtins
 Bash puede cargar dinámicamente nuevos comandos integrados. Se incluyen los encabezados necesarios para compilar sus propios comandos integrados y muchos ejemplos. En el navegador file:///usr/share/doc/bash-builtins
 
@@ -3656,6 +3661,17 @@ Enumera la información de red por países.
 $ blockfinder -i (actualizar la caché)
 $ blockfinder -v -t SP (buscar el recurso deseado en el país de su elección)
 $ blockfinder -v -t SP:ipv4 (filtrar los resultados de un protocolo específico)
+
+
+blosxom
+Aplicación de blog ligera escrita en Perl que permite a los usuarios crear y gestionar un blog de manera sencilla ya que su principal característica es que utiliza archivos de texto plano para almacenar las entradas y no requiere una base de datos.
+
+
+bls-standalone
+[Build Log Scanner - BLS]. Versión independiente del escáner de registros de compilación [build logs]. Su propósito principal es identificar problemas o advertencias en los registros de compilación, especialmente útiles para los mantenedores de paquetes en sistemas como Debian.
+$ bls-standalone --verbose build.log (escanear en busca de errores o advertencias el archivo build.log que contiene el registro de una compilación y de forma detallada)
+$ bls-standalone log1.txt log2.txt log3.txt (analizará cada archivo y mostrará los resultados en orden)
+$ bls-standalone build.log | grep "warning" (buscar advertencias específicas)
 
 
 bluemon
@@ -4789,6 +4805,37 @@ $ cat /proc/asound/card0/pcm0p/sub0/status (verificar el estado de un dispositiv
 # systemctl restart pulseaudio (reiniciar la aplicación)
 $ pacmd list-sinks (verificar los dispositivos de audio disponibles)
 Nota.- En sistemas modernos, callaudiod es parte del sistema PulseAudio, que ha reemplazado a otros sistemas como ALSA.
+
+
+calypso
+Servidor caldav [estándar de Internet que permite a un cliente acceder a información de planificación en un servidor remoto.] escrito en Python que almacena calendarios y contactos en repositorios git. Cada colección reside en su propio repositorio git.
+Configuración básica:
+$ nano ~/.config/calypso/config
+       [DEFAULT]
+       host = localhost
+       port = 5232
+       storage = ~/docs/calendarios
+       umask = 0077
+       git = true
+host: Dirección donde se ejecutará el servidor por ejemplo, localhost o una IP, port: Puerto en el que escuchará el servidor, storage: Ruta donde se almacenarán los calendarios/contactos y git: Habilita el almacenamiento en repositorios Git.
+$ calypso --config ~/.config/calypso/config (pondrá a calypso en marcha y estará disponible en http://localhost:5232)
+1.-
+Ejemplo de crear un calendario o repositorio
+$ mkdir -p ~/docs/calendarios/my_calendar
+cd ~/docs/calendarios/my_calendar
+git init
+Al habilitar Git, cualquier cambio realizado en este calendario se almacenará en el historial de Git. Puede conectar cualquier cliente CalDAV compatible como Thunderbird, Evolution o aplicaciones de calendario en dispositivos móviles, al servidor de calypso en el que se estará ejecutando en http://localhost:5232 y el calendario se llama my_calendar, la URL para el cliente sería:
+             http://localhost:5232/my_calendar
+Cuando se haga cambios en un calendario, por ejemplo, añadir o editar eventos, calypso automáticamente los registra en el repositorio Git asociado.
+$ git log (en el directorio my_calendar para ver el historial)
+2.-
+Para configurar autenticación básica en el archivo de configuración de calypso.
+$ nano ~/.config/calypso/config
+Añadir:
+        [DEFAULT]
+        auth = true
+        users = ~/users/usuarios.txt
+El archivo de usuarios debe contener líneas en el formato: username:password
 
 
 cancel
