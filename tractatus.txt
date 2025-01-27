@@ -8801,6 +8801,13 @@ $ cumin 'A:group3' 'whoami' > output.log (guardar salida en un archivo)
 $ cumin 'A:admin_servers' 'bash -c "echo $(date) - Service restarted"' (ejecuta un comando de Bash en cada servidor administrador, mostrando la fecha y un mensaje personalizado)
 
 
+cuneiform
+Sistema de reconocimiento óptico de caracteres [Optical Character Reader - OCR] que se utiliza para extraer texto de imágenes o documentos escaneados. Además de reconocimiento de texto, también realiza análisis de diseño, lo que significa que puede manejar documentos con múltiples columnas, tablas, y otros elementos de diseño. Es compatible con una gran variedad de idiomas: inglés [rmg], francés [fra], alemán [ger], italiano [ita], portugués [por], español [spa]...
+$ cuneiform -o salida.txt documento.png (extraer texto de una imagen llamada documento.png y guardarlo como texto plano en un archivo salida.txt)
+$ cuneiform -l spa -o salida.txt documento.png (si el texto de la imagen está en español, especificar el idioma)
+$ cuneiform -v -f html -o salida.html documento.png (obtener el texto con formato html y detallado)
+
+
 cupp
 [Common User Passwords Profiler]. Herramienta que puede generar un diccionario para ataques de fuerza bruta o ataques de diccionario con una lista de palabras a partir de información como un cumpleaños, apodo, dirección, nombre de una mascota o familiar, o una palabra común.
 $ cupp3 -i (Realiza varias preguntas sobre cual es el nombre, el nik, el hijo... y al final crea un diccionario con los datos entrados .txt)
@@ -10058,6 +10065,12 @@ apt: Instala paquetes adicionales en la imagen (en este caso, vim, curl y wget).
 overlay: Copia archivos desde un directorio local (./overlay) hacia la imagen creada.
 filesystem: Configura el sistema de archivos de salida como ext4 con un tamaño de 2 GB.
 $ debos recipe.yaml (generará una imagen en la arquitectura y configuración especificadas)
+
+
+debpear
+Construye e instala automáticamente paquetes PEAR [PHP Extension and Application Repository] como si fueran paquetes Debian. Se puede instalar paquetes PEAR a partir del nombre de un módulo PEAR de PHP. Debpear descargará, creará y construirá un paquete Debian a partir del paquete pear que se haya seleccionado y, finalmente, lo instalará en el sistema. También funciona buscando los paquetes PEAR equivalentes en el repositorio de Debian y los instala automáticamente ya que los paquetes PEAR suelen tener su propia forma de instalación y gestión, lo que puede complicar su administración en un sistema que utiliza apt para su gestión.
+# debpear install Mail (buscará el paquete Mail en el repositorio PEAR y lo convertirá en un paquete Debian para su instalación. Si ya existe lo actualizará y si hay una versión más reciente, la instalará )
+# apt-get remove php-pear-Mail (desinstalar el paquete php-pear-Mail que es el nombre del paquete Debian que fue creado a partir del paquete PEAR)
 
 
 debram
@@ -15965,6 +15978,12 @@ Para una personalización más exhaustiva:
 # nano /usr/lib/guake/guake.py (En Arch: nano /usr/bin/guake)
 width = 80 (Modificar archura, por defecto 100% de la pantalla)
 if halignment == ALIGN_CENTER: (Centrada)
+1.-
+Para guardar la configuración:
+$ guake --save-preferences=myprefs.cfg
+y restaurarla:
+$ guake --restore-preferences=myprefs.cfg
+Preferible colocar myprefs.cfg en ~/.config/guake/
 
 
 guake-indicator
