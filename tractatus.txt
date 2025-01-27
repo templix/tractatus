@@ -5714,6 +5714,39 @@ $ cewl -a -d 3 -m 5 -w wordlist.txt http://www.movistar.es (Incuir metadatos [a]
 $ cewl -w wordlist.txt -o -e URL (que escriba el resultado en wordlist.txt, que escanee enlaces externos y correos electrónicos [e])
 
 
+cfengine
+Conjunto de programas para la gestión autónoma integrada de ordenadores individuales o en red, asegurando que las configuraciones estén en un estado deseado. Se utiliza comúnmente para automatizar tareas de configuración, mantenimiento y gestión. Consta de los siguientes componentes principales: cf-agent [ejecuta las políticas de configuración en los nodos], cf-serverd [proporciona servicios para distribuir políticas y datos a otros nodos], cf-promises [valida la sintaxis de los archivos de política], cf-runagent [ejecuta remotamente cf-agent en los nodos gestionados] y cf-key [genera claves criptográficas para la comunicación segura entre nodos]
+# tail -n 100 /var/log/cfengine.log (verificar los logs de cfengine)
+# cf-runagent --hosts nodo1,nodo2 (ejecuta políticas en los nodos remotos nodo1 y nodo2)
+# systemctl start cf-serverd (iniciar el servidor de políticas)
+# cf-key (cada nodo necesita una clave para comunicarse de forma segura)
+1.-
+Ejemplo simple de estructura básica de un archivo de política [.cf]:
+$ cat archivo_politica.cf
+bundle agent example_policy
+       {
+         files:
+                "/etc/motd"
+                            create => "true",
+                edit_lines => append_line("Bienvenido al servidor gestionado por CFEngine.");
+       }
+En este ejemplo se asegura de que el archivo /etc/motd exista y se añade una línea de texto al final del archivo.
+# cf-promises -f archivo_politica.cf (verificar su sintaxis, si es válida, no se mostrará ningún error)
+# cf-agent -f archivo_politica.cf (ejecutar el archivo de política)
+Nota.- En el servidor, se coloca las políticas en el directorio /var/cfengine/masterfiles para que los nodos gestionados las descarguen.
+2.-
+Asegurar que el servicio SSH esté activo y configurado correctamente:
+# nano ssh_config.cf:
+bundle agent ssh_config
+       {
+           services:
+               "ssh"
+                   service_policy => "start";
+           files:
+               "/etc/ssh/sshd_config"
+                   comment => "Asegurar que la configuración de SSH cumpla las políticas";
+
+
 cfi-en
 Libro sobre cultura, folclore e historia de los hackers de Linus Walleij. Se trata de una traducción del texto original en sueco. En formato HTML. Indice del temario:
 $ firefox file:///usr/share/doc/cfi-en/html/mainindex.htm
