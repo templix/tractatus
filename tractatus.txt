@@ -4844,6 +4844,23 @@ $ cancel -u usuario  (del usuario especificado)
 $ cancel -a  (todos los trabajos)
 
 
+canid
+Herramienta que proporciona una API HTTP simple para consultar información relacionada con nombres de dominio, direcciones IP, números de sistemas autónomos [ASN] y otros datos relacionados con el ecosistema de Internet. Por defecto, CanID escucha en http://localhost:8043.
+# systemctl start canid (con el servicio en ectivo, en el navegador se coloca el dato a averiguar)
+$ curl http://localhost:8043/domain/example.com (con herramientas como curl se puede interactuar con la API)
+$ curl http://localhost:8043/ip/8.8.8.8 (consultar información sobre una IP)
+$ curl http://localhost:8043/asn/15169 (consultar información de un ASN)
+$ curl http://localhost:8043/tlds (consultar TLD disponibles)
+1.-
+Ejemplo de script para consultar direcciones IP de un archivo;
+$ nano dirs.sh
+       #!/bin/bash
+       while read -r ip; do
+         curl -s "http://localhost:8080/ip/$ip" | jq
+       done < ips.txt
+Este script toma direcciones IP de un archivo llamado ips.txt y devuelve la información en formato JSON utilizando jq para formatear la salida.
+
+
 cansina
 Trata de descubrir directorios ocultos en los que poder encontrar información útil. Descarga:
 $ git clone https://github.com/deibit/cansina
