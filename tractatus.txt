@@ -5678,6 +5678,19 @@ Interfaz de curses para configurar interfaces de red.
 # Ceni
 
 
+centreon-plugins
+Parte del sistema de monitorización Centreon, que permite supervisar servidores, aplicaciones, redes y más. Esta herramienta funciona como una colección de complementos que se ejecutan desde la línea de comandos para verificar el estado y el rendimiento de sistemas o servicios específicos.
+$ centreon_plugins.pl --plugin=apps::protocols::http::plugin --mode=response-time --hostname=example.com --port=80 --urlpath="/" --warning=2 --critical=5 (comprobar el tiempo de respuesta de un servidor)
+Las opciones: --hostname: Dirección del servidor web, --urlpath: Ruta que se desea comprobar y --warning y --critical: Establecen umbrales en segundos para emitir alertas.
+$ centreon_plugins.pl --plugin=os::linux::snmp::plugin --mode=cpu --hostname=192.168.1.1 --snmp-community=public --snmp-version=2c --warning=80 --critical=90 (verificar el uso de CPU en un servidor mediante SNMP)
+La opciones: --hostname: Dirección IP del host, --snmp-community: Cadena de comunidad SNMP, --snmp-version: Versión del protocolo SNMP y --warning y --critical: Umbrales para uso de CPU (%).
+$ centreon_plugins.pl --plugin=os::linux::snmp::plugin --mode=disk-usage --hostname=192.168.1.1 --snmp-community=public --snmp-version=2c --warning-usage=80 --critical-usage=90 (supervisar uso de disco en un servidor)
+$ centreon_plugins.pl --plugin=network::cisco::standard::snmp::plugin --mode=interfaces --hostname=192.168.1.1 --snmp-community=public --snmp-version=2c --interface=GigabitEthernet0/1 --state=up (ver si una red está activa)
+Las opciones: --plugin=network::cisco::standard::snmp::plugin: Especifica el complemento para dispositivos Cisco, --interface: Nombre de la interfaz que se desea supervisar y --state: Especifica el estado esperado por ejemplo, "up".
+$ centreon_plugins.pl --plugin=database::mysql::plugin --mode=connections --hostname=127.0.0.1 --port=3306 --username=root --password=secret --warning=50 --critical=100 (verificar conexiones activas en una base de datos MySQL)
+$ centreon_plugins.pl --plugin=apps::protocols::http::plugin --help (ver las opciones y modos disponibles para un complemento específico)
+
+
 ceph
 Sistema de almacenamiento distribuido y escalable.
 # ceph -s (mostrará información sobre el estado de los nodos, OSDs [Object Storage Daemons], monitores y otros componentes)
