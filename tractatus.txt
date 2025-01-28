@@ -3979,6 +3979,51 @@ Herramientas para configurar puentes Ethernet, útiles en redes virtuales y conf
 # brctl delif br0 eth0 (quita la interfaz eth0 del puente br0)
 
 
+brightd
+Daemon que ajusta el brillo de la pantalla y si un usuario está inactivo durante un tiempo determinado, la pantalla se oscurece automáticamente.
+ Crear un archivo de servicio para que brightd pueda ser gestionado con systemctl:
+# nano /etc/systemd/system/brightd.service
+Con el contenido:
+      [Unit]
+        Description=Brightd Daemon for Auto Screen Dimming
+        After=multi-user.target
+      [Service]
+        ExecStart=/usr/bin/brightd
+        Restart=always
+        User=root
+      [Install]
+        WantedBy=multi-user.target
+Guardar el archivo y recargar la configuración de systemd
+# systemctl daemon-reload
+Habilitar y arrancar el servicio
+# systemctl enable brightd
+# systemctl start brightd
+# systemctl status brightd (comprobar que se está ejecutando)
+Asegurar que la ruta del ejecutable en ExecStart sea correcta:
+# nano /etc/systemd/system/brightd.service
+     ExecStart=/usr/bin/brightd
+# nano /etc/brightd.conf
+Asegurar que los valores sean correctos:
+# nano /etc/brightd.conf
+     # Brillo máximo (al 100%)
+     max_brightness = 255
+     #
+     # Brillo mínimo (cuando se oscurece automáticamente)
+     min_brightness = 10
+     #
+     # Tiempo de inactividad en segundos antes de oscurecer
+     idle_time = 300
+     #
+     # Ajustar la ruta
+     backlight_path = /sys/class/backlight/*/brightness
+Algunos sistemas requieren permisos adicionales para que brightd acceda al control de brillo. Si el log muestra errores de permisos, añadir la regla de udev:
+# nano /etc/udev/rules.d/99-backlight.rules
+     SUBSYSTEM=="backlight", RUN+="/bin/chmod 666 /sys/class/backlight/*/brightness"
+Recargar las reglas:
+# udevadm control --reload
+Nota.- No funciona en todos los monitores.
+
+
 brillo
 Para definir el nivel de brillo de algunos portatiles podemos recurrir al siguiente comando:
 # echo 2000 > /sys/class/backlight/acpi_video0/brightness
