@@ -5666,6 +5666,13 @@ Puede gestionar la grabación de CD de audio y datos, a través de una imagen de
 $ cdw (abrirá la interfaz de la aplicación desde la que se puede gestionar todo)
 
 
+celery
+Es una cola de tareas o de trabajos asincrónica basada en el paso de mensajes distribuidos. Está enfocada en el funcionamiento en tiempo real, pero también admite la programación. Las tareas se pueden ejecutar de forma asincrónica [en segundo plano] o sincrónica [esperando hasta que estén listas].
+$ celery -A celyconfig.py worker --loglevel=info (ejecutar el worker de Celery)
+$ celery -A celyconfig.py inspect active (verificar el estado de las tareas)
+$ celery -A celyconfig.py control purge (limpiar las tareas en ejecución)
+
+
 ceni
 Interfaz de curses para configurar interfaces de red.
 # Ceni
