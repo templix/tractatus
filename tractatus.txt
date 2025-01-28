@@ -32531,6 +32531,23 @@ Se ejecuta sin argumentos desde la raíz del árbol de fuentes donde se ve el di
 $ uscan
 
 
+user-dirs.dirs
+[archivo $HOME/.config/user-dirs.dirs] Archivo donde se especifican los directorios que saldran por defecto en el $HOME:
+XDG_DESKTOP_DIR=”$HOME/Escritorio”
+XDG_DOWNLOAD_DIR=”$HOME/Descargas”
+XDG_TEMPLATES_DIR=”$HOME/Plantillas”
+XDG_PUBLICSHARE_DIR=”$HOME/Público”
+XDG_DOCUMENTS_DIR=”$HOME/Documentos”
+XDG_MUSIC_DIR=”$HOME/Música”
+XDG_PICTURES_DIR=”$HOME/Imágenes”
+XDG_VIDEOS_DIR=”$HOME/Vídeos”
+
+
+user-setup
+Normalmente cuando se instala una distro, durante la instalación se crea un primer usuario. Si por alguna de las cosas poco probables, no se ha creado, con este paquete puede hacerse.
+$ user-setup
+
+
 useradd
 Crear usuarios.
 # useradd -d /home/user -m user (Especifica la ruta a su $HOME)
@@ -32561,23 +32578,6 @@ Borrar usuarios
 # userdel usuario (Elimina al usuario pero no su directorio personal)
 # userdel -r usuario (lo borra junto a su directorio $HOME)
 # userdel -f usuario (Borra al usuario y su directorio personal incluso aunque esté logeado en el sistema)
-
-
-user-dirs.dirs
-[archivo $HOME/.config/user-dirs.dirs] Archivo donde se especifican los directorios que saldran por defecto en el $HOME:
-XDG_DESKTOP_DIR=”$HOME/Escritorio”
-XDG_DOWNLOAD_DIR=”$HOME/Descargas”
-XDG_TEMPLATES_DIR=”$HOME/Plantillas”
-XDG_PUBLICSHARE_DIR=”$HOME/Público”
-XDG_DOCUMENTS_DIR=”$HOME/Documentos”
-XDG_MUSIC_DIR=”$HOME/Música”
-XDG_PICTURES_DIR=”$HOME/Imágenes”
-XDG_VIDEOS_DIR=”$HOME/Vídeos”
-
-
-user-setup
-Normalmente cuando se instala una distro, durante la instalación se crea un primer usuario. Si por alguna de las cosas poco probables, no se ha creado, con este paquete puede hacerse.
-$ user-setup
 
 
 usermod
@@ -32616,6 +32616,23 @@ Esto permite que el usuario alloweduser ejecute /usr/bin/some-command en nombre 
 $ userv targetuser reglas (el usuario en cuyo nombre se ejecutará el comando y la regla definida en ~/.userv/)
 $ userv targetuser reglas arg1 arg2 (Si el comando de la regla admite argumentos se pueden pasar directamente)
 $ userv --dry-run targetuser reglas (probar la configuración sin ejecutar el comando)
+
+
+userv-dyndns
+Diseñado para gestionar registros DNS de forma segura y controlada por usuarios que no tienen privilegios de administrador. Primero configurar el servicio:
+# nano /etc/userv/dyndns.conf
+      domain example.com
+      ttl 300
+      allowed_user alice bob
+El archivo define: domain: El dominio para el que se pueden actualizar registros, ttl: Tiempo de vida de los registros DNS y allowed_user: Lista de usuarios permitidos para actualizar registros. Luego definir de reglas para userv:
+# nano /etc/userv/userv.dyndns.rules.
+        command: /usr/bin/userv
+        user: root
+Este archivo permite que el comando userv se ejecute con privilegios de root.
+$ userv root dyndns --set alice.example.com --ip 203.0.113.42 (actualizar el registro alice.example.com con la dirección IPv4 203.0.113.42)
+$ userv root dyndns --delete alice.example.com (elimina el registro asociado con alice.example.com)
+$ userv root dyndns --set alice.example.com --ip 203.0.113.42 --ttl 600 (actualiza el registro con un TTL de 600 segundos)
+$ userv root dyndns --check-permissions (verificar si se tiene permisos)
 
 
 util-linux
