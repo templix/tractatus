@@ -10734,6 +10734,24 @@ Cliente DHCP
 # dhclient -v eth0 (solicitar ip)
 
 
+dhcp-helper
+Escucha las transmisiones DHCP [Dynamic Host Configuration Protocol] y BOOTP [Bootstrap Protocol] en subredes conectadas directamente y las retransmite a servidores DHCP o BOOTP en otros lugares, permitiendo la asignación de direcciones IP incluso si el servidor DHCP no está en la misma subred.
+$ dhcp-helper -b -s 192.168.1.100 -i eth0 (-b que se ejecute en segundo plano, -s 192.168.1.100 es el servidor DHCP al que se retransmiten las solicitudes y -i eth0 la iInterfaz en la que escucha las solicitudes DHCP)
+$ dhcp-helper -b -s 192.168.1.100 -s 192.168.1.101 -i eth0 (reenviar solicitudes DHCP a múltiples servidores)
+$ dhcp-helper -b -s 192.168.1.100 -i eth0 -i wlan0 (se retransmiten solicitudes desde ambas interfaces)
+$ $ dhcp-helper -d -s 192.168.1.100 -i eth0 (modo de depuración y muestra información en la terminal)
+$ dhcp-helper -b -s 192.168.1.100 (retransmitir todas las solicitudes de DHCP de todas las interfaces del sistema)
+1.-
+Para iniciar automáticamente dhcp-helper al inicio:
+# nano /etc/default/dhcp-helper
+       INTERFACES="eth0"
+       SERVERS="192.168.1.100"
+       OPTIONS="-b"
+Después, activar el servicio:
+# systemctl enable dhcp-helper
+# systemctl start dhcp-helper
+
+
 dhcp-probe
 Herramienta que se utiliza para detectar servidores DHCP [Dynamic Host Configuration Protocol] y BootP [Bootstrap Protocol] en una red Ethernet. Su función principal es enviar paquetes la red y escuchar las respuestas de los servidores DHCP y BootP, lo que permite identificar qué servidores están disponibles y qué información ofrecen.
 # dhcp_probe eth0 (encontrar servidores DHCP en la interfaz eth0)
