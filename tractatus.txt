@@ -10709,6 +10709,12 @@ $ dfc -t ext (filtrar por tipo de sistema de archivos)
 $ dfc -T (mostrar el tipo de sistema de archivos)
 
 
+dfrs
+Muestra el uso del espacio del sistema de archivos mediante gráficos y colores. dfrs muestra la cantidad de espacio en disco disponible en el sistema de archivos que contiene cada argumento de nombre de archivo. Si no se proporciona ningún nombre de archivo, se muestra el espacio disponible en todos los sistemas de archivos montados actualmente. dfrs(1) es una herramienta similar a df(1) excepto que puede mostrar un gráfico junto con los datos y puede usar colores. Sin ningún argumento, el tamaño se muestra en formato legible para humanos.
+$ dfrs (muestra el uso de los sistemas montados)
+$ dfrs -a (mostrar más sistemas de archivos que los anteriores. Con -aa los muestra todos incluso los no montados)
+
+
 dglob
 Expandir nombres o archivos de paquetes que coincidan con un patron.
 $ dglob -a goodies (Buscar en todos los paquetes disponibles no solo en los instalados)
