@@ -10734,6 +10734,11 @@ Cliente DHCP
 # dhclient -v eth0 (solicitar ip)
 
 
+dhcp-probe
+Herramienta que se utiliza para detectar servidores DHCP [Dynamic Host Configuration Protocol] y BootP [Bootstrap Protocol] en una red Ethernet. Su función principal es enviar paquetes la red y escuchar las respuestas de los servidores DHCP y BootP, lo que permite identificar qué servidores están disponibles y qué información ofrecen.
+# dhcp_probe eth0 (encontrar servidores DHCP en la interfaz eth0)
+
+
 dhcpcd
 Configuración automática de la red dhcp
 $ dhcpcd eth0
