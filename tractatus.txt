@@ -17512,6 +17512,20 @@ Y modificar la linea:
 Obtener el módulo que usa una determinada interfaz de red:
 # ls /sys/class/net/ (Listar todas las interfaces de red del equipo)
 # ls -la /sys/class/net/eth1/device/driver (Ver el módulo del kernel que está usando una interfaz de red)
+5.-
+Desde la versión v197 de systemd/udev automáticamente se asignan nombres de interfaces de red predecibles y persistentes para todas las interfaces de red Ethernet, WLAN y WWAN, en contra del nombrado tradicional eth0, eth1, wlan0, etc… con la intención de solucionar problemas reales en la detección y configuración de interfaces. Para el ejemplo: enp1s0
+      en --> interfaces Ethernet
+      wl --> interfaces WLAN
+      ww --> interfaces WWAN
+La siguiente parte del nombre representa el tipo de adaptador:
+      p1 --> para una ubicación PCI [bus nñumero 1]
+      s0 --> para una ranura [slot] hot plug [slot número 0]
+Si este sistema no gusta y se quiere volver al anterior [eth0, wlan0..] la forma más rápida es:
+# nano /etc/default/grub
+Y en la linea GRUB_CMDLINE_LINUX="" colocar: net.ifnames=0 biosdevname=0 y se verá:
+     GRUB_CMDLINE_LINUX="net.ifnames=0 biosdevname=0"
+A continuación actualizar grub:
+# update-grub
 
 
 inxi
