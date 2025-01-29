@@ -10697,6 +10697,18 @@ $ df -t vfat (de las particiones especificadas, en el caso las vfat)
 $ df -T (de todas las particiones y el tipo)
 
 
+dfc
+Muestra el uso del sistema de archivos mediante gráficos y colores. En cierto modo, es una versión modernizada de df, ya que puede utilizar colores, dibujar gráficos y exportar su salida a diferentes formatos, como CSV o HTML.
+# dfc -a (mostrar todo)
+$ dfc -c never (sin color)
+$ dfc -e html > archivo.html (exportar el resultado a html)
+# dfc -i (información sobre los inodos)
+$ dfc -l -m (mostrar solo los archivos montados y usando potencias de 10 en logar de potencias de 2)
+$ dfc -p /dev (solo ver los dispositivos montados)
+$ dfc -t ext (filtrar por tipo de sistema de archivos)
+$ dfc -T (mostrar el tipo de sistema de archivos)
+
+
 dglob
 Expandir nombres o archivos de paquetes que coincidan con un patron.
 $ dglob -a goodies (Buscar en todos los paquetes disponibles no solo en los instalados)
