@@ -4827,6 +4827,10 @@ Calendario y organizador de tareas por consola.
 $ calcurse
 
 
+caldav
+Protocolo basado en WebDAV que permite la gestión de calendarios de manera remota. Se utiliza principalmente para acceder y gestionar datos de calendario a través de Internet. CalDAV permite a los usuarios crear, modificar y eliminar eventos de calendario en un servidor, lo que facilita la sincronización de calendarios entre diferentes dispositivos y aplicaciones entre servidores [Radicale, Nextcloud, OwnCloud] y cliente [Thunderbird, Evolution].
+
+
 calendar
 Muestra hechos relevantes en inglés sobre el dia actual o el especificado con amplia variedad de calendarios. Puede personalizarse editando el archivo:
 # nano /usr/share/calendar/calendar.all
@@ -5018,6 +5022,10 @@ Utilidad para ordenadores portátiles de control de tarjetas PCMCIA [Tarjetas de
 # cardctl suspend (Interrumpe la alimentación de la tarjeta)
 # cardctl eject (La desactiva)
 # cardctl insert (La activa nuevamente)
+
+
+carddav
+Protocolo similar a CalDAV, pero diseñado específicamente para la gestión de contactos entre servidor [Radicale, Nextcloud, OwnCloud] y cliente [Thunderbird, Evolution]. También se basa en WebDAV y permite el acceso y la gestión de datos de contactos almacenados en un servidor.
 
 
 care
@@ -17518,7 +17526,7 @@ Desde la versión v197 de systemd/udev automáticamente se asignan nombres de in
       wl --> interfaces WLAN
       ww --> interfaces WWAN
 La siguiente parte del nombre representa el tipo de adaptador:
-      p1 --> para una ubicación PCI [bus nñumero 1]
+      p1 --> para una ubicación PCI [bus número 1]
       s0 --> para una ranura [slot] hot plug [slot número 0]
 Si este sistema no gusta y se quiere volver al anterior [eth0, wlan0..] la forma más rápida es:
 # nano /etc/default/grub
@@ -18399,6 +18407,21 @@ $ keyctl read 898972716 (Leer una clave de la salida anterior y formatearla en h
 $ keuctl pipe 898972716 (Leer una clave y formatearla tal como está)
 $ keyctl session
 $ keyctl (muestra la gran variedad de subcomandos que pueden emplearse)
+
+
+khal
+Programa de calendario basado en estándares abiertos y capaz de sincronizarse con servidores CalDAV a través de vdirsyncer.
+$ khal configure (guiará por un asistente para definir calendarios y formatos de visualización necesario antes de usar)
+$ khal list (muestra los eventos del día actual)
+$ khal list today 7d (lista los eventos de los próximos 7 días)
+$ khal new 2025-02-10 10:00 1h "Reunión con equipo" (crea un evento el 10 de febrero de 2025 a las 10:00 AM con una duración de 1 hora)
+$ khal calendar (muestra un calendario mensual con eventos resaltados)
+$ khal delete "Reunión con equipo" (borra el evento con el título especificado)
+$ khal search "cumpleaños" (buscar eventos)
+1.-
+Sincronizar con CalDAV si se configuró mediante vdirsyncer
+$ vdirsyncer sync
+$ khal sync (actualizar para reflejar los cambios)
 
 
 kickpass
@@ -32915,6 +32938,14 @@ Herramienta para apagar y encender la pantalla de un portatil (backlight)
 
 vdir
 Equivalente a ls -l.
+
+
+vdirsyncer
+cliente de CalDAV y CardDAV que permite sincronizar eventos del calendario y contactos entre un servidor remoto, como Google Calendar o OwnCloud, con una carpeta local del sistema. Esto significa que puede tener acceso a los calendarios y direcciones desde diferentes dispositivos sin depender de la conexión a internet para verlos.
+$ vdirsyncer --caldav https://example.com/calendars/USER --carddav https://example.com/addressbooks/USER --local-folder /path/to/local/folder (sincroniza el calendario y la libreta de direcciones del usuario USER del servidor con una carpeta local)
+$ vdirsyncer --caldav https://example.com/calendars/user --carddav https://example.com/addressbooks/user --local-folder /path/to/local/folder --log-level DEBUG --sync-interval 3600 --max-sync-threads 4 (incluye opciones adicionales como el nivel de log, intervalo de sincronización y número máximo de hilos para la sincronización)
+$ vdirsyncer --caldav https://example.com/calendars/user --local-folder /path/to/local/folder --sync-type iCal (sincroniza solo el calendario sin incluir la libreta de direcciones)
+$ vdirsyncer --carddav https://example.com/addressbooks/user --local-folder /path/to/local/folder --sync-type vCard (sincronización de solo libreta de direcciones)
 
 
 verse
