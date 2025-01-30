@@ -10762,6 +10762,12 @@ Configuración automática de la red dhcp
 $ dhcpcd eth0
 
 
+dhcpig
+Envía solicitudes DHCP de manera continua para ocupar todas las direcciones IP disponibles. Además, puede liberar las direcciones IP que ya están en uso, lo que puede causar problemas a los dispositivos que están conectados a la red.
+# dhcpig -i eth0 (realizar un ataque a la red eth0)
+# dhcpig -i eth0 --release (liberar direcciones IP ya en uso en la red eth0)
+
+
 dhcping
 Enviar una solicitud DHCP a un servidor DHCP para ver si está activo.
 # dhcping -t 5 -s https://cloud.google.com/solutions/web-hosting (tiempo de espera 5 segundos, por defecto 3 y enviar un paquete al servidor especificado)
