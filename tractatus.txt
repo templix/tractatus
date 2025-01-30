@@ -10779,6 +10779,18 @@ Leer toda la documentación de ayuda de debian con el navegador.
 $ firefox file:///usr/share/doc/HTML/index.html
 
 
+dhex
+Editor hexadecimal interactivo que permite ver y modificar archivos binarios y que incluye un modo diff, que se puede utilizar para comparar dos archivos binarios.
+$ dhex archivo.bin (visualizar y editar un archivo en hexadecimal)
+$ dhex archivo1.bin archivo2.bin (comparar dos archivos binarios y ver sus diferencias)
+En modo interactivo las teclas para moverse son:
+       Flechas del teclado --> Para moverte por los bytes.
+       TAB --> Alternar entre la vista hexadecimal y la vista ASCII.
+       Enter --> Editar el byte seleccionado.
+       CTRL + x --> Guardar cambios y salir.
+       CTRL + c --> Salir sin guardar.
+
+
 dhomepage
 [debian-goodies]. Abre, si existe, en el navegador la página de información de un paquete debian.
 $ dhomepage debian-history
