@@ -10791,15 +10791,35 @@ En modo interactivo las teclas para moverse son:
        CTRL + c --> Salir sin guardar.
 
 
+dhis-client
+Cliente de un sistema de información de host dinámico. dhid es el demonio cliente de DHIS [Dynamic Host Configuration Interface Service - servicio de DNS dinámico]. Esto es útil en situaciones donde un dispositivo, como un servidor o una computadora, no tiene una dirección IP estática y, por lo tanto, su dirección IP puede cambiar cada vez que se conecta a Internet. Un cliente de DNS dinámico permite que el dispositivo actualice automáticamente su dirección IP en un servidor DNS, de modo que siempre pueda ser accesible mediante un nombre de dominio fijo. Primero, se necesita configurar el cliente con la información del proveedor de DDNS [Dynamic Domain Name Service]. Esto incluye detalles como el nombre de usuario, la contraseña, el nombre de dominio que se desea actualizar, etc. Una vez configurado, se puede ejecutar un demonio [dhid] que se ejecuta en segundo plano. Este demonio monitoriza los cambios en la dirección IP del dispositivo y, si detecta un cambio, se comunica con el servidor DDNS para actualizar la dirección IP asociada con el nombre de dominio.
+Configurar un servidor con el nombre de dominio, por ejemplo, mi-servidor.dyndns.org:
+# nano /etc/dhis-client.conf
+      service=dyndns
+      username=tu_usuario
+      password=tu_contraseña
+      hostname=mi-servidor.dyndns.org
+# dhid (arrancar el demonio)
+# # systemctl status dhis-client (verificar estado que ver que esté activo)
+
+
 dhomepage
 [debian-goodies]. Abre, si existe, en el navegador la página de información de un paquete debian.
 $ dhomepage debian-history
 
 
 di
-Muestra información sobre las particiones com  df [ver] mejorado.
+Muestra información sobre las particiones como df [ver] mejorado.
 $ di
 $ di -c (Salida en CSV, para importar una hoja de cálculo)
+
+
+di-netboot-assistant
+Asistente de arranque en red del instalador Debian. di-netboot-assistant es una herramienta que simplifica la preparación de archivos para el arranque en red TFTP. Se encarga de descargar, extraer y organizar los archivos necesarios para iniciar una instalación de Debian desde la red. di-netboot-assistant solo descarga y organiza los archivos, pero se necesita un servidor TFTP para usarlos.
+# di-netboot-assistant install bookworm (descargará y configurará automáticamente los archivos en el directorio /var/lib/tftpboot/debian-installer para instalar la imagen de arranque en red para Debian 12)
+# di-netboot-assistant list (ver distribuciones posibles: stable, testing, unstable, o nombres específicos como bookworm, trixie, etc)
+# di-netboot-assistant remove bookworm (eliminará los archivos relacionados con esa versión del instalador de Debian)
+# di-netboot-assistant update (verificará si hay versiones más recientes de las imágenes instaladas y las actualizará)
 
 
 dialog
@@ -10894,9 +10914,9 @@ $ dictzip -c diccionario.dict > nuevo_diccionario.dict.dz (redirige el archivo c
 
 
 didiwiki
-wiki rápida y ligera para uso personal.
-$ didiwiki -h /home/USER -l 127.0.0.1 -p 5000
-En el navegador colocar la dirección http://localhost:5000 y se vera el directorio especificado.
+wiki rápida y ligera para uso personal. Puede modificarse la apariencia en /etc/didiwiki/styles.css
+$ didiwiki -l 127.0.0.1 -p 5000
+En el navegador colocar la dirección http://localhost:5000 [por defecto el 8000] y lo que se navegue quedará reflejado, por defecto en /home/USER/.didiwiki.
 
 
 diff
