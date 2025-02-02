@@ -10919,6 +10919,15 @@ $ didiwiki -l 127.0.0.1 -p 5000
 En el navegador colocar la dirección http://localhost:5000 [por defecto el 8000] y lo que se navegue quedará reflejado, por defecto en /home/USER/.didiwiki.
 
 
+dieharder
+Interfaz de prueba de generador de números aleatorios para evaluar la calidad de generadores de números aleatorios. Aunque técnicamente no genera los números aleatorios por sí mismo, analiza los resultados de otros generadores de números aleatorios.
+$ dieharder -f /ruta/al/archivo_secuencias_aleatorias.bin -g 216000 (analiza las secuencias aleatorias contenidas en el archivo especificado durante 6 horas [216000 segundos])
+$ dieharder -f /ruta/al/archivo_secuencias_aleatorias.bin -t 3 (realiza pruebas estadísticas específicas sobre las secuencias aleatorias)
+$ dieharder -f /ruta/al/archivo_secuencias_aleatorias.bin -d (muestra información detallada sobre el proceso de prueba, incluyendo estadísticas y resultados intermedios)
+$ dieharder -f archivo1.bin -f archivo2.bin -g 360000 (analiza dos archivos diferentes de secuencias aleatorias durante 10 horas cada uno)
+$ dieharder -f /ruta/al/archivo_secuencias_aleatorias.bin -s 1000 -e 20000 (limita el rango de pruebas entre 1000 y 20,000 pasos)
+
+
 diff
 Mostrar diferencias entre dos directorios o ficheros
 $ diff archivo1 archivo2 (Compara diferencias entre dos ficheros)
@@ -10929,6 +10938,18 @@ $ diff -y fichero1 fichero2   (Muestra la salida a dos columnas)
 $ diff –urp dir1 dir2 (Compara recursivamente el contenido de 2 directorios.)
 $ diff -ru carpeta_original carpeta_modificada > parche.patch (Compara de forma recursiva dos directorios y genera un parche en un fichero .patch con formato unificado de diff)
 $ diff -u <(grep -vE '^(#|$)' file1) <(grep -vE '^(#|$)' file2)  (Los compara ignorando comentarios y lineas en blanco)
+
+
+diff-cover
+Herramienta útil para analizar la cobertura de pruebas en los cambios recientes de un proyecto. Se utiliza principalmente para verificar qué líneas de código en un diff no están cubiertas por pruebas automatizadas, asegurando así que las modificaciones recientes estén bien testeadas antes de ser fusionadas en una rama principal.
+$ git diff origin/main | diff-cover coverage.xml (comparará los cambios locales con la rama main y mostrará qué líneas modificadas no están cubiertas por pruebas)
+$ git diff origin/main | diff-quality --violations=flake8 (mostrará solo los errores de estilo que están en líneas modificadas, ayudando a enfocar la corrección)
+$ git diff origin/main | diff-cover coverage.xml --html-report diff_cover_report.html (generar un informe en HTML)
+
+
+difference
+Compara dos cadenas e imprime una representación visual colorida si difieren sin mostrar las diferencias.
+$ difference archivo1 archivo2
 
 
 diffimg
@@ -10951,6 +10972,18 @@ $ diffoscope --text salida.txt archivo1.txt archivo2.txt
 diffpdf
 Compara dos archivos pdf.
 $ diffpdf archivo1.pdf archivo2.pdf
+
+
+diffstat
+Produce un gráfico de barras de los cambios introducidos por el comando diff. Este programa es un filtro simple que lee la salida del programa 'diff' y produce un histograma del número total de líneas que se modificaron. Es útil para escanear un archivo de parches para ver qué archivos se modificaron.
+$ diff file1.txt file2.txt | diffstat -p 1 (diff genera la salida con las diferencias y diffstat la procesa para mostrar un resumen gráfico y muestra el nombre del modificado)
+$ git diff HEAD~1 HEAD | diffstat -a (compara el último commit con el anterior y muestra un gráfico de los cambios, tratando lo archivos como texto aunque no tengan la extensión)
+
+
+diffutils
+Utilidades de comparación de archivos. El paquete diffutils proporciona los programas diff [Compara archivos línea por línea], diff3 [Compara tres archivos línea por línea], sdiff [fusiona dos archivos de forma interactiva] y cmp [Compara archivos byte a byte].
+$ diff3 archivo1.txt archivo2.txt archivo3.txt
+Nota.-Los otros programas ya están comentados en sus entradas,
 
 
 dig
