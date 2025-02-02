@@ -11095,6 +11095,16 @@ dirs
 Ver pushd
 
 
+dirsearch
+Escáner de rutas web. Este paquete contiene una herramienta diseñada para realizar búsquedas por fuerza bruta de directorios y archivos en servidores web. Como herramienta rica en funciones, dirsearch brinda a los usuarios la oportunidad de realizar una búsqueda compleja de contenido web, con muchos vectores para la lista de palabras, alta precisión, rendimiento impresionante, configuraciones avanzadas de conexión/solicitud, técnicas modernas de búsqueda por fuerza bruta y un excelente resultado.
+$ dirsearch -u http://example.com (realiza una búsqueda exhaustiva de todos los directorios y archivos en el dominio especificado)
+$ dirsearch -u http://example.com --wordlist /path/to/wordlist.txt (utiliza un archivo de palabras clave personalizado para enfocar la búsqueda)
+$ dirsearch -u http://example.com --exclude-dir /admin/,/backup/ (excluye ciertos directorios de la búsqueda)
+$ dirsearch -u http://example.com --subdomains-only (busca subdominios relacionados con el dominio principal)
+$ dirsearch -u http://example.com --depth 3 (limita la profundidad de la búsqueda a 3 niveles)
+$ dirsearch -u http://example.com --output-format json > results.json (guarda los resultados en un archivo JSON)
+
+
 discover
 Sistema de identificación de hardward. Realiza detección de hardware en el momento del arranque. La información se almacena en el archivon /lib/discover/list.xml que puede visualizarse con el navegador.
 $ discover
