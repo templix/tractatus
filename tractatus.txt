@@ -11003,15 +11003,28 @@ Colección de controladores de tabletas gráficas para el núcleo Linux, produci
 $ digimend-debug status 1 (1/on/enable para habilitar, 0/off/disable para deshabilitar)
 
 
+digitemp
+Herramienta de software que permite leer datos de sensores de temperatura que utilizan la tecnología 1-Wire [sensor de cable]. Digitemp es un programa que lee datos provenientes de una red 1-Wire mediante un adaptador pasivo [DS9097] o el más nuevo adaptador activo [DS9097U], conectado a un puerto serial. Básicamente lee sensores de temperatura, pero también admite otros, como un sensor de humedad.
+$ digitemp_DS9097U -i (buscará en la red 1-Wire y mostrará una lista de los sensores que ha encontrado, junto con sus direcciones)
+$ digitemp -q -s /dev/ttyUSB0 -o 28.1234567890ab (leer temperatura de un sensor especifico. /dev/ttyUSB0 es el puerto donde está conectado el adaptador 1-Wire [ajustar según configuración])
+$ digitemp -q -s /dev/ttyUSB0 > temperaturas.txt (leer la temperatura de todos los sensores conectados a la red 1-Wire y guardarlas en un archivo)
+Nota.- La opción -q en los comandos anteriores significa "quiet", que suprime la salida de información que no es necesaria, mostrando solo los resultados.
+
+
 digup
 és una eina per actualitzar fitxers md5sum o shasum digest. Llegirà els fitxers de resum existents, comprovarà el directori actual si hi ha fitxers nous, actualitzats, modificats, canviats de nom o eliminats i consultarà a l'usuari amb un resum dels canvis. Després de revisar les actualitzacions, es poden escriure de nou al fitxer de resum.
 $ digut (scanea el directorio y entra en el prompt de digup)
   Command (see help)? new (imprime los archivos modificados. Si es la primera vez que se lanza los pondrá todos)
 Si al cabo de unos dias se vuelve a lanzar.
-  Command (see help)? changed (mostrará los modificados)
-  Command (see help)? deleted (mostrará los eliminados)
-  Command (see help)? help (ver las opciones disponibles)
-  Command (see help)? exit (salir)
+     Command (see help)? changed (mostrará los modificados)
+     Command (see help)? deleted (mostrará los eliminados)
+     Command (see help)? help (ver las opciones disponibles)
+     Command (see help)? exit (salir)
+     Command (see help)? untouched (Imprimir todos los archivos que no se han modificado)
+     Command (see help)? touched (los que se han modificado con su fecha de modificación)
+     Command (see help)? error (los con errores de lectura)
+     Command (see help)? skipped (los omitidos durante el análisis)
+     Command (see help)? save (guardar actualizaciones en sha1sum.txt y salir)
 
 
 ding
@@ -20537,10 +20550,11 @@ $ md2term -k 1 -p -f file.md (manteniendo todas las marcas [-k 0 sin mantenerlas
 
 
 md5sum
-Escribe o comprueba sumas de verificación md5
+Escribe o comprueba sumas de verificación md5.
 $ md5sum archivo
 $ md5sum -  (Entra en el prompt. Teclear la palabra o frase y pulsar dos veces Ctrl+d)
 $ echo -n palabra | md5sum | awk '{print $1}' (md5sum de una palabra)
+$ md5sum * > MD5SUMS (crear un directorio con los md5sum de todos los archivos)
 
 
 mdadm
@@ -30414,6 +30428,18 @@ Analiza la secuencia de arranque en sistemas basados en systemd (Ver systemctl)
 # systemd-analyze critical-chain (ver cuellos de botella en el arranque)
 # systemd-analyze plot > archivo.svg (mostrar un gráfico con los tiempos del arranque)
 # systemd-analyze dump (volcar todo el arranque)
+
+
+systemd-bootchart
+Herramienta gráfica de rendimiento de arranque. systemd-bootchart es una herramienta que, por lo general, se ejecuta al iniciar el sistema y que recopila la carga de la CPU, la carga del disco, el uso de la memoria y la información por proceso de un sistema en ejecución. Los resultados recopilados se muestran como un gráfico SVG.
+Para habilitar systemd-bootchart:
+# nano /etc/default/grub
+Y modificar la linea:
+            GRUB_CMDLINE_LINUX_DEFAULT="init=/lib/systemd/systemd-bootchart"
+# update-grub (actualizar grup)
+Después del arranque, el gráfico SVG se genera en /run/log/bootchart-XXXX.svg [las "X" son la fecha de arranque]:
+$ inkscape /run/log/bootchart-20250202-1707.svg (para visualizarlo)
+Nota.- El gráfico se almacena en /run/log/, por lo que se perderá tras un reinicio a menos que se copie en otro lugar.
 
 
 systemd-coredump
