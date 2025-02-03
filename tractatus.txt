@@ -11138,6 +11138,20 @@ $ dirsearch -u http://example.com --depth 3 (limita la profundidad de la búsque
 $ dirsearch -u http://example.com --output-format json > results.json (guarda los resultados en un archivo JSON)
 
 
+dirvish
+Sistema de copia de seguridad basado en sistema de archivos que utiliza rsync. Una utilidad para mantener varias copias de seguridad en un almacenamiento en línea; cada copia de seguridad está disponible como una especie de directorio de instantáneas, donde se comparten archivos comunes entre las diferentes generaciones de copias de seguridad. Utiliza rsync para realizar la copia real. Las copias de seguridad se pueden realizar de forma local o a través de la red (utilizando ssh).
+# dirvish mybackup (ejecutar un backup)
+# dirvish-check mybackup ( verificar el estado de un backup)
+# dirvish-restore mybackup (restaurar desde un backup)
+
+
+disc-cover
+Produce carátulas para CD de audio. La herramienta consulta una base de datos llamada FreeDB para obtener información sobre las pistas de un CD específico y luego crea una carátula en uno de varios formatos disponibles [PostScript, PDF, Dvi, LaTeX, texto sin formato, HTML, CDlabelgen y CDDB]. Es importante tener en cuenta que FreeDB ha sido reemplazado por otras bases de datos, como MusicBrainz.
+$ disc-cover /dev/cdrom (buscará la información del CD en FreeDB y generará una carátula en el formato predeterminado)
+$ disc-cover -f png /dev/cdrom (especificando el formato de salida)
+$ disc-cover -o ~/mis_carátulas/caratula.png /dev/cdrom (guardar la carátula generada en un directorio específico)
+
+
 discover
 Sistema de identificación de hardward. Realiza detección de hardware en el momento del arranque. La información se almacena en el archivon /lib/discover/list.xml que puede visualizarse con el navegador.
 $ discover
