@@ -11211,6 +11211,29 @@ $ disktype imagen.iso
 $ disktype archivo
 
 
+disorderfs
+Sistema de archivos basado en FUSE que se usa para introducir no determinismo en los metadatos del sistema de archivos. "no determinismo" significa que una misma acción puede producir resultados diferentes en distintos momentos. En el contexto de los sistemas de archivos, esto implica que disorderfs puede alterar el orden en que se devuelven los archivos y modificar sus tiempos de acceso/modificación/creación, lo cual es útil para probar software y detectar dependencias ocultas en el orden de los archivos.
+1.-
+Montar un directorio con disorderfs
+Supongamos que tenemos un directorio /home/user/proyecto y queremos montarlo con disorderfs en /mnt/disorderfs:
+# mkdir /mnt/disorderfs
+# disorderfs --shuffle /home/user/proyecto /mnt/disorderfs (reordena los archivos de forma aleatoria cada vez que se acceden)
+$ ls /mnt/disorderfs (si listamos los archivos en /mnt/disorderfs, el orden cambiará en cada ejecución del listado)
+2.-
+Cambiar aleatoriamente las marcas de tiempo de los archivos
+Si queremos que las fechas de creación/modificación de los archivos sean aleatorias, usamos:
+# disorderfs --shuffle --touch-randomize /home/user/proyecto /mnt/disorderfs (modifica las fechas de acceso, modificación y creación con valores aleatorios)
+$ ls -l --time-style=full-iso /mnt/disorderfs (inspeccionamos las marcas de tiempo y veremos que cambian)
+3.-
+Probar si un paquete es reproducible
+Si estamos verificando la reproducibilidad de un paquete de software, podemos compilarlo dentro del directorio montado con disorderfs:
+# disorderfs --shuffle --multi-user . /mnt/build (simula un sistema multiusuario, útil para verificar permisos)
+# cd /mnt/build
+# make (compila el código dentro del sistema de archivos no determinista)
+Si la compilación produce archivos diferentes en distintas ejecuciones, significa que el proceso no es completamente reproducible.
+# umount /mnt/disorderfs (desmontar el sistema de archivos)
+
+
 disown
 Disociar un proceso de la terminal que lo lanzó. Cuando creamos un proceso desde una terminal, éste queda ligado a la terminal. Si se cierra la terminal, también se cierra el proceso. disown evita tal contingencia. Veamos el proceso:
 Si se lanza:
