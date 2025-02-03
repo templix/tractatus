@@ -11052,6 +11052,18 @@ $ dir2ogg archivo.mp3 (crea archivo.ogg sin borrar el mp3)
 $ dir2ogg * (crea copias de todos los archivos del directorio compatibles a .ogg sin borrarlos)
 
 
+dirb
+Herramienta de fuerza bruta basada en diccionario para descubrir directorios y archivos en servidores web. Busca objetos web existentes (y/o ocultos) y básicamente, funciona lanzando un ataque basado en diccionario contra un servidor web y analizando las respuestas. DIRB viene con un conjunto de listas de palabras de ataque preconfiguradas, pero puede utilizar sus propias listas de palabras. El objetivo principal de DIRB es ayudar en la auditoría profesional de aplicaciones web, buscar vulnerabilidades en servidores y escánear contenido, no vulnerabilidades.
+$ dirb http://ejemplo.com (escaneará http://ejemplo.com usando el diccionario predeterminado en /usr/share/dirb/wordlists/common.txt)
+Nota.- En el directorio /usr/share/dirb/wordlists/ existen otros diccionarios disponibles: euskera.txt, catala.txt, spanish.txt... y, naturalmente, puede añadirse un txt personalizaado.
+$ dirb http://ejemplo.com /usr/share/dirb/wordlists/mi_diccionario.txt
+$ dirb http://ejemplo.com -X .php,.html,.txt (buscará archivos con las extensiones .php, .html y .txt)
+$ dirb http://ejemplo.com -o resultados.txt (almacenará los resultados en resultados.txt)
+$ dirb http://ejemplo.com -r (para desactivar escanear subdirectorios encontrados. Por defecto los scanea)
+$ dirb http://ejemplo.com -p 127.0.0.1:8080 (enviar el tráfico a través de un proxy)
+$ dirb http://ejemplo.com -H "User-Agent: Mozilla/5.0" -H "Cookie: PHPSESSID=12345" (agregar encabezados personalizados si el sitio requiere autenticación o cookies)
+
+
 dircolors
 Configuración de color para ls.
 $ dircolors -b (generar el código de shell para establecer la variable LS_COLORS)
@@ -11067,6 +11079,19 @@ $ cp default.config.php config.php
 Modificar lo que proceda. Todos los archivos o carpetas que pongamos en el directorio que contiene el index.php se verá reflejado cuando accedamos a htt://localhost/DirectoryLister.
 
 
+directvcn
+Cliente VNC que utiliza el framebuffer como pantalla. Es un cliente que implementa el protocolo de framebuffer remoto [Remote Framebuffer Protocol - rfb] que utilizan los servidores VNC. Si un servidor VNC se está ejecutando en una máquina, puede conectarse a él mediante este cliente y ver el contenido de su pantalla en su pantalla. Los eventos del teclado y del mouse se envían al servidor, por lo que básicamente puede controlar un servidor VNC de forma remota.
+$ directvnc 192.168.1.10 (conectarse a un servidor VNC en la dirección 192.168.1.10 en la pantalla predeterminada)
+$ directvnc 192.168.1.10 --password su_contraseña (contraseña para autenticarse en el servidor VNC [puede ser visible en el historial de comandos])
+$ directvnc 192.168.1.10 --bpp 16 (establece los bits por píxel que utilizará el cliente. Actualmente, solo se admiten 16 y 24 bpp)
+$ directvnc 192.168.1.10 --encodings "tight hextile" (especifica métodos de compresión para codificar las actualizaciones de pantalla. Los métodos disponibles: copyrect, tight, hextile, zlib, corre, rre y raw)
+$ directvnc 192.168.1.10 -f 100 (tiempo en milisegundos que el cliente espera entre sondeos para actualizaciones de pantalla cuando no hay eventos que procesar. Predeterminado 50 ms)
+$ directvnc 192.168.1.10 -s (no desconecta a los clientes ya conectados,comportamiento predeterminado)
+$ directvnc 192.168.1.10 -n (desconecta a los clientes ya conectados)
+$ directvnc 192.168.1.10 --nolocalcursor (desactiva el seguimiento del cursor local)
+Nota.- Actualmente, es necesario utilizar la opción --bpp para establecer la profundidad de color. Al negociar con el servidor VNC remoto, se utilizará la profundidad de color proporcionada por el servidor. Por lo tanto, es necesario asegurarse de que la profundidad de color de la pantalla, la profundidad de color proporcionada en la línea de comandos y la profundidad de color del servidor VNC remoto coincidan.
+
+
 direnv
 Permitir variables de entorno específicas de un proyecto sin tener que añadirlas a ~/.profile o archivos relacionados para no saturarlos y comprueba la existencia de un archivo ".envrc" en el directorio actual, si el archivo existe, se carga en un subshell y direnv captura todas las variables y las pone a disposición de la shell.
 $ direnv stdlib (genera un script bash llamado stdlib que carga .envrc y el archivo ~/.config/direnv/direnvrc si existe)
@@ -11076,6 +11101,14 @@ $ direnv status (imprime información de estado de depuración)
 $ direnv allow (cada vez que se modifiquen .envrc y .secrets.)
 $ direnv edit (muestra el contenido de .envrc)
 $ direnv grant (cargar el archivo .envrc o .env)
+
+
+direvent
+Monitorea eventos en los directorios del sistema de archivos. Esto significa que se puede detectar cambios como la creación, modificación o eliminación de archivos y directorios en una ubicación específica, útil, por ejemplo, para rastrear cambios en archivos de configuración.
+# direvent /etc (empezará a monitorear el directorio /etc y mostrará en la terminal los eventos que ocurran)
+# direvent /etc/ssh/sshd_config (monitorear un archivo específico)
+# direvent /etc > cambios_en_configuracion.log (redirigir la salida a un archivo)
+# direvent /etc & (monitoreo en segundo plano)
 
 
 dirhunt
@@ -27425,6 +27458,15 @@ rtkitctl
 # rtkitctl --reset-all (restablecer el estado en tiempo real de todos los hilos)
 # rtkitctl --start (iniciar rtkitctl si aún no se está ejecutando)
 # rtkitcrl --exit (finalizar la ejecución del demonio RealtimeKit)
+
+
+rtl-sdr
+Receptor de radio analógica o digital definido por software para Realtek RTL2832U. Es un software receptor de radio definido por software [SDR] para ciertos adaptadores USB DVB-T/DAB en el chip Realtek RTL2832U. Consta de las siguientes aplicaciones: rtl_adsb [Decodificación de ADS-B [Air Data Service Broadcast]], rtl_biast [Control de temperatura del biaseador], rtl_eeprom [Leer/escritura EEPROM del chip RTL2832U], rtl_fm, rtl_power, rtl_sdr, rtl_tcp y rtl_test.
+$ rtl-sdr -l (verificar si el dispositivo está conectado)
+$ rtl_fm -f 107.1M -g 50 -s 48000 -r 24000 - | ffmpeg -i ppe:0 -acodec mp3 -b:a 192k output.mp3 (captura una estación de radio FM en 107.1 MHz y graba el audio en formato MP3)
+$ rtl_power -f 24M:1700M:200kHz -g 40 -i 60 -e 3600 -v ag (mide la potencia de señales en el rango de frecuencia especificado durante 6 minutos)
+$ rtl_tcp -p 1234 (que el dispositivo emita señal TCP en el puerto 1234)
+$ rtl_test -t (realiza pruebas básicas del hardware RTL2832U)
 
 
 rtla
