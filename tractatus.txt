@@ -11111,12 +11111,36 @@ Monitorea eventos en los directorios del sistema de archivos. Esto significa que
 # direvent /etc & (monitoreo en segundo plano)
 
 
+direwolf
+Software de módem/TNC basado en una tarjeta de sonido que permite la comunicación en modos de radioaficionados, como APRS [Automatic Packet Reporting System]. Puede funcionar como un decodificador APRS, repetidor digital, puerta de enlace APRStt o IGate [puerta de enlace a Internet].
+$ direwolf -t 0  (imprimirá una configuración predeterminada en ~/.direwolf.conf, luego han de ajustarse los parámetros según las necesidades del usuario)
+$ direwolf -t 0 -c ~/.direwolf.conf (recibir paquetes APRS en la frecuencia de 144,800)
+Si en el archivo de configuración se ha definido, las coordenadas, la tarjeta de sonido, el indicativo de radioaficionado, etc la forma de lanzar la aplicación es siempre la misma:
+$ direwolf -c ~/.direwolf.conf
+Algunos parámetros del archivo de configuración son:
+        DIGIPEAT=0 0 WIDE1-1 (que direwolf actúe como un repetidor digital [digi] en APRS)
+        IGSERVER noam.aprs2.net (conectar direwolf a APRS-IS [el sistema de Internet de APRS] y enviar los paquetes recibidos)
+        IGLOGIN CALLSIGN-SSID PASSWORD (reemplazar CALLSIGN-SSID con el indicativo y PASSWORD con la clave APRS-IS que puede generarse en sitios web de APRS)
+        DTMF_THRESH 50 (permite que usuarios sin radios APRS envíen datos a la red APRS usando DTMF [tonos de teléfono])
+        DTMF_PREAMBLE 1234
+Nota.- Para la región 1, en la que se encuentra España, tenemos las siguientes frecuencias: 144,800 MHz [Frecuencia principal] y 432,500 MHz [Frecuencia alternativa]. Para latinoamérica. región 2, la frecuencia es 144,390 MHz.
+
+
 dirhunt
 Encontrar directorios en sitios web aunque el servicio no esté habilitado (<https://github.com/Nekmo/dirhunt>)
 $ dirhunt http://dominio.com http://dominio2.com (escanear dos urls)
 $ dirhunt http://dominio.com -e php,zip,sh (buscar determinadas extensiones. Por defecto php, zip, sh, asp, csv y log)
 $ dirhunt http://dominio.com -f access_log,error_log (buscar determinados archivos)
 $ dirhunt http://dominio.com --stdout-flags blank,not_found.fake,html > flags.txt (especificar flags y guardarlo en un fichero)
+
+
+dirmngr
+[Directory Manager]. Servicio de gestión de certificados de red que se ejecuta en segundo plano. Es un servidor para gestionar y descargar certificados OpenPGP y X.509, así como actualizaciones y señales de estado relacionadas con esos certificados. Para OpenPGP, esto significa obtenerlos de los servidores de claves públicos HKP/HKPS o de los servidores LDAP. Para X.509, esto incluye listas de revocación de certificados [CRL] y actualizaciones del protocolo de estado de certificados en línea [OCSP].
+# systemctl status dirmngr (verificar si el servicio está corriendo)
+$ echo "hostName = example.com" | sudo tee /etc/apt/trusted.gpg.d/example.com.gpg (configurar dirmngr para usar un servidor específico)
+# apt-key update (actualizar las claves)
+# gpg --keyserver hkp://pool.sks-keyservers.net:11371 --recv-keys A0D7A0C9B8D9089A (verificar una clave)
+$ echo "allow-loopback-shelf = yes" | sudo tee -a /etc/dirmngr.conf (configurar dirmngr para permitir conexiones desde otro host)
 
 
 dirname
@@ -33780,6 +33804,19 @@ Algunos atajos:
     s (Abrir historial reciente)
 
 
+wait
+Indica el estado de un proceso que se está ejecutando o se ha ejecutado en background o espera a que se realice determinado proceso o trabajo para continuar.
+$ wait
+$ wait PID  (Indicando el PID)
+$ wait %2  (Indicando el número de proceso)
+
+
+wait-for-it
+Script de bash que esperará la disponibilidad de un host y un puerto TCP.
+$ wait-for-it www.google.com:80 --echo "google está activo"
+$ wait-for-it -t 1 www.google.com:80 --echo "google está activo" (activo después de 1 segundo)
+
+
 wajig
 Herramienta que engloba apt, apt-cache, dpkg, aptitude, apt-get y otros.
 # wajig list-commands
@@ -33812,17 +33849,18 @@ Herramienta que engloba apt, apt-cache, dpkg, aptitude, apt-get y otros.
 # wajig toupgrade (equivalente al apt upgrade)
 
 
-wait
-Indica el estado de un proceso que se está ejecutando o se ha ejecutado en background o espera a que se realice determinado proceso o trabajo para continuar.
-$ wait
-$ wait PID  (Indicando el PID)
-$ wait %2  (Indicando el número de proceso)
-
-
-wait-for-it
-Script de bash que esperará la disponibilidad de un host y un puerto TCP.
-$ wait-for-it www.google.com:80 --echo "google está activo"
-$ wait-for-it -t 1 www.google.com:80 --echo "google está activo" (activo después de 1 segundo)
+wakeonlan
+Permite reactivar y encender una o varias máquinas de forma remota que tengan placas base o tarjetas de red que admitan paquetes WoL [Wake-on-Lan]. Se necesita las direcciones MAC de las máquinas para construir los paquetes WoL y el BIOS/UEFI del equipo objetivo debe tener habilitado el soporte WoL.
+$ wakeonlan 00:11:22:33:44:55 (enviará un paquete "magic packet" [para arrancarlo] a la dirección MAC 00:11:22:33:44:55)
+$ wakeonlan -i 192.168.1.255 -p 4242 00:11:22:33:44:55 (especificando dirección IP y puerto)
+$ wakeonlan -i dominio.dyndns.org -p 1111 00:01:22:f2:11:3e (cambiar la IP por el nombre de dominio si se tiene)
+$ wakeonlan 01:02:03:04:05:06 01:02:03:04:05:07 (arrancar varias MACs)
+$ wakeonlan -f archivo.wol (arancará los especificados en el archivo)
+Los pcs especificados en archivo.wol han de seguir la siguiente estructura: MAC. IP y puerto :
+        00:16:3e:a3:9d:a8	192.168.1.25		9
+        00:16:3e:08:ed:c6	192.168.1.32            7
+        f0:1f:af:1f:2c:60       dominio.dyndns.org      5
+Nota.- La única columna imprescindible es la primera, la de la MAC, las otras dos pueden estar ausentes
 
 
 wall
