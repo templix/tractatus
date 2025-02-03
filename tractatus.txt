@@ -11149,6 +11149,23 @@ $ discus (lanzamiento básico)
 $ discus -d -p 2 -m (mostrando nombres de los dispositivos, el uso de espacio con 2 dígitos y en megabytes)
 
 
+dish
+Ejecuta comandos simultáneamente en varios sistemas remotos a través de 'ssh', 'rsh', 'telnet', 'mysql' o cualquier cliente de conexión de línea de comandos definido por el usuario. Facilita la distribución de archivos mediante 'scp' y 'rcp', pero también el cambio de contraseñas remotas u operaciones que requieren autenticación mediante múltiples contraseñas. Dish se puede utilizar como una herramienta flexible para administrar una gran cantidad de varios tipos de hosts, como servidores (agrupados), conmutadores, bases de datos, etc.
+$ dish -h servidor1,servidor2,servidor3 "ls /var/www" (ejecutará `ls /var/www` en los tres servidores especificados)
+$ dish -h servidor1,servidor2,servidor3 "df -h" ssh rsh telnet (ejecutará `df -h` en los tres servidores usando SSH, RSH y Telnet respectivamente)
+$ dish -h servidor1,servidor2,servidor3 "cat > archivo.txt << EOF" scp (creará archivo.txt en los tres servidores usando SCP)
+$ dish -h servidor1,servidor2,servidor3 "passwd root" ssh (cambiará la contraseña de root en los tres servidores usando SSH)
+$ dish -h servidor1,servidor2,servidor3 "mysql -u usario -p base_de_datos" mysql (conectará al servidor MySQL en los tres servidores, solicitando la contraseña para cada uno)
+
+
+disk-filltest
+Herramienta sencilla para detectar discos defectuosos llenándolos con datos aleatorios. Su propósito principal es ayudar a identificar problemas de disco mediante un proceso de escritura y lectura intensiva.
+# disk-filltest /dev/sda (llenará todo el disco duro especificado con datos aleatorios y luego los leerá para verificar si hay errores)
+# disk-filltest /dev/sda1 (se probará solo la primera partición del disco duro /dev/sda)
+# disk-filltest /dev/sdb /dev/sdc1 /dev/sdd2 (probará todos los discos y particiones especificados)
+Nota.- Los resultados se pueden ver en el archivo /var/log/syslog
+
+
 disktype
 Detección de formatos de disco [sistemas de archivo, particiones, volumenes, imagenes, archivos comprimidos...]
 # disktype /dev/sda2
