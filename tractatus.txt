@@ -11309,6 +11309,15 @@ $ distro-info --stable (la stable actual)
 $ distro-info --testing (la testing actual)
 
 
+distrobox
+Herramienta para entornos de línea de comandos en contenedores en Linux. Distrobox utiliza podman o docker para crear contenedores utilizando cualquier distribución Linux. El contenedor creado se integrará estrechamente con el host, lo que permitirá compartir el directorio HOME del usuario, el almacenamiento externo, los dispositivos USB externos, las aplicaciones gráficas y el audio. Consta de los sigientes ejecutables: distrobox-create, distrobox-enter, distrobox-ephemeral, distrobox-export, distrobox-generate-entry, distrobox-host-exec, distrobox-init, distrobox-list, distrobox-rm, distrobox-stop y distrobox-upgrade
+$ distrobox-create --name mi-contenedor --image ubuntu:latest (crea un contenedor llamado "mi-contenedor" utilizando la imagen de Ubuntu más reciente)
+$ distrobox-enter mi-contenedor (entrar en el contenedor "mi-contenedor". Desde allí, puedes ejecutar comandos de Ubuntu, instalar software, etc)
+$ distrobox-ephemeral --image fedora:latest (crea un contenedor temporal basado en Fedora. Una vez que salgas del contenedor, se eliminará)
+$ distrobox-list (mostrará todos los contenedores existentes, sus nombres y sus estados)
+$ distrobox-remove mi-contenedor (elimina el contenedor "mi-contenedor")
+
+
 ditaa
 Transforma caracteres ascii en mapas de bips.
 $ nano grafic.txt
