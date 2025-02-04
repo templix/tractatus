@@ -11346,6 +11346,12 @@ $ ditto -domain nombre.com -available (que muestre solo los disponibles)
 $ ditto -domain facebook.com -registered (mostrar solo los registrables)
 
 
+divxcomp
+Ayudar a calcular la tasa de bits adecuada para codificar videos en formato DivX teniendo en cuenta el tamaño, el sonido y la duración con herramientas como ffmpeg o mencoder.
+$ divxcomp 716800 120 128 (para que archivo final tenga un tamaño aproximado de 700 MB [700 MB = 700 * 1024 KB = 716800 KB], con una duración de 120 minutos y una tasa de bits de audio de 128 kbps.)
+$ divxcomp 1048576 90 192 (para un video que dura 90 minutos y se quiere que el archivo final sea de 1 GB [1 GB = 1 * 1024 * 1024 KB = 1048576 KB], con una tasa de audio de 192 kbps)
+
+
 djvm
 Manipular documentos .djvu
 $ djvm -l fichero.djvm (Lista el contenido)
