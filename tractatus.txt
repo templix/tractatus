@@ -11403,6 +11403,17 @@ Analiza cualquier zona DNS que se especifique e informa de cualquier problema qu
 # dlint lapipaplena.org
 
 
+dlocate
+Alternativa rápida a dpkg -L y dpkg -S. Usa una base de datos de dpkg, similar a locate, para buscar archivos de manera más eficiente, mostrando todos los archivos instalados por un paquete, verificando sumas MD5, entre otras funcionalidades. Consta de la siguientes herramientas: dpkg-hold, dpkg-purge, dpkg-remove, dpkg-unhold y update-dlocatedb
+$ dlocate -l bash (muestra todos los archivos instalados por el paquete bash)
+$ dlocate /bin/bash (muestra el paquete que contiene /bin/bash)
+$ dlocate -S coreutils (enumera todos los registros que coincidan con coreutils)
+$ dlocate -man bash (muestra todas las páginas de manual incluidas en el paquete)
+$ dlocate -md5sum openssh-server (ver las sumas MD5SUM de los archivos instalados por un paquete)
+$ dlocate -K (lista de kernels instalados y paquetes relacionados)
+$ dlocate -l python3 | grep bin (muestra solo los archivos que contienen bin en el nombre o ruta)
+
+
 dmesg
 Imprimir en pantalla los mensajes del kernel
 $ dmesg | grep -i 'error'   (lista los errores del kernel)
