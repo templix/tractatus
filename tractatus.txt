@@ -11204,11 +11204,27 @@ Herramienta sencilla para detectar discos defectuosos llenándolos con datos ale
 Nota.- Los resultados se pueden ver en el archivo /var/log/syslog
 
 
+diskscan
+Analizar medios de almacenamiento en busca de sectores defectuosos o próximos a fallar. DiskScan tiene como objetivo encontrar sectores de un medio de almacenamiento, disco duro, unidad flash o pendrive, etc, que estén dañados o en proceso de fallar. La operación es completamente de solo lectura y no causa daños a los datos en los sistemas de archivos. Como el programa lee sectores de dispositivos de bloques, funcionará independientemente de si hay un sistema de archivos o no y no repara los sectores defectuosos, solo los detecta.
+# diskscan /dev/sda (recorrerá el disco y mostrará en pantalla cualquier sector problemático)
+# diskscan -t 50 /dev/sda (permite detectar sectores que aún no han fallado, pero que están funcionando más lentamente de lo normal)
+
+
 disktype
 Detección de formatos de disco [sistemas de archivo, particiones, volumenes, imagenes, archivos comprimidos...]
 # disktype /dev/sda2
 $ disktype imagen.iso
 $ disktype archivo
+
+
+dislocker
+Diseñado para leer particiones cifradas de BitLocker en un sistema Linux. El controlador se utiliza para leer volúmenes cifrados en versiones de sistemas Windows y particiones cifradas USB/FAT32.
+# dislocker /dev/sdb1 /mnt/bitlocker (montar la partición BitLocker /dev/sdb1 en el directorio /mnt/bitlocker)
+# lsblk (verificar si el volumen se montó correctamente)
+# mount /dev/mapper/dislocker-uuid /mnt/cifrado (después de ejecutar dislocker, se puede montar el volumen cifrado de forma normal. "dislocker-uuid" es el UUID generado por dislocker para el volumen cifrado)
+# cd /mnt/cifrado (acceder al contenido del volumen cifrado)
+# umount /mnt/cifrado (desmontar el volumen cifrado)
+Nota.- La partición debe estar cifrada por BitLocker y no necesariamente tiene que ser una partición completa, puede ser una partición parcial y Dislocker solo funciona con particiones cifradas por BitLocker, no con otras formas de cifrado como LUKS o GPT.
 
 
 disorderfs
@@ -11267,6 +11283,23 @@ display
 $ display imagen.jpg
 $ DISPLAY=:0.0 gedit  (lanzado desde una tty, abre gedit en las X. Si solo tenemos una sesión X corriendo, puede suprimirse el “.0”)
 $ gxmessage “Cierra el firefox” -display :0 (Lanzado desde una tty mostrará el mensaje en las X)
+
+
+distributed-net
+Permitir que los ciclos de CPU no utilizados en tu computadora sean donados a distributed.net para proyectos de aplicaciones practicas en la ciencia, de investigación académica y de interés público.
+# /etc/init.d/distributed-net status
+$ dnetc -config (se entra en el prompt de la aplicaciones con los datos a completar y la información de los proyectos actuales)
+$ dnetc (iniciar el cliente y empezar a procesar paquetes de datos)
+$ dnetc -quiet (ejecutarlo en segundo plano)
+$ dnetc -test (pruebas de errores de núcleo)
+$ dnetc -update (forzar una actualización manual de los paquetes de datos)
+$ dnetc -priority 5 (limitar el uso de CPU. Valores válidos: 0 - máxima prioridad, 9 - mínima prioridad)
+$ dnetc -background (ejecutarlo como servicio en segundo plano)
+$ dnetc -shutdown (detenerlo)
+
+
+distribution-gpg-keys
+Recopilación de claves GPG para comprobar las firmas de los paquetes rpm de las siguientes distribuciones basadas en RPM: Anolis OS, Amazon Linux, Alma Linux, Azure Linux/CBL-Mariner, CentOS, Circle Linux, EPEL, EuroLinux, Fedora, Mageia, openEuler, OpenMandriva, openSUSE, Oracle Linux, Qubes, Rocky Linux, RosaLinux, RPM Fusion, Red Hat, Navy Linux, Scientific Linux y United RPMs. Listado completo en file:///usr/share/distribution-gpg-keys
 
 
 distro-info
