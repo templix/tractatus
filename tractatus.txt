@@ -11389,6 +11389,15 @@ $ cd modulo
 # dkms install ./ (instalar)
 
 
+dl10n
+El comando y sus subcomandos forman parte de las herramientas de localización y traducción en Debian. Estas herramientas ayudan a verificar y generar informes sobre el estado de las traducciones en el proyecto Debian y  consta de las siguientes herramientas: dl10n-check [busca en los paquetes fuente cosas para traducir], dl10n-txt [genera vistas de estadísticas textuales], dl10n-html [genera las páginas web de Debian], dl10n-mail [Busca correos cuyo título siga un formato específico], dl10n-nmu, dl10n-pts y dl10n-spider [analiza los archivos de la lista de correo debian-l10n-<idioma>]
+$ dl10n-check es.po (verifica el archivo es.po y muestra advertencias o errores y la consistencia y calidad de la traduccion)
+$ dl10n-check *.po (revisa todos los archivos .po en el directorio actual)
+$ dl10n-txt --lang=es > informe.txt (genera un informe de traducciones para el idioma español (es) y lo guarda en informe.txt)
+$ dl10n-html --lang=fr --output=estado.html (crea un informe en HTML para las traducciones al francés (fr) y lo guarda como estado.html)
+$ dl10n-spellcheck es.po (busca errores ortográficos en el archivo es.po)
+
+
 dlint
 Analiza cualquier zona DNS que se especifique e informa de cualquier problema que encuentre mostrando errores y advertencias.
 # dlint lapipaplena.org
@@ -19600,15 +19609,20 @@ LANG="es_ES.UTF-8"
 El idioma tiene que estar descomentado en /etc/locale.gen y luego generado por locale-gen
 
 
+locale-gen
+Reconfiguración automática de los locales
+$ locale-gen
+
+
 localectl
 Controlar la configuración regional del sistema y la distribución del teclado
 $ localectl status
 $ localectl list-locales
 
 
-locale-gen
-Reconfiguración automática de los locales
-$ locale-gen
+localehelper
+Herramienta de Debian que se utiliza principalmente para gestionar las configuraciones regionales o locales en sistemas operativos.
+$ localehelper LANG=es_ES.UTF-8 locale day |  tr ';' '\n'
 
 
 localepurge
