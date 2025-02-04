@@ -11352,6 +11352,12 @@ $ divxcomp 716800 120 128 (para que archivo final tenga un tamaño aproximado de
 $ divxcomp 1048576 90 192 (para un video que dura 90 minutos y se quiere que el archivo final sea de 1 GB [1 GB = 1 * 1024 * 1024 KB = 1048576 KB], con una tasa de audio de 192 kbps)
 
 
+dizzy
+Demostración de gráficos que rota planos de patrones sobre un fondo de color. También permite que se ejecute como protector de pantalla.
+$ dizzy -f -a 3 (a pantalla completa y 3 segundos de dureción cada frame)
+Nota.- Con las flechas se modifican los patrones y con "q" se sale
+
+
 djvm
 Manipular documentos .djvu
 $ djvm -l fichero.djvm (Lista el contenido)
@@ -11367,6 +11373,20 @@ $ djvudump archivo.djvu
 djvusmooth
 Visor y manipulador gráfico de documentos djvu.
 $ djvusmooth archivo.djvu
+
+
+dkms
+[Dynamic Kernel Module System]. Marco diseñado para permitir que los módulos de kernel individuales se actualicen sin cambiar el kernel completo lo cual evita módulos obsoletos después de una actualización del núcleo y errores al cargar módulos debido a incompatibilidades con la nueva versión del núcleo.
+# dkms status (verificar el estado de los módulos)
+# dkms remove modulo/0.xx-xx-generic --all (eliminar un módulo)
+1.-
+Instalar un módulo personalizado usando DKMS:
+$ wget https://example.com/modulo.tar.gz (descargar el módulo)
+$ tar xvf modulo.tar.gz (descomprimir el módulo)
+$ cd modulo
+# dkms add ./ (configurar)
+# dkms build . (compilar el módulo)
+# dkms install ./ (instalar)
 
 
 dlint
