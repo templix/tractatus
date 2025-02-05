@@ -11432,12 +11432,59 @@ dm-writeboost-dkms
 Almacenamiento en caché estructurado en registros para Linux. Es un controlador de E/S a nivel de SO que crea registros a partir de las escrituras entrantes de datos y metadatos y luego escribe los registros de manera secuencial, de manera similar a un sistema de archivos estructurado en registros. Este paquete proporciona un módulo de kernel DKMS para Linux Kernel 3.10+. El archivo de configuración está en /usr/src/dm-writeboost-2.2.17/dkms.conf
 
 
+dmagnetic
+Intérprete para aventuras de texto [inglés] clásicas con gráficos en modo ASCII, específicamente para los juegos de Magnetic Scrolls, una compañía famosa por sus aventuras interactivas de los años 80. Los juegos son "The Pawn", "The Guild of Thieves", "Fish!", "Myth", "Jinxter", "Corruption" y "Wonderland". dmagnetic necesita que se pase los archivos de juego [imágenes de disco o archivos de datos] para funcionar. Los juegos originales están en formato Magnetic Scrolls, generalmente .mag o .dat. Descargar las carpetas con los archivos de cada juego de https://msmemorial.if-legends.org/magnetic.php.
+$ dMagnetic -mag pawnall/pawn.mag (especifica el archivo de entrada con los datos del juego)
+$ dMagnetic -mag guildall/guild.mag -r ansi -c 16 (jugar con gráficos en modo ANSI y una paleta de colores básica)
+Comandos básicos dentro del juego:
+         look: Observa el entorno actual.
+         inventory: Mostrar los objetos que se lleva.
+         go north/south/east/west: Desplazarse en una dirección.
+         get [objeto]: Recoge un objeto.
+         use [objeto]: Utiliza un objeto.
+
+
+dmarc-cat
+Decodificar informes DMARC [Domain-based Message Authentification Reporting and Conformance]. Esta utilidad decodifica los informes XML estándar enviados por los proveedores al registro RUA [Reporting URI for Aggregate] que son una colección de datos separados, reunidos en un único informe, configurado en DMARC que es un protocolo de autenticación de correo electrónico. Resulta útil para interpretar informes que de otro modo serían muy difíciles de leer. Los informes RUA de DMARC proporcionan a los propietarios de dominios información sobre la gestión de sus mensajes salientes.
+$ dmarc-cat report.zip (mostrará el contenido del informe DMARC compromido en formato legible)
+$ dmarc-cat report.xml (decodificar directamente un archivo XML)
+$ dmarc-cat *.zip (procesará todos los archivos .zip en el directorio actual y mostrará el contenido de cada uno)
+$ dmarc-cat report.zip | grep 'ip-address' (extraer solo las direcciones IP reportadas en los informes)
+
+
 dmesg
 Imprimir en pantalla los mensajes del kernel
 $ dmesg | grep -i 'error'   (lista los errores del kernel)
 $ dmesg | grep hd           (inf sobre dispositivos IDE.)
 $ dmesg -c (Limpiar el registro)
 $ dmesg -T (Que muestre la hora)
+
+
+dmeventd
+Demonio que forma parte del sistema de administración de volúmenes lógicos [LVM] en Linux. Su función principal es gestionar eventos relacionados con los dispositivos mapeados [devmapper], lo que incluye la detección de cambios en los dispositivos de almacenamiento y la respuesta a estos cambios.
+Ejemplo básico de configuración podría ser:
+      event {
+          # Configuración del evento
+          type = "all"  # Monitorear todos los eventos
+          action = "/usr/local/bin/manejo_evento.sh"  # Script a ejecutar
+      }
+El script que se ejecutará cuando dmeventd detecte un evento podría contener:
+#  nano manejo_evento.sh
+      #!/bin/bash
+      echo "Evento detectado: $1" >> /var/log/dmeventd.log
+      # Aquí puedes agregar más lógica para manejar el evento
+      #
+# chmod +x /usr/local/bin/manejo_evento.sh (dar permisos de ejecución al script)
+# dmeventd (iniciar dmeventd)
+Una vez que dmeventd esté en funcionamiento, comenzará a monitorear los volúmenes lógicos y ejecutará el script de manejo de eventos cuando se detecten cambios.
+
+
+dmg2img
+Herramienta para convertir archivos DMG [Disk Image] comprimidos de apple en imágenes HFS+ estándar sin necesidad de usar software específico de Mac.
+$ dmg2img archivo.dmg (creará un archivo .img que contiene el contenido extraído del DMG)
+$ dmg2img --extract /path/to/directory archivo.dmg (extraer solo ciertos directorios o archivos)
+$ dmg2img --list archivo.dmg (verificar el contenido de un archivo DMG sin extraerlo)
+$ dmg2img --create nueva_imagen.img /ruta/a/extraer (crear un nuevo archivo DMG desde una imagen HFS+)
 
 
 dmidecode
