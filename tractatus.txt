@@ -11510,6 +11510,14 @@ Para solucionarlo:
 # chmod 644 /home/usuario/.dmrc
 
 
+dmtx-utils
+Utilidades para leer y escribir códigos de barras Data Matrix 2D. Utilidades de línea de comandos para leer y escribir códigos de barras Data Matrix 2D, símbolos bidimensionales que contienen un patrón denso de datos con corrección de errores incorporada. Incluye las herramientas dmtxquery, dmtxread y dmtxwrite
+$ echo -n "linux es un sistema genial" | dmtxwrite -o codigo.png (guarda el código de barras de la frase como codigo.png)
+$ dmtxwrite -p archivo.txt (muestra el codigo de barras en la terminal)
+$ dmtxwrite -s 80x80 -p -e 8 archivo.txt (80x80, por pantalla y codigo base 256)
+$ dmtxwrite -l (lista de formatos de imagen admitidos)
+
+
 dnf
 Sistema de administración de paquetes predeterminado en la mayoría de distribuciones basadas en RPM.
 # dnf upgrade (actualizar listado)
