@@ -11414,6 +11414,20 @@ $ dlocate -K (lista de kernels instalados y paquetes relacionados)
 $ dlocate -l python3 | grep bin (muestra solo los archivos que contienen bin en el nombre o ruta)
 
 
+dlt-daemon
+Daemon de registro de diagnóstico y seguimiento. Es el proceso principal que se encarga de recopilar mensajes de registro y traza de varias fuentes basada en el protocolo estandarizado especificado en el estándar AUTOSAR 4.0 DLT. Puede escuchar mensajes a través de adaptadores como stdin, UDP, o módulos personalizados. Este software puede ser utilizado por los componentes de COVESA y otras aplicaciones como una herramienta de registro. El daemon DLT es el componente central de COVESA, que recopila todos los registros y seguimientos de las aplicaciones de usuario de DLT.
+# dlt-daemon -c /etc/dlt.conf (inicia el demonio DLT que comienza a escuchar y registrar mensajes de diagnóstico)
+
+
+dlt-tools
+[Diagnostic Log and Trace]. Está diseñado para registrar y rastrear información de diagnóstico en sistemas embebidos, como los que se encuentran en la industria automotriz. Este protocolo permite la comunicación entre diferentes módulos del sistema y herramientas externas para el monitoreo y depuración. Este paquete incluye herramientas para conectarse y experimentar con el demonio DLT: dlt-adaptor-stdin, dlt-adaptor-udp, dlt-control, dlt-convert, dlt-dbus, dlt-kpi, dlt-logstorage-ctrl, dlt-passive-node-ctrl, dlt-receive, dlt-sortbytimestamp y dlt-system
+# echo "Mensaje de prueba desde stdin" | dlt-adaptor-stdin (el mensaje se envía al dlt-daemon, que lo procesa y lo registra)
+# dlt-adaptor-udp -p 3490 (los mensajes enviados al puerto UDP 3490 se recibirán y registrarán)
+# dlt-control -l DEBUG (cambiar el nivel de registro)
+# dlt-logstorage-ctl -s start (inicia el almacenamiento de registros en el archivo configurado)
+# dlt-receive -a 127.0.0.1 (escucha mensajes del dlt-daemon en la dirección local)
+
+
 dmesg
 Imprimir en pantalla los mensajes del kernel
 $ dmesg | grep -i 'error'   (lista los errores del kernel)
