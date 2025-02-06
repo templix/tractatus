@@ -11641,6 +11641,15 @@ dnscache
 Herramienta que almacena respuestas a consultas DNS y las devuelve rápidamente para evitar consultas repetidas a servidores DNS externos.
 
 
+dnscap
+Utilidad similar a tcpdump, de captura de red diseñada específicamente para analizar el tráfico DNS. Produce datos binarios en formato pcap, lo cual facilita su posterior análisis con otras herramientas como Wireshark.
+# dnscap -i eth0 -w dns_capture.pcap (captura el tráfico DNS en la interfaz eth0 y guarda los resultados en un archivo llamado dns_capture.pcap)
+# dnscap -i eth0 -w example.com_capture.pcap 'host.example.com' (captura solo el tráfico DNS relacionado con el dominio host.example.com)
+# dnscap -i eth0 -n (muestra el tráfico DNS en tiempo real)
+# dnscap -i eth0 -w dns_capture.pcapng (captura y guarda en formato pcapng que es un formato más moderno y eficiente que pcap)
+# dnscap-rssm-rssac002 --no-recompile (se deshabilitó la combinación y la eliminación de métricas específicas de este complemento)
+
+
 dnscrypt
 Cifrar el tráfico DNS.
 $ wget https://github.com/downloads/opendns/dnscrypt-proxy/dnscrypt-proxy-1.2.0.tar.gz
@@ -11689,6 +11698,7 @@ Nota.- Descarga de diccionarios en <http://packetstormsecurity.org/Crackers/word
 
 
 dnsmasq
+[daemon]. Es un servidor DHCP y reenviador DNS. Está diseñado para proporcionar DNS y, opcionalmente, DHCP, a una red pequeña.
 Para que el ordenador guarde en cache las páginas visitadas y no vuelva a resolver las ips con el servidor DNS:
 # gedit /etc/resolv.conf
 Independientemente de que existan más lineas indicando otras ips, añadir la siguiente:
@@ -11705,6 +11715,14 @@ Si nuestra IP es dinámica, NetworkManager nos modificará cada cierto tiempo el
 # cp /etc/resolv.conf /etc/resolv.conf.local (Asegurándonos que este último tiene la linea “nameserver 127.0.0.1”)
 # crontab -e
 */3 * * * * cp /etc/resolv.conf.local /etc/resolv.conf (actualizar cada 3 minutos)
+
+
+dnsmasq-base
+Servidor proxy DNS de almacenamiento en caché y servidor DHCP/TFTP.
+$ dnsmasq --test (comprueba la configuración de dnsmasq)
+$ dnsmasq -h (No leer los nombres de host en /etc/hosts)
+$ dnsmasq -H mis_hosts (lee /etc/hosts y el archivo especificado. si se pone -h, solo leerá el especificado)
+$ dnsmasq --no-daemon --log-queries (inicia sin iniciar el demonio, imprime la salida del comando y registra toda la actividad)
 
 
 dnsping
