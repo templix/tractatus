@@ -11502,6 +11502,25 @@ Muestra toda la información de la máquina directamente de la BIOS
 # dmidecode -t memory | grep Maxi | grep Capa (máximo  de memoria soportada)
 
 
+dmitry
+Herramienta de recopilación de información de Deepmagic. DMitry puede encontrar posibles subdominios, direcciones de correo electrónico, información de tiempo de actividad, realizar escaneos de puertos TCP, búsquedas de Whois y más.
+$ dmitry example.com (ejecutará todas las funcionalidades disponibles por defecto)
+$ dmitry -s example.com (intentará descubrir dominios relacionados con el dominio principal proporcionado)
+$ dmitry -e xampl.com (buscar direcciones de correo electrónico asociadas al dominio)
+$ dmitry -t example.com (obtener información de tiempo de actividad del dominio o servidor)
+$ dmitry -p 80,443 example.com (escanea los puertos 80 [HTTP] y 443 [HTTPS] del dominio)
+$ dmitry -w example.com (realiza una búsqueda de información sobre el registro del dominio usando Whois)
+
+
+dmktools
+Herramienta para manipular imágenes de disquetes en formato dmk. Las imágenes DMK son particularmente útiles para preservar y trabajar con discos que contienen datos de controladores específicos o sistemas protegidos contra copia. Algunos esquemas de protección de copia se basan en sectores sin formato o defectuosos en los disquetes. El formato dmk permite que las imágenes de disco contengan configuraciones tan inusuales.
+$ empty-dmk file.dmk (crea una nueva imagen DMK vacía)
+$ dsk2dmk file.dsk file.dmk (crea una nueva imagen DMK y la inicializa con el contenido de un archivo DSK)
+$ svi2dmk file.dsk file.dmk (crea una nueva imagen DMK y la inicializa con el contenido de un archivo especial)
+$ combine-dmk (lee una serie de archivos nombrados DMK-tt-h.DAT, donde tt es el número de pista y h es la cabeza, y crea una imagen DMK llamada out.dmk, inicializada con los datos de esos archivos)
+$ analyze-dmk file.dmk (lee una imagen DMK y imprime estadísticas sobre ella en la salida estándar)
+
+
 dmrc
 En algunas ocasiones al iniciar ubuntu aparece la siguiente nota:
 su archivo $HOME/.dmrc no tiene los permisos adecuados y sera ignorado. Esto causara que la sesion e idioma predeterminado no se guarden. El archivo deberia pertener al usuario y tener los permisos 644
@@ -11510,12 +11529,55 @@ Para solucionarlo:
 # chmod 644 /home/usuario/.dmrc
 
 
+dmrconfig
+Utilidad de configuración para radios DMR [Digital Mobile Radio] para programar radios digitales a través de un cable de programación USB.
+# dmrconfig -l (radios soportadas)
+# dmrconfig -r (detectar radio conectada usb)
+
+
+dmsetup
+Linux Kernel Device Mapper es la implementación del equipo LVM [Logical Volume Management] de un controlador minimalista de espacio de kernel que maneja la administración de volúmenes, mientras conserva el conocimiento de la disposición del dispositivo subyacente en el espacio de usuario. Esto lo hace útil no solo para LVM, sino también para RAID de software y otros controladores que crean dispositivos de bloque "virtuales". Incluye las herramientas blkdeactivate, y dmstats
+$ dmsetup ls (muestra los dispositivos de bloque mapeados)
+$ dmsetup ls --tree (muestra una vista jerárquica de los dispositivos mapeados)
+$ dmsetup table lvm-myvg-mylv (ver la tabla de mapeo de un dispositivo)
+$ echo "0 2097152 linear /dev/sda 2048" | dmsetup create mydevice (crea el dispositivo /dev/mapper/mydevice que mapea los primeros 2097152 bloques de /dev/sda, comenzando en el bloque 2048)
+$ dmsetup info mydevice (muestra información sobre el dispositivo, como el tamaño, estado y dependencias)
+$ dmsetup remove mydevice (desmonta y elimina el dispositivo)
+$ dmsetup status mydevice (ver el estado del dispositivo)
+
+
+dmtracedump
+herramienta que se utiliza para analizar y visualizar el rendimiento de aplicaciones Java mediante la generación de diagramas gráficos en forma de árbol de la pila de llamadas. Cada nodo del árbol representa una llamada a un método, lo que facilita la identificación de cuellos de botella y problemas de rendimiento en el código. Para usar dmtracedump, generalmente se debe haber ejecutado una aplicación Java y haber generado un archivo de traza [trace file] que contenga la información de las llamadas a métodos.
+$ java -javaagent:/ruta/a/dmtcp-agent.jar -jar tu-aplicacion.jar
+Una vez se tenga el archivo de traza, se puede usar dmtracedump para analizarlo y generar el diagrama.
+$ dmtracedump -f tu-archivo-de-traza.dmt
+Suponiendo un archivo de traza con las siguientes llamadas a métodos:
+           Main.main()
+             -> A.methodA()
+                -> B.methodB()
+                -> C.methodC()
+             -> D.methodD()
+El árbol generado por dmtracedump podría verse así:
+           Main.main()
+            ├─ A.methodA()
+            │  ├─ B.methodB()
+            │  └─ C.methodC()
+            └─ D.methodD()
+
+
 dmtx-utils
 Utilidades para leer y escribir códigos de barras Data Matrix 2D. Utilidades de línea de comandos para leer y escribir códigos de barras Data Matrix 2D, símbolos bidimensionales que contienen un patrón denso de datos con corrección de errores incorporada. Incluye las herramientas dmtxquery, dmtxread y dmtxwrite
 $ echo -n "linux es un sistema genial" | dmtxwrite -o codigo.png (guarda el código de barras de la frase como codigo.png)
 $ dmtxwrite -p archivo.txt (muestra el codigo de barras en la terminal)
 $ dmtxwrite -s 80x80 -p -e 8 archivo.txt (80x80, por pantalla y codigo base 256)
 $ dmtxwrite -l (lista de formatos de imagen admitidos)
+
+
+dmucs
+Es un sistema de gestión de compilaciones distribuido que permite a un grupo de usuarios compartir recursos de compilación en una "granja de compilación". Esto significa que cuando un usuario solicita una compilación, el sistema selecciona automáticamente la máquina más adecuada (es decir, la más rápida y disponible) para llevar a cabo esa tarea. Esto es especialmente útil en entornos donde se realizan compilaciones grandes y complejas, ya que optimiza el uso del hardware y reduce los tiempos de espera. Antes de usar dmucs, es necesario tener un entorno configurado con varias máquinas que puedan actuar como nodos de compilación. Esto implica tener el software de dmucs instalado y configurado en cada máquina.
+$ dmucs build mi_proyecto (enviará la solicitud a la granja de compilación, y dmucs se encargará de direccionar la tarea a la máquina más rápida disponible)
+$ dmucs status (mostrará una lista de todas las compilaciones en curso, completadas y cualquier error que haya ocurrido)
+$ dmucs cancel <ID_de_compilación> (cancelar una compilación)
 
 
 dnf
@@ -11553,6 +11615,30 @@ Colocar:
 Nota.- Comentar o borrar las existentes.
 Para evitar que network-manager sobreescriba el archivo resolv.conf, bloquear el fichero:
 # chattr +i /etc/resolv.conf (Para desbloquearlo -i)
+
+
+dns2tcp
+Servidor y cliente de túnel TCP sobre DNS. La herramienta permite encapsular una conexión TCP dentro de paquetes DNS lo que significa que puede usar los protocolos de red DNS [Domain Name System] para transportar datos de manera anónima o evitar restricciones de firewall.
+$ dns2tcp-client -v example.com 53 ssh (conectar a un servidor SSH en el puerto 53 del dominio example.com y en modo verbose)
+$ cat archivo.txt | dns2tcp-client example.com 53 > salida.txt (enviar el contenido de archivo.txt al servidor DNS remoto y lo recibe como salida.txt)
+$ dns2tcp-proxy --listen=0.0.0.0:9050 --remote=example.com:53 (actuar como un proxy SOCKS5 en el puerto 9050, conectándose al servidor DNS remoto en example.com:53)
+
+
+dns-browse
+Interfaz de usuario para búsquedas DNS. Este paquete proporciona dos programas para realizar búsquedas de usuarios en servidores DNS: dns_tree y dns_browse. dns_tree es una interfaz de usuario basada en línea de comandos para dig. Reemplaza las diversas invocaciones de dig necesarias para obtener una zona y formatea la salida en un estilo jerárquico como un árbol. dns_browse es una interfaz de usuario gráfica para dns_tree. Permite la exploración de DNS con solo apuntar y hacer clic y facilita la expansión/compresión de jerarquías en una o más zonas DNS.
+$ dns_tree google.es (mostrará una representación de la estructura de dominios de google.es)
+
+
+dns-flood-detector
+Detecta niveles de uso abusivos en servidores de nombres con mucho tráfico y el demonio emitirá una alarma a través de syslog. Fue desarrollado para detectar niveles de uso abusivos en servidores de nombres con mucho tráfico y para permitir una respuesta rápida para detener el uso de un servidor de nombres para facilitar el correo no deseado.
+$ dns-flood-detector -i eth0 -t 10 (con el demonio activado, comenzará a monitorear el tráfico DNS en la interfaz eth0 y mostrará alarma a partir de 10 consultas por seundo)
+$ dns-flood-detector -i eth0 -d (muestra las estadísticas directamente en la consola)
+$ dns-flood-detector -i eth0 -b 10240 (configurar un mayor tamaño del búfer para análisis detallado)
+$ tail -f /var/log/syslog (por defecto las estadísticas y alertas se escriben en /var/log/syslog)
+
+
+dnscache
+Herramienta que almacena respuestas a consultas DNS y las devuelve rápidamente para evitar consultas repetidas a servidores DNS externos.
 
 
 dnscrypt
