@@ -11670,6 +11670,45 @@ Para evitar que network-manager sobreescriba el archivo resolv.conf, bloquear el
 
 dnsdiag
 Herramientas [dnseval, dnsping y dnstraceroute] para realizar auditorías básicas de solicitudes y respuestas DNS.
+$ dnsping google.es (como el "ping" clásico)
+$ dnseval -c 5 google.es (envia 5 solicitudes de consulta DNS arbitraria a una lista determinada de servidores DNS)
+$ dnstraceroute google.com (averiguar la ruta que sigue una solicitud DNS para llegar a su destino)
+
+
+dnsdist
+Balanceador de carga DNS [Domain Name System]. Herramienta de balanceo de carga para tráfico DNS con gran capacidad de detección de ataques DoS y abusos del servicio DNS. Recibe consultas DNS y las distribuye de manera eficiente a uno o más servidores DNS, garantizando que los servidores lentos o sobrecargados reciban menos consultas.
+# dnsdist --local 127.0.0.1:5353 --backend 192.168.1.1:53 --backend 192.168.1.2:53 (las consultas entrantes en local y el puerto 5353 se balancearán entre 192.168.1.1 y 192.168.1.2)
+1.-
+Balanceo de carga con detección de servidores lentos
+# dnsdist -e
+> newServer("192.168.1.1", { order = 1, qps = 100 })
+> newServer("192.168.1.2", { order = 2, qps = 50 })
+> setServerPolicy("leastOutstanding")
+> addAction(RegexRule(".*google.com"), DropAction())
+             newServer: añade servidores backend con una prioridad específica (order) y una limitación de consultas por segundo (qps).
+             setServerPolicy("leastOutstanding"): utiliza la política de balanceo basada en el servidor con menos consultas pendientes.
+             addAction: añade una regla para bloquear las consultas a google.com.
+2.-
+Configurar dnsdist para detectar y bloquear ataques DoS
+# dnsdist -e
+> addDynBlockRule(ExceededQPS(50), 60)
+             addDynBlockRule: crea una regla dinámica para bloquear IPs que envíen más de 50 consultas por segundo [QPS] durante 60 segundos.
+3.-
+Reenviar consultas solo a servidores específicos
+# dnsdist -e
+> addAction(RegexRule(".*example.com"), PoolAction("pool1"))
+> newServer("192.168.1.10", { pool = "pool1" })
+             Crea un grupo (pool1) para consultas dirigidas a example.com.
+             Sólo el servidor 192.168.1.10 manejará dichas consultas.
+4.-
+Supervisar el estado del tráfico
+# dnsdist -e
+> showServers()
+> showQPS()
+> topQueries()
+            showServers(): muestra el estado actual de los servidores backend (latencia, consultas, etc.).
+            showQPS(): muestra las consultas por segundo.
+            topQueries(): muestra las consultas más frecuentes.
 
 
 dnsdomainname
@@ -11688,6 +11727,14 @@ dnseval
 [dnsdiag]. Evalúa múltiples resoluciones de DNS y ayuda a elegir el mejor servidor DNS para su red. Se recomienda utilizar su propio dispositivo de resolución de DNS en lugar de un servidor DNS de terceros, pero en caso de que necesite elegir el mejor reenviador de DNS para su red, dnseval le permite comparar diferentes servidores DNS en relación al rendimiento, lae latencia y la fiabilidad.
 # dnseval -T facebook.com (forma básica)
 # dnseval -t A -f public-servers.txt -c 20 yahoo.com (Clase de registro "A", de una lista de servicios DNS y 20 solicitudes a enviar a yahoo.com)
+
+
+dnshistory
+Traducción y almacenamiento de direcciones IP de archivos de registro. Proporciona un medio para almacenar un historial de cambios de DNS/nombres para las direcciones IP extraídas de archivos de registro web. El historial se actualiza automáticamente cada vez que se ejecuta el comando.
+# dnshistory -D (volcar la base de datos del historial a STDOUT)
+# dnshistory -S (muestran una o más direcciones IP y el historial)
+# dnshistory -S -d /tmp/data.db 127.0.0.1 192.168.18.6 (ver el historial en dos direcciones IP y guardar en /tmp/data.db)
+# cat /var/log/dnshistory/* (ver todo el historial almacenado)
 
 
 dnsmap
@@ -13983,9 +14030,10 @@ $ fatattr +s /media/usb1/* (Oculta todos los archivos del usb)
 
 
 fatlabel
-Establecer u obtener la etiqueta del sistema de archivos MS-DOS o la ID del volumen.
-$ fatlabel /dev/sda1 (Obtener la etiqueta de una partición FAT32)
-$ fatlabel /dev/sda1 Nueva-etiqueta (establecer nueva-etiqueta a la partición)
+Establecer u obtener la etiqueta del sistema de archivos MS-DOS o la ID del volumen. Para otros sistemas existen los comandos: ntfslabel [NTFS], e2label [Ext2, Ext3 y Ext4] y BTFS [ver].
+# fatlabel /dev/sda1 (Obtener la etiqueta de una partición FAT32)
+# fatlabel /dev/sda1 etiqueta (establecer "etiqueta" a la partición)
+# ntfslabel /dev/sda3 etiqueta (lo mismo en un sistema NTFS)
 
 
 fbcmd
