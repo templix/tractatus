@@ -11772,6 +11772,26 @@ $ dnsmasq -H mis_hosts (lee /etc/hosts y el archivo especificado. si se pone -h,
 $ dnsmasq --no-daemon --log-queries (inicia sin iniciar el demonio, imprime la salida del comando y registra toda la actividad)
 
 
+dnsperf
+Herramientas para medir el rendimiento de servidores DNS, proporcionando datos de latencia, tasas de respuesta y rendimiento bajo condiciones de alta carga. resperf aumenta sistemáticamente la tasa de consultas y monitorea la tasa de respuesta para simular el almacenamiento en caché de los servicios de DNS. Incluye las herramientas pcap-queryparse, resperf y resperf-report
+$ dnsperf -s 192.168.1.1 -d queries.txt -l 30 -c 10 (servidor DNS a probar, archivo con las consultas a enviar, 30 segundo de duración y con 10 conexiones simultaneas)
+$ pcap-queryparse -r capture.pcap -o queries.txt (extrae consultas DNS desde un archivo de captura de red [.pcap] y las guarda en el archivo de salida queries.txt)
+$ resperf -s 192.168.1.1 -d queries.txt -m (servidor a probar, consultas a enviar y habilita el modo de múltiples consultas por segundo, incrementando la carga progresivamente)
+Durante la prueba, resperf muestra estadísticas como la tasa de consultas por segundo, la tasa de respuestas y la latencia media.
+$ resperf-report -i resperf.out -o report.html (genera informe gráfico en formato HTML a partir de los resultados obtenidos por resperf en report.html)
+El informe incluye gráficos que muestran la relación entre la tasa de consultas y la tasa de respuestas, el tiempo de respuesta promedio, y otros datos útiles para analizar el rendimiento del servidor DNS.
+Ejemplo de archivo queries.txt en el que cada línea representa una consulta DNS en el formato "name type class":
+        example.com A IN
+        example.org MX IN
+        example.net AAAA IN
+Flujo Completo de Ejemplo:
+$ tcpdump -i eth0 -w capture.pcap port 53 (capturar tráfico DNS)
+$ pcap-queryparse -r capture.pcap -o queries.txt (extraer consultas)
+$ dnsperf -s 8.8.8.8 -d queries.txt -l 60 (medir rendimiento)
+$ resperf -s 8.8.8.8 -d queries.txt -m > resperf.out (realizar prueba de estrés)
+$ resperf-report -i resperf.out -o report.html (generar informe)
+
+
 dnsping
 [dnsdiag]. Se usa para medir el tiempo de respuesta de un servidor DNS dado para solicitudes arbitrarias. Al igual que una utilidad de ping tradicional, proporciona una funcionalidad similar para las solicitudes de DNS.
 # dnsping dnsdiag.org (forma básica)
