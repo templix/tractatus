@@ -11852,6 +11852,44 @@ dnstraceroute
 # dnstraceroute -e -C -t A -s 8.8.4.4 facebook.com (impimiendo las sugerencias de los expertos si eestan disponibles, a todo color y usando las DNSs de google))
 
 
+dnstwist
+Herramienta para detectar posibles ataques de phishing, typosquatting, y monitorizar la seguridad de dominios web. Genera nombres de dominio de apariencia similar para un nombre de dominio determinado, por ejemplo, variaciones por errores tipográficos, y luego realiza consultas DNS para verificar qué dominios están activos y si hay servidores de correo configurados que podrían interceptar correos electrónicos mal dirigidos.
+$ dnstwist example.com (generará una lista de dominios similares a example.com y consultará registros DNS A, AAAA, NS, y MX para cada uno de ellos)
+$ dnstwist --csv resultados.csv example.com (generará resultados.csv con los resultados detallados, incluyendo las consultas DNS y los dominios activos)
+$ dnstwist --ssdeep example.com (comparar el contenido de las páginas web de dominios similares para detectar si hay páginas que podrían ser copias maliciosas)
+$ dnstwist --nameservers 8.8.8.8,1.1.1.1 example.com (consultas DNS utilizando los servidores especificados en este caso, Google y Cloudflare)
+$ dnstwist --resolvers-only example.com (solo muestra los dominios que tienen una resolución válida a una dirección IP9
+$ dnstwist --monitor example.com (monitorizar continuamente el dominio y recibir actualizaciones cuando se detecten cambios)
+
+
+dnsvi
+Editar zonas DNS dinámicas con vi. dnsvi es una interfaz para nsupdate. Dado un nombre de zona DNS, utiliza dig -t AXFR para obtener todos los registros de una zona. Luego, genera su editor favorito y, una vez completado, crea una lista de instrucciones "update add" y "update delete" para enviar a nsupdate [ver].
+$ dnsvi ejemplo.com (editar los registros de la zona DNS ejemplo.com. El comando dig -t AXFR ejemplo.com se ejecuta en segundo plano para obtener los registros DNS actuales)
+Luego se abrirá el editor vi con el contenido de la zona DNS. Aquí se puede realizar cambios como agregar, modificar o eliminar registros. Al guardar y salir: Una vez que se termina de editar, se guarda los cambios y se sale de vi. En este punto, dnsvi procesará los cambios. Finalmente, para enviar enviar estas instrucciones al servidor DNS para aplicar los cambios. El comando sería algo como:
+$ nsupdate -k /path/to/keyfile
+O, si no se requiere autenticación, simplemente:
+$ nsupdate
+
+
+dnsviz
+Herramienta para el análisis y visualización del comportamiento del Sistema de nombres de dominio [DNS], incluidas sus extensiones de seguridad [DNSSEC].  Esta basada en la web <http://dnsviz.net/>.
+$ dnsviz example.com (información sobre un dominio específico)
+$ dnsviz --zone=example.com(analizar los servidores autoritativos de un dominio)
+$ dnsviz --dnssec=example.com (verificar la implementación de DNSSEC)
+$ dnsviz --simulate=example.com (simular ataques contra un dominio)
+$ dnsviz --query-only=example.com (mostrar solo los resultados de consulta)
+$ dnsviz --json=example.com > results.json (generar un archivo JSON con los resultados)
+$ dnsviz --nameserver=192.168.1.100:53 (configurar un servidor DNS personalizado
+
+
+dnswalk
+Herramienta utilizada para realizar auditorías de zonas DNS. Su propósito principal es verificar la coherencia y precisión de los registros DNS en un dominio específico. Es un depurador de DNS que realiza transferencias de zona de dominios específicos para comprobar la coherencia interna y la precisión de la base de datos.
+$ dnswalk example.com (realizará una serie de comprobaciones sobre el dominio example.com, verificando que todos los registros sean correctos y que no haya inconsistencias)
+$ dnswalk -n ns1.example.com example.com (indicará que use ns1.example.com como el servidor de nombres para realizar las consultas de la zona)
+$ dnswalk sub.example.com (comprobar una subzona específica)
+$ dnswalk example.com sub.example.com (comprobaciones en múltiples zonas)
+
+
 do-release-upgrade
 Herramienta para actualizar por consola sistemas basados en Ubuntu a una nueva versión de la distribución. Para configurar si queremos actualizar entre versiones normales o versiones LTS, debemos modificar del fichero /etc/update-manager/release-upgrades la linea:
 Para versiones LTS:
@@ -11871,6 +11909,29 @@ $ doccentral
 
 doc-debian
 El Proyecto Debian es una asociación de individuos que han hecho causa común para crear un sistema operativo libre. En este paquete, se encuentra: Manifiesto de Debian Linux, Constitución del Proyecto Debian, Contrato Social de Debian, Directrices de Software Libre de Debian, Documentación del Sistema de Seguimiento de Fallos de Debian y una introducción a las listas de correo de Debian. Todos estos archivos están disponibles en http://ftp.debian.org/debian/doc/.
+
+
+docbook
+No es tanto un comando como un conjunto de definiciones de tipo de documento [DTD] para SGML o XML, orientado a la redacción de documentos técnicos como libros, manuales y artículos de software. Lo que puede hacer DocBook es procesar documentos XML/SGML para convertirlos en formatos legibles como HTML, PDF, ePub o texto plano. Se precisan otros paquets para procesar documentos DocBook: xmlto [Convertir a varios formatos], xslproc [Procesa archivos XML con hojas de estilo XSL], dblatex [Convierte DocBook a PDF usando LaTeX]  psgml [para editar], opensp [validar]  docbook-xsl o docbook-dsssl [formatear].
+Este es un ejemplo de un archivo XML en formato DocBook (mi_documento.xml):
+<?xml version="1.0"?>
+      <!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+          "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+      <article>
+        <title>Guía rápida de DocBook</title>
+        <section>
+            <title>Introducción</title>
+            <para>DocBook es un formato estándar para escribir documentación técnica.</para>
+        </section>
+        <section>
+            <title>Ejemplo</title>
+            <para>Este es un documento de ejemplo en formato DocBook.</para>
+        </section>
+      </article>
+$ xmlto html mi_documento.xml (generará un archivo HTML llamado mi_documento.html
+$ dblatex mi_documento.xml (generará un archivo mi_documento.pdf)
+$ xmlto man mi_documento.xml (generará un archivo mi_documento.1, que se puede ver como una página de manual [man ./mi_documento.1])
+$ xsltproc -o salida.html /usr/share/xml/docbook/stylesheet/nwalsh/html/docbook.xsl mi_documento.xml (utiliza una hoja de estilo predefinida para generar el archivo HTML)
 
 
 dochelp
@@ -23954,6 +24015,56 @@ $ nstat
 $ nstat -z (Mostrando los contadores a cero. Por defecto no se muestran)
 $ nstat -a (Volcado absoluto de todos los contadores)
 $ nstat -r (Resetear los contadores)
+
+
+nsupdate
+[bind9-dnsutils]. Se utiliza para enviar solicitudes de actualización de DNS dinámico, como se define en RFC 2136, a un servidor de nombres. Esto permite agregar o eliminar registros de recursos de una zona sin editar manualmente el archivo. Una sola solicitud de actualización puede contener solicitudes para agregar o eliminar más de un registro de recursos.
+$ nsupdate
+1.-
+Ejemplo en el que queremos agregar un registro A para el nombre servidor1.example.com con la dirección IP 192.168.1.10.
+        nsupdate -k clave.tsig
+        > server dns.example.com
+        > zone example.com
+        > update add servidor1.example.com 3600 A 192.168.1.10
+        > send
+Nota.- -k especifica la clave TSIG [Transaction Signature] para autenticar las actualizaciones.
+2.-
+Eliminar el registro A que acabamos de agregar:
+        nsupdate -k clave.tsig
+        > server dns.example.com
+        > zone example.com
+        > update delete servidor1.example.com A
+        > send
+3.-
+Agregar un registro CNAME que apunte www.example.com a servidor1.example.com:
+        nsupdate -k clave.tsig
+        > server dns.example.com
+        > zone example.com
+        > update add www.example.com 3600 CNAME servidor1.example.com
+        > send
+4.-
+Modificar un registro existente para cambiar la dirección IP de un registro A existente:
+        nsupdate -k clave.tsig
+        > server dns.example.com
+        > zone example.com
+        > update delete servidor1.example.com A
+        > update add servidor1.example.com 3600 A 192.168.1.20
+        > send
+5.-
+Agregar un registro TXT
+        nsupdate -k clave.tsig
+        > server dns.example.com
+        > zone example.com
+        > update add servidor1.example.com 3600 TXT "Este es un registro TXT"
+        > send
+Las actualizaciones dinámicas suelen requerir autenticación mediante una clave TSIG. Esta clave debe ser configurada tanto en el servidor DNS como en el cliente que realiza las actualizaciones. El TTL [Time To Live] especifica cuánto tiempo debe almacenarse en caché el registro antes de que se considere obsoleto. En los ejemplos, se usa un TTL de 3600 segundos [1 hora].
+6.-
+Ejemplo de archivo de clave TSIG típico [clave.tzig] podría verse así:
+        key "clave-tsig" {
+            algorithm hmac-md5;
+            secret "base64-encoded-secret";
+        };
+Este archivo debe ser referenciado en la configuración del servidor DNS y en el comando nsupdate mediante la opción -k.
 
 
 ntfs-3g
