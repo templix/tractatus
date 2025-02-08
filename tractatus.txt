@@ -11798,6 +11798,26 @@ dnsping
 # dnsping -c 3 -t A -s 8.8.8.8 dnsdiag.org (3 solicitudes de registro "A" usando las DNSs de google)
 
 
+dnss
+Es un demonio para usar DNS sobre HTTPS. Puede actuar como un proxy, recibiendo solicitudes DNS [por defecto, en puerto 53] y resolviéndolas mediante DNS sobre HTTPS [DoH]. Este protocolo permite realizar consultas DNS a través de conexiones HTTPS en lugar de usar el protocolo DNS tradicional, que son en texto plano y vulnerable a interceptaciones. Esto protege las consultas DNS de ser espiadas o modificadas por terceros.
+# systemctl start dnss (iniciar dnss como un servicio en segundo plano)
+# dnss -monitoring_listen_addr localhost (dirección a escuchar para monitorear solicitudes HTTP)
+# dnss -enable_dns_to_https
+1.-
+Configurar dnss para usar un servidor DoH específico
+# nano /etc/dnss.conf
+Añadir la linea
+       upstream = "https://cloudflare-dns.com/dns-query"
+# systemctl restart dnss (reiniciar el servicio)
+$ dig @127.0.0.1 example.com (probar que dnss está funcionando enviando una consulta DNS a dnss, que la resolverá mediante DoH)
+2.-
+Configurar el sistema para usar dnss como servidor DNS
+# nano /etc/resolv.conf
+Y añadir:
+        nameserver 127.0.0.1
+Nota: En algunos sistemas, este archivo puede ser sobrescrito automáticamente. Para evitar esto, se puede deshabilitar la modificación automática o usar herramientas como resolvconf.
+
+
 dnstap-ldns
 Utilidad que sirve para decodificar archivos codificados en formato dnstap a formato legible como text plano. Proporciona detalles sobre las consultas y respuestas DNS, como el tipo de mensaje (query, response), la dirección IP del cliente, el nombre de dominio consultado, el tipo de registro DNS (A, AAAA, MX, etc.), y más. Dnstap es un protocolo flexible y eficiente para capturar y registrar el tráfico DNS, y es comúnmente utilizado en servidores DNS como BIND, Knot DNS, y otros.
 $ dnstap-ldns -r archivo_dnstap (decodificar e imprimir en la salida estándar)
@@ -11934,11 +11954,67 @@ $ xmlto man mi_documento.xml (generará un archivo mi_documento.1, que se puede 
 $ xsltproc -o salida.html /usr/share/xml/docbook/stylesheet/nwalsh/html/docbook.xsl mi_documento.xml (utiliza una hoja de estilo predefinida para generar el archivo HTML)
 
 
+docdiff
+compara dos archivos y muestra la diferencia. Compara archivos palabra por palabra, carácter por carácter o línea por línea. Tiene varios formatos de salida, como HTML/XHTML, tty, Manued o marcado definido por el usuario. Admite varias codificaciones y caracteres de final de línea, incluidos ASCII, UTF-8, EUC-JP, Shift_JIS, CR, LF y CRLF.
+$ docdiff archivo1.txt archivo2.txt (mostrará las diferencias entre `archivo1.txt` y `archivo2.txt`, mostrando cada cambio palabra por palabra)
+$ docdiff archivo1.iso8859-1 archivo2.utf-8 (compara un archivo codificado en ISO-8859-1 con otro en UTF-8)
+$ docdiff archivo1_unix archivo2_dos (comparación de archivos con diferentes caracteres de fin de línea: Unix vs DOS)
+$ docdiff --added-only archivo1.txt archivo2.txt ( muestra solo las lineas añadidas en un archivo)
+$ docdiff --removed-only archivo1.txt archivo2.txt (muestra solo las eliminadas en un archivo)
+$ docdiff --ignore-blank-lines archivo1.txt archivo2.txt (ignora las líneas vacías al realizar la comparación)
+$ docdiff directorio1 directorio2 (comando compara todos los archivos en los dos directorios especificados)
+$ docdiff -vwb archivo1 archivo2 (modo verbose, ignora espacios y tabulaciones e ignora mayúsculas y minúsculas)
+
+
 dochelp
 Documentación sobre comandos del sistema.
 $ dochelp list (Muestra el listado)
 $ dochelp update (actualizar la página de resumen)
 $ dochelp search ip (buscar la documentación del comando "ip")
+
+
+docknot
+Generador de sitios web estáticos creado en torno a un lenguaje de macros llamado thread, con soporte especial para gestionar versiones de software. Además de crear un sitio web, puede generar archivos tar para distribución y documentación de paquetes.
+Estructura básica de un proyecto de software llamado mi-proyecto. La estructura de directorios podría ser:
+$ tree mi_proyecto
+      mi-proyecto/
+          ├── docknot.yaml
+          ├── templates/
+          │   └── main.thread
+          ├── docs/
+          │   └── index.md
+          └── versions/
+              ├── v1.0.yaml
+              └── v2.0.yaml
+El archivo docknot.yaml contiene la configuración principal del proyecto. Un ejemplo simple podría ser:
+       project_name: "Mi Proyecto"
+       version: "1.0"
+       author: "Tu Nombre"
+       description: "Descripción de mi proyecto."
+El archivo de Versión v1.0.yaml para una versión específica podría verse así:
+       version: "1.0"
+       release_date: "2023-01-01"
+       features:
+        - Funcionalidad 1
+        - Funcionalidad 2
+La plantilla main.thread podría definir cómo se verá el contenido del sitio. Un ejemplo simple:
+       Copiar
+       <html>
+       <head>
+           <title>{{ project_name }}</title>
+       </head>
+       <body>
+           <h1>{{ project_name }}</h1>
+           <p>{{ description }}</p>
+       </body>
+       </html>
+Finalmente, para generar el sitio, ejecutar en la terminal desde el directorio del proyecto:
+$ docknot build
+$ docknot package (crear un archivo tar)
+
+
+doctest
+Herramienta para verificar automáticamente las documentación y ejemplos en los comentarios del código fuente. Analiza los comentarios del código fuente buscando ejemplos de código entre paréntesis o corchetes. Luego ejecuta estos ejemplos y compara sus resultados con lo esperado.
 
 
 dog
