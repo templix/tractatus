@@ -11798,6 +11798,28 @@ dnsping
 # dnsping -c 3 -t A -s 8.8.8.8 dnsdiag.org (3 solicitudes de registro "A" usando las DNSs de google)
 
 
+dnstap-ldns
+Utilidad que sirve para decodificar archivos codificados en formato dnstap a formato legible como text plano. Proporciona detalles sobre las consultas y respuestas DNS, como el tipo de mensaje (query, response), la dirección IP del cliente, el nombre de dominio consultado, el tipo de registro DNS (A, AAAA, MX, etc.), y más. Dnstap es un protocolo flexible y eficiente para capturar y registrar el tráfico DNS, y es comúnmente utilizado en servidores DNS como BIND, Knot DNS, y otros.
+$ dnstap-ldns -r archivo_dnstap (decodificar e imprimir en la salida estándar)
+$ dnstap-ldns -y archivo_dnstap (especifica un formato de salida codificado en YAML)
+$ dnstap-ldns -q archivo_dnstap (salida de "texto silencioso")
+$ dnstap-ldns -f archivo.dnstap -o salida.txt (lee el archivo archivo.dnstap y muestra su contenido decodificado y lo guarda en salida.txt)
+$ dnstap-ldns -f archivo.dnstap -t query (filtra y muestra solo las consultas DNS [queries] del archivo dnstap)
+$ dnstap-ldns -f archivo.dnstap -t response (similar al anterior, pero filtra y muestra solo las respuestas DNS)
+$ dnstap-ldns -f archivo.dnstap -j (decodifica el archivo y muestra la salida en formato JSON)
+1.-
+Una salida típica de dnstap-ldns puede verse así:
+      2023-10-01T12:34:56.789Z CLIENT_QUERY NOERROR 192.168.1.100:12345 -> 8.8.8.8:53 IN A example.com.
+      2023-10-01T12:34:56.790Z CLIENT_RESPONSE NOERROR 8.8.8.8:53 -> 192.168.1.100:12345 IN A 93.184.216.34
+El significado de los parámetros es:
+      CLIENT_QUERY: Indica una consulta DNS desde el cliente.
+      CLIENT_RESPONSE: Indica una respuesta DNS desde el servidor.
+      NOERROR: El código de respuesta DNS (en este caso, sin errores).
+      192.168.1.100:12345: Dirección IP y puerto del cliente.
+      8.8.8.8:53: Dirección IP y puerto del servidor DNS.
+      IN A example.com.: Tipo de registro DNS y nombre de dominio consultado.
+
+
 dnstop
 Monitorear el tráfico dns.
 # dnstop -i 192.168.1.3 -p -r 2 eth0 (Excluir la propia máquina [i], en modo no promiscuo [p], actualizando cada 2 segundos [r] y la red objetivo)
@@ -11843,7 +11865,8 @@ Estas modificaciones son válidas también para update-manager [ver]
 
 
 doc-central
-Navegador de documentación basado en la Web para explorar la que se ha instalado en el sistema y que se ha registrado en el subsistema doc-base. Se accede con el navegador en http://localhost/dc/
+Navegador de documentación basado en la Web para explorar la que se ha instalado en el sistema y que se ha registrado en el subsistema doc-base. Se accede con el navegador en http://localhost/dc/ o directamente con:
+$ doccentral
 
 
 doc-debian
@@ -11852,8 +11875,9 @@ El Proyecto Debian es una asociación de individuos que han hecho causa común p
 
 dochelp
 Documentación sobre comandos del sistema.
-$ dochelp (Muestra el listado)
-$ nano /usr/share/doc-base/time
+$ dochelp list (Muestra el listado)
+$ dochelp update (actualizar la página de resumen)
+$ dochelp search ip (buscar la documentación del comando "ip")
 
 
 dog
@@ -32685,9 +32709,25 @@ Y contestar "yes". El parámetro "-plou" indica que solo se hagan preguntas esen
 
 
 unbound
-Servidor DNS de almacenamiento en caché solo recursivo que puede realizar la validación de resultados DNSSEC [Extensiones de seguridad DNS]. Implementa solo una cantidad mínima de servicio autorizado para evitar fugas a los servidores de nombres raíz: búsquedas directas para localhost, inversas para 127.0.0.1 y ::1, y NXDOMAIN [que no se pueda resolver el nombre del dominio] para zonas atendidas por AS112 [grupo de operadores de servidores de nombres de voluntarios que se unieron en un sistema autónomo].
-$ unbound-checkconf (averiguar si existen errores en el archivo de configuración /etc/unbound/unbound.conf)
+Es un servidor DNS recursivo es decir, si no tiene la respuesta en su caché, consulta otros servidores DNS hasta obtenerla y de almacenamiento en caché que se utiliza para resolver nombres de dominio en direcciones IP. Además, puede realizar la validación DNSSEC [Domain Name System Security Extensions], que es una extensión del DNS que permite verificar la autenticidad e integridad de las respuestas DNS. Este paquete contiene el demonio unbound.
+Ejemplo de archivo de configuración:
+# nano /etc/unbound/unbound.conf
+       # Escuchar en todas las interfaces IPv4
+       interface: 0.0.0.0
+       # Escuchar en todas las interfaces IPv6
+       interface: ::0
+       # Permitir consultas desde la red local
+       access-control: 192.168.1.0/24 allow
+       # Habilitar la validación DNSSEC
+       auto-trust-anchor-file: "/var/lib/unbound/root.key"
+       # Usar los servidores DNS raíz
+       root-hints: "/var/lib/unbound/root.hints"
+# unbound-checkconf (averiguar si existen errores en el archivo de configuración)
 $ unbound (activa el daemon)
+# systemctl status unbound (verificar el estado del servicio para asegurarte de que esté funcionando correctamente)
+Ejemplo de uso:
+$ dig @127.0.0.1 example.com (realiza una consulta DNS para example.com utilizando el servidor unbound que está escuchando en 127.0.0.1
+$ unbound -v example.com (mostrará si la respuesta DNS para example.com ha sido validada correctamente mediante DNSSEC)
 
 
 undbx
