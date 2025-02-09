@@ -12058,6 +12058,12 @@ dokuWiki> putpage mi_pagina "Este es el nuevo contenido de la página." (actuali
 dokuWiki> search "configuración" (buscar páginas)
 
 
+donkey
+Calculadora de contraseñas de un solo uso [One Time Password - OTP]. Dado que la entrada se imprime en stdout, no en /etc/skeykeys, puede ser enviada fácilmente a un operador remoto por correo electrónico, con una firma PGP o algo similar. Estas contraseñas son útiles en situaciones donde se necesita una autenticación segura, ya que solo son válidas para una única sesión o transacción. Una vez utilizada, la contraseña ya no es válida, lo que reduce el riesgo de que sea comprometida.
+$ donkey -s "secreto_compartido" -c 12345 (Especifica el secreto compartido y el contador o valor de tiempo para generar una contraseña de un solo uso)
+$ donkey -s "secreto_compartido" -c 12345 | mail -s "Contraseña de un solo uso" usuario@example.com (generará la contraseña y la enviará por correo electrónico al usuario remoto)
+
+
 dontzap
 Activa CRTL+ALT+Retroceso para reiniciar las X
 dontzap -d     (Lo activa)
