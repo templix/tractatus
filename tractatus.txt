@@ -12116,6 +12116,16 @@ Convertir un formato de fichero texto MSDOS a UNIX.
 $ dos2unix filedos.txt fileunix.txt
 
 
+dosage
+Descargador y archivador de tiras cómicas. Puede recuperar solo la última tira de una tira cómica, ponerse al día con la última tira descargada o descargar una tira para una fecha o índice en particular si el diseño del sitio web lo permite.
+$ dosage xkcd (descargará las tiras cómicas de "xkcd" y las guardará en un directorio local)
+$ dosage xkcd dilbert calvinandhobbes (descargar las tiras de "xkcd", "Dilbert" y "Calvin and Hobbes")
+$ dosage -u xkcd (actualizar las tiras de "xkcd" que ya se tienen descargadas)
+$ dosage -l (mostrar una lista de todos los cómics soportados por dosage)
+$ dosage -o comics/directorio xkcd (descargará las tiras de "xkcd" y las guardará en el directorio especificado)
+$ dosage -s 2023-01-01 -e 2023-01-31 xkcd (descargará las tiras de "xkcd" publicadas entre el 1 de enero de 2023 y el 31 de enero de 2023)
+
+
 doscan
 Scanner de interfaces para conocer los servicios de red activos.
 # doscan --banner 100 --port 22 192.0.2.0/24
