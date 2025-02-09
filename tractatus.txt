@@ -11922,6 +11922,26 @@ Estas modificaciones son válidas también para update-manager [ver]
 # do-release-upgrade -d
 
 
+doas
+Permite ejecutar comandos como otro usuario, generalmente con privilegios de root similar a sudo. Primero crear el archivo:
+# nano /etc/doas.conf
+  - entrar el grupo del usuario con permisos root para ejecutar algún comando [cmd apt]:
+  permit :USER as root cmd apt
+  - permitir a usuario ejecutar todos los comandos como root
+  permit nopass USER as root
+  - Prohibir al usuario juan ejecutar el comando fdisk
+  deny juan cmd fdisk
+Especificar los permisos y propietario del archivo:
+# chown -c root:root /etc/doas.conf
+# chmod -c 0400 /etc/doas.conf
+Luego el usuario especificado en el archivo podrá, por ejemplo, ejecutar:
+$ doas apt update (en el primer caso)
+$ doas -u root bash (iniciar sesión como root)
+Algunas opciones que podemos colocar en el archivo de configuración:
+        permit nopass :otros (Permitir que todos los usuarios del grupo "otros" realicen acciones como root sin autenticación)
+        permit persist USER (Una vez que el usuario se autentica exitosamente, no solicitar una contraseña nuevamente por algún tiempo.
+
+
 doc-central
 Navegador de documentación basado en la Web para explorar la que se ha instalado en el sistema y que se ha registrado en el subsistema doc-base. Se accede con el navegador en http://localhost/dc/ o directamente con:
 $ doccentral
@@ -12070,25 +12090,17 @@ dontzap -d     (Lo activa)
 dontzap -e      (Lo desactiva)
 
 
-doas
-Permite ejecutar comandos como otro usuario, generalmente con privilegios de root similar a sudo. Primero crear el archivo:
-# nano /etc/doas.conf
-  - entrar el grupo del usuario con permisos root para ejecutar algún comando [cmd apt]:
-  permit :USER as root cmd apt
-  - permitir a usuario ejecutar todos los comandos como root
-  permit nopass USER as root
-  - Prohibir al usuario juan ejecutar el comando fdisk
-  deny juan cmd fdisk
-Especificar los permisos y propietario del archivo:
-# chown -c root:root /etc/doas.conf
-# chmod -c 0400 /etc/doas.conf
-Luego el usuario especificado en el archivo podrá, por ejemplo, ejecutar:
-$ doas apt update (en el primer caso)
-$ doas -u root bash (iniciar sesión como root)
-Algunas opciones que podemos colocar en el archivo de configuración:
-        permit nopass :otros (Permitir que todos los usuarios del grupo "otros" realicen acciones como root sin autenticación)
-        permit persist USER (Una vez que el usuario se autentica exitosamente, no solicitar una contraseña nuevamente por algún tiempo.
+doodle
+Busca archivos en el disco duro mediante la búsqueda de patrones en metadatos. Extrae metadatos específicos del formato de archivo y crea un árbol de sufijos para indexar los archivos. Luego, se puede buscar rápidamente en el índice. Es similar a locate, pero puede aprovechar información como las etiquetas ID3.
+$ doodle -b $HOME (indexar todo el contenido de nuestra home)
+Se puede añadir en ~/.bashrc las siguientes lineas:
+         alias updatedb="doodle -bn -d /var/lib/doodle/doodle-locate-db -l libextractor_filename /"
+         alias locate="doodle -d /var/lib/doodle/doodle-locate-db"
 
+
+doodled
+Contiene el demonio para mantener la base de datos de Doodle actualizada automáticamente
+$ /etc/init.d/doodled status (comprobar si está activo)
 
 
 dool
