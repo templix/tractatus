@@ -12017,6 +12017,10 @@ doctest
 Herramienta para verificar automáticamente las documentación y ejemplos en los comentarios del código fuente. Analiza los comentarios del código fuente buscando ejemplos de código entre paréntesis o corchetes. Luego ejecuta estos ejemplos y compara sus resultados con lo esperado.
 
 
+docutils-common
+No es un comando en sí mismo, sino que forma parte del paquete docutils [ver python3-docutils]: Es una biblioteca de Python que se utiliza para procesar texto en formato reStructuredText [reST] que es un sistema de sintaxis y análisis de texto simple, fácil de leer y que permite ver lo que se obtiene. Es útil para la documentación de programas en línea, como cadenas de documentación de Python, para crear rápidamente páginas web sencillas y para documentos independientes.
+
+
 dog
 Parecido a cat.
 
@@ -27031,6 +27035,12 @@ $ echo "TGludXggZXMgdW4gc2lzdGVtYSBnZW5pYWwK" | python -m base64 -d (Descodifica
 python-hachoir-metadata
 Herramientas para extraer metadatos de imagenes. Soporta 32 formatos distintos de archivos.
 $ hachoir-metadata imagen
+
+
+python3-docutils
+El propósito del proyecto es crear un conjunto de herramientas para procesar la documentación de reStructuredText [reST] en formatos útiles, como HTML, LaTeX, ODT o páginas de manual de Unix. Esta herramientas son rst2html, rst2html4, rst2html5, rst2latex, rst2man, rst2odt, rst2odt_prepstyles, rst2pseudoxml, rst2s5, rst2xetex, rst2xml y rstpep2html.
+$ rst2pdf documento.rst -o documento.pdf (convertir archivo ret a PDF)
+$ rst2html documento.rst documento.html (generará un archivo documento.html de un rst que se puede abrir en un navegador)
 
 
 pyversions
