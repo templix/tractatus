@@ -12027,8 +12027,35 @@ Herramienta para generar archivos de texto sin formato equivalentes a partir de 
 $ docx2txt archivo.docx > salida.txt (convierte archivo.docx y lo guarda en salida.txt)
 
 
+dodgy
+Busca líneas de aspecto sospechoso en el código Python. Se utiliza para analizar el código y detectar patrones que pueden indicar problemas de seguridad, de aspecto "sospechoso" o mala práctica, como la inclusión accidental de información sensible, contraseñas, claves secretas codificadas o archivos que contienen datos que no deberían estar ahí.
+$ dodgy mi_codigo.py (analizará el código en busca de patrones que puedan ser problemáticos)
+Si el código del archivo.py que se analiza contine linea, por ejemplo:
+      password = "mi_contraseña_secreta"
+O parecida a:
+      api_key = "12345-abcde-67890-fghij"
+dodgy las marcaría como sospechosas porque la primera almacena una contraseña directamente en el código y la otra porque las claves API no deberían estar codificadas directamente en el código fuente.
+
+
 dog
 Parecido a cat.
+
+
+dokujclient
+Herramienta para interactuar [leer, escribir...] con una instancia de Dokuwiki de forma interactiva.
+$ dokujclient --server=https://mi-dokuwiki.com --user=miusuario --password=miclave pagelist (muestra una lista de todas las páginas disponibles en la instancia remota de DokuWiki)
+$ dokujclient --server=https://mi-dokuwiki.com --user=miusuario --password=miclave getpage mi_pagina (obtiene el contenido de la página mi_pagina y lo muestra en la terminal)
+$ dokujclient --server=https://mi-dokuwiki.com --user=miusuario --password=miclave putpage nueva_pagina.txt "Este es el contenido de la nueva página." (si nueva_pagina.txt no existe, la crea; si ya existe, actualiza su contenido)
+$ dokujclient --server=https://mi-dokuwiki.com --user=miusuario --password=miclave delpage pagina_a_borrar (elimina la página pagina_a_borrar de la instancia remota)
+$ dokujclient --server=https://mi-dokuwiki.com --user=miusuario --password=miclave search "documentación" (devuelve una lista de páginas que contienen el término documentación)
+
+
+dokuWiki
+Permite acceder directamente a la interfaz de DokuWiki desde la línea de comandos para interactuar de forma básica con las páginas del wiki. Esta wiki está destinada principalmente a crear documentación de cualquier tipo. Tiene una sintaxis simple que garantiza que los archivos de datos sigan siendo legibles fuera de la wiki y facilita la creación de textos estructurados. Todos los datos se almacenan en archivos de texto sin formato y no requiere base de datos.
+$ dokuWiki --server=https://mi-dokuwiki.com --user=miusuario --password=miclave (abre el cliente y ya se pueden usar comandos internos como getpage, putpage, delpage, etc., para interactuar con el contenido)
+dokuWiki> getpage inicio (obtener una página desde el modo interactivo)
+dokuWiki> putpage mi_pagina "Este es el nuevo contenido de la página." (actualizar el contenido de una página desde el modo interactivo)
+dokuWiki> search "configuración" (buscar páginas)
 
 
 dontzap
