@@ -11285,6 +11285,11 @@ $ DISPLAY=:0.0 gedit  (lanzado desde una tty, abre gedit en las X. Si solo tenem
 $ gxmessage “Cierra el firefox” -display :0 (Lanzado desde una tty mostrará el mensaje en las X)
 
 
+display-dhammapada
+Colección de dichos budistas de estilo fortune. Este programa muestra un verso aleatorio de las traducciones al inglés o al polaco del Dhammapada, una "escritura budista versificada que tradicionalmente se atribuye al propio Buda"
+$ dhamma
+
+
 distributed-net
 Permitir que los ciclos de CPU no utilizados en tu computadora sean donados a distributed.net para proyectos de aplicaciones practicas en la ciencia, de investigación académica y de interés público.
 # /etc/init.d/distributed-net status
@@ -15371,19 +15376,18 @@ Supervisa la actividad fork, exec y exit del proceso.
 # forkstat -s -d (información breve del nombre del proceso sin mostrar la ruta)
 
 
-fortune
-Mostrar frases aleatorias.
+fortune-anarchism
+Mostrar frases anarquistas aleatorias.
+$ fortune /usr/share/games/fortunes/anarchism
+
+
+fortunes
+[fortunes-es fortunes-es-off]. Mostrar frases aleatorias.
 $ fortune
 $ fortune -l (muestra citas largas)
 $ fortune -s (citas cortas)
-$ fortune -o (citas obscenas)
-Si queremos que al abrir la terminal muestre la fecha, añadir al final de /home/usuario/.bashrc:
-	fortune -a date
-Las frases se encuentran en /usr/share/games/fortune
-
-
-fortune-anarchism
-Proporciona un conjunto de citas anarquistas en inglés en el formato de base de datos de fortune.
+$ fortune /usr/share/games/fortunes/off/es/off/
+$ fortune /usr/share/games/fortunes/linux
 
 
 fping
