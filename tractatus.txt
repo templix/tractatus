@@ -12154,8 +12154,18 @@ Nota.- CTRL+F5 para guardar el estado del juego y CTRL+F9 para cargarlo más tar
 
 
 doscan
-Scanner de interfaces para conocer los servicios de red activos.
-# doscan --banner 100 --port 22 192.0.2.0/24
+Está diseñada para escanear interfaces de red y detectar servicios activos, como puertos abiertos, servicios en ejecución, etc
+$ doscan 192.168.18.6 -p 80 (escanear todas las IP en el rango especificado y detectar servicios activos en le puerto 80)
+$ doscan 192.168.18.10 -p 1-1000 (escanear un rango específico de puertos)
+$ doscan -b 100 192.168.18.6 -p 22 (lee como maximo 100 bites)
+
+
+doschk
+Se utiliza para verificar si los nombres de archivos en un sistema Linux podrían causar problemas al ser interpretados como nombres de archivos en sistemas DOS y SYSV que están limitados a 14 caracteres.
+$ doschk (buscará nombres de archivos que puedan causar conflictos con los sistemas DOS)
+$ doschk /ruta/del/directorio (analizar solo los archivos y subdirectorios del directorio especificado)
+$ find archivo.txt -print | doschk (si no produce ningún resultado, significa que el archivos son compatible con MS-DOS)
+Nota.- En sistemas modernos, este tipo de verificación generalmente no es necesario ya que la mayoría de los sistemas operativos actuales han superado las limitaciones de DOS.
 
 
 dosfsck
