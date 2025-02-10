@@ -12138,6 +12138,21 @@ $ dosage -o comics/directorio xkcd (descargará las tiras de "xkcd" y las guarda
 $ dosage -s 2023-01-01 -e 2023-01-31 xkcd (descargará las tiras de "xkcd" publicadas entre el 1 de enero de 2023 y el 31 de enero de 2023)
 
 
+dosbox
+Emulador x86 con gráficos diseñado para ejecutar juegos antiguos de DOS en plataformas modernas. Es especialmente útil para juegos antiguos que no funcionan en sistemas operativos actuales debido a diferencias en la arquitectura y el manejo de hardware.
+$ dosbox (abrirá una ventana con el símbolo del sistema donde se podrá ejecutar comandos como si se estuviera en un entorno DOS)
+1--
+Ejemplo de cómo usar DOSBox para ejecutar un juego antiguo
+$ mkdir ~/dosgames (crear un directorio para el Juego)
+Copiar el juego antiguo en ese directorio.
+$ dosbox (iniciar DOSBox)
+> mount c ~/dosgames (montar el directorio ~/dosgames que será tratado como la unidad C: dentro del entorno DOS)
+> c: (entrar en la unidad c:)
+> juego.exe (el juego debería iniciarse)
+> exit (y presionar "Enter" para salir de DosBox)
+Nota.- CTRL+F5 para guardar el estado del juego y CTRL+F9 para cargarlo más tarde.
+
+
 doscan
 Scanner de interfaces para conocer los servicios de red activos.
 # doscan --banner 100 --port 22 192.0.2.0/24
