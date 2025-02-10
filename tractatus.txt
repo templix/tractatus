@@ -12116,6 +12116,13 @@ $ dool --cpu --time 2 (cada 2 segundos)
 $ dool --full (monitorear todos los aspectos de la aplicación)
 
 
+doona
+Herramienta de seguridad basada en la técnica de fuerza bruta para detectar vulnerabilidades en servicios de red. Es una bifurcación de la herramienta BED [Bruteforce Exploit Detector].
+$ doona -m http -p 80 (detecta las del módulo HTML y puerto 80. Otros módulos son DICT, FINGER, FTP, HTTP_MORE, HTTP_SP, HTTP_WEBDAV, IMAP, IRC, LPD, NNTP, PJL, POP, PROXY, RTSP, SMTP, SOCKS4, SOCKS5, TFTP y WHOIS)
+$ doona -m http -t 192.168.18.6 -p 80 -o 4 -M 3 (especificando host, por defecto localhost, 4 segundos de espera después de cada prueba y realizar 3 pruebas y salir)
+$ doona -m proxy -t 8.8.8.8 -p 53 -M 3
+
+
 dos2unix
 Convertir un formato de fichero texto MSDOS a UNIX.
 $ dos2unix filedos.txt fileunix.txt
