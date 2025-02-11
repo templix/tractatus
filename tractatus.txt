@@ -16717,6 +16717,12 @@ Para conocer el color en RGB y exadecimal de algo del escritorio.
 El puntero del ratón de convierte en una cruz y al clicar obtiene el color.
 
 
+graph-easy
+[libgraph-easy-perl]. Módulo Perl para convertir o renderizar gráficos como ASCII, HTML, SVG o mediante Graphviz.
+$ graph-easy grafic --png (crear un png de un gráfico generado por graphviz[ver] o dothost[ver])
+$ echo "[ Bonn ] -- car --> [ Berlin ], [ Ulm ]" | graph-easy --html > ruta.html (gráfico a partir de texto crea el html)
+
+
 graphviz
 (meta paquete). Genera gráficos a partir de archivos de texto. Ver pactree o dot porque la aplicación incluye varios ejecutables: acyclic, bcomps, ccomps, circo, cluster, diffimg, dijkstra, dot, dot2gxl, dot_builtins, dotty, edgepaint, fdp, gc, gml2gv, graphml2gv, gv2gml, gv2gxl, gvcolor, gvgen, gvmap, gvmap.shn, gvpack, gvpr, gxl2dot, gxl2gv, lefty, lneato, mingle, mm2gv, neato, nop, osage, patchwork, prune, sccmap, sfdp, tred, twopi, unflatten y vimdot. Generar un archivo con pactree:
 $ pactree -g htop > htop
