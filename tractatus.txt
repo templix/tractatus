@@ -12202,6 +12202,18 @@ Herramientas adicionales de control de calidad de la biblioteca Dose3 para reali
 # dose-outdated /var/lib/apt/lists/ftp.debian.org_debian_dists_bookworm_main_binary-amd64_Packages /var/lib/apt/lists/ftp.debian.org_debian_dists_bookworm_main_source_Sources (paquetes binarios que han quedado obsoletos)
 
 
+dosfstools
+utilidades para crear, verificar, reparar y etiquetar sistemas de archivos FAT [FAT12, FAT16 y FAT32] en dispositivos de almacenamiento como USB, discos duros y tarjetas SD. Incluye las herramientas dosfsck, dosfslabel, fatlabel, fsck.fat, fsck.msdos, fsck.vfat, mkdosfs, mkfs.fat, mkfs.msdos y mkfs.vfat
+$ mkfs.fat -F 32 /dev/sdb1 (crea un sistema de archivos FAT32 en el dispotifivo especificado)
+$ mkfs.msdos /dev/sdb1 (equivalente al anterior)
+$ fsck.fat -a /dev/sdb1 (repara automáticamente los errores detectados en el dispositivo)
+$ fsck.fat -n /dev/sdb1 (solo verificar sin hacer cambios un sistema de archivos FAT)
+$ dosfsck -a /dev/sdb1 (equivaleente al anterior)
+$ fatlabel /dev/sdb1 (mostrar la etiqueta de volumen)
+$ fatlabel /dev/sdb1 NUEVA_ETIQUETA (establecer una nueva etiqueta)
+$ dosfslabel /dev/sdb1 NUEVA_ETIQUETA (equivalente al anterior)
+
+
 dot
 Lenguaje de descripción de gráficos. Los gráficos generalmente se almacenan con la extensión de nombre de archivo .gv o .dot aunque se prefiere .gv para evitar confusiones.
 $ gpicview output.svg (Para visualizar los gráficos de los siguientes ejemplos)
