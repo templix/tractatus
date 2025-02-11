@@ -12251,6 +12251,47 @@ El objetivo de la herramienta es dar a los gráficos generados por Graphviz [DOT
 $ dot2tex -o grafico.tex grafico.dot (generar un archivo grafico.tex de un .dot que se puede incluir en un documento LaTeX usando \input{grafico.tex})
 
 
+dotdrop
+Facilita la administración de archivos "dotfile" entre diferentes máquinas. Estos archivos se utilizan para personalizar entornos de usuario en sistemas Unix/Linux.
+Contiguración mínima:
+$ sudo mkdir dotdrop
+$ cd dotdrop
+$ mkdir dotfiles
+$ sudo nano config.yaml
+       config:
+         backup: true
+         banner: true
+         create: true
+         dotpath: dotfiles
+         ignoreempty: false
+         keepdot: false
+         longkey: false
+         showdiff: false
+         workdir: ~/.config/dotdrop
+       dotfiles:
+       profiles:
+$ sudo dotdrop import ~/.bashrc (importar un archivo al directorio)
+Se añadiran al archivo config.yaml los siguientes datos:
+       dotfiles:
+         f_bashrc:
+           src: home/pep/.bashrc
+           dst: /home/pep/.bashrc
+         chmod: '777'
+       profiles:
+         debian:
+           dotfiles:
+           - f_bashrc
+
+
+dothost
+Herramienta que se utiliza para realizar búsquedas de DNS en red y presentar los resultados en formatos compatibles con Graphviz generando representaciones visuales con la información obtenida. Los formatos de salida admitidos son: ascii, boxart, html, svg, dot, txt, vcg, gdl, graphml, gif, jpg, pdf, png y ps.
+$ dothost example.com | graph-easy --as html (guardar el gráfico como graph.html)
+$ dothost example.com | graph-easy --as svg (guardar como, por defecto, graph.svg)
+$ dothost example.com | graph-easy --as jpg (guarda como graph.jpg)
+$ dothost example.com | graph-easy --as pdf (como graph.pdf)
+$ dothost example.com | graph-easy (lo muestra en pantalla)
+
+
 downgrade
 Bajar versión a un programa instalado.
 # downgrade firefox
