@@ -12246,6 +12246,11 @@ $ echo 'digraph test123 {
 ' | dot -Tpng -Nfontcolor=red -Nshape=box -Glabel="Gráfico importante" -Nstyle=invis -o output.png
 
 
+dot2tex
+El objetivo de la herramienta es dar a los gráficos generados por Graphviz [DOT] un aspecto y un funcionamiento más compatibles y que se integra perfectamente con LaTeX.
+$ dot2tex -o grafico.tex grafico.dot (generar un archivo grafico.tex de un .dot que se puede incluir en un documento LaTeX usando \input{grafico.tex})
+
+
 downgrade
 Bajar versión a un programa instalado.
 # downgrade firefox
