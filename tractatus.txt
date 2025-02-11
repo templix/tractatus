@@ -12433,6 +12433,13 @@ Reconfigura los paquetes después de que ya se hayan instalado.
 # dpkg-reconfigure fontconfig  (reconfigurar fuentes)
 
 
+dpkg-www
+Interfaz web de administración de paquetes Debian. Puede listar paquetes, mostrar información de los paquetes y los archivos instalados, explorar la documentación y navegar a través de las dependencias de los paquetes. También puede encontrar todos los paquetes propietarios de un archivo o directorio o aquellos que proporcionan un paquete virtual.
+$ dpkg-www (abriría una URL de dpkg en el host local que enumeraría todos los paquetes instalados)
+$ dpkg-www bash (abriría una URL de dpkg mostrando información sobre el paquete bash
+$ dpkg-www depends=coreutils (abriría una URL dpkg que enumera todos los paquetes dependiendo de coreutils)
+
+
 driftnet
 Snifer de imagenes y video
 # driftnet -i wlan2
