@@ -12179,6 +12179,29 @@ Comprobar y reparar sistemas de archivos MS-DOS
 -V  (Realiza una pasada de verificación)
 
 
+dose-builddebcheck
+Comprueba si se pueden satisfacer las dependencias de compilación. Este software comprueba, dada una colección de secciones de paquetes fuente y una colección de secciones de paquetes binarios de paquetes Debian, si los paquetes binarios pueden satisfacer las dependencias de compilación de cada paquete fuente.
+$ dose-builddebcheck -v -f -e --deb-native-arch=amd64 /var/lib/apt/lists/ftp.debian.org_debian_dists_bookworm_main_binary-amd64_Packages /var/lib/apt/lists/ftp.debian.org_debian_dists_bookworm_main_source_Sources
+
+
+dose-distcheck
+Comprueba si se pueden satisfacer las dependencias de los paquetes. Este software comprueba para cada paquete de una distribución si es posible satisfacer sus dependencias y conflictos dentro de esta distribución. Consta de las aplicaciones: dose-debcheck [para paquetes Debian], dose-distcheck [evitar situaciones en las que una actualización de paquetes pueda romper dependencias importantes], dose-rpmcheck [para paquetes rpm] y dose-eclipsecheck [para complementos OSGi]
+# dose-debcheck -v /var/cache/apt/archives/*.deb (verifica si las dependencias de los paquetes .deb en /var/cache/apt/archives/ pueden satisfacerse entre sí)
+# apt-cache dumpavail | dose-debcheck (comprobar la distribución completa desde la lista de paquetes disponibles)
+# dose-debcheck | grep "unsat" (mostrará únicamente los paquetes con dependencias insatisfechas)
+# apt-get -s dist-upgrade | dose-debcheck (simula una actualización y comprueba si rompe dependencias)
+
+
+dose-extra
+Herramientas adicionales de control de calidad de la biblioteca Dose3 para realizar análisis más específicos, como la coinstalación de paquetes, la detección de dependencias rotas, y la identificación de paquetes obsoletos analizando metadatos de paquetes de software. Estas son ceve [analizador de metadatos general que admite distintos formatos de entrada y de salida], dose-challenged [herramienta específica de Debian para comprobar qué paquetes seguramente se volverán desinstalables cuando un paquete existente se actualice a una versión más nueva], dose-deb-coinstall ,[herramienta específica de Debian para comprobar si un conjunto de paquetes se puede instalar en su totalidad]
+# dose-outdated (encontrar paquetes que no se pueden instalar con respecto a un repositorio de paquetes)
+# dose-challenged Packages.gz (detecta los paquetes del archivo Packages.gz que no pueden instalarse porque tienen dependencias no satisfechas)
+# dose-deb-coinstall ./libc6_2.31-13_amd64.deb ./gcc-10-base_10.2.1-6_amd64.deb (verifica si las versiones especificadas de libc6 y gcc-10-base son compatibles y pueden instalarse juntas)
+# dose-outdated Sources.gz Packages.gz (detecta paquetes obsoletos en el archivo Packages.gz comparándolos con las versiones más recientes en Sources.gz)
+# dose-challenged /var/lib/apt/lists/ftp.debian.org_debian_dists_bookworm_main_binary-amd64_Packages (muestra todos los paquetes "main" de la distribución bookworm que tienen problemas de instalabilidad)
+# dose-outdated /var/lib/apt/lists/ftp.debian.org_debian_dists_bookworm_main_binary-amd64_Packages /var/lib/apt/lists/ftp.debian.org_debian_dists_bookworm_main_source_Sources (paquetes binarios que han quedado obsoletos)
+
+
 dot
 Lenguaje de descripción de gráficos. Los gráficos generalmente se almacenan con la extensión de nombre de archivo .gv o .dot aunque se prefiere .gv para evitar confusiones.
 $ gpicview output.svg (Para visualizar los gráficos de los siguientes ejemplos)
