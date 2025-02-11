@@ -12298,6 +12298,21 @@ $ douceur parse archivo.css
 $ douceur inline /var/www/html/index.html
 
 
+dov4l
+Programa para configurar y consultar la configuración de dispositivos video4linux [V4L]. Puede configurar propiedades como frecuencia, sintonizador, canal de entrada, modo, brillo, tono, color, contraste, blancura, paleta, ancho y alto de un dispositivo video4linux una API y un conjunto de drivers para dispositivos de captura de video en Linux, como cámaras web, tarjetas de captura de video, sintonizadores de TV, etc.. También puede consultar la configuración actual.
+$ dov4l -d /dev/video0 (muestra la configuración actual del dispositivo de video en /dev/video0, incluyendo propiedades como brillo, contraste, saturación, etc)
+$ dov4l -q (lo mismo que el anterior. Si no se especifica dispositivo, por defecto es /dev/video0)
+$ dov4l -b 150 (ajusta el brillo del dispositivo a un valor de 150 [el rango típico es de 0 a 255])
+$ dov4l -d /dev/video0 --contrast=64 (ajusta el contraste del dispositivo a un valor de 64)
+$ dov4l -d /dev/video0 --format=YUYV (configura el dispositivo para usar el formato de video YUYV)
+$ dov4l -f 213.25 (ajusta la frecuencia del sintonizador a 213.25 MHz)
+$ dov4l -c 5 (cambia el canal del sintonizador al número 5)
+$ dov4l -t 1 -i 2 (selecciona el sintonizador 1 y configura el canal de entrada a 2)
+$ dov4l -d /dev/video0 --list-controls (lista todos los controles que puedes ajustar en el dispositivo, como brillo, contraste, saturación...)
+$ dov4l -d /dev/video0 --capture=frame.jpg (captura un frame del dispositivo y lo guarda como frame.jpg)
+$ dov4l -x 640 -y 480 (resolución de salida del dispositivo)
+
+
 downgrade
 Bajar versión a un programa instalado.
 # downgrade firefox
