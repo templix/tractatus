@@ -9470,6 +9470,7 @@ $ date -d @1441543931 (Pasar fecha unix a normal)
 $ date -s "2010-01-10 16:59"  (forma de establecer la fecha y hora actual)
 $ date –u 0110170210  (Otra forma de establecer la fecha. mes 01, día 10, hora 17:02 y año 2010)
 $ date +"%A,%d-%m-%Y"
+$ date +%c (dia de la semana, fecha y hora, minutos y segundos)
 Algunas opciones:
 	%D (fecha en formato mm/dd/yy)
 	%T (hora:minutos:segundos en formato 24h)
@@ -12325,6 +12326,32 @@ Demonio para monitorear y llevar un registro del tiempo de inactividad del siste
 # service downtimed status (para saber si está activo)
 
 
+dphys-config
+Herramienta utilizada para la distribución de archivos de configuración personalizados en múltiples máquinas. El objetivo principal es mantener actualizados y sincronizados archivos de configuración específicos a través de una red.
+# dphys-config sync (sincronizar las configuraciones de todos los clientes de la red)
+# dphys-config force-sync (forzar la sincronización y sobrescribir configuraciones locales de todos los clientes de la red)
+# dphys-config test (verificar qué cambios se realizarán sin aplicarlos)
+
+
+dphys-swapfile
+Generar y usar automáticamente un archivo de intercambio, no una partición de intercambio. Este script init.d existe para que no sea necesario tener una partición de intercambio de tamaño fijo. En su lugar, se instala en el sistema sin partición de intercambio y luego se ejecuta la aplicación y automaticamente calcula el tamaño de la swap para adaptarse al tamaño actual de la RAM. De manera predeterminada y, por lo tanto, en la instalación, crea un archivo de intercambio dos veces más grande que la cantidad actual de RAM con un límite superior de 2 GB. También es muy útil cuando se incluye en tarjetas SD, memorias USB o imágenes de disco que se distribuyen y ejecutan en muchas máquinas con diferentes cantidades de RAM, por ejemplo, diferentes modelos de Raspberry Pi o imágenes en la nube.
+La configuración de dphys-swapfile se realiza mediante el archivo:
+# nano /etc/dphys-swapfile
+Con el contenido a modo de ejemplo:
+# Tamaño inicial del archivo de intercambio en MB
+CONF_SWAPSIZE=1024
+#
+# Tamaño máximo del archivo de intercambio en MB (para crecimiento dinámico)
+CONF_MAXSWAP=2048
+#
+# Ubicación del archivo de intercambio
+CONF_SWAPFILE=/var/swap
+# dphys-swapfile setup (inicializar el archivo de intercambio después de cada modificación del archivo de configuración)
+# dphys-swapfile swapon (activarlo)
+# dphys-swapfile swapoff (desactivar el archivo de intercambio)
+# rm /var/swap (eliminar el archivo de intercambio, despues de desactivar el archivo)
+
+
 dpigs
 [debian-goodies]. Muestra los paquetes que ocupan más espacio.
 $ dpigs (Los primeros diez 10. Opción por defecto)
@@ -12400,6 +12427,15 @@ Otro proceso para reparar paquetes rotos en el sistema
     # apt-get install -f (corregir dependencias rotas
 
 
+dpkg-awk
+Script de Gawk para analizar /var/lib/dpkg/{status,available} y paquetes. Este script puede analizar los archivos de base de datos de dpkg. Puede hacer expresiones regulares en los campos y obtener solo lo que desea. También se puede hacer que muestre ciertos campos. Como beneficio adicional, hay una opción para ordenar la salida.
+$ dpkg-awk > paquetes (listar todos los paquetes instalados y guardarlos en un archivo)
+$ dpkg-awk "Status: .* installed$" -- Package Version Status (mostrará todos los paquetes instalados, con solo los campos enumerados)
+$ dpkg-awk -f=/var/lib/dpkg/available "Package:^[aA].*" -- Package Version (mostrará todos los paquetes disponibles que comiencen con la letra 'A'.)
+$ dpkg-awk 'Package ~ /python/' (buscar todos los paquetes que contienen la palabra "python" en su nombre)
+$ dpkg-awk -f=/var/lib/dpkg/available -- Package Homepage (mostrar sólo nombre del paquete y su página web)
+
+
 dpkg-depcheck
 Determina los paquetes utilizados para ejecutar un comando. Este programa ejecuta el comando especificado bajo strace y luego determina y saca los paquetes usados en el proceso.
 $ dpkg-depcheck -b ip a
@@ -12431,6 +12467,14 @@ Reconfigura los paquetes después de que ya se hayan instalado.
 # dpkg-reconfigure -a (mostrará una lista de todos los paquetes que requieren configuración y permitirá reconfigurarlos uno por uno)
 # dpkg-reconfigure fontconfig-config  (reconfigurar fuentes. Seguir con el comando siguiente)
 # dpkg-reconfigure fontconfig  (reconfigurar fuentes)
+
+
+dpkg-repack
+Herramienta de archivado de paquetes de Debian. dpkg-repack crea un archivo .deb a partir de un paquete que ya se ha instalado. Este comando resulta particularmente práctico cuando se ha realizado cambios en los archivos de configuración u otros archivos de un paquete instalado y se desea conservar esos cambios en un nuevo paquete que se pueda distribuir o reinstalar en el futuro.
+Por ejemplo:
+# nano /etc/example-package/config.conf (realizar algunas modificaciones en el archivo de configuración de un paquete y una vez guardado)
+# dpkg-repack example-package (creará un archivo llamado example-package_version_arch.deb en el directorio actual, donde version y arch se sustituirán por la versión y la arquitectura del paquete)
+# dpkg -i example-package_version_arch.deb (el nuevo paquete se instala de la forma tradicional)
 
 
 dpkg-www
