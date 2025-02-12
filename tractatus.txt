@@ -12484,6 +12484,14 @@ $ dpkg-www bash (abriría una URL de dpkg mostrando información sobre el paquet
 $ dpkg-www depends=coreutils (abriría una URL dpkg que enumera todos los paquetes dependiendo de coreutils)
 
 
+dq
+Herramienta de consulta DNS/DNSCurve utilizada para realizar consultas a servidores DNS o DNSCurve sobre tipos específicos de registros relacionados con un nombre de dominio determinado.
+$ dq any example.com (mostrará las direcciones IP asociadas al dominio "example.com")
+$ dq ptr 127.0.0.1
+$ dq MX example.com (consultar un registro MX [Mail Exchange] de un dominio)
+$ dq NS example.como (mostrará los nombreservidores [NS] directamente asociados con "example.com" y seguirá las referencias si existen)
+
+
 driftnet
 Snifer de imagenes y video
 # driftnet -i wlan2
