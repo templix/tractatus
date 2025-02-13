@@ -12494,11 +12494,38 @@ $ dq NS example.como (mostrará los nombreservidores [NS] directamente asociados
 
 dracut
 Crea un initramfs de arranque para paquetes del núcleo de Linux. El initramfs se carga junto con el núcleo y es responsable de montar el sistema de archivos raíz e iniciar el sistema de inicio principal.
+$ dracut --list-modules
+
+
+dradio
+Interfaz basada en MPlayer que permite escuchar estaciones de radio y podcasts. Su principal ventaja es que organiza los canales y podcasts disponibles para facilitar la navegación sin necesidad de configuraciones complicadas.
+$ dradio (abrirá la interfaz basada en la terminal donde se podrá explorar las estaciones de radio y podcasts disponibles)
+
+
+drbl
+[Diskless Remote Boot en Linux]. Arranque remoto sin disco o sin sistema para máquinas cliente en una red [PXE boot]. Incluye Clonezilla, una utilidad de clonación de particiones y discos.
+# drblsrv -i (configurará todo lo necesario, incluyendo DHCP, TFTP, y NFS para que las máquinas cliente puedan arrancar desde la red)
+Ejemplo completo de flujo de trabajo:
+    - Un servidor DRBL configurado y funcionando.
+    - Varias máquinas cliente configuradas para arrancar desde la red.
+    - Una vez la máquina cliente arranca desde el servidor DRBL, se carga un sistema operativo temporal.
+    - Desde allí, se puede usar Clonezilla para clonar un disco de una máquina fuente a una máquina de destino que también puede arrancar desde la red.
 
 
 driftnet
-Snifer de imagenes y video
+Herramienta que se utiliza para capturar y mostrar imágenes como JPEG, GIF, PNG que se transmiten a través de una red. Funciona escuchando el tráfico de red y extrayendo imágenes de los flujos de datos TCP que detecta.
+# driftnet -i eth0 (abrirá una ventana donde se mostrarán las imágenes que driftnet capture en tiempo real)
+# driftnet -i eth0 -d /ruta/al/directorio (guardará todas las imágenes capturadas en el directorio especificado)
+# driftnet -i eth0 -b (seguirá capturando imágenes, pero no las mostrará en una ventana)
+# driftnet -i eth0 -p 80 (limitará la captura de imágenes solo al tráfico que pasa por el puerto 80)
 # driftnet -i wlan2
+
+
+driverctl
+Herramienta de control de controladores de dispositivos para Linux para manipular e inspeccionar las opciones de controladores de dispositivos del sistema [USB, PCI, entre otros]. Los dispositivos normalmente se asignan a su único controlador de kernel designado de forma predeterminada.
+$ driverctl list-devices (dispositivos del sistema actualmente conectados y reemplazables en un bus, pci de manera predeterminada, junto con sus controladores actuales)
+$ driverctl -v list-devices | grep r8169 (información sobre una en concreto)
+$ driverctl list-devices network (los relacionados con network)
 
 
 driverless
