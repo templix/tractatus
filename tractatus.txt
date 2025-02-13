@@ -12538,6 +12538,16 @@ Vuelca información sobre dispositivos DRM disponibles, como dispositivos, plano
 $ drm_info
 
 
+droid-juicer
+Este paquete proporciona un servicio de arranque para extraer firmware binario de particiones de proveedores en dispositivos Android. Está pensado para ejecutarse en el primer arranque y activa un reinicio una vez que se ejecuta correctamente, lo que garantiza que el dispositivo se ejecutará con todo el firmware necesario disponible para Linux. Este tipo de herramienta es útil en dispositivos que requieren firmware propietario para que ciertas funciones, como gráficos, redes inalámbricas o módems, funcionen correctamente en Linux.
+$ systemctl status droid-juicer.service (verificar si el servicio está habilitado)
+# systemctl start droid-juicer.service (forzar la ejecución manual del servicio y volverá a ejecutar el proceso de extracción del firmware)
+# journalctl -u droid-juicer.service (permitirá ver los registros generados por droid-juicer durante su ejecución, para verificar qué firmware fue extraído o si hubo algún error)
+$ ls -l /lib/firmware/droid-juicer/ (listar el firmware extraído que suelen guardar en /lib/firmware)
+# droid-juicer --no-reboot (ejecutar la extracción sin forzar el reinicio del dispositivo)
+# systemctl disable droid-juicer.service (desactivarlo para evitar que se ejecute nuevamente)
+
+
 droopy
 Mini web server para recibir archivos.
 $ mkdir fotos (crear el directorio donde recibir las imagenes que nos han de enviar)
