@@ -12548,12 +12548,42 @@ $ ls -l /lib/firmware/droid-juicer/ (listar el firmware extraído que suelen gua
 # systemctl disable droid-juicer.service (desactivarlo para evitar que se ejecute nuevamente)
 
 
+droidlysis
+Herramienta utilizada para analizar aplicaciones Android (APKs) y extraer información relevante de ellas. Esta herramienta automatiza el proceso de desmontaje de la aplicación y busca diversas propiedades dentro del paquete APK o su código desmontado. Puede identificar patrones sospechosos o potencialmente maliciosos en el código o en la configuración de la aplicación.
+$ droidlysis -i archivo.apk (desmontará el APK y generará un informe con las propiedades encontradas)
+$ droidlysis -i archivo.apk -o ruta/al/directorio/salida (guardará todos los archivos generados, incluyendo el informe, en el directorio especificado)
+$ droidlysis -i ruta/al/archivo.apk --permissions (buscar propiedades específicas dentro del APK)
+$ droidlysis -i ruta/al/archivo.apk --security (identificar posibles problemas de seguridad como comportamientos maliciosos o vulnerabilidades conocidas)
+$ droidlysis -i ruta/al/archivo.apk --json ruta/al/informe.json (creará un archivo JSON con toda la información extraída del APK)
+
+
+drool
+Puede reproducir el tráfico DNS de los archivos de captura de paquetes (PCAP) y enviarlo a un servidor específico, con opciones como manipular el tiempo entre paquetes, así como repetir los paquetes infinitamente o durante una cantidad determinada de iteraciones. El objetivo de esta herramienta es realizar pruebas de rendimiento o simulación de tráfico DNS real.
+$ drool -q -f captura.pcap -s 192.168.1.10 (en modo silencioso, sin mostrar salida en la terminal con el archivo captura.pcap y reproduce las consultas DNS contenidas en él hacia el servidor DNS en 192.168.1.10)
+$ drool -f captura.pcap -s 8.8.8.8 -i 5 (reproduce el tráfico DNS del archivo captura.pcap cinco veces hacia el servidor DNS 8.8.8.8)
+$ drool -f captura.pcap -s 192.168.0.1 -i 0 (reproduce el archivo captura.pcap en bucle infinito hacia el servidor DNS en 192.168.0.1)
+$ drool -f captura.pcap -s 1.1.1.1 -t 100 (reproduce el tráfico de captura.pcap hacia el servidor 1.1.1.1, introduciendo un retraso de 100 ms entre cada paquete)
+$ drool -f consulta.pcap -s 127.0.0.1 -p 5353 (envía el tráfico DNS del archivo consulta.pcap al servidor en 127.0.0.1 usando el puerto 5353)
+1.-
+Combinar con tcpdump para capturar y reproducir tráfico:
+# tcpdump -i eth0 port 53 -w dns_trafico.pcap (captura todo el tráfico DNS en la interfaz eth0 y lo guarda en dns_trafico.pcap)
+# drool -f dns_trafico.pcap -s 8.8.4.4 -i 2 (reproduce el tráfico capturado en el archivo dns_trafico.pcap dos veces hacia el servidor 8.8.4.4)
+
+
 droopy
 Mini web server para recibir archivos.
 $ mkdir fotos (crear el directorio donde recibir las imagenes que nos han de enviar)
 $ cd fotos
 $ droopy -m "Buenassssss, puedes enviarme las fotos que quieras" -p ~/gnu.png -d ~/imagenes (con el texto que queremos [m], ilustrado con la imagen deseada [p] y que lo que nos envien se guarde en la carpeta especificada [d])
 Accedemos en local con la dirección http://localhost:8000 y en remoto han de acceder, si no tenemos nombre de host registrado, con http://nuestra_ip:8000/fotos
+
+
+dropbear
+Ofrece tanto funcionalidades de servidor como de cliente SSH, está diseñado para ser lo suficientemente pequeño como para utilizarse en entornos con poca memoria y permite conexiones seguras sobre protocolo TCP o UDP.
+# systemctl enable dropbear (configurarlo para arrancar automáticamente al iniciar el sistema)
+# ssh root@ip_del_servidor -p 22 (conexión)
+# dropbearctl disconnect <ID_DEL_CLIENTE> (desconectar un cliente específico)
+# dropbearctl connections (verificar conexiones activas)
 
 
 dropbox
