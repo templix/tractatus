@@ -12628,14 +12628,80 @@ drraw
 Interfaz web ligera diseñada para visualizar gráficas generadas a partir de bases de datos RRD [Round Robin Database] que contienen datos de series temporales. Se utiliza para monitorear y presentar datos como: Temperaturas de servidores, uso de la red [ancho de banda], carga del procesador y uso del disco. drraw estará disponible en el navegador en http://localhost/drraw
 
 
+drslib
+Herramientas para usar la API de Python DRSLIB [Data Reference Syntax], utilizadas principalmente en el ámbito de datos climáticos y científicos. Estas herramientas permiten trabajar con datos del CMIP [Coupled Model Intercomparison Project] para garantizar que sigan las convenciones de DRS, traducir entre versiones del protocolo y verificar estructuras de datos en servidores THREDDS. Las herramientas son: drs_checkthredds, drs_tool y translate_cmip3
+$ drs_checkthredds http://example.com/thredds/catalog.xml (verifica la estructura de un catálogo THREDDS [Thematic Real-time Environmental Distributed Data Services] para garantizar que los datos cumplan con las reglas DRS)
+$ drs_tool validate /data/cmip5/output1/INM/inmcm4/historical/mon/ocean/Omon/r1i1p1/ (verifica si la ruta cumple con la convención DRS para datos CMIP5)
+$ drs_tool generate /data/raw_data.nc (generar una ruta DRS para un archivo específico)
+$ drs_tool rename /data/raw_data.nc (renombrar un archivo para cumplir con las convenciones DRS)
+$ translate_cmip3 /data/cmip3/INM/inmcm3/experiment1/ (traduce nombres y estructuras de archivos del proyecto CMIP3 al formato CMIP5)
+
+
 dselect
 Paquete obsoleto sustituido por aptitude.
+
+
+dsh
+Ejecuta un comando específico simultaneamente en un grupo de computadoras usando métodos de shell remotos como rsh o, el recomendable ssh por razones de seguridad.
+$ dsh echo "Linux es un sistema genial" (imprimirá la frase en cada uno de los nodos conectados)
+$ dsh read password (solicitará una contraseña a cada nodo y la devolverá como salida)
+$ dsh -w hosts.txt "ls -l" (especifica un archivo de hosts llamado "hosts.txt" donde se encuentran las direcciones IP o nombres de host de los nodos objetivo)
+$ dsh -rsh "uptime" (usa rsh como protocolo de conexión por defecto)
+
+
+dsniff
+Varias herramientas para rastrear el tráfico de red en busca de inseguridades. Este paquete contiene varias herramientas para escuchar y crear tráfico de red: arpspoof [envía respuestas arp no solicitadas y posiblemente falsificadas], dnsspoof [falsifica respuestas a consultas de direcciones DNS/punteros arbitrarios en la red de área local], dsniff [rastreador de contraseñas para varios protocolos], filesnarf [guarda archivos seleccionados rastreados del tráfico NFS], macof [inunda la red local con direcciones MAC aleatorias], mailsnarf [rastrea correo en la LAN y lo almacena en formato mbox], msgsnarf [graba mensajes seleccionados de diferentes mensajeros instantáneos], sshmitm [intermediario de SSH que rastrea el tráfico SSH], sshow [analizador de tráfico SSH], tcpkill [elimina conexiones TCP en curso especificadas], tcpnice [reduce la velocidad de conexiones TCP especificadas mediante modelado de tráfico "activo"], urlsnarf [genera URL seleccionadas rastreadas del tráfico HTTP en CLF], webmitm [intermediario HTTP/HTTPS. Hace de proxy transparente] y webspy [envía URL rastreadas desde un cliente a su navegador local, requiere tener instalado libx11-6]
 
 
 dstat
 Monitor  de trafico de red
 # dstat (uso básico)
 # dstat -c --top-cpu -dn --top-mem (uso de CPU, proceso que más usa la CPU, estadistica de disco y red y proceso que consume más memoria)
+
+
+dtach
+Pequeño programa que emula las funciónes de separar y adjuntar de screen [ver] sin embargo, no tiene las otras características de screen, como su compatibilidad con múltiples terminales o su compatibilidad con emulación de terminal.
+$ dtach -n session_1 (crear una sesión. "exit" para dewsconectar)
+$ dtach -r session_1 (reconectar a la sesion)
+Nota.- Las sesiones persisten incluso después de reiniciar el sistema.
+
+
+dtdinst
+Convierte DTD [Document Type Definition - Definición de Tipo de Documento] en formato de instancia XML [eXtensible Markup Language - Lenguaje de Marcado eXtensible]. Específicamente, convierte las definiciones de entidades y elementos del DTD [Document Type Declaration - Declaración de Tipo de Documento] a su representación en un archivo de instancia XML. Esto facilita trabajar con los datos de la estructura DTD como si fueran parte de un archivo XML estándar. La instancia XML puede tener un formato específico de DTD o un formato RELAX NG [lenguaje de esquema para XML].
+Por ejemplo, un DTD puede tener esta estructura:
+      <!ELEMENT libro (titulo, autor, fecha)>
+      <!ELEMENT titulo (#PCDATA)>
+      <!ELEMENT autor (#PCDATA)>
+      <!ELEMENT fecha (#PCDATA)>
+Esto define que un elemento <libro> debe contener obligatoriamente los elementos <titulo>, <autor> y <fecha>.
+$ dtdinst archivo.dtd (generará un archivo XML que representa el contenido del DTD)
+Un ejemplo práctico, supongamos que se tiene el siguiente archivo libro.dtd:
+      <!ELEMENT biblioteca (libro+)>
+      <!ELEMENT libro (titulo, autor, fecha)>
+      <!ELEMENT titulo (#PCDATA)>
+      <!ELEMENT autor (#PCDATA)>
+      <!ELEMENT fecha (#PCDATA)>
+      <!ATTLIST libro id ID #REQUIRED>
+$ dtdinst libro.dtd (generará libro.dtd.xml que representa la estructura definida en el DTD)
+El archivo xml resultante podría verse así:
+      <dtd>
+        <element name="biblioteca">
+          <content type="element" model="libro+"/>
+        </element>
+        <element name="libro">
+          <content type="element" model="(titulo, autor, fecha)"/>
+          <attribute name="id" type="ID" use="required"/>
+        </element>
+        <element name="titulo">
+          <content type="#PCDATA"/>
+        </element>
+        <element name="autor">
+          <content type="#PCDATA"/>
+        </element>
+        <element name="fecha">
+          <content type="#PCDATA"/>
+        </element>
+      </dtd>
 
 
 dte
