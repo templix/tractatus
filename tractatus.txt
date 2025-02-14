@@ -12617,6 +12617,17 @@ Mini servidor web cuyo único propósito es permitir que otros carguen archivos 
 Para comprobar si el sistema está en servicio, en el navegador colocar la dirección http://localhost:8000 y haciendo clic en "Discover the address of this page" [Descubre la dirección de esta página] se informa la ip donde enviar las fotos.
 
 
+dropwatch
+Herramienta para detectar y diagnosticar dónde se están perdiendo paquetes en una red.
+# dropwatch (comenzar a monitorear el tráfico de red y registrar los paquetes que se envían y reciben)
+# dropwatch -i eth0 -o salida (que solo escuche el tráfico en la interfaz eth0 y lo guarde en salida)
+# dropwatch -f 'tcp' (que solo muestre los paquetes de tipo TCP)
+
+
+drraw
+Interfaz web ligera diseñada para visualizar gráficas generadas a partir de bases de datos RRD [Round Robin Database] que contienen datos de series temporales. Se utiliza para monitorear y presentar datos como: Temperaturas de servidores, uso de la red [ancho de banda], carga del procesador y uso del disco. drraw estará disponible en el navegador en http://localhost/drraw
+
+
 dselect
 Paquete obsoleto sustituido por aptitude.
 
@@ -28273,6 +28284,50 @@ Gestor de paqueteria de distros basadas en Red Hat.
 # rpm -qf /etc/httpd/conf/httpd.conf (A qué paquete pertenece un archivo)
 # rpm --checksig paquete (verificar integridad de un paquete)
 # rpm -qa gpg-pubkey (verificar la integridad de todos los paquetes)
+
+
+rrdtool
+La herramienta de base de datos Round Robin (RRDtool) es un sistema para almacenar y visualizar datos de series temporales (por ejemplo, ancho de banda de red, temperatura de la sala de máquinas, carga promedio del servidor). Almacena los datos en bases de datos Round Robin (RRD), lo que significa que los datos se almacenan en un formato circular: una vez que la base de datos alcanza su tamaño máximo, los datos más antiguos se sobrescriben con los nuevos.
+1.-
+Para almacenar datos, primero se debe crear una base de datos RRD. Por ejemplo, para monitorear la carga promedio de un servidor:
+       # rrdtool create load_average.rrd \
+          --start N \
+          --step 300 \
+          DS:load1:GAUGE:600:0:U \
+          DS:load5:GAUGE:600:0:U \
+          DS:load15:GAUGE:600:0:U \
+          RRA:AVERAGE:0.5:1:288
+Las opciones:
+    --start N: Inicia la base de datos en el momento actual.
+    --step 300: Define un intervalo de 300 segundos [5 minutos] entre actualizaciones.
+    DS:load1:GAUGE:600:0:U: Define un Data Source [DS] llamado load1 de tipo GAUGE [valor crudo], con un tiempo de espera de 600 segundos, valor mínimo 0 y máximo desconocido [U].
+    RRA:AVERAGE:0.5:1:288: Define un Round Robin Archive [RRA] que almacena el promedio de los valores, con 288 puntos [un día de datos con intervalos de 5 minutos].
+# rrdtool update load_average.rrd N:0.15:0.10:0.05 (actualizar la base de datos. N: Indica que se usa la hora actual y 0.15:0.10:0.05: Son los valores para load1, load5 y load15, respectivamente)
+2.-
+Para crear una gráfica de la carga promedio en las últimas 24 horas:
+rrdtool graph load_graph.png \
+  --start -86400 \
+  --title "Carga promedio del servidor" \
+  --vertical-label "Carga" \
+  DEF:load1=load_average.rrd:load1:AVERAGE \
+  DEF:load5=load_average.rrd:load5:AVERAGE \
+  DEF:load15=load_average.rrd:load15:AVERAGE \
+  LINE1:load1#FF0000:"Carga 1 min" \
+  LINE2:load5#00FF00:"Carga 5 min" \
+  LINE3:load15#0000FF:"Carga 15 min"
+Las opciones:
+    --start -86400: Muestra los datos de las últimas 24 horas (86400 segundos).
+    DEF: Define una fuente de datos para graficar.
+    LINE1, LINE2, LINE3: Define las líneas en el gráfico con sus respectivos colores y etiquetas.
+# rrdtool fetch load_average.rrd AVERAGE --start -86400 (mostrará los valores promedio de los últimos 24 horas)
+3.-
+Monitoreo de tráfico de red
+Crear la base de datos:
+# rrdtool create traffic.rrd --start N --step 300 DS:in:COUNTER:600:0:U DS:out:COUNTER:600:0:U RRA:AVERAGE:0.5:1:288
+Actualizar la base de datos con datos de tráfico:
+# rrdtool update traffic.rrd N:123456:654321
+Generar un gráfico:
+# graph traffic_graph.png --start -86400 --title "Tráfico de red" --vertical-label "Bytes" DEF:in=traffic.rrd:in:AVERAGE DEF:out=traffic.rrd:out:AVERAGE LINE1:in#FF0000:"Entrada" LINE2:out#00FF00:"Salida"
 
 
 rrenice
