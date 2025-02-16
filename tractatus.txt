@@ -12779,6 +12779,12 @@ Algunos atajos:
 	t (Va al inicio de la página)
 
 
+ducktype
+Sintaxis liviana no XML para Mallard, sistema de documentación diseñado para ayudar a los usuarios a encontrar respuestas de manera rápida e intuitiva], con un lenguaje de marcado orientado a archivos de ayuda principalmente de GNOME.
+$ ducktype ayuda.txt -o ayuda.page (convertir un archivo .txt escrito en sintaxis Ducktype a formato Mallard)
+$ ducktype --validate ayuda.txt (revisará el archivo y mostrará posibles errores en la sintaxis)
+
+
 duf
 Ver espacio de disco ocupado. Como df más colorida. Descarga:
 $ wget https://github.com/muesli/duf/releases/download/v0.3.1/duf_0.3.1_linux_amd64.deb
@@ -12806,6 +12812,11 @@ Imprime una lista de todos los inicios de sesión. La lista está, generalmente,
 # dump-acct -n 10 /var/log/wtmp (solo imprimir en pantalla 10 lineas)
 
 
+dump.exfat
+Imprime información de un dispositivo dado que está formateado por el sistema de archivos exFAT.
+# dump.exfat /dev/sda3
+
+
 dumpe2fs
 Muestra información de ficheros ext2/3
 # dumpe2fs /dev/sda1
@@ -12813,15 +12824,36 @@ Nota.- El porcentaje de bloques reservados para el usuario root en los sistemas 
 # tune2fs -m 1 /dev/sda1
 
 
-dump.exfat
-Imprime información de un dispositivo dado que está formateado por el sistema de archivos exFAT.
-# dump.exfat /dev/sda3
+dumpet
+Herramienta para depurar imágenes de arranque de El Torito. Puede volcar la estructura de El Torito en varios formatos de salida. El-Torito es un estándar para crear medios de arranque como CD-ROM, DVD o BD compatibles con sitemas BIOS.
+$ dumpet imagen.iso (proporcionará detalles sobre la estructura de la imagen, incluyendo secciones como el sector de arranque y las entradas de menú)
+$ dumpet -s 0x20 mi_imagen.iso (extraerá y mostrará información sobre el sector 0x20 de la imagen)
 
 
 dumpkeys
 Permite obtener el mapa de teclas (Keymap) utilizado por el controlador de teclado actual.
 # dumpkeys -i
 # dumpkeys -f (completo)
+
+
+duplicity
+Copia de seguridad cifrada e incremental que solo registra las partes de los archivos que han cambiado desde la última copia de seguridad.
+$ duplicity full /home/user/docs file:///mnt/backup (copia de seguridad completa de la carpeta /home/user/docs y la almacena en /mnt/backup, cifrando los datos)
+$ duplicity --encrypt-key "CLAVE_GPG" /home/user/docs file:///mnt/backup (especificar una clave GPG para cifrar la copia de seguridad)
+$ duplicity full /home/me sftp://uid@other.host/some_dir
+$ duplicity incr /home/user/docs file:///mnt/backup (realizar copia incrementales)
+$ duplicity restore file:///mnt/backup /home/user/docs_restaurado (restaurar la copia de seguridad en su ubicación original)
+$ duplicity restore --file-to-restore documento.txt file:///mnt/backup /home/user/docs_restaurado/documento.txt (restaurar un archivo específico)
+$ duplicity verify file:///mnt/backup /home/user/docs (asegurar que los archivos respaldados están intactos)
+$ duplicity list-current-files file:///mnt/backup (ver qué archivos están almacenados)
+
+
+dupload
+Cargar automáticamente paquetes Debian a un host remoto, generalmente un repositorio de Debian o un servidor de mantenimiento.
+$ dupload --to mydebianrepo paquete.changes (subirá los archivos especificados en paquete.changes al servidor mydebianrepo)
+$ dupload -t scp://usuario@servidor:/var/incoming paquete.changes (usando scp para enviar los archivos directamente a /var/incoming en servidor)
+$ dupload --dry-run paquete.changes (mostrar lo que haría dupload sin realmente transferir archivos)
+$ dupload --force paquete.changes (subir un paquete y omitir la confirmación interactiva)
 
 
 dumppdf
