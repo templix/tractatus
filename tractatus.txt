@@ -12895,6 +12895,16 @@ $ dutree -f (omitiendo directorios)
 $ dutree -a (ver incluso los de menor tamaño que 1 M)
 
 
+dvb-tools
+Herramientas para trabajar con dispositivos de televisión digital [DVB, Digital Video Broadcasting]. Estas herramientas son útiles para probar, configurar y manipular dispositivos DVB, como sintonizadores de TV, y para realizar tareas como escanear canales, ajustar parámetros de sintonización, y convertir formatos de datos.
+$ dvb-fe-tool (mostrará información sobre el frontend del dispositivo DVB, como el estado del sintonizador, la frecuencia actual, el ancho de banda, y otros parámetros)
+$ dvb-fe-tool -i (mostrará información más detallada sobre el frontend, incluyendo capacidades y parámetros actuales)
+$ dvb-format-convert -i input_file -o output_file (convierte el archivo de entrada input_file al formato de salida output_file)
+$ dvbv5-scan /usr/share/dvb/dvb-t/es -o channels.conf (escaneará los canales de televisión digital terrestre [DVB-T] en España y guardará la lista de canales encontrados en el archivo channels.conf)
+$ dvbv5-scan -f 546000000 -b 8 -o channel.conf (escaneará la frecuencia 546 MHz con un ancho de banda de 8 MHz y guardará los resultados en channel.conf)
+$ dvbv5-zap -c channels.conf -a 0 -n "Canal 1" (sintonizará el canal llamado "Canal 1" en el archivo channels.conf y lo mostrará en el dispositivo de salida)
+
+
 dvdauthor
 Crear videos compatibles con reproductores domesticos [genera los directorios VIDEO_TS y AUDIO_TS]. Ver página man para una muestra del archivo de control.
 $ dvdauthor -o directorio archivo_control.xml
