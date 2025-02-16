@@ -12817,6 +12817,12 @@ Imprime información de un dispositivo dado que está formateado por el sistema 
 # dump.exfat /dev/sda3
 
 
+dumppdf
+Vuelca el contenido interno de un archivo PDF a formato pseudo-XML.
+$ dumppdf -a file.pdf (Volcar todos los encabezados y contenidos, excepto los objetos de flujo)
+$ dumppdf -T file.pdf (Volcar la tabla de contenido)
+
+
 dumpe2fs
 Muestra información de ficheros ext2/3
 # dumpe2fs /dev/sda1
@@ -12856,20 +12862,9 @@ $ dupload --dry-run paquete.changes (mostrar lo que haría dupload sin realmente
 $ dupload --force paquete.changes (subir un paquete y omitir la confirmación interactiva)
 
 
-dumppdf
-Vuelca el contenido interno de un archivo PDF a formato pseudo-XML.
-$ dumppdf -a file.pdf (Volcar todos los encabezados y contenidos, excepto los objetos de flujo)
-$ dumppdf -T file.pdf (Volcar la tabla de contenido)
+duply
+Interfaz de shell para duplicity [ver] que simplifica el uso al administrar las configuraciones para cada trabajo de respaldo en perfiles. Admite todos los backends de duplicity.
 
-
-duplicity
-Herramienta para realizar backups tanto en modo local como remoto
-# duplicity full /home file:///backups/ (realiza un backup copmpleto [full] en modo local de la carpeta /home en la carpeta /backups)
-$ duplicity /home/usuario scp://usuario@host/dir (Backup de un directorio local a un servidor remoto)
-Algunas opciones:
-	--no-encryption (Sin codificar. Por defecto codifica los archivos en el destino)
-	--include /home/usuario/datos/documentos (Backups de un subdirectorio especifico)
-	--remove-all-but-n-full 1 --force (Sólo dejará en destino la última copia "full", borrando la anterior y las incrementales que dependen de ella)
 
 
 durep
