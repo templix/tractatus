@@ -12905,6 +12905,15 @@ $ dvbv5-scan -f 546000000 -b 8 -o channel.conf (escaneará la frecuencia 546 MHz
 $ dvbv5-zap -c channels.conf -a 0 -n "Canal 1" (sintonizará el canal llamado "Canal 1" en el archivo channels.conf y lo mostrará en el dispositivo de salida)
 
 
+dvbackup
+Herramienta que permite realizar copias de seguridad utilizando videocámaras MiniDV. Esta herramienta utiliza el formato de video digital [DV] para almacenar datos en la cinta de la videocámara, lo que permite aprovechar el hardware de la cámara como un medio de almacenamiento. El sistema y la videocámara deben estar conectados a través de IEEE1394, también conocido como Firewire, iLink. Para llevar los datos a la cinta, se debe utilizar una utilidad adicional, llamada dvconnect, que está incluida en libdv-bin.
+$ find . | cpio -o -H crc | dvbackup --prefix=125 | dvconnect -s (Presiona el botón de grabar en tu videocámara)
+$ find . | cpio -o -H crc | dvbackup --prefix=125 | dvconnect -s -b 500 (caso de que el anterior comando no funcione)
+Detenina la videocámara y rebobinada, reproducir la cinta y lanzar:
+$ dvconnect | dvbackup -t (verificar)
+$ dvconnect | dvbackup -d | cpio -imV (restaurar)
+
+
 dvdauthor
 Crear videos compatibles con reproductores domesticos [genera los directorios VIDEO_TS y AUDIO_TS]. Ver página man para una muestra del archivo de control.
 $ dvdauthor -o directorio archivo_control.xml
