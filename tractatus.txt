@@ -12931,6 +12931,16 @@ Formatear dvd +- Rw
 $ dvd+rw-format -force /dev/cdrom
 
 
+dvd-rw-tools
+Herramientas que permiten grabar imágenes de DVD creadas por dvdauthor o genisoimage en discos DVD+R, DVD+RW, DVD-R y DVD-RW. Este paquete contiene dvd+rw-mediainfo [para brindar detalles sobre los discos DVD], Depende del paquete growisofs [ver]. Incluye las herramientas btcflash, dvd+rw-booktype, dvd+rw-mediainfo y dvd-ram-control
+$ btcflash -v (muestra la versión actual del firmware de la unidad.)
+$ btcflash -u firmware.bin (actualiza el firmware de la unidad con el archivo firmware.bin. Se debe tener cuidado al actualizar el firmware, ya que un error podría dejar inutilizable la unidad)
+$ dvd+rw-booktype -dvd-rom /dev/sr0 (cambia el "book type" de un DVD+R a "DVD-ROM")
+$ dvd+rw-mediainfo /dev/sr0 (muestra información sobre el disco insertado en /dev/sr0, incluyendo el estado de grabación, la capacidad y los espacios usados/libres)
+$ dvd-ram-control --status /dev/sr0 (muestra el estado actual del disco DVD-RAM.)
+$ dvd-ram-control --disable-defect /dev/sr0 (desactiva la gestión de defectos en un disco DVD-RAM)
+
+
 dvgrab
 Catura de videos desde una cámara digital DV.
 Previas:
@@ -17073,7 +17083,8 @@ $ groups  (Sin especificar usuario muestra los del usuario con el que estamos)
 
 growisofs
 Grabación de dvds.
-$ growisofs -dvd-compat -Z /dev/sdb=imagen.iso
+$ growisofs -Z /dev/sr0=image.iso (graba image.iso en el dispositivo /dev/sr0)
+$ growisofs -M /dev/sr0 -R -J /carpeta/con/archivos (añade archivos de /carpeta/con/archivos a un DVD+RW sin borrar el contenido anterior)
 
 
 grpck
