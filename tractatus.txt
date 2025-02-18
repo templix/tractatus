@@ -13007,6 +13007,15 @@ $ dvdisaster -i /dev/sr0 -t (comprobar si un disco tiene sectores dañados)
 $ dvdisaster (lanza la interfaz gráfica)
 
 
+dvdtape
+Herramienta que se utiliza en la producción profesional de DVDs para generar y transferir archivos en el formato DDP [Disc Description Protocol] y DDPMS [Disc Description Protocol Media Set] y los datos puedan ser enviados a cintas DLT [Digital Linear Tape] o archivos de disco. Es un protocolo estándar de la industria para la replicación de discos ópticos, asegurando que los datos grabados sean fieles al máster original. Soporta estructuras de disco DVD-Video y DVD-ROM.
+$ dvdtape -o output_directory -i mi_pelicula.iso (especifica la carpeta donde se guardarán los archivos DDP generados y la imagen ISO de entrada)
+Nota.- El directorio de salida contendrá archivos como: DDPID [identificación del conjunto DDP], CONTROL.DAT [archivo de control], IMAGE.DAT [los datos de la imagen] y PQDESCR.DAT [información sobre las pistas del DVD]
+$ dvdtape -o /ruta/de/salida -i dvd_master.iso -f ddp_output.dat (guardar toda la estructura DDP en un solo archivo en lugar de generar múltiples archivos en un directorio)
+$ dvdtape -o /dev/st0 -i dvd_master.iso (envía los datos a la unidad de cinta DLT de la imagen ISO de entrada)
+$ dvdtape -o /ruta/salida -i dvd_master.iso --verify (verificación para asegurarse de que los archivos DDP son correctos)
+
+
 dvgrab
 Catura de videos desde una cámara digital DV.
 Previas:
