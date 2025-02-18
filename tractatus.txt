@@ -12895,6 +12895,67 @@ $ dutree -f (omitiendo directorios)
 $ dutree -a (ver incluso los de menor tamaño que 1 M)
 
 
+dvd+rw-format
+Formatear dvd +- Rw
+$ dvd+rw-format -force /dev/cdrom
+
+
+dvd-slideshow
+conjunto de herramientas para crear presentaciones de diapositivas en DVD con menús. DVD Slideshow consiste en un conjunto de herramientas que permiten crear videos estilo presentaciones de diapositivas a partir de una colección de imágenes. Este paquete proporciona los siguientes programas: dir2slideshow, dvd-slideshow, dvd-menu, gallery1-to-slideshow y jigl2slideshow.
+El archvio de configuración, básico y basado en la página man podria ser:
+$ nano ~/.dvd-slideshow/dvd-slideshowrc
+       debug=1 # 0 (bajo) a 3 (mucha información)
+       pal=0 # 0=ntsc 1=pal
+       ac3=1 # 0=mp2 1=ac3 audio
+       copy=0 # agregar copias de las imágenes originales al directorio de salida
+       high_quality=0 # usar el modo de alta calidad (establecido en 1)
+       autocrop=1 # recortar automáticamente las imágenes para llenar la pantalla completa
+       border=0 # agregar un borde de N píxeles entre la imagen y el borde del DVD
+       sharpen=0 # habilitar el enfoque de imagen para todas las imágenes
+       widescreen=0 # usar el modo de pantalla ancha (16:9) en lugar de 4:3
+       #
+       ## Fuente predeterminada:
+       font=/usr/share/fonts/default/Type1/n019004l.pfb # Fuente URW en negrita helvética
+       #
+       ## Subtítulo: subtitle_type="dvd" # use "render" para forzar la representación del texto.
+       subtitle_font_size=24
+       subtitle_font='/usr/share/fonts/type1/texlive-fonts-recommended/putbi8a.pfb' # Fuente URW en negrita helvética
+       subtitle_color="white"
+       subtitle_outline_color="black"
+       subtitle_location="bottom" # inferior
+       subtitle_location_x=0
+       subtitle_location_y=105
+       #
+       ## Título:
+       title_font_size=48
+       title_font_color="black" # o use hexadecimal "#RRGGBB"
+       title_font='/usr/share/fonts/type1/texlive-fonts-recommended/putbi8a.pfb' # Fuente URW en negrita helvética
+       #
+       ## Título superior:
+       toptitle_font_size=48
+       toptitle_font_color="black" # o use el valor hexadecimal "#RRGGBB"
+       toptitle_bar_height=125 # 0 para que no haya un 50 % de blanco detrás del texto
+       toptitle_text_location_x=80
+       toptitle_text_location_y=50
+       #
+       # Título inferior:
+       bottomtitle_font_size=36
+       bottomtitle_font_color="black" # o use el valor hexadecimal "#RRGGBB"
+       bottomtitle_bar_location_y=156 # relativo a la parte inferior de la imagen
+       bottomtitle_bar_height=55 # 0 para que no haya un 50 % de blanco detrás del texto
+       bottomtitle_text_location_x=0
+       bottomtitle_text_location_y=155
+       #
+       # kenburns:
+       kenburns_acceleration=1 # segundos de aceleración lenta para kenburns
+       # use 0 para que no haya aceleración o use un porcentaje del tiempo del efecto:
+       # kenburns_acceleration=25% # acelerará durante el primer 25% del efecto.
+$ dir2slideshow -t 3 -c 1 -n Vacaciones -s "año 2024" imagenes/ (tiempo imagen en pantalla, tiempo transicion entre imágenes, titulo, subtitulo y directorio fotos)
+Este comando creará el archivo Vacaciones.txt que puede editarse y modificar y cada vez que se realicen modificaciones en este archivo o en el de configuración ha de lanzarse;
+$ dvd-slideshow -o Vacaciones -n Vacaciones -a musica.ogg -f Vacaciones.txt (con la música de la presentación y archivo salido del comando anterior)
+$ vlc "presen/Vacaciones.vob" (ver representación)
+
+
 dvb-tools
 Herramientas para trabajar con dispositivos de televisión digital [DVB, Digital Video Broadcasting]. Estas herramientas son útiles para probar, configurar y manipular dispositivos DVB, como sintonizadores de TV, y para realizar tareas como escanear canales, ajustar parámetros de sintonización, y convertir formatos de datos.
 $ dvb-fe-tool (mostrará información sobre el frontend del dispositivo DVB, como el estado del sintonizador, la frecuencia actual, el ancho de banda, y otros parámetros)
@@ -12924,11 +12985,6 @@ dvdbackup
 [dependencias: libdvdread, libdvdcss]. Ripeo de dvds.
 $ dvdbackup -i /dev/cdrom  (/información del dvd)
 $ dvdbackup -M -i/dev/cdrom -o/home/usuario/carpeta_destino (lanzar la aplicación)
-
-
-dvd+rw-format
-Formatear dvd +- Rw
-$ dvd+rw-format -force /dev/cdrom
 
 
 dvd-rw-tools
