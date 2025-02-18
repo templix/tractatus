@@ -13037,6 +13037,29 @@ Algunas opciones:
 	-t (poner fecha y hora de registro como nombre del archivo)
 
 
+dvi2dvi
+Convertir archivos DVI [DeVice Independent] generados por NTT jTeX a un formato ASCII compatible con pTeX y viceversa. El formato DVI es un formato de salida común para documentos que han sido procesados por sistemas de tipografía TeX, pero aquí se enfoca en la interoperabilidad entre dos variantes específicas de TeX: jTeX y pTeX, que son versiones del sistema TeX adaptadas para manejar caracteres propios de diferentes idiomas, especialmente japonés.
+$ dvi2dvi documento_jtex.dvi -o documento_ptex.dvi (convertir documento_jtex.dvi, generado por jTeX a pTeX)
+$ dvi2dvi documento_ptex.dvi -o documento_jtex.dvi (de pTeX a jTeX)
+
+
+dvidvi
+Seleccionar, cambiar el orden y/o desplazar las páginas en un archivo .dvi [Device Independent].
+Supongamos un documento .dvi con 8 páginas y se desea imprimirlo como un folleto A5 en papel A4. Para ello, se necesita reorganizar las páginas de manera que, al doblar el papel A4 por la mitad, las páginas aparezcan en el orden correcto
+$ dvidvi -m 8:1,8,2,7,3,6,4,5 archivo.dvi archivo_reordenado.dvi (indica que el archivo tiene 8 páginas y especifica el nuevo orden de las páginas, el archivo de entrada y el de salida)
+$ dvidvi -p 1,3,5 archivo.dvi archivo_seleccionado.dvi (selecciona las páginas 1, 3 y 5 del archivo de entrada y el archivo de salida que contiene solo las páginas seleccionadas)
+$ dvidvi -s 2 archivo.dvi archivo_desplazado.dvi (desplazar las páginas 2 posiciones hacia adelante del archivo de entrada y archivo de salida con las páginas desplazadas)
+
+
+dvips
+Convierte archivos de entrada DVI [LaTeX y TeX] a PostScript.
+$ dvips -t a4 -f archivo.dvi | lpr (imprimir un archivo en a4. Otros tipos: letter, legal, ledger, a3...)
+$ dvips -l =9 archivo.dvi (finalizará con la novena página del documento, sin importar cómo estén numeradas las páginas en realidad)
+$ dvips ejemplo.dvi (generará un archivo ejemplo.ps)
+$ dvips -s6 -o ejemplo.pdf ejemplo.dvi (genera un archivo PDF suprimiendo la página 6)
+$ dvips -Ppdf -G0 ejemplo.dvi (genera un archivo PDF y elimina las páginas en blanco)
+
+
 dvtm
 Terminal multiplexor
 $ dvtm (Lanza la aplicacion)
@@ -13054,6 +13077,22 @@ Algunos atajos
 	Ctrl+g g (Cambiiar a diseño de cuadrícula)
 	Ctrl+g l (Redibujar toda la pantalla)
 	Ctrl+g q (Salir)
+
+
+dwarf2sources
+Utilidad para listar los archivos fuente de un binario determinado. dwarf2sources es una herramienta de línea de comandos para listar los archivos fuente que se usaron para crear un binario determinado y volcarlo en formato JSON. Los archivos de entrada no deben eliminarse y deben contener información de depuración en formato DWARF.
+$ dwarf2sources -o salida archivo_binario
+Nota.- Si el binario no contiene información DWARF, por ejemplo, si fue compilado sin -g o fue "strippeado" con strip, dwarf2sources no podrá listar los archivos fuente.
+
+
+dwarfdump
+Utilidad para volcar información de depuración de DWARF [Debugging With Attributed Record Formats] de objetos ELF [Executable and Linkable Format]. DWARF es un formato de datos utilizado para almacenar información de depuración en archivos binarios, como símbolos, tipos de datos, ubicaciones de variables, etc. También se puede utilizar para verificar y validar secciones de DWARF manipuladas.
+$ dwarfdump -a programa (mostrar toda la información de depuración DWARF de un archivo ELF)
+$ dwarfdump -c programa (mostrar la información de las unidades de compilación)
+$ dwarfdump -l programa (mostrar la tabla de líneas [line table]. La tabla de líneas asocia las direcciones de memoria con las líneas de código fuente)
+$ dwarfdump -p programa (mostrar la tabla de nombres públicos [public names]. La tabla de nombres públicos contiene los nombres de funciones y variables globales que están disponibles para ser referenciadas desde otros archivos objeto)
+$ dwarfdump -r programa (mostrar la información de rangos [ranges]. Los rangos indican las direcciones de memoria donde se encuentran las diferentes partes del código, como funciones o bloques)
+$ dwarfdump -v programa (verificar y validar la integridad de las secciones DWARF en el archivo ELF)
 
 
 dwb
