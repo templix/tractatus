@@ -13119,6 +13119,16 @@ Algunos atajos:
 	ctrl q (Para salir del navegador)
 
 
+dwdiff
+Programa diff [ver] que opera a nivel de palabra en lugar de a nivel de línea.
+$ dwiff archivo1.txt archivo2.txt (mostrará las diferencias entre los dos archivos a nivel de palabra)
+$ dwiff archivo1.txt +5 archivo2.txt (comenzará la comparación desde la quinta línea de ambos archivos)
+$ dwiff archivo1.txt archivo2.txt --ignore-case (ignora las diferencias en mayúsculas y minúsculas al hacer la comparación)
+$ dwiff archivo1.txt archivo2.txt --show-added-only (mostrar solo las líneas añadidas o eliminadas)
+$ dwiff archivo1.txt archivo2.txt archivo3.txt (comparando varios archivos)
+$ dwiff archivo1.txt archivo2.txt --context=3 --side-by-side (muestra las diferencias contexto y en formato lado a lado)
+
+
 dwww
 Visualizar documentación (páginas man, info, README...) en el navegador. El archivo de configuración en /etc/dwww/dwww.conf. Se accede con http://localhost/dwww/index.html
 
