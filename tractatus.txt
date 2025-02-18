@@ -12900,6 +12900,16 @@ Formatear dvd +- Rw
 $ dvd+rw-format -force /dev/cdrom
 
 
+dvd-rw-tools
+Herramientas que permiten grabar imágenes de DVD creadas por dvdauthor o genisoimage en discos DVD+R, DVD+RW, DVD-R y DVD-RW. Este paquete contiene dvd+rw-mediainfo [para brindar detalles sobre los discos DVD], Depende del paquete growisofs [ver]. Incluye las herramientas btcflash, dvd+rw-booktype, dvd+rw-mediainfo y dvd-ram-control
+$ btcflash -v (muestra la versión actual del firmware de la unidad.)
+$ btcflash -u firmware.bin (actualiza el firmware de la unidad con el archivo firmware.bin. Se debe tener cuidado al actualizar el firmware, ya que un error podría dejar inutilizable la unidad)
+$ dvd+rw-booktype -dvd-rom /dev/sr0 (cambia el "book type" de un DVD+R a "DVD-ROM")
+$ dvd+rw-mediainfo /dev/sr0 (muestra información sobre el disco insertado en /dev/sr0, incluyendo el estado de grabación, la capacidad y los espacios usados/libres)
+$ dvd-ram-control --status /dev/sr0 (muestra el estado actual del disco DVD-RAM.)
+$ dvd-ram-control --disable-defect /dev/sr0 (desactiva la gestión de defectos en un disco DVD-RAM)
+
+
 dvd-slideshow
 conjunto de herramientas para crear presentaciones de diapositivas en DVD con menús. DVD Slideshow consiste en un conjunto de herramientas que permiten crear videos estilo presentaciones de diapositivas a partir de una colección de imágenes. Este paquete proporciona los siguientes programas: dir2slideshow, dvd-slideshow, dvd-menu, gallery1-to-slideshow y jigl2slideshow.
 El archvio de configuración, básico y basado en la página man podria ser:
@@ -12987,14 +12997,14 @@ $ dvdbackup -i /dev/cdrom  (/información del dvd)
 $ dvdbackup -M -i/dev/cdrom -o/home/usuario/carpeta_destino (lanzar la aplicación)
 
 
-dvd-rw-tools
-Herramientas que permiten grabar imágenes de DVD creadas por dvdauthor o genisoimage en discos DVD+R, DVD+RW, DVD-R y DVD-RW. Este paquete contiene dvd+rw-mediainfo [para brindar detalles sobre los discos DVD], Depende del paquete growisofs [ver]. Incluye las herramientas btcflash, dvd+rw-booktype, dvd+rw-mediainfo y dvd-ram-control
-$ btcflash -v (muestra la versión actual del firmware de la unidad.)
-$ btcflash -u firmware.bin (actualiza el firmware de la unidad con el archivo firmware.bin. Se debe tener cuidado al actualizar el firmware, ya que un error podría dejar inutilizable la unidad)
-$ dvd+rw-booktype -dvd-rom /dev/sr0 (cambia el "book type" de un DVD+R a "DVD-ROM")
-$ dvd+rw-mediainfo /dev/sr0 (muestra información sobre el disco insertado en /dev/sr0, incluyendo el estado de grabación, la capacidad y los espacios usados/libres)
-$ dvd-ram-control --status /dev/sr0 (muestra el estado actual del disco DVD-RAM.)
-$ dvd-ram-control --disable-defect /dev/sr0 (desactiva la gestión de defectos en un disco DVD-RAM)
+dvdisaster
+Herramienta útil para proteger los datos en CD y DVD contra la pérdida debido a rayaduras, envejecimiento o deterioro del medio. Lo hace generando datos de corrección de errores adicionales que pueden utilizarse para recuperar sectores ilegibles en el futuro.
+$ dvdisaster -i /dev/sr0 -o backup.ecc -mRS01 ((unidad donde está el disco, guarda el archivo de corrección de errores y  especifica modo de corrección de errores externo)
+Nota.- Modo "RS01" Genera un archivo de corrección de errores externo sin modificar el disco original el Modo "RS02" graba los datos de corrección de errores en el mismo disco, requiere espacio libre y el Modo "RS03" crea una imagen de disco con corrección de errores integrada.
+$ dvdisaster -i /dev/sr0 -c backup.ecc -r (intentar recuperar utilizando el archivo de corrección generado anteriormente e intentando reconstruir los datos dañados)
+$ dvdisaster -i disco_original.iso -o disco_protegido.iso -mRS03 (generar una imagen de disco con protección integrada)
+$ dvdisaster -i /dev/sr0 -t (comprobar si un disco tiene sectores dañados)
+$ dvdisaster (lanza la interfaz gráfica)
 
 
 dvgrab
