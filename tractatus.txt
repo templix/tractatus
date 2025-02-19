@@ -13129,6 +13129,16 @@ $ dwiff archivo1.txt archivo2.txt archivo3.txt (comparando varios archivos)
 $ dwiff archivo1.txt archivo2.txt --context=3 --side-by-side (muestra las diferencias contexto y en formato lado a lado)
 
 
+dwgsim
+Simulación de lecturas de secuenciación de ADN. El comando dwgsim es una herramienta para generar lecturas de secuenciación corta a partir de una secuencia de referencia en formato FASTA [formato de archivo, utilizado para representar secuencias de nucleótidos o de aminoácidos]. Está diseñado para simular datos de secuenciación moderna como los obtenidos en plataformas como Illumina y Roche 454, permitiendo un modelado realista de errores de secuenciación.
+$ dwgsim -N 1000000 -1 100 -2 100 referencia.fasta salida (1 millón de lecturas de pares de extremos con una longitud de 100 bases cada una de las dos lecturas, archivo referencia ADN en formato FASTA y prefijo para la salida. Generará archivos como salida.bwa.read1.fastq y salida.bwa.read2.fastq con las lecturas simuladas)
+$ dwgsim -N 100000 -e 0.02 referencia.fasta salida_error (establece la tasa de error en 2% y genera 100,000 lecturas)
+$ dwgsim -N 500000 -C 15 referencia.fasta salida_calidad (genera lecturas con un perfil de calidad más realista)
+$ dwgsim -N 200000 -r 0.001 -R 0.001 referencia.fasta salida_indels (tasa de inserción del 0.1% y tasa de deleción del 0.1%)
+$ dwgsim -N 0 -c 30 referencia.fasta salida_cobertura (cobertura de 30X del genoma y calcula automáticamente el número de lecturas necesarias para alcanzar la cobertura)
+$ dwgsim -N 500000 -d 300 -s 50 -y 0.005 referencia.fasta salida_mutaciones (longitud del fragmento de ADN de 300 bases, desviación estándar de la longitud del fragmento y 0.5% de tasa de mutación)
+
+
 dwww
 Visualizar documentación (páginas man, info, README...) en el navegador. El archivo de configuración en /etc/dwww/dwww.conf. Se accede con http://localhost/dwww/index.html
 
