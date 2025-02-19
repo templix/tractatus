@@ -13241,6 +13241,15 @@ $ eancheck 4015 (verificar código PLU. 4 dígitos)
 $ eancheck 042526114147 (verificar un código UPC-A. 12 dígitos)
 
 
+eapoltest
+[Extensible Authentication Protocol Over LAN]. Permite probar los métodos de autenticación EAP sin utilizar una conexión 802.1X completa. Se utiliza con frecuencia para probar la configuración EAP de los sistemas RADIUS.
+# eapoltest --request=2 --eap=PEAP --identity=user --password= --radius-server=192.168.1.100:1812 (prueba la autenticación PEAP contra un servidor RADIUS en 192.168.1.100:1812 usando las credenciales proporcionadas)
+# eapoltest --request=1 --eap=TLS,PEAP,POTP --identity=user --password= (prueba simultáneamente TLS, PEAP y POTP como métodos de autenticación EAP)
+# eapoltest --request=0 --eap=TLS (verifica la configuración local de TLS sin intentar conect a ningún servidor RADIUS)
+# eapoltest --request=2 --eap=TLS --identity=user --password= --ca-cert=/path/to/ca.crt (especificando un certificado CA personalizado para la prueba)
+# eapoltest --request=2 --eap=PEAP --identity=user --password= --radius-server=192.168.1.100:1812 --supplicant-identifier="MyClient" (incluye opciones adicionales como el identificador del cliente)
+
+
 ebook-
 Convertir/visualizar a formato ebook.
 $ ebook-convert texto.pdf texto.epub
