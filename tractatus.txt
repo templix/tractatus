@@ -13200,6 +13200,21 @@ e2label
 # e2label /dev/sda5  (dirá si la partición sdb5 tiene nombre de etiqueta)
 
 
+e2tools
+Conjunto de utilidades para leer, escribir y manipular archivos en un sistema de archivos ext2/ext3. El propósito de estas utilidades es manipular sistemas de archivos ext2/ext3 desde el espacio de usuario sin necesidad de montarlos, de modo que puedan ser utilizados directamente por usuarios normales. Las utilidades incluidas son e2cp, e2mv, e2rm, e2mkdir, e2ln, e2ls y e2tail.
+$ e2cp imagen_disco.ext3:/directorio/destino/archivo.txt /ruta/local/archivo.txt (copiar un archivo desde el sistema de archivos local a un sistema de archivos ext3 en una imagen de disco)
+$ e2cp /ruta/local/archivo.txt imagen_disco.ext3:/directorio/destino/archivo.txt (copiar un archivo desde el sistema de archivos ext3 a un sistema de archivos local)
+$ e2mv imagen_disco.ext3:/directorio/origen/archivo.txt imagen_disco.ext3:/directorio/destino/archivo.txt (mover un archivo dentro del sistema de archivos ext3)
+$ e2rm imagen_disco.ext3:/directorio/archivo.txt (eliminar un archivo en el sistema de archivos ext3)
+$ e2rm -r imagen_disco.ext3:/directorio/ (eliminar un directorio y su contenido)
+$ e2mkdir imagen_disco.ext3:/directorio/nuevo_directorio (crear un nuevo directorio en el sistema de archivos ext3)
+$ e2ln -s imagen_disco.ext3:/directorio/archivo.txt imagen_disco.ext3:/directorio/enlace.txt (crear un enlace simbólico)
+$ e2ln imagen_disco.ext3:/directorio/archivo.txt imagen_disco.ext3:/directorio/enlace_duro.txt (crear un enlace duro)
+$ e2ls imagen_disco.ext3:/directorio/ (listar el contenido de un directorio en el sistema de archivos ext3)
+$ e2tail imagen_disco.ext3:/directorio/archivo.txt (mostrar las últimas 10 líneas de un archivo en el sistema de archivos ext3)
+Nota.- Estas herramientas se pueden usar directamente en imágenes de disco .img, .ext3, etc. o en dispositivos de bloque /dev/sdX.
+
+
 e2undo
 Cuando la aplicación e2fsprogs falla, e2undo restablece el sistema de ficheros  ext2/ext3/ext4 anterior del dispositivo.
 
