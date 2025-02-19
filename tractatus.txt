@@ -13234,6 +13234,13 @@ e4defrag
 # e4defrag /dev/sda2
 
 
+eancheck
+Programa para verificar y validar dígitos de control de códigos de barras EAN [European Article Numbers], PLU [Price Look-Up] y UPC [Universal Product Codes]. Toma un código de barras como entrada y verifica si el dígito de control []el último dígito del código] es correcto. El dígito de control se calcula utilizando un algoritmo específico que depende del tipo de código de barras. Si el dígito de control es correcto, el comando devuelve un mensaje indicando que el código es válido. Si no lo es, indica que el código es inválido.
+$ eancheck 9789877671735 (verificar código EAN-13. 13 dígitos)
+$ eancheck 4015 (verificar código PLU. 4 dígitos)
+$ eancheck 042526114147 (verificar un código UPC-A. 12 dígitos)
+
+
 ebook-
 Convertir/visualizar a formato ebook.
 $ ebook-convert texto.pdf texto.epub
