@@ -13164,6 +13164,11 @@ $ dzgrep goodies debian-goodies
 $ dzgrep dpigs debian-goodies
 
 
+e-wrapper
+Todos o casi todos los editores de Unix admiten la sintaxis de "editor +42 file", para abrir el archivo dado y comenzar con el cursor en la línea 42. Lamentablemente, la sintaxis que utilizan algunos programas que generan dichos datos es diferente y utilizan diferentes sintaxis para especificar la línea inicial donde se desea posicionar el cursor. Este contenedor reconocerá dichas referencias y llamará a su $EDITOR utilizando la notación +.
+$ e archivo.txt:10 (si nuestro editor no usa la sintaxis +n archivo, abrirá archivo.txt en la linea 10 invocano al editor adecuado)
+
+
 e2fsck
 Optimizar y reparar particones ext2 y ext3. Preciso desmontarla.
 # e2fsck -b 8193 /dev/hda2  ("-b 8193"que use la informacion de la primera copia del super bloque para reparar los daños.)
@@ -13173,6 +13178,14 @@ Nota.- "-c" buscar y marcar los bloques dañados, "-D" Optimiza, "-f" fuerza, "-
 
 e2fsprogs
 Utilidades para los sistemas de ficheros ext2 y ext3. Incluye los ejecutables: badblocks [buscar bloques dañados en un dispositivo ], blkid [mostrar atributos de dispositivos de bloque], compile_et [compilador de tablas de error], debugfs [depurador de sistemas de ficheros], dumpe2fs [información del superbloque y de los grupos de bloques], e2fsck [chequear y reparar sistemas de ficheros], e2image [salvar información de un sistema de ficheros], e2label [muestra o cambia la etiqueta de un sistema de ficheros], findfs [encuentra un sistema de ficheros por su etiqueta o UUID], fsck, fsck.ext2 y fsck.ext3, [chequear y reparar un sistema de ficheros], logsave [salva la salida de un comando en un fichero de registro], mk_cmds [convierte tabla de nombres de comandos y mensajes de ayuda en un fichero fuente], mke2fs, mkfs.ext2 y mkfs.ext3 [crear sistemas de ficheros ext2 y ext3 en un dispositivo], mklost+found [crear un directorio lost+found en un sistema de ficheros], resize2fs [redimensionar sistemas de ficheros], lsattr [muestra los atributos de un fichero en un sistema de ficheros], chattr [cambia los atributos de los ficheros], tune2fs [ajusta los parámetros de un sistema de ficheros] y uuidgen [crea un nuevo identificador UUID].
+
+
+e2guardian
+filtra el contenido de las páginas web basándose en muchos métodos: lista de sitios prohibidos, coincidencia de frases, filtrado de PICS [Platform for Internet Content Selection] y filtrado de URL para controlar el acceso a ciertos contenidos. Proporciona capacidades de escaneo de virus en tiempo real para el acceso al contenido. La configuración predeterminada es muy elemental, pero permite controlar lo que se desea bloquear. Requiere squid u otro servidor proxy de almacenamiento en caché similar en la red local.
+$ systemctl status e2guardian (verificar si está activo)
+Si tenemos un listado de URLs de sitios prohibidos, se debe añadir em eñ archivo de configuración
+# nano /etc/e2guardian/e2guardian.conf
+blacklist_file: "/etc/e2guardian/blacklist.txt"
 
 
 e2image
@@ -23676,6 +23689,7 @@ nano
 editor de texto.
 $ nano -wx texto (Abrir "texto" inhabilitando "final de linea" [wrap] y la ayuda [x])
 Nota.- "wrap" es la cantidad de caracteres de una linea y puede especificarse en los parámetros de nano.
+$ nano +10 archivo (abrir archivo y con el cursor en la linea 10)
 Archivo de configuración. Crear:
 $ touch .nanorc
 Algunos parámetros a incluir:
