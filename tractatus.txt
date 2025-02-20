@@ -5895,6 +5895,24 @@ Herramienta para manipular la tabla de particiones GUID [GPT]
 # cgpt list-by-number (mostrará las particiones ordenadas por su número GPT)
 
 
+cgroup
+Es un mecanismo para organizar los procesos jerárquicamente y distribuir los recursos del sistema a lo largo de la jerarquía de una manera controlada y configurable. cgroup se compone principalmente de dos partes: el núcleo y los controladores. El núcleo de cgroup es el principal responsable de organizar los procesos jerárquicamente. Un controlador de cgroup suele ser responsable de distribuir un tipo específico de recurso del sistema a lo largo de la jerarquía, aunque existen controladores de utilidad que cumplen otros propósitos además de la distribución de recursos. A partir de la versión 4.20 del kernel existe un sistema llamado PSI [Pressure Stall Information], que proporciona información sobre cuánto se están estancando sus procesos en subsistemas seleccionados. Esta información se almacena en procfs [/proc/pressure/...], cgroupsv2 y se expresa en el siguiente formato:
+      some --  significa que algunos procesos están estancados
+      full --  todos los procesos (no inactivos) están estancados
+      avgX --  donde X significa segundos y se expresa como porcentaje del tiempo total estancado en uso
+Distintas consultas que pueden realizarse:
+$ cat /sys/fs/cgroup/cgroup.pressure
+$ cat /sys/fs/cgroup/cpu.pressure
+$ cat /sys/fs/cgroup/cpu.stat
+$ cat /sys/fs/cgroup/memory.stat
+$ cat /sys/fs/cgroup/memory.pressure
+# cat /proc/cgroups
+Un clásico ejemplo:
+$ cat /sys/fs/cgroup/system.slice/cpu.pressure
+      some avg10=0.00 avg60=0.00 avg300=0.01 total=220679555
+      full avg10=0.00 avg60=0.00 avg300=0.00 total=128239145
+
+
 cgroup-tools
 Conjunto de herramientas para gestionar y trabajar con grupos de control [cgroups+. Los cgroups son una característica del kernel de Linux que permite agrupar procesos y asignarles recursos del sistema como CPU, memoria, ancho de banda de red, etc. Incluye las herramientas cgclassify [Clasifica procesos dentro de un cgroup existente], cgcreate [Crea nuevos cgroups], cgdelete [Elimina cgroups existentes], cgexec [Ejecuta un comando dentro de un cgroup], cgget [Obtiene información sobre un cgroup], cgset [Configura parámetros de un cgroup], cgsnapshot, lscgroup, lssubsys, cgclear, cgconfigparser y cgrulesengd.
 # cgcreate -g cpu,memory:/example (crear un cgroup llamado example que gestione la CPU [/sys/fs/cgroup/cpu/example] y la memoria [/sys/fs/cgroup/memory/example])
@@ -13248,6 +13266,14 @@ eapoltest
 # eapoltest --request=0 --eap=TLS (verifica la configuración local de TLS sin intentar conect a ningún servidor RADIUS)
 # eapoltest --request=2 --eap=TLS --identity=user --password= --ca-cert=/path/to/ca.crt (especificando un certificado CA personalizado para la prueba)
 # eapoltest --request=2 --eap=PEAP --identity=user --password= --radius-server=192.168.1.100:1812 --supplicant-identifier="MyClient" (incluye opciones adicionales como el identificador del cliente)
+
+
+earlyoom
+[Early OOM]. Es un demonio que supervisa el uso de memoria y swap en el sistema y, si detecta que la memoria libre está por debajo de un umbral crítico, mata automáticamente los procesos con mayor consumo de memoria para evitar que el sistema se congele. Al eliminar OOM [Out-Of-Memory] evita que el sistema entre en un estado de inactividad causado por la swap, lo que es más probable que ocurra cuando hay un intercambio grande y la memoria es escasa.
+# earlyoom (inicia earlyoom con sus valores predeterminados)
+$ systemctl status earlyoom (ver si esta activo)
+# systemctl enable --now earlyoom (activará earlyoom en cada inicio del sistema en segundo plano)
+# earlyoom -m 5 -s 10 -r 60 (mata procesos cuando la memoria RAM libre cae por debajo del 5%, mata procesos cuando la swap libre es inferior al 10% e imprime estadísticas cada 60 segundos)
 
 
 ebook-
@@ -25300,6 +25326,19 @@ $ only -w /palabra/0:5 text.txt (muestra "palabra" y las siguientes 5 palabras)
 $ only -w 2/palabra/0:4 text.txt (muestra la 2ª vez que salie "palabra" y las siguientes 4 palabras)
 $ only -l 3/palabra text.txt (muestra la 3ª linea donde sale "palabra")
 $ only -l 3/palabra/0:2 text.txt (muestra la 3ª vez que sale "palabra" y las siguientes 2 lineas)
+
+
+oomd
+[Out Of Memory Daemon]. Demonio avanzado que utiliza métricas del kernel para detectar la presión de memoria antes de que el sistema llegue a un punto crítico y elimina procesos de acuerdo con reglas definidas en /etc/oomd/oomd.conf. Aprovecha PSI [Pressure Stall Information] y cgroupv2 [control group] [ver] para supervisar el sistema de forma integral, luego, toma medidas correctivas antes de que se produzca una falta de memoria en el espacio del núcleo eliminando los procesos infractores. Realiza un control más avanzado que la aplicación earlyoom [ver] y está integrado con systemd.
+$ systemctl status systemd-oomd (virificar si está activo)
+# systemctl enable systemd-oomd (activarlo en cada inicio del sistema)
+Un ejemplo de configuración podría ser:
+# nano /etc/systemd/oomd.conf
+       [OOM]
+       SwapUsedLimit=90%
+       DefaultMemoryPressureLimit=80%
+Significa que oomd matará procesos si la swap está utilizada en un 90% o más y si la presión de memoria del sistema alcanza el 80%. Toda modificación del archivo de configuración inplica reiniciar el servicio:
+# systemctl restart systemd-oomd
 
 
 oowrite
