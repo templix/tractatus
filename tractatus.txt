@@ -13333,6 +13333,11 @@ $ eg pull (sincroniza el repositorio local con el remoto)
 $ eg push (sube los cambios al servidor remoto)
 
 
+eatmydata
+[Cómete mis datos]. Herramienta diseñada para desactivar las llamadas al sistema fsync, sync, y otras operaciones similares que garantizan que los datos escritos en el disco sean realmente guardados de manera persistente. Esto puede ser útil en situaciones donde se prioriza el rendimiento sobre la integridad de los datos, como en entornos de pruebas o desarrollo, donde la pérdida de datos no es crítica. Cuando se ejecuta un comando con eatmydata, este intercepta las llamadas al sistema que normalmente aseguran que los datos se escriban en el disco [como fsync y sync], y las ignora lo que hace que las operaciones de escritura parezcan completarse más rápido, ya que no se espera a que los datos se escriban físicamente en el disco.
+$ eatmydata apt-get install paquete (hará que la instalación sea más rápida, ya que no se esperará a que los datos se escriban en el disco antes de continuar)
+
+
 ebook-
 Convertir/visualizar a formato ebook.
 $ ebook-convert texto.pdf texto.epub
