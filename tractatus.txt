@@ -13276,6 +13276,63 @@ $ systemctl status earlyoom (ver si esta activo)
 # earlyoom -m 5 -s 10 -r 60 (mata procesos cuando la memoria RAM libre cae por debajo del 5%, mata procesos cuando la swap libre es inferior al 10% e imprime estadísticas cada 60 segundos)
 
 
+easygen
+Herramienta que permite generar texto, HTML o código a partir de plantillas y datos de entrada. Es una herramienta que puede ser utilizada para una variedad de propósitos, como la generación de configuraciones, documentos, páginas web, o incluso código fuente.
+Supongamos una plantilla llamada con el siguiente contenido:
+$ cat saludo.tmpl
+       Hola, {{.Nombre}}!
+Y un archivo de datos con el siguiente contenido:
+$ cat datos.json
+       {
+           "Nombre": "Juan"
+       }
+$ easygen saludo.tmpl datos.json (generar el texto)
+       Hola, Juan! (el resultado)
+Otro ejemplo con una plantilla HTML:
+$ cat pagina.tmpl
+      <!DOCTYPE html>
+      <html>
+      <head>
+          <title>{{.Titulo}}</title>
+      </head>
+      <body>
+          <h1>{{.Titulo}}</h1>
+          <p>{{.Contenido}}</p>
+      </body>
+      </html>
+Y un archivo de datos
+$ cat datos_html.json
+      {
+          "Titulo": "Mi Página",
+          "Contenido": "Bienvenido a mi página web."
+      }
+$ easygen pagina.tmpl datos_html.json (generar el HTML)
+El resultado será:
+       <!DOCTYPE html>
+       <html>
+       <head>
+           <title>Mi Página</title>
+       </head>
+       <body>
+           <h1>Mi Página</h1>
+           <p>Bienvenido a mi página web.</p>
+       </body>
+       </html>
+
+
+easygit
+Script contenedor de un solo archivo para Git, diseñado para que Git sea fácil de aprender y usar, con unas características básicas como que se centra en la documentación y los ejemplos, elimina muchas violaciones del principio de la mínima sorpresa y proporciona subcomandos que son una extensión natural de las capacidades que los usuarios conocen de cvs/svn.
+$ eg init nombre_del_repositorio (inicializar un nuevo repositorio)
+$ eg clone https://url-del-repositorio.git (crea una copia local del repositorio remoto)
+$ eg status (muestra información sobre los cambios no confirmados, archivos sin seguimiento y ramas actuales)
+$ eg add archivo1 archivo2 (agregar archivos específicos al área de preparación)
+$ eg add . (agregar todos los archivos modificados)
+$ eg commit -m "Mensaje de confirmación" (guarda los cambios en el historial del repositorio con el mensaje proporcionado)
+$ eg log (muestra una lista de confirmaciones anteriores con detalles como el autor, la fecha y el mensaje de confirmación)
+$ eg pull (sincroniza el repositorio local con el remoto)
+$ eg push (sube los cambios al servidor remoto)
+
+
 ebook-
 Convertir/visualizar a formato ebook.
 $ ebook-convert texto.pdf texto.epub
