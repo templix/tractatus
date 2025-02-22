@@ -13356,6 +13356,12 @@ $ ebook-speaker libro.epub (después de aceptar algunas opciones empieza a leer 
 $ ebook-speaker -d 0:pulseaudio libro.epub (especificando salida)
 
 
+ebook2cw
+Programa que convierte un archivo de texto simple [ISO 8859-1 o UTF-8] en formato MP3 o OGG que contienen el texto en código Morse.
+$ ebook2cw -o salida.mp3 libro.txt (convierte el contenido de libro.txt en un archivo de audio llamado salida.mp3 con la velocidad y frecuencia predeterminadas)
+$ ebook2cw -w 20 -f 800 -o salida.mp3 libro.txt (especificar la velocidad en palabras por minuto y la frecuencia del tono)
+
+
 echo
 Muestra o incluye algo en un fichero.
 $ echo $$   (muestra el PID de la consola)
