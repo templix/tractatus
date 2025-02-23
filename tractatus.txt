@@ -4839,7 +4839,7 @@ $ calendar
 
 
 calibre
-Administración de bibliotecas, conversión de formatos, conversión de fuentes de noticias a libros electrónicos, visor y editor de libros electrónicos y funciones de sincronización de lectores de libros electrónicos. Calibre es principalmente un programa de catalogación de libros electrónicos. Incluye las herramientas calibre-complete [No invocar manualmente.], calibre-customize, calibre-debug [algunas opciones que no están enla GUI],  calibre-parallel [no invocar manualmente], calibre-server [niciar el servidor de contenido de calibre], calibre-smtp [correo electrónico mediante el protocolo SMTP.], calibredb [listado de la base datos de libros entrados], ebook-convert, ebook-device, ebook-edit, ebook-meta [Leer y escribir metadatos desde y hacia archivos de libros electrónicos], ebook-polish, ebook-viewer, fetch-ebook-metadata, lrf2lrs, lrfviewer, lrs2lrf, markdown-calibre y web2disk.
+Administración de bibliotecas, conversión de formatos, conversión de fuentes de noticias a libros electrónicos, visor y editor de libros electrónicos y funciones de sincronización de lectores de libros electrónicos. Calibre es principalmente un programa de catalogación de libros electrónicos. Incluye las herramientas calibre-complete [No invocar manualmente.], calibre-customize, calibre-debug [algunas opciones que no están enla GUI],  calibre-parallel [no invocar manualmente], calibre-server [niciar el servidor de contenido de calibre], calibre-smtp [correo electrónico mediante el protocolo SMTP.], calibredb [listado de la base datos de libros entrados], ebook-convert [convierte formatos], ebook-device [Administrar dispositivo de libros electrónicos], ebook-edit [Editar libro], ebook-meta [Leer y escribir metadatos desde y hacia archivos de libros electrónicos], ebook-polish [pulir un libro realizado por un usuario], ebook-viewer, fetch-ebook-metadata [ver metadatos de libros], lrf2lrs [convertir un LRF en un LRS], lrfviewer [ver un LRF], lrs2lrf [convertir un LRS en un LRF], markdown-calibre [convertir un markdown a HTML] y web2disk.
 $ calibre-customize -l (listado de plugins)
 $ calibre-customize -a plugin.zip (añadir un plugin. Tiene que especificarse la ruta al .zip)
 $ calibre-debug --diff arcchivo1 archivo2 (compara diferencias entre los dos ficheros)
@@ -4848,6 +4848,7 @@ $ calibredb list (llistado libros)
 $ calibredb add libro (añadir al listado)
 $ ebook-meta libro.epub (verificar si un archivo EPUB es válido)
 $ ebook-meta -a Juan Perez & Manuel Gomez -c "Libro de la naturaleza" -d 22/2/2025 -l es -t "Naturaleza" archivo.epub (escribe los autores, un comentario, fecha de publicación, lenguaje y título)
+$ ebook-viewer --continue libro (continuar leyendo el último libro abierto)
 
 
 calife
@@ -13380,6 +13381,19 @@ $ ebook2epub libro.mobi (generará un archivo libro.epub en el mismo directorio)
 $ ebook2epub documento.pdf (la conversión desde PDF puede no ser perfecta, ya que los archivos PDF no siempre están estructurados como texto fluido)
 $ ebook2epub *.mobi *.fb2 *.pdf (generará un archivo EPUB para cada archivo de entrada)
 $ ebook-meta libro.epub (verificar si el archivo EPUB generado es válido. Este comando pertenece a la aplicación "calibre")
+
+
+ebtables
+Herramienta que permite configurar reglas de filtrado de tramas Ethernet en el nivel de la capa de enlace de datos. Es útil cuando se trabaja con bridges en Linux, ya que permite controlar el tráfico antes de que llegue a las capas superiores. Es análogo a iptables, pero opera en la capa MAC en lugar de en la capa IP.
+# ebtables -A FORWARD -p arp --arp-opcode Request -j DROP (bloquea todas las solicitudes ARP que pasan a través del bridge)
+# ebtables -A FORWARD -s 00:11:22:33:44:55 -j DROP (impide que el tráfico de la dirección MAC 00:11:22:33:44:55 atraviese el bridge)
+# ebtables -t nat -A PREROUTING -d 00:11:22:33:44:55 -j dnat --to-destination 66:77:88:99:AA:BB (cambia la dirección MAC de destino en las tramas entrantes)
+# ebtables -A FORWARD -p ! ipv4 -j DROP (solo permite el tráfico IPv4 en la red)
+# ebtables -A FORWARD -p ipv4 --ip-src 192.168.1.100 -j DROP (bloquea el tráfico proveniente de la IP 192.168.1.100)
+# ebtables -L (ver las reglas activas en ebtables)
+# ebtables -F (eliminar todas las reglas)
+# ebtables-save > reglas.ebtables (guardar las reglas)
+# ebtables-restore < reglas.ebtables (restaurarlas)
 
 
 echo
