@@ -13350,6 +13350,12 @@ $ ebook-convert texto.pdf texto.epub
 $ ebook-viewer texto.epub (Visualiza con la apliciación calibre)
 
 
+ebook-meta
+[calibre]. Leer y escribir metadatos desde y hacia archivos de libros electrónicos. Formatos admitidos para leer metadatos: azw, azw1, azw3, azw4, cb7, cbc, cbr, cbz, chm, docx, epub, fb2, fbz, html, htmlz, imp, lit, lrf, lrx, mobi, odt, oebzip, opf, pdb, pdf, pml, pmlz, pobi, prc, rar, rb, rtf, snb, tpz, txt, txtz, updb, zip. Formatos admitidos para escribir metadatos: azw, azw1, azw3, azw4, docx, epub, fb2, fbz, htmlz, lrf, mobi, odt, pdb, pdf, prc, rtf, tpz, txtz. Los distintos tipos de archivos admiten distintos tipos de metadatos. Si se intenta configurar algunos metadatos en un tipo de archivo que no los admite, los metadatos se ignorarán de forma silenciosa. Siempre que se pase argumentos a ebook-meta que contengan espacios, han de encerrarse entre comillas.
+$ ebook-meta libro.epub (verificar si un archivo EPUB es válido)
+$ ebook-meta -a Juan Perez & Manuel Gomez -c "Libro de la naturaleza" -d 22/2/2025 -l es -t "Naturaleza" archivo.epub (escribe los autores, un comentario, fecha de publicación, lenguaje y título)
+
+
 ebook-speaker
 Lector de libros electrónicos [EPUB, PDF, MOBI...] que lee en voz alta con una voz sintética. Tiene una interfaz de usuario sencilla adecuada para terminales Braille.
 $ ebook-speaker libro.epub (después de aceptar algunas opciones empieza a leer el libre)
@@ -13360,6 +13366,14 @@ ebook2cw
 Programa que convierte un archivo de texto simple [ISO 8859-1 o UTF-8] en formato MP3 o OGG que contienen el texto en código Morse.
 $ ebook2cw -o salida.mp3 libro.txt (convierte el contenido de libro.txt en un archivo de audio llamado salida.mp3 con la velocidad y frecuencia predeterminadas)
 $ ebook2cw -w 20 -f 800 -o salida.mp3 libro.txt (especificar la velocidad en palabras por minuto y la frecuencia del tono)
+
+
+ebook2epub
+Convertidor de otros formatos de libros electrónicos a EPUB.
+$ ebook2epub libro.mobi (generará un archivo libro.epub en el mismo directorio)
+$ ebook2epub documento.pdf (la conversión desde PDF puede no ser perfecta, ya que los archivos PDF no siempre están estructurados como texto fluido)
+$ ebook2epub *.mobi *.fb2 *.pdf (generará un archivo EPUB para cada archivo de entrada)
+$ ebook-meta libro.epub (verificar si el archivo EPUB generado es válido. Este comando pertenece a la aplicación "calibre")
 
 
 echo
