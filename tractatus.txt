@@ -13505,13 +13505,10 @@ $ ed2k-hash documento.pdf > enlace_ed2k.txt (guardar el enlace ed2k generado en 
 
 edac-utils
 [Error Detection and Correction - detección y corrección de errores]. Conjunto de módulos del núcleo de Linux para monitorear y gestionar errores de hardware en sistemas Linux. Actualmente, su principal objetivo es el manejo de errores de memoria ECC [Error Correction Code - código de corrección de errores]. Sin embargo, también detecta e informa errores de paridad de bus PCI.
-$ edac-util --print-selftest (verificar el estado general de EDAC)
-$ edac-util --list-devices (mostrar información detallada sobre dispositivos EDAC)
-$ edac-util --selftest (ejecutar un test de diagnóstico completo)
-$ edac-util --device=nombre_del_dispositivo (verificar el estado de un dispositivo específico)
-$ edac-util --print-selftest (ver el estado actual de todos los dispositivos EDAC)
-$ edac-util --device=pci_0000_00_01.0 (obtener más detalles sobre un dispositivo específico)
-$ edac-util --print-selftest -v (ver el historial de errores)
+# dmesg | grep -i edac (comprobar si está soportado)
+$ edac-util --report=simple (verificar el estado general de EDAC)
+$ edac-util --report=full (mostrar información detallada sobre dispositivos EDAC)
+$ edac-util -sv (ver maxima información del estado)
 
 
 efibootmgr
