@@ -13406,6 +13406,14 @@ $ ecaccess set-workspace /path/to/your/workspace (establece el directorio de tra
 $ ecaccess download-data --variable wind_speed --time-range 20230101:00:00,20230102:23:59 --level 500hPa (descarga los datos de velocidad del viento para el nivel de 500 hPa entre el 1 y el 2 de enero de 2023)
 
 
+
+ecasound
+paquete de software diseñado para el procesamiento de audio multipista. Se puede utilizar para una amplia gama de operaciones de audio: grabación, conversión de formatos, procesamiento de efectos multipista y mezcla para trabajar en entornos donde no se dispone de una interfaz gráfica.
+$ ecasound -i archivo.mp3 (reproducirá el archivo archivo.wav a través de la salida de audio predeterminada)
+$ ecasound -i alsa -o grabacion.wav (grabará audio desde la entrada predeterminada, usualmente el micrófono y lo guardará en grabacion.wav)
+$ ecasound -i archivo.mp3 -y:10 -t:20 -o recorte.mp3 (recortar del segundo 10 al 20 de archivo.mp3 y guardarlo en recorte.mp3)
+
+
 echo
 Muestra o incluye algo en un fichero.
 $ echo $$   (muestra el PID de la consola)
