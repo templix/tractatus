@@ -13351,6 +13351,11 @@ eatmydata
 $ eatmydata apt-get install paquete (hará que la instalación sea más rápida, ya que no se esperará a que los datos se escriban en el disco antes de continuar)
 
 
+ebb
+[= extractbb]. Para cada archivo JPEG, PNG o PDF dado en la línea de comandos, extractbb extrae la información del cuadro delimitador y la escribe en un archivo con extensión .xbb, junto con cierta información de cabecera. Estos archivos pueden ser utilizados por dvipdfmx u otros programas. Si se llama como ebb, la salida se escribe en formato bb (y con extensión .bb) que utiliza dvipdfm. Xbb puede definirse como sinónimo de extractbb en su sistema.
+$ ebb -v file.png
+
+
 ebnflint
 Verifica la consistencia y corrección gramatical de las producciones EBNF [Extended Backus-Naur Form], que se usan a menudo para definir la sintaxis de los lenguajes de programación y otros sistemas formales.
 Verifica que las producciones EBNF [Extended Backus–Naur Form] sean consistentes y gramaticalmente correctas. Las lee desde un documento HTML como la especificación Go.
@@ -13459,11 +13464,6 @@ $ ecryptfs-unwrap-passphrase (Pedirá la contraseña. Como medida de precaución
 # ecryptfs-rewrap-passphrase .ecryptfs/sig-cache.txt (Modificar la contraseña)
 
 
-ebb
-[= extractbb]. Para cada archivo JPEG, PNG o PDF dado en la línea de comandos, extractbb extrae la información del cuadro delimitador y la escribe en un archivo con extensión .xbb, junto con cierta información de cabecera. Estos archivos pueden ser utilizados por dvipdfmx u otros programas. Si se llama como ebb, la salida se escribe en formato bb (y con extensión .bb) que utiliza dvipdfm. Xbb puede definirse como sinónimo de extractbb en su sistema.
-$ ebb -v file.png
-
-
 ed
 Editor de lineas.
 Teclas de control:
@@ -13517,6 +13517,44 @@ Herramienta que permite decodificar la información EDID [Extended Display Ident
 $ edid-decode edid.bin (si se dispone de un archivo que contiene datos EDID, se puede decodificar directamente)
 $ edid-decode --list-hdmi-vics
 $ edid-decode --list-rids
+
+
+editorconfig
+Indentador de estilos de codificación para todos los editores. Este paquete ayuda a definir y mantener estilos de codificación consistentes entre diferentes editores. El proyecto EditorConfig consta de un formato de archivo para definir estilos de codificación y una colección de complementos de editor de texto que permiten a los editores leer el formato de archivo y adherirse a los estilos definidos. Este paquete proporciona el comando editorconfig que se puede utilizar para reformatear y sangrar archivos de código mediante el archivo de configuración editorconfig.
+Reglas para el archivo de configuración:
+$ nano ~/.editorconfig
+Con el contenido, adaptado a cada usuario:
+       # Indica que este es el archivo raíz de EditorConfig
+       root = true
+       #
+       # Aplicar configuraciones a todos los archivos
+       [*]
+       charset = utf-8
+       indent_style = space
+       end_of_line = lf
+       insert_final_newline = true
+       max_line_length = 80
+       # eliminar cualquier espacio en blanco que preceda a los caracteres de nueva línea
+       trim_trailing_whitespace = true
+       #
+       [*.sh]
+       indent_style = space
+       indent_size = 4
+       #
+       # Configuraciones específicas para archivos Python
+       [*.py]
+       indent_style = space
+       indent_size = 4
+       #
+       # Configuraciones específicas para archivos Makefile
+       [Makefile]
+       indent_style = tab
+       #
+       # Configuraciones para archivos JavaScript en el directorio 'lib'
+       [lib/**.js]
+       indent_style = space
+       indent_size = 2
+$ editorconfig script.sh
 
 
 efibootmgr
@@ -28253,7 +28291,7 @@ Algunas opciones:
 
 
 read-edid
-Herramienta de recopilación de información de hardware para monitores VESA PnP. read-edid consta de dos herramientas: get-edid, para  leer una estructura EDID de latarjeta gráfica y recuperar la información del monitor a través del Canal de visualización de datos [DDC] y parse-edid que analiza esta estructura de datos y genera datos adecuados para su inclusión en el archivo de configuración XFree86 o X.org.
+Herramienta de recopilación de información de hardware para monitores VESA PnP. read-edid consta de dos herramientas: get-edid, para  leer una estructura EDID de latarjeta gráfica y recuperar la información del monitor a través del Canal de visualización de datos [DDC - Data Display Channel] y parse-edid que analiza esta estructura de datos y genera datos adecuados para su inclusión en el archivo de configuración XFree86 o X.org.
 # get-edid | edid-decode (primero obtener la información EDID del monitor y luego la pasa a edid-decode, que la decodifica y muestra en un formato legible)
 # get-edid | parse-edid
 
