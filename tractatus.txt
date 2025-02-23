@@ -13511,6 +13511,14 @@ $ edac-util --report=full (mostrar información detallada sobre dispositivos EDA
 $ edac-util -sv (ver maxima información del estado)
 
 
+edid-decode
+Herramienta que permite decodificar la información EDID [Extended Display Identification Data] de un monitor que es un estándar que permite a los monitores comunicar sus capacidades a una computadora tales como la resolución máxima, las frecuencias de actualización, el fabricante, el modelo y otros parámetros técnicos.
+# get-edid | edid-decode (primero obtener la información EDID del monitor y luego la pasa a edid-decode, que la decodifica y muestra en un formato legible)
+$ edid-decode edid.bin (si se dispone de un archivo que contiene datos EDID, se puede decodificar directamente)
+$ edid-decode --list-hdmi-vics
+$ edid-decode --list-rids
+
+
 efibootmgr
 Averiguar si se está ejecutando UEFI o BIOS. Si el sistema es compatible con UEFI generará diferentes variables. En caso de no ser compatible con UEFI se verás un mensaje que dice que las variables no son compatibles.
 	# efibootmgr
@@ -18364,6 +18372,11 @@ $ hunspell -i utf-8 archivo.txt (epecificando una codificación)
 $ hunspell (entrar  de forma interactiva. Salir con C-c)
 $ hunspell -D (mostrar diccionarios disponibles)
 $ hunspell -l archivo.odt (imprime palabras mal escritas del fichero especificado)
+
+
+hw-probe
+herramienta para comprobar la operatividad del hardware de la computadora y cargar el resultado en la base de datos de hardware de Linux.
+# hw-probe -all -upload
 
 
 hwb
@@ -28237,6 +28250,12 @@ Algunas opciones:
 -e (permite que se puedan usar todas las combinaciones de teclas de readline)
 -t 3 (Especificar un tiempo de espera en la entrada de datos antes de volver al prompt)
 -n 1 (Efectuará la acción al pulsar una tecla sin necesidad de pulsar "Intro")
+
+
+read-edid
+Herramienta de recopilación de información de hardware para monitores VESA PnP. read-edid consta de dos herramientas: get-edid, para  leer una estructura EDID de latarjeta gráfica y recuperar la información del monitor a través del Canal de visualización de datos [DDC] y parse-edid que analiza esta estructura de datos y genera datos adecuados para su inclusión en el archivo de configuración XFree86 o X.org.
+# get-edid | edid-decode (primero obtener la información EDID del monitor y luego la pasa a edid-decode, que la decodifica y muestra en un formato legible)
+# get-edid | parse-edid
 
 
 readlink
