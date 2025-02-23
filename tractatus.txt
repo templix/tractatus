@@ -4838,6 +4838,18 @@ Y suprimiendo las lineas de los calendarios que no se deseen y eliminando los ar
 $ calendar
 
 
+calibre
+Administración de bibliotecas, conversión de formatos, conversión de fuentes de noticias a libros electrónicos, visor y editor de libros electrónicos y funciones de sincronización de lectores de libros electrónicos. Calibre es principalmente un programa de catalogación de libros electrónicos. Incluye las herramientas calibre-complete [No invocar manualmente.], calibre-customize, calibre-debug [algunas opciones que no están enla GUI],  calibre-parallel [no invocar manualmente], calibre-server [niciar el servidor de contenido de calibre], calibre-smtp [correo electrónico mediante el protocolo SMTP.], calibredb [listado de la base datos de libros entrados], ebook-convert, ebook-device, ebook-edit, ebook-meta [Leer y escribir metadatos desde y hacia archivos de libros electrónicos], ebook-polish, ebook-viewer, fetch-ebook-metadata, lrf2lrs, lrfviewer, lrs2lrf, markdown-calibre y web2disk.
+$ calibre-customize -l (listado de plugins)
+$ calibre-customize -a plugin.zip (añadir un plugin. Tiene que especificarse la ruta al .zip)
+$ calibre-debug --diff arcchivo1 archivo2 (compara diferencias entre los dos ficheros)
+$ calibre-server --listen-on 127.0.0.1
+$ calibredb list (llistado libros)
+$ calibredb add libro (añadir al listado)
+$ ebook-meta libro.epub (verificar si un archivo EPUB es válido)
+$ ebook-meta -a Juan Perez & Manuel Gomez -c "Libro de la naturaleza" -d 22/2/2025 -l es -t "Naturaleza" archivo.epub (escribe los autores, un comentario, fecha de publicación, lenguaje y título)
+
+
 calife
 Alternativa ligera a Sudo. Permite a los usuarios seleccionados obtener un shell con la identidad de root u otro usuario, después de ingresar su propia contraseña. Esto permite al administrador del sistema otorgar privilegios de root sin compartir la contraseña.
 $ califa
@@ -13348,12 +13360,6 @@ ebook-
 Convertir/visualizar a formato ebook.
 $ ebook-convert texto.pdf texto.epub
 $ ebook-viewer texto.epub (Visualiza con la apliciación calibre)
-
-
-ebook-meta
-[calibre]. Leer y escribir metadatos desde y hacia archivos de libros electrónicos. Formatos admitidos para leer metadatos: azw, azw1, azw3, azw4, cb7, cbc, cbr, cbz, chm, docx, epub, fb2, fbz, html, htmlz, imp, lit, lrf, lrx, mobi, odt, oebzip, opf, pdb, pdf, pml, pmlz, pobi, prc, rar, rb, rtf, snb, tpz, txt, txtz, updb, zip. Formatos admitidos para escribir metadatos: azw, azw1, azw3, azw4, docx, epub, fb2, fbz, htmlz, lrf, mobi, odt, pdb, pdf, prc, rtf, tpz, txtz. Los distintos tipos de archivos admiten distintos tipos de metadatos. Si se intenta configurar algunos metadatos en un tipo de archivo que no los admite, los metadatos se ignorarán de forma silenciosa. Siempre que se pase argumentos a ebook-meta que contengan espacios, han de encerrarse entre comillas.
-$ ebook-meta libro.epub (verificar si un archivo EPUB es válido)
-$ ebook-meta -a Juan Perez & Manuel Gomez -c "Libro de la naturaleza" -d 22/2/2025 -l es -t "Naturaleza" archivo.epub (escribe los autores, un comentario, fecha de publicación, lenguaje y título)
 
 
 ebook-speaker
