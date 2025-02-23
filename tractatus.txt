@@ -13496,6 +13496,13 @@ Teclas de control:
 	s/cosa/casa/[g] (Busca las líneas que contienen "cosa" y substituye "cosa" por "casa"
 
 
+ed2k-hash
+Herramienta para generar enlaces ed2k, útil para conocer los enlaces ed2k, también conocidos como enlaces eDonkey2000, de archivos que no se están compartiendo actualmente o que se desean los enlaces ed2k de todos los archivos en ciertos directorios. Estos enlaces son útiles en redes P2P [peer-to-peer] como eDonkey2000 y eMule, ya que permiten compartir y descargar archivos de manera descentralizada.
+$ ed2k-hash documento.pdf (el enlace que genere se puede compartir con otros usuarios de la red)
+$ find /ruta/al/directorio -type f -exec ed2k-hash {} \; (generará enlaces ed2k para todos los archivos en el directorio especificado y sus subdirectorios)
+$ ed2k-hash documento.pdf > enlace_ed2k.txt (guardar el enlace ed2k generado en un archivo)
+
+
 efibootmgr
 Averiguar si se está ejecutando UEFI o BIOS. Si el sistema es compatible con UEFI generará diferentes variables. En caso de no ser compatible con UEFI se verás un mensaje que dice que las variables no son compatibles.
 	# efibootmgr
@@ -32706,11 +32713,10 @@ $ tiptop (arrancar el monitoreo. "q" para cerrar)
 
 tldr
 Muestra información de un comando como las páginas man pero más simplificada,como si fueran versiones resumidas de man com más ejemplos.
-$ tldr --update (primero despues de instalarla, recargar la base de datos y lanzarlo periodicamente)
+$ tldr -u (actualizar base de datos. Lanzarlo periodicamente)
 $ tldr ip
-$ tldr -l (listar)
 $ tldr --color tar
-$ tldr --language es tldr
+$ tldr -L es tldr (mostrará información en español si está disponible)
 
 
 tleds
