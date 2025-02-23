@@ -13396,6 +13396,16 @@ Herramienta que permite configurar reglas de filtrado de tramas Ethernet en el n
 # ebtables-restore < reglas.ebtables (restaurarlas)
 
 
+ecaccess
+conjunto de herramientas ECMWF [European Centre for Medium-Range Forecasts - Centro Europeo de Previsiones Meteorológicas a Plazo Medio] para acceder a sus servicios de datos meteorológicos.
+$ ecaccess login (solicitará tu nombre de usuario y contraseña para autenticarla con ECMWF)
+$ ecaccess get-token (genera un token de acceso válido por un período determinado para peticiones posteriores)
+$ ecaccess get-data --variable temperature --time 20230201:00:00 --level sfc (obtiene la temperatura en la superficie del mar para el 1 de febrero de 2023 a las 00:00 UTC)
+$ ecaccess list-variables (lista todas las variables disponibles para consulta)
+$ ecaccess set-workspace /path/to/your/workspace (establece el directorio de trabajo donde ECMWF guardará temporalmente los archivos descargados.)
+$ ecaccess download-data --variable wind_speed --time-range 20230101:00:00,20230102:23:59 --level 500hPa (descarga los datos de velocidad del viento para el nivel de 500 hPa entre el 1 y el 2 de enero de 2023)
+
+
 echo
 Muestra o incluye algo en un fichero.
 $ echo $$   (muestra el PID de la consola)
