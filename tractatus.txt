@@ -13557,6 +13557,16 @@ Con el contenido, adaptado a cada usuario:
 $ editorconfig script.sh
 
 
+efibootguard
+Cargador de arranque basado en UEFI que incluye un mecanismo de actualización simple con un algoritmo a prueba de fallos. Permite armar un sistema de vigilancia de hardware antes de cargar un sistema operativo y previene que malware malicioso modifique el bootloader EFI durante el arranque. Incluye las herramientas bg_gen_unified_kernel [Generar una imagen de kernel unificada [UKI - Unified Kernel Image]], bg_printenv [Muestra variables del entorno EFI] y bg_setenv [Herramienta que modifica variables del entorno EFI]
+# bg_gen_unified_kernel -k /boot/vmlinuz-linux -i /boot/initramfs-linux.img -o /boot/EFI/Linux/uki.efi (generar una imagen UKI [-o] con un kernel [-r] y un initramfs [-i] específicos)
+# bg_gen_unified_kernel -k /boot/vmlinuz-linux -i /boot/initramfs-linux.img -c "root=/dev/sda2 ro quiet splash" -o /boot/EFI/Linux/uki.efi (incluir la línea de comandos del kernel)
+# bg_printenv (visualizar las variables del entorno EFI que afectan el arranque)
+# bg_printenv | grep BootOrder (filtrar una variable específica)
+# bg_setenv BootOrder 0002,0001,0000 (establecer el orden de arranque UEFI especificando que la opción 0002 tiene prioridad sobre 0001 y 0000)
+# bg_setenv Timeout 5 (ajusta el tiempo de espera del cargador de arranque a 5 segundos)
+
+
 efibootmgr
 Averiguar si se está ejecutando UEFI o BIOS. Si el sistema es compatible con UEFI generará diferentes variables. En caso de no ser compatible con UEFI se verás un mensaje que dice que las variables no son compatibles.
 	# efibootmgr
