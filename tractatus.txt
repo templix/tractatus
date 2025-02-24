@@ -13402,14 +13402,52 @@ Herramienta que permite configurar reglas de filtrado de tramas Ethernet en el n
 
 
 ecaccess
-conjunto de herramientas ECMWF [European Centre for Medium-Range Forecasts - Centro Europeo de Previsiones Meteorológicas a Plazo Medio] para acceder a sus servicios de datos meteorológicos.
-$ ecaccess login (solicitará tu nombre de usuario y contraseña para autenticarla con ECMWF)
-$ ecaccess get-token (genera un token de acceso válido por un período determinado para peticiones posteriores)
-$ ecaccess get-data --variable temperature --time 20230201:00:00 --level sfc (obtiene la temperatura en la superficie del mar para el 1 de febrero de 2023 a las 00:00 UTC)
-$ ecaccess list-variables (lista todas las variables disponibles para consulta)
-$ ecaccess set-workspace /path/to/your/workspace (establece el directorio de trabajo donde ECMWF guardará temporalmente los archivos descargados.)
-$ ecaccess download-data --variable wind_speed --time-range 20230101:00:00,20230102:23:59 --level 500hPa (descarga los datos de velocidad del viento para el nivel de 500 hPa entre el 1 y el 2 de enero de 2023)
-
+Conjunto de herramientas ECMWF [European Centre for Medium-Range Forecasts - Centro Europeo de Previsiones Meteorológicas a Plazo Medio] para acceder a sus servicios de datos meteorológicos.
+Comandos para la gestión de certificados (ecaccess-certificate-*)
+          ecaccess-certificate-create  - Crear certificado para ECtools
+          ecaccess-certificate-list    - Enumerar operaciones disponibles
+Comandos para la gestión de archivos (ecaccess-file-*)
+          ecaccess-file-chmod          - Cambiar bits de modo de archivo de ECaccess
+          ecaccess-file-copy           - Copiar un archivo de ECaccess
+          ecaccess-file-delete         - Eliminar un archivo de ECaccess
+          ecaccess-file-dir            - Enumerar el contenido del directorio de ECaccess
+          ecaccess-file-get            - Descargar un archivo de ECaccess
+          ecaccess-file-mdelete        - Eliminar varios archivos de ECaccess a la vez
+          ecaccess-file-mget           - Descargar varios archivos de ECaccess a la vez
+          ecaccess-file-mkdir          - Crear un directorio en el sistema de archivos de ECaccess
+          ecaccess-file-modtime        - Mostrar la última hora de modificación de un archivo de ECaccess
+          ecaccess-file-move           - Mover o renombrar archivos de ECaccess
+          ecaccess-file-mput           - Cargar varios archivos locales en el sistema de archivos de ECaccess
+          ecaccess-file-put            - Cargar un archivo en el sistema de archivos de ECaccess
+          ecaccess-file-rmdir          - Eliminar un directorio en el sistema de archivos de ECaccess
+          ecaccess-file-size           - Mostrar el tamaño de un archivo de ECaccessShow the Size of an ECaccess File
+Comandos para la gestión de trabajos por lotes (ecaccess-job/queue-*)
+          ecaccess-job-delete          - Eliminar un trabajo de ECaccess
+          ecaccess-job-get             - Descargar un archivo de salida/entrada/error de trabajo
+          ecaccess-job-list            - Enumerar todos los trabajos de ECaccess
+          ecaccess-job-restart         - Reiniciar un trabajo de ECaccess
+          ecaccess-job-submit          - Enviar un nuevo trabajo de ECaccess
+          ecaccess-queue-list          - Enumerar las colas disponibles
+Comandos para la gestión de eventos en ECMWF (ecaccess-event-*)
+          ecaccess-event-list          - Enumerar los eventos disponibles
+          ecaccess-event-send          - Activar un evento de ECaccess
+Comandos para la gestión de asociaciones de ECtrans (ecaccess-association-*)
+          ecaccess-association-delete  - Eliminar asociación
+          ecaccess-association-get     - Obtener el archivo descriptivo de la asociación
+          ecaccess-association-list    - Enumerar sus asociaciones de ECtrans
+          ecaccess-association-protocol- Enumerar el protocolo ECtrans compatible
+          ecaccess-association-put     - Actualizar/crear una asociación
+Comandos para la gestión de transferencias de ECtrans (ecaccess-ectrans-*)
+          ecaccess-ectrans-delete      - Eliminar ECtrans
+          ecaccess-ectrans-list        - Enumerar todas las transferencias de ectrans
+          ecaccess-ectrans-request     - Solicitar una nueva transferencia de ECtrans
+          ecaccess-ectrans-restart     - Reiniciar una transferencia de ECtrans existente
+Comandos para obtener información de las puertas de enlace de ECaccess (ecaccess-gateway-*)
+          ecaccess-gateway-list        - Enumerar las puertas de enlace de ECaccess
+          ecaccess-gateway-name        - Mostrar el nombre de la la puerta de enlace de ECaccess predeterminada
+          ecaccess-gateway-connected   - muestra el estado de conexión de la puerta de enlace de ECaccess
+Comandos para obtener información general en ECMWF
+          ecaccess-cosinfo             - muestra información de ECMWF
 
 
 ecasound
