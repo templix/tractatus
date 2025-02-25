@@ -13672,6 +13672,14 @@ $ egctl eg1 on left left off (cambiar el estado del dispositivo de corriente eg1
 Nota.- valores posibles son: on [encender], off [apagar], toggle [cambiar al estado opuesto] y left [mantener el estado actual]
 
 
+eggdrop
+Bot de IRC escrito en C, que se instala en los canales y toma medidas de protección, como evitar que lo tomen, reconocer a los usuarios baneados para rechazarlos, reconocer a los usuarios privilegiados para darles el estado de operador, castigar a los usuarios por cosas como inundaciones de servicio... Un archivo de configuración de muestra en https://github.com/eggheads/eggdrop/blob/develop/eggdrop.conf.
+$ eggdrop -m ~/.eggdrop (especificando el archivo de configuración)
+$ eggdrop -n (envía todas las entradas de registro a la consola)
+$ eggdrop -nt (usar terminal para simular chat DCC [Direct Client-to-Client])
+$ eggdrop -nc (estadísticas del canal cada 10 segundos)
+
+
 egrep
 [extended grep]. Busca expresiones regulares.
 	$ egrep -v '^$|^#' archivo (suprimir lineas en blanco y comentadas)
