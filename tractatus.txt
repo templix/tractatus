@@ -13659,6 +13659,19 @@ Hará que Emacspeak que use eflite como su servidor de voz.
 $ echo "Hola, esto es una prueba" | eflite (enviar un texto a eflite, que lo procesará y lo enviará a Festival Lite para su reproducción)
 
 
+egctl
+Programa para controlar el estado de las regletas programables EnerGenie contra sobretensiones con interfaz LAN. Utiliza el protocolo de intercambio de datos nativo EG-PMS-LAN versión 2.0 o 2.1, en lugar de HTTP. Actualmente, se admiten los siguientes dispositivos: EG-PMS-LAN, EG-PM2-LAN, EG-PMS2-LAN y EG-PMS-WLAN
+Un archivo de configuración para dos dispositivos EG-PMS-LAN podría ser:
+$ nano ~/.egtab
+Con las lineas:
+      eg1 pms20 192.168.0.10  5000 password
+      eg2 pms20 192.168.10.10 5001 password2
+Indica nombre del dispositivo, protocolo [pms20 o pms21], dirección IP del dispositivo en la red, puerto de comunicación y contraseña para acceder al dispositivo.
+$ egctl eg1 (consultar el estado actual del dispositivo eg1)
+$ egctl eg1 on left left off (cambiar el estado del dispositivo de corriente eg1: encender la primera toma, mantener el estado de la segunda y tercera, y apagar la cuarta del dispositivo eg1)
+Nota.- valores posibles son: on [encender], off [apagar], toggle [cambiar al estado opuesto] y left [mantener el estado actual]
+
+
 egrep
 [extended grep]. Busca expresiones regulares.
 	$ egrep -v '^$|^#' archivo (suprimir lineas en blanco y comentadas)
