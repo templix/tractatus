@@ -13612,6 +13612,53 @@ Averiguar si se está ejecutando UEFI o BIOS. Si el sistema es compatible con UE
 Tambien puede consultarse si exite en el sistema la carpeta /sys/firmware/efi, si no existe se está usando BIOS.
 
 
+efingerd
+Demonio finger que ejecuta scripts y muestra su salida. El daemon fingerd es un protocolo simple que proporciona una interfaz para el mandato finger en varios sitios de red. El mandato finger devuelve un informe de estado sobre el sistema actual o un usuario. El daemon fingerd escucha las solicitudes TCP [Transmission Control Protocol] en el puerto 79 tal como se indica en el archivo /etc/services y en el archivo /etc/inetd.conf .
+Un caso practico en el que se quiere que al hacer finger usuario@tu_servidor se ejecute un script que muestre la hora actual
+# nano /usr/local/bin/mostrar_hora.sh
+       #!/bin/bash
+       echo "Hola, la hora actual es:"
+       date
+# chmod +x /usr/local/bin/mostrar_hora.sh (hacerlo ejecutable)
+Y en el archivo de configuración:
+# nano /etc/efingerd.conf
+Añadir la linea:
+       user USER run /usr/local/bin/mostrar_hora.sh
+Indica que cuando se consulta al usuario "USER" con finger:
+$ finger usuario@localhost
+Se ejecutará el script.
+
+
+efitools
+Herramientas para manipular claves y firmas de arranque seguro [Secure Boot] EFI que proporcionan acceso a las claves y certificados. Incluye las herramientas cert-to-efi-hash-list, cert-to-efi-sig-list, efi-readvar, efi-updatevar, efitool-mkusb, flash-var, hash-to-efi-sig-list, sig-list-to-certs y sign-efi-sig-list
+$ cert-to-efi-hash-list -g mycert.pem > mycert.hash (convierte el certificado mycert.pem en una lista de hashes EFI, genera los hashes y guarda la salida en mycert.hash)
+$ cert-to-efi-sig-list -g mycert.pem mycert.esl (convierte el certificado mycert.pem en una lista de firmas EFI,  genera las firmas y guarda la salida en formato compatible con Secure Boot)
+$ efi-readvar -v SecureBoot (muestra el estado de Secure Boot [habilitado o deshabilitado])
+$ efi-readvar -v PK (leer la clave pública. PK es la Plataform Key, que controla las claves usadas en Secure Boot)
+$ efi-updatevar -a -c mycert.pem -k PK.key KEK (añade la clave al KEK, especifica el certificado y firma la actualización con la clave de la plataforma)
+
+
+efivar
+Herramientas para gestionar variables UEFI. Puede leer y escribir variables de firmware en sistemas UEFI y almacenarlas en el firmware del sistema para ser utilizadas por el BIOS o UEFI para configurar el equipo durante el arranque.
+# efivar -n SecureBoot (leer el valor de una variable específica)
+# efivar --list (listar todas las variables disponibles)
+# efivar -s -w SecureBoot=0 (modificar variable. Establece el valor de SecureBoot a 0)
+# efivar -d SecureBoot (eliminar una variable)
+# efivar -e /sys/firmware/efi/vars/SecureBoot (verificar si un archivo existe)
+# efivar -i SecureBoot (obtener información sobre una variable:)
+# efivar --list-names (listar viables por nombre y valor)
+Nota.- El uso incorrecto de estas herramientas puede afectar la configuración del firmware y causar problemas de arranque.
+
+
+eflite
+Servidor de voz diseñado para integrarse con herramientas como Emacspeak y otros lectores de pantalla. Su función principal es permitir la interacción con Festival Lite, una versión ligera del sistema de síntesis de voz Festival, desarrollado en el Centro de Voz de la CMU [Carnegie Mellon University]. Esto es especialmente útil para usuarios con discapacidades visuales que dependen de lectores de pantalla para interactuar con sus sistemas. Solo ofrece soporte para el idioma inglés.
+$ eflite (iniciará el servidor y lo dejará listo para recibir solicitudes de síntesis de voz)
+Si en el archivo de configuración de Emacs [~/.emacs o ~/.emacs.d/init.el] se añade la linea:
+      (setq emacspeak-speak-program "eflite")
+Hará que Emacspeak que use eflite como su servidor de voz.
+$ echo "Hola, esto es una prueba" | eflite (enviar un texto a eflite, que lo procesará y lo enviará a Festival Lite para su reproducción)
+
+
 egrep
 [extended grep]. Busca expresiones regulares.
 	$ egrep -v '^$|^#' archivo (suprimir lineas en blanco y comentadas)
@@ -15658,6 +15705,8 @@ finger
 Quien está conectado al sistema, tiempo, consola...
 $ finger -s
 $ finger -l
+$ finger usuario@localhost (muestra detalles como el nombre completo, el directorio home, shell, o si está conectado)
+$ Finger @hostname (devuelve información general sobre el sistema remoto)
 
 
 finit
