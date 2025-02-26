@@ -13717,6 +13717,18 @@ Añadir la linea al final del apartado:
 Nota.- Los videos se encuentran en ~/.electricsheep en formato .avi
 
 
+electrum
+Cliente Bitcoin que permite a los usuarios gestionar sus bitcoins de manera segura y eficiente y protege de perder bitcoins en un error de copia de seguridad o falla de la computadora. Además, Electrum no requiere tiempo de espera porque no descarga la cadena de bloques de Bitcoin.
+$ electrum create (guiará a través del proceso de creación de una nueva cartera, incluyendo la generación de una semilla de 12 palabras)
+$ electrum restore (restaurar una cartera. Pedirá ingresar la semilla)
+$ electrum getbalance (mostrará el saldo total de bitcoins en la cartera)
+$ electrum payto 1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa 0.01 (creará una transacción para enviar 0.01 BTC a la dirección especificada)
+$ electrum listaddresses ()mostrará una lista de todas las direcciones generadas por la cartera)
+$ electrum getprivatekeys 1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa (exportar las claves privadas)
+$ electrum daemon start (iniciará el daemon de Electrum y cargará tu cartera para sincronizarla)
+$ electrum daemon load_wallet
+
+
 elinks
 Navegador.
 $ elinks -dump fichero.html > fichero.txt  (Convierte un .html a .txt)
