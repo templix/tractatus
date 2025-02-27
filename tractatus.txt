@@ -13735,6 +13735,15 @@ Y lo ejecutamos en producción
 $ elastalert --config config.yaml
 
 
+elasticsearch-curator
+Herramienta para administrar índices de series temporales de Elasticsearch. lo que incluye eliminar, cerrar, optimizar o hacer snapshots de índices antiguos. Con elastalert [ver] en un entorno con grandes volúmenes de datos, se podria necesitar elasticsearch-curator para limpiar o gestionar los índices y evitar problemas de rendimiento. Incluye las herramientas: curator, curator_cli y es_repo_mgr
+$ curator --config curator.yml delete_indices --filter_list '[{"filtertype":"age", "source":"name", "direction":"older", "unit":"days", "unit_count":30}]' (eliminar índices de más de 30 días)
+$ curator_cli show_indices (listar los índices en Elasticsearch)
+$ curator_cli delete_indices --filter_list '[{"filtertype":"age", "source":"name", "direction":"older", "unit":"days", "unit_count":7}]' (eliminar índices de más de 7 días)
+$ es_repo_mgr create fs --name backup_repo --location /var/backups/elasticsearch (crear un nuevo repositorio de snapshots)
+$ es_repo_mgr show (listar los repositorios existentes)
+
+
 electricsheep
 salva pantallas (screen saver) de arte abstracto en el que colaboran miles de personas en el mundo. Cuando los equipos "sueñan" ElectricSheep se enciende y comunica su ordenar con los demás a través de Internet para crear animaciones abstractas conocidas como "ovejas". Para que salga como opción en xscreensaver:
 $ nano .xscreensaver
@@ -13760,6 +13769,29 @@ $ electrum daemon start (iniciará el daemon de Electrum y cargará tu cartera p
 $ electrum daemon load_wallet
 
 
+elfrc
+elfrc es un programa que puede convertir archivos arbitrarios como imágenes, textos, datos binarios, etc en archivos de objetos ELF [Executable and Linkable Format] que luego se pueden vincular directamente al programa y acceder a ellos mediante nombres de símbolos simples definidos por el usuario. Esto es útil cuando se desea incrustar recursos directamente en un ejecutable, en lugar de tener que cargarlos desde archivos externos en tiempo de ejecución.
+$ elfrc -o logo.o -s my_logo_data logo.png (nombre del archivo objeto de salida, define un símbolo llamado my_logo_data que se usará para acceder a los datos de la imagen en el código y archivo de entrada que se desea convertir)
+Nota.- elfrc no interpreta el contenido del archivo, solo lo incrusta como datos binarios. Es responsabilidad del programador saber cómo interpretar estos datos, por ejemplo, como imagen PNG, archivo de texto, etc.
+1.-
+Ejemplo con un archivo config.txt que se desea incrustar en un programa.
+$ elfrc -o config.o -s my_config_data config.txt (convertir el archivo a objeto ELF)
+Escribir el código en C:
+         #include <stdio.h>
+         extern char my_config_data[]
+         extern int my_config_data_size
+         int main() {
+                 printf("Configuración:\n%s\n", my_config_data);
+                 printf("Tamaño del archivo de configuración: %d bytes\n", my_config_data_size);
+                 return 0;
+                 }
+Compilar y enlazar el programa:
+$ gcc -o config_program config_program.c config.o
+Ejecutar el programa:
+$ ./config_program
+El programa imprimirá el contenido del archivo config.txt y su tamaño.
+
+
 elinks
 Navegador.
 $ elinks -dump fichero.html > fichero.txt  (Convierte un .html a .txt)
@@ -13769,6 +13801,17 @@ Atajos:
 	g (Entrar nueva url)
 	< > (moverse entre pestañas a derecha o izquierda)
 	Flechas del cursor derecha/izquierda (pagina anterior/posterior)
+
+
+elogind
+Daemon que se encarga de gestionar sesiones, usuarios y "asientos" [seats: abstracciones de los dispositivos físicos donde un usuario puede interactuar con el sistema como un teclado, pantalla, etc] en un sistema Linux. Originalmente, esta funcionalidad formaba parte de systemd-logind, un componente del sistema de inicio systemd. Sin embargo, elogind se extrajo como un paquete independiente para permitir que sistemas que no utilizan systemd como sistema de inicio, por ejemplo, aquellos que usan sysvinit u otros, puedan seguir aprovechando estas capacidades de gestión de sesiones.
+# systemctl enable elogind (activo al iniciar el sistema)
+Aunque elogind es el daemon en sí, la interacción con él se realiza principalmente a través del comando loginctl, que permite inspeccionar y controlar sesiones, usuarios y asientos.
+# loginctl list-sessions (ver las sesiones actuales en el sistema con su ID, el usuario asociado, el "asiento" y el terminal [TTY] en uso)
+# loginctl show-session 1 (detallar una sesión específica, por ejemplo con ID 1)
+# loginctl list-users (ver qué usuarios están actualmente logueados)
+# loginctl terminate-session 1 (cerrar una sesión específica)
+# loginctl lock-sessions (bloquear todas las sesiones activas)
 
 
 emacs
