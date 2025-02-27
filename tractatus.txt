@@ -14519,6 +14519,11 @@ emacs-intl-fonts
 Paquete que incluye fuentes BDF para imprimir amárico, árabe, cantonés, chino, checo, danés, holandés, esperanto, estonio, finlandés, francés, alemán, griego, hebreo, hindi, italiano, japonés, coreano, maltés, noruego, polaco y ruso. , texto en eslovaco, español, sueco, tailandés, tigrinya, turco y vietnamita como PostScript en mapa de bits.
 
 
+emd
+Herramienta que se utiliza para procesar archivos escritos en Markdown.
+$ emd documento.md -o documento.html (generará un archivo documento.html que contendrá el texto formateado como HTML)
+
+
 emerge
 Instalador de paquetes de gentoo aunque en realidad, emerge no es en si un instalador de paquetes, si no que se descargan las fuentes y se compilan para nuestro sistema.
 # emerge -s paquete (Busca el paquete en el portage)
@@ -14539,6 +14544,12 @@ Instalador de paquetes de gentoo aunque en realidad, emerge no es en si un insta
 # emerge --update --deep --with-bdeps=y --newuse world (Actualización completa del sistema cuando se ha modificado el /etc/make.conf)
 # emerge --update --deep world (Actualizar con las dependencias)
 # emerge --resume (Proseguir la compilación despues de pararla con Ctrl + c)
+
+
+emmax
+[Efficient Mixed-Model Association eXpedited]. Herramienta bioinformática utilizada en estudios de asociación del genoma completo [Genome-Wide Association Study - GWAS] para identificar variantes genéticas asociadas con rasgos fenotípicos, teniendo en cuenta la estructura de la población y las relaciones de parentesco. EMMAX utiliza formatos .BED para genotipos y archivos de texto para fenotipos.
+$ emmax-kin -v -h -s -d 10 genotipos.bed (genera la matriz de parentesco a partir del archivo de genotipos en formato BED)
+$ emmax -v -d 10 -t genotipos -p fenotipos.txt -k genotipos.hIBS.kinf -o resultados (realiza el análisis de asociación utilizando los archivos especificados y genera los resultados en un archivo de salida)
 
 
 emms
