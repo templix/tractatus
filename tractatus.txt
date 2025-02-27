@@ -13704,6 +13704,37 @@ $ eject /dev/cdrom; sleep 1; eject -t /dev/cdrom  (abrirlo y cerrarlo)
 $ eject sda8 (desmonta la partición mencionada)
 
 
+elastalert
+Alertas fáciles y flexibles con Elasticsearch. Este paquete contiene un marco simple para alertar sobre anomalías, picos u otros patrones de interés a partir de los datos en Elasticsearch. Incluye las herramientas elastalert, elastalert-create-index, elastalert-rule-from-kibana y elastalert-test-rule
+$ elastalert --config config.yaml --verbose (mostrará información detallada sobre las alertas generadas a partir de la configuración en config.yaml)
+$ elastalert-create-index --config config.yaml (crea un índice en Elasticsearch para almacenar el estado de elastalert)
+$ elastalert-create-index --config config.yaml (creará un índice con el prefijo elastalert_status en Elasticsearch)
+$ elastalert-create-index --config config.yaml --index elastalert_custom (especificar un prefijo diferente)
+$ elastalert-rule-from-kibana --config /ruta/a/config.yaml (convierte consultas de Kibana en reglas de elastalert)
+$ elastalert-rule-from-kibana --config config.yaml --rule new_rule.yaml (convertir una consulta guardada en Kibana en una regla de elastalert)
+$ elastalert-test-rule --config config.yaml rule.yaml (permite probar una regla simulando la ejecución de la regla y mostrará los resultados sin enviar alertas reales)
+1.-
+Como ejemplo, supongamos que queremos generar una alerta si detectamos más de 5 errores HTTP 500 en los últimos 10 minutos
+      $ nano http_errors.yaml
+      name: "Alerta de errores HTTP 500"
+      type: frequency
+      index: logstash-*
+      num_events: 5
+      timeframe:
+      minutes: 10
+      filter:
+      - term:
+      response_code: 500
+      alert:
+      - email
+      email:
+      - "admin@example.com"
+Luego, lo probamos con:
+$ elastalert-test-rule --config config.yaml http_errors.yaml
+Y lo ejecutamos en producción
+$ elastalert --config config.yaml
+
+
 electricsheep
 salva pantallas (screen saver) de arte abstracto en el que colaboran miles de personas en el mundo. Cuando los equipos "sueñan" ElectricSheep se enciende y comunica su ordenar con los demás a través de Internet para crear animaciones abstractas conocidas como "ovejas". Para que salga como opción en xscreensaver:
 $ nano .xscreensaver
