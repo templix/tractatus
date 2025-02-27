@@ -16078,9 +16078,28 @@ Test completo del sistema sobre el firewall [ver].
 fish
 Intérprete de comandos.
 $ fish (entra en la shell)
-  pep@Deb ~> help (abre las instrucciones sobre fish en el navegador por defecto)
-  help: Help is being displayed in xdg-open.
-  pep@Deb ~> exit (salir de fish)
+> omf install dmorrell (instalar el tema)
+> omf install (descargar listado de todo lo disponible)
+> omf theme dmorrell (usar el tema)
+> omf remove dmorrell (eliminar un tema)
+> omf describe ocean (información de un tema)
+> omf list (lista de temas instalados)
+> omf repositories list (repositorios)
+> omf reload (Recargue Oh My Fish y todos los complementos)
+> omf new plugin
+> omf new theme dmorrell
+> omf search -t dangerous (buscar inf sobre un tema)
+> omf search -p omf (inf sobre un paquete)
+> omf doctor (información de git, sistema, oh-my-fish, fish version...)
+> rm ~/.config/fish/functions/fish_prompt.fish (si eiten errores en doctor)
+> omf destroy (desinstalar oh-my-fish)
+> omf chanel (El canal desde el cual OMF obtiene actualizaciones: stable o dev)
+> omf update (actualizar todos los paquetes)
+> omf update omf (actualizar un paquete)
+> omf repositories add https://github.com/sapoclay (añadir un repo. este no es correcto)
+> omf -h (información, incluidos todos los comandos)
+> exit (salir)
+Nota.- Oh My Fish no ha recibido mantenimiento durante años y es posible que algunas partes no funcionen.
 
 
 fixfiles
