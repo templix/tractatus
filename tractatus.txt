@@ -14613,6 +14613,22 @@ $ enchant-lsmod-2 -list-dicts (lista todos los diccionarios disponibles)
 $ enchant-lsmod-2 -lang es (Muestra qué proveedor y diccionario se utilizará para el idioma indicado)
 
 
+endlessh
+es un honeypot diseñado para ralentizar los intentos de escaneo y ataque automatizados contra el servicio SSH. Funciona respondiendo lentamente con un banner SSH interminable, manteniendo a los bots y atacantes ocupados sin permitirles llegar al servicio SSH real. El propósito es poner su servidor SSH real en otro puerto y luego dejar que los bots abusivos se queden atrapados en este tarpit [agujero de alquitrán - ralentización de la conexión a una red o servicio] en lugar de molestar a un servidor real.
+# endlessh -p 2223 (ejecutarlo en el puerto especificado, por defecto en el 2222)
+# journalctl -u endlessh (revisar los intentos de conexión atrapados)
+1.-
+configurar como un servicio systemd
+# nano /etc/endlessh/config
+Co los siguientes parámnetros:
+       PORT=2222
+       DELAY=10000
+       LOGFILE=/var/log/endlessh.log
+Se especifica puerto de escucha, tiempo en milisegundos entre los bytes enviados [mayor retraso = bots más atrapados] y ruta del archivo de logs.
+# systemctl enable endlessh (activar el servicio)
+# nc localhost 2222 (probar si endlessh está funcionando, si queda colgado significa que endless está enviando un banner interminable)
+
+
 enscript
 Aplicatión que toma archivos ASCII y los convierte a PostScript, HTML o RTF.
 $ enscript -J frases -ptexto.ps texto.txt (con título [J] y salida como "texto.ps" sobre el archivo texto.txt)
@@ -16161,7 +16177,7 @@ Test completo del sistema sobre el firewall [ver].
 
 
 fish
-Intérprete de comandos.
+[Friendly Interactive SHell]. Intérprete de comandos.
 $ fish (entra en la shell)
        > omf install dmorrell (instalar el tema)
        > omf install (descargar listado de todo lo disponible)
