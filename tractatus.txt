@@ -14716,7 +14716,16 @@ $ enum 10 -2 1 (del 10 al 1 decreciendo de 2)
 env
 Muestra las variables de entorno
 $ env | grep DISPLAY
-Algunas opciones para grep: SHELL, USER, PATH, KEYBOARD, LANG..
+$ env | grep PATH | tr ':' '\n'
+Algunas opciones para grep: SHELL, USER, KEYBOARD, LANG..
+
+
+env2
+Convierte variables de entorno entre lenguajes de programación. Genera código de configuración de entorno para el lenguaje de programación de destino. Por ejemplo, convierte el script de configuración de csh a bash o viceversa. Admite bash, csh, ksh, modulecmd, perl, plist, sh, tclsh, tcsh, vim, yaml y zsh.
+$ env2 -f config.csh -t bash (convertir variables de un archivo csh a bash)
+$ env2 -f config.sh -t csh (convertir variables de entorno a un formato compatible con csh)
+$ env2 -f config.sh -t python (convertir variables de entorno a otro lenguaje de programación)
+$ env2 -f config.sh -t json(convertir las variables de entorno a un formato JSON)
 
 
 envsubst
