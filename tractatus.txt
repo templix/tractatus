@@ -14629,11 +14629,60 @@ Se especifica puerto de escucha, tiempo en milisegundos entre los bytes enviados
 # nc localhost 2222 (probar si endlessh está funcionando, si queda colgado significa que endless está enviando un banner interminable)
 
 
+enmime
+Herramientas de codificación y decodificación de correo MIME en Go, enfocada en generar y analizar correos electrónicos codificados en MIME incluyendo archivos adjuntos y texto en diferentes codificaciones.. Contiene las utilidades mime-extractor y mime-dump.
+$ mime-extractor mensaje.eml (extraer su contenido, tanto adjuntos como metadatos)
+$ mime-extractor -o /ruta/de/salida mensaje.eml (lo mismo especificando una ruta para los adjuntos)
+$ mime-dump mensaje.eml (inspeccionar cómo está estructurado un correo MIME)
+$ mime-dump -v mensaje.eml (análisis más detallado)
+
+
+enscribe
+Herramienta que convierte imágenes en sonido utilizando Fast Fourier Transform, [Transformación Rápida de Fourier - FFT]. Básicamente, toma una imagen como entrada, la descompone en sus componentes de frecuencia y luego convierte esas frecuencias en una señal de audio.
+El lado izquierdo de la imagen es el extremo de baja frecuencia y el derecho es el extremo alto, hasta justo por debajo del límite de Nyquist si así lo desea. Hay varios parámetros ajustables en cuanto a cómo se convierte el color en sonido estéreo y el rango de frecuencia que se utilizará. Esta conversión se puede utilizar para crear marcas de agua de audio resistentes o simplemente para crear sonidos interesantes a partir de imágenes.
+$ enscribe imagen.png -o salida.wav (convertir una imagen en un archivo de sonido)
+$ enscribe imagen.png -o salida.wav -r 48000 -b 24 (generar un archivo de audio con una tasa de muestreo de 48 kHz y una profundidad de bits de 24)
+
+
 enscript
 Aplicatión que toma archivos ASCII y los convierte a PostScript, HTML o RTF.
 $ enscript -J frases -ptexto.ps texto.txt (con título [J] y salida como "texto.ps" sobre el archivo texto.txt)
 $ enscript -2 texto.txt (imprimir texto.txt a dos columnas)
 $ enscript -B -2r texto.txt (Imprimir texto.txt sin cabecera [B], a dos columnas y hacerlo apaisado)
+
+
+ent
+Programa de prueba de secuencias de números pseudoaleatorios útil para quienes evalúan generadores de números pseudoaleatorios para aplicaciones de cifrado y muestreo estadístico, algoritmos de compresión...
+$ ent datos_aleatorios.bin (analizará datos_aleatorios.bin y dará un resumen de las pruebas realizadas)
+1.-
+Analizar datos generados aleatoriamente
+$ dd if=/dev/urandom of=datos_aleatorios.bin bs=1M count=1
+$ ent datos_aleatorios.bin
+La salida típica podría verse así:
+          Entropy = 7.999999 bits per byte.
+          Optimum compression would reduce the size of this 1048576 byte file by 0 percent.
+          Chi square distribution for 256 samples is 248.00, and randomly would exceed this value 0.00 percent of the time.
+          Arithmetic mean value of data bytes is 127.5 (127.0 = random).
+          Monte Carlo value for Pi is 3.141592653589793.
+
+
+entagged
+Etiquetador de archivos de audio escrito en Java que utiliza la base de datos en línea FreeDB para obtener información de metadatos [etiquetas] de losd archivos. Soporta varios formatos de audio como APE, FLAC, MP3, MPC, OGG, WMA.
+$ entagged --artist "The Beatles" --album "Sgt. Pepper's Lonely Hearts Club Band" song.mp3 (etiquetar un archivo específico)
+$ entagged --artist "Radiohead" /ruta/a/carpeta/ (etiquetar todos los archivos en una carpeta)
+$ entagged --list-tags song.mp3 (obtener todas las etiquetas de un archivo)
+$ entagged --update song.mp3 (actualizar las etiquetas de un archivo existente)
+$ entagged --search "genre=rock" /ruta/a/carpeta/ (buscar archivos por etiqueta)
+
+
+entr
+Ejecuta comandos arbitrarios cuando cambian los archivos. El Event Notify Test Runner [ejecutor de pruebas de notificación de eventos - entr] ejecuta comandos arbitrarios cuando cambian los archivos. Los cambios se detectan a través de la interfaz del kernel inotify.
+$ ls main.c | entr gcc -o main main.c (un archivo main.c que se quiere recompilar con gcc cada vez que se modifica)
+$ find . -name "*.py" | entr python test.py (lista todos los archivos .py en el directorio actual y subdirectorios y cada vez que se modifica un archivo .py, entr ejecuta python test.py)
+$ ls index.html | entr pkill -HUP -f "python -m http.server" (recarga el servidor cada vez que cambia index.html)
+$ ls archivo.txt | entr echo "¡El archivo cambió!" (cada vez que se modifica archivo.txt, se verá el mensaje en la terminal)
+$ ls *.txt | entr cat archivo1.txt (monitorear todos los archivos .txt y ejecutar cat archivo1.txt cuando cualquiera cambia)
+$ ls main.py | entr -r python main.py (si cambia main.py, entr termina el proceso anterior y ejecuta python main.py de nuevo)XS
 
 
 entropybroker
