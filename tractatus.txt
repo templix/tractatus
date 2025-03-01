@@ -14701,6 +14701,18 @@ Los clientes son programas que generan entropía y la envían al servidor.
 # entropybroker -s (verificar las estadísticas y el estado del servidor que mostrará cuántos clientes están conectados y cuánta entropía está siendo generada y procesada)
 
 
+enum
+permite enumerar números entre dos valores, con opciones para definir el paso, la cantidad de números a generar y el formato de salida. Es útil para generar secuencias de números con control sobre el formato y la interpretación de la entrada y salida. Está diseñado para ser un reemplazo directo de GNU seq.
+$ enum 1 10 (generar una secuencia simple del 1 al 10)
+$ enum -r 1 10 (generar un número aleatorio entre 1 y 10)
+$ enum -f "%02d" 1 5 (generar números del 1 al 5 con formato de dos dígitos)
+$ enum -p 2 1 10 (generqar números con dos decimales entre entre el 1 y el 10)
+$ enum -c 55 78 (enumerar caracteres del 58 al 78)
+$ enum -b "linux es un sistema genial" 5x (imprimir 5 veces la frase)
+$ enum 1 2 10 (de 1 a 10 con incremento de 2)
+$ enum 10 -2 1 (del 10 al 1 decreciendo de 2)
+
+
 env
 Muestra las variables de entorno
 $ env | grep DISPLAY
