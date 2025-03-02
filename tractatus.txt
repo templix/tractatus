@@ -14728,6 +14728,15 @@ $ env2 -f config.sh -t python (convertir variables de entorno a otro lenguaje de
 $ env2 -f config.sh -t json(convertir las variables de entorno a un formato JSON)
 
 
+envstore
+Almacén de variables de entorno en todos los procesos del shell. envstore permite guardar las variables de entorno en un almacén independiente, enumerarlas, borrarlas y volver a cargarlas.
+$ envstore l (listar variables guardadas)
+$ envstore c (borrar todas la variables almacenadas)
+$ envstore e (restaruar todas las variables guardadas)
+$ envstore s SHELL (guardar la variable SHELL en el almacen)
+$ envstore r PATH (borra la variable PATH del almacen)
+
+
 envsubst
 En el modo de funcionamiento normal, la entrada estándar se copia en la salida estándar y las referencias a las variables de entorno de la forma $VARIABLE o ${VARIABLE} se reemplazan por los valores correspondientes. Si se proporciona SHELL-FORMAT, solo se sustituyen las variables de entorno a las que se hace referencia en SHELL-FORMAT; de lo contrario, se sustituyen todas las referencias de variables de entorno que aparecen en la entrada estándar. Cuando se usa --variables, la entrada estándar se ignora y la salida consta de las variables de entorno a las que se hace referencia en SHELL-FORMAT, una por línea.
 Ejemplo
