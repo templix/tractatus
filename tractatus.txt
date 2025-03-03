@@ -14768,6 +14768,22 @@ Paquete que utiliza libeot para convertir .eot [Embedded OpenType] a .ttf [TrueT
 $ eot2ttf fuente.eot (generará un archivo fuente.ttf en el mismo directorio)
 
 
+epub-utils
+Herramientas para trabajar con el formato de archivo EPUB. Las herramientas de ebook proporcionan formas de acceder y convertir diferentes formatos de archivos de libros electrónicos. Este paquete contiene las siguientes utilidades: einfo [proporciona información básica sobre un documento EPUB como metadatos, orden de lectura, etc.] y lit2epub [convierte un archivo LIT a EPUB].
+$ einfo -v libro.epub (muestra si existen errores)
+$ einfo -vv libro.epub (habilita mensajes de advertencia)
+$ einfo -t id51 libro.epub (imprime información del id51 que se obtiene con el comando anterior)
+$ einfo -p libro.epub (impresión del libro)
+
+
+epubcheck
+Herramienta para validar archivos EPUB que puede detectar muchos tipos de errores.
+$ epubcheck archivo.epub (forma básica)
+$ epubcheck -l (lista los mensajes y los niveles de gravedad)
+$ epubcheck --out archivo archivo.epub (guarda el informe en archivo en xml)
+$ epubcheck -e -w archivo.epub (solo muestra mensajes de gravedad, error y advertencia en la salida)
+
+
 epylog
 Analizador syslog que se ejecuta periódicamente. Examina los registros procesando algunas de las entradas para presentarlas en un formato más comprensible. Puede enviar el resultado por correo.
 # epylog --last day (del último dia. Otras opciones: "hour" [h], "week" [w], "month" [m])
@@ -14777,14 +14793,6 @@ Analizador syslog que se ejecuta periódicamente. Examina los registros procesan
 
 equivs-build
 Es un programa que crea paquetes Debian que pueden usarse para informar a dpkg sobre los paquetes instalados localmente y sus dependencias. También con equivs se pueden crear paquetes vacíos que sólo requieren otros paquetes. Éstos pueden usarse como paquetes de "perfil" que sólo marcan a otros para su instalación. Por favor, tenga en cuenta que este es un hack rudimentario y que si se usa irreflexivamente, podría dañar su sistema de empaquetado. Tenga en cuenta también que no es la forma recomendada de tratar con dependencias rotas. Mejor envíe un informe de error
-
-
-epubcheck
-Herramienta para validar archivos EPUB que puede detectar muchos tipos de errores.
-$ epubcheck archivo.epub (forma básica)
-$ epubcheck -l (lista los mensajes y los niveles de gravedad)
-$ epubcheck --out archivo archivo.epub (guarda el informe en archivo en xml)
-$ epubcheck -e -w archivo.epub (solo muestra mensajes de gravedad, error y advertencia en la salida)
 
 
 errno
