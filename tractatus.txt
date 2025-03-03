@@ -14791,6 +14791,20 @@ Analizador syslog que se ejecuta periódicamente. Examina los registros procesan
 # epylog --cron (ejecutarlo periodicamente)
 
 
+eql
+Herramienta que permite distribuir la carga de tráfico de red entre varias interfaces de red físicas, como eth0, eth1, ppp0, etc y está especificamente diseñada para combinar múltiples enlaces de red en una sola interfaz lógica, lo que permite aumentar el ancho de banda y mejorar la redundancia.
+# modprobe eql (cargar el módulo del kernel)
+# lsmod | grep eql (verificar que el módulo está activo)
+# ip link add eql0 type eql (crear la interfaz eql)
+# ip addr add 192.168.1.1/24 dev eql0 (asignar una dirección IP)
+# ip link set eql0 up (y activarla)
+# eql_enslave eql0 eth0 (agregar eth0 a la interfaz eql0)
+# eql_enslave eql0 eth1 (agregar otro [eth1] para compartir el tráfico de red)
+# ip route add default via 192.168.1.254 dev eql0 (establecer 192.168.1.254 como la puerta de enlace para todo el tráfico saliente a través de eql0)
+$ cat /proc/net/eql (ver las interfaces agregadas al balanceador)
+$ ip addr show eql0 (otra forma de verlas)
+
+
 equivs-build
 Es un programa que crea paquetes Debian que pueden usarse para informar a dpkg sobre los paquetes instalados localmente y sus dependencias. También con equivs se pueden crear paquetes vacíos que sólo requieren otros paquetes. Éstos pueden usarse como paquetes de "perfil" que sólo marcan a otros para su instalación. Por favor, tenga en cuenta que este es un hack rudimentario y que si se usa irreflexivamente, podría dañar su sistema de empaquetado. Tenga en cuenta también que no es la forma recomendada de tratar con dependencias rotas. Mejor envíe un informe de error
 
