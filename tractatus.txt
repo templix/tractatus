@@ -14805,8 +14805,13 @@ $ cat /proc/net/eql (ver las interfaces agregadas al balanceador)
 $ ip addr show eql0 (otra forma de verlas)
 
 
-equivs-build
-Es un programa que crea paquetes Debian que pueden usarse para informar a dpkg sobre los paquetes instalados localmente y sus dependencias. También con equivs se pueden crear paquetes vacíos que sólo requieren otros paquetes. Éstos pueden usarse como paquetes de "perfil" que sólo marcan a otros para su instalación. Por favor, tenga en cuenta que este es un hack rudimentario y que si se usa irreflexivamente, podría dañar su sistema de empaquetado. Tenga en cuenta también que no es la forma recomendada de tratar con dependencias rotas. Mejor envíe un informe de error
+equivs
+Este paquete proporciona una herramienta para crear paquetes Debian y evitar sus dependencias. Normalmente, estos paquetes contienen sólo información de dependencias, pero también pueden incluir archivos normales instalados como otros paquetes. Otro uso es evitar la comprobación de dependencias: al permitir que dpkg piense que un nombre y una versión de paquete en particular están instalados cuando no lo están, puede evitar errores en las dependencias de otros paquetes.
+$ equivs-control paquete (En un directorio vacio generará el archivo paquete, que es un archivo de control que se tendrá que editar y completar con los datos que se quiera)
+$ equivs-build paquete (generará paquete.deb en el directorio actual junto con los build y changes)
+El paquete.deb puede instalarse aunque no contenga ningún tipo de ejecutable:
+# dpkg -i paquete.deb
+Solo sirve para que las dependencias que hemos colocado en el archivo de control se consideren instaladas.
 
 
 errno
