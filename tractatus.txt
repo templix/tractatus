@@ -14758,6 +14758,16 @@ Convertir archivos de texto entre distintas codificaciones de esperanto
 $ eoconv --from=iso-8859-2 --to=utf-8 input.txt > output.txt (convertir un archivo a codificación en utf-8 y guardarlo en output.txt)
 
 
+eot-utils
+Herramientas para convertir de formato de fuente OTF [OpenType Font] o TTF [TrueType] a EOT [Embedded OpenType]. Las utilidades EOT son los dos programas mkeot y eotinfo. El primero crea un archivo EOT (Embedded OpenType) a partir de una fuente OpenType o TrueType y las URL de una o más páginas web. mkeot respeta los bits de incrustación TrueType.
+$ ttf2eot < fuente.ttf > fuente.eot (toma un archivo TTF y genera su versión EOT)
+
+
+eot2ttf
+Paquete que utiliza libeot para convertir .eot [Embedded OpenType] a .ttf [TrueType]. Libeot es una biblioteca para analizar archivos OpenType integrados y convertirlos a otros formatos.
+$ eot2ttf fuente.eot (generará un archivo fuente.ttf en el mismo directorio)
+
+
 epylog
 Analizador syslog que se ejecuta periódicamente. Examina los registros procesando algunas de las entradas para presentarlas en un formato más comprensible. Puede enviar el resultado por correo.
 # epylog --last day (del último dia. Otras opciones: "hour" [h], "week" [w], "month" [m])
