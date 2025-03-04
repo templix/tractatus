@@ -14849,11 +14849,13 @@ $ esbuild app.ts --bundle --servedir=dist (servirá el contenido del directorio 
 
 
 escputil
-Ver nivel de tinta de las impresoras Epson
-# escputil -i -u -r /dev/usblp0 (Para ver niveles de tinta)
-# escputil -c -u -r /dev/usblp0 (Limpiar cabezales)
-# escputil -n -u -r /dev/usblp0 (Imprimir prueba de inyestores)
-# escputil -h -u -r /dev/usblp0 (Listar comandos y opciones)
+Utilidad para limpiar y alinear los cabezales y comprobar los niveles de tinta de las impresoras Epson Stylus.
+$ escputil -s -P impresora (mostrar elestado de la impresora especiicada, por defecto la del sistema)
+$ escputil -c (limpiar los cabezales de la impresora)
+$ escputil -q 0 (comprobar niveles de tinta específicos, por ejemplo, negro [1 = azul, 2 = verde, etc.])
+$ escputil -a (alinear los cabezales de la impresora)
+$ escputil -M (ver modelos soportados)
+$ escputil -n (prueba de inyectores. Si se ven espacios, limpiar cabezales)
 
 
 esetroot
