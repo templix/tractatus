@@ -14840,6 +14840,14 @@ es2_info
 $ es2_info
 
 
+esbuild
+Herramienta de construcción y empaquetado para JavaScript y TypeScript conocida por su velocidad y eficiencia. Está diseñada para optimizar y empaquetar código para su despliegue en aplicaciones web.
+$ esbuild index.js --bundle --outfile=bundle.js (empaquetar index.js y generará un archivo bundle.js que contiene todo el código necesario para ejecutar la aplicación)
+$ esbuild index.js --bundle --minify --outfile=bundle.min.js (generar un archivo bundle.min.js que es una versión minificada del código empaquetado)
+$ esbuild app.ts --bundle --outfile=bundle.js (empaquetar TypeScript)
+$ esbuild app.ts --bundle --servedir=dist (servirá el contenido del directorio dist en un servidor local)
+
+
 escputil
 Ver nivel de tinta de las impresoras Epson
 # escputil -i -u -r /dev/usblp0 (Para ver niveles de tinta)
