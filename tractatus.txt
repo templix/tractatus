@@ -14868,6 +14868,27 @@ otras opciones:
       -m (en mosaico)
 
 
+esmtp
+Agente de transferencia de correo [Mail Transfer Agent - MTA] que solo retransmite correo. No recibe correo, ni amplía alias ni administra una cola, pero puede entregar correo localmente a través de un MDA [Mail Delivery Agent] como procmail y maildrop.
+Contenido mínimo del archivo de confgiuración del usuario:
+$ nano  ~/.esmtprc
+        hostname = smtp.example.com:587
+        username = usuario@example.com
+        password = "contraseña"
+        starttls = enabled
+        mda = "/usr/bin/procmail -d %T"
+Se especifica servidor SMTP que retransmitirá los correos, credenciales de autentificación, encriptación con STARTTLS y encargado de la entrega final
+$ echo -e "Subject: Prueba\n\nEste es un mensaje de prueba." | esmtp destinatario@example.com (enviar un correo)
+$ echo "Este es el mensaje." | mutt -s "Asunto" -a archivo.pdf -- destinatario@example.com (enviar un archivo con mutt que detectará automáticamente esmtp como el MTA si está bien configurado)
+$ echo "Este es un correo desde mailx con esmtp" | mailx -s "Correo con mailx" destinatario@example.com (usando mailx)
+$ echo "Mensaje de prueba" | esmtp -v destinatario@example.com (Si algo falla, usar la opción -v y revisar el archivo de configuración ~/.esmtprc y probar con otro servidor SMTP)
+1.-
+Enviar correo con sendmail
+$ echo "Cuerpo del mensaje" | esmtp -t <<EOF
+  To: destinatario@example.com
+  Subject: Prueba de esmtp
+
+
 espeak
 Hablando la terminal. Mismas opciones que aoss espeak.
 $ echo {1..3}" sistemas quedaron y naturalmente eran linux  " | espeak -ves -s 100
@@ -15078,7 +15099,7 @@ $ exif -e imagen  (extraer la foto miniatura)
 $ exif -r imagen   (suprimir la foto miniatura)
 Nota.- Cuando se toma una iamgen con una cámara fotográfica, esperamos que la imagen resultante tenga la misma orientación que pretendíamos. Esto significa que las imágenes de paisajes se muestran horizontalmente y las imágenes de retratos se muestran verticalmente en la pantalla. Pero, ¿cómo sabe la computadora (o la cámara) cómo se ha tomado una imagen?. La mayoría de los formatos de imagen contienen no solo el contenido, sino también información adicional sobre el contenido: los metadatos de la imagen. El formato de imagen JPEG puede contener metadatos EXIF [Exchangeable Image File Format], entre otras cosas como la lente, el modelo de cámara y la orientación de la imagen.
 La orientación canónica es 1. Un valor de orientación de 1 significa que el contenido de la imagen existe exactamente en la forma en que queremos verlo en la pantalla. Supongamos que tenemos una cámara de fotos cuyo sensor tiene una relación de aspecto de 4:3. Cuando usamos la cámara para tomar una imagen en orientación horizontal, la imagen JPEG resultante tendrá un valor de orientación de 1. Sin embargo, cuando disparamos en modo retrato, los sensores de la cámara notan que la orientación ha cambiado. Los metadatos EXIF de la imagen resultante tendrán un valor de orientación de 8, si la cámara se giró en el sentido de las agujas del reloj, o 6, si la cámara se giró en el sentido contrario a las agujas del reloj. Asimismo, 3 es la orientación correspondiente para imágenes de paisajes al revés.
-Hay casos en los que la cámara produce una imagen invertida, debido a restricciones del hardware de la cámara o a defectos del firmware. Por este motivo, existen otros cuatro valores de orientación posibles, Herramientas como exifautotran [ver] o ImageMagick permiten normalizar la orientación de las imágenes.
+Ha casos en los que la cámara produce una imagen invertida, debido a restricciones del hardware de la cámara o a defectos del firmware. Por este motivo, existen otros cuatro valores de orientación posibles, Herramientas como exifautotran [ver] o ImageMagick permiten normalizar la orientación de las imágenes.
 
 
 exifautotran
@@ -18322,6 +18343,19 @@ Analiza e identifica varios hashes de contraseñas en función de su tipo. Desca
 # hashtag -sh $1$MtCReiOj$zvOdxVzPtrQ.PXNW3hTHI0 (Analizar uno sólo)
 # hashtag -f archivo (Analizar todos los hash contenidos en un archivo)
 # hashtag -d dir -o archivo (recorrer un directorio y todos los subdirectorios intentando identificar todos los hash potenciales y mandando el resultado a un archivo. Si no se especifica, la salida es HashTag_Output_File.txt)
+
+
+hblock
+Script de shell compatible con POSIX que obtiene una lista de dominios que publican anuncios, scripts de seguimiento y malware de múltiples fuentes y los añade al contenio del archivo /etc/hosts y así evita que el sistema se conecte a ellos. Cada dominio se asocia con la dirección IP 127.0.0.1, lo que significa que cualquier intento de acceder a esos dominios será redirigido a la máquina local, evitando así que el sistema se conecte a ellos. Aunque no modifica el contenido existente en /etc/hosts, siempre es preferible realizar una copia de seguridad. Descargar e instalar hblock:
+# curl -o /usr/local/bin/hblock https://raw.githubusercontent.com/hectorm/hblock/v3.4.0/hblock
+# chmod +x /usr/local/bin/hblock
+$ hblock (descargar las listas de dominios y actualizará el archivo /etc/hosts para bloquearlos)
+$ hblock -S none -D none (desactivar temporalmente hBlock generando un archivo de hosts sin ningún dominio bloqueado)
+Para mantener el sistema protegido, es recomendable ejecutar hblock periódicamente con crontab:
+# crontab -e
+Y añadir la linea:
+0 2 * * * /usr/local/bin/hblock
+Para ejecutar hblock diariamente a las 2 AM
 
 
 hciconfig
