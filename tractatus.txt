@@ -35757,6 +35757,15 @@ Ver que estan haciendo los usuarios conectados (ESER) y desde qué teminal (TTY)
 # w
 
 
+w-scan-cpp
+Herramienta utilizada para escanear y detectar canales de televisión digital basado en VDR [Video Disk Recorder] y sucesor de w_scan.
+$ w_scan_cpp -c? (lista completa de códigos de país)
+$ w_scan_cpp -ft -c ES > channels.conf (escaneo de televisión digital terrestre [DVB-T/T2] en España. -fc [DVB-C - cable digital] y -fs [DVB-S/S2 satélite digital])
+$ w_scan_cpp -ft -c ES --output-VLC > canales.xspf (generar una lista de canales en formato compatible con VLC [XSPF])
+$ w_scan_cpp -ft -c ES --output-mplayer > ~/channels.conf (los canales en formato compatible con mplayer)
+$ mplayer "dvb://NombreDelCanal" (reproducir un canal específico con mplayer)
+
+
 w3m
 Navegador
 $ w3m -v URL (Para visualizar las url con imágenes en las tty)
