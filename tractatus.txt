@@ -27611,6 +27611,18 @@ ALL : 127.0.0.1:106
 O con reglas de firewall apropiadas.
 
 
+poppler-utils
+Herramienta para obtener información de documentos PDF, convertirlos a otros formatos o manipularlos. Inlcuye las aplicaciones pdfdetach [lista o extrae archivos adjuntos], pdffonts [analizador de fuentes], pdfimages [extractor de imágenes], pdfinfo [información del documento], pdfseparate [herramienta de extracción de páginas], pdfsig [verifica firmas digitales], pdftocairo [convertidor de PDF a PNG/JPEG/PDF/PS/EPS/SVG con Cairo], pdftohtml [convertidor de PDF a HTML], pdftoppm [convertidor de imágenes de PDF a PPM/PNG/JPEG], pdftops [convertidor de PDF a PostScript], pdftotext [extracción de texto] y pdfunite [herramienta de fusión de documentos].
+$ pdfunite archivo1.pdf archivo2.pdf archivo3.pdf todos.pdf (unir varios pdfs en uno)
+$ pdftoppm -singlefile -f 4 -r 72 -jpeg -jpegopt quality=90 file.pdf pag4 ([-singlefile] convierte solo una página, [-f] la 4, [-r] DPI de la imagen [x, y], a jpeg y [jpegopt quality=90] 90 de calidad, el pdf de entrada y la salida)
+$ pdfsig ejemplo.pdf (mostrar información sobre el firmante digital de un documento PDF)
+$ pdftops ejemplo.pdf salida.ps (convierte un archivo PDF a PostScript)
+$ pdfseparate ejemplo.pdf salida-%d.pf (creará nuevos archivos PDF, cada uno conteniendo una página individual del original)
+$ pdftotext ejemplo.pdf salida.txt (extrae como texto un archivo PDF)
+$ pdffonts ejemplo.pdf (lista las fuentes usadas en un archivo PDF)
+$ pdfinfo ejemplo.pdf (muestra información general)
+
+
 popularity-contest
 Informa a Debian de los paquetes más populares. Normalmente esta aplicación es lanzada por cron (/etc/cron.daily/popularity-contest). El archivo de configuración se encuentra en /etc/popularity-contest.conf. Si queremos ver el listado de lo que manda a Debian:
 # popularity-contest > listado
