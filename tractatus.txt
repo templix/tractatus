@@ -14889,6 +14889,14 @@ $ echo "Cuerpo del mensaje" | esmtp -t <<EOF
   Subject: Prueba de esmtp
 
 
+espctag
+Editor de etiquetas que puede leer o escribir etiquetas ID666 de archivos SPC, formato de audio asociado con el chip de sonido SPC-700 de la Super Nintendo [SNES] utilizado para almacenar música y efectos de sonido de videojuegos. Las etiquetas ID666 son metadatos incrustados en estos archivos que contienen información como el título de la canción, el nombre del juego, el artista, la fecha de extracción, entre otros.
+$ espctag cancion.spc (muestra las etiquetas ID666 del archivo SPC especificado)
+$ espctag --song --game cancion.spc (mostrar campos específicos)
+$ espctag --set --song="Boss Battle" --artist="Nobuo Uematsu" cancion.spc (cambia el título de la canción a "Boss Battle" y el artista a "Nobuo Uematsu" en cancion.spc)
+$ espctag -v -e --set --artist="Unknown" cancion1.spc cancion2.spc (intenta establecer el artista como "Unknown" en ambos archivos, mostrando detalles y continuando incluso si uno falla)
+
+
 espeak
 Hablando la terminal. Mismas opciones que aoss espeak.
 $ echo {1..3}" sistemas quedaron y naturalmente eran linux  " | espeak -ves -s 100
