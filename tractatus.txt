@@ -14902,6 +14902,12 @@ Hablando la terminal. Mismas opciones que aoss espeak.
 $ echo {1..3}" sistemas quedaron y naturalmente eran linux  " | espeak -ves -s 100
 
 
+espeakup
+demonio que se utiliza para proporcionar acceso a la síntesis de voz a través de la combinación de Speakup, que es un lector de pantalla para sistemas basados en texto, y Espeak, que es un sintetizador de voz de software. Su objetivo principal es ayudar a los usuarios con discapacidades visuales a interactuar con el sistema operativo y leer texto en la pantalla. El demonio conecta los módulos del kernel de Speakup al sintetizador de voz Espeak a través de un dispositivo especial llamado /dev/softsynth. Esto permite que el texto que se muestra en la consola sea convertido a voz, facilitando la lectura del contenido.
+$ espeakup & (iniciar el demonio espeakup en segundo plano)
+$ espeak -s 150 "Hola, esto es un ejemplo de uso de Espeak." (la frase a 150 palabras por minuto)
+
+
 et
 [Eternal Terminal]. Shell remoto, que a diferencia de una sesión normal ssh, aunque se tenga un cambio de ip o un corte de red, se vuelve a conectar automáticamente sin interrumpir la sesión. En debian, añadir a /etc/apt/sources.list la linea:
 	deb https://mistertea.github.io/debian-et/debian-source/ stretch main
