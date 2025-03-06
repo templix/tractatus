@@ -14933,6 +14933,31 @@ $ etc1tool imagen.png --encode imagen.pkm --quality best (intenta obtener la mej
 $ etc1tool imagen.png --encode imagen.pkm --size 256x256 (redimensiona la imagen a 256x256 antes de codificarla)
 
 
+etcd-discovery
+Código que potencia el servicio público en https://discovery.etcd.io. Este paquete proporciona una URL de descubrimiento inicial independiente si se contacta con https://discov si su servidor no tiene conexión a Internet. etcd es un almacén de clave-valor comúnmente utilizado en sistemas distribuidos como Kubernetes para almacenar la configuración del clúster y coordinar la comunicación entre nodos. El servicio de descubrimiento es una herramienta que facilita la formación de un clúster que, cuando se inicia, los nodos necesitan conocerse entre sí para formar el clúster. El servicio de descubrimiento proporciona una URL única que los nodos pueden usar para registrarse y descubrir a otros miembros del clúster.
+Generar una URL de descubrimiento única utilizando el servicio público en https://discovery.etcd.io. Esta URL actúa como un punto de encuentro para los nodos del clúster. Ejemplo de URL generada:
+        https://discovery.etcd.io/3e86b59982e49066c5d813af1c2e2579
+Cada nodo del clúster de etcd se configura con esta URL de descubrimiento. Cuando los nodos se inician, se registran en esta URL y descubren a otros nodos registrados. Una vez que los nodos se han registrado y descubierto entre sí, forman un clúster de etcd. Suponiendo que se está configurando un clúster de etcd con tres nodos, un ejemplo de cómo se podría usar el servicio de descubrimiento: Se accede con el navegador a:
+        https://discovery.etcd.io/new
+O con curl:
+        $ curl https://discovery.etcd.io/new?size=3
+Devolverá una URL única, por ejemplo:
+        https://discovery.etcd.io/3e86b59982e49066c5d813af1c2e2579
+Y en cada nodo, configurar etcd para usar la URL de descubrimiento. Por ejemplo, en un nodo:
+        $ etcd --name node1 --initial-advertise-peer-urls http://192.168.1.101:2380 \
+             --listen-peer-urls http://192.168.1.101:2380 \
+             --discovery https://discovery.etcd.io/3e86b59982e49066c5d813af1c2e2579
+En otro nodo:
+        $ etcd --name node2 --initial-advertise-peer-urls http://192.168.1.102:2380 \
+             --listen-peer-urls http://192.168.1.102:2380 \
+             --discovery https://discovery.etcd.io/3e86b59982e49066c5d813af1c2e2579
+Y en el tercer nodo:
+        $ etcd --name node3 --initial-advertise-peer-urls http://192.168.1.103:2380 \
+             --listen-peer-urls http://192.168.1.103:2380 \
+             --discovery https://discovery.etcd.io/3e86b59982e49066c5d813af1c2e2579
+Una vez que los tres nodos se hayan iniciado y registrado en la URL de descubrimiento, formarán un clúster de etcd.
+
+
 eterm
 [eterm-utils]. Emulador de terminal en color diseñado por y para Enlightenment. Este terminal es altamente configurable y dispone de una gran cantidad de temas disponibles. Su gran característica principal son las transparencias. eterm-utils dispone de varios ejecutables que todos se lanzan con la primera letra en mayúscula: Esetroot [ver] y kEsetroot para kde, Etbg [establece la imagen de fondo de Eterm], Etbg_update_list [actualiza listas de mapas de píxeles para los menús], Etcolors [muestra una tabla del mapa de colores actual], Etsearch [busca en el historial del búfer hacia atrás] y Ettable [muestra el conjunto de caracteres de la fuente actual].
 $ Eterm -D 1 -f green -O (En el segundo escritorio [-D 1] con las fuentes en verde  [-f]  y transparente [-O]
