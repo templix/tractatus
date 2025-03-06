@@ -14958,6 +14958,40 @@ Y en el tercer nodo:
 Una vez que los tres nodos se hayan iniciado y registrado en la URL de descubrimiento, formarán un clúster de etcd.
 
 
+etcd-server
+Un almacén de valores clave de alta disponibilidad para la configuración compartida y el descubrimiento de servicios. Es comúnmente utilizado en sistemas como Kubernetes para almacenar configuraciones de clúster y datos de coordinación.
+$ etcd --name mi-nodo --data-dir /var/lib/etcd (inicia un nodo de etcd con el nombre mi-nodo, almacenando sus datos en /var/lib/etcd)
+$ etcd --name nodo1 --data-dir /var/lib/etcd --listen-client-urls http://localhost:2379 --advertise-client-urls http://localhost:2379 (inicia un nodo etcd escuchando en el puerto 2379 solo en localhost)
+$ etcdctl put clave "Hola Mundo" (guardar un valor)
+$ etcdctl get clave (leer el valor almacenado)
+$ etcdctl get "" --prefix (listar claves almacenadas)
+$ etcdctl endpoint status --write-out=table (ver el estado del clúster)
+1.-
+Ejemplo de de iniciar tres nodos en diferentes máaquina, por ejemplo, en una configuración de tres nodos:
+Nodo 1:
+      $ etcd --name nodo1 --initial-advertise-peer-urls http://192.168.1.1:2380 \
+      --listen-peer-urls http://192.168.1.1:2380 \
+      --listen-client-urls http://192.168.1.1:2379 \
+      --advertise-client-urls http://192.168.1.1:2379 \
+      --initial-cluster nodo1=http://192.168.1.1:2380,nodo2=http://192.168.1.2:2380,nodo3=http://192.168.1.3:2380 \
+      --data-dir /var/lib/etcd
+Nodo 2:
+      $ etcd --name nodo2 --initial-advertise-peer-urls http://192.168.1.2:2380 \
+      --listen-peer-urls http://192.168.1.2:2380 \
+      --listen-client-urls http://192.168.1.2:2379 \
+      --advertise-client-urls http://192.168.1.2:2379 \
+      --initial-cluster nodo1=http://192.168.1.1:2380,nodo2=http://192.168.1.2:2380,nodo3=http://192.168.1.3:2380 \
+      --data-dir /var/lib/etcd
+Nodo 3:
+      $ etcd --name nodo3 --initial-advertise-peer-urls http://192.168.1.3:2380 \
+      --listen-peer-urls http://192.168.1.3:2380 \
+      --listen-client-urls http://192.168.1.3:2379 \
+      --advertise-client-urls http://192.168.1.3:2379 \
+      --initial-cluster nodo1=http://192.168.1.1:2380,nodo2=http://192.168.1.2:2380,nodo3=http://192.168.1.3:2380 \
+      --data-dir /var/lib/etcd
+Estos nodos forman un clúster distribuido de etcd.
+
+
 eterm
 [eterm-utils]. Emulador de terminal en color diseñado por y para Enlightenment. Este terminal es altamente configurable y dispone de una gran cantidad de temas disponibles. Su gran característica principal son las transparencias. eterm-utils dispone de varios ejecutables que todos se lanzan con la primera letra en mayúscula: Esetroot [ver] y kEsetroot para kde, Etbg [establece la imagen de fondo de Eterm], Etbg_update_list [actualiza listas de mapas de píxeles para los menús], Etcolors [muestra una tabla del mapa de colores actual], Etsearch [busca en el historial del búfer hacia atrás] y Ettable [muestra el conjunto de caracteres de la fuente actual].
 $ Eterm -D 1 -f green -O (En el segundo escritorio [-D 1] con las fuentes en verde  [-f]  y transparente [-O]
