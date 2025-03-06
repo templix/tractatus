@@ -14992,6 +14992,43 @@ Nodo 3:
 Estos nodos forman un clúster distribuido de etcd.
 
 
+etckeeper
+Herramienta que permite almacenar el directorio /etc, que es donde se almacenan los archivos de configuración, en un repositorio git, mercurial, brz o darcs. Se conecta a APT para confirmar automáticamente los cambios realizados en /etc durante las actualizaciones de paquetes. Realiza un seguimiento de los metadatos de los archivos que los sistemas de control de versiones [Version Control Systems - VCS] normalmente no admiten, pero que son importantes para /etc, como los permisos de /etc/shadow. Ideal para mantener un historial de cambios, revertir errores o documentar modificaciones en /etc.
+Archivo de configuración para establecer el VCS que se usa, por defecto git:
+# nano /etc/etckeeper/etckeeper.conf
+       # The VCS to use.
+       #VCS="hg"
+       VCS="git"
+       #VCS="bzr"
+       #VCS="darcs"
+       PUSH_REMOTE="origin"
+Y para que realice los PUSH_REMOTE automaticamente ha de configurarse:
+# nano /etc/etckeeper/commit.d/60push-remote
+    #!/bin/sh
+    cd /etc
+    if [ "$VCS" = "git" ]; then
+        git push "$PUSH_REMOTE" master || {
+            echo "Error: No se pudo hacer push al remoto $PUSH_REMOTE" >&2
+            exit 1
+        }
+    fi
+# chmod +x /etc/etckeeper/commit.d/50push-remote (y darle permisos de ejecución)
+Con la base realizada, puede empezar a usarse la aplicación.
+# cd /etc (entrar en el directorio)
+# etckeeper init (crea un repositorio Git en /etc/.git y prepara el directorio /etc para el control de versiones)
+# etckeeper commit "Primera confirmación inicial de /etc" (registra todos los archivos actuales de /etc en el repositorio con el mensaje especificado)
+A partir de este momento cualquier cambio que realice el usuario en algún archivo en /etc ha lanzarse:
+# etckeeper commit "Añadida entrada para servidor-local en /etc/XXXX"
+Si la modificación procede de APT por la instalación de un paquete, etckeeper detecta los cambios y automaticamente hace una confirmación al finalizar la instalación.
+# etckeeper vcs log (verificar el historial)
+# etckeeper vcs status (ver qué ha cambiado antes de confirmarlo)
+# etckeeper commit "Actualizados hosts y resolv.conf" (confirmar los cambios de varios archivos)
+# etckeeper vcs checkout abcd123 /etc/hosts (volver al estado antes de añadir una entrada)
+# etckeeper commit "Revertido cambio en /etc/hosts a estado inicial" (y confirmar el cambio)
+# etckeeper vcs diff abcd123 efgh456 (comparar qué cambió entre dos confirmaciones)
+Nota.- Lo inmportante de este paquete, es su integración con APT. Cada vez que se usa para instalar, actualizar o eliminar paquetes, etckeeper ejecuta un "hook" que detecta cambios en /etc y los registra automáticamente en el repositorio con un mensaje como "committing changes in /etc after apt run" sin intervención manual y los permisos y otros metadatos los guarda en el archivo especial .etckeeper.
+
+
 eterm
 [eterm-utils]. Emulador de terminal en color diseñado por y para Enlightenment. Este terminal es altamente configurable y dispone de una gran cantidad de temas disponibles. Su gran característica principal son las transparencias. eterm-utils dispone de varios ejecutables que todos se lanzan con la primera letra en mayúscula: Esetroot [ver] y kEsetroot para kde, Etbg [establece la imagen de fondo de Eterm], Etbg_update_list [actualiza listas de mapas de píxeles para los menús], Etcolors [muestra una tabla del mapa de colores actual], Etsearch [busca en el historial del búfer hacia atrás] y Ettable [muestra el conjunto de caracteres de la fuente actual].
 $ Eterm -D 1 -f green -O (En el segundo escritorio [-D 1] con las fuentes en verde  [-f]  y transparente [-O]
