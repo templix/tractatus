@@ -14923,6 +14923,16 @@ $ eta -- dd if=/dev/zero of=largefile bs=1M count=1000 (monitorea el progreso de
 $ eta --target 10000 -- ./count_lines.sh largefile.txt (indica que el valor objetivo es 10000 líneas y muestra el tiempo estimado de finalización)
 
 
+etc1tool
+Utilidad que permite codificar imágenes PNG según el estándar de compresión ETC1 [Ericson Texture Compression] y decodificar imágenes comprimidas ETC1 nuevamente a PNG. Es un formato de compresión de texturas utilizado en gráficos 3D en dispositivos móviles, especialmente en Android. No soporta transparencia, por lo que si el PNG de entrada tiene un canal alfa, se perderá.
+$ etc1tool imagen.png --encode imagen.pkm (convertir imagen.png a imagen.pkm, que es el formato de textura comprimida ETC1)
+$ etc1tool imagen.pkm --decode imagen_decodificada.png (convierte imagen.pkm nuevamente a imagen_decodificada.png)
+$ etc1tool imagen.png --encode imagen.pkm --format rgb8 (indica que la imagen usa un formato de color de 8 bits por canal)
+$ etc1tool imagen.pkm --show-info (muestra información sobre la imagen imagen.pkm, como dimensiones y si está comprimida correctamente)
+$ etc1tool imagen.png --encode imagen.pkm --quality best (intenta obtener la mejor calidad de compresión posible)
+$ etc1tool imagen.png --encode imagen.pkm --size 256x256 (redimensiona la imagen a 256x256 antes de codificarla)
+
+
 eterm
 [eterm-utils]. Emulador de terminal en color diseñado por y para Enlightenment. Este terminal es altamente configurable y dispone de una gran cantidad de temas disponibles. Su gran característica principal son las transparencias. eterm-utils dispone de varios ejecutables que todos se lanzan con la primera letra en mayúscula: Esetroot [ver] y kEsetroot para kde, Etbg [establece la imagen de fondo de Eterm], Etbg_update_list [actualiza listas de mapas de píxeles para los menús], Etcolors [muestra una tabla del mapa de colores actual], Etsearch [busca en el historial del búfer hacia atrás] y Ettable [muestra el conjunto de caracteres de la fuente actual].
 $ Eterm -D 1 -f green -O (En el segundo escritorio [-D 1] con las fuentes en verde  [-f]  y transparente [-O]
