@@ -14917,6 +14917,12 @@ Instalar con el clásico:
 # apt install et
 
 
+eta
+Herramienta de línea de comandos que se utiliza para monitorear el progreso de procesos y estimar el tiempo restante para su finalización.
+$ eta -- dd if=/dev/zero of=largefile bs=1M count=1000 (monitorea el progreso de la copia y muestra una barra de progreso junto con el tiempo estimado de finalización)
+$ eta --target 10000 -- ./count_lines.sh largefile.txt (indica que el valor objetivo es 10000 líneas y muestra el tiempo estimado de finalización)
+
+
 eterm
 [eterm-utils]. Emulador de terminal en color diseñado por y para Enlightenment. Este terminal es altamente configurable y dispone de una gran cantidad de temas disponibles. Su gran característica principal son las transparencias. eterm-utils dispone de varios ejecutables que todos se lanzan con la primera letra en mayúscula: Esetroot [ver] y kEsetroot para kde, Etbg [establece la imagen de fondo de Eterm], Etbg_update_list [actualiza listas de mapas de píxeles para los menús], Etcolors [muestra una tabla del mapa de colores actual], Etsearch [busca en el historial del búfer hacia atrás] y Ettable [muestra el conjunto de caracteres de la fuente actual].
 $ Eterm -D 1 -f green -O (En el segundo escritorio [-D 1] con las fuentes en verde  [-f]  y transparente [-O]
