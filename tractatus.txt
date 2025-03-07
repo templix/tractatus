@@ -15047,6 +15047,22 @@ Arrancar un ordenador [especificado por su MAC] de forma remota una vez activado
 # etherwake -i eth0 00:16:E6:31:1A:22
 
 
+ethflux
+Herramienta diseñada para monitorizar y analizar el rendimiento de las interfaces de red mediante ioctl SIOCETHTOOL al estilo de ethtool y enviarla a una base de datos InfluxDB.
+Ejemplo de configuración de la base de datos InfluxDB:
+$ nano config.yaml
+       influxdb:
+         url: "http://localhost:8086"
+         database: "metrics"
+         username: "usuario"
+         password: "contraseña"
+       interfaces:
+         - "eth0"
+         - "eth1"
+Se especifica la url especifica la dirección de InfluxDB, nombre de la base de datos donde se almacenarán las métricas,  las credenciales de acceso a InfluxDB y lista de las interfaces de red que se monitorizarán.
+$ ethflux -config config.yaml (iniciará la recopilación de datos de las interfaces especificadas y las enviará a la base de datos InfluxDB según la configuración proporcionada)
+
+
 ethstats
 muestra el uso y las estadísticas de nuestra red.
 # ethstats
@@ -15070,6 +15086,20 @@ ethumb
 Programa que crea miniaturas a partir de imágenes del fichero.
 $ ethumb -f=png archivo.pdf (crear un thumbnail de un pdf en png)
 $ ethumb -p=3 -f=png archivo.pdf (tomando como imagen la página 3)
+
+
+etktab
+Editor de tablaturas que representan las cuerdas de la guitarra y los trastes en los que se debe presionar en ASCII. Este programa se utiliza para escribir tablaturas de guitarra en el estilo típico de tablatura ASCII, que se encuentra a menudo en Internet.
+Ejemplo de tablatura [acorde de G (Sol)]:
+        e|---0---2---3---| (1ra cuerda)
+        B|---0---3-------| (2da cuerda)
+        G|---0-----------| (3ra cuerda)
+        D|---2-----------| (4ta cuerda)
+        A|---2-----------| (5ta cuerda)
+        E|---0-----------| (6ta cuerda)
+Nota.- Cada línea representa una cuerda de la guitarra, desde la más aguda "e" hasta la más grave "E", y los números indican los trastes que se deben presionar.
+$ eTktab (iniciar la interfaz y con el teclado marcar notas y acordes. Pulsando "help" se muestran todos las equivalencias en el teclado)
+$ cat musica.et6 (mostrar la tabladura)
 
 
 ettercap
