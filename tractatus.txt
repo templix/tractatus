@@ -15226,6 +15226,20 @@ $ nano ejemplo.sh
 Descomentar la linea del "echo" y comentar la de "eval" y observar la diferencia entre ambas salidas.
 
 
+evdi-dkms
+[Extensible Virtual Display Interface-Dynamic Kernel Module Support]. Módulo de kernel del controlador de interfaz de pantalla virtual extensible que permite la creación y administración de múltiples pantallas virtuales. Es especialmente útil para dispositivos como los de DisplayLink por ejemplo, adaptadores USB para monitores, pero no es un controlador completo por sí solo. El sufijo dkms indica que este módulo se compila dinámicamente con el soporte de DKMS. Esto significa que, al actualizar el kernel de Linux, DKMS recompila automáticamente el módulo EVDI para que sea compatible con la nueva versión, evitando la necesidad de recompilarlo manualmente.
+$ lsmod | grep evdi (ver si el módulo está instalado y cargado)
+# modprobe evdi (cargarlo manualmente si no aparece con el comando anterior)
+$ xrandr --listproviders (detectar pantallas disponibles)
+$ xrandr --setprovideroutputsource 1 0 (activar la pantalla virtual)
+$ xrandr --output DVI-I-1-1 --auto --right-of eDP-1 (configura la pantalla virtual EVDI [DVI-I-1-1] a la derecha de la pantalla principal eDP-1)
+# dkms status (si se actualiza el kernel, asegurar de que EVDI sigue funcionando)
+# dkms build -m evdi -v 1.14.1 (reconstruir manualmente el módulo si es necesario)
+# dkms install -m evdi -v 1.14.1
+Nota.- Si se tiene un dispositivo DisplayLink como un adaptador USB a HDMI, se necesita instalar también el software de usuario de DisplayLink, no solo evdi-dkms.
+# /usr/src/linux-headers-$(uname -r)/scripts/sign-file sha256 ./MOK.priv ./MOK.der $(modinfo -n evdi) (en sistemas con Secure Boot, se podría necesitar firmar el módulo EVDI)
+
+
 evillimiter
 Análisis de la red local.
 Descarga e instalación:
