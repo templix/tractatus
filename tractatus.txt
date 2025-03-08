@@ -15240,6 +15240,15 @@ Nota.- Si se tiene un dispositivo DisplayLink como un adaptador USB a HDMI, se n
 # /usr/src/linux-headers-$(uname -r)/scripts/sign-file sha256 ./MOK.priv ./MOK.der $(modinfo -n evdi) (en sistemas con Secure Boot, se podría necesitar firmar el módulo EVDI)
 
 
+evemu-tools
+Herramientas diseñadas para trabajar con dispositivos de entrada que utilizan la interfaz evdev del kernel de Linux. Estas herramientas permiten registrar eventos de entrada, como los de un teclado, un ratón o una pantalla táctil, emular dispositivos y reproducir eventos previamente grabados. Este paquete proporciona las herramientas: evemu-describe [Muestra información detallada sobre un dispositivo de entrada evdev], evemu-record [Registra los eventos de un dispositivo de entrada], evemu-play [Reproduce eventos previamente grabados] y evemu-stat [Muestra en tiempo real los eventos que genera un dispositivo de entrada]
+$ ls /dev/input/event* (listar los dispositivos evdev)
+$ evemu-describe /dev/input/event3 (obtener información sobre un dispositivo de entrada)
+$ evemu-record /dev/input/event3 > teclado.log (registrar eventos del teclado. Si presionamos teclas, los eventos quedarán registrados en teclado.log)
+$ evemu-play /dev/input/event3 < teclado.log (simulará la entrada registrada como si el usuario estuviera presionando las teclas en tiempo real)
+$ evemu-stat /dev/input/event3 (mostrará los eventos conforme presionamos teclas o movemos el ratón)
+
+
 evillimiter
 Análisis de la red local.
 Descarga e instalación:
