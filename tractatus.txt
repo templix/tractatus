@@ -15249,6 +15249,14 @@ $ evemu-play /dev/input/event3 < teclado.log (simulará la entrada registrada co
 $ evemu-stat /dev/input/event3 (mostrará los eventos conforme presionamos teclas o movemos el ratón)
 
 
+eventstat
+Herramienta de monitoreo de estados de eventos del núcleo que envía periódicamente su estado actual. Su función principal es rastrear y mostrar información sobre los eventos que ocurren en el sistema, como interrupciones de hardware, cambios de contexto, llamadas al sistema, etc.
+# eventstat (mostrar información sobre los eventos del kernel en tiempo real, actualizándose periódicamente)
+# eventstat -t 2 (especificar el intervalo de tiempo en segundos entre cada actualización de la salida)
+# eventstat | grep tick_sched_timer (ver solo los eventos especificos)
+# timeout 5 eventstat (monitorear durante 5 segundos)
+
+
 evillimiter
 Análisis de la red local.
 Descarga e instalación:
