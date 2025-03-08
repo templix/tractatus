@@ -15171,6 +15171,32 @@ $ eukleides ejemplo.euk > ejemplo.eps (convertir a PostScript)
 $ eukleides ejemplo.euk > ejemplo.svg (obtener gráficos vectoriales)
 
 
+eurephia
+Módulo que añade autenticación por nombre de usuario y contraseña al protocolo OpenVPN. Una cuenta de usuario de eurephia es una combinación de al menos un certificado SSL de OpenVPN y un nombre de usuario con una contraseña asignada. Además, eurephia pondrá en la lista negra direcciones IP, certificados y nombres de usuario en caso de que se produzcan demasiados intentos fallidos. Toda la información se almacena en una base de datos y todos los cambios en las cuentas se harán efectivos de inmediato. Por el momento, eurephia admite la base de datos SQLite.
+Preparar el archivo de configuración de OpenVPN de forma básica:
+# nano /etc/openvpn/server.conf
+Con el siguiente contenio:
+      ...
+      plugin /usr/lib/openvpn/eurephia.so
+      auth-user-pass-verify /etc/openvpn/scripts/check_user.sh via env
+      client-cert-not-required
+      username-as-common-name
+      ...
+Crear el script de verificación de usuarios:
+# nano /etc/openvpn/scripts/check_user.sh
+Con el contenido:
+      #!/bin/bash
+      #
+      if [ "$2" = "password" ]; then
+       echo $1
+      else
+       exit 0
+      fi
+# chmod +x /etc/openvpn/scripts/check_user.sh (hacerlo ejecutable)
+# systemctl restart openvpn@server (reiniciar el servicio OpenVPN)
+Con estas configuraciones, los clientes OpenVPN tendrán que proporcionar un nombre de usuario y una contraseña para conectarse, en lugar de solo un certificado cliente.
+
+
 eval
 Toma los argumentos de la línea de comandos y los ejecuta como comandos.
 * Tenemos un texto con variables:
