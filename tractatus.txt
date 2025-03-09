@@ -26494,6 +26494,28 @@ Verificar si un archivo pasado como argumento existe o no:
 	fi
 
 
+operon
+[exfalso]. Muestra y edita etiquetas de metadatos de audio de los formatos compatibles MP3, Ogg Vorbis, FLAC, Musepack [MPC], WavPack y MOD/XM/IT.
+$ operon list Chuck_Berry_Lets_Twist_Again.mp3
+          Description | Value                         | Tag
+          -------------------------------------------------------
+          Title       | Let's Twist Again             | title
+          Artist      | Bill Haley and the Comets     | artist
+          Album       | 16 Gouden Hits Laatste Nieuws | album
+          Comment     | Verzamel                      | comment
+          Date        | 1993                          | date
+          Genre       | Rock & Roll                   | genre
+$ operon info file.mp3 (muestra, codec, formato, duración...)
+$ operon print -p "<album> - <artist>" file.ogg (muestra nombre del album y artista)
+$ operon image-clear song.mp3 (borrar una imagen de un archivo de sonido)
+$ operon tags -a (muestra listado de tags)
+$ operon tags -t -c tag  (adecuada para el procesamiento de scripts y solo la columna de tag)
+$ operon edit file.mp3 (edita las etiqueras para modificarlas)
+$ operon clear -a file.mp3 (limpia todos los tags del archivo)
+$ operon set artist 'The Emacs' file.mp3 (establece como artista el mencionado)
+$ operon remove artist 'The Emacs' file.mp3 (elimina el artista del archivo)
+
+
 oping
 Utiliza paquetes ping para probar la accesibilidad de los hosts de red.
 $ oping -4 -i 2 host1 host2 host3 (usando IPv4, con un intervalo de 2 segundos y a los hosts especificados)
