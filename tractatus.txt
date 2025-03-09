@@ -15316,6 +15316,30 @@ $ exa -G -l --octal-permissions /etc (incluir loa permisos en octal)
 $ exa -R -s size (de forma recursiva y ordenar por tamaño)
 
 
+exabgp
+Herramienta que permite interactuar con redes definidas por software [Software Defined Networks - SDN] que utilizan el Protocolo de Puerta de Enlace Fronteriza [Border Gateway Protocol - BGP] al transformar los mensajes BGP en texto simple o JSON. BGP es un protocolo fundamental para el enrutamiento en Internet, ya que permite a los routers intercambiar información de rutas y alcanzabilidad entre diferentes sistemas autónomos (AS).
+Ejemplo básico de un archivo de configuración:
+$ nano exabgp.conf
+         group test {
+            neighbor 192.168.1.1 {
+                router-id 192.168.1.2;
+                local-address 192.168.1.2;
+                local-as 65000;
+                peer-as 65001;
+            }
+            process announce {
+                run /usr/bin/python3 /path/to/your/script.py;
+                encoder json;
+            }
+        }
+neighbor 192.168.1.1 --> define el vecino BGP con el que exabgp se comunicará.
+router-id, local-address, local-as, y peer-as --> son parámetros necesarios para establecer la sesión BGP.
+process announce --> define un proceso que ejecutará un script en Python y codificará los mensajes BGP en formato JSON.
+# exabgp exabgp.conf (ejecutar exabgp con la configuración anterior)
+# exabgp /path/to/exabgp.conf --api /var/run/exabgp.sock (monitorear los mensajes BGP y transformarlos en texto simple)
+# socat - UNIX-CONNECT:/var/run/exabgp.sock (leer los mensajes BGP desde el socket)
+
+
 exec
 Ejecuta comandos.
 $ exec firefox
@@ -32568,6 +32592,16 @@ $ sv status /etc/service/* (listar servicios)
 
 swap
 Tambien llamado memoria de intercambio o memoria virtual, es la que se sirve del espacio en el disco duro en lugar del módulo de memoria. Las aplicaciones usan la memoria RAM para ejecutarse en el ordenador cuando no hay muchas ejecutandose pero si hay muchas o estas necesitan mucha RAM o no hay RAM suficiente para todas es cuando entra en acción la swap. Una de las desventajas de utilizar la swap es que el sistema se vuelve más lento ya que la velocidad de intercambio de información entre un disco duro y la RAM es abismalmente diferente. La memoria RAM es unas 1000 veces más rápida que un SSD y 100.000 veces más rápida que un HDD. El tamaño de una swap en un equipo con una memoria de 8 GB o más, como norma general es 2GB. Reservar para la swap más de 2 GB es esteril pero aunque un equipo no tenga 8 GB de memoria es aconsejable no dejar una swap inferior a 1GB.
+1.-
+Como crear un archivo swapfile.
+# dd if=/dev/zero of=/swapfile bs=1M count=16384 status=progress (crear un archivo de intercambio de 16 GB [16 x 1024 = 16384])
+# chmod 600 /swapfile (permisos apropiados de lectura y escritura)
+# mkswap /swapfile (formatear...)
+# swapon /swapfile (..y habilitar el archivo de intercambio)
+# bash -c "echo /swapfile none swap defaults 0 0 >> /etc/fstab" (habilitar el archivo en el arranque)
+# swapoff -v /swapfile (desactivar el archivo para eliminarlo)
+# rm /swapfile (eliminar el archivo)
+# sed -i '/\/swapfile/d' /etc/fstab (eliminar la entrada que agregamos en /etc/fstab.)
 
 
 swapoff
