@@ -15345,6 +15345,73 @@ Ejecuta comandos.
 $ exec firefox
 
 
+execline
+Lenguaje de scripting diseñado para ser ligero y eficiente. A diferencia de los shells tradicionales como sh o bash, execline está diseñado para ser minimalista y evitar la sobrecarga de características, lo que lo hace ideal para entornos donde la eficiencia y la simplicidad son críticas, como en sistemas embebidos o en la inicialización de sistemas.
+1.-
+Ejemplos de scripts
+$ nano mi_script.exl
+       #!/bin/execlineb -P
+       echo "Hola, mundo"
+Nota.- #!/bin/execlineb -P: Indica que el script debe ser ejecutado con execlineb y la opción -P indica que debe buscar los comandos en el PATH.
+$ chmod +x mi_script.exl (hacerlo ejecutable)
+$ ./mi_script.exl (lanzarlo)
+2.-
+$ nano mi_script.exl
+       #!/bin/execlineb -P
+       importas home HOME
+       cd $home
+       ls
+3.-
+$ nano mi_script.exl
+        #!/bin/execlineb -P
+        importas home HOME
+        foreground {
+            if -n { test -d ${home}/Documentos/emacs }
+            mkdir ${home}/Documentos/emacs
+        }
+        echo El script terminó la ejecución
+Si no existe la carpeta ~/Documentos/emacs la crea
+4.-
+$ nano mi_script.exl
+        #!/bin/execlineb -P
+        importas home HOME
+        foreground
+        {
+            if -n { test -d ${home}/.cache/used }
+            mkdir ${home}/.cache/used
+        }
+        backtick DATE { date +%d%m%y }
+        importas date DATE
+        ifelse -n
+        # Ejecutar este bloque y verificar su código de salida
+        {
+            test -d ${home}/.cache/used/$date
+        }
+        # Si el bloque anterior finaliza con un código distinto de cero, entonces
+        # se ejecuta este bloque (debido al indicador -n en ifelse)
+        {
+            touch ${home}/.cache/used/$date
+        }
+        # De lo contrario, el script continúa aquí.
+        exit 1
+5.-
+$ nano mi_script.exl
+        !/bin/execlineb -P
+        # Imprimir todos los archivos y directorios, y usarlos como
+        # entrada para el siguiente comando
+        pipeline { ls }
+        # Para cada archivo y directorio impreso,
+        # ejecutar el siguiente bloque, después de reemplazar Vídeos
+        # con el nombre del directorio deseado
+        forstdin Vídeos
+        # Importar la variable en la carpeta literal
+        importas -u folder Vídeos
+        # Verificar si es una carpeta, por lo que omitimos los archivos
+        if { test -d $folder }
+        # Crear el archivo vacío en su interior
+        touch ${folder}/active
+
+
 exif
 Extraer metadatos de imagenes
 $ exif -d imagen  (mostrar todos los datos)
