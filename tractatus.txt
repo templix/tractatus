@@ -15289,6 +15289,16 @@ Mostrar vista previa de impresión para documentos PostScript y PDF.
 $ evince-previewer archivo.pdf
 
 
+ewf-tools
+Colección de herramientas para leer y escribir archivos Expert Witness Compression Format [EWF], en formato SMART (EWF-S01) y EnCase (EWF-E01). Admite archivos creados con EnCase 1 a 6, Linen y FTK Imager. Libewf es útil para investigaciones forenses. Incluye varias utilidades: ewfacquire [Crea imágenes EWF a partir de un dispositivo o archivo], ewfacquirestream [Crea imágenes EWF a partir de un flujo de datos], ewfexport [Exporta una imagen EWF a un archivo sin comprimir o a otro formato], ewfinfo [Muestra información sobre un archivo EWF]. ewfmount [Monta una imagen EWF como un dispositivo de bloque en el sistema], ewfrecover [Recupera datos de una imagen EWF dañada] y ewfverify [Verifica la integridad de una imagen EWF]
+$ ewfacquire /dev/sdb -o imagen.e01 (crear una imagen EWF de un dispositivo como archivo de salida en formato EWF [E01])
+$ ewfexport imagen.e01 -o imagen.raw (convertir una imagen EWF a un archivo sin comprimir)
+$ ewfinfo imagen.e01 (mostrar información como el tamaño del archivo, el tipo de compresión, el número de segmentos, etc)
+$ ewfmount imagen.e01 /mnt/ewf/ (montar una imagen EWF como un dispositivo de bloque en el sistema)
+$ ewfverify imagen.e01 (verificar que una imagen EWF no está corrupta)
+$ ewfrecover imagen.e01 (intentará reconstruir la imagen y extraer los datos válidos)
+
+
 exa
 Lista el contenido de un directorio de forma mejorada respecto al comando "ls" escrito en rust, coloreando de distintos tipos los archivos, metadatos, atributos, enlace simbólicos, git...
 $ exa (forma básica)
