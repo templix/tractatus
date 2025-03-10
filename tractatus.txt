@@ -15443,8 +15443,15 @@ Transforma los metadatos exif referentes a la orientación [vertical, horizontal
 $ exifautotran file1 file2 file3
 
 
+exifprobe
+Utilidad que lee archivos de imágenes producidos por cámaras digitales, incluidos varios formatos de archivo denominados "raw", TIFF, JPEG y EXIF [Exchangeable Image File Format] e informa sobre la estructura de los archivos, datos auxiliares y metadatos que contienen.
+$ exifprobe imagen.jpg (analizará el archivo imagen.jpg y mostrará los metadatos EXIF, como la marca y modelo de la cámara, la fecha y hora en que se tomó la foto, la configuración de la cámara, etc)
+$ exifprobe foto.cr2 (analizará un archivo RAW en este caso, un archivo CR2 de Canon)
+$ exifprobe -v imagen.jpg (proporcionar más detalles sobre la estructura del archivo y ayudar a verificar su integridad)
+
+
 exiftags
-Muestra los datos exif de un jpg.
+Utilidad para leer etiquetas Exif de un archivo JPEG de una cámara digital. La utilidad exiftags analiza un archivo JPEG específico o, de forma predeterminada, su entrada estándar, en busca de una sección JPEG APP1 que contenga datos Exif (Exchangeable Image File). Las propiedades contenidas en estos datos se imprimen luego en la salida estándar. Las cámaras digitales suelen agregar datos Exif a los archivos de imagen que producen, que contienen información sobre la cámara y la imagen digitalizada.
 $ exiftags foto.jpg
 
 
@@ -15457,6 +15464,23 @@ $ exiftool -GPSLatitudeRef="N" foto.jpg
 $ exiftool -GPSLongitude="2.1740288" foto.jpg
 $ exiftool -GPSLongitudeRef="E" foto.jpg
 $ exiftool -TagsFromFile imagen_datos.jpg imagenFinal.jpg (Copia los datos Exif de la foto "imagen_datos.jpg" a la foto "imagenFinal.jpg")
+
+
+exiftran
+Transformar imágenes JPEG de cámaras digitales, con capacidad de realizar rotaciones sin pérdida [lossless] y gestionar datos EXIF [Exchangeable Image File Format] que son metadatos incrustados en las imágenes por las cámaras digitales que pueden incluir información como la orientación de la imagen, dimensiones, fecha, etc.
+$ exiftran -9 -i foto.jpg (rotar manualmente una imagen 90° en sentido horario y sobreescribir la imagen)
+Opciones de transformación:
+        -a: Rotación automática basada en la etiqueta de orientación EXIF.
+        -9: Rotar 90° en sentido horario.
+        -1: Rotar 180°.
+        -2: Rotar 270° en sentido horario.
+        -f: Voltear verticalmente.
+        -F: Voltear horizontalmente.
+$ exiftran -1 -ib foto1.jpg foto2.jpg foto3.jpg (-1: rotación de 180°, -i: Edición en lugar y -b: Crea copias de respaldo [ej. foto1.jpg.bak] de cada una de las tres fotos)
+$ exiftran -g -ni -i imagen.jpg (-g: Regenera la miniatura EXIF, -ni: No rota la imagen JPEG y -i: Sobrescribe el archivo original)
+$ exiftran -ai *.jpg ((usa la etiqueta EXIF para determinar si la voltea o no, sobreescribe los originales y se aplica a todos los .jpg del directorio))
+$ exiftran -F -o imagen_flip.jpg imagen.jpg (voltea horizontalmente y guardar el resultado)
+$ exiftran -d foto.jpg (muestra los datos EXIF en la terminal)
 
 
 exim
