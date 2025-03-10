@@ -37620,6 +37620,19 @@ Algunas de las opciones:
 	--html (extraer datos de un sitio web.)
 
 
+xmlwf
+[expat]. Determina si un documento XML está bien formado.
+$ xmlwf -c ejemplo.xml -d ~/salida/ (intentará validar el archivo XML y mostrará un mensaje de éxito si está bien formado o un error si no lo está y lo copiará en el direcotorio ~/Salida)
+$ xmlwf -k ejemplo.xml ejemplo2.xml ejemplo3.xml (de forma predeterminada después del primer archivo con un error se para, la opción -k indica que informe el error pero que siga procesando)
+$ wmlwf -t ejemplo.xml (que analice el archivo completo, pero que no realice ningún procesamiento)
+Estado de salida:
+       0 --> Los archivos de entrada están bien formados y la salida, si se solicitó, se escribió correctamente.
+       1 --< Se produjo un error interno.
+       2 --> Uno o más archivos de entrada no estaban bien formados o no se pudieron analizar.
+       3 --> Si se usa la opción -d, se produjo un error al abrir un archivo de salida.
+       4 --> Hubo un error de argumento de línea de comandos en la forma en que se invocó xmlwf.
+
+
 xmodmap
 Muestra la disposición del teclado
 $ xmodmap -pke (listado)
