@@ -15510,10 +15510,30 @@ exit
 Salir del interprete de comandos.
 
 
+exiv2
+Proporciona acceso rápido y fácil de lectura y escritura a los metadatos en archivos de imágenes incluyendo Exif, IPTC y XMP. Los metadatos pueden incluir información como la fecha y hora en que se tomó la foto, la cámara utilizada, la configuración de la cámara, y otra información relevante.
+$ exiv2 imagen.jpg (mostrará todos los metadatos Exif, IPTC y XMP presentes en la imagen imagen.jpg)
+$ exiv2 -PE imagen.jpg (mostrará solo los metadatos Exif de la imagen)
+$ exiv2 -M"set Iptc.Application2.Byline Autor Nuevo" imagen.jpg (modificar los metadatos de una imagen)
+$ exiv2 -d a imagen.jpg (eliminará todos los metadatos de la imagen)
+$ exiv2 -T imagen_origen.jpg imagen_destino.jpg (copiará los metadatos de imagen_origen.jpg a imagen_destino.jpg)
+$ exiv2 -r '%Y-%m-%d_%H-%M-%S' imagen.jpg (renombrará imagen.jpg usando la fecha y hora de los metadatos Exif en el formato YYYY-MM-DD_HH-MM-SS)
+$ exiv2 -Pj imagen.jpg (mostrará los metadatos de imagen.jpg en formato JSON)
+
+
+exo-desktop-item-edit
+[exo-utils]. Permite crear y editar archivos .desktop, que son accesos directos para aplicaciones en entornos gráficos.
+$ exo-desktop-item-edit --create-new ~/Escritorio (aparecerá un cuadro de diálogo donde definir nombre, comando, icono y otras propiedades del acceso directo)
+$ exo-desktop-item-edit ~/Escritorio/mi_aplicacion.desktop (abrirá el editor gráfico para modificar las propiedades del acceso directo)
+$ exo-desktop-item-edit --create-new ~/.local/share/applications/ (Permite crear un acceso directo en el menú de aplicaciones para programas que no tienen un .desktop predeterminado)
+
+
 exo-open
-Abrir urls o aplicaciones determinadas en XFCE.
-$ exo-open --launch TerminalEmulator (abrir la terminal)
-$ exo-open URL (abrir la url con el navegador predeterminado)
+[exo-utils]. Abrir URL y ejecutar aplicaciones para el marco de trabajo de Xfce, aunque funciona con otros entornos.
+$ exo-open --launch WebBrowser $HOME (abre en el navegador predeterminado el directorio del usuario)
+$ exo-open https://www.debian.org (abrirá la página en el navegador predeterminado)
+$ exo-open documento.txt (abrir un archivo de texto con el editor predeterminado)
+$ exo-open --launch TerminalEmulator htop (abrirá el terminal predeterminado y ejecutará htop)
 $ exo-open --launch FileManager (el navegador de archivos)
 
 
