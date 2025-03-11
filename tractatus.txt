@@ -15760,6 +15760,13 @@ $ nano ~/.config/menus/custom.menu
 Luego, habilitarlo con exmenen.
 
 
+extrace
+rastrea todas las ejecuciones de programas que ocurren en un sistema, o el subconjunto de ejecuciones de programas realizadas por un proceso determinado y sus descendientes.
+# extrace -p 1779652 (monitorear las ejecuciones de programas lanzados por un proceso específico. El PID 1779652)
+# extrace -u firefox (mostrar tambien el usuario que ejecuta el proceso)
+# extrace -- brave-browser -o brave.txt (monitorear los procesos de la aplicación y guardarlos en brave.txt)
+
+
 extundelete
 [e2fsprogs, e2fslibs, e2fslibs-dev, g++, build-essential]. Recuperación de archivos o directorios borrados. La partición sobre la que se actua ha de estar desmontada. Descargar la aplicación de <http://extundelete.sourceforge.net/> e instalarla con el clasico ./configure, make, sudo make install.
 # extundelete  /dev/sda11 --restore-directory /datos/dir_borrado (recuperar el directorio dir_borrado de la partición /dev/sda11. Lo guardará en el directorio RECOVERED_FILES)
