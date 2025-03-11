@@ -15699,6 +15699,15 @@ $ cat lista
 	$ grep -E '^[a-zA-Z._-]+@.[a-zA-Z.0-9]+\.[[:alpha:]]{2,3}$' lista (Sólo mostrará las que terrminen con 2 o 3 letras)
 
 
+ext3grep
+Herramienta para recuperar archivos eliminados en sistemas de archivos ext3. Funciona escaneando el sistema de archivos en busca de inodos que han sido marcados como eliminados pero que aún contienen datos recuperables.
+$ ext3grep /dev/sda1 --restore-file ruta/archivo/eliminado.txt (intentará recuperar el archivo eliminado.txt que estaba en ruta/al/archivo/)
+$ ext3grep /dev/sda1 --restore-all (buscará y recuperará todos los archivos eliminados)
+$ ext3grep /dev/sda1 --restore-all --output-dir /ruta/directorio/recuperacion/ (especificar un directorio de destino para la recuperación)
+$ ext3grep /dev/sda1 --dump (lista de archivos que han sido eliminados, junto con información sobre su ubicación en el sistema de archivos)
+Nota.- Es recomendable desmontar la partición antes de usar ext3grep para evitar modificación de datos que podrían dificultar la recuperación y evitar escribir en la partición en la que se desea recuperar archivos.
+
+
 ext4magic
 Recuperación de ficheros ext3 y ext4 borrados o sobrescritos.
 # ext4magic /dev/sda2 -m -d . -f user (recuperar sólo los archivos borrados [-m] de nuestra $HOME [/dev/sda2], el resultado en el presente directorio [-d .] y del usuario "user" [-f])
