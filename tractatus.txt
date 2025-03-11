@@ -15552,6 +15552,19 @@ expect
 Herramienta para automatizar aplicaciones interactivas (telnet, ftp, passwd, fsck, rlogin, tip, etc) de acuerdo con un script.
 
 
+explain
+Herramienta diseñada para ayudar a los usuarios a entender los errores que ocurren cuando se realizan llamadas al sistema [system calls]. Estas llamadas son funciones que los programas utilizan para solicitar servicios al kernel del sistema operativo, como la creación de archivos, la gestión de procesos, la comunicación entre procesos, etc. Cuando un programa encuentra un error durante una llamada al sistema, generalmente devuelve un código de error. Estos códigos de error son números que pueden no ser intuitivos para entender qué salió mal. Aquí es donde entra en juego el comando explain. Este comando toma un código de error y proporciona una descripción legible y comprensible del error.
+$ explain -e ENOENT open sfjghsl (saber qué significa un error para abrir un archivo inexistente)
+La salida podría ser algo como:
+          open(pathname = "sfjghsl", flags = O_RDONLY) failed, No such file or
+          directory (2, ENOENT) because there is no "sfjghsl" regular file in the
+          current directory
+$ explain -e EPERM unlink open (no realizar una operación por falta de permisos)
+          unlink(pathname = "open") failed, Operation not permitted (1, EPERM)
+          because there is no "open" regular file in the current directorythe process
+          does not have the appropriate privileges to use the unlink system call
+
+
 export
 Exporta, almacena y lista variables. Para que los cambios sean permanentes, colocar la linea en .bashrc.
 $ export -p (mostrar todas las variables)
