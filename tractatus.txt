@@ -15767,6 +15767,14 @@ rastrea todas las ejecuciones de programas que ocurren en un sistema, o el subco
 # extrace -- brave-browser -o brave.txt (monitorear los procesos de la aplicación y guardarlos en brave.txt)
 
 
+extract
+Similar al conocido comando file [ver], puede mostrar metadatos de un archivo e imprimir los resultados en stdout.
+$ extract -L (mostrar todas las palabras clave)
+$ extract imagen.png (forma básica)
+$ extract -V -x mimetype imagen.png (excluir determinada palabra clave en la salida)
+$ extract -p "page count" archivo.pdf (imprimir solo la clave mencionada)
+
+
 extundelete
 [e2fsprogs, e2fslibs, e2fslibs-dev, g++, build-essential]. Recuperación de archivos o directorios borrados. La partición sobre la que se actua ha de estar desmontada. Descargar la aplicación de <http://extundelete.sourceforge.net/> e instalarla con el clasico ./configure, make, sudo make install.
 # extundelete  /dev/sda11 --restore-directory /datos/dir_borrado (recuperar el directorio dir_borrado de la partición /dev/sda11. Lo guardará en el directorio RECOVERED_FILES)
