@@ -15715,6 +15715,30 @@ Algunas opciones:
 -M (Emplear esta opción cuando se ha borrado todo el sistema de ficheros)
 
 
+extlinux
+Cargador de arranque para sistemas de archivos Linux ext2/ext3/ext4, btrfs y xfs que se utiliza para instalarlo en una partición específica, permitiendo que el sistema arranque un kernel de Linux. A diferencia de otros cargadores como GRUB, extlinux es más ligero y simple, ideal para configuraciones minimalistas o sistemas embebidos.
+# extlinux --install /boot (instala los archivos necesarios del cargador de arranque en /boot)
+Nota.- Verificar que en la partición donde se instala, en /boot, contenga los archivos /boot/vmlinuz [el kernel], /boot/initrd.img y /boot/extlinux/extlinux.conf [el archivo de configuración creado exproceso]
+# dd if=/usr/lib/EXTLINUX/mbr.bin of=/dev/sda (actualizar el sector de arranque de la partición, por ejemplo /dev/sda. Sobrescribe el MBR [Master Boot Record])
+Un ejemplo de archivo de configuración podría ser:
+# nano /boot/extlinux/extlinux.conf
+       TIMEOUT 50
+       DEFAULT debian
+       #
+       LABEL debian
+         SAY Booting Debian...
+         KERNEL /vmlinuz-5.10
+         APPEND root=/dev/sda1 ro quiet
+         INITRD /initrd.img-5.10
+       #
+       LABEL oldkernel
+         SAY Booting older kernel...
+         KERNEL /vmlinuz-5.4
+         APPEND root=/dev/sda1 ro quiet
+         INITRD /initrd.img-5.4
+Espera 5 segundos antes de arrancar, la opción predeterminada es 50 décimas de segundo.
+
+
 extundelete
 [e2fsprogs, e2fslibs, e2fslibs-dev, g++, build-essential]. Recuperación de archivos o directorios borrados. La partición sobre la que se actua ha de estar desmontada. Descargar la aplicación de <http://extundelete.sourceforge.net/> e instalarla con el clasico ./configure, make, sudo make install.
 # extundelete  /dev/sda11 --restore-directory /datos/dir_borrado (recuperar el directorio dir_borrado de la partición /dev/sda11. Lo guardará en el directorio RECOVERED_FILES)
