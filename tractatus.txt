@@ -15739,6 +15739,27 @@ Un ejemplo de archivo de configuración podría ser:
 Espera 5 segundos antes de arrancar, la opción predeterminada es 50 décimas de segundo.
 
 
+extra-xdg-menus
+Proporciona menús adicionales para los entornos de escritorio que siguen las especificaciones de menú de XDG, como GNOME, KDE, XFCE, LXQt, etc.
+Este paquete instala varios menús de escritorio adicionales opcionales para agrupar aplicaciones en GNOME, KDE y otros entornos de escritorio compatibles con especificaciones de menú XDG. Los menús adicionales se pueden habilitar o deshabilitar por sistema o por usuario con los scripts suministrados: exmenen y exmendis.
+$ exmenen --system electronics (habilitar el menú electronics si se encuentra en /etc/xdg/menus/extra/)
+$ exmendis --system electronic (deshabilitarlo)
+$ exmenen --user desarrollo (agregará el menú "desarrollo" solo a la configuración de usuario)
+$ xdg-desktop-menu forceupdate (después de habilitar o deshabilitar menús, a veces es necesario reiniciar la sesión o forzar la actualización del menú con)
+1.-
+Modificar o crear un menú propio
+$ nano ~/.config/menus/custom.menu
+       <!DOCTYPE Menu PUBLIC "-//freedesktop//DTD Menu 1.0//EN" "http://www.freedesktop.org/standards/menu-spec/menu-1.0.dtd">
+       <Menu>
+           <Name>Custom</Name>
+           <Directory>custom.directory</Directory>
+           <Include>
+              <Category>Development</Category>
+           </Include>
+       </Menu>
+Luego, habilitarlo con exmenen.
+
+
 extundelete
 [e2fsprogs, e2fslibs, e2fslibs-dev, g++, build-essential]. Recuperación de archivos o directorios borrados. La partición sobre la que se actua ha de estar desmontada. Descargar la aplicación de <http://extundelete.sourceforge.net/> e instalarla con el clasico ./configure, make, sudo make install.
 # extundelete  /dev/sda11 --restore-directory /datos/dir_borrado (recuperar el directorio dir_borrado de la partición /dev/sda11. Lo guardará en el directorio RECOVERED_FILES)
