@@ -15783,6 +15783,11 @@ Herramienta en Debian que facilita la adición de repositorios externos de maner
 # extrepo update mozilla (actualizar el paquete)
 
 
+extsmail
+Herramienta diseñada para actuar como un reemplazo del programa sendmail en sistemas UNIX. Su función principal es leer mensajes de correo electrónico y luego enviarlos a través de comandos externos definidos por el usuario, generalmente utilizando SSH para conectarse a servidores remotos que ejecutan un Agente de Transferencia de Correo [Mail Transfer Agent - MTA].
+$ extsmail --ssh mail.example.com --user myuser --command "/usr/sbin/sendmail" (servidor remoto al que conectarse, usuario con el que conectarse al servidor remoto y comando a ejecutar en el servidor remoto para enviar el correo)
+
+
 extundelete
 [e2fsprogs, e2fslibs, e2fslibs-dev, g++, build-essential]. Recuperación de archivos o directorios borrados. La partición sobre la que se actua ha de estar desmontada. Descargar la aplicación de <http://extundelete.sourceforge.net/> e instalarla con el clasico ./configure, make, sudo make install.
 # extundelete  /dev/sda11 --restore-directory /datos/dir_borrado (recuperar el directorio dir_borrado de la partición /dev/sda11. Lo guardará en el directorio RECOVERED_FILES)
