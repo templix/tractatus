@@ -15775,6 +15775,14 @@ $ extract -V -x mimetype imagen.png (excluir determinada palabra clave en la sal
 $ extract -p "page count" archivo.pdf (imprimir solo la clave mencionada)
 
 
+extrepo
+Herramienta en Debian que facilita la adición de repositorios externos de manera segura y estructurada. Permite a los usuarios agregar repositorios adicionales de software que no están mantenidos por Debian, pero que han sido revisados y listados en la base de datos de extrepo.
+# extrepo enable mozilla (habilita el repositorio especificado, colocandolo en /etc/apt/sources.list.d/extrepo_mozilla.sources)
+# extrepo disable mozilla (lo inhabilita)
+# extrepo search vivaldi (buscar si existe en la base de datos)
+# extrepo update mozilla (actualizar el paquete)
+
+
 extundelete
 [e2fsprogs, e2fslibs, e2fslibs-dev, g++, build-essential]. Recuperación de archivos o directorios borrados. La partición sobre la que se actua ha de estar desmontada. Descargar la aplicación de <http://extundelete.sourceforge.net/> e instalarla con el clasico ./configure, make, sudo make install.
 # extundelete  /dev/sda11 --restore-directory /datos/dir_borrado (recuperar el directorio dir_borrado de la partición /dev/sda11. Lo guardará en el directorio RECOVERED_FILES)
