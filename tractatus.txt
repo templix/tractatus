@@ -15805,6 +15805,14 @@ $ ctags-exuberant -f mi_indice.tags -R . (guardndo los resultados en mi_indice.t
 $ ctags-exuberant --exclude=node_modules --exclude=vendor -R . (excluir ciertas carpetas como node_modules o vendor)
 
 
+eyed3
+Herramienta para añadir, editar y eliminar etiquetas ID3 en archivos MP3. Las etiquetas ID3 son metadatos que se utilizan para almacenar información sobre el archivo de audio, como título, artista, álbum, año, duración, entre otros.
+$ eyed3 cancion.mp3 (mostrará información sobre el título, artista, álbum, año, y otros metadatos del archivo cancion.mp3)
+$ eyed3 --title "La Vida es Bella" --artist "Juan Pérez" --album "Éxitos 2023" cancion.mp3 (establecerá el título, el artista y el álbum del archivo cancion.mp3)
+$ eyed3 --remove title archivo.mp3 (eliminar una etiqueta específica)
+$ eyed3 --to-v2.3 cancion.mp3 (convertir etiquetas de ID3v1 a ID3v2)
+
+
 eza
 Moderno reemplazo del clásico ls y el no mantenido exa.
 $ eza (mostrar archivos y directorios sin los ocultos)
