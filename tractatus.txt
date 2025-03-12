@@ -15791,6 +15791,15 @@ extundelete
 # extundelete /dev/sda11 --restore-files files (recuperar de la partición /dev/sda11 los archivos enumerados en "files" a razón de uno por linea)
 
 
+exuberant-ctags
+Herramienta para analizar el código fuente y generar un índice de etiquetas que mapea nombres de funciones, variables, clases y otros elementos a sus ubicaciones en los archivos.
+$ ctags-exuberant --list-languages (listado completo de lenguajes soportados)
+$ ctags-exuberant --list-kinds=python (lista de todos los tipos de etiquetas para el idioma especificado)
+$ ctags-exuberant --list-kinds=all (lista las de etiquetas de todos los lenguajes)
+$ ctags-exuberant -f mi_indice.tags -R . (guardndo los resultados en mi_indice.tags en el presente directorio y de forma recursiva en todos los subdirectorios)
+$ ctags-exuberant --exclude=node_modules --exclude=vendor -R . (excluir ciertas carpetas como node_modules o vendor)
+
+
 eza
 Moderno reemplazo del clásico ls y el no mantenido exa.
 $ eza (mostrar archivos y directorios sin los ocultos)
