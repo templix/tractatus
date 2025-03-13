@@ -15827,6 +15827,17 @@ Herramienta diseñada para generar automáticamente trazas de ejecución de prog
 # eztrace -v -d script (modo verbose, debug y script que se ejecuta)
 
 
+f2fs-tools
+[Flash-Friendly File System]. Sistema de archivos para Linux diseñado para dispositivos de almacenamiento basados en memoria flash NAND [Not AND], como SSD, eMMC y tarjetas SD. Se basa en el Sistema de Archivos Estructurado por Registros [Log-structured File System - LFS]. Las herramientas de este paquete permiten la creación, verificación, reparación y administración de sistemas de archivos F2FS: mkfs.f2fs [formatea una partición], fsck.f2fs [verifica y repara un sistema], dump.f2fs [extrae información detallada], resize.f2fs [redimensiona], f2fs_io [herramienta de depuración para acceder directamente a archivos en F2FS] y f2fs_gc [ejecuta la recolección de basura manualmente].
+# mkfs.f2fs /dev/sdb1 (formatear /dev/sdb1 con F2FS)
+# mkfs.f2fs -f -a 2 -s 512 /dev/sdb1 (fuerza el formateo, activa la función de auto-recolección de basura y tamaño del sector en bytes.)
+# mount -t f2fs /dev/sdb1 /mnt (después de formatear la partición, se puede montar normalmente)
+# fsck.f2fs /dev/sdb1 (comprobar la integridad del sistema de archivos si hay errores, se intentarán corregir automáticamente)
+# resize.f2fs /dev/sdb1 (ajustará el sistema de archivos al tamaño de la partición.)
+# dump.f2fs /dev/sdb1 (muestra datos como la cantidad de bloques usados, tamaño del segmento, versión de F2FS, etc)
+# f2fs_gc /mnt (libera bloques no utilizados y mejora el rendimiento)
+
+
 f3
 [Fight Flash Fraud o Fight Fake Flash]. Prueba la capacidad total de una tarjeta flash [unidad flash, disco flash, pendrive]) para comprobar si coincide con las características que deberia tener. f3 escribe en la tarjeta y luego comprueba si puede leerla. No respeta los contenidos de la unidad o sea que es preferible que este vacia. Consta de varios ejecutables: f3brew, f3fix, f3probe, f3read y f3write.
 # f3brew /dev/sda (detecta si el dispositivo es una unidad falsa)
