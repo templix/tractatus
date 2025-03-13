@@ -15840,14 +15840,58 @@ f2fs-tools
 
 f3
 [Fight Flash Fraud o Fight Fake Flash]. Prueba la capacidad total de una tarjeta flash [unidad flash, disco flash, pendrive]) para comprobar si coincide con las características que deberia tener. f3 escribe en la tarjeta y luego comprueba si puede leerla. No respeta los contenidos de la unidad o sea que es preferible que este vacia. Consta de varios ejecutables: f3brew, f3fix, f3probe, f3read y f3write.
-# f3brew /dev/sda (detecta si el dispositivo es una unidad falsa)
+# f3brew -d /dev/sdb (verificar si el firmware de una memoria USB es fraudulento o haya sido modificado para mostrar más capacidad de la real)
 # f3probe /dev/sda (identificar de forma rápida los falsos pendrives/tarjetas y ver su tamaño real)
 # f3fix /dev/sda (comprobar la capacidad real del dispositivo que podemos utilizar para no perder datos)
 # f3write /dev/sda (escribe archivos de gran tamaño en el dispositivo)
 # f3read /dev/sda (Se encarga de comprobar que lo que ha escrito es correcto)
-Algunas opciones que pueden aplicarse a algunos ejecutables:
-        --destructive (obvia el contenido de la unidad para que el testeo sea más rápido)
-        --time-ops (mostrar información sobre la duración de la comprobación)
+# f3probe --destructive /dev/sdb (borra todos los datos de la unidad y analiza la memoria real del dispositivo proporcionando datos sobre su capacidad real)
+
+
+faac
+[Freeware Advanced Audio Coder]. Herramienta para codificar audio en el formato AAC [Advanced Audio Coding]. FAAC es el codificador, mientras que FAAD2 es el decodificador que permite reproducir audio AAC.
+$ faac audio.wav -o audio.aac (convertir un .wav a .aac)
+$ faac -b 192000 audio.wav -o audio.aac (codificar el archivo con una tasa de bits de 192 kbps)
+$ faad audio.aac -o output.wav (decodificar un archivo AAC y convertirlo de nuevo a WAV)
+
+
+faad
+Decodificador de audio ISO AAC. Decodifica correctamente todos los archivos AAC de tipo objeto MPEG-4 y MPEG-2 MAIN, LOW, LTP, LD y ER principalmente para reproducirlos.
+$ faad -i archio.aac (muestra información del archivo)
+
+
+fabric
+Herramienta de automatización y despliegue que permite ejecutar tareas en múltiples servidores de manera remota en serie o en paralelo. Se utiliza principalmente a través de un archivo de script Python llamado fabfile.py. En este archivo, se define las tareas que se han de ejecutar en los servidores remotos.
+1.-
+Para ejecutar en un servidor remoto el comando uname -a para obtener información del sistema.
+$ nano fabfile.py
+       from fabric import Connection
+       #
+       def obtener_info():
+        c = Connection('usuario@servidor_remoto')
+        result = c.run('uname -a', hide=True)
+        print(f"Resultado: {result.stdout}")
+$ fab obtener_info (se conectará al servidor remoto especificado, ejecutará el comando uname -a, y mostrará el resultado)
+2.-
+Ejecutar comandos en múltiples servidores en paralelo
+$ nano fabfile.py
+       from fabric import Connection, SerialGroup
+       #
+       def obtener_info_paralelo():
+        servidores = ['usuario@servidor1', 'usuario@servidor2', 'usuario@servidor3']
+        grupo = SerialGroup(*servidores)
+        resultados = grupo.run('uname -a', hide=True)
+        for conexion, resultado in resultados.items():
+        print(f"{conexion.host}: {resultado.stdout}")
+$ fab obtener_info_paralelo (conectará a cada uno de los servidores listados y ejecutará el comando uname -a en paralelo, mostrando los resultados)
+
+
+facedetect
+Detector de rostros sencillo para procesamiento por lotes. Responde a la pregunta básica: "¿Hay un rostro en esta imagen?" y proporciona como resultado un código de salida para indicar si se detectó un rostro o no o las coordenadas de los rostros detectados en la salida estándar.
+$ facedetect foto.jpg (detectar rostros y obtener sus coordenadas)
+$ facedetect --center foto.jpg (obtener solo las coordenadas del centro de la cara)
+$ facedetect -q foto.jpg (verificar la presencia de rostros. Si hay un rostro, el comando devuelve 0 y si no lo hay, devuelve 2)
+$ facedetect --biggest foto.jpg (detectar solo el rostro más grande)
 
 
 facter
