@@ -16134,6 +16134,12 @@ $ fair create session my_web_session http://192.168.1.103:80
 $ fair status my_web_session (verificar estado de la sesión)
 
 
+fake-hwclock
+Guardar/restaurar el reloj del sistema en máquinas sin hardware RTC [RealTime Clock] en funcionamiento. Algunas máquinas no tienen una unidad de reloj en tiempo real en funcionamiento o no tienen un controlador para dicho hardware. fake-hwclock es un conjunto simple de scripts que guarda el reloj actual del kernel periódicamente, incluso al apagar y lo restaura al arrancar para que el reloj del sistema se mantenga al menos cerca del tiempo real.
+$ fake-hwclock load force (ajustar la hora del sistema al reloj guardado)
+$ fake-hwclock save force (guarda la hora archivo. "force" para anular la comprobación de seguridad)
+
+
 faked-tcp
 [fakeroot]. Demonio que recuerda la propiedad/permisos falsos de archivos manipulados por procesos fakeroot.
 # faked-tcp --debug (muestra información por pantalla)
