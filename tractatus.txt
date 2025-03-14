@@ -16089,6 +16089,51 @@ El módulo pam_faillock.so mantiene una lista de intentos fallidos de autentific
 # faillog -a (todos)
 
 
+fair
+Se utiliza para implementar balanceadores de carga para conexiones TCP. Consta de dos daemons: Carrousel [realiza servicios de balanceo de carga] y Transponder [se ejecuta en los servidores destinados a recibir el tráfico balanceado].
+Configuración básica de ejemplo:
+# nano /etc/fair/transponder.conf
+       # Lista de direcciones IP de los servidores
+       server 192.168.1.100
+       server 192.168.1.101
+       server 192.168.1.102
+       #
+       # Puerto de escucha
+       port 12345
+       #
+       # Dirección IP y puerto donde se encuentra Carrousel
+       carrousel 192.168.1.103 12346
+       ...
+$ fair start session_name (iniciar una sesión de balanceo)
+$ fair status session_name (verificar el estado de una sesión)
+$ fair stop session_name (detener una sesión)
+$ fair delete session_name (eliminar una sesión)
+$ fair list sessions (mostrar todas las sesiones activas)
+1.-
+Ejemplo para crear una sesión de balanceo de carga para un servicio web. Primero configurar el archivo carrousel.conf en el servidor que ejecutará Carrousel:
+# nano /etc/fair/carousel.conf
+       # Servidor que actuará como Carrousel
+       server 192.168.1.103
+       #
+       # Puertos de escucha
+       http_port 80
+       https_port 443
+       #
+       # Lista de servidores Transponder
+       transponder 192.168.1.100:12345
+       transponder 192.168.1.101:12345
+       transponder 192.168.1.102:12345
+       #
+       # Configuración de red
+       interface eth0
+       netmask 255.255.255.0
+       gateway 192.168.1.1
+       ...
+Luego, en el cliente, crear una sesión:
+$ fair create session my_web_session http://192.168.1.103:80
+$ fair status my_web_session (verificar estado de la sesión)
+
+
 faked-tcp
 [fakeroot]. Demonio que recuerda la propiedad/permisos falsos de archivos manipulados por procesos fakeroot.
 # faked-tcp --debug (muestra información por pantalla)
