@@ -15908,6 +15908,61 @@ Sacar todos los factores de un número.
 $ factor 100
 
 
+fadecut
+[streamripper, sox, lame, vorbis-tools]. Herramienta para ripear transmisiones de audio, cortar, hacer fundidos de entrada y salida y etiquetar los archivos de audio resultantes. Los logotipos y la publicidad de las estaciones de radio se eliminan automáticamente. Los archivos de audio descargados se cortan mediante detección de silencio y luego se funden de entrada y salida. Posteriormente, los archivos se codifican a OGG o MP3 y se etiquetan con etiquetas (título, artista, género y comentario). En modo archivo, Fadecut simplemente procesa archivos de audio ya ripeados.
+$ fadecut -c swisspop (abre un editor para configurar el perfil de audio y lo guarda en ~/.fadecut/profiles/swisspop)
+Un ejemplo podría ser:
+        STREAM_URL="https://kissfm.kissfmradio.cires21.com/kissfm.mp3"
+        # Formato de archivo de destino preferido (ogg/mp3)
+        ENCODING=ogg
+        GENRE="Pop"
+        COMMENT="Música mucho rato"
+        # Segundos de fundido al inicio y final.
+        FADE_IN=1
+        FADE_OUT=4
+        # Segundos a recortar al inicio y final
+        TRIM_BEGIN=0
+        TRIM_END=0
+$ fadecut -p swisspop -r (usar el perfil swisspop y activar el modo streaming con streamripper)
+El audio se descargará, cortará, procesará con fundidos y etiquetará. Los archivos procesados aparecerán en la carpeta new/ en el directorio actual y los que contengan errores en error/. Para detener la grabación, presionar Ctrl+C. Otras carpetas que fadecut puede crear o crearlas el usuario en el directorio actual son: incomplete/: Archivos parcialmente ripeados por streamripper, done/: Archivos que se desea conservar tras escucharlos y dontlike/: Canciones no deseadas y que no se reprocesan.
+1.-
+Si ya se posee un directorio con archivos MP3
+$ cd /home/usuario/musica/
+$ fadecut -p swisspop (procesará los archivos en el directorio actual, aplicando los parámetros del perfil [corte, fundidos, etiquetas] y guardando los resultados en new/)
+$ fadecut -p swisspop -k (conservar los archivos originales ripeados sin procesar y los coloca en el directorio orig/)
+$ fadecut -e swisspop (editar el archivo del perfil)
+2.-
+Un ejemplo de archivo de configuración personal podria ser
+$ nano ~/.fadecut/fadecutrc
+         # Perfil por defecto si no se especifica con -p
+         PROFILEDIR="$HOME/.fadecut"
+         PROFILE=swisspop
+         #
+         PWD=$(pwd)
+         WORKDIR="$PWD"
+         #
+         # Formato de salida preferido
+         ENCODING=mp3
+         #
+         # Segundos de fundido por defecto
+         FADE_IN=2
+         FADE_OUT=3
+         #
+         # Segundos a recortar por defecto
+         TRIM_BEGIN=1
+         TRIM_END=1
+         #
+         # Directorios organizados para los archivos procesados
+         OUTPUTDIR="$PWD/nuevo"
+         ORIGDIR="$PWD/original"
+         DONEDIR="$PWD/conservar"
+         INCOMPLETEDIR="$PWD/incompleto"
+         ERRORDIR="$PWD/error"
+         DONTLIKEDIR="$PWD/noprocesar"
+Con un archivo fadecutrc como el anterior se puede lanzar la aplicación:
+$ fadecut -k (guardando los originales y sin especificar -p)
+
+
 fail2ban
 Cortafuegos. Habilitar los servicios en los que se quiera que actue el cortafuegos [ssh, apache2, ftp....] editando /etc/fail2ban/jail.conf y substituyendo el “false” por “true”. Algunos parámetros de este archivo son:
 	ignoreip  (lista de IPs separadas por un espacio en blanco que no serán bloqueadas)
