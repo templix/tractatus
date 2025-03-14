@@ -15963,6 +15963,43 @@ Con un archivo fadecutrc como el anterior se puede lanzar la aplicación:
 $ fadecut -k (guardando los originales y sin especificar -p)
 
 
+fades
+Herramienta diseñada para simplificar la gestión de entornos virtuales y dependencias que automatiza la creación y activación de entornos virtuales, así como la instalación de paquetes necesarios para ejecutar scripts o proyectos. Esto es especialmente útil para evitar conflictos entre dependencias y asegurar que los scripts se ejecuten en un entorno controlado.
+$ fades -r requirements.txt script.py (con un archivo requirements.txt con las dependencias)
+$ fades -m http.server 8000 (iniciará un servidor HTTP en el puerto 8000, gestionando automáticamente cualquier dependencia necesaria)
+1.-
+Ejecutar un script con dependencias específicas
+Suponiendo que se tiene script.py que requiere las bibliotecas "requests" y "numpy", en lugar de instalar estas dependencias manualmente, se puede usar fades para ejecutar el script en un entorno virtual con las dependencias instaladas automáticamente:
+$ fades -d requests -d numpy python script.py
+fades creará un entorno virtual, instalará requests y numpy, y ejecutará script.py en ese entorno.
+2.-
+Se puede incluir las dependencias directamente en el script
+         # fades import requests
+         # fades import numpy
+         import requests
+         import numpy as
+         ...
+$ fades script.py (ejecutar el script con fades)
+fades leerá los comentarios y gestionará las dependencias automáticamente.
+
+
+fai-client
+FAI [Fully Automatic Installation] es un sistema diseñado para instalaciones y configuraciones automatizadas de sistemas Linux de manera no interactiva y configuraciones de software en ordenadores, así como en máquinas virtuales y entornos chroot, desde pequeñas redes hasta grandes infraestructuras y clústeres. Su enfoque principal es la automatización y la personalización sin intervención manual.
+# fai -v -s file:///srv/fai/config softupdate (información detallada, ubicación del espacio de configuración y que se ejecutará una actualización suave)
+1.-
+Instalar un sistema en un directorio [dirinstall] para probar una instalación de Debian
+# fai -v -s file:///srv/fai/config --hostname test-machine -c DEFAULT,DEBIAN dirinstall /tmp/test-install
+"-c DEFAULT,DEBIAN" Define las clases que se usarán para la instalación, en este caso, DEFAULT y DEBIAN, que determinan qué paquetes y configuraciones se aplican, nombre de host especifico y "dirinstall /tmp/test-install"  donde se realiza la instalación. El resultado es un sistema Debian funcional instalado en /tmp/test-install, listo para ser usado como chroot o para empaquetarlo como imagen.
+
+
+faifa
+Herramienta de red para administrar remotamente dispositivos HomePlug 1.0 y HomePlug AV que son especificaciones de la comunicación por línea eléctrica [Power Line Communication - PLC] que es un sistema para transportar datos a través de la línea eléctrica. Estos dispositivos son útiles para extender una red de datos utilizando la infraestructura eléctrica existente en un hogar o edificio y pertime configurar, actualizar y recopilar estadísticas de estos dispositivos mediante tramas Ethernet privadas y públicas.
+$ faifa -d (buscará en la red dispositivos que respondan a la comunicación HomePlug)
+$ faifa -i [dirección_MAC] (ver detalles específicos de un dispositivo)
+$ faifa -c [nuevo_nombre] -p [nueva_contraseña] [dirección_MAC] (cambiar la configuración de un dispositivo, como su nombre o la contraseña de acceso de un dispositivo)
+$ faifa -m (mostrará estadísticas sobre la calidad de la conexión, la velocidad de transferencia de datos, etc)
+
+
 fail2ban
 Cortafuegos. Habilitar los servicios en los que se quiera que actue el cortafuegos [ssh, apache2, ftp....] editando /etc/fail2ban/jail.conf y substituyendo el “false” por “true”. Algunos parámetros de este archivo son:
 	ignoreip  (lista de IPs separadas por un espacio en blanco que no serán bloqueadas)
