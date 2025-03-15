@@ -16184,6 +16184,16 @@ $ faketime "2 years ago" date (usar formatos relativos: como "1 day ago" [hace 1
 $ faketime "12:30:00" date (solo cambiar la hora pero mantener la fecha actual)
 
 
+falco
+Detectar comportamientos sospechosos. Falco usa reglas predefinidas en /etc/falco/falco_rules.yaml para detectar anomalías que podrian verse en los logs de /var/log/falco.log. Descargar de https://falco.org/docs/setup/download/
+# systemctl status falco (comprobar si está activo)
+
+
+falcosecurity-scap-dkms
+Módulo del kernel que falco [ver] y sysdig [ver] utilizan para recopilar datos.
+$ lsmod | grep falco (verificar que el módulo esté cargado)
+
+
 false
 Este comando no hace nada excepto devolver un estado de salida 1 (fail). Se utiliza como marcador de posición en scripts.
 
@@ -33197,8 +33207,10 @@ Liberar memoria ram:
 
 
 sysdig
-herramienta de análisis del sistema en ejecución.
-# csysdig (monitoreo de procesos y uso de CPU)
+[falcosecurity-scap-dkms]. Herramienta de exploración y resolución de problemas a nivel de sistema. Sysdig instrumenta las máquinas físicas y virtuales a nivel de sistema operativo instalándose en el kernel y capturando llamadas del sistema [syscalls] y otros eventos del sistema. Luego, puede filtrar y decodificar estos eventos para extraer información y estadísticas útiles. Incluye las herramientas csysdig y scap-driver-loader
+# sysdig (listar todas las syscalls en tiempo real)
+# sysdig "fd.name=/etc/passwd" (muestra solo los eventos relacionados con el archivo /etc/passwd)
+# csysdig (abrir un interfaz tipo "top" donde se puede ver procesos, archivos accedidos, uso de CPU... todo basado en los datos capturados por falcosecurity-scap-dkms)
 # sysdig -cl (listado de opciones disponibles)
 # sysdig -c netstat (monitorearlas conexiones de red)
 # sysdig -c httplog (visualización de registros HTTP)
