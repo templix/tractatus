@@ -16175,6 +16175,15 @@ $ fakeroot -u dpkg-repack paquete (Crea un archivo .deb a partir de un paquete i
 $ fakeroot /bin/bash (ejecutar bash como root)
 
 
+faketime
+Herramienta que permite modificar la fecha y hora que un programa percibe, sin alterar la hora real del sistema. La biblioteca de precarga de hora falsa [Fake Time Preload Library - FTPL], intercepta diversas llamadas del sistema que los programas utilizan para obtener la fecha y hora actuales. A continuación, puede informar a estos programas sobre fechas y horas falsificadas.
+$ faketime "2020-01-01 12:00:00" date (que el comando "date" piense que es el 1 de enero de 2020 a las 12:00 PM)
+$ faketime "2050-12-25 00:00:00" bash -c 'echo "Hoy es $(date)"' (Simular una fecha futura con un texto)
+$ faketime "2022-06-15 08:30:00" ./generar_informe.sh (con un programa que genera un informe basado en la fecha actual, simular diferentes fechas para probarlo)
+$ faketime "2 years ago" date (usar formatos relativos: como "1 day ago" [hace 1 día] o "2 years ago" [hace 2 años])
+$ faketime "12:30:00" date (solo cambiar la hora pero mantener la fecha actual)
+
+
 false
 Este comando no hace nada excepto devolver un estado de salida 1 (fail). Se utiliza como marcador de posición en scripts.
 
