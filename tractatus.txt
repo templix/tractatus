@@ -16153,6 +16153,22 @@ faked-tcp
 # faked-tcp --debug (muestra información por pantalla)
 
 
+fakechroot
+Proporciona un entorno chroot falso que precarga una biblioteca que anula algunas funciones de la biblioteca C estándar [libc], lo que permite usar herramientas específicas para root sin privilegios de root. Incluye las herramientas env.fakechroot, ldd.fakechroot y chroot.fakechroot
+$ fakechroot chroot /path/to/chroot /bin/bash (abrirá un shell de Bash en el directorio /path/to/chroot como si estuvieras dentro de un entorno chroot)
+$ env.fakechroot /bin/sh (ejecutar un shell sh dentro de un entorno chroot falso)
+$ ldd.fakechroot /usr/bin/ls (mostrará las dependencias dinámicas del ejecutable "/usr/bin/ls" dentro del entorno chroot falso)
+$ chroot.fakechroot /bin/bash (abre una sesión de bash dentro del entorno chroot falso, permitiendo ejecutar comandos como si estuvieras en un sistema raíz completo)
+$ fakechroot fakeroot chroot /ruta/a/un/sistema (hacer chroot sin privilegios y dentro del chroot simular permisos de root lo que permite trabajar dentro de un entorno chroot falso y al mismo tiempo simular permisos de root dentro de él)
+Nota.- No todas las herramientas de root funcionan correctamente en este entorno falso y algunas operaciones que requieren acceso directo al hardware no están disponibles.
+1.-
+Creación de un entorno de desarrollo
+$ mkdir -p ~/chroot/usr/bin
+$ cp /bin/ls ~/chroot/usr/bin/
+$ fakechroot chroot ~/chroot /usr/bin/ls
+ejecutará el comando ls desde el entorno simulado, aunque en realidad no se está en un chroot real.
+
+
 fakeroot
 Ejecuta comandos en un entorno que simula privilegios de root. No aumenta los privilegios de un usuario ni disminuye la seguridad del sistema. Este paquete consta de los ejecutable: faked-sysv, faked-tcp, fakeroot-sysv y fakeroot-tcp
 $ fakeroot -u dpkg-repack paquete (Crea un archivo .deb a partir de un paquete instalado en el sistema.)
