@@ -16134,6 +16134,14 @@ $ fair create session my_web_session http://192.168.1.103:80
 $ fair status my_web_session (verificar estado de la sesión)
 
 
+fake
+Herramienta que permite realizar suplantación de direcciones IP en una red local mediante la manipulación de ARP [Address Resolution Protocol]. Su propósito principal es permitir la conmutación de servidores de respaldo en una LAN, pero también puede usarse para pruebas de seguridad y diagnóstico de red. Activa una segunda interfaz en la máquina host con la dirección IP que se desea "robar" luego envía paquetes ARP para asociar esa dirección IP con la MAC de la interfaz secundaria y asi permite que el tráfico destinado a la IP original sea recibido por la máquina que ejecuta fake.
+$ fake -i eth1 -a 192.168.1.100 (enviará paquetes ARP para asociar 192.168.1.100 con la MAC de eth1, permitiendo que la máquina en la que se ejecuta fake reciba el tráfico de la IP suplantada)
+$ fake -i eth1 -m ("-m" activa el modo "multi-interfaz", permitiendo que la misma IP esté en varias interfaces del mismo host)
+$ fake -i eth1 -a 192.168.1.100 -f ("-f" fuerza la emisión de paquetes ARP periódicos para mantener la suplantación de la IP)
+$ fake -r (establece la configuración de red y deja de suplantar la IP)
+
+
 fake-hwclock
 Guardar/restaurar el reloj del sistema en máquinas sin hardware RTC [RealTime Clock] en funcionamiento. Algunas máquinas no tienen una unidad de reloj en tiempo real en funcionamiento o no tienen un controlador para dicho hardware. fake-hwclock es un conjunto simple de scripts que guarda el reloj actual del kernel periódicamente, incluso al apagar y lo restaura al arrancar para que el reloj del sistema se mantenga al menos cerca del tiempo real.
 $ fake-hwclock load force (ajustar la hora del sistema al reloj guardado)
