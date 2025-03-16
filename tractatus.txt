@@ -16170,9 +16170,23 @@ ejecutará el comando ls desde el entorno simulado, aunque en realidad no se est
 
 
 fakeroot
-Ejecuta comandos en un entorno que simula privilegios de root. No aumenta los privilegios de un usuario ni disminuye la seguridad del sistema. Este paquete consta de los ejecutable: faked-sysv, faked-tcp, fakeroot-sysv y fakeroot-tcp
+Ejecuta comandos en un entorno que simula privilegios de root. No aumenta los privilegios de un usuario ni disminuye la seguridad del sistema. Las herramientas incluidas son: fakeroot-sysv: Implementación de fakeroot basada en System V IPC, más antigua, pero aún funcional, fakeroot-tcp: Implementación basada en TCP, útil para sistemas donde System V IPC no funciona bien, faked-sysv: Demonio usado por fakeroot-sysv y faked-tcp: Demonio usado por fakeroot-tcp.
 $ fakeroot -u dpkg-repack paquete (Crea un archivo .deb a partir de un paquete instalado en el sistema.)
 $ fakeroot /bin/bash (ejecutar bash como root)
+1.-
+Crear un archivo con permisos de root sin realmente serlo:
+$ fakeroot-sysv bash
+$ touch /rootfile
+$ chown root:root /rootfile
+$ ls -l /rootfile
+El archivo parecerá haber sido creado por root, pero en realidad, sigue siendo del usuario normal.
+2.-
+Si en el sistema fakeroot-sysv presenta problemas, se puede usar la versión basada en TCP:
+$ fakeroot-tcp bash
+$ mkdir /fake-root-dir
+$ chmod 700 /fake-root-dir
+$ ls -ld /fake-root-dir
+Esta implementación usa un enfoque diferente para emular permisos de root.
 
 
 faketime
@@ -16207,6 +16221,12 @@ $ falselogin --wait 5 (espera 5 segundos antes de cerrarse)
 fallocate
 Manipular el espacio de disco asignado a un archivo.
 $ fallocate -l 20G archivo.txt (Como si el archivo.txt tuviera 20G)
+
+
+fancontrol
+Este paquete contiene un demonio que calcula la velocidad del ventilador a partir de la temperatura y configura las salidas PWM correspondientes a los valores calculados. Esto resulta útil cuando la BIOS o ACPI no ofrecen esta función, lo que normalmente debería ocurrir en un portátil. Incluye la herramienta pwmconfig.
+# pwmconfig (si hay módulos de sensor compatibles con PWM [Pulse Width Modulation - PWM] instalados los buscará y probará cada uno para ver si controla un ventilador en la placa base
+# fancontrol file.conf (arranacr el daemon con el archivo de cofiguración creado con el comando anterior)
 
 
 far2l
