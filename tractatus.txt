@@ -16281,6 +16281,33 @@ $ fasm file.asm file.exe (generará un archivo file.exe para windows a partir de
 $ fasm boot.asm boot.bin (generará un archivo boot.bin que puede ser usado como un bootloader para un sistema x86)
 
 
+fastd
+Daemon VPN [Virtual Private Network] que ofrece una forma rápida y segura de crear túneles VPN que se popularizó en dispositivos pequeños como routers.
+Ejemplo de archivo de configuración JSON para definir las conexiones VPN:
+# nano /etc/fastd/config.json
+       { "interfaces": {
+           "eth0": {
+           "mode": "tun",
+           "address": "10.0.0.1/24"
+           }
+       },
+       "connections": [
+           {
+             "name": "lan",
+             "remote_address": "192.168.1.100:7128",
+             "local_address": "10.0.0.2:7128",
+             "key": "your_secret_key_here"
+           }
+         ]
+        }
+Este ejemplo configura una interfaz Ethernet [eth0] en modo TUN y establece una conexión VPN con otro dispositivo remoto.
+# systemctl start fastd (iniciar el servicio)
+# systemctl enable fastd (que inicie al arrancar el sistema)
+# systemctl status fastd (verificar el estado)
+# fast-client --config /path/to/config.json (conectar a una red VPN remota)
+# fast-server --config /path/to/config.json (permitir conexiones entrantes desde otros dispositivos)
+
+
 fastfech
 Herramienta para obtener información del sistema y mostrarla de una manera atractiva.
 $ fastfetch
