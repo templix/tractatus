@@ -16274,6 +16274,13 @@ Además del alias mencionado de vim se pueden añadir a .bashrc otros:
 $ fasd -fl | fzf (con fzf instalado, mostrará los archivos y directorios en un selector interactivo)
 
 
+fasm
+Ensamblador rápido y autocompilable de lenguaje ensamblador para procesadores de arquitectura x86 y x86-64, que realiza múltiples pasadas para optimizar el tamaño del código máquina generado.
+$ fasm file.asm file (generará un archivo ejecutable llamado file a partir de un archivo en código ensamblador)
+$ fasm file.asm file.exe (generará un archivo file.exe para windows a partir del archivo en código ensamblador)
+$ fasm boot.asm boot.bin (generará un archivo boot.bin que puede ser usado como un bootloader para un sistema x86)
+
+
 fastfech
 Herramienta para obtener información del sistema y mostrarla de una manera atractiva.
 $ fastfetch
