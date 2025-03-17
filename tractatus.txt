@@ -16229,9 +16229,29 @@ Este paquete contiene un demonio que calcula la velocidad del ventilador a parti
 # fancontrol file.conf (arranacr el daemon con el archivo de cofiguración creado con el comando anterior)
 
 
+fapolicyd
+Daemon de Política de Acceso a Archivos. Fapolicyd es un daemon, que funciona como un firewall de archivos y determina si puede accederse a ellos basándose en una base de datos de confianza y atributos de archivo o proceso. Puede utilizarse para bloquear o habilitar el acceso y la ejecución de archivos.
+# systemctl status fapolicyd (verificar el estado del servicio)
+# fapolicyd-a --add /Docmentos/emacs (habilitar)
+# fapolicyd-a --remove /Documentos/porn (deshabilitar)
+# fapolicyd-a --block-process 1234 (bloquear un proceso específico)
+# fapolicyd-a --allow-process 5678 (permitir acceso a un proceso específico)
+# fapolicyd-info /ruta/al/archivo (mostrar información sobre un archivo específico)
+# fapolicyd-cmd clear-cache (limpiar la caché de fapolicyd)
+# journalctl -u fapolicyd (verificar el registro de eventos)
+
+
 far2l
 Clon de FAR Manager para Windows, similar, pero más potente que Norton Commander/Midnight Commander.
 $ far2l
+
+
+farpd
+Daemon que se utiliza para crear respuestas ARP [Address Resolution Protocol] falsas en una red. Puede ser utilizado para realizar ataques de tipo ARP spoofing.
+$ farpd -i eth0 (especifica la interfaz de red que farpd debe utilizar para obtener la dirección MAC que se usará en las respuestas ARP)
+$ farpd -i eth0 -r 192.168.1.0/24 (indica que farpd solo responderá a solicitudes ARP para direcciones IP en el rango 192.168.1.0 a 192.168.1.255)
+$ farpd -i eth0 -d (hará que farpd se ejecute en segundo plano, liberando la terminal)
+$ arping -I eth0 192.168.1.100 (si farpd está configurado para responder a 192.168.1.100, debería verse una respuesta ARP con la dirección MAC de la interfaz eth0)
 
 
 fastfech
