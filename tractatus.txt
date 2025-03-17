@@ -16254,6 +16254,26 @@ $ farpd -i eth0 -d (hará que farpd se ejecute en segundo plano, liberando la te
 $ arping -I eth0 192.168.1.100 (si farpd está configurado para responder a 192.168.1.100, debería verse una respuesta ARP con la dirección MAC de la interfaz eth0)
 
 
+fasd
+[f[files], a[files/directories], s[show/search/select], d[directories]]. Impulsor de productividad que ofrece acceso rápido a archivos y directorios para shells POSIX. Registra los archivos y directorios a los que se ha accedido, para que se puedan referenciar rápidamente en la línea de comandos. fasd registra los archivos y directorios que se han usado con comandos como cd, vim, ls, cat, etc.
+$ echo 'eval "$(fasd --init auto)"' >> ~/.bashrc (agregarlo a la shell para que se cargue automáticamente al iniciar sesión)
+$ source ~/.bashrc (recargar la configuración)
+Si se ha trabajado en ~/Documentos/emacs, des de cualquier directorio se puede saltar a él con:
+$ fasd -d emacs
+O con la versión abreviada:
+$ z emacs
+$ fasd -l (muestra los archivos y directorios registrados, ordenados por frecuencia de uso)
+$ fasd -f notas.txt (Si se ha trabajado con notas.txt en distintos directorios, abrir el más frecuente)
+$ vim `fasd -f notas.txt` (abrir un archivo con vim)
+$ v notas.txt (o usando la versión abreviada si se ha configurado el alias v='fasd -e vim')
+$ fasd -R ~/.emacs.d/ notes (buscará notes dentro de un directorio especifico)
+Además del alias mencionado de vim se pueden añadir a .bashrc otros:
+       alias j='fasd -d'  # Para saltar a directorios
+       alias v='fasd -e vim'  # Para abrir archivos con vim
+       alias o='fasd -e xdg-open'  # Para abrir archivos con el visor predeterminado
+$ fasd -fl | fzf (con fzf instalado, mostrará los archivos y directorios en un selector interactivo)
+
+
 fastfech
 Herramienta para obtener información del sistema y mostrarla de una manera atractiva.
 $ fastfetch
