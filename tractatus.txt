@@ -10667,8 +10667,8 @@ $ devio -w /dev/mtd0 0 512 < archivo_de_datos (escribir 512 bytes de datos de la
 $ devio -r /dev/sda 1000 512 (leerá 512 bytes del sector 1000 de /dev/sda)
 
 
-devsripts
-Casi 80 scripts para facilitar la vida a los encargados de los paquetes Debian. Un listado en https://github.com/Debian/devscripts
+devscripts
+Scripts para simplificar la vida del mantenedor de paquetes Debian. Incluye la herramientas annotate-output, archpath, bts, build-rdeps, chdist, checkbashisms, cowpoke, cvs-debi, cvs-debc, cvs-debrelease,  cvs-debuild, dcmd, dd-list, debbisect, debc, debchange [abbreviation dch], debcheckout, debclean, debcommit, debdiff, debdiff-apply, debi, debootsnap, debpkg, debrelease, debrebuild, debrepro, debrsign, debsign, debsnap, debuild, deb-janitor, deb-reversion, deb-why-removed, dep3changelog, desktop2menu, dget, diff2patches, dpkg-depcheck, dpkg-genbuilddeps, dscextract, dscverify, edit-patch, getbuildlog, git-deborig, grep-excuses, hardening-check, list-unreleased, ltnu [Long Time No Upload], manpage-alert, mass-bug, mergechanges, mk-build-deps, mk-origtargz, namecheck, nmudiff, origtargz, plotchangelog, pts-subscribe, rc-alert, reproducible-check, rmadison, sadt, salsa, suspicious-source, svnpath, tagpending, transition-check, uscan, uupdate, what-patch, whodepends, who-permits-upload, who-uploads, wnpp-alert, wnpp-check y wrap-and-sort. Una explicación para cada uno en https://github.com/Debian/devscripts.
 
 
 devtodo
@@ -16428,6 +16428,14 @@ Reporta eventos de acceso a archivos de todos los procesos en ejecución. Su obj
 # fatrace (de forma general)
 # fatrace -s 10 -C emacs -o salida (durante 10 segundos solo del proceso emacs y guardado el informe en "salida")
 # power-usage-report
+
+
+fatresize
+Redimensionador de sistemas de archivos FAT16/FAT32 de forma no destructiva.
+# fatresize -s 500M /dev/sdb1 (reducirá el tamaño del sistema de archivos FAT32 en el dispositivo `/dev/sdb1` a 500 megabytes)
+# fatresize -s 2000M /dev/sdc1 (aumentará el tamaño del sistema de archivo FAT16 en el dispositivo `/dev/sdc1` a 2000 megabytes)
+# fatresize -s 750M -v /dev/sdd1 (mostrará información detallada sobre el proceso de redimensionamiento)
+# fatresize -s 1500M -f /dev/sde1 (intentará redimensionar el sistema de archivos FAT32 en `/dev/sde1` a 1500 megabytes, ignorando cualquier error que pueda surgir)
 
 
 fbcmd
