@@ -16385,6 +16385,15 @@ $ fastp -i input.fastq -o output.fastq -w 8 (usa 8 hilos en paralelo para aceler
 $ fastp -i R1.fastq -I R2.fastq -o R1_clean.fastq -O R2_clean.fastq --correction (Corrige errores en las lecturas paired-end utilizando información de ambas lecturas)
 
 
+fasttrack-archive-keyrin
+Hace referencia a una clave de archivo GnuPG [GNU Privacy Guard] que se utiliza para firmar digitalmente los archivos de lanzamiento del repositorio Debian FastTrack. Esto es parte de un mecanismo de seguridad que garantiza la integridad y autenticidad de los paquetes que se descargan desde dicho repositorio. El repositorio Debian FastTrack es un repositorio adicional que proporciona paquetes de software que no están disponibles en los repositorios oficiales de Debian, o que ofrecen versiones más recientes de ciertos paquetes. Es comúnmente utilizado por usuarios que necesitan software específico o actualizado que no se encuentra en los repositorios estándar.
+Agregar las lineas
+# nano /etc/apt/sources.list
+       deb https://fasttrack.debian.net/debian-fasttrack/ bookworm-fasttrack main contrib
+       deb https://fasttrack.debian.net/debian-fasttrack/ bookworm-backports-staging main contrib
+# apr update
+
+
 fatattr
 Permite ver y/o modificar los atributos MSDOS en un sistema de archivos FAT empleando los signos + para otorgar y - para quitar. Dichos premisos son:
     r (Solo lectura)
