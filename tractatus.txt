@@ -16308,12 +16308,69 @@ Este ejemplo configura una interfaz Ethernet [eth0] en modo TUN y establece una 
 # fast-server --config /path/to/config.json (permitir conexiones entrantes desde otros dispositivos)
 
 
+fastddsgen
+[fastdds-gen]. Generador de código fuente IDL [Interface Definition Language - lenguaje de definición de interfaz] para eProsima FastDDS. eProsima FastDDS-Gen es una aplicación Java que genera código fuente para eProsima FastDDS utilizando los tipos de datos definidos en un archivo IDL. Este código fuente generado puede usarse en cualquier aplicación FastDDS para definir el tipo de datos de un tema, que posteriormente se usará para publicar o suscribirse. Precisa tener instalado eProsima FastDDS en el sistema.
+$ fastdds-gen file.idl (generará un archivo file.cpp y un archivo file.h)
+$ fastdds-gen -o /tmp/mi_interfaz.cpp -d /tmp mi_interfaz.idl (generar código fuente en un archivo llamado mi_interfaz.cpp en el directorio /tmp)
+
+
+fastep
+Herramienta diseñada para optimizar la carga de los entry_points en proyectos de Python, específicamente en el archivo setup.py. Los entry_points son una forma de definir comandos ejecutables o plugins en un paquete de Python.
+Dentro de la carpeta del proyecto:
+$ fastep
+Asegura que fastentrypoints esté incluido en MANIFEST.in y setup.py incluendo la linea "import fastentrypoints"
+
+
 fastfech
 Herramienta para obtener información del sistema y mostrarla de una manera atractiva.
 $ fastfetch
 $ fastfetch --list-config-paths (muestra el listado de los archivos de configuracion de la aplicación)
 $ fastfetch --list-logos (llistado de logos disponible en la aplicación)
 $ fastfetch -d arch (muestra información del sistema sea la distro que sea pero con el logo de arch)
+
+
+fastnetmon
+Herramienta que analiza el tráfico de red en tiempo real para identificar patrones anómalos, como un volumen elevado de paquetes, bytes o flujos por segundo, que suelen indicar un ataque DDoS y reaccionar rápidamente ante ellos, ya sea notificando al administrador, apagar un servidor o bloquear al cliente. Está construido sobre múltiples motores de captura de paquetes, como NetFlow, IPFIX, sFlow y mirroring [SPAN], lo que lo hace muy eficiente y escalable.
+Configuración básica:
+# nano /etc/fastnetmon.conf
+       # Habilitar captura de tráfico vía NetFlow
+       netflow_enabled = yes
+       netflow_port = 2055
+       netflow_host = 127.0.0.1
+       #
+       # Umbrales para detectar ataques (ajusta según tu red)
+       threshold_pps = 10000       # Paquetes por segundo
+       threshold_mbps = 100        # Megabits por segundo
+       #
+       # Acciones al detectar un ataque
+       ban_enabled = yes           # Habilita bloqueo
+       ban_for_pps = yes           # Bloquea por exceso de paquetes por segundo
+       ban_for_bandwidth = yes     # Bloquea por exceso de ancho de banda
+       ban_script = /usr/local/bin/notify_attack.sh # script que se ejecuta
+# systemctl restart fastnetmon (reiniciar el servicio despues de cualquier modificación del archivo de configuración)
+# fastnetmon --sflow 6343 (si la red usa sFlow, FastNetMon analizará el tráfico sFlow y detectará anomalías)
+1.-
+Detección de un ataque DDoS con NetFlow
+Supongamos que se tiene un router enviando datos NetFlow a FastNetMon. El router envia el tráfico a la IP del servidor donde corre FastNetMon, por ejemplo, 192.168.1.10, puerto 2055. Iniciar FastNetMon:
+# fastnetmon --netflow 2055
+FastNetMon comenzará a analizar el tráfico. Si un host, digamos, 192.168.1.100, envía más de 10.000 paquetes por segundo, según el umbral configurado, FastNetMon lo detectará como un ataque y, si ban_enabled está activado, ejecutará la acción definida, por ejemplo, un script para notificar o bloquear.
+La salida esperada en logs [/var/log/fastnetmon.log] podría ser parecida a:
+          2025-03-18 08:00:00 - Attack detected: IP 192.168.1.100, 15000 pps, 120 Mbps
+          2025-03-18 08:00:01 - Banning IP 192.168.1.100
+2.-
+El script de notificación podría ser
+# nano /usr/local/bin/notyfy_attack.sh
+echo "Ataque detectado desde $1 a las $(date)" | mail -s "Alerta DDoS" admin@tured.com
+3.-
+Mitigación con BGP [Border Gateway Protocol] Blackholing
+FastNetMon puede integrarse con BGP para mitigar ataques redirigiendo el tráfico a un "agujero negro".
+# nano /etc/fastnetmon.conf
+Añadir las lineas:
+       bgp_enabled = yes
+       bgp_next_hop = 192.168.1.1
+       bgp_community = 65535:666  # Comunidad estándar para blackholing (RFC 7999)
+Cuando detecte un ataque, FastNetMon anunciará la IP atacante al router BGP y que descartará el tráfico.
+# fastnetmon
 
 
 fastp
