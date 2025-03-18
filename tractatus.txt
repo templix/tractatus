@@ -16316,6 +16316,18 @@ $ fastfetch --list-logos (llistado de logos disponible en la aplicación)
 $ fastfetch -d arch (muestra información del sistema sea la distro que sea pero con el logo de arch)
 
 
+fastp
+Herramienta de preprocesamiento de datos de secuenciación en formato FASTQ, que se utiliza en bioinformática para limpiar y mejorar la calidad de las lecturas antes del análisis posterior. Está diseñada para proporcionar preprocesamiento ultrarápido single-end [un solo extremo - SE] y paired-endd [extremo emparejado - PE] para datos FastQ con útiles funciones de control de calidad y filtrado.
+$ fastp -i input.fastq -o output.fastq (recorta y limpia las secuencias de un archivo de entrada input.fastq y genera un nuevo archivo output.fastq)
+$ fastp -i R1.fastq -I R2.fastq -o R1_clean.fastq -O R2_clean.fastq (procesa dos archivos R1.fastq y R2.fastq [lecturas forward y reverse] y genera archivos limpios)
+$ fastp -i input.fastq -o output.fastq -q 20 (recorta bases con una calidad inferior a Q20 en los extremos de cada secuencia)
+$ fastp -i input.fastq -o output.fastq --detect_adapter_for_pe (detecta y elimina adaptadores automáticamente en lecturas paired-end - PE)
+$ fastp -i input.fastq -o output.fastq -l 30 (descarta todas las lecturas con una longitud inferior a 30 bases)
+$ fastp -i input.fastq -o output.fastq -h report.html -j report.json (guarda un informe de calidad interactivo en report.html y un archivo report.json con las estadísticas)
+$ fastp -i input.fastq -o output.fastq -w 8 (usa 8 hilos en paralelo para acelerar el procesamiento)
+$ fastp -i R1.fastq -I R2.fastq -o R1_clean.fastq -O R2_clean.fastq --correction (Corrige errores en las lecturas paired-end utilizando información de ambas lecturas)
+
+
 fatattr
 Permite ver y/o modificar los atributos MSDOS en un sistema de archivos FAT empleando los signos + para otorgar y - para quitar. Dichos premisos son:
     r (Solo lectura)
