@@ -16423,6 +16423,13 @@ Establecer u obtener la etiqueta del sistema de archivos MS-DOS o la ID del volu
 # ntfslabel /dev/sda3 etiqueta (lo mismo en un sistema NTFS)
 
 
+fatrace
+Reporta eventos de acceso a archivos de todos los procesos en ejecución. Su objetivo principal es detectar procesos que reactivan el disco innecesariamente, impidiendo así el ahorro de energía. Incluye la herramienta power-usage-report.
+# fatrace (de forma general)
+# fatrace -s 10 -C emacs -o salida (durante 10 segundos solo del proceso emacs y guardado el informe en "salida")
+# power-usage-report
+
+
 fbcmd
 [php5-cli php5-curl]. Cliente de línea de comandos para Facebook.
 $ php -r 'echo phpversion();' (Comprobar si php5 está instalado)
