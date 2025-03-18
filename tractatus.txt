@@ -16407,6 +16407,15 @@ $ fatattr -s /media/usb1/* (Quita el atributo oculto de todo el usb)
 $ fatattr +s /media/usb1/* (Oculta todos los archivos del usb)
 
 
+fatcat
+Herramienta forense para explorar, extraer, reparar y analizar sistemas de archivos FAT [File Allocation Table]
+# fatcat /dev/sdX1 (explorar un dispositivo FAT)
+# fatcat --extract /dev/sda1 /extracción_sda1 (intentará extraer todos los archivos de la partición FAT en el directorio especificado)
+# fatcat --analyze /dev/sda1 (mostrará información detallada sobre la estructura de la partición, incluyendo tamaño, número de entradas de directorio, etc.)
+# fatcat --repair /dev/sda1 (intenta restaurar la estructura de archivos si está dañada)
+# fatcat --find /dev/sda1 "nombre_del_archivo" (buscará el archivo especificado en la partición FAT)
+
+
 fatlabel
 Establecer u obtener la etiqueta del sistema de archivos MS-DOS o la ID del volumen. Para otros sistemas existen los comandos: ntfslabel [NTFS], e2label [Ext2, Ext3 y Ext4] y BTFS [ver].
 # fatlabel /dev/sda1 (Obtener la etiqueta de una partición FAT32)
