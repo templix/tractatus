@@ -16391,7 +16391,14 @@ Agregar las lineas
 # nano /etc/apt/sources.list
        deb https://fasttrack.debian.net/debian-fasttrack/ bookworm-fasttrack main contrib
        deb https://fasttrack.debian.net/debian-fasttrack/ bookworm-backports-staging main contrib
-# apr update
+# apt update
+1.-
+Para consultar los paquetes disponibles en los repositorios fasttrack:
+# apt install devscripts
+$ nano ~/.devscripts (crear o editar el archivo)
+Añadir la linea
+       RMADISON_URL_MAP_FASTTRACK=https://fasttrack.debian.net/api/madison
+# rmadison -u fasttrack gitlab (consultar los paquetes fasttrack)
 
 
 fatattr
@@ -16436,6 +16443,11 @@ Redimensionador de sistemas de archivos FAT16/FAT32 de forma no destructiva.
 # fatresize -s 2000M /dev/sdc1 (aumentará el tamaño del sistema de archivo FAT16 en el dispositivo `/dev/sdc1` a 2000 megabytes)
 # fatresize -s 750M -v /dev/sdd1 (mostrará información detallada sobre el proceso de redimensionamiento)
 # fatresize -s 1500M -f /dev/sde1 (intentará redimensionar el sistema de archivos FAT32 en `/dev/sde1` a 1500 megabytes, ignorando cualquier error que pueda surgir)
+
+
+fatsort
+Herramienta que se utiliza para ordenar las entradas de directorio en particiones FAT16 y FAT32. Lee el sector de arranque y ordena la estructura de directorios recursivamente, si hay problemas en la estructura del directorio, fatsort puede ayudar a repararlos al reordenar las entradas y puede manejar nombres de archivo que superen los 8.3 caracteres, que es una limitación de los sistemas de archivos más antiguos.
+# fatsort /dev/sda1 (ordenar el directorio de una particion FAT y mostrar mensajes sobre el progreso de la operación)
 
 
 fbcmd
