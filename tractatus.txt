@@ -16450,6 +16450,12 @@ Herramienta que se utiliza para ordenar las entradas de directorio en particione
 # fatsort /dev/sda1 (ordenar el directorio de una particion FAT y mostrar mensajes sobre el progreso de la operación)
 
 
+faucc
+Compilador de C que genera código Intel para CPU de 16/32 bits útil para compilar código en modo real, como una BIOS aunque este caso no es muy común en sistemas modernos.
+$ faucc -m16 ejemplo.c -o ejempl16.bin (compilar un programa en modo 16 bits y guardarlo en ejemplo16.bin)
+$ faucc -m32 ejemplo.c -o ejempl32.bin -Wall -Werror (compilar uno de 32 bits, guardarlo en ejemplo32.bin, activar todas las advertencias y convertirlas en errores)
+
+
 fbcmd
 [php5-cli php5-curl]. Cliente de línea de comandos para Facebook.
 $ php -r 'echo phpversion();' (Comprobar si php5 está instalado)
