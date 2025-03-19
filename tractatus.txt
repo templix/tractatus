@@ -16481,6 +16481,18 @@ Un ejemplo de salida podría ser:
 En este ejemplo, indicaría que chrome y firefox son los procesos que están generando más fallos de página, con chromium teniendo un número significativo de fallos mayores, lo que podría indicar que está accediendo a mucha memoria que no está en RAM y necesita ser traída desde el disco.
 
 
+fbb
+implementación de un BBS [Bulletin Board System] para radioaficionados, especialmente para su uso con radio por paquetes [AX.25]. Este software permite a los operadores de radioaficionados administrar un sistema de mensajería y almacenamiento para la comunicación digital. Incluye las herramientas xfbbd [Es el demonio principal del sistema de BBS], ajoursat [Permite actualizar los datos de los satélites usados en la configuración de fbb], fbbgetconf [Extrae la configuración actual del sistema FBB BBS], satdoc [Muestra documentación relacionada con el seguimiento de satélites]. satupdat [Actualiza los datos orbitales de los satélites (TLE) para su uso en FBB] y sfbbC [Herramienta auxiliar para manipulación de la base de datos del BBS].
+# xfbbd (iniciar el demonio)
+$ ps aux | grep xfbbd (verificar que está corriendo)
+$ fbbgetconf (mostrará los valores de configuración)
+$ satupdat (descargará la última información de satélites)
+$ satdoc (mostrará información útil sobre cómo usar fbb con comunicaciones satelitales)
+$ ajoursat (revisa y actualiza los archivos de configuración relacionados con satélites en el sistema FBB)
+$ sfbbC -check (verificar la integridad de la base de datos)
+$ sfbbC -repair (intentar reparar si hay errores en la base de datos)xs
+
+
 fbcmd
 [php5-cli php5-curl]. Cliente de línea de comandos para Facebook.
 $ php -r 'echo phpversion();' (Comprobar si php5 está instalado)
