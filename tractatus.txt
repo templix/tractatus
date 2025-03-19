@@ -16456,6 +16456,13 @@ $ faucc -m16 ejemplo.c -o ejempl16.bin (compilar un programa en modo 16 bits y g
 $ faucc -m32 ejemplo.c -o ejempl32.bin -Wall -Werror (compilar uno de 32 bits, guardarlo en ejemplo32.bin, activar todas las advertencias y convertirlas en errores)
 
 
+fauhdlc
+Compilador e intérprete experimental de VHDL [VHSIC Hardware Description Language], un lenguaje de descripción de hardware usado en el diseño de circuitos electrónicos que permite simular y probar diseños antes de su implementación en hardware físico. fauhdlc se encuentra aún en una fase experimental muy temprana, donde muchas construcciones de VHDL aún no cuentan con soporte adecuado.
+$ fauhdlc and_gate.vhdl (compilar un archivo y si hay errores en la sintaxis, se mostrarán en la terminal)
+$ fauhdlc and_gate.vhdl and_gate_tb.vhdl (compilar y ejecutar la simulación)
+$ fauhdlc --list and_gate.vhdl (imprimirá una lista de entidades, arquitecturas y paquetes definidos)
+
+
 fbcmd
 [php5-cli php5-curl]. Cliente de línea de comandos para Facebook.
 $ php -r 'echo phpversion();' (Comprobar si php5 está instalado)
