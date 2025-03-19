@@ -16463,6 +16463,24 @@ $ fauhdlc and_gate.vhdl and_gate_tb.vhdl (compilar y ejecutar la simulación)
 $ fauhdlc --list and_gate.vhdl (imprimirá una lista de entidades, arquitecturas y paquetes definidos)
 
 
+faultstat
+Herramienta que permite monitorear la actividad de fallos de página de los procesos que se ejecutan en un sistema. Los fallos de página ocurren cuando un proceso intenta acceder a una página de memoria que no está actualmente en la memoria RAM, lo que obliga al sistema operativo a traer esa página desde el disco [swap o archivos mapeados en memoria] y eso puede afectar el rendimiento del sistema, especialmente si ocurre con frecuencia.
+$ faultstat (resumen de los fallos de página desde el inicio del sistema que incluirá el número de fallos de página, menores, que no requieren acceso a disco y mayores, que sí requieren acceso a disco)
+$ faultstat -l (mostrar información completa de comandos)
+$ faultstat -c (información de comandos del campo de comunicación de los procesos)
+$ faultstat -t (modo interactivo)
+$ faultstat -s (información corta de comandos)
+$ faultstat -T (mostrar los principales procesos con fallos de página según el total de fallos de página)
+Un ejemplo de salida podría ser:
+       PID  Major   Minor    Swap  User       Command
+      3261  13702    9112k  12700  pep        /usr/lib/chromium/chromium
+      3699   1235    7764k  14480  pep        /opt/brave.com/brave/brave
+      3209  62232    7500k  36488  pep        /usr/lib/chromium/chromium
+      2204  12557    7375k 115948  pep        firefox
+      2404    915    6325k  11272  pep        /usr/lib/firefox/firefox-bi
+En este ejemplo, indicaría que chrome y firefox son los procesos que están generando más fallos de página, con chromium teniendo un número significativo de fallos mayores, lo que podría indicar que está accediendo a mucha memoria que no está en RAM y necesita ser traída desde el disco.
+
+
 fbcmd
 [php5-cli php5-curl]. Cliente de línea de comandos para Facebook.
 $ php -r 'echo phpversion();' (Comprobar si php5 está instalado)
