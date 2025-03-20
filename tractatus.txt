@@ -16625,6 +16625,16 @@ $ fcm merge rama-nueva (fusiona cambios desde otra rama)
 $ fcm_graphic_diff archivo1.f90 archivo2.f90 (herramienta gráfica para ver diferencias entre archivos)
 
 
+fcoe-utils
+Herramientas que permiten configurar y gestionar Canal de Fibra sobre Ethernet. Contiene fcoeadm [configurar interfaces Fibre Channel Over - FCoE] y fcoemon [servicio para configurar filtros DCB [Data Center Bridging] Ethernet Quality Of Service - QOS]
+# systemctl enable fcoemon (habilitar el demonio FCoE para que se inicie automáticamente al arrancar)
+# fcoeadm -i (listar las interfaces de red que son capaces de soportar FCoE)
+# fcoeadm -c eth0 (crear una interfaz FCoE en eth0)
+# fcoeadm -t (mostrará los objetivos [targets] FCoE disponibles)
+# fcoeadm -s (mostrar información como el estado de la interfaz, el WWN [World Wide Name] y otros detalles)
+# fcoeadm -d eth0 (eliminará la configuración FCoE de la interfaz)
+
+
 fcrackzip
 Craquear zips protegidos
 $ fcrackzip -c aA1 -l 5 archivo_protegido.zip
