@@ -16700,22 +16700,20 @@ Y seguir las instrucciones que aparecen en pantalla.
 
 
 fdpowermon
-Script de Perl sencillo que instala un icono en la bandeja del sistema que muestra el nivel de bateria y se actualiza cada 3 segundos.
+[fdpowermon-icons]. Script de Perl sencillo que instala un icono en la bandeja del sistema que muestra el nivel de bateria y se actualiza cada 3 segundos.
 $ fdpowermon
 
 
 fdupes
 Buscar archivos duplicados.
-$ fdupes -r .  (Del directorio actual y los subdire4ctorios)
-$ fdupes -S .  (Del directorio actual por medida)
-Otras opciones:
-	-s (Comprueba los enlaces simbolicos)
-	-h (comprueba los enlaces fuertes)
-	-q ("quiet", oculta el indicador de progreso)
-	-v (muestra la version)
-	-d (borrar los ficheros duplicados)
-	-h (ayuda)
-	-n (descarta los ficheros vacios)
+$ fdupes -n -r .  (Del directorio actual y los subdirectorios y descartando los ficheros vacios)
+$ fdupes -q -d -S .  (Del directorio actual por medida, oculta el indicador de progreso y borrar los duplicados)
+$ fdupes -s -h . (Comprueba los enlaces simbolicos y los enlaces fuertes)
+
+
+fdutils
+utilidades para formatear discos de capacidad extra, montar y desmontar automáticamente disquetes, etc. Incluye las aplicaciones diskd [daemon que espera a que se inserte el disco], diskseekd [demonio de búsqueda de disco], fdlist [enumerar unidades conocidas], fdmount [monta y desmonta automáticamente los discos al insertarlos o extraerlos], fdmountd [daemon de montaje de disquetes], fdrawcmd [envía comandos sin formato al controlador de disquete], fdumount [Utilidad de montaje de disquetes], floppycontrol [configura el controlador de disquete], floppymeter [Mida la capacidad bruta y la velocidad de rotación exacta de la unidad de disquete], getfdprm [imprime la geometría actual del disco], setfdprm [establece la geometría actual del disco], superformat [formatea discos de alta capacidad hasta 1992 kb para discos de alta densidad o hasta 3984 kb para discos de densidad extra], xdfcopy [formatea, lee y escribe en los discos XDF de OS/2], xdfformat [Copiar y formatear discos XDF], MAKEFLOPPIES [crea los dispositivos de disquete en /dev] y fdutilsconfig [configurar el bit suid de fdmount].
+Nota.- Las utilidades no funcionan con unidades de disquete USB, ya que no permiten el acceso directo al controlador de disquete.
 
 
 feh
