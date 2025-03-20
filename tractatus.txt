@@ -16671,7 +16671,10 @@ fdfind
 Alternativa rápida al comando find para buscar patrones.
 $ fdfind bash /etc (que tengan "bash" en /etc)
 $ fdfind '^x.*rc$' /etc (que empiecen por "x" y terminen con "rc" en el directorio /etc)
-$ fdfind -s txt (que tengan determinada extensión)
+$ fdfind -e txt (que tengan determinada extensión)
+$ fdfind -t d directorio (buscar un directorio)
+$ fdfind -H -i -t f archivo (buscar un archivo incluyendo en la busqueda los archivos ocultos y sin distinción de mayúsculos y minúsculas)
+$ fdfind -a -c auto -t x ejecutable (indicar toda la ruta de un ejecutable y mostrarlo con color automático)
 
 
 fdformat
@@ -16694,6 +16697,11 @@ Algunas teclas que pueden usarse:
 	v   (Verifica la tabla de particiones)
 	w   (Escribe la tabla en el disco y sale)
 Y seguir las instrucciones que aparecen en pantalla.
+
+
+fdpowermon
+Script de Perl sencillo que instala un icono en la bandeja del sistema que muestra el nivel de bateria y se actualiza cada 3 segundos.
+$ fdpowermon
 
 
 fdupes
