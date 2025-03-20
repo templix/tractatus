@@ -16493,6 +16493,13 @@ $ sfbbC -check (verificar la integridad de la base de datos)
 $ sfbbC -repair (intentar reparar si hay errores en la base de datos)xs
 
 
+fbcat
+Hace una captura de pantalla de un framebuffer [salida de la consola] y la almacena en un archivo PPM [Portable PixMap].
+$ fbcat > screenshot.ppm (desde una consola de las X hace captura de la /dev/tty1 y guarda la imagen en captura.ppm)
+$ fbcat | pnmtopng > screenshot.png (evita crear un archivo intermedio en PPM y guarda directamente en PNG)
+$ fbcat | convert ppm:- screenshot.jpg (ppm:- indica que la entrada proviene de stdin y la convierte a .jpg con "convert" de ImageMagick)
+
+
 fbcmd
 [php5-cli php5-curl]. Cliente de línea de comandos para Facebook.
 $ php -r 'echo phpversion();' (Comprobar si php5 está instalado)
@@ -16536,6 +16543,11 @@ Visualizar imagenes usando framebuffer [sin X]. Precisa root.
 # fbi -t 3 *   (visualizar 3 segundos todas las imágenes del directorio)
 Si sale una nota: ioctl VT_GETSTATE: Invalid argument [not a linux console?] :
 # fbi -vt 01 imagen
+
+
+fbless
+Lector de libros electrónicos FictionBook [fb2], que es un formato XML utilizado para ebooks, libres de DRM [Digital Rights Management - Gestión de derechos digitales].
+$ fbless libro.fb2 (abrirá el archivo en la interfaz de "fbless")
 
 
 fbset
