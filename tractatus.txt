@@ -16614,6 +16614,17 @@ Iniciar un programa FastCGI. FastCGI es un protocolo para interconectar programa
 # fcgistarter -c command.cgi -p port -i eth0 -N num
 
 
+fcm
+Herramientas para la gestión y compilación de código fuente, especialmente utilizado en entornos científicos y de modelado numérico. Incluye las aplicaciones [varias con interfaz gráfica] fcm_graphic_diff, fcm_graphic_merge, fcm_gui, fcm_internal, fcm_test_battery, fcm-add-svn-repos, fcm-add-svn-repos-and-trac-env, fcm-add-trac-env, fcm-backup-svn-repos, fcm-backup-trac-env, fcm-commit-update, fcm-daily-update, fcm-install-svn-hook, fcm-manage-trac-env-session, fcm-manage-users, fcm-recover-svn-repos, fcm-recover-trac-env, fcm-rpmbuild, fcm-user-to-email y fcm-vacuum-trac-env-db.
+$ fcm add archivo.f90 (agrega un archivo o directorio al control de versiones)
+$ fcm checkout https://repositorio.ejemplo.com/proyecto (clona un repositorio SVN)
+$ fcm commit -m "Actualización de parámetros físicos" (envía cambios al repositorio)
+$ fcm build (compila un proyecto según su configuración)
+$ fcm diff archivo_modificado.f90 (compara cambios con la versión del repositorio)
+$ fcm merge rama-nueva (fusiona cambios desde otra rama)
+$ fcm_graphic_diff archivo1.f90 archivo2.f90 (herramienta gráfica para ver diferencias entre archivos)
+
+
 fcrackzip
 Craquear zips protegidos
 $ fcrackzip -c aA1 -l 5 archivo_protegido.zip
