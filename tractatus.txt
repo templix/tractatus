@@ -21245,6 +21245,11 @@ Lenguaje de programación
 $ java -jar fichero.jar  (Ejecuta un programa escrito en java)
 
 
+jed
+[jed-extra]. Editor para programadores. Ctrl-x Ctrl-c para salir.
+$ jed script.sh
+
+
 jekyll
 Script de ruby para transformar texto plano en páginas web estáticas y blogs.
 # gem install jekyll (Instalar la gema)
@@ -21479,6 +21484,11 @@ Atajos:
 	y (Copiar la dirección de la página al portapapeles)
 	^s (Mostrar código fuente)
 	^q (Salir)
+
+
+kakoune
+Editor de código muy inspirado en Vim; por ello, la mayoría de sus comandos son similares a los de Vi y comparte el modelo de Vi de "pulsaciones de teclado como lenguaje de edición de texto". :q para salir.
+$ kak file.txt
 
 
 katoolin
@@ -21952,6 +21962,11 @@ $ ldkaac input.wav -o output.m4a --rate 48000 (forzar la salida a 48 kHz)
 $ ldkaac input.wav -o output.m4a --aaclc (usará el perfil AAC-LC [Low Complexity], compatible con la mayoría de los dispositivos)
 $ ldkaac input.wav -o output.m4a --he (usar AAC-HE [High Efficiency], que es más eficiente a tasas de bits bajas)
 $ ldkaac input.wav -o output.m4a --hev2 (optimizado para tasas de bits aún más bajas)
+
+
+le
+Editor de texto. Ctrol-x para salir
+$ le file.txt
 
 
 leafpad
@@ -23872,6 +23887,11 @@ msf6 > exit (salir de metasploit)
 # msfupdate (actualizar la base de datos de exploits)
 
 
+mg
+Editor microscópico estilo GNU Emacs. Ctrl-x Ctrl-c para salir.
+$ mg file.txt
+
+
 mgen
 Ofrece la capacidad de realizar pruebas y mediciones de rendimiento de la red IP utilizando el tráfico TCP y UDP/IP. Los mensajes de prueba se pueden generar, recibir y registrar. mgen ofrece control sobre todos los parámetros de red y la sincronización de estos mensajes. Información: https://github.com/USNavalResearchLaboratory/mgen/blob/master/doc/mgen.pdf
 
@@ -23879,6 +23899,11 @@ Ofrece la capacidad de realizar pruebas y mediciones de rendimiento de la red IP
 mi
 muestra información sobre los dispositivos montados [dispositivo de bloques, punto de montaje, opciones de montaje y sistema de ficheros utilizado]. Ver di
 $ mi
+
+
+micro
+Editor de texto que pretende ser una especie de sucesor del editor Nano. Ctrl-q para salir.
+$ micro file.txt
 
 
 microfono
@@ -24152,6 +24177,14 @@ mlcc
 Configuración para mlterm. Las opciones susceptibles de modificación son las reflejadas en /usr/share/doc/mlterm/PROTOCOL.gz apartado “Values for each key”
 $ mlcc fg_color blue
 $ mlcc bg_color red
+
+
+mle
+Editor de texto escrito en C.
+$ mle file:25 (abrir file y colocar el cursor en el linea 25)
+$ mle -h (listado de atajos de teclado)
+$ mle file1 file2 file3 (abrir cada archivo en una ventado del editor)
+Nota.- Ctrl-s para guardar, Ctrl-o abrir y Ctrl-x para salir
 
 
 mlterm
@@ -25689,6 +25722,10 @@ Muestra información del sistema. Instalación:
 	# make install
 $ neofetch (Básico)
 $ neofetch --colors 9 3 5 10 7 9 (Modificando colores)
+
+
+neovim
+Bifurcación de Vim centrada en código y funciones modernas.
 
 
 nessus
