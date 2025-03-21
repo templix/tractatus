@@ -16716,6 +16716,14 @@ utilidades para formatear discos de capacidad extra, montar y desmontar automát
 Nota.- Las utilidades no funcionan con unidades de disquete USB, ya que no permiten el acceso directo al controlador de disquete.
 
 
+feedbackd
+Demonio activado por DBus que proporciona retroalimentación táctil, visual y auditiva basada en eventos. Incluye fbd-theme-validate
+$ fbcli -t=5 -P=full -w 5
+$ fbcli -t 0 -E phone-incoming-call (Ejecutar retroalimentaciones para el evento phone-incoming-call hasta que se detenga explícitamente)
+$ fbcli -t -1 -E message-new-instant (Ejecutar para el evento message-new-instant solo una vez)
+$ fbcli -t 10 -E alarm-clock-elapsed (Ejecutar para el evento message-new-instant durante 10 segundos)
+
+
 feh
 Visor de imagenes liviano.
 $ feh /home/usuario/imagenes (Muestra las imagenes del directorio)
@@ -21897,6 +21905,19 @@ Se utiliza para crear, actualizar y eliminar enlaces simbólicos para las biblio
 ldd
 Para conocer las librerias compartidas que usa una aplicación.
 $ ldd /usr/bin/amarok
+
+
+ldkaac
+interfaz de codificación AAC [Advanced Audio Codec] basado en la biblioteca libfdk-aac que lee audio PCM lineal en formato WAV, PCM sin procesar o CAF y lo codifica en archivos M4A/AAC"
+Interfaz de codificación de línea de comandos para libfdk-aac. fdkaac es un codificador AAC de línea de comandos basado en libfdk-aac. Lee audio PCM lineal en formato WAV, PCM sin procesar o CAF y lo codifica en archivos M4A/AAC.
+$ ldkaac input.wav -o output.m4a (tomará el archivo input.wav y lo codificará en formato AAC dentro de un contenedor M4A)
+$ ldkaac input.wav -o output.m4a --bitrate 128 (generará un archivo con una calidad de tasa de bits constante de 128 kbps)
+$ ldkaac input.wav -o output.m4a --quality 5 (obtener mejor eficiencia [de 1 a 5], con VBR [Variable Bitrate] en lugar de una tasa fija)
+$ ldkaac input.pcm -o output.m4a --raw --raw-channels 2 --raw-rate 44100 --raw-format S16LE (archivo es PCM sin cabecera, audio es estéreo, frecuencia de muestreo a 44.1 kHz y formato formato Little Endian de 16 bits)
+$ ldkaac input.wav -o output.m4a --rate 48000 (forzar la salida a 48 kHz)
+$ ldkaac input.wav -o output.m4a --aaclc (usará el perfil AAC-LC [Low Complexity], compatible con la mayoría de los dispositivos)
+$ ldkaac input.wav -o output.m4a --he (usar AAC-HE [High Efficiency], que es más eficiente a tasas de bits bajas)
+$ ldkaac input.wav -o output.m4a --hev2 (optimizado para tasas de bits aún más bajas)
 
 
 leafpad
