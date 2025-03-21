@@ -12690,6 +12690,13 @@ Monitor  de trafico de red
 # dstat -c --top-cpu -dn --top-mem (uso de CPU, proceso que más usa la CPU, estadistica de disco y red y proceso que consume más memoria)
 
 
+dt
+Herramienta para mostrar información sobre un dominio.
+$ dt -debug google.com
+$ dt -scan google.com (más información de los registros)
+$ dt -json google.com (resultado en json)
+
+
 dtach
 Pequeño programa que emula las funciónes de separar y adjuntar de screen [ver] sin embargo, no tiene las otras características de screen, como su compatibilidad con múltiples terminales o su compatibilidad con emulación de terminal.
 $ dtach -n session_1 (crear una sesión. "exit" para dewsconectar)
@@ -16667,6 +16674,14 @@ Algunos atajos:
 	E (Abre preferencias)
 
 
+fdb5
+[Fields DataBase] Herramienta desarrollada por el Centro Europeo de Predicción Meteorológica a Medio Plazo (ECMWF) para almacenar, indexar y recuperar datos GRIB. Cada mensaje GRIB se almacena como un campo y se indexa mediante metadatos semánticos, es decir, variables físicas como temperatura, presión, etc. Está orientado a profesionales y organizaciones que manejan grandes volúmenes de datos meteorológicos en formato GRIB.
+$ fdb5 ls base_de_datos (muestra una lista de todos los campos almacenados en la base de datos especificada)
+$ fdb5 get --param temperatura --level 850 --date 20250321 --time 12:00 /ruta/a/tu/base/de/datos (recupera el campo de temperatura al nivel 850 hPa para el 21 de marzo de 2025 a las 12:00 horas)
+$ fdb5 put --param humedad --level 700 --date 20250321 --time 00:00 --file archivo.grib base_de_datos (inserta un archivo GRIB que contiene datos de humedad al nivel 700 hPa para el 21 de marzo de 2025 a las 00:00 horas en la base de datos)
+$ fdb5 rm --param viento --level 500 --date 20250320 --time 06:00 /ruta/a/tu/base/de/datos (elimina el campo de viento al nivel 500 hPa para el 20 de marzo de 2025 a las 06:00 horas de la base de datos)
+
+
 fdfind
 Alternativa rápida al comando find para buscar patrones.
 $ fdfind bash /etc (que tengan "bash" en /etc)
@@ -18626,6 +18641,20 @@ Otro ejemplo a partir de un archivo [en el mismo directorio o especificando la r
 gnutls-cli-debug
 [gnutls]. Configura múltiples conexiones TLS a un servidor y consulta sus capacidades. Fue creado para ayudar a depurar GnuTLS, pero puede ser útil para extraer las capacidades de un servidor TLS.  Se conecta a un servidor TLS, realiza pruebas e imprime un archivo con las capacidades del servidor.
 $ gnutls-cli-debug -p 80 -v localhost (por el puerto 80 y con las máximas comprobaciones)
+
+
+go
+Lenguaje de programación, útil para la instalación de aplicaciones en sistemas linux. Instalación en Debian:
+$ cd /tmp
+$ wget https://golang.org/dl/go1.20.2.linux-amd64.tar.gz
+$ sudo tar -C /usr/local -xzf go1.20.2.linux-amd64.tar.gz
+$ echo "export PATH=/usr/local/go/bin:${PATH}" | sudo tee -a $HOME/.profile
+$ source $HOME/.profile
+$ go version
+1.-
+Un ejemplo de instalación de una aplicación usando el comando go
+# go install github.com/42wim/dt@latest
+# cp ~/go/bin/dt /usr/bin/ (para estar disponible como cualquier comando)
 
 
 go2
