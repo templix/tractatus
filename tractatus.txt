@@ -16821,6 +16821,34 @@ fex
 [Fast File EXchange de Frams]. Servicio que permite intercambiar archivos muy grandes de forma rápida y cómoda. El remitente carga el archivo en el servidor FEX y el destinatario recibe automáticamente un correo electrónico de notificación con una URL de descarga.
 
 
+ffcvt
+Herramienta de conversión de ffmpeg que simplifica la codificación de compresión de audio/vídeo de alta eficiencia [Opus/H.265].
+$ ffcvt video.mp4 (generará un archivo video_.mkv [el guión bajo se añade por defecto al nombre])
+Su equivalente en ffmpeg:
+         $ ffmpeg -i video.mp4 -c:v libx265 -x265-params crf=28 -c:a libopus -b:a 64k video_.mkv
+$ ffcvt -t webm video.mp4 (convierte video.mp4 a video_.webm usando VP9 para video y Opus para audio, ideal para la web)
+Su equivalente en ffmpeg:
+         $ ffmpeg -i video.mp4 -c:v libvpx-vp9 -c:a libopus -b:a 64k video_.webm
+$ ffcvt -abr 128k video.mp4 (el audio se codificará a 128k con Opus)
+Su equivalente en ffmpeg:
+         $ ffmpeg -i video.mp4 -c:v libx265 -x265-params crf=28 -c:a libopus -b:a 128k video_.mkv
+$ ffcvt -C 00:00:10-00:00:20 video.mp4 (cortar un segmento del video, por ejemplo, de 00:00:10 a 00:00:20)
+Su equivalente en ffmpeg:
+         $ ffmpeg -i video.mp4 -ss 00:00:10 -t 00:00:10 -c:v libx265 -x265-params crf=28 -c:a libopus -b:a 64k video_.mkv
+$ ffcvt -Speed 1.5 video.mp4 (acelerar el video a 1,5 veces)
+Su equivalente en ffmpeg:
+         $ ffmpeg -i video.mp4 -filter:v "setpts=0.666667*PTS" -c:v libx265 -x265-params crf=28 -c:a libopus -b:a 64k video_.mkv
+$ ffcvt -o "-vf scale=1280:720" video.mp4 (pasa opciones adicionales directamente a ffmpeg pòr ejemplo redimensiona a 720p).
+
+
+ffe
+Herramienta para analizar archivos planos y CSV [Comma-Separated Values] y convertirlos a diferentes formatos.
+$ ffe -i archivo.csv -o archivo.json (convertir un .csv en un .json)
+$ ffe -i archivo.csv -o archivo.tsv --delimiter "\t" (convertir un .csv a .tsv [Tab-Separated Values], epecificando el delimitador de tabulación)
+$ ffe -i archivo.csv -o archivo_filtrado.csv --filter "edad > 30" (filtrar datos si solo se quiere las filas donde la columna "edad" es mayor a 30)
+$ ffe -i archivo.csv -o columnas_extraidas.csv --columns "nombre,edad" (extraer algunas columnas del .csv)
+
+
 fff
 [Fucking Fast File-manager]. Gestor de archivos escrito en Bash que permite explorar archivos y gestionarlos de manera rápida desde la línea de comandos.
 Descarga e instalación:
@@ -16853,6 +16881,18 @@ Teclas para la gestión:
 	r (renombrar)
 	d (borrar [~/.cache/fff/trash/])
 	q (salir)
+
+
+ffindex
+Conjunto de herramientas diseñado para manejar grandes cantidades de archivos pequeños almacenándolos de manera eficiente en una base de datos indexada. Esto es útil para aplicaciones bioinformáticas, como bases de datos de secuencias o estructuras de proteínas. Incluye las herramientas ffindex_apply, ffindex_apply_mpi, ffindex_build, ffindex_from_fasta, ffindex_from_tsv, ffindex_get, ffindex_modify y ffindex_unpack.
+$ ffindex_from_fasta sequences.ff{data,index} < sequences.fasta (construir una base de datos desde un archivo FASTA que permitiría acceder a cada secuencia individualmente mediante ffindex_apply)
+$ ffindex_from_tsv sequences.ff{data,index} < data.tsv (construir una base de datos a partir de un archivo TSV [tab-separated values])
+$ ffindex_apply sequences.ff{data,index} grep "ATG" (buscar "ATG" en cada secuencia almacenada)
+1.-
+Crear una base de datos ffindex a partir de archivos individuales.
+$ ls secuences/
+seq1.fasta  seq2.fasta  seq3.fasta
+$ ffindex_build sequences.ff{data,index} sequences/* (construir la base de datos generando sequences.ffdata con las secuencias concatenadas y sequences.ffindex con el índice de cada archivo)
 
 
 ffmpeg
