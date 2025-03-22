@@ -278,6 +278,12 @@ Reloj digital en la pantalla.
 $ AClock
 
 
+acme
+Ensamblador cruzado que permite generar código ensamblador para procesadores de la familia 6502 y derivados, usados en computadoras clásicas como el Commodore 64, NES, Apple II, etc. Es útil para desarrollo de software retro y homebrew.
+$ acme --color -o file.prg file.asm (compilar y generar el binario)
+$ toacme vis input.asm ouput.prg
+
+
 acmetool
 Herramienta para adquirir automáticamente certificados TLS de servidores ACME [Automated Certificate Management Environment].
 $ acmetool init --email correo@dominio.com --domain dominio.com (configuración inicial)
@@ -16800,6 +16806,15 @@ fetch
 	$ cd fetch
 	$ sudo make install
 $ fetch --ascii
+
+
+fetch-crl
+Descargas de Listas de Revocación de Certificados. Esta herramienta y la entrada asociada del temporizador (systemd) o cron (init.d) garantizan la recuperación periódica de las Listas de Revocación de Certificados [Certificate Revocation Lists - CRL] de los sitios web de las respectivas Autoridades de Certificación [CA]. Las CRLs son listas que contienen certificados que han sido revocados por la CA y que ya no son considerados válidos y el propósito principal de la aaplicación es asegurar que el sistema tenga acceso a información actualizada sobre estos certificados revocados.
+# ls -lh /etc/grid-security/certificates/ (ver si existen certificados en el sistema)
+# fetch-crl (actualizar los archivos de CRL en el sistema)
+1.-
+Agregar una entrada en el cron para ejecutarlo cada 12 horas:
+        0 */12 * * * root /usr/sbin/fetch-crl > /var/log/fetch-crl.log 2>&1
 
 
 fex
