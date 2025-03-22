@@ -16937,6 +16937,11 @@ $ ffmpeg -i video2.avi -sameq video2.mpeg
 $ cat video1.mpeg video2.mpeg > nuevo_video.mpeg (Unir los videos resultantes usando cat)
 
 
+ffmpegthumbnailer
+Crear miniaturas de los archivos de vídeo.
+$ ffmpegthumbnailer -c png -q 10 -i input.mp4 -o output.png (en formato png, máxima cualidad, 0 la mínima, archivo de entrada y salida)
+
+
 fg
 Pasa un proceso a primer plano.
 $ fg PID
