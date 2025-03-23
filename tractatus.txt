@@ -16965,6 +16965,27 @@ $ ffmsindex -t 2 video.mp4 (indexar solo el segundo flujo de audio: 2)
 $ ffmsindex -v video.mp4 (imprimirá información sobre los diferentes flujos de video y audio detectados)
 
 
+ffuf
+[Fuzz Faster U Fool]. Herramienta escrita en Go diseñada para realizar fuzzing en aplicaciones web, descubriendo directorios, subdominios, parámetros y más. Es muy utilizada en pruebas de seguridad para encontrar archivos ocultos, rutas sensibles y posibles vulnerabilidades. Fuzzer es una técnica automatizada de pruebas de software que consiste en proporcionar datos inválidos, inesperados o aleatorios como entrada a un programa informático.
+Con un archivo como:
+$ nano wordlist.txt
+       id
+       user
+       admin
+       debug
+$ ffuf -u "http://ejemplo.com/index.php?FUZZ=valor" -w params.txt
+El escaneo probará http://ejemplo.com/index.php?id=valor, ?user=valor, etc., buscando respuestas distintas y el reultado puede ser:
+       user                    [Status: 301, Size: 230, Words: 9, Lines: 7]
+       debug                   [Status: 301, Size: 231, Words: 9, Lines: 7]
+       id                      [Status: 301, Size: 228, Words: 9, Lines: 7]
+       admin                   [Status: 301, Size: 231, Words: 9, Lines: 7]
+$ ffuf -u "http://ejemplo.com/login" -X POST -d "FUZZ=admin" -w wordlist.txt (descubrir nombres de parámetros en formularios o APIs. wordlist.txt puede sontener nombres tipo: username, user, login...)
+$ ffuf -u http://FUZZ.ejemplo.com -w subdominios.txt -H "Host: FUZZ.ejemplo.com" (encontrar subdominios ocultos mediante virtual hosts. subdominios.txt puede sontener: dev, test, api,admin...)
+$ ffuf -u http://ejemplo.com/FUZZ -w wordlist.txt -fc 403,404 (ignorar respuestas con código 403 o 404)
+$ ffuf -u http://ejemplo.com/FUZZ -w wordlist.txt -fs 0 (filtrar por tamaño de respuesta [0 bytes])
+$ ffuf -u http://ejemplo.com/FUZZ -w wordlist.txt -t 100 -rate 50 (establecer 100 hilos concurrentes y limitar a 50 solicitudes por segundo)
+
+
 fg
 Pasa un proceso a primer plano.
 $ fg PID
