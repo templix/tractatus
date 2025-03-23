@@ -4788,6 +4788,12 @@ Teclas de color. Es indistinto pulsar el número o la letra entre parentesis:
 	8 (k) (Negro)
 
 
+caffeine
+Evitar que el escritorio quede inactivo [suspendido, bloqueado, etc.] cuando una aplicación se ejecuta en modo de pantalla completa como ver una película o jugar. Un indicador de escritorio, "caffeine-indicator", permite activarlo manualmente, y el comando "caffeinate" que evita que el sistema entre en modo de suspensión o inactividad mientras se ejecuta un comando especificado.
+$ caffeine
+$ caffeinate vlc (que mientras dure vlc no entre en suspensión de pantalla)
+
+
 cal
 Muestra el calendario del mes
 $ cal -y    (muestra todos los meses del año)
@@ -16940,6 +16946,23 @@ $ cat video1.mpeg video2.mpeg > nuevo_video.mpeg (Unir los videos resultantes us
 ffmpegthumbnailer
 Crear miniaturas de los archivos de vídeo.
 $ ffmpegthumbnailer -c png -q 10 -i input.mp4 -o output.png (en formato png, máxima cualidad, 0 la mínima, archivo de entrada y salida)
+
+
+ffmpegthumbs
+Generador de miniaturas de vídeo que utiliza FFmpeg para crear imágenes representativas de los archivos de video.
+$ ffmpegthumbs input.mp4 output.jpg (genera una imagen JPEG representativa del video input.mp4 y la guarda como output.jpg)
+$ ffmpegthumbs -s 320x240 input.mp4 output_320x240.jpg (generar miniaturas en diferentes tamaños)
+$ ffmpegthumbs -n 5 input.mp4 output_%d.jpg (generará 5 miniaturas numeradas del 0 al 4)
+
+
+ffmsindex
+Herramienta para crear archivos de índice de ffms2 [FFMpegSource2] para ffmpeg con contenido adicional para aplicaciones que ffmpeg no gestiona correctamente. Su función principal es generar archivos de índice [.ffindex] que facilitan el acceso a los videos en aplicaciones que requieren una indexación previa para manejar correctamente el contenido, especialmente en formatos problemáticos para ffmpeg.
+$ ffmsindex video.mp4 (creará video.ffindex en el mismo directorio)
+$ ffmsindex video.mp4 indice_custom.ffindex (creará indice_custom.ffindex en lugar del predeterminado)
+$ ffmsindex -f video.mp4 (forzar la reindexación)
+$ ffmsindex -t 0 video.mp4 (indexar solo el primer flujo de video: 0)
+$ ffmsindex -t 2 video.mp4 (indexar solo el segundo flujo de audio: 2)
+$ ffmsindex -v video.mp4 (imprimirá información sobre los diferentes flujos de video y audio detectados)
 
 
 fg
