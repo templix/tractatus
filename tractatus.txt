@@ -17024,6 +17024,13 @@ $ fh2odg mi_dibujo.fh (generará un archivo llamado mi_dibujo.odg en el mismo di
 $ fh2odg mi_dibujo.fh -o mi_dibujo_convertido.odg (especificar un nombre para el archivo de salida)
 
 
+fhist
+Utilidades para ver los cambios que se han realizado en un archivo. incluye las utilidades fcomp [comparación de archivos] y fmerge [fusión de archivos]
+$ fhist documento.txt (ver el historial de cambios)
+$ fcomp documento_v1.txt documento_v2.txt (mostraría las diferencias línea por línea, indicando qué partes se han añadido, eliminado o modificado entre las dos versiones)
+$ fmerge documento_v1.txt documento_v2.txt > documento_fusionado.txt (combinaría los cambios de ambos archivos y guardaría el resultado en documento_fusionado.txt)
+
+
 figlet
 Baners
 $ figlet texto (forma básica)
