@@ -17031,6 +17031,15 @@ $ fcomp documento_v1.txt documento_v2.txt (mostraría las diferencias línea por
 $ fmerge documento_v1.txt documento_v2.txt > documento_fusionado.txt (combinaría los cambios de ambos archivos y guardaría el resultado en documento_fusionado.txt)
 
 
+fiat-utils
+Colección de bibliotecas de utilidades Fortran seleccionadas, extraídas del modelo IFS/Arpege [Integrated Forecasting System/Action de Recherche Petite Echelle Grande Echelle] utilizado en el ECMWF [European Centre for Medium-Range Weather Forecasts - Centro Europeo de Pronósticos Meteorológicos a Medio Plazo]. Estas herramientas son útiles para el análisis y manipulación de datos numéricos, especialmente en el contexto de modelos meteorológicos y climáticos. Proporciona: drhook [depurar programas Fortran], gstats [sincronización], parkind [selección de precisión], mpl [comunicación MPI] y mpi_serial [símbolos ficticios MPI compilados en una biblioteca estática y otras rutinas]
+$ drhook -i input.f90 -o output.f90 ( inserta puntos de control [hooks] en el archivo input.f90 y guarda el resultado en output.f90. Luego, se compila y ejecuta output.f90)
+$ gstats -f archivo_de_datos.grb -v temperatura (calcula las estadísticas de la variable “temperatura” en el archivo archivo_de_datos.grb)
+$ parkind -double input.f90 -o output.f90 (convierte las variables reales y complejas en input.f90 a doble precisión y guarda el resultado en output.f90)
+$ mpl -i archivo_de_datos.dat -v variable -o grafico.png (visualizar datos numéricos de modelos meteorológicos y climáticos. Genera un gráfico de la variable “variable” del archivo archivo_de_datos.dat y lo guarda como grafico.png)
+$ mpi_serial ./mi_programa_mpi (ejecuta el programa MPI mi_programa_mpi en modo serial)
+
+
 figlet
 Baners
 $ figlet texto (forma básica)
