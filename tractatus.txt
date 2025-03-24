@@ -17008,8 +17008,20 @@ Muestra el número de terminal activo.
 $ fgconsole
 
 
+fgetty
+Getty minimalista, eficiente, con un consumo de memoria mínimo, que no soporta terminales seriales ni redes y solo apto para consola de Linux. fgetty incluye un programa de inicio de sesión compatible con la interfaz de autenticación checkpassword [usada en sistemas tipo DJB [Daniel J. Bernstein] como qmail, ucspi-tcp, etc.] y también un programa checkpassword que utiliza la interfaz de la biblioteca estándar de C para passwd y shadow.
+$ fgetty /dev/tty1 (iniciar fgetty en la consola virtual mencionada y mostrará el prompt de login en esa terminal)
+$ fgetty --login /usr/bin/checkpassword /dev/tty2 (indica que debe usar checkpassword como backend de autenticación)
+
+
 fgrep
 (fast grep). Busca cadenas de texto fijas. Ignora el significado especial de los metacaracteres.
+
+
+fh2odg
+Utilidad para convertir documentos de Freehand [un programa de diseño gráfico vectorial] a documentos de dibujo de OpenDocument [ODG] utilizado por aplicaciones como LibreOffice Draw y OpenOffice Draw.
+$ fh2odg mi_dibujo.fh (generará un archivo llamado mi_dibujo.odg en el mismo directorio)
+$ fh2odg mi_dibujo.fh -o mi_dibujo_convertido.odg (especificar un nombre para el archivo de salida)
 
 
 figlet
