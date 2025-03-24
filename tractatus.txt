@@ -16002,6 +16002,7 @@ $ fades script.py (ejecutar el script con fades)
 fades leerá los comentarios y gestionará las dependencias automáticamente.
 
 
+
 fai-client
 FAI [Fully Automatic Installation] es un sistema diseñado para instalaciones y configuraciones automatizadas de sistemas Linux de manera no interactiva y configuraciones de software en ordenadores, así como en máquinas virtuales y entornos chroot, desde pequeñas redes hasta grandes infraestructuras y clústeres. Su enfoque principal es la automatización y la personalización sin intervención manual.
 # fai -v -s file:///srv/fai/config softupdate (información detallada, ubicación del espacio de configuración y que se ejecutará una actualización suave)
@@ -16990,6 +16991,16 @@ fg
 Pasa un proceso a primer plano.
 $ fg PID
 $ fg %2 (Regresa a foreground el proceso num2)
+
+
+fgallery
+Generador de galerías de fotos estáticas escrito en C que produce galerías web ligeras y rápidas sin necesidad de bases de datos o lenguajes de servidor.
+$ fgallery fotos/ galeria/ (creará una galería en el directorio galeria/ con las imágenes de fotos/)
+$ fgallery -q 85 -s 800x600 fotos/ galeria/ (especificar calidad JPEG al 85% y tamaño máximo de imágenes 800x600 píxeles)
+$ fgallery -t 150x150 fotos/ galeria/ (galería con miniaturas personalizadas)
+$ fgallery -r vacaciones/ galeria/ (incluir subdirectorios recursivamente)
+$ fgallery -i -c 3 -p -b "#333333" fotos/ galeria/ (mostrar nombres de archivo, 3 columnas de miniaturas, mostrar información EXIF y color de fondo gris oscuro)
+Nota.- El directorio de salida contendra: index.html, thumbs/, images, css y jss
 
 
 fgconsole
