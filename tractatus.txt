@@ -17040,6 +17040,14 @@ $ mpl -i archivo_de_datos.dat -v variable -o grafico.png (visualizar datos numé
 $ mpi_serial ./mi_programa_mpi (ejecuta el programa MPI mi_programa_mpi en modo serial)
 
 
+fiche
+Receptor para la salida de línea de comandos de Pastebin. Se usa normalmente en combinación con un servidor web.
+$ echo "Hola mundo" | fiche (enviará el texto "Hola mundo" a Pastebin)
+$ ls -l | fiche (listará los archivos y directorios en el actual y los enviará a Pastebin)
+$ fiche --web-server /path/to/webserver (recibir notificaciones cuando haya nuevos pastes)
+$ echo "Mi código fuente" | fiche --api-key MY_API_KEY --paste-name "mi_codigo" (usar una API key personalizada de Pastebin y nombra el paste automáticamente)
+
+
 figlet
 Baners
 $ figlet texto (forma básica)
