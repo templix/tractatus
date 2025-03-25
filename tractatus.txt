@@ -17048,6 +17048,14 @@ $ fiche --web-server /path/to/webserver (recibir notificaciones cuando haya nuev
 $ echo "Mi código fuente" | fiche --api-key MY_API_KEY --paste-name "mi_codigo" (usar una API key personalizada de Pastebin y nombra el paste automáticamente)
 
 
+fierce
+Herramienta de reconocimiento de DNS [Domain Name System] que se utiliza para descubrir posibles nombres de host y direcciones IP asociadas a un dominio. y para identificar subdominios y rangos de IP que podrían no ser evidentes en un escaneo superficial. A diferencia de herramientas agresivas como dnsrecon o nmap, fierce opera de manera más sigilosa, lo que lo hace menos intrusivo.
+$ fierce --tcp --domain dominio.com --dns-servers 8.8.8.8 --range 192.168.1.0/24 (usar tcp, lista subdominios, usando los DNS de google y en el rango especificado)
+$ fierce --domain dominio.com --subdomains accounts admin ads (buscar los subdominios especificados)
+$ fierce --domain facebook.com --subdomains admin --search fb.com fb.net
+$ fierce --domain ejemplo.com --delay 1000 (con un retraso de 1 segundo [1000 ms] entre consultas para ser menos ruidoso)
+
+
 figlet
 Baners
 $ figlet texto (forma básica)
