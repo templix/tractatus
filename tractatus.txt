@@ -17100,6 +17100,12 @@ $ fileschanged -r ~/ (controla el directorio home del usuario de forma recursiva
 $ fileschanged /var/log/messages
 
 
+filespooler
+Herramienta que facilita la ejecución de comandos tanto de manera local como remota, capturando su salida estándar [stdout] y facilitando la integración con otras herramientas.
+$ filespooler ls -l (ejecutar un comando localmente, como ls -l, y capturar su salida)
+$ filespooler -H usuario@servidor uptime (ejecutará el comando uptime en el servidor remoto y capturará su salida en la terminal local)
+
+
 filetraq
 Script de shell que informa sobre alguna modificación en algún archivo que se ha producido. Está diseñado para ejecutarse como un trabajo cron, además mantiene una copia de seguridad con fecha del original.
 # filetraq
