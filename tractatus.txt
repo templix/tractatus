@@ -17106,6 +17106,13 @@ $ filespooler ls -l (ejecutar un comando localmente, como ls -l, y capturar su s
 $ filespooler -H usuario@servidor uptime (ejecutará el comando uptime en el servidor remoto y capturará su salida en la terminal local)
 
 
+filetea
+Sistema web para compartir archivos que funciona como un servidor web. Al arrastrar archivos al navegador, se generará una URL para cada uno. Estas URL se pueden enviar a otras personas, que podrán descargar los archivos con curl o wget. El archivo de configuración en /etc/filetea/filetea.conf
+# filetea (abre en el navegador la dirección por defecto localhost:8080 donde ha de arrastrase los archivos)
+# filetea -p 4430 (abre el servidor en el puerto especificado)
+# filetea -D (iniciar el servidor en background)
+
+
 filetraq
 Script de shell que informa sobre alguna modificación en algún archivo que se ha producido. Está diseñado para ejecutarse como un trabajo cron, además mantiene una copia de seguridad con fecha del original.
 # filetraq
