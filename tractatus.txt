@@ -34789,14 +34789,22 @@ $ toplip -m imagen.jpg archivo.txt > imagen_crip.jpg
 $ toplip -d imagen_crip.png > archivo.txt
 
 
-torify
-Verificar si la navegación está torificada.
-$ torify elinks checkip.dyndns.org
+tor
+[The Onion Router]. Sistema de comunicación anónima de baja latencia que consiste en que la ruta pasa desde el origen a través de un conjunto de repetidores y negocian un "circuito virtual" a través de la red, donde cada repetidor conoce a su predecesor y sucesor, pero no a los demás. Básicamente, Tor proporciona una red distribuida de repetidores. Los usuarios rebotan sus flujos TCP [tráfico web, FTP, SSH, etc.] entre los repetidores, y los destinatarios, observadores e incluso los propios repetidores tienen dificultades para saber qué usuarios se conectaron a qué destinos. Por sí solo, tor no sirve como navegador ni envía tráfico HTTP directamente. Funciona como un servicio que escucha en un puerto, normalmente el 9050 o 9150, y espera que otro programa como curl, wget, o un navegador lo use como proxy.
+$ curl --socks5 127.0.0.1:9050 https://api.ipify.org (devolverá una IP de un nodo de salida Tor, no la IP real)
+$ curl --socks5-hostname 127.0.0.1:9050 https://check.torproject.org/ > prueba.html (correcto si al abrir en el navegador prueba.html dice "Congratulations. This browser is configured to use Tor")
+$ tor --verify-config (verificar la configuración. Si "Configuration was valid" todo correcto)
+$ tor --list-fingerprint (muestra la huella del nodo, si se corre un relé o un puente)
 
 
 tor-resolve
 Resuelve direcciones IP o nombres de host via tor.
 $ tor-resolve lapipaplena.net
+
+
+torify
+Verificar si la navegación está torificada.
+$ torify elinks checkip.dyndns.org
 
 
 torsocks
