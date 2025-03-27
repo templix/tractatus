@@ -17173,6 +17173,15 @@ Atajos de teclado
     q			Salir
 
 
+finalcif
+Herramienta diseñada para editar y validar archivos en formato CIF (Crystallographic Information File), un estándar utilizado en cristalografía para describir estructuras cristalinas.
+$ finalcif estructura.cif (abre el archivo .cif en modo interactivo permitiendo modificar campos como parámetros de celda unitaria, posiciones atómicas, etc)
+$ finalcif --check estructura.cif (verifica errores sintácticos o semánticos)
+$ finalcif --report estructura.cif > reporte.txt (generar un informe de validación y guardaro en reporte.txt)
+$ finalcif --fix estructura.cif (corregir errores automáticamente)
+$ finalcif --json estructura.cif > estructura.json (convertir a formato JSON)
+
+
 finch
 Cliente de mensajería instantánea en ncurses. La primera vez que se ejecute  mostrará la ventana de “Cuentas”, desde donde se configuran las distintas cuentas para conectarse.
 Algunos atajos de teclado:
