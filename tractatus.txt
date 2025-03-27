@@ -17657,8 +17657,8 @@ Herramienta de análisis de red que permite determinar qué puertos/protocolos s
 
 
 firewalld
-es un demonio de firewall administrado dinámicamente con soporte para zonas de red/firewall para definir el nivel de confianza de las conexiones o interfaces de red. De modo predeterminado Firewalld tiene diferentes tipos de zonas. Cada una tiene un distinto nivel de seguridad: Para redes públicas: drop, block y public [predeterminada], redes externas: external, redes para hogar: work, home y internal y trusted en que todas las conexiones son aceptadas. En la mayoria se descartan los paquetes entrantes no solicitados y el resto son rechazados. Los registros en /var/log/firewalld.
-# systemctl enable firewalld (iniciar firewalld automaaticamente al inicio del sistema)
+Es un demonio de firewall administrado dinámicamente con soporte para zonas de red/firewall para definir el nivel de confianza de las conexiones o interfaces de red. De modo predeterminado Firewalld tiene diferentes tipos de zonas. Cada una tiene un distinto nivel de seguridad: Para redes públicas: drop, block y public [predeterminada], redes externas: external, redes para hogar: work, home y internal y trusted en que todas las conexiones son aceptadas. En la mayoria se descartan los paquetes entrantes no solicitados y el resto son rechazados. Los registros en /var/log/firewalld.
+# systemctl enable firewalld (iniciar firewalld automaticamente al inicio del sistema)
 # firewall-cmd --state (comprobar si esta activo. Más información: systemctl status firewalld)
 # firewall-cmd --check-config (si el archivo de configuración tiene errores)
 # firewall-cmd --set-log-denied=all (registrar todos los paquetes descartados [unicast, broadcast, multicast])
@@ -17695,6 +17695,12 @@ es un demonio de firewall administrado dinámicamente con soporte para zonas de 
 firewall-tests
 Test completo del sistema sobre el firewall [ver].
 # /usr/share/firewalld/testsuite/testsuite
+
+
+fische
+Aplicación, basada en libsdl y el controlador de audio ALSA, permite visualizar el sonido emitido por un reproductor, creando ondas y efectos especiales.
+$ fische -e -f --exit-on-mouseevent (en modo nervioso, pantalla competa y salir al hacer clic con el ratón)
+$ fische -g 1280x800 (especificando el ancho y la altura de la animación. Por defecto 800x400)
 
 
 fish
