@@ -17118,6 +17118,26 @@ Script de shell que informa sobre alguna modificación en algún archivo que se 
 # filetraq
 
 
+filtergen
+Generador de filtros de paquetes para diversos sistemas de firewall facilitando la configuración de diferentes sistemas de firewall como iptables, ipchains y ipfw.
+Ejemplo de un archivo de configuración:
+# nano firewall.fg
+       policy reject
+       #
+       # Permitir tráfico entrante SSH (puerto 22)
+       accept in on eth0 proto tcp dport 22
+       #
+       # Permitir tráfico saliente para conexiones establecidas
+       accept out on eth0 mod state state established,related
+       #
+       # Bloquear todo el tráfico de una IP específica
+       deny in on eth0 from 192.168.1.100
+$ filtergen -o reglas_iptables.sh firewall.fg (generará un script llamado reglas_iptables.sh con las reglas de iptables correspondientes)
+$ bash reglas_iptables.sh (aplicar las reglas generadas)
+$ filtergen -f firewall.fg | bash (generar reglas directamente y aplicarlas sin un archivo intermedio)
+$ filtergen -F ipchains -o reglas_ipchains.sh firewall.fg (generar reglas para ipchains)
+
+
 filters
 Colección de filtros para hacer todo tipo de cosas extrañas a un texto en inglés. Opciones: (LOLCAT, b1ff, censor, chef, cockney, eleet, fanboy, fudd, jethro, jibberish, jive, ken, kenny, kraut, ky00te, nethackify, newspeak, nyc, pirate, rasterman, scottish, scramble, spammer, studly, uniencode y upside-down)
 $ echo "make tech easier is cool" | pirate
