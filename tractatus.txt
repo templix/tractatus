@@ -17346,6 +17346,14 @@ Alternativa a SysV init y systemd.
 # finit q (releer la configuración si se ha modificado)
 
 
+fio
+Herramienta utilizada para realizar pruebas de rendimiento de almacenamiento y cargas de trabajo que imitan operaciones de entrada y salida [Input/Ouput- I/O] en discos duros, SSDs, sistemas de archivos, entre otros.
+$ fio --name=prueba --ioengine=sync --rw=write --bs=4k --size=1G --numjobs=1 --time_based (nombre de la prueba, motor sincrónico, pruebas de escritura, 4 KB tamaño de bloque, tamaño total archivo de 1 GB, 1 hilo de ejecución y de forma indefinida)
+$ fio --name=prueba --ioengine=sync --rw=randread --bs=4k --size=1G --numjobs=1 --runtime=60 (realiza operaciones de lectura aleatoria, con bloques de 4Kb,1 solo hilo de prueba y durante 60 segundos)
+$ fio --name=prueba --ioengine=sync --rw=randwrite --bs=8k --size=500M --numjobs=4 (realiza operaciones de escritura aleatoria, tamaño de bloque de 8 KB y ejecutando 4 hilos simultaneamente)
+$ fio --name=prueba --ioengine=sync --rw=randwrite --bs=4k --size=1G --numjobs=2 --rw=randread --time_based (escritura aleatoria, 2 hilos de ejecución, la segunda operación es lectura aleatorio y se ejecuta de forma indefinida)
+
+
 firebuild
 Funciona almacenando en caché las salidas de los comandos ejecutados y reproduciendo los resultados cuando los mismos comandos se ejecutan con los mismos parámetros dentro del mismo entorno.
 # firebuild -r htop (genera un informe con nombre firebuild-build-report.html sobre el comando htop)
@@ -17628,6 +17636,16 @@ $ firejail --top (monitorizar el consumo de recursos de los programas del sandbo
 Nota.- el ampersand [&] permite cerrar la terminal y que el programa se siga ejecutando
 La totalidad de perfiles disponibles se muestra en:
 	$ ls /etc/firejail/
+
+
+fireqos
+Es un modelo de red que simula cargas de trabajo en redes virtuales o físicas, permitiendo analizar y probar diferentes escenarios de red antes de implementarlos en el entorno real. Precisa un archivo de configuración, un modelo en https://github.com/firehol/firehol/blob/master/etc/fireqos.conf.example
+# fireqos start (iniciar)
+# fireqos status world-out (tráfico hacia fuera)
+# fireqos status world-in (tráfico hacia adentro)
+# fireqos stop (parar la prueba)
+# fireqos clear_all_qos (limpiar todo el tráfico generado)
+# fireqos dump servers (muestra el de servers)
 
 
 firewalld
