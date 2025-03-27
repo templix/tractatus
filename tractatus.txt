@@ -17146,6 +17146,15 @@ $ echo "make tech easier is cool" | kraut
 $ echo "make tech easier is cool" | kenny
 
 
+filtlong
+Herramienta de filtrado de lecturas de secuencia genómica largas [LGS] que se utiliza comúnmente en análisis de secuencias de ADN.
+$ filtlong -l 500 input.fasta > filtered_output.fasta (filtrando secuencias con longitud mínima de 500 bp)
+$ filtlong -m 3 input.fasta > filtered_output.fasta (filtrando secuencias con un máximo de 3 bases repetidas consecutivamente)
+$ filtlong -p 0.05 input.fasta > filtered_output.fasta (filtrando secuencias cuyas bes repetidas no excedan el 5% del total)
+$ filtlong -q 20 input.fasta > filtered_output.fasta (filtrando secuencias con calidad promedio superior a 20)
+$ filtlong -l 500 -m 3 -p 0.05 -q 20 input.fasta > filtered_output.fasta (combinando múltiples criterios)
+
+
 fim
 Herramienta que utiliza el framebuffer del sistema para mostrar imágenes directamente desde la línea de comandos.
 $ fim imagen.jpg (uso básico)
