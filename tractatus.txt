@@ -17648,6 +17648,14 @@ Es un modelo de red que simula cargas de trabajo en redes virtuales o físicas, 
 # fireqos dump servers (muestra el de servers)
 
 
+firewalk
+Herramienta de análisis de red que permite determinar qué puertos/protocolos son permitidos a través de un dispositivo de red como un firewall o router que realiza reenvío IP [forwarding]. Envia paquetes con TTL [Time To Live] calculado para que expiren justo después del dispositivo de reenvío y analiza las respuestas o la falta de ellas, para determinar si el tráfico es permitido
+# firewalk -S 22,80,443 -p TCP 192.168.1.1 10.0.0.1 (escanea los puertos 22 [SSH], 80 [HTTP] y 443 [HTTPS] del protocolo TCP de la dirección IP del gateway/firewall y la dirección IP de un host detrás del firewall)
+# firewalk -S 53,123 -p UDP 192.168.1.1 10.0.0.1 (escanea puertos UDP comunes, el 53 para DNS, 123 para NTP)
+# firewalk -S 1-1024 -p TCP -d 5 192.168.1.1 10.0.0.1 (establece el TTL inicial en 5)
+# firewalk -S 1-100 -p TCP 192.168.1.1 10.0.0.1 (escanea los primeros 100 puertos TCP)
+
+
 firewalld
 es un demonio de firewall administrado dinámicamente con soporte para zonas de red/firewall para definir el nivel de confianza de las conexiones o interfaces de red. De modo predeterminado Firewalld tiene diferentes tipos de zonas. Cada una tiene un distinto nivel de seguridad: Para redes públicas: drop, block y public [predeterminada], redes externas: external, redes para hogar: work, home y internal y trusted en que todas las conexiones son aceptadas. En la mayoria se descartan los paquetes entrantes no solicitados y el resto son rechazados. Los registros en /var/log/firewalld.
 # systemctl enable firewalld (iniciar firewalld automaaticamente al inicio del sistema)
