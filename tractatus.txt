@@ -17245,16 +17245,60 @@ $ find . ! -name "plantilla*" -type f -delete | find . ! -name HTMLS -type d -de
 $ find -L /sys/bus/pci/devices/*/ata*/host*/target* -maxdepth 3 -name "sd*" 2>/dev/null | egrep block |egrep --colour '(ata[0-9]*)|(sd.*)' (Encontrar qué /dev/sda, sdb, etc. corresponde al ATA/SATA declarado en dmesg, etc para determinar qué disco duro es)
 
 
+findbugs
+Analizador estático de código java para encontrar bugs como posibles errores, problemas de diseño y malas prácticas en el código fuente.
+$ findbugs -textui src/main/java/MiClase.java (analiza solo el archivo MiClase.java)
+$ findbugs src/main/java (analizará todos los archivos Java en el directorio src/main/java)
+$ findbugs -textui -exitcode src/main/java (muestra el resultado en modo texto interactivo y retorna un código de salida basado en la severidad de los bugs encontrados)
+$ findbugs -textui -bugpatterns org.eclipse.jdt.core.** @src/main/java (busca solo los bugs de tipo "org.eclipse.jdt.core")
+$ findbugs -textui -exclude org.eclipse.jdt.core.* @src/main/java (ignora los bugs en los archivos que comienzan con "org.eclipse.jdt.core")
+
+
 finddup
 [perforate]. Encuentra archivos idénticos
 $ finddup -n -i (comprueba el directorio actual y solo imprime la salida y no comprueba que el propietario del archivo y los permisos coincidan)
 $ finddup -v -i -l -d DIR (máxima información, sin comprobar permisos y vinculando archivos idénticos del directorio mencionado)
 
 
+findent
+Herramienta que se utiliza para formatear y organizar el código fuente en lenguaje Fortran, ya sea de formato fijo, el clásico, donde las primeras 6 columnas son reservadas para las etiquetas y las columnas 7 a 72 para el código real y que las líneas deban terminar en la columna 72 o el libre, estilo más moderno, donde el código puede ser escrito sin las restricciones de las columnas y se permite más flexibilidad, con el objetivo de mejorar la legibilidad del código.
+$ findent -v archivo.f90  (agrega comentarios de versión y detalles sobre el archivo procesado)
+1.-
+Ejemplo con un archivo de código en formato libre que no está indentado y su resultado indentado con findent
+$ nano ejemplo.f90
+       program ejemplo
+       print *, 'Hola Mundo'
+       end program ejemplo
+$ findent archivo.f90
+$ nano ejemplo.f90
+       program ejemplo
+           print *, 'Hola Mundo'
+       end program ejemplo
+
+
 findfs
 Busca el sistema de ficheros por su etiqueta (LABEL) o UUID.
 $ findfs UUID=388dda65-2432-4684-8cd9-b1649006fe30
 $ findfs LABEL=datos
+
+
+findimagedupes
+Encuentra imágenes visualmente similares o duplicadas. findimagedupes es una utilidad que analiza las diferencias entre dos imágenes. Esto permite comparar dos imágenes o todo un árbol de imágenes y determinar si alguna es similar o idéntica.
+$ findimagedupes -R /directorio (buscar duplicados en el directorio específicado y los subdirectorios)
+$ findimagedupes /directorio --ignore .jpg,.png (ignorar ciertos tipos de archivos)
+$ findimagedupes /directorio --limit 10 (limitar el número de resultados mostrados)
+$ findimagedupes /directorio --names-only (mostrar solo los nombres de los archivos duplicados)
+$ findimagedupes /ruta/del/directorio --ignore-case --ignore "thumb" (ignorar ciertas palabras en los nombres de los archivos)
+$ findimagedupes /directorio1 /directorio2 (comparar dos directorios diferentes)
+$ findimagedupes /directorio --max-size 1000k (usar un tamaño máximo para comparar)
+$ findimagedupes /directorio --ignore-pattern "_*." (ignorar ciertos patrones en los nombres de los archivos)
+$ findimagedupes -R -- . (buscar duplicados en todos los subdirectores del riectorio actual)
+$ findimagedupes imagen1.jpg imagen2.jpg imagen3.jpg (comparar varios archivos especificados)
+$ findimagedupes -f /base_de_datos.huf -- . (usar una base de datos de huellas existente9
+$ findimagedupes -M nueva_base.huf -f base1.huf -f base2.huf -- . (combinar vias bases de datos)
+$ findimagedupes -t 95% -- . (establecer un umbral de similitud)
+$ findimagedupes -v md5,fingerprint -- . (verbose con detalles adicionales)
+$ findimagedupes -c coleccion.gqv -- . (crear una colección de GQView)
 
 
 findmnt
