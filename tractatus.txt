@@ -17767,6 +17767,18 @@ $ fkill chromium (por nombre directamente de la aplicación a cerrar)
 $ fkill :5050 (por numero de puerto)
 
 
+fl-cow
+Herramienta que utiliza un mecanismo conocido como Copy-On-Write [COW - copia al escribir] para gestionar archivos con enlaces físicos [hard links]. Normalmente, cuando se tiene archivos enlazados físicamente y se modifica uno de ellos, el cambio afecta a todos los enlaces porque apuntan al mismo contenido en disco. Sin embargo, fl-cow interviene para que, en lugar de sobrescribir el archivo original, se cree una copia del archivo modificado, preservando así la versión original y ahorrando espacio en disco al aprovechar los enlaces físicos.
+1.-
+Ejemplo práctico, suponiendo un archivo llamado original.txt y crear un enlace físico:
+$ echo "Este es el contenido original" > original.txt
+$ ln original.txt copia.txt
+Si se edita copia.txt y se modifica tambien se modifica original.txt porque ambos son el mismo archivo en disco
+$ fl-cow copia.txt
+$ echo "Contenido modificado" > copia.txt
+El resultado ahora sera que original.txt contendra el mismo contenido ["Este es el contenido original"] y copia.txt contendrá "Contenido modificado"
+
+
 flac
 [Free Lossless Audio Codec]. Códec de audio similar a MP3, pero sin pérdida para codificar y decodificar archivos FLAC. Incluye la aplicación metaflac para manipular metadatos FLAC
 $ flac archivo.wav (comprimir archivo)
@@ -17776,6 +17788,18 @@ $ flac --decode --verify input.flac output.wav (descomprimir un archivo FLAC con
 $ flac --compression-level=5 input.wav -o utput.flac (comprimir con un nivel de compresión específico)
 $ metaflac --list input.flac (extraer metadatos de un archivo FLAC)
 $ metaflac --set-title="Mi canción favorita" input.flac (añadir metadatos a un archivo FLAC)
+
+
+flactag
+Etiquetador para archivos FLAC [Free Lossless Audio Codec] de álbumes completos con datos de MusicBrainz y generalmente acompañados de una hoja de cues [CUE sheet] incrustada. Los datos para las etiquetas, como título del álbum, artista, pistas, etc. se descargan de MusicBrainz, una base de datos abierta de música.
+$ flactag -c album.flac (mostrará si las etiquetas actuales coinciden con las de MusicBrainz o si hay diferencias)
+$ flactag -w album.flac (si las etiquetas difieren, se escribirán las nuevas)
+$ flactag -w -f album.flac (forzar la escritura incluso si parecen iguales)
+$ flactag -w -r album.flac (etiquetar y renombrar album.flac según la plantilla definida en ~/.flactag)
+Nota.- La plantilla por defecto podría ser algo como %A/%T/%D-%E (artista/álbum/disco-extensión), pero se puede personalizar en el archivo de configuración.
+$ flactag -d album.flac (ver el ID del disco calculado para album.flac)
+$ flactag album.flac (abrirá una interfaz donde se puede navegar con las teclas de flecha para elegir el álbum correcto en MusicBrainz)
+Nota.- El archivo de configuración ~/.flactag se crea la primera vez que se usa el programa.
 
 
 flake
