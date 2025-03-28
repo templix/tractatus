@@ -17729,6 +17729,19 @@ $ fish (entra en la shell)
        > exit (salir)
 
 
+fiu-utils
+Marco de inyección de fallos en el espacio de usuario. útil para probar cómo se comportan los programas ante errores como fallos de asignación de memoria, errores de E/S, entre otros. Este paquete contiene las utilidades fiu-run [ejecuta un programa con fallos inyectados], fiu-ls [muestra los puntos de fallo activos en un proceso en ejecución] y fiu-ctrl [controla la inyección de fallos en procesos que ya están en ejecución].
+$ fiu-run -c "enable name=posix/malloc, probability=0.25" -- ./mi_programa (activa fallos en malloc() con una probabilidad del 25% y ejecuta mi_programa con la inyección de fallos)
+$ fiu-run -c "enable name=posix/open, probability=0.5" -- ./mi_programa (simular fallos en la apertura de archivos [open] con una probabilidad del 50%)
+$ fiu-ls -p 1234 (permite ver los puntos de fallo activos en un proceso en ejecución)
+1.-
+Controlar fallos en procesos en ejecución
+Supongamos que mi_programa ya está corriendo con PID=1234. Podemos inyectar fallos en malloc() con:
+$ fiu-ctrl -c "enable name=posix/malloc, probability=0.5" -p 1234
+Para desactivar el fallo en malloc() en ese proceso:
+$ fiu-ctrl -c "disable name=posix/malloc" -p 1234
+
+
 fixfiles
 [selinux]. Este script se utiliza principalmente para corregir la base de datos del contexto de seguridad en los sistemas de archivos. También se puede ejecutar en cualquier momento para reetiquetar cuando se agregue soporte para una nueva política, o simplemente para comprobar si los contextos de los archivos son los esperados.  Por defecto reetiquetará todos los sistemas de ficheros ext2, ext3, xfs y jfs montados, siempre y cuando no tengan una opción de montaje en el contexto de seguridad. El fichero /etc/selinux/fixfiles_exclude_dirs puede contener una lista de directorios excluidos del reetiquetado. De manera más general, los programas iniciados por scripts init pueden no funcionar correctamente. Este problema se debe generalmente al etiquetado incorrecto de uno o más scripts de init. Puede reetiquetar los scripts emitiendo el comando fixfiles.
 $ fixfiles restore
@@ -17754,6 +17767,23 @@ $ fkill chromium (por nombre directamente de la aplicación a cerrar)
 $ fkill :5050 (por numero de puerto)
 
 
+flac
+[Free Lossless Audio Codec]. Códec de audio similar a MP3, pero sin pérdida para codificar y decodificar archivos FLAC. Incluye la aplicación metaflac para manipular metadatos FLAC
+$ flac archivo.wav (comprimir archivo)
+$ flac --decode archivo.flac salida.wav (descomprimir archivo)
+$ flac -d input.wav -o utput.flac (comprimir .wav sin eliminar el archivo de entrada)
+$ flac --decode --verify input.flac output.wav (descomprimir un archivo FLAC con verificación)
+$ flac --compression-level=5 input.wav -o utput.flac (comprimir con un nivel de compresión específico)
+$ metaflac --list input.flac (extraer metadatos de un archivo FLAC)
+$ metaflac --set-title="Mi canción favorita" input.flac (añadir metadatos a un archivo FLAC)
+
+
+flake
+herramienta que se utiliza para codificar audio en formato FLAC, pero con algunas mejoras adicionales como aumentar la velocidad de codificación e implementar funciones experimentales.
+$ flake input.wav output.flac (codificar un archivo de audio a FLAC)
+$ flake --compression-level=5 input.wav output.flac (opciones avanzadas como el nivel de compresión)
+
+
 flameshot
 Herramienba de captura de pantalla. De forma predeterminada, Flameshot se ejecuta en segundo plano y añade un icono en la bandeja del sistema para su configuración.
 $ flameshot screen (captura la pantalla completa y la guarda en ~/Imagenes
@@ -17761,6 +17791,18 @@ $ flameshot full (captura todo el escritorio)
 $ flameshot launcher (abre el lanzador de captura)
 $ flameshot gui (inicia la captura manual en modo GUI)
 $ flameshot config (abre la GUI de la configuración)
+
+
+flamethrower
+Diseñado para ser un sistema de distribución de archivos multidifusión [multicast] que es un método de transmisión donde un paquete de datos se envía una sola vez desde el origen, pero es recibido por múltiples destinos simultáneamente,  lo que lo hace especialmente útil para escenarios donde se necesita enviar datos a múltiples dispositivos en una red, como despliegues de software, imágenes de disco, o actualizaciones simultáneas.
+$ flamethrower -send -file /ruta/al/archivo.iso -group 224.1.1.1 -port 5000 (enviar un archivo .iso al grupo multicast [debe estar en el rango 224.0.0.0/4] y el puerto)
+$ flamethrower -receive -file /destino/archivo.iso -group 224.1.1.1 -port 5000 (los clientes ejecutan esto para unirse al grupo multicast y recibir el archivo)
+$ flamethrower -checksum -file /destino/archivo.iso (compara el hash MD5 del archivo recibido con el original para detectar corrupción)
+
+
+flamp
+Aplicación utilizada por radioaficionados para transmitir archivos mediante el Amateur Multicast Protocol (AMP). Este protocolo permite enviar datos de manera eficiente a múltiples receptores en redes de radioaficionados, aprovechando la capacidad de transmisión en multicast. Es especialmente útil en situaciones donde se necesita distribuir información a varios operadores simultáneamente, como en emergencias o actividades grupales. El operador debe configurar su estación de radio y asegurarse de que todos los receptores estén sintonizados en la misma frecuencia.
+$ flamp --send archivo.txt (inicia la transmisión del archivo archivo.txt)
 
 
 flatpak
