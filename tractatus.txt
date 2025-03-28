@@ -17829,6 +17829,39 @@ Aplicación utilizada por radioaficionados para transmitir archivos mediante el 
 $ flamp --send archivo.txt (inicia la transmisión del archivo archivo.txt)
 
 
+flash
+[Fast Length Adjustment of SHort reads]. Herramienta bioinformática para fusionar pares de lecturas de secuenciación cuando los fragmentos de ADN originales son más cortos que el doble de la longitud de las lecturas. Las lecturas más largas resultantes pueden mejorar significativamente el ensamblaje del genoma. También pueden mejorar el ensamblaje del transcriptoma cuando FLASH se utiliza para fusionar datos de secuenciación de ARN.
+$ flash reads_R1.fastq reads_R2.fastq (fusionar dos archivos FASTQ con lecturas pareadas)
+Nota.- Los archivos generados serán out.extendedFrags.fastq [Lecturas fusionadas con éxito], out.notCombined_1.fastq, out.notCombined_2.fastq [Lecturas que no se pudieron fusionar.] y [prefijo].hist y [prefijo].histogram [Estadísticas sobre la distribución de solapamientos].
+$ flash -m 15 -M 30 -o merged_reads reads_R1.fastq reads_R2.fastq (requiere al menos 15 bases de solapamiento, limita el solapamiento máximo a 30 bases y los archivos de salida tendrán el prefijo merged_reads)
+La salida constará de merged_reads.extendedFrags.fastq que contendrá las lecturas fusionadas [longitud aproximada de 180 bases] y las lecturas no fusionadas estarán en merged_reads.notCombined_1.fastq y merged_reads.notCombined_2.fastq.
+$ flash -t 4 -o merged reads_R1.fastq reads_R2.fastq (con un equipo con múltiples núcleos,acelerar el proceso con 4 hilos)
+$ flash -o merged reads_R1.fastq reads_R2.fastq (fusionar lecturas)
+
+
+flashbench
+Esta utilidad ayuda a identificar las propiedades de las tarjetas SD y el almacenamiento flash asi como descubrir el tamaño de las páginas y segmentos, velocidades de lectura y escritura en diferentes condiciones y el número máximo de segmentos abiertos simultáneamente
+# flashbench --all /dev/sdb (realizará una serie de pruebas para determinar la estructura del almacenamiento)
+# flashbench --random-write --repeat=5 /dev/sdb (escribe datos aleatorios en el dispositivo 5 veces y muestra los resultados de rendimiento)
+# flashbench --size=4K /dev/sdb (ayuda a encontrar el tamaño de escritura óptimo para un mejor rendimiento)
+# flashbench --auto /dev/sdb (probará varias combinaciones y dará recomendaciones)
+Nota.- flashbench escribe datos en el dispositivo especificado por tanto no ejecutarlo en un dispositivo con datos importantes, ya que puede sobrescribir información.
+
+
+flashrom
+Es una herramienta para identificar, leer, escribir, verificar y borrar chips de memoria flash. Se utiliza a menudo para flashear imágenes de BIOS/EFI/coreboot/firmware/optionROM en el sistema mediante una placa base compatible. También permite flashear tarjetas de red NIC, tarjetas controladoras SATA y otros dispositivos externos que permiten programar chips flash.
+# flashrom --list-supported (ver chips soportados)
+# flashrom --programmer internal (Detectar el chip flash usando el controlador SPI integrado en la placa base, común para actualizar BIOS)
+Una salida podría ser:
+      Found chip "Winbond W25Q128FV" (16384 kB, SPI).
+# flashrom --programmer internal -r bios_backup.bin (lee el contenido del chip y lo guarda en bios_backup.bin)
+# flashrom --programmer internal -w new_bios.bin (escribe el archivo new_bios.bin en el chip)
+Nota.- Si el proceso falla, el dispositivo puede quedar inutilizable ["bricked"].
+# flashrom --programmer internal -v new_bios.bin (verificar después de escribir comparando el contenido del chip con el archivo new_bios.bin)
+# flashrom --programmer internal -E (borrar todo el contenido del chip [requiere reprogramación posterior])
+# flashrom --programmer ch341a_spi -r backup.bin (con un programador SPI externo conectado por USB común en adaptadores baratos)
+
+
 flatpak
 Instalar, obtener, administrar y ejecutar paquetes de aplicaciones, alojadas en flathub, lugar central de aplicaciones linux. Para habilitar flathub lanzar en una terminal:
 # flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
@@ -17844,6 +17877,33 @@ $ flatpak search paquete (buscar apliaciones)
 $ flatpak kill aplicacion (detener una aplicación flatpak en ejecución)
 $ flatpak ps (ver las aplicaiones faltpak ejecutándose)
 $ flatpak run aplicacion (ejecutar una aplicación flatpak)
+
+
+flatzinc
+es un lenguaje de modelado de bajo nivel diseñado para problemas de restricciones. Es una representación simplificada de MiniZinc que facilita la interacción con solucionadores de restricciones como Gecode.
+$ minizinc -c model.mzn data.dzn (produce un archivo FlatZinc [model.fzn] que puede ser utilizado por solucionadores compatibles con este formato)
+$ fzn-gecode model.fzn (ejecutar el modelo FlatZinc con un solucionador)
+
+
+flawfinder
+Explora el código fuente de C/C++ en busca de posibles vulnerabilidades de seguridad y genera un informe que describe las posibles fallas encontradas, clasificándolas según su posible gravedad.
+$ flawfinder -v *.c *.cpp (analizará todos los archivos .c y .cpp en el directorio actual en modo verbose)
+$ flawfinder -v --exclude=EX1:0 *.c (excluir ciertos patrones de vulnerabilidad)
+
+
+flent
+[FLExible Network Tester]. Herramienta de prueba de red versátil diseñada para evaluar el rendimiento de la red y la saturación de búferes. Es un envoltorio de Python que simplifica la ejecución simultánea de múltiples instancias de herramientas de pruebas de red populares como netperf, iperf y ping. flent agrega los resultados de estas pruebas y genera gráficos informativos
+$ flent tcp_ndown -H <servidor> -t 60 (ejecuta una prueba de descarga TCP de 60 segundos contra el servidor especificado)
+$ flent rrul -H <servidor> -t 60 (prueba de latencia bidireccional de 60 segundos contra el servidor especificado)
+$ flent tcp_ndown -H <servidor> -l 60 -p "bufferbloat" (prueba de descarga TCP de 60 segundos contra el servidor especificado y mide la saturación de búfer)
+$ flent tcp_ndown -H <servidor> -t 60 --multipath (ejecuta una prueba de descarga TCP de 60 segundos contra el servidor especificado utilizando múltiples flujos)
+$ flent tcp_ndown -H <servidor> -t 60 -o prueba.png (ejecuta una prueba de descarga TCP de 60 segundos contra el servidor especificado y guarda los resultados en un archivo de imagen llamado "prueba.png")
+
+
+flex
+Herramienta utilizada para generar analizadores léxicos o escáneres que son parte de un compilador o intérprete que se encarga de leer el código fuente y dividirlo en "tokens" o símbolos léxicos. Estos tokens son las unidades básicas de significado en el lenguaje de programación, como palabras clave, identificadores, literales, operadores, etc.
+$ flex example.l (generará un archivo C llamado lex.yy.c a partir del archivo especificado)
+$ gcc lex.yy.c -o example -lfl (compilar el archivo lex.yy.c y generará un ejecutable llamado example)
 
 
 flexget
