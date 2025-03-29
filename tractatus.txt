@@ -17955,6 +17955,13 @@ $ flickcurl photosets.create "Mi Álbum de Viaje" "Descripción del álbum" 1234
 $ flickcurl photosets.addPhoto 987654321 1234567890 (agregar fotos al álbum donde 987654321 es el ID del álbum y 1234567890 es el ID de la foto)
 
 
+flightcrew
+Validador de epub que la interfaz gráfica Sigil [editor de libros electronicos] utiliza para validar archivos epub y puede ser útil para otras utilidades de creación de epub.
+$ flightcrew --verbose libro.epub (forma básica)
+$ flightcrew --quiet libro.epub (salir sin mostrar errores, solo advertencias)
+$ flightcrew libro1.epub libro2.epub libro3.epub (verificar múltiples archivos EPUB)
+
+
 flunym0us
 Pruebas de vulnarabilidad de webs basadas en wordpress. Descarga http://code.google.com/p/flunym0us/downloads/list
 $ flunym0us -H http://host -w /home/usuario/wordlist -wp -t 60 -r 1 -p 2 -T 2
