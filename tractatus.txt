@@ -17933,6 +17933,28 @@ $ flexget --test (Comprobar si la configuración es correcta)
 $ flexget (Lanzar la aplicación)
 
 
+flexloader
+es una pequeña utilidad para configurar dispositivos FPGA de Altera [ahora Intel FPGA] basados en SRAM como las series antiguas, por ejemplo, los chips FLEX de Altera o ACEX. Estos dispositivos requieren una configuración externa cada vez que se encienden, ya que no retienen su configuración de forma permanente a diferencia de los basados en flash.
+$ flexloader -d /dev/ttyUSB0 -f config.rbf (especifica el puerto serie USB conectado a un cable de programación y el archivo de configuración [.rbf, Raw Binary File o .sof, SRAM Object File] que se cargará en la FPGA)
+$ flexloader -j -f hardware.rbf (-j indica que se usará JTAG para la configuración)
+$ flexloader --scan (lista los dispositivos FPGA detectados en la cadena JTAG)
+$ flexloader -d /dev/ttyS0 -b 115200 -f firmware.rbf (establece la velocidad en baudios para comunicación serial)
+
+
+flickcurl
+Biblioteca en C para la API de Flickr que permite interactuar con la API de Flickr para administrar fotos, álbumes y otras funciones del servicio. También incluye el programa flickrdf para convertir metadatos de fotos, etiquetas y descripciones RDF de fotos y etiquetas. Una vez se tiene la API key se entra en el archivo de configuración:
+$ nano ~/.flickcurl.conf
+       api_key=TU_API_KEY
+       api_secret=TU_API_SECRET
+$ flickcurl -a (redirigirá a Flickr para aprobar la aplicación y obtener un token de acceso)
+$ flickcurl people.findByUsername "nombre_de_usuario" (devolverá el ID del usuario en Flickr)
+$ flickcurl photos.search user_id="123456@N01" (listar las fotos públicas de un usuario)
+$ flickcurl photos.getInfo 1234567890 (devolverá datos como el título, descripción, etiquetas, etc del ID de una foto)
+$ flickcurl upload "mi_foto.jpg" --title "Vacaciones 2025" --description "Foto en la playa" --tags "playa verano" (subir una imagen)
+$ flickcurl photosets.create "Mi Álbum de Viaje" "Descripción del álbum" 1234567890 (crear un álbum. El último número es el ID de una foto que será la portada del álbum)
+$ flickcurl photosets.addPhoto 987654321 1234567890 (agregar fotos al álbum donde 987654321 es el ID del álbum y 1234567890 es el ID de la foto)
+
+
 flunym0us
 Pruebas de vulnarabilidad de webs basadas en wordpress. Descarga http://code.google.com/p/flunym0us/downloads/list
 $ flunym0us -H http://host -w /home/usuario/wordlist -wp -t 60 -r 1 -p 2 -T 2
