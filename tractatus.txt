@@ -17974,6 +17974,23 @@ Programa que utiliza la criba cuadrática multipolinómica [Multi-Polynomial Qua
 $ flintqs -v 123456789012345678901234567890123456789 (intentar factorizar el número y ver salida detallada)
 
 
+flip
+Convierte los finales de línea de archivos de texto entre formatos MS-DOS [Carriage Return + Line Feed - CRLF] y *nix [LF] y los ignora si ya tienen el formato correcto.
+$ flip -u archivo.txt (convertirá el final de línea de `archivo.txt` de CRLF a LF)
+$ flip -t -m archivo.txt (convertirá el final de linea de LF a CRLF conservando  las marcas de tiempo)
+$ file archivo.txt (comprobar formato de los finales de linea)
+       archivo.txt: Unicode text, UTF-8 text, with very long lines (847), with CRLF line terminators
+
+
+flit
+[Fast Lightweight Installer Tool]. Forma sencilla y más rápida que pip de instalar paquetes y módulos de Python desde PyPI [PEP 517]
+$ flit install requests (instalar el paquete "requests")
+$ flit install numpy pandas matplotlib (instalar varios paquetes)
+$ flit list (mostrar todos los paquetes instalados usando flit)
+$ flit uninstall pandas (desinstalar un paquete)
+$ flit update (actualizar todos los paquetes instalados con flit)
+
+
 flunym0us
 Pruebas de vulnarabilidad de webs basadas en wordpress. Descarga http://code.google.com/p/flunym0us/downloads/list
 $ flunym0us -H http://host -w /home/usuario/wordlist -wp -t 60 -r 1 -p 2 -T 2
