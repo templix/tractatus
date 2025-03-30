@@ -17962,6 +17962,18 @@ $ flightcrew --quiet libro.epub (salir sin mostrar errores, solo advertencias)
 $ flightcrew libro1.epub libro2.epub libro3.epub (verificar múltiples archivos EPUB)
 
 
+fling
+Transfiere datos desde la entrada estándar [stdin] hacia un destino a través a través de la red, sin cifrar los datos durante el proceso.
+$ cat archivo.txt | fling 192.168.1.10 (transferir datos a un servidor de destino)
+$ cat archivo.txt | fling -p 8080 192.168.1.10 (por un puerto específico)
+$ fling -r 8080 (indica que se escuche en el puerto 8080 para recibir datos)
+
+
+flintqs
+Programa que utiliza la criba cuadrática multipolinómica [Multi-Polynomial Quadratic Sieve - MPQS] para factorizar enteros grandes de al menos cuarenta dígitos y se utiliza principalmente en el campo de la criptografía y la teoría de números, dado que muchos sistemas de seguridad, como RSA, dependen de la dificultad de factorizar grandes números primos.
+$ flintqs -v 123456789012345678901234567890123456789 (intentar factorizar el número y ver salida detallada)
+
+
 flunym0us
 Pruebas de vulnarabilidad de webs basadas en wordpress. Descarga http://code.google.com/p/flunym0us/downloads/list
 $ flunym0us -H http://host -w /home/usuario/wordlist -wp -t 60 -r 1 -p 2 -T 2
