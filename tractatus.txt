@@ -17991,6 +17991,42 @@ $ flit uninstall pandas (desinstalar un paquete)
 $ flit update (actualizar todos los paquetes instalados con flit)
 
 
+floatbg
+Modifica sutilmente el color de la ventana raíz X tan lentamente que no se nota.
+$ floatbg -c "#0000FF" (cambiar el fondo a un tono azulado)
+$ floatbg -t 5 -n (ajustar el tiempo de transición y no cambia el fondo cuando la ventana está oculta)
+$ floatbg -m "#00FF00" (cambiar el color al hacer clic)
+$ floatbg -c "rgb(255, 165, 0)" (usar colores RGB)
+$ floatbg -c "#FF0000" -t 10 -m "#00FF00" (combinar opciones)
+
+
+flog
+[File LOGger - registrador de archivos]. Escribe la entrada estándar [STDIN] a un archivo y reabre el archivo cuando recibe una señal [SIGHUP] similar a sponge [ver]
+$ echo "Hola mundo" | flog archivo.txt (el contenido se escribirá en archivo.txt y luego el programa se cerrará sin embargo, el archivo seguirá abierto y listo para futuras escrituras)
+
+
+floppyd
+Un demonio que se utiliza como servidor para otorgar acceso a la disquetera local a clientes de máquinas remotas, que tambien han de tener instalada la aplicación y, una vez conectados, pueden leer y escribir archivos en el dispositivo de disco flexible. Una configuración básica en el servidor podría ser:
+# nano /etc/floppyd.conf
+        floppy=/dev/fd0
+        port=12345
+# floppyd (iniciar el servidor)
+$ floppyctl connect localhost 12345 (conectar al servidor des de la máquina remota)
+
+
+flowgrind
+Herramienta de medición del rendimiento y otras métricas TCP [red distribuida] similar a iperf y netperf. Su objetivo principal es ayudar a medir la capacidad de una red en términos de latencia, ancho de banda y otros parámetros importantes relacionados con el tráfico TCP, y esto se logra mediante la generación de tráfico TCP en ambas direcciones (cliente y servidor).
+1.-
+$ flowgrind -s 5001 (indica que el proceso se ejecutará en modo servidor, y el puerto en el que el servidor escuchará las conexiones de los clientes)
+$ flowgrind -c <dirección_del_servidor> -p 5001 (conectar al servidor y realizar la prueba de rendimiento)
+2.-
+$ flowgrind -s 5001 -t tcp (ejecutar en modoservidor, puerto y medir el ancho de banda de la red entre el cliente y el servidor)
+$ flowgrind -c <dirección_del_servidor> -p 5001 -t tcp (en el cliente especificando que se usará TCP como protocolo de transporte)
+3.-
+$ flowgrind -s 5001 -T 10 (probar con 10 flujos TCP simultáneos)
+$ flowgrind -c <dirección_del_servidor> -p 5001 -b 1400 (configurar paquetes de 1400 bytes)
+
+
 flunym0us
 Pruebas de vulnarabilidad de webs basadas en wordpress. Descarga http://code.google.com/p/flunym0us/downloads/list
 $ flunym0us -H http://host -w /home/usuario/wordlist -wp -t 60 -r 1 -p 2 -T 2
@@ -18005,10 +18041,23 @@ Opciones:
 	-T 2 (Número de subprocesos simultaneos por proceso)
 
 
+fluster
+Marco de pruebas que ejecuta varias suites [velocidad, eficiencia, compatibilidad...] para la conformidad de decodificadores multimedia compatibles [codecs]. Originalmente, se diseñó para comprobar la conformidad de los decodificadores H.265/HEVC, pero también es compatible con H.264/AVC y verifica si un decodificador, por ejemplo, ffmpeg, GStreamer, libde265, interpreta correctamente los archivos codificados bajo un estándar.
+$ fluster --list-tests (muestra todas las suites de pruebas incluidas)
+$ fluster --test-set HEVC --decoder /usr/bin/ffmpeg --output results.txt (selecciona la suite de pruebas para HEVC, el decodificador a probar, en este caso, ffmpeg y guardar resultados)
+$ fluster --test-set AVC --decoder /usr/bin/gst-launch-1.0 (usar gst-launch-1.0 de GStreamer como decodificador)
+$ fluster --test-set HEVC --test-case JCTVC_C004 --decoder /usr/bin/ffmpeg (ejecutar una prueba específica)
+
+
 fluxbox-generate_menu
 Generador de menús de fluxbox.
 $ fluxbox-generate_menu -g (Añade un menú tipo gnome)
 $ fluxbox-generate_menu -k -o ~/.fluxbox/menu1 (Añade menú tipo kde y lo coloca en menu1 para probarlo. Sin especificar, substituiría el .fluxbox/menu)
+
+
+flvmeta
+Herramienta de línea de comandos diseñada para manipular metadatos en archivos de vídeo FLV [FLash Video]. Su función principal es inyectar etiquetas de metadatos estándar en el evento onMetaData y agregar un evento onLastSeconde.
+$ flvmeta input.flv output.flv --add-metadata --on-last-second (archivo FLV de entrada, archivo FLV modificado con metadatos, ynyecta metadatos estándar en onMetaData e inserta el evento onLastSecond.)
 
 
 flvstreamer
