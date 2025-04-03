@@ -18169,6 +18169,15 @@ Suponiendo un directorio con los iconos en SVG [icons/]
 $ fontcustom compile icons/ --output=fonts/ --name="my-icons" --css-selector=.icon-{{glyph}} (generará fuentes en fonts/my-icons.{ttf,woff,eot,svg}, CSS en fonts/my-icons.css y HTML de demo en fonts/my-icons-preview.html)
 
 
+fontmake
+Esta biblioteca proporciona un contenedor para varias bibliotecas de Python que, en conjunto, compilan de diversas fuentes tipográficas desde formatos de diseño como .glyphs o el formato abierto .ufo [Unified Font Object] hacia formatos binarios como .otf [OpenType] y .ttf [TrueType]. Lo que hace especial a fontmake es que integra varias bibliotecas de Python, como glyphsLib, ufo2ft, fontTools, entre otras, para automatizar y simplificar este proceso de conversión.
+$ fontmake -g MiFuente.glyphs -o otf ttf (especifica el archivo .glyphs como entrada e indica que se generará tanto .otf como .ttf de salida)
+$ fontmake -g MiFuente.glyphs -o ttf -i (solo generar archivos .ttf e interpola y genera todas las instancias definidas en el archivo .glyphs)
+$ fontmake -g MiFuente.glyphs -o variable (genera una fuente variable en formato .ttf con curvas TrueType)
+$ fontmake -u MiFuente.ufo -o otf (especifica un archivo .ufo como entrada y genera un archivo .otf)
+$ fontmake -g MiFuente.glyphs -o ttf --output-dir ./fuentes_generadas (que todos los archivos .ttf generados se guardarán en el directorio fuentes_generadas)
+
+
 fonts-roadgeek
 Conjunto de fuentes que replica los tipos de letra utilizados en las señales de carretera en varios países.
 
