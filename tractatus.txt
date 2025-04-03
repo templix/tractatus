@@ -18049,6 +18049,13 @@ $ fluster --test-set AVC --decoder /usr/bin/gst-launch-1.0 (usar gst-launch-1.0 
 $ fluster --test-set HEVC --test-case JCTVC_C004 --decoder /usr/bin/ffmpeg (ejecutar una prueba específica)
 
 
+flwrap
+Herramienta de escritorio que encapsula un archivo de texto, un archivo de imagen o un archivo binario dentro de un formato especial que incluye bloques de identificación y una suma de verificación [checksum] de 16 bits. Esto es especialmente útil en el ámbito de la radioafición y las comunicaciones digitales.
+$ flwrap mensaje.txt (encapsular el archivo creando mensaje.txt.flw)
+$ flwrap imagen.jpg (encapsular un archivo de imagen generando imagen.jpg.flw)
+$ flwrap mensaje.txt.flw (desencapsular un archivo .flw y extraer el archivo original generando mensaje.txt)
+
+
 fluxbox-generate_menu
 Generador de menús de fluxbox.
 $ fluxbox-generate_menu -g (Añade un menú tipo gnome)
@@ -18073,6 +18080,16 @@ fmt
 Eliminar saltos de linea de un archivo y uniendo párrafos.
 $ fmt -w 80 fichero.txt (limitando el número de caracteres por linea)
 $ fmt -s 10 fichero.txt (solo une las lineas inferiores a 10 caracteres)
+
+
+fmtools
+Sintonizador de radio FM para ajustar frecuencias, volumenes, silenciar y activar el sonido de las tarjetas de radio FM.
+$ fm on (activa el radio si existe)
+$ fm off (desactivar)
+$ fmscan -d dispositivo (escanear frecuencias, si dispositivo no se especifica, por defecto /dev/radio0)
+$ fm 101500000 (si el dispositivo existe sintonizará la frecuencia especificada [101.5MHz especificada en KHz])
+$ fm + (aumentar el volumen)
+$ fm - (disminuir)
 
 
 fnotifystat
@@ -18110,6 +18127,26 @@ fold
 Formatea la salida de un archivo a una determinada longitud.
 $ fold archivo (a 80 caracteres por linea. Por defecto)
 $ fold  -w 100 -s archivo (100 caracteres por linea y que corte por los espacios entre palabras y no por las palabras)
+
+
+fomp
+Colección de plugins de audio LV2 [MCP, VCO, FIL y WAH] y consta de 13 plugins en total: 1 auto-wah, 1 ecualizador, 3 coros, 5 filtros y 3 osciladores y, generalmente, se encuentran en el directorio /usr/lib/lv2 o /usr/local/lib/lv2, pero si estan en una carpeta personalizada, ha de indicarse al sistema donde se tienen que buscar.
+$ nano ~/.bashrc
+Y añadir la linea:
+         export LV2_PATH=$LV2_PATH:$HOME/mis_plugins_lv2
+Reiniciar la sesión o actualizar el archivo [source ~/.bashrc] y cualquier aplicación de música [VLC, audacity, ardour...] reconocerá los plugins LV2. Tambien se puede usar, para ver si los plugins están siendo correctamente cargados, los paquetes de la colección lilv-utils [ver]:
+$ sudo lv2ls -n
+
+
+fondu
+Conversión entre formatos de fuentes de Macintosh a formatos más comunes en sistemas UNIX, como PFB [PostScript Type 1], TTF [TrueType], OTF [penType] y BDF [Bitmap Distribution Format]. Los sistemas Mac tradicionalmente almacenan fuentes en un formato especial que incluye un "resource fork" [fork de recursos], algo que no es nativo en otros sistemas operativos como UNIX/Linux. fondu extrae estas fuentes del "resource fork" y las convierte a formatos utilizables en entornos UNIX. Incluye un programa complementario llamado ufond, que hace lo inverso: toma fuentes en formatos UNIX y las convierte a un formato compatible con Mac.
+$ fondu fuente.bin (extraerá las fuentes del "resource fork" y generará archivos como NombreFuente.ttf o NombreFuente.pfb en el directorio actual)
+$ fondu fuente.hqx (se obtendrá archivos como NombreFuente.ttf, NombreFuente.otf o NombreFuente.bdf, según el contenido del archivo)
+$ fondu fuente.dfont (si el archivo contiene fuentes TrueType, generará un archivo como NombreFuente.ttf)
+$ fondu -latin1 fuente.bin (generará un archivo NombreFuente.bdf con codificación ISO 8859-1)
+$ fondu -trackps fuente.bin (si el archivo contiene un recurso FOND que referencia fuentes PostScript externas se intentará abrir y convertir los archivos PostScript referenciados, generando archivos .pfb)
+$ ufond -macbinary Helvetica.ttf (genera un archivo MacBinary con la fuente envuelta en un "resource fork")
+Nota.- fondu es ideal para fuentes antiguas de Mac. Para fuentes modernas o conversiones más complejas, herramientas como fontforge podrían ser más adecuadas.
 
 
 fonts-roadgeek
@@ -22792,6 +22829,15 @@ Si queremos una contraseña para entrar en alguno de los sistemas colocamos en s
 	password = 12345
 Cualquier modificación en este archivo para guardar los cambios, implica lanzar:
 # lilo
+
+
+lilv-utils
+Biblioteca de plugins LV2. Incluye las herramientas lilv-bench, lv2apply [aplica un plugin LV2 a un archivo de audio],
+# lv2bench (realiza una evaluación comparativa de todos los plugins LV2 instalados y compatibles)
+# lv2ls -n (lista todos los plugins LV2 instalados)
+# lv2bench (listado de URIs [Uniform Resource Identifier])
+# lv2info -p http://drobilla.net/plugins/fomp/triple_chorus (información sobre un plugin LV2 instalado)
+# lv2info -m 0.003550 http://lsp-plug.in/plugins/lv2/slap_delay_stereo (añade el registro del complemento)
 
 
 lilypond-doc-html-es
