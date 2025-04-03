@@ -18149,6 +18149,20 @@ $ ufond -macbinary Helvetica.ttf (genera un archivo MacBinary con la fuente envu
 Nota.- fondu es ideal para fuentes antiguas de Mac. Para fuentes modernas o conversiones más complejas, herramientas como fontforge podrían ser más adecuadas.
 
 
+fontconfig
+Biblioteca de configuración y personalización de fuentes que no depende del sistema X Window. Está diseñada para localizar fuentes dentro del sistema y seleccionarlas según los requisitos especificados por las aplicaciones. Este paquete   un programa para  ().
+$ fc-cache (mantener la caché de fontconfig)
+$ fc-list (listar las fuentes instaladas)
+$ fc-match (probar reglas de coincidencia)
+$ fc-cat (volcar los archivos binarios de la caché en formato de cadena)
+$ fc-scan /usr/share/fonts/truetype/freefont/ (escanear archivos o directorios de fuentes)
+$ fc-scan -b /usr/share/fonts/truetype/gentium/Gentium-I.ttf (muestra las caracteristicas de la fuente mencionada)
+$ fc-validate /usr/share/fonts/X11/100dpi/helvB18.pcf.gz (si es apta para el idioma del sistema)
+$ fc-conflist (enumerar los archivos de configuración procesados por Fontconfig)
+$ fc-pattern -d (analizar y mostrar patrones)
+$ fc-query -b /usr/share/fonts/X11/100dpi/helvB18.pcf.gz (consultar archivos de fuentes e ignorar espacios en blanco al calcular idiomas)
+
+
 fonts-roadgeek
 Conjunto de fuentes que replica los tipos de letra utilizados en las señales de carretera en varios países.
 
