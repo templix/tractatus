@@ -18151,7 +18151,7 @@ Nota.- fondu es ideal para fuentes antiguas de Mac. Para fuentes modernas o conv
 
 fontconfig
 Biblioteca de configuración y personalización de fuentes que no depende del sistema X Window. Está diseñada para localizar fuentes dentro del sistema y seleccionarlas según los requisitos especificados por las aplicaciones. Este paquete   un programa para  ().
-$ fc-cache (mantener la caché de fontconfig)
+$ fc-cache -f -v (actualizar la caché de fuentes)
 $ fc-list (listar las fuentes instaladas)
 $ fc-match (probar reglas de coincidencia)
 $ fc-cat (volcar los archivos binarios de la caché en formato de cadena)
@@ -18161,6 +18161,12 @@ $ fc-validate /usr/share/fonts/X11/100dpi/helvB18.pcf.gz (si es apta para el idi
 $ fc-conflist (enumerar los archivos de configuración procesados por Fontconfig)
 $ fc-pattern -d (analizar y mostrar patrones)
 $ fc-query -b /usr/share/fonts/X11/100dpi/helvB18.pcf.gz (consultar archivos de fuentes e ignorar espacios en blanco al calcular idiomas)
+
+
+fontcustom
+Herramienta que convierte iconos en formato SVG en fuentes de iconos [icon fonts] compatibles con navegadores web.
+Suponiendo un directorio con los iconos en SVG [icons/]
+$ fontcustom compile icons/ --output=fonts/ --name="my-icons" --css-selector=.icon-{{glyph}} (generará fuentes en fonts/my-icons.{ttf,woff,eot,svg}, CSS en fonts/my-icons.css y HTML de demo en fonts/my-icons-preview.html)
 
 
 fonts-roadgeek
