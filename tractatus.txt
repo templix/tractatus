@@ -18186,6 +18186,13 @@ fonts-roadgeek
 Conjunto de fuentes que replica los tipos de letra utilizados en las señales de carretera en varios países.
 
 
+fonttools
+Convierte fuentes OpenType y TrueType a XML para facilitar su análisis o edición. Incluye las aplicaciones fonttools [uso en scripts python], pyftmerge, pyftsubset y ttx
+$ pyftmerge fuente_regular.ttf fuente_negrita.ttf fuente_italica.ttf -o fuente_combinada.ttf (combina tres fuentes en un solo archivo fuente_combinada.ttf)
+$ pyftsubset fuente.ttf --text="Hola Mundo" --output-file=fuente_subconjunto.ttf (crea versión reducida de la fuente, con los caracteres necesarios para representar el texto "Hola Mundo" y lo guarda como fuente_subconjunto.ttf)
+$ ttx fuente.ttf (convierte la fuente en un archivo XML con todas las tablas y datos de la fuente en un formato legible)
+
+
 fop
 Aplicación Java que lee un árbol de objetos de formato y luego lo convierte en una amplia variedad de presentaciones de salida [PDF, PNG, PostScript...] o muestra el resultado en la pantalla.
 $ fop -fo documento.fo -pdf documento.pdf (convertir un archivo XSL-FO csstoxslfo [ver] a pdf)
