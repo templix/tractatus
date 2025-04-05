@@ -16627,6 +16627,10 @@ Listar todas las fuentes disponibles.
 $ fc-list | cut -d ':' -f 1 | sort -u  (de forma más clara)
 $ fc-list > lista_fuentes.txt   (redirigir la lista de fuentes a un fichero)
 $ fc-list | wc -l  (muestra el número de fuentes disponibles)
+$ fc-list : family (listado de fuentes instaladas sin información de ruta)
+$ fc-list :lang=es (identificar fuentes de un idioma con su ruta)
+$ fc-list :lang=es family (identificar fuentes de un idioma sin información de ruta)
+$ fc-list : family style (identificar los estilos de cada fuente tipográfica: negrita, regular, cursiva, etc.)
 
 
 fcgistarter
@@ -18191,6 +18195,15 @@ Convierte fuentes OpenType y TrueType a XML para facilitar su análisis o edici�
 $ pyftmerge fuente_regular.ttf fuente_negrita.ttf fuente_italica.ttf -o fuente_combinada.ttf (combina tres fuentes en un solo archivo fuente_combinada.ttf)
 $ pyftsubset fuente.ttf --text="Hola Mundo" --output-file=fuente_subconjunto.ttf (crea versión reducida de la fuente, con los caracteres necesarios para representar el texto "Hola Mundo" y lo guarda como fuente_subconjunto.ttf)
 $ ttx fuente.ttf (convierte la fuente en un archivo XML con todas las tablas y datos de la fuente en un formato legible)
+
+
+fonty-rg
+Conjunto de fuentes de consola diseñadas para usarse en terminales de Linux y otros entornos de consola [ttys], y está especialmente orientado a soportar una amplia gama de codificaciones de caracteres incluidas fuentes para las páginas de códigos ISO-8859-1,2,3,4,5,6,7,8,9,10,11,13,14,15,16, KOI8-R,U,C, CP1250, CP1251, CP1252, así como dos fuentes Unicode con amplia cobertura y un archivo ACM ISO-8859-16 y permitir que se pueda mostrar texto correctamente en diversas codificaciones. Incluye las herramientas iso y utf8.
+$ iso (sin especificar número, por defecto se usa la codificación ISO-8859-1)
+$ iso 2 (usará la codificación ISO-8859-2)
+$ iso 5 (usará ISO-8859-5)
+$ utf8 (usando codificación UTF-8
+Nota.- ISO-8859-1, tambien conocida como Latin-1, era antigamente la usada en muchos países de Europa Occidental como España, Francia, Portugal... pero actualmente se ha sustituido por UTF-8, mucho más versatil.
 
 
 fop
