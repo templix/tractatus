@@ -18301,6 +18301,16 @@ Del 1 al 10 de 2 en 2:
 	done
 
 
+foremancli
+Herramienta que permite buscar y acceder a toda la información de nodos [servidores, máquinas virtuales, etc.] almacenada en un servidor Foreman. Permite consultar datos como hosts, facts de Puppet/Ansible, parámetros, grupos, etc., y formatear la salida en texto plano, JSON o YAML.
+$ foremancli hosts list (listar todos los hosts registrados en Foreman)
+$ foremancli hosts show web-server01 (buscar un host específico por nombre)
+$ foremancli facts show db-server01 (obtener "facts" de un nodo [datos de Puppet/Ansible])
+$ foremancli hosts list --search 'os = Ubuntu' (filtrar hosts por un parámetro)
+$ foremancli parameters list (listar parámetros globales)
+$ foremancli hosts list --output yaml > hosts_inventory.yaml (exportar datos para usar en scripts [YAML])
+
+
 foremost
 Recuperación de datos
 # foremost -i /dev/sda -o /recovery
