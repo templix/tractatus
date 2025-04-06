@@ -18206,6 +18206,45 @@ $ utf8 (usando codificación UTF-8
 Nota.- ISO-8859-1, tambien conocida como Latin-1, era antigamente la usada en muchos países de Europa Occidental como España, Francia, Portugal... pero actualmente se ha sustituido por UTF-8, mucho más versatil.
 
 
+foomuuri
+Es un generador de firewalls bidireccional [controla el tráfico de entrada y también el de salida] para nftables [reemplazo de iptables] basado en el concepto de zonas ["Red interna", "Red externa", "VPN", etc] y compatible con todo tipo de sistemas, desde equipos personales hasta firewalls corporativos, y admite funciones avanzadas como un lenguaje de reglas completo, división de reglas IPv4/IPv6, búsquedas dinámicas de DNS [Permite utilizar nombres de dominio en lugar de direcciones IP estáticas], una API D-Bus y emulación de firewalld para la compatibilidad con zonas de NetworkManager.
+Ejemplo de configuración de una red local:
+# nano mi_configuracion.json
+       {
+         "zones": {
+           "red_interna": {
+             "interfaces": ["eth0"],
+             "rules": [
+               {
+                 "action": "accept",
+                 "protocol": "tcp",
+                 "port": 80
+               },
+               {
+                 "action": "accept",
+                 "protocol": "tcp",
+                 "port": 443
+               }
+                 ]
+               },
+               "red_externa": {
+               "interfaces": ["eth1"],
+               "rules": [
+                 {
+                   "action": "drop",
+                   "protocol": "tcp",
+                   "port": 80
+                 }
+              ]
+            }
+          }
+       }
+En este ejemplo, se definen dos zonas: red_interna que acepta tráfico HTTP [puerto 80] y HTTPS [puerto 443] en la interfaz eth0 y red_externa que bloquea el tráfico HTTP en la interfaz eth1.
+# foomuuri --config mi_configuracion.json
+# foomuuri --apply mi_configuracion.json
+# dbus-send --session --dest=org.foomuuri --type=method_call --print-reply /org/foomuuri/firewall org.foomuuri.firewall.ApplyConfig string:"mi_configuracion.json" (enviar una solicitud D-Bus para aplicar el archivo de configuración)
+
+
 fop
 Aplicación Java que lee un árbol de objetos de formato y luego lo convierte en una amplia variedad de presentaciones de salida [PDF, PNG, PostScript...] o muestra el resultado en la pantalla.
 $ fop -fo documento.fo -pdf documento.pdf (convertir un archivo XSL-FO csstoxslfo [ver] a pdf)
