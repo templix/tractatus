@@ -18346,6 +18346,32 @@ Explicación:
 Una vez en marcha, la fork bomb consume rápidamente los recursos del sistema, bloqueando la capacidad de ejecutar nuevos procesos y usualmente obligando a un reinicio forzado del equipo.
 
 
+form
+Herramienta de manipulación simbólica diseñada para leer expresiones simbólicas desde archivos y ejecutar transformaciones algebraicas y simbólicas sobre ellas. Este tipo de software es útil en áreas como la física teórica, matemáticas y otras disciplinas que requieren cálculos algebraicos complejos.
+1.-
+Ejemplo
+$ nano example.frm
+       Symbols x, y;
+       Local expr = (x + y)^2;
+       Print;
+       .end
+Symbols x, y;: Declara las variables simbólicas que se usarán, Local expr = (x + y)^2;: Define la expresión matemática que se desea manipular, Print;: Indica que se debe mostrar el resultado y .end: Marca el final del archivo.
+$ form example.frm (ejecutar el archivo)
+El programa expandirá la expresión (x+y)2(x+y)2 y mostrará:
+       expr = x^2 + 2*x*y + y^2;
+2.-
+Otro ejemplo con derivadas
+$ nano derivative.frm
+       Symbols x;
+       Local f = x^3 + 2*x^2 - x + 5;
+       id f = df(f,x);
+       Print;
+       .end
+Symbols x;: Declara la variable simbólica xx, Local f = x^3 + 2*x^2 - x + 5;: Define una función polinómica, id f = df(f,x);: Calcula la derivada de ff respecto a xx y Print;: Muestra el resultado.
+$ form derivative.frm
+       f = 3*x^2 + 4*x - 1;
+
+
 forkstat
 Supervisa la actividad fork, exec y exit del proceso.
 # forkstat -S -e all (mostrar estadisticas de eventos al final de la ejecución i sobre todos los procesos)
