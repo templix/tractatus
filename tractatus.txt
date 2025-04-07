@@ -18378,6 +18378,13 @@ Supervisa la actividad fork, exec y exit del proceso.
 # forkstat -s -d (información breve del nombre del proceso sin mostrar la ruta)
 
 
+fort-validator
+Herramienta utilizada en el ámbito de la infraestructura de clave pública de recursos RPKI [Resource Public Key Infrastructure - Infraestructura de Clave Pública de Recursos], que es un sistema de seguridad diseñado para mejorar la seguridad del enrutamiento de Internet. Este validador está basado en el proyecto FORT, un sistema que se encarga de verificar la validez de las rutas BGP [Border Gateway Protocol] mediante el uso de certificados y autorizaciones. La parte principal del sistema RPKI es una base de datos firmada criptográficamente, que un validador lee y procesa. El validador trabaja con las ROA [Route Authorization Object] publicadas para crear una lista de rutas validadas. Una ROA consta de un bloque de direcciones IP y un ASN, que juntos definen quién puede anunciar cada bloque IP.
+$ fort-validator --start-rtr (pondrá en marcha el servicio que se encargará de distribuir los datos RPKI validados a los enrutadores a través del protocolo RTR [RPKI-to-Router])
+$ fort-validator --check-roa <prefix> <asn> (verificará si el prefijo y AS [Autonomous System Number - Número de Sistema Autónomo] dados están cubiertos por un ROA [Route Origin Authorizations] válido)
+$ fort-validator --repo <ruta_del_repositorio> (validar un repositorio RPKI local)
+
+
 fortune-anarchism
 Mostrar frases anarquistas aleatorias.
 $ fortune /usr/share/games/fortunes/anarchism
