@@ -18504,6 +18504,15 @@ Demonio D-Bus que permite a los aplicaciones acceder a los lectores de huellas d
 # fprintd-verify (compara las huellas dactilares del usuario con la base de datos)
 
 
+fprobe
+Herramienta basada en libpcap que captura tráfico de red en una interfaz específica y lo convierte en flujos NetFlow, los cuales luego envía a un recopilador remoto para su análisis. NetFlow es un protocolo desarrollado por Cisco que permite recopilar y analizar información sobre el tráfico de red, como direcciones IP de origen y destino, puertos, protocolos, y volumen de datos, sin necesidad de capturar paquetes completos. Esto lo hace útil para monitoreo de red, detección de anomalías o análisis de rendimiento.
+# fprobe -i eth0 -f "tcp and port 80" 192.168.1.100:2055 (monitorea la interfaz eth0, filtra solo el tráfico TCP en el puerto 80 y lo envia a la dirección y puerto del recopilador remoto)
+# fprobe -i eth0 -f "vlan and ip" -K 18 192.168.1.100:2055 (capturar tráfico IP dentro de VLANs y especifica un tamaño de cabecera de 18 bytes)
+# fprobe -i eth0 -f ip -B 4096 -r 2 -q 10000 -t 10000:10000000 192.168.1.100:2055 (capturar todo el tráfico IP, tamaño del búfer en 4096 flujos, prioridad en tiempo real para evitar pérdidas, cola de paquetes y límite de emisión [10 KB o 10M paquetes])
+# fprobe -i eth0 192.168.1.100:2055 192.168.1.101:2055//r 192.168.1.102:2055//r (//r: Indica que los datos se distribuirán en modo round-robin entre los recopiladores)
+# fprobe -f ip 192.168.1.100:2055 (capturar tráfico genérico en la interfaz predeterminada)
+
+
 fpzip
 Utilidad para la compresión sin pérdida y opcionalmente con pérdida de matrices de punto flotante 2D y 3D. fpzip asume datos escalares correlacionados espacialmente, como funciones continuas muestreadas regularmente, y no es adecuado para comprimir secuencias no estructuradas de números de punto flotante.
 $ fpzip -i entrada.dat -o salida.fpzip (forma básica)
