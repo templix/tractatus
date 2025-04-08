@@ -18576,6 +18576,61 @@ $ cdbstats (lee la base de datos e imprime algunas estadísticas)
 $ cdbmake cdb cdb.tmp (cdb.tmp son los datos y con ellos, cdbmake crea la cdb)
 
 
+freediameter
+Se refiere a una implementación de código abierto del protocolo Diameter, que es utilizado para transportar información de Autenticación, Autorización y Contabilidad [Authentication, Authorization and  Accounting - AAA] en redes de telecomunicaciones. Diameter es el sucesor del protocolo RADIUS y se utiliza ampliamente en redes móviles y de banda ancha para gestionar la autenticación de usuarios, la autorización de servicios y la contabilidad de uso.
+# freediameterd -c /etc/freediameter/freediameter.conf (iniciar freediameter)
+# systemctl status freediameter (verificar el estado del servicio)
+1.-
+Configurar peers que son nodos con los que freediameter se comunicará
+# nano /etc/freediameter/freediameter.conf
+       # Configuración del peer local
+       LocalPeer = {
+           Identity = "local.peer.com";
+           Realm = "local.realm.com";
+           Vendor-Id = 0;
+           Product-Name = "FreeDiameter";
+           Firmware-Revision = 1;
+           Host-IP-Address = "127.0.0.1";
+           Sec-IP-Address = "127.0.0.1";
+           Port = 3868;
+           Sec-Port = 3869;
+           Tc = 1;
+           Origin-State-Id = 1;
+           Supported-Vendor-Id = 0;
+           Auth-Application-Id = 16777216;
+           Acct-Application-Id = 16777217;
+           Vendor-Specific-Application-Id = 16777251;
+       }
+       # Configuración del peer remoto
+       Peer = {
+           Identity = "remote.peer.com";
+           Realm = "remote.realm.com";
+           Vendor-Id = 0;
+           Product-Name = "RemotePeer";
+           Firmware-Revision = 1;
+           Host-IP-Address = "192.168.1.1";
+           Sec-IP-Address = "192.168.1.1";
+           Port = 3868;
+           Sec-Port = 3869;
+           Tc = 1;
+           Origin-State-Id = 1;
+           Supported-Vendor-Id = 0;
+           Auth-Application-Id = 16777216;
+           Acct-Application-Id = 16777217;
+           Vendor-Specific-Application-Id = 16777251;
+       }
+2.-
+Monitoreo y Depuración
+Para monitorear y depurar habilitar el modo de depuración en el archivo de configuración y revisar los logs:
+# nano /etc/freediameter/freediameter.conf
+Añadir:
+        # Habilitar depuración
+        Debug = "yes";
+Luego, reiniciar el servicio y revisar los logs:
+# systemctl restart freediameter
+# tail -f /var/log/freediameter/freediameter.log
+
+
 freeradius
 [libssl-dev freeradius-mysql freeradius-utils]. Servidor.
 Configurar la base de datos:
