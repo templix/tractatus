@@ -18444,6 +18444,37 @@ $ nano .fossil-settings
 Fossil no rastreará los archivos o directorios que coincidan con los patrones especificados.
 
 
+foxeye
+Es una base modular genérica multipropósito diseñada para crear clientes o servidores para redes cliente-servidor como IRC [Internet Relay Chat], ICQ [antiguo servicio de mensajería instantánea], y otros protocolos similares. Los módulos disponibles son: autolog, irc, irc-channel, irc-ctcp, ircd, logs, lua, modos, tcl y ziplink.
+1.-
+Conectarse a un Servidor IRC
+Ejemplo simplificado:
+# nano /etc/foxeye.conf
+       #!/bin/bash
+       # Configuración del servidor IRC
+       SERVER="irc.freenode.net"
+       PORT="6667"
+       NICK="usuario"
+       CHANNEL="#canal"
+$ foxeye --protocol irc --server $SERVER --port $PORT --nick $NICK --join $CHANNEL (conectarse al servidor IRC específico, con un apodo y uniéndose a un canal determinado)
+2.-
+Crear un Servidor de Chat Básico
+# nano /etc/foxeye.conf
+       #!/bin/bash
+       # Configuración del servidor de chat
+       PORT="12345"
+       # Usar foxeye para iniciar un servidor de chat
+$ foxeye --mode server --protocol chat --port $PORT (funcionar como un servidor de chat en el puerto especificado)
+3.-
+Conectarse a un Servicio de Mensajería ICQ
+# nano /etc/foxeye.conf
+       #!/bin/bash
+       # Configuración del servicio ICQ
+       USERNAME="tu_usuario"
+       PASSWORD="tu_contraseña"
+$ foxeye --protocol icq --username $USERNAME --password $PASSWORD (conectarse a un servicio de mensajería ICQ con las credenciales proporcionadas)
+
+
 fpart
 Herramienta que ayuda a ordenar árboles de archivos y empaquetarlos en bolsas llamadas "particiones". Divide una lista de directorios y árboles de archivos en un número determinado de particiones, intentando generar particiones con el mismo tamaño y número de archivos y creando subcarpetas dentro de la carpeta original para cada partición. Una vez generadas, las particiones se imprimen como listas de archivos en la salida estándar [predeterminada] o como archivos.
 $ fpart -n 4 ~/Documentos (dividir una carpeta en 4 particiones iguales)
