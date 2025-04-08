@@ -18405,6 +18405,45 @@ $ fortune /usr/share/games/fortunes/off/es/off/
 $ fortune /usr/share/games/fortunes/linux
 
 
+fossil
+Es un sistema de control de versiones distribuido (DVCS), similar a Git o Mercurial. Permite el acceso y la administración mediante HTTP CGI o mediante un servidor HTTP integrado. Además, cuenta con wiki integrado, explorador de archivos integrado, un sistema de tickets integrado, etc.
+$ fossil new proyecto.fossil (crear un nuevo repositorio que contendrá todo el historial y la información del proyecto)
+$ fossil open proyecto.fossil (abrir un repositorio existente)
+$ fossil add archivo1.txt archivo2.c (añadir archivos al control de versiones)
+$ fossil add directorio/ (añadir directorio)
+$ fossil add .  (añadir todos los archivos y directorios)
+$ fossil commit -m "Mensaje descriptivo del commit" (realizar un "check-in" [commit])
+$ fossil status (ver el estado del directorio de trabajo)
+$ fossil timeline (ver el historial del repositorio)
+$ fossil timeline -n 10  (muestra los últimos 10 eventos)
+$ fossil timeline -v  (muestra información más detallada)
+$ fossil diff archivo.txt (ver las diferencias entre la versión actual y la última versión guardada)
+$ fossil update trunk  (actualiza la rama principal [por defecto])
+$ fossil update <hash_del_commit>  (actualiza a un commit específico)
+$ fossil branch new nueva_funcionalidad (crear nueva rama)
+$ fossil checkout nueva_funcionalidad (cambiar entre ramas)
+$ fossil checkout trunk  (volver a la rama principal)
+$ fossil merge nueva_funcionalidad (fusionar rama especificada con la principal)
+$ fossil ui (inicia un servidor web local que permite acceder al repositorio a través de un navegador en la dirección http://localhost:8080, por defecto)
+$ fossil ticket new "Corregir error de validación en el formulario" (crear ticket asociado al proyecto)
+$ fossil ticket info <id_del_ticket> (ver ticket)
+$ fossil ticket edit <id_del_ticket> -status fixed (editar ticket)
+$ fossil wiki export wiki.txt (exportar la wiki)
+1.-
+Clonar un repositorio remoto a través de HTTP:
+$ fossil clone http://servidor/ruta/al/repositorio.fossil mi_copia_local
+$ cd mi_copia_local
+$ fossil open
+2.-
+Ignorar archivos y patrones:
+Crear un archivo en la raíz del directorio de trabajo
+$ nano .fossil-settings
+       ignore: *.o
+       ignore: tmp/
+       ignore: archivo_temporal.log
+Fossil no rastreará los archivos o directorios que coincidan con los patrones especificados.
+
+
 fpart
 Herramienta que ayuda a ordenar árboles de archivos y empaquetarlos en bolsas llamadas "particiones". Divide una lista de directorios y árboles de archivos en un número determinado de particiones, intentando generar particiones con el mismo tamaño y número de archivos y creando subcarpetas dentro de la carpeta original para cada partición. Una vez generadas, las particiones se imprimen como listas de archivos en la salida estándar [predeterminada] o como archivos.
 $ fpart -n 4 ~/Documentos (dividir una carpeta en 4 particiones iguales)
