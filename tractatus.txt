@@ -18484,6 +18484,14 @@ $ fpart -s 200M -m 3000 ~/Documentos (dividir una carpeta en particiones con un 
 $ fpart -v ~/Documentos (verificar el estado de las particiones creadas)
 
 
+fpdns
+Herramienta utilizada para realizar fingerprinting de servidores DNS, es decir, identificar remotamente la versión o implementación del software del servidor DNS, útil en auditorías de seguridad, pruebas de penetración y análisis de infraestructura.
+$ fpdns 192.168.1.1 (analizar un servidor DNS)
+La salida podría ser algo como:
+          192.168.1.1: ISC BIND 9.16.x
+Esto indica que el servidor está ejecutando una versión específica de BIND.
+
+
 fping
 Determina máquinas de una red activas
 # fping -g 192.168.2./24 2> /dev/null | grep alive
