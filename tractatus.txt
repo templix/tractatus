@@ -18497,6 +18497,13 @@ Determina máquinas de una red activas
 # fping -g 192.168.2./24 2> /dev/null | grep alive
 
 
+fprintd
+Demonio D-Bus que permite a los aplicaciones acceder a los lectores de huellas dactilares conectados al sistema. Incluye la herramientas fprintd-delete, fprintd-enroll, fprintd-list y fprintd-verify
+# systemctl status fprintd (verificar el estado del demonio)
+# fprintd-list (Lista las huellas dactilares registradas del usuario)
+# fprintd-verify (compara las huellas dactilares del usuario con la base de datos)
+
+
 fpzip
 Utilidad para la compresión sin pérdida y opcionalmente con pérdida de matrices de punto flotante 2D y 3D. fpzip asume datos escalares correlacionados espacialmente, como funciones continuas muestreadas regularmente, y no es adecuado para comprimir secuencias no estructuradas de números de punto flotante.
 $ fpzip -i entrada.dat -o salida.fpzip (forma básica)
