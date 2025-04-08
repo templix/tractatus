@@ -768,6 +768,12 @@ Servidor MP3 simple escrito en C que no admite mezclas, programas de radio, etc,
 $ ample -p 8080 -d /musica/mp3 (reproducir los archivos de la carpeta mp3 en http://localhost:8080 o con http://IP:8080)
 
 
+amtterm
+Herramienta utilizada para interactuar con dispositivos que soportan la tecnología Intel AMT [Active Management Technology] la cual está diseñada principalmente para permitir la gestión remota de computadoras, incluso cuando el sistema operativo no está funcionando o si la máquina está apagada o fuera de banda [out-of-band - OOB]. Esto es posible gracias a que Intel AMT se encuentra integrado en el hardware de la placa base y el adaptador de red, lo que permite acceder y gestionar la máquina de manera remota a través de una interfaz pseudoserie similar a un puerto serial, pero usando la red. La herramienta utiliza el protocolo SOL [Serial Over LAN] para establecer una sesión de terminal remota sobre la red. Incluye amttool un script para recopilar información sobre las computadoras administradas por AMT y controlarlas remotamente.
+$ amtterm -H 192.168.1.100 -u admin -p 123456 (dirección IP de la máquina con Intel AMT habilitado, usuario y contraseña)
+$ amtterm -H 192.168.1.100 -u admin -p 123456 -P 16993 (por un puerto personalizado el 16993)
+
+
 an
 Generar anagramas para una palabra o frase proporcionada por el usuario.
 $ an -c 'lin' 'genial' (que empiece por las letras "lin" contenidas en "genial")
@@ -18397,6 +18403,15 @@ $ fortune -l (muestra citas largas)
 $ fortune -s (citas cortas)
 $ fortune /usr/share/games/fortunes/off/es/off/
 $ fortune /usr/share/games/fortunes/linux
+
+
+fpart
+Herramienta que ayuda a ordenar árboles de archivos y empaquetarlos en bolsas llamadas "particiones". Divide una lista de directorios y árboles de archivos en un número determinado de particiones, intentando generar particiones con el mismo tamaño y número de archivos y creando subcarpetas dentro de la carpeta original para cada partición. Una vez generadas, las particiones se imprimen como listas de archivos en la salida estándar [predeterminada] o como archivos.
+$ fpart -n 4 ~/Documentos (dividir una carpeta en 4 particiones iguales)
+$ fpart -s 100M ~/Documentos (dividir una carpeta en particiones de 100MB cada una)
+$ fpart -m 5000 ~/Documentos (dividir una carpeta en particiones con un máximo de 5000 archivos cada una)
+$ fpart -s 200M -m 3000 ~/Documentos (dividir una carpeta en particiones con un tamaño máximo de 200MB y un máximo de 3000 archivos)
+$ fpart -v ~/Documentos (verificar el estado de las particiones creadas)
 
 
 fping
