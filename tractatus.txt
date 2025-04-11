@@ -18653,6 +18653,23 @@ Finalmente entrar en router y colocar la ip del equipo donde hemos instalado el 
 # radtest USUARIO testing 127.0.0.1 1812 testing123 (Testear si la configuración de un usuario está correcta)
 
 
+freetds
+Conjunto de herramientas y bibliotecas que proporciona FreeTDS, un proyecto de código abierto que implementa el protocolo Tabular Data Stream [TDS]. Este protocolo es utilizado por Microsoft SQL Server y Sybase para la comunicación cliente-servidor. Incluye las herramientas bsqldb, bsqlodbc, datacopy, defncopy, fisql, freebcp, osql, tdspool y tsql
+$ tsql -S servidor -U usuario -P contraseña (conexión a un servidor MSSQL/Sybase)
+$ fisql -S servidor -U usuario -P contraseña -i entrada.sql -o salida.log (trabajar con scripts SQL)
+$ bsqldb -S servidor -U usuario -P contraseña -i script.sql -o resultado.txt (ejecución de scripts en modo batch)
+$ bsqlodbc -S servidor -U usuario -P contraseña (versión ODBC de bsqldb, usado para conectarse a través de ODBC en lugar de TDS directo)
+$ freebcp mi_base.dbo.mi_tabla in datos.txt -S servidor -U usuario -P contraseña -c (importar datos de una tabla. -c indica que se usará formato de texto)
+$ datacopy -S origen -U user1 -P pass1 -D db1 -t tabla -s destino -u user2 -p pass2 -d db2 -T tabla_destino (copiar datos directamente entre dos servidores MSSQL/Sybase)
+1.-
+Ejemplo de entrada
+# nano /etc/freetds/freetds.conf
+       [mi_servidor]
+           host = 192.168.1.100
+           port = 1433
+           tds version = 7.3
+
+
 freshclam
 [clamav-freshclam]. Actualizar la base de datos de virus. Ver clamav
 
