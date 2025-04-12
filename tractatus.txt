@@ -18805,6 +18805,13 @@ Se te pedirá eligir un nombre para la política de cifrado, puede dejarse en bl
 Nota.- Si la integración con PAM está configurada correctamente que a menudo se hace automáticamente durante la instalación de fscrypt, los directorios cifrados propiedad del usuario se desbloquearán automáticamente cuando el usuario inicia sesión en el sistema. Esto significa que no se tendrá que introducir la frase de contraseña de cada directorio cifrado individualmente después de iniciar sesión.
 
 
+fsm-lite
+Implementación ligera y eficiente de una máquina de estados finitos [Finite-State Machine - FSM] utilizada para el análisis de secuencias biológicas. Las máquinas de estados finitos son modelos computacionales que pueden estar en uno de un número finito de estados, y pueden cambiar de un estado a otro en respuesta a algunas condiciones o entradas. En bioinformática, estas máquinas se utilizan para analizar secuencias de ADN, ARN o proteínas, identificando patrones y subcadenas significativas.
+$ fsm-lite -p conjunto_sano.fasta -n conjunto_enfermo.fasta -o resultados.txt (compara las secuencias en conjunto_sano.fasta y conjunto_enfermo.fasta, y guarda los motivos distintivos en resultados.txt)
+$ fsm-lite -p proteinas_funcionales.fasta -n proteinas_no_funcionales.fasta -o motivos_proteinas.txt (analiza las secuencias de proteínas en proteinas_funcionales.fasta y proteinas_no_funcionales.fasta, y guarda los motivos encontrados en motivos_proteinas.txt)
+$ fsm-lite -p variantes_comunes.fasta -n variantes_raras.fasta -o variantes_motivos.txt (busca motivos que diferencien las secuencias en variantes_comunes.fasta y variantes_raras.fasta, guardando los resultados en variantes_motivos.txt)
+
+
 fspy
 Herramienta de monitorización de la actividad de un sistema de archivos.
 # fspy /home/usuario
