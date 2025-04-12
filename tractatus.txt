@@ -18785,6 +18785,26 @@ Y modificar la linea:
 FSCKFIX=yes
 
 
+fscrypt
+Es una herramienta útil para gestionar el cifrado a nivel de directorio en sistemas de archivos linux. Gestiona metadatos, generación de claves, encapsulado de claves, integración con PAM y proporciona una interfaz uniforme para crear y modificar directorios cifrados. No cifra todo el sistema de archivos, sino las carpetas que se especifiquen y sin necesidad de crear particiones cifradas separadas de los sistemas de archivos como ext4, F2FS, XFS y UBIFS.
+# fscrypt setup /data (inicializar fscrypt en el sistema de archivos donde se desea trabajar y pedirá una frase de contraseña para proteger la clave maestra de fscrypt)
+# fscrypt adduser usuario1 (permitir a usuario1 que pueda cifrar directorios ya que, por defecto, solo root puede cifrarlos después de la inicialización)
+# fscrypt list (mostrar información sobre los directorios cifrados)
+1.-
+Crear un directorio cifrado:
+$ cd /home/usuario1
+$ mkdir secreto
+# fscrypt encrypt secreto
+Se te pedirá eligir un nombre para la política de cifrado, puede dejarse en blanco para un nombre predeterminado y una frase de contraseña para este directorio específico, si no se especifica, se utilizará la frase de contraseña del usuario.
+# fscrypt unlock secreto (desbloquear para acceder a él y acceder al contenido como si fuera un directorio normal)
+# fscrypt lock secreto (volver a proteger el contenido del directorio)
+# fscrypt authorize secreto usuario2 (autorizar a usuario2 a acceder a secreto)
+# fscrypt revoke secreto usuario2 (revocar el acceso de un usuario)
+# fscrypt changepw secreto (cambiar la frase de contraseña de un directorio cifrado y pedirá la contraseña actual y luego la nueva)
+# fscrypt unencrypt secreto (deshacer el cifrado de un directorio)
+Nota.- Si la integración con PAM está configurada correctamente que a menudo se hace automáticamente durante la instalación de fscrypt, los directorios cifrados propiedad del usuario se desbloquearán automáticamente cuando el usuario inicia sesión en el sistema. Esto significa que no se tendrá que introducir la frase de contraseña de cada directorio cifrado individualmente después de iniciar sesión.
+
+
 fspy
 Herramienta de monitorización de la actividad de un sistema de archivos.
 # fspy /home/usuario
