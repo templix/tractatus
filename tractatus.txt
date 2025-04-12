@@ -18714,6 +18714,30 @@ freshclam
 [clamav-freshclam]. Actualizar la base de datos de virus. Ver clamav
 
 
+frr
+[Free Range Routing]. Se compone de varios demonios [servicios] que se pueden gestionar individualmente y que implementan y gestionan diversos protocolos de enrutamiento IPv4 e IPv6 tales como: BGP [Border Gateway Protocol], OSPF [Open Shortest Path First], RIP [Routing Information Protocol], ISIS [Intermediate System to Intermediate System], PIM [Protocol Independent Multicast] y LDP [Label Distribution Protocol]. Los demonios principales de FRR on: zebra [núcleo de FRR, maneja la tabla de enrutamiento del sistema operativo], bgpd [para BGP], ospfd [para OSPFv2]. ospf6d [para OSPFv3 (IPv6)], ripd [para RIP], ripngd [para RIPng (IPv6)], isisd [para IS-IS] y pimd [para multicast].
+1.-
+Ejemplo de configuración mínima para BGP
+# nano /etc/frr/daemons:
+       zebra=yes
+       bgpd=yes
+# nano /etc/frr/frr.conf
+       hostname router1
+       password zebra
+       enable password zebra
+       router bgp 65001
+        bgp router-id 1.1.1.1
+        neighbor 192.0.2.2 remote-as 65002
+        network 10.0.0.0/24
+# systemctl restart frr (reiniciar el servicio)
+Una vez que FRR está en marcha, se puede interactuar con la suite mediante el comando:
+# ntysh
+Y desde ahí se puede usar comandos como si se estuviera en un router Cisco, por ejemplo:
+        router# show ip bgp
+        router# conf t
+        router(config)# router ospf
+
+
 fsarchiver
 Es una herramienta similar a partimage para crear imágenes de una o varias particiones a la vez a un fichero asi como restaurar dichas imágenes más tarde.
 # fsarchiver savefs /data/imagen.fsa /dev/sda1 (creamos la imagen de la partición).
