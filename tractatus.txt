@@ -18670,6 +18670,42 @@ Ejemplo de entrada
            tds version = 7.3
 
 
+freezer-api
+Servicio backups, restauración de copias de seguridad y recuperación ante desastres de OpenStack como servicio. Contiene el demonio.
+# systemctl start freezer-api (iniciar el servicio)
+# freezer-api (iniciarlo directamente)
+# curl -X GET http://localhost:9090/v1/jobs -H "X-Auth-Token: YOUR_OPENSTACK_TOKEN" (listar jobs de backup)
+1.-
+Crear un nuevo job de backup
+# curl -X POST http://localhost:9090/v1/jobs -H "Content-Type: application/json" -H "X-Auth-Token: YOUR_TOKEN" -d '{
+      "job": {
+          "client_id": "nova-instance-1",
+          "job_actions": [
+              {
+                "freezer_action": {
+                    "action": "backup",
+                    "mode": "nova",
+                    "nova_instance_id": "1234-5678-90ab-cdef",
+                    "storage": "swift",
+                    "container": "my_backups"
+                }
+            }
+        ]
+    }
+}'
+2.-
+Configuración típica
+# nano /etc/freezer/freezer.conf
+       [DEFAULT]
+        log_file = /var/log/freezer/freezer-api.log
+        bind_host = 0.0.0.0
+        bind_port = 9090
+        auth_strategy = keystone
+        enable_v1_api = True
+       [database]
+        connection = mysql+pymysql://freezer:password@localhost/freezer
+
+
 freshclam
 [clamav-freshclam]. Actualizar la base de datos de virus. Ver clamav
 
