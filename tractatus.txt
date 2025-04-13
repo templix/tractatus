@@ -18922,6 +18922,14 @@ Respaldo. Es el comando que utiliza dump para hacer respaldos del sistema de arc
 Orden. indica el orden en que la aplicación fsck revisará la partición en busca de errores durante el inicio, si es cero el dispositivo no se revisa.
 
 
+fstransform
+Herramienta para cambiar un sistema de archivos de un formato a otro mientrs el sistema está funcionando, por ejemplo, de jfs/xfs/reiser a ext2/ext3/ext4, in situ y sin necesidad de copias de seguridad.
+# fstransform /dev/sda1 xfs2ext4 (convertir un volumen XFS a ext4)
+# fstransform /dev/sdb1 ext42x (convertirá un volumen del sistema de archivos ext4 al formato XFS)
+# fstransform --status (verificar el estado del proceso de transformación)
+# fstransform --cancel (cancelar una transformación en curso)
+
+
 fswebcam
 Capturas con la webcam.
 $ fswebcam --crop 200x100 --save out (Especificando medidas y archivo de salida)
