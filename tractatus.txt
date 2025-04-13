@@ -18812,9 +18812,80 @@ $ fsm-lite -p proteinas_funcionales.fasta -n proteinas_no_funcionales.fasta -o m
 $ fsm-lite -p variantes_comunes.fasta -n variantes_raras.fasta -o variantes_motivos.txt (busca motivos que diferencien las secuencias en variantes_comunes.fasta y variantes_raras.fasta, guardando los resultados en variantes_motivos.txt)
 
 
+fsmark
+Prueba de rendimiento para simular cargas de trabajo de escritura síncrona [write + fsync]. Puede variar el número de archivos, la profundidad del directorio, etc. Ofrece tiempos detallados de lectura, escritura, desvinculación y sincronización fsync.
+$ fsmark -d /tmp/fsmark-test -n 1000 -s 4096 -S (crear 1000 archivos de 4 KB, usar fsync en cada archivo después de escribir y todo en el directorio /tmp/fsmark-test)
+$ fsmark -d /tmp/fsmark-test -n 1000 -s 4096 -S -N 4 (ejecutará 4 procesos simultáneos, cada uno creando 1000 archivos de 4 KB)
+$ fsmark -d /tmp/fsmark-test -n 1000 -s 4096 -S -N 4 -D 10 -m (cada proceso creará sus archivos en 10 subdirectorios y mostrar tiempo detallado por operación)
+$ fsmark -d /tmp/fsmark-test -n 1000 -s 4096 -S -m (mostrará estadísticas detalladas como: tiempo promedio de escritura, tiempo en fsync, tiempo en borrado y tiempo de lectura)
+$ rm -rf /tmp/fsmark-test (después de ejecutar pruebas, limpiar el directorio temporal)
+1.-
+script de benchmarking con fsmark, diseñado para evaluar el rendimiento de un sistema de archivos con diferentes niveles de concurrencia, tamaños de archivos y estructuras de directorios.
+$ nano fsmark_benchmark.sh
+       #!/bin/bash
+       #
+       # Ruta base para las pruebas
+       TEST_DIR="/tmp/fsmark-test"
+       mkdir -p "$TEST_DIR"
+       #
+       # Parámetros generales
+       FILE_SIZE=4096       # Tamaño de archivo en bytes
+       FILES_PER_THREAD=1000
+       REPEAT=3             # Número de veces que repetir cada prueba
+       THREADS_LIST=(1 2 4 8)  # Pruebas con diferentes niveles de concurrencia
+       SUBDIRS_LIST=(1 10)     # Pruebas con diferentes números de subdirectorios
+       #
+       echo "=== FSMark Benchmark Script ==="
+       echo "Directorio de pruebas: $TEST_DIR"
+       echo "Tamaño de archivo: $FILE_SIZE bytes"
+       echo "Archivos por hilo: $FILES_PER_THREAD"
+       echo "Repeticiones por prueba: $REPEAT"
+       echo
+       #
+       # Verifica que fsmark esté instalado
+       if ! command -v fsmark &> /dev/null; then
+           echo "❌ Error: fsmark no está instalado. Intenta con: sudo apt install fsmark"
+           exit 1
+       fi
+       #
+       # Función para ejecutar una prueba
+       run_test() {
+           local threads=$1
+           local subdirs=$2
+           echo "--- Ejecutando prueba con $threads hilo(s), $subdirs subdirectorio(s) por hilo ---"
+               for ((i=1; i<=REPEAT; i++)); do
+                  echo "Repetición $i de $REPEAT..."
+                  fsmark -d "$TEST_DIR" -n "$FILES_PER_THREAD" -s "$FILE_SIZE" -N "$threads" -D "$subdirs" -S -m
+                  echo
+               done
+           echo
+        }
+        #
+        # Itera sobre combinaciones de hilos y subdirectorios
+        for threads in "${THREADS_LIST[@]}"; do
+            for subdirs in "${SUBDIRS_LIST[@]}"; do
+                run_test "$threads" "$subdirs"
+            done
+        done
+        #
+        # Limpieza final
+        echo "Limpieza del directorio de pruebas..."
+        rm -rf "$TEST_DIR"
+        echo " Benchmark completado."
+$ chmod +x fsmark_benchmark.sh
+$ ./fsmark_benchmarck.sh
+
+
 fspy
 Herramienta de monitorización de la actividad de un sistema de archivos.
 # fspy /home/usuario
+
+
+fssync
+es una herramienta de sincronización de archivos unidireccional que rastrea inodos y mantiene una base de datos local de archivos remotos, lo que le permite gestionar eficientemente una gran cantidad de directorios/archivos y detectar cambios de nombre, movimientos y enlaces físicos.
+$ fssync ~/documentos /mnt/respaldo/documentos (copiará solo archivos nuevos o modificados de documentos al respaldo, detectará los movidos en origen y los reflejará en el destino y mantendrá una base de datos en DESTINO/.fssync.db)
+$ fssync -n ~/documentos /mnt/respaldo/documentos (simula la sincronización sin ejecutar nada)
+$ fssync -a -v ~/documentos /mnt/respaldo/documentos (incluir los archivos ocultos y atributos y en modo detallado)
 
 
 fstab
