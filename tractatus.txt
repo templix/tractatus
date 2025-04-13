@@ -18878,7 +18878,9 @@ $ ./fsmark_benchmarck.sh
 
 fspy
 Herramienta de monitorización de la actividad de un sistema de archivos.
-# fspy /home/usuario
+# fspy -p 1234 (filtrar por un proceso específico usando su PID)
+# fspy -T f /etc/passwd (motinorizar un archivo)
+# fspy -T d /home/pep/.emacs.d/ (monitorizar un directorio)
 
 
 fssync
