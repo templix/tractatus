@@ -18938,6 +18938,13 @@ $ fstrcmp -a archivo1 archivo2 (compara dos archivos como arrays de bytes)
 $ fstrcmp -s aguja pajar (selecciona la cadena más similar a "aguja" dentro del conjunto "pajar")
 
 
+fstrm
+[fstrm-bin]. Implementación en C del protocolo Frame Streams, diseñado para transportar datos binarios con una sobrecarga mínima, usando solo cuatro bytes por trama. Es un protocolo ligero y flexible que no impone un formato de codificación específico, permitiendo el uso de formatos como Protocol Buffers, JSON, XML, MessagePack, YAML, entre otros.
+$ fstrm_capture -t application/dnstap -u /tmp/dnstap.sock -w output.fstrm (tipo de contenido, que los datos se leerán desde un socket Unix y se almacenarán en output.fstrm)
+$ fstrm_replay -r output.fstrm -u /tmp/dnstap_replay.sock (lee el archivo Frame Streams y envía los datos a un socket Unix)
+$ fstrm_capture -t application/dnstap -i 127.0.0.1:9000 -w output_tcp.fstrm (escucha en la dirección IP y puerto especificados y los datos recibidos se guardan en output_tcp.fstrm)
+
+
 fswebcam
 Capturas con la webcam.
 $ fswebcam --crop 200x100 --save out (Especificando medidas y archivo de salida)
