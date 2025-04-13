@@ -18930,6 +18930,14 @@ Herramienta para cambiar un sistema de archivos de un formato a otro mientrs el 
 # fstransform --cancel (cancelar una transformación en curso)
 
 
+fstrcmp
+Herramienta para realizar comparaciones difusas de cadenas [approximate string matching], o sea, que evalúa el grado de similitud entre dos cadenas, incluso si no son idénticas, utilizando métricas como la distancia de edición. El comando fstrcmp evalúa la similitud entre cadenas y devuelve un valor entre 0.0 [completamente diferentes] y 1.0 [idénticas].
+$ fstrcmp -p cadena1 cadena2 (compara dos cadenas como arrays de bytes, por defecto)
+$ fstrcmp -w cadena1 cadena2 (compara dos cadenas multibyte, útil para caracteres especiales o idiomas con codificación específica)
+$ fstrcmp -a archivo1 archivo2 (compara dos archivos como arrays de bytes)
+$ fstrcmp -s aguja pajar (selecciona la cadena más similar a "aguja" dentro del conjunto "pajar")
+
+
 fswebcam
 Capturas con la webcam.
 $ fswebcam --crop 200x100 --save out (Especificando medidas y archivo de salida)
