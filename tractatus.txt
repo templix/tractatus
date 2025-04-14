@@ -18982,6 +18982,17 @@ $ fsvs commit /etc -m "Actualización tras modificar nginx.conf" (después de re
 $ fsvs log /etc (inspeccionar el historial de commits)
 
 
+fswatch
+Herramienta multiplataforma que permite monitorear cambios en archivos y directorios, notificando cuando se modifican, crean, eliminan o mueven archivos dentro de las rutas especificadas.
+$ fswatch ~/Documentos (monitoreo básico de un archivo o directorio)
+$ fswatch -r ~/Documentos (monitoreo recursivo de un directorio)
+$ fswatch -o ~/Documentos | xargs -n 1 bash_command (ejecutar un comando cuando se detecta un cambio)
+$ fswatch --event Updated ~/Documentos (filtrará y notificará solo cuando se actualice el archivo o directorio especificado)
+$ fswatch -x ~/Documentos (imprime los indicadores de eventos junto con la ruta del evento)
+$ fswatch ~/Documentos ~/Videos (monitorear varios directorios)
+$ fswatch -1 ~/Documentos (genera un solo registro de evento por lote cuando loes cambios no son relevantes)
+
+
 fswebcam
 Capturas con la webcam.
 $ fswebcam --crop 200x100 --save out (Especificando medidas y archivo de salida)
@@ -36111,6 +36122,20 @@ ts
 [moreutils]
 Añade una marca de tiempo al principio de cada línea de entrada.
 $ ts (Escribir cualquier cosa y al darle al intro mostrará la marca del tiempo y lo escrito)
+
+
+tsduck
+Conjunto de herramientas y plugins agrupados bajo el nombre del ejecutable principal: tsp [Transport Stream Processor]. Su filosofía es proporcionar una arquitectura modular y extensible para flujos de transporte MPEG. TSDuck se utiliza en sistemas de televisión digital para pruebas, monitorización, integración, depuración, laboratorios y demostraciones.
+$ tslsdvb -v (identificar los adaptadores)
+$ tsscan --verbose --delivery-system "DVB-S2" --adapter 0 --europe --nit-scan -g --lnb 950,1275,10 --save-channels ~/.tsduck.channels.xml (escanear)
+$ tsp -I file mi_video.ts -P analyze (leerá mi_video.ts y el plugin analyze mostrará información como el número de paquetes, la presencia de tablas PSI/SI, los PIDs encontrados, etc)
+$ tsp -I file mi_video.ts -P filter 100 -O file salida_pid_100.ts (indica que se deben pasar solo los paquetes con PID 100)
+$ tsp -I dvb --adapter 0 --frontend 0 --frequency 1234 --symbol-rate 27500 -P tables --pat (especificar la tarjeta y el frontend a usar, los parámetros de la transmisión e indica que se debe mostrar la tabla PAT)
+$ tsp -I udp 192.168.1.10:1234 -P bitrate (mostrará el bitrate del flujo recibido en la dirección IP y puerto especificados)
+$ tsp -I file original.ts -P nullify --interval 10 -O file con_nulls.ts (inserta un Null Packet después de cada 10 paquetes originales)
+$ tsp -I file servicio1.ts -I file servicio2.ts -P mux -O file multiplexado.ts (usar plugins input [para múltiples entradas] y mux para combinar varios flujos o servicios en uno solo)
+$ tsp -I file video_con_subs.ts -P subtitle --dvb-teletext --output subtitulos.srt (extrae los subtítulos DVB en formato Teletext y los guarda en un fichero SRT)
+$ tsp -P filter --help (mostrará todas las opciones disponibles para el plugin filter)
 
 
 tset
