@@ -19008,6 +19008,23 @@ Algunas opciones:
 	--invert (Haciendo un negativo de la imagen)
 
 
+ftdi-eeprom
+Herramienta para crear y cargar la EEPROM [Electrically Erasable Programmable Read-Only Memory] de configuración del chip FTDI [Future Technology Devices International Limited]. Esta EEPROM contiene información como el ID del proveedor y del producto, las cadenas del fabricante y del producto, la revisión, etc.
+# ftdi-eeprom --device i:0x0403:0x6001 --read-eeprom (lee la EEPROM del dispositivo FTDI con ese vendor_id y product_id)
+# ftdi-eeprom ftdi.cfg --flash-eeprom (carga el archivo de configuración y escribe los nuevos valores en la EEPROM)
+# ftdi-eeprom ftdi.cfg --dry-run (muestra qué se cambiaría, sin escribir nada físicamente)
+1.-
+Ejemplo de configuración básica:
+# nano ftdi.cfg
+       vendor_id=0x0403
+       product_id=0x6001
+       manufacturer="MiEmpresa"
+       product="FTDI UART"
+       serial="123ABC"
+Este archivo indica que se usará el ID de proveedor 0x0403 [FTDI], el ID de producto será 0x6001 [típico de FT232] y se cambia el fabricante, el producto y el número de serie.
+Nota.- Hacer mal una configuración puede inutilizar temporalmente el chip.
+
+
 fte
 Editor. Según se lance desde las X o por consola se usará fte, xfte o sfte. F1 muestra todos los atajos y se accede a los menús de forma clásica con Alt+f...
 
