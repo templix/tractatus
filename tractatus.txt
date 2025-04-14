@@ -18945,6 +18945,43 @@ $ fstrm_replay -r output.fstrm -u /tmp/dnstap_replay.sock (lee el archivo Frame 
 $ fstrm_capture -t application/dnstap -i 127.0.0.1:9000 -w output_tcp.fstrm (escucha en la dirección IP y puerto especificados y los datos recibidos se guardan en output_tcp.fstrm)
 
 
+fsverity
+Función del kernel de Linux que realiza una verificación transparente y bajo demanda de la integridad y autenticidad del contenido de archivos de solo lectura, utilizando un árbol de Merkle oculto [árbol hash] asociado al archivo.
+$ fsverity enable archivo.bin (generar una firma para un archivo)
+$ fsverity enable --hash-alg=sha512 archivo.bin (o con un algoritmo hash específico, sha256 es el predeterminado))
+$ fsverity measure archivo.bin (comprobar si fs-verity está habilitado en un archivo)
+$ fsverity digest archivo.bin > archivo.digest (generar un resumen del archivo)
+$ openssl pkeyutl -sign -inkey clave-privada.pem -in archivo.digest -out archivo.sig (firmar el digest con una clave privada)
+$ fsverity enable --signature=archivo.sig archivo.bin (habilitar fs-verity con verificación de firma)
+$ mkfs.ext4 -O verity /dev/sdXY (crear un sistema de archivos ext4 con soporte para fs-verity)
+$ mount -o verity /dev/sdXY /punto/montaje (montar con soporte para fs-verity)
+
+
+fsvs
+[Fast System VerSioning]. Herramienta de copia de seguridad, restauración, versionado e implementación para árboles de directorios o sistemas de archivos completos, utilizando un repositorio de Subversion [SVN] como backend. Esto permite mantener un historial de cambios, similar a como lo hace SVN para código fuente, pero aplicado a sistemas de archivos, incluyendo metadatos como permisos, propietarios y tiempos de modificación. Se necesita un repositorio SVN accesible local o remoto
+$ fsvs urls file:///var/svn/repos-base file:///var/svn/repos-local /etc (superponer varios repositorios para separar contenido, un repositorio base y uno para modificaciones locales)
+$ fsvs commit /etc -m "Modificaciones locales" -o url=file:///var/svn/repos-local (al hacer commit, se puede elegir a qué repositorio enviar los cambios)
+$ fsvs remove /etc/old-config (marcar un archivo como eliminado en el repositorio)
+$ fsvs commit /etc -m "Eliminado old-config" (con el correspondiente commit)
+1.-
+Ejemplos de Uso
+Se supone que se tiene un repositorio SVN en file:///var/svn/repos y se quiere versionar el directorio /etc.
+Para comenzar a versionar el directorio [/etc], asociandolo con un repositorio SVN y realizar un "checkout" inicial:
+$ fsvs urls file:///var/svn/repos /etc
+Esto crea metadatos locales en /etc/.fsvs/ para rastrear los cambios.
+Una vez inicializado, realizar un commit de los archivos en /etc al repositorio:
+$ fsvs commit /etc -m "Copia de seguridad inicial de /etc"
+Esto guarda una instantánea de /etc, incluyendo permisos y estructura de directorios.
+$ fsvs status /etc (ver qué archivos han cambiado desde el último commit. M = modificado, N = nuevo, D = eliminado)
+$ fsvs update /etc (restaurar o sincronizar el directorio /etc con una versión específica del repositorio)
+$ fsvs cat /etc/hosts -r4 > /etc/hosts.restored (Extrae el contenido de un archivo en una revisión especifica [-r4])
+$ mv /etc/hosts.restored /etc/hosts (restaurarlo)
+$ fsvs ignore /etc/*.cache /etc/tmp/ (evitar versionar ciertos archivos o directorios)
+$ fsvs ignore dump (verificar los patrones ignorados)
+$ fsvs commit /etc -m "Actualización tras modificar nginx.conf" (después de realizar cambios en /etc, hacer un commit incremental)
+$ fsvs log /etc (inspeccionar el historial de commits)
+
+
 fswebcam
 Capturas con la webcam.
 $ fswebcam --crop 200x100 --save out (Especificando medidas y archivo de salida)
