@@ -19081,6 +19081,26 @@ $ lftp -u usuario,contraseña ftps://mi-servidor.com (conéctar desde un cliente
 # tcpdump -i eth0 port 21 -A (para ver que no se transmiten credenciales en texto plano. Si está cifrado, no se verá las contraseñas ni comandos legibles)
 
 
+ftpgrab
+Herramienta diseñada para descargar archivos desde servidores FTP, orientado a sitios web pequeños que no cuentan con los recursos para replicar árboles de versiones completos de software.
+$ ftpgrab -H ftp.ejemplo.com -u usuario -p contraseña -d /ruta/local/destino (descargar todos los archivos de un servidor FTP)
+$ ftpgrab -H ftp.ejemplo.com -u usuario -p contraseña -s /directorio/remoto -d /ruta/local/destino (Descarga de un directorio específico)
+$ ftpgrab -H ftp.ejemplo.com -u usuario -p contraseña -d /ruta/local/destino --newer-only (Descargar solo archivos nuevos o modificados)
+Ejemplo de archivo de configuración:
+# nano ftpgrab.conf
+       HOST="ftp.ejemplo.com"
+       USER="usuario"
+       PASSWORD="contraseña"
+       SRCDIR="/directorio/remoto"
+       DSTDIR="/ruta/local/destino"
+       NEWER_ONLY=true
+$ ftpgrab -f /ruta/a/ftpgrab.conf (lanzar la utilidad con el archivo especificado)
+Actualizar automáticamente el sitio web cada día a las 3 AM con cron
+$ crontab -e
+Y añadir la linea:
+0 3 * * * /usr/bin/ftpgrab -f /ruta/a/ftpgrab.conf
+
+
 funcoeszz
 Conjunto de 65 funciones y utilidades varias. Una vez instalado:
 $ funcoeszz zzzz --bashrc (Para colocar las lineas en .bashrc)
