@@ -19101,6 +19101,13 @@ Y añadir la linea:
 0 3 * * * /usr/bin/ftpgrab -f /ruta/a/ftpgrab.conf
 
 
+ftpmirror
+Duplicación de la jerarquía de directorios mediante el protocolo FTP par sincronizar directorios remotos con locales y viceversa.
+$ ftpmirror -v /local/directory ftp://user@server.com/path/to/destination (copiar un directorio local a un servidor FTP mostrando información durante la operación)
+$ ftpmirror ftp://user@server.com/path/to/source /local/directory (copiar desde un servidor FTP a un directorio local)
+$ ftpmirror -u ser -p password -r /local/directory ftp://server.com/path/to/destination (especificando usuario, contraseña y modo recursivo)
+
+
 funcoeszz
 Conjunto de 65 funciones y utilidades varias. Una vez instalado:
 $ funcoeszz zzzz --bashrc (Para colocar las lineas en .bashrc)
