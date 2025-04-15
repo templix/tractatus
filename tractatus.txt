@@ -19061,6 +19061,14 @@ Algunas opciones:
 	cd, dir, ls, list, mkdir, rmdir, pwd, rename (Funionan igual que en la shell)
 
 
+ftpcopy
+Cliente FTP diseñado para copiar archivos o directorios de forma recursiva desde un servidor FTP y generar listados de directorios, ya sea en texto plano o HTML
+$ ftpcopy -r ftp://usuario:contraseña@servidor.com/directorio_remoto /ruta/local/ (copiará todo el contenido del directorio remoto y subdirectorios a la ruta local especificada)
+$ ftpcopy ftp://servidor.com/archivo1.txt ftp://servidor.com/archivo2.txt /ruta/local/ (copiarán solo los archivos especificados del servidor remoto)
+$ ftpcopy -rv ftp://servidor.com/directorio_remoto /ruta/local/ --html (realiza una copia recursiva y detallada, generando además un listado HTML de los directorios)
+$ ftpcopy -rv ftp://servidor.com/directorio_remoto /ruta/local/ --text (lo mismo pero el listado en texto plano)
+
+
 funcoeszz
 Conjunto de 65 funciones y utilidades varias. Una vez instalado:
 $ funcoeszz zzzz --bashrc (Para colocar las lineas en .bashrc)
