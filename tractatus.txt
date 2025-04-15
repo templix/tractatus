@@ -19069,6 +19069,18 @@ $ ftpcopy -rv ftp://servidor.com/directorio_remoto /ruta/local/ --html (realiza 
 $ ftpcopy -rv ftp://servidor.com/directorio_remoto /ruta/local/ --text (lo mismo pero el listado en texto plano)
 
 
+ftpd-ssl
+Servidor FTP de NetKit con autentificación y cifrado SSL. Comprueba si la otra parte también utiliza SSL; de lo contrario, recurre al protocolo FTP convencional. La principal ventaja sobre el ftpd convencional es que sus contraseñas y los datos que envíe no se envian en texto plano, por lo que nadie podrá acceder a ellos con tcpdump, Wireshark ni herramientas similares.
+Archivo de configuración principal:
+# nano /etc/inetd.conf
+       ftp stream tcp nowait root /usr/sbin/tcpd /usr/sbin/in.ftpd -l -a
+La opción -a activa el modo SSL y -l registra todas las conexiones. Si se quiere asegurar de que solo se permita el acceso cifrado, cambiar -a por -A
+# openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/ftpd.key -out /etc/ssl/certs/ftpd.pem (generar un certificado autofirmado con OpenSSL)
+# service openbsd-inetd restart (reiniciar el servicio)
+$ lftp -u usuario,contraseña ftps://mi-servidor.com (conéctar desde un cliente FTP con soporte TLS/SSL, normalmente por el puerto 21)
+# tcpdump -i eth0 port 21 -A (para ver que no se transmiten credenciales en texto plano. Si está cifrado, no se verá las contraseñas ni comandos legibles)
+
+
 funcoeszz
 Conjunto de 65 funciones y utilidades varias. Una vez instalado:
 $ funcoeszz zzzz --bashrc (Para colocar las lineas en .bashrc)
