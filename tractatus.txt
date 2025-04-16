@@ -19108,6 +19108,27 @@ $ ftpmirror ftp://user@server.com/path/to/source /local/directory (copiar desde 
 $ ftpmirror -u ser -p password -r /local/directory ftp://server.com/path/to/destination (especificando usuario, contraseña y modo recursivo)
 
 
+ftpsync
+Herramienta específica para sistemas basados en Debian que se utiliza para sincronizar archivos entre un servidor y sus clientes. Intenta que las actualizaciones sean lo más fluidas posible, evitando que los clientes experimenten réplicas a medias. Admite réplicas parciales por arquitectura. El archivo de configuración de /etc/apt.conf.d/01ftpsync.
+# ftpsync (sincronizar el sistema con los repositorios oficiales de Debian)
+# ftpsync -vd --no-download (modo verbose y debug y no descargar archivos nuevos)
+# ftpsync -t "package1 package2" server1.example.com (con varios servidores Debian y solo sincronizar ciertos paquetes)
+# apt update (después de ejecutar ftpsync,verificar si hay actualizaciones pendientes)
+
+
+ftpwatch
+Herramienta que permite monitorear cambios en directorios de servidores FTP remotos y notificar al usuario cuando ocurren modificaciones, como nuevos archivos, eliminaciones o cambios. Este paquete es preferible instalarse como una tarea cron.
+$ ftpwatch -u usuario -p contraseña ftp.ejemplo.com /directorio/remoto (monitorear un directorio FTP)
+$ ftpwatch -u usuario -p contraseña -s ~/ftp_snapshot.db ftp.ejemplo.com /directorio (guardar la instantánea en un archivo específico especificado con -s)
+$ ftpwatch -v -u usuario -p contraseña -m admin@ejemplo.com ftp.ejemplo.com /descargas (en modo verbose y notificar por correo si hay cambios con el parámetro -m)
+$ ftpwatch -u usuario -p contraseña -c "/ruta/script.sh" ftp.ejemplo.com /nuevos_archivos (ejecutar un script cuando haya cambios con el prámetro -c)
+Programar ftpwatch en un cron para que verifique cambios cada hora:
+$ crontab -e
+Y añadir la linea
+0 * * * * ftpwatch -u usuario -p contraseña -m tu@email.com ftp.ejemplo.com /informes
+Nota.- Las contraseñas en la línea de comandos pueden ser inseguras, mejor usar -p sin valor para que la pida interactivamente y para FTPs anónimos, usar -u anonymous y dejar la contraseña vacía.
+
+
 funcoeszz
 Conjunto de 65 funciones y utilidades varias. Una vez instalado:
 $ funcoeszz zzzz --bashrc (Para colocar las lineas en .bashrc)
