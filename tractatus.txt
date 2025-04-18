@@ -19184,6 +19184,39 @@ $ rm /mnt/zipfs/nuevo_file.txt (eliminar un archivo de un zip)
 $ mv /mnt/zipfs/original.txt /mnt/zipfs/nuevo_nombre.txt (renombrar un archivo de un zip)
 
 
+fuseext2
+Se utiliza para montar sistemas de archivos ext2, ext3 y ext4 en sistemas que soportan FUSE [Filesystem in USErspace].
+$ fuse-ext2 /dev/sda1 /mnt/sda1 (monta el dispositivo /dev/sda1 en el punto de montaje /mnt/sda1 con permisos de lectura y escritura)
+$ fuse-ext2 ext2.img /mnt/ext2_image -o rw+ (monta la imagen ext2.img en el punto de montaje /mnt/ext2_image con permisos de lectura y escritura)
+$ fuse-ext2 /dev/sda1 /mnt/sda1 -o ro,allow_other (monta el dispositivo /dev/sda1 en /mnt/sda1 en modo solo lectura y permite que otros usuarios accedan al sistema de archivos)
+
+
+fusefat
+Herramienta que permite montar sistemas de archivos FAT [FAT12, FAT16, FAT32, exFAT] en Linux utilizando el módulo FUSE [Filesystem in USErspace] del kernel y sin requerir permisos de root. Puede tener un rendimiento menor en comparación con los controladores nativos del kernel como vfat.
+# modprobe fuse (ver si el módulo FUSE esté cargado en el kernel)
+$ lsmod | grep fuse (verificar si FUSE está activo)
+$ fusefat disco.img /mnt/fat -o ro (monta la imagen en modo solo lectura)
+$ fusefat /dev/sdb1 ~/usb -o default_permissions,uid=$(id -u),gid=$(id -g) (permitir que el kernel maneje los permisos y que el sistema de archivos sea accesible por el usuario actual )
+$ fusefat disco.img /mnt/fat -o rw+,default_permissions (la escritura en la imagen o dispositivo es experimental y puede corromper el sistema de archivos)
+$ fusefat disco.img /mnt/fat -d -o ro (muestra mensajes de depuración y mantiene el proceso en primer plano)
+
+
+fusefile
+Utilidad que utiliza el sistema de archivos FUSE [Filesystem in USErspace] para presentar múltiples fragmentos de archivos individuales como si fueran un único archivo contiguo. En lugar de copiar físicamente el contenido de los archivos fragmentados en un nuevo archivo, fusefile crea un sistema de archivos virtual. Cuando una aplicación intenta acceder al archivo "montado" creado por fusefile, este intercepta las peticiones de lectura y las redirige a los fragmentos de archivo originales en el orden correcto. Para la aplicación, parece que está leyendo un único archivo continuo.
+$ fusefile parte1.txt parte2.txt /mnt/punto_montaje/completo.txt (leer el contenido de /mnt/punto_montaje/completo.txt)
+$ fusermount -u /mnt/punto_montaje/completo.txt (desmontar el sistema de archivos FUSE)
+$ fusefile archivo1.txt:0-1024 archivo2.txt:512- archivo_combinado.txt (se tomarían los primeros 1024 bytes de archivo1.txt y desde el byte 512 hasta el final de archivo2.txt para presentarlos como archivo_combinado.txt)
+$ fusefile -o overlay=overlay.dat parte1.txt parte2.txt /mnt/combinado_rw.txt (las escrituras realizadas en /mnt/combinado_rw.txt se almacenarían en overlay.dat)
+
+
+fuseiso
+Este paquete proporciona un módulo para montar imágenes ISO del sistema de archivos mediante FUSE como si fueran dispositivos físicos. También permite montar archivos .bin, .mdf, .img y .nrg de pista única.
+# fuseiso imagen.iso /punto/montaje (montar la iso de forma básica)
+# fuseiso http://example.com/image.iso /mnt/cdrom (montar una imagen ISO desde una URL)
+# fuseiso image1.iso image2.iso /mnt/cdrom1 /mnt/cdrom2 (montar múltiples imágenes ISO)
+# umount /mnt/cdrom1 (desmontar)
+
+
 fuser
 Cerrar particiones rebeldes, saber aplicaciones que corren en un puerto...
 $ fuser -km /media/sda6     (Mata todos los procesos de la partición especificada. Luego desmontarla normal con umount)
@@ -19198,6 +19231,13 @@ fusermount
 # fusermount -o /media/punto_montaje (montar un sistema de archivos)
 # fusermount -z /media/punto_montaje (Desmontar el sistema de archivos tan pronto como deje de usarse)
 # fusermount -u /media/punto_montaje (Desmonta un sistema de archivos)
+
+
+fusioninventory-agent
+Aplicación diseñada para realizar seguimiento de las configuraciones de hardware y software de los dispositivos. Funciona en segundo plano, recolectando datos y enviándolos automáticamente al servidor configurado, usualmente un servidor GLPI [Gestionnaire Libre de Parc Informatique] con el plugin FusionInventory. GLPI es un paquete de software de gestión de activos y TI que proporciona funciones de ITIL Service Desk, seguimiento de licencias y auditoría de software. La aplicación recopila información de hardware: CPU, RAM, discos, red, etc. y software: sistemas operativos, programas instalados, licencias, etc.
+# fusioninventory-agent --server http://mi-servidor-glpi/plugins/fusioninventory/ (inventario manual y enviarlo al servidor GLPI)
+# fusioninventory-agent --debug (ver en detalle los pasos que realiza el agente, útil para solucionar problemas de comunicación o configuración)
+# fusioninventory-agent --local=/ruta/salida/inventario.xml (ejecutar el inventario y guardar el resultado en un archivo local, sin enviarlo al servidor)
 
 
 fwanalog
