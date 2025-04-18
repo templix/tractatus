@@ -19240,6 +19240,23 @@ Aplicación diseñada para realizar seguimiento de las configuraciones de hardwa
 # fusioninventory-agent --local=/ruta/salida/inventario.xml (ejecutar el inventario y guardar el resultado en un archivo local, sin enviarlo al servidor)
 
 
+fuzz
+Pruebas de estrés [fuzz testing] en programas introduciendo datos aleatorios o malformados para detectar vulnerabilidades, fallos o comportamientos inesperados. El proxy para inyectar datos aleatorios es zzuf [ver]
+$ zzuf -r 0.1 -s 1234 ./mi_programa < entrada.txt (modifica el 10% de los bytes de entrada y semilla aleatoria para reproducibilidad)
+$ zzuf -r 0.2 -- curl http://localhost:8080/?param=test (altera la URL aleatoriamente para ver si el servidor responde correctamente)
+$ afl-fuzz -i input_dir -o output_dir ./programa_test (mutación guiada para encontrar bugs)
+
+
+fuzzyocr
+plugin para SpamAssassin que ayuda a detectar spam en imágenes utilizando reconocimiento óptico de caracteres [OCR]. Su propósito principal es analizar archivos adjuntos de imágenes en formatos GIF, JPEG o PNG para buscar palabras clave que suelen aparecer en mensajes de spam. En un servidor de correo, FuzzyOCR se ejecuta automáticamente cuando SpamAssassin procesa los mensajes entrantes, añadiendo puntuaciones de spam a los mensajes con imágenes sospechosas.
+Configuración básica
+# nano /etc/mail/spamassassin/v310.pre
+Y añadir la línea:
+         loadplugin Mail::SpamAssassin::Plugin::FuzzyOcr
+$ spamassassin -D fuzzyocr --lint (probar el funcionamiento)
+$ spamassassin -D fuzzyocr < mensaje_sospechoso.eml (analizar un correo específico)
+
+
 fwanalog
 Analiza y resume los archivos de registro del firewall.
 # fwanalog /ruta/al/firewall.log (analizará el archivo firewall.log y generará un informe en HTML para abrir con el navegador)
