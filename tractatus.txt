@@ -19306,6 +19306,21 @@ $ find . -name "*.sh" | fzf (encontrar archivos por extensión)
 $ git checkout $(git branch | fzf) (muestra una lista de ramas y permite buscar la que se quiere cambiar)
 
 
+fzy
+Es un selector de texto difuso rápido y sencillo para la terminal con un algoritmo de puntuación avanzado. Su utilidad principal es permitirte buscar y seleccionar interactívamente entre una lista de opciones, como archivos, comandos o cualquier texto, con una interfaz minimalista y eficiente.
+La búsqueda difusa (fuzzy search) no necesita que se escriba exactamente el texto que se está buscando. Por ejemplo, con una lista de archivos:
+$ ls pruebas
+     documento_final.txt
+     docu_borrador.txt
+     resumen.doc
+     finanzas_2023.xlsx
+$ ls | fzy -q df
+Mostrará documento_final.txt, porque las letras están en orden y se parecen a lo que se está buscando, aunque no sea una coincidencia exacta. Si hay varias posibilidades, las mostrará y se selecciona la que proceda.
+$ find . -type f | fzy (muestra todos los archivos del directorio actual y subdirectorios)
+$ cat $(find . -type f | fzy) (permite elegir un archivo y luego lo muestra con cat)
+$ history | fzy (buscar entre comandos recientes de shell para volver a ejecutarlos)
+
+
 gawkbug
 Es un script de shell para ayudar al usuario a redactar y enviar informes de errores relacionados con gawk en un formato estándar. gawkbug invoca el editor especificado por la variable de entorno EDITORs.
 $ gawkbug (El usuario debe completar los campos correspondientes y salir del editor)
