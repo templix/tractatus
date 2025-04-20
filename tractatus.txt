@@ -19355,6 +19355,39 @@ BEGIN MONITORING /home/tu_usuario/prueba_gamin
        DELETE archivo1.txt
 
 
+ganeti
+Herramienta de gestión de clústeres de servidores virtuales basada en las tecnologías de virtualización Xen, KVM y, en algunos casos, LXC. Proporciona un entorno automatizado para gestionar instancias de máquinas virtuales de alta disponibilidad. Está diseñado para facilitar la gestión de clústeres de servidores virtuales que utilizan hardware estándar y para proporcionar una recuperación rápida y sencilla tras fallos físicos.
+# gnt-cluster init --vg-name=vg_ganeti --default-iaas=xen --nic-parameters link=xenbr0 cluster1.com (inicializa el clúster en el nodo principal con un grupo de volúmenes llamado vg_ganeti y un bridge xenbr0
+# gnt-node list (ver los nodos físicos que componen el clúster)
+# gnt-node add venus.example.com (añadir un nuevo nodo al cluster que ha de tener Ganeti instalado, el hostname configurado y las claves SSH regeneradas)
+# gnt-instance add -t plain -o debootstrap+default --disk 0:size=10g -m 1024 -n marte.example.com minmei.example.com (crear una máquina virtual usando debootstrap que instala un sistema base))
+Los argumentos:
+       - -t plain: Usa almacenamiento LVM (sin DRBD).
+       - -o debootstrap+default: Instala un sistema Debian base.
+       - --disk 0:size=10g: Crea un disco de 10 GB.
+       - -m 1024: Asigna 1 GB de RAM.
+       - -n marte.example.com: Nodo donde se alojará la instancia.
+       - minmei.example.com: Nombre de la instancia.
+# gnt-instance startup minmei.example.com (iniciar una instancia)
+# gnt-instance shutdown minmei.example.com (detenerla)
+# gnt-instance reboot minmei.example.com (reiniciarla)
+# gnt-instance console minmei.example.com (acceder a la consola de una instancia)
+# gnt-instance migrate minmei.example.com (migrar una instancia a otro nodo [failover])
+# gnt-instance failover -n venus.example.com minmei.example.com (mover la instancia al nodo venus.example.com)
+# gnt-instance grow-disk minmei.example.com sda 2g (aumentar el tamaño del disco de la instancia a 12 GB. Ha de reiniciarse)
+# gnt-instance modify -m 128 minmei.example.com (cambiar la memoria a 128 MB. Los cambios se aplican tras reiniciar la instancia)
+# gnt-instance remove minmei.example.com (eliminar una máquina virtual)
+# gnt-instance list (listar instancias en el clúster)
+# gnt-instance modify -H vnc_bind_address= minmei.example.com (optimizar parámetros como VNC)
+# gnt-instance modify -H mouse_type= minmei.example.com (optimizar parámetros como el ratón)
+1.-
+Conceptos clave de Ganeti
+          - Nodo: Servidor físico que forma parte del clúster y aloja máquinas virtuales.
+          - Instancia: Máquina virtual gestionada por el clúster.
+          - Clúster: Conjunto de nodos coordinados para ejecutar y gestionar instancias.
+          - Comandos principales: Los comandos de Ganeti comienzan con gnt-, como gnt-cluster, gnt-node, gnt-instance, etc.
+
+
 gawkbug
 Es un script de shell para ayudar al usuario a redactar y enviar informes de errores relacionados con gawk en un formato estándar. gawkbug invoca el editor especificado por la variable de entorno EDITORs.
 $ gawkbug (El usuario debe completar los campos correspondientes y salir del editor)
