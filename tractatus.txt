@@ -21920,6 +21920,39 @@ $ innotop -u USER -p PASS -h localhost -P 3306
 Nota.- Pulsar "q" para salir.
 
 
+inotify-tools
+[INOde noTIFY]. La notificación de inodos es un subsistema que monitoriza eventos en el sistemas de archivos y los reporta a las aplicaciones en tiempo real mediante la API y también puede usarse para monitorizar archivos o directorios individuales. Al monitorizar un directorio, inotify devolverá eventos para el propio directorio y para los archivos dentro de él. Incluye las herramientas fsnotifywait, fsnotifywatch, inotifywait y inotifywatch
+$ inotifywait -m /ruta/al/directorio (monitorizar un directorio por cualquier evento)
+$ inotifywait -m -e create -e modify -e delete /ruta/al/directorio (monitorizar solo ciertos eventos como creación, modificación y eliminación)
+$ inotifywait -m -r -e create /ruta/al/directorio (monitorizar recursivamente en un directorio)
+$ inotifywatch -v -t 60 -r /ruta/al/directorio (recopilar estadísticas durante 60 segundos)
+$ inotifywatch -v -e access -e modify -t 30 /ruta/al/directorio (monitorizar solo ciertos eventos)
+Algunos eventos comunes que se pueden monitorizar:
+          - access: Acceso a contenido
+          - modify: Cambio de contenido
+          - attrib: Cambio de atributos
+          - close_write: Cierre después de escritura
+          - create: Creación en directorio
+          - delete: Eliminación en directorio
+          - move: Movimiento en directorio
+1.-
+Script Bash para monitorizar un directorio:
+$ nano monitor.sh
+       #!/bin/bash
+       #
+       DIRECTORIO=~/prueba
+       #
+       echo "Observando cambios en: $DIRECTORIO (Ctrl+C para salir)"
+       #
+       inotifywait -m -e create -e modify -e delete -e move "$DIRECTORIO" |
+       while read ruta evento archivo; do
+           echo "[EVENTO] $evento en $archivo"
+       done
+$ chmod +x monitor.sh (permisos de ejecución)
+$ ./monitor.sh (ejecutarlo y quedará a la espera de las modificaciones que se produzcan en el directorio ~/prueba)
+Después, en otra terminal, crear, editar o borrar archivos en el directorio ~/prueba y en la terminal donde se ha lanzado monitor.sh se verá los eventos en tiempo real.
+
+
 inputrc
 (archivo /etc/inputrc y ~/.inputrc). Librería readline que permite editar líneas de texto usando los modos de emacs y vi. Esto permite estandarizar las combinaciones de teclas entre muchos comandos.
 $ nano .inputrc
