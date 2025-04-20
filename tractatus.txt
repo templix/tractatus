@@ -19338,6 +19338,23 @@ es una herramienta forense que examina el contenido de las cookies generadas por
 $ galleta -t FD archivo (cambia el delimitador de campo predeterminado [TAB] a FD del archivo de cookies para analizar)
 
 
+gamin
+Demonio para monitorizar cambios en el sistema de archivos, que permite a las aplicaciones detectar cuándo un archivo o directorio ha sido añadido, eliminado o modificado. Por ejemplo, si un administrador de archivos muestra un directorio al usuario y este elimina uno de los archivos, Gamin notificará al administrador sobre este cambio para que pueda actualizar la visualización del directorio. Gamin ha sido diseñado como un reemplazo directo de FAM [File Alteration Monitor], priorizando la seguridad y la facilidad de mantenimiento, y puede utilizar el servicio avanzado inotify de Linux cuando esté disponible. En la mayoría de los casos, gamin se ejecuta como un servicio del sistema, y las aplicaciones lo usan indirectamente mediante llamadas a su API. Es decir, no es algo que se suela ejecutar directamente desde línea de comandos.
+1.-
+Ejemplo práctico usando fam [cliente de gamin] para ver notificaciones de cambios
+$ mkdir ~/prueba_gamin(crea un directorio de prueba)
+$ famcat ~/prueba_gamin (usa famcat para monitorizar, queda esperando)
+En otra terminal, crear o modificar archivos dentro del directorio:
+$touch ~/prueba_gamin/archivo1.txt
+$ echo "hola" >> ~/prueba_gamin/archivo1.txt
+$ rm ~/prueba_gamin/archivo1.txt
+En la terminal de famcat, se verán mensajes como:
+BEGIN MONITORING /home/tu_usuario/prueba_gamin
+       CREATE archivo1.txt
+       CHANGE archivo1.txt
+       DELETE archivo1.txt
+
+
 gawkbug
 Es un script de shell para ayudar al usuario a redactar y enviar informes de errores relacionados con gawk en un formato estándar. gawkbug invoca el editor especificado por la variable de entorno EDITORs.
 $ gawkbug (El usuario debe completar los campos correspondientes y salir del editor)
