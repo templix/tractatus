@@ -19388,6 +19388,22 @@ Conceptos clave de Ganeti
           - Comandos principales: Los comandos de Ganeti comienzan con gnt-, como gnt-cluster, gnt-node, gnt-instance, etc.
 
 
+gant
+Herramienta de construcción [build tool] que permite definir y automatizar tareas de compilación usando scripts escritos en Groovy, en lugar de los tradicionales archivos XML de Apache Ant. Gant combina la potencia de Ant y su ecosistema de tareas con la flexibilidad y expresividad de Groovy como lenguaje de scripting.
+$ gant -T (listar los targets disponibles)
+1.-
+Como ejemplo básico, crear un archivo build.gant como una tarea sencilla que imprima un mensaje
+$ nano build.gant
+       groovy
+       target(sayHello: "Saying hello") {
+           Ant.echo(message: "Hola Mundo desde Gant")
+       }
+       setDefaultTarget(sayHello)
+$ gant (ejecutar el script donde esté build.gant, siempre es el predeterminado)
+Si se definen varios targets, se ejecutan por nombre:
+$ gant -v -f build2.gant (ejecutar build2.gant en modo verbose)
+
+
 gawkbug
 Es un script de shell para ayudar al usuario a redactar y enviar informes de errores relacionados con gawk en un formato estándar. gawkbug invoca el editor especificado por la variable de entorno EDITORs.
 $ gawkbug (El usuario debe completar los campos correspondientes y salir del editor)
