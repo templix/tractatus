@@ -19430,6 +19430,17 @@ $ echo "Return code is $?"
         Return code is 1
 
 
+garmin-forerunner-tools
+Herramientas para recuperar datos de dispositivos GPS Garmin, especialmente las series Forerunner, dispositivos similares a relojes de pulsera que permiten registrar el itinerario exacto al practicar deportes al aire libre y datos específicos como velocidad máxima, resumen de vueltas, consumo de calorías, etc. Funciona con los modelos Forerunner 205 y 305, así como con el Edge 305 y posiblemente otros. Los datos de recorrido se pueden convertir a formato XML, a GPX y a formato de polilínea para su uso con Google Maps.
+$ garmin_get_info (ver información básica del dispositivo)
+$ garmin_save_runs -t guardar/ (exportar todos los entrenamientos a archivos TCX. Creará archivos como actividad_20230415_142345.tcx para cada entrenamiento)
+$ garmin_gpx -o ruta_carrera.gpx (exportar una ruta específica a formato GPX para aplicaciones como Strava, Google Earth o Garmin Basecamp)
+$ garmin_dump > datos_brutos.txt (extraer datos en bruto para diagnóstico)
+$ garmin_save_waypoints -l  (listar waypoints [puntos de interés])
+$ garmin_save_waypoints -w mis_puntos.wpt (extraer waypoints)
+Nota.- Existen herramientas más modernas como gpsbabel [más universal para dispositivos GPS], python-ant-downloader [para dispositivos con ANT+] y las propias herramientas de Garmin [Garmin Express]
+
+
 gawkbug
 Es un script de shell para ayudar al usuario a redactar y enviar informes de errores relacionados con gawk en un formato estándar. gawkbug invoca el editor especificado por la variable de entorno EDITORs.
 $ gawkbug (El usuario debe completar los campos correspondientes y salir del editor)
