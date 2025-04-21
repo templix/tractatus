@@ -19404,6 +19404,32 @@ Si se definen varios targets, se ejecutan por nombre:
 $ gant -v -f build2.gant (ejecutar build2.gant en modo verbose)
 
 
+gappa
+Herramienta para ayudar a verificar propiedades matemáticas, en particular en programas que utilizan aritmética de punto flotante o fijo, como en simulaciones científicas, cálculos numéricos, etc. Permite especificar expresiones matemáticas, normalmente relacionadas con errores de redondeo y demuestra automáticamente que ciertas propiedades se cumplen usando técnicas de intervalos y razonamiento formal.
+1.-
+Ejemplo para verificar una prueba formal de la propiedad
+$ nano ejemplo.g
+       { c in [-0.3,-0.1] /\
+         (2 * a in [3,4] -> b + c in [1,2]) /\
+         a - c in [1.9,2.05]
+         -> b + 1 in [2,3.5] }
+$ gappa ejemplo.g
+2.-
+Ejemplo
+$ echo "{ x in [-2,2] -> x * x in ? }" > ejemplo.gappa
+$ gappa -Bcoq ejemplo.g > test.v (genera un script que comprueba la fórmula lógica en test.v)
+        Results:
+          x * x in [0, 4]
+$ gappa -Bnull ejemplo.g (mismo ejemplo sin generar el script. Es el predeterminado)
+3.-
+Ejemplo con un error
+$ echo "{ 1 + 1 = 3 }" | gappa
+        Error: some properties were not satisfied:
+          EQL(1 + 1, 3)
+$ echo "Return code is $?"
+        Return code is 1
+
+
 gawkbug
 Es un script de shell para ayudar al usuario a redactar y enviar informes de errores relacionados con gawk en un formato estándar. gawkbug invoca el editor especificado por la variable de entorno EDITORs.
 $ gawkbug (El usuario debe completar los campos correspondientes y salir del editor)
