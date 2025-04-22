@@ -18161,7 +18161,7 @@ Nota.- fondu es ideal para fuentes antiguas de Mac. Para fuentes modernas o conv
 
 
 fontconfig
-Biblioteca de configuración y personalización de fuentes que no depende del sistema X Window. Está diseñada para localizar fuentes dentro del sistema y seleccionarlas según los requisitos especificados por las aplicaciones. Este paquete   un programa para  ().
+Biblioteca de configuración y personalización de fuentes que no depende del sistema X Window. Está diseñada para localizar fuentes dentro del sistema y seleccionarlas según los requisitos especificados por las aplicaciones.
 $ fc-cache -f -v (actualizar la caché de fuentes)
 $ fc-list (listar las fuentes instaladas)
 $ fc-match (probar reglas de coincidencia)
@@ -19457,9 +19457,34 @@ Información en inglés del comando gawk. Acceder a la misma con el navegador co
 	file:///usr/share/doc/gawk-doc/gawkworkflow-html/index.html
 
 
+gcal
+Muestra un calendario mensual, anual, días festivos, fechas fijas, etc.
+$ gcal (muestra el mes actual)
+$ gcal 2025 (el año actual o año especificado)
+$ gcal --year 2025 (lo mismo)
+$ gcal 2025/05 (muestra el calendario de mayo del 2025)
+$ gcal --usage=ARG (muestra todos los posibles argumentos del comando)
+$ gcal --month 6 (el junio del presente año)
+$ gcal --month 6 --year 2026 (junio del 2026)
+$ gcal --year 2023 --type holiday (ver los días festivos de un año)
+$ gcal --type fixed_dates (ver las fechas fijas programadas)
+
+
 gcalccmd
 Calculadora.
 $ gcalccmd (Entra en el prompt y se teclea por ejemplo 5*4 y dará el resultado)
+
+
+gcalcli
+Aplicación de Python que permite interractuar con Google Calendar del usuario para ver la agenda diaria, semanal o mensual, añadir, eliminar o modificar eventos, etc. Además, puede utilizarse como servicio de recordatorios para ejecutar cualquier aplicación que se desee. Precisa autenticación con la cuenta de Google.
+$ gcalcli agenda (ver los eventos de hoy)
+$ gcalcli agenda --days 7 (ver eventos de una semana)
+$ gcalcli calw 4 (ver 4 semanas - CALendar Week)
+$ gcalcli calm (ver el calendario mensual - CALendar Month)
+$ gcalcli add (abrirá una serie de prompts interactivos para introducir título, hora, fecha, etc)
+$ gcalcli add --title "Reunión con equipo" --where "Oficina" --when "2025-04-23 14:00" --duration 1 --description "Planificación de sprint" (o hacerlo con una sola línea)
+$ gcalcli search "Reunión" (buscar eventos)
+$ gcalcli delete (eliminar un evento)
 
 
 gcalctool
