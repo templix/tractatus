@@ -28246,8 +28246,30 @@ $ unzip -p archivo.odt content.xml | o3totxt > archivo.txt
 $ unzip -p archivo.sxw content.xml | o3tohtml > archivo.html
 
 
+oathtool
+Kit de herramientas OATH [Open AuTHentication] que proporciona componentes para crear sistemas de autenticación de contraseñas de un solo uso [OTP]. Contiene un módulo PAM, el algoritmo HOTP [Hmac-based One-Time Password] basado en eventos [RFC 4226], el algoritmo TOTP [Time-based One-Time Password] basado en tiempo [RFC 6238] y el Contenedor de Claves Simétricas Portátil [PSKC, RFC 6030] para gestionar los datos de claves secretas codificadas en base32 o hexadecimal. TOTP genera un código que cambia cada cierto tiempo, por defecto cada 30 segundos. Usa el tiempo actual y HOTP genera códigos basados en un contador. Ambos usan una clave secreta compartida entre el cliente y el servidor.
+$ oathtool --totp -b JBSWY3DPEHPK3PXP (genera el mismo código que daría una app de autenticación como Google Authenticator)
+$ oathtool --totp -b --verbose JBSWY3DPEHPK3PXP (ver más información)
+$ oathtool -b --counter=0 JBSWY3DPEHPK3PXP (cada vez que incrementes el contador, generará un código diferente [counter=2])
+$ echo 54 | oathtool - (generar la primera contraseña de un solo uso basada en eventos [HOTP] para una clave de todos ceros)
+$ oathtool --base32 -w 3 GEZDGNBVGY3TQOJQGEZDGNBVGY3TQOJQ (genera 3 codigos)
+
+
 obconf
 Herramienta para la configuración gráfica de entornos de escritorio ligeros (lxde, openbox...)
+
+
+obexftp
+Herramienta que permite transferir archivos utilizando FUSE entre la computadora y dispositivos móviles como teléfonos celulares u otros dispositivos que soporten el protocolo OBEX [OBject EXchange]. Lo más destacado es que permite montar el sistema de archivos de estos dispositivos directamente en el sistema Linux, como si fuera una unidad externa. Soporta dispositivos conectados por cable serie, IrDA, Bluetooth o USB.
+$ hcitool scan (listar dispositivos Bluetooth disponibles)
+$ obexftp-client -b 00:11:22:33:44:55 -B 10 -p ~/punto_montaje (especifica la dirección Bluetooth, el canal Bluetooth, usualmente 10 para OBEX y la carpeta donde montar el dispositivo)
+$ obexftp -b 00:11:22:33:44:55 -B 10 -p archivo_local.txt /carpeta_remota/ (transferir un archivo a un dispositivo)
+$ obexftp -b 00:11:22:33:44:55 -B 10 -g "archivo_remoto.jpg" -p carpeta_local/ (obtener un archivo del dispositivo)
+1.-
+Configuración en fstab para montaje automático
+# nano /etc/fstab
+Añadir la linea:
+       obexftp#-b00:11:22:33:44:55 /media/telefono fuse user,noauto 0 0
 
 
 objcopy
