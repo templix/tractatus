@@ -28218,6 +28218,27 @@ es un programa que muestra un gato poptart animado en la terminal.
 $ nyancat -n -s -f 50 (sin contar el tiempo, sin titulo y parar a los 50 frames [5 segundos])
 
 
+nyx
+Monitor de estado en terminal para Tor, diseñado para usuarios que necesitan supervisar la actividad y el estado de su conexión Tor en tiempo real como ancho de banda, CPU, memoria, configuración, IPs, nombre de host, logs...
+# nyx (iniciar)
+# nyx -i 127.0.0.1:9051 (especificando puerto)
+# nyx --password "mi_contraseña" (si requiere contraseña para el control)
+Configuración básica:
+# nano /etc/tor/torrc
+Descomentar las lineas:
+            ControlPort 9051
+            CookieAuthentication 1
+# systemctl restart tor (reiniciar el servicio despues de los cambios)
+
+
+o-saft
+[Owasp Ssl Advanced Forensic Tool]. Herramienta forense avanzada para SSL [Secure Sockets Layer - capa de sockets seguros] desarrollada por OWASP para la auditoría y análisis forense de conexiones SSL/TLS. Permite mostrar información detallada sobre los certificados SSL de un servidor y probar la conexión SSL usando diferentes listas de cifrados y configuraciones, ayudando a identificar posibles debilidades o configuraciones incorrectas en la seguridad de la capa de transporte.
+$ o-saft www.ejemplo.com (mostrar información básica del certificado SSL del dominio especificado)
+$ o-saft -ciphers www.ejemplo.com (listar y probar todos los cifrados que acepta el servidor remoto)
+$ o-saft -cert www.ejemplo.com (despliega detalles completos del certificado, como el emisor, el sujeto, la validez, etc.)
+$ o-saft -ssl2 -ssl3 -tls1 -tls1_1 -tls1_2 -tls1_3 www.ejemplo.com (verifica qué versiones de SSL/TLS están habilitadas en el servidor)
+
+
 o3read
 wget http://siag.nu/pub/o3read/o3read-0.0.4.tar.gz
 Paquete que contiene herramientas [o3tohtml, o3totxt] para convertir archivos en formato openoffice o libreoffice a html o txt. Los ficheros de openoffice/libreoffice son formatos comprimidos. El que contiene el texto es el archivo “content.xml” que es el que se ha de descomprimir con unzip antes de tunelarlo a la aplicación.
