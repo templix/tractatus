@@ -28260,12 +28260,38 @@ Herramienta para la configuración gráfica de entornos de escritorio ligeros (l
 
 
 obexftp
-Herramienta que permite transferir archivos utilizando FUSE entre la computadora y dispositivos móviles como teléfonos celulares u otros dispositivos que soporten el protocolo OBEX [OBject EXchange]. Lo más destacado es que permite montar el sistema de archivos de estos dispositivos directamente en el sistema Linux, como si fuera una unidad externa. Soporta dispositivos conectados por cable serie, IrDA, Bluetooth o USB.
+Herramienta que permite transferir archivos utilizando FUSE entre la computadora y dispositivos móviles como teléfonos celulares u otros dispositivos que soporten el protocolo OBEX [OBject EXchange]. Lo más destacado es que permite montar el sistema de archivos de estos dispositivos directamente en el sistema Linux, como si fuera una unidad externa. Soporta dispositivos conectados por cable serie, IrDA, Bluetooth o USB. Incluye las utilidades obexautofs [Montaje automático de dispositivos OBEX], obexfs, obexftp, obexftpd, obexget, obexls, obexput y obexrm
 $ hcitool scan (listar dispositivos Bluetooth disponibles)
 $ obexftp-client -b 00:11:22:33:44:55 -B 10 -p ~/punto_montaje (especifica la dirección Bluetooth, el canal Bluetooth, usualmente 10 para OBEX y la carpeta donde montar el dispositivo)
 $ obexftp -b 00:11:22:33:44:55 -B 10 -p archivo_local.txt /carpeta_remota/ (transferir un archivo a un dispositivo)
 $ obexftp -b 00:11:22:33:44:55 -B 10 -g "archivo_remoto.jpg" -p carpeta_local/ (obtener un archivo del dispositivo)
+# obexftpd -b (iniciar el servidor OBEX que escuchará conexiones Bluetooth)
+# obexls -b AA:BB:CC:DD:EE:FF /Music (listar el contenido de un subdirectorio)
+# obexget -b AA:BB:CC:DD:EE:FF -l / (listar los archivos disponibles en el dispositivo)
+# obexget -b AA:BB:CC:DD:EE:FF -o ~/descargas/mi_archivo.jpg /DCIM/Camera/archivo.jpg (recibir un archivo específico)
+# obexput -b AA:BB:CC:DD:EE:FF ~/mis_documentos/informe.pdf /informe.pdf (enviar un archivo a la raíz del dispositivo)
+# obexput -b AA:BB:CC:DD:EE:FF ~/imagenes/foto.jpg /Pictures/foto.jpg (enviar un archivo a un directorio específico en el dispositivo)
+# obexrm -b AA:BB:CC:DD:EE:FF /temp/archivo_viejo.txt (eliminar un directorio, puede requerir el flag -r recursivo en algunos dispositivos, aunque no es estándar en OBEX)
 1.-
+Configuración de obexautofs, módulo para autofs:
+# nano /etc/auto.master
+Añadir la línea:
+       /media/obex  /etc/auto.obex --timeout=5 --browse
+Crear el archivo de configuración para OBEX
+# nano /etc/auto.obex
+aÑADIR LA LINEA:
+       micelular -fstype=obexfs,source=:MAC_DEL_DISPOSITIVO:
+Nota.- La MAC_DEL_DISPOSITIVO se puede obtener con "hcitool scan" [ver]
+# mkdir /media/obex/micelular (crear el directorio de montaje)
+# systemctl restart autofs (reinicia el servicio)
+Ahora, cuando se acceda al directorio /media/obex/micelular, autofs intentará conectar con el dispositivo Bluetooth con la dirección MAC especificada y montará su sistema de archivos OBEX.
+2.-
+Montaje manual de sistemas de archivos OBEX usando FUSE
+$ mkdir ~/mi_telefono (crear un directorio de montaje)
+# obexfs -b AA:BB:CC:DD:EE:FF ~/mi_telefono (montar el sistema de archivos OBEX del dispositivo con su MAC)
+Pedirá que se autorice la conexión en el dispositivo
+# fusermount -u ~/mi_telefono (desmonta el sistema de archivos)
+3.-
 Configuración en fstab para montaje automático
 # nano /etc/fstab
 Añadir la linea:
