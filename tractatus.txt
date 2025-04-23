@@ -28272,6 +28272,20 @@ Añadir la linea:
        obexftp#-b00:11:22:33:44:55 /media/telefono fuse user,noauto 0 0
 
 
+obfs4proxy
+[OBFuScation]. Herramienta que intenta eludir la censura transformando el tráfico Tor [ver] entre el cliente y el puente [bridge], para que, los censores, que suelen supervisar el tráfico, lo vean transformado con apariencia inocente e inocua en lugar del tráfico Tor real. Este paquete incluye el cliente y el puente en un solo programa. No se usa directamente por el usuario final con comandos manuales, es llamado automáticamente por el cliente Tor cuando está configurado para usar un puente obfs4. Es la cuarta versión, más resistente a técnicas de detección modernas como DPI [Deep Packet Inspection].
+Conseguir un bridge obfs4 en la página oficial de bridges de Tor https://bridges.torproject.org/, marca la opción que dice: "I am not a robot" [puede pedir captcha] y seleccionar la opción "obfs4" y al clicar en "Get Bridges" se obtiene una linea similar a
+          Bridge obfs4 192.0.2.3:443 0123456789ABCDEF0123456789ABCDEF01234567 cert=ABCDEFGHIJKLMNOPQRSTUVWX iat-mode=0
+Configuración en el archivo torrc:
+$ nano ~/.tor/torrc
+           UseBridges 1
+           ClientTransportPlugin obfs4 exec /usr/bin/obfs4proxy
+           Bridge obfs4 192.0.2.3:443 0123456789ABCDEF0123456789ABCDEF01234567 cert=ABCDEFGHIJKLMNOPQRSTUVWX iat-mode=0
+Indica que se quiere usar un bridge, que Tor use obfs4proxy para manejar el tráfico obfs4 y el puente [bridge] a usar.
+# systemctl restart tor (reiniciar el servicio)
+# journalctl -u tor -f (verificar que esté funcionando)
+
+
 objcopy
 $ objcopy -O binary test test.bin (convierte a codigo máquina RAW un fichero ejecutable compilado)
 
@@ -36185,10 +36199,9 @@ $ torify elinks checkip.dyndns.org
 
 
 torsocks
-Permite lanzar aplicaciones a través de la red tor para enmascarar la ip. Puede usarse indistintamente los comandos torsocks o usewithtor. Ver proxychains. Precisa tor funcionando.
+Con tor funcionando, permite lanzar aplicaciones a través de la red para enmascarar la ip. Ver proxychains.
 # torsocks ssh usuario@host
 # torsocks w3m ifconfig.me
-# usewithtor pidgin
 
 
 totem
