@@ -28312,6 +28312,16 @@ Indica que se quiere usar un bridge, que Tor use obfs4proxy para manejar el trá
 # journalctl -u tor -f (verificar que esté funcionando)
 
 
+obitools
+Programas para analizar datos NGS [Next Generation Sequencing - Secuenciación de Nueva Generación] en un contexto de metacodificación de barras de ADN. Los programas OBITools ayudan a manipular diversos datos y archivos de secuencias de forma sencilla mediante la interfaz de línea de comandos de Unix.
+$ obicount -f input.fastq (cuenta el número de registros de secuencias en el archivo input.fastq1)
+$ obihead -n 10 input.fastq (ver los primeros 10 registros de secuencias de un archivo)
+$ obitail -n 10 input.fastq (muestra los últimos 10 registros de secuencias)
+$ obistat -a attribute_name input.fastq (proporciona estadísticas básicas como recuento, media, desviación estándar sobre los atributos especificados en el archivo input.fastq1)
+$ obigrep -p "pattern" input_file.fastq > output.fastq (filtra las secuencias que coinciden con el patrón especificado y las guarda en output.fastq2)
+$ ecoPCR -d database_file -e 3 -l 50 -L 2000 primer_sequence > output.fasta (utiliza ecoPCR para simular una PCR in silico con los parámetros especificados y guarda los resultados en output.fasta2.)
+
+
 objcopy
 $ objcopy -O binary test test.bin (convierte a codigo máquina RAW un fichero ejecutable compilado)
 
