@@ -3021,6 +3021,43 @@ $ evince /usr/share/doc/bash/bash.pdf
 $ ls /usr/share/doc/bash/examples
 
 
+bash_it
+Gran número de alias, complementos y temas que darán un nuevo aspecto a la shell
+$ git clone --depth=1 https://github.com/Bash-it/bash-it.git ~/.bash_it (descargar en ~/.bash_it)
+$ cd ~/.bash_it (entrar en el directorio)
+$ ./install.sh (instalar y colocar en ~/.bashrc la configuración del paquete)
+$ ls ~/.bash_it/themes/ (escoger el tema)
+Una vez escogido el tema, modificar en ~/.bashrc la linea:
+        export BASH_IT_THEME="brunton"
+$ bash-it reload (recargar la modificación del archivo de configuración)
+$ bash-it show aliases (listar el listado de alias activados o desactivados)
+$ bash-it enable aliases apt (activar el alias apt)
+$ bash-it help alias apt (ver todos los alias de apt)
+$ bash-it enable alias all (activar todos los alias del listado)
+$ bash-it disable alias apt (desactivar el alias de apt)
+$ bash-it disable alias all (desactivar todos los alias del listado)
+$ bash-it show plugins (listado de plugins)
+$ bash-it enable plugin tmux (activar el plugin tmux)
+$ bash-it help plugin tmux
+$ bash-it show completions (listado de autocompletados)
+Para no lanzar bash-it reload cada vez que se modifica algo de la configuración y se recargue automaticamente, descomentar en ~/.bashrc la linea:
+        export BASH_IT_AUTOMATIC_RELOAD_AFTER_CONFIG_CHANGE=1
+$ bash-it enable completion pipx (activar el autocompletado de pipx)
+$ bash-it disable completion pipx (desactivar)
+$ bash-it enable completion all (activar todos los autocompletados)
+$ bash-it doctor errors (muestra errores de la aplicación)
+$ bash-it doctor warnings (muestra warnings de la aplicación)
+$ bash-it update stable (actualizar la aplicación stable)
+$ bash-it migrate (migrará automáticamente la estructura de Bash-it a la versión más reciente)
+El comando "migrate" se ejecuta automáticamente al ejecutar los comandos "update", "enable" y "disable"
+$ bash-it search ruby rake gem bundle irb rails (buscar qué complementos, alias o completaciones están disponibles para un framework, lenguaje de programación o entorno específico, relacionados con comandos que se usan con frecuencia)
+$ bash-it restart (reiniciar el shell)
+$ bash-it profile list (ver todos los perfiles disponibles)
+$ bash-it profile save mi_perfil (guardar la configuración actual en un perfil llamado mi_perfil)
+$ bash-it profile load mi_perfil (cargar el perfil llamado mi_perfil)
+$ bash-it profile rm mi_perfil (eliminar el perfil mi_perfil)
+
+
 bashbug
 Guión del shell para ayudar al usuario a componer y enviar informes de fallos concernientes a bash en un formato normalizado. bashbug llama al editor por defecto o, si no está definido a emacs. El usuario debe rellenar los campos apropiados y salir del editor. Entonces, bashbug envía el informe a bug-bash@prep.ai.mit.edu. Si el informe no puede ser enviado, se guarda en el fichero dead.bashbug en el directorio del usuario. La plantilla del informe consiste en varias secciones. La primera proporciona información sobre la máquina, el sistema operativo, la versión de bash y el entorno de compilación. La segunda sección debería rellenarse con una descripción del fallo. La tercera sección debería ser una descripción de cómo reproducir el fallo y la cuarta sección, opcional, es para una correción que se proponga.
 $ bashbug
@@ -33904,6 +33941,20 @@ $ snap refresh vlc (actualizar una aplicación)
 $ snap list (listar aplicaciones snap instaladas)
 $ snap changes (ver si existen detalles de actualizaciones)
 # snap revert paquete (instalar una versión anterior de un paquete)
+
+
+snapper
+Herramienta que se utiliza para crear instantáneas del sistema [snapshots] antes o después de hacer cambios o actualizaciones en un sistema de archivos Btrfs. Además de la creación y eliminación de instantáneas, permite compararlas y revertir las diferencias entre ellas.
+$ findmnt / (verificar que el sistema de archivos permita la aplicación, si no aparece btrfs no funciona)
+# snapper -c root create-config / (crear el archivo de configuración para los snapshots. Crea /etc/snapper/configs/root y permite administrar instantáneas del sistema raíz)
+# snapper -c root create --description «Instalación de GIMP» (crear una instantánea manualmente con la descripción)
+# snapper -c root list (ver la lista de instantáneas)
+# snapper -c root status 1..2 (ver los cambios entre dos snapshots)
+# snapper -c root diff 1..2 /etc/nginx/nginx.conf (ver diferencias en un archivo específico)
+# snapper -c root undochange 1..2 (revertir todos los cambios)
+# snapper -c root undochange 1..2 /etc/nginx/nginx.conf (revertir un archivo)
+# systemctl enable --now snapper-timeline.timer (que se creen los puntos de restauración automáticamente)
+# snapper -c root delete 1 (eliminar instantáneas)
 
 
 snarf
