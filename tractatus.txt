@@ -19539,6 +19539,21 @@ $ gcc source.c -W -o linux (Compilará mostrando advertencias y errores y crear�
 Nota.-la ejecución de la salida será de forma clásica en linux: ./linux
 
 
+gcli
+Herramienta que permite interactuar con Git, como Gitea, GitLab y Microsoft® GitHub con operaciones comunes como clonar, crear, actualizar y gestionar ramas, etc.
+$ gcli clone https://github.com/username/repo.git (clona un repositorio desde GitHub a la máquina local)
+$ gcli branch new feature-branch (crear una nueva rama)
+$ gcli pull origin main (actualizar la rama actual)
+$ gcli commit -m "Añado nueva función" && gcli push origin main (hacer commit y push)
+$ gcli remote add upstream https://github.com/original-repo.git (configurar remoto con gcli)
+$ gcli status (proporcionar información sobre el estado del repositorio)
+$ gcli resolve-conflicts (resolver conflictos durante un merge o rebase)
+$ gcli tag create v1.0.0 (crear tags)
+$ gcli tag list (lista de tags)
+$ gcli rm file.txt (eliminar archivos de seguimiento)
+$ gcli diff (verificar los cambios antes de hacer un commit)
+
+
 gconftool-2
 [gconf-editor]. Configurador de todos los parámetros de gnome
 $ gconftool-2 --dump / > gconf_backup.xml  (realizar copia de seguridad de la configuración)
@@ -19562,6 +19577,16 @@ $ gconftool-2 -t string -s /apps/nautilus/desktop/home_icon_name "Mi carpeta"
 Lista de valores (list). En muchos casos va complementado con otra lista (--list-type) que admite los valores {int|bool|float|string}. p.e detectar codificación en gedit con determinadas opciones:
 $ gconftool-2 -t list --list-type string -s /apps/gedit-2/preferences/encodings/auto_detected [UTF-8,CURRENT,ISO-8859-15,UTF-16]
 Parejas de valores [pairs]. Indica parejas de valores de los tipos anteriores. No he encontrado ningún ejemplo
+
+
+gcovr
+Herramienta que automatiza la recolección y el resumen de información de cobertura de código generada por gcov, la utilidad de GNU para analizar cobertura en programas compilados con GCC. Su propósito es facilitar la generación de informes de cobertura, ayudando a identificar qué partes del código han sido ejecutadas durante las pruebas y cuáles no.
+$ gcovr -r . (genera un resumen en la consola de las líneas ejecutadas)
+$ gcovr -r . --html -o cobertura.html (genera un informe HTML resumido)
+$ gcovr -r . --html --html-details -o cobertura_detallada.html (genera un informe HTML con detalles)
+$ gcovr -r . --branches (muestra cobertura de ramas en vez de solo líneas)
+$ gcovr --gcov-executable gcov-8 (asegura que se use la versión correcta de gcov según el compilador empleado)
+$ gcovr -r . --xml -o cobertura.xml (generar informe en otros formatos)
 
 
 gcp
