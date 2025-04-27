@@ -28398,6 +28398,28 @@ ocfs2-tools
 # o2cb add-node mi_cluster nodo1 --ip 192.168.1.10 --number 0 (configurar nodos)
 
 
+oci-seccomp-bpf-hook
+Hook OCI [Open Container Initiative] para rastrear llamadas al sistema y generar un perfil de seccomp [SECure COMPuting mode] que es un mecanismo de seguridad del kernel de Linux que restringe las llamadas al sistema que un proceso puede realizar. Este proyecto proporciona un hook OCI para generar perfiles de seccomp mediante el rastreo de las llamadas al sistema [syscalls] realizadas por el contenedor. El perfil generado permitirá todas las llamadas al sistema realizadas y denegará el resto.
+$ grep CONFIG_SECCOMP= /boot/config-$(uname -r) (comprobar si el kernel admite seccomp)
+       CONFIG_SECCOMP=y
+# docker run --rm --hook-spec /usr/share/oci/hooks.d/oci-seccomp-bpf-hook.json -v /tmp/seccomp:/output nginx (especifica la configuración del hook y monta un directorio donde se guardará el perfil generado /output/seccomp.json)
+$ cat /tmp/seccomp/seccomp.json (ver el perfil generado)
+Nota.- defaultAction: SCMP_ACT_ERRNO: Deniega cualquier syscall no permitida y syscalls.names: Lista de syscalls permitidas.
+# docker run --rm --security-opt seccomp=/tmp/seccomp/seccomp.json nginx (aplicará el perfil generado, permitiendo solo las syscalls registradas)
+1.-
+Usando runc y con un contenedor definido en un bundle OCI, con su config.json. Modificar el archivo config.json del contenedor para incluir el hook:
+       "hooks": {
+         "poststart": [
+           {
+             "path": "/usr/lib/oci/hooks.d/oci-seccomp-bpf-hook",
+             "args": ["oci-seccomp-bpf-hook", "-o", "/tmp/seccomp-profile.json"]
+           }
+         ]
+       }
+Indica que, después de iniciar el contenedor, se ejecutará el hook y se generará un archivo /tmp/seccomp-profile.json con el perfil generado.
+# runc run mi_contenedor (Ejecutar el contenedor con runc)
+
+
 oclock
 Muestra la hora actual en una pantalla analógica.
 $ oclock -fg red -bg yellow -minute green -geometry 150x150 (manecilla de las horas en rojo, fondo amarillo, la de los cuartos verde y geomatria 150x150)
