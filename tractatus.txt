@@ -19622,6 +19622,66 @@ Dentro de la Shell de GDB podemos ejecutar comandos
 (gdb) quit (salimos del programa)
 
 
+gdbmtool
+Utilidad de línea de comandos que permite crear, examinar y modificar bases de datos GDBM [GNU dbm], que almacenan pares clave/valor en un archivo, proporcionando una versión persistente del tipo de dato abstracto "diccionario" o "hash" como en Perl. Incluye las siguientes herramientas de línea de comandos: gdbm_dump: volcar el contenido de la base de datos a un formato independiente del sistema, gdbm_load: recrear la base de datos a partir del volcado creado por gdbm_dump y gdbmtool: ver y modificar una base de datos existente o crear una nueva.
+$ gdbmtool  (entra en modo interactivo donde se pueden introducir comandos para manipular la base de datos9
+$ gdbmtool mi_base.gdbm (abrirá o creará el archivo mi_base.gdbm y mostrará un prompt interactivo)
+Ejemplo de prompt interactivo
+$ gdbmtool mi_base.gdbm
+           gdbmtool> store usuario1 Juan
+           gdbmtool> store usuario2 Maria
+           gdbmtool> fetch usuario1
+           Juan
+           gdbmtool> list
+           usuario1
+           usuario2
+           gdbmtool> delete usuario1
+           gdbmtool> list
+           usuario2
+           gdbmtool> quit
+Comandos principales en gdbmtool
+     store: Guarda un par clave/valor.
+     fetch: Recupera el valor asociado a una clave.
+     delete: Elimina un par clave/valor.
+     list: Lista todas las claves almacenadas.
+     quit: Sale de la herramienta.
+$ gdbm_dump mi_base.gdbm > respaldo.dump (exporta el contenido de una base de datos a un archivo de texto)
+$ gdbm_load -r -n respaldo.dump mi_base_restaurada.gdbm (restaura una base de datos a partir de un volcado, -r reemplazar entradas existentes, -n para no restaurar metadatos)
+
+
+gdbserver
+Programa que permite depurar aplicaciones en una máquina remota o incluso en la misma máquina, usando GNU Debugger. Lo que hace es ejecutar un programa objetivo y comunicarse con gdb a través de una red [TCP] o incluso por un puerto serie. Actualmente, gdb es compatible con C, C++, D, Objective-C, Fortran, Java, OpenCL C, Pascal, ensamblador, Modula-2, Go y Ada.
+$ gdbserver localhost:1234 ./mi_programa (iniciará mi_programa y lo detendrá inmediatamente, esperando que un GDB se conecte a través del puerto 1234 en localhost)
+1.-
+Supongamos un programa llamado saludo.c
+$ gcc -g saludo.c -o saludo (compilar con información de depuración)
+$ gdbserver localhost:1234 ./saludo (iniciar gdbserver)
+Saldrá algo como:
+       Process ./saludo created; pid = 12345
+       Listening on port 1234
+En otra terminal, abrir gdb
+$ gdb saludo
+      (gdb) target remote localhost:1234
+Ahora se pueden usar comandos como:
+      (gdb) break main         # Poner un punto de ruptura en main
+      (gdb) continue           # Continuar ejecución
+      (gdb) step               # Ejecutar línea a línea
+      (gdb) print nombre       # Ver el valor de variables
+$ gdbserver 192.168.1.100:1234 ./saludo (estando en otra máquina)
+
+
+gddrescue
+Herramienta, desarrollada por GNU, de recuperación de datos de dispositivos de almacenamiento dañados como discos duros, USB, CD/DVD, etc. A diferencia de dd [ver], gddrescue es inteligente: si encuentra errores, no se detiene, sino que registra las zonas problemáticas y sigue copiando el resto de los datos. Luego puede reintentar las zonas dañadas con diferentes estrategias.
+# ddrescue -f -n /dev/sda disco_rescatado.img mapa.log (-f: fuerza la operación, necesario si el destino es un archivo, -n: Modo "no scrap" que evita operaciones agresivas en la primera pasada, disco dañado. imagen de destino y archivo de registro)
+# ddrescue -d -r3 /dev/sda disco_rescatado.img mapa.log (acceso directo al disco, ignora caché, más preciso para sectores dañados y reintenta 3 veces los sectores erróneos)
+# ddrescue -n /dev/sda /dev/sdb logfile (recuperar solo los sectores que no se han leído correctamente)
+# ddrescue -f /dev/sdb /dev/sdc mapa.log (clonar un disco dañado a otro disco sanosdb el dañado y sdc el de destino de igual o superior tamaño)
+# ddrescue -C /dev/sda disco_rescatado.img mapa.log (continuar un rescate interrumpido desde el último progreso registrado en mapa.log)
+# ddrescue -d -A /dev/sda disco_rescatado.img mapa.log (modo "agresivo" para rescatar sectores muy dañados. -A: "Try hard" lee sectores con tamaños de bloque pequeños).
+# ddrescue -v -l 5 /dev/sdX /dev/sdY logfile (limitar el número de intentos de lectura a 5 para cada sector y con la máxima información)
+Nota.- En discos muy dañados, el proceso puede tardar horas o días.
+
+
 gdebi
 Instalador de paquetes .deb
 # gdebi paquete.deb
@@ -19666,6 +19726,73 @@ Y modificando la linea "pictori-uri" para que apunte a la imagen deseada:
 	picture-options='zoom'
 Una vez modificado, aplicar los cambios con:
 # dpkg-reconfigure gdm3
+
+
+gdnsd
+Servidor de nombres de dominio autoritativo con capacidades avanzadas de balanceo de carga, redirección y conmutación por error, teniendo en cuenta la ubicación geográfica de los clientes o el estado de los servicios. Este paquete proporciona el demonio principal de gdnsd y los complementos básicos. Un servidor DNS autoritativo es el responsable de dar respuestas directas a las consultas sobre los registros DNS de un dominio específico. En otras palabras, si alguien pregunta por la dirección IP de mi-dominio.com, uno de los servidores autoritativos configurados para ese dominio tendrá la respuesta definitiva.
+1.-
+Balanceo de Carga Geográfico Básico
+Ejemplo con 3 servidores web replicados en diferentes ubicaciones geográficas: Nueva York, Londres y Tokio y que los usuarios sean dirigidos al servidor más cercano para obtener una mejor velocidad de carga. Configuración del Archivo de Zona: En el archivo de zona del dominio mi-dominio.com, se definiría varios registros A para www.mi-dominio.com y gdnsd utilizará los plugins de geolocalización para decidir cuál de estas IPs devolver en función de la ubicación del cliente que realiza la consulta y generalmente se hace en el archivo de configuración de gdnsd (típicamente en /etc/gdnsd/).
+     www.mi-dominio.com. IN A 192.168.1.10  ; Servidor en Nueva York
+     www.mi-dominio.com. IN A 192.168.2.20  ; Servidor en Londres
+     www.mi-dominio.com. IN A 192.168.3.30  ; Servidor en Tokio
+Lo que haría que las consultas provenientes de Norteaméric se dirijan al servidor 192.168.1.10, para Europa, al 192.168.2.20, y para Asia, al 192.168.3.30.
+2.-
+Conmutación por Error Consciente del Estado del Servicio
+Suponiendo dos servidores de correo (mail.mi-dominio.com) y si el servidor primario falla, dirigir automáticamente el trafico al secundario definiendo los registros MX para los servidores de correo.
+     mail.mi-dominio.com. IN MX 10 mail1.mi-dominio.com.
+     mail.mi-dominio.com. IN MX 20 mail2.mi-dominio.com.
+     mail1.mi-dominio.com. IN A 192.168.4.40
+     mail2.mi-dominio.com. IN A 192.168.5.50
+Configuramdo un plugin de health checking, como ping o uno que consulte un puerto específico. para monitorizar la disponibilidad de 192.168.4.40. Si el health check falla, gdnsd dejaría de devolver la dirección IP de mail1.mi-dominio.com en las respuestas a las consultas MX, favoreciendo el servidor con menor preferencia [mail2.mi-dominio.com].
+3.-
+Redirección Basada en Subdominios y Geolocalización
+Ejemplo para dirigir a los usuarios de diferentes países a versiones localizadas de un sitio web, por ejemplo, eu.mi-dominio.com para Europa y asia.mi-dominio.com para Asia. definiendo los registros CNAME o A para los subdominios localizados.
+     eu.mi-dominio.com. IN A 192.168.6.60  ; Servidor en Europa
+     asia.mi-dominio.com. IN A 192.168.7.70  ; Servidor en Asia
+     www.mi-dominio.com. IN GDNSD geo-redirect
+La configuración de gdnsd para la zona mi-dominio.com le indicaría que para las consultas a www.mi-dominio.com, determine la ubicación del cliente y devuelva un registro CNAME o A al subdominio apropiado (eu.mi-dominio.com o asia.mi-dominio.com).
+
+
+gdstools
+Herramientas de almacenamiento GPUDirect de NVIDIA. El Almacenamiento GPUDirect [GpuDirect Storage - GDS] permite una ruta de datos directa para transferencias de acceso directo a memoria [Direct Memory Access - DMA] entre la memoria de la GPU y el almacenamiento, lo que evita un búfer de rebote en la CPU.
+$ /usr/local/cuda-<x>.<y>/gds/tools/gdscheck.py -p (verificar que GPUDirect Storage [GDS] está instalado correctamente)
+Nota.- Reemplazar <x> con la versión mayor y <y> con la versión menor del toolkit CUDA instalado en el sistema.
+$ dmesg | grep -e DMAR -e IOMMU (verificar el estado actual de IOMMU)
+$ modprobe nvidia-peerdirect (después de reiniciar el sistema, es necesario cargar el módulo que admite las capacidades PeerDirect)
+
+
+gdu
+[Go Disk Usage]. Analizador de uso de disco optimizado para discos SSD, donde utiliza procesamiento paralelo para mejorar la velocidad de análisis, aunque también funciona en discos HDD con menor ganancia de rendimiento.
+$ gdu (abre la interfaz de consola del directorio actual)
+Nota.- Con el modo interactivo pulsando ? muestra todas las teclas útiles. "q" para salir.
+$ gdu /var/log (abre le directorio especificado)
+$ gdu -d (mostrar todos los discos montados)
+$ gdu -n /var/www (muestra el uso de disco sin la interfaz interactiva)
+$ gdu -c -i $HOME/.cache,$HOME/.config $HOME (ignorar directorios especificados del /home del usuario y sin colores)
+$ gdu -nps $HOME (mostrar solo el tamaño total)
+$ gdu --si $HOME (usar escala decimal [SI] en lugar de binaria)
+$ gdu -m 4 $HOME (limita gdu a usar solo 4 núcleos, útil para reducir la carga en sistemas con muchos núcleos)
+$ gdu -g /home/user (activa la recolección de basura constante, reduciendo el uso de memoria ~30% menos a costa de un análisis ~25% más lento)
+$ gdu -l ./gdu_errors.log /home/user (registra errores, por ejemplo, permisos denegados en gdu_errors.log)
+$ gdu -a $HOME (muestra el tamaño real de los archivos, sin contar bloques de disco)
+$ gdu -I '.*cache.*' /home/user (ignora directorios que coincidan con el patrón .*cache.*, por ejemplo, .cache, cache_data)
+Símbolos en la salida de archivos y directorios pueden tener prefijos con significados especiales:
+      !: Error al leer el directorio.
+      .: Error al leer un subdirectorio.
+      @: Archivo es un enlace simbólico o socket.
+      H: Enlace duro ya contado.
+      e: Directorio vacío.
+
+
+gearman
+[gear man - hombre engranaje]. Es un sistema de cola de tareas que permite distribuir trabajo entre varias máquinas o procesos. Este paquete es un paquete vacío que depende tanto del cliente como del servidor.
+$ gearadmin --status (ver estado del servidor)
+$ gearman -f función -b < datos (enviar un trabajo)
+$ gearman -w -f función -- ./script_procesamiento.sh (ejecutar un trabajador en bash)
+$ gearadmin --status (ver trabajos en cola)
+$ gearadmin --workers (ver trabajadores conectados)
+Nota.- Cliente: Envía trabajos para ser ejecutados, Trabajador: Ejecuta los trabajos y Servidor: Coordina la comunicación entre clientes y trabajadores
 
 
 gedit
