@@ -28385,6 +28385,19 @@ $ obsession-exit -r (reinicia)
 $ obsession-exit -c (indica las capacidades de energia)
 
 
+ocfs2-tools
+[Oracle Cluster File System 2]. Herramientas para la gestión de sistemas de archivos de clúster desarrollado por Oracle. Permite que múltiples nodos [servidores] monten y accedan a un sistema de archivos al mismo tiempo sobre almacenamiento compartido, por ejemplo, SAN o iSCSI, manteniendo coherencia y evitando corrupción de datos. El paquete ocfs2-tools instala una serie de herramientas para crear, gestionar, verificar y configurar sistemas de archivos OCFS2. Incluye comandos como: mkfs.ocfs2, fsck.ocfs2, tunefs.ocfs2, debugfs.ocfs2 y o2cb
+# mkfs.ocfs2 -L "mi_cluster" /dev/sdb1 (crear un sistema de archivos OCFS2 en /dev/sdb1 con la etiqueta "mi_cluster")
+# modprobe ocfs2 (carga el módulo)
+# mount -t ocfs2 /dev/sdb1 /mnt/ocfs2 (montar el sistema de archivos)
+# fsck.ocfs2 /dev/sdb1 (verifica la integridad del sistema de archivos, como fsck para ext4, pero específico para OCFS2)
+# tunefs.ocfs2 -L "nuevo_nombre" /dev/sdb1 (cambia la etiqueta del sistema de archivos OCFS2)
+# debugfs.ocfs2 /dev/sdb1 (entra en un entorno interactivo tipo shell para inspeccionar inodos, bloques, etc)
+# o2cb.init start (iniciar para administrar la pila de clúster O2CB)
+# o2cb add-cluster mi_cluster (ver los nodos)
+# o2cb add-node mi_cluster nodo1 --ip 192.168.1.10 --number 0 (configurar nodos)
+
+
 oclock
 Muestra la hora actual en una pantalla analógica.
 $ oclock -fg red -bg yellow -minute green -geometry 150x150 (manecilla de las horas en rojo, fondo amarillo, la de los cuartos verde y geomatria 150x150)
