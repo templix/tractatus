@@ -16792,6 +16792,35 @@ utilidades para formatear discos de capacidad extra, montar y desmontar automát
 Nota.- Las utilidades no funcionan con unidades de disquete USB, ya que no permiten el acceso directo al controlador de disquete.
 
 
+feed2exec
+Herramienta que permite automatizar acciones basadas en feeds RSS o Atom. Básicamente, monitorea feeds y ejecuta acciones cuando encuentra nuevos elementos.
+$ feed2exec add "Noticias Linux" https://example.com/feed.xml maildir (la primera entrada crea la configuración y descarga el feed indicado y lo guarda en un Maildir)
+$ feed2exec fetch (actualización de feeds)
+$ feed2exec add "Noticias Tecnología" https://ejemplo.com/rss maildir --mailbox ~/Mail/tech-news/ (enviar artículos a un buzón Maildir específico)
+$ feed2exec add "Podcasts" https://ejemplo/feed.xml exec --command "wget {url} -O ~/Podcasts/{author}-{title}.mp3" (cuando aparece una nueva entrada en el feed mencionado, se descarga automáticamente con wget)
+$ feed2exec add "Blog Linux" https://ejemplo/feed.xml maildir --filter "machine learning|inteligencia artificial" (solo los artículos que contengan "machine learning" o "inteligencia artificial" serán procesados)
+1.-
+Ejemplo de configuración mediante archivo YAML
+$ nano ~/.config/feed2exec.ini
+       [DEFAULT]
+        output = maildir
+        mailbox = ~/Mail/feeds/
+       [feeds.noticias]
+        url = https://example.com/feed.xml
+        output = maildir
+        mailbox = ~/Mail/noticias/
+       [feeds.podcasts]
+        url = https://podcast-feed.com/feed.xml
+        output = exec
+        command = wget {url} -O ~/Podcasts/{title}.mp3
+       ...
+2.-
+Configurar un trabajo cron para que feed2exec se ejecute periódicamente
+$ crontab -e
+Añadir una línea para ejecutar feed2exec cada hora
+       0 * * * * /usr/bin/feed2exec fetch
+
+
 feedbackd
 Demonio activado por DBus que proporciona retroalimentación táctil, visual y auditiva basada en eventos. Incluye fbd-theme-validate
 $ fbcli -t=5 -P=full -w 5
@@ -19808,8 +19837,16 @@ Atajos
 	Ctrl+Mayús+flecha  (seleccionar texto a derecha o izquierda)
 
 
-gelemental
-Muestra la tabla periódica de los elementos quimicos.
+geekcode
+Programa para generar código geek [Geek Code Block]. Este "código" es una especie de firma, para emails, foros, o perfiles, que describe intereses, habilidades y actitudes de una manera muy geek, es decir, muy técnica y compacta.
+$ geekcode > mi_geekcode.txt (pregunta de forma interactiva varias cosas sobre el usuario y se guarda en el fichero)
+$ geekcode -f mis_respuestas.txt > salida.txt (leer respuestas desde un archivo y no preguntar interactivo y guardarlo en salida.txt)
+Ejemplo de código generado:
+        -----BEGIN GEEK CODE BLOCK-----
+        Version: 3.12
+        GIT d- s: a- C+++ UL++ P+ L++ E-- W+ N+ o-- K- w--- O- M- V PS+ PE-- Y PGP- t+ 5+ X R tv b+ DI+ D+ G e++ h-- r+ y+
+        ------END GEEK CODE BLOCK------
+Ese bloque de letras crípticas es la "identidad geek" comprimida. Para descifrar el significado entrar en la página <http://www.joereiss.net/geek/ungeek.html>
 
 
 gem
@@ -19829,8 +19866,55 @@ $ gem environment (Información sobre rubygems)
 $ gem update (Actualizar todas las gemas del sistema)
 
 
+gem2deb
+[dh-make-ruby devscripts build-essential]. Herramientas para crear paquetes Debian a partir gemas Ruby, distribuido con Rubygems. gem2tgz convierte el archivo .gem en un archivo tar. A continuación, dh-make-ruby crea un paquete fuente Debian a partir de ese archivo. Este paquete Debian utiliza el asistente Debhelper incluido, dh_ruby, para generar un paquete Debian adecuado.
+$ gem2tgz nombre_gema.gem (descargar y convertir la gema a .tar.gz)
+$ gem2tgz nombre_gema (descargar directamente desde rubygems)
+$ dh-make-ruby nombre_gema-version.tar.gz (crear estructura de paquete Debian)
+$ gem2tgz nombre_gema -v 1.2.3 (descargar especificar versión específica)
+$ gem2tgz nombre_gema --rubygems-url https://rubygems.org/ (usar mirror específico de rubygems)
+$ gem2tgz --force nombre_gema (forzar recreación del tarball)
+1.-
+Proceso completo de ejemplo con la gema "faker"
+$ gem2tgz faker (convertir la gema faker a tarball)
+$ dh-make-ruby faker-2.1.2.tar.gz (crear estructura Debian, suponiendo que la versión es 2.1.2)
+$ cd ruby-faker (entrar al directorio...)
+$ dpkg-buildpackage -us -uc (... y construir)
+Crea una estructura parecida a
+      ruby-nombre-gema/
+      ├── debian/
+      │   ├── control
+      │   ├── rules
+      │   ├── changelog
+      │   └── ...
+      ├── Gemfile
+      └── ...
+
+
 gemsets
 Conjunto de gemas que definimos para una determinada versión de Ruby [ver] y que están aislados entre ellos. O sea, si tenemos dos proyectos y cada uno con una versión distinta, no tienen conflicto entre ellos. Por tanto, lo más recomendable es definir un gemset para cada proyecto en el que estemos trabajando. Ver rvm.
+
+
+gendarme
+Herramienta de análisis estático para ensamblados .NET y Mono que detecta problemas comunes en el código mediante reglas configurables. Funciona a nivel de código intermedio [CIL/IL], lo que permite analizar cualquier lenguaje .NET compilado.
+$ gendarme --html Reporte.html MiBiblioteca.dll (analiza MiBiblioteca.dll y genera un reporte HTML)
+
+
+genders
+Herramienta útil en la gestión de clústeres Linux, especialmente cuando se necesita aplicar configuraciones o ejecutar comandos de forma selectiva en grupos de nodos con características similares. Es una basa en una base de datos estática que describe las características o atributos de los nodos que componen un clúster.
+Ejemplos de nodos
+# nano /etc/genders:
+       nodo1 cpu=intel,mem=16GB,os=centos7,rol=compute
+       nodo2 cpu=amd,mem=32GB,os=ubuntu20,rol=compute
+       nodo3 cpu=intel,mem=8GB,os=centos7,rol=storage
+       nodo4 cpu=amd,mem=16GB,os=ubuntu20,rol=compute
+       nodo5 cpu=intel,mem=32GB,os=centos8,rol=management
+$ genders nodo1 (listar las propiedades de un nodo específico)
+$ genders -l cpu=intel (listar todos los nodos con una propiedad específica)
+$ genders -l cpu=amd,rol=compute (listar los nodos que tienen varias propiedades)
+$ genders -L "os=centos7|os=ubuntu20" (listar los nodos que tienen al menos una de las propiedades especificadas)
+$ genders -l '!rol=storage' (listar los nodos que no tienen una propiedad específica)
+$ genders -l 'cpu=intel,!mem=8GB' (combinar condiciones AND y NOT)
 
 
 genius
@@ -34411,6 +34495,20 @@ $ sox 2.wav 3.wav speed 0.5 (3.wav irá a la mitad de velocitad que 2.wav)
 spacedream
 Muestra una imagen del cielo en la tty. Con las teclas del cursor permite moverse por entre la constelación de estrellas.
 $ spacedream
+
+
+spamassassin
+Herramienta para detectar y filtrar spam muy potente y totalmente configurable con numerosas funciones, como listas blancas automáticas, pruebas RBL, análisis bayesiano y análisis de encabezados y cuerpo de texto. También se integra con servidores de correo como Postfix, Sendmail, Exim, o herramientas como procmail.
+$ spamassassin -t < correo.txt (que analice el mensaje y muestre el resultado con el contenido original. el archivo con el correo en formato raw que incluye cabeceras)
+Nota.- El umbral para considerarlo spam es 5.0
+$ spamassassin < original.txt > limpio.txt (analiza el correo y si lo considera spam, le añade cabeceras indicando que lo es, además de marcarlo como tal)
+1.-
+Algunas configuraciones comunes en user_prefs:
+$ nano ~/.spamassassin/user_prefs
+       required_score 5.0
+       rewrite_header Subject [SPAM]
+       report_safe 0
+       use_bayes 1
 
 
 speaker-test
