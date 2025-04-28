@@ -14791,6 +14791,20 @@ $ env2 -f config.sh -t python (convertir variables de entorno a otro lenguaje de
 $ env2 -f config.sh -t json(convertir las variables de entorno a un formato JSON)
 
 
+environment-modules
+Herramienta para gestionar el entorno de usuario permitiendo cargar y descargar configuraciones de entorno dinámicamente, como cambiar versiones de programas, librerías, compiladores, etc., sin alterar el sistema. Funciona principalmente manipulando variables como PATH, LD_LIBRARY_PATH, MANPATH, etc., de forma automática, ordenada y sin tener que tocar ~/.bashrc manualmente. Incluye las aplicaciones add.modules, envml, mkroot y modulecmd.
+$ add.modules (agrega ". /usr/share/modules/init/bash" en .bashrc para asegurar acceso a los módulos para todos los subshells. Los originales se guardan con extensión .old)
+$ mkroot /opt/mis_modulos (crea la estructura básica de directorios para alojar tus propios módulos)
+$ module refresh (refrescar los módulos)
+$ module list (ver módulos cargados)
+$ module show gcc/11.2 (información sobre un módulo)
+$ module purge (purgar todos los módulos)
+$ envml save dev_environment (guardar una colección de módulos cargados)
+$ envml restore dev_environment (restaurar una colección)
+$ module unload python/3.8 (descargar la versión especificada)
+$ module load /usr/share/modules/modulefiles/module-git (cargar el módulo git)
+
+
 envstore
 Almacén de variables de entorno en todos los procesos del shell. envstore permite guardar las variables de entorno en un almacén independiente, enumerarlas, borrarlas y volver a cargarlas.
 $ envstore l (listar variables guardadas)
