@@ -19974,9 +19974,10 @@ $ genromfs -f minimal.rom -d rootfs -x "*.tmp" -x "*.log" (excluir archivos por 
 
 
 geoiplookup
-[geoip-bin geoip-database-contrib]. Localiación geográfica de una ip.
-$ geoiplookup IP
-# geoip-database-contrib_update (actualizar la BD [/usr/share/GeoIP/])
+[geoip-bin geoip-database]. Localiación geográfica de una ip o un host.
+$ geoiplookup google.es
+$ geoiplookup -i google.es
+$ geoiplookup 80.60.233.195
 
 
 geoipupdate
@@ -20000,6 +20001,12 @@ $ geolooc 8.8.8.8
 	lg: -122.078515
 	host: google-public-dns-a.google.com
 	tld: com
+
+
+geotiff-bin
+Herramientas para manipular archivos GeoTIFF, que son archivos TIFF con información geográfica incrustada, por ejemplo, sistema de coordenadas, resolución espacial, etc. La biblioteca GeoTIFF incluye dos utilidades: listgeo [extrae y muestra la metainformación geográfica, etiquetas GeoTIFF, de un archivo TIFF] y geotifcp [Inserta o reemplaza metadatos geográficos en un archivo TIFF a partir de un archivo .geo generado por listgeo].
+$ listgeo mapa.tif > mapa.geo (guardar metadatos a un archivo)
+$ geotifcp -g metadatos.geo original.tif nuevo_geotiff.tif
 
 
 get-iab
