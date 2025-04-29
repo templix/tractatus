@@ -19931,10 +19931,46 @@ $ genders -l '!rol=storage' (listar los nodos que no tienen una propiedad espec�
 $ genders -l 'cpu=intel,!mem=8GB' (combinar condiciones AND y NOT)
 
 
+genext2fs
+Permite crear una imagen de sistema de archivos ext2 sin necesidad de ser root. No requiere montar el archivo de imagen para copiar archivos.
+$ genext2fs -b 4096 ejemplo.img (creará un archivo llamado "ejemplo.img" con un tamaño de bloque de 4096 bytes)
+$ genext2fs -b 4096 -n 1000 ejemplo.img (creará un sistema de archivos con 1000 bloques de 4096 bytes cada uno)
+$ genext2fs -b 4096 -s 10M ejemplo.img (creará un sistema de archivos de aproximadamente 10 megabytes)
+$ genext2fs -b 4096 -i 1000 -d 50 ejemplo.img (creará un sistema de archivos con 1000 inodos y 50 directorios)
+Nota.- la herramienta dd para copiar la imagen a un dispositivo real.
+
+
+genimage
+Herramienta muy útil en entornos embebidos [embedded] o sistemas Linux personalizados, donde se necesita generar imágenes de sistemas de archivos o imágenes completas de discos por ejemplo, para flashear en una memoria NAND/NOR, una tarjeta SD, o un dispositivo similar. Toma un directorio raíz [rootfs] que contiene el sistema de archivos del dispositivo y genera una imagen en un formato específico, como ext4, squashfs, ubifs, cpio, etc, o incluso una imagen completa de disco que incluya particiones y cargadores de arranque.
+$ genimage --config genimage.cfg --rootpath path/al/rootfs --tmppath tmp/ --outputpath images/ (archivo de configuración que especifica qué imágenes generar y cómo, donde se encuentra el sistema de archivos raíz, carpeta temporal y carpeta donde se almacenarán las imágenes generadas)
+
+
+genisoimage
+Herramienta que permite crear imágenes ISO [formato ISO 9660] de sistemas de archivos, como las que se usan para crear CDs o DVDs arrancables [bootables] o distribuciones de software que posteriormente pueden grabarse en CD o DVD. Incluye las herramientas mkzftree [crea una imagen ISO-9660 con contenido comprimido], dirsplit [separa fácilmente el contenido de directorios grandes en discos de tamaño predefinido] y geteltorito [extrae una imagen de arranque de El Torito desde una imagen de CD].
+$ genisoimage -o ejemplo.iso -R -J /home/usuario/cd/ (crea ejemplo.iso del directorio /home/usuario/cd/, -R preserva nombres de archivo largos y permisos y -J soporte Joliet [windows])
+$ mkzftree /home/usuario/cd /tmp/cd_comprimido (genera versión comprimida de los archivos de /home/usuario/cd, en /tmp/cd_comprimido, lista para ser usada con genisoimage)
+$ dirsplit -d /tmp/split -s 700 /home/usuario/cd/ (divide el contenido del directorio /home/usuario/cd/ en subdirectorios dentro de /tmp/split, donde cada subdirectorio contiene un máximo de 700 MB)
+$ geteltorito -o arranque.img debian.iso (extrae la imagen de arranque [boot.img] desde el archivo ISO debian.iso)
+1.-
+Ejemplo completo de uso combinado:
+Crear una ISO arrancable con archivos comprimidos:
+$ mkzftree /home/usuario/cd /tmp/zf_cd
+$ genisoimage -o final.iso -R -J -z -b boot.img -c boot.cat /tmp/zf_cd (-z que se está usando zisofs [comprimido con mkzftree], -b: archivo de arranque y -c: catálogo de arranque, necesario para bootables)
+
+
 genius
 Calculadora.
 $ genius (Entra en el prompt. Su uso en el clásico: 60*2, 100/5... exit para salir)
 $ genius –exec=50/2
+
+
+genromfs
+Este es equivalente a mkfs [ver] en sistema de archivos romfs [Read-Only Memory File System] que es un sistema de archivos pequeño y de solo lectura diseñado para sistemas embebidos o medios de rescate. No soporta archivos mayores a 4GB
+$ genromfs -f sistema.rom -d mi_directorio (crea una imagen llamada sistema.rom con el contenido de mi_directorio)
+$ genromfs -f rescue.rom -d rescue_files -V "Sistema de rescate v1.0" (especificar una etiqueta)
+$ genromfs -d mi_directorio > imagen.rom (redirigir la salida a stdout)
+$ genromfs -d rootfs -f /dev/flash_drive (con dispositivos de bloque directamente)
+$ genromfs -f minimal.rom -d rootfs -x "*.tmp" -x "*.log" (excluir archivos por patrón)
 
 
 geoiplookup
