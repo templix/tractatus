@@ -20009,6 +20009,39 @@ $ listgeo mapa.tif > mapa.geo (guardar metadatos a un archivo)
 $ geotifcp -g metadatos.geo original.tif nuevo_geotiff.tif
 
 
+germinate
+Herramienta utilizada para gestionar listas de paquetes denominadas semillas [seeds]. Su función principal es tomar estas listas iniciales de paquetes y expandirlas, resolviendo todas sus dependencias para generar una lista completa de paquetes necesarios.
+$ germinate --seed-path ./seeds/ --output-dir ./output/ desktop (el resultado da lista de todos los paquetes necesarios para la semilla desktop, incluyendo dependencias directas e indirectas)
+      --seed-path ./seeds/: Ruta al directorio donde están los archivos de semillas.
+      --output-dir ./output/: Directorio donde se guardará la lista expandida de paquetes.
+      desktop: Nombre de la semilla a procesar.
+$ germinate --seed-path ./seeds/ --output-dir ./output/ alternate (permite rastrear el origen y la razón de inclusión de cada paquete en la compilación final)
+$ grep -l ^exim4 ./output/* (ver por qué exim4 aparece en la lista final de paquetes para un CD de instalación)
+
+
+gertty
+Gerrit es una herramienta de revisión de código basada en web muy usada en entornos de desarrollo colaborativos que usan Git. A diferencia de Gerrit, que es web, Gertty permite gestionar revisiones de código de manera local y offline por lo que las acciones como comentar, aprobar o marcar como revisado se aplican en local y se sincronizan más tarde.
+Crear un archivo de configuración. Ejemplo mínimo:
+$ nano ~/.gertty.yaml
+       gerrit:
+         url: https://review.example.com
+         username: tu_usuario
+         password: tu_token_o_password
+       projects:
+         - name: ejemplo/proyecto
+           git-url: ssh://tu_usuario@review.example.com:29418/ejemplo/proyecto
+Nota: Gerrit puede requerir una contraseña o HTTP password/token, no tu clave normal.
+$ gertty (cuando se lanza gertty por primera vez, sincronizará los proyectos y cambios locales)
+1.-
+Ejemplo de flujo de trabajo
+$ gertty (abrir Gertty)
+Aparecen cambios nuevos para revisar:
+         Project: ejemplo/proyecto
+           * Change 1234: Corrige error en módulo X
+           * Change 1235: Mejora documentación
+Navegas a uno con j/k, presionas Enter para abrirlo, lees el diff, haces comentarios (r), votas con v (por ejemplo, Code-Review +1), marcas como revisado con c y sincronizas con el servidor con :sync.
+
+
 get-iab
 [arp-scan]. Recupera el archivo IAB de Ethernet del sitio web IEEE [<https://standards.ieee.org/>] y lo guarda en el formato utilizado por arp-scan. El archivo IAB contiene todos los IAB (bloques de direcciones individuales) que se han registrado con IEEE.
 # get-iab -v
