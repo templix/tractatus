@@ -20079,11 +20079,6 @@ get-iab
 # get-iab -f iab.txt (que escriba el resultado en el archivo especificado. Por defecto en ieee-iab.txt)
 
 
-getkeycodes
-Muestras las tablas de asignación scancode y keycode del núcleo.
-$ getkeycodes
-
-
 get-oui
 [arp-scan]. Recupera el archivo OUI de Ethernet del sitio web IEEE [<http://standards.ieee.org>] y lo guarda en el formato utilizado por arp-scan. El archivo OUI contiene todos los OUI (identificadores únicos de la organización) que se han registrado con IEEE.
 # get-oui -v
@@ -20100,6 +20095,30 @@ getconf
 Consulta las variables de configuración del sistema.
 $ getconf -a (Muestra el listado)
 $ getconf LONG_BIT (Informa sobre si se trata de un equipo de 32 o 64 bits)
+
+
+getdata
+Herramienta diseñada para gestionar bases de datos externas, facilitando la descarga de datos mediante wget y su posterior indexación. Es útil para mantener bases de datos actualizadas automáticamente, como las de programas como iplocate, tellico o gnotski.
+# getdata ejemplo (con un archivo de configuración [/etc/getdata/ejemplo.conf], que define la fuente de datos y cómo indexarlos, leerá la configuración y descargará los datos)
+# getdata --debug --force ejemplo (volver a descargar los datos y ver más detalles)
+# getdata --show ejemplo (revisar cómo está configurada una base de datos)
+Una muestra de archivo de configuración
+# nano /etc/getdata/ejemplo.conf
+       # Fuente de datos a descargar
+       URL = "https://ejemplo.com/database/latest.zip"
+       # Comando para extraer/indexar los datos
+       POST_PROCESS = "unzip -o %f -d /var/lib/ejemplo/db/"
+       # Ruta donde guardar los datos descargados
+       OUTPUT_FILE = "/var/lib/ejemplo/db/latest.zip"
+
+
+getdns-utils
+Es una API para consultas DNS asíncrona [que las aplicaciones no se bloqueen esperando la respuesta DNS] moderna. Incluye la utilidad de línea de comandos getdns-query, que permite realizar consultas DNS detalladas y analizar las respuestas, incluyendo soporte para UDP, TCP y TLS, así como para la validación de seguridad DNSSEC
+$ getdns_query www.ejemplo.com (realiza una consulta DNS estándar para obtener la dirección IPv4 del dominio indicado)
+$ getdns_query -t AAAA www.ejemplo.com (el parámetro -t AAAA especifica que se desea consultar el registro IPv6)
+$ getdns_query -l www.ejemplo.com (-l fuerza el uso de DNS sobre TLS, proporcionando mayor privacidad y seguridad en la consulta)
+$ getdns_query -s www.ejemplo.com (-s activa la validación DNSSEC, mostrando si la respuesta está firmada y es segura)
+$ getdns_query -t MX dominio.com (consulta los registros de correo [MX] del dominio)
 
 
 getenforce
@@ -20147,6 +20166,11 @@ $ gethostip -x google.es (sólo con formato hexadecimal)
 $ gethostip -f google.es (Genera la dirección IP en todos los formatos admitidos)
 
 
+getkeycodes
+Muestras las tablas de asignación scancode y keycode del núcleo.
+$ getkeycodes
+
+
 getopt
 se utiliza para analizar las opciones en líneas de comando para facilitar su análisis por parte de los procedimientos del shell y para comprobar si las opciones son válidas. Por ejemplo, si tiene un script que acepta las opciones -a, -b y -c, getopts permite combinarlas como -abc, -bca o -bac, etc.
 
@@ -20177,6 +20201,33 @@ Permite listar polí­ticas y determinar si estan activas o inactivas en SELinux
 	    allow_ftpd_use_cifs (Permite transferencias de datos desde CIFS)
 	    allow_ftpd_use_nfs (Permite transferencias de datos desde NFS)
 	    ftp_home_dir (Permite a usuarios locales acceder a sus directorios de inicio)
+
+
+getstream
+Utilidad que extrae un flujo de transporte MPEG de una tarjeta DVB conectada al sistema y configurada correctamente y lo transmite a la red de área local. Está diseñada para reemplazar a VLC y consume mucha menos CPU y memoria que VLC.
+$ getstream (iniciará el extracción del flujo de transporte MPEG y lo transmitirá a la red local)
+$ getstream --pid=PID --sid=SID --tsfile=/home/user/dvb_stream.ts (identificador del PID del flujo que se desea capturar, identificador del SID del servicio DVB y ruta donde se guardará)
+
+
+gettext
+Utilidades para la internacionalización [i18n] y la localización [l10n] de software. Permiten que los programas que hace el uuario se muestren en diferentes idiomas sin necesidad de modificar el código fuente principal. En el flujo de trabajo de gettext, los textos que se mostrarán al usuario en el programa no están directamente escritos en el código. En su lugar, se utilizan cadenas especiales que actúan como "claves". Estas claves se asocian a las traducciones correspondientes en archivos separados para cada idioma.
+Ejemplo de uso en lenguaje Python para marcar cadenas traducibles
+# nano script.py
+       import gettext
+       # Establecer el directorio donde se encontrarán los archivos .mo
+       LOCALEDIR = 'locale'
+       # Obtener la función de traducción para el dominio 'mi_programa' y el idioma actual
+       gettext.install('mi_programa', LOCALEDIR)
+       print(_("Hola, mundo!"))
+       nombre = "Usuario"
+       print(_("Bienvenido, %s") % nombre)
+       print(_("Tienes %(count)d mensaje(s) nuevo(s).") % {'count': 3})
+En este ejemplo:
+       Importamos el módulo gettext.
+       Definimos LOCALEDIR como el directorio donde guardaremos nuestros archivos .mo.
+       gettext.install('mi_programa', LOCALEDIR) configura el entorno de traducción para el dominio 'mi_programa'. El "dominio" agrupa los archivos de traducción relacionados con una parte del software.
+       La función _() (que es un alias común para gettext.gettext()) envuelve las cadenas que queremos traducir.
+$ xgettext --default-domain=mi_programa -o locale/mi_programa.pot script.py (especifica el nombre del dominio para el archivo .pot, la ruta y el nombre del archivo de salida .pot y el script que se analiza)
 
 
 gflags2man
