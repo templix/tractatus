@@ -20042,6 +20042,21 @@ Aparecen cambios nuevos para revisar:
 Navegas a uno con j/k, presionas Enter para abrirlo, lees el diff, haces comentarios (r), votas con v (por ejemplo, Code-Review +1), marcas como revisado con c y sincronizas con el servidor con :sync.
 
 
+ges1.0-tools
+[GStreamer Editing Services]. Herramientas para usar con los servicios de edición de GStreamer.
+$ ges-launch-1.0 +clip ~/Música/the_best.wav
+$ ges-launch-1.0 +clip video.mp4 (crea una timeline con una sola capa y un solo clip de video llamado video.mp4)
+$ ges-launch-1.0 +clip video1.mp4 +clip video2.mp4 (concatena los dos clips en una sola línea de tiempo)
+$ ges-launch-1.0 +clip video.mp4 ! videobalance brightness=0.5 (añade un efecto de brillo al video. Se puede usar cualquier plugin de GStreamer como efecto)
+$ ges-launch-1.0 +clip video.mp4 +clip audio.mp3 (crea una línea de tiempo donde se reproduce video.mp4 con la pista de audio adicional audio.mp3)
+$ ges-launch-1.0 +clip video.mp4 inpoint=5 duration=10 (usa el video video.mp4 desde el segundo 5 durante 10 segundos)
+$ ges-launch-1.0 --help-gst (mostrar las opciones de GStreamer)
+$ ges-launch-1.0 --help-rendering (mostrar opciones de renderizado)
+$ ges-launch-1.0 --help-playback (mostrar opciones de reproducción)
+$ ges-launch-1.0 --help-informative (mostrar opciones informativas)
+$ ges-launch-1.0 --track-types=audio +clip ~/Videos/un_video.avi  (en una muestra de audio y vídeo, solo reproducirá el audio de la muestra en su totalidad)
+
+
 get-iab
 [arp-scan]. Recupera el archivo IAB de Ethernet del sitio web IEEE [<https://standards.ieee.org/>] y lo guarda en el formato utilizado por arp-scan. El archivo IAB contiene todos los IAB (bloques de direcciones individuales) que se han registrado con IEEE.
 # get-iab -v
