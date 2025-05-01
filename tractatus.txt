@@ -516,13 +516,14 @@ $ agedu -s /var/www/html -w (abrir el informe en el navegador)
 
 
 agetty
-Alternativa a getty. Abre un puerto tty, pide un nombre de usuario e invoca el comando /bin/login. Es un programa que se ejecuta en una computadora host que administra terminales físicos o virtuales para permitir el acceso de múltiples usuarios. Tiene algunas características no-estandar que son útiles para líneas de cable y líneas telefónicas.
+[linux-util]. Alternativa a getty. Abre un puerto tty, pide un nombre de usuario e invoca el comando /bin/login. Es un programa que se ejecuta en una computadora host que administra terminales físicos o virtuales para permitir el acceso de múltiples usuarios. Tiene algunas características no-estandar que son útiles para líneas de cable y líneas telefónicas.
 $ agetty 9600 ttyS1
 $ agetty -8 – linux (opciones para tty de 8 bits, '-' la entrada estándar ya está conectada a una tty y 'linux' es el valor de la variable de entorno TERM)
 $ agetty -8 -t 5 linux (tiempo de espera del proceso de inicio de sesión 5 segundos)
 $ agetty --local-line 9600 ttyS1 vt100
 $ agetty --extract-baud --timeout 60 ttyS1 9600,2400,1200 (Para una línea de marcación de estilo antiguo con un módem de 9600/2400/1200 baudios)
 $ agetty --wait-cr --init-string 'ATE0Q1&D2&C1S0=1\015' 115200 ttyS1 (Para un módem Hayes con una interfaz fija de 115200 bps a la máquina. La cadena de inicio de ejemplo desactiva el eco del módem y los códigos de resultado, hace que el módem/computadora rastree el módem/módem DCD, hace que una caída de DTR cause una desconexión y activa la respuesta automática después de 1 pitido)
+$ agetty --list-speeds (muestra las velocidades en baudios admitidas)
 
 
 aha
@@ -20228,6 +20229,10 @@ En este ejemplo:
        gettext.install('mi_programa', LOCALEDIR) configura el entorno de traducción para el dominio 'mi_programa'. El "dominio" agrupa los archivos de traducción relacionados con una parte del software.
        La función _() (que es un alias común para gettext.gettext()) envuelve las cadenas que queremos traducir.
 $ xgettext --default-domain=mi_programa -o locale/mi_programa.pot script.py (especifica el nombre del dominio para el archivo .pot, la ruta y el nombre del archivo de salida .pot y el script que se analiza)
+
+
+getty
+Alternativa de agetty [ver] abre un puerto TTY, solicita un nombre de usuario e invoca el comando /bin/login.
 
 
 gflags2man
