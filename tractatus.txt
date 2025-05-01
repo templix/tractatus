@@ -20057,6 +20057,22 @@ $ ges-launch-1.0 --help-informative (mostrar opciones informativas)
 $ ges-launch-1.0 --track-types=audio +clip ~/Videos/un_video.avi  (en una muestra de audio y vídeo, solo reproducirá el audio de la muestra en su totalidad)
 
 
+gesftpserver
+[Green End SFTP]. Submódulo de servidor SFTP para OpenSSH. Su propósito principal es permitir la transferencia segura de archivos usando el protocolo SFTP [SSH File Transfer Protocol]. SFTP es un protocolo de red, que suele ejecutarse como un subsistema SSH y que permite la transferencia de archivos.
+Cambiar la configuración de SSH:
+# nano /etc/ssh/sshd_config
+Busca la línea que dice:
+      Subsystem sftp /usr/lib/openssh/sftp-server
+Y cámbiala por:
+      Subsystem sftp /usr/lib/gesftpserver/gesftpserver
+# systemctl restart ssh (reiniciar el servicio SSH para aplicar cambios)
+$ sftp usuario@servidor (conectarse usando un cliente SFTP)
+Una vez conectado, se puede usar comandos como:
+      put archivo.txt (subir archivo)
+      get archivo.txt (descargar archivo)
+      ls (listar archivos)
+
+
 get-iab
 [arp-scan]. Recupera el archivo IAB de Ethernet del sitio web IEEE [<https://standards.ieee.org/>] y lo guarda en el formato utilizado por arp-scan. El archivo IAB contiene todos los IAB (bloques de direcciones individuales) que se han registrado con IEEE.
 # get-iab -v
