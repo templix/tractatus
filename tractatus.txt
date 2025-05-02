@@ -20286,6 +20286,47 @@ ftp> help (Para saber los comando disponibles)
 ftp> quit (Para salir)
 
 
+gfxboot
+Herramienta para personalizar la apariencia como imágenes de fondo, fuentes personalizadas, barras de progreso, etc de los menús de arranque más populares como GRUB, LILO y Syslinux, haciéndolos más atractivos visualmente.
+1.-
+Ejemplo de un tema con una imagen de fondo y texto básico.
+Supongamos una imagen llamada fondo.png y se quiere mostrar un menú simple con texto blanco sobre ese fondo.
+# nano tema.cfg
+       background fondo.png
+       color white
+       font default
+       menu {
+         item "Iniciar Linux" --command="linux /boot/vmlinuz root=/dev/sda1"
+         item "Opciones Avanzadas" --submenu=advanced
+       }
+       submenu advanced {
+         item "Modo Recuperación" --command="linux /boot/vmlinuz root=/dev/sda1 single"
+         item "Volver" --command=main
+       }
+"background fondo.png" indica la imagen de fondo, "color white" establece el color del texto en blanco, "font default" usa la fuente predeterminad, la sección "menu" define las opciones principales del menú y la sección "submenu advanced" define un submenú.
+$ gfxboot tema.cfg (simularía cómo se vería el menú de arranque con el fondo blanco y las opciones de texto)
+2.-
+Ejemplo con un tema con una fuente personalizada [Ubuntu-Bold.ttf] y una barra de progreso.
+# nano tema.cfg
+       background azul_gradiente.png
+       color negro
+       font Ubuntu-Bold.ttf 16  # Especifica la fuente y el tamaño
+       menu {
+         item "Iniciar Ubuntu" --command="linux /boot/vmlinuz root=/dev/sda1 quiet splash"
+       }
+       progressbar {
+         x 50
+         y 400
+         width 400
+         height 20
+         color verde
+         background gris
+       }
+"font Ubuntu-Bold.ttf 16" especifica la fuente y su tamaño y la sección "progressbar" define la posición, dimensiones y colores de la barra de progreso.
+$ gfxboot tema.cfg (probar el tema)
+Notaa.- No todos los cargadores de arranque admiten todas las características de gfxboot de la misma manera. Es importante consultar la documentación del cargador de arranque específico para conocer las opciones compatibles.
+
+
 ghostscript
 Intérprete del lenguaje PostScript® y de archivos PDF. Incluye las aplicaciones: dvipdf, eps2eps, gs, gsbj, gsdj, gsdj500, gslj, gslp, gsnd, pdf2dsc, pdf2ps, pf2afm, pfbtopfa, pphs, printafm, ps2ascii, ps2epsi, ps2pdf, ps2pdf12, ps2pdf13, ps2pdf14, ps2pdfwr, ps2ps, ps2ps2, ps2txt y update-gsfontmap
 
