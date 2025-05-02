@@ -20458,6 +20458,14 @@ Normalmente los datos del usuario se guardan en ~/.gitconfig con lo que pueden v
 $ cat .gitconfig
 
 
+git2cl
+Herramienta diseñada específicamente para convertir automáticamente los registros de cambios de Git a formatos compatibles con otros sistemas de control de versiones, como CVS [Concurrent Versions System]
+$ git2cl --cvs <commit_hash>  commit.cvs (convierte el registro de Git especificado al formato CVS y lo guarda en un archivo llamado commit.cvs)
+$ git2cl --cvs $(git log --format=%H) | sed 's/^/Commit:/' (convierte todos los commits desde el último commit hasta el primero, formateando cada uno como si fuera un commit individual en CVS)
+$ git2cl --cvs $(git rev-list HEAD~5..HEAD) > range.cvs (convierte los últimos 5 commits a formato CVS y los guarda en un archivo llamado range.cvs)
+$ git2cl --cvs abc123 > specific_commit.cvs (conversión de un commit específico. "abc123" es el hash de un commit específico que se quiere convertir)
+
+
 git-doc
 Documentación en inglés de git. Acceder via navegador a:
 	file:///usr/share/doc/git-doc/gittutorial.html
