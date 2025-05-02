@@ -20377,6 +20377,19 @@ Paletas (.gpl)	/usr/share/gimp/2.0/palettes
 Degradados(.ggr)/usr/share/gimp/2.0/gradients
 
 
+ginkgo
+Es un marco de pruebas de Golang de estilo BDD [Behavior-Driven Development], diseñado para generar, ejecutar, filtrar y perfilar suites de pruebas de Ginkgo. Se complementa mejor con la biblioteca de comparadores Gomega, pero está diseñado para ser independiente de los comparadores.
+$ ginkgo (ejecutar todas las pruebas en el directorio actual)
+$ ginkgo my_test_file.go (ejecutar pruebas en un archivo específico)
+$ ginkgo bootstrap students (creará un archivo de prueba llamado "students_suite_test.go" dentro del directorio "students")
+$ ginkgo -r (ejecutar todas las suites de pruebas bajo el directorio actual de manera recursiva)
+$ ginkgo watch (monitorear cambios en los archivos y ejecutar las pruebas automáticamente cuando se detecten cambios)
+$ ginkgo watch -r (detecta todas las suites de pruebas bajo el directorio actual de manera recursiva)
+$ ginkgo --junit-report=report.xml (generar reporte en formato XML)
+$ ginkgo -focus="@focus" (ejecutar solo las pruebas que coincidan con una etiqueta específica)
+$ ginkgo -p --keep-going (ejecutar pruebas en paralelo y continuar ejecutando las pruebas incluso si algunas fallan)
+
+
 git
 [git-core]. Manual completo en español: <http://www-cs-students.stanford.edu/~blynn/gitmagic/intl/es/book.html#_hosting_git_gratuito>
 Software de control de versiones. Una vez registrados en Github [<http://github.com>], crear un nuevo repositorio con el nombre escogido y github nos facilitará los datos de acceso [Al estilo: https://github.com/templix/tractatus.git].
