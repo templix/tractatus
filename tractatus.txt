@@ -20554,20 +20554,19 @@ gita
 Es una herramienta para gestionar múltiples repositorios Git de manera simultánea, mostrando su estado, rama, modificación, etc. Si varios repositorios están relacionados, Gita también permite ver su estado conjunto. Sus caracteristicas principales es que permite una visualización del estado de múltiples repositorios Git en una sola vista y que permite operaciones simultáneas como pull, push, fetch, etc., en varios repositorios.
 $ gita add /ruta/al/repo1 /ruta/al/repo2 (añadir repositorios para que gita pueda gestionarlos)
 $ gita ls (listar repositorios gestionados)
-$ gita status (ver el estado de todos los repositorios)
-       repo1: main *
-       repo2: dev ✔
-       repo3: feature ?
-* --> Cambios sin commit, ✔ --> Repositorio actualizado y ? --> Rama sin upstream remoto.
 $ gita fetch (hace git fetch en todos los repositorios)
 $ gita pull (hace git pull en todos en todos los repositorios)
 $ gita push (hace git push en todos los repositorios)
-$ gita -r repo1 status (muestra estado solo de repo1)
-$ gita -r repo2 pull (hace pull solo en repo2)
+$ gita pull repo1 (hace pull solo de repo1)
 $ gita group add frontend repo1 repo2 (crear el grupo "frontend" con los repositorios especificados)
 $ gita frontend status (ver estado de los repositorios del grupo "frontend")
 $ gita rename repo1 nuevo-nombre (renombrar un repositorios)
 $ gita rm repo2 (elimina repo2 del seguimiento. No borra los archivos)
+
+
+gitbatch
+Gestionar repositorios Git en un solo lugar
+$ gitbatch (en el directorio con varios subdirectorios git, los muestra todos en una interfaz de consola)
 
 
 gksu
