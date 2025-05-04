@@ -20297,6 +20297,57 @@ Convierte páginas man en archivos de texto en /tmp.
 $ gflags2man ls (Creará el archivo ls.1 en /tmp)
 
 
+gfsecret
+Herramientas para facilitar el intercambio de secretos, un método criptográfico que permite dividir un secreto (como un archivo o una clave) en múltiples partes o "recursos compartidos" de manera que solo un número mínimo de estas partes es necesario para reconstruir el secreto original. El esquema de Shamir, propuesto en 1979, divide un secreto en "n" partes [recursos compartidos] de modo que se necesitan al menos "k" partes [umbral] para reconstruirlo. Utiliza interpolación polinómica sobre campos finitos para garantizar seguridad teórica de la información: con menos de "k" partes, es matemáticamente imposible obtener información sobre el secreto. Cuenta con tres herramientas principales: gfsec-split, que divide un archivo en varios recursos compartidos, y gfsec-use, que reconstruye el archivo original a partir de algunos de los recursos compartidosy y gfsec-split-gpg, un script auxiliar que facilita dividir claves privadas de GnuPG.
+1.-
+Supongamos que se tiene un archivo sensible /home/USER/secreto.txt y se quiere dividir en 3 recursos compartidos, de los cuales se necesitan al menos 2 para reconstruirlo.
+$ gfsec-split -n 2 -s file:///home/alice/.local/share/gfsecret/secreto.share1 -s label://USBSTICK/secreto.share2 -s mtp://RF2GB6X704P/Documents/secreto.share3 /home/USER/secreto.txt
+Explicación:
+        -n 2: Establece el umbral en 2, se necesitan al menos 2 recursos compartidos para reconstruir el secreto.
+        -s <URI>: Especifica las ubicaciones de los recursos compartidos:
+           - Uno en el sistema de archivos local [file://].
+           - Otro en un dispositivo USB con etiqueta USBSTICK [label://].
+           - Otro en un dispositivo MTP con número de serie RF2GB6X704P [mtp://].
+        /home/USER/secreto.txt: El archivo a dividir.
+Resultado:
+        - gfsec-split genera 3 recursos compartidos y los almacena en las ubicaciones especificadas.
+        - El archivo original /home/USER/secreto.txt se elimina a menos que se use la opción "-k" para conservarlo.
+        - Se crea un archivo de configuración en "$XDG_CONFIG_HOME/gfsecret/secreto.conf" o en una ubicación especificada con -c, que contiene:
+          OUTFILE=/home/alice/secreto.txt
+          MINSHARES=2
+          URI=file:///home/USER/.local/share/gfsecret/secreto.share1.024
+          URI=label://USBSTICK/secreto.share2.070 [Dispositivo externo identificado por su etiqueta]
+          URI=mtp://RF2GB6X704P/Documents/secreto.share3.139 [Dispositivo MTP identificado por su número de serie]
+Para reconstruir el archivo "/home/USER/secreto.txt usando los recursos compartidos:
+$ gfsec-use -c $XDG_CONFIG_HOME/gfsecret/secreto.conf
+Explicación:
+        - -c: Especifica el archivo de configuración generado por gfsec-split.
+        - gfsec-use busca los recursos compartidos en las URIs listadas en el archivo de configuración.
+        - Si al menos 2 recursos compartidos están disponibles, por ejemplo, el archivo local y el USB, reconstruye el archivo /home/USER/secreto.txt.
+        - Una vez reconstruido, gfsec-use abre un nuevo shell donde puedes usar el archivo. Cuando el shell termina, el archivo reconstruido se elimina automáticamente.
+Nota.- Si se divide un secreto en 5 partes (n=5) con un umbral de 3 (k=3), cualquier combinación de 3 o más partes puede reconstruir el secreto, pero 2 o menos no revelan nada. Salida de ejmplo si faltan recursos:
+       Found share data in file:///home/USER/.local/share/gfsecret/secreto.share1.024
+       gfsec-use: Cannot reconstitute the secret: Not enough shares available
+Salida de ejemplo con éxito:
+       Found share data in file:///home/USER/.local/share/gfsecret/secreto.share1.024
+       Found share data in label://USBSTICK/secreto.share2.070
+       gfsec>
+En este caso, el archivo se reconstruye, y se puede trabajar con él en el shell. Al salir con "exit", el archivo se borra.
+2.-
+Ejemplo de dividir una clave privada de GnuPG
+Supongamos que USER quiere dividir su clave privada en 3 recursos compartidos, con un umbral de 2.
+$ gfsec-split-gpg USER file:///home/USER/.local/share/gfsecret/mykey.share1 label://USBSTICK/mykey.share2 mtp://RF2GB6X704P/Documents/mykey.share3
+Explicación:
+        - USER: El identificador de la clave GnuPG de USER [puede ser el ID de la clave o el correo asociado].
+        - Se crean 3 recursos compartidos en las ubicaciones especificadas.
+        - Se genera un archivo de configuración en $XDG_CONFIG_HOME/gfsecret/mykey.conf.
+        - El umbral por defecto es 2 si no se especifica con la opción -n.
+Reconstrucción:
+$ gfsec-use -c $XDG_CONFIG_HOME/gfsecret/mykey.conf
+Esto reconstruye la clave privada temporalmente, permitiendo usarla en un shell seguro.
+Nota.- gfsec-split elimina el archivo original y gfsec-use borra el archivo reconstruido tras usarlo.
+
+
 gftp
 Cliente para  la tranferencia de archivos. Logs y configuración en ~/.gftp/gftp.log y ~/.gftprc
 $ gftp ssh2://USER:PASS@HOST:22/home/USER_REMOTO (Abre la interfaz gráfica)
@@ -20497,6 +20548,26 @@ Documentación en inglés de git. Acceder via navegador a:
 
 git-shell
 Shell de inicio de sesión git pero restringido solo para acceso SSH. Permite la ejecución solo de los comandos Git pull/push, además el administrador puede incluir otros comandos que han de detallarse en un subdirectorio llamado git-shell-commands en el directorio del usuario.
+
+
+gita
+Es una herramienta para gestionar múltiples repositorios Git de manera simultánea, mostrando su estado, rama, modificación, etc. Si varios repositorios están relacionados, Gita también permite ver su estado conjunto. Sus caracteristicas principales es que permite una visualización del estado de múltiples repositorios Git en una sola vista y que permite operaciones simultáneas como pull, push, fetch, etc., en varios repositorios.
+$ gita add /ruta/al/repo1 /ruta/al/repo2 (añadir repositorios para que gita pueda gestionarlos)
+$ gita ls (listar repositorios gestionados)
+$ gita status (ver el estado de todos los repositorios)
+       repo1: main *
+       repo2: dev ✔
+       repo3: feature ?
+* --> Cambios sin commit, ✔ --> Repositorio actualizado y ? --> Rama sin upstream remoto.
+$ gita fetch (hace git fetch en todos los repositorios)
+$ gita pull (hace git pull en todos en todos los repositorios)
+$ gita push (hace git push en todos los repositorios)
+$ gita -r repo1 status (muestra estado solo de repo1)
+$ gita -r repo2 pull (hace pull solo en repo2)
+$ gita group add frontend repo1 repo2 (crear el grupo "frontend" con los repositorios especificados)
+$ gita frontend status (ver estado de los repositorios del grupo "frontend")
+$ gita rename repo1 nuevo-nombre (renombrar un repositorios)
+$ gita rm repo2 (elimina repo2 del seguimiento. No borra los archivos)
 
 
 gksu
