@@ -20283,6 +20283,15 @@ $ gfkey -c -b 2048 (gestionar claves de autenticación)
 $ gfarm2fs /mnt/gfarm (montar Gfarm como sistema de archivos)
 
 
+gff2ps
+Programa para biólogos computacionales que trabajan con datos genómicos para convertir registros en formato GFF [General Feature Format] en gráficos unidimensionales de alta calidad en PostScript. El GFF es un formato estándar utilizado para representar información sobre genes y características genéticas en secuencias de ADN.
+$ gff2ps input.gff > output.ps (convierte el archivo input.gff al formato PostScript y lo guarda como output.ps)
+$ gff2ps -b input.gff > gene_bar_chart.ps (generar un gráfico de barras para representar genes)
+$ gff2ps -c input.gff > gene_circular_chart.ps (crear un diagrama circulr de genes)
+$ gff2ps -s "gene_color=red;font_size=12" input.gff > styled_genes.ps (personaliza el color y el tamaño de la fuente para los genes en el gráfico)
+$ gff2ps -r input.gff > gene_summary.ps (crea un resumen de genes agrupados por región)
+
+
 gflags2man
 Convierte páginas man en archivos de texto en /tmp.
 $ gflags2man ls (Creará el archivo ls.1 en /tmp)
