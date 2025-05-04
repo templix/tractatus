@@ -20569,6 +20569,15 @@ Gestionar repositorios Git en un solo lugar
 $ gitbatch (en el directorio con varios subdirectorios git, los muestra todos en una interfaz de consola)
 
 
+gitinspector
+Herramienta de análisis estadístico para repositorios Git que genera informes detallados sobre contribuciones, actividad y métricas de desarrollo en un proyecto.
+$ gitinspector /ruta/al/repositorio (resumen de contribuciones por autor, incluyendo commits y cambios en líneas)
+$ gitinspector -H /ruta/al/repositorio > reporte.html (genera un informe visual en HTML)
+$ gitinspector --since="2023-01-01" --until="2023-12-31" /ruta/al/repositorio (analiza solo actividad del año 2023)
+$ gitinspector -x "*.md" /ruta/al/repositorio (excluye archivos Markdown del análisis)
+$ gitinspector -T /ruta/al/repositorio (muestra en qué horas hubo más actividad)
+
+
 gksu
 [gksudo]. Proporciona permisos para que un usuario autorizado pueda ejecutar cualquier programa, script o aplicación como usuario root. El nombre puede variar según distro o escritorio: kdesu en kde, beesu en Fedora...
 $ gksu nautilus
