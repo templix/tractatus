@@ -20251,6 +20251,21 @@ Supervisar un tty serial en /dev/ttyS0
 # ln -s /etc/sv/ttyS0 /etc/service/ (enlazar el servicio)
 
 
+gfarm2fs
+Programa basado en FUSE [Filesystem in Userspace] que permite montar un sistema de archivos Gfarm en un punto de montaje local y acceder a su sistema de archivos. El sistema de archivos Gfarm está diseñado para convertir PCs de consumo en nodos de una red de almacenamiento distribuido, implementando la arquitectura Grid Datafarm para computación global con uso intensivo de datos a gran escala.
+$ gfarm2fs /mnt/gfarm (montar un sistema de archivos Gfarm)
+$ fusermount -u /mnt/gfarm (desmontar un sistema Gfarm)
+$ gfarm2fs -o attr_timeout=15 /mnt/gfarm (establece tiempo de caché para los atributos de archivo a 15 segundos)
+$ gfarm2fs -o allow_other,default_permissions /mnt/gfarm (permite que otros usuarios accedan al sistema montado manteniendo los permisos)
+$ gfarm2fs -o directory=/usuario/datos /mnt/gfarm (montar un directorio específico)
+$ gfarm2fs -o attr_timeout=30,entry_timeout=30,negative_timeout=5 /mnt/gfarm (tiempo de caché 30 segundos, caché para entradas de directorio(30 segundos y tiempo de caché para entradas no existentes 5 segundos)
+$ gfarm2fs -o gfs_stat_timeout=5,auto_cache /mnt/gfarm (tiempo de caché para información de estado y habilita el almacenamiento en caché automático)
+Para configurar un montaje automático al iniciar el sistema:
+# nano /etc/fstab
+Agregar la entrada:
+        gfarm2fs#/    /mnt/gfarm    fuse    noauto,user    0    0
+
+
 gfarm-client
 El sistema de archivos Gfarm está diseñado para convertir PCs estándar en nodos de una red de almacenamiento distribuido, implementando la arquitectura Grid Datafarm para computación global con uso intensivo de datos a gran escala.
 $ gfservice start-gfmd gfmd2 (inicia servidor metadatos [gfmd] en host gfmd2)
