@@ -20609,6 +20609,32 @@ $ git push
 Nota.- Por defecto gitit no tiene autenticación. Para hacerlo más seguro se debería ejecutar detrás de un servidor como nginx o Apache con autenticación HTTP o usar un proxy inverso con HTTPS.
 
 
+gitlab-cli
+Herramienta para interactuar con la API del servidor de GitLab v4. El ejecutable se llama python-gitlab.
+Configurar credenciales creando el archivo:
+$ nano ~/.python-gitlab.cfg
+       [global]
+        default = gitlab.com
+        ssl_verify = true
+        timeout = 5
+       [gitlab.com]
+        url = https://gitlab.com
+        private_token = el_token_personal
+        api_version = 4
+$ python-gitlab --help (ayuda general con todos los argumentos de la aplicación)
+$ python-gitlab project -h (ver ayuda específica de un comando)
+$ python-gitlab current-user get (información del usuario actual)
+$ python-gitlab project list (listar proyectos)
+$ python-gitlab group list (listar grupos)
+$ python-gitlab project get --id=username/project-name (información de un proyecto específico)
+$ python-gitlab project-issue list --project-id=username/project-name (listar los issues de un proyecto)
+$ python-gitlab project-issue create --project-id=username/project-name --title="Nuevo issue" --description="Descripción del issue" (crear un nuevo issue)
+$ python-gitlab project-access-request list --project-id=username/project-name (trabajar con solicitudes de acceso a proyectos)
+$ python-gitlab event list (listar eventos)
+$ python-gitlab project-variable list --project-id=username/project-name (gestionar variables de CI)
+$ python-gitlab project create --name="Nuevo Proyecto" --description="Descripción del proyecto" (crear un nuevo proyecto)
+
+
 gitless
 Es un sistema de control de versiones experimental basado en Git que se ejecuta completamente en el navegador ideal para proyectos pequeños o colaboraciones informales.
 $ gitless init (iniciar un nuevo repositorio)
