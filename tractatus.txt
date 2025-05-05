@@ -20609,14 +20609,61 @@ $ git push
 Nota.- Por defecto gitit no tiene autenticación. Para hacerlo más seguro se debería ejecutar detrás de un servidor como nginx o Apache con autenticación HTTP o usar un proxy inverso con HTTPS.
 
 
+gitless
+Es un sistema de control de versiones experimental basado en Git que se ejecuta completamente en el navegador ideal para proyectos pequeños o colaboraciones informales.
+$ gitless init (iniciar un nuevo repositorio)
+$ gitless commit -m "Mensaje del commit" (hacer un commit)   ```
+$ gitless status (verificar el estado)
+$ gitless log (ver la historia de commits)
+
+
+gitlint
+Herramienta escrita en Python que revisa los mensajes de confirmación [commit messages] de Git para asegurar que cumplen con una guía de estilo predefinida. Su objetivo es mejorar la claridad, concisión y utilidad de los mensajes de commit.
+$ gitlint (analiza el mensaje del último commit en el repositorio actual)
+$ gitlint --commit f3fb2205faf56b (revisar un commit específico por su hash)
+$ gitlint install-hook (instala gitlint como hook en .git/hooks/commit-msg, para que se ejecute automáticamente en cada commit)
+$ gitlint -c title-max-length.line-length=60 (establece la longitud máxima de la línea de asunto a 60 caracteres para esa ejecución. Por defecto 72)
+
+
 gitmagic
 Guía sobre el sistema de control de versiones Git, más fácil de entender que el manual de usuario oficial. En el navegador entrar en file:///usr/share/doc/gitmagic/gitmagic.html
+
+
+gitpkg
+Herramienta diseñada para facilitar el mantenimiento de paquetes Debian en repositorios Git. Proporciona automatización y herramientas para exportar paquetes fuente Debian desde revisiones específicas de Git.
+$ gitpkg <branch> (en un repositorio Git con una sola rama especificada, se exportará dicha rama)
+$ gitpkg <branch1> <branch2> (con dos ramas especificadas, la primera rama se exportará como el origen completo desempaquetado, mientras que la segunda rama se exportará para el orig.tar.gz2)
+$ gitpkg --deb-dir=/ruta/personalizada <branch> (sobrescribir el directorio de destino predeterminado para los paquetes exportados)
 
 
 gksu
 [gksudo]. Proporciona permisos para que un usuario autorizado pueda ejecutar cualquier programa, script o aplicación como usuario root. El nombre puede variar según distro o escritorio: kdesu en kde, beesu en Fedora...
 $ gksu nautilus
 $ gksudo nano /etc/resolv.conf
+
+
+glab
+herramienta CLI de GitLab de código abierto.
+$ glab auth login (autenticar la aplicación y pedirá la URL de tu instancia de GitLab y token de acceso personal)
+$ glab project list (lista de los proyectos a los que se tiene acceso)
+$ glab project --namespace grupo_linux (ver proyectos dentro del grupo especificado)
+$ glab project --mine (ver solo los proyectos del usuario)
+$ glab project create nuevo-proyecto --description "Mi nuevo proyecto" --visibility private (creará un nuevo proyecto llamado "nuevo-proyecto" con la descripción proporcionada y lo establecerá como privado)
+$ glab project view <nombre_del_proyecto> (información detallada sobre el proyecto)
+$ glab project view ID_del_proyecto (lo mismo)
+$ glab issue list <nombre_del_proyecto> (mostrará las issues abiertas en el proyecto especificado)
+$ glab issue list <nombre_del_proyecto> --state=closed (mostrar las cerradas)
+$ glab issue list <nombre_del_proyecto> --label=etiqueta (ver las que contengan determinada etiqueta)
+$ glab issue list <nombre_del_proyecto> --author=juan (ver las de determinado autor)
+$ glab issue create -t "Título de la nueva issue" -d "Descripción detallada de la issue" -p <nombre_del_proyecto> (creará una nueva issue con el título, descripción y proyecto especificado)
+$ glab issue comment <número_de_issue> -m "Este es mi comentario" -p <nombre_del_proyecto> (añadir un comentario a una issue)
+$ glab mr view <número_de_mr> -p <nombre_del_proyecto> (ver detalles de una merge request)
+$ glab mr comment <número_de_mr> -m "Este es mi comentario" -p <nombre_del_proyecto> (añadir un comentario a una merge request)
+$ glab pipeline list <nombre_del_proyecto> (listar las últimas pipelines de un proyecto)
+$ glab pipeline view <ID_de_pipeline> -p <nombre_del_proyecto> (ver los detalles de una pipeline específica)
+$ glab snippet list (listar snippets)
+$ glab snippet create -t "Título del snippet" -f <ruta_al_archivo> --visibility private (crear un nuevo snippet)
+Nota.- Aunque es mantenido por la comunidad de GitLab, no es una herramienta oficial de GitLab. Esto significa que la compatibilidad con futuras versiones de la API de GitLab podría depender de las actualizaciones de la comunidad.
 
 
 glances
