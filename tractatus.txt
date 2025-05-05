@@ -20635,6 +20635,11 @@ $ python-gitlab project-variable list --project-id=username/project-name (gestio
 $ python-gitlab project create --name="Nuevo Proyecto" --description="Descripción del proyecto" (crear un nuevo proyecto)
 
 
+gitlab-rulez
+Herramienta que calcula y aplica cambios a la configuración de los proyectos en una instancia de GitLab según un conjunto de reglas YAML.
+$ gitlab-rulez --gitlab-url https://gitlab.com --token <TU_TOKEN> --rules rules.yml (URL de la instancia de GitLab, token de acceso y ruta al archivo que contiene las reglas)
+
+
 gitless
 Es un sistema de control de versiones experimental basado en Git que se ejecuta completamente en el navegador ideal para proyectos pequeños o colaboraciones informales.
 $ gitless init (iniciar un nuevo repositorio)
@@ -20660,6 +20665,13 @@ Herramienta diseñada para facilitar el mantenimiento de paquetes Debian en repo
 $ gitpkg <branch> (en un repositorio Git con una sola rama especificada, se exportará dicha rama)
 $ gitpkg <branch1> <branch2> (con dos ramas especificadas, la primera rama se exportará como el origen completo desempaquetado, mientras que la segunda rama se exportará para el orig.tar.gz2)
 $ gitpkg --deb-dir=/ruta/personalizada <branch> (sobrescribir el directorio de destino predeterminado para los paquetes exportados)
+
+
+gitsome
+Herramienta de línea de comandos que combina funcionalidades de git con integración directa a GitHub y un entorno de shell interactivo con características avanzadas como: Autocompletado inteligente, sugerencias automáticas, historial de comandos, ayuda contextual, comandos directos de GitHub como crear issues, ver notificaciones, etc. Ver git y gh.
+$ gitsome (abrirá una shell interactiva [IPython con mejoras], y dentro de ella se podrá usar tanto comandos de Git normales como comandos especiales de GitHub)
+> xonfig wizard (inicia el asistente de configuración para crear ~/.xonshrc)
+> xonfig tutorial (abre en el navegador un tutorial)
 
 
 gksu
