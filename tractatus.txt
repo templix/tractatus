@@ -20569,6 +20569,15 @@ Gestionar repositorios Git en un solo lugar
 $ gitbatch (en el directorio con varios subdirectorios git, los muestra todos en una interfaz de consola)
 
 
+gitbrute
+Modifica la confirmación principal en un repositorio Git, modificando la hora de confirmación y la hora de autor para que el hash de la confirmación
+Modifica un par de marcas de tiempo, de autor y confirmador, para que el hash de la confirmación de Git resultante comience con el prefijo indicado. Esta técnica se basa en la naturaleza del algoritmo SHA-1 utilizado por Git para generar los identificadores de las confirmaciones, donde pequeñas modificaciones en los metadatos pueden resultar en hashes completamente diferentes.
+Nota.- La búsqueda de un hash con un prefijo específico puede ser computacionalmente costosa. La duración del proceso aumenta exponencialmente con la longitud del prefijo deseado.
+$ gitbrute -cpus 64 -prefix 8e1dcfa696e42 (nivel de paralelismo; el predeterminado es el número de procesadores en línea al inicio y hash que se buscará)
+$ gitbrute -force true (si la confirmación actual ya coincide con el prefijo, se reemplazará por otra)
+Manipular los hashes de las confirmaciones puede generar confusión o desconfianza en entornos colaborativos. Es recomendable utilizar gitbrute únicamente con fines educativos o en proyectos personales donde se comprenda completamente el impacto de estas modificaciones.
+
+
 gitinspector
 Herramienta de análisis estadístico para repositorios Git que genera informes detallados sobre contribuciones, actividad y métricas de desarrollo en un proyecto.
 $ gitinspector /ruta/al/repositorio (resumen de contribuciones por autor, incluyendo commits y cambios en líneas)
@@ -20576,6 +20585,28 @@ $ gitinspector -H /ruta/al/repositorio > reporte.html (genera un informe visual 
 $ gitinspector --since="2023-01-01" --until="2023-12-31" /ruta/al/repositorio (analiza solo actividad del año 2023)
 $ gitinspector -x "*.md" /ruta/al/repositorio (excluye archivos Markdown del análisis)
 $ gitinspector -T /ruta/al/repositorio (muestra en qué horas hubo más actividad)
+
+
+gitit
+es un software de wiki que permite crear y mantener una wiki personal o colaborativa utilizando un sistema de control de versiones como Git o Darcs. Las páginas del wiki se almacenan como archivos de texto plano, lo que permite editarlas tanto a través de una interfaz web interactiva que gitit proporciona o directamente con herramientas como git, esto lo hace ideal para documentación técnica, notas personales, wikis colaborativos, etc. Soporta Markdown extendido, LaTeX, reStructuredText, HTML, etc y las páginas se pueden clonar, modificar, hacer commit y push como en cualquier repositorio Git.
+$ gitit (lanza el servidor web en, por defecto, el puerto 5001. Acceder http://localhost:5001)
+Cuando se lanza gitit por primera vez, se crea un directorio como este:
+       ├── static/ (archivos estáticos como CSS, JS, imágenes)
+       ├── templates/ (plantillas para la interfaz web)
+       ├── wikidata/ (páginas del wiki)
+       │   ├── Front Page.md
+       │   ├── OtraPágina.md
+       │   └── ...
+       └── gitit.conf (configuración del wiki para cambiar puerto, nombre del wiki, permitir o no registros anónimos...)
+$ gitit -p 8080 (personalizar el puerto)
+El directorio wikidata/ se puede tratar como un repositorio Git:
+$ git clone ssh://user@servidor.com/path/to/wiki wikidata (clonar el wiki desde un servidor remoto)
+$ cd wikidata
+$ git init (si no está inicializado)
+$ git add "NuevaPágina.md"
+$ git commit -m "Añadida nueva página"
+$ git push
+Nota.- Por defecto gitit no tiene autenticación. Para hacerlo más seguro se debería ejecutar detrás de un servidor como nginx o Apache con autenticación HTTP o usar un proxy inverso con HTTPS.
 
 
 gitmagic
