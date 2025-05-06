@@ -20674,6 +20674,16 @@ $ gitsome (abrirá una shell interactiva [IPython con mejoras], y dentro de ella
 > xonfig tutorial (abre en el navegador un tutorial)
 
 
+gitweb
+Sistema de control de versiones de repositorios Git locales no en plataformas externas como GitHub. Si Apache2 está instalado, la interfaz web se habilita automáticamente en http://localhost/gitweb
+# nano /etc/gitweb.conf
+Y que la variable $projectroot apunte al directorio donde esté el repositorio git
+      $projectroot = "/var/www/git";
+Reiniciar Apache para aplicar los cambios:
+# systemctl restart apache2
+Y con el navegador acceder al repositorio: http://localhost/gitweb
+
+
 gksu
 [gksudo]. Proporciona permisos para que un usuario autorizado pueda ejecutar cualquier programa, script o aplicación como usuario root. El nombre puede variar según distro o escritorio: kdesu en kde, beesu en Fedora...
 $ gksu nautilus
