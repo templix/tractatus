@@ -20338,6 +20338,14 @@ $ gforth factorial.fs (cargar el programa)
 > 5 factorial . (imprime 120)
 
 
+gfsd
+Es el daemon del sistema de archivos Gfarm, que gestiona operaciones de almacenamiento distribuido en nodos de una red. Su función principal es convertir PCs en nodos de almacenamiento para computación intensiva de datos a gran escala
+$ gfsd -h nodo1.example.com -r /var/gfarm/spool (define el host como nodo1.example.com y usa /var/gfarm/spool como directorio de almacenamiento)
+$ gfsd -d -L debug (muestra logs detallados en la consola)
+$ gfservice start-gfsd gfsd1 (iniciar gfsd en un nodo remoto)
+$ gfservice stop-gfsd gfsd1 (detener el servicio)
+
+
 gfsecret
 Herramientas para facilitar el intercambio de secretos, un método criptográfico que permite dividir un secreto (como un archivo o una clave) en múltiples partes o "recursos compartidos" de manera que solo un número mínimo de estas partes es necesario para reconstruir el secreto original. El esquema de Shamir, propuesto en 1979, divide un secreto en "n" partes [recursos compartidos] de modo que se necesitan al menos "k" partes [umbral] para reconstruirlo. Utiliza interpolación polinómica sobre campos finitos para garantizar seguridad teórica de la información: con menos de "k" partes, es matemáticamente imposible obtener información sobre el secreto. Cuenta con tres herramientas principales: gfsec-split, que divide un archivo en varios recursos compartidos, y gfsec-use, que reconstruye el archivo original a partir de algunos de los recursos compartidosy y gfsec-split-gpg, un script auxiliar que facilita dividir claves privadas de GnuPG.
 1.-
