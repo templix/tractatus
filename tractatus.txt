@@ -20790,10 +20790,16 @@ Código de los colores:
 
 
 glimpse
-Aplicación [GLobal IMPlicit SEarch] consistente en un sistema de indexación y consulta de UNIX que permite buscar rápidamente en un gran conjunto de archivos. Glimpse admite la mayoría de las opciones de agrep, incluida la coincidencia aproximada.
-$ glimpse -F '*.sh$' palabra (encuentra "palabra" en todos los archivos .sh)
-$ glimpse -2 -F html palabra (todas las ocurrencias de "palabra" con dos errores en los archivos html en algún lugar de su nombre completo.)
-$ glimpse -l -F '\.c$' palabra (enumera los nombres de todos los archivos .c que contienen "palabra")
+[GLobal IMPlicit SEarch]. Es una herramienta de búsqueda de texto, diseñada para encontrar rápidamente cadenas en grandes cantidades de archivos. Las principales características son: Búsqueda muy rápida gracias a la indexación previa, soporte de expresiones regulares como grep, soporte para coincidencias aproximadas [fuzzy], operadores booleanos [AND, OR, NOT] y admite errores tipográficos o palabras mal escritas [tolerancia al error].
+$ glimpseindex $HOME (indexar el directorio donde buscar, normalmente el $HOME y crea un archivo oculto .glimpse_index en ese directorio)
+$ glimpseindex -o ~/indice_glimpse $HOME (lo mismo pero guardando los archivos generados en la indexación en ~/indice_glimpse)
+$ glimpse -H ~/indice_glimpse "palabra" (busca "palabra" en los archivos indexados)
+$ glimpse -H ~/indice_glimpse "error_[0-9]+" (busca patrones como error_123
+$ glimpse -H ~/indice_glimpse -f "linux" 1 (busca "linux" permitiendo hasta 1 error tipográfico, como linus, linyx...)
+$ glimpse -H ~/indice_glimpse "python AND programación" (busca archivos que contengan ambas palabras)
+$ glimpse -H ~/indice_glimpse "error OR warning" (los busca con error o warning(
+$ glimpse -H ~/indice_glimpse "important NOT test" (busca "important" pero excluye archivos con "test")
+$ glimpse -H ~/indice_glimpse -i -w -n "linux OR debian" (busca linux o debian, insensible a mayúsculas, como palabras completas y mostrando números de línea)
 
 
 glxinfo
@@ -32702,10 +32708,11 @@ $ rig -m -c 5 (del genero masculino y 5 opciones de identidad)
 
 
 ripgrep
-buscar archivos y directorios.
+buscar palabras, archivos y directorios.
 $ rg archivo.mp3
 $ rg -A2 archivo.txt (muestra dos lineas despues de la coincidencia)
 $ rg -C2 dir (muestra la línea anterior y posterior a la coincidencia)
+$ rg rifftree $HOME (busca "rifftree" en toda la $HOME)
 
 
 ripit
@@ -34586,6 +34593,20 @@ Nota.- El archivo de clave privada ".sec" no debe compartirse con nadie. El arch
 
 sigtool
 Ver clamav
+
+
+silversearcher-ag
+Programa muy rápido similar a grep [ver] o ack [ver] para buscar palabras y archivo en directorios. Ignora archivos binarios y ocultos por defecto.
+$ ag "function calcular_total" (buscar "function calcular_total" en el directorio actual y subdirectorios)
+$ ag "ERROR" /var/log/ (busca "ERROR" en el directorio y subdirectorios especificado)
+$ ag -w "int" (buscar palabras que coincidan exactamente [whole-word]. Esto evitará que coincida con print, internal, etc. )
+$ ag -i "debug" (búsqueda case-insensitive [ignorar mayúsculas/minúsculas])
+$ ag "import requests" -G "\.py$" (buscar en archivos con una extensión específica)
+$ ag "patrón" --ignore-dir=Vídeos $HOME (excluir directorio "Vídeos" de la $HOME en la búsqueda de "patron")
+$ ag -g "\.conf$" (buscar solo en nombres de archivos .conf, no en su contenido)
+$ ag --numbers "patrón" (mostrar el número de línea en los resultados. Está activado por defecto)
+$ ag -c "TODO" (buscar en archivos que coincidan con un patrón)
+$ ag "function" -G "\.js$" (buscar function solo en archivos .js)
 
 
 simhash
