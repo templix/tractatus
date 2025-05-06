@@ -20297,6 +20297,47 @@ Convierte páginas man en archivos de texto en /tmp.
 $ gflags2man ls (Creará el archivo ls.1 en /tmp)
 
 
+gfmd
+[GFarm Metadata server Daemon]. Servidor de metadatos como nombres, ubicaciones, permisos, etc del sistema de archivos gfarm utilizado principalmente en entornos de cómputo de alto rendimiento [HPC] y clústeres. El sistema de archivos Gfarm está diseñado para convertir ordenadores portátiles en nodos de una red de almacenamiento distribuido, implementando la arquitectura Grid Datafarm para la computación intensiva en datos a gran escala global.
+# gfmd (inicia el servidor de metadatos. Por defecto, lee su configuración de /etc/gfarm2.conf)
+# gfmd -L - (ejecutar en modo foreground y enviar los logs a la salida estándar en lugar de un archivo de log)
+$ ps aux | grep gfmd (verificar si está corriendo)
+
+
+gforth
+Es una implementación del lenguaje Forth desarrollada por el proyecto GNU. Forth es un lenguaje de programación basado en pilas [stack], interactivo y extensible, que se usa en sistemas embebidos, aplicaciones científicas y como herramienta educativa.
+$ gforth (entra en el modo interactivo)
+Algunos ejemplos de uso de una pila de operaciones:
+> 5 3 + . (suma los dígitos e imprime el resultado: "8 ok")
+> 10 4 * . (multiplica imprime resultado)
+> 7 2 - . (resta e imprime resultado)
+> 8 3 / . (Divide e imprime 2, porque usa división entera)
+> : cuadrado dup * ; (define una palabra "cuadrado" [función] que eleva al cuadrado el número en la pila)
+> 4 cuadrado . (imprime 16)
+1.-
+Estructuras de control
+> : es-positivo? ( n -- )
+>   0 > if ." Es positivo" else ." No es positivo" then ;
+> 7 es-positivo? (imprime "Es positivo")
+> -2 es-positivo? (imprime "No es positivo")
+2.-
+Bucles
+> : contar-10 ( -- )
+>   10 0 do i . loop ; (imprime números del 0 al 9)
+> contar-10
+3.-
+Ejecutar un intérprete
+$ nano factorial.fs
+       : factorial ( n -- n! )
+          dup 1 > if
+           dup 1 - recurse *
+         else
+           drop 1
+         then ;
+$ gforth factorial.fs (cargar el programa)
+> 5 factorial . (imprime 120)
+
+
 gfsecret
 Herramientas para facilitar el intercambio de secretos, un método criptográfico que permite dividir un secreto (como un archivo o una clave) en múltiples partes o "recursos compartidos" de manera que solo un número mínimo de estas partes es necesario para reconstruir el secreto original. El esquema de Shamir, propuesto en 1979, divide un secreto en "n" partes [recursos compartidos] de modo que se necesitan al menos "k" partes [umbral] para reconstruirlo. Utiliza interpolación polinómica sobre campos finitos para garantizar seguridad teórica de la información: con menos de "k" partes, es matemáticamente imposible obtener información sobre el secreto. Cuenta con tres herramientas principales: gfsec-split, que divide un archivo en varios recursos compartidos, y gfsec-use, que reconstruye el archivo original a partir de algunos de los recursos compartidosy y gfsec-split-gpg, un script auxiliar que facilita dividir claves privadas de GnuPG.
 1.-
