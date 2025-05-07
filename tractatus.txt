@@ -20869,6 +20869,14 @@ $ glxinfo | grep  rendering  ("yes" indica que la tarjeta gráfica soporta acele
 $ glxgears (Lo mismo en modo gráfico. Los engranajes  han de verse de forma decente)
 
 
+glyphslib
+Herramienta permite la conversión entre archivos fuente tipográfica Glyphs (.glyphs) y Objetos de Fuente Unificados [Unified Font Object - UFO]. El editor de fuentes Glyphs es una aplicación popular para macOS utilizada por diseñadores tipográficos profesionales y UFO es un formato abierto basado en XML que almacena datos de fuentes de manera que sea fácil de acceder y modificar.
+$ glyphslib --output-dir=./output ./mifuente.glyphs (conversión de .glyphs a UFO)
+$ glyphslib --output=mifuente.glyphs ./mifuente.ufo (conversión de UFO a .glyphs)
+$ glyphslib --print ./mifuente.glyphs (visualizar información de un archivo .glyphs)
+$ glyphslib --output-dir=./output --minimize-ufo-diffs ./mifuente.glyphs (conversión con opciones específicas)
+
+
 gmail
 Correo de google. Permite buscar en el propio correo por palabras clave:
 	From:usuario@correo.com (Muestra los recibidos de la dirección)
