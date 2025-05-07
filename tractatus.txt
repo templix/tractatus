@@ -20829,6 +20829,11 @@ $ global -x '^[A-Z]*_MAX$' (busca símbolos que coincidan con el patrón, por ej
 $ htags (crea una interfaz web navegable del código accesible en ./HTML/)
 
 
+glue-sprite
+Herramienta para generar CSS de sprites [combinar múltiples imágenes pequeñas en una sola imagen más grande] utilizando cualquier tipo de imagen de origen, como PNG, JPEG o GIF. glue-sprite genera automáticamente el código CSS necesario para mostrar las porciones correctas del sprite en los elementos HTML. La salida genera dos archivos principales, un archivo de imagen PNG que contiene todas tus imágenes originales combinadas en un único sprite y un archivo CSS que contiene las clases CSS necesarias para utilizar el sprite. Cada clase CSS corresponderá a una de las imágenes originales y definirá la propiedad background-image para usar el sprite, así como las propiedades background-position para mostrar la porción correcta de la imagen y las dimensiones [width y height] de la imagen original.
+$ glue-sprite -s dir_fotos/ -o dir_salida -css dir_salida/css/ (directorio de fotos, dir imagen grande i dir del archivo css generado)
+
+
 glusterfs
 [Gluster File System]. Es un sistema de archivos distribuido que permite agrupar múltiples dispositivos de almacenamiento, en nodos distintos, en un único sistema de archivos de red. Agrega varios bloques de almacenamiento mediante interconexión Infiniband RDMA o TCP/IP en un gran sistema de archivos de red paralelo. Gran parte del código se encuentra en el espacio de usuario y es fácilmente administrable.
 # systemctl start glusterd (activa el servicio)
