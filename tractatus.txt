@@ -20802,6 +20802,62 @@ $ glimpse -H ~/indice_glimpse "important NOT test" (busca "important" pero exclu
 $ glimpse -H ~/indice_glimpse -i -w -n "linux OR debian" (busca linux o debian, insensible a mayúsculas, como palabras completas y mostrando números de línea)
 
 
+glirc
+es un cliente de consola IRC que se centra en proporcionar vistas dinámicas del modelo de tus conexiones IRC.
+$ glirc (abrirá una ventana de consola donde podrás conectarte a servidores IRC y participar en canales)
+$ glirc -s example.com -p 6697 (conectar a un servidor IRC específico)
+$ glirc -s example.com -p 6697 -u sername -P password (conexión con autenticación)
+Una vez conectado:
+        /join #channelname (unirte a un canal)
+        /say Hola, mundo! (enviar un mensaje a todos los usuarios en el canal actual)
+        /quit (desconectarse del servidor)
+        /nick newnickname (cambia nickname)
+        /part (abandona el canal actual)
+        /list (lista de canales disponibles)
+        /whois nickname (información sobre un usuario específico)
+También se puede crear o editar un archivo de configuración ~/.config/glirc/config para establecer opciones como el color del fondo, el tamaño de la ventana, etc.
+
+
+global
+Herramienta de búsqueda y exploración de código fuente. Genera una base de datos de símbolos [funciones, variables, macros, etc.] para permitir búsquedas rápidas.
+$ cd ~/proyecto_c (ir al proyecto)
+$ gtags (generar base de datos)
+$ global -x printf (muestra dónde se define printf)
+$ global -r malloc (muestra todas las llamadas a malloc)
+$ global -f main.c (lista todos los símbolos en main.c)
+$ global -x '^[A-Z]*_MAX$' (busca símbolos que coincidan con el patrón, por ejemplo INT_MAX)
+$ htags (crea una interfaz web navegable del código accesible en ./HTML/)
+
+
+glusterfs
+[Gluster File System]. Es un sistema de archivos distribuido que permite agrupar múltiples dispositivos de almacenamiento, en nodos distintos, en un único sistema de archivos de red. Agrega varios bloques de almacenamiento mediante interconexión Infiniband RDMA o TCP/IP en un gran sistema de archivos de red paralelo. Gran parte del código se encuentra en el espacio de usuario y es fácilmente administrable.
+# systemctl start glusterd (activa el servicio)
+# systemctl enable glusterd
+$ gluster volume list (mostrar todos los volúmenes)
+$ gluster volume info volumen1 (información detallada de un volumen)
+$ gluster volume status volumen1 (ver estado del volumen)
+$ gluster volume add-brick volumen1 nodo3:/gluster/volumen1 (expandir un volumen [añadir un nuevo brick])
+$ gluster volume stop volumen1 (parar un volumen)
+$ gluster volume delete volumen1 (eliminar un volumen)
+1.-
+Ejemplo de Configuración Básica
+Suponiendo dos nodos, nodo1 y nodo2, y se quiere crear un volumen replicado.
+# gluster peer probe nodo2 (añadir el segundo nodo al clúster)
+# gluster peer status (verificar los nodos conectados)
+# mkdir -p /gluster/volumen1 (crear directorios "brick" en ambos nodos)
+# gluster volume create volumen1 replica 2 transport tcp nodo1:/gluster/volumen1 nodo2:/gluster/volumen1 (crear un volumen GlusterFS replicado)
+# gluster volume start volumen1 (activar el volumen)
+Montar el volumen en un cliente. En un nodo cliente o en los mismos nodos:
+# apt install glusterfs-client
+# mkdir /mnt/volumen1
+# mount -t glusterfs nodo1:/volumen1 /mnt/volumen1
+Notas.-
+       Brick: Directorio exportado por un nodo que forma parte del volumen GlusterFS.
+       Volume: Conjunto lógico de bricks que se presenta como un solo sistema de archivos.
+       Peer: Nodo dentro del clúster.
+       Translator: Módulos que implementan funcionalidades (replicación, distribución, etc.).
+
+
 glxinfo
 Información sobre las bibliotecas gráficas.
 $ glxinfo | grep  rendering  ("yes" indica que la tarjeta gráfica soporta aceleración 3D)
