@@ -20877,6 +20877,25 @@ $ glyphslib --print ./mifuente.glyphs (visualizar información de un archivo .gl
 $ glyphslib --output-dir=./output --minimize-ufo-diffs ./mifuente.glyphs (conversión con opciones específicas)
 
 
+glyphspkg
+Conversor de archivos .glyphspackage [que contiene múltiples archivos, como glif, plist y otros, para representar una fuente] a .glyphs [formato de archivo único]. glyphspackage es un formato basado en directorios utilizado por la aplicación Glyphs para facilitar el control de versiones con sistemas como Git
+$ glyphspkg MiFuente.glyphspackage (Se genera un archivo MiFuente.glyphs en el mismo directorio)
+$ glyphspkg -o FuenteFinal.glyphs MiFuente.glyphspackage (crea un archivo FuenteFinal.glyphs en el directorio actual)
+$ fontmake -g FuenteFinal.glyphs -o ttf (genera los archivos binarios de la fuente [.ttf o .otf])
+$ fontmake -g MiFuente.glyphspackage -o ttf ((en versiones recientes de FontMake, se puede omitir el paso de glyphspkg y usar directamente))
+Nota.- Desde las versiones recientes de FontMake, el soporte directo para .glyphspackage ha hecho que glyphspkg sea menos necesario, y el paquete ha sido marcado como "huérfano" en Debian, lo que indica que no recibe mantenimiento activo.
+
+
+glyrc
+Herramienta que utiliza la biblioteca libglyr para recuperar metadatos relacionados con la música de varios proveedores en línea como Amazon, Discogs y MusicBrainz. Se puede usar en reproductores multimedia para descargar carátulas, letras, biografías y mucho más.
+$ glyrc artist -a "The Beatles" (obtener información de un artista)
+$ glyrc album -a "Pink Floyd" -A "The Dark Side of the Moon" (obtener información de un álbum)
+$ glyrc lyrics -a "Queen" -t "Bohemian Rhapsody" (obtener la letra de una canción)
+$ glyrc cover -a "Michael Jackson" -A "Thriller" (obtener la carátula de un álbum)
+$ glyrc biography -a "Bob Marley" (obtener la biografía de un artista)
+$ glyrc song -a "Led Zeppelin" -t "Stairway to Heaven" (obtener información de una canción)
+
+
 gmail
 Correo de google. Permite buscar en el propio correo por palabras clave:
 	From:usuario@correo.com (Muestra los recibidos de la dirección)
@@ -20892,6 +20911,30 @@ Correo de google. Permite buscar en el propio correo por palabras clave:
 	After/Before:AAAA/MM/DD (buscar los posteriores o anteriores a una fecha. Formato: año/mes/día)
 	/ (Coloca el cursor en la busqueda)
 	? (Muestra los atajos de teclado)
+
+
+gmetad
+[Ganglia Meta-Daemon]. Es el demonio central del sistema de monitorización Ganglia. Su principal función es recopilar las métricas que envían los nodos individuales del clúster [donde se ejecuta el agente gmond], por defecto por el puerto 8649 y almacenarlas para su posterior visualización y análisis en archivos de Round Robin Database (RRD).
+# systemctl start gmetad (iniciar el servicio gmetad)
+# systemctl status gmetad (ver estado)
+# gmetad -d 5 (indica el nivel de depuración, mayor número = más verbosidad)
+1.-
+Ejemplo de archivo de configuración
+# nano /etc/ganglia/gmetad.conf
+       data_source "mycluster" 192.168.1.10:8649 192.168.1.11:8649
+       rrd_rootdir "/var/lib/ganglia/rrds"
+       listen_port 8649
+       xml_port 8651
+data_source "mycluster" --> Define una fuente de datos llamada "mycluster" que recopilará métricas de los nodos con las direcciones IP 192.168.1.10 y 192.168.1.11 en el puerto 8649, el predeterminado
+rrd_rootdir "/var/lib/ganglia/rrds" --> Especifica que las bases de datos RRD se almacenarán en el directorio /var/lib/ganglia/rrds.
+listen_port 8649 --> Indica que gmetad escuchará las conexiones de gmond en el puerto 8649.
+xml_port 8651 --> Define el puerto en el que gmetad servirá los datos en formato XML utilizado por ganglia-web.
+
+
+gmime-bin
+Biblioteca de creación y análisis de mensajes MIME [Multipurpose Internet Mail Extension] que son usados comúnmente en correos electrónicos para manejar contenidos como texto, HTML, archivos adjuntos, etc. Herramientas incluidas gmime-uuencode/gmime-uudecode [Herramientas para codificar y decodificar archivos usando el formato uuencode, que convierte archivos binarios en texto ASCII usado en algunos correos electrónicos antiguos]
+$ gmime-uuencode archivo.txt > archivo.uu (codificar un archivo con gmime-uuencode)
+$ gmime-uudecode archivo.uu (decodificar un archivo .uu con gmime-uudecode)
 
 
 gmount
