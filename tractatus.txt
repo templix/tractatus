@@ -20904,6 +20904,26 @@ gmrun
 lanzador de aplicaciones.
 
 
+gnokii
+Hrramienta que permite la comunicación con teléfonos móviles, principalmente modelos antiguos de Nokia y Symbian, mediante cables serie, USB, infrarrojos o Bluetooth. Su propósito es acceder a funciones del teléfono como la gestión de mensajes SMS, la agenda de contactos, el calendario, entre otros. Para consultar la lista de teléfonos compatibles: http://wiki.gnokii.org
+Configurar el archivo con información sobre el modelo de teléfono y cómo está conectado, por ejemplo, USB, serie, Bluetooth.
+$ nano ~/.config/gnokii/config
+       [global]
+        port = /dev/ttyUSB0
+        model = AT
+        connection = serial
+        use_locking = yes
+        serial_baudrate = 19200
+Nota.- Si se usas Bluetooth, la configuración cambia: connection = bluetooth y port = xx:xx:xx:xx:xx:xx.
+$ gnokii --identify (mostrará información del modelo de teléfono, versión de firmware, etc., si está correctamente conectado)
+$ gnokii --sendsms +34123456789 (abrirá un prompt para enviar un SMS)
+$ echo "Hola, este es un mensaje de prueba" | gnokii --sendsms +34123456789 (enviar un texto directamente)
+$ gnokii --getsms IN 1 (lee el primer SMS de la bandeja de entrada [IN])
+$ gnokii --getsms IN 1 end (leerá todos los mensajes desde el primero hasta el último disponible)
+$ gnokii --getphonebook ME 1 end (recupera toda la agenda almacenada en la memoria del teléfono, ME = memoria interna, SM para SIM)
+$ gnokii --getcalendar (sincronizar el calendario:)
+
+
 gnome
 Entorno de escritorio
 # rm -rf .gnome .gnome2 .gconf .gconfd .metacity (Resetear la configuración)
