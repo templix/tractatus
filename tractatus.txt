@@ -21230,6 +21230,42 @@ $ gobuster dir -u https://ejemplo.com -w wordlist.txt -k -c "cert.pem" (búsqued
 $ gobuster dir -u https://ejemplo.com -w wordlist.txt -a "Mozilla/5.0 (Windows NT 10.0; Win64; x64)" (con user-agent personalizado)
 
 
+goby
+Herramienta de presentación WYSIWYG [What You See Is What You Get - lo que ves es lo que obtienes] para dentro del entorno Emacs. Goby es un paquete de Emacs Lisp para mostrar fuentes e imágenes de gran tamaño que puede utilizarse como herramienta de presentación WYSIWYG en GNU Emacs y ofrece dos modos: Edición y Vista. El modo Edición se implementa como modo secundario, mientras que el modo Vista es principal. El archivo creado (*.gby) es solo texto, por lo que se puede gestionar fácilmente. Para mostrar fuentes de gran tamaño, instale los paquetes de fuentes TrueType/OpenType. Para usar imágenes, instale el paquete netpbm. Para crear capturas de pantalla, instale el paquete imagemagick.
+Ejemplo de presentación:
+$ nano presentacion.goby
+        ;;; -*- goby-presentation -*-
+        ;; -*- mode: goby; -*-
+        * Título de la Presentación
+        ;
+        ** Introducción
+           Esta es la primera diapositiva.
+        ;
+        ** Tema 1
+           Aquí se puede hablar sobre el tema 1.
+           se puede usar listas:
+           - Punto uno
+           - Punto dos
+        ;
+        ** Imagen
+           [image: /ruta/a/la/imagen.png]
+        ;
+        ** Fin
+           ¡Gracias!
+Abrir el archivo en Emacs y si goby no se activa automaticamente, activarlo con:
+        M-x goby-mode
+Para ver la presentación:
+        M-x goby-view-mode
+Parar la presentación con.
+        M-x goby-view-quit
+Volver al modo edición:
+        M-x goby-edit-mode
+Navegar por las diapositivas:
+    n o flecha derecha: siguiente diapositiva
+    p o flecha izquierda: diapositiva anterior
+    q: salir de la vista
+
+
 gocr
 programa que imprime en la salida estándar todo el texto que puede leer de cualquier fichero gráfico de entrada. Usado especialmente para el descifrado de kapchas. El programa necesita cierto aprendizaje.
 $ mkdir ocrdb
