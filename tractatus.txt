@@ -21142,9 +21142,22 @@ $ cvtenc -f ISO-8859-1 -t UTF-8 archivo_antiguo.txt > archivo_nuevo.txt (convert
 $ defaults read com.example.MiAplicacion NombreUsuario (leer la configuración de una aplicación con el identificador com.example.MiAplicacion para la clave NombreUsuario)
 
 
-gnutls-cli-debug
-[gnutls]. Configura múltiples conexiones TLS a un servidor y consulta sus capacidades. Fue creado para ayudar a depurar GnuTLS, pero puede ser útil para extraer las capacidades de un servidor TLS.  Se conecta a un servidor TLS, realiza pruebas e imprime un archivo con las capacidades del servidor.
-$ gnutls-cli-debug -p 80 -v localhost (por el puerto 80 y con las máximas comprobaciones)
+gnutls-bin
+Interfaz de línea de comandos para la biblioteca GNU TLS [Transport Layer Security], que permite configurar conexiones seguras, depurar problemas de conexión o gestionar certificados. Incluye las herramientas certtool, danetool, gnutls-cli, gnutls-cli-debug, gnutls-serv, ocsptool, p11tool, psktool, srptool
+$ gnutls-cli google.com (establecer conexion TLS)
+$ gnutls-cli -p 443 example.com (establecer conexion TLS por un puerto especifico)
+$ gnutls-cli --x509cafile /etc/ssl/certs/ca-certificates.crt example.com (con verificación del certificado)
+$ gnutls-cli-debug -p 443 example.com (prueba qué características TLS soporta un servidor. Muestra protocolos y cifrados soportados, si el servidor permite renegociación insegura, etc.)
+$ gnutls-serv --x509certfile=cert.pem --x509keyfile=key.pem --port=5556 (servidor TLS para pruebas.Levantar un servidor TLS en el puerto 5556 usando los certificados proporcionados)
+$ certtool --generate-privkey --outfile key.pem (generar una clave privada)
+$ certtool --generate-request --load-privkey key.pem --outfile request.csr (crear una CSR [solicitud de certificado])
+$ certtool --generate-self-signed --load-privkey key.pem --outfile cert.pem --template info.txt (crear un certificado autofirmado)
+$ psktool -u usuario -p psk.txt (crear claves precompartidas [PSK] para autenticación TLS)
+$ srptool --create-conf --username=usuario --password=secreto --passwd-conf=srp.conf (genera credenciales SRP [Secure Remote Password] para autenticación TLS)
+$ danetool --create-tlsa --host example.com --port 443 --proto tcp (extraer un registro TLSA)
+$ ocsptool --ask --load-cert cert.pem --load-issuer issuer.pem --outfile ocsp.out (verifica certificados mediante OCSP [Online Certificate Status Protocol])
+$ p11tool --list-tokens (listar tokens disponibles)
+$ p11tool --login --list-all --provider=/usr/lib/softhsm/libsofthsm2.so (listar objetos en un token)
 
 
 go
