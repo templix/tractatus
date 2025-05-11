@@ -21134,6 +21134,14 @@ Otro ejemplo a partir de un archivo [en el mismo directorio o especificando la r
 	gnuplot> plot "datos" using 1:2 with lines
 
 
+gnustep-base-runtime
+Demonios y herramientas para las aplicaciones desarrolladas con la biblioteca base de GNUstep. La biblioteca base de GNUstep es una implementación libre y de código abierto de las bibliotecas de objetos fundamentales de Cocoa, el framework de desarrollo de aplicaciones nativo de macOS y su objetivo principal es permitir el desarrollo de aplicaciones portables que puedan ejecutarse en diferentes sistemas operativos, como Linux, Windows, macOS, etc. sin necesidad de modificar el código fuente significativamente. Incluye las aplicaciones HTMLLinker, autogsdoc, cvtenc, defaults, gdnc, gdomap, gspath, make_strings, pl, pl2link, pldes, plget, plmerge, plparse, plser, plutil, sfparse y xmlparse.
+$ HTMLLinker -o MiAplicacion.help MiDocumentacion.html OtroDocumento.html (crearía un paquete de ayuda llamado a partir de los archivos HTML proporcionados)
+$ autogsdoc -o Documentacion.texi *.h (generaría un archivo Texinfo [Documentacion.texi] con la documentación extraída de todos los archivos de encabezado en el directorio actual)
+$ cvtenc -f ISO-8859-1 -t UTF-8 archivo_antiguo.txt > archivo_nuevo.txt (convertir un archivo de texto codificado en ISO-8859-1 a UTF-8 [archivo_nuevo.txt])
+$ defaults read com.example.MiAplicacion NombreUsuario (leer la configuración de una aplicación con el identificador com.example.MiAplicacion para la clave NombreUsuario)
+
+
 gnutls-cli-debug
 [gnutls]. Configura múltiples conexiones TLS a un servidor y consulta sus capacidades. Fue creado para ayudar a depurar GnuTLS, pero puede ser útil para extraer las capacidades de un servidor TLS.  Se conecta a un servidor TLS, realiza pruebas e imprime un archivo con las capacidades del servidor.
 $ gnutls-cli-debug -p 80 -v localhost (por el puerto 80 y con las máximas comprobaciones)
