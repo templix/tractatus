@@ -21215,6 +21215,21 @@ $ ./app (Arrancar el servidor)
 2017/04/05 15:14:08 Starting goBrowser on :6001
 
 
+gobuster
+Herramienta que permite realizar ataques de fuerza bruta para detección de directorios, archivos y DNS contra URIs en sitios web, subdominios DNS, nombres de host virtuales en servidores web de destino, buckets de Open Amazon S3, buckets de Open Google Cloud y servidores TFTP.
+$ gobuster dir -u https://ejemplo.com -w /usr/share/wordlists/dirb/common.txt (descubrir directorios y archivos ocultos en un sitio web y ruta al diccionario)
+$ gobuster dir -u https://ejemplo.com -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -t 50 -x php,html,txt -o resultados.txt (con 50 hilos, por defecto 10, extensiones a buscar y archivo para guardar resultados)
+$ gobuster dns -d ejemplo.com -w /usr/share/wordlists/SecLists/Discovery/DNS/subdomains-top1million-5000.txt (descubrir subdominios mediante fuerza bruta en un domínio objetivo)
+$ gobuster vhost -u https://ejemplo.com -w /usr/share/wordlists/SecLists/Discovery/DNS/subdomains-top1million-5000.txt (descubrir hosts virtuales en un servidor web)
+$ gobuster s3 -w wordlist.txt (enumerar buckets de Amazon S3)
+$ gobuster gcs -w wordlist.txt (enumerar buckets de Google Cloud Storage)
+$ gobuster tftp -u 192.168.1.10 -w wordlist.txt ((descubrir archivos en servidores TFTP)
+$ gobuster dir -u https://ejemplo.com -w wordlist.txt -s "200,204,301,302,307" -b "403,404" (-s para mostrar solo estos códigos de estado y excluir los especificados en -b)
+$ gobuster dir -u https://ejemplo.com -w wordlist.txt -U usuario -P contraseña (uso con autenticación básica)
+$ gobuster dir -u https://ejemplo.com -w wordlist.txt -k -c "cert.pem" (búsqueda con certificados personalizados. -k para ignorar verificación SSL y -c con certificado personalizado)
+$ gobuster dir -u https://ejemplo.com -w wordlist.txt -a "Mozilla/5.0 (Windows NT 10.0; Win64; x64)" (con user-agent personalizado)
+
+
 gocr
 programa que imprime en la salida estándar todo el texto que puede leer de cualquier fichero gráfico de entrada. Usado especialmente para el descifrado de kapchas. El programa necesita cierto aprendizaje.
 $ mkdir ocrdb
