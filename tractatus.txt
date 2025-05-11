@@ -21292,6 +21292,14 @@ $ goiardi --ipaddress="0.0.0.0" --port=4545 --use-postgresql --postgresql-userna
 $ goiardi --freeze-interval=300 --data-file=/var/lib/goiardi/data.bin --index-file=/var/lib/goiardi/index.bin (que guarde automáticamente los datos e índices cada 5 minutos si hubo cambios, ayudando a evitar pérdidas en caso de cierre inesperado)
 
 
+gokey
+Es un gestor de contraseñas que se diferencia de otros gestores tradicionales porque no requiere un almacén centralizado de contraseñas. En su lugar, gokey genera contraseñas de manera determinista a partir de una contraseña maestra y un identificador único para cada servicio o sitio web. Esto significa que no necesitas almacenar las contraseñas generadas, ya que puedes regenerarlas en cualquier momento utilizando la misma contraseña maestra y el mismo identificador.
+$ gokey -p ContraSeñaSecreta -r google.es (especifica la contraseña maestra y el identificador único para el servicio, en este caso, "google.es"))
+$ gokey -t pass -p ContraSeñaSecreta -r google.es (lo mismo)
+$ gokey -l 20 -p ContraSeñaSecreta -r google.e (especifica la longitud de la contraseña generada en 20 caracteres)
+$ gokey -p ContraSeñaSecreta -t seed -o seedfile (crear archivo semilla con 256 bytes de datos aleatorios. Los datos se encriptan utilizando el modo AES-256-GCM y la especificada la clave)
+
+
 goldeneye
 Es una herramienta de prueba HTTP DoS. Esta herramienta se puede usar para probar si un sitio es susceptible a ataques de denegación de servicio (DoS). Es posible abrir varias conexiones paralelas contra una URL para verificar si el servidor web puede verse comprometido. El programa prueba la seguridad en las redes y utiliza 'HTTP Keep Alive + NoCache' como vector de ataque.
 # goldeneye http://lapipaplena.org -m random -d (con metodo HTTP "random", por defecto "get" y debug )
