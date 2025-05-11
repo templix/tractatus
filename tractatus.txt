@@ -21248,6 +21248,14 @@ $ gocryptfs -passwd dir_cifrado (modificar la contraseña. Primero pide la antig
 $ gocryptfs -fsck dir_cifrat (chequear la consitencia del directorio cifrado [fsck summary: no problems found])
 
 
+goiardi
+Implementación del servidor Chef escrita en Go que puede ejecutarse completamente en memoria, con la opción de guardar y cargar los datos y buscar índices en disco, inspirándose en Chef-Zero y compatible con las herramientas habituales del ecosistema Chef, como knife y chef-client, o utilizando bases de datos como MariaDB/MySQL o PostgreSQL como backend de almacenamiento. Archivo de configuración en /etc/goiardi/goiardi.conf
+$ goiardi --ipaddress="0.0.0.0" --port=4545 --data-file=/var/lib/goiardi/data.bin --index-file=/var/lib/goiardi/index.bin (inicia en modo memoria [in-memory] escuchando en todas las interfaces por el puerto 4545, y guarda los datos e índices en disco para persistencia entre reinicios)
+$ goiardi --ipaddress="0.0.0.0" --port=4545 --use-mysql --mysql-username=USER --mysql-password=PASS --mysql-address=localhost --mysql-dbname=BASE_DATOS (almacena todos los datos en una base MySQL en vez de en memoria. Es necesario tener la base y el usuario creados previamente)
+$ goiardi --ipaddress="0.0.0.0" --port=4545 --use-postgresql --postgresql-username=USER --postgresql-password=PASS --postgresql-address=localhost --postgresql-dbname=BASE_DATOS (modo similar al ejemplo anterior, pero usando PostgreSQL como backend de almacenamiento)
+$ goiardi --freeze-interval=300 --data-file=/var/lib/goiardi/data.bin --index-file=/var/lib/goiardi/index.bin (que guarde automáticamente los datos e índices cada 5 minutos si hubo cambios, ayudando a evitar pérdidas en caso de cierre inesperado)
+
+
 goldeneye
 Es una herramienta de prueba HTTP DoS. Esta herramienta se puede usar para probar si un sitio es susceptible a ataques de denegación de servicio (DoS). Es posible abrir varias conexiones paralelas contra una URL para verificar si el servidor web puede verse comprometido. El programa prueba la seguridad en las redes y utiliza 'HTTP Keep Alive + NoCache' como vector de ataque.
 # goldeneye http://lapipaplena.org -m random -d (con metodo HTTP "random", por defecto "get" y debug )
