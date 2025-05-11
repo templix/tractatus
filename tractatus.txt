@@ -21183,11 +21183,15 @@ $ /usr/lib/go2/go2.sh --setup (configura nuestro .bashrc para poder llamar al co
 
 
 goaccess
-Analiza el registro del servervidor web Apache
-# goaccess -f /var/log/apache2/access.log (forma básica, especificando el fichero)
-# goaccess -f /var/log/apache2/access.log -a -s -b (Habilitar lista de usuarios para el servidor seleccionado [a], activar respuesta de estado HTTP [s] y habilitar el consumo de ancho de banda total [b])
-# goaccess -f /var/log/apache2/access.log -a > reporte.html (Mandar resultado a un archivo html)
-Nota.- Con la aplicación en marxa, con F1 aparecen las teclas interactivas.
+Herramienta de análisis de logs en tiempo real que permite visualizar estadísticas de tráfico web de forma interactiva. Es compatible con varios formatos de logs, incluyendo Apache, Nginx, CloudFront y otros.
+$ goaccess /var/log/apache2/access.log (analiza el archivo de log predeterminado de Apache con interfaz de terminal)
+$ goaccess /var/log/nginx/access.log --log-format=COMBINED (especificar formato del log. "COMBINED" es el formato estándar de Apache/Nginx. Otros formatos: VCOMMON, CLOUDFRONT, etc)
+$ goaccess /var/log/apache2/access.log -o report.html --log-format=COMBINED (crea un informe en HTML que se puede abrir en un navegador)
+$ tail -f /var/log/nginx/access.log | goaccess - (muestra estadísticas en tiempo real)
+$ goaccess /var/log/apache2/access.log --date-format='%d/%b/%Y' --time-format='%H:%M:%S' (ajusta el formato de fecha/hora según el log)
+$ zcat /var/log/apache2/access.log.*.gz | goaccess (procesar logs comprimidos)
+# goaccess /var/log/apache2/access.log -o /var/www/html/report.html --real-time-html (interfaz en el navegador: http://localhost/report.html)
+Nota.- antes descomentar time-format y date-format en el archivo /etc/goaccess/goaccess.conf.
 
 
 gobrowser
