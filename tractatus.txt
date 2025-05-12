@@ -6565,6 +6565,11 @@ Cuando al lanzar chromium no da la salida:
        ... ERROR:process_singleton_posix.cc(358)] The profile appears to be in use by another Chromium process...
 Lanzar:
 $ rm ~/.config/chromium/Singleton*
+2.-
+Activar las descargas paralelas
+En la barra de direcciones escribir: chrome://flags y pulsa Enter.
+En el buscador de la parte superior escribir: Parallel downloading
+En la opción del menú desplegable que aparece, seleccionar: Enabled
 
 
 chroma-curses
@@ -21320,6 +21325,22 @@ golismero
 # python golismero.py -db database.db -d all -o report.html (Generar un informe a partir de un scaneo guardado en la base de datos)
 # python golismero.py plugin (Ver listado de plugins disponibles)
 # python golismero.py info brute_* (Ver detalles de un plugin concreto)
+
+
+gom
+Utilidad de audio que funciona como mezclador [mixer] de audio compatible con OSS [Open Sound System]. Solo es compatible con OSS, por lo que si se desea usar con ALSA, se necesitará módulos compatibles con OSS.
+$ gom (abre la interfaz ncurses donde puedes ajustar los controles de audio interactivamente)
+$ gom -l (lista los dispositivos de audio disponibles)
+$ gom -v 80 (establece el volumen principal al 80%)
+$ gom -c pcm -v 65 (establece el volumen del canal PCM al 65%)
+$ gom -c mic -m (silencia el micrófono)
+$ gom -c mic -u (reactiva el micrófono)
+$ gom -c pcm -b 60 (ajusta el balance del canal PCM hacia la derecha 60%)
+$ gom -s configuracion.gom (guarda la configuración actual del mezclador)
+$ gom -r configuracion.gom (restaura una configuración previamente guardada)
+# modprobe snd-pcm-oss ; modprobe snd-mixer-oss (cargar módulospara utillizar con ALSA)
+$ echo "snd-pcm-oss" | sudo tee -a /etc/modules (cargar estos módulos permanentemente al arranque
+$ echo "snd-mixer-oss" | sudo tee -a /etc/modules
 
 
 goobook
