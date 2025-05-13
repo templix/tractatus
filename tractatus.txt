@@ -21453,6 +21453,28 @@ $ gosu postgres pg_ctl start (ejecuta "pg_ctl start" como el usuario "postgres")
 $ gosu mongodb:mongodb mongod --config /etc/mongod.conf (ejecuta el servidor MongoDB como el usuario y grupo "mongodb")
 
 
+gotestsum
+Ejecuta pruebas de Go, imprime una salida intuitiva y muestra un resumen de la prueba, genera resúmenes claros y ofrece características adicionales como integración con sistemas de CI/CD [integración continua/despliegue continuo] mediante formatos como JUnit XML.
+$ gotestsum (ejecutar todas las pruebas de un proyecto Go en el directorio actual)
+$ gotestsum --format testname (cambiar el formato de salida)
+Algunos formatos disponibles son:
+        testname: Muestra solo los nombres de las pruebas.
+        standard-verbose: Muestra salida detallada con colores.
+        testdox: Formato inspirado en PHPUnit, ideal para listas legibles.
+$ gotestsum --junitfile report.xml (crea un archivo `report.xml` con los resultados en formato JUnit, que puede ser usado por herramientas como CircleCI o GitLab)
+$ gotestsum --rerun-fails (reejecuta las pruebas fallidas hasta que pasen o se alcance el número máximo de intentos, por defecto, 2)
+$ gotestsum --rerun-fails=3 (cambiar el número de intentos a 3)
+$ gotestsum --watch (ejecuta pruebas automáticamente cada vez que se guarda un archivo .go en el proyecto)
+$ gotestsum --raw-command -- go tool test2json -t ./binary.test -test.v (ejecuta el binario ./binary.test y formatea la salida como si fuera go test)
+$ gotestsum --raw-command --ignore-non-json-output-lines -- ./script.sh (si "--raw-command" genera salida no-JSON, para ignorarla)
+$ gotestsum --post-run-command "notify-send 'Tests finished'" (ejecutar un comando después de las pruebas, por ejemplo, para enviar notificaciones)
+$ gotestsum d (depurar pruebas fallidas)
+1.-
+Identificar pruebas lentas
+$ gotestsum --jsonfile test-output.json (guarda la salida JSON de las pruebas en test-output.json)
+$ gotestsum tool slowest --jsonfile test-output.json --threshold 500ms (lista las pruebas que toman más de 500 milisegundos, ordenadas de más lenta a más rápida)
+
+
 goto
 Ir de un directorio a otro de forma rápida. Descarga e instalación:
 	$ wget -O goto.zip "https://github.com/ankitvad/goto/archive/master.zip"
