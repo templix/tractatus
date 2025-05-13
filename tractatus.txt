@@ -21497,6 +21497,12 @@ $ govulncheck -json ./... > report.json (guardar en formato JSON)
 $ govulncheck -test ./... (ignorar vulnerabilidades en dependencias indirectas)
 
 
+goxkcdpwgen
+Generador de contraseñas. Las listas de palabras pueden ser en inglés y alemán.
+$ goxkcdpwgen -N 2 -c -d "" -n 5 (crear 2 contraseñas [p.d. 1], que las palabras empiecen por mayuscula, no separadas [p.d. separadas] y con 5 palabras cada una [p-d. 4])
+$ goxkcdpwgen -l de -d "" -n 3
+
+
 gpart
 Reparar la tabla de particiones.
 # gpart /dev/sda (escanear el disco)
