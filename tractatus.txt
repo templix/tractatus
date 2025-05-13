@@ -21523,15 +21523,17 @@ Añadir usuarios a grupos.
 # gpasswd -A usuario video (Define a "usuario" como administrador del grupo "video")
 
 
+gperf
+[Gnu PERFect hash generator]. es un programa que genera funciones hash perfectas para conjuntos de palabras clave. Una función hash perfecta es simplemente: una función hash y una estructura de datos que permite reconocer una palabra clave en un conjunto de palabras mediante una sola exploración de la estructura de datos.
+$ echo "Linux es un sistema genial" | gperf
+$ cat file.c | gperf -d
+
+
 gperftools
 [Google Performance Tools]. Herramienta, anteriormente llamado google-perftools, para mejorar y analizar el rendimiento de programas C++.
 $ pprof --text ./ejemplo perfil.output (análisis de resultados del profiling de CPU)
 $ pprof --text ./heap_ejemplo heap_profile.0001.heap (análisis de resultados del uso del asignador de memoria tcmalloc)
 $ pprof --base=perfil1.output --text ./ejemplo perfil2.output (análisis de uso de memoria)
-
-
-gperiodic
-Muestra la tabla periódica de los elementos quimicos.
 
 
 gpe-taskmanager
