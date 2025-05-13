@@ -21343,6 +21343,23 @@ $ echo "snd-pcm-oss" | sudo tee -a /etc/modules (cargar estos módulos permanent
 $ echo "snd-mixer-oss" | sudo tee -a /etc/modules
 
 
+gomuks
+Cliente Matrix [https://matrix.org] basado en terminal y escrito en Golang que utiliza Mautrix [biblioteca de Go para trabajar con Matrix] y Mauview [biblioteca de UI para terminales en Go, utilizada para construir la interfaz]. Está diseñado para ser rápido, simple y útil en entornos donde no se dispone de una interfaz gráfica, como servidores o terminales remotas. Matrix es un protocolo abierto para comunicaciones descentralizadas y seguras en tiempo real de mensajería instantánea, VoIP, etc..
+$ gomuks (iniciar sesión con la cuenta de Matrix)
+Pedirá iniciar sesión entrando las credenciales de Matrix [usuario y contraseña], o con un token de acceso si se tiene uno.
+$ gomuks login --user @tu_usuario:matrix.org --password tu_contraseña (también se puede iniciar sesión, en algunas versiones, desde línea de comandos)
+Navegación básica
+        Ctrl+N --> Abrir selector de sala.
+        Tab / Shift+Tab --> Cambiar entre paneles.
+        /join #debian:matrix.org --> Unirte a una sala.
+        /msg @usuario\:servidor --> Iniciar chat directo.
+        /help --> Lista los comandos disponibles.
+        /rooms --> Muestra las salas en las que estás.
+        /users --> Lista los usuarios de la sala actual.
+        /leave --> Salir de la sala actual.
+        /quit --> Cierra gomuks.
+
+
 goobook
 Interfaz en línea de comandos para los contactos de Google que admite: Búsqueda de contactos, agregar nuevos contactos e integración con la aplicación Mutt.
 $ goobook authenticate (muestra una url para autorizar a google la aplicación)
