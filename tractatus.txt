@@ -21447,6 +21447,12 @@ $ gosop encrypt --as=text --mode=encrypt --cert maria.pub < mensaje.txt > mensaj
 $ gosop decrypt --with-key maria.key < mensaje.txt.gpg > mensaje_descifrado.txt (descifrar un mensaje)
 
 
+gosu
+El funcionamiento básico consiste es iniciar una aplicación dentro de un contenedor, como Docker, para cambiar el usuario y grupo bajo el cual se ejecuta un proceso dentro del contenedor. Una vez procesado el usuario/grupo, cambiamos a ese usuario, ejecutamos el proceso especificado y "gosu" deja de ser residente y de participar en el ciclo de vida del proceso. Es útil para mejorar la seguridad, ya que permite ejecutar procesos con privilegios mínimos en lugar de hacerlo como root.
+$ gosu postgres pg_ctl start (ejecuta "pg_ctl start" como el usuario "postgres")
+$ gosu mongodb:mongodb mongod --config /etc/mongod.conf (ejecuta el servidor MongoDB como el usuario y grupo "mongodb")
+
+
 goto
 Ir de un directorio a otro de forma rápida. Descarga e instalación:
 	$ wget -O goto.zip "https://github.com/ankitvad/goto/archive/master.zip"
