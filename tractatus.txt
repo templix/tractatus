@@ -21489,6 +21489,14 @@ $ goto l (Listar los directorios guardados)
 $ goto d descargas (Suprimir el atajo guardado con el nombre "descargas")
 
 
+govulncheck
+Reporta vulnerabilidades conocidas que afectan al código Go conectando con https://vuln.go.dev/ y usando la base de datos de vulnerabilidades.. Analiza el código o binario y reporta solo las vulnerabilidades que realmente afectan al proyecto, evitando falsos positivos.
+$ govulncheck ./... (escaneará todos los paquetes del módulo actual)
+$ govulncheck /ruta/al/binario (analizar un binario compilado)
+$ govulncheck -json ./... > report.json (guardar en formato JSON)
+$ govulncheck -test ./... (ignorar vulnerabilidades en dependencias indirectas)
+
+
 gpart
 Reparar la tabla de particiones.
 # gpart /dev/sda (escanear el disco)
