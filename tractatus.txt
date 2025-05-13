@@ -21423,6 +21423,30 @@ Tambien puede entrarse en el promt de la aplicación y entrar las busquedas (dot
 	googler (? for help) dotemacs
 
 
+gopass
+Herramienta de gestión de contraseñas muy útil y segura, especialmente si se utiliza GnuPG  [gpg] para cifrar información. Almacena cada contraseña en un archivo individual cifrado con gpg, y el nombre del archivo suele reflejar el sitio web o recurso al que pertenece la contraseña.
+$ gopass init TuNombre "tu_correo@ejemplo.com" (inicializará utilizando nombre y correo electrónico asociados a la clave GPG. Si se tiene múltiples claves, preguntará cuál usar)
+$ gopass insert ejemplo.com/micuenta (Pedirá introducir la contraseña para micuenta en el sitio ejemplo.com y si se quiere añadir información adicional, como nombre de usuario o notas)
+$ gopass insert ejemplo.com/otra_cuenta "contraseña_segura" (especificar la contraseña directamente, no aconsejable ya que puede quedar en el historial shell)
+$ gopass show ejemplo.com/micuenta (mostrará la contraseña para ejemplo.com/micuenta en la terminal)
+$ gopass copy ejemplo.com/micuenta (copiará la contraseña al portapapeles durante un tiempo limitado, por defecto, 45 segundos)
+$ gopass list (listar todas las contraseñas guardadas)
+$ gopass find ejemplo (buscará todas las entradas que contengan la palabra "ejemplo" en su nombre)
+$ gopass edit ejemplo.com/micuenta (abrirá el archivo cifrado, permitiéndo modificar la contraseña y la información. Al guardar y cerrar el archivo, se volverá a cifrar)
+$ gopass rm ejemplo.com/micuenta (eliminará la entrada de la contraseña)
+$ gopass create grupo/subgrupo/nuevo_sitio (creará una estructura de carpetas para organizar mejor las contraseñas)
+
+
+gosop
+[GO - Stateless OpenPgp]. Es una especificación estándar [RFC 4880bis] para crear una interfaz mínima, consistente y sin estado [no guarda claves, configuraciones ni estados entre ejecuciones] para trabajar con criptografía OpenPGP.
+$ gosop generate-key "María Ejemplo <maria@ejemplo.com>" > maria.key (generar una clave nueva)
+$ gosop extract-cert < maria.key > maria.pub (extraer la clave pública)
+$ gosop sign --as=clearsign --with-key maria.key < mensaje.txt > mensaje.txt.asc (firmar un archivo)
+$ gosop verify --cert maria.pub mensaje.txt.asc (verificar una firma)
+$ gosop encrypt --as=text --mode=encrypt --cert maria.pub < mensaje.txt > mensaje.txt.gpg (cifrar un mensaje para un destinatario)
+$ gosop decrypt --with-key maria.key < mensaje.txt.gpg > mensaje_descifrado.txt (descifrar un mensaje)
+
+
 goto
 Ir de un directorio a otro de forma rápida. Descarga e instalación:
 	$ wget -O goto.zip "https://github.com/ankitvad/goto/archive/master.zip"
