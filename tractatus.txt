@@ -21574,6 +21574,17 @@ $ gpgconf --list-dirs (enumera los directorios usados por gpgconf)
 $ gpgconf --list-options gpg-agent (las opciones de gpg-agent)
 
 
+gpgsm
+[Gnu Privacy Guard - versión S/Mime]. Herramienta diseñada para proporcionar servicios de cifrado y firma digital utilizando certificados X.509 y el protocolo CMS [Cryptographic Message Syntax]. Su uso principal es como backend para el procesamiento de correos S/MIME, pero también se emplea para la gestión de certificados y la protección de archivos y datos mediante cifrado y firma digital.
+$ gpgsm --list-keys (muestra los certificados públicos almacenados en el llavero de GnuP)
+$ gpgsm --recipient 0x85B49A58 --encrypt archivo.txt > archivo.txt.encrypted (cifra archivo.txt para el destinatario cuyo certificado tiene el ID 0x85B49A58 y el resultado encriptado se guarda en archivo.txt.encrypted)
+$ gpgsm --decrypt archivo.txt.encrypted > archivo.txt (descifra el archivo cifrado y muestra el contenido descifrado por pantalla o lo redirige a un archivo)
+$ gpgsm --sign --output archivo.txt.signed archivo.txt (genera una firma digital del archivo)
+$ gpgsm --detach-sign archivo.txt > archivo.txt.sig (crear una firma separada [detached signature] útil para enviar la firma y el archivo por separado)
+$ gpgsm --verify archivo.txt.signed (verifica la integridad y autenticidad de la firma digital de un archivo firmado)
+$ gpgsm --delete-keys 0x85B49A58 (elimina el certificado con el ID especificado del llavero)
+
+
 gping
 Comprobar si existe conectividad con un dispositivo o acceso a Internet. Como la utilidad ping pero escrita con python y mostrandolo en un gráfico. Se instala con snap:
           # snap install gping
