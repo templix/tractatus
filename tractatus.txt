@@ -21591,18 +21591,45 @@ $ gpg --no-default-keyring --keyring ./llavero.gpg --import clave.asc (importar 
 $ gpgv --keyring ./llavero.gpg mensaje.txt.sig mensaje.txt (verificar la firma)
 
 
+gphoto2
+Herramienta que permite interactuar con cámaras digitales conectadas por USB o a través de redes Wi-Fi. Permite configurar las opciones de la cámara, transferir fotos desde la cámara al ordenador, controlar el funcionamiento de la cámara [encender/apagar, cambiar modo] y obtener información sobre la cámara y sus configuraciones.
+$ gphoto2 --list-devices (listar dispositivos detectados)
+$ gphoto2 --get-all-files /dev/bus/usb/001/002 (transferir fotos de una cámara específica al ordenador)
+$ gphoto2 --set-config camera.filetransferprotocol=PTP (encender una cámara)
+$ gphoto2 --set-config camera.powermode=0 (apagar una cámara)
+$ gphoto2 --get-config camera.model (obtener información sobre la cámara)
+$ gphoto2 --set-config camera.mode=AV (cambiar el modo de la cámara:)
+$ gphoto2 --set-config camera.filetransferprotocol=PTP --set-config camera.remotewhiletimedout=0 --set-config camera.remoteshutter=0 --capture-image-and-download (configura la transferencia de archivos PTP, desactiva el temporizador remoto y el disparo remoto y captura e instala una imagen)
+
+
 gphotofs
-Es un módulo del sistema de archivos virtual GVFS [GNOME Virtual File System] que permite acceder al contenido de una cámara digital como si fuera un directorio del sistema de archivos local.
-$ gphoto2 --mount /run/user/1000/gvfs/gphoto2:// (montar una cámara digital)
-$ ls /run/user/1000/gvfs/gphoto2:// (ver el contenido de una cámara montada)
-$ cp /run/user/1000/gvfs/gphoto2:///DCIM/100MSDCF/* ~/cargar/ (copiar archivos desde la cámara)
-$ rm /run/user/1000/gvfs/gphoto2:///DCIM/100MSDCF/foto.jpg (eliminar archivos de la cámara:)
+Utilidad que permite montar una cámara digital compatible con "libgphoto2" como si fuera un sistema de archivos, usando FUSE [Filesystem in USErspace]. Esto es especialmente útil para cámaras que no se comportan como dispositivos de almacenamiento masivo USB, como muchas cámaras profesionales, sino que usan protocolos como PTP [Picture Transfer Protocol].
+$ gphoto2 --auto-detect (verificar compatibilidad de la camara)
+Crear un punto de montaje
+$ mkdir ~/camara
+Conectar la cámara y luego ejecutar
+$ gphotofs ~/camara
+$ cd ~/camara/DCIM/ (entrar en el directorio)
+$ cp IMG_1234.JPG ~/Imágenes/ (copiar archivos)
+$ fusermount -u ~/camara (desmontar la cámara)
 
 
 gping
 Comprobar si existe conectividad con un dispositivo o acceso a Internet. Como la utilidad ping pero escrita con python y mostrandolo en un gráfico. Se instala con snap:
           # snap install gping
 $ gping google.es
+
+
+gpiod
+Herramientas para interactuar con dispositivos de caracteres GPIO [General Purpose Input/Output - Entrada/Salida de Propósito General] característica común en placas como Raspberry Pi, BeagleBone, o sistemas embebidos. Los dispositivos de caracteres son interfaces que permiten a las aplicaciones leer o escribir datos byte por byte, como si interactuaran con un archivo.
+$ gpiodetect (lista los chips GPIO disponibles)
+$ gpioinfo gpiochip0 (muestra información detallada de las líneas de un gpiochip)
+$ gpioget gpiochip0 4 (leerá el valor del pin 4)
+$ gpioset gpiochip0 17=1 (pone el pin 17 en alto. Se mantiene así solo mientras el proceso esté vivo)
+$ gpiofind "USR_LED" (busca una línea por su nombre)
+$ gpiomon --num-events=3 gpiochip0 4 (esperará 3 eventos, subidas o bajadas de señal, en el pin 4)
+$ gpioset gpiochip0 17=0 (apaga el pin 17)
+$ gpioset gpiochip0 17=1 && sleep 1 && gpioset gpiochip0 17=0 (parpadeo rápido)
 
 
 gpm
