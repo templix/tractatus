@@ -21585,6 +21585,20 @@ $ gpgsm --verify archivo.txt.signed (verifica la integridad y autenticidad de la
 $ gpgsm --delete-keys 0x85B49A58 (elimina el certificado con el ID especificado del llavero)
 
 
+gpgv
+Versión reducida de gpg [GNU Privacy Guard] que solo puede verificar firmas criptográficas. No permite cifrar, descifrar, ni firmar archivos.
+$ gpg --no-default-keyring --keyring ./llavero.gpg --import clave.asc (importar la clave pública a un llavero temporal)
+$ gpgv --keyring ./llavero.gpg mensaje.txt.sig mensaje.txt (verificar la firma)
+
+
+gphotofs
+Es un módulo del sistema de archivos virtual GVFS [GNOME Virtual File System] que permite acceder al contenido de una cámara digital como si fuera un directorio del sistema de archivos local.
+$ gphoto2 --mount /run/user/1000/gvfs/gphoto2:// (montar una cámara digital)
+$ ls /run/user/1000/gvfs/gphoto2:// (ver el contenido de una cámara montada)
+$ cp /run/user/1000/gvfs/gphoto2:///DCIM/100MSDCF/* ~/cargar/ (copiar archivos desde la cámara)
+$ rm /run/user/1000/gvfs/gphoto2:///DCIM/100MSDCF/foto.jpg (eliminar archivos de la cámara:)
+
+
 gping
 Comprobar si existe conectividad con un dispositivo o acceso a Internet. Como la utilidad ping pero escrita con python y mostrandolo en un gráfico. Se instala con snap:
           # snap install gping
