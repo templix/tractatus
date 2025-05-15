@@ -21648,6 +21648,30 @@ Configuración:
 	sample_rate=
 
 
+gpsd
+Sistema de Posicionamiento Global que puede monitorizar uno o más dispositivos GPS conectados a un ordenador, lo que permite consultar todos los datos sobre la ubicación y los movimientos de los sensores en el puerto TCP 2947. Con gpsd, varias aplicaciones cliente GPS pueden compartir el acceso a los dispositivos sin contención ni pérdida de datos. Este demonio gestiona los datos del GPS o receptores similares y los distribuye en formato estandarizado. Incluye las herramientas gpsctl, ntpshmmon, ppscheck, ubxtool y gpsdctl
+# gpsd /dev/ttyUSB0 -F /var/run/gpsd.sock (gestiona la comunicación con el dispositivo GPS especificando puerto del receptor GPS y ubicación del socket para la comunicación cliente-servidor)
+Una vez iniciado, los clientes pueden conectarse a `localhost:2947` o al socket Unix.
+# gpsctl -f -n -b /dev/ttyUSB0 (controlar la configuración del GPS. -f: forzar el reinicio del GPS, -n: no esperar a la salida del GPS y -b: configura el GPS para emitir en modo binario nativo si es compatible)
+# gpsctl -p NMEA /dev/ttyUSB0 (cambiar el tipo de protocolo)
+# ntpshmmon (monitorea las interfaces SHM [SHared Memory] usadas por NTP para sincronizar el reloj del sistema usando datos del GPS)
+# ppscheck /dev/pps0 (permite comprobar si el kernel detecta los pulsos de segundo [Pulse Per Second - PPS] del GPS)
+# ubxtool -p MON-VER (mostrar configuración actual de dispositivos que usan el protocolo UBX [U-BloX])
+# ubxtool -e NAV-PVT (activar solo mensajes NAV-PVT [posicionamiento])
+# gpsdctl -r (reiniciar todos los dispositivos monitoreados)
+# gpsdctl -l (mostrar estado de dispositivos conectados)
+
+
+gpsd-clients
+Conjunto de clientes para interactuar con gpsd [ver]. Contiene herramientas auxiliares para monitoreo, pruebas, creación de perfiles de latencia, configuración de dispositivos y simulación de gpsd. Incluye gegps [genera KML de recorrido para visualizar en Google Earth], gps2udp [reenvía datos GPS por UDP], gpscat [lee y muestra salida cruda del GPS], gpscsv [convierte a CSV para hojas de cálculo], gpsdecode [decodifica mensajes GPS crudos: NMEA, UBX, etc.], gpsfake, gpspipe [saca los datos del GPS en diferentes formatos], gpsplot, gpsprof, gpsrinex, gpssubframe, gpxlogger, lcdgps, xgps [GUI con gráficos de satélites], xgpsspeed [velocímetro gráfico] y zerk [para GPS Javad]
+
+
+gpsd-tools
+Contiene las herramientas más comunes utilizadas para acceder a un dispositivo GPS. Estas son cgps que muestra posición, satélites, etc. y gpsmon que proporciona un diagnóstico en modo texto de protocolos y datos.
+$ cgps -s (verificando el funcionamiento con un cliente. Mostrará información en tiempo real como: latitud/longitud, velocidad, altitud, satélites visibles...)
+$ gpsmon (ver más detalles técnicos)
+
+
 gpw
 Generador de contraseñas pronunciables
 $ gpw 5 8  (creará 5 de 8 caracteres)
