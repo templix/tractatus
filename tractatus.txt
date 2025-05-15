@@ -21692,12 +21692,24 @@ Generador de contraseñas pronunciables
 $ gpw 5 8  (creará 5 de 8 caracteres)
 
 
+grab
+Es un paquete de Go para descargar archivos de internet con las siguientes características: Monitoreo del progreso de descarga simultáneamente, reanudación automática de descargas incompletas, adivinación del nombre del archivo a partir del encabezado del contenido o la ruta URL, etc
+$ grab https://ejemplo.com/archivo.zip (uso básico)
+$ grab -o mi_archivo.zip https://ejemplo.com/archivo.zip (guardar el archivo con un nombre diferente)
+$ grab https://ejemplo.com/archivo1.zip https://ejemplo.com/archivo2.pdf (descargar varios archivos)
+$ grab --limit-rate 500k https://ejemplo.com/archivo-grande.iso (limitar la velocidad, por ejemplo, a 500 KB/s)
+$ grab --connections 8 https://ejemplo.com/archivo-grande.iso (acelerar la descarga usando conexiones paralelas)
+$ grab --input-file lista-urls.txt (descargar desde un archivo con lista de URLs)
+$ grab --user usuario --password contraseña https://sitio-seguro.com/archivo.zip (descargar con autenticación)
+Nota.- Si la descarga se interrumpe, simplemente vuelve a ejecutar el mismo comando y continuará automáticamente.
+
+
 grabc
 Para conocer el color en RGB y exadecimal de algo del escritorio.
 	$ grabc
 	#1951c2
 	25,81,194
-El puntero del ratón de convierte en una cruz y al clicar obtiene el color.
+El puntero del ratón se convierte en una cruz y al clicar obtiene el color.
 
 
 graph-easy
