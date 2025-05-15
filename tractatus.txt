@@ -21648,6 +21648,21 @@ Configuración:
 	sample_rate=
 
 
+gpp
+[General Purpose Preprocessor]. Es un preprocesador de texto altamente configurable que permite definir la propia sintaxis para realizar transformaciones en archivos de texto antes de que sean procesados por otros programas como compiladores, interpretes, etc.
+1.-
+Inclusión de archivos[similar a `#include` en C]
+Un archivo...
+$ nano config.txt
+        #def COLOR red
+Otro
+$ nano main.txt
+        //#include "config.txt"
+        El color es: /*$COLOR*/
+$ gpp main.txt (procesar)
+        El color es: red
+
+
 gpsd
 Sistema de Posicionamiento Global que puede monitorizar uno o más dispositivos GPS conectados a un ordenador, lo que permite consultar todos los datos sobre la ubicación y los movimientos de los sensores en el puerto TCP 2947. Con gpsd, varias aplicaciones cliente GPS pueden compartir el acceso a los dispositivos sin contención ni pérdida de datos. Este demonio gestiona los datos del GPS o receptores similares y los distribuye en formato estandarizado. Incluye las herramientas gpsctl, ntpshmmon, ppscheck, ubxtool y gpsdctl
 # gpsd /dev/ttyUSB0 -F /var/run/gpsd.sock (gestiona la comunicación con el dispositivo GPS especificando puerto del receptor GPS y ubicación del socket para la comunicación cliente-servidor)
