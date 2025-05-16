@@ -21737,6 +21737,16 @@ $ graph-easy grafic --png (crear un png de un gráfico generado por graphviz[ver
 $ echo "[ Bonn ] -- car --> [ Berlin ], [ Ulm ]" | graph-easy --html > ruta.html (gráfico a partir de texto crea el html)
 
 
+graphicsmagick
+Herramienta para la edición y manipulación de imágenes. Se accede a las herramientas a través de un único ejecutable llamado "gm", por lo tanto, GraphicsMagick e ImageMagick pueden utilizarse en paralelo instalando el paquete graphicsmagick-imagemagick-compat para obtener un conjunto de varios ejecutables compatibles con la interfaz de ImageMagick.
+$ gm convert entrada.jpg -resize 400x300 salida.jpg (crea una nueva imagen redimensionada)
+$ gm convert entrada.png salida.jpg (convierte un archivo PNG a JPG)
+$ gm identify imagen.jpg (información de una imagen)
+$ gm convert entrada.jpg -crop 100x100+10+10 salida.jpg (recorta un cuadro de 100x100 píxeles desde (10,10) de la imagen original)
+$ gm convert entrada.jpg -font Arial -pointsize 36 -draw "text 50,50 'Hola Mundo'" salida.jpg (escribe “Hola Mundo” en la posición 50,50)
+$ gm composite logo.png fondo.jpg salida.jpg (superpone logo.png sobre fondo.jpg)
+
+
 graphviz
 Genera gráficos a partir de archivos de texto. Ver pactree o dot porque la aplicación incluye varios ejecutables: acyclic, bcomps, ccomps, circo, cluster, diffimg, dijkstra, dot, dot2gxl, dot_builtins, dotty, edgepaint, fdp, gc, gml2gv, graphml2gv, gv2gml, gv2gxl, gvcolor, gvgen, gvmap, gvmap.shn, gvpack, gvpr, gxl2dot, gxl2gv, lefty, lneato, mingle, mm2gv, neato, nop, osage, patchwork, prune, sccmap, sfdp, tred, twopi, unflatten y vimdot. Generar un archivo con pactree:
 $ pactree -g htop > htop
