@@ -21786,6 +21786,13 @@ Buscar tres palabras al inicio de la linea [escapando la barra vertical] de un a
 $ ls | grep -v DIR3 | grep -v archi | xargs -d"\n" rm -rf
 
 
+grim
+[Generic Image Manipulation]. Utilidad para hacer capturas de pantalla de escritorios Wayland. Escribirá un PNG en un archivo o en la salida estándar.
+$ grim -g "$(xwininfo -root | grep 'X:Y' | awk '{print $2,$3}') $(xwininfo -root | grep 'Width:' | awk '{print $2}') $(xwininfo -root | grep 'Height:' | awk '{print $2}')" (capturar toda la pantalla)
+$ grim -id <ID_DE_LA_VENTANA> (captura de una ventana específica)
+$ grim -n -f screenshot.png --quality=90 (tomará una captura de pantalla sin mostrar la ventana de selección y guardará la imagen como "screenhot.png" con una calidad de compresión del 90%)
+
+
 grive
 [gdrive]. Permite sincronizar cualquier carpeta local con el servicio de almacenamiento online de Google. En Ubuntu: add-apt-repository ppa:nilarimogard/webupd8
 $ mkdir grive (crear una carpeta para sincronizar archivos)
