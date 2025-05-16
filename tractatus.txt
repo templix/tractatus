@@ -21687,9 +21687,22 @@ $ cgps -s (verificando el funcionamiento con un cliente. Mostrará información 
 $ gpsmon (ver más detalles técnicos)
 
 
+gpustat
+Herramienta que permite monitorear el estado de las GPUs NVIDIA en tiempo real. Se basa en la biblioteca NVML [NVidia Management Library] y ofrece una interfaz más simple y visualmente clara que nvidia-smi, mostrando información como el uso de la GPU, la memoria de video, la utilización por procesos, temperatura y más. Solo funciona con GPUs NVIDIA no soporta AMD u otras marcas.
+$ gpustat (comando básico para ver una instantánea del estado de todas las GPUs NVIDIA)
+$ gpustat --color -c -u -p  -n 2 (activa colores en la salida, muestra uso de la CPU, nombre del usuario que ejecuta procesos, el PID y actualiza cada 2 segundos)
+$ gpustat -cpu (muestra el uso de la CPU junto con las métricas de la GPU)
+$ gpustat | grep python (ver solo el proceso especificado)
+
+
 gpw
 Generador de contraseñas pronunciables
 $ gpw 5 8  (creará 5 de 8 caracteres)
+
+
+gpxinfo
+extrae estadísticas básicas de un archivo GPX [GPS Exchange Format]. Imprime metainformación sobre el archivo y calcula datos sobre rutas y recorridos, como tiempos, distancias e información de subidas y bajadas. El formato GPX es un esquema XML diseñado como un formato común de datos GPS y se utilizan comúnmente para almacenar rutas, tracks y waypoints.
+$ gpxinfo archivo.gpx (obtener información del archivo especificado)
 
 
 grab
@@ -21712,6 +21725,12 @@ Para conocer el color en RGB y exadecimal de algo del escritorio.
 El puntero del ratón se convierte en una cruz y al clicar obtiene el color.
 
 
+grabserial
+Su función principal es leer los datos que llegan a un puerto serie específico y volcarlos a la salida estándar del ordenador. Esto permite capturar y guardar la información que un dispositivo, por ejemplo una placa Raspberry Pi sin monitor conectado, está enviando a través de su consola serie.
+# grabserial /dev/ttyUSB0 >> salida_rpi.log (mostrará en la terminal todo lo que la Raspberry Pi esté enviando por su puerto serie y guarda en el archivo especificado)
+# grabserial -b 115200 /dev/ttyUSB0 > salida_rpi_115200.log (especifica una velocidad de 115200 baudios para la comunicación con el dispositivo en /dev/ttyUSB0)
+
+
 graph-easy
 [libgraph-easy-perl]. Módulo Perl para convertir o renderizar gráficos como ASCII, HTML, SVG o mediante Graphviz.
 $ graph-easy grafic --png (crear un png de un gráfico generado por graphviz[ver] o dothost[ver])
@@ -21719,7 +21738,7 @@ $ echo "[ Bonn ] -- car --> [ Berlin ], [ Ulm ]" | graph-easy --html > ruta.html
 
 
 graphviz
-(meta paquete). Genera gráficos a partir de archivos de texto. Ver pactree o dot porque la aplicación incluye varios ejecutables: acyclic, bcomps, ccomps, circo, cluster, diffimg, dijkstra, dot, dot2gxl, dot_builtins, dotty, edgepaint, fdp, gc, gml2gv, graphml2gv, gv2gml, gv2gxl, gvcolor, gvgen, gvmap, gvmap.shn, gvpack, gvpr, gxl2dot, gxl2gv, lefty, lneato, mingle, mm2gv, neato, nop, osage, patchwork, prune, sccmap, sfdp, tred, twopi, unflatten y vimdot. Generar un archivo con pactree:
+Genera gráficos a partir de archivos de texto. Ver pactree o dot porque la aplicación incluye varios ejecutables: acyclic, bcomps, ccomps, circo, cluster, diffimg, dijkstra, dot, dot2gxl, dot_builtins, dotty, edgepaint, fdp, gc, gml2gv, graphml2gv, gv2gml, gv2gxl, gvcolor, gvgen, gvmap, gvmap.shn, gvpack, gvpr, gxl2dot, gxl2gv, lefty, lneato, mingle, mm2gv, neato, nop, osage, patchwork, prune, sccmap, sfdp, tred, twopi, unflatten y vimdot. Generar un archivo con pactree:
 $ pactree -g htop > htop
 $ dotty htop (muestra el gráfico)
 
