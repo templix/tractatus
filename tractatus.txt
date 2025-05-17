@@ -21793,6 +21793,15 @@ $ grim -id <ID_DE_LA_VENTANA> (captura de una ventana específica)
 $ grim -n -f screenshot.png --quality=90 (tomará una captura de pantalla sin mostrar la ventana de selección y guardará la imagen como "screenhot.png" con una calidad de compresión del 90%)
 
 
+grimshot
+Es un asistente de shell para crear capturas de pantalla en entornos Wayland, como Sway, utilizando herramientas como grim [tomar la capturas de pantalla], WL-Copy [para copiar imágenes al portapapeles] y slurp [para seleccionar regiones de la pantalla con el cursor].
+$ grimshot check (verifica si tienes instalados los componentes necesarios)
+$ grimshot save screen ~/screenshot.png (capturar la pantalla completa)
+$ grimshot save area ~/selected.png (capturar una región seleccionada. abre un selector para que dibujes el área con el mouse)
+$ grimshot copy area (capturar una región y copiarla al portapapeles y pegarla directamente en una app con Ctrl-v)
+$ grimshot save window ~/Pictures/window.png (capturar la ventana activa)
+
+
 grive
 [gdrive]. Permite sincronizar cualquier carpeta local con el servicio de almacenamiento online de Google. En Ubuntu: add-apt-repository ppa:nilarimogard/webupd8
 $ mkdir grive (crear una carpeta para sincronizar archivos)
