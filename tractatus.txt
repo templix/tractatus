@@ -21786,6 +21786,42 @@ Buscar tres palabras al inicio de la linea [escapando la barra vertical] de un a
 $ ls | grep -v DIR3 | grep -v archi | xargs -d"\n" rm -rf
 
 
+grepcidr
+Filtrar direcciones IP que coinciden con una red o una rango CIDR [Classless Inter-Domain Routing].
+$ cat blocked_ips.txt | grepcidr 203.0.113.0/24 (con una lista de IPs bloqueadas, ver cuáles están en una red específica)
+$ grepcidr -v 192.168.1.0/24 ips.txt (mostrar IPs que no están en la red especificada)
+$ echo "192.168.1.100" | grepcidr 192.168.1.0/24 (usado como pipe)
+$ grep -oE '[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+' /var/log/auth.log | grepcidr 10.0.0.0/8 (filtrar IPs de un log)
+$ grepcidr -c 192.168.1.0/24 ips.txt (contar el número de coincidencias)
+1.-
+Filtrar IPs que pertenecen a una red CIDR
+Supongamos un archivo con direcciones IP:
+$ cat ips.txt
+        192.168.1.10
+        10.0.0.5
+        172.16.0.20
+        192.168.2.30
+Y se quiere filtrar solo las IPs que están en la red 192.168.1.0/24:
+$ grepcidr 192.168.1.0/24 ips.txt
+2.-
+Filtrar IPs que coinciden con múltiples redes CIDR
+Un archivo con varias redes:
+$ cat redes.txt
+        192.168.1.0/24
+        10.0.0.0/8
+Filtrar las IPs que coincidan con alguna de estas redes:
+$ grepcidr redes.txt ips.txt
+
+
+grepmail
+Busca en archivos de correo [formatos mbox y Maildir] mensajes que contengan un patrón ya se en el cuerpo como en los encabezados de los correos e imprime los mensajes resultantes.
+$ grepmail "factura" ~/correo/INBOX (buscará todos los mensajes en el archivo INBOX que contengan la palabra "factura")
+$ grepmail --header "Subject: Oferta" ~/correo/INBOX (busca mensajes cuyo asunto ["Subject"] contenga la palabra "Oferta" en el archivo INBOX)
+$ grepmail --body "reunión" ~/correo/INBOX (filtra los mensajes que mencionan "reunión" en el cuerpo del correo)
+$ grepmail --after "2025-01-01" --before "2025-03-01" "proyecto" ~/correo/INBOX (muestra mensajes que contienen "proyecto" y enviados entre el 1 de enero y el 1 de marzo de 2025)
+$ grepmail "urgente" ~/correo/INBOX.gz (buscar el patrón "urgente" en un archivo de correo comprimido con gzip)
+
+
 grim
 [Generic Image Manipulation]. Utilidad para hacer capturas de pantalla de escritorios Wayland. Escribirá un PNG en un archivo o en la salida estándar.
 $ grim -g "$(xwininfo -root | grep 'X:Y' | awk '{print $2,$3}') $(xwininfo -root | grep 'Width:' | awk '{print $2}') $(xwininfo -root | grep 'Height:' | awk '{print $2}')" (capturar toda la pantalla)
@@ -21800,6 +21836,21 @@ $ grimshot save screen ~/screenshot.png (capturar la pantalla completa)
 $ grimshot save area ~/selected.png (capturar una región seleccionada. abre un selector para que dibujes el área con el mouse)
 $ grimshot copy area (capturar una región y copiarla al portapapeles y pegarla directamente en una app con Ctrl-v)
 $ grimshot save window ~/Pictures/window.png (capturar la ventana activa)
+
+
+gringotts
+Herramienta para la gestión segura de contraseñas y otros datos confidenciales como números de tarjetas de crédito, PIN, etc. Utiliza un archivo cifrado para almacenar los datos. Este archivo está protegido por una contraseña maestra que se debe recordar porque todas las entradas dentro de este archivo están cifradas, lo que significa que sin la contraseña maestra, la información es ilegible.
+$ gringotts init (inicializar el almacén de datos)
+$ gringotts store correo_personal (guardar una nueva contraseña o información)
+$ gringotts store cuenta_bancaria "contraseña_secreta" -n "PIN de la tarjeta" (especificar el valor directamente en el comando. La contraseña podría quedar expuesta en el historial)
+$ gringotts get correo_personal (acceder a la información almacenada por consola)
+$ gringotts get -c correo_personal (copiar el valor al portapapeles)
+$ gringotts list (mostrará una lista de los nombres que usados al almacenar la información)
+$ gringotts edit correo_personal (abrirá un editor de texto donde se podrá modificar la información)
+$ gringotts delete cuenta_bancaria (eliminar una entrada)
+$ gringotts passwd (cambiar la contraseña maestra. Pedirá la actual y la nueva)
+$ gringotts export backup.json.gpg (exportar los datos a un archivo en formato JSON cifrado)
+$ gringotts import backup.json.gpg (importarlos desde un archivo)
 
 
 grive
