@@ -22106,6 +22106,27 @@ writable (Comprueba si un clave es modificable)
 monitor (Hace un seguimiento por si hay cambios)
 
 
+gsocket
+Herramienta gsocket [Global Socket], que permite establecer conexiones seguras entre dos máquinas en redes diferentes sin necesidad de conocer sus direcciones IP, la ubicación geográfica o puerto. Funciona mediante un servidor de rendezvous público o privado que actúa como intermediario [gsocket server], y utiliza una clave secreta compartida para emparejar las conexiones. Los datos se cifran con TLS, similar a SSH. Incluye las herramientas gs-netcat, gs-sftp, gs-mount y blitz
+$ gsocket -s mi-clave-secreta (ambas máquinas lo ejecutan y se abrirá una terminal compartida en cada una de ellas donde lo que escriba una lo verá la otra)
+$ gsocket -s mi-clave-secreta -f < archivo.txt (máquina emisora envía archivo)
+$ gs-netcat -s "mi-clave-secreta" < archivo_local.txt (lo mismo)
+$ gsocket -s mi-clave-secreta -f > archivo_recibido.txt (máquina receptora recibe archivo)
+$ gs-netcat -s "mi-clave-secreta" -l > archivo_recibido.txt (lo mismo)
+$ gsocket -s mi-clave-secreta -t -l 8080 (máquina servidor escucha en puerto local 8080)
+$ gs-netcat -s "mi-clave-secreta" -l -p 2222 (lo mismo en el puerto 2222)
+$ gsocket -s mi-clave-secreta -t 127.0.0.1:8080 (máquina cliente conecta al túnel)
+$ gs-netcat -s "mi-clave-secreta" -p 2222 (lo mismo)
+$ gsocket -s mi-clave-secreta -i (máquina servidor espera conexión)
+$ gsocket -s mi-clave-secreta -e "ls -l /" (máquina cliente ejecuta un comando en remoto)
+$ gs-sftp -s "mi-clave-secreta" (crea un servidor SFTP [SSH File Transfer Protocol] temporal sin necesidad de configurar sshd)
+$ sftp -P 33001 -i ~/.gsocket/gs-sftp.id_rsa localhost (cliente accede al directorio compartido)
+$ gs-mount -s "mi-clave-secreta" /tmp (servidor comparte /tmp)
+$ gs-mount -s "mi-clave-secreta" ~/remoto (cliente monta el directorio en ~/remoto y en el cliente refleja el contenido de /tmp del servidor)
+$ blitz -s "mi-clave-secreta" -l (modo escucha en todas las máquinas)
+$ blitz -s "mi-clave-secreta" -c "uname -a" (desde una máquina ejecuta un comando en todas y todas responderán con su versión del kernel)
+
+
 gss-man
 Páginas de manual de GSS [Generic Security Service]. Es una implementación libre del marco de seguridad GSS-API [[Generic Security Services - Application Program Interface]] que permite a las aplicaciones acceder a servicios de seguridad como autenticación, integridad y confidencialidad, sin importar qué protocolo específico se use debajo. El comando simplemente muestra las páginas del manual relacionadas con las funciones y conceptos de la GSS-API como un ayudante para acceder a la documentación de GSS.
 $ gss-man gss_init_sec_context (abrirá la página de manual que describe la función gss_init_sec_context)
