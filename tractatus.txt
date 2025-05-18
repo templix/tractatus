@@ -21862,6 +21862,49 @@ A partir de este momento siempre que entremos en la carpeta gdrive podremos sinc
 $ grive
 
 
+grok
+Herramienta diseñada para analizar texto, especialmente registros [logs] o salidas de programas, usando patrones definidos. La utilidad radica en poder extraer información estructurada de datos no estructurados como logs del sistema, salidas de comandos, etc. Se basa en expresiones regulares simplificadas y nombradas, llamadas patrones Grok, que hacen más fácil reconocer partes específicas del texto, como fechas, direcciones IP, nombres de usuario, etc.
+Un patrón Grok se ve así:
+        %{IP:client_ip}
+Este extrae una dirección IP y la guarda bajo el nombre `client_ip`.
+Supongamos este log:
+        192.168.1.10 - - [18/May/2025:15:23:12 +0000] "GET /index.html HTTP/1.1" 200 532
+Se puede definir un patrón para extraer partes específicas:
+$ echo '192.168.1.10 - - [18/May/2025:15:23:12 +0000] "GET /index.html HTTP/1.1" 200 532' \
+| grok '%{IP:client} - - \[%{HTTPDATE:timestamp}\] "%{WORD:method} %{URIPATH:request} HTTP/%{NUMBER:http_version}" %{NUMBER:status} %{NUMBER:bytes}'
+La salida:
+        {
+          "client": "192.168.1.10",
+          "timestamp": "18/May/2025:15:23:12 +0000",
+          "method": "GET",
+          "request": "/index.html",
+          "http_version": "1.1",
+          "status": "200",
+          "bytes": "532"
+        }
+grok ya incluye muchos patrones útiles. Algunos ejemplos:
+| Nombre del patrón | Coincide con...      |
+| ----------------- | -------------------- |
+| `IP`              | Dirección IP         |
+| `USERNAME`        | Nombre de usuario    |
+| `WORD`            | Palabra simple       |
+| `NUMBER`          | Número               |
+| `HTTPDATE`        | Fecha en logs HTTP   |
+| `URIPATH`         | Ruta de URL (`/foo`) |
+
+
+
+Ejemplo interactivo
+        Failed password for invalid user admin from 10.0.0.5 port 2234 ssh2
+$ cat log.txt | grok 'Failed password for %{GREEDYDATA:user} from %{IP:ip} port %{NUMBER:port} ssh2'
+Salida:
+        {
+          "user": "invalid user admin",
+          "ip": "10.0.0.5",
+          "port": "2234"
+        }
+
+
 groupadd
 Crear un nuevo grupo
 # groupadd oficina
