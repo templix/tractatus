@@ -22086,6 +22086,18 @@ $ gs -q -sPAPERSIZE=a4 -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -sOutputFile=1+2.pdf 
 $ gs -q -dNOPAUSE -dBATCH -sDEVICE=pswrite -sOutputFile=1+2.ps 1.ps 2.ps (Unir dos ps)
 
 
+gscanbus
+Es una pequeña herramienta de escaneo, prueba y visualización de topología de bus para el subsistema IEEE1394 [FireWire], con compatibilidad con AV/C, especialmente para controlar videocámaras y grabadoras de vídeo. Está diseñada como una herramienta de depuración para el desarrollo de IEEE1394, pero también puede utilizarse para comprobar la configuración de IEEE1394 en Linux.
+# gscanbus (escaneo básico)
+# gscanbus -v (mostrar información detallada sobre los dispositivos)
+# gscanbus --device=0x12345678 --target=0x87654321 (probar conexión entre dos dispositivos específicos)
+# gscanbus --topology (verificar la topología del bus)
+# gscanbus --name="Videocámara" (buscar dispositivos por nombre)
+# gscanbus --id-only (mostrar solo el ID de los dispositivos)
+# gscanbus --probe=0x12345678 (probar un dispositivo específico)
+# gscanbus --cable (encontrar dispositivos conectados en modo "cable", sin encender)
+
+
 gsettings
 Herramienta de configuración. Equivalente a gconftool-2 [gconf-editor] pero para gnome3 [dconf-editor]
 $ gsettings set com.canonical.indicator.session show-real-name-on-panel false (Borrar el nombre del panel de unity)
