@@ -21883,14 +21883,13 @@ La salida:
           "bytes": "532"
         }
 grok ya incluye muchos patrones útiles. Algunos ejemplos:
-| Nombre del patrón | Coincide con...      |
-| ----------------- | -------------------- |
-| `IP`              | Dirección IP         |
-| `USERNAME`        | Nombre de usuario    |
-| `WORD`            | Palabra simple       |
-| `NUMBER`          | Número               |
-| `HTTPDATE`        | Fecha en logs HTTP   |
-| `URIPATH`         | Ruta de URL (`/foo`) |
+IP --> Dirección IP
+USERNAME --> Nombre de usuario
+WORD --> Palabra simple
+NUMBER --> Número
+HTTPDATE --> Fecha en logs HTTP
+URIPATH --> Ruta de URL
+1.-
 Ejemplo interactivo
         Failed password for invalid user admin from 10.0.0.5 port 2234 ssh2
 $ cat log.txt | grok 'Failed password for %{GREEDYDATA:user} from %{IP:ip} port %{NUMBER:port} ssh2'
