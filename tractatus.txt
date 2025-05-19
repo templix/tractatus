@@ -21891,9 +21891,6 @@ grok ya incluye muchos patrones útiles. Algunos ejemplos:
 | `NUMBER`          | Número               |
 | `HTTPDATE`        | Fecha en logs HTTP   |
 | `URIPATH`         | Ruta de URL (`/foo`) |
-
-
-
 Ejemplo interactivo
         Failed password for invalid user admin from 10.0.0.5 port 2234 ssh2
 $ cat log.txt | grok 'Failed password for %{GREEDYDATA:user} from %{IP:ip} port %{NUMBER:port} ssh2'
@@ -21903,6 +21900,27 @@ Salida:
           "ip": "10.0.0.5",
           "port": "2234"
         }
+
+
+grokevt
+es una colección de scripts escritos en python diseñados para convertir los archivos de registro de eventos [entradas de registro, plantillas de mensajes y archivos de registro] en particiones de Microsoft Windows NT/2000/XP/2003 a un formato legible y analizable en sistemas Linux.
+# grokevt-parselog -t /var/lib/grokevt/NOMBRE_DEL_SISTEMA (mostrará una lista de los tipos de registros disponibles: System, Application, Security, etc.)
+# grokevt-parselog /var/lib/grokevt/NOMBRE_DEL_SISTEMA Security (ver todos los eventos del registro de seguridad)
+# grokevt-parselog /var/lib/grokevt/NOMBRE_DEL_SISTEMA Security | grep '528' (encontrar eventos de inicio de sesión exitosos. event ID 528 en registros de seguridad antiguos)
+# grokevt-parselog /var/lib/grokevt/NOMBRE_DEL_SISTEMA Security > security_events.txt (exportar a un archivo para análisis posterior)
+# grokevt-parselog /var/lib/grokevt/NOMBRE_DEL_SISTEMA Application | grep 'Error' (análisis de registros de aplicaciones)
+# grokevt-parselog /var/lib/grokevt/NOMBRE_DEL_SISTEMA System | grep '2023-04-15' (filtrado por fecha)
+1.-
+Crear la base de datos de registros
+# mkdir /var/lib/grokevt/NOMBRE_DEL_SISTEMA
+# grokevt-builddb /mnt/windows /var/lib/grokevt/NOMBRE_DEL_SISTEMA
+Este comando explora el sistema de archivos Windows montado, identifica los archivos de registro y construye una base de datos para su análisis.
+2.-
+Investigación de intrusión donde se necesita verificar intentos de acceso no autorizados:
+# mount -o ro,loop,noexec disk_image.dd /mnt/evidence (montar la imagen)
+# grokevt-builddb /mnt/evidence /var/lib/grokevt/compromised_system (crea la base de datos de registros)
+# grokevt-parselog /var/lib/grokevt/compromised_system Security | grep -E '(529|530|531|532|533|534|535|536|537|539)' (examina eventos de inicio de sesión fallidos)
+# grokevt-parselog /var/lib/grokevt/compromised_system Security | grep -E '(624|625|626|636)' (busca eventos de creación de usuarios o cambios en grupos administrativos)
 
 
 groupadd
