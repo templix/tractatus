@@ -22236,6 +22236,15 @@ writable (Comprueba si un clave es modificable)
 monitor (Hace un seguimiento por si hay cambios)
 
 
+gsm-utils
+Herramientas para interactuar con dispositivos GSM [teléfonos móviles antiguos o módems GSM]. Las funciones incluyen: modificación de agendas telefónicas, lectura, escritura, envío y recepción de mensajes SMS.
+$ gsmsendsms -d /dev/ttyUSB0 +34666777888 "Este es un mensaje de prueba" (enviar un SMS. Especifica el dispositivo del módem, número de destino y mensaje)
+$ gsmsms -d /dev/ttyUSB0 -r (mostrará los mensajes recibidos en el dispositivo)
+$ gsmsms -d /dev/ttyUSB0 -d 5  (borrar el mensaje con índice 5)
+$ gsmpb -d /dev/ttyUSB0 -l (listar contactos)
+$ gsmpb -d /dev/ttyUSB0 -a "Juan Perez" +34987654321 (añadir un contacto)
+
+
 gsocket
 Herramienta gsocket [Global Socket], que permite establecer conexiones seguras entre dos máquinas en redes diferentes sin necesidad de conocer sus direcciones IP, la ubicación geográfica o puerto. Funciona mediante un servidor de rendezvous público o privado que actúa como intermediario [gsocket server], y utiliza una clave secreta compartida para emparejar las conexiones. Los datos se cifran con TLS, similar a SSH. Incluye las herramientas gs-netcat, gs-sftp, gs-mount y blitz
 $ gsocket -s mi-clave-secreta (ambas máquinas lo ejecutan y se abrirá una terminal compartida en cada una de ellas donde lo que escriba una lo verá la otra)
@@ -22261,6 +22270,23 @@ gss-man
 Páginas de manual de GSS [Generic Security Service]. Es una implementación libre del marco de seguridad GSS-API [[Generic Security Services - Application Program Interface]] que permite a las aplicaciones acceder a servicios de seguridad como autenticación, integridad y confidencialidad, sin importar qué protocolo específico se use debajo. El comando simplemente muestra las páginas del manual relacionadas con las funciones y conceptos de la GSS-API como un ayudante para acceder a la documentación de GSS.
 $ gss-man gss_init_sec_context (abrirá la página de manual que describe la función gss_init_sec_context)
 $ gss-man gss_acquire_cred (muestra el manual de la función gss_acquire_cred)
+
+
+gssdp-tools
+Una API basada en GObject para ejecutar SSDP [Simple Service Discovery Protocol - Protocolo Simple de Descubrimiento de Servicios] y descubrir dispositivos y servicios disponibles en una red local, por ejemplo, smart TVs, impresoras, cámaras IP, etc.
+$ gssdp-device-sniffer (escanea la red y muestra en tiempo real los dispositivos SSDP anunciándose)
+$ gssdp-device-sniffer --interface=eth0 (escanear en una interfaz específica)
+$ gssdp-device-sniffer --target=239.255.255.250 (enviar consultas M-SEARCH a un objetivo personalizado)
+
+
+gst123
+Reproductor de archivos de audio/vídeo, similar a ogg123 y mpg123, basado en GStreamer.
+$ gst123 file.mp3 (reproducir un archivo MP3)
+$ gst123 --volume=50% file.mp3 (reproducir con volumen ajustado)
+$ gst123 file.avi (reproducir un archivo AVI)
+$ gst123 http://example.com/audio.mp3 (reproducir desde una URL)
+$ gst123 --loop file.mp3 (reproducir en bucle)
+$ gst123 --info file.mp3 (mostrar información sobre el archivo mientras se reproduce)
 
 
 gt5
