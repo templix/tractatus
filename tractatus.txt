@@ -21948,6 +21948,38 @@ load --> Inserta múltiples registros en la tabla Documents y cada documento tie
 Nota.- La búsqueda de "texto completo" permite buscar palabras o frases dentro de un conjunto de datos de texto, considerando no solo coincidencias exactas, sino también variaciones, sinónimos, o formas flexionadas de las palabras, por ejemplo, "corriendo" y "correr". A diferencia de una búsqueda simple, que busca coincidencias literales y puede ser lenta en grandes conjuntos de datos, la búsqueda de texto completo utiliza "índices invertidos" para acelerar las consultas. Estos índices almacenan un mapeo de palabras a sus ubicaciones en los documentos, lo que permite búsquedas rápidas y relevantes.
 
 
+gross
+Es un servidor de listas grises [Greylisting] que es una técnica utilizada para reducir el spam en servidores de correo electrónico, que temporalmente rechaza cualquier correo de un remitente desconocido. Si el correo es legítimo, el servidor de correo del remitente intentará reenviarlo después de un tiempo, y entonces será aceptado. Los servidores de spam generalmente no intentan reenviar el correo. La configuración en /etc/grossd.conf.
+1.-
+Integrar gross con Postfix
+# nano /etc/postfix/main.cf
+y añadir las siguientes líneas:
+        # Configuración de milter para Postfix
+        smtpd_milters = inet:127.0.0.1:10025
+        milter_default_action = accept
+# systemctl restart postfix (reiniciar Postfix para aplicar los cambios)
+2.-
+Integración con Exim
+# nano /etc/exim4/exim4.conf.template
+y añadir las siguientes líneas:
+        # Configuración de milter para Exim
+        acl_smtp_mime = acl_check_mime
+        acl_smtp_rcpt = acl_check_rcpt
+        acl_smtp_data = acl_check_data
+# systemctl restart exim4 (reinicia Exim para aplicar los cambios)
+3.-
+Integración con Sendmail
+# nano /etc/mail/sendmail.mc
+y añadir las siguientes líneas:
+        # Configuración de milter para Sendmail
+        INPUT_MAIL_FILTER(`gross', `S=inet:10025@127.0.0.1')
+        define(`confMILTER_MACROS_CONNECT', `j, {daemon_name}, {if_name}, {if_addr}')
+        define(`confMILTER_MACROS_HELO', `{tls_version}, {cipher}, {cipher_bits}, {cert_subject}, {cert_issuer}')
+        define(`confMILTER_MACROS_ENVFROM', `i, {auth_type}, {auth_authen}, {auth_ssf}, {auth_author}, {mail_mailer}, {mail_host}, {mail_addr}')
+        define(`confMILTER_MACROS_ENVRCPT', `{rcpt_mailer}, {rcpt_host}, {rcpt_addr}')
+# systemctl restart sendmail (reinicia Sendmail para aplicar los cambios)
+
+
 groupadd
 Crear un nuevo grupo
 # groupadd oficina
