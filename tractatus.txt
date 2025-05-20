@@ -21922,6 +21922,32 @@ Investigación de intrusión donde se necesita verificar intentos de acceso no a
 # grokevt-parselog /var/lib/grokevt/compromised_system Security | grep -E '(624|625|626|636)' (busca eventos de creación de usuarios o cambios en grupos administrativos)
 
 
+groonga
+Es un motor de búsqueda de texto completo [full-text search] y almacén de columnas, diseñado para realizar búsquedas rápidas y eficientes en grandes volúmenes de datos, especialmente en texto. Se utiliza en aplicaciones que requieren búsqueda de texto avanzada, como bases de datos, sistemas de gestión de contenido o aplicaciones web, soporta múltiples idiomas y tiene capacidad para manejar tanto datos estructurados [como columnas] como no estructurados [texto libre]. Está integrado en proyectos como Mroonga [para MySQL] y PGroonga [para PostgreSQL].
+$ groonga -n /tmp/mydb.db (crear una nueva base de datos)
+$ groonga (entrar en el prompt interactivo)
+        > table_create --name Documents --flags TABLE_HASH_KEY --key_type ShortText (crear una tabla de tipo hash para almacenar documentos con claves cortas [ShortText])
+        > column_create --table Documents --name content --type Text (crear una columna para almacenar el contenido del documento)
+        > table_create --name Terms --flags TABLE_PATRICIA_TRIE --key_type ShortText --default_tokenizer TokenBigram (crear una tabla para el índice de texto completo)
+        > column_create --table Terms --name content_index --type Documents --source content (crear un índice para la columna content)
+        > select --table Documents --query content:@zorro (buscar documentos que contengan la palabra "zorro")
+        > select --table Documents --query "content:@(rápido zorro)" (buscar varias palabras o frases)
+        > select --table Documents --query content:@perro --sort_keys _score --output_columns _key,content,_score (ordenar los resultados por relevancia)
+$ groonga -s /tmp/mydb.db (iniciar Groonga en modo servidor para aceptar consultas HTTP escuchando en el puerto 10041 por defecto)
+$ curl 'http://localhost:10041/d/select?table=Documents&query=content:@zorro' (consultar la base de datos usando un cliente HTTP como curl)
+1.-
+Insertar datos en en la tabla Documents
+$ groonga
+        load --table Documents
+        [
+          {"_key": "doc1", "content": "El rápido zorro marrón salta sobre el perro perezoso."},
+          {"_key": "doc2", "content": "Los perros son leales y amigables."},
+          {"_key": "doc3", "content": "El zorro es un animal astuto."}
+        ]
+load --> Inserta múltiples registros en la tabla Documents y cada documento tiene una clave única (_key) y un campo content con texto.
+Nota.- La búsqueda de "texto completo" permite buscar palabras o frases dentro de un conjunto de datos de texto, considerando no solo coincidencias exactas, sino también variaciones, sinónimos, o formas flexionadas de las palabras, por ejemplo, "corriendo" y "correr". A diferencia de una búsqueda simple, que busca coincidencias literales y puede ser lenta en grandes conjuntos de datos, la búsqueda de texto completo utiliza "índices invertidos" para acelerar las consultas. Estos índices almacenan un mapeo de palabras a sus ubicaciones en los documentos, lo que permite búsquedas rápidas y relevantes.
+
+
 groupadd
 Crear un nuevo grupo
 # groupadd oficina
