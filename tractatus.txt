@@ -22204,6 +22204,13 @@ $ gs -q -sPAPERSIZE=a4 -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -sOutputFile=1+2.pdf 
 $ gs -q -dNOPAUSE -dBATCH -sDEVICE=pswrite -sOutputFile=1+2.ps 1.ps 2.ps (Unir dos ps)
 
 
+gsasl
+[GNU SASL]. Herramienta que permite interactuar con servidores que utilizan el protocolo SASL [Simple Authentication and Security Layer] y establecer una capa de seguridad entre clientes y servidores, especialmente en protocolos como IMAP [correo electrónico], SMTP [envío de correo electrónico], LDAP [directorio] y XMPP [mensajería instantánea].
+$ gsasl --mechanism PLAIN --user usuario --password contraseña mail.example.com 143 (probar la autenticación PLAIN con el usuario y contraseña en un servidor IMAP y el puerto 143)
+$ gsasl --mechanism LOGIN --user remitente --password secreto smtp.example.com 25 (probar la autenticación LOGIN en un servidor SMTP)
+$ gsasl --mechanism DIGEST-MD5 --user otro_usuario --password otra_clave servidor.ejemplo.org 110 (usar un mecanismo más seguro)
+
+
 gscanbus
 Es una pequeña herramienta de escaneo, prueba y visualización de topología de bus para el subsistema IEEE1394 [FireWire], con compatibilidad con AV/C, especialmente para controlar videocámaras y grabadoras de vídeo. Está diseñada como una herramienta de depuración para el desarrollo de IEEE1394, pero también puede utilizarse para comprobar la configuración de IEEE1394 en Linux.
 # gscanbus (escaneo básico)
@@ -22290,10 +22297,10 @@ $ gst123 --info file.mp3 (mostrar información sobre el archivo mientras se repr
 
 
 gt5
-Proporciona un listado del uso del disco duro y se puede navegar por él. El programa muestra lo que ha sucedido desde la última ejecución y muestra el tamaño del directorio y el porcentaje total.
-$ gt5 /home/user/ --debug (crea un archivo /tmp/gt5XXXXXXX/gt5.html)
-$ gt5 /home/user/ --discard (lo muestra en pantalla sin guardar. "q" para salir)
-$ gt5 /home/user/ --discard --save-state (lo guarda en el mismo directorio /tmp/gt5XXXXXXX/)
+[Graphical Tree 5]. Proporciona un listado del uso del disco duro y se puede navegar por él. El programa muestra lo que ha sucedido desde la última ejecución y muestra el tamaño del directorio y el porcentaje total. "q" para salir
+$ gt5 /home/user (analiza el directorio y muestra el uso con el navegador)
+$ gt5 /home/user/ --debug (genera archivo HTML en /tmp/gt5XXXXXXX/gt5.html y no ejecuta el navegador)
+$ gt5 /home/user/ --discard (lo muestra en pantalla sin guardar)
 
 
 gthd
