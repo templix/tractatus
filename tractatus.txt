@@ -22393,6 +22393,23 @@ iface oficina inet static
         iface none inet dhcp
 
 
+guestfish
+Herramienta del proyecto libguestfs que permite examinar y modificar sistemas de archivos de máquinas virtuales [VMs] o imágenes de disco sin tener que arrancar la máquina virtual. Permite "montar" virtualmente el disco invitado y acceder a sus archivos directamente desde el sistema anfitrión, de forma segura y controlada.
+$ guestfish --rw -a mi_maquina_virtual.qcow2 (para explorar y modificar [rw] una imagen de disco entrando en él)
+        ><fs> run (inicia el "proceso invitado" y permite a guestfish interactuar con el sistema de archivos)
+        ><fs> list-filesystems  (lista los sistemas de archivos detectados en la imagen)
+        ><fs> mount /dev/vg_guest/lv_root /  (monta la partición raíz en el "root" virtual de guestfish no el el host anfitrion)
+        ><fs> ls /etc  (lista el contenido del directorio /etc dentro de la VM)
+        ><fs> cat /etc/fstab (muestra el contenido del archivo /etc/fstab de la VM)
+        ><fs> edit /etc/resolv.conf (abre el archivo en el host y permite modificarlo y lo guarda de nuevo en la imagen)
+        ><fs> upload /home/mi_usuario/archivo_local.txt /home/usuario_vm/nuevo_archivo.txt (copia un archivo desde el host a la VM)
+        ><fs> download /etc/nginx/nginx.conf /tmp/nginx.conf_backup (copia un archivo desde la VM al host
+        ><fs> rm /etc/udev/rules.d/70-persistent-net.rules (elimina un archivo en la VM)
+        ><fs> exit (sale de guestfish)
+$ guestfish --rw -a mi_maquina_virtual.qcow2 : run : mount /dev/vg_guest/lv_root / : write /etc/resolv.conf "nameserver 8.8.8.8" (ejecutar varios comandos sin entrar en el shell interactivo)
+$ guestfish --ro -a mi_maquina_virtual.qcow2 -i cat /etc/group (inspeccionar la imagen, encontrar las particiones y montarlas como lo haría una VM real)
+
+
 gv
 Visor de ps y pdf.
 $ gv --grayscale --infoErrors --center out.pdf (en gris, sin mostrar los errores y centrado)
