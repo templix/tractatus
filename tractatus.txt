@@ -22364,6 +22364,29 @@ $ gucharmap
 $ gucharmap --font 'Purisa 20'
 
 
+guestfsd
+Daemon para acceder a la máquina virtual invitada sin necesidad de arrancar la VM. El demonio guestfsd se ejecuta dentro de un pequeño "appliance" Linux que arranca libguestfs, y se comunica con la biblioteca principal del host a través de un canal especial, normalmente usando el puerto serie Virtio permitiendo así operaciones como listar, copiar, modificar archivos, inspeccionar particiones, etc, dentro de la imagen de disco de la VM. Los usuarios finales no suelen ejecutar guestfsd directamente. Normalmente, es la propia herramienta libguestfs, por ejemplo, guestfish, guestmount, virt-customize, etc. la que arranca el appliance y, dentro de él, ejecuta automáticamente guestfsd.
+$ guestfsd (inicia el demonio en modo normal, esperando órdenes de la biblioteca libguestfs a través del canal por defecto)
+$ guestfsd -v -r (inicia el demonio en modo "live", operando sobre el sistema de archivos raíz real en vez de sobre /sysroot y en modo verbose)
+Nota.- Virtio-serial es un mecanismo de transporte para la comunicación entre el espacio de usuario del host y el de la maquina virtual, lo que permite, por ejemplo, que la copia y pegado del portapapeles funcione sin problemas tanto en el host como en el invitado, bloquear la pantalla del invitado si se cierra la sesión VNC, etc
+
+
+guestmount
+Utilidad para montar y desmontar sistemas de archivos invitados basada en FUSE [Filesystem in USErspace] sin necesidad de arrancarlas.
+$ guestmount -a /var/lib/libvirt/images/debian11.qcow2 -i /mnt/guest (montar un disco QCOW2 [KVM/QEMU])
+$ guestmount -a windows.vmdk -i --ro /mnt/guest (montar con solo lectura)
+$ guestmount -a disk.raw -m /dev/sda1 /mnt/guest (monta solo la primera partición [/dev/sda1] del disco)
+$ guestmount -a /dev/sdb -i /mnt/guest (montar un disco físico desde una máquina virtual)
+$ guestmount --filesystem NTFS -a /dev/sdb -i /mnt/guest (para discos Windows, puede ser necesario especificar el sistema de archivos)
+$ guestunmount /mnt/guest (desmontar de manera segura similar a fusermount -u)
+Nota.- No usar "umount" directamente, ya que puede causar corrupción. guestunmount asegura una liberación limpia.
+1.-
+Un caso práctico para recuperar archivos de una VM corrupta:
+$ guestmount -a centos8.qcow2 -i /mnt/guest
+$ nano /mnt/guest/etc/fstab (modificar /etc/fstab)
+$ guestunmount /mnt/guest (desmontar)
+
+
 gunzip
 Descomprime archivos gz comprimidos con gzip.
 $ gunzip archivo.txt.gz
