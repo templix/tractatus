@@ -22433,6 +22433,15 @@ $ guestfish --rw -a mi_maquina_virtual.qcow2 : run : mount /dev/vg_guest/lv_root
 $ guestfish --ro -a mi_maquina_virtual.qcow2 -i cat /etc/group (inspeccionar la imagen, encontrar las particiones y montarlas como lo haría una VM real)
 
 
+guider
+Herramienta de análisis del sistema en tiempo de ejecución. Ofrece la mayoría de las funciones necesarias para medir, analizar, probar y verificar el rendimiento del sistema.
+# guider (abre la interfaz de análisis)
+# guider record -p <PID> (perfilará el proceso ya existente con el PID indicado)
+# guider record -c ./mi_programa (perfilar un comando)
+# guider stat -p <PID> (analizar llamadas del sistema)
+# guider func (permite seleccionar un proceso y luego ver qué funciones dentro de él consumen más CPU)
+
+
 gv
 Visor de ps y pdf.
 $ gv --grayscale --infoErrors --center out.pdf (en gris, sin mostrar los errores y centrado)
