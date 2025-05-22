@@ -22435,11 +22435,12 @@ $ guestfish --ro -a mi_maquina_virtual.qcow2 -i cat /etc/group (inspeccionar la 
 
 guider
 Herramienta de análisis del sistema en tiempo de ejecución. Ofrece la mayoría de las funciones necesarias para medir, analizar, probar y verificar el rendimiento del sistema.
-# guider (abre la interfaz de análisis)
-# guider record -p <PID> (perfilará el proceso ya existente con el PID indicado)
-# guider record -c ./mi_programa (perfilar un comando)
-# guider stat -p <PID> (analizar llamadas del sistema)
-# guider func (permite seleccionar un proceso y luego ver qué funciones dentro de él consumen más CPU)
+# guider top (abre la interfaz de análisis)
+# guider record (iniciará la grabación de datos de rendimiento)
+# guider -s mi_analisis.dat (guardar la salida en un archivo específico)
+# guider record CPU Tracing in Thread Mode (grabar y analizar CPU en modo hilo [thread mode])
+# guider top -g 12345 (monitorear un PID especifico)
+# guider -i mi_analisis.dat (leer y mostrar el informe del archivo)
 
 
 gv
