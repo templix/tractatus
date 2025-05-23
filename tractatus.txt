@@ -22478,6 +22478,18 @@ Visor de ps y pdf.
 $ gv --grayscale --infoErrors --center out.pdf (en gris, sin mostrar los errores y centrado)
 
 
+gvfs
+[Gnome Virtual File System]. Es una capa de abstracción de sistema de archivos que permite acceder a ubicaciones remotas como servidores FTP, SMB, WebDAV, Google Drive, etc. como si fueran sistemas de archivos locales, sin necesidad de montar nada explícitamente en /mnt o /media. gvfs en lugar de montar sistemas de archivos a nivel de kernel como el comando mount tradicional, lo hace en el espacio de usuario y cada "montaje" es manejado por un proceso independiente por ejemplo, gvfsd-ftp, gvfsd-smb, etc. Las aplicaciones GIO-aware como Nautilus, GNOME Terminal, o cualquier app GTK moderna, pueden acceder directamente a estos recursos.
+$ gio list (lista archivos)
+$ gio open musica.wav (abre el archivo con la aplicación predeterminada)
+$ gio list ftp://usuario@servidor.com (listar archivos en un recurso FTP)
+$ gio copy archivo.txt davs://usuario@webdav.servidor.com/archivo.txt (copiar un archivo local a un recurso WebDAV=
+$ gio mount smb://usuario@servidor/red (montar una unidad de red SMB)
+$ gio info google-drive://miemail@gmail.com/archivo.txt (ver información de un archivo en Google Drive)
+$ gio trash documento.txt (mandar un archivo a la papelera)
+Nota.- Al usar backends [ftp://, smb://, mtp://, etc.] de GVfs, estos se "montan" en: /run/user/$(id -u)/gvfs/
+
+
 gxmessage
 Dejar mensajes en la pantalla
 $ gxmessage -center -fg red -bg black "No cierren la terminal"
@@ -31432,6 +31444,15 @@ $ pee ls pwd "ip a"
 pentbox
 Descarga de <http://www.pentbox.net/download-pentbox/> . Herramientas de penetración [verificar fortaleza de contraseñas cifradas en MD5, SHA1, SHA256, SHA512, generador de DoS i DDoS, generador de contraseñas seguras, honeypots, escaneo de puertos, ataque de fuerza bruta contra servidores HTTP, geolocalitzación de direcciones MAC...]
 $ pentbox
+
+
+perf-tools-unstable
+Herramientas similares a DTrace de Solaris para análisis de rendimiento y que son experimentales o utilizan técnicas de trazado que podrían no ser estables en todas las versiones del kernel. Incluye las aplicaciones bitesize-perf, cachestat-perf, execsnoop-perf, funccount-perf, funcgraph-perf, funcslower-perf, functrace-perf, iolatency-perf, iosnoop-perf, killsnoop-perf, kprobe-perf, opensnoop-perf, perf-stat-hist-perf, reset-ftrace-perf, syscount-perf, tcpretrans-perf, tpoint-perf y uprobe-perf
+# bitesize-perf (mostrará estadísticas sobre tamaño de operaciones de lectura y escritura en disco, número de operaciones y bytes transferidos, agrupados por tamaño. Parar con Ctrl-c)
+# cachestat-perf -t 2 (muestra las estadísticas de aciertos y fallos de la caché de páginas del sistema cada 2 segundos. Por defecto 1)
+# execsnoop-perf firefox (traza las llamadas a "exec" de procesos, mostrando los argumentos con los que se ejecutan relacionadas con "firefox")
+# funccount-perf vfs_read (contar las llamadas a vfs_read [lecturas del sistema de archivos])
+# iosnoop-perf (ver las operaciones de I/O a disco en tiempo real)
 
 
 perftest
