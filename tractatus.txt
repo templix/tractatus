@@ -22438,9 +22438,39 @@ Herramienta de análisis del sistema en tiempo de ejecución. Ofrece la mayoría
 # guider top (abre la interfaz de análisis)
 # guider record (iniciará la grabación de datos de rendimiento)
 # guider -s mi_analisis.dat (guardar la salida en un archivo específico)
-# guider record CPU Tracing in Thread Mode (grabar y analizar CPU en modo hilo [thread mode])
 # guider top -g 12345 (monitorear un PID especifico)
 # guider -i mi_analisis.dat (leer y mostrar el informe del archivo)
+# guider top -i 2 (especificar un intervalo para la actualización de la pantalla en segundos)
+# guider top -a (obtener la máxima cantidad de información sobre el uso de recursos)
+
+
+guilt
+[Git User's Interface to Linux Team]. es una colección de scripts de Bash que busca replicar la funcionalidad y la interfaz de las "colas de Mercurial" [Mercurial Queues o MQ] dentro del ecosistema de Git. La idea principal es gestionar parches como una serie o pila, en lugar de commits individuales en la historia principal del repositorio. Toda la información se almacena en texto plano: un archivo de serie y los parches, uno por archivo.
+$ guilt init (estando en el directorio del repositorio GIT lo inicializa)
+$ guilt new mi_nueva_caracteristica (crear un nuevo parche para una característica y la situa en la parte superior de la pila)
+$ guilt refresh (después de realizar cambios, refrescar el parche)
+$ guilt series (ver el estado de los parches)
+$ guilt applied (solo mostraría la lista de los parches que están actualmente aplicados)
+$ guilt pop (deshace la aplicación del parche superior de la serie)
+$ guilt push (aplica el siguiente parche de la serie a tu directorio de trabajo)
+$ guilt pop -a (desaplicar todos los parches)
+$ guilt push -a` (aplicar todos los parches)
+
+
+guncat
+Herramienta que se utiliza para concatenar archivos mientras descifra secciones cifradas con PGP [Pretty Good Privacy]. Funciona de manera similar al comando cat [ver], pero con la capacidad adicional de manejar secciones parcialmente cifradas de los archivos procesados.
+$ guncat archivo.txt.pgp (descifrará las secciones cifradas y mostrará el contenido en la salida estándar)
+$ guncat archivo1.txt.pgp archivo2.txt.pgp (concatenará el contenido de los dos archivos, descifrando las secciones cifradas en el proceso)
+$ guncat archivo.txt.pgp > salida.txt (descifrará archivo.txt.pgp y guardará el resultado en salida.txt)
+$ guncat archivo.txt.pgp | grep "patrón" (descifrará archivo.txt.pgp y pasará el contenido a grep para buscar un patrón específico)
+
+
+gupnp-dlna-tools
+conjunto de herramientas que trabajan con perfiles DLNA [Digital Living Network Alliance], principalmente para identificar y manipular archivos multimedia según los estándares DLNA. Estas herramientas son parte del framework GUPnP, que implementa el protocolo UPnP [Universal Plug and Play] para dispositivos en red.
+$ gupnp-dlna-info video.mp4 (examina un archivo multimedia y muestra información sobre su perfil DLNA)
+$ gupnp-dlna-info cancion.mp3 (analizar un archivo de audio)
+$ gupnp-dlna-info -v imagen.jpg (analizar una imagen y nistrar más información)
+$ gupnp-dlna-ls-profiles (muestra todos los perfiles DLNA disponibles en el sistema)
 
 
 gv
