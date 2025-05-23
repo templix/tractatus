@@ -37042,6 +37042,26 @@ syslogout
 Configuración diseñado para funcionar con bash para un mantenimiento de las partes del shell encargada de cerrar sesión y que permite o prohibe el cierre de sesión del shell para todos los usuarios del sistema de forma modular y centralizada. No es un ejecutable ni un daemon. Las configuraciones se encuentran en $HOME/.bash_logout, /etc/syslogout y /etc/syslogout.d/
 
 
+sysstat
+Herramientas para monitorear el rendimiento del sistema, permitiendo ver estadísticas sobre CPU, memoria, disco, red, procesos, etc. Incluye cifsiostat, iostat, mpstat, pidstat, sadf, sar.sysstat y tapestat
+$ iostat -x 2 3 (muestra estadísticas extendidas de E/S cada 2 segundos, 3 veces)
+$ iostat -xz 1 (ver el uso de disco y latencia)
+$ mpstat -P ALL 1 (muestra el uso de cada CPU cada segundo)
+$ pidstat 1 (muestra el uso de recursos por proceso cada segundo)
+$ pidstat -r -u 1 (ver qué procesos consumen más CPU y memoria)
+$ sar -u 1 5 (muestra uso de CPU cada segundo por 5 veces)
+$ sar -u -f /var/log/sysstat/sa23 (ver histórico de CPU si se tiene recolección habilitada en /etc/default/sysstat)
+$ sadf -d /var/log/sysstat/sa17 -- -u (muestra estadísticas de CPU del archivo histórico sa17 en formato delimitado [CSV])
+$ cifsiostat -t 1 (muestra estadísticas de CIFS cada segundo)
+$ tapestat (muestra información de acceso a dispositivos de cinta)
+1.-
+Para habilitar recolección histórica (sar):
+# nano /etc/default/sysstat
+        ENABLED="true"
+Reiniciar el servicio
+# systemctl restart sysstat
+
+
 system-config-printer
 Gestor de impresoras. Lanza la gui.
 $ system-config-printer
