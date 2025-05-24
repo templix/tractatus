@@ -3935,6 +3935,36 @@ bpfmon
 # bpfmon iptables (cuenta los paquetes que coinciden con una regla de iptables)
 
 
+bpftrace
+Es un lenguaje de rastreo de alto nivel para el Filtro de Paquetes Berkeley [Enhanced Berkeley Packet Filter - eBPF]. Permite escribir scripts concisos y expresivos para observar eventos tanto en el kernel como en el espacio de usuario, facilitando la depuración, la optimización del rendimiento y la observabilidad. Incluye las aplicaciones bpftrace-aotrt, bashreadline.bt, biolatency.bt, biosnoop.bt, biostacks.bt, bitesize.bt, capable.bt, cpuwalk.bt, dcsnoop.bt, execsnoop.bt, gethostlatency.bt, killsnoop.bt, loads.bt, mdflush.bt, naptime.bt, oomkill.bt, opensnoop.bt, pidpersec.bt, runqlat.bt, runqlen.bt, setuids.bt, ssllatency.bt, sslsnoop.bt, statsnoop.bt, swapin.bt, syncsnoop.bt, syscount.bt, tcpaccept.bt, tcpconnect.bt, tcpdrop.bt, tcplife.bt, tcpretrans.bt, tcpsynbl.bt, threadsnoop.bt, undump.bt, vfscount.bt, vfsstat.bt, writeback.bt y xfsdist.bt.
+# bpftrace -e 'BEGIN { printf("Hello, World!\n"); }' (ejemplo simple. "BEGIN" es una sonda especial que se dispara una vez al inicio del programa bpftrace)
+# bpftrace -e 'kprobe:do_nanosleep { printf("%d durmiendo\n", pid); }' (rastrea los procesos que llaman a la función `do_nanosleep` del kernel y muestra su PID)
+# bpftrace -e 'tracepoint:raw_syscalls:sys_enter { @[comm] = count(); }' (utiliza un `tracepoint` y un mapa para contar cuántas llamadas al sistema realiza cada proceso)
+        tracepoint:raw_syscalls:sys_enter --> Un tracepoint que se activa en cada entrada de llamada al sistema.
+        @[comm] = count(); --> Utiliza un mapa [@] con el nombre del comando [comm] como clave para contar las ocurrencias.
+# bpftrace -e 'tracepoint:syscalls:sys_enter_openat { printf("%s %s\n", comm, str(args->filename)); }' (rastrea llamadas al sistema openat y muestra nombre del proceso y qué está abriendo)
+        tracepoint:syscalls:sys_enter_openat --> Tracepoint para la entrada de la llamada al sistema openat.
+        str(args->filename) --> Convierte el argumento filename [que es un puntero] a una cadena legible.
+# bpftrace -e 'kprobe:vfs_read { @start[tid] = nsecs; } kretprobe:vfs_read /@start[tid]/ { @ns[comm] = hist(nsecs - @start[tid]); delete(@start[tid]); }' (mide el tiempo que tardan las operaciones de lectura del sistema de archivos [vfs_read] y presenta un histograma de la latencia en nanosegundos)
+        kprobe:vfs_read --> En la entrada de vfs_read, guarda el timestamp actual en un mapa @start usando el ID del hilo [tid] como clave.
+        kretprobe:vfs_read --> En la salida de vfs_read.
+        /@start[tid]/ --> Una condición que asegura que solo procesamos las kretprobe si tenemos un timestamp de inicio correspondiente, evitando errores si el hilo ha terminado o si el rastreo se inició a mitad de una operación.
+        @ns[comm] = hist(nsecs - @start[tid]); --> Calcula la duración [nsecs - @start[tid]] y la agrega a un histograma [hist] en un mapa @ns, agrupado por el nombre del proceso [comm].
+        delete(@start[tid]); --> Elimina la entrada del mapa @start para liberar memoria.
+# bpftrace -e 'uprobe:/bin/bash:readline { printf("Bash leyendo entrada: %s\n", comm); }' (rastrea cuándo se llama a la función readline dentro de la aplicación bash)
+        uprobe:/bin/bash:readline --> Se adjunta a la entrada de la función readline en el ejecutable /bin/bash.
+Nota.- bpftrace incluye una colección de herramientas y scripts predefinidos, normalmente en /usr/share/bpftrace/tools o similar, que facilitan el rastreo de problemas comunes.
+# bpftrace /usr/share/bpftrace/tools/biolatency.bt (mostrará un histograma de la latencia de las operaciones de E/S de bloque en el sistema)
+# bpftrace /usr/share/bpftrace/tools/bashreadline.bt (Rastrea y muestra lo que los usuarios escriben en sus shells bash)
+# bpftrace /usr/share/bpftrace/tools/biolatency.bt (mide y muestra un histograma de la latencia de las operaciones de E/S de bloque, lectura/escritura, del disco)
+# bpftrace /usr/share/bpftrace/tools/biosnoop.bt (muestra información detallada sobre cada operación de E/S de bloque, quién la solicitó, qué tipo de operación, tamaño, etc.)
+# bpftrace /usr/share/bpftrace/tools/execsnoop.bt (muestra cada nueva ejecución de programa (`execve`) en el sistema, incluyendo el PID, nombre del proceso y argumentos)
+# bpftrace /usr/share/bpftrace/tools/opensnoop.bt (muestra cada llamada a `open()` y `openat()` en el sistema, indicando qué proceso abrió qué archivo)
+# bpftrace /usr/share/bpftrace/tools/tcpconnect.bt (muestra cada conexión TCP saliente, quién la inició, a dónde se conectó)
+# bpftrace /usr/share/bpftrace/tools/tcplife.bt (Rastrea el ciclo de vida de las conexiones TCP, incluyendo la duración)
+# bpftrace /usr/share/bpftrace/tools/ext4slower.bt (identifica operaciones lentas en el sistema de archivos ext4)
+
+
 bpm-tools
 Herramienta para calcular el tempo BPM [Beats-Per-Minute, pulsaciones por minuto] de la música. Incluye las herramientas bpm-graph y bpm-tag.
 $ bpm-tag -f archivo.mp3 (solo muestra las BPM)
