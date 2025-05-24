@@ -22520,6 +22520,60 @@ $ gio trash documento.txt (mandar un archivo a la papelera)
 Nota.- Al usar backends [ftp://, smb://, mtp://, etc.] de GVfs, estos se "montan" en: /run/user/$(id -u)/gvfs/
 
 
+gvpe
+[GNU Virtual Private Ethernet]. Herramienta diseñada para crear una Ethernet virtual segura y cifrada estableciendo túneles cifrados de host a host entre los "nodos" [máquinas o servidores] que forman parte de la red virtual, ideal para conectar sucursales de una empresa o diferentes redes remotas como si estuvieran en la misma red local. A diferencia de algunas soluciones VPN punto a punto, gvpe está diseñado para crear una verdadera red multipunto, lo que significa que cualquier nodo puede comunicarse directamente con cualquier otro nodo de la red virtual, sin necesidad de pasar por un nodo central. Puede usar diversos protocolos para el tunelado: IP sin procesar, UDP, TCP, conexión proxy HTTPS, ICMP y DNS.
+Configurar gvpe requiere de un archivo de configuración para cada nodo, donde se especifican las direcciones de los otros nodos, las claves de cifrado y los parámetros de red. No es un comando que se ejecute directamente en la línea de comandos con argumentos simples para establecer una conexión. En su lugar, se inicia un demonio gvpe que lee un archivo de configuración.
+Cada nodo necesita un par de claves públicas/privadas.
+$ gvpe --gen-key > key_oficina_a.priv
+$ gvpe --gen-pub key_oficina_a.priv >> key_oficina_a.pub
+Repetir este proceso para la oficina [b, c, d...].
+Cada nodo ha de tener la clave pública de los otros nodos con los que se va a comunicar. Estas claves se copiarían en el archivo de configuración de cada nodo.
+Ejemplo de configuración para oficina a y oficina b:
+# nano /etc/gvpe/gvpe_oficina_a.conf
+        # Nombre del nodo local
+        name = oficina_a
+        # La interfaz virtual que gvpe creará, ej. ethgvpe0
+        ifname = ethgvpe0
+        # Dirección IP que tendrá la interfaz virtual en esta oficina
+        ip = 10.0.0.1/24
+        # Puerto TCP/UDP para las conexiones entrantes, si se desea que este nodo actúe como servidor
+        # Si se pone a 0, este nodo solo iniciará conexiones, no las aceptará directamente.
+        port = 12345
+        # Clave privada de este nodo
+        private_key_file = /etc/gvpe/key_oficina_a.priv
+        # Otros parámetros (opcionales)
+        # log_file = /var/log/gvpe_oficina_a.log
+        # mtu = 1400
+        # Definición de los nodos remotos
+        [node oficina_b]
+        # Dirección IP pública o nombre de host de la Oficina B
+        host = direccion_ip_publica_oficina_b
+        # Puerto en el que la Oficina B escucha
+        port = 12345
+        # Clave pública de la Oficina B
+        public_key = "TU_CLAVE_PUBLICA_DE_OFICINA_B_AQUI"
+        # La dirección IP virtual de la Oficina B dentro de la red gvpe
+        ip = 10.0.0.2/24
+Para oficina b sería similar, pero con la ip local 10.0.0.2/24 y el host apuntando a la dirección pública de la Oficina a, junto con la clave pública de la Oficina a.
+# nano /etc/gvpe/gvpe_oficina_b.conf
+        name = oficina_b
+        ifname = ethgvpe0
+        ip = 10.0.0.2/24
+        port = 12345
+        private_key_file = /etc/gvpe/key_oficina_b.priv
+        [node oficina_a]
+        host = direccion_ip_publica_oficina_a
+        port = 12345
+        public_key = "TU_CLAVE_PUBLICA_DE_OFICINA_A_AQUI"
+        ip = 10.0.0.1/24
+Una vez configurado, gvpe se ejecutaría en segundo plano como un demonio:
+$ gvpe -c /etc/gvpe/gvpe_oficina_a.conf (en la oficina a)
+$ gvpe -c /etc/gvpe/gvpe_oficina_b.conf (en la oficina b)
+Para que el tráfico de la red local de cada oficina use el túnel gvpe, sería necesario añadir rutas en los servidores de pasarela. Por ejemplo, en el servidor de la Oficina A, si la red local de la Oficina B es 192.168.2.0/24:
+# ip route add 192.168.2.0/24 via 10.0.0.2 dev ethgvpe0 (en a)
+# ip route add 192.168.1.0/24 via 10.0.0.1 dev ethgvpe0 (en b)
+
+
 gxmessage
 Dejar mensajes en la pantalla
 $ gxmessage -center -fg red -bg black "No cierren la terminal"
