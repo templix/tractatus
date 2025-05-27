@@ -22656,6 +22656,22 @@ Este archivo indica a H2O que escuche en el puerto 443 [HTTPS], use los certific
 # systemctl start h2o.service
 
 
+h5ar
+Herramienta para trabajar con archivos HDF5 [Hierarchical Data Format versión 5], diseñados para almacenar y organizar grandes cantidades de datos numéricos y heterogéneos. Es ampliamente utilizado en campos científicos como la física, la química, la geología y la bioinformáticas.
+Ejemplo de uso
+$ ls dir_h5ar
+        documento1.txt
+        imagen.png
+        datos.csv
+        informe.pdf
+$ h5ar -c mi_archivo.h5 documento1.txt imagen.png datos.csv (crear un archivo HDF5 llamado mi_archivo.h5 y dentro de él, almacenará documento1.txt, imagen.png y datos.csv)
+$ h5ar -t mi_archivo.h5 (ver qué archivos contiene)
+$ h5ar -u mi_archivo.h5 informe.pdf (añadir archivos a un archivo HDF5 existente)
+$ h5ar -x mi_archivo.h5 (extraerá todos los archivos)
+$ h5ar -x mi_archivo.h5 documento1.txt imagen.png (extraer sólo el archivo especificado)
+$ h5ar -x mi_archivo.h5 -C otro_dir/ (que los archivos extraídos se guarden en un directorio diferente)
+
+
 hachoir-metadata
 Ver entrada python-hachoir-metadata
 
