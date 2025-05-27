@@ -22672,6 +22672,16 @@ $ h5ar -x mi_archivo.h5 documento1.txt imagen.png (extraer sólo el archivo espe
 $ h5ar -x mi_archivo.h5 -C otro_dir/ (que los archivos extraídos se guarden en un directorio diferente)
 
 
+hachoir
+Framework de Python que se utiliza para representar un archivo binario como un árbol de objetos de Python. Cada objeto tiene un tipo, un valor, una dirección, etc. El objetivo es conocer el significado de cada bit de un archivo. Incluye las herramientas hachoir-grep, hachoir-metadata, hachoir-strip, hachoir-urwid y hachoir-wx
+$ hachoir-metadata archivo.jpg (extrae metadatos)
+$ hachoir-grep GPS video.mp4 (buscar valores binarios específicos o patrones dentro del árbol del archivo)
+$ hachoir-strip documento.pdf documento_limpio.pdf (crea una nueva copia del archivo, eliminando metadatos sensibles)
+$ hachoir-urwid archivo.ext (interfaz interactiva que permite navegar por la estructura binaria del archivo)
+$ hachoir-wx archivo.ext (interfaz gráfica [GUI] para explorar visualmente la estructura del archivo)
+Nota.- Esta utilidad puede no estar disponible en algunas instalaciones o puede requerir dependencias gráficas específicas como python3-wxgtk.
+
+
 hachoir-metadata
 Ver entrada python-hachoir-metadata
 
