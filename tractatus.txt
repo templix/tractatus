@@ -22574,6 +22574,29 @@ Para que el tráfico de la red local de cada oficina use el túnel gvpe, sería 
 # ip route add 192.168.1.0/24 via 10.0.0.1 dev ethgvpe0 (en b)
 
 
+gwenhywfar-tools
+Biblioteca de abstracción de plataforma utilizada principalmente en aplicaciones financieras como AqBanking y KMyMoney. Gwenhywfar proporciona módulos reutilizables para tareas como acceso a archivos de configuración, análisis XML, comunicación entre procesos, etc.
+$ mklistdoc archivo.typ (define estructuras de datos, como Client, Address, etc)
+$ gct-tool list (muestra los certificados actualmente cargados)
+$ gct-tool import mi_certificado.pem (importa un certificado para que Gwenhywfar lo utilice)
+$ xmlmerge configuracion_original.xml configuracion_usuario.xml > configuracion_final.xml (combina configuraciones personalizadas del usuario con las predeterminadas del sistema)
+$ typemaker archivo.typ (generador de código que toma archivos `.typ` y produce estructuras C completas, funciones de acceso, serialización, etc)
+
+
+gwhois
+Herramienta Cliente/Servidor para consultar información WHOIS de dominios, direcciones IP y AS [Sistemas Autónomos]. A diferencia del comando whois tradicional, tiene la capacidad de determinar automáticamente el servidor WHOIS correcto para consultar, incluso para TLDs [dominios de nivel superior] menos comunes o rangos de IP.
+$ gwhois -v ejemplo.com (busca información WHOIS del dominio, detectando automáticamente el servidor correc y en modo verbose)
+$ gwhois ejemplo.io (gwhois sabe que los dominios .io deben consultarse en whois.nic.io)
+$ gwhois 192.0.2.1 (detecta el rango de la IP y consulta el servidor WHOIS correspondiente)
+$ gwhois AS12345 (devuelve información sobre el Sistema Autónomo con número 12345)
+$ gwhois -s whois.ripe.net 193.0.0.0 (ignora la detección automática y consulta directamente en whois.ripe.net)
+1.-
+Para usar como servidor para clientes WHOIS tradicionales
+# nano /etc/inetd.conf
+Añadir la linea:
+        whois stream tcp nowait nobody /usr/bin/gwhois gwhois -s
+
+
 gxmessage
 Dejar mensajes en la pantalla
 $ gxmessage -center -fg red -bg black "No cierren la terminal"
@@ -31301,6 +31324,26 @@ pcimodules
 pcmanfm
 Gestor de archivos
 $ pcmanfm --set-wallpaper /home/USER/images/limagen.jpg (colocar fondo)
+Algunos atajos:
+        Ctrl+1 	vista de íconos
+        Ctrl+2 	compacta
+        Ctrl+3 	iconos
+        Ctrl+4 	mostrar detalles
+        Ctrl+h 	mostrar archivos ocultos
+        Ctrl+d 	Establecer marcador para el dir actual y aparecerá automáticamente en el panel lateral
+        F3 	en modo de 2 paneles
+        F6      canvia el foco del panel lateral a las carpetas y viceversa
+        F10     activa el menú principal
+        Alt-d   Salta a la direcciones de interés
+$ pcmanfm --wallpaper-mode=mode (Configura el modo del fondo de pantalla. Los modos son:)
+        color (rellenar con un color sólido),
+        stretch (estirar para cubrir todo el monitor),
+        fit (estirar para ajustarse al tamaño del monitor),
+        center (colocar en el centro del monitor),
+        tile (mosaico para cubrir todo el monitor),
+        crop (estirar y recortar para cubrir todo el monitor) o
+        screen (estirar para cubrir toda la pantalla).
+$ pcmanfm -w ~/fondos_pantalla/emacs.png (poner una imagen de fondo de pantalla)
 1.-
 Creacion de un icono en el escritorio:
 $ mkdir Desktop
