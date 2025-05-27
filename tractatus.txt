@@ -8462,20 +8462,15 @@ $ cpigs | sort -k2 -n -r | head -n 10 (encontrar los paquetes con los valores m�
 cpio
 [CoPy In, copy Out]. Utilidad que se utiliza para procesar archivos comprimidos.
 $ ls *.txt | cpio -ocv -O archivo.cpio (Creará [-o] "archivo.cpio" [-O] con todos los .txt del directorio, mostrando toda la salida [-v] y que escriba la información del encabezado en ASCII para facilitar el traspaso entre plataformas)
-cpio -icv < archivo.cpio (Extraer el contenido)
-$ cpio -it < file.cpio > indice (Crear un indice con el contenido de un archivo cpio)
+$ cpio -icv < archivo.cpio (Extraer el contenido)
+$ cpio -itu < file.cpio > indice (Crear un indice con el contenido de un archivo cpio y sobreescribir si existe)
 $ find ~/Documents/emacs -type f > listado.txt (crear un archivo cpio desde una lista de archivos)
-$ cpio -ov < listado.txt > salida.cpio
+$ cpio -ovd < listado.txt > salida.cpio (extrae con la misma estructura de directorio, si así se creó el fichero)
 $ cpio -idv < salida.cpio (extraer archivos de un archivo cpio)
 $ find ~/Documents/emacs -type f | cpio -pdm ~/emacs (copiar archivos de un directorio a otro)
 $ find . -type f | cpio --create --format=cpio > archivo.cpio.gz (comprimir archivos)
 $ gunzip -c arhivo.cpio.gz | cpio --extract --make-directories (descomprimir)
-Opciones:
-	-u (Sobreescribiendo si al extraer ya existe el fichero ya que sin este parámetro no lo hace)
-	-i (extraer archivos de un fichero)
-	-t (Desplegar sin extraer)
-	-r (Dar nombre a los archivos que se están extrayendo de forma interactiva)
-	-d (Extrae con la misma estructura de directorio, si así se creó el fichero)
+$ cpio -F backup.tar.recovered -i -v (extraer contenido de un archivo .tar aunque contenga errores y modo verbose)
 
 
 cpipe
@@ -22621,6 +22616,12 @@ $ gzip -9 archivo (Con compresión máxima)
 $ gzip -d fichero.gz (Descomprimir)
 $ gzip -c fichero.gz (Ver contenido)
 $ gzexe datos.sh (si lo abrimos con un editor veremos parte codificada pero podrá ejecutarse normalmente con ./datos.sh)
+
+
+gzrt
+[GZip Recovery Toolkit]. Herramienta diseñada para intentar recuperar datos de archivos .gz dañados. Cuando un archivo comprimido con gzip se corrompe, por ejemplo, debido a una transferencia incorrecta o sectores defectuosos en el disco, gzrecover puede recuperar la mayor cantidad posible de datos intactos omitiendo las secciones corruptas.
+$ gzrecover -v backup.tar.gz (generará un archivo llamado backup.tar.recovered en modo verbose)
+$ gzrecover -s -o archivo_recuperado.tar backup.tar.gz (guardar los datos recuperados en un archivo específico y creando archivos separados para cada segmento recuperado)
 
 
 hachoir-metadata
