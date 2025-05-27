@@ -22635,6 +22635,27 @@ $ gztool -d archivo.gz > archivo.txt (descomprimir usando el índice)
 $ gztool -s 1 archivo.gz  # Crea un índice con muestreo cada 1MB (crear un índice optimizado para mejor rendimiento en acceso aleatorio)
 
 
+h2o
+Es un servidor HTTP diseñado para ofrecer respuestas rápidas y un uso eficiente de CPU y memoria, especialmente optimizado para HTTP/2 y HTTP/3, implementa características modernas como priorización de contenido, server push, soporte para TLS avanzado y puede servir archivos estáticos, actuar como proxy inverso, o funcionar con FastCGI para aplicaciones dinámicas.
+$ h2o -c /etc/h2o/h2o.conf (arrancar H2O indicando el archivo de configuración que define hosts, rutas, certificados SSL, etc. Permanecerá activo hasta pulsar Ctrl+c)
+Ejemplo de archivo de configuración básico
+# nano /etc/h2o/h2o.conf
+        listen:
+          port: 443
+          ssl:
+            certificate-file: /etc/ssl/certs/mi_cert.crt
+            key-file: /etc/ssl/private/mi_key.key
+        hosts:
+          "mi-dominio.com":
+            paths:
+              "/":
+                file.dir: /var/www/html
+                http2-push-preload: ON
+Este archivo indica a H2O que escuche en el puerto 443 [HTTPS], use los certificados especificados y sirva archivos estáticos desde /var/www/html para el dominio indicado y si los archivos HTML contienen enlaces con rel=preload, H2O los enviará automáticamente usando Server Push.
+# systemctl enable h2o.service (arrancar H2O como servicio)
+# systemctl start h2o.service
+
+
 hachoir-metadata
 Ver entrada python-hachoir-metadata
 
