@@ -22624,6 +22624,17 @@ $ gzrecover -v backup.tar.gz (generará un archivo llamado backup.tar.recovered 
 $ gzrecover -s -o archivo_recuperado.tar backup.tar.gz (guardar los datos recuperados en un archivo específico y creando archivos separados para cada segmento recuperado)
 
 
+gztool
+indexa archivos comprimidos con gzip, lo que permite acceder a los datos sin necesidad de descomprimir todo el archivo. Puede indexar archivos existentes, comprimir, descomprimir y crear índices optimizados sobre la marcha"
+$ gztool -c archivo.txt > archivo.gz (comprimir un archivo)
+$ gztool -i archivo.gz (creará el archivo de índice)
+$ gztool -I archivo.txt archivo.gz (comprimir y crear índice simultáneamente)
+$ gztool -b 1000 -e 2000 archivo.gz (extraer solo del byts 1000 al 2000)
+$ gztool -t archivo.gz (verificar la integridad del archivo comprimido)
+$ gztool -d archivo.gz > archivo.txt (descomprimir usando el índice)
+$ gztool -s 1 archivo.gz  # Crea un índice con muestreo cada 1MB (crear un índice optimizado para mejor rendimiento en acceso aleatorio)
+
+
 hachoir-metadata
 Ver entrada python-hachoir-metadata
 
