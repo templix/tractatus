@@ -22686,6 +22686,15 @@ hachoir-metadata
 Ver entrada python-hachoir-metadata
 
 
+hackage-tracker
+Herramienta utilizada para rastrear y comparar las versiones de paquetes Haskell disponibles en Hackage, el repositorio principal de paquetes Haskell con las versiones empaquetadas en Debian.
+$ hackage-tracker (descarga los metadatos de Hackage y Debian, compara las versiones y genera un archivo HTML en el directorio de salida predeterminado)
+$ hackage-tracker --output-dir=/tmp/hackage-report (especificar un directorio de salida)
+$ hackage-tracker --update (descarga la información más reciente de Hackage y Debian sin generar el informe HTML)
+$ hackage-tracker --package=yesod --package=lens (compara solo los paquetes `yesod` y `lens` entre Hackage y Debian)
+$ hackage-tracker --force (ignora la caché local y vuelve a descargar toda la información antes de generar el informe)
+
+
 hal-device
 Crea, suprime y muestra dispositivos
 $ hal-device -a dispositivo  (añadir)
