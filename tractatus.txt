@@ -22695,6 +22695,23 @@ $ hackage-tracker --package=yesod --package=lens (compara solo los paquetes `yes
 $ hackage-tracker --force (ignora la caché local y vuelve a descargar toda la información antes de generar el informe)
 
 
+hackrf
+Es una radio definida por software [SDR] que puede recibir y transmitir señales de radio en un rango de frecuencia extremadamente amplio [30 MHz a 6 GHz] con un ancho de banda considerable [20 MHz]. Es un dispositivo USB de alta velocidad alimentado por el bus USB. Contiene un conjunto de utilidades: hackrf_clock, hackrf_cpldjtag, hackrf_debug, hackrf_info, hackrf_operacake, hackrf_spiflash, hackrf_sweep y hackrf_transfer
+$ hackrf_info (verificar la conexión. Proporciona información sobre el firmware, versión del hardware y otros detalles importantes del dispositivo)
+$ hackrf_transfer -r fm_radio.raw -f 98.7e6 -s 20e6 -n 200e6 # 20M muestras/seg * 10 seg (grabar una señal de radio FM, por ejemplo, a 98.7 MHz durante 10 segundos)
+$ hackrf_transfer -t signal.raw -f 433.92e6 -s 10e6 -x 47 # Ganancia TX máxima (transmitir una señal previamente grabada, por ejemplo, signal.raw a 433.92 MHz)
+$ hackrf_transfer -r /dev/stdout -f 100e6 -s 10e6 | sox -t raw -e signed -b 16 -c 1 -r 10e6 - radio_audio.wav (recibir datos y enviarlos directamente a stdout)
+$ hackrf_sweep -f 800e6:900e6 (mostrará una serie de valores de potencia para diferentes frecuencias dentro del rango especificado)
+$ hackrf_sweep -f 2.4e9:2.5e9 -w 10e6 (escanear el espectro de 2.4 GHz a 2.5 GHz con un ancho de banda de 10 MHz por barrido)
+$ hackrf_clock --external-clock-source (ajustar la frecuencia del reloj)
+$ hackrf_cpldjtag --program <archivo_jtag> (actualizar o modificar el CPLD [Complex Programmable Logic Device]. Un uso incorrecto puede inutilizar el dispositivo)
+$ hackrf_spiflash -r firmware_backup.bin (leer el firmware actual y guardarlo en un archivo)
+$ hackrf_spiflash -w new_firmware.bin (escribir un nuevo firmware desde un archivo)
+$ hackrf_debug --help (ver opciones disponibles para depuración)
+$ hackrf_operacake --help ( ver las opciones para interactuar con Operacake)
+$ hackrf_spiflash -e (borrará el firmware y el HackRF no funcionará hasta que se flashee un nuevo firmware)
+
+
 hal-device
 Crea, suprime y muestra dispositivos
 $ hal-device -a dispositivo  (añadir)
