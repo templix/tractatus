@@ -10834,6 +10834,19 @@ $ dfrs (muestra el uso de los sistemas montados)
 $ dfrs -a (mostrar más sistemas de archivos que los anteriores. Con -aa los muestra todos incluso los no montados)
 
 
+dfu-util
+es un programa que implementa el protocolo USB DFU 1.0 y 1.1 [Universal Serial Bus  Device Firmware Upgrade] diseñado para descargar y cargar firmware a dispositivos compatibles conectados por USB ya sea pequeños como placas de microcontroladores, placas de desarrollo, algunos teléfonos móviles, etc.
+$ dfu-util -l (listar dispositivos DFU conectados)
+$ dfu-util -a 0 -d 0483:df11 -D firmware.bin (descargar y cargar firmware al dispositivo)
+        -a 0 --> altsetting 0, la mayoría de las veces es 0.
+        -d 0483:df11 --> ID de dispositivo USB [vendor:product]. Se obtiene con dfu-util -l.
+        -D firmware.bin --> archivo binario a cargar y descargar.
+$ dfu-util -a 0 -U backup_firmware.bin (subir y leer firmware desde el dispositivo9
+$ dfu-util -a 0 -s 0x08000000:leave -D firmware.bin (especificar dirección de memoria)
+        -s 0x08000000 --> dirección de inicio de la memoria Flash.
+        :leave --> le indica al bootloader que salga del modo DFU después de cargar el firmware.
+
+
 dglob
 Expandir nombres o archivos de paquetes que coincidan con un patron.
 $ dglob -a goodies (Buscar en todos los paquetes disponibles no solo en los instalados)
