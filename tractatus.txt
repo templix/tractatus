@@ -22797,6 +22797,13 @@ $ HandBrakeCLI -i entrada.mkv -o salida.mp4 --crop 0:0:10:10 --width 1280 --heig
 $ HandBrakeCLI -i /dev/dvd --title 0 --scan (analizar DVDs. Lista todos los títulos del DVD y sus detalles como duración, capítulos, etc.)
 
 
+handlebars
+Motor de plantillas semánticas que permite crear plantillas reutilizables con sintaxis similar a HTML pero con capacidades de lógica y renderizado dinámico.
+$ handlebars plantilla.handlebars -f plantilla.compiled.js (precompilar plantilla)
+Luego se puede incluir el archivo compilado en el HTML:
+        <script src="plantilla.compiled.js"></script>
+
+
 hardlink
 Herramienta que detecta archivos iguales y los reemplaza con enlaces duros.
 # hardlink -f -x /videos -t -o /home/usuaario (Enlazar archivos con el mismo nombre [f], excluyendo el directorio "videos" [x], comprobando aunque la fecha de modficación sea diferente [t], ignorando el propietario [o] y sobre la carpeta personal)
