@@ -22704,12 +22704,20 @@ $ hackrf_transfer -r /dev/stdout -f 100e6 -s 10e6 | sox -t raw -e signed -b 16 -
 $ hackrf_sweep -f 800e6:900e6 (mostrará una serie de valores de potencia para diferentes frecuencias dentro del rango especificado)
 $ hackrf_sweep -f 2.4e9:2.5e9 -w 10e6 (escanear el espectro de 2.4 GHz a 2.5 GHz con un ancho de banda de 10 MHz por barrido)
 $ hackrf_clock --external-clock-source (ajustar la frecuencia del reloj)
-$ hackrf_cpldjtag --program <archivo_jtag> (actualizar o modificar el CPLD [Complex Programmable Logic Device]. Un uso incorrecto puede inutilizar el dispositivo)
+$ hackrf_cpldjtag -x firmware/cpld/sgpio_if/default.xsvf (después de unos segundos, tres LED deberían empezar a parpadear lo que indica que el CPLD [Complex Programmable Logic Device] se ha programado correctamente. Reiniciar el dispositivo HackRF.)
 $ hackrf_spiflash -r firmware_backup.bin (leer el firmware actual y guardarlo en un archivo)
 $ hackrf_spiflash -w new_firmware.bin (escribir un nuevo firmware desde un archivo)
 $ hackrf_debug --help (ver opciones disponibles para depuración)
 $ hackrf_operacake --help ( ver las opciones para interactuar con Operacake)
 $ hackrf_spiflash -e (borrará el firmware y el HackRF no funcionará hasta que se flashee un nuevo firmware)
+
+
+hadori
+Esta herramienta podría parecer otra herramienta de enlaces duros a archivos idénticos, pero es la única que solo memoriza un nombre de archivo por inodo
+$ hadori original_file new_link (crea un nuevo enlace duro llamado "new_link" que apunta al archivo "original_file")
+$ hadori --list /ruta/del/archivo (muestra todos los enlaces duros existentes para el archivo especificado)
+$ hadori -d /ruta/del/enlace (eliminación de enlaces duros)
+$ hadori /ruta/del/directorio1 /ruta/del/directorio2 (crea un enlace duro entre dos directorios, permitiendo acceder a los archivos de uno desde el otro)
 
 
 hal-device
