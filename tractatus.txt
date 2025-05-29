@@ -22817,6 +22817,23 @@ Luego se puede incluir el archivo compilado en el HTML:
         <script src="plantilla.compiled.js"></script>
 
 
+haproxy-cmd
+Contiene un asistente para enviar comandos a través del socket de haproxy, lo que permite mantener los servidores de un clúster mediante el vaciado, la habilitación y la detención de servidores de un backend. Ofrece persistencia de conexión mediante cookies HTTP, balanceo de carga, adición, modificación y eliminación de encabezados en ambos sentidos. Tiene funciones de bloqueo de solicitudes y proporciona una interfaz para visualizar el estado del servidor.
+$ haproxy-cmd list (listar backends y servidores disponibles con su estado actual: UP/DOWN, peso, etc.)
+$ haproxy-cmd disable web_backend server1 (deshabilitar un servidor en un backend)
+$ haproxy-cmd enable web_backend server1 (habilitar un servidor)
+$ haproxy-cmd drain web_backend server1 (permite que las conexiones existentes terminen, pero no acepta nuevas)
+$ haproxy-cmd maint web_backend server1 (fuerza el modo de mantenimiento, ignorando checks)
+$ haproxy-cmd set weight web_backend server1 50 (cambia el peso de server1 a 50)
+$ haproxy-cmd stats (mostrar estadísticas: número de conexiones activas, tráfico procesado, estados de los servidores...)
+Configuración previa necesaria
+# nano /etc/haproxy/haproxy.cfg
+Y añadir:
+        global
+            stats socket /run/haproxy/admin.sock mode 660 level admin
+# systemctl restart haproxy (reiniciar HAProxy)
+
+
 harden-doc
 Documentación útil para proteger un sistema Debian. Este paquete contiene documentación que un administrador puede usar para aumentar la seguridad de un sistema Debian. Actualmente proporciona el "Manual de Seguridad de Debian" del Proyecto de Documentación de Debian. El manual está disponible tanto en inglés como en todas las traducciones disponibles, incluyendo portugués brasileño, chino, francés, alemán, italiano, japonés y español. Las traducciones no están actualizadas.
 file:///usr/share/doc/harden-doc/html/es-ES/index.html
