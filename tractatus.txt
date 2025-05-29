@@ -22784,6 +22784,19 @@ $ halt --halt (Detener la máquina, independientemente de cuál de los tres coma
 $ halt --reboot (Reiniciar la máquina, independientemente de cuál de los tres comandos se invoque)
 
 
+handbrake
+Herramienta para convertir DVD y otros vídeos a formatos H.264, XViD u Ogg. Es especialmente útil para crear vídeos compatibles con dispositivos portátiles como el iPod/iPhone de Apple o la PSP de Sony.
+$ HandBrakeCLI -i entrada.avi -o salida.mp4 (convertir un archivo de vídeo a MP4, por defecto usa H.264)
+$ HandBrakeCLI -i entrada.mkv -o salida.mp4 --preset "Fast 1080p30" (convertir con un ajuste preestablecido, por ejemplo "Fast 1080p30")
+$ HandBrakeCLI --preset-list (consultar los presets disponibles)
+$ HandBrakeCLI -i /dev/dvd -o salida.mp4 --title 1 --preset "Very Fast 720p30" (extraer el contenido de un DVD)
+$ HandBrakeCLI -i entrada.mkv -o salida.mp4 -E av_aac (convertir vídeo y cambiar el codec de audio [copy, vorbis, mp3])
+$ HandBrakeCLI -i entrada.mkv -o salida.mp4 --subtitle 1 --subtitle-burned (convertir y añadir subtítulos)
+$ HandBrakeCLI -i entrada.mkv -o salida.mp4 --crop 0:0:10:10 --width 1280 --height 720 (redimensionar o recortar el vídeo)
+        --crop --> recorta píxeles del vídeo, arriba\:abajo\:izquierda\:derecha y --width y --height --> cambia la resolución.
+$ HandBrakeCLI -i /dev/dvd --title 0 --scan (analizar DVDs. Lista todos los títulos del DVD y sus detalles como duración, capítulos, etc.)
+
+
 hardlink
 Herramienta que detecta archivos iguales y los reemplaza con enlaces duros.
 # hardlink -f -x /videos -t -o /home/usuaario (Enlazar archivos con el mismo nombre [f], excluyendo el directorio "videos" [x], comprobando aunque la fecha de modficación sea diferente [t], ignorando el propietario [o] y sobre la carpeta personal)
