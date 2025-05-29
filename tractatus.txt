@@ -22731,6 +22731,53 @@ $ hal-device -r dispositivo   (borrar)
 $ hal-device | grep volume.label  (mostrar etiquetas de todos los volumenes)
 
 
+halibut
+Sistema de formato de texto diseñado principalmente para la redacción de documentación de software. Se centra en la capacidad de generar una amplia variedad de formatos de salida [Text, HTML, WinHelp [Ayuda de Windows], Man Pages [páginas de manual], Info de GNU, PostScript o PDF] desde una única fuente. La idea central de Halibut es escribir el contenido una sola vez en un formato de texto plano y simple, y luego se encarga de convertirlo en el formato final que se necesite, ya sea visualización en web, como manual o para imprimir.
+Halibut utiliza un conjunto de directivas o comandos de formato dentro del archivo fuente para estructurar el contenido. Algunas de las más comunes incluyen:
+        \chapter{Título del Capítulo} --> Define un nuevo capítulo.
+        \section{Título de la Sección} --> Define una nueva sección.
+        \subsection{Título de la Subsección}--> Define una nueva subsección.
+        \paragraph{Título del Párrafo} --> Define un nuevo párrafo.
+        \item{Texto del Ítem} --> Crea un elemento en una lista.
+        \code{Código} --> Formatea texto como código.
+        \url{URL} --> Inserta una URL.
+        \li{Texto de la lista} --> Similar a `\item`, para elementos de lista.
+        \i{Texto en cursiva} --> Formatea texto en cursiva.
+        \b{Texto en negrita} --> Formatea texto en negrita.
+1.-
+Ejemplo de uso con un archivo fuente simple
+$ nano manual.txt
+\chapter{Mi Primer Manual con Halibut}
+ Este es un ejemplo sencillo de un manual escrito usando Halibut.
+\section{Introducción}
+ Bienvenidos a este pequeño manual. Aquí exploraremos las capacidades básicas de Halibut.
+\paragraph{Un Poco de Historia}
+ Halibut fue creado por Simon Tatham, el mismo autor de la famosa herramienta PuTTY.
+ Su diseño se centra en la simplicidad y la eficiencia.
+\section{Características Principales}
+ Halibut ofrece varias características útiles:
+\li Generación de múltiples formatos de salida.
+\li Sintaxis de marcado simple y fácil de aprender.
+\li Soporte para referencias cruzadas y tablas de contenido.
+\subsection{Ejemplo de Código}
+ Aquí tienes un ejemplo de cómo se puede formatear código:
+\code{
+#include <stdio.h>
+int main() {
+    printf("¡Hola, Halibut!\n");
+    return 0;
+}
+}
+\section{Enlaces Útiles}
+ Puedes encontrar más información sobre Halibut en su sitio web oficial:
+\url{https://www.chiark.greenend.org.uk/~sgtatham/halibut/}
+\end{document}
+$ halibut --text manual.txt > manual.txt.out (creará un archivo manual.txt.out con el contenido formateado para texto plano)
+$ halibut --html manual.txt > manual.html (generará un archivo manual.html)
+$ halibut --man manual.txt > manual.man (generar una página de manual)
+$ halibut --ps manual.txt > manual.ps (genera un .ps que podrá convertirse en .pdf con ps2pdf [ver])
+
+
 halt
 [poweroff, reboot]. Se puede utilizar para detener, apagar o reiniciar la máquina. Los tres  comandos tienen las mismas opciones.
 $ halt --halt (Detener la máquina, independientemente de cuál de los tres comandos se invoque)
@@ -26805,10 +26852,11 @@ Algunas teclas de control:
 	N (Elemento previo en la busqueda)
 	q (Salir)
 Nota.- Normalmente "man" formatea el contenido para que coincida con el ancho del terminal. Redirige su salida a una tubería, que no tiene "ancho de pantalla", por lo tanto, formatea utilizando el ancho predeterminado de 80 caracteres. Algunas páginas de manual tienen tablas de más de 80 caracteres de ancho, por lo que aparece esta advertencia de "no se puede romper la línea".
-       <standard input>:602: warning [p 7, 11.3i, div 'an-div', 0.2i]: cannot adjust line
+        <standard input>:602: warning [p 7, 11.3i, div 'an-div', 0.2i]: cannot adjust line
 Para solucionarlo:
-$ MANWIDTH=1250 man $COMANDO | wc -l
-1- Para crear una página man a partir de un .md:
+        $ MANWIDTH=1250 man $COMANDO | wc -l
+1.-
+Para crear una página man a partir de un .md:
 $ pandoc archivo.md -s -t man -o archivo.1
 # mv archivo.1 /usr/local/share/man/ca/man1/ (si no estan los directorios "ca/man1" se crean)
 
