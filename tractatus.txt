@@ -22712,6 +22712,10 @@ $ hackrf_operacake --help ( ver las opciones para interactuar con Operacake)
 $ hackrf_spiflash -e (borrará el firmware y el HackRF no funcionará hasta que se flashee un nuevo firmware)
 
 
+hackrf-firmware
+Firmware para dispositivos HackRF. El hardware HackRF necesita firmware para funcionar. El firmware se compila con arm-none-eabi-gcc. Este paquete contiene varias imágenes de firmware que pueden programarse en el hardware HackRF mediante el comando hackrf_spiflash -w [ver hackrt] o dfu-util [ver]. Las imágenes de firmware se instalan en /usr/share/hackrf/firmware/
+
+
 hadori
 Esta herramienta podría parecer otra herramienta de enlaces duros a archivos idénticos, pero es la única que solo memoriza un nombre de archivo por inodo
 $ hadori original_file new_link (crea un nuevo enlace duro llamado "new_link" que apunta al archivo "original_file")
