@@ -22839,6 +22839,24 @@ Documentación útil para proteger un sistema Debian. Este paquete contiene docu
 file:///usr/share/doc/harden-doc/html/es-ES/index.html
 
 
+hardening-runtime
+Este paquete instala configuraciones diseñados para mejorar el refuerzo de una instalación predeterminada de Debian que se encargan de ajustar parámetros del kernel y del sistema en general aplicando configuraciones recomendadas por el proyecto de autoprotección del kernel de Linux, con el objetivo de reducir la superficie de ataque y mitigar posibles exploits. Incluye archivos de configuración [.conf] en directorios como /etc/sysctl.d/ que establecen valores más seguros. Algunas opciones tienen efectos secundarios en el rendimiento o la usabilidad. Se recomienda a los usuarios ajustar los archivos de configuración según el archivo README.Debian para que se ajusten a su sistema.
+Algunos ejemplos:
+1.-
+Desactivar opciones del kernel que pueden ser explotadas
+kernel.dmesg_restrict podría estar en 0, permitiendo a usuarios no privilegiados leer el buffer del kernel [dmesg], lo que podría revelar información sensible sobre vulnerabilidades o direcciones de memoria. Con hardening-runtime Es probable que hardening-runtime configure kernel.dmesg_restrict = 1 [los usuarios no root no podrían leer el buffer de dmesg]
+$ sysctl kernel.dmesg_restrict
+2.-
+El sistema de archivos /proc puede exponer más información de la necesaria.
+El paquete lo pone en valores 1 [Los punteros de kernel expuestos a usuarios sin privilegios se ocultan] o 2 [Todos los punteros de kernel son ocultados, incluso para usuarios con privilegios]. 0 es el valor predeterminado [la dirección se procesa antes de imprimirse].
+$ sysctl kernel.kptr_restrict
+3.-
+Prevenir ciertos tipos de ataques, como ataques SYN-flood o enrutamiento.
+Algunas configuraciones por defecto podrían ser demasiado permisivas y el paquete podría ser configurar en 1 para mitigar ataques SYN-flood.
+$ sysctl net.ipv4.tcp_syncookies
+Lo que ayuda a proteger el sistema contra ataques de denegación de servicio (DoS) que explotan la pila TCP/IP.
+
+
 hardlink
 Herramienta que detecta archivos iguales y los reemplaza con enlaces duros.
 # hardlink -f -x /videos -t -o /home/usuaario (Enlazar archivos con el mismo nombre [f], excluyendo el directorio "videos" [x], comprobando aunque la fecha de modficación sea diferente [t], ignorando el propietario [o] y sobre la carpeta personal)
