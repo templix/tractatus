@@ -23079,6 +23079,20 @@ Que se inicie automáticamente al arrancar
 # nano /etc/default/hd-idle
 Cambia la línea:
         HD_IDLE_OPTS="-i 10 -a /dev/sdb"
+# systemctl restart hd-idle (reiniciar el servicio)
+
+
+hdav
+Cliente WebDAV que, actualmente, solo permite copiar un archivo y sus propiedades WebDAV asociadas de una URL a otra.
+$ hdav copy https://source.com/doc.pdf https://target.org/doc_copia.pdf --source-username USERNAME --source-password PASSWORD --target-username USERNAME --target-password PASSWORD
+Comandos disponibles:
+        copy --> Copiar propiedades y datos de una ubicación a otra
+        delete --> Eliminar propiedades y datos
+        getprops --> Obtener propiedades y mostrarlas en la salida estándar
+        makecollection --> Crear una nueva colección
+        move --> Mover propiedades y datos de una ubicación a otra en el mismo espacio DAV
+        put --> Transferir archivo a URL
+        caldav-report --> Obtener informe CalDAV
 
 
 hddtemp
