@@ -23041,6 +23041,33 @@ $ hcloud server metrics my-cool-server --type cpu,disk (consulta métricas [CPU,
 $ hcloud context list (si se trabaja con varios contextos, muesta el listado)
 
 
+hcxdumptool
+Pequeña herramienta de auditoría de seguridad inalámbrica. Su función principal es capturar tráfico de redes Wi-Fi, especialmente los handshakes WPA/WPA2, para determinar si los puntos de acceso o clientes Wi-Fi son vulnerables a ataques de fuerza bruta.
+# hcxdumptool -i wlan0 -o captura.pcapng (captura básica en una interfaz)
+# hcxdumptool -i wlan0 -o captura.pcapng --filterlist=redes.txt (captura con lista ESSID de redes objetivo)
+# hcxdumptool -i wlan0 -o captura.pcapng --enable_status=1 (captura activa enviando paquetes de autenticación)
+# hcxdumptool -i wlan0 -o captura.pcapng -c 6 (captura en canal específico)
+
+
+hcxkeys
+[hcxtools hcxdumptool]  Herramientas para generar claves maestras simples [PMKs - PlainMasterKeys] a partir de la técnica de criptografía "Tablas Arcoíris" [Rainbow Tables] y hashes para su uso con las últimas versiones de Hashcat y John the Ripper. El paquete incluye dos binarios: wlangenpmk para cálculos de CPU y wlangenpmkocl para cálculos de GPU [han de instalarse los controladores OpenCL correspondientes al modelo de GPU]. Una "tabla arcoíris", en el contexto de la seguridad de contraseñas, se utiliza para encontrar la contraseña original, en texto plano a partir de su hash. Las herramientas hcx... incluyen los ejecutables: hcxdumptool, hcxpioff, wlangenpmk, wlangenpmkocl, hcxeiutool, hcxessidtool, hcxhash2cap, hcxhashcattool, hcxhashtool, hcxmactool, hcxpcapngtool, hcxpmkidtool, hcxpmktool, hcxpsktool, hcxwltool, whoismac y wlancap2wpasec.
+$ wlangenpmk -e MiWiFi -i wordlist.txt -o pmklist.txt (generar PMKs usando la CPU)
+        -e MiWiFi --> Especifica el ESSID de la red objetivo.
+        -i wordlist.txt --> La ruta al archivo de lista de palabras [una en cada línea].
+        -o pmklist.txt --> El archivo de salida donde se guardarán las PMKs generadas.
+$ wlangenpmkocl -e MiWiFi -i wordlist.txt -o pmklist.txt (generar PMKs usando la GPU si se tiene una compatible con OpenCL)
+$ hcxpcapngtool -o my_hashes.hc22000 --pmkid-eapol=my_capture.pcapng (archivo de salida para los hashes en formato Hashcat [modo 22000] y especificando extraer PMKIDs y EAPOL de la captura)
+1.-
+Captura el handshake y convertirlo a formato hashcat mostrando el estado del proceso.
+# hcxdumptool -o my_capture.pcapng --enable_status_led
+# hcxdumptool -i wlan0mon -o my_capture.pcapng --enable_status_led
+Luego, generar PMKs y enviarlas directamente a Hashcat
+$ cat wordlist.txt | wlangenpmk -e MiWiFi | hashcat -m 22000 my_hashes.hc22000
+        cat wordlist.txt --> Envía el contenido del archivo wordlist.txt a la entrada estándar de wlangenpmk.
+        wlangenpmk -e MiWiFi --> Genera las PMKs para "MiWiFi" a partir de la lista de palabras recibida por la entrada estándar y las envía a la salida estándar.
+        hashcat -m 22000 my_hashes.hc22000 --> Hashcat recibe las PMKs de la salida estándar de wlangenpmk y las compara con los hashes de los handshakes [modo 22000 es para WPA-PMK].
+
+
 hddtemp
 Indica la temperatura del disco especificado
 # hddtemp /dev/sda
