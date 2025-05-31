@@ -22870,6 +22870,17 @@ $ haroopad --mode view archivo.md (Abrir el archivo sólo en modo lectura)
 $ haroopad --mode edit archivo.md (Abrir el archivo sólo en modo edición)
 
 
+harp
+[Harmonization and Analysis of Remote-sensing data for intercomparison and validation]. El objetivo principal es preprocesar y armonizar datos geofísicos, como observaciones satelitales, datos de modelos, mediciones in-situ, etc, con el objetivo de facilitar su comparación. Incluye las herramientas harpcheck, harpcollocate, harpconvert, harpdump y harpmerge
+$ harpcheck data.nc (verifica archivos HARP para asegurarse de que cumplan con las especificaciones)
+$ harpcollocate -a 'bin_spatial(1, 0, 1);bin("latitude", 0.5, 0.5, 1)' sat.nc ground.nc output_collocated.nc (compara espacialmente los datos de sat.nc, por ejemplo, satélite y ground.nc, por ejemplo, datos en tierra, y produce un archivo collocated.nc)
+$ harpcollocate sat.nc ground.nc collocated.nc (colocalizar ambos conjuntos)
+$ harpconvert -a 'latitude > 0 [degree_north]; keep(latitude, longitude, ozone_column)' input.nc output_filtered.nc (filtra los datos para incluir solo los del hemisferio norte y conserva solo ciertas variables)
+$ harpconvert -a 'derive(latitude {latitude}); derive(longitude {longitude})' raw_satellite.hdf sat.nc (convertir datos satelitales al formato HARP)
+$ harpdump data.nc (imprime información de dimensiones, variables, atributos y algunas estadísticas)
+$ harpmerge file1.nc file2.nc file3.nc merged.nc (crea un archivo merged.nc que contiene los datos combinados de todos los archivos de entrada.)
+
+
 hasciicam
 Visualizar la webcam via ascii.
 $ hasciicam -m html -c 50 -o (En modo html, contraste 50 [de 0 a 100. Por defecto 4] y guardar el archivo)
@@ -22885,14 +22896,6 @@ $ hash
 $ hash -l
 $ hash -d date (borrar la entrada date del listado)
 $ hash -r (borrar todo el listado)
-
-
-hashcat
-herramienta de recuperación de contraseñas utilizada para realizar ataques de fuerza bruta sobre hashes.
-$ hashcat -a 3 -m 0 hash.txt ?d?d?d?d?d ("a 3" que se realizará un ataque de fuerza bruta a un hash MD5 "m 0", con contraseñas numéricas de 5 dígitos "?d?d?d?d?d")
-$ hashcat -a 0 -m 1400 hash.txt diccionario.txt ("a 0" que se hará un ataque de diccionario a un hash SHA-256 "m 1400". diccionario.txt contiene las posibles contraseña)
-$ hashcat -a 3 -m 0 hash.txt ?1?1?1?1?1?1?1 (combinando mayúsculas, minúsculas y números. "?1" define un conjunto de caracteres a utilizar)
-$ hashcat -a 0 -m 0 hash.txt diccionario.txt --force (recuperar contraseña con "force" permite a hashcat usar la GPU)
 
 
 hash-identifier
@@ -22915,6 +22918,39 @@ HASH: caf90169eefa5f807d577486b9f795ab86ae2983c5c20806cff959117e90af18
 	[+]  SHA-256(sha1($pass))
 
 
+hash-slinger
+Herramientas para generar registros DNS especiales que permiten autenticar servicios mediante criptografía: sshfp genera registros DNS SSHFP RFC-4255, tlsa genera registros DNS TLSA RFC-6698 mediante TLS y openpgpkey genera registros DNS OPENPGPKEY RFC-<TBD>
+$ ssh -o "VerifyHostKeyDNS=yes" usuario@servidor.example.com (configura el cliente SSH para verificar el servidor mediante DNS)
+$ sshfp -a sha256 servidor.example.com (generar un registro SSHFP para SSH)
+        servidor.example.com IN SSHFP 2 2 1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef
+2 --> Algoritmo ECDSA, RSA sería 1.
+2 --> Tipo de hash SHA-256, SHA-1 sería 1.
+El hash es la huella de la clave pública del servidor SSH, generalmente en /etc/ssh/ssh_host_ecdsa_key.pub.
+$ tlsa --port 443 --protocol tcp --certificate /ruta/al/certificado.pem mi-servidor.example.com (generar un registro TLSA para HTTPS/DANE)
+        _443._tcp.mi-servidor.example.com IN TLSA 3 1 1 abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890
+3 --> Uso, DANE-EE: certificado exacto.
+1 --> Selector, certificado completo.
+1 ..> Tipo de hash, SHA-256.
+$ openpgpkey --user usuario@example.com --key /ruta/a/mi-clave.pub (generar un registro OPENPGPKEY para correo)
+
+
+hashcat
+herramienta de recuperación de contraseñas utilizada para realizar ataques de fuerza bruta sobre hashes.
+$ hashcat -a 3 -m 0 hash.txt ?d?d?d?d?d ("a 3" que se realizará un ataque de fuerza bruta a un hash MD5 "m 0", con contraseñas numéricas de 5 dígitos "?d?d?d?d?d")
+$ hashcat -a 0 -m 1400 hash.txt diccionario.txt ("a 0" que se hará un ataque de diccionario a un hash SHA-256 "m 1400". diccionario.txt contiene las posibles contraseña)
+$ hashcat -a 3 -m 0 hash.txt ?1?1?1?1?1?1?1 (combinando mayúsculas, minúsculas y números. "?1" define un conjunto de caracteres a utilizar)
+$ hashcat -a 0 -m 0 hash.txt diccionario.txt --force (recuperar contraseña con "force" permite a hashcat usar la GPU)
+
+
+hashdeep
+Conjunto de herramientas diseñado para calcular y verificar hashes criptográficos [MD5, SHA1, SHA256, Tiger y Whirlpool] de archivos de forma recursiva. Incluye las herramientas md5deep, sha1deep, sha256deep, tigerdeep y whirlpooldeep cada una optimizada para un algoritmo de hash particular
+$ sha256deep -r /ruta/al/directorio (calcular hashes SHA-256 de un directorio y subdirectorios)
+$ sha256deep -rl /ruta/al/directorio > hashes_originales.txt (guardar hashes en un archivo para auditorías futuras. "l" usa rutas relativas en lugar de absolutas)
+$ sha256deep -rlX hashes_originales.txt /ruta/al/directorio (reportará los archivos modificados, exit code 1 o confirmará integridad, exit code 0)
+$ hashdeep -c md5,sha1,sha256 -r /ruta/al/directorio (calcula tres hashes diferentes para cada archivo)
+$ hashdeep -k hashes_conocidos.txt -a /ruta/a/auditar (compara los hashes actuales con una lista de referencia y muestra discrepancias)
+
+
 hashalot
 Entrar una frase y muestra su hash. Soporta: ripemd160, rmd160, rmd160compat, sha256, sha384 y sha512
 $ hashalot -x sha256 (En binario [x])
@@ -22927,6 +22963,19 @@ hashid
 Identificar diferentes tipos de hashes utilizados para cifrar datos y especialmente contraseñas. es una herramienta escrita en Python 3.x que admite la identificación de más de 175 tipos de hash únicos mediante expresiones regulares. Es capaz de identificar un único hash o analizar un archivo e identificar los hashes que contiene. También hay disponible una versión nodejs de hashID que se configura fácilmente para proporcionar identificación de hash en línea.
 $ hashid -e caf90169eefa5f807d577486b9f795ab86ae2983c5c20806cff959117e90af18
 $ hashid -m 89939edf840d6edd260dcf326eb71beed79f776d -o file (incluir el modo hashcat en la salida y guardarla en file)
+
+
+hashrat
+Herramienta para generar y verificar hashes criptográficos compatible con varios algoritmos [MD5, SHA1, SHA256, SHA512, y sus versiones HMAC] y permite la salida en varios formatos: octal, decimal, hexadecimal, hexadecimal en mayúsculas, o Base64, o en su propio formato. Su modo CGI es una característica interesante para integrarlo en aplicaciones web.
+$ hashrat -a md5 -s "Hola mundo" (calcular el hash MD5 de una cadena de texto)
+Los algoritmos disponibles incluyen: md5, sha1, sha256, sha512, hmac-md5, hmac-sha1, hmac-sha256 y hmac-sha512
+$ hashrat -a sha256 documento.txt (mostrará el hash SHA256 del contenido del fichero)
+$ hashrat -a sha512 -s "Mi contraseña secreta" -f base64 (calcular el hash SHA512 de una cadena y mostrarlo en Base649
+Los formatos de salida disponibles son: octal, decimal, hex [por defecto, hexadecimal en minúsculas], HEX [hexadecimal en mayúsculas] y base64
+$ hashrat -a hmac-sha256 -k "mi_clave_secreta" -s "Mensaje confidencial" (usar HMAC especificando el algoritmo HMAC y una clave)
+$ hashrat -c hash_verificar.txt (verificar un hash)
+$ cat /etc/passwd | hashrat -a sha1 (calculará el hash SHA1 del contenido del fichero)
+Nota.- Si no se especifica un fichero, hashrat leerá la entrada estándar [stdin].
 
 
 hashtag
