@@ -23068,6 +23068,19 @@ $ cat wordlist.txt | wlangenpmk -e MiWiFi | hashcat -m 22000 my_hashes.hc22000
         hashcat -m 22000 my_hashes.hc22000 --> Hashcat recibe las PMKs de la salida estándar de wlangenpmk y las compara con los hashes de los handshakes [modo 22000 es para WPA-PMK].
 
 
+hd-idle
+Utilidad que permite apagar o detener la rotación de discos duros externos, especialmente aquellos conectados vía USB o FireWire, después de un período de inactividad, con el fin de ahorrar energía y reducir el desgaste del disco.
+# hd-idle -i 10 -a /dev/sdb (detener /dev/sdb después de 10 minutos de inactividad)
+# hd-idle -i 5 -a /dev/sdb -i 15 -a /dev/sdc (detener varios discos con diferentes tiempos)
+# hd-idle -i 20 (aplica un tiempo de 20 minutos a todos los discos detectados por el sistema)
+# hdparm -C /dev/sdb (verificar si el disco ha sido detenido)
+1.-
+Que se inicie automáticamente al arrancar
+# nano /etc/default/hd-idle
+Cambia la línea:
+        HD_IDLE_OPTS="-i 10 -a /dev/sdb"
+
+
 hddtemp
 Indica la temperatura del disco especificado
 # hddtemp /dev/sda
@@ -23079,17 +23092,17 @@ consultar y modificar diferentes parámetros de los discos duros.
 # hdparm /dev/sda (Informa del estado [activado o no] de las opciones de hdparm)
 # hdparm -tT /dev/sda (Comprobar velocidad de lectura)
 # hdparm -i /dev/sda (Informa de las características del disco duro)
-# hdparm -I /dev/sda (Mostrar información más extendida)
+# hdparm --scan (escanear los dispositivos)
+# hdparm -D /dev/sda  (muestra desperfectos posibles)
 1.-
 Desactivación del APM (Gestión avanzada de energia) de los portatiles ya que esta tecnologia alarga la duración de la batería en detrimento de la vida útil del disco duro.
-# hdparm -I /dev/sda
+# hdparm -x /dev/sda
 El parámetro que indica si tenemos APM y la frecuencia de ciclo de carga-descarga es:
 Advanced power management level: 128
-# smartctl -a /dev/sda | egrep 'ID|Load_Cycle'(El parámetro RAW_VALUE indica la  cantidad de ciclos que el HD ha consumido. La cantidad de ciclos oscila entre 300000 y 600000 por HD)
 # hdparm -B 254 /dev/sda (Disminuir la frecuencia de los ciclos a mínimo. El valor máximo sería 1 y desactivado 255)
 2.-
 Minimizar el ruido del disco duro:
-# hdparm -I /dev/sda |grep acoustic
+# hdparm -I /dev/sda | grep acoustic
 Muestra el valor recomendado y el valor actual. Si vemos que el recomendado es menor que el valor actual podemos modificarlo con:
 # hdparm -M (VALOR RECOMENDADO) /dev/sda
 
