@@ -22985,6 +22985,13 @@ Analiza e identifica varios hashes de contraseñas en función de su tipo. Desca
 # hashtag -d dir -o archivo (recorrer un directorio y todos los subdirectorios intentando identificar todos los hash potenciales y mandando el resultado a un archivo. Si no se especifica, la salida es HashTag_Output_File.txt)
 
 
+haveged
+Es un demonio de entropía en el espacio de usuario para sistemas Linux. Su principal función es generar entropía [aleatoriedad] para el sistema, lo cual es crucial para muchas operaciones criptográficas y de seguridad utilizando el algoritmo HAVEGE [HArdware Volatile Entropy Gathering and Expansion] para generar entropía de manera eficiente y confiable.
+# systemctl start haveged (iniciar el demonio)
+# systemctl enable haveged (habilitar para que se inicie automáticamente al arrancar el sistema)
+$ cat /proc/sys/kernel/random/entropy_avail (verificar la cantidad de entropía disponible en el sistema)
+
+
 hblock
 Script de shell compatible con POSIX que obtiene una lista de dominios que publican anuncios, scripts de seguimiento y malware de múltiples fuentes y los añade al contenio del archivo /etc/hosts y así evita que el sistema se conecte a ellos. Cada dominio se asocia con la dirección IP 127.0.0.1, lo que significa que cualquier intento de acceder a esos dominios será redirigido a la máquina local, evitando así que el sistema se conecte a ellos. Aunque no modifica el contenido existente en /etc/hosts, siempre es preferible realizar una copia de seguridad. Descargar e instalar hblock:
 # curl -o /usr/local/bin/hblock https://raw.githubusercontent.com/hectorm/hblock/v3.4.0/hblock
@@ -23013,6 +23020,25 @@ hcitool
 Busqueda de disposivos bluetooth, siempre que no esten en modo oculto.
 $ hcitool scan (Busca dispositivos activos)
 $ hcitool info   (Muestra información de los dispositivos encontrados)
+
+
+hcloud-cli
+Interfaz oficial para interactuar con la API de Hetzner Cloud, que opera sobre HTTPS, utiliza JSON como formato de datos y sigue un diseño RESTful. Permite gestionar recursos como servidores, volúmenes, redes, IPs flotantes, claves SSH y más desde la terminal, facilitando la automatización y la administración eficiente de infraestructura en la nube.
+Antes de usar hcloud, se necesita configurarlo con un token de API de Hetzner Cloud [https://console.hetzner.cloud]
+$ hcloud context create my-project (crear un contexto ingresando el token cuando se solicite lo que activará el contexto para el proyecto)
+$ hcloud --help (listar comandos disponibles)
+$ hcloud server-type list (listar tipos de servidores disponibles)
+$ hcloud server create --image ubuntu-22.04 --type cx11 --name my-cool-server (crea un servidor con la imagen ubuntu-22.04, tipo cx11 y nombre my-cool-server)
+$ hcloud ssh-key create --name my-ssh-key --public-key "ssh-rsa AAAjjk76kgf...Xt" (subir la clave SSH habilita el acceso seguro al servidor sin contraseña)
+$ hcloud server list -o json (muestra todos los servidores en el contexto activo y obtener resultados en formato JSON)
+$ hcloud server describe my-cool-server (muestra información detallada de un servidor por su ID o nombre)
+$ hcloud volume create --size 123 --name my-volume --server my-cool-server (crea un volumen de 123 GB y lo asócia a un servidor)
+$ hcloud floating-ip create --type ipv4 --description "my-floating-ip" (crea una IP flotante)
+$ hcloud floating-ip assign <floating-ip-id> my-cool-server (asigna la IP flotante a un servidor lo que permite redirigir tráfico sin cambiar la configuración del servidor)
+$ hcloud floating-ip unassign <floating-ip-id> (desasigna la IP)
+$ hcloud server delete my-cool-server (elimina un servidor por su ID o nombre de forma permanente)
+$ hcloud server metrics my-cool-server --type cpu,disk (consulta métricas [CPU, disco, red] de un servidor)
+$ hcloud context list (si se trabaja con varios contextos, muesta el listado)
 
 
 hddtemp
