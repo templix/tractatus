@@ -23137,6 +23137,16 @@ Muestra el valor recomendado y el valor actual. Si vemos que el recomendado es m
 # hdparm -M (VALOR RECOMENDADO) /dev/sda
 
 
+hdup
+[Hard disk Duplication Utility]. Herramienta para duplicar sistemas de archivos completos, realizar copias de seguridad de sistemas operativos y crear imágenes de particiones o discos enteros.
+# hdup /dev/sda /dev/sdb (duplicar un disco duro completo)
+# hdup /dev/sda1 /dev/sdb1 (duplicar solo una partición)
+# hdup /path/to/image.img /dev/sdX (duplicar un archivo o imagen de disco)
+# hdup --info /dev/sdb (mostrar información sobre el dispositivo destino)
+# hdup --verify /dev/sdb (verificar la integridad de la copia)
+# hdup -c gzip /dev/sda /dev/sdb (duplicar con compresión)
+
+
 head
 muestra por defecto las primeras 10 lineas de un archivo si no se especifica cantidad.
 $ head /var/log/apache2/access.log
