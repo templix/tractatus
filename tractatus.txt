@@ -23095,10 +23095,26 @@ Comandos disponibles:
         caldav-report --> Obtener informe CalDAV
 
 
+hddemux
+Herramienta diseñada para demultiplexar conexiones entrantes [HTTP/1.x y DNS], es decir, inspecciona la primera parte de una conexión entrante para decidir a qué backend redirigirla. Esto es útil cuando se tiene un único puerto expuesto, por ejemplo 443, que puede recibir tanto tráfico HTTPS como tráfico DoT, y se necesita reenviarlo al backend adecuado según el protocolo detectado. Inspecciona la firma inicial, si parece una solicitud HTTP [GET, POST, etc.], reenvía al backend HTTP y si parece una conexión TLS DNS, basada en handshake o patrón, reenvía al backend DNS sobre TLS.
+Supongamos que queremos aceptar conexiones HTTPS y conexiones DNS sobre TLS en el mismo puerto 443. Un servidor web HTTPS escuchando en localhost:8443 y un servidor DNS sobre TLS [como stubby, unbound, dnsdist, etc.] escuchando en localhost:853
+$ hddemux -listen :443 -http 127.0.0.1:8443 -dot 127.0.0.1:853 (enrutar de forma inteligente ambas conexiones)
+
+
 hddtemp
 Indica la temperatura del disco especificado
 # hddtemp /dev/sda
 # hddtemp -d /dev/sda (arrancar el daemon)
+
+
+hdfs-cli
+Heramienta escrita en Go para interactuar con sistemas de archivos HDFS [Hadoop Distributed File System - Sistema de archivos distribuido para Big Data], que es un sistema de almacenamiento distribuido utilizado en el ecosistema de Apache Hadoop.
+$ hdfs-cli ls /user/hadoop/datos (listar archivos en HDFS)
+$ hdfs-cli put datos.csv /user/hadoop/entrada/ (copiar un archivo local a HDFS)
+$ hdfs-cli get /user/hadoop/salida/resultado.csv . (descargar un archivo de HDFS a local)
+$ hdfs-cli mkdir /user/hadoop/nuevo_dir (crear un directorio en HDFS)
+$ hdfs-cli rm /user/hadoop/datos/basura.log (eliminar un archivo en HDFS)
+$ hdfs-cli cat /user/hadoop/logs/sistema.log (ver el contenido de un archivo en HDFS)
 
 
 hdparm
