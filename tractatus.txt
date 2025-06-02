@@ -23254,6 +23254,41 @@ $ heartbleeder -v -f output.bin example.com (mostrará más detalles y guardar d
 Nota.- La mayoría de los servidores están parcheados o las versones de OpenSSL son 1.0.1g o superior.
 
 
+heat-api
+[heat-api-cfn heat-engine python-heat-client]. Es un servicio para orquestar múltiples aplicaciones compuestas en la nube mediante plantillas, a través de una API ReST nativa de OpenStack y una API de consulta compatible con CloudFormation.
+Ejemplo sencillo de una plantilla
+$ nano mi_plantilla.yaml
+        heat_template_version: 2018-03-02
+        description: Simple template to deploy a single instance
+        parameters:
+          key_name:
+            type: string
+            description: Name of key-pair to be used for compute instance
+          image_id:
+            type: string
+            description: Image to be used for compute instance
+          instance_type:
+            type: string
+            description: Type of instance (flavor) to be used
+          network_name:
+            type: string
+            description: The network to be used
+        resources:
+          my_instance:
+            type: OS::Nova::Server
+            properties:
+              key_name: { get_param: key_name }
+              image: { get_param: image_id }
+              flavor: { get_param: instance_type }
+              networks:
+                - network: { get_param: network_name }
+# service heat-api restart (reiniciar el servicio)
+Estas acciones se comunican con el servicio heat-api, que a su vez se coordina con el motor de orquestación para realizar las operaciones solicitadas.
+$ openstack stack create -t mi_plantilla.yaml --parameter key_name=mi_llave --parameter image_id=mi_imagen --parameter instance_type=m1.small --parameter network_name=mi_red mi_stack (crea una pila que despliega los recursos definidos en la plantilla)
+$ openstack stack list (consultar el estado de las pilas)
+$ openstack stack show mi_stack (consultar el estado de mi plantilla)
+
+
 hegemon
 [libsensors4-dev cargo]. Monitoreo del sistema: Velocidad del ventilado, temperatura, CPU, memoria y uso de swap. El intervalo de monitorización es 3 segundos. Al estar escrito en lenguaje RUST, una vez instñalado:
 $ cargo install hegemon
