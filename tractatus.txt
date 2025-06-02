@@ -23140,6 +23140,26 @@ $ hdhomerun_config ID get /sys/temperature (ver temperatura del dispositivo)
 Nota.- Los formatos de canal varían según la región, 8vsb para ATSC en América del Norte, dvbt para DVB-T en Europa
 
 
+hdmi2usb-fx2-firmware
+Firmware del chip FX2 [Cypress FX2LP] que se encuentra en los dispositivos HDMI2USB, diseñados para capturar señales HDMI, como las de una cámara o computadora y convertirlas en una señal USB que puede ser reconocida como una cámara web [UVC] o dispositivo de captura por una computadora. Este paquete contiene el firmware FX2 para varios modos de la interfaz USB de la placa Numato Opsis.
+$ hdmi2usb-fx2-firmware --list-devices (listar dispositivos disponibles)
+$ hdmi2usb-fx2-firmware --load-firmware firmware.hex (cargar firmware en RAM [modo temporal, desaparece al reiniciar])
+$ hdmi2usb-fx2-firmware --flash-firmware firmware.hex (grabar el firmware en EEPROM [modo permanente] reemplazando el firmware anterior)
+$ hdmi2usb-fx2-firmware --reset (resetear el dispositivo después de cargar firmware)
+Nota.- Se puede descargar el firmware desde https://github.com/timvideos/HDMI2USB-fx2-firmware/releases.
+
+
+hdmi2usb-mode-switch
+Esta herramienta permite flashear y configurar dispositivos HDMI2USB. Es un proyecto para capturar vídeo HDMI con una placa FPGA compatible con las placas Digilent Atlys y Numato Opsis.
+$ hdmi2usb-mode-switch --list (listar los modos disponibles para un dispositivo conectado)
+$ hdmi2usb-mode-switch --mode hdmi2usb (cambiar al modo HDMI2USB, modo captura de video)
+$ hdmi2usb-mode-switch --mode dfu (cambiar al modo firmware update)
+
+
+hdmi2usb-udev
+Proporciona un conjunto de archivos de reglas udev [ver] a los dispositivos HDMI2USB, para su integración con el sistema operativo y que son usados por OBS, ffmpeg, vlc, o cualquier app compatible con /dev/video y por tanto no es un comando ejecutable como tal. Se instalan en /lib/udev/rules.d/70-hdmi2usb-udev.rules o /etc/udev/rules.d/99-hdmi2usb.rules
+
+
 hdparm
 consultar y modificar diferentes parámetros de los discos duros.
 # hdparm /dev/sda (Informa del estado [activado o no] de las opciones de hdparm)
@@ -39267,7 +39287,7 @@ Detecta la codificación de un texto.
 
 
 udev
-Demonio que crea y elimina dinámicamente nodos de dispositivos de /dev/, maneja eventos de conexión en caliente y carga controladores en el momento del arranque. Contiene las aplicaciones systemd-hwdb y udevadm
+Es el sistema de administración de dispositivos, que se encarga de detectar dispositivos conectados como cámaras, tarjetas de captura, memorias USB, etc. y aplicar reglas para darles nombres coherentes, cambiar permisos automáticamente o crear enlaces simbólicos [symlinks] útiles. Contiene las aplicaciones systemd-hwdb y udevadm
 $ systemctl status udev (comprobar si está activo)
 
 
