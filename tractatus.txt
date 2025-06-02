@@ -23117,6 +23117,29 @@ $ hdfs-cli rm /user/hadoop/datos/basura.log (eliminar un archivo en HDFS)
 $ hdfs-cli cat /user/hadoop/logs/sistema.log (ver el contenido de un archivo en HDFS)
 
 
+hdhomerun-config
+Herramienta para gestionar dispositivos HDHomeRun de SiliconDust, que son sintonizadores de TV digital conectados a la red y que permite descubrir su ubicación y nombre, obtener su configuración, realizar escaneos y actualizar su firmware.
+$ hdhomerun_config discover (descubrir todos los dispositivos HDHomeRun en la red)
+$ hdhomerun_config ID get /sys/model (obtener información detallada de un dispositivo específico)
+$ hdhomerun_config ID get /sys/version (verificar versión actual del firmware)
+$ hdhomerun_config ID get /tuner0/status (ver el estado actual de un sintonizador)
+$ hdhomerun_config ID set /tuner0/channel 8vsb:177.028 (sintonizar un canal específico)
+$ hdhomerun_config ID set /tuner0/program 1 (lo mismo)
+$ hdhomerun_config ID get /tuner0/streaminfo (ver la señal del canal sintonizado)
+$ hdhomerun_config ID scan /tuner0 (realizar un escaneo completo de canales)
+$ hdhomerun_config ID scan /tuner0 8vsb:177.028 (escanear un canal específico)
+$ hdhomerun_config ID set /sys/ip 192.168.1.100 (tres pasos para configurar dirección IP estática)
+$ hdhomerun_config ID set /sys/subnet 255.255.255.0
+$ hdhomerun_config ID set /sys/gateway 192.168.1.1
+$ hdhomerun_config ID set /sys/ip none (volver a DHCP)
+$ hdhomerun_config ID upgrade (actualizar firmware)
+$ hdhomerun_config ID get /sys/hwmodel (obtener información general del sistema)
+$ hdhomerun_config ID get /sys/features (lo mismo)
+$ hdhomerun_config ID get /sys/restart (lo mismo)
+$ hdhomerun_config ID get /sys/temperature (ver temperatura del dispositivo)
+Nota.- Los formatos de canal varían según la región, 8vsb para ATSC en América del Norte, dvbt para DVB-T en Europa
+
+
 hdparm
 consultar y modificar diferentes parámetros de los discos duros.
 # hdparm /dev/sda (Informa del estado [activado o no] de las opciones de hdparm)
