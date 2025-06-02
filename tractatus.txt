@@ -23197,10 +23197,32 @@ $ head -50 /var/log/maillog  (las primeras 50)
 $ head -5 archivo1 archivo2 (Muestra las 5 primeras lineas de los dos archivos)
 
 
+headache
+Herramienta para administrar las notas de licencia de los archivos de origen que generalmente se encuentra en un comentario al comienzo de estos archivos.
+$ headache -c LICENSE_HEADER *.py (añade el contenido de LICENSE_HEADER al inicio de todos los archivos .py del directorio)
+$ headache -r *.py (eliminar el encabezado de licencia existente)
+$ headache -u LICENSE_HEADER *.py (actualizar el encabezado de licencia)
+
+
 health-check
-monitorea los procesos y, opcionalmente, sus procesos secundarios y subprocesos durante un período de tiempo determinado. Al final del monitoreo, mostrará el tiempo de CPU utilizado, los eventos de activación generados y las operaciones de E/S de los procesos dados.
-$ health-check -d 10 -p ,emac (monitorear 10 segundos [por defecto 60] el proceso emacs)
-$ health-check -d 10 -p 9809 (lo mismo especificando PID)
+Herramienta que monitoriza procesos y, opcionalmente, sus procesos secundarios e hilos durante un tiempo determinado. Al finalizar la monitorización, mostrará un informe detallado sobre el uso de CPU, eventos de activación y operaciones de entrada/salida [E/S]. Puede utilizarse para diagnosticar procesos defectuosos, procesos que consumen demasiados recursos, cuellos de botella del sistema...
+$ health-check -p 5678 -t 60 (monitorizar un proceso existente por su PID durante 60 segundos)
+$ health-check -t 300 -- gzip large_file.tar.gz (monitorizar el proceso de compresión de un archivo grande con gzip durante 300 segundos)
+$ health-check -p 5678 -t 120 -r (monitorizar el PID 5678 y todos sus procesos secundarios durante 120 segundos)
+$ health-check -p emacs -t 10  (monitorear 10 segundos [por defecto 60] el proceso emacs)
+
+
+heaptrack
+Herramienta de perfilado de memoria que se utiliza para rastrear y analizar el uso de la memoria heap en aplicaciones. Funciona mediante la interceptación de llamadas a funciones de asignación de memoria, como malloc, free, realloc, etc. utilizando la variable de entorno LD_PRELOAD. Es útil para depurar fugas y aumentos de memoria. La memoria Heap se refiere a una región de la memoria de una computadora utilizada para la asignación de memoria dinámica. A diferencia de la memoria de la pila, que tiene un tamaño fijo y sigue un orden de primera entrada [LIFO], la memoria Heap permite una asignación más flexible y la distribución de bloques de memoria durante el tiempo de ejecución.
+$ heaptrack ./programa (generará un archivo de datos con extensión .heaptrack que contiene la información de perfilado de memoria)
+$ heaptrack_gui programa.heaptrack (analizar el archivo generado utilizando la herramienta gráfica de Heaptrack)
+$ heaptrack python3 script.py (perfilar un script de Python)
+$ heaptrack ./programa arg1 arg2 (perfilado de una aplicación con argumentos)
+La interfaz gráfica permitirá ver:
+- Una lista de todas las asignaciones de memoria y liberaciones.
+- Información detallada sobre cada asignación, incluyendo el tamaño y la ubicación en el código.
+- Gráficos que muestran el uso de la memoria a lo largo del tiempo.
+- Información sobre posibles fugas de memoria.
 
 
 hegemon
