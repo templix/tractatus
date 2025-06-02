@@ -23246,6 +23246,14 @@ $ cl_status resource_status recurso1 (verifica el estado del recurso recurso1)
 $ cl_respawn /usr/sbin/httpd -DFOREGROUND (lanza Apache y se asegura de que si el proceso muere, se reinicie automáticamente)
 
 
+heartbleeder
+Herramienta de prueba de vulnerabilidades que verifica si un servidor remoto es vulnerable al famoso bug Heartbleed [CVE-2014-0160] en OpenSSL [versiones 1.0.1 a 1.0.1f]. Este fallo de seguridad permitía a un atacante leer partes de la memoria del servidor, exponiendo información sensible como claves privadas, contraseñas y otros datos.
+$ heartbleeder example.com (comprobar un servidor web)
+$ heartbleeder -p 8443 example.com (probar un puerto. Por defecto el 443)
+$ heartbleeder -v -f output.bin example.com (mostrará más detalles y guardar datos extraídos en un archivo)
+Nota.- La mayoría de los servidores están parcheados o las versones de OpenSSL son 1.0.1g o superior.
+
+
 hegemon
 [libsensors4-dev cargo]. Monitoreo del sistema: Velocidad del ventilado, temperatura, CPU, memoria y uso de swap. El intervalo de monitorización es 3 segundos. Al estar escrito en lenguaje RUST, una vez instñalado:
 $ cargo install hegemon
