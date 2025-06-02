@@ -23225,6 +23225,27 @@ La interfaz gráfica permitirá ver:
 - Información sobre posibles fugas de memoria.
 
 
+heartbeat
+Es un subsistema de mensajería para alta disponibilidad [HA] que implementa latidos via serie, UDP o PPP/UDP y permite que múltiples nodos [servidores] trabajen juntos para proporcionar servicios que se mantengan disponibles incluso si uno de los nodos falla. Incluye las aplicaciones cl_respawn y cl_status.
+Ejemplo simple de configuración
+# nano /etc/ha.d/ha.cf
+        logfacility local0
+        keepalive 2
+        deadtime 10
+        warntime 5
+        initdead 20
+        udpport 694
+        bcast eth0
+        node nodo1
+        node nodo2
+Define: Intervalos de heartbeat [keepalive], cuánto esperar antes de declarar a un nodo muerto [deadtime], interfaz de red usada [bcast eth0], nombres de los nodos participantes [node1, nodo2, etc]
+$ cl_status listnodes (consulta el estado actual del clúster y sus recursos)
+$ cl_status nodestatus nodo1 (muestra los nodos activos del clúster)
+$ cl_status listresources (lista los recursos que está gestionando)
+$ cl_status resource_status recurso1 (verifica el estado del recurso recurso1)
+$ cl_respawn /usr/sbin/httpd -DFOREGROUND (lanza Apache y se asegura de que si el proceso muere, se reinicie automáticamente)
+
+
 hegemon
 [libsensors4-dev cargo]. Monitoreo del sistema: Velocidad del ventilado, temperatura, CPU, memoria y uso de swap. El intervalo de monitorización es 3 segundos. Al estar escrito en lenguaje RUST, una vez instñalado:
 $ cargo install hegemon
