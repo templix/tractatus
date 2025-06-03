@@ -23298,6 +23298,28 @@ Para ejecutarlo:
 $ hegemon
 
 
+hellfire
+Herramienta diseñada principalmente para la resolución DNS masiva y paralelizada. Su objetivo principal es generar listas de dominios para ser utilizadas por otras herramientas, como PATHspider [herramienta que se utiliza para realizar mediciones de red y analizar rutas de tráfico]. En esencia, actúa como un potente escáner DNS que puede procesar un gran número de consultas de forma eficiente.
+Crear el archivo CSV con una lista de dominios y l mismo contenido para dominios.txt:
+$ nano dominios.csv
+domain
+google.com
+facebook.com
+openai.com
+x.com
+nic.cl
+Asegurar que la primera fila sea el encabezado del.csv, en este caso "domain", en el .txt no es necesario.
+$ hellfire --topsites --type=host --output=individual (usa lista de sitios populares, hace resolución de tipo host [registro A] e imprime un objeto JSON por dominio)
+$ hellfire --csv --file=mis-dominios.csv --type=mx --output=array (usa archivo CSV con dominios, obtiene registros MX y muestra la salida como un único JSON tipo array)
+$ hellfire --csv --file=dominios.csv
+$ hellfire --opendns --list=adult-content --type=host --output=individual (usa lista temática de OpenDNS, busca registros A/AAAA y salida como JSON por dominio)
+$ hellfire --citizenlab --country=cn --type=ns --output=oneeach (descarga/usa lista de Citizen Lab para China, resuelve registros NS y muestra un resultado por línea, uno por dominio)
+$ hellfire --csv --file=dominios.csv --type=host --canid=10.0.0.1 --output=array (usa lista.csv, realiza resoluciones usando 10.0.0.1 como servidor DNS y muestra resultados en formato array)
+$ hellfire --csv --file=dominios.csv --type=ns --output=array --canid=127.0.0.1
+$ hellfire --opendns --file=dominios.txt --type=host --output=individual --rate=5 (limitando las consultas a 5 por segundo)
+$ hellfire --citizenlab --country=ES (resolver dominios de Citizen Lab para un país específico)
+
+
 hello
 Muestra el clásico "Hola, mundo" o un saludo personalizable.
 $ hello -t (El tradicional "Hola, mundo")
