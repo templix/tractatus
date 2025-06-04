@@ -25412,6 +25412,21 @@ $ snap install kesty-whatsapp
 $ snap run kesty-whatsapp (arrancar kesty-whatsapp. Pide ingresar el código QT en el móvil para activar la aplicación)
 
 
+kexec
+Es una llamada al sistema que permite arrancar un nuevo kernel desde el kernel actualmente en ejecución, sin necesidad de un reinicio completo del sistema, es decir, sin pasar por la BIOS/UEFI.
+Reiniciar a un nuevo kernel de forma rápida:
+Se ha actualizado el kernel a una nueva versión, por ejemplo, /boot/vmlinuz-6.1.0-9-amd64 con su initrd correspondiente /boot/initrd.img-6.1.0-9-amd64.
+# kexec -l /boot/vmlinuz-6.1.0-9-amd64 --initrd=/boot/initrd.img-6.1.0-9-amd64 --append="$(cat /proc/cmdline)" (cargar el nuevo kernel)
+        -l --> Le dice a kexec que cargue el kernel.
+        /boot/vmlinuz-6.1.0-9-amd64 --> Ruta al archivo del nuevo kernel.
+        --initrd=/boot/initrd.img-6.1.0-9-amd64 --> Ruta al archivo del initrd para el nuevo kernel.
+        --append="$(cat /proc/cmdline)" --> Le pasa la línea de comandos actual del kernel al nuevo kernel.
+Nota.- Es la forma más segura de asegurar que el nuevo kernel arranque con los mismos parámetros que el anterior [dónde está la raíz del sistema de archivos, parámetros de dispositivos, etc.].
+# kexec -e (reiniciará el sistema usando el nuevo kernel sin pasar por el proceso completo de la BIOS/UEFI)
+# systemctl kexec (integrar con el proceso de apagado)
+Este comando intentará usar kexec para reiniciar. Si la distribución y configuración lo soportan, systemd se encargará de cargar el kernel y el initrd apropiados, y luego invocará kexec -e como parte de la secuencia de apagado. Esto proporciona un reinicio "limpio" donde todos los servicios se apagan correctamente antes de que el nuevo kernel tome el control.
+
+
 keyctl
 [keyutils]. Este programa se utiliza para controlar la instalación de administración de claves de varias maneras usando una variedad de subcomandos.
 $ keyctl list @us (Enumerar las claves actuales en la sesión predeterminada del usuario)
