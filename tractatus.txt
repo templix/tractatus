@@ -23365,6 +23365,18 @@ $ heroku keys:add ~/.ssh/id_rsa.pub (Subir la clave publica)
 $ heroku git:remote -a tractatuslapipaplena (Añadir una aplicación Heroku con control remoto Git)
 
 
+hexcompare
+Es una utilidad basada en curses que permite comparar e identificar diferencias entre dos archivos binarios. Estas diferencias se representan visualmente mediante un diagrama de bloques interactivo.
+$ hexcompare archivo1.bin archivo2.bin (abre una interfaz interactiva donde se muestran las diferencias entre los dos archivos binarios)
+$ hexcompare -x archivo1.bin archivo2.bin (compara los archivos y muestra el contenido en formato hexadecimal)
+$ hexcompare -t 1024 archivo1.bin archivo2.bin (ignora diferencias menores a 1024 bytes, útil para archivos grandes con pequeñas variaciones)
+Atajos útiles en la interfaz:
+        F1 o ? --> Muestra ayuda.
+        Tab --> Cambia entre los paneles de los dos archivos.
+        Enter --> Salta a la siguiente diferencia.
+        Q --> Sale del programa.
+
+
 hexdump
 [exedit]. Editor de archivos binarios.
 $ hexdump -C archivo_binario
@@ -41061,6 +41073,12 @@ vte
 Terminal
 $ vte -T (Lanza terminal semitransparente)
 $ vte -g 60x10 -r red (Especificando medidas y color del cursor)
+
+
+vterm-ctrl
+Se refiere a una biblioteca de C99 que emula un terminal de tipo VT220 o xterm. Esta biblioteca no dibuja directamente en pantalla ni depende de un toolkit gráfico; solo interpreta secuencias de escape ANSI y mantiene el estado del "terminal virtual".
+$ vterm-ctrl title linux (poner título a la terminal)
+$ vterm-ctrl reset (limpiar la terminal)
 
 
 vtmc
