@@ -25354,6 +25354,21 @@ Establece la tasa de repetición del teclado y el tiempo de retardo en las tty.
 # kbdrate -d 200 -r 10 (establece retardo de 200 milisegundos y velocidad de repetición de 10 por segundo)
 
 
+kdump
+Se configura para cargar un segundo kernel [el "kernel de volcado"] en una parte reservada de la memoria. Si el primer kernel, el kernel principal, sufre un panic, kdump utiliza kexec para arrancar el kernel de volcado. La configuración se hace editando:
+# nano /etc/default/grub
+Y modificar la linea:
+        GRUB_CMDLINE_LINUX_DEFAULT="quiet splash crashkernel=auto"
+# update-grub (actualizar la configuración de GRUB)
+Y en la configuración de kdump especificar una ruta para el volcado:
+# nano /etc/kdump.conf
+...
+path /var/crash
+...
+# systemctl enable kdump (habilitar el inicio del servicio)
+Cuando el sistema se bloquea, el kernel de volcado arrancará vía kexec y guardará la imagen en /var/crash.
+
+
 kernel
 1.-
 Suprimir kernels antiguos
@@ -25410,6 +25425,25 @@ Aplicación de whatsapp para pc. La instalación es via snap [ver] y los comando
 $ apt install snapd
 $ snap install kesty-whatsapp
 $ snap run kesty-whatsapp (arrancar kesty-whatsapp. Pide ingresar el código QT en el móvil para activar la aplicación)
+
+
+hexcurse
+es un versátil editor hexadecimal basado en Ncurses, escrito en C, que permite abrir, modificar y guardar archivos binarios o de texto mostrando su contenido tanto en formato hexadecimal como ASCII. Actualmente, admite editar archivos binarios, búsquedas, saltar a posiciones especificas y modificar bytes individuales.
+$ hexcurse ejemplo.bin (abrir un archivo en modo interactivo)
+$ hexcurse -a ejemplo.bin (mostrar direcciones en decimal)
+$ hexcurse -r 8 ejemplo.bin (limitar a 8 caracteres por línea en la visualización)
+Algunos atajos del modo interactivo:
+        F1 / Ctrl+? --> Ayuda de teclas
+        F2 / Ctrl+S --> Guardar archivo
+        F3 / Ctrl+O --> Abrir archivo
+        F4 / Ctrl+G --> Ir a dirección específica
+        F5 / Ctrl+F --> Buscar cadena o valor hexadecimal
+        F6 / Ctrl+A --> Cambiar entre direcciones hex/decimal
+        F7 / TAB --> Alternar edición entre hexadecimal y ASCII
+        F8 / Ctrl+Q --> Salir
+        Ctrl+Z --> Deshacer último cambio
+        Ctrl+U/D --> Página arriba/abajo
+        Ctrl+T/B --> Ir al inicio/final del archivo
 
 
 kexec
