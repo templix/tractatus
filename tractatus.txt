@@ -23390,6 +23390,20 @@ Una vez abierto, las flechas para moverse, Tab para cambiar entre la vista hexad
 Nota.- No tiene función de deshacer. Cada cambio es permanente al guardar.
 
 
+hexer
+es un editor binario interactivo, también conocido como editor hexadecimal, con una interfaz similar a la de Vim. Sus características más importantes son múltiples búferes, deshacer multinivel, edición desde la línea de comandos con autocompletado y expresiones regulares binarias.
+$ hexer archivo.bin (abre archivo.bin en modo interactivo en dos columnas: a la izquierda, los valores hexadecimales; a la derecha, la representación ASCII)
+Moverse por el archivo
+        j, k, h, l --> moverse como en vi
+        G --> ir al final
+        gg --> ir al principio
+        :0x10A --> ir a una dirección específica, en decimal o hexadecimal
+        i --> entrar en modo inserción
+        :w --> guarda el archivo
+        :q --> salir
+        :wq --> guardar y salir
+
+
 hg
 [mercurial]. Mercurial es un potente programa de control de versiones para nuestros proyectos. Previamente crear en la carpeta personal, el archivo:
 $ nano .hgrc
