@@ -23404,6 +23404,16 @@ Moverse por el archivo
         :wq --> guardar y salir
 
 
+hexyl
+Visor hexadecimal que utiliza la salida en color para distinguir diferentes categorías de bytes: bytes nulos, caracteres ASCII imprimibles, espacios en blanco ASCII, otros caracteres ASCII y no ASCII.
+$ echo "Hola mundo" | hexyl (analizar entrada estándar)
+$ hexyl (abrirá una ventana interactiva donde se podrá ingresar texto o datos binarios para ser analizados en formato hexadecimal)
+$ hexyl < archivo.bin (visualizar un archivo binario)
+$ hexyl /dev/sda (lectura del primer sector de un disco duro
+$ hexyl -d archivo1.bin archivo2.bin (comparar dos archivos)
+$ hexyl -n 64kB archivo.txt (solo se leen 64 bytes de la entrada. El argumento también puede incluir una unidad con prefijo decimal [kB, MB, etc.] o binario [kiB, MiB, etc.])
+
+
 hg
 [mercurial]. Mercurial es un potente programa de control de versiones para nuestros proyectos. Previamente crear en la carpeta personal, el archivo:
 $ nano .hgrc
