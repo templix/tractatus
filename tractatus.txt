@@ -23382,6 +23382,14 @@ hexdump
 $ hexdump -C archivo_binario
 
 
+hexedit
+Visor y editor en hexadecimal o ASCII para archivos o dispositivos como discos duros, particiones, unidades flash, etc. También cuenta con funciones para copiar y pegar, y guardar en archivo y realizar tareas como la reparación de archivos binarios, búsqueda de cadenas, o edición de sectores en discos.
+$ hexedit archivo.bin (abre archivo.bin. A la izquierda las direcciones, en el centro los bytes hexadecimales y a la derecha los caracteres ASCII correspondientes.)
+Una vez abierto, las flechas para moverse, Tab para cambiar entre la vista hexadecimal y ASCII, Ctrl+x para salir y eligir si guardar los cambios, Ctrl+s para buscar texto ASCII y Ctrl+w para buscar una secuencia hexadecimal.
+# hexedit /dev/sdb1 (ver o editar directamente una partición)
+Nota.- No tiene función de deshacer. Cada cambio es permanente al guardar.
+
+
 hg
 [mercurial]. Mercurial es un potente programa de control de versiones para nuestros proyectos. Previamente crear en la carpeta personal, el archivo:
 $ nano .hgrc
