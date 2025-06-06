@@ -23434,6 +23434,33 @@ $ dbus-monitor --system "interface=org.sailfishos.hfd" (ver mensajes de D-Bus)
 $ journalctl -u hfd-service -f (ver logs del servicio)
 
 
+hfsplus
+Herramientas para acceder a volúmenes formateados HFS+ también conocido como "Mac OS Extended". HFS+ es una versión modernizada del sistema de archivos HFS de Apple que se usa ampliamente en versiones más recientes de macOS. A diferencia de las antiguas hfsutils, para el formato HFS, las herramientas hfsplus utilizan la sintaxis de rutas de estilo Unix, con "/" como delimitador en lugar de la sintaxis de Mac con ":". Incluye las herramientas hpcd, hpcopy, hpfsck, hpls, hpmkdir, hpmount, hppwd, hprm y hpumount
+# hpmount /dev/sdb1 /media/mac_disk (montar el dispositivo /dev/sdb1)
+# hpcd /media/mac_disk/Users/mi_usuario/Documents (cambiar al directorio Documents dentro del volumen montado)
+# hpcopy mi_documento.txt /media/mac_disk/Users/mi_usuario/Documents/ (copiar un archivo de Linux al volumen HFS+)
+# hpcopy /media/mac_disk/Photos/vacaciones.jpg . (copiar un archivo del volumen HFS+ al directorio actual en Linux)
+# hpcopy -r /media/mac_disk/Projects/ MyLinuxProjects/ (copiar un directorio entero)
+# hpfsck /dev/sdb1 (verificar el sistema de archivos HFS+ en /dev/sdb1. El volumen NO debe estar montado)
+# hpls /media/mac_disk/ (listar el contenido del directorio raíz del volumen HFS+)
+# hpls -l /media/mac_disk/Users/mi_usuario/Desktop/ (listar el contenido de un subdirectorio con detalles)
+# hpmkdir /media/mac_disk/Backups (crear un nuevo directorio)
+# hppwd (muestra el directorio de trabajo actual dentro del volumen HFS+)
+# hprm /media/mac_disk/Temporal/archivo_viejo.txt (eliminar un archivo)
+# hprm -r /media/mac_disk/Unused_Folder/ (eliminar un directorio y su contenido de forma recursiva)
+# hpumount /media/mac_disk (desmontar el volumen HFS+)
+Nota.- Generalmente se pueden usar las herramientas estándar de Linux [cd, mkdir, rm, ls, mv, ...] con el dispositivo montado.
+
+
+hfsprogs
+mkfs y fsck para sistemas de archivos HFS y HFS+ [desmontados]. Incluye las herramientas fsck.hfs, fsck.hfsplus, mkfs.hfs y mkfs.hfsplus
+# fsck.hfs -f /dev/sdb1 (verificar y reparar un volumen HFS en /dev/sdb1)
+# fsck.hfsplus -y -f /dev/sdb1 (verificar y reparar un volumen HFS+ en /dev/sdb1 asumientyo "si" a todas las preguntas)
+# fsck.hfsplus -n -f /dev/sdb1 (asumir "no" a todas las preguntas de reparación. Solo simular la verificación, no hacer cambios)
+# mkfs.hfs -v OLD_MAC_DISK /dev/sdc1 (crear un volumen HFS llamado "OLD_MAC_DISK" en /dev/sdc1)
+# mkfs.hfsplus -J -v My_Mac_Drive /dev/sdd1 (crear un volumen HFS+ con journaling y nombre "My_Mac_Drive")
+
+
 hg
 [mercurial]. Mercurial es un potente programa de control de versiones para nuestros proyectos. Previamente crear en la carpeta personal, el archivo:
 $ nano .hgrc
