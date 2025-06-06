@@ -23514,6 +23514,49 @@ Gestionar dispositivos blueetoth
 # hidd --connect 0A:1B:2C:4D:5E:6F (Conectar a un dispositivo)
 
 
+hiera
+Herramienta de búsqueda de datos jerárquicos que se utiliza comúnmente en entornos de automatización y gestión de configuración, como Puppet o Ansible.
+Crear el archivo de configuración:
+# nano hiera.yaml
+:backends:
+  - yaml
+:hierarchy:
+  - "nodes/%{::hostname}"
+  - "common"
+:yaml:
+  :datadir: /etc/hiera/data
+En este ejemplo, hiera buscará datos en archivos YAML ubicados en /etc/hiera/data. La jerarquía tiene dos niveles: nodes/hostname y common.
+Crear el directorio /etc/hiera/data/nodes y un archivo YAML para un nodo específico
+# cd /etc/hiera/data/nodes
+# nano mihost.example.com.yaml:
+users:
+  - usuario1
+  - usuario2
+También crear un archivo common.yaml en /etc/hiera/data para datos comunes:
+# cd /etc/hiera/data
+# nano common.yaml
+ntp_server: "ntp.example.com"
+$ hiera -c /etc/hiera/hiera.yaml users hostname=mihost.example.com (buscar el valor de users para un host específico)
+$ hiera -c /etc/hiera/hiera.yaml ntp_server (buscar el valor de ntp_server)
+
+
+highlight
+Herramienta para convertir código fuente a diferentes formatos con resaltado de sintaxis, tales como HTML, XHTML, RTF, LaTeX, TeX, SVG, XML.
+$ highlight --list-themes (listar temas disponibles)
+$ highlight -O html -i script.py -o script.html (convertir un archivo Python a HTML)
+$ highlight -O html -s molokai -l script.py -o script.html (usar tema específico)
+$ highlight -O html -l -i script.py -o script.html (con numeración de líneas)
+$ highlight -O html -s github -i script.py -o script.html (especificar tema de colores)
+$ highlight -O ansi script.py (generar salida para terminal con colores)
+$ highlight -O html -l -t 4 --doc-title "Mi Script Python" -i mi_script.py -o mi_script.html (generar HTML con título y numeración y sustituir tabulaciones con 4 espacios)
+$ highlight -A titulo script.py (generar salida ansi que es el formato por defecto con un titulo)
+$ highlight -O latex -i codigo.cpp -o codigo.tex (convertir a LaTeX)
+$ highlight -O latex -l -i codigo.cpp -o codigo.tex (con numeración de líneas)
+$ highlight -O rtf -i programa.java -o programa.rtf (generar RTF [Rich Text Format] para documentos de Word u otros procesadores)
+$ highlight -O svg -i script.js -o script.svg (generar imagen vectorial del código)
+$ highlight -O latex -l -s print -t 2 codigo.c -o codigo.tex (generar LaTeX con formato específico)
+
+
 hipstopgm
 [Netpbm]. Lee un archivo HIPS [Human Information Processing Laboratory] como entrada y produce una imagen PGM como salida. Si el archivo HIPS contiene más de una imagen se concatenará todas las imágenes verticalmente.
 $ hipstopgm archivo_de_hips
