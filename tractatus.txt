@@ -23414,6 +23414,26 @@ $ hexyl -d archivo1.bin archivo2.bin (comparar dos archivos)
 $ hexyl -n 64kB archivo.txt (solo se leen 64 bytes de la entrada. El argumento también puede incluir una unidad con prefijo decimal [kB, MB, etc.] o binario [kiB, MiB, etc.])
 
 
+hey
+Herramienta escrita en Go, que se utiliza para generar carga HTTP con el fin de realizar pruebas de rendimiento o benchmarking de servicios web. Sirve para evaluar cuántas peticiones por segundo puede manejar un servidor, simular múltiples usuarios simultáneos haciendo peticiones HTTP y probar cómo reacciona una API o página web bajo carga.
+$ hey -n 200 -c 20 https://example.com (número total de peticiones a realizar con hasta 20 de ellas ejecutándose al mismo tiempo y la URL objetivo)
+$ hey -n 100 -c 10 -m POST -H "Content-Type: application/json" -d '{"username":"test","password":"1234"}' https://example.com/api/login
+        -m POST --> especifica el método HTTP.
+        -H --> cabecera HTTP.
+        -d --> cuerpo del mensaje.
+$ hey -n 100 -c 10 -m PUT -H "Content-Type: application/json" -d '{"name":"new name"}' https://example.com/api/item/1 (cambiar el método a PUT)
+$ hey -n 50 -c 5 -H "Authorization: Bearer <token>" https://api.example.com/protected (añadir cabeceras de autorización)
+
+
+hfd-service
+[Human Feedback Device Service]. Servicio D-Bus del sistema para acceder a dispositivos de retroalimentación humana. El servicio de dispositivos de retroalimentación humana es un servicio activado por D-Bus que gestiona dispositivos como LED y vibradores en dispositivos móviles tales como teléfonos, tablets, etc..
+# systemctl status hfd-service (verificar su estado)
+$ dbus-send --system --dest=org.sailfishos.hfd --type=method_call /org/sailfishos/hfd org.sailfishos.hfd.Vibrator.Vibrate uint32:1000 (duración de la vibración. 1000 ms = 1 segundo)
+$ dbus-send --system --dest=org.sailfishos.hfd --type=method_call /org/sailfishos/hfd org.sailfishos.hfd.Led.SetPattern string:"notification" uint32:5000  (controlar un LED)
+$ dbus-monitor --system "interface=org.sailfishos.hfd" (ver mensajes de D-Bus)
+$ journalctl -u hfd-service -f (ver logs del servicio)
+
+
 hg
 [mercurial]. Mercurial es un potente programa de control de versiones para nuestros proyectos. Previamente crear en la carpeta personal, el archivo:
 $ nano .hgrc
