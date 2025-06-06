@@ -23461,6 +23461,29 @@ mkfs y fsck para sistemas de archivos HFS y HFS+ [desmontados]. Incluye las herr
 # mkfs.hfsplus -J -v My_Mac_Drive /dev/sdd1 (crear un volumen HFS+ con journaling y nombre "My_Mac_Drive")
 
 
+hfsutils
+Este paquete contiene varias utilidades para leer y escribir en medios con formato HFS [Hierarchical File System] de Macintosh, como disquetes, CD-ROM y discos duros. Incluye las herramientas hattrib, hcd, hcopy, hdel, hdir, hformat, hls, hmkdir, hmount, hpwd, hrename, hrmdir, humount y hvol
+$ hattrib -t TEXT -c BNHQ "Nuevo disco:Archivo.sea.hqx" (asigna el tipo TEXT y el creador BNHQ al archivo especificado en el volumen HFS)
+$ hcd "Carpeta de Documentos" (mueve el directorio de trabajo al especificado dentro del volumen HFS)
+$ hcopy archivo.txt "Desktop Folder" (copiar un archivo local al disco HFS)
+$ hcopy "Desktop Folder:Readme" . (copiar un archivo desde el disco HFS al sistema local)
+$ hdel "Desktop Folder:Readme" (borra el archivo "Readme" de la carpeta de escritorio del volumen HFS)
+$ hdir "Desktop Folder" (muestra detalles de los archivos, incluyendo tamaño, tipo y creador)
+$ hformat /dev/fd0 (formatear un disquete como HFS)
+$ hls "Desktop Folder" (lista archivos en un directorio HFS)
+$ hmkdir "Nuevos Documentos" (crea la carpeta en el directorio actual)
+$ hmount /dev/fd0 (monta el disquete HFS en `/dev/fd0` para usarlo con otras utilidades hfsutils)
+$ hpwd (devuelve la ruta actual dentro del volumen HFS)
+$ hrename "Desktop Folder:Viejo.txt" "Desktop Folder:Nuevo.txt" (renombra el archivo "Viejo.txt" a "Nuevo.txt")
+$ hrmdir "CarpetaVacia" (elimina la carpeta especificada si está vacía)
+$ humount (Desmonta el volumen HFS actual)
+$ hvol (muestra el nombre del volumen actual)
+1.-
+Crear una imagen HFS de 800K y formatearla
+$ dd if=/dev/zero of=disk.hfs bs=1k count=800
+$ hformat -l "Test Disk" disk.hfs
+
+
 hg
 [mercurial]. Mercurial es un potente programa de control de versiones para nuestros proyectos. Previamente crear en la carpeta personal, el archivo:
 $ nano .hgrc
