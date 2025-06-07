@@ -23559,9 +23559,11 @@ $ highlight -O latex -l -s print -t 2 codigo.c -o codigo.tex (generar LaTeX con 
 
 hipercontracer
 [High-Performance Connectivity Tracer ]. Herramienta utilizada para realizar pruebas de conectividad de red, específicamente pings y traceroutes, entre diferentes sitios y puede exportar los resultados a una base de datos SQL o no SQL. Inlcuye las herramientas addressinfogenerator, get-default-ips y tracedataimporter
-# hipercontracer -S 127.0.0.1 -D 142.251.37.163 -T --tracerouteinterval 10000 --tracerouteduration 1000 -v (dirección de origen, destino [google.es], realizar traceroute con intervalos de 10000 milisegundos y una duración de 1000 milisegundos con la máxima infromación)
-# hipercontracer -S 0.0.0.0,AF12 -D 142.251.37.163 -T --tracerouteinterval 10000 --tracerouteduration 1000 -v (specificar una clase de tráfico por nombre de PHB [BE, EF, AF11, AF12, AF13, AF21...])
-# hipercontracer -S 0.0.0.0 -D 142.251.37.163  --traceroute --ping --tracerouteduration 1000 --tracerouteinitialmaxttl 4 --traceroutefinalmaxttl 32 --tracerouteincrementmaxttl 4 --pinginterval 1000 --pingexpiration 7500 --pingttl 56 --resultsdirectory results
+# hipercontracer -U hipercontracer -S 0.0.0.0 -D 8.8.8.8 -P -v (usuario, origen, destino, lanzar ping y máxima información)
+# hipercontracer -S 127.0.0.1 -D 142.251.37.163 -T --tracerouteinterval 10000 --tracerouteduration 1000 -v (dirección de origen, destino [google.es], realizar traceroute con intervalos de 10000 milisegundos y una duración de 1000 milisegundos con la máxima información)
+# hipercontracer -S 0.0.0.0,AF12 -D 142.251.37.163 -T --tracerouteinterval 10000 --tracerouteduration 1000 -v (especificar una clase de tráfico por nombre de PHB [BE, EF, AF11, AF12, AF13, AF21...])
+# hipercontracer -S 0.0.0.0 -D 142.251.37.163  -T -P --tracerouteduration 1000 --tracerouteinitialmaxttl 4 --traceroutefinalmaxttl 32 --tracerouteincrementmaxttl 4 --pinginterval 1000 --pingexpiration 7500 --pingttl 56 --resultsdirectory results (guardando el resultado en el diectorio "results")
+Nota.- TTL [Time To Live - Tiempo de Vida]. Cantidad de "saltos" que un paquete rebota entre diferentes enrutadores o cuánto tiempo los datos en forma de paquete son válidos y están disponibles dentro de una red antes de que el enrutador los borre.
 
 
 hipstopgm
