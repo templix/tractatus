@@ -23594,6 +23594,22 @@ Para cambiar el tema, descargar un tema de tDiary desde http://www.tdiary.net/th
 # systemctl restart apache2 (reinicia el servidor web)
 
 
+hinawa-utils
+Utilidades para controlar unidades de audio y música en FireWire (IEEE1394). hinawa-utils son Herramientas para interactuar con dispositivos de audio y música a través de FireWire (IEEE1394) y contienen las siguientes herramientas: hinawa-bebob-parser, hinawa-config-rom-printer, hinawa-dg00x-cui, hinawa-dice-common-cui, hinawa-dice-extension-cui, hinawa-fireworks-cui, hinawa-focusrite-saffirepro-io-cui, hinawa-griffin-firewave-cui, hinawa-lacie-speakers-cui, hinawa-maudio-bebob-cui, hinawa-motu-common-cui, hinawa-oxfw-generic-cui, hinawa-tascam-fireone-cui, hinawa-tascam-fw-console-cui, hinawa-tascam-fw-rack-cui y hinawa-yamaha-terratec-cui.
+$ hinawa-bebob-parser /dev/fw1 (muestra detalles como modelos compatibles, capacidades de audio, formatos soportados, etc)
+$ hinawa-config-rom-printer /dev/fw1 (muestra información como vendor ID y Model ID)
+$ hinawa-dice-rtd-transaction /dev/fw1 read 0xffff00000000 4 (lee 4 bytes desde la dirección 0xffff00000000)
+$ hinawa-dice-rtd-transaction /dev/fw1 write 0xffff00000000 0x12345678 (escribe el valor 0x12345678 en la dirección especificada)
+$ hinawa-dice-parser /dev/fw1 (muestra detalles como número de canales de entrada/salida, formatos de audio soportados [PCM, MIDI] y configuración de clock)
+$ hinawa-fireface-rmh-command /dev/fw1 get-status (muestra el estado actual del dispositivo [sample rate, modo de clock, etc.])
+$ hinawa-fireface-rmh-parser /dev/fw1 (analiza la información de dispositivos RME FireFace)
+$ hinawa-fireworks-command /dev/fw1 reset (reinicia el dispositivo)
+$ hinawa-fireworks-parser /dev/fw1 (analiza dispositivos Echo AudioFire)
+$ hinawa-motu-command /dev/fw1 set-sample-rate 48000 (envía comandos a dispositivos **MOTU** [ej. MOTU 828/896])
+$ hinawa-motu-parser /dev/fw1 (analiza dispositivos MOTU)
+$ dmesg | grep firewire (asegurar que el kernel detecte el dispositivo)
+
+
 hipercontracer
 [High-Performance Connectivity Tracer]. Herramienta utilizada para realizar pruebas de conectividad de red, específicamente pings y traceroutes, entre diferentes sitios y puede exportar los resultados a una base de datos SQL o no SQL. Inlcuye las herramientas addressinfogenerator, get-default-ips y tracedataimporter
 # hipercontracer -U hipercontracer -S 0.0.0.0 -D 8.8.8.8 -P -v (usuario, origen, destino, lanzar ping y máxima información)
