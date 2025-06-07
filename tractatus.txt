@@ -23676,6 +23676,84 @@ write-proxy-v2 = on --> Usa el protocolo PROXY v2 para que el backend sepa la IP
 Ahora la aplicación está accesible en HTTPS a través del puerto 443, aunque internamente sigue trabajando en HTTP.
 
 
+hledger
+Herramienta de contabilidad que permite registrar y analizar transacciones financieras de manera sencilla y práctica para el uso diario. Funciona con archivos de texto plano, generalmente con extensión .journal, donde se define cuentas y transacciones en un formato específico. Existen las aplicaciones hledger-ui [interfaz de consola] y hledger-web [interfaz web]
+Ejemplo básico de un archivo finanzas.journal
+$ nano finanzas.journal
+2024-01-01 Salario
+    activos:banco:cuenta_corriente    +1000 €
+    ingresos:salario
+#
+2024-01-02 Supermercado
+    gastos:comida                     50 €
+    activos:banco:cuenta_corriente
+#
+2024-01-03 Alquiler
+    gastos:vivienda:alquiler          400 €
+    activos:banco:cuenta_corriente
+$ hledger -f finanzas.journal register (mostrar todas las transacciones)
+$ hledger -f finanzas.journal balance (mostrar el balance general)
+$ hledger -f finanzas.journal balance gastos (filtrar por cuenta, ej. solo gastos)
+$ hledger -f finanzas.journal register --monthly -p "2024-01" (ver transacciones de un mes específico)
+$ hledger -f finanzas.journal csv > transacciones.csv (exportar a CSV)
+$ hledger -f finanzas.journal income --tree (mostrar un resumen por categoría)
+
+
+hlins
+Herramienta para insertar enlaces de hipertexto en documentos HTML, utilizando una base de datos con entradas del formato "nombre = URL". Su principal característica es que no solo  permite reemplazar texto por una URL, sino que está diseñada para reconocer nombres de personas y convertirlos en enlaces a sus respectivas URLs, basándose en una base de datos predefinida.
+Crear la base de datos de nombres y URLs
+$ nano nombres.db
+Albert Einstein = https://es.wikipedia.org/wiki/Albert_Einstein
+Marie Curie = https://es.wikipedia.org/wiki/Marie_Curie
+Stephen Hawking = https://es.wikipedia.org/wiki/Stephen_Hawking
+Ada Lovelace = https://es.wikipedia.org/wiki/Ada_Lovelace
+Linus Torvalds = https://es.wikipedia.org/wiki/Linus_Torvalds
+Crea un archivo llamado con el siguiente contenido:
+$ nano documento.html
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>Grandes Científicos</title>
+        </head>
+        <body>
+            <h1>Grandes Figuras de la Ciencia</h1>
+            <p>
+                Uno de los científicos más influyentes fue Albert Einstein, famoso por su teoría de la relatividad.
+                Otra mente brillante fue Marie Curie, pionera en el campo de la radioactividad.
+                Más recientemente, Stephen Hawking nos asombró con sus teorías sobre los agujeros negros.
+                No podemos olvidar a Ada Lovelace, considerada la primera programadora de la historia.
+                Y en el mundo de la informática, Linus Torvalds es conocido por crear el kernel Linux.
+            </p>
+            <p>
+                A. Einstein y M. Curie son nombres importantes.
+            </p>
+        </body>
+        </html>
+$ hlins -d nombres.db documento.html > salida.html (ejecutar hlins)
+Visualizar el contenido del archivo y se debería ver algo similar a esto:
+$ nano salida.html
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>Grandes Científicos</title>
+        </head>
+        <body>
+            <h1>Grandes Figuras de la Ciencia</h1>
+            <p>
+                Uno de los científicos más influyentes fue <a href="https://es.wikipedia.org/wiki/Albert_Einstein">Albert Einstein</a>, famoso por su teoría de la relatividad.
+                Otra mente brillante fue <a href="https://es.wikipedia.org/wiki/Marie_Curie">Marie Curie</a>, pionera en el campo de la radioactividad.
+                Más recientemente, <a href="https://es.wikipedia.org/wiki/Stephen_Hawking">Stephen Hawking</a> nos asombró con sus teorías sobre los agujeros negros.
+                No podemos olvidar a <a href="https://es.wikipedia.org/wiki/Ada_Lovelace">Ada Lovelace</a>, considerada la primera programadora de la historia.
+                Y en el mundo de la informática, <a href="https://es.wikipedia.org/wiki/Linus_Torvalds">Linus Torvalds</a> es conocido por crear el kernel Linux.
+            </p>
+            <p>
+                <a href="https://es.wikipedia.org/wiki/Albert_Einstein">A. Einstein</a> y <a href="https://es.wikipedia.org/wiki/Marie_Curie">M. Curie</a> son nombres importantes.
+            </p>
+        </body>
+        </html>
+hlins reconoce no solo los nombres completos sino también las abreviaturas ["A. Einstein", "M. Curie"] y ha insertado los hipervínculos correspondientes.
+
+
 hodie
 Muestra la fecha en latín.
 $ hodie -n (En numeral)
