@@ -23769,6 +23769,26 @@ $ hlint src/ (revisa recursivamente todos los archivos .hs y .lhs en el director
 $ hlint . --report (generar un informe HTML)
 
 
+hnb
+[Hierarchical NoteBook]. Herramienta que permite organizar diversos tipos de datos de manera jerárquica. Es especialmente útil para tomar notas, gestionar listas de tareas, organizar ideas y más y exportarlos en varios formatos, incluyendo ASCII, HTML y XML.
+$ hnb (abrirá la interfaz en la terminal)
+Ejemplo Práctico
+Organizar una lista de tareas para un proyecto:
+$ hnd
+Presionar "Insert"` y escribir el nombre del proyecto, por ejemplo, "Proyecto X".
+Presionar "Insert" y añadir una casilla de verificación "[ ]" seguido del texto de la tarea
+        Proyecto X
+          [ ] Investigar requisitos
+          [ ] Diseñar arquitectura
+          [ ] Implementar módulo A
+          [ ] Implementar módulo B
+          [ ] Probar sistema
+A medida que se completan las tareas, navegar hasta las casillas de verificación y presionar la barra espaciadora para marcarlas como completadas.
+Presionar / para iniciar una búsqueda.
+Presionar "E" para abrir el menú de exportación.
+Nota.- El paquete está huerfano de mantenimiento y no es compatible con UTF-8.
+
+
 hodie
 Muestra la fecha en latín.
 $ hodie -n (En numeral)
