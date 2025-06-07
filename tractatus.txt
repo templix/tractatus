@@ -23557,8 +23557,45 @@ $ highlight -O svg -i script.js -o script.svg (generar imagen vectorial del cód
 $ highlight -O latex -l -s print -t 2 codigo.c -o codigo.tex (generar LaTeX con formato específico)
 
 
+hiki
+Es un clon de WikiWiki Web escrito en Ruby que permite configurar un servidor de wiki local o en un servidor web. Es una herramienta de colaboración que permite a los usuarios crear y editar páginas de manera sencilla y ofrece una sintaxis similar a la de los wikis originales, soporte para temas mediante CSS, funcionalidades extendidas a través de complementos [plugins], soporte para InterWiki, y categorización de páginas. Hiki no es compatible con Ruby a partir de la versión 3.3. El proyecto no parece estar activamente mantenido desde 2013.
+Configurar el servidor web
+Hiki funciona como un script CGI, por lo que se necesita un servidor web como Apache configurado para ejecutar scripts CGI.
+# a2enmod cgi (habilitar el módulo)
+Configurar Hiki:
+# mkdir /var/www/hiki (crear un directorio para los datos del wiki)
+# cp -r /usr/share/hiki/* /var/www/html/hiki/
+# chown -R www-data:www-data /var/www/html/hiki
+# nano /var/www/hiki/html/hikiconf.rb
+        @site_name = 'Mi Wiki'
+        @data_path = '/var/www/html/hiki/data'
+        @theme = 'hiki'
+        @charset = 'UTF-8'
+        @use_plugin = true
+Configurar Apache:
+# nano /etc/apache2/sites-available/hiki.conf
+<VirtualHost *:80>
+    ServerName wiki.ejemplo.com
+    DocumentRoot /var/www/html/hiki
+    <Directory /var/www/html/hiki>
+        Options +ExecCGI
+        AddHandler cgi-script .cgi
+        AllowOverride All
+        Require all granted
+    </Directory>
+</VirtualHost>
+a2ensite hiki (habilitar el sitio)
+systemctl restart apache2 (reiniciar apache)
+Acceder al wiki con el navegador http://localhost/hiki.cgi
+Para cambiar el tema, descargar un tema de tDiary desde http://www.tdiary.net/theme.rhtml y colocarlo en /var/www/html/hiki/theme
+# nano /var/www/hiki/html/hikiconf.rb
+   @theme = 'nombre_del_tema'
+   @theme_path = '/var/www/html/hiki/theme'
+# systemctl restart apache2 (reinicia el servidor web)
+
+
 hipercontracer
-[High-Performance Connectivity Tracer ]. Herramienta utilizada para realizar pruebas de conectividad de red, específicamente pings y traceroutes, entre diferentes sitios y puede exportar los resultados a una base de datos SQL o no SQL. Inlcuye las herramientas addressinfogenerator, get-default-ips y tracedataimporter
+[High-Performance Connectivity Tracer]. Herramienta utilizada para realizar pruebas de conectividad de red, específicamente pings y traceroutes, entre diferentes sitios y puede exportar los resultados a una base de datos SQL o no SQL. Inlcuye las herramientas addressinfogenerator, get-default-ips y tracedataimporter
 # hipercontracer -U hipercontracer -S 0.0.0.0 -D 8.8.8.8 -P -v (usuario, origen, destino, lanzar ping y máxima información)
 # hipercontracer -S 127.0.0.1 -D 142.251.37.163 -T --tracerouteinterval 10000 --tracerouteduration 1000 -v (dirección de origen, destino [google.es], realizar traceroute con intervalos de 10000 milisegundos y una duración de 1000 milisegundos con la máxima información)
 # hipercontracer -S 0.0.0.0,AF12 -D 142.251.37.163 -T --tracerouteinterval 10000 --tracerouteduration 1000 -v (especificar una clase de tráfico por nombre de PHB [BE, EF, AF11, AF12, AF13, AF21...])
