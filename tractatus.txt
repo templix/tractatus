@@ -23635,6 +23635,31 @@ histretch
 Traducción de archivos HINT binarios a archivos ASCII. La inversa de los que hace el comando hishrink [ver]
 
 
+hitch
+Proxy de terminación SSL/TLS. Su función principal es desencriptar el tráfico HTTPS antes de pasarlo a los servidores backend en HTTP plano [sin cifrar]. Hitch se coloca delante de un servidor web como Nginx, Apache, Varnish, etc. El cliente [el navegador], se conecta a Hitch usando HTTPS y Hitch termina la conexión TLS, y luego reenvía el tráfico desencriptado al servidor backend mediante HTTP.
+Configuración básica
+# nano /etc/hitch/hitch.conf
+        frontend = "[0.0.0.0]:443"
+        backend = "[127.0.0.1]:8080"
+        pem-file = "/etc/hitch/certs/mi_certificado.pem"
+frontend --> donde Hitch escucha [puerto 443 en todas las interfaces].
+backend --> servidor backend, en este caso un servidor HTTP en localhost:8080.
+pem-file --> es el archivo que contiene el certificado y clave privada.
+Nota.- El archivo .pem debe tener certificado y clave en el mismo archivo
+1.-
+Ejemplo de uso real
+Suponiendo que  se tiene una aplicación en Flask que escucha en localhost:5000. Para ofrecer HTTPS: Generar o conseguir un certificado SSL y guardar el certificado y la clave en el archivo .pem
+En el archivo de configuración:
+# nano /etc/hitch/hitch.conf
+        frontend = "[0.0.0.0]:443"
+        backend = "[127.0.0.1]:5000"
+        pem-file = "/etc/hitch/certs/flask_app.pem"
+        write-proxy-v2 = on
+write-proxy-v2 = on --> Usa el protocolo PROXY v2 para que el backend sepa la IP real del cliente.
+# systemctl restart hitch (reinicia el servicio)
+Ahora la aplicación está accesible en HTTPS a través del puerto 443, aunque internamente sigue trabajando en HTTP.
+
+
 hodie
 Muestra la fecha en latín.
 $ hodie -n (En numeral)
