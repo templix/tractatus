@@ -23754,6 +23754,21 @@ $ nano salida.html
 hlins reconoce no solo los nombres completos sino también las abreviaturas ["A. Einstein", "M. Curie"] y ha insertado los hipervínculos correspondientes.
 
 
+hlint
+Ofrece sugerencias para mejorar el código fuente Haskell ya sea directamente en la terminal o generar un informe HTML en color para revisión visual. Las sugerencias pueden ser: uso de funciones alternativas más concisas o eficientes, simplificación de expresiones, eliminación de redundancias, mejora de estilo y legibilidad, detección de posibles errores menores o malas prácticas...
+$ hlint MiArchivo.hs (analizará el archivo)
+Un ejemplo de salida podría ser:
+        MiArchivo.hs:10:1: Warning: Use concatMap
+        Found:
+            concat $ map f xs
+        Perhaps:
+            concatMap f xs
+Esto sugiere reemplazar "concat $ map f xs" por "concatMap f xs", que es más idiomático y eficiente.
+$ hlint MiArchivo.hs --ignore="Use concatMap" (ignorar una sugerencia concreta)
+$ hlint src/ (revisa recursivamente todos los archivos .hs y .lhs en el directorio src y subdirectorios)
+$ hlint . --report (generar un informe HTML)
+
+
 hodie
 Muestra la fecha en latín.
 $ hodie -n (En numeral)
