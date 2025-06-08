@@ -23870,6 +23870,20 @@ horizon_tempest_plugin.tests.scenario.test_create_instance ... SKIPPED
         FAIL --> Error (indica un problema en Horizon o su integración).
 
 
+horst
+Herramienta diseñada para escanear y analizar redes inalámbricas IEEE 802.11 [Wi-Fi] y procesar, en tiempo real, esta información para mostrar detalles relevantes sobre las redes, los clientes conectados y clientes intentando asociarse o realizando escaneos y el tráfico. Para usar horst, primero es asegurarse de que la interfaz inalámbrica pueda operar en modo monitor lo que requiere herramientas como airmon-ng [ver airmon].
+# horst -i wlan0mon (abrirá la interfaz interactiva, donde muestra una lista de redes detectadas, clientes, y estadísticas de tráfico)
+# horst -i wlan0mon -V stats ( muestra estadísticas detalladas por cada BSSID [punto de acceso] y por cliente)
+# horst -i wlan0mon -V essid (organiza la información por ESSID)
+# horst -i wlan0mon -V spectrum ( ofrece una representación visual de la actividad en los canales)
+# horst -i wlan0mon -C 6 (enfocar a un canal específico)
+# horst -i wlan0mon -e 00:11:22:33:44:55 (filtrar los paquetes para que solo se muestren aquellos que provienen de una dirección MAC específica)
+# horst -i wlan0mon -e AA:BB:CC:DD:EE:FF -e 11:22:33:44:55:66 (ver solo los paquetes de tu router y tu dispositivo)
+# horst -i wlan0mon -b 1000000 (si se está perdiendo paquetes bajo carga, aumentar el tamaño del búfer de recepción)
+# horst -i wlan0mon -o paquetes.log (registrar información sobre cada paquete recibido en un archivo)
+Nota.- Al terminar, detener el modo monitor.
+
+
 host
 Determina la ip de un registro DNS o, a partir de una ip, el nombre de registro
 $ host google.com
