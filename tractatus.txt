@@ -23989,6 +23989,17 @@ $ iw list (verificar que la tarjeta sea compatible. Puedes verificarlo con el mo
 $ $ iw dev wlan0 scan dump (elegir un canal Wi-Fi que no esté saturado para un mejor rendimiento)
 
 
+hostfiles
+Herramienta diseñada para gestionar múltiples conjuntos de archivos host. Los fragmentos de archivos host se almacenan en el directorio /etc/hostfiles/. Cada fragmento es un archivo que contiene entradas de hosts que pueden ser activadas o desactivadas. Cuando se activa un fragmento, hostfiles lee el contenido del archivo correspondiente en /etc/hostfiles/ y lo añade al archivo /etc/hosts. Cuando se desactiva un fragmento, hostfiles elimina las entradas correspondientes a ese fragmento del archivo /etc/hosts.
+Supongamos un fragmento con el siguiente contenido:
+# nano /etc/hostfiles/fragmento1
+        192.168.1.10 ejemplo1.com
+        192.168.1.11 ejemplo2.com
+# hostfiles activate fragmento1 (activar este fragmento y añadir sus entradas a /etc/hosts)
+# hostfiles deactivate fragmento1 (desactivar el fragmento1 y eliminar sus entradas de /etc/hosts)
+# hostfiles list (listar los fragmentos que están actualmente activados)
+
+
 hostid
 Muestra la identificación en hexadecimal del presente host.
 $ hostid
@@ -24039,6 +24050,12 @@ Herramienta para editar el archivo de hosts (por defecto /etc/hosts), puede agre
 $ hostsed add hostname (añadir un host en /etc/hosts)
 $ hostsed del hostname (suprimir un host de /etc/hosts. Con el mismo resultado puede usarse ademas de "del", "rm", delete y "remove")
 $ hostsed drop hostname (Eliminar líneas con IP o nombre de host especificado del archivo /etc/hosts)
+
+
+how-can-i-help
+El paquete se integra con APT para listar oportunidades de contribución a Debian con paquetes huérfanos [sin mantenedor asignado], errores etiquetados como "newcomer" [nuevos colaboradores], paquetes eliminados o próximos a ser eliminados para los paquetes instalados localmente, tras cada invocación de APT. También se puede invocar directamente y, a continuación, lista todas las oportunidades de contribución, no solo las nuevas.
+$ how-can-i-help (mostrará una lista de todos los paquetes instalados que presentan oportunidades de colaboración)
+$ how-can-i-help --old --show newcomer (mostrar errores etiquetados como "newcomer")
 
 
 howdoi
