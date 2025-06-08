@@ -23914,6 +23914,81 @@ host.conf
 **reorder on** (intenta reordenar las direcciones de host para que las direcciones locales [misma subred] se listen en primer lugar)
 
 
+hostapd
+[Host Access Point Daemon]. Software que convierte una tarjeta de red inalámbrica o incluso una tarjeta Ethernet, aunque su uso principal es Wi-Fi en un punto de acceso [AP]. Va más allá de las capacidades básicas de un controlador de kernel IEEE 802.11 al implementar características avanzadas de seguridad y autenticación lo que permite crear una red Wi-Fi con opciones de seguridad robustas como WPA2/WPA3, autenticación basada en RADIUS y soporta la generación y gestión dinámica de claves de cifrado para WEP, WPA/WPA2 (TKIP y CCMP) y WPA3 [CCMP/GCMP]
+Configuración básica para crear una red Wi-Fi personal y segura:
+# nano /etc/hostapd/hostapd.conf
+        # Interfaz de red inalámbrica
+        interface=wlan0
+        # Driver del controlador (se detecta automáticamente, pero se puede especificar)
+        # driver=nl80211
+        # driver=atheros
+        #
+        # Nombre de la red (SSID)
+        ssid=MiRedWiFiSegura
+        #
+        # Canal Wi-Fi (1-11 en 2.4GHz, más en 5GHz)
+        channel=6
+        #
+        # Modo de operación (a=IEEE 802.11a, b=IEEE 802.11b, g=IEEE 802.11g, ad=IEEE 802.11ad)
+        # Si la tarjeta soporta 802.11n, se puede dejar como "g" o especificar "n" si hostapd
+        # lo soporta específicamente con el driver
+        # Para 2.4 GHz, "g" es común.
+        hw_mode=g
+        #
+        # Protección de privacidad (opcional, ayuda en redes con dispositivos antiguos)
+        # ieee80211n=1 # Habilitar 802.11n si el hardware lo soporta
+        # wmm_enabled=1 # Habilitar Wi-Fi Multimedia
+        #
+        # WPA y autenticación (WPA2-Personal)
+        wpa=2
+        wpa_key_mgmt=WPA-PSK
+        rsn_pairwise=CCMP
+        wpa_passphrase=TuContraseñaSeguraAqui # ¡Cámbiala! Debe tener al menos 8 caracteres
+Configurar la interfaz de red con una dirección IP para la interfaz que será el punto de acceso. Puede hacerse con dhcp o de forma estática.
+Cpnfigurar la IP para DHCP:
+# nano /etc/dnsmasq.conf
+        interface=wlan0
+         dhcp-range=192.168.1.100,192.168.1.200,12h
+         # Esto asigna IPs del .100 al .200 con un lease de 12 horas
+Y luego configurar wlan0 con una IP estática;
+# ip addr add 192.168.1.1/24 dev wlan0
+# ip link set wlan0 up
+Habilitar el reenvío de paquetes [NAT/Masquerading] para compartir Internet:
+# sysctl -w net.ipv4.ip_forward=1
+# iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE # Cambia eth0 por tu interfaz de salida a Internet
+# iptables -A FORWARD -i eth0 -o wlan0 -m state --state RELATED,ESTABLISHED -j ACCEPT
+# iptables -A FORWARD -i wlan0 -o eth0 -j ACCEPT
+# Para guardar las reglas de iptables permanentemente, se necesita el paquete iptables-persistent
+# netfilter-persistent save
+# systemctl enable hostapd (para que se inicie en el arranque)
+# systemctl status hostapd (verificar el estado)
+Para controlar qué dispositivos pueden conectarse según sus direcciones MAC.
+# nano /etc/hostapd/hostapd.conf
+        interface=wlan0
+        ssid=MiRedMACFiltrada
+        channel=1
+        #
+        hw_mode=g
+        wpa=2
+        wpa_key_mgmt=WPA-PSK
+        rsn_pairwise=CCMP
+        wpa_passphrase=ContraseñaMAC
+        #
+        # Filtrado de MAC
+        macaddr_acl=1 # 0=deshabilitado, 1=permitir de la lista, 2=denegar de la lista
+        accept_mac_file=/etc/hostapd/mac_permitidas # Archivo con las MACs permitidas
+macaddr_acl=1 --> Que solo las direcciones MAC listadas en accept_mac_file podrán conectarse.
+macaddr_acl=2 --> Que las MACs listadas en deny_mac_file [se tiene que crear ese archivo] no podrán conectarse, y todas las demás sí.
+# nano /etc/hostapd/mac_permitidas
+        # 00:11:22:33:44:55
+        # AA:BB:CC:DD:EE:FF
+        ...
+# journalctl -f -u hostapd (ver los logs en tiempo real y depurar problemas)
+$ iw list (verificar que la tarjeta sea compatible. Puedes verificarlo con el modo AP)
+$ $ iw dev wlan0 scan dump (elegir un canal Wi-Fi que no esté saturado para un mejor rendimiento)
+
+
 hostid
 Muestra la identificación en hexadecimal del presente host.
 $ hostid
