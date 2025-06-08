@@ -23826,6 +23826,50 @@ Una vez instalado y arrancado el servicio, configurar el navegador para su uso e
 	$ kill -9 PID
 
 
+hopm
+[Hybrid Open Proxy Monitor]. Es un bot de monitorización de proxy abierto diseñado para monitorizar las conexiones a un servidor individual, especialmente utilizado en redes IRC. Su propósito principal es detectar y bloquear usuarios que se conectan desde proxies abiertos o vulnerables y escanear las direcciones IP de los usuarios que se conectan al IRC, buscando proxies HTTP, SOCKS4, SOCKS5, y WinGate mal configurados.
+$ hopm (ejecutarlo sin parámetros si el archivo de configuración por defecto es correcto)
+$ hopm -f /etc/hopm/hopm.conf (lanza el bot usando el archivo de configuración especificado)
+Ejemplo de archivo de configuración
+3 nano hopm.conf
+        general {
+            name = "MiServidorIRC";
+            description = "Monitor de proxies";
+            motd = "Bienvenido al escáner de proxies!";
+        }
+        #
+        scanner {
+            dnsbl = "dnsbl.proxybl.org";
+            max_read = 8192;
+            timeout = 30;
+        }
+        #
+        target {
+            ip = "127.0.0.1";
+            port = 6667;
+            password = "mi_clave";
+            myname = "ProxyScanBot";
+        }
+Este archivo configura el escáner para que actúe sobre conexiones entrantes al puerto 6667, típico de IRC, en 127.0.0.1.
+Nota.- El directorio de logs en /var/log/hopm/.
+
+
+horizon-tempest-plugin
+Es un conjunto de pruebas de integración que se ejecutan en un clúster de OpenStack en vivo para garantizar que Horizon, el dashboard de OpenStack, funcione correctamente en un entorno real.
+Configuración de Tempest para Horizon
+# nano /etc/tempest/tempest.conf
+        [dashboard]
+        dashboard_url = http://<IP_HORIZON>:80
+        login_url = http://<IP_HORIZON>:80/auth/login/
+$ tempest run --plugin horizon-tempest-plugin (ejecutar todas las pruebas del plugin)
+Al ejecutar las pruebas, se verá un resumen como:
+horizon_tempest_plugin.tests.scenario.test_login ... OK
+horizon_tempest_plugin.tests.scenario.test_create_instance ... SKIPPED
+        OK --> Prueba exitosa.
+        SKIPPED --> Prueba omitida (dependencias no cumplidas).
+        FAIL --> Error (indica un problema en Horizon o su integración).
+
+
 host
 Determina la ip de un registro DNS o, a partir de una ip, el nombre de registro
 $ host google.com
