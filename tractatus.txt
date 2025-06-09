@@ -24088,6 +24088,14 @@ Nota.- Tambien en preferible, si se instalan paquetes elpa para emacs desde los 
         (add-to-list 'load-path "/usr/share/emacs/site-lisp/")
 
 
+hoz
+Permite dividir [split] archivos grandes en partes más pequeñas y, posteriormente, volver a unirlos [paste]. Utiliza el mismo formato que el programa Hacha. ghoz es la versión gráfica.
+$ hoz -c 700M -o ~/partes video_vacaciones.mp4 (dividir el archivo en trozos de 700 MB y que se guarden en ~/partes)
+$ hoz -p video_vacaciones.mp4.0 (en el mismo directorio de los trozos, unir las piezas)
+Nota.- Solo se necesita especificar el nombre de la primera pieza, la que termina en .0 y hoz automáticamente buscará las piezas siguientes, .1, .2, etc. para reconstruir el archivo completo.
+$ hoz -v -p -f video_vacaciones.mp4.0 (fuerza la sobrescritura del archivo si ya existe y muestra una salida más detallada)
+
+
 hp-check
 [hplip]. Comprueba versiones, dependencia y permisos de HPLIP de la impresora HP. Crea un log en el directorio en el que se lanza con el nombre hp-check.log
 $ hp-check -g (en modo debug. -t en texto plano.)
