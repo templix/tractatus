@@ -24065,6 +24065,29 @@ $ howdoi comment bash
 $ howdoi redirect webpage
 
 
+howm
+[Hitori Otegaru Wiki Modoki en japonés significa algo así como “una wiki simple y personal”]. Es una herramienta para tomar notas en Emacs usando archivos de texto plano y permitiendo búsquedas, enlaces entre notas, listas de tareas, etc. No es un ejecutable independiente, sino un conjunto de archivos Lisp que se cargan dentro de Emacs.
+Configuración básica de howm en Emacs
+Agregar lo siguiente al archivo de configuración de emacs
+$ nano ~/.emacs.d/init.el
+        (add-to-list 'load-path "/usr/share/emacs/site-lisp/elpa-src/howm-1.4.8/")
+        (require 'howm)
+        (howm-mode t)
+        (setq howm-directory "~/.howm") ;; Carpeta donde se guardarán las notas
+        (setq howm-menu-file "menu.howm")
+        (setq howm-file-name-format "%d/%m/%Y-%H%M%S.howm")
+$ mkdir -p ~/.howm (crear el directorio)
+Una vez cargado howm, los comandos principales son:
+        M-x howm-menu --> Muestra el menú principal de Howm
+        M-x howm-create --> Crear una nueva nota
+        M-x howm-list-recent --> Ver notas recientes
+        M-x howm-list-all --> Ver todas las notas
+        M-x howm-search --> Buscar texto en las notas
+        M-x howm-reminder --> Ver recordatorios o tareas pendientes
+Nota.- Tambien en preferible, si se instalan paquetes elpa para emacs desde los repositorios de la distribución, añadir al archivo de configuración .init.el la linea:
+        (add-to-list 'load-path "/usr/share/emacs/site-lisp/")
+
+
 hp-check
 [hplip]. Comprueba versiones, dependencia y permisos de HPLIP de la impresora HP. Crea un log en el directorio en el que se lanza con el nombre hp-check.log
 $ hp-check -g (en modo debug. -t en texto plano.)
