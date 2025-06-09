@@ -24155,16 +24155,43 @@ $ hsetroot -alpha 150 imagen.jpg
 
 
 hstr
-Herramienta que mejora la búsqueda hacia atras [history], haciendo esta búsqueda mucho mas fácil que con el C-r convencional. Debemos entrar en source.list el repositorio:
-	deb https://www.mindforger.com/debian stretch main
-E incorporamos la key GPG:
-# wget -qO - https://www.mindforger.com/gpgpubkey.txt | sudo apt-key add -
-Recargamos e instalamos:
-# apt update
-# apt install hstr
-Uso:
-$ hstr rkhunter git (mostrará los comandos del historial con los argumentos especificados)
-$ hstr -s (ver la configuración por si se desea incorporar a ~/.bashrc. En caso afirmativo lanzar: $ hstr --show-configuration >> ~/.bashrc)
+[HiSTory seaRch]. Herramienta que mejora significativamente la experiencia de búsqueda en el historial de comandos de bash y zsh. Su objetivo es que la finalización sea más sencilla y eficiente que Ctrl+r. HSTR también puede administrar el historial de comandos, por ejemplo, puede eliminar comandos obsoletos o que contengan información confidencial o guardar sus comandos favoritos.
+Añadir estas líneas a ~/.bashrc o ~/.zshrc:
+$ hstr -s (ver la configuración por si se desea incorporar a ~/.bashrc. En caso afirmativo...)
+$ hstr --show-configuration >> ~/.bashrc
+Para incorporarlo de forma manual:
+$ nano ~/.bashrc
+        # Configuración de hstr
+        export HSTR_CONFIG=hicolor,case-sensitive,raw-history-view
+        alias hh=hstr                    # alias
+        # Vincular hstr a Ctrl+r
+        bind '"\C-r": "\C-a hstr -- \C-j"'
+        export HSTR_PROMPT="buscar> "
+hicolor --> colores resaltados
+case-sensitive --> búsqueda sensible a mayúsculas
+raw-history-view --> mostrar historial sin procesar
+$ source ~/.bashrc (recargar la configuración)
+$ hstr (entrar en el historial)
+Una vez dentro de hstr:
+        Escribir --> para filtrar comandos en tiempo real
+        Flechas --> navegar por los resultados
+        Enter --> ejecutar el comando seleccionado
+        Tab --> editar el comando antes de ejecutar
+        Ctrl+f --> añadir a favoritos
+        Del --> eliminar comando del historial
+        Ctrl+g --> salir
+$ hstr git
+$ hstr -f (ver solo comandos favoritos)
+$ hstr --kill-last-command (elimina el último comando)
+$ hstr --show-configuration (muestra configuración actual)
+Nota.- hstr muestra automáticamente estadísticas como: comandos más usados, ranking de frecuencia e historial organizado por tiempo.
+
+
+ht
+Este programa es un visor, editor y analizador de archivos de texto, binarios y, especialmente, ejecutables.
+$ hte -t archivo.bin (cargar archivo en modo editor de texto)
+$ hte -b archivo (cargar archivo en modo editor hexadecimal)
+$ hte -a archivo (intentar adivinar el tipo de archivo)
 
 
 htcacheclean
