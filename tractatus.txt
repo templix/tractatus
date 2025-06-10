@@ -24231,6 +24231,24 @@ Se usa para manipular los archivos de formato DBM que se usan para almacenar nom
 # htdbm -x /etc/apache2/.htdbm pepe (suprime al usuario "pepe"))
 
 
+htdig
+Sistema de búsqueda e indexación web completo para un dominio pequeño o una intranet. Incluye las aplicaciones htdb_dump, htdb_load, htdb_stat, htdig, htdig-pdfparser, htdump, htfuzzy, htload, htmerge, htnotify, htpurge, htstat y rundig.
+$ htdig -c /etc/htdig/htdig.conf -i -s (especifica el archivo de configuración, borra bases de datos antiguas e imprime estadísticas sobre el proceso de rastreo al finalizar)
+$ htdig -c /etc/htdig/my_site.conf -m my_urls.txt (solo indexa las URLs listadas en my_urls.txt, ignorando otras. Cada URL debe estar en una línea separada)
+$ htmerge -c /etc/htdig/htdig.conf -v (crea los índices de documentos y las bases de datos de palabras a partir de los archivos generados por htdig)
+$ htmerge -c /etc/htdig/htdig.conf -a -w (utiliza archivos de trabajo alternativos y evita que se cree la base de datos de palabras. -d evita que se cree el índice de documentos)
+$ htfuzzy -c /etc/htdig/htdig.conf (genera una base de datos de búsqueda difusa [fuzzy search])
+$ rundig -c /etc/htdig/htdig.conf (ejecutará htdig y luego htmerge utilizando la configuración especificada)
+$ htnotify (se ejecutado periódicamente (por ejemplo, mediante un cron job) para verificar campos y enviar las notificaciones según metainformación de los documentos HTML)
+$ htdb_dump -c /etc/htdig/htdig.conf document.db > document_dump.txt (volcará el contenido de la base de datos .db al .txt)
+$ htdb_load -c /etc/htdig/htdig.conf document.db < document_dump.txt (cargará los datos de .txt en la base de datos .db)
+$ htdb_stat -c /etc/htdig/htdig.conf document.db (mostrará estadísticas detalladas sobre la base de datos .db)
+$ htdump -c /etc/htdig/htdig.conf http://www.ejemplo.com/pagina.html (mostrará información indexada para http://www.ejemplo.com/pagina.html, como su título, descripción, enlaces, etc)
+$ htdump -c /etc/htdig/htdig.conf (listará todas las URLs que están actualmente en el índice)
+$ htpurge -c /etc/htdig/htdig.conf http://www.ejemplo.com/pagina_obsoleta.html (eliminará la página especificada de las bases de datos de búsqueda)
+$ htstat -c /etc/htdig/htdig.conf (mostrará un resumen del estado del índice)
+
+
 html
 Lenguaje de marcado predominante en la elaboración de páginas web.
 Las etiquetas básicas de HTML de obligada presencia en todo documento son:
