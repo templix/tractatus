@@ -24274,6 +24274,13 @@ Excepto algunas pocas etiquetas, la mayoría requieren ser cerradas con la misma
 Nota.- Los permisos de las carpetas que se muestran en localhost [/var/www/html] han de ser 755 y los ficheros 644.
 
 
+html2ps
+Conversor de HTML a PostScript
+$ html2ps archivo.html > salida.ps (convierte el archivo "archivo.html" a PostScript y guarda la salida en "salida.ps")
+$ html2ps -css -nomargins -landscape archivo.html > salida_con_opciones.ps (incluye estilos CSS, elimina los márgenes y genera el documento en landscape)
+$ html2ps http://www.example.com/index.html > salida_web.ps (conversión de una URL web a PostScript)
+
+
 html2text
 Lee documentos HTML en los archivos de entrada y los convierte en texto sin formato.
 $ html2text -o salida.txt archivo.html (especificando nombre del archivo de salida)
