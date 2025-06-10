@@ -24194,6 +24194,28 @@ $ hte -b archivo (cargar archivo en modo editor hexadecimal)
 $ hte -a archivo (intentar adivinar el tipo de archivo)
 
 
+htag
+Herramienta diseñada para agregar y gestionar eslóganes o signatures [firmas] que se pueden añadir automáticamente a correos electrónicos, publicaciones en foros, mensajes de Usenet o redes como FidoNet.
+$ nano ~/.slogans (crear un archivo de firmas)
+        ¡Vive y deja vivir!
+        %
+        La vida es un misterio, no un problema por resolver.
+        %
+        Enviado desde mi máquina Linux con amor.
+        %
+        "Si no está roto, no lo arregles." - Proverbio informático
+        %
+$ htag ~/.slogans (probar htag y obtener una firma aleatoria)
+Nota.- Cada vez que se ejecuta el comando, se selecciona una firma de forma aleatoria.
+$ htag -f ~/mis_frases.txt -n 2 (especifica el archivo de firmas cuando no es el por defecto y muestra la segunda firma del archvo)
+1.-
+Integrar con un cliente de correo, ejemplo con mutt
+$ nano ~/.muttrc
+Y añadir la línea
+        set signature="htag ~/.slogans|"
+El "|" al final indica que mutt debe ejecutar el comando htag y usar su salida como firma.
+
+
 htcacheclean
 Se usa para mantener el tamaño del almacenamiento de mod_disk_cache dentro de un cierto límite. Esta herramienta puede ejecutarse manualmente o en modo demonio. Cuando se ejecuta en modo daemon, actua en segundo plano y comprueba los directorios de la caché a intervalos regulares para ver si el contenido de la caché se ha eliminado.
 # htcacheclean -v -t -p/var/cache/apache2/mod_cache_disk -l1024M (de forma detallada [v], eliminando directorios vacios [t] del pDIR y con limite lLIMIT)
