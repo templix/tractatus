@@ -36514,11 +36514,12 @@ shell
 Termino usado para referirse al interprete de comandos. Los comandos, cuando se escriben en ficheros ejecutables se denominan shell-scripts o programación shell aunque, mirado estrictamente, no se sean un lenguje de programación. El termino shell hace referencia a un programa particular, el Bourne shell [sh] que es un standard unix y, aunque según las distros pueden incluir distintas shells con más características (bash, ash, csh, ksh, tcsh) todas son compatibles con el bourne shell.
 
 
-shellcheck
-Revisión y análisis de código de shell scripts. Realiza una comprobación de estándar POSIX detectando problemas con extensión de variables o variables sin usar, errores de sintaxis o en construccciones lógicas (bucles for/while o condicionales if), fragmentos de código mejorables o cualquier incidencia que pueda ocurrir en dicho código. Es posible que marque falsos positivos, por ejemplo si se usan variables de ambiente y no estan definidas. También está disponible en versión web e incluso como plugin para Atom, Sublime Text, vim o emacs [flycheck] .
-$ shellcheck script.sh (Forma básica. Si no muestra nada todo es perfecto)
-$ shellcheck -s bash -e SC1003,SC2035 script.sh (especificando el lenguaje y excluir 2 tipos de errores)
-Nota.- Los códigos de error generados pueden ser consultados en la Wiki del proyecto (<https://github.com/koalaman/shellcheck>) y por su código en <https://github.com/koalaman/shellcheck/wiki/Directive>
+shell2http
+Servidor HTTP diseñado para ejecutar comandos de shell.
+$ shell2http /ps "ps aux" (crea un servidor HTTP que ejecuta el comando "ps aux" cuando accedes a http://localhost:8080/ps)
+$ shell2http /info "uname -a" /uptime "uptime" /echo "echo Linux es un sistema genial" (con multiples parámetros)
+$ shell2http -port 9090 /date "TZ="Europe/Berlin" date" (por el puerto indicado y mostrando la fecha en Berlin)
+$ shell2http -basic-auth "user5:pass5" /ls "ls Documents" (pide nombre y usuario [user5:pass5] antes de mostrar la ejecución del comando)
 
 
 shell-genie
@@ -36538,6 +36539,13 @@ Produce varias preguntas:
         {'backend': 'free-genie', 'os': 'Linux', 'os_fullname': 'Debian GNU/Linux 12 (bookworm)', 'shell': 'bash', 'training-feedback': True}
 Nota.- Si elegimos la opción “openai-gpt3” tendremos que hacernos una cuenta en su página y recuperar la llave API para proporcionarla. Eligiendo la opción “free-genie” podemos disfrutar de la forma gratuita y participar o no a mejorar la herramienta.
 $ shell-genie ask "la pregunta que hacemos" (Para preguntar)
+
+
+shellcheck
+Revisión y análisis de código de shell scripts. Realiza una comprobación de estándar POSIX detectando problemas con extensión de variables o variables sin usar, errores de sintaxis o en construccciones lógicas (bucles for/while o condicionales if), fragmentos de código mejorables o cualquier incidencia que pueda ocurrir en dicho código. Es posible que marque falsos positivos, por ejemplo si se usan variables de ambiente y no estan definidas. También está disponible en versión web e incluso como plugin para Atom, Sublime Text, vim o emacs [flycheck] .
+$ shellcheck script.sh (Forma básica. Si no muestra nada todo es perfecto)
+$ shellcheck -s bash -e SC1003,SC2035 script.sh (especificando el lenguaje y excluir 2 tipos de errores)
+Nota.- Los códigos de error generados pueden ser consultados en la Wiki del proyecto (<https://github.com/koalaman/shellcheck>) y por su código en <https://github.com/koalaman/shellcheck/wiki/Directive>
 
 
 shelltestrunner
