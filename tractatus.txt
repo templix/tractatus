@@ -24310,6 +24310,26 @@ $ htmldoc -f documento.ps -t ps mi_documento.html (generar un archivo PostScript
 $ htmldoc -v -f documento.pdf --no-toc --no-title mi_documento.html (no generar índice ni página de título y mostrar información detallada)
 
 
+htmlmin
+Minificador de HTML que elimina espacios, saltos de línea, comentarios y otros caracteres innecesarios de un archivo de texto, generalmente para reducir su tamaño.
+$ htmlmin archivo.html > archivo.min.html (minifica el archivo.html y lo guarda)
+$ cat archivo.html | htmlmin > salida.html (lo mismo)
+$ htmlmin < archivo.html > salida.html (lo mismo)
+$ htmlmin --remove-comments --remove-empty-space archivo.html (elimina comentarios HTML y espacios vacíos innecesarios)
+Un ejemplo con un archivo HTML:
+        <!DOCTYPE html>
+        <html>
+          <head>
+            <title>Mi página</title>
+          </head>
+          <body>
+            <h1>Hola mundo</h1>
+          </body>
+        </html>
+Se puede minificar así:
+        <!DOCTYPE html><html><head><title>Mi página</title></head><body><h1>Hola mundo</h1></body></html>
+
+
 htop
 Muestra el consumo de CPU, RAM y SWAP y debajo de estos los diferentes procesos  organizados por defecto de mayor a menor consumo de CPU. Pulsando “u” podremos introducir el usuario a monitorizar y pulsando “k” e introduciendo el PID, mataremos el proceso.
 $ htop
