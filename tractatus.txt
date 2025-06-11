@@ -24295,6 +24295,21 @@ html-xml-utils
 Proporciona una serie de utilidades simples para manipular y convertir archivos HTML y XML de varias maneras. La suite consta de las siguientes herramientas: asc2xml (Convertir de UTF -8 a xml), xml2asc (Convertir de xml a UTF-8), hxaddid (agregar IDS a elementos seleccionados), hxcite (reemplazar las referencias bibliográficas por hipervínculos),  hxcite-mkbib (expandir las referencias y crear bibliografía), hxclean (aplicar heuristics para corregir un archivo HTML), hxcopy (copiar un archivo HTML mientras preserva los enlaces relativos), hxcount (contar elementos y atributos en archivos HTML o XML), hxextract (Extraer elementos seleccionados), hxincl (Expandir archivos HTML o XML), hxindex (crear un índice ordenado alfabéticamente), hxmkbib (Crear bibliografía a partir de una plantilla), hxmultitoc (crear una tabla de contenido para un conjunto de archivos HTML), hxname2id (mueva "id =" o "name =" de un elemento a sus padres), hxnormalize (imprimir un archivo HTML), hxnsxml (Convertir la salida de HXXMLN de nuevo a XML normal), hxnum (Encabezados de sección de números en un archivo HTML), hxpipe (Convertir XML a un formato más fácil de analizar con Perl o Awk), hxprintlinks (numnero de links y agregar tabla de URL al final de un archivo HTML), hxprune (eliminar los elementos marcados de un archivo HTML), hxref (Generar referencias cruzadas), hxselect (extraer elementos que coincidan con un selector CSS), hxtoc (insertar una tabla de contenido en un archivo HTML), hxuncdata (reemplazar las secciones de Cdata por otros caracteres), hxunent (Reemplazar carácteres predefinidas HTML a UTF-8), hxunpipe (convertir la salida de la tubería de regreso al formato XML), hxunxmlns (Reemplazar los "nombres globales" por los prefijos del espacio de nombres XML), hxwls (Enlaces de lista en un archivo HTML) y hxxmlns (Reemplazar los prefijos del espacio de nombres XML por "nombres globales")
 
 
+htmldoc
+Herramienta para generar documentación a partir de archivos HTML o Markdown, permitiéndo exportarla a diversos formatos como HTML, PostScript y PDF, con la capacidad de incluir tablas de contenido [índices] automáticas. No soporta: Hojas de estilo en cascada [CSS] de forma completa, cifrado de PDF más allá de RC4 de 128 bits, formularios PDF, tablas HTML complejas [solo HTML 3.2] ni unicode con formato de texto de derecha a izquierda [RTL] o emojis.
+$ htmldoc -f mi_documento.pdf mi_archivo.html (convertir archivo HTML a un PDF)
+$ htmldoc -f manual.pdf -t pdf chapter1.html chapter2.html introduction.html (convertir varios archivos HTML a un único PDF con tabla de contenido)
+$ htmldoc --webpage -f mi_web.pdf http://www.ejemplo.com/pagina_interesante.html (capturar una página web y convertirla a PDF)
+$ htmldoc -t html -d salida_html -outfile indice.html *.html (formato de salida como HTML, crea y guarda todos los htmls en el directorio salida_html, especifica el HTML que contendrá el índice de todos los htmls del directorio actual)
+$ htmldoc -f informe.pdf --left 2cm --right 2cm --top 2.5cm --bottom 2.5cm --header 'tL' --footer 't.' mi_informe.html
+        --left 2cm, --right 2cm, etc. --> Márgenes. Se puedes usar cm [centímetros], in [pulgadas], mm [milímetros] o pt [puntos]).
+        --footer 't.' --> Define el contenido del pie de página. t. significa "número de página a la derecha".
+        --header 'tL' --> Define el contenido del encabezado.
+Nota.- tL significa "título a la izquierda". Se puede usar códigos como t [título], c [capítulo], p [número de página], d [fecha], T [título del documento], etc., y combinarlos con L [izquierda], C [centro], R [derecha]).
+$ htmldoc -f documento.ps -t ps mi_documento.html (generar un archivo PostScript)
+$ htmldoc -v -f documento.pdf --no-toc --no-title mi_documento.html (no generar índice ni página de título y mostrar información detallada)
+
+
 htop
 Muestra el consumo de CPU, RAM y SWAP y debajo de estos los diferentes procesos  organizados por defecto de mayor a menor consumo de CPU. Pulsando “u” podremos introducir el usuario a monitorizar y pulsando “k” e introduciendo el PID, mataremos el proceso.
 $ htop
