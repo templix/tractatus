@@ -24118,6 +24118,9 @@ $ hp-levels -c -a '$' (en color y que use el simbolo "$" para el gráfico)
 
 hplip
 Soporte de HP para la mayoría de las impresoras de inyección de tinta HP y muchas LaserJets, tanto para escanear, enviar faxes y para el acceso a tarjetas fotográficas en la mayoría de las impresoras multifuncionales de la marca. Algunos de los comandos disponibles, a parte de algunos que estan directamente relacionados son: hp-align, hp-clean, hp-colorcal, hp-config_usb_printer, hp-firmware, hp-logcapture, hp-makeuri, hp-pkservice, hp-plugin, hp-probe, hp-query, hp-setup, hp-testpage y hp-timedate.
+# hp-setup -i (detecta automáticamente impresoras conectadas por USB y las configura en CUPS en modo interactivo)
+# hp-setup -i -b net (detecta automáticamente impresoras conectadas en red y las configura en CUPS)
+El asistente guiará paso a paso: Detecta la impresora, permite elegir el driver [PPD] adecuado e instalarlo automaticamente, instala plugins necesarios y registra la impresora en CUPS.
 
 
 hp-scan
@@ -27262,7 +27265,7 @@ $ nano /etc/printcap
 
 
 lpadmin
-Añadir impresoras.
+Añadir impresoras [ver lp y lpoptions].
 $ lpadmin -p nombre_local -v usb://dispositivo -m driver
 $ lpadmin -x nombre_local (eliminar una impresora)
 Opciones:
@@ -27278,12 +27281,12 @@ $ lpinfo -v (lista los dispositivos)
 
 lpoptions
 Información sobre las impresoras en cups
-$ lpoptions -d HP_psc_1100_series (Establecer la impresora predeterminada)
-$ lpoptions -p HP_psc_1100_series -l (Ver las opciones de la impresora predeterminada)
+$ lpoptions -d psc-1100-series (Establecer la impresora predeterminada)
+$ lpoptions -p psc-1100-series -l (Ver las opciones de la impresora predeterminada)
 
 
 lpstat
-Comprobar el estado de la impresora.
+Comprobar el estado de la impresora [ver lp].
 $ lpstat -t
 
 
