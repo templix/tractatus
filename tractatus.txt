@@ -27266,11 +27266,10 @@ $ nano /etc/printcap
 
 lpadmin
 Añadir impresoras [ver lp y lpoptions].
-$ lpadmin -p nombre_local -v usb://dispositivo -m driver
-$ lpadmin -x nombre_local (eliminar una impresora)
-Opciones:
--L (añadir una ubicación [-L "oficina"])
--D (añadir descripción [-D "impresora compartica"])
+# lpadmin -p nombre_local -v usb://dispositivo -m driver (nombre de la impresora, URI de dispositivo y driver)
+# lpadmin -p HP_LaserJet_1018 -E -v usb://HP/LaserJet%201018 -P /usr/share/ppd/HP/HP-LaserJet_1018.ppd.gz (-E habilita la impresora y -P ruta al archivo PPD)
+# lpadmin -x nombre_local (eliminar una impresora)
+Opciones: -L --> añadir una ubicación [-L "oficina"] y -D --> añadir descripción [-D "impresora compartica"].
 
 
 lpinfo
