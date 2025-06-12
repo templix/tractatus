@@ -24419,6 +24419,22 @@ Acceder al contenido de la URL como si fuera un archivo local (cat, ls, ...)
 $ fusermount -u ~/httpfs_mount (desmontar el sistema)
 
 
+httpie
+Es como un "navegador" de consola que permite enviar solicitudes HTTP [GET, POST, PUT, DELETE, etc.] y ver las respuestas de una manera clara y legible.  Es una alternativa moderna y amigable a curl [ver], que a menudo puede ser un poco más complicado de usar para tareas comunes.
+$ httpie example.com (mostrará la respuesta HTML de example.com con resaltado de sintaxis)
+$ httpie api.github.com/users/octocat (salida JSON con la información del usuario octocat)
+$ httpie httpbin.org/get search==httpie q==ejemplo (Esto enviará una solicitud GET con los parámetros especificados. Util para probar solicitudes HTTP)
+$ httpie POST httpbin.org/post name=Juan email=juan@example.com (enviará una solicitud POST)
+$ httpie -f POST httpbin.org/post username=user123 password=secure_password (enviar datos como un formulario HTML)
+$ httpie GET httpbin.org/headers User-Agent:MiApp Custom-Header:ValorPersonalizado (añadir encabezados)
+$ httpie -a usuario:contraseña httpbin.org/basic-auth/usuario/contraseña (autenticación básica)
+$ httpie POST httpbin.org/post avatar@~/pictures/me.jpg (subir un archivo)
+$ httpie -o imagen.png example.com/image.png (descargar un archivo en lugar de mostrar la salida)
+$ httpie -v httpbin.org/cookies/set?nombre=valor (ver las cookies enviadas y recibidas)
+$ httpie -h example.com (ver solo los encabezados de la respuesta)
+$ httpie -b example.com (ver solo el cuerpo de la respuesta)
+
+
 httping
 Ping específico para conexiones HTTP. Envía solicitudes a un nombre de host o una URL remota y muestra cuánto tiempo lleva conectarse, enviar una solicitud HTTP y recuperar la respuesta.
 $ httping -g http://www.tuxapuntes.com (forma básica)
