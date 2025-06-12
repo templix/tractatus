@@ -24621,26 +24621,30 @@ $ hwloc-gather-topology --dmi hwloc
 El resultado nos advierte: "No publique estos archivos en una lista pública o sitio web a menos que estamos seguros de que ninguna información sobre esta plataforma es confidencial." y del directorio en el que los encontraremos: /tmp/tmp.Mfv99mIHmB/hwloc/
 
 
-hwloc-info
-Muestra información sobre la topologia de la máquina, proporcionando una vista jerárquica de la máquina, nodos de memoria NUMA, enchufes, cachés compartidos, núcleos, etc.
-$ hwloc-info
+hwloc-nox
+[HardWare LOCality]. Utilidades para la vista jerárquica de la máquina que recopilan información sobre el hardware y sus atributos como los nodos de memoria NUMA [Non-Uniform Memory Access], los sockets, las cachés compartidas, los núcleos, el multihilo simultáneo, CPU, dispositivos PCI, información de caché y memoria. Incluye las herramientas hwloc-annotate, hwloc-bind, hwloc-calc, hwloc-compress-dir, hwloc-diff, hwloc-distrib, hwloc-gather-cpuid, hwloc-gather-topology, hwloc-info, hwloc-ls, hwloc-patch, hwloc-ps, lstopo, lstopo-no-graphics y hwloc-dump-hwdata
+$ hwloc-info (información detallada de objetos de hardware)
+$ hwloc-info Socket:0 (información del primer socket de CPU)
 $ hwloc-info package:all
 $ hwloc-info -p core:2
-
-
-hwloc-ls
-Mostrar la topología del sistema. Comando parecido a lstopo-no-graphics y lstopo y con las mismas opciones.
+$ hwloc-ls (muestra la topología del hardware)
 $ hwloc-ls -.ascii (muestra la topolocia en forma ascii)
 $ hwloc-ls -p (de forma lógica)
 $ hwloc-ls -c (de la cpu)
 $ hwloc-ls --whole-system (sin limitaciones de administración)
-
-
-hwloc-ps
-Listar los procesos que se esta ejecutando o los hilos que los enlazan.
-$ hwloc-ps -a (Todos)
+$ lstopo (parecido a la anterior)
+$ hwloc-calc core:0 (calcula máscaras de afinidad)
+$ hwloc-bind core:0 who (ejecuta un comando con afinidad a CPUs o memoria específica)
+$ hwloc-distrib 4 (distribuye tareas entre los núcleos disponibles)
+$ hwloc-gather-topology salida (recolecta la topología del sistema para análisis remoto. crea: salida.output, salida.tar.bz2 y salida.xml)
+$ sudo hwloc-gather-cpuid cpuid_output (recolecta información de CPUID y ña guarda en varios archivos en el directorio cpuid_output)
+$ hwloc-diff topo1.xml topo2.xml (compara dos topologías)
+$ hwloc-compress-dir salida.tar.bz2 salida/ (comprime directorios creados con hwloc-gather-*)
+$ hwloc-patch original.xml diff.xml patched.xml (aplica diferencias [diff] entre topologías)
+$ hwloc-annotate original.xml anotado.xml pu:0 tipo CustomData valor valor123 (agrega anotaciones a una topología)
+$ hwloc-ps -a (muestra procesos y su afinidad CPU/memoria)
 $ hwloc-ps -e (informa de los últimos procesadores donde se ejecutó un proceso o subproceso.)
-Nota.- El resultado puede estar desactualizado ya que el sistema operativo puede mover las tareas a otros procesadores en cualquier momento de acuerdo con el enlace.
+$ hwloc-dump-hwdata /var/run/hwloc/ (vuelca datos del sistema para luego analizarlos con otras herramientas)
 
 
 hxtools
