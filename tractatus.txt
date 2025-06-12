@@ -24348,22 +24348,6 @@ $ htpdate -d www.google.com (imprime la hora que recibiría, pero no cambia la h
 # htpdate -a -s www.google.com (ajusta el reloj cada cierto intervalo, por defecto 600 s = 10 minutos)
 
 
-httpcode
-Herramienta que permite consultar el significado de un código de estado HTTP.
-$ hc 404
-        Status code 404
-        Message: Not Found
-        Code explanation: Nothing matches the given URI
-Códigos HTTP más comunes que se puede consultar:
-        200 --> OK - Solicitud exitosa.
-        301 --> Moved Permanently - Redirección permanente.
-        400 --> Bad Request - Solicitud malformada.
-        403 --> Forbidden - Acceso denegado.
-        404 --> Not Found - Recurso no encontrado.
-        500 --> Internal Server Error - Error del servidor.
-        503 --> Service Unavailable - Servicio no disponible.
-
-
 httest
 Suite para realizar pruebas HTTP personalizadas. herramienta basada en scripts para probar y evaluar comparativamente aplicaciones web, servidores web, servidores proxy y navegadores web. httest puede emular clientes y servidores incluso en el mismo script de prueba. La emulación de servidores es una característica única, muy útil para probar servidores proxy, navegadores web y navegadores y clientes HTTP. Incluye las herramientas htntlm, htproxy y htremote.
 $ httest -T "GET / HTTP/1.1\r\nHost: example.com\r\n\r\n" (envía una solicitud GET a example.com y muestra la respuesta del servidor)
@@ -24382,6 +24366,22 @@ $ htproxy -P http://proxy.example.com:8080 -T "GET http://example.com HTTP/1.1\r
 $ htremote -H remote.example.com -u usuario -p contraseña -s prueba.hts (envía el archivo prueba.hts para que se ejecute en remote.example.com usando autenticación y muestra los resultados)
 
 
+httpcode
+Herramienta que permite consultar el significado de un código de estado HTTP.
+$ hc 404
+        Status code 404
+        Message: Not Found
+        Code explanation: Nothing matches the given URI
+Códigos HTTP más comunes que se puede consultar:
+        200 --> OK - Solicitud exitosa.
+        301 --> Moved Permanently - Redirección permanente.
+        400 --> Bad Request - Solicitud malformada.
+        403 --> Forbidden - Acceso denegado.
+        404 --> Not Found - Recurso no encontrado.
+        500 --> Internal Server Error - Error del servidor.
+        503 --> Service Unavailable - Servicio no disponible.
+
+
 httpd
 Servicio de protocolo de transferencia de apache
 $ httpd -l  (visualizar los módulos activos de apache)
@@ -24390,6 +24390,26 @@ $ httpd -t  (realiza un test de los archivos de configuración [Syntax OK])
 $ httpd -h  (muestra las opciones)
 $ httpd -v (versión de apache)
 $ httpd -V (versión y parámetros compilados)
+
+
+httpdirfs
+Programa que permite montar listados de directorios HTTP como un sistema de archivos virtual a través de la interfaz FUSE. Admite autenticación básica HTTP.
+$ httpdirfs http://example.com/files/ /mnt/httpfiles (montar un directorio HTTP en local)
+$ httpdirfs -u usuario -p contraseña http://example.com/protected/ /mnt/protected (montará el directorio protegido usando las credenciales proporcionadas)
+$ httpdirfs --cache --cache-location=/tmp/httpcache http://example.com/files/ /mnt/httpfiles (habilitar caché local y especificar la ubicación)
+$ httpdirfs -o allow_other --no-range-check https://www.example.com/mycrazypath/rocky-linux-8.iso /mnt/iso (permite acceso a otros usuarios, desactiva verificación y montar un solo archivo HTTP)
+
+
+httperf
+Herramienta de benchmarking para medir el rendimiento de servidores web. Permite generar diversas cargas de trabajo simulando múltiples clientes concurrentes y peticiones HTTP para evaluar cómo se comporta el servidor bajo estrés.
+$ httperf --hog localhost (prueba básica en la propia páquina)
+$ httperf --hog ejemplo.com --num-conns 100 (especifica el número total de conexiones HTTP que se van a establecer)
+$ httperf --hog ejemplo.com --rate 10 --num-conns 100 (intentará establecer 10 conexiones por segundo hasta llegar a un total de 100)
+$ httperf --hog ejemplo.com --rate 10 --num-conns 100 --timeout 5 (tiempo máximo en segundos que esperará por una respuesta del servidor antes de considerar la petición como un error)
+$ httperf --hog ejemplo.com --port 8080 --uri /productos/index.html --num-conns 50 (especifica la ruta del recurso que se va a solicitar en el servidor y el puerto)
+$ httperf --hog ejemplo.com --num-conns 100 --hog-conns --num-reqs 10 (abrirá 100 conexiones y realizará 10 peticiones a través de cada una de ellas)
+$ httperf --hog localhost --num-conns 1 --print-reply (imprime las respuestas del servidor pero no recomendado para pruebas de gran volumen ya que genera mucho output)
+$ httperf --hog ejemplo.com --num-conns 10 --add-header "X-Custom-Header: MyValue" (añadir una cabecera HTTP personalizada)
 
 
 httping
