@@ -24562,6 +24562,17 @@ $ hunspell -D (mostrar diccionarios disponibles)
 $ hunspell -l archivo.odt (imprime palabras mal escritas del fichero especificado)
 
 
+hunt
+Herramienta de red que permite interceptar y manipular conexiones TCP/IP y mostrar información sobre ellas y se utiliza comúnmente en pruebas de penetración [pentest] para evaluar la seguridad de las redes. Incluye las aplicaciones tpserv y transproxy.
+$ hunt -i eth0 (interceptará todas las conexiones salientes en la interfaz eth0)
+$ hunt -s -i eth0 (mostrará información detallada sobre el tráfico de red que se está supervisando)
+$ hunt -L (mostrará una lista de conexiones actuales)
+$ hunt -R <número de conexión> (Luego, se puede restablecer la que proceda)
+$ transproxy -i eth0 (lanzar un proxy transparente que se ejecuta en el kernel de Linux)
+$ tpserv -p 8080 -v (iniciar el proxy en el pñuerto 8080 y mostrar información)
+$ tpserv -p 8080 -d 192.168.1.100 -P 80 (redirigirá el tráfico desde el puerto 8080 a la dirección IP 192.168.1.100 en el puerto 80)
+
+
 hw-probe
 herramienta para comprobar la operatividad del hardware de la computadora y cargar el resultado en la base de datos de hardware de Linux.
 # hw-probe -all -upload
@@ -24580,6 +24591,16 @@ Ver fecha y hora de la BIOS
 # hwclock --set (establece el RTC [Real Time Clock ] según --date)
 # hwclock -a (ajusta la RTC para tener en cuenta la desviación sistemática)
 # hwclock -u (la escala de tiempo del RTC es UTC [Universal Time Coordinated])
+
+
+hwdata
+Contiene bases de datos de identificación de hardware utilizadas por diversas herramientas del sistema para reconocer y configurar dispositivos.
+Muchas herramientas usan los datos de hwdata para mostrar información:
+$ lspci -nn (muestra nombres de dispositivos PCI [usa /usr/share/hwdata/pci.ids])
+$ lsusb (muestra nombres de dispositivos USB [usa /usr/share/hwdata/usb.ids])
+$ grep "1d6b" /usr/share/hwdata/pci.ids (con la ID de un dispositivo buscarlo en pci.ids)
+$ grep "093a" /usr/share/hwdata/usb.ids (con la ID del mouse buscarlo en usb.ids)
+Nota.- En sistemas modernos, parte de su función ha sido reemplazada por pciutils, para PCI o usbutils para USB, que pueden descargar bases de datos actualizadas dinámicamente.
 
 
 hwinfo
