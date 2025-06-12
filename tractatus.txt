@@ -24412,6 +24412,13 @@ $ httperf --hog localhost --num-conns 1 --print-reply (imprime las respuestas de
 $ httperf --hog ejemplo.com --num-conns 10 --add-header "X-Custom-Header: MyValue" (añadir una cabecera HTTP personalizada)
 
 
+httpfs2
+Herramienta basada en FUSE [Filesystem in Userspace] que permite montar URLs HTTP o HTTPS como si fueran archivos en el sistema de archivos local.
+$ httpfs2 https://ejemplo.com/archivo.txt ~/httpfs_mount (montar la URL en un directorio existente)
+Acceder al contenido de la URL como si fuera un archivo local (cat, ls, ...)
+$ fusermount -u ~/httpfs_mount (desmontar el sistema)
+
+
 httping
 Ping específico para conexiones HTTP. Envía solicitudes a un nombre de host o una URL remota y muestra cuánto tiempo lleva conectarse, enviar una solicitud HTTP y recuperar la respuesta.
 $ httping -g http://www.tuxapuntes.com (forma básica)
