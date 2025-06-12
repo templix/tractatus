@@ -24532,6 +24532,16 @@ $ httrack sitio_escogido.com (Crea en el directorio personal una carpeta "sitio_
 $ httrack sitio_escogido.com -O /root/descargas/pelis (Especificando lugar de descarga)
 
 
+hub
+GitHub facilita el uso de Git con esta herramienta que encapsula Git para extenderlo con funciones adicionales que facilitan su uso de GitHub. Por ejemplo:
+$ hub clone rtomayko/tilt (se expande a: git clone git://github.com/rtomayko/tilt.git)
+$ nano .bashrc
+Entrar la linea:
+eval "$(hub alias -s)"
+$ source .bashrc (actualizar eñ archivo)
+A partir de ahora siempre que se escriba "git ...." se obtendrá todas las funciones de hub
+
+
 hunspell
 Corrector ortográfico y morfológico. Permite modificar, incluir y ver opciones de palabras.
 	$ echo 'El pinguino es hun systema mui bonitoo' | hunspell -A -d es_ES (Tradudir una frase. Los asteriscos son palabras correctas)
