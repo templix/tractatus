@@ -24452,6 +24452,80 @@ es una herramienta diseñada para mostrar y registrar el tráfico HTTP en una re
 # httpry -i eth0 | grep "GET" (captura el tráfico HTTP en la interfaz de red eth0 y filtra para mostrar solo las solicitudes GET)
 
 
+httptunnel
+Herramienta que permite crear un túnel bidireccional de datos encapsulado en solicitudes HTTP particularmente útil para usuarios detrás de cortafuegos restrictivos que solo permiten tráfico HTTP, generalmente en los puertos 80 o 443. Si se permite el acceso a la WWW a través de un proxy HTTP, es posible usar httptunnel y, por ejemplo, Telnet o PPP para conectarse a un ordenador fuera del cortafuegos. Cuenta con dos comandos hts [servidor de httptunnel, que escucha conexiones entrantes en un puerto, por defecto 8888 o un puerto permitido como 80 y redirige el tráfico al destino especificado] y htc [cliente de, que establece la conexión al servidor hts y redirige el tráfico local hacia el túnel]. No soporta HTTPS directamente, solo HTTP.
+# hts -F localhost:22 80 (redirige el tráfico al puerto SSH local y escucha en el puerto 80. Asegurarse de que no esté ocupado por apache)
+# htc -F 12345 myserver.com:80 (inicia el cliente htc para conectar al servidor hts y redirigir el tráfico local al túnel)
+Ahora se puede conectar al servidor SSH a través del túnel:
+$ ssh localhost -p 12345 (conecta el cliente SSH local al puerto 12345, que htc redirige a myserver.com:80, y hts lo pasa al puerto SSH [22] del servidor)
+1.-
+Túnel con proxy HTTP
+Si estás detrás de un proxy HTTP
+# hts -F localhost:22 80 (iniciar hts)
+En el cliente iniciar htc especificando el proxy:
+$ htc -P proxy.company.com:8080 -F 12345 myserver.com:80
+        -P proxy.company.com:8080 --> Especifica el proxy HTTP.
+        -F 12345 --> Puerto local para las conexiones.
+        myserver.com:80 --> Servidor `hts`.
+$ ssh localhost -p 12345 (conexión SSH)
+2.-
+Túnel con autenticación en el proxy
+Si el proxy requiere autenticación [usuario:contraseña]:
+En el servidor:
+# hts -F localhost:22 80
+En el cliente:
+$ htc -P proxy.company.com:8080 -A usuario:contraseña -F 12345 myserver.com:80
+$ ssh localhost -p 12345 (conexión SSH)
+3.-
+Túnel para Telnet
+Para usar httptunnel con Telnet en lugar de SSH, el proceso es similar. Supongamos que el servidor Telnet está en myserver.com:23.
+En el servidor:
+# hts -F localhost:23 80
+En el cliente:
+$ htc -F 12345 myserver.com:80
+$ telnet localhost 12345 (conexión Telnet)
+htc -F 12345 myserver.com:80 -D5 (habilitar la salida de depuración si el túnel no funciona. Los niveles van de 0 [sin mensajes] a 5 [muy detallado])
+Verificar que los puertos estén libres y si no, elegir otros:
+# ss -lap | grep ":80" (para el servidor)
+# ss -lap | grep ":12345" (para el cliente)
+4.-
+Configuración como servicio en el servidor para que hts se ejecute automáticamente al iniciar el sistema:
+# nano /etc/init.d/httptunnel
+        #!/bin/sh
+        ### BEGIN INIT INFO
+        # Provides: httptunnel
+        # Required-Start: $syslog $remote_fs $network
+        # Required-Stop: $syslog $remote_fs $network
+        # Default-Start: 2 3 4 5
+        # Default-Stop: 0 1 6
+        # Short-Description: Start httptunnel as daemon
+        ### END INIT INFO
+        #
+        LOGFILE="/var/log/hts_server.log"
+        DATE=`date +%d/%m/%Y-%Hh%Mm%Ss`
+        #
+        case "$1" in
+          start)
+            echo "$DATE : Starting HTTP-Tunnel Server" >> $LOGFILE
+            hts -F localhost:22 10000 &
+            ;;
+          stop)
+            killall hts
+            echo "$DATE : Stopping HTTP-Tunnel Server" >> $LOGFILE
+            ;;
+          restart)
+            $0 stop
+            $0 start
+            ;;
+          *)
+            echo "Usage: $0 { start | stop | restart }"
+            ;;
+        esac
+        exit 0
+# chmod 755 /etc/init.d/httptunnel (hacer el script ejecutable)
+# update-rc.d httptunnel defaults (añádirlo al inicio del sistema)
+
+
 httrack
 [WebHTTrack]. Crea en local una copia navegable de una web que puede visualizarse con un navegador sin necesidad de conexión a internet.
 $ httrack sitio_escogido.com (Crea en el directorio personal una carpeta "sitio_escogido.com" con todos loa datos descargados del sitio original)
