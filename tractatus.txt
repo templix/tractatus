@@ -24443,6 +24443,15 @@ $ httping -h localhost -p 80 (ping a localhost usando el puerto 80)
 $ httping -g http://localhost/ -U username -P password (usando autentificación)
 
 
+httpry
+es una herramienta diseñada para mostrar y registrar el tráfico HTTP en una red. Su principal función es mostrar y guardar las solicitudes y respuestas HTTP para su posterior análisis.
+# httpry -i eth0 (captura el tráfico HTTP en la interfaz de red eth0 y lo muestra en la terminal)
+# httpry -i eth0 -o captured_traffic.log (captura el tráfico HTTP en la interfaz de red eth0 y lo guarda en el archivo especificado)
+# httpry -r captured_traffic.log (lee y muestra el tráfico HTTP previamente capturado y guardado en el archivo captured_traffic.log)
+# httpry -i eth0 -o captured_traffic.log -q (capturar tráfico en modo silencioso)
+# httpry -i eth0 | grep "GET" (captura el tráfico HTTP en la interfaz de red eth0 y filtra para mostrar solo las solicitudes GET)
+
+
 httrack
 [WebHTTrack]. Crea en local una copia navegable de una web que puede visualizarse con un navegador sin necesidad de conexión a internet.
 $ httrack sitio_escogido.com (Crea en el directorio personal una carpeta "sitio_escogido.com" con todos loa datos descargados del sitio original)
