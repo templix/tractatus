@@ -24686,6 +24686,19 @@ Se utiliza para crackear los sistemas de login de diferentes servicios como HTTP
 # hydra 192.168.1.8 ftp -s 21 -l juan -P wordlist.txt (Una ip el puerto 21 del usuario "juan" y probando las contraseñas de un archivo de texto a una por linea)
 
 
+hyperfine
+Herramienta para medir y comparar el tiempo de ejecución de comandos de shell [benchmarking] desarrollada en Rust y que ofrece las siguientes características: Análisis estadístico en múltiples ejecuciones, compatibilidad con comandos de shell arbitrarios, ejecuciones de calentamiento antes del benchmark real, se pueden configurar comandos de borrado de caché antes de cada ejecución temporal, detección estadística de valores atípicos para detectar interferencias de otros programas y efectos de caché y exportación de resultados a varios formatos: CSV, JSON, Markdown, ASCII.
+$ hyperfine 'sleep 1' (ejecuta el comando sleep 1 varias veces, por defecto, al menos 10 y muestra estadísticas del tiempo de ejecución)
+$ hyperfine 'sleep 1' 'sleep 0.5' (compara el tiempo de ejecución de ambos comandos y lo muestra en una tabla)
+$ hyperfine --min-runs 7 'ls -l' (ejecuta el comando al menos 7 veces)
+$ hyperfine --warmup 5 'grep TODO *.txt' (realiza 5 ejecuciones de calentamiento antes de medir, útil para comandos afectados por cachés de disco)
+$ hyperfine --prepare 'make clean' 'make' (ejecuta "make clean" antes de cada ejecución de "make", asegurando que cada medición parta de un estado limpio)
+$ hyperfine --parameter-scan num_threads 1 8 'make -j {num_threads}' (ejecuta benchmarks de make -j 1 hasta make -j 8 para comparar el rendimiento con diferentes números de hilos)
+$ hyperfine --export-json resultados.json 'sleep 1' (guarda los resultados del benchmark en formato JSON)
+$ hyperfine --export-markdown resultados.md 'sleep 1' (guarda los resultados del benchmark en formato Markdown)
+$ hyperfine --prepare 'sync; echo 3 | sudo tee /proc/sys/vm/drop_caches' 'grep -R TODO *' (limpia la caché de disco antes de cada ejecución para medir el rendimiento en con caché fría)
+
+
 i2p
 El Proyecto Internet Invisible es una capa de red privada, anónima, descentralizada totalmente encriptada y construida usando Java con principios similares a Tor, pero que fue diseñada desde cero como una red oscura autónoma. Protege la actividad y localización y sin problemas de que rastreen o recopilen datos. I2P oculta el servidor al usuario y el usuario al servidor. Todo el tráfico I2P es interno a la red I2P. El tráfico dentro de I2P no interactúa directamente con Internet. Es una capa superior a Internet. Utiliza túneles unidireccionales encriptados entre usted y sus pares. Nadie puede ver de dónde viene el tráfico, a dónde va o cuál es su contenido. Además, I2P ofrece resistencia al reconocimiento de patrones y al bloqueo por parte de los censores.
 
