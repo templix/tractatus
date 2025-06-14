@@ -24707,6 +24707,13 @@ i2p
 El Proyecto Internet Invisible es una capa de red privada, anónima, descentralizada totalmente encriptada y construida usando Java con principios similares a Tor, pero que fue diseñada desde cero como una red oscura autónoma. Protege la actividad y localización y sin problemas de que rastreen o recopilen datos. I2P oculta el servidor al usuario y el usuario al servidor. Todo el tráfico I2P es interno a la red I2P. El tráfico dentro de I2P no interactúa directamente con Internet. Es una capa superior a Internet. Utiliza túneles unidireccionales encriptados entre usted y sus pares. Nadie puede ver de dónde viene el tráfico, a dónde va o cuál es su contenido. Además, I2P ofrece resistencia al reconocimiento de patrones y al bloqueo por parte de los censores.
 
 
+i2util-tools
+Herramienta que proporciona utilidades auxiliares que son utilizadas por otras herramientas relacionadas con la medición y gestión del rendimiento de redes. Incluye las herramientas aespasswd y pfstore
+$ aespasswd -f keys.txt juan (generará una clave cifrada para el usuario juan y lo almacenará en el archivo .txt que tiene que existir)
+$ pfstore -f keys.txt -n juan (pedira contraseña y almecenara nombre usuario y clave cifrada en el .txt que si no existe lo creará))
+Nota.- i2util-tools proporciona herramientas principalmente diseñadas para ser usadas junto con otras herramientas más grandes de Internet2 [bwctl, owamp, perfsonar]. Por sí solas no hacen mucho, pero son fundamentales cuando trabajas en monitoreo de redes académicas o de alto rendimiento.
+
+
 i7z
 Herramienta que muestra datos en tiempo real sobre cada core en los procesadores Intel Core i3, i5 o i7.
 # i7z
