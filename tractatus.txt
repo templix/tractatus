@@ -24739,6 +24739,21 @@ Herramienta que convierte ficheros de imagen de CD, DVD, etc a formato iso ISO96
 $ iat imagen.bin imagen.iso
 
 
+ibacm
+[InfiniBand Address and Connection Manager]. Implementa y proporciona un marco para servicios de resolución de nombres, direcciones y rutas sobre InfiniBand. Su objetivo es abordar problemas de escalabilidad en la configuración de la conexión al ejecutar aplicaciones MPI en clústeres grandes. InfiniBand [IB] es un estándar de comunicaciones de redes informáticas utilizado en informática que ofrece un alto rendimiento y una latencia muy baja. Se utiliza para la interconexión de datos entre ordenadores y dentro de ellos.
+# systemctl start ibacm (iniciar el servicio que normalmente se ejecuta como demonio)
+# ibacm (otra forma de lanzar el demonio que escucha en el socket Unix /var/run/ibacm.sock)
+El archivo de configuración básico:
+# nano /etc/rdma/ibacm_opts.cfg
+        interfaces=ib0
+        provider=verbs
+        log_file=/var/log/ibacm.log
+Interfaces de red a usar [interfaces], proveedores RDMA a usar [provider], ruta de logs
+Nota.- Las aplicaciones no invocan ibacm directamente. Lo usan indirectamente a través de aplicaciones que empleen RDMA como Open MPI, Intel MPI, etc. Tambien se puede forzar eñ uso del servicio activando la variable de entorno:
+$ export IBACM_ENABLE=1
+$ lsof -U | grep ibacm (verificar si el servicio está activo)
+
+
 ibam
 Monitor de carga de la bateria
 $ ibam -a
