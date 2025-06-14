@@ -24750,6 +24750,16 @@ $ ./ibmonitor
 $ ./ibmonitor --bytes --max --avg --data (Los valores de salida en KBytes/seg, los máximos por interfaz y datos transferidos)
 
 
+ibsim-utils
+Herramientas para simular una red InfiniBand, útil para probar configuraciones y diagnósticos sin necesidad de hardware físico.
+$ ibsim -n my_ib_network -s 0 (crea una simulación llamada my_ib_network y escucha en el puerto predeterminado)
+$ ibssendtopo -f topology.dot -n my_ib_network (carga la topología descrita en .dot en la simulación my_ib_network)
+$ ibnodes -l (muestra los nodos de la red simulada)
+$ ibdiagnet --simulate -n my_ib_network (verifica la conectividad y configuración de la subred simulada)
+$ ibnetdiscover -s -n my_ib_network (genera un mapa de la topología simulada)
+$ opensm -F /etc/opensm/opensm.conf -s test_ib (probar con OpenSM)
+
+
 ibus
 Utilidad en línea de comandos que puede reiniciar o salir de ibus-daemon, obtener o configurar el motor ibus actual o enumerar los motores ibus.
 $ ibus engine (obtiene el motor ibus)
@@ -24759,6 +24769,26 @@ $ ibus start (arrancar el daemon)
 $ ibus exit (salir de ibus daemon)
 $ ibus address (muesttra la dirección D-bus del daemon ibus)
 $ ibus reset-config (restablece los valores de la configuración)
+
+
+ibutils
+Conjunto de herramientas de diagnóstico y análisis que permiten inspeccionar y depurar el estado de la topología InfiniBand, conexiones, rutas, errores, etc.  Incluye las herramientas ibdiagnet, ibdiagpath, ibdiagui, ibdmchk, ibdmsh, ibdmtr, ibis, ibnlparse y ibtopodiff.
+$ ibdiagnet -r (recorre toda la topología y genera reportes detallados sovre errores, links caídos, puertos inactivos, conflictos de GUIDs, etc)
+$ ibdiagnet -o /tmp/diag (diagnosticar la red y obtener topología)
+$ ibdiagpath -s <src_guid> -d <dst_guid> (muestra las rutas utilizadas en la red para ir de un nodo a otro)
+$ ibdiagui (visualización gráfica de la topología)
+$ ibdmchk -t file.topo (compara una topología esperada con la real)
+$ ibdmsh (interfaz de shell para manipulación de datos de topología [ejecutar comandos] usado principalmente por scripts)
+$ ibtopodiff old.topo new.topo (compara dos salidas de ibdiagnet o archivos .topo)
+
+
+ical2html
+Crear una tabla HTML a partir de datos de iCalendar [formato .ics]. ical2html toma un archivo iCalendar y genera un archivo HTML que muestra uno o más meses en forma de tablas. Este paquete contiene las siguientes utilidades de línea de comandos:
+$ ical2html archivo.ics > calendario.html (toma un archivo .ics y genera un archivo HTML con la visualización de los eventos en tablas mensuales)
+$ icalfilter '/>-1m/' archivo.ics > filtrado.ics (eliminar eventos antiguos de más de un mes)
+$ icalfilter '/=+0w/;:expand;/=+0w/t' archivo.ics (filtra y muestra solo los eventos de la semana en curso)
+$ icalfilter -e 's/SUMMARY/Busy/;/DTSTART|DTEND|SUMMARY/f' archivo.ics > ocupado.ics (reemplaza el resumen de cada evento por "Busy" y deja solo los campos de inicio, fin y resumen)
+$ icalmerge archivo1.ics archivo2.ics > combinado.ics (genera un nuevo archivo .ics con todos los eventos de ambos archivos, eliminando duplicados según la fecha más reciente)
 
 
 icdiff
