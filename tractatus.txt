@@ -24719,6 +24719,21 @@ Herramienta que muestra datos en tiempo real sobre cada core en los procesadores
 # i7z
 
 
+i8kutils
+Es una colección de utilidades para controlar los ventiladores de los portátiles Dell. Incluye programas para encender, apagar y modificar el estado y velocidad los ventiladores, leer su estado, la temperatura de la CPU y la versión del BIOS.
+$ i8kctl (mostrar toda la información disponible)
+$ i8kctl temp (consultar la temperatura de la CPU)
+$ i8kctl fan (ver el estado de los ventiladores, primer número: estado del ventilador izquierdo, el segundo del derecho [0=apagado, 1=baja velocidad, 2=alta velocidad])
+$ i8kctl fan 2 - (poner el ventilador izquierdo en alta velocidad y dejar el derecho sin cambios)
+$ i8kctl fan - 2 (poner el ventilador derecho en alta velocidad y dejar el izquierdo sin cambios)
+$ i8kctl fan 1 1 (poner ambos ventiladores en baja velocidad)
+$ i8kctl fan 0 0 (apagar ambos ventiladores, no recomendado)
+$ i8kctl bios (consultar versión del BIOS)
+$ i8kctl id (ID de máquina)
+$ i8kctl speed (velocidades de los ventiladores en RPM)
+Nota.- Con el demonio i8kmon corriendo, cualquier cambio manual con i8kctl fan será sobrescrito automáticamente por el demonio según la temperatura del sistema. El comando también puede usarse como i8kfan, que es equivalente a i8kctl fan.
+
+
 iat
 Herramienta que convierte ficheros de imagen de CD, DVD, etc a formato iso ISO9660. Puede convertir a ISO desde los siguientes formatos: BIN, MDF, PDI, CDI, NRG y B5I.
 $ iat imagen.bin imagen.iso
