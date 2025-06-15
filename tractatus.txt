@@ -25960,6 +25960,37 @@ Muestra la distro instalada.
 $ cat /etc/issue.net
 
 
+istgt
+Es un demonio de destino iSCSI [Internet Small Computer Systems Interface] para sistemas operativos tipo Unix que se ejecuta como proceso en espacio de usuario, no en el núcleo del sistema operativo. istgt es el protocolo usado comúnmente para controlar discos duros y otros dispositivos de almacenamiento a través de una red IP, como Ethernet. Es una forma de implementar almacenamiento en red [SAN, Storage Area Network] usando tecnología estándar de red. En iSCSI hay dos roles principales: Iniciador iSCSI [iSCSI initiator] es el cliente. Es el sistema que se conecta al almacenamiento remoto como si fuera un disco local y Destino iSCSI [iSCSI target], el servidor. Es el sistema que expone su almacenamiento para ser usado remotamente por un iniciador.
+Ejemplo de uso práctico: Configurar un destino iSCSI con istgt en un servidor con un disco /dev/sdb que se quiere compartir por iSCSI para que otro equipo lo use remotamente.
+# nano /etc/istgt/istgt.conf
+[Global]
+  NodeBase "iqn.2025-06.com.ejemplo:servidor"
+  PidFile "/var/run/istgt.pid"
+  AuthFile "/etc/istgt/auth.conf"
+  MediaDirectory "/var/istgt"
+  LogFacility "local7"
+[UnitControl]
+  UnitName "ctl"
+  AuthMethod CHAP
+  Portal "127.0.0.1:3261"
+Ejemplo de entrada:
+# nano /etc/istgt/istgttarget.conf
+[LogicalUnit1]
+  TargetName "iqn.2025-06.com.ejemplo:disco1"
+  Mapping PortalGroup1 InitiatorGroup1
+  AuthMethod CHAP
+  UseDigest Auto
+  ReadOnly No
+  UnitType Disk
+  LUN0 Storage /dev/sdb Auto
+# systemctl enable istgt (habilitar servicio al arranque)
+Desde otro equipo, el cliente, se puede conectar.
+# iscsiadm -m discovery -t sendtargets -p IP_DEL_SERVIDOR
+# iscsiadm -m node --login
+Después de conectarse el cliente se verá el disco remoto como si fuera un disco local, porejemplo /dev/sdc.
+
+
 isympy
 Es un shell de Python para SymPy. Es solo un shell python normal [ipython shell si está instalado el paquete ipython]. Para salir: exit()
 $ isympy -p no -c python (iniciar la shell sin decoración extra)
