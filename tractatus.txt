@@ -26092,6 +26092,23 @@ Cuando está en ejecución, las teclas de control son:
 # itop -n 10 (Sólo muestra 10 procesos)
 
 
+its-playback-time
+[It's PlayBack Time]. Herramienta diseñada para reproducir grabaciones de terminal creadas con ttyrec [ver] y que permite avanzar y retroceder con precisión.
+Para usar ipbt, primero se necesita una grabación de ttyrec:
+$ ttyrec (empieza la grabación que se guarda con el nombre ttryrecord y se entran los siguientes comandos)
+        $ tty
+        $ who
+        $ ip a
+        $ pwd
+        $ uname -a
+        $ exit
+$ ipbt ttyrecord (reproducir la grabación)
+b --> retrocede
+p --> reproduce automaticamente
+Barra espaciadora --> va ejecutando paso a paso
+q --> salir de la reproducción
+
+
 ivstools
 [aircrack-ng]
 Herramienta para unir/convertir archivos .ivs y .cap
