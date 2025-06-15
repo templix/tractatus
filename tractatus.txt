@@ -30007,6 +30007,10 @@ Un ejemplo de configuración básica:
 </Group>
 
 
+myspell-es
+Diccionario de español para usar con el corrector ortográfico myspell, actualmente utilizado en OpenOffice.org y el corrector ortográfico de Mozilla.
+
+
 mysql
 Gestor de bases de datos [BDs]. Las BDs se guardan en el directorio /var/lib/mysql/
 $ mysqldump -u root -p proveedores > fichero.sql (Crear un backup de la BD "proveedores".)
@@ -37667,6 +37671,12 @@ $ speedtest --no-upload (sólo medir la velocidad de descarga)
 $ speedtest --no-download (sólo medir la de subida)
 $ speedtest --no-pre-allocate (probar la velocidad sin utilizar la geolocalización o la búsqueda de servidores cercanos)
 $ speedtest --share (Nos da una URL con la imagen en png de la conexión)
+
+
+spell
+Programa de corrección ortográfica que imprime cada palabra mal escrita en una línea independiente.
+$ spell archivo.txt (mostrará una lista de palabras mal escritas encontradas en el archivo)
+$ echo "La palabara está mal escrita" | spell -a (si la palabra "palabara" no está en el diccionario, el comando la mostrará y mostrará sugerencias de corrección)
 
 
 spew
