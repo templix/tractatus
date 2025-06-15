@@ -25943,6 +25943,18 @@ Es un script que gestionará los archivos hash de ispell autobuild, destinados a
 # ispell-autobuildhash --force
 
 
+isrcsubmit
+Es una utilidad para extraer los Códigos Internacionales Estándar de Grabación [International Standard Recording Codes - ISRC] que están incrustados en los CDs de audio y los envia automaticamente a MusicBrainz para enriquecer su base de datos. Los ISRC se utilizan para identificar de forma única grabaciones de sonido y video musical. Se requiere una cuenta válida de MusicBrainz para enviar los ISRC.
+$ isrcsubmit --setup (configurar las credenciales de MusicBrainz. Pedira nombre de usuario de MusicBrainz, contraseña y email)
+$ isrcsubmit --verbose (extraer ISRCs del CD en /dev/cdrom y enviarlos a MusicBrainz y mostrar información detallada del proceso)
+$ isrcsubmit -d /dev/sr1 (especificar un dispositivo de CD diferente)
+$ isrcsubmit --dry-run (solo mostrar los ISRCs encontrados sin enviarlos)
+$ isrcsubmit --release-id a1b2c3d4-e5f6-7890-abcd-ef1234567890 (especificar un release específico si se conoce el MBID [MusicBrainz ID])
+$ isrcsubmit --server test.musicbrainz.org (uUsar un servidor MusicBrainz diferente para testing)
+$ isrcsubmit --tracks 1,3,5 (procesar solo ciertas pistas)
+Nota.- No todos los CDs tienen ISRCs especialmente los más antiguos pueden no tenerlos
+
+
 issue.net
 Muestra la distro instalada.
 $ cat /etc/issue.net
