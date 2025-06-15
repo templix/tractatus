@@ -24806,6 +24806,10 @@ $ icalfilter -e 's/SUMMARY/Busy/;/DTSTART|DTEND|SUMMARY/f' archivo.ics > ocupado
 $ icalmerge archivo1.ics archivo2.ics > combinado.ics (genera un nuevo archivo .ics con todos los eventos de ambos archivos, eliminando duplicados según la fecha más reciente)
 
 
+icatalan
+Diccionario catalán por ispell [ver]
+
+
 icdiff
 Parecido a diff [ver], pero en lugar de tratar de ser un reemplazo de diff para todas las circunstancias, el objetivo de icdiff es ser una herramienta que pueda alcanzar para obtener una mejor idea de lo que cambió cuando no es inmediatamente obvio desde diff.
 $ icdiff -N archivo archivo1 (mostrando el número de linea)
@@ -25917,6 +25921,21 @@ $ isoquery -l es -o (en español y nombre oficial)
 isosize
 muestra el tamaño de un sistema de ficheros iso9660 en bytes
 $ isosize archivo.iso
+
+
+ispell
+Ispell corrige la ortografía en texto plano, LaTeX, sgml/html/xml y archivos nroff. Este paquete no incluye diccionarios de ispell, debe instalarse al menos uno de ellos. Ha sido  reemplazado por herramientas más modernas como aspell o hunspell. Incluye las herramientas buildhash, defmt-c, defmt-sh, findaffix, icombine, ijoin, ispell, munchlist y tryaffix.
+$ ispell file.txt (lee file.rxr y presenta al usuario las palabras que considera mal escritas, ofreciendo sugerencias de corrección)
+$ ispell -t file.tex (ignora los comandos de LaTeX y verifica solo el texto)
+$ ispell -d es -h file.html (ignora las etiquetas y atributos y usa un diccionario es, no el predeterminado, verificando el contenido)
+$ buildhash mi_diccionario.txt mis_reglas.aff mi_diccionario.hash (Con un diccionario de palabras personalizado y un archivo de reglas de afijos, crea diccionario para ispell)
+$ ispell -d mi_diccionario.hash mi_documento.txt (usar este diccionario con ispell)
+$ defmt-c mi_diccionario.hash mi_diccionario.c (convierte un diccionario `ispell, que incluye el archivo de palabras y el archivo de afijos, en un formato de código fuente C)
+$ findaffix palabras_cientificas.txt (intenta descubrir patrones de afijos [prefijos y sufijos] en una lista de palabras)
+$ icombine diccionario_medico.hash diccionario_legal.hash > diccionario_combinado.hash (permite fusionar múltiples diccionarios en uno solo)
+$ ijoin mis_palabras.txt mis_afijos.aff > entrada_buildhash.txt (unir un archivo de palabras y un archivo de afijos en un formato que puede ser directamente procesado por buildhash)
+$ munchlist diccionario_completo.txt reglas.aff > diccionario_comprimido.txt (toma un archivo de palabras y, utilizando las reglas de afijos, genera un diccionario más compacto)
+$ tryaffix mis_reglas.aff feliz (probar si una palabra dada puede formarse aplicando reglas de afijos de un archivo de afijos a una palabra base conocida)
 
 
 ispell-autobuildhash
