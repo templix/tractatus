@@ -25996,6 +25996,54 @@ Es un shell de Python para SymPy. Es solo un shell python normal [ipython shell 
 $ isympy -p no -c python (iniciar la shell sin decoración extra)
 
 
+isync
+También conocido como "mbsync" es una aplicación que sincroniza buzones de correo entre un servidor IMAP y un sistema local usando formato Maildir. Los mensajes nuevos, eliminados y modificados se pueden propagar en ambos sentidos. isync es adecuado para su uso en modo desconectado de IMAP. Incluye las herramientas mbsync-get-cert y mdconvert.
+Crear el archivo de configuración básico
+        $ nano ~/.mbsyncrc
+        # Configuración del servidor IMAP
+        IMAPAccount work
+        Host imap.example.com
+        User tuusuario
+        Pass tucontraseña
+        SSLType IMAPS
+        #
+        # Configuración del buzón remoto
+        IMAPStore work-remote
+        Account work
+        #
+        # Configuración del buzón local (Maildir)
+        MaildirStore work-local
+        Path ~/Mail/work/
+        Inbox ~/Mail/work/Inbox
+        #
+        # Definición de un canal de sincronización
+        Channel work-inbox
+        Master :work-remote:INBOX
+        Slave :work-local:INBOX
+        Create Both
+        Expunge Both
+        SyncState *
+$ mbsync -a (sincronizar todos los canales configurados)
+$ mbsync work-inbox (sincronizar un canal específico)
+$ mbsync --new work-inbox (sincronizar solo los nuevos mensajes sin eliminar nada)
+$ mbsync --all --pull --push work-inbox (forzar una sincronización completa)
+$ mbsync --expunge work-inbox (sincronizar eliminando mensajes marcados para borrar)
+$ mbsync --dry-run work-inbox (mostrar diferencias sin alterar datos)
+$ mbsync --push work-inbox (subir cambios al servidor)
+$ mbsync-get-cert imap.example.com:993 > imap_example_com.pem (descarga el certificado del servidor imap.example.com [puerto 993] y lo guarda en un archivo .pem)
+$ mbsync -dV nombre_canal (muestran detalles técnicos o problemas de autentificación)
+$ mbsync-get-cert no verifica la validez del certificado, solo lo descarga. Luego se puede añadir en el archivo de configuraciónc para usar ese certificado
+$ nano ~/.mbsyncrc`
+        IMAPAccount work
+        Host imap.example.com
+        SSLType IMAPS
+        # Ruta al certificado descargado
+        CertificateFile ~/imap_example_com.pem
+Nota.- Para leer y organizar los correos localmente se puede usar Mutt, Neomutt u otro cliente
+$ mdconvert --to=Maildir --mbox ~/correo_viejo.mbox ~/Mail/nuevo_maildir/ (convertir de mbox, usado por Thunderbird a Maildir para usar con mbsync)
+$ mdconvert --to=mbox --maildir ~/Mail/original_maildir/ ~/correo_exportado.mbox (convertir de Maildir a mbox para compatibilidad con otros clientes)
+
+
 isutf8
 [moreutils]. No muestra salida si el archivo tiene una codificación UTF-8 válida. Si no es el caso muestra el aviso.
 $ isutf8 archivo
@@ -28388,6 +28436,10 @@ mbmon
 Monitorea las temperaturas, voltajes y rpm de ventiladores de refrigeración de la cpu.
 # mbmon -c2 (realizar dos monitoreos y salir)
 # mbmon -t -u -n (informando de la hora, el sistema y el hostname)
+
+
+mbsync
+ver isync
 
 
 mbw
