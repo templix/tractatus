@@ -26049,6 +26049,38 @@ isutf8
 $ isutf8 archivo
 
 
+itamae
+es una herramienta sencilla y ligera de gestión de configuración inspirada en Chef. Cuenta con un DSL similar al de Chef, solo recetas [recipes] y es idempotente lo que significa que aplicar la misma receta varias veces no genera efectos secundarios adicionales.
+$ itamae local recipe.rb (ejecutar recetas localmente)
+$ itamae ssh --host ejemplo.com recipe.rb (ejecución remota por SSH)
+$ itamae ssh --vagrant --host vm_name recipe.rb (ejecución en Vagrant?
+1.-
+Una receta en Itamae es un archivo Ruby, por ejemplo, recipe.rb que define los recursos y acciones deseadas. Por ejemplo, instalar y habilitar Nginx:
+$ nano recipe.rb
+        package 'nginx' do
+          action :install
+        end
+        #
+        service 'nginx' do
+          action [:enable, :start]
+        end
+$ itamae local recipe.rb (aplicar esta receta localmente)
+2.-
+Otro ejemplo un poco más complejo
+Instalar Nginx, renderizar un archivo de configuración desde una plantilla, y reiniciar el servicio si la configuración cambia:
+$ nano recipe.rb
+        service 'nginx' do
+          action [:enable, :start]
+        end
+        #
+        template "/etc/nginx/sites-available/main" do
+          source "templates/etc/nginx/sites-available/main.erb"
+          mode "0644"
+          action :create
+          notifies :restart, "service[nginx]", :delayed
+        end
+
+
 itop
 Cuando un componente del hardware necesita un recurso, envia una petición de interrupción al sistema llamado IRQ y este suspende momentáneamente alguna rutina de servicio para continuarla cuando finaliza la interrupción. itop muestra estas interrupciones que vendrian a ser lo mismo que actualizar cada segundo el archivo /porc/interrupts:
 	# watch -n 1 cat /proc/interrupts
