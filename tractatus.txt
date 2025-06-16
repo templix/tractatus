@@ -26267,10 +26267,10 @@ iwlist
 
 j2cli
 Comando para crear plantillas en scripts de shell
-$ j2cli -f template.j2 -o output.sh (generar un script de inicio)
-$ j2cli -f template.j2 -o output.sh --var "variable_name=value" (generar un script de inicio con variables)
-$ j2cli -f /path/to/template.j2 -o /path/to/output.sh --var "variable1=value1" --var "variable2=value2" (y con multiples variables)
-$ j2cli -f /path/to/template.j2 -o /path/to/output_*.sh --count 3 (generará tres archivos con nombres como output_0.sh, output_1.sh y output_2.sh)
+$ j2 -f template.j2 -o output.sh (generar un script de inicio)
+$ j2 -f template.j2 -o output.sh --var "variable_name=value" (generar un script de inicio con variables)
+$ j2 -f /path/to/template.j2 -o /path/to/output.sh --var "variable1=value1" --var "variable2=value2" (y con multiples variables)
+$ j2 -f /path/to/template.j2 -o /path/to/output_*.sh --count 3 (generará tres archivos con nombres como output_0.sh, output_1.sh y output_2.sh)
 Nota.- Se necesita tener un archivo .j2 [Jinja2] con la estructura del script de shell para que j2cli pueda procesarlo y generar el resultado final.
 
 
