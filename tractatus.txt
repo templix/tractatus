@@ -26249,6 +26249,17 @@ $ iwconfig wlan0 key s:clave
 $ ifconfig wlan0 xx.xx.xx.xx netmask yy.yy.yy.yy
 
 
+iwd
+[Inet Wireless Daemon]. Demonio que proporciona una forma eficiente de gestionar las conexiones de red inalámbricas. Incluye las herramientas iwctl y iwmon
+# systemctl status iwd (ver el estado del servicio)
+# iwctl device list (mostrará una lista de dispositivos, incluyendo su nombre, estado y dirección MAC)
+# iwctl device wlp2s0 set-property Powered true (encender un dispositivo)
+# iwctl device wlp2s0 set-property Powered false (apagarlo)
+# iwmon (monitorear el tráfico de paquetes y los eventos del demonio iwd)
+# iwctl station wlp2s0 get-networks (ver redes disponibles)
+# iwctl known-networks eth0 forget (hacer que un dispositivo olvide una red específica)
+
+
 iwlist
 # iwlist eth0 scan  (scaneo de los puntos de acceso cercanos)
 # iwlist s    (Lo mismo para todas las interficies)
