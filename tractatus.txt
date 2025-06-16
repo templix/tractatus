@@ -26109,11 +26109,66 @@ Barra espaciadora --> va ejecutando paso a paso
 q --> salir de la reproducción
 
 
+itstool
+Utilidad que convierte archivos XML a archivos PO [Portable Object], utilizados comúnmente en la localización y traducción de software y documentación, y luego vuelve a aplicar las traducciones al XML original. Se basa en el estándar ITS [Internationalization Tag Set] del W3C, el cual permite marcar en documentos XML qué partes son traducibles y cómo deben procesarse.
+Ejemplo sencillo
+$ nano ejemplo.xml
+        <?xml version="1.0"?>
+        <page xmlns="http://projectmallard.org/1.0/">
+          <title>Hola mundo</title>
+          <p>Este es un párrafo traducible.</p>
+        </page>
+$ itstool -o po/ ejemplo.xml (crea un archivo POT/PO en el directorio [po/ejemplo.pot])
+Crear un archivo .po traducido al inglés
+$ nano po/en.po
+        msgid "Hola mundo"
+        msgstr "Hello world"
+        msgid "Este es un párrafo traducible."
+        msgstr "This is a translatable paragraph."
+$ itstool -m po/en.po -o traducido/ ejemplo.xml (crea una versión traducida del XML en el directorio traducido/)
+
+
+iucode-tool
+Herramienta para manipular y actualizar el microcódigo de procesadores Intel® x86 y x86-64 y utiliza las funciones del kernel para actualizarlo. El microcódigo son actualizaciones de firmware que Intel proporciona para corregir errores, vulnerabilidades o mejorar el rendimiento del CPU.
+# iucode-tool -l /usr/share/intel-microcode/intel-microcode.bin (muestra información sobre las revisiones de microcódigo disponibles en el archivo binario)
+# iucode-tool -S 0x000306a9 -w updated_microcode.bin /usr/share/intel-microcode/intel-microcode.bin (extraer microcódigo para un CPU específico y guardar el resultado en un nuevo archivo binario)
+Nota.- Filtra el microcódigo para un CPU con signature 0x000306a9 que puede obtenerse con cat /proc/cpuinfo.
+# iucode-tool -t /usr/share/intel-microcode/ -K /lib/firmware/intel-ucode/ ((selecciona automáticamente el microcódigo correcto para el CPU actual y carga el microcódigo en el kernel)
+# iucode-tool -w combined_microcode.bin file1.bin file2.bin (combinar múltiples archivos de microcódigo)
+# iucode-tool -C -l /usr/share/intel-microcode/intel-microcode.bin (compara el microcódigo actual del CPU con el disponible en el archivo por si hay una actualización)
+Nota.- El paquete intel-microcode instala los archivos en /usr/share/intel-microcode/ y el kernel carga el microcódigo desde /lib/firmware/intel-ucode/
+
+
 ivstools
 [aircrack-ng]
 Herramienta para unir/convertir archivos .ivs y .cap
 $ ivstools --merge captura1.ivs captura2.ivs captura3.ivs total.ivs
 $ ivstools --captura.cap nuevo.ivs
+
+
+ivy
+Es un gestor de dependencias, orientado a la gestión de dependencias de Java, aunque puede utilizarse para gestionar dependencias de cualquier tipo de proyecto. El funcionamiento básico de Ivy se basa en un archivo descriptor llamado ivy.xml, donde se declaran las dependencias del proyecto y sus configuraciones. Ivy se encarga de resolver estas dependencias, descargarlas desde repositorios configurados y organizarlas en el proyecto de acuerdo a las reglas definidas.
+Archivo de ejemplo ubicado en la raíz del proyecto
+$ nano ivy.xml
+        xml
+        <ivy-module version="2.0">
+          <info organisation="miempresa" module="mimodulo"/>
+          <dependencies>
+            <dependency org="org.apache.commons" name="commons-lang3" rev="3.12.0"/>
+          </dependencies>
+        </ivy-module>
+Este ejemplo indica que el proyecto depende de la librería commons-lang3 versión 3.12.0.
+Para utilizar Ivy con Ant, se debe declarar el uso de las tareas de Ivy en el archivo build.xml y luego invocar tareas como "resolve" y "retrieve" para gestionar las dependencias
+$ nano build.xml
+        <project name="ejemplo" default="resolve" xmlns:ivy="antlib:org.apache.ivy.ant">
+          <target name="resolve" description="Resuelve dependencias">
+            <ivy:resolve/>
+            <ivy:retrieve sync="true" type="jar"/>
+          </target>
+        </project>
+Descarga las dependencias declaradas en ivy.xml y copia los archivos descargados, por ejemplo, los .jar a un directorio del proyecto, como lib/.
+$ ant resolve (descargará las dependencias y las dejará disponibles en el directorio especificado)
+$ ant retrieve (copia las dependencias descargadas a un directorio específico del proyecto)
 
 
 iwconfig
