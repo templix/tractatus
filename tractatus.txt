@@ -26171,6 +26171,40 @@ $ ant resolve (descargará las dependencias y las dejará disponibles en el dire
 $ ant retrieve (copia las dependencias descargadas a un directorio específico del proyecto)
 
 
+ivyplusplus
+[ipp]. Herramienta que amplía Apache Ivy, que a su vez es un sistema de gestión de dependencias para proyectos Java.
+$ apt show ivyplusplus (verificar instalación)
+$ dpkg -L ivyplusplus | grep jar (ya que no tiene un ejecutable estándar visible [/usr/bin/ipp] buscar el ejecutable)
+$ java -jar /usr/share/java/ivyplusplus.jar (ejecutar la herramienta)
+$ java -jar /usr/share/ivyplusplus/ivyplusplus.jar new myproject (crear un nuevo proyecto)
+Creará un nuevo directorio myproject/ con:
+        src/
+        lib/
+        build.xml [para Ant]
+        ivy.xml [para definir dependencias]
+        ivysettings.xml
+$ java -jar /usr/share/ivyplusplus/ivyplusplus.jar eclipse (añadir soporte para Eclipse)
+$ java -jar /usr/share/ivyplusplus/ivyplusplus.jar antbuild (lee ivy.xml y crea un build.xml que compila el proyecto con Ant y resuelve dependencias con Ivy)
+Para que el comando ipp esté disponible globalmente, crear un alias y añadirlo a ~/.bashrc:
+$ alias ipp='java -jar /usr/share/ivyplusplus/ivyplusplus.jar'
+Luego se podrá usar como:
+$ ipp new myproject
+$ ipp eclipse
+$ ipp antbuild
+
+
+iw
+Este paquete que permite configurar y mostrar información sobre dispositivos inalámbricos, se basa en la interfaz del kernel nl80211, es compatible con la mayoría del hardware reciente y substituye a la antigua herramienta iwconfig.
+$ iw dev (listar todas las interfaces inalámbricas disponibles)
+# iw dev wlan0 scan | grep "SSID:" (escanear y listar las redes inalámbricas disponibles)
+# iw dev wlan0 connect "MiRedWiFi" (conectarse a una red inalámbrica)
+# iw dev wlan0 info (obtener información detallada sobre una interfaz inalámbrica específica)
+# iw dev wlan0 set channel 11 (cambiar el canal de una interfaz inalámbrica)
+# iw dev wlan0 scan (obtener información detallada sobre las redes disponibles)
+# iw dev wlan0 set type monitor (cambiar el modo de una interfaz inalámbrica, por ejemplo, a modo monitor)
+$ iw list (listar los dispositivos físicos inalámbricos disponibles)
+
+
 iwconfig
 Relacionado con direcciones ip y dispositivos de red inalámbricos
 # iwconfig (Ver los datos de conección de la red inalámbrica)
