@@ -26274,6 +26274,18 @@ $ j2 -f /path/to/template.j2 -o /path/to/output_*.sh --count 3 (generará tres a
 Nota.- Se necesita tener un archivo .j2 [Jinja2] con la estructura del script de shell para que j2cli pueda procesarlo y generar el resultado final.
 
 
+jaaa
+[JACK and ALSA Audio Analyser] Es un generador de señales de audio y analizador de espectro diseñado para realizar mediciones precisas en audio digital. Permite trabajar tanto con el servidor JACK como con dispositivos ALSA, facilitando el análisis de señales y la visualización de su espectro en tiempo real.
+$ jaaa -J (inicia "jaaa" utilizando el servidor de audio JACK)
+$ jaaa -A (inicia "jaaa" usando ALSA, el sistema de audio estándar de Linux)
+$ jaaa -A -d hw:1,0 -r 44100 (inicia "jaaa" con ALSA, usando el dispositivo de hardware hw:1,0 y una frecuencia de muestreo de 44.1 kHz)
+Las opciones por defecto son:
+-d hw:0.0 --> Dispositivo ALSA
+-r 48000 --> Frecuencia de muestreo
+-p 1024 --> Tamaño de periodo
+-n 2 --> Número de fragmentos
+
+
 jackd
 [jackd2]. JACK [JACK Audio Connection Kit] es un servidor de sonido de baja latencia que permite que varias aplicaciones se conecten a un dispositivo de audio y compartan audio entre ellas. Incluye los siguientes ejecutables: alsa_in, alsa_out, jack_alias, jack_bufsize, jack_connect, jack_control, jack_cpu, jack_cpu_load, jack_disconnect, jack_evmon, jack_freewheel, jack_iodelay, jack_latent_client, jack_load, jack_lsp, jack_metro, jack_midi_dump, jack_midi_latency_test, jack_midiseq, jack_midisine, jack_monitor_client, jack_multiple_metro, jack_net_master, jack_net_slave, jack_netsource, jack_property, jack_rec, jack_sampleraten, jack_server_control, jack_session_notify, jack_showtime, jack_simdtests, jack_simple_client, jack_simple_session_client, jack_test, jack_thru, jack_transport, jack_unload, jack_wait, jack_zombie, jackd y jackdbus. Crear el archivo:
 # nano /etc/security/limits.d/audio.conf
