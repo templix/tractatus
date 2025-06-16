@@ -26205,6 +26205,35 @@ $ iw dev (listar todas las interfaces inalámbricas disponibles)
 $ iw list (listar los dispositivos físicos inalámbricos disponibles)
 
 
+iwatch
+Programa basado en Perl que utiliza el subsistema inotify del kernel de Linux para monitorizar eventos en el sistema de archivos [creación, modificación, eliminación, acceso, etc.] en tiempo real, con la capacidad de ejecutarse como un comando simple o como un demonio.
+$ iwatch -r -c "echo 'Archivo creado: %f' | mail -s 'Evento detectado' usuario@ejemplo.com" /tmp/test (monitorizar un directorio y enviar un correo cuando se cree un archivo)
+$ iwatch -r -v /tmp/test (monitorear el directorio)
+$ iwatch -r -e create -c "echo 'Archivo creado: %f'" /tmp/test (mostrar un mensaje cada vez que se crea un archivo)
+Algunos eventos soportados [-e]:
+        access --> Un archivo fue leído.
+        modify --> Un archivo fue modificado.
+        create --> Se creó un archivo o directorio.
+        delete --> Se eliminó un archivo o directorio.
+$ iwatch -r -e modify -m usuario@ejemplo.com /tmp/test (enviar un correo cada vez que se modifica un archivo)
+Para ejecutar iwatch como demonio, se necesita un archivo de configuración XML:
+# nano  /etc/iwatch/iwatch.xml
+        <?xml version="1.0" ?>
+        <!DOCTYPE config SYSTEM "/usr/share/iwatch/iwatch.dtd">
+        <config>
+          <guard email="admin@ejemplo.com" name="Admin"/>
+          <watchlist>
+            <title>Monitoreo de /tmp/test</title>
+            <contactpoint email="usuario@ejemplo.com" name="Usuario"/>
+            <path type="recursive" events="create,delete,modify" exec="echo 'Evento: %e en %f' >> /var/log/iwatch.log">
+              /tmp/test
+            </path>
+          </watchlist>
+        </config>
+# iwatch -d -f /etc/iwatch/iwatch.xml (inicia iwatch en modo demonio, monitoreando /tmp/test y registrando eventos en /var/log/iwatch.log)
+$ iwatch -r -e create -X '\.log$' /tmp/test (monitorear /tmp/test pero excluir archivos que terminen en .log)
+
+
 iwconfig
 Relacionado con direcciones ip y dispositivos de red inalámbricos
 # iwconfig (Ver los datos de conección de la red inalámbrica)
