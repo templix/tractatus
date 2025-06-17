@@ -26286,6 +26286,16 @@ Las opciones por defecto son:
 -n 2 --> Número de fragmentos
 
 
+jack-capture
+Programa para grabar archivos de sonido con Jack. Con este programa puedes grabar, en todos los formatos compatibles con sndfile (WAV, AIFF, OGG, FLAC, WaveX, AU, etc.), cualquier sonido reproducido a través de Jack
+$ jack-capture output.wav (grabará todo el audio que pasa por la conexión JACK durante la ejecución del programa y lo guardará como un archivo WAV)
+$ jack-capture -f ogg output.ogg (grabará el audio en formato OGG Vorbis)
+$ jack-capture -c 2 output.aiff (grabará el audio en estéreo [2 canales] y lo guardará como un archivo AIFF)
+$ jack-capture -b 1024 output.flac (establece el tamaño del buffer en 1024 muestras)
+$ jack-capture -l (mostrará una lista de todas las conexiones disponibles)
+$ jack-capture -n 0 output.au (grabaría solo el primer canal)
+
+
 jackd
 [jackd2]. JACK [JACK Audio Connection Kit] es un servidor de sonido de baja latencia que permite que varias aplicaciones se conecten a un dispositivo de audio y compartan audio entre ellas. Incluye los siguientes ejecutables: alsa_in, alsa_out, jack_alias, jack_bufsize, jack_connect, jack_control, jack_cpu, jack_cpu_load, jack_disconnect, jack_evmon, jack_freewheel, jack_iodelay, jack_latent_client, jack_load, jack_lsp, jack_metro, jack_midi_dump, jack_midi_latency_test, jack_midiseq, jack_midisine, jack_monitor_client, jack_multiple_metro, jack_net_master, jack_net_slave, jack_netsource, jack_property, jack_rec, jack_sampleraten, jack_server_control, jack_session_notify, jack_showtime, jack_simdtests, jack_simple_client, jack_simple_session_client, jack_test, jack_thru, jack_transport, jack_unload, jack_wait, jack_zombie, jackd y jackdbus. Crear el archivo:
 # nano /etc/security/limits.d/audio.conf
@@ -26312,6 +26322,32 @@ El argumento "help" se puede usar con el dispositivo elegido:
               jackd -d oss --help
               jackd -d sun --help
               jackd -d portaudio --help
+
+
+jackmeter
+Permite monitorizar en tiempo real los niveles de señal de uno o varios puertos de audio JACK en ordenadores remotos sin necesidad de sistemas gráficos.
+$ jack_meter alsa_pcm:capture_1 (muestra una barra que representa el nivel de señal del puerto de entrada principal del sistema de audio JACK)
+$ jack_meter alsa_pcm:capture_1 alsa_pcm:capture_2 (mezcla y muestra los niveles de ambos canales de entrada)
+$ jack_meter -f 20 alsa_pcm:capture_1 (cambiar la frecuencia de actualización a 20 veces por segundo)
+$ jack_meter -n alsa_pcm:capture_1 (en vez de una barra, se imprime el nivel en decibelios [dB])
+$ jack_meter -w 40 alsa_pcm:capture_1 (el medidor ocupará solo 40 caracteres de ancho en la terminal)
+
+
+jacktrip
+Herramienta diseñada para transmitir audio de alta calidad, sin comprimir y con baja latencia a través de redes, como Internet, permitiendo colaboraciones musicales en tiempo real entre músicos ubicados en diferentes lugares. Admite cualquier número de canales, tantos como el ordenador o la red pueda gestionar, de transmisión de señales de audio bidireccionales.
+$ jacktrip -s -p 4464 --broadcast (modo servidor, el puerto y enviar audio a todos los clientes conectados)
+$ jacktrip -c 192.168.1.100 -p 4464 (conectarse al servidor en modo cliente y la IP del servidor)
+$ jacktrip -s -p 4464 -n 8 (especificar número de canales a 8 entradas/salidas)
+$ jacktrip -c 192.168.1.100 -p 4464 --bitres 16 (reducir ancho de banda [ligera pérdida de calidad])
+$ jacktrip -m -p 4464 --peer <IP1> --peer <IP2> (conexiones directas entre múltiples músicos)
+Ejemplo de flujo
+Servidor
+$ jackd -d alsa --device hw:0 --rate 48000 --period 128 &
+$ jacktrip -s -p 4464
+Cliente
+$ jackd -d alsa --device hw:0 --rate 48000 --period 128 &
+$ jacktrip -c <IP_servidor> -p 4464
+Para conectar envío/recepción se pueden usar herramientas gráficas como qjackctl, Sonobus, jamulus...
 
 
 jargon
