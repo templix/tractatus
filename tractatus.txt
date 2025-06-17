@@ -26431,6 +26431,38 @@ $ java2html archivo.cpp (conversión de código C++)
 $ java2html -t "Mi código Java" MiPrograma.java (generar HTML con título personalizado)
 
 
+jdns
+Herramienta que permite probar distintos aspectos del funcionamiento del sistema DNS [Domain Name System]. Está pensada para evaluar cómo se comportan las peticiones DNS en distintos modos de operación, como unicast, multicast, etc.
+$ jdns -d -q 3 uni src jabber.org (mostrar salida, ejecutar durante 3 segundos, consulta standard para descubrir servicios
+$ jdns uni A example.com (Consulta estándar de un registro tipo A [IPv4] para example.com usando el DNS convencional)
+$ jdns mul A mydevice.local (busca la IP de mydevice.local usando mDNS. Este tipo de consulta no va a servidores DNS públicos, sino que se difunde en la red local)
+# jdns pub A myservice.local 192.168.1.50 (anuncia que myservice.local tiene la IP 192.168.1.50 en la red local mediante mDNS. Requiere privilegios)
+$ jdns mul SRV _http._tcp.local (descubrir un servicio HTTP local con mDNS)
+$ jdns uni TXT google.com (ver texto adicional de un dominio)
+$ jdns uni ANY example.com (solicita todos los registros disponibles)
+Modos disponibles [cómo se envía la consulta]
+uni [Unicast DNS] --> Consulta estándar a través de servidores DNS configurados en el sistema
+mul [Multicast DNS - mDNS] --> Consulta usando multicast DNS, típico en redes locales
+pub [Publicación Multicast DNS] --> Permite publicar [anunciar] un nombre/respuesta en mDNS. Es útil para probar cómo un servicio anunciaría su presencia en una red.
+Tipos de consulta [tipo de registro DNS a consultar]
+A	Dirección IPv4
+AAAA	Dirección IPv6
+PTR	Puntero de nombre inverso
+SRV	Servicio usado para descubrir servicios
+TXT	Texto arbitrario, útil para metadatos)
+ANY	Solicita todos los registros disponibles
+
+
+jdresolve
+Alternativa rápida a Apache Logresolve que resuelve direcciones IP en nombres de host en archivos de log. Para reducir el tiempo necesario para resolver grandes cantidades de direcciones, jdresolve abre muchas conexiones simultáneas a los servidores DNS y mantiene un gran número de líneas de texto en memoria. Estas líneas pueden tener cualquier contenido, siempre que las direcciones IP sean el primer campo a la izquierda. Esto suele ocurrir con la mayoría de los formatos de archivos de registro HTTP y FTP.
+$ jdresolve access.log > resolved.log (resolución básica)
+$ jdresolve -v -k access.log > resolved_with_ips.log (modo verbose y resolución manteniendo las IPs originales)
+$ jdresolve access.log.1 access.log.2 > all_resolved.log ((procesar múltiples archivos)
+$ jdresolve -t 20 -n 8.8.8.8 access.log > resolved.log (usar 20 hilos, por defecto 30 y un servidor DNS específico)
+$ jdresolve -s access.log > resolved.log (mostrar estadísticas al finalizar)
+$ cat access.log | jdresolve > resolved.log (procesar desde la entrada estándar)
+
+
 jed
 [jed-extra]. Editor para programadores. Ctrl-x Ctrl-c para salir.
 $ jed script.sh
