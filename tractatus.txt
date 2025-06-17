@@ -26350,6 +26350,29 @@ $ jacktrip -c <IP_servidor> -p 4464
 Para conectar envío/recepción se pueden usar herramientas gráficas como qjackctl, Sonobus, jamulus...
 
 
+jailkit
+Herramientas que permiten restringir el entorno de un usuario a un conjunto limitado de archivos o comandos mediante el uso de la técnica chroot, creando lo que se conoce como "jaulas" o "jails". Los entornos se pueden personalizar en /etc/jailkit/jk_init.ini. Proporciona los siguientes comandos: jk_check, jk_chrootlaunch, jk_chrootsh, jk_cp, jk_init, jk_jailuser, jk_list, jk_lsh, jk_socketd, jk_uchroot y jk_update.
+# jk_init -v /home/jail sftp (inicializa un entorno de jaula chroot con soporte para SFTP)
+# jk_jailuser -m -j /home/jail usuario (mueve a usuario dentro de la jaula /home/jail y "-m" mueve el contenido de su home dentro de la jaula)
+# jk_cp /home/jail /usr/bin/top (copia el binario top y sus dependencias a la jaula /home/jail)
+# jk_list (lista los usuarios dentro de una jaula)
+# jk_check /home/jail (verifica si la jaula está bien configurada)
+# jk_update /home/jail (actualiza binarios en una jaula según lo que esté definido en jk_init.ini)
+# jk_chrootlaunch -j /home/jail /bin/bash (lanza procesos o da acceso a usuarios temporales en una jaula)
+jk_lsh es una shell limitada que permite solo ejecutar ciertos comandos predefinidos. Se configura .jk_lshrc.
+jk_socketd solo permite el uso de sockets dentro de una jaula, útil si el usuario necesita redes.
+jk_chrootsh es una Shell que lanza al usuario dentro de una jaula al iniciar sesión y se configura en /etc/passwd con la linea:
+        usuario:x:1001:1001::/home/jail/./home/usuario:/usr/sbin/jk_chrootsh
+Previamente se tiene que crear un usuario:
+# useradd -m -s /usr/sbin/jk_chrootsh usuario
+Y agregarlo a la jaula:
+# jk_jailuser -m -j /home/jail usuario
+Y crear permisos:
+# chown root:root /home/jail
+# chmod 755 /home/jail
+# # jk_check /home/jail (verificar)
+
+
 jargon
 Compendio completo de jerga hacker que ilumina muchos aspectos de la tradición, el folklore y el humor hackish en lengua inglesa. El archivo está en formato de información, pero incluye una página HTML con enlaces al sitio de inicio. Este paquete está desactualizado porque el autor ya no mantiene una versión informativa del archivo.
 $ jargon
