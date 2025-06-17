@@ -26373,6 +26373,42 @@ Y crear permisos:
 # # jk_check /home/jail (verificar)
 
 
+jalv
+Herramienta para ejecutar plugins LV2 como aplicaciones independientes, conectándolos al sistema de audio JACK. Los plugins LV2 son un estándar de plugins de audio modular y extensible, comúnmente usados en aplicaciones de producción musical y procesamiento de señales.
+# jalv http://calf.sourceforge.net/plugins/Compressor (ejecutar un plugin LV2 por su URI. Abre el compresor Calf Compressor como una aplicación independiente)
+# jalv -n "MiEQ" http://lsp-plug.in/plugins/lv2/para_eq (ejecuta el ecualizador LSP Para EQ y lo nombra "MiEQ" en el administrador de conexiones JACK)
+# jalv -c http://invadarecords.com/plugins/lv2/sc4 (ejecuta el SC4 Compressor y lo conecta directamente a las entradas/salidas de JACK)
+# jalv -s (muestra todas las URIs de plugins LV2 disponibles en el sistema)
+
+
+jam
+Herramienta de compilación de software, sustituto de make
+Ejemplo de compilación de un programa simple en C
+$ nano main.c
+        #include <stdio.h>
+        /* Un ejemplo */
+        int main() {
+            printf("¡Hola, mundo desde Jam!\n");
+            return 0;
+        }
+Para compilar esto con jam, se crea un archivo en el mismo directorio:
+$ nano Jamfile:
+        # Define el nombre del programa ejecutable
+        Main hello : main.c ;
+# --> inicia un comentario.
+Main --> es una regla incorporada en jam que se usa para construir una aplicación ejecutable.
+hello --> es el nombre del ejecutable que se creará.
+: main.c --> especifica que hello depende del archivo main.c.
+$ jam (compilar)
+        ...found 12 target(s)...
+        ...updating 2 target(s)...
+        Cc main.o
+        Link hello
+        Chmod1 hello
+        ...updated 2 target(s)...
+$ jam clean (limpiar los archivos generados. En el ejemplo solo dejar Jamfile y main.c)
+
+
 jargon
 Compendio completo de jerga hacker que ilumina muchos aspectos de la tradición, el folklore y el humor hackish en lengua inglesa. El archivo está en formato de información, pero incluye una página HTML con enlaces al sitio de inicio. Este paquete está desactualizado porque el autor ya no mantiene una versión informativa del archivo.
 $ jargon
