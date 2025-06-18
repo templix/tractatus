@@ -26463,6 +26463,22 @@ $ jdresolve -s access.log > resolved.log (mostrar estadísticas al finalizar)
 $ cat access.log | jdresolve > resolved.log (procesar desde la entrada estándar)
 
 
+jdupes
+Identificar, eliminar o vincular archivos duplicados en el sistema.
+$ jdupes ~/* (encontrar duplicados en el directorio personal. Si no encuentra ninguno no muestra salida)
+$ jdupes -N ~/* (si no encuentra duplicados, muestra un mensaje [No duplicate files found.])
+$ jdupes -d ~/Documentos/ (preguntará qué copia se quiere conservar y cuál eliminar)
+$ jdupes -rd Documentos/ Download/
+$ jdupes -r ~/ (buscar recursivamente todos los duplicados en un directorio)
+$ jdupes -r -L ~/ (crear enlaces físicos a cualquier archivo duplicado)
+$ jdupes -r --delete --noprompt (eliminar todos los duplicados conservando el primero)
+$ jdupes -L /tmp/jdupes_test/ (convertir duplicados en enlaces duros [hard links])
+$ jdupes -s /tmp/jdupes_test/ (convertir duplicados en enlaces simbólicos relativos [soft links])
+$ jdupes -X /tmp/jdupes_test/dir3 /tmp/jdupes_test/ (buscaría duplicados en /tmp/jdupes_test/ pero ignoraría /tmp/jdupes_test/dir3)
+$ jdupes -f ~/Documentos (no mostrar la primera copia de cada conjunto de duplicados para ver los que se podrían eliminar o reemplazar)
+$ jdupes -m /tmp/jdupes_test/ (muestra un resumen de los archivos duplicados encontrados, el espacio que ocupan, etc)
+
+
 jed
 [jed-extra]. Editor para programadores. Ctrl-x Ctrl-c para salir.
 $ jed script.sh
