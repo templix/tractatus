@@ -26493,6 +26493,25 @@ $ jekyll build (Generar el site)
 $ jekyl serve --watch (Acceder a la versión local del site en http://localhost:4000. El argumento --watch permite que si se realizan cambios en los archivos, éstos se puedan ver inmediatamente recargando la página del navegador)
 
 
+jetring
+Suite de herramientas diseñada para gestionar de forma segura y auditable los llaveros GPG [GNU Privacy Guard] utilizando un sistema de conjuntos de cambios. Esto es particularmente útil en entornos donde múltiples personas o sistemas necesitan contribuir a un llavero GPG, y donde la trazabilidad y la seguridad son primordiales. Incluye las herramientas jetring-accept, jetring-apply, jetring-build, jetring-checksum, jetring-diff, jetring-explode, jetring-gen, jetring-review y jetring-signindex.
+Suponemos que se tiene un repositorio de software y se quiere que las firmas de los paquetes sean verificables por los usuarios. Para ello, se necesita un llavero GPG público que contenga las claves de todos los desarrolladores que firman los paquetes. jetring permite gestionar este llavero de forma colaborativa y segura.
+Añadir una clave pública GPG al llavero.
+$ gpg --export --armor <ID_DE_LA_CLAVE> > mi_clave_publica.asc
+$ jetring-gen mi_anillo add mi_clave_publica.asc (creará un archivo en el directorio mi_anillo/in/ [por defecto] con un nombre como add-XXXXXXXX.jet con información para añadir la clave)
+Después de que se han generado varios cambios en el directorio mi_anillo/in/, firmar el índice para que sea confiable.
+$ jetring-signindex mi_anillo (creará un archivo de firma [index.sig] en el directorio mi_anillo/ que certifica el contenido del índice)
+$ jetring-build mi_anillo mi_llavero_final.gpg (generará el archivo mi_llavero_final.gpg que contendrá todas las claves públicas resultantes de aplicar los cambios)
+Supongamos que alguien ha enviado un cambio [.jet file] y se has colocado en mi_anillo/in/. Y se ha de revisar y luego aceptarlo.
+$ jetring-accept mi_anillo <nombre_del_archivo_jet> (acepta el cambio)
+$ jetring-accept mi_anillo --all (aceptar todos los cambios pendientes y moverá los archivos .jet al directorio mi_anillo/accepted/)
+$ jetring-apply mi_anillo mi_llavero.gpg (actualizará mi_llavero.gpg con los cambios pendientes de aplicación sin reconstruirlo desde cero)
+$ jetring-checksum mi_anillo (verificar las sumas de verificación de todos los cambios en un anillo y notificará si detecta alguna discrepancia)
+$ jetring-diff mi_anillo mi_llavero_actual.gpg (mostrará una salida, indicando qué se añadiría [+] y qué se eliminaría [-] si se aplicaran los cambios pendientes)
+$ jetring-explode llavero_antiguo.gpg mi_anillo_nuevo (descompone un llavero GPG existente en un conjunto de cambios individuales, uno por cada clave)
+$ jetring-review mi_anillo (presentará cada cambio y preguntará qué acción tomar: aceptar, rechazar, etc.)
+
+
 jhead
 mostrará toda la metainformación incrustada en un fichero JPG incluyendo la miniatura [thumbnail] de la foto original
 $ jhead -st miniatura.jpg imagen_para_analizar.jpg
