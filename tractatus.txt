@@ -26512,6 +26512,16 @@ $ jetring-explode llavero_antiguo.gpg mi_anillo_nuevo (descompone un llavero GPG
 $ jetring-review mi_anillo (presentará cada cambio y preguntará qué acción tomar: aceptar, rechazar, etc.)
 
 
+jfsutils
+Utilidades para la gestión del sistema de archivos JFS de IBM en Linux. Consta de los ejecutables fsck.jfs, jfs_debugfs, jfs_fsck, jfs_fscklog, jfs_logdump, jfs_mkfs, jfs_tune y mkfs.jfs
+# jfs_mkfs /dev/sdX1 (formatear una partición)
+# jfs_mkfs -L MisDatos /dev/sdX1 (etiquetar el sistema de archivos)
+# jfs_fsck -D myfsckdump.dat /dev/sdX1 (comprobar la integridad del sistema de archivos y reparar errores y volcar los resultados en el archivo)
+# jfs_logdump /dev/sdX1 (extrae información del log de transacciones [journal] del sistema de archivos JFS)
+# jfs_fscklog myfsckdump.dat (interpretar los dumps generados por fsck.jfs)
+# jfs_debugfs /dev/sdX1 (examinar manualmente los datos en disco con interfaz CLI interactiva)
+
+
 jhead
 mostrará toda la metainformación incrustada en un fichero JPG incluyendo la miniatura [thumbnail] de la foto original
 $ jhead -st miniatura.jpg imagen_para_analizar.jpg
