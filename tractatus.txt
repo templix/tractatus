@@ -26586,16 +26586,33 @@ x 1.5 y 3.5 hjc vjb --> justificación horizontal y vertical al centro [predeter
         hjr --> justificación horizontal a la derecha
         vjt --> justificación vertical a la parte superior encima del gráfico
         vjc --> justificación vertical a la parte inferior encima del gráfico
-Varios ejemplos en file:///usr/share/doc/jgraph/examples
+Varios ejemplos en file:///usr/share/doc/jgraph/examples. Se pueden ejecutar:
+$ mkdir salidas
+$ cd salidas
+$ jgraph /usr/share/doc/jgraph/examples/acc.jgr > salida.ps (y visualizar con gv)
 
 
 jhead
-mostrará toda la metainformación incrustada en un fichero JPG incluyendo la miniatura [thumbnail] de la foto original
-$ jhead -st miniatura.jpg imagen_para_analizar.jpg
-$ jhead -dt imagen.jpg  (borrar el thumbnail)
-$ jhead -mkexif imagen.jpg (borra datos)
-$ jhead -purejpg imajen.jpg (borra efix)
-$ jhead -n%Y-%m-%d_%H-%M-%S *.jpg (Renombrar con la fecha y hora de la metainformación)
+Utilidad para extraer la configuración de la cámara digital de los archivos con formato Exif utilizados por muchas cámaras digitales. También puede reducir el tamaño de los archivos JPEG de cámaras digitales sin pérdida de información, eliminando las miniaturas que las cámaras digitales incluyen en el encabezado Exif. Exif es un estándar que almacena metadatos dentro de archivos de imagen que incluye fecha y hora en que se tomó la foto, marca y modelo de la cámara, orientación, datos de GPS si están disponibles, miniaturas embebidas...
+$ jhead foto.jpg (ver los metadatos Exif de una imagen)
+$ jhead -dt foto.jpg (eliminar la miniatura incrustada)
+$ jhead -autorot *.jpg (corregir orientación de la imagen según el valor Exif)
+$ jhead -n%Y-%m-%d_%H-%M-%S *.jpg (renombra las fotos usando el patrón de fecha y hora de la toma, por ejemplo: 2025-06-20_14-30-01.jpg)
+$ jhead -purejpg foto.jpg (elimina todos los datos Exif y otros segmentos no esenciales)
+$ jhead -mkexif imagen.jpg (borra algunos datos)
+$ jhead -ft *.jpg (cambia la fecha del sistema del archivo para que coincida con la fecha de captura guardada en Exif)
+
+
+jhove
+[JSTOR/Harvard Object Validation Environment]. Herramienta de validación de objetos digitales que verifica la integridad y conformidad de archivos con sus formatos específicos. Los formatos actualmente compatibles son AIFF, ASCII, Bytestream, GIF, HTML, JPEG, JPEG 2000, PDF, TIFF, UTF-8, WAV y XML. Los documentos son analizados y comprobados por si estan bien formados, consistentes con los requisitos básicos del formato y válidos.
+$ jhove -m PDF-hul -h xml documento.pdf (valida un archivo PDF, usando el módulo especificado y salida en formato xml)
+$ jhove -m JPEG-hul imagen.jpg (validar una imagen JPEG)
+$ jhove -l (listar módulos disponibles)
+$ jhove -m TIFF-hul *.tif (procesa todos los archivos .tif en el directorio)
+$ jhove -m WAV-hul audio.wav -h text (salida en texto plano)
+$ jhove -m HTML-hul pagina.html (comprueba sintaxis, doctype y estructura para validar un html)
+Si un archivo es corrupto, JHOVE reporta errores como "Invalid xref table".
+Nota.-- No repara archivos, solo los valida.
 
 
 jnettop
