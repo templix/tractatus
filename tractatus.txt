@@ -26615,6 +26615,15 @@ Si un archivo es corrupto, JHOVE reporta errores como "Invalid xref table".
 Nota.-- No repara archivos, solo los valida.
 
 
+jigdo-file
+Descarguar imágenes ISO de CD/DVD/USB de Debian desde cualquier réplica [mirrors] de Debian. Incluye las herramientas jigdo-lite y jigdo-mirror
+Primero que precisa descargar un archivo .jigdo desde https://cdimage.debian.org/
+$ jigdo-lite archivo.jigdo (pide la URL base del espejo Debian o usar el predeterminado y empieza la descarga)
+$ jigdo-lite --scan /var/cache/apt/archives debian-12.5.0-amd64-DVD-1.jigdo (escaneando un cache local)
+$ jigdo-lite debian-12.5.0-amd64-DVD-1.jigdo (descargar imágenes Debian desde un espejo)
+$ jigdo-mirror --mirror /srv/debian-mirror/ --jigdo debian-12.5.0-amd64-DVD-1.jigdo (construir imágen completa desde un mirror local)
+
+
 jnettop
 Monitor del tráfico de red ordenado por el ancho de banda utilizado.
 # jnettop
