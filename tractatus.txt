@@ -26624,6 +26624,19 @@ $ jigdo-lite debian-12.5.0-amd64-DVD-1.jigdo (descargar imágenes Debian desde u
 $ jigdo-mirror --mirror /srv/debian-mirror/ --jigdo debian-12.5.0-amd64-DVD-1.jigdo (construir imágen completa desde un mirror local)
 
 
+jigit
+El paquete jigit complementa a jigdo [ver] y está orientado a usuarios avanzados, desarrolladores de distribuciones y mantenedores de mirrors. Sus utilidades permiten crear, verificar y manipular imágenes ISO relacionadas con .jigdo, especialmente enfocadas en reproducibilidad y verificación. Incluye las aplicaciones jigdo-gen-checksum-list, jigdump, jigit-mkimage, jigsum, jigsum-sha256, parallel-sums y mkjigsnap.
+$ jigdo-gen-checksum-list -e (mostrar ejemplos)
+$ jigdo-gen-checksum-list -c sha256 /srv/debian/debian-12.11.0-amd64-netinst.iso (suma de verificación sha256 del archivo especificado en el formato que jigdo-file espera)
+$ jigsum debian.iso (genera MD5 al estilo jigdo base64)
+$ jigsum-sha256 debian.iso (genera suma SHA256 al estilo jigdo base64)
+$ jigit-mkimage --jigdo debian-12.5.0-amd64-DVD-1.jigdo --template debian-12.5.0-amd64-DVD-1.template --checksum-list checksums.list --image debian-rebuild.iso (reconstruye una imagen ISO directamente desde un archivo .jigdo, .template y los paquetes necesarios)
+$ jigdump debian-12.5.0-amd64-DVD-1.template (extrae y muestra información interna de archivos .template y .jigdo)
+$ parallel-sums --md5 --sha256 /srv/debian/pool > sums.txt (genera ambas sumas [MD5 y SHA256] para todo el directorio)
+$ jigdo-file make-template --image original.iso --jigdo new.jigdo --template new.template (crear la .jigdo y .template)
+$ jigit-mkimage --jigdo new.jigdo --template new.template --checksum-list checksums.list --image rebuilt.iso (regenerar una ISO en otro equipo)
+
+
 jnettop
 Monitor del tráfico de red ordenado por el ancho de banda utilizado.
 # jnettop
