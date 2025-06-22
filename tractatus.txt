@@ -26642,6 +26642,13 @@ Script de Perl que genera una galería de fotos HTML estática a partir de uno o
 $ jigl -uec -it Verano -iw 6 -uo -lo . (mostrar exif, título, los thumbnails del indice de 6 por linea [por defecto 5], imágenes y links a los originales de las imágenes del presente directorio)
 
 
+jitterdebugger
+Herramienta de medición de respuesta en tiempo real [Real-Time - RT] que mide la variabilidad en la latencia de respuesta de las CPUs y almacena todas las muestras para posprocesamiento. Inicia un hilo en cada CPU que programa un temporizador y mide el tiempo transcurrido desde que expira el temporizador hasta que el hilo que lo configuró se vuelve a ejecutar.
+# jitterdebugger -v (Mostrar actualizaciones en vivo de las mediciones)
+# jitterdebugger -D 10s (se ejecuta durante 10 segundos)
+# jitterdebugger -D 20s -p 50 -i 10000 (durante 20 segundos, prioridad de los subprocesos de medición 50 [predete. 98, máximo] y tiempo de reposo entre cada medición [predete 1000 us]
+
+
 jnettop
 Monitor del tráfico de red ordenado por el ancho de banda utilizado.
 # jnettop
