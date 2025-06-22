@@ -26662,6 +26662,18 @@ $ cat /proc/sys/kernel/random/entropy_avail (saber la entropia del sistema. El v
 # jitterentropy-rngd -v -f 1 -o 8 -s (modo verboso, usa un flag interno, sobremuestreo de 8 muestras por bit y activa el modo compatible con SP800-90B)
 
 
+jlha-utils
+Programa para comprimir o descomprimir archivos en formato lzh también conocido como lha.
+$ jlha l archivo.lzh (ver qué archivos contiene un archivo .lzh sin descomprimirlo)
+$ jlha v archivo.lzh (ver más detalles como tamaño, fecha, etc)
+$ jlha x archivo.lzh (extraer todos los archivos del archivo LZH en el directorio actual)
+$ jlha x archivo.lzh -w=carpeta_descomprimida (extraerlos en un directorio específico)
+$ jlha a respaldo.lzh directorio/ (comprimir un directorio completo y su contenido)
+$ jlha aq archivo.lzh archivo1.txt imagen.jpg (crear un archivo LZH que contenga archivo1.txt y imagen.jpg y en modo silencioso)
+$ jlha xo archivo.lzh (extrae todos los archivos y sobrescribe archivos existentes sin preguntar en el directorio actual)
+$ jlha az nuevo_archivo.lzh archivo_grande.bin (añade sin comprimir los archivos)
+
+
 jnettop
 Monitor del tráfico de red ordenado por el ancho de banda utilizado.
 # jnettop
