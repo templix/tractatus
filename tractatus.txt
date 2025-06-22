@@ -25326,7 +25326,8 @@ inotify-tools
 $ inotifywait -m /ruta/al/directorio (monitorizar un directorio por cualquier evento)
 $ inotifywait -m -e create -e modify -e delete /ruta/al/directorio (monitorizar solo ciertos eventos como creación, modificación y eliminación)
 $ inotifywait -m -r -e create /ruta/al/directorio (monitorizar recursivamente en un directorio)
-$ inotifywatch -v -t 60 -r /ruta/al/directorio (recopilar estadísticas durante 60 segundos)
+$ inotifywatch -v -t 60 /dev/random (obtener un resumen después de 60 segundos de lecturas en /dev/random)
+$ inotifywait -m --timefmt '%H:%M:%S' --format '%T: %e' /dev/random (ver eventos de acceso en tiempo real en /dev/random)
 $ inotifywatch -v -e access -e modify -t 30 /ruta/al/directorio (monitorizar solo ciertos eventos)
 Algunos eventos comunes que se pueden monitorizar:
           - access: Acceso a contenido
@@ -35950,6 +35951,14 @@ rmdir
 Borra directorios vacios
 $ rmdir /home/usuario/dir_vacio
 $ find . -type d -empty -exec rmdir {} \; (Otra forma)
+
+
+rng-tools
+Daemon para usar un TRNG [True Random Number Generator] de hardware que actúa como puente entre un TRNG, como los de algunos chipsets Intel/AMD/VIA, y el PRNG [Pseudo-Random Number Generator] del kernel. Comprueba los datos recibidos del TRNG mediante las pruebas FIPS 140-2 para verificar su aleatoriedad y los envía al pool de entropía del kernel. Incluye la herramienta rngtest
+$ systemctl status rngd
+$ cat /dev/random | rngtest -c 1000 (salir después de procesar 1000 bloques)
+$ cat /dev/random | rngtest -t 2 (vuelca las estadísticas cada 2 segundos)
+$ cat /dev/random | rngtest -b 1000 (vuelca las estadísticas cada 100 bloques)
 
 
 robots.txt
