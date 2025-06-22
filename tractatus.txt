@@ -22986,9 +22986,11 @@ Analiza e identifica varios hashes de contraseñas en función de su tipo. Desca
 
 
 haveged
-Es un demonio de entropía en el espacio de usuario para sistemas Linux. Su principal función es generar entropía [aleatoriedad] para el sistema, lo cual es crucial para muchas operaciones criptográficas y de seguridad utilizando el algoritmo HAVEGE [HArdware Volatile Entropy Gathering and Expansion] para generar entropía de manera eficiente y confiable.
-# systemctl start haveged (iniciar el demonio)
+Demonio que genera entropía para el núcleo de Linux, mejorando la disponibilidad de números aleatorios en sistemas donde la fuente de entropía natural, como movimientos de ratón, pulsaciones de teclado o actividad de disco, es limitada. Utiliza el algoritmo HAVEGE [HArdware Volatile Entropy Gathering and Expansion] que no depende de los mecanismos estándar para recolectar aleatoriedad para el conjunto de entropía del sistema. Si el sistema no tiene suficiente entropía, procesos como gpg o ssh-keygen pueden bloquearse o volverse lentos.
+# systemctl status haveged (ver el estado actual)
 # systemctl enable haveged (habilitar para que se inicie automáticamente al arrancar el sistema)
+# nano /etc/default/haveged
+        DAEMON_ARGS="-w 2048"
 $ cat /proc/sys/kernel/random/entropy_avail (verificar la cantidad de entropía disponible en el sistema)
 
 
@@ -26648,6 +26650,16 @@ Herramienta de medición de respuesta en tiempo real [Real-Time - RT] que mide l
 # jitterdebugger -v (Mostrar actualizaciones en vivo de las mediciones)
 # jitterdebugger -D 10s (se ejecuta durante 10 segundos)
 # jitterdebugger -D 20s -p 50 -i 10000 (durante 20 segundos, prioridad de los subprocesos de medición 50 [predete. 98, máximo] y tiempo de reposo entre cada medición [predete 1000 us]
+
+
+jitterentropy-mgd
+Demonio de RNG [Random Number Generator] que alimenta el pool de entropía del kernel de Linux [/dev/random] utilizando una fuente de entropía basada en jitter de temporización, una técnica de generación de números aleatorios basada en la variación en tiempos de ejecución de operaciones a nivel de CPU. La inicialización de /dev/random también garantiza que /dev/urandom se beneficie de la entropía, especialmente durante el arranque, cuando la entropía de Linux es baja, Jitter RNGd proporciona una fuente de entropía suficiente.
+$ cat /proc/sys/kernel/random/entropy_avail (saber la entropia del sistema. El valor máximo en muchos sistemas es 4096. Si baja de 1000, puede indicar que el sistema necesita más entropía)
+# systemctl status jitterentropy-rngd
+# jitterentropy-rngd -f 1 (se está activando un comportamiento opcional específico)
+# jitterentropy-rngd -o 8 (configura el sobremuestreo a 8, que es un valor común)
+# jitterentropy-rngd -s (activa el modo compatible con SP800-90B y jitterentropy-rngd se comporta de forma más conservadora y estricta)
+# jitterentropy-rngd -v -f 1 -o 8 -s (modo verboso, usa un flag interno, sobremuestreo de 8 muestras por bit y activa el modo compatible con SP800-90B)
 
 
 jnettop
@@ -35958,7 +35970,7 @@ Daemon para usar un TRNG [True Random Number Generator] de hardware que actúa c
 $ systemctl status rngd
 $ cat /dev/random | rngtest -c 1000 (salir después de procesar 1000 bloques)
 $ cat /dev/random | rngtest -t 2 (vuelca las estadísticas cada 2 segundos)
-$ cat /dev/random | rngtest -b 1000 (vuelca las estadísticas cada 100 bloques)
+$ cat /dev/random | rngtest -b 1000 (vuelca las estadísticas cada 1000 bloques)
 
 
 robots.txt
