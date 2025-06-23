@@ -26778,6 +26778,16 @@ $ join fichero1 fichero2
 $ join -v 1 fichero1 fichero2 (mostrar líneas de fichero1 que no existen en  fichero2)
 
 
+jool-dkms
+[jool-tools]. Paquete que contiene módulos del kernel para Jool, instalados usando DKMS [Dynamic Kernel Module Support]. Jool es una herramienta de traducción entre IPv4 e IPv6, similar a NAT, y se usa para facilitar la interoperabilidad entre redes IPv4 y IPv6, según una estrategia de traducción de direcciones IP configurable.
+# modprobe jool (verificar que Jool está instalado)
+# jool instance add "instancia1" --netfilter (crea una instancia llamada instancia1 usando Netfilter)
+# jool nat64 add --pool6 64:ff9b::/96 (agregar un prefijo NAT64 estándar para traducir IPv6 a IPv4)
+# jool instance display (verificar el estado)
+# iptables -t nat -A PREROUTING -p tcp -d 64:ff9b::/96 -j JOOL --instance instancia1 (con tráfico IPv6 entrante y que se traduzca a IPv4)
+# jool instance remove instancia1 (eliminar instancia)
+
+
 joomla
 Recuperar la clave para acceder al administrador.
 Instalar webmin y desde el navegador: https://localhost:10000
