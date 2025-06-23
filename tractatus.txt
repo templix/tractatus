@@ -26703,6 +26703,16 @@ Algunas opciones:
 	-s (Sólo las que están paradas)
 
 
+jodconverter
+Conversor de formatos de Office. Utiliza OpenOffice.org para proporcionar filtros de importación y exportación para diversos formatos de Office, como OpenDocument y Microsoft Office [DOC, DOCX, XLS, XLSX, PPT, PPTX, ODT, ODS, ODP, etc.].
+$ jodconverter documento.docx documento.pdf (convierte documento.docx a PDF usando LibreOffice/OpenOffice en segundo plano)
+$ jodconverter informe.xlsx informe.odt (convertir a formato ODT)
+$ jodconverter --port 8100 (iniciar el servicio en modo servidor, por defecto en puerto 8100)
+$ jodconverter --server http://localhost:8100 presentacion.ppt presentacion.pdf (enviar un documento para conversión remota)
+$ jodconverter *.docx --output-dir pdfs --target-format pdf (convierte todos los archivos DOCX en el directorio actual a PDF y los guarda en la carpeta pdfs)
+$ jodconverter --format pdf contrato.odt (especificar formato de salida con extensión)
+
+
 joe
 Editor de texto
 $ joe -linums fichero (Abre fichero numerando las lineas)
