@@ -15579,6 +15579,7 @@ $ exiftags foto.jpg
 exiftool
 Lee y extrae metadatos de imágenes
 $ exiftool -a -u -g1 foto.png
+$ exiftool -ImageDescription="Verano en Batet" foto.jpg (añadir a "Image Description" el texto especificado)
 $ exiftool -GPSAltitude="0/1" foto.jpg  (Añadir tags a una imagen)
 $ exiftool -GPSLatitude="41.403339" foto.jpg
 $ exiftool -GPSLatitudeRef="N" foto.jpg
@@ -26672,6 +26673,13 @@ $ jlha a respaldo.lzh directorio/ (comprimir un directorio completo y su conteni
 $ jlha aq archivo.lzh archivo1.txt imagen.jpg (crear un archivo LZH que contenga archivo1.txt y imagen.jpg y en modo silencioso)
 $ jlha xo archivo.lzh (extrae todos los archivos y sobrescribe archivos existentes sin preguntar en el directorio actual)
 $ jlha az nuevo_archivo.lzh archivo_grande.bin (añade sin comprimir los archivos)
+
+
+jmeter
+Herramienta para realizar pruebas de carga y medición del rendimiento de aplicaciones web, servicios SOAP, API RESTful, etc. Incluye la herramienta jmeter-server.
+$ jmeter -n -t test.jmx -l resut.jtl (ejecuta un script de prueba definido en test.jmx y registra los resultados en result.jtl)
+$ jmeter-server (iniciar el servidor [igual a jmeter -s])
+$ jmeter -n -f /ruta/a/test_plan.jmx (ejecuta un test plan específico definido en /ruta/a/test_plan.jmx)
 
 
 jnettop
