@@ -26687,6 +26687,12 @@ Monitor del tráfico de red ordenado por el ancho de banda utilizado.
 # jnettop
 
 
+jnoise
+Utilidad que genera ruido blanco, un tipo de ruido tiene una potencia constante por unidad de frecuencia y rosa que tiene una potencia constante por octava. Ambas fuentes de ruido tienen una distribución de amplitud gaussiana y emiten una señal de -20 dB RMS [Root Mean Square], una onda sinusoidal de escala completa. Esto significa que la intensidad del ruido es consistente y controlada, lo que es importante para la calibración y el análisis.
+$ jackd -d alsa -d hw:0 (iniciar el servidor JACK si no está ya en ejecución o a través de una interfaz gráfica como qjackctl)
+$ jnoise
+
+
 jobs
 Informa sobre los trabajos en ejecución pendientes de finalización que se encuentran en backgroud.
 $ jobs (uso básico)
