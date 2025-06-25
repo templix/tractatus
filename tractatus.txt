@@ -26918,6 +26918,17 @@ $ jpnevulator --read --tty /dev/ttyS0 --base 2 (especificar si los datos están 
 $ jpnevulator --pass --tty /dev/ttyS0 --tty /dev/ttyS1 (leer y escribir en múltiples puertos)
 
 
+jsamp
+Herramienta para el protocolo simple de mensajería de aplicaciones SAMP [Simple Application Messaging Protocol] para el Observatorio Virtual [Virtual Observatory - VO] que permite acceso directo a operaciones de bajo nivel, como iniciar un concentrador de comunicaciones SAMP local para que otras aplicaciones astronómicas como Aladin [ver imágenes en diferentes longitudes de onda], Topcat [analizar un catálogo de estrellas en esa galaxia] y Splat-VO [examinar el espectro de una estrella específica], se comuniquen entre sí y compartan datos de forma estandarizada. Con SAMP, se selecciona una estrella en Topcat, este puede enviar un mensaje a Aladin para que centre la imagen en esa estrella y a Splat-VO para que muestre su espectro. Esto agiliza enormemente el flujo de trabajo en la investigación astronómica.
+$ java -jar jsamp.jar hub (iniciará un Hub SAMP en la máquina local)
+$ java -jar jsamp.jar hubmonitor (permitirá supervisar el Hub)
+$ java -jar jsamp.jar messagesender -mtype "table.load.votable" -url "file:///ruta/a/mi_catalogo.vot" -name "MiCatalogo" (enviaría un mensaje de tipo table.load.votable para cargar una tabla VOTable, con la URL de un archivo local a cualquier aplicación que esté suscrita a ese tipo de mensaje por ejemplo, Topcat)
+$ java -jar jsamp.jar messagesender -mtype "image.load.url" -url "http://ejemplo.com/mi_imagen.fits" -targetname "Aladin" (enviar a un cliente específico [Aladin] que cargue la imagen FITS desde la URL especificada)
+$ java -jar jsamp.jar snooper (mostrar los mensajes que se envían y reciben entre las aplicaciones conectadas)
+$ java -jar jsamp.jar sampload -nclient 10 -nquery 100 -mode async (simular 10 clientes enviando 100 consultas asíncronas para evaluar el rendimiento del Hub)
+$ topcat -jsamp hub (dice a TOPCAT que inicie un Hub SAMP usando su implementación jsamp interna)
+
+
 jumanji
 Navegador estilo vi con soporte flash.
 Configuración:
