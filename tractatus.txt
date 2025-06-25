@@ -26985,6 +26985,21 @@ Es un fork [versión derivada] de una versión más estable del editor JOE [ver]
 $ jupp -keymap cua doc.txt (abrir un archivo con los atajos CUA [Common User Access]: Ctrl+z, Ctrl+x, Ctrl+c, Ctrl+v [deshacer, cortar, copiar y pegar] similar a los editores GUI modernos)
 
 
+jupyter
+Herramientas para la computación interactiva, útiles para la ciencia de datos, la computación científica y machine learning por su capacidad de combinar código, texto y visualizaciones en un solo documento interactivo. Cuando se instala, se instalan varias dependencias tipo jupyter-... cuyos ejecutables son: jupyter-bundlerextension, jupyter-console, jupyter-dejavu, jupyter-kernelspec, jupyter-nbextension, jupyter-serverextension, jupyter-execute, jupyter-migrate, jupyter-notebook, jupyter-troubleshoot, jupyter-kernel, jupyter-nbconvert, jupyter-run y jupyter-trust.
+$ jupyter-notebook (lanza el entorno web de Jupyter Notebook donde sse puede crear, editar y ejecutar notebooks .ipynb)
+$ jupyter-console --kernel=python3 (abre una consola interactiva)
+$ jupyter-run notebook.ipynb (ejecuta un notebook)
+$ jupyter-nbconvert --to html mi_notebook.ipynb (convierte notebooks a HTML [PDF, Marldown...])
+$ jupyter-kernelspec list (listar kernels disponibles en el sistema)
+$ jupyter-trust mi_notebook.ipynb (marca un notebook como confiable)
+$ jupyter-dejavu notebook1.ipynb notebook2.ipynb (visualizar diferencias entre versiones de notebooks)
+$ jupyter-nbextension list (listar extensiones del frontend del notebook)
+$ jupyter-nbextension enable hinterland/main (habilitar una extensión)
+$ jupyter-serverextension enable nombre_extension (activa extensiones del servidor de Jupyter)
+$ jupyter-troubleshoot (verifica versiones, dependencias, errores)
+
+
 kakoune
 Editor de código muy inspirado en Vim; por ello, la mayoría de sus comandos son similares a los de Vi y comparte el modelo de Vi de "pulsaciones de teclado como lenguaje de edición de texto". :q para salir.
 $ kak file.txt
