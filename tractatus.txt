@@ -26714,7 +26714,7 @@ $ jodconverter --format pdf contrato.odt (especificar formato de salida con exte
 
 
 joe
-Editor de texto
+[Joe's Own Editor]. Editor de texto.
 $ joe -linums fichero (Abre fichero numerando las lineas)
 Algunas teclas de control ["^k h" significa pulsar la tecla Ctrl y sin soltarla pulsar la letra “k”, soltar estas teclas y pulsar “h”]
 	^k h (Abrir/cerrar ventana de ayuda. Con esc . se avanza en las ventanas de ayuda y con esc , se retrocede)
@@ -26734,6 +26734,11 @@ Algunas teclas de control ["^k h" significa pulsar la tecla Ctrl y sin soltarla 
 	^o (Borrar palabra anterior)
 	^_ (Deshacer)
 	^c (Cancelar)
+JOE se puede invocar con diferentes nombres para emular otros editores populares:
+jstar --> Imitación cercana de WordStar.
+jpico --> Imitación del editor PICO.
+jmacs --> Imitación de GNU Emacs.
+rjoe --> Versión restringida de JOE que permite editar solo los archivos especificados en la línea de comandos.
 
 
 john
@@ -26973,6 +26978,11 @@ Atajos:
 	y (Copiar la dirección de la página al portapapeles)
 	^s (Mostrar código fuente)
 	^q (Salir)
+
+
+jupp
+Es un fork [versión derivada] de una versión más estable del editor JOE [ver]. Los comandos son en gran medida los mismos de joe
+$ jupp -keymap cua doc.txt (abrir un archivo con los atajos CUA [Common User Access]: Ctrl+z, Ctrl+x, Ctrl+c, Ctrl+v [deshacer, cortar, copiar y pegar] similar a los editores GUI modernos)
 
 
 kakoune
