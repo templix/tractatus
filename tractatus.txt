@@ -26876,6 +26876,29 @@ $ jpegoptim -f imagen.jpg (Forzando optimización incluso si el resultado es má
 $ jpegoptim -t imagen.jpeg (borrando los marcadores en el archivo de salida)
 
 
+jpegpixi
+[JPEG PIXel Interpolator]. Herramienta usada para corregir puntos defectuosos, también llamados "píxeles calientes" o "hot pixels" en imágenes JPEG producidas por cámaras digitales con defectos en el CCD. La mayoría de los programas de gráficos decodifican las imágenes JFIF al cargarlas y las recodifican al guardarlas, lo que resulta en una pérdida general de calidad. jpegpixi, por otro lado, no decodifica ni recodifica la imagen, sino que manipula los datos codificados. Al hacerlo, también conserva los metadatos EXIF.
+Es preciso informar a la aplicación qué píxeles están defectuosos y en qué posición están. Esto se le pasa mediante un archivo de texto que contiene las coordenadas [x, y] de los píxeles a corregir. Luego, el programa reemplaza ese píxel por una interpolación de sus vecinos.
+$ nano hotpixels.txt
+        100 150 h
+        200 250 v
+        300 350 x
+100 150 h --> píxel en columna 100, fila 150,  interpolar horizontalmente [entre píxeles izquierdo y derecho]
+200 250 v --> interpolar verticalmente
+300 350 x --> interpolar en ambas direcciones [promedio de horizontal y vertical]
+$ jpegpixi foto_defecto.jpg foto_corregida.jpg hotpixels.txt (corregirá los píxeles listados y guardará la imagen corregida)
+Nota.- Se pueden encontrar los píxeles calientes haciendo varias fotos oscuras, por ejemplo, con la tapa del lente puesta y analizando los puntos brillantes. Tambien hay programas gráficos  como darktable o herramientas como python3-opencv o python3-numpy para identificarlos automáticamente.
+
+
+jpegqs
+[JPEG Quant Smooth]. Herramienta diseñada para mejorar imágenes JPEG que presentan artefactos de compresión. Estos artefactos son comunes cuando una imagen JPEG ha sido comprimida de manera agresiva [calidad baja], lo que resulta en bloques visibles, pérdida de detalles y distorsiones en áreas con colores o texturas uniformes. Intenta recuperar la precisión perdida de los coeficientes DCT [Discrete Cosine Transform] basándose en una tabla de cuantificación de una imagen JPEG.
+$ jpegqs imagen_original.jpg imagen_mejorada.jpg (corrección básica de una imagen JPEG)
+$ jpegqs -q 80 imagen.jpg imagen_suavizada.jpg (ajustar la intensidad de la corrección. De 0 a 100, corrección más fuerte puede introducir suavizado excesivo)
+$ jpegqs -f entrada.jpg salida.jpg (modo rápido, menos preciso)
+$ jpegqs -m 1 foto.jpg foto_reparada.jpg (modo "suave", ideal cuando se quiere preservar detalles finos)
+Nota.- Si la compresión original fue muy agresiva, la recuperación será limitada y en algunos casos, el filtrado excesivo puede hacer que la imagen parezca "borrosa".
+
+
 jpegtran
 Eliminar información y reducir, modificar o recortar tamaño de imagenes jpeg.
 $ jpegtran -copy none optimize original.jpg resultado.jpg (Eliminando información oculta [-copy none] y reduciendo la imagen [-optimize])
