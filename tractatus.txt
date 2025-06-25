@@ -27000,6 +27000,35 @@ $ jupyter-serverextension enable nombre_extension (activa extensiones del servid
 $ jupyter-troubleshoot (verifica versiones, dependencias, errores)
 
 
+k2pdfopt
+Herramienta de línea de comandos que se utiliza para optimizar archivos PDF y DJVU para su visualización en dispositivos electrónicos como lectores de libros electrónicos [e-readers] y smartphones. También puede ser utilizado para manipular archivos PDF de varias maneras, incluyendo el recorte, redimensionamiento, y la aplicación de OCR [Optical Character Recognition - Reconocimiento Óptico de Caracteres].
+$ k2pdfopt input.pdf output.pdf (convertirá el archivo input.pdf en un archivo optimizado output.pdf)
+$ k2pdfopt input.pdf -dev kindle output.pdf (optimiza input.pdf para un dispositivo Kindle y guarda el resultado en output.pdf)
+$ k2pdfopt input.pdf -x 0.5 -y 0.5 -w 700 -h 900 output.pdf (recortar y redimensionar un PDF. -x y -y especifican coordenadas de inicio del recorte, y -w y -h especifican ancho y altura del área recortada)
+$ k2pdfopt input.pdf -ocrmode 1 output.pdf (aplica OCR al archivo input.pdf y guarda el resultado en output.pdf)
+$ k2pdfopt input.djvu output.pdf (convierte un archivo DJVU a un PDF optimizado)
+$ k2pdfopt input.pdf -dev s9 output.pdf (optimiza input.pdf para un smartphone)
+$ k2pdfopt input.pdf -mode b+o output.pdf (crea un PDF de mapa de bits con una capa de OCR)
+$ k2pdfopt input.pdf -ui- -x 0.1 -y 0.1 -w 600 -h 800 -ocrmode 1 -dev kindle -fc- black -bc- white -g- 1.5 -m- 10 output.pdf (muestra una interfaz de usuario para seleccionar el área de recorte, recorta el PDF desde las coordenadas (0.1, 0.1) con un ancho de 600 y una altura de 800, aplica OCR, optimiza para Kindle, establece el color de primer plano a negro y el color de fondo a blanco, ajusta el factor de escala de gris a 1.5, y establece un margen de 10.)
+
+
+kacpimon
+Herramienta que monitoriza los eventos ACPI [Advanced Configuration and Power Interface] del kernel y del teclado desde múltiples interfaces y los reporta a la consola. Las computadoras modernas son compatibles con la Interfaz de configuración y energía avanzada [ACPI] para permitir una gestión inteligente de la energía del sistema, el adaptador de corriente, el cierre de la tapa de un portátil, consultar el estado de la batería y la configuración.
+# systemctl stop acpid (antes de ejecutar kacpimon es necesario detener el daemon acpid)
+$ ps aux | grep acpid (verificar si acpid está corriendo)
+# kacpimon (iniciará la monitorización de eventos ACPI y de teclado, mostrando en la consola cualquier evento detectado)
+Nota.- Para salir, presionar Esc. Evitar Ctrl+C, ya que puede causar pérdida de datos.
+
+
+kactivities-bin
+Herramienta que forma parte del escritorio KDE y permite interactuar con el sistema de actividades de KDE Plasma.
+$ kactivities-cli --list-activities (listar todas las actividades disponibles)
+$ kactivities-cli --current-activity (obtener la actividad actual)
+$ kactivities-cli --set-current-activity "ID_DE_ACTIVIDAD" (cambiar a una actividad específica)
+$ kactivities-cli --add-activity "Nombre de la nueva actividad" (crear una nueva actividad)
+$ kactivities-cli --remove-activity "ID_DE_ACTIVIDAD" (eliminar una actividad)
+
+
 kakoune
 Editor de código muy inspirado en Vim; por ello, la mayoría de sus comandos son similares a los de Vi y comparte el modelo de Vi de "pulsaciones de teclado como lenguaje de edición de texto". :q para salir.
 $ kak file.txt
