@@ -26909,6 +26909,15 @@ Algunas opciones:
 -flip vertical (Imagen espejo vertical [arriba-abajo])
 
 
+jpnevulator
+Herramienta para analizar y manipular datos en puertos seriales. Funciona como un *sniffer* serial, permitiendo leer y escribir datos en uno o más dispositivos seriales al mismo tiempo. Es útil para depurar protocolos, probar dispositivos, o analizar tráfico serial en entornos de desarrollo o integración.
+$ jpnevulator --read --tty /dev/ttyS0 (mostrará los datos recibidos en tiempo real, cada byte como dos dígitos hexadecimales, por ejemplo: DE AD BE EF, DEADBEEF o 0xDE 0xAD 0xBE 0xEF)
+$ jpnevulator --write --tty /dev/ttyS0 < datos.txt (enviar datos al puerto /dev/ttyS0. Los datos datos son tipo: FF 00 AA ...)
+$ echo "FF 00 AA" | jpnevulator --write --tty /dev/ttyS0 (enviar datos directamente desde la línea de comandos)
+$ jpnevulator --read --tty /dev/ttyS0 --base 2 (especificar si los datos están en hexadecimal, base 16, por defecto o binario, base 2 [01000010 111,  01000010111 ...])
+$ jpnevulator --pass --tty /dev/ttyS0 --tty /dev/ttyS1 (leer y escribir en múltiples puertos)
+
+
 jumanji
 Navegador estilo vi con soporte flash.
 Configuración:
