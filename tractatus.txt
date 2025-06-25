@@ -27038,6 +27038,14 @@ Editor de código muy inspirado en Vim; por ello, la mayoría de sus comandos so
 $ kak file.txt
 
 
+kanif
+Herramienta para la gestión y administración de clústeres de computación de alto rendimiento. Combina las principales funcionalidades de herramientas de gestión de clústeres conocidas, como c3, pdsh y dsh, e imita su sintaxis. Ofrece tres herramientas para ejecutar el mismo comando en varios nodos ("ssh paralelo", mediante el comando 'kash'), para difundir la copia de archivos o directorios a varios nodos (comando 'kaput') y para recopilar varios archivos o directorios remotos localmente (comando 'kaget'). Incluye las herramientas kaget, kaput y kash
+$ kanif -n "python --version" (ejecutar un comando en todos los nodos del clúster)
+$ kaget (listar todos los nodos del clúster y su estado)
+$ kaput -r nodo1 (reiniciará el nodo llamado nodo1)
+$ kash -j "./analisis.sh" (enviar un trabajo a todos los nodos, por ejemplo un script de análisis)
+
+
 katoolin
 [git python]. Instalar las herramientas de kali linux. Descarga:
 $ git clone https://github.com/LionSec/katoolin.git
