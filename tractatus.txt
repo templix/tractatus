@@ -27046,6 +27046,44 @@ $ kaput -r nodo1 (reiniciará el nodo llamado nodo1)
 $ kash -j "./analisis.sh" (enviar un trabajo a todos los nodos, por ejemplo un script de análisis)
 
 
+kannel
+es una puerta de enlace para conectar teléfonos WAP [Wireless Application Protocol - Protocolo de Aplicación Inalámbrica] a Internet. Permmite enviar y recibir mensajes SMS y MMS, así como para manejar conexiones **WAP** (Wireless Application Protocol). Está diseñado para operar entre una red GSM a través de SMPP, HTTP, o interfaces de módem y servicios de aplicaciones en Internet. También funciona como puerta de enlace SMS/SMPP para proporcionar servicios basados en SMS a teléfonos GSM. Incluye las aplicaciones decode_emimsg, mtbatch, seewbmp, wmlsc, wmlsdasm, bearerbox, run_kannel_box, smsbox y wapbox.
+$ bearerbox -v 1 /etc/kannel/kannel.conf (inicia el "bearerbox" con nivel de verbosidad 1 usando el archivo de configuración)
+$ smsbox -v 1 /etc/kannel/kannel.conf (inicia el proceso "smsbox", encargado de enviar y recibir SMS usando las reglas definidas en el archivo de configuración)
+$ wapbox /etc/kannel/kannel.conf (módulo opcional para manejar tráfico WAP menos usado actualmente por la obsolescencia del WAP)
+$ run_kannel_box bearerbox /etc/kannel/kannel.conf (wrapper/script para facilitar el inicio de los componentes de Kannel)
+$ mtbatch -f lista.csv -u http://localhost:13013/cgi-bin/sendsms (herramienta para enviar mensajes SMS masivos)
+Un ejemplo de lista.csv podría ser:
+        972456789,Hola Juan
+        910987654,Hola María
+        ...
+$ decode_emimsg 0201000D916407281553F800008005060804D4F29C0E (decodifica una cadena hexadecimal en un mensaje EMI/UCP [protocolo de mensajes SMS])
+$ seewbmp imagen.wbmp (muestra imágenes WBMP [Wireless Bitmap], usadas en terminales WAP antiguos)
+$ wmlsc archivo.wmls (genera archivo.wmlc, un archivo compilado de WMLScript)
+$ wmlsdasm archivo.wmlc (imprime el código fuente o aproximado del archivo compilado .wmlc)
+Estructura típica del archivo de configuración:
+# nano /etc/kannel/kannel.conf
+        group = core
+        admin-port = 13000
+        smsbox-port = 13001
+        admin-password = bar
+        log-file = "/var/log/kannel/bearerbox.log"
+        log-level = 1
+        #
+        group = smsc
+        smsc = fake
+        smsc-id = FAKE
+        port = 10000
+        #
+        group = sendsms-user
+        username = tester
+        password = foobar
+        #
+        group = sms-service
+        keyword = default
+        text = "Servicio no disponible"
+
+
 katoolin
 [git python]. Instalar las herramientas de kali linux. Descarga:
 $ git clone https://github.com/LionSec/katoolin.git
