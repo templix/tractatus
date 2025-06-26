@@ -27084,6 +27084,13 @@ Estructura típica del archivo de configuración:
         text = "Servicio no disponible"
 
 
+kappanhang
+Herramienta diseñada para conexión remota de canales de audio y un puerto serie a un servidor Icom RS-BA1. La aplicación está diseñada principalmente para conectarse al transceptor Icom IC-705, que cuenta con Wi-Fi integrado y un servidor RS-BA1
+$ kappanhang -H 192.168.1.100 -p 50001 -C 50002 -A 50003 (dirección IP del IC-705, puerto del servidor RS-BA1, puerto local para redirigir los comandos CAT [Computer Aided Transceiver] y puerto local para el streaming de audio)
+$ kappanhang -H 192.168.1.100 -v (muestra información detallada de la conexión)
+$ kappanhang -c /ruta/a/config.conf (cargar una configuración guardada)
+
+
 katoolin
 [git python]. Instalar las herramientas de kali linux. Descarga:
 $ git clone https://github.com/LionSec/katoolin.git
