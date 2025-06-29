@@ -27119,6 +27119,14 @@ $ kappanhang -H 192.168.1.100 -v (muestra información detallada de la conexión
 $ kappanhang -c /ruta/a/config.conf (cargar una configuración guardada)
 
 
+karma-tools
+Utilidades básicas para interactuar con el reproductor de música Rio Karma. Incluye las herramientas chprop, karma_helper y riocp.
+$ riocp -a ~/Música/cancion.mp3 (subir un archivo al Karma)
+$ riocp -d <id_del_archivo> (eliminar un archivo del dispositivo)
+$ chprop 1234 --title="Nueva Canción" --genre="Rock" (cambiar las propiedades como artista, álbum, título de los archivos en el Rio Karma con ID 1234)
+Nota.- El Rio Karma debe estar conectado por USB y en modo de transferencia.
+
+
 katoolin
 [git python]. Instalar las herramientas de kali linux. Descarga:
 $ git clone https://github.com/LionSec/katoolin.git
