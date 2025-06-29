@@ -27127,6 +27127,34 @@ $ chprop 1234 --title="Nueva Canción" --genre="Rock" (cambiar las propiedades c
 Nota.- El Rio Karma debe estar conectado por USB y en modo de transferencia.
 
 
+kas
+[Konfigurator für Applikations-Systeme]. Herramienta de configuración para proyectos basados en Bitbake. kas utiliza un archivo de configuración del proyecto y se encarga de la fase de descarga y configuración. BitBake es el motor de construcción utilizado por el proyecto Yocto. Es similar a make pero está específicamente diseñado para la construcción de distribuciones Linux embebidas.
+$ kas build archivo-kas.yml (construir un proyecto)
+$ kas build --target machine-specific archivo-kas.yml (construir para una máquina específica)
+$ kas shell archivo-kas.yml (ejecutar una shell en el entorno configurado)
+$ kas build --target core-image-minimal archivo-kas.yml (construir solo una receta específica)
+Ejemplo de archivo.yml
+$ nano kas.yml
+        header:
+          version: 12
+        machine: qemux86-64
+        distro: poky
+        repos:
+          poky:
+            url: git://git.yoctoproject.org/poky
+            refspec: kirkstone
+          meta-openembedded:
+            url: git://git.openembedded.org/meta-openembedded
+            refspec: kirkstone
+          meta-example:
+            url: https://github.com/example/meta-example
+            refspec: master
+            layers:
+              meta-example-layer:
+                conf: |
+                  IMAGE_INSTALL:append = " example-package"
+
+
 katoolin
 [git python]. Instalar las herramientas de kali linux. Descarga:
 $ git clone https://github.com/LionSec/katoolin.git
