@@ -27084,6 +27084,34 @@ Estructura típica del archivo de configuración:
         text = "Servicio no disponible"
 
 
+kanshi
+Permite definir perfiles de salida que se activan y desactivan automáticamente al conectar en caliente. Es especialmente útil si se conecta o desconecta monitores externos con frecuencia, o si se acopla y desacopla a una estación de trabajo varias veces.
+$ nano .config/kanshi/config
+        profile "solo-portatil" {
+            output "eDP-1" enable
+            output "DP-1" disable
+        }
+        profile "monitor-externo" {
+            output "eDP-1" disable
+            output "DP-1" enable
+            output "DP-1" mode 1920x1080@60Hz
+            output "DP-1" position 0,0
+        }
+profile "solo-portatil"
+ - output "eDP-1" enable --> Habilita la pantalla interna del portátil, suponiendo que eDP-1 es su nombre.
+ - output "DP-1" disable --> Deshabilita la pantalla externa, suponiendo que DP-1 es su nombre.
+Este perfil se activaría cuando solo se detecta la pantalla del portátil. Kanshi empareja implícitamente los perfiles basándose en las salidas presentes. Si solo tienes eDP-1 conectado, buscará un perfil que haga referencia solo a eDP-1 o que tenga eDP-1 habilitado y otras salidas no conectadas deshabilitadas.
+profile "monitor-externo"
+ - output "eDP-1" disable --> Deshabilita la pantalla interna del portátil.
+ - output "DP-1" enable --> Habilita la pantalla externa.
+ - output "DP-1" mode 1920x1080@60Hz --> Establece la resolución y la frecuencia de actualización para la pantalla externa.
+ - output "DP-1" position 0,0 --> Posiciona la pantalla externa en la esquina superior izquierda.
+Este perfil se activaría cuando DP-1 está conectado. Kanshi priorizará este perfil porque define explícitamente una acción para el DP-1 recién conectado.
+$ kanshi (ejecutarlo directamente aunque lo normal es que se ejecute en segundo plano cuando se inicia sesión de Wayland)
+$ kanshi -d (mostrará qué perfiles está evaluando kanshi y por qué elige o no, uno en particular)
+Nota.- Para detenerlo, es posible que se tenga que encontrar la ID de su proceso o con pkill kanshi.
+
+
 kappanhang
 Herramienta diseñada para conexión remota de canales de audio y un puerto serie a un servidor Icom RS-BA1. La aplicación está diseñada principalmente para conectarse al transceptor Icom IC-705, que cuenta con Wi-Fi integrado y un servidor RS-BA1
 $ kappanhang -H 192.168.1.100 -p 50001 -C 50002 -A 50003 (dirección IP del IC-705, puerto del servidor RS-BA1, puerto local para redirigir los comandos CAT [Computer Aided Transceiver] y puerto local para el streaming de audio)
