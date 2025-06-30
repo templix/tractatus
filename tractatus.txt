@@ -3738,6 +3738,18 @@ $ bluemon -d 00:1B:63:84:45:67 -c "echo 'Auriculares conectados'" &
 $ bluemon -d 00:1A:7D:DA:71:13 >> ~/bluemon.log 2>&1 & (monitoreo detallado en segundo plano y gardado en un registro)
 
 
+bluetui
+Interfaz para la gestión de dispositivos Bluetooth. Descargar de https://github.com/pythops/bluetui.
+$ bluetui (ver lista de dispositivos Bluetooth cercanos)
+Para navegar porla lista:
+Flechas arriba/abajo o j/k --> Moverse por la lista de dispositivos.
+Enter --> Conectar o desconectar el dispositivo seleccionado.
+p --> Emparejar el dispositivo seleccionado.
+u --> Anular el emparejamiento del dispositivo.
+t --> Marcar el dispositivo como de confianza.
+? --> Mostrar todos los atajos de teclado.
+
+
 bluez
 Es una herramienta que se puede utilizar para manipular atributos de un dispositivo Bluetooth Low Energy [BLE]. Es principalmente útil para averiguar los servicios y características de un dispositivo BLE disponible para que los datos de la víctima puedan ser leídos/escritos según el atacante. Consta de varios ejecutables; bluemoon, bluetoothctl, btattach, btmgmt, btmon, ciptool, gatttool, hciattach, hciconfig, hcidump, hcitool, hex2hcd, l2ping, l2test, mpris-proxy, obexctl, rctest, rfcomm, sdptool y bluetoothd
 $ hcitool dev (averiguar los dispositivos accesibles)
@@ -25142,6 +25154,16 @@ $ img2txt -f svg imagen.jpg > imagen.svg
 $ img2txt -f html imagen.jpg > imagen.html (código html de la imagen)
 
 
+impala
+Gestionar conexiones Wi-Fi. Descargar de https://github.com/pythops/impala.
+$ impala (muestra una lista de las redes Wi-Fi detectadas)
+Para navegar por la lista:
+flechas arriba/abajo para moverse por la lista
+Enter para seleccionar
+d --> desconectar la red actual
+? --> mostrar todos los atajos de teclado.
+
+
 import
 [imagemagick]. Capturar la pantalla en cualquier formato.
 $ import -window root captura.png (captura de pantalla completa)
@@ -43708,6 +43730,18 @@ $ wipe -rq -Q 10 -i -c DIR/ (Que suprima los subdirectorios [r], que haga 10 pas
 wird
 Frontend basado en ncurses para recordatorios, cálculo de fechas, fases lunares, salida y puesta del sol, calendario hebreo, alarmas, mensajes multilingües y manejo adecuado de los días festivos. Muestra en una tabla de tiempo navegable junto con un calendario y permite al usuario crear nuevos recordatorios con o sin tiempo.
 $ wird
+
+
+wiremix
+Mezclador de audio para el servidor de audio PipeWire que permite ajustar volúmenes, enrutar el audio entre diferentes dispositivos y aplicaciones, y configurar ajustes de los dispositivos de audio. Descargar de https://github.com/tsowell/wiremix.
+$ wiremix (iniciar la aplicación)
+Para navegar:
+Flechas o h/j/k/l --> Navegar y ajustar el volumen.
+Tab --> Para cambiar entre las diferentes pestañas: Reproducción, Grabación, Salida ...
+c --> Abre un menú desplegable para enrutar el audio a un destino diferente.
+m --> Silenciar/activar el sonido.
+d --> Establecer un dispositivo de entrada o salida como predeterminado.
+q --> Salir de la aplicación.
 
 
 wkhtmltopdf
