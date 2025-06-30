@@ -27177,6 +27177,32 @@ $ nano kas.yml
                   IMAGE_INSTALL:append = " example-package"
 
 
+kati
+Clon experimental de GNU make cuyo objetivo principal es acelerar la compilación incremental [cuando se recompila solo lo que ha cambiado, sin rehacerlo todo] de Android que convierte el archivo Makefile en un ejecutable o en un archivo .ninja, que luego se compila usando el comando ninja [ver ninja-build].
+Un pequeño ejemplo de como funciona la herramienta:
+$ mkdir projecto-kati
+$ cd projecto-kati
+$ nano linux.c
+        #include <stdio.h>
+        /* Prueba de kati */
+        int main() {
+            printf("¡Linux es un sistema genial!\n");
+            return 0;
+        }
+$ nano Makefile
+        all: linux
+        linux: linux.c
+                gcc -o linux linux.c
+$ ls
+        linux.c  Makefile
+$ kati -f Makefile (crea el ejecutable)
+$ ls
+        linux  linux.c  Makefile
+$ ./linux
+        ¡Linux es un sistema genial!
+$ kati -ninja -f Makefile (creará un build.ninja para compilarlo con la aplicación ninja)
+
+
 katoolin
 [git python]. Instalar las herramientas de kali linux. Descarga:
 $ git clone https://github.com/LionSec/katoolin.git
