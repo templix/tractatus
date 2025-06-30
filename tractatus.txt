@@ -31929,6 +31929,14 @@ nikto
 # nikto -h archivo (a partir de un archivo con una ip o host por linea)
 
 
+ninja-build
+Sistema de compilación parecida a Make. Su objetivo distintivo es la rapidez. Nace del proyecto del navegador Chromium, que cuenta con más de 30 000 archivos fuente y cuyos otros sistemas de compilación pueden tardar diez segundos en empezar a compilar tras modificar un archivo. Ninja tarda menos de un segundo.
+$ ninja (construir un proyecto)
+$ ninja nombre_del_objetivo (construir un objetivo específico)
+$ ninja -t clean -r rules (elimina todos los archivos creados)
+$ ninja -j4 (construir en paralelo, usando 4 jobs)
+
+
 nitrogen
 Gestión de fondos de pantalla para escritorios ligeros.
 $ nitrogen /home/usuario/imagenes/linux.png (Poner una imagen)
