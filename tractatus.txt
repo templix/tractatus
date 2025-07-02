@@ -24603,6 +24603,7 @@ Ver fecha y hora de la BIOS
 # hwclock -D (Muestra toda la información))
 # hwclock -w (sincroniza la del hardware a la del sistema)
 # hwclock -r  (verifica desfase entre ambas)
+# hwclock --set --date="2014-04-28 18:00" (establecer cambio de hora en el sistema y en el hardward.
 # hwclock --set (establece el RTC [Real Time Clock ] según --date)
 # hwclock -a (ajusta la RTC para tener en cuenta la desviación sistemática)
 # hwclock -u (la escala de tiempo del RTC es UTC [Universal Time Coordinated])
@@ -39655,6 +39656,16 @@ Conjunto de cargadores de arranque que actualmente admite sistemas de archivos D
 
 syslogout
 Configuración diseñado para funcionar con bash para un mantenimiento de las partes del shell encargada de cerrar sesión y que permite o prohibe el cierre de sesión del shell para todos los usuarios del sistema de forma modular y centralizada. No es un ejecutable ni un daemon. Las configuraciones se encuentran en $HOME/.bash_logout, /etc/syslogout y /etc/syslogout.d/
+
+
+sysnews
+Programa para mostrar noticias entre usuarios del sistema. Cada noticia se encuentra en un archivo independiente en el directorio /var/lib/sysnews. Cualquier persona con permiso de escritura en este directorio puede crear un archivo news.
+$ nano /var/lib/sysnews/noticia (enviar noticia, por ejemplo con el texto: ¡Atención! Se ha actualizado el kernel del sistema. Reinicie para aplicar cambios)
+$ rm /var/lib/sysnews/noticia (eliminar el archivo, cuando ya no es relevante)
+$ news -a (muestra todas las noticias, incluyendo las ya leídas)
+$ news -s (número de artículos de noticias)
+$ news -n -l (muestra solo los nombres de los artículos de noticias y uno por linea)
+$ news -e 10 -x noticia1 noticia3 (que las noticias caduquen a los 10 dias excepto noticia1 y noticia3)
 
 
 sysstat
