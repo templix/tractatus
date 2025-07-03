@@ -27226,9 +27226,61 @@ kbd
 Permite configurar la consola de Linux, cambiar la fuente, redimensionar las consolas virtuales en modo texto y reasignar el teclado. Incluye las herramientas dumpkeys [ver], fgconsole, kbd_mode, loadkeys [ver], openvt, setfont [ver], unicode_start, kbdrate, codepage, deallocvt, getkeycodes, kbdinfo, loadunimap, mapscrn, mk_modmap, psfaddtable, psfgettable, psfstriptable, psfxtable, resizecons, screendump, setkeycodes, setleds, setlogcons, setmetamode, setvtrgb, showconsolefont, showkey [ver], splitfont, unicode_stop, setvesablank y vcstime
 
 
+kbdd
+Demonio para sistemas X11 [no Wayland] que gestiona distribuciones de teclado por ventana lo que permite que cada ventana, terminal, navegador, editor, etc. recuerde su propio idioma del teclado.
+Es útil si se usa varias distribuciones, por ejemplo: español, inglés y catalán, y no se quiere cambiar manualmente cada vez que se cambia de aplicación.
+$ kbdd -n (ejecutar en modo nodaemon, primer plano)
+Automatizar en la sesión
+$ nano .xinitrc
+kbdd &
+Se puede observar si realmente recuerda por ventana haciendo lo siguiente:
+Abrir dos terminales y en una ejecutar:
+$ setxkbmap us
+Y en la otra ejecuta:
+$ setxkbmap es
+Cambiar de una a otra y comprobar si se activa automáticamente la distribución que se entro en cada una.
+$ pkill kbdd (parar el demonio)
+
+
 kbdrate
 Establece la tasa de repetición del teclado y el tiempo de retardo en las tty.
 # kbdrate -d 200 -r 10 (establece retardo de 200 milisegundos y velocidad de repetición de 10 por segundo)
+
+
+kbtin
+es un cliente MUD [Multi-User Dungeons] de consola basado en el popular Tintin++. No se limita al Mudding y puede usarse para ejecutar programas locales basados en líneas, como Adventure, MySQL, Dpkg-BuildPackage o PiuParts.
+$ kbtin (abre la interfaz interactiva)
+> connect mud.ejemplo.org 4000 (conectar por el puerto y la url especificados)
+> system ls -la (ejecutar un comando del sistema)
+> system adventure (interactuar con Adventure)
+> system mysql -u usuario -pbasedatos (trabajar con MySQL)
+> system piuparts -d sid paquete.deb (usar con piuparts)
+> help (ver todos los comandos)
+> split (dividir la pantalla)
+> session NAME (gestionar múltiples conexiones)
+
+
+kcapi-tools
+Utilidades que interactúan directamente con la API de cifrado del kernel de Linux [AF_ALG]. Esto significa que aprovechan las implementaciones criptográficas optimizadas y seguras que residen en el kernel, a menudo con soporte para hardware específico. Incluye las aplicaciones kcapi-dgst, kcapi-enc y kcapi-rng
+$ kcapi-dgst -c sha512 -i test.txt --hex (usando el hash especificado del archivo test.txt y en formato hexadecimal. Por defecto binario)
+$ echo "Hola mundo" | kcapi-dgst -c sha256 --hex (calcular el hash de una cadena)
+$ echo "Datos secretos" | kcapi-dgst -c hmac(sha256) -p "MiContrasena" --hex (deriva una clave de 256 bits de la contraseña usando PBKDF2 con HMAC-SHA256 por defecto)
+$ echo "Mensaje secreto" | kcapi-enc -c cbc(aes) -e -p "mi_clave_secreta" --hex (cifrar una cadena con AES en modo CBC y una contraseña)
+$ kcapi-enc -c cbc(aes) -d -p "mi_clave_secreta" --salt 1234567890abcdef --iv fedcba9876543210 --hex (descifrar)
+$ kcapi-enc -c gcm(aes) -e -i important.txt -o important.enc --hex --password "SuperSecreto" (cifrar un archivo con AES-GCM)
+$ kcapi-enc -c gcm(aes) -d -i important.enc -o important.dec --hex --password "SuperSecreto" --salt <salt_hex> --iv <iv_hex> --tag <tag_hex> (descifrar)
+$ kcapi-rng -b 16 --hex (generar 16 bytes aleatorios en formato hexadecimal)
+$ kcapi-rng -b 32 > random_data.bin (generar 32 bytes aleatorios utilizando el RNG estándar del kernel y escribirlo en un archivo binario)
+$ kcapi-rng -b 64 -n stdrng -s archivo.txt --hex (generar 64 bytes aleatorios y sembrar el generador)
+        CONFIG_CRYPTO_USER=m (o y)
+        CONFIG_CRYPTO_USER_API=y
+        CONFIG_CRYPTO_USER_API_HASH=y
+        CONFIG_CRYPTO_USER_API_SKCIPHER=y
+        CONFIG_CRYPTO_USER_API_RNG=y
+        CONFIG_CRYPTO_USER_API_AEAD=y
+Nota.- Para que kcapi-tools funcione, el kernel debe estar compilado con las opciones de configuración adecuadas para la API de cifrado del usuario. Algunas de las opciones clave incluyen:
+Verificar estas configuraciones en el sistema con
+$ cat /boot/config-$(uname -r) | grep CONFIG_CRYPTO_USER
 
 
 kdump
