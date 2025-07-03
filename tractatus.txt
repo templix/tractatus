@@ -20786,13 +20786,16 @@ $ gitsome (abrirá una shell interactiva [IPython con mejoras], y dentro de ella
 
 
 gitweb
-Sistema de control de versiones de repositorios Git locales no en plataformas externas como GitHub. Si Apache2 está instalado, la interfaz web se habilita automáticamente en http://localhost/gitweb
+Sistema de control de versiones de repositorios Git locales no en plataformas externas como GitHub.
 # nano /etc/gitweb.conf
 Y que la variable $projectroot apunte al directorio donde esté el repositorio git
       $projectroot = "/var/www/git";
 Reiniciar Apache para aplicar los cambios:
 # systemctl restart apache2
 Y con el navegador acceder al repositorio: http://localhost/gitweb
+Nota.- Si Apache2 está instalado, la interfaz web se habilita automáticamente en http://localhost/gitweb en caso de que no lo haga, entrar en el directorio del proyecto git y lanzar:
+$ git instaweb
+Y se abrirá directamente en una pestaña del navegador.
 
 
 gksu
@@ -27281,6 +27284,15 @@ $ kcapi-rng -b 64 -n stdrng -s archivo.txt --hex (generar 64 bytes aleatorios y 
 Nota.- Para que kcapi-tools funcione, el kernel debe estar compilado con las opciones de configuración adecuadas para la API de cifrado del usuario. Algunas de las opciones clave incluyen:
 Verificar estas configuraciones en el sistema con
 $ cat /boot/config-$(uname -r) | grep CONFIG_CRYPTO_USER
+
+
+kcptun
+Herramienta de reenvío de puertos remotos que convierte el flujo TCP en flujo UDP basado en el protocolo KCP para lograr un mayor rendimiento o una menor latencia. KCP es un protocolo de transmisión confiable sobre UDP que intenta superar las limitaciones de TCP, como la congestión o la retransmisión lenta. Se compone de dos programas kcptun-client [el servidor] y kcptun-server [el cliente]
+En el servidor:
+$ kcptun-client -t "127.0.0.1:1080" -l ":29900" --key "clave_segura" --crypt aes (dónde reenviar el tráfico recibido, puerto UDP de escucha kcptun, clave cifrada compartida y algoritmo de cifrado [aes, salsa20, none...])
+En el cliente:
+$ kcptun-server -r "1.2.3.4:29900" -l ":1080" --key "clave_segura" --crypt aes (IP y puerto del servidor remoto, puerto local en donde el cliente escuchará conexiones y la clave [la misma que el servidor])
+Nota.- KCP solo cifra el canal, no cifra el contenido que puede que ya lo esté.
 
 
 kdump
