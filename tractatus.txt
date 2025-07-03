@@ -27301,6 +27301,19 @@ $ kdc2tiff imagen.kdc imagen.tiff (uso básico para conservar la máxima calidad
 $ kdc2tiff vacaciones.kdc vacaciones.jpeg (convertir un archivo KDC a JPEG)
 
 
+kde-cli-tools
+Herramientas que permiten usar servicios de KDE como kioslaves, kdesu, QtSVG, módulos kcontrol y KDE Trader, e iniciar aplicaciones desde la línea de comandos. Este paquete forma parte de KDE Plasma. Incluye las herramientas kbroadcastnotification, kcmshell5, kde-inhibit, kde-open, kde-open5, kdecp, kdecp5, kdemv, kdemv5, keditfiletype, keditfiletype5, kinfo, kioclient, kioclient5, kmimetypefinder, kmimetypefinder5, kstart, kstart5, ksvgtopng, ksvgtopng5, ktraderclient5 y plasma-open-settings.
+$ kde-open documento.pdf (abre el PDF con Okular la predeterminada de KDE)
+$ kde-open https://kde.org (abre el sitio web en elu navegador predeterminado)
+$ kcmshell5 keyboard (configuración del teclado)
+$ kcmshell5 kcm_regionandlang (configuración de idioma)
+$ kcmshell5 kcm_fonts (tipografías)
+$ kcmshell5 kcm_lookandfeel (apariencia del sistema)
+$ kcmshell5 --list (ver una lista completa de módulos disponibles)
+$ kde-inhibit mpv peli.mp4 (inhibe temporalmente el bloqueo de pantalla o evita que se apague la pantalla mientras se reproduce el vídeo)
+$ kdecp /home/pep/foto.jpg sftp://pep@servidor.local/home/pep/ (copia la foto a un servidor remoto vía SFTP)
+
+
 kdump
 Se configura para cargar un segundo kernel [el "kernel de volcado"] en una parte reservada de la memoria. Si el primer kernel, el kernel principal, sufre un panic, kdump utiliza kexec para arrancar el kernel de volcado. La configuración se hace editando:
 # nano /etc/default/grub
