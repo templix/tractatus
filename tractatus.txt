@@ -27314,6 +27314,24 @@ $ kde-inhibit mpv peli.mp4 (inhibe temporalmente el bloqueo de pantalla o evita 
 $ kdecp /home/pep/foto.jpg sftp://pep@servidor.local/home/pep/ (copia la foto a un servidor remoto vía SFTP)
 
 
+kdialog
+kdialog permite mostrar cuadros de diálogo desde scripts de shell. Su sintaxis está muy inspirada en el comando "dialog" (que muestra diálogos en modo texto).
+$ kdialog --yesno ¿linux? (muestra un cuadro de dialogo con el texto y las opciones si y no)
+$ kdialog --yesnocancel ¿linux? (lo mismo más la opción cancelar)
+$ kdialog --warningcontinuecancel ¿linux? (peligro y botones continuar cancelar)
+$ kdialog --password "Entrar la contraseña:" (pedir contraseña)
+$ kdialog --msgbox "Contraseña correcta.\n A punto de conectarse al servidor" (cuadro informativo)
+$ kdialog --sorry "Contraseña incorrecta.\n No se conectará al servidor"
+$ kdialog --title "Esta es una ventana emergente pasiva." --passivepopup "Desaparecerá en 5 segundos". 5 (con título y que se cierre en 5 segundos)
+$ kdialog --title "Dialogo de entrada" --inputbox "¿Qué nombre te gustaría usar?" (con título y espacio para entrar texto)
+$ kdialog --textbox text.txt 512 256 (un archivo de texto con una medidas determinadas)
+$ kdialog --checklist "Elegir un Sistema Operativo:" 1 "Red Hat" off 2 Debian on 3 Opensuse off (elegir opciones, marcando por defecto la 2ª)
+$ kdialog --combobox "Seleccionar sistema:" "Red Hat" "Debian" "Opensuse" "Ubuntu" (con un menú desplegable)
+$ kdialog --slider "Seleccionar volumen" 0 100 10 (con barra horizontal para seleccionar)
+$ kdialog --getopenfilename /home/pep/Vídeos/ '*.mp4' (abrir un directorio con los mp4 para selecionar)
+$ kdialog --getopenfilename /home/pep/Vídeos/ '*.mp4 *.avi' (con los .mp4 y los .avi
+
+
 kdump
 Se configura para cargar un segundo kernel [el "kernel de volcado"] en una parte reservada de la memoria. Si el primer kernel, el kernel principal, sufre un panic, kdump utiliza kexec para arrancar el kernel de volcado. La configuración se hace editando:
 # nano /etc/default/grub
