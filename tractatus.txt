@@ -27295,6 +27295,12 @@ $ kcptun-server -r "1.2.3.4:29900" -l ":1080" --key "clave_segura" --crypt aes (
 Nota.- KCP solo cifra el canal, no cifra el contenido que puede que ya lo esté.
 
 
+kdc2tiff
+Convierte archivos KDC creados por cámaras digitales Kodak DC-120 [no soporta DC40/50] a TIFF o JPEG.
+$ kdc2tiff imagen.kdc imagen.tiff (uso básico para conservar la máxima calidad de la imagen)
+$ kdc2tiff vacaciones.kdc vacaciones.jpeg (convertir un archivo KDC a JPEG)
+
+
 kdump
 Se configura para cargar un segundo kernel [el "kernel de volcado"] en una parte reservada de la memoria. Si el primer kernel, el kernel principal, sufre un panic, kdump utiliza kexec para arrancar el kernel de volcado. La configuración se hace editando:
 # nano /etc/default/grub
