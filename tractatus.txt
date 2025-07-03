@@ -27286,6 +27286,18 @@ Verificar estas configuraciones en el sistema con
 $ cat /boot/config-$(uname -r) | grep CONFIG_CRYPTO_USER
 
 
+kcat
+Herramienta que permite interactuar con Apache Kafka. Es útil para producir y consumir mensajes en Kafka sin necesidad de escribir código en Java o cualquier otro lenguaje de programación.
+En el modo productor, kcat lee mensajes de la entrada estándar [stdin] y los envía a un tema de Kafka.
+$ cat mensajes.txt | kcat -b localhost:9092 -t mi_tema -P (archivo de mensajes a uno por linea que se quiere enviar, broker de Kafka al que conectar, tema y modo productor)
+$ echo "Hola, Kafka!" | kcat -b localhost:9092 -t mi_tema -P (un solo mensaje a enviar)
+$ echo "mensaje1|mensaje2|mensaje3" | kcat -b localhost:9092 -t mi_tema -P -D '|' (usando el delimitador "|")
+$ echo "Mensaje para la partición 0" | kcat -b localhost:9092 -t mi_tema -P -p 0 (mensaje solo para la partición 0)
+En el modo consumidor, kcat lee mensajes de un tema de Kafka y los imprime en la salida estándar [stdout].
+$ kcat -b localhost:9092 -t mi_tema -C -G mi_grupo (-C indica modo consumidor)
+$ kcat -b localhost:9092 -t mi_tema -C -p 0 (lectura desde la partición 0 del tema)
+
+
 kcptun
 Herramienta de reenvío de puertos remotos que convierte el flujo TCP en flujo UDP basado en el protocolo KCP para lograr un mayor rendimiento o una menor latencia. KCP es un protocolo de transmisión confiable sobre UDP que intenta superar las limitaciones de TCP, como la congestión o la retransmisión lenta. Se compone de dos programas kcptun-client [el servidor] y kcptun-server [el cliente]
 En el servidor:
