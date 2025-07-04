@@ -27326,6 +27326,12 @@ $ kde-inhibit mpv peli.mp4 (inhibe temporalmente el bloqueo de pantalla o evita 
 $ kdecp /home/pep/foto.jpg sftp://pep@servidor.local/home/pep/ (copia la foto a un servidor remoto vía SFTP)
 
 
+kded
+[KDE Daemon]. Es un demonio que KDE Plasma usa para hacer funcionar pequeños servicios necesarios en la sesión gráfica. Realiza diversas tareas menores como detectar cuando se inserta un USB, gestión del portapapeles, recordar configuración de brillo, que los iconos funcionen bien...
+$ qdbus org.kde.kded5 /kded org.kde.kded5.loadedModules (ver los módulos cargados)
+$ qdbus org.kde.kded5 /kded org.kde.kded5.loadedModules | wc -l (ver cuáles están activos)
+
+
 kdialog
 kdialog permite mostrar cuadros de diálogo desde scripts de shell. Su sintaxis está muy inspirada en el comando "dialog" (que muestra diálogos en modo texto).
 $ kdialog --yesno ¿linux? (muestra un cuadro de dialogo con el texto y las opciones si y no)
@@ -35637,6 +35643,12 @@ $ px --debug firefox
 qcp
 [renameutils]. Funciona como qmv [ver], pero copia los archivos en lugar de renombrarlos. Mantendrá tanto los archivos originales como los duplicados.
 $ qcp dir
+
+
+qdbus
+Herramienta para listar servicios D-Bus y sus propiedades.
+$ qdbus org.kde.kded5 /kded org.kde.kded5.loadedModules | wc -l (ver módulos activos)
+$ qdbus org.kde.kded5 /kded org.kde.kded5.loadedModules (ver módulos cargados)
 
 
 qemu-nbd
