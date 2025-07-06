@@ -27467,6 +27467,16 @@ $ keyctl session
 $ keyctl (muestra la gran variedad de subcomandos que pueden emplearse)
 
 
+keyman
+[onboard]. Sistema de entrada de teclado multilingüe y multiplataforma que permite escribir fácilmente en más de 2000 idiomas, incluyendo lenguas con alfabetos especiales, escrituras complejas o sistemas que normalmente no están soportados por los teclados estándar como el Tibetano, Hindi, Amhárico, Cherokee, etc. No cambia el idioma del sistema, sino el comportamiento del teclado. Se puede buscar y descargar un teclado en la web oficial https://keyman.com/keyboards.
+$ keyman install ~/Descargas/tamil99.kmp (instalar un teclado tamil)
+$ keyman list (muestra teclados instalados)
+$ keyman list --short (saber la ID para usar en scripts)
+$ keyman apply tamil99 (activa el teclado llamado "tamil99")
+Una vez aplicado se podrá escribir en cualquier aplicación [LibreOffice, Firefox, etc.] con el nuevo mapa de teclado activo
+$ keyman stop (dejar de usar)
+
+
 khal
 Programa de calendario basado en estándares abiertos y capaz de sincronizarse con servidores CalDAV a través de vdirsyncer.
 $ khal configure (guiará por un asistente para definir calendarios y formatos de visualización necesario antes de usar)
