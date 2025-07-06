@@ -27731,6 +27731,52 @@ kwin
 $ kwin --replace (Activar kwin)
 
 
+l2tpns
+[Layer 2 Tunneling Protocol Network Server]. Servidor de red de protocolo de tunelización de capa 2 [LNS] diseñado para manejar grandes volúmenes de conexiones VPN [admite hasta 65535 sesiones], además de funciones como limitación de velocidad, contabilidad de uso y agrupación en clústeres tanto para compartir carga como para redundancia.
+Ejemplo de archivo de configuración.
+# nano /etc/l2tpns/l2tpns.conf
+        # Configuración básica del servidor
+        listen = 0.0.0.0
+        port = 1701
+        #
+        # Configuración de autenticación
+        auth {
+            type = radius
+            server = 192.168.1.10
+            secret = miSecretoCompartido
+            timeout = 3
+        }
+        #
+        # Configuración de IPs para clientes
+        ip {
+            pool = 192.168.100.100-192.168.100.200
+            dns = 8.8.8.8, 8.8.4.4
+        }
+        #
+        # Limitación de ancho de banda
+        shaper {
+            default = 1024/512  # 1024 kbps down / 512 kbps up
+            premium_users = 2048/1024
+            user.juan = 512/256  # Limitación específica para usuario 'juan'
+        }
+        # Configuración de cluster (para alta disponibilidad)
+        cluster {
+            nodes = 192.168.1.101, 192.168.1.102
+            secret = ClusterSecret123
+            heartbeat_interval = 5
+        }
+$ l2tpns -c /etc/l2tpns/l2tpns.conf (iniciar el servidor)
+$ l2tpns -d -c /etc/l2tpns/l2tpns.conf (iniciar en modo depuración)
+# iptables -A INPUT -p udp --dport 1701 -j ACCEPT (abrir el puerto correpondiente en el Firewall)
+Incluye una interfaz administrativa, usualmente en el puerto 4000, donde están disponibles comandos de administración
+$ telnet localhost 4000
+        > show users --> Lista usuarios conectados
+        > show stats --> Muestra estadísticas del servidor
+        > kill session <id> --> Termina una sesión específica
+        > reload --> Recarga la configuración sin reiniciar
+$ l2tpns-accounting -f /var/log/l2tpns/accounting.log -r mensual (generar reportes de uso)
+
+
 lame
 Cambiar formatos de audio
 $ lame -h -m j tema.wav tema.mp3  (Pasar de wav a mp3)
