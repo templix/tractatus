@@ -39213,6 +39213,43 @@ Para incorporarlo a bash entrar en ~/.bashrc la linea:
    eval "$(starship init bash)"
 Y recargar:
   $ source ~/.bashrc
+Muestra de archivo de configuración
+$ nano ~/.config/starship.toml
+        # Obtener terminaciones del editor basado en el esquema de configuración
+        "$schema" = 'https://starship.rs/config-schema.json'
+        #
+        # Inserta una línea en blanco entre las instrucciones del intérprete de comandos
+        add_newline = true
+        #
+        # Reemplaza el símbolo '❯' en el prompt con ''➜'
+        [character] # The name of the module we are configuring is 'character'
+        success_symbol = '[➜](bold green)' # The 'success_symbol' segment is being set to '➜' with the color 'bold green'
+        #
+        # Desactiva el módulo del paquete, ocultándolo del prompt completamente
+        [package]
+        disabled = true
+        #
+        # indicador de la shell
+        [shell]
+        bash_indicator = '󰈺 '
+        unknown_indicator = 'mystery shell'
+        style = 'cyan bold'
+        disabled = false
+        #
+        # el tiempo
+        [time]
+        disabled = false
+        format = '🕙[\[ $time \]]($style) '
+        time_format = '%T'
+        #
+        # nombre del usuadio
+        [username]
+        style_user = 'white bold'
+        style_root = 'red bold'
+        format = 'user: [$user]($style) '
+        disabled = false
+        show_always = true
+        aliases = { "corpuser034g" = "matchai" }
 
 
 startlxde
