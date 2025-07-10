@@ -27862,6 +27862,19 @@ $ lpass logout -f --color=auto (salir)
 $ lpass generate --sync=auto -c --username=USER@gmail.com USER 16 (crear contraseña de 16 caracteres y copiarla al portapapeles. No se muestra en pantalla y se guarda unos segundos)
 
 
+latencytop
+Herramienta diseñada para identificar dónde se produce la latencia en el sistema y qué tipo de operación/acción la causa. El kernel debe tener soporte para CONFIG_LATENCYTOP.
+# zcat /proc/config.gz | grep CONFIG_LATENCYTOP (comprobar si está activado en el sistema)
+# latencytop (comando básico)
+Muestra algunas columnas: Cause of latency [Nombre técnico del punto de bloqueo o llamada que causa la espera], Count [Cuántas veces ha ocurrido esa causa desde que se lanzó latencytop], Maximum [Máxima duración de una única latencia por esa causa], Total [Tiempo total acumulado de latencia causado por esa operación] y Description [Explicación más legible para humanos]
+Teclas útiles dentro de latencytop
+        P --> Mostrar latencias agrupadas por proceso
+        K --> Mostrar latencias del núcleo (kernel)
+        U --> Mostrar latencias del espacio de usuario
+        Q --> Salir
+        R --> Reiniciar los contadores
+
+
 latex
 [texlive texlive-lang-spanish]. Sistema de composición de textos, orientado especialmente a la creación de libros, documentos científicos y técnicos que contengan fórmulas matemáticas. La elaboración del documento requiere normalmente de dos etapas: en la primera hay que crear mediante cualquier editor de texto llano un fichero fuente que, con las órdenes y comandos adecuados, contenga el texto que queramos imprimir. La segunda consiste en procesar este fichero; el procesador de textos interpreta las órdenes escritas en él y compila el documento, dejándolo preparado para que pueda ser enviado a la salida correspondiente. LaTeX ofrece siempre la misma salida, con independencia del dispositivo (impresora, pantalla, etc.) o el sistema operativo (MS Windows, MacOS, Unix, GNU/Linux, etc.) y puede ser exportado a partir de una misma fuente a numerosos formatos [Ps, PDF, SGML, HTML, RTF, etc.]. Otra ventaja de LaTeX es que calcula la cantidad óptima de caracteres por línea para optimizar la lectura, 66 por defecto. Existen miles de instrucciones. Aquí una pequeña muestra para no morir en el intento.
 A continuación una estructura elemental de un documento:
