@@ -23648,10 +23648,11 @@ Convierte un archivo ASCII HINT, generalmente con la extensión .hint, en un arc
 
 history
 Lista los comandos utilizados por el usuario.
-$ history 20       (Lista los últimos 20)
-$ history -c        (Elimina el historial)
-$ history -d 125 (Eliminar la orden 125. útil si se escribió la contraseña y esta queda visible en el historial)
-$ history -d 100-125 (Eliminar las ordenes de la 100 a la 125)
+$ history 20 (lista los últimos 20)
+$ history -c (elimina el historial de la memoria)
+$ history -c ; history -w (limpieza definitiva)
+$ history -d 125 ; history -w (eliminar la orden 125 y guardar cambios, útil si se escribió la contraseña y esta queda visible en el historial)
+$ history -d 100-125 (eliminar las ordenes de la 100 a la 125. Para guardar los cambios los cambios lanzar despues siempre: history -w)
 $ history | awk '{print $2}' | sort | uniq -c | sort -rn | head -10 (lista los 10 comandos más usados y numero de veces)
 $ !354  (ejecutará el comando 354 del listado de history)
 $ !354:p (lo mostrará sin ejecutarlo)
@@ -23663,6 +23664,12 @@ $ history -a (Guardar el historial sin cerrar la sesión)
 $ echo $HISTCMD (número de comandos registrados en history y este tambien queda reflejado en history)
 $ history -d $HISTCMD && ip a (ejecuta "ip a" pero no se muestra en el historial)
 $ ip a # un comentario (en history aparecerá "ip a # un comentario")
+$ echo "" > ~/.bash_history && history -c (borrar el historial completo)
+1.-
+Borrar el historial automáticamente al cerrar la sesión de terminal
+$ nano ~/.bash_logout
+Y colocar al comienzo del archivo la linea:
+        echo "" > ~/.bash_history && history -c
 
 
 histretch
