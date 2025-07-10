@@ -25409,7 +25409,7 @@ set completion-ignore-case on
 
 insmod
 Carga modulos.
-# insmod mudulo
+# insmod módulo
 
 
 install-mbr
@@ -28922,6 +28922,8 @@ $ lslogins -l (listado)
 
 lsmod
 Listar todos los módulos cargados del kernel, y alguna información adicional de ellos.
+$ lsmod
+$ cat /proc/modules (otra forma)
 
 
 lsmount
@@ -30536,6 +30538,7 @@ Utilidad que se usa para agregar y quitar módulos del kernel. Los módulos del 
 # modprobe -q nombre_modulo (excluir información de error respecto de un nombre_modulo)
 # modprobe -c | grep pcspkr (comprobar un módulo concreto)
 # lsmod | grep pcspkr (ver si un módulo esta cargado)
+$ ls -R /lib/modules/$(uname -r) (ver la totalidad de módulos que estan disponibles)
 
 
 more
@@ -36543,6 +36546,11 @@ rmdir
 Borra directorios vacios
 $ rmdir /home/usuario/dir_vacio
 $ find . -type d -empty -exec rmdir {} \; (Otra forma)
+
+
+rmmod
+[kmod]. Programa para eliminar un módulo del kernel de Linux.
+# rmmod modulo
 
 
 rng-tools
