@@ -27792,6 +27792,15 @@ Detecta si nos encontramos en un portatil. Retorna "0" si lo más probable es qu
 $ laptot-detect -v
 
 
+largetifftools
+Conjunto de software que puede ayudar a gestionar archivos TIFF muy grandes, especialmente archivos demasiado grandes para caber completamente en la memoria RAM del ordenador. Es particularmente útil para trabajar con imágenes de alta resolución, como las generadas por escáneres científicos, cámaras de gran formato o drones. Incluye las herramientas tifffastcrop, tiffmakemosaic y tiffsplittiles
+$ tifffastcrop entrada.tif salida.tif 1000 2000 5000 3000 (recortar una sección específica que comienza en las coordenadas [x=1000, y=2000] y tiene un tamaño de 5000x3000 píxeles)
+$ tiffmakemosaic mapa_area_completa.tif parte1.tif 0 0 parte2.tif 1000 0 parte3.tif 0 500 parte4.tif 1000 500 (unir varias capturas en una sola imagen. parte2.tif está a la derecha de parte1.tif, y parte3.tif y parte4.tif están debajo de las dos primeras respectivamente)
+$ tiffmakemosaic documento_completo.tif documento_arriba.tif 0 0 documento_abajo.tif 0 2000 (documento_abajo.tif comienza en la coordenada Y=2000, justo debajo de documento_arriba.tif)
+$ tiffsplittiles imagen_aerea.tif 1024 1024 tile_aerea (dividir imagen_aerea.tif en trozos de 1024x1024 píxeles generaría y archivos como tile_aerea_0_0.tif, tile_aerea_0_1.tif...)
+$ tiffsplittiles mapa_historico.tif 256 256 mapa_tile (dividir mapa_historico.tif en tiles de 256x256)
+
+
 last
 Muestra la ultima vez que se conecto un usuario [/var/log/wtmp].
 $ last -n 10 (Muestra los últimos 10 eventos. )
