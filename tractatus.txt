@@ -27848,6 +27848,18 @@ Ver el momento exacto que los usuarios han entrado por última vez
 $ lastlog -u usuario  (solo ver a "usuario")
 
 
+lastpass
+Interfaz de línea de comandos para los servicios de LastPass.com un popular gestor de contraseñas que almacena las credenciales de forma segura en una bóveda cifrada en la nube.. Ejemplos en file:///usr/share/doc/lastpass-cli/examples
+$ lpass login usuario@gmail.com (despues de crear la cuenta en laspass.com, iniciar sesión en la cuenta de lastpass.com)
+$ lpass ls (listar entradas)
+$ lpass show -c --password Sitename (guardar la contraseña de Sitename en el búfer de copia)
+$ lpass show (almacenar contraseñas utilizadas en scripts, en lugar de escribirlas en los propios scripts)
+$ lpass ls --sync=auto -l --color=auto folder (sincronizar, forma extendida, en color y del apartado "folder" de los datos en la web)
+$ lpass ls folder
+$ lpass show --sync=auto --all --color=auto USER (todos los datos del usuario USER)
+$ lpass show --sync=auto --password --color=auto USER (solo mostrar la contraseña)
+
+
 latex
 [texlive texlive-lang-spanish]. Sistema de composición de textos, orientado especialmente a la creación de libros, documentos científicos y técnicos que contengan fórmulas matemáticas. La elaboración del documento requiere normalmente de dos etapas: en la primera hay que crear mediante cualquier editor de texto llano un fichero fuente que, con las órdenes y comandos adecuados, contenga el texto que queramos imprimir. La segunda consiste en procesar este fichero; el procesador de textos interpreta las órdenes escritas en él y compila el documento, dejándolo preparado para que pueda ser enviado a la salida correspondiente. LaTeX ofrece siempre la misma salida, con independencia del dispositivo (impresora, pantalla, etc.) o el sistema operativo (MS Windows, MacOS, Unix, GNU/Linux, etc.) y puede ser exportado a partir de una misma fuente a numerosos formatos [Ps, PDF, SGML, HTML, RTF, etc.]. Otra ventaja de LaTeX es que calcula la cantidad óptima de caracteres por línea para optimizar la lectura, 66 por defecto. Existen miles de instrucciones. Aquí una pequeña muestra para no morir en el intento.
 A continuación una estructura elemental de un documento:
