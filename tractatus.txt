@@ -27777,6 +27777,20 @@ $ telnet localhost 4000
 $ l2tpns-accounting -f /var/log/l2tpns/accounting.log -r mensual (generar reportes de uso)
 
 
+lablie
+[LABel LIne Editor]. Herramienta CLI para generar etiquetas imprimibles a partir de plantillas SVG. Los documentos se pueden generar a partir de imágenes SVG o plantillas SVG con datos de instancias.
+Ejemplo completo de suo
+$ nano etiqueta.svg
+Equipo: {nombre}
+Código: {codigo}
+$ nano datos.yaml
+- nombre: Placa 1
+  codigo: A123
+- nombre: Placa 2
+  codigo: B456
+$ lablie render etiqueta.svg datos.yaml --output-dir etiquetas/ (creará archivos SVG como: etiquetas/Placa 1.svg, etiquetas/Placa 2.svg)
+
+
 lame
 Cambiar formatos de audio
 $ lame -h -m j tema.wav tema.mp3  (Pasar de wav a mp3)
