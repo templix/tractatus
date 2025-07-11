@@ -23702,26 +23702,38 @@ Ahora la aplicación está accesible en HTTPS a través del puerto 443, aunque i
 
 
 hledger
-Herramienta de contabilidad que permite registrar y analizar transacciones financieras de manera sencilla y práctica para el uso diario. Funciona con archivos de texto plano, generalmente con extensión .journal, donde se define cuentas y transacciones en un formato específico. Existen las aplicaciones hledger-ui [interfaz de consola] y hledger-web [interfaz web]
+Herramienta de contabilidad que permite registrar y analizar transacciones financieras de manera sencilla y práctica para el uso diario. Funciona con archivos de texto plano, generalmente con extensión .journal o .ledge, donde se define cuentas y transacciones en un formato específico.
 Ejemplo básico de un archivo finanzas.journal
 $ nano finanzas.journal
-2024-01-01 Salario
-    activos:banco:cuenta_corriente    +1000 €
-    ingresos:salario
-#
-2024-01-02 Supermercado
-    gastos:comida                     50 €
-    activos:banco:cuenta_corriente
-#
-2024-01-03 Alquiler
-    gastos:vivienda:alquiler          400 €
-    activos:banco:cuenta_corriente
+        2024-01-01 Salario
+            activos:banco:cuenta_corriente    +1000 €
+            ingresos:salario
+        #
+        2024-01-02 Supermercado
+            gastos:comida                     50 €
+            activos:banco:cuenta_corriente
+        #
+        2024-01-03 Alquiler
+            gastos:vivienda:alquiler          400 €
+            activos:banco:cuenta_corriente
 $ hledger -f finanzas.journal register (mostrar todas las transacciones)
 $ hledger -f finanzas.journal balance (mostrar el balance general)
 $ hledger -f finanzas.journal balance gastos (filtrar por cuenta, ej. solo gastos)
 $ hledger -f finanzas.journal register --monthly -p "2024-01" (ver transacciones de un mes específico)
 $ hledger -f finanzas.journal csv > transacciones.csv (exportar a CSV)
 $ hledger -f finanzas.journal income --tree (mostrar un resumen por categoría)
+$ hledger -f finanzas.journal stats (estado general)
+$ hledger -f finanzas.journal accounts (muestra todas las cuentas)
+$ hledger -f finanzas.journal descriptions (todas las descripciones a continuación de la fecha)
+$ hledger -f finanzas.journal commodities (muestra la unidad en la que se cuenta [euros])
+$ hledger -f finanzas.journal activity (muestra los dias del mes que hay actividad)
+$ hledger -f finanzas.journal areg alquiler (ver un concepto)
+$ hledger -f finanzas.journal print (mostrar todas las entradas completas)
+
+
+ledger-web
+Ver ledger y hledger
+$ hledger-web -f finanzas.journal (muestra las finanzas en el navegador predeterminado)
 
 
 hlins
@@ -28166,6 +28178,61 @@ Ejemplo básico de configuración en YAML
 # lecm --renew (renueva todos los certificados que estén próximos a caducar)
 # lecm --status (muestra el estado de los certificados gestionados)
 # lecm --renew --domain ejemplo.com (renueva solo el certificado del dominio ejemplo.com)
+
+
+ledger
+Programa de contabilidad de partida doble que es la que en cada transacción afecta al menos a dos cuentas, una que recibe y otra que entrega. Su libro de cuentas se almacena en uno o más archivos de texto plano con un formato muy simple y legible, y Ledger se encarga de la tarea de cuadrar sus libros y generar informes.
+Ejemplo a partir de un archivo:
+$ nano cuentas.ledger
+        ; ==============================
+        ; Archivo de contabilidad personal
+        ; Formato: ledger (https://ledger-cli.org)
+        ; ==============================
+        ;
+        ; === BALANCE DE OBERTURA ===
+        2025/01/01 Saldo inicial banco
+          Activos:Banco                 2000.00 EUR
+          Patrimonio:Inicial
+        ;
+        ; === ENERO 2025 ===
+        2025/01/05 Sueldo enero
+          Activos:Banco                 1200.00 EUR
+          Ingresos:Sueldo
+        ;
+        2025/01/06 Compra super       ; Merdadona
+          Gastos:Comida                   85.20 EUR
+          Activos:Banco
+        ;
+        2025/01/10 Subscripción Internet
+          Gastos:Internet                 29.99 EUR
+          Activos:Banco
+        ;
+        ; === FEBRERO 2025 ===
+        2025/02/03 Sueldo febrero
+          Activos:Banco                 1200.00 EUR
+          Ingresos:Sueldo
+        ;
+        2025/02/04 Compra libros      ; Nombre de la Rosa
+          Gastos:Cultura                  35.00 EUR
+          Activos:Banco
+        ;
+        2025/02/20 Cine con amigos    ; Casablanca
+          Gastos:Ocio                     24.00 EUR
+          Activos:Banco
+        ;
+        ; === MARZO 2025 ===
+        2025/03/01 Alquiler
+          Gastos:Alquiler                650.00 EUR
+          Activos:Banco
+Nota.- Las fechas van al principio en formato inglés: año/mes/dia, las líneas con sangría representan cuentas afectadas, solo se necesita especificar una cantidad, la otra la calcula automáticamente y los comentarios [;] solo constan en el archivo.
+$ ledger -f cuentas.ledger bal (ver el balance general)
+$ ledger -f cuentas.ledger register Gastos (ver solo el apartado Gastos)
+$ ledger -f cuentas.ledger register Ingresos (ver los ingresos)
+$ ledger -f cuentas.ledger bal Gastos (balance de gastos)
+$ ledger -f cuentas.ledger stats (muestra estadísticas básicas)
+$ ledger -f cuentas.ledger register ^Gastos --period "2025/02" (ver gastos de la fecha especificada)
+$ ledger -f cuentas.ledger register ^Gastos --period "2025/02/04" (de un dia en concreto)
+$ ledger -f cuentas.ledger cleared (informe de saldo especial que añade dos columnas adicionales)
 
 
 less
