@@ -28025,6 +28025,39 @@ Para conocer las librerias compartidas que usa una aplicación.
 $ ldd /usr/bin/amarok
 
 
+ldirectord
+Utilizado para monitorizar la salud y el estado de los servidores reales que están detrás de los servicios virtuales proporcionados por LVS [Linux Virtual Server]. LVS es una solución de balanceo de carga que distribuye las solicitudes de red entre múltiples servidores para mejorar la escalabilidad y la disponibilidad de los servicios.
+Configuración Básica:
+# nano /etc/ha.d/ldirectord.cf
+        checktimeout=10
+        checkinterval=2
+        autoservice=yes
+        quiescent=yes
+        #
+        virtual=192.168.1.100:80
+                real=192.168.1.101:80 gate
+                real=192.168.1.102:80 gate
+                service=http
+                request="index.html"
+                receive="Perfecto"
+                scheduler=wlc
+                protocol=tcp
+                checktype=connect
+checktimeout: Tiempo máximo en segundos para esperar una respuesta de un servidor real.
+checkinterval: Intervalos en segundos entre comprobaciones de salud.
+autoservice: Indica si ldirectord debe gestionar automáticamente los servicios virtuales.
+quiescent: Indica si ldirectord debe poner en modo quiescente [inactivo] los servidores reales que fallen.
+virtual: Define la dirección IP y el puerto del servicio virtual.
+real: Define las direcciones IP y los puertos de los servidores reales.
+service: Tipo de servicio a monitorizar, por ejemplo, http, tcp.
+request: Petición específica a realizar para comprobar la salud del servicio.
+receive: Respuesta esperada para considerar el servicio como saludable.
+scheduler: Algoritmo de programación para distribuir las solicitudes, por ejemplo, wlc para Weighted Least Connections.
+protocol: Protocolo utilizado para las comprobaciones.
+checktype: Tipo de comprobación a realizar, por ejemplo, connect para comprobar la conectividad.
+# systemctl enable ldirectord (habilitar el inicio automático)
+
+
 ldkaac
 interfaz de codificación AAC [Advanced Audio Codec] basado en la biblioteca libfdk-aac que lee audio PCM lineal en formato WAV, PCM sin procesar o CAF y lo codifica en archivos M4A/AAC"
 Interfaz de codificación de línea de comandos para libfdk-aac. fdkaac es un codificador AAC de línea de comandos basado en libfdk-aac. Lee audio PCM lineal en formato WAV, PCM sin procesar o CAF y lo codifica en archivos M4A/AAC.
