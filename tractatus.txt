@@ -27973,6 +27973,19 @@ Con LAUREL, el mismo evento se transforma en un registro JSON legible:
 Este formato es mucho más claro para un analista de SIEM, mostrando los argumentos del comando sin codificación hexadecimal y proporcionando información sobre el proceso padre.
 
 
+lavacli
+Herramienta para interactuar con LAVA [LAVA Automated Validation Architecture], un sistema de integración continua diseñado específicamente para la implementación de sistemas operativos y la ejecución de pruebas en hardware físico y virtual. Requiere una cuenta de usuario en la instancia para crear y usar tokens de autenticación en algunas llamadas [~/.config/lavacli.yaml].
+$ lavacli devices list (mostrar lista de dispositivos de prueba registrados en el servidor LAVA, junto con su estado actual)
+$ lavacli devices show beaglebone-black-01 (proporcionará información detallada sobre el hardware, su configuración, y si está disponible para nuevas pruebas)
+$ lavacli submit my_job.yaml (enviar un trabajo de prueba [se necesita un archivo YAML que lo defina])
+$ lavacli jobs list (ver el estado de los trabajos que están en curso o que han finalizado)
+$ lavacli jobs show ID (ver los logs de un trabajo específico con su ID)
+$ lavacli utils logs print --job ID (ver logs detallados)
+$ lavacli utils logs print --job ID --filter target,input (filtrar logs para ver solo la salida serial del dispositivo y los comandos enviados)
+$ lavacli devices maintenance <hostname_del_dispositivo> (poner un dispositivo en mantenimiento)
+$ lavacli events listen (ver transmisión en tiempo real de lo que ocurre en el servidor LAVA: inicio de nuevos trabajos, cambios en el estado de los dispositivos, etc)
+
+
 lazygal
 Generar una galería web.
 $ lazygal directorio_con_las_imagenes  (Creará todos los archivos en el presente directorio por lo que es preferible estar en un directorio vacio)
