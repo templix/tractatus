@@ -27992,6 +27992,15 @@ $ lazygal directorio_con_las_imagenes  (Creará todos los archivos en el present
 $ lazygal -o /var/www/ /home/usuario/fotos (Lo creará en la carpeta web a partir del directorio fotos)
 
 
+lbzip2
+Herramienta de compresión y descompresión compatible con el formato bzip2, que aprovecha múltiples núcleos de CPU para acelerar el proceso. Esto la hace especialmente útil para comprimir o descomprimir archivos grandes en sistemas con procesadores multinúcleo, donde bzip2 tradicional solo usa un núcleo.
+$ lbzip2 archivo.txt (reemplaza archivo.txt por archivo.txt.bz2)
+$ lbzip2 -d archivo.txt.bz2 (descomprime el archivo y restaura el original)
+$ lbzip2 -k archivo.txt (comprimir y mantener el archivo original)
+$ lbzip2 -d archivo1.bz2 archivo2.bz2 (descomprime ambos archivos en paralelo)
+$ lbzip2 -n 4 archivo.txt (comprimir usando un número específico de núcleos [4])
+
+
 lckdo
 [moreutils]. Bloquea la ejecución de un programa con el fin de evitar que otros procesos se ejecuten en paralelo. Se utiliza como nice [ver] y nohup [ver]
 
