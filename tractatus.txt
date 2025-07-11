@@ -23736,6 +23736,17 @@ Ver ledger y hledger
 $ hledger-web -f finanzas.journal (muestra las finanzas en el navegador predeterminado)
 
 
+legit
+Extensión de Git para facilitar la manipulación de ramas al proporcionar varios comandos que ayudan a automatizar ciertas tareas con Git: cambio de rama fluido, sincronización del repositorio, creación y fusión de ramas y manipulación de ramas remotas.
+$ legit sync (sincroniza todas las ramas locales con sus equivalentes remotas, haciendo pull y push automáticamente)
+$ legit switch nombre_rama (cambia de una rama a otra, guardando automáticamente cambios sin commitear y restaurándolos al cambiar de rama)
+$ legit publish nombre_rama (sube una rama local al repositorio remoto y la configura para seguimiento)
+$ legit unpublish nombre_rama (elimina una rama remota y la desvincula de la local)
+$ legit graft rama_origen rama_destino (fusiona los cambios de una rama en otra de manera sencilla)
+$ legit new feature-y (crear nueva rama)
+$ legit publish feature-y (publicarla en el remoto)
+
+
 hlins
 Herramienta para insertar enlaces de hipertexto en documentos HTML, utilizando una base de datos con entradas del formato "nombre = URL". Su principal característica es que no solo  permite reemplazar texto por una URL, sino que está diseñada para reconocer nombres de personas y convertirlos en enlaces a sus respectivas URLs, basándose en una base de datos predefinida.
 Crear la base de datos de nombres y URLs
