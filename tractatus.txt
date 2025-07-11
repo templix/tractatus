@@ -28142,6 +28142,12 @@ Atajos:
 	Ctrl-t (Siempre en primer plano)
 
 
+leave
+Herramienta que permite programar recordatorios para que el usuario se acuerde de irse a una hora específica. Recuerda 5 minutos y 1 minuto antes de la hora real, a la hora exacta y cada minuto a partir de entonces. Cuando se desconecta, leave sale justo antes de imprimir el siguiente mensaje. todas las horas se convierten a un reloj de 12 horas y se asume que corresponden a las próximas 12 horas. Si intenta configurar una alarma para una fecha posterior, se truncará a las próximas 12 horas.
+$ leave 1530 (programar una hora [las 15 horas 30 minutos])
+$ leave +0030 (recordatorio a los 30 minutos de la hora actual)
+
+
 less
 Pagina la visualización de un fichero.
 $ cat /etc/apt/sources.list | less
