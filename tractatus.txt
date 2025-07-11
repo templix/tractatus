@@ -28148,6 +28148,26 @@ $ leave 1530 (programar una hora [las 15 horas 30 minutos])
 $ leave +0030 (recordatorio a los 30 minutos de la hora actual)
 
 
+lecm
+[Let's Encrypt Certificates Manager]. Utilidad para gestionar certificados SSL/TLS de Let's Encrypt en sistemas Linux que permite generar, renovar y administrar certificados de manera sencilla mediante una configuración en formato YAML.
+Ejemplo básico de configuración en YAML
+# nano /etc/lecm.conf
+        defaults:
+          email: admin@ejemplo.com
+          agree_tos: true
+          webroot: /var/www/html
+        #
+        certificates:
+          - domain: ejemplo.com
+            webroot: /var/www/ejemplo
+          - domain: api.ejemplo.com
+            webroot: /var/www/api
+# lecm --generate (lee la configuración y genera los certificados definidos)
+# lecm --renew (renueva todos los certificados que estén próximos a caducar)
+# lecm --status (muestra el estado de los certificados gestionados)
+# lecm --renew --domain ejemplo.com (renueva solo el certificado del dominio ejemplo.com)
+
+
 less
 Pagina la visualización de un fichero.
 $ cat /etc/apt/sources.list | less
