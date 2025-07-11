@@ -28071,9 +28071,42 @@ $ ldkaac input.wav -o output.m4a --he (usar AAC-HE [High Efficiency], que es má
 $ ldkaac input.wav -o output.m4a --hev2 (optimizado para tasas de bits aún más bajas)
 
 
+ldmtool
+Herramienta para administrar discos dinámicos de Microsoft Windows que utilizan metadatos LDM [Logical Disk Manager] de Microsoft que permite detectar, mostrar e interactuar con ellos. Linux no soporta directamente estos discos dinámicos pero ldmtool actúa como una forma de leerlos y, en algunos casos, montar las particiones para poder acceder a los datos.
+# ldmtool create all (escanea todos los discos conectados y crea representaciones de los volúmenes dinámicos que detecta)
+# ldmtool show volumes (muestra una lista de todos los volúmenes lógicos detectados, incluyendo su tipo y nombre)
+# ldmtool show partitions (muestra particiones que han sido reconocidas por ldmtool, listas para ser montadas)
+# ldmtool show disks (ver qué discos físicos contienen los volúmenes LDM)
+1.-
+Un ejemplo para montar una partición detectada, suponiendo que "ldmtool show partitions" devuelva algo como:
+        /dev/mapper/ldm_vol_Group_Volume1
+Para montarlo:
+# mkdir /mnt/windows-dynamic
+# mount /dev/mapper/ldm_vol_Group_Volume1 /mnt/windows-dynamic
+# ldmtool remove all (al terminar, limpia configuraciones de los volúmenes detectados para evitar conflictos posteriores)
+Notas.- No es 100% confiable con configuraciones complejas como RAID dinámico o volúmenes dañados, en algunos casos es de solo lectura pero es ideal para recuperación de datos.
+
+
 le
 Editor de texto. Ctrol-x para salir
 $ le file.txt
+
+
+leafnode
+Servidor de noticias [NNTP] ideal para sitios pequeños con ancho de banda limitado y pocos usuarios [leaf sites]). Ha sido diseñado para no requerir mantenimiento y ser fácil de configurar.
+Ejemplo de configuración básica
+        # nano /etc/leafnode/config
+        # Servidor NNTP upstream (ej: usenet.proveedor.com)
+        server = news.provider.com
+        #
+        # Grupos a suscribir
+        groups = comp.os.linux,alt.www
+        #
+        # Directorio donde almacenar los artículos
+        spooldir = /var/spool/news
+# leafnode -f (sincronización con el servidor upstream y descargar nuevos artículos)
+# leafnode -l (listar grupos disponibles)
+# leafnode -a alt.new.group (suscribirse a un nuevo grupo)
 
 
 leafpad
