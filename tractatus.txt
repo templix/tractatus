@@ -23747,6 +23747,15 @@ $ legit new feature-y (crear nueva rama)
 $ legit publish feature-y (publicarla en el remoto)
 
 
+lego
+Cliente Let's Encrypt escrito en Go. Su función principal es solicitar, renovar y gestionar certificados TLS/SSL gratuitos para tus dominios para que el servidor web [Apache, Nginx, etc.] para activar HTTPS.
+$ lego --email tu@email.com --domains dominio.com --http --path ./certs run (tu correo, dominio para el que se pide el certificado, validaación http-01, donde se guardará y acción)
+Después de ejecutarlo, en ./certs/ se tendrá cert.pem [el certificado], key.pem [clave privada] y fullchain.pem [cert + cadena de confianza].
+$ lego --email tu@email.com --domains pep.cat --http --path ./certs renew (renovar el certificado)
+$ lego --email tu@email.com --dns cloudflare --domains www.dominio.com --path ./certs run (validación DNS. Requiere que la API key de Cloudflare este en las variables de entorno)
+$ lego --email tu@example.com --domains dominio.com --http --path ./certs --server https://acme-staging-v02.api.letsencrypt.org/directory run (probar en entorno staging. Evita el límite de peticiones durante pruebas)
+
+
 hlins
 Herramienta para insertar enlaces de hipertexto en documentos HTML, utilizando una base de datos con entradas del formato "nombre = URL". Su principal característica es que no solo  permite reemplazar texto por una URL, sino que está diseñada para reconocer nombres de personas y convertirlos en enlaces a sus respectivas URLs, basándose en una base de datos predefinida.
 Crear la base de datos de nombres y URLs
