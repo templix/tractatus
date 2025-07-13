@@ -39924,6 +39924,50 @@ subversion
 [Apache Subversion, svn]. Sistema de control de versiones centralizado. Los sistemas de control de versiones permiten que muchas personas, que pueden estar distribuidas geográficamente, colaboren en un conjunto de archivos [código fuente, sitios web, etc]. Incluye las siguientes herramientas svn, svnadmin, svnauthz, svnauthz-validate, svnbench, svndumpfilter, svnfsfs, svnlook, svnmucc, svnrdump, svnserve, svnsync y svnversion
 
 
+succade
+[lemonbar]. Es un gestor que ejecuta bloques repetidamente y envía su salida a Lemonbar. Se descarga de https://github.com/domsson/succade.
+Ejemplo de archivo de configuración [variante de los que existen en github]
+nano ~/.config/succade/succaderc
+        [bar]
+        name = "testbar"
+        blocks = "System | Shell | date time"
+        height = 24
+        areas = 16
+        foreground = "#edd5d5"
+        background = "#f85a5a"
+        line-color = "#63d16f"
+        line-width = 2
+        #
+        [default]
+        label-foreground = "#0f0505"
+        affix-foreground = "#555555"
+        margin = 8
+        padding-left = 1
+        prefix = "[ "
+        suffix = " ]"
+        underline = true
+        #
+        [System]
+        command = "uname -a"
+        label = "System"
+        #
+        [Shell]
+        command = "echo $SHELL"
+        label = "Shell"
+        #
+        [date]
+        command = "date +'%Y-%m-%d'"
+        interval = 1
+        label = "DATE"
+        #
+        [time]
+        command = "date +'%H:%M:%S'"
+        interval = 1
+        label = "TIME"
+        mouse-left = "xclock"
+        margin-right = 8
+
+
 sudo
 Utilidad que permite a un usuario ejecutar programas con privilegios de root. En algunas distros sólo el usuario creado durante la instalación puede ejecutar sudo con privilegios de root, los demás han de ser agregados al grupo admin. Incluye las aplicaciones: cvtsudoers [convertir entre formatos de archivo sudoers], sudoedit [Ejecutar comandos como otro usuario] y sudoreplay [enumera los registros de salida creados por sudo]
 $ sudo -k   (limpia la clave sudo introducida)
