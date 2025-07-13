@@ -28282,6 +28282,14 @@ $ ledger -f cuentas.ledger register ^Gastos --period "2025/02/04" (de un dia en 
 $ ledger -f cuentas.ledger cleared (informe de saldo especial que añade dos columnas adicionales)
 
 
+lemonbar
+Es una barra ligera basada en XCB. Ofrece cambio de color de primer plano/fondo, alineación de texto y subrayado/superposición de color, compatibilidad total con UTF-8 y consumo de memoria reducido.
+$ lemonbar -g 180x30 -B#ff0000 -F#42c24a (con la medida de la barra, color de fondo y color del texto especificados)
+$ lemonbar -g 250x30+500+0 -b -B#ff5733 -F#1d610a (la barra a 500 del lateral tocando la parte baja y en la parte baja del monitor)
+$ echo "Linux es un sistema genial | lemonbar -p (se muestra mientras no se cierre la terminal o Ctrl -c)
+$ uname -a | lemonbar -p
+
+
 less
 Pagina la visualización de un fichero.
 $ cat /etc/apt/sources.list | less
