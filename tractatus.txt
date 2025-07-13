@@ -23756,6 +23756,33 @@ $ lego --email tu@email.com --dns cloudflare --domains www.dominio.com --path ./
 $ lego --email tu@example.com --domains dominio.com --http --path ./certs --server https://acme-staging-v02.api.letsencrypt.org/directory run (probar en entorno staging. Evita el límite de peticiones durante pruebas)
 
 
+lektor
+Generador de sitios web estáticos basado en Python. Lektor es un generador de sitios web estáticos. Un proyecto Lektor consiste en una colección de archivos estáticos que pueden integrarse en varias páginas HTML individuales. Lektor también puede utilizarse como un CMS, proporcionando una interfaz de administración basada en navegador para editar el contenido del sitio web y crear nuevas páginas.
+$ lektor quickstart (lanza un asistente que pregunta nombre del proyecto, título, autor, carpeta de salida, idioma...)
+Crea una estructura tipo:
+        web-mia/
+        ├── content/           # Contenido del sitio en archivos .lr [Lektor Record]
+        ├── templates/         # Plantillas HTML (Jinja2)
+        ├── assets/            # CSS, JS, imágenes...
+        ├── models/            # Modelos de contenido
+        └── lektorproject      # Configuración
+$ cd web-mia
+$ lektor server (lanza un servidor local en http://127.0.0.1:5000 que se recarga automáticamente cuando se hacen cambios)
+Puedes tener una jerarquía como esta:
+        content/
+        ├── blog/
+        │   ├── post1/
+        │   │   └── contents.lr
+        │   ├── post2/
+        │   │   └── contents.lr
+        ├── about/
+        │   └── contents.lr
+        └── contents.lr         # homepage
+$ lektor build (genera todos los archivos HTML en web-mia/_build/ y esta carpeta kpuede subirse al servidor)
+Entrar en el editor con el navegador en http://127.0.0.1:5000/admin para acceder al CMS visual y desde ahí se puede añadir páginas, editar texto, subir imágenes...
+$ lektor deploy (subir al hosting si no está en local)
+
+
 hlins
 Herramienta para insertar enlaces de hipertexto en documentos HTML, utilizando una base de datos con entradas del formato "nombre = URL". Su principal característica es que no solo  permite reemplazar texto por una URL, sino que está diseñada para reconocer nombres de personas y convertirlos en enlaces a sus respectivas URLs, basándose en una base de datos predefinida.
 Crear la base de datos de nombres y URLs
