@@ -2460,7 +2460,7 @@ Parser Generator	: none
 Long Options		:
 Author      		: USER
 Email-Address		: USER@ejemplo.es
-Date		        : November 21, 2024
+Date        : November 21, 2024
 13 files processed
 ...
 $ cd nombre_script
@@ -9597,7 +9597,7 @@ date
 Relacionado con fechas y calendarios.
 $ date +%s  (en tiempo unix - desde el 1 de enero de 1970-)
 $ date -d @1441543931 (Pasar fecha unix a normal)
-$ date -s "2010-01-10 16:59"  (forma de establecer la fecha y hora actual)
+$ date -s "2010/01/10 16:59"  (forma de establecer la fecha y hora actual)
 $ date –u 0110170210  (Otra forma de establecer la fecha. mes 01, día 10, hora 17:02 y año 2010)
 $ date +"%A,%d-%m-%Y"
 $ date +%c (dia de la semana, fecha y hora, minutos y segundos)
@@ -23781,6 +23781,44 @@ Puedes tener una jerarquía como esta:
 $ lektor build (genera todos los archivos HTML en web-mia/_build/ y esta carpeta kpuede subirse al servidor)
 Entrar en el editor con el navegador en http://127.0.0.1:5000/admin para acceder al CMS visual y desde ahí se puede añadir páginas, editar texto, subir imágenes...
 $ lektor deploy (subir al hosting si no está en local)
+
+
+levee
+Editor de pantalla extremadamente pequeña, basado en el editor "vi" de Unix pero que no tiene la mayoría de sus características como resaltado de sintaxis, múltiples ventanas, etc.
+Como está basado en vi, los comandos son muy similares, pero levee solo implementa un grupo muy reducido. Los más básicos son:
+        i --> Entrar en modo de inserción
+        Esc --> Volver al modo normal
+        h --> Mover cursor a la izquierda
+        j --> Mover cursor hacia abajo
+        k --> Mover cursor hacia arriba
+        l --> Mover cursor a la derecha
+        x --> Borrar el carácter bajo el cursor
+        dd --> Borrar la línea actual
+        :w --> Guardar el archivo
+        :q --> Salir del editor si no hay cambios sin guardar
+        :wq --> Guardar y salir
+        :q! --> Salir sin guardar los cambios
+
+
+lexicon
+Permite manipular registros DNS [A, AAAA, CNAME, MX, NS, TXT, SPF, SOA, SRV, LOC] en múltiples proveedores [Cloudflare, DigitalOcean, Namesilo, yandex, Route53...] de DNS de forma estandarizada. Es especialmente útil en automatización, como en la configuración de certificados SSL/TLS con Let's Encrypt, ya que permite crear, listar, actualizar y eliminar registros DNS de forma programática.
+$ lexicon cloudflare list example.com TXT (listar todos los registros txt de un dominio en Cloudflare)
+Si se usa variables de entorno para autenticación:
+        export LEXICON_CLOUDFLARE_USERNAME="myusername@example.com"
+        export LEXICON_CLOUDFLARE_TOKEN="cloudflare-api-token"
+$ lexicon cloudflare list example.com TXT
+$ lexicon cloudflare create www.example.com TXT --name="_acme-challenge.www.example.com." --content="challenge-token" (crear un registro txt para validar un dominio con Let's Encrypt)
+$ lexicon cloudflare create www.example.com TXT --name="_acme-challenge.www.example.com." --content="challenge-token" --ttl 600 (Lo mismo especificando el TTL)
+$ lexicon cloudflare update www.example.com TXT --identifier="cloudflare-record-id" --content="new-challenge-token" (actualizar registro txt con el identificador de registro obtenido con list)
+$ lexicon cloudflare delete www.example.com TXT --name="_acme-challenge.www.example.com." --content="challenge-token" (eliminar un registro txt)
+$ lexicon cloudflare delete www.example.com TXT --identifier="cloudflare-record-id" (lo mismo usando el identificador)
+$ lexicon auto create domain.net TXT --name foo --content bar (con un proveedor especial que lo detecta automáticamente)
+$ lexicon --help (lista completa de provedores)
+1.-
+Integrar lexicon con acme.sh para automatizar la emisión de certificados. Ejemplo para Namesilo que actualiza registros cada 15 minutos.
+        export PROVIDER=namesilo
+        export LEXICON_NAMESILO_TOKEN="namesilo-api-token"
+$ acme.sh --issue -d test.example.com --dns dns_lexicon --dnssleep 960 (espera 16 minutos para la propagación de DNS en Namesilo)
 
 
 hlins
