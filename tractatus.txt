@@ -28398,6 +28398,15 @@ $ lfm /home/usuario/Documentos /media/sda2 (Abrir en cada panel un directorio)
 Nota.- Pulsar “q” para cerrar
 
 
+lft
+[Layer Four Traceroute]. Herramienta avanzada de diagnóstico de red que realiza un trazado de ruta utilizando paquetes TCP en lugar del método tradicional basado en UDP o ICMP. Útil para analizar rutas de red en entornos donde los paquetes UDP o ICMP podrían estar bloqueados por firewalls. `lft` envía sondas TCP SYN o FIN, manipulando el campo TTL (Time To Live) del protocolo IP, y espera respuestas ICMP TIME_EXCEEDED de los routers intermedios para mapear la ruta hacia el host de destino.
+$ lft -d 80 google.com (trazar la ruta a un host usando el puerto 80)
+$ lft -F google.com (enviar sondas TCP FIN útil en algunos firewalls que filtran SYN)
+$ lft -a google.com (ver solo direcciones IP sin consultas DNS)
+$ lft -v -d 80 google.com (obtener más información sobre los paquetes enviados y recibidos)
+$ lft -m 10 google.com (restringir el trazado a un número máximo de saltos)
+
+
 lftp
 Conexión ftp por linea de comandos.
 $ lftp usuario@host
