@@ -40662,6 +40662,14 @@ Informa de estadísticas de la red al igual que vmstat [ver] lo hace para las es
 # smemstat -dm -o smemstat.json (informe en megabytes, eliminando ruta del directorio y el resultado en el archivo smemstat.json)
 
 
+tcptraceroute
+Implementación de traceroute con paquetes TCP. traceroute [ver], envía paquetes UDP o ICMP ECHO con un TTL de uno, incrementándolo hasta alcanzar el destino. El problema radica en que, con el uso generalizado de firewalls, muchos de los paquetes que traceroute envía se filtran, lo que imposibilita rastrear completamente la ruta hasta el destino. Sin embargo, en muchos casos, los firewalls permiten la entrada de paquetes TCP a puertos específicos en los que los hosts que se encuentran detrás del firewall escuchan conexiones. Al enviar paquetes TCP SYN en lugar de paquetes UDP o ICMP ECHO, tcptraceroute puede eludir los filtros de firewall más comunes.
+$ tcptraceroute google.com (forma básica)
+$ tcptraceroute -v 8.8.8.8 (con más información)
+$ tcptraceroute -p 80 google.com (con un puerto específico)
+$ tcptraceroute -m 20 -w 2 -n example.com (máximo número de saltos, por defecto es 30, tiempo máximo entre paquetes en segundos y no realizar DNS lookup para nombres de host)
+
+
 tcptrack
 aplicación que muestra el consumo de la conexión.
 # tcptrack -i eth1 port 22 -f (Especificando conexión, puerto y habilitar el algoritmo de velocidad media rápida [-f])
