@@ -28517,6 +28517,60 @@ liece
 Cliente IRC [Internet Relay Chat] para Emacs basado en Irchat aunque no tiene nada que ver son este. "M-x liece" abrirá la interfaz de Liece dentro de Emacs, desde donde se puede conectar a servidores IRC, por ejemplo irc.libera.chat, y unirse a canales, por ejemplo #emacs y, con el apodo chhatear.
 
 
+lifelines
+Programa de genealogía que permite a los usuarios mantener registros genealógicos y generar informes a partir de ellos. Proporcionar una interfaz de usuario basada en pantalla y menú y mantiene registros genealógicos [personas, familias, fuentes, eventos y otros] en una base de datos y genera informes a partir de ellos. Incluye varios ejecutables: btedit, dbverify, llexec y llines.
+$ btedit mi_arbol.ged (abrirá el archivo mi_arbol.ged)
+$ dbverify mi_arbol.ged (verificar la integridad del archivo mi_arbol.ged y reportará cualquier error encontrado)
+$ llexec mi_script.ll mi_arbol.ged (ejecutará el script mi_script.ll en la base de datos mi_arbol.ged)
+$ llines mi_arbol.ged (abrirá la interfaz de usuario de Lifelines para el archivo mi_arbol.ged)
+Los datos genealógicos en Lifelines se introducen y almacenan en archivos con formato GEDCOM [.ged]. Un ejemplo de cómo se puede ver un archivo:
+$ nano mi_arbol.ged
+        0 HEAD
+        1 SOUR LIFELINES
+        2 VERS 3.0.5
+        1 DEST LIFELINES
+        1 DATE 14 JUL 2025
+        1 SUBM @SUBM@
+        1 FILE mi_arbol.ged
+        1 GEDC
+        2 VERS 5.5
+        2 FORM LINEAGE-LINKED
+        1 CHAR UTF-8
+        0 @SUBM@ SUBM
+        1 NAME Juan Pérez
+        0 @I1@ INDI
+        1 NAME Juan /Pérez/
+        1 SEX M
+        1 BIRT
+        2 DATE 1 JAN 1950
+        1 FAMS @F1@
+        0 @I2@ INDI
+        1 NAME María /Gómez/
+        1 SEX F
+        1 BIRT
+        2 DATE 1 JAN 1955
+        1 FAMS @F1@
+        0 @F1@ FAM
+        1 HUSB @I1@
+        1 WIFE @I2@
+        1 CHIL @I3@
+        0 @I3@ INDI
+        1 NAME Luis /Pérez Gómez/
+        1 SEX M
+        1 BIRT
+        2 DATE 1 JAN 1980
+        1 FAMC @F1@
+        0 TRAILER
+Un ejemplo de Script de Lifelines que genera un informe de todas las personas en la base de datos:
+$ nano mi_script.ll
+        proc main() {
+            forindilist(person, indiset()) {
+                name(person, "PNV")
+                printf("\n")
+            }
+        }
+
+
 liferea
 Lector RSS.
 Atajos:
