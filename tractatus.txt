@@ -28740,6 +28740,37 @@ $ LimeUtil --update (actualizar el firmware del dispositivo)
 $ LimeSuiteGUI (interfaz gráfica para configurar transceptores LMS7)
 
 
+limnoria
+Bot de IRC desarrollado en Python que destaca por su flexibilidad, robustez y facilidad de uso. Incorpora un sistema ACL [Listas de Control de Acceso] muy granular que permite definir permisos por usuario y por comando, ideal para gestionar canales de IRC con seguridad y detalle. Incluye las herramientas supybot, supybot-adduser, supybot-botchk, supybot-plugin-create, supybot-plugin-doc, supybot-reset-password, supybot-test y supybot-wizard.
+$ supybot-wizard (crear la configuración inicial. Nombre del bot, canales de IRC a los que se debe conectar, plugins a cargar, contraseñas, credenciales del propietario...)
+$ supybot config.conf (iniciar el bot con el archivo de configuración generado con supybot-wizard)
+$ supybot-adduser datos/users.conf (añadir un usuario administrador)
+$ supybot-botchk (verificar si el bot está en ejecución)
+$ supybot-reset-password datos/users.conf (reiniciar contraseña)
+$ supybot-test (ejecuta tests en plugins)
+Algunos ejemplos de configuración
+/msg BotNick identify contraseña (autenticarse)
+/msg BotNick @addcapability usuario admin (permisos de administrador global)
+/msg BotNick @canal addperm usuario #canal op (permisos de OP en un canal específico)
+/msg BotNick @canal addperm usuario #canal1 op
+/msg BotNick @removecapability usuario admin
+/msg BotNick @load PluginName (cargar un plugin)
+Una vez el bot está en un canal
+!help (muestra ayuda)
+!quote add "Hola mundo" (añade una cita)
+!seen usuario (dice cuándo se vio por última vez a un usuario)
+!tell usuario mensaje (envía un mensaje cuando el usuario esté activo)
+
+
+linaro-bcb-util
+Herramienta especializada que interactúa con el Bootloader Control Block [BCB], una pequeña porción de datos almacenada generalmente en la partición "misc" de dispositivos que usan cargadores de arranque compatibles con Android. Su propósito principal es controlar el comportamiento del cargador de arranque en el siguiente inicio del sistema. En una instalación normal de Debian en la que el cargador de arranque, típicamente GRUB, no utiliza el BCB, esta utilidad debería ser inútil ya que solo funciona en sistemas que arrancan desde cargadores de arranque compatibles con Android. Si, por ejemplo, si se instala o desinstala Debian en la partición del sistema de AOSP [Android Open Source Project], se puede usar esta utilidad para controlar el comportamiento del cargador de arranque para iniciar en modo de recuperación en el siguiente arranque.
+Para los ejemplos se asume que se está en un dispositivo que tiene una partición misc que actúa como la partición BCB, y que el cargador de arranque del dispositivo es compatible con Android.
+# linaro-bcb-util --read (mostrar el comando actual almacenado en el BCB)
+# linaro-bcb-util --write --command "boot-recovery" (reiniciar el dispositivo, el cargador de arranque leerá el BCB y, si lo interpreta correctamente, iniciará en el modo de recuperación)
+# linaro-bcb-util --write --command "boot-fastboot" (arrancar en fastboot)
+# linaro-bcb-util --clear (eliminar cualquier instrucción previa del BCB, permitiendo que el cargador de arranque proceda con el arranque normal)
+
+
 line
 Utilidad que copia una línea desde el inicio hasta el final desde la entrada estándar a la salida estándar.  Siempre imprime al menos una nueva línea y devuelve un estado de salida distinto de 0 en EOF o error de lectura
 	$ line
