@@ -28634,6 +28634,26 @@ $ a2enmod php8.2 (activar php en localhost)
 Con el navegador acceder a la página http://localhost
 
 
+likwid
+Conjunto de herramientas de línea de comandos orientados al rendimiento. Funciona con procesadores Intel y AMD
+$ likwid-topology (imprime la topología de subprocesos y caché)
+$ likwid-features -a (funciones disponibles. Las características modificables están marcadas con *)
+$ likwid-features -l (imprimir el estado de todas las funciones para las CPU)
+$ likwid-features -e HW_PREFETCHER,CL_PREFETCHER (especificar qué características debe habilitarse)
+$ likwid-features -d DCU_PREFETCHER,IP_PREFETCHER (deshabilitar caacteriístics)
+$ likwid-perfctr -a (muestra los contadores de rendimiento de hardware)
+$ likwid-perfctr -e (imprime los contadores disponibles y los eventos de rendimiento del procesador actual y, si están disponibles, las GPU Nvidia)
+$ likwid-powermeter (información de energía RAPL e información sobre los pasos del modo Turbo)
+$ likwid-setFrequencies -p (imprimir frecuencias actuales si estan disponibles)
+$ likwid-setFrequencies -l (listar frecuencias de CPU disponibles)
+$ likwid-setFrequencies -t 1 (activar modo turbo si disponible. "-t 0" para desactivar)
+$ likwid-memsweeper (limpia los dominios de memoria NUMA llenos y elimina la línea de caché sucia de la jerarquía de caché)
+$ likwid-genTopoCfg (vuelca la información de topología al archivo /usr/etc/likwid_topo.cfg si existe)
+$ likwid-perfscope -a (imprimir las configuraciones preconfiguradas para el sistema actual)
+$ likwid-pin -p (dominios disponibles con mapeo en identificaciones físicas)
+$ likwid-perfscope -a (imprimir todas las configuraciones de trazado preconfiguradas para el sistema actual)
+
+
 lilo
 Gestor de arranque. La configuración en:
 # nano /etc/lilo.conf
