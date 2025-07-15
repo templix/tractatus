@@ -28624,6 +28624,16 @@ $ light-locker-command -l (imediatamente)
 $ light-locker-command -d (desactivarlo)
 
 
+lighttpd
+Servidor web pequeño, rápido y un consumo de memoria mínimo, desarrollado pensando en la seguridad y con numerosas funciones.
+$ lighttpd -t -f /etc/lighttpd/lighttpd.conf (encontrar errores en la configuración)
+# /etc/init.d/lighttpd start
+# chmod 777 -R /var/www/html
+$ a2enmod php8.2 (activar php en localhost)
+# echo '<?php phpinfo();?>' >> /var/www/html/index.php
+Con el navegador acceder a la página http://localhost
+
+
 lilo
 Gestor de arranque. La configuración en:
 # nano /etc/lilo.conf
