@@ -28624,6 +28624,13 @@ $ light-locker-command -l (imediatamente)
 $ light-locker-command -d (desactivarlo)
 
 
+lighter
+Herramienta de bioinformática diseñada para la corrección de errores en datos de secuenciación de ADN y ARN. La mayoría de las herramientas de corrección de errores se basan en el conteo de k-meros [subcadenas de longitud $k$ que se encuentran en las lecturas de secuenciación]. Los k-meros que aparecen con alta frecuencia se consideran "correctos", mientras que los que aparecen con baja frecuencia se consideran "errores".
+$ lighter -r my_reads.fastq -o corrected_reads -k 31 -t 8 (lecturas de entrada en formato FASTQ, salida corregida, longitud k-mer a utilizar [31] y 8 hilos de procesamiento)
+$ lighter -r forward_reads.fastq,reverse_reads.fastq -o corrected_paired_reads -k 27 -max_mem 10G (con 2 lecturas de pares apareados [paired-end] y cantidad máxima de memoria RAM a 10 Gigabytes)
+$ lighter -r reads.fastq -o final_corrected_reads -k 21 -s 0.05 -f (-s 0.05 indica usar el 5% de las lecturas para construir el filtro Bloom de k-meros de entrada [predeterminado 1%] y -f que los archivos corregidos esten en formato fasta en lugar de fastq)
+
+
 lighttpd
 Servidor web pequeño, rápido y un consumo de memoria mínimo, desarrollado pensando en la seguridad y con numerosas funciones.
 $ lighttpd -t -f /etc/lighttpd/lighttpd.conf (encontrar errores en la configuración)
