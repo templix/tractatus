@@ -28718,6 +28718,20 @@ Algunos atajos:
 	Ctrl + AvPag (Ir a pestañas siguiente)
 
 
+lime-forensics-dkms
+lime [Linux Memory Extractor] es un módulo [.ko] que permite extraer la RAM completa de una máquina Linux en tiempo real. La herramienta admite la adquisición de memoria tanto en el sistema de archivos del dispositivo como a través de la red. Se usa para obtener una copia exacta de la memoria volátil sin reiniciar el sistema.
+$ find /lib/modules/$(uname -r) -name 'lime.ko' (verificar que se tiene el módulo instalado)
+$ mkdir ~/capturas (crear un directorio donde guardar la imagen)
+$ cd ~/capturas
+# insmod /lib/modules/$(uname -r)/updates/dkms/lime.ko "path=/home/USER/capturas/memoria.lime format=lime" (cargarlo especificando la ruta del archivo y cómo guardar la RAM)
+Nota.- Otras opciones de formato de salida son raw y padded.
+# rmmod lime (unload el módulo cuando se haya terminado)
+Para analizar procesos, sockets, claves, etc.
+$ pip install volatility3 (instalar el paquete)
+$ vol -f memoria.lime windows.pslist (si fuera un volcado de una máquina Windows o Android, volatility soporta muchos tipos)
+Nota.- Este módulo puede afectar la estabilidad del sistema si se usa mal. Solo se recomienda en entornos controlados de análisis, auditoría, laboratorio...
+
+
 line
 Utilidad que copia una línea desde el inicio hasta el final desde la entrada estándar a la salida estándar.  Siempre imprime al menos una nueva línea y devuelve un estado de salida distinto de 0 en EOF o error de lectura
 	$ line
