@@ -4020,6 +4020,11 @@ $ brebis -d \( -g /backups/backup.tar.gz  (cambia el delimitador predeterminado 
 
 brew
 [build-essential curl git python-setuptools ruby]. En Debian el paquete se denomina linuxbrew-wrapper. Bifurcación de Homebrew, el administrador de paquetes de Mac OS, para Linux. Algunas de sus caracteristicas principales son que no requiere acceso root, permite instalar software no empaquetado por la distribución nativa y pueden instalarse versiones actualizadas de software cuando la distribución nativa es antigua.
+$ nano ~/.bash_profile
+Añadir:
+        if [ -f $(brew --prefix)/etc/bash_completion.d/um-completion.sh ]; then
+        . $(brew --prefix)/etc/bash_completion.d/um-completion.sh
+        fi
 $ brew doctor (Comprobar si linuxbrew esté instalado y funciona correctamente)
 $ brew update (actualizar linuxbrew)
 $ brew search (paquetes están disponibles)
@@ -42322,6 +42327,16 @@ Limitar la cantidad de usuarios conectados al sistema:
 # nano /etc/security/limits.conf
 Y en el parámetro maxlogins modificamos el número que deseemos:
 	*    -       maxlogins 3
+
+
+um
+Crear páginas man.
+# brew install um
+$ um config (ver la configuración actual. Por defecto ~/.um/umconfig)
+$ um edit script (crea la estructura básica, una vez llena se guarda)
+$ um script (lanzar la página man)
+$ um list (listado de páginas creadas)
+$ um rm script (eliminar una página man)
 
 
 umask
