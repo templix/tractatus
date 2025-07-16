@@ -28799,6 +28799,14 @@ Crear enlaces entre ficheros.
 $ link fichero1 fichero2 (crea un enllace fichero2 que apunta a fichero 2)
 
 
+linkchecker
+Herramienta muy útil para verificar la validez de enlaces en sitios web, documentos HTML, y otros recursos. Está diseñada para detectar enlaces rotos, errores de red, y otros problemas relacionados con enlaces. Además, puede trabajar en modo recursivo para comprobar enlaces en varias páginas enlazadas, y ofrece diferentes formatos de salida para facilitar el análisis.
+$ linkchecker --output-html=resultado.html https://ejemplo.com (verificar un sitio web completo en modo recursivo y guardar la salida)
+$ linkchecker --file=pagina.html --output=csv --output-file=resultado.csv (revisará los enlaces en pagina.html, y generará un archivo CSV con los resultados)
+$ linkchecker --recursive --depth=2 https://ejemplo.com (comprueba enlaces en https://ejemplo.com y en las páginas enlazadas, hasta una profundidad de 2 niveles)
+$ linkchecker --output-xml=resultado.xml --no-status  https://ejemplo.com (salida en XML y análisis de enlaces rotos)
+
+
 links2
 Navegador.
 # links2 -driver fb -g web.com (modo gráfico en el las tty con framebuffer)
