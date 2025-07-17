@@ -28815,6 +28815,13 @@ $ linkchecker --recursive --depth=2 https://ejemplo.com (comprueba enlaces en ht
 $ linkchecker --output-xml=resultado.xml --no-status  https://ejemplo.com (salida en XML y análisis de enlaces rotos)
 
 
+linklint
+Programa Perl con todas las funciones para verificar enlaces HTML locales o remotos y asegurarse de que no haya enlaces rotos [404].
+$ linklint /@ -doc ~/linkdoc -root /var/www/html/site (análisis de directorios y subdirectorios y los informes en ~/linkdoc del sitio local especificado)
+$ linklint -limit 2000 -doc ~/linkdoc -host http://localhost:8000/ (anlisis de un sitio web con un limite de 2000 htmls, por defecto 500)
+Nota.- Los enlaces "mailto" o "javascript:void" són ignorados y en el informe se muestra "skipped actions"
+
+
 links2
 Navegador.
 # links2 -driver fb -g web.com (modo gráfico en el las tty con framebuffer)
