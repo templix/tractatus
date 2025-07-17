@@ -28776,6 +28776,14 @@ Para los ejemplos se asume que se está en un dispositivo que tiene una partici�
 # linaro-bcb-util --clear (eliminar cualquier instrucción previa del BCB, permitiendo que el cargador de arranque proceda con el arranque normal)
 
 
+lincredits
+Programa que convierte el archivo CREDITS de Linux a uno de los tres formatos compatibles: texto plano, LaTeX y HTML. Se debe especificar la ruta de un archivo CREDITS válido, normalmente /usr/src/linux/CREDITS)
+Este paquete permite crear versiones optimizadas del archivo CRÉDITOS de Linux en texto plano, LaTeX o HTML.
+$ lincredits creditos.txt (creará un archivo en el directorio actual con las credenciales optimizadas. Por defecto en .txt)
+$ lincredits --html creditos.txt (lo creará en .html)
+$ lincredits -o my_custom_credits.txt creditos.txt (lo envia al archivo especificado)
+
+
 line
 Utilidad que copia una línea desde el inicio hasta el final desde la entrada estándar a la salida estándar.  Siempre imprime al menos una nueva línea y devuelve un estado de salida distinto de 0 en EOF o error de lectura
 	$ line
