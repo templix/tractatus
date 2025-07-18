@@ -29924,8 +29924,9 @@ $ pandoc archivo.md -s -t man -o archivo.1
 
 
 man2html
-Pasar páginas de manual a formato html. Tambien pueden visualizarse con el navegador con http://localhost/cgi-bin/man/man2html.
-$ man ls | man2html > man_ls.html
+Explorar las páginas del manual en el navegador con la dirección http://localhost/cgi-bin/man/man2html. Es necesario habilitar la compatibilidad con CGI en el servidor HTTP [CGI puede estar deshabilitado por defecto por motivos de seguridad]. Para Apache2, se puede habilitar con:
+# a2enmod cgid
+# systemctl restart apache2
 
 
 man-db
