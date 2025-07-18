@@ -5307,6 +5307,15 @@ Después, reconstruir el espacio de trabajo con catkin_make.
 $ catkin_make
 
 
+catman
+[man-db]. Se utiliza para crear o actualizar un conjunto de páginas de manual preformateadas, conocidas como páginas cat. Estas páginas son versiones preprocesadas de las páginas de manual originales, que suelen estar en formato troff o similar y se almacenan en un formato que permite una visualización más rápida al usar el comando man. Normalmente las páginas de manual originales se encuentran en /usr/share/man o /usr/local/share/man para software instalado localmente y las páginas cat preformateadas en /var/cache/man.
+# catman -v (preformatear todas las páginas de manual de todas las secciones disponibles en el sistema y en modo información detallada)
+# catman 1 (actualizar las páginas de manual de la sección 1 [comandos de usuario])
+# catman 1 8 (actualizar las secciones 1 y 8 [comandos de administración])
+# catman -d (muestra información de depuración)
+Nota.- El paquete man-db incluye un script que se ejecuta periódicamente para mantener las páginas cat actualizadas, normalmente en /etc/cron.daily/man-db.
+
+
 cava
 [C.A.V.A.]. Visualizador de audio de espectro de barras para la terminal Linux que utiliza ALSA, pulseaudio o búfer fifo para la entrada.
 $ cava (mientras está sonando música son un clásico reproductor))
