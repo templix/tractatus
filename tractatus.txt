@@ -25118,24 +25118,24 @@ Ejecuta uno o varios comandos dependiendo de si una condición se cumple o no. A
 
 
 ifconfig
-[net-tools]. Define direcciones ip y dispositivos de red
-# ifconfig  (ver los datos de conexión)
+[net-tools]. Define direcciones ip y dispositivos de red.
+# ifconfig (ver los datos de conexión)
 # ifconfig eth0 up 192.168.1.2 (Levanta la placa de red eth0 y le da la ip)
 # ifconfig eth0 down (Cierra la red eth0)
 # ifconfig eth0 promisc (Poner la placa en modo promiscuo)
 # ifconfig wlan0 up (si se trata de redes inalámbricas)
-# ifconfig eth0 hw ether 00:01:02:03:04:05  (cambiar la dirección MAC)
+# ifconfig eth0 hw ether 00:01:02:03:04:05 (cambiar la dirección MAC)
 
 
 ifdata
 [moreutils]. Muestra información de la red.
-$ ifdata -p eth0 (Muestra la ip local, la mascara de red, la dirección broadcast y los MTU de la red)
-$ ifdata -pa -pn eth0 (Muestra la ip local i la mascara de red)
-$ ifdata -pe eth5 (Muestra "yes" o "no" sobre si existe o no la red especificada)
+$ ifdata -p eth0 (muestra la ip local, la mascara de red, la dirección broadcast y los MTU de la red)
+$ ifdata -pa -pn eth0 (muestra la ip local i la mascara de red)
+$ ifdata -pe eth5 (muestra "yes" o "no" sobre si existe o no la red especificada)
 Otras opciones:
--pb (La dirección broadcast)
--ph (Muestra la MAC)
--pf (Muestra las caracteristicas de la red)
+-pb (la dirección broadcast)
+-ph (muestra la MAC)
+-pf (muestra las caracteristicas de la red)
 
 
 ifdown
