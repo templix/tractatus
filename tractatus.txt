@@ -28871,6 +28871,33 @@ Comprobar si la eliminación de un kernel es segura. está pensado para ser llam
 # linux-check-removal 5.10.0-8-amd64 (si se quiere eliminar manualmente un kernel viejo)
 
 
+linux-cpupower
+Herramientas y utilidades que te permiten inspeccionar y controlar los parámetros de ajuste relacionados con la gestión de energía y el rendimiento de la CPU en sistemas Linux especialmente aquellos que soportan las funcionalidades compatible con estas funciones. Esto significa que se puede ver cómo la CPU está manejando la frecuencia y los estados de ahorro de energía, y en algunos casos, modificarlos para optimizar el rendimiento o el consumo de energía. Incluye las herramientas cpupower, turbostat y x86_energy_perf_policy
+# cpupower frequency-info (información detallada sobre el controlador de cpufreq en uso, las frecuencias disponibles, el gobernador actual y las CPUs afectadas)
+# cpupower frequency-set -g performance (configurará todas las CPUs para que usen el gobernador `performance`, manteniéndolas a la máxima frecuencia posible)
+Nota.- Los gobernadores de frecuencia son algoritmos que deciden cómo escalar la frecuencia de la CPU. Algunos comunes son "performance" [siempre al máximo rendimiento], "powersave" [prioriza el ahorro de energía], "ondemand" [escala según la carga] y "conservative" [similar a "ondemand" pero con un enfoque más gradual].
+# cpupower -c 0-3 frequency-set -g powersave (aplicará el gobernador `powersave` a las CPUs del 0 al 3)
+# cpupower frequency-set -g userspace (para establecer una frecuencia específica, primero cambiar el gobernador)
+# cpupower frequency-set -f 1.5GHz (establece la frecuencia de la CPU a 1.5 GHz. Se puede usar unidades como Hz, KHz, MHz, GHz)
+# cpupower idle-info (muestra los C-states [estados de inactividad] soportados por la CPU y las estadísticas de uso de cada uno)
+# cpupower idle-set -d 3 (deshabilitaría el C-state 3. Cuidado al modificar estas configuraciones, ya que pueden afectar el consumo de energía y la estabilidad del sistema)
+# turbostat (que informe cada 5 segundos con datos como la frecuencia, el porcentaje de tiempo en diferentes C-states, la temperatura del núcleo y el consumo de energía)
+# turbostat -i 10 (monitorizar estadísticas con un intervalo específico [cada 10 segundos])
+# turbostat --out ts.log sleep 60 (medir el impacto de un proceso específico. Ejecutar sleep 60 y luego guardar todas las estadísticas recopiladas durante ese tiempo en el archivo ts.log)
+# turbostat --quiet --show "PkgWatt","Busy%","Core","CoreTmp" -i 1 (mostrar métricas específicas: consumo de energía del paquete, el porcentaje de ocupación, el número de núcleos y temperatura del núcleo, actualizándose cada segundo y sin el encabezado inicial)
+# x86_energy_perf_policy --cpu all (mostrará el valor EPB [Energy-Performance Bias] actual para cada CPU)
+# x86_energy_perf_policy --cpu all --epb performance (indicará al procesador que priorice el rendimiento para todas las CPUs)
+Otras opciones: performance [máximo ahorro de energia y menos rendimiento], balance-performance, normal, balance-power y power [menos ahorro de energía y máximo rendimiento].
+# x86_energy_perf_policy --cpu 0 --epb power (establecerá el EPB de la CPU 0 a "power", equivalente a 15, priorizando el ahorro de energía para ese núcleo)
+# x86_energy_perf_policy --hwp-enable 1 (habilitar Turbo Boost si está soportado. Una vez habilitado, a menudo requiere un reinicio del sistema para deshabilitarse)
+# x86_energy_perf_policy --turbo-enable 0 (deshabilitar Turbo Boost)
+Nota.- Deshabilitar Turbo Boost puede reducir el consumo de energía y la temperatura máxima, a costa de un rendimiento máximo menor.
+En sistemas Intel modernos, el controlador intel_pstate es a menudo el predeterminado y el más eficiente para gestionar la frecuencia. Si se necesita un control más manual, por ejemplo, para usar el gobernador userspace, a veces es necesario deshabilitar intel_pstate en el arranque del kernel y usar acpi-cpufreq en su lugar. La forma básica para deshabilitarlo es:
+# nano nano /etc/default/grub
+        GRUB_CMDLINE_LINUX_DEFAULT="quiet"
+# update-grub (si se ha modificado)
+
+
 linux-update-symlinks
 Como linux-check-removal está pensado para ser llamado desde los scripts postinst y postrm maintainer de los paquetes del núcleo Linux. El script postinst debe pasar el primer argumento  install o upgrade dependiendo de si se ha realizado una nueva instalación o una actualización.
 # linux-update-symlinks upgrade 6.1.0-10-amd64
