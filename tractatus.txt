@@ -25405,6 +25405,16 @@ $ info2pod /usr/share/info/nano.info.gz > nano.txt
 $ info2man /usr/share/info/nano.info.gz > nano.txt
 
 
+info2www
+Permite leer archivos info, tipicamente ubicados en /usr/share/info/, comúnmente utilizados para la documentación de software en sistemas GNU/Linux con un navegador web. Requiere un servidor HTTP compatible con CGI [Common Gateway Interface]. Se accede al indice general con la dirección http://localhost/cgi-bin/info2www
+# a2enmod cgi (habilitar el módulo CGI si no está habilitado)
+# systemctl restart apache2 (reiniciar el servidor)
+Para buscar un comando especifico:
+http://localhost/cgi-bin/info2www?grep
+Es equivalente a:
+$ info grep
+
+
 infocmp
 Herramienta que se utiliza para comparar o mostrar información sobre descripciones de terminal en sistemas que utilizan el sistema de gestión de terminales terminfo.
 $ infocmp (muestra la descripción completa de la terminal actual)
@@ -28894,7 +28904,7 @@ Otras opciones: performance [máximo ahorro de energia y menos rendimiento], bal
 Nota.- Deshabilitar Turbo Boost puede reducir el consumo de energía y la temperatura máxima, a costa de un rendimiento máximo menor.
 En sistemas Intel modernos, el controlador intel_pstate es a menudo el predeterminado y el más eficiente para gestionar la frecuencia. Si se necesita un control más manual, por ejemplo, para usar el gobernador userspace, a veces es necesario deshabilitar intel_pstate en el arranque del kernel y usar acpi-cpufreq en su lugar. La forma básica para deshabilitarlo es:
 # nano nano /etc/default/grub
-        GRUB_CMDLINE_LINUX_DEFAULT="quiet"
+        GRUB_CMDLINE_LINUX_DEFAULT="intel_pstate=disable"
 # update-grub (si se ha modificado)
 
 
