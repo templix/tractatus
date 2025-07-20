@@ -20590,6 +20590,10 @@ $ ginkgo -focus="@focus" (ejecutar solo las pruebas que coincidan con una etique
 $ ginkgo -p --keep-going (ejecutar pruebas en paralelo y continuar ejecutando las pruebas incluso si algunas fallan)
 
 
+ginstall-info
+Comparte las mismas opciones, funcionalidad y sintaxis que install-info [ver]
+
+
 gis-all
 Es un metapaquete [paquete especial que no contiene software en sí, sino que depende de otros paquetes] que forma parte de Debian Gis Pure Blend, una variante diseñada para usuarios que trabajan con datos geográficos, teledetección y observación de la Tierra e instala de manera automática un amplio conjunto de programas y bibliotecas orientados al trabajo con Sistemas de Información Geográfica [Geographical Information System - GIS]. gis-all instalará programas como QGIS, GRASS GIS, GDAL, PROJ, y otros relacionados con la gestión, análisis y visualización de información geográfica.
 
@@ -25531,6 +25535,14 @@ set completion-ignore-case on
 insmod
 Carga modulos.
 # insmod módulo
+
+
+install-info
+Utilidad que se encarga de gestionar el índice centralizado de toda la documentación en formato info instalada en el sistema. Permite crear, modificar o eliminar entradas en el archivo /usr/share/info/ normalmente el directorio de documentación Info, haciéndolas accesibles para los lectores como el comando info. En sistemas Debian, el paquete suele reenvíar las opciones al programa real ginstall-info. Su función principal es facilitar la actualización de las entradas en el índice sin intervención manual y suele ejecutarse automáticamente durante la instalación o eliminación de paquetes, aunque también se puede usar manualmente.
+# install-info /usr/share/info/mi-prog.info /usr/share/info/dir (añade el contenido de menú especificado en el archivo mi-prog.info al índice general "dir" del sistema)
+# install-info --dry-run /usr/share/info/mi-prog.info /usr/share/info/dir (sumula la acción)
+# install-info --delete /usr/share/info/mi-prog.info /usr/share/info/dir (elimina la entrada correspondiente a ese manual del índice)
+# install-info --entry="* Mi-Prog: (mi-prog).   Manual de Mi-Prog" /usr/share/info/mi-prog.info /usr/share/info/dir (forzar la descripción de la entrada de cómo aparecerá el menú en el índice para ese manual)
 
 
 install-mbr
