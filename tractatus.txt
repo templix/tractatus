@@ -26601,6 +26601,19 @@ $ java2html archivo.cpp (conversión de código C++)
 $ java2html -t "Mi código Java" MiPrograma.java (generar HTML con título personalizado)
 
 
+jclassinfo
+Herramienta para analizar archivos de clase Java y extraer información detallada sobre los elementos que contiene como las clases, métodos, constantes, campos proporcionados, dependencias, versión de la máquina virtual necesaria para ejecutarlos y otros atributos.
+$ jclassinfo MiClase.class --recursive (forma básica y analizando todas las clases dentro de los arcchivos JAR o ZIP)
+$ jclassinfo MiClase.class --methods (mostrar solo los métodos de una clase)
+$ jclassinfo MiClase.class --dependencies (verificar las dependencias de una clase)
+$ jclassinfo MiClase.class --constants (información sobre las constantes definidas)
+$ jclassinfo MiClase.class --vm-version --verbose (versión de la máquina virtual requerida y com la maxima información)
+$ jclassinfo MiClase.class --attributes (listar todos los atributos de una clase)
+$ jclassinfo MiClase.class --method buscarNombreMétodo (buscar un método específico por nombre)
+$ jclassinfo MiClase.class --inherits (verificar si una clase hereda de otra)
+$ jclassinfo MiClase.class --fields --output-format json (mostrar información sobre los campos [variables] de una clase y salia en JSON)
+
+
 jdns
 Herramienta que permite probar distintos aspectos del funcionamiento del sistema DNS [Domain Name System]. Está pensada para evaluar cómo se comportan las peticiones DNS en distintos modos de operación, como unicast, multicast, etc.
 $ jdns -d -q 3 uni src jabber.org (mostrar salida, ejecutar durante 3 segundos, consulta standard para descubrir servicios
