@@ -28933,6 +28933,10 @@ En sistemas Intel modernos, el controlador intel_pstate es a menudo el predeterm
 # update-grub (si se ha modificado)
 
 
+linux-sysctl-defaults
+Contiene un archivo de configuración [/etc/sysctl.conf] de sysctl que establece algunos valores predeterminados adecuados para Linux.
+
+
 linux-update-symlinks
 Como linux-check-removal está pensado para ser llamado desde los scripts postinst y postrm maintainer de los paquetes del núcleo Linux. El script postinst debe pasar el primer argumento  install o upgrade dependiendo de si se ha realizado una nueva instalación o una actualización.
 # linux-update-symlinks upgrade 6.1.0-10-amd64
