@@ -28996,9 +28996,9 @@ Herramientas para implementar el Protocolo de Tiempo de Precisión [PTP, IEEE 15
 # timemaster -f /etc/timemaster.conf (sincroniza el reloj usando tanto NTP como PTP. Requiere un archivo de configuración)
 # nsm -i eth0 -m (monitorea la calidad del servicio de tiempo en la red)
 # phc2sys -s eth0 -c CLOCK_REALTIME -m -w
--s eth0 --> toma el tiempo del PHC [reloj de hardware] en eth0.
--c CLOCK_REALTIME --> Sincroniza con el reloj del sistema.
--w --> Espera a que ptp4l esté listo.
+        -s eth0 --> toma el tiempo del PHC [reloj de hardware] en eth0.
+        -c CLOCK_REALTIME --> Sincroniza con el reloj del sistema.
+        -w --> Espera a que ptp4l esté listo.
 1.-
 Ejemplo maestro/slave
 Maestro [Grandmaster Clock]
