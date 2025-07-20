@@ -28986,6 +28986,27 @@ $ linux-version list (los lista todos)
 $ linux-version list | linux-version sort --reverse (lista los kernels y ordena del más nuevo al más viejo)
 
 
+linuxptp
+Herramientas para implementar el Protocolo de Tiempo de Precisión [PTP, IEEE 1588] en sistemas Linux. Este protocolo permite sincronizar relojes en una red con alta precisión [hasta nanosegundos], útil en entornos como telecomunicaciones, centros de datos y sistemas financieros. Incluye las herramientas hwstamp_ctl, nsm, phc2sys, phc_ctl, pmc, ptp4l, timemaster y ts2phc.
+# ptp4l -i eth0 -m (sincroniza el reloj del sistema con otros dispositivos PTP en la red y en modo verbose [-m])
+# pmc -u -b 0 'GET PORT_DATA_SET' (usar UDP en lugar de raw sockets y dominio PTP 0)
+# hwstamp_ctl -i eth0 -t 1 -r 1 (-t 1 Habilita timestamping en TX y -r 1 en RX)
+# phc_ctl eth0 set 1000000000 (ajusta el reloj PHC en eth0 1 segundo [1,000,000,000 ns])
+# ts2phc -s /dev/ttyS0 -c eth0 -m (sincronizar con una fuente externa de tiempo serial [GPS] y dispositivo de destino)
+# timemaster -f /etc/timemaster.conf (sincroniza el reloj usando tanto NTP como PTP. Requiere un archivo de configuración)
+# nsm -i eth0 -m (monitorea la calidad del servicio de tiempo en la red)
+# phc2sys -s eth0 -c CLOCK_REALTIME -m -w
+-s eth0 --> toma el tiempo del PHC [reloj de hardware] en eth0.
+-c CLOCK_REALTIME --> Sincroniza con el reloj del sistema.
+-w --> Espera a que ptp4l esté listo.
+1.-
+Ejemplo maestro/slave
+Maestro [Grandmaster Clock]
+# ptp4l -i eth0 -m --step_threshold=1 -s (ajusta el reloj en pasos grandes si la diferencia es >1 segundo)
+Slave
+# ptp4l -i eth0 -m -s (sincroniza con el maestro)
+
+
 liquidprompt
 Ofrece un promt modificado con información y coloreado.
 $ source /usr/share/liquidprompt/liquidprompt (activarlo al momento de instalar)
