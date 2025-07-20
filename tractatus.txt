@@ -40548,6 +40548,7 @@ Otros ajustes que podemos hacer en este archivo que mejoran el rendimiento del s
 # echo "vm.vfs_cache_pressure = 50" >> /etc/sysctl.conf (reducir intercambio de información entre disco duro y memoria RAM)
 # echo "vm.watermark_scale_factor = 200" >> /etc/sysctl.conf (cantidad de información en la memoria que será paginada al disco)
 # echo "vm.dirty_ratio = 3" >> /etc/sysctl.conf (reducir la transferencia de la cantidad paginada)
+# sysctl -w kernel.perf_event_paranoid=1 (ajustar a usuarios regulares el acceso a eventos del kernel [ver linux-perf])
 1.-
 Liberar memoria ram:
 # watch -n 1 free -m (Comprobar el estado actual)
