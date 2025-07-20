@@ -28933,6 +28933,29 @@ En sistemas Intel modernos, el controlador intel_pstate es a menudo el predeterm
 # update-grub (si se ha modificado)
 
 
+linux-perf
+Herramienta de análisis de rendimiento para Linux permite monitorear y analizar métricas de rendimiento tanto a nivel de hardware, contadores de CPU, caché, etc. como de software, eventos del kernel, trazas, etc. útil para identificar cuellos de botella, optimizar aplicaciones y diagnosticar problemas de rendimiento.
+# sysctl -w kernel.perf_event_paranoid=1 (ajustar a usuarios regulares el acceso a eventos del kernel)
+# perf list (listar eventos disponibles que se pueden monitorear)
+# perf stat gcc hello.c (estadísticas de rendimiento de un comando, como la compilación de un programa con gcc)
+# perf stat -e cycles,instructions,cache-misses gcc hello.c (especificar eventos concretos)
+# perf stat -e cache-misses,cache-references python script.py (medir fallos de caché y ayudar a identificar problemas de rendimiento relacionados con el uso de la memoria caché)
+# perf top (monitoreo en tiempo real)
+# perf top --pid 1234 (filtrando por PID)
+# perf record -F 1000 -a -g -- sleep 60 (muestrea a 1000 Hz, todo el sistema, captura la pila de llamadas en perf.data y ejecuta sleep durante 60 segundos)
+# perf report (analiza y muestra los datos grabados en perf.data)
+# perf --list-cmds (enumera los comandos de rendimiento más utilizados)
+# perf --list-opts (enumera las opciones de rendimiento disponibles)
+# perf script (leer perf.data creado por el registro perf y mostrar la salida del seguimiento)
+1.-
+Para monitorear una función específica del kernel, como tcp_sendmsg:
+# perf probe --add tcp_sendmsg
+# perf record -e probe:tcp_sendmsg -a -- sleep 5
+# perf probe --del tcp_sendmsg
+# perf report
+Esto registra las llamadas a la función tcp_sendmsg durante 5 segundos y muestra un reporte detallado.
+
+
 linux-sysctl-defaults
 Contiene un archivo de configuración [/etc/sysctl.conf] de sysctl que establece algunos valores predeterminados adecuados para Linux.
 
