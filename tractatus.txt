@@ -29007,6 +29007,19 @@ Slave
 # ptp4l -i eth0 -m -s (sincroniza con el maestro)
 
 
+liquidctl
+Herramienta multiplataforma que permite supervisar y controlar dispositivos internos del PC, especialmente relacionados con la refrigeración líquida AIO, ventiladores, y sistemas de iluminación RGB.
+# liquidctl list (listar dispositivos compatibles conectados al sistema)
+# liquidctl initialize all (inicializa todos los dispositivos tras el arranque, preparando el hardware para recibir comandos de control)
+# liquidctl status (consultar el estado de los dispositivos, temperaturas, velocidades de ventiladores/bomba, estado LEDs, etc)
+# liquidctl set pump speed 70 (fija la velocidad de la bomba al 70%)
+# liquidctl --match kraken set pump speed 90 (especificando dispositivo)
+# liquidctl set fan speed 25 10 30 50 40 100 (el ventilador variará entre esos valores según la temperatura interna del refrigerante: 25°C --> 10%, 30°C --> 50% y 40°C --> 100%)
+# liquidctl --match kraken set sync color fading 350017 ff2608 (configura el color del LED con efecto degradado)
+# liquidctl set led color fixed ff00cc (cambia el color de una tira LED o de los LEDs integrados a un tono particular)
+Puede usarse en diferentes formatos: hexadecimal, rgb, hsv, etc.
+
+
 liquidprompt
 Ofrece un promt modificado con información y coloreado.
 $ source /usr/share/liquidprompt/liquidprompt (activarlo al momento de instalar)
