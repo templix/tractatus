@@ -29029,6 +29029,53 @@ $ liquidprompt_off (desactivarlo)
 $ lp_theme --list (listado de temas)
 
 
+lirc
+[Linux Infra-red Remote Control]. Proporciona los demonios y algunas utilidades a los sistemas Linux para recibir y enviar señales de infrarrojos [IR] para controlar dispositivos externos, como televisores, reproductores de DVD, equipos de sonido, etc. En esencia, LIRC traduce las señales IR recibidas del control remoto en eventos del sistema operativo como pulsaciones de teclas o movimientos del ratón o permite que la computadora envíe señales IR para controlar otros dispositivos. Se precisa un receptor/emisor de infrarrojos conectado a la computadora ya sea un dongle USB, un receptor GPIO en una Raspberry Pi, o un puerto IR integrado.
+# systemctl enable lircd (activar el servicio al inicio)
+# irexec -d (se ejecuta como demonio)
+# irrecord -d /dev/lirc0 mi_nuevo_remoto.conf (guía a través de un proceso interactivo para capturar las señales IR de cada botón. Especifica dispositivo y archivo donde guardar la configuración)
+$ irw (muestra las señales IR que LIRC está recibiendo y decodificando en tiempo real)
+$ irsend SEND_ONCE MiTV KEY_POWER (envía la señal de la tecla una sola vez, nombre del control remoto definido en lircd.conf y nombre de la tecla que se quiere enviar)
+$ irsend SEND_ONCE MiAmplificador KEY_VOLUMEUP (subir el volumen del amplificador)
+$ irsend LIST MiTV "" (listar teclas disponibles para un control remoto específico)
+$ mode2 -d /dev/lirc0 (ver las señales IR crudas que el hardware está detectando)
+1.-
+Ejemplo de configuración:
+$ nano ~/.lircrc
+        begin
+            prog = irexec
+            button = KEY_POWER
+            config = systemctl poweroff
+        end
+        begin
+            prog = irexec
+            button = KEY_VOLUMEUP
+            config = amixer set Master 5%+
+        end
+        begin
+            prog = irexec
+            button = KEY_VOLUMEDOWN
+            config = amixer set Master 5%-
+        end
+        begin
+            prog = irexec
+            button = KEY_MUTE
+            config = amixer set Master toggle
+        end
+         iniciar `irexec`:**
+prog = irexec --> Indica que esta sección de configuración es para el programa irexec.
+button = KEY_POWER --> La tecla del control remoto que se va a detectar. Este nombre debe coincidir con el nombre de la tecla en el archivo /etc/lirc/lircd.conf.
+config = systemctl poweroff --> El comando de shell que se ejecutará cuando se presione la tecla KEY_POWER.
+2.-
+Ejemplo de configuración:
+# nano /etc/lirc/lirc_options.conf
+        driver = default
+        device = /dev/lirc0
+        output = /var/run/lirc/lircd
+        pidfile = /var/run/lirc/lircd.pid
+Se especifica el controlador [driver] que LIRC debe usar para comunicarse con el hardware IR y el dispositivo IR [/dev/lirc0].
+
+
 listres
 Genera una lista de la base de datos de recursos de un widget. La lista muestra la clase en la que se define por primera vez cada recurso, el tipo y la instancia. Si no se proporcionan widgets específicos se imprimirá una lista de nombres de widgets y sus jerarquías de clase.
 $ listres -all (todos)
