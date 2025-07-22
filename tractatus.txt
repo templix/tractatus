@@ -29076,6 +29076,16 @@ Ejemplo de configuración:
 Se especifica el controlador [driver] que LIRC debe usar para comunicarse con el hardware IR y el dispositivo IR [/dev/lirc0].
 
 
+listadmin
+Herramienta para gestionar las colas de mensajes en Mailman, un popular software de gestión de listas de correo y es especialmente útil para los administradores de listas de correo que necesitan manipular mensajes que están en espera de aprobación por parte de los moderadores. Puede filtrar mensajes basándose en varios criterios, como la puntuación de SpamAssassin, el remitente, el asunto o el motivo de moderación.
+$ listadmin -l nombre_de_la_lista (listar mensajes en la cola de moderación)
+$ listadmin -a nombre_de_la_lista (aprueba todos los mensajes en la cola de moderación para la lista de correo especificada)
+$ listadmin -r nombre_de_la_lista (rechaza todos los mensajes en la cola de moderación)
+$ listadmin -s 5.0 nombre_de_la_lista (filtra y lista los mensajes con una puntuación de SpamAssassin mayor o igual a 5.0)
+$ listadmin -d --sender=remitente@example.com nombre_de_la_lista (elimina todos los mensajes en la cola de moderación que provienen del remitente especificado)
+$ listadmin -f --subject="asunto del mensaje" nombre_de_la_lista (busca y lista los mensajes en la cola de moderación que coinciden con el asunto especificado)
+
+
 listres
 Genera una lista de la base de datos de recursos de un widget. La lista muestra la clase en la que se define por primera vez cada recurso, el tipo y la instancia. Si no se proporcionan widgets específicos se imprimirá una lista de nombres de widgets y sus jerarquías de clase.
 $ listres -all (todos)
