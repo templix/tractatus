@@ -29145,6 +29145,11 @@ $ litecoin-cli getblock "000000000000000123abc..." (devuelve detalles sobre un b
 $ litecoin-cli -testnet getblockchaininfo (ejecutar en testnet si se está ejecutando la red de prueba)
 
 
+live-boot
+Conjunto de scripts y herramientas para iniciar un sistema operativo completamente funcional desde un medio extraíble como USB, CD/DVD o red, sin necesidad de instalarlo en el disco duro.
+Está diseñado para configurar el entorno de arranque en tiempo real, montando el sistema de archivos en memoria [RAM] o desde el dispositivo de almacenamiento, y no está pensado para ser instalado en un sistema convencional. Cuando se inicia una imagen Debian Live, los componentes de live-boot se encargan de detectar el medio de arranque [USB, CD, PXE, etc.], cargar el sistema de archivos raíz [squashfs, ext4, etc.] y configurar el entorno en memoria [tmpfs para persistencia opcional].
+
+
 lmbench
 Herramienta para probar el rendimiento de un sistema. La primera vez que se ejecute hará varias preguntas [las opciones por defecto son suficientes] y algunos chequeos. Su ejecución lleva bastante tiempo.
 # lmbench-run
