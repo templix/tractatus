@@ -29097,6 +29097,21 @@ Listar los puertos serie del pc. La salida contiene campos vid/pid/iserial.
 $ listserialportsc
 
 
+litecli
+Interfaz de línea de comandos para SQLite con autocompletado, resaltado de sintaxis, formateo de salidas, historial de comandos, etc. También permite la impresión de datos tabulares.
+$ litecli mi_base_de_datos.db (conectarse a una base de datos SQLite, si la DB no existe, se creará automáticamente)
+$ litecli mi_base_de_datos.db -e "SELECT * FROM usuarios" > resultados.txt (redirigir la salida a un archivo)
+$ litecli (entrar en la interfaz de la aplicación)
+Para crear tablas, entrar datos, consultarlas, etc
+        > CREATE TABLE usuarios (id INTEGER PRIMARY KEY, nombre TEXT, edad INTEGER);
+        > INSERT INTO usuarios (nombre, edad) VALUES ('Ana', 28), ('Carlos', 35);
+        > SELECT * FROM usuarios;
+Escribir consultas en varias líneas, terminar con ";" y "Enter"` para ejecutar
+        > SELECT *
+        > FROM usuarios
+        > WHERE edad > 30;
+
+
 lmbench
 Herramienta para probar el rendimiento de un sistema. La primera vez que se ejecute hará varias preguntas [las opciones por defecto son suficientes] y algunos chequeos. Su ejecución lleva bastante tiempo.
 # lmbench-run
