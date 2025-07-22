@@ -29112,6 +29112,39 @@ Escribir consultas en varias líneas, terminar con ";" y "Enter"` para ejecutar
         > WHERE edad > 30;
 
 
+litecoind
+Programa que ejecuta un nodo de Litecoin en segundo plano como un servicio [daemon]. Litecoin, es una criptomoneda descentralizada basada en un sistema de efectivo electrónico peer-to-peer [P2P]. Los usuarios poseen las claves criptográficas de su propio dinero y realizan transacciones directamente entre sí, con la ayuda de una red P2P para comprobar el doble gasto. Incluye la herramienta litecoin-cli
+Configuración inicial
+$ nano ~/.litecoin/litecoin.conf
+        rpcuser=tu_usuario
+        rpcpassword=tu_contraseña_segura
+        rpcallowip=127.0.0.1
+        rpcport=9332
+        daemon=1
+        server=1
+        txindex=1
+Establece parámetros como el puerto, la interfaz RPC y las credenciales de acceso.
+rpcuser y rpcpassword --> Credenciales para la comunicación RPC.
+rpcallowip --> Restringe el acceso RPC, en este caso, solo localhost.
+rpcport --> Puerto para la comunicación RPC, 9332 es el predeterminado para Litecoin.
+daemon=1 --> Ejecuta litecoind como daemon.
+server=1 --> Habilita el servidor RPC.
+txindex=1 --> Mantiene un índice de todas las transacciones.
+$ litecoind (inicia el nodo en segundo plano, sincronizando la blockchain)
+Nota.- La primera vez puede tomar varias horas o días dependiendo de tu conexión y hardware, ya que debe descargar toda la blockchain de Litecoin [~50 GB en 2025].
+$ litecoind -testnet (inicia el nodo en la red de prueba sin usar monedas reales)
+$ litecoin-cli stop (envía una señal al daemon para que se cierre de manera segura)
+$ ps aux | grep litecoind (verificar si el daemon está corriendo)
+$ litecoin-cli getblockchaininfo (información sobre el estado de la blockchain, como el número de bloques sincronizados, la red [mainnet/testnet], y más)
+$ litecoin-cli gettransaction "txid_aqui" (dará detalles como el monto, las direcciones involucradas y las confirmaciones)
+$ litecoin-cli getnewaddress (genera una nueva dirección para recibir Litecoin)
+$ litecoin-cli getbalance (muestra el saldo disponible en la billetera del nodo)
+$ litecoin-cli sendtoaddress "Lxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" 1.5 (envía 1.5 LTC a la dirección especificada. Asegurar fondos y tarifas de red)
+$ litecoin-cli listtransactions (muestra un historial de transacciones asociadas con la billetera del nodo)
+$ litecoin-cli getblock "000000000000000123abc..." (devuelve detalles sobre un bloque específico, identificado por su hash)
+$ litecoin-cli -testnet getblockchaininfo (ejecutar en testnet si se está ejecutando la red de prueba)
+
+
 lmbench
 Herramienta para probar el rendimiento de un sistema. La primera vez que se ejecute hará varias preguntas [las opciones por defecto son suficientes] y algunos chequeos. Su ejecución lleva bastante tiempo.
 # lmbench-run
