@@ -35596,6 +35596,15 @@ opciones que permite un ordenador.
 Si en la salida aparece "mem" significa que podemos suspender el ordenador. Si aparece "disk" significa que podemos hibernar.
 
 
+pmc
+[Precision time protocol Management Client]. Herramienta utilizada para administrar y monitorear servidores PTP [Precision Time Protocol], especialmente en sistemas que requieren sincronización de tiempo de alta precisión según el estándar IEEE 1588.
+$ pmc -u -b 0 "GET CURRENT_DATA_SET" (transporte UDP, domio PTP predeterminado [0] y solicita información sobre el conjunto de datos actual del reloj)
+$ pmc -u -b 0 "SET PRIORITY1 128" (cambia el valor de priority1, un parámetro que influye en la elección del mejor reloj maestro)
+$ pmc -u -b 0 "CMD RESET" (reinicia el reloj PTP)
+$ pmc -u -b 0 "GET PORT_DATA_SET" (ver el estado del reloj)
+$ pmc -i eth0 -u -b 0 "GET CURRENT_DATA_SET" (si el sistema tiene múltiples interfaces, podemos indicar cuál usar)
+
+
 pmacct
 Herramienta diseñada para recopilar información de tráfico [bytes y número de paquetes]. Incluye las aplicaciones: nfacctd, pmacctd, pmbgpd, pmbmpd, pmtelemetryd, sfacctd y uacctd. El archivo de configuración esta en /etc/pmacct/pmacctd.conf.
 # pmacctd (activar el demonio)
