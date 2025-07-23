@@ -29178,6 +29178,13 @@ Conjunto de scripts y herramientas para iniciar un sistema operativo completamen
 Está diseñado para configurar el entorno de arranque en tiempo real, montando el sistema de archivos en memoria [RAM] o desde el dispositivo de almacenamiento, y no está pensado para ser instalado en un sistema convencional. Cuando se inicia una imagen Debian Live, los componentes de live-boot se encargan de detectar el medio de arranque [USB, CD, PXE, etc.], cargar el sistema de archivos raíz [squashfs, ext4, etc.] y configurar el entorno en memoria [tmpfs para persistencia opcional].
 
 
+llgal
+Generador de galerías de imagenes.
+$ llgal --title "Vacaciones del 2024"--sx 800 --sy 600 --exif (especificando título,  medidas para verlas en el navegador y mostrar los datos exif)
+$ llgal --clean (limpiar el directorio de los archivos creados por llgal. No borra las imágenes)
+$ llgal --exif --li -L -R --title "Viaje al Sur" --sx 800 --sy 600 (añade metadatos EXIF, reemplazar etiquetas de enlaces en las diapositivas, no crear miniaturas para textos y enlaces, incluye subcarpetas y poner un título a la galería)
+
+
 lloconv
 Herramienta diseñada para convertir archivos de diferentes formatos de documentos utilizando las capacidades de LibreOffice por medio de la API LibreOfficeKit. Esto significa que puede manejar la conversión entre prácticamente todos los formatos que soporta LibreOffice, como ODT, DOCX, XLSX, PPTX, PDF, entre otros.
 $ lloconv archivo.docx archivo.pdf (convierte el archivo archivo.docx a archivo.pdf)
