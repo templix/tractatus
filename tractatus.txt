@@ -27875,6 +27875,17 @@ $ kpsewhich example.pdf (ver dónde se ha generado un archivo de salida [como un
 $ kpsewhich --format='TeX system documentation' file.txt (limitar la búsqueda a tipos específicos de archivos. Por ejemplo, para buscar solo archivos de ayuda [.doc o .txt])
 
 
+ksh
+Intérprete interactivo de comandos UNIX y lenguaje de script compatible con POSIX. Antes, el paquete del Korn Shell se llamaba simplemente ksh, ahora, por cuestiones de licencias y mantenimiento, Debian usa la versión moderna mantenida como ksh93u+m [ver].
+$ ksh (estando en bash pasa ksh)
+
+
+ksh93u+m
+Intérprete interactivo de comandos UNIX y lenguaje de script compatible con POSIX. Es un superconjunto de sh, el shell de UNIX System V. Debian, en vez de seguir llamándola simplemente ksh, prefirió usar el nombre exacto de la versión upstream para evitar confusiones y conflictos futuros.
+$ ksh93 (estando en bash pasa a ksh)
+$ ksh (lo mismo aunque el paquete "ksh" esté desinstalado)
+
+
 kvm-ok
 [check-bios-nx]. Comprobar si la CPU  tiene soporte para extensiones KVM.
 # kvm-ok
@@ -46393,6 +46404,11 @@ $ zi (ver directorios de la base de datos)
 zrun
 Hace que los archivos comprimidos que son argumentos de un comando se descompriman automáticamente. Soporta los tipos de compresión gz, bz2, Z, xz, lzma y lzo.
 $ zrun grep linux archivo.gz (buscar la palabra "linux" en el comrpimido "archivo.gz")
+
+
+zsh
+Intérprete de comandos de UNIX que puede utilizarse como shell de inicio de sesión interactivo y como procesador de comandos de scripts de shell.
+$ zsh (pasar a la shell zsh desde bash, si es la que tenemos predeterminada en el sistema)
 
 
 zssh
