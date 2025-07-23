@@ -25265,7 +25265,9 @@ Algunas notas al respecto:
 	$detaillinktext (en castellano)
 	$stylesheet (el fondo [background] gris. colocar otros ajustes entre los apóstrofes)
 Entrar en el directorio donde estan las imagenes y lanzar:
-$ imageindex (Crea los archivos y el index.html)
+$ imageindex (buscará todas las imágenes en el directorio actual y creará una galería)
+$ imageindex Images/verano_2025 (especificandoun directorio de imágenes y donde se generará los subdirectorios y archivos de la aplicación)
+$ imageindex --title "Verano del 2025" (especificando título)
 Visualizar el index.html creado en el navegador.
 
 
@@ -27012,6 +27014,7 @@ Sistema de registro [log] propio de systemd.
 # journalctl -u sshd (Mostrar mensajes de una unidad especifica)
 # journalctl --since yesterday (Muestra los mensajes des de el día de ayer. Los de hoy "today")
 # journalctl --since "2016-09-13" (Muestra los mensajes des de el día especificado en el formato YYYY-MM-DD)
+# journalctl --list-boots (muestra el historial de reinicios)
 1.-
 Hacer que el demonio syslog funcione con journal
 # systemctl enable syslog-ng
