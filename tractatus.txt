@@ -9531,6 +9531,7 @@ Junto con test_rt estan diseñados para administrar y supervisar sistemas en tie
 
 dash
 [Debian Almquist SHell]. Shell compatible con POSIX derivado de ash. Dado que ejecuta scripts más rápido que bash y tiene menos dependencias de bibliotecas, lo que lo hace más robusto frente a fallos de software o hardware, se utiliza como shell de sistema predeterminado en los sistemas Debian.
+$ dash (estando en bash pasa a dash. "exit" para volver a bash)
 
 
 datafudge
@@ -27700,9 +27701,9 @@ $ killall -s SEGV
 
 
 killer
-Elimina los trabajos en segundo plano, Cuando se instala el paquete, se instala un trabajo cron para ejecutar Killer una vez por hora.
+Elimina los trabajos en segundo plano. Cuando se instala un trabajo cron se encarga de ejecutar Killer una vez por hora.
 $ killer (forma básica)
-$ killer -d -n (activar debur en la salida y sin matar los procesos, solo imprimiendo el resultado)
+$ killer -d -n (activar debug en la salida y sin matar los procesos, solo imprimiendo el resultado)
 
 
 kippo
@@ -27884,6 +27885,14 @@ ksh93u+m
 Intérprete interactivo de comandos UNIX y lenguaje de script compatible con POSIX. Es un superconjunto de sh, el shell de UNIX System V. Debian, en vez de seguir llamándola simplemente ksh, prefirió usar el nombre exacto de la versión upstream para evitar confusiones y conflictos futuros.
 $ ksh93 (estando en bash pasa a ksh)
 $ ksh (lo mismo aunque el paquete "ksh" esté desinstalado)
+
+
+kshell5
+[kinit]. Es un envoltorio [wrapper] o herramienta auxiliar para ejecutar comandos en un entorno Kerberizado. Kerberos es un protocolo de autenticación de red que proporciona una autenticación segura para aplicaciones cliente/servidor mediante criptografía de clave secreta.
+Por ejemplo un servidor de archivos, NFS por ejemplo, que está protegido con Kerberos. Para montar ese recurso, el cliente necesita autenticarse.
+$ kinit tu_usuario@REALM.EJEMPLO.COM (obtener el ticket Kerberos. Pedirá contraseña)
+$ kshell5 mount -t nfs server.ejemplo.com:/ruta /mnt/data (montar el server)
+kshell5 se asegura de que el comando mount se ejecute en un entorno donde las credenciales Kerberos son accesibles y se utilizan para la autenticación con el servidor NFS.
 
 
 kvm-ok
