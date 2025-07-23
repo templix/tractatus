@@ -31162,7 +31162,8 @@ $ mokutil --enable-validation
 
 
 molly-guard
-Evitar paradas o reinicios de servidores desde consola remota. Editar:
+Protege las máquinas de apagados y reinicios accidentales. El paquete instala un script de shell que anula los comandos existentes: shutdown, reboot, halt, poweroff, coldreboot, pm-hibernate y pm-suspend; primero ejecuta un conjunto de scripts, que deben finalizar correctamente, antes de que molly-guard invoque el comando real.
+Por ejemplo para evitar paradas o reinicios de servidores desde consola remota. Editar:
 # nano /etc/molly-guard/rc
 Y descomentar la linea:
 ALWAYS_QUERY_HOSTNAME=true
@@ -38898,11 +38899,14 @@ Buscador de dispositivos.
 
 shopt
 Habilita o deshabilita variables opcionales del comportamiento del shell bash.
-$ shopt  (visualiza las activas y las inactivas)
-$ shopt -s (visualiza las que estan activas)
-$ shopt -s hostcomplete (activa una opción)
-$ shopt -u hostcomplete (la desactiva)
-Variables opcionales:
+$ shopt (listado de todas las opciones de shell y su valor actual [activadas o desactivadas])
+$ shopt -s (lista las que están activas)
+$ shopt -u (las que están inactivas)
+$ shopt -s dotglob (activar una función del listado anterior. En el ejemplo, incluye en la expanción de comodines los ficheros que empiezan por punto [.])
+$ shopt -u dotglob (desactivarla)
+$ shopt -p (muestra las opciones para activarlas o desactivarlas)
+$ shopt -o (las que están "on" y las que están "off")
+Algunas variables:
 cdable_vars (Permite que cd use los valores de las variables como nombres de directorios)
 cdspell (Ignora pequeños errores en los cambios de directorio con cd. Sólo en la ejecución interactiva)
 cmdhist (Guarda los comandos que hemos escrito en varias líneas en una sola línea del historial)
@@ -40618,8 +40622,26 @@ Sistema de detección de intrusiones de red (IDS). Se basa en reglas para detect
 
 
 suspend
-Cuando es posible, suspender la shell actual.
+Parar la ejecución de un proceso hasta que se recibe una señal de continuación.
 # suspend -f (Pasará de root a nuestro usuario)
+Un proceso de ejemplo:
+        bash> pwd
+        /home/pep
+        bash> zsh
+        debian% cd Vídeos
+        debian% pwd
+        /home/pep/Vídeos
+        debian% suspend
+        [1]+  Aturat                  zsh
+        bash> pwd
+        /home/pep
+        bash> fg
+        zsh
+        debian% pwd
+        /home/pep/Vídeos
+        debian% exit
+        bash> pwd
+        /home/pep
 
 
 suspicious-source
