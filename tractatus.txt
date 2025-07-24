@@ -29219,6 +29219,17 @@ $ lltag --no-tagging --rename "%a - %t" *.mp3 (renombra archivos MP3 a "Artista 
 $ lltag --artist "The Beatles" song.mp3 (modifica la etiqueta de artista en un archivo concreto)
 
 
+lltdscan
+Buscar hosts en una red local que tienen el protocolo LLTD [Link Layer Topology Discovery] habilitado. Este protocolo es utilizado principalmente para descubrir la topología de la red a nivel de capa de enlace, lo que puede ser útil para herramientas de diagnóstico y mapeo de red.
+$ lltdscan (escaneará la red local en busca de hosts con LLTD habilitado utilizando la interfaz de red predeterminada)
+$ lltdscan -i eth0 (escaneará la red local utilizando la interfaz especificada)
+$ lltdscan -t 5 (escaneará la red local con un tiempo de espera de 5 segundos para las respuestas)
+        Host 1: 192.168.1.1 - LLTD enabled
+        Host 2: 192.168.1.2 - LLTD enabled
+        Host 3: 192.168.1.3 - LLTD not enabled
+En este ejemplo, los hosts con las direcciones IP 192.168.1.1 y 192.168.1.2 tienen el protocolo LLTD habilitado, mientras que el host con la dirección IP 192.168.1.3 no.
+
+
 lmbench
 Herramienta para probar el rendimiento de un sistema. La primera vez que se ejecute hará varias preguntas [las opciones por defecto son suficientes] y algunos chequeos. Su ejecución lleva bastante tiempo.
 # lmbench-run
