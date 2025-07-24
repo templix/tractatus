@@ -29230,6 +29230,18 @@ $ lltdscan -t 5 (escaneará la red local con un tiempo de espera de 5 segundos p
 En este ejemplo, los hosts con las direcciones IP 192.168.1.1 y 192.168.1.2 tienen el protocolo LLTD habilitado, mientras que el host con la dirección IP 192.168.1.3 no.
 
 
+lltsv
+Herramienta diseñada para procesar y visualizar archivos o texto en formato LTSV [Labeled Tab Separated Values] con salida coloreada en una terminal. Su principal función es mostrar únicamente las claves o campos específicos que el usuario desee, resaltando los resultados con colores cuando se trabaja en una terminal interactiva. Este formato es muy común en registros de aplicaciones y servidores web, donde cada dato tiene una etiqueta [clave] y un valor, separados por dos puntos, y cada campo está separado por tabulaciones.
+$ echo -e "host:127.0.0.1\tuser:frank\tstatus:200" | lltsv -k host,status (extraer las claves "host" y "status" y los valores aparecerán resaltados)
+$ echo -e "foo:aaa\tbar:bbb\tbaz:ccc" | lltsv -k foo,bar -K (mostrar sólo los valores sin etiquetas)
+$ lltsv -k host,req,status -f "status == 404" access_ltsv.log (mostrará líneas donde el campo "status" tenga el valor 404)
+$ lltsv -k user,status log*.ltsv (listar los campos "user" y "status" de todos los archivos que empiezan por "log")
+Operadores admitidos en filtros
+        ==, != --> comparación de cadenas
+        >, =, <= --> comparación numérica
+        =~, !~ --> expresiones regulares
+
+
 lmbench
 Herramienta para probar el rendimiento de un sistema. La primera vez que se ejecute hará varias preguntas [las opciones por defecto son suficientes] y algunos chequeos. Su ejecución lleva bastante tiempo.
 # lmbench-run
