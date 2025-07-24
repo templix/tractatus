@@ -29178,6 +29178,19 @@ Conjunto de scripts y herramientas para iniciar un sistema operativo completamen
 Está diseñado para configurar el entorno de arranque en tiempo real, montando el sistema de archivos en memoria [RAM] o desde el dispositivo de almacenamiento, y no está pensado para ser instalado en un sistema convencional. Cuando se inicia una imagen Debian Live, los componentes de live-boot se encargan de detectar el medio de arranque [USB, CD, PXE, etc.], cargar el sistema de archivos raíz [squashfs, ext4, etc.] y configurar el entorno en memoria [tmpfs para persistencia opcional].
 
 
+lksctp-tools
+Herramientas para interactuar con el protocolo SCTP [Stream Control Transmission Protocol] del kernel de Linux, un protocolo de transporte que, a diferencia de TCP o UDP, soporta múltiples flujos dentro de una misma conexión, ofrece características de multihoming [varias direcciones IP para una misma conexión], y proporciona un control de congestión fiable y ordenado de mensajes. Incluye varias herramientas: sctp_darn, sctp_status y sctp_test.
+$ checksctp (determina si el kernel admite SCTP)
+Para enviar mensajes manualmente:
+$ sctp_darn -H 127.0.0.1 -P 5000 -l (iniciar como servidor)
+$ sctp_darn -H 127.0.0.1 -P 5000 (en otro terminal, como cliente)
+$ sctp_status 127.0.0.1 5000 (muestra información sobre streams, estado de asociación, direcciones IP asociadas, etc.)
+$ sctp_test -H 127.0.0.1 -P 6000 -l (en el servidor. Herramienta de prueba automatizada para medir rendimiento y validar características de SCTP)
+$ sctp_test -H 127.0.0.1 -P 6000 -n 100 -s "Hola SCTP" (en el cliente. envia 100 mensajes con el mensaje)
+# modprobe sctp (cargar el módulo, si no lo está)
+# iptables -A INPUT -p sctp -j ACCEPT (asegurar que el firewall no lo bloquee)
+
+
 llgal
 Generador de galerías de imagenes.
 $ llgal --title "Vacaciones del 2024"--sx 800 --sy 600 --exif (especificando título,  medidas para verlas en el navegador y mostrar los datos exif)
@@ -29190,6 +29203,20 @@ Herramienta diseñada para convertir archivos de diferentes formatos de document
 $ lloconv archivo.docx archivo.pdf (convierte el archivo archivo.docx a archivo.pdf)
 $ lloconv datos.xlsx datos.ods (convertir una hoja de cálculo XLSX a ODS)
 $ lloconv documento.odt documento.pdf (convertir ODS a PDF)
+
+
+lltag
+Herramienta que manipula etiquetas [tags] en archivos MP3 ID3, OGG o FLAC. Permite etiquetar varios archivos a la vez comparando su nombre o ruta de acceso con una lista configurable de formatos, o bien obteniendo las etiquetas de la base de datos CDDB. También puede renombrar archivos según un formato configurable.
+$ lltag -S *.mp3 (muestra las etiquetas ID3 de todos los archivos MP3 en el directorio actual)
+$ lltag --show-tags artist,title *.flac (muestra solo las etiquetas específicas "artist" y "title" en los archivos FLAC)
+$ lltag --artist "Queen" --album "Innuendo" --genre "Rock" *.mp3 (establece los valores de ARTIST, ALBUM y GENRE para todos los MP3 en la carpeta)
+$ lltag --tag foo=nil foo.ogg (escribe un tag personalizado "foo" con valor "nil" en un archivo OGG)
+$ lltag --tag foo= archivo.ogg (elimina la etiqueta personalizada "foo"` de un archivo OGG)
+$ lltag --no-tagging --rename "%n - %a - %t" song.flac (renombra el archivo según el patrón Número - Artista - Título, sin modificar las etiquetas)
+$ lltag --clear *.flac (elimina todas las etiquetas de todos los archivos FLAC del directorio)
+$ lltag -F "%n - %a - %t" *.mp3 (extrae los campos Número, Artista y Título del nombre de los archivos y actualiza las etiquetas)
+$ lltag --no-tagging --rename "%a - %t" *.mp3 (renombra archivos MP3 a "Artista - Título.mp3" sin cambiar los metadatos)
+$ lltag --artist "The Beatles" song.mp3 (modifica la etiqueta de artista en un archivo concreto)
 
 
 lmbench
