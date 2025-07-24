@@ -29254,6 +29254,15 @@ Herramienta para probar el rendimiento de un sistema. La primera vez que se ejec
 # lmbench-run
 
 
+lmdb-utils
+[lmdb-go-tools]. Utilidades para manipular Bases de datos de LMDB [Lighting Memory-Mapped Database]. Incluye las herramientas mdb_copy, mdb_stat, lmdb_cat, lmdb_copy, lmdb_stat y testresize
+$ mdb_copy original.lmdb copia.lmdb (copia una base de datos LMDB a otra ubicación)
+$ mdb_stat -a mi_basedatos.lmdb (muestra estadísticas de la base de datos LMDB, como el número de entradas y el tamaño)
+$ lmdb_cat mi_basedatos.lmdb (lista el contenido de una base de datos)
+$ testresize mi_basedatos.lmdb 1048576 (probar el redimensionamiento de una base de datos LMDB [a 1 MB])
+$ mdb_stat -e datos.lmdb (diagnosticar problemas de rendimiento)
+
+
 ln
 Crear enlaces de archivos o carpetas.
 $ ln -s /home/ct/videos /home/Desktop/videos (Crea un enlace a videos en Desktop)
