@@ -29267,6 +29267,22 @@ $ testresize mi_basedatos.lmdb 1048576 (probar el redimensionamiento de una base
 $ mdb_stat -e datos.lmdb (diagnosticar problemas de rendimiento)
 
 
+lmod
+Es un sistema de módulos basado en Lua que gestiona fácilmente el problema jerárquico de MODULEPATH, especialmente en entornos de cómputo de alto rendimiento [HPC] . Esto incluye la fácil adición o eliminación de directorios a la variable de entorno PATH. Un módulo es un archivo que define cómo configurar el entorno para un software específico. por ejemplo, agregar rutas al PATH o definir variables de entorno. El paquete lmod no instala directamente el comando module, para cargarlo:
+$ source /usr/share/lmod/lmod/init/bash (carga el entorno de Lmod)
+Para activarlo de forma permanente, añadir a .bashrc la linea:
+        source /usr/share/lmod/lmod/init/bash
+$ module list (muestra los módulos actualmente cargados)
+$ module avail (lista los módulos disponibles para cargar)
+$ module load gcc/9.3.0 (carga un módulo específico)
+$ module unload gcc/9.3.0 (descarga un módulo, eliminando sus configuraciones del entorno)
+$ module purge (limpia el entorno, dejando solo las configuraciones predeterminadas del sistema)
+$ module show python/3.8.5 (muestra la configuración que realiza un módulo)
+$ module swap gcc/9.3.0 gcc/10.2.0 (reemplaza GCC 9.3.0 por GCC 10.2.0 en el entorno)
+$ module spider openmpi ((busca un módulo especifico [openmpi])
+Nota.- ver el paquete environment-modules que al instalarlo, desinstala lmod.
+
+
 ln
 Crear enlaces de archivos o carpetas.
 $ ln -s /home/ct/videos /home/Desktop/videos (Crea un enlace a videos en Desktop)
