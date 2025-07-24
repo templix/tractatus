@@ -22244,9 +22244,13 @@ Arrancará el sistema situado en la 3ª linea que aparece en el menú (La primer
 
 
 grub-mkconfig
-Generar un fichero de configuración para grub [grub.cfg]
+[grub-common]. Generar un fichero de configuración para grub [grub.cfg]
 # grub-mkconfig -o /boot/grub/grub.cfg
 Despues instalar en el MBR [grub-install /dev/sda]
+
+
+grub-common
+Cargador de arranque unificado que contiene archivos comunes compartidos por las distintas versiones de GRUB. Se comparte entre GRUB Legacy y GRUB 2, aunque aquí se incluyen varios archivos específicos de GRUB 2, siempre que no afecten a GRUB Legacy. Incluye las herramientas grub-editenv, grub-file, grub-fstest, grub-glue-efi, grub-kbdcomp, grub-menulst2cfg, grub-mkfont, grub-mkimage, grub-mklayout, grub-mknetdir, grub-mkpasswd-pbkdf2, grub-mkrelpath, grub-mkrescue, grub-mkstandalone, grub-mount, grub-render-label, grub-script-check, grub-syslinux2cfg, grub-macbless, grub-mkconfig, grub-mkdevicemap y grub-probe.
 
 
 grub-mkpasswd-pbkdf2
