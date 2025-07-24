@@ -29242,6 +29242,13 @@ Operadores admitidos en filtros
         =~, !~ --> expresiones regulares
 
 
+lm4flash
+Herramienta de actualización de firmware mediante línea de comandos que utiliza libusb-1.0 para comunicarse con Stellaris Launchpad ICDI [In-Circuit Debug Interface]. Stellaris Launchpad es una placa de desarrollo de bajo coste creada por Texas Instruments que incluye un procesador ARM Cortex-M4F. En esencia, lm4flash toma un archivo de firmware, generalmente en formato .bin o .hex y lo "flashea" [lo escribe] en la memoria flash del microcontrolador de la Launchpad a través de la conexión USB.
+$ lm4flash mi_firmware.bin (cargar en Launchpad el archivo de firmware especificado)
+$ lm4flash mi_firmware.hex (lo mismo con un archivo .hex)
+$ lm4flash -e (borrar la memoria flash del dispositivo)
+
+
 lmbench
 Herramienta para probar el rendimiento de un sistema. La primera vez que se ejecute hará varias preguntas [las opciones por defecto son suficientes] y algunos chequeos. Su ejecución lleva bastante tiempo.
 # lmbench-run
@@ -38560,7 +38567,7 @@ $ sensible-pager (abre como less u archivo de texto)
 
 
 sensors
-Mostrar las lecturas de todos los sensores de temperatura de los chips.
+[lom-sensors]. Mostrar las lecturas de todos los sensores de temperatura de los chips.
 $ sensors (forma básica)
 $ sensors -A (No mostrando el adaptador para cada chip)
 
