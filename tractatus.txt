@@ -29340,6 +29340,20 @@ Nota.- Para encontrar la ruta al mapa de teclado:
 # find / -iname es.map*
 
 
+loadwatch
+Permite ejecutar un programa únicamente cuando la carga media del sistema [load average] está por debajo de ciertos límites definidos por el usuario. Si la carga del sistema sube por encima de un umbral "alto" determinado, el proceso se pausa; cuando la carga baja por debajo de un umbral "bajo", el proceso se reanuda automáticamente.
+$ loadwatch 2.0 1.5 10 tar czf backup.tar.gz /home/USER/ (realizar el backup. Si el valor de la carga sube de 2.0 el proceso se pausa, se reanuda cuando baja de 1.5 y se comprueba cda 10 segundos)
+$ loadwatch 1.0 0.7 5 ./procesar_datos.sh (el script se ejecuta solo si la carga está por debajo de 1.0, se pausa si alcanza ese valor, y se reanuda al bajar de 0.7, comprobando cada 5 segundos)
+$ lx-ctl procesar_datos.sh stop (parar manualmente el proceso gestionado por loadwatch. "run" activa el modo de ejecución y "watch" activa el modo de supervisión de carga normal)
+
+
+local-apt-repository
+Repositorio local de apt listo para usar. Con este paquete instalado, todos los paquetes Debian [los archivos *.deb] que se coloquen en /srv/local-apt-repository [que debe crear primero] estarán disponibles para apt. Este paquete no proporciona un repositorio de apt para otros hosts.
+# mkdir /srv/local-apt-repository (crear el directorio)
+Todos los .deb que se coloquen en el directorio estarán disponibles localmente para apt.
+# systemctl restart local-apt-repository.service (reiniciar servicio después de modificar los archivos del directorio)
+
+
 locale
 Información sobre los idiomas del sistema
 $ locale -a  (muestra los idiomas disponibles)
