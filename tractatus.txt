@@ -29414,6 +29414,13 @@ $ location lookup 2.142.97.159 (localizar una IP)
 $ location search-as "linux" (Buscar un sistema por nombre)
 
 
+lockfile-progs
+Proporciona una serie de utilidades de línea de comandos para gestionar bloqueos de archivos y buzones de correo de forma segura. Estos bloqueos son cruciales en entornos multiusuario o donde múltiples procesos podrían intentar acceder o modificar el mismo archivo simultáneamente, lo que podría llevar a corrupción de datos o inconsistencias. Incluye las herramientas lockfile-create, lockfile-remove, lockfile-touchlock, mail-lock, mail-unlock y mail-touchlock. La idea principal detrás de los "lockfiles" [archivos de bloqueo] es crear un archivo temporal con un nombre específico a menudo derivado del archivo que se quiere proteger, que indica que un proceso tiene el control exclusivo sobre ese recurso. Si otro proceso intenta acceder al recurso y ve el archivo de bloqueo, sabe que debe esperar o abortar.
+$ lockfile-create -r 2 -l 3 -s 10 script (2 reintentos, 3 segundos entre reintentos y 10 segundos de espera para el bloqueo del acceso al script)
+$ lockfile-remove ruta_al_archivo_de_bloqueo  (elimina un archivo de bloqueo existente. Se usa para liberar un bloqueo que ha sido adquirido)
+$ lockfile-touchlock <ruta_al_archivo_de_bloqueo> (actualiza la marca de tiempo de un archivo de bloqueo existente)
+
+
 lockout
 Herramienta que impone disciplina para que pueda realizar algún trabajo. Por ejemplo, el bloqueo se puede utilizar para instalar un firewall que no le permita navegar por la Web. El bloqueo cambia la contraseña de root durante un período específico; esto le impide eliminar secretamente el firewall y luego navegar por la Web de todos modos. En caso de emergencia, puede reiniciar su computadora para deshacer los efectos del bloqueo y restaurar la contraseña de root original.
 $ lockout (muestras varios advertimientos sobre la aplicación:)
@@ -29421,6 +29428,22 @@ $ lockout (muestras varios advertimientos sobre la aplicación:)
       Este programa es MUY PELIGROSO.
 $ lockout lock 2h30m (cerrar en 2 horas 30 minutos)
 $ lockout status (mirar el estado de la aplicación)
+
+
+logapp
+Utilidad que se utiliza para supervisar y registrar la salida de aplicaciones de consola que generan una gran cantidad de datos, como make, CVS y Subversio. Su principal función es registrar, recortar y colorear cada línea de salida antes de mostrarla, lo que facilita la supervisión y el análisis de la salida de estas aplicaciones.
+$ logapp make (supervisar la salida de make y registrarla en un archivo además de mostrarla en consola)
+$ logapp cvs update (registrará toda la salida en un archivo de registro)
+$ logapp svn update (registrar la salida de subversion)
+1.-
+Un ejemplo con un archivo de configuración personalizado
+$ nano logapp.conf
+        color error red
+        color warning yellow
+        color info green
+        trim 80
+Que los mensajes de error se muestren en rojo, las advertencias en amarillo, la información en verde y que las líneas se recorten a 80 caracteres.
+$ logapp -c logapp.cons make (lazar make con el archivo de configuración anterior)
 
 
 logcheck
@@ -29432,6 +29455,32 @@ y descomentar o completar las líneas:
 	SENDMAILTO="tu@direccion.com"
 	REPORTLEVEL="paranoid"
 	MAILASATTACH=1
+
+
+logdata-anomaly-miner
+Esta herramienta permite analizar los flujos de datos de registro [logs] y detectar patrones anómalos o posibles violaciones de seguridad. Puede ejecutarse desde la consola, como un demonio con alertas por correo electrónico o integrarse como biblioteca en programas propios
+$ logdata-anomaly-miner -f /var/log/auth.log (analiza un archivo de logs en busca de anomalías)
+$ tail -f /var/log/apache2/access.log | logdata-anomaly-miner --stdin (redirigir logs desde otro comando)
+Ejemplo de archivo de configuración para alertas por correo electrónico.
+$ nano config.json
+        {
+          "smtp": {
+            "server": "smtp.example.com",
+            "port": 587,
+            "username": "user@example.com",
+            "password": "password123",
+            "from": "alerts@example.com",
+            "to": "admin@example.com"
+          },
+          "rules": [
+            {
+              "name": "Failed SSH login",
+              "pattern": "Failed password for .* from",
+              "severity": "high"
+            }
+          ]
+        }
+$ logdata-anomaly-miner --daemon --config config.json (inicia el demonio)
 
 
 loggedfs
