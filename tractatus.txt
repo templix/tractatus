@@ -29614,6 +29614,15 @@ Analizador de archivos de registro y generador de informes de estilo syslog, cap
 $ cat /var/log/messages | logtool -t -s -p short -o HTML > /home/pep/logs/messages.html (formato de la hora corto [HH:MM] y no mostrar el campo "fuente" ni el campo "programa")
 
 
+logtools
+Herramientas útiles para analizar, filtrar, dividir y combinar en diferentes formatos archivos de registro [logs]. Incluye las aplicaciones clfmerge, logprn, funnel, clfsplit y clfdomainsplit.
+$ clfmerge access.log.1 access.log.2 > combined.log (combina múltiples archivos de registro en formato Common Log Format [CLF] ordenándolos cronológicamente)
+$ logprn --from "2023-10-01" --to "2023-10-31" /var/log/apache2/access.log (imprime registros de logs permitiendo filtrar por fechas u otros criterios)
+$ funnel /var/log/nginx/access.log /var/log/nginx/error.log > nginx_combined.log (redirige múltiples flujos de entrada a uno solo)
+$ clfsplit --lines=1000 access.log split_access_ (divide access.log en archivos de 1000 líneas cada uno, con nombres como split_access_001, split_access_002, etc.)
+$ clfdomainsplit access.log (crea archivos como com.example.log, org.example.log, etc, agrupando las peticiones por dominio)
+
+
 logtop
 Herramienta para analizar el archivo de registro de logs como entrada.
 # tail -f /var/log/apache2/access.log | logtop
