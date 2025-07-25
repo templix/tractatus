@@ -29502,6 +29502,19 @@ Solicitar la contraseña de usuario.
 $ login -f  usuario (Inicia nueva sesión dentro de la actual)
 
 
+login-duo
+Envoltorio de inicio de sesión para la autenticación de dos factores [2FA] de Duo Security. En lugar de simplemente aceptar el usuario/contraseña, este comando añade un segundo factor de autenticación usando los servicios de Duo Security, normalmente mediante notificaciones push, códigos temporales o llamadas telefónicas. Está diseñado principalmente para usarse junto con las configuraciones globales del servidor OpenSSH.
+Configuración básica
+# nano /etc/duo/login_duo.conf
+        ikey = DIXXXXXXXXXXXXXXXXXX
+        skey = 9bXXXXXXXXXXXXXXXXXXXXXXXXXX
+        host = api-XXXXXXXX.duosecurity.com
+        pushinfo = yes
+# nano /etc/pam.d/sshd
+        auth required pam_duo.so
+$ login-duo (probarlo de forma local)
+
+
 loginctl
 Realizar una introspección y controlar el estado del administrador de inicio de sesión de systemd.
 $ loginctl list-sessions
@@ -29512,6 +29525,13 @@ $ loginctl list-users (lista los usuarios con sesión abierta)
 $ loginctl -psessions (muestra todas las sesiones abiertas)
 $ loginctl seat-status (muestra todos los procesos que están relacionados con el asiento)
 Nota.- "Seat" permite conectar varios conjuntos de hardware (ratón, teclado, pantalla) y utilizarlo por varios usuarios al mismo tiempo. Por lo general, esta función no se utiliza y la utilidad muestra solo un "asiento".
+
+
+logiops
+Herramienta que permite configurar en detalle ratones y teclados Logitech. Archivo de configuración en /etc/logid.cfg
+# logid --discover (ver los dispositivos conectados y sus nombres)
+# logid (muestra si la configuración se ha aplicado correctamente)
+# systemctl enable logid (habilitarlo para que arranque con el sistema)
 
 
 logkeys
@@ -29571,6 +29591,15 @@ Reproduce o transmite registros de acceso al servidor web como una simulación r
 # logstalgia /var/log/nginx/access.log (lo mismo con nginx)
 # tail -f /var/log/apache2/access.log | logstalgia (registros en tiempo real)
 # logstalgia --fullscreen /var/log/apache2/access.log (a pantalla completa)
+
+
+logswan
+Analizador de logs de servidores web como Apache, Nginx, etc. con estructuras de datos probabilísticas. Esto significa que, en lugar de almacenar y contar cada visita de forma exacta, utiliza algoritmos para estimar las métricas. Genera un único archivo HTML con todas las estadísticas [Número de visitas totales y únicas, navegadores y sistemas operativos más usados, páginas más visitadas, países de origen de las visitas, etc].
+$ logswan /var/log/nginx/access.log (generará un archivo llamado report.html en el directorio actual con el análisis de los logs)
+$ zcat -f /var/log/nginx/access.log* | logswan -o full_report.html (analizar archivos log sin comprimir y comprimidos [acces.log.1-gz, acces.log.2.gz...])
+$ logswan /var/log/nginx/access.log --date-from 2023-12-25 --date-to 2023-12-25 (analizar solo los logs del 25 de diciembre de 2023)
+$ logswan /var/log/nginx/access.log --geoip-database /path/to/GeoLite2-City.mmdb (ver el reporte de visitas por país)
+Nota.- Para geolocalización de IP se precisa una base de datos de DeoIP en formato .mmdb. Puede descargarse de https://github.com/P3TERX/GeoLite.mmdb
 
 
 logtail
