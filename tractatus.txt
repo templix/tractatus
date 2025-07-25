@@ -29503,8 +29503,18 @@ $ logsave -a file.log ifconfig (Añadiendo la salida al contenido existente)
 
 
 logstalgia
-Software para visualizar ficheros de log que registra las peticiones de los visitantes al servidor web como si fueran pelotas que van llegando del lado izquierdo, el servidor simula ser una raqueta que devuelve las peticiones con códigos como 200 (OK) 302 (redirigido a…) o el 404 (no encontrado).
-# logstalgia /var/log/apache2/access.log
+Reproduce o transmite registros de acceso al servidor web como una simulación retro, generando una visualización en forma de puntos o personajes que representan a los visitantes, simulando su navegación en tiempo real o a partir de registros históricos.
+# logstalgia /var/log/apache2/access.log (visualizar los registros en tiempo real desde un archivo de log)
+# logstalgia /var/log/nginx/access.log (lo mismo con nginx)
+# tail -f /var/log/apache2/access.log | logstalgia (registros en tiempo real)
+# logstalgia --fullscreen /var/log/apache2/access.log (a pantalla completa)
+
+
+logtail
+Identificar nuevas líneas añadidas al final de los archivos de registro [logs]. Lee un archivo de log y recuerda la posición en la que se quedó la última vez que se ejecutó. La próxima vez que se ejecute, solo mostrará las líneas que se han añadido desde la última ejecución.
+# logtail -f/var/log/apache2/access.log (monitorear las nuevas líneas que se añaden)
+# logtail -o/var/log/syslog.offset -f/var/log/apache2/access.log (recordará la posición de la última lectura en el archivo .offset del .log)
+# logtail -t /var/log/apache2/access.log (en modo test)
 
 
 logtool
