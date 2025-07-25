@@ -29659,9 +29659,21 @@ Y colocar la linea:
 
 lolcat
 Colorear texto.
-$ bash | lolcat -a -s 250
+$ bash | lolcat -a -s 250 (todos los comandos que se entren se verán coloreados hasta cerrar la terminal)
 $ fortune | cowsay -f tux | lolcat -s 64
 $ ls | lolcat -a
+
+
+lomoco
+[LOgitech MOuse COntrol]. Permite configurar opciones específicas del fabricante en ratones USB Logitech o ratones de doble personalidad conectados al puerto USB. Es útil para modelos como el MX500, MX510, MX1000, G5 o G7, que pueden arrancar con una resolución baja, por ejemplo, 400 CPI y necesitan ajustes para optimizar su rendimiento, o para deshabilitar funciones como SmartScroll/Cruise Control.
+$ lomoco -s (muestra una lista de dispositivos Logitech conectados, con su bus USB y ID de producto)
+$ lomoco -p c025 -i (consultar el estado de un ratón específico, en este caso un MX500 con ID c025)
+$ lomoco -p c025 --800 (aumentar la resolución del ratón a 800 CPI)
+$ lomoco -p c041 --2000 (onfigurar un ratón G5 a 2000 CPI)
+$ lomoco -p c025 --no-sms (deshabilitar SmartScroll/Cruise Control para usar los botones adicionales como botones estándar)
+$ lomoco -p c025 --sms (restaurar el comportamiento predeterminado [SmartScroll/Cruise Control])
+$ lomoco -p c025 -1 (configurar un ratón inalámbrico al canal 1 para un ratón con soporte CSR)
+$ lomoco -p c025 -c (desvincular un ratón de su receptor)
 
 
 look
