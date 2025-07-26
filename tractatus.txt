@@ -29716,6 +29716,20 @@ lost+found
 Carpeta donde el sistema almacena archivos marcados como dañados después de una comprobación de disco realizada con el comando fsck.
 
 
+low-memory-monitor
+Es un demonio diseñado para monitorear la presión de memoria en sistemas Linux y tomar acciones cuando la memoria disponible es crítica. Funciona en etapas tempranas del arranque del sistema y se integra con el kernel para gestionar situaciones de escasez de memoria. Primero, envía una señal a las aplicaciones de espacio de usuario cuando la memoria se está agotando y, luego, opcionalmente, activa el eliminador de memoria OOM [Out-Of-Memory Killer] del kernel cuando la memoria está en las últimas para evitar un colapso del sistema.
+# systemctl status low-memory-monitor (verificar si está activo)
+Ejemplo mínimo de configuración
+# nano /etc/low-memory-monitor.conf
+        # Umbral bajo (en %): notifica a las aplicaciones
+        low_threshold=10
+        # Umbral crítico (en %): activa OOM Killer
+        critical_threshold=5
+        # Tiempo de espera antes de actuar (en segundos)
+        timeout=30
+# systemctl enable low-memory-monitor (habilitar el servicio al inicio del sistema)
+
+
 lp
 Gestión de impresoras y trabajos de impresión. Aunque los comandos lp y lpr son distintos pero relacionados se han tratado en el mismo espacio.
 $ lp fichero (imprime fichero con la impresora predeterminada)
