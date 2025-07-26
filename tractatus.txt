@@ -7478,6 +7478,7 @@ Salvapantallas estilo matrix
 $ cmatrix -u 9 -B -C blue  (A velocidad lenta [0-9], usando todos los caracteres y especificando color [green, red, blue, white, yellow, cyan, magenta y black]
 Nota.- Si durante la ejecución se pulsan las teclas siguientes, se cambia al color indicado:
 ! (rojo) @ (verde)# (amarillo) $ (azul) % (magenta) ^ (cyam) & (blanco) ) (negro)
+Nota.- En la pantalla gráfica de screensaver, puede estar referenciada como GLMatrix o XMatrix
 
 
 cmospwd
@@ -29686,6 +29687,14 @@ Herramienta de presentaciones extensible basada en terminal que representa docum
 $ lookatme /usr/share/doc/lookatme/examples/file_loader_ext/example.md
 # lookatme /usr/share/doc/lookatme/examples/terminal_ext/example.md
 # lookatme /usr/share/doc/lookatme/examples/progressive.md
+
+
+lookup
+Utilidad interactiva para buscar archivos de texto rápidamente. Ofrece: Conversor de romaji [nuestro alfabeto] a kana [silabario japones], búsqueda difusa [Fuzzy Search], búsqueda con expresiones regulares, filtrado, modificaciones automáticas y modo de preferencia de palabras inteligente.
+$ lookup -writeindex **/*.txt **/*.org (crear un indice de todos los .txt y los .org del presente directorio y subdirectorios)
+$ lookup archivo.txt
+        search [archivo.txt]> palabra_a_buscar
+Mostrará todas las coincidencias. Ctrl-D para salir de la interfaz.
 
 
 lorem
