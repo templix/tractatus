@@ -29684,6 +29684,8 @@ $ look palabra
 
 lookatme
 Herramienta de presentaciones extensible basada en terminal que representa documentos Markdown y admite temas, resaltado de sintaxis, recarga de fuentes en vivo y manual y puede incrustar archivos externos y terminales en vivo en diapositivas. Algunos ejemplos de la propia aplicación:
+$ lookatme presentacion.md (ejecutar una presentación)
+$ lookatme --theme dark presentacion.md (con el teme dark, otra opción es el tema light)
 $ lookatme /usr/share/doc/lookatme/examples/file_loader_ext/example.md
 # lookatme /usr/share/doc/lookatme/examples/terminal_ext/example.md
 # lookatme /usr/share/doc/lookatme/examples/progressive.md
@@ -29792,6 +29794,19 @@ Añadir impresoras [ver lp y lpoptions].
 # lpadmin -p HP_LaserJet_1018 -E -v usb://HP/LaserJet%201018 -P /usr/share/ppd/HP/HP-LaserJet_1018.ppd.gz (-E habilita la impresora y -P ruta al archivo PPD)
 # lpadmin -x nombre_local (eliminar una impresora)
 Opciones: -L --> añadir una ubicación [-L "oficina"] y -D --> añadir descripción [-D "impresora compartica"].
+
+
+lpctools
+Herramientas diseñadas para interactuar con los microcontroladores LPC de NXP, específicamente para la programación en sistema [In-System Programming - ISP] a través de una interfaz serie,  usualmente UART. Incluye los programas lpcisp y lpcprog
+$ lpcisp -erase /dev/ttyUSB0 9600 (borrar el flash de un microcontrolador conectado al puerto serie /dev/ttyUSB0 y la velocidad de baudios para ISP es 9600)
+$ lpcisp -hex mi_firmware.hex /dev/ttyUSB0 9600 (programar un archivo HEX en el microcontrolador)
+$ lpcisp -bin mi_firmware.bin -verify /dev/ttyUSB0 9600 (programar un archivo BIN y verificarlo)
+$ lpcisp -read 0x0 4096 backup_firmware.bin /dev/ttyUSB0 9600 (leer 4KB [4096 bytes] de la memoria flash desde la dirección 0x0 y guardarlo en un archivo)
+$ lpcisp -reset /dev/ttyUSB0 9600 (reiniciar el microcontrolador después de la programación)
+$ lpcprog -c LPC1768 -b 115200 -e -p mi_firmware.hex /dev/ttyUSB0 (chip LPC, velocidad en baudios, borrar y programar un archivo HEX para un LPC1768)
+$ lpcprog -c LPC1343 -b 57600 -p mi_otro_firmware.bin -v -j /dev/ttyACM0 (programar un archivo BIN, verificar y luego ejecutar el firmware para un LPC1343)
+$ lpcprog -c LPC1114 -b 38400 -r backup_lpc1114.bin /dev/ttyUSB1 (leer el firmware actual de un LPC1114 y guardarlo)
+$ lpcprog -c auto -b 115200 /dev/ttyUSB0 (obtener información del dispositivo)
 
 
 lpinfo
