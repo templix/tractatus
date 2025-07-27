@@ -29728,6 +29728,17 @@ Ejemplo mínimo de configuración
         # Tiempo de espera antes de actuar (en segundos)
         timeout=30
 # systemctl enable low-memory-monitor (habilitar el servicio al inicio del sistema)
+# journalctl -u low-memory-monitor -f (ver logs del demonio)
+
+
+lowdown
+es un traductor de Markdown que permite convertir archivos escritos en este lenguaje a varios formatos de salida, incluidos HTML5, roff para generar páginas de manual en los formatos ms y man, LaTeX, Gemini, y salida para terminal ANSI/UTF-8.
+$ lowdown -t html -o archivo.html archivo.md (convertir Markdown a HTML5)
+$ lowdown -t man  -o archivo.1 archivo.md (convertir Markdown a página de manual)
+$ lowdown -t term archivo.md (presenta el Markdown con formato legible directamente en la terminal)
+$ lowdown -t ms -o archivo.ms archivo.md (convertir Markdown al formato roff ms, útil para crear PDFs con groff)
+Luego se podría generar el PDF usando groff:
+$ groff -ms archivo.ms | ps2pdf - archivo.pdf
 
 
 lp
