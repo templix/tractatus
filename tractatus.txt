@@ -29863,6 +29863,24 @@ Comprobar el estado de la impresora [ver lp].
 $ lpstat -t
 
 
+lptools
+Herramientas que permiten trabajar con Launchpad [plataforma de desarrollo colaborativo de Ubuntu] sin necesidad de usar la interfaz web. Este paquete proporciona las siguientes herramientas: lp-attach, lp-bug-dupe-properties, lp-capture-bug-counts, lp-check-membership, lp-force-branch-mirror, lp-get-branches, lp-grab-attachments, lp-list-bugs, lp-milestone2ical, lp-milestones, lp-project, lp-project-upload, lp-recipe-status, lp-remove-team-members, lp-set-dup y lp-shell.
+$ lp-list-bugs ubuntu (lista bugs de un proyecto en Launchpad)
+$ lp-list-bugs --status "New" ubuntu (bugs con estado "New")
+$ lp-list-bugs --tag "security" python (bugs con etiqueta "security")
+$ lp-list-bugs --importance "Critical" ubuntu (listar bugs críticos de Ubuntu)
+$ lp-bug-dupe-properties 123456  # Donde 123456 es el ID del bug (muestra información sobre bugs marcados como duplicados)
+$ lp-attach 123456 archivo.txt (adjunta un archivo a un bug en Launchpad)
+$ lp-project ubuntu (muestra información sobre un proyecto en Launchpad)
+$ lp-get-branches lp:ubuntu (lista ramas [branches] asociadas a un proyecto)
+$ lp-check-membership usuario ubuntu-dev (verifica si un usuario pertenece a un equipo en Launchpad)
+$ lp-milestones ubuntu (lista los hitos [milestones] de un proyecto)
+$ lp-shell (abre una consola interactiva para ejecutar múltiples comandos de lptools)
+$ lp-grab-attachments 123456 --dest-dir=~/descargas/bug_123456 (descarga archivos adjuntos de un bug y los guarda en el archivo especificado)
+$ lp-set-dup 123456 654321 (marca el bug 123456 como duplicado de 654321)
+Nota.- Precisa cuenta en Launchpad y configurar credenciales en ~/.launchpadlib/creds.
+
+
 lr
 Herramienta para generar listados de archivos tipo ls.
 $ lr -1 (solo directorios incluso los ocultos)
