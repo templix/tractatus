@@ -29828,6 +29828,20 @@ $ lpoptions -d psc-1100-series (Establecer la impresora predeterminada)
 $ lpoptions -p psc-1100-series -l (Ver las opciones de la impresora predeterminada)
 
 
+lpr
+Utilidad de impresión en sistemas Unix y Linux que se utiliza para enviar archivos a la cola de impresión para imprimir tanto en impresoras locales como remotas. Incluye las herramientas lpq, lprm, lptest, lpc, lpd, lpf [en la actualidad, tiene poca o ninguna utilidad] y pac.
+$ lpr archivo.txt (imprimir un archivo de texto)
+$ lpr -P impresora_oficina archivo.txt (imprimir un archivo en una impresora específica)
+$ lpr -# 3 archivo.txt (imprimir 3 copias de un archivo)
+$ lpr -r archivo.txt (imprimir un archivo y eliminarlo después)
+$ lpr -o landscape -o media=A4 archivo.pdf (imprimir un archivo en orientación horizontal y el tamaño del papel a A4)
+$ lpq (ver cola de impresión)
+$ lprm trabajo (eliminar un trabajo de la cola de impresión)
+$ lpd (demonio de impresión)
+$ lpstat -a (Muestra el estado de aceptación de las colas de impresión)
+$ lptest (patrón tradicional de "prueba de ondulación" en la salida estándar)
+
+
 lpstat
 Comprobar el estado de la impresora [ver lp].
 $ lpstat -t
