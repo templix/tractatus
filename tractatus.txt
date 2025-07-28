@@ -30035,6 +30035,16 @@ lsfd
 # lsfd -Q 'TYPE != "REG"' (lista de archivos descriptores no regulares)
 
 
+lsh
+[lsh-client lsh-server lsh-utils]. Implementación con licencia GPL del protocolo Secure Shell versión 2 [SSH2] que proporcionar acceso remoto seguro, transferencia de archivos y gestión de sesiones seguras entre sistemas.
+$ lsh-client user@servidor.example.com (iniciar una sesión interactiva en un servidor remoto)
+$ lsh-client -p 2222 user@servidor.example.com (especificar un puerto no estándar, el 22)
+$ lsh-clien user@servidor.example.com "ls -la" (ejecutar un comando en el servidor sin iniciar una sesión interactiva)
+$ lsh-keygen (genera un par de claves: pública y privada)
+$ lsh-writekey (instala las claves en el directorio `~/.lsh/` y configura los permisos adecuados)
+Nota.- lsh es menos común que OpenSSH, por lo que el soporte y la documentación son más limitados.
+
+
 lshal
 Mostrar elementos en la base de datos del dispositivo HAL [Hardware Abstraction Layer]. Muestra información del firmware, serial server, Bios, kernel, procesador, discos, puntos de montaje, particiones, usb, pci... HAL está en desuso en la mayoría de las distribuciones Linux. La funcionalidad se está fusionando en udev.
 $ lshal  (Información de los dispositivos de HAL en formato largo y detallado))
