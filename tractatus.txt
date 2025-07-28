@@ -29842,6 +29842,18 @@ $ lpstat -a (Muestra el estado de aceptación de las colas de impresión)
 $ lptest (patrón tradicional de "prueba de ondulación" en la salida estándar)
 
 
+lprint
+Utilidad diseñada para la administración y operación de impresoras específicas de etiquetas y recibos, conectadas por red o USB. Es especialmente útil para impresoras que no funcionan correctamente con el subsistema estándar CUPS o que requieren compatibilidad para etiquetas y recibos, como Zebra, Brother, y otras marcas especializadas.
+$ lprint submit -d zebra -n 3 etiqueta.png (imprimir 3 copias de una etiqueta desde un archivo PNG en la impresora llamada "zebra")
+$ lprint submit -d zebra -o media=na_index-4x6_4x6in etiqueta.png (especificar el tamaño de la etiqueta)
+$ lprint default -d zebra (e stablecer la impresora predeterminada)
+$ lprint add -d zebra -v usb://URI_DEL_DISPOSITIVO -m DRIVER (agregar una impresora. Requiere saber el URI del dispositivo y el driver)
+$ lprint devices (listar dispositivos USB detectados)
+$ lprint list (lista las impresoras configuradas)
+$ lprint status -d zebra (muestra el estado de la impresora)
+$ lprint delete -d zebra  (elimina la impresora "zebra")
+
+
 lpstat
 Comprobar el estado de la impresora [ver lp].
 $ lpstat -t
