@@ -11228,6 +11228,43 @@ dircolors
 Configuración de color para ls.
 $ dircolors -b (generar el código de shell para establecer la variable LS_COLORS)
 $ dircolors --print-ls-colors (mostrar colores)
+$ dircolors -p > ~/.dircolors (añadir la configuración al directorio personal)
+En ~/.bashrc añadir la linea:
+        eval "$(dircolors ~/.dircolors)"
+1.-
+Para cambiar un color
+$ nano ~/.dircolors
+Por ejemplo cambiamos los ejecutables de 32 [verde] a 31 [rojo]:
+        EXEC 01;32
+Para rojo brillante:
+        EXEC 01;31
+$ eval "$(dircolors ~/.dircolors)" (actualizar el cambio)
+2.-
+Códigos básicos de color
+        30 --> Negro
+        31 --> Rojo
+        32 --> Verde
+        33 --> Amarillo
+        34 --> Azul
+        35 --> Magenta
+        36 --> Cian
+        37 --> Blanco (gris)
+Códigos de fondo
+        40 --> Negro
+        41 --> Rojo
+        42 --> Verde
+        43 --> Amarillo
+        44 --> Azul
+        45 --> Magenta
+        46 --> Cian
+        47 --> Blanco
+Atributos adicionales
+        0 --> Reset (normal)
+        1 --> Negrita
+        4 --> Subrayado
+        5 --> Parpadeo
+        7 --> Invertir colores
+        8 --> Oculto
 
 
 directorylister
@@ -29887,6 +29924,17 @@ $ lr -1 (solo directorios incluso los ocultos)
 $ lr -l1Aon | column (sin los ocultos y ordenados por nombre)
 
 
+lrzip
+[Long Range ZIP]. Programa de compresión con una tasa muy alta, útil cuando se necesita una compresión muy eficiente para archivos grandes, como bases de datos, imágenes de disco, o archivos de respaldo.
+$ lrzip -k archivo (generará un archivo comprimido llamado archivo.lrz y mantendrá el archivo original)
+$ lrunzip archivo.lrz (descomprimir)
+$ lrzip -d archivo.lrz (descomprimir)
+$ lrzip -9 archivo.txt (comprimir con un nivel de compresión máximo. El rango va de 1 a 9)
+$ lrzip --method=lzma archivo.txt (usar el algoritmo LZMA para la compresión)
+$ lrzip -I archivo.lrz (mostrar información sobre un archivo comprimido)
+$ lrzcat archivo.lrz (descomprimir)
+
+
 ls
 Listar archivos de un directorio.
 $ ls -i (Muestra todos los archivos no ocultos)
@@ -29941,10 +29989,18 @@ $ lsblk -f /dev/sda (Mostrando etiquetas, uuids y puntos de montaje)
 $ lsblk -m /dev/sda (Mostrando propietarios, grupos y permisos)
 
 
-lsb_release
-Muestra nombre y código del sistema operativo
-$ lsb_release -a
-$ cat /etc/*-release (lo mismo)
+lsb-release
+Herramienta sencilla que ayuda a identificar la distribución de Linux utilizada y su conformidad con la Base Estándar de Linux.
+$ lsb_release -a (muestra la versión del sistema operativo)
+$ lsb_release -r (solo mosrará el número de versión)
+S lsb_release -d (descripción de la distribución)
+$ lsb_release -c (solo el codename de la distribución)
+
+
+lscolors
+Colorear rutas con la variable de entorno LS_COLORS. Es una herramienta mínima y probablemente solo tenga un uso interno o experimental ya que la donfiguración de colores se hace con el comando dircolors [ver].
+$ lscolors /usr/share/libreoffice/bin/lo-xlate-lang (colorear una ruta)
+$ lscolors /etc/passwd /usr/bin/bash /var/log/syslog (colorear varias rutas)
 
 
 lscpu
