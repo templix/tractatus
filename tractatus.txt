@@ -30414,6 +30414,11 @@ $ nano ~/.config/lxterminal/lxterminal.conf
         decor=no
 $ lxterminal --geometry=150x34 (lanzarla con una geometria concreta)
 $ lxterminal --geometry=105x15 -e 'bash -c "ip a; read"' (lanzarla para ejecutar un comando y esperar a pulsar "intro" para cerrarla)
+$ lxterminal -e "bash -c 'ip a; bash'" (se lanza para ejecutar un comando pero continua la aplicación abierta)
+$ lxterminal -e "/bin/bash -c 'ip a; read -n 1 -s'" (ejecutar comando y esperar a pulsar una tecla para cerrarse la aplicación)
+$ lxterminal --tabs=tab_name1,tab_name2,tab_name3 (abrir la terminal con 3 pestañas con sus nombres cada una)
+$ lxterminal --title=title_name (con un título)
+$ lxterminal --working-directory=/home/USER/Documentos (brir la terminal en un directorio especifico)
 
 
 lynis
