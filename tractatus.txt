@@ -30382,6 +30382,40 @@ restart (Reiniciarlo)
 exit (Matarlo)
 
 
+lxterminal
+Emulador de terminal basado en VTE para el entorno de escritorio ligero X11 [LXDE].
+Algunos ajustes del archivo de configuración
+$ nano ~/.config/lxterminal/lxterminal.conf
+        [general]
+        fontname=Comic Mono 12
+        selchars=-A-Za-z0-9,./?%&#:_
+        scrollback=1000
+        bgcolor=rgb(0,0,0)
+        fgcolor=rgb(170,170,170)
+        ...
+        color_preset=VGA
+        disallowbold=true
+        boldbright=true
+        cursorblinks=true
+        cursorunderline=false
+        audiblebell=false
+        visualbell=false
+        tabpos=top
+        geometry_columns=100
+        geometry_rows=24
+        hidescrollbar=true
+        hidemenubar=true
+        hideclosebutton=true
+        hidepointer=true
+        disablef10=false
+        disablealt=false
+        disableconfirm=false
+        undecorate=true
+        decor=no
+$ lxterminal --geometry=150x34 (lanzarla con una geometria concreta)
+$ lxterminal --geometry=105x15 -e 'bash -c "ip a; read"' (lanzarla para ejecutar un comando y esperar a pulsar "intro" para cerrarla)
+
+
 lynis
 Busca en el sistema posibles debilidades de configuración sin realizar ninguna modificación.
 # lynis (Visualizar las opciones)
@@ -34485,7 +34519,7 @@ $ openbox –-replace (Activa openbox)
 $ openbox --restart (Reinicia)
 $ openbox --reconfigure (Relee los archivos de configuración después de una modificación)
 Los archivos de configuración se encuentran en el directorio: .config/openbox:
-- autostart
+----- autostart
 Donde se colocan las aplicaciones que arrancan cuando se inicia el sistema. La sintaxis es:
 	(sleep 1 && nitrogen --restore) &
 	(sleep 2 && lxpanel) &
@@ -34493,7 +34527,7 @@ Donde se colocan las aplicaciones que arrancan cuando se inicia el sistema. La s
 	(sleep 3 && volumeicon) &
 	(sleep 3 && idesk) &
 Retrasar [sleep] algunos segundos [1, 2, 3 ] el lanzamiento de las aplicaciones  y dejar los procesos en background [&]
-- rc.xml
+----- rc.xml
 Archivo de configuración de los atajos de teclado y ratón. Cada atajo ha de colocarse en el interior de la etiqueta a la que correspondan: atajos de teclado entre <keyboard> y </keyboard>, los de ratón entre <mouse> y </mouse>...
 Ejemplo para abrir firefox pulsando la tecla Win + f:
 	<keybind key="W-f">
@@ -34507,7 +34541,7 @@ Ejemplo para mostrar el menú del botón derecho del ratón pulsando las teclas 
 	   <menu>root-menu</menu>
 	   </action>
 	</keybind>
-- menu.xml
+----- xmenu.xml
 El menú que se muestra con el botón derecho del mouse.
 1.-
 Cuando no se montan automaticamente los dispositivos usb que se conectan:
