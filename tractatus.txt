@@ -40972,6 +40972,19 @@ nano ~/.config/succade/succaderc
         margin-right = 8
 
 
+suckless-tools
+Conjunto de utilidades minimalistas y ligeras, diseñadas con la filosofía Suckless: "Simple is better" [lo simple es mejor]. Están pensadas para ser usadas con gestores de ventanas minimalistas como DWM, Awesome, i3, etc aunque es independiente del gestor de ventanas utilizado. Incluye las aplicaciones dmenu, dmenu_path, dmenu_run, lsw, slock, sprop, sselp, ssid, stest, swarp, tabbed.default, tabbed.meta, wmname y xssstate.
+$ dmenu_path | dmenu | xargs -r firefox & (lista las rutas de los ejecutables, "dmenu" permite seleccionar uno, y "xargs -r firefox &" ejecuta el seleccionado)
+$ dmenu_path (listar todos los ejecutables disponibles en el $PATH)
+$ dmenu_run -nb yellow -nf red -p bash (muestra una barra de color amarillo y letra roja con aplicaciones del sistema)
+$ lsw (lista las ventanas abiertas en el servidor X)
+$ slock (la pantalla se oscurecerá y se quedará bloqueada hasta que se introduzca la contraseña)
+$ sselp (pegará en la consola lo que esté en el portapapeles)
+$ swarp 100 200 ( mover el puntero a la posición indicada)
+$ xssstate -i (estado del protector de pantalla en X11 en milisegundos)
+$ xssstate -s (estado actual del protector de pantalla. "on" activo, "off" no activo, "disabled" desactivado)
+
+
 sudo
 Utilidad que permite a un usuario ejecutar programas con privilegios de root. En algunas distros sólo el usuario creado durante la instalación puede ejecutar sudo con privilegios de root, los demás han de ser agregados al grupo admin. Incluye las aplicaciones: cvtsudoers [convertir entre formatos de archivo sudoers], sudoedit [Ejecutar comandos como otro usuario] y sudoreplay [enumera los registros de salida creados por sudo]
 $ sudo -k   (limpia la clave sudo introducida)
