@@ -30108,6 +30108,16 @@ $ nano  failover.sh
         ip route replace default via 192.168.2.1 dev eth1
 
 
+lsmbox
+lista el número de mensajes totales y no leídos en uno o varios archivos de buzones y también permite la monitorización continua de los buzones.
+$ lsmbox /path/to/mailbox (mostrará el número total de mensajes y el número de mensajes no leídos en el buzón especificado)
+$ lsmbox /path/to/mailbox1 /path/to/mailbox2 (listar el número de mensajes en varios buzones)
+$ lsmbox -w /path/to/mailbox (monitorización continua de un buzón)
+$ lsmbox -u /path/to/mailbox (mostrar solo el número de mensajes no leídos en el buzón especificado)
+$ lsmbox -f "Total: %t, No leídos: %u" /path/to/mailbox (formato personalizado para la salida. %t se reemplazará con el número total de mensajes y %u con el número de mensajes no leídos.)
+$ lsmbox -w -i 10 /path/to/mailbox (monitorización continua con un intervalo específico de cada 10 segundos)
+
+
 lsmod
 Listar todos los módulos cargados del kernel, y alguna información adicional de ellos.
 $ lsmod
@@ -30412,14 +30422,13 @@ $ nano ip.desktop
         Encoding=UTF-8
         Type=Application
         Name=ip
-        Name[en_US]=ip
         Categories=cli
         Icon=/home/pep/Imatges/logos/icons/ip.png
         Exec=urxvt -g 100x20 -hold -e sh -c "grc ip a"
-        Comment[en_US]=Saber la ip del sistema
+        Comment=Saber la ip del sistema
         StartupNotify=true
 $ lxpanelctl restart (recargar la configuración)
-$ lxpanelctl menu (comprobar que "cli" sale en el menú y que en él existe la aplicación "ip")
+$ lxpanelctl menu (comprobar que "cli" sale en el menú y que en él existe la aplicación "ip" y que acercando el puntero muestra eñ "comment")
 
 
 lxterminal
