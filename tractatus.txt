@@ -30098,6 +30098,16 @@ $ lslogins -g USER user (Información del grupo "user")
 $ lslogins -l (listado)
 
 
+lsm
+[Link Status Monitor]. Herramienta diseñada para supervisar la conectividad de un router o firewall. Su función principal es monitorear si las distintas interfaces de red están activas o caídas. Puede ejecutar scripts externos en caso de que detecte la caída de una conexión, permitiendo así cambiar el enrutamiento, enviar alertas o realizar acciones correctivas automáticas.
+$ lsm -d eth0,eth1 -s failover.sh (monitorización básica de enlaces y script externo que se ejecutará cuando una interfaz cambie de estado)
+Un ejemplo de script externo [Enviar una alerta y cambiar rutas]:
+$ nano  failover.sh
+        #!/bin/bash
+        logger "Se ha detectado un cambio en el estado de la interfaz de red"
+        ip route replace default via 192.168.2.1 dev eth1
+
+
 lsmod
 Listar todos los módulos cargados del kernel, y alguna información adicional de ellos.
 $ lsmod
