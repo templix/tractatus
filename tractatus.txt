@@ -30372,14 +30372,44 @@ Bloquea la sesión del usuario usando el protector de pantalla. Entrando la cont
 $ lxlock
 
 
-lxpanelctl
-Controla lxpanel.
-$ lxpanelctl menu (abre el menú de lxpanel)
-$ lxpanelctl config (Su configuración)
-$ lxpanelctl run (Cuadro para entrar una aplicación para ejecutarla)
-Otras opciones:
-restart (Reiniciarlo)
-exit (Matarlo)
+lxpanel
+Aplicación GUI para el entorno de escritorio ligero X11 LXDE. Incluye la herramienta lxpanelctl.
+Crear nuevo directorio en el menú de aplicaciones
+# nano /usr/share/desktop-directories/lxde-cli.directory
+Y añadir el liguiente texto:
+        [Desktop Entry]
+         Name=cli
+         Comment[es]=Comandos de consola
+         Icon=/home/USER/images/logos/icons/tux.png
+         Type=Directory
+Nombre del nuevo directorio, un comentario y el icono que emplearemos
+# nano /etc/xdg/menus/lxde-applications.menu
+<!-- cli -->
+        <Menu>
+               <Name>cli</Name>
+               <Directory>lxde-cli.directory</Directory>
+               <Include>
+                       <And>
+                               <Category>cli</Category>
+                               <Not><Category>Utility</Category></Not>
+                       </And>
+               </Include>
+        </Menu> <!-- End cli -->
+$ lxpanelctl restart (la nueva entrada todavía no aparecerá en el menú ya que no tiene ninguna aplicación entrada)
+Entrar la primera aplicación en el nuevo menú [cli], por ejemplo que se ejecute "grc ip a" ["grc" es para darle más colorido]
+$ nano ip.desktop
+        [Desktop Entry]
+        Encoding=UTF-8
+        Type=Application
+        Name=ip
+        Name[en_US]=ip
+        Categories=cli
+        Icon=/home/pep/Imatges/logos/icons/ip.png
+        Exec=urxvt -g 100x20 -hold -e sh -c "grc ip a"
+        Comment[en_US]=Saber la ip del sistema
+        StartupNotify=true
+$ lxpanelctl restart (recargar la configuración)
+$ lxpanelctl menu (comprobar que "cli" sale en el menú y que en él existe la aplicación "ip")
 
 
 lxterminal
