@@ -15927,12 +15927,11 @@ Espera 5 segundos antes de arrancar, la opción predeterminada es 50 décimas de
 
 
 extra-xdg-menus
-Proporciona menús adicionales para los entornos de escritorio que siguen las especificaciones de menú de XDG, como GNOME, KDE, XFCE, LXQt, etc.
-Este paquete instala varios menús de escritorio adicionales opcionales para agrupar aplicaciones en GNOME, KDE y otros entornos de escritorio compatibles con especificaciones de menú XDG. Los menús adicionales se pueden habilitar o deshabilitar por sistema o por usuario con los scripts suministrados: exmenen y exmendis.
+Proporciona menús adicionales para los entornos de escritorio que siguen las especificaciones de menú de XDG, como GNOME, KDE, XFCE, LXQt, etc. Los menús adicionales se pueden habilitar o deshabilitar por sistema o por usuario con los scripts suministrados: exmenen y exmendis.
 $ exmenen --system electronics (habilitar el menú electronics si se encuentra en /etc/xdg/menus/extra/)
 $ exmendis --system electronic (deshabilitarlo)
 $ exmenen --user desarrollo (agregará el menú "desarrollo" solo a la configuración de usuario)
-$ xdg-desktop-menu forceupdate (después de habilitar o deshabilitar menús, a veces es necesario reiniciar la sesión o forzar la actualización del menú con)
+$ xdg-desktop-menu forceupdate (después de habilitar o deshabilitar menús, a veces es necesario reiniciar la sesión o forzar la actualización del menú)
 1.-
 Modificar o crear un menú propio
 $ nano ~/.config/menus/custom.menu
@@ -25858,7 +25857,7 @@ iperf
 Para poder verificar el ancho de banda entre los clientes de una red local. Se instala en todas las máquinas de la red.
 # iperf -s (Poner el servidor a la escucha por el puerto 5001)
 # iperf -c 192.168.1.10 (Conectar los clientes con el servidor)
-Alguna sopciones que pueden añadirse:
+Algunas opciones que pueden añadirse:
 -f B (Mostrar el resultado en Bytes por segundo [b: bytes/s, k:kilobits/s, m:megabytes/s, B:Bytes/s, K:KiloBytes/s, M:MegaBytes/s] esta opción sirva igual para el cliente que para el servidor)
 -t 120 (Tiempo en segundos de duración de la transmisión. Sólo para el cliente)
 -D (Lanzarlo como servicio. Sólo en el servidor)
@@ -30203,6 +30202,71 @@ Ver los puertos USB y los dispositivos conectados a ellos. De vez en cuando ha d
 # update-usbids
 $ lsusb -d 046d:c00e (De un dispositivo determinado especificando fabricante y producto)
 $ lsusb -s 006:002 (De un dispositivo determinado especificando bus y número dispositivo)
+
+
+lsyncd
+[Live SYNCing Daemon]. Daemon que se utiliza con rsync para sincronizar directorios locales con una máquina remota. Observa los cambios en los directorios locales y luego lanza procesos de rsync para sincronizar esos cambios con un destino remoto o local en lugar de realizar escaneos programados.
+$ rsync -avz --delete /var/www/html/ usuario@servidor-remoto.com:/var/www/html/
+Nota.- Antes de iniciar lsyncd, a menudo es una buena idea realizar un rsync inicial completo manualmente del origen al destino. Esto asegura que el destino ya esté sincronizado, y lsyncd solo necesite manejar los cambios posteriores.
+Archivo de Configuración de Ejemplo
+# nano /etc/lsyncd/lsyncd.conf
+        settings {
+            logfile    = "/var/log/lsyncd/lsyncd.log",
+            statusFile = "/var/log/lsyncd/lsyncd.status",
+            maxProcesses = 2,
+            delay      = 1,
+        }
+        sync {
+            default.rsync,
+            source    = "/var/www/html",
+            target    = "usuario@servidor-remoto.com:/var/www/html",
+            rsync     = {
+                archive = true,
+                compress = true,
+                perms = true,
+                owner = true,
+                group = true,
+                exclude = {
+                    ".git/",
+                    "cache/",
+                    "tmp/*",
+                },
+                _extra = {"--delete"},
+            },
+        }
+Explicación de la Configuración:
+Bloque settings {}:
+    logfile: Ruta al archivo de registro de lsyncd. Esencial para la depuración.
+    statusFile: Ruta a un archivo donde lsyncd escribe su estado (por ejemplo, número de procesos rsync activos).
+    maxProcesses: Limita el número de procesos rsync que pueden ejecutarse simultáneamente. Útil para evitar sobrecargas.
+    delay: El tiempo que lsyncd espera después de un evento antes de iniciar un rsync. Esto ayuda a agrupar múltiples cambios rápidos en una sola transferencia.
+Bloque sync {}:
+    default.rsync: Especifica que esta sincronización utiliza el comportamiento predeterminado de rsync. lsyncd también soporta default.direct para copias de local a local sin rsync.
+    source: El directorio local a monitorear.
+    target: El destino remoto en formato usuario@host:ruta.
+    rsync = {}: Esta tabla anidada te permite pasar opciones de rsync directamente.
+        archive = true: Esto es una abreviatura de -a, que incluye -rlptgoD [recursivo, enlaces, permisos, tiempos, grupo, propietario, dispositivos].
+        compress = true: Usa -z para compresión durante la transferencia.
+        perms, owner, group: Banderas específicas de rsync para preservar los atributos de los archivos.
+        exclude: Una tabla de patrones a excluir de la sincronización. Similar a rsync --exclude.
+        _extra = {"--delete"}: Indica a rsync que elimine los archivos en el destino que ya no existen en el origen.
+Después de crear o modificar el archivo de servicio para ssystemd:
+# nano /etc/systemd/system/lsyncd.service
+        [Unit]
+        Description=Servicio de sincronización Lsyncd
+        After=network.target
+        [Service]
+        Type=forking
+        ExecStart=/usr/bin/lsyncd /etc/lsyncd/lsyncd.conf
+        ExecReload=/bin/kill -HUP $MAINPID
+        PIDFile=/var/run/lsyncd.pid
+        Restart=on-failure
+        [Install]
+        WantedBy=multi-user.target
+Se podrán usar las clásicas opciones de  systemctl
+# systemctl daemon-reload (releer la configuración)
+# systemctl enable lsyncd.service (activar servicio al inicio)
+# systemctl status lsyncd.service (ver el estado del servicio)
 
 
 luakit
@@ -35313,12 +35377,13 @@ $ pcmanfm --set-wallpaper /home/USER/images/limagen.jpg (colocar fondo)
 Algunos atajos:
         Ctrl+1 	vista de íconos
         Ctrl+2 	compacta
-        Ctrl+3 	iconos
+        Ctrl+3 	miniaturas
         Ctrl+4 	mostrar detalles
         Ctrl+h 	mostrar archivos ocultos
         Ctrl+d 	Establecer marcador para el dir actual y aparecerá automáticamente en el panel lateral
         F3 	en modo de 2 paneles
         F6      canvia el foco del panel lateral a las carpetas y viceversa
+        F9      mostrar/ocultar panel lateral
         F10     activa el menú principal
         Alt-d   Salta a la direcciones de interés
 $ pcmanfm --wallpaper-mode=mode (Configura el modo del fondo de pantalla. Los modos son:)
@@ -42742,10 +42807,10 @@ tty
 Muestra el número de terminal.
 $ tty
 1- Para entrar en las consolas virtuales, de la Crtl-Alt-F1 a la Crtl-Alt-F6, de forma automática sin tener que logearnos en cada una:
-# nano /etc/init.d/agetty-autologin (Crear el archivo de autologin)
-Y en su interior poner la linea:
-# agetty_options="--autologin <user> –-noclear" (en user poner el que corresponda)
-Reiniciar.
+# nano /etc/systemd/system/getty.target.wants/getty\@tty1.service
+        [Service]
+        ExecStart=-/sbin/agetty -a USER %I $TERM
+En USER poner el que corresponda, reiniciar.
 
 
 tty-clock
