@@ -30313,6 +30313,16 @@ $ lsmod | grep lttng (comprobar que los módulos esten cargados)
 # lttng destroy
 
 
+ltunify
+Empareja y administra dispositivos Logitech que usan el receptor unificador.
+$ ltunify -D list (mostrar todos los dispositivos emparejados)
+$ ltunify pair 100 keyboard (Intentar emparejar dentro de los segundos especificados. De 1 a 255, predeterminado 0 [30 s])
+$ ltunify unpair numpad (desvincular dispositivo)
+$ ltunify receiver-info (mostrar información sobre el receptor)
+$ ltunify info idx (información de un dispositivo. "idx" se refiere al número de dispositivo que se muestra en la primera columna del comando list)
+$ ltunify info mouse ("idx" puede sustituirse por keyboard, mouse, numpad, presenter, trackball y touchpad, sin importar mayúsculas o minúsculas)
+
+
 luakit
 Navegador web
 $ luakit
