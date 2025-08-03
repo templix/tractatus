@@ -37871,6 +37871,12 @@ Conecta con un host remoto
 $ rlogin usuario@host
 
 
+rlwrap
+Permite añadir historial y edición de línea (como hace Bash) a programas que normalmente no lo soportan, por ejemplo, clientes de bases de datos, intérpretes propios o cualquier cosa que use la entrada estándar sin readline.
+$ rlwrap nc localhost 1234 (Si te conectas con nc [netcat] normalmente no se tiene historial ni autocompletado. Con rlwrap, se pueden usar las flechas ↑↓ para recuperar comandos previos)
+$ rlwrap python (se tiene historial de comandos con flechas en un Python viejo sin readline)
+
+
 rm
 Borrar archivos. Puede que con algunas de las opciones tenga que activarse extglob (shopt -s extglob).
 $ rm -R directorio         (Borra directorios y los subdirectorios)
@@ -41652,6 +41658,18 @@ Controlar, clasificar, dar forma y programar el tráfico de la red.
 # tc -c -d qdisc
 # tc -g class show dev enp1s0 (Muestra clases como gráfico ASCII en la interfaz enp1s0)
 # tc qdisc show dev enp0s0
+
+
+tcc
+[Tiny C Compiler]. Compilador de C. Su objetivo no es tanto la optimización máxima del código, sino la velocidad de compilación y la facilidad de uso.
+Ejemplo rápido:
+$ nano hola.c
+        #include <stdio.h>
+        int main() {
+            printf("Hola desde TinyCC\n");
+            return 0;
+        }
+$ tcc hola.c -run (compila el archivo C y lo ejecuta directamente sin generar ejecutables intermedios)
 
 
 tcpbench
