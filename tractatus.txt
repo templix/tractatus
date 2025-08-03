@@ -30416,6 +30416,14 @@ $ luit -list | grep ISO885
 $ luit -encoding 'ISO 8859-1' xterm
 
 
+lumin
+Resalta las coincidencias con un patrón específico (cadena o expresión regular) en los archivos, usando color. Es similar a grep con salida coloreada, pero muestra todas las líneas de los archivos dados, no solo las líneas coincidentes.
+$ lumin palabra archivo.txt (muestra todo el archivo.txt con "palabra" coloreada en rojo por defecto)
+$ lumin -c green palabra archivo.txt (cooreada en verde)
+$ lumin -l (códigos de colores disponibles)
+$ lumin -n (nombres de colores disponibles)
+
+
 lxde
 Escritorio ligero. Sus componentes:
 	pcmanfm (gestor de archivos)
