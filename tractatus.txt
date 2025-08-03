@@ -30424,6 +30424,10 @@ $ lumin -l (códigos de colores disponibles)
 $ lumin -n (nombres de colores disponibles)
 
 
+lunzip
+Descompresor de archivos comprimidos con lzip [ver]
+
+
 lxde
 Escritorio ligero. Sus componentes:
 	pcmanfm (gestor de archivos)
@@ -30627,8 +30631,8 @@ lzip
 Compresor de archivos que utiliza la técnica de compresión LZMA2 y ofrece una alta compresión sin pérdida de datos. Lzip descomprime casi tan rápido como gzip y comprime mejor que bzip2.
 $ lzip archivo.txt (comprimirá el archivo archivo.txt en un archivo llamado archivo.txt.lz)
 $ lzip archivo1.txt archivo2.txt archivo3.txt (Comprimir todos los archivos especificados en archivos comprimidos con sufijo .lz)
-$ echo "linux es sistema genial" | lzip - (comprimir la salida estándar del echo)
-$ unlzip archivo.txt.lz > descompresion.txt (descomprimir)
+$ echo "linux es sistema genial" | lzip - (comprimir la salida)
+$ lunzip archivo.txt.lz (descomprimir)
 $ lzip --test archivo.txt.lz (verificar si el archivo comprimido está intacto)
 $ lzip -I archivo.txt (permitir interactivamente seleccionar qué partes del archivo se comprimen)
 $ lzip -9 archivo.txt (usa el nivel más alto de compresión)
