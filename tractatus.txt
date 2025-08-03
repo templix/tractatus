@@ -30269,6 +30269,33 @@ Se podrán usar las clásicas opciones de  systemctl
 # systemctl status lsyncd.service (ver el estado del servicio)
 
 
+ltsp
+[Linux Terminal Server Project]. Facilita el arranque en red de clientes LAN desde una única instalación ubicada en un entorno chroot o una máquina virtual en el servidor LTSP. LTSP integra dnsmasq para proporcionar DHCP, para asignar IP y decir a los clientes dónde está la imagen y TFTP para enviar el kernel/initramfs al cliente.
+# ltsp image / (crear la imagen del sistema para clientes usando la propia máquina como base. Creará un archivo parecido a /srv/ltsp/images/amd64.img)
+Archivo básico dnsmasq
+# nano /etc/dnsmasq.d/ltsp.conf
+        port=0
+        dhcp-range=192.168.67.20,192.168.67.250,12h
+        dhcp-boot=ltsp/ltsp.ipxe
+        pxe-service=X86PC, "Boot LTSP", ltsp/ltsp.ipxe
+        enable-tftp
+        tftp-root=/srv/tftp
+# systemctl restart dnsmasq (recargar la configuración)
+Añadir soporte NBD, opcional pero recomendado:
+# apt install nbd-server
+# nano /etc/nbd-server/config
+        [ltsp]
+            exportname = /srv/ltsp/images/amd64.img
+            readonly = true
+        ...
+# systemctl restart nbd-server (recargar servicio)
+$ qemu-system-x86_64 -enable-kvm -m 2G -netdev user,id=net0 -device e1000,netdev=net0 -boot n (arranca el cliente virtual [KVM/QEMU] por red. "-boot n" hace que arranque vía PXE)
+# ltsp image / (actualizar imagen tras cambios en el servidor)
+# adduser alumno1 (crear usuarios para clientes)
+# journalctl -u nbd-server (ver logs de arranque)
+# journalctl -u dnsmasq
+
+
 luakit
 Navegador web
 $ luakit
