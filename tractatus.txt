@@ -2814,6 +2814,12 @@ $ b3sum --no-names archivo.txt (la salida solo mostrará el hash sin el nombre d
 $ find /directorio -type f -exec b3sum {} + (calcular el hash para cada archivo del /directorio)
 
 
+babeltrace
+Herramienta para ver, convertir y manipular trazas de software que siguen el Common Trace Format [CTF]. Incluye la herramienta babeltrace-log.
+# babeltrace ~/lttng-traces/my-trace (mostrará listado de todos los eventos de traza, ordenados cronológicamente, con detalles como marca de tiempo, nombre del evento y contenido)
+# dmesg | babeltrace-log -t salida.txt (dmesg genera el log del kernel, y comopipe para entrada de babeltrace-log. -t para que interprete las marcas de tiempo de dmesg y el resultado se escribe en el archivo salida.txt como una traza en formato CTF)
+
+
 backup-manager
 Realiza copias de seguridad. Puede comprimir en tar, tar.gz, tar.bz2, y zip. El archivo de configuración está en /etc/backup-manager.conf.
 # backup-manager
@@ -30294,6 +30300,17 @@ $ qemu-system-x86_64 -enable-kvm -m 2G -netdev user,id=net0 -device e1000,netdev
 # adduser alumno1 (crear usuarios para clientes)
 # journalctl -u nbd-server (ver logs de arranque)
 # journalctl -u dnsmasq
+
+
+lttng-tools
+[lttng-modules-dkms]. Herramientas y módulos del kernel necesarios para permitir el rastreo avanzado con LTTng [Linux Trace Toolkit Next Generation]. DKMS [Dynamic Kernel Module Support] permite que estos módulos se recompilen automáticamente al actualizar el kernel, asegurando compatibilidad continua. Estos módulos, que no están disponibles en el kernel principal, hacen posible activar puntos de traza y observar eventos detallados como cambios de tarea, interrupciones, llamadas al sistema, bloqueos, etc., crucial para detectar problemas de rendimiento y debug multiplataforma y con muchos hilos concurrentes. Ver comando babeltrace
+$ lsmod | grep lttng (comprobar que los módulos esten cargados)
+# lttng list -k (listado de eventos disponibles en el kernel)
+# lttng create mi-sesion (crear una sesión de rastreo)
+# lttng enable-event -k sched_switch (habilitar eventos de kernel para rastreo)
+# lttng start (comenzar el rastreo)
+# lttng stop (detener el rastreo)
+# lttng destroy
 
 
 luakit
