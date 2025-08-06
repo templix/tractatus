@@ -30478,12 +30478,7 @@ Una de las ventajas de LVM es la capacidad de redimensionar volúmenes lógicos 
 lwatch
 Herramienta para monitorear y analizar logs en sistemas que usan syslog o syslog-ng con expresiones regulares [PCRE], colorearlos y mostrarlos de forma que la información importante se pueda ver a simple vista.
 $ lwatch /var/log/syslog (monitorear logs en tiempo real similar a tail -f pero con colores)
-$ lwatch --level=err /var/log/syslog (filtrar por error. Otras opciones : emerg, alert, crit, warning, notice, info, debug.)
-$ lwatch --grep "ssh|fail" /var/log/auth.log (resaltará líneas que contengan "ssh" o "fail")
-$ lwatch --grep -v "cron" /var/log/syslog (ignorar mensajes que coincidan con un patrón)
-$ lwatch --fields "date,host,message" /var/log/syslog (muestra solo la fecha, el host y el mensaje)
-$ lwatch --color 'error=red:warning=yellow' /var/log/syslog (asigna colores a palabras clave, "error" en rojo, "warning" en amarillo)
-$ lwatch /var/log/syslog > salida.log (guardar salida en un archivo. Los colores se pierden en el archivo, pero se puede usar ansi2txt [ver] para convertirlos)
+$ lwatch /var/log/syslog -o salida.log (guardar salida en un archivo.)
 Se puede crear un archivo de configuración para definir reglas permanentes:
 $ nano ~/.lwatchrc
         [default]
