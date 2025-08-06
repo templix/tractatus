@@ -30446,6 +30446,52 @@ $ lv -h (mostrar ayuda y las opciones de codificación soportadas)
 $ lv -I sjis -O utf-8 archivo_sjis.txt (un archivo en japonés codificado en Shift-JIS y verlo como UTF-8)
 
 
+lv2file
+Programa para aplicar efectos LV2 a archivos de audio como WAV o FLAC. En esencia, actúa como un anfitrión que carga un plugin LV2 y procesa el audio de un archivo de entrada para crear un nuevo archivo de salida con los efectos aplicados. lv2file no incluye efectos integrados, por lo que se debe instalar otros paquetes que contengan plugins LV2 para usarlos.
+$ lv2ls (lista todos los plugins LV2 instalados)
+$ lv2ls | grep calf (buscar plugins de Calf)
+$ lv2file -i voz.wav -o voz_con_reverb.wav http://calf.sourceforge.net/plugins/Reverb (aplica un reverb con los ajustes por defecto con el identificador del plugin a usar)
+$ lv2file -i voz.wav -o voz_reverb_grande.wav http://calf.sourceforge.net/plugins/Reverb -p roomsize 0.8 (aplica un reverb y ajusta el tamaño de la sala [roomsize] a 0.8)
+$ lv2file -i musica.flac -o musica_eq.flac http://calf.sourceforge.net/plugins/FiveBandEQ (aplicar un ecualizador de 5 bandas de Calf a un archivo llamado musica.flac)
+$ lv2file -i musica.flac -o musica_eq_ajustado.flac http://calf.sourceforge.net/plugins/FiveBandEQ -p gain1 5.0 -p gain5 4.5 (ajusta el ecualizador para realzar los bajos, banda 1 y los agudos, banda 5)
+$ lv2info http://calf.sourceforge.net/plugins/Reverb (muestra información detallada sobre el plugin Calf Reverb)
+
+
+lvm2
+[Logical Volume Manager 2]. Administrador de Volúmenes Lógicos de Linux.
+# pvcreate /dev/sdX (crear un volumen físico [PV] a partir de una partición o disco)
+# vgcreate nombre_vg /dev/sdX (crear un grupo de volúmenes [VG] con el nombre que se da al grupo de volúmenes y el volumen físico que se desea agregar)
+# lvcreate -L 10G -n nombre_lv nombre_vg (crear un volumen lógico dentro de un grupo de volúmenes)
+"-L 10G" especifica el tamaño del volumen lógico, "-n nombre_lv" nombre que se da al volumen lógico y "nombre_vg" nombre del grupo de volúmenes.
+Una vez creado el volumen lógico, puede formatearse y montarlo como un sistema de archivos normal. Por ejemplo, para formatearlo como ext4 y montarlo en /mnt/nombre_lv:
+# mkfs.ext4 /dev/nombre_vg/nombre_lv
+# mkdir /mnt/nombre_lv
+# mount /dev/nombre_vg/nombre_lv /mnt/nombre_lv
+Una de las ventajas de LVM es la capacidad de redimensionar volúmenes lógicos sin perder datos.
+# lvextend -L +5G /dev/nombre_vg/nombre_lv (aumentar el tamaño de un volumen lógico 5 GB)
+# sudo resize2fs /dev/nombre_vg/nombre_lv (redimensionar el volumen lógico)
+# lvremove /dev/nombre_vg/nombre_lv (eliminar un volumen lógico)
+# vgremove nombre_vg (eliminar un grupo de volúmenes, al que primero se eliminado todos los volúmenes lógicos dentro de él)
+# pvremove /dev/sdX (eliminar un volumen físico al que primero se ha eliminado cualquier grupo de volúmenes al que pertenezca)
+
+
+lwatch
+Herramienta para monitorear y analizar logs en sistemas que usan syslog o syslog-ng con expresiones regulares [PCRE], colorearlos y mostrarlos de forma que la información importante se pueda ver a simple vista.
+$ lwatch /var/log/syslog (monitorear logs en tiempo real similar a tail -f pero con colores)
+$ lwatch --level=err /var/log/syslog (filtrar por error. Otras opciones : emerg, alert, crit, warning, notice, info, debug.)
+$ lwatch --grep "ssh|fail" /var/log/auth.log (resaltará líneas que contengan "ssh" o "fail")
+$ lwatch --grep -v "cron" /var/log/syslog (ignorar mensajes que coincidan con un patrón)
+$ lwatch --fields "date,host,message" /var/log/syslog (muestra solo la fecha, el host y el mensaje)
+$ lwatch --color 'error=red:warning=yellow' /var/log/syslog (asigna colores a palabras clave, "error" en rojo, "warning" en amarillo)
+$ lwatch /var/log/syslog > salida.log (guardar salida en un archivo. Los colores se pierden en el archivo, pero se puede usar ansi2txt [ver] para convertirlos)
+Se puede crear un archivo de configuración para definir reglas permanentes:
+$ nano ~/.lwatchrc
+        [default]
+        grep = "error|fail|denied"
+        color = "error=red:fail=bold,yellow:denied=bold,red"
+        fields = "date,time,message"
+
+
 lxde
 Escritorio ligero. Sus componentes:
 	pcmanfm (gestor de archivos)
