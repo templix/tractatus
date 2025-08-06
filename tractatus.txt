@@ -30491,6 +30491,42 @@ lwm
 Gestor de ventanas ligero. Utiliza un mínimo de bibliotecas externas, por lo que consume muy poca memoria y no incluye iconos, documentación de iconos, barras de botones ni menús raíz.
 
 
+lxc
+[Linux Containers]. Herramientas del espacio de usuario de contenedores de Linux. Los contenedores son áreas aisladas dentro de un sistema que cuentan con su propio espacio de nombres para el sistema de archivos, la red, el PID, el IPC, la CPU y la asignación de memoria. Incluye las herramientas lxc-attach, lxc-autostart, lxc-cgroup, lxc-checkconfig, lxc-checkpoint, lxc-config, lxc-console, lxc-copy, lxc-create, lxc-destroy, lxc-device, lxc-execute, lxc-freeze, lxc-info, lxc-ls, lxc-monitor, lxc-snapshot, lxc-start, lxc-stop, lxc-top, lxc-unfreeze, lxc-unpriv-attach, lxc-unpriv-start, lxc-unshare, lxc-update-config, lxc-usernsexec y lxc-wait, que permiten iniciar un único demonio en un contenedor o arrancar un sistema contenedorizado completo, así como administrar y depurar los contenedores.
+# lxc-create -t debian -n mycontainer (crea un contenedor llamado basado en la plantilla de Debian)
+$ ls /usr/share/lxc/templates/ (listar plantillas)
+# lxc-copy -n mycontainer -N mycontainer-clone (crea una copia del contenedor mycontainer llamada mycontainer-clone)
+# lxc-destroy -n mycontainer (elimina el contenedor mycontainer permanentemente)
+# lxc-snapshot -n mycontainer (crea un snapshot del contenedor mycontainer)
+# lxc-snapshot -n mycontainer -r snap0 (restaurar un contenedor al que se habia creado un snapshot)
+# lxc-start -n mycontainer (inicia el contenedor mycontainer en segundo plano)
+# lxc-start -n mycontainer -F (ejecutarlo en primer plano)
+# lxc-stop -n mycontainer (detiene el contenedor)
+# lxc-execute -n mycontainer -- /bin/bash (ejecuta un shell en mycontainer sin iniciar todo el sistema)
+# lxc-attach -n mycontainer (accede al contenedor y ejecuta un comando o shell)
+# lxc-console -n mycontainer (conecta a la consola del contenedor)
+# lxc-freeze -n mycontainer (pausa todos los procesos del contenedor)
+# lxc-unfreeze -n mycontainer (reanuda los procesos de mycontainer)
+# lxc-ls --fancy (muestra una tabla con los nombres, estados, direcciones IP y otra información de los contenedores)
+# lxc-info -n mycontainer (muestra el estado, PID, uso de recursos, etc., del contenedor mycontainer)
+# lxc-monitor -n mycontainer (muestra eventos como inicio, detención o cambios de estado en mycontainer)
+# lxc-top (muestra el uso de recursos [CPU, memoria...] de los contenedores en tiempo real)
+# lxc-config -n mycontainer lxc.network.type (muestra el tipo de red configurado para mycontainer)
+# lxc-update-config -n mycontainer (actualiza el archivo de configuración de mycontainer)
+# lxc-cgroup -n mycontainer memory.limit_in_bytes 256M (limita la memoria del contenedor mycontainer a 256 MB)
+# lxc-checkconfig (muestra si el kernel tiene habilitadas las características necesarias para LXC)
+$ lxc-unpriv-attach -n myunprivcontainer (accede a un contenedor no privilegiado)
+$ lxc-unpriv-start -n myunprivcontainer (inicia un contenedor no privilegiado(
+$ lxc-usernsexec -m u:0:1000:1 -- /bin/bash (ejecuta un shell en un namespace con mapeo de usuario)
+$ lxc-unshare -s MOUNT -- /bin/bash (ejecuta un shell en un namespace de montaje aislado)
+# lxc-autostart (inicia todos los contenedores con la configuración lxc.start.auto=1)
+# lxc-wait -n mycontainer -s RUNNING (espera hasta que mycontainer esté en ejecución)
+# lxc-device -n mycontainer add /dev/ttyUSB0 (añade el dispositivo /dev/ttyUSB0 al contenedor mycontainer)
+# lxc-checkpoint -n mycontainer (crea un checkpoint de mycontainer)
+# lxc-checkpoint -n mycontainer -r (restaurarlo)
+Nota.- Los archivos de configuración de los contenedores están en /var/lib/lxc/<nombre>/config para contenedores privilegiados o ~/.local/share/lxc/<nombre>/config para no privilegiados.
+
+
 lxc-tests
 Binarios de prueba para contenedores de Linux. Los contenedores son áreas aisladas dentro de un sistema que cuentan con su propio espacio de nombres para el sistema de archivos, la red, el PID, el IPC, la CPU y la asignación de memoria. Estos binarios se utilizan principalmente para autopkgtest y por algunos desarrolladores y no están diseñados para instalarse en sistemas de usuario estándar. Incluye casi una sesentena de comandos.
 
