@@ -30437,6 +30437,15 @@ $ lur-command --status (ver el estado del receptor y dispositivos)
 $ lur-command --reset (reiniciar el receptor)
 
 
+lv
+[Less Viewer]. Visor de archivos similar a less que puede decodificar y codificar flujos multilingües mediante diversos sistemas de codificación: ISO-8859, ISO-2022, EUC, SJIS, Big5, HZ y Unicode.
+$ lv archivo.txt (mostrará el archivo en pantalla paginada)
+$ lv -I utf-8 archivo.txt (por defecto detecta la codificación automáticamente, pero se puede especificar)
+$ lv -I euc-jp -O utf-8 archivo.jp (leerá el archivo como EUC-JP y lo mostrará en UTF-8)
+$ lv -h (mostrar ayuda y las opciones de codificación soportadas)
+$ lv -I sjis -O utf-8 archivo_sjis.txt (un archivo en japonés codificado en Shift-JIS y verlo como UTF-8)
+
+
 lxde
 Escritorio ligero. Sus componentes:
 	pcmanfm (gestor de archivos)
