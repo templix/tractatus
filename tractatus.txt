@@ -30774,6 +30774,12 @@ $ lzip -9 archivo.txt (usa el nivel más alto de compresión)
 $ lzip -e archivo.txt (comprimir y eliminar original)
 
 
+lziprecover
+Herramienta de recuperación de datos y descompresor para archivos en formato lzip [.lz] que también ofrece corrección de errores de reenvío [FEC], capaz de reparar cualquier tipo de archivo.
+$ lziprecover -cd --ignore-errors file.lz > file (Si un archivo está demasiado dañado como para que lziprecover lo repare, se extraen todos los datos recuperables)
+Nota.- El archivo resultante puede contener errores y generar datos innecesarios. Los archivos dañados se coservan sin cambios
+
+
 lzma
 Compresor/descompresor de archivos. Formato de salida .lzma
 $ lzma fichero.txt (Substituye fichero.txt por fichero.txt.lzma)
