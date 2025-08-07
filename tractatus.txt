@@ -30524,11 +30524,33 @@ $ lxc-unshare -s MOUNT -- /bin/bash (ejecuta un shell en un namespace de montaje
 # lxc-device -n mycontainer add /dev/ttyUSB0 (añade el dispositivo /dev/ttyUSB0 al contenedor mycontainer)
 # lxc-checkpoint -n mycontainer (crea un checkpoint de mycontainer)
 # lxc-checkpoint -n mycontainer -r (restaurarlo)
+Para que un contenedor use un puente de LXD
+# nano /var/lib/lxc/myhybridcontainer/config
+        lxc.net.0.type = veth
+        lxc.net.0.link = mybridge
+        lxc.net.0.flags = up
 Nota.- Los archivos de configuración de los contenedores están en /var/lib/lxc/<nombre>/config para contenedores privilegiados o ~/.local/share/lxc/<nombre>/config para no privilegiados.
 
 
 lxc-tests
 Binarios de prueba para contenedores de Linux. Los contenedores son áreas aisladas dentro de un sistema que cuentan con su propio espacio de nombres para el sistema de archivos, la red, el PID, el IPC, la CPU y la asignación de memoria. Estos binarios se utilizan principalmente para autopkgtest y por algunos desarrolladores y no están diseñados para instalarse en sistemas de usuario estándar. Incluye casi una sesentena de comandos.
+
+
+lxcfs
+[lxc lxd lxcfs]. Sistema de archivos virtual basado en FUSE que mejora la experiencia de los contenedores proporcionando vistas aisladas de ciertos recursos del sistema como /proc o /sys. Esto permite que los contenedores vean información de recursos, CPU, memoria, etc. como si fueran sistemas independientes, en lugar de reflejar los del host por ejemplo, en un contenedor sin LXCFS, /proc/cpuinfo muestra los CPUs del host, mientras que con LXCFS muestra solo los asignados al contenedor. El comando se instala como un servicio [lxcfs.service] y se monta automáticamente en los contenedores para proporcionar estas vistas aisladas.
+# systemctl enable lxcfs.service (iniciar el servicio)
+$ echo "lxc.mount.entry = /var/lib/lxcfs proc proc rw,nosuid,nodev,noexec 0 0" | sudo tee -a /var/lib/lxc/mylxccontainer/config (configurar el contenedor para usar LXCFS)
+# lxc exec mylxdcontainer -- bash (abrir un shell dentro del contenedor...)
+# cat /proc/meminfo (... y verificar que solo se vea la memoria asignada al contenedor)
+
+
+lxctl
+Permite controlar contenedores basados en LXC y gestionar diferentes aspectos como la creación, la destrucción, el inicio y la detención de contenedores. Obsoleto y no recomendado en sistemas modernos. Usar lxc o lxd en su lugar.
+
+
+lxd
+Es un gestor de contenedores de sistemas y máquinas virtuales de última generación. Se basa en imágenes prediseñadas disponibles para una amplia variedad de distribuciones de Linux y se basa en una API REST muy potente y sencilla. Este paquete contiene el demonio LXD.
+# lxd init (inicializa el daemon)
 
 
 lxde
