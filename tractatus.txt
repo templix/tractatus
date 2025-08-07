@@ -30752,6 +30752,11 @@ $ lz4 -d file.lz4 (descomprimir)
 $ lz4 -t file.lz (test de integridad de un archivo comprimido)
 
 
+lz4json
+Utilidad destinada a descomprimir archivos en formato lz4json, un tipo de compresión utilizado principalmente por productos de Mozilla como Firefox para sus marcadores y archivos de restauración de sesiones. El formato lz4json es especial: contiene un encabezado específico y no es compatible con la mayoría de utilidades estándar de lz4; por eso, para leer archivos como recovery.jsonlz4 o bookmarks-YYYY-MM-DD_XXXX_fx_bookmarkbackup.jsonlz4, se requiere una herramienta dedicada como lz4json.
+$ lz4jsoncat somefile.mozlz4 > somefile.json
+
+
 lzip
 Compresor de archivos que utiliza la técnica de compresión LZMA2 y ofrece una alta compresión sin pérdida de datos. Lzip descomprime casi tan rápido como gzip y comprime mejor que bzip2.
 $ lzip archivo.txt (comprimirá el archivo archivo.txt en un archivo llamado archivo.txt.lz)
