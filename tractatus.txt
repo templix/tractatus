@@ -30786,6 +30786,14 @@ $ lzma fichero.txt (Substituye fichero.txt por fichero.txt.lzma)
 $ lzma -d fichero.txt.lzma (Descomprimir)
 
 
+lzop
+Es un compresor similar a gzip. Sus principales ventajas sobre gzip son una velocidad de compresión y descompresión mucho mayor.
+$ lzop -1 -o salida.lzo archivo (comprimir archivo a la máxima compresión [preterminado 3] y guardarlo en salida.jz)
+$ lzop -t solida.lzo (comprobar la integridad de un archivo .lz)
+$ lzop -l solida.lzo (enumerar de un comprimido los siguientes campos: method, compressed, uncompressed, ratio y uncompressed_name)
+$ lzop -df solida.lzo (descomprimir y sobreescribir si existe)
+
+
 macchanger
 Modificar la MAC
 # macchanger -s eth0 (Muestra la MAC)
