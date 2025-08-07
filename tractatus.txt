@@ -30794,6 +30794,31 @@ $ lzop -l solida.lzo (enumerar de un comprimido los siguientes campos: method, c
 $ lzop -df solida.lzo (descomprimir y sobreescribir si existe)
 
 
+m2r
+Convierte un archivo Markdown [md], a reStructuredText [rst]
+$ m2r --dry-run archivo.md  (mustra el resultado sin guardar)
+$ m2r --overwrite archivo.md (genera archivo.rst y si existe lo sobreescribe)
+
+
+m4
+Lenguaje de procesamiento de macros y preprocesador de texto. Es como un mini lenguaje que toma un texto y lo transforma antes de pasarlo a otro programa, compilarlo, etc.
+1.-
+$ nano ejemplo.m4
+        define(`saludo', `Hola, mundo!')
+        saludo
+$ m4 ejemplo.m4 (ejecutarlo)
+2.-
+Macros con parámetros
+$ nano ejemplo.m4
+        define(`cuadrado', `eval($1 * $1)')
+        cuadrado(7)
+3.-
+Macros anidadas [convierte las vocales en mayúsculas]
+$ nano ejemplo.m4
+define(`grito', `translit($1, aeiou, AEIOU)!!')
+grito(`este texto es importante')
+
+
 macchanger
 Modificar la MAC
 # macchanger -s eth0 (Muestra la MAC)
