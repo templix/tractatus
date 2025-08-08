@@ -13063,6 +13063,7 @@ $ duplicity verify file:///mnt/backup /home/user/docs (asegurar que los archivos
 $ duplicity list-current-files file:///mnt/backup (ver qué archivos están almacenados)
 
 
+
 dupload
 Cargar automáticamente paquetes Debian a un host remoto, generalmente un repositorio de Debian o un servidor de mantenimiento.
 $ dupload --to mydebianrepo paquete.changes (subirá los archivos especificados en paquete.changes al servidor mydebianrepo)
@@ -37680,10 +37681,26 @@ $ rdfind -deleteduplicates true ~/Documents (eliminar duplicacdos del directorio
 $ rdfind /home/USER /home/USER/Documents
 
 
+rdiff
+Compara archivos y directorios y crea diferencias binarias [delta] basadas en firmas [signature]. Al aprovechar el algoritmo delta remoto de rsync, no es necesario que el archivo de origen esté en la misma ubicación que el archivo de destino.
+El proceso es el siguiente:
+Se tiene dos archivos iguales en dos directorios ditintos. Se genera una "firma" del archivo de un directorio [signature.sig] y se copia en la misma ubicación que el archivo que modificaremos. Una vez modificado, generamos el delta que describe los cambios necesarios para convertir el archivo de origen en el archivo modificado a partir de la signature.sig y se genera el archivo delta.diff. Este archivo se copia a la carpeta donde está el archivo no modificado y se "patchea" para convertir el archivo igual que el del directorio que se ha modificado.
+$ rdiff signature file.txt signature.sig (crear una firma del archivo original)
+$ rdiff delta signature.sig file.txt delta.diff (despues de una modificación en file.txt crear delta.diff con las direfencias a partir de la signature.sig del paso anterior)
+$ rdiff patch original.txt delta.diff reconstruido.txt (recontruir el archivo original con la modificación a partir del delta.diff generado en el paso anterior)
+
+
 rdiff-backup
 Backups incrementales locales o remotos. La aplicación ha de estar instalada en el cliente y en el servidor.
 $ rdiff-backup --force 192.168.1.20::/home/USER/dir_remoto /home/USER/dir_local (Realiza un backup del dir_remota de la máquina 20 de la red y lo guarda en nuestro dir_local sin comprimir)
 $ rdiff-backup /home/USER /media/datos/Backups/home_user.backup (Un backup de un directorio personal)
+$ rdiff-backup -r 5D Documents/backup/ file_restaura/ (restaurar archivos antiguos [de 5 dias antes])
+
+
+rdiffdir
+[duplicity]. Calcular, aplicar firmas y comparar directorios [estructura y metadatos].
+$ rdiffdir dir1 dir2 > diferencies.dir
+$ cat diferencies.dir (para ver el archivo de las diferencias)
 
 
 read
