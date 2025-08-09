@@ -30841,6 +30841,27 @@ Daemon de control de ventiladores para ordenadores Apple MacBook/MacBook Pro. Le
 # systemctl anable macfanctld (activar al inicio)
 
 
+mactelnet-client
+Herramientas de consola para telnet y ping mediante direcciones MAC. Herramientas de ping, descubrimiento y telnet para conectarse a dispositivos Mikrotik RouterOS u otros equipos/dispositivos con MAC-Telnet. Esta herramienta puede comunicarse a través de la red de área local mediante paquetes UDP con una dirección MAC como destino. Puede usar telnet en equipos Linux que tengan instalado mactelnet-server o en un dispositivo Mikrotik RouterOS. La ventaja de usar MAC-Telnet es que se puede conectar a un dispositivo incluso si no tiene una dirección IP configurada o si su configuración de red es incorrecta.
+$ mactelnet-client 00:1A:2B:3C:4D:5E (conectarse a un router MikroTik que todavía no tiene dirección IP configurada usando la dirección MAC)
+
+
+mactelnet-server
+Daemon Telnet para aceptar conexiones mediante direcciones MAC. Este es un daemon Telnet que utiliza el protocolo MAC-Telnet, propiedad de Mikrotik. Este comando no es común para el uso diario, ya que la mayoría de los usuarios se conectan a un dispositivo de red y no al revés
+$ mactelnet-server eth0 (conectar a la red a través de la interfaz eth0 y aceptar conexiones MAC-Telnet de otros dispositivos)
+Nota.- Este comando se usa principalmente para pruebas o para escenarios de red muy específicos, ya que abrir un servidor de este tipo puede presentar riesgos de seguridad si no se gestiona correctamente.
+
+
+macutils
+Es un paquete que contiene varias utilidades para trabajar con archivos Macintosh en sistemas Unix, facilitando la conversión, transferencia, empaquetado y desempaquetado de archivos entre ambas plataformas. Incluye las aplicaciones binhex, frommac, hexbin, macsave, macstream, macunpack y tomac.
+$ binhex archivo_origen archivo_destino.hqx (convierte archivos a formato BinHex, que codifica datos binarios a texto ASCII)
+$ frommac > archivo_recibido (recibe archivos enviados desde un Macintosh a través de serie o red. Su uso principal hoy es histórico)
+$ hexbin archivo.hqx (convierte archivos BinHex [.hqx] a su formato binario original)
+$ macsave  flujo.macbin (extrae varios archivos de un flujo MacBinary y los guarda como archivos individuales)
+$ macunpack archivo.sit (Desempaqueta archivos de los principales formatos de compresión y empaquetado clásicos de Mac: PackIt, StuffIt, Diamond, Compactor ...)
+$ tomac archivo_unix archivo_mac (envía archivos desde Unix a Macintosh, preparándolos en formatos que el sistema Mac pueda entender)
+
+
 magicrescue
 Recuperar archivos borrados
 $ magicrescue -d /home/usuario/rescue -r /usr/share/magicrescue/recipes/avi /dev/sda3
@@ -42169,6 +42190,7 @@ $ terminalizer render nombre_proyecto (crear el gif)
 terminator
 Terminal que puede dividirse horizontalmente y verticalmente.
 $ terminator -T linux --geometry 1150x250 (Especificando un titulo y medidas)
+$ terminator -b --geometry=400X1050 -e nnn (sin decoración, medidas y ejecutar una aplicación
 Algunos atajos:
 	Ctrl + Mayus + o (División horizontal)
 	Ctrl + Mayus + e (División vertical)
