@@ -22445,6 +22445,66 @@ Algunas teclas que se pueden usar:
     flechas aArriba/abajo (navegar por los procesos en ejecución)
 
 
+getopts
+Comando interno de bash [builtin] que sirve para analizar parámetros posicionales y opciones dentro de scripts.
+1.-
+Ejemplo de opciones simples
+$ nano ejemplo1.sh
+        #!/bin/bash
+        #
+        while getopts "ab" opt; do
+          case $opt in
+            a) echo "Opción -a detectada" ;;
+            b) echo "Opción -b detectada" ;;
+            \?) echo "Opción inválida: -$OPTARG" ;;
+          esac
+        done
+$ chmod +x ejemplo1.sh
+$ ./ejemplo1.sh -a -b (ejecutar)
+        Opción -a detectada
+        Opción -b detectada
+2.-
+Ejemplo con argumentos para opciones
+$ nano ejemplo2.sh
+        #!/bin/bash
+        #
+        while getopts "f:o:" opt; do
+          case $opt in
+            f) echo "Archivo: $OPTARG" ;;
+            o) echo "Salida: $OPTARG" ;;
+            \?) echo "Uso: $0 [-f archivo] [-o salida]" ;;
+          esac
+        done
+f: --> significa que -f necesita un argumento.
+OPTARG --> contiene el argumento de la opción actual.
+$ chmod +x ejemplo2.sh
+$ ./ejemplo2.sh -f datos.txt -o resultado.txt (ejecutar)
+        Archivo: datos.txt
+        Salida: resultado.txt
+3.-
+Ejemplo combinando opciones y argumentos libres
+$ nano ejemplo3.sh
+        #!/bin/bash
+        #
+        while getopts "u:p:" opt; do
+          case $opt in
+            u) echo "Usuario: $OPTARG" ;;
+            p) echo "Puerto: $OPTARG" ;;
+          esac
+        done
+        #
+        # Desplazamos los parámetros para acceder a los argumentos libres
+        shift $((OPTIND - 1))
+        #
+        echo "Archivos a procesar: $@"
+$OPTIND --> Índice del siguiente argumento a procesar. Sirve para saber dónde acaban las opciones y empiezan parámetros "libres".
+$ chmod +x ejemplo3.sh
+$ ./ejemplo3.sh -u admin -p 8080 archivo1.txt archivo2.txt (ejecutar)
+        Usuario: admin
+        Puerto: 8080
+        Archivos a procesar: archivo1.txt archivo2.txt
+
+
 gtypist
 Programa para aprender mecanografia en ncurses.
 
