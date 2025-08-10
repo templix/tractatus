@@ -1993,6 +1993,8 @@ ascii
 $ man ascii (muestra la tabla de caracteres)
 $ ¾ (ctrl-shift-u be intro)
 $ æ (ctrl-shift-u e6 intro)
+Una curiosidad de ascii:
+$ ssh -o StrictHostKeyChecking=no watch.ascii.theater
 
 
 ascii2binary
@@ -23142,7 +23144,7 @@ Script de shell compatible con POSIX que obtiene una lista de dominios que publi
 # curl -o /usr/local/bin/hblock https://raw.githubusercontent.com/hectorm/hblock/v3.4.0/hblock
 # chmod +x /usr/local/bin/hblock
 $ hblock (descargar las listas de dominios y actualizará el archivo /etc/hosts para bloquearlos)
-$ hblock -S none -D none (desactivar temporalmente hBlock generando un archivo de hosts sin ningún dominio bloqueado)
+$ hblock -S none -D none (desactivar temporalmente hblock generando un archivo de hosts sin ningún dominio bloqueado)
 Para mantener el sistema protegido, es recomendable ejecutar hblock periódicamente con crontab:
 # crontab -e
 Y añadir la linea:
@@ -29451,6 +29453,15 @@ Permite ejecutar un programa únicamente cuando la carga media del sistema [load
 $ loadwatch 2.0 1.5 10 tar czf backup.tar.gz /home/USER/ (realizar el backup. Si el valor de la carga sube de 2.0 el proceso se pausa, se reanuda cuando baja de 1.5 y se comprueba cda 10 segundos)
 $ loadwatch 1.0 0.7 5 ./procesar_datos.sh (el script se ejecuta solo si la carga está por debajo de 1.0, se pausa si alcanza ese valor, y se reanuda al bajar de 0.7, comprobando cada 5 segundos)
 $ lx-ctl procesar_datos.sh stop (parar manualmente el proceso gestionado por loadwatch. "run" activa el modo de ejecución y "watch" activa el modo de supervisión de carga normal)
+
+
+local
+BASH nos permite utilizar dos tipos de variables, las locales y globales. Básicamente, la diferencia entre ambas es que la variable local tiene valor únicamente dentro de nuestra shell, es decir en de nuestra sesión. Por el contrario, las variables globales se establecen para todas las shells.
+$ VAR1="Linux es un sistema genial" (crear una variable local)
+$ echo $VAR1 (lanzarla)
+$ unset VAR1 (anularla o reiniciando se anula)
+$ export VAR2="Linux es un sistema genial" (crear varialbe global)
+$ unset VAR2 (anularla. Reiniciando no se anula)
 
 
 local-apt-repository
