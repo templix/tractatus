@@ -30933,6 +30933,22 @@ $ macunpack archivo.sit (Desempaqueta archivos de los principales formatos de co
 $ tomac archivo_unix archivo_mac (envía archivos desde Unix a Macintosh, preparándolos en formatos que el sistema Mac pueda entender)
 
 
+magic-wormhole
+Herramienta que permite transferir datos de un ordenador a otro utilizando una conexión cifrada de extremo a extremo [protocolp SPAKE2] que genera una clave segura a partir de un código corto y fácil de pronunciar. Este código, conocido como "código de agujero de gusano", es de un solo uso y sirve para autenticar la conexión entre el emisor y el receptor.
+$ wormhole send documento.pdf (enviar un archivo)
+La salida podría ser
+        Sending 1.2 MB file named 'documento.pdf'
+        Wormhole code is: 7-honest-horses
+        On the other computer, please run:
+        wormhole receive 7-honest-horses
+        ...
+Genera un código único, por ejemplo, "7-honest-horses" que se debe compartir con el receptor ya sea por chat, correo, llamada, etc. y el receptor con magic-wormhole instalado ejecuta:
+$ wormhole receive 7-honest-horses (puede usar TAB después de escribir las primeras letras del código para autocompletar y el archivo se transfiere a su directorio actual)
+$ wormhole receive 7-honest-horses --output-file /home/usuario/descargas/documento.pdf (guardar el envio en una carpeta concreta)
+Nota.- magic-wormhole comprime automáticamente la carpeta en un archivo .tar.gz antes de enviarla.
+$ wormhole send (el programa espera que se ingrese texto directamente en la terminal y finalizar con Ctrl+D)
+
+
 magicrescue
 Recuperar archivos borrados
 $ magicrescue -d /home/usuario/rescue -r /usr/share/magicrescue/recipes/avi /dev/sda3
