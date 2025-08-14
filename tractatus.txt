@@ -30966,6 +30966,22 @@ Nota.- magic-wormhole comprime automáticamente la carpeta en un archivo .tar.gz
 $ wormhole send (el programa espera que se ingrese texto directamente en la terminal y finalizar con Ctrl+D)
 
 
+magicfilter
+Filtro automático de impresora personalizable y extensible que traduce los archivos que se envían a la impresora, PDF, PostScript, texto plano, imágenes, etc. a un lenguaje que esta pueda entender. Para lograrlo, determina el tipo de archivo que se va a imprimir y utiliza su conocimiento para convertirlo en un archivo imprimible generalmente PostScript o PCL. Incluye la herramienta magicfilterconfig.
+# magicfilterconfig (inicia el asistente para configurar la impresora. Queda establecida en /etc/printcap)
+$ cat documento.pdf | magicfilter -d psc_1100_series > /dev/lp0 (imprimir un archivo PDF con la impresora especificada)
+Algunas opciones en el archivo de configuración
+# /etc/magicfilter/multifuncional.cfg
+DEVICE pcl
+RESOLUTION 1200x600
+# Para archivos PostScript
+FILTER application/postscript /usr/bin/gs -q -dNOPAUSE -dBATCH -sDEVICE=pxlmono -sOutputFile=- -
+# Para archivos PDF
+FILTER application/pdf /usr/bin/pdftops - | /usr/bin/gs -q -dNOPAUSE -dBATCH -sDEVICE=pxlmono -sOutputFile=- -
+# Para imágenes JPEG
+FILTER image/jpeg /usr/bin/convert -density 300x300 - -resize 100% pxlmono:-
+
+
 magicrescue
 Recuperar archivos borrados
 $ magicrescue -d /home/usuario/rescue -r /usr/share/magicrescue/recipes/avi /dev/sda3
