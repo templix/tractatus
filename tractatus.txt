@@ -1392,11 +1392,23 @@ $ apt search paquete (Buscar un paquete)
 # apt remove paquete (Suprime un paquete)
 # apt edit-sources (Edita el sources.list)
 # apt show nano (ver detalles de un paquete)
+# apt modernize-sources (actualizar los repositorios a la nueva versión de apt)
+# apt update --audit (comprobar si funcionan correctamente y no producen errores)
 1- significado de algunas salidas de apt update
    Hit (significa que apt comprobó las marcas de tiempo en la lista de paquetes, éstas coinciden y no hay cambios.)
    Ign (significa que no hay cambios en el archivo de índice pdiff, no se molestará en descargarlo de nuevo.)
    Obj (en la versión del paquete no hay cambios respecto a la versión anterior)
    Get (hubo cambios y se descargarán.)
+2.-
+Ejemplo de entrar en los repositorios la url para que el paquete Firefox sea directamente el generado por Mozilla
+# wget -q https://packages.mozilla.org/apt/repo-signing-key.gpg -O- | sudo tee /etc/apt/keyrings/packages.mozilla.org.asc > /dev/null (descargar las claves de validacion de los paquetes)
+# gpg -n -q --import --import-options import-show /etc/apt/keyrings/packages.mozilla.org.asc | awk '/pub/{getline; gsub(/^ +| +$/,""); if($0 == "35BAA0B33E9EB396F59CA838C0BA5CE6DC6315A3") print "\nLa huella digital coincide ("$0").\n"; else print "\nError de verificación: la huella digital no coincide con la esperada.\n"}' (comprobar que la clave es correct)
+Añadir al sources list la linea:
+# nano /etc/apt/sources.list
+        deb [signed-by=/etc/apt/keyrings/packages.mozilla.org.asc] https://packages.mozilla.org/apt mozilla main
+# apt modernize-source (actualizar los repositorios a la nueva versión de apt)
+# apt update
+# apt -y install firefox firefox-l10n-es-es (instalar)
 
 
 apt-cdrom
@@ -14689,6 +14701,11 @@ screenshot.- Capturas de pantalla:
 M-x screenshot (Pregunta nombre para la captura y scheme (con TAB muestra opciones). Al pulsar C-c C-c el puntero del ratón se convierte en una cruz para seleccionar la zona)
 memory-usage.- Muestra estadistica de la memoria usada por emacs
 M-x memory-usage
+35.-
+Suprimir el error:
+warning: desktop file appears to be in use by PID XXXX.
+Using it may cause conflicts. Use it anyway? (y or n)
+$ mr ~/.emacs.d/.emacs.desktop.lock
 
 
 emacs25-common-non-dfsg
