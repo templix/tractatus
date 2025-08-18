@@ -7345,17 +7345,6 @@ $ cmdtest echo_tests
       0/1 tests OK, 1 failures
 
 
-cmospwd
-Herramienta para descifrar contraseñas almacenadas en CMOS que se utilizan para acceder a la configuración BIOS de una computadora. Esta aplicación debería funcionar de inmediato en la mayoría de los sistemas modernos, pero es posible que algunas BIOS más complejas no sean compatibles o requieran pasos adicionales.
-$ cmospwd -c "contraseña_cmos" (descifrar con una contraseña específica)
-$ cmospwd -p "palabra_secreta" (probar diferentes contraseña)
-$ cmospwd -d (volcar información por pantalla)
-
-
-cmt
-[Computer Music Toolkit]. Colección de complementos compatibles con LADSPA que solo se pueden usar en aplicaciones host como sweep.
-
-
 cobertura
 Herramienta que mide la cobertura de las pruebas instrumentando una base de código Java y observando qué líneas de código se ejecutan y cuáles no a medida que se ejecuta el conjunto de pruebas. Además de identificar código no probado y localizar errores, puede optimizar el código marcando el código inactivo o inaccesible y puede brindar información sobre cómo funciona una API en la práctica. Incluye las herramientas cobertura-check, cobertura-instrument, cobertura-merge y cobertura-report.
 $ cobertura-instrument /proyecto/src (instrumentará el código fuente en la carpeta especificada)
@@ -7502,7 +7491,11 @@ Nota.- En la pantalla gráfica de screensaver, puede estar referenciada como GLM
 
 
 cmospwd
-Averiguar la contraseña de la BIOS. Arrancar con un cd-live [System rescue] y modificar la entrada del kernel del menú de opciones de grub para iniciar una shell [rw init=/bin/bash]
+Herramienta para descifrar contraseñas almacenadas en CMOS que se utilizan para acceder a la configuración BIOS de una computadora. Esta aplicación debería funcionar de inmediato en la mayoría de los sistemas modernos, pero es posible que algunas BIOS más complejas no sean compatibles o requieran pasos adicionales.
+# cmospwd -c "contraseña_cmos" (descifrar con una contraseña específica)
+# cmospwd -p "palabra_secreta" (probar diferentes contraseña)
+# cmospwd -d (volcar información por pantalla)
+Tambien se puede arrancar con un cd-live [System rescue] y modificar la entrada del kernel del menú de opciones de grub para iniciar una shell [rw init=/bin/bash]
 # cmospwd /d   (pasar la información por pantalla)
 # cmospwd /k   (resetear)
 # cmospwd /d /w bios.back  (copia de seguridad)
@@ -7542,6 +7535,10 @@ Para que el cambio sea permanente:
 $ nano .cmus/rc
 Y colocar la linea:
 	colorscheme cyan
+
+
+cmt
+[Computer Music Toolkit]. Colección de complementos compatibles con LADSPA que solo se pueden usar en aplicaciones host como sweep.
 
 
 cnetworkmanager
