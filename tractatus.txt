@@ -38134,6 +38134,17 @@ $  restore -rf home.bak (restaurar la copia completa [r] del archivo especificad
 $ restore -xaf fichero.bak fichero (restaurar solo la copia del fichero indicado [x], sin preguntar de qué volumen extraer los ficheros y especificando  archivo  [f])
 
 
+return
+Comando builtin [integrado] de la shell Bash y de otras compatibles que se utiliza dentro de funciones definidas en scripts de shell para finalizar la ejecución de la función y, opcionalmente, devolver un valor de retorno, un número entero entre 0 y 255. Este valor suele ser utilizado para indicar el estado o resultado de la función: éxito, error, etc.
+Ejemplo de finalizar una función con un código específico y capturarlo usando $? tras llamar a la función.
+        mi_funcion() {
+            echo "Esto es la función"
+            return 5
+        }
+        mi_funcion
+        echo $
+
+
 retty
 Capturar el proceso que se está ejecutando en otra consola.
 $ retty PID
