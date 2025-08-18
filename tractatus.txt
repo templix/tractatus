@@ -30960,6 +30960,23 @@ $ macunpack archivo.sit (Desempaqueta archivos de los principales formatos de co
 $ tomac archivo_unix archivo_mac (envía archivos desde Unix a Macintosh, preparándolos en formatos que el sistema Mac pueda entender)
 
 
+madison-lite
+Este programa inspecciona un archivo local de paquetes Debian y muestra las versiones de los paquetes de cada suite, por ejemplo, estable, en pruebas o inestable.
+$ madison-lite emacs (saber qué versiones del paquete erspecificado están disponibles en las diferentes suites de Debian)
+$ madison-lite sudo htop (consultar varios paquetes)
+$ madison-lite -a arm64 gparted (filtrar por arquitectura)
+
+
+madonctl
+Cliente CLI para la API de la red social Mastodon. Para usar madonctl, se debe especificar el nombre o la URL de la instancia y nombre de usuario y contraseña de la cuenta o un token ya sea por argumentos del comando o por un archivo de configuración.
+$ madonctl config dump -i mastodon.social -L username@domain -P password > config.yaml(generar un archivo de configuración)
+O directamente en el archivo de configuración:
+$ nano $HOME/.config/madonctl/madonctl.yaml
+        instance: https://mastodon.social
+	login: "USERNAME"
+	password: "USERPASSWORD"
+
+
 magic-wormhole
 Herramienta que permite transferir datos de un ordenador a otro utilizando una conexión cifrada de extremo a extremo [protocolp SPAKE2] que genera una clave segura a partir de un código corto y fácil de pronunciar. Este código, conocido como "código de agujero de gusano", es de un solo uso y sirve para autenticar la conexión entre el emisor y el receptor.
 $ wormhole send documento.pdf (enviar un archivo)
