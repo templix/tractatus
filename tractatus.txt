@@ -35545,9 +35545,11 @@ $ paplay archivo.flac
 
 
 parallel
-Ejecutar varias aplicaciones en paralelo.
-$ parallel -- who pwd "echo ++++++++++++++++++"
-$ parallel sh -c "echo linux es genial; sleep 2; echo ... o no" -- n 2 (dos veces)
+Ejecutar varias aplicaciones o argumentos en paralelo.
+$ parallel ip ::: "addr" "route show" "n" (mostrará la resolución de los 3 argumentos del comando ip)
+$ parallel echo ::: "Linux es" "Debian es" "Vivir es" ::: "genial" "fantástico" "brutal"
+$ parallel ::: who 'ip a' pwd (mostrará la resolución de los 3 comandos)
+$ parallel ::: echo 'uname -a' echo 'ip a' echo lspci (dejando un espcaio entre comandos)
 
 
 paris-ping
