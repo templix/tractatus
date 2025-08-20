@@ -6856,24 +6856,18 @@ Detecta troyanos, virus, malware y otras amenazas maliciosas.
 # freshclam -v (actualizar la lista de virus viendo detalles)
 # freshclam -d -c 24    (arranca el demonio que actualizará clamav 24 veces diarias- Maximo 50 veces diarias)
 # clamscan -ri    (Sin especificar directorio, escanear el del usuario)
-# clamscan -ri --remove /home/usuario  (escanea el directorio usuario y borra directamente los archivos infectados)
-# clamscan -r -l test_clamav.txt  (manda el resultado a un archivo)
-# clamscan -v -r --bell --move=/home/usuario/cuarentena --log=/var/log/clamav/clamav.log /media/win
+# clamscan -ri --remove /home/usuario  (escanea el directorio usuario, solo mostrando los infectados y los borra directamente)
+# clamscan -v -r -l test_clamav.txt  (revisa directorios y subdirectorios mostrando máxima información y manda el resultado a un archivo)
+# clamscan -v -r --bell --move=/home/usuario/cuarentena -l /var/log/clamav/clamav.log /media/win (aviso sonoro al detectar un virus, mandarlos a cuarentena y los logs en clamav.log)
 # sigtool --list-sigs > list (listado de virus y troyanos que detecta)
 # clamdtop (monitorear análisis con ncurses)
 # clamconf (muestra la configuración completa)
-Opciones:
-	-v (muestra la información)
-	-r  (revisa directorios y subdirectorios)
-	--bell  (aviso sonoro al detectar un virus)
-	--move  (confina los virus en el directorio especificado)
-	-l  (guarda los logs en el archivo especificado)
-	-i  (solo mostrará los archivos infectados)
-	-d  (arrancar en modo demonio)
-Archivo de logs: /var/log/clamav/clamav.log
-Configuración: /etc/clamav/clamd.conf
-Reconfigurar paquete: # dpkg-reconfigure clamav-base
+# dpkg-reconfigure clamav-base (reconfigurar paquete)
 1.-
+Para el archivo de configuración
+# cp /usr/share/doc/clamav-freshclam/examples/freshclam.conf.sample /etc/clamav/clamav.conf
+Y descomentar lo que se cree necesario.
+2.-
 Para asegurarse de que clamav y las definiciones estén instaladas correctamente, se puede escanear el archivo de prueba EICAR [una firma inofensiva sin código de virus]:
 $ curl https://secure.eicar.org/eicar.com.txt | clamscan -
 La salida debe incluir:
