@@ -1,4 +1,3 @@
-TRACTATUS ELEMENTALIS
 
 
 2ping
@@ -30972,6 +30971,16 @@ $ nano $HOME/.config/madonctl/madonctl.yaml
         instance: https://mastodon.social
 	login: "USERNAME"
 	password: "USERPASSWORD"
+
+
+madplay
+Reproductor de audio MPEG en punto fijo, basado en la librería MAD [libmad] por lo que funciona incluso en equipos sin FPU. MAD es un decodificador de audio MPEG. Su principal característica es que decodifica archivos MPEG, como MP3, usando aritmética de punto fijo, lo cual le permite funcionar en equipos que no tienen FPU [unidad de coma flotante], por ejemplo, computadoras antiguas o embebidas [las CPUs modernas generalmente incluyen la FPU].
+$ madplay song.mp3 (reproducir un archivo)
+$ madplay -v 0.5 song.mp3 (reproducir con menor volumen al 50%. El rango típico es de 0.0 [mute] a 1.0 [máximo volumen])
+$ madplay song.mp3 -o raw:archivo.wav (convertir un MP3 a archivo WAV)
+$ madplay cancion.mp3 --start=30 --stop=70 (reproducir solo una parte del archivo, desde el segundo 30 hasta el minuto 1:10)
+$ madplay archivo1.mp3 archivo2.mp3 archivo3.mp3 (reproduce los archivos en el orden que aparecen)
+$ madplay -v 0 cancion.mp3 (inicia el archivo completamente en silencio)
 
 
 magic-wormhole
