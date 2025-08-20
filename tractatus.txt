@@ -41560,6 +41560,21 @@ Ver la totalidad de acciones realizadas con el comando sudo
 4.-
 Significado de: %sudo ALL=(ALL:ALL) ALL
 Un % especifica que se trata de un grupo, en este caso el grupo sudo. ALL=(ALL) o ALL=(ALL:ALL) especifica que en cualquier host que pueda tener este archivo, sudo puede ejecutar cualquier comando. El ALL final especifica que sudo puede ejecutar esos comandos como cualquier usuario en el sistema.
+5.-
+Colocar entradas personalizadas en grub
+# nano /etc/grub.d/40_custom
+Añadir las lineas:
+        menuentry "Apagar el sistema" {
+                echo "Apagando el sistema..."
+                halt
+        }
+        #
+        menuentry "Reiniciar sistema" {
+                echo "Reiniciando el sistema..."
+                reboot
+        }
+# update-grub
+
 
 
 sudoedit
