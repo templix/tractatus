@@ -31051,6 +31051,17 @@ Opciones disponibles:
 	q (sale de mail)
 
 
+mail-expire
+Herramienta que escanea las carpetas de correo [archivos Maildir o mbox] en busca de mensajes con una antigüedad superior a la establecida y los mueve a otro archivo mbox [comprimido] o simplemente los elimina.
+$ mail-expire --delete --age=90 ~/Maildir/ (eliminar mensajes con más de 90 días en formato Maildir. Por defecto 30 dias)
+$ mail-expire --delete --age=12w ~/mbox (eliminar mensajes con más de 12 semana en formato mbox. --age=6m --> 6 meses, --age=2y --> 2 años)
+$ mail-expire --compress --age=180 --target=~/old-mail.mbox.gz ~/Maildir/ (mover correos de más de 180 días a un archivo comprimido)
+$ mail-expire --delete --age=90 --dry-run ~/Maildir/ (ver qué se eliminaría sin ejecutar realmente)
+$ mail-expire --delete --age=30 ~/Maildir/.Spam/ (procesar solo la carpeta de spam)
+$ mail-expire --delete --age=60 ~/Maildir/cur ~/Maildir/.Sent/ (procesar múltiples carpetas)
+$ mail-expire --delete --age=90 --max-size=1M ~/Maildir/ (eliminar correos antiguos y grandes >1MB)
+
+
 mailcap
 Se usa para definir cómo los programas manejan diferentes tipos de archivos MIME. Básicamente, utiliza un archivo de configuración, generalmente ubicado en /etc/mailcap o en el directorio del usuario, ~/.mailcap, para mapear tipos MIME a programas específicos que se deben utilizar para visualizar, editar o manipular esos archivos.
 $ cat /etc/mailcap (lista de qué programa debe ejecutarse cuando se encuentra un tipo MIME particular)
