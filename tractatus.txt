@@ -31097,6 +31097,31 @@ $ run-mailcap --action=view imagen.jpg (según lo que conste en el archivo de co
 $ see imagen.png
 
 
+maildir-utils
+Conjunto de utilidades para gestionar directorios de correo, específicamente la indexación y la búsqueda.
+$ mu index (escanea recursivamente una colección de mensajes de correo electrónico y almacena la información encontrada en una base de datos)
+$ mu find (busca mensajes según criterios de búsqueda)
+$ mu mkdir (crea un nuevo directorio de correo)
+$ mu add (añade mensajes específicos a la base de datos)
+$ mu cfind (busca contactos)
+$ mu extract (extrae archivos adjuntos y otros componentes MIME)
+$ mu info (muestra información sobre la base de datos mu)
+$ mu init (inicializa la base de datos mu)
+$ mu remove (eliminar mensajes específicos de la base de datos)
+$ mu server (iniciar un proceso de servidor para uso interno de mu4e)
+$ mu view (ver un mensaje específico)
+
+
+maildirsync
+Utilidad para sincronizar carpetas de Maildir entre ordenadores utilizando su propio protocolo que permite transferir solo los cambios necesarios, lo que hace que la sincronización sea eficiente y rápida y SSH como transporte.
+$ maildirsync /local/maildir1:/remote/maildir2 (sincronizar carpetas local y remota)
+$ ssh user@remote_host "maildirsync /local/maildir1:/remote/maildir2" (sincronizar con un sistemas remotos con SSH)
+$ maildirsync --only-read /local/maildir1:/remote/maildir2 (sincronizar solo los mensajes marcados como leídos [read])
+$ maildirsync --exclude=/.Trash /local/maildir1:/remote/maildir2 (excluir ciertos directorios durante la sincronización)
+$ maildirsync --verbose /local/maildir1:/remote/maildir2 (mostrar información detallada sobre la sincronización)
+Nota.- No funciona con otros formatos de correo electrónico como mbox o IMAP.
+
+
 mailutil
 Utilidades relacionadas con el correo
 $ mailutil transfer {imap.gmail.com/ssl/user=usuario@gmail.com} Gmail/ -v (hacer copia de seguridad de los correos de gmail)
