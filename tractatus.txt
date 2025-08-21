@@ -31062,13 +31062,20 @@ $ mail-expire --delete --age=60 ~/Maildir/cur ~/Maildir/.Sent/ (procesar múltip
 $ mail-expire --delete --age=90 --max-size=1M ~/Maildir/ (eliminar correos antiguos y grandes >1MB)
 
 
+mailagent
+Agente de entrega de correo [MDA] que puede archivar correos en carpetas específicas [MMDF y MH], reenviar mensajes a terceros, canalizarlos a comandos o publicarlos en grupos de noticias. Existen alternativas más avanzadas y seguras de filtrado o procesamiento, como procmail, maildrop, o filtros Sieve, que ofrecen controles de seguridad y menor superficie de ataque.
+
+
 mailcap
-Se usa para definir cómo los programas manejan diferentes tipos de archivos MIME. Básicamente, utiliza un archivo de configuración, generalmente ubicado en /etc/mailcap o en el directorio del usuario, ~/.mailcap, para mapear tipos MIME a programas específicos que se deben utilizar para visualizar, editar o manipular esos archivos.
-$ cat /etc/mailcap (lista de qué programa debe ejecutarse cuando se encuentra un tipo MIME particular)
+Asocia tipos de archivo MIME [Multipurpose Internet Mail Extensions] con los programas que pueden gestionarlos. Esto se hace a través de archivos de configuración del sistema (/etc/mailcap) y del usuario (~/.mailcap), donde se definen entradas que especifican comandos para acciones como ver, editar, imprimir o componer archivos de un tipo MIME específico. Incluye las aplicaciones, en este caso, alias al comando principal run-mailcap, pero con acciones predeterminadas: compose, edit, print, run-mailcap, see y update-mime
+Una entrada en /etc/mailcap tiene este formato:
+        text/plain; vim %s; needsterminal; test=command -v vim > /dev/null 2>&1
+Nota.- needsterminal indica que los comandos deben ejecutarse en una terminal interactiva. No es una prueba; es un requisito del entorno en el que se ejecutará el programa y, por lo general, provocará la creación de una ventana de terminal cuando no se ejecute en una terminal real ni en una ventana de terminal.
 Por ejemplo, supongamos que se quiere configurar el tipo MIME text/html para que se abra con el navegador de texto lynx:
 $ nano ~/.mailcap
 Y colocar la linea:
   text/html; lynx %s"
+# update-mime (actualiza el archivo de configuración despues de modificaciones)
 $ run-mailcap file.html (El sistema detectará que es un archivo text/html y lo abrirá con el programa asociado, en este caso lynx)
 Si quisiéramos abrir los pdf con evince:
 $ nano ~/.mailcap
@@ -31082,6 +31089,12 @@ $ nano ~/.mailcap
 Y poner la linea:
 image/jpeg; feh --auto-zoom --borderless %s
 $ run-mailcap --test (verificar que el archivo mailcap está correctamente configurado)
+$ compose archivo.txt (lo abrirá con vi si es el configurado)
+$ edit documento.txt (si mailcap tiene "text/plain; nano %s; edit", abrirá nano para editar el archivo)
+$ print informe.pdf (si mailcap tiene "application/pdf; evince -p %s; print", usará evince para imprimir)
+$ print nota.txt (podría ejecutar "lpr %s" directamente)
+$ run-mailcap --action=view imagen.jpg (según lo que conste en el archivo de configuración se abrirá con feh, imagemagic...)
+$ see imagen.png
 
 
 mailutil
