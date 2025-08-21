@@ -31097,6 +31097,15 @@ $ run-mailcap --action=view imagen.jpg (según lo que conste en el archivo de co
 $ see imagen.png
 
 
+mailcheck
+Herramienta que permite comprobar la existencia de nuevos mensajes en varios buzones tipo mbox y de tipo maildir, lo que garantiza la compatibilidad con la mayoría de los agentes de transporte de correo. También admite buzones remotos POP3 e IMAP.
+$ mailcheck /var/mail/usuario (imprimirá si tienes mensajes nuevos en ese archivo mbox)
+$ mailcheck /var/mail/usuario /home/usuario/mail/INBOX (comprobar varios buzones locales)
+$ mailcheck ~/Maildir (comprobar un buzón local tipo maildir)
+$ mailcheck imap://usuario:contraseña@imap.ejemplo.com/INBOX (comprobará la bandeja de entrada vía IMAP usando el usuario y la contraseña)
+$ mailcheck pop3://usuario:contraseña@pop3.ejemplo.com (comprobar correo remoto vía POP3)
+
+
 maildir-utils
 Conjunto de utilidades para gestionar directorios de correo, específicamente la indexación y la búsqueda.
 $ mu index (escanea recursivamente una colección de mensajes de correo electrónico y almacena la información encontrada en una base de datos)
