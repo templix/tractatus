@@ -31131,6 +31131,61 @@ $ maildirsync --verbose /local/maildir1:/remote/maildir2 (mostrar información d
 Nota.- No funciona con otros formatos de correo electrónico como mbox o IMAP.
 
 
+maildrop
+Es un agente de entrega de correo (MDA) que lee un mensaje de correo electrónico desde la entrada estándar y lo entrega a un buzón. Es particularmente útil para filtrar, clasificar y procesar correos antes de que lleguen a la bandeja de entrada, lo que te permite organizar el correo de forma automática y eficiente. Maildrop puede entregar correo tanto en formato mbox como maildir. Incluye las herramientas lockmail.maildrop, mailbot, maildirkw.maildrop, maildirmake.maildrop, maildirwatch, maildrop, makedat.maildrop, makedatprog, makemime, reformail, reformime y deliverquota.maildrop.
+Maildrop utiliza un archivo de reglas, similar a un script, para determinar qué hacer con los mensajes entrantes.
+$ maildrop -d usuario (lee un mensaje de correo desde la entrada estándar y lo entrega a un buzón. Si no se especifica en las reglas, al buzón predeterminado $HOME/Maildir)
+$ echo "Subject: Prueba\n\nEste es un correo de prueba" | maildrop -d usuario (Esto entrega un correo de prueba al buzón predeterminado del usuario usuario)
+$ lockmail /var/mail/usuario maildrop -d usuario (archivo o directorio donde se aplicará el bloqueo y comando a ejecutar mientras el buzón está bloqueado)
+$ mailbot -T reply -t archivo_respuesta -d base_datos -A 'From: correo@dominio.com' sendmail (respuesta automática, archivo con el contenido de la respuesta, base de datos, cabecera adicional para la respuesta y programa para enviar el correo )
+$ echo "Subject: Mensaje recibido\n\nGracias por tu correo." | mailbot -T reply -t /usr/share/auto_reply.txt -d autoresponsedb -A 'From: yo@dominio.com' /usr/sbin/sendmail -t (envía una respuesta automática al remitente del correo recibido, usando el contenido de /usr/share/auto_reply.txt)
+$ maildirkw $HOME/Maildir/IN.Important add importante (directorio donde se gestionan las palabras clave, acción [puede ser "add", "remove" o "list"] y añade "importante" a palabras clave)
+$ maildirmake -q 1000000S -f IN.Archivados $HOME/Maildir (crea un directorio maildir con una cuota de 1MB y la subcarpeta IN.Archivados)
+$ maildirwatch $HOME/Maildir (monitorea un directorio maildir para detectar cambios)
+$ makedat autoresponsedb (crea una base de datos GDBM para almacenar información, como registros de mensajes enviados o deduplicación)
+$ makedat -db base_datos (lo mismo con una base de datos Berkeley DB)
+$ makedatprog autoresponsedb (compila una base de datos autoresponsedb para uso con otras herramientas de maildrop)
+$ makemime -c "text/plain" -f mensaje.txt -o correo.mime (crea un mensaje MIME a partir de mensaje.txt y lo guarda en correo.mime)
+$ echo "Subject: Prueba\n\nMensaje" | reformail -f0 | maildrop -d usuario (Elimina líneas "From_" no válidas y entrega el mensaje al buzón de usuario)
+$ reformail -D 8000 duplicate.cache (si el mensaje ya está en duplicate.cache, reformail devuelve un código de salida 0, indicando un duplicado)
+$ reformime -e -s 1.1 < correo.mime > parte_extraida.txt (extrae la parte 1.1 de un mensaje MIME y la guarda en parte_extraida.txt)
+$ echo "Subject: Prueba\n\nMensaje con cuota" | deliverquota $HOME/Maildir (entrega el mensaje a $HOME/Maildir, respetando cualquier cuota configurada)
+Ejemplo de reglas básica de configuración
+$ nano ~/.maildrop
+        # Si el asunto del correo contiene la palabra "Spam" lo mueve a la carpeta Spam
+        if (/^Subject:.*[Spam]/)
+        {
+            to "$HOME/Maildir/.Spam"
+        }
+        # Busca una cabecera List-Id en el correo. Si encuentra el valor especificado,
+        # entrega el mensaje a la carpeta dev-team.
+        if (/^List-Id:.*<dev-team.example.com>/)
+        {
+            to "$HOME/Maildir/.listas/dev-team"
+        }
+        # Si el correo proviene de spammer@example.com, lo elimina
+        if (/^From:.*spammer@example.com/)
+        {
+            # elimina el correo
+            exit
+        }
+        # Mover el correo con score de spam alto a la carpeta Spam
+        if (/^X-Spam-Score:.*[5-9]|1[0-9]/)
+        {
+            to "$HOME/Maildir/.Spam"
+        }
+        # Reenviar el correo a 'otro-usuario@example.com'. Con reformail modifica el correo
+        # y lo pasa a sendmail para reenviarlo.
+        if (/^Subject:.*[Reenviar]/)
+        {
+            to "| /usr/bin/reformail -i $HOME/.forward | /usr/sbin/sendmail otro-usuario@example.com"
+        }
+        # Usar mailbot para enviar una respuesta automática
+        if (/^Subject:.*[Consulta]/)
+        {
+            to "| /usr/bin/mailbot -t -A -T -M 'Hola, hemos recibido su consulta y le responderemos en breve. Gracias.' -f 'no-reply@example.com' -- "
+
+
 mailutil
 Utilidades relacionadas con el correo
 $ mailutil transfer {imap.gmail.com/ssl/user=usuario@gmail.com} Gmail/ -v (hacer copia de seguridad de los correos de gmail)
