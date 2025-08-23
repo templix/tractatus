@@ -10067,7 +10067,7 @@ Crear el subdirectorio DEBIAN:
 En su interior el fichero “control”:
 	$ nano deb/DEBIAN/control
 En el que pegamos datos del paquete:
-Package: nombre_que_queremos
+Package: nombre-que-queremos
 Priority: optional
 Section: misc
 Maintainer: el_mantenedor
@@ -31965,8 +31965,9 @@ $ mkdir -m=rwx      (Especifica los permisos del directorio que se crea)
 $ mkdir -p -m=x /home/ct/videos/res/tot  (creará los nuevos directorios “videos”, “res” i “tot” y dará permisos de ejecución [x]  al usuario ct)
 $ mkdir -p ~/docs/{1,2,3} (creará docs en el directorio del usuario y dentro los directorios 1,2 y 3)
 $ mkdir -p project/{lib/ext,bin,src,doc/{html,info,pdf},demo/stat/a} (creación de varios directorios y subdirectorios)
-$ mkdir uno dos tres (crear directorios “uno”, “dos” y “tres”)
+$ mkdir uno dos tres (crear directorios "uno", "dos" y "tres")
 $ mkdir R{1..9} (Crear los directorios del R1 al R9)
+$ mkdir -p AA/{1,2/{a,b/{01,02},c},3,4} (crear directorios 1,2,3,4, en el interior del 2, a,b,c y en el interrior del 2/b, el 01 y 02)
 
 
 mkdosfs
