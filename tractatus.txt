@@ -31216,6 +31216,16 @@ $ mdmv --all INBOX archive ( mover todos los correos nuevos de la bandeja de ent
 $ notmuch-import-patch < un_parche.patch (importar un parche a la base de datos de Notmuch)
 
 
+mailtextbody
+Herramienta que extrae el cuerpo de texto de mensajes de correo electrónico, manejando tanto mensajes simples como complejos con múltiples partes MIME.
+$ mailtextbody < mensaje.eml (extraer texto de un correo simple)
+$ cat mensaje.eml | mailtextbody (desde un archivo)
+$ mailtextbody -t text/html < mensaje.eml (extraer solo texto/html)
+$ mailtextbody -t text/plain < mensaje_con_html.eml (extraer texto/plain, por defecto)
+$ mailtextbody < mensaje.eml > cuerpo_del_mensaje.txt (guardar en archivo)
+$ mailtextbody < mensaje.eml | grep -i "urgente" (buscar palabras específicas)
+
+
 mailutil
 Utilidades relacionadas con el correo
 $ mailutil transfer {imap.gmail.com/ssl/user=usuario@gmail.com} Gmail/ -v (hacer copia de seguridad de los correos de gmail)
