@@ -31203,6 +31203,19 @@ Demonio de filtrado de correo de propósito general que trabaja integrado con se
 # systemctl enable mailfromd
 
 
+mailscripts
+Colección de scripts para la gestión del correo electrónico en Debian. Incluye las herramientas email-extract-openpgp-certs, email-print-mime-structure, gmi2email, imap-dl, maildir-import-patch, mbox-extract-patch, mbox2maildir, mdmv, notmuch-extract-patch, notmuch-import-patch y notmuch-slurp-debbug.
+$ email-extract-openpgp-certs archivo.mbox > certificados.txt (escanear un buzón de correo en formato mbox y extraer los certificados OpenPGP)
+$ email-print-mime-structure mensaje.eml (ver la estructura MIME [Multipurpose Internet Mail Extensions] de un correo guardado en el archivo mensaje.eml)
+$ mbox2maildir buzon.mbox mi_mail_dir (convierte un buzón del formato mbox, un solo archivo que contiene todos los mensajes, al formato Maildir, cada mensaje es un archivo separado en una jerarquía de directorios)
+$ maildir-import-patch /ruta/maildir | git am (importar los parches de un directorio Maildir y aplicarlos y canalizar su salida al comando git am)
+$ mbox-extract-patch buzon.mbox > parches_extraidos.patch (similar a la herramienta anterior, esta herramienta extrae parches de un archivo mbox)
+$ gmi2email mi_documento.gmi > mi_correo.eml (convierte un documento Gemini, un protocolo de internet simple, a un formato de correo electrónico)
+$ imap-dl --host imap.ejemplo.com --user usuario --pass "micontraseña" /ruta/donde/guardar/correos (descarga correos electrónicos de un servidor IMAP)
+$ mdmv --all INBOX archive ( mover todos los correos nuevos de la bandeja de entrada a una carpeta de archivo)
+$ notmuch-import-patch < un_parche.patch (importar un parche a la base de datos de Notmuch)
+
+
 mailutil
 Utilidades relacionadas con el correo
 $ mailutil transfer {imap.gmail.com/ssl/user=usuario@gmail.com} Gmail/ -v (hacer copia de seguridad de los correos de gmail)
