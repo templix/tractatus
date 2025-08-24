@@ -31179,6 +31179,25 @@ $ nano ~/.maildrop
             to "| /usr/bin/mailbot -t -A -T -M 'Hola, hemos recibido su consulta y le responderemos en breve. Gracias.' -f 'no-reply@example.com' -- "
 
 
+mailfilter
+Utilidad que permite eliminar los mensajes no deseados sin tener que descargarlos al equipo local. Ofrece compatibilidad con una o varias cuentas POP3 y es especialmente útil para conexiones de acceso telefónico a través de módem, RDSI, etc. Solo soporta POP3.
+Ejemplo de configuración
+$ nano ~/.mailfilterrc
+        server "pop3.tuservidor.com"
+          username "usuario"
+          password "contraseña"
+          # Borra mensajes de ciertos remitentes
+          delete "From:.*correo@ejemplo.com"
+          delete "Subject:.*viagra"
+          # Borra mensajes por tamaño
+          delete-every >1000000
+        server "pop3.otroservidor.com
+          username "usuario"
+          ...
+delete "From:.*spam@spammer.com" borrará cualquier correo cuyo remitente coincida con esa expresión regular, "Subject:.*viagra" todos los que contengan la palabra mencionada en el encabezado y delete-every >1000000 borra los mensajes mayores de 1 MB
+$ mailfilter (conecta a la(s) cuenta(s) POP3 configuradas, analiza los correos y elimina los que coincidan con las reglas antes de descargar nada al cliente de correo)
+
+
 mailutil
 Utilidades relacionadas con el correo
 $ mailutil transfer {imap.gmail.com/ssl/user=usuario@gmail.com} Gmail/ -v (hacer copia de seguridad de los correos de gmail)
@@ -31967,7 +31986,7 @@ $ mkdir -p ~/docs/{1,2,3} (creará docs en el directorio del usuario y dentro lo
 $ mkdir -p project/{lib/ext,bin,src,doc/{html,info,pdf},demo/stat/a} (creación de varios directorios y subdirectorios)
 $ mkdir uno dos tres (crear directorios "uno", "dos" y "tres")
 $ mkdir R{1..9} (Crear los directorios del R1 al R9)
-$ mkdir -p AA/{1,2/{a,b/{01,02},c},3,4} (crear directorios 1,2,3,4, en el interior del 2, a,b,c y en el interrior del 2/b, el 01 y 02)
+$ mkdir -p AA/{1,2/{a,b/{01,02},c},3,4} (crear directorios 1,2,3,4, en el interior del 2, a,b,c y en el interior del 2/b, el 01 y 02)
 
 
 mkdosfs
