@@ -31198,6 +31198,11 @@ delete "From:.*spam@spammer.com" borrará cualquier correo cuyo remitente coinci
 $ mailfilter (conecta a la(s) cuenta(s) POP3 configuradas, analiza los correos y elimina los que coincidan con las reglas antes de descargar nada al cliente de correo)
 
 
+mailfromd
+Demonio de filtrado de correo de propósito general que trabaja integrado con servidores de correo como Sendmail, Postfix o MeTA1, funcionando junto al sistema MTA [Mail Transfer Agent]. Permite filtrar tanto mensajes entrantes como salientes usando reglas complejas basadas en scripts definidos por el administrador. Se integra con el servidor mediante los protocolos Milter o PMilter y ofrece funcionalidades avanzadas como verificación del remitente [sender address verification], greylisting, whitelisting y control de tasa de envío, además de admitir un lenguaje para crear filtros personalizables.
+# systemctl enable mailfromd
+
+
 mailutil
 Utilidades relacionadas con el correo
 $ mailutil transfer {imap.gmail.com/ssl/user=usuario@gmail.com} Gmail/ -v (hacer copia de seguridad de los correos de gmail)
