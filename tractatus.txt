@@ -31226,9 +31226,25 @@ $ mailtextbody < mensaje.eml > cuerpo_del_mensaje.txt (guardar en archivo)
 $ mailtextbody < mensaje.eml | grep -i "urgente" (buscar palabras específicas)
 
 
-mailutil
-Utilidades relacionadas con el correo
-$ mailutil transfer {imap.gmail.com/ssl/user=usuario@gmail.com} Gmail/ -v (hacer copia de seguridad de los correos de gmail)
+mailutils
+Colección de utilidades para gestionar y manipular correo electrónico independiente del protocolo de correo [POP3, IMAP, mbox, Maildir, MH, etc.]. Contiene las herramientas dotlock, frm, from, mail, messages, mimeview, movemail, readmsg y sieve.
+$ echo "Hola, esto es un mensaje de prueba" | mail -s "Asunto" usuario@dominio.com (enviar un correo)
+$ mail (leer correos nuevos. Dentro del programa, se puede usar comandos como ? para ayuda, d para borrar, q para salir, etc.)
+$ from (muestra el remitente de los mensajes nuevos en el buzón)
+$ frm (lista los mensajes del buzón mostrando remitente y asunto)
+$ messages (cuenta el número de mensajes nuevos en el buzón)
+$ readmsg +1 (muestra el primer mensaje del buzón)
+$ movemail /var/mail/usuario /home/usuario/backup.mbox (mueve los mensajes del buzón del sistema a un archivo local)
+$ dotlock /var/mail/usuario (bloquea un archivo de buzón. Devuelve 0 si el bloqueo fue exitoso)
+$ mimeview -a /var/mail/usuario (muestra el contenido y estructura MIME del buzón)
+$ sieve -u usuario -a script.sieve (filtra mensajes usando el lenguaje de filtrado Sieve)
+Configuración básica con la información del servidor de correo y credenciales si es necesario.
+$ nano ~/.mailrc
+        set from=tu_correo@dominio.com
+        set smtp=smtp.dominio.com
+        set smtp-auth-user=tu_usuario
+        set smtp-auth-password=tu_contraseña
+        set smtp-auth=login
 
 
 mailx
@@ -31241,9 +31257,11 @@ $ mailx -s "un adjunto" usuario@gmail.com < texto_para_enviar.txt (enviar un adj
 
 
 maim
-Capturas de pantalla del escritorio.
-$ maim captura.png (forma básica)
-$ maim --select captura.png (seleccionar región)
+[MAke IMage] toma capturas de pantalla del escritorio.
+$ maim imagen.png (toma imagen del escritorio y la guarda en imagen.png)
+$ maim -u -d 4 -f jpeg imagen (imagen si mostrar el cursor, 4 segundos de retardo, y guardar "imagen" en jpeg)
+$ maim ~/Images/$(date +"%A,%d-%m-%Y").png (guardar la imagen en el directorio Images y con nombre con el formato de fecha especificado)
+$ maim -s -f png -d 3 imagen (el cursor de convierte en cruz para seleccionar un trozo de pantalla, en formato png, esperar 3 segundos despues de terminar la seleción y guardar en imagen)
 
 
 maint-guide
