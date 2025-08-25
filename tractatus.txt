@@ -42518,6 +42518,45 @@ $ tempfile -p 4463 (lo crea con un prefijo especificado. El resultado es parecid
 $ tempfile -s nota (lo crea con un sufijo especificado. El resualtado es parecido a /tmp/fileKpYlf4nota)
 
 
+term
+[$TERM]. La variable de entorno $TERM no dice qué emulador de terminal se usa [sakura, lxterminal, etc.], sino qué tipo de terminal lógico se está emulando, es decir: le dice al sistema qué capacidades gráficas y de control puede esperar la terminal [¿Soporta colores? ¿Cuántos?, ¿Mueve el cursor con códigos ANSI?, ¿Entiende secuencias para limpiar la pantalla o resaltar texto?]. Los emuladores de terminal [sakura, lxterminal, terminator, guake, etc.] emulan un terminal clásico de hardware, la mayoría compatible con xterm, un estandar de facto que soporta colores extendidos [xterm-256color] y entiende casi todas las secuencias ANSI modernas.
+$ infocmp xterm-256color (lista enorme de las capacidades del tipo especificado)
+Algunos valores que se puede encontrar en la variable $TERM:
+        xterm --> un terminal tipo xterm clásico, 16 colores.
+        xterm-256color --> lo mismo, pero con 256 colores.
+        linux --> la consola virtual de Linux (Ctrl+Alt+F1..F6). 16 colores.
+        vt100, vt220 --> terminales físicos DEC muy populares en los 80. 8/16 colores.
+        ansi --> soporte básico de secuencias ANSI. 8/16 colores.
+        screen-256color --> cuando se está dentro de screen. 256 colores.
+        tmux-256color --> cuando se está dentro de tmux. 256 colores.
+        dumb --> terminal mínima sin colores ni control, solo texto plano. 0 colores ni control del cursor).
+Para comprobar las diferencias:
+$ tput colors (comprobar colores. Ver tput)
+$ export TERM_OLD=$TERM (guarda el valor actual)
+$ export TERM=dumb (probar con dumb)
+$ tput colors (comprobar la diferencia)
+$ echo $TERM (comprobar el cambio)
+$ export TERM=$TERM_OLD (regresar a la normalidad)
+Nota.- Muchos programas no miran la variable $TERM, miran $COLORTERM si está en "truecolor"
+$ echo $COLORTERM
+$ export COLORTERM=truecolor (si no estuviera en truecolor)
+$ tput colors (si marca 256, correcto)
+1.-
+Configurar tmux para 256 colores
+$ nano ~/.tmux.conf
+Añadir las lineas
+        set -g default-terminal "tmux-256color"
+        set -ga terminal-overrides ",xterm-256color:RGB"
+2.-
+Configurar screen para 256 colores
+$ nano ~/.screenrc
+$ screen -T screen-256color
+Añadir la linea
+        term screen-256color
+O lanzar
+$ screen -T screen-256color
+
+
 termdebug
 Utilidades que ayudan a grabar, reproducir y comparar sesiones interactivas en la terminal. Incluye las aplicaciones: tdcompare, tdrecord, tdreplay, tdrerecord y tdview.
 $ tdrecord salida (iniciará la grabación de la sesión de terminal y almacenará los comandos ejecutados y las salidas en "salida")
@@ -43183,6 +43222,10 @@ $ tput cnorm (Lo vuelve visible)
 $ tput sgr0 (vuelve la terminal a los parámetros por defecto)
 $ tput smcup (Borra el contenido de la terminal guardandolo)
 $ tput rmcup (Restablece el contenido de la terminal borrado con el comando anterior)
+$ tput colors (colores admitidos en la terminal)
+$ tput bold (activar negrita)
+$ tput setaf 1 (foreground rojo si la term lo soporta)
+$ tput setab 4 (background azul
 
 
 tr
@@ -44845,7 +44888,7 @@ Modificar parte de una variable:
 Algunas de la variables globales:
 	$HOME  (ruta del directorio home del usuario)
 	$PATH    (directorios donde se encuentran los ejecutables)
-	$TERM    (nombre de la terminal)
+	$TERM    (tipo de la terminal)
 	$BASH    (ruta del interprete bash )
 	$PWD      (directorio actual)
 	$USER     (Usuario)
