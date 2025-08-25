@@ -31268,6 +31268,19 @@ maint-guide
 Este paquete contiene la Guía para nuevos mantenedores de Debian. Este documento intenta describir la construcción de un paquete Debian para usuarios comunes y potenciales de Debian. Utiliza un lenguaje bastante no técnico y está bien cubierto con ejemplos prácticos. En el navegador abrir la url /usr/share/doc/maint-guide-ca/html/index.ca.html
 
 
+make
+[Ver compilar]. Herramienta que automatiza la compilación y construcción de archivos ejecutables a partir del código fuente, siguiendo las reglas definidas en el archivo makefile en el directorio actual.
+Un ejemplo podría ser:
+$ nano HolaMundo.c
+#include <stdio.h>
+int main(){ printf("Hola mundo\n"); return 0; }
+$ nano makefile
+HolaMundo: HolaMundo.c
+	gcc -o HolaMundo HolaMundo.c
+$ make (Generará el ejecutable HolaMundo)
+$ ./HolaMundo (lanzar el ejecutable)
+
+
 makeinfo
 Compilar archivos texinfo a distintos formatos.
 $ makeinfo --html archivo.texi (a html)
@@ -43225,7 +43238,7 @@ $ tput rmcup (Restablece el contenido de la terminal borrado con el comando ante
 $ tput colors (colores admitidos en la terminal)
 $ tput bold (activar negrita)
 $ tput setaf 1 (foreground rojo si la term lo soporta)
-$ tput setab 4 (background azul
+$ tput setab 4 (background azul)
 
 
 tr
