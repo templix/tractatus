@@ -29169,9 +29169,10 @@ liquidprompt
 Ofrece un promt modificado con información y coloreado.
 $ source /usr/share/liquidprompt/liquidprompt (activarlo al momento de instalar)
 $ liquidprompt_activate (crea entrada en .bashrc)
-$ liquidprompt_on (activarlo)
-$ liquidprompt_off (desactivarlo)
-$ lp_theme --list (listado de temas)
+$ liquidprompt_on (activa liquidprompt para este shell)
+$ liquidprompt_off (lo desactiva)
+$ liquidprompt_tag marca (etiqueta el shell actual con liquidprompt)
+$ liquidprompt_OFF (dejar el prompt vacio solo con el simbolo $)
 
 
 lirc
@@ -41243,6 +41244,43 @@ Y colocar el texto:
 	El cuerpo de texto del correo
 	Hasta la proxima.
 Ctrl+d para terminar. Cuando vuelva a salir el prompt del sistema es que el mensaje ya se ha enviado.
+
+
+ssshtest
+Pruebas de bash sencillas y estúpidas. ssshtest es una serie de funciones de bash que facilitan la ejecución de pruebas de bash. Incluye funciones para comprobar la igualdad, determinar si una cadena está en la salida estándar (stdout), no en la salida estándar (stdout) o en la salida estándar (stderr). El proceso puede mostrarse con ejemplo de uso:
+$ nano tests.sh
+        #!/bin/bash
+        #
+        source ssshtest
+        # Si "linux" stá en la salida:
+        run test_in_stdout bash -c "echo 'linux es un sistema genial'"
+        assert_in_stdout "linux"
+        # si no existe salida de error
+        run test_no_stderr bash -c "echo 'linux es un sistema genial'"
+        assert_no_stderr
+        # si muestra salida de error
+        run test_stderr bash -c "hjdfhalsdf"
+        assert_stderr
+        # si la salida muestra "Usage"
+        run test_in_stderr bash -c "ip s"
+        assert_in_stderr "Usage"
+        # comprobar que no existe salida
+        run test_no_stdout bash -c "echo"
+        assert_no_stdout
+        # ver si en la salida sale "debian"
+        run test_in_stderr bash -c "ip s"
+        assert_no_stdout "debian"
+        # si en una entrada existe error
+        run test_in_stdout bash -c "ehrjqk"
+        assert_stderr
+        # si el código de salida es "0" [correcto]
+        run test_in_stdout bash -c "echo 'linux es un sistema genial'"
+        assert_exit_code "0"
+        # Si la variable $USER es pep [sustituir por quien proceda]
+        run test_in_stdout bash -c "echo $USER"
+        assert_equal "pep" "$USER"
+$ chmod +x tests.sh
+$ ./ tests.sh
 
 
 sswap
