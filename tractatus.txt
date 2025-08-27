@@ -31301,6 +31301,31 @@ Script para automatizar la construcción de paquetes para Archlinux.
 # makepkg --asroot -g paquete (Muestra el md5sum)
 
 
+makeself
+Herramienta de empaquetado que permite crear archivos autoextraíbles en sistemas Unix/Linux. Estos archivos son scripts de shell ejecutables que contienen en su interior un directorio comprimido como un archivo .tar.gz, .tar.bz2, etc. más un pequeño código que permite descomprimir automáticamente el contenido en un directorio temporal, ejecutar un comando [por ejemplo, ./install.sh] y eliminar los archivos temporales al finalizar.
+Ilustrar el comando con un ejemplo de guardar el directorio y subdirectorios ~/Docs/bash y que cuando se descomprima que ejecute el script mis_docs.sh.
+$ nano mis_docs.sh
+        #!/bin/bash
+        echo "documentos guardados"
+$ makeself --bzip2 --notemp ~/docs/bash/ ~/pruebas/bash.run "documentos bash" ~/bin/mis_docs.sh (creará el ejecutable bash.run en ~/pruebas y en su interior el directorio bash/ comprimido en bzip2, sin eliminar los archivos temporales, con el título especificado y el ejecutable mis_docs.sh)
+        ...
+        CRC: 2686987911
+        MD5: e7250a45419e2cb52bc200b674314b56
+        Self-extractable archive "/home/pep/pruebas/bash.run" successfully created.
+Nota.- Si no se especifican rutas absolutas tanto el directorio que se comprime, el script.sh que se ejecuta cuando se descomprime y el resultdo .run, todo tiene que estar o aparece en el directorio activo.
+$ chmod +x bash.run (permiso de ejecución)
+$ ~/pruebas/bash.run --target /tmp/extracted --noexec (Para ver el contenido en /tmp/extracted)
+        Creating directory /tmp/extracted
+        Verifying archive integrity...  100%   MD5 checksums are OK. All good.
+        Uncompressing documentos bash 100%
+$ ./bash.run (Al ejecutar se creará el arbol de directorios que se creó originalmente en el propio directorio o en el equipo donde se copie el .run)
+        Creating directory bash
+        Verifying archive integrity...  100%   MD5 checksums are OK. All good.
+        Uncompressing documents de bash per guardar  100%
+        documentos guardados
+        $
+
+
 maldet
 Detector de malware.
 # maldet -a /home/usuario
