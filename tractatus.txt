@@ -31351,6 +31351,28 @@ $ makeinfo --html archivo.texi (a html)
 $ makeinfo --pdf archivo.texi
 
 
+makeparallel
+Utilidad diseñada para optimizar la ejecución de tareas en paralelo con GNU make, especialmente en entornos donde varios procesos de compilación o construcción pueden competir por recursos. Su función principal es coordinar el número de trabajos paralelos [-j] que cada instancia de make puede ejecutar, evitando la sobrecarga del sistema y mejorando la eficiencia.
+$ make --jobserver-auth=3,4 -j4 (un proyecto con varios subdirectorios, cada uno con su propio Makefile, para compilarlo todo en paralelo, pero sin saturar la CPU, crea un servidor de trabajos que permite hasta 4 trabajos en paralelo)
+$ makeparallel --jobserver-auth=3,4 make (en cada subdirectorio, en lugar de ejecutar make -j4, makeparallel se comunicará con el servidor de trabajos, reclamará los disponibles y ejecutará make con el número de trabajos asignados)
+Ejemplo práctico con un propyecto con la estructura:
+proyecto/
+├── Makefile
+├── modulo1/
+│   └── Makefile
+├── modulo2/
+│   └── Makefile
+└── modulo3/
+    └── Makefile
+Compilar todo en paralelo, pero sin exceder 4 trabajos en total. Primer paso iniciar el servidor de trabajos
+$ make --jobserver-auth=3,4 -j4
+A continuación compilar cada módulo
+$ cd modulo1 && makeparallel --jobserver-auth=3,4 make
+$ cd modulo2 && makeparallel --jobserver-auth=3,4 make
+$ cd modulo3 && makeparallel --jobserver-auth=3,4 make
+Cada makeparallel reclamará trabajos disponibles y ejecutará make con el número de trabajos asignados, sin exceder el límite global de 4.
+
+
 makepasswd
 Crea contraseñas aleatorias usando /dev/urandom.
 $ makepasswd --count=5 --chars=12 (5 y de 12 caracteres)
