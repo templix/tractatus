@@ -31269,6 +31269,43 @@ maint-guide
 Este paquete contiene la Guía para nuevos mantenedores de Debian. Este documento intenta describir la construcción de un paquete Debian para usuarios comunes y potenciales de Debian. Utiliza un lenguaje bastante no técnico y está bien cubierto con ejemplos prácticos. En el navegador abrir la url /usr/share/doc/maint-guide-ca/html/index.ca.html
 
 
+mairix
+Programa para indexar y buscar mensajes de correo electrónico almacenados sin conexión en el ordenador. Crea primero un índice con el contenido de los correos electrónicos para hacer las búsquedas posteriores mucho más rápidas. Trabaja directamente sobre los archivos locales de correo, por lo que es especialmente útil para quienes gestionan sus correos offline usando clientes como mutt, neomutt, o similares.
+$ mairix (escaneará los correos y creará el índice)
+$ mairix f:ejemplo@correo.com (buscar todos los mensajes enviados por una persona)
+$ mairix s:factura (buscar todos los correos que en el asunto contienen la palabra “factura”)
+$ mairix b:reunión (buscar todos los mensajes que contengan la palabra "reunión" en el cuerpo del mensaje)
+$ mairix d:2025-08-01..2025-08-15 (buscar mensajes recibidos entre el 1 y el 15 de agosto de 2025. Formato YYYY-MM-DD)
+Ejemplo de archivo de configuración
+$ nano ~/.mairixrc
+        # Directorio base donde se almacenan los correos
+        base=/home/usuario/Mail
+        # Los directorios de correo a indexar (pueden ser varios)
+        maildir=Inbox
+        maildir=Sent
+        maildir=Archive/2023
+        # Formato del maildir; usar maildir para el formato Maildir, mbox si es mbox tradicional
+        maildir_type=maildir
+        # Carpeta donde se guardarán los resultados de las búsquedas
+        database=/home/usuario/.mairix_db
+        # Carpeta donde se mostrarán los resultados como symlinks a los mails reales
+        results=Results
+        # Patrón de fecha para indexar solo correos a partir de 2023
+        from=2023
+        # Se puede añadir más patrones según necesidades
+        # Por ejemplo, para solo indexar correos con un determinado "From"
+        pattern=from:ejemplo@dominio.com
+        # Excluir carpetas que no se quiere indexar (opcional)
+        not_maildir=Spam
+        not_maildir=Trash
+base --> Directorio raíz con las carpetas de correo.
+maildir --> Lista cada carpeta de correo a indexar. Se pueden poner tantas líneas como se necesiten.
+maildir_type --> Define el formato, generalmente maildir.
+results --> Carpeta donde mairix crea enlaces simbólicos a los correos encontrados.
+from --> Restringe el filtrado por fecha mínima al indexar [opcional].
+not_maildir --> Carpeta(s) de correo a excluir del índice [opcional].
+
+
 make
 [Ver compilar]. Herramienta que automatiza la compilación y construcción de archivos ejecutables a partir del código fuente, siguiendo las reglas definidas en el archivo makefile en el directorio actual.
 Un ejemplo podría ser:
