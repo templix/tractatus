@@ -31339,6 +31339,12 @@ Sumar para combinar exclusiones:
 $ crash /usr/lib/debug/boot/vmlinux-$(uname -r) /var/crash/dumpfile.20250405 (analizar un volcado existente. Ver crash)
 
 
+makefs
+Herramienta utilizada para crear imágenes de sistemas de archivos a partir de un árbol de directorios existente. El uso más común es para crear imágenes de sistemas de archivos de tipo CD9660, también conocido como ISO 9660, que es el estándar para discos compactos de datos y para crear imágenes de sistemas de archivos FFS  [Fast File System], un sistema de archivos tradicional de Unix.
+$ makefs -t cd9660 proyecto.iso proyecto/ (creará el archivo mi_proyecto.iso, que es una imagen de disco con formato CD9660. Esta imagen ya está lista para ser grabada en un CD o montada como un disco virtual)
+$ makefs -t ffs -s 512M mi_ffs_disco.img mi_directorio (crear una imagen de un sistema de archivos FFS para usarla como un disco virtual en una máquina virtual con un tamaño de la imagen en 512 Megabytes)
+
+
 makeinfo
 Compilar archivos texinfo a distintos formatos.
 $ makeinfo --html archivo.texi (a html)
