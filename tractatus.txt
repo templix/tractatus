@@ -31379,6 +31379,16 @@ $ makepasswd --count=5 --chars=12 (5 y de 12 caracteres)
 $ makepasswd --count=5 --chars=12 --count=5 --crypt (y cifrar el resultado de cada una de ellas. Otra opcion es crypt-md5)
 
 
+makepatch
+Se utiliza para crear un archivo de parche [patch] que representa las diferencias entre dos árboles de código fuente. Es una herramienta muy útil para compartir cambios específicos sin tener que distribuir todo el repositorio. La herramienta applypatch, incluida en el comando, es la contraparte de makepatch y se encarga de aplicar ese archivo de parche a otro árbol de código fuente.
+Un ejemplo para ilustrar su uso
+Supongamos que tenemos una versión original de un proyecto llamada proyecto-v1 y hemos creado una versión modificada llamada proyecto-v2.
+$ makepatch proyecto-v1 proyecto-v2 > mis-cambios.patch (crear el archivo de parche que contiene las diferencias entre proyecto-v1 y proyecto-v2)
+Si en otro equipo se tiene la versión original del proyecto y, estando en el mismo directorio del proyecto, se quiere aplicar los cambios:
+$ applypatch mis-cambios.patch (aplicar los cambios en el otro equipo para que sean idénticos a los del árbol de código fuente proyecto-v2 del primer equipo)
+makepatch crea el parche y applypatch lo aplica, facilitando la gestión de cambios en el código de forma incremental.
+
+
 makepkg
 Script para automatizar la construcción de paquetes para Archlinux.
 # makepkg --asroot (Lanzado en el interior del directorio donde se encuentra el PKGBUILD, crea el paquete .pkg.tar.xz, instalable con pacman -U)
