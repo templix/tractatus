@@ -31421,6 +31421,13 @@ $ ./bash.run (Al ejecutar se creará el arbol de directorios que se creó origin
         $
 
 
+makexvpics
+Herramienta específica para crear y actualizar miniaturas [thumbnails] compatibles con los visores XV, zgv y xzgv. Estas miniaturas son incompatibles** con los formatos usados por GNOME [Nautilus] y KDE [Konqueror], que requieren sus propias herramientas. Incluye la aplicación ppmtoxvmini es un programa que convierte archivos PPM sin procesar al formato especial utilizado por xv, zgv y otras herramientas. Según la descripción de debian, no debe ejecutarse directamente y en su lugar, utilizar la herramienta makexvpics.
+$ makexvpics -f -v imagenes/* (crea miniaturas para todas las imágenes en el directorio especificado y las almacena en imagenes/.xvpics)
+$ makexvpics -f -v imagen.jpg (fuerza la creación de la minuatura, muestra información y la almacena en el directorio .xvpics)
+Nota.- Para visualizarlas con la aplicación feh o imagemagic
+
+
 maldet
 Detector de malware.
 # maldet -a /home/usuario
