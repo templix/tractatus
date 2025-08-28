@@ -31276,6 +31276,7 @@ $ mairix f:ejemplo@correo.com (buscar todos los mensajes enviados por una person
 $ mairix s:factura (buscar todos los correos que en el asunto contienen la palabra “factura”)
 $ mairix b:reunión (buscar todos los mensajes que contengan la palabra "reunión" en el cuerpo del mensaje)
 $ mairix d:2025-08-01..2025-08-15 (buscar mensajes recibidos entre el 1 y el 15 de agosto de 2025. Formato YYYY-MM-DD)
+$ mairix f:ana@dominio.com d:2024-06-01..2024-06-30 s:informe (encontrar todos los correos enviados por ana@dominio.com durante junio de 2024 cuyo asunto contiene informe)
 Ejemplo de archivo de configuración
 $ nano ~/.mairixrc
         # Directorio base donde se almacenan los correos
@@ -31317,6 +31318,25 @@ HolaMundo: HolaMundo.c
 	gcc -o HolaMundo HolaMundo.c
 $ make (Generará el ejecutable HolaMundo)
 $ ./HolaMundo (lanzar el ejecutable)
+
+
+makedumpfile
+Herramienta para crear imágenes de volcado de memoria [memory dumps] optimizados, eliminando información innecesaria como páginas de memoria libre, caché, etc, especialmente en escenarios de análisis de fallos del sistema como crash dumps del kernel. Se utiliza comúnmente junto con kdump [ver], el mecanismo de volcado de memoria del kernel en Linux. y obtiene los datos de /proc/vmcore, generado después de un kernel panic cuando kdump está activado y /dev/mem acceso directo a la memoria física, menos común hoy por razones de seguridad.
+# makedumpfile -c -d 31 /proc/vmcore /var/crash/dumpfile.20250405 (comprime el volcado usando zlib, páginas a excluir, volcado completo del kernel y archivo de salida)
+# makedumpfile -c -d 31 --encrypt --keyfile /etc/dumpkey /proc/vmcore /var/crash/secure_dump (Crear un volcado con encriptación especificando el archivo con la clave)
+La clave con 16 bytes se puede generar:
+$ dd if=/dev/urandom of=/etc/dumpkey bs=1 count=16
+Las opciones de filtrado de las páginas a excluir [-d] se basa en la siguiente numeración:
+1 -->  Páginas libres
+2 -->  Páginas de caché de archivo
+4 -->  Páginas de caché de slab
+8 -->  Páginas de usuarios no presentes
+16-->  Páginas de kernel no presentes
+Sumar para combinar exclusiones:
+1+2+4+8+16=31 --> [-d 31] excluye todo lo anterior.
+8+16=24 --> [-d 24] excluye usuarios y kernel no presentes.
+1+2+4=7 --> [-d 7] excluye páginas libres, caché y slab.
+$ crash /usr/lib/debug/boot/vmlinux-$(uname -r) /var/crash/dumpfile.20250405 (analizar un volcado existente. Ver crash)
 
 
 makeinfo
