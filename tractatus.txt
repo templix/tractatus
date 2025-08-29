@@ -31554,6 +31554,17 @@ mariadb-client
 > describe mitabla (ver estructura de una tabla)
 
 
+mariadb-test
+[mariadb-test-data]. Conjunto de pruebas de regresión de bases de datos MariaDB. Estas pruebas están diseñadas para verificar que el servidor MariaDB funcione correctamente y no se han roto funcionalidades, después de cambios en el código, actualizaciones, parches o configuraciones específicas. Incluye las herramientas mariadb-client-test, mariadb-client-test-embedded, mariadb-test [=mysqltest], mariadb-test-embedded, mysql_client_test, mysql_client_test_embedded, mysqltest_embedded y test-connect-t y en el directorio /usr/share/mariadb-test o /usr/share/mariadb/mariadb-test/, según versiones, se encuentran test de pruebas.
+$ cd /usr/share/mariadb/mariadb-test/
+# ./mysql-test-run.pl (forma más recomendada de ejecutar la suite de pruebas de regresión completa)
+# ./mariadb-stress-test.pl --threads=10 --queries=1000 (pruebas de carga y estrés. Iniciaría un test de estrés con 10 hilos simultáneos y ejecutaría 1000 consultas)
+# ./mysql-test-run.pl --suite=innodb (solo probar las pruebas relacionadas con el motor InnoDB)
+# ./mysql-test-run.pl main.alter_table (probar solo un archivo de prueba específico)
+# ./mysql-test-run.pl --test-file=rpl.test (probar una funcionalidad concreta)
+Después de ejecutar las pruebas, el resumen con el número de pruebas pasadas/fallidas se encuentran en el directorio /usr/share/mysql/mysql-test/
+
+
 markdown
 Lenguaje orientado a la escritura de documentos de manera que sean fáciles de escribir y leer directamente en texto plano convirtiéndolos en documentos XHTML bien formados. La aplicación retext permite eleborar textos en markdown y visualizarlos en tiempo real.
 Sintaxis elemental [las referencias son respecto de html]:
