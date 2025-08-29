@@ -31533,6 +31533,16 @@ Teclas:
 Nota.- Tambien puede ejecutarse en una terminal sin instalar nada tecleando: telnet mapscii.me y usando las mismas teclas.
 
 
+mariadb-backup
+Herramienta de copia de seguridad para el servidor MariaDB.
+$ mariadb-backup --backup --target-dir=/var/mariadb/backup/ --user=mariadb-backup --password=mypassword  (que realice una copia de seguridad, dónde colocarla y los datos el usuario)
+$ mariadb-backup --prepare --target-dir=/var/mariadb/backup/ (Antes de restaurar desde una copia de seguridad, primero preparar para que los archivos de datos sean consistentes)
+$ mariadb-backup --copy-back --target-dir=/var/mariadb/backup/ (restaurar la copia de seguridad conservando los archivos de copia de seguridad originales)
+$ mariadb-backup --move-back --target-dir=/var/mariadb/backup/ (restaurar la copia de seguridad sin conservar los archivos de copia de seguridad originales)
+Nota.- Antes de restaurar, detener el proceso del servidor MariaDB y asegurarse de que el directorio de datos está vacío.
+$ chown -R mysql:mysql /var/lib/mysql/ (después de restaurar una copia de seguridad, podría ser necesario ajustar el propietario del directorio de datos para que coincida con el usuario y el grupo del servidor MariaDB)
+
+
 mariadb-client
 [mariadb-server]. Utilidad para gestionar el cliente y el servidor de bases de datos MariaDB. MariaDB es un servidor de bases de datos SQL [Structured Query Language] compatible con MySQL, rápido, estable y multiusuario con múltiples subprocesos.
 # systemctl enable mariadb (activar el servicio en el servidor)
