@@ -31533,6 +31533,17 @@ Teclas:
 Nota.- Tambien puede ejecutarse en una terminal sin instalar nada tecleando: telnet mapscii.me y usando las mismas teclas.
 
 
+mariadb-client
+[mariadb-server]. Utilidad para gestionar el cliente y el servidor de bases de datos MariaDB. MariaDB es un servidor de bases de datos SQL [Structured Query Language] compatible con MySQL, rápido, estable y multiusuario con múltiples subprocesos.
+# systemctl enable mariadb (activar el servicio en el servidor)
+# mysql_secure_installation (permite fijar contraseñas, eliminar usuarios anónimos y bloquear accesos inseguros)
+# mysql -u usuario -p (conectarse al servidor local o remoto tras ingresar la contraseña, aparecerá el prompt de MariaDB para ejecutar comandos SQL)
+> show databases; (listar bases de datos)
+> use mibasedatos (seleccioanr una base de datos)
+> show tables (listar tablas de la base de datos seleccionada)
+> describe mitabla (ver estructura de una tabla)
+
+
 markdown
 Lenguaje orientado a la escritura de documentos de manera que sean fáciles de escribir y leer directamente en texto plano convirtiéndolos en documentos XHTML bien formados. La aplicación retext permite eleborar textos en markdown y visualizarlos en tiempo real.
 Sintaxis elemental [las referencias son respecto de html]:
