@@ -31612,6 +31612,15 @@ Notas: Cada signo afecta hasta el primer salto de linea. Un bloque HTML ha de es
 	<img class="[clases asignadas]" src="/ruta/a/la/imagen" title="[ancho] [alto] [el title [alt de la imagen]]" > (Colocar una imagen)
 
 
+markdownlint
+verifica la consistencia sintáctica de un archivo Markdown individual o de un directorio de archivos Markdown. En su informe a la CLI, la implementación basada en Ruby indica las líneas con problemas identificados y cómo solucionarlos.
+$ mdl -l (listado de las reglas)
+$ mdl -r MD001,MD004,MD013,MD032 -l (Enumerar los objetivos de las reglas MD001, MD004, MD013 y MD032)
+$ mdl -r MD001,MD004 README.md (solo aplicar las reglas especificadas)
+$ mdl README.md (aplicar todas las reglas disponibles
+$ mdl -r ~MD001,~MD004,~MD032 README.md (examinar el archivo según todas las reglas disponibles excepto MD001, MD004 y MD032)
+
+
 masscan
 Escaner de puertos. Produce resultados similares a "Nmap". Tiene permanentemente activada las siguientes opciones: "-sS" realiza un escaneo de tipo TCP SYN, "-Pn" trata todos los hosts como si estuviesen en funcionamiento, "-n" no hace una resolución al DNS, "--randomize-hosts" aplica aleatoriedad al orden de los host a escanear, "-v" genera verbosidad y la opción "--send-eth" utiliza para el envío paquetes ethernet en bruto.
 # masscan --regress (autotest integrado)
