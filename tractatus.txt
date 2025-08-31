@@ -31568,14 +31568,14 @@ Después de ejecutar las pruebas, el resumen con el número de pruebas pasadas/f
 marisa
 [Matching Algorithm with Recursively Implemented StorAge]. Utilidades** que sirven para interactuar con la librería libmarisa. Esa librería implementa un trie comprimido y estático, muy usado en búsquedas rápidas de cadenas, diccionarios y autocompletado. Un trie es una estructura de datos tipo árbol diseñada para manejar colecciones de cadenas y marisa es una implementación optimizada de tries muy usado, por ejemplo, en motores de búsqueda, correctores ortográficos, autocompletado y análisis de texto. Incluye las herramientas marisa-benchmark, marisa-build, marisa-common-prefix-search, marisa-dump, marisa-lookup, marisa-predictive-search y marisa-reverse-lookup.
 Un ejemplo sería guardar "casa", "caso" y "canto". En un array normal ocuparía memoria redundante, pero en un trie se comparte prefijos con la estructura siguiente:
-c
- └─ a
-     └─ s
-     │   ├─ a
-     │   └─ o
-     └─ n
-         └─ t
-             └─ o
+        c
+         └─ a
+             └─ s
+             │   ├─ a
+             │   └─ o
+             └─ n
+                 └─ t
+                     └─ o
 Así, es mucho más eficiente en memoria y en búsqueda de prefijos.
 $ marisa-build ~/dic/words.txt -o ~/dic/words.marisa (construir del diccionario words.txt un archivo binario optimizado con todas las palabras)
 $ marisa-dump words.marisa (como "cat words.marisa" volcar el diccionario en pantalla para ver el contenido)
