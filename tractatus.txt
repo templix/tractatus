@@ -31565,6 +31565,26 @@ $ cd /usr/share/mariadb/mariadb-test/
 Después de ejecutar las pruebas, el resumen con el número de pruebas pasadas/fallidas se encuentran en el directorio /usr/share/mysql/mysql-test/
 
 
+marisa
+[Matching Algorithm with Recursively Implemented StorAge]. Utilidades** que sirven para interactuar con la librería libmarisa. Esa librería implementa un trie comprimido y estático, muy usado en búsquedas rápidas de cadenas, diccionarios y autocompletado. Un trie es una estructura de datos tipo árbol diseñada para manejar colecciones de cadenas y marisa es una implementación optimizada de tries muy usado, por ejemplo, en motores de búsqueda, correctores ortográficos, autocompletado y análisis de texto. Incluye las herramientas marisa-benchmark, marisa-build, marisa-common-prefix-search, marisa-dump, marisa-lookup, marisa-predictive-search y marisa-reverse-lookup.
+Un ejemplo sería guardar "casa", "caso" y "canto". En un array normal ocuparía memoria redundante, pero en un trie se comparte prefijos con la estructura siguiente:
+c
+ └─ a
+     └─ s
+     │   ├─ a
+     │   └─ o
+     └─ n
+         └─ t
+             └─ o
+Así, es mucho más eficiente en memoria y en búsqueda de prefijos.
+$ marisa-build ~/dic/words.txt -o ~/dic/words.marisa (construir del diccionario words.txt un archivo binario optimizado con todas las palabras)
+$ marisa-dump words.marisa (como "cat words.marisa" volcar el diccionario en pantalla para ver el contenido)
+$ marisa-predictive-search words.marisa (entra en el prompt de marisa y espera la entrada del prefijo a buscar)
+$ marisa-lookup words.marisa (entra en el prompt de marisa y muestra el número de entrada en el archivo de la palabra que se entre)
+$ marisa-benchmark words.marisa (toma la misma información que marisa-build y mide el rendimiento de libmarisa para el conjunto de claves especificado)
+$ marisa-common-prefix-search ( busca claves entre los posibles prefijos de las cadena que se entra y luego imprime las primeras m claves, donde m es uno de los parámetros)
+
+
 markdown
 Lenguaje orientado a la escritura de documentos de manera que sean fáciles de escribir y leer directamente en texto plano convirtiéndolos en documentos XHTML bien formados. La aplicación retext permite eleborar textos en markdown y visualizarlos en tiempo real.
 Sintaxis elemental [las referencias son respecto de html]:
