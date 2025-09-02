@@ -31623,6 +31623,24 @@ $ mdl README.md (aplicar todas las reglas disponibles
 $ mdl -r ~MD001,~MD004,~MD032 README.md (examinar el archivo según todas las reglas disponibles excepto MD001, MD004 y MD032)
 
 
+maskprocessor
+Generador rápido de listas de palabras que permite crear, de manera flexible, todas las combinaciones posibles según una máscara definida por el usuario, personalizando el espacio de claves con alfabetos distintos en cada posición del patrón. Los ejecutables son mp32 y mp64.
+Generador rápido de listas de palabras. Enumera todas las combinaciones de un espacio de claves definido por el usuario y genera los resultados. Al admitir diferentes alfabetos (que también pueden combinarse) en diferentes posiciones de la plantilla de generación ('máscara'), este enfoque permite una generación de candidatos más precisa que la enumeración ingenua de palabras por fuerza bruta.
+Cada uno de los caracteres siguientes pñuede sustituir un caracter del patrón:
+        ?l --> minúsculas (abcdefghijklmnopqrstuvwxyz)
+        ?u --> mayúsculas (ABCDEFGHIJKLMNOPQRSTUVWXYZ)
+        ?d --> dígitos (0123456789)
+        ?s --> símbolos
+        ?a --> todos los anteriores
+        ?1, ?2, ?3, ?4 --> conjuntos personalizados definidos por el usuario con los parámetros -1, -2, -3 y -4
+$ mp64 perr?d (sustituira el último caracter de la palabra perro [la "o"] por un dígito: perr1, perr2, perr3...)
+$ mp64 p?srr?u (el segundo caracter por un simbolo y el último por una mayúscula)
+$ mp64 -i 3:5 ?a?l?d?s?a (genera palabras empezando por 3 caracteres e incrementar hasta 5 caracteres con los equivalentes especificados)
+$ mp64 -o salida.txt -1 AEIOU ?1?d?d (generar conjuntos personalizados, en la primera posición [AEIOU] y dígitos en las siguientes y guardar el resultado en salida.txt)
+$ mp64 --combinations -1 AEIOU ?1?d?d (solo muestra el total de combinaciones)
+$ mp64 -1 AeItr -2 *+40w ?1?d?2 (generar palabras de 3 dígitos, el primero y el tercero con los caracteres especificados y el segundo un dígito)
+
+
 masscan
 Escaner de puertos. Produce resultados similares a "Nmap". Tiene permanentemente activada las siguientes opciones: "-sS" realiza un escaneo de tipo TCP SYN, "-Pn" trata todos los hosts como si estuviesen en funcionamiento, "-n" no hace una resolución DNS, "--randomize-hosts" aplica aleatoriedad al orden de los host a escanear, "-v" genera verbosidad y la opción "--send-eth" utiliza para el envío paquetes ethernet en bruto.
 # masscan --regress (autotest integrado)
