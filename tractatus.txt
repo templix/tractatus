@@ -31580,7 +31580,9 @@ Así, es mucho más eficiente en memoria y en búsqueda de prefijos.
 $ marisa-build ~/dic/words.txt -o ~/dic/words.marisa (construir del diccionario words.txt un archivo binario optimizado con todas las palabras)
 $ marisa-dump words.marisa (como "cat words.marisa" volcar el diccionario en pantalla para ver el contenido)
 $ marisa-predictive-search words.marisa (entra en el prompt de marisa y espera la entrada del prefijo a buscar)
+$ marisa-predictive-search words.marisa <<< palabra (lo mismo pero sin entrar en el prompt interactivo para buscar "palabra")
 $ marisa-lookup words.marisa (entra en el prompt de marisa y muestra el número de entrada en el archivo de la palabra que se entre)
+$ marisa-lookup dic.marisa <<< palabra (lo mismo sin entrar en el promt interactivo)
 $ marisa-benchmark words.marisa (toma la misma información que marisa-build y mide el rendimiento de libmarisa para el conjunto de claves especificado)
 $ marisa-common-prefix-search (busca claves entre los posibles prefijos de las cadena que se entra y luego imprime las primeras m claves, donde m es uno de los parámetros)
 
@@ -31622,14 +31624,21 @@ $ mdl -r ~MD001,~MD004,~MD032 README.md (examinar el archivo según todas las re
 
 
 masscan
-Escaner de puertos. Produce resultados similares a "Nmap". Tiene permanentemente activada las siguientes opciones: "-sS" realiza un escaneo de tipo TCP SYN, "-Pn" trata todos los hosts como si estuviesen en funcionamiento, "-n" no hace una resolución al DNS, "--randomize-hosts" aplica aleatoriedad al orden de los host a escanear, "-v" genera verbosidad y la opción "--send-eth" utiliza para el envío paquetes ethernet en bruto.
+Escaner de puertos. Produce resultados similares a "Nmap". Tiene permanentemente activada las siguientes opciones: "-sS" realiza un escaneo de tipo TCP SYN, "-Pn" trata todos los hosts como si estuviesen en funcionamiento, "-n" no hace una resolución DNS, "--randomize-hosts" aplica aleatoriedad al orden de los host a escanear, "-v" genera verbosidad y la opción "--send-eth" utiliza para el envío paquetes ethernet en bruto.
 # masscan --regress (autotest integrado)
 # masscan 192.168.1.0/24 -p80,443 (escanea los puertos 80 y 443 en toda la red))
 # masscan 192.168.1.0/24 -p22-150 (escanea el rango de puertos del 22 al 150)
-# masscan 192.168.1.0/16 -p80 --rate 10000 --router-mac 66-55-44-33-22-11 (escaneando un pueto de una red con una MAC falsa del router para no salir a internet y enviardo 10000 pàquetes por segundo)
+# masscan 192.168.1.0/16 -p80 --rate 1000 --router-mac 66-55-44-33-22-11 (escaneando un puerto de una red con una MAC falsa del router para no salir a internet y enviardo 1000 paquetes por segundo)
 # masscan 192.168.1.0/16 ‐‐top-ports 100 > escaner.txt (escanear los 100 puertos más comunes según nmap y guardarlo en el archivo escaner.txt)
-# masscan 192.168.1.5 -p0-65535 --rate 1000000 (escanear todos los puertos de una IP))
+# masscan 192.168.1.5 -p0-65535 --rate 1000 (escanear todos los puertos de una IP, limitando la velocidad para no saturar la red)
 # masscan -p80 --banners 0.0.0.0/24 (obtener los baners de todas las ips de una red con el puerto abierto 80)
+# masscan 192.168.1.5 -p22,80 --open-only --output-format grepable --output-filename file.txt --interface enp1s0 (en un formato más claro y guardando el resultado en file.txt)
+Para una prueba rápida, levantar un servidor temporal en la propia máquina:
+$ python3 -m http.server 8080
+   Serving HTTP on 0.0.0.0 port 8080 (http://0.0.0.0:8080/) ...
+Escanear con:
+# masscan 127.0.0.1 -p8080 --open-only
+   Discovered open port 8080/tcp on 127.0.0.1
 
 
 match_parens
