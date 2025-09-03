@@ -31702,9 +31702,21 @@ Dar de alta un nuevo sitio para rastrear y se obtiene el código de seguimiento 
 Copiar y pegar el código anterior dentro de la etiqueta <head> o <body> de cada página del sitio web que se quiera analizar. Cada vez que un usuario visite una página con este código, se registrará la visita en la instancia de Matomo y en el panel de control de Matomo en el navegador se podrán ver los informes de tráfico, comportamiento de los usuarios, conversiones, y más.
 
 
+mawk
+Intérprete del lenguaje de programación AWK [ver] más pequeño y mucho más rápido que gawk.
+
+
 maybe
 [python-ptrace]. Ejecuta un script validando sus funciones y simulando su ejecución cuando en realidad no se està ejecutando.
 $ maybe script.sh
+
+
+mb2md
+[MBox to MailDir]. Convierte buzones de correo en formato Mbox a formato Maildir. Mbox es un formato de buzón de correo donde todos los mensajes de un buzón se almacenan en un solo archivo. Cada mensaje está separado por una línea que comienza con "From ". Es simple pero puede ser problemático para buzones grandes o en sistemas con alta concurrencia, ya que el archivo puede corromperse si varios procesos intentan acceder a él simultáneamente. Maildir es un formato más robusto donde cada mensaje de correo se almacena como un archivo individual en un directorio estructurado haciendolo más eficiente y seguro para sistemas de correo modernos.
+$ mb2md -s inbox.mbox -d /home/usuario/Maildir (especifica un archivo Mbox individual y el directorio de destino para el Maildir con subdirectorios new, cur y tmp)
+$ mb2md -f -d /home/usuario/Maildir (todos los archivos Mbox en el directorio actual se convierten, y los mensajes se almacenan en /home/usuario/Maildir. Si existen se fuerza la sobreescritura)
+$ mb2md -R -d /home/usuario/Maildir (busca recursivamente archivos Mbox y los convierte, manteniendo la estructura de directorios en /home/usuario/Maildir)
+$ mb2md -s inbox.mbox -m -d /home/usuario/Maildir (solo los mensajes no leídos de inbox.mbox se convierten al formato Maildir)
 
 
 mbmon
