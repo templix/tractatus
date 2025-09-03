@@ -31659,6 +31659,16 @@ Escanear con:
    Discovered open port 8080/tcp on 127.0.0.1
 
 
+mat2
+[Metadata Anonymisation Toolkit 2]. Elimina metadatos de una amplia variedad de formatos de archivo [JPEG, PNG, GIF, TIFF, PDF, DOCX, ODT, PPTX, XLSX, MP3, FLAC, WAV, etc] generando un archivo con la palabra "cleaned" entre el nombre y su extensión; por ejemplo, "filename.cleaned.png" para un archivo llamado "filename.png". Los metadatos son información oculta que muchos archivos almacenan, como: Nombre del autor, fecha de creación, ubicación GPS, dispositivo utilizado, historial de ediciones, software con el que se creó el archivo. etc sin que el usuario lo note.
+$ mat2 -l (ver todos los formatos suportados)
+$ mat2 -s foto.png (ver todos los metadatos del archivo especificado)
+$ mat2 foto.jpg (genera un archivo foto.cleaned.jpg sin metadatos y sin eliminar el original)
+$ mat2 informe.pdf (lo mismo con un documento .pdf)
+$ mat2 foto.jpg documento.docx audio.mp3 archivo.pdf (limpiar múltiples archivos)
+$ mat2 --inplace foto.jpg (elimina el original y deja con el mismo nombre, foto.jpg, el limpio de metadatos)
+
+
 match_parens
 Encontrar en textos paréntesis, llaves, corchetes, comillas, etc desparejados.
 $ match_parens --test texto.txt
