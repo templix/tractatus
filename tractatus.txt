@@ -31683,6 +31683,25 @@ Biblioteca en C para leer y escribir archivos MAT de MATLAB. Incluye la herramie
 $ matdump archivo.mat (imprime una lista legible de todas las variables almacenadas en archivo.mat, mostrando sus nombres, tamaños y tipos)
 
 
+matomo
+Conjunto de archivos PHP y una base de datos MySQL que se ejecuta en el servidor, con Apache/Nginx, PHP y MySQL/MariaDB y se gestiona a través de la interfaz web. Es una alternativa de código abierto a Google Analytics. Matomo genera un código de seguimiento JavaScript. Este código se inserta en las páginas web que se desea analizar. Cuando un visitante carga la página, el código se ejecuta y envía los datos de la visita: páginas vistas, clics, etc. al servidor Matomo.
+La instalación en el servidor implica descomprimirlo en el servidor web normalmente en el directorio /var/www/html/matomo, y luego seguir un asistente de instalación a través del navegador accediendo a la URL http://tudominio.com/matomo.
+Dar de alta un nuevo sitio para rastrear y se obtiene el código de seguimiento similar a este:
+        <script>
+          var _paq = window._paq = window._paq || [];
+          _paq.push(['trackPageView']);
+          _paq.push(['enableLinkTracking']);
+          (function() {
+            var u="//tudominio.com/matomo/";
+            _paq.push(['setTrackerUrl', u+'matomo.php']);
+            _paq.push(['setSiteId', 1]);
+            var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+            g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+          })();
+        </script>
+Copiar y pegar el código anterior dentro de la etiqueta <head> o <body> de cada página del sitio web que se quiera analizar. Cada vez que un usuario visite una página con este código, se registrará la visita en la instancia de Matomo y en el panel de control de Matomo en el navegador se podrán ver los informes de tráfico, comportamiento de los usuarios, conversiones, y más.
+
+
 maybe
 [python-ptrace]. Ejecuta un script validando sus funciones y simulando su ejecución cuando en realidad no se està ejecutando.
 $ maybe script.sh
