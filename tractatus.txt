@@ -31737,6 +31737,19 @@ Monitorea las temperaturas, voltajes y rpm de ventiladores de refrigeración de 
 # mbmon -t -u -n (informando de la hora, el sistema y el hostname)
 
 
+mbpoll
+Herramienta que permite leer y escribir datos en dispositivos esclavos Modbus ya sea a través de los protocolos RTU [serial] o TCP [red]. Modbus es un protocolo de comunicación ampliamente utilizado en automatización industrial para interactuar con dispositivos, como PLCs, sensores o actuadores.
+$ mbpoll -m rtu -a 1 -t 1 -r 100 -c 5 /dev/ttyUSB0 (protocolo RTU, dirección del esclavo ID 1 [1-247], -t 1 entradas discretas, -r 100 dirección inicial del registro, leer 5 entradas consecutivas y puerto serial conectado al dispositivo)
+Nota.- El tipo de datos a leer/escribir [-t]: 0 para coils, 1 para entradas discretas, 3 para registros de entrada y 4 para registros de retención.
+$ mbpoll -m tcp -a 2 -t 0 -r 50 -c 3 192.168.1.100 (usa protocolo TCP, esclavo con ID 2, tipo 0 [coils], dirección inicial 50, leer 3 coils y dirección IP del esclavo)
+$ mbpoll -m tcp -a 2 -t 0 -r 50 192.168.1.100 1 (encender el coil en la dirección 50 [ON, binario 1]. El puerto TCP por defecto es el 502)
+$ mbpoll -m rtu -a 1 -t 3 -r 300 -c 2 /dev/ttyUSB0 (protocolo RTU, esclavo ID 1, tipo 3 [registros de entrada], dirección inicial 300, leer 2 registros y puerto serie del dispositivo=
+$ mbpoll -m tcp -a 1 -t 4 -r 400 -c 4 192.168.1.100 (protocolo TCP, esclavo ID 1, tipo 4 [registros de retención], dirección de entrada 400, leer 4 registros y dirección IP del esclavo)
+$ mbpoll -m tcp -a 1 -t 4 -r 400 -c 2 -f float 192.168.1.100 (leer registros como flotantes con la opción -f float)
+$ mbpoll -m tcp -a 1 -t 4 -r 200 192.168.1.100 500 (escribir el valor 500 en el registro 200)
+$ mbpoll -m rtu -a 1 -b 19200 -d 8 -p none -s 1 -t 4 -r 400 -c 2 /dev/ttyUSB0 (protocolo RTU, esclavo ID 1, velocidad 19200 baudios, 8 bits de datos, sin paridad, 1 bit de parada, tipo 4, dirección inicial 400, leer 2 registros y puerto serie)
+
+
 mbsync
 ver isync
 
