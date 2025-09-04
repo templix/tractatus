@@ -31750,6 +31750,11 @@ $ mbpoll -m tcp -a 1 -t 4 -r 200 192.168.1.100 500 (escribir el valor 500 en el 
 $ mbpoll -m rtu -a 1 -b 19200 -d 8 -p none -s 1 -t 4 -r 400 -c 2 /dev/ttyUSB0 (protocolo RTU, esclavo ID 1, velocidad 19200 baudios, 8 bits de datos, sin paridad, 1 bit de parada, tipo 4, dirección inicial 400, leer 2 registros y puerto serie)
 
 
+mbr
+Se utiliza para arrancar sistemas operativos desde el disco duro. Se ejecuta primero y luego transfiere el control al cargador del sistema operativo, que a su vez lo transfiere al núcleo. El paquete es un pequeño programa de arranque alternativo que se puede instalar si se quiere sobrescribir el MBR [Master Boot Record] con un código “genérico” que luego pase el control a un gestor de arranque o a la partición activa. Es un binario de usuario que puede grabar un código de arranque muy simple en los primeros 512 bytes de un disco. Lo que realmente arranca en el sistema no depende del paquete mbr, sino de lo que el gestor de arranque haya escrito en el sector 0 del disco normalmento grub-pc. El paquete mbr sirve para grabar un MBR genérico que busque la partición activa y le ceda el control, como hacían los PCs antiguos con DOS o Windows, para hacer pruebas con arranques muy básicos, sin depender de GRUB o reparar un disco que perdió su código de arranque pero aún conserva particiones arrancables.
+# install-mbr /dev/sda (escribiría un MBR genérico en el primer sector del disco /dev/sda)
+
+
 mbsync
 ver isync
 
