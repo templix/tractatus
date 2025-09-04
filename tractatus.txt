@@ -3476,6 +3476,12 @@ $ bamsormadup SO=coordinate threads=8 input.cram output.bam (procesar archivos C
 $ blastnxmltobam ref.fasta query.fasta > query.bam (convertir XML a BAM)
 
 
+bios
+[Basic Input Output System]. Estándar de facto que define la interfaz de firmware para computadoras IBM PC compatibles. El firmware del BIOS es instalado dentro de la computadora personal, y es el primer programa que se ejecuta cuando se enciende la computadora. Su propósito fundamental es iniciar y probar el hardware del sistema y cargar un gestor de arranque o un sistema operativo desde un dispositivo de almacenamiento de datos. Fué usado por las computadoras desde los años 80 hasta el 2002 aproximadamente.
+# efibootmgr (comprobar si el pc está basado en BIOS o UEFI. En este caso en BIOS)
+        EFI variables are not supported on this system.
+
+
 biosdecode
 Analiza la memoria de la BIOS e imprime información sobre todas las estructuras que conoce.
 # biosdecode
@@ -44188,6 +44194,13 @@ $ udisksctl mount -b /dev/sdd1 (montar dispositivo. Equivalente al clásico moun
 $ udisksctl unmount -b /dev/sdd1 (desmontar dispositivo. Equivalente al clásico umount /dev/sdd1)
 $ udisksctl dump (mostrar toda la información de todos los dispositivos con detalle)
 $ udisksctl info -b /dev/sda (mostrar información sobre un dispositivo)
+
+
+uefi
+[Unified Extensible Firmware Interface]. Es el primer programa que se ejecuta cuando iniciamos el PC y tiene 3 objetivos: verificar el hardware conectado a la placa, activar los componentes y vincularlos al sistema operativo.
+# ls /sys/firmware/efi (si existe esta ruta el pc está basado en UEFI)
+# efibootmgr (comprobar si el pc está basado en BIOS o UEFI. En este caso en BIOS)
+        EFI variables are not supported on this system.
 
 
 ufw
