@@ -3477,7 +3477,7 @@ $ blastnxmltobam ref.fasta query.fasta > query.bam (convertir XML a BAM)
 
 
 bios
-[Basic Input Output System]. Estándar de facto que define la interfaz de firmware para computadoras IBM PC compatibles. El firmware del BIOS es instalado dentro de la computadora personal, y es el primer programa que se ejecuta cuando se enciende la computadora. Su propósito fundamental es iniciar y probar el hardware del sistema y cargar un gestor de arranque o un sistema operativo desde un dispositivo de almacenamiento de datos. Fué usado por las computadoras desde los años 80 hasta el 2002 aproximadamente.
+[Basic Input Output System]. Estándar de facto que define la interfaz de firmware para computadoras IBM PC compatibles. El firmware del BIOS es instalado dentro de la computadora personal, y es el primer programa que se ejecuta cuando se enciende la computadora. Su propósito fundamental es iniciar y probar el hardware del sistema y cargar un gestor de arranque o un sistema operativo desde un dispositivo de almacenamiento de datos. Fué usado por las computadoras desde los años 80 hasta el 2002 aproximadamente. Ver efibootmgr.
 # efibootmgr (comprobar si el pc está basado en BIOS o UEFI. En este caso en BIOS)
         EFI variables are not supported on this system.
 
@@ -13800,6 +13800,7 @@ Averiguar si se está ejecutando UEFI o BIOS. Si el sistema es compatible con UE
 	# efibootmgr
 	EFI variables are not supported on this system.
 Tambien puede consultarse si exite en el sistema la carpeta /sys/firmware/efi, si no existe se está usando BIOS.
+Nota.- efibootmgr solo funciona si se arranca el sistema en modo UEFI. Si se arranca en modo Legacy/BIOS, aunque se tenga una partición EFI [ESP-Epi System Partition], no se verán variables EFI [EFI variables are not supported]. Pero que exista no significa que el firmware o la instalación actual, esté usando UEFI, puede estar ahí “de adorno” porque la distro la creó automáticamente, o porque antes ya había otra instalación en modo UEFI.
 
 
 efingerd
@@ -22311,6 +22312,38 @@ Modificar el sistema que arranca primero.
 Y modificar la linea que pone:
 	set default="2"
 Arrancará el sistema situado en la 3ª linea que aparece en el menú (La primera linea es la 0)
+14.-
+Probar grub en una imagen sin relación con el sistema original con qemu
+# dd if=/dev/zero of=lab.img bs=1M count=22 (crear imagen vacía de 22 MB)
+# fdisk lab.img (particionar con fdisk)
+Dentro de fdisk:
+        o --> crear tabla de particiones DOS (MBR).
+        n --> nueva partición primaria.
+        a --> activa partición de arranque.
+        w --< guardar.
+Mapear la partición con:
+# losetup -Pf --show lab.img
+Eso devolverá algo como /dev/loop0.
+# mkfs.ext2 /dev/loop0p1 (formatear)
+# mkdir /mnt/lab (crear partión para montarla)
+# mount /dev/loop0p1 /mnt/lab (poner sistema mínimo)
+Crear, aunque sea solo un archivo de prueba:
+$ echo "¡Linus es un sistema genial" > /mnt/lab/bootmsg.txt
+$ grub-install --target=i386-pc --boot-directory=/mnt/lab/boot /dev/loop0 (instalar GRUB en la imagen)
+Crear un grub.cfg muy simple:
+mkdir -p /mnt/lab/boot/grub
+cat > /mnt/lab/boot/grub/grub.cfg <<'EOF'
+set timeout=5
+set default=0
+#
+menuentry "Mensaje de prueba" {
+    insmod ext2
+    set root=(hd0,msdos1)
+    cat /bootmsg.txt
+}
+EOF
+$ qemu-system-x86_64 -hda lab.img (probar con QEMU)
+Si todo sale bien, se verá GRUB arrancar desde la imagen de 22 MB, con un menú que muestra el archivo bootmsg.txt sin tocar el disco real por lo que se puede repetir, romper y borrar la imagen sin problemas.
 
 
 grub-mkconfig
