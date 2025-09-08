@@ -31825,6 +31825,13 @@ $ mbtserver -f config.cfg -s spanish_model -p 8080 & (iniciar el servidor en seg
 $ echo "El sol brilla hoy ." | nc localhost 8080 (enviar texto vía netcat o curl)
 
 
+mbuffer
+La herramienta se utiliza para almacenar en búfer flujos de datos y mostrar la tasa de entrada/salida [E/S], como el caudal de transferencia y el resumen de la actividad. Es especialmente útil en contextos donde la fuente y el destino de un flujo de datos tienen velocidades distintas, como al hacer copias de seguridad a cintas, transferir mediante red o cuando se necesita suavizar picos de actividad para evitar cuellos de botella.
+$ cat archivo.img | mbuffer > destino.img (coloca a mbuffer entre la producción y el consumo de datos, permitiendo almacenar en búfer temporal y mantener la transferencia constante)
+$ mbuffer -s 128k -m 1G < archivo.img | nc destino 9090 (enviar datos con un tamaño de bloques de 128k, el tamaño del buffer de 1G por red usando mbuffer en la máquina de origen)
+$ nc -l -p 9090 | mbuffer -s 128k -m 1G > archivo.recibido (y en la máquina de destino)
+
+
 mbw
 Determina el ancho de banda de la memoria de "copia" disponible para los programas del espacio de usuario.
 $ mbw 1000 (tamaño de la matriz para las pruebas de 1000 [ARRAY_SIZE])
@@ -31902,6 +31909,45 @@ Y modificar las que procedan. Ejemplo:
 	# Que los videos los abra vlc
 		include/video
         	Open=(vlc %f >/dev/null 2>&1 &)
+
+
+mcabber
+Es un cliente de chat para la red Jabber [XMPP] en modo texto que incluye funciones como compatibilidad con SASL, registro de historial, finalización de comandos, módulos dinámicos y activadores de acciones externas
+$ mcabber -s jabber.org -u usuarioejemplo (conectarse al servidor XMPP con el nombre de usuario, mcabber pedirá contraseña que puede guardarse en un archivo de configuración para evitar escribirla cada vez)
+Una vez dentro de la interfaz de mcabber, se puede usar una serie de comandos que se inician con una barra inclinada [/]. Algunos de los más útiles:
+        /help --> Muestra una lista de todos los comandos disponibles.
+        /add amigo@servidor.com --> Agrega un contacto a tu lista de amigos.
+        /join sala_linux@servidor.com --> Te une a una sala de chat, también conocida como MUC, Multi-User Chat.
+        /msg amigo@servidor.com Hola, ¿cómo estás? --> Envía un mensaje directo a un usuario sin cambiar de pantalla.
+        /status away Estoy comiendo --> Cambia tu estado de presencia [away, online, dnd - Do Not Disturb].
+        /quit --> Cierra la sesión y sale de mcabber.
+Para navegar entre conversaciones abiertas usando Ctrl + n [siguiente] y Ctrl + p [anterior] o Alt + número para ir directamente a una conversación específica.
+Ejemplo de un archivo de configuración básico:
+$ nano ~/.mcabber/mcabberrc
+        set username = usuarioejemplo
+        set server = jabber.org
+        set password = tu_contraseña_segura
+        set save_history = 1
+        set auto_join = sala_linux@servidor.com
+Este archivo configura el cliente para que se conecte automáticamente a jabber.org con el usuario usuarioejemplo, guarde el historial de conversaciones y se una a la sala de chat sala_linux@servidor.com al iniciar.
+
+
+mceliece
+Es un sistema criptográfico de clave pública basado en códigos de corrección de errores. Es resistente a ataques con computación cuántica, por lo que se considera un candidato para la criptografía post-cuántica. La interfaz de línea de comandos de libmceliece proporciona las siguientes herramientas: mceliece348864-dec, mceliece348864-enc, mceliece348864f-keypair, mceliece348864-keypair, mceliece348864pc-dec, mceliece348864pc-enc, mceliece348864pcf-keypair, mceliece348864pc-keypair, mceliece460896-dec, mceliece460896-enc, mceliece460896f-keypair, mceliece460896-keypair, mceliece460896pc-dec, mceliece460896pc-enc, mceliece460896pcf-keypair, mceliece460896pc-keypair, mceliece6688128-dec, mceliece6688128-enc, mceliece6688128f-keypair, mceliece6688128-keypair, mceliece6688128pc-dec, mceliece6688128pc-enc, mceliece6688128pcf-keypair, mceliece6688128pc-keypair, mceliece6960119-dec, mceliece6960119-enc, mceliece6960119f-keypair, mceliece6960119-keypair, mceliece6960119pc-dec, mceliece6960119pc-enc, mceliece6960119pcf-keypair, mceliece6960119pc-keypair, mceliece8192128-dec, mceliece8192128-enc, mceliece8192128f-keypair, mceliece8192128-keypair, mceliece8192128pc-dec, mceliece8192128pc-enc, mceliece8192128pcf-keypair, mceliece8192128pc-keypair, mceliece-fulltest, mceliece-speed y mceliece-test. Algunos ejemplos con las más usuales:
+$ mceliece-fulltest (ejecuta pruebas completas del sistema)
+$ mceliece-speed (pruebas de rendimiento. Mide el rendimiento de las operaciones criptográficas: velocidad de cifrado, descifrado, generación de claves)
+$ mceliece-speed 1000 (especificando número de iteraciones)
+$ mceliece-test (ejecuta pruebas unitarias para verificar que los componentes básicos funcionan correctamente)
+$ mceliece348864f-keypair 5>public 9>secret (generar un par de claves, publica y la privada, versión fused)
+El proceso criptográfico es el siguiente:
+$ mceliece348864-keypair 5>publickey 9>secretkey (generar clave)
+$ ls
+publickey  secretkey
+$ mceliece348864-enc >ciphertext 7>sessionkey 4<publickey (encapsular)
+$ mceliece348864-dec 7>sessionkey <ciphertext 8<secretkey (desencamsular)
+$ ls
+ciphertext  publickey  secretkey  sessionkey
+Notas.- Los números en los nombres [348864, 460896, 6960119, 8192128] se refieren a los parámetros de seguridad, 3488 bits de seguridad para la clave o 4608, etc, y cuando se genera la clave el parámetro numérico 6960119, para encapsular y desencapslar ha de usarse el .enc y .dec que coincida con el número de su parámetro de seguridad [6960119]. Las claves públicas de McEliece son enormes, de cientos de kilobytes o más. Por eso aunque es seguro post-cuántico, no es práctico para todos los usos.
 
 
 mcfly
