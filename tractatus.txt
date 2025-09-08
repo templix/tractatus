@@ -15551,8 +15551,12 @@ process announce --> define un proceso que ejecutará un script en Python y codi
 
 
 exec
-Ejecuta comandos.
+Permite remplazar la shell por el comando que se indique.
 $ exec firefox
+$ exec sleep 2 (pasados 2 segundo cierra la terminal)
+$ $ exec 3>&1 > /tmp/salida.txt (que el descriptor 3 conecte su salida a donde la conecta el descriptor 1 [la pantalla] y después que este último se conecte al archivo /tmp/salida.txt. La consecuencia es que a partir de este momento todas las órdenes usarán como salida estándar el archivo)
+$ exec 1>&3 3>&- (restituye la situación inicial, que el descriptor 1 conecte su salida a la del descriptor 3, o sea, la pantalla y, después, cierra el conector 3. Por tanto, a partir de ese momento, las órdenes volverán a mostrar su salida estándar por pantalla)
+$ exec 1>/dev/null (mandamos a /dev/null la salida estándar de cualquier comando que ejecutemos a continuación en la misma shell)
 
 
 execline
@@ -31933,12 +31937,19 @@ Este archivo configura el cliente para que se conecte automáticamente a jabber.
 
 
 mceliece
-Es un sistema criptográfico de clave pública basado en códigos de corrección de errores. Es resistente a ataques con computación cuántica, por lo que se considera un candidato para la criptografía post-cuántica. La interfaz de línea de comandos de libmceliece proporciona las siguientes herramientas: mceliece348864-dec, mceliece348864-enc, mceliece348864f-keypair, mceliece348864-keypair, mceliece348864pc-dec, mceliece348864pc-enc, mceliece348864pcf-keypair, mceliece348864pc-keypair, mceliece460896-dec, mceliece460896-enc, mceliece460896f-keypair, mceliece460896-keypair, mceliece460896pc-dec, mceliece460896pc-enc, mceliece460896pcf-keypair, mceliece460896pc-keypair, mceliece6688128-dec, mceliece6688128-enc, mceliece6688128f-keypair, mceliece6688128-keypair, mceliece6688128pc-dec, mceliece6688128pc-enc, mceliece6688128pcf-keypair, mceliece6688128pc-keypair, mceliece6960119-dec, mceliece6960119-enc, mceliece6960119f-keypair, mceliece6960119-keypair, mceliece6960119pc-dec, mceliece6960119pc-enc, mceliece6960119pcf-keypair, mceliece6960119pc-keypair, mceliece8192128-dec, mceliece8192128-enc, mceliece8192128f-keypair, mceliece8192128-keypair, mceliece8192128pc-dec, mceliece8192128pc-enc, mceliece8192128pcf-keypair, mceliece8192128pc-keypair, mceliece-fulltest, mceliece-speed y mceliece-test. Algunos ejemplos con las más usuales:
+Es un sistema criptográfico de clave pública basado en códigos de corrección de errores. Es resistente a ataques con computación cuántica, por lo que se considera un candidato para la criptografía post-cuántica. Las herramientas se agrupan de la siguiente manera:
+        mceliece {6960119,6688128,8192128,460896,348864} -keypair
+        mceliece {6960119,6688128,8192128,460896,348864} f-kepair
+        mceliece {6960119,6688128,8192128,460896,348864} -enc
+        mceliece {6960119,6688128,8192128,460896,348864} -dec
+Las claves [mceliece...-keypair y mceliece...f-keypair] se generan aleatoriamente la publica y la secreta. La clave pública la archiva en el descriptor 5 y la clave secreta en el descriptor 9. El comando mceliece...f-kepair es internamente más complicado que el comando mceliece...-keypair, pero proporciona una generación de claves más rápida. Los comandos son interoperables.
+La encapsulación se ejecuta cpn el comando mceliece...-enc. Este comando lee la clave pública desde el descriptor de archivo 4. Genera aleatoriamente un texto cifrado y la clave de sesión correspondiente. Escribe el texto cifrado en stdout, y luego escribe la clave de sesión para archivar el descriptor 7.
+La decapsulación se ejecuta con el comando mceliece...-dec. Este comando lee la clave secreta desde el descriptor de archivo 8, y luego lee un texto de cifrado de Stdin. Calcula la clave de sesión correspondiente, que escribe en el descriptor de archivos 7.
+Unos ejemplos con las más usuales:
 $ mceliece-fulltest (ejecuta pruebas completas del sistema)
 $ mceliece-speed (pruebas de rendimiento. Mide el rendimiento de las operaciones criptográficas: velocidad de cifrado, descifrado, generación de claves)
 $ mceliece-speed 1000 (especificando número de iteraciones)
 $ mceliece-test (ejecuta pruebas unitarias para verificar que los componentes básicos funcionan correctamente)
-$ mceliece348864f-keypair 5>public 9>secret (generar un par de claves, publica y la privada, versión fused)
 El proceso criptográfico es el siguiente:
 $ mceliece348864-keypair 5>publickey 9>secretkey (generar clave)
 $ ls
@@ -31947,7 +31958,7 @@ $ mceliece348864-enc >ciphertext 7>sessionkey 4<publickey (encapsular)
 $ mceliece348864-dec 7>sessionkey <ciphertext 8<secretkey (desencamsular)
 $ ls
 ciphertext  publickey  secretkey  sessionkey
-Notas.- Los números en los nombres [348864, 460896, 6960119, 8192128] se refieren a los parámetros de seguridad, 3488 bits de seguridad para la clave o 4608, etc, y cuando se genera la clave el parámetro numérico 6960119, para encapsular y desencapslar ha de usarse el .enc y .dec que coincida con el número de su parámetro de seguridad [6960119]. Las claves públicas de McEliece son enormes, de cientos de kilobytes o más. Por eso aunque es seguro post-cuántico, no es práctico para todos los usos.
+Notas.- Los números en los nombres [348864, 460896, 6960119, 8192128] se refieren a los parámetros de seguridad, 3488 bits de seguridad para la clave o 4608, etc, y cuando se genera la clave el parámetro numérico 6960119, para encapsular y desencapslar es preferible usar el .enc y .dec que coincida con el número de su parámetro de seguridad [6960119] para evitar errores [fatal: read publickey failed: end of file]. Las claves públicas de mceliece son enormes, de cientos de kilobytes o más. Por eso aunque es seguro post-cuántico, no es práctico para todos los usos.
 
 
 mcfly
