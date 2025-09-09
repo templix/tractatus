@@ -32033,6 +32033,20 @@ $ mcrypt -p archivo    (usando compresión bzip2 antes de la encriptación)
 $ mcrypt -b archivo   (No mantener información del algoritmo usado en el cifrado)
 
 
+mcstrans
+Demonio MCS [Multiple Category System] que traduce las etiquetas y categorias MCS/MLS de SELinux [s0, s15, c0, c1023] a un formato legible [Payroll,Finance] configurados en /etc/selinux/{SELINUXTYPE}/setrans.conf.
+# systemctl start mcstrans (habilitar el servicio)
+# mcstrans -f (Ejecutar en primer plano. No como demonio)
+Nota.- Rara vez se usa manualmente, pero es clave para leer y dar sentido a la información MCS/MLS en sistemas con SELinux.
+Ejemplo de funcionamiento
+# nano /etc/selinux/targeted/setrans.conf
+        s0:c0  = Marketing
+        s0:c1  = Finance
+        s0:c2  = Payroll
+        s0:c3  = Personnel
+Si una herramienta muestra un contexto tipo "system_u:object_r:default_t:s0:c0,c2", mcstransd puede traducirlo automáticamente a "system_u:object_r:default_t:Marketing,Payroll"
+
+
 md2term
 Ver presentaciones de markdown para textos cortos de menos de 30 líneas y, al mismo tiempo, poder visualizarse con otras presentaciones en sitios web como GitHub, GitLab, etc. El script también se puede utilizar satisfactoriamente para ver otros textos de markdown, siempre que se respeten sus limitaciones.
 $ md2term -k 1 -p -f file.md (manteniendo todas las marcas [-k 0 sin mantenerlas, -k2 solo para el titulo], aplicando "less" del archivo epecificado)
