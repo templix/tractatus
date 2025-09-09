@@ -10704,11 +10704,54 @@ $ depmod -a (Sondear todos los módulos. Opción predeterminada si no se proporc
 
 descriptor
 Toda aplicación tiene siempre tres descriptores de fichero abiertos, el 0 para la entrada estándar [stdin], el 1 para la salida estándar [stdout], y el 2 para la salida de errores estándar [stderr]. Del 3 al 9 son descriptores adicionales [ver tuberias]. En el ejemplo:
-$ ls -a >> listado.txt
-La salida estándart [descriptor 1] se envia al fichero listado.txt, consecuentemente en pantalla no veremos nada. En el caso:
-$ ls -zy >> listado.txt
-El error [descriptor 2] se mostrará por pantalla y listado.txt permanecerá vacio. Para redirigir el error [descriptor 2 ]al fichero listado.txt [descriptor 1]:
-$ ls -zy >> listado.txt 2>&1
+$ exec 3>&1 > /tmp/salida.txt (que el descriptor 3 conecte su salida a donde la conecta el descriptor 1 [la pantalla] y después que este último se conecte al archivo /tmp/salida.txt. La consecuencia es que a partir de este momento todas las órdenes usarán como salida estándar el archivo)
+$ exec 1>&3 3>&- (restituye la situación inicial, que el descriptor 1 conecte su salida a la del descriptor 3, o sea, la pantalla y, después, cierra el conector 3. Por tanto, a partir de ese momento, las órdenes volverán a mostrar su salida estándar por pantalla)
+$ command > file 2>&1 (redirige la salida estándar y la salida estándar de error de command al archivo file)
+$ exec 1>/dev/null (mandamos a /dev/null la salida estándar de cualquier comando que ejecutemos a continuación en la misma shell)
+1.-
+        $ exec 3<>/tmp/archivo.txt (cualquier cosa que se envíe a este descriptor, acabará en el archivo)
+Los siguientes comandos no mostraran salida en el terrminal
+        $ echo "Hola" >&3
+        $ tty >&3
+        $ cat /tmp/archivo.txt
+        Hola
+        /dev/pts/1
+Cerrar el descriptor y volver a la normalidad
+        $ exec 3>&-
+2.-
+Lo mismo
+        $ exec 3>&1
+        $ exec 1> >(while read line; do echo "$(date): $line"; done > /tmp/log.txt)
+Los siguientes comandos no mostraran salida en el terrminal
+        $ echo "Linux es un sistema genial"
+        $ who
+        $ tty
+Cerrar el descriptor
+        $ exec 1>&3 3>&-
+Muestra las 3 últimas salidas de los comandos
+        $ nano /tmp/log.txt
+3.-
+Tunel SSH con descriptors
+        $ exec 3<>/dev/tcp/google.com/80
+        $ echo -e "GET / HTTP/1.1\nHost: google.com\nConnection: close\n\n" >&3
+        $ cat <&3
+Mostrará salida. Volver a la normalidad:
+        $ exec 3>&-
+4.-
+Adivinar el número mayor, menos o correcto con pipes
+# Terminal 1: Servidor
+        $ mkfifo /tmp/guess_pipe
+        $ exec 3<>/tmp/guess_pipe
+        $ number=$((RANDOM % 100 + 1))
+        $ while read guess <&3; do
+            [ "$guess" -eq "$number" ] && echo "¡Correcto!" && break
+            [ "$guess" -lt "$number" ] && echo "Mayor" || echo "Menor"
+          done
+Quedará a la espera de los números que se entren en la terminal 2
+# Terminal 2: Cliente
+        $ exec 4>/tmp/guess_pipe
+        $ echo "50" >&4
+        $ echo "150" >&4
 
 
 desktop-file-utils
@@ -15554,7 +15597,7 @@ exec
 Permite remplazar la shell por el comando que se indique.
 $ exec firefox
 $ exec sleep 2 (pasados 2 segundo cierra la terminal)
-$ $ exec 3>&1 > /tmp/salida.txt (que el descriptor 3 conecte su salida a donde la conecta el descriptor 1 [la pantalla] y después que este último se conecte al archivo /tmp/salida.txt. La consecuencia es que a partir de este momento todas las órdenes usarán como salida estándar el archivo)
+$ exec 3>&1 > /tmp/salida.txt (que el descriptor 3 conecte su salida a donde la conecta el descriptor 1 [la pantalla] y después que este último se conecte al archivo /tmp/salida.txt. La consecuencia es que a partir de este momento todas las órdenes usarán como salida estándar el archivo)
 $ exec 1>&3 3>&- (restituye la situación inicial, que el descriptor 1 conecte su salida a la del descriptor 3, o sea, la pantalla y, después, cierra el conector 3. Por tanto, a partir de ese momento, las órdenes volverán a mostrar su salida estándar por pantalla)
 $ exec 1>/dev/null (mandamos a /dev/null la salida estándar de cualquier comando que ejecutemos a continuación en la misma shell)
 
@@ -38501,8 +38544,8 @@ read
 Espera una entrada por teclado y le asigna una variable, aunque contenga espacios.
 	$ read -p "dime tu nombre " NOMBRE
 	$ echo $NOMBRE
-La opción "p" tambien permite entrar varias variables simultaneamente:
-	$ read -p "entra 3 nombres" PRIMERO SEGUNDO TERCERO
+La opción "p" tambien permite entrar varias variables simultaneamente y la -t espera 10 segundos las entradas antes de volver al prompt:
+	$ read -t 10 -p "entra 3 nombres" PRIMERO SEGUNDO TERCERO
 	$ echo "Hola $PRIMERO $SEGUNDO $TERCERO"
 La opción -a permite leer las palabras como elementos de un array:
 	$ read -a frase
@@ -38510,11 +38553,15 @@ La opción -a permite leer las palabras como elementos de un array:
 	$ declare -p frase
 	declare -a frase='([0]="Hola" [1]="que" [2]="tal")'
 $ read -s -p "entra la contraseña: " CONTRASEÑA (Para que no se vea en la pantalla lo que se escribe aunque si se efectua un echo $CONTRASEÑA se mostrará)
+$ read -n 1 -p "¿continuar? "  (efectuará la acción al pulsar una tecla sin necesidad de pulsar "Intro")
+1.-
+$ read x y <<<"2 5"
+$ echo "x=$x -- y=$y"
+x=2 -- y=5
 Algunas opciones:
 -d (permite indicar un delimitador de fin de línea de forma que la línea se lee hasta encontrar este delimitador)
 -e (permite que se puedan usar todas las combinaciones de teclas de readline)
--t 3 (Especificar un tiempo de espera en la entrada de datos antes de volver al prompt)
--n 1 (Efectuará la acción al pulsar una tecla sin necesidad de pulsar "Intro")
+-n 1 (
 
 
 read-edid
