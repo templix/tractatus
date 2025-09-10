@@ -25610,16 +25610,16 @@ $ info grep
 infocmp
 Herramienta que se utiliza para comparar o mostrar información sobre descripciones de terminal en sistemas que utilizan el sistema de gestión de terminales terminfo.
 $ infocmp (muestra la descripción completa de la terminal actual)
-$ infocmp xterm (mostrar información sobre el tipo de terminal xterm)
-$ infocmp aterm xterm (Comparar dos descripciones de terminal)
-$ infocmp -L > infor.txt (convertir y mostrar la descripción en formato de texto legible y mandarlo a un archivo)
+$ infocmp vt100 (mostrar información sobre el tipo de terminal vt100)
+$ infocmp -d aterm xterm (Comparar dos descripciones de terminal)
+$ infocmp -L xterm-256color (mostrar información en formato legible de la terminal especificada)
 
 
 init
 Para o reinicia el sistema
-$ init 0    (para)
-$ init 1    (reinicia en modo  uniusuario)
-$ init 6    (reinicia)
+$ init 0 (parar)
+$ init 1 (reinicia en modo uniusuario)
+$ init 6 (reinicia)
 
 
 initramfs
