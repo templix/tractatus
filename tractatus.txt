@@ -25609,9 +25609,12 @@ $ info grep
 
 infocmp
 Herramienta que se utiliza para comparar o mostrar información sobre descripciones de terminal en sistemas que utilizan el sistema de gestión de terminales terminfo.
+$ toe -a -s (muestra el listado de descripciones de terminal disponibles. Más de 1800)
 $ infocmp (muestra la descripción completa de la terminal actual)
 $ infocmp vt100 (mostrar información sobre el tipo de terminal vt100)
-$ infocmp -d aterm xterm (Comparar dos descripciones de terminal)
+$ infocmp -d vt220 xterms-sun
+$ infocmp -u xterm-256color (descripción de la fuente terminfo del primer terminal)
+$ infocmp -C ibm3101 (salida en formato termcap)
 $ infocmp -L xterm-256color (mostrar información en formato legible de la terminal especificada)
 
 
@@ -32088,9 +32091,40 @@ $ mdbook serve (muestra un libro en http://localhost:3000 y lo reconstruye al ca
 $ mdbook build --help (obtener más información sobre un comando específico)
 
 
+mdbtools
+Herramientas diseñadas para leer, exportar, consultar y manipular archivos de bases de datos de Microsoft Access [formato .mdb y en algunos casos .accdb, aunque el soporte para este último es limitado]. Consta de las siguientes ejecutables: mdb-array, mdb-count, mdb-export, mdb-header, mdb-hexdump, mdb-import, mdb-json, mdb-parsecsv, mdb-prop, mdb-queries, mdb-schema, mdb-sql, mdb-tables y mdb-ver.
+$ mdb-ver mi_base.mdb (muestra la versión del archivo MDB, Access 97, 2000, 2003, etc)
+$ mdb-tables mi_base.mdb (lista todas las tablas en la base de datos)
+$ mdb-schema mi_base.mdb (genera el esquema SQL de la base de datos, CREATE TABLE, índices, etc)
+$ mdb-schema mi_base.mdb -T Clientes (generar solo para una tabla)
+$ mdb-schema base.mdb | sqlite3 nueva_base.sqlite (crear esquema en SQLite)
+$ mdb-export mi_base.mdb Clientes > clientes.csv (exporta una tabla a formato CSV)
+$ mdb-export -d '|' mi_base.mdb Clientes > clientes_pipe.csv (exportar con delimitador personalizado, por ejemplo, "|")
+$ mdb-export -I "ID,Nombre" mi_base.mdb Clientes (exportar solo ciertas columnas)
+$ mdb-json mi_base.mdb Clientes (exporta una tabla en formato JSON)
+$ mdb-sql mi_base.mdb (ejecuta consultas SQL interactivas o desde línea de comandos sobre la base MDB)
+$ mdb-count mi_base.mdb Clientes (cuenta el número de registros en una tabla)
+$ mdb-header mi_base.mdb (muestra metadatos del archivo MDB, no de las tablas, sino del archivo en sí [fecha de creación, versión interna, tamaño, etc])
+$ mdb-hexdump mi_base.mdb 0 (muestra el contenido binario [hexadecimal] de una página específica del archivo MDB)
+$ mdb-prop mi_base.mdb (muestra propiedades del archivo MDB, como título, autor, fecha de creación, etc, si están definidas)
+$ mdb-queries mi_base.mdb (lista las consultas guardadas [queries] en la base de datos Access)
+$ mdb-array mi_base.mdb Clientes (exporta los datos de una tabla en formato de arrays [por columnas], útil para procesamiento en lenguajes como Python o R)
+$ mdb-import mi_base.mdb Clientes nuevos_clientes.csv (importa datos desde un archivo CSV a una tabla existente en la base MDB. No crea la tabla, solo inserta datos. La tabla debe existir previamente)
+$ mdb-parsecsv -d ',' archivo.csv (parsea un archivo CSV y lo convierte a formato interno de mdbtools)
+Notas.- No soporta escritura completa. Se puede importar datos, pero no se puede crear tablas, modificar esquemas o borrar registros directamente. El soporte para archivos .accdb [Access 2007+] es limitado o inexistente en versiones antiguas. Versiones recientes (>= 0.9) tienen soporte experimental. Algunas herramientas pueden fallar si la base de datos está corrupta o protegida con contraseña ya que mdbtools no soporta contraseñas.
+
+
 mdetect
 Herramienta para configurar automáticamente mouses
 $ mdetect -v
+
+
+mdevctl
+Creación y administración de dispositivos virtuales derivados de hardware físico, usados comúnmente en soluciones de virtualización. Utilidad para administrar y mantener dispositivos en la estructura de dispositivos mediados [mdev] del kernel de Linux. Los dispositivos mediados son subdispositivos de un dispositivo principal, por ejemplo, una vGPU que pueden crearse dinámicamente y ser utilizados por controladores como vfio-mdev para su asignación a máquinas virtuales.
+$ mdevctl start -u 30820a6f-b1a5-4503-91ca-0c10ba58692a -p 0000:01:00.0 --type nvidia-63 (crear vGPU mediada. -u UUID único para la instancia mdev, -p Bus PCI del dispositivo físico y --type Tipo de recurso mediado [varía según hardware]
+$ mdevctl define --auto --uuid 30820a6f-b1a5-4503-91ca-0c10ba58692a (que un dispositivo mediado se cree automáticamente al inicio [persistencia])
+$ mdevctl list (listar todos los dispositivos mediados)
+$ mdevctl stop -u 30820a6f-b1a5-4503-91ca-0c10ba58692a (borrar o desactivar un dispositivo mediado)
 
 
 mdf2iso
@@ -43578,16 +43612,16 @@ Muestra de un archivo.yml:
 	name: proyecto1
 	root: ~/
 		windows:
-				- editor:
-				layout: main-vertical
-				panes:
-					- top
-					- who; pwd
+			- editor:
+			layout: main-vertical
+			panes:
+				- top
+				- who; pwd
 
 
 toe
-Enumera todos los tipos de terminal disponibles por nombre principal con descripciones.
-$ toe -a -s (informe sobre todas las bases de datos de terminal y una columna con entradas perteneentes a una base de datos de terminal determinada.)
+Enumera todos los tipos de terminal disponibles por nombre principal con descripciones. Más de 1800.
+$ toe -a -s (informe sobre todas las bases de datos de terminal y una columna con entradas pertenecientes a una base de datos de terminal determinada.)
 
 
 toilet
