@@ -10703,7 +10703,8 @@ $ depmod -a (Sondear todos los módulos. Opción predeterminada si no se proporc
 
 
 descriptor
-Toda aplicación tiene siempre tres descriptores de fichero abiertos, el 0 para la entrada estándar [stdin], el 1 para la salida estándar [stdout], y el 2 para la salida de errores estándar [stderr]. Del 3 al 9 son descriptores adicionales [ver tuberias]. En el ejemplo:
+Toda aplicación tiene siempre tres descriptores de fichero abiertos, el 0 para la entrada estándar [stdin], el 1 para la salida estándar [stdout], y el 2 para la salida de errores estándar [stderr]. Del 3 al 9 son descriptores adicionales [ver tuberias].
+$ ls -l /proc/self/fd (contiene un enlace simbólico para cada descriptor de archivo abierto por la terminal)
 $ exec 3>&1 > /tmp/salida.txt (que el descriptor 3 conecte su salida a donde la conecta el descriptor 1 [la pantalla] y después que este último se conecte al archivo /tmp/salida.txt. La consecuencia es que a partir de este momento todas las órdenes usarán como salida estándar el archivo)
 $ exec 1>&3 3>&- (restituye la situación inicial, que el descriptor 1 conecte su salida a la del descriptor 3, o sea, la pantalla y, después, cierra el conector 3. Por tanto, a partir de ese momento, las órdenes volverán a mostrar su salida estándar por pantalla)
 $ command > file 2>&1 (redirige la salida estándar y la salida estándar de error de command al archivo file)
@@ -32047,6 +32048,11 @@ Ejemplo de funcionamiento
 Si una herramienta muestra un contexto tipo "system_u:object_r:default_t:s0:c0,c2", mcstransd puede traducirlo automáticamente a "system_u:object_r:default_t:Marketing,Payroll"
 
 
+md2html
+Utilidad basada en la biblioteca MD4C que convierte archivos Markdown a HTML.
+$ md2html -f -o salida.html file.md (Generar documento HTML completo, incluido el encabezado y guardarlo en salida.html)
+
+
 md2term
 Ver presentaciones de markdown para textos cortos de menos de 30 líneas y, al mismo tiempo, poder visualizarse con otras presentaciones en sitios web como GitHub, GitLab, etc. El script también se puede utilizar satisfactoriamente para ver otros textos de markdown, siempre que se respeten sus limitaciones.
 $ md2term -k 1 -p -f file.md (manteniendo todas las marcas [-k 0 sin mantenerlas, -k2 solo para el titulo], aplicando "less" del archivo epecificado)
@@ -32063,12 +32069,23 @@ $ md5sum * > MD5SUMS (crear un directorio con los md5sum de todos los archivos)
 mdadm
 Gestión de raids.
 # mdadm --create --verbose /dev/md0 --level=1 --raid-devices=2 /dev/sdb1 /dev/sdc1
---create (Para crear el raid)
---verbose (No pregunte)
-/dev/md0 (Dispositivo dónde vamos a crear el raid)
---level=1 (Nivel 1 del RAID [dos discos uno espejo del otro)
---raid-devices=2 (Número de dispositivos)
-/dev/sdb1 /dev/sdc1 (los dispositivos que vamos a usar)
+        --create (Para crear el raid)
+        --verbose (No pregunte)
+        /dev/md0 (Dispositivo dónde vamos a crear el raid)
+        --level=1 (Nivel 1 del RAID [dos discos uno espejo del otro)
+        --raid-devices=2 (Número de dispositivos)
+        /dev/sdb1 /dev/sdc1 (los dispositivos que vamos a usar)
+
+
+mdbook
+Herramienta para crear libros con Markdown.
+$ mdbook init (en el directorio del markdown, crea la estructura y los archivos del nuevo libro)
+$ mdbook test (comprueba que los ejemplos de código de Rust de un libro se compilen)
+$ mdbook build (crea un libro a partir de sus archivos Markdown)
+$ mdbook clena (elimina un libro creado)
+$ mdbook watch (supervisa los archivos de un libro y lo reconstruye al cambiar)
+$ mdbook serve (muestra un libro en http://localhost:3000 y lo reconstruye al cambiar)
+$ mdbook build --help (obtener más información sobre un comando específico)
 
 
 mdetect
