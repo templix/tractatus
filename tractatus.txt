@@ -32209,6 +32209,13 @@ Sintaxis de la presentación
 	texto tabulado para marcar codigo
 
 
+media-player-info
+Archivos de identificación de reproductores multimedia. media-player-info es un repositorio de archivos de datos que describen las capacidades de los reproductores multimedia, principalmente los de almacenamiento masivo USB. Estos archivos contienen información sobre la distribución de directorios que se debe usar para agregar música a estos dispositivos, los formatos de archivo compatibles, etc. Las capacidades de los reproductores de música ahora se describen en archivos *.mpi [media player info], similares a archivos ini, junto con las reglas udev para identificar estos dispositivos.
+El proceso es el siguiente:
+Cuando se conecta un reproductor de música USB a la computadora, el sistema operativo, a través de herramientas como udev y librerías como libmtp [Media Transfer Protocol], lo identifica. udev utiliza las reglas que vienen con el paquete media-player-info para emparejar la información del dispositivo, como su ID de vendedor y producto, con el archivo .mpi correspondiente.
+Una vez identificado, el sistema sabe: Dónde guardar la música y qué estructura de directorios utiliza el dispositivo. Por ejemplo, si la música debe ir a una carpeta llamada "Music" o "Audio" y qué formatos soporta: MP3, FLAC, OGG, etc. Esta información es crucial para que aplicaciones como Rhythmbox, Amarok o Banshee puedan sincronizar música de forma correcta y sin problemas con el reproductor.
+
+
 mech-dump
 Muestra información sobre una página web.
 $ mech-dump --all URL (toda)
