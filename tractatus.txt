@@ -32216,6 +32216,17 @@ Cuando se conecta un reproductor de música USB a la computadora, el sistema ope
 Una vez identificado, el sistema sabe: Dónde guardar la música y qué estructura de directorios utiliza el dispositivo. Por ejemplo, si la música debe ir a una carpeta llamada "Music" o "Audio" y qué formatos soporta: MP3, FLAC, OGG, etc. Esta información es crucial para que aplicaciones como Rhythmbox, Amarok o Banshee puedan sincronizar música de forma correcta y sin problemas con el reproductor.
 
 
+media-types
+Es un paquete que proporciona el archivo /etc/mime.types. Este archivo es una base de datos que asocia tipos MIME [Multipurpose Internet Mail Extensions] con las extensiones de archivo más comunes. Su función principal es ayudar a los programas a identificar el tipo de contenido de un archivo basándose en su extensión, lo que es útil para aplicaciones como servidores web, gestores de archivos, navegadores, etc.
+$ cat /etc/mime.types | grep "text/html"
+        text/html	html htm shtml
+$ cat /etc/mime.types | grep "image/png"
+        image/png	png
+$ grep "jpeg" /etc/mime.types
+        image/jpeg	jpeg jpg jpe jfif
+        video/jpeg2000
+
+
 mech-dump
 Muestra información sobre una página web.
 $ mech-dump --all URL (toda)
