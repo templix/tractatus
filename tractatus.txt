@@ -32169,6 +32169,16 @@ Herramienta para buscar servicios mDNS/DNS-SD publicados en la red local. Recupe
 $ mdns-scan
 
 
+mdnsd
+Daemon que implementa mDNS [Multicast DNS], permitiendo que sistemas pequeños anuncien y descubran servicios como FTP, HTTP y SSH en redes locales sin necesidad de un servidor DNS centralizado. Su uso es habitual en entornos ligeros o integrados donde se busca auto-descubrimiento de servicios. Utiliza UDP y por defecto el puerto 5353 para mDNS multinodal, anunciando y resolviendo. Los servicios se muestran en /etc/mdnsd/services/ssh.service
+# mdnsd (inicia el daemon y comienza a gestionar anuncios y consultas mDNS en la red local)
+# mdns-scan (listará servicios detectables por mDNS, incluyendo los que mdnsd haya anunciado en este host)
+Se acomseja que la configuración incluya la linea:
+# nano /etc/nsswitch.conf
+        hosts: files mdns4_minimal [NOTFOUND=return] dns
+Para priorizar resolución mDNS antes de DNS clásico.
+
+
 mdp
 Presentaciones con terminal en markdown.
 $ mdp presentacion.mdp (arrancar la presentación)
@@ -34843,7 +34853,7 @@ nmcli
 Herramienta de línea de comandos para controlar NetworkManager y para conocer su estado.
 $ nmcli device wifi list (listar wifis cercanas)
 $ nmcli -m tabular device show (ver todos los dispositivos de red de forma tabulada. Otra opción es multiline)
-$ nmcli connection show (ver conexiones activas)
+$ nmcli connection show (ver conexion activa)
 $ nmcli connection (lo mismo)
 $ nmcli general status (estado)
 $ nmcli device wifi connect SSID_or_BSSID password password (conectarse a una wifi)
