@@ -32234,6 +32234,23 @@ $ mech-dump --headers URL (cabeceras)
 $ mech-dump --links (de todos los enlaces)
 
 
+mediaconch
+Herramienta de código abierto diseñada para verificar, validar y corregir archivos audiovisuales, especialmente aquellos utilizados en la preservación digital, como los formatos Matroska, LPCM y FFV1.
+$ mediaconch -mi archivo.mkv (verificar si un archivo cumple con las especificaciones del formato)
+$ mediaconch -p politica.xml archivo.mkv (definir políticas personalizadas en formato XML. Para validar un archivo contra una política)
+$ mediaconch -fh archivo.mkv > informe.html (generar un informe en formato HTML)
+$ mediaconch --fix archivo.mkv (sugerir correcciones para que un archivo cumpla con las especificaciones pero no modifica el original pero proporciona instrucciones para hacerlo)
+$ mediaconch -mi directorio/* (verificar múltiples archivos)
+1.-
+Para crear una política personalizada con requisitos especificos:
+$ nano politica.xml
+        <policy>
+          <rule name="VideoCodec" value="FFV1" />
+          <rule name="AudioCodec" value="LPCM" />
+        </policy>
+Guardar este archivo y úsarlo con el comando -p.
+
+
 mediainfo
 Utilidad que se utiliza para recuperar información técnica y otros metadatos sobre archivos de audio o vídeo.
 $ mediainfo -f archivo.mp3 (con la máxima información)
