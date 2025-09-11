@@ -32132,9 +32132,20 @@ Convertir imágenes MDF a ISO
 $ mdf2iso archivo.mdf archivo.iso
 
 
-mdk3
-Herramienta de ataque para redes IEEE 802.11
-# mdk3 wlan0 a (Utilizar la interfaz wireless [wlan0] para ejecutar un test DoS [a])
+mdk4
+Herramienta de auditoría de seguridad para redes WiFi que permiten probar la resistencia de puntos de acceso y clientes mediante diversos tipos de ataques de denegación de servicio [DoS] y pruebas de estrés. mdk4 es una versión mejorada de mdk3 con más modos de ataque y mejor rendimiento
+# airmon-ng start wlan0 (poner la interfaz en modo monitor)
+# airodump-ng wlan0mon (ver redes disponibles)
+# mdk4 wlan0 a (Utilizar la interfaz wireless para ejecutar un test DoS)
+# mdk4 wlan0mon d -b lista_APs.txt (desautenticar todos los clientes de un AP específico)
+# mdk4 wlan0mon d -c CC:CC:CC:CC:CC:CC -B SSID_AP (desautenticar un cliente específico)
+# mdk4 wlan0mon a -a AA:AA:AA:AA:AA:AA -m (enviar peticiones de autenticación masivas)
+# mdk4 wlan0mon b -f /usr/share/wordlists/rockyou.txt -c 11 (crear APs falsos masivamente)
+# mdk4 wlan0mon p -e "Fake_Network" -s 1000 (enviar probes requests masivos)
+# mdk4 wlan0mon b -n "Test_Network" -c 6 -s 10 (ejemplo de testing controlado)
+Para crear lista de APs objetivo:
+$ echo "AA:AA:AA:AA:AA:AA" > lista_APs.txt
+$ echo "BB:BB:BB:BB:BB:BB" >> lista_APs.txt
 
 
 mdm
@@ -32146,6 +32157,11 @@ Entrada automática:
 [daemon]
 AutomaticLoginEnable=true
 AutomaticLogin=USUARIO
+
+
+mdns-reflector
+Utilidad de alto rendimiento para reflejar consultas y respuestas de mDNS entre varias LANs, permitiendo que dispositivos en distintas redes se detecten mutuamente aunque estén segmentados por motivos de seguridad. Esto es especialmente útil en escenarios con IoT o dispositivos inteligentes distribuidos en VLANs separadas. mdns-reflector recibe paquetes de mDNS [puerto UDP 5353, multicast 224.0.0.251] en varias interfaces de red, y los reenvía entre ellas, haciendo que los dispositivos mDNS de una red puedan descubrir servicios en otra, como impresoras, Chromecast o hubs domóticos.
+# mdns-reflector -i eth0 -i eth1 (lanzar el demonio especificando las interfaces que actuarán como “puentes” mDNS)
 
 
 mdns-scan
