@@ -19910,6 +19910,15 @@ Ahora se pueden usar comandos como:
 $ gdbserver 192.168.1.100:1234 ./saludo (estando en otra máquina)
 
 
+gdbus
+Herramienta para trabajar con objetos D-Bus [Desktop Bus], un sistema de comunicación entre procesos [IPC] que permite que diferentes aplicaciones se comuniquen entre sí en un entorno de escritorio o servidor, por ejemplo que un reproductor de música notifique a la barra de tareas que está reproduciendo una canción, o gestionar el brillo de la pantalla, el volumen, la red... D-Bus organiza la comunicación en objetos, que son entidades que exponen métodos [Funciones que pueden ser llamadas remotamente], señales [Eventos que notifican cambios o acciones] y propiedades [Valores que pueden ser leídos o modificados]. Cada objeto tiene una ruta [path] única, como /org/freedesktop/NetworkManager que podría exponer un método GetDevices para listar dispositivos de red, o emitir una señal DeviceAdded cuando se conecta un nuevo dispositivo.
+$ ls /usr/share/dbus-1/services/ (ver todos los servicios disponibles)
+$ gdbus introspect --system --dest org.freedesktop.NetworkManager --object-path /org/freedesktop/NetworkManager (inspeccionar los métodos, señales, propiedadesd del objeto de NetworkManager. Genera un xml con la información)
+$ gdbus call --system --dest org.freedesktop.NetworkManager --object-path /org/freedesktop/NetworkManager --method org.freedesktop.NetworkManager.GetDevices (listar dispositivos de red)
+$ gdbus monitor --system --dest org.freedesktop.NetworkManager (monitorear NetworkManager en tiempo real y ver las interacciones con el objeto)
+$ gdbus wait --system org.freedesktop.NetworkManager (espera a que un servicio esté disponible en el bus)
+
+
 gddrescue
 Herramienta, desarrollada por GNU, de recuperación de datos de dispositivos de almacenamiento dañados como discos duros, USB, CD/DVD, etc. A diferencia de dd [ver], gddrescue es inteligente: si encuentra errores, no se detiene, sino que registra las zonas problemáticas y sigue copiando el resto de los datos. Luego puede reintentar las zonas dañadas con diferentes estrategias.
 # ddrescue -f -n /dev/sda disco_rescatado.img mapa.log (-f: fuerza la operación, necesario si el destino es un archivo, -n: Modo "no scrap" que evita operaciones agresivas en la primera pasada, disco dañado. imagen de destino y archivo de registro)
