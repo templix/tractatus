@@ -32311,6 +32311,45 @@ $ megals --recursive / | grep "factura" (busca todos los archivos que contengan 
 Nota.- megatools puede dejar de funcionar si Mega actualiza su protocolo
 
 
+meli
+Cliente de correo y noticias [usenet] compatible con múltiples cuentas, Maildir, almacenamiento de contenido mbox, almacenamiento limitado de metadatos y protocolos IMAP, JMAP y NNTP.
+Ejemplo de configuración para Gmail. Se ha de activar “Contraseñas de aplicación” en gmail.
+$ nano ~/.config/meli/config.toml
+        [accounts]
+         [[accounts]]
+         name = "personal"
+         email = "tuemail@gmail.com"
+         inbox = "~/Mail/inbox"
+         sent = "~/Mail/sent"
+        [[accounts.imap]]
+         server = "imap.gmail.com"
+         port = 993
+         username = "tuemail@gmail.com"
+         password = "tucontraseñaapp"  # Usa contraseña de app, no la de cuenta normal
+         tls = true
+        [[accounts.smtp]]
+         server = "smtp.gmail.com"
+         port = 587
+         username = "tuemail@gmail.com"
+         password = "tucontraseñaapp"
+         tls = true
+$ meli (entra en el interfaz de usuario mostrando todas las cuentas)
+Navegación básica:
+        j / k --> Bajar / subir mensaje
+        Enter --> Abrir mensaje
+        q --> Salir del mensaje o salir de la vista actual
+        Q --> Salir de meli
+        c --> Cambiar cuenta
+        C --> Crear nuevo mensaje
+        r --> Responder
+        d --> Marcar como eliminado
+        u --> Desmarcar eliminado
+        / --> Buscar texto
+        # --> Filtrar por etiqueta [ej: #unread]
+        t --> Cambiar etiquetas [tags]
+$ meli -a personal -f inbox (ver mensajes sin leer)
+
+
 melt
 Editor de video y reproductor de audio.
 $ melt video.mp4
