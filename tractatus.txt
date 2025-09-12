@@ -32375,6 +32375,27 @@ Herramienta del sistema diseñada para mejorar la resiliencia y la estabilidad d
 # systemctl enable memlockd
 
 
+memo
+Software de toma de notas y tareas pendientes estilo UNIX.
+$ memo -a "comprar pan" (entrar una nota)
+$ memo -a "recoger a juan" 2025-09-25
+$ memo -s (ver listado de notas)
+$ memo -f comprar (buscar notas con la palabra "comprar")
+$ memo -r 2 "recoger a juan y a enrique" (modificar la entrada 2 con nuevo texto)
+$ memo -P 1 (posponer una nota)
+$ memo -P (mostrar todas las notas pospuestas)
+$ memo -u (mostrar solo notas sin hacer, sin las pospuestas)
+$ memo -T (marcar todas las notas como hechas)
+$ memo -R (suprimir todas las notas marcadas como hechas)
+$ memo -o (listar notas según fecha)
+$ memo -M (marcar nota como no hecha)
+$ memo -m (marcar nota como hecha)
+$ memo -l 3 (mostrar las últimas 3 notas)
+$ memo -d 2 (suprimir la nota 2)
+$ memo -D (suprimir todas las notas)
+$ memo -e html notas (descargar todas las notas a un archivo html "notas")
+
+
 memoria
 Liberar memória física
 # sync
