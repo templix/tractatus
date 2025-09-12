@@ -32285,6 +32285,32 @@ opciones:
 -M module (Especificar un módulo de los disponibles)
 
 
+megatools
+Herramientas para interactuar con el servicio de almacenamiento en la nube Mega.nz, anteriormente Mega.co.nz y no oficialmente mantenidas. Permite subir y descargar archivos y carpetas enteras, listar contenido del almacenamiento en la nube, crear, mover, renombrar o eliminar archivos/directorios, descargar en streaming para reproducir videos/audio sin descargarlos completamente, copiar entre directorios en Mega, ver información de cuentas y cuota disponible.
+Mustra de un archivo de configuración básico
+$ nano ~/.megarc
+        [Login]
+        Username = user@correo.com
+        password = contraseña
+$ megareg --register --email user@correo.com --name USER --password XXXXXXX (sin archivo de configuració, la contraseña queda en el hitorial)
+$ megals / (muestra todo el contenido raíz de tu cuenta Mega)
+$ megals /Mis_Documentos (lista el contenido de una carpeta específica)
+$ megacopy --local /home/usuario/documento.pdf --remote /Mis_Documentos/documento.pdf (sube documento.pdf desde el disco local a la carpeta /Mis_Documentos en Mega)
+$ megacopy --local /home/usuario/FotosVacaciones --remote /Fotos/ (sube toda la carpeta FotosVacaciones recursivamente)
+$ megacopy --remote /Mis_Documentos/informe.pdf --local ~/Descargas/informe.pdf (descarga informe.pdf desde Mega a tu carpeta local)
+$ megacopy --remote /Fotos/Viaje2024 --local ~/Descargas/Viaje2024 (descargar una carpeta completa)
+$ megadl --stream /Videos/pelicula.mp4 | vlc - (inicia la descarga en streaming y la redirige a VLC como entrada estándar [-]. No se guarda el archivo en disco hasta que se reproduce)
+$ curl -s "$(megadl --stream /Videos/pelicula.mp4)" | mpv - (devuelve la URL de descarga en tiempo real, que se puede usar con curl, wget, etc para escuchar música)
+$ megamkdir /NuevaCarpeta (crea una nueva carpeta en la raíz de la cuenta)
+$ megamv /Mis_Documentos/antiguo.txt /Mis_Documentos/nuevo.txt (renombra el archivo)
+$ megamv /Mis_Documentos/archivo.txt /Otros/archivo.txt (mueve el archivo a otra carpeta)
+$ megarm /Mis_Documentos/temporal.txt (elimina el archivo)
+$ megarm /ViejasFotos (elimina la carpeta completa. No hay papelera)
+$ megadf (muestra el uso de almacenamiento)
+$ megals --recursive / | grep "factura" (busca todos los archivos que contengan factura en su nombre en toda tu cuenta)
+Nota.- megatools puede dejar de funcionar si Mega actualiza su protocolo
+
+
 melt
 Editor de video y reproductor de audio.
 $ melt video.mp4
