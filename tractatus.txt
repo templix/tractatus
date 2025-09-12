@@ -32370,8 +32370,14 @@ Programa que vuelca la memoria del sistema a la salida estándar, omitiendo los 
 Nota.- Si memdump se ejecuta sin parámetros, puede leer más de la cuenta o tocar zonas sensibles [mapeos de kernel o dispositivos], y el sistema puede caer. En kernels modernos, /dev/mem está muy restringido, por eso a veces devuelve solo ceros o corta en 1 MB, pero sigue siendo peligroso.
 
 
+memlockd
+Herramienta del sistema diseñada para mejorar la resiliencia y la estabilidad de un sistema Linux bajo condiciones de alta carga de memoria o pánico de memoria. En esencia, su función principal es bloquear archivos clave del sistema en la RAM, impidiendo que sean intercambiados [swapped] al disco duro. El paginamiento excesivo ocurre cuando el sistema operativo necesita más memoria RAM de la que tiene disponible. Para liberar espacio, mueve páginas de memoria que no se usan activamente al disco duro, área de intercambio o swap. Si esta situación se vuelve extrema, el sistema se ralentiza drásticamente, haciendo casi imposible interactuar con él, incluso para iniciar sesión o ejecutar comandos básicos. Cuando se inicia, el daemon memlockd lee una lista de archivos y bibliotecas esenciales como /bin/login, /bin/getty, /bin/bash, y las bibliotecas compartidas que usan y las bloquea en la memoria. Al hacerlo, garantiza que los procesos de inicio de sesión, la consola de administración y otras herramientas críticas permanezcan accesibles y reactivos, incluso si el resto del sistema está sufriendo una sobrecarga de memoria. El uso de memlockd no evita que el sistema se ralentice, pero asegura que las herramientas de rescate y administración sigan funcionando para que se pueda solucionar el problema.
+# systemctl enable memlockd
+
+
 memoria
 Liberar memória física
+# sync
 # echo 3 > /proc/sys/vm/drop_caches
 
 
