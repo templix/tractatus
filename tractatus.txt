@@ -32363,6 +32363,13 @@ $ members -p grupo  (el usuario primario)
 $ members -s grupo  (los secundarios)
 
 
+memdump
+Programa que vuelca la memoria del sistema a la salida estándar, omitiendo los huecos en los mapas de memoria. Por defecto, el programa vuelca el contenido de la memoria física. Este programa no funcionará si CONFIG_STRICT_DEVMEM está habilitado en el kernel. Desde la versión 2.6, varios kernels habilitan esta opción por defecto.
+# memdump -s 1024 -b 16 | hexdump -C (leerá 1 KB de memoria y lo mostrará en hex de forma segura)
+# memdump (vuelca /dev/mem [memoria física del sistema] y muestra bytes binarios en pantalla)
+Nota.- Si memdump se ejecuta sin parámetros, puede leer más de la cuenta o tocar zonas sensibles [mapeos de kernel o dispositivos], y el sistema puede caer. En kernels modernos, /dev/mem está muy restringido, por eso a veces devuelve solo ceros o corta en 1 MB, pero sigue siendo peligroso.
+
+
 memoria
 Liberar memória física
 # echo 3 > /proc/sys/vm/drop_caches
