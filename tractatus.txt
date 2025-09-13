@@ -30798,6 +30798,22 @@ Para arrancar el sistema sin colocar la contraseña:
 # nano /etc/lxdm/lxdm.conf
 Y en elk apartado [base] descomentamos la linea:
   autologin=usuario
+7.-
+Para suprimir la decoración de las terminales:
+Suprimir solo para lxterminal
+$ nano /home/pep/.config/openbox/lxde-rc.xml
+Y en el apartado <applications> [la última parte del archivo] colocar
+        <application class="Lxterminal">
+          <name>lxterminal</name>
+          <decor>no</decor>
+        </application>
+Para suprimir la decoración de todas las shells. colocar estas otas lineas:
+        <application class="*">
+          <decor>no</decor>
+        </application>
+<application name="primer elemento de la propiedad WM_CLASS de la ventana de xprop"
+class="segundo elemento de la propiedad WM_CLASS de la ventana de xprop"
+$ openbox --restart
 
 
 lxlock
@@ -32415,6 +32431,15 @@ memtest86
 memtester
 Utilidad para probar el subsistema de memoria en busca de fallas.
 $ memtester 10 2 (con 10 MB y 2 bucles)
+
+
+memtool
+Herramienta que permite leer y escribir en la memoria física del sistema a través de /dev/mem útil para diagnosticar hardware, probar registros de dispositivos, desarrollar o depurar firmware, drivers o sistemas embebidos e interactuar con registros de control de chips, como GPIO, UART, PWM, etc. en placas como Raspberry Pi, BeagleBone, etc. memtool accede directamente a la memoria física. Usarlo mal puede causar bloqueos del sistema, corrupción de datos o reinicios inesperados. Solo debe usarse con conocimiento profundo del hardware y bajo condiciones controladas, preferiblemente en sistemas embebidos o de pruebas.
+# memtool 0x44E07000 (leer el valor de un registro de un dispositivo mapeado en la dirección 0x44E07000)
+# memtool -w 0x44E07000 0xDEADBEEF (escribir 0xDEADBEEF en la dirección 0x44E07000. Verificar con el comando anterior)
+# memtool -b 0x44E07000 (leer solo 1 byte, útil para registros de estado de GPIO)
+# sudo memtool -b 0x481AF01C 0x01 (Suponiendo que el registro de salida de GPIO está en 0x481AF01C, activar un pin GPIO)
+Nota.- En sistemas modernos con CONFIG_STRICT_DEVMEM=y [predeterminado en kernels de Debian], solo se permite acceder a ciertas regiones de memoria, evitando acceso a áreas críticas del kernel. Si se intenta acceder a una dirección prohibida, se obtendrá: memtool: Cannot access /dev/mem: Operation not permitted
 
 
 memusage
