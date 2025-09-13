@@ -28735,6 +28735,22 @@ Este paquete contiene utilidades para analizar y configurar las capacidades de l
 # filecap
 
 
+libmemcached-tools
+Conjunto de utilidades para interactuar y administrar servidores Memcached. Este toolkit está diseñado para ser eficiente en uso de memoria, seguro para subprocesos y ofrecer acceso completo a los métodos del servidor. Este paquete proporciona varias herramientas de línea de comandos: memcaslap, memccapable, memccat, memccp, memcdump, memcerror, memcexist, memcflush, memcparse, memcping, memcrm, memcslap, memcstat y memctouch.
+$ memccp --servers localhost archivo.txt (guarda el contenido de archivo.txt en Memcached y el nombre del archivo es la clave "archivo.txt")
+$ memccat --servers localhost archivo.txt (recupera y muestra el contenido de la clave archivo.txt desde Memcached)
+$ memcdump --servers localhost (listar todas las claves existentes en el servidor Memcached)
+$ memcrm --servers localhost archivo.txt (borra la clave archivo.txt de Memcached)
+$ memcflush --servers localhost (vacía todo el almacenamiento de Memcached, elimina todas las claves)
+$ memcstat --servers localhost (muestra estadísticas del servidor)
+$ memaslap -s 127.0.0.1:11211 -S 5s (realiza tests de rendimiento por 5 segundos con valores por defecto: 16 concurrencias, 1 hilo, operación get/set 9:1, etc.)
+$ memaslap -s 127.0.0.1:11211 -t 2m -v 0.2 -e 0.05 (ejecuta pruebas durante 2 minutos, con 20% de verificación de datos y 5% de registros con experación)
+$ memcexist --servers localhost clave1 clave2` (informa si las claves existen)
+$ memcping --servers localhost (equivalente a "ping" de red para servidores Memcached)
+$ memctouch --servers localhost -e 120 clave (cambia o renueva el tiempo de expiración de una clave)
+Nota.- Por defecto el puerto es el 11211.
+
+
 libnetcfg
 Libnet es una API que ayuda con la construcción e inyección de paquetes de red de bajo nivel. La utilidad libnetcfg se puede utilizar para configurar libnet.
 $ libnetcfg
