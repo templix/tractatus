@@ -30811,8 +30811,8 @@ Colocar el siguiente código en el apartado applications:
 Esto abrirá firefox en el escritorio 2
 6.-
 Para arrancar el sistema sin colocar la contraseña:
-# nano /etc/lxdm/lxdm.conf
-Y en elk apartado [base] descomentamos la linea:
+# nano /etc/lightdm/lightdm.conf
+Y en el apartado [base] descomentamos la linea:
   autologin=usuario
 7.-
 Para suprimir la decoración de las terminales:
@@ -47537,6 +47537,13 @@ $ xdg-open http://www.tuxapuntes.com/   (abre la url)
 $ xdg-open imagen.jpg  (abre la imagen)
 $ cat /usr/share/applications/defaults.list. (Listado del sistema)
 $ cat .local/share/applications/mimeapps.list  (Listado del usuario)
+
+
+xdg-settings
+[xdg-utils]. Obtener o establecer el navegador web y los manejadores URI predeterminados.
+$ xdg-settings get default-web-browser (ver el navegador por defecto)
+$ xdg-settings set default-web-browser firefox.desktop (cambiar a firefox)
+$ xdg-settings check default-web-browser firefox.desktop (chequear si firefox es el navegador por defecto)
 
 
 xdotool
