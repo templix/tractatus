@@ -32508,6 +32508,27 @@ $ meow -c 3 (imprime 3 gatos)
 $ meow -l (soy literalmente este gato)
 
 
+mercurial
+Es un sistema de gestión de control de versiones rápido y ligero, diseñado para la gestión eficiente de proyectos distribuidos de gran tamaño
+$ hg clone URL (para clonar un repositorio)
+$ hg init (crear un nuevo repositorio en el directorio indicado)
+$ hg status (ver todos los cambios pendientes)
+$ hg add (añadir los archivos especificados en la próxima confirmación. Si no se especifica ningún archivo, todos los nuevos archivos se añaden al repositorio)
+$ hg commit (confirmar los cambios)
+$ hg push (enviar los cambios)
+$ hg pull (recuperar los cambios que han realizado y llevado al repositorio)
+$ hg update (mostrar los cambios asociados en el repositorio local)
+$ hg rollback (deshace la última operación de Mercurial)
+$ hg log (mostrar el historial de revisiones de todo el repositorio)
+$ hg summary (resumir el estado del directorio de trabajo)
+Ejemplo básico de archivo de configuración
+$ nano /.hgrc
+        [ui]
+            username = William von Hagen
+            editor = emacs -nw
+            verbose = True
+
+
 mesg
 Controla el acceso a la terminal por otros usuarios. Se utiliza para permitir o rechazar que otros usuarios escriban mensajes a la propia terminal
 $ mesg y   (autoriza)
