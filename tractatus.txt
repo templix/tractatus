@@ -47528,15 +47528,18 @@ $ xd --input /ulb (entra en el directorio /usr/local/bin)
 Si existen varios con las mismas iniciales mostraría la lista para escoger el número del que corresponda al que queremos.
 
 
-xdg
-Establece o abre archivos y url con las aplicaciones establecidas por defecto. Estas se encuentran definidas en /usr/share/applications/defaults.list.
-$ xdg-mime query default text/html    (Mostrar la aplicación que por defecto abre un html)
-$ xdg-mime default vlc.desktop video/mpeg  (establecer vlc por defecto)
-$ xdg-mime default pcmanfm.desktop application/x-directory (establece PcMan como gestor de ficheros)
-$ xdg-open http://www.tuxapuntes.com/   (abre la url)
-$ xdg-open imagen.jpg  (abre la imagen)
-$ cat /usr/share/applications/defaults.list. (Listado del sistema)
-$ cat .local/share/applications/mimeapps.list  (Listado del usuario)
+xdg-mime
+Consultar e instalar tipos MIME y asociaciones.
+$ xdg-mime default brave-browser.desktop x-scheme-handler/http (establecer brave como navegador predeterminado)
+$ xdg-mime default atril.desktop application/pdf (establecer atril como lector de pdfs predeterminado)
+$ xdg-mime query default text/html (Mostrar la aplicación que por defecto abre un html)
+$ xdg-mime query default application/pdf (consultar cual es el lector de pdfs determinado)
+$ xdg-mime query default inode/directory (consultar la terminal predeterminada)
+$ xdg-mime default thunar.desktop inode/directory (establecer el navegador de archivos)
+$ xdg-mime query default video/ogg (consultar el lector de videos)
+$ xdg-mime default mpv.desktop video/x-flv video/ogg video/webm video/mpeg video/mp4 video/flv video/avi (establecer como lector de videos predeterminado mpv para todas las extensiones referenciadas)
+$ xdg-mime query default image/jpeg image/png image/webp (consultar el letor de imágenes)
+$ xdg-mime query filetype documento.pdf (consultar el tipo MIME de un archivo)
 
 
 xdg-settings
@@ -47544,6 +47547,33 @@ xdg-settings
 $ xdg-settings get default-web-browser (ver el navegador por defecto)
 $ xdg-settings set default-web-browser firefox.desktop (cambiar a firefox)
 $ xdg-settings check default-web-browser firefox.desktop (chequear si firefox es el navegador por defecto)
+
+
+xdg-utils
+Utilidades que permiten a las aplicaciones interactuar con el entorno de escritorio [Desktop Environment, DE] de forma independiente del DE específico que se esté usando [GNOME, KDE, LXDE, XFCE, MATE, etc.]. Esto es crucial para que las aplicaciones instaladas desde fuentes externas como AppImages, snaps, o paquetes .deb, funcionen correctamente en cualquier entorno gráfico. Incluye las siguientes herramientas xdg-desktop-menu, xdg-desktop-icon, xdg-email, xdg-icon-resource, xdg-mime [ver], xdg-open, xdg-screensaver y xdg-settings [ver]. Los archivos .desktop están en /usr/share/applications/ o ~/.local/share/applications/, los íconos se instalan en ~/.local/share/icons/ o /usr/share/icons/.
+$ xdg-open https://www.google.com (abre un archivo, URL o directorio con la aplicación predeterminada)
+$ xdg-open /home/usuario/documentos/foto.jpg
+$ xdg-open /home/usuario/Documentos/
+$ xdg-email --subject "Hola" --body "Este es un mensaje de prueba" usuario@ejemplo.com (abre el cliente de correo electrónico predeterminado)
+$ xdg-icon-resource install --novendor --size 64 miapp.png miapp (instalar un ícono para una app personalizada, no añade un prefijo de proveedor, tamaño, archivo de la imagen y nombre icono sin extensión)
+$ xdg-icon-resource uninstall miapp (desinstalarlo)
+$ xdg-desktop-menu install --novendor miapp.desktop (instalar una entrada de menú)
+$ xdg-desktop-menu uninstall miapp.desktop (desinstalarla)
+$ xdg-desktop-menu forceupdate (forzar actualización del menú si no aparece inmediatamente)
+$ xdg-desktop-icon install --novendor miapp.desktop (crear un acceso directo en el escritorio)
+$ xdg-desktop-icon uninstall miapp.desktop (eliminarlo)
+$ xdg-screensaver suspend (informar al sistema que estás activo para evitar que se apague la pantalla)
+$ xdg-screensaver resume (restaurar el comportamiento normal)
+$ xdg-screensaver status (comprobar el estado)
+$ ls /usr/bin/xdg-* (ver todos los comandos disponibles)
+El archivo miapp.desktop debe estar bien formado. Ejemplo mínimo:
+$ nano miapp.desktop
+        [Desktop Entry]
+        Name=Mi Aplicación
+        Exec=/usr/bin/miapp
+        Icon=miapp
+        Type=Application
+        Categories=Utility;
 
 
 xdotool
