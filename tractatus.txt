@@ -32493,6 +32493,14 @@ $ mencoder -oac copy -ovc copy -o resultado.avi *.avi (Unir todos los .avi de un
 	-oac copy (Se utilizará la misma codificación de audio que en el original)
 
 
+menu
+Mantiene sincronizados los menús de los diferentes gestores de ventanas con la lista de programas instalados. Cada aplicación que desea aparecer crea un archivo en /usr/share/menu/<paquete> usando una sintaxis específica para declarar cómo quiere mostrarse la entrada, su nombre, icono y comando de ejecución. Cuando se instala o elimina un paquete, el menú se actualiza automáticamente ejecutando comandos internos en los scripts de postinstalación, manteniendo los menús del sistema sincronizados con las aplicaciones presentes. Incluye las aplicaciones install-menu, su-to-root y update-menus
+# update-menus (se regeneran los menús de todos los gestores compatibles como IceWM, WindowMaker, Enlightenment, etc. para reflejar cualquier cambio reciente de aplicaciones o entradas personalizadas)
+install-menu es llamado internamente por update-menus y se encarga de ejecutar los "métodos de menú" específicos a cada gestor de ventanas para traducir la base de datos del menú al formato específico requerido por el gestor de ventanas.
+# install-menu /etc/menu-methods/icewm (Esto toma la base del menú y la convierte a un menú nativo de IceWM. En la práctica, rara vez se invoca de forma manual)
+$ su-to-root -X -p root -c synaptic (el comando es un programa X11 que no requiere una terminal, ejecutar como root y comando que se abrirá)
+
+
 meow
 Imprime gatos ASCII en la terminal vriando la forma cada vez que se ejecuta.
 $ meow (imprime un gato)
