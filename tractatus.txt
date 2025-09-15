@@ -25156,6 +25156,13 @@ Se utiliza para editar y mostrar la información de autorización utilizada en l
 $ iceauth -v (entrar en el prompt y mostrar mensajes detallados, "q" para salir del prompt)
 
 
+icnsutils
+Permite extraer imágenes PNG desde archivos .icns [formato de iconos de macOS] y también crear archivos .icns a partir de imágenes PNG. Incluye las herramientas icns2png y png2icns.
+$ icns2png -x mi_icono.icns (extrae todas las imágenes del archivo "mi_icono.icns" a archivos PNG individuales en el directorio actual)
+$ icns2png -l mi_icono.icns (listar los tamaños incluidos en el icns)
+$ png2icns icono.icns icono_16.png icono_32.png icono_128.png (generará el archivo "icono.icns" utilizando los archivos PNG proporcionados)
+
+
 ico
 Muestra poligonos en movimiento en la terminal.
 $ ico -faces -colors red -sleep 0.5 (poligono conpacto rojo moviendose cada medio segundo)
@@ -25166,6 +25173,20 @@ iconv
 Modificar la codificación de un archivo. Para saber la codificación de un archivo $ file --mime-encoding archivo.txt
 $ iconv -l   (Muestra todas las opciones posibles)
 $ iconv -f ISO85591 -t UTF8 viejo.txt -o nuevo.txt (Pasar viejo.txt de codificación ISO-8559-1 a UTF-8 en el nuevo.txt)
+
+
+icoutils
+Herramientas de línea de comandos diseñadas para extraer, crear y manipular iconos y cursores de Windows [archivos .ico, .cur, y también recursos embebidos dentro de archivos .exe o .dll]. Incluye los ejecutables extresso, genresscript, icotool y wrestool
+$ wrestool -l programa.exe (listar todos los recursos en un .exe)
+$ wrestool -x --type=group_icon -o iconos/ programa.exe (extraerá todos los grupos de iconos y los guardará en la carpeta iconos/)
+$ wrestool -x --type=group_cursor -o cursores/ programa.exe (extraer cursores)
+$ wrestool -x --type=group_icon --name=101 -o icono101.ico programa.exe (extraer un recurso específico por ID)
+$ icotool -x icono.ico (generará archivos como icono_0.png, icono_1.png etc., uno por cada tamaño/formato dentro del .ico)
+$ icotool -c -o nuevo_icono.ico imagen32.png imagen16.png imagen48.png (crear un archivo `.ico a partir de varios PNG. El orden no importa; icotool organiza automáticamente por tamaño)
+$ icotool -c --cursor -o puntero.cur cursor_hotspot_32.png (crear un cursor .cur)
+Nota.- Los cursores requieren un "hotspot" [punto de clic]. Si no se especifica, usa [0,0]. Se puede usar "--hotspot=X,Y".
+$ extresso programa.exe (extraer todos los recursos de un .exe. Crea una carpeta programa.exe.dir/ con subcarpetas como: group_icon/, group_cursor/, bitmap/, dialog/, etc.)
+$ genresscript programa.exe.dir > recursos.rc (generar script .rc a partir de una carpeta de recursos)
 
 
 icp
