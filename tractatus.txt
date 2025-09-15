@@ -32550,6 +32550,56 @@ $ nano /.hgrc
             verbose = True
 
 
+merecat
+Es un servidor web sencillo basado en thttpd que admite todas las funciones básicas necesarias para la mayoría de los casos de uso. Las características más destacadas son probablemente HTTPS, el uso de OpenSSL, PHP, múltiples servidores con soporte para redireccionamiento HTTP, redirección de HTTP a HTTPS, hosts virtuales y limitación del tráfico URL.
+Ejemplo de configuración básica del servidor:
+# nano /etc/merecat/merecat.conf
+        # Directorio raíz donde están los archivos del sitio
+        docroot=/var/www/misitio
+        #
+        # Puerto que escucha el servidor
+        port=80
+        #
+        # Habilitar HTTPS y especificar el puerto, certificado y clave privada
+        # sslport=443
+        # sslcert=/etc/ssl/certs/misitio.pem
+        # sslkey=/etc/ssl/ssl.key/misitio.pem
+        #
+        # Habilitar el soporte de PHP
+        # cgi=/usr/bin/php-cgi
+        #
+        # Habilitar los hosts virtuales
+        # vhost=1
+Nota.- Algunas líneas que empiezan con # están comentadas. Para habilitar al característica, simplemente eliminar el #.
+Ejemplo de configuración para crear un host virtual. Cada archivo en este directorio representa un host virtual:
+# nano /etc/merecat/vhosts
+**Ejemplo de archivo para `misitio.com`**:
+`$ nano /etc/merecat/vhosts/misitio.com`
+        # Archivo de configuración para misitio.com
+        docroot=/var/www/misitio.com
+        logfile=/var/log/merecat/misitio.com.log
+        # Redirección de HTTP a HTTPS
+        # rewrite_rules="^/(.*)$ https://misitio.com/$1 [R=301,L]"
+# systemctl start merecat (iniciar el servidor)
+# systemctl restart merecat (reiniciar si se han realizado cambios)
+
+
+mergerfs
+Herramienta que permite combinar varios sistemas de archivos o directorios en uno solo, presentándolos como un único punto de montaje. Es especialmente útil cuando se tiene múltiples discos duros, particiones o incluso unidades de red y se quiere gestionarlos como si fueran una sola unidad lógica. Esto es ideal para servidores, NAS [Network Attached Storage], o cualquier escenario donde se necesite agrupar espacio de almacenamiento disperso. A diferencia de RAID, mergerfs no ofrece redundancia ni mejora el rendimiento, solo une espacios de almacenamiento. Si un disco falla se pierde la información [ver snapraid]
+# mergerfs /mnt/disco1:/mnt/disco2:/mnt/disco3 /mnt/almacenamiento (Con 3 discos montados, crear un punto de montaje unificado)
+# mergerfs /mnt/disco1:/mnt/disco2:/mnt/disco3 /mnt/almacenamiento -o defaults,allow_other,category.create=epmfs,moveonenospc=true ("allow_other" permite acceso a otros usuarios, "category.create" crea nuevos archivos en el disco con más espacio libre y "moveonenospc" mueve automáticamente archivos si un disco se llena)
+Montaje automático al iniciar el sistema
+# nano /etc/fstab
+y añadir:
+        /mnt/disco1:/mnt/disco2:/mnt/disco3 /mnt/almacenamiento fuse.mergerfs allow_other,category.create=epmfs,moveonenospc=true 0 0
+Elegir cómo mergerfs decide dónde guardar los archivos [category.create]:
+epmfs --> Usa el disco con más espacio libre [default].
+epall --> Distribuye los archivos en todos los discos simultáneamente.
+ff --> Llena un disco antes de pasar al siguiente.
+# df -h /mnt/almacenamiento (ver cómo están distribuidos los archivos)
+# mergerfs.ctldfs -o debug /mnt/almacenamiento (lo mismo)
+
+
 mesg
 Controla el acceso a la terminal por otros usuarios. Se utiliza para permitir o rechazar que otros usuarios escriban mensajes a la propia terminal
 $ mesg y   (autoriza)
@@ -41386,6 +41436,44 @@ $ findmnt / (verificar que el sistema de archivos permita la aplicación, si no 
 # snapper -c root undochange 1..2 /etc/nginx/nginx.conf (revertir un archivo)
 # systemctl enable --now snapper-timeline.timer (que se creen los puntos de restauración automáticamente)
 # snapper -c root delete 1 (eliminar instantáneas)
+
+
+snapraid
+[mergerfs [ver] + snapraid]. Unir varios discos en uno lógico para añadir paridad y proteger los datos contra fallos de disco. El disco de paridad /mnt/paridad debe ser al menos tan grande como el disco más grande de datos.
+Ejemplo de configuración básica:
+# nano /etc/snapraid.conf
+        # Discos de datos (sin la barra final)
+        disk d1 /mnt/disco1
+        disk d2 /mnt/disco2
+        disk d3 /mnt/disco3
+        #
+        # Disco de paridad (1 disco de paridad = protección contra 1 fallo)
+        parity /mnt/paridad/snapraid.parity
+        #
+        # Archivo de contenido (guarda metadatos) /
+        content /var/snapraid/content
+        #
+        # Excluir archivos temporales o basura
+        exclude *.tmp
+        exclude *.bak
+        exclude /lost+found/
+# snapraid create (crear los archivos de paridad y contenido. Puede tardar horas, dependiendo del tamaño de los discos)
+# mergerfs /mnt/disco1:/mnt/disco2:/mnt/disco3 /mnt/almacenamiento -o defaults,allow_other,category.create=epmfs (montar los discos de datos con mergerfs [ver])
+# snapraid sync (ejecutar cada vez que se añade o modifica archivos)
+Automatizar la sincronización
+# crontab -e
+Añadir la línea para sincronizar diariamente a las 3 AM:
+0 3 * * * /usr/bin/snapraid sync
+# snapraid status (comprobar que todo funciona)
+# snapraid fix (reconstruirá los archivos perdidos en otro disco)
+Nota.- La paridad no se actualiza en tiempo real. Si se pierde un disco antes de sincronizar, los cambios recientes no estarán protegidos.
+Ejemplo para montar todo al inicio**
+# nano /etc/fstab
+Añadir:
+        /mnt/disco1  /mnt/disco1  ext4  defaults  0  2
+        /mnt/disco2  /mnt/disco2  ext4  defaults  0  2
+        /mnt/disco3  /mnt/disco3  ext4  defaults  0  2
+        /mnt/paridad /mnt/paridad ext4  defaults  0  2
 
 
 snarf
