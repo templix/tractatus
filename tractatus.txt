@@ -32657,6 +32657,78 @@ $ meshio binary malla.vtk (convertir a binary)
 $ msh2xdmf domino.msh domino (convertir una malla Gmsh a dominio.xdmf y dominio.h5 con los datos de la malla)
 
 
+meson
+Sistema de compilación para herramientas como "ninja" [backend predeterminado] diseñado para ser rápido, eficiente y fácil de usar. Meson se utiliza principalmente para compilar proyectos de software escritos en lenguajes como C, C++, Rust, Python, Fortran, entre otros. Su objetivo es simplificar el proceso de configuración y compilación de proyectos grandes, como Gnome, X.org, o systemd, ofreciendo una sintaxis clara y un rendimiento superior en comparación con otros sistemas como Make o CMake. A diferencia de escribir manualmente Makefiles, Meson utiliza un lenguaje de alto nivel, legible y declarativo para definir cómo se debe compilar un proyecto.
+1.-
+Ejemplo de funcionamiento con un proyecto simple en C que imprime "¡Hola, mundo!".
+Estructura del proyecto
+        mi_proyecto/
+        ├── meson.build
+        └── src/
+            └── main.c
+El contenido de main.c:
+        #include <stdio.h>
+        int main() {
+            printf("¡Hola, mundo!\n");
+            return 0;
+        }
+Contenido de meson.build en la raiz del proyecto que describe las fuentes, dependencias, opciones de compilación y artefactos: ejecutables, bibliotecas, etc.
+        project('mi_proyecto', 'c',
+          version: '1.0',
+          default_options: ['warning_level=3'])
+        executable('mi_programa',
+          'src/main.c',
+          install: true)
+project: Define el nombre del proyecto y el lenguaje principal [c] y executable: Especifica que queremos compilar un ejecutable llamado mi_programa a partir de src/main.c.
+$ meson setup builddir (genera los archivos de compilación en el directorio builddir)
+$ ninja -C builddir (compila el proyecto)
+$ ./builddir/mi_programa (ejecuta el programa)
+$ ninja -C builddir install (Instala el programa en el sistema)
+2.-
+Ejemplo de proyecto con dependencias usando la biblioteca libcurl para hacer una solicitud HTTP
+Estructura del proyecto**
+        proyecto_curl/
+        ├── meson.build
+        └── src/
+            └── main.c
+            tests/
+            └── test.c
+Contenido de main.c:
+        #include <curl/curl.h>
+        #include <stdio.h>
+        int main() {
+            CURL *curl = curl_easy_init();
+            if (curl) {
+                curl_easy_setopt(curl, CURLOPT_URL, "https://example.com");
+                CURLcode res = curl_easy_perform(curl);
+                if (res != CURLE_OK)
+                    fprintf(stderr, "Error: %s\n", curl_easy_strerror(res));
+                curl_easy_cleanup(curl);
+            }
+            return 0;
+        }
+Contenido de meson.build
+        project('proyecto_curl', 'c',
+          version: '1.0',
+          default_options: ['warning_level=3'])
+        # Busca la dependencia libcurl
+        curl_dep = dependency('libcurl', required: true)
+        executable('curl_ejemplo',
+          'src/main.c',
+          dependencies: [curl_dep],
+          install: true)
+Pasos para compilar
+Asegurarse de tener libcurl instalado:
+# apt install libcurl4-openssl-dev
+$ meson setup builddir (configurar el proyecto)
+$ ninja -C builddir (compilar)
+$ meson test -C builddir
+$ ./builddir/curl_ejemplo (ejecutar)
+Hace una solicitud HTTP a example.com y muestra el resultado.
+$ meson setup builddir --buildtype=release (pasar opciones al configurar el proyecto, como el tipo de compilación [debug, release, minsize]
+$ meson configure builddir (definir opciones personalizadas y configurarlas)
+
+
 messages
 Contar el número de mensajes del buzón.
 $ messages
@@ -32697,6 +32769,12 @@ $ echo $HOME
 metacity
 gestor de ventanas
 $ metacity --replace (activar metacity)
+
+
+metalfinder
+Herramienta que escanea un directorio de música para encontrar conciertos cerca de una ubicación específica. Requiere registro en alguna: https://www.concerts-metal.com/next_FR-A.html, https://www.concerts-metal.com/next_FR-B.html,
+$ export METALFINDER_BIT_APPID=mysecretapikey
+$ metalfinder -d "~/Musica" -o "~/metalfinder.txt" -l "Madrid"
 
 
 metapixel
