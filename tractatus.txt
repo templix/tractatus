@@ -32664,6 +32664,12 @@ $ messages
 $ messages -s (solo mostrar el número)
 
 
+metacam
+Extraer información EXIF de archivos de cámaras digitales. EXIF [Exchangeable Image File Format] es un estándar para almacenar información de intercambio en archivos de imagen, especialmente aquellos que utilizan compresión JPEG. La mayoría de las cámaras digitales, incluidos los teléfonos móviles, utilizan actualmente el formato EXIF.
+$ metacam IMG_20240811_152933_117.jpg (ver datos EXIF de la imagen especificada)
+$ metacam -a -x imagen.jpg > datos_exif.xml (ver todos los tags y salida en formato XML y guardarlos en datos_exif.xml)
+
+
 metacaracteres
 Permiten ampliar comandos o combinar varios para construir una única orden lógica. Son varios: la tuberia [|], redirección [<>], el asterisco [*], la tilde [~], el simbolo dolar [$], el circunflejo [^], el interrogante [?], la almoadilla [#], los corchetes [[]], parentesis [()], llaves [{}], arroba [@]...
 $ date ; who (semicolon-punto y coma [;] es un separador entre ordenes que se ejecutan secuencialmente)
