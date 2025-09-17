@@ -6535,7 +6535,7 @@ chklastlog
 
 
 chkrootkit
-[incluye las aplicaciones chkwtmp y chklastlog]. Buscador de rootkits infiltrados en el sistema.
+[incluye las aplicaciones chkwtmp y chklastlog]. Buscador de rootkits infiltrados en el sistema. Al ser un paquete bastante antiguo es preferible usar rkhunter para evitar muchos falsos WARNINGS, especialmente en archivos ocultos.
 # chkrootkit  (lanzar la aplicación)
 # chkrootkit -l  (visualizar las opciones de escaneo)
 # chkrootkit sshd tcpd  (verificar solo dos opciones)
@@ -32600,6 +32600,16 @@ ff --> Llena un disco antes de pasar al siguiente.
 # mergerfs.ctldfs -o debug /mnt/almacenamiento (lo mismo)
 
 
+mescc-tools
+Herramientas de supervivencia para iniciar la construcción de un compilador o un sistema operativo desde cero. Son herramientas para el arranque binario [que no se construyen a partir de código fuente de manera normal sinó que proporcionan directamente ejecutables binarios muy simples y confiables]. Las herramientas incluidas ofrecen funcionalidades mínimas, utilizadas en las primeras etapas [compilar, ensamblar, enlazar] del arranque [Bootstrapping] de una cadena de herramientas [Toolchain] y son M1, blood-elf, catm, get_machine, hex2 y kaem.
+$ m1 hola.s -o hola (compilar un archivo hola.s para obtener un ejecutable)
+$ blood-elf -f hola.o -o hola.sym (procesa archivos objeto, output del ensamblador, para generar tablas de símbolos)
+$ catm version.h "VERSION=1.0" < version.h.in (crearía version.h con el contenido: #define VERSION "1.0")
+$ get_machine (detectar y imprimir la arquitectura de la máquina actual)
+$ hex2 -o simple simple.hex (convertir archivo simple.hex en un binario ejecutable)
+$ kaem construir.kaem (con un script construir.kaem, describe los pasos para construir un programa)
+
+
 mesg
 Controla el acceso a la terminal por otros usuarios. Se utiliza para permitir o rechazar que otros usuarios escriban mensajes a la propia terminal
 $ mesg y   (autoriza)
@@ -39272,11 +39282,11 @@ $ ripit --span 0-25 (Copiar solo los primeros 25 segundos de cada pista)
 
 
 rkhunter
-Buscador de rootkits instalados en el sistema
+Buscador de rootkits instalados en el sistema. La aplicación, preferiblemente iniciarla con los dos comandos siguientes primero.
 # rkhunter --update  (recargar la base de datos)
 # rkhunter --propupd (si se ha modificado la función Hash o para reconstruir la base de datos y evitar "Warnings" tipo: Warning: The file properties have changed)
 # rkhunter -c  (iniciar la aplicación)
-# rkhunter -c -sk (iniciar la aplicación sin pedir confirmación para proseguir después de cada sección)
+# rkhunter -c --sk (iniciar la aplicación sin pedir confirmación para proseguir después de cada sección)
 # rkhunter -c -sk --rwo (sin mostrar salida excepto los "Warnings")
 # rkhunter --list (ver todas las opciones)
 # rkhunter --list rootkits (ver el listado se rootkits que busca)
@@ -39357,6 +39367,20 @@ dará como resultado algo tipo:
 	  Checking file i18n/tr.utf8                                 [ Skipped ]
 	  ...
 10.-
+Para evitar:
+# rkhunter --update
+        Update failed
+modificar:
+# nano /var/lib/rkhunter/db/mirrors.dat
+        mirror=https://rkhunter.sourceforge.net
+        remote=http://rkhunter.sourceforge.net
+11.-
+Preferible comentar la linea:
+# nano /etc/rkhunter.conf
+#WEB_CMD=/bin/false
+Modificandola por:
+WEB_CMD=wget
+12.-
 Paquetes opcionales adicionales son: unhide para encontrar procesos y puertos ocultos y skdet (wget http://dvgevers.home.xs4all.nl/skdet/skdet) para verificaciones adicionales de Suckit Rookit.
 
 
