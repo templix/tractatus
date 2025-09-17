@@ -32646,6 +32646,17 @@ $ mesg y   (autoriza)
 $ mesg n   (desautoriza)
 
 
+meshio-tools
+Puede leer y escribir en varios formatos de datos que representan mallas no estructuradas, como DOLFIN, Gmsh, H5M o VTK. Este paquete también incluye la herramienta msh2xdmf para convertir formatos de malla Gmsh [.msh] al formato XDMF [.xdmf], que es comúnmente usado en simulaciones numéricas. Un archivo de malla o mesh file es un archivo que almacena la información geométrica y topológica de un objeto o dominio. En el contexto de las simulaciones numéricas, una malla es una discretización del espacio, dividiendo un objeto tridimensional, una superficie o una línea en elementos más pequeños y simples, como triángulos, tetraedros o hexaedros.
+$ meshio convert malla.msh malla.vtk (convertir malla.msh a malla.vtk)
+$ $ meshio info input.xdmf (Mostrar información como: que contiene 100 puntos, 150 triángulos y 50 tetraedros, además de un campo de datos llamado temperature asociado a los puntos)
+$ meshio compress input.vtu (comprimir el archivo especificado)
+$ meshio decompress input.vtu (descomprimirlo)
+$ meshio ascii malla.vtk (convertir un archivo VTK de formato binario a ascii)
+$ meshio binary malla.vtk (convertir a binary)
+$ msh2xdmf domino.msh domino (convertir una malla Gmsh a dominio.xdmf y dominio.h5 con los datos de la malla)
+
+
 messages
 Contar el número de mensajes del buzón.
         # messages
