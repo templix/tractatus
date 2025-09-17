@@ -32600,6 +32600,36 @@ ff --> Llena un disco antes de pasar al siguiente.
 # mergerfs.ctldfs -o debug /mnt/almacenamiento (lo mismo)
 
 
+mesa-drm-shim
+Este paquete proporciona bibliotecas de reemplazo [shims] para simular o interceptar llamadas al subsistema DRM [Direct Rendering Manager] del kernel de Linux. DRM es una parte del kernel de Linux que gestiona el acceso directo al hardware gráfico [GPU], especialmente para aceleración 3D, modos de video, buffers de pantalla, etc. Es fundamental para que Mesa, la implementación de OpenGL/Vulkan de código abierto. funcione correctamente con drivers como i915, amdgpu, nouveau, etc.
+# dpkg -L mesa-drm-shim (ver su contenido)
+1.-
+Ejecutar glxinfo en un entorno sin DRM
+Supongamos que se está en un contenedor Docker sin acceso a /dev/dri/card0. Normalmente, glxinfo fallaría con:
+        Error: unable to open display
+o
+        libGL error: failed to load driver: ...
+Pero si se tiene instalado mesa-drm-shim, se puede hacer:
+        LD_PRELOAD=/usr/lib/x86_64-linux-gnu/drm-shim/libdrm_shim.so glxinfo | grep "OpenGL renderer"
+Y así intercepta las llamadas a libdrm y las redirige a una implementación simulada, permitiendo que glxinfo se ejecute, aunque con renderizado por software, como llvmpipe.
+2.-
+Probar un driver de Mesa en CI sin GPU
+En un entorno de integración continua, como GitLab CI o GitHub Actions, se podría tener un script así:
+$ nano .gitlab-ci.yml
+test-mesa-driver:
+  image: ubuntu:22.04
+  script:
+    - apt update && apt install -y mesa-utils mesa-drm-shim
+    - LD_PRELOAD=/usr/lib/x86_64-linux-gnu/drm-shim/libdrm_shim.so glxinfo -B
+Esto permitirá ver qué driver de software está usando Mesa, por ejemplo, llvmpipe o softpipe, sin necesidad de GPU real.
+3.-
+Forzar renderizado por software con shim
+A veces se quiere asegurar de que la app use software rendering incluso si hay GPU. Se puede combinar el shim con variables de entorno de Mesa:
+        export LIBGL_ALWAYS_SOFTWARE=1
+        LD_PRELOAD=/usr/lib/x86_64-linux-gnu/drm-shim/libdrm_shim.so glxgears
+Notas.- No emula hardware real, solo intercepta llamadas y devuelve respuestas básicas o simuladas. No acelera nada. Solo útil para pruebas y debugging, no para uso en producción ni para obtener rendimiento gráfico y depende de Mesa y se necesita tener instalado mesa-utils o similar para tener glxinfo, glxgears, etc.
+
+
 mescc-tools
 Herramientas de supervivencia para iniciar la construcción de un compilador o un sistema operativo desde cero. Son herramientas para el arranque binario [que no se construyen a partir de código fuente de manera normal sinó que proporcionan directamente ejecutables binarios muy simples y confiables]. Las herramientas incluidas ofrecen funcionalidades mínimas, utilizadas en las primeras etapas [compilar, ensamblar, enlazar] del arranque [Bootstrapping] de una cadena de herramientas [Toolchain] y son M1, blood-elf, catm, get_machine, hex2 y kaem.
 $ m1 hola.s -o hola (compilar un archivo hola.s para obtener un ejecutable)
