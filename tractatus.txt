@@ -32777,6 +32777,15 @@ $ export METALFINDER_BIT_APPID=mysecretapikey
 $ metalfinder -d "~/Musica" -o "~/metalfinder.txt" -l "Madrid"
 
 
+metamonger
+Se utiliza para guardar, comparar y restaurar los metadatos de archivos y directorios, tales como mtime, atime, uid, gid, modos y otros atributos POSIX, utilizando un backend de almacenamiento en JSON fácilmente legible y editable, lo que facilita el control de cambios y la integración con sistemas de control de versiones como Git. Su enfoque en operar con metadatos, no el contenido de archivos y resulta útil para comprobaciones de integridad y restauración de permisos, usuarios o fechas originales.
+$ metamonger save /srv/data > metadatos.json (guarda los metadatos en formato JSON en el archivo metadatos.json)
+$ metamonger diff metadatos.json /srv/data (comparar los metadatos actuales con un respaldo previo en metadatos.json)
+$ metamonger restore metadatos.json /srv/data (aplicará los metadatos guardados, ajustando permisos, tiempos, propietario, grupo, etc)
+$ git add metadatos.json (permite auditar y restaurar versiones históricas de metadatos, subiendolo a git)
+$ git commit -m "Actualización de metadatos de /srv/data"
+
+
 metapixel
 Generar mosaicos de fotos [collage].
 $ mkdir collage (Crear el directorio)
