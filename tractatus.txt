@@ -32879,6 +32879,13 @@ $ metastore -a (cambia los metadatos de archivos/directorios para que coincidan 
 $ metastore -c && metastore -a (verifica si hay diferencias, y solo si las hay, las aplica)
 
 
+mfoc
+[Mifare Offline Cracker]. Permite recuperar las claves de autenticación de las tarjetas de memoria MIFARE Classic. Se basa en un ataque criptográfico sin conexión que aprovecha una debilidad en el generador de números aleatorios de los chips MIFARE Classic. El proceso comienza intentando leer un sector de la tarjeta para el que ya se conoce al menos una clave. Si no se conoce ninguna clave, el programa suele empezar con las claves por defecto comunes. Al intentar la autenticación con una clave, la tarjeta responde con un valor cifrado. mfoc captura esta respuesta, que contiene información sobre un "nonce" [un valor aleatorio de un solo uso]. A partir de estos valores, mfoc realiza cálculos matemáticos para deducir las claves de otros sectores. Esto se debe a que el algoritmo de generación de nonces en estas tarjetas es débil y predecible. Una vez que se ha descifrado una clave, el programa puede usarla para autenticarse en ese sector, leer sus datos y, lo que es más importante, obtener más información para descifrar las claves de otros sectores. Este proceso se repite hasta que se han recuperado todas las claves de todos los sectores de la tarjeta. Requiere un lector NFC compatible y la tarjeta MIFARE Classic que se desea analizar.
+$ mfoc -O tarjeta.mfd (indica que se debe guardar la información del crackeo en el archivo especificado)
+$ mfoc -k A0A1A2A3A4A5 -O tarjeta.mfd (proporcionar la clave de un sector de la tarjeta que se conoce)
+$ mfoc -P 500 -O tarjeta.mfd (realizar un crackeo y volcar la memoria de la tarjeta en un solo paso) con 500 intentos de autentificación)
+
+
 mg
 Editor microscópico estilo GNU Emacs. Ctrl-x Ctrl-c para salir.
 $ mg file.txt
