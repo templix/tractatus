@@ -32793,6 +32793,23 @@ $ metapixel-prepare --width=10 --height=10 -r Imatges/ collage (Copiar con las m
 $ metapixel --metapixel Imagenes/imagen.jpeg destino.jpg --library collage/ (Que coja la imágen.jpg del directorio Imagenes y la convierta en destino.jpg usando el directorio "collage")
 
 
+metar
+Utilidad que descarga informes meteorológicos para aviación desde el servidor HTTP de la NOAA en noaa.gov. Los códigos de las estaciones en https://tgftp.nws.noaa.gov/data/nsd_bbsss.txt [LEBB --> Bilbao, LEBL --> Barcelona, LEMD --> Madrid/Barajas...]
+$ metar -d LEGE (Decodificar los informes meteorológicos en un formato legible para humanos de Girona, España)
+        Station       : LEGE
+        Day           : 18
+        Time          : 05:00 UTC
+        Wind direction: 0 (N)
+        Wind speed    : 0 KT
+        Wind gust     : 0 KT
+        Visibility    : 500 M
+        Temperature   : 16 C
+        Dewpoint      : 16 C
+        Pressure      : 1022 hPa
+        Clouds        :
+        Phenomena     : Fog
+
+
 metasploit
 Herramienta utilizada para realizar pentesting, tanto para comprometer sistemas como para obtener datos antes y después de comprometerlo. Los módulos auxiliares se pueden usar para el escaneo de puertos, la identificación del servicio, el rastreo de contraseñas y la enumeración de parches. Para empezar es necesario tener activado el servicio postgresql, crear la configuración inicial y luego iniciar Metasploit Framework:
 # service postgresql start
@@ -32851,6 +32868,15 @@ msf6 > upload ./localpath/data.txt C:\Temp\data.txt (transferir un archivo local
 msf6 > download C:\Temp\data.txt ./localpath/data.txt (descargar un archivo del remoto a local)
 msf6 > exit (salir de metasploit)
 # msfupdate (actualizar la base de datos de exploits)
+
+
+metastore
+Herramienta que almacena metadatos de archivos y directorios, como permisos, propietario, grupo, timestamps, atributos extendidos, etc. en un archivo de texto plano, generalmente llamado .metastore y luego, puede comparar esos metadatos con el estado actual del sistema de archivos y restaurarlos si es necesario. Es especialmente útil con sistemas de control de versiones como Git, SVN, etc. que no guardan metadatos, solo contenido.
+$ metastore -s -f file (guarda todos los metadatos actuales del directorio actual y los guarda en file, por defecto en .metadata)
+$ metastore -s -i Documentos (exceptuando la carpeta Documentos y guardando en .metadata)
+$ metastore -c (muestra las diferencias entre los metadatos almacenados y los actuales sin modificar nada)
+$ metastore -a (cambia los metadatos de archivos/directorios para que coincidan con los guardados)
+$ metastore -c && metastore -a (verifica si hay diferencias, y solo si las hay, las aplica)
 
 
 mg
