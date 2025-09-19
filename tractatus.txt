@@ -28388,6 +28388,26 @@ $ lbzip2 -d archivo1.bz2 archivo2.bz2 (descomprime ambos archivos en paralelo)
 $ lbzip2 -n 4 archivo.txt (comprimir usando un número específico de núcleos [4])
 
 
+lcdf-typetools
+Herramientas para manipular fuentes OpenType, multimaster y PostScript Type 1. Incluye las herramientas cfftot1, mmafm, mmpfb, otfinfo, otftotfm, t1dotlessj, t1lint, t1rawafm, t1reencode, t1testpage y ttftotype42.
+$ cfftot1 -o MyFont.pfa MyFont.otf (extrae la fuente CFF de `MyFont.otf` y la guarda como MyFont.pfa, ASCII Type 1)
+$ mmafm -w 500 -o MyFontMM-500.afm MyFontMM.pfb (genera un archivo AFM para la instancia de peso 500 de la fuente Multimaster MyFontMM.pfb)
+$ mmpfb -w 700 -o MyFont-Bold.pfb MyFontMM.pfb (genera una instancia en negrita, peso 700 y la guarda como MyFont-Bold.pfb)
+$ otfinfo -i MyFont.otf (información general: nombre, copyright, etc)
+$ otfinfo -t MyFont.otf (lista de tablas OpenType)
+$ otfinfo -g MyFont.otf (lista de glifos)
+$ otfinfo --script=latn MyFont.otf (muestra scripts soportados)
+$ otfinfo -f MyFont.otf  (muestra características tipográficas)
+$ otftotfm -a -e ec MyFont.otf MyFontEC (genera archivos TFM y mapas para usar MyFont.otf con codificación ec [European Computer Modern] en LaTeX)
+$ otftotfm --automatic --vendor myfonts --typeface MyFont MyFont.otf MyFont (generar entradas para updmap)
+$ t1dotlessj < MyFont.pfa > MyFont-dotlessj.pfa (crea una versión de la fuente sin punto en la "j")
+$ t1lint MyFont.pfa (reporta errores o advertencias en la estructura de la fuente)
+$ t1rawafm MyFont.pfb > MyFont.raw.afm (extrae métricas sin procesar de fuentes Type 1)
+$ t1reencode ISOLatin1Encoding < MyFont.pfa > MyFont-iso.pfa (cambia la codificación de los glifos en una fuente Type 1, de StandardEncoding a ISOLatin1Encoding)
+$ t1testpage MyFont.pfa > test.ps (genera un archivo PostScript que muestra todos los glifos de la fuente)
+$ ttftotype42 MyFont.ttf > MyFont.t42 (envuelve una fuente TrueType (.ttf) en un contenedor PostScript Type 42, para usarla en entornos PostScript o PDF)
+
+
 lckdo
 [moreutils]. Bloquea la ejecución de un programa con el fin de evitar que otros procesos se ejecuten en paralelo. Se utiliza como nice [ver] y nohup [ver]
 
@@ -32884,6 +32904,13 @@ mfoc
 $ mfoc -O tarjeta.mfd (indica que se debe guardar la información del crackeo en el archivo especificado)
 $ mfoc -k A0A1A2A3A4A5 -O tarjeta.mfd (proporcionar la clave de un sector de la tarjeta que se conoce)
 $ mfoc -P 500 -O tarjeta.mfd (realizar un crackeo y volcar la memoria de la tarjeta en un solo paso) con 500 intentos de autentificación)
+
+
+mftrace
+Herramienta escrita en Python que se utiliza para convertir fuentes de mapa de bits generadas por METAFONT, usadas en el sistema de composición tipográfica TeX, a fuentes escalables en formato PostScript Type 1 [PFA o PFB]. Esto es útil cuando se quiere utilizar una fuente diseñada para TeX en otros sistemas o aplicaciones que no soportan directamente fuentes METAFONT, pero sí fuentes PostScript.
+$ mftrace --output-directory=./fuentes_type1 cmr10.mf (convertir .mf a Type 1)
+$ mftrace --output-directory=./fuentes_type1 cmr10.600gf (convertir .gf a Type 1)
+$ mftrace --output-directory=./fuentes_type1 --verbose cmr10.mf (lo mismo mostrando más información)
 
 
 mg
@@ -38100,6 +38127,16 @@ Ha de especificarse, si no consta ya, como mínimo en /etc/portsentry/portsentry
 # grep "attackalert" /var/log/syslog (ver alerta de ataques)
 # grep -n Blocked /var/lib/portsentry/portsentry.history (ver historial de ips bloqueadas)
 # nano /var/lib/portsentry/portsentry.blocked (ver ips bloqueadas)
+
+
+potace
+Utilidad para transformar mapas de bits en gráficos vectoriales suaves y escalables, permitiendo transformaciones a formatos como EPS, SVG o PDF, a partir de archivos PBM, PGM, PPM o BMP. Se utiliza comúnmente para vectorizar logotipos, firmas y dibujos escaneados, preservando trazos suaves y haciendo posible escalar sin perder calidad.
+$ potrace -s imagen.bmp (genera el archivo imagen.svg vectorizado)
+$ potrace imagen.bmp -b svg -o resultado.svg (cambiar el formato de salida explícitamente a SVG)
+$ potrace imagen.pbm (vectorizar para EPS [por defecto] y el resultado se llama imagen.eps)
+$ convert original.png imagen.bmp ; potrace -s imagen.bmp (usar junto con ImageMagick para convertir otros formatos. Así se procesan PNG y JPEG convertidos previamente a BMP)
+$ potrace -s imagen.bmp --turdsize 5 --alphamax 0.5 (ajustar parámetros para mejorar el resultado. "turdsize" elimina puntos pequeños y "alphamax" modifica el umbral de esquinas)
+$ potrace imagen.bmp --invert (invertir colores antes de trazar)
 
 
 powerdebug
@@ -43325,6 +43362,18 @@ $ sysvbanner linux
 sysv-rc-conf
 Gestionar el arranque de las aplicaciones al inicio.
 # sysv-rc-conf
+
+
+t1utils
+Colección de programas para la manipulación de fuentes Type 1 [PostScript Type 1]. Las herramientas t1utils permiten convertir entre formatos PFA (ASCII) y PFB (binario); desensamblar archivos PFA o PFB a formato legible; y reensamblar estos archivos a formato PFA o PFB. También se pueden extraer recursos de fuentes de un archivo de fuentes Macintosh (ATM/Laserwriter) o crear un archivo de fuentes Macintosh Type 1 a partir de una fuente PFA o PFB. Incluye las aplicaciones t1ascii, t1asm, t1binary, t1disasm, t1mac y t1unmac
+$ t1binary cmr10.pfa cmr10.pfb (convierte fuente.pfa [ASCII] a fuente.pfb [binario])
+$ t1ascii fuente.pfb fuente.pfa (convierte fuente.pfb [binario] a fuente.pfa [ASCII] y guarda el resultado en el archivo fuente.pfa)
+$ t1ascii Palatino-Bold.pfb Palatino-Bold.pfa (lo mismo)
+$ t1asm Helvetica-Oblique.t1a > Helvetica-Oblique_new.pfa (reensambla el archivo de texto legible a un formato de fuente PFA)
+$ t1disasm fuente.pfb > fuente_desensamblada.txt (desensambla fuente.pfb y guarda el resultado en fuente_desensamblada.txt)
+$ t1disasm Helvetica-Oblique.pfb > Helvetica-Oblique.t1a (desensambla una fuente, PFA o PFB, en un formato de texto legible con extensión .t1a por convención)
+$ t1mac fuente.pfb fuente_mac.bin (convierte fuente.pfb a un archivo de fuente Type 1 para Macintosh y guarda el resultado en fuente_mac.bin)
+$ t1unmac fuente_mac.bin > fuente.pfb (extrae la fuente del archivo fuente_mac.bin [Macintosh] y la guarda como fuente.pfb)
 
 
 tac
