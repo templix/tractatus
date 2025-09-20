@@ -26007,6 +26007,8 @@ Se utiliza para realizar cálculos relacionados con direcciones IP y subredes. P
 ipcrm
 Permite eliminar la comunicación entre procesos [ver ipcs]. Si paramos el programa con un Ctrl-C o simplemente sale de forma anormal, el recurso [la memoria compartida] no se libera y queda en el sistema. Con este comando es posible borrarla.
 # ipcrm -m 950288 (eliminar un segmento de memoria compartida)
+Nota.- La forma de saber el número de segmento es lanzando:
+$ ipcs -s
 
 
 ipcs
@@ -33119,10 +33121,14 @@ $ mkeot neuropol_x_free.ttf > neuropol_x_free.eot
 
 
 mkfifo
-Crear una tuberia que tanto sirve para permitir que la salida de una aplicación sea la entrada de otra como redirección de cualquier dato de salida que pueda ser grabado a disco.
-$ mkfifo pipe (crear la tuberia. Lanzando “ls -l pipe” la primera letra que mostrará será una “p” de pipe [tuberia])
-$ ifconfig > pipe  (La consola se bloqueará esperando soltar la tuberia)
-$ cat pipe  (Ejecutado desde otra terminal pst o tty ejecutará la tuberia)
+[First In, First Out]. Crear una tuberia que tanto sirve para permitir que la salida de una aplicación sea la entrada de otra como redirección de cualquier dato de salida que pueda ser grabado a disco.
+$ mkfifo pipe (crear la tuberia. Lanzando “ls -l pipe” la primera letra que mostrará la descripción será una “p” de pipe [tuberia])
+En una terminal:
+$ mkfifo canal
+$ echo "Linux es genial" > canal
+En otra terminal:
+$ cat canal (mostrará lo lanzado en la otra terminal)
+
 
 
 mkhomedir_helper
@@ -33156,13 +33162,25 @@ $ mkisofs /dev/cdrom > cd.iso (crear una imagen iso del cdrom en disco)
 
 
 mknod
-Crear archivos de dispositivos que no se encuentran en el sistema.
+Crear archivos de dispositivos que no se encuentran en el sistema. Crea archivos especiales de bloques [/dev/sda es el disco duro entero, /dev/nvme0n1p1 una partición del disco...] o caracteres [dispositivos que entregan datos como un flujo de bytes: /dev/tty la terminal, /dev/null el pozo sin fondo, /dev/urandom el generador de números pseudoaleatorios...]. Ver mkfifo.
 # mknod -m 644  /dev/ttyS4 c 4 64 (con permisos 644, crear el dispositivo de carácter [c] ttyS0 e intervalo entre el máximo y el mínimo)
 Una vez creado precisa otorgar propietarios:
 # chown root:dialout /dev/ttyS4
 Otro ejemplo
 # mknod -m 640 /dev/loop8 b 7 8 (con permisos 640, especificando que es un dispositivo de bloques [b] e intervalo entre el máximo y el mínimo)
 # chown root:disk /dev/loop8 (Otorgar propiedad)
+# mknod /tmp/falso_null c 1 3 (crear un “dispositivo null” falso de tipo caracter, identifica el driver y el dispositivo dentro del driver)
+En realidad en los sistemas modernos, udev crea todos los /dev/* automáticamente, así que casi nunca se usa mknod a mano salvo en casos de debugging o sistemas minimalistas.
+# mknod -m 600 /tmp/falso_null c 1 3 (solo root puede leer y escribir)
+# mknod -Z /tmp/falso_null c 1 3 (-Z deja que mknod asigne los permisos por defecto al nuevo dispositivo)
+1.-
+Crear un /dev/falso_zero casero
+$ sudo mknod -m 666 /dev/falso_zero c 1 5
+$ sudo head -c 16 /dev/falso_zero | hexdump -C
+        00000000  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|
+        00000010
+Se verá 16 bytes en 00.
+$ sudo rm -r /dev/falso_zero
 
 
 mkntfs
@@ -40856,6 +40874,7 @@ $ set history=2000 (que el historial guarde los últimos 2000 comandos entrados)
 $ set -o vi (cambiar a las teclas del modo de edición de vi . Por defecto bash utiliza el modo emacs)
 $ set -o noclobber (activar la protección de sobreescritura en las tuberias si el archido ya existe [ver noclobber] )
 $ set +o noclobber (Desactivar la protección. Opción por defecto)
+$ set -euo pipefail ("-e" detiene el script ante cualquier error, "-u" previene el uso de variables no definidas y "-o pipefail" asegura que los pipelines fallen completamente si cualquier parte falla)
 1.-
 Depurar partes de un script encerrando el código:
 	set -x
