@@ -11032,7 +11032,8 @@ $ dhomepage debian-history
 di
 Muestra información sobre las particiones como df [ver] mejorado.
 $ di
-$ di -c (Salida en CSV, para importar una hoja de cálculo)
+$ di -q (Salida en gigabytes)
+$ di -f a /dev/nvme0n1p6 (mostrar el porcentaje libre de una partición)
 
 
 di-netboot-assistant
@@ -32922,6 +32923,14 @@ $ mg file.txt
 
 mgen
 Ofrece la capacidad de realizar pruebas y mediciones de rendimiento de la red IP utilizando el tráfico TCP y UDP/IP. Los mensajes de prueba se pueden generar, recibir y registrar. mgen ofrece control sobre todos los parámetros de red y la sincronización de estos mensajes. Información: https://github.com/USNavalResearchLaboratory/mgen/blob/master/doc/mgen.pdf
+
+
+mgitstatus
+Herramienta que recorre varios repositorios Git e informa, para cada uno, de los cambios no confirmados, no rastreados y no enviados. Entrar en el directorio de los proyectos y lanzar la aplicación.
+$ mgitstatus
+uncommitted --> Archivos modificados que aún no se han hecho git add + git commit.
+untracked --> Archivos nuevos que Git no está rastreando.
+unpushed --> Número de commits locales que aún no se han enviado [git push] al remoto.
 
 
 mi
