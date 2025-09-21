@@ -32933,6 +32933,20 @@ untracked --> Archivos nuevos que Git no está rastreando.
 unpushed --> Número de commits locales que aún no se han enviado [git push] al remoto.
 
 
+mgmt
+Herramienta de automatización en tiempo real [que opera de manera continua y reactiva]. Usa un lenguaje propio llamado MCL [Mgmt Configuration Language] para definir las reglas para describir qué se quiere que pase en el sistema, por ejemplo, "este archivo debe existir con estos permisos" o "este servicio debe estar corriendo en X hosts".
+Un ejemplo para ver como funciona
+Supongamos que se tiene un servidor de archivos que sea de solo lectura los viernes.
+# nano viernes.mcl
+        $is_friday = datetime.weekday == 5;  # 5 = viernes
+        file "/srv/files/" {
+            state => $const.res.file.state.exists,
+            mode => if $is_friday { "0550" } else { "0770" },  # Solo lectura vs. lectura/escritura
+        }
+# mgmt run viernes.mcl (lo aplica y monitorea en la propia máquina)
+# mgmt deploy viernes.mcl (lo propaga a todos los hosts, ajustando en tiempo real si es viernes)
+
+
 mi
 muestra información sobre los dispositivos montados [dispositivo de bloques, punto de montaje, opciones de montaje y sistema de ficheros utilizado]. Ver di
 $ mi
