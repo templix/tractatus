@@ -10806,6 +10806,30 @@ deurlname
 $ deurlname omg%20ponnu%20ily%20kannu.mp3
 
 
+dev
+El linux todo son archivos y, por supuesto, los dispositivos tambien y se encuentran bajo el directorio /dev. Relación de dispositivos comunes:
+        /dev/null       c       1:3     Agujero negro, descarta todo lo que escribes.
+        /dev/zero       c       1:5     Genera infinitos ceros.
+        /dev/random     c       1:8     Aleatorios de alta entropía. Puede bloquear.
+        /dev/urandom    c       1:9     Aleatorios no bloqueantes.
+        /dev/tty        c       5:0     Terminal actual.
+        /dev/tty0       c       4:0     Consola del sistema, VT actual.
+        /dev/tty1       c       4:1     Primera consola virtual.
+        /dev/console    c       5:1     Consola del sistema usada al inicio.
+        /dev/full       c       1:7     Siempre devuelve “sin espacio en el dispositivo”.
+        /dev/loop0      b       7:0     Primer dispositivo loopback. Montar archivos como discos.
+        /dev/sda        b       8:0     Primer disco duro SATA/SCSI.
+        /dev/sda1       b       8:1     Primera partición del primer disco.
+        /dev/nvme0n1    b       259:0   Primer disco NVMe.
+        /dev/nvme0n1p1  b       259:1   Primera partición del NVMe.
+Mayor = identifica al controlador [driver].
+Menor = identifica al dispositivo dentro de ese driver.
+c = carácter
+b = bloque.
+$ cat /proc/devices (consultar todos los números de los drivers)
+$ ls -l /dev | less (ver los dispositivos creados en el sistema)
+
+
 devilspie2
 Herramienta para gestionar ventanas en el entorno gráfico de forma automática. Utiliza scripts en lenguaje Lua en el directorio ~/.config/devilspie2/ para describir las acciones que deben realizarse cuando se detectan ventanas específicas a medida que se crean, como cambiar el tamaño, moverlas a otro espacio de trabajo o fijarlas.
 $ devilspie2 & (iniciar en segundo plano)
