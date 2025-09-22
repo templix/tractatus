@@ -32975,6 +32975,28 @@ mh-book
 [Universidad Miguel Hernandez]. El Sistema de Manejo de Mensajes MH es un conjunto de programas de correo electrónico de dominio público. Este libro también abarca tres interfaces populares, o front-ends, de MH [xmh y exmh]. Incluye una guía paso a paso para cada interfaz que permitirá enviar y leer correo en pocas páginas. El indice en file:///usr/share/doc/mh-book/html/index.html y en linea en https://mh-e.sourceforge.io/manual/html/index.html
 
 
+mha4mysql-manager
+Administrador de Alta Disponibilidad y Herramientas MHA [Master High Availability] para MySQL que automatiza la conmutación por error [failover] de un servidor maestro y la promoción del esclavo a un nuevo servidor, minimizando el tiempo de inactividad y garantizando la consistencia de los datos. Incluye las herramientas masterha_check_repl, masterha_check_ssh, masterha_check_status, masterha_conf_host, masterha_manager, masterha_master_monitor, masterha_master_switch, masterha_secondary_check y masterha_stop.
+$ masterha_check_repl --conf=/etc/masterha/app1.cnf (comprueba el estado de replicación de todos los nodos en el grupo MHA según la configuración en el archivo app1.cnf)
+$ masterha_check_ssh --conf=/etc/masterha/app1.cnf (verifica la conectividad SSH sin contraseña entre los servidores del grupo y garantiza que el usuario configurado puede acceder a todos los servidores)
+$ masterha_check_status --conf=/etc/masterha/app1.cnf (verifica si el proceso de masterha_manager está activo y monitorizando el clúster)
+$ masterha_conf_host --conf=/etc/masterha/app1.cnf (muestra la configuración de los servidores en el clúster MHA)
+$ masterha_manager --conf=/etc/masterha/app1.cnf --daemonize (inicia el manager en segundo plano)
+$ masterha_master_monitor --conf=/etc/masterha/app1.cnf (verifica si el maestro está en línea y accesible)
+$ masterha_master_switch --conf=/etc/masterha/app1.cnf --new_master_host=node2 --orig_master_host=node1 --ignore_binlog_error (fuerza una conmutación por error, promoviendo node2 como el nuevo maestro en lugar de node1)
+$ masterha_secondary_check --conf=/etc/masterha/app1.cnf (valida la salud de los servidores esclavos)
+$ masterha_stop --conf=/etc/masterha/app1.cnf (finaliza el demonio masterha_manager asociado a la configuración app1.cnf)
+
+
+mhap
+Toma "huellas dactilares" de párrafos en lugar de leer todo el libro, identifica combinaciones únicas de palabras ["min-meros"] en cada párrafo y les asigna un número [un "hash"]. Busca huellas similares en dos párrafos de libros diferentes y si tienen muchas "huellas dactilares" [números hash] en común, es muy probable que sean el mismo párrafo, incluso si algunas palabras están mal escritas y te da un informe que dice: "El párrafo de la página 120 del Libro A se solapa con el párrafo de la página 245 del Libro B". Con "libros" se refiere a fragmentos de ADN secuenciados que constan de miles a millones de letras y que pueden tener entre un 5-15% de error (palabras mal escritas, letras cambiadas...)
+$ mhap -s lecturas.fasta -q lecturas.fasta --num-threads 8 > solapamientos.mhap (especifica el archivo de las lecturas, que se comparen contra ellas mismas, usando 8 nucleos de CPU y donde guardar la salida)
+En el archivo solapamientos.mhap, cada línea representa un solapamiento detectado. Por ejemplo:
+        lectura_123 0 10500 15000 + lectura_456 500 11000 10500 - 0.95
+Una explicación simplificada de esta salida sería:
+lectura_123 y lectura_456se solapan. En lectura_123, el solapamiento va desde la posición 10.500 a la 15.000. En lectura_456, el solapamiento va desde la posición 500 a la 11.000. "+" y "-" indican la orientación, es decir si están en la misma hebra o en la complementaria y 0.95 es la similitud estimada [95%].
+
+
 mi
 muestra información sobre los dispositivos montados [dispositivo de bloques, punto de montaje, opciones de montaje y sistema de ficheros utilizado]. Ver di
 $ mi
