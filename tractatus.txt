@@ -32997,6 +32997,15 @@ Una explicación simplificada de esta salida sería:
 lectura_123 y lectura_456se solapan. En lectura_123, el solapamiento va desde la posición 10.500 a la 15.000. En lectura_456, el solapamiento va desde la posición 500 a la 11.000. "+" y "-" indican la orientación, es decir si están en la misma hebra o en la complementaria y 0.95 es la similitud estimada [95%].
 
 
+mhc
+[Message Harmonized Calendar]. Herramienta que permite gestionar agendas personales y citas extrayendo información de mensajes de correo electrónico, pensado especialmente para quienes reciben la mayoría de las citas por correo electrónico. Aunque está muy integrado con Emacs, el paquete mhc-utils proporciona el binario mhc para operar desde el sistema fuera de Emacs. Configuración en ~/.config/mhc/config.yml
+$ mhc list (mostrará los eventos almacenados en la agenda para el periodo que cubre la fecha actual)
+$ mhc grep reunión (buscar todos los eventos que contengan la palabra "reunión" en sus detalles o asunto)
+$ mhc list --today (mostrar las citas para la fecha actual)
+$ mhc import evento.ics (convertirá el evento iCal a un registro en la agenda personal de mhc)
+$ mhc export --all --ical > agenda.ics (exporta todos los eventos a un archivo en formato iCal compatible con otros sistemas de calendario)
+
+
 mi
 muestra información sobre los dispositivos montados [dispositivo de bloques, punto de montaje, opciones de montaje y sistema de ficheros utilizado]. Ver di
 $ mi
