@@ -33060,6 +33060,22 @@ Editor de texto que pretende ser una especie de sucesor del editor Nano. Ctrl-q 
 $ micro file.txt
 
 
+microcom
+Herramienta de terminal minimalista diseñada para conectarse a dispositivos mediante puertos serie [RS232] o mediante conexiones Telnet [RFC 2217]. Es especialmente útil para interactuar con dispositivos embebidos, routers, switches, placas de desarrollo, como Raspberry Pi sin interfaz gráfica, módems, etc., que exponen una consola serial.
+$ microcom -s 115200 /dev/ttyUSB0 (conectar a un dispositivo en /dev/ttyUSB0 a 115200 baudios)
+$ microcom -s 9600 -p e -d 7 -t 2 /dev/ttyS0 (conectar al dispositivo especificado con velocidad 9600, paridad par, 7 bits, 2 bits de parada)
+Los parámetros de paridad pueden ser:
+        n = none [sin paridad]
+        o = odd [impar]
+        e = even [par]
+        m = mark
+        s = space
+$ microcom -t 192.168.1.100:2000 (conecta a un switch remoto por Telnet serie)
+$ microcom -s 9600 /dev/ttyUSB0 (depurar un router o switch por puerto consola, conectanado un cable serial [USB a Serial] al puerto consola del switch. Muchos dispositivos de red usan 9600 baudios por defecto)
+$ microcom -t console-server.local:3001 (conectarse a un servidor de consolas seriales en red)
+Nota.- Para salir de la sesión, Ctrl + x
+
+
 microfono
 (activar micro del monitor).
 # gedit /etc/modprobe.d/alsa-base.conf
