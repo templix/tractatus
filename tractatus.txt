@@ -33022,6 +33022,16 @@ $ mhc import evento.ics (convertirá el evento iCal a un registro en la agenda p
 $ mhc export --all --ical > agenda.ics (exporta todos los eventos a un archivo en formato iCal compatible con otros sistemas de calendario)
 
 
+mhonarc
+Herramienta basada en Perl que convierte archivos de correo electrónico, en formato MH, mbox u otros, en archivos HTML, generando índices cronológicos, enlaces a hilos de correo y manejando mensajes MIME para cada mensaje,
+$ mhonarc inbox (creará archivos como: maillist.html [índice de todos los mensajes por fecha], threads.html [índice por hilos de conversación] y msg00000.html, msg00001.html, ... [mensajes individuales en HTML])
+$ mhonarc -outdir public_html/correos ~/Mail/inbox (convierte el buzón inbox en HTML en el directorio public_html/correos)
+$ mhonarc -outdir archivomail inbox (guardar los archivos HTML generados en archivomail/)
+$ mhonarc -add inbox (añadir nuevos mensajes en un HTML existente)
+$ mhonarc -single < mensaje.txt > mensaje.html (convierte un mensaje aislado a HTML y lo guarda con redirección)
+$ mhonarc -rcfile mi_config.mrc inbox (permite insertar elementos o modificar la estructura de los archivos HTML resultantes)
+
+
 mhz
 Utilidad de medición de frecuencia de CPU. Esta herramienta mide las velocidades de reloj reales de la CPU. Resulta útil en plataformas donde la compatibilidad con cpufreq aún no está disponible o donde los valores de velocidad de reloj devueltos por el kernel no son fiables. Esto aplica a plataformas donde los proveedores hacen trampa, donde se producen limitaciones inusuales de velocidad de reloj por razones desconocidas o donde las velocidades de reloj reales se configuran mediante puentes, mientras que las velocidades de reloj disponibles para el kernel se derivan de las entradas del árbol de dispositivos (DT).
 $ mhz -c (hace un bucle para mostrar solo la frecuencia de la CPU en MHz)
@@ -40942,6 +40952,7 @@ sensors
 [lom-sensors]. Mostrar las lecturas de todos los sensores de temperatura de los chips.
 $ sensors (forma básica)
 $ sensors -A (No mostrando el adaptador para cada chip)
+$ watch -n1 sensors (ver temperatura de las CPUs)
 
 
 sensors-conf-convert
