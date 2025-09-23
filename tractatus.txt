@@ -8610,6 +8610,7 @@ Biblioteca para detectar información del rendimiento de la CPU. Incluye las apl
 # cpu-info
 # cpuid-dump
 # isa-info
+# watch -n1 "grep 'cpu MHz' /proc/cpuinfo" (refresca cada segundo la frecuencia real de cada núcleo de la CPU)
 
 
 cpulimit
@@ -30252,6 +30253,21 @@ $ lscolors /etc/passwd /usr/bin/bash /var/log/syslog (colorear varias rutas)
 
 lscpu
 Muestra información sobre la cpu
+Algunos conceptos útiles:
+$ lscpu (muestra modelo, núcleos, hilos, frecuencia base y máxima...)
+        ...
+        Architecture:            x86_64
+        ...
+        CPU(s):                  6
+        ...
+        CPU(s) scaling MHz:      28%
+        CPU max MHz:             4000,0000
+        CPU min MHz:             800,0000
+Architecture --> la arquitectura del pc
+CPU(s) --> número de CPUs del pc
+CPU(s) scaling MHz --> frecuencia actual en ese instante.
+CPU max MHz --> turbo máximo que soporta.
+CPU min MHz --> frecuencia mínima posible.
 
 
 lsd
@@ -33004,6 +33020,24 @@ $ mhc grep reunión (buscar todos los eventos que contengan la palabra "reunión
 $ mhc list --today (mostrar las citas para la fecha actual)
 $ mhc import evento.ics (convertirá el evento iCal a un registro en la agenda personal de mhc)
 $ mhc export --all --ical > agenda.ics (exporta todos los eventos a un archivo en formato iCal compatible con otros sistemas de calendario)
+
+
+mhz
+Utilidad de medición de frecuencia de CPU. Esta herramienta mide las velocidades de reloj reales de la CPU. Resulta útil en plataformas donde la compatibilidad con cpufreq aún no está disponible o donde los valores de velocidad de reloj devueltos por el kernel no son fiables. Esto aplica a plataformas donde los proveedores hacen trampa, donde se producen limitaciones inusuales de velocidad de reloj por razones desconocidas o donde las velocidades de reloj reales se configuran mediante puentes, mientras que las velocidades de reloj disponibles para el kernel se derivan de las entradas del árbol de dispositivos (DT).
+$ mhz -c (hace un bucle para mostrar solo la frecuencia de la CPU en MHz)
+        3888.146
+$ mhz -t (hace un bucle usando acceso al reloj [rdtsc] en vez de operaciones de CPU)
+        2807.977
+Los valores 3888 y 2807 MHz indican que la CPU escala dinámicamente y puede subir a 4 GHz con turbo.
+$ mhz -i (informar solo las frecuencias integrales)
+        count=1550236 us50=19930 us250=98050 diff=78120 cpu_MHz=3969 tsc50=55968951 tsc250=277968045 diff=143 rdtsc_MHz=2842
+count=1547858 --> número de iteraciones que ejecutó el bucle de prueba.
+us50 y us250 --> tiempo en microsegundos que tardó en hacer el bucle en ventanas de 50 µs y 250 µs respectivamente.
+diff=78189 --> diferencia de tiempo entre ambas mediciones.
+cpu_MHz=3960 --> estimación de MHz calculada con operaciones de CPU, similar a -c.
+tsc50 y tsc250 --> valores del contador de tiempo [rdtsc] tomados en las ventanas de 50 y 250 µs.
+diff=142 --> diferencia de ticks del TSC en ese periodo.
+rdtsc_MHz=2816 --> frecuencia estimada a partir del TSC, similar a -t.
 
 
 mi
