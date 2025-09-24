@@ -33076,6 +33076,19 @@ $ microcom -t console-server.local:3001 (conectarse a un servidor de consolas se
 Nota.- Para salir de la sesión, Ctrl + x
 
 
+microdc2
+Cliente para el protocolo de Conexión Directa [Direct Connect - DC] que permite compartir archivos entre usuarios conectados a un "hub" P2P e interactuar con otros "hubs", buscar, descargar archivos, así como chatear con otros usuarios utilizando la biblioteca GNU Readline para facilitar la edición de comandos y el historial.
+$ microdc2 (iniciar microdc2)
+        microdc2> help
+        microdc2> alias MI_ALIAS
+        microdc2> connent hub.ejemplo.com:411
+        microdc2> get FILE
+        microdc2> say MESSAGE
+        microdc2> search WORD
+        microdc2> disconnect
+        microdc2> exit
+
+
 microfono
 (activar micro del monitor).
 # gedit /etc/modprobe.d/alsa-base.conf
