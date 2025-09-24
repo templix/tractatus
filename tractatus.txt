@@ -33097,6 +33097,23 @@ options snd_hda_intel model=laptop options snd-hda-intel position_fix=1 enable=y
 Reiniciar
 
 
+micropython
+Permite probar programas diseñados para microcontroladores, como un ESP32 o una Raspberry Pi Pico y sistemas con recursos limitados pero sin necesidad de tener el hardware conectado. Esto es ideal para desarrollo y depuración inicial, ya que se puede verificar la lógica del programa antes de cargarlo en el microcontrolador. Sin embargo, no se podrán probar funcionalidades que dependen del hardware específico, como el control de pines GPIO, el acceso a periféricos como I2C o SPI, etc.
+$ micropython (entrar en modo interactivo [REPL - Read-Eval-Print Loop])
+        MicroPython v1.25.0+ds-1 on 2025-05-04; linux [GCC 14.2.0] version
+        Use Ctrl-D to exit, Ctrl-E for paste mode
+        >>> print("Linux es un sistema genial")
+        Linux es un sistema genial
+        >>>
+        >>> a = 10
+        >>> b = 20
+        >>> a + b
+        30
+        >>>
+$ micropython mi_programa.py (ejecutar un archivo .py)
+$ micropython -c "print('Linux es un sistema genial')" (ejecutar código directamente desde la línea de comandos)
+
+
 midori
 Navegador web. Los archivos de configuración en .config/midori/
 1.-
