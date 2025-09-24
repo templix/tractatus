@@ -3245,7 +3245,7 @@ Lanzador de aplicaciones propio de fluxbox.
 
 bc
 Calculadora
-bc -l  (Entra en el promt de la calculadora. Para terminar teclear quit o exit)
+$ bc -l  (Entra en el promt de la calculadora. Para terminar teclear quit o exit)
 $ echo "36*2" | bc
 $ echo "(1409302/28186042)*100" | bc -l
 $ echo "scale = 6; 13.397/12" | bc (Resultado con 6 decimales)
@@ -37607,6 +37607,13 @@ Algunas teclas para moverse por el fichero:
     ^u                   restaura líneas eliminadas y las coloca en la posición del cursor.
     ^w                   busca texto
     ^x                   guardar y salir
+
+
+picocom
+Es un programa minimalista de emulación de terminal. Fue diseñado para servir como una herramienta sencilla y manual de configuración, prueba y depuración de módems. También funciona como un programa de comunicaciones serie de baja tecnología que permite el acceso a todo tipo de dispositivos que proporcionan consolas serie. Descarga de https://salsa.debian.org/debian/picocom. Salsa es un servidor de desarrollo colaborativo para Debian que proporciona las herramientas necesarias para el desarrollo colaborativo a los mantenedores de paquetes, equipos de empaquetado y otras personas y grupos relacionados con Debian.
+# picocom /dev/ttyS0 (entra en la interrfaz del programa. C-a C-x para salir)
+# picocom -b 115200 -f h /dev/ttyS0 (-b, velocidad en baudios y -f, control de flujo por hardware [RTS/CTS])
+Otros controles de flujo pueden ser: "-f x" para el modo xon/xoff [software] y "-f n" para sin control de flujo, el predeterminado.
 
 
 picom
