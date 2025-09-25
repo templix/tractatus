@@ -23420,7 +23420,7 @@ consultar y modificar diferentes parámetros de los discos duros.
 # hdparm /dev/sda (Informa del estado [activado o no] de las opciones de hdparm)
 # hdparm -tT /dev/sda (Comprobar velocidad de lectura)
 # hdparm -i /dev/sda (Informa de las características del disco duro)
-# hdparm --scan (escanear los dispositivos)
+# hdparm --sanitize-status (información del estado de desinfección)
 # hdparm -D /dev/sda  (muestra desperfectos posibles)
 1.-
 Desactivación del APM (Gestión avanzada de energia) de los portatiles ya que esta tecnologia alarga la duración de la batería en detrimento de la vida útil del disco duro.
@@ -33114,6 +33114,21 @@ $ micropython mi_programa.py (ejecutar un archivo .py)
 $ micropython -c "print('Linux es un sistema genial')" (ejecutar código directamente desde la línea de comandos)
 
 
+microsocks
+Servidor SOCKS5 es un servicio que se puede ejecutar en equipos remotos para tunelizar conexiones a través de ellos si, por alguna razón, SSH no funciona por tener el puerto 22 bloqueado o no se tiene acceso a un servidor SSH. Diseñado para ser fácil de usar, multiproceso y sin necesidad de un archivo de configuración.
+$ microsocks (iniciará un servidor SOCKS5 en el puerto 1080, puerto por defecto y escuchará en todas las interfaces de red 0.0.0.0)
+$ microsocks -p 8080 (usar un puerto diferente)
+$ microsocks -i 192.168.1.100 -p 1080 (solo aceptará conexiones entrantes en la IP 192.168.1.100)
+$ microsocks -u mi_usuario -P mi_contraseña -p 1080 (requerir autenticación usuario/contraseña)
+$ microsocks -d -p 1080 (ejecutar como un servicio en segundo plano)
+$ microsocks -c 10 -p 1080 (solo permitir 10 conexiones simultáneas)
+Un caso practivo
+Supongamos un servidor remoto con IP 203.0.113.45 y se quiere tunelizar el tráfico a través de él:
+$ microsocks -p 1080 -u USER -P PASSWD (En el servidor remoto)
+En la máquina local, configurar el cliente, por ejemplo curl
+$ curl --socks5 203.0.113.45:1080 -U USER:PASSWD https://ejemplo.com
+
+
 midori
 Navegador web. Los archivos de configuración en .config/midori/
 1.-
@@ -40891,8 +40906,8 @@ $ see image.jpg
 
 
 seeker
-Comprobar la velocidad del disco duro, pero no en el inicio que es la parte más rápida como hace hdparm, sino de forma aleatoria en todo el espacio del disco.
-# seeker /dev/sda
+Crea una página falsa que solicita la ubicación del usuario.
+# seeker (entra en modo interactivo)
 
 
 select
