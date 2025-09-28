@@ -35933,9 +35933,28 @@ $ nuettcp - IP (que la ip especificada sea el transmisor)
 
 
 nvme-cli
-Medir la temperatura del SSD entre otros parámetros.
-# nvme smart-log /dev/nvme0 (uso básico)
-# nvme smart-log /dev/nvme0 | grep 'temperature'
+[NVM Express]. Herramienta para interactuar con unidades de almacenamiento NVMe [Non-Volatile Memory Express], que son SSDs modernos conectados directamente a través del bus PCIe. Esta herramienta permite consultar información del dispositivo, realizar pruebas de rendimiento, actualizar firmware, gestionar espacios de nombres, etc.
+# nvme list (mostrar todos los controladores NVMe y sus espacios de nombres)
+Algunos conceptos de la salida:
+        /dev/nvme0n1 --> dispositivo NVMe [n0 = controlador 0, n1 = namespace 1].
+        SN --> número de serie.
+        Model --> modelo del SSD.
+        FW Rev --> versión del firmware.
+# nvme id-ctrl /dev/nvme0 (información detallada del controlador: capacidades, versión del controlador, soporte de características...)
+Nota.- Usa /dev/nvme0 [el controlador], no /dev/nvme0n1 [el namespace].
+# nvme id-ns /dev/nvme0n1 (información del namespace: tamaño, formato de LBA, etc)
+# nvme smart-log /dev/nvme0 (muestra el estado de salud del SSD [SMART]: desgaste, temperatura, errores...)
+Nota.- percentage_used es la estimación del desgaste, 100% = vida útil agotada y critical_warning, 0 = todo bien; cualquier otro valor indica problemas
+# nvme smart-log /dev/nvme0 | grep 'temperature' (mostrar la temperatura)
+# nvme read /dev/nvme0n1 --start-block=0 --block-count=2097152 --data-size=1073741824 --output-file=read_test.bin (realizar una prueba de rendimiento [lectura/escritura]. Puede sobrescribir datos. Úsar solo en dispositivos de prueba)
+# nvme format /dev/nvme0n1 (formatear el dispositivo NVMe. Destruye todos los datos)
+# nvme format /dev/nvme0n1 --lbaf=0 --ms=0 (especificar tamaño de LBA, protección, etc)
+# nvme id-ns /dev/nvme0n1 (muestra las opciones de formato [lbaf - Logical Block Address Format]).
+# nvme error-log /dev/nvme0 (muestra los últimos errores registrados por el controlador)
+# nvme fw-log /dev/nvme0 (consultar las revisiones disponibles del firmware)
+Si se tiene un archivo de firmware [firmware.bin] se puede actualizar, pero una actualización fallida puede dejar el SSD inutilizable:
+# nvme fw-download /dev/nvme0 --fw=/ruta/a/firmware.bin --xfer=4096
+# nvme fw-commit /dev/nvme0 --slot=1 --action=2
 
 
 nvram-wakeup
