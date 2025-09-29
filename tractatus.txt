@@ -34898,6 +34898,20 @@ Muestra el espacio usado por los archivos y directorios del directorio actual. C
 $ ncdu /home/usuario
 
 
+ncftp
+Cliente FTP que permite al usuario transferir archivos desde y hacia un servidor remoto, y ofrece funciones adicionales que no están disponibles en la interfaz estándar de FTP. Incluye las herramientas ncftp3, ncftpbatch, ncftpbookmarks, ncftpget, ncftpls, ncftpput y ncftpspooler.
+$ ncftp -u USER ftp.servidor.net (Se conecta y entra en modo interactivo. Comandos típicos: ls, cd, get [bajar del servidor], put [subir], quit)
+$ ncftpget -u USER -p PASSWD ftp.servidor.net /remoto/backup.tar.gz /home/USER/descargas/ (descarga archivo.zip a la carpeta actual)
+$ ncftpget -R -u USER -p PASSWD ftp.servidor.org /remoto/docs /home/USER/archivos (descarga en local la carpeta remota de forma recursiva)
+$ ncftpput -R -v -u USER -p PASSWD -z servidor.com /destino/remoto /origen/local/carpeta (sube la carpeta local completa [-R recursivo] al directorio remoto y reanudar la transferencia si es necesario y en modo verbose)
+$ $ ncftpls -u USER servidor.com /home/USER/docs (lista los archivos del directorio remoto sin necesidad de una sesión interactiva)
+$ ncftpput -bb -u USER -p PASSWD servidor.com /destino archivo.zip (envía el trabajo a la cola. El trabajo se ejecutará cuando se inicie ncftpbatch)
+$ ncftpput -b -u USER -p PASSWD servidor.com /destino archivo.zip (con una sola -b intenta ejecutar ncftpbatch inmediatamente después de poner el trabajo en cola)
+$ ncftpbatch (inicia el procesador de lotes si no está ya ejecutándose como daemon)
+$ ncftpbatch -d (inicia el proceso en modo daemon para gestionar las tareas pendientes de transferencia)
+$ ncftpspooler -d (iniciar el daemon de spooler global para procesar tareas de múltiples usuarios o sistemas)
+
+
 ncmpcpp
 Reproductor de música. Al ser del tipo cliente-servidor, Precisa mpd [ver] arrancado.
 En el archivo de configuración, que tiene que crearse, sólo es necesario especificar el directorio de música:
@@ -43112,14 +43126,14 @@ nano ~/.config/succade/succaderc
 
 
 suckless-tools
-Conjunto de utilidades minimalistas y ligeras, diseñadas con la filosofía Suckless: "Simple is better" [lo simple es mejor]. Están pensadas para ser usadas con gestores de ventanas minimalistas como DWM, Awesome, i3, etc aunque es independiente del gestor de ventanas utilizado. Incluye las aplicaciones dmenu, dmenu_path, dmenu_run, lsw, slock, sprop, sselp, ssid, stest, swarp, tabbed.default, tabbed.meta, wmname y xssstate.
+Conjunto de utilidades minimalistas y ligeras, diseñadas con la filosofía "Simple is better" [lo simple es mejor]. Están pensadas para ser usadas con gestores de ventanas minimalistas como DWM, Awesome, i3, etc aunque es independiente del gestor de ventanas utilizado. Incluye las aplicaciones dmenu, dmenu_path, dmenu_run, lsw, slock, sprop, sselp, ssid, stest, swarp, tabbed.default, tabbed.meta, wmname y xssstate.
 $ dmenu_path | dmenu | xargs -r firefox & (lista las rutas de los ejecutables, "dmenu" permite seleccionar uno, y "xargs -r firefox &" ejecuta el seleccionado)
 $ dmenu_path (listar todos los ejecutables disponibles en el $PATH)
 $ dmenu_run -nb yellow -nf red -p bash (muestra una barra de color amarillo y letra roja con aplicaciones del sistema)
 $ lsw (lista las ventanas abiertas en el servidor X)
 $ slock (la pantalla se oscurecerá y se quedará bloqueada hasta que se introduzca la contraseña)
 $ sselp (pegará en la consola lo que esté en el portapapeles)
-$ swarp 100 200 ( mover el puntero a la posición indicada)
+$ swarp 100 200 (mover el puntero a la posición indicada)
 $ xssstate -i (estado del protector de pantalla en X11 en milisegundos)
 $ xssstate -s (estado actual del protector de pantalla. "on" activo, "off" no activo, "disabled" desactivado)
 
