@@ -3818,6 +3818,11 @@ $ nano .bmonrc
 Para no tener que especificar la red y con algun colorido. Los colores permitidos son: black, red, green, yellow, blue, magenta, cyan, white y default y sobre las partes de la ventana [layouts] que se puede incidir: Statusbar, List, Header, Selected y Default.
 
 
+bogl-bterm
+Es una terminal que no depende de un servidor gráfico como X11 o Wayland, sino que dibuja directamente en el framebuffer [ver] de Linux, útil en sistemas embebidos, servidores sin entorno gráfico, sistemas minimalistas o de bajo recurso o para tener una terminal con capacidades gráficas básicas y soporte para caracteres UTF-8 [acentos, símbolos, emojis básicos].
+# bterm -f bdftobogl -s 0 -l es htop (con la fuente especificada, pantalla completa, locale español y el programa a ejecutar)
+
+
 boinc
 [boinc-client boinc-manager]Plataforma de software libre para la computación distribuida que comprende áreas tan diversas como matemáticas, medicina, biologia, astrofísica... Es una forma de aprovechar nuestros equipos durante los periodos de inactividad para que sean usados en el marco de investigaciones cientificas.
 # /etc/init.d/boinc-client start (Arrancar el demonio)
@@ -16956,22 +16961,29 @@ Algunos atajos:
 	E (Abre preferencias)
 
 
+fd-find
+Alternativa sencilla, rápida e intuitiva a find con algunas características propias como que, por defecto, es insensible a mayúsculas y minúsculas y omite los archivos y directorios ocultos
+$ fdfind emacs (buscar todos los archivos que contengan la palabra mencionada en su nombre)
+$ fdfind bash /etc (busca archivos que tengan "bash" en el nombre en el directorio /etc)
+$ fdfind -s emacs (lo mismo pero "case sensitive")
+$ fdfind -e txt (busca todos los archivos con extensión .txt)
+$ fdfind -e md /home/usuario/docs (busca archivos con la extensión .md dentro del directorio /home/usuario/docs)
+$ fdfind -td conf (busca solo directorios cuyo nombre contenga "conf")
+$ fdfind -tf -e jpg (busca solo archivos con extensión .jpg)
+$ fdfind '^archivo.*log$' (busca archivos cuyo nombre comience con "archivo" y termine en "log")
+$ fdfind -H .gitkeep (busca el archivo .gitkeep, incluyendo archivos y directorios ocultos)
+$ fdfind -x chmod 644 {} (busca archivos y directorios, y para cada uno ejecuta el comando chmod 644 sustituyendo {} por la ruta del archivo)
+$ fdfind -tf -e log -X rm (busca archivos con extensión .log y los elimina por lotes)
+$ fdfind -H -i -t f archivo (buscar un archivo incluyendo en la busqueda los archivos ocultos y sin distinción de mayúsculos y minúsculas)
+$ fdfind -a -c auto -t x ejecutable (indicar toda la ruta de un ejecutable y mostrarlo con color automático)
+
+
 fdb5
 [Fields DataBase] Herramienta desarrollada por el Centro Europeo de Predicción Meteorológica a Medio Plazo (ECMWF) para almacenar, indexar y recuperar datos GRIB. Cada mensaje GRIB se almacena como un campo y se indexa mediante metadatos semánticos, es decir, variables físicas como temperatura, presión, etc. Está orientado a profesionales y organizaciones que manejan grandes volúmenes de datos meteorológicos en formato GRIB.
 $ fdb5 ls base_de_datos (muestra una lista de todos los campos almacenados en la base de datos especificada)
 $ fdb5 get --param temperatura --level 850 --date 20250321 --time 12:00 /ruta/a/tu/base/de/datos (recupera el campo de temperatura al nivel 850 hPa para el 21 de marzo de 2025 a las 12:00 horas)
 $ fdb5 put --param humedad --level 700 --date 20250321 --time 00:00 --file archivo.grib base_de_datos (inserta un archivo GRIB que contiene datos de humedad al nivel 700 hPa para el 21 de marzo de 2025 a las 00:00 horas en la base de datos)
 $ fdb5 rm --param viento --level 500 --date 20250320 --time 06:00 /ruta/a/tu/base/de/datos (elimina el campo de viento al nivel 500 hPa para el 20 de marzo de 2025 a las 06:00 horas de la base de datos)
-
-
-fdfind
-Alternativa rápida al comando find para buscar patrones.
-$ fdfind bash /etc (que tengan "bash" en /etc)
-$ fdfind '^x.*rc$' /etc (que empiecen por "x" y terminen con "rc" en el directorio /etc)
-$ fdfind -e txt (que tengan determinada extensión)
-$ fdfind -t d directorio (buscar un directorio)
-$ fdfind -H -i -t f archivo (buscar un archivo incluyendo en la busqueda los archivos ocultos y sin distinción de mayúsculos y minúsculas)
-$ fdfind -a -c auto -t x ejecutable (indicar toda la ruta de un ejecutable y mostrarlo con color automático)
 
 
 fdformat
@@ -18808,6 +18820,12 @@ $ fpzip -d comprimido.fpzip -o descomprimido.dat (descomprimir)
 $ fpzip -i entrada.dat -o salida.fpzip -p 4 (comprimir con un nivel de precisión de 4)
 $ fpzip -v salida.fpzip (mostrar información sobre el archivo comprimido)
 $ fpzip -i entrada.dat -o salida.fpzip -H (comprimir archivos muy grandes que no caben  memoria y que se debe incluir la cabecera en el archivo de salida)
+
+
+framebuffer
+Es una porción de memoria, generalmente en la RAM o en la memoria de la GPU, que representa la pantalla en modo gráfico o texto. En Linux, el framebuffer [/dev/fb0, por ejemplo] permite dibujar directamente en la pantalla sin necesidad de un entorno gráfico completo y es más rápido y ligero que terminales basadas en X11. Es una región de memoria en el sistema que se utiliza para almacenar una representación de los píxeles que se mostrarán en la pantalla. En esencia, es una abstracción que permite al sistema operativo y a las aplicaciones enviar datos gráficos, como colores, intensidades, etc. directamente al hardware de la pantalla, sin necesidad de interactuar con controladores gráficos complejos. El framebuffer soporta diferentes resoluciones y profundidades de color, por ejemplo, 8 bits, 16 bits, 32 bits por píxel, dependiendo del hardware y del controlador. En Linux moderno, el sistema de framebuffer [fbdev] está siendo reemplazado por DRM/KMS, que ofrece una gestión más avanzada de gráficos, incluyendo soporte para aceleración por hardware y cambios de resolución dinámicos. DRM/KMS es más eficiente y está mejor integrado con entornos gráficos modernos como Wayland.
+# fbset -i (mostrar información del frambuffer. Ver fbset)
+# fbi -vt 01 linux.png (ver una imagen en framebuffer. Ver fbi)
 
 
 francine
