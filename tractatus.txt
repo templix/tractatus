@@ -3343,6 +3343,16 @@ Realizar comprobaciones de seguridad rápidas y proactivas de programas binarios
 $ bfbtester -a /home/user/bin/* (todas las comprobaciones de los scripts del directorio mencionado en el home del usuario)
 
 
+bfs
+[Breadth-First Search]. Es una variante del comando find de UNIX, pero con un enfoque de búsqueda en anchura [Breadth-First Search] en lugar de en profundidad [Depth-First Search]. Esto significa que bfs explora primero todos los archivos y directorios del nivel actual antes de descender a los subdirectorios.
+$ bfs -name "*.txt" (busca todos los archivos .txt en el directorio actual y subdirectorios)
+$ bfs -type f -name "*.log" (busca solo archivos, no directorios con extensión .log)
+$ bfs -name "*.py" -exec chmod +x {} \; (busca todos los archivos .py y les da permiso de ejecución)
+$ bfs -maxdepth 2 -name "*.conf" (busca archivos .conf solo hasta 2 niveles de profundidad)
+$ bfs -size +10M (busca archivos mayores a 10MB)
+$ bfs -name "*.sh" -print (muestra solo la ruta de los archivos .sh encontrados)
+
+
 bg
 Pasa un proceso a segundo plano.
 $ bg PID
@@ -3827,6 +3837,21 @@ boinc
 [boinc-client boinc-manager]Plataforma de software libre para la computación distribuida que comprende áreas tan diversas como matemáticas, medicina, biologia, astrofísica... Es una forma de aprovechar nuestros equipos durante los periodos de inactividad para que sean usados en el marco de investigaciones cientificas.
 # /etc/init.d/boinc-client start (Arrancar el demonio)
 $ boincmgr (Arrancar la gui para la configuración inicial)
+
+
+bombadillo
+Navegador de terminal que permite explorar protocolos alternativos a la web [HTTP] tradicionales, como Gopher, Gemini y Finger, todo desde la línea de comandos. Su interfaz se basa en atajos al estilo Vim, es configurable, respeta la privacidad y también permite gestionar marcadores, historial y archivos descargados.
+$ bombadillo (se accede a su interfaz principal, donde todo se realiza con combinaciones de teclas y comandos interactivos)
+       :go gopher.floodgap.com (navegar a una URL Gopher)
+       :go gemini://gemini.circumlunar.space (navegar a un sitio Gemini)
+       :go finger://usuario@servidor.tld (consultar Finger)
+       b (volver atrás en el historial)
+       f (ir adelante en el historial)
+       B (ver/ocultar marcadores)
+       :help (ayuda)
+       g (ir al inicio del documento)
+       G (ir al final)
+       q (salir del programa)
 
 
 bookman
@@ -9985,10 +10010,10 @@ Utilidad para consultar y cambiar la configuración del monitor.
 
 
 ddgr
-Utilidad para hacer busquedas con DuckDuckGo desde la terminal. Abrira las busquedas con el navegador predeterminado a menos que se lance:
-$ export BROWSER=w3m
-$ ddgr linux emacs
-Las teclas que se usan son las del navegador escogido.
+Herramienta que permite buscar información directamente desde la terminal usando DuckDuckGo como motor de búsqueda.
+$ ddgr imagen de gatos (mostrará enlaces con la información solicitada)
+$ ddgr site:github.com Python tutorials (usar operadores de búsqueda avanzada)
+$ ddgr news since 2023-01-01 emacs (limitar resultados por fecha)
 
 
 ddir
