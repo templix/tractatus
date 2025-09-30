@@ -17689,6 +17689,38 @@ $ fio --name=prueba --ioengine=sync --rw=randwrite --bs=8k --size=500M --numjobs
 $ fio --name=prueba --ioengine=sync --rw=randwrite --bs=4k --size=1G --numjobs=2 --rw=randread --time_based (escritura aleatoria, 2 hilos de ejecución, la segunda operación es lectura aleatorio y se ejecuta de forma indefinida)
 
 
+firebird3.0-server
+Es una base de datos relacional. La contraseña "sysdba" la solicita durante la instalación.
+# systemctl status firebird3.0.service (con la instalación se activa)
+
+
+firebird3.0-utils
+contiene las utilidades para administrar bases de datos de Firebird.
+$ isql-fb /ruta/a/database.fdb -user sysdba -password masterkey (conectar a base de datos local)
+$ isql-fb localhost:/ruta/a/database.fdb -user sysdba -password masterkey (conectar a servidor remoto)
+$ isql-fb database.fdb -i script.sql -o resultado.txt (ejecutar script SQL desde archivo)
+$ gbak -b -user sysdba -password masterkey database.fdb backup.fbk (backup completo)
+$ gbak -b -g -user sysdba -password masterkey database.fdb backup.fbk (backup comprimido)
+$ gbak -c -user sysdba -password masterkey backup.fkb nueva_database.fdb (restaurar backup)
+$ gbak -c -rep -user sysdba -password masterkey backup.fbk database.fdb (restaurar sobreescribiendo)
+$ gfix -shut -tran 60 -force 0 database.fdb (apagar base de datos para mantenimiento)
+$ gfix -online database.fdb (encender base de datos)
+$ gfix -mend -full database.fdb (reparar base de datos corrupta)
+$ gfix -v -full database.fdb (ver estado de la base de datos)
+$ gsec -user sysdba -password masterkey -display (listar usuarios)
+$ gsec -user sysdba -password masterkey -add usuario_nuevo -pw su_password (agregar usuario)
+$ gsec -user sysdba -password masterkey -mod usuario_nuevo -pw nuevo_password (modificar usuario)
+$ gsec -user sysdba -password masterkey -del usuario_nuevo (eliminar usuario)
+$ fbstat -h database.fdb (estadísticas generales)
+$ fbstat -t TABLA database.fdb (estadísticas detalladas por tabla)
+$ fbstat -d database.fdb (mostrar páginas de datos)
+$ nbackup -L database.fdb (iniciar backup en línea sin bloquear la BD)
+$ nbackup -B 0 database.fdb backup.nbk (realizar backup físico)
+$ nbackup -R backup.nbk database.fdb (restaurar desde backup nbackup)
+$ gpre -lang cpp programa.e (precompilar archivo .e [Embedded SQL])
+$ gpre -lang c programa.e (generar código C)
+
+
 firebuild
 Funciona almacenando en caché las salidas de los comandos ejecutados y reproduciendo los resultados cuando los mismos comandos se ejecutan con los mismos parámetros dentro del mismo entorno.
 # firebuild -r htop (genera un informe con nombre firebuild-build-report.html sobre el comando htop)
