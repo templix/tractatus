@@ -33204,6 +33204,30 @@ En la máquina local, configurar el cliente, por ejemplo curl
 $ curl --socks5 203.0.113.45:1080 -U USER:PASSWD https://ejemplo.com
 
 
+midge
+Herramienta que convierte texto en archivos MIDI, permitiendo describir música en formato textual y generar secuencias MIDI compatibles con General MIDI, además de ofrecer funciones como generación aleatoria de secuencias, descompilador y modo Emacs.
+Un texto midge típico de unas cuantas escalas musicales, según los ejemplo del directorio /usr/share/doc/midge/examples/, podría ser:
+$ nano scales.mg
+@head {
+     $tempo 120
+     $time_sig 4/4
+}
+@body {
+     @channel 1 "bass" {
+           $patch bass_fg
+           %repeat 4 {
+                   /l3:8/a3=>b-3=>a3
+                   /l8/g3 r /l32/d /l3:32/e /l8/g a
+           }
+     }
+     @channel 10 "tamborine" {
+           %repeat 4 { /l4r4/tamb }
+     }
+}
+$ midge scales.mg -o scañes.mid
+$ timidity scales.mid
+
+
 midori
 Navegador web. Los archivos de configuración en .config/midori/
 1.-
