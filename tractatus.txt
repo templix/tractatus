@@ -165,6 +165,43 @@ $ abcde -d /dev/sdc1 -N -x -o ogg tracks 1-3 5 (extrae las tres primeras cancion
 Nota.- "-d" indica dispositivo, "-N" opciones por defecto y sin preguntar, "-x" expulsa el cd al acabar, "-o" tipo de archivo resultante
 
 
+abcmidi
+Utilidades para convertir entre notación musical ABC y archivos MIDI y viceversa y manipular y analizar archivos MIDI y notación ABC. Incluye las herramientas abc2abc, abc2midi, abcmatch, mftext, midi2abc, midicopy y midistats. Incluye las herramientas abc2abc, abc2midi, abcmatch, mftext, midi2abc, midicopy, midistats y yaps
+$ abc2midi cancion.abc -o cancion.mid (convierte notación ABC a un archivo MIDI)
+$ midi2abc cancion.mid -o cancion.abc (convierte un archivo MIDI a ABC)
+$ midi2abc -m 3/4 vals.mid -o vals.abc (ajustar la firma de compás)
+$ abc2abc cancion.abc -t 2 -o cancion_transpuesta.abc (transpone una canción ABC 2 semitonos arriba)
+$ abc2abc cancion.abc -n 4 -o cancion_nueva.abc (reformatea para que cada 4 compases vaya en una línea:)
+$ abcmatch fragmento.abc repertorio.abc (muestra dónde aparece el patrón definido en `fragmento.abc` dentro del repertorio)
+$ mftext cancion.mid > eventos.txt (muestra el contenido de eventos y notas de un archivo MIDI en formato texto)
+$ midicopy -t 1 original.mid extraido.mid (extrae la pista 1 de un archivo MIDI)
+$ midistats cancion.mid (analiza y resume estadísticas de un archivo MIDI: número de notas, duración, instrumentos usados, canales, etc)
+$ yaps cancion.abc -o cancion.ps (convierte notación ABC en PostScript para imprimir)
+Estructura básica de un archivo ABC
+$ nano ejemplo.abc
+       X:1
+       T:Prueba de sonido
+       C:Juan gonzalez
+       M:6/8
+       L:1/8
+       R:prueba
+       K:G
+       Q:120
+       GFG BAB | gfg gab | GFG BAB | d2A AFD |
+       GFG BAB | gfg gab | age edB |1 dBA AFD:|2 dBA ABd |:
+       efe edB | dBA ABd | efe edB | gdB ABd |
+       efe edB | d2d def | gfe edB |1 dBA ABd:|2 dBA AFD |
+X --> Número identificador de la melodía.
+T --> Título de la obra.
+C --> Autor
+M --> Compás.
+L --> Valor por defecto de la duración de nota.
+R --> Tipo de pieza (opcional).
+K --> Armadura de la clave (sol).
+Q --> Tempo. Tambien admite 1/4...
+Las letras A-G y a-g (mayúsculas/minúsculas) indican notas en distintas octavas; los números indican duración.
+
+
 abiword
 Procesador de texto completo y rápido y con una interfaz muy simple. Dado que requiere pocos recursos técnicos puede usarse en equipos obsoletos. Tiene filtros de importación/exportación de documentos desde su formato nativo a XML, RTF, HTML, Microsoft Word, LaTeX y OpenDocument.
 $ abiword --to=doc nombre.pdf (pasar pdf a doc)
@@ -29176,48 +29213,48 @@ ges --> si bemol
 ' { c4 d ...} --> sube el contenido una octava respeco a lo que indica "\relative c' {"
 Un ejemplo más completo:
 $ nano ejemplo.ly
-\version "2.24.1"
-%
-\header {
-  title = "Linux es un sistema genial"
-  composer = "Ejemplo LilyPond"
-}
-%
-\score {
-  <<
-    % --- Voz superior (melodía con letra)
-    \new Staff = "melody" <<
-      \clef treble
-      \key c \major
-      \time 4/4
-      \new Voice = "mel" {
-        \relative c' {
-          c4 d e2               % negras y blanca
-          r4 g g a              % silencio + melodía
-          b4 c2 r4              % blanca y silencio
-        }
-      }
-      \new Lyrics \lyricsto "mel" {
-        Li -- nux es un sis -- te -- ma ge -- nial
-      }
-    >>
-%
-    % --- Voz inferior (acompañamiento de acordes)
-    \new Staff = "chords" <<
-      \clef bass
-      \key c \major
-      \time 4/4
-      \relative c {
-        <c e g>1                % acorde de do mayor (blanca extendida al compás)
-        <f a c>1                % acorde de fa mayor
-        <g b d>1                % acorde de sol mayor
-      }
-    >>
-  >>
-%
-  \layout { }  % para la partitura en PDF
-  \midi { \tempo 4=80 }  % para generar MIDI
-}
+       \version "2.24.1"
+       %
+       \header {
+         title = "Linux es un sistema genial"
+	   composer = "Ejemplo LilyPond"
+	   }
+	   %
+       \score {
+         <<
+	     % --- Voz superior (melodía con letra)
+	     \new Staff = "melody" <<
+	     \clef treble
+	     \key c \major
+	     \time 4/4
+           \new Voice = "mel" {
+	   \relative c' {
+	             c4 d e2               % negras y blanca
+		     r4 g g a              % silencio + melodía
+                     b4 c2 r4              % blanca y silencio
+           }
+           }
+	         \new Lyrics \lyricsto "mel" {
+		 Li -- nux es un sis -- te -- ma ge -- nial
+           }
+         >>
+         %
+         % --- Voz inferior (acompañamiento de acordes)
+	     \new Staff = "chords" <<
+	     \clef bass
+	     \key c \major
+	     \time 4/4
+	     \relative c {
+	             <c e g>1                % acorde de do mayor (blanca extendida al compás)
+		     <f a c>1                % acorde de fa mayor
+		     <g b d>1                % acorde de sol mayor
+		     }
+	    >>
+	   >>
+	   %
+	     \layout { }  % para la partitura en PDF
+	     \midi { \tempo 4=80 }  % para generar MIDI
+	   }
 $ lilypond -f ps ejemplo.ly -o ejemplo
 $ ps2pdf ejemplo.ps
 $ timidity ejemplo.midi
