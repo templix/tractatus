@@ -49028,6 +49028,12 @@ $ xz -l file1.xz file2.lzma file3.txz (información sobre archivos comprimidos)
 $ xz -t file1.xz file2.lzma file3.txz (prueba la integridad de los archivos comprimidos)
 
 
+y-ppa-manager
+utilidad para gestionar los PPA en Launchpad.
+# y-ppa-cmd (Lanza las formas de usar el comando)
+# y-ppa-manager (abre la interfaz gráfica)
+
+
 yacpi
 Herramienta de monitoreo para portátiles.
 $ yacpi
@@ -49229,10 +49235,21 @@ $ youtube-dl --write-sub --sub-lang en url (Bajar el video y los subtítulos en 
 	Nota.- En algunas ocasiones muestra un error (ERROR: format not available for video) se soluciona bajando directamente el ejecutable de internet y suprimiendo el de los repositorios.
 
 
-y-ppa-manager
-utilidad para gestionar los PPA en Launchpad.
-# y-ppa-cmd (Lanza las formas de usar el comando)
-# y-ppa-manager (abre la interfaz gráfica)
+yp-tools
+Herramientas para interactuar con NIS [Network Information System - Sistema de Información de Red], un sistema cliente/servidor que permite compartir archivos de configuración del sistema como /etc/passwd, /etc/group, /etc/hosts, a través de la red, centralizando la gestión de cuentas. Antiguamente era conocido como Páginas Amarillas [Yellow Pages - YP]. Incluye las herramientas ypcat, ypchfn, ypchsh, ypmatch, yppasswd, ypwhich, yp_dump_binding, yppoll, ypset, yptest
+$ ypcat passwd (lista todas las cuentas de usuarios del mapa passwd del servidor NIS)
+$ ypchfn -f "Juan Pérez, Desarrollador" (actualiza el campo GECOS del usuario actual en el servidor NIS. Pide contraseña)
+$ ypchsh -l /bin/zsh (actualiza el shell de un usuario en el mapa "passwd" NIS que actúa sobre el servidor NIS centralizado. Requiere autenticación)
+$ ypmatch Perez passwd (busca la entrada del usuario "Perez" en el mapa passwd)
+$ ypmatch -x (lista los mapas del servidor)
+$ yppasswd -p Perez (cambia la contraseña del usuario en el servidor NIS)
+$ ypwhich (muestra el hostname del servidor NIS al que está conectado el cliente actual)
+$ ypwhich -m (listar todos los servidores)
+$ yp_dump_binding (muestra la configuración de binding del cliente NIS, incluyendo dominios, servidores preferidos y estado de conexión)
+$ yppoll -d example.com passwd nis-server.example.com (muestra estadísticas del mapa `passwd` en el servidor especificado)
+$ ypset nis-backup.example.com (cambia el binding del cliente al servidor de respaldo)
+$ yptest (verifica múltiples aspectos de la conexión NIS al dominio actual)
+$ rpcinfo -p (verificar los servicios que están en marcha)
 
 
 yt-dlp
