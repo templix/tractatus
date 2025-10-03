@@ -29132,6 +29132,97 @@ Biblioteca de plugins LV2. Incluye las herramientas lilv-bench, lv2apply [aplica
 # lv2info -m 0.003550 http://lsp-plug.in/plugins/lv2/slap_delay_stereo (añade el registro del complemento)
 
 
+lilypond
+Sistema de composición tipográfica musical y grabado automatizado. Produce partituras utilizando un archivo de descripción de alto nivel como entrada. LilyPond admite diversas formas de construcción de notación musical, incluyendo nombres de acordes, notación de batería, bajo cifrado, notas de adorno, tablatura de guitarra, trémolos, grupos irregulares y más. Ejemplos y extensa explicación en https://lilypond.org/examples.es.html y https://lilypond.org/manuals.es.html.
+$ lilypond --loglevel=ERROR ejemplo.ly -o ejemplo (muestra errores por pantalla y si no existen, genera un archivo ejemplo.pdf con la partitura)
+$ lilypond -f ps ejemplo.ly -o ejemplo (indica que solo genere el archivo PostScript [.ps] para saltarse la etapa de conversión a PDF si esta falla)
+Nota.- por defecto crea un .pdf pero con -f puede especificarse crear un png y un svg. Si en el texto se especifica \midi { } crea un archivo.midi
+Un ejemplo de archivo en formato lilypond para crear una escala de Do mayor en modo relativo:
+$ nano ejemplo.ly
+      \version "2.24.1"
+      \header {
+        title = "Escala de Do Mayor"
+	}
+	\score {
+	  \new Staff {	     % Crea un pentagrama
+	      \time 4/4      % Indicación de compás
+	      \clef treble   % Clave de sol
+	      \relative c'' { % Modo relativo [las notas se calculan a partir de la anterior]. Para una escala inferior colocar: c'
+	            c4 d e f g a b c c1 |  % Do, Re, Mi, Fa, Sol, La, Si, [negras, duración 4] y Do [redonda, duración 1]
+	      \bar "|."       % Barra final
+		      }
+	       }
+	        \layout { }
+		\midi { }
+ 	}
+\header --> Define el título y otra información de cabecera.
+\score --> Contiene la expresión musical principal.
+\new Staff --> Crea un nuevo pentagrama.
+\time 4/4 --> Establecen el compás
+\clef treble --> Establece la clave.
+\relative c' --> Pone el modo relativo, donde el "c'" inicial establece el Do central como nota de referencia. Para una octava superior: c''
+c4 d e f g a b c --> Define las notas. El número "4" indica una negra. Si no se especifica la duración como en "d", "e", etc. toma la duración de la nota anterior.
+|. --> Marca la barra final
+$ lilypond -f ps ejemplo.ly -o ejemplo (crea ejemplo.ps y ejemplo.midi)
+$ ps2pdf ejemplo.ps (convierte a ejemplo.pdf)
+$ timidity ejemplo.midi (para escuchar el .midi)
+Algunas instrucciones sobre la anotación:
+\time 2/4 --> el compas
+\clef bass --> clave de fa
+\chords --> acordes
+\addlyrics --> letra
+dis --> re sostenido
+ges --> si bemol
+' { c4 d ...} --> sube el contenido una octava respeco a lo que indica "\relative c' {"
+Un ejemplo más completo:
+$ nano ejemplo.ly
+\version "2.24.1"
+%
+\header {
+  title = "Linux es un sistema genial"
+  composer = "Ejemplo LilyPond"
+}
+%
+\score {
+  <<
+    % --- Voz superior (melodía con letra)
+    \new Staff = "melody" <<
+      \clef treble
+      \key c \major
+      \time 4/4
+      \new Voice = "mel" {
+        \relative c' {
+          c4 d e2               % negras y blanca
+          r4 g g a              % silencio + melodía
+          b4 c2 r4              % blanca y silencio
+        }
+      }
+      \new Lyrics \lyricsto "mel" {
+        Li -- nux es un sis -- te -- ma ge -- nial
+      }
+    >>
+%
+    % --- Voz inferior (acompañamiento de acordes)
+    \new Staff = "chords" <<
+      \clef bass
+      \key c \major
+      \time 4/4
+      \relative c {
+        <c e g>1                % acorde de do mayor (blanca extendida al compás)
+        <f a c>1                % acorde de fa mayor
+        <g b d>1                % acorde de sol mayor
+      }
+    >>
+  >>
+%
+  \layout { }  % para la partitura en PDF
+  \midi { \tempo 4=80 }  % para generar MIDI
+}
+$ lilypond -f ps ejemplo.ly -o ejemplo
+$ ps2pdf ejemplo.ps
+$ timidity ejemplo.midi
+
+
 lilypond-doc-html-es
 Documentación HTML en español del software de composición tipográfica de música lilypond. Acceder con el navegador a la dirección:
 	file:///usr/share/doc/lilypond/html/Documentation/changes/index.es.html
