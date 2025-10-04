@@ -165,6 +165,24 @@ $ abcde -d /dev/sdc1 -N -x -o ogg tracks 1-3 5 (extrae las tres primeras cancion
 Nota.- "-d" indica dispositivo, "-N" opciones por defecto y sin preguntar, "-x" expulsa el cd al acabar, "-o" tipo de archivo resultante
 
 
+abcm2ps
+Convierte archivos musicales de texto plano en notación ABC a formato PostScript.
+$ abcm2ps ejemplo.abc (generará el archivo de salida out.ps con la partitura correspondiente)
+$ abcm2ps -O salida.ps ejemplo.abc (especificar el nombre de salida)
+Ejemplo dee archivo ABC:
+$ nano ejemplo.abc
+    X:1
+    T:The Legacy Jig
+    M:6/8
+    L:1/8
+    R:jig
+    K:G
+    GFG BAB | gfg gab | GFG BAB | d2A AFD |
+    GFG BAB | gfg gab | age edB |1 dBA AFD :|2 dBA ABd |:
+    efe edB | dBA ABd | efe edB | gdB ABd |
+    efe edB | d2d def | gfe edB |1 dBA ABd :|2 dBA AFD |]
+
+
 abcmidi
 Utilidades para convertir entre notación musical ABC y archivos MIDI y viceversa y manipular y analizar archivos MIDI y notación ABC. Incluye las herramientas abc2abc, abc2midi, abcmatch, mftext, midi2abc, midicopy y midistats. Incluye las herramientas abc2abc, abc2midi, abcmatch, mftext, midi2abc, midicopy, midistats y yaps
 $ abc2midi cancion.abc -o cancion.mid (convierte notación ABC a un archivo MIDI)
@@ -39026,13 +39044,50 @@ $ pub2odg archivo.pub archivo.odf (si se omite el archivo de salida se impreme e
 
 
 pulseaudio
-Servidor de sonido multiplataforma.
-$ pulseaudio -D  (Reiniciar el servicio)
-1.-
-Habilitar la salida de audio combinada a todos los dispositivos (analógicos y hdmi)
-# nano /etc/pulse/default.pa
-Y añadir la linea:
-	load-module module-combine-sink sink_name=combined
+Es un servidor de sonido para sistemas POSIX que gestiona el audio en múltiples aplicaciones, permitiendo mezclar streams de audio y redirigirlos a diferentes dispositivos. Incluye las herramientas pa-info, pacat, pacmd, pactl, padsp, pamon, paplay, parec, parecord, pasuspender y pax11publish.
+$ pulseaudio --start (iniciar el daemon principal que gestiona todo el sistema de audio)
+$ pulseaudio --kill (detener)
+$ pulseaudio --kill && pulseaudio --start (reiniciar PulseAudio)
+$ pa-info > audio_info.txt (información completa del sistema de audio y guardarla en un archivo)
+$ pacat archivo.wav (reproducir un archivo WAV)
+$ pacat --record --file-format=wav audio.wav --latency-msec=1 & sleep 5 && kill $! (grabar audio a un archivo, 5 segundos)
+$ pacat --record | pacat --playback (reproducir desde micrófono directamente a altavoz [loopback])
+$ pacmd list-sinks (mostrar información de sinks [dispositivos de salida])
+$ pacmd list-sources (mostrar información de sources [dispositivos de entrada])
+$ pacmd set-default-sink "nombre_del_sink" (cambiar sink por defecto)
+$ pacmd set-default-source "nombre_del_source" (cambiar source por defecto)
+$ pacmd list-clients (mostrar clients conectados)
+$ pactl info (mostrar información general)
+$ pactl list sinks short (listar todos los sinks)
+$ pactl list sources short (listar todas las sources)
+$ pactl list cards (listar tarjetas disponibles)
+$ pactl set-sink-volume 0 +10% (subir volumen)
+$ pactl set-sink-volume 0 -10% (bajar volumen)
+$ pactl set-sink-mute 0 toggle (silenciar/desilenciar)
+$ pactl set-card-profile 0 output:hdmi-stereo (cambiar perfil de tarjeta a salida HDMI)
+$ pactl move-sink-input 1 2 (mover reproductor de audio entre sinks)
+$ pactl load-module module-null-sink sink_name=virtual_sink (crear sink virtual para aplicaciones específicas)
+$ pactl move-sink-input $(pactl list sink-inputs short | grep aplicacion | awk '{print $1}') virtual_sink (asignar aplicación al sink virtual)
+$ pactl load-module module-null-sink sink_name=monitor_out && pactl load-module module-loopback source=monitor_out.monitor (monitorizar mezcla de audio)
+$ paplay --device=monitor_out.monitor (reproducir la mezcla)
+$ padsp mplayer -ao oss archivo.mp3 (ejecutar un reproductor que solo soporta OSS con PulseAudio)
+$ pamon --device=0 (monitorizar el audio que se está reproduciendo)
+$ pamon --format=s16le --channels=2 --rate=44100 (monitorizar audio con formato específico)
+$ paplay audio.wav (reproduce archivos de audio)
+$ paplay --device=alsa_output.pci-0000_00_1b.0.analog-stereo musica.wav (reproducir archivo con dispositivo específico)
+$ cat audio.wav | paplay (reproducir desde stdin)
+$ parec --format=s16le --channels=2 --rate=44100 --file-format=wav grabacion.wav (grabar audio desde dispositivos de entrada a archivo WAV)
+$ parec --format=s16le | paplay (grabar audio y enviar a stdout)
+$ parec --device=alsa_input.pci-0000_00_1b.0.analog-stereo grabacion.wav (grabar desde source específica)
+$ parecord grabacion.wav (grabar audio)
+$ parecord --channels=1 --rate=16000 grabacion_mono.wav (grabar con parámetros específicos)
+$ parecord --latency-msec=1 grabacion_baja_latencia.wav (grabar con latencia baja)
+$ pasuspender -- aplay archivo.wav (ejecutar una aplicación ALSA con PulseAudio suspendido)
+$ pasuspender -- arecord -f cd grabacion.wav (grabar con ALSA directamente con PulseAudio suspendiso)
+$ pax11publish (mostrar configuración actual de audio en X11)
+$ pax11publish -s "nombre_del_sink" (establecer sink por defecto en X11)
+$ pax11publish -i "nombre_del_source" (establecer source por defecto en X11)
+$ pax11publish -r (eliminar publicaciones de audio en X11)
 
 
 pureline
