@@ -33466,6 +33466,14 @@ Nota.- En sistemas actuales, mingetty está integrado en el servicio getty@.serv
 # systemctl enable getty@tty3.service
 
 
+minidjvu
+Herramienta para trabajar con el formato DjVu, centrándose en imágenes monocromas [blanco y negro] y diseñada para archivos multipágina, como documentos escaneados. Permite convertir imágenes en varios formatos [PBM, BMP, TIFF] a DjVu y viceversa, pero sin soporte para color ni escala de grises, lo que la hace especialmente útil para documentos de texto escaneados.
+$ minidjvu input.pbm output.djvu (Convierte una imagen monocroma PBM al formato DjVu)
+$ minidjvu page1.pbm page2.pbm page3.pbm output.djvu (crea un archivo DjVu multipágina, uniendo las imágenes PBM indicadas)
+$ minidjvu --deco input.djvu output.pbm (extrae la primera página del archivo DjVu y la guarda como archivo PBM)
+$ minidjvu --deco --pages input.djvu page%d.pbm (decodifica todas las páginas de input.djvu, guardando cada página como archivos page1.pbm, page2.pbm, etc)
+
+
 miniflux
 [libreadline-dev libconfig-dev libssl-dev lua5.2 liblua5.2-dev libevent-dev libjansson-dev libpython-dev make]. Lector RSS instalado en local o en un servidor. Simplemente se descarga la aplicación de <http://miniflux.net/> y, una vez descomprimida, se copia al directorio web (generalmente /var/www). Se accede colocando en la barra de direcciones: http://localhost/miniflux (Por defecto el nombre de usuario y contraseña son admin:admin)
 Atajos de teclado:
