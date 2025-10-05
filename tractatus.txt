@@ -33392,6 +33392,26 @@ Muestra información similar a ethtool (Ver)
 # mii-tool eth0
 
 
+mime-construct
+Construir/enviar mensajes MIME [Multipurpose Internet Mail Extensions] desde la línea de comandos. MIME es una extensión del protocolo de correo electrónico que permite enviar contenido más allá de texto plano en formato ASCII. Originalmente diseñado para correo electrónico, MIME se usa para estructurar mensajes que pueden incluir texto en diferentes formatos, archivos adjuntos y contenido multimedia. Por defecto, mime-construct envía el mensaje a través de un servidor de correo, usando sendmail o similar, pero también puede generar el mensaje MIME sin enviarlo, redirigiéndolo a un archivo o a la salida estándar.
+$ mime-construct --to "destinatario@ejemplo.com" --from yo@ejemplo.com --subject "Prueba de correo" --body "Hola, este es un mensaje de prueba." (enviar un correo simple con texto plano. El correo se envía
+usando el servidor de correo configurado en el sistema)
+$ mime-construct --to "destinatario@ejemplo.com" --subject "Documento importante" --multipart mixed --body "Adjunto encontrarás el documento." --file documento.pdf (enviar con un PDF adjunto)
+$ mime-construct --to "destinatario@ejemplo.com" --subject "Correo en HTML" --type text/html --body "<h1>Hola</h1><p>Este es un mensaje en <b>HTML</b>.</p>" (enviar un correo con texto HTML)
+$ mime-construct --to "destinatario@ejemplo.com" --subject "Correo de prueba" --body "Mensaje de prueba" --output > mensaje.mime (crear mensaje MIME y guardarlo en un archivo sin enviarlo)
+$ mime-construct --to "destinatario@ejemplo.com" --subject "Archivos adjuntos" --multipart mixed --body "Aquí tienes los archivos solicitados." --file imagen.jpg --file informe.pdf (enviar un correo con varios adjuntos)
+       --to --> Define el destinatario.
+       --subject --> Especifica el asunto.
+       --body --> Contenido del mensaje en texto plano o código HTML.
+       --multipart mixed --> Crea un mensaje con varias partes [texto y adjunto].
+       --file --> Adjunta el archivo documento.pdf.
+       --type text/html --> Indica que el cuerpo es HTML [text/plain...].
+       --output --> Evita enviar el correo y muestra el mensaje MIME en la salida estándar.
+       --header --> Añade un encabezado personalizado al mensaje MIME.
+       --from <dirección> --> Remitente.
+       --cc <dirección> --> Copia [CC].
+
+
 mimetype
 Determina el tipo de archivo.
 $ mimetype -a archivo.md
