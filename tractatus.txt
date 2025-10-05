@@ -33409,20 +33409,61 @@ Grabación de emisoras.mencoder mf://*.jpg -ovc lavc -o out.avi
 $ mimms -t 2 mms://viplagardere.yacast.net/encodereurope2 (2 minutos)
 
 
+mina
+Herramienta de automatización de despliegue [deployment] como clonar repositorios, instalar dependencias, reiniciar servicios, etc. escrita en Ruby y diseñada para simplificar y agilizar la implementación de aplicaciones en servidores remotos. Su principal característica es que genera scripts Bash a partir de tareas definidas en Ruby, y luego ejecuta esos scripts en el servidor remoto a través de una única sesión SSH, lo que optimiza el rendimiento y reduce la sobrecarga de múltiples conexiones SSH.
+Crear un archivo en el directorio del proyecto donde se define la configuración básica y las tareas de despliegue. Un ejemplo mínimo:
+$ nano config/deploy.rb
+      require 'mina/bundler'
+      require 'mina/rails'
+      require 'mina/git'
+      set :domain, 'tuservidor.com'
+      set :deploy_to, '/var/www/mi_app'
+      set :repository, 'git@github.com:usuario/mi_app.git'
+      set :branch, 'main'
+      task :setup do
+        command %[mkdir -p "#{deploy_to}/shared/log"]
+	command %[mkdir -p "#{deploy_to}/shared/config"]
+	command %[touch "#{deploy_to}/shared/config/database.yml"]
+      end
+      task :deploy do
+        deploy do
+	  invoke :'git:clone'
+	  invoke :'deploy:link_shared_paths'
+    	  invoke :'bundle:install'
+    	  invoke :'rails:db_migrate'
+    	  invoke :'rails:assets_precompile'
+    	  invoke :'deploy:cleanup'
+    	  to :launch do
+	        invoke :'puma:restart'
+	    end
+	  end
+       end
+$ mina setup (onfigurar el servidor por primera vez)
+$ mina deploy (desplegar tareas)
+1.-
+Ejemplo de tareas personalizadas
+Definir tus propias tareas. Por ejemplo, para reiniciar un servicio de Nginx:
+	task :restart_nginx do
+	  command %[sudo systemctl restart nginx]
+	end
+Y luego invocarla desde otra tarea:
+        task :deploy do
+	  deploy do
+	      # ... otras tareas ...
+	      invoke :restart_nginx
+	  end
+	end
+
+
 minfo
 Herramienta que imprime los parámetros de un sistema de archivos MS-DOS, como el número de sectores, cabezas y cilindros. También imprime una línea de comandos mformat que puede utilizarse para crear un sistema de archivos MS-DOS similar en otro soporte.
 
 
-minguetty
-Programa minimalista que se utiliza para iniciar sesión en consolas
-$ mingetty --autologin usuario console (iniciar automáticamente una sesión de login para el usuario especificado)
-$ mingetty --login-graphical console (mostrará una interfaz gráfica de login en lugar de la consola estándar)
-$ ps aux | grep mingetty (mostrará si hay procesos mingetty corriendo)
-1.-
-Para crear un archivo de configuración personalizado:
-$ echo "console /dev/ttyS0" > ~/.mingettyrc
-Y luego ejecutar:
-$ mingetty console
+mingetty
+Versión minimalista y optimizada del programa "getty", diseñada específicamente para consolas virtuales locales, como las terminales accesibles con "Ctrl+Alt+F1-F6", no funciona con terminales físicas [seriales] ni redes [SSH]. Getty abre un puerto tty, solicita un nombre de usuario e invoca el comando /bin/login.
+# mingetty /dev/tty4 (abrirá la terminal tty4, accesible con "Ctrl+Alt+F4", donde se pedirá un nombre de usuario)
+Nota.- En sistemas actuales, mingetty está integrado en el servicio getty@.service. Para habilitarlo en tty3, caso improbable de que no lo esté por "systemd-logind":
+# systemctl enable getty@tty3.service
 
 
 miniflux
