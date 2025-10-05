@@ -28057,12 +28057,20 @@ $ kill -1 pid  (reinicia el servicio indicado en PID)
 $ kill %2 (mata el proceso número 2)
 $ kill -19 pid  (Parar un proceso de forma temporal. Con -18 se reanuda)
 Algunas muestras del número y su equivalencia:
-2 SIGINT (Interrumpido desde el teclado [igual que Ctrl+c])
-3 SIGQUIT (Cerrado desde el teclado [igual que Ctrl+\])
-9 SIGKILL (forzar que uno o varios procesos terminen de forma inmediata)
-18 SIGCONT (Reanudar un proceso parado)
-19 SIGSTOP (suspender un proceso)
-20 SIGTSTP (Parar un proceso desde terminal [igual que Ctrl+z])
+1 (SIGHUP) --> Colgar sesión o recargar configuración. Muchos demonios lo usan para recargar sin reiniciar, como  nginx, sshd, rsyslog...
+2 (SIGINT) --> Interrumpe el proceso desde terminal. Equivalente a Ctrl-c
+3 (SIGQUIT)--> Termina proceso y genera un volcado [core dump]. Equivalente a Ctrl+\
+9 (SIGKILL)--> Mata el proceso inmediatamente, sin posibilidad de captura ni limpieza
+10(SIGUSR1)--> Señal libre para uso personal por programas o scripts
+11(SIGSEGV)--> Error de memoria [acceso indebido]
+12(SIGUSR2)--> Señal libre para uso personal por porgramas o scripts
+13(SIGPIPE)--> Cuando un proceso escribe en una tubería sin lector
+14(SIGALRM)--> Señal enviada por temporizadores [alarm(), sleep]
+15(SIGTERM)--> Cierre ordenado
+17(SIGCHLD)--> Notifica a un proceso padre que su hijo terminó
+18(SIGCONT)--> Reanudar un proceso pausado
+19(SIGSTOP)--> Pausa el proceso
+20(SIGTSTP)--> Terminal Stop. Equivalente a (Ctrl+z)
 Nota.- Si en vez de usar los números [kill -9 pid] usamos el nombre de la señal [kill -KILL pid] podemos omitir las letras SIG de la señal [SIGKILL]
 
 
@@ -28070,8 +28078,8 @@ killall
 Mata el proceso de la aplicación especificada
 $ killall -9 scribus
 $ killall gnome-panel (reiniciar los paneles)
-$ killall -INFO dd  (chequear el estado de un proceso dd)
-$ killall -u usuario (Matar los procesos de un	 usuario)
+$ killall -INFO dd (chequear el estado de un proceso dd)
+$ killall -u usuario (Matar los procesos de un usuario)
 $ killall -l (listado de todas las señales)
 $ killall -s SEGV
 
