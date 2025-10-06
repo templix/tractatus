@@ -33502,6 +33502,42 @@ $ minidjvu --deco input.djvu output.pbm (extrae la primera página del archivo D
 $ minidjvu --deco --pages input.djvu page%d.pbm (decodifica todas las páginas de input.djvu, guardando cada página como archivos page1.pbm, page2.pbm, etc)
 
 
+minicoredumper
+Es un servicio que captura volcados de memoria de forma selectiva y configurable, más ligero que el core dump tradicional del sistema.
+# systemctl status minicoredumper (ver estado del servicio)
+# minicoredumper --pid 1234 (forzar un volcado manual de un proceso específico)
+Un ejemplo de configuración:
+# nano /etc/minicoredumper.conf
+       # Configurar para capturar solo ciertos tipos de señales
+       # En el archivo de configuración:
+       # signal = SIGSEGV,SIGABRT,SIGFPE
+       [core]
+       # Directorio donde guardar los volcados
+       directory = /var/crash
+       #
+       # Tamaño máximo del volcado
+       max_size = 100M
+       #
+       # Señales que activarán el volcado
+       signal = SIGSEGV,SIGABRT
+       #
+       # Comprimir volcados
+       compress = yes
+
+
+minicoredumper-utils
+Herramientas para trabajar con aplicaciones basadas en libminicoredumper: coreinject y minicoredumper_trigger. Ver minicoredumper y gdb.
+# coreinject --env /path/to/core.dump (inyectar información adicional en archivos de volcado existentes en ese caso en las variables de entorno)
+# coreinject --maps /path/to/core.dump (inyectar información de archivos mapeados en memoria)
+# coreinject --env --maps --auxv /path/to/core.dump (inyectar múltiples tipos de información)
+# coreinject --env core.dump -o core_with_env.dump (especificar archivo de salida)
+# minicoredumper_trigger --pid 5678 (generar volcado de un proceso por PID)
+# minicoredumper_trigger --name mi_aplicacion (generar volcado de un proceso por nombre)
+# minicoredumper_trigger --pid 5678 --with-maps --with-env (generar volcado con información específica)
+# minicoredumper_trigger --pid 5678 --force (forzar volcado incluso si el proceso está funcionando correctamente)
+Nota.- Un core dump es un archivo binario que contiene el estado de la memoria de un proceso en el momento de un fallo
+
+
 miniflux
 [libreadline-dev libconfig-dev libssl-dev lua5.2 liblua5.2-dev libevent-dev libjansson-dev libpython-dev make]. Lector RSS instalado en local o en un servidor. Simplemente se descarga la aplicación de <http://miniflux.net/> y, una vez descomprimida, se copia al directorio web (generalmente /var/www). Se accede colocando en la barra de direcciones: http://localhost/miniflux (Por defecto el nombre de usuario y contraseña son admin:admin)
 Atajos de teclado:
