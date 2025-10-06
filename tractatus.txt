@@ -33538,6 +33538,41 @@ Herramientas para trabajar con aplicaciones basadas en libminicoredumper: corein
 Nota.- Un core dump es un archivo binario que contiene el estado de la memoria de un proceso en el momento de un fallo
 
 
+minidlna
+MiniDLNA es un servidor de medios ligero que implementa los protocolos DLNA [Digital Living Network Alliance] y UPnP-AV [Universal Plug and Play - Audio Video]. Permite compartir archivos multimedia de música, imágenes y videos en una red local para que dispositivos compatibles puedan acceder a ellos tales como Smart TVs [Samsung, LG, Sony, etc.], consolas [PlayStation, Xbox], reproductores multimedia [Kodi, VLC], dispositivos móviles y aplicaciones como BubbleUPnP.
+Configuración mínima:
+# nano /etc/minidlna.conf
+       # Directorio donde se almacenan los archivos de la base de datos
+       db_dir=/var/cache/minidlna
+       # Directorio de log
+       log_dir=/var/log
+       # Puerto HTTP (por defecto 8200)
+       port=8200
+       # Nombre del servidor en la red
+       friendly_name=Mi Servidor Multimedia
+       # Directorios a compartir (separados por comas)
+       media_dir=A,/home/usuario/Música
+       media_dir=P,/home/usuario/Imágenes
+       media_dir=V,/home/usuario/Videos
+       # Configuración de red
+       network_interface=eth0
+       presentation_url=http://192.168.1.100:8200
+       # Opciones de rendimiento
+       max_connections=10
+       root_container=.
+# systemctl enable minidlna (habilitar inicio automático)
+# minidlna -R (forzar rescaneo de archivos)
+# tail -f /var/log/minidlna.log (ver logs en tiempo real)
+# grep -i error /var/log/minidlna.log (ver logs de errores)
+# minidlna -d -S (probar configuración sin iniciar el servicio)
+# netstat -tlnp | grep 8200 (verificar que el servicio está escuchando)
+1.-
+Regenerar base de datos completa:
+# systemctl stop minidlna
+# rm -rf /var/cache/minidlna/*
+# systemctl start minidlna
+
+
 miniflux
 [libreadline-dev libconfig-dev libssl-dev lua5.2 liblua5.2-dev libevent-dev libjansson-dev libpython-dev make]. Lector RSS instalado en local o en un servidor. Simplemente se descarga la aplicación de <http://miniflux.net/> y, una vez descomprimida, se copia al directorio web (generalmente /var/www). Se accede colocando en la barra de direcciones: http://localhost/miniflux (Por defecto el nombre de usuario y contraseña son admin:admin)
 Atajos de teclado:
