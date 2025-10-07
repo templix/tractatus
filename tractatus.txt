@@ -33637,6 +33637,14 @@ $ minil new Mi-Modulo (creará un directorio Mi-Modulo/ con la estructura están
 $ cd Mi-Modulo
 
 
+minilzip
+Es una versión reducida del compresor de datos lzip, casi tan rápido como gzip y comprime mejor que bzip2 y totalmente compatible con lzip. LZMA [Lempel-Ziv-Markov chain-Algorithm]
+$ minilzip -k -o comprimido.lz archivo.txt (conservar los archivos de entrada, escribir la salida con el nombre "comprimido.lz" y archivo.txt es el archivo a comprimir)
+$ minilzip -t comprimido.lz (comprobar la integridad del archivo comprimido)
+$ minilzip --best archivo.txt (con la máxima compresión. Del 0 al 9. "best" es un alias para 9 y "fast" para 0. Predeterminado 6)
+$ minilzip -d comprimido.lz (descomprimir)
+
+
 mirmon
 Comprueba el estado de los espejos de Debian. Visualizarlos en el navegador con la ruta: /var/lib/mirmon/debian-mirror-check.html. El archivo de configuración en /etc/mirmon.conf.
 # mirmon -v -get update (Actualizar estado de los mirrors con la maxima información)
