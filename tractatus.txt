@@ -33645,6 +33645,32 @@ $ minilzip --best archivo.txt (con la máxima compresión. Del 0 al 9. "best" es
 $ minilzip -d comprimido.lz (descomprimir)
 
 
+mininet
+Herramienta que permite crear y experimentar con redes virtuales en una sola máquina, simulando switches, hosts y enlaces tal como existen en una red física. Es ideal para probar conceptos de redes definidas por software [SDN] con OpenFlow. Incluye el ejecutable mnexec que se usa internamente para gestionar los procesos de los hosts virtuales, normalmente no se usa directamente.
+# mn (crea una red de un switch [s1] y dos hosts conectados [h1, h2], un controlador y sinalmente se entra en una CLI interactiva)
+     mininet> help (ayuda para con comando disponibles)
+     mininet> nodes (lista todos los nodos: hosts, switches y controlador)
+     mininet> net (muestra cómo están conectados los nodos)
+     mininet> dump (muestra detalles de los nodos y sus interfaces)
+     mininet> xterm h1 (abre una terminal de sistema aislada para el host h1. Precisa xterm instalado)
+     mininet> pingall (efectua un ping entre todos los hosts de la red)
+     mininet> exit (salir de mininet)
+     mininet> h1 ifconfig (ejecutar comands de red dentro del host virtual h1)
+     mininet> h2 ping h1 (ejecutar un ping entre dos máquinas del host)
+# mn --topo=tree,2,2 (crea un árbol de switches y hosts según esos valores)
+# mn --topo=linear,3,2 (topología lineal con 3 switches y 2 hosts por switch)
+# mn --topo=single,3 (topología de un switch y 3 hosts)
+# mn -c (limpia registros y elimina toda la red virtual anterior)
+
+
+miniramfs
+Conjunto de scripts y herramientas, cuyo propósito es generar imágenes de initramfs [Initial RAM File System] de tamaño reducido. Esto es crucial para sistemas o dispositivos con restricciones significativas de memoria o espacio de almacenamiento para la imagen de arranque, como puede ser hardware embebido o sistemas que arrancan por red [PXE]. El concepto principal es el de crear un initramfs minimalista que solo contenga los módulos del kernel y las herramientas esenciales, como mkfs, mount, o udev mínimo, necesarios para: Detectar y cargar el controlador del disco o la red, montar el sistema de archivos raíz real y transferir el control al sistema de archivos raíz para continuar con el arranque normal.
+# miniramfs-generator -k <versión_del_kernel> -o /boot/miniramfs-<versión>.img (especifica para qué versión del kernel se debe construir la imagen y  donde guardarla)
+El script analizaría la configuración del kernel*y el hardware para incluir solamente los módulos de controlador para el disco de arranque [ej: SATA, NVMe, o el controlador de red si es un arranque remoto] y programas muy básicos como busybox, una herramienta que combina muchas utilidades estándar de Linux en un solo ejecutable pequeño, en lugar de versiones completas de bash, mount, etc. Una vez generada la imagen, el paso final es decirle al gestor de arranque [como GRUB] que use esta imagen minimalista en lugar de la imagen de initramfs estándar.
+# update-grub
+Nota.- initramfs es un sistema de archivos temporal utilizado durante el arranque de Linux.
+
+
 mirmon
 Comprueba el estado de los espejos de Debian. Visualizarlos en el navegador con la ruta: /var/lib/mirmon/debian-mirror-check.html. El archivo de configuración en /etc/mirmon.conf.
 # mirmon -v -get update (Actualizar estado de los mirrors con la maxima información)
