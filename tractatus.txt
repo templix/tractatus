@@ -33623,6 +33623,20 @@ Atajos de teclado:
 	q (Cerrar la ayuda)
 
 
+minilla
+Herramienta para la creación, prueba, publicación, instalación y carga de distribuciones CPAN, pensada para simplificar el ciclo de vida de un módulo Perl: desde su creación hasta su liberación en CPAN [Comprehensive Perl Archive Network]. CPAN es una red de almacenamiento de recursos de Perl a la que se tiene acceso a través de http://www.cpan.org/ y en la que se pueden realizar búsquedas desde http://search.cpan.org/.
+$ perl -MCGI::Carp -e 1 (si no da menaje de error es que ya está instalado)
+$ perl -e "print qq(@INC)" (ruta del módulo)
+$ minil test (probar el módulo)
+$ minil install (construir e instalar localmente)
+$ minil release (preparar y liberar)
+$ minil upload (subir a CPAN. Requiere tener configuradas las credenciales)
+1.-
+Ejemplo para empezar un módulo Perl
+$ minil new Mi-Modulo (creará un directorio Mi-Modulo/ con la estructura estándar de un módulo CPAN)
+$ cd Mi-Modulo
+
+
 mirmon
 Comprueba el estado de los espejos de Debian. Visualizarlos en el navegador con la ruta: /var/lib/mirmon/debian-mirror-check.html. El archivo de configuración en /etc/mirmon.conf.
 # mirmon -v -get update (Actualizar estado de los mirrors con la maxima información)
