@@ -33645,6 +33645,25 @@ $ minilzip --best archivo.txt (con la máxima compresión. Del 0 al 9. "best" es
 $ minilzip -d comprimido.lz (descomprimir)
 
 
+minimodem
+Es esencialmente un módem de software. En lugar de usar hardware físico para modular [convertir datos digitales en tonos de audio] y demodular [convertir tonos de audio en datos digitales], lo hace mediante la tarjeta de sonido de la computadora. Es compatible con diversos protocolos FSK estándar, como Bell103, Bell202, RTTY, TTY/TDD, NOAA SAME e identificador de llamadas.
+$ echo "Mensaje secreto para un archivo." | minimodem -t -f mensaje_secreto.wav 1200 (el transmisor crea el archivo de audio con los tonos del mensaje que puede enviarse por email)
+$ minimodem -r -f mensaje_secreto.wav 1200 (decodificar el archivo de audio por parte del receptor)
+$ cat mi_documento.txt | minimodem -t -f mi_archivo.wav 300 (transmitir archivos)
+$ minimodem -r -f mi_archivo.wav 300 > documento_recibido.txt (descodificarlo el receptor)
+$ echo "CQ CQ CQ Este es un llamado general por radio." | minimodem -t rtty (usando un protocolo clásico de radio que usa 7 bits de datos y paridad par)
+$ minimodem -r rtty (decodificar en recepción)
+$ minimodem --rx -S 1000 -A 10 300 (con recepción ruidosa, fuerza la sincronización cada 1000 ms y ajusta automáticamente el nivel de audio para adaptarse a señales silenciosas o fuertes)
+1.-
+Un caso práctico. Dos computadoras, o una con dos terminales abiertos. En el equipo TRANSMISOR con altavoz:
+$ echo "Hola desde Minimodem!" | minimodem -t 300
+Hará que el altavoz emita una serie de tonos que representan el texto "Hola desde Minimodem!" a 300 baudios.
+En el equipo RECEPTOR con micrófono. La velocidad en Baudios ha de ser la misma que el transmisor:
+$ minimodem -r 300
+Acercando el micrófono del receptor al altavoz del transmisor se verá cómo minimodem decodifica los tonos en tiempo real y muestra el mensaje original en la pantalla.
+Nota.- A menor velocidad [300 baudios], mayor es la resistencia al ruido, pero la transferencia es más lenta. A mayor velocidad [9600 baudios], es más rápida pero requiere un canal de audio de muy alta calidad, sin eco, sin ruido.
+
+
 mininet
 Herramienta que permite crear y experimentar con redes virtuales en una sola máquina, simulando switches, hosts y enlaces tal como existen en una red física. Es ideal para probar conceptos de redes definidas por software [SDN] con OpenFlow. Incluye el ejecutable mnexec que se usa internamente para gestionar los procesos de los hosts virtuales, normalmente no se usa directamente.
 # mn (crea una red de un switch [s1] y dos hosts conectados [h1, h2], un controlador y sinalmente se entra en una CLI interactiva)
