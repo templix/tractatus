@@ -33752,6 +33752,14 @@ Es un pequeño demonio utilizado por MiniUPnc y su función principal es acelera
 Notas.- UPnP: Stands for Universal Plug and Play. Es un protocolo que permite a los dispositivos conectarse automáticamente en redes domésticas o empresariales sin necesidad de configuración manual. IGD: Stands for Internet Gateway Device. Es un dispositivo que actúa como puente entre la red local y la red externa, generalmente un router. SSDP: Simple Service Discovery Protocol. Es un protocolo que permite a los dispositivos descubrir otros dispositivos en la misma red.
 
 
+minizip
+es una biblioteca minimalista que permite comprimir, extraer, visualizar y manipular archivos zip. Este paquete incluye las herramientas minizip y miniunzip.
+$ minizip -o -9 archivo.zip archivo.txt archivo2.txt (comprimir lento pero mejor [-1 = rapido pero peor] los archivos .txt especificados en archivo.zip, sobreescribiento si existe [-o])
+$ minizip -a archivo.zip archivo.md (añadir archivo.md al .zip existente)
+$ miniunzip -l archivo.zip (listar los archivos del interior de un .zip)
+$ miniunzip -o -x arxius.zip (extraer sobreescribiendo si existen)
+
+
 mirmon
 Comprueba el estado de los espejos de Debian. Visualizarlos en el navegador con la ruta: /var/lib/mirmon/debian-mirror-check.html. El archivo de configuración en /etc/mirmon.conf.
 # mirmon -v -get update (Actualizar estado de los mirrors con la maxima información)
