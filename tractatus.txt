@@ -40009,7 +40009,7 @@ La opción -a permite leer las palabras como elementos de un array:
 	Hola que tal
 	$ declare -p frase
 	declare -a frase='([0]="Hola" [1]="que" [2]="tal")'
-$ read -s -p "entra la contraseña: " CONTRASEÑA (Para que no se vea en la pantalla lo que se escribe aunque si se efectua un echo $CONTRASEÑA se mostrará)
+$ read -s -p "entra la contraseña: " CONTRASEÑA (-s --> Para que no se vea en la pantalla lo que se escribe aunque si se efectua un echo $CONTRASEÑA se mostrará)
 $ read -n 1 -p "¿continuar? "  (efectuará la acción al pulsar una tecla sin necesidad de pulsar "Intro")
 1.-
 $ read x y <<<"2 5"
@@ -40018,7 +40018,6 @@ x=2 -- y=5
 Algunas opciones:
 -d (permite indicar un delimitador de fin de línea de forma que la línea se lee hasta encontrar este delimitador)
 -e (permite que se puedan usar todas las combinaciones de teclas de readline)
--n 1 (
 
 
 read-edid
