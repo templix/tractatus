@@ -33724,6 +33724,25 @@ La pantalla mostrar un salida amplia pero el archivo resultado.out:
        1 -2 3 0
 
 
+minisign
+Herramienta para firmar archivos y verificar firmas que utiliza el sistema de firma de clave pública Ed25519 de alta seguridad. Los archivos de firma incluyen una línea de comentario no confiable que se puede modificar libremente, incluso después de la creación de la firma. También incluyen una segunda línea de comentario que no se puede modificar sin la clave secreta. Los comentarios confiables se pueden usar para agregar instrucciones o metadatos específicos de la aplicación como nombre de archivo, marcas de tiempo, identificadores de recursos, números de versión para evitar ataques de degradación.
+$ minisign -G -p pubkey.txt -s secretkey.txt (genera una clave pública para verificación [pubkey.txt] y una clave privada para firmar [secretkey.txt])
+$ minisign -S -s secretkey.txt -m archivo.txt (pedirá la contraseña ntrada en el paso anterior y creará archivo.txt.minisig con la firma de archivo.txt)
+$ minisign -S -s secretkey.txt -m mensaje.txt -c "Versión 1.0 - Oct 2025" (lo mismo con un comantario)
+$ minisign -Vm mensaje.txt -p pubkey.txt (verificar si la firma ha sido modificada)
+  	   Signature and comment signature verified
+Si ha sido modificad aparecerá:
+           Signature verification failed
+El contenido de un archivo .minisig muestra las lineas:
+   	  untrusted comment: signature from minisign secret key
+	  RURUqkuAKIaHUbQJEU4lV/hT3JT0L7E9roUhS7OCfYrB8HhVuH...
+	  trusted comment: timestamp:1759929273   file:archivo.txt      hashed
+	  zDADSXsqVWH9Hqxo1IF08s6f5uqHWgJ5SBMZnbUMw0WsoXsK...
+untrusted comment --> editable, no afecta la verificación.
+trusted comment --> autenticado con la firma.
+Última línea --> la firma en base64.
+
+
 mirmon
 Comprueba el estado de los espejos de Debian. Visualizarlos en el navegador con la ruta: /var/lib/mirmon/debian-mirror-check.html. El archivo de configuración en /etc/mirmon.conf.
 # mirmon -v -get update (Actualizar estado de los mirrors con la maxima información)
