@@ -33743,6 +33743,15 @@ trusted comment --> autenticado con la firma.
 Última línea --> la firma en base64.
 
 
+minissdpd
+Es un pequeño demonio utilizado por MiniUPnc y su función principal es acelerar la detección de dispositivos UPnP en la red, guardar en la memoria los que se anunciaron en la red mediante paquetes SSDP NOTIFY y gestionar el tráfico SSDP [Simple Service Discovery Protocol] enviados por los dispositivos en la red y recibidos en el equipo. El archivo de configuración se encuentra en /etc/default/minissdpd. El puerto multicast por defecto es el 1900, que puede cambiarse en el archivo de configuración
+      MINISSDPD_MCAST_PORT=12345
+# systemctl enable minissdpd (habilitar el arranque automático)
+# cat /var/log/minissdpd.log | grep "Device found" (verificar los dispositivos detectados)
+# minissdpd --clear-cache (limpiar la lista de dispositivos guardados)
+Notas.- UPnP: Stands for Universal Plug and Play. Es un protocolo que permite a los dispositivos conectarse automáticamente en redes domésticas o empresariales sin necesidad de configuración manual. IGD: Stands for Internet Gateway Device. Es un dispositivo que actúa como puente entre la red local y la red externa, generalmente un router. SSDP: Simple Service Discovery Protocol. Es un protocolo que permite a los dispositivos descubrir otros dispositivos en la misma red.
+
+
 mirmon
 Comprueba el estado de los espejos de Debian. Visualizarlos en el navegador con la ruta: /var/lib/mirmon/debian-mirror-check.html. El archivo de configuración en /etc/mirmon.conf.
 # mirmon -v -get update (Actualizar estado de los mirrors con la maxima información)
