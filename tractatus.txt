@@ -22526,6 +22526,20 @@ Modificar el sistema que arranca primero.
 Y modificar la linea que pone:
 	set default="2"
 Arrancará el sistema situado en la 3ª linea que aparece en el menú (La primera linea es la 0)
+15.-
+Poner entradas personalizadas en grub.
+# nano /etc/grub.d/40_custom
+Añadir:
+menuentry "Apagar el sistema" {
+        echo "Apagan el sistema..."
+        halt
+}
+#
+menuentry "Reiniciar eñ sistema" {
+        echo "Reinician el sistema..."
+        reboot
+}
+# update-grub2 (recargar)
 
 
 grub-mkconfig
