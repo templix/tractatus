@@ -33822,6 +33822,28 @@ $ missidentify -b (mostrar solo el nombre del archivo sin la ruta)
 $ missidentify | grep "malware" (filtrará los resultados para mostrar solo los archivos que contengan "malware" en su nombre)
 
 
+mjpegtools
+Conjunto de herramientas de captura, edición y reproducción de MJPEG [Motion JPEG] y codificación MPEG. Los programas MJPEG son un conjunto de herramientas que permiten grabar y reproducir vídeos, realizar ediciones sencillas de cortar y pegar, y comprimir audio y vídeo MPEG en Linux. Incluye las aplicaciones jpeg2yuv, lav2avi, lav2mpeg, lav2wav, lav2yuv, lavaddwav, lavinfo, lavpipe, lavplay, lavtrans, mp2enc, mpeg2enc, mpegtra, nscode, mplex, pgmtoy4m, png2yuv, pnmtoy4m, ppmtoy4m, y4mcolorbars, y4mdenoise, y4mscaler, y4mtopnm, y4mtoppm, y4munshar
+p, yuv2lav, yuv4mpeg, yuvcorrect, yuvcorrect_tune, yuvdeinterlace, yuvdenoise, yuvfps, yuvinactive, yuvkineco, yuvmedian, yuvplay, yuvscaler, yuvycsnoise
+$ lavrec -f 100 video.avi (grabar 100 frames desde /dev/video0)
+$ lavrec -d /dev/video0 -s 640x480 video.avi (grabar con resolución específica)
+$ lavrec -q 90 video.avi (grabar con calidad JPEG personalizada. La calidad de 1 a 100 máxima calidad)
+$ lavplay video.avi (reproducir archivo AVI)
+$ lavplay -s 800x600 video.avi (reproducir con tamaño específico)
+$ lav2yuv video.avi > video.yuv (convertir AVI a YUV raw)
+$ lav2yuv -f 50 video.avi > video.yuv (extraer solo primeros 50 frames)
+$ jpeg2yuv -I p -f 25 -j imagen%03d.jpg > video.yuv (convertir secuencia de JPEGs a YUV. -I p = progresivo, -I t = entrelazado)
+$ jpeg2yuv -f 30 -j fotos_*.jpg > video.yuv (con frame rate específico)
+$ yuv2lav video.yuv -o video.avi -f 25 (convertir YUV a AVI)
+$ yuv2lav -s 640x480 video.yuv -o video.avi (especificar resolución)
+$ yuv2lav video.yuv | mpeg2enc -o video.m1v (codificar YUV a MPEG-1)
+$ mpeg2enc -q 1 -f 4 -o video_dvd.m2v (MPEG-2 con alta calidad)
+$ jpeg2yuv -f 25 -I p -j img%03d.jpg | mpeg2enc -f 4 -q 3 -o video.mpg (convertir secuencia JPEG → MPEG)
+$ lav2wav video.avi > audio.wav (extraer audio de un vídeo)
+$ lavaddwav video_sin_audio.avi audio.wav video_final.avi (combinar audio y vídeo)
+$ lav2yuv -f 100-200 video.avi | yuv2lav -o recorte.avi (recortar vídeo. Extraer frames 100-200)
+
+
 mjpg-streamer
 Streaming de video
 $ mjpg_streamer -i "input_uvc.so -y -f 5" -o output_http.so -p 3000 -n -c USER:CONTRASEÑA -b
