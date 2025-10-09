@@ -33421,6 +33421,42 @@ $ mime-construct --to "destinatario@ejemplo.com" --subject "Archivos adjuntos" -
        --cc <dirección> --> Copia [CC].
 
 
+ministat
+Calcula las propiedades estadísticas fundamentales de uno o dos conjuntos de datos numéricos y determina si se puede encontrar una diferencia entre ambos con un nivel de confianza determinado.
+Obtener estadísticas de un solo conjunto de datos
+$ nano tiempos_v1.txt
+10.2
+9.8
+10.5
+10.1
+9.9
+11.0
+$ ministat tiempos_v1.txt
+...
+    N        Min        Max      Median      Avg    StdDev
+x   6       9.80      11.00      10.15     10.25      0.44
+Primero muestra el gráfico ASCII [diagrama de caja simplificado] de la distribución y a continuación muestra las estadísticas básicas: número de muestras [N], mínimo [Min], máximo [Max], mediana [Median], promedio [Avg] y desviación estándar [StdDev].
+Comparar con un segundo archivo
+$ nano tiempos_V2.txt
+9.5
+9.1
+9.3
+9.2
+9.0
+9.4
+$ ministat tiempos_v1.txt tiempos_v2.txt
+...
+x   6           9.8            11          10.2         10.25    0.44158804
++   6             9           9.5           9.3          9.25    0.18708287
+Difference at 95.0% confidence
+	-1 +/- 0.436218
+	-9.7561% +/- 4.25578%
+	(Student's t, pooled s = 0.339116)
+Muestra la distribución de ambos conjuntos en el mismo gráfico ASCII, las estadísticas básicas para cada conjunto y la diferencia. En este ejemplo, el promedio de $V2$ (9.25) es -1.00 menos que el promedio de $V1$ (10.25). La línea "Difference at 95.0% confidence" indica que la diferencia real se encuentra entre -1.00 - 0.4023 y -1.00 + 0.4023. Como este rango no incluye el cero, se concluye que hay una diferencia estadísticamente significativa al 95% de confianza. Si el rango hubiese incluido el cero, ministat diría "No difference proven at 95.0% confidence".
+$ ministat -A tiempos_v1.txt tiempos_v2.txt (para omitir el gráfico y solo mostrar las estadísticas y la comparación)
+$ ministat -c 99 tiempos_v1.txt tiempos_v2.txt (cambiar el nivel de confianza para la Prueba t de Student [ej. 99%])
+
+
 mimetype
 Determina el tipo de archivo.
 $ mimetype -a archivo.md
@@ -33774,6 +33810,15 @@ Conjunto de archivos no cruciales para la administración u operación del siste
 mispipe
 [moreutils]. mispipe se comporta como cualquier tuberia de la shell, incluyendo comandos independientes, pero a diferencia de las clásicas tuberias, que sólo devuelven el estado de salida del último comando, mispipe devuelve el estado de salida del primer comando si este falla.
 $ mispipe ls "echo "NO""
+
+
+missidentify
+Es un programa para encontrar aplicaciones Win32 de MS Windows. De forma predeterminada, muestra el nombre de archivo de cualquier ejecutable sin extensión o ignorándola, como exe, dll, com, sys, cpl, hxs, hxi, olb, rll o tlb y detecta archivos sospechosos que podrían ser malware disfrazado, por ejemplo, un .pdf que en realidad es un .exe.
+$ missidentify (mostrará todos los archivos en el directorio actual que sean ejecutables de Windows, sin importar su extensión)
+$ missidentify ~/Descargas (mostrará todos los ejecutables de Windows en la carpeta Descargas)
+$ missidentify -r ~/Documentos (buscar recursivamente en subdirectorios del directorio especificado)
+$ missidentify -b (mostrar solo el nombre del archivo sin la ruta)
+$ missidentify | grep "malware" (filtrará los resultados para mostrar solo los archivos que contengan "malware" en su nombre)
 
 
 mjpg-streamer
