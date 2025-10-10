@@ -33880,6 +33880,19 @@ $ mk-build-deps emacs25 (crea una paquete emacs25-build-deps_25.1+1-4+deb9u1_amd
 $ mk-build-deps -i emacs25 (lo instala todo)
 
 
+mk-configure
+Herramienta de configuración y construcción portable que actúa como un sustituto ligero de AutoTools, apoyándose en bmake [NetBSD make] y herramientas POSIX como shell y awk para automatizar la generación de Makefiles y scripts de construcción en proyectos de software. Utiliza archivos .mk como módulos reutilizables y un archivo especial llamado "Makaefile" [no "Makefile"] para definir reglas, configuraciones y opciones de construcción. Incluye las aplicaciones mkc_check_compiler, mkc_check_custom, mkc_check_decl, mkc_check_funclib, mkc_check_header, mkc_check_prog, mkc_check_sizeof, mkc_check_version, mkc_compiler_settings, mkc_install, mkc_which y mkcmake.
+El ciclo típico de uso, es preparar el árbol de fuentes, incluyendo el archivo "Makaefile" y módulos .mk requeridos.
+# mkcmake (genera el makefile a partir del archivo principal [Mkcfile, Makefile.mkc, etc.] ejecutando automáticamente los scripts de detección de entorno)
+# bmake (compila)
+# bmake install (instala)
+# mkc_check_compiler cc (detecta y prueba compiladores disponibles, cc, gcc, clang, etc.)
+# mkc_check_custom "int main(){return 0;}"  (ejecuta una prueba arbitraria definida por el usuario)
+# mkc_check_decl malloc stdlib.h (comprueba si existe una declaración [símbolo, variable, función, macro] en los headers estándar)
+# mkc_check_header (comprueba si existe un archivo de cabecera)
+# mkc_check_type size_t stddef.h (comprueba si un tipo [int64_t, size_t, etc] está definido)
+
+
 mkalias
 Permite a los usuarios crear, listar y eliminar alias. Todos los alias se guardan en ~/.bashrc, creando un alias y una función para alias. Todos los nombres de las funciones tienen el prefijo "mkalias" y el alias se añade al final del archivo ~/.bashrc.
 $ mkalias new ll 'ls -al' (crear un alias)
@@ -33928,6 +33941,17 @@ Comprobar que no existan errores de sintaxis en los archivos:
     # apache2ctl configtest
 # systemctl restart apache2 (reiniciar apache2)
 Si existen cortafuegos tipo ufw han de reconfigurarse [ufw allow 'Apache Full']. Podemos comprobar si se ha realizado todo el proceso correctamente colocando en la barra del navegador la dirección https://localhost. El certificado creado no está firmado por una de las autoridades de confianza del navegador y es probable que se vea una alguna advertencia al respecto. clicmos en “ADVANCED” y luego en el enlace proporcionado para acceder a su host
+
+
+mkchromecast
+Herramienta que permite transmitir audio y video desde tu computadora a dispositivos compatibles con Google Cast como Chromecast, altavoces Google Home, pantallas Nest, etc. Está escrita en Python y utiliza Node.js o ffmpeg para realizar la transmisión y soporta varos formatos de audio [FLAC, WAV, MP3, AAC, etc.], siempre que ffmpeg esté instalado.
+$ mkchromecast --name "Nombre_del_Chromecast" --audio-file musica.flac (transmitir audio desde un archivo)
+$ mkchromecast --name "Nombre_del_Chromecast" --pulse (creará un sumidero de PulseAudio llamado mkchromecast al que se puede redirigir el audio de cualquier aplicación)
+$ mkchromecast --name "Nombre_de_tu_Chromecast" --system (transmitir todo el audio de tu sistema)
+$ mkchromecast --name "Nombre_de_tu_Chromecast" --video-file video.mp4 (transmitir un archivo de video)
+$ mkchromecast --name "Chromecast1,Chromecast2" --audio-file musica.flac (enviar audio a varios dispositivos al mismo tiempo)
+$ mkchromecast --name "Nombre_de_tu_Chromecast" --volume 50 (controlar el volumen del dispositivo [de 0 a 100])
+$ mkchromecast --list (listar dispositivos disponibles)
 
 
 mkdir
