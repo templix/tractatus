@@ -34057,6 +34057,10 @@ $ mkpasswd -m help (Muestra las opciones de encriptación)
 $ mkpasswd -m sha-512 password (Usando sha-512 para la contraseña "password")
 
 
+mksh
+Es un shell completo y con todas las funciones, sucesor de Public Domain Korn shell [pdksh], un shell compatible con Bourne/POSIX, muy similar al original AT&T Korn Shell [ksh88/ksh93]. Incluye correcciones de errores y mejoras de funcionalidad para crear un shell moderno y robusto, ideal para uso interactivo, especialmente con scripts. mksh es compatible con UTF-8, en operaciones con cadenas y en el modo de edición de Emacs. El código se ha depurado y simplificado, se han corregido errores, se ha añadido compatibilidad con estándares y se han implementado varias mejoras para una mayor compatibilidad con otros shells modernos, además de un par de las propias. Este shell cumple con la Política de Debian 10.4 y funciona como /bin/sh en sistemas Debian [/bin/lksh] y es un buen shell de rescate e initrd [/bin/mksh-static].
+
+
 mkswap
 Crear un espacio de intercambio.
 # mkswap /dev/sda5 (Luego añadir la entrada en /etc/fstab: /dev/sda4 none swap sw 0 0)
