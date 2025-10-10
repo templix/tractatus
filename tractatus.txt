@@ -45991,8 +45991,9 @@ $ udisksctl info -b /dev/sda (mostrar información sobre un dispositivo)
 uefi
 [Unified Extensible Firmware Interface]. Es el primer programa que se ejecuta cuando iniciamos el PC y tiene 3 objetivos: verificar el hardware conectado a la placa, activar los componentes y vincularlos al sistema operativo.
 # ls /sys/firmware/efi (si existe esta ruta el pc está basado en UEFI)
-# efibootmgr (comprobar si el pc está basado en BIOS o UEFI. En este caso en BIOS)
+# efibootmgr (comprobar si el pc está basado en BIOS o UEFI. En este caso en BIOS. Ver comando efibootmgr)
         EFI variables are not supported on this system.
+# [ -d /sys/firmware/efi ] && echo UEFI || echo BIOS (otra forma de saberlo)
 
 
 ufw
