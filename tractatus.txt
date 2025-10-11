@@ -34060,6 +34060,36 @@ Crear particiones ntfs.
 $ mkntfs -L win -F /dev/sdb2 (con etiqueta “win” y forzando)
 
 
+mkosi
+[Make Operating System Image]. Herramienta de Python diseñada para construir imágenes de sistemas operativos (SO) personalizadas, reproducibles y "legacy-free" [sin soporte para tecnologías antiguas], basándose principalmente en el ecosistema systemd. Solo admite sistemas EFI, no MBR/BIOS.
+# mkosi (sin archivos de configuración en el directorio, creará una imagen de SO con la configuración por defecto de "mkosi" para la distribución anfitriona)
+# mkosi -d debian -r bookworm --bootable (distribución, nombre clave de la versión y que genere una imagen de disco con partición GPT y cargador de arranque EFI lista para arrancar)
+# mkosi --format=tar --output=mi-sistema.tar (la salida será un archivo tar)
+Nota.- El formato de salida puede ser "directory" [directorio simple], "disk" [archivo de imagen con tabla de particiones GPT, por defecto] o "tar" [tarball de un directorio simple]
+# mkosi -d fedora -p emacs -p nginx (incluir paquetes que no están en el conjunto base dentro de la imagen)
+Para construcciones más complejas y reproducibles, se recomienda usar un archivo de configuración, típicamente llamado `mkosi.default`, en el mismo directorio donde se ejecuta `mkosi`.
+# nano mkosi.default
+[Distribution]
+Distribution=ubuntu
+Release=focal
+#
+[Output]
+Format=disk
+Output=ubuntu-vm.raw
+RootSize=10G
+Bootable=true
+#
+[Packages]
+Packages=
+    python3
+    git
+    network-manager
+    # Se puede usar ! para eliminar un paquete base
+    # !unwanted-package
+"mkosi" leerá la configuración de "mkosi.default" y construirá la imagen "ubuntu-vm.raw".
+# mkosi clean (elimina los artefactos de compilación generados)
+
+
 mkpasswd
 Encriptar contraseñas. Si la contraseña no se especifica, la pedirá por pantalla
 $ mkpasswd (Uso básico)
