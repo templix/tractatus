@@ -34022,6 +34022,17 @@ $ mkisofs -r -l -o imagen.iso fichero
 $ mkisofs /dev/cdrom > cd.iso (crear una imagen iso del cdrom en disco)
 
 
+mklibs
+Produce bibliotecas compartidas reducidas que contienen únicamente las rutinas requeridas por un conjunto específico de ejecutables. Analiza los ejecutables y determina cuáles funciones de las bibliotecas compartidas son usadas por esos binarios y a partir de esa información, produce versiones "recortadas" de dichas bibliotecas, eliminando el código no utilizado para ahorrar espacio. Es fundamental en la creación del "initramfs" o sistemas mínimos como instaladores personalizados.
+Un ejemplo práctico de uso podría ser, tener un conjunto de ejecutables en /tmp/target/bin y querer generar un conjunto mínimo de bibliotecas compartidas para un sistema cerrado en /tmp/target/lib
+$ mklibs --root=/tmp/target --libdir=/tmp/target/lib /tmp/target/bin/*
+"--root" especifica el prefijo raíz para el entorno objetivo y "--libdir" el directorio donde se almacenarán las bibliotecas reducidas.
+
+
+mklibs-copy
+Herramientas tienen propósitos similares  mklibs, y su descripción es casi idéntica: producir un conjunto mínimo de bibliotecas compartidas para ejecutables concretos, pero "mklibs-copy" es esencialmente un script auxiliar que copia solo las bibliotecas necesarias y puede integrarse en flujos de trabajo automatizados de reducción de sistemas. A menudo, se utiliza internamente por "mklibs", o en scripts que generan entornos de sistema base. Prácticamente, si "mklibs" recorta y genera nuevas versiones de las bibliotecas, "mklibs-copy" copia dichas bibliotecas necesarias a un directorio destino específico.
+
+
 mknod
 Crear archivos de dispositivos que no se encuentran en el sistema. Crea archivos especiales de bloques [/dev/sda es el disco duro entero, /dev/nvme0n1p1 una partición del disco...] o caracteres [dispositivos que entregan datos como un flujo de bytes: /dev/tty la terminal, /dev/null el pozo sin fondo, /dev/urandom el generador de números pseudoaleatorios...]. Ver mkfifo.
 # mknod -m 644  /dev/ttyS4 c 4 64 (con permisos 644, crear el dispositivo de carácter [c] ttyS0 e intervalo entre el máximo y el mínimo)
