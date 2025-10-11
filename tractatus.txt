@@ -34132,6 +34132,12 @@ $ mkvpropedit archivo.mkv --edit track:2 --set flag-default=1 (marcar la pista I
 $ mkvpropedit archivo.mkv --delete chapters (eliminar los capítulos)
 
 
+ml-burg
+Genera un programa de ML estándar para reescribir de abajo a arriba un árbol de entrada. La información de costo asociada a cada regla de reescritura se utiliza para obtener el costo mínimo de reescritura para todo el árbol. Una reducción exitosa corresponde a la reescritura del árbol de entrada a un símbolo no terminal especial llamado "no terminal de inicio". Tras una reducción exitosa, se proporcionan funciones para recorrer el árbol emitiendo acciones semánticas correspondientes a las reglas que coincidieron.
+$ ml-burg archivo.burg (genera archivo.sml)
+$ sml archivo.sml (compilarlo para integrar en el proyecto SML)
+
+
 mlabel
 Poner etiquetas a las particiones y dispositivos vfat
 # mlabel -i /dev/sda2 ::vfat
