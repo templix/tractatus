@@ -34119,6 +34119,19 @@ Crear archivos bittorrent.
 $ mktorrent -v -p -a http://url.com -o nombre.torrent (mostrar máxima información, con el flag "privado", url del rastreador y especificar nombre del torrent)
 
 
+mkvtoolnix
+Conjunto de herramientas de línea de comandos para trabajar con archivos Matroska [mkv] un contenedor multimedia completo para vídeos, audio y texto, sin importar que cada uno de estos elementos utilice diferentes tipos de codificación. Al hacer doble clic en un solo archivo MKV se abrirán todos sus elementos en un reproductor de archivos MKV. Incluye las herramientas mkvmerge, mkvinfo, mkvextract y mkvpropedit
+$ mkvmerge -o salida.mkv video.mp4 audio.mp3 subtitulos.srt (crea salida.mkv combinando varios archivos: video, audio, subtítulos y capítulos en un solo archivo MKV)
+$ mkvmerge -o nuevo.mkv entrada.mkv audio_extra.mp3 (añadir una pista de audio adicional a un MKV existente)
+$ mkvmerge -o solo_video.mkv --video-tracks 1 entrada.mkv (extraer la pista número 1 de un MKV)
+$ mkvinfo archivo.mkv (información detallada sobre las pistas, capítulos, etiquetas y otros metadatos de un archivo MKV)
+$ mkvextract archivo.mkv tracks 2:audio.mp3 (extrae la pista con ID 2 y la guarda como audio.mp3)
+$ mkvextract archivo.mkv tracks 3:subtitulos.srt (extraer subtítulos)
+$ mkvpropedit archivo.mkv --edit info --set title="Nuevo Título" (cambiar el título del archivo)
+$ mkvpropedit archivo.mkv --edit track:2 --set flag-default=1 (marcar la pista ID 2 de audio como predeterminada)
+$ mkvpropedit archivo.mkv --delete chapters (eliminar los capítulos)
+
+
 mlabel
 Poner etiquetas a las particiones y dispositivos vfat
 # mlabel -i /dev/sda2 ::vfat
