@@ -34194,6 +34194,10 @@ $ mlmmj-sub -L /var/lib/mlmmj/mi-lista -r usuario@ejemplo.com (eliminar suscript
 $ echo "1" > /var/lib/mlmmj/mi-lista/control/archive (habilitar archivo)
 
 
+mlocate
+Redirige a plocate [ver] significativamente más rápido.
+
+
 mlterm
 Emulador de terminal para X Window System, que admite varias codificaciones. Verifica la configuración regional y selecciona la codificación adecuada, no es preciso configurar mlterm para mostrar idioma o codificación. Las codificaciones incluidas son: ISO-8859-[1-11,13-16], TCVN5712, VISCII, TIS-620 (same as ISO-8859-11), KOI8-{R,U,T}, CP{1251,1255},  GEORGEAN-PS, EUC-JP, EUC-JISX0213, ISO-2022-JP{,1,2,3}, Shift_JIS, Shift_JISX0213, ISO-2022-KR, EUC-KR, UHC, JOHAB, EUC-CN (aka GB2312), GBK, ISO-2022-CN, Big5, EUC-TW, HZ, UTF-8, y GB18030.
 $ mlterm -b blue -f yellow -g 50x10 (Especificando color de fondo [b] color de fuente [f] y medidas)
@@ -38803,6 +38807,14 @@ play
 $ play archivo.wav
 
 
+plocate
+Encuentra todos los archivos del sistema que coinciden con el patrón dado o patrones dados. Incluye las herramientas plocate-build y updatedb.plocate
+# updatedb.plocate (crear la base de datos)
+$ plocate archivo.txt
+$ plocate -c *.pdf (muestra la cantidad de coincidencias)
+$ plocate -i archivo.pdf (sin distinción de mayúsculas y minúsculas)
+
+
 plowshare
 herramienta que permite subir y descargar archivos alojados en megaupload, rapidshare... ]http://plowshare.googlecode.com/files/plowshare-SVN-r1575-snapshot.tar.gz]
 $ plowdown url (Descargar un archivo)
@@ -42606,6 +42618,10 @@ Una vez escogido el tema lo colocamos en /etc/slim.conf substituyéndolo por el 
 Si al usar systemd el sistema no para ni reinicia, modificar las lineas existentes por las siguientes:
 halt_cmd /usr/bin/systemctl halt
 reboot_cmd /usr/bin/systemctl reboot
+
+
+slocate
+Buscador de archivo en el sistema. Por lo visto el desarrollador dejó de trabajar en el proyecto y las distribuciones evolucionaron, primero a mlocate y luego a plocate [ver]
 
 
 slowhttptest
