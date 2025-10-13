@@ -34215,6 +34215,17 @@ $ mmaker -f  -s KDE,Xfce,XWindow OpenBox3 (Omitiendo los menús de los escritori
 $ mmaker -f OpenBox3 -s Console (Omitir del menú las aplicaciones que sólo son para consola)
 
 
+mmdb-bin
+Resolver direcciones IP mediante la biblioteca libmaxminddb. Precisa cuenta y clave de MaxMind [https://www.maxmind.com/en/home] y entrar los datos en el archivo de configuración:
+# nano /etc/GeoIP.conf
+       ...
+       AccountID 00000
+       LicenseKey 00000000000
+       ...
+       EditionIDs GeoLite2-Country GeoLite2-City GeoLite2-ASN
+$ mmdblookup -f file.mmdb -i 8.8.8.8
+
+
 mmv
 Cambiar el sufijo del nombre de los archivos.
 $ mmv "*.PNG" "#1.png"   (Renombrar todas las extensiones "PNG" a "png", conservándose el nombre que las precede.)
