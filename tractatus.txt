@@ -42622,6 +42622,9 @@ reboot_cmd /usr/bin/systemctl reboot
 
 slocate
 Buscador de archivo en el sistema. Por lo visto el desarrollador dejó de trabajar en el proyecto y las distribuciones evolucionaron, primero a mlocate y luego a plocate [ver]
+$ slocate -i archivo.sda (buscar sin considerar mayúsculas y minúsculas)
+$ slocate -c archivo.pdf (escribir solo el número de entradas coincidentes)
+$ slocate -l 5 archivo.txt (ver como máximo 5 coincidencias con archivo.txt)
 
 
 slowhttptest
