@@ -1478,6 +1478,8 @@ Empleado para buscar en la base de datos provista por la lista de fuentes [dpkg 
 # apt-cache depends paquete    (Muestra las dependencias del paquete)
 # apt-cache rdepend paquete     (Muestra dependencias inversas del paquete)
 # apt-cache policy paquete       (Ver vesiones de paquetes y la versión instalada)
+# apt-cache search dummy | grep -i "dummy package" | wc -l (identificar cuantos paquetes de transición estan instalados en el sistema)
+# apt-cache show login | grep Essential (ver si determinado paquete es esencial)
 
 
 apt-clone
@@ -9988,14 +9990,30 @@ $ dcraw -c arhivo.raw | ppmtopnm | pnmquant 255 | pnmtopgm > imagen.pgm (extrae 
 $ dcraw -T archivo.raw > imagen.tiff && dcraw -D archivo.raw > imagen.ppm (convierte el archivo RAW a TIFF y PPM simultáneamente)
 
 
-dctrl
-Conjunto de utilidades diseñadas para manipular y consultar archivos en el formato dctrl [control de Debian]. Este formato se utiliza comúnmente para almacenar metadatos relacionados con los paquetes de Debian, como los contenidos de Packages, Sources y otros archivos relacionados.  Se incluyen las herramientas: grep-dctrl [Buscar información en archivos con formato dctrl], grep-available [Buscar la base de datos disponible de DPKG], grep-status [Buscar la base de datos de estado de DPKG], grep-aptavail [Buscar la base de datos disponible de APT], grep-debtags [Buscar la base de datos de paquetes Debtags], sort-dctrl [Ordenar archivos con formato dctrl], tbl-dctrl [Extrae y concatena entradas de archivos dctrl] y sync-available [Sincroniza /var/lib/dpkg/available con los datos actuales]
+dctrl-tools
+[Debian ConTRoL]. Herramientas para procesar y manipular archivos de control Debian, que contienen información sobre paquetes disponibles en el sistema. incluye las herramientas grep-aptavail, grep-available, grep-dctrl, grep-debtags, grep-status, join-dctrl, sort-dctrl, tbl-dctrl y sync-available.
+$ grep-status -F Essential yes -s Package (ver listado de paquetes esenciales del sistema)
+$ grep-status -F Status "install ok installed" (listar paquetes instalados)
+$ grep-status -F Status "deinstall ok" (buscar paquetes con errores)
+$ grep-status -F Status "half-installed" (ver paquetes en estado "half-installed")
+$ grep-status -P -e 'apt|dpkg' (ver los registros de estado de todos los paquetes con "apt" o "dpkg" en sus nombres)
+$ grep-dctrl -F Package python /var/lib/dpkg/status (buscar paquetes que contengan "python" en el nombre)
+$ grep-dctrl -F Version 2.7.18 /var/lib/dpkg/status (buscar paquetes con una versión específica)
+$ grep-dctrl -F Maintainer YOKOTA /var/lib/dpkg/status (buscar paquetes mantenidos por un desarrollador específico)
+$ sort-dctrl -k Package /var/lib/dpkg/status (ordenar por nombre de paquete)
+$ sort-dctrl -k Version /var/lib/dpkg/status (ordenar por versión de Debian)
+$ sudo sync-available (sincronizar la base de datos de paquetes disponibles)
+$ grep-available -F Description -i 7zip (buscar paquetes disponibles que contengan "7zip")
+$ grep-available -F Tag -i interface::text-mode (buscar paquetes que tengan como tag "interface::text-mode")
+$ grep-available -F Section -i web (buscar paquetes en una sección específica)
+$ grep-available -F Architecture -i amd64 (buscar paquetes con una arquitectura específica)
+$ grep-available -P -F Description 7zip (buscar en descripciones como en nombres; si se encuentra una coincidencia en alguno de ellos, se imprime el registro del paquete)
+$ grep-available -F Maintainer -s Depends '<apo@debian.org>' (mostrar las líneas de dependencias de todos los paquetes del email del mantenedor especificado)
+$ grep-aptavail -F Description -i "web browser" (buscar por descripción)
 $ grep-dctrl -F Depends -s Package python3 /var/lib/apt/lists/*_Packages (busca en el campo Depends todos los paquetes que dependen de python3 en el archivo Packages)
 $ grep-status -F Status -s Package "hold ok installed" /var/lib/dpkg/status (busca en el campo Status y muestra los paquetes encontrados que estan en estado hold del archivo status)
 $ sort-dctrl -k Package /var/lib/apt/lists/*_Packages (ordena las entradas según el campo Package)
 $ tbl-dctrl -s Package,Version,Architecture /var/lib/apt/lists/*_Packages (selecciona los campos que se desea mostrar en la tabla)
-$ cat-dctrl -F Package linux /var/lib/apt/lists/*_Packages (Busca en el campo Package y muestra todas las entradas que contienen linux)
-# sync-available (sincronizar con los datos actuales de los repositorios)
 
 
 dd
