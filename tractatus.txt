@@ -34230,7 +34230,7 @@ Nota.- El dispositivo RPMB es un char device [/dev/mmcblk0rpmb], no block.
 # echo -n "AAAABBBBCCCCDDDDEEEEFFFFGGGGHHHH" | mmc rpmb write-block /dev/mmcblk0rpmb 0x02 - - (escribir un bloque en la dirección 0x02)
 # mmc ffu /path/to/firmware.img /dev/mmcblk0 (realiza Field Firmware Update [FFU] en eMMC compatibles, actualizando el firmware del controlador)
 # mmc ffu /path/to/firmware.img 512000 /dev/mmcblk0` (especificando tamaño para transferencias grandes [512k chunks])
-Nota.- Algunas operaciones como escribir en registros o habilitar particiones pueden causar problemas al dispositivo si se usan incorrectamente
+Nota.- Algunas operaciones como escribir en registros o habilitar particiones pueden causar problemas al dispositivo si se usan incorrectamente.
 
 
 mmdb-bin
