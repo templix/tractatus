@@ -10418,6 +10418,7 @@ Instalar un sistema Debian dentro de un directorio de nuestro sistema para hacer
 # mkdir /mnt/debian-i386/ (Crear el directorio)
 # debootstrap --arch=i386 wheezy /mnt/debian-i386/ http://ftp.debian.org/debian/
 # chroot /mnt/debian-i386 (Entrar en el nuevo sistema. Ver chroot)
+Nota.- mmdebstrap [ver] es más rápido y eficiente, ya que usa apt internamente, maneja mejor las dependencias, permite más opciones de personalización y es más moderno que debootstrap.
 
 
 debootstick
@@ -34215,6 +34216,23 @@ $ mmaker -f  -s KDE,Xfce,XWindow OpenBox3 (Omitiendo los menús de los escritori
 $ mmaker -f OpenBox3 -s Console (Omitir del menú las aplicaciones que sólo son para consola)
 
 
+mmc-utils
+Herramienta diseñada para interactuar con dispositivos MMC [MultiMediaCard] y SD en el kernel de Linux. MMC es un estándar de tarjeta de memoria para almacenamiento de estado sólido. Esta herramienta facilita el desarrollo y la depuración de estos dispositivos al permitir leer y modificar registros de configuración, como CSD [Card Specific Data] y EXT_CSD [Extended CSD], habilitar particiones de arranque, gestionar protección de escritura, RPMB [Replay Protected Memory Block] para seguridad, y realizar actualizaciones de firmware.
+# dmesg | grep mmc (ver si el dispositivo MMC está detectado por el kernel)
+# mmc extcsd read /dev/mmcblk0 (lee y muestra el registro EXT_CSD del dispositivo)
+# mmc extcsd read /dev/mmcblk0 | grep -i life (filtrar solo el estado de vida útil)
+# mmc csd read /sys/block/mmcblk0/device (lee el registro CSD, con datos básicos como la capacidad de la tarjeta, velocidad de bloque y estructura de particiones)
+# mmc bootpart enable 1 1 /dev/mmcblk0 (habilita /dev/mmcblk0boot0 para arranque)
+# mmc bootpart disable 1 /dev/mmcblk0 (deshabilita)
+# mmc writeprotect status /dev/mmcblk0 (establece la protección de escritura en áreas específicas: boot o user data)
+# mmc rpmb read-block /dev/mmcblk0rpmb 0x02 2 /tmp/block - clave_secreta (leer 2 bloques desde dirección 0x02 y guardarlos en un archivo con verificación de clave)
+Nota.- El dispositivo RPMB es un char device [/dev/mmcblk0rpmb], no block.
+# echo -n "AAAABBBBCCCCDDDDEEEEFFFFGGGGHHHH" | mmc rpmb write-block /dev/mmcblk0rpmb 0x02 - - (escribir un bloque en la dirección 0x02)
+# mmc ffu /path/to/firmware.img /dev/mmcblk0 (realiza Field Firmware Update [FFU] en eMMC compatibles, actualizando el firmware del controlador)
+# mmc ffu /path/to/firmware.img 512000 /dev/mmcblk0` (especificando tamaño para transferencias grandes [512k chunks])
+Nota.- Algunas operaciones como escribir en registros o habilitar particiones pueden causar problemas al dispositivo si se usan incorrectamente
+
+
 mmdb-bin
 Resolver direcciones IP mediante la biblioteca libmaxminddb. Precisa cuenta y clave de MaxMind [https://www.maxmind.com/en/home] y entrar los datos en el archivo de configuración:
 # nano /etc/GeoIP.conf
@@ -34224,6 +34242,15 @@ Resolver direcciones IP mediante la biblioteca libmaxminddb. Precisa cuenta y cl
        ...
        EditionIDs GeoLite2-Country GeoLite2-City GeoLite2-ASN
 $ mmdblookup -f file.mmdb -i 8.8.8.8
+
+
+mmdebstrap
+Herramienta diseñada para crear entornos Debian mínimos y personalizables, ya sea como un directorio que puede usarse como chroot o como un archivo tar para distribuir o guardar. Es especialmente útil para crear imágenes de contenedores, sistemas embebidos, o entornos de desarrollo aislados. A diferencia de debootstrap, usa apt, admite más de un servidor de réplica, usa seguridad y actualiza automáticamente los servidores de réplica para entornos chroot estables de Debian, es de 3 a 6 veces más rápido, genera una salida más pequeña al eliminar elementos innecesarios, es reproducible bit a bit si se configura $SOURCE_DATE_EPOCH y permite operaciones sin privilegios usando espacios de nombres de usuario de Linux o fakechroot.
+# mmdebstrap --architectures=amd64 bookworm ./mi-chroot/ (crear un entorno chroot básico de Debian stable en un directorio)
+# mmdebstrap --architectures=amd64 bookworm mi-sistema.tar.gz (crear un archivo tar.gz con un sistema Debian minimal)
+# mmdebstrap --architectures=amd64 --include="vim, curl, build-essential" bookworm ./mi-chroot/ (instalar paquetes adicionales)
+# mmdebstrap --architectures=amd64 --mirror=http://ftp.debian.org/debian bookworm ./mi-chroot/ (con un repositorio diferente al oficial)
+# mmdebstrap --architectures=arm64 bookworm ./chroot-arm64/ (crear un entorno para otra arquitectura)
 
 
 mmv
