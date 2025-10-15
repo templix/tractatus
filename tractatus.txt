@@ -34253,6 +34253,17 @@ Herramienta diseñada para crear entornos Debian mínimos y personalizables, ya 
 # mmdebstrap --architectures=arm64 bookworm ./chroot-arm64/ (crear un entorno para otra arquitectura)
 
 
+mmmulti
+Mapa múltiple con respaldo de memoria. "Mapa múltiple" o multimap significa que una misma clave [key] puede asociarse con múltiples valores [value]). Es diferente de un “mapa” ordinario que requiere que cada clave tenga un único valor y "con respaldo de memoria" [memory backed] significa que el almacenamiento de los datos está hecho o respaldado mediante un archivo mapeado en memoria [memory-mapped file], usando mmap o mecanismo similar, en lugar de mantener todo en estructuras dentro del espacio de usuario en RAM. Está pensado para casos grandes de datos, por ejemplo, operaciones bioinformáticas, manipulación de grafos genómicos, donde la memoria es un límite, pero el disco o almacenamiento rápido es más viable.
+$ mmmulti -T testfile -s 100 -M 10 (generar 100 pares aleatorios: valores 1..10)
+      10 keys
+      100 values
+      63 unique pairs
+10 keys --> 10 claves únicas [-M 10].
+100 values --> 100 valores totales [-s 100].
+66 unique pairs --> algunos pares clave-valor se repiten por eso hay menos pares únicos que valores totales.
+
+
 mmsd-tng
 [Multimedia Messaging Service Daemon - The Next Generation] Demonio diseñado para manejar el envío y recepción de mensajes multimedia [MMS] en sistemas Linux, especialmente en entornos móviles como teléfonos con distribuciones basadas en Debian, por ejemplo, Mobian o postmarketOS. Es un backend completamente compatible con la pila de MMS, lo que significa que actúa como un servicio en segundo plano que procesa MMS de manera transparente, integrándose con aplicaciones de mensajería como Chatty o VGMMS. A diferencia de implementaciones anteriores, como el mmsd original, esta versión "next generation" es más robusta, modular y está optimizada para trabajar con ModemManager, un gestor de módems de banda ancha móvil que proporciona una interfaz unificada para comunicarse con hardware de telefonía, como módems USB o integrados en dispositivos como el PinePhone. ModemManager maneja aspectos como la conexión de datos [APN], autenticación SIM y el estado del módem, permitiendo que mmsd-tng se enfoque exclusivamente en el protocolo MMS.
 # systemctl enable --now mmsd-tng (habilita y arranca el servicio)
