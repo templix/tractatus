@@ -34282,6 +34282,10 @@ $ mmv ";*.abc" "#1#2.cba" (Renombrar todas las extensiones "PNG" a "png" del dir
 $ mmv "*.flv.mpg" "#1.mpg" (Renombrar todos los archivos terminados en .flv.mpg a .mpg)
 
 
+mobian-archive-keyring
+Claves OpenPGP [Pretty Good Privacy] para el archivo de paquetes de Mobian, una versión híbrida de Debian diseñada para dispositivos móviles, como teléfonos y tabletas. Su función principal es la autenticación y verificación de la integridad de los paquetes de software. Cuando un desarrollador de Mobian sube un paquete, lo firma digitalmente usando su clave privada, que solo ellos poseen. El sistema, al descargar ese paquete, usa la clave pública correspondiente, almacenada en mobian-archive-keyring.gpg en el directorio /usr/share/keyrings/ para verificar la firma. Si la verificación es exitosa, el sistema sabe que el paquete realmente proviene de Mobian y que es auténtico.
+
+
 moc
 Reproductor de música.
 Copiar el archivo de configuración al directorio personal:
