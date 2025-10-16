@@ -34385,6 +34385,22 @@ $ chmod +x sakis3g
 $ ./sakis3g --interface
 
 
+modem-cmd
+[modemmanager]. Envía comandos AT arbitrarios al módem a través de una línea serie. Esto significa que puede usarse como marcador telefónico. modem-cmd está diseñado para módems físicos que se conectan via USB/puerto serie y soportan comandos AT.
+Para identificar el /dev del modem:
+$ ls /dev/tty* (listar dispositivos serie disponibles: /dev/ttyUSB0, /dev/ttyUSB1, /dev/ttyACM0, /dev/ttyACM1 [dispositivos CDC-ACM], /dev/ttyS0, /dev/ttyS1 [puertos serie tradicionales])
+$ lsusb (mostrará todos los dispositivos USB. Buscar algo relacionado con módem, HSPA, LTE, etc.)
+$ dmesg | tail -20 (al enchufar el modem se verá mensajes del kernel que indican qué dispositivo se asignó)
+$ find /dev -name "tty*" -type c | grep -E "ACM|USB|GSM" (verificar si se tiene un módem integrado)
+$ mmcli -L (listar módems)
+$ modem-cmd /dev/ttyUSB2 AT+CGMI (consultar información del módem, suponiendo que es el /dev especificado)
+$ modem-cmd /dev/ttyUSB2 AT+CSQ (consultar intensidad de señal)
+$ modem-cmd /dev/ttyUSB2 AT+COPS? (ver información de la red)
+$ modem-cmd /dev/ttyUSB2 "ATD123456789" (marcar un número)
+$ modem-cmd /dev/ttyUSB2 "ATH" (colgar llamada)
+$ modem-cmd /dev/ttyUSB2 "ATA" (contestar llamada)
+
+
 modinfo
 Información sobre módulos.
 $ modinfo sr_mod
