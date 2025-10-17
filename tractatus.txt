@@ -34401,6 +34401,21 @@ $ modem-cmd /dev/ttyUSB2 "ATH" (colgar llamada)
 $ modem-cmd /dev/ttyUSB2 "ATA" (contestar llamada)
 
 
+modemmanager
+Es un demonio Linux basado en DBus que permite gestionar módems de banda ancha móvil en sistemas Linux. Su función principal es actuar como intermediario entre el sistema operativo y dispositivos de red 3G/4G/5G, por ejemplo, módems USB o integrados en placas IoT. Actúa como una RIL [Radio Interface Layer - Capa de interfaz de radio] estándar y puede ser utilizado por diferentes administradores de conexión, como NetworkManager. Aunque ModemManager funciona en segundo plano, se puede controlar desde la terminal usando el comando mmcli [ModemManager Command Line Interface]. Este proporciona una interfaz en línea de comandos para inspeccionar, habilitar, conectar o depurar los módems gestionados por ModemManager.
+# mmcli -L (buscar dispositivos modem manager)
+# mmcli --scan-modems (buscar y detectar todos los módems conectados)
+# mmcli --list-modems (listar los módems administrados por ModemManager. Muestra el identificador DBus del módem. Ese número se usa en otros comandos)
+# mmcli --modem=0 (obtener información detallada del módem."0" es el ID del modem)
+# mmcli --modem=0 --enable (habilitar el módem)
+# mmcli -m 0 --simple-connect='apn=iot.1nce.net,ip-type=ipv4v6' (el daemon configura el APN [Access Point Name] y tipo de dirección IP)
+# mmcli -m 0 (verificar el estado de la conexión)
+# mmcli --set-logging=DEBUG (aumentar el nivel de detalle del registro)
+# tail -F /var/log/syslog (útil para diagnosticar fallos de conexión o controladores)
+# ModemManager --debug & mmcli -m 0 --command='AT+CSQ' (enviar comandos AT al módem)
+Los comandos AT se utilizan para controlar y obtener información directa del hardware, por ejemplo, AT+CSQ para medir la intensidad de señal.
+
+
 modinfo
 Información sobre módulos.
 $ modinfo sr_mod
