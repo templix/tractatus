@@ -34421,6 +34421,16 @@ Información sobre módulos.
 $ modinfo sr_mod
 
 
+modprobe
+Utilidad que se usa para agregar y quitar módulos del kernel. Los módulos del kernel de Linux tienen .ko como extensión del nombre del módulo.
+# modprobe --dry-run --verbose ac97_bus
+# modprobe -r pcspkr (excluir cargar módulo emncionado [pitido del pc])
+# modprobe -q nombre_modulo (excluir información de error respecto de un nombre_modulo)
+# modprobe -c | grep pcspkr (comprobar un módulo concreto)
+# lsmod | grep pcspkr (ver si un módulo esta cargado)
+$ ls -R /lib/modules/$(uname -r) (ver la totalidad de módulos que estan disponibles)
+
+
 module-assistant
 Paquete especifico de Debian para la instalación de controladores.
 # m-a (abre la interficie ncuses del programa)
@@ -34616,14 +34626,13 @@ $ montage -geometry +1+1 -tile 2x2 *.png salida.png
 $ montage *.png -tile 2x5 -geometry 227x147+1+1 salida.png (Colocará todos los png de la carpeta y los colocará en páginas de 10 con la geometria indicada y con una separación de 1 pixel entre ellos
 
 
-modprobe
-Utilidad que se usa para agregar y quitar módulos del kernel. Los módulos del kernel de Linux tienen .ko como extensión del nombre del módulo.
-# modprobe --dry-run --verbose ac97_bus
-# modprobe -r pcspkr (excluir cargar módulo emncionado [pitido del pc])
-# modprobe -q nombre_modulo (excluir información de error respecto de un nombre_modulo)
-# modprobe -c | grep pcspkr (comprobar un módulo concreto)
-# lsmod | grep pcspkr (ver si un módulo esta cargado)
-$ ls -R /lib/modules/$(uname -r) (ver la totalidad de módulos que estan disponibles)
+moodplug-tools
+[libmodplug1 libmodplug-tools]. Herramientas de consola de reproducción de Modplug. Estos son reproductores de línea de comandos para los siguientes formatos de módulo: 669, amf, ams, dbm, dmf, dsm, far, it, j2b, mdl, med mod, mt2, mtm, okt, psm, ptm, s3m, stm, ult, umx, xm. Los Modplug no son módulos del kernel, son archivos de música de los 90 que contienen notas musicales, como partituras digitales, samples, grabaciones de sonidos reales, efectos y patrones. En https://modarchive.org/ hay miles de módulos gratis
+$ modplug123 /usr/share/bb/bb2.s3m (reproducir un tema)
+$ modplug123 --loop cancion.mod (reproducir en bucle)
+$ modplug123 --info tema.s3m (listar información del archivo)
+$ find /usr -name "*.xm" -o -name "*.mod" -o -name "*.s3m" 2>/dev/null (buscar módulos para probar, en Debian vienen algunos ejemplos)
+$ modplug123 --wav salida.wav entrada.xm (convertir a WAV)
 
 
 more
