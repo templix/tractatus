@@ -1166,6 +1166,10 @@ Los parámetros por defecto son suficientes en condiciones "normales". Si se pre
 	DOSBlockingPeriod   600
 	</IfModule>
 Que significa que si una página o cualquier objeto de ella, recibe 50 peticiones por segundo cada segundo la IP será bloqueada durante 600 segundos.
+Tambien puede instalar de los repositorios:
+# apt install libapache2-mod-security2
+# a2enmod security2
+# systemctl restart apache2
 4.-
 Para que apache no informe del sistema operativo y versión de apache
 # nano /etc/apache2/apache2.conf
@@ -34429,6 +34433,25 @@ Utilidad que se usa para agregar y quitar módulos del kernel. Los módulos del 
 # modprobe -c | grep pcspkr (comprobar un módulo concreto)
 # lsmod | grep pcspkr (ver si un módulo esta cargado)
 $ ls -R /lib/modules/$(uname -r) (ver la totalidad de módulos que estan disponibles)
+
+
+modsecurity-crs
+Proporciona protección crítica contra ataques en prácticamente cualquier arquitectura web. El CRS [Core Rule Set] se basa en reglas genéricas que se centran en la identificación de la carga útil del ataque para brindar protección contra vulnerabilidades de día cero y desconocidas que suelen encontrarse en aplicaciones web y que, en la mayoría de los casos, están personalizadas. Las reglas básicas utilizan las siguientes técnicas: validación de solicitudes HTTP, anomalías del protocolo HTTP, restricciones globales, política de uso de HTTP, detección de software malicioso, detección de ataques genéricos (inyección SQL, scripts entre sitios, inyección de comandos del sistema operativo, inyección de ColdFusion, PHP y ASP, etc.), detección de troyanos y puertas traseras, detección de errores, protección XML y monitorización de motores de búsqueda.
+$ wget https://github.com/coreruleset/coreruleset/archive/v3.3.0.tar.gz
+$ tar xvf v3.3.0.tar.gz
+# mkdir /etc/apache2/modsecurity-crs/
+# mv coreruleset-3.3.0/ /etc/apache2/modsecurity-crs/
+# cd /etc/apache2/modsecurity-crs/coreruleset-3.3.0/
+# mv crs-setup.conf.example crs-setup.conf
+# nano /etc/apache2/mods-enabled/security2.conf
+Buscamos la línea
+	 IncludeOptional /usr/share/modsecurity-crs/*.load
+Y la sustituimos por:
+     	 IncludeOptional /etc/apache2/modsecurity-crs/coreruleset-3.3.0/crs-setup.conf
+	 IncludeOptional /etc/apache2/modsecurity-crs/coreruleset-3.3.0/rules/*.conf
+# apache2ctl -t (probar la configuración de apache)
+# systemctl restart apache2 (si sale correctas la configuración, reiniciar)
+# apache2ctl -M (comprobar módulos de apache)
 
 
 module-assistant
