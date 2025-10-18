@@ -34496,12 +34496,30 @@ $ moggsplit file.ogg
 
 
 mokutil
-Herramienta para importar o borrar las claves de propietario de máquina (MOK) almacenadas en la base de datos de shim. shim es un sencillo paquete de software diseñado para funcionar como cargador de arranque de primera etapa en sistemas UEFI. Una parte clave del diseño de shim es permitir a los usuarios controlar sus propios sistemas. La clave distro CA está integrada en el propio binario shim, pero también hay una base de datos adicional de claves que puede ser gestionada por el usuario, la llamada Machine Owner Key [MOK] Clave del Propietario de la Máquina. El usuario puede añadir y eliminar claves de la lista MOK, de forma totalmente independiente a la clave CA de la distro. La utilidad mokutil puede usarse para ayudar a gestionar las claves aquí desde la zona de usuario de Linux, pero los cambios en las claves MOK sólo pueden confirmarse directamente desde la consola en el momento del arranque. Esto elimina el riesgo de que el malware de la zona del usuario pueda registrar nuevas claves y, por tanto, eludir todo el punto de Secure Boot.
-        $ mokutil --sb-state
-        SecureBoot disabled
-        Platform is in Setup Mode
-$ mokutil --disable-validation
-$ mokutil --enable-validation
+Permite registrar y borrar las claves de propietario de la máquina [Machine Owner Keys - MOK] almacenadas en la base de datos de shim. Las claves de propietario de la máquina, son un mecanismo de seguridad en sistemas Linux con arranque seguro [Secure Boot] basado en UEFI. Básicamente, permiten a los usuarios o administradores del sistema agregar sus propias claves de firma de confianza al proceso de verificación de arranque. Esto es útil cuando se necesitan cargar módulos del kernel personalizados, controladores o cargadores de arranque que no están firmados por las claves oficiales de la distribución. De esta forma, se mantiene la integridad del arranque seguro sin necesidad de desactivarlo por completo, evitando que software malicioso o no autorizado se ejecute durante el inicio del sistema. Shim es un cargador de arranque inicial diseñado específicamente para sistemas UEFI con Secure Boot que fue desarrollado para permitir que distribuciones Linux arranquen kernels no firmados directamente por Microsoft, que controla las claves principales de Secure Boot. Shim actúa como un "intermediario" o "traductor" que verifica la firma de los componentes subsiguientes, como GRUB o el kernel, usando sus propias bases de datos internas.
+# mokutil --sb-state (verificar el estado de Secure Boot)
+# mokutil -l (listar claves MOK enroladas, muestra detalles como hashes y emisores de las claves almacenadas en shim)
+# mokutil -d mi_clave.der (borrar una clave MOK)
+# mokutil --disable-validation (desactivar validación en shim, útil para depuración, pero reduce seguridad)
+# mokutil -t mi_clave.der (verificar si una clave está enrolada)
+Nota.- Todos los comandos requieren reinicios para confirmar cambios sensibles, y siempre usar con precaución para no comprometer la seguridad del sistema.
+1.-
+Enrolar una nueva clave MOK, por ejemplo, para firmar un módulo personalizado:
+Primero, generar un par de claves con openssl [ver] para crear un certificado DE).
+# mokutil -i mi_clave.der
+Ingresar una contraseña temporal. Reiniciar el sistema; y en la pantalla de MokManager, seleccionar "Enroll MOK" y confirmar. Esto agrega la clave a la base de datos de shim.
+
+
+mold
+Enlazador [linker] moderno y de alto rendimiento, diseñado como alternativa a los enlazadores tradicionales de Unix como ld o lld de LLVM. Su objetivo principal es acelerar el proceso de enlazado durante la compilación de programas, lo que es especialmente útil en ciclos de desarrollo rápidos [editar-compilar-depurar]. Un enlazador es una herramienta que combina varios archivos objeto [.o] y bibliotecas en un solo ejecutable o biblioteca. Es una parte esencial del proceso de compilación. Incluye la herramienta ld.mold.
+$ gcc -fuse-ld=mold -o mi_programa mi_programa.c (dice a gcc que use mold en lugar del enlazador por defecto)
+$ clang -fuse-ld=mold -o mi_programa mi_programa.c (ejemplo con clang)
+$ ld.mold -o mi_programa mi_programa.o -lc (invocar mold directamente, aunque es menos común)
+1.-
+Medir la diferencia de velocidad de enlazado con y sin mold
+$ time gcc -o mi_programa mi_programa.c
+$ time gcc -fuse-ld=mold -o mi_programa mi_programa.c
+Se verá que el segundo comando suele ser mucho más rápido.
 
 
 molly-guard
