@@ -18681,9 +18681,16 @@ Ejemplo de configuración de una red local:
           }
        }
 En este ejemplo, se definen dos zonas: red_interna que acepta tráfico HTTP [puerto 80] y HTTPS [puerto 443] en la interfaz eth0 y red_externa que bloquea el tráfico HTTP en la interfaz eth1.
-# foomuuri --config mi_configuracion.json
-# foomuuri --apply mi_configuracion.json
-# dbus-send --session --dest=org.foomuuri --type=method_call --print-reply /org/foomuuri/firewall org.foomuuri.firewall.ApplyConfig string:"mi_configuracion.json" (enviar una solicitud D-Bus para aplicar el archivo de configuración)
+# foomuuri start (cargar archivo de configuración en el kernel)
+# foomuuri stop (eliminar conjunto de reglas del kernel)
+# foomuuri restart (actualizar reglas)
+# foomuuri status (mostrar estado actual)
+# foomuuri check (verificar sistaxis del archivo de configuración)
+# foomuuri block (bloquear todo el tráfico)
+# foomuuri list (listar conjunto de reglas del kernel)
+# foomuuri list public-localhost (reglas para la zona especificada cagadas en el kernel)
+# foomuuri list macro (listar macros)
+# foomuuri list macro telnet (listar macros para el nombre especificado)
 
 
 foot
@@ -34522,13 +34529,68 @@ $ time gcc -fuse-ld=mold -o mi_programa mi_programa.c
 Se verá que el segundo comando suele ser mucho más rápido.
 
 
+molly-brown
+Servidor Gemini completo apto para entornos Pubnix o similares de alojamiento compartido, donde los usuarios pueden subir su contenido, pero no tienen acceso al archivo de configuración principal. También es ideal para entornos monousuario, pero su compatibilidad multiusuario lo distingue de muchos otros servidores Gemini. Un servidor Gemini sirve contenido minimalista y ligero al web moderno.
+# useradd -M molly (crear un usuario dedicado)
+Generar certificados TLS, obligatorios para Gemini; usa un certificado autofirmado para pruebas, reemplazando <tu-dominio>:
+# mkdir -p /etc/molly-brown/certs
+# openssl req -x509 -newkey rsa:4096 -keyout /etc/molly-brown/certs/gemini.key -out /etc/molly-brown/certs/gemini.crt -days 3650 -nodes -subj "/CN=<tu-dominio>" -addext "subjectAltName = DNS:<tu-dominio>"
+# mkdir -p /var/log/molly-brown /var/gemini (crear directorios para logs y contenido)
+Ejemplo de archivo de configura
+# nano /etc/molly-brown/molly.conf
+     Port = 1965
+     Hostname = "<tu-dominio>"
+     DocBase = "/var/gemini/"
+     CertPath = "/etc/molly-brown/certs/gemini.crt"
+     KeyPath = "/etc/molly-brown/certs/gemini.key"
+     AccessLog = "/var/log/molly-brown/access.log"
+     ErrorLog = "/var/log/molly-brown/error.log"
+# chown -R molly /var/gemini /etc/molly-brown /var/log/molly-brown (cambiar permisos)
+Crear un servicio systemd en
+# nano /etc/systemd/system/molly-brown.service
+     [Unit]
+     Description=Molly Brown gemini server
+     After=network.target
+     [Service]
+     Type=simple
+     Restart=always
+     User=molly
+     ExecStart=molly-brown -c /etc/molly-brown/molly.conf
+     [Install]
+     WantedBy=multi-user.target
+# systemctl start molly-brown (iniciar servicio)
+# systemctl enable molly-brown (habilitar servicio al inicio)
+Ahora, colocar archivos .gmi [Gemtext] en /var/gemini/ y acceder vía un cliente Gemini como gemini://<tu-dominio>/.
+En un entorno multiusuario, un usuario podría cargar contenido en /var/gemini/users/usuario/ y acceder vía gemini://dominio/~usuario/, sin tocar la config principal.
+
+El comando principal es `molly-brown`, que se ejecuta desde la línea de comandos. Puede funcionar sin archivo de configuración usando valores predeterminados (por ejemplo, sirviendo contenido desde el directorio actual en el puerto 1965), pero para un uso real se recomienda un archivo de config en formato TOML (por ejemplo, `/etc/molly.conf` o `/etc/molly-brown/molly.conf`).
+
+
 molly-guard
-Protege las máquinas de apagados y reinicios accidentales. El paquete instala un script de shell que anula los comandos existentes: shutdown, reboot, halt, poweroff, coldreboot, pm-hibernate y pm-suspend; primero ejecuta un conjunto de scripts, que deben finalizar correctamente, antes de que molly-guard invoque el comando real.
-Por ejemplo para evitar paradas o reinicios de servidores desde consola remota. Editar:
+Protege las máquinas de apagados/reinicios accidentales. El paquete instala un sript de shell que mueve los comandos reales: shutdown, reboot, halt, poweroff, coldreboot, pm-hibernate, pm-suspend al directorio /lib/molly-guard/. Primero, ejecuta un conjunto de scripts, que deben finalizar correctamente, antes de que molly-guard invoque el comando real. Uno de los scripts comprueba si hay sesiones SSH existentes. Si alguno de los cuatro comandos se ejecuta interactivamente a través de una sesión SSH, el script de shell le solicita que introduzca el nombre del host que desea apagar. Esto debería evitar apagados y reinicios accidentales. Incluye los binarios coldreboot, halt, pm-hibernate, pm-suspend, pm-suspend-hybrid, poweroff, reboot y shutdown. Puede omitir molly-guard ejecutando esos binarios directamente.
+$ ls -l /sbin/{halt,reboot,shutdown,poweroff} (comprobar si Molly Guard está activo y reemplazó los binarios originales con enlaces simbólicos a Molly Guard)
+1.-
+Cuando se intenta reiniciar un servidor remoto vía SSH:
+# reboot
+       W: molly-guard: SSH session detected!
+       Please type in hostname of the machine to reboot:
+Si se introduce mal el nombre:
+       Please type in hostname of the machine to reboot: otrohost
+       Good thing I asked; I won't reboot plsdontreboot ...
+       W: aborting reboot due to 30-query-hostname exiting with code 1.
+Pero si lo haces correctamente:
+       Please type in hostname of the machine to reboot: plsdontreboot
+       Broadcast message from root@plsdontreboot:
+       The system is going down for reboot NOW!
+También permite cancelar un apagado sin comprobaciones:
+# shutdown -c
+       I: executing shutdown "-c" regardless of check results.
+2.-
+Forzar la protección en todo tipo de sesión:
 # nano /etc/molly-guard/rc
-Y descomentar la linea:
-ALWAYS_QUERY_HOSTNAME=true
-Cuando se intente parar o reiniciar el equipo vía ssh, saldrá una nota pidiendo el nombre de la máquina. Una vez introducida, se ejecutará el shutdown o reboot.
+Descomentar la linea:
+     ALWAYS_QUERY_HOSTNAME=true
+Y pedirá confirmación incluso desde consolas locales.
 
 
 mon
