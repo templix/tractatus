@@ -34607,6 +34607,19 @@ Herramienta para monitorear la disponibilidad de servicios y enviar alertas sobr
 # mon -s /home/USER (epecificando ruta para monitorear scripts)
 
 
+monado-cli
+Es parte del ecosistema OpenXR, un estándar abierto de Khronos para interactuar con dispositivos de realidad virtual [VR] y aumentada [AR], sin depender de drivers propietarios, como los de Oculus, SteamVR, etc. Monado intenta ser una capa universal que detecta y gestiona visores, mandos, cámaras y sensores XR, para que las aplicaciones OpenXR puedan funcionar en Linux.
+$ monado-cli test (ejecuta una prueba completa de inicialización e intenta comprobar que todo el stack funciona aunque no haya dispositivos físicos)
+La salida muestra, además de muchas información:
+   	  Creating instance! --> crea una sesión de OpenXR.
+	  Probing! --> busca hardware XR conectado.
+	  Dumping! --> imprime lo que encuentra.
+	  Creating system devices! --> inicializa los builders.
+	  All ok, shutting down --> todo fue bien.
+	  Exiting '0' --> se cierra con éxito.
+$ monado-cli probe (lista los posibles "builders" de dispositivos y luego destruye lo que ha creado [Destroying probed devices])
+
+
 monfailures
 Programa que enumera los últimos fallos de la aplicación mom [ver].
 # monfailures
