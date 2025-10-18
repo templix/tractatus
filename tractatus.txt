@@ -34593,6 +34593,13 @@ Descomentar la linea:
 Y pedirá confirmación incluso desde consolas locales.
 
 
+mom
+[Memory Overcommitment Manager Daemon]. Es una herramienta basada en políticas para gestionar la sobreasignación de recursos, principalmente memoria en hosts KVM. Su función principal es monitorizar las máquinas virtuales [VMs] activas y el host para luego ajustar dinámicamente los recursos asignados a las VMs, como el uso de memory ballooning o inflado de memoria basándose en un conjunto de políticas configuradas. Recolecta datos utilizando libvirt o vdsm en entornos oVirt/RHV, para obtener métricas del host y de los invitados. Estos datos incluyen uso de CPU, uso de memoria, páginas de memoria ballooned [reclamadas], y más, provenientes de interfaces del sistema [/proc], APIs de libvirt, o incluso programas cliente dentro de las VMs.
+$ momd -v 4 (nivel de detalle del registro em máximo [de 0 a 4]
+# systemctl start momd (inicia el servicio)
+# systemctl enable momd (configura el demonio para que inicie automáticamente al arrancar el sistema)
+
+
 mon
 Herramienta para monitorear la disponibilidad de servicios y enviar alertas sobre eventos prescritos o fallas en un entorno servidor-cliente. Los servicios se definen como cualquier cosa probada por un programa de "monitorización", que puede ser algo tan simple como hacer ping a un sistema o tan complejo como analizar los resultados de una transacción a nivel de aplicación. Logs en /var/log/mon/ si está activo el servicio se puede monitorear datos con la dirección http://127.0.0.1:2583/ en el navegador.
 # monshow --full
