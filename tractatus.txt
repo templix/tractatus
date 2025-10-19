@@ -39212,6 +39212,43 @@ $ pnscan 192.168.1.5/24 1:65525 (todos los puertos de la red))
 $ pnscan -w"HEAD / HTTP/1.0\r\n\r\n" -r"Server:" localhost 1:65525 (escanear todos los puertos de localhost)
 
 
+podman
+Herramienta para gestionar contenedores, imágenes, volúmenes montados en dichos contenedores y pods creados a partir de grupos de contenedores. Alternativa a Docker sin daemon.
+$ podman run -it --rm debian:stable (entrar en una Debian limpia donde poder instalar, probar y salir sin riesgo. Con --rm cuando cierra se pierde todo)
+      Resolved "debian" as an alias (/etc/containers/registries.conf.d/shortnames.conf)
+      Trying to pull docker.io/library/debian:stable...
+      Getting image source signatures
+      Copying blob a1d865bc2cbc done   |
+      Copying config 678d881964 done   |
+      Writing manifest to image destination
+      root@1ef1507a7b94:/#
+Para salir y mantener el contenedor exit o Ctrl+D. CTRL-Z lo manda a segundo plano.
+$ podman run -it --name mi_laboratorio -v $(pwd)/experimentos:/root/experimentos debian:stable (crear un entorno persistente para pruebas)
+$ podman exec -it mi_laboratorio bash (desde otra terminal, salir y volver cuando se quiera)
+$ podman attach (para volver a él)
+$ podman attach 1ef1507a7b94 (otra forma)
+$ podman volume create mi_volumen (crear un volumen)
+$ podman run -it --rm -v mi_volumen:/datos debian:stable (todo lo que se guarde en /datos persistirá )
+$ podman run -it --rm -v $(pwd)/mis_datos:/app debian:stable (montar un directorio local)
+$ podman commit <container_id> mi_debian_personalizado (creando una imagen personalizada desde el contenedor modificado)
+$ podman run -it --name mi_entorno debian:stable (crear contenedor persistente con nombre)
+$ podman start -ai mi_entorno (reutilizar ese contenedor)
+$ podman ps (listar contenedores en ejecución)
+$ podman ps -a (listar todos los contenedores incluidos parados)
+$ podman images (listar imágenes)
+$ podman rm <container_id> (eliminar contenedor)
+$ podman rmi <image_id> (eliminar imagen)
+$ podman run -d -p 8080:80 nginx (mapear puertos)
+$ podman network create mi_red (red personalizada)
+$ podman run --network mi_red mi_app
+$ podman system prune -f (limpiar contenedores temporales)
+1.-
+El proceso completo podría ser:
+$ podman run -it --name zona_segura debian:stable (crear contenedor persistente)
+$ podman stop zona_segura (parar el contenedor)
+$ podman start -ai zona_segura (volver al contenedor)
+
+
 pom (bsdgames)
 Informa de las fases de la luna.
 $ pom
@@ -44576,6 +44613,7 @@ systemctl
 # systemctl (Listado de unidades activas)
 # systemctl list-units (Listado de unidades activas)
 # systemctl --failed (Listado de unidades que han tenido problemas)
+# systemctl list-units --type=service (servicios cargados)
 # systemctl list-unit-files (Listado de unidades instaladas)
 # systemctl list-dependencies ssh.service (servicios que se han de iniciar antes de iniciar el servicio requerido)
 # systemctl start slim.service (Activa slim de inmediato)
