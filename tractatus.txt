@@ -34755,7 +34755,7 @@ monitorix
 Herramienta para monitorizar sistemas y diseñada para controlar la mayor cantidad posible de servicios y recursos. Una vez activado el servicio con::
 # service monitorix start
 Se accede a los informes con el navegador y la dirección http://localhost:8080/monitorix
-Podemois ajustar título y otros parámetros en el archivo /etc/monitorix/monitorix.conf
+Podemos ajustar título y otros parámetros en el archivo /etc/monitorix/monitorix.conf
 
 
 monshow
@@ -34781,6 +34781,11 @@ $ modplug123 --loop cancion.mod (reproducir en bucle)
 $ modplug123 --info tema.s3m (listar información del archivo)
 $ find /usr -name "*.xm" -o -name "*.mod" -o -name "*.s3m" 2>/dev/null (buscar módulos para probar, en Debian vienen algunos ejemplos)
 $ modplug123 --wav salida.wav entrada.xm (convertir a WAV)
+
+
+morbig
+Es un analizador para scripts de shell escritos en el lenguaje de scripts de shell POSIX. Analiza los scripts estáticamente, es decir, sin ejecutarlos, y construye un árbol sintáctico concreto para cada uno. Los árboles sintácticos concretos se construyen mediante constructores según la gramática de shell del estándar POSIX. Este paquete contiene la herramienta de análisis que permite analizar scripts de shell y obtener su árbol sintáctico concreto en varios formatos.
+$ morbig --as simple --display-stats --continue-after-error script?.sh (la salida en formato json simple [script1.sh.sjson, script2.sh.sjson...], que muestre total de archivos de entrada procesados, omitidos y rechazados por pantalla y que escriba el mensaje de error en el archivo de salida en lugar de en stderr y que continúe con el siguiente archivo)
 
 
 more
