@@ -34620,6 +34620,27 @@ La salida muestra, además de muchas información:
 $ monado-cli probe (lista los posibles "builders" de dispositivos y luego destruye lo que ha creado [Destroying probed devices])
 
 
+monero
+Cliente de criptomonedas para la red Monero. El cliente completo de Monero, también conocido como Monero Core, es una billetera de nodo completo para la red Monero. Monero [XMR] es una criptomoneda de código abierto que prioriza la privacidad y la descentralización. Utiliza un libro de contabilidad público para registrar las transacciones, mientras que las nuevas unidades se crean mediante un proceso llamado minería. Monero busca mejorar el diseño de criptomonedas existentes ocultando el remitente, el destinatario y el monto de cada transacción realizada, además de hacer que el proceso de minería sea más igualitario. El historial de transacciones global completo [blockchain] se almacena localmente, lo que puede requerir una gran cantidad de espacio en disco. Incluye los ejecutables monero-blockchain-ancestry, monero-blockchain-depth, monero-blockchain-export, monero-blockchain-import, monero-blockchain-mark-spent-outputs, monero-blockchain-prune, monero-blockchain-prune-known-spent-data, monero-blockchain-stats, monero-blockchain-usage, monero-gen-ssl-cert, monero-gen-trusted-multisig, monero-wallet-cli, monero-wallet-rpc y monerod.
+$ monerod (conectar a la red Monero y descargar y mantener una copia de la cadena de bloques [blockchain]. Puede tardar horas o días la primera vez)
+$ monerod --rpc-bind-ip 0.0.0.0 --confirm-external-bind (iniciar el nodo y permitir conexiones externas)
+$ monerod --detach (ejecuta el daemon en segundo plano, liberando la terminal)
+$ monero-blockchain-import --input-file /ruta/a/blockchain.raw (descargas la blockchain fuera del proceso del daemon para acelerar la sincronización inicial)
+$ monero-wallet-cli --generate-new-wallet /ruta/a/mi_monedero (crear un monedero. Pedirá eligir una contraseña y mostrará la semilla mnemotécnica [clave de 25 palabras])
+$ monero-wallet-cli --wallet-file /ruta/a/mi_monedero  (carga el archivo de monedero especificado)
+$ monero-wallet-cli --daemon-host monero.node.url:18081 (conectarta a un nodo público remoto)
+Nota.- "monero-wallet-cli" requiere que monerod esté en funcionamiento y sincronizado o conectado a un nodo remoto.
+Una vez que has abierto el monedero con monero-wallet-cli, se entra en una interfaz interactiva donde se pueden usar comandos específicos:
+balance --> Muestra el saldo disponible y transferible y el saldo bloqueado/pendiente
+transfer 47FfL8V...b7gA 1.50 --> Envía 1.50 XMR a la dirección especificada
+address --> Muestra tu dirección pública de Monero para recibir fondos
+show_transfers in --> Muestra solo las recibidas
+show_transfers all --> Las muestra todas
+seed --> Muestra la semilla mnemotécnica. Usar en privado y con seguridad
+start_mining 2 --> Permite hacer minería de Monero desde el propio monedero, usando 2 cores de la CPU para minar
+Nota.- El manejo de criptomonedas requiere precaución extrema. Guardar la semilla mnemotécnica de forma segura y fuera de línea, ya que es la única forma de recuperar los fondos si se olvida la contraseña o si la computadora falla.
+
+
 monfailures
 Programa que enumera los últimos fallos de la aplicación mom [ver].
 # monfailures
@@ -46367,7 +46388,15 @@ Detecta la codificación de un texto.
 
 udev
 Es el sistema de administración de dispositivos, que se encarga de detectar dispositivos conectados como cámaras, tarjetas de captura, memorias USB, etc. y aplicar reglas para darles nombres coherentes, cambiar permisos automáticamente o crear enlaces simbólicos [symlinks] útiles. Contiene las aplicaciones systemd-hwdb y udevadm
-$ systemctl status udev (comprobar si está activo)
+# systemctl status udev (comprobar si está activo)
+# udevadm info --export-db | less (base de datos de dispositivos del kernel)
+# udevadm monitor (monitorear eventos de dispositivos en tiempo real como conectar un USB, un disco, etc)
+# udevadm control --reload-rules (si se modifica las reglas de udev [/etc/udev/rules.d/], recargar y activar los cambios)
+# udevadm trigger (procesar todos los dispositivos para aplicar las nuevas reglas)
+# udevadm info -a -p $(udevadm info -q path -n /dev/sda) (consultar toda la información que udev tiene sobre un dispositivo específico)
+# udevadm trigger --action=change --subsystem-match=block --attr-match=dev=sda ((que udev reprocese un dispositivo después de cambiar una regla)
+# udevadm control --log-priority=debug (si un dispositivo no se configura correctamente, activa el modo depuración para ver más detalles en los logs)
+# systemd-hwdb -s update (devolver un valor de salida distinto de cero ante cualquier error de análisis al recargar)
 
 
 udevil
