@@ -34875,12 +34875,12 @@ control_authentication juanito:password
 
 mount
 Montaje de particiones
-# mount -t ext3      (Lista las particones ext3 montados)
-# mount -a       (Monta todo lo que contengan la expresion  "auto" en el /etc/fstab)
-# mount -s       (Tolera opciones de montaje medio malas en vez de fallar)
-# mount -o loop imagen.iso /directorio     (Montar una iso en un dir)
-# mount -t vfat /dev/sdf /media/disk -o force,rw   (Forzar montaje lectura y escritura)
-# mount | column -t  (muestra todo lo montado de forma ordenada)
+# mount -t ext3 (Lista las particones ext3 montados)
+# mount -a (Monta todo lo que contengan la expresion  "auto" en el /etc/fstab)
+# mount -s (Tolera opciones de montaje medio malas en vez de fallar)
+# mount -o loop imagen.iso /directorio (Montar una iso en un dir)
+# mount -t vfat /dev/sdf /media/disk -o force,rw (Forzar montaje lectura y escritura)
+# mount -t ext4 | column -t (muestra archivos ext4 montados de forma ordenada)
 # mount -o remount / (Remontar una partición después de, por ejemplo modificar sus atributos (4ª columna) en el fstab)
 # mount -o remount,rw,relatime / (Remontar una partición modificando atributos sólo para la presente sesión)
 
@@ -34949,6 +34949,18 @@ Nota.- Ante cualquier fallo, revisar tool-output.txt en /tmp/mp3cd-$USER para ve
 mp3check
 Utilidad para la detección de mp3 incompletos o con errores.
 $ mp3check 3 -e -r . (sólo los mp3 del presente directorio de forma recursiva y verificar la coherencia y encabezados e imprimir los mensajes de error)
+
+
+mp3fs
+Es un sistema de archivos virtual de solo lectura basado en FUSE [Filesystem in Userspace], diseñado específicamente para transcodificar archivos de audio de alta calidad, principalmente FLAC, y en versiones recientes también Ogg Vorbis a formato MP3 en tiempo real. Esto significa que, cuando se abre o lee un archivo en el sistema de archivos montado, mp3fs no crea copias físicas de los archivos MP3; en su lugar, genera el contenido MP3 "sobre la marcha" mediante un proceso de conversión dinámica.
+Permitir montajes como usuario normal:
+# nano /etc/fuse.conf
+Descomentar la linea:
+	 user_allow_other
+$ mp3fs -b 128 ~/Musica/FLAC /tmp/mp3 (montar el directorio con bitrate 128 kbps)
+Una vez montado, se puede navegar el punto_de_montaje como un directorio normal. Los archivos FLAC aparecerán con extensión .mp3 y se transcodificarán al leerlos, con un reproductor como VLC o al copiarlos.
+$ fusermount -u /tmp/mp3 (desmontar)
+$ mp3fs -o allow_other,ro,bitrate=192 /mnt/musica_flac /mnt/mp3_servidor (otros usuarios pueden acceder, refuerza solo lectura y calidad media-alta)
 
 
 mp3gain
