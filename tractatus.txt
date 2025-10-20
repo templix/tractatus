@@ -34918,6 +34918,15 @@ Atajos
 	3 (Avanzar canción)
 
 
+mp3burn
+Herramienta útil para grabar CDs de audio directamente desde archivos MP3, Ogg Vorbis o FLAC, sin necesidad de convertir todo el contenido a WAV o CDR antes de grabar. Los archivos .mp3/.ogg/.flac se convierten mediante un decodificador, pero se escriben en FIFO [tuberías con nombre] para no consumir espacio durante la grabación con archivos temporales.
+$ mp3burn ~/Musica/*.mp3 (grabará todos los archivos MP3 en el directorio especificado)
+$ mp3burn -d /dev/cdrw archivo1.mp3 archivo2.ogg archivo3.flac (usar un dispositivo de grabación específico y grabar una lista específica de archivos)
+$ mp3burn -n ~/Musica/*.mp3 (simulación y ver si todo está correcto antes de grabar)
+$ mp3burn -x 4 ~/Musica/*.mp3 (especificar la velocidad de grabación, por ejemplo, 4x)
+$ mp3burn -e ~/Musica/*.mp3 (forzar la sobregrabación si el CD es regrabable)
+
+
 mp3check
 Utilidad para la detección de mp3 incompletos o con errores.
 $ mp3check 3 -e -r . (sólo los mp3 del presente directorio de forma recursiva y verificar la coherencia y encabezados e imprimir los mensajes de error)
