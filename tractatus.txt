@@ -34927,6 +34927,25 @@ $ mp3burn -x 4 ~/Musica/*.mp3 (especificar la velocidad de grabación, por ejemp
 $ mp3burn -e ~/Musica/*.mp3 (forzar la sobregrabación si el CD es regrabable)
 
 
+mp3cd
+Graba CD de audio normalizados a partir de listas de MP3/WAV/Oggs/FLAC. El script se encarga de corregir los WAV remuestreándolos si es necesario y normalizando el volumen en todas las pistas. Admite la lectura de etiquetas y la grabación de CD-TEXT.
+Asegurar que /dev/cdrecorder apunte a la grabadora, sino crear el enlace:
+# ln -s /dev/sr0 /dev/cdrecorder
+$ mp3cd -h (ayuda breve)
+$ mp3cd --help (ayuda detallada)
+$ mp3cd --longhelp (asyuda completa).
+$ mp3cd lista.m3u (limpia directorio temporal, decodifica los WAV, corrige formatos, normaliza volúmenes, genera TOC y graba el CD. Incluye CD-TEXT si es posible)
+$ mp3cd ~/Musica/cancion1.mp3 ~/Musica/cancion2.ogg ~/Musica/cancion3.flac (trata la lista como una playlist temporal y procede con el proceso completo)
+$ mp3cd -s decode -q lista.m3u (inicia en la etapa de decodificación [convierte MP3/Ogg/FLAC a WAV] y "-q" sale después de completar esa etapa)
+$ mp3cd -s norm -q lista.m3u (normalizar solo volúmenes)
+$ mp3cd -n lista.m3u (realiza todas las etapas hasta el TOC, pero simula la grabación sin escribir en disco y verifica que los archivos quepan en un CD [máx. ~80 minutos])
+$ mp3cd --skip norm,burn lista.m3u (salta la normalización [norm] y la grabación [burn], pero hace el resto)
+$ mp3cd -v -t /tmp -d /dev/sr0 lista.m3u (ver comandos ejecutados, especificar directorio temporal y dispositivo de grabación)
+$ mp3cd -s burn (verifica el CDR y graba directamente desde el TOC existente en el directorio temporal)
+$ mp3cd -T -c "speed=8" lista.m3u ("T" si la grabadora no soporta CD-TEXT y pasar a cdrdao una velocidad específica)
+Nota.- Ante cualquier fallo, revisar tool-output.txt en /tmp/mp3cd-$USER para ver errores.
+
+
 mp3check
 Utilidad para la detección de mp3 incompletos o con errores.
 $ mp3check 3 -e -r . (sólo los mp3 del presente directorio de forma recursiva y verificar la coherencia y encabezados e imprimir los mensajes de error)
