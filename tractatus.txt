@@ -17357,6 +17357,25 @@ $ ffmpeg -i video2.avi -sameq video2.mpeg
 $ cat video1.mpeg video2.mpeg > nuevo_video.mpeg (Unir los videos resultantes usando cat)
 
 
+ffmpegfs
+Es un sistema de archivos virtual de solo lectura basado en FUSE [Filesystem in Userspace], similar a mp3fs [ver], pero mucho más versátil. Utiliza la biblioteca FFmpeg para transcodificar archivos de audio y video de múltiples formatos de entrada, como AVI, OGG, MOV, MKV, AVI, MP4, FLAC, WAV, etc. a formatos de salida como MP4, WebM, OGG, MP3, OPUS, MOV, ProRes, WAV, FLAC, TS, HLS en tiempo real, cuando se abren o leen los archivos en el montaje. Esto significa que no genera archivos físicos permanentes; en su lugar, crea el contenido transcodificado "sobre la marcha" de forma dinámica.
+Permitir montajes como usuario normal:
+# nano /etc/fuse.conf
+Descomentar la linea:
+	 user_allow_other
+$ ffmpegfs --desttype=webm ~/Videos /tmp/webm -o allow_other,ro (montar un directorio)
+Una vez montado, navega el punto_de_montaje como un directorio normal. Los archivos se renombran automáticamente con la extensión del formato de salida por ejemplo un MKV se ve como .mp4 y se transcodifican al leerlos por ejemplo con VLC o al copiar).
+$ fusermount -u /tmp/webm (desmontar)
+$ $ ffmpegfs --desttype=mp3 --audiobitrate=256K /home/usuario/Musica /mnt/mp3 -o allow_other,ro --cachepath=/tmp/ffmpeg_cache (transcodificación de audio a MP3 con bitrate específico)
+$ ffmpegfs --desttype=mp4 --videobitrate=1.5M --audiobitrate=256K /mnt/multimedia /mnt/stream -o allow_other,ro --log_maxlevel=INFO (montaje mixto para audio/video con bitrates personalizados)
+$ ffmpegfs --desttype=hls --videobitrate=1.5M --audiobitrate=256K /mnt/multimedia /mnt/stream -o allow_other,ro --log_maxlevel=INFO (montaje mixto para audio/video con bitrates personalizados y HLS para streaming)
+--desttype=FORMATO --> Formato de salida [mp4, webm, mp3, ogg, hls]. Por defecto: mp4.
+--audiobitrate=BPS --> Bitrate de audio [256K para 256 kbps].
+--videobitrate=BPS --> Bitrate de video [1.5M para 1.5 Mbps].
+-o allow_other,ro --> Permite acceso a otros usuarios y modo solo lectura.
+--log_maxlevel=DEBUG --> Para depuración [ERROR, INFO, DEBUG].
+
+
 ffmpegthumbnailer
 Crear miniaturas de los archivos de vídeo.
 $ ffmpegthumbnailer -c png -q 10 -i input.mp4 -o output.png (en formato png, máxima cualidad, 0 la mínima, archivo de entrada y salida)
