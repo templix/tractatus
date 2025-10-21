@@ -1,5 +1,26 @@
 
 
+0install
+Es un sistema de instalación descentralizado que funciona como un gestor de paquetes universal. Permite a los desarrolladores de software publicar programas directamente desde sus propios sitios web, a la vez que admite funciones habituales de los repositorios de distribución centralizados, como bibliotecas compartidas, actualizaciones automáticas y firmas digitales. Su objetivo es complementar, en lugar de reemplazar, la gestión de paquetes del sistema operativo. Los paquetes 0install nunca interfieren con los proporcionados por la distribución. Un mismo paquete funciona en Debian, Fedora, Arch, etc. Los desarrolladores publican una sola versión que funciona en todas las distros y se resuelven automáticamente las dependencias compartidas. Los programas se instalan en ~/.cache/0install.net/ y múltiples versiones pueden coexistir. Se pueden buscar paquetes en https://apps.0install.net/.
+$ 0install search vlc (buscar un paquete. Permite busquedas genéricas: game, editor, video, cli...)
+  	https://apps.0install.net/gui/vlc.xml
+	  VLC media player - powerful media player, playing most of the media codecs and video formats out there [100%]
+$ 0install search editor (ver los editores disponibles)
+$ 0install run http://0install.net/2008/3rd-party/GIMP.xml (instalar GIMP)
+$ 0install run http://0install.net/2008/3rd-party/Inkscape.xml (instalar y usar una aplicación específica)
+$ 0install update (actualizar todos los programas instalados)
+$ 0install list (listar programas instalados)
+$ 0install -h (ver todas las opciones)
+$ 0install man git (ver la página de manual)
+Nota.- Es especialmente útil: en casos de software no empaquetado en los repos oficiales, cuando se quieren versiones más nuevas que las disponibles en repos, aplicaciones específicas que necesitan versiones particulares y se precisa software de desarrolladores que lo suben por este conducto.
+1.-
+El proceso clásico podría ser:
+$ 0install search firefox (buscar firefox)
+$ 0install run http://afb.users.sourceforge.net/zero-install/interfaces/firefox.xml (con la url mostrada con el comando anterior instalar la aplicacion)
+$ 0install list (ver qué está instalado)
+Nota.-  Muchos paquetes en 0install.net/2006/, 2007/ ... están rotos ya que los mantenedores abandonaron las recetas y los enlaces a las distros antiguos ya no existen. 0install no verifica si los paquetes siguen funcionando.
+
+
 2ping
 Utilidad de ping bidireccional para determinar si ocurre una perdida de paquetes en un sentido o en otro.
 $ 2ping -c 5 -i 2  nombre_host.com (con 5 peticiones y a intervalos de 2 segundos)
