@@ -35010,6 +35010,16 @@ $ find . -type f -iname '*.mp3' -print0 | xargs -0 mp3gain -r -k (genera una lis
 $ find directorio -iname “*.mp3″ -exec mp3gain -r -k -m 5 (normaliza un directorio y sus subdirectorios)
 
 
+mp3guessenc
+Utilidad para analizar archivos de audio MPEG. Identifica si un archivo MP3 fue codificado con LAME, Fraunhofer, iTunes, etc, detecta si el archivo es CBR [Constant Bitrate] o VBR [Variable Bitrate], verifica si hay inconsistencias en los metadatos del archivo y diagnostica archivos corruptos o mal etiquetados.
+$ mp3guessenc -v cancion.mp3 (analizar un archivo MP3 en modo detallado)
+$ mp3guessenc *.mp3 (analizar todos los .mpe del directorio)
+$ mp3guessenc -g cancion.mp3 (solo informar como está codificado)
+$ mp3guessenc -i cancion.mp3 (mostrar etiquetas de información de metadatos)
+$ mp3guessenc -m (Mostrar detalles de la transmisión mpeg)
+$ mp3guessenc -s (muestra la cadena del codificador)
+
+
 mp3info
 Información sobre las etiquetas ID3 de archivos mp3blaster
 $ mp3info archivo.mp3 (Ver la información ID3)
