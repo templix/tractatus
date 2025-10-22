@@ -35103,8 +35103,33 @@ Utilidad para codificar archivos binarios en mensajes de correo con formato MIME
 $ mpack -s "Reporte Trimestral" -d cuerpo.txt informe.pdf gerente@empresa.com (asunto del correo electrónico, el texto del correo que se envia, el archivo que se codificará en formato MIME y se adjuntará y destinatario)
 
 
+mpc
+[Music Player Command]. Herramienta para interactuar con MPD (Music Player Daemon). Es una herramienta sencilla y potente que permite controlar la reproducción, gestionar listas de reproducción, ajustar el volumen, y más, enviando comandos al servidor MPD [ver]. El daemon mpd debe estar ejecutándose en segundo plano.
+$ mpc play (inicia la reproducción de la pista actual o la primera de la lista de reproducción)
+$ mpc pause (pausar música)
+$ mpc stop (parar reproducción)
+$ mpc next (siguiente pista)
+$ mpc prev (pista anterior)
+$ mpc add "/ruta/cancion.mp3" (añadir una canción a la lista de reproducción)
+$ mpc add "~/Rock" (añadir un directorio completo)
+$ mpc playlist (listar la lista de reproducción actual)
+$ mpc clear (borrar la lista de reproducción)
+$ mpc save mi_lista (guardar una lista de reproducción)
+$ mpc load mi_lista (cargar una lista de reproducción guardada)
+$ mpc volume 50 (ajustar volumen [0-100])
+$ mpc volume +10 (subir volumen)
+$ mpc volume -10 (bajar volumen)
+$ mpc status (información como la canción actual, el estado de reproducción [play/pause/stop], el volumen y si está activado el modo aleatorio o repetitivo)
+$ mpc current (ver la canción actual)
+$ mpc random on (activar/desactivar [off] reproducción aleatoria)
+$ mpc repeat on (activar/desactivar [off] repetición)
+$ mpc update (si se añade o elimina archivos en el directorio de música configurado, actualizar la base de datos de MPD)
+$ mpc add http://icecast-stream-url/radio.mp3 && mpc play (reproducir streams en línea por ejemplo, radios por Internet)
+
+
 mpd
-(demonio). Reproductor de audio con arquitectura servidor-cliente que gestiona listas de reproducción y bases de datos. Para hacer uso de una interfaz gráfica, es necesario un cliente tipo: sonata, ario, ncmpcpp o pms.Ajustes en la configuración:
+[Music Player Daemon]. Servidor de música ligero y flexible que se ejecuta como un daemon [proceso en segundo plano]. Permite reproducir archivos de audio en diversos formatos [Ogg-Vorbis, FLAC, MP3, Wave, AIFF]) y transmisiones en línea, además de gestionar listas de reproducción. MPD no tiene una interfaz gráfica propia, sino que se controla a través de clientes, como mpc [ver] o interfaces gráficas [ncmpcpp, Cantata, etc.]. También incluye reproducción sin interrupciones, salida con búfer y compatibilidad con crossfading.
+Ajustes en la configuración:
 # nano /etc/mpd.conf
 music_directory	"/home/usuario/Musica"
 playlist_directory "/home/usuario/.mpd/playlists"
@@ -35112,6 +35137,7 @@ db_file	"/home/usuario/.mpd/mpd.db"
 log_file "/home/usuario/.mpd/mpd.log"
 pid_file "/home/usuario/.mpd/mpd.pid"
 state_file "/home/usuario/.mpd/mpdstate"
+sticker_file "/home/usuario/.mpd/sticker.sql"
 user "usuario"
 group "usuario"
 bind_to_address "localhost"
