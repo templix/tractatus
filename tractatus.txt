@@ -36599,6 +36599,41 @@ $ nitrogen /home/usuario/imagenes/linux.png (Poner una imagen)
 $ nitrogen --restore (Restablecer la imagen despues de un reinicio. Normalmente se coloca en las opciones de inicio, por ejemplo en openbox, se colocaría en .config/openbox/autostart con la sintaxis: nitrogen --restore &)
 
 
+nix-bin
+Potente gestor de paquetes para Linux y otros sistemas Unix que permite una gestión de paquetes fiable y reproducible. Nix ofrece actualizaciones y reversiones atómicas, instalación simultánea de múltiples versiones de un paquete, gestión de paquetes multiusuario y una sencilla configuración de entornos de compilación. Incluye las aplicaciones nix, nix-build, nix-channel, nix-collect-garbage, nix-copy-closure, nix-daemon, nix-env, nix-hash, nix-instantiate, nix-prefetch-url, nix-shell y nix-store.
+# nix upgrade-nix (actualizar la versión de nix)
+# nix-build default.nix (Construye el paquete)
+# nix-channel --list (listar todos los canales)
+# nix-channel --update (actualizar canales)
+# nix-collect-garbage (eliminar paquetes no utilizados)
+# nix-collect-garbage -d (limpia versiones antiguas y objetos no referenciados)
+# nix-copy-closure --to root@remote-host /nix/store/abc123 (copia un conjunto de paquetes y sus dependencias a otro sistema)
+# nix run nixpkgs#firefox (instalar y ejecutar un paquete temporalmente)
+# nix-env -q (listar paquetes instalados por nix-env)
+# nix-env -qa (ver con más detalles)
+# nix-env -iA nixpkgs.firefox (instalar un paquete)
+# nix-env -u (actualizar todos los paquetes)
+# nix-env -u firefox (actualizar un paquete específico)
+# nix-env -e firefox (eliminar un paquete)
+# nix-env -e vim tmux (eliminar varios)
+# nix-env --list-generations (ver generaciones [versiones] de tu perfil)
+# nix-env --rollback (volver a una generación anterior)
+# nix-env --switch-generation 42 (ir a una generación específica)
+# nix-hash --type sha256 --base32 archivo.tar.gz (calcula hashes para archivos o derivaciones, útil para verificar integridad)
+# nix-instantiate default.nix (evalúa un archivo .nix y muestra la derivación resultante)
+# nix-prefetch-url https://example.com/package.tar.gz (descarga una URL y calcula su hash)
+# nix-shell -p python3 numpy (inicia un entorno de desarrollo temporal con los paquetes especificados, sin instalarlos globalmente)
+# nix-store --gc --print-dead (listar contenido)
+# nix-store --optimise (optimizar el almacén eliminando duplicados)
+# nix-shell -p python3 nodejs (usar shell temporal par robar un programa sin instalarlo. Al salir [exit], desaparecen del sistema)
+Nota.- Después de instalar nix-bin, se necesita configurar el entorno:
+$ nano .bashrc
+Y añadir las lineas
+  	 if [ -e ~/.nix-profile/etc/profile.d/nix.sh ]; then
+	   . ~/.nix-profile/etc/profile.d/nix.sh
+	 fi
+
+
 nl
 Muestra en pantalla un archivo de texto con las lineas numeradas. No modifica el archivo.
 $ nl fichero.txt
