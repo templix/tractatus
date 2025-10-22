@@ -35152,6 +35152,15 @@ Arrancar el demonio:
 $ mpd
 
 
+mpeg3-utils
+Utilidades para trabajar con archivos MPEG, incluyendo la indexación, lectura y manipulación de audio y video de diversos formatos MPEG como MPEG-1, MPEG-2 y MP3. Incluye las herramientas mpeg3cat, mpeg3dump, mpeg3peek y mpeg3toc
+$ mpeg3toc mi_video.mpg (indexar un archivo de video MPEG-2 llamado mi_video.mpg)
+$ mpeg3cat archivo1.mpg archivo2.mpg > archivo_unido.mpg (unir archivos. Todos los archivos deben tener el mismo formato MPEG)
+$ mpeg3cat -s 10 -e 30 mi_video.mpg > extracto.mpg (extraer desde el segundo 10 hasta el segundo 30 del archivo mi_video.mpg)
+$ mpeg3dump -h -v mi_video.mpg (muestra el encabezado MPEG del archivo y aumenta el nivel de detalle)
+$ mpeg3peek -f 500 mi_video.mpg (encontrar dónde comienza el frame de video número 500 en mi_video.mpg)
+
+
 mpg123
 Reproducir mp3 o urls
 $ mpg123 archivo.mp3
