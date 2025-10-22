@@ -35043,9 +35043,59 @@ $ mp3report --title=Titulos directorio (especificando un título)
 $ mp3report --title=Titulos --outfile=musica.html directorio (especificando archivo de salida)
 
 
+mp3roaster
+Permite grabar CD de audio desde archivos en distintos formatos como MP3, Ogg Vorbis, FLAC y WAV. Las principales características de esta aplicación son su fácil uso y la función de nivelación automática del volumen para una calidad óptima de audio en CD.
+$ mp3roaster archivo1.mp3 archivo2.mp3 archivo3.mp3 (iniciará el proceso de conversión WAV y grabará un CD de audio con esas pistas)
+mp3roaster -d /dev/cdrw -v -n "Mi CD de Audio" archivo1.mp3 archivo2.ogg archivo3.flac (selecciona el dispositivo de grabación, habilita la nivelación automática del volumen y da un nombre o etiqueta al CD)
+
+
+mp3splt
+Dividir archivos MP3, Ogg Vorbis o FLAC sin necesidad de recodificarlos, manteniendo así la calidad original del audio.
+$ mp3splt cancion.mp3 1.30 3.45 (extrae desde el minuto 1:30 hasta el minuto 3:45)
+$ mp3splt album.mp3 0.0 5.30 12.15 18.45 (crea 3 archivos: 0:00-5:30, 5:30-12:15 y 12:15-18:45)
+$ mp3splt -s *.mp3 (dividir álbumes completos automáticamente por silencios)
+$ mp3splt -s -p th=-40,min=2 album.mp3 (umbral de silencio en dB, valores más negativos = más sensible y duración mínima del silencio en segundos)
+$ mp3splt -c archivo.cue album.mp3 (división usando archivos CUE. Los archivos CUE contienen información sobre las pistas de un álbum)
+$ mp3splt -t 10.0 podcast.mp3 (división por intervalos regulares de 10 minutos)
+$ mp3splt -S 5 archivo.mp3 (dividir en 5 partes iguales)
+$ mp3splt -c query.cddb album.mp3 (buscará el álbum en la base de datos CDDB y dividirá según las pistas encontradas)
+$ mp3splt -s -p th=-48,min=1.5 -o "@n-@a-@t" -d "./album_dividido/" album_completo.mp3 (detecta silencios con umbral de -48dB y mínimo 1.5 segundos, nombra archivos como: "01-Artista-Titulo.mp3" y guarda en la carpeta "./album_dividido/")
+$ mp3splt -w archivo_wrap.mp3 (para archivos que fueron unidos con mp3wrap [ver])
+$ mp3splt -a album.mp3 0.0 5.30.40 (divisiones más precisas a nivel de frame: minutos, segundos, centésimas)
+$ mp3splt -n cancion.mp3 1.0 3.0 (no crear carpeta para los archivos de salida)
+$ mp3splt -q cancion.mp3 1.0 3.0 (modo silencioso sin salida por pantalla)
+$ mp3splt -r cancion.mp3 1.0 3.0 (eliminar el silencio original de las divisiones)
+$ mp3splt -P cancion.mp3 1.0 3.0 (previsualizar divisiones sin ejecutar)
+$ mp3splt -o "@n-@t" album.mp3 0.0 5.30 10.00 (especificar formato de salida)
+Variables disponibles:
+	  @n --> número de pista
+	  @t --> título
+	  @a --> artista
+	  @b --> álbum
+	  @f -->nombre del archivo original
+
+
 mp3val
 Herramienta para la validación de archivos de audio MPEG
 $ mpeval -f -si tema.mp3 (tratar de corregir errores y suprimir mensaje de información)
+
+
+mp3wrap
+Utilidad que agrupa varios archivos MP3 en uno solo, sin perder nombres de archivo ni información ID3, y sin recodificar. También permite archivar datos no relacionados con audio, como listas de reproducción, archivos de información e imágenes de portada dentro del MP3. Concatena físicamente los archivos MP3 uno tras otro, manteniendo intactos sus encabezados ID3 y sin alterar los datos de audio. El resultado es un archivo MP3 válido que la mayoría de los reproductores pueden reproducir como una sola pista larga. Además, si se incluye archivos no-MP3, como .txt, .jpg, etc, los agrega al final del archivo MP3 en una sección especial que no interfiere con la reproducción.
+$ mp3wrap album_completo.mp3 cancion1.mp3 cancion2.mp3 cancion3.mp3 (combinar 3 canciones en ambum_completo)
+$ mp3wrap podcast_con_datos.mp3 episodio1.mp3 episodio2.mp3 portada.jpg playlist.m3u (episodio1.mp3 y episodio2.mp3 se reproducirán en secuencia y portada.jpg y playlist.m3u se almacenan al final del archivo MP3)
+$ mp3splt -w album_completo_MP3WRAP.mp3 (recuperar los archivos originales, incluyendo los no-MP3,con mp3splt [ver])
+Nota.- cat a.mp3 b.mp3 > c.mp3 también funciona, pero no preserva metadatos de forma confiable ni permite incluir archivos no-MP3.
+1.-
+Un caso de recuperar los archivos originales:
+$ mp3wrap mix.mp3 a.mp3 b.mp3 cover.jpg
+El archivo generado será mix_MP3WRAP.mp3, y para extraer:
+$ mp3splt -w mix_MP3WRAP.mp3
+Esto generará:
+a.mp3
+b.mp3
+cover.jpg
+La mayoría de los reproductores como VLC, Audacious, etc reproducen el archivo resultante sin problemas. Algunos reproductores móviles o simples podrían tener problemas si hay archivos no-MP3 incrustados y cada fragmento conserva sus propias etiquetas, pero solo las del primer fragmento suelen mostrarse en interfaces gráficas.
 
 
 mpd
