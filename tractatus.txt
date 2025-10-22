@@ -35098,6 +35098,11 @@ cover.jpg
 La mayoría de los reproductores como VLC, Audacious, etc reproducen el archivo resultante sin problemas. Algunos reproductores móviles o simples podrían tener problemas si hay archivos no-MP3 incrustados y cada fragmento conserva sus propias etiquetas, pero solo las del primer fragmento suelen mostrarse en interfaces gráficas.
 
 
+mpack
+Utilidad para codificar archivos binarios en mensajes de correo con formato MIME [Multipurpose Internet Mail Extensions].
+$ mpack -s "Reporte Trimestral" -d cuerpo.txt informe.pdf gerente@empresa.com (asunto del correo electrónico, el texto del correo que se envia, el archivo que se codificará en formato MIME y se adjuntará y destinatario)
+
+
 mpd
 (demonio). Reproductor de audio con arquitectura servidor-cliente que gestiona listas de reproducción y bases de datos. Para hacer uso de una interfaz gráfica, es necesario un cliente tipo: sonata, ario, ncmpcpp o pms.Ajustes en la configuración:
 # nano /etc/mpd.conf
@@ -35462,6 +35467,12 @@ munin
 Monitor del sistema via web. Permite, mediante plugins, monitorizar varios servicios. Funciona en modo cliente/servidor.
 # /etc/init.d/munin start
 Y colocar en el navegador: file:///var/cache/munin/www/index.html
+
+
+munpack
+Utilidad para decodificar archivos binarios en mensajes de correo con formato MIME y extraer los archivos adjuntos para guardarlos como archivos separados en el disco. Por compatibilidad con métodos más antiguos de transferencia de archivos binarios, el programa munpack también puede decodificar mensajes en formato de codificación uu-split.
+$ munpack email_con_adjunto.eml (extraer el adjunto del correo guardado con el nombre especificado. Si el correo continene texto previo se guardará en un archivo con extensión .desc)
+$ munpack -C /correos -f email.eml (xtrae los archivos adjuntos en el directorio especificado y fuerza sobreescritura. Por defecto, añade sufijos [.1, .2, etc] para evitar sobrescribir)
 
 
 mupdf
