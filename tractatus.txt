@@ -35589,6 +35589,32 @@ $ music123 -d 2 -r . (esperar 2 segundos entre tema y tema)
 $ music123 -r /rock tema1.mp3 /folk tema2.wav (Reproducir dos temas de dos directorios distintos)
 
 
+mussh
+[Multi User Secure SHell]. Es un script de shell que permite ejecutar un comando o script por SSH en varios hosts con un solo comando desde tu máquina local. Su objetivo principal es ahorrar tiempo y esfuerzo al evitar tener que conectarse manualmente a cada servidor uno por uno. Siempre que sea posible, aprovecha el agente SSH [ssh-agent] y claves RSA/DSA para autenticación sin necesidad de ingresar la contraseña repetidamente en cada conexión..
+$ mussh -h servidor1.example.com servidor2.example.com servidor3.example.com -c "uptime" (conectar a tres hosts y ejecutar el comando uptime en los 3)
+$ mussh -A -h servidor1.example.com servidor2.example.com servidor3.example.com -c "uptime" (lo mismo pero ingresando la contraseña en cada host)
+$ echo -e "hostA\nhostB" | mussh -H - -i ~/.ssh/clave_privada -c "ps aux | grep apache" -d 1 (lee hosts de stdin, usa una clave específica, ejecuta el comando y muestra debug básico)
+$ mussh -a -h web1 web2 db1 -c "echo 'Iniciando backup'" -C /ruta/backup_script.sh -c "echo 'Backup completado'" -m -b -d 2 (fuerza un agente propio [-a], ejecuta comandos inicial/final + script, en paralelo pero con salida secuencial [-m -b], y debug detallado [0=off, 1=básico, 2=detallado])
+1.-
+Usando lista de hosts desde archivo a host por línea [los comentarios precedidos por # no son leidos]:
+$ nano mis_hosts.txt
+       # Servidores de producción
+       prod1.example.com
+       prod2.example.com
+       # Otro servidor
+       staging.example.com
+$ mussh -H mis_hosts.txt -c "df -h /var/log" (corre "df -h /var/log" en los tres hosts listados en mis_hosts.txt)
+2.-
+Ejecutando un script desde archivo en paralelo:
+$ nano actualizar.sh
+       #!/bin/bash
+       apt update
+       apt upgrade -y
+$ mussh -h host1 host2 host3 -C actualizar.sh -m (ejecuta el script en paralelo [-m] en los 3 hosts)
+$ mussh -H mis_hosts.txt -C actualizar.sh -m (los mismo entrando el archivo de hosts. -m ejecuta el script en paralelo)
+Notas.- Si un host falla, mussh continúa con los demás y los argumentos pueden ir en cualquier orden.
+
+
 mutagen-inspect
 Muestra información sobre un archivo de audio y sus etiquetas. Está pensado principalmente como herramienta de depuración para Mutagen que es un módulo de Python para manejar metadatos de audio.
 $ mutagen-inspect audio.mp3
