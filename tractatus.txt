@@ -35209,6 +35209,12 @@ $ mplayer -nolirc http://5253.live.streamtheworld.com/VIRGINRADIO_DUBAIAAC (Otra
 $ mplayer http://192.168.1.115/img/video.asf -frames 1 -vo jpeg:quality=100:maxfiles=1  (Tomar una imagen [frames 1] de una ubicación en la red)
 
 
+mppenc
+Codificador de audio con pérdida Musepack. Musepack es un códec de audio con pérdida optimizado específicamente para la compresión transparente de audio estéreo a velocidades de bits de 160-180 kbit/s.
+$ mppenc entrada.wav
+$ mppenc entrada.wav salida.mpc
+
+
 mpstat
 [sysstat]. Escribe en la salida estándar las actividades de cada procesador disponible, siendo el primero el procesador 0. Si no se ha seleccionado ninguna actividad, entonces el informe por defecto es el informe de utilización de la CPU.
 # mpstat -P ALL 2 5 (informes de todos los procesadores a intervalos de 2 segundo 5 veces)
