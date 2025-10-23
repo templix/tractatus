@@ -35615,6 +35615,21 @@ $ mussh -H mis_hosts.txt -C actualizar.sh -m (los mismo entrando el archivo de h
 Notas.- Si un host falla, mussh continúa con los demás y los argumentos pueden ir en cualquier orden.
 
 
+mussort
+Herramienta diseñada para organizar grandes colecciones de música de forma automática, basada en los metadatos [etiquetas ID3, MP3, Ogg Vorbis y FLAC] de los archivos de audio y procesándolos uno por uno. Luego, lee la información del archivo y los coloca en un árbol de directorios recién ordenado.
+$ mussort -d ~/Música/desordenada -o ~/Música/organizada (organizar música en la estructura Artista/Álbum/Pista - Título.mp3 con un directorio de entrada y uno de salida)
+$ mussort -d ~/Música/desordenada -o ~/Música/organizada --dry-run (ver qué cambios hará mussort sin mover realmente los archivos)
+$ mussort -d ~/Música/desordenada -o ~/Música/organizada --ignore-missing (ignorar archivos sin metadatos completos)
+$ mussort -d ~/Música/desordenada -o ~/Música/organizada --format "%a - %t" (que los archivos se nombren como `Artista - Título.mp3` en lugar de incluir el número de pista y el álbum)
+Otros formatos;
+      %a --> Artista
+      %t --> Título
+      %b --> Álbum
+      %n --> Número de pista
+      %y --> Año
+Notas.- Por defecto, mussort mueve los archivos. Si se prefiere copiarlos, usar "--copy". Si los archivos o tienen metadatos correctos no podrás organizarse correctamente.
+
+
 mutagen-inspect
 Muestra información sobre un archivo de audio y sus etiquetas. Está pensado principalmente como herramienta de depuración para Mutagen que es un módulo de Python para manejar metadatos de audio.
 $ mutagen-inspect audio.mp3
