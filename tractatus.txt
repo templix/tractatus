@@ -28438,9 +28438,10 @@ $ lablie render etiqueta.svg datos.yaml --output-dir etiquetas/ (creará archivo
 
 lame
 Cambiar formatos de audio
-$ lame -h -m j tema.wav tema.mp3  (Pasar de wav a mp3)
-$ lame -h -m j --nogap *.wav (Pasar lote de wav a mp3)
-$ lame -h --decode tema.mp3 tema.wav     (Pasar de mp3 a wav)
+$ lame entrada.wav salida.mp3 (forma básica de pasar de .wwav a .mp3)
+$ lame -h -m j tema.wav tema.mp3  (otra forma de pasar de .wav a .mp3)
+$ lame -h -m j --nogap *.wav (pasar lote de wav a mp3)
+$ lame -h --decode tema.mp3 tema.wav (pasar de mp3 a wav)
 $ for i in *.mp3; do lame -q 0 -b 160 -m j "$i" "directorio/$i"; done (Modificar el bitrate (-b 160) de todos los mp3 de “directorio”)
 -q 0	Opciones de 0 a 9. A menor calidad, mayor velocidad de conversión.
 -m j	Activar joint stereo.
