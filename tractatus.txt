@@ -35161,6 +35161,12 @@ $ mpeg3dump -h -v mi_video.mpg (muestra el encabezado MPEG del archivo y aumenta
 $ mpeg3peek -f 500 mi_video.mpg (encontrar dónde comienza el frame de video número 500 en mi_video.mpg)
 
 
+mpegdemux
+Demultiplexor de flujo de sistema MPEG1/2. Combinar video, audio, subtítulos, menús... se llama "multiplexado" y separarlos "demultiplexado". Esta herramienta permite listar el contenido de un flujo de sistema MPEG y extraer sus flujos.
+$ mpegdemux -c video.mp4 (analizar un flujo del sistema en busca de flujos elementales. Es el predeterminado)
+$ mpegdemux -e video.mpg (no imprimir códigos de fin en el modo de listado)
+
+
 mpg123
 Reproducir mp3 o urls
 $ mpg123 archivo.mp3
