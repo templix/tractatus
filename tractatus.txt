@@ -35549,6 +35549,36 @@ Convierte páginas PDF en imágenes.
 $ muraster -F ppm -o file.ppm entrada.pdf 1,2 (en formato ppm con el nombre especificado de las páginas 1 y 2 de entrada.pdf)
 
 
+musepack-tools
+Utilidades del formato de comprensión de audio MusePack [.mpc] con gran énfasis en la alta calidad y la transparencia. Incluye las siguientes herramientas mpc2sv8, mpcchap, mpccut, mpcdec, mpcenc, mpcgain y wavcmp.
+$ mpcenc audio.wav audio.mpc (codificación básica de .wav a .mpc. Calidad estándar ~180 kbps)
+$ mpcenc --quality 7 audio.wav audio.mpc (calidad específica. 0-10, donde 5 es estándar)
+$ mpcenc --extreme audio.wav audio.mpc (calidad extrema)
+$ mpcenc --artist "Artista" --album "Álbum" --title "Canción" audio.wav audio.mpc (con etiquetas ID3)
+$ mpcdec audio.mpc audio.wav (convierte archivo Musepack a WAV)
+$ mpcdec audio.mpc - (decodificar a stdout)
+$ mpcgain -a *.mpc (normalizar sin recodificar)
+$ mpcgain -s audio.mpc (solo mostrar información sin modificar)
+$ mpccut audio.mpc salida.mpc 30 90 (cortar desde segundo 30 hasta el 90)
+$ mpccut audio.mpc intro.mpc 0 60 (extraer primeros 60 segundos)
+$ mpccut audio.mpc resto.mpc 120 -1 (cortar desde minuto 2 hasta el final)
+$ mpcchap audio.mpc --import capitulos.txt (añadir capítulos desde archivo de texto)
+$ wavcmp -v audio1.wav audio2.wav (verificar conversión sin pérdidas)
+Ejemplo de archivo:
+$ nano capitulos.txt
+       00:00:00 Introducción
+       00:03:45 Primer tema
+       00:12:30 Segundo tema
+       00:25:00 Conclusión
+$ mpcchap audio.mpc --export (exportar información de capítulos)
+$ mpcchap audio.mpc --remove (eliminar capítulos)
+$ mpc2sv8 archivo_viejo.mpc archivo_nuevo.mpc (convierte archivos Musepack antiguos [SV7] al formato actual [SV8])
+1.-
+Comparar original con decodificado para verificar la calidad de codificación:
+$ mpcdec audio.mpc test.wav
+$ wavcmp original.wav test.wav
+
+
 music123
 Reproductor de música.
 $ music123 tema.mp3
