@@ -35693,6 +35693,38 @@ $ mwaw2odt archivo.cwk (genera un archivo llamado archivo.odt en el mismo direct
 $ mwaw2odt archivo.mwp archivo.odt (lo mismo especificando la salida)
 
 
+mwic
+[misspelled words in context - palabras mal escritas en contexto]. Es un corrector ortográfico, solo en alemán e inglés, que agrupa posibles errores ortográficos y los muestra en su contexto. Esto resulta útil para revisar documentos técnicos que suelen contener palabras no incluidas en los diccionarios estándar.
+
+
+mycli
+Alternativa moderna al cliente MySQL estándar que ofrece una experiencia mucho más agradable y productiva. Sus principales ventajas son el autocompletado inteligente, el resaltado de sintaxis y una mejor visualización de resultados.
+$ mycli -u usuario -p (conexión básica)
+$ mycli -h localhost -u root -D nombre_base_datos (especificar host y base de datos)
+$ mycli -u usuario -pmicontraseña -D mibd (con contraseña en el comando, no recomendado en producción)
+Ver mysql para la gestión de la base de datos. Los comandos especiales de mucli son:
+       \? --> Ver ayuda
+       \T --> Cambiar entre formatos de tabla
+       \history --> Ver historial de comandos
+       \e --> Editar última consulta en editor
+       \. /ruta/al/archivo.sql --> Ejecutar comando desde archivo
+       \u nombre_bd --> Cambiar de base de datos
+       \q --> Salir
+Algunas opciones útiles en el archivo de configuración:
+$ nano ~/.myclirc
+[main]
+# Habilitar autocompletado
+auto_vertical_output = True
+# Formato de tabla preferido
+table_format = psql
+# Resaltado de sintaxis
+syntax_style = native
+# Guardar historial
+history_file = ~/.mycli-history
+# Paginador (como less)
+enable_pager = True
+
+
 mypager
 Colorear la salida de las bases de datos de mysql/postgresql. Una vez entrado en la aplicación SQL.
 	mysql> pager base_de_datos
