@@ -35738,8 +35738,20 @@ enable_pager = True
 
 
 mypager
-Colorear la salida de las bases de datos de mysql/postgresql. Una vez entrado en la aplicación SQL.
-	mysql> pager base_de_datos
+Paginador intuitivo que añade color y formateo mejorado a los resultados de las consultas de clientes de bases de datos MySQL o PostgreSQL. Funciona como un "paginador" similar a less o more.
+mysql> pager mypager (indicarle al cliente de MySQL que use mypager solo para la sesión actual)
+psql> \pset pager 'mypager' (uso Temporal en la Sesión de PostgreSQL)
+1.-
+Configuración permanente en MySQL
+$ nano ~/.my.cnf
+Y agregar o modificar la sección [mysql]:
+  	[mysql]
+	pager = /usr/bin/mypager
+2.-
+Configuración permanente en PostgreSQL
+$ nano ~/.psqlrc
+Y agregar:
+	\setenv PAGER 'mypager'
 
 
 mysecureshell
