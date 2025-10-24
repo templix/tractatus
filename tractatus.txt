@@ -11279,6 +11279,16 @@ Diccionario en inglés.
 $ dict linux
 
 
+diction
+Utilidades para mejorar el estilo y la dicción en inglés y alemán. Incluye la aplicación style.
+$ echo "I am going to the store in order to buy some things that are necessary." | diction
+$ diction -s -d -L en texto.txt (sugiere reescrituras mejores con "->", que ignore palabras duplicadas, en idioma inglés ["de" para alemán] y el archivo a procesar)
+$ cat archivo.txt | diction -L en | fmt (analiza con base inglés y reformatea el texto)
+$ echo "The the cat runs very very fast." | diction -b -L en (detectar duplicados y errores de principiante)
+$ echo "The quick brown fox jumps over the lazy dog. This is a longer sentence with more complex words like photosynthesis." | style
+$ echo "The decision was made by the committee. The ball was kicked." | style -n -L en (lista oraciones pasivas o con nominalizaciones)
+
+
 dictzip
 Utilidad para comprimir bases de datos de diccionarios [.dict] con el algoritmo LZ77, útil para reducir su tamaño y hacer que sean más eficientes de almacenar y transferir. Incluye dictunzip [descomprimir] y dictzcat [visualizar archivos comprimidos].
 $ dictzip diccionario.dict (genera un archivo comprimido llamado diccionario.dict.dz)
@@ -35694,7 +35704,9 @@ $ mwaw2odt archivo.mwp archivo.odt (lo mismo especificando la salida)
 
 
 mwic
-[misspelled words in context - palabras mal escritas en contexto]. Es un corrector ortográfico, solo en alemán e inglés, que agrupa posibles errores ortográficos y los muestra en su contexto. Esto resulta útil para revisar documentos técnicos que suelen contener palabras no incluidas en los diccionarios estándar.
+[misspelled words in context - palabras mal escritas en contexto]. Es un corrector ortográfico, que agrupa posibles errores ortográficos y los muestra en su contexto. Esto resulta útil para revisar documentos técnicos que suelen contener palabras no incluidas en los diccionarios estándar.
+$ mwic --list-languages (listados de lenguajes del sistema)
+$ mwic -l es --compact archivo.txt (en español y omitir lineas en blanco en la salida)
 
 
 mycli
