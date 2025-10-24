@@ -35754,6 +35754,26 @@ Y agregar:
 	\setenv PAGER 'mypager'
 
 
+myrepos
+Herramienta para gestionar todos los repositorios de control de versiones entrados en el sistema. El comando mr permite extraer, actualizar o realizar otras acciones en un conjunto de repositorios como si fueran uno solo en lugar de ir repositorio por repositorio ejecutando comandos. Admite cualquier combinación de repositorios Git, SVN, Mercurial, BZR, Darcs, CVS, VCSH, Fossil y Veracity. Incluye la herramienta webcheckout
+Imaginemos que tenemos tres repositorios en el directorio ~/projects y cada uno en un subdirectorio: proyecto1 para el repo de GIT, legacy-app para el repo Subversion y python-lib para el repo Mercurial:
+$ nano  ~/.mrconfig
+  	[~/projects/proyecto1]
+	checkout = git clone git@github.com:usuario/proyecto1.git
+	[~/projects/legacy-app]
+	checkout = svn checkout https://svn.example.com/legacy-app/trunk
+	[~/projects/python-lib]
+	checkout = hg clone https://bitbucket.org/user/python-lib
+$ mr update (desde el directorio que contiene .mrconfig actualizar todos los repositorios)
+$ mr -c ~/.mrconfig update (si no estamos en el directorio de .mrconfig, especificar la ruta)
+$ mr checkout (descarga todos los repositorios configurados)
+$ mr status (ver el estado de todos los repositorios)
+$ mr run git fetch (ejecutar "git fetch" en todos los repositorios Git)
+$ mr run git log --oneline -3 (ejecutar "git log --oneline" en los últimos 3 commits)
+$ mr log (mostrar los logs de todos los repositorios)
+$ webcheckout https://bitbucket.org/atlassian/bitbucket.git (clona un repositorio desde una URL en ~/src/github.com/usuario/repositorio/)
+
+
 mysecureshell
 Herramienta creada para aportar más funcionalidades al protocolo sftp/scp ofrecido por OpenSSH y ofrecer la potencia y seguridad de OpenSSH, con funciones mejoradas (como ACL) para restringir los usuarios conectados.
 Crear un usuario con la shell restringida. Tambien puede hacerse desde la propia aplicaicón (ver):
