@@ -35665,6 +35665,14 @@ $ echo "Esto es una prueba" | mutt  -s 'asunto' destinatario@correo.com
 $ cat texto.txt | mutt -s "asunto" destinatario@correo.com
 
 
+muttdown
+Es un sustituto de sendmail diseñado para el cliente de correo electrónico mutt. Este compila de forma transparente correos de texto sin formato en HTML utilizando el estándar Markdown.
+$ echo "Hola, mundo!" | muttdown -s "Asunto" -r "destinatario@example.com" (compilará el texto "Hola, mundo!" en HTML y lo enviará como correo electrónico)
+$ echo "# Título de la nota" | muttdown -s "Asunto" -r "destinatario@example.com" (creará un correo con el título en negrita usando Markdown)
+$ echo "Hola, mundo!" | muttdown -s "Asunto" --to "destinatario1@example.com" --to "destinatario2@example.com" (enviando un correo con múltiples destinatarios)
+$ echo "Hola, mundo!" > mensaje.txt && muttdown -s "Asunto" --to "destinatario@example.com" --attach mensaje.txt (crea mensaje.txt, lo incluye como adjunto y luego envía el correo)
+
+
 mv
 Mover o renombrar archivos o directorios
 $ mv archivo archivo2 (renombrar "archivo" a "archivo2")
