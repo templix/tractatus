@@ -35754,6 +35754,25 @@ Y agregar:
 	\setenv PAGER 'mypager'
 
 
+mypy
+Es básicamente un linter de Python mejorado, capaz de detectar numerosos errores de programación analizando tu programa sin necesidad de ejecutarlo. Mypy cuenta con un potente sistema de tipos con funciones como inferencia de tipos, tipado gradual, genéricos y tipos de unión. En esencia, mypy puede decirte mucho sobre tu código antes de ejecutarlo, lo cual es sumamente útil para detectar errores y escribir código Python más robusto y mantenible.
+$ mypy miarchivo.py (si el archivo tiene algún error en la tipología lo indicará)
+1.-
+Para comenzar un nuevo proyecto con el uso de tipo hints, se puede usar la herramienta poetry, gestionador de paquetes de Python, y mypy directamente. Ejemplo:
+$ mkdir proyecto (crear una nueva carpeta para el proyecto)
+$ cd proyecto (entrar en la carpeta)
+$ poetry init (una vez instalado python3-poetry, configurar el proyecto)
+Añadir mypy como dependencia
+$ nano pyproject.toml
+       [tool.poetry.dependencies]
+       python = "3.10"
+       mypy = "0.941"
+       [tool.poetry.dev-dependencies]
+       mypy = "0.941"
+Apartir de es momento se puede ejecutar mypy en el proyecto simplemente utilizando la herramienta poetry.
+$ poetry run mypy proyecto
+
+
 myrepos
 Herramienta para gestionar todos los repositorios de control de versiones entrados en el sistema. El comando mr permite extraer, actualizar o realizar otras acciones en un conjunto de repositorios como si fueran uno solo en lugar de ir repositorio por repositorio ejecutando comandos. Admite cualquier combinación de repositorios Git, SVN, Mercurial, BZR, Darcs, CVS, VCSH, Fossil y Veracity. Incluye la herramienta webcheckout
 Imaginemos que tenemos tres repositorios en el directorio ~/projects y cada uno en un subdirectorio: proyecto1 para el repo de GIT, legacy-app para el repo Subversion y python-lib para el repo Mercurial:
@@ -35771,6 +35790,9 @@ $ mr status (ver el estado de todos los repositorios)
 $ mr run git fetch (ejecutar "git fetch" en todos los repositorios Git)
 $ mr run git log --oneline -3 (ejecutar "git log --oneline" en los últimos 3 commits)
 $ mr log (mostrar los logs de todos los repositorios)
+$ mr register (que mr detecte automáticamente repositorios en un directorio con multiples repositorios)
+$ mr update proyecto1 legaxy-app (sólo operar en algunos repositorios)
+$ mr update -X proyecto1 (excluir repositorios)
 $ webcheckout https://bitbucket.org/atlassian/bitbucket.git (clona un repositorio desde una URL en ~/src/github.com/usuario/repositorio/)
 
 
