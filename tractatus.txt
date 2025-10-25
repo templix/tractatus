@@ -35796,6 +35796,13 @@ $ mr update -X proyecto1 (excluir repositorios)
 $ webcheckout https://bitbucket.org/atlassian/bitbucket.git (clona un repositorio desde una URL en ~/src/github.com/usuario/repositorio/)
 
 
+myrescue
+Es un programa que rescata datos aún legibles de discos duros, CD-ROM, DVD, unidades flash, etc., dañados. Su propósito es similar al de ddrescue [ver], pero intenta recuperar rápidamente las áreas dañadas para procesar primero la parte intacta del disco y recuperarla posteriormente.
+# myrescue /dev/sdb disco_recuperado.img (intentará copiar los datos del disco dañado desmontado en la imagen)
+# myrescue -T 5 /dev/sdb /dev/sdc (tiempos de espera entre reintentos [5 segundos] y los datos recuperados a un disco externo [sdc])
+# myrescue -n -v /dev/sdb datos_recuperados.img (no intentar recuperar las áreas dañadas, solo las sanas y ver más detalles durante el proceso )
+
+
 mysecureshell
 Herramienta creada para aportar más funcionalidades al protocolo sftp/scp ofrecido por OpenSSH y ofrecer la potencia y seguridad de OpenSSH, con funciones mejoradas (como ACL) para restringir los usuarios conectados.
 Crear un usuario con la shell restringida. Tambien puede hacerse desde la propia aplicaicón (ver):
