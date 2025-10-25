@@ -36159,6 +36159,19 @@ Teclas interactivas:
 	u (Mostrar solamente de un usuario específico)
 
 
+n2n
+Demonio de red privada virtual [VPN] que utiliza una arquitectura Peer-to-Peer [P2P] lo que significa que los nodos pueden comunicarse directamente entre sí sin necesidad de pasar siempre por un servidor central, aunque sí requiere un nodo especial llamado supernodo para facilitar la conexión inicial y el descubrimiento de pares. Incluye las herramientas supernode [servidor de coordinación] y edge [el cliente].
+# supernode -l 1234 (iniciar un supernodo. Escucha en un puerto, por defecto 1234 y permite que los edge se registren)
+# edge -d n2n0 -a 10.1.1.10 -c mi_red -k secreto123 -l 203.0.113.10:1234 (unirse a una comunidad llamada mi_red y el supernode está en 203.0.113.10:1234)
+-d n2n0 --> nombre de la interfaz virtual, puede ser tun0, edge0, etc.
+-a 10.1.1.10 --> dirección IP única que tomará este nodo dentro de la red n2n.
+-c mi_red --> nombre de la comunidad y debe coincidir con otros nodos.
+-k secreto123 --> clave compartida para cifrado, opcional, pero recomendado.
+-l 203.0.113.10:1234 --> dirección del supernodo.
+$ ip addr show n2n0 (verificar la interfaz)
+$ ip route (muestra las rutas)
+
+
 namecheck
 Consulta nombres de proyectos que no esten tomados. Cada nuevo proyecto requiere un nombre y estos han de ser únicos. Proponer nombres es difícil para asegurarse que no esten ya en uso y esta herramienta contiene una lista de sitios y patrones para evaluar.
 $ namecheck tqñas-up84
