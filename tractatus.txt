@@ -36052,6 +36052,11 @@ Otra herramienta importante es el script "mysql_secure_installation", el cual no
 $ sudo mysql_secure_installation
 
 
+mysql_secure_installation
+Mejorar la seguridad de la instalación de MariaDB. Este programa permite establecer contraseña para las cuentas,  puede eliminar el acceso remoto, eliminar cuentas anónimas y puede eliminar bases de datos de prueba, a las que los usuarios anónimos pueden acceder de forma predeterminada.
+$ mysql_secure_installation
+
+
 mysql2dbf
 Toma los datos de una tabla de MySQL y los vuelca a un archivo en formato DBF.
 $ mysql2dbf -u usuario -p contraseña -d mi_base_de_datos -t clientes clientes_exportado.dbf (Una tabla llamada clientes en la base de datos mi_base_de_datos y se exportaa a un archivo DBF llamado clientes_exportado.dbf)
@@ -36078,11 +36083,6 @@ Crea un informe de importantes valores del estado de MySQL. Interpreta y formate
 # mysqlreport --outfile archivo (vuelca los datos en "archivo")
 
 
-mysql_secure_installation
-Mejorar la seguridad de la instalación de MariaDB. Este programa permite establecer contraseña para las cuentas,  puede eliminar el acceso remoto, eliminar cuentas anónimas y puede eliminar bases de datos de prueba, a las que los usuarios anónimos pueden acceder de forma predeterminada.
-$ mysql_secure_installation
-
-
 mysqlshow
 Mstrar información de la base de datos, tablas y columnas.
 # mysqlshow
@@ -36104,6 +36104,10 @@ $ chmod +x mysqltuner.pl
 Ejecutamos:
 # ./mysqltuner
 Nos pedirá nombre de usuario mysql o de mariadb y contraseña y mostrará el informe.
+
+
+mysqmail
+Es un conjunto de pequeños registradores [loggers] de datos para servidores de correo y FTP que guardan la información de tráfico en una base de datos MySQL. La información se divide por dominio y por usuario para facilitar la medición de todo el tráfico de un dominio determinado en tiempo real. Este paquete proporciona la infraestructura de configuración.
 
 
 mytop
