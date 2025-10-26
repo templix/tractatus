@@ -36191,6 +36191,13 @@ Reiniciar servicios
 Probar acceso web. Abrir el navegador con la URL http://localhost/nagios4
 
 
+nagvis
+[NAGios VISualization]. Herramienta gráfica y web que se integra con Nagios Core para mostrar visualmente el estado de los hosts y servicios con mapas, esquemas de red, topologías o paneles donde cada icono cambia de color según el estado [OK, WARNING, CRITICAL…].
+# a2enconf nagvis (en caso que durante la instalación no se haya habilitado)
+# systemctl reload apache2 (recargar la nueva configuración de apache2 con nagvis)
+Se accede a la página principal en un servidor local con el navegador en htts.//localhost/nagvis. Por defecto nombre usuario y contraseña son admin admin.
+
+
 namecheck
 Consulta nombres de proyectos que no esten tomados. Cada nuevo proyecto requiere un nombre y estos han de ser únicos. Proponer nombres es difícil para asegurarse que no esten ya en uso y esta herramienta contiene una lista de sitios y patrones para evaluar.
 $ namecheck tqñas-up84
