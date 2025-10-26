@@ -36198,6 +36198,15 @@ nagvis
 Se accede a la página principal en un servidor local con el navegador en htts.//localhost/nagvis. Por defecto nombre usuario y contraseña son admin admin.
 
 
+nala
+Nala es una interfaz para el gestor de paquetes APT que comparte gran parte de la misma funcionalidad, pero formatea la salida para que sea más legible. También implementa una función de historial para ver transacciones pasadas y deshacerlas/rehacerlas. Practicamente todos los argumentos de nala son iguales a los de apt.
+# vala update (equivalente a apt update)
+# vala upgrade (equivalente a apt upgrade)
+# vala history (lista de paquetes en la caché)
+# vala autoremove (equivalente a apt autoremove)
+# vala clean (limpiar caché. Equivalente a apt clean)
+
+
 namecheck
 Consulta nombres de proyectos que no esten tomados. Cada nuevo proyecto requiere un nombre y estos han de ser únicos. Proponer nombres es difícil para asegurarse que no esten ya en uso y esta herramienta contiene una lista de sitios y patrones para evaluar.
 $ namecheck tqñas-up84
