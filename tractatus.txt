@@ -36172,6 +36172,25 @@ $ ip addr show n2n0 (verificar la interfaz)
 $ ip route (muestra las rutas)
 
 
+nagios
+Es un sistema de monitorización y gestión de hosts, servicios y redes. Se trata de un metapaquete que instala tanto el demonio de monitorización como la interfaz web.
+# sudo nagios4 -v /etc/nagios4/nagios.cfg (verificar la configuración sin ejecutarla)
+# systemctl enable nagios4.service (activar el demonio en el arranque)                                                                |
+# nagios4stats (muestra el estado)
+# nagios4 /etc/nagios4/nagios.cfg (ejecuta manualmente Nagios con la configuración indicada)                             |
+1.-
+Activar la interfaz web en http://localhost/nagios
+Nagios4 usa Apache2 y los CGIs [Common Gateway Interface] para mostrar su interfaz web.
+# apt install nagios4 nagios4-cgi apache2 (asegúrar tener los paquetes instalados)
+# a2enconf nagios4-cgi (habilitar el módulo si no lo ha hecho al instalar)
+# systemctl reload apache2 (reiniciar apache2)
+# sudo htpasswd -c /etc/nagios4/htpasswd.users nagiosadmin (crear un usuario por defecto nagiosadmin)
+Reiniciar servicios
+# systemctl restart nagios4
+# systemctl restart apache2
+Probar acceso web. Abrir el navegador con la URL http://localhost/nagios4
+
+
 namecheck
 Consulta nombres de proyectos que no esten tomados. Cada nuevo proyecto requiere un nombre y estos han de ser únicos. Proponer nombres es difícil para asegurarse que no esten ya en uso y esta herramienta contiene una lista de sitios y patrones para evaluar.
 $ namecheck tqñas-up84
