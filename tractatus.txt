@@ -36206,6 +36206,22 @@ Sistema de retransmisión de mensajería para el protocolo Jabber [XMPP]. Un sis
 # systemctl enable nagzillad (habilitar el daemon en el inicio del sistema)
 
 
+nailgun
+Cliente, protocolo y servidor para ejecutar programas Java desde la línea de comandos sin la sobrecarga de inicio de la JVM [Java Virtual Machine] que debe iniciarse desde cero, lo que puede tardar varios segundos y así ejecuciones que normalmente tardan 2-3 segundos pueden completarse en menos de 100ms.
+$ java -jar nailgun-server.jar & (iniciar servidor con un JAR específico)
+$ java -cp nailgun-server.jar:tuapp.jar com.facebook.nailgun.NGServer (especificar tu propio classpath)
+$ java -cp "nailgun-server.jar:~/.m2/repository/*:target/classes" \ (iniciar servidor con el classpath del proyecto)
+El servidor queda ejecutándose en segundo plano, escuchando en el puerto 2113 por defecto.
+$ ng com.ejemplo.MiPrograma arg1 arg2 (ejecutar una clase Java)
+$ ng org.apache.tools.ant.Main clean compile (ejecutar herramientas comunes si están en el classpath)
+$ ng org.junit.runner.JUnitCore com.miapp.MiTest (ejecutar tests rápidamente)
+$ ng ng-stats (ver si el servidor está ejecutándose)
+$ ng ng-stop (detener el servidor)
+1.-
+java -cp nailgun-server.jar com.facebook.nailgun.NGServer :2114 & (cambiar puerto)
+ng --nailgun-port 2114 MiClase
+
+
 nala
 Nala es una interfaz para el gestor de paquetes APT que comparte gran parte de la misma funcionalidad, pero formatea la salida para que sea más legible. También implementa una función de historial para ver transacciones pasadas y deshacerlas/rehacerlas. Practicamente todos los argumentos de nala son iguales a los de apt.
 # vala update (equivalente a apt update)
