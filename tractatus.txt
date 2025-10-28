@@ -31327,9 +31327,12 @@ $ lxterminal --working-directory=/home/USER/Documentos (brir la terminal en un d
 lynis
 Busca en el sistema posibles debilidades de configuración sin realizar ninguna modificación.
 # lynis (Visualizar las opciones)
-# lynis --check-update (descargar actualizaciones)
-# lynis -c (lanzar el escaneo)
-# lynis --cronjob (Lanzar el escaneo sin pedir confirmaciones en cada apartado)
+# lynis audit system --forensics (análisis forenses en un sistema en ejecución o montado)
+# lynix audit system --pentest (muestra puntos de interés para pruebas de penetración)
+# lynis audit system remote <host> (Análisis de seguridad remoto)
+# lynis show (ver todos los argumentos adicionales)
+# lynis show tests (alguno de los argumentos del listado anterior. Ver todos los chequeos que realiza)
+# lynis update info (descargar actualizaciones)
 # cat /var/log/lynis.log | grep Warning (ver las vulnerabilidades)
 # cat /var/log/lynis.log | grep Suggestion (ver sugerencias que nos realiza lynis)
 
