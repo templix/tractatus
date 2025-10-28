@@ -39781,6 +39781,32 @@ $ podman stop zona_segura (parar el contenedor)
 $ podman start -ai zona_segura (volver al contenedor)
 
 
+polybar
+Ayuda a los usuarios a crear barras de estado atractivas y altamente personalizables para su entorno de escritorio
+Descargar temas:
+$ git clone --depth=1 https://github.com/adi1090x/polybar-themes.git
+$ cd polybar-themes
+$ chmod +x setup.sh
+$ ./setup.sh (crear el directorio de los temas)
+$ ls ~/.config/polybar/ (ver listado de temas instalados)
+$ ~/.config/polybar/launch.sh --hack (lanzar polybar con el tema "hack")
+$ pkill polybar (para matar el proceso para probar nuevos temas)
+Un ejemplo de como poner un script en la barra de estado:
+# nano /etc/polybar/config.ini
+Y añadir:
+	[module/ip_externa]
+	format-prefix = "IP "
+	format-prefix-foreground = ${colors.primary}
+	type = custom/script
+	exec = ~/.config/polybar/scripts/ip_externa.sh
+	interval = 1200
+	tail = true
+El script lo tenemos donde indica el parámetro "exec" y su contenido es:
+$ nano ~/.config/polybar/scripts/ip_externa.sh
+	#!/bin/bash
+        wget -O - -q http://checkip.dyndns.org/ | cut -d':' -f2 | cut -d'<' -f1| cut -c2-
+
+
 pom (bsdgames)
 Informa de las fases de la luna.
 $ pom
