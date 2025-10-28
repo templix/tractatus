@@ -36201,6 +36201,11 @@ nagvis
 Se accede a la página principal en un servidor local con el navegador en htts.//localhost/nagvis. Por defecto nombre usuario y contraseña son admin admin.
 
 
+nagzilla
+Sistema de retransmisión de mensajería para el protocolo Jabber [XMPP]. Un sistema de retransmisión significa que puede tomar mensajes desde una sala de chat, dentro del protocolo Jabber y reenviarlos a otro lugar, como una sala distinta o a contactos específicos. Se divide en dos programas: nagzillad: el demonio que se encuentra en la sala y envía los mensajes, y nagzillac: el cliente que recibe los mensajes y se los entrega al demonio.
+# systemctl enable nagzillad (habilitar el daemon en el inicio del sistema)
+
+
 nala
 Nala es una interfaz para el gestor de paquetes APT que comparte gran parte de la misma funcionalidad, pero formatea la salida para que sea más legible. También implementa una función de historial para ver transacciones pasadas y deshacerlas/rehacerlas. Practicamente todos los argumentos de nala son iguales a los de apt.
 # vala update (equivalente a apt update)
