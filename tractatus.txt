@@ -36330,6 +36330,27 @@ nano-tiny
 es una versión especial y minimalista del programa nano [ver], diseñada para los disquetes de arranque o discos de emergencia de Debian.
 
 
+nanoc
+es un generador de sitios estáticos que toma archivos fuente como Markdown, HTML, Sass, etc, los procesa mediante reglas y produce un sitio web estático listo para ser desplegado. La clave es que el sitio generado es una colección de archivos HTML, CSS y JavaScript que no requieren una base de datos ni procesamiento del lado del servidor.
+$ mkdir blog
+$ nanoc create-site blog (crear la estructura del sitio)
+      create  Gemfile
+      create  nanoc.yaml
+      create  Rules
+      create  content/index.html
+      create  content/stylesheet.css
+      create  layouts/default.html
+      Created a blank Nanoc site at 'blog'. Enjoy!
+content/ --> Contiene los archivos fuente del sitio: páginas, publicaciones...
+layouts/ --> Contiene plantillas como headers y footers, para dar formato al contenido.
+lib/ --> Para código Ruby personalizado: filtros, helpers...
+Rules --> Donde se define cómo se deben procesar los archivos.
+nanoc.yaml --> Opciones de configuración generales.
+$ bundle3.3 exec nanoc (compilar el sitio)
+$ nanoc compile (creará una carpeta llamada output/ que contendrá todos los archivos HTML, CSS y demás generados, listos para ser subidos a un servidor web)
+$ nanoc view (el sitio estará accesible en http://localhost:3000)
+
+
 nanoid
 Crea contraseñas.
 $ nanoid -s 10 (de 10 letras mayúsculas y minúsculas)
