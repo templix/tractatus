@@ -36351,6 +36351,15 @@ $ nanoc compile (creará una carpeta llamada output/ que contendrá todos los ar
 $ nanoc view (el sitio estará accesible en http://localhost:3000)
 
 
+nanofilt
+Herramienta de línea de comandos diseñada para el filtrado y recorte de datos de secuenciación de lecturas largas. Su función principal es permitir a los usuarios filtrar y procesar secuencias de ADN o ARN obtenidas a través de tecnologías de secuenciación de nueva generación.
+$ nanofilt -q 10 < input.fastq > output.fastq (filtrar las secuencias con una calidad mínima de 10 de un archivo de secuencias de ADN en formato FASTQ y salida output.fastq)
+$ nanofilt -l 1000 < input.fastq > output.fastq (filtrar secuencias con una longitud mínima de 1000 pb)
+$ nanofilt -q 10 -l 1000 < input.fastq > output.fastq (filtrar secuencias con una calidad mínima de 10 y una longitud mínima de 1000 pb)
+$ nanofilt -q 10 -l 1000 --trim < input.fastq > output.fastq (recortar las secuencias después de pasar los filtros)
+$ nanofilt -q 10 -l 1000 --trim input.fastq > output.fastq (leer directamente desde un archivo sin comprimir)
+
+
 nanoid
 Crea contraseñas.
 $ nanoid -s 10 (de 10 letras mayúsculas y minúsculas)
