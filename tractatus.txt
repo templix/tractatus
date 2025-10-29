@@ -37234,6 +37234,21 @@ $ nodau append linux (añadir datos a la entrada "linux" sin sobreescribirla)
 $ nodau del linux (elimina la nota "linux")
 
 
+node
+Node.js es un entorno o motor que permite ejecutar JavaScript fuera del navegador, normalmente en un servidor. Ver npm
+$ nano servidor.js
+       // servidor.js
+       const http = require('http');
+       const server = http.createServer((req, res) => {
+         res.end('Linux es un sistema genial');
+       });
+       server.listen(3000, () => {
+         console.log('Servidor escuchando en http://localhost:3000');
+       });
+$ node servidor.js (ejecutar)
+Y se tendrá un servidor web que responde con "Linux es un sistema genial" en http://localhost:3000.
+
+
 nohup
 permite mantener activo un proceso, incluso después de haber cerrado la sesión de usuario.
 $ nohup sleep 10000 &   (lanzar el proceso)
@@ -37308,19 +37323,31 @@ Detecta productos vulnerables en el entorno de sistema. El método de escaneo co
 
 
 npm
-Gestor de paquetes para la plataforma JavaScript Node. Coloca los módulos en su lugar para que Node pueda encontrarlos y gestiona los conflictos de dependencias de forma inteligente. Más comúnmente, se utiliza para publicar, descubrir, instalar y desarrollar programas node. Los paquetes se pueden instalar de forma global o local. Cuando un paquete se instala globalmente, podemos hacer uso de la funcionalidad del paquete desde cualquier directorio de nuestro ordenador. Por otro lado, si instalamos un paquete localmente, sólo podemos hacer uso de él en el directorio donde fue instalado.
-# npm i (instala todos los modulos necesarios)
-# npm init --yes (inicializar un proyecto. Se crea el archivo package.json)
-# npm up -g paquete1 paquete2 (actualiza a la última versión paquete1 y paquete2)
-# npm i paquete -g (instalar un paquete de forma global)
-# npm c onfig list (ver ubicación de los paquetes globales npm)
-# npm list -g (listar los paquetes globales instalados)
-# npm outdated -g  (ver qué paquetes deben actualizarse)
-# npm run (lista de scripts disponibles)
-# npm restart (reiniciar un proyecto)
-# npm star (arrancar un proyecto)
-# npm stop (parar proyecto)
-# npm -g uninstall paquete (desinstalar un paquete global)
+[Node Package Manager]. Es el gestor de paquetes para la plataforma JavaScript Node.js [ver node]. Coloca los módulos en la ubicación adecuada para que Node.js pueda encontrarlos y gestiona los conflictos de dependencias de forma inteligente. Se utiliza principalmente para publicar, actualizar, gestionar módulos, descubrir, instalar y desarrollar programas Node.js. Incluye las herramientas arborist, npm-arborist, npx, pacote y qrcode-terminal
+Ejemplo de crear un proyecto y usar npm
+$ mkdir mi-proyecto
+$ cd mi-proyecto
+$ npm init -y (crea package.json con configuración básica)
+$ npm install express (instala el framework web "Express" dentro del proyecto. El archivo package.json ahora sabrá que el proyecto depende de Express)
+$ node server.js (arrancar el servidor. Si es en local con http://localhost:3000)
+$ node -e "require('npm-arborist')().loadActual().then(tree => console.log(tree.inventory.size))" (mostrar el número de dependencias realmente instaladas en el proyecto)
+$ npx cowsay "Hola desde npx" (descargará temporalmente el paquete "cowsay" y lo ejecutará)
+$ npx eslint . (ejecutar una herramienta local del proyecto aunque esté instalada solo en el proyecto)
+$ npm fund (ver detalles de paquetes)
+$ npm uninstall express (desinstalar un módulo)
+$ npm update (actualizar todo)
+$ npm run start (ejecutar scripts definidos en package.json)
+$ npm init --yes (inicializar un proyecto. Se crea el archivo package.json)
+$ npm up -g paquete1 paquete2 (actualiza a la última versión paquete1 y paquete2)
+$ npm i paquete -g (instalar un paquete de forma global)
+$ npm c onfig list (ver ubicación de los paquetes globales npm)
+$ npm list -g (listar los paquetes globales instalados)
+$ npm outdated -g  (ver qué paquetes deben actualizarse)
+$ npm run (lista de scripts disponibles)
+$ npm restart (reiniciar un proyecto)
+$ npm star (arrancar un proyecto)
+$ npm stop (parar proyecto)
+pacote es el módulo que usa npm para descargar e instalar paquetes desde el registro [npmjs.com]. Es una librería técnica, no un comando de uso común.
 
 
 nproc
