@@ -37350,6 +37350,13 @@ $ npm stop (parar proyecto)
 pacote es el módulo que usa npm para descargar e instalar paquetes desde el registro [npmjs.com]. Es una librería técnica, no un comando de uso común.
 
 
+npm2deb
+Esta aplicación simplifica el empaquetado de módulos de Node.js disponibles a través de npm. También permite listar las dependencias de los módulos y comprobar cuáles ya están disponibles como paquetes Debian.
+$ npm2deb view wscat (ver información sobre un módulo)
+$ npm2deb depends pacote (ver si un módulo tiene dependencias)
+$ npm2deb search spawn-wrap (buscar un módulo)
+
+
 nproc
 Muestra el número de procesadores o cores.
 # nproc
