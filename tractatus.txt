@@ -36404,6 +36404,32 @@ Detectar usuarios, inalámbricos o no, de una red local. Como herramienta de an�
 # nast -c -B (comprueba si alguien está envenenando con arp)
 
 
+nat-traverse
+Establece conexiones entre nodos que se encuentran detrás de gateways NAT, es decir, hosts que no tienen direcciones IP públicas. Es una herramienta que permite la comunicación directa entre dos máquinas que están detrás de NAT sin necesidad de servidores intermediarios ni reconfiguración de routers ni configuración adicional.
+# nat-traverse --server 5000 ssh -p %p localhost (en el host A el que actúa como "servidor")
+# nat-traverse --client 5000 <IP_publica_A> ssh -p %p usuario@localhost (en el host B, el cliente. La variable %p es reemplazada automáticamente por el puerto UDP negociado)
+# nat-traverse --client 6000 <IP_A> nc %p < archivo_enviar.tar.gz (enviar un archivoo en host B. el emisor)
+# nat-traverse --server 6000 nc -l -p %p > archivo_recibido.tar.gz (recibir archivo en host A,  el receptor)
+# nat-traverse --server 5555 pppd updetach noauth passive notty ipparam vpn 10.0.0.1:10.0.0.2 (VPN con pppd en host A)
+# nat-traverse --client 5555 <IP_A> pppd updetach noauth notty ipparam vpn 10.0.0.2:10.0.0.1 (VPN en host B)
+# nat-traverse --server 5900 vncviewer localhost:%p (escritorio remoto [VNC] en host A)
+# nat-traverse --client 5900 <IP_A> x11vnc -display :0 -rfbport %p (en host B)
+# nat-traverse --server 8000 rsync -av --port=%p /ruta/origen/ destino/ (sincronización con rsync en host A)
+# nat-traverse --client 8000 <IP_A> rsync -av --port=%p origen/ /ruta/destino/ (sincronización con rsync en host B)
+Nota.- No es cifrado. nat-traverse solo establece el túnel el cifrado depende del protocolo que se use, SSH lo proporciona, netcat no.
+1.-
+Ejemplo práctico
+Acceder por SSH desde una laptop fuera de casa al PC de casa, detrás de un router doméstico:
+En casa
+$ curl ifconfig.me (obtener IP pública)
+Supongamos que devuelve 203.0.113.45
+Iniciar nat-traverse
+$ nat-traverse --keepalive 25 --server 4500 ssh -p %p localhost
+Des de la laptop fuera de casa:
+$ nat-traverse --keepalive 25 --client 4500 203.0.113.45 ssh -p %p usuario@localhost
+Se establecerá una sesión SSH directa sin configurar port forwarding en el router
+
+
 native-architecture
 Metapaquete que solo existe para declarar una dependencia lógica relacionada con la arquitectura del sistema.
 $ dpkg --print-architecture (ver arquitectura nativa)
