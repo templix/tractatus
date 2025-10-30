@@ -36378,6 +36378,15 @@ Detectar usuarios, inalámbricos o no, de una red local. Como herramienta de an�
 # nast -c -B (comprueba si alguien está envenenando con arp)
 
 
+native-architecture
+Metapaquete que solo existe para declarar una dependencia lógica relacionada con la arquitectura del sistema.
+$ dpkg --print-architecture (ver arquitectura nativa)
+Si un paquete contiene la caracteristica:
+      Depends: native-architecture
+Solo está diciendo que se puede instalar si el sistema amd64 coincide con la arquitectura nativa aunque esté habilitada con Multi-Arch [dpkg --add-architecture i386]
+$ apt show native-architecture (mostrar descripción)
+
+
 nautilus
 Navegador de archivos de gnome
 $ nautilus -q  (salir de nautilus)
