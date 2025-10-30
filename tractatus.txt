@@ -20907,6 +20907,27 @@ ghostscript
 Intérprete del lenguaje PostScript® y de archivos PDF. Incluye las aplicaciones: dvipdf, eps2eps, gs, gsbj, gsdj, gsdj500, gslj, gslp, gsnd, pdf2dsc, pdf2ps, pf2afm, pfbtopfa, pphs, printafm, ps2ascii, ps2epsi, ps2pdf, ps2pdf12, ps2pdf13, ps2pdf14, ps2pdfwr, ps2ps, ps2ps2, ps2txt y update-gsfontmap
 
 
+ghostty
+Emulador de terminal moderno. Configuración en ~/.config/ghostty/config
+$ ghostty +list-themes (ver los temas disponibles. El escogido se anota en el archivo de configuración [theme = Dark Pastel]
+$ ghostty +list-fonts (listado de fuentes)
+$ ghostty +edit-config (editar la configuración)
+$ ghostty +validate-config (validar la configuración)
+$ ghostty +show-config (ver la configuración actual)
+$ ghostty +list-actions (ver las acciones)
+$ ghostty +list-keybinds (ver los atajos de teclado)
+Una muestra del archivo de configuración:
+$ nano ~/.config/ghostty/config
+       font-family = "Monospace"
+       font-size = 14
+       theme = Adventure
+       copy-on-select = clipboard
+       window-decoration = none
+       shell-integration = bash
+       window-height = 19
+       window-width = 105
+
+
 gifwrap
 Mostrar archivo GIF en la terminal convirtiendo los fotogramas del GIF en caracteres ASCII o utilizando colores de terminal.
 $ gifwrap animacion.gif (visualizar un GIF en la terminal)
