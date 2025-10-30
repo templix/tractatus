@@ -36460,6 +36460,15 @@ Solo está diciendo que se puede instalar si el sistema amd64 coincide con la ar
 $ apt show native-architecture (mostrar descripción)
 
 
+natlog
+Utilidad de registro de firewall con NAT de origen. Los firewalls como iptables suelen ofrecer funciones de traducción de direcciones de red de origen POSTROUTING que cambian la dirección de origen de un host detrás del firewall a la dirección del host antes del firewall. Las funciones de registro estándar de iptables no permiten fácilmente asociar las direcciones detrás del firewall con sus equivalentes con NAT de origen antes del firewall. Natlog se diseñó para cubrir esta necesidad específica. Al ejecutar natlog, se envían mensajes al demonio syslog o a la salida estándar, mostrando las características esenciales de la conexión mediante NAT de origen.
+# systemctl enable natlog (activar el servicio al iniciar el sistema)
+# natlog -s tun0 eth0 (captura paquetes en tun0 [interno] y eth0 [externo]. Se ejecuta como demonio, enviando logs a syslog. Verlos con tail -f /var/log/syslog)
+# natlog --no-daemon --no-syslog -s tun0 eth0 (ejecución en primer plano [foreground] con salida a stdout, sin syslog)
+# natlog --time --protocol udp -s br0 eth0 (con timestamps legibles por humanos y solo protocolo UDP)
+# natlog conntrack (listar conexiones actuales en lugar de capturar paquetes en vivo)
+
+
 nautilus
 Navegador de archivos de gnome
 $ nautilus -q  (salir de nautilus)
