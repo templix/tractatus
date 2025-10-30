@@ -36366,6 +36366,32 @@ $ nanoid -s 10 (de 10 letras mayúsculas y minúsculas)
 $ nanoid -s 15 -a .,-rtadls:_ (de 15 aracteres usando los signos y letras especificados con -a)
 
 
+nas
+Este paquete contiene el demonio NAS [Network Audio System], necesario para la salida de audio del servidor local para que los dispositivos de audio como reproductores, micrófonos, altavoces, etc. se conecten entre sí y con estaciones de trabajo a través de una red para reproducir, grabar y manipular datos. Incluye la aplicación start-nas
+# start-nas (poner el daemon en marxa)
+# nasd -aa -local (permite conexión de cualquier cliente y solo de clientes en el host local)
+
+
+nas-bin
+Cliente para el servidor de audio NAS [ver]. Incluye las aplicaciones auconvert, auctl, audemo, audial, auedit, auinfo, aupanel, auphone, auplay, aurecord, auscope, autool, auwave, checkmail, issndfile, playbucket y soundtoh.
+$ auconvert input.au output.wav (convierte un archivo de audio de formato .au a .wav)
+$ auctl volume 75 (ajusta el volumen al 75%)
+$ audemo (ejecuta la demo interactiva)
+$ audial 123456789 (intenta marcar el número de teléfono especificado usando un módem compatible con NAS. Solo red de Norte America)
+$ auedit archivo.au (abre el archivo de audio para edición básica)
+$ auinfo (muestra información sobre el servidor NAS y los dispositivos de audio disponibles)
+$ aupanel (panel de control gráfico para NAS)
+$ auphone usuario@servidor (inicia una llamada de voz al usuario especificado)
+$ auplay archivo.wav (reproduce un archivo de audio a través del servidor NAS)
+$ aurecord salida.au (graba audio desde el micrófono o entrada de línea usando NAS y lo guarda en salida.au)
+$ auscope (osciloscopio de audio, muestra visualmente la forma de onda del audio)
+$ auwave (demuestra el uso de formas de onda)
+$ checkmail (reproduce un sonido cuando llega correo nuevo)
+$ issndfile archivo.au (Comprueba si un archivo está en un formato de archivo de audio reconocido)
+$ playbucket -volume 50 ~/Música (reproduce todos los archivos de sonido en el directorio especificado al 50$ del volumen [0-100])
+$ soundtoh archivo.au (convertir un archivo de sonido a un archivo de cabecera de lenguaje C)
+
+
 nast
 Detectar usuarios, inalámbricos o no, de una red local. Como herramienta de análisis, tiene muchas características como:  Crear lista de hosts LAN, Seguir secuencias TCP-DATA, Encontrar puertas de enlace a Internet LAN, Descubre nodos promiscuos, Restablece conexiones establecidas, Realizar escáner de puertos medio abiertos, Buscar tipos de enlaces, Capturar banners del demonio de los nodos LAN, Controlar respuestas arp para descubrir posibles suplantaciones ...
       # nast (de forma interactiva informa de paquetes recibidos y los descartados por el kernel)
