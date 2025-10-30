@@ -28249,16 +28249,16 @@ $ ./install.sh
 kitty
 Emulador de terminal.
 Algunas combinaciones de teclas:
-    C+S+t ─ Crear una pestaña nueva.
-    C+S+q ─ Cerrar una pestaña.
-    C+S+→ ─ Pestaña siguiente.
-    C+S+← ─ Pesstaña anterior.
-    C+S+. ─ Mover a la derecha la pestaña.
-    C+S+, ─ Mover a la izquierda la pestaña.
-    C+S+enter ─ Nueva ventana.
-    C+S+n ─ Crear marco nuevo.
-    C+S+1 ─ Mover foco a la ventana 1 (2,3,...)
-    C+S+l ─ Cambiar la distribución de las ventanas
+    C+S+t --> Crear una pestaña nueva.
+    C+S+q --> Cerrar una pestaña.
+    C+S+→ --> Pestaña siguiente.
+    C+S+← --> Pesstaña anterior.
+    C+S+. --> Mover a la derecha la pestaña.
+    C+S+, --> Mover a la izquierda la pestaña.
+    C+S+enter --> Nueva ventana.
+    C+S+n --> Crear marco nuevo.
+    C+S+1 --> Mover foco a la ventana 1 (2,3,...)
+    C+S+l --> Cambiar la distribución de las ventanas
 La distribución de ventanas puede ser:
     Fat: Ventana arriba ocupando todo el ancho y las demás abajo una al lado de la otra.
     Grid: Todas las ventanas en una rejilla repartiendo el espacio entre todas.
@@ -28266,6 +28266,17 @@ La distribución de ventanas puede ser:
     Stack: Las ventanas ocupando todo el marco.
     Tall: Ventana en la izquierda ocupando todo el alto y el resto a la derecha una encima de otra.
     Vertical: Ventanas todas apiladas unas encima de otras.
+Muestra de archivo de configuración:
+$ nano ~/.config/kitty/kitty.conf
+       font_family      monospace
+       font_size        12
+       enable_audio_bell no
+       shell bash
+       remember_window_size    yes
+       #initial_window_width  640
+       #initial_window_height 400
+       remember_window_position no
+       hide_window_decorations yes
 
 
 kmod
