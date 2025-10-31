@@ -36579,6 +36579,19 @@ $ ncal -A 2 (los proximos tres meses [0,1 y 2])
 $ ncal -B 2 (los anteriores tres meses [2, 1 y 0])
 
 
+ncaptool
+Utilidad para capturar y analizar tráfico de redes similar a libpcap diseñada para ser una alternativa a tcpdump.
+# ncaptool -i eth0 (capturar paquetes en una interfaz)
+# ncaptool -i eth0 -w captura.pcap (guardar la captura en un archivo)
+# ncaptool -r captura.pcap (leer un archivo de captura)
+# ncaptool -i eth0 tcp (filtrar por protocolo)
+# ncaptool -i eth0 host 192.168.1.1 (filtrar por dirección IP)
+# ncaptool -i eth0 port 80 (filtrar por puerto)
+# ncaptool -i eth0 -c 10 (limitar el número de paquetes capturados a 10)
+# ncaptool -i eth0 -v (mostrar información detallada de los paquetes)
+# ncaptool -i eth0 "greater 100" (captura solo paquetes mayores a 100 bytes)
+
+
 ncdt
 Muestra un árbol de directorios muy parecido al árbol estándar del comando tree[ver]. Imprime información resumida en lugar del tamaño de archivo especial del directorio e información sobre archivos mp3.
 Es particularmente útil para indexar CDs.
