@@ -36527,6 +36527,22 @@ Atajos
 	F2 (Renombrar carpeta)
 
 
+nbdkit
+Kit de herramientas para crear servidores NBD [Network Block Device], un protocolo que permite acceder a dispositivos de almacenamiento en bloque, como discos duros, imágenes de disco o volúmenes virtuales, a través de una red, como si fueran dispositivos locales.
+$ nbdkit -f file disk.img (ejecuta en primer plano)
+$ nbdkit -p 10810 file disk.img (dirección IP para escuchar, por defecto todas las interfaces)
+$ nbdkit -v -i 127.0.0.1 file disk.img (mensajes detallados)
+$ nbdkit -r file disk.img (exporta el dispositivo como solo lectura)
+$ nbdkit --filter=partition file disk.img partition=1 (aplica un filtro, "partition" para particiones, "xz" para compresión)
+Filtro "xz" descomprime sobre la marcha y el filtro "partition" limita al offset de la partición 1 [detecta automáticamente].
+$ nbdkit --tls=require file disk.img (requiere conexiones encriptadas)
+$ nbdkit --run 'guestfish -a nbd://localhost' file disk.img (ejecuta un comando cliente y mata nbdkit al terminar)
+$ nbdkit -U /tmp/nbd.sock file disk.img (usa un socket Unix en lugar de TCP)
+$ nbdkit --filter=partition --filter=xz file disk.img.xz partition=1 (aplica filtros "partition" y "xz" para extraer la partición 1 de disk.img.xz)
+$ nbdkit --filter=error --filter=delay memory size=100M error-rate=10% rdelay=1 wdelay=1 (simula un disco de 100 MB en RAM, agregando errores y delays para probar clientes)
+$ nbdkit --tls=require --run 'guestfish --rw -a nbd://localhost' file disk.img (sirve un archivo con TLS requerido y ejecuta guestfish automáticamente al inicio)
+
+
 nbsdgames
 Juegos para la terminal. Colección de juegos textuales con IA, modo de 2 jugadores, tamaño de tablero flexible, color, compatibilidad con mouse, etc. Incluye los siguientes:  battleship, checkers, fifteen, fisher, jewels, memoblocks, miketron, mines, muncher, pipes, rabbithole, redsquare, reversi, sos y sudoku.
 
