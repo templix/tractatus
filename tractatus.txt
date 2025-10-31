@@ -36480,6 +36480,14 @@ Utilidad de registro de firewall con NAT de origen. Los firewalls como iptables 
 # natlog conntrack (listar conexiones actuales en lugar de capturar paquetes en vivo)
 
 
+nats-server
+Servidor de comunicaciones sencillo, seguro y de alto rendimiento para sistemas, servicios y dispositivos digitales. El servidor puede ejecutarse localmente, en la nube, en el edge e incluso en una Raspberry Pi. Es el daemon principal que ejecuta una instancia de NATS [https://nats.io/], una red de distribución de mensajes [Message Queue based] que permite enviar y recibir mensajes de forma confiable y entre varios servicios. Configuración en /etc/nats-server.conf
+$ nats-server -c (inicia un servidor Nats que no utiliza una configuración predefinida y crea un archivo de configuración al iniciar)
+$ nats-server -m security (inicia el servidor en modo seguro. Bloquea la transmisión de mensajes no solicitados y requiere autenticación y autorización para enviar y recibir mensajes)
+$ docker run -p 4222:4222 -v /path/to/config:/etc/nats/nats.conf nats (iniciar un servidor Nats en un contenedor, especificando el puerto y el archivo de configuración)
+$ nats-server stop (detener el servidor Nats)
+
+
 nautilus
 Navegador de archivos de gnome
 $ nautilus -q  (salir de nautilus)
