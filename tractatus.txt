@@ -36592,6 +36592,13 @@ Utilidad para capturar y analizar tráfico de redes similar a libpcap diseñada 
 # ncaptool -i eth0 "greater 100" (captura solo paquetes mayores a 100 bytes)
 
 
+ncdc
+Programa para compartir archivos mediante protocolos Direct Connect [DC]. Es compatible con varios clientes populares como EiskaltDC++, DC++, AirDC++, FlylinkDC++ y otros que utilizan estos protocolos. Ncdc también es interoperable con todo el software de concentrador DC [servidores] común que utiliza los protocolos DC y Advanced DC. Su función principal es actuar como un cliente o nodo en la red de intercambio de archivos basada en DC, permitiendo a los usuarios compartir y buscar archivos en la red.
+$ ncdc -n MiUsuario -m dc.server.com:411 -c (define nombre de usuario en la red DC y el host y puerto del servidor a conectar.)
+$ ncdc -n MiUsuario -u "Mi Red" -g grupo (nombre de la red o grupo a unirse y grupo de chat o canal)
+$ ncdc -d /ruta/a/compartir -n MiUsuario -m dc.server.com:411 (especifica la ruta del directorio que se desea compartir en la red)
+
+
 ncdt
 Muestra un árbol de directorios muy parecido al árbol estándar del comando tree[ver]. Imprime información resumida en lugar del tamaño de archivo especial del directorio e información sobre archivos mp3.
 Es particularmente útil para indexar CDs.
