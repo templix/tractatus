@@ -36691,6 +36691,20 @@ Un ejemplo completo de auditoría a un servidor podría ser
 $ ncrack -v -U common_users.txt -P top_1000_passwords.txt --connection-limit 5 -T3 -oN audit_results.txt ssh://192.168.1.100 ftp://192.168.1.100 http://192.168.1.100
 
 
+ncurses-bin
+Programas y páginas de manual relacionados con terminales. Las rutinas de la biblioteca ncurses ofrecen un método independiente de la terminal para actualizar las pantallas de caracteres con una optimización razonable. Este paquete contiene los programas utilizados para manipular la base de datos terminfo y las entradas individuales de terminfo, así como algunos programas para reiniciar terminales, entre otras funciones. Incluye las aplicaciones clear [ver], infocmp [ver], tabs, tic, toe [ver], tput [ver] y tset [ver]  .
+$ tabs 4 (tabuladores cada 4 columnas)
+$ tabs -d (restaurar configuración por defecto)
+1.-
+Ejemplo  de crear un terminal personalizado
+$ nano mifancy.ti
+mifancy|Mi terminal chulo,
+	colors#256, bold=\E[1m, setaf=\E[3%p1%dm, clear=\E[H\E[2J,
+$ tic mifancy.ti (compilar)
+$ export TERM=mifancy
+$ tput clear
+
+
 ncurses-doc
 Contiene una introducción a la escritura de programas con ncurses y una guía de los aspectos internos de la biblioteca ncurses. También incluye las páginas de manual de las bibliotecas. Colocar en el navegador la url /usr/share/doc/ncurses-doc/html/index.html
 
