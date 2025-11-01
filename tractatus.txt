@@ -36663,6 +36663,34 @@ $ uncompress.real archivo.txt.Z (descomprimir. Elimina el .Z)
 $ uncompress -c archivo.txt.Z > archivo_recuperado.txt (descomprimir a stdout. Mantiene el .Z)
 
 
+ncrack
+Herramienta cracker de autenticación de red de alta velocidad diseñado específicamente para probar la fortaleza de contraseñas en diversos servicios y protocolos de red. Fue creada para ayudar a proteger redes mediante pruebas proactivas de todos los hosts y dispositivos de red en busca de contraseñas débiles. Se diseñó con un enfoque modular, una sintaxis de línea de comandos similar a Nmap y un motor dinámico que adapta su comportamiento según la información de la red.
+$ ncrack -v ssh://192.168.1.100 (ataque a servicio SSH con diccionario por defecto)
+$ ncrack -v -u admin -P passwords.txt ssh://192.168.1.100 (especificando usuario y diccionario personalizado)
+$ ncrack -v ssh://192.168.1.100 ftp://192.168.1.100 http://192.168.1.100 (escanear SSH, FTP y HTTP en un mismo objetivo)
+$ ncrack -v ssh://192.168.1.100:2222 ftp://192.168.1.100:2121 (especificando puertos no estándar)
+$ ncrack -U users.txt -P passwords.txt ssh://192.168.1.100 (usando diferentes diccionarios)
+$ ncrack -U users_pass.txt -P users_pass.txt ssh://192.168.1.100 (mismo archivo para usuarios y contraseñas)
+$ ncrack -v http://192.168.1.100 (ataque de autenticación HTTP básica)
+$ ncrack -v https://192.168.1.100 (lo mismo con HTTPS)
+$ ncrack -v http://192.168.1.100/admin (especificando ruta de autenticación)
+$ ncrack -v mysql://192.168.1.100 (ataque a base de datos)
+$ ncrack -v pgsql://192.168.1.100 (lo mismo en base de datos PostgreSQL)
+$ ncrack -v mysql://192.168.1.100:3306/database_name (especificando base de datos)
+$ ncrack -T5 ssh://192.168.1.100 (ataque más rápido. Puede ser detectado más fácilmente)
+$ ncrack -T1 ssh://192.168.1.100 (ataque sigiloso. Más lento)
+$ ncrack --connections 10 ssh://192.168.1.100 (límite de conexiones simultáneas a 10)
+$ ncrack --delay 1s ssh://192.168.1.100 (delay entre intentos)
+$ ncrack -v ssh://192.168.1.100,192.168.1.101,192.168.1.102 (escaneo múltiples hosts)
+$ ncrack -v ssh://192.168.1.1-50 (escaneo de un rango de IPs)
+$ ncrack -v -v ssh://192.168.1.0/24 (máxima información y escaneo de red completa)
+$ ncrack -oN resultados.txt ssh://192.168.1.100 (guardar resultados en archivo)
+$ ncrack -oX resultados.xml ssh://192.168.1.100 (guardar resultados en formato XML)
+$ ncrack --resume sesion_guardada ssh://192.168.1.100 (continuar sesión previa)
+Un ejemplo completo de auditoría a un servidor podría ser
+$ ncrack -v -U common_users.txt -P top_1000_passwords.txt --connection-limit 5 -T3 -oN audit_results.txt ssh://192.168.1.100 ftp://192.168.1.100 http://192.168.1.100
+
+
 ncurses-doc
 Contiene una introducción a la escritura de programas con ncurses y una guía de los aspectos internos de la biblioteca ncurses. También incluye las páginas de manual de las bibliotecas. Colocar en el navegador la url /usr/share/doc/ncurses-doc/html/index.html
 
