@@ -36654,6 +36654,15 @@ Algunas teclas de control:
 	> (Tema siguiente)
 
 
+ncompress
+Programas originales de compresión/descompresión Lempel-Ziv [LZW] que fueron el estándar de facto de UNIX.
+$ compress archivo.txt (comprimir un archivo. Crea archivo.txt.Z y elimina el original)
+$ compress -v -f -c archivo.txt > archivo.txt.Z (comprimir manteniendo el original en modo verbose y forzar aunque no ahorre espacio)
+$ compress -b 12 archivo.txt (comprimir con diferentes niveles. 9-16 bits, por defecto 16)
+$ uncompress.real archivo.txt.Z (descomprimir. Elimina el .Z)
+$ uncompress -c archivo.txt.Z > archivo_recuperado.txt (descomprimir a stdout. Mantiene el .Z)
+
+
 ncurses-doc
 Contiene una introducción a la escritura de programas con ncurses y una guía de los aspectos internos de la biblioteca ncurses. También incluye las páginas de manual de las bibliotecas. Colocar en el navegador la url /usr/share/doc/ncurses-doc/html/index.html
 
