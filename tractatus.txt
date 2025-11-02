@@ -5374,6 +5374,7 @@ $ cat < /sys/class/net/eth1/address (Muestra la dirección MAC)
 $ cat /etc/services | grep http (Visualizar puertos por los que corre http)
 $ cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 10 | sed 1q (generar una contraseña de 10 caracteres)
 $ cat listado.txt / | sed -e :a -e 's/^.\{1,20\}$/&_/;ta'  (coloca los nombres del listado uno detrás de otro y completa hasta 20 caracteres [1,10] con un guión bajo [&_])
+$ cat /proc/$(ps -o ppid= -p $$ | tr -d ' ')/comm (muestra el nombre de la terrminal que está corriendo: lsterminal, tilda, kitty...)
 
 
 catatonic
@@ -40580,6 +40581,7 @@ $ ps -l PID  (informa de la aplicación que corre por un PID)
 $ ps -p $$ (informa del pid de la propia terminal)
 $ ps axo pid=,stat= | awk '$2~/^Z/ { print $1 }' (Ver PID de los procesos zombies)
 $ ps -a (muestra lo que se está ejecutando en ttys conocidas)
+$ ps -p $(ps -o ppid= -p $$) -o comm= (da el nombre de la terminal que está corriendo: tilda, kitty, lxterminal...)
 flags:
 	USER (usuario que ejecuta el proceso)
 	PID (número del proceso)
