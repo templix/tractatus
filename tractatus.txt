@@ -36765,6 +36765,57 @@ $ addr2name 2001:db8::1 (muestra el nombre de host correspondiente a la direcci�
 $ dnssort 2001:db8::1 2001:4860:4860::8888 (ordena una lista de direcciones según la preferencia local de rutas o configuraciones, mostrando la mejor opción en primer lugar)
 
 
+ndppd
+[Neighbor Discovery Protocol Proxy Daemon]. Es un daemon que funciona como proxy para el protocolo NDP [Neighbor Discovery Protocol] en IPv6 entre dos o más interfaces. Su propósito principal es permitir que dispositivos en diferentes subredes IPv6 se comuniquen como si estuvieran en la misma red local, sin necesidad de configuraciones especiales en el kernel Linux. En redes IPv6, el protocolo NDP reemplaza a ARP de IPv4 para la resolución de direcciones. Normalmente, los routers no reenvían mensajes NDP entre subredes.
+Ejemplo de configuración básica
+# nano /etc/ndppd.conf
+route-ttl 30000
+proxy eth0 {
+    router yes
+    timeout 500
+    ttl 30000
+    # Regla para todas las direcciones
+    rule * {
+        static
+    }
+    # O regla específica para un prefijo
+    rule 2001:db8:1234::/64 {
+        auto
+    }
+}
+# systemctl enable ndppd (habilitar inicio automático)
+# journalctl -u ndppd -f (ver logs)
+# ip -6 neighbor show (ver tablas NDP)
+# ip -6 route show (ver rutas IPv6)
+# ping6 2001:db8:1234::1 (probar conectividad)
+1.-
+Ejemplo completo de implementación
+Router con dos interfaces. Configuración de interfaces
+# ip link set eth0 up
+# ip link set eth1 up
+Asignar direcciones IPv6
+# ip -6 addr add 2001:db8:1111::1/64 dev eth0
+# ip -6 addr add 2001:db8:2222::1/64 dev eth1
+Habilitar forwarding IPv6
+$ echo 1 > /proc/sys/net/ipv6/conf/all/forwarding
+Configurar ndppd
+# nano /etc/ndppd.conf
+route-ttl 30000
+proxy eth0 {
+    router yes
+    rule 2001:db8:2222::/64 {
+        static
+    }
+}
+proxy eth1 {
+    router yes
+    rule 2001:db8:1111::/64 {
+        static
+    }
+}
+# systemctl start ndppd (iniciar servicio)
+
+
 ne
 Editor. Admite caracteres UTF-8, varias columnas y resaltado de sintaxis. Utiliza combinaciones de teclas breves, intuitivas y fáciles de recordar y, al mismo tiempo, proporciona todas las funciones que debería tener un editor. Es totalmente configurable, lo que permite al usuario cambiar el contenido de los distintos menús, crear fácilmente pequeñas macros y cambiar fácilmente las combinaciones de teclas existentes, siendo al mismo tiempo un editor pequeño y rápido. F1 para abrir menús y Esc para cerrarlos
 $ ne --read-only --utf8 file.txt (solo lectura y codificación utf8)
