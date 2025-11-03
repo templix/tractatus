@@ -36751,6 +36751,20 @@ $ ndiff scan1.xml scan2.xml > differences.txt (guardar la salida de la comparaci
 $ ndiff --html scan1.xml scan2.xml > differences.html (generar salida en formato HTML)
 
 
+ndisc6
+Varias herramientas de diagnóstico IPv6  entre las que se incluyen ndisc6, rdisc6, rltraceroute6, tcptraceroute6, tcpspray.ndisc6, tracert6, tcpspray6, name2addr, addr2name y dnssort.
+$ ndisc6 2001:db8::1 eth0 (envía solicitud NS [Neighbor Solicitation] para la dirección IPv6 dada usando la interfaz eth0 y muestra la respuesta recibida)
+$ rdisc6 -v eth0 (solicita información de routers en la interfaz eth0 y muestra detalles de los anuncios de routers recibidos, incluyendo prefijos y parámetros asociados)
+$ rltraceroute6 2001:db8::1 (traza la ruta de salto a salto hacia una dirección IPv6 mostrando información extra de cada salto de la ruta en el nivel de enlace)
+$ tcptraceroute6 2001:db8::1 80 (traza la ruta por paquetes TCP al puerto 80 en la dirección IPv6 especificada)
+$ tcpspray6 2001:db8::2 (envía un flujo de datos para medir el rendimiento TCP entre el host local y el destino IPv6 específico)
+$ tcpspray.ndisc6 -l (inicia en modo escucha [servidor] listo para aceptar conexiones de prueba desde clientes)
+$ tracert6 2001:db8::1 (muestra cada salto intermedio hasta llegar a la dirección destino)
+$ name2addr www.ejemplo.com (devuelve la/s dirección/es IPv6 asociada/s al nombre de dominio)
+$ addr2name 2001:db8::1 (muestra el nombre de host correspondiente a la dirección IPv6 dada)
+$ dnssort 2001:db8::1 2001:4860:4860::8888 (ordena una lista de direcciones según la preferencia local de rutas o configuraciones, mostrando la mejor opción en primer lugar)
+
+
 ne
 Editor. Admite caracteres UTF-8, varias columnas y resaltado de sintaxis. Utiliza combinaciones de teclas breves, intuitivas y fáciles de recordar y, al mismo tiempo, proporciona todas las funciones que debería tener un editor. Es totalmente configurable, lo que permite al usuario cambiar el contenido de los distintos menús, crear fácilmente pequeñas macros y cambiar fácilmente las combinaciones de teclas existentes, siendo al mismo tiempo un editor pequeño y rápido. F1 para abrir menús y Esc para cerrarlos
 $ ne --read-only --utf8 file.txt (solo lectura y codificación utf8)
