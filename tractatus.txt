@@ -36822,8 +36822,11 @@ $ ne --read-only --utf8 file.txt (solo lectura y codificación utf8)
 
 
 needrestart
-Comprueba qué demonios deben reiniciarse después de las actualizaciones de alguna biblioteca como actualizaciones del kernel, actualizaciones pendientes de microcódigo para CPU Intel, reiniciosd necesarios de contenedores o basados en interpretes... Está inspirado en checkrestart del paquete debian-goodies [ver].
-# needrestart
+Comprueba qué demonios necesitan reiniciarse tras actualizaciones de bibliotecas.
+# needrestart (comprobación básica)
+# needrestart -k (solo comprobar si el kernel está obsoleto)
+# needrestart -l (solo comprobar si las bibliotecas están obsoletas)
+# needrestart -m a (establece el nivel de detalles técnicos en "avanzado")
 
 
 needrestart-session
@@ -36849,6 +36852,11 @@ $ neofetch --colors 9 3 5 10 7 9 (Modificando colores)
 
 neovim
 Bifurcación de Vim centrada en código y funciones modernas.
+
+
+neowofetch
+Muestra información del sistema Linux con el logotipo de la distribución. Es parecido a screenfetch [ver] para más extenso.
+$ neowofetch
 
 
 nessus
