@@ -36872,12 +36872,28 @@ https://127.0.0.1:8834
 
 
 net-acct
-Demonio que crea logs del uso de la red.
-# cat /var/log/net-acct/net-acct.log
+Herramienta que registra el tráfico de red. Proporciona un daemon que registra todo el tráfico que pasa por la máquina donde se ejecuta de forma similar a como lo hace tcpdump [ver]. El archivo de configuración en /etc/naccttab.
+# systemctl enable net-acct (que inicie cuando arranca el sistema)
+# nacctd -d -D (que se ejecute en modo de depuración y evitar que se desvincule como demonio)
+# cat /var/log/net-acct/net-acct.log (ver los logs)
 
 
 net-tools
 Paquete que contiene herramientas importantes para controlar el subsistema de red del núcleo Linux. Incluye arp, ifconfig, netstat, rarp, nameif y route, además de utilidades relacionadas con tipos de hardware de red específicos como plipconfig, slattach, mii-tool y aspectos avanzados de configuración de IP: iptunnel, ipmaddr.
+
+
+netavark
+Alternativa moderna a CNI [Container Network Interface] escrita en Rust, diseñada específicamente para Podman y otros gestores de contenedores OCI.
+Los servicios:
+netavark-dhcp-proxy.socket --> Escucha en un socket para peticiones DHCP.
+netavark-firewalld-reload.service --> Reconfigura el firewall cuando cambia la red de contenedores.
+netavark-dhcp-proxy.service --> El servicio DHCP propiamente dicho y solo se activa cuando el socket recibe una petición.
+Netavark se usa indirectamente a través de Podman [ver].
+$ ps aux | grep netavark (ver los procesos de Netavark, cuando esté en uso)
+# nft list ruleset | grep -i netavark (ver reglas iptables/nftables relacionadas)
+# systemctl status netavark-dhcp-proxy.socket (ver estado del servicio)
+# systemctl status netavark-firewalld-reload.service (ver estado del servicio)
+# ss -lpt | grep netavark (ver sockets activos)
 
 
 netcat
@@ -40172,6 +40188,9 @@ $ podman run -it --rm -v $(pwd)/mis_datos:/app debian:stable (montar un director
 $ podman commit <container_id> mi_debian_personalizado (creando una imagen personalizada desde el contenedor modificado)
 $ podman run -it --name mi_entorno debian:stable (crear contenedor persistente con nombre)
 $ podman start -ai mi_entorno (reutilizar ese contenedor)
+$ podman info (ver información del sistema incluyendo backend de red)
+$ podman info | grep -A 5 "networkBackend" (ver qué backend de red está usando Podman)
+$ podman info | grep -i network (verificar si Netavark está siendo usado)
 $ podman ps (listar contenedores en ejecución)
 $ podman ps -a (listar todos los contenedores incluidos parados)
 $ podman images (listar imágenes)
@@ -40179,13 +40198,23 @@ $ podman rm <container_id> (eliminar contenedor)
 $ podman rmi <image_id> (eliminar imagen)
 $ podman run -d -p 8080:80 nginx (mapear puertos)
 $ podman network create mi_red (red personalizada)
+$ podman network ls (ver redes existentes si las hay)
+$ podman network rm test-network (eliminar una red)
 $ podman run --network mi_red mi_app
 $ podman system prune -f (limpiar contenedores temporales)
+$ ip link show | grep podman (ver interfaces de red creadas)
 1.-
 El proceso completo podría ser:
 $ podman run -it --name zona_segura debian:stable (crear contenedor persistente)
 $ podman stop zona_segura (parar el contenedor)
 $ podman start -ai zona_segura (volver al contenedor)
+2.-
+Crear una red personalizada con Podman y Netavark
+# podman network create mi-red
+# podman network ls (listar redes)
+# podman run -d --name mi-contenedor --network mi-red nginx (ejecutar contenedor en red específica)
+# podman network inspect mi-red (inspeccionar configuración de red)
+# podman network connect otra-red mi-contenedor (conectar contenedor existente a otra red)
 
 
 polybar
