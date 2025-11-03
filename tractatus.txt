@@ -36734,6 +36734,13 @@ ncurses-term
 Contiene todas las definiciones de terminal que no se encuentran en el paquete ncurses-base. Ver ncurses-bin
 
 
+ndiff
+Herramienta que facilita la comparación de escaneos Nmap. Toma dos archivos de salida XML de Nmap e imprime las diferencias entre ellos, como hosts que se conectan y desconectan, puertos que se abren o cierran, etc.
+$ ndiff scan1.xml scan2.xml (mostrará las diferencias entre los dos escaneos)
+$ ndiff scan1.xml scan2.xml > differences.txt (guardar la salida de la comparación en un archivo)
+$ ndiff --html scan1.xml scan2.xml > differences.html (generar salida en formato HTML)
+
+
 ne
 Editor. Admite caracteres UTF-8, varias columnas y resaltado de sintaxis. Utiliza combinaciones de teclas breves, intuitivas y fáciles de recordar y, al mismo tiempo, proporciona todas las funciones que debería tener un editor. Es totalmente configurable, lo que permite al usuario cambiar el contenido de los distintos menús, crear fácilmente pequeñas macros y cambiar fácilmente las combinaciones de teclas existentes, siendo al mismo tiempo un editor pequeño y rápido. F1 para abrir menús y Esc para cerrarlos
 $ ne --read-only --utf8 file.txt (solo lectura y codificación utf8)
