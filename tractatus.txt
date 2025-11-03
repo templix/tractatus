@@ -36734,6 +36734,16 @@ ncurses-term
 Contiene todas las definiciones de terminal que no se encuentran en el paquete ncurses-base. Ver ncurses-bin
 
 
+nd
+Herramienta diseñada para interactuar con servidores WebDAV [Web-based Distributed Authoring and Versioning], protocolo basado en HTTP que permite a los usuarios editar y gestionar archivos de forma colaborativa en servidores web remotos. Incluye operaciones como subir, descargar, recuperar, eliminar, bloquear y consultar propiedades de archivos o directorios, todo a través de métodos HTTP como GET, PUT, PROPFIND, DELETE, MKCOL. A diferencia de herramientas más completas como "cadaver" [ver], que tiene un modo interactivo similar a un shell FTP, "nd" es más pequeño y orientado a scripts. No soporta modo interactivo ni conexiones encriptadas con SSL/TLS, solo HTTP plano.
+$ nd -u miusuario:micontra http://ejemplo.com/dav/archivo.txt (metodo GET por defecto, descargar un archivo y lo muestra en pantalla)
+$ nd -u miusuario:micontra -P PUT http://ejemplo.com/dav/nuevo_archivo.txt < local_archivo.txt (subir un archivo local al servidor)
+$ nd -u miusuario:micontra -P PROPFIND http://ejemplo.com/dav/ (listar el contenido de un directorio)
+$ nd -u miusuario:micontra -P MKCOL http://ejemplo.com/dav/nuevo_directorio/ (crear un directorio)
+$ nd -u miusuario:micontra -P DELETE http://ejemplo.com/dav/archivo_a_borrar.txt (eliminar un archivo)
+$ nd -u miusuario:micontra -P COPY -H "Destination: http://ejemplo.com/dav/copia.txt" http://ejemplo.com/dav/original.txt (copiar un archivo)
+
+
 ndiff
 Herramienta que facilita la comparación de escaneos Nmap. Toma dos archivos de salida XML de Nmap e imprime las diferencias entre ellos, como hosts que se conectan y desconectan, puertos que se abren o cierran, etc.
 $ ndiff scan1.xml scan2.xml (mostrará las diferencias entre los dos escaneos)
