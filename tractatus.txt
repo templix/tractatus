@@ -36985,6 +36985,16 @@ Configuración básica
 # systemctl enable netconsd  (que inicie al arrancar)
 En la máquina que quiere enviar los logs del kernel, cargar el módulo netconsole con los parámetros adecuados:
 # modprobe netconsole netconsole=@/eth0/@,6666@192.168.1.100/ ("@/eth0/" es la interfaz de red, 6666 el puerto del servidor netconsd y 192.168.1.100 es la IP del servidor donde corre netconsd)
+# netconsd 6666 (ejecución básica, solo recibe en el puerto 6666)
+# netconsd -t 4 -o filelogger.so 514 (usa 4 hilos, carga el módulo, escucha en 514)
+
+
+netconsole
+[arping netconsd]. Es un módulo del kernel de Linux que envía todos los mensajes de registro del kernel a través de la red a otro equipo. Fue diseñado para ser lo más instantáneo posible, permitiendo el registro incluso de los errores más críticos del kernel. También funciona desde contextos IRQ y no habilita interrupciones durante el envío de paquetes. Debido a estas necesidades específicas, solo se admiten redes IP, paquetes UDP y dispositivos Ethernet. Este paquete contiene un servicio que configura dinámicamente netconsole con uno o más hosts mediante sus nombres o direcciones IP.
+$ netconsole-setup loghost.example.com (envía todos los logs del kernel al host especificado en el puerto 6666)
+$ netconsole-setup +514@192.168.1.100 (envía logs detallados [+] al IP 192.168.1.100 en puerto 514, común para syslog, con soporte extendido activado)
+$ netconsole-setup loghost1.example.com 6667@loghost2.example.com (envía logs a loghost1 al puerto por defecto 6666 y a loghost2, puerto 6667)
+# systemctl enable netconsole.service (habilitar el sevicio al iniciar)
 
 
 netdiag
