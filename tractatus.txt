@@ -36972,6 +36972,21 @@ Luego un cliente puede conectarse así:
 y el servidor SSH ejecutará netconf-subsystem, que a su vez se comunica con el demonio netconfd.
 
 
+netconsd
+Daemon para recibir y procesar registros [logs] del kernel de Linux, que son enviados a través de la red usando el módulo netconsole. Este módulo permite que los mensajes del kernel se envíen a un host remoto en tiempo real, lo que es especialmente útil para depuración y monitoreo de sistemas donde el acceso físico o por consola es limitado. Soporta dos formatos, el formato antiguo de solo texto [Mensajes de log en texto plano] y formato extendido que incluye metadatos como nivel de log, timestamp, etc.
+Configuración básica
+# nano /etc/netconsd.conf
+       # Escuchar en el puerto 6666 UDP
+       port = 6666
+       # Módulo de salida: guardar logs en un archivo
+       [output_file]
+       type = file
+       filename = /var/log/netconsole.log
+# systemctl enable netconsd  (que inicie al arrancar)
+En la máquina que quiere enviar los logs del kernel, cargar el módulo netconsole con los parámetros adecuados:
+# modprobe netconsole netconsole=@/eth0/@,6666@192.168.1.100/ ("@/eth0/" es la interfaz de red, 6666 el puerto del servidor netconsd y 192.168.1.100 es la IP del servidor donde corre netconsd)
+
+
 netdiag
 Colección de pequeñas herramientas para analizar el tráfico de red y la configuración de hosts remotos. Incluye los ejecutables: tcpblast, netload, trafshow, netwatch, statnet y tcpspray.
 
