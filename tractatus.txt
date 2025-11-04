@@ -36896,6 +36896,37 @@ $ ps aux | grep netavark (ver los procesos de Netavark, cuando esté en uso)
 # ss -lpt | grep netavark (ver sockets activos)
 
 
+netbase
+Datos fundamentales para el funcionamiento de la red TCP/IP clásica en sistemas Unix. Estos datos estan en los archivos: /etc/services, /etc/protocols, /etc/rpc y /etc/ethertypes. Su finalidad es proporcionar información básica a la biblioteca del sistema libc a través de funciones como getservbyname() y getservbyport(), a las herramientas de red como netstat, ss, lsof, tcpdump, nmap, etc., para mostrar nombres en lugar de números y a los demonios de servicios que escuchan en puertos para traducir nombres a números y viceversa en el contexto de redes.
+$ nano /etc/protocols (ver nombres asignados a números de protocolos IP)
+$ nano /etc/rpc (ver los nombres y números asignados a servicios RPC [Remote Procedure Call])
+$ nano /etc/ethertypes (ver las definiciones de los tipos de protocolo Ethernet [EtherType])
+$ nano /etc/services (ver la relación nombre/puerto TCP/UDP)
+1.-
+Un caso práctico con y sin /etc/services
+Caso normal con netbase
+$ ss -tln
+Salida típica:
+       State    Recv-Q   Send-Q   Local Address:Port   Peer Address:Port
+       LISTEN   0        128      0.0.0.0:ssh         0.0.0.0:*
+       LISTEN   0        80       0.0.0.0:http        0.0.0.0:*
+       LISTEN   0        50       0.0.0.0:https       0.0.0.0:*
+       ...
+Los puertos aparecen con nombres simbólicos [ssh, http, https] en lugar de números.
+Caso sin netbase o sin /etc/services
+# mv /etc/services /etc/services.bak
+Y luego ejecutar el mismo comando:
+$ ss -tln
+la salida cambiará así:
+       State    Recv-Q   Send-Q   Local Address:Port   Peer Address:Port
+       LISTEN   0        128      0.0.0.0:22          0.0.0.0:*
+       LISTEN   0        80       0.0.0.0:80          0.0.0.0:*
+       LISTEN   0        50       0.0.0.0:443         0.0.0.0:*
+       ...
+Solo aparecen los números de puerto, porque el sistema no puede traducirlos a sus nombres simbólicos (ssh, http, https).
+# mv /etc/services.bak /etc/services (volver las cosas como estaban)
+
+
 netcat
 utilidad que se puede utilizar para practicamente cualquier cosa relacionada con el protocolo TCP/IP [navaja suiza]
 Nota.- En algunas distros está ligeramente capado. Preferible bajarlo de http://netcat.sourceforge.net/download.php y compilarlo:
