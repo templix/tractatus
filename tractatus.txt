@@ -36957,6 +36957,21 @@ opciones
 -z	.-	mostrar puertos a la escucha
 
 
+netconfd
+Es un demonio [servidor] que implementa el protocolo NETCONF [Network Configuration Protocol, RFC 6241] una alternativa moderna a SNMP o CLI manual, usado para la gestión y configuración remota de equipos de red [routers, switches, etc.] mediante XML sobre SSH o TLS.
+# netconfd --superuser --no-startup --log-level=debug (arranca el demonio, con privilegios administrativos, no carga un archivo de configuración inicial y muestra información detallada)
+# netconfd --superuser --module=ietf-interfaces --log-level=info (otra forma de arrancar el demonio)
+Nota.- Por defecto, escuchará en el puerto 830/tcp [estándar NETCONF sobre SSH].
+# netconfd --module=ietf-interfaces --module=ietf-ip --startup=./startup-cfg.xml (carga los módulos especificados y usa un archivo de arranque para definir la configuración inicial del dispositivo)
+Ejemplo de uso
+# nano /etc/ssh/sshd_config
+Añadir la linea:
+       Subsystem netconf /usr/sbin/netconf-subsystem
+Luego un cliente puede conectarse así:
+# ssh -s usuario@localhost netconf
+y el servidor SSH ejecutará netconf-subsystem, que a su vez se comunica con el demonio netconfd.
+
+
 netdiag
 Colección de pequeñas herramientas para analizar el tráfico de red y la configuración de hosts remotos. Incluye los ejecutables: tcpblast, netload, trafshow, netwatch, statnet y tcpspray.
 
