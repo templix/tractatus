@@ -37002,9 +37002,15 @@ Colección de pequeñas herramientas para analizar el tráfico de red y la confi
 
 
 netdiscover
-Buscar máquinas [activas o pasivas] conectados  a una red.
-# netdiscover -i eth0
-# netdiscover -r 192.168.1.0/24 -i eth1 (especificando rango de ips)
+Escáner de direcciones de red activo/pasivo mediante solicitudes ARP. netdiscover es una herramienta de reconocimiento de direcciones activa/pasiva, principalmente desarrollada para redes inalámbricas sin servidor DHCP, cuando se realiza wardriving. También se puede usar en redes con hubs y switches. Basada en libnet y libpcap, puede detectar pasivamente hosts en línea
+o buscarlos mediante el envío activo de solicitudes ARP.
+# netdiscover -i enp1s0 (escanear direcciones LAN en la red mencionada)
+# netdiscover -i enp1s0 -f (escaneo rápido de direcciones LAN comunes en enp1s0 [búsqueda solo de gateways])
+# netdiscover -i eth0 -r 172.26.0.0/24 (escanear rangos fijos)
+# netdiscover -r 192.168.0.0/16 (lo mismo)
+# netdiscover -s 0.5 (Escanear direcciones LAN comunes con un tiempo de espera de 0.5 milisegundos en lugar del valor predeterminado de 1)
+# netdiscover -r 192.168.0.0/16 -f -s 0.5 (escanear un rango fijo y con un tiempo de espera de 0.5 milisegundos)
+# netdiscover -p (solo detectar tráfico ARP)
 
 
 netfilter-persistent
