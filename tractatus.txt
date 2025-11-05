@@ -37031,6 +37031,13 @@ Pulsando:
 	q --> Salir
 
 
+netlabel-tools
+Herramienta de gestión para el subsistema de seguridad de red del kernel de Linux,llamada NetLabel [Network Labeling]. Este paquete requiere que el kernel en ejecución sea compatible con NetLabel. NetLabel es un framework dentro del kernel de Linux que permite a los Módulos de Seguridad de Linux [LSM] como SELinux o Smack adjuntar atributos de seguridad [etiquetas] a los paquetes de red salientes y leer esos atributos en los paquetes entrantes. Su función principal es asignar etiquetas de seguridad a los paquetes de red. Tiene dos ejecutables: netlabel-config y netlabelctl
+# netlabel-config reset (borra cualquier configuración de NetLabel cargada en el kernel y restablece el estado a los valores por defecto)
+# netlabel-config load (carga la configuración de NetLabel especificada en el archivo /etc/netlabel.rules en el kernel, utilizando internamente el comando netlabelctl)
+# netlabelctl unlbl add default address:192.168.0.0/16 label:bar (asignar la etiqueta de seguridad "bar" a cualquier paquete no etiquetado que provenga del rango de direcciones especificada)
+
+
 netload
 [netdiag]. Muestra la carga en la interfaz de red sin usar la propia interfaz. netload simplemente accede a las estadísticas del kernel. El archivo $HOME/.netloadrc permite agregar cualquier cantidad de interfaces de red, modificar la configuración de alarma y las preferencias de correo electrónico.
 # netload eth0 -t 2 (actualizando cada 2 segundos)
