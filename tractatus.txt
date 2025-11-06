@@ -602,6 +602,16 @@ $ agetty --wait-cr --init-string 'ATE0Q1&D2&C1S0=1\015' 115200 ttyS1 (Para un m�
 $ agetty --list-speeds (muestra las velocidades en baudios admitidas)
 
 
+aggrhome
+Lector de feeds RSS que muestra las portadas de los principales agregadores de noticias en español. La página carga automáticamente los feeds RSS de varios sitios, muestra el primer artículo de cada feed y permite actualizar la información de manera periódica según un intervalo configurable. Descarga e instalación:
+$ git clone https://github.com/enterum/aggrhome.git (descargar)
+$ cd aggrhome (entrar en el directorio)
+$ npm install (instalar dependencias)
+$ npm run build (compilar)
+$ npm run start (iniciar el servidor local)
+Y en el navegador se abre la página http://127.0.0.1:5500/. Los feeds en aggrhome/docs/feeds.txt
+
+
 aha
 Lee el texto de entrada, lo convierte a HTML en color y lo escribe en la salida.
 $ echo q | htop | aha -b -l > htop.html (Cree un archivo HTML con un fondo negro a partir de la salida de htop. La opción -l anula otros comandos de nueva línea que usa htop)
