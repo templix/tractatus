@@ -37066,11 +37066,33 @@ $ pbmtoascii -2x4 imagen.pbm  (convertir .pbm a ascii. Para mayor resolución -1
 
 netperf
 Medir el rendimiento de la red. Ha de instalarse en el cliente y en el servidor. Utiliza el puerto 12865.
+# netserver (servidor)
+# netperf -H servidor -t TCP_STREAM -l 30 (en el cliente prueba TCP)
+# netperf -H servidor -t UDP_STREAM -l 30 -- -m 1472 (en el cliente prueba UDP)
 # nmap -O -p 12865 localhost | grep tcp (comprobar si el puerto esta abierto)
        12965/tcp closed unknown
 # nmap localhost -p 12865 | grep tcp (abrir el puerto)
        12865/tcp open  unknown
 # netperf -H localhost
+
+
+netperfmeter
+Generador de tráfico y medidor de rendimiento de red para los protocolos de transporte UDP, TCP, MPTCP, SCTP y DCCP sobre IPv4 e IPv6. Transmite simultáneamente flujos bidireccionales a un punto final y mide el ancho de banda y la calidad de servicio (QoS) resultantes. Incluye los ejecutables combinesummaries, createsummary, extractvectors, getabstime, netperfmeter y runtimeestimator.
+$ netperfmeter -s 8080 (servidor. Escucha en puerto 8080)
+$ netperfmeter -c servidor.example.com:8080 -t 10 -P tcp (cliente. envía tráfico TCP durante 10 segundos)
+$ netperfmeter -c servidor:8080 -t 30 -P udp -n 4 --bidir (flujos UDP bidireccionales durante 30 segundos)
+$ netperfmeter -c servidor:8080 -t 60 -P tcp -n 2 --bidir --qos > datos.log (flujos TCP bidireccionales durante 60 segundos y medición QoS)
+$ netperfmeter -c [2001:db8::1]:8080 -P tcp -t 60 --qos (con IPv6 y medición QoS)
+$ createsummary datos_brutos.log > resumen.csv (crea resúmenes estadísticos)
+$ combinesummaries prueba1.csv prueba2.csv prueba3.csv > total.csv (combina múltiples resúmenes)
+$ extractvectors --vector throughput datos_completos.log (extrae vectores de datos específicos)
+$ getabstime 1634567890.123456 (convertir timestamp a formato legible)
+$ eruntimeestimator --flows 10 --duration 300 (stimar tiempo para prueba específica)
+
+
+netperfmeter-plotting
+Solo genera gráficos a partir de resultados, no realiza mediciones por sí mismo.
+$ plot-netperfmeter-results resultados.log -o graficos/ (generar gráficos desde datos de netperfmeter)
 
 
 netplug
