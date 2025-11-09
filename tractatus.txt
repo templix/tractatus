@@ -37095,6 +37095,25 @@ Solo genera gráficos a partir de resultados, no realiza mediciones por sí mism
 $ plot-netperfmeter-results resultados.log -o graficos/ (generar gráficos desde datos de netperfmeter)
 
 
+netpipe
+[NETwork Protocol-Independent Performance Evaluator]. Suite de herramientas [netpipe-lam netpipe-mpich2 netpipe-openmoi netpipe-tcp] para medir el rendimiento de red de forma exhaustiva. Cada variante está diseñada para un protocolo o implementación de comunicación específica. Entre las 4 herramientas incluyen los ejecutables NPlam, NPlam2, NPmpich2, NPopenmpi, NPopenmpi2 y NPtcp
+$ NPtcp -r -p 5002 (en el servidor, modo receptor y puerto. Por ejemplo el servidor es la máquina 192.168.1.10)
+$ NPtcp -h 192.168.1.10 -p 5002 -n 100 -l 1 -u 1048576 -o resultados.txt (en el cliente, máquina destino, puerto, 100 pruebas, tamaño mínimo u máximo de mensajes en bytes y guardar resultados)
+$ mpiexec -n 2 -hosts nodo1,nodo2 NPmpich2 -o mpich2_results.txt (lanzar en 2 nodos)
+$ mpiexec -f hostfile NPmpich2 (lo mismo con un archivo de hosts: 1 por linea)
+$ mpiexec -n 2 -f hostfile NPmpich2 -a -s -l 1 -u 4194304 (-a incluye pruebas asíncronas y -s sincronización adicional)
+$ mpirun -np 2 --host host1,host2 NPopenmpi -o openmpi_results.txt (uso típico)
+$ mpirun -np 2 --mca btl tcp,self --host servidor1,servidor2 NPopenmpi (lo mismo con más control)
+$ mpirun -np 2 --mca btl tcp,self NPopenmpi -o tcp_transport.txt (comparando diferentes transportes)
+$ mpirun -np 2 --mca btl openib,self NPopenmpi -o ib_transport.txt (usando infiniband)
+$ lamboot -v -b hostlist (iniciar LAM/MPI. El archivo "hostlist" contendrá un host por linea. Prueba de latencia y throughput)
+$ mpirun -np 2 NPlam -P -b 65536 -o tcp_benchmark.txt (después de lamboot, ejecutar con opciones de TCP. Tamaño del buffer en 64 KB)
+$ mpirun -np 2 NPlam -P -o resultado.txt (lo mismo guardando resultados)
+$ lamhalt (limpiar la terminal)
+$ NPtcp -h servidor -l 1 -u 10485760 | grep "Peak" (identificar cuellos de botella)
+Nota.- El paquete netpipe-lam es para entornos heredados. Para entornos modernos, se recomienda usar netpipe-tcp o netpipe-mpich2 en lugar de netpipe-lam.
+
+
 netplug
 Demonio que monitorea el estado del enlace de las tarjetas de red y configura la red en eventos de conexión y desconexión. Es similar a ifplugd, pero usa NETLINK en lugar de sondear regularmente el estado del enlace. Esto mejora el consumo de energía con las computadoras portátiles, pero no funciona con todas las tarjetas.
 
