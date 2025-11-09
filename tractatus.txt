@@ -22639,7 +22639,7 @@ Modificar el sistema que arranca primero.
 Y modificar la linea que pone:
 	set default="2"
 Arrancará el sistema situado en la 3ª linea que aparece en el menú (La primera linea es la 0)
-15.-
+14.-
 Poner entradas personalizadas en grub.
 # nano /etc/grub.d/40_custom
 Añadir:
@@ -22653,6 +22653,37 @@ menuentry "Reiniciar eñ sistema" {
         reboot
 }
 # update-grub2 (recargar)
+15.-
+Crear un theme personalizado
+# nano /etc/default/grub
+Añadir al final la linea con la ruta a la imagen que queremos:
+       export GRUB_MENU_PICTURE="/home/usuario/imagenes/gnu.jpg"
+# mkdir -p /boot/grub/themes/mitema (crea un directorio para el tema)
+# cp /home/usuario/imagenes/gnu.jpg /boot/grub/themes/mitema/ (preferible copiar la imagen en el directorio)
+Crear el archivo:
+# nano /boot/grub/themes/mitema/theme.txt
+       # Tema minimalista medio centrado
+       desktop-image: "gnu1.jpg"
+       terminal-font: "DejaVu Sans Mono 12"
+       #
+       + boot_menu {
+           left = 35%
+	   top = 35%
+    	   width = 600
+    	   height = 300
+    	   item_height = 30
+    	   item_padding = 2
+    	   item_spacing = 5
+    	   item_color = "white"
+    	   selected_item_color = "yellow"
+    	   align = "center"
+	}
+Indicar a GRUB que use el tema:
+# nano /etc/default/grub
+Y añadir la línea:
+     GRUB_THEME="/boot/grub/themes/mitema/theme.txt"
+# update-grub2 (actualizar GRUB)
+Reiniciar.
 
 
 grub-mkconfig
