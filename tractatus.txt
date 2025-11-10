@@ -37218,6 +37218,22 @@ Probar la velocidad de los servidores de red para elegir el más rápido. Puede 
 # netselect -vv -s 5 http.us.debian.or (que muestre los 3 mejores servidores y el del final sea el mejor)
 
 
+netsend
+Programa que transmite y recibe archivos y diagnóstico de redes. Ofrece los protocolos de transporte TCP, DCCP, UDP, UDPLITE y SCTP, utilizando IPv4 o IPv6 en la capa de red. No añade formato de aplicación [no es FTP, HTTP, SCP...], lo que envía por la red son los bytes exactos que lee de un fichero o de la entrada estándar, y viceversa.
+$ netsend -l 5001 (en el servidor)
+$ netsend 192.168.1.10 5001 < /etc/passwd (en el cliente, el contenido de /etc/passwd pasará al servidor)
+$ netsend -l 5001 -6 (en el servidor, mismo ejemplo pero con IPv6)
+$ netsend 2001:db8::a 5001 -6 < /etc/passwd (en el cliente)
+$ dd if=debian-12.iso | netsend -v srv.desarrollo.local 8000 (enviar un ISO grande y medir tiempo)
+$ netsend -l 8000 -v > debian-12.iso (en el servidor)
+$ yes | head -c 100M | netsend -p udp 10.0.0.5 9000 (en el cliente generar tráfico UDP)
+$ netsend -l 9000 -p udp > /dev/null (en el receptor)
+$ netsend -l 7000 -p dccp (en el servidor, comprobar que el kernel soporta DCCP)
+$ netsend 127.0.0.1 7000 -p dccp < /dev/zero (en el cliente. Si no hay soporte el programa lo indicará inmediatamente)
+$ netsend -l 5000 (en el servidor para enviar texto tecleado)
+$ netsend 192.168.1.10 5000 (en el cliente todo lo que escriba por teclado se retransmite en caliente)
+
+
 netsniff-ng
 Es un sniffer de red de alto rendimiento para la inspección de paquetes. Se puede usar para análisis de protocolo, ingeniería inversa o red de depuración. El kit de herramientas netsniff-ng actualmente consta de las siguientes utilidades:
   - netsniff-ng - analizador de paquetes de zero-copy. Herramienta de captura/reproducción pcap
