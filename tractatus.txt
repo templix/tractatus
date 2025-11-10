@@ -37145,6 +37145,54 @@ $ NPtcp -h servidor -l 1 -u 10485760 | grep "Peak" (identificar cuellos de botel
 Nota.- El paquete netpipe-lam es para entornos heredados. Para entornos modernos, se recomienda usar netpipe-tcp o netpipe-mpich2 en lugar de netpipe-lam.
 
 
+netplan-generator
+Este paquete proporciona un generador de systemd para configurar diversos demonios de red durante el arranque. Su función es leer los archivos YAML de configuración en /etc/netplan/ y generar automáticamente los archivos de configuración para los backends de red como /run/systemd/network/ para systemd-networkd.
+1.-
+Ejemplo de configuración simple para NetworkManager con DHCP automático en todas las interfaces
+# nano /etc/netplan/01-network-manager-all.yaml
+network:
+  version: 2
+  renderer: NetworkManager
+Una ves aplicada NetworkManager manejará la conexión [ver netplan.io].
+2.-
+Ejemplo de configuración estática para una interfaz Ethernet con systemd-networkd
+Para un servidor, donde se quiere una IP fija en la interfaz enp0s
+# nano /etc/netplan/01-netcfg.yaml
+network:
+  version: 2
+  renderer: networkd
+  ethernets:
+    enp0s3:
+      dhcp4: no  # Desactiva DHCP para IPv4
+      addresses: [192.168.1.10/24]  # IP estática y máscara
+      routes:
+        - to: default
+          via: 192.168.1.1  # Gateway
+      nameservers:
+        addresses: [8.8.8.8, 8.8.4.4]  # DNS (Google DNS como ejemplo)
+3.-
+Ejemplo de conexión WiFi con WPA2 y DHCP en un laptop, usando NetworkManager.
+# nano /etc/netplan/50-wifi.yaml`
+network:
+  version: 2
+  renderer: NetworkManager
+  wifis:
+    wlan0:  # Nombre de la interfaz WiFi
+      dhcp4: yes
+      access-points:
+        "Mi-Red-WiFi":
+          password: "mi-contrasena-secreta"
+
+
+netplan.io
+Utilidad de configuración de red que simplifica la configuración de interfaces de manera declarativa, utilizando archivos en formato YAML. En lugar de editar directamente archivos de configuración de backends como NetworkManager o systemd-networkd, se define la configuración deseada en YAML, y Netplan genera automáticamente los archivos necesarios para el backend elegido durante el arranque o manualmente asegurando que la red se configure correctamente.
+# netplan generate (genera los archivos de config sin aplicar)
+# netplan apply (aplica los cambios reiniciando los servicios de red si es necesario)
+# netplan try (prueba los cambios temporalmente y se revierten si no se confirma en 120 segundos)
+# netplan try --timeout=60 (lo mismo pero con 60 segundos)
+# netplan --debug apply (ver logs detallados)
+
+
 netplug
 Demonio que monitorea el estado del enlace de las tarjetas de red y configura la red en eventos de conexión y desconexión. Es similar a ifplugd, pero usa NETLINK en lugar de sondear regularmente el estado del enlace. Esto mejora el consumo de energía con las computadoras portátiles, pero no funciona con todas las tarjetas.
 
