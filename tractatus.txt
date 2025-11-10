@@ -40221,6 +40221,25 @@ $ plowdown lista_de_links.txt (descarga una lista de links)
 $ plowdown -a usuario:contraseña url (caso de precisar usuario y contraseña)
 
 
+plymouth
+Aplicación que se inicia muy temprano en el proceso de inicio y final y que proporciona una animación gráfica mientas el proceso de inicio o final ocurre en segundo plano lo que ayuda a proporcionar una experiencia visual fluida sin ver los mensajes de kernel y los parpadeos de la pantalla durante estos procesos.
+# plymouth-set-default-theme --list (lista los temas de Plymouth disponibles instalados en el sistema)
+# plymouth-set-default-theme -R moonlight (establece el tema y actualiza el initramfs, el sistema de archivos inicial, para incluir el nuevo tema)
+# plymouth-set-default-theme --reset (restaura el tema de Plymouth a la opción por defecto de la distribución)
+# update-initramfs -u (actualizar la configuración para que los cambios de Plymouth se apliquen en el siguiente arranque)
+# update-grub (lo mismo)
+# plymouthd (inicia el demonio de Plymouth en segundo plano)
+# plymouth --show-splash (muestra la pantalla de bienvenida actualmente configurada. Solo funciona si el daemon está corriendo)
+# plymouth --quit (detiene la previsualización del tema y el daemon de Plymouth)
+# killall -9 plymouthd (lo mismo)
+Para que Plymouth se ejecute, el gestor de arranque GRUB debe pasar parámetros específicos al kernel.
+# nano /etc/default/grub
+Y en la linea "GRUB_CMDLINE_LINUX_DEFAULT="quiet"" añadir la opción "splash" para que quede:
+      GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"
+La opción `quiet` oculta los mensajes del kernel, y splash le dice al kernel que ejecute Plymouth.
+# update-grub (para que los cambios se apliquen)
+
+
 pm
 [pm-utils]. Colección de comandos que permiten suspender, hibernar o pasar a modo de bajo consumo.
 # pm-is-supported (determinar qué modos de ahorro de energía son soportado por el sistema)
