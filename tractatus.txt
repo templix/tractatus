@@ -37301,10 +37301,20 @@ Utilidad cliente/servidor diseñada para comparar la actividad de la red de un d
 # netstress -v -m localhost -h 37.128.231.132 -w (con la máxima información, especificando nombre del host y la ip y hacer sólo prueba de escritura lectura/escritura)
 
 
-nettlet-hash
-Generar claves de ficheros
-$ nettlet-hash --list  (lista los algoritmos que pueden usarse)
-$ nettlet-hash -a sha224 fichero
+nettle-bin
+biblioteca criptográfica de bajo nivel diseñada para ser fácilmente integrable en diversos contextos, como kits de herramientas criptográficas para lenguajes orientados a objetos, por ejemplo, C++, Python, Pike y aplicaciones como LSH o GNUPG. También puede ser utilizada en el espacio del kernel. Incluye las herramientas nettle-hash, nettle-lfib-stream, nettle-pbkdf2, pkcs1-conv y sexp-conv.
+$ nettle-hash --list (listado de algoritmos soportados)
+$ nettle-hash -a sha256 archivo (calculará el hash SHA-256 de archivo)
+$ echo "linux es genial" | nettle-hash -a sha512_256 (mostrará el algoritmo SHA512_256 de la frase)
+$ nettle-hash -a md5 archivo.pdf (mostrar en formato hexadecimal, por defecto)
+$ nettle-lfib-stream (generar 16 bytes aleatorios en binario)
+$ nettle-lfib-stream | head -c 20 | xxd (genera bytes aleatorios y los muestra en hex)
+$ echo -n "mi_passphrase_secreta" | nettle-pbkdf2 -i 50000 -l 32 "sal_unica" | xxd -p (generar clave desde passphrase)
+Varios ejemplos de uso:
+$ echo "contraseña_1234" | nettle-pbkdf2 -i 1000 -l 16 "Linux_genial"
+$ echo -n "password123" | nettle-pbkdf2 --hex-salt -i 5000 ABCD1234
+$ SAL=$(nettle-lfib-stream | head -c 16 | xxd -p) ; echo "Sal generada: $SAL"
+$ echo -n "mi_contraseña" | nettle-pbkdf2 --hex-salt --iterations=10000 --length=32 $SAL
 
 
 netwatch
