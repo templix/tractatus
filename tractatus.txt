@@ -18398,6 +18398,11 @@ $ flawfinder -v *.c *.cpp (analizará todos los archivos .c y .cpp en el directo
 $ flawfinder -v --exclude=EX1:0 *.c (excluir ciertos patrones de vulnerabilidad)
 
 
+fldiff
+Programa de comparación de archivos que muestra las diferencias entre dos archivos o directorios, o entre un archivo o directorio y un repositorio CVS o Subversion.
+$ fldiff archivo1.txt archivo2.txt (mostrará las diferencias)
+
+
 flent
 [FLExible Network Tester]. Herramienta de prueba de red versátil diseñada para evaluar el rendimiento de la red y la saturación de búferes. Es un envoltorio de Python que simplifica la ejecución simultánea de múltiples instancias de herramientas de pruebas de red populares como netperf, iperf y ping. flent agrega los resultados de estas pruebas y genera gráficos informativos
 $ flent tcp_ndown -H <servidor> -t 60 (ejecuta una prueba de descarga TCP de 60 segundos contra el servidor especificado)
@@ -51146,6 +51151,7 @@ $ xxd -r -p  (Proceso inverso)
 xxdiff
 herramienta para visualizar las diferencias entre dos o tres archivos, o dos directorios. Los textos de los dos o tres archivos se presentan uno al lado del otro, con sus diferencias resaltadas con colores para facilitar su identificación.
 $ xxdiff -w -b -B -i archivo1 archivo2 (ignora los espacios en blanco, su cantidad y cambios que solo insertan o las eliminan e ignora mayusculas/minusculas)
+$ xxdiff --help-html > xxdiff.html (para abrir la información con el navegador)
 
 
 xxdiff-scripts
