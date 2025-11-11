@@ -37351,6 +37351,12 @@ newlisp
 Lenguaje de scripting de propósito general, similar a LISP para el desarrollo de aplicaciones web y programas en general, así como en los ámbitos de la inteligencia artificial [IA] y la estadística.
 
 
+newmail
+Notificador de correo entrante que suele ejecutarse en segundo plano y monitoriza los archivos del buzón para informar cuando llega un nuevo correo. El remitente y el asunto se mostrarán en la terminal donde se ejecutó. No monitoriza cuentas de correo electrónico externas como Gmail, Outlook, etc, monitoriza el buzón local del sistema como alertas de cron, logwatch, fail2ban, etc, correo enviado entre usuarios locales con mail o sendmail o mensajes del sistema como "disk full", "backup completed" y típicamente se almacena en /var/mail/usuario o /var/spool/mail/usuario
+$ newmail -i 30 (monitorizar el buzón en segundo plano actualizando cada 30 segundos)
+$ echo "Linux es un sistema genial" | mail -s "Hola desde $(hostname)" $USER (enviarse un correo local uno mismo, al cabo de unos 20-30 segundos llegará a la terminal)
+
+
 newpid
 Lanzar un comando con un nuevo PID.
 # newpid htop
