@@ -37362,6 +37362,37 @@ Lanzar un comando con un nuevo PID.
 # newpid htop
 
 
+newrole
+Utilidades principales de políticas de SELinux [Security-Enhanced Linux]. SELinux es un parche del kernel de Linux y varias utilidades con funcionalidades de seguridad mejoradas, diseñadas para añadir controles de acceso obligatorios. Se usan cuando el sistema está en enforcing y la política es el proceso que se lance corra con otro contexto [usuario, rol, tipo, nivel] que el que tendrías normalmente. Incluye las herramientas open_init_pty y run_init
+$ newrole -t user_t -- 'firefox &' (lanzar un único comando con otro tipo, no abre shell)
+Normalmente "open_init_pty" no se invoca a mano; "run_init" lo usa internamente.
+# open_init_pty run_init -- dpkg -i htop_3.2.2-1_amd64.deb (para que el programa que se ejecute dentro del contexto init_t tenga un terminal controlador válido)
+# run_init -- dpkg -i ./mi-paquete.deb (instalar un paquete .deb sin desactivar SELinux)
+# run_init -- ldconfig (recrear la caché de ldconfig)
+# run_init -- /usr/local/sbin/fix-my-daemon.sh (lanzar un script personalizado que toca /etc y /usr/lib/systemd)
+# run_init -u staff_u -r staff_r -t staff_t -- /home/alice/bin/actualiza-mis-ficheros (ejecutar como otro usuario-SELinux, poco habitual)
+1.-
+Pasar de staff_t a sysadm_t
+$ id -Z
+user_u:staff_r:staff_t:s0
+$ newrole -r sysadm_r -t sysadm_t
+Password: ******** (pide contraseña de usuario)
+# id -Z
+user_u:sysadm_r:sysadm_t:s0
+Y ya se puede ejecutar apt, dpkg, etc. sin que la política lo bloquee.
+2.-
+Bajar de privilegio: volver a staff_t
+$ newrole -r staff_r -t staff_t
+$ id -Z
+user_u:staff_r:staff_t:s0
+3.-
+Cambiar sólo el nivel de confidencialidad
+$ newrole -l s0:c5.c9
+$ id -Z
+user_u:staff_r:staff_t:s0:c5.c9
+Nota.- newrole no puede elevar el «usuario-SELinux» [user_u --> root no se puede].
+
+
 newsbeuter
 Lector RSS en consola
 $ newsbeuter -i archivo.opml  (cargar los feeds de otra aplicación)
