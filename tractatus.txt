@@ -40522,6 +40522,15 @@ Crear una red personalizada con Podman y Netavark
 # podman network connect otra-red mi-contenedor (conectar contenedor existente a otra red)
 
 
+policycoreutils
+Este paquete contiene las utilidades principales de políticas necesarias para el funcionamiento básico de un sistema SELinux [ver]. Incluye las herramientas secon, sestatus, fixfiles, genhomedircon, load_policy, restorecon, restorecon_xattr, semodule, setfiles, setsebool y unsetfiles.
+# sestatus (saber si esta activo)
+# secon --pid 1 (mostrar el contexto SELinux del proceso de inicialización)
+# semodule -l (lista todos los módulos)
+# setsebool -P systemd_tmpfiles_manage_all on (activar un módulo)
+# setsebool httpd_can_network_connect on (Activamos el permitir a Apache realizar conexiones de red. Ver comando setsebool)
+
+
 polybar
 Ayuda a los usuarios a crear barras de estado atractivas y altamente personalizables para su entorno de escritorio
 Descargar temas:
@@ -43414,6 +43423,39 @@ tabla de los usuarios estándar SELinux disponibles:
 	sysadm_u (Administración del sistema. Por defecto, esta cuenta no se utiliza inmediatamente ya que este usuario obtiene de forma inmediata el rol administrativo (por lo que staff_u y root todavía necesitarán conmutar roles).
 	system_u (administrar servicios. Nunca se debe utilizar para usuarios finales ya que ofrece acceso directo al rol del sistema)
 	unconfined_u 	Usado cuando la directriz es targeted, este usuario SELinux tiene muchos privilegios (esencialmente no está limitado en sus acciones, aunque todavía se gestiona través de SELinux con una directriz "muy abierta").
+1.-
+Activar SELinux en Debian
+Tener los paquetes básicos instalados
+# apt install selinux-basics selinux-policy-default auditd policycoreutils selinux-utils
+"auditd" es opcional pero muy recomendable. Es el que registra los eventos de seguridad y los logs que luego permiten analizar qué bloqueó SELinux.
+$ sestatus (comprobar el estado actual)
+  	   SELinux status:                 disabled
+$ getenforce (lo mismo)
+  	   Disabled
+Configurar el archivo principal de SELinux
+$ sudo nano /etc/selinux/config
+       SELINUX=permissive
+       SELINUXTYPE=default
+"permissive" significa que registrará los bloqueos pero no los aplicará, ideal para observar sin romper nada.
+Activar SELinux en el kernel
+$ sudo nano /etc/default/grub
+En la línea que empieza por "GRUB_CMDLINE_LINUX_DEFAULT", añadir los siguientes parámetros al final:
+           GRUB_CMDLINE_LINUX_DEFAULT="quiet splash security=selinux selinux=1"
+# update-grub (actualizar la nueva configuración)
+El sistema de archivos necesita etiquetas SELinux. Crear el marcador para que se genere automáticamente en el siguiente arranque:
+# touch /.autorelabel
+# reboot (reiniciar)
+El primer reinicio puede tardar bastante, dependiendo del tamaño del disco ya que está reetiquetando todo el sistema.
+$ nano /var/log/audit/audit.log (analizar los logs y ver fácilmente las violaciones aunque no bloquean nada en modo permissive)
+$ sestatus
+  	 SELinux status:                 enabled
+	 ...
+
+
+selinux-utils
+SELinux (Security-Enhanced Linux) es un mecanismo de control de acceso obligatorio [MAC] desarrollado por la NSA y la comunidad open source. En lugar de basarse solo en los permisos tradicionales de Unix [propietario, grupo, otros], SELinux [ver] añade una capa de políticas de seguridad que controlan qué puede hacer cada proceso con cada recurso [ficheros, sockets, puertos, etc.]. Incluye las aplicaciones avcstat, compute_av, compute_create, compute_member, compute_relabel, getconlist, getdefaultcon, getenforce, getfilecon, getpidcon, getpidprevcon, getpolicyload, getsebool, getseuser, matchpathcon, policyvers, sefcontext_compile, selabel_compare, selabel_digest, selabel_get_digests_all_partial_matches, selabel_lookup, selabel_lookup_best_match, selabel_partial_match, selinux_check_access, selinux_check_securetty_context, selinuxenabled, selinuxexeccon, setenforce, setfilecon, togglesebool y validatetrans.
+# getenforce (saber si esta activo selinux)
+# getsebool -a (mostrar todas las politicas si estan o no activas. Ver comando getsebool)
 
 
 sendmail
