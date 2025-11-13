@@ -37478,6 +37478,22 @@ nfct
 # nfct count (muestra un resumen de la cantidad de conexiones por protocolo)
 
 
+nfdump
+Conjunto de herramientas esencial para el análisis de tráfico de red utilizando datos de NetFlow/IPFIX. Se requiere un proceso nfcapd por cada flujo de NetFlow. Incluye las aplicaciones nfanon, nfcapd, nfdump, nfexpire, nfpcapd, nfprofile, nfreplay y nftrack.
+$ nfdump -r /ruta/a/nfcapd.202511131800 (muestra el contenido de un archivo específico)
+$ nfdump -R /ruta/a/los/flujos (lee recursivamente todos los archivos de flujo en el directorio)
+$ nfdump -t 2025/11/13.18:00:00-2025/11/13.18:30:00 -R /ruta/ (muestra flujos dentro de un periodo de 30 minutos)
+$ nfdump -R /ruta/a/los/flujos 'proto tcp and src ip 192.168.1.10' (Flujos TCP de una IP de origen específica)
+$ nfdump -R /ruta/a/los/flujos 'dst port 80' (flujos con destino a un puerto HTTP [80])
+$ nfdump -R /ruta/a/los/flujos 'proto udp and bytes > 10k' (tráfico con más de 10.000 bytes y protocolo UDP)
+$ nfdump -R /ruta/a/los/flujos -s srcip/bytes -n 10 (estadísticas de las 10 IP de origen más activas, ordenadas por bytes)
+$ nfdump -R /ruta/a/los/flujos -s dstport/flows -n 5 (top 5 de puertos destino, ordenados por número de flujos)
+$ nfdump -R /ruta/a/los/flujos -A srcip,dstip (agregación por par [IP origen, IP destino]. Muestra el total de tráfico entre cada par de IP)
+$ nfcapd -D -p 9995 -l /var/flows/router1 (Ejecutar como demonio, recibir datos NetFlow en el puerto 9995 y guardarlos en el directorio /var/flows/router1)
+$ nfanon -r in.nf -w anon.nf -T 1 (anonimizar un archivo de flujo de entrada "in.nf", guardar el resultado anonimizado en "anon.nf" y utilizando el método de anonimización 1)
+$ nfexpire -e 7d -w /var/flows/router1 (limpiar archivos antiguos en /var/flows/router1, manteniendo solo los datos de los últimos 7 días)
+
+
 nftables
 Herramienta que proporciona filtrado y clasificación de paquetes que reemplaza frameworks existentes (iptables, ip6tables, arptables y ebtables). Podemos comprobar si la instalación se ha efectuado correctamente arrancando el modulo con:
 # modprobe nf_tables
