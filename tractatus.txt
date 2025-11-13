@@ -37463,6 +37463,21 @@ $ newsboat -ru rss feeds.txt (-u es para indicar el archivo de texto que contien
 Para abrir noticia en el navegador pulsar "o" y para salir "q"
 
 
+nfct
+[NetFilter ConnTrack]. Herramienta que permite manipular el sistema de seguimiento de conexiones de Netfilter. Su función es inspeccionar, añadir, actualizar y borrar entradas en la tabla de seguimiento de conexiones del núcleo [/proc/net/nf_conntrack]. Es particularmente relevante en sistemas donde se usan firewalls como nftables o iptables con reglas "stateful" basadas en el seguimiento de conexiones, o cuando se requiere diagnóstico avanzado de NAT y conexiones de red. Descargar ejemplo de  archivo de configuración de https://github.com/nfc-tools/libnfc/blob/master/libnfc.conf.sample.
+# mkdir /etc/nfc/ (crear direcotorio)
+# cp libnfc.conf.sample /etc/nfc/libnfc.conf (copiar la configuración descargada y adaptarla)
+# nfct list (muestra todas las conexiones de red actualmente registradas en el sistema de seguimiento)
+# nfct list ipv4 (filtra las conexiones activas para mostrar solo las de tipo IPv4)
+# nfct list tcp | grep ESTABLISHED (mostrar solo las conexiones TCP ESTABLISHED)
+# nfct add tcp 192.168.1.100 45678 203.0.113.5 80 ESTABLISHED mark 42 timeout 3600 (crear una entrada "falsa", útil para pruebas de firewall o NAT. Protocolo TCP, IP origen, puerto, IP destino, puerto, estado ESTABLISHED, marca 42, para iptables con -m mark y 3600 segundos)
+# nfct update tcp 192.168.1.100 45678 203.0.113.5 80 \ (actualizar el timeout de una entrada existente)
+# nfct delete ip_src=192.168.1.15 ip_dst=8.8.8.8 proto=tcp sport=443 dport=55732 (elimina la entrada de seguimiento que corresponde a esa conexión concreta)
+# nfct flush (vaciar toda la tabla, corta todas las conexiones rastreadas)
+# nfct event (monitorizar eventos en tiempo real)
+# nfct count (muestra un resumen de la cantidad de conexiones por protocolo)
+
+
 nftables
 Herramienta que proporciona filtrado y clasificación de paquetes que reemplaza frameworks existentes (iptables, ip6tables, arptables y ebtables). Podemos comprobar si la instalación se ha efectuado correctamente arrancando el modulo con:
 # modprobe nf_tables
@@ -43450,6 +43465,11 @@ $ nano /var/log/audit/audit.log (analizar los logs y ver fácilmente las violaci
 $ sestatus
   	 SELinux status:                 enabled
 	 ...
+2.-
+Forma simple de activar selinux
+# apt install selinux-basics selinux-policy-default auditd
+# selinux-activate (se encarga de los pasos de configuración básicos)
+# reboot
 
 
 selinux-utils
