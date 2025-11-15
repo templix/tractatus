@@ -37502,6 +37502,15 @@ $ nfdump -R /var/sflow/data/ 'proto tcp and port 80' -n 10 -s ip/bytes (lee todo
 $ nfdump -R /var/sflow/data/ 'dst ip 192.168.1.100' (mostrar los flujos donde 192.168.1.100 es el destino)
 
 
+nfoview
+Visor sencillo para archivos .nfo, esos típicos archivos de texto con arte ASCII, [dibujos hechos con caracteres] que suelen venir en releases de scene/warez, y que están codificados en CP437, la página de códigos original de DOS. Las ventajas de usar nfoviewer en lugar de un editor de texto son la configuración predefinida de fuentes y codificación, el ajuste automático del tamaño de la ventana y los hipervínculos clicables.
+$ nfoview archivo.nfo (abrirá una ventana gráfica con el arte ASCII perfectamente alineado)
+$ nfoview --geometry=80x25 archivo.nfo (forzar tamaño de ventana)
+$ nfoview release1.nfo release2.nfo info.nfo (abrir varios archivos cada uno en una pestaña)
+$ nfoview --encoding=IBM850 archivo.nfo (por defecto usa codificación CP437, pero puedes forzar otra si el archivo está mal)
+Nota.- Otras codificaciones comunes: CP437, IBM437, CP850, ISO-8859-1.
+
+
 nftables
 Herramienta que proporciona filtrado y clasificación de paquetes que reemplaza frameworks existentes (iptables, ip6tables, arptables y ebtables). Podemos comprobar si la instalación se ha efectuado correctamente arrancando el modulo con:
 # modprobe nf_tables
