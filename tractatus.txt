@@ -37494,6 +37494,14 @@ $ nfanon -r in.nf -w anon.nf -T 1 (anonimizar un archivo de flujo de entrada "in
 $ nfexpire -e 7d -w /var/flows/router1 (limpiar archivos antiguos en /var/flows/router1, manteniendo solo los datos de los últimos 7 días)
 
 
+nfdump-sflow
+sfcapd recopila datos de sflow y los almacena en archivos compatibles. Escucha en un puerto específico las muestras de tráfico sFlow enviadas por dispositivos de red compatibles, como switches o routers. Los datos sFlow recibidos se procesan y se almacenan en archivos de formato nfdump, el mismo formato que usa nfcapd para NetFlow/IPFIX. Esto es clave, ya que permite que todas las herramientas de análisis de la suite nfdump puedan leer y procesar los datos de sFlow. sFlow es un estándar de muestreo de tráfico de red que permite monitorizar grandes volúmenes de tráfico con una sobrecarga mínima en el dispositivo. A diferencia de NetFlow, que generalmente recolecta información de todos los flujos, sFlow toma muestras periódicas de paquetes o estadísticas de interfaz.
+$ sfcapd -p 6343 -l /var/sflow/data -t 300 -D (empezar a recibir datos escuchando en el puerto UDP 6343, almacenando los archivos en el directorio /var/sflow/data, rotando los archivos cada 5 minutos y ejecuta el proceso como daemon)
+Una vez que sfcapd ha recopilado los datos para analizarlos:
+$ nfdump -R /var/sflow/data/ 'proto tcp and port 80' -n 10 -s ip/bytes (lee todos los archivos de datos del directorio, solo tráfico TCP en el puerto 80, muestra los 10 primeros resultados y genera estadísticas agrupadas por dirección IP y ordenadas por bytes)
+$ nfdump -R /var/sflow/data/ 'dst ip 192.168.1.100' (mostrar los flujos donde 192.168.1.100 es el destino)
+
+
 nftables
 Herramienta que proporciona filtrado y clasificación de paquetes que reemplaza frameworks existentes (iptables, ip6tables, arptables y ebtables). Podemos comprobar si la instalación se ha efectuado correctamente arrancando el modulo con:
 # modprobe nf_tables
