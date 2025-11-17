@@ -37597,6 +37597,17 @@ $ nano versiones_nfstet.sh
      done
 
 
+nfstarce
+Herramienta de análisis de tráfico de red especializada en el protocolo NFS [Network File System] y realiza filtrado, análisis estadístico y capturas del tráfico NFS en tiempo real. Admite los siguientes protocolos: Ethernet, IPv4, IPv6, UDP, TCP, NFSv3, NFSv4, CIFS
+# nfstrace -i eth0 (captura el tráfico NFS en la interfaz eth0 y lo imprime a la salida estándar)
+# nfstrace -i eth0 -o nfs_trace.cap (captura tráfico en eth0 y lo guarda en el archivo nfs_trace.cap)
+# nfstrace -i eth0 -F "host 192.168.1.100" (captura tráfico en eth0 solo para el servidor NFS con IP 192.168.1.100)
+# nfstrace -i eth0 -F "nfsv4" (captura tráfico solo de NFSv4)
+# nfstrace -r nfs_trace.cap --summary-stats (lee el archivo nfs_trace.cap y genera un resumen estadístico [latencias, etc.])
+# nfstrace -i eth0 -F "nfsv3 and WRITE" (captura y muestra solo las operaciones NFSv3 de escritura [WRITE])
+# nfstrace -r nfs_trace.cap --client-stats (muestra estadísticas de latencia agrupadas por host de origen [cliente])
+
+
 nfswatch
 Herramienta para monitorizar el tráfico NFS. Puede capturar y analizar los paquetes NFS en una interfaz de red particular o en todas las interfaces. También monitorea el tráfico de respuesta NFS desde un servidor para medir el tiempo de respuesta de cada RPC.
 # nfswatch (entra en el prompt de la aplicación)
