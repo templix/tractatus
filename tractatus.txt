@@ -37566,6 +37566,37 @@ Consulta datos sobre el servidor NFS
 # nfsstat -m (Muestra datos de los puntos de montaje sólamente)
 
 
+nfstest
+Conjunto de herramientas que permiten probar tanto el cliente como el servidor NFS. Estas herramientas son nfstest_alloc, nfstest_cache, nfstest_delegation, nfstest_dio, nfstest_fcmp, nfstest_file, nfstest_interop, nfstest_io, nfstest_lock, nfstest_pkt, nfstest_pnfs, nfstest_posix, nfstest_rdma, nfstest_sparse, nfstest_ssc, nfstest_xattr y nfstest_xid.
+$ nfstest_alloc -s 192.168.56.11 -e /export -m /mnt/nfs -o vers=4.2,minorversion=2 (crea un fichero, reserva 100 MiB en el medio y verifica que la cuota libre en el servidor disminuye aunque el fichero siga vacío. -s IP del servidor, -e punto de montaje, -m directorio local donde montar y -o opciones de montaje)
+$ nfstest_cache -s 192.168.56.11 -e /export -m /mnt/nfs -o vers=4.1,cto (comprueba que atime, mtime, ctime se invalidan correctamente cuando un segundo cliente cambia los metadatos)
+$ nfstest_delegation -s 192.168.56.11 -e /export -m /mnt/nfs -o vers=4,delegation (fuerza que el servidor conceda una delegación READ o WRITE, desconecta el cliente, modifica el fichero desde otro cliente y comprueba que la delegación se revoca)
+$ nfstest_dio -s 192.168.56.11 -e /export -m /mnt/nfs -o vers=3,proto=tcp (verifica que los reads/writes con O_DIRECT no pasan por la cache del cliente y que el tamaño y la alineación respetan los límites del servidor)
+$ nfstest_fcmp -s 192.168.56.11 -e /export -m /mnt/nfs --server-path /export/testfile --local-file /mnt/nfs/testfile (comparación de ficheros cliente/servidor. Monta el export, escribe un
+patrón, lo sincroniza, lo lee desde el servidor por otro canal [ssh] y compara bit a bit)
+$ nfstest_file -s 192.168.56.11 -e /export -m /mnt/nfs (crea, renombra, trunca, elimina, enlaza duro/simbólico, etc. y comprueba que los atributos volátiles se actualizan)
+$ nfstest_interop -s 192.168.56.11 -e /export -m /mnt/nfs (prueba casos límite que suelen fallar entre implementaciones distintas)
+$ nfstest_io -s 192.168.56.11 -e /export -m /mnt/nfs --pattern=0xdeadbeef --size=1G --blocksize=1M (rendimiento y corrección de I/O comprobación de checksum del fichero resultante)
+$ nfstest_lock -s 192.168.56.11 -e /export -m /mnt/nfs -o vers=4,lock (ejecuta los clásicos“fcntl/lockf tests: lock exclusivo, shared, deadlock, signal interruption, close-fd free-all, etc)
+$ nfstest_pkt -s 192.168.56.11 -e /export -m /mnt/nfs --xid-replay=5 (envía paquetes malformados o con XID duplicado, simula retransmisiones y comprueba que el servidor no corrompe estado)
+$ nfstest_pnfs -s 192.168.56.11 -e /export -m /mnt/nfs -o vers=4.1,pnfs (útil si el servidor exporta con pnfs; fuerza la concesión de layouts, hace I/O a través del DS y comprueba la devolución)
+$ nfstest_posix -s 192.168.56.11 -e /export -m /mnt/nfs (crea miles de ficheros, prueba link-max, name-max, path-max, pipe, fifo, mknod, etc)
+$ nfstest_rdma -s 192.168.56.11 -e /export -m /mnt/nfs -o proto=rdma,port=20049 (comprueba que el servidor acepta la negotiación de RDMA y que el cliente puede montar y hacer I/O sin pasar por TCP)
+$ nfstest_sparse -s 192.168.56.11 -e /export -m /mnt/nfs -o vers=4.2 (escribe solo los bloques 0, 2, 4... y comprueba que st_blocks refleja el espacio real y luego hace un fallocate(FALLOC_FL_PUNCH_HOLE))
+$ nfstest_ssc -s 192.168.56.11 -e /export -m /mnt/nfs -o vers=4.2 (fuerza una copia en el servidor [CB_COPY] y compara el resultado con una copia local para ver que los datos son idénticos)
+$ nfstest_xattr -s 192.168.56.11 -e /export -m /mnt/nfs -o vers=4.2,xattr (crea user.*, system.*, trusted.* y comprueba que listxattr, getxattr, removexattr funcionan y que se propagan al servidor)
+$ nfstest_xid -s 192.168.56.11 -e /export -m /mnt/nfs (envía requests con XID = 0, XID = 2³²-1, XID duplicado, etc. y verifica que el servidor responda con el mismo XID y no confunda transacciones)
+Nota.- Cada test crea su propio subdirectorio bajo <mntpoint> y lo limpia al terminar; no sobrescribirá los datos.
+$ tcpdump -i any -s 0 -w /tmp/nfs.pcap host 192.168.56.11 & (ver el tráfico NFS simultáneamente)
+1.-
+script para ejecutar el mismo test sobre varias versiones
+$ nano versiones_nfstet.sh
+   # for v in 3 4 4.1 4.2; do
+       nfstest_file -s 192.168.56.11 -e /export -m /mnt/nfs \
+                    -o vers=$v --logdir=/tmp/results-v$v
+     done
+
+
 nfswatch
 Herramienta para monitorizar el tráfico NFS. Puede capturar y analizar los paquetes NFS en una interfaz de red particular o en todas las interfaces. También monitorea el tráfico de respuesta NFS desde un servidor para medir el tiempo de respuesta de cada RPC.
 # nfswatch (entra en el prompt de la aplicación)
