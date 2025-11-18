@@ -37624,6 +37624,33 @@ Una vez dentro pueden usarse algunas teclas:
 # nfswatch -all (todos los paquetes desde y hacia la red local)
 
 
+nftlb
+[NFTables Load Balancer - balanceador de carga nftables]. Herramienta de administración de alto nivel que permite configurar fácilmente un balanceador de carga de nivel 4 [L4] utilizando el marco nftables [ve] como backend. La lógica del balanceo no la hace nftables directamente; la hace nftlb, que genera reglas y tablas específicas para que nftables haga el trabajo. Nivel 4 [L4] se refiere al nivel de transporte del modelo OSI: TCP/UDP. Esto significa que nftlb no entiende HTTP, HTTPS, etc., eso sería L7, como HAProxy o NGINX, solo ve direcciones IP y puertos, por ejemplo 192.168.1.10:80.
+1.-
+Un ejemplo
+Balancear tráfico HTTP a 3 servidores: 192.168.1.10:80, 192.168.1.11:80 y 192.168.1.12:80 y se quiere que el balanceador [192.168.1.5] que recibe todas las conexiones al puerto 80, las reparta entre ellos
+Configurar el archivo de configuración, crear o editar:
+# nano /etc/nftlb/nftlb.conf
+[global]
+    # Interface de entrada (donde llega el tráfico)
+    interface = eth0
+[backend http]
+    # Protocolo y puerto del servicio
+    protocol = tcp
+    port = 80
+    # Servidores backend
+    servers = 192.168.1.10:80, 192.168.1.11:80, 192.168.1.12:80
+    # Algoritmo de balanceo: round-robin (por defecto)
+    lb_algo = rr
+    # Tipo de NAT: DNAT (redirige la conexión)
+    lb_type = nat
+# systemctl enable nftlb (iniciar el servicio)
+# systemctl start nftlb
+# nft list ruleset (verificar las reglas generadas)
+En la práctica recibe una conexión TCP desde un cliente a 192.168.1.5:80, elige un servidor backend, por round-robin, least connections, etc, cambia la IP de destino [DNAT] a 192.168.1.10:80 y cambia la IP de origen [SNAT] de la respuesta del servidor para que vuelva por el balanceador. El cliente cree que está hablando con 192.168.1.5, pero en realidad está con 192.168.1.10.
+Nota.- Si un servidor falla, nftlb lo elimina automáticamente del grupo.
+
+
 ngrep
 Herramienta para monitorear el tráfico de red. Grep para tráfico de red.
 # ngrep port 80  (captura todo lo que use el puerto 80)
