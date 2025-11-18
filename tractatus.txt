@@ -33417,27 +33417,6 @@ En modo interactivo se pueden usar comandos como "play", "record", "exit"
 # journalctl -u mgetty@ttyS0.service -f (ver logs)
 
 
-nghttp2
-El paquete solo instalará un conjunto de programas que implementan el protocolo HTTP/2: un servidor independiente (nghttp2-server), un proxy inverso (nghttp2-proxy) y un cliente (nghttp2-client). nghttp2 no incluye archivos adicionales y no es necesario para que los programas que instala funcionen. Los ejecutables de los 3 programas son h2load y nghttp [nghttp2-client], nghttpd [nghttp2-server] y nghttpx [nghttp2-proxy].
-$ nghttp https://nghttp2.org (hacer un GET simple a una web que hable HTTP/2 o HTTP/3)
-$ nghttp -ns https://nghttp2.org (ver solo las cabeceras de respuesta. -n no verifica certificado y -s muestra estadísticas al final)
-$ nghttp -d datos.json https://httpbin.org/post (hacer un POST con un fichero JSON)
-$ nghttp --http3 https://quic.nghttp2.org (forzar HTTP/3 si el servidor lo soporta)
-$ nghttp -nv https://nghttp2.org (mostrar información muy detallada del handshake ALPN, prioridades, streams, etc.)
-$ h2load -n 1000 -c 100 -m 10 https://nghttp2.org (herramienta de estrés: 100 conexiones, 1000 peticiones totales, 10 en paralelo por conexión)
-$ h2load --http3 -n 50000 -c 200 https://quic.nghttp2.org (probar con HTTP/3)
-$ h2load -n 25000 -c 50 -m 20 https://localhost:8443 (simular 50 clientes, cada uno haciendo 500 peticiones, máximo 20 peticiones simultáneas por conexión)
-$ h2load -n 10000 -c 100 https://localhost/index.html https://localhost/style.css https://localhost/app.js (probar varias URLs distintas)
-$ nghttpd 8443 (servidor simple en puerto 8443 con certificado autofirmado que incluye el paquete)
-$ nghttpd --cert=mi-cert.pem --private-key=mi-key.pem 443 (usar los propios certificado y clave)
-$ nghttpd -d /var/www/mi-web 8443 (servir un directorio concreto, por defecto sirve /usr/share/nghttp2/fetch-ocsp-response si no se indica nada)
-$ nghttpd -d /var/www -p "/index.html=/style.css;/index.html=/script.js" 8443 (activar Server Push útil para probar que el cliente HTTP/2 funciona correctamente)
-$ nghttpx --frontend="*,443;tls" --backend="127.0.0.1,8080;http" /etc/ssl/mi-cert.pem /etc/ssl/mi-key.pem (terminar TLS, hablar HTTP/2 con el cliente y HTTP/1.1 con el backend)
-$ nghttpx --frontend="*,443;tls" --frontend="*,80;no-tls" --backend="192.168.1.10,3000;proto=h2" --backend="192.168.1.11,3000;proto=h2" mi-cert.pem mi-key.pem (aceptar HTTP/1, HTTP/2 y HTTP/3 en el frontend y hablar HTTP/2 con los backends)
-$ nghttpx --frontend="*,443;quic" --frontend="*,443;tls" --backend="127.0.0.1,8080" mi-cert.pem mi-key.pem (modo HTTP/3 [QUIC])
-$ nghttpx --frontend="127.0.0.1,8080;no-tls" --backend="0.0.0.0,0;http-proxy" (forward proxy (como Squid pero HTTP/2. Luego configurar el navegador o curl con proxy http://127.0.0.1:8080)
-
-
 mgitstatus
 Herramienta que recorre varios repositorios Git e informa, para cada uno, de los cambios no confirmados, no rastreados y no enviados. Entrar en el directorio de los proyectos y lanzar la aplicación.
 $ mgitstatus
@@ -37722,6 +37701,27 @@ ngetty
 # ngetty --login-program=/bin/bash /dev/tty1 (personalización)
 
 
+nghttp2
+El paquete solo instalará un conjunto de programas que implementan el protocolo HTTP/2: un servidor independiente (nghttp2-server), un proxy inverso (nghttp2-proxy) y un cliente (nghttp2-client). nghttp2 no incluye archivos adicionales y no es necesario para que los programas que instala funcionen. Los ejecutables de los 3 programas son h2load y nghttp [nghttp2-client], nghttpd [nghttp2-server] y nghttpx [nghttp2-proxy].
+$ nghttp https://nghttp2.org (hacer un GET simple a una web que hable HTTP/2 o HTTP/3)
+$ nghttp -ns https://nghttp2.org (ver solo las cabeceras de respuesta. -n no verifica certificado y -s muestra estadísticas al final)
+$ nghttp -d datos.json https://httpbin.org/post (hacer un POST con un fichero JSON)
+$ nghttp --http3 https://quic.nghttp2.org (forzar HTTP/3 si el servidor lo soporta)
+$ nghttp -nv https://nghttp2.org (mostrar información muy detallada del handshake ALPN, prioridades, streams, etc.)
+$ h2load -n 1000 -c 100 -m 10 https://nghttp2.org (herramienta de estrés: 100 conexiones, 1000 peticiones totales, 10 en paralelo por conexión)
+$ h2load --http3 -n 50000 -c 200 https://quic.nghttp2.org (probar con HTTP/3)
+$ h2load -n 25000 -c 50 -m 20 https://localhost:8443 (simular 50 clientes, cada uno haciendo 500 peticiones, máximo 20 peticiones simultáneas por conexión)
+$ h2load -n 10000 -c 100 https://localhost/index.html https://localhost/style.css https://localhost/app.js (probar varias URLs distintas)
+$ nghttpd 8443 (servidor simple en puerto 8443 con certificado autofirmado que incluye el paquete)
+$ nghttpd --cert=mi-cert.pem --private-key=mi-key.pem 443 (usar los propios certificado y clave)
+$ nghttpd -d /var/www/mi-web 8443 (servir un directorio concreto, por defecto sirve /usr/share/nghttp2/fetch-ocsp-response si no se indica nada)
+$ nghttpd -d /var/www -p "/index.html=/style.css;/index.html=/script.js" 8443 (activar Server Push útil para probar que el cliente HTTP/2 funciona correctamente)
+$ nghttpx --frontend="*,443;tls" --backend="127.0.0.1,8080;http" /etc/ssl/mi-cert.pem /etc/ssl/mi-key.pem (terminar TLS, hablar HTTP/2 con el cliente y HTTP/1.1 con el backend)
+$ nghttpx --frontend="*,443;tls" --frontend="*,80;no-tls" --backend="192.168.1.10,3000;proto=h2" --backend="192.168.1.11,3000;proto=h2" mi-cert.pem mi-key.pem (aceptar HTTP/1, HTTP/2 y HTTP/3 en el frontend y hablar HTTP/2 con los backends)
+$ nghttpx --frontend="*,443;quic" --frontend="*,443;tls" --backend="127.0.0.1,8080" mi-cert.pem mi-key.pem (modo HTTP/3 [QUIC])
+$ nghttpx --frontend="127.0.0.1,8080;no-tls" --backend="0.0.0.0,0;http-proxy" (forward proxy (como Squid pero HTTP/2. Luego configurar el navegador o curl con proxy http://127.0.0.1:8080)
+
+
 ngrep
 Herramienta para monitorear el tráfico de red. Grep para tráfico de red.
 # ngrep port 80  (captura todo lo que use el puerto 80)
@@ -37731,9 +37731,9 @@ Herramienta para monitorear el tráfico de red. Grep para tráfico de red.
 # ngrep -e -x PASS (introduciendo una cadena en la busqueda y mostrando lo que no coincida con ella)
 # ngrep b    (captura todo usando el filtro por defecto)
 # ngrep port 80 -O archivo (redirige la salida a un archivo)
+# ngrep -l -q -d eth0 -i "^GET |^POST " tcp and port 80 (muestra las cargas útiles de paquetes HTTP coincidentes en la interfaz eth0)
+# ngrep -wi -d any 'user|pass' port 21 (realiza un seguimiento de los paquetes que contienen "user" o "pass" en el tráfico FTP)
 Nota.- Las almoadillas (#) son paquetes que no cumplen la expresión regular.
-Otras usos:
-# ngrep -d1 -w -i “user|pass” port 21
 
 
 nice
@@ -37760,6 +37760,13 @@ Herramientas que pueden ayudar a diagnosticar problemas con tarjetas Ethernet o,
 
 nield
 Daemon para recibir notificaciones del núcleo a través del socket de enlace de red y generar registros relacionados con las interfaces NIC [network information service]. Una vez arrancado el daemon [/etc/init.d/nield start] visualizar los logs en /var/log/nield.log.
+
+
+nik4
+script para exportar imágenes desde Mapnik utilizando las bibliotecas de Python. Mapnik es una herramienta para la representación de mapas.
+$ nik4 -c 2.483307 42.185949 --size-px 800 600 -z 17 style.xml imagen.png (centrar un mapa a unas coordenadas con tamaño fijo en píxeles)
+$ nik4 --url "https://www.openstreetmap.org/#map=17/42.185949/2.483307" osm.xml imagen.png
+Nota.- Archivos como osm.xml, custom.xml, etc. Es el estilo de Mapnik que definirá cómo se renderizan los datos. Sin ese archivo XML, nik4 no sabe cómo representar el mapa.
 
 
 nikto
