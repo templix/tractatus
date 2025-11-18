@@ -17485,9 +17485,11 @@ $ fgconsole
 
 
 fgetty
-Getty minimalista, eficiente, con un consumo de memoria mínimo, que no soporta terminales seriales ni redes y solo apto para consola de Linux. fgetty incluye un programa de inicio de sesión compatible con la interfaz de autenticación checkpassword [usada en sistemas tipo DJB [Daniel J. Bernstein] como qmail, ucspi-tcp, etc.] y también un programa checkpassword que utiliza la interfaz de la biblioteca estándar de C para passwd y shadow.
+[Fast Getty]. Getty minimalista, eficiente, con un consumo de memoria mínimo, que no soporta terminales seriales ni redes y solo apto para consola de Linux. fgetty incluye un programa de inicio de sesión compatible con la interfaz de autenticación checkpassword [usada en sistemas tipo DJB [Daniel J. Bernstein] como qmail, ucspi-tcp, etc.] y también un programa checkpassword que utiliza la interfaz de la biblioteca estándar de C para passwd y shadow.
 $ fgetty /dev/tty1 (iniciar fgetty en la consola virtual mencionada y mostrará el prompt de login en esa terminal)
 $ fgetty --login /usr/bin/checkpassword /dev/tty2 (indica que debe usar checkpassword como backend de autenticación)
+$ fgetty -n /dev/tty1 (sin prompt personalizado)
+$ fgetty --noclear /dev/tty1 (sin limpiar pantalla, más rápido)
 
 
 fgrep
@@ -20691,7 +20693,7 @@ $ xgettext --default-domain=mi_programa -o locale/mi_programa.pot script.py (esp
 
 
 getty
-Alternativa de agetty [ver] abre un puerto TTY, solicita un nombre de usuario e invoca el comando /bin/login.
+[get tty] es el original de UNIX responsable de iniciar sesiones de login en terminales. Reemplazado por agetty [ver].
 
 
 getty-run
@@ -33374,6 +33376,47 @@ mgen
 Ofrece la capacidad de realizar pruebas y mediciones de rendimiento de la red IP utilizando el tráfico TCP y UDP/IP. Los mensajes de prueba se pueden generar, recibir y registrar. mgen ofrece control sobre todos los parámetros de red y la sincronización de estos mensajes. Información: https://github.com/USNavalResearchLaboratory/mgen/blob/master/doc/mgen.pdf
 
 
+mgetty
+[mgetty-fax mgetty-voice]. Permite usar un módem para gestionar inicios de sesión externos, recibir faxes y usarlo como contestador automático sin interferir con las llamadas salientes.
+Ejemplo de archivo de configuración
+# nano /etc/mgetty/login.config
+       # Puerto ttyS0: acepta llamadas y permite login
+       /dev/ttyS0    -    -    115200  speed 115200
+Indica que cuando alguien llame por /dev/ttyS0 [tambien podría ser /dev/ttyUSB0], inicie mgetty con velocidad 115200.
+Configurar el puerto
+# nano /etc/mgetty/mgetty.config
+       port ttyS0
+       data-only no
+       fax-only no
+       voice-only no
+       debug 3
+# systemctl enable mgetty@ttyS0.service (habilitar el servicio)
+# systemctl start mgetty@ttyS0.service
+Para recibir faxes añadir al archivo de configuración /etc/mgetty/login.config la linea:
+      /dev/ttyS0    -    -    115200  speed 115200 fax
+Y para configurar el fax, editar o crear el archivo:
+# nano /etc/mgetty/fax/mfax.config
+       # /etc/mgetty/fax/mfax.config
+       fax-dir /var/spool/fax/incoming
+       fax-sender-id "MiEmpresa"
+       fax-receiver-id "MiEmpresa"
+# mkdir -p /var/spool/fax/incoming (crear directorio para faxes recibidos)
+# chown fax:fax /var/spool/fax/incoming (y el propietario)
+# systemctl restart mgetty@ttyS0.service (reiniciar el sevicio)
+Para usar como contestador automático añadir al archivo de configuración /etc/mgetty/login.config la linea:
+       /dev/ttyS0    -    -    115200  speed 115200 voice
+Y para configurar el contestador:
+# nano /etc/mgetty/voice/voice.config
+       voice-dir /var/spool/voice
+       max-message-length 60
+       prompt-file /usr/share/mgetty/voice/prompt/voice-prompt
+# mkdir -p /var/spool/voice (crear directorios para grabar mensajes)
+# chown voice:voice /var/spool/voice (el usuario)
+# voice -d /dev/ttyS0 (entra en modo voz con un terminal conectado al módem)
+En modo interactivo se pueden usar comandos como "play", "record", "exit"
+# journalctl -u mgetty@ttyS0.service -f (ver logs)
+
+
 mgitstatus
 Herramienta que recorre varios repositorios Git e informa, para cada uno, de los cambios no confirmados, no rastreados y no enviados. Entrar en el directorio de los proyectos y lanzar la aplicación.
 $ mgitstatus
@@ -33704,7 +33747,7 @@ Herramienta que imprime los parámetros de un sistema de archivos MS-DOS, como e
 
 
 mingetty
-Versión minimalista y optimizada del programa "getty", diseñada específicamente para consolas virtuales locales, como las terminales accesibles con "Ctrl+Alt+F1-F6", no funciona con terminales físicas [seriales] ni redes [SSH]. Getty abre un puerto tty, solicita un nombre de usuario e invoca el comando /bin/login.
+[Modern Getty]. Versión minimalista y optimizada del programa "getty", diseñada específicamente para consolas virtuales locales, como las terminales accesibles con "Ctrl+Alt+F1-F6", no funciona con terminales físicas [seriales] ni redes [SSH]. Getty abre un puerto tty, solicita un nombre de usuario e invoca el comando /bin/login.
 # mingetty /dev/tty4 (abrirá la terminal tty4, accesible con "Ctrl+Alt+F4", donde se pedirá un nombre de usuario)
 Nota.- En sistemas actuales, mingetty está integrado en el servicio getty@.service. Para habilitarlo en tty3, caso improbable de que no lo esté por "systemd-logind":
 # systemctl enable getty@tty3.service
@@ -37649,6 +37692,13 @@ Configurar el archivo de configuración, crear o editar:
 # nft list ruleset (verificar las reglas generadas)
 En la práctica recibe una conexión TCP desde un cliente a 192.168.1.5:80, elige un servidor backend, por round-robin, least connections, etc, cambia la IP de destino [DNAT] a 192.168.1.10:80 y cambia la IP de origen [SNAT] de la respuesta del servidor para que vuelva por el balanceador. El cliente cree que está hablando con 192.168.1.5, pero en realidad está con 192.168.1.10.
 Nota.- Si un servidor falla, nftlb lo elimina automáticamente del grupo.
+
+
+ngetty
+[New Getty]. Es un demonio que inicia sesiones de inicio de sesión en terminales de consola virtual, bajo demanda. Es un buen reemplazo para todos esos procesos getty iniciados desde init que, la mayoría de las veces, solo consumen memoria.
+# ngetty /dev/tty4 (probar ngetty)
+# ngetty -L 115200 /dev/ttyS0 (para línea serie)
+# ngetty --login-program=/bin/bash /dev/tty1 (personalización)
 
 
 ngrep
