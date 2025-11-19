@@ -51729,6 +51729,19 @@ $ yptest (verifica múltiples aspectos de la conexión NIS al dominio actual)
 $ rpcinfo -p (verificar los servicios que están en marcha)
 
 
+ypbind
+Daemon cliente para trabajar con el Sistema de Información de Red [NIS]. Este daemon puede gestionar múltiples solicitudes de forma concurrente. Esto significa que puede atender varias peticiones simultáneamente sin bloquearse o tener que esperar a que una solicitud termine antes de comenzar otra.
+
+
+ypserv
+Servidor y otros programas necesarios para implementar un servicio NIS [ver] para cuentas y nombres de red compartidos. Incluye los ejecutables rpc.yppasswdd, rpc.ypxfrd y yppush.
+# systemctl enable ypserv (habilitar que se inicie automáticamente al arrancar el sistema)
+# rpc.yppasswdd (iniciar el demonio que permite a los usuarios cambiar sus contraseñas en el servidor NIS. Cuando un usuario cambia su contraseña, este demonio actualiza la base de datos de contraseñas [passwd.byname y passwd.byuid] y luego notifica a ypserv para que actualice las bases de datos NIS)
+# rpc.ypxfrd (iniciar el demonio que acelera la transferencia de mapas NIS desde el servidor maestro a los esclavos)
+# yppush (enviar actualizaciones a todos los servidores esclavos)
+# yppush -h servidor_esclavo1 -h servidor_esclavo2 (enviar actualizaciones a servidores esclavos específicos)
+
+
 yt-dlp
 [FFmpeg]. Utilidad escrita en python [pip install yt-dlp] para descargar audio y video de servicios como YouTube. Es un fork de youtube-dl que actualmente parece que no se está desarrollando.
 $ yt-dlp url (forma básica)
