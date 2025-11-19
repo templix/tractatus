@@ -1592,7 +1592,7 @@ Buscar un paquete que contiene un fichero o ver el contenido de un paquete. Una 
 # apt-file update
 # apt-file search ifconfig
 # apt-file list ifconfig
-# apt-file list util-linux | grep -E 'bin|sbin' (ver los ejecutables de un paquete)
+# apt-file list util-linux | grep -E '/bin/|/sbin/' (ver los ejecutables de un paquete)
 
 
 apt-ftparchive
@@ -12824,7 +12824,7 @@ $ dpkg -l inkscape  (Conocer si un paquete está instalado y su versión)
 # dpkg-query -W paquete (Ver versión de un paquete)
 # dpkg -i --force-overwrite /var/cache/apt/archives/paquete.deb (forzar install)
 # dpkg -b deb paquete.deb (Convertir la carpeta “deb” en un archivo “.deb”)
-# dpkg -L util-linux | grep -E 'bin|sbin' (ver los ejecutables de un paquete)
+# dpkg -L util-linux | grep -E '/bin/|/sbin/' (ver los ejecutables de un paquete)
 1.-
 En ocasiones, algún paquete medio o mal instalado puede bloquear la aplicación. En estos casos puede usarse:
 # rm /var/lib/apt/lists/* -vf
@@ -37787,6 +37787,24 @@ $ ninja (construir un proyecto)
 $ ninja nombre_del_objetivo (construir un objetivo específico)
 $ ninja -t clean -r rules (elimina todos los archivos creados)
 $ ninja -j4 (construir en paralelo, usando 4 jobs)
+
+
+nis
+[Network Information Service - Servicio de Información de Red]. Este paquete proporciona herramientas para configurar y mantener un dominio NIS que se utiliza principalmente para que varias máquinas en una red compartan la misma información de cuenta, usuarios, contraseñas, grupos, hosts, etc. En realidad, NIS permite que un servidor central [master o slave] comparta archivos como /etc/passwd, /etc/group, /etc/hosts, etc., con todos los clientes de la red así, cuando se crea un usuario en el servidor NIS, ese usuario puede hacer login en cualquier cliente sin volver a crearlo localmente. NIS es inseguro ya que envía contraseñas en texto plano por la red y está prácticamente obsoleto. Instalar los paquetes yp-tools, libnss-nis, ypserv y ypbind-mt.
+# systemctl enable --now rpcbind ypserv yppasswdd ypxfrd ypbind (arrancar los servicios)
+$ echo "midominio-nis" > /etc/defaultdomain (elegir un domainname y configurarlo de forma permanente. Es un nombre arbitrario que agrupa todas las máquinas que usaran el mismo servidor NIS)
+$ echo "domain midominio-nis server 192.168.1.10" | sudo tee /etc/yp.conf (indicar el servidor)
+$ domainname midominio-nis (elegir un domainname de forma no permanente)
+Nota.- nisdomainname y ypdomainname son alias del mismo comando domainname que si no está definido, ypbind y todos los comandos relacionados abortan con "domainname not set - aborting".
+$ ypwhich (a qué servidor NIS está conectado el cliente o el propio servidor)
+$ ypcat passwd.byname (muestra todo el mapa passwd [usuarios NIS])
+$ ypcat group (muestra el mapa de grupos)
+$ ypmatch pepe passwd (busca un usuario concreto)
+$ yppasswd (cambia la contraseña de un usuario NIS desde cualquier cliente)
+$ yppush (lanzado en el servidor fuerza la propagación de mapas a slaves)
+$ make -C /var/yp (en el servidor master regenera todos los mapas NIS a partir de /etc/passwd, etc. Se ejecuta automáticamente cuando se cambia usuarios)
+$ /usr/lib/yp/ypinit -m (inicializa un servidor master)
+$ /usr/lib/yp/ypinit -s master (inicializa un servidor slave)
 
 
 nitrogen
