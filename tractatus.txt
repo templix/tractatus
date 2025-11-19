@@ -37781,6 +37781,39 @@ nikto
 # nikto -h archivo (a partir de un archivo con una ip o host por linea)
 
 
+nilfs-tools
+Conjunto de herramientas para implementación de un sistema de archivos con estructura de registro. Permite la creación continua de instantáneas [Snapshots], de modo que los usuarios pueden restaurar archivos sobrescritos o destruidos por error, incluso si esto ocurre después de la última copia de seguridad. Incluye los ejecutables chcp, dumpseg, lscp, lssu, mkcp, rmcp, mkfs.nilfs2, mount.nilfs2, nilfs-clean, nilfs-resize, nilfs-tune, nilfs_cleanerd y umount.nilfs2.
+# mkfs -t nilfs2 /dev/sdb1 (crea un sistema de archivos NILFS2 en un dispositivo)
+# mkfs.nilfs2 /dev/sdb1 (Lo mismo)
+# mount -t nilfs2 /dev/sdb1 /mnt/nilfs_data (monta un volumen NILFS2)
+# umount /mnt/nilfs_data (desmonta un volumen NILFS2)
+# nilfs-clean /dev/sdb1 (fuerza la limpieza si el limpiador automático está desactivado)
+# nilfs_cleanerd /dev/sdb1 (demonio limpiador de NILFS2. Normalmente se inicia automáticamente al montar o mediante un script de inicio
+# nilfs-resize /dev/sdb1 50G (cambia el tamaño de un volumen NILFS2 para expandirlo)
+# nilfs-tune -c 60 /dev/sdb1 (ajusta parámetros del sistema de archivos NILFS2, como el intervalo entre checkpoints)
+# lscp -l /dev/sdb1 (lista los checkpoints y snapshots [puntos de sincronización] disponibles en el sistema de archivos)
+# mkcp -s /dev/sdb1 (crea un nuevo checkpoint explícito o convierte un checkpoint existente en un snapshot de solo lectura)
+# chcp -s 1234 /dev/sdb1 (Marca el checkpoint 1234 como snapshot)
+# rmcp 1234 /dev/sdb1 (elimina un checkpoint o un snapshot conservado, permitiendo que el limpiador recupere su espacio)
+# dumpseg -h /dev/sdb1 (muestra información detallada sobre los segmentos [segmentos son las unidades de escritura de NILFS2] en el dispositivo)
+# lssu /dev/sdb1 (lista los estados de uso de segmentos y el uso general del disco)
+1.-
+Ejemplo Práctico de Recuperación de Archivos
+Un volumen NILFS2 montado en /mnt/nilfs_data
+# echo "Datos iniciales" > /mnt/nilfs_data/documento.txt (crear un archivo)
+# lscp /dev/sdb1 (verificar el último checkpoint. El ID más alto es el último checkpoint)
+Accidentalmente, se borra el archivo:
+# rm /mnt/nilfs_data/documento.txt
+Recuperar la versión anterior montando el checkpoint anterior como una instantánea de solo lectura. Suponiendo que el checkpoint anterior es el 1234:
+# umount /mnt/nilfs_data (desmontar el sistema de archivos)
+# mount.nilfs2 -r -o cp=1234 /dev/sdb1 /mnt/nilfs_data (volver a montar, pero especificando el checkpoint a usar. "-r" solo lectura y "-o cp=1234" montar el checkpoint 1234)
+Ahora /mnt/nilfs_data/documento.txt contiene los "Datos iniciales" de nuevo.
+Volver a montar el sistema de archivos en su estado actual, el más reciente:
+# umount /mnt/nilfs_data
+# mount -t nilfs2 /dev/sdb1 /mnt/nilfs_data
+Nota.- Punto de Control (Checkpoint) es una instantánea que se crea automáticamente cada vez que se escriben datos en el disco. Punto de Sincronización (Snapshot) es un checkpoint especial que se marca explícitamente como conservado (no será eliminado por el limpiador) y se comporta como una instantánea de solo lectura.
+
+
 ninja-build
 Sistema de compilación parecida a Make. Su objetivo distintivo es la rapidez. Nace del proyecto del navegador Chromium, que cuenta con más de 30 000 archivos fuente y cuyos otros sistemas de compilación pueden tardar diez segundos en empezar a compilar tras modificar un archivo. Ninja tarda menos de un segundo.
 $ ninja (construir un proyecto)
