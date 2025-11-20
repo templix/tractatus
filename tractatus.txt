@@ -37881,6 +37881,13 @@ Y añadir las lineas
 	 fi
 
 
+njs
+Subconjunto de JavaScript diseñado específicamente para extender la funcionalidad de NGINX. Permite ejecutar código JavaScript directamente dentro de la configuración de NGINX.  Este comando sirve para depurar scripts, probar lógica de negocio sin necesidad de reiniciar NGINX y validar sintax pero es independiente de Nginx y no se ejecuta dentro de él; por lo tanto, los objetos HTTP y Stream no están disponibles.
+$ njs script.js (ejecutar script)
+$ njs (modo interactivo)
+$ njs -t script.js (con opciones de debugging)
+
+
 nl
 Muestra en pantalla un archivo de texto con las lineas numeradas. No modifica el archivo.
 $ nl fichero.txt
@@ -38056,6 +38063,10 @@ $ nmcli general reload (reiniciar servicio despues de modificar una conexión)
 nmon
 Monitor del sistema
 # nmon   (arranca la aplicación y muestra las teclas de control para escoger lo que se monitorea. “q” para cerrar la aplicación)
+
+
+nmrpflash
+Utilidad de actualización de firmware para dispositivos Netgear [EX2700, DNG3700v2, R6220, R7000, D7000, WNR3500, R6400 y R6800]
 
 
 nnn
