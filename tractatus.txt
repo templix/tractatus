@@ -38069,6 +38069,14 @@ nmrpflash
 Utilidad de actualización de firmware para dispositivos Netgear [EX2700, DNG3700v2, R6220, R7000, D7000, WNR3500, R6400 y R6800]
 
 
+nmzmail
+Herramienta que sirve de “puente” entre el lector de correos, normalmente Mutt y el motor de búsqueda Namazu2. Su única misión es indexar todos los mensajes que haya en una o varias carpetas Maildir y aceptar una consulta desde Mutt, pasarla a Namazu2 y devolver la lista de mensajes que coincidan para que Mutt pueda mostrar sólo esos correos.
+$ nmzmail -v -f ~/.nmzmail-index -m ~/Maildir (indexar en modo verbose, donde se guardará el índice y carpeta de los mensajes)
+$ nmzmail -v -f ~/.nmzmail-index -m ~/Maildir -u (reindexar sólo lo nuevo)
+$ nmzmail -v -f ~/.nmzmail-index -m ~/Maildir -m ~/Maildir-trabajo -m ~/Maildir-lists (indexar varias carpetas a la vez)
+$ nmzmail -f ~/.nmzmail-index -s "presupuesto final" (probar una busqueda)
+
+
 nnn
 Administrador de archivos. Muestra en primer lugar los directorios y luego los archivos. La configuración personal se realiza en el archivo ~/.nnncp al estilo:
 $ nano .nnncp
