@@ -37501,12 +37501,14 @@ texto que se tiene que agregar:
 
 
 newsboat
-Lector de noticias RSS. Descargar de <http://github.com/newsboat/newsboat.git>
-Los feeds se han de colocar en un archivo de texto, por ejemplo, feeds.txt con el siguiente formato:
-<a title="Linkification: https://site.com/feed/" href="https://site.com/feed/" class="linkification-ext">https://site.com/feed/</a>
-Lanzar la aplicación:
-$ newsboat -ru rss feeds.txt (-u es para indicar el archivo de texto que contiene los feeds y -r para que se actualicen)
-Para abrir noticia en el navegador pulsar "o" y para salir "q"
+Lector de noticias RSS.
+$ newsboat -i feeds.opml (importar fuentes. Se instalan en el archivo ~/.newsboat/urls que puede que tenga que crearse)
+$ newsboat (entrar en la aplicación)
+R --> actualizar todos los feeds
+r --> recargar una fuente en particular
+e --> exportar los feeds
+o --> abrir la noticia con el navegador
+q --> salir
 
 
 nfct
@@ -38075,6 +38077,23 @@ $ nmzmail -v -f ~/.nmzmail-index -m ~/Maildir (indexar en modo verbose, donde se
 $ nmzmail -v -f ~/.nmzmail-index -m ~/Maildir -u (reindexar sólo lo nuevo)
 $ nmzmail -v -f ~/.nmzmail-index -m ~/Maildir -m ~/Maildir-trabajo -m ~/Maildir-lists (indexar varias carpetas a la vez)
 $ nmzmail -f ~/.nmzmail-index -s "presupuesto final" (probar una busqueda)
+
+
+nn
+Lector de noticias USENET clásico [años 80–90], muy rápido y antiguo, pensado para servidores UNIX conectados a un news server [NNTP]. No está pensado para leer RSS, blogs ni webs: funciona solo con servidores USENET, por ejemplo news.eternal-september.org [registro gratis]. Incluye las herramientas nnadmin, nnbatch, nncheck, nngoback, nngrab, nngrep, nnpost, nnstats, nntidy, nnusage y nnview.
+Para evitar que al lanzar alguno de los comandos nos diga:
+     hostname=debian, You need a fully qualified domain name
+"hostname=debian" o el que sea, es porque nn espera un nombre tipo debian.localdomain, debian.lan, debian.home... para solucionarlo:
+# nano /etc/hosts
+Y modificar la linea para que quede:
+     127.0.1.1   debian.localdomain   debian
+Para configurar el servidor de noticias, nn necesita un servidor NNTP, que ha de ponerse en la variable de entorno:
+$ export NNTPSERVER=news.eternal-september.org
+O en el archivo
+# nano /etc/news/server
+Con una sola línea:
+      news.eternal-september.org
+La lista de grupos suscritos en ~/.newsrc y los articulos descargados en ~/.nn o en /var/spool/news.
 
 
 nnn
