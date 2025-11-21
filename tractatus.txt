@@ -27545,7 +27545,7 @@ $ jot -s "" -c 26 a (26 letras [-c] empezando por la A y sin espacio entre ellas
 journalctl
 Sistema de registro [log] propio de systemd.
 # journalctl (Leer el registro)
-# journalctl -b (Mostrar todos los mesajes de arranque)
+# journalctl -b (logs desde el último arranque)
 # journalctl -n (muestra los últimos 10)
 # journalctl -n 20 (muestra los últimos 20=
 # journalctl -b -0 (Muestra los mensajes del arranque actual)
@@ -27554,6 +27554,7 @@ Sistema de registro [log] propio de systemd.
 # journalctl --list-boots (Muestra los últimos arranques guardados por el sistema. Si el sistema no guarda los registros de arranque hay que editar el fichero /etc/systemd/journald.conf y añadir/editar la línea Storage=persistent dentro de la sección [Journal])
 # journalctl -b 27487d1e4b1241df93a55949aef01161 (También se puede consultar los mensajes de un arranque en concreto poniendo el identificador que aparece con --list-boots)
 # journalctl -f (Seguir los mensajes nuevos)
+# journalctl -u sshd -f (seguir logs en tiempo real de un servicio concreto
 # journalcrl -k (registro de mensajes del kernel desde el último inicio)
 # journalctl -p crit (ver los registros según su prioridad crítica)
 # journalctl _PID=1 (Mostrar mensajes por su PID)
@@ -46260,10 +46261,11 @@ systemctl
 # systemctl suspend (Suspender el sistema)
 # systemctl hibernate (Poner el sistema en hivernación)
 # systemctl (Listado de unidades activas)
-# systemctl list-units (Listado de unidades activas)
 # systemctl --failed (Listado de unidades que han tenido problemas)
+# systemctl list-units (Listado de unidades activas)
+# systemctl list-unit-files --all (listar todos los archivos de unidad instalados: enabled, disabled, static..)
+# systemctl list-units --type=target (listar targets activos)
 # systemctl list-units --type=service (servicios cargados)
-# systemctl list-unit-files (Listado de unidades instaladas)
 # systemctl list-dependencies ssh.service (servicios que se han de iniciar antes de iniciar el servicio requerido)
 # systemctl start slim.service (Activa slim de inmediato)
 # systemctl stop sshd.service (Parar ssh de inmediato)
