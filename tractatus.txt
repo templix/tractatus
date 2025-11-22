@@ -47135,6 +47135,15 @@ Otras opciones:
 	-w (errores)
 
 
+tml
+Programa que facilita la salida de texto con color y formato en la terminal.
+$ echo "<bold><yellow># Título grande en amarillo negrita</yellow></bold>" | tml (título con colores y estilos. Probar diferencia sin el pipe)
+$ echo "Normal, <italic>cursiva</italic>, <underline>subrayado</underline>, <dim>atenuado</dim>." | tml
+$ echo "<bold><red_bg><white>ERROR con fondo rojo y texto blanco</white></red_bg></bold>" | tml
+$ echo "Esto es <red>rojo</red>, <green>verde</green> y <blue>azul</blue>." | tml (texto coloreado)
+$ echo "<bold><green>ERROR con texto </green><underline><red>rojo</red></underline></bold>" | tml
+
+
 tmpfs
 Permite asignar parte de la memoria física para ser utilizada como una partición lo que permite una vez montada, leer o escribir archivos de la RAM como si de una partición de disco se tratara. Dado que se está escribiendo en la memoria RAM del sistema, esta se borra en un reinicio o en un cuelgue. Relacionado con ramfs [ver], se diferencia de este en que tmpfs usa swap y que no permite escribir más que el tamaño que se ha especificado en el montaje. El proceso:
 # mkdir /media/tmp
