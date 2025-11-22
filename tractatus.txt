@@ -50098,6 +50098,30 @@ wetboobs> forecast 3 (Muestra la previsión de varios dias de la opción 1)
 wetboobs> quit (Salir del prompt)
 
 
+wezterm
+Potente emulador y multiplexor de terminal multiplataforma. Las funciones más llamativas son: Ligaduras [Fira Code, JetBrains Mono, etc.] perfecto para programar o trabajar con símbolos, font fallback automático que significa que si una fuente no tiene cierto carácter, usa otra sin romper la línea y live reload de la configuración, es decir que si se cambia algo en el archivo Lua se aplica sin reiniciar.
+Crear o editar el archivo de configuración
+$ nano ~/.config/wezterm/wezterm.lua
+       local wezterm = require 'wezterm'
+       return {
+         color_scheme = "Gruvbox Dark",
+	 font = wezterm.font("JetBrains Mono"),
+  	 font_size = 12.0,
+  	 hide_tab_bar_if_only_one_tab = true,
+  	 enable_wayland = false,
+       }
+$ wezterm cli list --format json (lista todas las pestañas y paneles activos en formato JSON)
+$ wezterm cli spawn --cwd /ruta/especifica (crea un nuevo panel en el directorio actual)
+$ wezterm start --cwd ~/Vídeos (abrir la terminal en el directorio especificado)
+$ wezterm imgcat archivo.png (mostrar una imagen. Ha de estarse en la terminal wezterm)
+$ wezterm imgcat -- imagen.png (centra la imagen)
+$ wezterm imgcat --width 50 staredsi.png (escala la imagen al 50%)
+$ wezterm ls-fonts --list-system (ver listado de fuentes disponibles)
+$ wezterm ssh USER@servidor (SSH con pestañas automáticas)
+$ wezterm show-keys (ver listado de atajos de teclado)
+$ wezterm serial --device /dev/ttyUSB0 (ejecutar un serial para dispositivos serie)
+
+
 wget
 Realizar descargas de una web. Soporta protocolo http, https y ftp.
 $ wget http://www.ubuntu.org/ubuntu.iso  (descarga básica)
