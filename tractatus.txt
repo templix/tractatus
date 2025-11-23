@@ -38097,6 +38097,46 @@ Con una sola línea:
 La lista de grupos suscritos en ~/.newsrc y los articulos descargados en ~/.nn o en /var/spool/news.
 
 
+nncp
+[Node to Node CoPy]. Paquete que facilita el intercambio seguro [cifrados de extremo a extremo y firmados] de archivos y correo mediante almacenamiento, por defecto en /var/spool/nncp y reenvío. Es muy usado en redes aire-gap [air-gapped], redes de malla, redes lentas o cuando se quiere comunicación cifrada sin depender de servidores centrales.
+$ nncp-file backup.tar.gz servidor:documentos/2025/ (enviar el archivo backup.tar.gz al servidor. El archivo queda cifrado en /var/spool/nncp/out/ y esperará a que se haga el transporte))
+$ tar czf - /home/usuario/archivo | nncp-pipe servidor:backups/vivo-$(date +%F).tar.gz (enviar por tubería)
+$ echo "Hola desde casa" | nncp-mail -to usuario@servidor dominio.com (enviar correo electrónico. Funciona con msmtp, notmuch, aerc, etc)
+$ nncp-bundle -tx > /media/usb/nncp-para-servidor (crear paquetes para llevar en un USB...)
+$ nncp-bundle -rx < /media/usb/nncp-para-servidor (...y en el servidor, insertar el USB)
+$ nncp-check (verifica integridad)
+$ nncp-toss (desencripta y ejecuta)
+$ nncp-daemon -bind 0.0.0.0:5400 (En servidor, escuchar en puerto 5400 o hidden service Tor)
+$ nncp-daemon -bind "onion:puertotorhidden:5400" (... o con Tor)
+$ nncp-call servidor (llamar cuando haya internet...)
+$ nncp-call -onion servidor (... o con Tor)
+$ nncp-stat (muestra paquetes pendientes)
+$ nncp-pkt paquete(inspecciona un paquete concreto)
+$ nncp-check (verifica integridad de todos)
+$ nncp-trns -node intermediario -via casa archivo.txt destino:/ (reenviar paquetes a través de un nodo intermedio [trampoline])
+
+
+nng-utils
+[Nanomsg Next Generation]. Biblioteca de mensajería ligera diseñada para resolver problemas comunes de comunicación entre procesos o nodos, como publicación/suscripción [pub/sub], solicitud/respuesta [req/rep], pipelines [Push/Pull], par a par [Pair], encuesta/respuesta [Survey], bus de mensajes [Bus] y descubrimiento de servicios.
+$ nngcat --pub --url tcp://127.0.0.1:5555 (El publicador. Escribe mensajes en la terminal y nngcat los enviará a todos los suscriptores conectados al puerto 5555)
+$ nngcat --sub --url tcp://127.0.0.1:5555 --sub topic: (Suscriptor. Recibirá todos los mensajes publicados en el topic especificado o todos si no se especifica)
+$ nngcat --rep --url tcp://127.0.0.1:5556 (Servidor. Espera solicitudes y responde a cada mensaje recibido)
+$ nngcat --req --url tcp://127.0.0.1:5556 (Cliente. Envía mensajes y espera una respuesta por cada uno)
+$ nngcat --push --url tcp://127.0.0.1:5557 (envía mensajes a un receptor "pull")
+$ nngcat --pull --url tcp://127.0.0.1:5557 (recibe mensajes enviados por un emisor "push")
+$ nngcat --pair1 --url tcp://127.0.0.1:5558 (ambos nodos, pair1 y pair2 pueden enviar y recibir mensajes entre sí)
+$ nngcat --pair2 --url tcp://127.0.0.1:5558
+$ nngcat --bus --url tcp://127.0.0.1:5559 --name node1 (todos los nodos conectados al bus reciben los mensajes de los demás)
+$ nngcat --bus --url tcp://127.0.0.1:5559 --name node2
+1.-
+Ejemplo práctico: Pub/Sub**
+En una terminal ejecutar el suscriptor:
+$ nngcat --sub --url tcp://127.0.0.1:5555 --sub topic:noticias
+En otra terminal ejecutar el publicador
+$ nngcat --pub --url tcp://127.0.0.1:5555
+Escribir un mensaje en el publicador y se verá cómo aparece en el suscriptor.
+
+
 nnn
 Administrador de archivos. Muestra en primer lugar los directorios y luego los archivos. La configuración personal se realiza en el archivo ~/.nnncp al estilo:
 $ nano .nnncp
