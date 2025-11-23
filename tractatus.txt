@@ -38112,6 +38112,24 @@ Algunas teclas:
 	? (muestra las teclas de control))
 
 
+nocache
+Omitir o minimizar la caché del sistema de archivos de un programa al pedir al kernel que no guarde las páginas, o que las descarte inmediatamente; no es un “apagado” de la caché global sino un intento de minimizar el impacto del proceso. Incluye los ejecutables cachedel y cachestats.
+# nocache -n 3 dd if=/dev/zero of=/tmp/prueba.img bs=1M count=1024 (dd crea un fichero grande; con nocache se intenta que las páginas escritas no se mantengan en la caché de páginas del kernel)
+# nocache -n 3 dd if=/tmp/prueba.img of=/dev/null bs=4M (medir rendimiento)
+# nocache -n 3 tar -xvf grande.tar -C /destino (reduce la probabilidad de que los ficheros extraídos queden en memoria de páginas y perjudiquen a otros procesos)
+# time nocache -n 3 dd if=/ruta/grande.img of=/dev/null bs=4M (intenta que las páginas leídas no permanezcan en page cache, de modo que cada lectura refleje I/O real de disco)
+# nocache tar -xvf grande.tar (evita que las páginas de los ficheros extraídos permanezcan en cache y contaminen la memoria de archivo)
+# cachedel /tmp/prueba.img (eliminar del page cache las páginas asociadas a uno o varios ficheros)
+# cachedel /ruta/al/fichero1 /ruta/al/fichero2 (expulsar del page cache las páginas asociadas a archivos dados)
+# cachestats /tmp/prueba.img (mostrar estadísticas o información práctica sobre la caché relacionada con ficheros o el sistema)
+Nota.- Algunos binarios setuid/sgid y aplicaciones que usan O_DIRECT o cierto mapeo no son afectadas por nocache.
+1.-
+Comprobación de eliminar cache
+$ free -h (comprobar)
+$ echo 3 > /proc/sys/vm/drop_caches (borra caches a nivel global)
+· free -h (volver a comprobar las dieferencias)
+
+
 noclobber
 Es una opción de la shell [ver set] que permite protegerse de un borrado involuntario de archivos. Esta opción se encuentra desactivada por defecto. Puede configurarse de forma permanente en el archivo .bashrc.
 $ set -o noclobber (activarla)
