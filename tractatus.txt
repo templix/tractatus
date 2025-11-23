@@ -29116,6 +29116,10 @@ $ aainfo
 $ aatest
 
 
+libaio
+[LIBrary Asynchronous I/O]. Biblioteca en sistemas Linux de alto rendimiento, especialmente en entornos de bases de datos y aplicaciones que manejan una gran cantidad de operaciones de entrada/salida [I/O] de disco. Para usar libaio, un programa debe incluir el archivo de cabecera libaio.h y usar las funciones provistas por la biblioteca, como: io_setup(), io_submit(), io_getevents() o io_destroy().
+
+
 libcap-ng-utils
 Este paquete contiene utilidades para analizar y configurar las capacidades de los archivos. Incluye las aplicaciones: captest, filecap, netcap  y pscap [imprimen un informe de las capacidades del proceso]
 # netcap
@@ -49623,11 +49627,13 @@ Herramienta de monitorización del rendimiento. Proporciona información acerca 
 
 
 vmtouch
-Herramienta para controlar la memoria caché del sistema.
-$ vmtouch /bin/ (cantidad del directorio /bin que está es caché)
+Diagnóstico y control de la caché del sistema de archivos. Es una herramienta para aprender y controlar la caché del sistema de archivos. Puede descubrir qué archivos almacena el sistema operativo en caché, indicarle que almacene en caché o expulse algunos archivos o regiones de archivos, bloquear archivos en memoria para que el sistema operativo no los expulse, etc.
+$ vmtouch /bin (ver cuántas páginas de los archivos en /bin están en caché)
+$ vmtouch -t archivo_grande.dat (traer archivos a memoria)
+$ vmtouch -e archivo_a_expulzar.dat (expulsar archivos de la cache)
+$ vmtouch -dl /var/www/htdocs/critico/ (bloquear en memoria todos los archivos de un directorio, en modo daemon)
 $ vmtouch -vt archivo.txt (cuanto del archivo especificado está en memoria caché y mostrando progreso)
 $ vmtouch -ve video.mp4 (desalojar video.mp4 de la memoria caché)
-$ vmtouch -dl /vat/log/ (Daemoniza y bloquea todos los archivos de un directorio en la memoria física)
 
 
 vncrec
