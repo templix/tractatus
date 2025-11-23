@@ -38218,6 +38218,22 @@ nodm
 Pquete que prepara el sistema para iniciar automáticamente una sesión X al arrancar. Está diseñado para dispositivos como smartphones, pero también puede utilizarse en un ordenador personal, siempre que las implicaciones de seguridad sean aceptables.
 
 
+nohang
+Demonio inteligente que monitorea la memoria del sistema y actúa proactivamente para evitar que ocurra el OOM Killer [Out Of Memory Killer] del kernel Linux, que suele matar procesos de forma abrupta cuando la memoria se agota. A diferencia del OOM Killer tradicional que actúa cuando ya es demasiado tarde, nohang detecta situaciones de estrés de memoria antes de que ocurra el bloqueo del sistema. Incluye los ejecutables oom-sort, psi-top y psi2log.
+# systemctl status nohang (al instalarlo ya se activa, si no es el caso activarlo)
+# nohang --check -c /etc/nohang/nohang.conf (chequear el archivo de configuración)
+# oom-sort (mostrar procesos ordenados por uso de memoria)
+# oom-sort -e (mostrar en formato extendido)
+# oom-sort | head -10 (solo mostrar los top 10 procesos)
+# psi-top (monitor de presión de recursos)
+# psi-top -m cpu (de la cpu)
+# psi-top -m io (de la io)
+# journalctl -u nohang -f (ver logs de actividad)
+# nohang -m (modo de prueba de memoria)
+# psi2log  (ver logs PSI en tiempo real)
+Nota.- PSI mide el tiempo que los procesos esperan por recursos [CPU, memoria, I/O], lo que es un mejor indicador de estrés del sistema que solo el uso de memoria.
+
+
 nohup
 permite mantener activo un proceso, incluso después de haber cerrado la sesión de usuario.
 $ nohup sleep 10000 &   (lanzar el proceso)
