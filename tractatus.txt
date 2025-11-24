@@ -44561,6 +44561,29 @@ $ sl -F  (El tren vuela)
 $ sl -e  (permite la interrupción con ^C)
 
 
+slack
+Herramienta de gestión de configuración ligera y minimalista basada en rsync [ver], diseñada para los que quieren mantener configuraciones centralizadas y sincronizadas entre múltiples máquinas, de forma automática y con poco esfuerzo. Sus principales caracteristicas es que usa rsync como motor de sincronización, permite aplicar configuraciones [archivos, scripts, etc.] a máquinas cliente desde un servidor central y funciona bajo el principio de "pon el archivo en el lugar correcto y slack se encargará del resto". Está pensado para entornos simples, donde no se necesite herramientas complejas como Puppet, Ansible, Chef, etc. Generalmente la estructura predefinida de directorios slack es: /srv/slack/common/ [aplicables a todos], /srv/slack/hosts/<hostname>/ [específicos del host] y /srv/slack/groups/<grupo>/ [especificos del grupo]
+# nano /etc/slack.conf
+   ...
+   SERVER=rsync://servidor-central/slack/
+   GROUPS="webservers,database"
+   ...
+# slack (sincronizará los archivos desde el servidor central al sistema local)
+Un ejemplo práctico:
+Se quieres que todos los servidores tengan un motd [mensaje del día] personalizado y los servidores web tengan una configuración especial de Nginx.
+En el servidor central [/srv/slack/]:
+$ echo "¡Bienvenido al sistema centralizado!" > /srv/slack/common/etc/motd (mensaje del día para todos)
+$ mkdir -p /srv/slack/groups/webservers/etc/nginx/sites-available/ (configuración de Nginx solo para el grupo "webservers")
+$ echo "server { listen 80; root /var/www/html; }" > /srv/slack/groups/webservers/etc/nginx/sites-available/default
+En un cliente web [mi-web-01]:
+# nano /etc/slack.conf
+SERVER=rsync://192.168.1.100/slack/
+GROUPS="webservers"
+Al ejecutar en el servidor:
+# slack
+Copia /srv/slack/common/etc/motd a /etc/motd y /srv/slack/groups/webservers/etc/nginx/... a /etc/nginx/...  en los clientes.
+
+
 slackpkg
 Gestor de paquetes de Slackware sin resolución de dependencias. Como previa antes de su uso es preciso descomentar el repositorio de nuestra elección en /etc/slackpkg/mirrors
 # slackpkg update gpg (Bajar llaves publicas)
