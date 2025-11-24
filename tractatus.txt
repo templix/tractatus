@@ -39593,6 +39593,26 @@ Buscar paquetes arch (Equivalente a pacman -Ss )
 $ pacsearch mail
 
 
+pacstall
+Retoma el concepto de AUR y le da un giro, facilitando la instalación de programas sin tener que buscar en repositorios de GitHub y similares.
+# pacstall -I alacritty (instalar un paquete)
+# pacstall -R alacritty (eliminar paquete)
+# pacstall -S alacritty (buscar)
+# pacstall -A https://github.com/user/repo (añadir un repositorio)
+# pacstall -A gitlab:user/repo (lo mismo)
+# pacstall -Rr @myrepo (eliminar un repositorio)
+# pacstall -U (actualizar los scripts de Pacstall)
+# pacstall -Up (equivalente a apt upgrade)
+# pacstall -Up (actualizar paquetes)
+# pacstall -Si "alacritty@https://raw.githubusercontent.com/user/reponame/master" (buscar información)
+# pacstall -Si "alacritty@github:user/reponame" (lo mismo)
+# pacstall -Sd alacritty (Similar a la búsqueda, pero ambos muestran descripciones en el resultado y buscan a través de ellas al realizar la consulta)
+# pacstall -Sd browser (buscar todos los paquetes que tengan navegador en su nombre o descripción)
+# pacstall -Sd "'browser'" (lo mismo pero que distinga entre mayúsculas y minúsculas)
+# pacstall -L (listar los paquetes instalados)
+# pacstall -D neofetch@github:user/reponame (descarga el pacscript de neofetch desde https://github.com/user/reponame)
+
+
 pactl
 Se utiliza para gestionar la reproducción de audio, controlar los dispositivos de audio y manejar el servidor de sonido PulseAudio.
 $ pactl list sinks short (ver lista de dispositivos de audio disponibles conectados con el sistema)
