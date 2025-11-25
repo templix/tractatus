@@ -38794,6 +38794,24 @@ Muestra la hora actual en una pantalla analógica.
 $ oclock -fg red -bg yellow -minute green -geometry 150x150 (manecilla de las horas en rojo, fondo amarillo, la de los cuartos verde y geomatria 150x150)
 
 
+ocproxy
+Es un proxy SOCKS y de reenvío de puertos para el cliente de VPN SSL, OpenConnect. Su principal ventaja es que no requiere privilegios de administrador ni dispositivos de túnel como tun0, ya que implementa su propia pila IP en espacio de usuario [userland IP stack]. Esto permite que solo el tráfico específico sea enviado a través de la VPN, sin necesidad de cambiar la configuración de red del sistema operativo.
+$ openconnect --script-tun --script "ocproxy -D 9052" vpn.empresa.com (inicia un servidor SOCKS5 en localhost:9052)
+$ openconnect --script-tun --script "ocproxy -D 11080 -L 3389:win-pc:3389" vpn.empresa.com (combinar SOCKS y reenvío. Acceso SOCKS5 en localhost:11080 y escritorio remoto Windows en localhost:3389)
+Nota.- Con -g, el proxy escucha en todas las interfaces, no solo en localhost.
+$ openconnect -v --script-tun --script "ocproxy -L 2222:servidor-interno:22" vpn.empresa.com (con la máxima información y redirigir el puerto local 2222 al puerto 22 del host servidor-interno dentro de la VPN)
+Luego puede hacerse:
+$ ssh -p 2222 localhost
+1.-
+Configurar SSH para usar el proxy SOCKS5 creado por ocproxy:
+$ nano ~/.ssh/config
+Host servidor-vpn
+  User miusuario
+  ProxyCommand nc -X 5 -x 127.0.0.1:9052 %h %p
+Luego simplemente:
+$ ssh servidor-vpn
+
+
 octopress
 [git-core curl zlib1g-dev libssl-dev build-essential libreadline-dev libaml]. CMS para gestión de contenido web que genera automaticamente los archivos html, css y javascript a partir de archivos de texto plano formateado en markdown (Ver) y sin utilizar base de datos.
 Pasos previos para su instalación en Debian y derivados:
