@@ -38812,6 +38812,28 @@ Luego simplemente:
 $ ssh servidor-vpn
 
 
+octave
+Lenguaje de alto nivel, compatible principalmente con MATLAB, diseñado principalmente para cálculos numéricos. Ejemplos de distintas operaciones:
+$ octave -i (entrar en la interfaz de la aplicación)
+octave:1> A = [1, 2, 3; 4, 5, 6; 7, 8, 9]
+octave:2> sqrt(16)
+Resolución de sistemas de ecuaciones lineales:
+octave:3> A = [3, 2; 1, 2];
+octave:4> b = [5; 4];
+octave:5> x = A \ b
+Cálculo de integrales:
+octave:10> f = @(x) x.^2;
+octave:11> integral(f, 0, 1)
+Cálculo de derivadas:
+octave:12> f = @(x) x.^2;
+octave:13> df = @(x) 2*x;
+octave:14> df(3)
+Gráficos (lo muest5ra en GUI):
+octave:7> x = linspace(0, 2*pi, 100);
+octave:8> y = sin(x);
+octave:9> plot(x, y)
+
+
 octopress
 [git-core curl zlib1g-dev libssl-dev build-essential libreadline-dev libaml]. CMS para gestión de contenido web que genera automaticamente los archivos html, css y javascript a partir de archivos de texto plano formateado en markdown (Ver) y sin utilizar base de datos.
 Pasos previos para su instalación en Debian y derivados:
