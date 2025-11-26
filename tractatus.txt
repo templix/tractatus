@@ -37336,6 +37336,7 @@ Proto.- protocolo, Recv-Q.- paquetes recibidos, Send-Q.- paquetes enviados, Loca
 # netstat -lantp | grep ESTABLISHED |awk '{print $5}' | awk -F: '{print $1}' | sort -u (Todas las ip conectadas a nuestro host)
 # netstat -plan | grep :80 |  grep ESTABLISHED | awk {'print $5'} | cut -d: -f 1 | sort | uniq -c | sort -n (Otra forma de mostralas)
 # netstat -plan | grep :80 | awk {'print $5'} | cut -d: -f 1 | sort | uniq -c | sort -n (número de peticiones al puerto 80 por cada IP)
+# netstat -ntu | tail -n +3 | awk '{print $5}' | sed 's/:[0-9]*$//' | sort | uniq -c | sort -rn (Mostrar conexiones TCP ordenadas por Host)
 # netstat -plutn
 Explicación de los Flags:
 	G (La ruta utiliza una pasarela)
@@ -39107,6 +39108,32 @@ od
 Vuelca ficheros en octal
 $ od -x fichero
 $ cat texto.txt | od -x texto.octal
+
+
+oddjob
+Servicio de D-Bus que permite a los clientes realizar tareas específicas como parte del sistema de gestión de trabajos en segundo plano de un sistema operativo. D-Bus [Desktop Bus] es un mecanismo de comunicación interproceso y de sistema que permite a los diferentes componentes de un sistema operativo: aplicaciones, servicios, etc. comunicarse entre sí.
+# systemctl enable oddjobd (tener el servicio activo en el arranque)
+Ejemplos de uso:
+1.-
+Ejecutar un script al iniciar sesión por un usuario.
+# nano /etc/oddjob.d/
+   [System]
+   User=usuario1
+   [Session]
+   Type=session
+   [Job]
+   Exec=/path/to/startup.sh
+2.-
+Ejecutar una tarea programada [cron-like]
+Configurar oddjob para ejecutar un script a la 1:00 AM
+# nano /etc/oddjob.d/cronjob.conf
+     [System]
+     User=root  # o cualquier usuario que necesites
+     [Time]
+     StartTime=0 1 * * *
+     [Job]
+     Exec=/path/to/cronjob.sh
+El archivo de logs de oddjob para verificar si la tarea se ha ejecutado correctamente suele estar en /var/log/oddjob/.
 
 
 odt2txt
