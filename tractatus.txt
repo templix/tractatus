@@ -39239,6 +39239,21 @@ $ ofhash --md5 --sha1 --sha256 archivo.pddf (calcular varios hashes simultaneame
 $ ofhash --sha512 --iri https://ejemplo.com/archivo.tar.gz (calcular el hash de una URL. --iri indica que el argumento es un Identificador de Recurso Internacional, es decir, una dirección web)
 
 
+ofhttp
+Descargador de línea de comandos para HTTP y HTTPS que utiliza la clase OFHTTPClient de ObjFW. Admite todas las funciones esperadas de un descargador de línea de comandos moderno, como la reanudación de descargas, el uso de un proxy SOCKS5, una interfaz de usuario moderna que incluye barras de progreso, colores, etc. Es una alternativa moderna y eficiente a herramientas como wget [ver] o curl [ver], pero con un enfoque en la simplicidad, portabilidad y características avanzadas.
+$ ofhttp https://www.ejemplo.com/imagen.jpg (descarga un archivo y lo guarda con el nombre detectado)
+$ ofhttp -c https://ejemplo.com/archivo_grande.iso (si la descarga se ha interrumpido, reanúdarla. Detecta el archivo parcial y continúa desde los bytes descargados)
+$ ofhttp -o ~/Descargas/mi_backup.zip -f https://ejemplo.com/backup.zip (guarda en ~/Descargas/mi_backup.zip y sobrescribe si existe)
+$ ofhttp -O https://ejemplo.com/descargar?id=123 (cuando la URL no indica el nombre hace una HEAD request para leer Content-Disposition y nombrar el archivo automáticamente)
+$ ofhttp -P 127.0.0.1:9050 https://ejemplo.com/contenido_privado.zip (descargar a través de un proxy local)
+$ ofhttp -v -H "User-Agent: MiApp/1.0" https://api.ejemplo.com/datos.json (descarga verbosa con cabecera personalizada)
+$ ofhttp -m POST -b /ruta/a/datos.txt https://ejemplo.com/subir (envía el contenido de datos.txt como body)
+$ ofhttp --insecure https://sitio-inseguro.com/archivo (ignora errores TLS y permite redirecciones inseguras. Usar con precaución)
+$ ofhttp --ignore-status https://ejemplo.com/noexiste (ignora códigos de estado HTTP aunque sea 404)
+$ ofhttp -q https://ejemplo.com/script.sh > /dev/null (modo silencioso)
+$ ofhttp -m POST -b datos.txt https://ejemplo.com/subir (especifica el body para métodos como POST)
+
+
 ofris-en
 Programa que congela los cambios realizados en el sistema. Tanto la modificación de los archivos como las configuraciones desaparecerán al reiniciar el equipo. Una vez aplicada la función de "congelar" es posible realizar cambios en la máquina y probar software potencialmente peligroso, ya que al reiniciar el sistema todo volverá a estar como estaba antes de "congelarlo". Arrancar la aplicación con:
 # ofris-en
