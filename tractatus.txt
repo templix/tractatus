@@ -9932,6 +9932,14 @@ Nota.- Para verificar el archivo generado
 $ epubcheck documento.epub
 
 
+dbus-send
+El comando dbus-send se utiliza para enviar un mensaje a un bus de mensajes D-Bus. Existen dos buses de mensajes conocidos: el bus de mensajes de todo el sistema, instalado en muchos sistemas como el servicio "messagebus" y el bus de mensajes "per-user-login-session", que se inicia cada vez que un usuario inicia sesión. Las opciones --system y --session indican a dbus-send que envíe mensajes al bus de sistema o al bus de sesión, respectivamente. Si no se especifica ninguna, dbus-send envía al bus de sesión. Casi todos los usos de dbus-send deben proporcionar el argumento --dest, que es el nombre de una conexión en el bus a la que se enviará el mensaje. Si se omite --dest, no se establece ningún destino.
+# dbus-send --system --print-reply --dest=com.oddjob /com/oddjob JobManager CreateJob "objectpath='/job/mi_tarea' type='job' properties='{'Description': 'Mi tarea'}" (crea una nueva tarea con una descripción "Mi tarea". Ver oddjob)
+# dbus-send --system --dest=com.oddjob /com/oddjob JobManager DeleteJob "/job/mi_tarea" (eliminar una tarea)
+# dbus-send --system --dest=com.oddjob /com/oddjob JobManager Emit "/job/mi_tarea" (ejecutar una tarea de inmediato)
+# dbus-send --system --dest=com.oddjob /com/oddjob JobManager ListJobs (listar tareas)
+
+
 dbus-test
 Sistema de mensajería entre procesos que permite que las aplicaciones interactúen tre sí.
 $ dbus-test --address unix:abstract=/tmp/dbus-test (Probar la conexión)
@@ -39150,6 +39158,26 @@ $ ofarc -x archivo.zip (extrae todos los archivos del ZIP en el directorio actua
 $ ofarc -c archivo.tar directorio/ (crea un .tat con el contenido del directorio directorio/)
 $ ofarc -x archivo.lha (extrae todos los archivos contenidos en .tat)
 $ ofarc -a archivo.zip nuevoarchivo.txt (agrega nuevoarchivo.txt a archivo.zip)
+
+
+ofdns
+Utilidad para realizar consultas DNS que parte del framework ObjFW [Objective-C Framework]. Es similar a dig [ver] y host [ver].
+$ ofdns example.com (devuelve las direcciones IPv4 del dominio)
+$ ofdns example.com AAAA (consultar registros IPv6 [AAAA])
+$ ofdns gmail.com MX (muestra los servidores de correo y sus prioridades)
+$ ofdns google.com NS (lista los servidores DNS autoritativos del dominio)
+$ ofdns example.com TXT (consultar registros TXT util para verificar registros SPF, DKIM, verificación de dominio, etc.)
+$ ofdns -s 8.8.8.8 example.com (usa el servidor DNS de Google en lugar del configurado por defecto)
+$ ofdns -r 8.8.8.8 (consulta inversa. Resuelve una IP a nombre de dominio)
+Nota.- ipos de registros DNS comunes
+A -->  Dirección IPv4
+AAAA --> Dirección IPv6
+MX --> Servidor de correo
+NS --> Servidores de nombres
+TXT --> Registros de texto
+CNAME --> Alias canónico
+SOA --> Start of Authority
+PTR --> Resolución inversa
 
 
 offpunk
