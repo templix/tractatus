@@ -39142,6 +39142,16 @@ $ odt2txt archivo.odt –output=archivo.txt
 $ odt2txt archivo.odt | grep palabra (Buscar una palabra en un odt. Muestra el resultado en pantalla)
 
 
+ofarc
+Utilidad diseñada para manejar archivos en diversos formatos como ZIP, TAR y LHA que permite crear, listar, extraer y modificar estos archivos usando clases de ObjFW que es un framework de objetos para C y otros lenguajes.
+$ ofarc -c archivo.zip archivo1.txt archivo2.txt (crea archivo.zip con los archivos archivo1.txt y archivo2.txt)
+$ ofarc -l archivo.zip (lista de archivos contenidos en archivo.zip)
+$ ofarc -x archivo.zip (extrae todos los archivos del ZIP en el directorio actual)
+$ ofarc -c archivo.tar directorio/ (crea un .tat con el contenido del directorio directorio/)
+$ ofarc -x archivo.lha (extrae todos los archivos contenidos en .tat)
+$ ofarc -a archivo.zip nuevoarchivo.txt (agrega nuevoarchivo.txt a archivo.zip)
+
+
 offpunk
 Navegador y lector offline/online para varios protocolos alternativos: Gemini, Gopher, Finger y Spartan. Está pensado para leer contenido tranquilamente, guardar y sincronizar páginas, navegar en modo offline y ser más un gestor de contenidos que un navegador clásico. Incluye las herramientas ansicat, netcache y opnk
 $ offpunk (entrar en el navegador con un interprete interactivo)
