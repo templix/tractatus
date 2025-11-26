@@ -2400,6 +2400,36 @@ El comando será rechazado.
 # authprogs --config ~/.authrpogs/authrpogs.conf --log /var/log/authprogs.log (habilitar registros de auditoría)
 
 
+authselect
+Herramienta para seleccionar fuentes de autenticación e identidad entre los perfiles compatibles, diseñado para reemplazar a authconfig. Los perfiles están definidos en /usr/share/authselect/default/.
+$ authselect list (listar perfiles disponibles. NO dependen de que los servicios estén instalados en el sistema)
+$ authselect list-features nis (listar las caracteristicas desponibles del perfil "nis")
+$ authselect select sssd with-sudo with-smartcard (Habilitar SSSD con soporte para sudo y tarjetas inteligentes)
+$ authselect select nis with-mkhomedir (habilitar NIS y crear directorios de inicio para los usuarios en su primer inicio de sesión)
+$ authselect select nis (habilitar NIS sin módulos adicionales)
+$ sudo authselect select sssd with-faillock with-mkhomedir (seleccionar un perfil básico [LDAP/Active Directory] con características adicionales)
+$ sudo authselect select local with-faillock without-nullok (lo mismo para el perfil local)
+$ authselect show winbind (mostrar información del perfil "winbind")
+$ authselect check (comprobar si la configuración actual es válida)
+$ sudo authselect create-profile USER --warn --debug (crear un nuevo perfil y eliminar errores de actualización y de error)
+$ sudo authselect test sssd -a (verificar toda la configuración del perfil especificado)
+$ sudo authselect apply-changes -b (revertir cambios volviendo al estaao anterior)
+$ sudo authselect select sssd with-faillock with-mkhomedir without-nullok --force (crear un perfil personalizado basado en uno existente)
+$ sudo authselect apply-changes --debug (aplicar cambios)
+1.-
+Aplicar la aplicación correctamente en el sistema
+Copia de seguridad de la configuración actual
+$ sudo cp -r /etc/pam.d /etc/pam.d.backup
+$ sudo cp /etc/nsswitch.conf /etc/nsswitch.conf.backup
+Probar qué pasaría si se aplica un perfil local
+$ $ sudo authselect select local -f --debug
+Si parece correcto, aplícarlo
+$ sudo authselect select local
+Verificar que todo funciona
+authselect check
+getent passwd $USER
+
+
 autoconf
 Estándar para los paquetes fuente de la FSF. Esto sólo es útil si se escribe los propios programas o si se modifica extensamente los programas de otras personas. Todos los comandos deben ejecutarse desde la carpeta raíz del paquete en el que se está trabajando. Para obtener una biblioteca extensa de macros Autoconf adicionales, ha de instalarse el paquete "autoconf-archive".
 Crear archivo configure.ac con las lineas:
