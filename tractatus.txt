@@ -34375,16 +34375,20 @@ $ mktorrent -v -p -a http://url.com -o nombre.torrent (mostrar máxima informaci
 
 
 mkvtoolnix
-Conjunto de herramientas de línea de comandos para trabajar con archivos Matroska [mkv] un contenedor multimedia completo para vídeos, audio y texto, sin importar que cada uno de estos elementos utilice diferentes tipos de codificación. Al hacer doble clic en un solo archivo MKV se abrirán todos sus elementos en un reproductor de archivos MKV. Incluye las herramientas mkvmerge, mkvinfo, mkvextract y mkvpropedit
+Conjunto de herramientas para trabajar con archivos Matroska, un nuevo formato contenedor multimedia basado en EBML [Extensible Binary Meta Language], un tipo de XML binario. Estas herramientas son: mkvmerge, mkvinfo, mkvextract y mkvpropedit
 $ mkvmerge -o salida.mkv video.mp4 audio.mp3 subtitulos.srt (crea salida.mkv combinando varios archivos: video, audio, subtítulos y capítulos en un solo archivo MKV)
 $ mkvmerge -o nuevo.mkv entrada.mkv audio_extra.mp3 (añadir una pista de audio adicional a un MKV existente)
+$ mkvmerge -o nuevo.mkv -a 1 -s 0 archivo.mkv subtitulos.srt (agrega un archivo de subtítulos .srt al archivo existente)
 $ mkvmerge -o solo_video.mkv --video-tracks 1 entrada.mkv (extraer la pista número 1 de un MKV)
-$ mkvinfo archivo.mkv (información detallada sobre las pistas, capítulos, etiquetas y otros metadatos de un archivo MKV)
+$ mkvinfo archivo.mkv (mostrará detalles como las pistas de video, audio, subtítulos, duración, tamaño, etc)
 $ mkvextract archivo.mkv tracks 2:audio.mp3 (extrae la pista con ID 2 y la guarda como audio.mp3)
-$ mkvextract archivo.mkv tracks 3:subtitulos.srt (extraer subtítulos)
-$ mkvpropedit archivo.mkv --edit info --set title="Nuevo Título" (cambiar el título del archivo)
-$ mkvpropedit archivo.mkv --edit track:2 --set flag-default=1 (marcar la pista ID 2 de audio como predeterminada)
+$ mkvextract tracks archivo.mkv 1 audio.ac3 (extraer la pista 1 de audio en formato AC3)
+$ mkvextract tracks archivo.mkv 2 subtitulo.srt (extraer subtítulos en formato .srt, si la pista es compatible)
+$ mkvextract info archivo.mkv (extraer toda la información de pistas)
+$ mkvpropedit archivo.mkv --edit info --set "Título del video" (cambiar el título del archivo MKV)
+$ mkvpropedit archivo.mkv --delete track:2 (eliminar la pista 2)
 $ mkvpropedit archivo.mkv --delete chapters (eliminar los capítulos)
+$ mkvpropedit archivo.mkv --set "Bélico" --tags 1(agregar o editar etiquetas)
 
 
 ml-burg
@@ -39303,6 +39307,24 @@ ogg123
 [vorbis-tools]. Reproductor de música para archivos .ogg
 $ ogg123 archivo.ogg (forma básica)
 $ ogg123 ~/Música/* (reproducirá todos los .ogg de la carpeta mencionada)
+
+
+ogmtools
+Herramientas para manipular transmisiones multimedia Ogg que es un formato para almacenar video, audio y subtítulos. Estas herramientas son: ogminfo: muestra la información de la transmisión, ogmdemux: demultiplexa una transmisión OGG en las transmisiones multimedia que la componen, ogmsplit: divide una transmisión OGG en fragmentos, ogmcat: concatena archivos OGG en uno solo, ogmmerge: une transmisiones multimedia en una transmisión OGG y dvdxchap: extrae la información de los capítulos de los DVD. Aunque OGM ha sido en gran medida reemplazado por formatos más modernos como Matroska [MKV], estas herramientas siguen siendo útiles para trabajar con archivos multimedia antiguos.
+$ ogminfo archivo.ogm (muestra información detallada sobre las transmisiones de audio, video, códecs utilizados, los IDs de las pistas y subtítulos contenidas en un archivo OGM)
+$ ogmdemux archivo.ogm (extrae y separa las diferentes transmisiones, video, audio, subtítulos de un archivo OGM en archivos independientes)
+$ ogmdemux -a 1 -o audio.ogg pelicula.ogm (extraer solo el audio)
+$ ogmdemux -s 0 -o subtitulos.srt pelicula.ogm (extraer solo los subtítulos)
+$ ogmsplit --size 700M pelicula.ogm (dividir en fragmentos de 700MB)
+$ ogmsplit --split 01:30:00 pelicula.ogm (divide el archivo en la marca de 1 hora y 30 minutos)
+$ ogmsplit --split 00:30:00,01:00:00,01:30:00 pelicula.ogm (dividir en varios puntos temporales)
+$ ogmcat -o pelicula_completa.ogm parte1.ogm parte2.ogm parte3.ogm (une varios archivos OGM en uno solo, siempre que tengan las mismas características de transmisión)
+$ ogmmerge -o pelicula.ogm video.avi audio.mp3 (combina audio y video en un único archivo OGM)
+$ ogmmerge -o pelicula.ogm video.avi --language 0:spa audio_espanol.ogg --language 0:eng audio_ingles.mp3 (añadir múltiples pistas de audio con idiomas)
+$ ogmmerge -o pelicula.ogm video.avi audio.ogg --language 0:spa subtitulos_es.srt --language 0:eng subtitulos_en.srt (añadir subtítulos)
+$ ogmmerge -o pelicula.ogm video.avi --sync 0:200 audio.ogg (ajustar sincronización de audio. Retrasa el audio 200 ms)
+$ dvdxchap /dev/dvd > capitulos.txt (extraer capítulos del DVD...)
+$ ogmmerge -o pelicula.ogm --chapters capitulos.txt video.avi audio.ogg (... luego se puede combinar con video y audio)
 
 
 oh-my-posh
