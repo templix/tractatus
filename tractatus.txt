@@ -39254,6 +39254,21 @@ $ ofhttp -q https://ejemplo.com/script.sh > /dev/null (modo silencioso)
 $ ofhttp -m POST -b datos.txt https://ejemplo.com/subir (especifica el body para métodos como POST)
 
 
+ofono
+Framework para manejar dispositivos de telefonía móvil, com modems 3G/4G/5G en Linux. Permite controlar modems mediante drivers específicos o comandos AT genéricos. Incluye las herramientas dundee, ofono-fcc-unlock y ofonod.
+# systemctl status ofono (ver estado del servicio)
+# systemctl status dundee (para detección de dispositivos)
+Nota.- "ofono-fcc-unlock" solo necesario activar en EE.UU. para cumplir regulaciones [systemctl enable ofono-fcc-unlock].
+$ ofonod -n -d (ejecutar en primer plano, no como demonio)
+Configuración básica si no se está en EE.UU:
+# nano /etc/default/ofono
+       DAEMON_OPTS="--nodetach"
+       FCC_UNLOCK=0
+       FCC_UNLOCK_MODEM_ENABLED=0
+       FCC_UNLOCK_MODEM_ONLINE=0
+# systemctl list-units | grep -E "(ofono|dundee)" (ver todos los servicios relacionados)
+
+
 ofris-en
 Programa que congela los cambios realizados en el sistema. Tanto la modificación de los archivos como las configuraciones desaparecerán al reiniciar el equipo. Una vez aplicada la función de "congelar" es posible realizar cambios en la máquina y probar software potencialmente peligroso, ya que al reiniciar el sistema todo volverá a estar como estaba antes de "congelarlo". Arrancar la aplicación con:
 # ofris-en
