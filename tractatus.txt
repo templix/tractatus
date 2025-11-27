@@ -39281,6 +39281,24 @@ Y mostrarà un menú de opciones:
 	6. Salir
 
 
+ofx
+Este paquete incluye herramientas para trabajar con archivos en formato OFX [Open Financial Exchange], un estándar utilizado por muchas instituciones financieras para el intercambio de información, como extractos bancarios, movimientos de tarjetas de crédito, inversiones, etc. Estas herramientas son ofx2qif, ofxconnect y ofxdump
+$ ofxdump -i archivo.ofx (mostrará en la terminal los datos del archivo OFX, como transacciones, saldos, fechas, etc)
+$ ofx2qif -i archivo.ofx -o archivo.qif (convierte archivos OFX a QIF, un formato compatible con programas de contabilidad como GnuCash, Quicken, o Money)
+$ ofxconnect -f config.txt (descargar archivos OFX directamente desde tu banco o institución financiera, usando tus credenciales)
+Ejemplo de archivo de configuración
+$ nano ~/.local/ofx/config.txt
+       url = https://ofx.tubanco.com
+       org = TUBANCO
+       fid = 12345
+       userid = tu_usuario
+       userpass = tu_contraseña
+       bankid = 0001
+       brokerid = 0001
+       acctid = 123456789
+       accttype = CHECKING
+
+
 ogg123
 [vorbis-tools]. Reproductor de música para archivos .ogg
 $ ogg123 archivo.ogg (forma básica)
