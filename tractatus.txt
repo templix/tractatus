@@ -39327,6 +39327,12 @@ $ dvdxchap /dev/dvd > capitulos.txt (extraer capítulos del DVD...)
 $ ogmmerge -o pelicula.ogm --chapters capitulos.txt video.avi audio.ogg (... luego se puede combinar con video y audio)
 
 
+ognibuild
+Detecta, invoca y ejecuta cualquier tipo de herramienta de compilación. La idea es que pueda ejecutarse para compilar e instalar cualquier directorio de código fuente detectando el sistema de compilación en uso e invocándolo con los parámetros correctos. También puede detectar e instalar dependencias faltantes.
+$ ognibuild (con un Makefile en el directorio actual lo detectará, ejecutará make, y luego make install si está disponible)
+Nota.- No es un reemplazo de herramientas como make, cmake, meson, et, sino una capa de abstracción sobre ellas y requiere que el sistema tenga instaladas las herramientas de compilación básicas build-essential, cmake, etc.
+
+
 oh-my-posh
 Temas varios para el prompt.
 $ curl -s https://ohmyposh.dev/install.sh | bash -s (descarga e instalación))
@@ -39352,6 +39358,28 @@ $ ohcount -i script.sh (muestra la cantidad de lineas de código, comentarios, l
 $ ohcount -l archivo.py (muestra la licencia)
 $ ohcount -d archivo (detecta el lenguaje de programación)
 $ ohcount -s script.sh (muestra el sumario)
+
+
+oidc-agent-cli
+Conjunto de herramientas para la gestion de credenciales y tokens de OpenID Connect [OIDC] especialmente en entornos HPC y federados como el [EGI Check-in]. Estas herramientas son: oidc-add, oidc-agent, oidc-agent-service, oidc-gen, oidc-keychain y oidc-token
+# oidc-agent-service enable (habilitar)
+# oidc-agent-service start (arrancar el servicio al inicio de sesión)
+# oidc-agent-service stop (detenerlo)
+$ oidc-gen egi-account (crea un profile llamado egi-account, que se almacena encriptado por defecto en ~/.config/oidc-agent/egi-account)
+$ oidc-gen --issuer https://aai.egi.eu/oidc/ --scope "openid profile email eduperson_scoped_affiliation eduperson_entitlement" egi-account (guía al usuario para configurar un proveedor OIDC [EGI Check-in, Google, IAM, etc.], obteniendo un token de acceso inicial. "--scope" scopes requeridos mínimo: openid profile email)
+$ oidc-add egi-account (pedirá la contraseña si el profile está cifrado y lo cargará en el agente)
+$ oidc-add -c "Google Account" -p "google-oauth2" -b "https://accounts.google.com" (añadir una nueva cuenta o cliente a oidc-agent)
+$ oidc-agent --socket /tmp/my-socket.sock (escucha peticiones de otros procesos. No se invoca directamente normalmente; suele arrancarse automáticamente por `oidc-add` o mediante el servicio del sistema)
+$ oidc-keychain --add egi-account (almacenar y recuperar la contraseña de descifrado del profile y evitar escribirla cada vez)
+$ oidc-keychain --get egi-account (devuelve la passphrase, usado internamente por oidc-add)
+$ oidc-token egi-account (pide al oidc-agent el último access token válido o lo renueva si es necesario)
+$ curl -H "Authorization: Bearer $(oidc-token egi-account)" https://some-api.example.com/data (uso con curl)
+Flujo típico de uso
+$ oidc-gen egi-account (configurar un proveedor
+$ oidc-keychain --add egi-account (guardar la contraseña en el keyring, opcional pero recomendado)
+$ oidc-agent-service enable && oidc-agent-service start (arrancar el servicio, solo una vez por sesión)
+$ oidc-add egi-account (cargar el profile, sin contraseña gracias al keyring)
+$ curl -H "Authorization: Bearer $(oidc-token egi-account)" https://api.example.com/secure (usar tokens en scripts/apps)
 
 
 olive
