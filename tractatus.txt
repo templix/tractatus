@@ -39382,6 +39382,24 @@ $ oidc-add egi-account (cargar el profile, sin contraseña gracias al keyring)
 $ curl -H "Authorization: Bearer $(oidc-token egi-account)" https://api.example.com/secure (usar tokens en scripts/apps)
 
 
+oidentd
+Demonio de identidad [rfc1413] que sirve como reemplazo para los demonios de identidad tradicionales. Está diseñado para funcionar tanto con IPv4 como con IPv6. Una de las características principales de `oidentd` es que permite a los usuarios especificar la respuesta que el servidor generará tras una búsqueda exitosa de identidad. Esto incluye la capacidad de devolver cadenas pseudoaleatorias en lugar de nombres de usuario o IDs de usuario [UIDs].
+# oidentd (inicia el demonio con las opciones predeterminadas)
+# oidentd -m "usuario 0-99999" (hará que devuelva respuestas como "usuario12345" en lugar del nombre de usuario real)
+# oidentd -r (con esta configuración, cada vez que se realice una búsqueda de identidad, devolverá una cadena de 10 caracteres pseudoaleatorios, como "a1B2c3D4e5")
+Ejemplo básico de archivo de configuración
+Crear el archivo
+# nano /etc/oidentd.conf y especificar reglas detalladas para diferentes usuarios o servicios. Aquí tienes un ejemplo básico de cómo podría verse un archivo de configuración:
+   default {
+       reply "usuario 0-99999"
+   }
+   user "juan" {
+       reply "juan123"
+   }
+En este ejemplo, para el usuario "juan", oidentd devolverá "juan123", mientras que para otros usuarios, devolverá una cadena que comienza con "usuario" seguida de un número entre 0 y 99999.
+# oidentd -f /etc/oidentd.conf (que oidentd lea y aplique las reglas definidas en el archivo de configuración especificado)
+
+
 olive
 Lector rss
 $ olive archivo.opml (importar las fuentes)
