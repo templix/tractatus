@@ -39446,6 +39446,24 @@ Lector rss
 $ olive archivo.opml (importar las fuentes)
 
 
+omake
+Es un sistema de compilación diseñado para escalar desde proyectos pequeños hasta proyectos muy grandes que abarcan varios directorios. OMake utiliza una sintaxis similar a la de GNU Make, con muchas características adicionales. Contiene especificaciones para compilar fácilmente programas en C, OCaml y LaTeX, pero también puede usarse para compilar proyectos con otros lenguajes.
+$ omake (compilación normal)
+$ omake -j 4 (compilación con múltiples núcleos [paralela])
+$ omake clean (limpiar archivos generados)
+$ omake -n (ver comandos sin ejecutar)
+
+
+omd
+Interfaz de Markdown en OCaml puro. Su función principal es convertir documentos escritos en formato Markdown a otros formatos, siendo el más común y fundamental el HTML. Es esencialmente un procesador de Markdown, diseñado para ser fiel a la especificación original de Markdown, al tiempo que incorpora características modernas como algunas extensiones de Markdown de GitHub y un enfoque en la conformidad con el estándar CommonMark.
+$ omd documento.md (procesa el archivo Markdown y muestra el código HTML resultante en la terminal)
+$ omd documento.md -o_documento.html (guardar la salida en html en un archivo)
+$ echo "## Apartado emacs" | omd (mostrará la salida en html)
+$ omd -- (considera todos los argumentos restantes como nombres de entrada)
+$ omd -LHTML (lista todas las etiquetas html conocidas)
+$ omd -m archivo (genera markdown en lugar de html)
+
+
 omv-initsystem
 Inicializa openmediavault en esta distribución de GNU/Linux basada en Debian. Es necesaria su ejecución para un correcto funcionamiento
 # omv-initsystem
