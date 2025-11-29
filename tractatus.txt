@@ -39400,6 +39400,19 @@ En este ejemplo, para el usuario "juan", oidentd devolverá "juan123", mientras 
 # oidentd -f /etc/oidentd.conf (que oidentd lea y aplique las reglas definidas en el archivo de configuración especificado)
 
 
+oinkmaster
+Script Perl que automatiza la descarga, comparación e instalación de reglas de Snort, un sistema de detección de intrusiones (IDS) de código abierto. Su valor radica en mostrar exactamente qué ha cambiado antes de aplicar actualizaciones, permitiendo auditoría y reversión sencilla. Gestiona backups, reglas locales y oficiales sin sobrescribir personalizaciones. Actualizar a mano implica descargar tarballs, descomprimir, comparar línea a línea y mezclar reglas locales. Oinkmaster resume diferencias, respalda el conjunto anterior, respeta skipfiles y modifysid. Para descargar y actualizar las reglas de Snort usando oinkmaster, primero se necesita tener un archivo de configuración de Oink Code. Este código se obtiene al registrarse en la página de Sourcefire y es necesario para acceder a las reglas de Snort.
+Si se desea deshabilitar ciertas reglas que se considera innecesarias o que generan falsos positivos, se puede hacerlo editando el archivo de configuración de Oinkmaster y agregando las reglas que deseas deshabilitar.
+# nano /etc/oinkmaster.conf
+   DisableRule 1:2000001
+   DisableRule 1:2000002
+   NewMessage "Nueva descripción de la alerta"
+   # DisableRule 1:2000003
+# oinkmaster -C /etc/oinkmaster.conf -o /etc/snort/rules (aplicar cambios. Especifica la ruta al archivo de configuración y la ruta donde se guardarán las reglas actualizadas)
+Nota.- Si se ha deshabilitado una regla y se desea habilitar nuevamente, comentarla o eliminarla. luego otra vez aplicar los cambios con el comando anterior.
+# oinkmaster -C /path/to/oinkmaster.conf -o /path/to/rules -D (muestra las diferencias entre la última actualización y la actual)
+
+
 olive
 Lector rss
 $ olive archivo.opml (importar las fuentes)
