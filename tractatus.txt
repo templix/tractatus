@@ -39413,6 +39413,34 @@ Nota.- Si se ha deshabilitado una regla y se desea habilitar nuevamente, comenta
 # oinkmaster -C /path/to/oinkmaster.conf -o /path/to/rules -D (muestra las diferencias entre la última actualización y la actual)
 
 
+okteta
+Editor hexadecimal que permite visualizar y editar archivos en su forma binaria, mostrando los datos en formato hexadecimal y en caracteres ASCII. Es útil para analizar archivos en bruto, modificar datos específicos, o realizar tareas de ingeniería inversa y depuración.
+$ okteta archivo.bin (abrirá Okteta cargando "archivo.bin" para su edición)
+
+
+ola
+[Open Lighting Architecture]. Es una plataforma de código abierto para el control de iluminación profesional, especialmente utilizando el estándar **DMX512**, pero también soporta muchos otros protocolos modernos (Art-Net, sACN/E1.31, KiNet, ESPnet, OSC, etc.). Está diseñada para funcionar como *middleware*: recibe datos de control desde varias fuentes, los unifica y los distribuye a dispositivos de iluminación mediante plugins. Incluye las herramientas ola_artnet, ola_dev_info, ola_dmxconsole, ola_dmxmonitor, ola_e131, ola_patch, ola_plugin_info, ola_plugin_state, ola_rdm_discover, ola_rdm_get, ola_rdm_set, ola_recorder, ola_set_dmx [deprecated], ola_set_priority, ola_streaming_client, ola_timecode, ola_trigger, ola_uni_info, ola_uni_merge, ola_uni_name, ola_uni_stats, ola_usbpro, olad [obsoleto en versiones nuevas], rdmpro_sniffer y usbpro_firmware.
+# systemctl enable ola (habilitar el servicio al inicio del sistema)
+$ ola_plugin_info (ver plugins cargados)
+$ ola_plugin_info (lista plugins disponibles y su estado: habilitados/deshabilitados)
+$ ola_dev_info (muestra información sobre dispositivos y universos configurados)
+$ ola_dev_info (muestra: universos, canales, dispositivos asociados, plugins usados)
+$ ola_port_info (lista puertos de entrada/salida expuestos por plugins)
+$ ola_trigger_info (muestra los triggers disponibles) (funcionalidad para responder a eventos).
+$ ola_send_dmx -u 3 "0,255,0" (envía una trama DMX a un universo específico)
+$ ola_receive_dmx (escucha y muestra DMX entrante de un universo, solo si hay un puerto input configurado).
+$ ola_dmxconsole -u 1 (interfaz interactiva tipo consola. Flechas para navegar, +, - ajustar valor y q para salir)
+$ ola_dmxmonitor (muestra en tiempo real los valores DMX de un universo. Actualiza cada 100ms por defecto)
+$ ola_discovery -p ArtNet (inicia discovery para ciertos protocolos)
+$ ola_patch -d 4 -p 0 -u 1 -o (patch puerto 0 del plugin 4 [ej: USB Pro] al universo 1)
+$ ola_uni_info -u 1 (muestra: "Universe 1: name=MainStage, input=OLA, output=USBPro, merge=LTP")
+$ ola_rdm_discovery -u 1 (Ejecuta RDM Discovery [Remote Device Management] en un universo que soporte RDM)
+$ ola_rdm_get -u 1 -d 7A70:01234567 DEVICE_INFO (lee/escribe parámetros RDM como DMX start address, device info, etc.)
+$ ola_rdm_set -u 1 -d 7A70:01234567 DMX_START_ADDRESS 100 (lo mismo)
+$ ola_jsonrpc_client (cliente para interactuar con el servidor JSON-RPC de OLA)
+$ ola_http (no es un binario, pero al habilitar el plugin HTTP, OLA lanza un servidor web en http://localhost:9090)
+
+
 olive
 Lector rss
 $ olive archivo.opml (importar las fuentes)
