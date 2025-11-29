@@ -39483,6 +39483,23 @@ on_ac_power
 $ on_ac_power
 
 
+onak
+Herramienta que actúa como servidor de claves OpenPGP similar a los servidores de claves tradicionales como hkp://, pero con características avanzadas como soporte para múltiples subclaves, identificación con fotos, y la capacidad de buscar rutas de confianza entre claves.
+$ onak search "nombre@ejemplo.com" (buscará en la base de datos de claves públicas del servidor onak todas las claves asociadas al correo nombre@ejemplo.com)
+$ gpg --keyserver onak-server.example.com --send-keys ID_DE_LA_CLAVE (publicar una clave pública)
+$ onak submit clave_publica.asc (lo mismo con onak donde clave_publica.asc es el archivo con la clave pública exportada)
+$ onak path ID_CLAVE_ORIGEN ID_CLAVE_DESTINO (mostrará los caminos de confianza [firmas] que conectan dos claves en la red de confianza PGP)
+$ onak list --with-photos (muestra las claves que tienen asociadas fotos de identificación)
+1.-
+Usar onak como servidor de claves en GnuPG
+$ nano ~/.gnupg/gpg.conf
+Y añadir
+	keyserver onak-server.example.com
+Luego se puede usar comandos estándar de gpg:
+$ gpg --recv-keys ID_DE_LA_CLAVE
+$ gpg --send-keys ID_DE_LA_CLAVE
+
+
 oneko
 Un gato persigue el cursor por la pantalla mientras trabajas. Alternativamente, un perro persigue un hueso. Hay opciones de menú para iniciar y detener el programa fácilmente en los modos perro y gato. Otras variaciones y configuraciones detalladas están disponibles a través de opciones de línea de comando.
 $ oneko -dog -fg yellow -speed 20 (un perro, amarillo y a 20 de velocidad, por defecto 16)
