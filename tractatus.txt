@@ -39599,15 +39599,15 @@ $ only -l 3/palabra/0:2 text.txt (muestra la 3ª vez que sale "palabra" y las si
 
 oomd
 [Out Of Memory Daemon]. Demonio avanzado que utiliza métricas del kernel para detectar la presión de memoria antes de que el sistema llegue a un punto crítico y elimina procesos de acuerdo con reglas definidas en /etc/oomd/oomd.conf. Aprovecha PSI [Pressure Stall Information] y cgroupv2 [control group] [ver] para supervisar el sistema de forma integral, luego, toma medidas correctivas antes de que se produzca una falta de memoria en el espacio del núcleo eliminando los procesos infractores. Realiza un control más avanzado que la aplicación earlyoom [ver] y está integrado con systemd.
-$ systemctl status systemd-oomd (virificar si está activo)
-# systemctl enable systemd-oomd (activarlo en cada inicio del sistema)
+# /usr/lib/systemd/systemd-sysv-install enable oomd (iniciar el servicio al iniciar el sistema)
+# systemctl status oomd (virificar si está activo)
 Un ejemplo de configuración podría ser:
 # nano /etc/systemd/oomd.conf
        [OOM]
        SwapUsedLimit=90%
        DefaultMemoryPressureLimit=80%
-Significa que oomd matará procesos si la swap está utilizada en un 90% o más y si la presión de memoria del sistema alcanza el 80%. Toda modificación del archivo de configuración inplica reiniciar el servicio:
-# systemctl restart systemd-oomd
+Significa que oomd matará procesos si la swap está utilizada en un 90% o más y si la presión de memoria del sistema alcanza el 80%. Toda modificación del archivo de configuración implica reiniciar el servicio:
+# systemctl restart oomd
 
 
 oowrite
@@ -39658,10 +39658,10 @@ Añadir una o varias lineas a /etc/fstab con el siguiente contenido:
 Modificando el nombre del dispositivo [ sdc2, sdc3...) en el gestor de archivos [thunar...] aparecera el icono y con doble clic se montará el dispositivo.
 
 
-openclipart-svg
+openclipart
 Colección de imágenes 100% libres de derechos de autor que pueden usarse sin ningún tipo de restricción. Han de visualizarse en el navegador y se encuentran en el directorio /usr/share/openclipart/svg/*. Estan ordenadas por temáticas: animals, buildings, computer, containers, decorations... y en subcarpetas. Si se instalan los paquetes openclipart-png y openclipart-libreoffice las imágenes tambien se tendran en formato png y podran incrustarse en documentos de libre office.
-$ firefox /usr/share/openclipart/svg/electronics/battery/battery_snuatautisticido_04.svg
-$ firefox /usr/share/openclipart/png/animals/birds/acquila_architetto_franc_01.png
+$ firefox file:///usr/share/openclipart/png/
+$ firefox file:///usr/share/openclipart/svg/
 
 
 opendoas
