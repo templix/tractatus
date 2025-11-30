@@ -39553,6 +39553,15 @@ $ onesixtyone 192.168.18.0/24 public
 $ onesixtyone -c dict.txt -i hosts -o my.log -w 100 (archivo con los nombres de las comunidades a probar, archivo con los hosts de destino y esperar 100 milisegundos [1/1000] entre el envío de paquetes, predeterminado 10)
 
 
+onionbalance
+Herramienta que proporciona balanceo de carga y redundancia para los servicios ocultos de Tor distribuyendo las solicitudes de los usuarios a múltiples instancias de Tor del backend.
+# onionbalance-config --output /etc/onionbalance --hs-version v3 -n 3 (crea la carpeta con config.yaml y la clave maestra; el número tras -n reserva huecos para backends y puede ampliarse posteriormente)
+Nota.- Conviene anotar la dirección .onion resultante que se obtiene al concatenar el nombre del archivo .key sin extensión más .onion.
+# onionbalance -c /etc/onionbalance/config.yaml -v info (el proceso lee los descriptores de los backends, ensambla el superdescriptor y lo publica periódicamente. Tor escucha en las rutas predeterminadas)
+# onionbalance --is-testnet (pruebas para evitar publicar descriptores en la red real)
+# onionbalance -v warning (revisar logs para detectar fallos de publicación y posibles ataques de enumeration contra los backends)
+
+
 only
 Herramienta que permite buscar según patrones de palabras o patrones de líneas.
 $ only -l palabra text.txt (muestra la linea donde sale "palabra")
