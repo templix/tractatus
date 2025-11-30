@@ -39547,6 +39547,12 @@ $ oneko -dog -fg yellow -speed 20 (un perro, amarillo y a 20 de velocidad, por d
 $ oneko -neko (un gato. Otras alternativas: -sakura y -tomoyo)
 
 
+onesixtyone
+Escáner SNMP que envía solicitudes para el valor sysDescr de forma asíncrona con tiempos de envío ajustables por el usuario y registra las respuestas, que describen el software que se ejecuta en el dispositivo. Al ejecutar onesixtyone en una red de clase B (100 Mb conmutada y 1 Gb de red troncal) con -w 10, se obtiene un rendimiento de 3 segundos por clase C, sin pérdida de paquetes, y las 65536 direcciones IP se escanearon en menos de 13 minutos.
+$ onesixtyone 192.168.18.0/24 public
+$ onesixtyone -c dict.txt -i hosts -o my.log -w 100 (archivo con los nombres de las comunidades a probar, archivo con los hosts de destino y esperar 100 milisegundos [1/1000] entre el envío de paquetes, predeterminado 10)
+
+
 only
 Herramienta que permite buscar según patrones de palabras o patrones de líneas.
 $ only -l palabra text.txt (muestra la linea donde sale "palabra")
