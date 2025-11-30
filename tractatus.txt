@@ -39562,6 +39562,23 @@ Nota.- Conviene anotar la dirección .onion resultante que se obtiene al concate
 # onionbalance -v warning (revisar logs para detectar fallos de publicación y posibles ataques de enumeration contra los backends)
 
 
+onionprobe
+Herramienta diseñada específicamente para probar y monitorear la disponibilidad y el rendimiento de los sitios de Tor Onion Services también conocidos como servicios ocultos o .onion sites. Onion Service es un servicio, por ejemplo, un sitio web, API, servidor SSH, etc, que solo es accesible a través de la red Tor y cuya dirección termina en .onion. Estos servicios ofrecen privacidad tanto al servidor como al cliente, ya que no exponen su ubicación real en internet. Entre sus características principales está verificar si un servicio .onion está accesible, medir el tiempo de respuesta [latencia], ejecutar pruebas de forma puntual o continua y exportar métricas en formato compatible con Prometheus, lo que permite integrarlo en sistemas de monitoreo como Grafana. Tor debe de estar instalado y funcionando, ya que onionprobe depende del proxy SOCKS de Tor, por defecto en 127.0.0.1:9050 o 127.0.0.1:9150, según la configuración.
+Archivo de configuracióne de ejemplo
+$ nano servicios.yaml
+targets:
+  - url: http://example.onion
+    timeout: 30s
+  - url: http://another-service.onion/path
+    timeout: 45s
+$ ss -tuln | grep 9050 (verificar que Tor esté escuchando en SOCKS)
+$ onionprobe -e http://example.onion (intentará acceder a http://example.onion a través de Tor y mostrará si el servicio está accesible, con código de respuesta HTTP y tiempo de respuesta)
+Servicios .onion públicos para prueba, seguros y legítimos
+DuckDuckGo --> https://duckduckgogg42xjoc72x3sjaswhzzgjqfpfnhd7ub75qczqav7vynv2brq.onion
+The Tor Project -> http://2gzyxa5ihm7nsggfxnu52rck2vv4rvmdlkiu3zzui5du4xyclen53wid.onion
+Proton Mail --> https://protonmailrmez3lotccipshtkleegetolb73fuirguix4e7hzmasyd.onion
+
+
 only
 Herramienta que permite buscar según patrones de palabras o patrones de líneas.
 $ only -l palabra text.txt (muestra la linea donde sale "palabra")
