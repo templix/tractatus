@@ -39500,6 +39500,31 @@ $ gpg --recv-keys ID_DE_LA_CLAVE
 $ gpg --send-keys ID_DE_LA_CLAVE
 
 
+ondir
+Programa para automatizar tareas específicas en ciertos directorios. Funciona ejecutando scripts en directorios en el momento de entrar o salir de ellos. Puede usarse para establecer variables de entorno o cambiar la umask según el directorio de trabajo actual.
+Añadir al archivo:
+$ nano ~/.bashrc
+  ...
+  # Activa ondir
+  source /usr/share/ondir/integration/bash
+  ...
+$ source ~/.bashrc (recargar)
+$ type cd (comprobar que funciona)
+  cd is a function
+  cd ()
+  {
+      builtin cd "$@" && eval "`ondir \"$OLDPWD\" \"$PWD\"`"
+  }
+Si no aparece algo parecido a lo mostrado significa que ondir no está funcionando. Probar:
+$ ondir "$OLDPWD" "$PWD"
+$ nano ~/.ondirrc
+enter /home/USER/repositorio_git
+    git status
+leave /home/USER/repositorio_git
+    echo "Saliendo de repositorio_git..."
+Nota.- La indentación debe ser con tabulador o espacios, pero sin mezclarlos.
+
+
 oneko
 Un gato persigue el cursor por la pantalla mientras trabajas. Alternativamente, un perro persigue un hueso. Hay opciones de menú para iniciar y detener el programa fácilmente en los modos perro y gato. Otras variaciones y configuraciones detalladas están disponibles a través de opciones de línea de comando.
 $ oneko -dog -fg yellow -speed 20 (un perro, amarillo y a 20 de velocidad, por defecto 16)
