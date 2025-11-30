@@ -39534,6 +39534,13 @@ $ onedrive --synchronize --config-dir ~/nube/OneDrive --delete-drive-uploads (si
 $ onedrive --synchronize --path ~/ruta/carpeta/local (sincronizar una carpeta específica que no es ~/OneDrive)
 
 
+onedriver
+Sistema de archivos nativo para Linux que sincroniza archivos de Microsoft OneDrive de manera selectiva, descargando solo los archivos y metadatos que se necesita y no todo el contenido de tu cuenta de OneDrive.
+$ onedriver download --path /ruta/carpeta/local/ important_project_2024.xlsx (descargar el .xlsx de la cuenta OneDrive y guardarlo en local)
+$ onedriver ls /path/to/one/drive (listar todos los archivos de OneDrive de la carpeta especificada)
+$ onedriver upload --path /path/to/file/file.txt /path/to/one/drive (subir un archivo local al directorio one/drive de OneDrive)
+
+
 oneko
 Un gato persigue el cursor por la pantalla mientras trabajas. Alternativamente, un perro persigue un hueso. Hay opciones de menú para iniciar y detener el programa fácilmente en los modos perro y gato. Otras variaciones y configuraciones detalladas están disponibles a través de opciones de línea de comando.
 $ oneko -dog -fg yellow -speed 20 (un perro, amarillo y a 20 de velocidad, por defecto 16)
