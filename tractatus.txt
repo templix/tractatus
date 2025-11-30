@@ -39579,6 +39579,15 @@ The Tor Project -> http://2gzyxa5ihm7nsggfxnu52rck2vv4rvmdlkiu3zzui5du4xyclen53w
 Proton Mail --> https://protonmailrmez3lotccipshtkleegetolb73fuirguix4e7hzmasyd.onion
 
 
+onionshare
+Permite compartir archivos de cualquier tamaño de forma segura y anónima a través de los Servicios Ocultos de Tor. Funciona iniciando un servidor web, haciéndolo accesible como un servicio oculto de Tor y generando una URL indescifrable para acceder y descargar el archivo. No requiere configurar un servidor en internet ni usar un servicio de intercambio de archivos externo. Alojas el archivo en tu ordenador y usas un servicio oculto de Tor para que sea accesible temporalmente a través de internet. El otro usuario solo necesita usar el navegador Tor e introducir la URL para descargar el archivo.
+$ ss -tuln | grep 9050 (verificar que Tor esté escuchando en SOCKS)
+$ onionshare /ruta/archivo (levanta el servicio oculto y muestra una URL .onion que se debe enviar al destinatario)
+$ onionshare ~/Fotos/vacaciones/ (compartir un directorio)
+$ onionshare --public ~/ISOS/debian.iso (permite que varias personas descarguen el archivo y mantiene el sercicio abierto aunque termine una transferencia)
+$ onionshare --website ~/web/mi_sitio/ (devuelve una URL .onion donde ese sitio queda accesible mientras el comando esté en ejecución)
+
+
 only
 Herramienta que permite buscar según patrones de palabras o patrones de líneas.
 $ only -l palabra text.txt (muestra la linea donde sale "palabra")
