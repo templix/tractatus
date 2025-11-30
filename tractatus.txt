@@ -39525,6 +39525,15 @@ leave /home/USER/repositorio_git
 Nota.- La indentación debe ser con tabulador o espacios, pero sin mezclarlos.
 
 
+onedrive
+Cliente para la sincronización de carpetas con OneDrive, el sistema de almacenamiento en la nube de Microsoft.
+$ onedrive (comando para iniciar el proceso interativo de configuración. Precisa iniciar sesión en el navegador con la cuenta de Microsoft y autorizar la aplicación)
+$ onedrive --synchronize (iniciar la sincronización, por defecto, con la carpeta ~/OneDrive)
+$ onedrive --monitor (monitorear continuamente la carpeta local y que sincronice los cambios en tiempo real)
+$ onedrive --synchronize --config-dir ~/nube/OneDrive --delete-drive-uploads (sincronizar especificando un directorio de configuración diferente y eliminando los archivos eliminados localmente)
+$ onedrive --synchronize --path ~/ruta/carpeta/local (sincronizar una carpeta específica que no es ~/OneDrive)
+
+
 oneko
 Un gato persigue el cursor por la pantalla mientras trabajas. Alternativamente, un perro persigue un hueso. Hay opciones de menú para iniciar y detener el programa fácilmente en los modos perro y gato. Otras variaciones y configuraciones detalladas están disponibles a través de opciones de línea de comando.
 $ oneko -dog -fg yellow -speed 20 (un perro, amarillo y a 20 de velocidad, por defecto 16)
