@@ -39711,6 +39711,64 @@ $ doas apt update (despues de reiniciar las comandos apt como usuario sin sudo)
 $ doas -C /etc/doas.conf (comprobar errores en el archivo de configuración)
 
 
+opengnb
+[Open Great Network Bridge]. Implementación de una VPN descentralizada y P2P [Peer-to-Peer] que opera en la Capa 3 del modelo OSI. A diferencia de las VPN tradicionales que dependen de un servidor central, en OpenGNB, cada nodo [dispositivo] se conecta directamente a otros nodos. No hay un punto central de fallo o un servidor al que todo el tráfico deba pasar. Que "opera en la capa 3" significa que crea una red a nivel de direcciones IP y al conectar a una red OpenGNB, el dispositivo obtiene una nueva dirección IP virtual, lo que permite que los dispositivos de la red se comuniquen entre sí como si estuvieran en la misma red de área local, independientemente de su ubicación física en Internet.
+$ gnb -i gnbtun -c $node_conf_dir -e "--upnp"(nombre de la interfaz de red virtual, directorio donde se almacerarán los archivos de configuración y habilitat la función UPnP)
+$ gnb -n 1001 -I 'i/0/$public_index_ip:$port' -p 'mibypasscode' ((iniciar el primer nodo de la red virtual con ID 1001, unirse a un índice público y contraseña compartida para esta red virual)
+Nota.- En la misma red, cada nodo puede tener su propio ID de nodo o un ID que se autoasigna [1002, 1003...].
+$ gnb -P --console-log-level=3 --index-service-log-level=3 (ejecutar el servicio en segundo plano y ajustar el nivel de registro. 3 --> informativo)
+$ gnb -n 1001 -p 'mibypasscode' -I 'i/0/indice.dominio.com:443' -a 10.10.0.5/24 (asigna la dirección IP 10.10.0.5 al nodo, y la máscara de subred $255.255.255.0$ [dada por /24])
+$ gnb -n 1001 -p 'mibypasscode' -I 'i/0/indice.dominio.com:443' -R (fuerza a que todo el tráfico saliente del equipo pase primero a la red virtual de OpenGNB)
+gnb -n 3000 -p 'otracontraseña' -I 'i/0/indice.dominio.com' -i tun0 --device-if eth0 --persistence 10 (configurar la Interfaz y Persistencia)
+-i tun0 --> Nombre de la interfaz virtual que se creará [tun0 en lugar de gnbtun].
+--device-if eth0 --> Fuerza al nodo a enviar sus paquetes salientes a través de la interfaz física eth0.
+--persistence 10 --> El nodo intentará mantener la conexión activa y se reconectará si cae, esperando 10 segundos antes de reintentar.
+$ gnb -n 4000 -p 'túneldirecto' --add-tunnel '10.10.0.10:1.2.3.4:443' --add-tunnel '10.10.0.11:5.6.7.8:443' (establecer un túnel directo con la IP virtual 10.10.0.10 y cuya IP pública/puerto se encuentra en 1.2.3.4:443)
+1.-
+Usar un servidor de índice privado
+$ gnbisd (iniciar el servidor de índice privado en la máquina que actuará como índice, por ejemplo, con IP 92.168.1.100)
+Esto inicia el servidor de índice, escuchando las peticiones de los nodos, generalmente en el puerto 443 por defecto.
+$ gnb -n 2000 -p 'micontrasegura' -I 'i/0/192.168.1.100:443' -P (en los clientes que quieran unirse a la red, se utiliza la IP del servidor de índice)
+
+
+openiked
+Daemon de Intercambio de Claves por Internet [Internet Key Exchange - IKEv2] que realiza autenticación mutua y establece y mantiene políticas de seguridad VPN IPsec y asociaciones entre pares.
+Configuración de servidor VPN con PSK:
+# nano /etc/iked.conf
+       ikev2 "mi_vpn" passive esp \
+           from 0.0.0.0/0 to 192.168.100.0/24 \
+    	   local 203.0.113.10 \
+    	   peer any \
+    	   config pool 192.168.100.10-192.168.100.20 \
+    	   psk "clave_secreta_compartida"
+passive --> espera conexiones entrantes.
+esp --> usa encapsulación de seguridad [IPsec ESP].
+from 0.0.0.0/0 --> permite a cualquier cliente.
+to 192.168.100.0/24 --> red destino tras el túnel.
+local 203.0.113.10 --> IP pública del servidor.
+peer any --> acepta cualquier par.
+config pool --> rango de IPs para clientes.
+psk --> clave precompartida.
+Autenticación con certificados:
+# nano /etc/iked.conf
+       ca "mi_ca" {
+       	  subject "CN=Mi Autoridad Certificadora"
+    	  cert "/etc/ssl/certs/ca.crt"
+       }
+       ikev2 "vpn_cert" passive esp \
+           from 0.0.0.0/0 to 10.10.10.0/24 \
+    	   local 198.51.100.5 \
+    	   peer any \
+    	   config pool 10.10.10.100-10.10.10.200 \
+    	   ca "mi_ca" \
+    	   cert "/etc/ssl/certs/servidor.crt" \
+    	   key "/etc/ssl/private/servidor.key"
+# systemctl enable openiked (iniciar el servicio al inicio del sistema)
+# systemctl reload openiked (recargar configuración)
+# journalctl -u openiked -f (ver logs)
+Nota.- Asegurar que el firewall permita UDP/500 y UDP/4500, puertos IKE e IPsec NAT-T.
+
+
 openoffice
 Suite ofimática
 $ soffice --writer (--calc, --impress, --draw, --math, --base) Arrancar el programa
