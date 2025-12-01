@@ -39597,6 +39597,16 @@ $ only -l 3/palabra text.txt (muestra la 3ª linea donde sale "palabra")
 $ only -l 3/palabra/0:2 text.txt (muestra la 3ª vez que sale "palabra" y las siguientes 2 lineas)
 
 
+ont-fast5-api
+Interfaz desarrollada por Oxford Nanopore Technologies para manejar archivos en formato HDF5, específicamente los archivos .fast5 utilizados en secuenciación de nanoporos. Incluye las herramientas check_compression, compress_fast5, demux_fast5, fast5_subset, multi_to_single_fast5 y single_to_multi_fast5.
+$ check_compression --input /data/archivo.fast5 (indica el tipo de compresión para cada archivo, como "VBZ" o "GZIP")
+$ compress_fast5 -i /data/lecturas_sin_comprimir -o /data/lecturas_comprimidas --recursive (copia la estructura de /data/lecturas_sin_comprimir y subcarpetas a /data/lecturas_comprimidas)
+$ demux_fast5 -i /data/multi_reads -s /data/demultiplexadas -l barcoding_summary.txt (genera subdirectorios como /data/demultiplexadas/barcode01/batch_0.fast5, donde cada archivo contiene lecturas de un barcode específico)
+$ fast5_subset -i /data/multi_reads -s /data/subset --read_id_list read_id_list.txt -n 100 --recursive (si /data/multi_reads contiene archivos multi-read y read_id_list.txt lista IDs específicos, genera archivos como /data/subset/batch_0.fast5 con hasta 100 lecturas cada uno)
+$ multi_to_single_fast5 -i /data/multi_reads.fast5 -s /data/single_reads -n 4000 -t 4 --recursive -c vbz (convierte lecturas de /data/multi_reads.fast5 en archivos individuales como /data/single_reads/read_id_001.fast5, con compresión VBZ)
+$ single_to_multi_fast5 -i /data/single_reads -s /data/multi_fast5 -n 10000 -t 2 --recursive -c vbz (agrupa hasta 10,000 lecturas de /data/single_reads en archivos como /data/multi_fast5/batch_0.fast5)
+
+
 oomd
 [Out Of Memory Daemon]. Demonio avanzado que utiliza métricas del kernel para detectar la presión de memoria antes de que el sistema llegue a un punto crítico y elimina procesos de acuerdo con reglas definidas en /etc/oomd/oomd.conf. Aprovecha PSI [Pressure Stall Information] y cgroupv2 [control group] [ver] para supervisar el sistema de forma integral, luego, toma medidas correctivas antes de que se produzca una falta de memoria en el espacio del núcleo eliminando los procesos infractores. Realiza un control más avanzado que la aplicación earlyoom [ver] y está integrado con systemd.
 # /usr/lib/systemd/systemd-sysv-install enable oomd (iniciar el servicio al iniciar el sistema)
