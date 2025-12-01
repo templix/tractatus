@@ -39769,6 +39769,24 @@ Autenticación con certificados:
 Nota.- Asegurar que el firewall permita UDP/500 y UDP/4500, puertos IKE e IPsec NAT-T.
 
 
+openimageio-tools
+Colección de utilidades basadas en la biblioteca OpenImageIO [OIIO], que es una biblioteca de lectura y escritura de imágenes de alto rendimiento. Estas herramientas son fundamentales en flujos de trabajo de gráficos por computadora y efectos visuales para inspeccionar, manipular y convertir archivos de imagen. Las utilidades son iconvert, idiff, igrep, iinfo, iv, maketx, oiiotool y testtex
+$ oiiotool original.exr --resize 50% -o reducido.exr (redimensionar una imagen y guardarla con un nuevo nombre)
+$ oiiotool fondo.png capa.png --over -o resultado.png (fusionar dos imágenes usando el canal alfa)
+$ oiiotool imagen.tiff --ch R -o canal_rojo.tiff (extraer el canal rojo de una imagen)
+$ iconvert imagen.jpg imagen.png (convertir una imagen de JPG a PNG)
+$ iconvert archivo.exr -d compression=lzw archivo.tiff (convertir a TIFF usando compresión LZW)
+$ iinfo mapa_profundidad.exr (obtener un resumen de la información de un archivo EXR)
+$ iinfo -v mi_render.tiff (mostrar metadatos detallados)
+$ idiff -fail 1e-6 render_v01.exr render_v02.exr (comparar dos versiones de un render y establecer un umbral de error de $10^{-6}$)
+$ idiff -v imagen_A.png imagen_B.png (generar un informe detallado de las diferencias encontradas)
+$ igrep camera_A *.exr (buscar la etiqueta "camara\_A" en los metadatos de un archivo del directorio actual)
+$ maketx textura_color.png (generar un archivo TX [textura] con mipmaps y baldosas)
+$ maketx -u --wrap clamp rugosidad.png -o rugosidad.tx (crear un mapa de rugosidad con el modo de envoltura establecido en clamp)
+$ testtex mi_textura.tx 0.5 0.5 (probar el muestreo de un mapa TX en coordenadas UV específicas)
+$ iv render_final.exr (visualizar un archivo)
+
+
 openoffice
 Suite ofimática
 $ soffice --writer (--calc, --impress, --draw, --math, --base) Arrancar el programa
