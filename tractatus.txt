@@ -39674,6 +39674,33 @@ $ firefox file:///usr/share/openclipart/png/
 $ firefox file:///usr/share/openclipart/svg/
 
 
+openconnect
+Cliente que permite conectarse a servidores VPN que utilizan protocolos SSL/TLS, como los de AnyConnect de Cisco, Pulse Connect Secure, Palo Alto GlobalProtect, F5 Big-IP, Fortinet Fortigate y Array Networks.
+# openconnect vpn.ejemplo.com (conexión básica a un servidor VPN. Pedirá usuario y contraseña y si el servidor usa certificados, puede que pida aceptarlos)
+# openconnect vpn.ejemplo.com --user=tu_usuario --authgroup=tu_grupo (especificar usuario y grupo)
+# openconnect vpn.ejemplo.com --certificate=/ruta/a/tu/certificado.pem (usar un certificado de cliente)
+# openconnect vpn.ejemplo.com --token-mode=stoken --token-secret=tu_secreto (conexión con autenticación por token [2FA] para servidores que usan autenticación en dos pasos)
+# openconnect --protocol=gp vpn.globalprotect.ejemplo.com (conexión a GlobalProtect [Palo Alto])
+# openconnect --protocol=fortinet vpn.fortinet.ejemplo.com (conexión a Fortinet SSL VPN)
+Nota.- Para desconectarse presionar Ctrl+C en la terminal donde está corriendo openconnect.
+
+
+opencu
+conectarse a la consola serie de otra máquina con fines administrativos o de depuración.
+$ cu
+# cu -l /dev/ttyUSB0 -s 115200 (conectar a 115200 baudios)
+# cu -l /dev/ttyUSB0 (conectar con la velocidad por defecto del dispositivo si coincide con la del equipo remoto)
+# cu -l /dev/ttyACM0 (con un microcontrolador conectado como /dev/ttyACM0 con la velocidad por defecto del firmware)
+# dmesg | grep -i tty (localizar el dispositivo correcto)
+# ls /dev/ttyUSB* /dev/ttyACM* (lo mismo)
+Una vez dentro de la sesión, cu usa “tildes” al inicio de línea como comandos especiales. Los más prácticos para consola de administración son:
+- : escribir en una línea nueva:
+~. --> Salir de la sesión serie sin matar el equipo remoto
+~? --> Ver ayuda de todas las escapes disponibles
+~S --> Cambiar la velocidad al vuelo si el dispositivo lo permite y seguir las indicaciones de cu.[1]
+~# --> Enviar un "BREAK" útil para ciertos bootloaders o ROMs
+
+
 opendoas
 [doas] Versión  del comando doas de OpenBSD que es un reemplazo mínimo de sudo. Ejemplos de archivo de configuración /usr/share/doc/opendoas/examples/doas.conf y el archivo real de configuración [si no existe se crea]:
 # nano /etc/doas.conf
