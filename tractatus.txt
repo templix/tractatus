@@ -39839,6 +39839,27 @@ Para probar, conectarse al SSID "Wi-Fi Gratuito", abrir el navegador y aparece l
 # opennds -f -d 7   # nivel debug 7 (depurar en primer plano)
 
 
+openntpd
+Demonio para el Protocolo de Tiempo de Red [Network Time Protocol], se utiliza para mantener sincronizados los relojes de los ordenadores. Permite sincronizar el reloj local con servidores NTP remotos y puede actuar como servidor NTP, redistribuyendo el reloj local. Su instalción elimina el paquete systemd-timesyncd. Incluye las aplicaciones ntpctl y ntpd.
+# ntpd -n (comprobar la configuración)
+# ntpd -d (sincronizar manualmente el sistema)
+# ntpd -s (fuerza sincronización inmediata)
+# systemctl restart openntpd (lo mismo)
+# ntpctl -s status (ver estado)
+# ntpctl -s peers (ver servidores y su calidad)
+# ntpctl -s sensors (si se usan sensores locales)
+$ sudo systemctl status openntp (comprobar si está activo)
+El archivo de configuración /etc/openntpd/ntpd.conf viene son los servidores públicos descomentados:
+   	servers 0.debian.pool.ntp.org
+	servers 1.debian.pool.ntp.org
+	servers 2.debian.pool.ntp.org
+	servers 3.debian.pool.ntp.org
+Aunque siempre se puden poner otros o añadirlos:
+        server 0.es.pool.ntp.org
+	server 1.es.pool.ntp.org
+        server 2.es.pool.ntp.org
+
+
 openoffice
 Suite ofimática
 $ soffice --writer (--calc, --impress, --draw, --math, --base) Arrancar el programa
@@ -51774,6 +51795,7 @@ $ xdotool key alt+F2 (Simula la pulsación de alt + F2 y arranca la aplicación 
 $ xdotool mousemove 0 0 (Envia el puntero a la coordenada especificada, en este caso, extremo superior izquierdo)
 $ xdotool getmouselocation (Indica las coordenadas del puntero)
 $ xdotool click 1 (Hace “click” donde esté el puntero)
+$ sleep 5; xdotool type -- "$(xclip -o -selection clipboard)" (escribir algo que está en el portapapeles)
 Ejemplo en un script [que abra una nueva pestaña, escriba “ifconfig” y pulse “return”]:
 	#!/bin/bash
 	xdotool key shift+ctrl+t;
