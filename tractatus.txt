@@ -39773,7 +39773,7 @@ openimageio-tools
 Colección de utilidades basadas en la biblioteca OpenImageIO [OIIO], que es una biblioteca de lectura y escritura de imágenes de alto rendimiento. Estas herramientas son fundamentales en flujos de trabajo de gráficos por computadora y efectos visuales para inspeccionar, manipular y convertir archivos de imagen. Las utilidades son iconvert, idiff, igrep, iinfo, iv, maketx, oiiotool y testtex
 $ oiiotool original.exr --resize 50% -o reducido.exr (redimensionar una imagen y guardarla con un nuevo nombre)
 $ oiiotool fondo.png capa.png --over -o resultado.png (fusionar dos imágenes usando el canal alfa)
-$ oiiotool imagen.tiff --ch R -o canal_rojo.tiff (extraer el canal rojo de una imagen)
+$ oiiotool imagen.tiff --ch R -o imagen_sin_rojo.tiff (extraer el canal rojo de una imagen)
 $ iconvert imagen.jpg imagen.png (convertir una imagen de JPG a PNG)
 $ iconvert archivo.exr -d compression=lzw archivo.tiff (convertir a TIFF usando compresión LZW)
 $ iinfo mapa_profundidad.exr (obtener un resumen de la información de un archivo EXR)
@@ -39785,6 +39785,52 @@ $ maketx textura_color.png (generar un archivo TX [textura] con mipmaps y baldos
 $ maketx -u --wrap clamp rugosidad.png -o rugosidad.tx (crear un mapa de rugosidad con el modo de envoltura establecido en clamp)
 $ testtex mi_textura.tx 0.5 0.5 (probar el muestreo de un mapa TX en coordenadas UV específicas)
 $ iv render_final.exr (visualizar un archivo)
+
+
+opennds
+[Open Network Demarcation Service]. Controla el acceso a una conexión pública a internet y ofrece una forma sencilla de abrir un punto de acceso para redes inalámbricas. Proporciona un portal cautivo para informar a los usuarios sobre los servicios y, opcionalmente, para que acepten los términos y condiciones de uso. El cliente reciba automáticamente una página web la primera vez que intente navegar, no pueda salir a Internet hasta que "valide" el acceso de alguna de las formas que se hayamo configurado: pulsar "Acepto", rellenar un formulario, ver un vídeo, pagar, introducir un token, etc y una vez validado, opennds le da de alta en la "lista blanca" durante el tiempo que se configure y le permite navegar.
+# systemctl enable opennds (arrancar el servicio al iniciar el sistema si no se ha realizado durante la instalación)
+1.-
+Proceso en que el cliente ha de pulsar el botón "aceptar"
+Ejemplo mínimo de configuración
+# nano /etc/opennds/opennds.conf
+       # Interfaz donde está el AP
+       GatewayInterface wlan0
+       # Puerto interno (opcional)
+       GatewayPort 2050
+       # Página que mostraremos (puede ser remota)
+       FasRemoteIP 192.168.1.1
+       FasPath /nds/splash.html
+       FasSecureEnabled 0   # no HTTPS para el ejemplo
+       # Duración del paso
+       SessionTimeout 14400   # 4 h
+       # Script que decide: cualquier petición con ?tok=accept
+       BinAuth /usr/lib/opennds/binauth_log.sh
+Página splash.html
+# nano /var/www/nds/splash.html
+	<!doctype html>
+	<html>
+	  <head><meta charset="utf-8"><title>Bienvenido</title></head>
+  	  <body>
+	    <h1>Wi-Fi Gratuito</h1>
+    	    <p>Pulse el botón para navegar 4 h.</p>
+    	    <form method="GET" action="http://192.168.1.1:2050/opennds_preauth/">
+    	      <input type="hidden" name="tok" value="accept">
+      	      <button type="submit">Acepto</button>
+    	    </form>
+  	  </body>
+	</html>
+Ejemplo orientativo de script binauth_log.sh
+# nano /usr/lib/opennds/binauth_log.sh
+       #!/bin/sh
+       # $1=method (auth), $2=clientip, $3=clientmac, $4=tok, $5=redir
+       [ "$4" = "accept" ] && exit 0   # autorizado
+       exit 1                          # rechazado
+# chmod 755 /usr/lib/opennds/binauth_log.sh (hacerlo ejecutable)
+# systemctl restart opennds (reiniciar el demonio)
+Para probar, conectarse al SSID "Wi-Fi Gratuito", abrir el navegador y aparece la splash, pulsar "Acepto" y pennds te da de alta y redirige a la página que querías.
+# ndsctl status (muestra la lista de clientes autorizados)
+# opennds -f -d 7   # nivel debug 7 (depurar en primer plano)
 
 
 openoffice
