@@ -39787,6 +39787,12 @@ $ testtex mi_textura.tx 0.5 0.5 (probar el muestreo de un mapa TX en coordenadas
 $ iv render_final.exr (visualizar un archivo)
 
 
+openjph-tools
+Biblioteca de compresión/descompresión de imágenes HTJ2K [High Throughput JPEG 2000] un formato de compresión de imágenes basado en el estándar JPEG 2000, pero optimizado para aplicaciones de alto rendimiento y baja latencia. Este formato es especialmente útil en aplicaciones donde se requiere una transmisión rápida y eficiente de imágenes, como en la transmisión de video en tiempo real, la visualización de imágenes médicas, y el procesamiento de imágenes en aplicaciones de realidad aumentada y virtual. Incluye las aplicaciones ojph_compress y ojph_expand.
+$ ojph_compress -i input_image.png -o output_image.j2k (ruta de la imagen de entrada que se desea comprimir y donde se guardará la imagen comprimida)
+$ ojph_expand -i input_image.j2k -o output_image.png (ruta de la imagen comprimida y donde se guardará la imagen descomprimida en su formato original)
+
+
 opennds
 [Open Network Demarcation Service]. Controla el acceso a una conexión pública a internet y ofrece una forma sencilla de abrir un punto de acceso para redes inalámbricas. Proporciona un portal cautivo para informar a los usuarios sobre los servicios y, opcionalmente, para que acepten los términos y condiciones de uso. El cliente reciba automáticamente una página web la primera vez que intente navegar, no pueda salir a Internet hasta que "valide" el acceso de alguna de las formas que se hayamo configurado: pulsar "Acepto", rellenar un formulario, ver un vídeo, pagar, introducir un token, etc y una vez validado, opennds le da de alta en la "lista blanca" durante el tiempo que se configure y le permite navegar.
 # systemctl enable opennds (arrancar el servicio al iniciar el sistema si no se ha realizado durante la instalación)
