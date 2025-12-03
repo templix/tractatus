@@ -16061,6 +16061,7 @@ $ export HISTFILE=/dev/null bash (abrir otra sesión que no almacene los comando
 $ export PS1="[\u@`curl icanhazip.com` \W]$ "  (Excentricidad: que el promt diga la ip externa.)
 $ export LANG=C; gedit (Lanzar una aplicación con un locale concreto)
 $ export | grep XDG_ (listar todas las variables XDG)
+$ export XDG_CACHE_HOME="$HOME/.cache" (colocado en ~/.profile indicará la ruta .cache a las aplicaciones)
 
 
 expr
@@ -51763,6 +51764,27 @@ $ xd .Dl (el "." que partimos del directorio de inicio del usuario. En el ejempl
 $ cd 0le (el "0" indica que partimos del directorio en el que estemos. En el ejemplo, si estamos en ~/Documentos, podría tratarse de libros/emacs)
 $ xd --input /ulb (entra en el directorio /usr/local/bin)
 Si existen varios con las mismas iniciales mostraría la lista para escoger el número del que corresponda al que queremos.
+
+
+xdg
+Las variables XDG vienen del estándar XDG Base Directory Specification, creado por freedesktop.org. Su objetivo es ordenar dónde deben guardarse los archivos de configuración, datos y cachés, evitando que el $HOME se llene de archivos sueltos. Gracias a XDG, la mayoría de programas modernos usan directorios organizados como: ~/.config, ~/.local/share, ~/.cache...
+Variables principales XDG y su función:
+XDG_CONFIG_HOME --> Dónde se guardan archivos de configuración del usuario [~/.config/lxsession/, ~/.config/pcmanfm/...].
+XDG_DATA_HOME --> Dónde se guardan datos de las aplicaciones, no configuración [~/.local/share/shotwell, ~/.local/share/applications/, ~/.local/share/icons/, ~/.local/share/flatpak/...].
+XDG_CACHE_HOME --> Dónde se guarda la caché de las aplicaciones. Puede que no exista pero se puede crear [~/.cache/thumbnails/, ~/.cache/mozilla/...].
+XDG_DATA_DIRS --> Lista de rutas donde el sistema busca datos globales de aplicaciones [/usr/share, /usr/local/share, /var/lib/...].
+XDG_CONFIG_DIRS --> Similar al anterior, pero para configuración global [/etc/xdg/lxsession/].
+XDG_GREETER_DATA_DIR --> Directorio de datos de LightDM para el usuario [/var/lib/lightdm/data/USER].
+XDG_SEAT --> asiento de sesión gráfica, normalmente seat0.
+XDG_VTNR --> número de terminal virtual donde corre la sesión, por ejemplo 7.
+XDG_SESSION_TYPE --> Tipo de sesión [x11, wayland, tty ...].
+XDG_CURRENT_DESKTOP --> El escritorio actual.
+$ export | grep XDG_ (ver todas las variables y donde apuntan)
+Si alguna variable no está definida, podemos ponerla en el archivo:
+$ nano .bashrc
+Con la linea:
+  	export XDG_CACHE_HOME="$HOME/.cache"
+$ source ~/.bashrc (recargar la configuración)
 
 
 xdg-mime
