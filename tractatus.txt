@@ -39875,6 +39875,29 @@ Para previsualizar en miniaturas los documentos:
 # apt-get install ooo-thumbnailer
 
 
+openqa
+[openqa-client openqa-worker]. Marco de pruebas automáticas de sistemas operativos [interfaz web y programador] que permite ejecutar pruebas en prácticamente cualquier dispositivo que se pueda controlar remotamente, normalmente, cualquier cosa que se pueda ejecutar en una máquina virtual y apuntar a VNC. Esto permite probar aplicaciones GUI, el arranque del sistema [BIOS, cargadores de arranque, kernels], instaladores y sistemas operativos completos. El paquete openqa-client incluye los ejecutables openqa-cli, openqa-clone-job, openqa-dump-templates, openqa-label-all, openqa-load-templates y openqa-validate-yaml y el paquete openqa-worker incluye 25 servicios [openqa-websockets.service, openqa-enqueue-git-auto-update.service, openqa-webui.service...]
+Cada servicio tiene una función específica, algunas son:
+     openqa-webui.service --> Interfaz web principal.
+     openqa-scheduler.service --> Orquesta y distribuye trabajos a workers
+     openqa-websockets.service --> Comunicación en tiempo real para UI
+     openqa-livehandler.service --> Maneja conexiones interactivas/debug
+     openqa-worker@.service --> Ejecuta pruebas reales en VMs. Puede tener múltiples workers: @1, @2, etc. para paralelizar
+     openqa-worker-plain@.service --> Ejecuta pruebas reales en VMs
+     openqa-enqueue-*-cleanup.service --> Limpieza periódica de datos viejos
+     openqa-enqueue-*-cleanup.timer --> Programadores para las limpiezas
+     openqa-setup-db.service --> Inicializa/configura la base de datos
+     openqa-vde_switch.service --> Conmutador de red virtual para las VMs
+     openqa-slirpvde.service --> NAT para red de pruebas
+     openqa-gru.service --> Maneja tareas de ejecución diferida
+     openqa-minion-*.service --> Para arquitecturas distribuídas más complejas
+Para una instalación básica, los esenciales son: openqa-webui, openqa-scheduler, openqa-websockets, openqa-worker@1 [al menos uno] y openqa-setup-db [solo para inicializar]
+# systemctl status openqa-webui openqa-scheduler openqa-worker@1 (ver estado de los servicios principales)
+# systemctl list-units --type=service --state=running | grep openqa (ver qué servicios están realmente activos)
+# openqa-cli api jobs/overview (ver trabajos en cola)
+# systemctl status openqa-webui (ver la interfaz web, normalmente en puerto 80 o 9526, luego visitar http://localhost:9526 en el navegador)
+
+
 opensc
 Utilidades para tarjetas inteligentes compatibles con la API PKCS#11 y PKCS#15 [estándart]. Ofrece un conjunto de bibliotecas y utilidades para acceder a tarjetas inteligentes y se centra principalmente en tarjetas que admiten operaciones criptográficas. Facilita su uso en aplicaciones de seguridad como cifrado de correo, autenticación y firma digital. Solo se admiten algunas tarjetas [documentación en https://github.com/OpenSC/OpenSC/wiki] y con algunos parámetros como la versión de la tarjeta, la versión del sistema operativo de la tarjeta y el subprograma precargado, tambien puede requerir software propietario de terceros.
 
