@@ -15176,6 +15176,7 @@ env
 Muestra las variables de entorno
 $ env | grep DISPLAY
 $ env | grep PATH | tr ':' '\n'
+$ env | grep XDG_ (listar todas las variables XDG)
 Algunas opciones para grep: SHELL, USER, KEYBOARD, LANG..
 
 
@@ -16059,6 +16060,7 @@ $ export HISTFILE=/dev/null (Para no guardar el history de la sesión)
 $ export HISTFILE=/dev/null bash (abrir otra sesión que no almacene los comandos sin perder los de la actual)
 $ export PS1="[\u@`curl icanhazip.com` \W]$ "  (Excentricidad: que el promt diga la ip externa.)
 $ export LANG=C; gedit (Lanzar una aplicación con un locale concreto)
+$ export | grep XDG_ (listar todas las variables XDG)
 
 
 expr
