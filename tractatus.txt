@@ -39913,6 +39913,16 @@ $ refine -p 8888 (ejecutar en otro puerto)
 $ curl http://127.0.0.1:3333/command/core/create-project-from-upload -F "project-name=ventas2025" -F "file=@ventas.csv" (cargar un proyecto automáticamente)
 
 
+openresolv
+Marco de gestión para resolv.conf que permite que varios daemons lo administren y configuren resolutores DNS locales como dnsmasq y unbound. La principal ventaja de openresolv es que facilita la gestión de múltiples servicios DNS en un sistema, evitando conflictos y asegurando que el archivo resolv.conf se mantenga actualizado correctamente.
+Archivo de configuración básico:
+# nano /etc/resolvconf.conf
+       name_servers=127.0.0.1
+       interface_order="lo wlp2s0 enp1s0"
+Nota.- En "interface_order" poner las que procedan, por ejemplo "lo eth0 wlan0"
+# resolvconf -u (actualizar configuración)
+
+
 opensc
 Utilidades para tarjetas inteligentes compatibles con la API PKCS#11 y PKCS#15 [estándart]. Ofrece un conjunto de bibliotecas y utilidades para acceder a tarjetas inteligentes y se centra principalmente en tarjetas que admiten operaciones criptográficas. Facilita su uso en aplicaciones de seguridad como cifrado de correo, autenticación y firma digital. Solo se admiten algunas tarjetas [documentación en https://github.com/OpenSC/OpenSC/wiki] y con algunos parámetros como la versión de la tarjeta, la versión del sistema operativo de la tarjeta y el subprograma precargado, tambien puede requerir software propietario de terceros.
 
