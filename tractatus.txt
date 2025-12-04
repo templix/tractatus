@@ -39905,6 +39905,14 @@ openpace
 Biblioteca criptográfica que implementa el Control de Acceso Extendido [Extended Access Control - EAC] versión 2, según lo especificado en BSI TR-03110. OpenPACE es compatible con los siguientes protocolos: Establecimiento de Conexión Autenticada por Contraseña [Password Authenticated Connection Establishment - PACE], autenticación de Terminal [Terminal Authentication - TA] y autenticación de Chip [Chip Authentication - CA]. El paquete Debian openpace proporciona la librería compartida y headers, no una herramienta de alto nivel para el usuario final, su uso, normalmente se hace a través de herramientas que ya integran la librería por ejemplo, software de eID, middleware de DNIe, lectores de pasaportes, etc.
 
 
+openrefine
+Es una aplicación web local que arranca desde terminal o con el icono del menú y después se controla con el navegador.
+$ openrefine (levanta el servicio en http://127.0.0.1:3333 y se abre en el navegador por defecto)
+$ refine -m 4096M (arrancar con más memoria para datasets enormes)
+$ refine -p 8888 (ejecutar en otro puerto)
+$ curl http://127.0.0.1:3333/command/core/create-project-from-upload -F "project-name=ventas2025" -F "file=@ventas.csv" (cargar un proyecto automáticamente)
+
+
 opensc
 Utilidades para tarjetas inteligentes compatibles con la API PKCS#11 y PKCS#15 [estándart]. Ofrece un conjunto de bibliotecas y utilidades para acceder a tarjetas inteligentes y se centra principalmente en tarjetas que admiten operaciones criptográficas. Facilita su uso en aplicaciones de seguridad como cifrado de correo, autenticación y firma digital. Solo se admiten algunas tarjetas [documentación en https://github.com/OpenSC/OpenSC/wiki] y con algunos parámetros como la versión de la tarjeta, la versión del sistema operativo de la tarjeta y el subprograma precargado, tambien puede requerir software propietario de terceros.
 
