@@ -12243,6 +12243,16 @@ Si nuestra IP es dinámica, NetworkManager nos modificará cada cierto tiempo el
 # cp /etc/resolv.conf /etc/resolv.conf.local (Asegurándonos que este último tiene la linea “nameserver 127.0.0.1”)
 # crontab -e
 */3 * * * * cp /etc/resolv.conf.local /etc/resolv.conf (actualizar cada 3 minutos)
+1.-
+Configurar dnsmasq con cloudflare [1.1.1.1], opendns [208.67.222.222] y quad9 [9.9.9.9] como resolución de DNSs.
+$ sudo nano /etc/dnsmasq.conf
+# Descomentar y configurar:
+server=1.1.1.1
+server=208.67.222.222
+server=9.9.9.9
+no-resolv  # No usar /etc/resolv.conf
+listen-address=127.0.0.1
+bind-interfaces
 
 
 dnsmasq-base
@@ -38105,14 +38115,16 @@ $ nmcli connection (lo mismo)
 $ nmcli general status (estado)
 $ nmcli device wifi connect SSID_or_BSSID password password (conectarse a una wifi)
 $ nmcli device wifi connect SSID_or_BSSID password password hidden yes (conectarse a una wifi oculta)
-$ nmcli connection up name_or_uuid (conectarse a una red)
+$ nmcli connection up "Xartic-E413AD_5G" (conectarse a una red)
 $ nmcli -p -f general,wifi-properties device show wlan0 (ver información extensa [p] y propiedades de los campos expecificados [f])
 $ nmcli general permissions (permisos)
 $ nmcli device (listado de dispositivos de red y su estado)
 $ nmcli device disconnect ifname eth0 (desconectarse de una interfaz)
-$ nmcli connection delete name_or_uuid (eliminar una conexion)
+$ nmcli connection delete "Xartic-E413AD_5G" (eliminar una conexion)
 $ nmcli radio wifi off (desactivar una wifi)
 $ nmcli general reload (reiniciar servicio despues de modificar una conexión)
+$ nmcli connection modify "Xartic-E413AD_5G" ipv4.dns "1.1.1.1 9.9.9.9" (cambiar DNSs: cloudflare y quad9)
+$ nmcli connection modify "Xartic-E413AD_5G" ipv4.ignore-auto-dns yes (no realizar actualizaciones automáticas de dns)
 
 
 nmon
@@ -39925,6 +39937,15 @@ Nota.- En "interface_order" poner las que procedan, por ejemplo "lo eth0 wlan0"
 
 opensc
 Utilidades para tarjetas inteligentes compatibles con la API PKCS#11 y PKCS#15 [estándart]. Ofrece un conjunto de bibliotecas y utilidades para acceder a tarjetas inteligentes y se centra principalmente en tarjetas que admiten operaciones criptográficas. Facilita su uso en aplicaciones de seguridad como cifrado de correo, autenticación y firma digital. Solo se admiten algunas tarjetas [documentación en https://github.com/OpenSC/OpenSC/wiki] y con algunos parámetros como la versión de la tarjeta, la versión del sistema operativo de la tarjeta y el subprograma precargado, tambien puede requerir software propietario de terceros.
+
+
+openseachest
+Colección de utilidades diseñadas para operaciones en dispositivos de almacenamiento SATA, SAS, NVMe y USB. Estas herramientas son útiles para una variedad de tareas: actualizar el firmware del dispositivo o cambiar el tamaño del sector exportado de los discos duros. La herramientas son: openSeaChest_Basics, openSeaChest_Configure, openSeaChest_Defect, openSeaChest_Erase, openSeaChest_Firmware, openSeaChest_Format, openSeaChest_GenericTests, openSeaChest_Info, openSeaChest_Logs, openSeaChest_NVMe, openSeaChest_PassthroughTest, openSeaChest_PowerControl, openSeaChest_Raw, openSeaChest_Reservations, openSeaChest_SMART, openSeaChest_Security y openSeaChest_ZBD.
+$ openSeaChest_Basics --info /dev/sdX (devolverá información como el modelo del dispositivo, su capacidad y otros detalles básicos)
+$ openSeaChest_Firmware --update /dev/sdX --firmwarefile new_firmware.bin (actualizará el firmware del dispositivo con el archivo especificado)
+$ openSeaChest_Configure --set-sector-size 4096 /dev/sdX (configurará el dispositivo /dev/sdX para que utilice sectores lógicos de 4K)
+$ openSeaChest_SecureErase --security-erase /dev/sdX (ejecutará una operación de borrado seguro en el dispositivo /dev/sdX)
+Nota.- Algunas de estas herramientas pueden ser específicas para dispositivos Seagate, por lo que es posible que no sean compatibles con dispositivos de otros fabricantes.
 
 
 openssl
