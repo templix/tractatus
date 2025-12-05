@@ -40077,6 +40077,12 @@ $ ssh-add
 A partir de este momento cualquier conexión SSH que se inicie, no se volverá a pedir la frase de contraseña, ya que el ssh-client le pedirá la clave al ssh-agent que ya está desbloqueado.
 
 
+openssh-test
+Proporciona un conjunto de scripts o funciones de pruebas de regresión destinados a verificar la integridad y funcionamiento de la suite OpenSSH. Las pruebas de regresión son un conjunto de pruebas automatizadas diseñadas para verificar que las nuevas modificaciones en el software no hayan roto o afectado funcionalidades existentes. Listado de scripts en file:///usr/lib/openssh/regress/ que para su uso han de hacerse ejecutables:
+# cd /usr/lib/openssh/regress
+# chmod +x *
+
+
 openssl
 Codificador/descodificador
 $ openssl aes-128-cbc -salt -in texto -out encriptado.aes128  (encriptar)
