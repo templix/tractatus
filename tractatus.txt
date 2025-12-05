@@ -39935,6 +39935,10 @@ Nota.- En "interface_order" poner las que procedan, por ejemplo "lo eth0 wlan0"
 # resolvconf -u (actualizar configuración)
 
 
+opensbi
+Implementación de referencia de código abierto de las especificaciones SBI [Supervisor Binary Interface] de RISC-V diseñada para ser utilizada como firmware específico de plataforma que se ejecuta en modo M [Machine Mode] en procesadores RISC-V. Las especificaciones SBI definen una interfaz estándar entre el firmware y el software de nivel superior, como el sistema operativo en sistemas RISC-V. Esta interfaz permite que el software de nivel superior interactúe con el firmware para realizar tareas como la inicialización del hardware, la gestión de interrupciones y excepciones, y la configuración del entorno de ejecución. En el modo M el procesador tiene acceso completo a todos los recursos del sistema, incluyendo el hardware y el firmware. Cuando se enciende un sistema RISC-V, el firmware opensbi se ejecuta en modo M para inicializar el hardware y preparar el entorno de ejecución. Esto puede incluir tareas como la configuración de la memoria, la inicialización de los periféricos y la carga del kernel del sistema operativo.
+
+
 opensc
 Utilidades para tarjetas inteligentes compatibles con la API PKCS#11 y PKCS#15 [estándart]. Ofrece un conjunto de bibliotecas y utilidades para acceder a tarjetas inteligentes y se centra principalmente en tarjetas que admiten operaciones criptográficas. Facilita su uso en aplicaciones de seguridad como cifrado de correo, autenticación y firma digital. Solo se admiten algunas tarjetas [documentación en https://github.com/OpenSC/OpenSC/wiki] y con algunos parámetros como la versión de la tarjeta, la versión del sistema operativo de la tarjeta y el subprograma precargado, tambien puede requerir software propietario de terceros.
 
