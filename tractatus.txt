@@ -39952,6 +39952,15 @@ $ openSeaChest_SecureErase --security-erase /dev/sdX (ejecutará una operación 
 Nota.- Algunas de estas herramientas pueden ser específicas para dispositivos Seagate, por lo que es posible que no sean compatibles con dispositivos de otros fabricantes.
 
 
+openslide
+Herramientas de manipulación y conversión que proporcionan una interfaz sencilla para leer imágenes de diapositivas completas, también conocidas como diapositivas virtuales [Whole Slide Images - WSI] que son imágenes grandes y de alta resolución que se utilizan en patología digital. Leer estas imágenes con herramientas o bibliotecas de imágenes estándar es un desafío, ya que estas herramientas suelen estar diseñadas para imágenes que se pueden descomprimir fácilmente en la RAM o en un archivo de intercambio. Las imágenes de diapositivas completas suelen superar el tamaño de la RAM. Además, las imágenes de diapositivas completas suelen ser multirresolución, y solo se necesita una pequeña cantidad de datos de imagen con una resolución específica. Incluye los ejecutables openslide-quickhash1sum, openslide-show-properties y openslide-write-png.
+$ openslide-quickhash1sum archivo.ws (identifica de forma única una imagen de diapositiva virtual, para verificar la integridad o identidad de una imagen sin tener que procesarla completa)
+$ openslide-show-properties biopsia.ndpi (muestra las propiedades y metadatos asociados a una imagen de diapositiva virtual como el fabricante del escáner, resolución, dimensiones, número de niveles, etc)
+$ openslide-write-png tumor.svs 2 tumor_nivel2.png (extrae una región nivel 2 [0 resolución máxima] de la diapositiva virtual y lo guarda como una imagen PNG)
+$ openslide-write-png tumor.svs 0 recorte.png 0 0 1024 1024 (extraer una región de 1024x1024 píxeles desde la esquina superior izquierda en el nivel 0)
+$ openslide-write-png tumor.svs 0 region_interes.png 50000 40000 2048 2048 (extraer una región centrada en una zona de interés, por ejemplo, en coordenadas 50000,40000)
+
+
 openssl
 Codificador/descodificador
 $ openssl aes-128-cbc -salt -in texto -out encriptado.aes128  (encriptar)
