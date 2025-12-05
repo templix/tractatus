@@ -39961,6 +39961,53 @@ $ openslide-write-png tumor.svs 0 recorte.png 0 0 1024 1024 (extraer una región
 $ openslide-write-png tumor.svs 0 region_interes.png 50000 40000 2048 2048 (extraer una región centrada en una zona de interés, por ejemplo, en coordenadas 50000,40000)
 
 
+opensmtpd
+Servidor de correo SMTP [Simple Mail Transfer Protocol] diseñado para ser seguro, fiable, ágil y fácil de configurar.
+Archivo de configuración básico
+# nano /etc/smtpd/smtpd.conf
+       # Escuchar en todas las interfaces, solo para la red local
+       listen on lo
+       listen on eth0
+       #
+       # Permitir envío de correos desde localhost y la red local
+       accept from local for local deliver to mbox
+       accept from any for domain "tudominio.com" deliver to mbox
+       # Habilitar TLS
+       pki tudominio.com cert "/etc/ssl/certs/tudominio.crt"
+       pki tudominio.com key "/etc/ssl/private/tudominio.key"
+       #
+       # Autenticación
+       accept for local alias <aliases> deliver to mbox
+       accept from auth for any relay
+listen on lo --> Escucha en la interfaz de loopback.
+accept from local for local --> Acepta correos locales y los entrega en el buzón del usuario.
+accept from any for domain "tudominio.com" --> Acepta correos para el dominio especificado.
+pki --> Define los certificados TLS.
+accept from auth --> Permite el relay de correos solo para usuarios autenticados.
+# systemctl restart opensmtpd (reiniciar el servicio para actualizar la configuración)
+$ echo "Cuerpo del mensaje" | mail -s "Asunto" usuario@tudominio.com (probar el envío de un correo com "mail")
+
+
+opensnitch-ebpf-modules
+Proporciona módulos eBPF que usa OpenSnitch que permiten interceptar conexiones a nivel de kernel, ofreciendo un mejor rendimiento y fiabilidad. El paquete contiene los programas eBPF que se cargan en el kernel y se enganchan a funciones internas relacionadas con sockets y conexiones de red [kprobes/tracepoints]. Esto permite a OpenSnitch ver las conexiones sin depender de iptables, nfqueue u otros mecanismos en espacio de usuario. Al operar dentro del kernel, se reduce la sobrecarga de contexto y se mejora la precisión al asociar conexiones con procesos, lo que se traduce en menor consumo de CPU y menos falsos positivos o pérdidas de eventos de red.
+
+
+opensp
+Herramientas que se utilizan para analizar, validar y normalizar archivos SGML y XML. Los programas incluidos en este paquete son onsgmls, osgmlnorm, ospam, ospcat, ospent y osx.
+$ onsgmls -s -wxml -f errores.txt mi_documento.xml (suprime salida normal, solo errores, activa modo XML estricto y guarda errores en un archivo)
+$ onsgmls -s -f err.txt documento.sgml (validación SGML clásica con DTD externo)
+$ onsgmls documento.xml (ver el ESIS completo)
+$ osgmlnorm -A sgml mi_libro.sgml > mi_libro_norm.sgml (normalizar el documento)
+$ osgmlnorm documento.sgml > documento_normalizado.sgml (genera una versión "normalizada": expande entidades, aplica atributos por defecto, elimina marcas de omisión, incluye subdocumentos, etc)
+$ osgmlnorm -wxml mi_archivo.xml > normalizado.xml (lo mismo con una extensión XML)
+$ ospam documento_minimizado.sgml > con_marcas_explícitas.sgml (convierte <p>texto</> o </> en las etiquetas de cierre explícitas)
+$ ospent documento.sgml (listar entidades declaradas)
+$ ospent -e nombre_entidad documento.sgml(expandir una entidad concreta)
+$ ospcat catalog (muestra la resolución de public identifiers y system identifiers según los catálogos)
+$ osx -x -d estilo.dsl documento.sgml > salida.xml (permite transformar SGML/XML usando hojas de estilo DSSSL)
+$ osx -xlower -xno-nsgml mi_libro_norm.sgml > mi_libro.xml (convertir a XML moderno)
+
+
 openssh-client
 Cliente Secure Shell [Secure Shell] para acceso seguro a equipos remotos. SSH es un programa para iniciar sesión en un equipo remoto y ejecutar comandos en él. Proporciona comunicaciones cifradas seguras entre dos hosts no confiables a través de una red insegura. Incluye los programas scp [ver], sftp [ver], ssh [ver], ssh-add, ssh-agent, ssh-argv0, ssh-copy-id, ssh-keygen [ver] y ssh-keyscan
 ssh-agent es un programa en segundo plano [daemon] que se inicia automáticamente cuando se iniciala sesión. Para ver las variable de entorno:
