@@ -38111,7 +38111,7 @@ Herramienta de línea de comandos para controlar NetworkManager y para conocer s
 $ nmcli device wifi list (listar wifis cercanas)
 $ nmcli -m tabular device show (ver todos los dispositivos de red de forma tabulada. Otra opción es multiline)
 $ nmcli connection show (ver conexion activa)
-$ nmcli connection (lo mismo)
+$ nmcli con (lo mismo)
 $ nmcli general status (estado)
 $ nmcli device wifi connect SSID_or_BSSID password password (conectarse a una wifi)
 $ nmcli device wifi connect SSID_or_BSSID password password hidden yes (conectarse a una wifi oculta)
@@ -38123,8 +38123,9 @@ $ nmcli device disconnect ifname eth0 (desconectarse de una interfaz)
 $ nmcli connection delete "Xartic-E413AD_5G" (eliminar una conexion)
 $ nmcli radio wifi off (desactivar una wifi)
 $ nmcli general reload (reiniciar servicio despues de modificar una conexión)
-$ nmcli connection modify "Xartic-E413AD_5G" ipv4.dns "1.1.1.1 9.9.9.9" (cambiar DNSs: cloudflare y quad9)
-$ nmcli connection modify "Xartic-E413AD_5G" ipv4.ignore-auto-dns yes (no realizar actualizaciones automáticas de dns)
+$ nmcli con mod "Xartic-E413AD_5G" ipv4.dns "1.1.1.1 9.9.9.9" (cambiar DNSs: cloudflare y quad9)
+$ nmcli con mod "Xartic-E413AD_5G" ipv4.ignore-auto-dns yes (no realizar actualizaciones automáticas de dns)
+$ nmcli con edit (editor interactivo)
 
 
 nmon
