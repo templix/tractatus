@@ -40116,6 +40116,12 @@ $ opentracker -P 7012 (usar otro puerto UDP)
 $ opentracker -i 192.168.0.4 -p 6868 -P 6969 -A 192.168/16 -r https://my-trackersite.com/ (Iniciar enlazado en los puertos UDP y TCP 6868 del host local IPv4 y permitir acceso privilegiado desde la red 192.168/16 mientras se redirige a los clientes HTTP que acceden al directorio raíz, que no está cubierto por el protocolo de seguimiento de BitTorrent, a https://my-trackersite.com/)
 
 
+opentype-sanitizer
+[OTS]. Herramienta que se utiliza para analizar, validar y limpieza y corrección de errores en archivos de fuentes en formatos OpenType [OTF], TrueType [TTF], Web Open Font Format [WOFF] y Web Open Font Format 2 [WOFF2].
+$ ots-sanitize font.otf trans_font.otf (analizará el archivo y generará una versión saneada del mismo)
+$ ots-sanitize font.ttf (analizará el archivo font.ttf y mostrará un mensaje indicando si el archivo es válido o si hay errores que necesitan ser corregidos)
+
+
 openvpn
 Encapsular datos entre dos redes físicas usando una red privada virtual. Existen varios sitios de internet que ofrecen este servicio de forma gratuita. Aquí usaremos a modo de ejemplo frootvpn. Nos registramos en <https://www.frootvpn.com/> y descargamos el software:
 $ wget https://www.frootvpn.com/files/frootvpn.ovpn
