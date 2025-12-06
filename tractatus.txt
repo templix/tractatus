@@ -40098,6 +40098,14 @@ Para visualizar el resultado del encriptado:
 Nota.- la opción "a" indica que codificará con base64. "-salt" Añade potencia al cifrado.
 
 
+opensysusers
+utiliza los archivos del directorio sysusers.d para crear usuarios y grupos del sistema, y​para añadir usuarios a grupos, durante la instalación del paquete o el arranque. Esta herramienta solo puede utilizarse para asignar usuarios y grupos del sistema; no es útil para crear usuarios y grupos no pertenecientes al sistema es decir, no sirve para cuentas humanas porque escribe directamente en /etc/passwd y /etc/group, sin soporte para NIS, LDAP o directorios home. Los usuarios humanos tienen UID ≥ 1000, directorio home, shell interactiva y gestión con useradd. Los usuarios sistema tienen UID < 1000, sin home, shell /bin/false o /usr/sbin/nologin y solo existen para que un servicio tenga identidad y permisos.
+Un ejemplo orientativo: Crear usuario para nginx
+# nano /usr/lib/sysusers.d/nginx.conf
+       'u nginx 440 nginx "Nginx web server"'
+Al instalar nginx, opensysusers genera entrada en passwd con UID 440, grupo primario nginx y shell /usr/sbin/nologin; el servicio se ejecuta como ese usuario sin capacidad de login.
+
+
 openvpn
 Encapsular datos entre dos redes físicas usando una red privada virtual. Existen varios sitios de internet que ofrecen este servicio de forma gratuita. Aquí usaremos a modo de ejemplo frootvpn. Nos registramos en <https://www.frootvpn.com/> y descargamos el software:
 $ wget https://www.frootvpn.com/files/frootvpn.ovpn
