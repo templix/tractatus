@@ -40106,6 +40106,16 @@ Un ejemplo orientativo: Crear usuario para nginx
 Al instalar nginx, opensysusers genera entrada en passwd con UID 440, grupo primario nginx y shell /usr/sbin/nologin; el servicio se ejecuta como ese usuario sin capacidad de login.
 
 
+opentracker
+Es un proyecto de rastreo de BitTorrent abierto y gratuito que implementa acciones de anuncio y scraping sobre UDP y el protocolo HTTP simple con el objetivo es minimizar el consumo de recursos y diseñado para ejecutarse en un router WLAN.
+# nano /etc/opentracker/opentracker.conf
+Añadir la linea:
+       listen.tcp_udp 0.0.0.0:6969
+$ opentracker -p 7012 -f /otro_opentracker.conf (usar otro puerto TCP y otro archivo de configuración)
+$ opentracker -P 7012 (usar otro puerto UDP)
+$ opentracker -i 192.168.0.4 -p 6868 -P 6969 -A 192.168/16 -r https://my-trackersite.com/ (Iniciar enlazado en los puertos UDP y TCP 6868 del host local IPv4 y permitir acceso privilegiado desde la red 192.168/16 mientras se redirige a los clientes HTTP que acceden al directorio raíz, que no está cubierto por el protocolo de seguimiento de BitTorrent, a https://my-trackersite.com/)
+
+
 openvpn
 Encapsular datos entre dos redes físicas usando una red privada virtual. Existen varios sitios de internet que ofrecen este servicio de forma gratuita. Aquí usaremos a modo de ejemplo frootvpn. Nos registramos en <https://www.frootvpn.com/> y descargamos el software:
 $ wget https://www.frootvpn.com/files/frootvpn.ovpn
