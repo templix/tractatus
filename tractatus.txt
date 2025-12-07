@@ -40400,16 +40400,24 @@ orpie
 Calculadora RPN [Reverse Polish Notation] para la consola que significa que los operandos van primero y el operador después, es decir "3 4 +" en lugar de "3 + 4"
 
 
+os-prober
+Detecta otros sistemas operativos en un dispositivo.
+# os-prober
+
+
+osdclock
+reloj que usa la biblioteca X On-Screen Display para mostrarse. Admite un parámetro de formato similar a strftime y se puede configurar para que se muestre solo a intervalos específicos.
+$ osd_clock (en la parte de abajo izquierda por defecto y color rojo por defecto)
+$ osd_clock -t -c green (en color verde y en la parte izquierda superior de la pantalla)
+$ osd_clock -F "%R %a %x" (con un formato concreto)
+Nota.- Los formatos posibles con "man strftime"
+
+
 ossec
 Sistema de detección de intrusos. Durante la instalación, una vez escogido el idioma, se realizan una serie de preguntas sobre si se desea recibir por correo las notificaciones [en este caso precisa postfix], lugar de instalación [/var/ossec], si la instalación va a ser local, servidor... y otras cuyos parámetros por defecto son suficientes.
 $ wget http://www.ossec.net/files/ossec-hids-2.6.tar.gz
 # /var/ossec/etc/ossec.conf (Archivo de configuración:)
 # /var/ossec/bin/ossec-control start (Arrancar el demonio caso de no colocarlo en /etc/init.d/ossec)
-
-
-os-prober
-Detecta otros sistemas operativos en un dispositivo.
-# os-prober
 
 
 otfinfo
