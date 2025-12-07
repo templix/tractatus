@@ -40341,6 +40341,27 @@ $ ssh -i ~/.opkssh/id_opkssh usuario@servidor
 El servidor verificará el token PK en la clave pública y te permitirá acceder si la autenticación con OpenID es válida.
 
 
+opl3-soundfont
+Proporciona una fuente de sonido [sf2] que FluidSynth, Timidity y WildMidi pueden usar para reproducir archivos MIDI y similares utilizando las muestras creadas por el chip OPL3 [SB16/YM262]. Es como una biblioteca de sonidos de instrumentos musicales. Cuando un programa reproduce un archivo MIDI, que solo contiene "instrucciones musicales", no audio real, necesita una soundfont para saber cómo debe sonar cada instrumento. Esta soundfont en particular usa muestras grabadas del chip OPL3, el sintetizador FM del Sound Blaster 16, dándole ese sonido característico "retro" de los juegos DOS de los años 90. Este paquete se instalará en /usr/share/sounds/sf2/opl3-soundfont.sf2.
+$ fluidsynth -a alsa -i /usr/share/sounds/sf2/opl3-soundfont.sf2 cancion.mid (reproducir un archivo MIDI usando la soundfont OPL3)
+$ fluidsynth -a alsa -ni /usr/share/sounds/sf2/opl3-soundfont.sf2 cancion.mid (versión sin mensajes)
+$ timidity -c /etc/timidity/opl3.cfg cancion.mid (reproducir directamente con TiMidity)
+$ timidity -x "soundfont /usr/share/sounds/sf2/opl3-soundfont.sf2" cancion.mid (especificar la soundfont manualmente)
+1.-
+Archivo de configuración de DOSBox
+$ nano ~/.dosbox/dosbox.conf
+[midi]
+mpu401=intelligent
+mididevice=fluidsynth
+fluid.soundfont=/usr/share/sounds/sf2/opl3-soundfont.sf2
+Ahora los juegos DOS que usen MIDI sonarán con el chip OPL3 sin necesidad de emularlo.
+2.-
+Para que TiMidity use esta soundfont por defecto:
+# nano /etc/timidity/timidity.cfg
+Agregar o modificar:
+	soundfont /usr/share/sounds/sf2/opl3-soundfont.sf2
+
+
 optipng
 Optimizacion de imagenes .png. La reduccion de tamaño es poca pero no pierde calidad. Como modo indicativo, un directorio con 5 imagenes con un peso de 27,5 MB pasa a 25,8 MB.
 $ optipng imagen.png (Sobreescribe la imagen.png)
