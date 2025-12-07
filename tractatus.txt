@@ -40370,6 +40370,17 @@ $ optipng -dir imagenes (De todas las imagenes de un directorio)
 $ optipng -k -o7 *.png (máxima compresión de todas las imagenes y sin sobreescribir las originales) [.bak]
 
 
+opus-tools
+Herramientas para codificar, decodificar y analizar audio en formato Opus, basadas en la implementación de referencia de libopus que se usa para probar interoperabilidad con el códec.
+$ opusenc --bitrate 128 input.wav output.opus (convertir un WAV estéreo a Opus con bitrate “razonable” para música)
+$ opusenc --bitrate 32 --vbr --speech charla.wav charla.opus (indica que el contenido es principalmente voz y permite bitrate variable para mejor eficiencia)
+$ opusenc --bitrate 16 --vbr --downmix-mono --bandwidth narrowband voz.wav voz_nb.opus (reduce bitrate y ancho de banda de frecuencia, útil para comunicaciones de baja tasa)
+$ opusdec entrada.opus salida.wav (decodificar un archivo Opus a WAV)
+$ opusdec --rate 48000 --float --force-wav entrada.opus - | otra_herramienta ... (decodificar a audio raw [16‑bit little-endian, 48 kHz, estéreo], para canalizar a otra herramienta)
+$ opusdec entrada.opus - | aplay (lo mismo)
+$ opusinfo archivo.opus (inspeccionar parámetros del archivo)
+
+
 orca
 Lector de pantalla para personas con discapacidad visual, proporciona acceso alternativo al escritorio mediante síntesis de voz y braille.
 
