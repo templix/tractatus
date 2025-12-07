@@ -40381,6 +40381,17 @@ $ opusdec entrada.opus - | aplay (lo mismo)
 $ opusinfo archivo.opus (inspeccionar parámetros del archivo)
 
 
+opustags
+Ver, añadir, modificar, eliminar, importar, exportar y editar etiquetas de archivos ogg Opus desde la línea de comandos.
+$ opustags -l tema.opus (inspeccionar las etiquetas existentes)
+$ opustags --set TITLE="Mi canción" --set ARTIST="Mi grupo" tema.opus (establecer título y artista)
+$ opustags --add GENRE="Rock" tema.opus (añadir una etiqueta adicional de género sin tocar las demás)
+$ opustags --delete COMMENT tema.opus (eliminar todas las etiquetas COMMENT)
+$ opustags --export etiquetas.txt tema.opus (exportar etiquetas actuales a un archivo)
+$ opustags --import etiquetas.txt tema.opus (sobrescribe las etiquetas del archivo Opus con las del fichero de texto)
+$ opustags --set ARTIST="Mi grupo" --set ALBUM="Mi álbum" *.opus (añadir el mismo álbum y artista a todos los .opus del directorio)
+
+
 orca
 Lector de pantalla para personas con discapacidad visual, proporciona acceso alternativo al escritorio mediante síntesis de voz y braille.
 
