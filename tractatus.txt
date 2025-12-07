@@ -5421,6 +5421,16 @@ $ cat listado.txt / | sed -e :a -e 's/^.\{1,20\}$/&_/;ta'  (coloca los nombres d
 $ cat /proc/$(ps -o ppid= -p $$ | tr -d ' ')/comm (muestra el nombre de la terrminal que está corriendo: lsterminal, tilda, kitty...)
 
 
+cat-printer
+Imprimir desde el navegador.
+# apt install opencc python3-bleak
+$ git clone https://github.com/NaitLee/Cat-Printer
+$ cd Cat-Printer
+$ python3 server.py
+Abrir el navegador en 127.0.0.1:8095/
+Escanear para detectar la impresora e imprimir.
+
+
 catatonic
 Proceso de inicialización para contenedores de aplicaciones. Este sistema está diseñado para simplificar la administración de contenedores de aplicaciones y mejorar la eficiencia en el arranque y su ejecución.
 # catatonic list (listar todos los contenedores)
@@ -40132,6 +40142,41 @@ Opcionalmente pueden cambiarse las DNSs:
 # nano /etc/resolv.conf
 Y colocar:
 Nameserver 80.67.0.2
+
+
+openvswitch-common
+[openvswitch-switch openvswitch-common openvswitch-testcontroller] Es un conmutador virtual Ethernet, diseñado para redes virtualizadas y entornos de nube. Es compatible con estándares como OpenFlow, IPFIX, sFlow, SPAN, RSPAN, CLI, LACP, 802.1ag y permite una red programable, escalable y con gestión avanzada. Incluye las herramientas ovs-appctl, ovs-docker, ovs-flowviz, ovs-ofctl, ovs-parse-backtrace, ovs-pki, ovsdb-client, ovsdb-tool, ovs-bugtool, y ovsdb-server.
+# ovs-vsctl add-br br0 (configurar el switch [crear puentes, puertos, interfaces, etc.])
+# ovs-vsctl add-port br0 eth1 (añadir una interfaz física)
+# ovs-vsctl show (listar bridges)
+# ovs-ofctl dump-flows br0 (mostrar todas las reglas de flujo en el bridge 'br0')
+# ovs-ofctl add-flow br0 "in_port=1,actions=output:2" (añadir una regla de flujo: enviar tráfico del puerto 1 al 2)
+# ovsdb-client dump Open_vSwitch Bridge (ver contenido de la base de datos)
+# ovsdb-client get-manager (obtener dirección del servidor de base de datos)
+# ovsdb-tool schema /etc/openvswitch/conf.db (ver esquema de la base de datos)
+# ovsdb-tool backup /etc/openvswitch/conf.db /backup/ovs.db.bak (hacer copia de seguridad)
+# ovs-appctl exit (reiniciar el daemon)
+# ovs-appctl bridge/dump-flows br0 (ver estadísticas de un puente)
+# ovs-appctl ofproto/list (listar conexiones OpenFlow)
+# ovs-flowviz br0 | dot -Tpng -o flows.png (visualiza flujos en formato gráfico usando Graphviz)
+# cat ovs-backtrace.txt | ovs-parse-backtrace (analiza backtraces de fallos en binarios de OVS)
+# ovs-pki init (inicializar CA)
+# ovs-pki req+sign br0 switch (crear certificado para switch)
+# ovs-pki req+sign ctl controller (crear certificado para controlador)
+# ovs-bugtool -o /tmp/ovs-debug.tgz (genera un archivo .tgz con logs, configuración, estado, etc)
+Nota.- Normalmente el daemon ovsdb-server se inicia automáticamente para iniciarlo de forma manual:
+# ovsdb-server --remote=punix:/var/run/openvswitch/db.sock \
+ --remote=db:Open_vSwitch,Open_vSwitch,manager_options \
+ --private-key=db:Open_vSwitch,SSL,private_key \
+ --certificate=db:Open_vSwitch,SSL,certificate \
+ --bootstrap-ca-cert=db:Open_vSwitch,SSL,ca_cert \
+ --pidfile --detach
+
+
+openvswitch-test
+Contiene utilidades para diagnosticar problemas de rendimiento y conectividad en la configuración de Open vSwitch. Incluye el ejecutable ovs-l3ping.
+$ ovs-l3ping -c 4 192.168.1.20 (se enviarán 4 paquetes ICMP a la dirección IP 192.168.1.20 y mostrará los resultados de la conectividad)
+$ ovs-test -i eth0 -i eth1 -t 10 (realizar una prueba de rendimiento en un entorno OVS de los interfaces especificados)
 
 
 openvt
