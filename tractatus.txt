@@ -40298,6 +40298,13 @@ $ operon set artist 'The Emacs' file.mp3 (establece como artista el mencionado)
 $ operon remove artist 'The Emacs' file.mp3 (elimina el artista del archivo)
 
 
+ophcrack
+Herramienta de descifrado de contraseñas que se utiliza principalmente para recuperar contraseñas en sistemas operativos Windows [NT/2000/XP/Vista/7]. Utiliza una técnica llamada tablas arcoíris [rainbow tables] para descifrar contraseñas. Las tablas arcoíris son conjuntos precomputados de hashes de contraseñas que se utilizan para verificar rápidamente si una contraseña coincide con una de las hashes precomputadas. Este método es más eficiente que un ataque de fuerza bruta, que intenta todas las combinaciones posibles de caracteres.
+$ ophcrack -f archivo_sam (leerá el archivo SAM y mostrará las contraseñas recuperadas)
+$ ophcrack -i /dev/sda1 -f /path/to/samfile (indica el dispositivo de inicio y la ruta al archivo SAM)
+$ ophcrack -i /dev/sda1 -f /path/to/samfile -m /path/to/memmapfile (indica el dispositivo de inicio, ruta al archivo SAM, y ruta al archivo de mapeo de memoria)
+
+
 oping
 Utiliza paquetes ping para probar la accesibilidad de los hosts de red.
 $ oping -4 -i 2 host1 host2 host3 (usando IPv4, con un intervalo de 2 segundos y a los hosts especificados)
@@ -40315,6 +40322,23 @@ Gestor de paquetes de OpenWRT, firmware linux para routers.
 # opkg files paquete (Ver ficheros instalados de un paquete y la versión del mismo)
 # opkg info paquete (ver información de un paquete)
 # opkg find palabra (buscar paquetes por nombre y descripción)
+
+
+opkssh
+[OpenPubkey SSH]. Herramienta que permite integrar la autentificación basada en OpenID Connect [OIDC] con SSH. Básicamente, genera claves públicas SSH que contienen tokens PK [Public Key] vinculados a tu identidad en un proveedor de OpenID [Google, Azure AD, etc]. Esto facilita el inicio de sesión en servidores SSH usando tu identidad de OpenID, sin necesidad de gestionar contraseñas tradicionales o claves SSH estáticas. No reemplaza a SSH, sino que extiende su funcionalidad para usar OpenID como método de autenticación.
+$ opkssh --generate-key --user <tu_usuario> --openid-provider <proveeror_openid> (genera una clave pública SSH que incluye un token de OpenID asociado a tu usuario)
+$ opkssh --get-pubkey (obtiene la clave pública que se debe añadir en el archivo authorized_keys del servidor SSH)
+$ ssh -i ~/.opkssh/id_opkssh <usuario>@<servidor> (conectarse a un servidor SSH usando la clave generada)
+1.-
+Todos los pasos
+Supongamos que se quiere usar opkssh para autenticarte en un servidor SSH con tu cuenta de Google. Instalar opkssh en la máquina cliente.
+$ opkssh --generate-key --user tu_email@gmail.com --openid-provider https://accounts.google.com (generar tu clave con tu proveedor de OpenID:)
+Se obtiene la clave pública y se añade en ~/.ssh/authorized_keys en el servidor:
+$ opkssh --get-pubkey > ~/.opkssh/id_opkssh.pub
+$ scp ~/.opkssh/id_opkssh.pub usuario@servidor:~/.ssh/authorized_keys
+Desde el cliente, te conectas usando:
+$ ssh -i ~/.opkssh/id_opkssh usuario@servidor
+El servidor verificará el token PK en la clave pública y te permitirá acceder si la autenticación con OpenID es válida.
 
 
 optipng
