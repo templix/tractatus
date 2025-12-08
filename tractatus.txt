@@ -40502,6 +40502,11 @@ osk-sdl
 Teclado ligero en pantalla basado en SDL2 diseñado para desbloquear particiones raíz cifradas al arrancar dispositivos móviles. Se inicia automáticamente al arrancar, lo que permite al usuario introducir la contraseña de cifrado del disco.
 
 
+osm2pgrouting
+Es una herramienta que facilita la importación de datos de OpenStreetMap a una base de datos PostgreSQL/PostGIS en formato XML o PBF, preparando la estructura necesaria para que pgRouting, una extensión de PostgreSQL para análisis de redes y enrutamiento, pueda trabajar con ellos. Los archivos OSM se pueden descargar de: Geofabrik - https://download.geofabrik.de/
+$ osm2pgrouting -f spain.pbf -d basedatos -U usuario -W contraseña --clean (archivo OSM de entrada, nombre base de datos PostgreSQL, usuario y contraseña de la base de datos y limpiar tablas existentes antes de importar)
+
+
 ossec
 Sistema de detección de intrusos. Durante la instalación, una vez escogido el idioma, se realizan una serie de preguntas sobre si se desea recibir por correo las notificaciones [en este caso precisa postfix], lugar de instalación [/var/ossec], si la instalación va a ser local, servidor... y otras cuyos parámetros por defecto son suficientes.
 $ wget http://www.ossec.net/files/ossec-hids-2.6.tar.gz
