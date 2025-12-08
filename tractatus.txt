@@ -40392,17 +40392,89 @@ $ opustags --import etiquetas.txt tema.opus (sobrescribe las etiquetas del archi
 $ opustags --set ARTIST="Mi grupo" --set ALBUM="Mi álbum" *.opus (añadir el mismo álbum y artista a todos los .opus del directorio)
 
 
+ora2pg
+Conversor de bases de datos Oracle/MySQL a PostgreSQL. Se conecta a la base de datos, la escanea automáticamente y extrae su estructura o datos. A continuación, genera scripts SQL que se pueden cargar en PostgreSQL.
+Muestra de archivo de configuración
+# nano /etc/ora2pg/ora2pg.conf
+       # Datos de conexión a Oracle
+       ORACLE_DSN     dbi:Oracle:host=localhost;sid=ORCL;port=1521
+       ORACLE_USER    usuario_oracle
+       ORACLE_PWD     contraseña_oracle
+       #
+       # Datos de conexión a PostgreSQL (opcional, si se quiere migrar directamente)
+       PG_DSN         dbi:Pg:dbname=postgres;host=localhost;port=5432
+       PG_USER        postgres
+       PG_PWD         contraseña_postgres
+       #
+       # Opciones
+       OUTPUT         /ruta/de/salida/
+       EXPORT_SCHEMA  1
+       EXPORT_DATA    1
+$ ora2pg -c /etc/ora2pg/ora2pg.conf -t schema -o esquema.sql (extraer la estructura y los datos y gardar en un .sql)
+$ ora2pg -c /etc/ora2pg/ora2pg.conf -t COPY -o datos.sql (exportar solo los datos)
+Luego, en PostgreSQL, cargar los scripts:
+$ psql -d basededatos_postgres -f esquema.sql
+O
+$ psql -d basededatos_postgres -f datos.sql
+
+
 orca
 Lector de pantalla para personas con discapacidad visual, proporciona acceso alternativo al escritorio mediante síntesis de voz y braille.
+
+
+orphan-sysvinit-scripts
+Este paquete proporciona scripts de inicio de System-V para paquetes cuyos mantenedores han optado por eliminarlos de la distribución y proporcionar únicamente un archivo de servicio systemd. Durante la transición de SysVinit a systemd, muchos mantenedores decidieron eliminar los scripts de inicio tradicionales y mantener únicamente los archivos `.service` de systemd. Sin embargo, algunos usuarios y sistemas todavía necesitan esos scripts antiguos. Solo colocará los archivos en /etc/init.d/ cuando el paquete correspondiente esté instalado en su sistema. Una vez instalado "orphan-sysvinit-scripts" los daemons que solo estaban en systemd [.service] tambien se encontraran en /etc/init.d/ y se podrán gestionar de la forma tradicional:
+# /etc/init.d/xxxxx status
+# /etc/init.d/xxxxx restart
 
 
 orpie
 Calculadora RPN [Reverse Polish Notation] para la consola que significa que los operandos van primero y el operador después, es decir "3 4 +" en lugar de "3 + 4"
 
 
+os-brick-common
+Biblioteca de Python que forma parte del proyecto OpenStack Cinder el servicio de almacenamiento en bloque de OpenStack, que permite la gestión de volúmenes de almacenamiento para instancias de máquinas virtuales. Permite la detección y eliminación de volúmenes conectados a un host a través de diversos protocolos de transporte y se utiliza principalmente en scripts y aplicaciones que necesitan interactuar con volúmenes de almacenamiento en un entorno OpenStack. Aunque os-brick-common en sí no es un comando que se ejecute directamente desde la línea de comandos, sus funciones son utilizadas por otros comandos y herramientas de OpenStack para realizar operaciones de almacenamiento.
+
+
 os-prober
 Detecta otros sistemas operativos en un dispositivo.
 # os-prober
+
+
+osc
+Cliente de línea de comandos para Open Build Service [OBS], que permite acceder a los repositorios de Open Build Service de forma similar a los repositorios de Subversion. Open Build Service permite a los desarrolladores empaquetar software para las principales distribuciones de Linux.
+$ osc ls (ver la lista de repositorios)
+$ osc co nombre-del-repositorio (clonar un repositorio)
+$ osc ls -r nombre-del-repositorio (ver el contenido de un repositorio)
+$ osc ci nombre-del-repositorio (subir cambios a un repositorio)
+$ osc st mi-repositorio (verificar el estado de los cambios en el repositorio)
+$ osc r nombre-del-repositorio (crear un nuevo repositorio)
+
+
+oscs
+[OpenStack Cloud Selector] Herramienta que forma parte del ecosistema de OpenStack y su propósito es facilitar el trabajo con múltiples nubes [entornos o proyectos de OpenStack] definidas en el archivo ~/.config/openstack/clouds.yaml.
+Ejemplo de archivo de configuración
+$ nano ~/.config/openstack/clouds.yaml
+clouds:
+  mi-nube-1:
+    auth:
+      auth_url: https://openstack.miempresa.com:5000/v3
+      username: "usuario1"
+      password: "secreto123"
+      project_name: "proyecto-dev"
+      user_domain_name: "Default"
+      project_domain_name: "Default"
+  nube-externa:
+    auth:
+      auth_url: https://openstack.proveedorexterno.com:5000/v3
+      username: "cliente@externo.com"
+      password: "clave_segura"
+      project_name: "cliente-prod"
+      user_domain_name: "Default"
+      project_domain_name: "Default"
+Cada clave bajo "clouds:", como mi-nube-1 o nube-externa representa una "nube" configurada.
+$ chmod 600 ~/.config/openstack/clouds.yaml (asegurar que los permisos sean seguros)
+$ $ oscs (muestra una lista de las nubes disponibles)
 
 
 osdclock
