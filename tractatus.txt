@@ -40490,6 +40490,14 @@ Los certificados de autoridad de certificación de Open Science Grid [OSG] propo
 $ globus-url-copy -nodcau -notass hostcert.pem gsiftp://servidor-osg.org/ruta/archivo.txt file:///local/archivo.txt (Grid utiliza implícitamente los certificados instalados)
 
 
+osinfo-db-tools
+Biblioteca basada en GObject para gestionar información sobre sistemas operativos, hipervisores y dispositivos de hardware virtuales. Proporciona API para identificar los dispositivos óptimos para implementar un sistema operativo en un hipervisor. Esta herramienta es especialmente útil en entornos de virtualización, donde es necesario identificar y gestionar diferentes sistemas operativos y sus requisitos. Incluye los ejecutables osinfo-db-export, osinfo-db-import, osinfo-db-path y osinfo-db-validate
+$ osinfo-db-export --output osinfo.xml (exportará la base de datos a un archivo llamado osinfo.xml)
+$ osinfo-db-import osinfo.xml (importará la información contenida en osinfo.xml a la base de datos)
+$ osinfo-db-path (mostrará la ruta de la base de datos, que generalmente es algo como /usr/share/libosinfo/osinfo.xml)
+$ osinfo-db-validate (revisará la base de datos y mostrará cualquier error o advertencia que encuentre)
+
+
 ossec
 Sistema de detección de intrusos. Durante la instalación, una vez escogido el idioma, se realizan una serie de preguntas sobre si se desea recibir por correo las notificaciones [en este caso precisa postfix], lugar de instalación [/var/ossec], si la instalación va a ser local, servidor... y otras cuyos parámetros por defecto son suficientes.
 $ wget http://www.ossec.net/files/ossec-hids-2.6.tar.gz
