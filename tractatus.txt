@@ -40507,6 +40507,11 @@ Es una herramienta que facilita la importación de datos de OpenStreetMap a una 
 $ osm2pgrouting -f spain.pbf -d basedatos -U usuario -W contraseña --clean (archivo OSM de entrada, nombre base de datos PostgreSQL, usuario y contraseña de la base de datos y limpiar tablas existentes antes de importar)
 
 
+osm2pgsql
+Conversor de datos de OpenStreetMap a PostgreSQL y es el importador estándar de OSM a PostgreSQL/PostGIS en formato XML o PBF.
+$ osm2pgsql -d basedatos -U usuario -W contraseña --create --slim -C 2000 --style /usr/share/osm2pgsql/default.style --multi-geometry --hstore spain.osm.pbf (base de datos, usuario y contraseña y crear las tablas necesarias, optimizar el almacenamiento, usar 2000 MB de caché, estilo, importa geometrias multipolígono y guarda las etiquetas en un columna)
+
+
 ossec
 Sistema de detección de intrusos. Durante la instalación, una vez escogido el idioma, se realizan una serie de preguntas sobre si se desea recibir por correo las notificaciones [en este caso precisa postfix], lugar de instalación [/var/ossec], si la instalación va a ser local, servidor... y otras cuyos parámetros por defecto son suficientes.
 $ wget http://www.ossec.net/files/ossec-hids-2.6.tar.gz
