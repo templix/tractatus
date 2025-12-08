@@ -40485,6 +40485,11 @@ $ osd_clock -F "%a %x %R" (con un formato concreto)
 Nota.- Los formatos posibles con "man strftime"
 
 
+osg-ca-certs
+Los certificados de autoridad de certificación de Open Science Grid [OSG] proporcionan las raíces de confianza de la infraestructura de clave pública necesarias para garantizar la integridad del servicio de la red. Este paquete contiene la selección de certificados de autoridad [CA] del grupo de seguridad de OSG. Al instalar el paquete los certificados de CA de OSG e IGTF se instalan en la ruta adecuada para que las aplicaciones de Grid los encuentren [ejemplo: /etc/grid-security/certificates].
+$ globus-url-copy -nodcau -notass hostcert.pem gsiftp://servidor-osg.org/ruta/archivo.txt file:///local/archivo.txt (Grid utiliza implícitamente los certificados instalados)
+
+
 ossec
 Sistema de detección de intrusos. Durante la instalación, una vez escogido el idioma, se realizan una serie de preguntas sobre si se desea recibir por correo las notificaciones [en este caso precisa postfix], lugar de instalación [/var/ossec], si la instalación va a ser local, servidor... y otras cuyos parámetros por defecto son suficientes.
 $ wget http://www.ossec.net/files/ossec-hids-2.6.tar.gz
