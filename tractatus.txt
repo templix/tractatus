@@ -40542,6 +40542,54 @@ ospics
 Este paquete contiene imágenes de tux [/usr/share/ospics/penguin.jpg], baby tux [/usr/share/ospics/BabyTuX.png] y debian [/usr/share/ospics/Debian.png].
 
 
+oss-compat
+Paquete de compatibilidad con Open Sound System [OSS] que garantiza su compatibilidad habilitando módulos compatibles con ALSA. En otros kernels donde OSS es la interfaz predeterminada, no se realiza ninguna acción.
+$ oss-compat enable (habilitar compatibilidad con ALSA)
+$ oss-compat disable (deshabilitar compatibilidad con ALSA)
+$ oss-compat status (verificar estado de la compatibilidad)
+Nota.- Crea un dispositivo virtual /dev/snd/* que simula la API de ALSA, permitiendo que aplicaciones como Skype, Wine, algunos navegadores y reproductores multimedia funcionen con OSS.
+
+
+oss-preserve
+Este paquete guarda la configuración del mezclador Open Sound System [OSS] en un archivo al apagar el equipo y la restaura desde dicho archivo al reiniciarlo. Opcionalmente, puede restaurar desde un archivo de configuración fija.
+$ oss-preserve save (guardar configuración actual del mezclador)
+$ oss-preserve restore (restaurar configuración guardada)
+$ oss-preserve show (ver configuración guardada)
+Para que todo funcione correctamente, se necesita configurar varios archivos:
+# nano /etc/oss.conf
+# Ejemplo de secciones relevantes:
+  	  osscore_setup=yes
+	  vmix0_enable=yes
+	  vmix0_rates=48000:44100:32000
+	  vmix0_bits=16
+	  vmix0_channels=2
+	  vmix0_spatial=yes
+# nano /etc/modprobe.d/oss.conf
+          # Cargar módulos OSS al inicio
+   	  alias sound-service-0-0 snd_pcm_oss
+	  alias sound-service-0-1 snd_mixer_oss
+	  alias sound-service-0-3 snd_seq_oss
+# nano /etc/rc.local
+          #!/bin/bash
+	  # Agregar al final del archivo /etc/rc.local para restaurar configuración
+	  oss-preserve restore
+	  /usr/sbin/oss-compat enable
+# nano /etc/pulse/default.pa
+          # Configurar Pulse Audio para usar OSS como backend
+	  load-module module-oss device="/dev/dsp" sink_name=oss
+  	  set-default-sink oss
+# nano /etc/asound.conf
+	  # Configurar ALSA para usar el dispositivo OSS
+          pcm.oss {
+      	    type oss
+      	    device /dev/dsp
+  	  }
+  	  pcm.!default {
+    	    type oss
+      	    device /dev/dsp
+  	  }
+
+
 ossec
 Sistema de detección de intrusos. Durante la instalación, una vez escogido el idioma, se realizan una serie de preguntas sobre si se desea recibir por correo las notificaciones [en este caso precisa postfix], lugar de instalación [/var/ossec], si la instalación va a ser local, servidor... y otras cuyos parámetros por defecto son suficientes.
 $ wget http://www.ossec.net/files/ossec-hids-2.6.tar.gz
