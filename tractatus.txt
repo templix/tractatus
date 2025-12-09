@@ -40512,6 +40512,21 @@ Conversor de datos de OpenStreetMap a PostgreSQL y es el importador estándar de
 $ osm2pgsql -d basedatos -U usuario -W contraseña --create --slim -C 2000 --style /usr/share/osm2pgsql/default.style --multi-geometry --hstore spain.osm.pbf (base de datos, usuario y contraseña y crear las tablas necesarias, optimizar el almacenamiento, usar 2000 MB de caché, estilo, importa geometrias multipolígono y guarda las etiquetas en un columna)
 
 
+osmcoastline
+Extraer y procesar datos de costas [coastlines] de archivos OSM. Su objetivo principal es tomar datos crudos de OSM, etiquetados como natural=coastline y convertirlos en formatos utilizables para renderizado de mapas, como polígonos de tierra/agua en shapefiles o bases de datos espaciales. Incluye varios ejecutables: osmcoastline [el principal], osmcoastline_filter, osmcoastline_readmeta, osmcoastline_segments y osmcoastline_ways.
+$ osmcoastline_filter planet.osm.pbf coastline-filtered.osm.pbf (crea un archivo más pequeño solo con elementos relevantes para costas)
+$ osmcoastline --verbose --output-polygons=land_polygons.shp --output-lines=coastlines.shp coastline-filtered.osm.pbf (--output-polygons genera shapefiles de polígonos de tierra, y --output-lines líneas de costa)
+$ osmcoastline_readmeta coastline.db (leer metadatos de una base de datos generada por osmcoastline)
+
+
+osmctools
+Herramientas para manipular archivos de OpenStreetMap. Incluye los ejecutables osmconvert, osmfilter y osmupdate
+$ osmconvert input.osm -o=output.pbf (reduce el tamaño del archivo y lo hace compatible con herramientas que prefieren .pbf)
+$ osmfilter usa.osm --keep="natural=water or landuse=reservoir" -o=usa-lakes.osm (--keep especifica los tags a mantener)
+$ osmfilter usa.osm --drop="natural=water or landuse=reservoir" -o=usa-lakes.osm (--keep especifica los tags a excluir)
+$ osmupdate old.osm new.osm (descarga automáticamente los cambios necesarios y los aplica, creando new.osm actualizado)
+
+
 osmid
 Herramienta para convertir MIDI [Musical Instrument Digital Interface] a OSC [Open Sound Control] y OSC a MIDI. Los ejecutables son m2o y o2m.
 $ m2o input.mid output.osc
