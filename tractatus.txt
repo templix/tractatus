@@ -40601,6 +40601,15 @@ osspd
 [Open Sound System Proxy Daemon]. osspd y sus variantes [osspd-alsa y osspd-pulseaudio] son herramientas en sistemas Linux cuyo objetivo principal es proporcionar compatibilidad con aplicaciones antiguas que fueron escritas para usar el antiguo estándar de sonido OSS [Open Sound System], a pesar de que los sistemas modernos utilizan pilas de sonido más nuevas como ALSA [Advanced Linux Sound Architecture] o PulseAudio. En esencia, actúan como un "proxy" o "puente" que traduce las llamadas al sistema de sonido OSS a las llamadas nativas del sistema de sonido moderno. osspd es el demonio proxy principal, osspd-alsa es el módulo backend que permite a osspd utilizar ALSA para la salida de sonido real. Una aplicación que intente escribir a /dev/dsp pensando que es OSS, en realidad estará enviando datos a través de osspd a ALSA y osspd-pulseaudio es el módulo backend que permite a osspd utilizar PulseAudio, útil si el sistema usa PulseAudio para gestionar el sonido de múltiples aplicaciones.
 
 
+otf2bdf
+Herramienta para convertir fuentes de contorno OpenType [OTF] en fuentes de mapa de bits [Bitmap Distribution Format - BDF]. Esto es especialmente útil en entornos donde se requieren fuentes de mapa de bits, como en algunos sistemas de ventanas o terminales que no soportan fuentes vectoriales, pantallas de baja resolución o para aplicaciones que no pueden manejar fuentes escalables.
+$ otf2bdf fuente.otf (generará un archivo fuente.bdf en el mismo directorio)
+$ otf2bdf -p 12 fuente.otf(especificar el tamaño de la fuente que se desea generar)
+$ otf2bdf -r 100 fuente.otf (especificar la resolución de la fuente)
+$ otf2bdf -s 10,12,14 fuente.otf (generar múltiples tamaños de una fuente)
+$ otf2bdf -o salida.bdf fuente.otf (especificar un nombre diferente para el archivo de salida)
+
+
 otfinfo
 [lcdf-typetools]. Mostrar las características OpenType ofrecidas por una fuente.
 $ otfinfo -s /usr/share/fonts/truetype/freefont/FreeSans.ttf (Idiomas soportados)
