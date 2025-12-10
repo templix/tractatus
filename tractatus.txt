@@ -40656,6 +40656,16 @@ Algunas opciones:
 -l6 (6 letras en minúscula)
 
 
+otpw
+[One‑Time PassWord]. Sistema de contraseñas de un solo uso. Se integra con PAM, de forma que cuando un servicio, por ejemplo SSH lo exige, el usuario debe introducir la contraseña correspondiente de la lista en lugar de su contraseña normal o además de ella.
+$ otpw-gen (genera una lista de contraseñas numeradas. Se guardan en ~/.otpw)
+1.-
+Ejemplo de uso al conectarse por SSH
+Te conectas con ssh usuario@servidor
+En lugar de pedir solo la contraseña normal, el sistema te muestra un índice OTP, por ejemplo OTP #017 y te pide la contraseña correspondiente.
+Buscas en tu lista la línea 17 y escribes exactamente esa contraseña; el sistema la verifica y, si es correcta, te deja entrar y marca esa entrada como utilizada.
+
+
 ots
 Lee un texto y decide qué frases son importantes y cuáles no.
 $ ots texto.txt -h > salida.html (crea un breve resumen, resalta la idea principal en el texto y el resultado a un archivo html)
