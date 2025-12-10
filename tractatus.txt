@@ -40601,6 +40601,37 @@ osspd
 [Open Sound System Proxy Daemon]. osspd y sus variantes [osspd-alsa y osspd-pulseaudio] son herramientas en sistemas Linux cuyo objetivo principal es proporcionar compatibilidad con aplicaciones antiguas que fueron escritas para usar el antiguo estándar de sonido OSS [Open Sound System], a pesar de que los sistemas modernos utilizan pilas de sonido más nuevas como ALSA [Advanced Linux Sound Architecture] o PulseAudio. En esencia, actúan como un "proxy" o "puente" que traduce las llamadas al sistema de sonido OSS a las llamadas nativas del sistema de sonido moderno. osspd es el demonio proxy principal, osspd-alsa es el módulo backend que permite a osspd utilizar ALSA para la salida de sonido real. Una aplicación que intente escribir a /dev/dsp pensando que es OSS, en realidad estará enviando datos a través de osspd a ALSA y osspd-pulseaudio es el módulo backend que permite a osspd utilizar PulseAudio, útil si el sistema usa PulseAudio para gestionar el sonido de múltiples aplicaciones.
 
 
+ostree
+[Operating System Tree]. Herramienta para gestionar sistemas de archivos inmutables, versionados y arrancables, especialmente útil en entornos donde se busca consistencia, seguridad y facilidad de despliegue, como en sistemas embebidos, contenedores o distribuciones inmutables como Fedora Silverblue o Endless OS. OSTree es un sistema de archivos con direccionamiento por contenido [content-addressed], similar a Git, pero diseñado para binarios del sistema operativo que ermite que los archivos no cambien después de ser desplegados, cada cambio genera una nueva revisión, permitiendo rollbacks y solo se almacenan las diferencias entre versiones. Incluye el ejecutable rofiles-fuse.
+# ostree remote list (listar repositorios configurados)
+# ostree remote add --set=gpgkeypath=/etc/pki/rpm-gpg/RPM-GPG-KEY-fedora-38-primary fedora https://ostree.fedoraproject.org (agrega un repositorio remoto de Fedora, especificando la clave GPG para verificar la autenticidad de los datos)
+# ostree remote refs fedora (listar ramas disponibles en un repositorio)
+# ostree admin deploy fedora:fedora/38/x86_64/silverblue (despliega la rama silverblue de Fedora 38 en el sistema)
+# ostree admin status (muestra las revisiones desplegadas)
+# ostree admin rollback 1 (vuelve a la revisión anterior [rollback])
+# ostree admin upgrade (actualizar)
+# ostree fsck (comprueba que todos los objetos en el repositorio local están íntegros y coinciden con sus checksums)
+
+
+ostree-boot
+Integración del gestor de arranque libostree e initramfs.
+$ ostree-boot list (muestra las revisiones de OSTree que están configuradas para arrancar, junto con su número de revisión y ruta)
+# ostree-boot add 0/fedora/38/x86_64/silverblue/123abc... (agrega una nueva entrada al bootloader para la revisión especificada)
+# ostree-boot remove 1 (elimina la entrada de arranque con el índice 1)
+# ostree-boot update (reescribe la configuración del bootloader para reflejar las entradas actuales de OSTree)
+
+
+ostree-push
+Envía confirmaciones desde un repositorio local de OSTree a uno remoto usando SSH. Incluye las herramientas ostree-push, ostree-receive, ostree-receive-0, ostree-receive-1 y ostree-receive-shell.
+# ostree push --repo=/ruta/al/repo/remoto fedora/38/x86_64/silverblue 123abc... (envía la revisión 123abc... de la rama fedora/38/x86_64/silverblue al repositorio remoto especificado)
+# ostree push --repo=/ruta/al/repo/remoto --all fedora/38/x86_64/silverblue (envía todas las revisiones de la rama especificada al repositorio remoto)
+# ostree push --repo=ssh://user@servidor/ruta/al/repo fedora/38/x86_64/silverblue 123abc... (envía la revisión a un repositorio remoto usando SSH para la autenticación)
+
+
+ostree-test
+Pruebas automatizadas para gestionar árboles de sistemas de archivos arrancables, inmutables y versionados localizadas en el directorio file:///usr/libexec/installed-tests/libostree. No están pensados para ejecutarse manualmente por lo que no tienen permisos de ejecución y dependen de funciones auxiliares.
+
+
 otf2bdf
 Herramienta para convertir fuentes de contorno OpenType [OTF] en fuentes de mapa de bits [Bitmap Distribution Format - BDF]. Esto es especialmente útil en entornos donde se requieren fuentes de mapa de bits, como en algunos sistemas de ventanas o terminales que no soportan fuentes vectoriales, pantallas de baja resolución o para aplicaciones que no pueden manejar fuentes escalables.
 $ otf2bdf fuente.otf (generará un archivo fuente.bdf en el mismo directorio)
