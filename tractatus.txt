@@ -40705,6 +40705,35 @@ $ qemu-system-x86_64 -bios /usr/share/ovmf/OVMF_CODE.fd -pflash /usr/share/ovmf/
 $ qemu-system-x86_64 -bios /usr/share/ovmf/OVMF_CODE.fd -pflash /variables/uefi/OVMF_VARS.fd -m 2048 -hda /ruta/a/tu/disco/virtual.img -cdrom /ruta/instalador.iso (personalizar las variables UEFI creando un archivo de variables y usarlo en lugar del archivo predeterminado)
 
 
+ow-shell
+Utilidades de shell para comunicarse con un servidor 1-Wire. El bus 1-Wire es un bus económico y de baja velocidad para dispositivos como sensores meteorológicos, control de acceso, etc. Incluye los programas owdir, owread, owget, owwrite, owexist, owusbprobe y owpresent.
+$ owdir / (lista los dispositivos 1-Wire conectados al bus, mostrando su estructura de directorios. Cada línea representa un dispositivo o directorio)
+$ owread /28.123456789ABC/temperature (leer temperatura de un sensor DS18B20)
+$ owget /28.123456789ABC/VAD (obtener el voltaje de alimentación del dispositivo)
+$ owwrite /12.123456789ABC/PIO.0 1 (encender un relé conectado a un dispositivo)
+$ owexist /28.123456789ABC/temperature (verifica si un dispositivo o propiedad existe en el bus 1-Wire. Devuelve 1 si existe, 0 si no)
+$ owusbprobe (detecta y lista los adaptadores USB 1-Wire conectados al sistema)
+$ owpresent /28.123456789ABC (verifica si un dispositivo 1-Wire está presente en el bus)
+Nota.- Los dispositivos 1-Wire se identifican por un código único [ej: 28.123456789ABC] y la ruta "/" representa la raíz del bus 1-Wire.
+
+
+ow-tools
+Herramientas para monitorizar o inspeccionar un enlace entre servidores ow. El bus 1-Wire es un bus económico de baja velocidad para dispositivos como sensores meteorológicos, control de acceso, etc. Se puede conectar al sistema mediante interfaces serie, USB, I²C y otras. Incluye los ejecutables owmon y owtap
+$ owmon (muestra una interfaz interactiva donde se puede navegar por los dispositivos conectados, leer sensores, y modificar valores sin usar comandos manuales)
+$ owmon /mnt/1wire (otra opción)
+Nota.- Internamente, owmon usa las mismas rutas y protocolos que ow-shell, pero presenta la información de forma más amigable.
+$ owtap -a (muestra todo el tráfico del bus 1-Wire en tiempo real)
+Nota.- - owtap es útil para diagnosticar problemas cuando los comandos de ow-shell no funcionan como se espera y ayuda a ver si el dispositivo está respondiendp o si hay errores de comunicación.
+
+
+owfs
+[One-Wire File System]. Es un servidor que expone los dispositivos 1-Wire como un sistema de archivos virtual, permitiendo acceder a ellos como si fueran archivos y directorios normales. El bus 1-Wire es un bus económico y de baja velocidad para dispositivos como sensores meteorológicos, control de acceso, etc. Este paquete es un metapaquete que depende de otros paquetes OWFS. Al instalarlo, se obtiene un demonio FUSE, un servidor que arbitra el acceso al bus desde múltiples procesos cliente, un pequeño FTP y un servidor web. ow-shell y ow-tools dependen de OWFS para funcionar. Cuando se usa owread, owwrite, owmon, etc., en realidad se está accediendo al sistema de archivos virtual que OWFS monta. El servidor OWFS se monta en /mnt/1wire o similar y los comandos de ow-shell acceden a los dispositivos a través de esa ruta.
+Para montar OWFS automáticamente de bus 1-Wire al arrancar
+# nano /etc/fstab
+Añadadir la siguiente línea:
+	 owfs           /mnt/1wire   fuse    _netdev,allow_other,server=localhost:4304  0  0
+
+
 owl
 Instalador de paquetes para archlinux.
 $ owl refresh  (Refrescar la lista de paquetes)
