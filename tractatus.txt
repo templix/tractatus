@@ -40697,6 +40697,14 @@ Presionar F10 o Ctrl-x para arrancar con el nuevo parámetro. Una vez realizadas
 # overlayroot-chroot (una vez dentro de la sesión de chroot, se puede ejecutar comandos como si overlayroot no estuviera activo, permitiendo cambios permanentes. Exit para salir)
 
 
+ovmf
+[Open Virtual Machine Firmware]. Firmware UEFI [Unified Extensible Firmware Interface] para máquinas virtuales x86 de 64 bits que ofrece arranque seguro y permite usar UEFI en lugar de una BIOS tradicional en la máquina virtual.
+Configurar QEMU para usar ovmf como firmware de la máquina virtual:
+$ qemu-system-x86_64 -bios /usr/share/ovmf/OVMF.fd -m 2048 -hda /disco/virtual.img -cdrom /ruta/instalador.iso (ruta al archivo de firmware ovmf, 2048 MB de RAM a la máquina virtual, ruta al disco virtual y ruta al archivo ISO del instalador del sistema operativo.)
+$ qemu-system-x86_64 -bios /usr/share/ovmf/OVMF_CODE.fd -pflash /usr/share/ovmf/OVMF_VARS.fd -m 2048 -hda /disco/virtual.img -cdrom /ruta/a/tu/instalador.iso (arranque seguro. Especificando el firmware de arranque [OVMF_CODE.fd] y el archivo de variables de firmware [OVMF_VARS.fd])
+$ qemu-system-x86_64 -bios /usr/share/ovmf/OVMF_CODE.fd -pflash /variables/uefi/OVMF_VARS.fd -m 2048 -hda /ruta/a/tu/disco/virtual.img -cdrom /ruta/instalador.iso (personalizar las variables UEFI creando un archivo de variables y usarlo en lugar del archivo predeterminado)
+
+
 owl
 Instalador de paquetes para archlinux.
 $ owl refresh  (Refrescar la lista de paquetes)
