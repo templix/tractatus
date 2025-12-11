@@ -40673,9 +40673,28 @@ $ ots -a texto.txt (solo genera el resumen)
 
 
 outguess
-Herramienta de encriptación
-$ outguess -k password -d mensaje.txt imagen.jpg resultado.jpg (Embebe el mensaje en una imagen con la contraseña especificada)
-$ outguess -k password -r resultado.jpg mensaje.txt  (saca el mensaje de la imagen)
+Herramienta universal de esteganografía que permite insertar y extraer datos ocultos en imágenes [jpeg,ppm y pnm]. Toma un archivo, por ejemplo, una imagen JPEG y escribe dentro de sus bits redundantes el contenido de otro archivo [texto, binario, etc.]. El resultado es otra imagen muy similar a la original, pero que contiene datos ocultos que solo pueden recuperarse con la misma clave utilizada al insertar la información.
+$ outguess -k "clave_secreta" -d oculto.txt foto.jpg foto_stego.jpg (incrusta el .txt en la foto.jpg y el resultado en foto_stego.jpg con la clave_secreta)
+$ outguess -k "clave_secreta" -r foto_stego.jpg extraido.txt (extraer el contenido incrustado en foto_stego.jpg y gardar en extraido.txt con la clave al incrustar)
+
+
+overlayroot
+Herramienta que permite que el sistema de archivos raíz [/] sea montado como de solo lectura [Read-Only], y que todos los cambios que se realicen durante la sesión de trabajo se escriban en una capa superior temporal y escribible [Writable]. Esta capa superior es un "overlayfs". Los beneficios principales son que la instalación base del sistema operativo permanece inalterada, si el sistema es comprometido o se instala malware, un simple reinicio puede revertir el sistema a su estado original limpio, si se usa una capa temporal en memoria, perfecto para sistemas de uso público donde los cambios de un usuario no deben afectar al siguiente y permite realizar pruebas destructivas o instalar software sin preocuparse por estropear el sistema base. El comportamiento de overlayroot se controla a través de la opción de kernel que se añade a la línea boot de GRUB. En el modo temporal sería:
+# nano /etc/default/grub
+       GRUB_CMDLINE_LINUX_DEFAULT="quiet splash overlayroot=tmp"
+# update-grub (actualizar grub)
+# reboot (reiniciar)
+# touch /cambio_temporal.txt (realiza un cambio)
+# overlayroot-chroot -e (verifica el estado actual)
+# reboot
+Y el archivo /cambio_temporal.txt habrá desaparecido. El modo temporal es el más seguro y fácil de usar, ya que garantiza que el sistema regrese a su estado original después de cada reinicio. Para hacerlo permanente la linea a modificar sería:
+# nano /etc/default/grub
+       GRUB_CMDLINE_LINUX_DEFAULT="quiet splash overlayroot=/dev/sdb1"
+Los pasos siguientes son los mismos pero al reiniciar el archivo /cambio_temporal.txt estará en el mismo lugar. Para deshabilitarlo en el boot:
+Durante el arranque, en la pantalla de GRUB, presionar "E" para editar la entrada de boot. Buscar la línea que contiene overlayroot= y cámbiarla a:
+       GRUB_CMDLINE_LINUX_DEFAULT="quiet splash overlayroot=disabled"
+Presionar F10 o Ctrl-x para arrancar con el nuevo parámetro. Una vez realizadas las operaciones realizadas en en sistema, reiniciar y el sistema volverá a usar el modo overlayroot configurado por defecto. El comando overlayroot-chroot detiene temporalmente la protección de solo lectura de la capa inferior, la monta con permisos de lectura/escritura [R/W], y coloca al usuario en un entorno chroot [Change Root o cambio de raíz].
+# overlayroot-chroot (una vez dentro de la sesión de chroot, se puede ejecutar comandos como si overlayroot no estuviera activo, permitiendo cambios permanentes. Exit para salir)
 
 
 owl
