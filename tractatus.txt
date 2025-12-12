@@ -29249,6 +29249,19 @@ Atajos (write)
 	F7 (Ortografia y gramatica)
 
 
+libvirsh-clients
+Herramientas para interactuar con la biblioteca libvirt, que permite gestionar hipervisores como KVM/QEMU de forma modular y programable desde C u otros lenguajes. Este paquete contiene virsh, una herramienta de línea de comandos que permite controlar el demonio de libvirt. Incluye los ejecutables virsh, virt-pki-query-dn, virt-pki-validate y virt-xml-validate.
+$ virsh create ubuntu22.xml (lanzar la virtualización)
+$ virsh list (lista dominios activos)
+$ virsh start nombre-dominio (inicia un dominio)
+$ virsh shutdown nombre-dominio (apaga graceful)
+$ virsh destroy nombre-dominio (fuerza apagado)
+$ virt-pki-query-dn /ruta/certificado.pem (muestra el DN para copiar en libvirtd.conf)
+$ virt-pki-validate (verifica la cadena de certificados); requiere ejecución como root en algunos casos.[5]
+$ virt-xml-validate /ruta/dominio.xml  (verifica archivos XML de libvirt contra esquemas oficiales)
+$ virt-xml-validate /ruta/archivo.xml domain (para dominios)
+
+
 libwacom-list-local-devices
 Utilidad para listar los dispositivos conectados e identificados por libwacom. libwacom es una biblioteca para identificar tabletas gráficas las características específicas de cada modelo. Facilita el acceso a información como si es una tableta integrada en la pantalla, cuál es el tamaño de este modelo, etc. Originalmente estaba diseñado sólo para dispositivos Wacom pero ahora soporta cualquier tableta gráfica de cualquier proveedor. . Normalmente se utiliza para comprobar si un archivo de datos libwacom  es correcto, está presente y/o se aplica a un dispositivo específico.
 $ libwacom-list-local-devices
@@ -40790,6 +40803,80 @@ $ mv owncloud /var/www/ (mover la carpeta al directorio web)
 Terminar la configuración [administrador, contraseña, base de datos..) abriendo en el navegador la dirección:
 http://localhost/owncloud
 Todo lo que se arrastra a la ventana del navegador se incluye en la nube.
+
+
+ownserver
+Servidor backend controlar dispositivos 1-Wire, un bus de comunicación económico y de baja velocidad utilizado en una variedad de aplicaciones, como sensores meteorológicos, control de acceso, etc. Se puede conectar al sistema mediante interfaces serie, USB, I²C y otras. El bus físico suele estar conectado a un puerto serie o USB, y otros procesos se conectan a OWserver mediante sockets de red [puerto TCP].
+# systemctl status ownserver (ver si está activo)
+
+
+oxigraph
+Base de datos de grafos escrita en Rust que implementa los estándares RDF [Resource Description Framework] y SPARQL que permiten trabajar con datos enlazados [Linked Data]. Esta herramienta permite manipular archivos RDF y consultarlos mediante SPARQL, así como generar un servidor HTTP sobre la base de datos. El Marco de Descripción de Recursos [RDF] es un modelo estándar para el intercambio de datos en la web. Formatos soportados Turtle [.ttl], N-Triples [.nt], N-Quads [.nq], RDF/XML [.rdf] y TriG [.trig]
+$ oxigraph load --location mi_db datos.ttl (crear una base de datos y cargar un archivo RDF)
+$ oxigraph load --location mi_bd datos1.ttl datos2.rdf datos3.nt (cargar múltiples archivos)
+$ oxigraph load --location mi_bd --format turtle datos.txt (especificar el formato si no es autodetectable)
+$ oxigraph query --location mi_bd --query 'SELECT * WHERE { ?s ?p ?o } LIMIT 10' (consulta simple)
+$ oxigraph query --location mi_bd --query-file consulta.sparql (consulta desde un archivo)
+$ oxigraph query --location mi_bd --query-file consulta.sparql --results resultados.json (guardar resultados en archivo)
+$ oxigraph serve --location mi_bd (iniciar servidor HTTP básico por defecto en puerto 7878)
+$ oxigraph serve --location mi_bd --bind 0.0.0.0:8080 (especificar puerto determinado)
+$ oxigraph serve --location mi_bd --bind localhost:7878 (con autenticación básica)
+$ oxigraph dump --location mi_bd --file backup.nq (volcar toda la base de datos a un archivo)
+$ oxigraph convert --from turtle --to ntriples datos.ttl > datos.nt (convertir entre formatos RDF)
+$ oxigraph serve --help (ver ayuda de algún argumento)
+1.-
+Ejemplo completo para crear archivo de datos
+$ nano libros.ttl
+       @prefix : <http://ejemplo.org/libros#> .
+       @prefix dc: <http://purl.org/dc/elements/1.1/> .
+       //
+       :libro1 a :Libro ;
+           dc:title "El Quijote" ;
+	   dc:creator "Miguel de Cervantes" ;
+    	   :año 1605 .
+       //
+       :libro2 a :Libro ;
+           dc:title "Cien años de soledad" ;
+    	   dc:creator "Gabriel García Márquez" ;
+    	   :año 1967 .
+$ oxigraph load --location biblioteca libros.ttl (cargar datos)
+Consultar:
+$ nano consulta.sparql
+       PREFIX dc: <http://purl.org/dc/elements/1.1/>
+       SELECT ?titulo ?autor WHERE {
+           ?libro dc:title ?titulo ;
+	          dc:creator ?autor .
+       }
+       ORDER BY ?titulo
+$ oxigraph query --location biblioteca --query-file consulta.sparql (ejecutar consulta)
+$ oxigraph serve --location biblioteca (iniciar servidor)
+$ curl -X POST http://localhost:7878/query -H "Content-Type: application/sparql-query" -H "Accept: application/json" --data 'SELECT * WHERE { ?s ?p ?o } LIMIT 5' (consulta HTTP)
+
+
+oz
+Herramienta para instalar automáticamente sistemas operativos invitados [guest OS] en máquinas virtuales, reduciendo la intervención manual al mínimo. Se apoya en plantillas TDL [Template Description Language] que describen el SO, la arquitectura, los discos, los paquetes, los scripts post-instalación, etc. A partir de esas plantillas, el conjunto de ejecutables que forman el paquete `oz` descarga la imagen ISO, crea la VM, ejecuta la instalación desatendida, aplica personalizaciones y deja la imagen lista para usar con KVM/QEMU, libvirt o similar. Incluye los ejecutables oz-cleanup-cache, oz-customize, oz-generate-icicle y oz-install
+$ oz-install -d3 -t 900 -u debian12-x86_64.tdl (nivel de depuración de 0 a 5 y timeout en segundos para la fase de instalación)
+$ oz-customize -d3 debian12-x86_64.dsk customize.tdl
+Ejemplo de customize.
+$ nano customize.tdl
+       <template>
+         <name>debian12-custom</name>
+  	 <os>
+ 	   <name>Debian</name>
+	   <version>12</version>
+    	   <arch>x86_64</arch>
+  	 </os>
+  	 <customize>
+  	   <install>
+      	     <package>curl</package>
+      	     <package>htop</package>
+    	   </install>
+    	   <command>echo 'Customized at $(date)' > /root/build.log</command>
+  	 </customize>
+       </template>
+$ oz-generate-icicle -d3 -t 600 debian12-x86_64.dsk debian12.tdl > nuevo.icicle (generar el fichero “icicle” (XML con la lista de paquetes instalados, usuarios, etc.) a partir de un disco existente)
+$ oz-cleanup-cache (borra todo el caché que Oz guarda en $HOME/.oz/cache/, ISOs descargadas, kernels/initrds, paquetes temporalmente copiados...)
+$ $ virsh create ubuntu22.xml (lanzar la virtualización. Ver libvirsh-clients)
 
 
 p0f
