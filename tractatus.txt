@@ -40887,6 +40887,17 @@ identifica huellas de sistemas operativos de forma pasiva (solo escuchando)
 Nota.- Lanzar la aplicación, visitar distintas páginas con el navegador y mirar en la consola lo que aparece.
 
 
+p11-kit
+Permite cargar y enumerar módulos del estándar de criptografía de Clave Pública #11, junto con una configuración estándar para instalar módulos PKCS#11 y que sean detectables. También soluciona problemas de coordinación del uso de PKCS#11 por parte de diferentes componentes o bibliotecas que conviven en el mismo proceso.
+$ p11-kit list-modules (lista los módulos)
+$ p11-kit print-config (imprimir configuración)
+$ trust list (examinar el almacén de políticas de confianza compartidas)
+$ trust extract --format=x509-directory --filter=certificates ~/dir_certificates/ (crear dir_certificates con los certificados y en formato especificado)
+$ p11-kit list-tokens "pkcs11:model=p11-kit-trust;manufacturer=PKCS%2311%20Kit;serial=1;token=System%20Trust" (ver uno concreto)
+$ p11-kit list-tokens "pkcs11:token=System%20Trust" (tambien funciona con solo el nombre del token)
+$ p11-kit server pkcs11:token=System%20Trust (inicia un servidor que expone los tokens PKCS#11 especificados en un socket local)
+
+
 p11tool
 [gnutls]. Programa que permite operar con tarjetas inteligentes PKCS #11 y módulos de seguridad. Para usar los tokens de PKCS #11 con GnuTLS, los archivos de configuración de p11-kit necesitan ser configurados, es decir, crear un fichero en /etc/pkcs11/module con el contenido módule /path/to/pkcs11.so. Alternativamente, el archivo de configuración /etc/gnutls/pkcs11.conf tiene que existir y contener un número de líneas de la forma 'load=/usr/lib/opensc-pkcs11.so'.
 $ p11tool --list-tokens (enumera todos los códigos disponibles)
