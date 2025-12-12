@@ -40705,6 +40705,33 @@ $ qemu-system-x86_64 -bios /usr/share/ovmf/OVMF_CODE.fd -pflash /usr/share/ovmf/
 $ qemu-system-x86_64 -bios /usr/share/ovmf/OVMF_CODE.fd -pflash /variables/uefi/OVMF_VARS.fd -m 2048 -hda /ruta/a/tu/disco/virtual.img -cdrom /ruta/instalador.iso (personalizar las variables UEFI creando un archivo de variables y usarlo en lugar del archivo predeterminado)
 
 
+ovn-central
+[pvn-common]. Componentes centrales de OVN la Red Virtual Abierta [Open Virtual Network], que es un sistema que soporta la abstracción de redes virtuales. OVN complementa las capacidades existentes de OVS para añadir compatibilidad nativa con abstracciones de redes virtuales, como superposiciones virtuales de Capa 2 y Capa 3 y grupos de seguridad. ovn-central proporciona los daemons, utilidades y bases de datos del espacio de usuario para OVN, que se ejecuta en una ubicación central.
+# systemctl status ovn-northd (comprobar si el demonio está activo)
+
+
+ovn-common
+[ovn-central]. Componentes centrales de OVN la Red Virtual Abierta (Open Virtual Network), que es un sistema que soporta la abstracción de redes virtuales. Incluye los ejecutables ovn-appctl, ovn-debug, ovn-detrace, ovn-ic-nbctl, ovn-ic-sbctl, ovn-nbctl, ovn-sbctl y ovn-trace.
+Ejemplo de configurar una red lógica en la que ovn-central está corriendo en 192.168.1.10
+$ export OVN_NB_DB=tcp:192.168.1.10:6641 (configurar conexión a la base de datos NB, normalmente en tcp:192.168.1.10:6641)
+$ ovn-nbctl ls-add demo-net (crear una red lógica [Logical Switch])
+$ ovn-nbctl ls-del <nombre> (elimina un switch lógico)
+$ ovn-nbctl lsp-add demo-net vm1 (añadir un puerto lógico, como una VM o contenedor)
+$ ovn-nbctl lsp-set-addresses vm1 "00:00:00:00:00:01 192.168.100.10"
+$ ovn-nbctl lsp-add switch-logico vm1-port (agregar un puerto llamado "vm1-port" a "switch-logico")
+$ ovn-nbctl lr-add demo-router (crear un router lógico y conectar la red)
+$ ovn-nbctl lrp-add demo-router demo-router-demo-net 00:00:00:00:ff:01 192.168.100.1/24
+$ ovn-nbctl lsp-add demo-net demo-net-demo-router
+$ ovn-nbctl lsp-set-type demo-net-demo-router router
+$ ovn-nbctl lsp-set-addresses vm1-port "0a:00:00:00:01:01 192.168.1.10/24" (establecer la dirección MAC y IP para el puerto)
+$ ovn-nbctl lsp-set-addresses demo-net-demo-router "router"
+$ ovn-nbctl lsp-set-options demo-net-demo-router router-port=demo-router-demo-net
+$ ovn-nbctl show (mostrar un resumen de la topología lógica: switches, routers, puertos)
+$ ovn-sbctl lflow-list (con el UUID del dato anterior, listar los flujos lógicos asociados a un Datapath)
+$ ovn-trace switch-logico "inport == \"vm1-port\" && eth.type == 0x800 && ip.src == 192.168.1.10 && ip.dst == 192.168.1.11 && ip.proto == 1" (trazar un paquete ICMP de 192.168.1.10 a 192.168.1.11 en el switch lógico)
+Este tipo de comandos solo funcionan si ovn-central está activo y accesible.
+
+
 ow-shell
 Utilidades de shell para comunicarse con un servidor 1-Wire. El bus 1-Wire es un bus económico y de baja velocidad para dispositivos como sensores meteorológicos, control de acceso, etc. Incluye los programas owdir, owread, owget, owwrite, owexist, owusbprobe y owpresent.
 $ owdir / (lista los dispositivos 1-Wire conectados al bus, mostrando su estructura de directorios. Cada línea representa un dispositivo o directorio)
