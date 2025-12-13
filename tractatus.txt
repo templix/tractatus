@@ -40911,6 +40911,14 @@ p910nd
 Pequeño demonio de impresora diseñado para estaciones de trabajo sin disco. Copia cualquier dato recibido en el puerto que escucha, al puerto de impresora correspondiente. Está diseñado principalmente para hosts Linux sin disco que se ejecutan como controladores de impresora, pero no hay ninguna razón por la que no pueda usarse en hosts con disco. El puerto 9100 se copia a /dev/lp0, el 9101 a /dev/lp1 y el 9102 a /dev/lp2. El puerto predeterminado es el 9100 a /dev/lp0.
 
 
+pa-dlna
+Herramienta que permite enviar transmisiones sin pérdida [PCM, FLAC, AIFF] y con pérdida [MP3, Vorbis, etc.] de audio PulseAudio a dispositivos compatibles con DLNA [Digital Living Network Alliance]. DLNA es un estándar de networking que permite la comunicación entre dispositivos electrónicos para compartir contenido multimedia.
+$ pa-dlna --device 1 --output-format FLAC --output-device 10000 archivo.mp3 (dispositivo en la red, formato de salida, puerto de salida y archivo de audio)
+$ pa-dlna --list-devices (muestra una lista de todos los dispositivos DLNA detectados en la red)
+$ pa-dlna --control 1 --play /ruta/a/tu/archivo.mp3 (identifica el dispositivo en la red e inicia la reproducción del archivo especificado)
+$ pa-dlna --control 1 --status (muestra el estado actual de reproducción del dispositivo)
+
+
 paccache
 [pacman-contrib]. Limpiar caché de paquetes en Manjaro.
 # paccache -r (eliminar versiones antiguas y mantener solo la versión más reciente de cada paquete)
