@@ -40931,6 +40931,34 @@ pacdiffviewer
 En Arch, busca archivos de configuración nuevos y obsoletos [pacnew, pacsave] para gestionarlos [eliminarlos, reemplazarlos..]
 
 
+pacemaker
+Sistema de administración de clústeres [Conjunto de servidores [nodos] que trabajan juntos] de alta disponibilidad [HA] que coordina el inicio y la recuperación de servicios interrelacionados en un conjunto de máquinas. Está diseñado para garantizar que los servicios críticos estén siempre disponibles, incluso en caso de fallos en los nodos del clúster y puede gestionar diferentes tipos de recursos, incluyendo OCF [Open Cluster Framework], SYSV [System V init scripts] y systemd. Incluye los ejecutables crm_node, fence_legacy, fence_watchdog y pacemakerd
+# systemctl status pacemaker (comprobar si está activo)
+$ pacemakerd (otra forma de activarlo si no lo está)
+$ ps aux | grep pacemaker (verificar procesos activos)
+# crm_node -l (listar todos los nodos del clúster)
+# crm_node -n (ver el nombre del nodo actual)
+# crm_node -i (ver información del nodo)
+# crm_node --force --remove nombre-nodo (eliminar un nodo del clúster, desde otro nodo)
+# crm_node -q (ver el estado de quorum)
+# crm_node --name node1 (obtener ID numérico del nodo)
+# fence_legacy -o status -n nodo1 -a 192.168.1.10 (ejecutar un dispositivo de fencing legacy antiguo en formato de clúster RHCS/CMAN)
+# fence_legacy -o off -n nodo2 -a pdu.ejemplo.com -l admin -p password (apagar [fence] un nodo usando APC PDU legacy)
+# fence_legacy -o reboot -n nodo1 -a ilo.nodo1.com (reiniciar un nodo)
+# fence_legacy -o metadata (listar dispositivos soportados)
+# pcs stonith create watchdog-fencing fence_watchdog (configurar watchdog como método de fencing)
+# fence_watchdog -o reboot -n $(crm_node -n) (probar el watchdog, reinicia el nodo)
+# ls -l /dev/watchdog* (ver dispositivo watchdog disponible)
+# cat /sys/class/watchdog/watchdog0/state (verificar estado del watchdog)
+# grep -i fence /var/log/pacemaker/pacemaker.log (ver logs de fencing)
+Configuración normal [instalar "pcs"]
+# modprobe softdog (habilitar watchdog en el kernel)
+# echo "softdog" >> /etc/modules (en /etc/modules)
+# pcs property set stonith-watchdog-timeout=30s (configurar en Pacemaker)
+# pcs stonith create wdt fence_watchdog
+# pcs stonith level add 1 nodo1 wdt
+
+
 package-update-indicator
 Utilidad que comprueba periódicamente las actualizaciones de software y notifica al usuario sobre las actualizaciones disponibles mediante notificaciones de escritorio y/o un icono de notificación de estado o un icono en la bandeja del sistema.
 
