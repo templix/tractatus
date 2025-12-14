@@ -41476,6 +41476,23 @@ Para abrir ventanas y no tabs en pcmanfm solo si se abren por terminal, colocar 
 alias pcmanfm='pcmanfm -n'
 
 
+pcs
+Es una herramienta de configuración de corosync y Pacemaker. Permite a los usuarios ver, modificar y crear fácilmente clústeres basados en Pacemaker. Aunque pcs es parte del paquete de Pacemaker, también se utiliza para configurar y gestionar Corosync, que es el componente responsable de la comunicación entre los nodos del clúster.
+# systemctl status pcsd (verificar si está activol)
+# passwd hacluster (pedirá ingresar una contraseña para el usuario hacluster, que es el usuario predeterminado para pcs)
+# pcs cluster setup --name my_cluster node1 node2 (configura un clúster llamado my_cluster con los nodos node1 y node2)
+# pcs cluster start --all (iniciar los servicios de Corosync y Pacemaker)
+# pcs status (verificar que el clúster se haya iniciado correctamente y ver el estado de los nodos)
+# pcs resource create nginx_service systemd:nginx op monitor interval=30s (actualizar el monitoreo cada 30 segundos)
+# pcs resource create my_pg ocf:heartbeat:pgsql pgctl="/usr/lib/postgresql/12/bin/pg_ctl" pgdata="/var/lib/postgresql/12/main" pgport="5432" (configurar un recurso de base de datos, como PostgreSQL)
+# pcs resource create my_nfs ocf:heartbeat:nfsd nfs_shared_infodir="/var/lib/nfs" nfs_shared_ip="192.168.1.100" (configurar un recurso de archivo compartido, como NFS)
+# pcs resource create my_ip ocf:heartbeat:IPaddr2 ip=192.168.1.100 (crea un recurso de IP flotante con la dirección 192.168.1.100)
+Nota.- pcs se utiliza principalmente para configurar recursos en Pacemaker, también se puede configurar recursos que dependen de Corosync, como recursos de IP o servicios.
+# pcs constraint location my_resource prefers node1=100 (establece una preferencia para que my_resource se ejecute en node1)
+# pcs property set start-failure-is-fatal=true (establecer una política de arranque que indique que todos los recursos deben iniciarse en el nodo preferido)
+# pcs stonith level add 1 my_resource email@example.com (configura una notificación por correo electrónico para el recurso my_resource)
+
+
 pdb
 Debuger de código python.
 $ pdb archivo.py
