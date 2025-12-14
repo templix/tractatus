@@ -41493,6 +41493,21 @@ Nota.- pcs se utiliza principalmente para configurar recursos en Pacemaker, tamb
 # pcs stonith level add 1 my_resource email@example.com (configura una notificación por correo electrónico para el recurso my_resource)
 
 
+pcsc-tools
+Herramientas para usar con tarjetas inteligentes PC/SC [Personal Computer/Smart Card], como los de DNI electrónico, tarjetas SIM, tarjetas bancarias, etc. Los ejecutables son ATR_analysis, pcsc_scan, scriptor y gscriptor [igual que scriptor pero con intergaz gráfica].
+# systemctl status pcscd (verificar que el servicio está corriendo)
+$ pcsc_scan (escanea los lectores de tarjetas inteligentes disponibles e imprime eventos detectados. Si no hay ninguna esperará hasta que se concecte. Terminar el escaneo con Ctrl-c)
+$ echo "3B 9F 96 80 1F C7 80 31 E0 73 FE 21 1B 67 48 54 45 4D 20 53 4D 41 52 54 43 41 52 44 20 58" | ATR_analysis (analiza el ATR [Answer To Reset] de una tarjeta inteligente)
+Nota.- El ATR es una secuencia de bytes que la tarjeta envía al lector cuando se inserta, y contiene información sobre el tipo de tarjeta, protocolo, etc.
+$ scriptor (enviar comandos APDU [Application Protocol Data Unit] que son los que se usan para leer, escribir, autentificar, etc en la tarjeta)
+
+
+pcscd
+Demonio para acceder a tarjetas inteligentes y lectores de tarjetas mediante PC/SC.
+# systemctl status pcscd (verificar que el servicio está activo)
+# pcscd -d -a (mostrar los APDU [Application Protocol Data Unit] intercambiados entre el lector y la tarjeta y mostrando información detallada)
+
+
 pdb
 Debuger de código python.
 $ pdb archivo.py
