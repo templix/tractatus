@@ -40959,6 +40959,37 @@ Configuración normal [instalar "pcs"]
 # pcs stonith level add 1 nodo1 wdt
 
 
+pacemaker-cli-utils
+Contiene las herramientas de "bajo nivel" que permiten manipular directamente el CIB [Cluster Information Base], que es el archivo XML donde reside toda la configuración del clúster [Conjunto de servidores [nodos] que trabajan juntos]. Incluye los ejecutables attrd_updater, cibadmin, cibsecret, crm_attribute, crm_diff, crm_error, crm_failcount, crm_master, crm_mon, crm_report, crm_resource, crm_rule, crm_shadow, crm_simulate, crm_standby, crm_ticket, crm_verify, crmadmin, iso8601 y stonith_admin.
+# crm_node -p (ver miembros de esta partición)
+# crm_node -n node1 --force (forzar actualización de estado)
+# crm_mon -1 (estado completo del clúster)
+# crm_mon -r (modo interactivo en tiempo real)
+# crm_mon -rfj (muestra fallos, recursos y genera salida en JSON).
+# cibadmin -Q (ver configuración CIB)
+# crmadmin -D (muestra quién es el nodo DC actual)
+# crm_diff --original config_vieja.xml --new config_nueva.xml (compara dos archivos de configuración para ver qué ha cambiado)
+# crm_verify -LV (validar configuración)
+# crm_shadow --display (mostrar la configuración de shadow actual)
+# crm_shadow --create mi_prueba (crear una "copia de trabajo" de la configuración para hacer pruebas sin afectar al clúster real)
+# crm_simulate -LS (simula la recuperación de recursos)
+# crm_resource --resource mi_web --cleanup (limpiar errores de un recurso)
+# crm_attribute --node node1 --name "prioridad" --update 100 (gestiona atributos de los nodos)
+# crm_failcount --resource mi_db --delete --node node1 (consulta o borra el contador de fallos de un recurso. Si llega al límite, el recurso no arranca más en ese nodo)
+# crm_standby --node node1 --update on (pone a un nodo en modo "espera" para que no pueda ejecutar recursos)
+# crm_error -1 (traduce los códigos de error numéricos de Pacemaker a texto humano)
+# crm_report --from "2025-12-12 00:00:00" informe.tar.bz2 (genera un archivo comprimido con todos los logs y configuraciones de todos los nodos)
+# cibsecret set node1 passwd PASS (poner una contraseña a un nodo)
+# cibsecret check node1 passwd (chequear la contraseña de un nodo)
+# stonith_admin --reboot node2 (reiniciar un nodo via STONITH)
+# iso8601 (convertir o validar fechas en el formato ISO8601 que usa el clúster para sus reglas de tiempo)
+# attrd_updater --help-all (mostrar todas las opciones de ayuda)
+# attrd_updater --help-output (mostrar la ayuda de salida)
+# attrd_updater --help-required (mostrar los argumentos obligatorios)
+# attrd_updater --help-command (mostrar las opciones del comando mutuamente excluyentes)
+# attrd_updater --help-additional (mostrar opciones adicionales)
+
+
 package-update-indicator
 Utilidad que comprueba periódicamente las actualizaciones de software y notifica al usuario sobre las actualizaciones disponibles mediante notificaciones de escritorio y/o un icono de notificación de estado o un icono en la bandeja del sistema.
 
