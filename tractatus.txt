@@ -8545,6 +8545,34 @@ Luego puede usarae así:
 $ corkscrew /etc/corkscrew.conf
 
 
+corosync
+Es el motor de comunicación de clúster [multicast/unicast fiable, membership, quorum, etc.] sobre el que se apoyan stacks de alta disponibilidad como Pacemaker. El paquete incluye el demonio principal y varias utilidades administrativas para diagnosticar enlaces, ver/ajustar parámetros, trabajar con grupos de procesos, gestionar la clave de autenticación y consultar el quorum. Incluye los ejecutables corosync-blackbox, corosync-xmlproc, corosync-cfgtool, corosync-cmapctl, corosync-cpgtool, corosync-keygen y corosync-quorumtool.
+# systemctl status corosync (ver el estado del demonio si está activo)
+$ corosync-blackbox (volcado de trazas internas para debug)
+$ corosync-xmlproc corosync.xml > corosync.conf (convertir XML a corosync.conf)
+$ corosync-quorumtool -s (validar que el quorum está activo y ver estado resumido de quorum)
+$ corosync-quorumtool -l (listar nodos y sus votos)
+$ corosync-quorumtool -m (monitorizar en continuo)
+# corosync-quorumtool -n <nodeid> -v <votes> (cambiar votos de un nodo en runtime)
+$ corosync-cmapctl runtime.totem.cluster_name (leer/escribir claves en la base de datos CMAP)
+$ corosync-cfgtool -s (ver estado detallado de los enlaces de este nodo)
+$ corosync-keygen (generar clave compartida de autenticación en /etc/corosync/authkey)
+$ corosync-cfgtool -s -b (versión "brief" que codifica con dígitos o letras el estado [1, 2, 3, n, ?, d])
+$ corosync-cfgtool -n (listar nodos y su conectividad:)
+# corosync-cfgtool -R (recargar corosync.conf en todos los nodos)
+# corosync-cfgtool -L (reabrir ficheros de log)
+# corosync-cfgtool -H (apagar Corosync en este nodo de forma limpia)
+# corosync-cfgtool -H --force (forzar el apagado ignorando veto de daemons)
+$ corosync-cfgtool -a <nodeid>(mostrar la(s) IP de un nodo concreto)
+# corosync-cfgtool -k <nodeid> (matar un nodo)
+$ corosync-cmapctl (listar todas las claves)
+$ corosync-cmapctl -m runtime.totem (filtrar por un "map" [prefijo lógico])
+$ corosync-cmapctl totem.cluster_name (leer una clave concreta)
+# corosync-cmapctl -s totem.token_timeout u32 5000 (modificar un valor runtime)
+$ corosync-cmapctl -p dump.txt (volcar/leer desde fichero)
+# corosync-quorumtool -e <expected> (cambiar expected votes del clúster)
+
+
 cow-shell
 [cowdancer]. Invoca una sesión de shell, bajo el directorio en el que se invocó la aplicación. Durante esta sesión, cualquier modificación que se realice en los archivos o directorios dentro del entorno de trabajo se lleva a cabo en una copia temporal de los archivos, en lugar de modificarlos directamente. Esto se logra a través de la técnica de Copy on Write [COW] que permite trabajar con archivos y directorios sin riesgos de perder datos o corromper los originales.
 
