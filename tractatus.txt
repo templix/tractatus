@@ -41593,6 +41593,12 @@ Averigua si el pdf tiene archivos embebidos.
 $ pdfdetach -list archivo.pdf
 
 
+pdfgrep
+es una herramienta para buscar texto en archivos PDF. Funciona de forma similar a grep.
+$ pdfgrep -n --max-count 15 palabra archivo.pdf (imprimir las 15 primeras veces que sale "palabra" en el .pdf e imprimir número de página)
+$ pdfgrep -n -r --include "emacs*.pdf" palabra (buscar en el directorio actual y todos los subdirectorios "palabra" en todos los .pdf que empiecen por "emacs" e imprimir número de página)
+
+
 pdfimages
 [xpdf-utils]. Extraer las imágenes de un pdf
 $ pdfimages fichero.pdf fichero
