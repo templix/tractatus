@@ -36798,6 +36798,16 @@ Utilidad para capturar y analizar tráfico de redes similar a libpcap diseñada 
 # ncaptool -i eth0 "greater 100" (captura solo paquetes mayores a 100 bytes)
 
 
+ncat
+Sucesor moderno de netcat que mantiene la mayoría de sus características pero añade soporte oficial para IPv6, SSL/TLS, proxy SOCKS, ejecución de scripts, autenticación, etc. Se ha eliminado la compatibilidad con el escaneo de puertos.
+$ ncat -l 5000 (en la terminal A [servidor] en "listen" en el puerto especificado)
+$ ncat 192.168.18.15 5000 (en la terminal B [cliente] todo lo que se escriba en esta terminal aparecerá en A)
+$ ncat -l 5000 < archivo.txt (en el servidor, transferencia de un archivo)
+$ ncat 192.168.18.15 5000 (a la que el cliente pulse intro el archivo se mostrará en la terminal)
+$ ncat -l -u 5000 -c "echo $(date)" (en el servidor)
+$ ncat -u 192.168.18.14 5000 (en el cliente. Cuando se haya conectado al pulsar intro aparecerá la fecha y se cerrará el servidor)
+
+
 ncdc
 Programa para compartir archivos mediante protocolos Direct Connect [DC]. Es compatible con varios clientes populares como EiskaltDC++, DC++, AirDC++, FlylinkDC++ y otros que utilizan estos protocolos. Ncdc también es interoperable con todo el software de concentrador DC [servidores] común que utiliza los protocolos DC y Advanced DC. Su función principal es actuar como un cliente o nodo en la red de intercambio de archivos basada en DC, permitiendo a los usuarios compartir y buscar archivos en la red.
 $ ncdc -n MiUsuario -m dc.server.com:411 -c (define nombre de usuario en la red DC y el host y puerto del servidor a conectar.)
