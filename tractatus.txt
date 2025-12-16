@@ -41780,6 +41780,18 @@ Generar una secuencia, calcular el cuadrado de cada elemento y dividirlos por 2
 	pdl> help
 
 
+pdlzip
+Compresor de datos basado en el algoritmo LZMA. Lzip es un compresor de datos sin pérdidas, con una comprobación de integridad muy segura y una interfaz de usuario similar a la de gzip o bzip2.
+$ pdlzip archivo (comprimir "archivo". El resultado es archivo.out.lz)
+$ pdlzip -o comprimido.lz archivo (comprimir "archivo" conservándolo y guardar el comprimido en "comprimido.lz")
+$ pdlzip -t comprimido.lz (comprobar integridad del archivo comprimido)
+$ pdlzip -f -d comprimido.lz (descomprimir sobreescribiendo los archivos de salida existentes)
+$ pdlzip -F comprimido.lz (forzar una recompresión de un comprimido. El resultado es comprimido.lz.lz)
+$ pdlzip -k archivo (comprimir archivo conservando el original)
+$ pdlzip -c -d comprimido.lz (descomprimir mostrando la salida en pantalla)
+$ pdlzip -0 -k archivo (comprimir rápido [de 0 a 9, de rápido a mejor] conservando el original. Por defecto 6)
+
+
 pebrot
 Cliente msn en ncurses. Ingresar usuario y contraseña en /home/USUARIO/.pebrot/pebrotrc
 Algunos atajos:
@@ -41797,7 +41809,7 @@ Algunos atajos:
 
 
 pee
-[moreutils]. Parecido al comando tee [ver] ejecutando cada uno de los comandos
+[moreutils]. Parecido al comando tee [ver] ejecutando cada uno de los comandos.
 $ pee ls pwd "ip a"
 
 
