@@ -41740,6 +41740,46 @@ Unir varios pdf en un sólo documento.
 $ pdfunite 1.pdf 2.pdf 1+2.pdf
 
 
+pdl
+[Perl Data Language]. Extensiones de Perl para funciones numéricas que permiten almacenar de forma compacta y manipular con rapidez grandes matrices de datos N-dimensionales, fundamentales para la computación científica. Incluye los ejecutables dh_pdl, pdldoc, perldl [intérprete de comandos interactivo y alias del comando "pdl"] y pptemplate
+$ pdldoc convolve (ver documentación de PDL)
+$ pdldoc dice (consultar documentación de la función dice [Crear piddles con datos aleatorios])
+$ pdldoc PDL::IO::Pic (mostraría una introducción al módulo PDL::IO::Pic y una lista de todas las funciones que incluye, como rpic [leer imagen], wpic [escribir imagen], formatos compatibles [PNG, JPEG, etc.])
+$ pdldoc -a convolution (buscar funciones relacionadas con la "convolución")
+Ejemplos de uso interactivo:
+Creación y Visualización de un piddle 2x3 [una matriz PDL]
+$ pdl
+	pdl> $a = pdl( [1, 2, 3], [4, 5, 6] )
+	pdl> print $a
+	[
+	 [1 2 3]
+	 [4 5 6]
+	]
+Realizar una suma y una multiplicación
+	pdl> $b = $a + 10
+	pdl> print $b
+	[
+	 [11 12 13]
+ 	 [14 15 16]
+	]
+	pdl> $c = $a * $b
+	pdl> print $c
+	[
+	 [ 11  24  39]
+ 	 [ 56  75  96]
+	]
+Generar una secuencia, calcular el cuadrado de cada elemento y dividirlos por 2
+	pdl> $x = sequence(5) # Genera una secuencia de 0 a 4
+	pdl> print $x
+	[0 1 2 3 4]
+	pdl> $y = $x ** 2   # Calcula el cuadrado de cada elemento
+	pdl> print $y
+	[0 1 4 9 16]
+	pdl> $c = $y / 2
+	pdl> print $c
+	pdl> help
+
+
 pebrot
 Cliente msn en ncurses. Ingresar usuario y contraseña en /home/USUARIO/.pebrot/pebrotrc
 Algunos atajos:
