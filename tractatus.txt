@@ -41656,6 +41656,7 @@ $ pdfresurrect -s  archivo.pdf  (Limpia todos los datos del pdf)
 
 pdfsandwich
 Herramienta que se utiliza para convertir documentos PDF que contienen solo imágenes, por ejemplo, escaneos de libros o revistas en archivos PDF con OCR [Reconocimiento Óptico de Caracteres]. Utiliza un motor de OCR para analizar las imágenes y extraer el texto que contienen. El texto reconocido se inserta en el PDF de manera que se superponga a las imágenes originales, pero de forma invisible. Esto significa que el texto no se ve, pero está presente en el archivo PDF y puede ser seleccionado, copiado y buscado. Reconoce el diseño de página incluso para texto de varias columnas.
+$ pdfsandwich -list_langs (lista los idiomas disponibles. Instalando tesseract-ocr-... puede instalarse el que se precise)
 $ pdfsandwich documento_escaneado.pdf documento_con_ocr.pdf (generará un nuevo archivo que contiene el mismo contenido que el original, pero ahora con el texto reconocido)
 $ pdfsandwich -lang spa documento_escaneado.pdf documento_con_ocr.pdf (especificar el idioma para mejorar la precisión del OCR)
 $ pdfsandwich -resolution 300 documento_escaneado.pdf documento_con_ocr.pdf (ajustar la resolución de las imágenes para mejorar la calidad del OCR)
@@ -41714,6 +41715,11 @@ Pasar un pdf a html. Preferible lanzar en una carpeta sin contenido ya que, depe
 $ pdftohtml -i -stdout archivo.pdf | w3m -T text/html (leerlo por consola con w3m sin mostrar imagenes [-i])
 $ pdftohtml -s archivo.pdf (Crea un html de una sola página)
 $ pdftohtml -c archivo.pdf (Crea una página cada una del pdf)
+
+
+pdftoipe
+Convierte imágenes en formato PDF a un archivo XML legible por el editor ipe.
+$ pdftoipe -literal archivo.pdf (permitir marcado Latex en objetos de texto y generar archivo.ipe)
 
 
 pdftops
