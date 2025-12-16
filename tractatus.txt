@@ -41654,6 +41654,13 @@ $ pdfresurrect -q archivo.pdf   (Muestra el número de versiones del pdf)
 $ pdfresurrect -s  archivo.pdf  (Limpia todos los datos del pdf)
 
 
+pdfsandwich
+Herramienta que se utiliza para convertir documentos PDF que contienen solo imágenes, por ejemplo, escaneos de libros o revistas en archivos PDF con OCR [Reconocimiento Óptico de Caracteres]. Utiliza un motor de OCR para analizar las imágenes y extraer el texto que contienen. El texto reconocido se inserta en el PDF de manera que se superponga a las imágenes originales, pero de forma invisible. Esto significa que el texto no se ve, pero está presente en el archivo PDF y puede ser seleccionado, copiado y buscado. Reconoce el diseño de página incluso para texto de varias columnas.
+$ pdfsandwich documento_escaneado.pdf documento_con_ocr.pdf (generará un nuevo archivo que contiene el mismo contenido que el original, pero ahora con el texto reconocido)
+$ pdfsandwich -lang spa documento_escaneado.pdf documento_con_ocr.pdf (especificar el idioma para mejorar la precisión del OCR)
+$ pdfsandwich -resolution 300 documento_escaneado.pdf documento_con_ocr.pdf (ajustar la resolución de las imágenes para mejorar la calidad del OCR)
+
+
 pdfseparate
 Separa cada página de un pdf en un pdf.
 $ pdfseparate sample.pdf sample-%d.pdf (si sample.pdf tiene 3 páginas crea sample-1.pdf, sample-2.pdf, sample-3.pdf)
