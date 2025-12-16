@@ -41633,6 +41633,19 @@ $ pdfopen -viewer evince archivo.pdf (con evince)
 $ pdfopen -viewer evince -p 5 archivo.pdf (abrirlo por la página 5 con evince)
 
 
+pdfproctools
+Herramientas para el procesamiento de archivos PDF. Permite configurar las propiedades del documento p. ej., autor, título, palabras clave, creador, productor, etc.
+$ pdfembedfonts entrada.pdf salida.pdf -optimize (optimizar un pdf incrustando las fuentes)
+$ setpdfmetadata entrada.pdf metadata.meta salida.pdf (sustituir metadatos por los mencionados en metadata.meta)
+Un ejemplo básico de archivo para sustituir los metadatos:
+$ nano metadata.meta
+       author Pep Templix
+       title Manual de emacs
+       keywords Manual, PDF, emacs
+       creator Linux
+       producer org-mode
+
+
 pdfresurrect
 herramienta para la extracción/limpieza de metadatos de documentos pdf.
 $ pdfresurrect -i archivo.pdf   (Información del creador del pdf)
