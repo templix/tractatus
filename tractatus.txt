@@ -3159,6 +3159,10 @@ bash-builtins
 Bash puede cargar dinámicamente nuevos comandos integrados. Se incluyen los encabezados necesarios para compilar sus propios comandos integrados y muchos ejemplos. En el navegador file:///usr/share/doc/bash-builtins
 
 
+bash-completion
+Amplía el comportamiento de completado estándar de bash para lograr líneas de comando complejas con solo pulsar unas pocas teclas. Este proyecto fue concebido para producir rutinas de completado programables para los comandos más comunes de Linux/UNIX. Normalmente están en /usr/share/bash-completion/ y /etc/bash_completion.d/. El ejecutable dh_bash-completion es una herramienta de Debhelper, no un clásico ejecutable, usada solo por desarrolladores de paquetes Debian. Sirve para que, al crear un paquete .deb, se instalen correctamente los archivos de autocompletado Bash.
+
+
 bash-doc
 Manuales de bash (en).
 $ firefox file:////usr/share/doc/bash/bashref.html
@@ -11204,6 +11208,10 @@ dgrep
 Busqueda a través de archivos que pertenecen a un paquete Debian instalado.
 $ dgrep goodies debian-goodies
 $ dgrep dpigs debian-goodies
+
+
+dh-shell-completions
+Instalación más sencilla de completado de comandos de shell en consola,  similar a dh_bash-completion de bash-completion, pero compatible con más shells [bash, fish y zsh].
 
 
 dhclient
