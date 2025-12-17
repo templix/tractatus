@@ -7935,6 +7935,15 @@ $ compiz --replace (activar los efectos)
 $ metacity --replace (Desactivar los efectos)
 
 
+complete
+función integrada que controla el autocompletado programable de los comandos mediante tabulación. Permite definir cómo se autocompletan los argumentos de un comando al pulsar la tecla Tab, en lugar de depender únicamente del autocompletado predeterminado de nombre de archivo/comando.
+$ complete (imprime el listado completo de especificaciones)
+$ complete -p | head (imprime 10 primeras especificaciones existentes)
+$ complete -W "start stop restart status" localhost (al pulsar en la terminal "localhost st<tab> propondrá "start", "stop" y "status")
+$ complete -r localhost (anular la especificación anterior)
+$ complete -o filename nospace (establecer la especificación de evitar agregar un espació despues de completar. Otras opciones filenames|dirnames para que al pulsar <tab> complete con archivos o directorios)
+
+
 complexity
 Herramienta para analizar la complejidad de funciones de los programas en C.
 $ complexity archivo.c (analiza todas las funciones de archivo-c)
