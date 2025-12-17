@@ -30724,6 +30724,7 @@ $ ls -1 (muestra en un listado)
 $ ls -F (Muestra a continuación de cada elemento si se trata de un directorio [/], un ejecutable [*] o un enlace [@])
 $ ls -F | grep '/$' (Lista solo directorios)
 $ ls -F | grep -v '/$' (Lista solo los archivos)
+$ ls -C (mostrar el listado en columnas)
 $ ls -L (En los enlaces, se muestra el archivo al que apuntan)
 $ ls -l PID (Muestra qué está corriendo con el PID especificado)
 $ ls -R	(recursivamente)
@@ -32191,6 +32192,7 @@ Nota.- Normalmente "man" formatea el contenido para que coincida con el ancho de
         <standard input>:602: warning [p 7, 11.3i, div 'an-div', 0.2i]: cannot adjust line
 Para solucionarlo:
         $ MANWIDTH=1250 man $COMANDO | wc -l
+En los argumentos del comando descrito en la página man, los corchetes indican argumentos opcionales.
 1.-
 Para crear una página man a partir de un .md:
 $ pandoc archivo.md -s -t man -o archivo.1
@@ -41803,6 +41805,15 @@ $ pdlzip -F comprimido.lz (forzar una recompresión de un comprimido. El resulta
 $ pdlzip -k archivo (comprimir archivo conservando el original)
 $ pdlzip -c -d comprimido.lz (descomprimir mostrando la salida en pantalla)
 $ pdlzip -0 -k archivo (comprimir rápido [de 0 a 9, de rápido a mejor] conservando el original. Por defecto 6)
+
+
+pdns-server
+Es un servidor de nombres [DNS] versátil compatible con una gran variedad de backends, desde simples archivos de zona hasta bases de datos relacionales y algoritmos de equilibrio de carga/conmutación por error. Incluye las herramientas pdns_control, pdnsutil, zone2json y zone2sql
+# pdns-server (iniciar el servidor utilizando la configuración por defecto especificada en el archivo de configuración, generalmente ubicado en /etc/powerdns/pdns.conf)
+# pdns_control show (muestra información general sobre el estado del servidor PowerDNS, incluyendo estadísticas de consultas y errores)
+# pdnsutil add-zone example.com (añade una nueva zona llamada `example.com` al servidor PowerDNS. Precisa tener configurada una base de datos para que esta operación tenga efecto)
+# zone2json -i example.com.zone -o example.com.json (convierte el archivo de zona example.com.zone en un archivo JSON llamado example.com.json)
+# zone2sql --gpgsql --namedb=mydnsdb -i example.com.zone (convierte el archivo de zona example.com.zone en instrucciones SQL para una base de datos PostgreSQL llamada mydnsdb. La opción --gpgsql especifica que se está utilizando PostgreSQL como backend)
 
 
 pebrot
