@@ -41824,6 +41824,16 @@ Es un servidor de nombres [DNS] versátil compatible con una gran variedad de ba
 # zone2sql --gpgsql --namedb=mydnsdb -i example.com.zone (convierte el archivo de zona example.com.zone en instrucciones SQL para una base de datos PostgreSQL llamada mydnsdb. La opción --gpgsql especifica que se está utilizando PostgreSQL como backend)
 
 
+pdudaemon
+Proporciona un daemon para controlar controladores de energía, que pueden ser dispositivos locales o PDU en red. Además, garantiza que los comandos de control de la PDU se ejecuten secuencialmente para evitar problemas con varias PDU al gestionar múltiples solicitudes paralelas.
+# systemctl status pdudaemon (comprobar que esta activo)
+
+
+pdudaemon-client
+Cliente para pdudaemon [ver]
+$ pduclient --daemon localhost --hostname debian --port 16421 --command on (conectar a localhost, del hostname debian puerto por defecto y comando on. Otros reboot y off)
+
+
 pebrot
 Cliente msn en ncurses. Ingresar usuario y contraseña en /home/USUARIO/.pebrot/pebrotrc
 Algunos atajos:
@@ -43067,6 +43077,17 @@ El segundo número indica el color:
       35 – Púrpura
       36 – Cian
       37 – Gris claro
+
+
+protonvpn
+conectarse y desconectarse a servidores de VPN y elegir servidores por país o ciudad.
+# protonvpn init (inicia el servicio. Pedirá las credenciales)
+# protonvpn login (iniciar sesión con tu cuenta)
+# protonvpn connect (conectar a un servidor. Permite opciones como -fastest, -random, -country <CC>, etc.
+# protonvpn disconnect (desconectar la sesión activa)
+# protonvpn status (ver el estado actual de la conexión)
+# protonvpn killswitch -on (activar el kill switch para bloquear tráfico si la VPN cae)
+# protonvpn killswitch -off (desactivar)
 
 
 proxychains
