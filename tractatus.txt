@@ -41850,6 +41850,20 @@ Algunos atajos:
 	fr (rechazar recepción de archivo)
 
 
+pecomato
+[Picture-Embedded COntents MAnipulation TOol]. Es un procesador de metadatos diseñado para mostrar cualquier tipo de información incrustada en archivos de imagen, así como para verificar, filtrar, extraer, eliminar, añadir y corregir dicha información. Es compatible con los siguientes formatos de archivo: JPEG/JFIF, Adobe PSD, FFO e IPTC sin procesar. También es compatible con los formatos de metadatos: JFIF, IPTC, Exif, Adobe y Fotostation. Uno de sus principales objetivos es comprobar la validez de los metadatos analizados y no muestra nada si no hay errores o si no se le pide algo concreto.
+$ pecomato --list (enumerar todas las estructuras de datos integradas compatibles)
+$ pecomato check imagen.jpg (si no muestra nada es que no existen errores, inconsistencias o violaciones del estándar en los metadatos)
+$ $ pecomato dump-full imagen.jpg (solo muestra estructuras que reconoce explícitamente y  no muestra nada si no hay nada interesante que volcar)
+Un ejemplo de salida cuando hay problemas con los metadatos podría ser:
+   	   [Exif] Invalid tag offset detected
+	   [JFIF] Incorrect segment length
+$ pecomato dump-value Exif:DateTimeOriginal imagen.jpg (si el tag no existe no hay salida)
+$ pecomato filter -e Exif imagen.jpg (eliminar todos los EXIF)
+$ pecomato filter -e IPTC imagen.jpg (eliminar IPTC)
+$ pecomato filter -i IPTC imagen.jpg (extraer solo IPTC)
+
+
 pee
 [moreutils]. Parecido al comando tee [ver] ejecutando cada uno de los comandos.
 $ pee ls pwd "ip a"
