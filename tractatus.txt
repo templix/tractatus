@@ -48804,6 +48804,13 @@ Sobre strings:
 	$ test -n $DIR; echo $? (Devuelve 0 si la longitud del string NO es 0)
 
 
+testasciidoc
+Ejecutar pruebas de conformidad con AsciiDoc especificadas en el archivo de configuración.
+$ testasciidoc list (numera los casos de prueba disponibles)
+$ testasciidoc run (ejecutar pruebas)
+$ testasciidoc update --number 1 --backend html5 (generar o actualizar los archivos de referencia utilizados para los casos de prueba)
+
+
 testdisk
 [photorec]. Escaneo y reparación de particiones.
 $ testdisk /list (Muestra todas las particiones incluso las no montadas)
