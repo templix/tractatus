@@ -2102,6 +2102,13 @@ Una curiosidad de ascii:
 $ ssh -o StrictHostKeyChecking=no watch.ascii.theater
 
 
+ascii-image-converter
+Convertir imagenes de formatos estandard [png, jpg, jprg...] a imagen ascii.
+$ ascii-image-converter imagen.png > imagen.txt (forma básica y guardarla en imagen.txt)
+$ ascii-image-converter imagen.png -Cb -s . (en color, en código braille y guardar la imagen en el presente directorio con el nombre por defecto image-ascii-art.png)
+$ ascii-image-converter --formats (formatos soportados)
+
+
 ascii2binary
 lee la entrada que consiste en números ascii o hexadecimales separados por espacios y produce como salida los equivalentes binarios. Incluye el comando binary2ascii que lee la entrada que consiste en números binarios y los convierte a su representación ascii o hexadecimal.
 $ echo "65 66 67" | ascii2binary (65 66 67 son los valores ASCII de las letras A, B y C)
@@ -2126,18 +2133,16 @@ $ asciidoc --help syntax (muestra todas las formas sintacticas que pueden usarse
 $ asciidoc -b html5 -d manpage asciidoc.1.txt  (Genera página man usando html5)
 
 
-ascii-image-converter
-Convertir imagenes de formatos estandard [png, jpg, jprg...] a imagen ascii.
-$ ascii-image-converter imagen.png > imagen.txt (forma básica y guardarla en imagen.txt)
-$ ascii-image-converter imagen.png -Cb -s . (en color, en código braille y guardar la imagen en el presente directorio con el nombre por defecto image-ascii-art.png)
-$ ascii-image-converter --formats (formatos soportados)
-
-
 asciinema
 Grabación de la terminal. Requiere registro en asciinema.org. Visualizar videos de otros usuarios en <https://asciinema.org/browse/featured>
 $ asciinema auth (Para utentificarse en asciinema.org)
 $ asciinema rec (Empezar la grabación. "Ctrl -d" o "exit" para matar el proceso. Al terminar preguntará si queremos subir el video a nuestro perfil)
 $ asciinema -t nmap rec (Colocando un título)
+
+
+asciiquarium
+Pecera en ascii en la terminal.
+$ asciiquarium
 
 
 asciiview
