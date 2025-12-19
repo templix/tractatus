@@ -41824,6 +41824,12 @@ Es un servidor de nombres [DNS] versátil compatible con una gran variedad de ba
 # zone2sql --gpgsql --namedb=mydnsdb -i example.com.zone (convierte el archivo de zona example.com.zone en instrucciones SQL para una base de datos PostgreSQL llamada mydnsdb. La opción --gpgsql especifica que se está utilizando PostgreSQL como backend)
 
 
+pdsh
+Utilidad que permite ejecutar comandos de forma paralela en múltiples hosts, similar a lo que hace rsh pero con la capacidad de manejar múltiples conexiones simultáneas. Intenta mantener 32 conexiones, predeterminadas, modificables en la línea de comandos, a máquinas remotas en cualquier momento. Puede ejecutar comandos individuales o como un shell interactivo.
+$ pdsh -w host1,host2,host3 "ls -l" (ejecuta el comando ls -l en los hosts host1, host2, y host3)
+$ pdsh -w host1,host2,host (Ejecutar un comando interactivo en múltiples hosts)
+
+
 pdudaemon
 Proporciona un daemon para controlar controladores de energía, que pueden ser dispositivos locales o PDU en red. Además, garantiza que los comandos de control de la PDU se ejecuten secuencialmente para evitar problemas con varias PDU al gestionar múltiples solicitudes paralelas.
 # systemctl status pdudaemon (comprobar que esta activo)
@@ -41875,6 +41881,59 @@ Es una biblioteca ORM [Object–Relational Mapping] ligera y de código abierto 
 
 pekwm
 Gestor de ventanas. Cuenta con un conjunto de funciones, que incluye agrupación de ventanas similar a ion, pwm o fluxbox, propiedades automáticas, xinerama, un capturador de claves compatible con llaveros, etc.
+
+
+pelican
+Es un generador de sitios web estáticos, escrito en Python que permite escribir las entradas de blog directamente con el editor que se prefiera [reStructuredText o Markdown], y luego genera un sitio web estático [HTML, CSS, JS] listo para alojar en cualquier servidor.
+$ pelican-quickstart (hará preguntas interactivas para configurar el proyecto: título, autor, URL, etc. y generará la estructura básica)
+      > Where do you want to create your new web site? [.] ~/blog
+      > What will be the title of this web site? linux
+      > Who will be the author of this web site? templix
+      > What will be the default language of this web site? [ca] es
+      > Do you want to specify a URL prefix? e.g., https://example.com   (Y/n)
+      > What is your URL prefix? (see above example; no trailing slash) localhost
+      > Do you want to enable article pagination? (Y/n)
+      > How many articles per page do you want? [10]
+      > What is your time zone? [Europe/Madrid]
+      > Do you want to generate a tasks.py/Makefile to automate generation and publishing? (Y/n)
+      > Do you want to upload your website using FTP? (y/N)
+      > Do you want to upload your website using SSH? (y/N)
+      > Do you want to upload your website using Dropbox? (y/N)
+      > Do you want to upload your website using S3? (y/N)
+      > Do you want to upload your website using Rackspace Cloud Files? (y/N)
+      > Do you want to upload your website using GitHub Pages? (y/N)
+      Done. Your new project is available at /home/pep/blog
+La estructura básica de un proyecto Pelican es:
+$ ls -C blog
+      content  output  Makefile  pelicanconf.py  publishconf.py  tasks.py
+content/ --> Aquí se coloca las entradas y páginas. Pelican busca archivos .md o .rst en este directorio y sus subdirectorios.
+content/posts/ --> Para entradas de blog con la fecha [en formato inglés] en el nombre del archivo.
+content/pages/ --> Para páginas estáticas sin fecha, como "Acerca de" o "Contacto".
+output/ --> Directorio generado automáticamente con el sitio estático. No se debe editar manualmente.
+pelicanconf.py --> Archivo de configuración principal: título, tema, plugins, etc. generado automaticamente)
+$ pelican-themes -l (lista temas disponibles)
+$ pelican content (generará el sitio estático en el directorio output/)
+$ pelican -r content (regenera el sitio al realizar cambios)
+$ pelican --listen (ver el sitio en el navegador en http://localhost:8000)
+$ python -m pelican.server (o usando el servidor de desarrollo)
+Luego se puede subir el contenido de output/ al servidor web [GitHub Pages, Netlify, un VPS, etc.]
+Descargar nuevos temas:
+$ git clone --recursive https://github.com/getpelican/pelican-themes.git
+$ sudo cp -r pelican-themes/* /usr/lib/python3/dist-packages/pelican/themes/
+
+
+pem
+Gestor de gastos personales. Pem funciona almacenando los detalles en un archivo CSV ubicado en el directorio ~/.pem, dentro del directorio $HOME. Cada archivo lleva el nombre del mes actual y Pem lo crea automáticamente al introducir el primer registro de un mes.
+Ejemplo de uso:
+$ pem -e Ingres 10000 (empezar con un saldo)
+$ pem -c Gastos Super 2500 (añadir un gasto de supermercado de 2500)
+$ pem -c Gastos Varios 1500 (añadir otro gasto)
+$ pem -C (Mostrar gastos por categoria/etiqueta)
+$ pem -m Ingres (resumen de ingresos)
+$ pem -s Gastos (resumen de gastos)
+$ pem -s -t (muestra totales)
+$ pem -s 10 (muestra informe de los últimos 10 dias)
+$ pem -m 1 (muestra informe de último mes)
 
 
 pentbox
