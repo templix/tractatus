@@ -35775,6 +35775,35 @@ mtd-utils
 Utilidades para manipular dispositivos con tecnología de memoria, como memoria flash, Disk-On-Chip o ROM. Incluye las siguientes herramientas: docfdisk, doc_loadbios, flashcp, flash_erase, flash_eraseall, flash_lock, flash_otp_dump, flash_otp_info, flash_otp_lock, flash_otp_write, flash_unlock, ftl_check, ftl_format, jffs2dump, jffs2reader, lsmtd, mkfs.jffs2, mkfs.ubifs, mtd_debug, mtdinfo, mtdpart, nanddump, nandtest, nandwrite, nftldump, nftl_format, recv_image, rfddump, rfdformat, serve_image, sumtool, ubiattach, ubiblock, ubicrc32, ubidetach, ubiformat, ubihealthd, ubimkvol, ubinfo, ubinize, ubirename, ubirmvol, ubirsvol, ubiupdatevol.
 
 
+mullvad
+Es una VPN que crea una conexión privada a Internet cifrando el tráfico. El resultado es que la ISP, el proveedor del servicio de Internet, no puede ver su actividad y nadie más puede usar su dirección IP para rastrearle. Precisa cuenta en mullvad.net.
+$ mullvad account login <ID> (inicia sesión con tu número de cuenta de 16 dígitos)
+$ mullvad auto-account generate (genera un nuevo número de cuenta)
+$ mullvad connect (establece la conexión VPN)
+$ mullvad disconnect (corta la conexión VPN)
+$ mullvad reconnect (desconectar y volver a conectar)
+$ mullvad status (muestra si estás conectado, a qué servidor y tu IP actual)
+$ mullvad lockdown-mode set on (activa el "Kill Switch" permanente. Si la VPN se desconecta, el sistema no podrá acceder a internet en absoluto)
+$ mullvad dns set default (utiliza los servidores DNS de Mullvad)
+$ mullvad lan set allow (permite acceder a dispositivos en la red local como impresoras o carpetas compartidas mientras la VPN está activa)
+$ mullvad relay set location es mad (cambia el servidor a uno específico: España, Madrid)
+$ mullvad relay list (listar código de los países)
+$ mullvad obfuscation set mode bridge (util en países o redes que bloquean el uso de VPNs, ocultando que estás usando una.)
+$ mullvad split-tunnel add <PID> (permite que una aplicación específica salga a internet fuera de la VPN)
+$ mullvad tunnel wireguard key regenerate (regenera las claves de cifrado para el protocolo WireGuard)
+$ mullvad api-access set on (permite que aplicaciones locales interactúen con la API de Mullvad)
+$ mullvad beta-program set on (te permite recibir actualizaciones en fase de prueba)
+$ mullvad export-settings <archivo.json> (guarda la configuración actual en un archivo)
+$ mullvad import-settings <archivo.json> (restaura configuraciones guardadas)
+$ mullvad reset-settings (restablece la configuración de la aplicación a los valores de fábrica pero mantiene la sesión)
+$ mullvad factory-reset (borra todo: cuenta, configuraciones y logs)
+$ mullvad custom-list (permite gestionar listas personalizadas de servidores o bloqueos)
+
+
+mullvad-browser
+Navegador web desarrollado en colaboración con el Proyecto Tor que utiliza la red de Mullvad para evitar el rastreo, pero no cifra el resto de las aplicaciones; solo el tráfico del navegador.
+
+
 multitail
 Abrir en una ventana varios procesos tail.
 $ multitail /var/log/messagess /var/log/apache2/access.log
@@ -41946,6 +41975,19 @@ $ pem -s Gastos (resumen de gastos)
 $ pem -s -t (muestra totales)
 $ pem -s 10 (muestra informe de los últimos 10 dias)
 $ pem -m 1 (muestra informe de último mes)
+
+
+pen
+Balanceador de carga para protocolos TCP y UDP "simples" como DNS, HTTP o SMTP. Permite que varios servidores se identifiquen como uno solo y detecta automáticamente los servidores inactivos y distribuye los clientes entre los servidores disponibles.
+Ejemplo básico de Balanceo HTTP simple [round-robin]
+Supongamos tres servidores web en: 192.168.1.10:80, 192.168.1.11:80 y 192.168.1.12:80
+$ pen 80 192.168.1.10:80 192.168.1.11:80 192.168.1.12:80 (escuchar en el puerto 80 local y distribuir las conexiones entrantes entre los tres)
+$ pen -d 80 192.168.1.10:80 192.168.1.11:80 192.168.1.12:80 (probar en modo debug)
+$ pen 80 192.168.1.10:80:100:10 192.168.1.11:80:50:5 192.168.1.12:80:50:1 (primer servidor es más potente y recibe 10 veces más conexiones que el tercero
+$ pen -f -l /var/log/pen.log 80 192.168.1.10:80 192.168.1.11:80(ejecutar en segundo plano con logging e indicando archivo de logs)
+$ pen -C 10000 80 servidor1:80 servidor2:80 (agrega un puerto de control [10000] para interactuar con pen en ejecución)
+$ pen -u 53 ns1.ejemplo.com:53 ns2.ejemplo.com:53 (modo UDP y balancea consultas DNS a múltiples nameservers)
+$ pen 25 mail1:25 mail2:25 mail3:25 (distribuye conexiones entrantes de correo [SMTP])
 
 
 pentbox
