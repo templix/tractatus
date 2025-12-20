@@ -41861,6 +41861,13 @@ Algunos atajos:
 	fr (rechazar recepción de archivo)
 
 
+peco
+Herramienta de filtrado interactivo y sencilla para filtrar información como registros, estadísticas de procesos y archivos de búsqueda, ya que, a diferencia de grep, permite escribir mientras se piensa y consultar los resultados actuales. Puede que no funcione en determinadas terminales, las verificadas son kitty y ghostty.
+$ ls -la | peco (seleccionar con las flechas)
+$ ls --color=never -la | peco (lo mismo
+$ stty raw; ls -la | peco | od -c | head -20; stty sane (captura RAW lo que peco envía)
+
+
 pecomato
 [Picture-Embedded COntents MAnipulation TOol]. Es un procesador de metadatos diseñado para mostrar cualquier tipo de información incrustada en archivos de imagen, así como para verificar, filtrar, extraer, eliminar, añadir y corregir dicha información. Es compatible con los siguientes formatos de archivo: JPEG/JFIF, Adobe PSD, FFO e IPTC sin procesar. También es compatible con los formatos de metadatos: JFIF, IPTC, Exif, Adobe y Fotostation. Uno de sus principales objetivos es comprobar la validez de los metadatos analizados y no muestra nada si no hay errores o si no se le pide algo concreto.
 $ pecomato --list (enumerar todas las estructuras de datos integradas compatibles)
