@@ -42056,12 +42056,30 @@ $ perdition -p 143 --imap_server mail.example.com (inicia perdition en el puerto
 
 
 perf-tools-unstable
-Herramientas similares a DTrace de Solaris para análisis de rendimiento y que son experimentales o utilizan técnicas de trazado que podrían no ser estables en todas las versiones del kernel. Incluye las aplicaciones bitesize-perf, cachestat-perf, execsnoop-perf, funccount-perf, funcgraph-perf, funcslower-perf, functrace-perf, iolatency-perf, iosnoop-perf, killsnoop-perf, kprobe-perf, opensnoop-perf, perf-stat-hist-perf, reset-ftrace-perf, syscount-perf, tcpretrans-perf, tpoint-perf y uprobe-perf
+Herramientas similares a DTrace de Solaris para análisis de rendimiento y que son experimentales o utilizan técnicas de trazado que podrían no ser estables en todas las versiones del kernel. Incluye las aplicaciones bitesize-perf, cachestat-perf, execsnoop-perf, funccount-perf, funcgraph-perf, funcslower-perf, functrace-perf, iolatency-perf, iosnoop-perf, killsnoop-perf, kprobe-perf, opensnoop-perf, perf-stat-hist-perf, reset-ftrace-perf, syscount-perf, tcpretrans-perf, tpoint-perf y uprobe-perf. Estas herramientas han sido reemplazadas por versiones más modernas incluidas en el paquete bpfcc-tools [ver].
 # bitesize-perf (mostrará estadísticas sobre tamaño de operaciones de lectura y escritura en disco, número de operaciones y bytes transferidos, agrupados por tamaño. Parar con Ctrl-c)
 # cachestat-perf -t 2 (muestra las estadísticas de aciertos y fallos de la caché de páginas del sistema cada 2 segundos. Por defecto 1)
 # execsnoop-perf firefox (traza las llamadas a "exec" de procesos, mostrando los argumentos con los que se ejecutan relacionadas con "firefox")
 # funccount-perf vfs_read (contar las llamadas a vfs_read [lecturas del sistema de archivos])
 # iosnoop-perf (ver las operaciones de I/O a disco en tiempo real)
+
+
+perforate
+Utilidades para ahorrar espacio en disco. Las utilidades del paquete trabajan sobre dos ideas "Perforar" archivos sustituyendo largos bloques de ceros por "agujeros" [ficheros sparse] y detectar y gestionar ficheros idénticos o con contenido prescindible. Incluye los ejecutables finddup, findstrip, nodup y zum
+$ finddup -n -d /home/USER (solo mostrarlos sin hacer nada)
+$ finddup -l -d /home/USER (reemplazar duplicados por hardlinks al primer ejemplar)
+$ findstrip /home/USER > archivo (buscar candidatos a perforar y mandar el informe a un archivo)
+$ findstrip /var | zum (perforar automáticamente los candidatos. No recomendado)
+$ nodup -l /datos (convertir duplicados en hardlinks dentro de /datos)
+1.-
+Ejemplo básico con zum:
+$ dd if=/dev/zero of=imagen.raw bs=1M count=200 (crear un fichero grande con muchos ceros)
+$ ls -ls imagen.raw (ver tamaño lógico y en bloques)
+204800 -rw-rw-r-- 1 pep pep 209715200 21 de des.  19:48 imagen.raw
+$ zum imagen.raw (perforarlo)
+$ ls -ls imagen.raw (volver a ver tamaño lógico y en bloques)
+0 -rw-rw-r-- 1 pep pep 209715200 21 de des.  19:48 imagen.raw
+El tamaño lógico seguirá siendo 200 MiB [209715200] pero los bloques asignados [primera columna] ha bajado de 204800 a 0.
 
 
 perftest
