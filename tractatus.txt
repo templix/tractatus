@@ -42009,6 +42009,48 @@ Herramienta de comparación de imágenes que utiliza un modelo computacional del
 $ perceptualdiff --verbose imagen1 imagen2 --output salida (comparar dos imagenes en modo detallado y mandar la salida a un archivo)
 
 
+percol
+Selección interactiva conectando la salida de un comando con la entrada de otro [tuberías, pipes]. Percol hace lo siguiente: Recibe líneas de entrada desde la entrada estándar o un archivo, lista las líneas de entrada, espera la entrada que filtra/selecciona la(s) línea(s) y finalmente envía la(s) línea(s) seleccionada(s) a la salida estándar. Funciona con cualquier lista de texto.
+$ ls -l | grep ".txt" (genera una lista, y grep la filtra automáticamente no de forma interactiva)
+$ history | percol (lista todos los comandos ejecutados y al escribir algunas letras va filtrando la lista instantáneamente. Enter y el comando seleccionado se imprime. Parecido a "history | grep algo")
+$ $(history | percol | sed 's/^[ ]*[0-9]*[ ]*//') (ejecutar el comando seleccionado)
+$ cd $(find . -type d | percol) (muestra todos los subdirectorios, escribes para filtrar, seleccionas uno y cambias a él)
+$ ps aux | percol | awk '{print $2}' | xargs kill (lista todos los procesos, seleccionar el que se quiere matar y se ejecuta el kill)
+$ cat /var/log/syslog | percol (navegar por el log, escribir palabra clave, y encuentrar lo que se busca)
+1.-
+Buscar en el historial de forma interactiva
+$ nano ,bashrc
+Añadir las lineas:
+# Ctrl+R para buscar en historial con percol
+bind '"\C-r": "\C-a history | percol \C-m"'
+Y al presiona Ctrl+R,  automáticamente se buscas en el historial de forma interactiva.
+
+
+percona-toolkit
+Colección de herramientas avanzadas de línea de comandos para realizar diversas tareas de MySQL/MariaDB y del sistema muy centradas en verificar la consistencia de los datos maestros y de réplica, archivar filas eficientemente, encontrar índices duplicados, resumir servidores MySQL, analizar consultas de registros y tcpdump y recopilar información vital del sistema cuando se producen problemas. Incluye las herramientas pt-align, pt-archiver, pt-config-diff, pt-deadlock-logger, pt-diskstats, pt-duplicate-key-checker, pt-fifo-split, pt-find, pt-fingerprint, pt-fk-error-logger, pt-heartbeat, pt-index-usage, pt-ioprofile, pt-kill, pt-mext, pt-mysql-summary, pt-online-schema-change, pt-pmp, pt-query-digest, pt-show-grants, pt-sift, pt-slave-delay, pt-slave-find, pt-slave-restart, pt-stalk, pt-summary, pt-table-checksum, pt-table-sync, pt-table-usage, pt-upgrade, pt-variable-advisor y pt-visual-explain.
+# pt-summary > /root/pt-summary-$(hostname)-$(date +%F).txt (ver resumen del servidor [CPU, RAM, discos, red, procesos, etc.])
+# pt-mysql-summary --user=root --password (resumen de un servidor MySQL/MariaDB, variables, buffers, InnoDB, etc.)
+# pt-stalk --user=root --password --threshold 10 --daemonize --log /var/log/pt-stalk.log (esperar a que la carga del sistema [loadavg] supere 10 y entonces recopilar datos)
+# pt-query-digest /var/log/mysql/mysql-slow.log > digest-slow.txt (analizar un slow log clásico)
+# tcpdump -s 65535 -x -nn -q -tttt -i eth0 port 3306 -w mysql.pcap (analizar tráfico capturado con tcpdump y ...)
+# pt-query-digest --type tcpdump mysql.pcap > digest-tcpdump.txt (... luego)
+# vmstat 1 10 | pt-align (alinea la salida de herramientas [vmstat, iostat, pt-diskstats, etc.] en columnas para facilitar lectura)
+# pt-diskstats --interval 1 | pt-align (lo mismo)
+# pt-config-diff /etc/mysql/my.cnf h=localhost,u=root,p=xxxx (comparar my.cnf local con la configuración actual del servidor)
+# pt-config-diff h=master,u=admin,p=xxxx h=replica1,u=admin,p=xxxx (comparar dos servidores)
+# pt-duplicate-key-checker --user=root --password > duplicate-indexes.txt (busca índices y claves duplicadas o redundantes)
+# pt-online-schema-change --alter "ADD INDEX idx_created_at (created_at)" --execute h=localhost,D=mi_bd,t=mi_tabla,u=root,p=xxxx (añadir un índice sin bloquear la tabla en producción)
+# pt-online-schema-change --dry-run --alter "ADD INDEX idx_created_at (created_at)" --execute h=localhost,D=mi_bd,t=mi_tabla,u=root,p=xxxx (Lo mismo sin ejecutarlo realmente)
+# pt-table-checksum --user=root --password --host=master1 --databases mi_bd (comprobar todas las tablas de un esquema)
+# pt-table-sync --execute --replicate=percona.checksums h=master1,u=root,p=xxxx h=replica1,u=root,p=xxxx (sincroniza tablas que se han detectado como inconsistentes)
+# pt-table-sync --print --replicate=percona.checksums h=master1,u=root,p=xxxx h=replica1,u=root,p=xxxx (muestra las sentencias que aplicaría sin hacerlo)
+# pt-archiver --source h=localhost,D=mi_bd,t=logs,u=root,p=xxxx --dest h=localhost,D=mi_bd,t=logs_archivo,u=root,p=xxxx --where "fecha < '2023-01-01'" --limit 1000 --commit-each --no-delete (archivar registros antiguos a otra tabla en la misma BD. "no-delete" evita borrar del origen; sin esa opción, los va eliminando tras copiarlos)
+# pt-archiver --source h=localhost,D=mi_bd,t=logs,u=root,p=xxxx --where "fecha < '2023-01-01'" --file /var/archive/logs.antiguos --limit 1000 --commit-each (archivar a un fichero para luego cargarlo o guardarlo)
+# pt-diskstats --interval 1 (muestra estadísticas de IO por dispositivo)
+# pt-diskstats --interval 1 | pt-align (con salida alineada)
+# pt-deadlock-logger --user=root --password --create-dest-table --dest h=localhost,D=percona,t=deadlocks (dejarlo corriendo en background y revisar la tabla para ver qué consultas y tablas se ven implicadas)
+
+
 perf-tools-unstable
 Herramientas similares a DTrace de Solaris para análisis de rendimiento y que son experimentales o utilizan técnicas de trazado que podrían no ser estables en todas las versiones del kernel. Incluye las aplicaciones bitesize-perf, cachestat-perf, execsnoop-perf, funccount-perf, funcgraph-perf, funcslower-perf, functrace-perf, iolatency-perf, iosnoop-perf, killsnoop-perf, kprobe-perf, opensnoop-perf, perf-stat-hist-perf, reset-ftrace-perf, syscount-perf, tcpretrans-perf, tpoint-perf y uprobe-perf
 # bitesize-perf (mostrará estadísticas sobre tamaño de operaciones de lectura y escritura en disco, número de operaciones y bytes transferidos, agrupados por tamaño. Parar con Ctrl-c)
