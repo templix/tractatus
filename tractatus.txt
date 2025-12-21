@@ -17655,15 +17655,11 @@ $ fierce --domain ejemplo.com --delay 1000 (con un retraso de 1 segundo [1000 ms
 
 figlet
 Baners
-$ figlet texto (forma básica)
+$ figlet -c texto (con texto centrado. -l alineado a la izquierda y -r a la derecha)
 $ showfigfonts    (visualizar las tipografias del comando)
 $ figlet -f banner texto  (especificando tipografía)
-Opciones
-	-c (centra el texto de salida)
-	-l (alinea el texto a la izquierda)
-	-r (alinea el texto a la derecha)
-	-w (establece un tamaño máximo)
-	-t (Con la anchura máxima que permite la terminal)
+$ echo "Bash" | figlet | cowsay -f tux | boxes -d santa | pv -qL 50  | lolcat -a
+$ figlet -w -t (entrar en modo interactivo. Crear palabras y al pulsar intro las plasmará)
 
 
 figlist
@@ -42049,6 +42045,14 @@ Colección de herramientas avanzadas de línea de comandos para realizar diversa
 # pt-diskstats --interval 1 (muestra estadísticas de IO por dispositivo)
 # pt-diskstats --interval 1 | pt-align (con salida alineada)
 # pt-deadlock-logger --user=root --password --create-dest-table --dest h=localhost,D=percona,t=deadlocks (dejarlo corriendo en background y revisar la tabla para ver qué consultas y tablas se ven implicadas)
+
+
+perdition
+Servidor proxy para protocolos de correo electrónico como POP3 e IMAP4. Su principal función es permitir a los usuarios conectarse a un servidor POP3 o IMAP4 sin que el contenido de sus correos electrónicos sea modificado o inspeccionado. En lugar de conectarse directamente al servidor de correo real, los usuarios se conectan a `perdition`, el cual luego redirige la conexión al servidor POP3 o IMAP4 real.
+$ perdition -p 110 (inicia perdition en el puerto 110, el puerto estándar para POP3. Los usuarios pueden conectarse a este proxy en lugar de conectarse al servidor POP3 real)
+$ perdition -p 143 (inicia perdition en el puerto 143, el puerto estándar para IMAP4)
+$ perdition -p 110 --pop3_server mail.example.com (inicia perdition en el puerto 110 y configura la redirección a mail.example.com como el servidor POP3 real)
+$ perdition -p 143 --imap_server mail.example.com (inicia perdition en el puerto 143 y configura la redirección a mail.example.com como el servidor IMAP4 real)
 
 
 perf-tools-unstable
