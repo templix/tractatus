@@ -42094,6 +42094,47 @@ Otras opciones:
 -b BEGIN (iniciar el conteo en BEGIN, predeterminado 0)
 
 
+perlbal
+Balanceador de carga proxy inverso y servidor web basado en Perl. Una de las características distintivas de Perlbal es que prácticamente todo se puede configurar o reconfigurar sobre la marcha, sin necesidad de reiniciar el software.
+Configuración básica de ejemplo
+# nano /etc/perlbal/perlbal.conf
+       CREATE POOL my_backend
+           ADD 127.0.0.1:8080
+    	   ADD 127.0.0.1:8081
+       CREATE SERVICE my_web_server
+           SET role = web_server
+    	   SET pool = my_backend
+    	   SET listen = 0.0.0.0:80
+       ENABLE my_web_server
+Se crea un pool llamado "my_backend" que contiene dos servidores en 127.0.0.1:8080 y 127.0.0.1:8081. Luego, se crea un servicio llamado "my_web_server" que actúa como un servidor web y escucha en el puerto 80, utilizando el pool my_backend.
+# perlbal --conf /etc/perlbal/perlbal.conf (iniciar Perlbal con la configuración anterior)
+# telnet localhost 60000 (conectar a la interfaz de administración que por defecto escucha en el puerto 60000)
+Algunos comando dentro de la interfaz son:
+> LIST SERVICES (listar servicios)
+> LIST POOLS (muestra todos los pools configurados)
+> SET SERVICE my_web_server SET listen = 0.0.0.0:8080 (cambia la configuración del servicio my_web_server para que escuche en el puerto 8080)
+> ADD POOL my_backend 127.0.0.1:8082 (agrega un nuevo servidor backend al pool my_backend)
+> REMOVE POOL my_backend 127.0.0.1:8080 (elimina un servidor backend del pool my_backend)
+> RELOAD SERVICE my_web_server (recarga la configuración del servicio my_web_server sin necesidad de reiniciar Perlbal)
+
+
+perlbrew
+Programa que automatiza la compilación, instalación y la administración de múltiples versiones de Perl en el HOME del usuario. Actualmente, instala todo en ~/perl5/perlbrew y requiere que se modifique el PATH en el archivo .bashrc/.cshrc para no tener que ejecutar comandos "sudo" para instalar módulos cpan, ya que estos también se instalan en $HOME. No afectar al Perl del sistema, generalmente en /usr/bin/perl.
+$ perlbrew init (iniciar el entorno)
+$ echo "source ~/perl5/perlbrew/etc/bashrc" >> ~/.bashrc (cargar el entorno)
+$ source ~/.bashrc
+$ perlbrew available (lista las versiones de Perl disponibles para instalar)
+$ perlbrew install perl-5.36.0 (instala una versión específica de Perl)
+$ perlbrew list (muestra las versiones instaladas)
+$ perlbrew use perl-5.36.0 (usa una versión solo en la sesión actual)
+$ perl -v (verificar si se ja cambiado de versión)
+$ perlbrew switch perl-5.36.0 (cambia la versión por defecto)
+$ perlbrew switch-off (desactiva el Perl por defecto establecido con switch)
+$ perlbrew off (desactiva perlbrew y vuelve al Perl del sistema)
+$ perlbrew exec perl myscript.pl (ejecuta un comando con todas las versiones instaladas)
+$ perlbrew install-cpanm (instala cpanm, útil para instalar módulos CPAN)
+
+
 pev
 Herramienta para obtener información de los ejecutables PE32/PE32+ (EXE, DLL, OCX etc) como cabeceras, secciones, recursos y más.
 $ pev -p putty..exe (ver solo la versión de putty.exe)
