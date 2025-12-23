@@ -3974,6 +3974,16 @@ boinc
 $ boincmgr (Arrancar la gui para la configuración inicial)
 
 
+bolt
+Demonio del sistema y ejecutable para administrar dispositivos Thunderbolt, nombre de marca de una interfaz de hardware para la conexión de periféricos externos a una computadora.
+# boltctl -U full (controla cómo se imprimen los UUID)
+# boltctl list -a (listados todos)
+# boltctl monitor (monitorearlos)
+# boltctl power -t 5 (durante 5 segundos)
+# boltctl config --describe global
+# boltctl info DEVICE (información de un dispositivo)
+
+
 bombadillo
 Navegador de terminal que permite explorar protocolos alternativos a la web [HTTP] tradicionales, como Gopher, Gemini y Finger, todo desde la línea de comandos. Su interfaz se basa en atajos al estilo Vim, es configurable, respeta la privacidad y también permite gestionar marcadores, historial y archivos descargados.
 $ bombadillo (se accede a su interfaz principal, donde todo se realiza con combinaciones de teclas y comandos interactivos)
@@ -26394,14 +26404,12 @@ Alguns opciones:
 
 
 iozone
-Realizar test de velocidad de sistemas de archivos (ext3, ext4...)
+Realizar test de velocidad de sistemas de archivos ext3, ext4... Incluye los ejecutables fileop y pit_server.
 $ iozone -s 2g -r 64 -i 0 -i 1 -b test.xls
 $ iozone -a -g 2G -f /media/sda2
--a (automático)
--g (Tamaño de los archivos generados)
--f (el sistema de archivos a tratar)
--i (0= escritura, 1= lectura, 2=lectura/escritura....)
--b (archivo que generará con los resultados)
+$ iozone -i 0 -i 1 -f /media/sda2 (operación de escritura y lectura [lectura/escritura sería el número 2] y el archivo de prueba)
+$ iozone -a -g 4G -f /media/sda2 -b resultados (pruebas automática, tamaño máximo del archivo de prueba, el archivo de prueba y archivo de resultados)
+$ pit_server -p 12345 (realizar pruebas de rendimiento en entronos de red. Especificando el puerto en el que el servidor escuchará las solicitudes de prueba)
 
 
 ip
@@ -29848,6 +29856,8 @@ Herramienta de análisis de rendimiento para Linux permite monitorear y analizar
 # perf top --pid 1234 (filtrando por PID)
 # perf record -F 1000 -a -g -- sleep 60 (muestrea a 1000 Hz, todo el sistema, captura la pila de llamadas en perf.data y ejecuta sleep durante 60 segundos)
 # perf report (analiza y muestra los datos grabados en perf.data)
+# perf record -g -a -- sleep 5 (ver en general qué hacen los kworkers. Luego lanzar "report")
+# perf kwork record -- sleep 5 (filtrar por tiempos de ejecución por tipo de trabajo del kernel. Luego lanzar "report")
 # perf --list-cmds (enumera los comandos de rendimiento más utilizados)
 # perf --list-opts (enumera las opciones de rendimiento disponibles)
 # perf script (leer perf.data creado por el registro perf y mostrar la salida del seguimiento)
