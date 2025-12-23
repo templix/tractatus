@@ -42203,6 +42203,10 @@ $ perlbrew exec perl myscript.pl (ejecuta un comando con todas las versiones ins
 $ perlbrew install-cpanm (instala cpanm, útil para instalar módulos CPAN)
 
 
+perlindex
+Es un programa para indexar y buscar en la documentación de Perl. Se debe crear una base de datos de índice que almacene palabras clave para todas las páginas del manual de Perl y los módulos instalados.
+$ perlindex (sin una base de datos solo mostrará la página man)
+
 pev
 Herramienta para obtener información de los ejecutables PE32/PE32+ (EXE, DLL, OCX etc) como cabeceras, secciones, recursos y más.
 $ pev -p putty..exe (ver solo la versión de putty.exe)
@@ -43312,7 +43316,12 @@ $ procinfo -H (en formato KiB, MiB, GiB en lugar de los Kbytes predeterminados)
 
 
 procps
-Explorar el "pseudo" sistema procfs, generado dinámicamente por el kernel para proporcionar información sobre el estado de las entradas en su tabla de procesos, como si el proceso se está ejecutando, detenido o "zombi". Incluye varios ejecutables; kill, sysctl, free, pgrep, pidwait, pkill, pmap, pwdx, skill, slabtop, snice, tload, top, uptime, vmstat, w y watch
+Explorar el "pseudo" sistema procfs, generado dinámicamente por el kernel para proporcionar información sobre el estado de las entradas en su tabla de procesos, como si el proceso se está ejecutando, detenido o "zombi". Incluye varios ejecutables; kill [ver], sysctl, free [ver], pgrep [ver], pidwait, pkill [ver], pmap [ver], pwdx [ver], skill [ver], slabtop, snice, tload [ver], top [ver], uptime [ver], vmstat [ver], w [ver] y watch [ver]
+$ slabtop (Mostrar información de caché del núcleo en tiempo real)
+$ sysctl -a (ver todas las variables)
+$ sysctl -b vm.vfs_cache_pressure (imprimir el valor de una variable)
+$ snice -l (listar nombre de las señales)
+$ snice -L (enumera todos los nombres de las señales en una tabla)
 
 
 procs
