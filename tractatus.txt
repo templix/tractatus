@@ -4135,6 +4135,37 @@ $ bozocrack archivo.txt
 	Nota.- dado que no usa diccionarios ni fuerza bruta sino solo busquedas de google, solamente se encontrarán las más usuales.
 
 
+bpfcc-tools
+Colección de Compiladores BPF [BPF Compiler Collection - BCC] es un conjunto de herramientas para crear programas eficientes de rastreo y manipulación del kernel. Incluye los ejecutables argdist-bpfcc, bashreadline-bpfcc, bindsnoop-bpfcc, biolatency-bpfcc, biolatpcts-bpfcc, biopattern-bpfcc, biosnoop-bpfcc, biotop-bpfcc, bitesize-bpfcc, bpflist-bpfcc, btrfsdist-bpfcc, btrfsslower-bpfcc, cachestat-bpfcc, cachetop-bpfcc, capable-bpfcc, cobjnew-bpfcc, compactsnoop-bpfcc, cpudist-bpfcc, cpuunclaimed-bpfcc, criticalstat-bpfcc, dbslower-bpfcc, dbstat-bpfcc, dcsnoop-bpfcc, dcstat-bpfcc, deadlock-bpfcc, dirtop-bpfcc, drsnoop-bpfcc, execsnoop-bpfcc, exitsnoop-bpfcc, ext4dist-bpfcc, ext4slower-bpfcc, f2fsslower-bpfcc, filegone-bpfcc, filelife-bpfcc, fileslower-bpfcc, filetop-bpfcc, funccount-bpfcc, funcinterval-bpfcc, funclatency-bpfcc, funcslower-bpfcc, gethostlatency-bpfcc, hardirqs-bpfcc, inject-bpfcc, javacalls-bpfcc, javaflow-bpfcc, javagc-bpfcc, javaobjnew-bpfcc, javastat-bpfcc, javathreads-bpfcc, killsnoop-bpfcc, klockstat-bpfcc, kvmexit-bpfcc, llcstat-bpfcc, mdflush-bpfcc, memleak-bpfcc, mountsnoop-bpfcc, mysqld_qslower-bpfcc, netqtop-bpfcc, nfsdist-bpfcc, nfsslower-bpfcc, nodegc-bpfcc, nodestat-bpfcc, offcputime-bpfcc, offwaketime-bpfcc, oomkill-bpfcc, opensnoop-bpfcc, perlcalls-bpfcc, perlflow-bpfcc, perlstat-bpfcc, phpcalls-bpfcc, phpflow-bpfcc, phpstat-bpfcc, pidpersec-bpfcc, ppchcalls-bpfcc, profile-bpfcc, pythoncalls-bpfcc, pythonflow-bpfcc, pythongc-bpfcc, pythonstat-bpfcc, rdmaucma-bpfcc, readahead-bpfcc, reset-trace-bpfcc, rubycalls-bpfcc, rubyflow-bpfcc, rubygc-bpfcc, rubyobjnew-bpfcc, rubystat-bpfcc, runqlat-bpfcc, runqlen-bpfcc, runqslower-bpfcc, shmsnoop-bpfcc, slabratetop-bpfcc, sofdsnoop-bpfcc, softirqs-bpfcc, solisten-bpfcc, sslsniff-bpfcc, stackcount-bpfcc, statsnoop-bpfcc, syncsnoop-bpfcc, syscount-bpfcc, tclcalls-bpfcc, tclflow-bpfcc, tclobjnew-bpfcc, tclstat-bpfcc, tcpaccept-bpfcc, tcpcong-bpfcc, tcpconnect-bpfcc, tcpconnlat-bpfcc, tcpdrop-bpfcc, tcplife-bpfcc, tcpretrans-bpfcc, tcprtt-bpfcc, tcpstates-bpfcc, tcpsubnet-bpfcc, tcpsynbl-bpfcc, tcptop-bpfcc, tcptracer-bpfcc, threadsnoop-bpfcc, tplist-bpfcc, trace-bpfcc, ttysnoop-bpfcc, ucalls, uflow, ugc, uobjnew, ustat, uthreads, vfscount-bpfcc, vfsstat-bpfcc, virtiostat-bpfcc, wakeuptime-bpfcc, wqlat-bpfcc, xfsdist-bpfcc, xfsslower-bpfcc, zfsdist-bpfcc y zfsslower-bpfcc.
+# biolatency-bpfcc (al pulsar Ctrl-c despues de un tiempo, muestra un histograma de cuánto tardan las operaciones de lectura/escritura)
+# execsnoop-bpfcc (monitoriza cada vez que se lanza un nuevo proceso en el sistema)
+# execsnoop-bpfcc -u 1000 (lo mismo solo de UID 1000)
+# runqlat-bpfcc (dice si necesitas más núcleos de CPU o si el planificador está saturado)
+# tcptop-bpfcc (muestra qué procesos están enviando y recibiendo más datos, como un comando top, pero para el tráfico de red)
+# tcpconnect-bpfcc (reegistra cada conexión TCP saliente que ocurre en el sistema)
+# tcpretrans-bpfcc (muestra las retransmisiones TCP)
+# bashreadline-bpfcc (registra cada comando que se escribe en cualquier terminal Bash del sistema en tiempo real)
+# opensnoop-bpfcc (muestra qué archivos está intentando abrir cada proceso)
+# execsnoop-bpfcc (ver qué programas se abren en tiempo real)
+# biolatency-bpfcc (ver si el disco es el cuello de botella)
+# tcptop-bpfcc (ver quién consume tu ancho de banda)
+# opensnoop-bpfcc (ver qué archivos lee/escribe cada app)
+# bitesize-bpfcc (muestra un histograma del tamaño de las peticiones de entrada/salida a disco
+# bitesize-bpfcc -p $(pgrep firefox) (filtrar por un solo programa)
+# vfscount-bpfcc (dará el nombre de las funciones del kernel que se están llamando como vfs_read o vfs_write)
+# runqslower-bpfcc 5000 (
+# oomkill-bpfcc (corriendo en una terminal si el sistema se queda sin recursos, avisará inmediatamente qué proceso ha cerrado el kernel)
+Nota.- Casi todas las herramientas de bpfcc-tools aceptan el flag -h que no solo muestra los parámetros, sino que suele incluir ejemplos de uso real al final de la ayuda.
+Las columnas de las muestras indican:
+      Columna usecs --> Es el rango de tamaño. Se usa una escala logarítmica [potencias de 2: 1, 2, 4, 8, 16...].
+      Columna count --> Cuántas veces ha ocurrido una operación en ese rango.
+      Columna distribution --> Una barra visual para ver dónde está el "peso" de la actividad.
+Interpretar los datos de un proceso;
+	    4 -> 7       :   6     |****************************************|
+	    4096 -> 8191 : 896     |                                        |
+El primer dato indica que un proceso ha realizado 6 operaciones de entre 4 y 7 KB. Si existen miles de eventos en la franja de 0 -> 1 o 2 -> 3, indica un software muy ineficiente que está "picoteando" el disco constantemente en lugar de leer bloques grandes. El segundo que hay 896 procesos que han tenido que esperar entre 4 y 8 milisegundos (4096 usecs) para poder ejecutarse. Este pico de carga es normal al abrir un navegador pero si el pc está en reposo significa saturación de CPU.
+
+
 bpfmon
 [Berkeley Packet Filter MONitor]. Monitorea la cantidad de bytes y paquetes que pasan por una interfaz de red específica.
 # bpfmon enp1s0 "arp or ip" (cuenta los paquetes arp o ip en enp1s0)
@@ -28585,6 +28616,33 @@ kwin
 $ kwin --replace (Activar kwin)
 
 
+kworker
+Es un hilo del núcleo que ejecuta trabajo aplazado en "workqueues", una cola en la que el núcleo o los drivers meten tareas a ejecutar más tarde, normalmente como continuación de interrupciones de hardware, temporizadores del kernel o eventos de E/S, pero ya en contexto de proceso "normal" para no bloquear la CPU.  Es decir, casi nunca es "el culpable" por sí mismo, sino el mensajero que hace tareas que otro subsistema ha pedido.
+$ ps -ef | grep kworker
+     root      156852       2  0 20:27 ?        00:00:00 [kworker/u25:2-rtw_tx_wq]
+     root          65       2  0 15:51 ?        00:00:00 [kworker/R-writeback]
+     root         642       2  0 15:51 ?        00:00:00 [kworker/R-cryptd]
+     root         238       2  0 15:51 ?        00:00:00 [kworker/R-nvme-wq]
+     root      140703       2  0 19:59 ?        00:00:02 [kworker/u25:1-i915_flip]
+     root         478       2  0 15:51 ?        00:00:00 [kworker/R-tls-strp]
+     ...
+- Cada "kworker/...-XXX" suele indicar la workqueue o subsistema que está atendiendo; si uno de ellos "se dispara" en CPU, la causa suele estar en el subsistema que aparece en el sufijo.
+- Estos sufijos [-writeback, -nvme-wq, -i915_flip, -rtw_tx_wq, etc] indican tareas normales de E/S, red, gráficos, RCU, etc., que cualquier sistema activo tiene.
+- TIME cercano a 00:00:00 o a unos pocos segundos no indican ningún problema.
+- Si uno o varios kworker/... se disparan al 80/100% de un core de forma permanente es preocupante,
+Si se ve un kworker tragando CPU o provocando latencias [no es el caso], para localizarlo, anotar el PID [segunda columna] y lanzar:
+# cat /proc/478/stack
+[<0>] rescuer_thread+0x389/0x470
+[<0>] kthread+0xcf/0x100
+[<0>] ret_from_fork+0x31/0x50
+[<0>] ret_from_fork_asm+0x1a/0x30
+La traza dirá en qué función del kernel está gastando tiempo, por ejemplo algo de un driver, de net, de blk, etc.
+# perf record -g -a -- sleep 5 (ver en general qué hacen los kworkers)
+# perf report (luego ver el report)
+# perf kwork record -- sleep 5 (filtrar por tiempos de ejecución por tipo de trabajo del kernel)
+# perf kwork report (ver report)
+
+
 l2tpns
 [Layer 2 Tunneling Protocol Network Server]. Servidor de red de protocolo de tunelización de capa 2 [LNS] diseñado para manejar grandes volúmenes de conexiones VPN [admite hasta 65535 sesiones], además de funciones como limitación de velocidad, contabilidad de uso y agrupación en clústeres tanto para compartir carga como para redundancia.
 Ejemplo de archivo de configuración.
@@ -42354,13 +42412,14 @@ pidstat
 [sysstat]. Muestra información relacionada con los procesos del sistema.
 $ pidstat  (informa del uso de la CPU)
 $ pidstat -u  (lo mismo)
+$ pidstat -u 5 (muestra uso de CPU por proceso cada 5 segundos)
 $ pidstat -d  (Muestra la tasa de lectura/escritura a los medios fisicos)
 $ pidstat -p 1234  (Especifica que solo deseas analizar el proceso 1234)
 $ pidstat -C comando  (Similar a -p pero indicando el nombre del proceso)
 $ pidstat -r  (Muestra el uso de memoria de los procesos y errores de 	paginación en la memoria de los procesos -page faults-).
 $ pidstat -I  (En sistemas multicore, indica la CPU en la que se ejecuta el 	comando)
-$ pidstat -d 5 2 (“5” es el intervalo de tiempo y “2” el número de veces que ejecutara el comando. Cuando haya llegado al número de 	ejecuciones, pidstat se parará y mostrará una media con los valores obtenidos)
-$ pidstat -d 5  (omitiendo el numero de veces a ejecutar para producir un bucle infinito. Parar con ^C)
+$ pidstat -d 5 2 ("5" es el intervalo de tiempo y "2" el número de veces que ejecutara el comando. Cuando haya llegado al número de ejecuciones, se parará y mostrará una media con los valores obtenidos)
+$ pidstat -d 5 (omitiendo el numero de veces a ejecutar para producir un bucle infinito. Parar con ^C)
 
 
 pig
@@ -51960,6 +52019,7 @@ $ watch -n 5 date (mostrará la fecha cada cinco segundos)
 $ watch -tn1 'date +%r | figlet' (muestra la hora en un digital en consola)
 $ watch -tn1 'date "+%r %F %A"'  (Muestra la fecha completa)
 $ watch -n3 free -m (monitor de ram)
+$ watch -n1 'free -m && echo "---" && ps -eo pid,ppid,comm,%cpu --no-headers | grep kworker | sort -nrk4 | head -5' (monitorea la carga del sistema)
 
 
 watchcatd
