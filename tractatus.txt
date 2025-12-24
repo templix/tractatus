@@ -42324,6 +42324,53 @@ Control systemd para clusters PF_RING.
 # systemctl enable cluster@10 (habilitar inicio automático)
 
 
+pfsglview
+Visor interactivo de imágenes HDR [High-Dynamic Range] del ecosistema pfstools [ver] que abre un flujo PFS por stdin y lo muestra con OpenGL, permitiendo ajustar exposición, gamma, etc., en tiempo real. Se usa típicamente "en medio" de un pipeline de comandos pfs: lees un HDR con pfsin, lo procesas con filtros tipo pfsextractchannels, pfsgamma, pfssize, y envías el resultado a pfsglview para visualizarlo.
+$ pfsin imagen.hdr | pfsglview (lee el archivo HDR y lo convierte al flujo PFS por stdout y pfsglview recibe ese flujo por stdin y abre una ventana con la imagen HDR)
+$ pfsin *.hdr | pfsglview (lo mismo para todos los .hdr del directorio)
+$ pfsin imagen.exr | pfsextractchannels -y | pfsglview (pfsextractchannels -y extrae solo el canal de luminancia del flujo HDR)
+$ pfsin imagen.hdr | pfssize --resize 50% | pfsglview (pfssize --resize 50% redimensiona a la mitad en cada dimensión para ganar velocidad y comodidad de visualización)
+$ pfsin imagen.hdr | pfsexposure -e +2 | pfsglview (pfsexposure -e +2 suma 2 EV a la imagen HDR [multiplica la luminancia por 4])
+$ pfsin foto_bracketing_%02d.hdr | pfsalign | pfspanoramic --mirror | pfsexposure -e -1.5 | pfsglview (alineas, mezclas y bajas exposición para ver si el HDR resultante mantiene detalle en altas luces antes de hacer el tone mapping final)
+
+
+pfstmo
+Este paquete contiene un conjunto de operadores de mapeo de tonos de última generación. El mapeo de tonos es una técnica utilizada para mapear de forma aproximada la apariencia de imágenes estáticas de alto rango dinámico [high-dynamic range - HDR] a medios con un rango dinámico más limitado. Incluye los ejecutables pfstmo_drago03, pfstmo_durand02, pfstmo_fattal02, pfstmo_ferradans11, pfstmo_mai11, pfstmo_mantiuk06, pfstmo_mantiuk08, pfstmo_pattanaik00, pfstmo_reinhard02 y pfstmo_reinhard05
+$ pfsin memorial.hdr | pfstmo_drago03 | pfsout memorial_drago.jpg (mapeo básico)
+$ pfsin memorial.hdr | pfstmo_drago03 -b 0.95 | pfsout memorial_drago_high.jpg (con ajuste de bias para más contraste local)
+$ pfsin indoor.hdr | pfstmo_durand02 | pfsout indoor_durand.jpg (mapeo con parámetros por defecto)
+$ pfsin indoor.hdr | pfstmo_durand02 -s 4 -r 0.3 -c 7 | pfsout indoor_detail.jpg (más preservación de detalles locales. -s Sigma espacial, por defecto 8.0, -r Sigma de rango, por defecto 0.4 y -c Factor de contraste, por defecto 5.0)
+$ pfsin landscape.hdr | pfstmo_fattal02 | pfsout landscape_fattal.jpg (mapeo estándar)
+$ pfsin landscape.hdr | pfstmo_fattal02 -a 1.5 -b 0.95 | pfsout landscape_contrast.jpg (más contraste local. -a Alpha de 0.1-2.0, por defecto 1.0, -b Beta de 0.8-0.99, por defecto 0.9 y -s Saturación de color, por defecto 0.8)
+$ pfsin cityscape.hdr | pfstmo_ferradans11 | pfsout cityscape_ferradans.jpg (uso básico)
+$ pfsin cityscape.hdr | pfstmo_ferradans11 -r 0.03 -m 4.0 | pfsout cityscape_enhanced.jpg (ajuste fino. -r Radio de influencia, por defecto 0.02 y -m Multiplicador, por defecto 3.0)
+$ pfsin photo.hdr | pfstmo_mai11 | pfsout photo_mai.jpg (procesamiento rápido)
+$ pfsin sunset.hdr | pfstmo_mantiuk06 -c 0.7 | pfsout sunset_mantiuk06.jpg (-c Factor de contraste, por defecto 0.5 y -s Factor de saturación, por defecto 1.0)
+$ pfsin sunset.hdr | pfstmo_mantiuk06 -s 1.3 | pfsout sunset_saturated.jpg (colores más saturados)
+$ pfsin church.hdr | pfstmo_mantiuk08 -c 0.6 | pfsout church_mantiuk08.jpg (-c Factor de contraste, por defecto 0.5 y -s Saturación de color, por defecto 1.0)
+$ $ pfsin nightscene.hdr | pfstmo_pattanaik00 -m 1.5 | pfsout nightscene_pattanaik.jpg (-m  Multiplicador, por defecto 1.0 y -l Adaptación local, por defecto 0)
+$ pfsin bright.hdr | pfstmo_reinhard02 -k 0.4 | pfsout bright_reinhard.jpg (-k Key value de 0.09-0.6, por defecto 0.18 y -p Phi, umbral para blanco, por defecto 1.0)
+$ pfsin dark.hdr | pfstmo_reinhard02 -k 0.12 | pfsout dark_reinhard.jpg (escena oscura, key bajo)
+$ pfsin portrait.hdr | pfstmo_reinhard05 -b 0.2 -c 0.3 | pfsout portrait_reinhard05.jpg (-b Brightness, por defecto 0.0, -c Contraste cromático, por defecto 0.0 y -l Adaptación de luz, por defecto 1.0)
+1.-
+Crear HDR desde múltiples exposiciones
+$ pfsindcraw -g 1.0 IMG_*.CR2 | pfshdrcalibrate -s response.m | pfshdrcreate -o output.hdr
+Probar diferentes operadores
+$ pfsin output.hdr | pfstmo_drago03 | pfsout output_drago.jpg
+$ pfsin output.hdr | pfstmo_fattal02 | pfsout output_fattal.jpg
+$ pfsin output.hdr | pfstmo_reinhard02 -k 0.25 | pfsout output_reinhard.jpg
+Comparar resultados y elegir el mejor
+
+
+pfstools
+Conjunto de programas para leer, escribir, manipular y visualizar imágenes y fotogramas de vídeo de alto rango dinámico [high-dynamic range - HDR]. Incluye los ejecutables dcraw2hdrgen, jpeg2hdrgen, pfs_automerge, pfs_split_exposures.py, pfsabsolute, pfscat, pfsclamp, pfscolortransform, pfscut, pfsdisplayfunction, pfsextractchannels, pfsflip, pfsgamma, pfshdrcalibrate, pfsin, pfsindcraw, pfsinexr, pfsinhdrgen, pfsinimgmagick, pfsinme, pfsinpfm, pfsinppm, pfsinrgbe, pfsintiff, pfsinyuv, pfsoctavelum, pfsoctavergb, pfsout, pfsoutexr, pfsouthdrhtml, pfsoutimgmagick, pfsoutpfm, pfsoutppm, pfsoutrgbe, pfsouttiff, pfsoutyuv, pfspad, pfspanoramic, pfsplotresponse, pfsretime, pfsrotate, pfssize, pfsstat y pfstag.
+$ pfsin escena.jpg | pfsgamma -g 2.2 | pfsout escena_gamma.png (lee una imagen, le aplica una corrección gamma y la guarda en otro formato)
+$ pfsin imagen.jpg | pfsout resultado.exr (guarda en EXR)
+$ pfsin imagen.jpg | pfssize -r 0.75 | pfsout resultado.hdr (reducir la imagen al 75%)
+$ pfsin imagen.png | pfsclamp | pfsout salida.hdr (Eliminar posibles valores fuera de rango, por ejemplo, ceros de la imagen)
+$ pfsin memorial.hdr | pfstmo_mantiuk08 -d pd=crt | pfsout salida.png (Imagen del mapa de tonos para una pantalla CRT y almacenamiento del resultado en formato PNG)
+
+
 pg
 Muestra un texto tabulado a pantalla completa de la terminal. Con la tecla intro carga nuevo párrafo.
 $ pg archivo
