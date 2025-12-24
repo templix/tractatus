@@ -42262,6 +42262,13 @@ $ t1c2pfb Times-Roman.t1c Times-Roman-recuperado.pfb (convierte un archivo .t1c 
 Nota.- Casi todas las fuentes modernas son OpenType [.otf, .ttf] o WOFF y las Type 1 están obsoletas [Adobe dejó de dar soporte en 2023].
 
 
+pff-tools
+Utilidades para extraer datos de archivos PAB, PST y OST de Microsoft Outlook sin depender del software de Microsoft. Libpff es una biblioteca para acceder a los formatos de PFF [Personal Folder File] y Archivo OFF [Offline Folder File]. Estos formatos son utilizados por MS Outlook en archivos PAB [Personal Address Book], PST [Personal Storage Table] y OST (Offline Storage Table) y suelen ser "cajas negras" difíciles de leer fuera del ecosistema Windows. Incluye los ejecutables pffexport y pffinfo
+$ pffinfo correo_antiguo.pst (obtener metadatos e información técnica)
+$ pffexport -m all correo_antiguo.pst (extraer y convertir el contenido a formatos estándar que se pueden abrir en Linux o macOS. Por defecto, crea una carpeta llamada correo_antiguo.export)
+$ pffexport -t ~/extraccion_outlook archivo.ost (guardar los resultados en una carpeta específica)
+
+
 pg
 Muestra un texto tabulado a pantalla completa de la terminal. Con la tecla intro carga nuevo párrafo.
 $ pg archivo
