@@ -42376,6 +42376,13 @@ Muestra un texto tabulado a pantalla completa de la terminal. Con la tecla intro
 $ pg archivo
 
 
+pgcluu
+Herramienta de monitorización y auditoría del rendimiento del clúster del sistma PostgreSQL. Incluye la herramienta pgcluu_collectd.
+# systemctl status pgcluu_collectd.service (comprobar que está activo)
+$ pgcluu -o /tmp/report_db1/ /tmp/stat_db1/ (generar todos los informes HTML a partir de archivos de datos almacenados)
+$ pgcluu -o /tmp/report_db1/ /tmp/stat_db1/ --db-only "db1,db2,db3" (informes de algunas bases de datos)
+
+
 pgrep
 Examina los procesos en ejecución y enumera los identificadores de cada proceso.
 $ pgrep emacs
