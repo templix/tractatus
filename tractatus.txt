@@ -42255,6 +42255,13 @@ algunas teclas de control:
 	tab (Moverse entre los paneles)
 
 
+pfb2t1c2pfb
+Convierte la fuente Type 1 PostScript, usado comúnmente en Windows y aplicaciones legacy, pfb [Printer Font Binary] a un formato más comprimible y viceversa. El paquete incluye las herramientas pfb2t1c y t1c2pfb.
+$ pfb2t1c Times-Roman.pfb Times-Roman.t1c (convierte un archivo .pfb a .t1c, versión comprimida propietaria)
+$ t1c2pfb Times-Roman.t1c Times-Roman-recuperado.pfb (convierte un archivo .t1c de vuelta a .pfb)
+Nota.- Casi todas las fuentes modernas son OpenType [.otf, .ttf] o WOFF y las Type 1 están obsoletas [Adobe dejó de dar soporte en 2023].
+
+
 pg
 Muestra un texto tabulado a pantalla completa de la terminal. Con la tecla intro carga nuevo párrafo.
 $ pg archivo
