@@ -42376,6 +42376,33 @@ Muestra un texto tabulado a pantalla completa de la terminal. Con la tecla intro
 $ pg archivo
 
 
+pg-activity
+Herramienta de monitorización de servidores de bases de datos PostgreSQL en tiempo real. Muestra información sobre consultas en ejecución, en espera y bloqueadas, uso de CPU, memoria y E/S de cada consulta y tiempo de ejecución de las consultas.
+$ pg_activity (conexión local con usuario postgres por defecto)
+$ pg_activity -U postgres -h localhost -p 5432 -d postgres (especificando conexión)
+$ pg_activity -U postgres (conexión local con socket)
+$ pg_activity -h 10.20.30.40 -U monitoreo -d postgres (servidor remoto)
+$ pg_activity -h dbprod.company.com -p 5435 -U check_pg (puerto no estándar, sin contraseña [usando .pgpass])
+$ pg_activity --no-color --min-duration 5 (mostrar consultas que lleven más de 5 segundos y sin colores)
+$ pg_activity --min-duration 10 (solo muestra consultas mayores de 10 segundos)
+$ pg_activity --refresh 5 (ejecutar con refresh más lento)
+Atajos más útiles dentro de pg_activity interactivo
+Flecha arriva/abajo --> Moverse por la lista de procesos
+Spacio --> Marcar/desmarcar procesos para actuar sobre varios
+K --> Matar [pg_terminate_backend] el proceso seleccionado o los marcados
+C --> Cancelar [pg_cancel_backend] la consulta seleccionada o las marcadas
+r --> Ordenar por lectura disco [Read/s] descendente
+w --> Ordenar por escritura disco [Write/s]
+c --> Ordenar por %CPU
+m --> Ordenar por %MEM
+t --> Ordenar por tiempo de ejecución
+T --> Cambiar modo de duración: query/transaction/backend
++/- --> Aumentar/disminuir frecuencia de refresco [0.5–5 s]
+D --> Forzar refresco del tamaño de bases de datos
+v --> Cambiar modo de visualización de query (completa, truncada, indentada)
+q --> Salir
+
+
 pgcluu
 Herramienta de monitorización y auditoría del rendimiento del clúster del sistma PostgreSQL. Incluye la herramienta pgcluu_collectd.
 # systemctl status pgcluu_collectd.service (comprobar que está activo)
