@@ -42269,6 +42269,61 @@ $ pffexport -m all correo_antiguo.pst (extraer y convertir el contenido a format
 $ pffexport -t ~/extraccion_outlook archivo.ost (guardar los resultados en una carpeta específica)
 
 
+pflogsumm
+Herramienta diseñada para analizar y resumir los logs del servidor de correo Postfix. Proporciona una visión general de la actividad del servidor de correo, incluyendo estadísticas como mensajes recibidos, enviados, rechazados, rebotados, diferidos, tamaños de mensajes, principales remitentes/destinatarios, hosts, etc.
+$ pflogsumm /var/log/mail.log (procesa todo el log y muestra un resumen completo en la terminal)
+$ pflogsumm -d yesterday /var/log/mail.log (reporte solo del día de ayer)
+$ pflogsumm -d yesterday --problems-first /var/log/mail.log | mail -s "Reporte Postfix diario $(date +%Y-%m-%d)" admin@tudominio.com (reporte diario enviado por email)
+$ zcat /var/log/mail.log.*.gz | pflogsumm -d yesterday (procesar logs comprimidos/rotados)
+1.-
+Entrada en crontab para reporte automático diario
+$ crontab -e
+Añadir la linea:
+          0 1 * * * root /usr/sbin/pflogsumm -d yesterday /var/log/mail.log --problems-first | mail -s "Reporte Postfix diario - $(hostname)" admin@tudominio.com
+Se ejecuta a la 1:00 AM todos los días.
+
+
+pfring
+Es un framework de captura de paquetes que acelera la captura y transmisión de paquetes en cualquier adaptador. Además de la aceleración pura de la captura de paquetes, ofrece funciones adicionales como análisis de paquetes, filtrado, balanceo de carga y muchas otras para facilitar el procesamiento de paquetes. Incluye los ejecutables clusterctl, ftflow, n2if, pf_ringcfg, pf_ringctl, pfbridge, pfcount, pfcount_multichannel, pfsend, pfsend_multichannel, pfwrite, zbalance_ipc, zcount, zcount_ipc, zsend
+# pfcount -i eth0 (captura básica desde interfaz estándar)
+# pfcount -i eth0 -v 1 (captura con análisis detallado de paquetes [L2/L3/L4])
+# pfcount -i zc:eth1 (captura usando driver ZC [Zero Copy] para máximo rendimiento)
+# pfcount -i eth0 -o captura.pcap (guardar captura en archivo PCAP)
+# pfcount -i eth0 -n 100000 (limitar número de paquetes a capturar)
+# pfcount_multichannel -i zc:eth1 -g 1,2,3,4 (utiliza RSS [Receive Side Scaling] para capturar desde múltiples colas de hardware simultáneamente)
+# pfsend_multichannel -i zc:eth1 -g 1,2,3,4 -f captura.pcap (enviar tráfico usando 4 colas RSS)
+# pfsend -i eth1 (generar tráfico sintético a máxima velocidad)
+# pfsend -i zc:eth1 -f captura.pcap -n 0 -r 5 (reproducir archivo PCAP en loop a 5 Gbps)
+# pfsend -i eth1 -S 192.168.1.10 -D 10.0.0.1 -p 1000000 (generar tráfico con IPs específicas a 1 Mpps)
+# pfsend -i eth1 -V 6 (generar tráfico IPv6)
+# zcount -i zc:eth1 -c 10 (captura con cluster ID 10 necesario para ZC)
+# zcount -i "zc:eth1,zc:eth2" -c 10 (captura desde múltiples interfaces)
+# zsend -i eth1 -c 10 (generar tráfico sintético con cluster ID 10)
+# zsend -i zc:eth1 -c 10 -f captura.pcap -r 10 (reproducir PCAP con velocidad controlada)
+# zbalance_ipc -i zc:eth1,zc:eth2 -n 2 -m 1 -c 10 (balancear tráfico de 2 interfaces a 2 procesos usando hash IP)
+# zbalance_ipc -i zc:eth1 -n 2,1 -m 1 -c 10 (distribuir y duplicar tráfico [2 procesos + 1 copia completa])
+# zbounce -i zc:eth1 -o zc:eth2 -c 10 -b -g 1:2 (reenvío bidireccional entre eth1 y eth2)
+# zbounce -i zc:eth1 -o zc:eth2 -c 10 -g 1 (monitoreo pasivo sin reenvío)
+# n2if -i /storage/capture.ix -o n2if0 (reproducir desde índice n2disk a interfaz virtual)
+# ftflow -i zc:eth1 -7 -c 10 (captura con detección L7)
+# ftflow -i eth0 -F reglas.conf -p protocolos.conf (aplicar reglas de filtrado)
+# pf_ringctl -i eth0 promisc 1 (activar modo promiscuo en interfaz)
+# pf_ringcfg -g 65536(configurar tamaño de anillo)
+Consumidores conectados al cluster:
+$ pfcount -i zc:10@0 (proceso 0)
+$ pfcount -i zc:10@1 (Proceso 1)
+1.-
+Control systemd para clusters PF_RING.
+# Crear configuración para cluster ID 10
+# nano /etc/cluster/cluster-10.conf
+    -i=zc:eth1
+    -n=2,1
+    -m=1
+    -c=10
+    -g=1
+# systemctl enable cluster@10 (habilitar inicio automático)
+
+
 pg
 Muestra un texto tabulado a pantalla completa de la terminal. Con la tecla intro carga nuevo párrafo.
 $ pg archivo
