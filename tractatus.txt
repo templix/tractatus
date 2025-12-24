@@ -41326,6 +41326,7 @@ $ parallel ip ::: "addr" "route show" "n" (mostrará la resolución de los 3 arg
 $ parallel echo ::: "Linux es" "Debian es" "Vivir es" ::: "genial" "fantástico" "brutal"
 $ parallel ::: who 'ip a' pwd (mostrará la resolución de los 3 comandos)
 $ parallel ::: echo 'uname -a' echo 'ip a' echo 'lspci' (dejando un espacio entre comandos)
+$ ls *.txt | parallel gzip {} (comprimirá todos los .txt del directorio usando múltiples procesos en paralelo, por defecto número de CPUs)
 
 
 paris-ping
@@ -42207,11 +42208,39 @@ perlindex
 Es un programa para indexar y buscar en la documentación de Perl. Se debe crear una base de datos de índice que almacene palabras clave para todas las páginas del manual de Perl y los módulos instalados.
 $ perlindex (sin una base de datos solo mostrará la página man)
 
+
+pesign
+Utiidades relacionadas con la firma y verificación de archivos binarios en el formato PE-COFF [Portable Executable - Common Object File Format], específicamente para sistemas UEFI [Unified Extensible Firmware Interface]. Incluye los ejecutables authvar, efikeygen, pesigcheck y pesign-client.
+$ authvar -n "Firma" -v "SHA256" -k "~/private/key.pem" file.efi (define variable de autenticación "Firma" que utiliza hash SHA256 y clave privada almacenada en ~/private/key.pem para firmar file.efi)
+$ efikeygen -o "~/public/key.pem" -p "~/private/key.pem" (genera una clave pública en ~/public/key.pem y una clave privada en ~/private/key.pem)
+$ pesigcheck file.efi (verifica la firma del archivo file.efi y muestra el resultado)
+$ pesign-client --sign file.efi --key ~/private/key.pem (abre una interfaz gráfica y solicita la clave privada para firmar el archivo file.efi)
+$ pesign-client --verify file.efi --key ~/public/key.pem (verifica la firma del archivo file.efi utilizando la clave pública almacenada en ~/public/key.pem)
+
+
 pev
 Herramienta para obtener información de los ejecutables PE32/PE32+ (EXE, DLL, OCX etc) como cabeceras, secciones, recursos y más.
 $ pev -p putty..exe (ver solo la versión de putty.exe)
 $ pev -dc cards.dll (mostrar los encabezados de archivo DOS y COFF de cards.dll)
 $ pev svchost.exe (mostrar toda la información de svchost.exe)
+
+
+pex
+[Python EXecutable]. Herramienta y biblioteca que permite crear archivos ejecutables portables que contienen un entorno completo de Python, incluyendo dependencias, scripts y tu código. Es similar a crear un entorno virtual, pero en un solo archivo que puede distribuirse y ejecutarse en cualquier sistema compatible con Python, sin necesidad de instalar dependencias adicionales. pex empaqueta tu código y sus dependencias en un solo archivo .pex. Cuando ejecutas ese archivo, inicia un entorno aislado y ejecuta tu aplicación.
+$ pex requests -c requests -o mi_app.pex (crear un ejecutable que use la librería requests, el punto de entrada y archivo de salida)
+$ ./mi_app.pex (luego se puede ejecutar)
+$ pex . -m mi_script -o mi_app.pex (. indica empaquetar tu directorio actual con tu script, -m mi_script es el módulo principal a ejecutar y archivo generado. luego se puede ejecutar)
+$ pex flask requests -o app.pex -m app:main (crear una versión de la aplicación que incluya flask y requests. app:main sería el punto de entrada si el código tienes un módulo app con una función main())
+
+
+pexec
+Herramienta que permite ejecutar multiples comandos en paralelo aprovechando mejor los recursos del sistema, especialmente en máquinas con múltiples núcleos de CPU. Es similar a herramientas como xargs -P o GNU parallel, pero con su propia sintaxis.
+$ ls *.txt | pexec -r gzip {} (comprimirá todos los archivos .txt del directorio usando múltiples procesos en paralelo, por defecto número de CPUs)
+$ ls *.jpg | pexec -r convert {} {}.png (convierte todas las imágenes JPG a PNG en paralelo)
+$ pexec -e < tareas.txt (ejecutará cada línea como un comando independiente en paralelo)
+$ seq 1 10 | pexec -n 3 -r sleep {} (ejecuta 10 comandos sleep, pero solo 3 a la vez)
+$ cat urls.txt | pexec -r wget {} (descarga múltiples archivos en paralelo desde una lista de URLs)
+$ find /var/log -name "*.log" | pexec -r "grep ERROR {} > {}.errors" (busca errores en múltiples archivos de log simultáneamente y los manda a un archivo)
 
 
 peyote
