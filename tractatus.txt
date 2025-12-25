@@ -42434,6 +42434,42 @@ $ pgbadger -o cluster.html $(ssh pg-node1 'ls /var/log/postgresql/postgresql-15-
 $ pgbadger -q -I -O "/var/lib/postgresql/incremental_report" -R 12 /var/log/postgresql/postgresql-15-main.log /var/log/postgresql/postgresql-15-main.log.1 (modo incremental sin reprocesar todo cada vez. -I activa modo incremental, -O indica el directorio donde se guardan los informes y -R 12 indica retención de informes, por ejemplo 12 semanas para que pgBadger gestione rotación de sus propios HTML)
 
 
+pgbouncer
+Agrupador de conexiones [Connection Pooling] ligero para PostgreSQL. pgbouncer es un "middleware" o proxy que se sitúa entre la aplicación y la base de datos PostgreSQL. En lugar de que cada usuario abra y cierre una conexión directa con Postgres lo cual es costoso en términos de CPU y memoria, pgbouncer mantiene un "pool" de conexiones abiertas y las reparte según sea necesario. Archivo de configuración en /etc/pgbouncer/pgbouncer.ini y donde colocar a los usuario autorizados en /etc/pgbouncer/userlist.txt y el ejemplo de sintaxis en /usr/share/doc/pgbouncer/examples/userlist.txt.
+# systemctl status pgbouncer (comprobar si el servicio está activo)
+$ psql -h 127.0.0.1 -p 6432 -U usuario_app -d ventas (host, puerto, usuario y base de datos)
+$ psql -p 6432 -U pgbouncer pgbouncer (entrar en caliente a la base de datos "virtual" llamada pgbouncer)
+Dentro de la consola se puede ejecutar comandos especiales:
+SHOW POOLS; --> Mira cuántas conexiones están activas y cuántas en espera.
+SHOW CLIENTS; --> Lista todas las aplicaciones conectadas actualmente.
+PAUSE; --> Detiene todas las conexiones nuevas (útil para backups o cambios rápidos).
+RELOAD; --> Recarga la configuración sin cortar las conexiones actuales.
+Nota.- Si la aplicación tiene menos de 50 usuarios y estos mantienen conexiones estables, añadir PgBouncer podría ser una capa de complejidad innecesaria.
+
+
+pgcli
+[PostGresql CLI]. Alternativa moderna y más amigable a la herramienta clásica psql, diseñada específicamente para interactuar con bases de datos PostgreSQL desde la terminal, pero con mejoras significativas en usabilidad: Autocompletado inteligente, resaltado de sintaxis en tiempo real, sugerencias mientras se escribe, soporte para comandos internos estilo psql, soporte para múltiples formatos de salida [csv, json...], etc.
+$ pgcli -h localhost -p 5432 -U usuario nombre_bd (conexión básica a una base de datos)
+$ pgcli -U postgres myapp_db (Si no se especifica contraseña, la pedirá interactivamente o se puede usar .pgpass para evitarlo).
+$ pgcli "postgresql://user:password@localhost:5432/mydb" (conexión usando URL. Soporta URLs completas con esquema postgresql:// o postgres://)
+$ pgcli -U postgres mydb -c "SELECT version();" (ejecutar una consulta y salir)
+$ pgcli -U user mydb -c "SELECT * FROM logs;" --csv > logs.csv (exportar resultados a CSV)
+Algunos comandos en interfaz interactiva:
+> SELECT * FROM us (pulsado TAB sugerirá "users", "user_roles"...)
+> SELECT id, na (pulsado TAB sugerirá "name", national:id"...)
+> \d u (muestra tablas que empiecen por "u")
+> \dt (lista todas las tablas)
+> \l (lista todas las bases de datos)
+> \c otra_bd (cambia a otra base de datos)
+Ejemplo de configuración:
+$ nano ~/.config/pgcli/config
+[main]
+multi_line = True
+vi_mode = False
+auto_expand = False
+theme = monokai
+
+
 pgcluu
 Herramienta de monitorización y auditoría del rendimiento del clúster del sistma PostgreSQL. Incluye la herramienta pgcluu_collectd.
 # systemctl status pgcluu_collectd.service (comprobar que está activo)
