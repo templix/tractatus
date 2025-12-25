@@ -8812,8 +8812,10 @@ $ cpm (abre la interfaz donde se puede agregar, buscar, editar y eliminar entrad
 
 
 cpu
-Herramienta de administración de usuarios LDAP [Lightweight Directory Access Protocol - protocolo ligero de acceso a directorios]. Archivo de configuración en /etc/cpu/cpu.conf
-# cpu -m ldap (la otra opción es "passwd")
+Herramienta de administración de usuarios LDAP [Lightweight Directory Access Protocol - protocolo ligero de acceso a directorios] que sirve como un sustituto ideal de las utilidades tradicionales useradd, usermod y userdel para administradores que utilizan un directorio LDAP. LDAP es un protocolo utilizado para acceder y mantener servicios de directorio distribuidos sobre una red IP. Es el caso de una entidad que dispone de múltiples servidores y servicios que requieren autenticación de usuarios. En lugar de gestionar usuarios de manera local en cada servidor, se puede configurar un servidor LDAP central que almacene toda la información y entonces los servidores y servicios pueden consultar este servidor LDAP para autenticar a los usuarios y obtener información sobre ellos.
+# cpu -a -u nombre_usuario -p contraseña -e correo@ejemplo.com (-a añadir un nuevo usuario)
+# cpu -m -u nombre_usuario -p nueva_contraseña -e nuevo_correo@ejemplo.com (-m modificar un usuario existente)
+# cpu -d -u nombre_usuario (-d eliminar un usuario)
 
 
 cpu-checker
