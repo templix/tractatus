@@ -42423,6 +42423,17 @@ $ sudo -u postgres pgbackrest --stanza=main verify (verificar la integridad de l
 $ sudo -u postgres pgbackrest --stanza=main info (listar las copias disponibles)
 
 
+pgbadger
+Analizador de registros de PostgreSQL escrito en Perl que genera informes HTML muy detallados de su archivo de registro [consultas más lentas, consultas más frecuentes, tiempos de espera, errores, actividad por tipo de sentencia [SELECT/INSERT/UPDATE/DELETE], conexiones por usuario/base de datos, checkpoints, autovacuum, etc]. Detecta automáticamente el formato del archivo de registro syslog, stderr o csvlog.
+$ pgbadger /var/log/postgresql/postgresql-15-main.log -o /var/www/html/pgbadger.html (analizar un único fichero y generar un HTML)
+$ pgbadger /var/log/postgresql/postgresql-15-main.log /var/log/postgresql/postgresql-15-main.log.1 -o /var/www/html/pgbadger-diario.html (analizar varios ficheros [rotación diaria])
+$ pgbadger -f stderr /var/log/postgresql/postgresql-15-main.log -o report.html (especificar el formato de log. Otras opciones: syslog, csvlog, jsonlog)
+$ pgbadger -j 4 /var/log/postgresql/postgresql-15-main.log -o report.html (acelerar análisis de logs grandes usando 4 workers en paralelo. Por derfecto usa 1 cpu)
+$ pgbadger --errors-only /var/log/postgresql/postgresql-15-main.log -o errores.html (centrarte únicamente en errores de la aplicación)
+$ pgbadger -o cluster.html $(ssh pg-node1 'ls /var/log/postgresql/postgresql-15-main.log*') (pasar un comando que devuelva la lista de logs)
+$ pgbadger -q -I -O "/var/lib/postgresql/incremental_report" -R 12 /var/log/postgresql/postgresql-15-main.log /var/log/postgresql/postgresql-15-main.log.1 (modo incremental sin reprocesar todo cada vez. -I activa modo incremental, -O indica el directorio donde se guardan los informes y -R 12 indica retención de informes, por ejemplo 12 semanas para que pgBadger gestione rotación de sus propios HTML)
+
+
 pgcluu
 Herramienta de monitorización y auditoría del rendimiento del clúster del sistma PostgreSQL. Incluye la herramienta pgcluu_collectd.
 # systemctl status pgcluu_collectd.service (comprobar que está activo)
