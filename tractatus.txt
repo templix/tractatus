@@ -42519,6 +42519,32 @@ Demonio y herramientas que escuchan las notificaciones de una base de datos de P
 # psql -d gestion_usuarios -c "NOTIFY user_changes, 'test';" (probar notificaciones manualmente)
 
 
+pgloader
+Extraer, transformar y cargar datos de diferentes fuentes y copiarlos en PostgreSQL. Su punto fuerte es que sabe migrar no solo datos, sino también esquemas como tablas, índices y claves foráneas de otras bases de datos y hace transformaciones automáticas o personalizadas.
+createdb base_nueva (para migrar una base de datos completa de MySQL a PostgreSQL primero crear la base de datos vacía en PostgreSQL)
+$ pgloader mysql://usuario:contraseña@host_mysql:3306/nombre_base postgresql://tu_usuario:tu_pass@localhost:5432/base_nueva (migración directa)
+$ pgloader mysql://root@localhost/sakila pgsql:///sakila (Versión corta cuando se usa usuario postgres sin contraseña y localhost)
+$ pgloader --with "include drop, create tables, create indexes, reset sequences" mysql://usuario:pass@mysql-host/dbname pgsql://postgres:pass@localhost/nueva_db
+$ pgloader mysql://usuario:pass@host/dbname pgsql://postgres@localhost/nueva_db INCLUDING ONLY TABLE NAMES MATCHING 'clientes', 'pedidos', ~/facturas_.*/ EXCLUDING TABLE NAMES MATCHING ~/temp_.*/ (migrar solo algunas tablas específicas)
+$ pgloader http://datos.gob.es/archivos/ine.zip postgresql:///ine?tabla_poblacion (cargar desde un .zip o .gz directamente)
+$ pgloader sqlite:///ruta/a/mi_base.db pgsql:///nueva_base (migrar de SQLite a PostgreSQL)
+$ pgloader mssql://sa:TuPass@servidor:1433/CRM postgresql://postgres@localhost/crm_nuevo (migrar de SQL Server [MSSQL] a PostgreSQL)
+1.-
+cargar un archivo CSV
+$ nano clientes.load
+LOAD CSV
+     FROM 'clientes.csv'
+     INTO postgresql:///mi_db?clientes
+WITH fields terminated by ';',
+     columns id, nombre, email, fecha_alta DATE format "DD/MM/YYYY"
+SET client_encoding to 'latin1',
+    work_mem to '128MB',
+    maintenance_work_mem to '512MB';
+$ pgloader clientes.load
+$ pgloader --type csv --with "fields terminated by ',', header row" --with truncate ./ventas-2025.csv postgresql:///ventas?tabla_ventas (versión todo en una línea [sin archivo])
+Nota.- pgloader, además de mostrar un resumen final, guarda un log completo por defecto en /tmp/pgloader/.
+
+
 pgpainless-cli
 Implementación moderna de OpenPGP en Java basada en el kit de herramientas criptográficas BouncyCastle, que facilita el manejo de datos OpenPGP. Las características principales de BouncyCastle son cifrado simétrico [AES (CBC, GCM, CTR), ChaCha20, Camellia, ARIA, SM4, DES/3DES], funciones hash [SHA-2, SHA-3, BLAKE2/3, SHAKE128/SHAKE256, Whirlpool, RIPEMD], cifrado asimétrico [RSA, ECDSA, EdDSA (Ed25519), ElGamal, Diffie-Hellman], criptografía post-cuántica [ML-KEM (Kyber), ML-DSA (Dilithium), HQC (desde versión 1.79)] y protocolos [OpenPGP, CMS, S/MIME, TLS 1.3, X.509, OCSP, CRL, TSP].
 $ pgpainless-cli generate-key "Alice <alice@pgpainless.org>" > key.asc (crea una clave secreta protegida con contraseña y la guarda en formato ASCII armored en el archivo key.asc)
@@ -42532,7 +42558,6 @@ $ cat msg.asc | pgpainless-cli decrypt key.asc --verify-with cert.asc --verifica
       --verifications-out --> Guarda información de verificación en un archivo.
 $ $ pgpainless-cli verify document.txt.sig --with document.txt --cert sender.asc (verificar una firma separada)
 $ $ cat binary-data | pgpainless-cli armor > armored.txt (añadir ASCII armor a datos binarios)
-
 
 
 pgpdump
