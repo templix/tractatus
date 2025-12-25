@@ -42477,6 +42477,48 @@ $ pgcluu -o /tmp/report_db1/ /tmp/stat_db1/ (generar todos los informes HTML a p
 $ pgcluu -o /tmp/report_db1/ /tmp/stat_db1/ --db-only "db1,db2,db3" (informes de algunas bases de datos)
 
 
+pgcopydb
+Herramienta que copia una base de datos PostgreSQL completa del origen al destino. Sus principales características son que copia en paralelo de tablas, índices y secuencias, oporte para replicación lógica continua, menor tiempo de inactividad en migraciones copia incremental y seguimiento de cambios y gestión inteligente de dependencias
+$ pgcopydb copy --source "postgresql://user:pass@localhost:5432/db_origen" --target "postgresql://user:pass@localhost:5432/db_destino" (copia simple de una base de datos local a otra)
+$ pgcopydb copy --source "postgresql://localhost/produccion" --target "postgresql://localhost/desarrollo" --table-jobs 8 --index-jobs 4 (copia con máxima concurrencia. --table-jobs 8 copiará hasta 8 tablas simultáneamente y --index-jobs 4 creará hasta 4 índices en paralelo)
+$ pgcopydb copy --source "postgresql://usuario@servidor-origen.com:5432/miapp" --target "postgresql://localhost:5432/miapp_backup" --table-jobs 4 (copia entre servidores remotos)
+$ pgcopydb copy --source "postgresql://localhost/origen" --target "postgresql://localhost/destino" --skip-large-objects --no-owner --schema-only (copia solo del esquema sin datos)
+$ pgcopydb copy --source "postgresql://localhost/midb" --target "postgresql://localhost/midb_filtrada" --filters "tabla1,tabla2,tabla3" (copiar solo tablas específicas)
+$ pgcopydb clone --source "postgresql://localhost/prod" --target "postgresql://localhost/staging" --follow (iniciar copia con captura de cambios)
+$ pgcopydb copy --source "postgresql://localhost/origen" --target "postgresql://localhost/destino" --data-only (copiar solo datos sin esquema)
+$ pgcopydb snapshot --source "postgresql://localhost/midb" --dir /backup/midb_snapshot (restauración desde directorio, primero, crear un snapshot/backup...)
+$ pgcopydb restore --dir /backup/midb_snapshot --target "postgresql://localhost/midb_restaurada" --verbose (...luego restaurar desde ese directorio y en modo verbose)
+$ pgcopydb compare --source "postgresql://localhost/db1" --target "postgresql://localhost/db2" (verificar diferencias sin copiar)
+
+
+pgdbf
+Convierte bases de datos en formato DBF , en particular tablas FoxPro con archivos memo, a un formato SQL que contienen comandos CREATE TABLE e INSERT para que se pueda importar los datos en una base de datos PostgreSQL.
+$ pgdbf -p -t clientes -o clientes.sql clientes.dbf (convertir clientes.dbf a SQL. -p instrucciones para crear y poblar la tabla y -t tabla define el nombre de la tabla en la base de datos resultante)
+$ psql -d tu_base_de_datos -f clientes.sql (importar en PostgreSQL)
+
+
+pgformatter
+Embellecedor de sintaxis SQL para PostgreSQL. Detectará automáticamente el entorno y generará la salida como texto o HTML según el contexto.
+$ pgformatter archivo.sql (imprimirá el código SQL formateado en la salida estándar)
+$ echo "SELECT * FROM productos WHERE precio > 100;" | pgformatter (formatear código SQL ingresado directamente desde la pantalla)
+$ pgformatter < archivo.sql (o desde un archivo)
+$ pgformatter --html archivo.sql > archivo_formateado.html (formatear un archivo SQL y generar la salida en HTML)
+
+
+pglistener
+Demonio y herramientas que escuchan las notificaciones de una base de datos de Postgres y luego llaman a varios hooks que se encargan de todo, desde actualizar la base de datos de contraseñas hasta actualizar las cuentas en RT. Incluye los ejecutables pglistener-update y pua [PostgreSQL User Administrator].
+# systemctl status pglistener.service (comprobar estado del demonio de que esté activo)
+# pua adduser juanperez --uid 1001 --gid 1001 --nombre "Juan Pérez" --home /home/juanperez --shell /bin/bash (añadir un nuevo usuario [también lo inserta en PostgreSQL])
+# pua usermod juanperez --gid 1002 --shell /bin/zsh (modificar usuario existente)
+# pua deluser juanperez (eliminar usuario)
+# pua passwd juanperez (cambiar contraseña y actualiza /etc/shadow a través del hook)
+# pua listusers (listar usuarios desde la base de datos)
+# pua sync (sincronizar todos los usuarios y fuerza ejecución de hooks)
+# journalctl -u pglistener -f (ver logs del servicio)
+# tail -f /var/log/pglistener.log (ver logs específicos de pglistener-update)
+# psql -d gestion_usuarios -c "NOTIFY user_changes, 'test';" (probar notificaciones manualmente)
+
+
 pgrep
 Examina los procesos en ejecución y enumera los identificadores de cada proceso.
 $ pgrep emacs
