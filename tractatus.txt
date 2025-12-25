@@ -42403,6 +42403,24 @@ v --> Cambiar modo de visualización de query (completa, truncada, indentada)
 q --> Salir
 
 
+pgbackrest
+Herramienta diseñada para realizar copias de seguridad y restauraciones de bases de datos PostgreSQL de manera confiable, eficiente y escalable. Su principal ventaja es que está optimizada para manejar grandes volúmenes de datos y cargas de trabajo intensivas, ofreciendo características como compresión, cifrado, verificación de integridad y soporte para entornos distribuidos.
+Configuración básica
+# nano /etc/pgbackrest.conf
+[global]
+repo1-path=/var/lib/pgbackrest
+repo1-retention-full=2
+log-level-console=info
+[main]
+pg1-path=/var/lib/postgresql/14/main
+$ sudo -u postgres pgbackrest --stanza=main --log-level-console=info backup --type=full (crear copia de seguridad. --stanza=main nombre de la instancia de PostgreSQL y --type=full que es una copia completa)
+$ sudo -u postgres pgbackrest --stanza=main backup --type=diff (crear una copia diferencial con las modificaciones desde la última copia)
+$ sudo -u postgres pgbackrest --stanza=main restore (restaurar una copia de seguridad)
+$ sudo -u postgres pgbackrest --stanza=main restore --type=time --target="2025-12-20 12:00:00+00" (restaurar hasta un momento específico [PITR])
+$ sudo -u postgres pgbackrest --stanza=main verify (verificar la integridad de las copias)
+$ sudo -u postgres pgbackrest --stanza=main info (listar las copias disponibles)
+
+
 pgcluu
 Herramienta de monitorización y auditoría del rendimiento del clúster del sistma PostgreSQL. Incluye la herramienta pgcluu_collectd.
 # systemctl status pgcluu_collectd.service (comprobar que está activo)
