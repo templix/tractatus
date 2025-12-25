@@ -42519,6 +42519,40 @@ Demonio y herramientas que escuchan las notificaciones de una base de datos de P
 # psql -d gestion_usuarios -c "NOTIFY user_changes, 'test';" (probar notificaciones manualmente)
 
 
+pgpainless-cli
+Implementación moderna de OpenPGP en Java basada en el kit de herramientas criptográficas BouncyCastle, que facilita el manejo de datos OpenPGP. Las características principales de BouncyCastle son cifrado simétrico [AES (CBC, GCM, CTR), ChaCha20, Camellia, ARIA, SM4, DES/3DES], funciones hash [SHA-2, SHA-3, BLAKE2/3, SHAKE128/SHAKE256, Whirlpool, RIPEMD], cifrado asimétrico [RSA, ECDSA, EdDSA (Ed25519), ElGamal, Diffie-Hellman], criptografía post-cuántica [ML-KEM (Kyber), ML-DSA (Dilithium), HQC (desde versión 1.79)] y protocolos [OpenPGP, CMS, S/MIME, TLS 1.3, X.509, OCSP, CRL, TSP].
+$ pgpainless-cli generate-key "Alice <alice@pgpainless.org>" > key.asc (crea una clave secreta protegida con contraseña y la guarda en formato ASCII armored en el archivo key.asc)
+$ cat key.asc | pgpainless-cli extract-cert > cert.asc (El certificado [cert.asc] es la parte pública que se debe compartir con otros para que te envíen mensajes cifrados)
+$ $ echo "Linux es un sistema genial" | pgpainless-cli encrypt cert.asc --sign-with key.asc > msg.asc (cifrar y firmar un mensaje)
+      cert.asc --> El certificado del destinatario para cifrado.
+      --sign-with key.asc --> La clave secreta para firmar el mensaje.
+$ cat msg.asc | pgpainless-cli decrypt key.asc --verify-with cert.asc --verifications-out verifications.txt (descifrar y verificar un mensaje y guardarlo en el .txt)
+      key.asc --> La clave secreta del destinatario para descifrado.
+      --verify-with cert.asc --> El certificado del remitente para verificación.
+      --verifications-out --> Guarda información de verificación en un archivo.
+$ $ pgpainless-cli verify document.txt.sig --with document.txt --cert sender.asc (verificar una firma separada)
+$ $ cat binary-data | pgpainless-cli armor > armored.txt (añadir ASCII armor a datos binarios)
+
+
+
+pgpdump
+Herramienta que "desenpaqueta" y muestra en forma legible la estructura interna de ficheros OpenPGP/PGP, tanto binarios como ASCII-armored. Es útil para inspeccionar claves, firmas, mensajes cifrados o ficheros PGP para depuración y análisis forense. El paquete solo muestra la estructura y metadatos de los paquetes OpenPGP; no desencripta contenido cifrado.
+$ pgpdump archivo.pgp (uso básico)
+$ cat archivo.asc | pgpdump
+$ pgpainless-cli generate-key > key.asc (generar uba ckave)
+$ pgpdump key.asc (mostrar metadatos y estructura)
+Old: Secret Key Packet(tag 5)(88 bytes)
+	Ver 4 - new
+	Public key creation time - Thu Dec 25 18:49:17 CET 2025
+	Pub alg - EdDSA Edwards-curve Digital Signature Algorithm(pub 22)
+	Elliptic Curve - Ed25519 (0x2B 06 01 04 01 DA 47 0F 01)
+	EdDSA Q(263 bits) - ...
+	Elliptic Curve - (null) ((null))
+pgpdump: unexpected end of file.
+	EdDSA Q(64261 bits)
+$ pgpdump -i key.asc (vuelca el paquete entero)
+
+
 pgrep
 Examina los procesos en ejecución y enumera los identificadores de cada proceso.
 $ pgrep emacs
