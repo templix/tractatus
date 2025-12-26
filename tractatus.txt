@@ -42666,6 +42666,10 @@ $ pgstat --table-stats 3 (identificar "tablas calientes" que están sufriendo mu
 $ pgstat --bgwriter-stats 5 (mostrar problemas de rendimiento en el disco duro o cuellos de botella en la escritura)
 
 
+pgtap
+es un conjunto de funciones de base de datos que facilita la escritura de pruebas unitarias que emiten TAP [Test Anything Protocol] en scripts psql, adecuados para la recolección, el análisis y la generación de informes mediante un arnés TAP, como los utilizados en aplicaciones Perl y PHP. Se activa en una base de datos con CREATE EXTENSION pgtap; o CREATE EXTENSION IF NOT EXISTS pgtap;
+
+
 pgtop
 Monitorear la base de datos de postgres.
 # pgtop -h localhost -s 10 -p 6543 -d BASE_DE_DATOS -u USER -p PASS (del host localhost, actualización cada 10 segundos [por defecto 5], puerto 6543 [por defecto 3306] de la base de datos especificada, usuario USER y la contraseña)
