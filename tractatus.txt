@@ -42658,6 +42658,14 @@ $ pgreplay -s 2 -d "dbname=mi_bd user=usuario host=servidor" -f carga_produccion
 $ pgreplay -d "dbname=mi_bd user=usuario host=servidor" -f carga_produccion.log -j 4 -s 2 -o errores.log (-j usar 4 hilos en paralelo, -s 2 doble velocidad y -o guardar las consultas que fallan en un archivo)
 
 
+pgstat
+Utilidad cliente que recopila información estadística de una instancia de PostgreSQL en tiempo real y funciona como vmstat [ver] o sar [ver]. Puerto de conexión por defecto es 5432
+$ pgstat 2 5 (mostrar estadísticas generales cada 2 segundos, un total de 5 veces)
+$ pgstat --db-stats 5 (ver qué base de datos está recibiendo más carga en un servidor con múltiples proyectos)
+$ pgstat --table-stats 3 (identificar "tablas calientes" que están sufriendo muchos escaneos secuenciales)
+$ pgstat --bgwriter-stats 5 (mostrar problemas de rendimiento en el disco duro o cuellos de botella en la escritura)
+
+
 pgtop
 Monitorear la base de datos de postgres.
 # pgtop -h localhost -s 10 -p 6543 -d BASE_DE_DATOS -u USER -p PASS (del host localhost, actualización cada 10 segundos [por defecto 5], puerto 6543 [por defecto 3306] de la base de datos especificada, usuario USER y la contraseña)
