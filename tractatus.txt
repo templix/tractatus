@@ -42626,12 +42626,36 @@ max_pool = 4                  # conexiones por usuario+base
 failover_command = '/etc/pgpool2/failover.sh %H /tmp/trigger'
 
 
+pgqd
+[PostgreSQL Queue]. extensión de PostgreSQL que proporciona un sistema de colas genéricas, eficientes y transaccionales dentro de la base de datos, donde productores insertan eventos mediante funciones SQL y consumidores los procesan de forma asíncrona. Su función principal es ejecutar periódicamente el "ticker" en todas las bases de datos del clúster PostgreSQL, preparar batches de eventos para que los consumidores los procesen y realizar tareas de mantenimiento como limpieza de eventos antiguos o retry de fallos.
+# systemctl status pgqd.service (comprobar que esté activo)
+# pgqd --ini > /etc/pgqd.ini (nostrar un ejemplo de archivo de configuración y hacerlo efectivo)
+# pgqd -k /etc/pgqd.ini (matar el proceso)
+# pgqd -s /etc/pgqd.ini (detener el proceso)
+# pgqd -r /etc/pgqd.ini (recargar config sin parar)
+$ journalctl -u pgqd.service (ver logs)
+
+
 pgrep
 Examina los procesos en ejecución y enumera los identificadores de cada proceso.
 $ pgrep emacs
 $ pgrep httpd
 $ pgrep -l -G group (del grupo especificado)
 $ pgrep -l -u user (del usuario especificado)
+
+
+pgreplay
+Lee un archivo de registro [log] de PostgreSQL, extrae las sentencias SQL y las ejecuta en el mismo orden y con la sincronización original en otra instancia de PostgreSQL. No usa los archivos WAL [Write-Ahead Log], sino los logs de texto generados por PostgreSQL.
+Añadir o descomentar los siguientes parametros del archivo de configuración:
+# nano /etc/postgresql/17/main/postgresql.conf
+       log_statement = 'all'
+       log_duration = on
+       log_timestamp = on
+       log_min_duration_statement = 0
+# systemctl restart postgresql.service (reiniciar el servicio despues de la modificación)
+$ cat /var/log/postgresql/postgresql-*.log > carga_produccion.log (concatenar varios archivos de log en uno solo)
+$ pgreplay -s 2 -d "dbname=mi_bd user=usuario host=servidor" -f carga_produccion.log (reproducir al doble de velocidad, -d Cadena de conexión a la base de datos destino y archivo de log de entrada)
+$ pgreplay -d "dbname=mi_bd user=usuario host=servidor" -f carga_produccion.log -j 4 -s 2 -o errores.log (-j usar 4 hilos en paralelo, -s 2 doble velocidad y -o guardar las consultas que fallan en un archivo)
 
 
 pgtop
