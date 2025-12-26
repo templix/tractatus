@@ -42578,6 +42578,54 @@ pgpdump: unexpected end of file.
 $ pgpdump -i key.asc (vuelca el paquete entero)
 
 
+pgpgpg
+Herramienta de compatibilidad que permite usar la sintaxis antigua de PGP 2.6 mientras que internamente ejecuta GnuPG [GPG]. PGP 2.6 usaba una sintaxis diferente a GnuPG. Por ejemplo, donde PGP 2.6 usaba flags como +e para cifrar, GnuPG usa opciones como --encrypt. pgpgpg traduce automáticamente entre ambos estilos.
+$ pgpgpg -e archivo.txt usuario@ejemplo.com (cifrar un archivo)
+$ pgpgpg -s archivo.txt (firmar un archivo)
+$ pgpgpg archivo.txt.sig (verificar una firma)
+Nota.- GnuPG ha de encontrar la clave pública del correo en los anillos de claves locales o en un archvio .asc proporcionado:
+$ gpg --import clave_publica_usuario.asc
+
+
+pgpool2
+Servidor de pool de conexiones y proxy de replicación (middleware) que funciona entre servidores PostgreSQL y un cliente de base de datos PostgreSQL. Básicamente, actúa como un proxy inteligente entre las aplicaciones [clientes] y los servidores PostgreSQL. Una vez configurado pgpool2 [/etc/pgpool2/pgpool.conf], los clientes se conectan a pgpool, no directamente a PostgreSQL:
+En lugar de conectar a PostgreSQL [puerto 5432])
+$ psql -h localhost -p 5432 -U usuario -d basedatos
+Se conectan a pgpool que por defecto escucha en puerto 9999 y pcp por el 9898)
+$ psql -h localhost -p 9999 -U usuario -d basedatos
+# pg_md5 -m -u admin secreto123 (añade al usuario "admin" y su hash en /etc/pgpool2/pcp.conf)
+# pcp_node_info -h localhost -U admin -p 9898 0 (consultar el estado de los nodos)
+# pcp_detach_node -h localhost -U admin -p 9898 0 (marca como "down" el nodo 0, y pgpool redirigirá escrituras al nodo primario restante)
+Ejemplo de configuración mínima para Connection Pooling + Load Balancing
+# nano /etc/pgpool2/pgpool.conf
+# Backend PostgreSQL servers (primary + standby)
+backend_hostname0 = '192.168.1.10'
+backend_port0 = 5432
+backend_weight0 = 1
+backend_data_directory0 = '/var/lib/postgresql/14/main'
+backend_flag0 = 'ALLOW_TO_FAILOVER'
+#
+backend_hostname1 = '192.168.1.11'  # standby
+backend_port1 = 5432
+backend_weight1 = 1
+backend_data_directory1 = '/var/lib/postgresql/14/main'
+backend_flag1 = 'ALLOW_TO_FAILOVER'
+#
+# Modo streaming replication (recomendado)
+replication_mode = off
+load_balance_mode = on
+master_slave_mode = on
+master_slave_sub_mode = 'stream'
+#
+# Connection pooling
+connection_cache = on
+num_init_children = 32        # conexiones pre-creadas
+max_pool = 4                  # conexiones por usuario+base
+#
+# Failover
+failover_command = '/etc/pgpool2/failover.sh %H /tmp/trigger'
+
+
 pgrep
 Examina los procesos en ejecución y enumera los identificadores de cada proceso.
 $ pgrep emacs
