@@ -42755,6 +42755,14 @@ Arreglar el error: PHP Deprecated:  Comments starting with '#' are deprecated in
 	Y cambiar el “#” de los comentarios por un “;”
 
 
+phpab
+[PHP Autoload Builder]. Aplicación que automatiza la generación de un archivo de requisitos de autocarga para proyectos PHP sin necesidad de incluir manualmente cada archivo.
+$ composer require --dev phpab/phpab (si no está en los repositorios de la destro, su puede instalar a través de Composer [ver])
+$ phpab --autoload=autoload.php --source=src/ (con las clases en el directorio src/ generar un archivo autoload.php)
+$ phpab --list=requirements.txt --source=src/ (crea un archivo requirements.txt con las clases o archivos necesarios)
+$ phpab --verbose --phar=mi_app.phar --source=src/ (genera un archivo mi_app.phar que contiene toda la aplicación en modo verbose)
+
+
 phpldapadmin
 es un cliente LDAP web que ofrece una administración sencilla, accesible desde cualquier lugar y en varios idiomas para su servidor LDAP. Se puede acceder con el navegador en http://<webserver>/phpldapadmin.
 
