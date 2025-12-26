@@ -42675,6 +42675,23 @@ Monitorear la base de datos de postgres.
 # pgtop -h localhost -s 10 -p 6543 -d BASE_DE_DATOS -u USER -p PASS (del host localhost, actualización cada 10 segundos [por defecto 5], puerto 6543 [por defecto 3306] de la base de datos especificada, usuario USER y la contraseña)
 
 
+pgxnclient
+Herramienta diseñada para interactuar con la Red de Extensiones PostgreSQL desde PGXN [PostGresql eXtension Network], lo que permite buscar, compilar, instalar y eliminar extensiones en bases de datos PostgreSQL. Funcionando de manera similar a como pip para Python o npm para Node.js.
+$ pgxn search json (buscar extensiones relacionadas con "json")
+$ pgxn search fulltext (buscar extensiones de texto completo)
+$ pgxn info pg_trgm (información sobre la extensión pg_trgm)
+$ pgxn download semver (descargar la extensión semver)
+$ pgxn download semver=0.5.0 (descargar una versión específica)
+# pgxn install --verbose pg_trgm (instalar la extensión pg_trgm en modo verbose)
+$ pgxn load -d nombre_base_datos pg_trgm (después de instalar, se debe activar en la base de datos o directamente desde PostgreSQL: CREATE EXTENSION pg_trgm;)
+$ pgxn install --no-check-certificate extension_name (instalar sin verificar certificados SSL, no recomendado)
+$ pgxn install hstore=1.4 (instalar una versión específica)
+$ pgxn check pg_trgm (comprueba si una extensión está instalada correctamente)
+$ pgxn uninstall pg_trgm (elimina una extensión instalada)
+$ pgxn install https://github.com/usuario/extension/archive/master.zip (instalar desde una URL)
+Nota.- pgxnclient instala la extensión en el sistema [archivos binarios, bibliotecas], mientras que "CREATE EXTENSION" en SQL activa la extensión en una base de datos específica. Ambos pasos son necesarios para usar una extensión que no viene preinstalada con PostgreSQL.
+
+
 phockup
 Organizar carpetas de fotos por año, mes y dia. Descarga: <https://github.com/ivandokov/phockup>
 $ phockup -d YYYY/M  carpeta_fotos carpeta_ordenada (por año y mes por nombre en inglés)
