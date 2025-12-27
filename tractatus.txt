@@ -42892,6 +42892,12 @@ $ pandora
 	(i) Login... Error: Pandora is not available in your country. Set up a control proxy (see manpage).
 
 
+pick
+Herramienta que permite seleccionar una opción de un conjunto de opciones mediante una interfaz interactiva. Lee una lista de opciones en la entrada estándar y muestra la opción seleccionada en la salida estándar.
+$ ls | pick (lista los archivos del directorio actual y con las flechas se selecciona el deseado y lo imprime)
+$ ps aux | pick | awk '{print $2}' | xargs kill (seleccionar un proceso para matarlo usando el comando kill)
+
+
 picocom
 Es un programa minimalista de emulación de terminal. Fue diseñado para servir como una herramienta sencilla y manual de configuración, prueba y depuración de módems. También funciona como un programa de comunicaciones serie de baja tecnología que permite el acceso a todo tipo de dispositivos que proporcionan consolas serie. Descarga de https://salsa.debian.org/debian/picocom. Salsa es un servidor de desarrollo colaborativo para Debian que proporciona las herramientas necesarias para el desarrollo colaborativo a los mantenedores de paquetes, equipos de empaquetado y otras personas y grupos relacionados con Debian.
 # picocom /dev/ttyS0 (entra en la interrfaz del programa. C-a C-x para salir)
@@ -42963,6 +42969,18 @@ $ nano ~/.config/picon/picon.conf
   ];
 $ picon --config ~/.config/picon/picon.conf & (iniciar picon indicando este archivo de configuración)
 $ picon --log-level=debug (ejecutarlo con un mayor nivel de detalle)
+
+
+pid1
+Manejo de señales y recolección de procesos huérfanos para procesos de inicio PID1 de Unix. Esta biblioteca/ejecutable detectará automáticamente si se ejecuta como un proceso distinto de PID1 y, de ser así, utilizará una simple llamada al sistema exec. pid1 es un ejecutable especializado que desempeña el papel de proceso inicial [PID 1] en espacios de nombres aislados como contenedores o al inicio del sistema tradicionalmente es init [SysVinit, systemd, OpenRC, etc.], pero que también puede usarse como un simple wrapper en un shell normal. Su comportamiento y utilidad cambian radicalmente dependiendo del contexto en el que se ejecute.
+Un ejemplo en una terminal, pid1 detecta que no es el PID 1 real del sistema. En este caso, su comportamiento es muy simple llamará al sistema exec:
+$ pid1 -u USER -t 5 htop (lanzar htop como usuario USER y esperar 5 segundos a que todos los procesos secundarios salgan)
+$ pid1 -w ~/proyecto git status (lanzar "git status" en el directorio mencionado)
+Un ejemplo en un contenedor Docker minimalista:
+   	 FROM debian:bookworm-slim
+	 COPY mi-aplicacion /usr/local/bin/
+	 CMD ["pid1", "-t", "30", "mi-aplicacion"]
+Aquí, "pid1" será el PID 1 dentro del contenedor. Si mi-aplicacion crea hijos y luego crashea, pid1 se asegurará de limpiar esos hijos.
 
 
 pidof
