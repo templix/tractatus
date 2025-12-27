@@ -42783,6 +42783,27 @@ phpmyadmin
 Permite administrar MySQL o MariaDB mediante una interfaz web. Se accede con el navegador en http://localhost/phpmyadmin
 
 
+phpqrcode
+Biblioteca para generar códigos QR y códigos de barras bidimensionales. Se basa en la biblioteca libqrencode de C y proporciona una API para crear imágenes de códigos QR (PNG y JPEG). No hay un ejecutable directo, "phpqrcode" en realidad es una biblioteca que se ha de incluir en un proyectos PHP para generar códigos QR.
+Ejemplo básico de código php con esta biblioteca:
+	<?php
+	require 'vendor/autoload.php';
+	//
+	use Endroid\QrCode\QrCode;
+	use Endroid\QrCode\Writer\PngWriter;
+	//
+	// Crear una instancia de QrCode
+	$qrCode = new QrCode('Texto que se quiere codificar en el QR');
+	//
+	// Crear una instancia de PngWriter
+	$writer = new PngWriter();
+	//
+	// Generar el código QR y guardar en un archivo
+	$result = $writer->write($qrCode);
+	$result->saveToFile('qr.png');
+En este ejemplo, se está generando un código QR que contiene el texto "Texto que se quiere codificar en el QR" y se guarda en un archivo llamado qr.png.
+
+
 phppgadmin
 Herramienta de administración web para PostgreSQL. Se accede con el navegador en http://localhost/phppgadmin
 
@@ -42805,6 +42826,14 @@ Entrar en phpshell colocando en el navegador: http://localhost/shell
 
 phpsysinfo
 Muestra información del host al que se accede sobre el sistema, versión del kernel, tiempo de actividad, uso de red, disco y memoria, información sobre la CPU y el modelo, los dispositivos IDE y SCSI conectados, las tarjetas PCI y la salida de los sensores lm en las arquitecturas compatibles. Se accede con el navegador con http://localhost/phpsysinfo
+
+
+phpunit
+suite de pruebas unitarias para el lenguaje PHP, basada en el framework de pruebas xUnit que es un estándar ampliamente utilizado en el mundo del desarrollo de software para escribir y ejecutar pruebas unitarias.
+$ phpunit example.php (ejecutar pruebas unitarias en el archivo mencionado, si las pasa no imprime ningún mensaje, si falla alguna mostrará en qué prueba falló)
+$ phpunit ExampleTest.php AnotherExampleTest.php (ejecutar pruebas unitarias en múltiples archivos)
+$ phpunit tests/ (ejecutar pruebas unitarias en un directorio)
+$ phpunit (buscará todos los archivos que terminan en .php en el directorio actual y sus subdirectorios y ejecutará las pruebas unitarias en ellos)
 
 
 phpwebcounter
