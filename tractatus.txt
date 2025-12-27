@@ -42855,6 +42855,13 @@ Veremos el resultado con el navegador en http://localhost/contador.php
 Nota.- Los archivos de contador se crean automáticamente la primera vez en /var/lib/phpwebcounter/hits_webcounter.0
 
 
+physlock
+Herramienta ligera de bloqueo de TTY pensado para bloquear *todas* las consolas virtuales [vt1, vt2,...] sin interferir con hibernación/suspensión y es funcionalmente equivalente a vlock [ver].
+$ physlock -l (estando en la tty1 no se podrá cambiar a ninguna otra ni a las X [tty7])
+$ physlock -L (la desbloquea)
+$ physlock -p "TTys bloqueadas" (muestra un mensaje y bloquea todas las TTY. Pide contraseña del usuario de la sesión activa o de root para desbloquearlo todo)
+
+
 pi
 Calcula la cantidad de decimales de pi que se le indique.
 $ pi 100
