@@ -21466,6 +21466,14 @@ Una vez conectado:
 También se puede crear o editar un archivo de configuración ~/.config/glirc/config para establecer opciones como el color del fondo, el tamaño de la ventana, etc.
 
 
+glmatrix
+[xscreensaver-gl]. Salvapantllas clásico de matrix. Todos los de la aplicación xscreensaver-gl estan en /usr/libexec/xscreensaver/
+$ /usr/libexec/xscreensaver/glmatrix --density 50 --speed 2.0 --binary (densidad de caracteres 50, predeterminado 20%, velocidad dobre de rápida, predeterrminado 1.0 y caracteres binarios [1 0])
+$ /usr/libexec/xscreensaver/glmatrix --no-fog --no-waves --no-rotate --hexadecimal (desactivar atenuación de glifos, ondas de color que se desplazan por columnas y la inclinación de escena y que muestre dígitos hexadecñimales)
+$ /usr/libexec/xscreensaver/glmatrix --dna (en lugar de mostrar glifos de Matrix, se muestra el código genético [guanina, adenina, timina y citosina])
+$ /usr/libexec/xscreensaver/glmatrix --fps (muestra velocidad de cuadros actual, carga de la CPU y recuento de polígonos)
+
+
 global
 Herramienta de búsqueda y exploración de código fuente. Genera una base de datos de símbolos [funciones, variables, macros, etc.] para permitir búsquedas rápidas.
 $ cd ~/proyecto_c (ir al proyecto)
@@ -42797,6 +42805,25 @@ Entrar en phpshell colocando en el navegador: http://localhost/shell
 
 phpsysinfo
 Muestra información del host al que se accede sobre el sistema, versión del kernel, tiempo de actividad, uso de red, disco y memoria, información sobre la CPU y el modelo, los dispositivos IDE y SCSI conectados, las tarjetas PCI y la salida de los sensores lm en las arquitecturas compatibles. Se accede con el navegador con http://localhost/phpsysinfo
+
+
+phpwebcounter
+Contador de visitas web mediante texto ASCII o imágenes PNG. No requiere base de datos MySQL, ya que almacena los datos en archivos de texto plano. No es un programa CGI y depende de un servidor web con soporte PHP. Una vez instalado, el script principal se encuentra en /usr/share/phpwebcounter/phpwebcounter.php.
+Un ejemplo de uso
+$ nano /var/www/html/contador.php
+<?php
+// Incluir el script del contador
+require_once('/usr/share/phpwebcounter/phpwebcounter.php');
+//
+// Configurar el modo texto
+$mode = "text";
+$counterfile = "/var/lib/phpwebcounter/contador1.txt";
+//
+// Mostrar el contador
+echo "Visitas: " . hits_webcounter($counterfile, $mode);
+?>
+Veremos el resultado con el navegador en http://localhost/contador.php
+Nota.- Los archivos de contador se crean automáticamente la primera vez en /var/lib/phpwebcounter/hits_webcounter.0
 
 
 pi
