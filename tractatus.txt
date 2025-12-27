@@ -42983,6 +42983,12 @@ Un ejemplo en un contenedor Docker minimalista:
 Aquí, "pid1" será el PID 1 dentro del contenedor. Si mi-aplicacion crea hijos y luego crashea, pid1 se asegurará de limpiar esos hijos.
 
 
+pidcat
+[adb]. Herramienta que facilita la visualización de los registros de log [logcat] de Android, filtrando solo las entradas relacionadas con un proceso [app] específico. Es especialmente útil cuando quieres depurar o monitorear en tiempo real solo los logs de una aplicación concreta en lugar de todo el sistema de logs de Android. Precisa tener un dispositivo Android conectado al pc con modo de depuración habilitado.
+$ adb devices (verifica que el dispositivo Android sea reconocido)
+$ pidcat -l E aplicación (veer solo los errores del log de la aplicación)
+
+
 pidof
 muestra el Pid del programa si está activo.
 
