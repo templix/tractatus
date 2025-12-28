@@ -43041,6 +43041,10 @@ changes.html   enabled.html  index.css	 my-results	regressions.html  skips.html
 disabled.html  fixes.html    index.html  problems.html	result.css
 $ firefox results/resultado/index.html
 Y con el navegador se pueden estudiar todos los apartados.
+$ piglit run sanity tests/all results/sanity-results (ejecuta un conjunto de pruebas de "sanity" para verificar que la implementación de OpenGL en el sistema funciona correctamente)
+$ piglit summary html results/resultado_sanity results/sanity-results/ (para convertir los resultados en html para abrir con el navegador en el directorio results/resultado_sanity)
+$ piglit run all tests/all results/all-results (ejecutar todas las pruebas disponibles y generará un informe detallado en el directorio results/all-results)
+$ piglit summary html results/resultado_all results/all-results/ (para convertir los resultados en html para abrir con el navegador en el directorio results/resultado_all)
 
 
 pigz
