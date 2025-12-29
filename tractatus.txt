@@ -33317,6 +33317,11 @@ A veces se quiere asegurar de que la app use software rendering incluso si hay G
 Notas.- No emula hardware real, solo intercepta llamadas y devuelve respuestas básicas o simuladas. No acelera nada. Solo útil para pruebas y debugging, no para uso en producción ni para obtener rendimiento gráfico y depende de Mesa y se necesita tener instalado mesa-utils o similar para tener glxinfo, glxgears, etc.
 
 
+mesa-vulkan-drivers
+Instala las implementaciones Vulkan proporcionados por el proyecto Mesa. Vulkan es una API de gráficos y computación 3D de bajo consumo.
+$ mesa-overlay-control.py
+
+
 mescc-tools
 Herramientas de supervivencia para iniciar la construcción de un compilador o un sistema operativo desde cero. Son herramientas para el arranque binario [que no se construyen a partir de código fuente de manera normal sinó que proporcionan directamente ejecutables binarios muy simples y confiables]. Las herramientas incluidas ofrecen funcionalidades mínimas, utilizadas en las primeras etapas [compilar, ensamblar, enlazar] del arranque [Bootstrapping] de una cadena de herramientas [Toolchain] y son M1, blood-elf, catm, get_machine, hex2 y kaem.
 $ m1 hola.s -o hola (compilar un archivo hola.s para obtener un ejecutable)
@@ -52458,6 +52463,14 @@ $ vtprint nota.txt
 vttest
 Proporciona un programa diseñado para probar la funcionalidad del terminal VT100 [o emulador]. También es compatible con el análisis de VT220, VT420 y xterm. Cuando se entra en el prompt del programa, se observa el menú y contiene instrucciones de funcionamiento en línea. Prueba tanto la visualización [secuencia de escape] como el manejo del teclado.
 $ vttest (entrar en el prompt)
+
+
+vulkan-tools
+Implementaciones Vulkan proporcionados por el proyecto Mesa. incluye los ejecutables vkcube, vkcubepp y vulkaninfo
+$ vulkaninfo > vulkaninfo.txt (muestra propiedades, características del dispositivo y capas y extensiones de Vulkan compatibles y lo manda a un archivo [son casi 3000 lineas])
+$ VK_INSTANCE_LAYERS=VK_LAYER_MESA_overlay VK_LAYER_MESA_OVERLAY_CONFIG=fps=1,frame_timing=1,position=top-right vkcube (lanza vkcube con el HUD de Mesa mostrando FPS y tiempos de frame en la esquina superior derecha)
+$ VK_LOADER_DEBUG=all vkcube (ver qué carga realmente el loader)
+$ MESA_VK_WSI_PRESENT_MODE=immediate vkcube (jugar con el modelo de presentación)
 
 
 vuls
