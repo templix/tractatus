@@ -43048,18 +43048,36 @@ $ piglit summary html results/resultado_all results/all-results/ (para convertir
 
 
 pigz
-Compresión de ficheros. Permite lanzar varias instancias en paralelo para un único proceso de compresión. Sobrreescribe el fichero dándole extensión gz a menos que lo usemos con el parámetro -k. Pigz es casi lo mismo que gzip solo que aprovecha los múltiples cores a diferencia de gzip que solo usa un core. Al comprimir sólo ficheros, si queremos comprimir un directorio, primero se ha de empaquetar con tar (ver). Descarga y compilación:
-	wget http://zlib.net/pigz/pigz-2.3.1.tar.gz
-	$ tar -xzvf pigz-2.3.1.tar.gz
-	$ make
-Nota.- Si no se desea arrancar la aplicación con ./pigz crear un enlace directo en el path [ln -s pigz-2.3.1/pigz /usr/bin/]
-$ pigz -p 4 fichero (Especificando número de procesos a levantar. Por defecto utiliza todos los cores i procesadores de la máquina)
-$ pigz -k fichero (Sin sobreescrir el fichero)
-$ pigz -d fichero.gz (Descomprimir el fichero creado)
-$ pigz -r carpeta (Comprimir todos los archivos de la carpeta. No la carpeta)
-Algunas opciones:
---fast (Nivel mínimo de compresión)
---best (Nivel máximo de compresión)
+[Parallel Implementation of GZip]. Es un reemplazo totalmente funcional de gzip pero repartiendo el trabajo entre todos los núcleos de la CPU. Comprime sólo ficheros, si queremos comprimir un directorio, primero se ha de empaquetar con tar [ver]. Incluye el ejecutable unpigz
+$ pigz big.log (comprimir un único archivo. Borra el original y produce big.log.gz)
+$ pigz -k big.log (comprimir sin borrar el original)
+$ pigz -p 4 fichero (especificando número de procesos a levantar. Por defecto utiliza todos los cores y procesadores de la máquina)
+$ pigz -p 2 -k base-de-datos.sql (usa dos procesos para comprimir y no borrar el original)
+$ pigz -9 -v -k video.mkv (comprimir al máximo [nivel 9], ver progreso y nop borrar original)
+$ pigz -d archivo.gz (descomprimir)
+$ unpigz archivo.gz (lo mismo)
+$ pigz -r carpeta.tar (Comprimir un archivo tar)
+
+
+pikchr-cli
+Herramienta que permite renderizar diagramas utilizando el lenguaje de marcado Pikchr. Pikchr es un lenguaje de marcado diseñado para crear diagramas en documentación técnica, y está especialmente pensado para integrarse en bloques de código delimitados de Markdown u otros lenguajes de marcado similares.
+$ pikchr-cli archivo.pikchr > circulo (guarda la conversión a svg en el archivo circulo)
+Muestra de archivo.pikchr
+$ nano archivo.pikchr
+dimen_ = 1
+Origem: (0,0)
+B1:box "Microfone";
+L1:line from B1.e right dimen_/2;
+L2:line -> up dimen_/3.2 then right dimen_/2;
+L3:line -> from L1.end down dimen_/3.2 then right dimen_/2;
+B2:box "Filtro PF" "em f₀" with .w at L2.end;
+B3:box "Filtro PF" "em f₁" with .w at L3.end;
+L4:line -> from B2.e right dimen_/2 then down dimen_/3.2 \
+ then right dimen_/2
+L4:line -> from B3.e right dimen_/2 then up dimen_/3.2 \
+ then right dimen_/2
+B4: box "Rede" "Neural" with .w at (L4.end.x,L1.end.y)
+$ firefox circulo (ver el .svg con el navegador)
 
 
 pilfile
@@ -43071,6 +43089,28 @@ $ pilfile -i grafic.png
 pilot
 Explorador de archivos tipo mc [ver].
 $ pilot
+
+
+pim-data-exporter
+Una aplicación que ayuda a realizar copias de seguridad y archivar datos PIM [Personal Information Manager] un tipo de software que se utiliza para gestionar la información personal, como contactos, tareas, notas y otros datos organizados.
+$ pim-data-exporter --output /path/to/backup --type taskwarrior (exportará todos los datos de TaskWarrior a un archivo en el directorio especificado)
+$ pim-data-exporter --output /path/to/archive --type evolution (exportará todos los correos electrónicos y citas de Evolution a un archivo en el directorio especificado)
+$ pim-data-exporter --output /path/to/file.csv --type kontact --format csv (exportará todos los datos de Kontact a un archivo CSV)
+
+
+pimd
+[Protocol Independent Multicast Daemon]. Es un demonio o servicio que permite gestionar el enrutamiento multicast de forma independiente del protocolo específico como PIM-SM, PIM-SSM, etc. Esto significa que puede trabajar con diferentes métodos de multicast sin estar ligado a un protocolo particular, facilitando la implementación de redes multicast eficientes y escalables. Permite que un router o servidor Linux pueda reenviar tráfico multicast entre diferentes segmentos de red, facilitando aplicaciones como streaming de video, conferencias en línea, o cualquier servicio que requiera enviar datos a múltiples destinatarios simultáneamente.
+# nano /etc/pimd.conf
+# Interfaces que participan en multicast
+phyint eth0 enable
+phyint eth1 enable
+#
+# Grupos multicast a reenviar
+rpt 239.255.0.0/16 {
+    dr-priority 1;
+}
+# systemctl enable pimd (Iniciar el demonio al arrancar el sistema)
+# ps aux | grep pimd (verificar si "pimd" está funcionando correctamente)
 
 
 pinentry-curses
@@ -43098,6 +43138,10 @@ Programa que permite la entrada segura de PIN o frases de contraseña. Ver pinen
 # pinentry-tty (uso básico)
 # gpg --passphrase-fd 0 | pinentry-tty (con gpg)
 # ssh-keygen -t rsa -b 4096 -C "el_email@example.com" -f ~/.ssh/id_rsa (con ssh)
+
+
+pinephone-tweaks
+Configuración predeterminada del PinePhone, telèfono inteligente con un sistema operativo linux adaptada a moviles.
 
 
 pinfo
