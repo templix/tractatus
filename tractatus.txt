@@ -43175,6 +43175,25 @@ $ pinky -l usuario
 $ pinky -b usuario root (shells abiertas por los usuarios especificados)
 
 
+pinto
+Es una aplicación para crear y gestionar un repositorio personalizado de módulos Perl, similar a CPAN [Comprehensive Perl Archive Network]. Con pinto, puedes construir y mantener tu propio repositorio de módulos Perl, lo que te brinda control sobre las versiones y dependencias de los módulos que utilizas en tus proyectos.
+$ pinto init ~/modulos (crear un repositorio pinto)
+$ pinto pull Moose (añadir un módulo desde CPAN)
+$ pinto pull DBI@1.637 (añadir una versión específica)
+$ pinto add ~/descargas/MyModule-0.01.tar.gz (añadir desde un archivo local .tar.gz)
+$ pinto stacks (listar stacks disponibles)
+$ pinto --stack prod pull Catalyst@5.90124 (añadir versiones específicas estables)
+$ pinto --stack dev pull Catalyst@5.90130 (crear stack para desarrollo)
+$ pinto new proyecto-experimental (crear un nuevo stack, como una rama en Git)
+$ PINTO_REPOSITORY_ROOT=~/modulos pinto -r ~/modulos --stack proyecto-experimental list (cambiar entre stacks)
+$ pinto merge proyecto-experimental master (fusionar stacks)
+$ cpanm --mirror file://$HOME/modulos --mirror-only Moose (usar cpanm con el repositorio Pinto)
+$ echo "alias cpanm='cpanm --mirror file://$HOME/modulos --mirror-only'" >> ~/.bashrc (configurar cpan para usar siempre el repositorio)
+$ pinto list (ver qué paquetes están en un stack)
+$ pinto pin DBI@1.637 (bloquear una versión específica [pin])
+$ pinto diff master proyecto-experimental (ver diferencias entre stacks)
+
+
 pip
 [python3-pip python-dev build-essential]. Herramienta para instalar, actualizar, eliminar y buscar paquetes de Python.
 # pip install paquete
