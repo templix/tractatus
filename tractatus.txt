@@ -43175,6 +43175,16 @@ $ pinky -l usuario
 $ pinky -b usuario root (shells abiertas por los usuarios especificados)
 
 
+pinpoint
+Herramienta de presentaciones que utiliza un archivo de texto plano como entrada, escribes un archivo de texto simple con extensión .pin y el programa lo convierte en una presentación elegante con transiciones suaves.
+$ mkdir presentacion (crear el directorio de la presentación)
+$ cd presentacion
+$ cp /usr/share/doc/pinpoint/examples/introduction.pin . (copiar el archivo de ejemplo de presentación en el directorio, es un ejemplo perfecto de estructura)
+$ pinpoint introduction.pin (con la presentación activa cualquier modificación en .pin se muestra directamente en la presentación)
+$ pinpoint --output=presentacion.pdf presentacion.pin (convertir a pdf)
+$ pinpoint -f presentacion.pin (modo pantalla completa)
+
+
 pinto
 Es una aplicación para crear y gestionar un repositorio personalizado de módulos Perl, similar a CPAN [Comprehensive Perl Archive Network]. Con pinto, puedes construir y mantener tu propio repositorio de módulos Perl, lo que te brinda control sobre las versiones y dependencias de los módulos que utilizas en tus proyectos.
 $ pinto init ~/modulos (crear un repositorio pinto)
