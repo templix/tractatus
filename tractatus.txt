@@ -14275,6 +14275,14 @@ $ eject /dev/cdrom; sleep 1; eject -t /dev/cdrom  (abrirlo y cerrarlo)
 $ eject sda8 (desmonta la partición mencionada)
 
 
+ejecución
+[...condicional]. Ejecutar un comando dependiendo del resultado del comando anterior.
+$ comando1 && comando2 (ejecutar comando2 solo cuando el anterior comando1 tenga éxito)
+$ comando1 || comando2 (ejecutar comando2 solo cuando el anterior comando1 falle)
+$ comando1 ; comando2 (ejecutar comando2 sin importar el resultado del primero)
+$ comando1 & (ejecutar comando1 en segundo plano independientemente de si existe o no comando2)
+
+
 elastalert
 Alertas fáciles y flexibles con Elasticsearch. Este paquete contiene un marco simple para alertar sobre anomalías, picos u otros patrones de interés a partir de los datos en Elasticsearch. Incluye las herramientas elastalert, elastalert-create-index, elastalert-rule-from-kibana y elastalert-test-rule
 $ elastalert --config config.yaml --verbose (mostrará información detallada sobre las alertas generadas a partir de la configuración en config.yaml)
@@ -43216,6 +43224,20 @@ pip
 # pip install --upgrade paquete (actualizar un paquete a su última versión)
 # pip freeze | grep -v '^\-e' | cut -d = -f 1 | xargs -n1 pip install -U (actualizar todos los paquetes)
 # pip cache dir (Ver la ubicación del directorio que almacena copias en forma de cache de los paquetes que se descargan)
+
+
+pip-check-reqs
+Comprueba paquetes faltantes y adicionales en los requisitos de Python.
+$ pip-check-reqs (con un archivo requirements.txt en el directorio del proyecto, verificar los requisitos)
+$ pip-check-reqs -r requisitos.txt (si "requirements" está con un nombre distinto, ha de espcificarse)
+$ pip-check-reqs --use-setup-py (si el proyecto utiliza un archivo setup.py para especificar sus requisitos)
+
+
+pipebench
+Permite medir el rendimiento de la comunicación a través de tuberías [pipes]. Es decir, evalúa la velocidad a la que se puede transmitir datos desde la entrada estándar [stdin] hasta la salida estándar [stdout] mediante una tubería.
+$ dd if=/dev/urandom bs=1M count=100 | pipebench (medir la velocidad de transmisión de datos en una tubería entre dos comandos)
+$ dd if=/dev/zero bs=1M count=100 | pipebench -q (solo mostrará el resumen)
+$ dd if=/dev/zero bs=1M count=100 | pipebench -r (muestra la velocidad pura y sin resumen)
 
 
 pipes
