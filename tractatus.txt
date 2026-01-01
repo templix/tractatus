@@ -43269,9 +43269,15 @@ $ pipemeter -q huge.dump | mysql datos (limitar la salida a stderr y dejar stdou
 $ pipemeter -c *.txt > todo.txt (usar pipemeter como «cat» con estadísticas)
 
 
-pipes
-[pipes.sh]. Muestra tuberías que se dibujan en la terminal. Hay varios tipos de tuberías disponibles.
-$ pipes -t 5 -p 10 (10 tuberias, por defecto 1 y con el modelo de caracteres 7)
+pipes-sh
+Salvapantallas de tuberias que se dibujan en la terminal.
+$ pipes -p 3 -t 5 -c 7 -f 90 -s 5 -r 0 (numero de tuberias 3 [p.d 1], tipo de tuberia [de 0 a 9], color [de 0 a 7], velocidad [de 20 a 100 p.d 75] ajusta recto [de 5 a 15 p.d 13] y sin limite para reiniciar [p.d se reinicia a los 2000]
+
+
+pipewire
+que actúa como un motor de procesamiento de audio y vídeo. Está diseñado para gestionar canales multimedia de manera eficiente y flexible. Fue creado para reemplazar a PulseAudio y ALSA [Advanced Linux Sound Architecture] en sistemas Linux, ofreciendo una mejor integración con Wayland y otras tecnologías modernas.
+$ pipewire (iniciar)
+$ pipewire --print-fabric (actuar como un servidor JACK si el módulo esta inatalado y artivo)
 
 
 pipx
