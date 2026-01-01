@@ -43313,6 +43313,35 @@ $ pipx uninstall shell-genie (desinstalar una aplicación)
 $ pipx uninstall-all (desinstalar todas las aplicaciones instaladas)
 
 
+pisg
+[Perl IRC Statistics Generator]. Herramienta que analiza logs y archivos de registro de canales IRC y genera páginas HTML con estadísticas sobre la actividad del canal.
+$ pisg --logdir /ruta/logs --format xchat --channel '#nombrecanal' (la forma más simple es especificar el archivo de log y el formato)
+$ pisg --logdir ~/.irssi/logs --format irssi --channel '#debian' --outputfile estadisticas.html (análisis simple con Irssi)
+$ pisg --logdir /var/logs/irc --format eggdrop --channel '#micanal' --output /var/www/html/stats.html (con múltiples archivos de log)
+$ pisg --lang es --logdir /logs --format irssi (especificar idioma de salida)
+$ pisg --logdir /logs --ignore "bot1 bot2" (excluir usuarios bot)
+$ pisg --logdir /logs --days 30 (generar solo últimos 30 días)
+Ejemplo usando archivo de configuración
+$ nano pisg.cfg
+<set>
+  maintainer = "Tu Nombre <email@example.com>"
+  pagehead = "Estadísticas del canal #micanal"
+  pagefoot = "Generado el %d"
+  user1 = usuario1
+  user2 = usuario2
+</set>
+<channel="#micanal">
+  Logfile = "/home/user/.irssi/logs/micanal.log"
+  Format = irssi
+  OutputFile = "/var/www/stats.html"
+</channel>
+$ pisg -co pisg.cfg (luego ejecutar)
+Para generar estadísticas periódicamente con cron:
+$ crontab -e (editar crontab)
+Y para generar stats diariamente a las 23:00 añadir línea:
+0 23 * * * /usr/bin/pisg -co /etc/pisg/pisg.cfg
+
+
 pitidos
 [del pc]. Señales de alerta sonora cuando algo falla.
 Sin pitidos.-  Sin suministro eléctrico
@@ -43325,6 +43354,19 @@ Pitidos cortos y constantes.- Placa base defectuosa.
 1 pitido largo + 3 cortos.- Monitor no conectado a la tarjeta gráfica
 1 pitido largo + varios cortos.- Problema con la tarjeta de vídeo
 2 pitidos largos + uno corto.- Error en la sincronización de imágenes
+
+
+piuparts
+Herramienta que comprueba que un .deb se puede instalar, actualizar y eliminar, incluido el purge, sin dejar el sistema "sucio".  Lo hace dentro de un chroot mínimo, comparando el árbol de ficheros antes y después de las operaciones.
+$ piuparts ./mi-paquete_1.0-1_amd64.deb (creará un chroot, instalará el paquete, lo eliminará y purgará, y finalmente devolverá OK o un informe de problemas)
+Ejemplo usando una base ya preconstruida
+# debootstrap stable /var/cache/piuparts/base-chroot http://deb.debian.org/debian
+# tar -C /var/cache/piuparts/base-chroot -czf /var/cache/piuparts/base.tgz .
+$ piuparts -b /var/cache/piuparts/base.tgz ./mi-paquete_1.0-1_amd64.deb (-b indica que se use ese tarball como chroot base)
+$ piuparts ../mi-paquete_1.0-1_amd64.changes (tomará cada .deb listado en el .changes y los probará uno por uno)
+$ piuparts --old-package ./mi-paquete_0.9-1_amd64.deb ./mi-paquete_1.0-1_amd64.deb (test de upgrade entre versiones del paquete)
+$ piuparts --fromdist bookworm --dist trixie mi-paquete (instala un sistema mínimo bookworm, instala mi-paquete, luego simula el upgrade de la distro a trixie y verifica que todo siga consistente)
+$ piuparts -d unstable -m 'http://deb.debian.org/debian main contrib non-free non-free-firmware' --keep-chroot ./mi-paquete_1.0-1_amd64.deb (selecciona la suite [stable, testing, unstable, bookworm, trixie, etc], espejo APT que usará dentro del chroot [por defecto deb.debian.org], tarball de chroot base, para acelerar pruebas repetidas, permitir compartir caché APT entre ejecuciones, reduciendo descargas y no borrar el chroot al finalizar, para inspeccionar fallos a mano)
 
 
 pkaction
