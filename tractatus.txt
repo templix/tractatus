@@ -43241,6 +43241,25 @@ $ dd if=/dev/zero bs=1M count=100 | pipebench -q (solo mostrará el resumen)
 $ dd if=/dev/zero bs=1M count=100 | pipebench -r (muestra la velocidad pura y sin resumen)
 
 
+pipectl
+Herramienta que permite crear tuberías con nombre de forma temporal y gestionarlas. Son como "buzones" en el sistema de archivos donde un programa puede dejar mensajes y otro recogerlos.
+Ejemplo de aplicación y uso:
+$ nano pipectl_control.sh
+pipectl -n mi_control -o | while read linea; do
+    echo "He recibido la orden: $linea"
+    if [ "$linea" == "SALIR" ]; then
+        echo "Cerrando el chiringuito..."
+    	break  # Esto rompe el bucle y termina el script
+    fi
+done
+$ chmod -x pipectl_control.sh
+$ ./pipectl_control.sh (en la terminal A se crea la tubería y espera a recibir datos para imprimirlos)
+En otra terminal, la B se lanza:
+$ date | pipectl -n mi_control -i
+Y en la terminal A aparecerá la fecha. Se pueden ir emitiendo comandos en la esta terrminal y todos apareceran en la terminal A. Cuando se quiera terminar, en la terminal B se ejecuta:
+$ echo "SALIR" | pipectl -n mi_control -i
+
+
 pipes
 [pipes.sh]. Muestra tuberías que se dibujan en la terminal. Hay varios tipos de tuberías disponibles.
 $ pipes -t 5 -p 10 (10 tuberias, por defecto 1 y con el modelo de caracteres 7)
