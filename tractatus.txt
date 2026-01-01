@@ -43260,6 +43260,15 @@ Y en la terminal A aparecerá la fecha. Se pueden ir emitiendo comandos en la es
 $ echo "SALIR" | pipectl -n mi_control -i
 
 
+pipemeter
+Utilidad en Perl que se coloca en medio de una tubería [pipe] para mostrar, en tiempo real, la velocidad de transferencia y la cantidad de bytes que van pasando de la entrada a la salida. Si la entrada es un fichero regular, por lo que su tamaño se conoce, también pinta una barra de progreso con % y tiempo restante estimado.
+$ pipemeter -c debian-12.iso > /dev/sdX (copiar un ISO con barra de progreso)
+$ pipemeter -b big.log | gzip > big.log.gz (comprimir un log y ver la velocidad)
+$ tar -cf - /home | pipemeter -c -s $(du -sb /home | awk '{print $1}') > backup.tar (medir cuánto tarda «tar» sin tocar el archivo resultante. -s indicamos el tamaño total para que pinte la barra)
+$ pipemeter -q huge.dump | mysql datos (limitar la salida a stderr y dejar stdout limpio)
+$ pipemeter -c *.txt > todo.txt (usar pipemeter como «cat» con estadísticas)
+
+
 pipes
 [pipes.sh]. Muestra tuberías que se dibujan en la terminal. Hay varios tipos de tuberías disponibles.
 $ pipes -t 5 -p 10 (10 tuberias, por defecto 1 y con el modelo de caracteres 7)
