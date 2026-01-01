@@ -43280,6 +43280,22 @@ $ pipewire (iniciar)
 $ pipewire --print-fabric (actuar como un servidor JACK si el módulo esta inatalado y artivo)
 
 
+pipexec
+Crea un grafo dirigido de procesos y tuberías y monitoriza todos sus procesos secundarios y puede reiniciar toda la red de procesos y tuberías si alguno falla. Incluye los ejecutables peet y ptee
+$ peet -a program1 program2 program3 (creará un grafo dirigido de procesos y tuberías, donde program1 se ejecuta primero, luego se ejecuta program2 con su salida conectada a la entrada de program3)
+$ pipexec -m (hará que pipexec monitoree la red de procesos y tuberías que ha creado. Si alguno de los procesos en la red falla, intentará reiniciarlo automáticamente)
+$ pipexec -r (reiniciar toda la red de procesos y tuberías si alguno de los procesos falla)
+$ pipexec -r -m (monitorear y reiniciar la red de procesos y tuberías)
+
+
+pipsi
+Herramienta que facilita la instalación de scripts o aplicaciones de Python en entornos virtuales aislados. Esto es útil para mantener los proyectos o herramientas independientes del sistema principal y evitar conflictos entre diferentes versiones de paquetes o scripts.
+$ pipsi install httpie (creará un entorno virtual, instalará httpie y dejará el comando http en el $PATH)
+$ pipsi list (listar paquetes instalados)
+$ pipsi update httpie (actualizar un paquete)
+$ pipsi uninstall httpie (eliminar un paquete y su entorno virtual)
+
+
 pipx
 [python3-venv]. Gestor de paquete python.
 $ pipx ensurepath (añadir el directorio que usa la aplicación [~/.local/bin] al $PATH)
