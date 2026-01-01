@@ -43369,6 +43369,28 @@ $ piuparts --fromdist bookworm --dist trixie mi-paquete (instala un sistema mín
 $ piuparts -d unstable -m 'http://deb.debian.org/debian main contrib non-free non-free-firmware' --keep-chroot ./mi-paquete_1.0-1_amd64.deb (selecciona la suite [stable, testing, unstable, bookworm, trixie, etc], espejo APT que usará dentro del chroot [por defecto deb.debian.org], tarball de chroot base, para acelerar pruebas repetidas, permitir compartir caché APT entre ejecuciones, reduciendo descargas y no borrar el chroot al finalizar, para inspeccionar fallos a mano)
 
 
+pius
+[PGP Individual UID Signer]. Herramienta para ayudar a firmar claves OpenPGP [GnuPG] de otras personas de forma semiautomática antes y después de un "keysigning party". Su objetivo es que se firme UIDs de forma controlada, con buenas prácticas, y luego se genere los correos con las firmas para cada propietario de clave. Suele usarse después de una sesión donde se verifican identidades, por ejemplo intercambio de fingerprints y documentos, para luego firmar todas las claves verificadas y enviar las firmas a sus dueños. Incluye los ejecutables pius-keyring-mgr, pius-party-worksheet y pius-report
+$ gpg --no-default-keyring --keyring ./party.gpg --import party-keys.asc (importar el fichero party-keys.asc a un keyring específico)
+$ pius-keyring-mgr --keyring ./party.gpg --list (limpiar duplicados o revisar el keyring)
+$ pius --signer YOURKEYID --keyring ./party.gpg (firmar claves tras verificar identidades. --signer YOURKEYID indica el ID de la clave con la que se va a firmar y --keyring ./party.gpg dice que use ese keyring en lugar del keyring por defecto)
+$ pius --signer 0xDEADBEEF --keyring ./party.gpg --maildir ./out-mails (genera las firmas de UIDs en keyring party.gpg y guarda los correos preparados en ./out-mails para cada propietario de clave)
+$ pius-gen-mail --maildir ./out-mails --keyring ./party.gpg (crea un mensaje por persona con las firmas adjuntas, los ficheros .asc con las firmas de sus UIDs y después solo se tiene que abrir esos correos con el cliente de correo para enviarlos)
+Ejemplo para un caso sencillo donde se ha verificado a una sola persona y se quiere usar pius
+$ gpg --export KEYID_OTHER > other.asc
+$ gpg --no-default-keyring --keyring ./one.gpg --import other.asc
+$ pius --signer 0xTUCLAVE --keyring ./one.gpg --maildir ./mails-one
+Esto produce una firma de los UIDs de esa clave según las reglas, y un correo listo para enviar al propietario.
+
+
+pixelize
+Crea una imagen compuesta por muchas imágenes pequeñas. Pixelize es un programa que utiliza muchas imágenes reducidas para intentar duplicar, con la mayor fidelidad posible, otra imagen. Pixelize funciona dividiendo la imagen que se quiere renderizar o duplicar en una cuadrícula de pequeñas áreas rectangulares. Cada área se analiza y se reemplaza con una imagen seleccionada de una gran base de datos. Pixelize intenta seleccionar las imágenes que mejor se adapten a cada área. Incluye el ejecutable make_db.
+Crear la base de datos:
+$ cd ~/Imagenes/
+$ make_db *.jpg (generará un archivo llamado pic_db.dat)
+$ pixelize (abrirá una ventana una ventana GTK)
+
+
 pkaction
 [policykit o polkit según distros)]. Herramienta para manejar politicas que permitan a los procesos sin privilegios "hablar" con procesos privilegiados.
 $ pkaction (Muestra todos los procesos a los que afecta esta politica)
