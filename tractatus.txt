@@ -3842,10 +3842,9 @@ $ dot -Tx11 grafo.dot (o desde la terminal)
 
 blkid
 Muestra uuid de cada partición y el tipo de formato.
-# blkid
-Tambien con:
-$ ls -lF /dev/disk/by-uuid/
+# blkid (equivalente a "ls -lF /dev/disk/by-uuid/")
 # blkid -i /dev/sda (Información sobre los sectores)
+# blkid | grep swap | cut -d "\"" -f2 (mostrar solo el uid de la partición swap)
 
 
 blkreplay
