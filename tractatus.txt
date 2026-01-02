@@ -30860,6 +30860,7 @@ Un ejemplo completo:
 lsblk
 Muestra información de los dispositivo montados.
 $ lsblk (los muestra todos)
+$ lsblk -f | grep nvme (solo los reales mostrando su uid)
 $ lsblk -a /dev/sda
 $ lsblk -f /dev/sda (Mostrando etiquetas, uuids y puntos de montaje)
 $ lsblk -m /dev/sda (Mostrando propietarios, grupos y permisos)
@@ -49231,7 +49232,7 @@ Y descomentar y modificar las lineas siguientes de 90 segundos a 10:
 systemd-analyze
 Analiza la secuencia de arranque en sistemas basados en systemd (Ver systemctl)
 # systemd-analyze time (muestra el tiempo total del arranque del sistema, desglosando el tiempo en espacio de usuario, del kernel y en la carga del initrd)
-# systemd-analyze blame (procesos que se ejecutan y cuanto tiempo consumen)
+# systemd-analyze blame (servicios se montan durante el arranque)
 # systemd-analyze critical-chain (ver cuellos de botella en el arranque)
 # systemd-analyze plot > archivo.svg (mostrar un gráfico con los tiempos del arranque)
 # systemd-analyze dump (volcar todo el arranque)
