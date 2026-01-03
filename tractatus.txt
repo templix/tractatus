@@ -682,7 +682,7 @@ Teclas de control:
 
 
 alacritty
-Emulador de terminal que utiliza GPU para realizar su trabajo. Un archivo de configuración puede ser <https://gitlab.com/dwt1/dotfiles/-/raw/master/.config/alacritty/alacritty.yml> y puede copiarse en ~/.alacritty. Puede descargarse de <https://github.com/alacritty/alacritty/releases>
+Emulador de terminal que utiliza GPU para realizar su trabajo. El archivo de configuración en ~/.config/alacritty/alacritty.toml
 
 
 alarm-clock-applet
@@ -22407,8 +22407,12 @@ $ dotty htop (muestra el gráfico)
 
 
 grc
-Colorear la salida de los comandos especificados en /etc/grc.conf
-$ grc ping www.tuxapuntes.com
+Colorear la salida de comandos. El listado básico de los que lo permiten está en /usr/share/grc/, pero siempre se puede crear uno propio al estilo conf.mi_comando en ~/.grc/ y añadirlo a ~/.grc/grc.conf o al global /etc/grc.conf. Incluye el ejecutable grcat que normalmente no se necesita llamar ya que grc lo hace directamente.
+$ grc ping google.com
+$ grc ip a
+Tambien pueden añadirse como alias en ~/.bashrc (alias ping="grc ping -c 3")
+$ ip a | grcat conf.ip
+$ ping -c 3 google.com | grcat conf.ping
 
 
 grep
@@ -48605,7 +48609,8 @@ $ strings /dev/sda5
 
 
 stterm
-En realidad el paquete se llama st pero en Debian se llama stterm por razones históricas. Es un emulador de terminal con un enfoque en la simplicidad, claridad y frugalidad. La filosofía del proyecto es mantener las cosas simples, mínimas y utilizables. st admite mannejo del portapapeles, atajos de mouse y teclado, UTF-8, ancho de caracteres, redimensionar, 256 colores.
+En realidad el paquete se llama st pero en Debian se llama stterm por razones históricas. Es un emulador de terminal con un enfoque en la simplicidad, claridad y frugalidad. La filosofía del proyecto es mantener las cosas simples, mínimas y utilizables. st admite manejo del portapapeles, atajos de mouse y teclado, UTF-8, ancho de caracteres, redimensionar, 256 colores. Carece de archivo de configuración toda se realiza editando el código fuente y recompilandolo.
+$ st
 
 
 stty
