@@ -43396,6 +43396,23 @@ $ make_db *.jpg (generará un archivo llamado pic_db.dat)
 $ pixelize (abrirá una ventana una ventana GTK)
 
 
+pixz
+Compresor/descompresor paralelo del formato XZ  que además añade un índice especial cuando comprime archivos tar. Es totalmente compatible con los archivos .xz y ofrece ventajas importantes en equipos con varios núcleos.
+$ pixz linux-6.12.tar linux-6.12.tar.xz (comprime usando todos los núcleos y borra el original como hace xz por defecto)
+$ cat linux-6.12.tar | pixz > linux-6.12.tar.xz (usando redirección es más seguro y mantiene el original)
+$ tar -I pixz -cf documentos-2025.tpxz  ~/Documentos (compresión de un tar con índice automático dejando que tar llame a pixz)
+$ tar -c ~/Documentos | pixz > documentos-2025.tpxz (equivalente)
+$ pixz -d documentos-2025.tpxz documentos-2025.tar (descomprime y borra el .tpxz)
+$ pixz -d < backup.tpxz > backup.tar (descomprimir sin borrar el .tpxz)
+$ tar -tf documentos-2025.tpxz | less (listar contenido)
+$ tar -I pixz -xf imagenes.tpxz fotos/2025/verano/ (extraer solo un archivo o carpeta)
+$ pixz -t  vm-disk.raw  vm-disk.raw.xz (forzar compresión sin índice, modo archivo normal, no tar)
+$ pixz -p 6 carpeta-grande/ carpeta-grande.tpxz (limitar a 6 hilos)
+$ pixz -9 postgres-dump.sql postgres-dump.sql.xz (nivel de compresión máximo. Igual que xz)
+$ pixz -1 logs-hoy.log logs-hoy.log.xz (más rápido, menos compresión)
+$ pixz -l   backup-muy-grande.tpxz (ver información de bloques)
+
+
 pkaction
 [policykit o polkit según distros)]. Herramienta para manejar politicas que permitan a los procesos sin privilegios "hablar" con procesos privilegiados.
 $ pkaction (Muestra todos los procesos a los que afecta esta politica)
