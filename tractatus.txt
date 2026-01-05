@@ -43413,6 +43413,15 @@ $ pixz -1 logs-hoy.log logs-hoy.log.xz (más rápido, menos compresión)
 $ pixz -l   backup-muy-grande.tpxz (ver información de bloques)
 
 
+pk4
+Poner a disposición el código fuente de los paquetes Debian. Es útil para desarrolladores y usuarios avanzados que desean modificar, compilar o simplemente inspeccionar el código fuente de un paquete Debian.
+$ pk4 vim (descargará el código fuente del paquete vim y lo preparará en el directorio /usr/src/ o en el de inicio del usuario)
+Luego puede compilarse de forma normal:
+$ cd /usr/src/vim
+$ dpkg-buildpackage -us -uc (compilará el paquete vim desde el código fuente y generará un nuevo paquete binario que se puede instalar en el sistema)
+$ sudo apt-get build-dep vim (instalar las dependencias necesarias para compilar el paquete específico)
+
+
 pkaction
 [policykit o polkit según distros)]. Herramienta para manejar politicas que permitan a los procesos sin privilegios "hablar" con procesos privilegiados.
 $ pkaction (Muestra todos los procesos a los que afecta esta politica)
