@@ -43445,6 +43445,47 @@ Herramienta que forma parte de PolicyKit y permite que un usuario autorizado pue
 $ pkexec --user otro_usuario synaptic
 
 
+pkg-haskell-tools
+Conjunto de utilidades para empaquetadores de Haskell en Debian. Este paquete proporciona diversas herramientas prácticas [subcomandos] utilizadas por el Grupo Debian Haskell para la construcción de paquetes debian. Los subcomandos son: cabal-debian, dch, debian2dsc, init, make-all, mass-change, tag, upgrade, upload, what-to-build y what-to-upgrade. La forma de uso para todos los subcomandos es "dht subcommand [args..]".
+$ dht cabal-debian (genera plantillas Debian desde un .cabal. En un directorio con .cabal, genera debian/)
+$ dht cabal-debian --pkg-version=1.2.3 (especificar versión del paquete)
+$ dht dch --release (añade entrada para nueva versión upstream en debian/changelog)
+$ dht dch --release -m "Parche de seguridad" (mensaje personalizado)
+$ dht debian2dsc (en directorio del paquete crea .dsc desde directorio debianizado)
+$ dht debian2dsc libghc-foo-dev (para paquete específico)
+$ dht init (inicializa nuevo paquete Debian Haskell)
+$ dht init --maintainer="Tu Nombre <email>" (con opciones específicas)
+$ dht make-all (construye todos los paquetes binarios)
+$ dht make-all --clean (con limpieza previa)
+$ dht upgrade (actualiza dependencias/build-depends)
+$ dht upgrade --dry-run (solo mostrar cambios)
+$ dht what-to-build (lista paquetes pendientes de construir que necesitan rebuild)
+$ dht what-to-build --arch=amd64 (para arquitectura específica)
+$ dht what-to-upgrade (sugiere paquetes para actualizar)
+$ dht what-to-upgrade | grep -E "^libghc" (con filtro)
+$ dht cabal-debian --help (ver ayuda específica)
+1.-
+Ejemplo para empaquetar nueva librería Haskell
+$ cd ~/mi-libreria-haskell
+$ dht init
+$ dht cabal-debian (genera plantillas)
+$ dht dch --release -m "Paquete inicial" (edita debian/control si es necesario)
+$ dht make-all (construye paquetes)
+2.-
+Ejemplo para actualizar paquete existente
+$ cd ~/paquete-existente
+$ dht upgrade --dry-run (ver qué se actualiza)
+$ dht upgrade (actualiza dependencias)
+$ dht dch --release -m "Actualiza dependencias"
+$ dht make-all --clean (reconstruye)
+3.-
+Ejemplo para preparar upload a repositorio
+$ dht debian2dsc (crea .dsc para upload)
+$ dht tag (cCrea tag git)
+# dht upload (necesita configuración adicional)
+Nota.- La mayoría de comandos deben ejecutarse en un directorio que contenga el archivo .cabal y el directorio debian/, excepto init y cabal-debian que lo crean.
+
+
 pkill
 matar procesos.
 # pkill -x scribus (equivalente a: # killall scribus)
