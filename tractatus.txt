@@ -43491,6 +43491,27 @@ Herramienta útil para comparar diferentes versiones de paquetes de software [RP
 $ pkgdiff -v paquete1.deb paquete2.deb -o informe.html (modo verbose al comparar los dos paquetes y generar un informe en html)
 
 
+pkgsync
+Sincronización automatizada de listas de paquetes para mantener varias máquinas razonablemente similares y limpias. Su objetivo principal es asegurar que los sistemas tengan una configuración de paquetes consistente y mínima, ideal para entornos con múltiples servidores o estaciones de trabajo similares. Los paquetes pueden estar en listas de "imprescindibles" [musthave], "posibles" [mayhave] o "no imprescindibles" [maynothave] y pkgsync se encargará de cumplir con estos requisitos y eliminar todo lo que no esté en estas listas y que no sea necesario para su funcionamiento y normalmente se colocan en el directorio /etc/pkgsync/.
+Ejemplos de contenido:
+# nano /etc/pkgsync/musthave/musthave.must
+     vim
+     ssh
+     nginx
+     ?section(utils)
+# nano /etc/pkgsync/mayhave/mayhave.may
+     htop
+     tmux
+     firefox
+# nano /etc/pkgsync/maynothave/maynothave.mayn
+     telnet
+     apache2
+# pkgsync (uso básico)
+# pkgsync -k (no elimina paquetes innecesarios [equivalente a permitir todo en mayhave])
+# pkgsync -e (no toca paquetes esenciales [required, important, standard])
+# pkgsync -s (simulación. Mostrará qué paquetes instalaría, mantendría o eliminaría)
+
+
 pkill
 matar procesos.
 # pkill -x scribus (equivalente a: # killall scribus)
