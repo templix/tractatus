@@ -43486,6 +43486,11 @@ $ dht tag (cCrea tag git)
 Nota.- La mayoría de comandos deben ejecutarse en un directorio que contenga el archivo .cabal y el directorio debian/, excepto init y cabal-debian que lo crean.
 
 
+pkgdiff
+Herramienta útil para comparar diferentes versiones de paquetes de software [RPM, DEB, TAR.GZ, etc.] y visualizar fácilmente las diferencias entre ellos generando informes HTML.
+$ pkgdiff -v paquete1.deb paquete2.deb -o informe.html (modo verbose al comparar los dos paquetes y generar un informe en html)
+
+
 pkill
 matar procesos.
 # pkill -x scribus (equivalente a: # killall scribus)
