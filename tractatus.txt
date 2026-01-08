@@ -43521,6 +43521,12 @@ $ pkill -9 -t pts/3 (Mata procesos no basados en el PID. La terminal 3 en este c
 # pkill -KILL -u usuario (lo mismo)
 
 
+pktanon
+Herramienta que se usa para anonimizar trazas de red en archivos de captura de paquetes, típicamente en formato pcap. Esto es útil para compartir datos de red sin revelar información sensible, como direcciones IP, nombres de usuario, o datos personales, manteniendo la estructura y el contenido técnico de la captura para análisis posterior.
+$ pktanon captura.pcap -o captura_anon.pcap (reemplazará las direcciones IP y otros datos sensibles por valores aleatorios o enmascarados de captura-pcap, manteniendo la estructura del tráfico y guardando la salida en captura_anon.pcap)
+$ $ pktanon -p captura.pcap -o captura_anon.pcap (lo mismo pero sin enmascarar las direcciones IP)
+
+
 pktstat
 Monitor de tráfico de red
 # pktstat -i eth0 -n -w 3 (especificando red, sin resolver las ips y refresco cada 3 segundos [por defecto cada 5])
@@ -43808,6 +43814,9 @@ $ ./setup.sh (crear el directorio de los temas)
 $ ls ~/.config/polybar/ (ver listado de temas instalados)
 $ ~/.config/polybar/launch.sh --hack (lanzar polybar con el tema "hack")
 $ pkill polybar (para matar el proceso para probar nuevos temas)
+$ polybar -r (volver a cargar al modificar la configuración)
+$ polybar -m (listar monitores)
+$ polybar -p archivo.png (toma una instantanea png de la barra en la pantalla)
 Un ejemplo de como poner un script en la barra de estado:
 # nano /etc/polybar/config.ini
 Y añadir:
