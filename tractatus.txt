@@ -43572,6 +43572,17 @@ $ openstack resource class list (listar todas las clases de recursos conocidas)
 $ openstack allocation candidate list --resource VCPU=8 --resource MEMORY_MB=32768--resource DISK_GB=200 --trait MEMBER_OF=HW_CPU_X86_AVX2 --os-placement-api-version 1.36 (ver qué nodos pueden alojar una instancia que necesita: 8 vCPU + 32GB RAM + 200GB disco + trait SSD)
 
 
+planetfilter
+Herramienta diseñada para filtrar y depurar los feeds de los agregadores de blogs. Permite aplicar reglas personalizadas para incluir o excluir entradas de los feeds agregados, según criterios como palabras clave, autores, fechas, etc.
+$ planetfilter --include-title "Linux" --include-body "Linux" entrada.xml salida.xml (mostrar solo las entradas que contengan la palabra "Linux" en el título o el contenido)
+$ planetfilter --exclude-title "Windows" entrada.xml salida.xml (excluir las que tengan la palabra mencionada en el título)
+$ planetfilter --exclude-body "Windows" entrada.xml salida.xml (excluir las tengan la palabra mencionada en el contenido)
+$ planetfilter --exclude-author "Juan Pérez" entrada.xml salida.xml (excluir entradas de un autor específico)
+$ planetfilter --limit 10 entrada.xml salida.xml (limitar el número de entradas)
+$ planetfilter --deduplicate entrada.xml salida.xml (eiminar entradas duplicadas)
+$ planetfilter --since "7 days ago" entrada.xml salida.xml (mostrar solo las entradas publicadas en los últimos 7 días)
+
+
 planets
 Simulador grabitacional del movimiento de los astros.
 $ planets
