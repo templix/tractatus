@@ -31601,6 +31601,21 @@ $ lxpanelctl restart (recargar la configuración)
 $ lxpanelctl menu (comprobar que "cli" sale en el menú y que en él existe la aplicación "ip" y que acercando el puntero muestra eñ "comment")
 
 
+lxqt-globalkeys
+Gestor de atajos de lxqt. Es una aplicación con interfaz gráfica [lxqt-config-globalkeyshortcuts]
+Muestra del archivo de configuración de los atajos:
+$ nano ~/.config/lxqt/globalkeyshortcuts.conf
+[Meta%2BF.41]
+Comment=navegador
+Enabled=true
+Exec=firefox
+[Print.50]
+Comment=captura pantalla
+Enabled=true
+Exec=gnome-screenshot, -i
+Las teclas windows+f lanzará firefox y pulsar la tecla ImprPant realizará un pantallazo.
+
+
 lxterminal
 Emulador de terminal basado en VTE para el entorno de escritorio ligero X11 [LXDE].
 Algunos ajustes del archivo de configuración
@@ -49177,6 +49192,28 @@ switchdesk
 Sin argumentos, mostrará un cuadro de diálogo que permite al usuario elegir entre los escritorios disponibles instalados en el sistema en Fedora, Cent OS y Red Hat.
 $ switchdesk kde (cambia el entrono de escritorio a kde)
 $ switchdesk gnome (cambia a gnome)
+
+
+sxhkd
+[Simple X HotKey Daemon]. Demonio de teclas [hotkey daemon] de acceso rápido en X en entornos minimalistas.
+Muestra de archivo de configuración:
+$ nano ~/.config/sxhkd/sxhkdrc
+       ctrl + super + b
+           lxterminal --geometry=110x20
+       #
+       super + f
+           firefox
+       #
+       Print
+           gnome-screenshot -i
+       #
+       # Recargar sxhkd
+       ctrl + super + s
+           pkill -USR1 sxhkd
+Notas.- La aplicación es case sensitive. Las teclas más importantes para los atajos son crtl, alt, shift, super (tecla windows). Si se desconoce el nombre de una tecla usar:
+$ xbindkeys -k (se abrirá un cuadro en la pantalla y al teclearla, la teminal mostrará su nombre)
+$ pkill -USR1 sxhkd (actualizar después de modificar el archivo de configuación)
+$ sxhkd -c ~/.config/sxhkd/sxhkdrc & (lanzarlo directamente si no se ha colocado en autostart)
 
 
 sxiv
