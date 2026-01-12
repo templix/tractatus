@@ -43558,6 +43558,20 @@ Monitor de tráfico de red
 # pktstat -i eth0 -n -w 3 (especificando red, sin resolver las ips y refresco cada 3 segundos [por defecto cada 5])
 
 
+placement-api
+Ubicación del inventario de recursos de OpenStack. Proporciona un servicio HTTP para gestionar, seleccionar y solicitar proveedores de clases de inventario que representan recursos disponibles en la nube.
+$ openstack resource provider list (listar todos los resource providers: nodos compute, pools de almacenamiento, etc)
+$ openstack resource provider show <UUID-o-nombre> (ver información detallada de un proveedor concreto)
+$ openstack resource provider inventory list (ver recursos libres de un nodo)
+$ openstack resource provider inventory list <UUID> (ver los recursos que ofrece un proveedor)
+$ openstack resource provider inventory show <UUID> VCPU (ver cuántos vCPU quedan libres en un nodo)
+$ openstack resource provider inventory show <UUID> MEMORY_MB (ver cuanta RAM)
+$ openstack resource provider inventory show <UUID> DISK_GB (ver cuanto disco queda libre en un nodo)
+$ openstack resource provider allocation show <UUID-de-la-instancia> (ver qué recursos está consumiendo actualmente un servidor)
+$ openstack resource class list (listar todas las clases de recursos conocidas)
+$ openstack allocation candidate list --resource VCPU=8 --resource MEMORY_MB=32768--resource DISK_GB=200 --trait MEMBER_OF=HW_CPU_X86_AVX2 --os-placement-api-version 1.36 (ver qué nodos pueden alojar una instancia que necesita: 8 vCPU + 32GB RAM + 200GB disco + trait SSD)
+
+
 planets
 Simulador grabitacional del movimiento de los astros.
 $ planets
