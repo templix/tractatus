@@ -43602,6 +43602,46 @@ play
 $ play archivo.wav
 
 
+pleaser
+Un clon de sudo con un enfoque en la cortesía y el uso de expresiones regulares para definir permisos. Incluye el ejecutable pleaseedit.
+Configuración básica
+1.-
+Para permitir a un usuario ejecutar cualquier comando.
+$ sudo nano /etc/please.ini
+       [user_rule]
+       name = tu_usuario
+       target = root
+       rule = .*
+       require_pass = true
+2.-
+Permitir ejecutar apt específicamente
+$ sudo nano /etc/please.ini
+       [apt_rule]
+       name = tu_usuario
+       target = root
+       rule = /usr/bin/apt.*
+       require_pass = true
+3.-
+Permitir editar archivos en /etc
+$ sudo nano /etc/please.ini
+       [edit_etc]
+       name = tu_usuario
+       target = root
+       edit_mode = true
+       rule = /etc/.*
+       require_pass = false
+name --> Usuario que puede ejecutar el comando: ".*" para todos.
+target --> Usuario como el que se ejecutará, normalmente root.
+rule --> Expresión regular que coincide con el comando/archivo permitido.
+require_pass --> Si requiere contraseña [true/false].
+edit_mode --> Para reglas de pleaseedit debe ser true.
+regex_type --> Tipo de regex, pcre o extended, por defecto pcre.
+$ please -u root /usr/bin/apt update (ejecutar apt como root)
+$ pleaseedit -u root /etc/hosts (editar un archivo como root)
+$ please apt install vim (ejecutar comando sin especificar usuario, root por defecto)
+$ please -l (ver la configuración actual)
+
+
 plocate
 Encuentra todos los archivos del sistema que coinciden con el patrón dado o patrones dados. Incluye las herramientas plocate-build y updatedb.plocate
 # updatedb.plocate (crear la base de datos)
