@@ -43664,12 +43664,40 @@ $ plowdown lista_de_links.txt (descarga una lista de links)
 $ plowdown -a usuario:contraseña url (caso de precisar usuario y contraseña)
 
 
+plprofiler
+Sirve para perfilar código PL/pgSQL a nivel de línea y generar informes HTML que muestran qué funciones y qué líneas consumen más tiempo o se ejecutan más veces. Se compone de una extensión que se carga en PostgreSQL y de una herramienta de línea de comandos que se conecta a la base, ejecuta funciones y produce el informe. Abrir una sesión SQL
+> CREATE EXTENSION plprofiler; (crear la extensión, una vez por base de datos. Registra el módulo que captura datos de ejecución)
+> SELECT pl_profiler_enable(TRUE); (activar el perfilador en esta sesión)
+> SELECT cambiar_precio(10, 5); (ejecutar la función que quieres analizar)
+> SELECT line_number, (la vista pl_profiler permite inspeccionar los datos)
+       line,
+       exec_count,
+       total_time,
+       longest_time
+> FROM pl_profiler
+> ORDER BY total_time DESC;
+$ plprofiler run --command "SELECT tpcb(1, 2, 3, -42)" -d pgbench_plprofiler --output tpcb-test1.html
+  	 run --> indica que va a ejecutar un comando SQL concreto.
+	 --command --> es la llamada a la función PL/pgSQL a perfilar.
+	 -d --> indica la base de datos.
+	 -output --> es el nombre del fichero HTML que se generará con el perfil de la ejecución.
+$ plprofiler monitor --interval=10 --duration=60 -d pgbench_plprofiler
+	   monitor --> recopila datos de funciones PL/pgSQL ejecutadas en la base durante un intervalo de tiempo.
+	   --interval --> controla cada cuánto se vuelcan datos.
+	   --duration --> cuánto tiempo dura la monitorización.
+
+
 plptools
 Conjunto de herramientas que permite interactuar con dispositivos que ejecutan el sistema operativo EPOC a través de un enlace serie como un cable USB o serie y desarrollado originalmente por Psion y utilizado en dispositivos como los Symbian. Este paquete permite acceder a las unidades de los dispositivos EPOC mediante un enlace serie. Puede montarlos, acceder a ellos mediante FTP, usar una impresora local desde el dispositivo remoto e instalar aplicaciones desde archivos SIS, que son paquetes para aplicaciones en dispositivos que ejecutan Symbian [basado en EPOC] . Incluye los ejecutables plpftp y sisinstall.
 # plpmount /dev/ttyUSB0 /mnt/epoc (montaje)
 # plpftp 192.168.1.2 (conectar por ftp)
 $ plpprinter -p /dev/usb/lp0 (configura el dispositivo EPOC para usar la impresora conectada a /dev/usb/lp0 en el sistema)
 $ sisinstall application.sis (instalar aplicaciones en el dispositivo EPOC)
+
+
+pluma
+Editor de texto oficial del entorno de escritorio MATE.
+$ pluma archivo.txt
 
 
 plymouth
