@@ -43664,6 +43664,14 @@ $ plowdown lista_de_links.txt (descarga una lista de links)
 $ plowdown -a usuario:contraseña url (caso de precisar usuario y contraseña)
 
 
+plptools
+Conjunto de herramientas que permite interactuar con dispositivos que ejecutan el sistema operativo EPOC a través de un enlace serie como un cable USB o serie y desarrollado originalmente por Psion y utilizado en dispositivos como los Symbian. Este paquete permite acceder a las unidades de los dispositivos EPOC mediante un enlace serie. Puede montarlos, acceder a ellos mediante FTP, usar una impresora local desde el dispositivo remoto e instalar aplicaciones desde archivos SIS, que son paquetes para aplicaciones en dispositivos que ejecutan Symbian [basado en EPOC] . Incluye los ejecutables plpftp y sisinstall.
+# plpmount /dev/ttyUSB0 /mnt/epoc (montaje)
+# plpftp 192.168.1.2 (conectar por ftp)
+$ plpprinter -p /dev/usb/lp0 (configura el dispositivo EPOC para usar la impresora conectada a /dev/usb/lp0 en el sistema)
+$ sisinstall application.sis (instalar aplicaciones en el dispositivo EPOC)
+
+
 plymouth
 Aplicación que se inicia muy temprano en el proceso de inicio y final y que proporciona una animación gráfica mientas el proceso de inicio o final ocurre en segundo plano lo que ayuda a proporcionar una experiencia visual fluida sin ver los mensajes de kernel y los parpadeos de la pantalla durante estos procesos.
 # plymouth-set-default-theme --list (lista los temas de Plymouth disponibles instalados en el sistema)
