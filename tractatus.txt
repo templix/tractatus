@@ -43650,6 +43650,13 @@ $ plocate -c *.pdf (muestra la cantidad de coincidencias)
 $ plocate -i archivo.pdf (sin distinción de mayúsculas y minúsculas)
 
 
+plotnetcfg
+Herramienta capaz de analizar la configuración de red de una máquina y generar un diagrama de la jerarquía de la red local.
+$ plotnetcfg -F (muestra los formatos posibles [dot y json])
+$ plotnetcfg -f json > archivo (manda informe en formato json, por defecto en dot)
+$ plotnetcfg | dot -Tpdf | okular - (crea un gráfico de la configuración de red de la máquina local)
+
+
 plowshare
 herramienta que permite subir y descargar archivos alojados en megaupload, rapidshare... ]http://plowshare.googlecode.com/files/plowshare-SVN-r1575-snapshot.tar.gz]
 $ plowdown url (Descargar un archivo)
