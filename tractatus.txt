@@ -15592,40 +15592,38 @@ Estos nodos forman un clúster distribuido de etcd.
 
 
 etckeeper
-Herramienta que permite almacenar el directorio /etc, que es donde se almacenan los archivos de configuración, en un repositorio git, mercurial, brz o darcs. Se conecta a APT para confirmar automáticamente los cambios realizados en /etc durante las actualizaciones de paquetes. Realiza un seguimiento de los metadatos de los archivos que los sistemas de control de versiones [Version Control Systems - VCS] normalmente no admiten, pero que son importantes para /etc, como los permisos de /etc/shadow. Ideal para mantener un historial de cambios, revertir errores o documentar modificaciones en /etc.
-Archivo de configuración para establecer el VCS que se usa, por defecto git:
+Permite almacenar todo el directorio /etc en un repositorio Git, Mercurial, Bazaar [BRZ] o Darcs. Lo más importante es que se integra con APT y hace commits automáticos cada vez que se instala, actualiza o se elimina paquetes, y también guarda metadatos importantes que git normalmente no versiona coomo permisos, dueños, grupo, atributos especiales, etc. En la instalación normal ya crea el repositorio automáticamente y hace el primer commit.
+Configuración principal de lo más importante que se debería revisar/modificar:
 # nano /etc/etckeeper/etckeeper.conf
-       # The VCS to use.
-       #VCS="hg"
-       VCS="git"
-       #VCS="bzr"
+       # Elegir el sistema de control de versiones. Descomentar solo uno
+       VCS="git"           # git [Version Control Systems - VCS]
+       #VCS="hg"           # Mercurial
+       #VCS="bzr"          # Bazaar
        #VCS="darcs"
-       PUSH_REMOTE="origin"
-Y para que realice los PUSH_REMOTE automaticamente ha de configurarse:
-# nano /etc/etckeeper/commit.d/60push-remote
-    #!/bin/sh
-    cd /etc
-    if [ "$VCS" = "git" ]; then
-        git push "$PUSH_REMOTE" master || {
-            echo "Error: No se pudo hacer push al remoto $PUSH_REMOTE" >&2
-            exit 1
-        }
-    fi
-# chmod +x /etc/etckeeper/commit.d/50push-remote (y darle permisos de ejecución)
-Con la base realizada, puede empezar a usarse la aplicación.
-# cd /etc (entrar en el directorio)
-# etckeeper init (crea un repositorio Git en /etc/.git y prepara el directorio /etc para el control de versiones)
-# etckeeper commit "Primera confirmación inicial de /etc" (registra todos los archivos actuales de /etc en el repositorio con el mensaje especificado)
-A partir de este momento cualquier cambio que realice el usuario en algún archivo en /etc ha lanzarse:
-# etckeeper commit "Añadida entrada para servidor-local en /etc/XXXX"
-Si la modificación procede de APT por la instalación de un paquete, etckeeper detecta los cambios y automaticamente hace una confirmación al finalizar la instalación.
-# etckeeper vcs log (verificar el historial)
-# etckeeper vcs status (ver qué ha cambiado antes de confirmarlo)
-# etckeeper commit "Actualizados hosts y resolv.conf" (confirmar los cambios de varios archivos)
-# etckeeper vcs checkout abcd123 /etc/hosts (volver al estado antes de añadir una entrada)
-# etckeeper commit "Revertido cambio en /etc/hosts a estado inicial" (y confirmar el cambio)
+       #
+       # Activar commits automáticos diarios
+       AVOID_DAILY_AUTOCOMMITS=0
+       #
+       # Commit antes de hacer upgrade/dist-upgrade
+       AVOID_COMMIT_BEFORE_INSTALL=0
+       #
+       # Commit después de instalar/actualizar paquetes
+       AVOID_COMMIT_AFTER_INSTALL=0
+# systemctl enable etckeeper.timer (habilitar el temporizador systemd para confirmar automáticamente los cambios existentes en /etc una vez al día)
+# etckeeper init (inicializar el repositorio)
+# etckeeper vcs status (ver estado actual)
+# etckeeper commit "He cambiado sshd_config (hacer commit manual)
+# etckeeper vcs log (ver historial completo)
+# etckeeper vcs log --oneline (lo mismo pero con la vista más compacta)
+# etckeeper vcs log --grep=fail2ban (ver historial referente a fail2ban)
+# etckeeper vcs diff HEAD~5..HEAD (ver qué cambió en los últimos 5 commits)
+# etckeeper vcs log -p /etc/nginx/nginx.conf (ver qué cambió un archivo concreto)
+# etckeeper vcs diff HEAD@{3.days.ago} (comparar versión actual vs hace 3 días)
 # etckeeper vcs diff abcd123 efgh456 (comparar qué cambió entre dos confirmaciones)
-Nota.- Lo inmportante de este paquete, es su integración con APT. Cada vez que se usa para instalar, actualizar o eliminar paquetes, etckeeper ejecuta un "hook" que detecta cambios en /etc y los registra automáticamente en el repositorio con un mensaje como "committing changes in /etc after apt run" sin intervención manual y los permisos y otros metadatos los guarda en el archivo especial .etckeeper.
+# etckeeper vcs reset --hard HEAD~3 (vuelve 3 commits atrás. Pierde los cambios no commiteados)
+# etckeeper vcs checkout HEAD~2 -- /etc/hosts (recupera la versión de /etc/hosts de hace 2 commits)
+# etckeeper vcs diff (ver diferencias antes de commitear)
+# etckeeper uninit (borra el repositorio de etckeeper)
 
 
 eterm
@@ -43721,6 +43719,21 @@ Y en la linea "GRUB_CMDLINE_LINUX_DEFAULT="quiet"" añadir la opción "splash" p
       GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"
 La opción `quiet` oculta los mensajes del kernel, y splash le dice al kernel que ejecute Plymouth.
 # update-grub (para que los cambios se apliquen)
+
+
+plzip
+Compresor de datos en paralelo sin pérdidas basado en el algoritmo LZMA con una comprobación de integridad muy segura y una interfaz de usuario similar a la de gzip o bzip2. Los archivos generados por plzip son totalmente compatibles con lzip.
+$ plzip archivo.txt (comprimir archivo.txt creando archivo.txt.lz y borrando el original)
+$ plzip -k archivo.txt (lo mismo manteniendo el archivo original)
+$ plzip -d archivo.txt.lz (descomprimir)
+$ plzip -l archivo.txt.lz (ver información del archivo comprimido)
+$ plzip -n 4 archivo_grande.iso ((por defecto usa todos los núcleos disponibles pero en este caso se limita a 4)
+$ plzip -1 archivo (más rápido, menos compresión)
+$ plzip -9 archivo (más lento, mejor compresión)
+$ tar -cf - datos/ | plzip > datos.tar.lz (plzip no empaqueta, solo comprime, kpara comprimir directorios se usa con tar)
+$ plzip -dc datos.tar.lz | tar -xf - (descomprimir)
+$ plzip -dc archivo.txt.lz (ver contenido sin descomprimir)
+$ plzip -t archivo.lz (verificar integridad)
 
 
 pm
