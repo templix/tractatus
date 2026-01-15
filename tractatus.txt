@@ -43702,6 +43702,30 @@ pluto-lunar
 Colección de rutinas para calcular la posición de los cuerpos del sistema solar, conversiones de tiempo y transformaciones de coordenadas, que se utiliza a menudo en aplicaciones científicas o SDR [Software Defined Radio]. No es un comando directo, se invocan sus funciones desde otras aplicaciones.
 
 
+ply
+Un rastreador dinámico para Linux que aprovecha la máquina virtual BPF [Berkeley Packet Filter] del kernel junto con sondas k [kprobes] que son puntos de rastreo que se colocan en funciones del kernel para capturar eventos y puntos de rastreo para conectar sondas a puntos arbitrarios del kernel. Es una herramienta que permite monitorear y recopilar datos en tiempo real del núcleo de Linux sin necesidad de modificar el código del kernel o reiniciar el sistema. Se usa principalmente para diagnóstico, análisis de rendimiento y depuración del sistema.
+# ply -T (verificar que el sistema tenga todas las capacidades necesarias para que ply funcione)
+# ply 'kprobe:vfs_read { @["reads"] = count(); }' (al pulsar ctrl-c muestra la cantidad de escrituras de los procesos)
+# ply 'kprobe:vfs_write { @[comm] = count(); }' (ver procesos que hacen write)
+# ply -d 'kprobe:vfs_read { @reads[comm,pid] = count(); }' (en modo debug y mostrando proceso y el pid)
+# ply -d 'kprobe:vfs_read { @stats[comm,pid] = count(); }'
+1.-
+Un ejemplo
+$ nano contar-reads.ply
+#!/usr/local/bin/ply
+kprobe:vfs_read {
+    @[comm] = count();
+}
+interval:1000 {
+    print(@);
+    clear(@);
+}
+$ chmod +x contar-reads.ply
+# ply contar-reads.ply
+Cuando se pulse ctrl-c mostrar las estadísticas
+# ply -S mi_script.ply (ver el BPF generado)
+
+
 plymouth
 Aplicación que se inicia muy temprano en el proceso de inicio y final y que proporciona una animación gráfica mientas el proceso de inicio o final ocurre en segundo plano lo que ayuda a proporcionar una experiencia visual fluida sin ver los mensajes de kernel y los parpadeos de la pantalla durante estos procesos.
 # plymouth-set-default-theme --list (lista los temas de Plymouth disponibles instalados en el sistema)
