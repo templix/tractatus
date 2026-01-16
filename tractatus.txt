@@ -28294,8 +28294,16 @@ Se usa para instalar o eliminar imágenes del kernel en initrd hacia y desde la 
 $ ls /usr/lib/modules/
 
 
+kernelshark
+Es un lector front-end de la salida de trace-cmd [ver]. Lee un archivo con formato trace-cmd.dat y genera una vista gráfica y de lista de los datos.
+$ kernelshark trace.dat (muestra el gráfico de los datos optenidos con trace-cmd)
+$ kernelshark --cpu (muestra gráfico de todas las cpu)
+$ kernelshark --pid (muestra gráfico de las tareas por pid)
+$ kernelshark --task (muestra gráficos de las tareas por nombre)
+
+
 kerneltop
-muestra el uso del kernel en estilo interactivo como top [ver]
+Muestra el uso del kernel en estilo interactivo como top [ver]
 # kerneltop -l 45 -s 5 (Que muestre 45 lineas [por defecto 50] y actualización cada 5 segundos [por defecto 1])
 
 
@@ -42173,6 +42181,38 @@ $ perdition -p 110 --pop3_server mail.example.com (inicia perdition en el puerto
 $ perdition -p 143 --imap_server mail.example.com (inicia perdition en el puerto 143 y configura la redirección a mail.example.com como el servidor IMAP4 real)
 
 
+perf
+Herramientas de análisis de rendimiento. Su flujo típico es elegir qué evento medir, recoger datos y luego analizarlos.
+$ perf --list-cmds (listado de subcomandos)
+$ perf --list-opts (ver las opciones)
+$ perf list (ver todos los eventos sobre los que se puede medir)
+# perf list stat (mostrar todos los eventos strace)
+# perf list sw (lista de eventos predefinidos de software)
+# perf list block (eventos de disco)
+# perf list sched (eventos scheduler)
+# perf stat ls -ld /etc (medir un comando: tiempo de ejecución, número de instrucciones ejecutadas, ciclos de CPU, fallos de página, context switches, etc)
+# perf stat ip a (lo mismo del comando ip)
+# perf stat -p <PID> sleep 5 (medir un proceso en ejecución por el PID durante 5 segundos)
+# perf stat -e cycles,instructions,cache-misses fastfetch (medir sólo algunos eventos del comando fastfetch)
+# perf record ip (perfilar la ejecución de un programa)
+# perf record -a sleep 5 (perfilar todo el sistema durante 5 s)
+# perf record -F 99 -a -- sleep 10 (aumentar frecuencia de muestreo)
+# perf record -e cycles:u neowofetch (perfilar sólo user-space de un programa)
+# perf report (mostrar los ciclos de todo el sistema)
+# perf bench mem all (todos los tests de memoria)
+# perf top (ver los hotspots de CPU de todo el sistema. Parecido a top pero por función/símbolo, no por proceso)
+# perf top -a (ver todos los CPUs)
+# perf top -e cpu-clock (enfocarse en un evento concreto)
+# perf top -p 2798 (limitar a un pid)
+# perf top -e syscalls:sys_enter_* (ver syscalls en tiempo real)
+# perf sched record sleep 10 (registrar la actividad del scheduler durante 10 s)
+# perf sched latency (mostrar un resumen de latencias)
+# perf trace free -m (trazar syscalls de un comando)
+# perf trace ls -ld /etc (lo mismo)
+# perf trace -p <PID> (trazar syscalls de un PID)
+Nota.- Para averigurar el PID de un proceso: pgrep firefox.
+
+
 perf-tools-unstable
 Herramientas similares a DTrace de Solaris para análisis de rendimiento y que son experimentales o utilizan técnicas de trazado que podrían no ser estables en todas las versiones del kernel. Incluye las aplicaciones bitesize-perf, cachestat-perf, execsnoop-perf, funccount-perf, funcgraph-perf, funcslower-perf, functrace-perf, iolatency-perf, iosnoop-perf, killsnoop-perf, kprobe-perf, opensnoop-perf, perf-stat-hist-perf, reset-ftrace-perf, syscount-perf, tcpretrans-perf, tpoint-perf y uprobe-perf. Estas herramientas han sido reemplazadas por versiones más modernas incluidas en el paquete bpfcc-tools [ver].
 # bitesize-perf (mostrará estadísticas sobre tamaño de operaciones de lectura y escritura en disco, número de operaciones y bytes transferidos, agrupados por tamaño. Parar con Ctrl-c)
@@ -42684,7 +42724,7 @@ $ journalctl -u pgqd.service (ver logs)
 
 
 pgrep
-Examina los procesos en ejecución y enumera los identificadores de cada proceso.
+Examina los procesos en ejecución y enumera los identificadores de cada proceso [PID].
 $ pgrep emacs
 $ pgrep httpd
 $ pgrep -l -G group (del grupo especificado)
@@ -51354,7 +51394,12 @@ $ newgidmap 1234 0 100000 1000 1000 200000 1000 (que dentro del proceso 1234 el 
 
 ul
 Subrayado de palabras en la terminal.
-	$ echo $'linux es g\b_e\b_n\b_i\b_a\b_l\b_ ' | ul (Cada letra a subrayar ha de ir seguida de \b_)
+$ echo $'linux es g\b_e\b_n\b_i\b_a\b_l\b_ ' | ul (Cada letra a subrayar ha de ir seguida de \b_)
+
+
+ulauncher
+Lanzador de aplicaciones. Su uso normal es asociar el comando a una combinación de teclas.
+$ ulauncher
 
 
 ulimit
