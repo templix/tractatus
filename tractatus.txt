@@ -52054,29 +52054,6 @@ usb-devices
 $ usb-devices
 
 
-usbguard
-Proteger el sistema contra dispositivos USB no autorizados [BadUSB].
-# systemctl status usbguard (controlar el estado del servicio)
-# usbguard list-devices (listar dispositivos USB conectados, si estan permitidos, bloqueados o rechazados y ver sus IDs)
-# usbguard allow-device <ID_del_dispositivo> (permitir un dispositivo)
-# usbguard block-device <ID_del_dispositivo> (bloquear un dispositivo)
-# usbguard monitor (monitorizar en tiempo real los eventos de dispositivos USB)
-# usbguard generate-policy > /ruta/a/politica.conf (generar archivo de configuración que puede reutilizarse en otros sistema)
-Se pueden crear reglas para dispositivos USB en el archivo:
-# nano /etc/usbguard/rules.conf
-Con la linea:
-    allow id 1d6b:0002 (para autorizar)
-Y si se quere bloquear todo:
-# nano /etc/usbguard/usbguard-daemon.conf
-    PresentDevicePolicy=block
-Para cambiar cómo se tratan los dispositivos USB ya conectados cuando el servicio USBGuard se inicia:
-# nano /etc/usbguard/usbguard-daemon.conf
-Y en las opciones en "PresentDevicePolicy":
-    apply-policy: aplica las reglas existentes a los dispositivos ya conectados.
-    allow: permite todos los dispositivos ya conectados.
-    block: bloquea todos los dispositivos ya conectados.
-
-
 usb_modeswitch
 Configuración del modem Huawei. Editar:
 # gedit /etc/usb_modeswitch.conf
@@ -52107,11 +52084,47 @@ Arrancarlo con alguno de los siguientes comandos:
 # usb_modeswitch -c /etc/usb_modeswitch.conf
 
 
+usbguard
+Proteger el sistema contra dispositivos USB no autorizados [BadUSB].
+# systemctl status usbguard (controlar el estado del servicio)
+# usbguard list-devices (listar dispositivos USB conectados, si estan permitidos, bloqueados o rechazados y ver sus IDs)
+# usbguard allow-device <ID_del_dispositivo> (permitir un dispositivo)
+# usbguard block-device <ID_del_dispositivo> (bloquear un dispositivo)
+# usbguard monitor (monitorizar en tiempo real los eventos de dispositivos USB)
+# usbguard generate-policy > /ruta/a/politica.conf (generar archivo de configuración que puede reutilizarse en otros sistema)
+Se pueden crear reglas para dispositivos USB en el archivo:
+# nano /etc/usbguard/rules.conf
+Con la linea:
+    allow id 1d6b:0002 (para autorizar)
+Y si se quere bloquear todo:
+# nano /etc/usbguard/usbguard-daemon.conf
+    PresentDevicePolicy=block
+Para cambiar cómo se tratan los dispositivos USB ya conectados cuando el servicio USBGuard se inicia:
+# nano /etc/usbguard/usbguard-daemon.conf
+Y en las opciones en "PresentDevicePolicy":
+    apply-policy: aplica las reglas existentes a los dispositivos ya conectados.
+    allow: permite todos los dispositivos ya conectados.
+    block: bloquea todos los dispositivos ya conectados.
+
+
 usbhid-dump
 [usbutils]. Volcar descriptores de informe y flujos de interfaces HID de todos los dispositivos USB conectados.
 $ usbhid-dump (básico)
 $ usbhid-dump -m 5543:0005 -es (Volcar flujo de informes para un dispositivo con ID de proveedor 0x5543 e ID de producto 0x0005)
 $ usbhid-dump -es (Volcar flujos de informes de todas las interfaces HID de todos los dispositivos USB [precaución: perderá el control sobre el terminal si usa un teclado USB])
+
+
+usbip
+Herramienta que permite compartir dispositivos USB conectados a un ordenador [servidor] con otros ordenadores [clientes] a través de la red IP sin control de acceso ni cifrado por lo que debe de utilizarse en entornos de confianza. Este paquete proporciona el componente de servidor "usbipd" y la herramienta de cliente "usbip".
+# modprobe vhci-hcd (activar el módulo en el cliente)
+# modprobe usbip-host (activar el módulo en el servidor)
+# usbipd -D (iniciar el daemon usbipd en el servidor)
+# usbipd (o colocar el servidor en modo escucha en 0.0.0.0:3240)
+# usbip attach --remote=server --device=usbip-vudc.0 (conectar un dispositivo remoto)
+# usbip list --device (lista de gadgets exportados por el servidor usb local)
+# usbip port (dispositivos importados)
+# usbip detach --port=0 (desconecta el dispositivo USB)
+# usbip list -r 192.168.18.17 (listar dispositivos disponibles en el servidor)
 
 
 usbmount
