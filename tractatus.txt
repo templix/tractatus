@@ -14243,6 +14243,20 @@ $ egctl eg1 on left left off (cambiar el estado del dispositivo de corriente eg1
 Nota.- valores posibles son: on [encender], off [apagar], toggle [cambiar al estado opuesto] y left [mantener el estado actual]
 
 
+eget
+Descarga y extrae binarios precompilados de las versiones en GitHub. Para usarlo, proporciona un repositorio y Eget buscará entre los recursos de la última versión para encontrar un binario precompilado adecuado para tu sistema. Si lo encuentra, se descargará y Eget lo extraerá al directorio actual.
+https://github.com/zyedidia/eget
+$ eget junegunn/fzf (busca el buscador difuso fzf para el sistema, lo descarga y lo deja listo para usar en la carpeta donde se esté)
+$ eget neovim/neovim (descarga la última versión estable del editor Neovim)
+$ eget zyedidia/micro --tag nightly (or defecto, descarga la versión estable [Latest]. Con --tag, se pide una versión "nightly")
+$ eget jgm/pandoc --to /usr/local/bin (guarda el archivo en la carpeta donde se está, con --to, see indica que lo mueva directamente a /usr/local/bin)
+$ eget ogham/exa --asset ^musl (que busque un binario que no use la librería musl o que cumpla ese patrón específico de nombre)
+$ eget -f eget.1 zyedidia/eget (que no quiemos el ejecutable principal, sino un archivo específico dentro del paquete descargado, en este caso, un archivo de manual)
+$ eget --system darwin/amd64 sharkdp/fd (descargar la versión de macOS [Darwin])
+$ eget https://go.dev/dl/go1.17.5.linux-amd64.tar.gz --file go --to ~/go1.17.5 (que extraiga solo el archivo "go" de la URL mencionada y lo guarde en una carpeta específica)
+$ eget --all --file '*' ActivityWatch/activitywatch (en lugar de buscar un solo binario, que descargue y extraiga todos los archivos contenidos en el paquete de la versión)
+
+
 eggdrop
 Bot de IRC escrito en C, que se instala en los canales y toma medidas de protección, como evitar que lo tomen, reconocer a los usuarios baneados para rechazarlos, reconocer a los usuarios privilegiados para darles el estado de operador, castigar a los usuarios por cosas como inundaciones de servicio... Un archivo de configuración de muestra en https://github.com/eggheads/eggdrop/blob/develop/eggdrop.conf.
 $ eggdrop -m ~/.eggdrop (especificando el archivo de configuración)
