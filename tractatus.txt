@@ -50743,6 +50743,27 @@ $ tr " " . < archivo (substituir los espacios por puntos)
 $ tr -c "[:digit:]" " " < /dev/urandom | dd cbs=$COLUMNS conv=lcase,unblock | GREP_COLOR="1;32" grep --color "[^ ]" (salvapantallas como matrix)
 
 
+trace-cmd
+Es una interfaz para ftrace, el trazador interno del kernel Linux. Su función principal es capturar y analizar el comportamiento del kernel en tiempo de ejecución, permitiendo inspeccionar llamadas a funciones, eventos del sistema, cambios de contexto, interrupciones, etc., sin necesidad de recompilar el kernel ni insertar módulos.
+# trace-cmd list -e (lista todos los eventos disponibles)
+# trace-cmd report --profile --comm net:netif_rx (muestra estadísticas de algún evento del listado anterior, si se ha producido)
+# trace-cmd list -f (lista todas las funciones trazables)
+# trace-cmd record -e syscalls sleep 5 (trazar todas las llamadas al sistema durante 5 segundos y genera trace.dat)
+# trace-cmd report (muestra el archivo trace.dat generado)
+# trace-cmd record -e sched_switch ls > /dev/null (trazar cambios de tareas [sched_switch] mientras se ejecuta ls)
+# trace-cmd report (luegoo ver qué procesos se ejecutan y cuándo)
+# trace-cmd record -p function -l '*uart*' (trazar funciones del kernel que contienen la palabra "uart", Detener con Ctrl-c)
+# trace-cmd report (ver el resultado)
+# trace-cmd record -p function_graph -e irq_handler_entry -l do_IRQ sleep 10 (trazar gráfico de llamadas [function_graph] para "do_IRQ")
+# trace-cmd report (muestra la duración de cada llamada a "do_IRQ" y qué interrupciones se manejaron)
+# trace-cmd record -e timer:hrtimer_expire_entry sleep 0.01 (trazar eventos de temporizador de alta resolución)
+# trace-cmd report (captura callbacks de temporizadores en solo 10 ms)
+# trace-cmd reset (desactiva todos los tracers y eventos activos)
+# trace-cmd start -p function_graph -l '*usb*' (inicia trazado sin detenerse [modo continuo])
+# trace-cmd stop (detiene la traza iniciada con start)
+# trace-cmd extract (descarga la traza actual sin detenerla)
+
+
 traceroute
 Permite seguir la pista de un paquete desde un host a otro.
 # traceroute www.tuxapuntes.com
