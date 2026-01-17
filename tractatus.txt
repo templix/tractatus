@@ -46207,6 +46207,12 @@ $ ruby -e "puts Dir.glob('*').count" (la opción -e permite introducir directame
 $ ruby -v (Versión de ruby)
 
 
+ruby-notify
+El comando notify es un envoltorio para notify-send. Ambos son equivalentes.
+$ notify "Linux es genial"
+$ notify-send "linux es genial"
+
+
 runit
 Colección de herramientas para proporcionar supervisión y gestión de servicios en el sistema: iniciar y detener servicios y supervisar los daemons mientras se ejecutan, enviar señales a daemons de servicio sin la necesidad de archivos pid, registro con rotación automática de archivos de registro y límites de espacio en disco. Consta de las siguientes aplicaciones: chpst [ver], cpsv, runsv [se ejecuta dentro de un directorio de servicio, donde controlará y mantendrá el servicio en ejecución. runsv se ocupa de iniciar, detener, reiniciar el servicio y también de monitorizar su estado], runsvdir [se encarga de supervisar varios servicios a la vez], sv [ver], svlogd, mk-runscript, runsvchdir, update-service, utmpset.
 $ svlogd /home/USER/Documentos/ (daemon que activa la monitorización del directorio especificado)
