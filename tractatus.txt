@@ -49635,6 +49635,20 @@ Para verificar el contenido de resolv.conf:
 # cat /etc/resolv.conf
 
 
+systemtap
+Proporciona una infraestructura que simplifica la recopilación de información sobre el sistema Linux en ejecución. Esto facilita el diagnóstico de problemas de rendimiento, análisis de cuellos de botella y depuración de problemas complejos. Incluye los ejecutables stap, stap-prep, stap-profile-annotate, stap-report y stapbpf
+Proceso previo
+# apt install linux-headers-$(uname -r) (instalar los headers del kernel)
+# apt install linux-image-$(uname -r)-dbg (en algunos casos también se necesita los símbolos de depuración)
+# sysctl -w kernel.perf_event_paranoid=-1
+# sysctl -w kernel.kptr_restrict=0
+# stap-prep (herramienta de preparación que intenta instalar automáticamente los paquetes necesarios)
+# ls -la /lib/modules/$(uname -r)/build/ (verificar que existe el directorio de headers)
+# ls -la /lib/modules/$(uname -r)/build/.config (verificar el archivo .config)
+A pesar de los bugs de este comando alguna prueba si funciona:
+# stap -l 'syscall.*' (listar probes disponibles)
+
+
 systune
 Este programa escribe los parámetros del núcleo, previamente guardados en un archivo de configuración, en el sistema de archivos /proc. Esto permite ajustar el rendimiento del kernel sin volver a compilarlo. Systune se inicia después de la mayoría de los demonios y otros scripts de init.d, por lo que puede usarse como sysctl de "segunda etapa".
 
