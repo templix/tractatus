@@ -43877,6 +43877,21 @@ Paquete que proporciona al usuario un conjunto de utilidades para el análisis y
 Nota.- Un dispositivo DAX [devdax] proporciona un medio para que las aplicaciones accedan directamente al almacenamiento, sin la participación de un sistema de archivos. El beneficio del dispositivo DAX es que proporciona una granularidad de fallas garantizada. Debe haber al menos un dispositivo DAX como entrada o salida. Si no se especifica, el valor predeterminado será stdin o stdout respectivamente. Para las arquitecturas Intel 64 y AMD64, se admiten las siguientes granularidades: 4KB, 2MIB y 1GB
 
 
+pmidi
+Herramienta para reproducir archivos MIDI a través del secuenciador ALSA. No genera sonido por sí misma, envía eventos MIDI a un puerto MIDI [hardware o software], como un sintetizador, SoundFont, Fluidsynth, o un dispositivo externo.
+$ pmidi archivo.mid (reproducir un archivo MIDI por el puerto por defecto)
+$ pmidi -l (listar puertos MIDI disponibles)
+$ fluidsynth -a alsa -m alsa_seq soundfont.sf2 (ejecutar FluidSynth con un SoundFont)
+$ pmidi -p 128:0 archivo.mid (enviará el MIDI a Fluidsynth por el cliente 128 y puerto 0 y lo reproducirá)
+$ pmidi tema1.mid tema2.mid tema3.mid (reproducir varios archivos MIDI)
+$ pmidi -r archivo.mid (reproducir en bucle)
+1.-
+Uso con dispositivos MIDI externos como un teclado o módulo MIDI USB. Una vez conectado:
+$ pmidi -l (verificar el puerto)
+$ pmidi -p 20:0 archivo.mid (enviar el midi)
+El dispositivo externo producirá el sonido.
+
+
 pmie
 Motor de inferencia para métricas de rendimiento.
 $ pmie archivo
@@ -43889,6 +43904,21 @@ Permite a usuarios sin privilegios montar dispositivos extraíbles sin una entra
 # pmount --type ntfs --read-write /dev/sdc (Montar un disco formateado en NTFS, forzando el acceso de lectura y escritura)
 # pmount --type ext4 /dev/sda1 label (Montar un dispositivo con un tipo de sistema de archivos ext4 en /media/label)
 # pumount /dev/sda1 (desmontar una particion)
+
+
+pms
+[Practical Music Search]. cliente para el demonio del reproductor de música mpd [Music Player Daemon]. La interfaz está diseñada para ser similar a Vim, lo que significa que utiliza atajos de teclado y comandos que pueden ser familiares para los usuarios de Vim.
+$ pms (abrirá la interfaz)
+Algunos de los comandos básicos:
+Space --> Play/Pause
+n --> Pista siguiente
+p --> pista anterior
+s --> Stop
+S --> Reproducción aleatoria
+R --> Volver a reproducir
++ --> Subir volumen
+- --> Bajar volumen
+q --> Salir
 
 
 pmt-
@@ -43918,6 +43948,31 @@ $ pm-is-supported (muestra las acciones soportadas [--suspend | --hibernate | --
 # pm-hibernate --help (ver los parámetros de la opción que puede especificarse para hibernar el pc)
 # pm-powersave false (desactiva las funciones de ahorro de energía)
 # pm-powersave true (activa las funciones de ahorro de energía)
+
+
+pmtools
+Conjunto de pequeñas herramientas que ayudan a administrar e inspeccionar módulos, archivos de documentación básica y programas Perl. Incluye los ejecutables basepods, faqpods, modpods, pfcat, plxload, pmall, pman, pmcat, pmcheck, pmdesc, pmeth, pmexp, pmfunc, pminclude, pminst, pmload, pmls, pmpath, pmvers, podgrep, podpath, pods, podtoc, sitepods y stdpods.
+$ pmpath DBI (encontrar dónde está instalado el módulo DBI)
+$ pmpath CGI JSON::PP (encontrar múltiples módulos)
+$ pman LWP::UserAgent (ver documentación del módulo LWP::UserAgent)
+$ pmvers DBI (ver versión de un módulo)
+$ pmvers DBI DBD::mysql JSON (verificar múltiples módulos)
+$ pmls (lista todos los módulos Perl disponibles)
+$ pmls | grep -i json (filtrar por uno concreto)
+$ pmdesc LWP::UserAgent (obtener descripción de un módulo)
+$ pmeth File::Copy (muestra los métodos disponibles en un módulo)
+$ pmfunc File::Basename (muestra las funciones que un módulo exporta)
+$ pmfunc List::Util (lo mismo)
+$ podgrep database DBI (buscar "database" en documentación de DBI)
+$ podgrep -r "web scraping" (buscar en todos los módulos instalados)
+$ podgrep -i "regular expressions" | head -20 (encontrar documentación sobre un tema específico)
+$ pmcat JSON::PP (visualiza el código fuente completo de un módulo)
+$ stdpods (listar toda la documentación estándar)
+$ faqpods (muestra páginas de preguntas frecuentes de Perl)
+$ pman perlfaq1 (leer una FAQ específica)
+$ pmload DBI (verificar si DBI se puede cargar)
+$ pmload NonExistent::Module (verificar módulo inexistente)
+$ pmpath JSON::PP && pmvers JSON::PP && pman JSON::PP (encontrar, verificar versión y ver documentación)
 
 
 png2html
