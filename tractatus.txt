@@ -44007,6 +44007,13 @@ El archivo texto.txt contiene una palabra, frase o párrafo con el que se confec
 2 = fuente grande.
 
 
+png23d
+Convierte imágenes PNG en representaciones tridimensionales OpenSCAD o STL.
+$ png23d -o rscad file.png file.scad (generar un archivo en formato scad para usar con OpenSCAD. El archivo estará compuesto por una unión de cubos)
+$ png23d -f smooth -o stl file.png file.scad (conservar todas las caras del cubo con bordes inclinados y reducir las irregularidades y en formato de estereolitografía binaria)
+$ png23d -f smooth -o astl -w 50 file.png file.scad
+
+
 pngcheck
 Verifica la integridad de archivos PNG, JNG y MNG y opcionalmente vuelca casi toda la información. Por ejemplo, se puede usar para imprimir las estadísticas básicas sobre una imagen [dimensiones, profundidad de bits, etc.] para enumerar la información de color y transparencia en su paleta o para extraer las anotaciones de texto incrustadas.
 $ pngcheck imagen.png
