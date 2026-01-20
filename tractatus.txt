@@ -43986,6 +43986,14 @@ $ pmuninstall -L /usr/local/lib/perl5 Mojolicious (especificar una ruta concreta
 Nota.- No usar con módulos instalados con apt, mezclar pmuninstall y apt puede dejar el sistema inconsistente.
 
 
+pnc
+Es una herramienta que permite a los usuarios operar con números telefónicos [obtener información de validez, reformatearlos o extraer números de un fragmento de texto] mediante libphonenumber. En los ejemplos los números son ficticios.
+$ pnc format -c ES -f e164 669752163 (especificando la nación y el formato de salida del número)
+$ pnc info -c ES 669752163 (información)
+$ pnc valid -c ES 663283646 (si es valido. No muestra salida)
+$ pnc format -c ES -f int 639786911 (muestra el prefijo delante separado del número)
+
+
 png2html
 Convertir imagenes png a html. Dado que la conversión asume 1 pixel por cada caracter, las imagenes resultantes se ven alargadas. Para una visualización más decente han de achatarse. A modo de ejemplo una imagen de 115x115 no se ha visualizado correctamente hasta 155x115.
 $ png2html imagen.png texto.txt salida.html 1
