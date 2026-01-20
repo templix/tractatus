@@ -43976,6 +43976,16 @@ $ pmload NonExistent::Module (verificar módulo inexistente)
 $ pmpath JSON::PP && pmvers JSON::PP && pman JSON::PP (encontrar, verificar versión y ver documentación)
 
 
+pmuninstall
+Script para desinstalar módulos instalados desde CPAN. Cuando se instala módulos Perl desde CPAN por ejemplo con cpan, cpanm o CPANPLUS, el proceso suele generar un archivo llamado .packlist. pmuninstall lee las listas de archivos instalados *.packlist generados al instalar módulos con, por ejemplo, cpanminus y los elimina. No gestiona dependencias automáticamente por lo que si otros módulos dependen del que se borra, se romperán.
+$ pmuninstall DBI (busca el .packlist de DBI, elimina todos los archivos listados y borra directorios vacíos si procede. Puede dejar inutilizables módulos como DBD::mysql, DBD::Pg, etc)
+$ pmuninstall JSON::XS (otro ejemplo)
+$ pmuninstall -n DBI (ver qué haría sin borrar nada)
+$ pmuninstall Mojolicious Plack Try::Tiny (desinstalar varios módulos)
+$ pmuninstall -L /usr/local/lib/perl5 Mojolicious (especificar una ruta concreta de .packlist)
+Nota.- No usar con módulos instalados con apt, mezclar pmuninstall y apt puede dejar el sistema inconsistente.
+
+
 png2html
 Convertir imagenes png a html. Dado que la conversión asume 1 pixel por cada caracter, las imagenes resultantes se ven alargadas. Para una visualización más decente han de achatarse. A modo de ejemplo una imagen de 115x115 no se ha visualizado correctamente hasta 155x115.
 $ png2html imagen.png texto.txt salida.html 1
