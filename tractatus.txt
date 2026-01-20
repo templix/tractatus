@@ -50625,6 +50625,45 @@ Muestra de un archivo.yml:
 				- who; pwd
 
 
+tmuxp
+Gestor de sesiones de tmux [ver] que permite la configuración en formatos JSON y YAML. Configurar manualmente los paneles, las ventanas y los directorios cada vez que se reinicia la terminal es tedioso. tmuxp permite definir "planos" [blueprints] de las sesiones en archivos de texto [YAML o JSON] y con un solo comando, tmuxp lee ese archivo, abre tmux y organiza todo exactamente como se configuró.
+$ tmuxp load . (busca un archivo .yaml en el directorio actual para replicar la sesión)
+$ tmuxp freeze 0 ("congela" una sesión abierta número 0 y crea el archivo YAML por defecto en ~/.tmuxp/0.yaml |
+$ tmuxp ls (lista las configuraciones disponibles)
+1.-
+Ejemplo de dos ventanas [Ctrol-b n -- Ctrl-b p para cambiar de ventanas]
+$ nano mi_tmux.yaml
+session_name: Linux es genial
+windows:
+  - window_name: editor
+    focus: true
+    layout: main-vertical
+    panes:
+      - shell_command:
+        - cd ~/.emacs.d/
+        - nano init.el
+  - window_name: docs
+    panes:
+      - shell_command:
+        - cd ~/Documentos
+        - nano file.txt
+      - shell_command:
+        - ip a
+$ tmuxp load mi_tmux.yaml (para lanzarlo)
+2.-
+Ejemplo de un ventana con 3 paneles
+$ nano mi_tmux2.yaml
+session_name: comandos
+windows:
+  - window_name: stats
+    layout: even-horizontal
+    panes:
+      - htop
+      - ip a
+      - df -h
+$ tmuxp load mi_tmux2.yaml (para lanzarlo)
+
+
 toe
 Enumera todos los tipos de terminal disponibles por nombre principal con descripciones. Más de 1800.
 $ toe -a -s (informe sobre todas las bases de datos de terminal y una columna con entradas pertenecientes a una base de datos de terminal determinada.)
