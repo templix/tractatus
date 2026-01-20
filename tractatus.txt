@@ -43998,6 +43998,13 @@ png-definitive-guide
 La Guía Definitiva sobre el formato png. Puede leerse en el navegador con la dirección file:///usr/share/doc/png-definitive-guide/html/cover.html
 
 
+png23d
+Convierte imágenes PNG en representaciones tridimensionales OpenSCAD o STL.
+$ png23d -o rscad file.png file.scad (generar un archivo en formato scad para usar con OpenSCAD. El archivo estará compuesto por una unión de cubos)
+$ png23d -f smooth -o stl file.png file.scad (conservar todas las caras del cubo con bordes inclinados y reducir las irregularidades y en formato de estereolitografía binaria)
+$ png23d -f smooth -o astl -w 50 file.png file.scad
+
+
 png2html
 Convertir imagenes png a html. Dado que la conversión asume 1 pixel por cada caracter, las imagenes resultantes se ven alargadas. Para una visualización más decente han de achatarse. A modo de ejemplo una imagen de 115x115 no se ha visualizado correctamente hasta 155x115.
 $ png2html imagen.png texto.txt salida.html 1
@@ -44007,11 +44014,9 @@ El archivo texto.txt contiene una palabra, frase o párrafo con el que se confec
 2 = fuente grande.
 
 
-png23d
-Convierte imágenes PNG en representaciones tridimensionales OpenSCAD o STL.
-$ png23d -o rscad file.png file.scad (generar un archivo en formato scad para usar con OpenSCAD. El archivo estará compuesto por una unión de cubos)
-$ png23d -f smooth -o stl file.png file.scad (conservar todas las caras del cubo con bordes inclinados y reducir las irregularidades y en formato de estereolitografía binaria)
-$ png23d -f smooth -o astl -w 50 file.png file.scad
+png2svg
+Herramienta para convertir imágenes PNG pequeñas a SVG
+$ png2svg -p -c -o gnu.svg gnu.png (utilizar rectángulos de un solo pixel, rectángulos expandidos de color rosa y salida especificada en svg de la imagen gnu.png)
 
 
 pngcheck
