@@ -12189,20 +12189,34 @@ Sistema de administración de paquetes predeterminado en la mayoría de distribu
 dns
 El servidor DNS traduce los numeros ip a nombres inteligibles para los seres humanos. Estos servicios estan vinculados a los ISP, es decir, a nuestros proveedores de acceso a Internet. Sin embargo estas ips pueden ser modificadas para conseguir mejores rendimientos o por manias personales con algunas opciones mas libres o profesionales. La manera de saber si el servidor DNS responde correctamente es hacer un ping consistente en enviar una pequeña cantidad de información al servidor y medir la velocidad en milisegundos de la respuesta. Valores inferiores a 70 ms (Al final de la linea [time=62.9 ms]) son razonables:
 $ ping -c 3 8.8.8.8
-Algunas opciones a las ofrecidas por nuestras ISP:
+Algunas opciones libres son:
 	Google -> 8.8.8.8,	8.8.4.4
 	OpenDNS -> 208.67.222.222, 208.67.220.220
 	Level3 -> 4.2.2.1, 4.2.2.2, 4.2.2.3, 4.2.2.4, 4.2.2.5 y 4.2.2.6
-	Dyn -> 216.146.35.35, 216.146.36.36
 	DNSadvantage -> 156.154.70.1, 156.154.71.1
-Ona vez escogidas las DNSs:
+	AdGuard --> 94.140.14.140 94.140.14.141
+	Yandex.DNS --> 77.88.8.8 77.88.8.1
+	UncensoredDNS --> 89.233.43.71 91.239.100.100
+Escogidas las que se desee se colocan en el archivo de configuración y con la opción "rotate":
 # nano /etc/resolv.conf
-Colocar:
-	nameserver 4.2.2.1
-	nameserver 4.2.2.2
+options rotate
+# google
+#nameserver 8.8.8.8
+#nameserver 4.2.2.1
+# opendns:
+nameserver 208.67.222.222
+nameserver 208.67.220.220
+# level3
+nameserver 4.2.2.1
+nameserver 4.2.2.2
 Nota.- Comentar o borrar las existentes.
 Para evitar que network-manager sobreescriba el archivo resolv.conf, bloquear el fichero:
 # chattr +i /etc/resolv.conf (Para desbloquearlo -i)
+O preferible editar:
+# nano /etc/NetworkManager/NetworkManager.conf
+Y en el apartado [main] colocar:
+dns=none
+rc-manager=unmanaged
 
 
 dns2tcp
@@ -37709,6 +37723,11 @@ network-test
 # network-test
 
 
+NetworkManager
+Supervisa todas las conexiones de red y escoge automáticamente la mejor conexión para usar. El demonio NetworkManager intenta simplificar y automatizar al máximo la configuración y el funcionamiento de la red, gestionando la conexión de red principal y otras interfaces de red, como Ethernet, Wi-Fi y dispositivos de banda ancha móvil. Archivo de configuración en nano /etc/NetworkManager/NetworkManager.conf. Ver dns y nmcli.
+# NetworkManager --print-config (ver la configuración del servicio)
+
+
 netwox
 Este comando proporciona un menú con más de 200 herramientas [sniffers, spoofing, udp/tcp clients/servers, scan, ping, DNS, FTP, HTTP, IRC, NNTP, SMTP, SNMP, SYSLOG, TELNET, TFTP] para encontrar y resolver problemas de red.
 # netwox (entrar en el menú)
@@ -38234,7 +38253,7 @@ Monitor de tráfico de red
 
 nm
 Lista las funciones de una biblioteca o programa compilado
-$nm fichero.o
+$ nm fichero.o
 
 
 nmap
