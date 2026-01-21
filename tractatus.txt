@@ -44071,6 +44071,20 @@ $ pngcp entrada.png salida.png (crear un nuevo archivo PNG, cambiado algunos atr
 $ pnginfo imagen.png (muesra información sobre la imagen expecificada)
 
 
+pnopaste-cli
+[Perl Nopaste]. El servidor pnopaste, un pastebin auto-alojado, está escrito en Perl utiliza MySQL y resaltado de sintaxis para más de 120 idiomas y maneja contadores de visitas, caducidad, listas negras de palabras y direcciones IP, etc. pnopaste-cli es el cliente de línea de comandos para subir contenido al servicio pnopaste, no el servidor en sí.
+$ pnopaste-cli (abrirá un prompt donde se puede pegar texto. Finaliza con Ctrl+D)
+$ pnopaste-cli archivo.txt (enviar un archivo. Se sube como un paste con resaltado automático si el servidor detecta el lenguaje)
+$ cat archivo.log | pnopaste-cli (enviar texto desde un pipe)
+$ dmesg | pnopaste-cli (lo mismo)
+$ pnopaste-cli -l python script.py (especificar el lenguaje para resaltado de sintaxis)
+$ pnopaste-cli -l bash < script.sh (otro ejemplo)
+$ pnopaste-cli -e 1d archivo.txt (definir caducidad del paste. 1h una hora, 1w una semana, 1m un mes. Sin especificar, caducidad por defecto del servidor)
+$ pnopaste-cli -p archivo.txt (marcar el paste como privado)
+$ pnopaste-cli -s https://paste.midominio.org archivo.txt (cambiar el servidor de destino. Por defecto el configurado en el sistema o uno predefinido)
+$ make 2>&1 | pnopaste-cli -l c -e 1d (subir la salida de un error de compilación, con caducidad de 1 día y resaltado C)
+
+
 pnp.ids
 Archivo que contiene un registro público de todos los ID de proveedor conocidos utilizados en dispositivos PnP [Plug and Play] y los nombres de dichos proveedores. Su función principal es traducir códigos numéricos o alfabéticos a nombres de fabricantes para que los programas puedan mostrar información más comprensible al usuario. El archivo no es un ejecutable, sino un archivo de referencia que otros programas leen para mostrar información amigable. Por ejemplo cuando se conecta un dispositivo USB, PCI, ISA, etc., el sistema operativo detecta su ID de proveedor como "AAE" o "ABC" y en lugar de mostrar "Dispositivo de proveedor AAE", el programa consulta pnp.ids y muestra "Dispositivo de Anatek Electronics Inc.". El archivo de registro se encuentra en /usr/share/hwdata/pnp.ids.
 Algunos programas y herramientas comunes que utilizan pnp.ids son:
