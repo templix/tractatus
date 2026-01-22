@@ -44166,6 +44166,14 @@ $ poc-console (abrirá una consola interactiva donde se puede cargar PoCs, confi
 $ pocsuite -r examples/cve-XXXX.py -p 5020 -u http://victima.com (ejecutar directamente sin entrar en modo interactivo por el puerto 5020)
 
 
+pod2pandoc
+[pandoc texlive]. Herramienta que permite convertir documentos escritos en formato POD [Plain Old Documentation], el formato de documentación estándar de Perl, a otros formatos populares como HTML, Markdown, LaTeX, PDF, EPUB, ODT, etc, utilizando pandoc como motor de conversión.
+$ pod2pandoc --from pod --to markdown -o salida.md entrada.pod (especifica formato de entrada, formato de salida, archivo de salida y el de entrada)
+$ pod2pandoc --from pod --to html -o salida.html entrada.pod (convertir POD a HTML)
+$ pod2pandoc --from pod --to pdf -o salida.pdf entrada.pod (convertir POD a PDF)
+$ pod2pandoc --from pod --to epub -o salida.epub entrada.pod (vonvertir POD a EPUB)
+
+
 podman
 Herramienta para gestionar contenedores, imágenes, volúmenes montados en dichos contenedores y pods creados a partir de grupos de contenedores. Alternativa a Docker sin daemon.
 $ podman run -it --rm debian:stable (entrar en una Debian limpia donde poder instalar, probar y salir sin riesgo. Con --rm cuando cierra se pierde todo)
