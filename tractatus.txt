@@ -44143,6 +44143,16 @@ $ po4a po4a.conf (ejecutar para detectar los cambios)
 Creará/actualizará los archivos es.po, fr.po y de.po y si ya ha traducido algo en es.po, generará automáticamente el archivo guia.es.md.
 
 
+poc-streamer
+Conjunto de herramientas y programas de streaming de MP3 que permiten transmitir MP3 mediante HTTP, multidifusión RTP (RFC 2250 y RFC 3119) y un protocolo especial de multidifusión que permite el uso de la corrección de errores de reenvío para proteger el flujo de MP3 contra la pérdida de paquetes. También permite transmitir OGG mediante HTTP. Además de los programas de streaming, poc incluye dos herramientas de MP3: mp3cue y mp3cut. mp3cue permite cortar un archivo MP3 grande según la lista de pistas de un archivo .cue. mp3cut permite dividir y concatenar archivos MP3 según las franjas de tiempo indicadas en la línea de comandos. mp3cut corta archivos MP3 en tramas ADU (unidades de datos autónomas) para garantizar la mejor calidad. Incluye las herramientas mp3cue, mp3cut, mp3length, pob-2250, pob-3119, pob-fec, poc-2250, poc-3119, poc-fec, poc-http, pogg-http
+$ mp3length cancion.mp3 (devuelve la duración exacta de un archivo MP3)
+$ mp3cut -o salida.mp3 -t 00:30-01:30 entrada.mp3 (extrae un fragmento desde el segundo 30 al 90)
+$ cat musica.mp3 musica2.mp3 | poc-http -p 8080 (lee los MP3 de la entrada estándar y lo sirve vía HTTP. Permite conectarse a http://tu-ip:8080 para escuchar el archivo)
+$ cat musica.ogg | pogg-http -p 8080 (lo mismo que el anterior pero con un archivo Ogg)
+$ cat musica.mp3 | poc-3119 224.0.1.1 5000 (emitir a varios equipos a la vez usando el estándar robusto RFC 3119)
+$ pob-3119 224.0.1.1 5000 | mpg123 - (en los clientes)
+
+
 podman
 Herramienta para gestionar contenedores, imágenes, volúmenes montados en dichos contenedores y pods creados a partir de grupos de contenedores. Alternativa a Docker sin daemon.
 $ podman run -it --rm debian:stable (entrar en una Debian limpia donde poder instalar, probar y salir sin riesgo. Con --rm cuando cierra se pierde todo)
