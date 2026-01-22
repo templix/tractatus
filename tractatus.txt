@@ -44131,6 +44131,18 @@ $ pnscan 192.168.1.5/24 1:65525 (todos los puertos de la red))
 $ pnscan -w"HEAD / HTTP/1.0\r\n\r\n" -r"Server:" localhost 1:65525 (escanear todos los puertos de localhost)
 
 
+po4a.
+Herramientas para facilitar la traducción de documentación de manuales y otros documentos textuales utilizando el formato gettext [archivos .po], que es el estándar en el mundo del software libre. Contiene las bibliotecas principales y los submódulos necesarios para gestionar varios formatos: Asciidoc, Docbook, INI, KernelHelp, Latex, Man, Markdown, Texinfo, text. XML, Yaml...
+$ po4a-gettextize -f markdown -m guia.md -p guia.pot (extraer el texto en formato markdown del archivo original guia.md y guardarlo en guia.pot)
+Para proyectos largos, es preferible crear un archivo de configuración
+$ nano po4a.conf
+[po4a_langs] es fr de
+[po4a_paths] guia.pot $lang:$lang.po
+[type: markdown] guia.md $lang:guia.$lang.md
+$ po4a po4a.conf (ejecutar para detectar los cambios)
+Creará/actualizará los archivos es.po, fr.po y de.po y si ya ha traducido algo en es.po, generará automáticamente el archivo guia.es.md.
+
+
 podman
 Herramienta para gestionar contenedores, imágenes, volúmenes montados en dichos contenedores y pods creados a partir de grupos de contenedores. Alternativa a Docker sin daemon.
 $ podman run -it --rm debian:stable (entrar en una Debian limpia donde poder instalar, probar y salir sin riesgo. Con --rm cuando cierra se pierde todo)
