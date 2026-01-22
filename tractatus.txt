@@ -24900,7 +24900,7 @@ hostnamectl
 Comando similar a hostname pero más moderno. Muestra el nombre de host, el sistema operativo, el kernel y la arquitectura usada entre otros datos.
 $ hostnamectl (muestra los datos del sistema)
 $ hostnamectl status (lo mismo que la anterior)
-# hostnamectl set-hostname nombre_maquina (define el hostname)
+# hostnamectl set-hostname nombre_maquina (cambia el hostname al especificado)
 
 
 hosts
@@ -25458,7 +25458,7 @@ información sobre cómo construir cables. Colocar en el navegador file:///usr/s
 
 hwclock
 Ver fecha y hora de la BIOS
-# hwclock -D (Muestra toda la información))
+# hwclock -v (Muestra toda la información))
 # hwclock -w (sincroniza la del hardware a la del sistema)
 # hwclock -r  (verifica desfase entre ambas)
 # hwclock --set --date="2014-04-28 18:00" (establecer cambio de hora en el sistema y en el hardward.
@@ -30345,8 +30345,9 @@ $ locale-gen
 
 localectl
 Controlar la configuración regional del sistema y la distribución del teclado
-$ localectl status
-$ localectl list-locales
+$ localectl status (mostrar la configuración actual)
+$ localectl list-locales (listado de configuraciones posibles)
+# localectl set-keymap es (establecer la configuración a español del teclado)
 
 
 localehelper
@@ -30488,8 +30489,9 @@ $ login-duo (probarlo de forma local)
 
 loginctl
 Realizar una introspección y controlar el estado del administrador de inicio de sesión de systemd.
-$ loginctl list-sessions
-$ loginctl session-status 1
+$ loginctl list-sessions (listar sesiones activas)
+$ loginctl session-status 3 (mostrar detalles de la sesión 3)
+$ loginctl show-session 2 (mostrar detalles sobre la sesión 2)
 $ loginctl lock-sessions (pide contraseña y suspende pantalla)
 $ loignctl -a (muestra las propiedades de sesión/usuario independientemente de si están configuradas o no)
 $ loginctl list-users (lista los usuarios con sesión abierta)
@@ -37721,6 +37723,14 @@ netwatch
 network-test
 [ifupdown-extra]. Chequea y verifica que la red funciona como es debido.
 # network-test
+
+
+networkctl
+Muestra información sobre las interfaces de red gestionadas por systemd-networkd.
+# systemctl start systemd-networkd (activar el sericio si no está activo)
+# networkctl (listar interfaces de red)
+# networkctl status enp1s0 (mostrar detalles de una interfaz)
+Nota.- networkctl solo muestra información útil si se usa systemd-networkd como gestor de red, no si se usa NetworkManager o ifupdown.
 
 
 NetworkManager
@@ -49745,6 +49755,10 @@ Para acelerar el proceso de inicio y finalización:
 Y descomentar y modificar las lineas siguientes de 90 segundos a 10:
 	DefaultTimeoutStartSec=10s
 	DefaultTimeoutStopSec=10s
+
+
+systemd
+Es un administrador de sistemas y servicios para Linux. Ofrece potentes capacidades de paralelización, utiliza activación por socket y D-Bus para iniciar servicios, ofrece inicio de daemons bajo demanda, monitoriza los procesos mediante grupos de control de Linux, mantiene puntos de montaje y automontaje, e implementa una compleja lógica de control de servicios basada en dependencias transaccionales. Incluye los ejecutables busctl, hostnamectl, journalctl, kernel-install, localectl, loginctl, networkctl, run0, systemctl, systemd-ac-power, systemd-analyze, systemd-ask-password, systemd-cat, systemd-cgls, systemd-cgtop, systemd-confext, systemd-creds, systemd-delta, systemd-detect-virt, systemd-escape, systemd-firstboot, systemd-id128, systemd-inhibit, systemd-machine-id-setup, systemd-mount, systemd-notify, systemd-path, systemd-run, systemd-socket-activate, systemd-stdio-bridge, systemd-sysext, systemd-sysusers, systemd-tmpfiles, systemd-tty-ask-password-agent, systemd-umount, systemd-vpick, timedatectl y varlinkctl. Varios ejecutables están documentados a parte.
 
 
 systemd-analyze
