@@ -44157,6 +44157,15 @@ pocket-reform-handbook
 Versión HTML y PDF del manual del operador de la minicomputadora portátil de hardware abierto MNT Pocket Reform. Contiene temas como: Fundamentos de Linux: terminal, shell, sistema de archivos, administración de software con apt, escritorios gráficos Sway y Wayfire con Waybar, software y scripts específicos de MNT Pocket Reform, el hardware: carcasa, placa base, módulos del procesador, teclado, trackball, trackpad, baterías y temas avanzados com conexión serial mediante UART, u-boot, esquemas de hardware y lista de materiales. Ver la documentación en el navegador: file:///usr/share/doc/pocket-reform-handbook/html/index.html
 
 
+pocsuite3
+Es un marco de trabajo [framework] para realizar pruebas de vulnerabilidades remotas, desarrollar y ejecutar pruebas de concepto [PoCs] y automatizar tareas relacionadas con la seguridad de aplicaciones y servicios en red. Está diseñado para ser una herramienta para investigaciones de seguridad y testers de penetración. Incluye el ejecutable poc-console.
+$ poc-console (abrirá una consola interactiva donde se puede cargar PoCs, configurar objetivos y ejecutar pruebas)
+  	 (poc-console) > load  poc.json
+	 (poc-console) > set target http://victima.com
+	 (poc-console) > run
+$ pocsuite -r examples/cve-XXXX.py -p 5020 -u http://victima.com (ejecutar directamente sin entrar en modo interactivo por el puerto 5020)
+
+
 podman
 Herramienta para gestionar contenedores, imágenes, volúmenes montados en dichos contenedores y pods creados a partir de grupos de contenedores. Alternativa a Docker sin daemon.
 $ podman run -it --rm debian:stable (entrar en una Debian limpia donde poder instalar, probar y salir sin riesgo. Con --rm cuando cierra se pierde todo)
