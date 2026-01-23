@@ -44263,6 +44263,35 @@ $ poe.app archivo.ogg (abrirá el archivo archivo.ogg en el editor poe.app, perm
 $ poe.app -r archivo.ogg (abrir el archivo en modo de solo lectura)
 
 
+poezio
+Es un cliente de mensajería instantánea para el protocolo XMPP [Jabber, conversations.im, 404.city, disroot.org] cuyo objetivo es permitir conectarse fácilmente y sin necesidad de crear una cuenta a la red y unirte a varias salas de chat al instante.
+$ poezio (iniciar Poezio. La primera vez pedirá configurar algunos parámetros básicos)
+Si se tiene una cuenta XMPP, debe configurarse en el archivo de configuración:
+$ nano ~/.config/poezio/poezio.cfg
+[Poezio]
+jid = tu_usuario@servidor.org
+password = tu_contraseña
+$ poezio -j usuario@jabber.org (luego se puede conectar directamente)
+Algunos atajos de navegación básica
+	Alt+1, Alt+2, etc. --> Cambiar entre pestañas/conversaciones
+	Alt + j --> Ir a la siguiente pestaña
+	Alt + k --> Ir a la pestaña anterior
+	Ctrl + n --> Siguiente conversación con actividad
+	/help --> Mostrar ayuda
+	/join sala@conference.jabber.org --> unirse a una sala pública
+	/join sala@conference.jabber.org/MiApodo (o con un apodo específico)
+	/message usuario@servidor.org --> iniciar una conversación privada. Luego escribir el mesaje y presionar Enter
+	/list --> Listar salas de chat disponibles en un servidor
+	/nick nuevo_apodo --> Cambiar el apodo en una sala
+	/topic nuevo_tema --> Cambiar el tema de una sala si se tiene permisos
+	/quit o /exit --> Salir de Poezio
+	/bookmark --> Guardar una sala como favorita
+	/status mensaje --> Cambiar tu mensaje de estado
+	/away mensaje --> Marcarte como ausente
+	/roster --> Ver tu lista de contactos
+	Hola a todos, ¿alguien puede ayudarme con un problema de apt? --> Una vez dentro de una sala enviar un mensaje a toda la sala
+
+
 policycoreutils
 Este paquete contiene las utilidades principales de políticas necesarias para el funcionamiento básico de un sistema SELinux [ver]. Incluye las herramientas secon, sestatus, fixfiles, genhomedircon, load_policy, restorecon, restorecon_xattr, semodule, setfiles, setsebool y unsetfiles.
 # sestatus (saber si esta activo)
