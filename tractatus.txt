@@ -44174,6 +44174,11 @@ $ pod2pandoc --from pod --to pdf -o salida.pdf entrada.pod (convertir POD a PDF)
 $ pod2pandoc --from pod --to epub -o salida.epub entrada.pod (vonvertir POD a EPUB)
 
 
+pod2pdf
+Conversión de POD a PDF.
+$ pod2pdf --page-size A5 --page-orientation landscape --output-file salida.pdf archivo.pod (formato A5, orientación horizontal, por defecto vertical [portrait] y salida del pdf, por defecto en pantalla)
+
+
 podman
 Herramienta para gestionar contenedores, imágenes, volúmenes montados en dichos contenedores y pods creados a partir de grupos de contenedores. Alternativa a Docker sin daemon.
 $ podman run -it --rm debian:stable (entrar en una Debian limpia donde poder instalar, probar y salir sin riesgo. Con --rm cuando cierra se pierde todo)
