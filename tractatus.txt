@@ -44179,6 +44179,34 @@ Conversión de POD a PDF.
 $ pod2pdf --page-size A5 --page-orientation landscape --output-file salida.pdf archivo.pod (formato A5, orientación horizontal, por defecto vertical [portrait] y salida del pdf, por defecto en pantalla)
 
 
+podget
+Agregador de podcasts optimizado para ejecutarse como una tarea programada en segundo plano, es decir, cron.
+$ podget (lee el archivo de configuración ~/.podget/podgetrc y descarga los episodios nuevos de las fuentes RSS configuradas)
+$ DEBUG=1 podget -vvvv (activa el modo verbose con máximo nivel de detalle)
+Automatizar con cron:
+$ crontab -e
+Agrega esta línea para que se ejecute cada hora:
+       0 * * * * /usr/bin/podget
+Ejemplo de archivo de configuración con limpieza automática de episodios antiguos con más de 7 dias:
+$ nano ~/.podget/podgetrc
+OLD_TIME=7
+server_feed=(
+  "https://feed.syntax.fm/rss"
+  "https://otro_feed/rss"
+)
+
+
+podiff
+Herramienta pensada para comparar contenido "real" de traducción en archivos .po, ignorando el ruido [comentarios, orden, saltos de línea, etc.].
+$ podiff es.po es_nuevo.po (comparar dos archivos PO distintos. Muestra los cambios en msgid, cambios en msgstr y cadenas añadidas o eliminadas)
+$ podiff programa-1.0.po programa-1.1.po (ver traducciones actualizadas, textos nuevos sin traducir y traducciones eliminadas entre dos versiones)
+$ podiff po_viejo/ po_nuevo/ (recorrerá los .po de cada directorio y comparará los que tengan el mismo nombre)
+1.-
+Ver solo si hay diferencias
+$ podiff es.po es_nuevo.po >/dev/null
+$ echo $?
+
+
 podman
 Herramienta para gestionar contenedores, imágenes, volúmenes montados en dichos contenedores y pods creados a partir de grupos de contenedores. Alternativa a Docker sin daemon.
 $ podman run -it --rm debian:stable (entrar en una Debian limpia donde poder instalar, probar y salir sin riesgo. Con --rm cuando cierra se pierde todo)
