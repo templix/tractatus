@@ -44360,6 +44360,15 @@ pollen
 Es un servidor HTTP/HTTPS muy simple que sirve entropía aleatoria [bytes aleatorios] a través de la red. Esto se puede realizar tanto con conexiones HTTP de texto plano como con conexiones HTTPS cifradas TLS. Básicamente es un /dev/urandom por HTTP. No es un comando que lance el usuario.
 
 
+poly1305
+Es un algoritmo de autenticación de mensajes [MAC] extremadamente rápido y seguro. Lib1305 es una microbiblioteca de autentificación de un solo uso para Poly1305. Las herramientas que incluye este comando: lib1305-speed, lib1305-test y lib1305-fulltest se pueden utilizar para pruebas comparativas y autopruebas internas.
+# lib1305-test (verificar la integridad del software)
+      ...
+      all tests succeeded
+# lib1305-speed (mide cuántos megabytes por segundo puede procesar el procesador)
+Nota.- ib1305-fulltest se usa principalmente durante el desarrollo o empaquetado del software para Debian.
+
+
 polybar
 Ayuda a los usuarios a crear barras de estado atractivas y altamente personalizables para su entorno de escritorio
 Descargar temas:
