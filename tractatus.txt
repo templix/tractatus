@@ -44324,6 +44324,32 @@ Este paquete contiene las utilidades principales de políticas necesarias para e
 # setsebool httpd_can_network_connect on (Activamos el permitir a Apache realizar conexiones de red. Ver comando setsebool)
 
 
+policyd-rate-limit
+es un demonio de políticas para el servidor de correo electrónico Postfix, escrito en Python 3, que permite limitar el número de correos que un usuario puede enviar en un período de tiempo determinado. Las reglas de limitación son una lista de pares (número de correos, número de segundos). Si un usuario identificado por su nombre de usuario SASL o por su dirección IP ha enviado más correos que el número especificado en segundos, se le devuelve un error.
+Ejemplo de archivo de configuración
+# nano /etc/postfix-policyd-rate-limit.conf
+       # Límite global: 10 correos por minuto por usuario SASL
+       default_limit = 10/60
+       #
+       # Límite para una IP específica: 5 correos por minuto
+       limit = 192.168.1.100: 5/60
+       #
+       # Límite para un usuario SASL específico: 20 correos por minuto
+       limit = usuario@dominio.com: 20/60
+       #
+       # Mensaje de error personalizado
+       error_message = "Límite de envío superado. Inténtelo más tarde."
+Configuración en Postfix
+# nano /etc/postfix/main.cf
+Añadir la siguiente línea en la sección de restricciones de smtpd_recipient_restrictions:
+       smtpd_recipient_restrictions =
+           ...
+       check_policy_service unix:private/policyd-rate-limit,
+           ...
+# systemctl restart postfix (reiniciar servicios)
+# systemctl restart postfix-policyd-rate-limit
+
+
 polybar
 Ayuda a los usuarios a crear barras de estado atractivas y altamente personalizables para su entorno de escritorio
 Descargar temas:
