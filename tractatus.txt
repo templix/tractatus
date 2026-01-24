@@ -44350,6 +44350,12 @@ Añadir la siguiente línea en la sección de restricciones de smtpd_recipient_r
 # systemctl restart postfix-policyd-rate-limit
 
 
+polkitd
+Es un conjunto de herramientas a nivel de aplicación para definir y gestionar la política que permite a los procesos sin privilegios comunicarse con los privilegiados. Las políticas se definen en /usr/share/polkit-1/actions/. Incluye los ejecutables pkaction. pkcheck y pkttyagent
+$ pkaction (listar acciones existentes)
+$ pkaction --action-id org.freedesktop.login1.power-off --verbose (ver detalles de una acción)
+
+
 pollen
 Es un servidor HTTP/HTTPS muy simple que sirve entropía aleatoria [bytes aleatorios] a través de la red. Esto se puede realizar tanto con conexiones HTTP de texto plano como con conexiones HTTPS cifradas TLS. Básicamente es un /dev/urandom por HTTP. No es un comando que lance el usuario.
 
