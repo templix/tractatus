@@ -44300,6 +44300,21 @@ $ poke 56321, 1 (enciende el sonido)
 $ poke score_address, score_value (actualizar estructuras de datos en tiempo de ejecución, por ejemplo, en un juego)
 
 
+polenum
+Herramienta en python que utiliza la biblioteca Impacket de CORE Security Technologies para obtener la política de contraseñas de un dominio o equipo Windows mediante el protocolo RPC [Remote Procedure Call], utilizando las sesiones nulas [null sessions] o credenciales válidas sin necesidad de acceder a él. Antes de intentar un ataque de fuerza bruta o "password spraying", un atacante necesita saber las "reglas del juego" como longitud mínima de la contraseña, historial de contraseñas, cuántas veces hay que cambiarla antes de repetir, cuántos intentos fallidos se permiten antes de bloquear al usuario... Este paquete permite obtener eta politica de contraseñas.
+$ polenum 192.168.1.50 (en sistemas antiguos o mal configurados permiten consultas sin usuario ni contraseña)
+$ polenum usuario:contraseña@192.168.1.50 (con una cuenta, incluso una sin privilegios, extraer la política completa del dominio)
+$ polenum 'DOMINIO/usuario:contraseña'@10.0.0.15 (con un equipo está dentro de un dominio específico)
+Ejemplo de salida [Output] puede ser algo parecido a:
+	Minimum password length  8
+	Password complexity Enabled
+	Password history length 5
+	Lockout threshold 5 attempts
+	Lockout duration 30 minutes
+Nota.- Si el "Lockout threshold" es 0, significa que la cuenta nunca se bloquea.
+Una vez que conoces que el bloqueo ocurre a los 5 intentos, se puede configurar herramientas como Hydra o CrackMapExec para que solo intenten 3 contraseñas cada 30 minutos, evitando así "disparar" las alarmas del sistema.
+
+
 policycoreutils
 Este paquete contiene las utilidades principales de políticas necesarias para el funcionamiento básico de un sistema SELinux [ver]. Incluye las herramientas secon, sestatus, fixfiles, genhomedircon, load_policy, restorecon, restorecon_xattr, semodule, setfiles, setsebool y unsetfiles.
 # sestatus (saber si esta activo)
