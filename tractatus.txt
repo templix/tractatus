@@ -44434,6 +44434,22 @@ pop3browser> delete 2 (marca el mensaje #2 para eliminación)
 pop3browser> close (aplica las eliminaciones pendientes y termina la sesión POP3)
 
 
+popa3d
+Demonio POP3 [Post Office Protocol version 3], que se utiliza para recuperar correos electrónicos desde un servidor remoto con un enfoque principal en la seguridad como prevenir ataques comunes como el buffer overflow y otros tipos de exploits.
+Configuración básica
+# nano /etc/popa3d/popa3d.conf
+# Puerto
+PORT 110
+#
+# Requiere autenticación
+AUTH_REQUIRED yes
+#
+# Usuarios y contraseñas (ejemplo simple)
+USERS user1:password1
+USERS user2:password2
+# systemctl enable popa3d (activar el servicio al inicio)
+
+
 popbugs
 Encuentra errores en paquetes que se usan habitualmente.
 # popbugs -d
