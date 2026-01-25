@@ -44516,6 +44516,26 @@ posh
 Versión simplificada del shell pdksh compatible con políticas de debian y que ofrece algunas funciones adicionales. Dado que muchos scripts /bin/sh de Debian no cumplen con las políticas, usar posh como su /bin/sh podría revelar fallos.
 
 
+posixtestsuite
+Herramienta para verificar que un sistema cumple con los estándares POSIX. Este paquete solo proporciona los resultados del conjunto de pruebas en un archivo de registro. Este paquete solo contiene resultados pre-compilados de las pruebas, no el código fuente ni los ejecutables. Es básicamente una herramienta de calidad y verificación para asegurar que el sistema operativo cumple con los estándares UNIX/POSIX establecidos por IEEE. Se necesita descargar el código fuente para ejecutar las pruebas realmente.
+# apt-get source posixtestsuite (descargar el código fuente)
+# apt-get build-dep posixtestsuite (instalar dependencias necesarias si se precisan)
+# cd posixtestsuite-1.5.2/ (entrar en el directorio descargado del código fuente)
+# make (ejecutar todas las pruebas. Puede tardar media hora o más)
+# ./execute.sh (lo mismo, para realizar nuevas pruebas)
+# cat logfile (los resultados)
+# grep FAIL logfile (buscar solo fallos)
+# grep -E "(PASS|FAIL|UNRESOLVED)" logfile | sort | uniq -c (ver un resumen)
+# ./execute.sh conformance > resultados.log
+Interpretación de resultados:
+	PASS --> El test pasó correctamente
+	FAIL --> El sistema no cumple con POSIX en ese aspecto
+	UNRESOLVED --> No se pudo determinar dependencias, permisos, etc
+	UNSUPPORTED --> Funcionalidad opcional no implementada
+	UNTESTED --> Test no ejecutado
+Nota.- Algunos tests son muy estrictos y pueden fallar en implementaciones válidas marcadas como FAIL.
+
+
 postfix
 Agente de transferencia de correo [MTA] ampliamente usado en Linux, encargado de recibir, enrutar y entregar correos electrónicos, tanto locales como externos.
 # systemctl restart postfix (reiniciar Postfix tras cambios en la configuración en /etc/postfix/main.cf)
