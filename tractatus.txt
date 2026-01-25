@@ -44412,6 +44412,28 @@ $ pompem -s FortiGate --txt (el resultado en un archivo .txt)
 $ pompem -s ssh,ftp,mysql
 
 
+poolcounter
+es un demonio de red que ofrece funcionalidad similar a la de un mutex [MUTual EXclusion], con una cola de espera limitada. Es decir, permite controlar el acceso concurrente a recursos compartidos en un entorno distribuido, asegurando que solo un número limitado de procesos puedan acceder a un recurso al mismo tiempo.
+$ poolcounter -p 12345 -n 3 (el el servidor, puerto en el que escucha y número máximo de permisos)
+$ nc localhost 12345 (desde un cliente, para solicitar un permiso, si lo hay el servidor responderá con GRANT)
+
+
+pop3browser
+Permite revisar un buzón de correo en un servidor remoto POP3 antes de descargarlo a tu cliente de correo habitual como Thunderbird o fetchmail y listarlo, leer encabezados y eliminar correos no deseados.
+Configuración básica
+$ nano ~/.pop3browserrc
+       host mail.ejemplo.com
+       user tu_usuario
+       pass tu_contraseña
+$ pop3browser (entrar en el prompt de la aplicación)
+pop3browser> hosts (listar cuentas)
+pop3browser> login 1 (usar el host del listado número 1)
+pop3browser> open 1 (lo mismo)
+pop3browser> show 1 (muestra encabezados del primer mensaje)
+pop3browser> delete 2 (marca el mensaje #2 para eliminación)
+pop3browser> close (aplica las eliminaciones pendientes y termina la sesión POP3)
+
+
 popbugs
 Encuentra errores en paquetes que se usan habitualmente.
 # popbugs -d
