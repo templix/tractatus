@@ -44536,6 +44536,14 @@ Interpretación de resultados:
 Nota.- Algunos tests son muy estrictos y pueden fallar en implementaciones válidas marcadas como FAIL.
 
 
+poster
+Convierte una página PS en un mosaico de páginas que juntas forman una versión de la misma página pero ampliada. Puede agrupar la imagen resultante en varias páginas más pequeñas que se pueden pegar para formar el póster grande.
+$ poster -mA2 gnu.ps > poster.ps (ampliar una imagen A4 el doble [A2])
+$ poster -v -iA4 -mA3 -pA0 entrada.ps > salida.ps (imprime un archivo de entrada A4 en 8 páginas A3, formando un póster A0 mostrando el proceso [-v])
+$ poster -v -mA0 -w2x2i entrada.ps > salida.ps (ampliar la imagen a A0 dejando margen a los lados de 2 pulgadas)
+$ poster -v -iA4 entrada.ps > salida.ps (ampliar una imagen pequeña a A4)
+
+
 postfix
 Agente de transferencia de correo [MTA] ampliamente usado en Linux, encargado de recibir, enrutar y entregar correos electrónicos, tanto locales como externos.
 # systemctl restart postfix (reiniciar Postfix tras cambios en la configuración en /etc/postfix/main.cf)
