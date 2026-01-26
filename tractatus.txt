@@ -44558,8 +44558,19 @@ $ postsuper -d [MAIL_ID] (eliminar un mensaje específico de la cola de correo)
 $ postsuper -d ALL (eliminar todos)
 
 
-postgres
-[postgresql php5-pgsql]. Gestión de base de datos. En caso de querer aceptar conexiones externas:
+postgis
+Extensión de PostgreSQL que añade soporte para objetos geográficos, permitiendo que PostgreSQL funcione como una base de datos espacial para Sistemas de Información Geográfica (SIG). Esto significa que puedes almacenar, consultar y analizar datos geográficos (puntos, líneas, polígonos, raster, etc.) directamente en tu base de datos.  Incluye los ejecutables pgsql2shp, pgtopo_export, pgtopo_import, postgis, postgis_restore, raster2pgsql y shp2pgsql
+CREATE EXTENSION postgis; (activa todas las funciones y tipos de datos geográficos en la base de datos seleccionada)
+$ shp2pgsql -s 4326 -I -c ~/archivo.shp nombre_tabla | psql -U usuario -d base_de_datos (-s 4326 especifica el sistema de referencia de coordenadas, -I Crea un índice espacial, -c Crea una nueva tabla si no existe. El resultado se redirige a psql para ejecutarlo en la base de datos)
+$ pgsql2shp -f ~/archivo.shp -u usuario -P contraseña base_de_datos "SELECT * FROM nombre_tabla" (exporta una tabla de PostgreSQL/PostGIS a un archivo Shapefile [.shp])
+$ raster2pgsql -s 4326 -I -C -M ~/archivo.tif -F -t 100x100 nombre_tabla | psql -U usuario -d base_de_datos (-s 4326 SRID del raster, -I Crea un índice espacial, -C Aplica restricciones de raster, -M Vacía la tabla si existe, -F Añade el nombre del archivo como columna, -t 100x100 Tamaño de los tiles y el resultado se redirige a psql)
+$ postgis_restore -U usuario -d base_de_datos -C ~/respaldo.sql (restaura una base de datos PostGIS desde un archivo de respaldo creado con pg_dump)
+$ pgtopo_import -U usuario -d base_de_datos -f ~/archivo.sql (importa datos de topología a PostGIS desde un archivo SQL)
+$ pgtopo_export -U usuario -d base_de_datos -f /ruta/al/archivo.sql -t nombre_topologia (exporta datos de topología de PostGIS a un archivo SQL)
+
+
+postgresql
+[php5-pgsql]. Gestión de base de datos. En caso de querer aceptar conexiones externas:
 # nano /etc/postgresql/9.1/main/postgresql.conf
 Substituir la linea:
 	listen_addresses = 'localhost'
