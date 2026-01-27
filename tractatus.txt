@@ -44547,6 +44547,46 @@ $ porg -f foo-1.3 (activando listado [-f]. Sin nombre de archivo, lista todos lo
 $ porg -i foo-1.3 (información del paquete)
 
 
+portsentry
+Herramienta de seguridad que detecta escaneo de puertos y permite monitorizar rastreos tipo NULL, SYN, TCP, ARP... Su configuración se realiza en el archivo /etc/portsentry/portsentry.conf, las opciones [tcp y/o udp] del demonio en /etc/default/portsentry y las máquinas y interficies a ignorar en /etc/portsentry/portsentry.ignore.static. Sin tocar del archivo de configuración el parámetro TCP_PORTS y UDC_PORTS portsentry simula que todos los especificados están abiertos, lo cual puede verificarse con un nmap:
+# nmap 192.168.1.x
+La configuración por defecto con la explicación a modo de comentario:
+	# Puertos que se simularán abiertos y que monitorizarán ataques:
+	TCP_PORTS="1,11,15,79,111,119,143,540,635,1080,1524,2000,5742,6667,12345,12346,20034,27665,31337,32771,32772,32773,32774,40421,49724,54320"
+	UDP_PORTS="1,7,9,69,161,162,513,635,640,641,700,37444,34555,31335,32770,32771,32772,32773,32774,31337,54321"
+	# Monitorizar los servicios del rango de puertos del 1 al especificado [1024]:
+	ADVANCED_PORTS_TCP="1024"
+	ADVANCED_PORTS_UDP="1024"
+    # puertos excluidos del scaneo:
+	ADVANCED_EXCLUDE_TCP="113,139"
+	ADVANCED_EXCLUDE_UDP="520,138,137,67"
+	# Archivo con ips que no queremos bloquear:
+	IGNORE_FILE="/etc/portsentry/portsentry.ignore"
+	# Direcciones detectadas intentando accesar puertos monitoreados:
+	HISTORY_FILE="/var/lib/portsentry/portsentry.history"
+	BLOCKED_FILE="/var/lib/portsentry/portsentry.blocked"
+	# No resolver la ip del host atacante [con valor 1 lo resuelve]:
+	RESOLVE_HOST = "0"
+        # Bloquear scaneos udp y tcp. valor 0 no bloquear
+	BLOCK_UDP="1"
+	BLOCK_TCP="1"
+	# Configurar la actuación de los distintos intentos de intrusión [0=no bloquear, 1=Bloquear y 2=Ejecutar un comando externo]:
+	KILL_ROUTE="/sbin/route add -host $TARGET$ reject"
+	# Opción para los atacantes insistentes [bloqueo total por TCPwrappers]:
+	KILL_HOSTS_DENY="ALL: $TARGET$ : DENY"
+	# qué tan rápido marca una intento fallido como un ataque. 0=paranoico, 1 y 2=permite algún error. Valores superiores descartar]
+	SCAN_TRIGGER="0"
+	# Comunicar un mensaje al atacante:
+	PORT_BANNER="** UNAUTHORIZED ACCESS PROHIBITED *** IP LOGGED"
+Ha de especificarse, si no consta ya, como mínimo en /etc/portsentry/portsentry.ignore, la ip localhost, 127.0.0.1 y las IPs de las interfaces locales si existen.
+# service portsentry stop
+# service portsentry start
+# service portsentry status
+# grep "attackalert" /var/log/syslog (ver alerta de ataques)
+# grep -n Blocked /var/lib/portsentry/portsentry.history (ver historial de ips bloqueadas)
+# nano /var/lib/portsentry/portsentry.blocked (ver ips bloqueadas)
+
+
 posh
 Versión simplificada del shell pdksh compatible con políticas de debian y que ofrece algunas funciones adicionales. Dado que muchos scripts /bin/sh de Debian no cumplen con las políticas, usar posh como su /bin/sh podría revelar fallos.
 
@@ -44684,46 +44724,6 @@ Este test usa /tmp/postmark_test, crea 10.000 archivos, de 512 bytes a 10 KB, ej
 Nota.- Lo más importante son las "transactions: ... (1666 per second)", cuanto más alto, mejor rendimiento del sistema de archivos bajo esta carga.
 
 
-portsentry
-Herramienta de seguridad que detecta escaneo de puertos y permite monitorizar rastreos tipo NULL, SYN, TCP, ARP... Su configuración se realiza en el archivo /etc/portsentry/portsentry.conf, las opciones [tcp y/o udp] del demonio en /etc/default/portsentry y las máquinas y interficies a ignorar en /etc/portsentry/portsentry.ignore.static. Sin tocar del archivo de configuración el parámetro TCP_PORTS y UDC_PORTS portsentry simula que todos los especificados están abiertos, lo cual puede verificarse con un nmap:
-# nmap 192.168.1.x
-La configuración por defecto con la explicación a modo de comentario:
-	# Puertos que se simularán abiertos y que monitorizarán ataques:
-	TCP_PORTS="1,11,15,79,111,119,143,540,635,1080,1524,2000,5742,6667,12345,12346,20034,27665,31337,32771,32772,32773,32774,40421,49724,54320"
-	UDP_PORTS="1,7,9,69,161,162,513,635,640,641,700,37444,34555,31335,32770,32771,32772,32773,32774,31337,54321"
-	# Monitorizar los servicios del rango de puertos del 1 al especificado [1024]:
-	ADVANCED_PORTS_TCP="1024"
-	ADVANCED_PORTS_UDP="1024"
-    # puertos excluidos del scaneo:
-	ADVANCED_EXCLUDE_TCP="113,139"
-	ADVANCED_EXCLUDE_UDP="520,138,137,67"
-	# Archivo con ips que no queremos bloquear:
-	IGNORE_FILE="/etc/portsentry/portsentry.ignore"
-	# Direcciones detectadas intentando accesar puertos monitoreados:
-	HISTORY_FILE="/var/lib/portsentry/portsentry.history"
-	BLOCKED_FILE="/var/lib/portsentry/portsentry.blocked"
-	# No resolver la ip del host atacante [con valor 1 lo resuelve]:
-	RESOLVE_HOST = "0"
-        # Bloquear scaneos udp y tcp. valor 0 no bloquear
-	BLOCK_UDP="1"
-	BLOCK_TCP="1"
-	# Configurar la actuación de los distintos intentos de intrusión [0=no bloquear, 1=Bloquear y 2=Ejecutar un comando externo]:
-	KILL_ROUTE="/sbin/route add -host $TARGET$ reject"
-	# Opción para los atacantes insistentes [bloqueo total por TCPwrappers]:
-	KILL_HOSTS_DENY="ALL: $TARGET$ : DENY"
-	# qué tan rápido marca una intento fallido como un ataque. 0=paranoico, 1 y 2=permite algún error. Valores superiores descartar]
-	SCAN_TRIGGER="0"
-	# Comunicar un mensaje al atacante:
-	PORT_BANNER="** UNAUTHORIZED ACCESS PROHIBITED *** IP LOGGED"
-Ha de especificarse, si no consta ya, como mínimo en /etc/portsentry/portsentry.ignore, la ip localhost, 127.0.0.1 y las IPs de las interfaces locales si existen.
-# service portsentry stop
-# service portsentry start
-# service portsentry status
-# grep "attackalert" /var/log/syslog (ver alerta de ataques)
-# grep -n Blocked /var/lib/portsentry/portsentry.history (ver historial de ips bloqueadas)
-# nano /var/lib/portsentry/portsentry.blocked (ver ips bloqueadas)
-
-
 potace
 Utilidad para transformar mapas de bits en gráficos vectoriales suaves y escalables, permitiendo transformaciones a formatos como EPS, SVG o PDF, a partir de archivos PBM, PGM, PPM o BMP. Se utiliza comúnmente para vectorizar logotipos, firmas y dibujos escaneados, preservando trazos suaves y haciendo posible escalar sin perder calidad.
 $ potrace -s imagen.bmp (genera el archivo imagen.svg vectorizado)
@@ -44732,6 +44732,16 @@ $ potrace imagen.pbm (vectorizar para EPS [por defecto] y el resultado se llama 
 $ convert original.png imagen.bmp ; potrace -s imagen.bmp (usar junto con ImageMagick para convertir otros formatos. Así se procesan PNG y JPEG convertidos previamente a BMP)
 $ potrace -s imagen.bmp --turdsize 5 --alphamax 0.5 (ajustar parámetros para mejorar el resultado. "turdsize" elimina puntos pequeños y "alphamax" modifica el umbral de esquinas)
 $ potrace imagen.bmp --invert (invertir colores antes de trazar)
+
+
+potool
+Utilidad que facilita la manipulación de archivos PO [Portable Object] utilizados en el sistema de internacionalización GetText. Este comando permite realizar diversas operaciones sobre estos archivos, como la creación, edición y análisis de traducciones. Incluye las herramientas potooledit, change-po-charset y postats. poedit también se conoce como potooledit en sistemas Debian para evitar conflictos de nombres con programas no relacionados con el mismo nombre.
+$ potool create --template template.pot --output newfile.po (crea un nuevo archivo PO llamado newfile.po a partir de un archivo de plantilla template.pot)
+$ potool update --source source.pot --output updated.po (actualiza el archivo PO updated.po con las nuevas cadenas del archivo de plantilla source.pot)
+$ potool stats --file existing.po (muestra estadísticas sobre el archivo PO existing.po, incluyendo el número de cadenas traducidas, no traducidas, obsoletas, etc)
+$ postats --file existing.po (muestra estadísticas básicas del archivo PO existing.po, como el número total de cadenas y el estado de cada cadena)
+$ postats --file existing.po --detailed (genera un informe detallado del archivo PO, incluyendo información adicional como el número de cadenas obsoletas y las cadenas no traducidas)
+$ poedit -a -p -n existing.po (que incluya también las entradas ya traducidas, que  mantenga intacto el formato del archivo y no realice ninguna recodificación de caracteres antes ni después de editar el archivo)
 
 
 powerdebug
