@@ -44744,6 +44744,21 @@ $ postats --file existing.po --detailed (genera un informe detallado del archivo
 $ poedit -a -p -n existing.po (que incluya también las entradas ya traducidas, que  mantenga intacto el formato del archivo y no realice ninguna recodificación de caracteres antes ni después de editar el archivo)
 
 
+potrace
+Herramienta para convertir mapas de bits [imágenes en formato PBM, PGM, PPM o BMP] en imágenes vectoriales [EPS, PostScript, PDF, SVG, DXF, GeoJSON, PGM, Gimppath y XFig]. Esto es especialmente útil para escalar imágenes sin perder calidad, ya que las imágenes vectoriales pueden ser ampliadas o reducidas sin perder detalles.
+$ potrace -s -t eps input.pbm output.eps (-s que  el resultado es un archivo vectorial y -t el formato de salida eps)
+$ potrace -s -t svg input.pgm output.svg (convertir un mapa de bits en un archivo SVG)
+$ potrace -s -t dxf input.bpm output.dxf (convertir un mapa de bits en un archivo DXF)
+
+
+pound
+Proxy inverso, balanceador de carga y front-end HTTPS para servidores web. Se desarrolló para distribuir la carga entre varios servidores web y para ofrecer un práctico contenedor SSL para aquellos servidores que no lo ofrecen de forma nativa.
+# systemctl enable pound (habilitar el servicio al arrancar)
+# poundctl list L (lista el estado del objeto subordinados)
+# poundctl enable S (habilita el servicio)
+# poundctl disable S (lo deshabilita)
+
+
 powerdebug
 Herramienta para mostrar información sobre reguladores, sensores y relojes.
 # powerdebug (de todo)
