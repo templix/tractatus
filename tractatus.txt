@@ -20835,6 +20835,65 @@ getopt
 se utiliza para analizar las opciones en líneas de comando para facilitar su análisis por parte de los procedimientos del shell y para comprobar si las opciones son válidas. Por ejemplo, si tiene un script que acepta las opciones -a, -b y -c, getopts permite combinarlas como -abc, -bca o -bac, etc.
 
 
+getopts
+Comando interno de bash [builtin] que sirve para analizar parámetros posicionales y opciones dentro de scripts.
+1.-
+Ejemplo de opciones simples
+$ nano ejemplo1.sh
+        #!/bin/bash
+        #
+        while getopts "ab" opt; do
+          case $opt in
+            a) echo "Opción -a detectada" ;;
+            b) echo "Opción -b detectada" ;;
+            \?) echo "Opción inválida: -$OPTARG" ;;
+          esac
+        done
+$ chmod +x ejemplo1.sh
+$ ./ejemplo1.sh -a -b (ejecutar)
+        Opción -a detectada
+        Opción -b detectada
+2.-
+Ejemplo con argumentos para opciones
+$ nano ejemplo2.sh
+        #!/bin/bash
+        #
+        while getopts "f:o:" opt; do
+          case $opt in
+            f) echo "Archivo: $OPTARG" ;;
+            o) echo "Salida: $OPTARG" ;;
+            \?) echo "Uso: $0 [-f archivo] [-o salida]" ;;
+          esac
+        done
+f: --> significa que -f necesita un argumento.
+OPTARG --> contiene el argumento de la opción actual.
+$ chmod +x ejemplo2.sh
+$ ./ejemplo2.sh -f datos.txt -o resultado.txt (ejecutar)
+        Archivo: datos.txt
+        Salida: resultado.txt
+3.-
+Ejemplo combinando opciones y argumentos libres
+$ nano ejemplo3.sh
+        #!/bin/bash
+        #
+        while getopts "u:p:" opt; do
+          case $opt in
+            u) echo "Usuario: $OPTARG" ;;
+            p) echo "Puerto: $OPTARG" ;;          esac
+        done
+        #
+        # Desplazamos los parámetros para acceder a los argumentos libres
+        shift $((OPTIND - 1))
+        #
+        echo "Archivos a procesar: $@"
+$OPTIND --> Índice del siguiente argumento a procesar. Sirve para saber dónde acaban las opciones y empiezan parámetros "libres".
+$ chmod +x ejemplo3.sh
+$ ./ejemplo3.sh -u admin -p 8080 archivo1.txt archivo2.txt (ejecutar)
+        Usuario: admin
+        Puerto: 8080
+        Archivos a procesar: archivo1.txt archivo2.txt
+
+
 getpcaps
 Muestra las capacidades en los procesos indicados por el valor pid indicado. Un pid  0 muestra las capacidades del propio proceso que está ejecutando getpcaps.
 $ getpcaps --verbose 1247 (del PID mencionado)
@@ -23066,66 +23125,6 @@ Algunas teclas que se pueden usar:
     flechas aArriba/abajo (navegar por los procesos en ejecución)
 
 
-getopts
-Comando interno de bash [builtin] que sirve para analizar parámetros posicionales y opciones dentro de scripts.
-1.-
-Ejemplo de opciones simples
-$ nano ejemplo1.sh
-        #!/bin/bash
-        #
-        while getopts "ab" opt; do
-          case $opt in
-            a) echo "Opción -a detectada" ;;
-            b) echo "Opción -b detectada" ;;
-            \?) echo "Opción inválida: -$OPTARG" ;;
-          esac
-        done
-$ chmod +x ejemplo1.sh
-$ ./ejemplo1.sh -a -b (ejecutar)
-        Opción -a detectada
-        Opción -b detectada
-2.-
-Ejemplo con argumentos para opciones
-$ nano ejemplo2.sh
-        #!/bin/bash
-        #
-        while getopts "f:o:" opt; do
-          case $opt in
-            f) echo "Archivo: $OPTARG" ;;
-            o) echo "Salida: $OPTARG" ;;
-            \?) echo "Uso: $0 [-f archivo] [-o salida]" ;;
-          esac
-        done
-f: --> significa que -f necesita un argumento.
-OPTARG --> contiene el argumento de la opción actual.
-$ chmod +x ejemplo2.sh
-$ ./ejemplo2.sh -f datos.txt -o resultado.txt (ejecutar)
-        Archivo: datos.txt
-        Salida: resultado.txt
-3.-
-Ejemplo combinando opciones y argumentos libres
-$ nano ejemplo3.sh
-        #!/bin/bash
-        #
-        while getopts "u:p:" opt; do
-          case $opt in
-            u) echo "Usuario: $OPTARG" ;;
-            p) echo "Puerto: $OPTARG" ;;
-          esac
-        done
-        #
-        # Desplazamos los parámetros para acceder a los argumentos libres
-        shift $((OPTIND - 1))
-        #
-        echo "Archivos a procesar: $@"
-$OPTIND --> Índice del siguiente argumento a procesar. Sirve para saber dónde acaban las opciones y empiezan parámetros "libres".
-$ chmod +x ejemplo3.sh
-$ ./ejemplo3.sh -u admin -p 8080 archivo1.txt archivo2.txt (ejecutar)
-        Usuario: admin
-        Puerto: 8080
-        Archivos a procesar: archivo1.txt archivo2.txt
-
-
 gtypist
 Programa para aprender mecanografia en ncurses.
 
@@ -23257,6 +23256,38 @@ $ guilt pop (deshace la aplicación del parche superior de la serie)
 $ guilt push (aplica el siguiente parche de la serie a tu directorio de trabajo)
 $ guilt pop -a (desaplicar todos los parches)
 $ guilt push -a` (aplicar todos los parches)
+
+
+guix
+Gestor de paquetes para el sistema operativo GNU. Los ejecutables se colocan en ~/.guix-profile/bin/
+# systemctl restart guix-daemon.service (despues de alguna modificacion reconfigurar)
+# guix-daemon --build-users-group=guixbuild (implementa toda la funcionalidad para acceder al almacén)
+$ guix pull (extrae la última revisión de Guix)
+$ guix pull -l (enumeran las generaciones pasadas producidas por guix pull)
+$ guix package -r lua -i guile guile-cairo (borrar lua e instalar guile y guile-cairo)
+$ guix package -s emacs (información de una aplicación)
+$ guix package --show=emacs (lo mismo)
+$ guix package -u (upgrade)
+$ guix describe (describir las revisiones de canal utilizadas actualmente)
+$ guix gc (recolector de basura)
+$ guix install emacs (instalar un paquete)
+$ guix locate emacs (busca paquetes que proporcionen un archivo dado)
+$ guix remove emacs (elimina paquetes instalados)
+$ guix search emacs (buscar paquete)
+$ guix show emacs (muestra información sobre paquetes)
+$ guix upgade (actualiza paquetes a su última versión)
+$ guix edit emacs (edita definiciones de paquetes)
+$ guix graph emacs (visualiza y consulta gráficos de dependencia de paquetes)
+$ guix refresh (actualiza definiciones de los paquetes existentes)
+$ guix package --list-available (lista paquetes desponibles)
+$ guix describe (describir el estado actual de Guix)
+$ guix pull --roll-back (enumerar generaciones y retroceder a la generación anterior [de la 3 a la 2])
+$ guix package -p ~/.config/guix/current --roll-back (gestionar el perfil proporcionando su nombre de manera específica [de la 3 a la 2])
+1.-
+Para que el sistema coja los ejecutables, colocar en
+	$ nano ~/bashrc
+la linea
+	export PATH=${PATH}:~/.guix-profile/bin
 
 
 guncat
