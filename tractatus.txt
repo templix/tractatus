@@ -44775,6 +44775,35 @@ Demonio que envía notificaciones sobre cambios en la batería de los dispositiv
 # poweralertd (otra forma de activar el servicio)
 
 
+powercap-utils
+Famework del kernel de Linux que proporciona una interfaz unificada para controlar y monitorear límites de consumo de energía de diferentes componentes del sistema. Funciona como una capa de abstracción sobre tecnologías específicas de hardware. Incluye los ejecutables powercap-info y powercap-set para el acceso genérico a los tipos de control y rapl-info y rapl-set para la gestión de implementaciones de Intel RAPL.
+$ ls -la /sys/class/powercap/ (ver qué zonas están disponibles en el sistema para explorar la jerarquía)
+$ ls -la /sys/class/powercap/intel-rapl*/ (lo mismo)
+# powercap-info (listar todos los control types disponibles)
+# powercap-info intel-rapl (ver información de todas las zonas de intel-rapl)
+# powercap-info -v intel-rapl -z 0:2 (modo verbose para la zona 0 subzona 2)
+# powercap-set intel-rapl -z 0 -c 0 -l 15000000 (limita el consumo a 15W [15,000,000 μW])
+# powercap-set intel-rapl -z 0 -c 0 -w 28000000 (establece una ventana de 28 segundos)
+# rapl-info -P 0 -c 0 -s 2 (monitorear en tiempo real cada 2 segundos)
+# rapl-set -P 0 -c 0 -p 12000000 -t 10000000 (establecer límite específico "power limit" a 12W y "time window" en 10 segundos)
+# watch -n 5 "powercap-info intel-rapl -z 0:2 | grep energy_uj" (monitorear consumo de DRAM cada 5 segundos)
+# powercap-set intel-rapl -z 0 -c 0 -l 45000000 (limitar consumo del CPU para reducir temperatura a 45W)
+# powercap-set intel-rapl -z 0:0 -c 0 -l 30000000 (limitar cores a 30W)
+Una interpretación de datos:
+# powercap-info intel-rapl -z 0:2
+Zone 0              (Zona principal, paquete del CPU)
+  Zone 0:2          (Subzona 2 dentro de la zona 0)
+    name: dram      (Controla la memoria DRAM)
+    enabled: 0      (No hay límites activos)
+    max_energy_range_uj: 262143328850  (Rango máximo medible, 262,143 Joules)
+    energy_uj: 93180045699             (Energía consumida, 93,180 Joules ≈ 0.026 kWh)
+    Constraint 0    (Primer límite configurable)
+      name: long_term      (Límite a largo plazo)
+      power_limit_uw: 0    (Límite actual: 0 μW, deshabilitado)
+      time_window_us: 976  (Ventana temporal: 976 μs)
+Nota.- Los cambios se pierden al reiniciar
+
+
 powerdebug
 Herramienta para mostrar información sobre reguladores, sensores y relojes.
 # powerdebug (de todo)
