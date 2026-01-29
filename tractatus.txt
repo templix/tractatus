@@ -34403,6 +34403,9 @@ $ lav2yuv -f 100-200 video.avi | yuv2lav -o recorte.avi (recortar vídeo. Extrae
 
 mjpg-streamer
 Streaming de video
+$ mjpg_streamer -i "input_uvc.so -d /dev/video0" -o "output_http.so -p 1234" (ver webcam con el navegador en localhost:8080/?action=stream)
+$ mjpg_streamer -i "input_uvc.so -d /dev/video0 -r 1280x720 -f 30" -o "output_http.so -p 8080" (lo mismo modificando resolución y frames por segundo)
+$ mjpg_streamer -i "input_uvc.so -d /dev/video0 -r 1280x720 -f 30" -o "output_http.so -p 8080 -c USER:CONTRASEÑA" (lo mismo con usuario y contraseña)
 $ mjpg_streamer -i "input_uvc.so -y -f 5" -o output_http.so -p 3000 -n -c USER:CONTRASEÑA -b
 Opciones:
 	-f  frames por segundo
@@ -44839,8 +44842,13 @@ $ powerstat interval 20 (Mida la potencia con un número especificado de muestra
 
 
 powertop
-Es una herramienta para diagnosticar problemas con el consumo y la administración de energía. Además de ser una herramienta de diagnóstico, también tiene un modo interactivo que puede usar para experimentar con varias configuraciones de administración de energía, en los casos en que la distribución de Linux no haya habilitado esas configuraciones. powertop informa qué componentes del sistema tienen más probabilidades de ser responsables de un consumo de energía superior al necesario, desde aplicaciones de software hasta componentes activos del sistema. Hay pantallas detalladas disponibles para los estados C y P de la CPU, la actividad del dispositivo y la actividad del software.
-# powertop -t 10 --debug -c -r (generar un informe durante 10 segundose, ejecutar en modo calibración y el resultado en .html [powertop.html])
+Es una herramienta para diagnosticar problemas con el consumo y la administración de energía. Además de ser una herramienta de diagnóstico, también tiene un modo interactivo que se puede usar para experimentar con varias configuraciones de administración de energía, en los casos en que la distribución de Linux no haya habilitado esas configuraciones. powertop informa qué componentes del sistema tienen más probabilidades de ser responsables de un consumo de energía superior al necesario, desde aplicaciones de software hasta componentes activos del sistema. Hay pantallas detalladas disponibles para los estados C y P de la CPU, la actividad del dispositivo y la actividad del software.
+# powertop (modo interactivo. La tecla TAB salta de pestañas)
+# powertop --html=powtop.html (crea el archivo especificado despues de 20 segundos de acción [por defecto])
+# powertop -t 10 --html=reporte_corto.html (lo mismo pero solo con 10 segundos de acción)
+# powertop -t 5 --csv=reporte.txt (lo mismo pero 5 segundos de acción y guardar resultado en reporte.txt)
+# grep -E "(USB|Wi-Fi|iwlwifi|radio|drm)" reporte.txt (luego filtrar líneas solo dispositivos USB y WiFi)
+# powertop -t 10 --debug -c -r (generar un informe durante 10 segundose de acción, ejecutar en modo calibración y el resultado en .html [powertop.html])
 
 
 ppp
