@@ -44834,6 +44834,23 @@ Modificar, por ejemplo por:
 "user":                       { "fg": "yellow", "bg": "green", "attrs": ["bold"] },
 
 
+powerman
+Herramienta diseñada principalmente para gestionar de forma centralizada y remota el encendido/apagado de nodos/máquinas a través de PDUs [Power Distribution Units] conmutadas, IPMI, Redfish, HTTP y otros dispositivos en entornos de clústeres o centros de datos. El archivo de configuración de ejemplo está en /etc/powerman/powerman.conf.example, descomentar lo que proceda y dejarlo como /etc/powerman/powerman.conf. Los archivo se dispositivos están en /etc/powerman/*.dev
+# systemctl status powerman.service (ver estado del servicio)
+$ pm -q node[01-20] (ver el estado de encendido/apagado de los nodos del 1 al 20)
+$ pm --on storage-01 (encender un solo nodo)
+$ pm -1 node[05-12] rack2-sw[1-4] login[01,03] (encender varios, con rangos y listas)
+$ pm --off node[30-40] (apagar nodos)
+$ pm -c node[15,18,22] (ciclo de apagado+encendido)
+$ pm -c compute-045(reiniciar un nodo que no responde)
+$ pm --off --hard node99 (apagado forzado, hard off, sin esperar ACPI)
+$ pm --reset node99 (lo mismo en algunas versiones)
+$ pm -Q (consultar estado más detallado)
+$ pm --list (lista todos los nodos conocidos)
+$ pm -i (ejecutar en modo interactivo. Dentro del prompt se pueden usar los mismos comandos: "oon mode [01-10]", "off storage-*", "query", "quit"...)
+$ pm -q node[001-128] | grep off (ver qué nodos están apagados)
+
+
 poweroff
 [halt, reboot]. Apagar el ordenador. Los 3 comandos tienen las mismas opciones.
 $ poweroff --halt (Detener la máquina independientemente de que comando de los tres se use)
