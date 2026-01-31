@@ -44888,6 +44888,14 @@ $ xml2pot documento.xml -o documento.pot (extraer las cadenas de un documento XM
 $ po2xml es.po -o mensajes_es.xml (convertir PO a XML)
 
 
+ppa-dev-tools
+Proporciona una herramienta para crear, eliminar y configurar Personal Package Archives [PPAs]. Incluye la función de esperar/bloquear hasta que se hayan compilado todos los paquetes.
+$ ppa create my-ppa (Registrar un nuevo PPA)
+$ ppa wait my-ppa (Esperar hasta que todos los paquetes en el PPA hayan terminado de compilarse)
+$ ppa destroy my-ppa (Eliminar el PPA)
+$ cat some-package/README | ppa desc ppa:my-name/my-ppa (Establecer la descripción pública de un PPA desde un archivo)
+
+
 ppp
 El protocolo Point-to-Point proporciona una forma estándar de transmitir datagramas a través de un enlace serie, así como una forma estándar para que las máquinas en cada extremo del enlace negocien varias características opcionales del enlace. Este paquete se utiliza más comúnmente para administrar un módem para acceso telefónico o ciertos tipos de conexiones de banda ancha. Incluye los ejecutables: plog, poff y # pon (ejecuta el archivo /etc/ppp/ppp_on_boot, si existe y es ejecutable. De lo contrario, se iniciará una conexión PPP utilizando la configuración de /etc/ppp/peers/provider)
 # poff (cierra una conexión PPP)
