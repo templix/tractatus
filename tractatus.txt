@@ -44905,6 +44905,13 @@ Nota.-  Para tener toda la información generada por pppd en un archivo de regis
         local2.*       -/var/log/ppp.log
 
 
+ppp-gatekeeper
+Gestor PPP para la gestión de enlaces balanceados, redundantes y con conmutación por error. PPP Gatekeeper es un demonio que gestiona conexiones PPPOE con diversos niveles de redundancia y conmutación por error. El tráfico se puede enrutar mediante estrategias round-robin y aleatorias en enlaces de prioridad similar. También se pueden proporcionar listas de rutas IP estáticas para fines de enrutamiento específicos. El DNS también permite el balanceo de carga en múltiples enlaces.
+# /etc/init.d/ppp-gatekeeper status (comprobar si está activo)
+# ppp-gatekeeper --config /etc/ppp/ppp-gatekeeper.conf (especificar el archivo de configuración a usar)
+# ppp-gatekeeper -fg (Ejecutar en primer plano, no como demonio)
+
+
 ppt
 Formatea un texto a cintas de papel.
 $ ppt linux es un sistema genial
