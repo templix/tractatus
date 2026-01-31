@@ -44879,6 +44879,15 @@ Es una herramienta para diagnosticar problemas con el consumo y la administraci�
 # powertop -t 10 --debug -c -r (generar un informe durante 10 segundose de acción, ejecutar en modo calibración y el resultado en .html [powertop.html])
 
 
+poxml
+Herramientas que facilitan la traducción y manipulación de archivos XML de DocBook mediante archivos de mensajes Gettext [archivos PO]. Incluye los ejecutables po2xml, split2po, swappo y xml2pot
+$ po2xml archivo.po -o archivo.xml (convierte el archivos PO [formato gettext] a archivos XML compatibles con DocBook)
+$ split2po archivo.grande.po -o divisiones/ (dividir un archivo PO grande en varios archivos PO más pequeños)
+$ swappo messages.po -o messages_invertido.po (intercambiar las traducciones en messages.po)
+$ xml2pot documento.xml -o documento.pot (extraer las cadenas de un documento XML para crear un archivo POT que los traductores puedan traducir)
+$ po2xml es.po -o mensajes_es.xml (convertir PO a XML)
+
+
 ppp
 El protocolo Point-to-Point proporciona una forma estándar de transmitir datagramas a través de un enlace serie, así como una forma estándar para que las máquinas en cada extremo del enlace negocien varias características opcionales del enlace. Este paquete se utiliza más comúnmente para administrar un módem para acceso telefónico o ciertos tipos de conexiones de banda ancha. Incluye los ejecutables: plog, poff y # pon (ejecuta el archivo /etc/ppp/ppp_on_boot, si existe y es ejecutable. De lo contrario, se iniciará una conexión PPP utilizando la configuración de /etc/ppp/peers/provider)
 # poff (cierra una conexión PPP)
