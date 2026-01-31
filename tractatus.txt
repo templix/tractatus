@@ -44815,18 +44815,23 @@ Herramienta para mostrar información sobre reguladores, sensores y relojes.
 
 
 powerline
-[fonts-powerline]. Utilidad escrita en python que muestra otra forma de ver el prompt de la shell.
-$ mkdir ~/.config/powerline
-$ cp -R /usr/share/powerline/* ~/.config/powerline (copiar archivos y modificarlos al gusto)
-Añadir la siguientes lineas en .bashrc
-	if [ -f /usr/share/powerline/bindings/bash/powerline.sh ]; then
-	source /usr/share/powerline/bindings/bash/powerline.sh
-	fi
-Recargar la configuración:
-	$ source .bashrc
-para tener la misma configucación como root:
-	# cp -f .bashrc /root/.bashrc
-El resultado se observa al abrir una nueva terminal.
+[fonts-powerline]. Utilidad escrita en python que muestra otra forma de ver el prompt de la shell. Incluye las herramientas powerline-config, powerline-daemon, powerline-lint y powerline-render
+$ ls /usr/share/powerline/config_files/themes/shell/ (ver temas)
+$ mkdir ~/.config/powerline (crear el directorio personal)
+$ cp -R /usr/share/powerline/config_files/* $HOME/.config/powerline/ (copiar configuración)
+$ source /usr/share/powerline/bindings/bash/powerline.sh (leer configuración y poner esta linea en .bashrc)
+$ powerline-lint (comprobar que no existen problemas ni errores en la configuración)
+$ powerline-render shell left (probar el nuevo prompt)
+$ powerline-daemon -q (iniciar el demonio en modo "quiet", si ya está corriendo, no hace nada)
+$ powerline-daemon --replace (reiniciar el daemon despues de cualquier modificación)
+1.-
+Cambio colores del primer elemento del prompt. Buscar la linea "user": del archivo:
+$ nano .config/powerline/colorschemes/default.json
+...
+"user":                       { "fg": "white", "bg": "darkblue", "attrs": ["bold"] },
+...
+Modificar, por ejemplo por:
+"user":                       { "fg": "yellow", "bg": "green", "attrs": ["bold"] },
 
 
 poweroff
