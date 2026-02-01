@@ -44932,6 +44932,17 @@ Al finalizar, crea/modifica estos archivos principales: /etc/ppp/peers/dsl-provi
 Nota.- Si se usa NetworkManager se añade la conexión directamente desde la configuración de red.
 
 
+pps-tools
+Herramientas y encabezados [headers] necesarios para usar la interfaz de kernel PPSAPI de LinuxPPS en aplicaciones de espacio de usuario. LinuxPPS es un subsistema que soporta señales de "Pulse Per Second" [PPS], que son pulsos de alta precisión generados cada segundo por dispositivos como receptores GPS, radios atómicas o otros fuentes de tiempo preciso. Estos pulsos se utilizan para sincronizar el reloj del sistema con una precisión de microsegundos o mejor, comúnmente en aplicaciones de temporización, navegación o redes, por ejemplo, con NTP. Incluye los ejecutables ppstest, ppsldisc, ppswatch, ppsctl y ppsfind. Estas herramientas requieren que el módulo del kernel correspondiente esté cargado, por ejemplo, modprobe pps_core o drivers específicos como pps_ldisc para puertos seriales.
+# ppstest /dev/pps0 (verificar un dispositivo PPS)
+En la salida del comando, "assert" muestra el timestamp del pulso, "sequence" es un contador de eventos y "clear" es 0.0 si no se detecta flanco descendente.
+# ppsldisc /dev/ttyS0 (configura la "line discipline" [disciplina de línea] PPS en un puerto serial, como /dev/ttyS0. A veces es necesario cargar el módulo: sudo modprobe pps_ldisc)
+# ppswatch -a /dev/pps0 (monitorea solo asserts)
+# ppswatch -c /dev/pps0 (monitorea solo clears)
+# ppsctl /dev/pps0 -e (habilitar echo en un dispositivo GPIO-based)
+# ppsfind pps0 (encontrar un dispositivo por nombre)
+
+
 ppt
 Formatea un texto a cintas de papel.
 $ ppt linux es un sistema genial
