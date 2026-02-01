@@ -44939,6 +44939,30 @@ Al finalizar, crea/modifica estos archivos principales: /etc/ppp/peers/dsl-provi
 Nota.- Si se usa NetworkManager se añade la conexión directamente desde la configuración de red.
 
 
+pppoeconf
+Herramienta para la configuración inicial de una conexión  PPPoE/DSL.
+# pppoeconf (inicia el escaneo del sistema en busca de concentradores PPPoE)
+# pppoeconf enp1s0 (especificar interfaz de red)
+# pppoeconf -nox enp1s0 (modo forzado sin entorno gráfico y especificando interfaz de red)
+Crea o modifica los siguientes archivos:
+      /etc/ppp/peers/dsl-provider --> Opciones de configuración PPP para el proveedor
+      /etc/ppp/pap-secrets --> Credenciales para autenticación PAP
+      /etc/ppp/chap-secrets --> Credenciales para autenticación CHAP
+      /etc/network/interfaces --> Configuración de interfaces de red del sistema
+      /etc/ppp/ip-up.d/0clampmss --> Script para ajustar MSS cuando se levanta la conexión
+      /etc/ppp/ip-down.d/0clampmss --> Script para restaurar MSS cuando se baja la conexión
+Una vez configurado, se puede controlar la conexión con estos comandos:
+# pon dsl-provider (iniciar la conexión)
+# pon (lo mismo)
+# poff dsl-provider (detener la conexión)
+# poff (lo mismo)
+# plog (ver estado y logs)
+# ip addr show ppp0 (verificar que ppp0 existe con IP asignada)
+# pppd debug call dsl-provider (ver mensajes detallados)
+# ip link set dev eth0 up (verificar que la interfaz esté levantada)
+# ethtool enp1s0 (verificar conectividad física)
+
+
 pps-tools
 Herramientas y encabezados [headers] necesarios para usar la interfaz de kernel PPSAPI de LinuxPPS en aplicaciones de espacio de usuario. LinuxPPS es un subsistema que soporta señales de "Pulse Per Second" [PPS], que son pulsos de alta precisión generados cada segundo por dispositivos como receptores GPS, radios atómicas o otros fuentes de tiempo preciso. Estos pulsos se utilizan para sincronizar el reloj del sistema con una precisión de microsegundos o mejor, comúnmente en aplicaciones de temporización, navegación o redes, por ejemplo, con NTP. Incluye los ejecutables ppstest, ppsldisc, ppswatch, ppsctl y ppsfind. Estas herramientas requieren que el módulo del kernel correspondiente esté cargado, por ejemplo, modprobe pps_core o drivers específicos como pps_ldisc para puertos seriales.
 # ppstest /dev/pps0 (verificar un dispositivo PPS)
