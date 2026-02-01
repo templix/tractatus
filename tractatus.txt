@@ -29057,6 +29057,13 @@ Libreria que permite ejecutar binarios del sistema sin permiso de ejecución sie
 	a.jpg  b.jpg  captures  guia-sed.pdf ...
 
 
+ldattach
+El demonio ldattach abre el archivo de dispositivo especificado, que debe hacer referencia a un dispositivo serie y le adjunta la disciplina de línea ldisc para decirle al kernel que los datos enviados o recibidos por ese dispositivo que los procese de determinada manera..
+# ldattach PPS /dev/ttyS0 (ajusta los parámetros del dispositivo)
+# ldattach 18 /dev/ttyS0 (con PPS en un GPS conectado a /dev/ttyS0 y que en el kernel sea la disciplina 18)
+# ldattach -d -s 9600 -8 -n -1 -c "CONFIGURE_PPS\r" -p 1 PPS /dev/ttyS0 (que no pase a background y muestra trazas, que fije baudios a 9600, 8 bits de datos, sin paridad, 1 bit de parada, envía una "orden de introducción" por el puerto antes de enganchar la disciplina, pausa de 1 segundo entre el comando de introducción y el cambio de disciplina)
+
+
 ldconfig
 Se utiliza para crear, actualizar y eliminar enlaces simbólicos para las bibliotecas compartidas actuales basándose en los directorios de bibliotecas presentes en el directorio /etc/ld.so.conf
 # ldconfig -p (Cantidad de directorios y bibliotecas que están almacenadas en la cache /etc/ld.so.cache y los enumera a continuación)
