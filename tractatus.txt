@@ -44912,6 +44912,26 @@ Gestor PPP para la gestión de enlaces balanceados, redundantes y con conmutaci�
 # ppp-gatekeeper -fg (Ejecutar en primer plano, no como demonio)
 
 
+pppconfig
+Utilidad con interfaz de menú de texto que facilita la configuración del protocolo PPP [Point-to-Point Protocol] que permite para acceder a Internet o redes remotas, soportando métodos de autenticación como PAP, CHAP y configuraciones de diálogo [chat] y configura PPP para controlar la conexión mediante comandos simples como pon y poff. Algunas de las funciones compatibles con pppconfig son: Múltiples ISP con servidores de nombres independientes, detección de módem, DNS dinámico y marcación bajo demanda.
+# pppconfig (abre el menú interactico en la consola)
+# pon conexion_ppp (una vez completado el menú anterrior, conectar)
+# ifconfig ppp0 (verificar conexión)
+# poff conexion_ppp (desconectar)
+
+
+pppoe
+[Point-to-Point Protocol over Ethernet]. Es un protocolo utilizado por muchos proveedores de servicios de Internet ADSL y fibra para autenticarte con usuario + contraseña.
+# pppoeconf (hace todas las preguntas y configura casi todo automáticamente)
+Al finalizar, crea/modifica estos archivos principales: /etc/ppp/peers/dsl-provider, /etc/ppp/pap-secrets o /etc/ppp/chap-secrets y /etc/network/interfaces [en sistemas antiguos o si se usa ifupdown].
+# pon dsl-provider (conectar)
+# poff dsl-provider (desconectar)
+# ip link show ppp0 (ver el estado)
+# ip addr show ppp0 (lo mismo)
+# pon dsl-provider & tail -f /var/log/syslog | grep ppp (ver logs en tiempo real mientras se está conectado)
+Nota.- Si se usa NetworkManager se añade la conexión directamente desde la configuración de red.
+
+
 ppt
 Formatea un texto a cintas de papel.
 $ ppt linux es un sistema genial
