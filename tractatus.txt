@@ -16955,10 +16955,13 @@ Asegura que fastentrypoints esté incluido en MANIFEST.in y setup.py incluendo l
 
 fastfetch
 Herramienta para obtener información del sistema y mostrarla de una manera atractiva.
-$ fastfetch
+$ fastfetch (ejecución básica)
 $ fastfetch --list-config-paths (muestra el listado de los archivos de configuracion de la aplicación)
 $ fastfetch --list-logos (llistado de logos disponible en la aplicación)
 $ fastfetch -d arch (muestra información del sistema sea la distro que sea pero con el logo de arch)
+$ fastfetch --list-presets (configuraciones instaladas de manera predeterminada)
+$ ls /usr/share/fastfetch/presets/ (ruta a la configuraciones)
+$ fastfetch -c all.jsonc (ejecutar con una configuración determinada)
 
 
 fastnetmon
