@@ -44984,6 +44984,29 @@ Formatea un texto a cintas de papel.
 $ ppt linux es un sistema genial
 
 
+pptp-linux
+[Point-to-Point Tunneling Protocol]. Cliente para el protocolo propietario de Microsoft, PPTP. Permite la conexión a una VPN basada en PPTP, como la que utilizan algunas empresas y proveedores de servicios de cable y ADSL.
+# pptp vpn.servidor.com user mi_usuario password mi_password lock noauth refuse-eap refuse-chap refuse-mschap nopsandmppe (sin crear archivos de configuración para probar la conexión)
+Configurar las credenciales
+# nano /etc/ppp/chap-secrets
+# Cliente       Servidor    Contraseña          IPs aceptadas
+mi_usuario      PPTP        mi_password_segura  *
+Crear el archivo de conexión
+# nano /etc/ppp/peers/mi-vpn
+pty "pptp vpn.ejemplo.com --nolaunchpppd"
+name mi_usuario
+remotename PPTP
+require-mppe-128
+file /etc/ppp/options.pptp
+ipparam mi-vpn
+# pon mi-vpn (iniciar la conexión)
+# poff mi-vpn (desconectar)
+
+
+pptpd
+Implementa un servidor de red privada virtual [VPN] compatible con los clientes VPN de Microsoft. Permite a los usuarios de Windows conectarse a una red interna protegida por firewall mediante acceso telefónico. Ver pptp-linux.
+
+
 pr
 Muestra en pantalla un archivo de texto en modo “Previsualización de impresión”
 $ pr fichero.txt
