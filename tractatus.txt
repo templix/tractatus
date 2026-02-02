@@ -45007,6 +45007,14 @@ pptpd
 Implementa un servidor de red privada virtual [VPN] compatible con los clientes VPN de Microsoft. Permite a los usuarios de Windows conectarse a una red interna protegida por firewall mediante acceso telefónico. Ver pptp-linux.
 
 
+pqconnect
+Permite actuar de inmediato en su equipo para abordar la amenaza de ataques cuánticos, sin esperar actualizaciones en las aplicaciones que utiliza y aplica automáticamente criptografía postcuántica de extremo a extremo entre los equipos que ejecutan PQConnect. La computación cuántica tiene el potencial de romper los esquemas criptográficos tradicionales, por lo que la criptografía postcuántica busca desarrollar algoritmos resistentes a los ataques de los ordenadores cuánticos.
+$ pqconnect --server remote.server.com --port 443 (iniciará una conexión segura con el servidor remote.server.com en el puerto 443, utilizando criptografía postcuántica)
+$ pqconnect --server --listen (en un equipo actuando como servidor)
+$ pqconnect --client (en un equipo actuando como cliente)
+$ pqconnect --cipher-suite PQC-Suite-XYZ --verbose (especificar algoritmos específicos [PQC-Suite-XYZ])
+
+
 pr
 Muestra en pantalla un archivo de texto en modo “Previsualización de impresión”
 $ pr fichero.txt
