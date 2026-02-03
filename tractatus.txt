@@ -44063,6 +44063,18 @@ $ pmuninstall -L /usr/local/lib/perl5 Mojolicious (especificar una ruta concreta
 Nota.- No usar con módulos instalados con apt, mezclar pmuninstall y apt puede dejar el sistema inconsistente.
 
 
+pmw
+[Philip's Music Writer]. Es un programa para la composición tipográfica musical. Funciona leyendo un archivo de texto plano, usualmente con extensión .pmw y puede generar archivos PostScript para impresión y archivos MIDI básicos para revisión. Una pequeña muestra del código que usa:
+; --> significa "nota negra" o la duración por defecto actual.
+= --> significa "corchea".
+- --> significa "blanca".
+c' --> es un do agudo.
+c --> es el central
+c, --> es el grave.
+[stave 6 treble 1] ... [endstave] --> inicia/finaliza el contenido de los instrumentos.
+@1, @2 --> marcadores de compás.
+
+
 pnc
 Es una herramienta que permite a los usuarios operar con números telefónicos [obtener información de validez, reformatearlos o extraer números de un fragmento de texto] mediante libphonenumber. En los ejemplos los números son ficticios.
 $ pnc format -c ES -f e164 669752163 (especificando la nación y el formato de salida del número)
