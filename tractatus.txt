@@ -45037,6 +45037,16 @@ Es un Sistema Pasivo de Detección de Activos en Tiempo Real [Passive Real-time 
 # prads-asset-report -r /var/log/prads-asset.log -w asset-report.txt (enviar el informe de log [-r] al archivo especificado [-w])
 
 
+prctl
+Herramienta que permite consultar y modificar ciertos atributos y comportamientos de los procesos en tiempo de ejecución como límites de recursos, comportamiento de señales, nombres, entre otros. Es muy útil para ajustar parámetros específicos del proceso sin necesidad de reiniciarlo.
+$ prctl --unaligned=silent sleep 5
+  	This platform does not implement set_unaligned prctl feature.
+Si el resultado es el que se muestra, significa que la arquitectura de CPU y/o el kernel no soportan la opción, solo existen en arquitecturas muy concretas (ARM, MIPS,IA64) en PCs Intel/AMD no están implementadas.
+$ prctl --unaligned=signal ./programa (envia SIGBUS al programa)
+$ prctl --fpemu=signal ./binario_antiguo (controla la emulación por software de coma flotante cuando no hay FPU. Todas las CPU modernas tienen FPU)
+$ prctl --mcekill=early ./servicio_critico (mata el proceso inmediatamente)
+
+
 prelink
 Preenlazar binarios y bibliotecas ELF compartidas para acelerar su tiempo de inicio. Precisa lanzar prelink despues de cada nueva instalación de paquetes o configurarlo en el cron.
 # prelink -amR (Para equipos x86)
@@ -45277,6 +45287,7 @@ $ ps -p $$ (informa del pid de la propia terminal)
 $ ps axo pid=,stat= | awk '$2~/^Z/ { print $1 }' (Ver PID de los procesos zombies)
 $ ps -a (muestra lo que se está ejecutando en ttys conocidas)
 $ ps -p $(ps -o ppid= -p $$) -o comm= (da el nombre de la terminal que está corriendo: tilda, kitty, lxterminal...)
+$ ps -o pid,comm (muestra el PID y el comando que lo ejecuta)
 flags:
 	USER (usuario que ejecuta el proceso)
 	PID (número del proceso)
