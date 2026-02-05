@@ -45122,6 +45122,17 @@ Al hacer el primer commit [git commit -m "Mi commit"] la salida puede ser pareci
 Si falla, el commit no se crea y dice qué arreglar.
 
 
+precious
+Herramienta de calidad de código que permite ejecutar todos los linters y tidiers [formateadores] con un solo comando. Las herramientas de Linter, son programas que analizan el código fuente en busca de errores de sintaxis, estilo y otros problemas comunes.
+$ precious config init --auto (generar un archivo de configuración inicial sin el cual el comando no funciona)
+$ precious lint -a (verificar todos los archivos del proyecto)
+$ precious lint -s (verificar solo archivos staged en git)
+$ precious lint src/ (verificar un directorio específico)
+$ precious tidy -a (ejecuta los formateadores definidos en la configuración)
+$ precious tidy -s (aplicar correcciones solo a archivos staged)
+$ precious tidy myfile.py (corregir un archivo específico)
+
+
 prelink
 Preenlazar binarios y bibliotecas ELF compartidas para acelerar su tiempo de inicio. Precisa lanzar prelink despues de cada nueva instalación de paquetes o configurarlo en el cron.
 # prelink -amR (Para equipos x86)
