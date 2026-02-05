@@ -3747,6 +3747,21 @@ Otros comando relacionados y del mismo paquete o bld-tools:
 # bldsubmit localhost:10000 192.168.1.46 (envía una ip al demonio que escucha en el host y puerto determinado (por defecto en localhost:2905)
 
 
+black
+Herramienta de formateador de código para Python que automáticamente ajusta el estilo de codificación a un estándar consistente y riguroso. Se usa comúnmente en el ecosistema de desarrollo de Python para mejorar la legibilidad y uniformidad del código.
+Un ejemplo de la herramienta:
+$ nano example.py
+def sumar(a, b) :
+ """ Devuelve suma """
+ return a + b
+def restar(a, b) :
+   """ Devuelve resta """
+   return a - b
+$ black example.py (formatear el código)
+$ black . --line-length 120 (aplicará el formato black a todos los archivos Python en el directorio actual, limitando la longitud de línea a 120 caracteres)
+$ black example.py --fast (forzar el uso de f-strings)
+
+
 bleachbit
 elimina archivos innecesarios para liberar espacio valioso en el disco, mantener la privacidad y eliminar archivos basura. Elimina la memoria caché, el historial de Internet, los archivos temporales, las cookies y los accesos directos rotos. Se encarga de la limpieza de Adobe Reader, Bash, Beagle, Epiphany, Firefox, Flash, GIMP, Google Earth, Java, KDE, OpenOffice.org, Opera, RealPlayer, rpmbuild, Second Life Viewer, VIM, XChat y más. Además de simplemente borrar archivos basura, BleachBit limpia el espacio libre en el disco (para ocultar archivos eliminados previamente para mayor privacidad y para mejorar la compresión de imágenes), limpia las bases de datos de Firefox (para mejorar el rendimiento sin eliminar datos) y destruye de forma segura archivos arbitrarios.
 $ bleachbit (uso básico pero no recomendable)
