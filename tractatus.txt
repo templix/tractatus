@@ -45059,6 +45059,54 @@ $ prctl --fpemu=signal ./binario_antiguo (controla la emulación por software de
 $ prctl --mcekill=early ./servicio_critico (mata el proceso inmediatamente)
 
 
+pre-commit
+[pre-commit-hooks]. Herramienta que gestiona hooks de Git, en concreto hooks que se ejecutan antes de hacer un commit [git commit]. Un hook es básicamente un script que Git ejecuta automáticamente en ciertos momentos. El hook pre-commit se ejecuta antes de que el commit se complete, y sirve para: Detectar errores, aplicar formato automático y evitar commits "malos" [código roto, mal formateado, secretos, etc.]. Funciona con muchos lenguajes [Python, JS, Go, YAML, etc.].
+$ pre-commit run --all-files (ejecutar todos los hooks en todos los archivos)
+$ pre-commit run trailing-whitespace --all-files (ejecutar un hook concreto)
+
+
+pre-commit-hooks
+Scripts que se ejecutan automáticamente antes de que se pueda realizar un commit en un repositorio de Git. Estos hooks permiten realizar comprobaciones y tareas de calidad de código, asegurando que el código cumpla con ciertos estándares antes de ser commitado. Esto ayuda a mantener la calidad del código y a evitar problemas comunes antes de que el código llegue al repositorio principal [ver pre-commit]. Incluye los ejecutables check-added-large-files, check-ast, check-builtin-literals, check-byte-order-marker, check-case-conflict, check-docstring-first, check-executables-have-shebangs, check-json, check-merge-conflict, check-shebang-scripts-are-executable, check-symlinks, check-toml, check-vcs-permalinks, check-xml, check-yaml, debug-statement-hook, destroyed-symlinks, detect-aws-credentials, detect-private-key, double-quote-string-fixer, end-of-file-fixer, file-contents-sorter, fix-byte-order-marker, fix-encoding-pragma, forbid-new-submodules, mixed-line-ending, name-tests-test, no-commit-to-branch, pre-commit-hooks-removed, pretty-format-json, requirements-txt-fixer, sort-simple-yaml y trailing-whitespace-fixer.
+Expliación de algunos hooks de los más importantes:
+trailing-whitespace --> Elimina espacios al final de las líneas. Evita commits "sucios".
+end-of-file-fixer --> Asegurar salto de línea al final del archivo, errores típicos en diffs y herramientas Unix.
+black --> Formatear código automáticamente y pide volver a hacer el commit.
+prettier --> Para JavaScript / TypeScript
+detect-secrets --> Evitar subir secretos. Detecta tokens, passwords y claves privadas.
+check-added-large-files --> Verifica si se están añadiendo archivos grandes al repositorio. Al intentar añadir un archivo <50 MB, evitará el commit y mostrará un mensaje de advertencia.
+check-ast --> Verifica que el código fuente sea sintácticamente correcto. P.e escribir código Python con error de sintaxis, lo indicará antes de hacer el commit.
+check-builtin-literals --> Verifica que no se usen literales mágicos [valores fijos] en el código. Usar un número mágico como 42 sin explicación, advertirá que se reemplace por una constante con un nombre descriptivo.
+check-case-conflict --> Verifica si hay conflictos de nombres debido a mayúsculas y minúsculas. Un archivo README.md y otro llamado readme.md, advertirá sobre el conflicto potencial.
+check-docbuilder --> Verifica que la documentación del proyecto se pueda construir correctamente. Es útil para asegurarse de que la documentación esté actualizada y sea accesible.
+check-merge-conflict --> Verifica si hay conflictos de fusión en el código antes de hacer el commit.
+check-symlinks --> Verifica si hay enlaces simbólicos rotos en el repositorio. Si un enlace simbólico que apunta a un archivo que no existe, se advertirá para corregir.
+check-yaml --> Verifica que los archivos YAML estén correctamente formateados. Un archivo config.yaml con sintaxis incorrecta, lo indicará antes de hacer el commit.
+detect-aws-credentials --> Verifica que no se estén añadiendo algún archivo con credenciales de AWS al repositorio.
+detect-private-key --> Verifica que no se estén añadiendo claves privadas al repositorio.
+Crear el archivo de configuración en la raíz del repositorio:
+$ nano .pre-commit-config.yaml
+       repos:
+         - repo: https://github.com/pre-commit/pre-commit-hooks
+	   rev: v6.0.0
+    	   hooks:
+      	       - id: trailing-whitespace
+      	       - id: end-of-file-fixer
+      	       - id: check-yaml
+      	       ...
+Define: Repositorio de hooks, versión concreta y qué hooks usar.
+$ pre-commit install (instalar los hooks en el repositorio. Crea el hook en .git/hooks/pre-commit)
+Al hacer un commit normal [git commit -m "Mi commit"] la salida puede ser parecida a:
+      [INFO] Initializing environment for https://github.com/pre-commit/pre-commit-hooks.
+      [INFO] Installing environment for https://github.com/pre-commit/pre-commit-hooks.
+      [INFO] Once installed this environment will be reused.
+      [INFO] This may take a few minutes...
+      trim trailing whitespace.................................................Passed
+      fix end of files.........................................................Passed
+      check yaml...............................................................Passed
+      ...
+Si falla, el commit no se crea y dice qué arreglar.
+
+
 prelink
 Preenlazar binarios y bibliotecas ELF compartidas para acelerar su tiempo de inicio. Precisa lanzar prelink despues de cada nueva instalación de paquetes o configurarlo en el cron.
 # prelink -amR (Para equipos x86)
