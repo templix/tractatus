@@ -45148,6 +45148,13 @@ preload
 Demonio que se encarga de recoger información de las aplicaciones más usadas para que en el siguiente inicio estos estén cargados en memoria acelerando el tiempo de arranque de los mismos.
 
 
+prelude-lml-rules
+[Prelude Log Monitoring Lackey]. Sistema de Gestión de Información y Eventos de Seguridad que contiene las reglas [ficheros .rules] que usa el daemon prelude-lml para analizar logs y generar alertas IDMEF.
+# systemctl status prelude-lml.service (ver si está el servicio activo)
+$ prelude-lml-rules-check /etc/prelude-lml/ruleset/*.rules (ver la totalidad de las reglas)
+$ prelude-lml-rules-check /etc/prelude-lml/ruleset/ssh.rules (ver una en concreto)
+
+
 prettyping
 Herramienta para mostrar la latencia entre los hosts de envío y de destino. Es una envoltura de la herramienta de ping estándar con el objetivo de hacer que la salida sea más bonita, más colorida, más compacta y más fácil de leer. Prettyping ejecuta el ping estándar en segundo plano y analiza su salida, mostrando las respuestas al ping de forma gráfica mediante el uso de colores y caracteres Unicode.
 $ prettyping google.com
