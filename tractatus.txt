@@ -20035,6 +20035,7 @@ fyi
 Utilidad para enviar notificaciones de escritorio mediante un demonio.
 $ fyi "Hola, esto es una notificación" (uso básico para mostrar una frase)
 $ fyi -t 10000 -i "/home/USER/Images/logos/gnu.png" "Linux es genial" (mostrará el logo gnu.png y la frase mencionada durante 10 segundos)
+$ fyi -t 0 "linux es genial" (mostrar la frase hasta que se cierre manualmente)
 
 
 fzf
@@ -26693,42 +26694,58 @@ $ ipscan -s -f:file ips.txt (Las especificadas en el archivo ips.txt [una por li
 $ ipscan -s -f:range 192.168.1.9 192.168.1.16 -o resultat.txt (Derivando el resultado a un archivo)
 
 
+ipset
+Herramienta de administración para conjuntos IP del kernel. Incluye el ejecutable ipset-translate
+$ sudo ipset create iran hash:net (crear el conjunto [hash] de IPs por país)
+$ sudo ipset list iran (comprobar el estado)
+Name: iran
+Type: hash:net
+Revision: 7
+Header: family inet hashsize 1024 maxelem 65536 bucketsize 12 initval 0x9cbd2b67
+Size in memory: 456
+References: 0
+Number of entries: 0
+Members:
+$ sudo ipset add iran 1.0.1.0/24 (obtener rangos IP oficiales )
+$ iptables -I INPUT -m set --match-set iran src -j DROP (bloqueo. Cualquier IP incluida en el ipset iran será descartada antes de llegar a servicios como Apache, SSH, etc)
+
+
 iptables
 [= ip6tables]. Herramienta de cortafuegos y trafico de red.
 Algunos ejemplos generales:
-	# iptables -F (eliminar todas las reglas)
-	# iptables -L (si está activo y con qué reglas)
-	# iptables -L -vn (mostrando los puertos e información detallada)
-	# iptables -S (mostrar todas las reglas)
-	# iptables -L -t nat (Listar reglas de una tabla concreta)
-	# iptables -L fail2ban-ssh (comprobar las ips bloqueadas por fail2ban)
-	# iptables -D fail2ban-ssh 1 (Quitar la primera ip baneada de las ips bloqueadas)
-	# iptables -nL --line-numbers (muestra el orden de ejecución de las reglas)
-	# iptables -nL INPUT (Lista todas las reglas de entrada)
-	# iptables -nL FORWARD (Lista todas las reglas de salida)
-	# iptables -D INPUT 3 (borrar la regla número 3)
-	# iptables -A INPUT -j LOG (Guardar logs de todos los bloqueos)
+# iptables -F (eliminar todas las reglas)
+# iptables -L (si está activo y con qué reglas)
+# iptables -L -vn (mostrando los puertos e información detallada)
+# iptables -S (mostrar todas las reglas)
+# iptables -L -t nat (Listar reglas de una tabla concreta)
+# iptables -L fail2ban-ssh (comprobar las ips bloqueadas por fail2ban)
+# iptables -D fail2ban-ssh 1 (Quitar la primera ip baneada de las ips bloqueadas)
+# iptables -nL --line-numbers (muestra el orden de ejecución de las reglas)
+# iptables -nL INPUT (Lista todas las reglas de entrada)
+# iptables -nL FORWARD (Lista todas las reglas de salida)
+# iptables -D INPUT 3 (borrar la regla número 3)
+# iptables -A INPUT -j LOG (Guardar logs de todos los bloqueos)
 Bloquear (DROP)
-	# iptables -P INPUT DROP (Bloquear todo lo que entra)
-	# iptables -A INPUT -s IP -j DROP (una ip)
-	# iptables -A INPUT -s IP -i eth0 -j DROP (una ip de una red)
-	# iptables -A INPUT -s IP -p tcp -dport 22 -j DROP (un puerto de una ip)
-	# iptables -A INPUT -s 192.168.1.0/24 -j DROP (una red)
-	# iptables -A INPUT -m mac --mac-source 00:11:22:33:44:55 -j DROP (una mac)
-	# iptables -A INPUT -p tcp --destination-port 21 -j DROP (puerto 21 de entrada)
-	# iptables -A INPUT -p tcp -s IP --destination-port 21 -j DROP (el puerto 21 de entrada sólo para una IP)
-	# iptables -A INPUT -p tcp -i eth0 -m multiport --destination-port 22,80,443 -j ACCEPT (Varios puertos)
-	# iptables -A INPUT p tcp -s 192.168.1.0/24 --destination-port 21 -j DROP (el  puerto 21 de entrada para todo un rango de IPs)
-	# iptables -A FORWARD -p tcp --dport 25 -j DROP (la salida del puerto 25)
-	# iptables -A INPUT -p tcp --dport 22 -j LOG --log-prefix "Puerto 22 bloqueado" iptables -A INPUT -p tcp --dport 22 -j DROP (haciendo aparecer una mensaje informando del bloqueo)
+# iptables -P INPUT DROP (Bloquear todo lo que entra)
+# iptables -A INPUT -s IP -j DROP (una ip)
+# iptables -A INPUT -s IP -i eth0 -j DROP (una ip de una red)
+# iptables -A INPUT -s IP -p tcp -dport 22 -j DROP (un puerto de una ip)
+# iptables -A INPUT -s 192.168.1.0/24 -j DROP (una red)
+# iptables -A INPUT -m mac --mac-source 00:11:22:33:44:55 -j DROP (una mac)
+# iptables -A INPUT -p tcp --destination-port 21 -j DROP (puerto 21 de entrada)
+# iptables -A INPUT -p tcp -s IP --destination-port 21 -j DROP (el puerto 21 de entrada sólo para una IP)
+# iptables -A INPUT -p tcp -i eth0 -m multiport --destination-port 22,80,443 -j ACCEPT (Varios puertos)
+# iptables -A INPUT p tcp -s 192.168.1.0/24 --destination-port 21 -j DROP (el  puerto 21 de entrada para todo un rango de IPs)
+# iptables -A FORWARD -p tcp --dport 25 -j DROP (la salida del puerto 25)
+# iptables -A INPUT -p tcp --dport 22 -j LOG --log-prefix "Puerto 22 bloqueado" iptables -A INPUT -p tcp --dport 22 -j DROP (haciendo aparecer una mensaje informando del bloqueo)
 Permitir (ACCEPT)
-	# iptables -I INPUT 3 -s 192.168.1.0/8 -j ACCEPT (a la red especificada y poner la regla en tercer lugar)
-	# iptables -D INPUT -s 192.168.1.0/8 -j ACCEPT (Quitar la regla anterior)
-	# iptables -A INPUT -i lo -p all -j ACCEPT (todas las entradas a localhost)
-	# iptables -A OUTPUT -o lo -p all -j ACCEPT (todas las salidas a localhost)
-	# iptables -A INPUT -p tcp --dport ssh -j ACCEPT (Un servicio concreto)
-	# iptables -A INPUT -p tcp -i eth0 -m multiport --destination-port 22,80,443 -j ACCEPT (Todas las entradas a varios puertos)
-	# iptables -A OUTPUT -o eth0 -p tcp -d 192.168.101.0/24 --dport 22 -j ACCEPT  (Permitir trafico ssh saliente para la red especificada)
+# iptables -I INPUT 3 -s 192.168.1.0/8 -j ACCEPT (a la red especificada y poner la regla en tercer lugar)
+# iptables -D INPUT -s 192.168.1.0/8 -j ACCEPT (Quitar la regla anterior)
+# iptables -A INPUT -i lo -p all -j ACCEPT (todas las entradas a localhost)
+# iptables -A OUTPUT -o lo -p all -j ACCEPT (todas las salidas a localhost)
+# iptables -A INPUT -p tcp --dport ssh -j ACCEPT (Un servicio concreto)
+# iptables -A INPUT -p tcp -i eth0 -m multiport --destination-port 22,80,443 -j ACCEPT (Todas las entradas a varios puertos)
+# iptables -A OUTPUT -o eth0 -p tcp -d 192.168.101.0/24 --dport 22 -j ACCEPT  (Permitir trafico ssh saliente para la red especificada)
 1.-
 Salvar las reglas de iptables y restablecerlas manualmente:
 # iptables-save  > /etc/iptables.rules
