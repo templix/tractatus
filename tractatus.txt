@@ -50247,6 +50247,54 @@ Complemento del sistema que adapta de forma continua y automática el espacio de
 $ systemctl status swapspace.service (comprobar si está activo)
 
 
+swatchdog
+Diseñado para monitorizar la actividad del sistema a partir de un archivo de configuración que contiene los patrones que se deben buscar y las acciones que se deben realizar al encontrarlos.
+Ejemplo básico de configuración para vigilar /var/log/auth.log:
+$ nano ~/.swatchdogrc
+watchfor /Failed password for/
+  echo
+  exec /home/tux/bin/swatchdogrc.sh "$0"
+watchfor /FAILED/
+  echo red
+  throttle 300, lines=10
+  mail=admin@correo.com, subject="Failed Login Attempt"
+watchfor /ssh.*: Failed password/
+  echo
+  bell
+watchfor /segfault|kernel panic/
+  throttle 00:05:00
+  exec /home/tux/bin/fyi_kernel.sh "$0"
+throttle 300, lines=10 enviará un correo electrónico cada 300 segundos, incluso si el error ocurre más de 10 veces en ese período, throttle 00:05:00 indica que como máximo avise 1 vez cada 5 minutos y el archivo que se lanza con el exec para mostrar un texto en pantalla y hasta que no se cierre permanece en la pantalla. Ver fyi:
+$ nano ~/bin/swatchdog.sh
+       #!/bin/bash
+       msg="$*"
+       fyi -t 0 -i "/home/tux/Imatges/logos/gnu.png" "$msg"
+$ swatchdog -c ~/.swatchdogrc -t /var/log/auth.log --daemon (ejecutar Swatchdog en modo demonio)
+$ swatchdog -c ~/.swatchdogrc -t /var/log/secure
+$ swatchdog -c ~/.swatchdogrc -t '/var/log/nginx/site1/access_log /var/log/messages /var/log/auth.log' --daemon (ejecutar varios procesos para supervisar varios archivos de registro)
+Tambien es posible un swatchdog por log con configuraciones distintas:
+$ swatchdog -c ~/.sw_auth.rc   -t /var/log/auth.log   --daemon
+$ swatchdog -c ~/.sw_msgs.rc   -t /var/log/messages   --daemon
+$ swatchdog -c ~/.sw_nginx.rc  -t /var/log/nginx/site1/access_log --daemon
+$ swatchdog -c ~/.swatchdogrc -t '/var/log/messages /var/log/auth.log' --tail-program-name=/usr/bin/tail --tail-args='-F' --pid-file=/run/swatchdog-logs.pid --daemon (archivo de configuración sobre dos archivos de registro [messages y auth.log], usar tail con el argumento -F, guardar el pid en el directorio especificado y arctivar el demonio)
+Nota.- Si se usa --daemon, al recibir HUP o ALRM no recarga la config, simplemente termina; se tiene que relanzar.
+1.-
+Activar/desactivar el servicio con systemd
+# nano /etc/systemd/system/swatchdog.service
+[Unit]
+ Description=Swatchdog Log Monitor
+ After=network.target syslog.target
+[Service]
+ Type=simple
+ ExecStart=/usr/bin/swatchdog -c /home/tux/.swatchdogrc -t /var/log/syslog
+ Restart=on-failure
+[Install]
+ WantedBy=multi-user.target
+# systemctl enable swatchdog.service (activar el servicio al inicio del sistema)
+# systemctl start swatchdog.service (activar el servicio)
+# systemctl status swatchdog.service (ver el estado)
+
+
 switchdesk
 Sin argumentos, mostrará un cuadro de diálogo que permite al usuario elegir entre los escritorios disponibles instalados en el sistema en Fedora, Cent OS y Red Hat.
 $ switchdesk kde (cambia el entrono de escritorio a kde)
