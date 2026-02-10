@@ -47115,6 +47115,19 @@ $ rustscan -a 127.0.0.1 -p 53 (escaneo de puertos individuales)
 $ rustscan -a 127.0.0.1 (todos los puertos del host)
 
 
+routinator
+Recopila y procesa datos de Resource Public Key Infrastructure [RPKI]. Routinator se ejecuta como un servicio que descarga y verifica periódicamente los datos RPKI. El servidor HTTPS integrado ofrece una interfaz de usuario, puntos finales de API para varios formatos de archivo, así como registro, estado y métricas de Prometheus. Las métricas de Prometheus son puntos de datos medibles que se utilizan habitualmente para monitorizar la infraestructura en la nube. Indican cuándo y dónde se han producido o se están produciendo problemas.
+$ routinator init (la primera vez que se usa Routinator, este mostrará un mensaje indicando que falta el TAL de ARIN)
+$ routinator init --accept-arin-rpa (creará el directorio del repositorio de caché rpki, así como una descarga de los TAL, cinco RIR y la guardará en el directorio $HOME/.rpki-cache/tals/)
+$ routinator -v vrps (extraer y listar las cargas útiles de ROA validadas del repositorio RPKI global, lo que genera una lista de ASN y prefijos. Tarda un poco)
+$ ls .rpki-cache/tals/ (Confirmar que existen los cinco archivos TAL)
+$ more .rpki-cache/tals/apnic.tal (ver el contenido del archivo TAL de APNIC)
+$ routinator server --rtr 192.168.30.10:3323 --refresh=900 (ejecutar como servidor RTR escuchando en 192.168.30.10 y puerto 3323. El repositorio local se actualizará y revalidará cada 15')
+$ routinator server --rtr 192.168.30.10:3323 --rtr [2001:0DB8::X]:3323 --refresh=900 (lo mismo pero escuchando tanto en IPv4 como en IPv6)
+$ outinator server --http 192.168.30.10:8080 (iniciar servidor HTTP)
+$ routinator config (ver la configuración actual de Routinator)
+
+
 rvm
 Paquete de gestión para entornos ruby y las gemas de cada proycto.
 $ rvm install 1.9.2 (Instalar una versión de ruby)
