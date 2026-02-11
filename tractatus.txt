@@ -26682,6 +26682,22 @@ Envía solicitudes IPP arbitrarias a un servidor o a una impresora IPP. Cada arc
 $ ipptool -t -v -f test ipp://localhost:631/printers/HP_psc_1100_series text.txt (informe de prueba CUPS [-t], atributos de solicitud y respuesta en modo de prueba CUPS [-v] y nombre de archivo de solicitud predeterminado para las pruebas [-f])
 
 
+iprange
+Herramienta que sirve para trabajar con conjuntos de direcciones IP: expandir rangos, convertir formatos, calcular redes, verificar si una IP pertenece a un rango, etc.
+$ echo "192.168.1.10-192.168.1.15" | iprange - (convertir el rango en el mínimo conjunto de bloques CIDR equivalentes)
+$ echo -e "192.168.1.0/25\n192.168.1.128/25" | iprange - (entrar varios bloques y los fusiona)
+Ejemplo trabajando con dos archivo:
+$ nano base.txt
+192.168.1.0/24
+$ nano excluir.txt:
+192.168.1.0/28
+$ iprange base.txt --print-ranges excluir.txt (imprimir rangos de IP)
+$ iprange base.txt --compare excluir.txt (compara los archivos)
+$ iprange base.txt --intersect excluir.txt (Si devuelve algo hay solapamiento)
+$ iprange base.txt --optimize excluir.txt (con listas gigantes [no es el caso] las compacta. Sin redundancia y listo para firewall)
+$ iprange base.txt --diff excluir.txt (devolver el espacio libre)
+
+
 ips
 Programa tipo ps que muestra los estados de los procesos obtenidos en el archivos /proc. Tiene funciones para facilitar el seguimiento de procesos activos, semiactivos y transitorios.
 $ ips
