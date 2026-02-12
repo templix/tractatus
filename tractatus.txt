@@ -45206,6 +45206,23 @@ $ primes 1 100 (del 1 al 100)
 $ primes 100 150 (del 100 al 150)
 
 
+princeprocessor
+Generador de candidatos a contraseñas que utiliza el algoritmo PRINCE [PRobability INfinite Chained Elements]. Utiliza una lista de palabras de entrada y construye cadenas de palabras combinadas.
+Ejemplo con un archivo de palabras:
+$ nano palabras.txt
+       perro
+       gato
+       pajaro
+       elefant
+       cocodrilo
+$ princeprocessor < palabras.txt (genera todas las combinaciones posibles)
+$ princeprocessor --keyspace < palabras.txt (calcula cuántas combinaciones generará)
+$ princeprocessor --elem-cnt-min=2 --elem-cnt-max=2 palabras.txt (crear contraseñas que sean exactamente la concatenación de 2 palabras del archivo)
+$ princeprocessor --elem-cnt-min=3 --elem-cnt-max=4 palabras.txt (generar contraseñas de 3 o 4 palabras del archivo)
+$ princeprocessor --pw-min=8 --pw-max=13 < palabras.txt (generar solo contraseñas entre 8 y 13 caracteres)
+$ princeprocessor -s 5 --case-permute -o resultado < palabras.txt (omitir las primeras 5 contraseñas, con la primera letra mayúscula o minúscula y guardar en resultado)
+
+
 printenv
 Para saber los valores de todas las variables de entorno predefinidas por  la shell (TERM, SHELL, PWD, LC_ALL, USER, USERNAME, HOME, LOGNAME, BROWSER, DISPLAY...).
 $ printenv
