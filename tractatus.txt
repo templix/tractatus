@@ -45239,13 +45239,17 @@ $ lpstat -p (estado de impresoras)
 # nano /etc/cups/ppd/Epson_R360.ppd (ver archivo PPD de la impresora. Modificar por la impresora especifica)
 
 
+printer-driver-hpcups
+[hplip]. Este paquete contiene un controlador de impresora basado en CUPS Raster que añade compatibilidad con la mayoría de las impresoras de inyección de tinta y algunas impresoras LaserJet fabricadas por HP. No proporciona archivos PPD para la función de fax de los dispositivos multifunción de HP.
+
+
 print-manager
 Herramientas que proporciona un módulo de configuración de KDE y un widget de Plasma para instalar y configurar impresoras, así como para monitorizar impresoras, trabajos de impresión y colas de impresión. Incluye las herramientas configure-printer, kde-add-printer [obsoleta] y kde-print-queue
 $ configure-printer impresora (configurar una impresora)
 $ kde-print-queue queue (muestra la cola de impresión)
 
 
-pintemf
+printemf
 libEMF es una biblioteca de C/C++ que proporciona un conjunto de herramientas de dibujo basado en ECMA-234. Su propósito general es crear archivos de gráficos vectoriales en sistemas POSIX que se pueden importar a OpenOffice.org o LibreOffice. Sin embargo, hoy en día, se pueden importar directamente archivos SVG, o PDF, a OpenOffice o LibreOffice sin necesida de estas herramientas.
 
 
