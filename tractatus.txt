@@ -45223,6 +45223,22 @@ $ princeprocessor --pw-min=8 --pw-max=13 < palabras.txt (generar solo contraseñ
 $ princeprocessor -s 5 --case-permute -o resultado < palabras.txt (omitir las primeras 5 contraseñas, con la primera letra mayúscula o minúscula y guardar en resultado)
 
 
+print-driver-gutenprint
+[cups system-config-printer]. Controladores de impresora para CUPS [Common UNIX Printing System] que contienen todos los archivos necesarios para imprimir con calidad fotográfica profesional en más de 700 modelos de impresoras [Canon, Epson, HP, Brother, Lexmark, etc.]. Incluye los ejecutables cups-calibrate y cups-genppdupdate. Ver lp, lpstat, lpinfo, lpadmin y lpoptions.
+$ cups-calibrate (realiza varias preguntas para generar un perfil de color personalizado e imprime las pruebas)
+$ lpr -o profile=950,1000,1000,0,-200,-500,1000,0,0,-100,1000 foto.jpg (aplicar el perfil)
+$ lp -d Epson_R360 -o MediaType=GlossyPhoto -o StpQuality=Best -o StpImageType=Photo -o StpColorCorrection=Uncorrected -o StpDitherAlgorithm=EvenTone -o profile=950,1000,1000,0,-200,-500,1000,0,0,-100,1000 -o PageSize=4x6 foto.jpg (configuración óptima para fotos)
+$ lpoptions -p psc-1100-series -o profile=950,1000,1000,0,-200,-500,1000,0,0,-100,1000 (guardar como predeterminado)
+$ lpinfo -m \| grep gutenprint (listar drivers)
+# cups-genppdupdate Epson_R360 (actualizar una impresora específica si es que existen actualizaciones)
+$ sudo cups-genppdupdate -n -v (ver si existen cambios sin aplicarlos)
+# cups-genppdupdate (actualizar todas las impresoras)
+# cups-genppdupdate /etc/cups/ppd/Epson_R360.ppd (usando el archivo PPD directamente)
+# systemctl restart cups (aplicar los cambios)
+$ lpstat -p (estado de impresoras)
+# nano /etc/cups/ppd/Epson_R360.ppd (ver archivo PPD de la impresora. Modificar por la impresora especifica)
+
+
 print-manager
 Herramientas que proporciona un módulo de configuración de KDE y un widget de Plasma para instalar y configurar impresoras, así como para monitorizar impresoras, trabajos de impresión y colas de impresión. Incluye las herramientas configure-printer, kde-add-printer [obsoleta] y kde-print-queue
 $ configure-printer impresora (configurar una impresora)
