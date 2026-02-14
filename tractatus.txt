@@ -45338,6 +45338,51 @@ $ procinfo -D (mostrar estadísticas como totales)
 $ procinfo -H (en formato KiB, MiB, GiB en lugar de los Kbytes predeterminados)
 
 
+procmail
+Procesador y filtro de correo que se usa principalmente como Mail Delivery Agent [MDA] para recibir mensajes y aplicar reglas automáticas: clasificarlos en carpetas, reenviarlos, ejecutar scripts, responder automáticamente, etc. Suele configurarse a través del archivo ~/.procmailrc
+Ejemplo básico de configuración:
+$ nano ~/.procmailrc
+       SHELL=/bin/bash
+       PATH=/usr/bin:/bin
+       MAILDIR=$HOME/Mail
+       DEFAULT=$MAILDIR/inbox
+       LOGFILE=$MAILDIR/procmail.log
+       # Correos del trabajo
+       :0:
+       * ^From:.*user@empresa.com
+       Trabajo
+       # Factura
+       :0 c:
+       * ^Subject:.*Factura
+       Facturas
+       # Spam
+       * Viagra
+       Spam
+       # Aviso para realizar backups
+       * ^Subject:.*Backup
+       | /home/usuario/scripts/procesar_backup.sh
+       # Reenvio de correo automático
+       * ^From:.*cliente@empresa.com
+       ! otrocorreo@dominio.com
+       # Consultas
+       * ^Subject:.*Consulta
+       | (formail -r -I"Precedence: junk" ; \
+          echo "Gracias por su mensaje. Le responderemos pronto.") \
+       | sendmail -t
+       # Todo lo demás
+       :0:
+       Inbox
+Las variables se definen al inicio del archivo: MAILDIR [Directorio donde se guardan los correos], DEFAULT [Carpeta por defecto] y LOGFILE [Archivo de registro].
+:0 --> Inicio de receta
+:0 c: --> Deja el original y ejecuta acción.
+* ^From --> Busca en el encabezado, puede haber varias.
+Trabajo --> Guardar en un archivo tipo mbox en $MAILDIR llamado "Trabajo"
+* Viagra --> Busca en todo el mensaje.
+| --> indica que el mensaje se pasa como entrada estándar al programa a ejecutar.
+! --> Reenviar correos de cierto remitente.
+| sendmail --> Usa formail, incluido con procmail para generar una respuesta automática.
+
+
 procps
 Explorar el "pseudo" sistema procfs, generado dinámicamente por el kernel para proporcionar información sobre el estado de las entradas en su tabla de procesos, como si el proceso se está ejecutando, detenido o "zombi". Incluye varios ejecutables; kill [ver], sysctl, free [ver], pgrep [ver], pidwait, pkill [ver], pmap [ver], pwdx [ver], skill [ver], slabtop, snice, tload [ver], top [ver], uptime [ver], vmstat [ver], w [ver] y watch [ver]
 $ slabtop (Mostrar información de caché del núcleo en tiempo real)
