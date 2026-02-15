@@ -45407,6 +45407,47 @@ $ procs ram (de la ram)
 $ procs user (del usuario)
 
 
+procserv
+[PROCess SERVer]. Herramienta para ejecutar un proceso en segundo plano y permitir acceso remoto tipo Telnet a la consola, registro [logging] de la salida, reinicio automático si el proceso termina y control manual del proceso.
+$ procserv 20000 /usr/bin/python3 script.py (abrir el puerto 20000 y ejecutar script.py)
+$ procserv 20000 /bin/bash (bare una shell remota)
+$ telnet localhost 20000 (luego permite conectarse por telnet)
+$ procserv -r 20000 ./programa (si programa termina, procserv lo reinicia automáticamente)
+$ procserv -L salida.log 20000 ./mi_programa (todo lo que el programa escriba en stdout/stderr quedará en salida.log)
+$ procserv -n servidor_test -L log.txt -r 20000 ./servidor (ejecutar como servicio en segundo plano. Nombre del servicio, archivo de logs, reinicio automático y puerto 20000)
+$ procserv -c 20000 ./mi_programa (dentro de la sesión de telnet, -c permite enviar comandos especiales cuando se está conectado [reiniciar procesp, detenerlo y ver estado])
+$ procserv -n IOC_TEST -L ioc.log -r 20000 ./st.cmd (en los sistemas basados en EPICS)
+$ ssh -L 20000:localhost:20000 usuario@servidor (Dado que no hay autenticación fuerte ni cifra la comunicación es preferible usar túneles ssh)
+
+
+procyon
+Descompilador Java que gestiona las mejoras del lenguaje Java 5 y posteriores. Un descompilador es una herramienta que convierte un archivo binario o compilado de vuelta a código fuente. En el contexto de Java, un descompilador toma un archivo .class, que contiene bytecode de Java y lo convierte en código fuente Java .java.
+$ java -jar procyon-decompiler.jar Example.class (descompilar un archivo .class)
+$ java -jar procyon-decompiler.jar MyProgram.class > MyProgram.java (descompilará MyProgram.class y redirigirá la salida al archivo MyProgram.java)
+Nota.- la descompilación no siempre produce un código idéntico al original. Algunas optimizaciones o estructuras específicas del código fuente original pueden no ser perfectamente reconstruidas y precisa permiso del titular de los derechos de autor.
+
+
+profanity
+Cliente de chat basado en el protocolo XMPP/Jabber para la terminal.
+$ profanity (iniciar Profanity)
+Una vez dentro el interfaz es similar a IRSSI donde los comandos son precedidos por "/"
+/help --> muestra la ayuda general
+/connect usuario@servidor.com --> conectarse a tu cuenta XMPP. Pide usuario y contraseña.
+/roster --> ver lista de contactos
+/roster add amigo@servidor.com --> añadir contacto
+/roster remove amigo@servidor.com --> eliminar contacto
+/join sala@conference.servidor.com --> unirse a una sala
+/join sala@conference.servidor.com/Apodo --> con un nick específico
+/leave --> salir de la sala actual
+/msg amigo@servidor.com Hola, ¿cómo estás? --> mandar un mensaje
+Nota.- Cuando se está en una sala se pueden escribir mensajes sin comando [/msg]
+/win 1 --> ir a la ventana 1
+/win 2 --> ir a la ventana 2
+/status online "Trabajando" --> cambiar estado
+/away "Vuelvo en 10 min" --> marcar como ausente
+/quit --> salir de Profanity
+
+
 profile-cleaner
 Reduce el tamaño de los perfiles del navegador organizando sus bases de datos SQLite mediante las funciones de vaciado y reindexación de SQLite3. Los navegadores modernos [Firefox, Chrome, Brave, etc.] guardan casi todo: historial, marcadores, cookies... en pequeñas bases de datos llamadas SQLite. Con el uso constante, estas bases de datos se fragmentan y quedan con espacios vacíos. profile-cleaner entra ahí para limpiar los huecos [VACUUM] y reordenar el índice [REINDEX].
 $ profile-cleaner (listar opciones de navegadores soportados)
