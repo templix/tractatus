@@ -45400,6 +45400,14 @@ $ procs ram (de la ram)
 $ procs user (del usuario)
 
 
+profile-cleaner
+Reduce el tamaño de los perfiles del navegador organizando sus bases de datos SQLite mediante las funciones de vaciado y reindexación de SQLite3. Los navegadores modernos [Firefox, Chrome, Brave, etc.] guardan casi todo: historial, marcadores, cookies... en pequeñas bases de datos llamadas SQLite. Con el uso constante, estas bases de datos se fragmentan y quedan con espacios vacíos. profile-cleaner entra ahí para limpiar los huecos [VACUUM] y reordenar el índice [REINDEX].
+$ profile-cleaner (muestra todos los navegadores en los que se puede usar)
+$ profile-cleaner f (limpia firefox)
+$ profile-cleaner b (limpia brave)
+Nota.- El navegador tiene que estar cerrado de lo contrario, las bases de datos estarán bloqueadas y el comando dará error.
+
+
 proftpd
 Servidor ftp local.
 # nano /etc/proftp/proftpd.conf
