@@ -45402,10 +45402,25 @@ $ procs user (del usuario)
 
 profile-cleaner
 Reduce el tamaño de los perfiles del navegador organizando sus bases de datos SQLite mediante las funciones de vaciado y reindexación de SQLite3. Los navegadores modernos [Firefox, Chrome, Brave, etc.] guardan casi todo: historial, marcadores, cookies... en pequeñas bases de datos llamadas SQLite. Con el uso constante, estas bases de datos se fragmentan y quedan con espacios vacíos. profile-cleaner entra ahí para limpiar los huecos [VACUUM] y reordenar el índice [REINDEX].
-$ profile-cleaner (muestra todos los navegadores en los que se puede usar)
+$ profile-cleaner (listar opciones de navegadores soportados)
 $ profile-cleaner f (limpia firefox)
 $ profile-cleaner b (limpia brave)
+$ profile-cleaner t (limpiar thunderbird)
+$ profile-cleaner p /usr/bin/navegador (si se tiene uno que no está en el listado)
 Nota.- El navegador tiene que estar cerrado de lo contrario, las bases de datos estarán bloqueadas y el comando dará error.
+
+
+profile-sync-daemon
+Enlace simbólico y sincronización de directorios de perfiles de navegador en RAM. Profile-sync-daemon [psd] es un pequeño pseudo-daemon diseñado para administrar el perfil de su navegador en tmpfs y sincronizarlo periódicamente con el disco. Con PSD, el navegador irá muy rápido porque lee desde la RAM, pero si las bases de datos están fragmentadas, usando ocasionalmente profile-cleaner [ver] haraá que el archivo que PSD tiene que cargar en la RAM sea lo más pequeño y eficiente posible. Incluye las herramientas profile-sync-daemon, psd, psd-overlay-helper y psd-suspend-sync,
+$ systemctl --user start psd (iniciar el servicio)
+$ systemctl --user enable psd (iniciar el servicio al iniciar el sistema)
+$ systemctl --user restart psd (ante cualquier cambio en la configuración)
+$ psd-suspend-sync (suspender la sincronización)
+$ psd-overlay-helper (muestra una nota diciendo que "No llames a este script directamente; psd lo hará automáticamente")
+$ psd parse (muestra en la configuración del archivo ~/.config/psd/psd.conf los navegadores activos. El archivo se crea automáticamente)
+$ psd preview (ver si está funcionando)
+$ psd resync (si existen problemas debido a un corte de luz ese comando ayuda a volver a la normalidad)
+Nota.- El perfil está en la RAM, si el ordenador se apaga de golpe, se puede perder el historial o las pestañas abiertas de esa sesión específica. PSD sincroniza cada hora por defecto.
 
 
 proftpd
