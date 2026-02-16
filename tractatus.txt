@@ -49361,6 +49361,46 @@ $ gorge -i 0 -u M -p zeros -b 512 1m /dev/zero (Lee 1 mebibyte de datos utilizan
 $ regorge -g -r -b 1k -B 256K 1t /dev/md1 (Escribe 1 tebibyte (1 tebibyte = 1024*1024*1024*1024 bytes) utilizando peticiones de 1-256 kibibytes en el dispositivo de bloques /dev/md1 utilizando el patrón aleatorio. Se realizan búsquedas aleatorias antes de cada transferencia, pero cada bloque entre el inicio y el final de los datos se escribe exactamente una vez. Los tamaños de las peticiones se eligen aleatoriamente. A continuación se leen los mismos datos utilizando los mismos tamaños de petición y búsquedas en la misma secuencia. Repita la secuencia anterior un número infinito de veces hasta que se le indique que abandone [mediante señal o comando TUI])
 
 
+sphinx
+Generador de documentación o una herramienta que traduce un conjunto de archivos fuente de texto plano a varios formatos de salida, generando automáticamente referencias cruzadas, índices, etc. Sphinx se centra en la documentación, en particular la documentación manuscrita; sin embargo, también puede utilizarse para generar blogs [ver ablog], páginas de inicio e incluso libros. El proceso inicial básico es:
+$ mkdir bl_sphinx (crear el directorio de origen)
+$ cd bl_sphinx (entrar en él)
+$ sphinx-quickstart (hace algunas pareguntas y crea la estructura del directorio con el archivo de configuración conf.py)
+$ ls (muestra del contenido del directorio creado)
+_build/  _static/  _templates/  conf.py  index.rst  make.bat  Makefile
+Nota.- Nunca editar los archivos del directorio _build ni los .html, siempre las entradas .rst y el index.rst a parte del conf.py
+Las "entradas" [posts], se crean en el directorio origen [el raiz], junto a index.rst.
+1.-
+Crear una entrada de blog
+$ cd bl_sphinx (el sourcedir)
+$ nano entrada1.rst
+       Mi primera entrada
+       ==================
+       ..
+       Publicado el 12 de febrero de 2026
+       ..
+       Linux es un sistema genial.
+Decirle a Sphinx que lo incluya sin la extensión .rst
+$ nano index.rst
+       ...
+       .. toctree::
+          :maxdepth: 2
+   	  :caption: Contents:
+       ..
+          entrada1
+       ...
+Una configuración sin tener que entrar los nuevos posts podría ser:
+4 nano index.rst
+       .. postlist::
+          :list-style: circle
+   	  :category: Manual
+   	  :format: {date} — {title}
+   	  :sort:
+$ make html (compila la nueva entrada y los html se instalan en _build/html [outputdir])
+$ firefox _build/html/index.html (ver el resultado con el navegador)
+$ make clean (para eliminar un post o modificar alguno antiguo)
+
+
 split
 Cortar archivos
 $ split -d -b 5M archivo otro_archivo. (Que tengan extensión con números: .00, .01, .02 [-d]. Trozos de 5 MB [-b], archivo de entrada y de salida terminado con un punto donde se añade la extension. En este ejemplo daría salidas tipo otro_archivo.00, otro_archivo.01....)
