@@ -45493,6 +45493,14 @@ $ proguard -injars myapp.jar -outjars myapp_obfuscated.jar -libraryjars <java.ho
 $ proguard -injars myapp1.jar -injars myapp2.jar -outjars myapp_combined_optimized.jar -libraryjars <java.home>/lib/rt.jar (especificar varios .jar para optimizar)
 
 
+prolix
+Herramienta pensada para filtrar de forma interactiva la salida de otros comandos, especialmente cuando generan demasiada información "ruidosa" [que generan demasiadas líneas, que mezclan información útil con advertencias repetitivas, mensajes irrelevantes o redundantes, etc]. Ejecuta un comando y captura su salida estándar y de error, suprimiendo las líneas poco interesantes según un patrón y muestra una salida más limpia. Algunos de estos comandos "ruidosos" pueden ser: make, apt, gcc, rsync...
+$ prolix make (ocultar lineas repetitivas para mostrar solo lo relevante)
+$ prolix gcc programa.c
+$ prolix -r http:// sudo apt update (ocultar lineas que contengan "http://")
+$ make 2>&1 | grep -v warning (equivalente con grep)
+
+
 prompt
 Sección de texto que aparece en la pantalla cuando un usuario abre una terminal o consola informática tratando de avisar al usuario de que está lista para recibir una entrada. Normalmente muestra información como nombre del usuario,  ruta donde se encuentra, símbolo del sistema operativo utilizado, instrucciones para realizar ciertas tareas o diagnósticos. Bash tiene cuatro "cadenas de prompt" que se pueden personalizar: PS0 se muestra después de cada orden, antes de cualquier salida, PS1 es el prompt principal que se muestra antes de cada orden, PS2 es el prompt secundario que se muestra cuando una orden se aplica con varias lineas de entrada, PS3 para el comando de selección y PS4 cuando se ejecuta un script de shell en modo de depuración, normalmente el signo "+". Todos los ejemplos siguientes solo se aplican a la terminal hasta que se cierre. Para hacerlos permanentes ha de colocarse la linea en .bashrc.
 $ export PS1="\u@\H \W:\$ "
