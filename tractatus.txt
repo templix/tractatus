@@ -45554,6 +45554,8 @@ $ export ALERTMANAGER_URL='http://localhost:9093
 # amtool silence expire <ID-del-silencio> (quitar un silencio, usando su ID)
 # amtool alert (ver alertas que están sonando ahora mismo)
 # amtool alert --output=simple (ver alertas con un formato más limpio)
+# watch -n 1 amtool alert --output=simple (refrescar la lista cada segundo sin teclear nada ver cómo aparecen y desaparecen las alertas mientras se tocan cosas)
+# amtool alert query severity=critical (cuando se tenga muchas alertas y solo se quiera las críticas)
 1.-
 algunos parámetros pueden colocarse en el archivo:
 # nano /etc/default/prometheus-alertmanager
