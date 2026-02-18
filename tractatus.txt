@@ -45533,10 +45533,32 @@ $ make 2>&1 | grep -v warning (equivalente con grep)
 
 
 prometheus
-Servidor de monitoreo. El archivo de configuración en /etc/prometheus/prometheus.yml. El nodo explorer por defecto en localhost:9100
+Servidor de monitoreo. El archivo de configuración en /etc/prometheus/prometheus.yml.
 # systemctl status prometheus (comprobar que esté activo)
 # prometheus --web.listen-address localhost:8001 (muestra en el navegador el monitoreo en localhost y puerto 8001. Si no se especifica, por defecto puerto 9090)
 # prometheus --log.level=info --web.max-connections=512 (solo mensajes "info", otras opciones debug, warn y error y máximo de conexiones simultaneas)
+
+
+prometheus-alertmanager
+Gestiona las alertas enviadas por aplicaciones cliente, como el servidor Prometheus [ver]. Incluye el ejecutable amtool. Archivo de configuración en /etc/prometheus/alertmanager.yml y las alertas en /var/lib/prometheus/alertmanager/. Las muestra en el navegador en localhost:9100 por defecto.
+# prometheus-alertmanager --web.listen-address=:9097 --cluster.listen-address= (si no se monta un cluster de varios servidores de Alertmanager, desactivar Gossip dejándolo vacío)
+# prometheus-alertmanager --web.listen-address=:9097 --cluster.listen-address=:9095 (o cambiar el puerto del cluster)
+# prometheus-alertmanager --data.retention=250h (guardar el historial de alertas 250 horas, por defecto 120h)
+Para que amtool sepa a dónde mirar sin escribir la URL siempre, exportar la variable con el puerto elegido
+$ export ALERTMANAGER_URL='http://localhost:9093
+# amtool check-config /etc/prometheus/alertmanager.yml (verificar la configuración antes de reiniciar el servicio)
+# amtool silence add alertname=InstanciaCaida --duration=1h --comment="Mantenimiento programado" (si se va a tocar un servidor para que no saturen los mensajes, crear un silencio)
+# amtool --output=simple config show (muestra la configuración en formato de salida simple)
+# amtool --alertmanager.url=http://localhost:9093/
+# amtool silence query (listar silencios activos)
+# amtool silence expire <ID-del-silencio> (quitar un silencio, usando su ID)
+# amtool alert (ver alertas que están sonando ahora mismo)
+# amtool alert --output=simple (ver alertas con un formato más limpio)
+1.-
+algunos parámetros pueden colocarse en el archivo:
+# nano /etc/default/prometheus-alertmanager
+Añadir la linea:
+       ARGS="--web.listen-address=:9097 --cluster.listen-address="
 
 
 prompt
