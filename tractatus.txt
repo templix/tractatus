@@ -248,6 +248,37 @@ $ abiword --to=doc nombre.pdf (pasar pdf a doc)
 $ abiword --geometry=1366x768 (Iniciar maximizado según la resolución de pantalla)
 
 
+ablog
+[python3-aphinx-ablog]. Es una extensión de Sphinx [ver] que convierte cualquier proyecto de Sphinx en un blog completo con funcionalidades como posts con fecha, listado cronológico, categorías y etiquetas, eeds RSS/Atom, páginas de archivo por autor, año, etiqueta, categoría...
+$ ablog start -h (muestra información sobre el argumento "start". Otras opciones: build, clean, serve, post y deploy)
+El proceso inicial es el siguiente:
+$ mkdir dir_ablog (crear el directorio del proyecto)
+$ cd dir_ablog (entrar en él)
+$ ablog start (hace varias preguntas y crea la estructura básica)
+$ mkdir posts (crear ñdirectorio de entradas [post])
+$ mv first-post.rst posts/ (mover la primera entrada que se crea por defecto)
+$ ls -F -C (visualizar la estructura)
+     _posts/  _pycache__/  _static/  _templates/  _website/  about.rst  conf.py  index.rst
+$ ablog build (compilar)
+$ ablog serve (visualizar en el navegador)
+Las nuevas entradas se realizan en el direcotorio posts/.
+Contenido ejemplo de una entrada:
+$ nano blog/mi-entrada.rst
+       .. post:: Feb 17, 2026
+          :tags: python, sphinx
+   	  :category: Tutoriales
+   	  :author: yo
+       ..
+       Título del post
+       ===============
+       ..
+       Aquí va el contenido...
+Después de cada entrada o midificación ha de ejecutarse:
+$ ablog clean
+$ ablog build
+Los .html se encuentran en el directorio _website/posts/.
+
+
 abook
 Muestra una plantilla de libreta de direcciones. Proporciona muchos campos diferentes de información del usuario como nombre, email, dirección y varios campos de teléfono. abook está diseñado para usar con mutt, pero se puede usar de forma independiente.
 $ abook (forma básica)
