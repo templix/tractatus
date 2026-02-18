@@ -45629,6 +45629,20 @@ El segundo número indica el color:
       37 – Gris claro
 
 
+promtool
+Utilidad para gestionar e interactuar con el sistema de monitorización Prometheus y su configuración/reglas.
+$ curl -s http://localhost:9100/metrics | promtool check metrics (con prometheus activo, analizar y comprobar coherencia y corrección de las métricas de Prometheus)
+$ promtool check config /etc/prometheus/prometheus.yml (validar el fichero principal de configuración y de reglas)
+# promtool query instant http://localhost:9090 'up' (consultar métricas en tiempo real como un cliente PromQL)
+# promtool query instant http://localhost:9090 'up' (consulta instantánea)
+# promtool query instant http://localhost:9090 'node_cpu_seconds_total{mode="idle"}' (misma consulta)
+# promtool query range --start=2024-01-15T10:00:00Z --end=2024-01-15T11:00:00Z --step=1m http://localhost:9090 'rate(node_cpu_seconds_total[5m])' (consulta en rango de tiempo)
+# promtool query metadata http://localhost:9090 'node_cpu_seconds_total' (ver metadatos de una métrica)
+# promtool query labels http://localhost:9090 job (ver etiquetes disponibles)
+# promtool tsdb analyze /var/lib/prometheus (analizar el estado de la base de datos: bloques, tamaño, cardinalidad...)
+# promtool tsdb list /var/lib/prometheus (listar bloques del TSDB)
+
+
 protonvpn
 conectarse y desconectarse a servidores de VPN y elegir servidores por país o ciudad.
 # protonvpn init (inicia el servicio. Pedirá las credenciales)
