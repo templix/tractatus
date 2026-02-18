@@ -45532,6 +45532,13 @@ $ prolix -r http:// sudo apt update (ocultar lineas que contengan "http://")
 $ make 2>&1 | grep -v warning (equivalente con grep)
 
 
+prometheus
+Servidor de monitoreo. El archivo de configuración en /etc/prometheus/prometheus.yml. El nodo explorer por defecto en localhost:9100
+# systemctl status prometheus (comprobar que esté activo)
+# prometheus --web.listen-address localhost:8001 (muestra en el navegador el monitoreo en localhost y puerto 8001. Si no se especifica, por defecto puerto 9090)
+# prometheus --log.level=info --web.max-connections=512 (solo mensajes "info", otras opciones debug, warn y error y máximo de conexiones simultaneas)
+
+
 prompt
 Sección de texto que aparece en la pantalla cuando un usuario abre una terminal o consola informática tratando de avisar al usuario de que está lista para recibir una entrada. Normalmente muestra información como nombre del usuario,  ruta donde se encuentra, símbolo del sistema operativo utilizado, instrucciones para realizar ciertas tareas o diagnósticos. Bash tiene cuatro "cadenas de prompt" que se pueden personalizar: PS0 se muestra después de cada orden, antes de cualquier salida, PS1 es el prompt principal que se muestra antes de cada orden, PS2 es el prompt secundario que se muestra cuando una orden se aplica con varias lineas de entrada, PS3 para el comando de selección y PS4 cuando se ejecuta un script de shell en modo de depuración, normalmente el signo "+". Todos los ejemplos siguientes solo se aplican a la terminal hasta que se cierre. Para hacerlos permanentes ha de colocarse la linea en .bashrc.
 $ export PS1="\u@\H \W:\$ "
