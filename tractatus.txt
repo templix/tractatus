@@ -45740,6 +45740,12 @@ conectarse y desconectarse a servidores de VPN y elegir servidores por país o c
 # protonvpn killswitch -off (desactivar)
 
 
+prov-tools
+Utilidades para trabajar con documentos PROV [formatos de texto PROV-JSON o PROV-XML], el modelo de procedencia [provenance] estandarizado por el W3C que permiten la exportación de estos documentos a varios formatos gráficos: PDF, PNG, SVG. PROV es un modelo para describir procedencia de datos, es decir, quién generó qué, cuándo, cómo y a partir de qué. En PROV se representan relaciones entre entidades [datos], actividades [procesos] y agentes [personas, sistemas] en forma de grafo dirigido. Internamente usa Graphviz para convertir el grafo de procedencia en una imagen o un PDF.
+$ prov-convert -f svg file.json file.svg (convertir un json a svg)
+$ prov-convert -f png file.xml file.png (convertir un xml a png)
+
+
 proxychains
 [tor privoxy]. Convierte en anonima la conexión que realiza una aplicación determinada [Ver privoxy]
 # nano /etc/proxychains.conf
