@@ -45672,6 +45672,52 @@ propaganda-debian
 Volumen de imágenes diseñadas como fondo de escritorio para Debian. Este paquete no incluye imágenes con el logotipo de Debian. El listado está abriendo con el navegador: file:///usr/share/doc/propaganda-debian/html
 
 
+propellor
+Herramienta escrita en haskell para gestinar la configuración de host basada en propiedades que garantiza que el sistema en el que se ejecuta cumpla una lista de propiedades, tomando las medidas necesarias cuando alguna no se cumple.
+$ propellor --init (comienza inicializando un repositorio ~/.propellor/, después, editar ~/.propellor/config.hs para configurar propellor)
+$ propellor (lee config.hs, lo compila y aplica las propiedades definidas para el hostname de la máquina local)
+$ propellor --spin webserver.local  (envía la configuración git al <host> remoto vía SSH, la compila allí y la ejecuta)
+$ propellor --merge (si se ha actualizado el repo local desde otro lugar, esto fusiona los cambios en la configuración local)
+$ propellor --add-key user@email.com (añadir la clave GPG. Se debe tener una generada con gpg --gen-key)
+$ propellor --check (verifica la configuración sin aplicar cambios)
+
+
+prosody
+[prosody-modules]. Servidor, escrito en Lua, de mensajería instantánea que implementa el protocolo XMPP [Extensible Messaging and Presence Protocol], también conocido como Jabber.
+# prosodyctl start (iniciar el servidor)
+# prosodyctl stop (parar)
+# prosodyctl restart (reiniciar)
+# prosodyctl status (ver el estado del servidor)
+# prosodyctl (arrancar el servidor)
+# prosodyctl reload (recargar la configuración sin reiniciar)
+# prosodyctl adduser usuario@tudominio.com (crear un usuario, pedirá contraseña)
+# prosodyctl passwd usuario@tudominio.com (cambiar la contraseña de un usuario)
+# prosodyctl deluser usuario@tudominio.com (eliminar un usuario)
+# prosodyctl check config (antes de reiniciar, comprobar que el archivo de configuración no tiene errores)
+# prosodyctl check (chequeo más completo que verifica certificados, DNS, etc)
+# prosodyctl --root cert import /etc/letsencrypt/live/tudominio.com/ (importar un certificado existente)
+# tail -f /var/log/prosody/prosody.log (ver logs en tiempo real)
+# tail -f /var/log/prosody/prosody.err (ver errores)
+1.-
+Ejemplo de archivo de configuración
+# nano /etc/prosody/prosody.cfg.lua
+VirtualHost "tudominio.com"
+    enabled = true
+    ssl = {
+        key = "/etc/prosody/certs/tudominio.com.key";
+        certificate = "/etc/prosody/certs/tudominio.com.crt";
+    }
+modules_enabled = {
+    "roster";        -- Lista de contactos
+    "saslauth";      -- Autenticación
+    "tls";           -- Cifrado
+    "dialback";      -- Verificación entre servidores
+    "carbons";       -- Sincronización entre dispositivos
+    "mam";           -- Archivo de mensajes
+    "http_upload";   -- Subida de archivos
+}
+
+
 protonvpn
 conectarse y desconectarse a servidores de VPN y elegir servidores por país o ciudad.
 # protonvpn init (inicia el servicio. Pedirá las credenciales)
