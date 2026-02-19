@@ -45643,6 +45643,24 @@ $ promtool check config /etc/prometheus/prometheus.yml (validar el fichero princ
 # promtool tsdb list /var/lib/prometheus (listar bloques del TSDB)
 
 
+proofgeneral
+Es un conjunto de modos mayores y menores de Emacs pensado como interfaz genérica para asistentes de pruebas interactivos [theorem provers]. Al abrir un fichero .v [Coq], .ec [EasyCrypt], .qrhl, .phx, etc., se carga automáticamente el modo correspondiente si ProofGeneral está instalado y configurado. Prerible instalarlo desde MELPA dentro de emacs:
+M-x package-refresh-contents RET
+M-x package-install RET proof-general RET
+Ejemplo de prueba:
+$ nano conmutatividad.v
+     Theorem and_comm : forall P Q : Prop, P /\ Q -> Q /\ P.
+     Proof.
+          intros P Q H.
+     	  destruct H as [HP HQ].
+     	  split.
+     	  - exact HQ.
+     	  - exact HP.
+     Qed.
+$ emacs conmutatividad.v
+El modo de Proof General para Coq se activa automáticamente.
+
+
 protonvpn
 conectarse y desconectarse a servidores de VPN y elegir servidores por país o ciudad.
 # protonvpn init (inicia el servicio. Pedirá las credenciales)
