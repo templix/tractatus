@@ -45718,6 +45718,12 @@ modules_enabled = {
 }
 
 
+protection-domain-mapper
+Servicio utilizado en sistemas que emplean hardware de Qualcomm, específicamente en SoCs [System on Chips] recientes que utilizan el protocolo QRTR [Qualcomm RunTime Router]. Es necesario para que las aplicaciones del espacio de usuario accedan a los diversos procesadores remotos [Wi-Fi, módem, sensores, etc.].
+# systemctl status protection-domain-mapper (verificar si el servicio está activo)
+# journalctl -u protection-domain-mapper (consultar los logs del servicio)
+
+
 protonvpn
 conectarse y desconectarse a servidores de VPN y elegir servidores por país o ciudad.
 # protonvpn init (inicia el servicio. Pedirá las credenciales)
