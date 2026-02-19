@@ -45661,6 +45661,13 @@ $ emacs conmutatividad.v
 El modo de Proof General para Coq se activa automáticamente.
 
 
+proot
+Herramienta que permite emular un entorno de chroot, montaje por enlace (bind mount) y soporte de binfmt_misc para usuarios sin privilegios de root. Esto significa que se puede crear y manipular entornos aislados de manera segura sin necesidad de tener acceso de superusuario.
+$ proot -r /directorio -b /directorio/enlace:/ruta/en/entorno (crea un entorno aislado en /directorio y monta el directorio /directorio/enlace dentro del entorno aislado en /ruta/en/entorno)
+$ proot -r /directorio -b /directorio/enlace:/ruta/en/entorno -0 /binario (ejecuta un binario ubicado en /ruta/a/binario dentro del entorno aislado)
+$ proot -r /directorio -b /archivo.squashfs:/ -0 /binario (monta un sistema de archivos squashfs en el directorio raíz del entorno aislado y ejecuta un binario dentro de este entorno)
+
+
 protonvpn
 conectarse y desconectarse a servidores de VPN y elegir servidores por país o ciudad.
 # protonvpn init (inicia el servicio. Pedirá las credenciales)
