@@ -45767,6 +45767,34 @@ $ prove6 mi-prueba.t
 Si al resultado termina mal, la última linea dice: Result: FAIL.
 
 
+proxsmtp
+Herramienta que permite rechazar, modificar o registrar correos electrónicos según criterios arbitrarios. Acepta conexiones SMTP y reenvía los comandos y respuestas SMTP a otro servidor SMTP.
+# proxsmtp -f /etc/proxsmtp.conf (ejecutar aplicando las normas del archivo de configuración)
+Ejemplo básico de archivo de configuración:
+# nano /etc/proxsmtp.conf
+       ServerName smtp.example.com
+       ServerPort 25
+       # Filtrar correos del remitente spam@example.com
+       FilterCommand /usr/local/bin/filter_spam.sh
+       # Registrar tráfico SMTP
+       LogCommands /var/log/proxsmtp_commands.log
+       LogResponses /var/log/proxsmtp_responses.log
+       # Modificar contenido del correo
+       FilterCommand /usr/local/bin/modify_content.sh
+Un ejemplo de filtro:
+# nano /usr/local/bin/filter_spam.sh
+       #!/bin/bash
+       if [ "$SMTP_FROM" = "spam@example.com" ]; then
+         echo "550 Rejected by filter"
+         exit 1
+       fi
+Ejemplo de "modificar contenido"
+# nano /usr/local/bin/modify_content.sh
+       #!/bin/bash
+       # Modificar el contenido del correo
+       sed -i 's/Hello/Hi/g' "$SMTP_DATA_FILE"
+
+
 proxychains
 [tor privoxy]. Convierte en anonima la conexión que realiza una aplicación determinada [Ver privoxy]
 # nano /etc/proxychains.conf
@@ -45783,6 +45811,16 @@ Otros ejemplos:
 # proxychains nessusd -D
 # proxychains msfconsole
 # proxychains ssh -D 127.0.0.1:9050 usuario@host
+
+
+proxycheck
+Detectar si un host o conjunto de hosts tienen un servidor proxy abierto [open proxy] es decir, un servidor proxy mal configurado que permite que cualquiera lo use para enrutar tráfico anónimamente.
+$ proxycheck 192.168.1.100 (comprobar un host)
+$ proxycheck 192.168.1.100 192.168.1.101 10.0.0.5 (comprobar varios hosts)
+$ proxycheck proxy.ejemplo.com (comprobar un host con nombre de dominio)
+$ proxycheck -l lista_de_hosts.txt (leer una lista de hosts desde un fichero a uno por linea)
+$ proxycheck -p 7023 192.168.1.100 (especificar un puerto concreto a comprobar. Por defecto suele usar puertos típicos de proxy como 3128, 8080, etc.)
+$ proxycheck -v -t 10 192.168.1.100 (en modo detallado y aumentar el tiempo de espera [timeout] a 10 segundos)
 
 
 prozilla
