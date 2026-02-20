@@ -45746,6 +45746,27 @@ $ prov-convert -f svg file.json file.svg (convertir un json a svg)
 $ prov-convert -f png file.xml file.png (convertir un xml a png)
 
 
+prove6
+Herramienta para ejecutar pruebas automáticas, escrita específicamente para el lenguaje de programación Raku, antes conocido como Perl 6. Su función principal es tomar un conjunto de archivos de prueba y ejecutarlos, informando si las pruebas pasaron o fallaron. La clave de su funcionamiento es que se basa en TAP un protocolo simple, legible tanto por humanos como por máquinas, que define un formato estándar para la salida de las pruebas.
+Ejecutor de pruebas basado en un arnés TAP. prove6 es una implementación en Raku del comando prove de Perl.
+1.-
+Ejemplo con un script Raku:
+$ nano prueba.t
+       use Test;
+       #
+       plan 3; # Declaramos que vamos a ejecutar 3 pruebas
+       #
+       ok( 1 == 1, 'Uno es igual a uno' );
+       is( 'hola'.chars, 4, 'La palabra "hola" tiene 4 caracteres' );
+       nok( 2 > 5, 'Dos no es mayor que cinco' );
+$ prove6 mi-prueba.t
+       prueba.t .. ok
+       All tests successful.
+       Files=1, Tests=3,  0 wallclock secs
+       Result: PASS
+Si al resultado termina mal, la última linea dice: Result: FAIL.
+
+
 proxychains
 [tor privoxy]. Convierte en anonima la conexión que realiza una aplicación determinada [Ver privoxy]
 # nano /etc/proxychains.conf
