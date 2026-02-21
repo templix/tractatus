@@ -45854,6 +45854,15 @@ prozilla
 $ proz URL
 
 
+prr
+[Pull Request Reviewer]. Herramienta diseñada para desarrolladores que prefieren el flujo de trabajo de "estilo lista de correo", basado en parches y texto plano, pero trabajan en proyectos alojados en GitHub. En lugar de navegar por la web, prr descarga el Pull Request  [PR] y lo convierte en un archivo de texto local que contiene todos los cambios. Se edita ese archivo escribiendo los comentarios directamente debajo de las líneas de código, y luego se "envía" ese archivo de vuelta. La herramienta se encarga de publicar los comentarios en GitHub.
+$ prr fetch origin/42 > revision_42.prr (revisar el PR número 42 de un repositorio)
+Esto crea un archivo revision_42.prr. Al abrirlo, se verá algo parecido a un diff de Git. Dentro del archivo .prr, se puede insertar comentarios simplemente dejando una línea en blanco y escribiendolo.
+$ prr submit revision_42.prr (una vez guardado el archivo con los comentarios, entrar en modo interactivo para subirlo a GitHub)
+Cuando se ejecuta "prr submit", la herramienta suele entrar en un modo interactivo donde preguntará si se quiere enviar los comentarios como: comment, approve, request-changes...
+Nota.- Para que funcione, se necesita configurar un Token de Acceso Personal [PAT] de GitHub.
+
+
 ps
 Informa sobre el estado de los procesos
 $ ps (muestra el PID de la consola)
