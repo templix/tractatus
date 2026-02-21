@@ -45863,6 +45863,13 @@ Cuando se ejecuta "prr submit", la herramienta suele entrar en un modo interacti
 Nota.- Para que funcione, se necesita configurar un Token de Acceso Personal [PAT] de GitHub.
 
 
+prt
+Herramienta de refactorización que se utiliza para mejorar y reorganizar el código Perl. Algunas de las funcionalidades que ofrece prt incluyen: Renombrar variables, subrutinas y módulos, reorganizar el código para mejorar la legibilidad y el mantenimiento, eliminar código muerto o redundante, actualizar el código para cumplir con las últimas mejores prácticas y estándares de codificación...
+$ prt -rename-variable contador counter script.pl (renombrar la variable $contador a $counter en un script.pl)
+$ prt -reorganize-code complex_script.pl (reorganizar el código y colocar las subrutinas al principio del script)
+$ prt -remove-dead-code dead_code.pl (eliminar código que no se utiliza en ninguna parte del script)
+
+
 ps
 Informa sobre el estado de los procesos
 $ ps (muestra el PID de la consola)
