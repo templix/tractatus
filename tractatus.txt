@@ -45828,6 +45828,27 @@ Servidor proxy diseñado para entregar contenido archivado por sesiones HTTrack 
 $ proxytrack --root ~/mi_website --port 8081 --verbose (ejecutar el proxy por el puerto 8081 y salida detallada. Acceder a él con http://localhost:8081. El predeterminado en 8080)
 
 
+proxytunnel
+Herramienta que permite crear túneles TCP a través de proxies HTTP/HTTPS usando el método CONNECT. Básicamente "engaña" al proxy haciéndole creer que quiere establecer una conexión HTTPS, pero por ese túnel puede pasar cualquier protocolo TCP (SSH, SMTP, etc.). Cuando un proxy recibe una petición HTTP CONNECT host:puerto, establece una conexión directa con ese destino y actúa como un simple relay de bytes. proxytunnel aprovecha esto para encapsular cualquier tráfico TCP dentro de esa conexión.
+$ ssh -o "ProxyCommand proxytunnel -p proxy.empresa.com:8080 -d %h:%p" usuario@servidor.externo.com (crear un proxy que solo permite salir por el puerto 443/80, pero conectarlo por SSH a un servidor externo)
+$ ssh -o "ProxyCommand proxytunnel -p proxy.empresa.com:8080 -u miusuario -P micontraseña -d %h:%p" usuario@servidor.externo.com (proxy con autenticación [Basic Auth])
+$ proxytunnel -p proxy.empresa.com:443 -s -d destino.com:22 (proxy con SSL [HTTPS proxy])
+$ proxytunnel -p proxy-interno:8080 -r proxy-externo:8080 -d destino.com:22 (encadenado a través de dos proxies uno externo y otro interno)
+1.-
+Actuar como un servidor local
+$ proxytunnel -a 2222 -p proxy.empresa.com:8080 -d destino.com:22 & (escucha en localhost:2222 y tuneliza hacia destino.com:22 al que se conecta como si fuera el destino real)
+(luego permite conectar SSH a localhost:2222.
+$ ssh -p 2222 usuario@localhost
+1.-
+Configuración permanente de conexión SSh por proxy
+$ nano ~/.ssh/config
+Host servidor.externo.com
+    User miusuario
+    ProxyCommand proxytunnel -p proxy.empresa.com:8080 -d %h:%p
+A partir de aquí simplemente
+$ ssh servidor.externo.com (funciona de forma transparentemente)
+
+
 prozilla
 [libncurses5]. Gestor de descargas. La descarga se realiza en el directorio actual. Para modificar dicho directorio ha de editarse en el archivo de configuración (/etc/prozilla.conf) la opción: mainoutputdir = /home/usuario/tmp. Página: <http://old-releases.ubuntu.com/ubuntu/pool/universe/p/prozilla/>
 $ proz URL
