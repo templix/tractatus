@@ -45899,6 +45899,18 @@ flags:
 	COMMAND (nombre del comando que se está ejecutando)
 
 
+ps-watcher
+Monitoreo de un sistema mediante comandos tipo ps. Este programa ejecuta el comando ps periódicamente y activa comandos al encontrar coincidencias. Los patrones de coincidencia son expresiones regulares de Perl que pueden referirse a la información del proceso mediante variables. Por ejemplo, se puede usar para garantizar que un demonio se esté ejecutando o que no se ejecute demasiadas veces. También se puede usar para determinar cuándo un proceso ha consumido demasiados recursos, quizás debido a una fuga de memoria.
+$ ps-watcher --config /etc/ps-watcher/ps-watcher.conf (especificar el archivo de configuración)
+$ ps-watcher --syslog /var/log/ps-watcher (especificar archivo de logs)
+$ ps-watcher --log --nodaemon --sleep 1 --debug 2 --config /etc/ps-watcher/ps-watcher.conf (mostrar logs, no daemon, tiempo entre iteraciones 1', si se especifica un número negativo, el programa se ejecuta solo una vez en modo debug y el archivo de configuración)
+Ejemplo básico de archivo de configuración:
+# nano /etc/ps-watcher/ps-watcher.conf
+       [httpd$]
+        trigger = $count < 4
+ 	action  = echo "$trigger disparado -- tienes $count sesiones de httpd"
+
+
 ps2pdf
 [psutils]. Pasar un archivo ps a pdf
 $ man -t mount | ps2pdf -  mount.pdf   (salvar a pdf una página man del comando "mount")
