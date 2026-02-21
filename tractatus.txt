@@ -45823,6 +45823,11 @@ $ proxycheck -p 7023 192.168.1.100 (especificar un puerto concreto a comprobar. 
 $ proxycheck -v -t 10 192.168.1.100 (en modo detallado y aumentar el tiempo de espera [timeout] a 10 segundos)
 
 
+proxytrack
+Servidor proxy diseñado para entregar contenido archivado por sesiones HTTrack [ver], comúnmente utilizado para replicar sitios web. Puede agregar múltiples cachés de descarga para uso directo a través de cualquier navegador o como servidor esclavo de caché ascendente. Una vez que haya usado HTTrack para descargar un sitio web, se puede ejecutar proxytrack para servir ese contenido a través de un servidor web local. Esto le permite navegar por el sitio archivado como se haría con cualquier sitio web en vivo, pero en realidad está viendo las copias almacenadas localmente. Precisa tener HTTrack instalado y haberlo usado para crear un archivo de un sitio web, en el ejemplo de uso mi_website.
+$ proxytrack --root ~/mi_website --port 8081 --verbose (ejecutar el proxy por el puerto 8081 y salida detallada. Acceder a él con http://localhost:8081. El predeterminado en 8080)
+
+
 prozilla
 [libncurses5]. Gestor de descargas. La descarga se realiza en el directorio actual. Para modificar dicho directorio ha de editarse en el archivo de configuración (/etc/prozilla.conf) la opción: mainoutputdir = /home/usuario/tmp. Página: <http://old-releases.ubuntu.com/ubuntu/pool/universe/p/prozilla/>
 $ proz URL
