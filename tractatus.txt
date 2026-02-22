@@ -587,6 +587,15 @@ Algunas teclas de control:
 	Ctrl c (Sale del programa)
 
 
+afdko
+Herramientas para crear fuentes OpenType añadiendo datos específicos de OpenType a una fuente TrueType o Type1.
+$ afdko (ver los parámetros disponibles)
+$ otf2ttf fuente.otf (convertir una fuente de OpenType [CFF] .otf a TrueType .ttf)
+$ makeotf -f font.pfa -ff features -o nueva_fuente.otf (compilar una fuente con características OpenType)
+$ spot fuente.otf (ver las tablas internas de un archivo de fuente)
+$ tx -dump -6 fuente.otf (mostrará datos técnicos de una fuente)
+
+
 afio
 Útil para crear y gestionar archivos en formato de compresión propio.
 $ find /directorio | afio -o -Z -F -z9 -O archivo.afio (crear un archivo comprimido de un directorio)
