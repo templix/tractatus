@@ -45937,6 +45937,26 @@ Consultar estado con:
 # psad -S (Muestra el estado de cualquier proceso psad que pueda estar ejecutándose. La salida muestra una lista de los paquetes que psad ha procesado, junto con todas las direcciones IP y los niveles de peligro correspondientes que han escaneado la red)
 
 
+psautohint
+Herramienta para mejorar la calidad de renderizado de fuentes. Se puede utilizar para procesar fuentes, generalmente como parte del proceso de su desarrollo, lo que garantiza un resultado de alta calidad para fuentes PostScript. Admite los siguientes formatos: PFA, PFB, CFF, OTF y UFO. Incluye el ejecutable psstemhist.
+$ psautohint --info (muestras información sobre lo que realiza la herramienta)
+$ psautohint --test /usr/share/fonts/X11/Type1/b018035d.pfb
+Si psautohint muestra el error: "... font format requires 'tx'. Please install 'afdko'" y afdko está instalado, significa que no encuentra "px" en el path:
+# find / -name "tx" -type f
+Para hacerlo permanente añadir la línea a ~/.bashrc.
+     export PATH=${PATH}:/usr/libexec/afdko/
+$ psautohint --test /usr/share/fonts/X11/Type1/b018035d.pfb
+$ tx -cff fuente.otf > fuente.cff (en algunos casos es posible convertir a mano el .otf a .cff que psautohint entiende mejor)
+$ tx -dump /usr/share/fonts/X11/Type1/b018035d.pfb | head -50 (ver información de la fuente sin procesarla)
+$ makeotf -f /usr/share/fonts/X11/Type1/b018035d.pfb -o b018035d.otf (otra forma de conversión)
+$ fc-scan b018035d.otf | grep family (lista las familias disponibles)
+$ otfinfo -i b018035d.otf (ver información básica de una fuente)
+1.-
+Hacer el proceso en dos pasos de convertir PFB a CFF:
+$ tx -cff /usr/share/fonts/X11/Type1/b018035d.pfb > b018035d.cff
+$ psautohint --test b018035d.cff (ejecuta psautohint sobre el CFF)
+
+
 psbook
 [psutils]. Paginar un archivo ps para imprimir como libro. Ver ps2pdf.
 
