@@ -17284,7 +17284,9 @@ $ !dialog (Ejecuta el último comando que empiece por dialog)
 
 fc-cache
 Regenerar la cache de fuentes instaladas
-$ fc-cache -f -v
+$ rm -rf ~/.cache/fontconfig/* (limpiar la caché de usuario)
+# rm -rf /var/cache/fontconfig/* (limpiar la caché del sistema)
+$ fc-cache -f -v (regenerar funetes)
 
 
 fchdir
@@ -18932,6 +18934,20 @@ fontcustom
 Herramienta que convierte iconos en formato SVG en fuentes de iconos [icon fonts] compatibles con navegadores web.
 Suponiendo un directorio con los iconos en SVG [icons/]
 $ fontcustom compile icons/ --output=fonts/ --name="my-icons" --css-selector=.icon-{{glyph}} (generará fuentes en fonts/my-icons.{ttf,woff,eot,svg}, CSS en fonts/my-icons.css y HTML de demo en fonts/my-icons-preview.html)
+
+
+fontforge
+Editor de fuentes para crear, editar y convertir fuentes en formatos OpenType, TrueType, UFO, con clave CID, Multiple Master y muchos otros. Incluye las siguientes utilidades fontimage, fontlint y sfddiff.
+$ fontlint /usr/share/fonts/truetype/dejavu/DejaVuSans.ttf (comprueba la fuente para detectar errores comunes)
+$ fontimage /usr/share/fonts/truetype/inconsolata/Inconsolata.otf (genera una imagen png de la fuente)
+$ sfddiff ComicShannsMono-Regular.sfd ComicShannsMono-Regular.ttf (compara dos archivos de fuentes)
+1.-
+Un script para convertir .sfd a .ttf
+$ nano convertsfd.sh
+#!/bin/bash
+fontforge -lang=ff -c 'Open($1); Generate($2)' "$1" "$2"
+$ chmod +x convertsfd.sh
+$ ./convertsfd archivo.sfd archivo.ttf (convierte un .sfd en .ttf)
 
 
 fontmake
