@@ -45936,6 +45936,15 @@ Ejemplo básico de archivo de configuración:
  	action  = echo "$trigger disparado -- tienes $count sesiones de httpd"
 
 
+ps2eps
+Herramienta que automatiza la conversión de una página de un archivo PostScript .ps a PostScript Encapsulado .eps [Encapsulated PostScript]. Su función principal es calcular automáticamente el Bounding Box, o sea exactamente qué rectángulo ocupa el dibujo para ser incrustado en un documento con otro programa [LaTeX, Word o Inkscape].
+$ ps2eps grafica.ps (forma básica. Crea un grafica.eps en el mismo directorio)
+$ ps2eps -o grafica.eps grafica.ps (convertir el .ps a .eps en el mismo directorio con el nombre especificado)
+$ ps2eps -f grafica.ps (forzar la sobrescritura si existe un archivo grafica.eps en el directorio)
+$ ps2eps -r 600 grafica.ps (aunque EPS es vectorial, a veces contiene imágenes incrustadas en las que se puede definir la resolución en puntos por pulgada)
+Nota.- Si el archivo .ps tiene 5 páginas, ps2eps generalmente solo procesará la primera o fallará. EPS no soporta multipágina.
+
+
 ps2pdf
 [psutils]. Pasar un archivo ps a pdf
 $ man -t mount | ps2pdf -  mount.pdf   (salvar a pdf una página man del comando "mount")
