@@ -46010,6 +46010,13 @@ psbook
 [psutils]. Paginar un archivo ps para imprimir como libro. Ver ps2pdf.
 
 
+pscan
+Herramienta de seguridad que analiza archivos fuente C para identificar posibles abusos de funciones que podrían causar problemas de seguridad, mejorar la calidad del código y prevenir vulnerabilidades.
+$ pscan example.c (mostrará cualquier vulnerabilidad o abuso de función que encuentre en el archivo mencionado)
+$ pscan -r ~/carpeta_C/ (análisis de una carpeta completa)
+$ pscan -f 'memory' -r ~/carpeta_C/ (enfocar el análisis en un tipo específico de vulnerabilidades)
+
+
 psktool
 [gnutls]. Programa que genera claves aleatorias para uso TLS-PSK. Las claves se almacenan en formato hexadecimal en un archivo de claves.
 $ psktool -u USER (genera clave para el usuario mencionado y la guarda en /etc/passwd.psk)
