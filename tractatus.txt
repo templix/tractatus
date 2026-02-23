@@ -46023,6 +46023,16 @@ $ psktool -u USER (genera clave para el usuario mencionado y la guarda en /etc/p
 $ psktool -u USER -p clave.psk (la guarda en el archivo clave.psk)
 
 
+psl
+Explorar la Lista de Sufijos Públicos y compararlos con dominio. Se puede utilizar para evitar "supercookies" que vulneran la privacidad, certificados de "superdominio", para resaltar dominios, ordenar listas de dominios por sitio y más.
+$ psl --print-info (mostrar información)
+$ psl --no-star-rule --is-public-suffix google.es (desactiva la regla prevaleciente de la PSL, de modo que todos los TLD no listados explícitamente en la PSL devolverán 0 y mostrar 1 si el dominio es un sufijo público, 0 en caso contrario)
+$ psl --print-reg-domain google.com facebook.com (devuelve la parte más corta del sufijo privado para cada dominio)
+$ psl --print-unreg-domain google.com facebook.com (devuelve la parte más larga del sufijo público para cada dominio)
+$ psl --use-latest-data google.es (usar los datos PSL más recientes disponibles)
+$ psl --use-builtin-data google.es (usar los datos de PSL integrados)
+
+
 pslist
 Examina la lista de los procesos y muestra el ID y los PIDs de los procesos hijos.
 $ pslist (Muestra todo el listado)
