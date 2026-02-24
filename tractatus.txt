@@ -11079,7 +11079,7 @@ Tunel SSH con descriptors
 Mostrará salida. Volver a la normalidad:
         $ exec 3>&-
 4.-
-Adivinar el número mayor, menos o correcto con pipes
+Adivinar el número mayor, menor o correcto con pipes
 # Terminal 1: Servidor
         $ mkfifo /tmp/guess_pipe
         $ exec 3<>/tmp/guess_pipe
@@ -33045,6 +33045,11 @@ Ejemplo de funcionamiento
         s0:c2  = Payroll
         s0:c3  = Personnel
 Si una herramienta muestra un contexto tipo "system_u:object_r:default_t:s0:c0,c2", mcstransd puede traducirlo automáticamente a "system_u:object_r:default_t:Marketing,Payroll"
+
+
+md2gmi
+Convierte ficheros markdown a gemini.
+md2gmi -i fichero.md -o salida
 
 
 md2html
@@ -56132,6 +56137,8 @@ Permite iniciar un servidor X. El script startx [ver] es un front-end para xinit
 xinput
 Muestra las id de los dispositivos de entrada.
 $ xinput
+$ xinput disable id (desactivar un dispositivo)
+$ xinput enable id (activarlo)
 
 
 xjokes
