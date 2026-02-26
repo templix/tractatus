@@ -12661,6 +12661,48 @@ $ dochelp update (actualizar la página de resumen)
 $ dochelp search ip (buscar la documentación del comando "ip")
 
 
+docker
+Interfaz de imágenes y contenedores.
+$ docker container prune (eliminar contenedores detenidos)
+$ docker image prune (eliminar imágenes sin usar [dangling])
+$ docker image prune -a (eliminar todas las imágenes sin usar, no solo dangling)
+$ docker volume prune (eliminar volúmenes no utilizados)
+$ docker system prune (limpieza total: contenedores, redes, imágenes y caché)
+$ docker system prune -a --volumes (limpieza total incluyendo volúmenes)
+$ docker ps (listar contenedores activos)
+$ docker ps -a (listar todos los contenedores incluidos detenidos)
+$ docker ps -a --filter "status=exited" (filtrar por estado)
+$ docker start <nombre_o_id> (iniciar)
+$ docker stop <nombre_o_id> (detener)
+$ docker stop $(docker ps -q) (parar todos los contenedores)
+$ docker restart <nombre_o_id> (reiniciar)
+$ docker rm <nombre_o_id> (eliminar un contenedor)
+$ docker rm $(docker ps -aq) (eliminar todos los contenedores)
+$ docker logs <nombre_o_id> (ver logs de un contenedor)
+$ docker logs -f <nombre_o_id> (ver logs de un contenedor en tiempo real [follow])
+$ docker exec -it <nombre_o_id> bash (ejecutar un comando dentro de un contenedor activo)
+$ docker stats (ver uso de recursos en tiempo real)
+$ docker images (listar imágenes locales)
+$ docker pull nginx:latest (descargar una imagen)
+$ docker rmi <imagen>:<tag> (eliminar una imagen)
+$ docker rmi $(docker images -q) (liminar todas las imágenes)
+$ docker build -t mi-app:1.0 . (construir una imagen desde un Dockerfile)
+$ docker history <imagen> (ver historial de capas de una imagen)
+$ docker network ls (listar redes)
+$ docker network prune (limpiar redes no utilizadas)
+$ docker network create mi-red (crear una red)
+$ docker network inspect mi-red (inspeccionar una red)
+$ docker network connect mi-red <contenedor> (conectar un contenedor de una red)
+$ docker network disconnect mi-red <contenedor> (desconectar un contenedor de una red)
+$ docker network rm mi-red (eliminar una red concreta)
+$ docker volume ls (listar volúmenes)
+$ docker volume create mi-volumen (crear un volumen)
+$ docker volume inspect mi-volumen (inspeccionar un volumen)
+$ docker volume rm mi-volumen (eliminar un volumen concreto)
+$ docker system df (resumen del sistema Docker: espacio usado, contenedores, etc.)
+$ docker info (información detallada del daemon Docker)
+
+
 docknot
 Generador de sitios web estáticos creado en torno a un lenguaje de macros llamado thread, con soporte especial para gestionar versiones de software. Además de crear un sitio web, puede generar archivos tar para distribución y documentación de paquetes.
 Estructura básica de un proyecto de software llamado mi-proyecto. La estructura de directorios podría ser:
@@ -26600,22 +26642,25 @@ $ pit_server -p 12345 (realizar pruebas de rendimiento en entronos de red. Espec
 
 ip
 [iproute2]. Configuración de red. Muestra dispositivos, enrutamientos, tuneles.
-$ ip addr (Revisar tarjetas)
-$ ip route show (Información)
+$ ip -c -br a (ver interfaces a color y simplificado)
+$ ip -c -br addr show scope global (lo mismo pero más simplificado)
 $ ip link show (Ver interfaces de red)
 $ ip link set dev eth0 down (bajar una red)
-$ ip route add default via 192.168.1.1 (establecer la ip del router)
+# ip link delete docker0 (eliminar interfaces si se muestran con "ip a" y no proceden)
 $ ip link set dev eth0 up (levantar una red)
+$ ip link set dev eth1 address 00:03:44:88:00:11 (Modificdar la MAC. Previamente bajar la red)
+$ ip addr (Revisar tarjetas)
 $ ip addr add 192.168.1.20 255.255.255.0 dev eth1 (establecer una ip estática)
 $ ip addr del 192.168.1.55/24 dev eth0 (bajar una ip)
 $ ip n  (MAC e IP del router)
-$ ip link set dev eth1 address 00:03:44:88:00:11 (Modificdar la MAC. Previamente bajar la red)
 $ ip route del default (Eliminar puerta de enlace para crear una nueva)
 $ ip route add default via 192.168.1.10 (Crear nueva puerta de enlace)
 $ ip route add 192.168.1.53 via 192.168.0.33 (redirigir un pc a otro)
+$ ip route add default via 192.168.1.1 (establecer la ip del router)
 $ ip route add 192.168.1.0/24 via 192.168.0.33 (redirigir una red a un pc)
-$ ip -f inet addr show eth0 (información de la dirección ip)
+$ ip route show (Información)
 $ ip route add 192.168.2.0/24 via 192.168.1.10 (Añadir una red a una puerta de enlace)
+$ ip -f inet addr show eth0 (información de la dirección ip)
 Nota.- Verificar que /etc/resolv contenga una linea con el servidor DNS tipo: nameserver 8.8.8.8 [para las DNS de google] o la 127.0.0.1
 
 
@@ -46022,6 +46067,18 @@ Herramienta de seguridad que analiza archivos fuente C para identificar posibles
 $ pscan example.c (mostrará cualquier vulnerabilidad o abuso de función que encuentre en el archivo mencionado)
 $ pscan -r ~/carpeta_C/ (análisis de una carpeta completa)
 $ pscan -f 'memory' -r ~/carpeta_C/ (enfocar el análisis en un tipo específico de vulnerabilidades)
+
+
+psk31lx
+Aplicación con interfaz de usuario basada en texto que permite la comunicación utilizando el protocolo PSK31 [Phase Shift Keying 31 baudios]. Este protocolo es muy popular en la radioafición debido a su eficiencia en el uso del ancho de banda y su capacidad para operar en condiciones de baja señal. psk31lx incluye un osciloscopio de fase integrado y un analizador de espectro, lo que facilita la sintonización y el ajuste de las señales.
+$ psk31lx (abrir la interfaz de usuario en la terminal, permitiéndo comenzar a transmitir y recibir mensajes PSK31)
+
+
+pskc-utils
+Utilidades para gestionar archivos PSKC [Portable Symmetric Key Container - Contenedor de Clave Simétrica Portátil], según lo definido en RFC6030. Incluye las herramientas csv2pskc, pskc2csv y pskc2pskc
+$ csv2pskc -o archivo.pskc archivo.csv (convertir un archivo CSV a PSKC y guardarlo con el nombre especificado)
+$ pskc2csv -o archivo.csv archivo.pskc (convertir un archivo PSKC a CSV y guardarlo con el nombre especificado)
+$ pskc2pskc -o archivo.pskc (cambiar el cifrado de un archivo PSKC)
 
 
 psktool
