@@ -11043,57 +11043,210 @@ $ depmod -a (Sondear todos los módulos. Opción predeterminada si no se proporc
 
 
 descriptor
-Toda aplicación tiene siempre tres descriptores de fichero abiertos, el 0 para la entrada estándar [stdin], el 1 para la salida estándar [stdout], y el 2 para la salida de errores estándar [stderr]. Del 3 al 9 son descriptores adicionales [ver tuberias].
-$ ls -l /proc/self/fd (contiene un enlace simbólico para cada descriptor de archivo abierto por la terminal)
-$ ls -l /proc/$$/fd (ver los descriptors)
-$ exec 3>&1 > /tmp/salida.txt (que el descriptor 3 conecte su salida a donde la conecta el descriptor 1 [la pantalla] y después que este último se conecte al archivo /tmp/salida.txt. La consecuencia es que a partir de este momento todas las órdenes usarán como salida estándar el archivo)
-$ exec 1>&3 3>&- (restituye la situación inicial, que el descriptor 1 conecte su salida a la del descriptor 3, o sea, la pantalla y, después, cierra el conector 3. Por tanto, a partir de ese momento, las órdenes volverán a mostrar su salida estándar por pantalla)
-$ command > file 2>&1 (redirige la salida estándar y la salida estándar de error de command al archivo file)
-$ exec 1>/dev/null (mandamos a /dev/null la salida estándar de cualquier comando que ejecutemos a continuación en la misma shell)
+Un file descriptor [FD] es simplemente un número que representa un flujo de entrada o salida. Toda aplicación tiene siempre tres descriptores de fichero abiertos, el 0 para la entrada estándar [stdin], el 1 para la salida estándar [stdout], y el 2 para la salida de errores estándar [stderr]. Del 3 al 9 son descriptores adicionales [ver tuberias]. los FD pertenecen a procesos no al sistema.
+$ ls -l /proc/self/fd (proceso que está accediendo al descriptor, en este caso "ls")
+$ ls -l /proc/$$/fd (ver los descriptors a los que accede la shell)
+FD 255 es usado internamente por Bash para guardar el stdin original o el script source FD. Bash usa este FD para restaurar cosas internamente.
+$ ip a >&255 (imprime en terminal)
+Un ejemplo de funcionamiento del comando
+$ exec 3> prueba.txt
+$ echo "linux es genial" >&3
+$ ls -l /proc/$$/fd/3
+l-wx------ 1 tux tux 64 25 de febr. 15:41 /proc/970360/fd/3 -> /home/tux/AA2/4/prueba.txt
+$ rm prueba.txt
+$ echo "linux continua siendo genial" >&3
+$ ls -l /proc/$$/fd/3
+l-wx------ 1 tux tux 64 25 de febr. 15:41 /proc/970360/fd/3 -> /home/tux/.local/share/Trash/files/prueba.txt
+$ exec 3>&-
+$ cat /home/tux/.local/share/Trash/files/prueba.txt
+Linux es genial
+linux continua siendo genial
+Nota.- El orden importa:
+$ who > file 2>&1
+No correcto:
+$ who > 2>&1 file
 1.-
-        $ exec 3<>/tmp/archivo.txt (cualquier cosa que se envíe a este descriptor, acabará en el archivo)
-Los siguientes comandos no mostraran salida en el terrminal
-        $ echo "Hola" >&3
-        $ tty >&3
-        $ cat /tmp/archivo.txt
-        Hola
-        /dev/pts/1
+Cualquier cosa que se envíe a este descriptor, acabará en el archivo
+$ exec 3<>/tmp/archivo.txt
+Los siguientes comandos no mostraran salida en el terminal
+$ echo "Hola" >&3
+$ tty >&3
+$ cat /tmp/archivo.txt
+Hola
+/dev/pts/1
 Cerrar el descriptor y volver a la normalidad
-        $ exec 3>&-
+$ exec 3>&-
 2.-
 Lo mismo
-        $ exec 3>&1
-        $ exec 1> >(while read line; do echo "$(date): $line"; done > /tmp/log.txt)
-Los siguientes comandos no mostraran salida en el terrminal
-        $ echo "Linux es un sistema genial"
-        $ who
-        $ tty
+$ exec 3>&1
+$ exec 1> >(while read line; do echo "$(date): $line"; done > /tmp/log.txt)
+Los siguientes comandos no mostraran salida en el terminal
+$ echo "Linux es un sistema genial"
+$ who
+$ tty
 Cerrar el descriptor
-        $ exec 1>&3 3>&-
+$ exec 1>&3 3>&-
 Muestra las 3 últimas salidas de los comandos
-        $ nano /tmp/log.txt
+$ nano /tmp/log.txt
 3.-
 Tunel SSH con descriptors
-        $ exec 3<>/dev/tcp/google.com/80
-        $ echo -e "GET / HTTP/1.1\nHost: google.com\nConnection: close\n\n" >&3
-        $ cat <&3
+$ exec 3<>/dev/tcp/google.com/80
+$ echo -e "GET / HTTP/1.1\nHost: google.com\nConnection: close\n\n" >&3
+$ cat <&3
 Mostrará salida. Volver a la normalidad:
-        $ exec 3>&-
+$ exec 3>&-
 4.-
 Adivinar el número mayor, menor o correcto con pipes
 # Terminal 1: Servidor
-        $ mkfifo /tmp/guess_pipe
-        $ exec 3<>/tmp/guess_pipe
-        $ number=$((RANDOM % 100 + 1))
-        $ while read guess <&3; do
-            [ "$guess" -eq "$number" ] && echo "¡Correcto!" && break
-            [ "$guess" -lt "$number" ] && echo "Mayor" || echo "Menor"
-          done
+$ mkfifo /tmp/guess_pipe
+$ exec 3<>/tmp/guess_pipe
+$ number=$((RANDOM % 100 + 1))
+$ while read guess <&3; do
+  [ "$guess" -eq "$number" ] && echo "¡Correcto!" && break
+  [ "$guess" -lt "$number" ] && echo "Mayor" || echo "Menor"
+done
 Quedará a la espera de los números que se entren en la terminal 2
 # Terminal 2: Cliente
-        $ exec 4>/tmp/guess_pipe
-        $ echo "50" >&4
-        $ echo "150" >&4
+$ exec 4>/tmp/guess_pipe
+$ echo "50" >&4
+$ echo "150" >&4
+5.-
+stderr a archivo
+$ ls archivo_inexistente 2> error.txt
+6.-
+separar stdout y stderr
+$ ls archivo_inexistente > out.txt 2> err.txt
+7.-
+Redirigir stdin
+$ cat < archivo.txt
+8.-
+Control de stdout y stderr
+Redirigir ambos
+$ ls archivo_inexistente > todo.txt 2>&1 (stderr --> stdout --> archivo)
+El Orden importa:
+$ cmd > archivo 2>&1 (correcto)
+$ cmd 2>&1 > archivo (incorrecto)
+9.-
+Redirigir error al agujero negro
+$ ls archivo 2> /dev/null (redirigir a /dev/null)
+Redirigir todo
+$ cmd > /dev/null 2>&1
+10.-
+El pipe
+$ ls | grep txt
+Equivale a
+stdout --> stdin
+11.-
+Crear file descriptor personalizado
+$ exec 3> archivo.txt (crea FD 3)
+$ echo "Hola" >&3 (escribe en FD 3)
+$ exec 3>&- (cierra FD 3)
+12.-
+Leer desde FD
+$ exec 3< archivo.txt
+$ cat <&3
+$ exec 3>&- (cerrar FD 3)
+13.-
+Duplicar FD
+$ exec 3>&1
+Ahora FD3 apunta a stdout.
+$ echo "normal"
+$ echo "FD3" >&3
+14.-
+Guardar stdout y restaurarlo
+$ exec 3>&1
+$ exec 1> log.txt
+$ echo "Esto va al log"
+$ exec 1>&3
+$ echo "Esto va a pantalla"
+15-
+Swap stdout y stderr
+$ exec 3>&1
+$ exec 1>&2
+$ exec 2>&3
+16.-
+Here document
+$ cat << EOF
+Hola
+Mundo
+EOF
+17.-
+Here string
+$ grep Hola <<< "Hola mundo"
+18.-
+Redirecciones en bloques a un archivo
+$ {
+echo hola
+echo mundo
+} > archivo.txt
+19.-
+Redirección en subshell
+$ (
+echo hola
+echo mundo
+) > archivo.txt
+20.-
+Abrir FD para lectura y escritura
+$ exec 3<> archivo.txt
+21.-
+Usar múltiples FD
+$ exec 3> out.log
+$ exec 4> err.log
+$ echo "normal" >&3
+$ echo "error" >&4
+22.-
+Logging profesional
+$ exec 3>&1 4>&2
+$ exec 1>out.log 2>err.log XXXXXXXX
+$ echo "stdout"
+$ echo "stderr" >&2
+$ exec 1>&3 2>&4
+23.-
+Separar stdout y stderr en pipes diferentes
+$ cmd > >(grep ok) 2> >(grep error)
+24.-
+Process substitution
+$ diff <(ls dir1) <(ls dir2)
+25.-
+Todo a pantalla y a archivo con tee y FD
+$ exec > >(tee log.txt)
+26.-
+Crear un pipe, un proceso tee y conectar stdout del shell a ese pipe:
+$ exec > >(tee ip.txt)
+27.-
+file descriptors dinámicos
+$ exec {fd}>archivo.log
+$ echo "hola" >&$fd
+$ ip a >&$fd
+$ exec {fd}>&- (volver a la normalidad)
+$ cat archivo.log
+28.-
+FD 3 como una conexión SSH.
+$ exec 3<> /dev/tcp/localhost/22
+29.-
+Servidor TCP en Bash:
+Terminal 1:
+$ nc -l 12345
+Terminal 2:
+$ exec 3<> /dev/tcp/localhost/12345
+$ echo "hola desde bash" >&3
+Se verá el mensaje en terminal 1.
+$ exec 3>&- (tecleado en la terminal 2, cierra terminal 1)
+30.-
+No existe un comando para cerrar todos los file descriptors, pero puede usarse:
+$ exec 3>&-
+$ exec 4>&-
+$ exec 5>&-
+script para cerrarlos
+$ nano fd_cerrar.sh
+# cerrar descriptors excepto stdin, stdout, stderr
+# cierra todos los FD mayores que 2.
+for fd in /proc/$$/fd/*; do
+    fdnum=${fd##*/}
+    if [ "$fdnum" -gt 2 ]; then
+        eval "exec $fdnum>&-"
+    fi
+done
 
 
 desktop-file-utils
@@ -46121,6 +46274,29 @@ Tambien puede instalarse con pip caso de tenerlo instalado: # pip install ps_mem
 
 psmisc
 Utilidades que utilizan el sistema de archivos proc. Incluye las aplicaciones: fuser [identifica procesos que están utilizando archivos o sockets.], killall [mata procesos por nombre], peekfd [muestra los datos que viajan sobre un descriptor de archivo], prtstat [imprime el contenido de /proc/<pid>/stat], pslog [Las utilidades que utilizan el sistema de archivos proc informan la ruta de los registros actuales de un proceso.], pstree y pstree.x11 [muestran los procesos en ejecución como un árbol].
+
+
+pspg
+Paginador interactivo diseñado específicamente para mejorar la visualización de los resultados de consultas SQL cuando se usa el cliente de línea de comandos psql de PostgreSQL.
+Configuración básica:
+$ nano ~/.psqlrc
+       \setenv PAGER 'pspg -s 2 --no-mouse'
+       \pset border 2
+       \pset format aligned
+"-s 2" Establece el estilo de borde [0=sin borde, 1=líneas simples, 2=doble línea] y "--no-mouse" desactiva el soporte para ratón.
+Sin archivo de configuración se pueden ejecutar estos comandos directamente en la sesión de psqg:
+\setenv PAGER 'pspg -s 2 --no-mouse'
+\pset border 2
+\pset format aligned
+Si se consulta una tabla, por ejemplo, clientes en PostgreSQL:
+> SELECT * FROM clientes;
+Los resultados se mostrarán en pspg con bordes claros entre celdas y colores para distinguir filas y columnas. Algunas de la teclas de navegación:
+PgUp, PgDown --> arriba/abajo
+/ --> buscar
+n --> siguiente resultado
+N --> anterior
+o --> ordenar los resultados de la columna [ascendente/descendente]
+q --> para salir, etc.
 
 
 psst
