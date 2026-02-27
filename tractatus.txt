@@ -46299,6 +46299,21 @@ o --> ordenar los resultados de la columna [ascendente/descendente]
 q --> para salir, etc.
 
 
+pspp
+Programa para el análisis estadístico de datos muestreados. Admite pruebas T, ANOVA, GLM, análisis factorial, pruebas no paramétricas y otras funciones estadísticas y genera informes estadísticos en texto plano, PDF, PostScript, CSV, HTML, SVG y OpenDocument. Incluye los ejecutables pspp-convert, pspp-output y psppire. Directorio con ejemplos /usr/share/pspp/examples/.
+$ pspp /usr/share/pspp/examples/descript.sps (muestra en pantalla el gráfico)
+$ pspp -O format=html -o descript.html /usr/share/pspp/examples/descript.sps (convierte al formato html y lo guarda en descript.html para abrir con el navegador)
+$ pspp -o descript.list /usr/share/pspp/examples/descript.sps (guarda el gráfico en formato texto en descript.list)
+$ pspp -O format=pdf -o descript.pdf /usr/share/pspp/examples/descript.sps (lo guarda en formato pdf en descript.pdf)
+$ pspp-convert datos.sav datos.csv (convertir datos sav a csv)
+$ pspp-convert datos.sav | head (convertir .sav a texto CSV y mostrar en stdout)
+$ pspp-convert datos.por -O sys > datos.sav (forzar salida sistema SPSS)
+$ pspp-convert -c 1000 --decimal=, datos.sav recorte.csv (limitar a 1000 casos y poner decimal "coma")
+$ pspp-output convert informe.spv informe.html (todo el contenido SPV a HTML)
+$ pspp-output --nth-commands=3 convert informe.spv informe.csv (solo las tablas del tercer comando al CSV)
+$ psppire (interfaz gráfica  de la aplicación)
+
+
 psst
 [Power Stress and Shaping Tool]. Herramienta que controla componentes Intel como CPU y GPU. Permite un control de la función de estrés sin su propia sobrecarga de proceso. Los logs en /var/log/psst.csv
 # psst
