@@ -46314,6 +46314,12 @@ $ pspp-output --nth-commands=3 convert informe.spv informe.csv (solo las tablas 
 $ psppire (interfaz gráfica  de la aplicación)
 
 
+pspresent
+Herramienta que muestra presentaciones de diapositivas PostScript a pantalla completa. La navegación es sencilla: la barra espaciadora avanza una diapositiva, la tecla de retroceso retrocede una diapositiva y la tecla de escape cierra la presentación. La pantalla cuenta con doble búfer, lo que permite transiciones fluidas entre diapositivas.
+$ pspresent archivo.ps
+$ pspresent -o -l -t10 demo.ps (no anular el gestor de ventanas, repetir cuando acabe la presentación y 10 segundos por diapositiva; por defecto 20)
+
+
 psst
 [Power Stress and Shaping Tool]. Herramienta que controla componentes Intel como CPU y GPU. Permite un control de la función de estrés sin su propia sobrecarga de proceso. Los logs en /var/log/psst.csv
 # psst
