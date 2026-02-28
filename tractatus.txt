@@ -46325,6 +46325,15 @@ El script escanea un archivo PostScript y guarda las líneas entre '%%BeginDocum
 $ psrip archivo.ps
 
 
+pssh
+Conjunto de herramientas diseñadas para ejecutar comandos en múltiples computadoras de manera paralela a través de SSH y normalmente se base en un archivo que contiene la lista de servidores, a uno por linea a los que se quiere conectar. Incluye las herramientas parallel-ssh, parallel-scp, parallel-rsync, parallel-nuke y parallel-slurp
+$ parallel-ssh -h hosts.txt -i "uptime" (se ejecutará "uptime" en todos los host enumerado en el archivo y se mostrará los resultados por pantalla)
+$ parallel-scp -h hosts.txt ~/file ~/remote/directory/ (copiar file de la maquina local al ~/remote/directory de todos los hots del archivo)
+$ parallel-rsync -h hosts.txt ~/local/directory/ ~/remote/directory/ (sincronizar el directorio local con los remotos del listado de hosts)
+$ parallel-nuke -h hosts.txt "apt-get update && apt-get upgrade -y" (actualizará los paquetes en todos los servidores listados en hosts.txt y luego cerrará las conexiones)
+$ parallel-slurp -h hosts.txt ~/remote/file ~/local/directory/ (copiar file de los hosts del archivo a la máquina local)
+
+
 psst
 [Power Stress and Shaping Tool]. Herramienta que controla componentes Intel como CPU y GPU como el consumo energético y la temperatura bajo diferentes patrones de uso. Una de sus características más importantes es que intenta que su propia sobrecarga sea mínima y esté incluida en la carga que está generando, para no distorsionar las mediciones.
 # psst (forma básica)
@@ -46364,6 +46373,14 @@ $ pstotext archivo.pdf > salida.xml
 pstree
 Para ver el árbol de procesos
 $ pstree -al   (verlo con cada uno de sus hilos de ejecución)
+
+
+psurface
+Biblioteca de C++ que se utiliza para trabajar con superficies triangulares y realizar operaciones específicas en ellas. Incluye los ejecutables psurface-convert, psurface-simplify y psurface-smooth
+$ psurface-convert -f obj -i input.obj -o output.ply (convierte un archivo .obj a formato .ply)
+$ psurface-convert -f ply -i smoothed.ply -o output.stl (convertir a .stl para usar en una impresora 3D)
+$ psurface-simplify -i input.ply -o simplified.ply -t 0.05 (simplifica input.ply reduciendo el número de triángulos de manera que la distancia entre los puntos de la superficie y los puntos simplificados no supere 0.05 unidades)
+$ psurface-smooth -i input.ply -o smoothed.ply -n 5 (suaviza la superficie del archivo input.ply con 5 repeticiones para el suavizado)
 
 
 psutils
