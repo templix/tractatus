@@ -46326,9 +46326,23 @@ $ psrip archivo.ps
 
 
 psst
-[Power Stress and Shaping Tool]. Herramienta que controla componentes Intel como CPU y GPU. Permite un control de la función de estrés sin su propia sobrecarga de proceso. Los logs en /var/log/psst.csv
-# psst
-# psst -v -d 10000 -s saw-tooth,5 -C a -p 500
+[Power Stress and Shaping Tool]. Herramienta que controla componentes Intel como CPU y GPU como el consumo energético y la temperatura bajo diferentes patrones de uso. Una de sus características más importantes es que intenta que su propia sobrecarga sea mínima y esté incluida en la carga que está generando, para no distorsionar las mediciones.
+# psst (forma básica)
+# psst -v -d 10000 -s saw-tooth,5 -C a -p 500 (modo verbose, 10000 milisegundos de prueba, forma de la carga, núcleos que se va a stresar y escribir una linea cada 500 milisegundos en el log y en la terminal)
+# psst -d 20000 -s stair-case,0.9,10 -C 3 -p 500 (empezaría con una carga baja, probablemente 0.1% y después de 10 segundos, daría un "paso" [step] al 90% durante otros 10 segundos)
+# psst -d 20000 -s sinosoid,10,0.9 -C 3 -p 500 (genera una carga sinusoidal durante 20 segundos)
+Nota.- Es posible que algún módulo se tenga que cargar manualmente: sudo modprobe msr
+La tabla que se genera es un archivo csv [/var/log/psst.csv] y cada columna da una metrica diferente:
+Time [ms] --> Tiempo transcurrido desde el inicio de la prueba en milisegundos.
+LoadIn [C0_%] --> Este es el objetivo de carga que psst está intentando generar en ese momento.
+pwrPkg0 [mWatt] --> Potencia consumida por todo el paquete del procesador (CPU + GPU integrada + caché) en milivatios. Es el consumo total del chip.
+PwrCore [mWatt] --> Potencia consumida solo por los núcleos de la CPU en milivatios.
+PwrGpu [mWatt] --> Potencia consumida por la GPU integrada en el procesador.
+PwrDram [mWatt] --> Potencia consumida por la memoria RAM si el controlador de memoria lo soporta.
+CpuDts [DegC] --> Temperatura de la CPU en grados Celsius, medida por el sensor digital [DTS - Digital Thermal Sensor].
+SocDts [DegC] --> Temperatura general del SoC [System on Chip] en grados Celsius.
+FreqReal [MHz] --> Frecuencia real a la que operan los núcleos. Valores como 3802 MHz, 3156 MHz, 3591 MHz es normal para entender el comportamiento del gobernador de frecuencia de la CPU.
+LoadOut [C0_%] --> Carga real que psst consiguió generar en la CPU.
 
 
 pstotext
