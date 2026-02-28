@@ -46345,6 +46345,17 @@ FreqReal [MHz] --> Frecuencia real a la que operan los núcleos. Valores como 38
 LoadOut [C0_%] --> Carga real que psst consiguió generar en la CPU.
 
 
+pst-utils
+Herramientas basadas en libpst para leer datos de archivos PST de Microsoft Outlook. Las herramientas son nick2ldif, readpst, lspst, pst2ldif y pst2dii.
+$ lspst outlook.pst (ver la estructura del archivo outlook.pst)
+$ readpst -o correos_extraidos -e outlook.pst (creará una carpeta correos_extraidos con subcarpetas y archivos .eml)
+$ readpst -o buzón.mbox -m outlook.pst (convertir a formato MBOX)
+$ readpst -T -c -o salida outlook.pst (solo contactos y correos, ignorar calendario/tareas)
+$ pst2ldif outlook.pst > contactos.ldif (extraer contactos y guardarlos en un archivo ldif)
+$ nick2ldif outlook.pst > apodos.ldif (extraer la caché de apodos/nicknames)
+$ pst2dii outlook.pst salida.dii (conversión básica a DII [Data Interchange Format] en sistemas antiguos)
+
+
 pstotext
 Lee uno o más archivos PostScript o PDF y escribe su representación en txt o en otro formato que se especifique.
 $ pstotext archivo.pdf > salida.xml
