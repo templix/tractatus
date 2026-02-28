@@ -18004,11 +18004,17 @@ Lista las fuentes disponibles en figlet.
 
 file
 Indica el tipo y codificación de un fichero.
-$ file script.sh
-$ file Desktop
-$ file archivo.odt
-$ file -i archivo
+$ file script.sh (de un script)
+$ file ~/docs/* (de un directorio)
+$ file archivo.odt (de un odt)
+$ file archivo.pdf (de un pdf. Si la salida muestra algo tipo "executable" es un ejecutable renombradoi como pdf)
+$ file -i archivo (obtener el tipo MIME)
 $ file --mime-encoding archivo.txt (Mostrar codificación)
+$ file -b archivo (mostrar el tipo sin nostrar el nombre del archivo)
+$ file -b archivo1 archivo2 archivo3 (mostrar el tipo de los 3 sin mostrar el nombre del archivo)
+$ file -z archivo.zip (de un archivo comprimido)
+$ file -z archivo.tar.xz (lo mismo)
+$ sudo file -s /dev/sda (un dispositivo especial
 
 
 file2brl
