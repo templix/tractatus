@@ -46409,6 +46409,35 @@ Muestra una lista ordenada de procesos del sistema. Los procesos se ordenan con 
 $ ptop
 
 
+ptpd
+Daemon que implementa el Precision Time Protocol [Protocolo de Tiempo de Precisión - PTP], según lo define el estándar IEEE 1588-2008. PTP se desarrolló para proporcionar una coordinación horaria muy precisa de ordenadores conectados a una LAN. Para más información, consulte http://ptpd.sourceforge.net/
+Configurar el archivo de configuración:
+# cp /usr/share/ptpd/ptpd2.conf.default-full /etc/ptpd2.conf (copiar la plantilla al directorio de configuración del sistema)
+# nano /etc/ptpd2.conf (editar para establecer el interfaz de red)
+       ...
+       ; Network interface to use - eth0, igb0 etc. (required).
+       ptpengine:interface = wlp2s0
+       ...
+# ptpd -k -c /etc/ptpd2.conf (verificar la configuración, indicándole dónde está el archivo)
+Si la salida dice: Unknown configuration entry: global:enable_snmp - setting will be ignored, puede comentarse la linea en le archivo de configuración:
+       ; Enable SNMP agent (if compiled with PTPD_SNMP).
+       ;global:enable_snmp = N
+Para que el demonio [systemd] utilice esta nueva configuración, deberá indicarse la ruta del archivo en el archivo de servicio. Normalmente se hace creando un archivo "override" para evitar que se sobreescriba al actualizar el paquete:
+# systemctl edit ptpd.service
+Añadir las siguientes líneas:
+    [Service]
+    ExecStart=
+    ExecStart=/usr/sbin/ptpd -c /etc/ptpd2.conf
+Recargar la configuración de systemd y reiniciar el servicio:
+# systemctl daemon-reload
+# systemctl restart ptpd.service
+# systemctl status ptpd.service
+# ptpd -H (ver la ayuda detallada con todas las opciones de configuración)
+# ptpd -e ptpengine:preset (ver la ayuda para un ajuste específico)
+# ptpd -C -V -i wlp2s0 (ejecutar en primer plano y en modo verbose para ver todos los mensajes en tiempo real y especificando la interfaz sin usar el archivo de configuración)
+# ptpd -s -i wlp2s0 (ejecutarlo en segundo plano)
+
+
 ptrepack
 [pytables]. Biblioteca de Python para el manejo eficiente de grandes conjuntos de datos. Este comando permite reorganizar o comprimir los datos almacenados en archivos HDF5.
 $ ptrepack input_file.h5 output_file.h5 (reorganiza un archivo HDF5 para mejorar su rendimiento o reducir el tamaño del archivo)
