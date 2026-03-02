@@ -7317,6 +7317,25 @@ cli-spinner
 Línea de comando simple que muestra un indicador de barra inclinada. El binario cli-spinner no es realmente funcional, es un ejemplo de línea de comandos.
 
 
+cliamp
+Aplicación escrita en Go para reproducir música.
+$ curl -fsSL https://raw.githubusercontent.com/bjarneo/cliamp/HEAD/install.sh | sh (descarga e instalación)
+$ cliamp ~/Musica (lanzar la interfaz con un directorio)
+Algunos atajos para moverse por la aplicación:
+Espacio	--> Play/Pausa
+s --> Stop
+> . -->	Pista sguiente
+< , -->	Pista anterior
++ - -->	Volumen arriba/abajo
+j k -->	Desplazarse sobre playlist
+h l -->	EQ cursor izquierda/derecha
+Enter --> Reproducir pista seleccionada
+/ --> Buscar playlist
+z --> Reproducir aleatorio
+Ctrl+K --> Mostrar atajos
+q --> Salir
+
+
 click
 Formato de paquete simplificado que se instala en una parte separada del sistema de archivos, adecuado para aplicaciones de terceros.
 Crear una aplicación CLI usando click de ejemplo:
@@ -51039,6 +51058,11 @@ sudo-rs
 Reimplementación de sudo y su que busca ser un reemplazo directo para la mayoría de los casos de uso comunes, pero con un código, escrito en Rust, más limpio, fácil de mantener y con mejores valores de seguridad por defecto. Si bien todavía no inplementa todas las opciones de sudo, las básicas son iguales y lo establecido en /etc/sudoers/ y /etc/sudoers.d/ continua siendo efectivo. Incluye los ejecutables su-rs y visudo-rs
 $ sudo-rs -k (limpia la clave sudo introducida)
 $ sudo-rs -u user (ejecutar como otro usuario)
+1.-
+Para que al marcar la contraseña no muestre nada en vez de asteriscos:
+# nano /etc/sudoers
+y añadir la linea:
+  	 Defaults !pwfeedback
 
 
 sudoedit
