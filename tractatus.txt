@@ -12873,6 +12873,26 @@ $ docker volume inspect mi-volumen (inspeccionar un volumen)
 $ docker volume rm mi-volumen (eliminar un volumen concreto)
 $ docker system df (resumen del sistema Docker: espacio usado, contenedores, etc.)
 $ docker info (información detallada del daemon Docker)
+1.-
+Eliminar la interfaz actual
+# ip link set dev docker0 down
+# ip link del docker0
+Esto borra el bridge de la sesión actual, pero volverá a aparecer si se vuelve a iniciar el daemon Docker.
+2.-
+Desactivar Docker y containerd en el arranque
+# systemctl stop docker.service docker.socket
+# systemctl disable docker.service docker.socket
+Si se usa también containerd como servicio independiente:
+# systemctl stop containerd.service
+# systemctl disable containerd.service
+3.-
+Mantener Docker pero sin que cree el bridge docker0, crear o modificar:
+# nano /etc/docker/daemon.json
+   {
+     "bridge": "none"
+   }
+# systemctl restart docker (reinicia docker)
+Con "bridge": "none" Docker no levanta la interfaz docker0 al arrancar.
 
 
 docknot
