@@ -46477,6 +46477,17 @@ Recargar la configuración de systemd y reiniciar el servicio:
 # ptpd -s -i wlp2s0 (ejecutarlo en segundo plano)
 
 
+ptpython
+Es un REPL [Read-Eval-Print Loop] diseñado exclusivamente para Python construida sobre la biblioteca prompt_toolkit. Su objetivo es hacer que escribir código Python de forma interactiva sea mucho menos frustrante que en el intérprete básico. Incluye el ejecutable ptipython [fusión de ptpython e IPython].
+$ ptipython (entrar en la interfaz. Pulsando F2 se abre un panel lateral para configurar varios parámetros)
+Al no ser un prompt tipo bash, para interactuar con el sistema operativo ha de emplearse el prefijo "!", característica heredada de IPython:
+In [1]: !ip a (ejecutará el comando de bash mostrando la salida)
+Algunas caracteristicas:
+	objeto? --> Muestra la ayuda de cualquier cosa.
+	%run archivo.py --> Carga el script
+	%save notas.py 1-10 --> Guarda de la línea 1 a la 10
+
+
 ptrepack
 [pytables]. Biblioteca de Python para el manejo eficiente de grandes conjuntos de datos. Este comando permite reorganizar o comprimir los datos almacenados en archivos HDF5.
 $ ptrepack input_file.h5 output_file.h5 (reorganiza un archivo HDF5 para mejorar su rendimiento o reducir el tamaño del archivo)
