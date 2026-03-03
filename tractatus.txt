@@ -7150,6 +7150,10 @@ Para asegurarse de que clamav y las definiciones estén instaladas correctamente
 $ curl https://secure.eicar.org/eicar.com.txt | clamscan -
 La salida debe incluir:
 	stdin: Win.Test.EICAR_HDB-1 FOUND
+3.-
+Para ver algún log concreto por ejemplo un error.
+$ clamscan -i -v -r /home/USER 2>&1 | tee /tmp/clamscan.log
+$ grep -iE 'error|cant|cannot|permission denied' /tmp/clamscan.log (buscar lineas con "error" o "can't"
 
 
 clamav-cvdupdate
