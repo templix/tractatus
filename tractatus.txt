@@ -9691,7 +9691,7 @@ El acrónimo DACCO significa 'Diccionari Anglès-Català de Codi Obert', o 'Dicc
 
 
 daemon
-Hay muchas tareas que se deben realizar para configurar correctamente un proceso demonio. Daemon realiza estas tareas y además, resulta útil para escribir demonios en lenguajes distintos de C, C++ o Perl, por ejemplo, sh, Java.
+Un proceso que se ejecuta en segundo plano, sin estar asociado a una terminal interactiva. Al cerrar la terminal, un proceso que se esté ejecutando recibe SIGHUP y normalmente muere. Un daemon no depende del terminal, no depende de una sesión, no muere si se cierra la terminal, se ejecuta en segundo plano, no escribe en pantalla y vive gestionado por el sistema.
 $ daemon --name=script-daemon --output=/var/log/mi-script.log script.sh (asigna un nombre al demonio y especifica un archivo de registro del script.sh que se ejecutará como demonio)
 $ daemon --name=criptt-daemon --respawn -- mi-script.sh (reinicia el proceso automáticamente si termina inesperadamente)
 $ daemon --name=apli-java java -jar mi-aplicacion.jar (ejecutar una aplicación Java como demonio)
@@ -46503,6 +46503,26 @@ $ ptrepack --show-progress input_file.h5 output_file.h5 (comprobar qué estructu
 $ ptrepack --complib=lzo --complevel=3 input_file.h5 output_file.h5 (usar un filtro como LZO en lugar de zlib)
 $ ptrepack --complevel=0 input_file.h5 output_file.h5 (hacer una copia rápida sin compresión)
 $ ptrepack --h5out-version=2 input_file.h5 output_file.h5 (convierte un archivo PyTables más antiguo al formato HDF5 más reciente)
+
+
+ptunnel
+es una aplicación que permite tunelizar de forma fiable conexiones TCP a un host remoto mediante paquetes de solicitud y respuesta de eco ICMP, comúnmente conocidos como solicitudes y respuestas de ping. Actúa como un proxy y puede gestionar sockets e identificación segura.
+# ptunnel -x "secreto123" -v 4 -f /tmp/ptunnel-server.log (en el servidor con una máquina con acceso libre)
+# ptunnel -p 203.0.113.45 -lp 2222 -da 192.168.1.77 -dp 22 -x "secreto123" (en el cliente, IP del servidor,puerto local dondes escuchar, máquina de destino, puerto real de destino [ssh] y mensaje)
+Luego puede conectarse normalmente:
+$ ssh -p 2222 usuario@localhost
+1.-
+Acceder a un servidor SSH que está detrás del proxy
+# ptunnel -x "m1_cl4v3" (en el servidor expuesto que recibe ICMP)
+# ptunnel -p servidorpublico.com -lp 8000 -da 10.77.88.5 -dp 22 -x "m1_cl4v3" (en el cliente marcar la IP 10.77.88.5 interna del servidor SSH real)
+# ssh -p 8000 usuario@localhost
+2.-
+Acceder a HTTP/HTTPS con navegador o curl
+# ptunnel -x "tunnelpass" (en el servidor)
+# ptunnel -p 198.51.100.88 -lp 8080 -da google.com -dp 80 -x "tunnelpass" (En el cliente con un túnel a google.com)
+Luego usar el proxy:
+$ curl -x http://127.0.0.1:8080 http://example.com
+O configurar el navegador con proxy HTTP 127.0.0.1:8080
 
 
 ptx
