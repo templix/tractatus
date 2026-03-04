@@ -46540,6 +46540,69 @@ Este paquete contiene una utilidad para convertir documentos de Publisher en doc
 $ pub2odg archivo.pub archivo.odf (si se omite el archivo de salida se impreme en pantalla)
 
 
+public-inbox
+Herramientas para archivar listas de correo electrónico de forma pública y descentralizada y permite acceder a los correos mediante web, Git, NNTP, IMAP y POP3. Incluye las herramientas public-inbox-clone, public-inbox-compact, public-inbox-convert, public-inbox-edit, public-inbox-extindex, public-inbox-fetch, public-inbox-httpd, public-inbox-imapd, public-inbox-index, public-inbox-init, public-inbox-learn, public-inbox-mda, public-inbox-netd, public-inbox-nntpd, public-inbox-pop3d, public-inbox-purge, public-inbox-watch, public-inbox-xcpdb
+Configuración base
+$ nano ~/.public-inbox/config
+[publicinbox "mi-lista"]
+      address = mi-lista@ejemplo.com
+      url = https://listas.ejemplo.com/mi-lista
+      inboxdir = /var/lib/public-inbox/mi-lista
+      indexlevel = full
+$ public-inbox-init dev-list /var/lib/public-inbox/dev-list https://listas.ejemplo.com/dev-list dev@ejemplo.com (crear un archivo para una lista de desarrolladores)
+$ public-inbox-init dev-list /var/lib/public-inbox/dev-list https://listas.ejemplo.com/dev-list dev@ejemplo.com dev-old@ejemplo.com (con múltiples direcciones de email)
+$ public-inbox-init -V2 dev-list /var/lib/public-inbox/dev-list https://listas.ejemplo.com/dev-list dev@ejemplo.com (con nivel de indexado completo)
+Ejemplo de configuración para public-inbox-watch
+$ nano ~/.public-inbox/config
+      [watch]
+         maildir = /var/mail/listas/dev-list
+     	 state = /var/lib/public-inbox/watch-state
+$ public-inbox-watch (iniciar el watcher en primer plano)
+$ public-inbox-watch & (o en segundo plano como servicio)
+$ cat correo.eml | public-inbox-mda dev-list (entrega un .eml al archivo)
+$ public-inbox-index /var/lib/public-inbox/dev-list (indexar un archivo existente)
+$ public-inbox-index --indexlevel=full /var/lib/public-inbox/dev-list (indexar con nivel completo de búsqueda [Xapian])
+$ public-inbox-index --reindex /var/lib/public-inbox/dev-list (reindexar desde cero)
+$ public-inbox-index /var/lib/public-inbox/dev-list /var/lib/public-inbox/anuncios (indexar múltiples archivos)
+$ public-inbox-index -j4 /var/lib/public-inbox/dev-list (con límite de jobs paralelos)
+$ public-inbox-httpd --listen 127.0.0.1:8080 (arrancar el servidor web en puerto 8080)
+$ public-inbox-httpd --listen 0.0.0.0:80 --worker-processes=4 (con número de workers)
+$ public-inbox-httpd --listen /run/public-inbox/httpd.sock (detrás de un socket Unix para usar con nginx/apache como proxy)
+$ public-inbox-nntpd --listen 0.0.0.0:119 (iniciar servidor NNTP en puerto estándar 119)
+$ public-inbox-nntpd --listen 127.0.0.1:1119 (puerto alternativo sin privilegios de root)
+$ public-inbox-nntpd --listen 0.0.0.0:563 --tls-key /etc/ssl/private/server.key --tls-cert /etc/ssl/certs/server.crt (con TLS, NNTPS, puerto 563)
+$ public-inbox-imapd --listen 0.0.0.0:143 (iniciar servidor IMAP en puerto 143)
+$ public-inbox-imapd --listen 0.0.0.0:993 --tls-key /etc/ssl/private/server.key --tls-cert /etc/ssl/certs/server.crt (con IMAPS [TLS] en puerto 993)
+$ public-inbox-imapd --listen 127.0.0.1:1143 (solo local para pruebas)
+$ public-inbox-pop3d --listen 0.0.0.0:110 (iniciar POP3 en puerto 110)
+$ public-inbox-pop3d --listen 0.0.0.0:995 --tls-key /etc/ssl/private/server.key --tls-cert /etc/ssl/certs/server.crt (POP3S con TLS en puerto 995)
+$ public-inbox-pop3d --listen 127.0.0.1:1110 (para pruebas locales)
+$ public-inbox-netd --listen 0.0.0.0:119 --listen 0.0.0.0:143 --listen 0.0.0.0:110 (servir todos los protocolos desde un proceso(
+$ public-inbox-clone https://lore.kernel.org/linux-kernel /var/lib/public-inbox/linux-kernel (clonar un archivo público)
+$ public-inbox-clone --epoch=5.. https://lore.kernel.org/linux-kernel /var/lib/public-inbox/linux-kernel (clonar solo los últimos épocas)
+$ public-inbox-clone https://lore.kernel.org/git /var/lib/public-inbox/git-list (clonar y luego mantener sincronizado con fetch)
+$ public-inbox-fetch /var/lib/public-inbox/linux-kernel (actualizar un archivo clonado previamente)
+$ public-inbox-fetch /var/lib/public-inbox/linux-kernel && public-inbox-index /var/lib/public-inbox/linux-kernel (actualizar y reindexar automáticamente)
+O entrando en cron job para cada hora la linea
+  	   0 * * * * public-inbox-fetch /var/lib/public-inbox/linux-kernel
+$ public-inbox-compact /var/lib/public-inbox/dev-list (compactar el índice de búsqueda)
+$ public-inbox-compact --all /var/lib/public-inbox/dev-list (compactar y verificar integridad)
+Tambien útil ejecutarlo periódicamente en cron
+	   0 3 * * 0 public-inbox-compact /var/lib/public-inbox/dev-list
+$ public-inbox-convert /var/lib/public-inbox/dev-list-v1 /var/lib/public-inbox/dev-list-v2 (convertir de formato antiguo [v1] a moderno [v2])
+$ public-inbox-edit --msgid="<20240101120000.ABC123@ejemplo.com>" /var/lib/public-inbox/dev-list (editar un mensaje por su Message-ID)
+$ public-inbox-edit --msgid="<20240101120000.ABC123@ejemplo.com>" --input=mensaje-editado.eml /var/lib/public-inbox/dev-list (reemplazar el contenido de un mensaje con un fichero editado)
+$ public-inbox-purge --msgid="<20240101120000.ABC123@ejemplo.com>" /var/lib/public-inbox/dev-list (eliminar un mensaje por su Message-ID)
+$ public-inbox-purge --msgid="<spam@ejemplo.com>" /var/lib/public-inbox/dev-list (purgar...)
+$ public-inbox-index /var/lib/public-inbox/dev-list (y reindexar)
+$ cat correo-spam.eml | public-inbox-learn spam (marcar un correo como spam)
+$ cat correo-legitimo.eml | public-inbox-learn ham (marcar un correo como ham [no-spam])
+$ public-inbox-extindex /var/lib/public-inbox/extindex /var/lib/public-inbox/dev-list /var/lib/public-inbox/anuncios /var/lib/public-inbox/soporte (crear un índice externo que abarque varias listas)
+$ public-inbox-extindex --reindex /var/lib/public-inbox/extindex (actualizar el índice externo)
+$ public-inbox-xcpdb /var/lib/public-inbox/dev-list/xapian /var/lib/public-inbox/dev-list/xapian-nuevo (copiar/convertir la base de datos Xapian)
+$ public-inbox-xcpdb --compact /var/lib/public-inbox/dev-list (reparar bases de datos corruptas)
+
+
 publican
 sistema de publicación DocBook XML. Incluye los ejecutables db4-2-db5 y db5-valid. Acceder a los documentos con el vanegador en file:///usr/share/doc/.
 
@@ -46554,6 +46617,10 @@ Incluye los ejecutables build-publicfile y get-publicfile
 $ get-publicfile (descarga y verifica las fuentes de publicfile)
 $ build-publicfile (compila el paquete publicfile a partir de sus fuentes y, opcionalmente, lo instala)
 Nota.- Ambos comandos son interactivos y bastante detallados. Si no se desea que actuen de modo interactivo añadir el argumento "go".
+
+
+publicsuffix
+Utilidad que permite trabajar con la lista de sufijos públicos de dominios [public suffix list]. Esta lista, que es mantenida por la comunidad por ejemplo, en publicsuffix.org, identifica las partes de un dominio que son registrables públicamente y que, por tanto, no están bajo el control del usuario final o del registrante. La utilidad principal del comando publicsuffix es determinar qué parte de un nombre de dominio es el sufijo público y, por lo tanto, qué parte del dominio puede ser registrada o controlada públicamente. Ver psl.
 
 
 pubpaste
