@@ -46548,6 +46548,14 @@ publican-debian
 Marca de Debian para Publican. La salida de Publican se puede personalizar mediante hojas de estilo externas, conocidas como marcas. Este paquete proporciona una marca de este tipo para Publican, adaptada a las necesidades de la documentación publicada por el proyecto Debian. Acceder con el navegador en file:///usr/share/publican/Common_Content/debian/
 
 
+publicfile-installer
+Servidor HTTP y FTP, escrito por Daniel J. Bernstein en 1999 y no ha cambiado mucho desde entonces. No es compatible con las funciones modernas. Sin embargo, si se busca un servidor web pequeño, sencillo y seguro que se integre con los gestores de servicios UNIX runit y daemontools, publicfile es la solución perfecta. Este paquete de instalación descarga el archivo publicfile .tar.gz del sitio web original, lo combina con la información de empaquetado de Debian del sitio web del responsable del paquete; luego, compila un paquete Debian publicfile y lo instala. Al instalar este paquete de instalación, se ofrece la opción de posponer la descarga e instalación de publicfile.
+Incluye los ejecutables build-publicfile y get-publicfile
+$ get-publicfile (descarga y verifica las fuentes de publicfile)
+$ build-publicfile (compila el paquete publicfile a partir de sus fuentes y, opcionalmente, lo instala)
+Nota.- Ambos comandos son interactivos y bastante detallados. Si no se desea que actuen de modo interactivo añadir el argumento "go".
+
+
 pulseaudio
 Es un servidor de sonido para sistemas POSIX que gestiona el audio en múltiples aplicaciones, permitiendo mezclar streams de audio y redirigirlos a diferentes dispositivos. Incluye las herramientas pa-info, pacat, pacmd, pactl, padsp, pamon, paplay, parec, parecord, pasuspender y pax11publish.
 $ pulseaudio --start (iniciar el daemon principal que gestiona todo el sistema de audio)
