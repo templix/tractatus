@@ -46556,6 +46556,23 @@ $ build-publicfile (compila el paquete publicfile a partir de sus fuentes y, opc
 Nota.- Ambos comandos son interactivos y bastante detallados. Si no se desea que actuen de modo interactivo añadir el argumento "go".
 
 
+pubpaste
+[xclip scrot imagemagick]. Herramienta que facilita la publicación de archivos, portapapeles, capturas de pantalla y galerías de fotos en línea. Es un poco engorroso, pero cumple su función a la perfección. Según la descripción pubpaste no es para usuarios principiantes: asume que se tiene acceso a un servidor SSH y se sabe cómo configurar un archivo YAML. Ha sido escrito por y para su autor en un ataque de egoísmo. Disculpas, gente común que lee esto.
+Ejemplo de archivo de configuración:
+$ nano ~/.config/pubpaste.yaml
+default:
+  user: tu_usuario
+  host: tu_servidor.com
+  root: /var/www/html/public_html/pastes
+  url: https://tu_servidor.com/pastes
+  strategy: scp
+$ pubpaste mi_script.p` (sube el archivo al servidor y devuelve una URL tipo https://servidor.com/pastes/mi_script.py)
+$ pubpaste -p (subir lo que se tiene en el portapapeles)
+$ pubpaste -s (seleccionar un área de la pantalla, la guarda, la sube y pone el enlace en el portapapeles)
+$ pubpaste -g ~/Vacaciones/*.jpg (No solo sube las fotos, sino que genera un archivo index.html básico en el servidor para verlas como una galería web)
+Nota.- Precisa tener configurada la autentificación por clave en el servidor ssh.
+
+
 pulseaudio
 Es un servidor de sonido para sistemas POSIX que gestiona el audio en múltiples aplicaciones, permitiendo mezclar streams de audio y redirigirlos a diferentes dispositivos. Incluye las herramientas pa-info, pacat, pacmd, pactl, padsp, pamon, paplay, parec, parecord, pasuspender y pax11publish.
 $ pulseaudio --start (iniciar el daemon principal que gestiona todo el sistema de audio)
