@@ -46640,6 +46640,13 @@ $ pubpaste -g ~/Vacaciones/*.jpg (No solo sube las fotos, sino que genera un arc
 Nota.- Precisa tener configurada la autentificación por clave en el servidor ssh.
 
 
+pulldown-cmark
+Herramienta escrita en Rust que convierte texto en formato CommonMark, versión optimizada de la sintaxis Markdown a HTML
+$ pulldown-cmark -T -L -F documento.md > doc.html (convertir un archivo .md a HTML habilitando tablas, listas de tareas y notas al pie estilo GitHub)
+$ pulldown-cmark -H -M -R documento.md > doc.html (lo mismo, habilitando atributos de encabezado, bloques de metadatos y que falle si tiene enlaces rotos)
+$ echo "## Linux es un sistema genial" | pulldown-cmark (prueba por pantalla)
+
+
 pulseaudio
 Es un servidor de sonido para sistemas POSIX que gestiona el audio en múltiples aplicaciones, permitiendo mezclar streams de audio y redirigirlos a diferentes dispositivos. Incluye las herramientas pa-info, pacat, pacmd, pactl, padsp, pamon, paplay, parec, parecord, pasuspender y pax11publish.
 $ pulseaudio --start (iniciar el daemon principal que gestiona todo el sistema de audio)
