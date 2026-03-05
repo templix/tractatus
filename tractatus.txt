@@ -46647,6 +46647,30 @@ $ pulldown-cmark -H -M -R documento.md > doc.html (lo mismo, habilitando atribut
 $ echo "## Linux es un sistema genial" | pulldown-cmark (prueba por pantalla)
 
 
+pullimap
+Recupera mensajes de un buzón IMAP remoto y los entrega a un canal SMTP o LMTP local.
+$ pullimap -v -i imap.example.com -p 993 -u usuario -w clave --ssl -m INBOX -o localhost -P 25 -f pullimap@ (recuperar mails de un buzón IMAP y enviarlos a un servidor SMTP local)
+Ejemplo de sección en el archivo de configuración:
+# nano /etc/pullimap.conf
+       [mi-buzon]
+       ImapHost imap.gmail.com
+       ImapUser usuario@gmail.com
+       ImapPass claveapp
+       ImapPort 993
+       ImapSsl yes
+       Mailbox INBOX
+       SmtpHost localhost
+       SmtpPort 25
+       StateFile /var/lib/pullimap/mi-buzon.state
+       Retention 30d
+$ pullimap -c mi-buzon (ejecutar para procesar)
+1.-
+Colocar en cron para procesar cada hora la linea:
+$ crontab
+	0 * * * * /usr/bin/pullimap -c mi-buzon -q
+La opción -q hace que salga tras una iteración; sin ella, corre en foreground.
+
+
 pullseq
 Utilidad que permite extraer secuencia de un fasta o fastq, formatos estándar en bioinformática para almacenar secuencias biológicas [ADN/proteínas].
 
@@ -46696,6 +46720,11 @@ $ pax11publish (mostrar configuración actual de audio en X11)
 $ pax11publish -s "nombre_del_sink" (establecer sink por defecto en X11)
 $ pax11publish -i "nombre_del_source" (establecer source por defecto en X11)
 $ pax11publish -r (eliminar publicaciones de audio en X11)
+
+
+pulsemixer
+mezclador de volumen para PulseAudio que ofrece una interfaz de usuario interactiva basada en curses.
+$ pulsemixer
 
 
 pureline
