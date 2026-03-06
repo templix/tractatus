@@ -28169,9 +28169,11 @@ $ jot -s "" -c 26 a (26 letras [-c] empezando por la A y sin espacio entre ellas
 journalctl
 Sistema de registro [log] propio de systemd.
 # journalctl (Leer el registro)
-# journalctl -b (logs desde el último arranque)
+# journalctl -b (logs del presente arranque)
+# journalctl -p crit -rb -1 (ver procesos críticos del anterior arranque [-1] y los más nuevos primero [-r])
+# journalctl -p crit -rb (lo mismo pero del presente arranque)
 # journalctl -n (muestra los últimos 10)
-# journalctl -n 20 (muestra los últimos 20=
+# journalctl -n 20 (muestra los últimos 20)
 # journalctl -b -0 (Muestra los mensajes del arranque actual)
 # journalctl -b -1 (Muestra los mensajes del arranque anterior)
 # journalctl -b -2 (Muestra los mensajes desde los dos últimos arranques)
@@ -46726,6 +46728,25 @@ mezclador de volumen para PulseAudio que ofrece una interfaz de usuario interact
 $ pulsemixer
 
 
+pumpa
+Cliente de escritorio sencillo para pump.io, la red social distribuida. Pump.io es una plataforma que permite a los usuarios crear sus propios servidores de redes sociales, ofreciendo una alternativa descentralizada a servicios como Twitter o Mastodon.
+$ pumpa (iniciar el cliente)
+$ pumpa --new-account (crear una nueva cuenta)
+$ pumpa --login (iniciar sesión)
+$ pumpa --friends (verificar la lista de amigos)
+$ pumpa --post "¡Hola, mundo!" (publicar un nuevo mensaje)
+
+
+pup
+Herramienta para procesar HTML. Lee desde la entrada estándar [stdin], imprime en la salida estándar [stdout] y permite al usuario filtrar partes de la página mediante selectores CSS.
+$ curl -s https://lapipaplena.wordpress.com | pup 'h1, h2, h3 text{}' (extraer títulos de una URL)
+$ echo '<ul><li>A</li><li>B</li></ul>' | pup (obtener el html complero del texto)
+$ echo '<div class="precio">19.99€</div><div class="titulo">Libro</div>' | pup (lo mismo de otro ejemplo)
+$ echo '<ul><li>Primero</li><li>Segundo</li><li>Tercero</li></ul>' | pup (lo mismo)
+$ curl -s URL | pup 'text{}' (extraer texto de una URL)
+$ curl -s URL | pup 'json{}' (muestra el json estructurado)
+
+
 pureline
 Utilidad escrita en bash que muestra de una manera distinta el prompt de la shell.
 Instalación:
@@ -51701,9 +51722,14 @@ Para cambiar el nivel de ejecución predeterminado del sistema, que con sysvinit
 4.-
 Para acelerar el proceso de inicio y finalización:
 # /etc/systemd/system.conf
-Y descomentar y modificar las lineas siguientes de 90 segundos a 10:
+Y descomentar y modificar las lineas siguientes a 10 segundos:
 	DefaultTimeoutStartSec=10s
 	DefaultTimeoutStopSec=10s
+5.-
+Activar el almacenamiento del sistema
+# nano /etc/systemd/journald.conf
+[Journal]
+Storage=auto
 
 
 systemd
