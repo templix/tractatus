@@ -46764,6 +46764,31 @@ $ curl -s URL | pup 'text{}' (extraer texto de una URL)
 $ curl -s URL | pup 'json{}' (muestra el json estructurado)
 
 
+pure-ftpd
+Servidor FTP [File Transfer Protocol]. Sus características incluyen directorios principales con chroot, dominios virtuales, 'ls' integrado, sistema anti-warez, puertos configurables para descargas pasivas, protocolo FXP, limitación de ancho de banda, ratios, archivos fortune, archivos de registro similares a Apache, modo autónomo rápido, cargas atómicas, informes de estado en tiempo real de texto/HTML/XML, usuarios virtuales, cuotas virtuales, separación de privilegios, SSL/TLS y más. Incluye los ejecutables pure-pw, pure-pwconvert, pure-statsdecode, pure-authd, pure-certd, pure-ftpd, pure-ftpd-virtualchroot, pure-ftpwho, pure-mrtginfo, pure-quotacheck y pure-uploadscript.
+# systemctl start pure-ftpd (inicia el servicio)
+# systemctl enable pure-ftpd (habilita el inicio automático)
+El sistema de configuración es modular en el directorio /etc/pure-ftpd/conf/. Cada archivo en este directorio corresponde a una opción de línea de comandos [switch]. Para configurar una opción, se crea un archivo con el nombre de la opción, en mayúsculas la primera letra y se escribe el valor dentro: yes, no, 1...:
+$ echo "yes" > /etc/pure-ftpd/conf/ChrootEveryone (usuarios a su directorio home)
+$ echo "1" > /etc/pure-ftpd/conf/TLS (habilitar TLS)
+$ echo "20000 20099" > /etc/pure-ftpd/conf/PassivePortRange (habilitar puertos 20000-20099 para descargas pasivas)
+$ echo "yes" > /etc/pure-ftpd/conf/NoAnonymous (prohibir accesos anónimos)
+$ echo "clf:/var/log/pure-ftpd/transfer.log" > /etc/pure-ftpd/conf/AltLog (configurar los logs)
+$ echo "5000:8" > /etc/pure-ftpd/conf/LimitRecursion (máx. 5000 archivos, profundidad 8)
+$ echo "yes" > /etc/pure-ftpd/conf/AllowUserFXP (permite transferencias directas entre servidores FTP sin pasar por el cliente)
+$ echo "50:100" > /etc/pure-ftpd/conf/UserBandwidth (limitación de ancho de banda)
+$ echo "yes" > /etc/pure-ftpd/conf/AntiWarez (previene el intercambio ilegal en directorios públicos)
+$ echo "40110 40210" > /etc/pure-ftpd/conf/PassivePortRange (restringe el rango de puertos para conexiones pasivas)
+Nota.- Abrir los puertos en el firewall [ufw: sudo ufw allow 40110:40210/tcp].
+$ pure-ftpwho -v (muestra usuarios conectados, ancho de banda usado, etc.)
+# pure-pw mkdb (actualiza la base de datos /etc/pure-ftpd/pureftpd.pdb)
+1.-
+Creación de usuarios virtuales que no requieren cuentas de sistema
+# groupadd ftpgroup (crear grupo del sistema base)
+# useradd -g ftpgroup -d /dev/null -s /bin/false ftpuser (crear usuario)
+# pure-pw useradd usuario1 -u ftpuser -g ftpgroup -d /var/ftp/usuario1 -m (añade usuario virtual, crea directorio si no existe y -m actualiza la DB)
+
+
 pureline
 Utilidad escrita en bash que muestra de una manera distinta el prompt de la shell.
 Instalación:
