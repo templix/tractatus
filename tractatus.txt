@@ -46823,6 +46823,13 @@ Moverse al directorio especificado, como con cd, pero el directorio anterior se 
 [/usr/share/apache2/icons]$ dirs (nos informa de la pila de directorios en cada momento)
 
 
+put-dns
+proporciona una interfaz CLI para crear registros DNS externos en varios proveedores externos, ocultando los detalles del acceso. Su objetivo es proporcionar a los paquetes una interfaz sencilla, basada en el formato de registro RFC1034, para crear las entradas DNS necesarias para su correcto funcionamiento.
+# put-dns "mail.example.com IN A 10.9.8.7" (Crear un registro de dirección DNS para mail.example.com, apuntando a la dirección IP 10.9.8.7)
+# put-dns google.com
+Los resultados se crean en /var/lib/put-dns/pending.txt.
+
+
 pv
 Visualizar el progreso de un proceso.
 $ echo "Este texto se escribirá letra a letra hasta terminar con toda la frase" |  pv -qL 10 (Escribir un texto letra a letra)
