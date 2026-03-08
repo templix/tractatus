@@ -46930,6 +46930,36 @@ opciones:
 	-s     (totalmente aleatoria)
 
 
+pwget
+Aplicación similar a wget, pero puede usar archivos de configuración categorizados, analizar páginas web y buscar enlaces de descarga según las instrucciones. En lugar de enlaces absolutos, utiliza heurística para rastrear versiones más recientes de los archivos.
+$ pwget http://www.example.com/dir/package.tar.gz (descarga el fichero indicado al directorio actual)
+$ pwget --chdir "$HOME/descargas" http://www.example.com/dir/package.tar.gz (cambia al directorio descargas antes de la descarga)
+$ pwget --verbose --overwrite http://www.example.com/dir/package.tar.gz (sobrescribir si ya existe la descarga y modo verbose)
+$ pwget --stdout http://www.debian.org/index.html (volcar salida por pantalla)
+$ pwget --new --overwrite --verbose http://www.example.com/kit-1.00.tar.gz (aunque se pase kit-1.00.tar.gz, si en el servidor está kit-3.08.tar.gz, descargará la 3.08)
+$ pwget --regexp gz http://example.com/mailing-list/archive/download/ (descargar todos los ficheros de un archivo de listas de correo cuyo nombre contenga “gz”)
+$ pwget --new --overwrite --verbose https://cdimage.debian.org/debian-cd/current-live/amd64/iso-hybrid/debian-live-13.0.0-amd64-lxqt.iso (descargar la última iso sin archivo de configuración)
+El soporte HTTPS requiere el módulo Perl Crypt::SSLeay o equivalente para evitar la salida: "Can't locate Crypt/SSLeay.pm in @INC..." Normalmente se soluciona instalando:
+# apt install libcrypt-ssleay-perl libio-socket-ssl-perl liblwp-protocol-https-perl
+1.-
+Ejemplo de configuración típica simplificada:
+$ nano ~/.conf/pwget/pwget.conf
+       ROOT  = $HOME
+       ISOS  = $ROOT/isos
+       #
+       tag1: debian
+       tag2: netinst
+       lcd: $ISOS
+       #
+       # URL esqueleto para netinst amd64 estable; "new:" buscará la última 13.x.x
+       https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/debian-13.0.0-amd64-netinst.iso new:
+$ export PWGET_CFG="$HOME/.config/pwget/pwget.conf"
+Con este archivo de configuración se puede lanzar el comando:
+$ mkdir ~/isos
+$ pwget --tag debian --tag netinst --new --overwrite --verbose
+Para descargar siempre la última netinst amd64 estable que haya en ese directorio y guardarla por la instrucción lcd en ~/isos.
+
+
 pwman3
 Interfaz para la gestión de contraseñas. Le permite almacenar su contraseña en una base de datos sqlite bloqueada por una contraseña maestra.
 Algunas opciones a modificar o incorporar en el archivo de configuración:
