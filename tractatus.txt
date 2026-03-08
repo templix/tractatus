@@ -46856,6 +46856,46 @@ $ pvesh create /access/users -userid usuario@pve (Crear usuario)
 $ pvesh delete /access/users/usuario@pve (Eliminar usuario)
 
 
+pvrg-jpeg
+[Portable Video Research Group]. Es la implementación alternativa del estándar JPEG desarrollada por el PVRG de Stanford University. Es una implementación histórica del codec JPEG que coexistió con la más conocida libjpeg, del Independent JPEG Group. La principal diferencia es que PVRG-JPEG fue diseñada para investigación y experimentación, mientras que libjpeg, usada por cjpeg/djpeg, estaba orientada a uso en producción.
+$ pvrg-jpeg -iw 128 -ih 128 -hf 2 image.Y image.U image.V -s image.jpg (comprimir archivos Y, U, V. los componentes de luminancia y crominancia separados en un JPEG creando una imágen de 128x128 pixels con submostreo horizontal de 2 y la salida en image.jpg)
+$ pvrg-jpeg -d -s image.jpg (decodificar un JPEG a componentes YUV separados: image.jpg.1 [Y], image.jpg.2 [U] e image.jpg.3 [V])
+
+
+pwauth
+Programa diseñado para ser utilizado con módulos de autenticación externa como mod_auth_external o mod_authnz_external en el servidor web Apache. Su propósito principal es permitir la autenticación web utilizando la base de datos de contraseñas del sistema.lee el nombre de usuario y la contraseña desde la entrada estándar [stdin] y verifica si la combinación de usuario y contraseña es válida en la base de datos de contraseñas del sistema. Si la autenticación es exitosa, pwauth devuelve un código de salida de 0, indicando que la autenticación fue exitosa. De lo contrario, devuelve un código de salida distinto de cero, indicando un fallo en la autenticación.
+1.-
+script CGI que necesita autenticar a un usuario:
+$ nano auth.sh
+       #!/bin/bash
+       #
+       # Leer el nombre de usuario y la contraseña desde el formulario
+       read username
+       read password
+       #
+       # Ejecutar pwauth con la combinación de usuario y contraseña
+       echo -e "$username\n$password" | /usr/sbin/pwauth
+       #
+       # Verificar el código de salida de pwauth
+       if [ $? -eq 0 ]; then
+           echo "Authentication successful"
+       else
+	   echo "Authentication failed"
+       fi
+2.-
+Integración con Apache
+Primero se debe instalar y configurar los módulos mod_auth_external o mod_authnz_external. A continuación, configurar Apache para utilizar pwauth como el programa de autenticación externa.
+# nano /etc/apache2/apache2.conf
+       <Directory "/var/www/html/protected">
+           AuthType Basic
+   	   AuthName "Restricted Area"
+    	   AuthBasicProvider external
+    	   AuthExternal pwauth
+    	   Require valid-user
+       </Directory>
+En esta configuración, se protege el directorio /var/www/html/protected y se requiere autenticación básica.
+
+
 pwck
 Verifica la integridad de los archivos de claves [/etc/passwd y /etc/shadow].
 # pwck (Salida vacia significa todo correcto)
