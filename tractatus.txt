@@ -46911,6 +46911,17 @@ pwd
 Mostrar el directorio actual.
 
 
+pwdsphinx
+[Store that Perfectly Hides from Itself No Xaggeration]. SPHINX usa un protocolo criptográfico llamado OPRF [Oblivious Pseudo-Random Function] de almacenamiento de contraseñas seguro desde el punto de vista de la información con sólidas garantías de seguridad. El servidor almacena la información, pero es matemáticamente imposible que sepa cuáles son las contraseñas, ni aunque sea comprometido. Se necesita tanto el PIN/contraseña local como la respuesta del servidor para obtener la contraseña final. Ninguno de los dos por separado sirve.
+$ sphinxd (iniciar el demonio para levantar el servidor)
+$ sphinx create usuario@gmail.com gmail (crear una contraseña para un sitio y generará y almacenará de forma opaca una contraseña fuerte para Gmail)
+$ sphinx get usuario@gmail.com gmail (obtener/recuperar una contraseña)
+$ sphinx change usuario@gmail.com gmail (cambiar/rotar una contraseña manteniendo el mismo PIN)
+$ sphinx delete usuario@gmail.com gmail (eliminar una entrada)
+$ sphinx list gmail (listar sitios almacenados)
+$ sphinx create -u -l -d -s -c 16 usuario@banco.com banco (especificar contraseña de 16 caracteres, mayúsculas, nimúsculas, dígitos y simbolos)
+
+
 pwdx
 Informa del directorio actual de uno o varios procesos.
 $ pwdx pid pid pid
