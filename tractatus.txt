@@ -57369,6 +57369,58 @@ El acceso se realiza colocando en la barra de direcciones del navegador:
 Para el acceso externo es preciso redireccionar en el router el puerto al pc correspondiente.
 
 
+yadm
+Herramienta que gestiona dotfiles usando Git pero sin tener que moverlos del $HOME.
+$ yadm init (crea el repositorio en ~/.local/share/yadm/repo.git pero los archivos siguen en su sitio original)
+Una vez inicializado, añadir dotfiles:
+$ yadm add ~/.bashrc
+$ yadm add ~/.emacs.d/init.el
+$ yadm add ~/.config/kitty/kitty.conf
+Y realizar el commit:
+$ yadm commit -m "dotfiles iniciales"
+Y usarlo como Git
+$ yadm status
+$ yadm log
+Opcionalmente puede subirse a GitHub
+$ yadm remote add origin git@github.com:usuario/dotfiles.git (añadir un remoto)
+$ yadm push -u origin master (subirlo con push)
+$ yadm clone git@github.com:usuario/dotfiles.git (instalar dotfiles en otra máquina con un sistema nuevo y automaticamente los coloca en su lugar en $HOME)
+$ yadm diff (evitar subir basura accidental logs, caché, etc.)
+$ yadm perms (restara permisos incorrectos tipo: WARNING: UNPROTECTED PRIVATE KEY FILE)
+Otras opciones del comando:
+$ yadm list -a (listar todos los dotfiles entrados. Sin -a solo lista los del presente directorio)
+$ yadm enter (abre una shell dentro del repo real)
+$ yadm config --list | grep yadm (listar toda la config de yadm)
+Nota.- Si algo no debe ir al repo colocarla en .config/yadm/ignore funciona como .gitignore.
+$ nano .config/yadm/ignore
+.config/yadm/age.key
+1.-
+Cifrar archivos sensibles
+$ nano .config/yadm/encrypt
+Agregar los archivos que se crea oportuno:
+~/.ssh/id_rsa
+~/.ssh/id_ed25519
+~/.config/api_keys
+$ yadm encrypt (informa que se han cifrado y escrito los nuevos archivos en /home/tux/.local/share/yadm/archive y si queremos agregarlo. Respondemos "y")
+$ yadm rev-parse --git-dir (ver donde está el repo realmente [~/.local/share/yadm/repo.git])
+2.-
+Cifrado moderno con age muy recomendable y que está reemplazando a GPG
+$ age-keygen -o ~/.config/yadm/age.key (crear clave)
+$ yadm config yadm.encrypt age (que yadm use age)
+$ yadm config yadm.age-recipient age1ayv9twr054t4ugv8rqrfe9d3syxytwhe77k5kln644glf33hnyaqkg7srg (registrar la clave pública)
+A partir de ahora yadm encrypt usará age automáticamente.
+$ yadm config --get yadm.encrypt (comprobar que yadm está usando age)
+$ yadm config --get yadm.age-recipient (comprobar la clave pública)
+3.-
+Ejecutar scripts automáticamente cuando pasa algo.
+$ nano ~/.config/yadm/hooks/post_pull
+#!/bin/sh
+echo "Dotfiles actualizados"
+Cada vez que se haga un
+$ yadm pull
+Se ejecutará el script post_pull.
+
+
 yafc
 Cliente ftp con soporte para conexiones ftp y ssh.
 $ yafc 67.33.83.15
