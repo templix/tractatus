@@ -46991,6 +46991,18 @@ pwman3> p 2 (mostrar los datos del número 2 del listado)
 pwman3> exit (salir)
 
 
+pwru
+Herramienta basada en eBPF [Extended Berkeley Packet Filter] para rastrear paquetes de red en el kernel de Linux. Esta herramienta ofrece funciones avanzadas de filtrado y proporciona una introspección detallada del estado del kernel, lo que facilita la depuración de problemas de conectividad de red. Se basa en una tecnología que permite ejecutar código personalizado de manera segura dentro del kernel de Linux sin modificar el kernel en sí. El archivo debugfs debe estar montado en /sys/kernel/debug.
+# pwru --output-meta --output-limit-lines 50 (captura 50 eventos de red con metadatos)
+# pwru --output-meta --output-limit-lines 100 'tcp and dst port 22' (añadir filtro pcap)
+# pwru --output-meta --output-limit-lines 100 --filter-proto tcp --filter-ifname wlan0 'dst port 22' (añadir filtro de protocolo)
+# pwru --output-tuple 'tcp and dst host 1.2.3.4 and dst port 80' (solo tráfico TCP hacia 1.2.3.4:80)
+# pwru --output-tuple 'tcp and dst host example.org and (dst port 80 or dst port 443)' (ver qué pasa con un curl a example.org)
+# pwru --output-tuple --filter-proto tcp --output-limit-lines 200 'dst host 203.0.113.10 and dst port 443' (ver solo TCP 443 hacia 203.0.113.10, máximo 200 eventos)
+# pwru --filter-func '^tcp_v4_rcv$' --output-meta --output-limit-lines 50 (seguir solo llamadas a tcp_v4_rcv)
+# pwru --all-kmods --output-limit-lines 100 (engancha a todos los módulos y solo muestra 100 líneas)
+
+
 pwscore
 [libpwquality-tools]. Herramienta para verificar la calidad de una contraseña.
 $ pwscore (pulsar intro y entrar la contraseña. El valor va de 0 a 100. Superior a 50 se considera fuerte.)
