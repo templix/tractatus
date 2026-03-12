@@ -15414,6 +15414,33 @@ Suprimir el error:
 warning: desktop file appears to be in use by PID XXXX.
 Using it may cause conflicts. Use it anyway? (y or n)
 $ mr ~/.emacs.d/.emacs.desktop.lock
+36.-
+Gestionar el archivo de configuración de emacs con init.org
+$ cp ~/.emacs.d/init.el ~/.emacs.d/init.el.backup (copia de seguridad)
+Puede estarse dentro de emacs. Crear un archivo init.org tal como se indica:
+$ nano ~/.emacs.d/init.org
+       #+TITLE: Configuración de Emacs
+       #+PROPERTY: header-args :tangle init.el
+       #+begin_src emacs-lisp
+       todas las lineas del antiguo init.el
+       #+end_src
+$ rm ~/emacs.d/init.el (suprimir init.el)
+Salir de emacs y volver a entrar.
+$ emacs
+Sin init.el se abre con el bufer scratch, abrir el init.org (C-x C-f .emacs.d/init.org) y una vez abierto
+M-x org-babel-tangle (muestra el mensage "tangled 1 code block from init.org")
+Si se mira el directorio .emacs.d/ ha aparecido el init.el generado. Se sale de emacs y se vuelve a entrar. Puede ser que la primera vez se muestre las lineas:
+      The local variables list in emacs-org-doc-system
+      or .dir-locals.el contains values that may not be safe (*).
+      Do you want to apply it?  You can type
+      y  -- to apply the local variables list.
+      n  -- to ignore the local variables list.
+      !  -- to apply the local variables list, and permanently mark these
+            values (*) as safe (in the future, they will be set automatically.)
+      i  -- to ignore the local variables list, and permanently mark these
+      values (*) as ignored
+        * eval : (add-hook 'after-save-hook (lambda nil (org-babel-tangle)) nil t)
+Pulsar "!" para aplicar la lista de variables locales y marcar permanentemente estos valores como seguros. Cada vez que se modifique la configuración en init.org se tendrá que hacer el proceso descrito para que se actualice init.el.
 
 
 emacs25-common-non-dfsg
