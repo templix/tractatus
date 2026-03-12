@@ -29728,6 +29728,27 @@ $ less archivo.rar (mostrará caracteres raros)
 Después de actualizar .bashrc mostrará el contenido del archivo.
 
 
+lesspass
+Gestor de contraseñas sin estado
+$ lesspass gmail login maestro -luds -d -L10 -c (con minúsculas, mayúsculas, dígitos y simbolos con una longitud de 10 caracteres y que se copie en el portapapeles)
+$ lesspass -p (va pidiendo los datos de forma interactiva)
+$ lesspass local tux maestro -L12 (contraseña de 12 caracteres)
+$ lesspass local tux maestro -L12 --counter 2 (al aumentar el counter generará distinta contraseña con los mismos datos)
+$ lesspass --logout (suprimir el archivo /home/tux/.config/lesspass/config.json de contraseñas)
+$ lesspass github tux master -luds -L10 --exclude "[]()|" (de 10 caracteres y que excluya los caracteres entre comillas)
+El proceso para usar este comando que no es muy seguro es el siguiente: Imaginemos que queremos poner 3 contraseñas a 3 correos electrónicos de gmail de 13 caracteres
+$ lesspass joseantonio@gmail.com jose pAssw0Rt -L13
+p%x\IT5e^7KoG
+$ lesspass josant@gmail.com jose pAssw0Rt -L13
+pcYV.Y5&q:yLh
+$ lesspass jantonio@gmail.com jose pAssw0Rt -L13
+_XM'ESW5QXx%_
+Siempre que lancemos el mismo comando mostrará la misma contraseña
+$ lesspass josant@gmail.com jose pAssw0Rt -L13
+pcYV.Y5&q:yLh
+Por tanto cualquiera que pueda acceder a nuestro historial puede descubrirla.
+
+
 lesspipe
 Exactamente igual que lessfile [ver]
 
