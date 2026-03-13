@@ -20350,6 +20350,13 @@ Traduce las reglas de Snort en reglas de iptables equivalentes y genera un scrip
 # fwsnort --ipt-sync --verbose (Generar reglas de iptables para Snort que estan permitidas por la política local de iptables y escribir las de snort originales en el script de iptables como comentario)
 
 
+fwudp-test
+Conjunto de pruebas instaladas que se pueden ejecutar para validar el demonio en un sistema de integración continua. Las pruebas estan en el directorio /usr/libexec/installed-tests/fwupd.
+$ /usr/libexec/installed-tests/fwupd/logitech-hidpp-self-test (ejemplos de ejecución de test, si sale positivo muestra "ok")
+$ /usr/libexec/installed-tests/fwupd/linux-swap-self-test
+$ /usr/libexec/installed-tests/fwupd/acpi-facp-self-test
+
+
 fwupd
 Demonio que permite que el software de sesión actualice el firmware del dispositivo.
 # fwupdmgr get-devices (mostrar todos los dispositivos detectados)
@@ -20357,7 +20364,6 @@ Demonio que permite que el software de sesión actualice el firmware del disposi
 # fwupdmgr get-updates (enumerar las actualizaciones disponibles para cualquier dispositivo en el sistema)
 # fwupdmgr update (instalar actualizaciones)
 # fwupdmgr report-history (enviar información a los administradores de LVFS y a los desarrolladores OEM sobre la eficacia del proceso de actualización del firmware)
-fwupd-test
 
 
 fyi
