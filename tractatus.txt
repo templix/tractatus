@@ -47116,6 +47116,21 @@ tftp> quit
 Si los comandos "get" se ejecutan sin errores como "File not found", significa que el servidor TFTP está sirviendo esos archivos correctamente y se descargarán al directorio desde el que se ejecuta tftp.
 
 
+pxfw
+Utilidad específica y bastante antigua, diseñada exclusivamente para actualizar el firmware de unidades ópticas [CD/DVD/Blu-ray] de la marca Plextor.
+# pxfw -l (confirmar que la herramienta ve la grabadora)
+# pxfw -f ~/descargas/px716a_1.05.bin (actualizar el firmware descargado y pedirá confirmación antes de escribir)
+# pxfw -d /dev/sr0 -f px716a_1.05.bin (con varias unidades ópticas, asegurar de usar la correcta)
+Notas.- Actualizar el firmware de una unidad óptica es riesgoso. Si se corta la luz o el proceso falla, la unidad puede quedar inservible permanentemente. Los servidores oficiales de Plextor para descargar firmware ya no existen. Se debe encontrar el archivo .bin o .fls en archivos de internet [archive.org, etc.], lo cual conlleva riesgos de seguridad.
+
+
+pxlib1
+Biblioteca para leer y escribir archivos de bases de datos de Paradox [.db], un formato de base de datos muy popular en los años 90.
+$ pxview clientes.db (volcar los datos de un archivo .db a la pantalla)
+$ pxview --sql clientes.db > clientes.sql (pasar datos viejos a una base de datos moderna como MySQL o PostgreSQL)
+$ pxview --info clientes.db (saber qué columnas tiene la tabla y de qué tipo son)
+
+
 py-cpuinfo
 Script de Python para obtener información de la CPU
 $ py-cpuinfo
