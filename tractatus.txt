@@ -56474,10 +56474,24 @@ $ wnpp-check paquete
 
 
 wodim
-Grabación de cds i dvds
+Grabación de cds i dvds. Incluye los ejecutables cdrecord y readom
 $ wodim -v -eject dev=/dev/cdrw -data imagen.iso  (Grabar una iso)
 $ wodim -v -eject dev=/dev/dvd -data imagen.iso  (Grabar imagen en un DVD)
 $ wodim -v -eject blank=fast dev=/dev/cdrw  (Borrar un CD)
+$ wodim --devices (ver dispositivos disponibles))
+$ cdrecord --devices (lo mismo)
+$ cdrecord -checkdrive dev=/dev/sr0 ()información de un grabador)
+$ cdrecord -v dev=/dev/sr0 speed=8 archivo.iso (grabar una imagen ISO en un CD/DVD)
+$ cdrecord -v -dao dev=/dev/sr0 archivo.iso (grabar con opción de finalizar el disco. Recomendado para ISOs arrancables)
+$ cdrecord -v dev=/dev/sr0 blank=fast (borrar un CD-RW)
+$ cdrecord -v dev=/dev/sr0 blank=all (borrado completo)
+$ cdrecord -v -audio dev=/dev/sr0 cancion1.wav cancion2.wav cancion3.wav (grabar múltiples archivos de audio)
+$ cdrecord -v -dummy dev=/dev/sr0 archivo.iso (simular la grabación sin escribir nada)
+$ readom dev=/dev/sr0 f=copia.iso (crear una imagen ISO a partir de un CD/DVD)
+$ readom dev=0,0,0 f=copia.iso (especificar el dispositivo con sintaxis SCSI)
+$ readom dev=/dev/sr0 sectors=0-300 f=parcial.iso (leer solo un rango de sectores)
+$ readom dev=/dev/sr0 -c2scan (verificar la lectura del disco sin guardar y detectar errores de lectura C2, útil para saber si el disco está dañado)
+$ readom dev=/dev/sr0 f=- | wodim -v dev=/dev/sr1 - (clonar un disco directamente a otro)
 
 
 wondershaper
