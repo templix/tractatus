@@ -47068,6 +47068,54 @@ Hace invisible el archivo /etc/shadow que previamente se había hecho visible co
 # pwunconv
 
 
+pxelinux
+Cargador de arranque para arranque de red PXE. pxelinux no se ejecuta como un comando común en la terminal para obtener un resultado inmediato, sino que se configura para servir menús de arranque en un PC con soporte PXE en la BIOS/UEFI. Un servidor TFTP [Trivial File Transfer Protocol] es una aplicación ligera y simple utilizada en redes locales para transferir archivos pequeños, frecuentemente para actualizaciones de firmware, copias de seguridad de configuraciones de routers/switches y arranques de red (PXE). Utiliza el puerto UDP 69, no requiere autenticación y es mucho más rápido y sencillo que FTP.
+Configuración de un menú de arranque básico en un servidor TFTP con las opciones que verá el usuario al encender la PC por red:
+$ nano /srv/tftp/pxelinux.cfg/default
+DEFAULT vesamenu.c32
+PROMPT 0
+TIMEOUT 600
+MENU TITLE Menu de Instalacion Debian 12 (Bookworm)
+MENU BACKGROUND splash.png
+MENU COLOR title 1;37;44 #ffffffff #00000000 std
+# --- Opcion 1: Instalacion Estandar ---
+LABEL install
+    MENU LABEL ^Instalar Debian (Grafico)
+    KERNEL debian-installer/amd64/linux
+    APPEND vga=788 initrd=debian-installer/amd64/initrd.gz --- quiet
+# --- Opcion 2: Instalacion Experta ---
+LABEL expert
+    MENU LABEL ^Instalacion Experta (Texto)
+    KERNEL debian-installer/amd64/linux
+    APPEND priority=low initrd=debian-installer/amd64/initrd.gz ---
+# --- Opcion 3: Instalacion Automatizada (Preseed) ---
+LABEL auto
+    MENU LABEL ^Instalacion Automatizada (Preseed)
+    KERNEL debian-installer/amd64/linux
+    APPEND auto=true priority=critical vga=788 initrd=debian-installer/amd64/initrd.gz preseed/url=http://192.168.1.10/preseed.cfg ---
+# --- Opcion 4: Modo Rescate ---
+LABEL rescue
+    MENU LABEL ^Modo de Rescate
+    KERNEL debian-installer/amd64/linux
+    APPEND vga=788 initrd=debian-installer/amd64/initrd.gz rescue/enable=true ---
+Nota.- El kernel y el initrd deben estar en las rutas puestas en el archivo default. Por ejemplo, para la opción de instalación estándar, el kernel debe estar en /srv/tftp/debian-installer/amd64/linux y el initrd en /srv/tftp/debian-installer/amd64/initrd.gz.
+$ sudo find / -name "vesamenu.c32" 2>/dev/null (averiguar donde se encuentra cada módulo)
+$ sudo cp /usr/lib/PXELINUX/pxelinux.0 /srv/tftp/ (copiar cada módulo al directorio del servidor TFTP)
+$ sudo cp ~/images/imagen.png /srv/tftp (copiar un imagen 640x480 al servidor para usar como fondo del menú)
+1.-
+Probar la Conexión TFTP Localmente
+$ tftp 127.0.0.1 (conectar al servidor local)
+tftp> status (muestra el estado de la conexión)
+tftp> get pxelinux.0 (descargar los módulos)
+tftp> get vesamenu.c32
+tftp> get ldlinux.c32
+tftp> get libcom32.c32
+tftp> get libutil.c32
+tftp> get pxelinux.cfg/default
+tftp> quit
+Si los comandos "get" se ejecutan sin errores como "File not found", significa que el servidor TFTP está sirviendo esos archivos correctamente y se descargarán al directorio desde el que se ejecuta tftp.
+
+
 pydf
 Muestra información sobre todos los sistemas de archivos montados de forma coloreada.
 $ pydf -a (Incluye los sistemas que contengan 0 bloques)
