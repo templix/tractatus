@@ -47223,6 +47223,16 @@ Herramienta para leer archivos de registro capaz de manejar archivos de registro
 # pygtail /var/log/syslog
 
 
+pyhoca-cli
+Proporciona un cliente sencillo y flexible, escrito en Python, que permite controlar las sesiones del servidor X2Go en ordenadores de escritorio y clientes ligeros. X2Go es un software de código abierto para escritorios remotos en Linux que utiliza el protocolo NX Technology.
+$ pyhoca-cli --server myserver.local -N -c GNOME --user USER --add-to-known-hosts (iniciar una sesión X2go para un usuario remoto en el servidor X2go myserver.local)
+$ pyhoca-cli --session-profile MyProfile (sesión en el archivo sessions de x2goclient llamado MyProfile)
+$ pyhoca-cli --server myserver.local --list-desktops --user USER --add-to-known-hosts (compartir una sesión de escritorio X2Go local o remota ya en ejecución del usuario USER en el servidor X2Go myserver.local)
+$ pyhoca-cli --server myserver.local --list-desktops (mostrará una lista de sesiones de escritorio disponibles/compartibles)
+$ pyhoca-cli --server myserver.local --share-desktop USER@:0 --user USER --add-to-known-hosts (Para ver la sesión de escritorio local de USER USER@:0)
+$ pyhoca-cli --server myserver.local --share-desktop USER@:0 --share-mode 1 --user USER --add-to-known-hosts (acceder al escritorio local de USER en modo de acceso lectura y escritura)
+
+
 pyhtmlizer
 Generar un documento HTML con las fuentes de un archivo en Python. Para colorear se ha de proporcionar una hoja de estilo.
 $ pyhtmlizer archivo.py (Crea un html archivo.py.html que se ùede visualizar en el navegador)
