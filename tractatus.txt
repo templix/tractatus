@@ -9408,6 +9408,11 @@ Para recibir un archivo eEn el sistema B, también se necesita estar en cu y se 
 sistema B> receive archivo.txt
 
 
+cue2toc
+Convierte archivos CUE usados para describir la estructura de un CD de audio, al formato TOC [Table Of Contents] que puede ser leido por programos como cdrdao o cdrecord, los dos programas de grabación de CD para sistemas Linux.
+$ cue2toc -d -o archivo.toc archivo.cue (mostrando información y guardando el resultado en archivo.toc)
+
+
 cuetools
 Herramientas para manipular archivos CUE/TOC. Estos archivos contienen información sobre la disposición de pistas en un CD, incluyendo tiempos de inicio, títulos, intérpretes, etc. Los archivos CUE y TOC son una forma de representar el diseño de un CD de datos o audio en un formato ASCII. El paquete incluye estas utilidades: cueconvert [convierte entre formatos CUE y TOC], cuebreakpoints [imprime los puntos de interrupción de un archivo CUE o TOC],
 cueprint [imprime información de pista y disco para un archivo CUE o TOC] y cuetag [etiqueta archivos según la información del archivo CUE/TOC]
