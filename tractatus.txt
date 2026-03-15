@@ -54840,6 +54840,22 @@ $ uuiparse -J UUID (Utilizar el formato de salida JSON)
 $ uuiparse -r UUID (Utilizar el formato de salida raw)
 
 
+uuu
+[Universal Update Utility]. Herramienta oficial de NXP, antes Freescale, para cargar firmware y grabar imágenes en procesadores i.MX a través de USB, principalmente en modo Serial Download Protocol [SDP] o Fastboot.
+# uuu u-boot.imx (cargar U-Boot en RAM para pruebas rápidas)
+# uuu flash.bin (lo mismo)
+# uuu -b emmc u-boot-imx8mp-evk.bin-flash_singleboot (grabar U-Boot en eMMC)
+# uuu -b emmc_all flash.bin fsl-image-validation-imx-imx8mp-evk.sdcard (grabar imagen completa .sdcard en eMMC)
+# uuu -b emmc_all flash.bin fsl-image-validation-imx-imx8mp-evk.sdcard.bz2/* (lo mismo pero con imagen comprimida)
+# uuu -b sd_all flash.bin image.sdcard (grabar en tarjeta SD)
+# uuu -b qspi flash.bin-flash_ddr4_evk_flexspi (grabar en QSPI/NOR flash)
+# uuu -b qspi_all flash.bin-flash_ddr4_evk_flexspi image.bin (lo mismo)
+# uuu imx-boot-imx8mn-evk-sd.bin-flash_singleboot (cargar solo el bootloader para entrar en fastboot/uuu)
+# uuu -b emmc_all imx-boot-imx8mnddr4evk-fspi.bin-flash_ddr4_evk_flexspi fsl-image-gui-imx8mnddr4evk.sdcard (flashear imagen Yocto completa en eMMC)
+# uuu -b emmc_all imx-boot-imx8mp-evk-sd.bin-flash_singleboot imx8mp-evk-scmi.dtb Image core-image-base-imx8mp-evk.rootfs.tar.bz2 (lo mismo)
+# uuu LF6.6.3_1.0.0-mx8mp.zip (lo mismo con un paquete .zip oficial de NXP)
+
+
 uz
 extrae un archivo tar comprimido con gzip. No es estrictamente necesario porque el programa tar [ver] proporciona la misma capacidad.
 $ uz archivo.tar
