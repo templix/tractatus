@@ -47167,6 +47167,51 @@ $ pydoc dbhash (información sobre el comando dbhash de python)
 $ pydoc -w sha (crea el archivo sha.html para abrirlo con el navegador y modstrar la información sobre el módulo)
 
 
+pyenv
+Herramienta para gestionar múltiples versiones de Python en un mismo sistema.
+$ pyenv install --list (ver las versiones de Python que se puede instalar)
+$ pyenv install 3.8.10 (instalar una versión específica de Python)
+$ pyenv global 3.8.10 (establecer una versión de Python como la versión global en elu sistema)
+$ pyenv local 3.8.10 (estando en el directorio del proyecto, establecer una versión local)
+$ pyenv versions (ver las versiones de Python que se tiene instaladas)
+$ pyenv shell 3.8.10 (cambiar la versión de Python temporalmente)
+$ pyenv uninstall 3.8.10 (desinstalar una versión de Python que ya no se necesita)
+$ python --version (verificar la versión correcta de Python en el directorio del proyecto)
+1.-
+Crear un entorno virtual
+$ pyenv virtualenv 3.8.10 mi_entorno
+$ pyenv activate mi_entorno
+Desactivar el entorno virtual cuando se termina
+$ pyenv deactivate
+
+
+pyflakes3
+Programa para analizar código Python y detectar diversos errores. Funciona analizando el archivo fuente, sin importarlo y detecta solo errores lógicos reales como nombres no definidos, importaciones no utilizadas, variables no utilizadas, errores de sintaxis básicos, etc, evitando sugerencias de estilo o convenciones que puedan distraer.
+Ejemplo de Uso con varios errores intencionales
+$ nano ejemplo.py
+       import os
+       import sys  # Este módulo no se usará
+       #
+       def calcular_area(radio):
+           # 'pi' no está definido ni importado
+    	   return pi * radio ** 2
+       #
+       def proceso_datos():
+           dato = 10
+    	   # La variable 'resultado' se define pero nunca se usa
+    	   resultado = dato * 2
+       #
+           # 'x' no está definida
+    	   print(x)
+       #
+       # Redefinición de variable en el mismo ámbito
+       contador = 1
+       contador = 2  # Pyflakes puede advertir sobre redefiniciones inútiles en ciertos contextos
+$ pyflakes ejemplo.py (ejecutar el análisis estando en el directorio de ejemplo.py)
+$ pyflakes *.py (verificar todo un proyecto recursivamente)
+Nota.- Dependiendo de la shell, quizás precise activar "shopt -s globstar" en bash primero, o simplemente listar las carpetas: pyflakes src/ tests/.
+
+
 pygtail
 Herramienta para leer archivos de registro capaz de manejar archivos de registro que rotan.
 # pygtail /var/log/syslog
