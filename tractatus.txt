@@ -47295,6 +47295,16 @@ $ pyphoon (En el dia de hoy y con 30 lineas [por defecto])
 $ pyphoon -n 40 04-02-2917 (con 40 lineas y especificando la fecha)
 
 
+pypi2deb
+Convertir paquetes alojados en PyPI o GitHub a paquetes fuente de Debian. Proporciona las herramientas py2dsp que convierte paquetes de PyPI/GitHub a paquetes fuente de Debian y pypi2debian que convierte un repositorio completo de PyPI en un repositorio de Debian.
+$ pypi2debian --output-dir ./debian-repo (generará un repositorio Debian en el directorio especificado, listo para ser servido con herramientas como reprepro o aptly)
+$ py2dsp --github amatellanes/python-examples (descargará el repositorio, intentará detectar las dependencias y generará el paquete fuente en el directorio ./result/)
+Luego construir el paquete .deb con:
+$ cd ./result/python-examples-*
+$ dpkg-buildpackage -us -uc
+Nota.- El repositorio debe tener un archivo setup.py o pyproject.toml válido, ya que py2dsp usa esta información para generar los metadatos de Debian.
+
+
 pyradio
 [mplayer python-pip] Emisoras de radio por consola.Descarga, descomprimir e instalar:
 	$ wget https://github.com/coderholic/pyradio/archive/master.zip
