@@ -47244,6 +47244,35 @@ Obtener información de la CPU sin necesidad de dependencias o programas adicion
 $ py-pcuinfo
 
 
+pypass
+Gestor de contraseñas escrita en python que no usa bases de datos sinó directorios. No es una base de datos ni un archivo único. Todo se guarda en una carpeta normal en el sistema, por defecto ~/.password-store/ y cada contraseña es un archivo con extensión .gpg [encriptado con GPG] en este directorio que tambien se pueden organizar en subcarpetas.
+$ ls ~/.password-store/
+     .gpg-id correo banco documentos
+No necesita ningún demonio ni servidor y requiere inicializar el almacén con un ID de clave GPG antes de su uso. El proceso inicial es el siguiente:
+$ gpg --full-generate-key (crear una clave GPG solo en una ocasión)
+      ...
+      pub   rsa4096 2026-03-16 [SC]
+      157C1683B51FE4C312D...
+      ...
+$ pypass init 157C1683B51FE4C312D.. (inicializar el almacén solo la primera vez. La clave queda en el archivo .gpg-id del directorio)
+$ pypass init correo@ejemplo.com (tambien puede inicializarse con el email entrado en el comando anterior)
+$ pypass --PASSWORD_STORE_DIR ~/mi-almacen init correo@ejemplo.com (se puede cambiar el directorio caso de no desear el por defecto ~/.password-store)
+$ pypass insert correo/gmail (pide la contraseña dos veces y se guarda en ~/.password-store/correo/gmail.gpg)
+$ pypass show correo/gmail (ver una contraseña. Pide la clave GPG)
+$ pypass show -c netflix (copiar la contraseña al portapapeles sin mostrarla en pantalla. Suele borrarse después de 45 segundos por seguridad)
+$ pypass generate banco/santander 32 (generar una contraseña automáticamente de 32 caracteres aleatorios y la guarda)
+$ pypass ls (listar todo)
+$ pypass ls correo/ (listar solo lass entrada en el subdirectorio "correo")
+$ pypass find gmail (buscar un correo)
+$ pypass edit gmail (editar, por defecto $EDITOR)
+$ pypass cp correo/gmail correo/trabajo (copiar un correo)
+$ pypass mv correo/gmail correo/personal (mover)
+$ pypass rm banco/santander (eliminar un correo)
+$ pypass grep "miusuario" (buscar dentro de las contraseñas)
+$ pypass git init (sincronizar con git)
+$ pypass git push (después de configurar el remoto)
+
+
 pyphoon
 [python-dateutils] Muestra en ascii las fases de la luna. descarga: <https://github.com/chubin/pyphoon> . Acepta varios formatos de fecha (2017-02-01, 01/02/2017...)
 $ pyphoon (En el dia de hoy y con 30 lineas [por defecto])
