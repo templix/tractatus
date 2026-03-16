@@ -47244,6 +47244,22 @@ Utilidad para empaquetar una aplicación Python en un solo paquete. PyInstaller 
 $ pyinstaller script.py (en la carpeta del proyecto)
 
 
+pyp
+[Pyed Piper], Herramienta python para la manipulación de texto. Su funcionalidad es similar a la de awk y sed sin imitar su sintaxis y pensado para usar expresiones Python de forma muy directa dentro de tuberías [pipes].
+Ejemplo de la forma de proceder con pyp
+$ nano lista
+ana 23 Madrid
+luis 31 Barcelona
+maria 19 Valencia
+pedro 45 Sevilla
+$ cat lista | pyp 'pp[2]' 2>/dev/null (mostrar la linea 3. Las lineas empiezan por 0)
+$ cat lista | pyp 'p.split()[1]' 2>/dev/null (imprimir la segunda columna)
+$ cat lista | pyp 'p.upper()' 2>dev/null (pasar todo a mayúsculas)
+$ cat lista | pyp 'p.replace("Madrid", "Toledo")' 2>/dev/null (reemplazar Madrid por Toledo)
+$ cat lista | pyp 'p.rsplit(maxsplit=1)[-1]' (imprimir solo la última columna)
+$ cat lista | pyp 'pp.sort(key=lambda x: int(x.split()[1]))' 2>/dev/null (ordenar las líneas por edad)
+
+
 pypass
 Gestor de contraseñas escrita en python que no usa bases de datos sinó directorios. No es una base de datos ni un archivo único. Todo se guarda en una carpeta normal en el sistema, por defecto ~/.password-store/ y cada contraseña es un archivo con extensión .gpg [encriptado con GPG] en este directorio que tambien se pueden organizar en subcarpetas.
 $ ls ~/.password-store/
