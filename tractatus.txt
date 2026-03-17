@@ -47366,6 +47366,19 @@ Atajos:
 	Ctrl + AvPág (Cambia al siguiente búfer)
 
 
+pyspf-milter
+Milter completo escrito en python para la verificación SPF. Milter completo escrito en Python para la verificación SPF. Un milter es una aplicación que se integra con servidores de correo como Sendmail o Postfix para verificar la autenticidad de los remitentes mediante el protocolo Sender Policy Framework [SPF].
+# systemctl status pyspf-milter.service (comprobar si el servicio está activo)
+Ejemplo de configuración:
+# nano /etc/policyd-spf/policyd-spf.conf
+       spf_hosts = "example.com"
+       spf_check = "hard_fail"
+       spf_whitelist = "192.168.1.1/24"
+       spf_blacklist = "spammer.com"
+       spf_timeout = 5
+       spf_cache = 60
+
+
 python
 Lenguaje de programación
 $ python (abre la shell de python para introducir comandos)
