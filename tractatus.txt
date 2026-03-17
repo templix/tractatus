@@ -47312,6 +47312,13 @@ $ dpkg-buildpackage -us -uc
 Nota.- El repositorio debe tener un archivo setup.py o pyproject.toml válido, ya que py2dsp usa esta información para generar los metadatos de Debian.
 
 
+pyppd
+Herramienta que forma parte del sistema de impresión CUPS [Common Unix Printing System] en distribuciones de Linux. Su función principal es generar archivos PPD [PostScript Printer Description], que son archivos de configuración utilizados por CUPS para describir las capacidades y características de las impresoras PostScript.
+$ pyppd -i ~/archivo/configuracion -o ~/archivo/ppd/salida.ppd (generar un archivo PPD a partir de un archivo de configuración)
+$ pyppd -c ~/archivo/ppd/entrada.ppd -o ~/archivo/ppd/comprimido.ppd (comprimir un archivo PPD existente)
+$ pyppd -d /ruta/al/archivo/ppd/entrada.ppd -o /ruta/al/archivo/ppd/legible.txt (convertir un archivo PPD a formato txt)
+
+
 pyradio
 [mplayer python-pip] Emisoras de radio por consola.Descarga, descomprimir e instalar:
 	$ wget https://github.com/coderholic/pyradio/archive/master.zip
