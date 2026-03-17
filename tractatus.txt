@@ -47326,6 +47326,21 @@ Añadir una emisora:
 $ pyradio (Arrancar la aplicación)
 
 
+pyroman
+Herramienta de firewall escrita en Python para redes complejas, aunque también puede gestionar configuraciones sencillas de un solo host y un solo enlace.
+Ejemplo de configuración para "un solo host"
+# nano /etc/pyroman/interfaces
+       interface eth0 internet
+# nano /etc/pyroman/rules
+       # Permitir todo el tráfico de salida
+       out internet accept
+       # Permitir SSH y Web entrante (ejemplo)
+       in internet service ssh accept
+       in internet service http accept
+       # Bloquear todo lo demás (comportamiento por defecto)
+       in internet drop
+
+
 pyroom
 Editor minimalista.
 Atajos:
