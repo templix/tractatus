@@ -25959,6 +25959,13 @@ Se utiliza para crackear los sistemas de login de diferentes servicios como HTTP
 # hydra 192.168.1.8 ftp -s 21 -l juan -P wordlist.txt (Una ip el puerto 21 del usuario "juan" y probando las contraseñas de un archivo de texto a una por linea)
 
 
+hyfetch
+Script que muestra información sobre el sistema, como cantidad de paquetes instalados, versión del sistema operativo y del kernel, el tema GTK activo, información de la CPU y la memoria utilizada/disponible. Es una bifurcación de neofetch y añade los colores de la bandera del orgullo LGBTQ+ al logotipo del sistema operativo.
+$ hyfetch -m rgb -p queer (color rgb y estilo queer)
+$ hyfetch -m 8bit -p rainbow (8 bits de color y ajuste rainbow)
+Nota.- Listado de estilos con man hyfetch.
+
+
 hyperfine
 Herramienta para medir y comparar el tiempo de ejecución de comandos de shell [benchmarking] desarrollada en Rust y que ofrece las siguientes características: Análisis estadístico en múltiples ejecuciones, compatibilidad con comandos de shell arbitrarios, ejecuciones de calentamiento antes del benchmark real, se pueden configurar comandos de borrado de caché antes de cada ejecución temporal, detección estadística de valores atípicos para detectar interferencias de otros programas y efectos de caché y exportación de resultados a varios formatos: CSV, JSON, Markdown, ASCII.
 $ hyperfine 'sleep 1' (ejecuta el comando sleep 1 varias veces, por defecto, al menos 10 y muestra estadísticas del tiempo de ejecución)
