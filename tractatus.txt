@@ -47379,6 +47379,17 @@ Ejemplo de configuración:
        spf_cache = 60
 
 
+pyssim
+Herramienta que calcula la SSIM [Structural Similarity Image Metric] entre dos imágenes. El SSIM es un método para medir la similitud entre dos imágenes. A diferencia de métodos antiguos como el MSE [Error Cuadrático Medio], que simplemente calculan la diferencia matemática píxel por píxel, el SSIM intenta imitar la percepción visual humana.
+$ pyssim original.png comprimida.jpg (calculará el índice SSIM global entre ambas imágenes y lo mostrará en la terminal)
+El resultado es un valor único que oscila entre -1 y 1, cuanto más cerca de 1, mejor calidad tiene la imagen comprimida respecto a la original.
+   	  1  --> Las imágenes son idénticas estructuralmente.
+	  0  --> No hay correlación estructural.
+	  -1 --> Correlación inversa total, muy raro en imágenes naturales.
+$ pyssim -o mapa_similitud.png original.png comprimida.jpg (especifica el archivo de salida para el mapa visual)
+$ pyssim -w 7 original.png comprimida.jpg (usa una ventana que se mueve por la imagen de 7X7 píxels)
+
+
 python
 Lenguaje de programación
 $ python (abre la shell de python para introducir comandos)
