@@ -47390,6 +47390,27 @@ $ pyssim -o mapa_similitud.png original.png comprimida.jpg (especifica el archiv
 $ pyssim -w 7 original.png comprimida.jpg (usa una ventana que se mueve por la imagen de 7X7 píxels)
 
 
+pysubs2
+Herramienta diseñada para manipular archivos de subtítulos: convertir entre formatos, ajustar la sincronización, modificar texto, etc compatible con los formatos SubStation Alpha [.ass, .ssa], SubRip [.srt], MicroDVD [.sub], MPL2 [.txt], TMP [.txt], WebVTT [.vtt], y Whisper [OpenAI y .json de salida].
+$ pysubs2 --to ass subtitulos.srt -o subtitulos.ass (conversión de formatos de SRT a ASS)
+$ pysubs2 --to srt subtitulos.ass -o subtitulos.srt (de ASS a SRT)
+$ pysubs2 --to vtt subtitulos.srt -o subtitulos.vtt (de SRT a WebVTT para web)
+$ pysubs2 --shift 2s subtitulos.srt -o subtitulos_sync.srt (ajuste de sincronización [sync]. Adelantar 2 segundos [2000 ms])
+$ pysubs2 --shift -500ms subtitulos.srt -o subtitulos_sync.srt (retrasar 500 milisegundos)
+$ pysubs2 --shift 0:01:30.5 subtitulos.srt (adelantar especificando minutos:segundos:milisegundos)
+$ pysubs2 --shift 3s --shift-start 45m subtitulos.srt -o out.srt (adelantar 3s solo a partir del minuto 45)
+$ pysubs2 --shift -1s --shift-end 20m subtitulos.srt -o out.srt (retrasar 1s solo hasta el minuto 20)
+$ pysubs2 --fps 23.976 --to srt subtitulos_23fps.srt -o subtitulos_25fps.srt (con velocidad de subtítulos incorrecta por diferencia de fps entre versiones de un vídeo, cambiar de 23.976 fps a 25 fps)
+$ pysubs2 --scale 1.001042 subtitulos.srt -o out.srt (escalar manualmente con un factor)
+$ pysubs2 --from whisper subtitulos_whisper.json -o subtitulos.srt (convertir la salida JSON de Whisper a SRT)
+$ pysubs2 --from whisper subtitulos_whisper.json --to ass -o subtitulos.ass (o a ASS con estilo)
+$ pysubs2 --from whisper audio.json --to vtt -o audio.vtt (convertir transcripción de Whisper a subtítulos web)
+$ pysubs2 --input-enc utf-8 subtitulos.srt -o out.srt (especificar codificación de entrada útil para archivos con caracteres especiales)
+$ pysubs2 --output-enc latin-1 subtitulos.srt -o out_latin.srt (especificar codificación de salida)
+$ pysubs2 --input-enc auto subtitulos.srt -o out.srt (forzar codificación de detección automática)
+$ pysubs2 --scale 1.0005 capitulo.srt -o capitulo_sync.srt (sincronizar subtítulos de una serie que "se pilla" poco a poco y los primeros bien pero al final van retrasados)
+
+
 python
 Lenguaje de programación
 $ python (abre la shell de python para introducir comandos)
