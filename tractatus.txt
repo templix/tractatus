@@ -47475,6 +47475,13 @@ $ pyzor ping (generar y verificar un resumen sin usar un archivo completo)
 $ pyzor check < resumen (verificar un resumen específico donde "resumen" es un hash que se obtuvo previamente)
 
 
+qad
+demonio sencillo, compatible con REST-API que permite realizar pruebas automatizadas en hardware, eliminando la necesidad de intervención física, ya que Q.A.D. permite inyectar entradas mediante solicitudes HTTP/HTTPS. Esto elimina la necesidad de interactuar físicamente con el equipo y permite que las tareas se ejecuten de forma totalmente automática. El flujo es el siguiente: El Demonio [qad] se ejecuta en el equipo que controla el hardware a veces una Raspberry Pi conectada al equipo objetivo, expone una REST-API y recibe un POST o GET y emula eventos de entrada [HID] como teclado o ratón. Pongamos por caso un servidor remoto inactivo y se precisa entrar a la BIOS. No se puede usar SSH porque el sistema operativo ni siquiera ha cargado. Ahí es donde entra qad:
+$ curl -X POST http://<ip-del-dispositivo>:8080/keyboard/type -d '{"text": "admin\n"}' (que el equipo remoto escriba "admin" y pulse "Enter")
+$ curl -X POST http://<ip-del-dispositivo>:8080/keyboard/press -d '{"keys": ["ctrl", "alt", "del"]}' (reiniciar una máquina mediante el clásico "Ctrl+Alt+Del" sin tocar el botón de corriente)
+$ curl -X POST http://<ip-del-dispositivo>:8080/mouse/move -d '{"x": 500, "y": 300}' (probando una interfaz gráfica [GUI] y se precisa mover el cursor a una coordenada específica)
+
+
 qalc
 Calculadora de línea de comandos pequeña y sencilla de usar. Las operaciones se entran de la forma habitual (5*4, 9/3, 5+2...)
 $ qalc (entrar en la interfaz de forma básica)
