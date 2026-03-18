@@ -8765,7 +8765,15 @@ $ cp -f   (Borra el archivo de destino sin preguntar)
 $ cp -u  (copia sólo cuando el archivo de origen es más reciente que el archivo de destino o cuando el archivo destino falta)
 $ cp -p  (Copiar conservando los permisos de usuario y grupo)
 $ cp archivo{,.back} (Hará una copia .back del archivo)
-	$ cp archivo archivo.$$ ("$$" es una variable de la shell que contiene el pid)
+$ cp archivo archivo.$$ ("$$" es una variable de la shell que contiene el pid)
+
+
+cpa_sample_code
+[qatlib-examples]. La tecnología Intel QuickAssist [Intel QAT] proporciona aceleración por hardware para descargar los servicios de seguridad, autenticación y compresión de la CPU, lo que aumenta significativamente el rendimiento y la eficiencia de las soluciones de plataforma estándar. La tecnología Intel QuickAssist Technology [QAT] no es una característica integrada en muchas CPUs de Intel por tanto si este "Coprocessor" no aparece lanzando el comando lscpi este comando no es útil. Ver qatlib-service.
+$ cpa_sample_code runTests (realizar todas las pruebas)
+$ cpa_sample_code signOfLife=1
+$ cpa_sample_code getOffloadCost=1
+$ cpa_sample_code getLatency=1
 
 
 cpaldjvu
@@ -47502,6 +47510,12 @@ qalc
 Calculadora de línea de comandos pequeña y sencilla de usar. Las operaciones se entran de la forma habitual (5*4, 9/3, 5+2...)
 $ qalc (entrar en la interfaz de forma básica)
 $ qalc -b 2 -c (iniciar la interfaz en base 2 y color)
+
+
+qatlib-service
+[qatengine]. Demonio que gestiona los recursos QAT para la biblioteca de espacio de usuario de la tecnología Intel QuickAssist. La tecnología Intel QuickAssist Technology [QAT] no es una característica integrada en muchas CPUs de Intel por tanto si este "Coprocessor" no aparece lanzando el comando lscpi este comando no es útil. Incluye los ejecutables qat_init y qatmgr
+$ qat_init
+$ qatmgr
 
 
 qcp
