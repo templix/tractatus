@@ -47416,7 +47416,7 @@ Lenguaje de programación
 $ python (abre la shell de python para introducir comandos)
 $ python -c 'print "x"*50'  (escribe una linea xxxxx de 50 caracteres)
 $ python -m SimpleHTTPServer (Abre un servidor web en la carpeta actual. Para visualizarla desde un ordenador de la red local en el navegador con  http://ip:8000)
-$ python -c "import SimpleHTTPServer;SimpleHTTPServer.test()"  (lo mismo pero incluyendo los subdirectorios). Cancelar los procesos con Ctrol+c
+$ python -c "import SimpleHTTPServer;SimpleHTTPServer.test()"  (lo mismo pero incluyendo los subdirectorios. Cancelar los procesos con Ctrol+c)
 $ python3 -m http.server (Otra forma de crear un servidor en el propio directorio)
 $ python -m SimpleHTTPServer 8080 (crea un servidor por el puesto especificado)
 $ python -m smtpd -n -c DebuggingServer localhost:25 (Iniciar un servidor de correos en el puerto especificado)
@@ -47464,6 +47464,15 @@ analiza las líneas de comando de Python, Ruby, Node, Perl, Java, bash, zh, sh y
 $ px user
 $ px root
 $ px --debug firefox
+
+
+pyzor
+Sistema colaborativo en red para detectar y bloquear spam mediante resúmenes [hashes] de mensajes. El paquete incluye tanto el cliente como el servidor. El cliente puede verificar si un correo electrónico es spam conocido en un servidor Pyzor o reportar nuevos resúmenes de spam a dicho servidor. El servidor almacena la base de datos de resúmenes y gestiona las solicitudes del cliente. Cuando se recibe un mensaje, Pyzor puede calcular un resumen [hash] del mensaje y consultar si ese resumen ya ha sido reportado como spam por otros usuarios.
+$ pyzor --register-user (registrarse y comenzar a usar el sistema colaborativo)
+$ pyzor check < missatge.eml (verificar si un mensaje es spam conocido)
+$ pyzor report < mensaje.eml (reportar un mensaje como spam. Envía el resumen del mensaje al servidor Pyzor, ayudando a construir una base de datos colaborativa)
+$ pyzor ping (generar y verificar un resumen sin usar un archivo completo)
+$ pyzor check < resumen (verificar un resumen específico donde "resumen" es un hash que se obtuvo previamente)
 
 
 qalc
