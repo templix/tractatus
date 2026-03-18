@@ -47522,6 +47522,13 @@ qatzip
 biblioteca de espacio de usuario basada en la tecnología Intel® QuickAssist para proporcionar servicios de compresión y descompresión acelerados y extendidos, al descargar las solicitudes de compresión y descompresión a la serie de chipsets Intel®. QATzip genera datos utilizando el formato gzip estándar [RFC1952] con encabezados extendidos o bloques lz4 con formato de trama lz4. Los datos se pueden descomprimir con una implementación gzip o lz4 compatible. QATzip está diseñado para aprovechar al máximo el rendimiento que ofrece la tecnología Intel® QuickAssist. La tecnología Intel QuickAssist Technology [QAT] no es una característica integrada en muchas CPUs de Intel por tanto si este "Coprocessor" no aparece lanzando el comando lscpi este comando no es útil. Ver qatlib-service.
 
 
+qcalcfilehash
+Utilidad para el cálculo y la verificación de una amplia gama de sumas hash, como SHA1, SHA-224, SHA-256, SHA-384, HA-512, MD5, CRC32 y CRC8. Tambien se puede usar en modo gráfico [GUI].
+$ qcalcfilehash -l (listados de hash soportados)
+$ qcalcfilehash -p archivo SHA-384 (mostrando el proceso y con el hash especificado)
+$ qcalcfilehash archivo MD5 (muestra el hash MD5 del archivo)
+
+
 qcp
 [renameutils]. Funciona como qmv [ver], pero copia los archivos en lugar de renombrarlos. Mantendrá tanto los archivos originales como los duplicados.
 $ qcp dir
