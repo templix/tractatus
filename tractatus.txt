@@ -47522,6 +47522,24 @@ qatzip
 biblioteca de espacio de usuario basada en la tecnología Intel® QuickAssist para proporcionar servicios de compresión y descompresión acelerados y extendidos, al descargar las solicitudes de compresión y descompresión a la serie de chipsets Intel®. QATzip genera datos utilizando el formato gzip estándar [RFC1952] con encabezados extendidos o bloques lz4 con formato de trama lz4. Los datos se pueden descomprimir con una implementación gzip o lz4 compatible. QATzip está diseñado para aprovechar al máximo el rendimiento que ofrece la tecnología Intel® QuickAssist. La tecnología Intel QuickAssist Technology [QAT] no es una característica integrada en muchas CPUs de Intel por tanto si este "Coprocessor" no aparece lanzando el comando lscpi este comando no es útil. Ver qatlib-service.
 
 
+qbootctl
+Herramienta específica para dispositivos Android que utilizan la arquitectura A/B, también conocida como "seamless" o "dynamic partitions". Esta arquitectura permite que el dispositivo tenga dos particiones completas del sistema operativo, lo que facilita las actualizaciones sin necesidad de reiniciar en un modo de recuperación. qbootctl es particularmente útil en dispositivos que utilizan chips Qualcomm, ya que es el desarrollador de esta tecnologia para manipular estas ranuras A/B.
+# qbootctl switch (alternará entre las dos ranuras disponibles cuando se sospecha que una de las particiones está dañada y se desea arrancar desde la otra)
+# qbootctl mark-successful (marcar el intento de arranque como exitoso para que el sistema continúe arrancando desde la misma ranura en futuros arranques)
+# qbootctl mark-failed (marcar el intento de arranque como fallido para que el sistema intente arrancar desde la otra ranura en el próximo reinicio
+Nota.- Está diseñado para dispositivos que utilizan chips Qualcomm y que implementan la arquitectura A/B. No todos los dispositivos Android son compatibles con esta herramienta.
+
+
+qbs
+[Quick Build System]. Es una herramienta de compilación multiplataforma de propósito general que busca realizar compilaciones incrementales rápidas y precisas evitando volver a compilar todo cuando solo cambian unos pocos archivos. El lenguaje de descripción de proyectos es muy parecido a QML: declarativo, con objetos, propiedades y enlaces y utiliza Ninja como backend de compilación por defecto aunque también puede usar Unix Makefiles, MSBuild, etc.
+$ qbs build (construir)
+$ qbs build myapp (construir solo un producto concreto)
+$ qbs -v build myapp (construir con más verbosidad)
+$ qbs clean (borrar artefactos generados)
+$ qbs run myapp (ejecutar si el producto es una aplicación)
+$ qbs list-products (listar todos los productos disponibles)
+
+
 qcalcfilehash
 Utilidad para el cálculo y la verificación de una amplia gama de sumas hash, como SHA1, SHA-224, SHA-256, SHA-384, HA-512, MD5, CRC32 y CRC8. Tambien se puede usar en modo gráfico [GUI].
 $ qcalcfilehash -l (listados de hash soportados)
