@@ -47540,6 +47540,34 @@ $ qbs run myapp (ejecutar si el producto es una aplicación)
 $ qbs list-products (listar todos los productos disponibles)
 
 
+qca-qt6-utils
+Herramienta para la biblioteca QCA [Qt Cryptographic Architecture] adaptada para Qt 6 que básicamente, sirve para gestionar certificados, claves y para interactuar con los "plugins" que QCA utiliza para realizar el trabajo pesado de cifrado como OpenSSL o GnuPG. Incluye los ejecutables mozcerts-qt6 y qcatool-qt6
+$ qcatool-qt6 key make rsa 2048 (crear un par de claves RSA una clave pública para cifrar y una privada para descifrar)
+$ qcatool-qt6 plugins (ver el listado de providers. Comprueba qué complementos QCA están cargados y disponibles)
+Los Providers son códigos [plugins] y pueden ser:
+      qca-ossl --> usa la librería OpenSSL.
+      qca-gnupg --> usa GnuPG.
+      qca-softstore --> es un almacén de claves basado en software.
+$ qcatool-qt6 config save qca-softstore (guardar la configuración de un provider)
+$ qcatool-qt6 keystore list-stores 2>/dev/null (listar los almacenes [Keystores])
+$ qcatool-qt6 keystore list system 2>/dev/null (ver el almacen de "system")
+$ qcatool-qt6 keystore list gnupg 2>/dev/null (ver el almacen de gnupg)
+$ qcatool-qt6 keystore list user 2>/dev/null (ver el almacen user si existe)
+$ qcatool-qt6 cert makeself rsapriv.pem (crear un certificado propio)
+      Enter passphrase for rsapriv.pem: **********
+      Common Name: USER
+      Country Code (2 letters): es
+      Organization: linux
+      Email: correo@gmail.com
+      How long should the certificate be valid? (e.g. '1y2m3d'): 1y2m3d
+      Certificate will be valid for 1 year(s) and 2 month(s).
+      Certificate saved to cert.pem
+$ qcatool-qt6 message encrypt smime rsapub.pem (espera a que se entre un mensaje, pulsar INTRO y CTRL-D y muestra la clave)
+$ qcatool-qt6 keybundle make rsapriv.pem cert.pem 2>/dev/null (crear el Keybundle. Dentro se guarda la clave privada [rsapriv.pem] como el certificado [cert.pem])
+Pide la passphrase de la clave privada [rsapriv.pem`] para poder abrirla y luego la nueva contraseña para el archivo resultante [bundle.p12] la que pedirá el navegador cuando se intente importar el certificado.
+$ qcatool-qt6 show cert cert.pem 2>/dev/null (mostrar el certificado)
+
+
 qcalcfilehash
 Utilidad para el cálculo y la verificación de una amplia gama de sumas hash, como SHA1, SHA-224, SHA-256, SHA-384, HA-512, MD5, CRC32 y CRC8. Tambien se puede usar en modo gráfico [GUI].
 $ qcalcfilehash -l (listados de hash soportados)
