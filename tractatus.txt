@@ -47542,9 +47542,9 @@ $ qbs list-products (listar todos los productos disponibles)
 
 qca-qt6-utils
 Herramienta para la biblioteca QCA [Qt Cryptographic Architecture] adaptada para Qt 6 que básicamente, sirve para gestionar certificados, claves y para interactuar con los "plugins" que QCA utiliza para realizar el trabajo pesado de cifrado como OpenSSL o GnuPG. Incluye los ejecutables mozcerts-qt6 y qcatool-qt6
-$ qcatool-qt6 key make rsa 2048 (crear un par de claves RSA una clave pública para cifrar y una privada para descifrar)
+$ qcatool-qt6 key make rsa 2048 (pide contraseña y crea un par de claves RSA una clave pública [rsapub.pem] para cifrar y una privada para descifrar [rsapriv.pem]) <-------
 $ qcatool-qt6 plugins (ver el listado de providers. Comprueba qué complementos QCA están cargados y disponibles)
-Los Providers son códigos [plugins] y pueden ser:
+Muestra de algunos Providers [códigos/plugins]:
       qca-ossl --> usa la librería OpenSSL.
       qca-gnupg --> usa GnuPG.
       qca-softstore --> es un almacén de claves basado en software.
@@ -47562,10 +47562,19 @@ $ qcatool-qt6 cert makeself rsapriv.pem (crear un certificado propio)
       How long should the certificate be valid? (e.g. '1y2m3d'): 1y2m3d
       Certificate will be valid for 1 year(s) and 2 month(s).
       Certificate saved to cert.pem
-$ qcatool-qt6 message encrypt smime rsapub.pem (espera a que se entre un mensaje, pulsar INTRO y CTRL-D y muestra la clave)
+$ qcatool-qt6 message encrypt smime cert.pem 2>/dev/null (espera a que se entre un mensaje, pulsar INTRO y CTRL-D y muestra la clave)
 $ qcatool-qt6 keybundle make rsapriv.pem cert.pem 2>/dev/null (crear el Keybundle. Dentro se guarda la clave privada [rsapriv.pem] como el certificado [cert.pem])
 Pide la passphrase de la clave privada [rsapriv.pem`] para poder abrirla y luego la nueva contraseña para el archivo resultante [bundle.p12] la que pedirá el navegador cuando se intente importar el certificado.
 $ qcatool-qt6 show cert cert.pem 2>/dev/null (mostrar el certificado)
+Resumen dej Kit Criptográfico en la carpeta:
+	rsapriv.pem --> Identidad secreta que no se comparte.
+	cert.pem --> Carnet de identidad digital que si se comparte.
+	cert.p12--> Maletín para llevar la identidad a otras aplicaciones.
+$ qcatool-qt6 message sign smime cert.p12 < prueba.txt 2>/dev/null (pedirá contraseña y mostrará la firma S/MIME)
+$ qcatool-qt6 message sign smime cert.p12 < prueba.txt > prueba_firmada.msg 2>/dev/null (guardar la firma en un archivo)
+$ qcatool-qt6 message verify smime < prueba_firmada.msg 2>/dev/null (mostrar el texto de un archivo con la firma sin mostrar la firma)
+$ qcatool-qt6 message exportcerts < prueba_firmada.msg > certificado (extraer el certificado de un archivo en el que se habia guardado)
+$ qcatool-qt6 show kb cert.p12 2>/dev/null (ver el contenido de cert.p12)
 
 
 qcalcfilehash
