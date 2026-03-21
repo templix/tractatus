@@ -16042,6 +16042,7 @@ Averiguar/modificar la tarjeta de red
 # ethtool --test eth0 (Realizar un test de la tarjeta si está soportado)
 # ethtool -S eth0 (Consultar estadísticas de la red)
 # ethtool -p eth0 10 (Hacer parpadear los lets de la interfaz de red)
+# ethtool -i enp1s0 | grep firmware (conocer el firmware de la bios)
 
 
 ethumb
@@ -47655,6 +47656,16 @@ $ qpdf --empty --pages entrada.pdf 1-5 -- salida.pdf (Extraer las primeras cinco
 $ qpdf --empty --pages entrada.pdf z-1 -- salida.pdf (Reordenar las páginas de un documento en orden inverso)
 $ qpdf --empty --pages doc1.pdf 1-z doc2.pdf 1-6 -- salida.pdf (Unir todo un documento con las 6 primeras páginas de otro)
 $ qpdf --optimize-images entrada.pdf salida.pdf (optimiza las imágenes del PDF para optimizar el tamaño del archivo. Útil para documentos escaneados con xsane u otros programas)
+
+
+qperf
+mide el ancho de banda y la latencia entre dos nodos. Funciona tanto con protocolos TCP/IP como con protocolos RDMA.
+$ qperf myserver tcp_bw tcp_lat (realizar una prueba de ancho de banda y latencia TCP)
+$ qperf myserver -t 10 sdp_bw (realizar una prueba de ancho de banda SDP durante 10 segundos)
+$ qperf myserver udp_lat quit (realizar una prueba de latencia UDP y luego provocar la terminación del servidor)
+$ qperf myserver ud_lat ud_bw (medir la latencia y el ancho de banda RDMA UD)
+$ qperf myserver rc_bi_bw (medir el ancho de banda bidireccional RDMA UC)
+$ qperf myserver -oo msg_size:1:64K:*2 -vu tcp_lat (obtener un rango de latencias TCP con un tamaño de mensaje de 1 a 64 KB)
 
 
 qrencode
