@@ -47668,6 +47668,12 @@ $ qperf myserver rc_bi_bw (medir el ancho de banda bidireccional RDMA UC)
 $ qperf myserver -oo msg_size:1:64K:*2 -vu tcp_lat (obtener un rango de latencias TCP con un tamaño de mensaje de 1 a 64 KB)
 
 
+qprint
+Herramienta que permite codificar y decodificar archivos desde/hacia la codificación quoted-printable [RFC1521]. Es compatible con datos de texto y binarios.
+$ qprint -e -i -p archivo_entrada archivo_salida (codificar)
+$ aprint -d archivo_codificado archivo_descodificado (descodificar)
+
+
 qrencode
 Codifica datos de entrada en código QR y los guarda en una imatgen png.
 $ qrencode -o salida.png 'linux es genial' (código QR de un texto)
