@@ -47615,6 +47615,11 @@ Utilidad de Qemu para poder montar discos virtuales. Crea un disco de red. Es ne
 # qemu-nbd -c /dev/nbd0 fichero.vdi (Crear dispositivo de disco de red a partir del fichero vdi de VirtualBox. Ahora hay que montar la partición con mount /dev/nbd0p1 /mnt)
 
 
+qhelpgenerator
+herramienta de línea de comandos para empaquetar la documentación HTML generada por qdoc en archivos .qch.
+$ qhelpgenerator myapp.qhp -c -o myapp.qch (archivo de entrada, que todos los enlaces en los archivos HTML apuntan a archivos de este proyecto de ayuda y archivo de salida)
+
+
 qiv
 Visor de imágenes muy pequeño y bastante rápido. Las características incluyen zoom, maxpect, reducción de escala, pantalla completa, corrección de brillo/contraste/gamma, presentación de diapositivas, desplazamiento con teclado y mouse, rotar hacia la izquierda/derecha, voltear, eliminar (mover a .qiv-trash/), saltar imagenes...
 % qiv imagen.png
