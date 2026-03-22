@@ -47701,6 +47701,51 @@ $ qrencode -o salida.png 'linux es genial' (código QR de un texto)
 $ qrencode -r clave.pub -o clave.pub.png (código QR de un archivo que contiene una clave publica)
 
 
+qrisk2
+Calculadora de riesgo cardiovascular. Puede usar esta calculadora para calcular su riesgo de sufrir un infarto o un derrame cerebral en los próximos diez años respondiendo a unas sencillas
+preguntas. Es adecuada para personas que no tienen un diagnóstico previo de enfermedad cardíaca o derrame cerebral. El algoritmo QRISK®2 ha sido desarrollado por médicos y académicos
+que trabajan en el Servicio Nacional de Salud del Reino Unido y se basa en datos recopilados de forma rutinaria de miles de médicos de cabecera de todo el país que han contribuido voluntariamente con datos para la investigación médica. El paquete instala dos ejecutables: Q80_model_4_0_commandLine [versión femenina] y Q80_model_4_1_commandLine [versión masculina] y ambos aceptan 15 argumentos obligatorios en un orden fijo. El formato del comando es:
+$ Q80_model_4_0_commandLine age b_AF b_ra b_renal b_treatedhyp b_type1 b_type2 bmi ethrisk fh_cvd rati sbp smoke_cat surv town
+Parámetros detallados con su descripción y valores:
+	age --> Edad [30–84]
+	b_AF --> Fibrilación auricular [0 no y 1 sí]
+	b_ra --> Artritis reumatoide [0 o 1]
+	b_renal --> Enfermedad renal [0 o 1]
+	b_treatedhyp --> Tratamiento antihipertensivo [0 o 1]
+	b_type1 --> Diabetes tipo 1 [0 o 1]
+	b_type2 --> Diabetes tipo 2 [0 o 1]
+	bmi --> Índice de masa corporal [20–40 (ver calculo)]
+	ethrisk --> Etnicidad [1-9 (ver tabla)]
+	fh_cvd --> Historia familiar de ECV [0 o 1]
+	rati --> Ratio colesterol/HDL [1–12 (ver calculo)]
+	sbp --> Presión arterial sistólica [70–210 mmHg]
+	smoke_cat --> Estado tabáquico [0-4 (tabla)]
+	surv --> [No especificado] ["" para vacio]
+	town --> Código postal UK ["" si no se es de UK comillas vacias de texto]
+Valor mbi [mass body index] = Peso del individuo en kilogramos dividido por el cuadrado de su altura en metros.
+Valores ethrisk
+	1 = blanco o no especificado
+	2 = indio
+	3 = pakistaní
+	4 = bangladesí
+	5 = otro asiático
+	6 = caribeño negro
+	7 = africano negro
+	8 = chino
+	9 = otro grupo étnico
+Valor rati = Colesterol total dividido por colesterol HDL (el bueno). La relación debe ser inferior a 5:1, siendo la relación ideal alrededor de 3,5:1.
+Valores smoke_cat
+	0 = no fumador
+	1 = ex fumador
+	2 = fumador ligero (<10/día)
+	3 = fumador moderado (10–19/día)
+	4 = fumador heavy (≥20/día)
+$ Q80_model_4_0_commandLine 55 0 0 0 0 0 0 24 1 0 4 120 0 "" "" (ejemplo para una mujer de 55 años, bajo riesgo)
+$ Q80_model_4_1_commandLine 60 0 0 0 1 0 1 28 1 1 5 145 4 "" "" (ejemplo para un hombre de 60 años, diabético tipo 2, fumador)
+$ Q80_model_4_0_commandLine 45 0 0 0 1 0 0 32 6 0 3.5 135 0 "" "" (ejemplo para una mujer de 45 años con hipertensión tratada)
+Nota.- "surv" aparece en la documentación original pero su uso no está claramente documentado.
+
+
 qterminal
 Emulador de terminal con división de terminales horizontal y verticalmente, múltiples pestañas, colores...
 $ qterminal -w /home/USER/Documentos (abrir la terminal con el directorio especificado)
