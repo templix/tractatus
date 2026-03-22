@@ -47637,6 +47637,22 @@ Visor de imágenes muy pequeño y bastante rápido. Las características incluye
 % qiv imagen.png
 
 
+qmk
+Programa de ayuda para trabajar con el firmware QMK [Quantum Mechanical Keyboard].
+$ qmk env (muestra información del entorno)
+$ qmk setup -H ~/src/qmk_firmware (clona el repositorio qmk_firmware y, opcionalmente, instala dependencias de compilación)
+$ qmk config (comprueba la configuración que ha dejado)
+$ qmk setup --help (ver las opciones que tiene)
+$ qmk -v setup (para ver la máxima información y ajustar la configuración por defecto de la CLI, teclado, keymap, ruta del repo, etc.)
+$ qmk config user.qmk_home="$HOME/qmk_firmware" (definir el repo de firmware si no lo ha puesto setup)
+$ qmk config user.keyboard=clueboard/66/rev4 user.keymap=default (definir teclado y keymap por defecto para compilar)
+$ qmk console (información sobre los dispositivos. Precisa CONSOLE_ENABLE = yes)
+$ qmk compile -kb mi_teclado/rev1 -km USER (compilar)
+$ qmk -v console -l (ver lista de dispositivos)
+$ qmk clone https://github.com/USER/qmk_firmware.git (clonar el fork en el árbol de trabajo de QMK)
+Nota.- Si solo se quiere el repo oficial, normalmente con qmk setup basta y no se necesita clone.
+
+
 qmlkonsole
 Aplicación de terminal ptimizada para dispositivos táctiles y que se integra perfectamente en los sistemas Plasma Mobile. Se basa en Qmltermwidget [versión QML de qtermwidget] y Kirigami, un framework para diseñar aplicaciones convergentes con una interfaz de usuario que se adapta a ordenadores de escritorio, teléfonos, pantallas grandes y, potencialmente, a cualquier otro dispositivo. Depende de las bibliotecas gráficas Qt y de algunos frameworks de KDE.
 $ qmlkonsole
