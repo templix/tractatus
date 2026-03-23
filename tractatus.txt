@@ -47748,6 +47748,26 @@ virus/clamdscan
 spamassassin reject_threshold 7
 
 
+qpxtool
+Comprobador de calidad de CD/DVD/Blu-ray tanto grabados como vírgenes. Esto te ayudará a encontrar el disco adecuado y la velocidad de escritura óptima para tu hardware, lo que aumentará la probabilidad de una mayor vida útil de los datos. QPxTool depende de la unidad que uses; no todas las unidades pueden leer las comprobaciones de calidad ni todas son compatibles con QPxTool. Actualmente, la mayoría de las unidades más recientes de LiteOn, NEC, Pioneer y Plextor son compatibles. Incluye las herramientas cdvdcontrol, f1tattoo, qpxtool, qscan, qscand y readdvd
+$ qscan -d /dev/sr0 (escanear un disco en la unidad /dev/sr0)
+$ qscan -d /dev/sr0 -t errc -s 4x (especificar tipo de test, corrección de errores y velocidad de escaneo 4x)
+$ qscan -d /dev/sr0 -t errc -t jitter -t beta -s 4x -o resultados.qpx (escanear múltiples tests. Mide la variación temporal de los pits y lands y la asimetria de la señal y guarda resultado)
+$ qscan -d /dev/sr0 -t pie -t pif -t jitter -s 4x (escanear DVD/Blu-ray, los errores que se pueden corregir [Parity Inner Errors] y los que no [Parity Inner Failures])
+$ cdvdcontrol -l (listar todas las unidades ópticas disponibles)
+$ cdvdcontrol -d /dev/sr0 --supported (ver características soportadas por una unidad específica)
+$ cdvdcontrol -d /dev/sr0 --as-create qa (crear entrada ASDB rápidamente y añadirla a la lista para medios virgenes)
+$ cdvdcontrol -d /dev/sr0 --as-list (ver lista de estrategias guardadas)
+$ cdvdcontrol -d /dev/sr0 --powerec on (activar PoweRec [control de reducción de errores de escritura])
+$ cdvdcontrol -d /dev/sr0 --powerec off (desactivar)
+$ cdvdcontrol -d /dev/sr0 --gigarec 0.9 (establecer GigaRec a 0.9 [90% de capacidad, mayor calidad])
+$ cdvdcontrol -d /dev/sr0 --silent on (activar modo silencioso)
+$ cdvdcontrol -d /dev/sr0 --sm-dvd-rd 8 (limitar velocidad de lectura DVD a 8x)
+$ readdvd -d /dev/sr0 -o imagen.iso (leer discos protegidos o dañados)
+$ readdvd -d /dev/sr0 -d /dev/sr1 -o imagen.iso (lectura multihilo, más rápida si hay múltiples unidades)
+$ psxtool (abre la interfaz gráfica)
+
+
 qrencode
 Codifica datos de entrada en código QR y los guarda en una imatgen png.
 $ qrencode -o salida.png 'linux es genial' (código QR de un texto)
