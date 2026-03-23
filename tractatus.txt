@@ -19478,8 +19478,9 @@ $ nano frases.txt
        Es de gente bien nacida, el agradecer el beneficio que recibe.
        %
        La pluma es la lengua de la mente.
-$ strfile -c % -r frases.txt (crea el archivo frases.txt.dat para el uso del comando fortune)
+$ strfile -c % -r frases.txt (crea el archivo frases.txt.dat para el uso del comando fortune, indicando el separador [%] y las frases de forma aleatoria)
 $ fortune frases.txt (muestra aleatoriamente las frases del archivo)
+$ unstr frases.txt.dat frases.txt (invierte el proceso de strfile. A partir del binario .dat crea archivo .txt)
 
 
 fortunes
@@ -47024,6 +47025,10 @@ $ sphinx change usuario@gmail.com gmail (cambiar/rotar una contraseña mantenien
 $ sphinx delete usuario@gmail.com gmail (eliminar una entrada)
 $ sphinx list gmail (listar sitios almacenados)
 $ sphinx create -u -l -d -s -c 16 usuario@banco.com banco (especificar contraseña de 16 caracteres, mayúsculas, nimúsculas, dígitos y simbolos)
+
+
+pwdsphinx-tools
+Herramientas para integrar el protocolo de almacenamiento de contraseñas SPHINX en un escritorio X11 . Ver pwdsphinx. Esas herramientas son dmenu-sphinx, exec-on-click, getpwd, pipe2tmpfile, sphage, sphinx-x11, sx11-getacc-user-pass, sx11-otp, sx11-pass, sx11-user-pass, sx11-user-pass-otp y type-pwd.
 
 
 pwdx
