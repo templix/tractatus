@@ -47719,6 +47719,35 @@ Monitor que muestra el estado de los procesos en ejecución.
 $ qps
 
 
+qpsmtpd
+demonio que se centra en la detección de spam durante la transacción SMTP, intentando determinar si un mensaje es spam o no antes de aceptarlo, lo que reduce significativamente los rebotes y las falsificaciones. Solo implementa el protocolo SMTP, sin cargar plugins. Aprovecha su visibilidad de la transacción de red para detectar ciertos comportamientos que suelen exhibir los agentes que envían spam. Incluye los ejecutables qpsmtpd-forkserver y qpsmtpd-prefork
+$ tcpserver -u $(id -u smtpd) -g $(id -g smtpd) -x /etc/tcp.smtp.cdb 0 25 /usr/sbin/qpsmtpd (se usa junto a herramientas externas de supervisión de conexiones TCP como tcpserver)
+$ tcpserver 127.0.0.1 2525 /usr/sbin/qpsmtpd (versión mínima para pruebas en puerto 2525)
+$ qpsmtpd-forkserver --port 25 --detach (arranque básico en puerto 25, modo daemon)
+$ qpsmtpd-forkserver -l 192.168.1.10 --port 25 --limit-connections 20 --max-from-ip 3 -u --detach --pid-file /var/run/qpsmtpd.pid (escuchar en una IP específica)
+$ qpsmtpd-prefork -p 25 -l 0.0.0.0 --min-spare-servers 5 --max-spare-servers 10 --max-servers 30 -u --detach --pid-file /var/run/qpsmtpd-prefork.pid (arranque prefork con pool de workers)
+$ tail -f ~smtpd/qpsmtpd/log/main/current (ver logs en tiempo real [instalación con daemontools])
+Añadir o descomentar los plugins que procedan:
+# nano /etc/qpsmtpd/plugins
+# Conexiones
+hosts_allow
+check_earlytalker
+count_unrecognized_commands 5
+#
+# Relay y destinatarios
+check_relay
+rcpt_ok
+#
+# Antispam en tiempo de transacción
+dnsbl
+resolvable_fromhost
+uribl
+virus/clamdscan
+#
+# SpamAssassin (rechaza si puntuación > 7)
+spamassassin reject_threshold 7
+
+
 qrencode
 Codifica datos de entrada en código QR y los guarda en una imatgen png.
 $ qrencode -o salida.png 'linux es genial' (código QR de un texto)
