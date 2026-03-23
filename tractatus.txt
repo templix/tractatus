@@ -19464,6 +19464,24 @@ Mostrar frases anarquistas aleatorias.
 $ fortune /usr/share/games/fortunes/anarchism
 
 
+fortune-mod
+Programa para generar los archivos de datos para fortuna. Incluye los ejecutables strfile y unstr. Crear un archivo con la siguiente estructura:
+$ nano frases.txt
+       El que no sabe gozar de la ventura cuando llega, no debe quejarse cuando pasa.
+       %
+       Una confidencia tiene tanto de confianza como de indiscreción.
+       %
+       La verdadera y buena amistad no debe ni puede ser sospechosa de nada.
+       %
+       La alabanza propia envilece.
+       %
+       Es de gente bien nacida, el agradecer el beneficio que recibe.
+       %
+       La pluma es la lengua de la mente.
+$ strfile -c % -r frases.txt (crea el archivo frases.txt.dat para el uso del comando fortune)
+$ fortune frases.txt (muestra aleatoriamente las frases del archivo)
+
+
 fortunes
 [fortunes-es fortunes-es-off]. Mostrar frases aleatorias.
 $ fortune
@@ -47705,6 +47723,7 @@ qrencode
 Codifica datos de entrada en código QR y los guarda en una imatgen png.
 $ qrencode -o salida.png 'linux es genial' (código QR de un texto)
 $ qrencode -r clave.pub -o clave.pub.png (código QR de un archivo que contiene una clave publica)
+$ qrencode -o slaida.png "https://ejemplo.com/informe" (de una URL)
 
 
 qrisk2
