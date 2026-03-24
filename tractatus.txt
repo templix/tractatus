@@ -47838,6 +47838,17 @@ $ qterminal -d (iniciar en "modo desplegable" tipo yakuake o tilda)
 Nota.- Si se tiene alguna de estas dos terminales desplegables y se quiere compaginar con qterminal ha de modificarse el lanzamiento de F12 por otro en las preferencias.
 
 
+quickchick
+Framework de property-based testing [pruebas basadas en propiedades] para Coq, inspirado en QuickCheck de Haskell. En lugar de escribir pruebas unitarias con valores específicos, defines propiedades matemáticas que el código debe cumplir y QuickChick genera automáticamente casos de prueba aleatorios para verificarlas.
+$ quickChick -color -top MiProyecto (estando en el directorio del proyecto, probar todas las propiedades indicando el nombre del módulo top-level con -top y activa los colores en la salida)
+$ quickChick -color -top MiProyecto -s optimizations (ejecutar solo las pruebas que están dentro de la sección llamada "optimizations")
+$ quickChick -color -top MiProyecto -m 1 (ejecutar pruebas solo contra el mutante número 1)
+Nota.- Un mutante [mutation testing] son versiones incorrectas en el código con anotaciones (*! *) y (*!! ... *) que se insertan de forma controlada para ver si las pruebas son lo suficientemente buenas como para detectarlos.
+$ quickChick -color -top MiProyecto -failfast (detener la ejecución en cuanto se encuentre el primer problema)
+$ quickChick -color -top MiProyecto -N 100000 (ejecutar 100,000 pruebas, por defecto 10,000 por propiedad)
+$ quickChick -v -color -top MiProyecto -nobase (en modo detallado y no ejecutar las pruebas sobre el código base, solo sobre mutantes)
+
+
 quiterss
 Lector de noticias.
 Algunos atajos:
