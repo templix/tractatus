@@ -47831,6 +47831,15 @@ $ qrterminal https://github.com/mdp/qrterminal -l M
 $ qrterminal "Linux es genial" -l L -v
 
 
+qstat
+Herramienta para consultar servidores de varios juegos, incluidos, entre otros, Quake, QuakeWorld, Quake 2, Quake 3 Arena, Unreal Tournament y Half-Life. El ejecutable se llama quakestat.
+$ qstat -game quake3 (consultar servidores de Quake 3 Arena)
+$ qstat -game quake3 -ping 50 (buscar servidores con un ping bajo de 50 ms o menos)
+$ qstat -game quake3 -empty (mostrar solo servidores vacíos)
+$ qstat -game quake3 -full (mostrar solo servidores llenos)
+$ qstat -game quake3 -secure (mostrar servidores de Quake 3 Arena que tienen activado el sistema de protección antitrampas de Valve)
+
+
 qterminal
 Emulador de terminal con división de terminales horizontal y verticalmente, múltiples pestañas, colores...
 $ qterminal -w /home/USER/Documentos (abrir la terminal con el directorio especificado)
@@ -47847,6 +47856,81 @@ Nota.- Un mutante [mutation testing] son versiones incorrectas en el código con
 $ quickChick -color -top MiProyecto -failfast (detener la ejecución en cuanto se encuentre el primer problema)
 $ quickChick -color -top MiProyecto -N 100000 (ejecutar 100,000 pruebas, por defecto 10,000 por propiedad)
 $ quickChick -v -color -top MiProyecto -nobase (en modo detallado y no ejecutar las pruebas sobre el código base, solo sobre mutantes)
+
+
+quicktun
+Es un software de túnel VPN [Virtual Private Network] diseñado para ser simple y seguro.
+$ quictun --tun0 --proto tcp --local 192.168.1.100 --remote 192.168.1.200 --port 12345 (crea un túnel TCP desde 192.168.1.100 a 192.168.1.200 en el puerto 12345)
+$ quictun --tun0 --proto udp --local 192.168.1.100 --remote 192.168.1.200 --port 53 (crea un túnel UDP desde 192.168.1.100 a 192.168.1.200 en el puerto 53)
+$ quictun --tun mi-tun --proto tcp --local 192.168.1.100 --remote 192.168.1.200 --port 12345 (usar el nombre "mi-tun" para el dispositivo túnel)
+
+
+quilt
+Gestiona una serie de parches registrando los cambios que realiza cada uno. Se organizan lógicamente en una pila, y se pueden aplicar, desaplicar y actualizar fácilmente navegando por ella. Incluye los ejecutables deb3 [estándar moderno en Debian], dh_quilt_patch, dh_quilt_unpatch [estos dos ejecutables son ayudantes de debhelper para integrar quilt en el proceso de construcción de paquetes Debian.], dpatch2quilt [dpatch fue un sistema de parches anterior a quilt, muy usado en Debian hasta ~2010. dpatch2quilt convierte automáticamente una serie de parches dpatch al formato quilt] y guards.
+$ quilt init (en el directorio de fuentes del proyecto, al inicializar quilt crea el directorio patches/ y .pc/)
+$ quilt new 01-corregir-typo.patch (crear un nuevo parche y lo añade al tope de la pila)
+$ quilt push (aplicar el siguiente parche [subir en la pila])
+$ quilt push -a (aplicar todos los parches de golpe)
+$ quilt pop (desaplicar el parche actual [bajar en la pila])
+$ quilt pop -a (desaplicar todos los parches)
+$ quilt series (lista todos los parches en orden)
+$ quilt applied (lista los parches ya aplicados)
+$ quilt unapplied (lista los pendientes de aplicar)
+$ quilt top (muestra el parche activo actualmente)
+$ quilt diff (ver qué cambia el parche actual)
+$ quilt files (ver los archivos que toca el parche actual)
+$ quilt header 01-corregir-typo.patch (ver el contenido del parche)
+$ quilt header -e (abre el editor para añadir una descripción al parche)
+$ guards --with x86 < debian/patches/series (listar parches que se aplicarían con el flag "x86")
+$ guards --with arm --without debug < debian/patches/series (listar parches para arm sin debug)
+$ guards --with x86 < patches/series | xargs -I{} quilt push {} (aplicar selectivamente combinando con quilt)
+$ guards --with x86 --with debug < patches/series (verificar qué parches se aplican con varios flags)
+1.-
+proceso
+$ quilt add src/main.c (indicar a quilt qué archivos va a modificar este parche)
+$ nano src/main.c (editar el archivo)
+$ quilt refresh (registrar los cambios en el parche)
+2.-
+Modificar un parche existente
+$ quilt push 02-feature.patch (ir al parche que se quiere modificar)
+$ quilt add src/nuevo.c (añadir más archivos al parche)
+$ nano src/nuevo.c (editar)
+$ quilt refresh (actualizar el parche con los nuevos cambios)
+3.-
+Eliminar parches
+Primero desaplicar hasta que el parche a borrar sea el top de la pila
+$ quilt pop 01-corregir-typo.patch
+$ quilt delete 01-corregir-typo.patch (eliminar el parche top de la pila)
+4.-
+Ejemplo de todo un proceso
+Descargar fuentes de un paquete Debian
+$ apt-get source wget
+Entrar al directorio y ver parches existentes
+$ cd wget-1.21.3/
+$ quilt series
+Crear nuestro propio parche
+$ quilt new 99-local-fix.patch
+$ quilt add src/connect.c
+Hacer cambios
+$ nano src/connect.c
+$ quilt refresh
+Añadir descripción DEP-3
+$ quilt header -e
+Verificar el diff del parche
+$ quilt diff
+Desaplicar y reaplicar todo
+$ quilt pop -a && quilt push -a
+Construir el paquete con los parches incluidos
+$ dpkg-buildpackage -us -uc
+5.-
+Proceso típico de migración completa:
+$ cd mi-paquete/
+$ dpatch2quilt
+Revisar que los parches se convirtieron correctamente
+$ quilt series
+Verificar que todos aplican sin errores
+$ quilt push -a
+$ quilt pop -a
 
 
 quiterss
