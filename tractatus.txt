@@ -47984,6 +47984,14 @@ Los parámetros son:
     -v  (Verbose)
 
 
+quotatool
+Herramienta no interactiva para editar cuotas de disco que establece límites de uso del sistema de archivos para los usuarios o grupos específicos. La cuota de disco es una restricción que impone límites sobre cuánto espacio en disco puede usar un usuario o grupo.
+# quotatool -u juan -b 10000000 -l 10000000 /home (limitar al usuario juan a un máximo de 10 GB en /home)
+# quotatool -u juan -i 1000 /home (limitar a juan a 1,000 archivos en /home)
+# quotatool -u juan -r /home (eliminar los límites de juan en /home)
+# quotatool -g desarrolladores -b 5000000 -l 5000000 /data (establecer límites al grupo llamado desarrolladores en /data)
+
+
 qwqfetch
 Módulo escrito en python para mostrar información del sistema que reemplaza a neofetch[ver] en hyfetch[ver]. Está en desarrollo y debe descargarse de github.
 $ python3 qwqfetch-master/main.py 2>/dev/null
