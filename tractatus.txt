@@ -47996,6 +47996,11 @@ qutebrowser
 Navegador con interfaz gráfica minimalista tipo Vim, controlado por teclado y basado en Python y Qt.
 
 
+quvi
+Programa para extraer enlaces de descarga de vídeo. No es un extractor universal tipo yt-dlp [ver], es más bien un frontend que depende de libquvi, la librería y scripts específicos por sitio [libquvi scripts]. Esos scripts son los que saben cómo extraer vídeo de cada web concreta pero ese sistema está prácticamente abandonado. Muchos sitios, especialmente YouTube han cambiado su estructura muchas veces y los scripts de libquvi ya no funcionan o ni siquiera existen para URLs modernas.
+$ quvi info -D (ver los dominios para los que era útil)
+
+
 qwqfetch
 Módulo escrito en python para mostrar información del sistema que reemplaza a neofetch[ver] en hyfetch[ver]. Está en desarrollo y debe descargarse de github.
 $ python3 qwqfetch-master/main.py 2>/dev/null
