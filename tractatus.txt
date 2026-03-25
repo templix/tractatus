@@ -48023,6 +48023,37 @@ Módulo escrito en python para mostrar información del sistema que reemplaza a 
 $ python3 qwqfetch-master/main.py 2>/dev/null
 
 
+rabbit
+Aplicación para crear presentaciones con documentos RD [Ruby Document]. RD es un formato de texto sencillo, fácil de leer y de escribir y también soporta Wiki/Hiki y Markdown, aunque RD es el valor por defecto cuando se generan plantillas con rabbit-slide. Un ejemplo de plantilla de presentación:
+$ nano charla.rd
+= Mi charla sobre Rabbit
+: subtitle
+   Presentaciones con RD
+: author
+   templix
+: date
+   25-03-2026
+: theme
+   rabbit
+#
+= ¿Qué es Rabbit?
+Rabbit es una herramienta de presentaciones escrita en Ruby.
+* Usa formatos de texto: RD, Wiki, Markdown, PDF.
+* Se controla con teclado y ratón.
+#
+= Características útiles
+* Recarga automática del fichero de origen.
+* Temas personalizables.
+* Exportación a PDF.
+#
+= Imagen de rabbit
+#
+  # image
+  # src = https://raw.github.com/rabbit-shocker/rabbit/master/sample/lavie.png
+  # relative_height = 100
+$ rabbit -f charla.rd 2>/dev/null (se lanza la presentación en el directorio, a pantalla competa y si hay algún warning a /dev/null)
+
+
 radeontool
 Utilidad para controlar la retroiluminación de portátiles con tarjetas gráficas ATI Radeon y que tambien permite volcar el contenido de los registros para depuración. ADVERTENCIA: El código de Radeontool no ha sido revisado completamente y puede contener errores que podrían dañar el hardware. Úselo bajo su propia responsabilidad.
 
