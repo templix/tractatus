@@ -17939,6 +17939,7 @@ $ ffmpeg -i ./PELICULA_ENTRADA.MOV -s 800x450 -vcodec libxvid -acodec aac -stric
 $ ffmpeg -i video1.avi -sameq video1.mpeg (Primero convertirlos a mpeg))
 $ ffmpeg -i video2.avi -sameq video2.mpeg
 $ cat video1.mpeg video2.mpeg > nuevo_video.mpeg (Unir los videos resultantes usando cat)
+$ ffmpeg -f v4l2 -i /dev/video0 -t 10 video_salida.mkv (grabar en formato MKV durante 10 segundos)
 
 
 ffmpegfs
@@ -55548,6 +55549,15 @@ $ ir-ctl --receive (recibir y mostrar los códigos que envía un mando)
 $ media-ctl -p (ver la topología de los nodos de video)
 $ v4l2-ctl -d /dev/video0 --set-ctrl=brightness=200 (mientras se ve el video, en otra terminal, ajustar el brillo al vuelo)
 $ v4l2-ctl --stream-mmap --stream-count=100  (en un servidor sin entorno gráfico, ver si una cámara está enviando datos)
+$ v4l2-ctl --device /dev/video0 --stream-mmap --stream-out-quiet (comprobar si la cámara está viva sin guardar nada. No mostrará imagen, pero imprimirá una línea por cada frame recibido)
+$ v4l2-ctl --device /dev/video0 --stream-mmap --stream-to=video_crudo.raw --stream-count=100 (grabar 100 frames de video)
+1.-
+Ver el video en otro PC por Red
+Coon una cámara, por ejemplo, en una Raspberry Pi y ver el video en otro pc
+En la Raspberry Pi:
+$ v4l2-ctl --device /dev/video0 --stream-mmap --stream-to=- | nc -l -p 5000
+En el PC:
+$ nc [IP_DE_LA_PI] 5000 | qvidcap -f
 
 
 validlocale
