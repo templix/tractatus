@@ -48001,6 +48001,11 @@ Programa para extraer enlaces de descarga de vídeo. No es un extractor universa
 $ quvi info -D (ver los dominios para los que era útil)
 
 
+qvidcap
+Se utiliza para probar dispositivos de captura video4linux, ya sea mediante un dispositivo de vídeo, un archivo o a través de la red. Esta aplicación también puede funcionar como un reproductor de vídeo/TV genérico. Ver v4l-utils
+$ qvidcap -d /dev/video0 (abrir la visualización)
+
+
 qxp2epub
 convertir documentos de QuarkXPress a EPUB.
 $ qxp2epub entrada.qxp salida.epub
@@ -55541,6 +55546,8 @@ $ cec-ctl --to 0 --standby (poner la TV en modo standby desde la terminal)
 $ cec-compliance (verifica que el dispositivo HDMI-CEC cumpla con las especificaciones del protocolo)
 $ ir-ctl --receive (recibir y mostrar los códigos que envía un mando)
 $ media-ctl -p (ver la topología de los nodos de video)
+$ v4l2-ctl -d /dev/video0 --set-ctrl=brightness=200 (mientras se ve el video, en otra terminal, ajustar el brillo al vuelo)
+$ v4l2-ctl --stream-mmap --stream-count=100  (en un servidor sin entorno gráfico, ver si una cámara está enviando datos)
 
 
 validlocale
