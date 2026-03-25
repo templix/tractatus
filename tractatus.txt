@@ -55531,6 +55531,18 @@ Atajos:
 	N (ir a la busqueda anterior)
 
 
+v4l-utils
+Colección de utilidades de video4linux. Incluye los ejecutables cec-compliance, cec-ctl, cec-follower, cx18-ctl, decode_tm6000, ir-ctl, ivtv-ctl, media-ctl, rds-ctl, v4l2-compliance, v4l2-ctl, v4l2-sysfs-path y v4l2-dbg.
+$ v4l2-ctl --list-devices (listará todos los dispositivos de captura de video disponibles en el sistema)
+$ v4l2-ctl --list-formats-ext (ver los formatos de video que soporta la webcam)
+$ v4l2-compliance -d /dev/video0 (testear si un driver de video cumple estrictamente con el estándar V4L2)
+$ v4l2-sysfs-path (mapea los dispositivos /dev/videoX con su ruta física en el sistema de archivos sysfs para identificar qué puerto USB está usando una cámara)
+$ cec-ctl --to 0 --standby (poner la TV en modo standby desde la terminal)
+$ cec-compliance (verifica que el dispositivo HDMI-CEC cumpla con las especificaciones del protocolo)
+$ ir-ctl --receive (recibir y mostrar los códigos que envía un mando)
+$ media-ctl -p (ver la topología de los nodos de video)
+
+
 validlocale
 Comprobar si una configuración regional determinada está disponible.
           $ validlocale ca_ES.UTF-8
