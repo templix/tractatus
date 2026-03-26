@@ -48067,6 +48067,27 @@ Utilidad para ver el uso de GPU detallado por componentes y el uso de VRAM de ta
 $ radeontop
 
 
+radio
+Aplicación de radio interactiva para consola basada en ncurses.
+$ radio (abre la interfaz ncurses interactiva para controlar la radio manualmente)
+$ radio -f 91.4 (sintoniza la frecuencia 91.4 MHz [FM] y abre la interfaz interactiva)
+$ radio -qf 91.4 (sintoniza 91.4 MHz y sale inmediatamente sin entrar en modo interactivo)
+$ radio -s (escanear emisoras disponibles)
+$ radio -S (escanear emisoras y guardar el resultado en el archivo radio.fmmap para uso futuro)
+$ radio -i > ~/.radio (generar configuración inicial en ~/.radio. Útil para primera configuración)
+$ radio -c /dev/radio1 (especifica un dispositivo de radio distinto, por defecto usa /dev/radio0)
+$ radio -L 300 (establece la latencia del loopback de audio a 300ms, por defecto es 500ms)
+$ radio -b ? (muestra las bandas disponibles del sintonizador)
+$ radio -d -b 1 (en modo debug y selecciona la banda número 1)
+$ radio -r hw:1,0 -p hw:0,0 (especificar tarjeta 1, dispositivo 0 para grabación/captura y tarjeta 0, dispositivo 0 para reproducción)
+$ radio -c /dev/radio0 -f 95.2 -L 200 -q (usar /dev/radio0, sintoniza 95.2 MHz, latencia de 200ms y salir sin interfaz interactiva)
+
+
+radioclkd
+Utilidad que permite a un sistema recibir señales de tiempo demoduladas de receptores de tiempo MSF, WWVB y DCF77. Estas señales de tiempo se utilizan para sincronizar relojes de ordenadores y otros dispositivos con fuentes de tiempo muy precisas.
+$ radioclkd -c /dev/ttyS0 -t 1 -p /var/lib/radioclkd/polling.pid (con un receptor MSF para recibir la señal y ajustar el tiempo del sistema)
+
+
 rain
 [bsdgames]. Muestra chapoteo de agua en la terminal.
 $ rain -d 120 (El máximo de lento. Por defecto 0 [rápido])
