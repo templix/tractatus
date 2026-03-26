@@ -48088,6 +48088,24 @@ Utilidad que permite a un sistema recibir señales de tiempo demoduladas de rece
 $ radioclkd -c /dev/ttyS0 -t 1 -p /var/lib/radioclkd/polling.pid (con un receptor MSF para recibir la señal y ajustar el tiempo del sistema)
 
 
+radosgw
+Demonio principal de la Ceph Object Gateway, también conocida como RGW o RADOS Gateway. Se trata de la puerta de enlace REST para el almacén de objetos distribuidos RADOS. el núcleo de Ceph. Su objetivo es implementar un superconjunto de la API de Amazon S3 y la API de OpenStack Object Storage [Swift], permitiendo que aplicaciones accedan al almacenamiento de objetos de Ceph mediante llamadas HTTP/REST compatibles con estos estándares. Incluye los ejecutables radosgw-es, radosgw-object-expirer y radosgw-token
+Ejemplo de configuración:
+# nano /etc/ceph/ceph.conf
+       [client.radosgw.gateway]
+       host = tu-hostname
+       keyring = /etc/ceph/ceph.client.radosgw.gateway.keyring
+       log file = /var/log/ceph/client.radosgw.gateway.log
+       rgw_frontends = beast   # o civetweb en versiones anteriores
+Una vez en ejecución, el gateway escucha por defecto en puerto 80/443 o el configurado y expone las APIs S3 y Swift.
+# systemctl start ceph-radosgw@radosgw (iniciar el servicio al arrancar con el nombre por defecto)
+$ radosgw -n client.radosgw.gateway -d -f (ejecución manual para pruebas o depuración)
+$ radosgw-admin user create --uid=miusuario --display-name="Mi Usuario" --access-key=ABC123 --secret-key=XYZ789 (crear usuario)
+$ radosgw-object-expirer (procesar la expiración automática de objetos. Normalmente no e ejecuta manualmente sinó internamente por los procesos)
+$ radosgw-token --encode --ttype=ldap (codificar un token LDAP)
+$ radosgw-token --decode --ttype=ad (decodificar para Active Directory)
+
+
 rain
 [bsdgames]. Muestra chapoteo de agua en la terminal.
 $ rain -d 120 (El máximo de lento. Por defecto 0 [rápido])
