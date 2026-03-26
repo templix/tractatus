@@ -48131,10 +48131,16 @@ Comprobar con df -k [ver] o mount [ver]su correcto montaje
 
 
 randmac
-imprime una dirección MAC aleatoria para interfaces de máquinas virtuales.
+randmac imprime una dirección MAC aleatoria. Esta utilidad ha sido diseñada para proporcionar direcciones MAC aleatorias a las interfaces de máquinas virtuales, por ejemplo, qemu/kvm.
 $ randmac -l -e (local y con dirección EUI64)
 $ randmac -g -u (global y para unicast)
-$ randmac -U -m (para multidifusión y dígitos hexadecimales en mayúsculas)
+$ randmac -U -m (dígitos hexadecimales en mayúsculas y para multidifusión)
+$ randmac -o 358876 (establece el Identificador Único de Organización [OUI] de 1 a 6 dígitos)
+$ randmac -0 7
+$ randmac -q (establece el OUI estándar de qemu/kvm)
+$ randmac -x (establece el OUI estándar de xen)
+$ randmac -v Apple (establece el OUI de un proveedor específico)
+$ randmac -v Huawei
 
 
 random
