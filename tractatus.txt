@@ -15864,6 +15864,7 @@ $ espctag -v -e --set --artist="Unknown" cancion1.spc cancion2.spc (intenta esta
 espeak
 Hablando la terminal. Mismas opciones que aoss espeak.
 $ echo {1..3}" sistemas quedaron y naturalmente eran linux  " | espeak -ves -s 100
+$ espeak -f archivo.txt
 
 
 espeakup
@@ -48186,8 +48187,12 @@ $ randombytes-info
 randtype
 Utilidad para leer un archivo y mostrar la salida carácter por carácter o línea por línea a intervalos aleatorios.
 $ randtype archivo (forma básica con valores por defecto)
-$ randtype -t 10,100000 archivo (Retarda la salida de forma aleatoria entre 10 y 100000 microsegundos)
+$ echo "Linux es un sistema genial................. o no tanto" | randtype
+$ randtype -t 10,10000 archivo (Retarda la salida de forma aleatoria entre 10 y 10000 microsegundos)
 $ echo "Linux es un sistema genial" | randtype -m 4 (Simulando 4 errores en el tecleo de la frase)
+$ man randtype | randtype -t 10,1000 (escritura bastante rápida)
+$ man randtype | randtype -m 1000 -t 5,16000 (sumulando bastantes errores de escritura)
+$ echo '話していたことは全部わかりました。'  |  randtype -t 13,10000 (con otros idiomas)
 
 
 ranger
