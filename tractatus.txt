@@ -48338,6 +48338,15 @@ raspi-config
 Acceso a los parámetros de configuración de la placa RaspberriPi
 
 
+ratbagd
+Demonio D-Bus que gestiona la configuración del ratón. Es específico del entorno de escritorio XFCE y se utiliza para gestionar la configuración del ratón, especialmente en entornos que utilizan dispositivos de entrada avanzados como los ratones Magic Trackpad, Magic Mouse, y Magic Trackpad 2 de Apple.
+$ ratbagd (iniciar el demonio de D-Bus)
+$ pgrep ratbagd (verificar si ratbagd está ejecutándose)
+$ ratbagctl list (ver si existen dispositivos compatibles)
+$ ratbagctl info (información del dispositivo)
+$ ratbagctl name (muestra el nombre del dispositivo)
+
+
 ratmenu
 Permite crear menús X sencillos desde la línea de comandos.
 $ ratmenu -style snazzy -align left -fg yellow -bg red -label 'X progs' ghostview ghostview xdvi xdvi xeyes xeyes xneko xneko &
