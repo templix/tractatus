@@ -48151,6 +48151,40 @@ rake
 Sencillo programa de compilación para Ruby con funcionalidades similares a Make [ver].
 
 
+rally
+Herramienta diseñada para realizar pruebas de rendimiento y evaluaciones comparativas [benchmarking] en entornos OpenStack. OpenStack es una plataforma de computación en la nube que proporciona una variedad de servicios, como computación [Nova], almacenamiento [Swift, Cinder], y redes [Neutron], entre otros. Rally se enfoca en ofrecer una manera sistemática y reproducible de medir el rendimiento de estos servicios en escenarios reales de implementación.
+$ rally deployment check (comprueba credenciales y servicios disponibles en el despliegue)
+$ rally task restart (relanza una tarea o escenarios concretos)
+$ rally deployment destroy (elimina el despliegue registrado por Rally y limpia recursos creados por él)
+1.-
+Archivo que define el escenario de prueba con un ejemplo simple para probar la creación y eliminación de instancias
+$ nano task.json
+{
+  "NovaServers.boot_and_delete_server": [
+    {
+      "args": {
+        "flavor": "m1.tiny",
+        "image": "cirros",
+        "force_delete": true
+      },
+      "runner": {
+        "type": "constant",
+        "times": 10,
+        "concurrency": 2
+      },
+      "context": {
+        "users": {
+          "tenants": 1,
+          "users_per_tenant": 2
+        }
+      }
+    }
+  ]
+}
+Este escenario especifica que se deben crear y eliminar 10 instancias usando el tipo de sabor m1.tiny y la imagen cirros, con un máximo de 2 instancias creadas simultáneamente. El contexto indica que estas operaciones se realizarán bajo un solo inquilino [tenant] con 2 usuarios.
+$ rally task start --task task.json
+
+
 ramfs
 Permite asignar parte de la memoria física para ser utilizada como una partición lo que permite una vez montada, leer o escribir archivos de la RAM como si de una partición de disco se tratara. Dado que se está escribiendo en la memoria RAM del sistema, esta se borra en un reinicio o en un cuelgue. Relacionado con tmpfs [ver], se diferencia de este en que ramfs no usa swap y que si se supera la RAM del sistema, se bloquea. El proceso:
 # mkdir /media/ram
@@ -48182,6 +48216,13 @@ $ VARIABLE=`echo $(($RANDOM))`
 randombytes
 Biblioteca generadora de aleatoriedad. Imprime información legible sobre el generador de números aleatorios [RNG] seleccionado por randombytes().
 $ randombytes-info
+
+
+randomplay
+reproduce la colección de música en orden aleatorio, recordando las canciones reproducidas en distintas sesiones.
+$ randomplay --norandom --noremember (en el directorio de la música, no ejecutar aleatoriamente y no recordar orden. Por defecto ejecutar aleatoriamente y recordar orden)
+$ randomplay --days=15 --pause=2 --player ogg=ogg123 ~/dir1 ~/dir2 (reproduce todos los archivos ogg en dir1 y dir2 que no se hayan reproducido durante 15 días en orden aleatorio con 2 segundos entre canciones)
+$ randomplay --last=10  (reproducir de nuevo las últimas 10 canciones)
 
 
 randtype
