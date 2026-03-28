@@ -33183,6 +33183,26 @@ Se utiliza para arrancar sistemas operativos desde el disco duro. Se ejecuta pri
 # install-mbr /dev/sda (escribiría un MBR genérico en el primer sector del disco /dev/sda)
 
 
+mbrola
+[mbrola-es1 mbrola-es2 mbrola-es3 mbrola-es4]. Sintetizador de voz basado en la concatenación de difonos [pares de fonemas adyacentes]. Toma como entrada una lista de fonemas junto con información prosódica [duración y curva de tono], y produce muestras de audio a 16 bits.
+Crear un archivo con la notación en el alfabeto SAMPA:
+$ nano hola.pho
+       ; silencio de 51 ms
+       _ 51 25 114
+       ; fonema 'o', 400ms, con curva de tono
+       o 400 0 122 50 130
+       l 70 50 115
+       ; fonema 'a', 500ms, con curva de tono
+       a 500 0 110 100 100
+       ; silencio final
+       _ 40
+$ mbrola /usr/share/mbrola/es1/es1 hola.pho salida.wav (crea salida.wav con la palabra "hola" con vez masculina)
+$ mbrola /usr/share/mbrola/es3/es3 hola.pho salida2.wav (crea salida.wav con la palabra "hola" con vez femenina)
+$ cat hola.pho | mbrola /usr/share/mbrola/es1/es1 - salida3.wav (con un pipe)
+$ mbrola -t 1.5 -f 0.8 /usr/share/mbrola/es2/es2 hola.pho salida.wav (hablar más despacio [-t 1.5] y con tono más grave [-f 0.8])
+$ mbrola -v 2.0 /usr/share/mbrola/es1/es1 hola.pho salida.au (subir el volumen y guardar en formato AU)
+
+
 mbsync
 ver isync
 
