@@ -47489,26 +47489,23 @@ $ pytest-benchmark compare 0001 0002 --benchmark-histogram=comparativa_rendimien
 
 python
 Lenguaje de programación
-$ python (abre la shell de python para introducir comandos)
-$ python -c 'print "x"*50'  (escribe una linea xxxxx de 50 caracteres)
-$ python -m SimpleHTTPServer (Abre un servidor web en la carpeta actual. Para visualizarla desde un ordenador de la red local en el navegador con  http://ip:8000)
-$ python -c "import SimpleHTTPServer;SimpleHTTPServer.test()"  (lo mismo pero incluyendo los subdirectorios. Cancelar los procesos con Ctrol+c)
-$ python3 -m http.server (Otra forma de crear un servidor en el propio directorio)
-$ python -m SimpleHTTPServer 8080 (crea un servidor por el puesto especificado)
-$ python -m smtpd -n -c DebuggingServer localhost:25 (Iniciar un servidor de correos en el puerto especificado)
-$ python -m pyftpdlib.ftpserver (inicia servidor ftp)
-$ python -m webbrowser http://web.com (Abre una página en el navegador)
-$ python -m urllib http://web.com (Obtener código fuente de una página)
-$ python -m htmllib test.html (Eliminar etiquetas html de un archivo html)
-$ python -m filecmp dir1 dir2 (Comparar dos directorios)
-$ python -m calendar (Mostrar calendario)
-$ python -m calendar 2013 07 (Mostrar un mes concreto de un año)
-$ python -c "help('modules')" (Muestra los módulos instalados)
-$ python -m platform (Como uname -a)
-$ echo "Linux es un sistema genial" | python -m encodings.rot_13 (Codificar simple en ROT_13 [rotar 13 veces])
-$ echo "Yvahk rf ha fvfgrzn travny" | python -m encodings.rot_13 (Descodificar en ROT_13)
-$ echo "Linux es un sistema genial" | python -m base64 -e (Codificar en base64)
-$ echo "TGludXggZXMgdW4gc2lzdGVtYSBnZW5pYWwK" | python -m base64 -d (Descodificar en base64)
+$ python3 (abre la shell de python para introducir comandos)
+$ python3 -c 'print "x"*50'  (escribe una linea xxxxx de 50 caracteres)
+$ python3 -m http.server (abre un servidor web en localhost puerto 8000)
+$ python3 -m smtpd -n -c DebuggingServer localhost:25 (iniciar un servidor de correos en el puerto especificado)
+$ python3 -m pyftpdlib.ftpserver (inicia servidor ftp)
+$ python3 -m webbrowser http://web.com (abre una página en el navegador)
+$ python3 -m urllib http://web.com (obtener código fuente de una página)
+$ python3 -m htmllib test.html (eliminar etiquetas html de un archivo html)
+$ python3 -m filecmp dir1 dir2 (comparar dos directorios)
+$ python3 -m calendar (mostrar calendario)
+$ python3 -m calendar 2013 07 (mostrar un mes concreto de un año)
+$ python3 -c "help('modules')" (muestra los módulos instalados)
+$ python3 -m platform (como uname -a)
+$ echo "Linux es un sistema genial" | python3 -m encodings.rot_13 (codificar simple en ROT_13 [rotar 13 veces])
+$ echo "Yvahk rf ha fvfgrzn travny" | python3 -m encodings.rot_13 (descodificar en ROT_13)
+$ echo "Linux es un sistema genial" | python3 -m base64 -e (codificar en base64)
+$ echo "TGludXggZXMgdW4gc2lzdGVtYSBnZW5pYWwK" | python3 -m base64 -d (descodificar en base64)
 
 
 python-hachoir-metadata
@@ -48472,6 +48469,11 @@ Para crear Bundles de Actualización, primero se necesita crear un manifiesto
 # rauc service (iniciar RAUC como servicio D-Bus, normalmente via systemd)
 # rauc info actualizacion.raucb (consultar información vía D-Bus)
 # setenv BOOT_ORDER "system1 system0" (marca que se intente arrancar desde system1, si el sistema falla 3 veces, U-Boot vuelve automáticamente a system0)
+
+
+raven
+Herramienta Python que amplía las capacidades del módulo http.server, ofreciendo un servidor web autónomo para la carga de archivos.
+$ raven (abre una página web con el directorio en el que se está)
 
 
 rbash
