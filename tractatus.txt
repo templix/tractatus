@@ -48212,6 +48212,39 @@ Permite asignar parte de la memoria física para ser utilizada como una partici�
 Comprobar con df -k [ver] o mount [ver]su correcto montaje
 
 
+rancid
+[Really Awesome New Cisco Config Differ]. Conjunto de herramientas para ISP, basado en expect y scripts de shell, para administrar las configuraciones de los routers. Rancid monitoriza la configuración de un router (o dispositivo), incluyendo software y hardware (tarjetas, números de serie, etc.), utilizando CVS, Subversion o Git. Las herramientas son a10login, agmrancid, alogin, anlogin, arancid, avologin, blogin, brancid, brlogin, cat5rancid, clogin, control_rancid, csblogin, cssrancid, dllogin, elogin, erancid, f5rancid, flogin, fnlogin, fxlogin, hlogin, hrancid, htlogin, htrancid, jerancid, jlogin, mrancid, mrvlogin, mtlogin, nlogin, noklogin, nrancid, nslogin, nsrancid, panlogin, plogin, rancid, rancid-cvs, rancid-run, rancid_par, rblogin, rivlogin, rivrancid, rrancid, tlogin, trancid, ulogin, wlogin, xilogin, xirancid y xlogin. La razón por la existen tantos ejecutables es que cada fabricante [Cisco, Juniper, HP, F5, etc.] tiene comandos y formas de interactuar distintas. RANCID separa la lógica en scripts de login y scripts de recolección.
+$ sudo nano /etc/rancid/rancid.conf
+Buscar la variable LIST_OF_GROUPS Y poner algo como LIST_OF_GROUPS="PRODUCCION".
+$ rancid-cvs (crear la estructura del directorio de trabajo, normalmente en /var/lib/rancid/PRODUCCION/)
+Para que RANCID funcione, el ecosistema se basa en dos archivos de texto que se deben configurar:
+$ nano ~/.cloginrc
+        --- AJUSTES DE COMPORTAMIENTO ---
+	# Para evitar que pregunte "¿Está seguro de que desea conectar (yes/no)?" en SSH
+	# Usuario por defecto para todos los equipos (*)
+	add cyphertype * {aes256-ctr}
+	add autoenable * {1}
+	# --- CONFIGURACIÓN GLOBAL ---
+	# Método de conexión: primero intenta SSH, si falla, Telnet (se puede dejar solo ssh)
+	add method * {ssh} {telnet}
+	# Usuario por defecto para todos los equipos (*)
+	add user * {USER}
+	# Contraseña de login y contraseña de "enable" (modo privilegiado)
+	# Formato: {password} {enable_password}
+	add password * {PASS} {PASS}
+$ sudo nano /var/lib/rancid/PRODUCCION/router.db
+        192.168.1.1:huawai:up
+	192.168.1.1:hp:up
+$ clogin 192.168.1.1 (conectar con el router. Si pide usuario y contraseña es que ~/.cloginrc no está bien configurado)
+$ clogin -d 192.168.18.1 (si se produce un error, mostrará todo el diálogo interno. Mirar las líneas antes del error)
+Si no conecta con el router puede intentarse entrar por ssh normal:
+$ ssh -c aes256-ctr -l USER 192.168.1.1
+$ ssh -o KexAlgorithms=+diffie-hellman-group14-sha1 -o HostKeyAlgorithms=+ssh-rsa -l USER 192.168.1.1 (o forzando una compatibilidad más amplia)
+Si así tampoco entra puede ser problema de ssh o, lo más normal, que el protocolo ssh esté filtrado [cerrado] en el router por la operadora. Puede comprobarse con:
+$ nmap -p 22 192.168.1.1
+Si muestra algo como "22/tcp filtered ssh" en tal caso el comando rancid no tiene nada que hacer. Si está Closed, el servicio SSH está apagado en el router.
+
+
 randmac
 randmac imprime una dirección MAC aleatoria. Esta utilidad ha sido diseñada para proporcionar direcciones MAC aleatorias a las interfaces de máquinas virtuales, por ejemplo, qemu/kvm.
 $ randmac -l -e (local y con dirección EUI64)
