@@ -48392,6 +48392,55 @@ Los comandos ratpoison con C-t :
 8. msgwait (número de segundos que se muestra la salida de un comando en la pantalla)
 
 
+rauc
+[Robust Auto-Update Controller]. Herramienta especializada para gestionar actualizaciones de software de forma segura y atómica en sistemas Linux embebidos. Es especialmente útil en dispositivos donde la fiabilidad es crítica como routers, sistemas IoT, dispositivos médicos, automoción... RAUC utiliza el concepto de particiones redundantes [A/B partitioning]: Tiene dos conjuntos idénticos de particiones, sistema A y sistema B, uno está activo, el que arranca actualmente, el otro está en standby y es donde se instala la actualización. Si la actualización falla, el sistema puede volver automáticamente a la versión anterior
+Estructura Básica de Configuración
+# nano /etc/rauc/system.conf
+       [system]
+       compatible=MiDispositivo-ModeloX
+       bootloader=uboot  # o grub, efi, barebox, etc.
+       #
+       [slot.rootfs.0]
+       device=/dev/mmcblk0p2
+       type=ext4
+       bootname=system0
+       #
+       [slot.rootfs.1]
+       device=/dev/mmcblk0p3
+       type=ext4
+       bootname=system1
+       #
+       [slot.kernel.0]
+       device=/dev/mmcblk0p1
+       type=raw
+       parent=rootfs.0
+       #
+       [slot.kernel.1]
+       device=/dev/mmcblk0p4
+       type=raw
+       parent=rootfs.1
+# rauc status (ver estado actual de las ranuras [slots])
+# rauc install /path/to/actualizacion-1.2.3.raucb (instalar un bundle de actualización [.raucb])
+# rauc install --progress /path/to/actualizacion.raucb (verificar progreso detallado)
+Para crear Bundles de Actualización, primero se necesita crear un manifiesto
+# nano manifest.raucm
+       [update]
+       compatible=MiDispositivo-ModeloX
+       version=1.2.3
+       [image.rootfs]
+       filename=rootfs.tar.gz
+       [image.kernel]
+       filename=zImage
+# rauc bundle --cert=cert.pem --key=key.pem /directorio-con-manifiesto/ actualizacion-1.2.3.raucb (crear el bundle firmado [requiere certificados])
+# rauc bundle --no-sign /directorio-con-manifiesto/ actualizacion.raucb (crear bundle sin firmar [solo para desarrollo])
+# rauc status mark-good (marcar la ranura actual como "buena" [boot successful])
+# rauc status mark-active other (marcar la otra ranura para el próximo arranque)
+# rauc verity slot rootfs.1 (verificar integridad de una ranura)
+# rauc service (iniciar RAUC como servicio D-Bus, normalmente via systemd)
+# rauc info actualizacion.raucb (consultar información vía D-Bus)
+# setenv BOOT_ORDER "system1 system0" (marca que se intente arrancar desde system1, si el sistema falla 3 veces, U-Boot vuelve automáticamente a system0)
+
+
 rbash
 shell restringido. Se usa para imponer a un usuario un entorno severamente limitado en el que, por ejemplo, no podrá cambiar de directorio [cd], especificar nombre que contengan la /, redirigir la salida usando operadores de redirección [>, <, >>], reemplazar la shell, desactivar el modo restringido, etc. Equivalente a "bash -c"
 # adduser -s /bin/rbash juan (Crear un usuario con shell restringido)
