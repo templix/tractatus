@@ -48476,6 +48476,13 @@ Herramienta Python que amplía las capacidades del módulo http.server, ofrecien
 $ raven (abre una página web con el directorio en el que se está)
 
 
+rawdns
+Reenviador DNS [Domain Name System] que permite que las solicitudes DNS devuelvan directamente las direcciones IP de los contenedores Docker. Está diseñado para resolver nombres de host a direcciones IP dentro de un entorno Docker, permitiendo que los contenedores se comuniquen entre sí utilizando nombres de host en lugar de direcciones IP.
+$ rawdns (inicia el servicio que comienza a escuchar solicitudes DNS en el puerto por defecto [53])
+$ rawdns -p 5353 (que escuche en un puerto diferente al por defecto)
+$ rawdns -i eth0 (inicia para que escuche solicitudes DNS en la interfaz de red eth0)
+
+
 rbash
 shell restringido. Se usa para imponer a un usuario un entorno severamente limitado en el que, por ejemplo, no podrá cambiar de directorio [cd], especificar nombre que contengan la /, redirigir la salida usando operadores de redirección [>, <, >>], reemplazar la shell, desactivar el modo restringido, etc. Equivalente a "bash -c"
 # adduser -s /bin/rbash juan (Crear un usuario con shell restringido)
