@@ -48483,6 +48483,28 @@ $ rawdns -p 5353 (que escuche en un puerto diferente al por defecto)
 $ rawdns -i eth0 (inicia para que escuche solicitudes DNS en la interfaz de red eth0)
 
 
+razor
+Herramienta para interactuar con Vipul's Razor, una red colaborativa distribuida para la detección de spam. Permite a los usuarios reportar spam, verificar si un mensaje es spam conocido y consultar la reputación de remitentes. Funciona mediante un sistema de firmas distribuidas, cuando un usuario reporta un mensaje como spam, se genera una firma única [hash] que se comparte con la red. Otros usuarios pueden consultar esta base de datos para verificar si un mensaje es spam conocido. Incluye los ejecutables razor-admin, razor-check, razor-client, razor-report y razor-revoke. El archivo de  configuración en /etc/razor/razor-agent.conf
+$ razor-check ./mbox (chequear un directorio)
+$ razor-check -d mail.1 mail.2 (chequear los correos mencionados en modo verbose)
+$ cat mensaje1.eml | razor-check (chequear un mensaje como pipe)
+$ cat mensaje1.eml | razor-report (reportar como spam)
+$ cat spam1.eml spam2.eml | razor-report (reportar múltiples mensajes)
+$ razor-revoke ./mail (revocar la nominación de spam del directorio mail)
+$ razor-admin -register -user=usuario -pass=contraseña (registrar un nuevo usuario en la red Razor)
+$ razor-admin -create trabajo (crear nueva identidad)
+1.-
+Integración con SpamAssassin
+$ nano ~/.spamassassin/user_prefs
+       # Activar Razor
+       use_razor 1
+       razor_config /etc/razor/razor-agent.conf
+       # Puntuación adicional para mensajes detectados por Razor
+       score RAZOR_CHECK 2.500
+       score RAZOR_CF_RANGE_51_100 3.000
+Notas.- razor requiere registro para reportar spam. Al reportar, se envían hashes del mensaje, no el contenido completo y se usa junto con otras listas negras [DNSBL] y filtros bayesianos
+
+
 rbash
 shell restringido. Se usa para imponer a un usuario un entorno severamente limitado en el que, por ejemplo, no podrá cambiar de directorio [cd], especificar nombre que contengan la /, redirigir la salida usando operadores de redirección [>, <, >>], reemplazar la shell, desactivar el modo restringido, etc. Equivalente a "bash -c"
 # adduser -s /bin/rbash juan (Crear un usuario con shell restringido)
