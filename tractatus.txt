@@ -48483,6 +48483,17 @@ $ rawdns -p 5353 (que escuche en un puerto diferente al por defecto)
 $ rawdns -i eth0 (inicia para que escuche solicitudes DNS en la interfaz de red eth0)
 
 
+razercfg
+Herramienta basada en Python de configuración de dispositivos Razer como teclados, ratones y auriculares.
+$ razercfg --profile razer --keyboard "Razer BlackWidow V3 Pro" --profile-name "Razer Keyboard" --profile-description "Custom Razer Keyboard Profile" (configurar el perfil de teclado Razer)
+$ razercfg --profile razer --mouse "Razer Basilisk Ultimate" --profile-name "Razer Mouse" --profile-description "Custom Razer Mouse Profile" (configurar el perfil de ratón Razer)
+$ razercfg --profile razer --apply "My Razer Keyboard Profile" (aplicar un perfil personalizado)
+$ razercfg --profile razer --create "My Custom Profile" --profile-description "Custom profile for my Razer device" (crear un nuevo perfil personalizado)
+$ razercfg --profile razer --delete "My Custom Profile" (eliminar un perfil personalizado)
+$ razercfg --list (ver la configuración actual)
+$ razercfg --update "Razer BlackWidow V3 Pro" --profile-name "Updated Keyboard Profile" (actualizar la configuración de un dispositivo Razer)
+
+
 razor
 Herramienta para interactuar con Vipul's Razor, una red colaborativa distribuida para la detección de spam. Permite a los usuarios reportar spam, verificar si un mensaje es spam conocido y consultar la reputación de remitentes. Funciona mediante un sistema de firmas distribuidas, cuando un usuario reporta un mensaje como spam, se genera una firma única [hash] que se comparte con la red. Otros usuarios pueden consultar esta base de datos para verificar si un mensaje es spam conocido. Incluye los ejecutables razor-admin, razor-check, razor-client, razor-report y razor-revoke. El archivo de  configuración en /etc/razor/razor-agent.conf
 $ razor-check ./mbox (chequear un directorio)
@@ -48522,6 +48533,38 @@ Y añadimos enlaces de los binarios que queramos permitir al usuario [en este ca
 # ln -s /bin/cat /home/juan/apps/
 Y bloqueamos el archivo:
 # chattr +i /home/juan/.bash_profile
+
+
+rbd-fuse
+Cliente basado en FUSE [Filesystem in Userspace] para el sistema de archivos distribuido Ceph. Permite mapear imágenes RBD [RADOS Block Device] de Ceph como archivos regulares en el sistema de archivos local. Esto significa que se puede acceder a las imágenes de Ceph como si fueran archivos normales, lo cual es útil para ciertas aplicaciones que requieren acceso a bloques de almacenamiento de manera similar a como se accede a archivos.
+# rbd-fuse mount /dev/nbd0 /mnt/mi-volumen (montar una imagen RBD como un archivo)
+# rbd-fuse unmount /dev/nbd0 (desmontar una imagen RBD)
+
+
+rbd-mirror
+Demonio para replicar imágenes RBD entre clústeres Ceph, transmitiendo los cambios de forma asíncrona. Ver nbd-fuse y rbd-nbd.
+# rbd-mirror --cluster ceph --id mirror (iniciar el demonio rbd-mirror en el clúster local)
+# rbd mirror pool status replicapool (ver el estado de la replicación de un pool)
+# rbd mirror image status replicapool/mi-imagen (ver el estado de una imagen concreta)
+# rbd mirror pool enable replicapool pool (habilitar mirroring en un pool [pool mode])
+# rbd mirror pool enable replicapool image (habilitar mirroring solo en una imagen concreta [image mode])
+# rbd mirror image enable replicapool/mi-imagen snapshot
+# rbd mirror pool peer add replicapool client.admin@ceph-remoto (añadir el clúster remoto como peer)
+# rbd mirror pool peer list replicapool (listar los peers configurados)
+# rbd mirror image resync replicapool/mi-imagen (forzar sincronización de una imagen)
+# rbd mirror image promote replicapool/mi-imagen (promover una imagen a primaria en caso de failover)
+# rbd mirror image demote replicapool/mi-imagen (degradar una imagen a secundaria tras recuperación)
+
+
+rbd-nbd
+Mapear imágenes rbd de Ceph como dispositivos de bloques locales. Ver nbd-fuse y nbd-mirror.
+# rbd-nbd map mipool/mi-imagen (mapear una imagen RBD como dispositivo de bloque)
+# rbd-nbd map mipool/mi-imagen --io-timeout 60 --nbds_max 8 (mapear con opciones específicas com tamaño de caché, timeout)
+# rbd-nbd list (listar los dispositivos NBD [Network Block Device] mapeados actualmente)
+# rbd-nbd map mipool/mi-imagen --device /dev/nbd1 (mapear con un nombre de dispositivo concreto)
+# rbd-nbd unmap /dev/nbd0 (desmapear un dispositivo)
+# rbd-nbd unmap mipool/mi-imagen (desmapear especificando la imagen si no se recuerda el dispositivo)
+# rbd-nbd list --format json (ver los dispositivos mapeados con más detalle)
 
 
 rbenv
