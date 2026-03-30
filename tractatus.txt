@@ -48574,6 +48574,42 @@ $ rbenv init
 $ rbenv commands (listar todos los comandos disponibles)
 
 
+rblcheck
+Herramienta cliente para consultar servidores DNSBL las listas negras de DNS. La idea principal del filtro es que, cuando alguien es incluido en una lista negra por algún tipo de abuso de correo electrónico, se resuelve un nuevo nombre de dominio con el formato "2.0.0.127.dominio.com", donde 2.0.0.127 es la dirección IP abusiva invertida [127.0.0.2], y "dominio.com" es el nombre de dominio base del servicio de filtrado. Su función es sencilla se le pasa una dirección IP y él va a preguntar a varios servidores de listas negras como Spamhaus, Barracuda, etc. si esa IP está en su "lista negra" por ser conocida por enviar spam o malware .
+$ rblcheck -s sbl.spamhaus.org 8.8.8.8 (que consulte solo contra la famosa lista sbl.spamhaus.org la IP de Google 8.8.8.8)
+$ rblcheck -t -s sbl.spamhaus.org -s zen.spamhaus.org -s bl.spamcop.net google.com (que intente obtener el motivo o enlace de la lista y consultar en varias listas un dominio)
+$ rblcheck -n 1.1.1.1 -s zen.spamhaus.org 8.8.8.8 (si el servidor DNS local tiene problemas, se puede usar uno alternativo como el de Cloudflare)
+1.-
+Si siempre se consulta las mismas listas, puede crearse un archivo a una por linea.
+$ nano mis_listas.txt
+       # Este es mi archivo de listas
+       sbl.spamhaus.org
+       zen.spamhaus.org
+       bl.spamcop.net
+       dnsbl.sorbs.net
+$ rblcheck -S mis_listas.txt -t IP (ejecutar leyendo el archivo anterior)
+
+
+rbldnsd
+Pequeño servidor local de nombres DNS autoritativo, diseñado para gestionar listas de bloqueo basadas en DNS [DNSBL]. Puede gestionar listas de bloqueo basadas en IP y en nombres. Ver rbl-check.
+$ rbldnsd -b 127.0.0.1 -n misbloqueos:ip4tset:bloqueados.txt (levantar un servidor básico para una lista negra privada)
+-b address [Bind] --> Le dice a rbldnsd en qué IP y puerto escuchar, por defecto puerto 53.
+zonespec [Especificación de zona] --> define qué zona DNS va a servir [misbloqueos], con qué tipo de dataset [ip4tset] y desde qué archivo cargar los datos [bloqueados.txt].
+$ rbldnsd -u rbldns:rbldns -r /var/lib/rbldns-chroot -w /zones -b 0.0.0.0 -n mi-lista:ip4trie:bloqueados.txt (ejemplo típico en producción)
+-u user[:group] --> Cambia al usuario rbldns o el creado tras arrancar como root para vincularse al puerto 53 [privilegiado]. Si alguien vulnera el servicio, no tendrá permisos de root.
+-r rootdir --> Crea un entorno virtual donde el proceso solo ve ese directorio sin acceso al resto del sistema. Es el equivalente a encerrar al servicio en una jaula.
+-w workdir --> Directorio de trabajo donde rbldnsd buscará los archivos de zona si no se usa rutas absolutas.
+$ rbldnsd -b 0.0.0.0 -n mis-ips:ip4trie:ips-bloqueadas.txt mis-dominios:dnset:dominios-bloqueados.txt (combinando tipos)
+Algunas opciones útiles:
+-c 60 --> comprueba cada 60 segundos si el archivo de datos cambió y lo recarga en caliente
+-f --> Mientras recarga la zona, que puede tener cientos de miles de entradas, un proceso hijo atiende las consultas para que no haya downtime pero duplica el uso de RAM.
+-q --> Carga las zonas después de pasar a segundo plano. Útil para que el script de inicio no se quede colgado esperando a que cargue una lista enorme.
+-a --> Omite la sección AUTH en respuestas regulares. Hace las respuestas más pequeñas y evita dar información extra sobre la infraestructura DNS.
+-A --> Lo contrario de -a, incluye sección AUTH en cada respuesta.
+-v --> Oculta la versión en respuestas version.bind.
+-vv --> rechaza directamente esas consultas. Nadie podrá sondear la versión que se usa.
+
+
 rcconf
 Parar/arrancar procesos durante el inicio
 $ rcconf -now
