@@ -48637,6 +48637,41 @@ Parar/arrancar procesos durante el inicio
 $ rcconf -now
 
 
+rclone
+Programa para sincronizar archivos y directorios entre el sistema de archivos local y docenas de proveedores de almacenamiento en la nube [Google Drive, Amazon S3, Openstack Swift, Dropbox, Google Cloud Storage, Amazon Drive, etc].
+$ rclone config (inicia el asistente interactivo. Cuando abra el navegador, iniciar sesión con la cuenta de Dropbox y darle "Permitir". Volver a la terminal y pulsar "Enter")
+$ rclone config reconnect dropbox: (si se cambia de máquina o caduca el token, volver a loguearse)
+$ rclone size dropbox: (ver el tamaño total del Dropbox)
+$ rclone listremotes (ver los remotos)
+$ rclone ls dropbox: (listar archivos del directorio remoto)
+$ rclone lsd dropbox: (lista directorios)
+$ rclone copy script.sh dropbox:Dades -P (copiar un script local al remoto mostrando una barra de progreso)
+$ rclone copy ~/fotos/ dropbox:Dades -P (copiar un directorio al remoto)
+$ rclone copy dropbox:Dades/archivo ~/Docs/ -P (descargar un archivo remoto al directorio Docs local)
+$ rclone copy dropbox:Dades/vacaciones26/ ~/fotos/ -P (descargar el directorio "vacaciones26" remoto al directorio ~/fotos local y mostrando progreso)
+$ rclone copy dropbox:Dades/ mi_gdrive:backups/proyectos/ (copiar un directorio [Dades] entre dos nubes de dropbox Google Drive al directorio backups/proyectos)
+$ rclone copy ~/Dropbox/Dades dropbox:Dades -P --update (copiar solo los archivos nuevos o modificados)
+$ rclone sync ~/Dropbox/Dades/ dropbox:Dades/ --dry-run (sincronizar de forma simulada el local con el remoto)
+$ rclone sync ~/Dropbox/Dades/ dropbox:Dades/ --interactive (lo mismo de forma interactiva)
+$ rclone sync ~/Dropbox/Dades dropbox:Dades -P --delete-before (sincronizar de verdad. Borra todo lo que no esté en local)
+$ rclone mkdir dropbox:scripts/ (crear un directorio en el remoto)
+$ rclone delete dropbox:scripts/ (borrar el directorio remoto)
+$ rclone delete dropbox:scripts/ptrac (borrar un archivo remoto)
+$ rclone rmdir dropbox:CarpetaVacia/ (borrar un carpeta vacia del remoto)
+$ rclone purge dropbox:scripts/ (borrar todo un directorio y su contenido)
+$ rclone about dropbox: (ver información de cuota/uso)
+$ rclone sync ~/Dropbox/Datos/ dropbox:Backup/ --progress --dry-run --exclude "*.log" --transfers 16 (simular una sincronización excluiendo .log)
+1.-
+Montar la nube como si fuera una carpeta local:
+$ mkdir ~/nube
+$ rclone mount dropbox: ~/nube/ --daemon --vfs-cache-mode writes
+$ rclone mount dropbox: ~/nube/ --daemon --vfs-cache-mode writes --vfs-cache-max-size 500M --dir-cache-time 12h (montar el remoto de forma más estable)
+$ ls nube
+drwxrwxr-x 1 tux tux 0 31 de març  15:46 Dades
+drwxrwxr-x 1 tux tux 0 31 de març  15:46 public
+$ fusermount -u nube (desmontar)
+
+
 rdesktop
 Conexión a escritorio remoto.
 $ rdesktop -k es -g 1024×768 -u USER -p PASS -a 15 -T tux -D client (Especificando teclado español [k], medidas de la ventana [g], usuario [u] y contraseña [p], especificar un mobre para la ventana [T] y suprimiendo la decoración de la ventana [D])
