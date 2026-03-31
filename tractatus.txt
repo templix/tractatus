@@ -48610,6 +48610,17 @@ Algunas opciones útiles:
 -vv --> rechaza directamente esas consultas. Nadie podrá sondear la versión que se usa.
 
 
+rbootd
+[Remote BOOT Daemon]. Demonio de arranque remoto que se utiliza para arranar algunas estaciones de trabajo o servidores HP a través de la red, como las series 9000/300 y 9000/400. También puede arrancar algunas estaciones de trabajo PA RISC como la 9000/730. Este daemon responde a solicitudes de arranque remoto enviadas por clientes que soportan el protocolo BOOTP o PXE [Preboot Execution Environment].
+Ejemplo básico de configuración para que rbootd arranque una estación con MAC 08:00:20:12:34:56 usando un archivo de arranque en /tftpboot/hp9000/boot_image.
+# nano /etc/rbootd.conf
+       mac 08:00:20:12:34:56
+       file /tftpboot/hp9000/boot_image
+# systemctl start rbootd (iniciar el servicio)
+El cliente envía una solicitud BOOTP de arranque por red y el servidor rbootd responde con la información necesaria: dirección IP, imagen de arranque, etc. y descarga el sistema operativo o sistema de arranque desde la red y comienza la operación.
+Nota.- rbootd es un servicio bastante antiguo y específico para ciertos hardware de HP, para entornos modernos, el uso de PXE y otros servicios de arranque en red, junto con tftp y dhcp, suelen ser más comunes y compatibles.
+
+
 rc
 Intérprete de comandos y lenguaje de programación similar a sh. Se basa en el intérprete de comandos homónimo de AT&T Plan 9 con una sintaxis similar a la de C y un potente mecanismo para manipular variables.
 
