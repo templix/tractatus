@@ -48681,6 +48681,20 @@ $ rcup -v (aplica los archivos de configuración gestionados por rcm en modo ver
 $ rcdn -v (eliminar los enlaces simbólicos creados por rcup`, restaurar los archivos originales si es posible y modo verboso)
 
 
+rcs
+[Revision Control System]. Gestiona múltiples revisiones de archivos automatizando el almacenamiento, la recuperación, el registro, la identificación y la fusión de revisiones. RCS es útil para textos que se revisan con frecuencia, como programas, documentación, gráficos, artículos y cartas modelo. Incluye los ejecutables ci, co, ident, merge, rcsclean, rcsdiff, rcsmerge y rlog
+$ ci ejemplo.c (solicitará un mensaje de revisión y almacenará la versión en el sistema RCS)
+$ ci -m "Agrega función para calcular suma" ejemplo.c (lo mismo con el mensaje incluido)
+$ co ejemplo.c (extrae una revisión del repositorio para editarla y la deja en el directorio de trabajo)
+$ co -r1.2 ejemplo.c (obtener una revisión específica)
+$ ident ejemplo.c (mostrará información como la versión, autor y fecha)
+$ merge -r1.1 -r1.2 ejemplo.c (intenta fusionar las revisiones 1.1 y 1.2 del archivo ejemplo.c)
+$ rcsclean . (revisa el directorio actual y elimina archivos temporales o no controlados)
+$ rcsdiff -r1.1 -r1.2 ejemplo.c (compara las revisiones 1.1 y 1.2 del archivo)
+$ rlog ejemplo.c (proporciona una lista de revisiones, autores y mensajes de cambios)
+Nota.- rcsmerge funciona de manera similar a merge y puede usarse en scripts de automatización.
+
+
 rdesktop
 Conexión a escritorio remoto.
 $ rdesktop -k es -g 1024×768 -u USER -p PASS -a 15 -T tux -D client (Especificando teclado español [k], medidas de la ventana [g], usuario [u] y contraseña [p], especificar un mobre para la ventana [T] y suprimiendo la decoración de la ventana [D])
