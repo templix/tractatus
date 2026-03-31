@@ -48672,6 +48672,15 @@ drwxrwxr-x 1 tux tux 0 31 de març  15:46 public
 $ fusermount -u nube (desmontar)
 
 
+rcm
+[RC Management]. Conjunto de herramientas diseñadas para gestionar archivos de configuración también conocidos como dotfiles o archivos rc. Su objetivo principal es centralizar la gestión de estos archivos, permitiendo almacenarlos en un único directorio y crear enlaces simbólicos o copias en los lugares adecuados del sistema. Incluye los ejecutables lsrc, mkrc, rcdn y rcup
+$ lsrc (lista los archivos gestionados por rcm en el directorio de configuración por defecto, ~/.rcrc)
+$ mkrc ~/.config/polybar/config.ini (moverá config.ini al directorio de rcm [/home/USER/.dotfiles/] y creará en su lugar en enlace simbólico apuntando al nuevo archivo)
+$ mkrc ~/.local/share/applications/* (lo mismo de todos los archivos del directorio)
+$ rcup -v (aplica los archivos de configuración gestionados por rcm en modo verboso)
+$ rcdn -v (eliminar los enlaces simbólicos creados por rcup`, restaurar los archivos originales si es posible y modo verboso)
+
+
 rdesktop
 Conexión a escritorio remoto.
 $ rdesktop -k es -g 1024×768 -u USER -p PASS -a 15 -T tux -D client (Especificando teclado español [k], medidas de la ventana [g], usuario [u] y contraseña [p], especificar un mobre para la ventana [T] y suprimiendo la decoración de la ventana [D])
