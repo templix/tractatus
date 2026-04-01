@@ -38991,6 +38991,7 @@ $ nmcli general reload (reiniciar servicio despues de modificar una conexión)
 $ nmcli con mod "Xartic-E413AD_5G" ipv4.dns "1.1.1.1 9.9.9.9" (cambiar DNSs: cloudflare y quad9)
 $ nmcli con mod "Xartic-E413AD_5G" ipv4.ignore-auto-dns yes (no realizar actualizaciones automáticas de dns)
 $ nmcli con edit (editor interactivo)
+$ nmcli dev show wlp2s0 | grep DNS (ver las DNS de la conexión)
 
 
 nmon
