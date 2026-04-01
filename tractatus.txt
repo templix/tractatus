@@ -48704,6 +48704,17 @@ $ ci archivo.txt (entrar un comentario y terminar con un ".")
 $ co archivo.txt (muestra información de la revisión)
 
 
+rdap
+Herramienta escrita en Go que implementa el protocolo RDAP [Registration Data Access Protocol], que es el sucesor moderno del antiguo protocolo WHOIS [ver] para consultar información sobre dominios, direcciones IP, ASNs [Autonomous System Numbers] y entidades de registro.
+$ rdap 8.8.8.8 (consultar una IP)
+$ rdap -v 192.168.0.0/24 (consultar un rango CIDR [Classless Inter-Domain Routing] y en modo verbose)
+$ rdap AS15169 (consultar un ASN [google])
+$ rdap --json AS15169 (salida en formato JSON)
+$ rdap tuxapuntes.com (consultar un dominio)
+$ rdap -f registrant -f administrative -f billing amazon.com.br
+$ rdap -s https://rdap.db.ripe.net/ -t help (consulta sobre un servidor RDAP)
+
+
 rdesktop
 Conexión a escritorio remoto.
 $ rdesktop -k es -g 1024×768 -u USER -p PASS -a 15 -T tux -D client (Especificando teclado español [k], medidas de la ventana [g], usuario [u] y contraseña [p], especificar un mobre para la ventana [T] y suprimiendo la decoración de la ventana [D])
