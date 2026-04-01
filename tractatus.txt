@@ -48695,6 +48695,15 @@ $ rlog ejemplo.c (proporciona una lista de revisiones, autores y mensajes de cam
 Nota.- rcsmerge funciona de manera similar a merge y puede usarse en scripts de automatización.
 
 
+rcs-blame
+[rcs]. Muestra la última modificación de cada línea en un archivo RCS. Muestra quién modificó por última vez cada línea de un archivo, junto con número de revisión, autor y fecha.
+$ blame -r1.2 archivo.txt (muestra anotaciones relativas a una revisión concreta)
+$ blame -d archivo.txt (incluye fechas más detalladas)
+Nota.- No funciona sobre cualquier archivo, solo si el archivo está bajo control de RCS ya que los archivos no se gestionan directamente, sino mediante un archivo especial "archivo.txt,v" cuya ",v" contiene el historial de revisiones. Ver rcs. Para crear este archivo:
+$ ci archivo.txt (entrar un comentario y terminar con un ".")
+$ co archivo.txt (muestra información de la revisión)
+
+
 rdesktop
 Conexión a escritorio remoto.
 $ rdesktop -k es -g 1024×768 -u USER -p PASS -a 15 -T tux -D client (Especificando teclado español [k], medidas de la ventana [g], usuario [u] y contraseña [p], especificar un mobre para la ventana [T] y suprimiendo la decoración de la ventana [D])
