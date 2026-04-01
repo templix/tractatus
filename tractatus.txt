@@ -38996,7 +38996,7 @@ $ nmcli dev show wlp2s0 | grep DNS (ver las DNS de la conexión)
 Que el sistema use unas DNS concretas modificando el perfil de conexión de NetworkManager
 $ nmcli con show (ver el nombre exacto de la conexión Wi‑Fi)
 Suponiendo que el nombre de la conexión wifi es Xartic-E413AD_5G y queremos usar las DNS de opendns [208.67.222.222 208.67.220.220]
-# nmcli con mod Xartic-E413AD_5G ipv4.ignore-auto-dns yes ipv4.dns "208.67.222.222 208.67.220.220"
+# nmcli con mod Xartic-E413AD_5G ipv4.method auto ipv4.ignore-auto-dns yes ipv4.dns "208.67.222.222 208.67.220.220"
 # nmcli con mod Xartic-E413AD_5G ipv6.ignore-auto-dns yes
 # nmcli con down Xartic-E413AD_5G (cerrar la conexión)
 # nmcli con up Xartic-E413AD_5G (levantar la conexión)
@@ -39006,16 +39006,29 @@ Las DNS de level3 [4.2.2.1 4.2.2.2], las de DNSadvantage [156.154.70.1 156.154.7
 $ nmcli dev show wlp2s0 | grep DNS (comprobar las DNS de la conexión para verificar que se han cambiado)
 Esta configuración mantiene DHCP para la IP y fuerza DNS estáticos para la conexión y queda fijada en el perfil de NetworkManager por tanto aunque se reinicie la configuración persiste.
 # nmcli con show "Xartic-E413AD_5G" | grep -E 'ipv4.method|ipv4.ignore-auto-dns|ipv4.dns|ipv6.ignore-auto-dns' (ver el perfil de NetworkManager)
+Regla general rápida
+ipv4.method auto --> DHCP para la IP.
+ipv4.ignore-auto-dns yes --> no aceptar DNS del router.
+ipv4.dns "1.1.1.1 1.0.0.1" --> DNS fijos que se establecen.
+down + up --> Cerrar conexión y volver a levantarla para aplicar los cambios.
 2.-
 Si solo se quiere fijar DNS manuales e ignorar los del router, la conexión puede ser con las DNS de Cloudflare:
 # nmcli con mod "Xartic-E413AD_5G" ipv4.method auto ipv4.ignore-auto-dns yes ipv4.dns "1.1.1.1 1.0.0.1"
+# nmcli con down "Xartic-E413AD_5G"
+# nmcli con up "Xartic-E413AD_5G"
+3.-
+Volver a DNS automáticos
+Para deshacer los dos casos anteriores y dejar que NetworkManager acepte los DNS que llegue a recibir por DHCP:
+# nmcli con mod "Xartic-E413AD_5G" ipv4.ignore-auto-dns no
+# nmcli con mod "Xartic-E413AD_5G" ipv4.dns ""
+# nmcli con mod "Xartic-E413AD_5G" ipv6.ignore-auto-dns no
 # nmcli con down "Xartic-E413AD_5G"
 # nmcli con up "Xartic-E413AD_5G"
 
 
 nmon
 Monitor del sistema
-# nmon   (arranca la aplicación y muestra las teclas de control para escoger lo que se monitorea. “q” para cerrar la aplicación)
+# nmon (arranca la aplicación y muestra las teclas de control para escoger lo que se monitorea. “q” para cerrar la aplicación)
 
 
 nmrpflash
