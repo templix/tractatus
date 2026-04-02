@@ -48790,6 +48790,11 @@ $ rdiffdir dir1 dir2 > diferencies.dir
 $ cat diferencies.dir (para ver el archivo de las diferencias)
 
 
+rdnssd
+[Recursive DNS Server Discovery]. Demonio que se encarga de descubrir servidores DNS recursivos en redes IPv6. Este demonio utiliza el protocolo ICMPv6 [RFC 5006] para descubrir vecinos en la red y autoconfigurar servidores DNS recursivos. Se ejecutará en segundo plano y se encargará de descubrir servidores DNS sin necesiedad de ejecutarlo manualmente.
+# systemctl enable rdnssd
+
+
 read
 Espera una entrada por teclado y le asigna una variable, aunque contenga espacios.
 	$ read -p "dime tu nombre " NOMBRE
