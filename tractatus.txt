@@ -48930,6 +48930,15 @@ really
 # really -R ~/dir (establece el directorio raiz del proceso)
 
 
+realmd
+Herramienta que permite la configuración y gestión de dominios en sistemas operativos basados en Linux. Permite la inscripción en dominios como Active Directory o IPA [Identity, Policy, and Audit] utilizando protocolos como Kerberos. realmd se comunica a través de D-Bus, un sistema de mensajería que permite la comunicación entre procesos.
+$ realm discover (muestra una lista de los dominios a los que el sistema está actualmente unido)
+$ realm list (listar dominios unidos)
+# realm join --user=admin domain.local (une el sistema a domain.local utilizando el usuario admin)
+# realm leave domain.local (retira el sistema del dominio domain.local)
+# realm join --user=admin --computer-ou=OU=Computers,DC=domain,DC=local domain.local (une el sistema a domain.local especificando una Unidad Organizativa [OU] específica dentro del dominio para el equipo)
+
+
 realpath
 Muestra el path real de un enlace, un fichero o un directorio.
 $ realpath -P Musica (si es un enlace)
