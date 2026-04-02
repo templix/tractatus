@@ -38303,6 +38303,7 @@ Nota.- networkctl solo muestra información útil si se usa systemd-networkd com
 NetworkManager
 Supervisa todas las conexiones de red y escoge automáticamente la mejor conexión para usar. El demonio NetworkManager intenta simplificar y automatizar al máximo la configuración y el funcionamiento de la red, gestionando la conexión de red principal y otras interfaces de red, como Ethernet, Wi-Fi y dispositivos de banda ancha móvil. Archivo de configuración en nano /etc/NetworkManager/NetworkManager.conf. Ver dns y nmcli.
 # NetworkManager --print-config (ver la configuración del servicio)
+$ NetworkManager --log-level=INFO (nivel en los logs, otras opciones son TRACE,DEBUG,WARN,ERR,OFF,KEEP)
 
 
 netwox
@@ -48753,6 +48754,14 @@ Conexión a escritorio remoto.
 $ rdesktop -k es -g 1024×768 -u USER -p PASS -a 15 -T tux -D client (Especificando teclado español [k], medidas de la ventana [g], usuario [u] y contraseña [p], especificar un mobre para la ventana [T] y suprimiendo la decoración de la ventana [D])
 
 
+rdate
+Herramienta de sincronización de tiempo en sistemas Unix/Linux que permite obtener y establecer la fecha y hora del sistema desde un servidor remoto mediante el protocolo RFC 868 [Time Protocol, puerto 37], no NTP [Network Time Protocol, puerto 123] aunque a veces se confunde. Ver timedatectl.
+$ rdate -p hora.roa.es (usar un servidor de tiempo español sin modificar el sistema)
+# rdate -a time.nist.gov (ajustar gradualmente la hora local a la hora remota en lugar de simplemente saltar)
+# rdate -usc tick.usno.navy.mil (usar UDP en lugar de TCP sin imprimir la hora y corrección de segundos intercalares)
+# rdate -n time-a.nist.gov (Utilice SNTP [antiguo RFC 2030, actualmente RFC 5905] en lugar del RFC 868. SNTP siempre utilizará el protocolo UDP
+
+
 rdfind
 programa para buscar archivos duplicados y, opcionalmente, enumerarlos, eliminarlos o reemplazarlos con enlaces simbólicos o físicos.  Si se encuentran dos (o más) archivos iguales, el programa decide cuál de ellos es el original y el resto se consideran duplicados.  De forma predeterminada, no se realiza ninguna acción aparte de crear un archivo con los archivos detectados
 $ rdfind -deleteduplicates true ~/Documents (eliminar duplicacdos del directorio especificado)
@@ -53920,6 +53929,7 @@ Informa o ajusta la hora del sistema en sistemas Linux con Systemd
 # timedatectl show  (Muestra la configuración actual del reloj del sistema)
 # timedatectl set-time "2014-05-26 11:13:54" (Define el dia y la hora de forma manual)
 # timedatectl set-timezone Europe/Madrid (establecer dia y hora de España)
+# timedatectl set-ntp true (otra forma de establecer la hora)
 
 
 timelimit
