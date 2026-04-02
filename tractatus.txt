@@ -48839,6 +48839,69 @@ $ readonly -f var (Crear la funcion "var" de solo lectura)
 $ readonly -r var (Quita el atributo de "solo lectura" pero no permite redefinirla)
 
 
+readpe
+Conjunto de herramientas para analizar archivos binarios PE [Portable Executable] de Microsoft Windows: EXE, DLL, OCX, etc. y analizarlos en busca de características sospechosas. Incluye los ejecutables ofs2rva, pedis, pehash, peldd, pepack, peres, pescan, pesec, pestr, readpe y rva2ofs.
+$ readpe archivo.exe (mostrar toda la información del binario: cabeceras DOS, cabecera NT, secciones, importaciones, exportaciones, etc)
+$ readpe -H archivo.exe (mostrar solo las cabeceras)
+$ readpe -S archivo.exe (mostrar solo las secciones)
+$ readpe --imports archivo.exe (mostrar importaciones: DLLs y funciones que usa)
+$ readpe --exports archivo.dll (mostrar exportaciones: funciones que expone, útil en DLLs)
+$ readpe --format xml archivo.exe (salida en formato XML)
+$ readpe --format json archivo.exe (salida en formato JSON)
+$ pedis archivo.exe (desensamblar el punto de entrada [entry point])
+$ pedis -s .text archivo.exe (desensamblar una sección específica)
+$ pedis -n 100 archivo.exe (desensamblar 100 bytes desde el entry point)
+$ pedis -o 0x1000 archivo.exe (desensamblar desde un offset específico)
+$ pedis -m 64 archivo.exe (desensamblar para arquitectura de 64 bits)
+$ pehash archivo.exe (calcula distintos hashes [MD5, SHA1, SHA256...] del archivo y de sus secciones)
+$ pehash -s .text archivo.exe (hash de una sección específica)
+$ pehash --imphash archivo.exe (calcular el imphash [hash de la tabla de importaciones])
+$ pehash -a archivo.exe (ver todos los hashes disponibles)
+$ peldd archivo.exe (listar todas las DLLs importadas)
+$ peldd -f archivo.exe (ver también las funciones importadas de cada DLL)
+$ peldd -p C:\Windows\System32 archivo.exe (comprobar si las DLLs existen en una ruta concreta)
+$ pepack archivo.exe (detectar packer del binario)
+$ pepack *.exe (analizar múltiples archivos a la vez)
+$ pepack malware_sample.exe (analizar un archivo sospechoso de estar empaquetado)
+$ peres -l archivo.exe (listar todos los recursos del binario)
+$ peres -x archivo.exe (extraer todos los recursos a un directorio)
+$ peres -v archivo.exe (mostrar información de versión: FileVersion, ProductName...)
+$ peres -m archivo.exe (mostrar el manifiesto XML embebido)
+$ peres -t RT_STRING archivo.exe (mostrar recursos de tipo específico: RT_ICON, RT_STRING...)
+$ pescan archivo.exe (escaneo básico de características sospechosas)
+$ pescan -v archivo.exe (escaneo detallado)
+$ pescan *.exe (escanear múltiples archivos)
+$ pescan --antidebug archivo.exe (ver si el binario tiene técnicas anti-análisis)
+$ pesec archivo.exe (comprueba si el binario fue compilado con mitigaciones de seguridad modernas [ver qué protecciones tiene activadas/desactivadas])
+$ pesec C:\Windows\System32\kernel32.dll (analizar una DLL del sistema)
+$ pesec app_vieja.exe (comparar seguridad entre dos binarios)
+$ pesec app_nueva.exe
+$ pestr archivo.exe (extraer strings del binario completo)
+$ pestr -s .data archivo.exe (extraer strings de una sección concreta)
+$ pestr -n 6 archivo.exe (mostrar solo strings de longitud mínima 6)
+$ pestr archivo.exe | grep -i "password" (buscar strings que contengan una palabra clave)
+$ pestr archivo.exe | grep -iE "https?://" (buscar URLs embebidas)
+$ pestr malware.exe | grep -iE "\.onion|\.ru|cmd\.exe|powershell" (buscar posibles C2 [command & control] en malware)
+$ ofs2rva 0x400 archivo.exe (convertir offset 0x400 a RVA en el binario)
+$ ofs2rva 1024 archivo.exe (con offset en decimal)
+$ rva2ofs 0x1000 archivo.exe (convertir RVA [dirección virtual relativa en memoria] 0x1000 a offset físico)
+1.-
+Flujo de trabajo típico en análisis de malware
+Identificar el archivo y buscar el hash en VirusTotal
+$ file sospechoso.exe
+$ pehash sospechoso.exe
+$ pepack sospechoso.exe (Ver si está empaquetado)
+$ pesec sospechoso.exe (revisar protecciones o falta de ellas)
+$ pescan sospechoso.exe (escanear anomalías)
+$ peldd sospechoso.exe (ver dependencias y funciones importadas)
+$ readpe --imports sospechoso.exe
+$ pestr sospechoso.exe | grep -iE "https?://|[0-9]{1,3}\.[0-9]{1,3}" (extraer strings en busca de URLs, IPs, rutas, claves...)
+$ peres -l sospechoso.exe (inspeccionar recursos embebidos si hay payloads ocultos)
+$ peres -x sospechoso.exe
+$ pedis -n 200 sospechoso.exe (desensamblar el entry point para ver el código inicial)
+Nota.- Todas son herramientas de solo lectura por lo que no modifican el binario analizado.
+
+
 readpst
 Herramienta para convertir base de datos de Outlook en PST a eml para su posterior exportación a Thunderbird
 $ readpst -o  -r miarchivo.pst
