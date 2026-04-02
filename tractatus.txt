@@ -6938,18 +6938,14 @@ $ chronic man (Mostrará que necesita otro dato)
 
 
 chrony
-Sincronizar el reloj del sistema. Primero incluir los servidores en el archivo de configuración:
-# nano /etc/chrony/chrony.conf
-Añadir las lineas:
-       pool 3.es.pool.ntp.org iburst
-       pool ntp.redimadrid.es iburst
-       pool europe.pool.ntp.org iburst
-Reinicar el servicio y comprobar que está activo:
-# systemctl restart chronyd
-# systemctl status chronyd
-# chronyc makestep (forzar la sincronización)
-# chronyc tracking (comprobar el seguimiento)
-# chronyc sources (ver una lista de las fuentes de servidores de hora)
+Implementación versátil del Protocolo de Tiempo de Red (NTP). Mientras que el servicio por defecto de systemd-timesyncd, el que suele manejar timedatectl [ver], es un cliente ligero que solo sincroniza el tiempo de vez en cuando, Chrony es una implementación completa de NTP diseñada para ser extremadamente precisa, incluso en condiciones de red inestables. El paquete incluye el daemon chronyd y el ejecutable chronyc.
+# systemctl status chronyd (comprobar que el servicio está activo)
+$ chronyc tracking (ver información técnica de la fecha y hora)
+$ chronyc sources -v (listar las fuentes de tiempo [Servidores])
+# chronyc makestep (forzar una actualización rápida)
+$ chronyc sourcestats -v (saber cuánto "ruido" hay en la conexión con los servidores NTP)
+$ chronyc sources (ver una lista de las fuentes de servidores de hora)
+$ watch -n 5 chronyc sources -v (refrescar la tabla cada 5 segundos para que ver cómo cambian los valores de "Last sample" y el estado de los servidores)
 
 
 chroot
@@ -48906,6 +48902,13 @@ readpst
 Herramienta para convertir base de datos de Outlook en PST a eml para su posterior exportación a Thunderbird
 $ readpst -o  -r miarchivo.pst
 $ readpst -M -b -e -o carpeta-destino miarchivo.pst (Generará los archivos EML en la carpeta-destino)
+
+
+readsb
+Decodificador de señales ADS-B, Mode-S y TIS [Traffic Information Service] diseñado para trabajar con diferentes dispositivos SDR [Software Defined Radio] como RTL-SDR, BladeRF, Modes-Beast y GNS5894. Su función principal es captar las señales de aeronaves en vuelo transmitidas en frecuencias específicas y decodificarlas para obtener información como posición, altitud, velocidad, identificador, etc. de los aviones en tiempo real. Es muy popular en la comunidad de radioaficionados y en proyectos de seguimiento de vuelos, ya que permite montar un receptor ADS-B en casa y visualizar información en tiempo real sobre los vuelos cercanos. Incluye el ejecutable viewadsb.
+$ readsb (inicia la captura usando el dispositivo por defecto, /dev/ttyUSB0 o similar. El receptor SDR tiene que estar conectado)
+$ readsb --usage (muestra listado de parámetros que pueden espcificarse)
+$ readsb --device-type modesbeast
 
 
 really
