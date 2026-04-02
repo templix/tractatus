@@ -48911,6 +48911,17 @@ $ readsb --usage (muestra listado de parámetros que pueden espcificarse)
 $ readsb --device-type modesbeast
 
 
+readstat
+Herramienta que permite leer y escribir archivos de datos de los paquetes estadísticos más comunes: SAS, Stata** y SPSS. Incluye el ejecutable extract_metadata.
+$ readstat datos_encuesta.dta datos_encuesta.csv (convertir un archivo Stata a CSV)
+$ readstat -f encuesta.sav encuesta.dta (convertir un archivo SPSS a Stata forzando la sobreescritura si el archivo de salida existe)
+$ readstat datos_analisis.sas7bdat resultados.xlsx (convertir SAS a Excel)
+$ readstat datos_texto.csv metadatos.dct salida.dta (convertir un texto plano y los metadatos en salida.dta)
+$ readstat datos.sas7bdat catalogo.sas7bcat salida.sav (lo mismo para SAS9
+$ extract_metadata encuesta.dta > metadatos_encuesta.json (extraer metadatos de un archivo Stata y guardarlos en JSON)
+$ extract_metadata datos.sav | less (ver directamente los metadatos)
+
+
 really
 [chiark-really]. Programa que permite a ciertos usuarios convertirse en el usuario que deseen si así lo solicitan. Es un poco como sudo en ese aspecto. A diferencia de sudo, no pretende que la cuenta llamada pueda ser más segura que la cuenta que llama, por lo que nunca es necesaria una contraseña. Además, a diferencia de sudo, solo funciona si se supone que el usuario que llama es equivalente a root. Pero, también puede ser utilizado por usuarios equivalentes a root para convertirse en cualquier usuario, no solo root; de esta manera, puede ser un reemplazo para ciertos usos de su [ver].
 # really -u USER (establece el uid, gid y la lista de grupos suplementarios de USER en las bases de datos de contraseñas y grupos)
