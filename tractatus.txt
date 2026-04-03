@@ -52287,6 +52287,34 @@ Y colocar el texto:
 Ctrl+d para terminar. Cuando vuelva a salir el prompt del sistema es que el mensaje ya se ha enviado.
 
 
+sssd
+[System Security Services Daemon]. Proporciona un conjunto de demonios para gestionar el acceso a directorios remotos y mecanismos de autenticación. Ofrece una interfaz NSS y PAM hacia el sistema y un sistema backend modular para conectarse a diversas fuentes de cuentas.
+
+
+sssd-common
+Es el paquete que se instala con el metapaquete sssd [ver] y el que contine el daemon sssd y los ejecutables sss_ssh_authorizedkeys, /sss_ssh_knownhosts y sss_ssh_knownhostsproxy
+# systemctl status sssd (comprobar que el daemon está activo)
+# systemctl enable sssd (que arranque el servicio  al inicio)
+Ejemplo de archivo de configuración de SSSD:
+# nano /etc/sssd/sssd.conf
+       [sssd]
+       domains = LOCAL
+       services = nss
+       config_file_version = 2
+       #
+       [nss]
+       filter_groups = root
+       filter_users = root
+       #
+       [domain/LOCAL]
+       id_provider = local
+       auth_provider = local
+       access_provider = permit
+# sss_ssh_authorizedkeys -a ~/.keys_sssd (agregar una clave SSH al archivo de claves autorizadas)
+# sss_ssh_knownhosts -a MD5:hostname.example.com:01:23:45:67:89:ab:cd:ef:01:23:45:67:89:ab:cd:ef (agregar una huella digital de host al archivo de huellas conocidas)
+# sss_ssh_knownhostsproxy -a MD5:hostname.example.com:01:23:45:67:89:ab:cd:ef:01:23:45:67:89:ab:cd:ef (agregar una huella digital de host al archivo de huellas conocidas proxy)
+
+
 ssshtest
 Pruebas de bash sencillas y estúpidas. ssshtest es una serie de funciones de bash que facilitan la ejecución de pruebas de bash. Incluye funciones para comprobar la igualdad, determinar si una cadena está en la salida estándar (stdout), no en la salida estándar (stdout) o en la salida estándar (stderr). El proceso puede mostrarse con ejemplo de uso:
 $ nano tests.sh
