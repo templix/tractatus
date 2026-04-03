@@ -48945,6 +48945,17 @@ $ realpath -P Musica (si es un enlace)
 $ realpath -e archivo (de un archivo)
 
 
+rear
+[RElax-And-Recover]. Herramienta diseñada para la migración de sistemas y la recuperación ante desastres en sistemas operativos Linux. Está especialmente enfocada en la creación de imágenes de arranque que permiten reparticionar el sistema y restaurar desde copias de seguridad. Es un marco modular que ofrece varios flujos de trabajo predefinidos para situaciones comunes, facilitando así la recuperación de sistemas en caso de fallos críticos.
+Configuración básica:
+# nano /etc/rear/local.conf
+       # especificar el método de copia de seguridad
+       BACKUP=NETFS
+# rear -v mkbackup (crear una copia de seguridad del sistema verificando cada paso para asegurar que todo se realice correctamente)
+# rear -v mkrescue (genera una imagen de arranque que se puede usar para iniciar el sistema en caso de que se necesite restaurar desde la copia de seguridad)
+# rear -v recover (inicia el proceso de restauración, utilizando la copia de seguridad previamente creada)
+
+
 reaver
 Herramienta que lleva a cabo un ataque de fuerza bruta contra el número pin de la configuración protegida de un punto de acceso wifi. Precisa poner nuestra targeta en modo monitor (airmon-ng start wlan0)
 # reaver -i mon0 -b 00:01:02:03:04:05 (Mínimo requerido, especificar nombre de la interfaz y BBSID)
