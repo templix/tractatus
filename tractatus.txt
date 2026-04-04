@@ -49055,6 +49055,18 @@ recaptool
 # recaptool -m http -e 80 -q (del servicio html del puerto 80 y la base de datos mysql)
 
 
+receptor
+Daemon para controlar una red superpuesta [overlay network] de nodos dispersos geográficamente diseñada para facilitar la distribución del trabajo entre un conjunto amplio y disperso de usuarios. Los nodos de Receptor establecen conexiones punto a punto entre sí a través de redes existentes.
+# systemctl status receptor (comprobar el estado del demonio)
+# receptorctl --socket /tmp/receptor.sock status (ver estado de la malla)
+# receptorctl --socket /tmp/receptor.sock ping nodo2.ejemplo.net (ping a otro nodo)
+# receptorctl --socket /tmp/receptor.sock traceroute nodo3.ejemplo.net (traceroute a través de la malla)
+# receptorctl --socket /tmp/receptor.sock connect nodo2.ejemplo.net bash --tls-client nodo1_client --raw (conectarse a otro nodo)
+# seq 10 | receptorctl work submit sleepcat --payload=- --follow --rm --node=baz --tls-client foo_client (enviar un trabajo de tipo "sleepcat" al nodo "baz")
+# receptorctl --socket /tmp/receptor.sock work list (listar trabajos activos)
+# receptorctl work info <work-unit-id> (ver detalles de un trabajo específico)
+
+
 recode
 Convierte archivos a distintos formatos de caracteres
 $ recode -l | less	(listado de conversiones disponibles)
