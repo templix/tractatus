@@ -48971,6 +48971,15 @@ Reiniciar el sistema.
 $ reboot -f (Fonzandolo)
 
 
+reboot-notifier
+Envía un correo electrónico diario al administrador o a quien se especifique en /etc/default/reboot-notifier, cuando se requiere reiniciar el sistema debido a una actualización del kernel. Si el administrador y el usuario son el mismo puede modificarse el archivo cron:
+# nano /etc/cron.daily/reboot-notifier
+        ...
+	echo "$BODY" | mail -s "$USER necesita reiniciarse el sistema" $NOTIFICATION_EMAIL
+	...
+Y lo mismo en el archivo /etc/default/reboot-notifier.
+
+
 recap
 Vuelca información periódica sobre la ejecución de aplicaciones y el uso de recursos. Se almacena en el archivo /var/log/recap/recap.log. Los valores para los que se generan los informes y cuántos informes se almacenan se pueden especificar en /etc/recap.conf.
 
@@ -52300,19 +52309,24 @@ Ejemplo de archivo de configuración de SSSD:
        [sssd]
        domains = LOCAL
        services = nss
-       config_file_version = 2
        #
        [nss]
        filter_groups = root
        filter_users = root
        #
-       [domain/LOCAL]
-       id_provider = local
-       auth_provider = local
-       access_provider = permit
+       [ssh]
+       ssh_hash_known_hosts = false
+# chmod 600 /etc/sssd/sssd.conf (permisos del fichero de configuración)
+# chown root:root /etc/sssd/sssd.conf (propietario del permiso de circulación)
+# sssctl config-check (instalar sssd-tools. Compueba el archivo de configuración  si tiene fallos)
 # sss_ssh_authorizedkeys -a ~/.keys_sssd (agregar una clave SSH al archivo de claves autorizadas)
 # sss_ssh_knownhosts -a MD5:hostname.example.com:01:23:45:67:89:ab:cd:ef:01:23:45:67:89:ab:cd:ef (agregar una huella digital de host al archivo de huellas conocidas)
 # sss_ssh_knownhostsproxy -a MD5:hostname.example.com:01:23:45:67:89:ab:cd:ef:01:23:45:67:89:ab:cd:ef (agregar una huella digital de host al archivo de huellas conocidas proxy)
+1.-
+Comprobar que SSSD recupera correctamente la información de usuario y grupo:
+# id $USER
+# getent passwd $USER
+Si los comandos devuelven información de usuario válida, SSSD funciona correctamente.
 
 
 ssshtest
