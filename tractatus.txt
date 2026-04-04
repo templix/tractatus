@@ -48978,6 +48978,30 @@ Envía un correo electrónico diario al administrador o a quien se especifique e
 	echo "$BODY" | mail -s "$USER necesita reiniciarse el sistema" $NOTIFICATION_EMAIL
 	...
 Y lo mismo en el archivo /etc/default/reboot-notifier.
+1.-
+Modificar el script original para que en vez de mandar un mail a root muestre una notificación en pantalla. Precisa comando fyi [ver].
+# nano /etc/cron.daily/reboot-notifier
+#!/bin/bash
+	. /etc/default/reboot-notifier
+	#
+	REBOOT_REQUIRED=/var/run/reboot-required
+	#
+	# Detectamos el usuario real que está logueado en la sesión gráfica (normalmente el 1000)
+	# Esto es necesario porque cron corre como root
+	USER_ID=$(id -u ${SUDO_USER:-$(logname 2>/dev/null || echo "tu_usuario")})
+	USER_NAME=${SUDO_USER:-$(logname 2>/dev/null || echo "tu_usuario")}
+	#
+	if [ -s "$REBOOT_REQUIRED" ] ; then
+	    BODY="El sistema necesita reiniciarse."
+    	    BODY+=$'\nPaquetes:\n'
+    	    BODY+=$(cat /var/run/reboot-required.pkgs)
+    	    #
+    	    # El truco: ejecutar fyi como TU usuario y apuntando a TU bus de sesión
+    	    sudo -u "$USER_NAME" \
+            DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/$USER_ID/bus" \
+    	    fyi -t 0 "$HOSTNAME necesita reiniciar" "$BODY"
+	fi
+$ sudo /etc/cron.daily/reboot-notifier (probar si funciona)
 
 
 recap
