@@ -49011,6 +49011,33 @@ $ rebound  archivo.js (consultar un error en un archivo node.js)
 $ rebound -q What is an array comprehension (consultar Stack Overflow la duda ¿Qué es una comprensión de matriz? [mejor colocar la pregunta en inglés])
 
 
+rebuildctl
+cliente que permite interactuar con el servidor rebuilderd. Se utiliza para enviar solicitudes de reconstrucción, consultar el estado de las tareas y gestionar el sistema.
+$ rebuildctl --server http://localhost:8080 rebuild --package nombre-del-paquete --version 1.0.0 --source-url https://example.com/source.tar.gz (solicitar la reconstrucción de un paquete)
+$ rebuildctl --server http://localhost:8080 list (listar reconstrucciones en curso)
+$ rebuildctl --server http://localhost:8080 status <id-de-reconstrucción> (consultar el estado de una reconstrucción específica)
+  	server --> URL del servidor rebuilderd.
+	package --> Nombre del paquete a reconstruir.
+	version --> Versión del paquete.
+	source-url --> URL del código fuente del paquete.
+$ rebuildctl --server http://localhost:8080 logs <id-de-reconstrucción> > logs.txt (descargar los logs de una reconstrucción)
+
+
+rebuilderd
+Servidor que gestiona y monitoriza la reconstrucción de paquetes binarios desde el código fuente. Actúa como un coordinador central que recibe solicitudes de reconstrucción, las distribuye a rebuilderd-worker y almacena los resultados.
+$ rebuilderd --listen 0.0.0.0:8080 --data-dir /path/data (iniciar el servidor en primer plano)
+$ rebuilderd --listen 0.0.0.0:8080 --data-dir /path/data --daemonize (iniciar el servidor en segundo plano)
+  	listen --> Especifica la dirección y puerto donde escucha el servidor.
+  	data-dir --> Directorio donde se almacenan los datos de las reconstrucciones.
+
+
+rebuilderd-worker
+Agente de trabajo que se conecta al servidor rebuilderd y ejecuta las tareas de reconstrucción de paquetes.
+$ rebuilderd-worker --server http://localhost:8080 --name worker1 (conectar un trabajador al servidor)
+        server --> URL del servidor rebuilderd.
+	name --> Nombre identificativo del trabajador.
+
+
 recap
 Vuelca información periódica sobre la ejecución de aplicaciones y el uso de recursos. Se almacena en el archivo /var/log/recap/recap.log. Los valores para los que se generan los informes y cuántos informes se almacenan se pueden especificar en /etc/recap.conf.
 
