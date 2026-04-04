@@ -49004,6 +49004,13 @@ Modificar el script original para que en vez de mandar un mail a root muestre un
 $ sudo /etc/cron.daily/reboot-notifier (probar si funciona)
 
 
+rebound
+Herramienta de línea de comandos que obtiene instantáneamente resultados de Stack Overflow al ejecutar un programa con errores en varios lenguajes de programación. Esta herramienta ejecuta el programa, extrae el mensaje de error si es necesario y muestra preguntas y respuestas relacionadas de Stack Overflow sin salir de la terminal. Los lenguajes soportados según la documentación son python, node.js, java, golang y ruby pero puede se incluya a otros.
+$ rebound archivo.py (consultar un error en un archivo python)
+$ rebound  archivo.js (consultar un error en un archivo node.js)
+$ rebound -q What is an array comprehension (consultar Stack Overflow la duda ¿Qué es una comprensión de matriz? [mejor colocar la pregunta en inglés])
+
+
 recap
 Vuelca información periódica sobre la ejecución de aplicaciones y el uso de recursos. Se almacena en el archivo /var/log/recap/recap.log. Los valores para los que se generan los informes y cuántos informes se almacenan se pueden especificar en /etc/recap.conf.
 
