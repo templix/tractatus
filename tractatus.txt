@@ -57478,6 +57478,16 @@ $ $ whatweb -p nginx URL (Sólo usar un plugin)
 $ whatweb 192.168.1.0/24 (Que analice toda una red)
 
 
+wheel
+[python-wheel-common]. herramienta de línea de comandos de Python para manipular archivos .whl [wheels]. Un wheel, definido en el PEP 427, es el formato moderno de paquete binario precompilado para Python. Es básicamente un archivo .whl que es un ZIP con una estructura especial. Contiene el código del paquete ya "construido" y listo para instalar, lo que hace que pip install sea mucho más rápido y fiable que instalar desde código fuente. Normalmente no se usa directamente en el día a día. La mayoría de la gente usa "pip wheel" o "python -m build" para crear wheels.
+$ wheel unpack mi_paquete-1.0-py3-none-any.whl (descomprime el wheel en una carpeta llamada mi_paquete)
+$ wheel unpack mi_paquete-1.0-py3-none-any.whl -d ./temp (descomprime en un dirctorio)
+$ wheel pack ./temp/mi_paquete-1.0 --dest-dir ./nuevos_wheels (una vez modificados los archivo, reempaqueta)
+$ wheel convert viejo_paquete.egg (convertir un egg antiguo a wheel)
+$ wheel tags mi_paquete-1.0-py3-none-any.whl (ver tags actuales)
+$ wheel tags --python-tag py310 --abi-tag none --platform-tag manylinux_2_28_x86_64 mi_paquete.whl (añadir o reemplazar tags)
+
+
 when
 Agenda personal.
 $ wget http://www.lightandmatter.com/when/when.tar.gz
