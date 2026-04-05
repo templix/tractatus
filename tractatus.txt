@@ -49077,6 +49077,39 @@ $ cat file.txt | recode ISO_8859-1..UTF8 > nuevo.txt (De iso8859-1 a utf-8 )
 $ recode ..HTML < file.txt > file.html  (pasar un texto a html)
 
 
+recollcmd
+Programa de búsqueda de texto completo. Incluye las herramientas recollindex [Crea o actualiza un índice de Recoll], recollq y xadump. El archivo de configuración en ~/.recoll/recoll.conf
+Crear o editar el archivo de configuración:
+mkdir -p ~/.recoll
+nano ~/.recoll/recoll.conf
+     # Directorios a indexar (¡solo los que necesites!)
+     topdirs = ~/Documentos ~/Descargas
+     #
+     # Codificación por defecto para ficheros de texto plano
+     defaultcharset = utf-8
+     #
+     # Idiomas para expansión de raíces (stemming)
+     indexstemminglanguages = spanish english
+     #
+     # Excluir directorios que no interesan
+     skippedPaths = ~/.cache ~/.local/share/Trash ~/.mozilla ~/.config
+$ recollindex -l (mostrar los nombres de los analizadores de lenguaje disponibles)
+$ recollindex (primera indexación limpia y controlada)
+$ recollindex -z (borrar el índice anterior y empezar de cero solo cuando sea necesario)
+$ recollindex (despues de la primera indexación, actualización incremental [solo indexa lo que ha cambiado])
+$ recollindex -r ~/Documentos (indexar un directorio concreto de forma recursiva)
+$ recollindex -i ~/Documentos/notas.txt ~/Documentos/informe.pdf (indexar ficheros específicos)
+$ recollq "factura" (búsqueda simple de una palabra)
+$ recollq "presupuesto 2024" (búsqueda de varias palabras)
+$ recollq '"reunión de equipo"' (búsqueda de frase exacta)
+$ recollq "factura" -t text/plain (buscar en un tipo de fichero concreto)
+$ recollq -n 20 "factura" (mostrar más resultados)
+$ xadump -d ~/.recoll/xapiandb -q emacs (ver información sobre una palabra)
+$ xadump -d ~/.recoll/xapiandb -t factur (listar los términos del índice que empiezan por "factur")
+$ xadump -d ~/.recoll/xapiandb -t init.el -F (las veces que sale init.el en el índice)
+$ xadump -d ~/.recoll/xapiandb -t init.el -P (muestra las entradas al termino especificado)
+
+
 recordmydesktop
 Grabar el escritorio.
 $ recordmydesktop -o video.ogv (Especificando nombre del archivo de salida. Si no consta por defecto es out.ogv)
