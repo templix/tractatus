@@ -49116,6 +49116,73 @@ $ cm2html --title=archivo -g -d archivo.md archivo.html (incluir en el html tít
 $ cm2latex archivo.md archivo.tex (pasar markdown a latex. Las opciones son las mismas para todos los scripts)
 
 
+recon-ng
+Framework de reconocimiento web completo escrito en Python que proporciona un entorno modular y potente para realizar investigaciones de código abierto [OSINT] de forma rápida y exhaustiva. Fue diseñado para replicar la funcionalidad de herramientas como Metasploit pero enfocado específicamente en reconocimiento web. Incluye los ejecutables recon-cli y recon-web
+$ recon-web (por defecto inicia en http://127.0.0.1:5000)
+$ recon-web --mode-debug --host 0.0.0.0 --port 8080 (especificar host y puerto y en modo debug)
+$ recon-ng (inicio de la interfaz más común y completa)
+Comandos básicos de navegación
+[recon-ng][default] > help (Muestra ayuda)
+[recon-ng][default] > show modules (Lista todos los módulos disponibles)
+[recon-ng][default] > show workspaces (Muestra espacios de trabajo)
+[recon-ng][default] > workspaces create test (Crea nuevo workspace)
+[recon-ng][default] > marketplace search (Busca módulos en el marketplace)
+[recon-ng][default] > show hosts (Muestra hosts descubiertos)
+[recon-ng][default] > show contacts (Muestra contactos encontrados)
+[recon-ng][default] > show credentials (Muestra credenciales expuestas)
+[recon-ng][default] > marketplace install recon/domains-hosts/google_site_web
+[recon-ng][default] > marketplace install all (Instala todos los módulos)
+[recon-ng][default] > keys list (Ver claves configuradas)
+[recon-ng][default] > keys add shodan_api <tu_api_key> (configurar una clave)
+[recon-ng][default] > keys add github_api <tu_token>
+[recon-ng][default] > modules load recon/domains-hosts/hackertarget
+[recon-ng][default][hackertarget] > info (Info del módulo)
+[recon-ng][default][hackertarget] > modules load reporting/html
+[recon-ng][default][hackertarget] > options (Muestra opciones configurables)
+[recon-ng][default][hackertarget] > set SOURCE example.com (Generar reporte HTML)
+[recon-ng][default][hackertarget] > run (Ejecuta el módulo)
+El comando recon-cli ideal para scripts, automatización y pipelines. No requiere interacción interactiva y la sintaxis básica es:
+$ recon-cli -w <workspace> -m <módulo> -c "<comando1>" -c "<comando2>" ...
+$ recon-cli -w $WORKSPACE \
+  -m "recon/domains-hosts/hackertarget" \
+  -c "set SOURCE $DOMINIO" \
+  -c "run" \
+  -m "recon/domains-hosts/google_site_web" \
+  -c "set SOURCE $DOMINIO" \
+  -c "run" \
+  -m "recon/hosts-hosts/resolve" \
+  -c "run" \
+  -m "reporting/html" \
+  -c "set FILENAME /tmp/report-$DOMINIO.html" \
+  -c "set CUSTOMER $DOMINIO" \
+  -c "run" (reconocimiento automatizado)
+$ recon-cli -w "contact-search" \
+  -m "recon/domains-contacts/whois_pocs" \
+  -c "set SOURCE empresa.com" \
+  -c "run" \
+  -m "recon/domains-contacts/hunter_io" \
+  -c "set SOURCE empresa.com" \
+  -c "set API_KEY <tu_api_key>" \
+  -c "run" \
+  -x (Búsqueda de emails de empleados. Salir al finalizar)
+$ recon-cli -w "breach-analysis" \
+  -m "recon/contacts-credentials/hibp_breach" \
+  -c "set SOURCE usuario@empresa.com" \
+  -c "set API_KEY <tu_api_key_hibp>" \
+  -c "run" \
+  -m "recon/contacts-credentials/hibp_paste" \
+  -c "run" (Análisis de breaches y credenciales)
+Categorías de módulos principales
+recon/domains-hosts --> Descubrimiento de hosts/subdominios [hackertarget, google_site_web, brute_hosts, certificate_transparency]
+recon/domains-contacts --> Búsqueda de contactos/emails [whois_pocs, hunter_io, pgp_search]
+recon/hosts-hosts --> Resolución y validación de hosts [resolve, reverse_resolve, whois, ssltools]
+recon/hosts-ports --> Escaneo de puertos/servicios [shodan_ip, censysio, binaryedge]
+recon/contacts-credentials --> Verificación de breaches [hibp_breach, hibp_paste, dehashed]
+discovery --> Descubrimiento de información [info_disclosure, interesting_files]
+exploitation --> Explotación básica [xssed, xss_sniper]
+reporting --> Generación de reportes [html, xml, json, list]
+
+
 recordmydesktop
 Grabar el escritorio.
 $ recordmydesktop -o video.ogv (Especificando nombre del archivo de salida. Si no consta por defecto es out.ogv)
