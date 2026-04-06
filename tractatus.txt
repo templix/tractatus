@@ -12851,54 +12851,83 @@ Interfaz de imágenes y contenedores.
 $ docker container prune (eliminar contenedores detenidos)
 $ docker image prune (eliminar imágenes sin usar [dangling])
 $ docker image prune -a (eliminar todas las imágenes sin usar, no solo dangling)
-$ docker volume prune (eliminar volúmenes no utilizados)
+$ docker image inspect nginx:latest (Inspeccionar una imagen en detalle)
+$ docker images app --format "table {{.Tag}}\t{{.Size}}\t{{.CreatedAt}}" (listar tags)
+$ docker images --format "table {{.Repository}}\t{{.Tag}}\t{{.Size}}\t{{.CreatedSince}}" (listar imágenes locales con detalles)
+$ docker images --filter "dangling=true" (muestra imágenes sin usar)
+$ docker images (listar imágenes locales)
+$ docker run -d -p 8080:80 nginx (ejecuta contenedor Nginx en modo segundo plano, asignando el puerto 80 dentro del contenedor al puerto 8080 en la máquina anfitriona)
+$ docker run --network host nginx (iniciar un contenedor)
+$ docker run -d --name web -p 80:80 nginx (servidor web en background)
+$ docker run -d --name mi-app --memory="1g" --memory-swap="2g" nginx (ajustar límites de memoria)
+$ docker run --rm -v mi-app-data:/source:ro -v $(pwd):/backup alpine tar czf /backup/volume-backup-$(date +%Y%m%d).tar.gz -C /source . (backup de volúmenes)
 $ docker system prune (limpieza total: contenedores, redes, imágenes y caché)
+$ docker system prune --volumes --filter "until=24h" (limpieza inteligente)
 $ docker system prune -a --volumes (limpieza total incluyendo volúmenes)
+$ docker system df (resumen del sistema Docker: espacio usado, contenedores, etc.)
 $ docker ps (listar contenedores activos)
 $ docker ps -a (listar todos los contenedores incluidos detenidos)
 $ docker ps -a --filter "status=exited" (filtrar por estado)
+$ docker ps -a --filter name=debian --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}" (ver estado de un contenedor)
+$ docker ps --format "table {{.ID}}\t{{.Image}}\t{{.Status}}\t{{.Ports}}\t{{.Names}}" (listar contenedores con formato personalizado)
+$ docker inspect web-server (Inspeccionar configuración del contenedor)
 $ docker start <nombre_o_id> (iniciar)
 $ docker stop <nombre_o_id> (detener)
 $ docker stop $(docker ps -q) (parar todos los contenedores)
 $ docker restart <nombre_o_id> (reiniciar)
 $ docker rm <nombre_o_id> (eliminar un contenedor)
 $ docker rm $(docker ps -aq) (eliminar todos los contenedores)
+$ docker rm -f $(docker ps -aq) (fuerza eliminación de todos)
+$ docker rmi nginx:latest (eliminar una imagen)
+$ docker rmi $(docker images -q) (liminar todas las imágenes)
+$ docker rmi $(docker images -q -f "dangling=true") (limpieza forzada de imágenes)
 $ docker logs <nombre_o_id> (ver logs de un contenedor)
 $ docker logs -f <nombre_o_id> (ver logs de un contenedor en tiempo real [follow])
+$ docker logs -f --tail 100 web (muestra las últimas 100 líneas del log)
 $ docker exec -it <nombre_o_id> bash (ejecutar un comando dentro de un contenedor activo)
+$ docker logs -f --timestamps app (Ver logs en tiempo real)
 $ docker stats (ver uso de recursos en tiempo real)
-$ docker images (listar imágenes locales)
-$ docker pull nginx:latest (descargar una imagen)
-$ docker rmi <imagen>:<tag> (eliminar una imagen)
-$ docker rmi $(docker images -q) (liminar todas las imágenes)
+$ docker stats --no-stream (verificar uso actual de memoria)
+$ docker scan nginx:latest (escanear vulnerabilidades)
+$ docker pull nginx:latest (descargar la última versión de una imagen)
 $ docker build -t mi-app:1.0 . (construir una imagen desde un Dockerfile)
-$ docker history <imagen> (ver historial de capas de una imagen)
+$ docker history nginx:latest (mostrar el historial de capas de una imagen)
+$ docker history nginx:latest --no-trunc (Analizar capas de la imagen)
 $ docker network ls (listar redes)
 $ docker network prune (limpiar redes no utilizadas)
 $ docker network create mi-red (crear una red)
+$ docker network create --driver bridge mi-red (crea red personalizada)
 $ docker network inspect mi-red (inspeccionar una red)
 $ docker network connect mi-red <contenedor> (conectar un contenedor de una red)
 $ docker network disconnect mi-red <contenedor> (desconectar un contenedor de una red)
 $ docker network rm mi-red (eliminar una red concreta)
 $ docker volume ls (listar volúmenes)
+$ docker volume prune (eliminar volúmenes no utilizados)
 $ docker volume create mi-volumen (crear un volumen)
+$ docker volume create --name mi-volumen (crea volumen persistente)
 $ docker volume inspect mi-volumen (inspeccionar un volumen)
 $ docker volume rm mi-volumen (eliminar un volumen concreto)
-$ docker system df (resumen del sistema Docker: espacio usado, contenedores, etc.)
 $ docker info (información detallada del daemon Docker)
 1.-
+Configurar el usuario para usar Docker sin sudo
+# usermod -aG docker $USER (agregar usuario al grupo docker)
+# newgrp docker (crear el grupo docker)
+$ ls -l /var/run/docker.sock (verificar permisos del socket)
+# chmod 666 /var/run/docker.sock (ajustar permisos si es necesario)
+# systemctl restart docker (reiniciar el servicio)
+2.-
 Eliminar la interfaz actual
 # ip link set dev docker0 down
 # ip link del docker0
 Esto borra el bridge de la sesión actual, pero volverá a aparecer si se vuelve a iniciar el daemon Docker.
-2.-
+3.-
 Desactivar Docker y containerd en el arranque
 # systemctl stop docker.service docker.socket
 # systemctl disable docker.service docker.socket
 Si se usa también containerd como servicio independiente:
 # systemctl stop containerd.service
 # systemctl disable containerd.service
-3.-
+4.-
 Mantener Docker pero sin que cree el bridge docker0, crear o modificar:
 # nano /etc/docker/daemon.json
    {
@@ -12906,6 +12935,11 @@ Mantener Docker pero sin que cree el bridge docker0, crear o modificar:
    }
 # systemctl restart docker (reinicia docker)
 Con "bridge": "none" Docker no levanta la interfaz docker0 al arrancar.
+5.-
+El puerto está siendo utilizado por otro proceso o contenedor.
+# lsof -i :5000 (identificar el proceso)
+# kill -9 $(lsof -t -i:5000) (liberar el puerto)
+# docker run -d -p 5001:5000 mi-primera-app (o usar un puerto alternativo en docker)
 
 
 docknot
@@ -46900,6 +46934,14 @@ $ pax11publish -r (eliminar publicaciones de audio en X11)
 pulsemixer
 mezclador de volumen para PulseAudio que ofrece una interfaz de usuario interactiva basada en curses.
 $ pulsemixer
+
+
+puma
+Servidor que viene con Ruby.
+# ruby bin/rails server -e production (ejecutado en la raiz del proyecto se verá en http://localhost:3000. Ctrl-c para matar el servicio)
+Si se quiere liberar la terminal puede ejecutarse el comando:
+# ruby bin/rails server -e production -d --pid /tmp/redmine.pid
+# kill -9 $(cat /tmp/redmine.pid) (pararlo)
 
 
 pumpa
