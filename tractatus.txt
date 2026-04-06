@@ -49214,6 +49214,24 @@ Reiniciar red:
 # /etc/init.d/networking restart
 
 
+redfishtool
+Herramienta utilizada para interactuar con la API RESTful de Redfish, una interfaz de programación de aplicaciones [API] que permite a los sistemas de gestión de hardware, como servidores y dispositivos de almacenamiento, ser controlados y monitoreados de manera centralizada.
+$ redfishtool -u USERNAME -p PASSWORD list (lista todos los recursos disponibles en el servidor de Redfish)
+$ redfishtool -u USERNAME -p PASSWORD list systems (lo mismo más especificamente)
+
+
+redir
+Actúa como un proxy/redirector TCP puro, no soporta UDP, ICMP ni SCTP. Su función es escuchar en un puerto local y reenviar todas las conexiones entrantes a un host y puerto remoto, sin modificar el contenido de los paquetes ni realizar NAT a nivel de kernel.
+$ redir 8080 192.168.1.50:80 (escucha en localhost:8080 y cada conexión que llegue se reenvía a 192.168.1.50 puerto 80)
+$ redir --laddr=127.0.0.1 9090 db-remota:5432 (solo acepta conexiones desde la máquina local)
+$ redir --logfile=/var/log/redir_ssh.log 2222 jump-server:22 (guarda en el archivo cada conexión aceptada, origen, destino y cierres)
+$ nohup redir 8080 10.0.0.5:80 &>/var/log/redir_web.log & (ejecutar en segundo plano)
+$ redir --timeout=30 --maxconn=50 3307 mysql-backup:3306 (limitar recursos y tiempos)
+$ ss -tlnp | grep :8080 (comprobar que está escuchando)
+$ nc -zv 127.0.0.1 8080 (probar conectividad)
+$ curl -I http://127.0.0.1:8080
+
+
 redireccionar
 Permite direccionar las salidas por pantalla a un archivo.
 $ pwd > archivo.txt (mandar la salida de un comando a un archivo. Si archivo.txt existe borra todo el contenido anterior)
