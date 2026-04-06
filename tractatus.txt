@@ -49246,6 +49246,34 @@ $ find / -name passwd 1> todo.txt 2>&1 (mandar salida y errores a un mismo archi
 $ find / -name passwd 2> todo.txt 1>&2 (lo mismo que el anterior)
 
 
+redis-server
+Base de datos persistente clave-valor con interfaz de red. Redis es una base de datos clave-valor similar a memcache, pero con datos no volátiles. Además, Redis ofrece soporte nativo para la manipulación de datos complejas y su capacidad de persistencia en disco. Los datos se almacenan completamente en memoria y se guardan periódicamente en disco. Este paquete depende del paquete redis-server.
+$ redis-server (inicia el servidor Redis)
+
+
+redis-tools
+Herramientas para la base de datos redis-server. Incluye los ejecutables redis-benchmark, redis-check-aof, redis-check-rdb y redis-cli
+$ redis-cli (abrir una línea de comandos interactiva)
+       > SET mi_clave "Hola Mundo" (establecer una clave)
+       > GET mi_clave (obtener el valor de una clave)
+       > LPUSH mi_lista "primer elemento" (establecer una lista)
+       > LPUSH mi_lista "segundo elemento"
+       > LRANGE mi_lista 0 -1
+       > SADD mi_conjunto "manzana" (trabajar con conjuntos)
+       > SADD mi_conjunto "banana"
+       > SADD mi_conjunto "manzana"
+       > SMEMBERS mi_conjunto
+$ redis-benchmark -n 10000 (benchmark de SET/GET con 10000 peticiones)
+$ redis-benchmark -c 20 -d 4096 -n 20000 (enviar 20000 peticiones que se enviaran a 20 clientes y valores de 4 KB usando SER)
+$ redis-benchmark -t SET,GET -r 1000000 -n 200000 (benchmark de random keys para estudiar la distribución de claves)
+$ redis-benchmark --latency -n 100000 (medida de latencia en tiempo real)
+$ redis-benchmark -h my.redis.host.com -p 6380 --tls -n 100000 (uso con un servidor remoto y TLS)
+$ redis-benchmark -q -n 100000 -c 50 -d 256 (muestra una línea con QPS, latenc.%, pctiles y hps)
+$ redis-check-aof appendonly.aof (verificar la integridad del AOF [Append Only File])
+$ redis-check-aof --fix /ruta/al/archivo/appendonly.aof (reparar el AOF si hay errores)
+$ redis-check-rdb dump.rdb (verificar la integridad del RDB [Redis Database Backup])
+
+
 ree
 Verifica si el firmware del pc y la tarjeta de red puede arrancar la máquina en red.
 # strings *.rom | grep UNDI > /dev/null && echo "Si puede" || echo No
