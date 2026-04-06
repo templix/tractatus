@@ -49191,6 +49191,23 @@ $ recordmydesktop --follow-mouse (La brabación sigue al cursor)
 $ recordmydesktop --device pulse (Especificando dispositivo de sonido)
 
 
+recoverdm
+Recupera discos con sectores defectuosos. Permite recuperar archivos y dispositivos completos. Si encuentra sectores irrecuperables, escribe un sector vacío en el archivo de salida y continúa. Al recuperar un CD o DVD, si el programa no puede leer el sector en modo normal, intentará leerlo en modo RAW [sin comprobación de errores, etc.]. Incluye una utilidad llamada mergebad que combina varias imágenes en una sola.
+$ recoverdm -t 41 -o sortida -l sectores -n 4 -s 3 -r 4 -p 2 (tipo archivo, archivo de salida, archivo de los bloques defectuosos, 4 reintentos antes de continuar al siguiente sector [por defecto 6], velocidad de rotación [3, por defecto 1], 4 reintentos de relectura RAW [por defecto 6] y 2 sectores que se omitiran al detectar un problema de lextura)
+Los tipos [-t] pueden ser:
+       FILE            1
+       FLOPPY          10
+       FLOPPY_IDE      11
+       FLOPPY_SCSI     12
+       CDROM_IDE       20
+       CDROM_SCSI      21
+       DVD_IDE         30
+       DVD_SCSI        31
+       DISK_IDE        40
+       DISK_SCSI       41
+Si fuera un disco lo que se quisiera recupera tendría que especificarse con -i /dev/sdxxx.
+
+
 recoverjpeg
 Herramienta para recuperar imágenes JPEG y vídeos MOV de un dispositivo de almacenamiento, como un disco duro o una tarjeta de memoria. Incluye los ejecutables recovermov, remove-duplicates y sort-pictures
 $ recoverjpeg /dev/sdb1 /home/user/recovered_images (escaneará el dispositivo /dev/sdb1 y recuperará todas las imágenes JPEG encontradas, guardándolas en el directorio especificado)
