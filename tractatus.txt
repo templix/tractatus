@@ -49353,6 +49353,32 @@ redmine
 [redmine-mysql redmine-plugin-pretend redmine-sqlite]. Aplicación web flexible para la gestión de proyectos. Desarrollada con el framework Ruby on Rails, es multiplataforma y compatible con diversas bases de datos. Necesita un servidor que entienda Ruby y lo "traduzca" a HTML. El servidor pòpiode Ruby es puma [ver].
 
 
+
+redshift
+Herramienta que ajusta la temperatura de color de la pantalla para reducir la fatiga ocular y mejorar la comodidad visual, especialmente en horarios nocturnos o en ambientes con poca luz. La idea es modificar la tonalidad de la coloración de la pantalla, haciéndola más cálida [más amarilla o anaranjada] en la noche y más fría [más blanca o azulada] durante el día, imitando los cambios de la luz natural según la posición del sol.
+$ nano .config/redshift.conf
+       [redshift]
+        temp-day=5700
+ 	temp-night=3600
+ 	gamma=0.8
+ 	adjustment-method=randr
+ 	location-provider=manual
+       [manual]
+        ; Olot (Girona)
+        lat=42.2
+ 	lon=2.3
+$ redshift -p (mostrar los parámetros actuales)
+$ redshift -l list (ver los proveedores disponibles)
+$ redshift -l manual:help (información sobre un proveedor. En el manual ha de especificarse latitud y longitud)
+$ redshift -m list (métodos de ajuste disponibles)
+$ redshift -m randr:help (información sobre un ajuste)
+$ redshift & (ajustará la temperatura de color automáticamente según la hora del día en la ubicación configurada liberando la terminal)
+$ redshift -x (restablecer la temperatura)
+$ pkill redshift (matar la aplicación)
+$ redshift -t 6500:4500 (establecer manualmente la temperatura de color. 6500 Kelvin sería la temperatura diurna [más fría] y 4500 la nocturna [más cálida])
+$ redshift -l 40.4168:-3.7038 -t 6500:3500 (manualmente especificando longitud y latitud y la temperatura de color)
+
+
 ree
 Verifica si el firmware del pc y la tarjeta de red puede arrancar la máquina en red.
 # strings *.rom | grep UNDI > /dev/null && echo "Si puede" || echo No
