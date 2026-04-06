@@ -49246,6 +49246,22 @@ $ find / -name passwd 1> todo.txt 2>&1 (mandar salida y errores a un mismo archi
 $ find / -name passwd 2> todo.txt 1>&2 (lo mismo que el anterior)
 
 
+redis-sentinel
+Sistema de alta disponibilidad para Redis, diseñado para monitorizar, notificar y realizar failover automático de instancias de Redis cuando algo sale mal. Para usar Sentinel, se necesita al menos 3 nodos Sentinel por consenso y al menos 1 maestro y 1 réplica de Redis.
+$ nano .config/sentinel/sentinel.conf
+       sentinel monitor mymaster 127.0.0.1 6379 2
+       sentinel down-after-milliseconds mymaster 5000
+       sentinel failover-timeout mymaster 60000
+       sentinel parallel-syncs mymaster 1
+mymaster --> nombre del grupo de Redis que Sentinel monitorizará.
+2 --> número de sentinels que deben estar de acuerdo para marcar el maestro como "down".
+down-after-milliseconds --> tiempo en ms antes de considerar que el maestro está caído.
+failover-timeout --> tiempo máximo para el failover.
+# redis-sentinel /ruta/a/sentinel.conf (iniciar sentinel)
+# systemctl start redis-sentinel (si se usa systemd)
+$ redis-cli -p 26379 info sentinel (verificar el estado [ver redis-tools])
+
+
 redis-server
 Base de datos persistente clave-valor con interfaz de red. Redis es una base de datos clave-valor similar a memcache, pero con datos no volátiles. Además, Redis ofrece soporte nativo para la manipulación de datos complejas y su capacidad de persistencia en disco. Los datos se almacenan completamente en memoria y se guardan periódicamente en disco. Este paquete depende del paquete redis-server.
 $ redis-server (inicia el servidor Redis)
