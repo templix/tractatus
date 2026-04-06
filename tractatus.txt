@@ -12856,6 +12856,7 @@ $ docker images app --format "table {{.Tag}}\t{{.Size}}\t{{.CreatedAt}}" (listar
 $ docker images --format "table {{.Repository}}\t{{.Tag}}\t{{.Size}}\t{{.CreatedSince}}" (listar imágenes locales con detalles)
 $ docker images --filter "dangling=true" (muestra imágenes sin usar)
 $ docker images (listar imágenes locales)
+$ docker images -q (istar los ID numéricos de las imágenes disponibles)
 $ docker run -d -p 8080:80 nginx (ejecuta contenedor Nginx en modo segundo plano, asignando el puerto 80 dentro del contenedor al puerto 8080 en la máquina anfitriona)
 $ docker run --network host nginx (iniciar un contenedor)
 $ docker run -d --name web -p 80:80 nginx (servidor web en background)
@@ -12908,6 +12909,7 @@ $ docker volume create --name mi-volumen (crea volumen persistente)
 $ docker volume inspect mi-volumen (inspeccionar un volumen)
 $ docker volume rm mi-volumen (eliminar un volumen concreto)
 $ docker info (información detallada del daemon Docker)
+$ docker top MyContainer (ver el proceso superior de un contenedor)
 1.-
 Configurar el usuario para usar Docker sin sudo
 # usermod -aG docker $USER (agregar usuario al grupo docker)
