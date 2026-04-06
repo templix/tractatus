@@ -49191,6 +49191,14 @@ $ recordmydesktop --follow-mouse (La brabación sigue al cursor)
 $ recordmydesktop --device pulse (Especificando dispositivo de sonido)
 
 
+recoverjpeg
+Herramienta para recuperar imágenes JPEG y vídeos MOV de un dispositivo de almacenamiento, como un disco duro o una tarjeta de memoria. Incluye los ejecutables recovermov, remove-duplicates y sort-pictures
+$ recoverjpeg /dev/sdb1 /home/user/recovered_images (escaneará el dispositivo /dev/sdb1 y recuperará todas las imágenes JPEG encontradas, guardándolas en el directorio especificado)
+$ recovermov /dev/sdb1 /home/user/recovered_videos (buscará y recuperará todos los vídeos MOV del dispositivo /dev/sdb1, almacenándolos en el directorio especificado)
+$ remove-duplicates /home/user/file_list.txt (leerá la lista de archivos recuperados y eliminará los duplicados)
+$ sort-pictures /home/user/recovered_images (organizará las imágenes en subdirectorios basados en la fecha de captura)
+
+
 red
 1.- Configurar IP fija
 # nano /etc/network/interfaces
