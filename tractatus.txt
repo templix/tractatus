@@ -37452,6 +37452,15 @@ $ playbucket -volume 50 ~/Música (reproduce todos los archivos de sonido en el 
 $ soundtoh archivo.au (convertir un archivo de sonido a un archivo de cabecera de lenguaje C)
 
 
+nasm
+Ensamblador que se utiliza para convertir código escrito en lenguaje ensamblador a código máquina. NASM [Netwide Assembler] es un ensamblador de propósito general que soporta una amplia gama de formatos de salida, incluyendo archivos binarios de formato plano, archivos objeto Unix a.out, COFF, ELF, y archivos objeto de Microsoft DOS de 16 bits y Win32. Ver ree
+$ nasm -f bin -l c0000.lst c0000.rom (analizar ROM extraída con desensamblado básico)
+$ nasm -f elf program.asm -o program.o (especifica que el formato de salida deseado elf [Executable and Linkable Format] y el archivo de salida [program.o])
+$ nasm -f coff program.asm -o program.obj (compilar a formato COFF, utilizado en sistemas windows)
+$ nasm -f elf program.asm -o program (generar un archivo ejecutable directamente desde el código fuente en ensamblador)
+$ ndisasm -b 32 program.bin (desensamblar un archivo binario especificando que debe ser desensamblado como código de 32 bits. cambiar a 16 si el archivo binario es de 16 bits)
+
+
 nast
 Detectar usuarios, inalámbricos o no, de una red local. Como herramienta de análisis, tiene muchas características como:  Crear lista de hosts LAN, Seguir secuencias TCP-DATA, Encontrar puertas de enlace a Internet LAN, Descubre nodos promiscuos, Restablece conexiones establecidas, Realizar escáner de puertos medio abiertos, Buscar tipos de enlaces, Capturar banners del demonio de los nodos LAN, Controlar respuestas arp para descubrir posibles suplantaciones ...
       # nast (de forma interactiva informa de paquetes recibidos y los descartados por el kernel)
@@ -49357,7 +49366,7 @@ redmine
 
 
 redshift
-Herramienta que ajusta la temperatura de color de la pantalla para reducir la fatiga ocular y mejorar la comodidad visual, especialmente en horarios nocturnos o en ambientes con poca luz. La idea es modificar la tonalidad de la coloración de la pantalla, haciéndola más cálida [más amarilla o anaranjada] en la noche y más fría [más blanca o azulada] durante el día, imitando los cambios de la luz natural según la posición del sol.
+Herramienta que ajusta la temperatura de color de la pantalla para reducir la fatiga ocular y mejorar la comodidad visual, especialmente en horarios nocturnos o en ambientes con poca luz. La idea es modificar la tonalidad de la coloración de la pantalla, haciéndola más cálida [más amarilla o anaranjada] en la noche y más fría [más blanca o azulada] durante el día, imitando los cambios de la luz natural según la posición del sol. El valor neutro por defecto es temp-day=6500.
 $ nano .config/redshift.conf
        [redshift]
         temp-day=5700
@@ -49382,9 +49391,14 @@ $ redshift -l 40.4168:-3.7038 -t 6500:3500 (manualmente especificando longitud y
 
 
 ree
-Verifica si el firmware del pc y la tarjeta de red puede arrancar la máquina en red.
-# strings *.rom | grep UNDI > /dev/null && echo "Si puede" || echo No
-# ree
+[Rom Extension Extractor]. Herramienta que extrae las extensiones ROM del firmware de un ordenador. Este paquete también incluye fontdump, un programa para extraer las fuentes de la BIOS de vídeo. ree escanea la memoria del sistema, en las direcciones c0000 a f0000, en pasos de 512 bytes para identificar las extensiones ROM (55,aa). Si las encuentra, calcula su tamaño, el byte posterior al ID, multiplicado por los pasos de 512 bytes y guarda el resultado en un archivo .rom.
+# ree (extracción básica de /dev/mem y generará archivos .rom en el directorio actual)
+# fontdump video.rom (extraer fuentes de la BIOS de vídeo)
+# fontdump /dev/mem 0xC0000 0x10000 (extraer desde dirección específica)
+# fontdump /dev/mem 0xC8000 0x8000 (especificar rango exacto donde suelen estar las fuentes)
+$ file c0000.rom (analizar una ROM específica)
+$ echo "ibase=16; C0000" | bc  (convierte hex a decimal)
+# strings *.rom | grep UNDI > /dev/null && echo "Si puede" || echo No (verifica si el firmware del pc y la tarjeta de red puede arrancar la máquina en red)
 
 
 reflector
