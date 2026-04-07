@@ -49390,6 +49390,30 @@ $ redshift -t 6500:4500 (establecer manualmente la temperatura de color. 6500 Ke
 $ redshift -l 40.4168:-3.7038 -t 6500:3500 (manualmente especificando longitud y latitud y la temperatura de color)
 
 
+redsocks
+Demonio que se ejecuta en el sistema local y que tuneliza de forma transparente cualquier conexión TCP y paquetes UDP a través de un servidor proxy remoto SOCKS4, SOCKS5 o HTTP. El archivo de configuración en /etc/redsocks.conf.
+# systemctl enable redsocks (activar el domonio al iniciar el sistema)
+# redsocks -t -c /etc/redsocks.conf (probar la sintaxis)
+1.-
+Ejemplo clásico de redirigir todo el tráfico TCP excepto redes locales con iptables:
+# iptables -t nat -N REDSOCKS (crear una cadena nueva)
+Ignorar tráfico a redes locales y reservadas para evitar bucles)
+# iptables -t nat -A REDSOCKS -d 0.0.0.0/8 -j RETURN
+# iptables -t nat -A REDSOCKS -d 10.0.0.0/8 -j RETURN
+# iptables -t nat -A REDSOCKS -d 127.0.0.0/8 -j RETURN
+# iptables -t nat -A REDSOCKS -d 169.254.0.0/16 -j RETURN
+# iptables -t nat -A REDSOCKS -d 172.16.0.0/12 -j RETURN
+# iptables -t nat -A REDSOCKS -d 192.168.0.0/16 -j RETURN
+# iptables -t nat -A REDSOCKS -d 224.0.0.0/4 -j RETURN
+# iptables -t nat -A REDSOCKS -d 240.0.0.0/4 -j RETURN
+Redirigir todo el tráfico TCP al puerto de redsocks
+# iptables -t nat -A REDSOCKS -p tcp -j REDIRECT --to-ports 12345
+Aplicar la cadena al tráfico saliente de la propia máquina
+# iptables -t nat -A OUTPUT -p tcp -j REDSOCKS
+# iptables -t nat -A REDSOCKS -p tcp -m multiport --dports 80,443 -j REDIRECT --to-ports 12345 (para redirigir solo tráfico web [puertos 80 y 443])
+# iptables-save (para guardar las reglas o usando iptables-ersistent)
+
+
 ree
 [Rom Extension Extractor]. Herramienta que extrae las extensiones ROM del firmware de un ordenador. Este paquete también incluye fontdump, un programa para extraer las fuentes de la BIOS de vídeo. ree escanea la memoria del sistema, en las direcciones c0000 a f0000, en pasos de 512 bytes para identificar las extensiones ROM (55,aa). Si las encuentra, calcula su tamaño, el byte posterior al ID, multiplicado por los pasos de 512 bytes y guarda el resultado en un archivo .rom.
 # ree (extracción básica de /dev/mem y generará archivos .rom en el directorio actual)
