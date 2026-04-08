@@ -37461,6 +37461,11 @@ $ nasm -f elf program.asm -o program (generar un archivo ejecutable directamente
 $ ndisasm -b 32 program.bin (desensamblar un archivo binario especificando que debe ser desensamblado como código de 32 bits. cambiar a 16 si el archivo binario es de 16 bits)
 
 
+naspro-bridges
+es una colección de puentes a LV2 que, una vez instalados, permiten a los usuarios utilizar plugins de audio desarrollados para otros estándares en hosts LV2. Esta versión incluye dos puentes para lo tres estándares de plugins de audio para Linux: uno para LADSPA [Linux Audio Developer's Simple Plugin API], otro para DSSI [Disposable Soft Synth Interface] y LV2 [Ladspa Version 2]. Un puente [bridge] es una capa de compatibilidad que hace que un plugin de un estándar antiguo aparezca y funcione como si fuera LV2 ante el host. El comando naspro-bridges envuelve esos plugins y los expone al host como si fueran bundles LV2 nativos. El paquete instala bundles LV2 [carpetas .lv2] en /usr/lib/lv2/ y cuando el host [Ardour, Carla, Qtractor, Guitarix, Audacity, etc] LV2 arranca y escanea esa carpeta, descubre los bridges automáticamente y los carga como plugins. El usuario no los invoca directamente.
+Nota.- El bridge de LADSPA soporta prácticamente todo LADSPA y LRDF excepto run_adding() y set_run_adding_gain(), y los presets de fábrica de LRDF. El bridge de DSSI no soporta: GUIs, programas MIDI, run_synth_adding(), ni run_multiple_synths().
+
+
 nast
 Detectar usuarios, inalámbricos o no, de una red local. Como herramienta de análisis, tiene muchas características como:  Crear lista de hosts LAN, Seguir secuencias TCP-DATA, Encontrar puertas de enlace a Internet LAN, Descubre nodos promiscuos, Restablece conexiones establecidas, Realizar escáner de puertos medio abiertos, Buscar tipos de enlaces, Capturar banners del demonio de los nodos LAN, Controlar respuestas arp para descubrir posibles suplantaciones ...
       # nast (de forma interactiva informa de paquetes recibidos y los descartados por el kernel)
