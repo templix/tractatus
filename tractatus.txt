@@ -35217,8 +35217,10 @@ Crear un espacio de intercambio.
 mktemp
 [coreutils]. Crear archivos o directorios temporales.
 $ mktemp (Crea un fichero temporal en /tmp)
-$ mktemp -d (Crea un directorio en tmp y en su interior un archivo)
-$ mktemp --tmpdir=documentos (crea un archivo temporal en el interior del directorio "documentos")
+$ mktemp -d (Crea un directorio en tmp)
+$ mktemp --tmpdir=documentos (crea un directorio temporal en el directorio "documentos")
+$ mktemp doc_XXXXX (creu un archivo en /tmp/ con el prefijo especificado [doc_] y 5 caracteres aleatorios [como mínimo 3 X]
+$ echo "linux es un sistema genial" > $(mktemp cierto_XXXX) (crear un archivo en el directorio actual con el contenido especificado)
 
 
 mktorrent
