@@ -57004,6 +57004,29 @@ Para abrir NERDTree pulsando F5 colocar en .vimrc la linea:
 	map <F5> :NERDTreeToggle<cr>
 
 
+vim-syntastic
+[flake8 shellcheck eslint gcc clang]. Plugin de comprobación de sintaxis de vim que analiza los archivos con verificadores de sintaxis externos y muestra los errores al usuario. Esto se puede hacer bajo demanda o automáticamente al guardar los archivos. Si se detectan errores de sintaxis, el usuario recibe una notificación. El desarrollo de Syntastic se detuvo oficialmente alrededor de 2018-2020. Sigue funcionando en entornos estables, pero es síncrono [bloquea Vim mientras ejecuta el checker] y no recibe actualizaciones. Para proyectos nuevos o flujos de trabajo modernos, se recomienda ALE [dense-analysis/ale] o, si se usa Neovim, el sistema LSP nativo [nvim-lspconfig].
+Configuración básica:
+$ nano ~/.vimrc
+       " Activar Syntastic
+       let g:syntastic_always_populate_loc_list = 1
+       let g:syntastic_auto_loc_list = 1
+       let g:syntastic_check_on_open = 0        " No revisar al abrir archivo
+       let g:syntastic_check_on_wq = 0          " No revisar al salir (:wq)
+       " Modo: 'active' (automático al guardar) o 'passive' (solo manual)
+       let g:syntastic_mode_map = { 'mode': 'active' }
+       " Abrir automáticamente la lista si hay errores
+       let g:syntastic_auto_jump = 1
+Comandos principales
+:SyntasticCheck --> Ejecuta la verificación manualmente
+:SyntasticInfo --> Muestra checkers disponibles y activos para el filetype actual
+:SyntasticToggleMode --> Alterna entre modo active y passive
+:Errors --> Abre la ventana de errores [quickfix]
+:lopen --> Abre la location list [alternativa a quickfix]
+:lclose --> Cierra la location list
+:lfirst / :lnext / :lprev --> Navega entre errores
+
+
 vimdff
 Editar dos, tres o cuatro versiones de un archivo con Vim y mostrar sus diferencias.
 $ vimdff file1 file2 (comparar dos archivos linea a linea con vim. De forma predeterminada, vimdiff divide la pantalla verticalmente)
