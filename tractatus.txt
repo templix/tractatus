@@ -40409,6 +40409,14 @@ Lector rss
 $ olive archivo.opml (importar las fuentes)
 
 
+ollama
+Herramienta para llevar la inteligencia artificial al entorno local diseñada para facilitar la ejecución de modelos como LLaMA 3, Codex, Claude Code y asistentes como OpenClaw.
+$ curl -fsSL https://ollama.com/install.sh | sh (descargar e instalar el comando)
+$ ollama run llama3 (Iniciar Ollama desde el CLI para que descargue llama3)
+$ curl http://localhost:11434/api/generate -d '{ "model": "llama3", "prompt": "Explica el comando linux nmap", "stream": false }' | jq '.response' (la respuesta en la url especificada)
+$ ollama run llama3 (luego entrar la pregunta)
+
+
 omake
 Es un sistema de compilación diseñado para escalar desde proyectos pequeños hasta proyectos muy grandes que abarcan varios directorios. OMake utiliza una sintaxis similar a la de GNU Make, con muchas características adicionales. Contiene especificaciones para compilar fácilmente programas en C, OCaml y LaTeX, pero también puede usarse para compilar proyectos con otros lenguajes.
 $ omake (compilación normal)
