@@ -33824,6 +33824,15 @@ Liberar memória física
 # echo 3 > /proc/sys/vm/drop_caches
 
 
+mempalace
+Sistema de memoria de IAs. Es como una base de datos inteligente y un sistema de organización para todos los historiales de conversación con IAs, como DeepSeek, ChatGPT, Claude, etc. y los archivos de proyecto. Almacena todo el historial de chats y archivos mantenidos con IAs en el disco duro. Provee herramientas, un servidor MCP [Model Context Protocol], para que otras IAs como DeepSeek, si se ejecuta localmente con una interfaz compatible, o Claude Code, etc. puedan preguntarle a MemPalace sobre información pasada. MemPalace es un sistema que ingiere las conversaciones que se ha tenido en otras plataformas [Claude, ChatGPT, Slack] y luego expone esa información a través de comandos o a través de un servidor MCP para que cualquier IA compatible pueda consultarla con "search" y actuar como si tuviera memoria perfecta.
+$ mempalace init ~/projects/myapp (inicializa un nuevo "palacio de memoria" para el proyecto "myapp")
+$ mempalace mine ~/projects/myapp (extrae y procesa los archivos de código, documentación y notas dentro de esa carpeta para que sean buscables)
+$ mempalace mine ~/chats/ --mode convos (procesa los chats con ChatGPT, Claude o Slack, etc y los procesa de manera especial para entender el flujo de un diálogo)
+$ mempalace search "¿Por qué cambiamos a GraphQL?" (busca la frase exacta o su significado en todo el contenido guardado)
+$ mempalace status (muestra un resumen del palacio de memoria: cuántas alas, habitaciones y archivos almacenados)
+
+
 memstat
 Enumera todos los procesos, ejecutables y bibliotecas compartidas que están consumiendo memoria virtual.
 $ memstat -v
@@ -49460,6 +49469,17 @@ reflex
 Herramienta para monitorizar un directorio y ejecutar un comando cuando ciertos archivos cambien.
 $ reflex -d fancy -r '\.txt$' echo {} & (imprime cada archivo .txt si cambia con decoración elegante [por defecto "plain", otra opción "none"] y en segundo plano)
 $ reflex -g '*.c' make (ejecuta make si cambia alguno de los archivos .c en el presente directorio)
+$ reflex -r 'archivo\.txt$' -- ~/bin/cambios_archivo.sh 2> /dev/null & (monitorizar cambios en un archivo lanzando un script con el comando fyi para mostrar notificación en la pantalla)
+       [1] 2480602
+El script con el comando fyi que muestra la notificación en pantalla hasta que no se cierre.
+$ nano cambios_archivo.sh
+       !/bin/bash
+       cd ~/dir_a_controlar_el archivo
+       fyi -t 0 "cambios en el archivo $(date '+%H:%M:%S')"
+Para terminar eñ comando reflex:
+$ kill 2480602
+       Interrupted (terminated). Cleaning up children...
+       [1]+  Fet                     reflex -r 'archivo\.txt$' -- ~/bin/cambios_archivo.sh 2> /dev/null
 
 
 regionset
