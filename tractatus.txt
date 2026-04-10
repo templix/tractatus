@@ -14533,7 +14533,7 @@ Cargador de arranque basado en UEFI que incluye un mecanismo de actualización s
 
 efibootmgr
 Averiguar si se está ejecutando UEFI o BIOS. Si el sistema es compatible con UEFI generará diferentes variables. En caso de no ser compatible con UEFI se verás un mensaje que dice que las variables no son compatibles.
-	# efibootmgr
+# efibootmgr
 	EFI variables are not supported on this system.
 Tambien puede consultarse si exite en el sistema la carpeta /sys/firmware/efi, si no existe se está usando BIOS.
 Nota.- efibootmgr solo funciona si se arranca el sistema en modo UEFI. Si se arranca en modo Legacy/BIOS, aunque se tenga una partición EFI [ESP-Epi System Partition], no se verán variables EFI [EFI variables are not supported]. Pero que exista no significa que el firmware o la instalación actual, esté usando UEFI, puede estar ahí “de adorno” porque la distro la creó automáticamente, o porque antes ya había otra instalación en modo UEFI.
