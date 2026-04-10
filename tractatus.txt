@@ -49457,8 +49457,8 @@ Optimizador del mirrorlist de pacman.
 
 
 reflex
-Hrramienta para monitorizar un directorio y ejecutar un comando cuando ciertos archivos cambien.
-$ reflex -d fancy -r '\.txt$' echo {} (imprime cada archivo .txt si cambia con decoración elegante [por defecto "plain", otra opción "none"])
+Herramienta para monitorizar un directorio y ejecutar un comando cuando ciertos archivos cambien.
+$ reflex -d fancy -r '\.txt$' echo {} & (imprime cada archivo .txt si cambia con decoración elegante [por defecto "plain", otra opción "none"] y en segundo plano)
 $ reflex -g '*.c' make (ejecuta make si cambia alguno de los archivos .c en el presente directorio)
 
 
@@ -49505,7 +49505,7 @@ $ remove-shell rbash
 
 
 rename
-renombrar archivos
+renombrar archivos.
 $ rename JPG jpg *.JPG (Renombrará todos los xxxx.JPG a xxxx.jpg)
 1.-
 Substituir parte del nombre de unos archivos ("DSC") por otro ("Fotos")
