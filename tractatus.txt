@@ -49456,6 +49456,12 @@ Optimizador del mirrorlist de pacman.
 # reflector --sort rate -l 10 -f 5 --save /etc/pacman.d/mirrorlist (Que tome los 5 mejores [f] de los 10 más actualizados [l], los ordene por velocidad de descarga [sort] y que sobreescriba el archivo mirrorlist [save])
 
 
+reflex
+Hrramienta para monitorizar un directorio y ejecutar un comando cuando ciertos archivos cambien.
+$ reflex -d fancy -r '\.txt$' echo {} (imprime cada archivo .txt si cambia con decoración elegante [por defecto "plain", otra opción "none"])
+$ reflex -g '*.c' make (ejecuta make si cambia alguno de los archivos .c en el presente directorio)
+
+
 regionset
 Los discos dvd contienen un código que indica la región geográfica donde el dvd fue publicado imposibilitando que los comprados en unas regiones, puedan reproducirse en otras:
 Códigos de región:
