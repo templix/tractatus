@@ -15493,6 +15493,14 @@ Si se mira el directorio .emacs.d/ ha aparecido el init.el generado. Se sale de 
       values (*) as ignored
         * eval : (add-hook 'after-save-hook (lambda nil (org-babel-tangle)) nil t)
 Pulsar "!" para aplicar la lista de variables locales y marcar permanentemente estos valores como seguros. Cada vez que se modifique la configuración en init.org se tendrá que hacer el proceso descrito para que se actualice init.el.
+37.-
+Ver la forma de mejorar la sintaxis de los scripts de bash. En .emacs [ver chellcheck]:
+(add-hook 'sh-mode-hook 'flymake-shellcheck-load)
+(add-hook 'after-init-hook #'global-flycheck-mode)(add-hook 'after-init-hook #'global-flycheck-mode)
+(eval-after-load 'flycheck
+  '(progn
+     (require 'flycheck-bashate)
+     (flycheck-bashate-setup)))
 
 
 emacs25-common-non-dfsg
@@ -19144,13 +19152,6 @@ $ fluster --test-set AVC --decoder /usr/bin/gst-launch-1.0 (usar gst-launch-1.0 
 $ fluster --test-set HEVC --test-case JCTVC_C004 --decoder /usr/bin/ffmpeg (ejecutar una prueba específica)
 
 
-flwrap
-Herramienta de escritorio que encapsula un archivo de texto, un archivo de imagen o un archivo binario dentro de un formato especial que incluye bloques de identificación y una suma de verificación [checksum] de 16 bits. Esto es especialmente útil en el ámbito de la radioafición y las comunicaciones digitales.
-$ flwrap mensaje.txt (encapsular el archivo creando mensaje.txt.flw)
-$ flwrap imagen.jpg (encapsular un archivo de imagen generando imagen.jpg.flw)
-$ flwrap mensaje.txt.flw (desencapsular un archivo .flw y extraer el archivo original generando mensaje.txt)
-
-
 fluxbox-generate_menu
 Generador de menús de fluxbox.
 $ fluxbox-generate_menu -g (Añade un menú tipo gnome)
@@ -19169,6 +19170,17 @@ Abrir una pestaña del vavegador y pegar:
 http://www.tv3.cat/su/tvc/tvcConditionalAccess.jsp?ID=1307049732092&QUALITY=H&FORMAT=MP4
 Colocando en el número “ID=” el que corresponda y con la ruta rtmp que nos indique lanzar [en una sola linea]:
 $ flvstreamer -r rtmp://mp4-500-str.tv3.cat/ondemand/mp4:g/tvcatalunya/2/9/1307049732092.mp4 -o video.mp4
+
+
+flwrap
+Herramienta de escritorio que encapsula un archivo de texto, un archivo de imagen o un archivo binario dentro de un formato especial que incluye bloques de identificación y una suma de verificación [checksum] de 16 bits. Esto es especialmente útil en el ámbito de la radioafición y las comunicaciones digitales.
+$ flwrap mensaje.txt (encapsular el archivo creando mensaje.txt.flw)
+$ flwrap imagen.jpg (encapsular un archivo de imagen generando imagen.jpg.flw)
+$ flwrap mensaje.txt.flw (desencapsular un archivo .flw y extraer el archivo original generando mensaje.txt)
+
+
+flycheck
+Comprobación de sintaxis en emacs [ver emacs(37) y shellcheck]
 
 
 fmt
