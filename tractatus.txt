@@ -14536,6 +14536,10 @@ Averiguar si se está ejecutando UEFI o BIOS. Si el sistema es compatible con UE
 # efibootmgr
 	EFI variables are not supported on this system.
 Tambien puede consultarse si exite en el sistema la carpeta /sys/firmware/efi, si no existe se está usando BIOS.
+# efibootmgr --bootorder 0001 (cambiar el orden en el que el firmware UEFI intenta arrancar los sistemas operativos)
+# efibootmgr --create --disk /dev/sda (crear nueva entrada de forma básica)
+# efibootmgr --create --disk /dev/sda --part 1 --label "Mi Sistema Linux" --loader /EFI/linux/vmlinuz (crear una nueva entrada de arranque con más datos)
+# efibootmgr --delete-bootnum --bootnum 0002 (eliminar una entrada de arranque)
 Nota.- efibootmgr solo funciona si se arranca el sistema en modo UEFI. Si se arranca en modo Legacy/BIOS, aunque se tenga una partición EFI [ESP-Epi System Partition], no se verán variables EFI [EFI variables are not supported]. Pero que exista no significa que el firmware o la instalación actual, esté usando UEFI, puede estar ahí “de adorno” porque la distro la creó automáticamente, o porque antes ya había otra instalación en modo UEFI.
 
 
@@ -49438,6 +49442,12 @@ ree
 $ file c0000.rom (analizar una ROM específica)
 $ echo "ibase=16; C0000" | bc  (convierte hex a decimal)
 # strings *.rom | grep UNDI > /dev/null && echo "Si puede" || echo No (verifica si el firmware del pc y la tarjeta de red puede arrancar la máquina en red)
+
+
+refind
+Gestor de arranque para ordenadores con firmware EFI y UEFI reemplazo de GRUB y que se ejecuta en la fase de prearranque del sistema operativo. No funciona en modo BIOS tradicional.
+# refind-install (instalación como gestor de arranque. Detecta la partición EFI y copia los archivos necesarios)
+# cp /usr/share/refind/refind.conf-sample /boot/efi/EFI/refind/refind.conf (copiar el archivo de configuración de ejemplo para personalizar timeout, tema, iconos, etc)
 
 
 reflector
