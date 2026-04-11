@@ -49520,6 +49520,13 @@ Esta aplicación permite cambiar dicho código del reproductor, no en el disco d
 vendor resets available: 4 (indica el número de cambios disponibles)
 
 
+reglookup
+Utilidad para el análisis del registro de Windows NT. El paquete incluye los siguientes comandos: reglookup, reglookup-recover y reglookup-timeline.
+$ reglookup "SELECT * FROM HKEY_LOCAL_MACHINE\Software" (consulta similar a SQL para obtener todos los valores y claves bajo HKEY_LOCAL_MACHINE\Software)
+$ reglookup-recover archivo.reg (intentará recuperar datos del archivo de registro archivo.reg que puedan haber sido eliminados o dañados)
+$ reglookup-timeline -o salida.txt (generará una línea de tiempo de eventos del registro de Windows y guardará la salida en salida.txt)
+
+
 reiserfsck
 Reparación de particiones reiserfs. Equivalente al fsck -f /dev/sdX de las particiones ext3.
 # reiserfsck --rebuild-tree /dev/sda
