@@ -49542,9 +49542,16 @@ $ regripper -r /mnt/SYSTEM -f system > /mnt/reports/system.txt (procesar un arch
 $ regripper -r /mnt/SAM -f sam > /mnt/SAM.txt (analizar un archivo de registro de tipo SAM)
 
 
-reiserfsck
-Reparación de particiones reiserfs. Equivalente al fsck -f /dev/sdX de las particiones ext3.
-# reiserfsck --rebuild-tree /dev/sda
+reiserfsprogs
+Utilidades para crear, verificar, redimensionar y depurar sistemas de archivos ReiserFS. Incluye las herramientas debugfs.reiserfs, debugreiserfs, fsck.reiserfs, mkfs.reiserfs, mkreiserfs, reiserfsck, reiserfstune, resize_reiserfs y tunefs.reiserfs.
+$ mkfs.reiserfs /dev/sda1 (crear un sistema de archivos ReiserFS)
+$ mkreiserfs /dev/sda1 (lo mismo)
+$ reiserfsck --check /dev/sda1 (comprueba la coherencia del sistema de archivos e informa de los errores, pero no repara los que pueda encontrar)
+$ resize_reiserfs -f /dev/sda1 (forzar el redimensionar un sistema de archivos ReiserFS)
+$ debugfs.reiserfs -J -j /dev/hda1 (imprime el encabezado del dispositivo especificado)
+$ debugreiserfs -j /dev/hda2 (imprime el superbloque del sistema de archivos ReiserFS encontrado en el dispositivo)
+$ fsck.reiserfs /dev/hda1 (busca un sistema de archivos Reiserfs en un dispositivo, reproduce las transacciones necesarias y verifica o repara el sistema de archivos)
+$ reiserfstune /dev/sda1 (se utiliza para optimizar ReiserFS)
 
 
 reisub
