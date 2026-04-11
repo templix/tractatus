@@ -49527,6 +49527,11 @@ $ reglookup-recover archivo.reg (intentará recuperar datos del archivo de regis
 $ reglookup-timeline -o salida.txt (generará una línea de tiempo de eventos del registro de Windows y guardará la salida en salida.txt)
 
 
+regolith-powerd
+Daemeon de configuración de energía para la sesión Wayland de Regolith. Regolith utiliza gnome-control-center y gsettings para configurar los ajustes relacionados con la energía. regolith-powerd utiliza systemd-inhibit para bloquear los eventos del botón de encendido y del interruptor de la tapa a través de logind, permitiendo que sway se encargue de ellos. También permite iniciar y configurar swayidle mediante gnome-control-center o gsettings.
+$ regolith-powerd
+
+
 reiserfsck
 Reparación de particiones reiserfs. Equivalente al fsck -f /dev/sdX de las particiones ext3.
 # reiserfsck --rebuild-tree /dev/sda
