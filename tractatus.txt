@@ -49532,6 +49532,16 @@ Daemeon de configuración de energía para la sesión Wayland de Regolith. Regol
 $ regolith-powerd
 
 
+regripper
+Herramienta escrita en Perl para el análisis forense de archivos hive del Registro de Windows que permite extraer, traducir y mostrar información, tanto datos como metadatos, de archivos con formato de registro mediante complementos en forma de scripts Perl.
+$ regripper -l (listar todos los complementos disponibles. Tambien con el navegador en file:///usr/lib/regripper/plugins)
+$ regripper -l -c (ver listado de complementos estructurados: Plugin,Version,Hive,Description)
+$ regripper -r /hive/NTUSER.DAT -p recentdocs_tln (ejecutar un complemento específico; por ejemplo, recuperar la cronología de los documentos recientes de NTUSER.DAT)
+$ regripper -r /hive/NTUSER.DAT -p run (recuperar claves de ejecución de NTUSER.DAT)
+$ regripper -r /mnt/SYSTEM -f system > /mnt/reports/system.txt (procesar un archivo de registro completo de tipo sistema)
+$ regripper -r /mnt/SAM -f sam > /mnt/SAM.txt (analizar un archivo de registro de tipo SAM)
+
+
 reiserfsck
 Reparación de particiones reiserfs. Equivalente al fsck -f /dev/sdX de las particiones ext3.
 # reiserfsck --rebuild-tree /dev/sda
