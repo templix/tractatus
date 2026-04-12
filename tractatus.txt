@@ -8705,6 +8705,11 @@ $ corosync-cmapctl -p dump.txt (volcar/leer desde fichero)
 # corosync-quorumtool -e <expected> (cambiar expected votes del clúster)
 
 
+cosign
+Firma de contenedores OCI y otros artefactos mediante Sigstore. Cosign admite firma sin clave con la autoridad de certificados Fulcio de Sigstore y el registro de transparencia Rekor[ver].
+$ cosign sign-blob fichero.txt (se puede usar identidad GitHub, Google, etc. Usa OIDC [login web] y automáticamente firma y registra en Rekor sin gestionar claves uno mismo)
+
+
 cow-shell
 [cowdancer]. Invoca una sesión de shell, bajo el directorio en el que se invocó la aplicación. Durante esta sesión, cualquier modificación que se realice en los archivos o directorios dentro del entorno de trabajo se lleva a cabo en una copia temporal de los archivos, en lugar de modificarlos directamente. Esto se logra a través de la técnica de Copy on Write [COW] que permite trabajar con archivos y directorios sin riesgos de perder datos o corromper los originales.
 
