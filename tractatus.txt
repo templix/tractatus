@@ -51394,6 +51394,14 @@ Muestra el hash sha de un fichero con el objetivo de verificar si se producen ca
 $ shasum -a 512 -t fichero (Usando el algoritmo de 512 bits. Otras opciones: 32 [por defecto] 224, 256, 384, 512224, 512256)
 
 
+sha256sum
+[coreutils]. Calcula el hash SHA-256 de un archivo o de la salida de un proceso. El hash es una huella digital de 64 caracteres hexa [256 bits].
+$ sha256sum fichero.pdf
+$ sha256sum file1.txt file2.mp3 image.png (calcular el hash de varios archivos)
+$ sha256sum * > checksums.sha256 (guardar la lista de hashes en un fichero a una linea por archivo)
+$ sha256sum -c checksums.sha256 (verificar todos los archivos contra una lista de checksums)
+
+
 sha1sum
 Calcular el hash sha1 de palabras, archivos o directorios.
 $ sha1sum archivo
