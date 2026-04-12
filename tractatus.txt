@@ -49592,6 +49592,20 @@ $ rekor-cli search --sha $(sha256sum fichero.txt | cut -d ' ' -f1) (buscar en Re
 Nota.- Cuando se sube un archivo a rekor no se puede borrar jamas ya que es "append-only [solo añade]". Al estar basado en el arbol de Merkle si se borrase una entrada, cambiaría el hash del nodo, todos los hashes superiores y el Root Hash y se detectaría inmediatamente.
 
 
+remaster-iso
+Conjunto de scripts [remaster-compose, remaster-extract y remaster-squashfs-editor] para extraer una imagen ISO, editar el archivo filesystem.squashfs de la imagen y, finalmente, restaurar los cambios al formato ISO.
+# remaster-extract debian-live-12.5.0-amd64-standard.iso ~/iso-work (monta la ISO en el directorio ~/iso-work, extrae live/filesystem.squashfs a ~/iso-work/squashfs-root y copia la estructura de arranque [isolinux/, EFI/, boot/] a ~/iso-work/iso-contents)
+# remaster-squashfs-editor ~/iso-work (abrirá un chroot en la terminal dentro del sistema live)
+Dentro del chroot se puede hacer cambios normales:
+# apt update
+# apt install vim tmux net-tools htop
+Editar archivos de configuración, añadir usuarios, ajustar services, etc.
+# apt clean (limpieza recomendada antes de salir)
+# rm -rf /var/lib/apt/lists/*
+# exit (salir del chroot)
+# remaster-compose ~/iso-work ~/debian-custom.iso (reconstruir la ISO)
+
+
 remove-shell
 [debianutils]. Elimina shells de la lista de shells de inicio de sesión. Funciona en los archivos temporales /etc/shells.tmp y /etc/shells.tmp2 para eliminar los shells dados de la lista de shells válidos y copia el resultado en /etc/shells.
 $ remove-shell rbash
