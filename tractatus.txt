@@ -49564,6 +49564,29 @@ U: Desmonta todos los sistemas de archivos.
 B: Reinicia la máquina.
 
 
+rekor
+Parte del proyecto Sigstore y consiste en mantener un registro público, inmutable y verificable de artefactos de software firmados con una identidad criptográfica. Rekor divide el log en fragmentos [shards] porque contiene más de mil millones de entradas.
+$ rekor-cli search --sha 3a7bd3e2360a... (buscar una firma por hash)
+$ rekor-cli loginfo (ver información del log: tamaño y verificar integridad global)
+$ rekor-cli loginfo --config ~/.rekor.yaml (el archivo .yaml se puede bajar de https://raw.githubusercontent.com/sigstore/rekor/refs/heads/main/config/rekor.yaml)
+Nota.- "inactive shards" son fragmentos antiguos [cerrados] que ya no cambian y se validan para asegurar que no han sido alterados
+$ rekor-cli get --uuid 108e9186e8c5677a11d612... (obtener una entrada concreta: da firma, certificado y metadata ya que no almacena el archivo completo)
+$ rekor-cli get --log-index 1280065902 | sed -n '1,4p' (mostrar las primera 4 lineas del índice)
+$ cosign sign-blob --key cosign.key fichero.txt > fichero.txt.sig
+$ cosign sign fichero.txt (subir un artefacto con cosign...)
+$ rekor-cli upload --artifact fichero.txt --signature fichero.txt.sig --public-key cosign.pub (... y luego registra el artefacto en el log público)
+1.-
+Flujo completo
+$ echo "Linux es un sistema genial" > fichero.txt (crear un artefacto)
+$ cosign generate-key-pair (generar claves, cosign.key, privada y cosign.pub ,pública)
+$ cosign sign-blob --key cosign.key fichero.txt > fichero.txt.sig (crear el archivo con la firma y subirla automáticamente a Rekor. No precisa hacer rekor-cli upload)
+  	 ...
+	 tlog entry created with index: 1280065902
+$ cosign verify-blob --key cosign.pub --signature fichero.txt.sig fichero.txt (verificar)
+$ rekor-cli search --sha $(sha256sum fichero.txt | cut -d ' ' -f1) (buscar en Rekor)
+Nota.- Cuando se sube un archivo a rekor no se puede borrar jamas ya que es "append-only [solo añade]". Al estar basado en el arbol de Merkle si se borrase una entrada, cambiaría el hash del nodo, todos los hashes superiores y el Root Hash y se detectaría inmediatamente.
+
+
 remove-shell
 [debianutils]. Elimina shells de la lista de shells de inicio de sesión. Funciona en los archivos temporales /etc/shells.tmp y /etc/shells.tmp2 para eliminar los shells dados de la lista de shells válidos y copia el resultado en /etc/shells.
 $ remove-shell rbash
@@ -50855,6 +50878,7 @@ Archivo base para ejemplo (Empleado -- Precio/hora -- Horas trabajadas – Cómo
 	María Monzón 9 16 metálico
 $ sed -n 4p lista (Mostrar la linea 4 del fichero)
 $ sed -n 4,5p lista (Mostrar la 4ª y la 5ª)
+$ sed -n 1,4p lista (mostrar las primeras 4 lineas del fichero)
 $ sed -n '4,$p' lista (Mostrar de la 3ª al final del fichero)
 $ sed -n '/^\Ant/,$p' lista (Mostrar desde la primera linea que empiece por “Ant” hasta el final)
 $ sed -n '/Clara/,/Bueno/p' lista (Mostrar sólo los parrafos desde “Clara” hasta “Bueno”)
