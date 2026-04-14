@@ -49606,6 +49606,39 @@ Editar archivos de configuración, añadir usuarios, ajustar services, etc.
 # remaster-compose ~/iso-work ~/debian-custom.iso (reconstruir la ISO)
 
 
+remind
+Programa avanzado de calendario y alarmas, que permite programar recordatorios, alarmas, cálculos de fechas, fases lunares, etc. Se basa en un archivo de configuración donde se definen los recordatorios, y luego ejecutar un comando para que muestre los avisos programados no es un visor de calendario del mes. Incluye el ejecutable rem.
+$ rem -m -c (comenzar en lunes y no domingo y mostrar el calendario del mes actual con todo lo programado)
+$ rem -m -c2 (lo mismo mostrando 2 meses)
+$ remind ~/.reminders (ver los recordatorios de hoy)
+$ rem (lo mismo)
+$ remind -c ~/.reminders (ver los recordatorios del mes)
+$ remind -c -p ~/.reminders | rem2pdf > calendario.pdf (generar un calendario en PDF)
+$ remind -p ~/.reminders | rem2html > calendario.html (generar un calendario en HTML)
+Ejemplo de fichero
+$ nano ~/.reminders
+# Cumpleaños fijo (cada año el 14 de abril):
+REM 14 Apr MSG Aniversario David
+# Primer día de cada mes:
+REM 1 MSG Primer de mes...
+# Con 5 días de antelación:
+REM 1 +5 MSG ¡Pagar el alquiler!
+# Todos los sábados:
+REM Sat MSG Día de limpieza en casa
+# Primer miércoles de cada mes:
+REM Wed 1 MSG Reunión del grupo de usuarios Linux
+# Cada dos días con fecha de inicio:
+REM Apr 15 2026 *2 MSG Regar las plantas
+# De una fecha a otra y cada dia:
+REM Apr 14 2026 *1 UNTIL Apr 20 2026 MSG Dar de comer al gato del vecino
+# A una hora todos los lunes:
+REM Mon 9:00 MSG Reunión semanal del equipo
+# Que empiece a comunicarlo 3 dias antes cuando se mira los recordatorios del dia [rem]:
+REM Apr 17 +3 MSG %"Aniversario de Eleanor%" is %b
+# Otra forma y que empiecen los recordatorios 7 dias antes con el recordatorio del dia:
+REM 20 Dec +7 MSG El cumpleaños de Nuria es %b
+
+
 remove-shell
 [debianutils]. Elimina shells de la lista de shells de inicio de sesión. Funciona en los archivos temporales /etc/shells.tmp y /etc/shells.tmp2 para eliminar los shells dados de la lista de shells válidos y copia el resultado en /etc/shells.
 $ remove-shell rbash
