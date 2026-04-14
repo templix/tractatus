@@ -49592,6 +49592,14 @@ $ rekor-cli search --sha $(sha256sum fichero.txt | cut -d ' ' -f1) (buscar en Re
 Nota.- Cuando se sube un archivo a rekor no se puede borrar jamas ya que es "append-only [solo añade]". Al estar basado en el arbol de Merkle si se borrase una entrada, cambiaría el hash del nodo, todos los hashes superiores y el Root Hash y se detectaría inmediatamente.
 
 
+remake
+Versión modernizada de la utilidad GNU make que añade varias mejoras y características adicionales que facilitan el desarrollo y la depuración de proyectos.
+$ remake -f Makefile (ejecutar un Makefile)
+$ remake -f Makefile clean (ejecuta el objetivo clean definido en el archivo Makefile)
+$ remake --trace -f Makefile (habilitar el rastreo de ejecución lo que muestra información detallada sobre la ejecución de las reglas y comandos)
+$ remake --debugger -f Makefile (depurar un Makefile permitiendo establecer puntos de interrupción, inspeccionar variables y ejecutar el proceso paso a paso)
+
+
 remaster-iso
 Conjunto de scripts [remaster-compose, remaster-extract y remaster-squashfs-editor] para extraer una imagen ISO, editar el archivo filesystem.squashfs de la imagen y, finalmente, restaurar los cambios al formato ISO.
 # remaster-extract debian-live-12.5.0-amd64-standard.iso ~/iso-work (monta la ISO en el directorio ~/iso-work, extrae live/filesystem.squashfs a ~/iso-work/squashfs-root y copia la estructura de arranque [isolinux/, EFI/, boot/] a ~/iso-work/iso-contents)
@@ -49637,6 +49645,8 @@ REM Mon 9:00 MSG Reunión semanal del equipo
 REM Apr 17 +3 MSG %"Aniversario de Eleanor%" is %b
 # Otra forma y que empiecen los recordatorios 7 dias antes con el recordatorio del dia:
 REM 20 Dec +7 MSG El cumpleaños de Nuria es %b
+Nota.- January (Jan), February (Feb), March (Mar), April (Apr), May (May), June (Jun), July (Jul), August (Aug), September (Sep), October (Oct), November (Nov) y December (Dec)
+Monday (Mon), Tuesday (Tue), Wednesday (Wed), Thursday (Thu), Friday (Fri), Saturday (Sat) y Sunday (Sun)
 
 
 remove-shell
