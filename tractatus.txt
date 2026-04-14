@@ -49623,6 +49623,7 @@ $ rem (lo mismo)
 $ remind -c ~/.reminders (ver los recordatorios del mes)
 $ remind -c -p ~/.reminders | rem2pdf > calendario.pdf (generar un calendario en PDF)
 $ remind -p ~/.reminders | rem2html > calendario.html (generar un calendario en HTML)
+$ remind -n ~/.reminders (próximas ocurrencia)
 Ejemplo de fichero
 $ nano ~/.reminders
 # Cumpleaños fijo (cada año el 14 de abril):
@@ -49647,11 +49648,22 @@ REM Apr 17 +3 MSG %"Aniversario de Eleanor%" is %b
 REM 20 Dec +7 MSG El cumpleaños de Nuria es %b
 Nota.- January (Jan), February (Feb), March (Mar), April (Apr), May (May), June (Jun), July (Jul), August (Aug), September (Sep), October (Oct), November (Nov) y December (Dec)
 Monday (Mon), Tuesday (Tue), Wednesday (Wed), Thursday (Thu), Friday (Fri), Saturday (Sat) y Sunday (Sun)
+Es posible dividir los recordatorios en varios ficheros e incluirlos desde el principal:
+$ nano ~/.reminders
+include ~/.config/remind/cumpleanos.rem
+include ~/.config/remind/festivos.rem
+include ~/.config/remind/trabajo.rem
 
 
 remove-shell
 [debianutils]. Elimina shells de la lista de shells de inicio de sesión. Funciona en los archivos temporales /etc/shells.tmp y /etc/shells.tmp2 para eliminar los shells dados de la lista de shells válidos y copia el resultado en /etc/shells.
 $ remove-shell rbash
+
+
+remrun
+Herramienta que copia un archivo a un host remoto mediante SSH, lo ejecuta allí y posteriormente limpia el archivo temporal.
+$ remrun backup.sh admin@192.168.1.100 (copia backup.sh al remoto, lo ejecuta como ./backup.sh y lo borra)
+$ remrun check_disk.sh root@mihost.remoto:22 /dev/sda1 (por el puerto 22 y un script de monitoreo para /dev/sda1)
 
 
 rename
