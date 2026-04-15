@@ -49685,6 +49685,38 @@ $ renattach -m safe correo.eml (renombrar archivos adjuntos utilizando el modo "
 Nota.- Antes de procesar archivos de correo electrónico, es recomendable hacer una copia de seguridad del archivo original, ya que el comando modifica el archivo directamente.
 
 
+renderd
+Daemon que renderiza teselas de mapa usando mapnik. Su función principal es recibir peticiones de teselas [tiles] desde el servidor web [Apache/Nginx] mediante mod_tile, gestionar una cola de renderizado asíncrona, ejecutar Mapnik de forma eficiente, reutilizando conexiones a PostgreSQL/PostGIS y evitando sobrecargar el sistema con múltiples instancias de Mapnik y almacenar las teselas generadas en caché [/var/cache/mod_tile/] para servir directamente sin volver a renderizar. Incluye los ejecutables render_expired, render_list, render_old y render_speedtest
+# systemctl status renderd (comprobar que el sevicio este activo)
+# journalctl -u renderd -f
+Configuración básica
+# nano /etc/renderd.conf
+       [renderd]
+       num_threads=4
+       tile_dir=/var/cache/mod_tile
+       socketname=/var/run/renderd/renderd.sock
+       [mapnik]
+       plugins_dir=/usr/lib/mapnik/3.0/input
+       [default]
+       URI=/tile/
+       XML=/etc/mapnik-osm-data/osm.xml
+       HOST=localhost
+# systemctl restart renderd (si se modifica el archivo de configuración)
+# renderd -f -c /etc/renderd.conf (lanzarlo en primer plano para depuración)
+renderizar 3 teselas con 2 hilos:
+cat <<EOF | render_list -m default -n 2
+14 8200 5600
+14 8201 5600
+15 16400 11200
+EOF
+# render_list -m default -n 4 -a < teselas.txt (desde un archivo, sin esperar confirmación [cola asíncrona])
+# render_list -m default -n 4 -o < teselas.txt (forzar re-renderizado aunque existan en caché con 4 hilos y overwrite)
+# render_expired -m default -s /var/run/renderd/renderd.sock < expired.list (marcar teselas expiradas. Formato de lista z x y)
+# render_expired -m default -z 12 -Z 16 < expired.list (limitar por rango de zoom solo de z12 a z16)
+# render_old -d /var/cache/mod_tile/default -t 604800 > old_tiles.txt (directorio de caché y segundos especificados)
+# render_speedtest -m default -n 8 -r 50 -z 13 -Z 15 (test básico de 8 hilos, 50 teselas aleatorias en z13-z15)
+
+
 renice
 (Ver nice). Cambiar la prioridad de un proceso en marcha.
 # renice -10 PID
