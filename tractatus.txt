@@ -49678,6 +49678,13 @@ Substituir parte del nombre de unos archivos ("DSC") por otro ("Fotos")
 	Fotos_8362.jpg Fotos_8374.jpg Fotos_8378.jpg Fotos_9112.jpg
 
 
+renattach
+Herramienta que se utiliza para renombrar archivos adjuntos en correos electrónicos de manera automática. Su principal objetivo es renombrar archivos adjuntos potencialmente peligrosos, como archivos ejecutables, para evitar que el usuario o su programa de correo electrónico si es deficiente los ejecute accidentalmente.
+$ renattach correo.eml (procesará el archivo correo.eml y renombrará cualquier archivo adjunto que sea considerado peligroso)
+$ renattach -m safe correo.eml (renombrar archivos adjuntos utilizando el modo "safe", que renombra los archivos a una extensión segura)
+Nota.- Antes de procesar archivos de correo electrónico, es recomendable hacer una copia de seguridad del archivo original, ya que el comando modifica el archivo directamente.
+
+
 renice
 (Ver nice). Cambiar la prioridad de un proceso en marcha.
 # renice -10 PID
