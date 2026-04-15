@@ -49722,6 +49722,13 @@ renice
 # renice -10 PID
 
 
+renrot
+Herramienta para renombrar archivos de imagen y vídeo según la fecha y hora en que fueron tomados, utilizando los metadatos EXIF.
+Renombra y rota archivos según las etiquetas EXIF [Exchangeable Image File Format] DateTimeOriginal y FileModifyDate, si existen. De lo contrario, el nombre se establecerá según la marca de tiempo actual. EXIF es un estándar utilizado en archivos de imagen y vídeo que almacena metadatos como la fecha y hora de captura, modelo de cámara, ajustes de cámara, etc.
+$ renrot -v imágenes (renombrar archivos de imagen y en modo verboso)
+$ renrot -v -f "%Y%m%d-%H%M%S" -s archivos (modo verboso, con formato personalizado de fecha y usa la fecha de modificación si DateTimeOriginal no existe)
+
+
 rep
 Intérprete de comandos de Lisp diseñado para usarse tanto como lenguaje de extensión para aplicaciones como lenguaje de programación de propósito general. Originalmente se escribió para ser compatible en su mayor parte con Emacs Lisp, pero posteriormente se ha diferenciado notablemente. Su objetivo es combinar las mejores características de Scheme y Common Lisp y proporcionar un entorno cómodo para implementar sistemas tanto pequeños como grandes. Busca ser un lenguaje de programación "pragmático".
 
