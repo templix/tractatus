@@ -49742,6 +49742,7 @@ $ top | grep firefox
       4787 tux       30  10 3448116 455780 231068 S   0,3   5,7   0:29.00 firefox+
 $ top | grep tilda
       4476 tux       25   5  553668  49636  36528 S   0,3   0,6   0:03.72 tilda
+Nota.- No se puede "subir" la prioridad de un proceso una vez que se ha bajado, el sistema no permite volver a subirla, ni siquiera al valor con el que se inició. Esto es una medida de seguridad para evitar que un proceso pueda ceder la CPU y luego recuperarla a voluntad.
 
 
 renrot
@@ -49753,6 +49754,19 @@ $ renrot -v -f "%Y%m%d-%H%M%S" -s archivos (modo verboso, con formato personaliz
 
 rep
 Intérprete de comandos de Lisp diseñado para usarse tanto como lenguaje de extensión para aplicaciones como lenguaje de programación de propósito general. Originalmente se escribió para ser compatible en su mayor parte con Emacs Lisp, pero posteriormente se ha diferenciado notablemente. Su objetivo es combinar las mejores características de Scheme y Common Lisp y proporcionar un entorno cómodo para implementar sistemas tanto pequeños como grandes. Busca ser un lenguaje de programación "pragmático".
+
+
+rephrase
+Herramienta para la recuperación de la contraseña, no para un ataque de fuerza bruta completo. Funciona cuando se recuerda casi toda la frase y solo se tiene dudas sobre algunas letras, mayúsculas, símbolos o separadores.
+El proceso es el siguiente. La clave de ejemplo es tUxgeN3-L pero no recordamos algunos caracteres. El primero lo tenemos claro es una "t" pero luego no sabemos si el segundo en una "u" minúscula o mayúscula (u|U) los siguientes caracteres sabemos que son xg y el otro si es un "5" o una "e" (5|e), el siguiente si es "n" o "N" (n|N) y a continuación qué número era de los tres especificados (1|2|3), y el otro si era guión o guión bajo (-|_) y el último si en "l" o "L" (l|L). La clave gpg es la que se especifica, puede averiguarse con
+$ gpg --list-secret-keys
+Una vez colocados los caracteres en orden tal como se ha descrito y copiado en el portapapeles, lanzamos el comando con la clave de la contraseña y en "Enter pattern" pegamos del portapapeles
+$ rephrase B78465754B057D863486463269FF78743A32BACC
+...
+Enter pattern:t(u|U)xg(5|e)(n|N)(1|2|3)(-|_)(l|L)
+2 2 2 3 1 2
+Significa que los caracteres desconocidos, los entre paréntesis, correctos son el segundo del primer paréntesis [U] , el segundo [e], el segundo [N],  el tercero [3], el primero [-] y el segundo [L]
+Nota.- Si la contraseña contiene paréntesis o barra separadora, han de escaparse con \: (\(|\)), (\||-).
 
 
 replace
