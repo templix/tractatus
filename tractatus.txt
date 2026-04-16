@@ -49776,6 +49776,11 @@ $ replace files DIRS  --  archivo (“files” por “DIRS” en archivo)
 $ replace DIRS dirs files FILES -- archivo (“DIRS” por ”dirs” y “files” por “FILES”)
 
 
+repopush
+Sincroniza de forma segura un repositorio de paquetes con otra ubicación mediante rsync.
+$ repopush /etc/apt/sources.list.d/debian.sources usuario@servidor:/etc/apt/sources.list.d/debian.sources (sincronizar repositorio local con un servidor remoto)
+
+
 reportbug
 Herramienta diseñada para enviar informes de errores a Debian o a las distribuciones derivadas. reportbug está diseñado para usarse en sistemas con un agente de transporte de correo instalado, como exim o sendmail; sin embargo, puede editarse el archivo de configuración y enviar informes utilizando cualquier servidor de correo disponible.
 # reportbug lynx-ssl (Informa un error en el paquete lynx-ssl)
