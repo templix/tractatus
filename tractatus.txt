@@ -49787,6 +49787,26 @@ Herramienta diseñada para enviar informes de errores a Debian o a las distribuc
 # reportbug --path --filename=ls (Informa un error en el paquete instalado que incluye un programa en su ruta llamado ls)
 
 
+reposurgeon
+Herramienta para editar el historial de repositorios de control de versiones. Soporta Git, Mercurial, Bazaar y Subversion. Incluye las herramientas repobench, repocutter, repomapper y repotool
+$ nano corregir_historia.rs
+read mi-repo.git
+delete 8f3a9c1
+author 2b7d4e0 "Ana López <ana@ejemplo.com>"
+rename src/legacy/main.c src/app/main.c
+write mi-repo-corregido.git
+$ reposurgeon < corregir_historia.rs (ejecutar)
+$ repobench --time --memory < mi_script.rs (mide tiempo de CPU, memoria y E/S durante la reescritura)
+$ repobench --compare script_v1.rs script_v2.rs (compara dos estrategias de reescritura)
+$ repocutter --subdir docs --output docs-repo.git mi-repo.git (crear un repo solo con la carpeta docs/)
+$ repocutter --include 'src/lib/**' --include '*.md' --output lib-repo.git mi-repo.git (extraer múltiples patrones)
+$ repomapper --authors --output autores.map mi-repo.git (generar mapa de autores desde el historial)
+$ repotool --verify mi-repo.git (verificar integridad del historial)
+$ repotool --stats mi-repo.git (extraer estadísticas básicas)
+$ repotool --convert hg://mi-repo hg-to-git.git (convertir entre formatos VCS)
+$ repotool --orphans --duplicates mi-repo.git (listar commits duplicados o huérfanos)
+
+
 repowerd
 Daemon para monitorizar y controlar el estado de energía del sistema en el entorno operativo Lomiri para telefonos moviles.
 
