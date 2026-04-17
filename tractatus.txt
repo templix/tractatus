@@ -21751,6 +21751,7 @@ $ git commit --amend (editar el último commit para modificarlo)
 $ git config --global user.name "username" (poner un nombre de identificación)
 $ git config --global user.password "password" (poner la contraseña)
 $ git config --global user.mail "email" (poner el email)
+$ git fsck (verificar el repositorio git con el local)
 1.-
 Indicar a git archivos o directorios que quedemos excluir del control de versiones.
 $ touch .gitignore (Crear el fichero en el directorio raiz del proyecto)
@@ -49860,6 +49861,41 @@ deb [signed-by=/etc/apt/keyrings/myrepo.gpg] http://repo.ejemplo.com/myrepo book
 Luego al ejecutar el update el paquete ya está disponible para instalación
 # apt update
 # apt install mipaquete
+
+
+reprotest
+Compila el mismo código fuente dos veces en entornos diferentes y luego verifica si existen diferencias entre los binarios generados en cada compilación. Si se encuentran diferencias, se puede utilizar diffscope o, si no está disponible, diff para visualizarlas en detalle y analizarlas posteriormente. Sirve para verificar que los paquetes se construyen de manera reproducible, independientemente del entorno donde se compilen.
+$ reprotest auto . (construir el directorio actual en /tmp [servidor null])
+$ reprotest auto . -- null -d (detecta automáticamente cómo construir el paquete y en modo verbose)
+$ reprotest auto paquete_1.0.dsc -- schroot unstable-amd64-sbuild (construir un paquete Debian fuente [.dsc] en un schroot. requiere configuración previa de sbuild)
+$ reprotest "make clean && make" mi_binario (construcción con make)
+$ reprotest "python3 setup.py bdist" "dist/*.tar.gz" (construcción Python)
+$ reprotest "python3 setup.py bdist_wheel" "dist/*.whl" (construcción Python wheel)
+$ reprotest "debuild -b -uc -us" "../*.deb" (construcción Debian manual)
+$ reprotest "dpkg-buildpackage -b --no-sign" "*.deb *.changes" (usar comillas para patrones con wildcards)
+$ reprotest --variations "+time" "make" "mi_programa" (probar solo variaciones específicas [solo tiempo])
+$ reprotest --dont-vary "time,timezone" "make" "mi_programa" (excluir variaciones problemáticas)
+$ reprotest --variations "build_path,umask" "make" "mi_programa" (variaciones mínimas para prueba rápida)
+$ reprotest "debuild -b -uc -us" "../*.deb" -- chroot /srv/chroot/sid (usando el servidor virtual chroot)
+$ reprotest "make" "mi_binario" qemu /path/to/qemu.img (usando QEMU)
+$ reprotest "make" "mi_binario" lxc nombre-contenedor (usando LXC)
+$ reprotest "make" "mi_binario" ssh usuario@servidor (usando SSH)
+$ reprotest --testbed-init 'apt-get update && apt-get install -y disorderfs faketime' "dpkg-buildpackage -uc -us -b" "../*.deb" -- schroot unstable-amd64-sbuild (instalar dependencias en el testbed antes de aplicar variaciones)
+$ reprotest --store-dir ./artefactos "make" "mi_binario" (guardar artefactos en directorio específico)
+Crear archivo de configuración en el directorio del proyecto
+$ nano .reprotestrc
+[basics]
+build_command = python3 setup.py sdist
+artifact = dist/mi_paquete-1.0.tar.gz
+source_root = .
+variations =
+    environment
+    build_path
+    home
+    time
+Luego simplemente ejecutar:
+$ reprotest
+Nota.- Cuando hay diferencias, reprotest indica qué variación específica causa el problema, lo que facilita arreglar el no-determinismo en el sistema de build.
 
 
 reptyr
