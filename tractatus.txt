@@ -49903,6 +49903,22 @@ Mueve procesos entre terminales ptys.
 $ reptyr -L PID (cambio de terminal en un modo "lento" para mayor compatibilidad con procesos que podrían bloquearse)
 
 
+request-tracker5
+Request Tracker [RT] es un sistema de gestión de incidencias que permite a un grupo de personas administrar de forma inteligente y eficiente las tareas, incidencias y solicitudes enviadas por una comunidad de usuarios. Incluye interfaces web, de correo electrónico y de línea de comandos (consulte el paquete rt5-clients). RT gestiona tareas clave como la identificación, priorización, asignación, resolución y notificación necesarias para aplicaciones críticas de la empresa, incluyendo gestión de proyectos, mesa de ayuda, gestión de incidencias del NOC, CRM y desarrollo de software. Admite tres tipos de bases de datos de forma predeterminada: MySQL, PostgreSQL y SQLite. Para facilitar la instalación sin configuración, se utilizará SQLite por defecto. Incluye las herramientas rt-attributes-viewer-5, rt-clean-attributes-5, rt-clean-sessions-5, rt-clean-shorteners-5, rt-dump-initialdata-5, rt-dump-metadata-5, rt-email-dashboards-5, rt-email-digest-5, rt-email-expiring-auth-tokens-5, rt-email-group-admin-5, rt-externalize-attachments-5, rt-fulltext-indexer-5, rt-importer-5, rt-ldapimport-5, rt-munge-attachments-5, rt-passwd-5, rt-preferences-viewer-5, rt-search-attributes-5, rt-serializer-5, rt-session-viewer-5, rt-setup-database-5, rt-setup-fulltext-index-5, rt-shredder-5, rt-validate-aliases-5 y rt-validator-5.
+# rt-validator --check (revisar si la base de datos está en buen estado)
+# rt-dump-metadata --all > /root/rt-metadata.xml (volcado de metadatos para reutilizarla con rt-setup-database)
+# rt-setup-database --action create (crear metadatos)
+# rt-dump-initialdata (exporta objetos soportados por `initialdata` para luego reutilizarlos en otra instancia)
+# rt-clean-sessions (limpiar sesiones)
+# rt-dump-initialdata > /root/rt-initialdata.xml (exportar initialdata)
+# rt-ldapimport (sincronizar cuentas y grupos con LDAP/Active Directory)
+# rt-email-digest -m daily (genera resúmenes diarios)
+# rt-email-digest -m weekly (genera resúmenes semanales)
+# rt-email-dashboards (envía por correo los dashboards a los usuarios suscritos)
+# rt-fulltext-indexer (reindexa contenido cuando se ha activado búsqueda de texto completo)
+# rt-ldapimport (importa usuarios y grupos desde LDAP/AD cuando se integra RT con un directorio corporativo)
+
+
 reset
 Restablece la configuración de la terminal cuando al intentar abrir algún fichero se nos ha llenado de caracteres raros. Aunque no veamos el cursor o el prompt, tecleando "reset" y clicar "intro", se restablece la terminal.
 
