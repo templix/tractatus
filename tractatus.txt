@@ -49811,6 +49811,57 @@ repowerd
 Daemon para monitorizar y controlar el estado de energía del sistema en el entorno operativo Lomiri para telefonos moviles.
 
 
+reprepro
+Herramienta para crear y gestionar repositorios de paquetes Debian, compatibles con el formato usado por apt. Permite incluir paquetes .deb, .udeb, .dsc [fuentes], entre otros. Es la solución habitual para montar un repositorio privado o de distribución propia. Este paquete incluye las herramientas auxiliares changestool y rredtool.
+Estructura básica del repositorio, las distribuciones que se gestionan y las opciones globales [opcionales].
+/srv/repos/myrepo/
+  conf/
+    distributions
+    options
+# nano conf/distributions
+       Origin: Mi Empresa
+       Label: myrepo
+       Codename: bookworm
+       Architectures: amd64 arm64 source
+       Components: main contrib
+       Description: Repositorio privado de Mi Empresa
+       SignWith: ABCDEF1234567890
+       DiffEnable: yes
+# nano conf/options
+       basedir /srv/repos/myrepo
+       verbose
+       ask-passphrase
+# reprepro -b /srv/repos/myrepo includedeb bookworm /ruta/mipaquete_1.0_amd64.deb (añadir un paquete binario .deb)
+# reprepro -b /srv/repos/myrepo include bookworm /ruta/mipaquete_1.0_amd64.changes (añadir desde un archivo .changes generado por dpkg-buildpackage y referencia todos los archivos del build)
+# reprepro -b /srv/repos/myrepo includedsc bookworm /ruta/a/mipaquete_1.0.dsc (añadir paquete fuente .dsc)
+# reprepro -b /srv/repos/myrepo list bookworm (listar paquetes en el repositorio)
+# reprepro -b /srv/repos/myrepo remove bookworm mipaquete (eliminar un paquete)
+# reprepro -b /srv/repos/myrepo copy bookworm-backports bookworm mipaquete (copiar un paquete entre distribuciones)
+# reprepro -b /srv/repos/myrepo export bookworm (regenear índices)
+# reprepro -b /srv/repos/myrepo check (verificar integridad del repositorio)
+# changestool mipaquete_1.0_amd64.changes show (ver el contenido de un .changes)
+# changestool mipaquete_1.0_amd64.changes verify (verificar sumas de comprobación)
+# changestool mipaquete_1.0_amd64.changes updatechecksums (actualizar sumas de comprobación tras modificar archivos)
+# changestool mipaquete_1.0_amd64.changes addrawfile mipaquete_1.0_all.deb (añadir un archivo al .changes)
+# changestool mipaquete_1.0_amd64.changes removefile mipaquete-doc_1.0_all.deb (eliminar un archivo del .changes)
+# rredtool patch < fichero.patch > Packages.new (aplicar un parche rred [Redundancy-Reduced Encoded Diff])
+# rredtool diff Packages.viejo Packages.nuevo > Packages.diff (crear un parche rred entre dos versiones de un índice)
+Nota.- reprepro genera automáticamente los parches rred si en conf/distributions se incluye "DiffEnable: yes" y se encarga de que apt update solo descargue los índices incrementales en lugar del fichero completo cada vez.
+Ejemplo de flujo de trabajo completo
+# dpkg-buildpackage -us -uc (compilar el paquete que genera .deb, .dsc, .changes)
+# changestool ../mipaquete_1.0_amd64.changes verify (verificar y actualizar checksums del .changes)
+# changestool ../mipaquete_1.0_amd64.changes updatechecksums
+# debsign ../mipaquete_1.0_amd64.changes (firmar el .changes, opcional pero recomendado)
+# reprepro -b /srv/repos/myrepo include bookworm ../mipaquete_1.0_amd64.changes (yncluir en el repositorio)
+# reprepro -b /srv/repos/myrepo list bookworm (listar para verificar)
+ publicar el repositorio para apt sirve el directorio /srv/repos/myrepo con nginx o apache, y en los clientes se añade:
+# nano /etc/apt/sources.list.d/myrepo.list
+deb [signed-by=/etc/apt/keyrings/myrepo.gpg] http://repo.ejemplo.com/myrepo bookworm main
+Luego al ejecutar el update el paquete ya está disponible para instalación
+# apt update
+# apt install mipaquete
+
+
 reptyr
 Mueve procesos entre terminales ptys.
 $ reptyr -L PID (cambio de terminal en un modo "lento" para mayor compatibilidad con procesos que podrían bloquearse)
