@@ -50004,6 +50004,12 @@ $ restore -rf home.bak (restaurar la copia completa [r] del archivo especificado
 $ restore -xaf fichero.bak fichero (restaurar solo la copia del fichero indicado [x], sin preguntar de qué volumen extraer los ficheros y especificando  archivo  [f])
 
 
+restorecond
+Utilidades de política principales de SELinux. Security-enhanced Linux es un parche del kernel de Linux® y varias utilidades con funcionalidades de seguridad mejoradas, diseñadas para añadir controles de acceso obligatorios a Linux. El kernel de Security-enhanced Linux contiene nuevos componentes arquitectónicos desarrollados originalmente para mejorar la seguridad del sistema operativo Flask. Estos componentes arquitectónicos ofrecen soporte general para la aplicación de diversos tipos de políticas de control de acceso obligatorio, incluidas las basadas en los conceptos de Type Enforcement®, control de acceso basado en roles y seguridad multinivel. Este paquete incluye restorecond para restaurar el contexto de archivos que suelen tener un contexto incorrecto.
+$ restorecond -d -u -v (modo depuración, supervisa el directorio /etc/selinux/restorecond_user.conf del usuario y modo verbose)
+$ sudo restorecond -d -v (modo verbose y supervisa el directorio /etc/selinux/restorecond.conf de root)
+
+
 return
 Comando builtin [integrado] de la shell Bash y de otras compatibles que se utiliza dentro de funciones definidas en scripts de shell para finalizar la ejecución de la función y, opcionalmente, devolver un valor de retorno, un número entero entre 0 y 255. Este valor suele ser utilizado para indicar el estado o resultado de la función: éxito, error, etc.
 Ejemplo de finalizar una función con un código específico y capturarlo usando $? tras llamar a la función.
