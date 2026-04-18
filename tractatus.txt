@@ -49919,6 +49919,13 @@ Request Tracker [RT] es un sistema de gestión de incidencias que permite a un g
 # rt-ldapimport (importa usuarios y grupos desde LDAP/AD cuando se integra RT con un directorio corporativo)
 
 
+rerun
+Herramienta para ejecutar comandos y reiniciarlos ante cambios en el sistema de archivos. Rerun ejecuta un programa y luego monitoriza el sistema de archivos y si se modifica algún archivo relevante, reinicia el programa.
+$ rerun "g++ principal.cpp -o programa && ./programa" (encadenar comandos para que, al guardar un archivo fuente, el programa se compile y se ejecute automáticamente)
+$ rerun -v ./limpiar_datos.sh datos_crudos.csv (limpia un archivo de texto y en modo verbose)
+$ rerun -c -p "**/*.go" -i "tests/*" go run main.go (limpiar pantalla cada reinicio, trabajar en un proyecto de Go, solo que se reinicie si se cambian archivos .go e ignorar carpeta tests)
+
+
 reset
 Restablece la configuración de la terminal cuando al intentar abrir algún fichero se nos ha llenado de caracteres raros. Aunque no veamos el cursor o el prompt, tecleando "reset" y clicar "intro", se restablece la terminal.
 
