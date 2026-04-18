@@ -49980,6 +49980,14 @@ Buscar el host de una ip o la ip de un host
 $ resolveip -s www.google.com
 
 
+resource-agents
+Contiene agentes de recursos de clúster [Resource Agents - RA] compatibles con la especificación Open Cluster Framework [OCF] una interfaz estándar para gestionarlos, utilizados para interactuar con diversos servicios en un entorno de alta disponibilidad gestionado por el gestor de recursos Pacemaker. Incluye los ejecutables ocf-tester, ocft, sfex_init y sfex_stat
+$ ocf-tester -n /usr/lib/ocf/resource.d/heartbeat/apache (ejecuta las pruebas para el agente de recursos apache ubicado en /usr/lib/ocf/resource.d/heartbeat/)
+$ ocft test -v /usr/lib/ocf/resource.d/heartbeat/apache (es equivalente al ejemplo anterior)
+$ sfex_init -n /dev/sdb1 (inicializa el recurso SFEX utilizando el dispositivo /dev/sdb1)
+$ sfex_stat /dev/sdb1 (muestra el estado del recurso SFEX para el dispositivo /dev/sdb1, indicando qué nodo tiene acceso exclusivo en ese momento)
+
+
 restic
 Programa que hace copias de seguridad de forma fácil, simple de configurar, rápido de ejecutar y restaurar, verificable, utiliza criptografíca para garantizar la confidencialidad y con el crecimiento de los datos, las instantáneas adicionales solo almacenan el incremento real.
 $ restic init -r /tmp/prueba-restic (inicio del directorio del backup. Pide contraseña y confirmación)
@@ -49992,7 +50000,7 @@ $ restic -r /tmp/prueba-restic restore 9d0c9446 --target /tmp/restore/ (restaura
 
 restore
 Restaurar una copia de seguridad realizada con dump.
-$  restore -rf home.bak (restaurar la copia completa [r] del archivo especificado [f])
+$ restore -rf home.bak (restaurar la copia completa [r] del archivo especificado [f])
 $ restore -xaf fichero.bak fichero (restaurar solo la copia del fichero indicado [x], sin preguntar de qué volumen extraer los ficheros y especificando  archivo  [f])
 
 
