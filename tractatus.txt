@@ -49955,6 +49955,16 @@ Framework para mantener actualizada la información del sistema sobre servidores
 # resolvconf -u (actualizar todos los suscriptores. No los actualiza cuando agrega un resolv.conf que coincide con lo que ya tiene para la interfaz)
 
 
+resolvconf-admin
+Programa auxiliar setuid para configurar el DNS local. Permite que un cliente DHCP sin privilegios añada información sobre los servidores DNS que detecta. Los cambios hechos con resolvconf-admin pueden ser sobreescritos cuando el NetworkManager o el cliente DHCP renueven la conexión.
+# resolvconf-admin add cloudflare 1.1.1.1 1.0.0.1 (añadir las DNS de Cloudflare)
+# resolvconf-admin add google 8.8.8.8 8.8.4.4 (añadir DNS de Google)
+# resolvconf-admin add router 192.168.1.1 (añadir DNS del router)
+# resolvconf-admin del google (eliminar una entrada añadida previamente)
+# resolvconf-admin add oficina -d empresa.com -s empresa.com 10.0.0.53 10.0.0.54 (especificando dominio y búsqueda típico en redes corporativas)
+Nota.- El comando comprueba si existe /sbin/resolvconf, si existe delega en él la gestion de /etc/resolv.conf de forma dinámica y si no existe gestiona él directamente el archivo.
+
+
 resolvectl
 [systemd-resolve]. Herramienta para la administración de DNSs [Domain Name Service, son los responsables de traducir los nombres de dominio a sus respectivas IPs y viceversa]
 # resolvectl statistics (verificar estadísticas DNS)
