@@ -49929,7 +49929,7 @@ $ rerun -c -p "**/*.go" -i "tests/*" go run main.go (limpiar pantalla cada reini
 reserialize
 Conversión entre YAML, JSON, TOML y BSON. Incluye las herramientas bson2json, bson2toml, bson2yaml, json2bson, json2toml, json2yaml, toml2bson, toml2json, toml2yaml, yaml2bson, yaml2json y yaml2toml.
 $ reserialize bson2json archivo.bson (convertir un bson a json)
-$ reserialize yaml2json archivo.yaml (convertir un yaml a json)
+$ reserialize yaml2json archivo.yaml (convertir un yaml a json)yaml2toml
 
 
 reset
@@ -49949,9 +49949,10 @@ Cambiar la medida de una partición.
 
 resolvconf
 Framework para mantener actualizada la información del sistema sobre servidores de nombres. Se erige en intermediario entre programas que proporcionan esta información (como ifup y ifdown, clientes DHCP, el demonio PPP y servidores de nombres locales) y programas que utilizan esta información (como cachés DNS y bibliotecas de resolución).
-$ resolvconf -i eth0 (interfaces y protocolos opcionalmente coincidiendo con el patrón)
-$ resolvconf -l eth0 (enumera los archivos resolv.conf)
-$ resolvconf -u (actualizar todos los suscriptores. No los actualiza cuando agrega un resolv.conf que coincide con lo que ya tiene para la interfaz)
+# systemctl status resolvconf (comprobar si está activo)
+# resolvconf -i eth0 (interfaces y protocolos opcionalmente coincidiendo con el patrón)
+# resolvconf -l eth0 (enumera los archivos resolv.conf)
+# resolvconf -u (actualizar todos los suscriptores. No los actualiza cuando agrega un resolv.conf que coincide con lo que ya tiene para la interfaz)
 
 
 resolvectl
