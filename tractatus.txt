@@ -49926,6 +49926,12 @@ $ rerun -v ./limpiar_datos.sh datos_crudos.csv (limpia un archivo de texto y en 
 $ rerun -c -p "**/*.go" -i "tests/*" go run main.go (limpiar pantalla cada reinicio, trabajar en un proyecto de Go, solo que se reinicie si se cambian archivos .go e ignorar carpeta tests)
 
 
+reserialize
+Conversión entre YAML, JSON, TOML y BSON. Incluye las herramientas bson2json, bson2toml, bson2yaml, json2bson, json2toml, json2yaml, toml2bson, toml2json, toml2yaml, yaml2bson, yaml2json y yaml2toml.
+$ reserialize bson2json archivo.bson (convertir un bson a json)
+$ reserialize yaml2json archivo.yaml (convertir un yaml a json)
+
+
 reset
 Restablece la configuración de la terminal cuando al intentar abrir algún fichero se nos ha llenado de caracteres raros. Aunque no veamos el cursor o el prompt, tecleando "reset" y clicar "intro", se restablece la terminal.
 
