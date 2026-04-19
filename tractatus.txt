@@ -42413,20 +42413,23 @@ alias pcmanfm='pcmanfm -n'
 
 
 pcs
-Es una herramienta de configuración de corosync y Pacemaker. Permite a los usuarios ver, modificar y crear fácilmente clústeres basados en Pacemaker. Aunque pcs es parte del paquete de Pacemaker, también se utiliza para configurar y gestionar Corosync, que es el componente responsable de la comunicación entre los nodos del clúster.
+Es una herramienta de configuración de corosync y Pacemaker [ver]. Permite a los usuarios ver, modificar y crear fácilmente clústeres basados en Pacemaker. Aunque pcs es parte del paquete de Pacemaker, también se utiliza para configurar y gestionar Corosync, que es el componente responsable de la comunicación entre los nodos del clúster.
 # systemctl status pcsd (verificar si está activol)
 # passwd hacluster (pedirá ingresar una contraseña para el usuario hacluster, que es el usuario predeterminado para pcs)
 # pcs cluster setup --name my_cluster node1 node2 (configura un clúster llamado my_cluster con los nodos node1 y node2)
 # pcs cluster start --all (iniciar los servicios de Corosync y Pacemaker)
 # pcs status (verificar que el clúster se haya iniciado correctamente y ver el estado de los nodos)
 # pcs resource create nginx_service systemd:nginx op monitor interval=30s (actualizar el monitoreo cada 30 segundos)
-# pcs resource create my_pg ocf:heartbeat:pgsql pgctl="/usr/lib/postgresql/12/bin/pg_ctl" pgdata="/var/lib/postgresql/12/main" pgport="5432" (configurar un recurso de base de datos, como PostgreSQL)
+# pcs resource create my_pg ocf:heartbeat:pgsql pgctl="/usr/lib/postgresql/17/bin/pg_ctl" pgdata="/var/lib/postgresql/17/main" pgport="5432" (configurar un recurso de base de datos, como PostgreSQL)
+$ pcs resource create VirtualIP ocf:heartbeat:IPaddr2 ip=192.168.1.100 (crear un recurso de IP virtual)
 # pcs resource create my_nfs ocf:heartbeat:nfsd nfs_shared_infodir="/var/lib/nfs" nfs_shared_ip="192.168.1.100" (configurar un recurso de archivo compartido, como NFS)
 # pcs resource create my_ip ocf:heartbeat:IPaddr2 ip=192.168.1.100 (crea un recurso de IP flotante con la dirección 192.168.1.100)
 Nota.- pcs se utiliza principalmente para configurar recursos en Pacemaker, también se puede configurar recursos que dependen de Corosync, como recursos de IP o servicios.
 # pcs constraint location my_resource prefers node1=100 (establece una preferencia para que my_resource se ejecute en node1)
 # pcs property set start-failure-is-fatal=true (establecer una política de arranque que indique que todos los recursos deben iniciarse en el nodo preferido)
 # pcs stonith level add 1 my_resource email@example.com (configura una notificación por correo electrónico para el recurso my_resource)
+$ pcs status (ver estado del cluster)
+$ pcs node standby <nombre> (poner un nodo en mantenimiento)
 
 
 pcsc-tools
@@ -49986,6 +49989,40 @@ $ ocf-tester -n /usr/lib/ocf/resource.d/heartbeat/apache (ejecuta las pruebas pa
 $ ocft test -v /usr/lib/ocf/resource.d/heartbeat/apache (es equivalente al ejemplo anterior)
 $ sfex_init -n /dev/sdb1 (inicializa el recurso SFEX utilizando el dispositivo /dev/sdb1)
 $ sfex_stat /dev/sdb1 (muestra el estado del recurso SFEX para el dispositivo /dev/sdb1, indicando qué nodo tiene acceso exclusivo en ese momento)
+
+
+resource-agents-paf
+PostgreSQL Automatic Failover [PAF] es un nuevo agente de recursos de OCF [Open Cluster Framework] dedicado a clústeres PostgreSQL multiestado [maestro-esclavo]. Su objetivo principal es mantener una clara separación entre la administración de Pacemaker [ver] y la de PostgreSQL [ver]. PAF está diseñado para gestionar clústeres PostgreSQL con un nodo maestro y uno o más nodos esclavos. En caso de que el nodo maestro falle, PAF detecta el fallo y promueve uno de los nodos esclavos al rol de maestro, asegurando la continuidad del servicio.
+Crear un recurso PostgreSQL gestionado por PAF con el comando pcs [ver]
+# pcs resource create my_pgdb ocf:heartbeat:pgsql \
+  pgctl="/usr/lib/postgresql/17/bin/pg_ctl" \
+  pghost="" \
+  pgdata="/var/lib/postgresql/17/main" \
+  pgport="5432" \
+  pgdatabase="mydb" \
+  op monitor interval="30s" \
+  op start timeout="60s" \
+  op stop timeout="60s"
+# pcs resource group add my_pg_group my_pgdb my_vip (añade el recurso de PostgreSQL my_pgdb y un recurso de IP virtual my_vip a un grupo de recursos llamado my_pg_group)
+# pcs status (muestra el estado actual del clúster, incluyendo los recursos y sus estados)
+
+
+resource-proof
+Biblioteca que gestiona la verificación de ancho de banda, CPU y almacenamiento para nodos en una red descentralizada. Su objetivo es combinar mecanismos que intenten validar los recursos en máquinas remotas. Sin embargo, esta validación es puntual y no se garantiza su precisión a lo largo del tiempo. El propósito es proporcionar alguna indicación de que una máquina posee ciertas capacidades. No es una utilidad para el usuario final [de consola], sino un binario CLI que forma parte de una librería para verificar recursos de nodos en una red descentralizada.
+
+
+restfuldb
+Herramienta escrita en Perl que convierte cualquier base de datos MySQL/MariaDB o SQLite en una API REST accesible vía HTTP, permitiendo realizar operaciones de crear, leer, actualizar y eliminar sin necesidad de escribir código backend personalizado.
+# systemctl start restfuldb (arrancar el servicio)
+Por defecto el acceso es en http://localhost:8080
+$ curl http://localhost:8080/api (listar todas las bases de datos disponibles)
+$ curl http://localhost:8080/api/mi_base_de_datos (ver las tablas de una base de datos)
+$ curl http://localhost:8080/api/mi_base_de_datos/usuarios?query=true (listar registros de una tabla)
+$ curl http://localhost:8080/api/mi_base_de_datos/usuarios/1 (obtener un registro específico por ID)
+$ curl -X POST -H "Content-Type: application/json" -d '{"nombre": "Juan", "email": "juan@ejemplo.com"}' http://localhost:8080/api/mi_base_de_datos/usuarios (crear un nuevo registro [POST])
+$ curl -X PATCH -H "Content-Type: application/json" -d '{"email": "nuevo@ejemplo.com"}' http://localhost:8080/api/mi_base_de_datos/usuarios/1 (actualizar un registro [PATCH])
+$ curl -X DELETE http://localhost:8080/api/mi_base_de_datos/usuarios/1 (eliminar un registro [DELETE])
+$ curl -X POST -H "Content-Type: text/sql" -d "SELECT * FROM usuarios WHERE edad > 25" http://localhost:8080/api (ejecutar SQL directamente)
 
 
 restic
