@@ -4072,6 +4072,18 @@ Cuando el sistema haya arrancado lanzar:
 Lo que convertirá el ilegible archivo bootchart.tgz en una imágen en nuestro home. El archivo de configuración en /etc/bootchartd.conf
 
 
+booth
+Administra los tickets que autorizan a los nodos del clúster, ubicados en diferentes lugares geográficos, a ejecutar recursos. Facilita la compatibilidad con clústeres distribuidos geográficamente con Pacemaker [ver]. Pacemaker decide qué recurso va a qué nodo y Booth decide qué sitio tiene permitido participar. Incluye las herramientas booth-keygen, boothd y geostore
+# systemctl status booth.service (comprobar si está activo el servicio)
+# boothd status -c /etc/booth/booth.conf (lo mismo con el daemon del comando)
+# booth-keygen /etc/booth/authkey (genera una clave de autenticación)
+# chmod 600 /etc/booth/authkey (permisos para dicha clave)
+# geostore list -t ticket-A (gestor de atributos de sitio para geo-clusters)
+# geostore set -t ticket-A replication synced
+# geostore get -t ticket-A replication
+# geostore delete -t ticket-A replication
+
+
 bootinfoscript
 [boot-infor-script]. Genera un informe del arranque del sistema.
 # bootinfoscript (genera el informe RESULTS.txt en el directorio /root)
@@ -41929,6 +41941,7 @@ Contiene las herramientas de "bajo nivel" que permiten manipular directamente el
 # crm_mon -1 (estado completo del clúster)
 # crm_mon -r (modo interactivo en tiempo real)
 # crm_mon -rfj (muestra fallos, recursos y genera salida en JSON).
+# crm_mon -r -f -t (ver recursos, failcounts e historial temporal de operaciones)
 # cibadmin -Q (ver configuración CIB)
 # crmadmin -D (muestra quién es el nodo DC actual)
 # crm_diff --original config_vieja.xml --new config_nueva.xml (compara dos archivos de configuración para ver qué ha cambiado)
@@ -41939,18 +41952,22 @@ Contiene las herramientas de "bajo nivel" que permiten manipular directamente el
 # crm_resource --resource mi_web --cleanup (limpiar errores de un recurso)
 # crm_attribute --node node1 --name "prioridad" --update 100 (gestiona atributos de los nodos)
 # crm_failcount --resource mi_db --delete --node node1 (consulta o borra el contador de fallos de un recurso. Si llega al límite, el recurso no arranca más en ese nodo)
+# crm_failcount -G -r mi_recurso (revisar y limpiar fallos de un recurso)
+# crm_failcount -D -r mi_recurso -N nodo1 (limpiar fallos de un nodo)
 # crm_standby --node node1 --update on (pone a un nodo en modo "espera" para que no pueda ejecutar recursos)
 # crm_error -1 (traduce los códigos de error numéricos de Pacemaker a texto humano)
 # crm_report --from "2025-12-12 00:00:00" informe.tar.bz2 (genera un archivo comprimido con todos los logs y configuraciones de todos los nodos)
 # cibsecret set node1 passwd PASS (poner una contraseña a un nodo)
 # cibsecret check node1 passwd (chequear la contraseña de un nodo)
 # stonith_admin --reboot node2 (reiniciar un nodo via STONITH)
+# stonith_admin --list (listar nodos STONITH)
 # iso8601 (convertir o validar fechas en el formato ISO8601 que usa el clúster para sus reglas de tiempo)
 # attrd_updater --help-all (mostrar todas las opciones de ayuda)
 # attrd_updater --help-output (mostrar la ayuda de salida)
 # attrd_updater --help-required (mostrar los argumentos obligatorios)
 # attrd_updater --help-command (mostrar las opciones del comando mutuamente excluyentes)
 # attrd_updater --help-additional (mostrar opciones adicionales)
+# crm_resource --validate -r mi_recurso (validar)
 
 
 package-update-indicator
