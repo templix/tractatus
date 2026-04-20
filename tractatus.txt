@@ -50047,6 +50047,20 @@ $ restorecond -d -u -v (modo depuración, supervisa el directorio /etc/selinux/r
 $ sudo restorecond -d -v (modo verbose y supervisa el directorio /etc/selinux/restorecond.conf de root)
 
 
+restricted-ssh-commands
+Restringir a los usuarios de SSH a un conjunto predefinido de comandos. restricted-ssh-commands está diseñado para que SSH lo llame y restrinja a un usuario a ejecutar únicamente comandos específicos. Se puede configurar una lista de expresiones regulares permitidas en `/etc/restricted-ssh-commands/`. El comando solicitado debe coincidir con al menos una expresión regular, de lo contrario, será rechazado.
+Ejemplo de archivo de comandos permitidos para USER
+# nano /etc/restricted-ssh-commands/USER
+^apt update$
+^ls -la /home/usuario$
+^git status$
+Se permite recargar apt, listar el directorio /home/usuario y ver el estado de git, nada más y que cuando alguien use la clave, ejecute el filtro:
+$ nano ~/.ssh/authorized_keys
+command="RSC_VERBOSE=1 /usr/lib/restricted-ssh-commands"
+command="/usr/lib/restricted-ssh-commands",no-port-forwarding,no-X11-forwarding,no-agent-forwarding,no-pty ssh-rsa
+El archivo /usr/lib/restricted-ssh-commands [el filtro] es el programa ejecutable que hace la validación y solo se llama desde authorized_keys.
+
+
 return
 Comando builtin [integrado] de la shell Bash y de otras compatibles que se utiliza dentro de funciones definidas en scripts de shell para finalizar la ejecución de la función y, opcionalmente, devolver un valor de retorno, un número entero entre 0 y 255. Este valor suele ser utilizado para indicar el estado o resultado de la función: éxito, error, etc.
 Ejemplo de finalizar una función con un código específico y capturarlo usando $? tras llamar a la función.
