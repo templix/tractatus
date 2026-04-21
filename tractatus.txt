@@ -4058,6 +4058,22 @@ Generar libros de las páginas man.
 $ bookman -p -t “Paginas man” /usr/man/man1/* > man.pdf (en formato pdf [-p] y con título [-t])
 
 
+bootcd
+Son herramientas que pueden copiar un sistema Debian en ejecución o montado. Se admiten diferentes configuraciones de arranque (efi, BIOS antiguo, arranque seguro). bootcdwrite crea un archivo ISO life-cd llamado bootcd usando verlayfs. Incluye las herramientas bootcd2chroot, bootcd2disk, bootcdbackup, bootcdmk2diskconf y bootcdwrite
+En el archivo de configuración se puede especificar los direcorios a excluir separados por espacio, deshabilitar ciertas comprobaciones para ahorrar tiempo y lugar donde se crea la ISO que por defecto es en /var/spool/bootcd/ t puede tener un tamaño de 30-40 GiB:
+$ sudo nano /etc/bootcd/bootcdwrite.conf
+...
+NOT_TO_CD="/home /snap /proc /sys /tmp"
+...
+DO_CHECK="no"
+...
+VAR=/home/USER/iso_deb/
+...
+# bootcdwrite (generará un archivo .iso)
+# bootcdmk2diskconf (una vez arrancado una máquina con esa ISO para "volcarla" al disco duro de un servidor nuevo, primero gener la configuración del disco)
+# bootcd2disk (una vez configurado el destino instalar el contenido del CD/ISO en el disco duro local)
+
+
 bootchart
 Ver el proceso de arranque en una imagen png. En la entrada del kernel en el grub colocar: init=/sbin/bootchartd
 Ejemplo:
@@ -31488,6 +31504,7 @@ $ ls -l PID (Muestra qué está corriendo con el PID especificado)
 $ ls -R	(recursivamente)
 $ ls -Z (listar visualizando los contextos en selinux [ver])
 $ ls -s	(Muestra el tamaño)
+$ ls -h (muestra tamaño en formato legible [KB, MB, GB])
 $ ls -S (Lista por tamaño)
 $ ls ../ (Listar los archivos del directorio anterior)
 $ ls -t	(lista por fecha de modificación de más nuevo a más viejo)
