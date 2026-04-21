@@ -50095,6 +50095,14 @@ command="/usr/lib/restricted-ssh-commands",no-port-forwarding,no-X11-forwarding,
 El archivo /usr/lib/restricted-ssh-commands [el filtro] es el programa ejecutable que hace la validación y solo se llama desde authorized_keys.
 
 
+resvg
+Utilidad para renderizar archivos SVG basada en un subconjunto estático de SVG Full 1.1.
+$ resvg --list-fonts (ver listado de fuentes)
+$ resvg --background red imagen.svg imagen.png (con fondo rojo y salida como imagen.png
+$ resvg imagen.svg -c (ver la salida en pantalla)
+$ resvg --font-family FONT imagen.svg imagen.png (con la fuente FONT, por defecto Times New Roman)
+
+
 return
 Comando builtin [integrado] de la shell Bash y de otras compatibles que se utiliza dentro de funciones definidas en scripts de shell para finalizar la ejecución de la función y, opcionalmente, devolver un valor de retorno, un número entero entre 0 y 255. Este valor suele ser utilizado para indicar el estado o resultado de la función: éxito, error, etc.
 Ejemplo de finalizar una función con un código específico y capturarlo usando $? tras llamar a la función.
