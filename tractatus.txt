@@ -50126,6 +50126,15 @@ Y capturamos el proceso:
 $ retty PID
 
 
+reuse
+Herramienta iniciativa de la Free Software Foundation Europe [FSFE] que ofrece una serie de recomendaciones para simplificar la gestión de derechos de autor y licencias de proyectos de software libre.
+$ reuse supported-licenses (listado de licencias soportadas)
+$ reuse --include-submodules download ZPL-2.1 (sin omitir los submódulos de Git descargar la licencia de ZPL-2.1. La guarda en ~/LICENSES/)
+  	Successfully downloaded /home/USER/LICENSES/ZPL-2.1.txt.
+$ reuse lint (analiza el directorio del proyecto GIT para comprobar su conformidad con REUSE)
+$ reuse --suppress-deprecation --root ~/DIR lint (oculta las advertencias de obsolescencia del directorio git especificado para comprobar su conformidad)
+
+
 rev
 invierte una cadena de texto o un archivo
 $ echo "perico de los palotes" | rev
