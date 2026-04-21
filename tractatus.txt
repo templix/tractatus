@@ -50103,6 +50103,11 @@ $ resvg imagen.svg -c (ver la salida en pantalla)
 $ resvg --font-family FONT imagen.svg imagen.png (con la fuente FONT, por defecto Times New Roman)
 
 
+retry
+Reintentar un comando hasta que se ejecute correctamente. La función `retry` captura la entrada estándar (stdin) en memoria a medida que los datos se pasan al comando repetido, y esta entrada estándar capturada se reproduce si el comando se repite. Esto permite integrar la herramienta `retry` en las tuberías de la shell. La función `retry` captura la salida estándar (stdout) en memoria. Si el comando se ejecuta correctamente, la salida estándar se envía a `stdout` como de costumbre; si el comando se repite, la salida estándar se envía a `stderr`. Esto garantiza que la salida se envíe a `stdout` una sola vez.
+$ retry -d 3 -m "reintentando" -t 5 -u true -w fail comando (3 segundos de retraso entre intentos, mensaje cuando se haya interrumpido la repetición, por defecto, el nombre del comando, número de veces que se reintentará el comando, por defecto indefinidamente, hasta que se cumpla el criterio "true", otras opciones fail, success y false y se repetirá mientras se cupla el criterio "fail" con las mismas opciones que -u y el comando que se ejecuta)
+
+
 return
 Comando builtin [integrado] de la shell Bash y de otras compatibles que se utiliza dentro de funciones definidas en scripts de shell para finalizar la ejecución de la función y, opcionalmente, devolver un valor de retorno, un número entero entre 0 y 255. Este valor suele ser utilizado para indicar el estado o resultado de la función: éxito, error, etc.
 Ejemplo de finalizar una función con un código específico y capturarlo usando $? tras llamar a la función.
