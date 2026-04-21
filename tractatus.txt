@@ -50146,6 +50146,10 @@ $ echo "perico de los palotes" | rev
 $ rev archivo.txt
 
 
+rev-plugins
+Plugin de reverberación LADSPA [Linux Audio Developer's Simple Plugin Api] un estándar para crear efectos de audio en Linux. Son módulos que se insertan en una cadena de audio para procesarlo. Cuenta con dos entradas para funcionamiento estéreo. El plugin acepta los dos canales por separado y los procesa de forma coordinada para mantener la imagen estéreo. En audio, la reverberación se va apagando y los valores van haciéndose cada vez más pequeños hasta casi llegar a cero. El plugin incluye código especial para detectar y eliminar esos valores problemáticos antes de que ralenticen la CPU, típicamente sustituyéndolos directamente por cero cuando son inaudibles. El uso de los plugins precisa una aplicación anfitriona LADSPA. Algunas opciones habituales en Linux son Audacity, Ardou, Carla...
+
+
 rfkill
 Herramienta para activar/desactivar dispositivos inalámbricos.
 # rfkill list (Muestra listado y su estado)
