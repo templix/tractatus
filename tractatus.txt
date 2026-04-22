@@ -50184,6 +50184,14 @@ $ nano Rexfile
 $ rex nginx_basic (ejecutar)
 
 
+rexima
+Mezclador interactivo que permite modificar los niveles de todos los dispositivos y configurar cuáles son las fuentes de grabación. Precisa un dispositivo mezclador conectado.
+$ rexima -v (muestra la configuración actual del mezclador)
+$ rexima -d (especifica el archivo del dispositivo mezclador que se utilizará. Por defecto, el archivo /dev/mixer)
+$ rexima line rec mic rec cd rec igain 100 ogain 0 (permite grabar la entrada de línea, el micrófono y la entrada de CD, ajusta la ganancia de entrada al máximo y la de salida al mínimo)
+$ rexima bass 85 treble 100 vol 50 speaker 0 mic 0
+
+
 rfkill
 Herramienta para activar/desactivar dispositivos inalámbricos.
 # rfkill list (Muestra listado y su estado)
