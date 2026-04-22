@@ -50150,6 +50150,40 @@ rev-plugins
 Plugin de reverberación LADSPA [Linux Audio Developer's Simple Plugin Api] un estándar para crear efectos de audio en Linux. Son módulos que se insertan en una cadena de audio para procesarlo. Cuenta con dos entradas para funcionamiento estéreo. El plugin acepta los dos canales por separado y los procesa de forma coordinada para mantener la imagen estéreo. En audio, la reverberación se va apagando y los valores van haciéndose cada vez más pequeños hasta casi llegar a cero. El plugin incluye código especial para detectar y eliminar esos valores problemáticos antes de que ralenticen la CPU, típicamente sustituyéndolos directamente por cero cuando son inaudibles. El uso de los plugins precisa una aplicación anfitriona LADSPA. Algunas opciones habituales en Linux son Audacity, Ardou, Carla...
 
 
+rex
+[Remote EXecution]. Herramienta que facilita la ejecución de comandos en múltiples servidores remotos. Se puede definir tareas pequeñas, encadenarlas en lotes, vincularlas con servidores o grupos de servidores y ejecutarlas fácilmente desde la terminal. Incluye la herramienta rexify.
+$ rex deploy --hosts="web1.ejemplo.com,web2.ejemplo.com" (ejecutar en servidores específicos. Sobrescribe el grupo)
+$ rex deploy --debug (modo debug para ver qué hace internamente)
+$ rex -T (listar tareas disponibles en el Rexfile)
+$ rex tarea1 tarea2 tarea3 (ejecutar múltiples tareas en secuencia)
+$ rex -u USER -H REMOTE_HOST -e 'say run(q{hostname})' (ver el hostname remoto sin Rexfile)
+$ rex -u USER -H REMOTE_HOST -e 'say for run(q{ls -l})' (listar un directorio remoto sin Rexfile)
+1.-
+$ rex -e "say run 'uptime'" -H "server1 server2" -u USER -p PASS (comprobar el tiempo de actividad en dos equipos y nombre y contraseña necesario para iniciar sesión en ambos)
+Esta linea es equivalente a colocar en Rexfile el contenido:
+$ nano Rexfile
+       user "USER";
+       password "PASS";
+       desc "Uptime estimate";
+       task "uptime", sub {
+       say run 'uptime';
+       };
+Y luego simplemente lanzar:
+$ rex uptime
+Ejemplo de archivo de configuración
+2.-
+Ejemplo que solo instala y arranca nginx
+$ nano Rexfile
+       use Rex -feature => ['1.4'];
+       user 'root';
+       task 'nginx_basic', sub {
+         update_package_db;
+  	 pkg 'nginx', ensure => 'present';
+  	 service 'nginx', ensure => 'started';
+       };
+$ rex nginx_basic (ejecutar)
+
+
 rfkill
 Herramienta para activar/desactivar dispositivos inalámbricos.
 # rfkill list (Muestra listado y su estado)
