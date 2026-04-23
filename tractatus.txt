@@ -50212,6 +50212,24 @@ Herramienta para activar/desactivar dispositivos inalámbricos.
 # rfkill unblock 0 (Desbloquear la 0 según resultado de “list”)
 
 
+rgxg
+[ReGular eXpression Generator]. Herramienta que genera expresiones regulares extendidas.
+$ rgxg range 0 31 (rango del 0 al 31 en base 10)
+$ rgxg range -b 2 0 31 (rango del 0 al 31 en base 2 en binario)
+$ rgxg range -b 16 0 31 (rango del 0 al 31 en base 16 en hexadecimal)
+$ rgxg range -b 16 -U 0 31 (solo letras mayúsculas en hex)
+$ rgxg range -b 16 -l 0 31 (solo letras minúsculas en hex)
+$ rgxg range -z 0 31 (con ceros a la izquierda de 00 a 31)
+$ rgxg range -z -m 4 0 31 (con longitud mínima de 4 dígitos)
+$ rgxg range 4096 (todos los números >= 4096 sin límite superior)
+$ rgxg cidr 192.168.0.0/24 (todas las IPs de una red /24)
+$ rgxg cidr -l 2001:db8:aaaa:bbbb:cccc:dddd::/112 (IPv6 con letras minúsculas)
+$ rgxg alternation lion elephant rhino buffalo leopard (genera una regex que casa con cualquiera de las palabras o patrones dados)
+$ rgxg alternation -N cat dog bird (sin paréntesis exteriores útil para anidar en otra regex)
+$ rgxg escape '1+(2*(3-4))' (escapa automáticamente todos los caracteres especiales de una cadena para que pueda usarse literalmente en una regex)
+$ echo "($(rgxg alternation -N gato perro)|$(rgxg range -N 1 10))" (combinar subcomandos con -N para anidar. Regex que casa con "gato", "perro" o números del 1 al 10)
+
+
 rhash
 Utilidad para generación y verificación de magnet links [enlaces magnéticos] y una amplia gama de sumas hash, como CRC32, MD4, MD5, SHA1, SHA256, SHA512, AICH, ED2K, Tiger, DC++ TTH, BitTorrent BTIH, GOST R 34.11-94, RIPEMD-160, HAS-160, EDON-R, Whirlpool y Snefru. Incluye las herramientas ed2k-link, edonr256-hash, edonr512-hash, gost12-256-hash, gost12-512-hash, has160-hash, magnet-link, rhash, sfv-hash, tiger-hash, tth-hash y whirlpool-hash.
 $ rhash --list-hashes (listado de todas las opciones de hash posibles)
