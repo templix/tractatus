@@ -50212,6 +50212,36 @@ Herramienta para activar/desactivar dispositivos inalámbricos.
 # rfkill unblock 0 (Desbloquear la 0 según resultado de “list”)
 
 
+rhash
+Utilidad para generación y verificación de magnet links [enlaces magnéticos] y una amplia gama de sumas hash, como CRC32, MD4, MD5, SHA1, SHA256, SHA512, AICH, ED2K, Tiger, DC++ TTH, BitTorrent BTIH, GOST R 34.11-94, RIPEMD-160, HAS-160, EDON-R, Whirlpool y Snefru. Incluye las herramientas ed2k-link, edonr256-hash, edonr512-hash, gost12-256-hash, gost12-512-hash, has160-hash, magnet-link, rhash, sfv-hash, tiger-hash, tth-hash y whirlpool-hash.
+$ rhash --list-hashes (listado de todas las opciones de hash posibles)
+$ rhash archivo.iso (calcular el hash de un archivo)
+$ echo "Linux es genial" | rhash - (calcular el hash de una cadena desde la entrada estándar)
+$ rhash -a archivo.iso -o archivo.sfv (ver todos los hashes del mismo archivo, separados por espacio y mandarlo a un archivo. Los hashes siguen un orden fijo interno)
+$ rhash -c archivo.sfv (verificar un archivo hash en formato SFV)
+$ rhash --sha256 descarga.iso (calcular el hash con sha256)
+$ rhash --simple texto (con formato más simple)
+$ rhash --bsd texto (con otro formato)
+$ rhash --magnet archivo.iso (genera un enlace magnet)
+$ printf "Linux es genial" | rhash --sha512 - (mostrar en pantalla el hash512 de la frase especificada)
+$ rhash --whirlpool texto (con formato whirlpool)
+Equivalencias de los ejecutables con rhash + opciones
+	  whirlpool-hash fichero --> rhash --whirlpool fichero
+	  tiger-hash fichero --> rhash --tiger fichero
+	  tth-hash fichero --> rhash --tth fichero
+	  edonr256-hash fichero --> rhash --edon-r256 fichero
+	  edonr512-hash fichero --> rhash --edon-r512 fichero
+	  gost12-256-hash fichero --> rhash --gost12-256 fichero
+	  gost12-512-hash fichero --> rhash --gost12-512 fichero
+	  has160-hash fichero --> rhash --has‑160 fichero
+	  sfv-hash fichero --> rhash --sfv fichero
+	  ed2k-link fichero --> rhash --ed2k-link fichero
+	  magnet-link fichero --> rhash --magnet fichero
+1.-
+Comando para buscar el hash número 4 del orden de --list-hashes
+$ rhash -a texto | cut -d" " -f 2- | awk '{print $4}'
+
+
 rig
 [Random Identity Generator]. Genera datos personales aleatorios pero de apariencia real en inglés. Si se ha bajado de https://github.com/harkaitz/rig-spain el equivalente español ha de especificarse con -d.
 $ rig -f -c 5 -d /usr/local/share/rig/spain (genero femenino, 5 opciones de identidad y en español)
