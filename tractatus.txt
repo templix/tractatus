@@ -50379,6 +50379,25 @@ $ ristsender -i input_video.ts -o rist://192.168.1.100:5000 (archivo de video de
 $ ristsrppasswd -o password.txt (generar una contraseña segura para la autenticación en la transmisión RIST)
 
 
+rkdeveloptoool
+Herramienta para trabajar con procesadores Rockchip como SBCs del tipo Orange Pi, Rock Pi, PineNote, Radxa, etc. compatibles con el protocolo RockUSB, por ejemplo, rk3288, rk3328, rk3399, rk356x. La herramienta permite interactuar con la ROM de arranque de bajo nivel del procesador conocida como MaskROM, así como con el protocolo de recuperación o descarga de firmware rockusb. Esto posibilita cargar y descargar firmware desde la memoria flash, borrarla, reiniciar el dispositivo, leer la información de fabricación del procesador y ejecutar otros comandos. Antes de usar la herramienta, el dispositivo debe estar en uno de estos modos especiales, conectado por USB al PC:
+- Modo MaskROM es un modo de arranque de bajo nivel integrado en el chip [SoC], inalterable, al que se entra automáticamente cuando el dispositivo no puede cargar un bootloader válido desde ningún medio de almacenamiento [eMMC, SD, etc]. Permite reescribir el firmware del dispositivo mediante el protocolo RockUSB.
+- Modo Loader [Rockusb] se entra después de que un loader es descargado con éxito a la RAM, permitiendo operaciones más complejas como el flasheo de particiones y actualizaciones completas de firmware.
+# rkdeveloptool list (listar dispositivos conectados)
+# rkdeveloptool db rk3399_loader_v1.30.bin (descarga el archivo de bootloader especificado a la RAM del dispositivo)
+# rkdeveloptool wl 0x0 system.img (escribe una imagen en una dirección de bloque lógico [sector] concreta del almacenamiento interno. El valor 0x0 indica el sector inicial)
+# rkdeveloptool writeflash boot boot.img (escribir en una partición por nombre)
+# rkdeveloptool readflash boot backup_boot.img (leer/volcar una partición)
+# rkdeveloptool db rk3328_loader.bin (flasheo completo con imagen unificada)
+# rkdeveloptool upgrade firmware.img
+# rkdeveloptool rd (reinicia el dispositivo y lo saca del modo especial [MaskROM/Loader] para que arranque normalmente desde el almacenamiento actualizado)
+# rkdeveloptool list-partitions (ver tabla de particiones GPT)
+# rkdeveloptool read-partition boot backup.img (leer partición por nombre)
+# rkdeveloptool reboot-maskrom (reiniciar en modo MaskROM)
+# rkdeveloptool read-flash-info (info del chip de flash)
+Nota.- flashear imágenes corruptas o interrumpir el proceso puede dejar el dispositivo inutilizable.
+
+
 rkhunter
 Buscador de rootkits instalados en el sistema. La aplicación, preferiblemente iniciarla con los dos comandos siguientes primero.
 # rkhunter --update  (recargar la base de datos)
