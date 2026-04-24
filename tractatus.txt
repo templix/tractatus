@@ -50290,6 +50290,13 @@ $ gpu-pac --verbose --force_write (modificar los estados de energía, ajustar ve
 $ gpu-mon -d | gpu-plot (genera gráficas de los datos capturados)
 
 
+rifiuti
+Herramienta diseñada para examinar los archivos INFO2 que contienen metainformación sobre los archivos que se encuentran en la papelera de reciclaje de Windows. Proporciona detalles sobre los archivos eliminados, como su nombre original, la ruta donde se encontraba, la fecha de eliminación, y otros metadatos.
+$ rifiuti archivo_INFO2 (examinar un archivo INFO2 específico)
+$ rifiuti -l papelera_de_reciclaje (listar todos los archivos eliminados en la papelera de reciclaje)
+$ rifiuti -d nombre_de_archivo (obtener información detallada de un archivo eliminado incluyendo su nombre original, la ruta donde se encontraba, y la fecha de eliminación)
+
+
 rig
 [Random Identity Generator]. Genera datos personales aleatorios pero de apariencia real en inglés. Si se ha bajado de https://github.com/harkaitz/rig-spain el equivalente español ha de especificarse con -d.
 $ rig -f -c 5 -d /usr/local/share/rig/spain (genero femenino, 5 opciones de identidad y en español)
