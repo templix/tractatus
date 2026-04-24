@@ -50298,9 +50298,23 @@ $ rifiuti -d nombre_de_archivo (obtener información detallada de un archivo eli
 
 
 rig
-[Random Identity Generator]. Genera datos personales aleatorios pero de apariencia real en inglés. Si se ha bajado de https://github.com/harkaitz/rig-spain el equivalente español ha de especificarse con -d.
-$ rig -f -c 5 -d /usr/local/share/rig/spain (genero femenino, 5 opciones de identidad y en español)
+[Random Identity Generator]. Genera datos personales aleatorios pero de apariencia real en inglés.
 $ rig -m -c 5 (del genero masculino y 5 opciones de identidad)
+
+
+rinetd
+Servidor que permite redirigir o "reenviar" conexiones TCP o UDP de una dirección IP y puerto específicos hacia otra dirección IP y puerto. Es decir, actúa como un proxy de red a nivel de transporte, facilitando la redirección de tráfico sin necesidad de configurar reglas complejas en el firewall o en routers. Es un servidor de un solo proceso que gestiona cualquier número de conexiones a los pares dirección/puerto especificados en el archivo /etc/rinetd.conf de forma automática.
+Ejemplo de configuración.
+# nano /etc/rinetd.conf:
+       # Redirigir conexiones entrantes en el puerto 8080 de la IP 0.0.0.0
+       # (todas las interfaces) hacia la IP 192.168.1.100 en el puerto 80.
+       # IP de origen  Puerto de origen   IP de destino   Puerto de destino
+       0.0.0.0 8080 192.168.1.100 80
+       # Redirige tráfico TCP desde puerto 2222 a la IP 10.0.0.5 en puerto 22 (SSH)
+       2222 0.0.0.0 22 10.0.0.5
+       # Desde puerto 5353 en cualquier IP hacia 192.168.1.200 en puerto 5353
+       0.0.0.0 5353 192.168.1.200 5353
+# systemctl enable rinetd (habilitar el servicio al inicio del sistema)
 
 
 ripgrep
