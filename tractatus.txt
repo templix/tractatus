@@ -50371,6 +50371,14 @@ $ ripper file.c file.go
 $ ripper dir/
 
 
+rist-tools
+[Reliable Internet Stream Transport]. Protocolo de transporte diseñado para la transmisión confiable de video a través de redes con pérdidas como Internet con baja latencia y alta calidad. Estas herramientas son parte del protocolo RIST [Reliable Internet Stream Transport], que está diseñado para mejorar la calidad de la transmisión de video en entornos de red inestables. Incluye las herramientas rist2rist, ristreceiver, ristsender y ristsrppasswd
+$ rist2rist -i input_video.ts -o output_video.ts -l 1000 -b 5000k -p 5000 (entrada y salida de video, nivel de protección FEC [Forward Error Correction] ancho de banda máximo de 5000 kbps y el puerto que escucha la conexión)
+$ ristreceiver -i 192.168.1.100 -p 5000 -o output_video.ts (dirección IP del emisor, puerto que escuchará la conexión y archivo de salida donde se guarda el archivo recibido)
+$ ristsender -i input_video.ts -o rist://192.168.1.100:5000 (archivo de video de entrada y dirección y puerto del receptor al que se envia el video)
+$ ristsrppasswd -o password.txt (generar una contraseña segura para la autenticación en la transmisión RIST)
+
+
 rkhunter
 Buscador de rootkits instalados en el sistema. La aplicación, preferiblemente iniciarla con los dos comandos siguientes primero.
 # rkhunter --update  (recargar la base de datos)
