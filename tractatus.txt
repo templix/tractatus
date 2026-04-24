@@ -50317,6 +50317,15 @@ Ejemplo de configuración.
 # systemctl enable rinetd (habilitar el servicio al inicio del sistema)
 
 
+ripcalc
+Calculadora y herramienta de búsqueda de redes. Procesa y busca direcciones de red desde la línea de comandos o un archivo CSV. La salida ofrece diversos formatos personalizables.
+$ ripcalc 192.168.1.0/24 (resumen completo de la red)
+$ ripcalc -l 192.168.18.1/24 (listado de hosts)
+$ ripcalc -a 192.168.18.1/24 (mostrar direcciones no utilizadas)
+$ ripcalc -l --outside 192.168.18.1/24 (muestra cuando los extremos están fuera de la red)
+$ ripcalc -l --inside 192.168.18.1/24 (muestra cuando los extremos están dentro de la red)
+
+
 ripgrep
 buscar palabras, archivos y directorios.
 $ rg archivo.mp3
