@@ -26884,6 +26884,24 @@ Y colocamos la linea:
 	* 1 * * * integrit -C /etc/integrit/integrit.conf -c | mail root
 
 
+intel-gpu-tools
+Paquete de herramientas para depurar el controlador gráfico de Intel. Las herramientas son: amd_hdmi_compliance, dpcd_reg, gputop, i915-perf-configs, i915-perf-control, i915-perf-reader, i915-perf-recorder, igt_facts, igt_power, igt_stats, intel-gen4asm, intel-gen4disasm, intel-gfx-fw-info, intel-gpu-overlay, intel_audio_dump, intel_backlight, intel_bios_dumper, intel_display_bandwidth, intel_display_crc, intel_display_poller, intel_dp_compliance, intel_dump_decode, intel_error_decode, intel_firmware_decode, intel_forcewaked, intel_framebuffer_dump, intel_gem_info, intel_gpu_abrt, intel_gpu_frequency, intel_gpu_time, intel_gpu_top, intel_gtt, intel_guc_logger, intel_gvtg_test, intel_infoframes, intel_l3_parity, intel_lid, intel_opregion_decode, intel_panel_fitter, intel_perf_counters, intel_pm_rpm, intel_reg, intel_reg_checker, intel_residency, intel_stepping, intel_tiling_detect, intel_vbt_decode, intel_watermark, lsgpu, msm_dp_compliance, xe-perf-configs, xe-perf-control, xe-perf-reader, xe-perf-recorder
+# gputop (lista de las GPU Intel detectadas y su ruta en el sistema)
+# gputop -d 2 -n 5 (monitorear la gpu actualizando cada 2 segundos y 5 veces)
+# intel_gpu_top (mostrar información de uso de las GPU de Intel)
+# intel_gpu_top -L (enumera las GPU disponibles en el sistema)
+# igt_power -r gpu -S 2 -s 3 (2 segundos de duración del asentamiento, 3 segundos de medición de la gpu)
+# intel_gpu_frequency (ver la frecuencia de la gpu)
+# intel_gpu_time ram (tiempo de la ram. Otras opciones: cpu y gpu)
+# intel_stepping (dice la revisión exacta del silicio de la GPU)
+# intel_audio_dump (vuelca la configuración de los registros de audio)
+# i915-perf-configs -l (lista las configuraciones del kernel)
+# intel_backlight (mostrar el nivel de brillo de la pantalla interactuando con el controlador del panel)
+# $ intel_stepping (muestra la revisión física del chip: código de identificación de Intel, ID de la GPU y revisión del modelo)
+# # intel_tiling_detect (cómo la GPU organiza los píxeles en la memoria RAM [VRAM])
+Notas.- Algunos comando como "intel_reg write", intel_firmware_decode o intel_bios_dumper pueden interactuar directamente con los registros del hardware o el firmware por tanto es preferible no tocarlos a menos que se sepa exactamente lo que se hace. intel_forcewaked es un demonio que obliga a la GPU a permanecer en un estado de "despierto" evitando que entre en ahorro de energía por lo que el portátil se calentará más y la batería durará menos.
+
+
 interfaces
 [/etc/network/interfaces]
 Archivo de configuración de la red en distros debian.
