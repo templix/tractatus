@@ -20483,12 +20483,30 @@ $ /usr/libexec/installed-tests/fwupd/acpi-facp-self-test
 
 
 fwupd
-Demonio que permite que el software de sesión actualice el firmware del dispositivo.
-# fwupdmgr get-devices (mostrar todos los dispositivos detectados)
-# fwupdmgr refresh (descargar metadatos recientes del Linux Vendor firmware Service [Servicio de firmware del proveedor de Linux]-LVFS)
+Demonio que permite actualizar el firmware de dispositivos de hardware directamente desde la sesión de usuario, sin necesidad de acceso root ni de entrar a la BIOS/UEFI. El firmware lo descarga desde LVFS [Linux Vendor Firmware Service], el repositorio oficial donde fabricantes como Dell, Lenovo, HP o Logitech publican actualizaciones firmadas. Incluye las herramientas dbxtool, fwupdmgr y fwupdtool.
+# systemctl status fwupd (asegurarse que el demonio corre)
+# fwupdmgr get-devices (mostrar todos los dispositivos detectados y su firmware actual)
 # fwupdmgr get-updates (enumerar las actualizaciones disponibles para cualquier dispositivo en el sistema)
+# fwupdmgr get-history (ver el historial de actualizaciones aplicadas)
+# fwupdmgr get-report-metadata (obtener el informe del sistema)
+# fwupdmgr refresh (actualizar la lista de firmware disponible desde LVFS)
 # fwupdmgr update (instalar actualizaciones)
+# fwupdmgr update 2082b5e0-7a64-478a-b1b2-e3404fab6dad (actualizar un solo dispositivo por su GUID)
 # fwupdmgr report-history (enviar información a los administradores de LVFS y a los desarrolladores OEM sobre la eficacia del proceso de actualización del firmware)
+# fwupdmgr install /ruta/al/firmware.cab (instalar un archivo .cab descargado manualmente)
+# fwupdmgr downgrade (revertir la última actualización de un dispositivo)
+# fwupdtool --verbose get-devices (listar dispositivos directamente sin pasar por el demonio D-Bus y en modo verbose)
+# fwupdtool get-plugins (ver plugins disponibles y su estado)
+# fwupdtool install /ruta/firmware.cab --allow-reinstall (instalar firmware directamente desde un .cab)
+# fwupdtool get-device-flags (leer los atributos de un dispositivo específico)
+# fwupdtool check-requirements /ruta/firmware.cab (comprobar si un .cab es válido antes de instalarlo)
+# fwupdtool get-details /ruta/firmware.cab (ver los metadatos de un archivo de firmware)
+# dbxtool --list (ver contenido de la lista DBX la lista negra de Secure Boot en UEFI que contiene hashes, firmas de bootloaders y kernels comprometidos que el firmware rechazará al arrancar)
+# dbxtool --status (comprobar si hay una actualización disponible para DBX)
+# dbxtool --set /ruta/dbxupdate.bin (aplicar una actualización DBX desde un archivo .auth descargado)
+# dbxtool --print-dbx (ver la versión del DBX instalada)
+# dbxtool --validate /ruta/dbxupdate.bin (verificar que el archivo es válido antes de aplicarlo)
+Nota.- algunas actualizaciones UEFI requieren reinicio. fwupdmgr lo avisa y programa la actualización para el próximo arranque automáticamente.
 
 
 fyi
@@ -50532,6 +50550,19 @@ $ rl /etc/fstab (Forma básica)
 $ seq 10 | rl --count 2 (2 números del 0 al 10)
 $ rl -n /etc/fstab -o archivo (Numerando las lineas, colocandolas de forma aleatoria y guardando el resultado en "archivo")
 $ rl -o archivo -c 5 archivo.txt (Guardar en archivo [-o] 5 lineas [-c] del texto archivo.txt)
+
+
+rlfe
+[Read Line and Edit]. Herramienta que permite usar las funciones avanzadas de edición de línea de comandos en cualquier programa que normalmente no tenga estas funciones integradas. Su principal utilidad es que, al ejecutarlo, proporciona un entorno de edición avanzada para ingresar texto, permitiendo navegar por el historial, editar líneas, y usar combinaciones de teclas similares a las que se conocen en Bash o en editores como readline.
+$ rlfe (entrar en el prompt donde se puede escribir líneas, navegar por el historial, editar, lanzar comando, etc)
+Un pequeño ejemplo de muestra:
+$ nlfe bc
+       2+2
+       4
+       5*5
+       25
+Ahora pulsando la flecha arriba muestra los comando entrados, el historial. Para salir pulsar "quit". Tambien tiene autocompletado y edición de la linea con Ctrl-A, Ctrl-E...
+$ rlfe telnet example.com (permite editar comandos antes de enviarlos)
 
 
 rlogin
