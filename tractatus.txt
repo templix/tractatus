@@ -50581,7 +50581,6 @@ service echo
     bind_address    = 0.0.0.0
 }
 # systemctl restart rlinetd (reiniciar rlinetd)
-# ss -tulnp | grep rlinetd (verificar que está escuchando)
 Desde otra terminal o máquina:
 $ nc localhost 9999
 Escribir algo y se verá que el servidor lo devuelve.
