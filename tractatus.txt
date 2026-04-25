@@ -50398,6 +50398,25 @@ Herramienta para trabajar con procesadores Rockchip como SBCs del tipo Orange Pi
 Nota.- flashear imágenes corruptas o interrumpir el proceso puede dejar el dispositivo inutilizable.
 
 
+rkflashtool
+Herramientas para flashear dispositivos embebidos basados en Rockchip. La lista de dispositivos compatibles actualmente es: RK2818, RK2918, RK2928, RK3026, RK3036, RK3066, RK312X, RK3168, RK3188, RK3228, RK3229, RK3288, RK3368. El dispositivo debe estar en modo de descarga, generalmente entrando en MaskROM mode desconectando la batería o usando botones específicos mientras se conecta USB. Para chips Rockchip más modernos, suele recomendarse rkdeveloptool [ver] en lugar de rkflashtool, ya que rkflashtool es más antiguo y está orientado a chips legacy. Incluye los ejecutables rkcrc, rkmisc, rkpad, rkparameters, rkparametersblock, rkunpack y rkunsign.
+# rkflashtool p > parm.bin (lee los parámetros de partición y los guarda en un archivo)
+# rkflashtool r boot > boot.img (lee la partición boot)
+# rkflashtool r 0x8000 0x2000 > backup.img (lee por offset y tamaño en sectores de 512 bytes normalmente)
+# rkflashtool w recovery < recovery.img (escribe una imagen en una partición por nombre)
+# rkflashtool w 0x10000 0x8000 < recovery.img (escribe por offset y tamaño)
+# rkflashtool b (reinicia el dispositivo boot/reboot)
+# rkflashtool v (lee la versión del chip)
+# rkflashtool l <file (carga init de DDR [modo MaskROM])
+# rkflashtool L <file> (carga USB loader [modo MaskROM])
+# rkunsign signed-boot.img unsigned-boot.img  (quita la firma [unsign] de un archivo)
+# rkcrc -k entrada salida (calcula el CRC [checksum] de archivos/imágenes Rockchip)
+# rkpad 0x00002000 entrada salida (añade padding [relleno] a imágenes para alinearlas correctamente según los requisitos de Rockchip)
+# rkparametersblock params.txt outfile.bin (trabaja con el bloque de parámetros en binario)
+# rkunpack update.img (descomprime o extrae contenido de archivos empaquetados)
+# rkparameters arnova7g2 1.2.3 mtdparts.txt > params (manipula el archivo de parámetros de particiones)
+
+
 rkhunter
 Buscador de rootkits instalados en el sistema. La aplicación, preferiblemente iniciarla con los dos comandos siguientes primero.
 # rkhunter --update  (recargar la base de datos)
