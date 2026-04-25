@@ -50565,6 +50565,28 @@ Ahora pulsando la flecha arriba muestra los comando entrados, el historial. Para
 $ rlfe telnet example.com (permite editar comandos antes de enviarlos)
 
 
+rlinetd
+Superdemonio para sistemas Unix/Linux, diseñado como un reemplazo mejorado del clásico inetd de BSD. Su función principal es escuchar peticiones de conexión en ciertos puertos y, cuando llega una petición, lanzar el servicio correspondiente como un servidor FTP, Telnet, etc. en lugar de mantener esos servicios ejecutándose permanentemente.
+Ejemplo de archivo de configuración. Lanzar un servidor "echo" que devuelve lo que le envías, usando netcat cada vez que alguien se conecte al puerto 9999.
+# nano /etc/rlinetd.conf
+service echo
+{
+    socket_type     = stream
+    protocol        = tcp
+    wait            = no
+    user            = nobody
+    server          = /bin/nc
+    server_args     = -l -e /bin/cat
+    port            = 9999
+    bind_address    = 0.0.0.0
+}
+# systemctl restart rlinetd (reiniciar rlinetd)
+# ss -tulnp | grep rlinetd (verificar que está escuchando)
+Desde otra terminal o máquina:
+$ nc localhost 9999
+Escribir algo y se verá que el servidor lo devuelve.
+
+
 rlogin
 Conecta con un host remoto
 $ rlogin usuario@host
