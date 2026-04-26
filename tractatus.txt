@@ -50591,6 +50591,12 @@ Conecta con un host remoto
 $ rlogin usuario@host
 
 
+rlpr
+Permite o facilita imprimir archivos desde ubicaciones remotas a la impresora local, y viceversa. El paquete rlpr incluye alternativas compatibles con BSD para lpr [ver], lpq y lprm, cuya funcionalidad es superior a la de sus contrapartes BSD. Incluye las herramientas rlpq, rlprd y rlprm. Usa las mismas funciones que el comando lpr colocando una "r" delante excepto que rlpr permite imprimir directamente en una impresora de red sin configurar nada en el sistema local.
+$ rlpr laser@oficina-central archivo.pdf (especificar la impresora y la máquina a la que enviar el trabajo)
+$ rlpr -P nombre_impresora@direccion_ip_del_servidor_de_impresion documento.txt
+
+
 rlwrap
 Permite añadir historial y edición de línea (como hace Bash) a programas que normalmente no lo soportan, por ejemplo, clientes de bases de datos, intérpretes propios o cualquier cosa que use la entrada estándar sin readline.
 $ rlwrap nc localhost 1234 (Si te conectas con nc [netcat] normalmente no se tiene historial ni autocompletado. Con rlwrap, se pueden usar las flechas ↑↓ para recuperar comandos previos)
