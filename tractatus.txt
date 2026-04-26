@@ -50628,6 +50628,12 @@ Eliminar todo un directorio menos un subdirectorio, por ejemplo menos el dir HTM
 	HTMLS
 
 
+rman
+Compilación inversa de páginas man. Es un filtro para páginas de manual de UNIX que toma como entrada páginas man formateadas para diversas variantes de UNIX [no el código fuente [tn]roff] y produce como salida diversos formatos de archivo.
+$ rman -f roff /usr/local/man/cat1/ls.1 > /usr/local/man/man1/ls.1 (convertir la página man formateada llamada ls.1 de nuevo al formato fuente roff)
+$ rman -f html /usr/local/man/cat1/ls.1 > /usr/local/man/man1/ls.html (convertir a html)
+
+
 rmdir
 Borra directorios vacios
 $ rmdir /home/usuario/dir_vacio
