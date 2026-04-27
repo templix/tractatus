@@ -50626,9 +50626,12 @@ $ rlpr -P nombre_impresora@direccion_ip_del_servidor_de_impresion documento.txt
 
 
 rlwrap
-Permite añadir historial y edición de línea (como hace Bash) a programas que normalmente no lo soportan, por ejemplo, clientes de bases de datos, intérpretes propios o cualquier cosa que use la entrada estándar sin readline.
+Proporciona una pequeña utilidad que utiliza la biblioteca GNU readline para permitir la edición de la entrada de teclado para cualquier otro comando. La biblioteca GNU readline añade a cualquier programa capacidades interactivas en la terminal tales como las flecha arriba/abajo para navegar el historial de comandos anteriores, las flechas derecha/izquierda para moverse por el texto que se está escribiendo, Ctrl+A / Ctrl+E, ir al inicio/fin de la línea, Ctrl+R búsqueda en el historial, Tab autocompletado, Ctrl+W borrar palabra anterior. Bash, por ejemplo, ya usa readline de forma nativa. Por eso se puedem usar todas esas teclas en sin problemas pero muchos programas interactivos no usan readline ya que tienen su propio bucle de lectura de teclado muy básico. rlwrap se interpone entre el teclado y ese programa, intercepta la entrada y le aplica readline antes de pasársela al programa. Ejemplos de uso en programas que no usan readline:
+$ rlwrap sqlplus usuario/contraseña@base
+$ rlwrap sbcl (aplicar al lenguaje common Lisp)
+$ rlwrap sqlite3 mi_base.db
 $ rlwrap nc localhost 1234 (Si te conectas con nc [netcat] normalmente no se tiene historial ni autocompletado. Con rlwrap, se pueden usar las flechas ↑↓ para recuperar comandos previos)
-$ rlwrap python (se tiene historial de comandos con flechas en un Python viejo sin readline)
+$ rlwrap -H ~/.sqlite_history -s 1000 sqlite3 mi_base.db (usar un fichero de historial persistente y guardar 1000 líneas de historial)
 
 
 rm
@@ -50674,6 +50677,17 @@ rmdir
 Borra directorios vacios
 $ rmdir /home/usuario/dir_vacio
 $ find . -type d -empty -exec rmdir {} \; (Otra forma)
+
+
+rmlint
+Detecta el desperdicio de espacio y otros elementos defectuosos en el sistema de archivos y ofrece eliminarlos. Es capaz de encontrar archivos y directorios duplicados, binarios sin optimizar, enlaces simbólicos rotos, archivos y directorios vacíos recursivos, archivos con ID de usuario o grupo incorrectos. etc.
+$ rmlint (realizar un escaneo básico del directorio actual y mostrará una lista de los elementos que considera como "basura" en la terminal)
+$ rmlint ~/Documents (escanear un directorio específico)
+$ rmlint -c sh:rmlint-remove.sh (eliminar automáticamente los elementos que considera como "basura")
+$ sh rmlint-remove.sh (y luego, para eliminar los elementos, con el script generado:)
+$ rmlint ~/Documents -o ~/archivo_de_salida.txt (guardar los resultados en un archivo en lugar de mostrarlos en la terminal)
+$ rmlint --duplicates --summary (escanear solo archivos duplicados y mostrar un resumen detallado)
+Nota.- Es importante tener precaución al usar rmlint con la opción de eliminación automática. Siempre es recomendable revisar los resultados del escaneo antes de eliminar cualquier archivo o directorio.
 
 
 rmmod
