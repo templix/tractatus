@@ -23108,6 +23108,38 @@ A partir de este momento siempre que entremos en la carpeta gdrive podremos sinc
 $ grive
 
 
+groff
+Sistema de formato de texto GNU que se utiliza para crear documentos con formato profesional, similar a LaTeX pero con un enfoque en texto plano. El paquete principal, groff-base, incluye las herramientas tradicionales como troff, nroff, tbl, eqn y pic. Este paquete también incluye dispositivos y controladores adicionales para la salida a DVI, HTML, PDF, impresoras HP LaserJet e impresoras Canon CAPSL LBP-4 y LBP-8. Incluye los ejecutables addftinfo, afmtodit, chem, eqn2graph, gdiffmk, glilypond, gperl, gpinyin, grap2graph, grn, grodvi, grolbp, grolj4, gropdf, gxditview, hpftodit, indxbib, lkbib, lookbib, mmroff, pdfmom, pdfroff, pfbtops, pic2graph, post-grohtml, pre-grohtml, refer, tfmtodit y xtotroff.
+$ groff addftinfo -V -D 100 -F myfont.fd myfont.tfm > myfont.dit (agregar información a un fichero de formato troff [.dit] desde un fichero de fuentes [.tfm] y un fichero de información de fuentes [.fd])
+$ afmtodit -o myfont.fd myfont.afm (convertir un fichero de fuentes [.afm] a un fichero de información de fuentes [.fd])
+$ chem myfile.txt > myfile.chem (convertir ficheros de texto plano [.txt] a ficheros de texto químico [.chem] para su posterior procesamiento con groff chem)
+$ eqn2graph -e myfile.eqn > myfile.graph (convertir un fichero de texto de ecuaciones [.eqn] a fichero de texto de gráficos [.graph])
+$ gdiffmk -o myfile.diff myfile1.mk myfile2.mk (crear diferencias entre dos ficheros de texto [.mk])
+$ glilypond myfile.ly > myfile.pdf (compilar un fichero LilyPond [.ly] a fichero de música [.pdf, .midi, etc.])
+$ gperl -c myfile.pl > myfile.exe (compilar ficheros de Perl [.pl] a ficheros ejecutables [.exe, .bin, etc.])
+$ gpinyin -i myfile.txt -o myfile.pinyin.txt (convertir texto latino a texto pinyin para chino)
+$ grap2graph myfile.grap > myfile.graph (convertir ficheros de texto de gráficos [.grap] a ficheros de texto de gráficos [.graph])
+$ grn -T html myfile.graph > myfile.html (convertir ficheros de texto de gráficos [.graph] a ficheros de texto de HTML [.html])
+$ grodvi myfile.troff > myfile.dvi (compilar ficheros de texto de troff [.troff, .n] a ficheros de texto de DVI [.dvi])
+$ grolbp myfile.dvi > myfile.ps (convertir ficheros de texto de DVI  [.dvi] a ficheros de texto de PostScript [.ps])
+$ grolj4 myfile.dvi > myfile.jpg (convertir ficheros de texto de DVI [.dvi] a ficheros de texto de JPEG [.jpg])
+$ gropdf myfile.dvi > myfile.pdf (convertir ficheros de texto de DVI [.dvi] a ficheros de texto de PDF [.pdf])
+$ gxditview myfile.dvi (mostrar ficheros de texto de DVI [.dvi] en una ventana)
+$ hpftodit -o myfont.fd myfont.hpt (convertir ficheros de texto de HPFT [.hpt] a ficheros de información de fuentes [.fd])
+$ indxbib myfile.bib (crear un índice de ficheros de bibliografía [.bib])
+$ lkbib myfile.bib (buscar y mostrar información de ficheros de bibliografía [.bib])
+$ lookbib myfile.bib (buscar y mostrar información de ficheros de bibliografía [.bib])
+$ mmroff myfile.m > myfile.troff (convertir ficheros de texto de Mtroff [.m] a ficheros de texto de troff [.troff])
+$ pdfmom myfile.troff > myfile.pdf (convertir ficheros de texto de troff [.troff, .n] a ficheros de texto de PDF [.pdf])
+$ pdfroff myfile.troff > myfile.ps (convertir ficheros de texto de troff [.troff, .n] a ficheros de texto de PostScript [.ps])
+$ pfbtops myfile.ps > myfile.troff (convertir ficheros de texto de PostScript [.ps] a ficheros de texto de troff [.troff, .n])
+$ pic2graph myfile.pic > myfile.graph (convertir ficheros de texto de gráficos [.pic] a ficheros de texto de gráficos [.graph])
+$ post-grohtml myfile.troff > myfile.html (convertir ficheros de texto de troff [.troff, .n] a ficheros de texto de HTML [.html])
+$ refer -i myfile.bib > myfile.idx (crear un índice de referencias [.idx] a partir de ficheros de bibliografía [.bib])
+$ tfmtodit -o myfont.fd myfile.troff (convertir ficheros de texto de troff [.troff, .n] a ficheros de información de fuentes [.fd])
+$ xtotroff myfile.x > myfile.troff (convertir ficheros de texto de X [.x] a ficheros de texto de troff [.troff, .n])
+
+
 grok
 Herramienta diseñada para analizar texto, especialmente registros [logs] o salidas de programas, usando patrones definidos. La utilidad radica en poder extraer información estructurada de datos no estructurados como logs del sistema, salidas de comandos, etc. Se basa en expresiones regulares simplificadas y nombradas, llamadas patrones Grok, que hacen más fácil reconocer partes específicas del texto, como fechas, direcciones IP, nombres de usuario, etc.
 Un patrón Grok se ve así:
