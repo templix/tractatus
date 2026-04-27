@@ -50695,6 +50695,10 @@ rmmod
 # rmmod modulo
 
 
+rmtfs
+Servicio de sistema de archivos remoto de Qualcomm, pensado para plataformas con SoC Qualcomm recientes. Su función es permitir que el espacio de usuario acceda a memoria compartida y almacenamiento interno de coprocesadores remotos, como módem, Wi‑Fi o sensores, usando QMI y QRTR. El procesador principal del sistema no monta un “disco” normal, sino que ofrece a los procesadores remotos un área de memoria reservada con el binding qcom,rmtfs-mem y un protocolo para intercambiar datos con ella. Normalmente se ve en sistemas embebidos o móviles con hardware Qualcomm, no en un PC Linux típico. En Debian aparece como paquete porque algunas imágenes o instalaciones para estas plataformas necesitan ese servicio para que el módem, el subsistema Wi‑Fi u otros coprocesadores funcionen correctamente. Si el equipo no tiene SoC Qualcomm compatible, es probable que no sirva de nada práctico.
+
+
 rng-tools
 Daemon para usar un TRNG [True Random Number Generator] de hardware que actúa como puente entre un TRNG, como los de algunos chipsets Intel/AMD/VIA, y el PRNG [Pseudo-Random Number Generator] del kernel. Comprueba los datos recibidos del TRNG mediante las pruebas FIPS 140-2 para verificar su aleatoriedad y los envía al pool de entropía del kernel. Incluye la herramienta rngtest
 $ systemctl status rngd
