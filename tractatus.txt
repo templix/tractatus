@@ -50707,6 +50707,21 @@ $ cat /dev/random | rngtest -t 2 (vuelca las estadísticas cada 2 segundos)
 $ cat /dev/random | rngtest -b 1000 (vuelca las estadísticas cada 1000 bloques)
 
 
+rnp
+Herramienta multiplataforma que implementa OpenPGP [RFC 4880] y estándares relacionados. Incluye el ejecutable rnpkeys.
+$ rnpkeys -g (genera un nuevo par de claves en el archivo ~/.rnp)
+$ rnpkeys --overwrite -g (lo mismo sobreescribiendo el archivo)
+$ rnpkeys --overwrite --expert -g (lo mismo solicitando el tipo de llave)
+$ rnp -e --output salida archivo.txt (cifrar archivo.txt utilizando la clave pública del comando anterior)
+$ rnp -d salida (pide contraseña y muestra archivo.txt)
+$ rnpkeys -l (mostrar las llaves existentes en el directorio ~/.rnp)
+$ rnpkeys -l --secret (lista las llaves secretas en lugar de la publicas)
+$ rnpkeys -l --with-sigs (lista las llaves con firma)
+$ rnp --list-packets ~/.rnp/* (mostrar información de las llaves del directorio)
+$ rnp --sign --homedir=/home/tux/.rnp/ archivo.txt (crear una firma de un archivo. La guarda en archivo.txt.pgp
+$ rnpkeys --remove-key 0xB0FFEA0E97659566 (surprimir una llave)
+
+
 robots
 [robots.txt]. Archivo que evita que determinado contenido de un sitio web sea indexado por los motores de búsqueda. Este archivo distingue mayúsculas y minúsculas, puede incluir comentario mediante almohadilla [#] y cada grupo User-agen/Disallow debe de estar separado por una linea en blanco.
 Algunos comandos:
