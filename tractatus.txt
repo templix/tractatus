@@ -50755,6 +50755,17 @@ Aspecto que puede presentar un archivo robots.txt:
 	Sitemap: https://tractatuslapipaplena.herokuapp.com/sitemap.xml
 
 
+rockusb
+Utilidad que permite interactuar con dispositivos basados en procesadores Rockchip a través del protocolo USB. Permite leer información sobre el procesador o la memoria flash, leer y escribir archivos en la memoria flash, reiniciar el dispositivo y ejecutar otros comandos.
+# rockusb info (muestra información básica del dispositivo conectado, como el modelo, versión, etc)
+# rockusb reboot (reinicia el dispositivo Rockchip conectado)
+# rockusb dump archivo.img (extrae la memoria flash y la guarda en archivo.img)
+# rockusb flash archivo.img (escribir una imagen en la memoria flash)
+# rockusb erase (borrar la memoria)
+# rockusb load archivo.img (cargar un firmware o imagen en el dispositivo)
+Nota.- Manipular la memoria flash puede resultar en la pérdida de datos o en que el dispositivo quede inoperable si se hace incorrectamente.
+
+
 rofi
 Emula un menu de aplicaciones.
 $ rofi -show drun (uso básico)
