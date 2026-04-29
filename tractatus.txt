@@ -50846,6 +50846,22 @@ Componente de ip route para listar las tablas de enrutado. [ver routef]
 $ routel
 
 
+routino
+Conjunto de herramientas para encontrar una ruta entre dos puntos. Routino es una aplicación para encontrar una ruta entre dos puntos utilizando el conjunto de datos topográficos recopilados por OpenStreetMap y como mínimo siempre necesita al menos dos “waypoints” [coordenadas]. Incluye las herramientas filedumper, filedumper-slim, filedumperx, planetsplitter, planetsplitter-slim, routino-router, routino-router+lib, routino-router+lib-slim y routino-router-slim. Descargar el archivo correspondiente a la zona de https://download.geofabrik.de/europe/spain.html.
+El proceso de ejemplo podría ser:
+$ mkdir routino
+$ cd routino
+S mkdir data
+A fecha abril de 2026 el archivo podía descargarse con wget, pero es preferible hacerlo por la web mencionada.
+$ wget https://download.geofabrik.de/europe/spain/cataluna-260428.osm.pbf
+$ planetsplitter --dir=data --prefix=cat cataluna-260428.osm.pbf
+S ls data/
+cat-nodes.mem  cat-relations.mem  cat-segments.mem  cat-ways.mem
+Lanzar el comando usando estos archivo del directorio data, que la explicación sea en español, ir con motocicleta, sin autopista ni carreteras principales, sin superara los 90 kilómetros/hora, encontrar la ruta más rápida entre los puntos de longitud y latitud de inicio [Figueres en este ejemplo] y longitud y latitud de llegada [Olot]:
+$ routino-router --dir=data --language=es --transport=motorcycle --highway-motorway=0 --highway-trunk=0 --speed-primary=80 --speed-secondary=80 --quickest --lon1=2.9667 --lat1=42.2667 --lon2=2.4890 --lat2=42.1800
+Abrir el archivo quickest.html con el navegador y versión texto quickest.txt y quickest-all.txt
+
+
 rpcinfo
 Para saber los servicios que estan en marcha
 $ rpcinfo -p
