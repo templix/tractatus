@@ -50820,6 +50820,11 @@ $ rotix -a -t "linux es un sistema genial"
 $ rotix -f archivo.txt -o otro_archivo.txt (ofusca un archivo y lo guarda en otro_archivo.txt)
 
 
+rotter
+Cliente JACK para grabación de transmisiones y registro de audio. Rotter es un registrador de audio y grabación de transmisiones para JACK. Fue diseñado para emisoras de radio, las cuales están obligadas por ley a mantener una grabación de toda su programación. Rotter se ejecuta continuamente, escribiendo en un archivo nuevo cada hora.
+$ rotter -a -f mp3 -d 1000 -b 160 -v /var/archives (se conectará automáticamente a los dos primeros puertos de salida JACK que encuentre y codificará el audio a MPEG Layer 3 a 128 kbps, cada hora eliminará los archivos con más de 1000 horas [42 días] de antigüedad, modo verbose y registrar audio en archivos cada hora en /var/archives)
+
+
 route
 Mostrar/manipular la tabla de enrutamiento ip.
 $ route -n
