@@ -50855,12 +50855,17 @@ S mkdir data
 A fecha abril de 2026 el archivo podía descargarse con wget, pero es preferible hacerlo por la web mencionada.
 $ wget https://download.geofabrik.de/europe/spain/cataluna-260428.osm.pbf
 $ planetsplitter --dir=data --prefix=cat cataluna-260428.osm.pbf
+La opción --prefix no es necesaria pero es preferible si se quieren varios mapas para diferenciarlo: --prefix=val, --prefix=and...
 S ls data/
-cat-nodes.mem  cat-relations.mem  cat-segments.mem  cat-ways.mem
-Lanzar el comando usando estos archivo del directorio data, que la explicación sea en español, ir con motocicleta, sin autopista ni carreteras principales, sin superara los 90 kilómetros/hora, encontrar la ruta más rápida entre los puntos de longitud y latitud de inicio [Figueres en este ejemplo] y longitud y latitud de llegada [Olot]:
-$ routino-router --dir=data --language=es --transport=motorcycle --highway-motorway=0 --highway-trunk=0 --speed-primary=80 --speed-secondary=80 --quickest --lon1=2.9667 --lat1=42.2667 --lon2=2.4890 --lat2=42.1800
+cat-nodes.mem  cat-relations.mem  cat-segments.mem  cat-ways.mem val-nodes.mem  val-relations.mem  val-segments.mem  val-ways.mem
+Lanzar el comando usando estos archivo del directorio data usando los del prefijo "cat, que la explicación sea en español, ir con motocicleta, sin autopista ni carreteras principales, sin superara los 80 kilómetros/hora, encontrar la ruta más rápida entre los puntos de longitud y latitud de inicio [Figueres en este ejemplo] y longitud y latitud de llegada [Olot]:
+$ routino-router --dir=data --prefix=cat --language=es --transport=motorcycle --highway-motorway=0 --highway-trunk=0 --speed-primary=80 --speed-secondary=80 --quickest --lon1=2.9667 --lat1=42.2667 --lon2=2.4890 --lat2=42.1800
 $ filedumper --prefix=cat --statistics
 Abrir el archivo quickest.html con el navegador y versión texto quickest.txt y quickest-all.txt
+1.-
+Otro caso
+Lanzar el comando usando los archivo del directorio data con el prefijo "val", que la explicación sea en español, solo mostrar la salida en html, si no se especifica se generan todas [html, gpx, txt y txt-all], ir con bicicleta, usar carreteras primarias y secundarias, sin superara los 30 kilómetros/hora, encontrar la ruta más rápida entre los puntos de longitud y latitud de inicio [Figueres en este ejemplo], pasando por Girona, especificando longitud y latitud y longitud y latitud de llegada [Olot]:
+$ routino-router --dir=data --prefix=val --output-html --language=es --transport=bicycle --highway-motorway=primary --highway-trunk=secondary --speed-primary=30 --speed-secondary=30 --quickest --lon1=2.9667 --lat1=42.2667 --lon2=2.8249 --lat2=41.9831 --lon3=2.4890 --lat3=42.1800
 
 
 rover
