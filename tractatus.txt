@@ -50916,6 +50916,15 @@ $ rpacket dump .gnupg/openpgp-revocs.d/157C1683B51FE4C312D5A9FF874E4101FA38861D.
 $ rpacket split sign.cert (división de datos OpenPGP en paquetes individuales)
 
 
+rpcbind
+Servidor que convierte los números de programa RPC [Remote Procedure Call] en direcciones universales. Los programas RPC son programas que permiten a un programa en una computadora solicitar servicios a un programa en otra computadora en una red, sin necesidad de entender los detalles de la red.
+$ rpcbind -d (iniciar rpcbind en modo depuración, lo que significa que no se bifurcará cuando se inicie y mostrará información adicional durante la operación)
+$ rpcbind -i (permite llamadas a SET y UNSET desde cualquier host [inseguro]. Normalmente solo acepta estas solicitudes desde la interfaz de loopback por razones de seguridad)
+$ rpcbind -l (registrar eventos de seguridad en el sistema mediante syslog)
+$ rpcbind -L (permitir conexiones locales antiguas sobre la interfaz de loopback. Sin esta opción, las conexiones locales solo se permiten a través de un socket local /var/run/rpcbind.sock)
+$ rpcbind -s (cambiar a un usuario daemon tan pronto como sea posible utilizando puertos no privilegiados para conexiones salientes y evitando que clientes no privilegiados se conecten a servicios desde un puerto privilegiado)
+
+
 rpcinfo
 Para saber los servicios que estan en marcha
 $ rpcinfo -p
