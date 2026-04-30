@@ -50926,8 +50926,10 @@ $ rpcbind -s (cambiar a un usuario daemon tan pronto como sea posible utilizando
 
 
 rpcinfo
-Para saber los servicios que estan en marcha
+Para saber los servicios que estan en marcha.
 $ rpcinfo -p
+$ rpcinfo -p nombre_maquina (mostrar todos los servicios RPC registrados en la máquina especificada)
+$ rpcinfo -d servicio 1 (eliminar el registro de la versión 1 del servicio "servicio")
 
 
 rpcsvc-proto
