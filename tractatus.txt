@@ -50930,6 +50930,14 @@ Para saber los servicios que estan en marcha
 $ rpcinfo -p
 
 
+rpcsvc-proto
+Herramienta que genera código C para implementar un protocolo RPC.
+$ rpcgen -T prot.x (genera los cinco archivos: prot.h, prot_clnt.c, prot_svc.c, prot_xdr.c y prot_tbl.i)
+$ rpcgen -h prot.x (envía las definiciones de datos en C [archivo de cabecera] a la salida estándar)
+$ rpcgen -s datagram_n -DTEST prot.x (enviar la versión de prueba de -DTEST, los stubs del lado del servidor para todos los transportes pertenecientes a la clase datagram_n)
+$ rpcgen -n tcp -o prot_svc.c prot.x (crear los stubs del lado del servidor para el transporte indicado por netid tcp)
+
+
 rpl
 Utilidad de búsqueda y reemplazo que cambia cadenas con cadenas nuevas en varios archivos de texto al mismo tiempo.
 $ rpl -i -w 'más' 'menos' docs/file_* (Reemplaza todos los "más" sin importar mayúsculas o minúsculas por "menos" en los archivos "file_*" en el directorio docs/)
