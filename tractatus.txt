@@ -50862,6 +50862,10 @@ Lanzar el comando usando estos archivo del directorio data usando los del prefij
 $ routino-router --dir=data --prefix=cat --language=es --transport=motorcycle --highway-motorway=0 --highway-trunk=0 --speed-primary=80 --speed-secondary=80 --quickest --lon1=2.9667 --lat1=42.2667 --lon2=2.4890 --lat2=42.1800
 $ filedumper --prefix=cat --statistics
 Abrir el archivo quickest.html con el navegador y versión texto quickest.txt y quickest-all.txt. Los archivo gpx con para usar en apps de navegación. dispositivos GPS, visores tipo mapa web...
+Algunas opciones:
+	--highway-track=0 --> evitar caminos
+	--turns=1 --> penalizar curvas
+	--oneway=0 --> no respetar la dirección de las calles de sentido único, útil para no respetarlas al caminar
 1.-
 Otro caso
 Lanzar el comando usando los archivo del directorio data con el prefijo "val", que la explicación sea en español, solo mostrar la salida en html, si no se especifica se generan todas [html, gpx, txt y txt-all], ir con bicicleta, usar carreteras primarias y secundarias, sin superara los 30 kilómetros/hora, encontrar la ruta más rápida entre los puntos de longitud y latitud de inicio [Figueres en este ejemplo], pasando por Girona, especificando longitud y latitud y longitud y latitud de llegada [Olot]:
@@ -50877,6 +50881,33 @@ Interfaz ligera basada en texto inspirada en ranger, para update-alternatives y 
 $ rover (lanzador básico)
 $ rover -c (no acceder ni crear ningún archivo de configuración ni dejar rastros en el sistema, útil cuando la configuración está dañada, evitar archivos innecesarios, etc)
 $ rover --show-only-dirs (mostrar solo los directorios)
+
+
+rows
+Interfaz para datos tabulares, independientemente del formato que facilita el acceso a las funciones más utilizadas: conversión entre formatos, suma, unión y ordenación de tablas. No importa el formato de los datos tabulares, rows los importará y detectará automáticamente los tipos para que se pueda empezar a trabajar con ellos de inmediato, sin necesidad de analizarlos. Además, es compatible con la configuración regional y Unicode.
+$ rows print --fields=state,city --order-by=city ciudades.csv (ver un CSV con columnas seleccionadas y ordenado)
+$ rows print --table-index=1 pagina.html (ver la segunda tabla de la página HTML)
+$ rows print --frame-style=double datos.csv (estilos de marco "double", otros estilos disponibles: ascii, single y none)
+$ rows convert http://www.worldometers.info/world-population/population-by-country/ poblacion.csv (convierte una tabla de un formato source a destination)
+$ rows convert datos.csv datos.json (convertir datos CSV a JSON)
+$ rows convert datos.csv datos.xlsx (convertir datos CSV a XLSX)
+$ rows convert --fields=nombre,edad,ciudad --order-by=edad entrada.csv salida.csv (solo exportar algunas columnas, ordenadas)
+$ rows convert --input-encoding=latin1 --output-encoding=utf-8 viejo.csv nuevo.csv (con codificación específica)
+$ rows query "SELECT * FROM table1 WHERE habitantes > 1000000" ciudades.csv (filtrar filas de un CSV con SQL)
+$ rows query "SELECT * FROM table1 WHERE habitantes > 1000000" ciudades.csv --output=resultado.html (guardar el resultado en otro formato)
+$ rows query 'SELECT * FROM table1 WHERE categoria = "Aprobada"' http://ejemplo.com/informe.pdf --output=resultado.xls (descarga el PDF, identifica las tablas, ejecuta el SQL y exporta a XLS)
+$ rows schema ciudades.csv (inspeccionar el esquema de una tabla)
+$ rows schema --format=sql ciudades.csv (generar SQL CREATE TABLE)
+$ rows schema --format=django ciudades.csv (generar modelo Django)
+$ rows sum enero.csv febrero.csv marzo.csv trimestre.csv (agrega las filas de dos tablas equivalentes. Han de tener los mismos nombres y tipos de campo)
+$ rows sum --fields=id,nombre,telefono personas.csv telefonos.csv contactos.csv (seleccionando solo algunos campos comunes entre los ficheros)
+$ rows join id a.csv b.csv c.csv (une a.csv y b.csv en c.csv usando el campo "id" como clave)
+$ rows csv-merge fichero1.csv fichero2.csv.bz2 fichero3.csv.xz resultado.csv.gz (fusiona ficheros CSV. Admite ficheros comprimidos .gz, .xz, .bz2)
+$ rows csv2sqlite --dialect=excel --input-encoding=latin1 datos1.csv datos2.csv base.sqlite (varios CSV a SQLite)
+$ rows sqlite2csv base.sqlite mi_tabla mi_tabla.csv.bz2 (de un SQLite a un CSV comprimido)
+$ rows pdf-to-text informe.pdf resultado.txt (extraer texto de un PDF)
+$ rows pdf-to-text --pages=1-3 informe.pdf (solo extraer páginas concretas)
+$ rows pdf-to-text --quiet informe.pdf resultado.txt (sin barra de progreso)
 
 
 rpcinfo
