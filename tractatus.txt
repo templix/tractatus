@@ -2270,6 +2270,16 @@ $ atheme-checkconf (revisar el archivo de configuración atheme.conf en busca de
 $ atheme-services restart (reiniciar servicios)
 
 
+athena-jot
+O simplemente jot, imprime datos crecientes, decrecientes, aleatorios o redundantes, generalmente números, uno por línea.
+$ jot -r 100 | rs 10 10 | rs -T
+$ jot 20 -3 3.00 (imprime 20 números espaciados uniformemente, que aumentan de -3 a 3)
+$ jot -c 128 0 | rs (conjunto de caracteres ASCII en forma de tabla con el comando "rs" [ver])
+$ jot -w xa%c 26 a | rs (cadenas xaa a xaz)
+$ jot -r -c 160 a z | rs -g 0 8 (generan 8 cadenas aleatorias de 29 letras)
+$ jot -b linux 0 (obtener infinitos "linux")
+
+
 atool
 Herramienta versátil para gestionar archivos comprimidos en diferentes formatos [zip, tar, gzip, etc...]. Incluye los comandos apack [crear archivos comprimidos]), als [enumerar archivos en archivos comprimidos] y acat [extraer archivos a la salida estándar].
 $ apack archivo.zip archivo.txt (crear archivo.zip con el archivo archivo.txt)
