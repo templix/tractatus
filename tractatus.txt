@@ -32625,6 +32625,39 @@ Opciones disponibles:
 	h (muestra la lista de mensajes)
 	h 4 (muestra la lista de mensajes comenzando en el 4)
 	q (sale de mail)
+2.-
+Que al recibir un mail salga una nota en la pantalla. Crear un script, colocarlo en el path y hacerlo ejecutable:
+$ nano mail-notify.sh
+#!/bin/bash
+MAILBOX="/var/mail/USER"
+TITLE="Correo nuevo"
+BODY="Ha llegado un mensaje nuevo"
+#
+[ -e "$MAILBOX" ] || exit 1
+#
+last_size=$(stat -c %s "$MAILBOX" 2>/dev/null)
+last_mtime=$(stat -c %Y "$MAILBOX" 2>/dev/null)
+#
+while sleep 2; do
+    [ -e "$MAILBOX" ] || continue
+#
+    current_size=$(stat -c %s "$MAILBOX" 2>/dev/null) || continue
+    current_mtime=$(stat -c %Y "$MAILBOX" 2>/dev/null) || continue
+#
+    if [ "$current_size" -ne "$last_size" ] || [ "$current_mtime" -ne "$last_mtime" ]; then
+        notify-send -t 0 -u normal "$TITLE" "$BODY" &
+        last_size="$current_size"
+        last_mtime="$current_mtime"
+    fi
+done
+Crear el script para que se ejecute al iniciar el sistema
+$ nano ~/.config/autostart/mail-notify.desktop
+       [Desktop Entry]
+       Type=Application
+       Name=Mail notify
+       Exec=/home/USER/bin/mail-notify.sh
+       X-LXQt-Autostart-enabled=true
+       NoDisplay=false
 
 
 mail-expire
