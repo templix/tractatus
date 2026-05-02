@@ -50947,6 +50947,24 @@ $ rpl -m -w 'mala cosa' 'excelente caso' docs/file_* (Ignorar mayúsculas y min�
 $ rpl -i -- '-x3' '+x5' docs/file_* (si una de las cadenas comienza con "-", se debe colocar "--" como último argumento ANTES de la cadena)
 
 
+rplay-contrib
+Contiene los ejecutables mailsound y Mailsound, cada uno de los cuales se puede utilizar para reproducir sonidos en un sistema cuando llega correo nuevo.
+Un archivo de configuración mínimo:
+$ nano ~/.Mailsounds
+       .*             sound=musica.au
+Configuración de procmail
+$ nano ~/.procmailrc
+       :0 ic
+       | /usr/local/bin/Mailsound -h doctor:doit
+Nota.- El servidor RPlay tiene que estar funcionando en el sistema o en el host donde se quiera reproducir los sonidos.
+
+
+rplay-server
+[replay-client]. Servidor rplay que permite reproducir y recibir sonidos desde y hacia sistemas Unix locales y remotos. Normalmente, las solicitudes RPLAY se reciben en el puerto 5555/udp y las RPTP en el puerto 5556/tcp.
+# rplayd (iniciar el servicio)
+# systemctl status rplay.service (comprobación)
+
+
 rpm
 Gestor de paqueteria de distros basadas en Red Hat.
 # rpm -ivh paquete (instalar un paquete)
