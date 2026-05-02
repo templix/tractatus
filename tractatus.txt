@@ -51019,6 +51019,16 @@ $ rpm2archive glint-1.0-1.i386.rpm | tar -xvz
 $ cat glint-1.0-1.i386.rpm | rpm2archive - | tar -tvz
 
 
+rpmlint
+Herramienta para comprobar errores comunes en paquetes RPM [Red hat Package Manager].
+$ rpmlint paquete.rpm (analizará el paquete paquete.rpm y mostrará advertencias, errores y sugerencias)
+$ rpmlint fuente.src.rpm (verificar un archivo fuente SRPM)
+$ rpmlint /ruta/a/paquetes/*.rpm (verificar todos los paquetes en un directorio)
+$ rpmlint --progress --type rpm paquete.rpm (muestra progreso durante la ejecución y especifica tipo de archivo [rpm, srpm...]
+$ rpmlint --list-keys paquete.rpm (lista claves GPG usadas para verificar firmas)
+$ rpmlint --explain paquete.rpm (muestra explicacion detallada de los errores y advertencias)
+
+
 rrdtool
 La herramienta de base de datos Round Robin (RRDtool) es un sistema para almacenar y visualizar datos de series temporales (por ejemplo, ancho de banda de red, temperatura de la sala de máquinas, carga promedio del servidor). Almacena los datos en bases de datos Round Robin (RRD), lo que significa que los datos se almacenan en un formato circular: una vez que la base de datos alcanza su tamaño máximo, los datos más antiguos se sobrescriben con los nuevos.
 1.-
