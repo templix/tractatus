@@ -51011,6 +51011,14 @@ Gestor de paqueteria de distros basadas en Red Hat.
 # rpm -qa gpg-pubkey (verificar la integridad de todos los paquetes)
 
 
+rpm2cpio
+Herramienta para convertir paquetes RPM a formato CPIO [ver] estándar, utilidad que se usa para procesar archivos comprimidos y que no admite archivos individuales de más de 4 GB, por lo que esta herramienta se considera obsoleta, en su lugar es preferible usar la herramienta rpm2archive incluida en el paquete que si funciona con archivos de más de 4 GB.
+$ rpm2cpio glint-1.0-1.i386.rpm | cpio -dium
+$ cat glint-1.0-1.i386.rpm | rpm2cpio - | cpio -tv
+$ rpm2archive glint-1.0-1.i386.rpm | tar -xvz
+$ cat glint-1.0-1.i386.rpm | rpm2archive - | tar -tvz
+
+
 rrdtool
 La herramienta de base de datos Round Robin (RRDtool) es un sistema para almacenar y visualizar datos de series temporales (por ejemplo, ancho de banda de red, temperatura de la sala de máquinas, carga promedio del servidor). Almacena los datos en bases de datos Round Robin (RRD), lo que significa que los datos se almacenan en un formato circular: una vez que la base de datos alcanza su tamaño máximo, los datos más antiguos se sobrescriben con los nuevos.
 1.-
