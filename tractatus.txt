@@ -51087,6 +51087,12 @@ rrenice
 [pslist]. Herramienta con uso igual que renice [ver]
 
 
+rs
+Reestructurar una matriz de datos, lee la entrada estándar, interpreta cada línea como una fila de entradas separadas por espacios en blanco en una matriz, transforma la matriz según las opciones y la escribe en la salida estándar.
+$ jot -r 100 | rs 10 10 (generar una tabla de 10x10 con número del 1 al 100 aleatorios)
+$ look gos | rs (ver entradas del diccionario que empiecen por "gos" y mostrarlas en una tabla)
+
+
 rsnapshot
 Script en Perl y basado en rsync que realiza copias de seguridad manualmente o mediante cron [ver].
 # cp /etc/rsnapshot.conf.default /etc/rsnapshot.conf (Copiar el archivo de configuración)
