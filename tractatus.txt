@@ -51221,6 +51221,32 @@ $ rsgain easy --help (ver ayuda detallada)
 $ rsgain custom --help
 
 
+rsibreak
+[Repetitive Strain Injury]. Utilidad que para prevenir lesiones por esfuerzo repetitivo por el uso prolongado del ratón y el teclado, recomienda a los usuarios de ordenadores que tomen descansos regulares. Durante los descansos, RSIBreak puede mostrar un mensaje discreto, bloquear la pantalla por completo o presentar una presentación de diapositivas.
+Ejemplo de configuración:
+$ nano ~/.config/rsibreakrc
+       [General]
+       Enabled=true
+       BreakInterval=55
+       MicroBreakInterval=10
+       BreakDuration=5
+       MicroBreakDuration=20
+       LockScreen=false
+       ShowSlide=true
+       SlidePath=/home/USER/Images/vacaciones/
+Los conceptos indican:
+       BreakInterval --> Minutos entre descansos largos
+       MicroBreakInterval --> Minutos entre microdescansos
+       BreakDuration --> Duración del descanso largo en minutos
+       MicroBreakDuration --> Duración del microdescanso en segundos
+       LockScreen --> Si es true, bloquea la pantalla durante el descanso
+       ShowSlide --> Si es true, muestra una presentación de diapositivas
+       SlidePath --> Ruta a las diapositivas
+$ rsibreak (iniciar manualmente en segundo plano)
+$ rsibreak --break-interval 60 --microbreak-interval 15 (sin archivo de configuración, que recuerde un descanso largo cada 60 minutos y un microdescanso cada 15 minutos)
+$ pkill rsibreak (detener rsibreak)
+
+
 rsnapshot
 Script en Perl y basado en rsync que realiza copias de seguridad manualmente o mediante cron [ver].
 # cp /etc/rsnapshot.conf.default /etc/rsnapshot.conf (Copiar el archivo de configuración)
