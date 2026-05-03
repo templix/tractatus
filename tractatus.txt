@@ -51141,6 +51141,55 @@ $ jot -r 100 | rs 10 10 (generar una tabla de 10x10 con número del 1 al 100 ale
 $ look gos | rs (ver entradas del diccionario que empiecen por "gos" y mostrarlas en una tabla)
 
 
+rsakeyfind
+Herramienta que se utiliza para localizar claves privadas RSA codificadas con BER [Basic Encoding Rules] en imágenes de memoria. Si se especifica un archivo de módulo, localizará las claves privadas y públicas que coincidan con el módulo codificado en hexadecimal leído de dicho archivo.
+$ rsakeyfind /ruta/a/la/imagen_de_memoria (búsqueda básica sin módulo específico)
+$ rsakeyfind /ruta/a/la/imagen_de_memoria /ruta/a/modulo.txt (búsqueda con módulo específico)
+
+
+rsbackup
+Utilidad escrita en Perl que automatiza copias de seguridad utilizando rsync. Las copias de seguridad se almacenan como árboles completos del sistema de archivos en un disco duro,  posiblemente externo. Está pensada para ser sencilla de administrar mediante un único archivo de configuración, soportando copias locales y remotas vía SSH, rotación de backups [diarios, semanales, mensuales], ahorro de espacio mediante enlaces duros [hardlinks], similar a rsnapshot [ver], exclusión de rutas, opciones personalizadas de rsync y registro en logs. No es un sistema de backup moderno como borg, restic [ver] o duplicati. Es ideal para entornos sencillos, servidores con recursos limitados o cuando solo se necesita replicar directorios con rsync de forma programada. Incluye las herramientas rsbackup-mount, rsbackup-snapshot-hook y rsbackup.cron. Configuración básica en /etc/rsbackup/defaults.
+Ejemplo de configuración básica. Crear el archivo:
+# sudo nano /etc/rsbackup/rsbackup.conf
+### Ejemplo de configuración
+#
+# === Opciones globales ===
+BACKUP_ROOT=/var/backups/rsbackup
+LOGFILE=/var/log/rsbackup.log
+COMPRESS=0              # 1 = comprime con gzip los logs antiguos
+VERBOSE=1
+#
+# === Backup 1: Local ===
+[home_local]
+SOURCE=/home/
+DESTINATION=/mnt/backup_disco/home/
+RSYNC_OPTS=-av --delete --exclude='.cache/' --exclude='tmp/'
+ROTATE=daily:7 weekly:4
+#
+# === Backup 2: Remoto vía SSH ===
+[webserver_db]
+SOURCE=/var/lib/mysql/
+DESTINATION=backup@192.168.1.50:/backups/db/
+SSH_OPTS=-i /root/.ssh/id_rsa_backup -p 2222
+RSYNC_OPTS=-avz --delete --numeric-ids
+ROTATE=daily:10 weekly:8 monthly:6
+Explicación de los parámetros:
+       SOURCE -> Ruta origen [local]
+       DESTINATION -> Ruta destino [local o usuario@host:/ruta/]
+       RSYNC_OPTS --> Opciones que se pasan directamente a rsync
+       SSH_OPTS --> Opciones para ssh [clave, puerto, etc.]
+       ROTATE --> Formato: tipo:cantidad. Tipos: daily, weekly, monthly
+       BACKUP_ROOT --> Directorio base donde se guardarán las copias rotadas
+# rsbackup (ejecutar todos los backups configurados)
+# rsbackup webserver_db (ejecutar solo un backup específico)
+# tail -f /var/log/rsbackup.log (ver logs en tiempo real)
+1.-
+Programar con cron
+# crontab -e
+  	# Ejecutar diario a las 2:00 AM
+	0 2 * * * /usr/sbin/rsbackup >> /var/log/rsbackup-cron.log 2>&1
+
+
 rsnapshot
 Script en Perl y basado en rsync que realiza copias de seguridad manualmente o mediante cron [ver].
 # cp /etc/rsnapshot.conf.default /etc/rsnapshot.conf (Copiar el archivo de configuración)
