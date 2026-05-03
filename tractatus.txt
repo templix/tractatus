@@ -51039,6 +51039,38 @@ $ rpmlint --list-keys paquete.rpm (lista claves GPG usadas para verificar firmas
 $ rpmlint --explain paquete.rpm (muestra explicacion detallada de los errores y advertencias)
 
 
+rrdcached
+Demonio intermediario que se coloca entre las aplicaciones y los archivos RRD. En lugar de que cada actualización escriba directamente al disco, las acumula en memoria y las escribe en lote, reduciendo drásticamente las operaciones de I/O. Esto es especialmente útil en sistemas de monitorización con cientos o miles de archivos RRD [Cacti, Collectd, Nagios, etc.].
+# systemctl status rrdcached (comprobar si está activo)
+$ rrdcached -l unix:/var/run/rrdcached.sock -p /var/run/rrdcached.pid -b /var/lib/rrd (arranque básico con socket Unix)
+$ rrdcached -l unix:/var/run/rrdcached.sock -p /var/run/rrdcached.pid -b /var/lib/rrd -B -j /var/lib/rrdcached/journal -w 300 -z 60 -f 3600 (arranque con journal para recuperar las actualizaciones pendientes si el demonio se reinicia inesperadamente [recomendado en producción]
+  	  -w 300 -->  escribe al disco si los datos llevan 300s en caché
+	  -z 60 --> añade hasta 60s aleatorios para no saturar el disco con muchos RRDs a la vez
+	  -f 3600 --> flush completo cada hora como mínimo
+	  -B --> solo permite archivos dentro del directorio base
+	  -j <directorio> --> directorio para el journal [recuperación ante fallos]
+$ rrdcached -l 0.0.0.0:42217 -l unix:/var/run/rrdcached.sock -b /var/lib/rrd -B (escucha en TCP)
+$ rrdcached -g -l unix:/tmp/rrdcached-test.sock -b /tmp/rrd-test -w 30 (modo foreground para depuración)
+$ rrdtool update --daemon unix:/var/run/rrdcached.sock /var/lib/rrd/host1-cpu.rrd N:45 (uso desde rrdtool [ver] con el demonio activo, actualizar un archivo RRD a través del caché)
+$ rrdtool graph /tmp/cpu.png --daemon unix:/var/run/rrdcached.sock --start -3600 DEF:cpu=/var/lib/rrd/host1-cpu.rrd:value:AVERAGE LINE1:cpu#FF0000:"CPU uso" (flush automático antes de leer)
+$ rrdtool flushcached --daemon unix:/var/run/rrdcached.sock /var/lib/rrd/host1-cpu.rrd (forzar flush de un archivo concreto)
+$ echo "STATS" | socat - unix:/var/run/rrdcached.sock (conectarse al socket y pedir stats)
+La configuración se puede afinar en:
+# nano /etc/default/rrdcached
+       DAEMON=/usr/bin/rrdcached
+       DAEMON_USER=www-data
+       DAEMON_GROUP=www-data
+       BASE_PATH=/var/lib/rrd
+       JOURNAL_PATH=/var/lib/rrdcached/journal
+       WRITE_TIMEOUT=300
+       WRITE_JITTER=60
+       FLUSH_INTERVAL=3600
+       PIDFILE=/var/run/rrdcached/rrdcached.pid
+       SOCKFILE=/var/run/rrdcached/rrdcached.sock
+       SOCKGROUP=www-data
+       BASE_OPTIONS="-B -F -f ${FLUSH_INTERVAL}"
+
+
 rrdtool
 La herramienta de base de datos Round Robin (RRDtool) es un sistema para almacenar y visualizar datos de series temporales (por ejemplo, ancho de banda de red, temperatura de la sala de máquinas, carga promedio del servidor). Almacena los datos en bases de datos Round Robin (RRD), lo que significa que los datos se almacenan en un formato circular: una vez que la base de datos alcanza su tamaño máximo, los datos más antiguos se sobrescriben con los nuevos.
 1.-
