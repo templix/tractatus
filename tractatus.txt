@@ -51119,6 +51119,22 @@ rrenice
 [pslist]. Herramienta con uso igual que renice [ver]
 
 
+rrep
+Busca en ficheros de entrada coincidencias con un patrón dado y las sustituye por una cadena de reemplazo. Incluye soporte para expresiones regulares, procesamiento recursivo de directorios, copias de seguridad, simulación y solicitud de entrada. La cadena de reemplazo puede contener caracteres especiales para referirse a partes del patrón coincidente.
+$ rrep "hola" "adiós" fichero.txt (reemplazo simple en un fichero. Sustituye todas las ocurrencias de hola por adiós en fichero.txt)
+$ rrep -F "precio: 10.00€" "precio: 12.50€" catalogo.txt (cadenas literales sin regex)
+$ rrep -i "error" "ERROR" log.txt (ignorar mayúsculas/minúsculas. Reemplaza error, Error... por ERROR)
+$ rrep -w "en" "EN" documento.txt (solo palabras completas. Reemplaza "en" pero no tocará "entonces", "también", etc.)
+$ rrep -r "localhost" "produccion.ejemplo.com" ./config/ (busca y reemplaza en todos los ficheros dentro de config/ y sus subdirectorios)
+$ rrep -r --include="*.conf" "puerto=8080" "puerto=443" /etc/miapp/ (cambiar puerto de forma recursiva solo en ficheros .conf)
+$ rrep --dry-run -r "v1\.0" "v2.0" ./src/ (simulación [dry-run] sin modificar nada)
+$ rrep -b "antiguo_valor" "nuevo_valor" config.ini (antes de modificar config.ini, crea config.ini~ de forma automática como copia de seguridad)
+$ rrep -S .bak "antiguo" "nuevo" fichero.txt (backup con sufijo personalizado [bak])
+$ rrep --interactive -r "debug" "info" ./logs/ (modo interactivo pregunta antes de cada fichero)
+$ rrep -r --exclude-dir=".git" "TODO" "PENDIENTE" ./proyecto/ (procesa todo el proyecto excepto el directorio .git)
+$ rrep -E "([0-9]{4})-([0-9]{2})-([0-9]{2})" "\3/\2/\1" fechas.txt (convierte fechas formato 2024-05-03 a 03/05/2024. Los grupos \1, \2, \3 hacen referencia a las partes capturadas del patrón)
+
+
 rs
 Reestructurar una matriz de datos, lee la entrada estándar, interpreta cada línea como una fila de entradas separadas por espacios en blanco en una matriz, transforma la matriz según las opciones y la escribe en la salida estándar.
 $ jot -r 100 | rs 10 10 (generar una tabla de 10x10 con número del 1 al 100 aleatorios)
