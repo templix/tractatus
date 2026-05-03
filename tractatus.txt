@@ -51279,6 +51279,11 @@ $ echo "Linux es un sistema genial" | rsop encrypt clave_publica.asc > mensaje.g
 $ rsop decrypt clave_privada.asc < mensaje.gpg (descifrar por pantalla)
 
 
+rsopv
+Implementación en Rust del subconjunto de verificación de la interfaz de línea de comandos OpenPGP sin estado. Ver rsop.
+$ RUST_BACKTRACE=full rsopv --debug inline-verify mensaje.gpg
+
+
 rssh
 Shell restrictiva que permite elegir el método de acceso de un usuario que se desea entre las opciones disponibles: scp, sftp, cvs, svn, rsync o rdist. Primero incluir la nueva shell como una shell válida en del sistema:
 # echo "/usr/bin/rssh" >> /etc/shells
