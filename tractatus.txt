@@ -51151,28 +51151,28 @@ rsbackup
 Utilidad escrita en Perl que automatiza copias de seguridad utilizando rsync. Las copias de seguridad se almacenan como árboles completos del sistema de archivos en un disco duro,  posiblemente externo. Está pensada para ser sencilla de administrar mediante un único archivo de configuración, soportando copias locales y remotas vía SSH, rotación de backups [diarios, semanales, mensuales], ahorro de espacio mediante enlaces duros [hardlinks], similar a rsnapshot [ver], exclusión de rutas, opciones personalizadas de rsync y registro en logs. No es un sistema de backup moderno como borg, restic [ver] o duplicati. Es ideal para entornos sencillos, servidores con recursos limitados o cuando solo se necesita replicar directorios con rsync de forma programada. Incluye las herramientas rsbackup-mount, rsbackup-snapshot-hook y rsbackup.cron. Configuración básica en /etc/rsbackup/defaults.
 Ejemplo de configuración básica. Crear el archivo:
 # sudo nano /etc/rsbackup/rsbackup.conf
-### Ejemplo de configuración
-#
-# === Opciones globales ===
-BACKUP_ROOT=/var/backups/rsbackup
-LOGFILE=/var/log/rsbackup.log
-COMPRESS=0              # 1 = comprime con gzip los logs antiguos
-VERBOSE=1
-#
-# === Backup 1: Local ===
-[home_local]
-SOURCE=/home/
-DESTINATION=/mnt/backup_disco/home/
-RSYNC_OPTS=-av --delete --exclude='.cache/' --exclude='tmp/'
-ROTATE=daily:7 weekly:4
-#
-# === Backup 2: Remoto vía SSH ===
-[webserver_db]
-SOURCE=/var/lib/mysql/
-DESTINATION=backup@192.168.1.50:/backups/db/
-SSH_OPTS=-i /root/.ssh/id_rsa_backup -p 2222
-RSYNC_OPTS=-avz --delete --numeric-ids
-ROTATE=daily:10 weekly:8 monthly:6
+       ### Ejemplo de configuración
+       #
+       # === Opciones globales ===
+       BACKUP_ROOT=/var/backups/rsbackup
+       LOGFILE=/var/log/rsbackup.log
+       COMPRESS=0  # 1 = comprime con gzip los logs antiguos
+       VERBOSE=1
+       #
+       # === Backup 1: Local ===
+       [home_local]
+       SOURCE=/home/
+       DESTINATION=/mnt/backup_disco/home/
+       RSYNC_OPTS=-av --delete --exclude='.cache/' --exclude='tmp/'
+       ROTATE=daily:7 weekly:4
+       #
+       # === Backup 2: Remoto vía SSH ===
+       [webserver_db]
+       SOURCE=/var/lib/mysql/
+       DESTINATION=backup@192.168.1.50:/backups/db/
+       SSH_OPTS=-i /root/.ssh/id_rsa_backup -p 2222
+       RSYNC_OPTS=-avz --delete --numeric-ids
+       ROTATE=daily:10 weekly:8 monthly:6
 Explicación de los parámetros:
        SOURCE -> Ruta origen [local]
        DESTINATION -> Ruta destino [local o usuario@host:/ruta/]
@@ -51180,9 +51180,13 @@ Explicación de los parámetros:
        SSH_OPTS --> Opciones para ssh [clave, puerto, etc.]
        ROTATE --> Formato: tipo:cantidad. Tipos: daily, weekly, monthly
        BACKUP_ROOT --> Directorio base donde se guardarán las copias rotadas
+# rsbackup --backup --dry-run (verificar que rsbackup funcione correctamente a modo de prueba)
+# rsbackup --backup --verbose (realizar una copia de seguridad inicial. Cada copia de seguridad de cada volumen, creará una entrada en /var/log/backup/backups.db)
 # rsbackup (ejecutar todos los backups configurados)
 # rsbackup webserver_db (ejecutar solo un backup específico)
-# tail -f /var/log/rsbackup.log (ver logs en tiempo real)
+# rsbackup --prune --verbose (eliminar copias de seguridad, cuyos detalles se registran en archivos en /var/log/backup)
+# rsbackup --retire HOST (eliminar todas las copias de seguridad en los dispositivos disponibles y sus registros correspondientes)
+# rsbackup --forget-only --retire HOST (conservar las copias de seguridad, pero eliminar registro, haciéndolas invisibles para rsbackup y preservando los datos)
 1.-
 Programar con cron
 # crontab -e
