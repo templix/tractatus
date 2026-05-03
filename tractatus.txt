@@ -51271,6 +51271,14 @@ Ejemplo de archivo de configuración:
 	retain yearly 5 (cada año y se almacenan las últimas 5)
 
 
+rsop
+Implementación basada en Rust de la interfaz de línea de comandos OpenPGP sin estado [Stateless] destinada a ser utilizada en pruebas de interoperabilidad y comandos simples de OpenPGP, sin dejar rastro en el sistema de archivos.
+$ rsop generate-key "Nombre de Usuario <email@ejemplo.com>" > clave_privada.asc (crear una clave [Certificado] y guardarla en un archivo)
+$ rsop extract-cert < clave_privada.asc > clave_publica.asc (extraer la clave publica desde la clave privada para compartir)
+$ echo "Linux es un sistema genial" | rsop encrypt clave_publica.asc > mensaje.gpg (cifrar un mensaje)
+$ rsop decrypt clave_privada.asc < mensaje.gpg (descifrar por pantalla)
+
+
 rssh
 Shell restrictiva que permite elegir el método de acceso de un usuario que se desea entre las opciones disponibles: scp, sftp, cvs, svn, rsync o rdist. Primero incluir la nueva shell como una shell válida en del sistema:
 # echo "/usr/bin/rssh" >> /etc/shells
