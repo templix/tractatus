@@ -51194,6 +51194,11 @@ Programar con cron
 	0 2 * * * /usr/sbin/rsbackup >> /var/log/rsbackup-cron.log 2>&1
 
 
+rsbackup-graph
+Genera una representación gráfica del conjunto actual de copias de seguridad conocidas por rsbackup.
+$ rebackup-graph HOST (crea el gráfico del HOST especificado y, pòr defecto lo guarda en rsbackup.png)
+
+
 rsnapshot
 Script en Perl y basado en rsync que realiza copias de seguridad manualmente o mediante cron [ver].
 # cp /etc/rsnapshot.conf.default /etc/rsnapshot.conf (Copiar el archivo de configuración)
