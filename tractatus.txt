@@ -51199,6 +51199,14 @@ Genera una representación gráfica del conjunto actual de copias de seguridad c
 $ rebackup-graph HOST (crea el gráfico del HOST especificado y, pòr defecto lo guarda en rsbackup.png)
 
 
+rsendmail
+Utilidad que permite enviar correos electrónicos de manera sencilla, agregándolos a la cola de envío sin necesidad de configurar completamente un servidor de correo. Está diseñada para facilitar a clientes o estaciones de trabajo enviar correos sin permisos administrativos, mediante el uso de claves SSH.
+Agregar la clave pública SSH del cliente en la configuración en el servidor:
+$ nano .ssh/authorized_keys
+       command="rsendmail --mail-from=$SSH_ORIGINAL_COMMAND" ssh-rsa AAAAB3NzaC1yc2E...
+$ ssh -i /etc/ssh/ssh_host_rsa_key usuario@192.168.1.100 'echo "Mensaje de prueba" | mail -s "Asunto" destino@ejemplo.com' (enviar email desde el cliente)
+
+
 rsnapshot
 Script en Perl y basado en rsync que realiza copias de seguridad manualmente o mediante cron [ver].
 # cp /etc/rsnapshot.conf.default /etc/rsnapshot.conf (Copiar el archivo de configuración)
