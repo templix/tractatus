@@ -51207,6 +51207,20 @@ $ nano .ssh/authorized_keys
 $ ssh -i /etc/ssh/ssh_host_rsa_key usuario@192.168.1.100 'echo "Mensaje de prueba" | mail -s "Asunto" destino@ejemplo.com' (enviar email desde el cliente)
 
 
+rsgain
+[Really Simple Gain]. Normalizador de sonoridad que analiza archivos de audio y calcula los valores de ganancia normalizada y picos de sonoridad según estándares como EBU R128 e ITU-R BS.1770, típicamente con un objetivo de -18 LUFS. No modifica el audio en sí, es no destructivo, sino que añade metadatos [tags] en los archivos. Los reproductores compatibles con ReplayGain como foobar2000, MusicBee, VLC con configuraciones adecuadas, Strawberry, etc, ajustan el volumen dinámicamente durante la reproducción para que todas las canciones suenen a un volumen similar. Soporta muchos formatos: MP3, FLAC, Opus, Ogg, MP4/M4A, WAV, AIFF, WMA, WavPack, APE, etc.
+$ rsgain easy ~/Musica (escanear toda tu biblioteca musical)
+$ rsgain easy "~/Musica/Mi Álbum" (escanear solo un álbum)
+$ rsgain easy -m MAX ~/Musica (con multihilo [usa todos los núcleos])
+$ rsgain easy -S ~/Musica (saltar archivos que ya tienen tags ReplayGain)
+$ rsgain easy -O ~/Musica (escanear y generar un log CSV)
+$ rsgain easy -p ebur128 ~/Musica (usar un preset más estricto)
+$ rsgain custom -a -s i ~/Musica/archivo1.mp3 ~/Musica/archivo2.mp3 (escanear y etiquetar archivos individuales)
+$ rsgain custom -s s *.flac (solo analizar sin escribir tags)
+$ rsgain easy --help (ver ayuda detallada)
+$ rsgain custom --help
+
+
 rsnapshot
 Script en Perl y basado en rsync que realiza copias de seguridad manualmente o mediante cron [ver].
 # cp /etc/rsnapshot.conf.default /etc/rsnapshot.conf (Copiar el archivo de configuración)
