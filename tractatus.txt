@@ -51396,6 +51396,20 @@ $ rst2pdf -c entrada -o salida (crear un archivo comprimido como salida)
 $ rst2pdf --print-stylesheet (muestra la hoja de estilo predeterminada)
 
 
+rstatd
+[Remote STATistics Daemon]. Muestra información estadística básica sobre el estado de máquinas remotas en una red, como el tiempo de actividad [uptime], carga del sistema, usuarios conectados, etc. Escucha en el puerto 111 [RPC] y suele usarse para monitorización básica. No es seguro por defecto ya que transmite datos en texto plano y no cifra la comunicación. Para permitir o negar conexiones desde otras máquinas, editar /etc/hosts.allow y /etc/hosts.deny según sea necesario.
+# systemctl enable rstatd (iniciar el servicio al arrancar el sistema)
+
+
+rstatd-client
+Cliente para rstatd. Incluye las herramientas rsysinfo y rup
+$ rup (consulta el uptime de la máquina local)
+$ rup servidor.example.com (muestra el uptime y la carga de la máquins remota)
+$ rup servidor1 servidor2 servidor3 (consulta el uptime de varias máquinas)
+$ rsysinfo (información del sistema local)
+$ rsysinfo servidor.example.com (información de un host remoto)
+
+
 rsync
 Sincronizar archivos o directorios. Trabajar con el directorio montado. En las rutas a copiar, no colocar * si queremos tambien copiar ficheros y directorios ocultos.
 $ rsync -av /home/usuario/Dropbox /home/usuario/Copias_seguridad/ (Copiar todo el directorio “Dropbox” en el directorio “Copias_seguridad”)
