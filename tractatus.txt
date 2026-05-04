@@ -51284,6 +51284,56 @@ Implementación en Rust del subconjunto de verificación de la interfaz de líne
 $ RUST_BACKTRACE=full rsopv --debug inline-verify mensaje.gpg
 
 
+rspamd
+Filtro de spam rápido, modular y ligero diseñado para gestionar grandes volúmenes de correo con un consumo de recursos muy bajo, usando I/O no bloqueante y procesamiento asíncrono. El servicio se ejecuta en segundo plano y procesa los correos y normalmente se comunica con Postfix/Exim vía milter, puerto 11332 y expone la interfaz web en el puerto 11334. Incluye los ejecutables rspamadm, rspamc y rspamd_stats.
+# systemctl status rspamd (comprobar si está activo)
+# journalctl -u rspamd -f (ver logs)
+# ss -tlnp | grep 11332 (verificar que el milter escucha)
+# rspamc modules (ver módulos cargados)
+# rspamc mensaje.eml (escanear un correo)
+# rspamc stat (ver estadísticas de aprendizaje Bayesiano)
+# rspamc stat | grep -i grey (filtrar estadísticas específicas [greylisting])
+# rspamadm -l (listar todos los comandos disponibles)
+# rspamadm configtest (probar la configuración)
+# rspamadm configdump (ver configuración procesada)
+# rspamadm configdump -j (ver configuración procesada en formato JSON)
+# rspamadm dkim_keygen --selector mail --domain ejemplo.com --bits 2048 --privkey /var/lib/rspamd/dkim/ejemplo.com.mail.key (generar clave DKIM para el dominio)
+# rspamadm pw (cifrar contraseña para la interfaz web)
+# rspamadm configwizard (asistente de configuración interactivo)
+# rspamd_stats -v (ver estadísticas generales en modo verbose)
+# redis-cli keys "rg_*" | wc -l (ver conteo de entradas en greylist via Redis)
+# rspamc learn_spam /var/vmail/*/Maildir/.Junk/cur/ (entrenar con correo existente)
+# rspamc learn_ham /var/vmail/*/Maildir/cur/
+1.-
+Integración con Postfix
+# nano /etc/postfix/main.cf
+smtpd_milters = inet:localhost:11332
+non_smtpd_milters = inet:localhost:11332
+milter_default_action = accept
+milter_protocol = 6
+2.-
+Configurar aprendizaje automático
+@ tee /etc/rspamd/local.d/classifier-bayes.conf << 'EOF'
+servers = "127.0.0.1:6379";
+backend = "redis";
+autolearn = true;
+min_learns = 200;
+EOF
+3.-
+Ajustar umbrales de acción
+# tee /etc/rspamd/local.d/actions.conf << 'EOF'
+reject = 15;      # Rechazar spam obvio
+add_header = 6;   # Añadir cabeceras X-Spam
+greylist = 4;     # Retraso temporal para sospechosos
+EOF
+4.-
+Guardar en la configuración
+sudo tee /etc/rspamd/local.d/worker-controller.inc << 'EOF'
+password = "$2$...hash_generado...";
+bind_socket = "127.0.0.1:11334";
+EOF
+
+
 rssh
 Shell restrictiva que permite elegir el método de acceso de un usuario que se desea entre las opciones disponibles: scp, sftp, cvs, svn, rsync o rdist. Primero incluir la nueva shell como una shell válida en del sistema:
 # echo "/usr/bin/rssh" >> /etc/shells
