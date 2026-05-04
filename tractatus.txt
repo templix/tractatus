@@ -51334,6 +51334,15 @@ bind_socket = "127.0.0.1:11334";
 EOF
 
 
+rss-bridge
+[apache2 php php-xml php-curl php-mbstring]. Servicio web que genera feeds ATOM para sitios web que no los tienen. Ofrece un servicio web en PHP que genera feeds ATOM para Facebook, Twitter, YouTube, Flickr, Google, Instagram, Pinterest y más de 130 servicios web adicionales que no ofrecen feeds ATOM ni RSS. El software actúa como un proxy entre el servicio web y un lector de RSS. Extrae la información necesaria de sus páginas HTML públicas. Para evitar bloqueos, los resultados se almacenan en caché.
+# a2enconf rss-bridge (habilitar el alias)
+# systemctl reload apache2 (releer la nueva configuración de apache)
+Nota.- Con nginx hay que configurar un virtualhost manualmente apuntando a /usr/share/rss-bridge/.
+Una vez desplegado, se accede por http://tu-servidor/rss-bridge/ y se ve una galería de puentes [bridges]. Cada bridge corresponde a un servicio web. Se selecciona uno, se rellena los parámetros: usuario, canal, hashtag... y se obtiene una URL de feed que se pega en el lector RSS.
+http://localhost/rss-bridge/?action=list (listar todos los bridges disponibles activos e inactivos)
+
+
 rssh
 Shell restrictiva que permite elegir el método de acceso de un usuario que se desea entre las opciones disponibles: scp, sftp, cvs, svn, rsync o rdist. Primero incluir la nueva shell como una shell válida en del sistema:
 # echo "/usr/bin/rssh" >> /etc/shells
