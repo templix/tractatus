@@ -51343,6 +51343,15 @@ Una vez desplegado, se accede por http://tu-servidor/rss-bridge/ y se ve una gal
 http://localhost/rss-bridge/?action=list (listar todos los bridges disponibles activos e inactivos)
 
 
+rss2mail
+Herramienta que permite recibir actualizaciones de fuentes RSS [Really Simple Syndication] directamente en la bandeja de entrada del correo electrónico. Para empezar a usar rss2mail, primero se necesita crear una nueva base de datos de feeds con la dirección de correo electrónico a la que se desea que se envíen las actualizaciones. El archivo de configuración está en ~/.rss2email.cfg donde se puede cambiar el correo electrónico, configurar servidores SMTP...
+$ r2e new email@ejemplo.com
+$ r2e add NombreDelFeed http://www.ejemplo.com/feed.rss (añadir feeds RSS a la nueva base de datos con el nombre que le damos a cada feed)
+$ r2e run (revisar los feeds y enviar cualquier artículo nuevo a la dirección de correo electrónico especificada)
+$ r2e list (listar todos los feeds)
+$ r2e delete 1 (eliminar un feed con el índice que se obtiene con el comando anterior)
+
+
 rssh
 Shell restrictiva que permite elegir el método de acceso de un usuario que se desea entre las opciones disponibles: scp, sftp, cvs, svn, rsync o rdist. Primero incluir la nueva shell como una shell válida en del sistema:
 # echo "/usr/bin/rssh" >> /etc/shells
@@ -51359,6 +51368,14 @@ A continuacion descomentar la o las opciones permitidas:
 	#allowrdist
 	allowrsync
 	allowsvnserve
+
+
+rsshfs
+Herramienta que combina rssh [Restricted SSH] con sshfs para montar sistemas de archivos remotos a través de SSH en modo "solo lectura" o con restricciones específicas. La idea principal es que permite montar un volumen remoto en la máquina local, iniciando el proceso desde el host local, sin que el servidor remoto tenga que conectarse activamente al host local.
+$ rsshfs usuario@192.168.1.100:/home/usuario/datos /mnt/remoto (montar el directorio /home/usuario/datos del servidor remoto 192.168.1.100 en el directorio local /mnt/remoto de forma predeterminada en modo lectura y escritura)
+$ rsshfs -o ro usuario@192.168.1.100:/home/usuario/datos /mnt/remoto (montarlo solo en modo lectura)
+$ rsshfs -o ro,allow_other usuario@192.168.1.100:/home/usuario/datos /mnt/remoto (en modo lectura y permitir acceso a otros usuarios)
+Nota.- La herramienta está diseñada para situaciones donde el servidor remoto no puede o no debe conectarse al host local, pero el host local puede acceder a los recursos remotos.
 
 
 rsstail
