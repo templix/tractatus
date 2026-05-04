@@ -51410,6 +51410,31 @@ $ rsysinfo (información del sistema local)
 $ rsysinfo servidor.example.com (información de un host remoto)
 
 
+rstcheck
+Valida la sintaxis de los documentos reStructuredText. A diferencia de otros validadores, también verifica la corrección sintáctica en bloques de código anidados para diversos lenguajes: Scripts de shell Bash, Doctest, C [C99], C++ [C++11], JSON, XML, Python y reStructuredText.
+$ rstcheck documento.rst (verificar un fichero básico)
+$ rstcheck README.rst CHANGELOG.rst docs/index.rst (verificar varios ficheros a la vez)
+$ rstcheck -r docs/ (revisión recursiva de un directorio)
+$ rstcheck --report error documento.rst (solo mostrar errores graves no warning, info ni severe)
+$ rstcheck --report info documento.rst (mostrar todo, incluyendo info)
+$ rstcheck --report none documento.rst (suprimir toda salida, solo interesa el código de retorno)
+$ rstcheck --ignore-language bash,xml documento.rst (ignorar lenguajes específicos)
+$ rstcheck --ignore-messages "Title underline too short" documento.rst (ignorar mensajes concretos con regex)
+$ rstcheck --debug documento.rst (ver dónde se carga la configuración)
+1.-
+Ejemplo de fichero de configuración personalizado
+El fichero de configuración usa formato INI con una sección [rstcheck]. Los nombres de opción son los mismos que en la línea de comandos pero con "_" en lugar de "-".
+$ nano ~/.rstcheck.cfg
+       [rstcheck]
+       ignore_directives=autodoc,automodule
+       ignore_roles=src,RFC
+       ignore_messages=(Document or section may not begin with a transition\.$)
+       report=warning
+       ...
+Luego al lanzar el comando ha de especificarse este archivo:
+$ rstcheck --config ~/.rstcheck.ini documento.rst
+
+
 rsync
 Sincronizar archivos o directorios. Trabajar con el directorio montado. En las rutas a copiar, no colocar * si queremos tambien copiar ficheros y directorios ocultos.
 $ rsync -av /home/usuario/Dropbox /home/usuario/Copias_seguridad/ (Copiar todo el directorio “Dropbox” en el directorio “Copias_seguridad”)
