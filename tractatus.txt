@@ -51372,6 +51372,13 @@ Algunas opciones:
 -u URL (Host del feed)
 
 
+rst2pdf
+Generador de PDF a partir de reStructuredText basado en ReportLab. La forma habitual de crear archivos PDF a partir de reStructuredText es mediante LaTeX. Esta herramienta ofrece una alternativa al generar PDF directamente utilizando la biblioteca ReportLab.
+$ rst2pdf entrada -o salida (forma básica)
+$ rst2pdf -c entrada -o salida (crear un archivo comprimido como salida)
+$ rst2pdf --print-stylesheet (muestra la hoja de estilo predeterminada)
+
+
 rsync
 Sincronizar archivos o directorios. Trabajar con el directorio montado. En las rutas a copiar, no colocar * si queremos tambien copiar ficheros y directorios ocultos.
 $ rsync -av /home/usuario/Dropbox /home/usuario/Copias_seguridad/ (Copiar todo el directorio “Dropbox” en el directorio “Copias_seguridad”)
