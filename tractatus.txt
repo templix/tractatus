@@ -51530,6 +51530,15 @@ Monitorear los contadores snmp del kernel y las estadísticas de la interfaz de 
 # rtacct -d 5 (ejecutar en modo daemon y recolectando las estadisticas cada 5 segundos)
 
 
+rtags
+Herramienta para facilitar la navegación y búsqueda en proyectos de código C/C++ y en menor medida Objective-C y Objective-C++. Funciona en modo cliente/servidor, donde el servidor indexa el código fuente y mantiene una base de datos persistente con información sobre declaraciones, definiciones, referencias, símbolos, etc y e cliente permite consultar esa base de datos rápidamente, facilitando tareas como ir a la definición, buscar referencias, obtener documentación, etc. Incluye las herramientas rtags-rc y rtags-rdm
+$ rtags-rdm & (lanzar el demonio)
+$ rtags-rc -J compile_commands.json (indexar el proyecto actual lanzado desde el mismo directorio usando compile_commands.json, generado con CMake usando -DCMAKE_EXPORT_COMPILE_COMMANDS=1)
+$ rtags-rc -f Myclass::myMethod (buscar dónde se define un símbolo)
+$ rtags-rc -r MyClass::myMethod (encontrar todas las referencias de un símbolo)
+$ rc --inheritance-child MyBaseClass (ver la jerarquía de una clase)
+
+
 rtc
 [Real Time Clock]. Dispositivo que se encarga de mantener la hora y fecha del sistema actualizados incluso cuando este está apagado. Para comprobar si el pc tiene RTC:
 # grep -i rtc /boot/config-6.1.0-13-amd64 (substituir por el kernel real instalado lanzando el comando: uname -r)
