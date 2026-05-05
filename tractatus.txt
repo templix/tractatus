@@ -32420,6 +32420,19 @@ $ lynx -dump http://www.tuxapuntes.com | awk '/http/{print $2}' | egrep "^https{
 $ lynx -dump http://www.lapipaplena.com/ | awk '/http/{print $2}' | sort -  (Lo mismo)
 
 
+lyx
+Procesador de documentos con interfaz WYSIWYG para LaTeX. Se puede ampliar la funcionalidad de LyX instalando varios paquetes: chktex comprueba si hay errores tipográficos, gnuhtml2latex importa documentos HTML, groff mejora el formato de tablas en las exportaciones de texto plano, gnumeric importa hojas de cálculo, librsvg2-bin, inkscape que utilizan el formato de imagen SVG en los documentos de LyX, lilypond para compatibilidad con partituras musicales, maxim sistema de álgebra computacional, mythes que utiliza el diccionario de sinónimos de OpenOffice.org/LibreOffice, noweb, r-cran-knitr que utilizan programación literaria... LyX actúa como servidor, aceptando conexiones de clientes a través de un socket local. Incluye las herramientas lyxclient y tex2lyx.
+$ lyx (abrir la gui)
+$ lyxclient -c "LYXCMD buffer-open myfile.lyx" (envia un comando a LyX y sale. Debe llevar el prefijo LYXCMD)
+$ lyxclient -g myfile.lyx 10 (ir a un archivo y línea específica)
+Si no se usan -c ni -g, lyxclient lee comandos desde la entrada estándar hasta recibir BYE: para terminar.
+$ tex2lyx mi_documento.tex mi_documento.lyx (convertir un archivo LaTeX a LyX)
+$ tex2lyx -m algorithm,listings mi_documento.tex mi_documento.lyx (convertir con módulos específicos)
+$ tex2lyx -c article mi_documento.tex mi_documento.lyx (forzar clase de documento)
+$ tex2lyx -copyfiles mi_documento.tex mi_documento.lyx (copiar archivos incluidos)
+Nota.- Si no se especifica archivo de salida, se generará uno con el mismo nombre pero extensión .lyx.
+
+
 lz4
 Comprimir y descomprimir ficheros.
 $ lz4 file (forma básica para comprimir un fichero)
