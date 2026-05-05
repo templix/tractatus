@@ -51586,11 +51586,23 @@ Para habilitar threadirqs en el arranque, editar /etc/default/grub y en la linea
 # update-grub
 
 
-rtkitctl
-[realtimekit]. Servicio del sistema D-Bus que cambia la política de programación de los hilos y procesos de usuario a modo de programación en tiempo real, a petición del usuario. Está concebido para ser utilizado como un mecanismo seguro que permita la programación en tiempo real para ser utilizado por los procesos normales.
+rtkit
+[RealTimeKIT]. Política en tiempo real y demonio de vigilancia. RealtimeKit es un servicio del sistema D-Bus que cambia la política de planificación de los procesos/hilos de usuario a SCHED_RR a petición del usuario. Su utilidad principal es actuar como un intermediario seguro entre aplicaciones de usuario como servidores de audio y el kernel Linux, permitiendo elevar la prioridad de planificación a tiempo real sin otorgar privilegios de root.
+Una muestra de configuración típica
+# nano /etc/rtkit/rtkit.conf
+       [rtkit]
+       rttime-usec-max=200000      # Máximo 200ms continuos en RT (previene congelaciones)
+       nice-level-min=-11          # Prioridad mínima (más negativo = mayor prioridad)
+       allowed-users=              # Deja en blanco para permitir a todos (polkit decide)
+       system-users=pipewire,pulse,rtkit
+En la mayoría de distribuciones modernas no es necesario modificar este archivo. Los valores por defecto son seguros y compatibles con PipeWire/PulseAudio.
+# systemctl status rtkit-daemon (ver estado del demonio)
+# journalctl -u rtkit-daemon (logs de solicitudes aprobadas/rechazadas)
+# rtkitctl --start (iniciar RealtimeKit si aún no está en ejecución)
+# rtkitctl --reset-all (restablece el estado en tiempo real de todos los subprocesos)
+# journalctl -u rtkit-daemon --since "1 hour ago" (ver historial de concesiones/denegaciones)
+# ps -eLo pid,tid,class,rtprio,comm | grep -E "FIFO|RR" (verificar planificación en tiempo real. Cuando se inicia pipewire o pulseaudio lo solicitan automáticamente)
 # rtkitctl --reset-known (restablecer el estado en tiempo real de los hilos conocidos)
-# rtkitctl --reset-all (restablecer el estado en tiempo real de todos los hilos)
-# rtkitctl --start (iniciar rtkitctl si aún no se está ejecutando)
 # rtkitcrl --exit (finalizar la ejecución del demonio RealtimeKit)
 
 
