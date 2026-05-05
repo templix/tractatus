@@ -51579,6 +51579,13 @@ La marca de tiempo puede ser cualquiera de las siguientes:
    +5min
 
 
+rtirq-init
+Script de inicio, específicamente diseñado para optimizar el rendimiento de audio de tiempo real. Su función principal es asignar la máxima prioridad de planificación de tiempo real [SCHED_FIFO] a los hilos de interrupción [IRQ threads] gestionados por el kernel, lo cual es crucial para minimizar la latencia y evitar cortes [xruns] en aplicaciones de audio profesionalcomo JACK, Ardour o Reaper. También funciona en kernels genéricos modernos si se habilita la opción threadirqs en el arranque, ya que estos también utilizan hilos para manejar las interrupciones. En un kernel estándar, las interrupciones de hardware se manejan en un contexto de alta prioridad que no puede ser interrumpido fácilmente. En un kernel de tiempo real o con threadirqs, estas interrupciones se convierten en hilos de usuario. rtirq-init detecta estos hilos especialmente los de la tarjeta de sonido, USB, FireWire y temporizadores y les asigna una prioridad de tiempo real por defecto 90, para asegurar que tengan preferencia sobre otros procesos del sistema, como el entorno de escritorio o servicios de red. El archivo de configuración en /etc/default/rtirq.
+# systemctl start rtirq-init (verificar el estado actual del servicio)
+Para habilitar threadirqs en el arranque, editar /etc/default/grub y en la linea GRUB_CMDLINE_LINUX_DEFAULT añadir threadirqs. Luego lanzar:
+# update-grub
+
+
 rtkitctl
 [realtimekit]. Servicio del sistema D-Bus que cambia la política de programación de los hilos y procesos de usuario a modo de programación en tiempo real, a petición del usuario. Está concebido para ser utilizado como un mecanismo seguro que permita la programación en tiempo real para ser utilizado por los procesos normales.
 # rtkitctl --reset-known (restablecer el estado en tiempo real de los hilos conocidos)
