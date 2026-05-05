@@ -51516,6 +51516,13 @@ rsyslog-doc
 Contiene documentación HTML detallada para rsyslog. Describe la sintaxis general de los archivos de configuración para filtros, acciones, plantillas, etc., e incluye información detallada sobre todas las directivas de configuración disponibles. En el navegador file:///usr/share/doc/rsyslog-doc/html/_sources.
 
 
+rt-app
+Aplicación de prueba que inicia múltiples hilos para simular una carga periódica en tiempo real. Permite iniciar múltiples hilos periódicos y evaluar el comportamiento del sistema en diferentes políticas de programación, como SCHED_OTHER, SCHED_FIFO, SCHED_RR, AQuoSA y SCHED_DEADLINE.
+$ rt-app -p fifo -t 100 -d 50 -i 10 (ejecuta con la política SCHED_FIFO, con un período de 100 milisegundos, tiempo de ejecución de 50 milisegundos y un intervalo de 10 milisegundos)
+$ rt-app -p deadline -r 100 -d 50 -p 50 (ejecuta con la política SCHED_DEADLINE, con tiempo de ejecución de 100 milisegundos, tiempo de vencimiento de 50 milisegundos y período de 50 milisegundos)
+$ rt-app -t 100 -d 50 -i 10 -p fifo -t 200 -d 100 -i 20 -p rr (se ejecutan dos hilos con diferentes políticas de programación. El primer hilo utiliza la política SCHED_FIFO con un período de 100 milisegundos, un tiempo de ejecución de 50 milisegundos y un intervalo de 10 milisegundos y el segundo hilo utiliza la política SCHED_RR con un período de 200 milisegundos, un tiempo de ejecución de 100 milisegundos y un intervalo de 20 milisegundos)
+
+
 rtacct
 Monitorear los contadores snmp del kernel y las estadísticas de la interfaz de red cuyo contenido se encuentra en /proc/net/rt_acct.
 # rtacct -a -s -z (volcar valores absolutos, no actualizar el historial y mostrar tambien los contadores a cero)
