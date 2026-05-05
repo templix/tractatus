@@ -51504,6 +51504,14 @@ Verificar que el servicio rsyslog esté escuchando en los puertos especificados.
 # rsyslogd -dn (modo debug)
 
 
+rsyslog-clickhouse
+Módulo/plugin de salida de rsyslog que permite enviar logs directamente a ClickHouse de forma nativa. Su objetivo es que puedas guardar eventos de sistema en ClickHouse para luego consultarlos con SQL en tiempo real. Rsyslog recibe mensajes de registro y los puede reenviar a distintos destinos. Con este plugin, en lugar de escribir los logs en un archivo plano o enviarlos a otro servidor, los inserta en ClickHouse, que es una base de datos columnar pensada para analítica rápida.
+Un ejemplo de configuración podría ser que envíe todos los logs a ClickHouse usando los valores por defecto. Crear el archivo
+# nano /etc/rsyslog.d/10-first.conf
+       module(load="omclickhouse")
+       action(type="omclickhouse")
+
+
 rsyslog-doc
 Contiene documentación HTML detallada para rsyslog. Describe la sintaxis general de los archivos de configuración para filtros, acciones, plantillas, etc., e incluye información detallada sobre todas las directivas de configuración disponibles. En el navegador file:///usr/share/doc/rsyslog-doc/html/_sources.
 
