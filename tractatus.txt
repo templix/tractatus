@@ -9623,7 +9623,6 @@ $ cut -d: -f1 archivo  (Muestra el primer campo delimitado por “:”)
 $ cut -d" " -f1,5 archivo  (Mostrar el primero y el quinto, separados por espacio)
 $ cut -d" " -f 2- archivo (Mostrar todo menos la primera columna)
 $ cut -s -d"(" -f1 archivo ("-s" suprime las lineas que no contengan el delimitador [(]). De las que sí lo contengan, mostraría el 1er campo)
-$ echo $RANDOM | cut -c1,2 (Coger los 2 primeros números de un número aleatorio [$RANDOM])
 
 
 cutter
@@ -51523,6 +51522,10 @@ $ rt-app -p deadline -r 100 -d 50 -p 50 (ejecuta con la política SCHED_DEADLINE
 $ rt-app -t 100 -d 50 -i 10 -p fifo -t 200 -d 100 -i 20 -p rr (se ejecutan dos hilos con diferentes políticas de programación. El primer hilo utiliza la política SCHED_FIFO con un período de 100 milisegundos, un tiempo de ejecución de 50 milisegundos y un intervalo de 10 milisegundos y el segundo hilo utiliza la política SCHED_RR con un período de 200 milisegundos, un tiempo de ejecución de 100 milisegundos y un intervalo de 20 milisegundos)
 
 
+rt-tests
+Contiene un conjunto de programas que prueban y miden varios componentes del comportamiento del kernel en tiempo real, como la latencia del temporizador, la latencia de la señal, etc. Incluye las aplicaciones: cyclicdeadline [prueba el programador de fechas límite usando un programa estilo prueba cíclica], cyclictest [detección de latencia], deadline_test [prueba el programador de fechas límite], determine_maximum_mpps [determina los mpps máximos que la máquina puede manejar], hackbench [prueba de estrés/comparación del programador], oslat [medidas de retraso con RDTSC], pi_stress [herencia prioritaria con procesos], pip_stress [prueba de estrés para mutex de herencia de prioridad POSIX], pmqtest [ inicia pares de subprocesos y mide la latencia de la comunicación entre procesos con colas de mensajes POSIX], ptsematest [inicia dos subprocesos y mide la latencia de la comunicación entre procesos con POSIX mutex.], queuelat [programa de prueba de latencia de cola], rt-migrate-test [programa de migración de tareas en tiempo real], signaltest [software de prueba de ida y vuelta de señal], sigwaittest [inicia dos subprocesos o bifurca dos procesos y mide la latencia entre el envío y la recepción de una señal], ssdd [un rastreador que hace un montón de PTRACE_SINGLESTEP] y svsematest [inicia dos subprocesos o bifurca dos procesos y mide la latencia de los semáforos SYSV]
+
+
 rtacct
 Monitorear los contadores snmp del kernel y las estadísticas de la interfaz de red cuyo contenido se encuentra en /proc/net/rt_acct.
 # rtacct -a -s -z (volcar valores absolutos, no actualizar el historial y mostrar tambien los contadores a cero)
@@ -51615,6 +51618,15 @@ En la mayoría de distribuciones modernas no es necesario modificar este archivo
 # rtkitcrl --exit (finalizar la ejecución del demonio RealtimeKit)
 
 
+rtklib
+paquete de programas para posicionamiento estándar y preciso con GNSS [Global Navigation Satellite System - Sistema Global de Navegación por Satélite] incluyendo GPS, GLONASS, Galileo, QZSS, BeiDou y SBAS. Incluye las herramientas convbin, pos2kml, rnx2rtkp, rtkrcv y str2str.
+$ rnx2rtkp -o salida.pos -p 2 rover.obs base.obs base.nav (-p 2 modo cinemático [0: Estático, 1: Single], rover.obs datos del receptor móvil, `base.obs datos de la estación base base.nav archivo de navegación y -o archivo con la salida)
+$ convbin -r ubx -v 3.02 log_receptor.ubx  (especifica que el formato de entrada es u-blox y crea un archivo RINEX versión 3.02
+$ str2str -in serial://ttyUSB0:115200 -out ntrips://:password@rtcm.example.com/MOUNTPOINT (convertir receptor GPS conectado por USB en un servidor que emite correcciones a través de internet)
+$ rtkrcv -s -p 2000 -o rtk.conf (abre un monitor remoto en el puerto 2000 para que se pueda conectar y ver el estado del posicionamiento)
+$ pos2kml salida.pos (generará un archivo salida.kml listo para visualizar)
+
+
 rtl-433
 Receptor y decodificador de datos RF genérico que transmite en 433,9 MHz para dispositivos de banda ISM que utilizan RTL-SDR y SoapySDR como los sensores de temperatura.
 $ rtl_433 (utiliza el primer dispositivo encontrado y escucha a 433,92 MHz con una frecuencia de muestreo de 250 kHz)
@@ -51627,6 +51639,12 @@ $ rtl_433 -S all -T 120 (guarda todas las señales detectadas [g###_###M_###k.cu
 $ rtl_433 -K FILE -r nombre_archivo (lee un archivo de datos guardado en lugar de recibir datos en vivo. Etiqueta la salida con nombres de archivo)
 $ rtl_433 -F json -M utc | mosquitto_pub -t home/rtl_433 -l (enviará la salida a la red como mensajes MQTT en formato JSON)
 $ rtl_433 -f 433.53M -f 434.02M -H 15 (sondeará dos frecuencias con un intervalo de salto de 15 segundos)
+
+
+rtl-ais
+Sintonizador AIS sencillo y demodulador FM genérico de doble frecuencia. Este proporciona el comando rtl_ais, que decodifica los datos AIS de la radio definida por software (SDR) y genera sentencias AIVDM/AIVDO.
+$ rtl_ais -n (recibe tráfico AIS, envía tramas NMEA UDP a 127.0.0.1 puerto 10110 y registra las tramas en la consola)
+$ rtl_ais -l233.15M -r233.20M -A | play -r48k -traw -es -b16 -c2 -V1 - (sintoniza dos emisoras de FM y reproduce una en cada canal)
 
 
 rtl-sdr
@@ -51651,9 +51669,46 @@ Dado que el fichero estará en formato binario ha de visualizarse con:
 # ip monitor file /var/log/rtmon.log
 
 
+rtmpdump
+[Real-Time Messaging Protocol]. Programa para extraer contenido multimedia transmitido mediante el protocolo RTMP. Al proporcionar una URL RTMP, se generará un archivo FLV extraído, que se puede reproducir o transcodificar con herramientas estándar. RTMP es un protocolo desarrollado por Macromedia, ahora Adobe para transmitir audio, vídeo y datos entre un servidor Flash y un cliente. Fue muy usado por plataformas como la BBC iPlayer, Twitch en sus inicios y muchos servicios de streaming de los años 2000-2010. Incluye las herramientas rtmpgw, rtmpsrv y rtmpsuck.
+$ rtmpdump -r "rtmp://streaming.ejemplo.com/live/stream_clave" -o video.flv (descarga un stream RTMP y lo guarda como archivo FLV)
+$ rtmpdump -r "rtmp://cp12345.edgefcs.net/ondemand" -y "mp4:media/video/progname" -p "http://www.bbc.co.uk/iplayer/page" -W "http://www.bbc.co.uk/emp/10player.swf" -o pelicula.flv (-y ruta del stream dentro de la aplicación, -p URL de la página que referencia el stream, -W URL con verificación SWF y salida)
+$ rtmpdump -r "rtmp://servidor.com/app/stream" -o - | ffmpeg -i pipe:0 -c:v libx264 -c:a aac salida.mp4 (volcar a ffmpeg para transcodificar en tiempo real sin guardar FLV)
+$ rtmpdump -r "rtmp://servidor.com/app/stream" -o video.flv -e (reanudar una descarga interrumpida)
+$ rtmpdump -r "rtmp://servidor.com/live/canal" -B 60 -o muestra.flv (capturar solo los primeros 60 segundos)
+$ rtmpdump -r "rtmpe://servidor.com/app/stream" -o seguro.flv (stream cifrado [RTMPE / RTMPS])
+$ rtmpdump -r "rtmps://servidor.com/app/stream" -o seguro.flv (o con TLS)
+$ rtmpgw -r "rtmp://servidor.com/app/stream" -p 19234 (arranca el gateway, por defecto en el puerto 19234, después, abrir en VLC o cualquier reproductor http://localhost:19234/)
+$ rtmpgw -r "rtmp://live.servidor.com/live" -y "stream_clave" -n 0.0.0.0 -p 8080 -B 3600 (ejemplo con más opciones, -n 0.0.0.0 permite conexiones desde otros equipos de la red)
+$ rtmpsrv (escucha en el puerto 1935 por defecto)
+$ rtmpsuck (intercepta toda la comunicación, muestra los datos de conexión y además graba el stream automáticamente en un archivo FLV. Escucha en el puerto 1935)
+# iptables -t nat -A OUTPUT -p tcp --dport 1935 -j REDIRECT --to-ports 1935 (redirigir tráfico con iptables)
+Nota.- rtmpdump es principalmente una herramienta histórica. RTMP cayó en desuso con la muerte de Flash Player el 2020 y hoy la mayoría de plataformas usan HLS o DASH. Sin embargo, aún se usa en retransmisiones en vivo como OBS Studio usa RTMP para enviar a Twitch/YouTube y en sistemas de CCTV y streaming industrial.
+
+
 rtorrent
 Descarga de archivos a partir de torrents
 $ rtorrent url.torrent
+
+
+rtpengine
+[rtpengine-daemon rtpengine-kernel-dkms rtpengine-perftest rtpengine-perftest-data rtpengine-recording-daemon rtpengine-utils]. Proxy de medios [media proxy] de alto rendimiento para tráfico RTP y otros protocolos multimedia basados en UDP. Está diseñado principalmente para trabajar junto con proxies SIP como Kamailio o OpenSIPS, actuando como un reemplazo avanzado de herramientas como rtpproxy. Soporta funciones como relay de RTP, transcodificación, bridging SRTP/DTLS, manejo de ICE, grabación de llamadas, NAT traversal, etc. Al instalar el paquete, se instalan todos los rtpengine-* con los ejecutables tpengine, rtpengine-daemon, rtpengine-kernel-dkms, rtpengine-perftest, rtpengine-perftest-data, rtpengine-recording-daemon y rtpengine-utils.
+# systemctl status rtpengine (ver el estado del servicio)
+$ rtpengine --table=0 --interface=10.0.0.10 --listen-ng=127.0.0.1:2223 --listen-udp=127.0.0.1:22222 --tos=184 --pidfile=/run/rtpengine.pid --no-fallback
+  	--table=N --> ID de tabla del módulo kernel. 0 por defecto.
+	--interface=IP o nombre/IP --> Direcciones locales para RTP. Obligatorio  [--interface=192.0.2.10 o --interface=pub/203.0.113.10]
+	--listen-ng=IP:puerto --> Para el protocolo NG avanzado que usa Kamailio.
+	--listen-udp=IP:puerto --> Para compatibilidad con módulo rtpproxy de Kamailio.
+	--tos=184 --> Valor TOS/DSCP recomendado para voz.
+	--no-fallback --> No caer a modo solo userspace si falla el módulo kernel.
+	--port-min=30000 --port-max=40000 --> Rango de puertos RTP.
+$ rtpengine-ctl -h (ver comandos disponibles)
+$ rtpengine-ctl stats (estadísticas generales)
+$ rtpengine-ctl list (lista de llamadas activas)
+$ rtpengine-ctl call <call-id> (información detallada de una llamada)
+$ rtpengine-ctl delete <call-id> (terminar una llamada)<
+$ rtpengine-perftest (probar rendimiento de transcodificación)
+$ rtpengine-recording (grabar llamadas, necesita activarse por llamada vía NG protocol con start recording)
 
 
 rt-tests
