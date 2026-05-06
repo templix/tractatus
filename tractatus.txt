@@ -51615,6 +51615,20 @@ En la mayoría de distribuciones modernas no es necesario modificar este archivo
 # rtkitcrl --exit (finalizar la ejecución del demonio RealtimeKit)
 
 
+rtl-433
+Receptor y decodificador de datos RF genérico que transmite en 433,9 MHz para dispositivos de banda ISM que utilizan RTL-SDR y SoapySDR como los sensores de temperatura.
+$ rtl_433 (utiliza el primer dispositivo encontrado y escucha a 433,92 MHz con una frecuencia de muestreo de 250 kHz)
+$ rtl_433 -C si (modo de recepción predeterminado. Convierte las unidades al sistema métrico)
+$ rtl_433 -f 868M -s 1024k (escucha a 868 MHz con una frecuencia de muestreo de 1024 kHz)
+$ rtl_433 -M hires -M level (informa marcas de tiempo con precisión de microsegundos y agrega niveles de recepción, dependiendo de la ganancia)
+$ rtl_433 -R 1 -R 8 -R 43 (habilita solo decodificadores específicos para los dispositivos deseados)
+$ rtl_433 -A (habilita el analizador de pulsos. Resume los tiempos de pulsos, intervalos y períodos. Se puede usar con -R 0 para deshabilitar los decodificadores)
+$ rtl_433 -S all -T 120 (guarda todas las señales detectadas [g###_###M_###k.cu8]. Se ejecuta durante 2 minutos)
+$ rtl_433 -K FILE -r nombre_archivo (lee un archivo de datos guardado en lugar de recibir datos en vivo. Etiqueta la salida con nombres de archivo)
+$ rtl_433 -F json -M utc | mosquitto_pub -t home/rtl_433 -l (enviará la salida a la red como mensajes MQTT en formato JSON)
+$ rtl_433 -f 433.53M -f 434.02M -H 15 (sondeará dos frecuencias con un intervalo de salto de 15 segundos)
+
+
 rtl-sdr
 Receptor de radio analógica o digital definido por software para Realtek RTL2832U. Es un software receptor de radio definido por software [SDR] para ciertos adaptadores USB DVB-T/DAB en el chip Realtek RTL2832U. Consta de las siguientes aplicaciones: rtl_adsb [Decodificación de ADS-B [Air Data Service Broadcast]], rtl_biast [Control de temperatura del biaseador], rtl_eeprom [Leer/escritura EEPROM del chip RTL2832U], rtl_fm, rtl_power, rtl_sdr, rtl_tcp y rtl_test.
 $ rtl-sdr -l (verificar si el dispositivo está conectado)
