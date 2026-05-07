@@ -51736,6 +51736,18 @@ Una vez que el flujo esté siendo transmitido al servidor, se podrá reproducir 
 $ vlc rtsp://12.34.56.78/abc (VLC para reproducir el flujo)
 
 
+rttool
+Es un conversor de RT [Ruby Table] a varios formatos y una de las interfaces del formateador para RT. Permite convertir tablas en formato RT a otros formatos como HTML y texto plano. El archivo mínimo ruby para pruebas es:
+$ nano tabla.rt
+       | Nombre | Edad |
+       | Ana    | 23   |
+       | Luis   | 40   |
+$ rt2 -r rt/rt2html-lib.rb tabla.rt > tabla.html (crea tabla.html que puede abrirse con el navegador)
+$ cat tabla.rt | rt2 -r rt/rt2html-lib.rb (para ver la salida por pantalla)
+$ rt2 -r rt/rt2txt-lib.rb tabla.rt > tabla.txt (crea tabla.txt)
+Nota.- Es una herramienta bastante antigua del ecosistema Ruby/RD [Ruby Document format]
+
+
 ruby
 Lenguaje de programación orientado a objetos. Ver irb.
 Instalación:
