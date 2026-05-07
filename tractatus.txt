@@ -51760,6 +51760,13 @@ rubberband-vamp
 Contiene los plugins Vamp para rubberband [ver]:  increments [Incrementos de salida] incremento de tiempo de salida para cada paso de entrada, aggregate_increments [Incrementos de salida acumulados] incrementos de tiempo de salida acumulados, divergence [Divergencia respecto a la linealidad] diferencia entre el tiempo de salida real y el tiempo de salida para un estiramiento lineal teórico, phaseresetdf [Función de detección de reinicio de fase] curva cuyos picos se utilizan para identificar transitorios en los puntos de reinicio de fase, smoothedphaseresetdf [Función de detección de reinicio de fase suavizada] curva de reinicio de fase suavizada para la detección de picos phaseresetpoints [Puntos de reinicio de fase] puntos estimados como transitorios en los que se produce el reinicio de fase y timesyncpoints [Puntos de sincronización temporal] puntos clave que el programa de estiramiento busca colocar con una sincronización precisa.
 
 
+rubiks
+colección de 3 solucionadores del cubo de Rubik. "rubiks_optimal" de Michael Reid utiliza tablas precalculadas para encontrar una solución óptima para el cubo de Rubik 3x3x3. "rubiks_dikcube"  de Dik T. Winter utiliza el algoritmo de Kociemba para encontrar iterativamente una solución corta para el cubo 3x3x3 y "rubiks_cubex" de Eric Dietz ofrece un solucionador rápido, aunque no óptimo, para el cubo 3x3x3.
+$ rubiks_cubex random (de forma aleatoria)
+$ rubiks_dikcube -t (se introducirá una configuración desde la entrada estándar)
+$ rubiks_optimal
+
+
 ruby
 Lenguaje de programación orientado a objetos. Ver irb.
 Instalación:
