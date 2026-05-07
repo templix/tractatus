@@ -51748,6 +51748,12 @@ $ rt2 -r rt/rt2txt-lib.rb tabla.rt > tabla.txt (crea tabla.txt)
 Nota.- Es una herramienta bastante antigua del ecosistema Ruby/RD [Ruby Document format]
 
 
+rubber
+Sistema automatizado para la compilación de documentos LaTeX. Se basa en una rutina que ejecuta solo las compilaciones necesarias. Su función principal es compilar documentos LaTeX [.tex] en formatos como PDF, asegurando que todos los procesos necesarios como múltiples compilaciones, procesamiento de bibliografías con BibTeX o Biber, índices, etc. se realicen automáticamente según sea necesario.
+$ rubber --pdf documento.tex (compilar el documento, manejando automáticamente las múltiples pasadas si son necesarias)
+$ rubber --pdf --bibtex --quiet documento.tex (compilar un documento, usando BibTeX y generando PDF, con salida silenciosa)
+
+
 rubberband
 Herramienta que permite cambiar el tempo y el tono de una grabación de audio de forma independiente.
 $ rubberband input.wav out_down.wav -p -2 -t 1.1 (bajar 2 semitonos y bajar la velocidad 10%)
