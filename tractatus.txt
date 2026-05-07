@@ -60683,6 +60683,66 @@ y desclicar la linea
 	set bell-style none)
 
 
+xsltproc
+Herramienta que aplica hojas de estilo XSLT a documentos XML para transformarlos en otros formatos: XML, HTML, texto plano, etc.
+1.-
+Ejemplo práctico de transformación XML a HTML básica
+$ nano datos.xml
+       <?xml version="1.0"?>
+       <libros>
+         <libro>
+           <titulo>El Quijote</titulo>
+           <autor>Cervantes</autor>
+         </libro>
+         <libro>
+           <titulo>Cien años de soledad</titulo>
+           <autor>García Márquez</autor>
+         </libro>
+       </libros>
+$ nano libros.xsl
+       <?xml version="1.0"?>
+       <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+         <xsl:template match="/">
+           <html>
+             <body>
+               <h2>Listado de libros</h2>
+               <ul>
+                 <xsl:for-each select="libros/libro">
+                   <li>
+                     <xsl:value-of select="titulo"/> - <xsl:value-of select="autor"/>
+                   </li>
+                 </xsl:for-each>
+               </ul>
+             </body>
+           </html>
+         </xsl:template>
+       </xsl:stylesheet>
+$ xsltproc -o libros.html libros.xsl datos.xml (genera un HTML con los archivos anteriores)
+$ xsltproc libros.xsl datos.xml (lo muestra en pantalla)
+2.-
+Transformación XML a XML [reestructurar] con datos.xml anterior)
+$ nano reorder.xsl
+       <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+         <xsl:output method="xml" indent="yes"/>
+         <xsl:template match="libros">
+           <catalogo>
+             <xsl:apply-templates select="libro"/>
+           </catalogo>
+         </xsl:template>
+         <xsl:template match="libro">
+           <item>
+             <nombre><xsl:value-of select="titulo"/></nombre>
+             <escritor><xsl:value-of select="autor"/></escritor>
+           </item>
+         </xsl:template>
+       </xsl:stylesheet>
+$ xsltproc reorder.xsl datos.xml (muestra la salida en pantalla)
+$ xsltproc -o libros.csv libros.xsl datos.xml (xml a texto plano [csv])
+$ xsltproc --nonet libros.xsl datos.xml (no permite acceder a la red)
+$ xsltproc --debug libros.xsl datos.xml (ver el árbol XML antes de transformar)
+$ xmllint --valid datos.xml (validar un XML sin transformar con el comando xmllint [ver])
+
+
 xss-lock
 Herramienta para escuchar eventos XScreenSaver para suspender, hibernar, bloquear o desbloquear sesión con las acciones apropiadas.
 $ nano ~/.profile
