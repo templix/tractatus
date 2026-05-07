@@ -51711,6 +51711,31 @@ $ rtpengine-perftest (probar rendimiento de transcodificación)
 $ rtpengine-recording (grabar llamadas, necesita activarse por llamada vía NG protocol con start recording)
 
 
+rtr-tools
+Contiene dos utilidades basadas en la librería RTRlib, rtrclient y rpki-rov. Ambas sirven para interactuar con servidores de caché RPKI mediante el protocolo RPKI-RTR [RFC 6810 y RFC 8210], que distribuye los ROA [Route Origin Authorization] validados. Si no se dispone de un validador RPKI propio, puede usarse estos servidores de prueba: rpki-validator.realmv6.org:8282 y rpki-cache.netd.cs.tu-dresden.de:3323
+$ rtrclient tcp rpki-validator.realmv6.org 8282 (conexión TCP a un servidor público e imprime en tiempo real la información del protocolo y los ROA recibidos)
+$ rtrclient tcp localhost 3323 (conexión TCP a un validador local [Routinator])
+$ rpki-rov rpki-validator.realmv6.org 8282 (iniciar sesión interactiva con un servidor público)
+  	   > 93.175.146.0 24 12654 (validar un prefijo dentro de la sesión interactiva)
+	   93.175.146.0 24 12654|196615 93.175.147.0 24 24|2
+Interpretación de resultados:
+	   0 --> Válido. el AS está autorizado para anunciar ese prefijo
+	   1 --> No encontrado, no existe ROA para ese prefijo
+	   2 --> Inválido, el AS no está autorizado para ese prefijo
+$ rtrclient tcp localhost 3323 | tee roas.txt (verificar qué ROA conoce un validador)
+$ rpki-rov localhost 3323 (auditar si los prefijos están correctamente registrados)
+$ rtrclient tcp rpki-validator.realmv6.org 8282 | grep "^[+-]" (monitoreo en tiempo real de cambios RPKI)
+
+
+rtsp-server-perl
+Servidor RTSP/RTP de transmisión de medios ligero desarrollado en Perl diseñado para aceptar diversas fuentes de audio y video, conectarse a ellas y transmitir los flujos a través de una red.
+$ perl rtsp-server.pl (iniciará el servidor y comenzará a escuchar conexiones en el puerto 554, el puerto estándar para RTSP y en el puerto 5545 para las fuentes de los flujos)
+Para enviar un flujo de video al servidor, se puede utilizar cualquier cliente que soporte los métodos ANNOUNCE y RECORD de RTSP, como FFmpeg.
+$ ffmpeg -re -i /input.avi -f rtsp -muxdelay 0.1 rtsp://12.34.56.78:5545/abc (enviar archivo de video local "input.avi" al servidor 12.34.56.78 puerto 5545 y "abc" es el nombre del flujo)
+Una vez que el flujo esté siendo transmitido al servidor, se podrá reproducir utilizando cualquier reproductor de medios que soporte RTSP.
+$ vlc rtsp://12.34.56.78/abc (VLC para reproducir el flujo)
+
+
 ruby
 Lenguaje de programación orientado a objetos. Ver irb.
 Instalación:
