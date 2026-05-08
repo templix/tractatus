@@ -51773,6 +51773,16 @@ $ rubiks_dikcube -t (se introducirá una configuración desde la entrada estánd
 $ rubiks_optimal
 
 
+rubocop
+Herramienta de análisis estático de código para el lenguaje de programación Ruby. Su propósito principal es ayudar a los desarrolladores a escribir código Ruby que siga las mejores prácticas y directrices de estilo establecidas en la comunidad Ruby.
+$ rubocop archivo.rb (analizará el archivo y mostrará cualquier infracción de estilo o problema de código detectado)
+$ rubocop ~/dir_ruby/ (analizará todos los archivos Ruby dentro del directorio especificado y sus subdirectorios)
+$ rubocop . (ejecutar en el directorio raíz de un proyecto Rails, analizará todos los archivos Ruby relevantes en el proyecto)
+$ rubocop -a (aplicar correcciones automáticas a los problemas detectados siempre que sea seguro hacerlo)
+$ rubocop --auto-gen-config (generar un archivo .rubocop.yml con las configuraciones necesarias para excluir los problemas detectados en el proyecto)
+$ rubocop -c .rubocop.yml (ejecutar con un archivo de configuración personalizado)
+
+
 ruby
 Lenguaje de programación orientado a objetos. Ver irb.
 Instalación:
@@ -51793,6 +51803,15 @@ ruby-notify
 El comando notify es un envoltorio para notify-send. Ambos son equivalentes.
 $ notify "Linux es genial"
 $ notify-send "linux es genial"
+
+
+rudof
+Herramienta para el procesamiento y validación de datos en el ecosistema RDF [Resource Description Framework]. Implementa tecnologías como Shape Expressions [ShEx], SHACL, DCTAP y otras, permitiendo validar datos RDF representados en diferentes sintaxis como Turtle y NTriples, así como datos disponibles a través de puntos finales SPARQL como Wikidata.
+$ rudof validate --input data.ttl --schema schema.shex (valida los datos RDF en el archivo data.ttl utilizando el esquema definido en schema.shex en Turtle)
+$ rudof convert --input data.nt --output data.ttl --format turtle (convierte los datos RDF del archivo data.nt a formato Turtle y guarda el resultado en data.ttl)
+$ rudof visualize --input schema.shex --output schema.uml (genera una visualización UML del esquema definido en schema.shex y guarda el resultado en schema.uml)
+$ rudof neighborhood --input data.ttl --node http://example.org/node (obtiene información sobre el vecindario [arcos entrantes y salientes] del nodo especificado en el archivo data.ttl)
+$ rudof validate --sparql-endpoint https://query.wikidata.org/sparql --query query.sparql --schema schema.shex (valida los datos RDF obtenidos a través de un punto final SPARQL utilizando el esquema schema.shex y la consulta SPARQL query.sparql)
 
 
 runit
