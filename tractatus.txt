@@ -51814,6 +51814,17 @@ $ rudof neighborhood --input data.ttl --node http://example.org/node (obtiene in
 $ rudof validate --sparql-endpoint https://query.wikidata.org/sparql --query query.sparql --schema schema.shex (valida los datos RDF obtenidos a través de un punto final SPARQL utilizando el esquema schema.shex y la consulta SPARQL query.sparql)
 
 
+rumur
+Herramienta para verificar modelos de máquinas de estados finitos [FSM] especificados en el lenguaje de modelado Murphi. Murphi es un lenguaje de modelado de software utilizado para especificar sistemas de software, que pueden incluir máquinas de estados finitos y otros modelos de software. Incluye los ejecutables murphi-format, murphi2c, murphi2murphi, murphi2smv, murphi2uclid, murphi2xml y rumur-run
+$ murphi-format my_model.murphi > my_model_formatted.txt (convierte un archivo Murphi a un formato legible por humanos)
+$ murphi2c my_model.murphi > my_model.c (genera código C a partir de un modelo Murphi)
+$ murphi2murphi my_model.murphi > my_model_adapted.murphi (convierte un modelo Murphi a otro formato de Murphi)
+$ murphi2smv my_model.murphi > my_model_smv.msm (genera un modelo SMV [Specification and Model Validation] a partir de un modelo Murphi)
+$ murphi2uclid my_model.murphi > my_model_uclid.mud (genera un modelo UCLID [Unified Code Logic Identifier] a partir de un modelo Murphi)
+$ murphi2xml my_model.murphi > my_model_xml.xml (genera un modelo XML a partir de un modelo Murphi)
+$ rumur-run my_model.murphi (ejecuta un modelo Murphi para verificar su corrección)
+
+
 runit
 Colección de herramientas para proporcionar supervisión y gestión de servicios en el sistema: iniciar y detener servicios y supervisar los daemons mientras se ejecutan, enviar señales a daemons de servicio sin la necesidad de archivos pid, registro con rotación automática de archivos de registro y límites de espacio en disco. Consta de las siguientes aplicaciones: chpst [ver], cpsv, runsv [se ejecuta dentro de un directorio de servicio, donde controlará y mantendrá el servicio en ejecución. runsv se ocupa de iniciar, detener, reiniciar el servicio y también de monitorizar su estado], runsvdir [se encarga de supervisar varios servicios a la vez], sv [ver], svlogd, mk-runscript, runsvchdir, update-service, utmpset.
 $ svlogd /home/USER/Documentos/ (daemon que activa la monitorización del directorio especificado)
