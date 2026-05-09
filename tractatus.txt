@@ -51871,7 +51871,7 @@ Conjunto de herramientas para la supervisión y gestión de servicios a nivel de
 Cambiar de systemd es algo más complejo, especialmente cuando se utiliza un entorno de escritorio u otros paquetes que dependen de libpam-systemd. Existe una alternativa independiente llamada libpam-elogind, pero esta depende de libelogind, lo que a su vez genera un conflicto con libsystemd por lo que systemd se negará a eliminarse si systemd es el sistema de inicio actual y también depende de libsystemd. Como resultado, apt mostrará un error o sugerirá que se elimine cualquier paquete que dependa de libpam-systemd. En ese caso, siguir una de las dos opciones siguientes.
 1.-
 # apt-get install --no-install-recommends runit getty-run
-Al reiniciar el sistema, en la pantalla de grub, pulsar la "E" para editar la entrada del menú predeterminada y añadir a la linea que empieza por "linux" la vatiable del kernel "ini" para que quede:
+Al reiniciar el sistema, en la pantalla de grub, pulsar la "E" para editar la entrada del menú predeterminada y añadir a la linea que empieza por "linux" la vatiable del kernel "init" para que quede:
  	 linux /boot/vmlinuz-5.7.0-1-amd64 root=UUID=580a4d9-... ro quiet init=/lib/runi/runit-init
 Luego, pulsar "Ctrl+X" para arrancar o "B" si aún se usa Grub Legacy para iniciar el sistema. Los cambios realizados de esta forma no son permanentes, así que si algo sale mal, siempre se puede reiniciar con la configuración de inicio anterior que funcionaba correctamente. Una vez que ha arrancado correctamente con runit como init, se puede proceder a instalar el paquete runit-init.
 # apt-get --allow-remove-essential remove init
