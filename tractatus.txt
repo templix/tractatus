@@ -51825,6 +51825,20 @@ $ murphi2xml my_model.murphi > my_model_xml.xml (genera un modelo XML a partir d
 $ rumur-run my_model.murphi (ejecuta un modelo Murphi para verificar su corrección)
 
 
+runc
+cliente para ejecutar aplicaciones empaquetadas según el formato OCI [Open Container Initiative]. Permite ejecutar imágenes de contenedores que siguen este estándar, independientemente de si la imagen se creó con Docker, Buildah, Podman u otras herramientas que generen imágenes OCI. Comparado con Docker, runc ofrece una alternativa más minimalista y de bajo nivel para ejecutar contenedores.
+# runc run miimagen (ejecutar el contenedor disponible en el directorio actual)
+# runc run --privileged miimagen (ejecutar un contenedor en modo "privilegiado" equivalente a --privileged en Docker)
+# runc run --name micontenedor miimagen (ejecutar un contenedor con un nombre específico)
+# runc run --volume /mi/directorio:/mi/directorio miimagen (ejecutar un contenedor con un volumen)
+# runc list (ver información sobre un contenedor en ejecución o detenido)
+# runc inspect ID (lo mismo con la ID o nombre del contenedor)
+# runc stop ID (detener un contenedor en ejecución. Tambien con el nombre del contenedor)
+# runc delete ID (eliminar un contenedor detenido- Tambien con el nombre)
+# runc delete --force ID (eliminar un contenedor en ejecución, lo detendrá primero. Tambien con el nombre)
+Nota.- No todas las imágenes de contenedor son compatibles con runc.
+
+
 runit
 Colección de herramientas para proporcionar supervisión y gestión de servicios en el sistema: iniciar y detener servicios y supervisar los daemons mientras se ejecutan, enviar señales a daemons de servicio sin la necesidad de archivos pid, registro con rotación automática de archivos de registro y límites de espacio en disco. Consta de las siguientes aplicaciones: chpst [ver], cpsv, runsv [se ejecuta dentro de un directorio de servicio, donde controlará y mantendrá el servicio en ejecución. runsv se ocupa de iniciar, detener, reiniciar el servicio y también de monitorizar su estado], runsvdir [se encarga de supervisar varios servicios a la vez], sv [ver], svlogd, mk-runscript, runsvchdir, update-service, utmpset.
 $ svlogd /home/USER/Documentos/ (daemon que activa la monitorización del directorio especificado)
