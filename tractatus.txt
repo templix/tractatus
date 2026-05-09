@@ -51863,6 +51863,30 @@ $ svlogd /home/USER/Documentos/ (daemon que activa la monitorización del direct
 # svlogd -tt -b 10000000 -l 5 /var/log/un_servicio (rotación de logs con un límite de tamaño de 10 MB y que guarde hasta 5 archivos de logs antiguos)
 
 
+runit-init
+Conjunto de herramientas para la supervisión y gestión de servicios a nivel de sistema. A diferencia de sysv init, no solo se encarga de iniciar y detener servicios, sino que también supervisa los demonios de servicio mientras se ejecutan. Entre otras cosas, proporciona una interfaz fiable para enviar señales a los demonios de servicio sin necesidad de archivos PID, y un sistema de registro con rotación automática de archivos de registro y límites de espacio en disco. Este paquete proporciona /sbin/init como enlace simbólico a runit-init para que el sistema arranque automáticamente con runit; también proporciona enlaces simbólicos de compatibilidad (shutdown, halt, reboot, poweroff) necesarios para entornos de escritorio y otras herramientas del sistema.
+# apt-get --allow-remove-essential remove init (para instalar runit-init, eliminar primero el metapackage init)
+# apt-get install runit-init (instalar el paquete)
+# shutdown -r now (reiniciar el sistema)
+Cambiar de systemd es algo más complejo, especialmente cuando se utiliza un entorno de escritorio u otros paquetes que dependen de libpam-systemd. Existe una alternativa independiente llamada libpam-elogind, pero esta depende de libelogind, lo que a su vez genera un conflicto con libsystemd por lo que systemd se negará a eliminarse si systemd es el sistema de inicio actual y también depende de libsystemd. Como resultado, apt mostrará un error o sugerirá que se elimine cualquier paquete que dependa de libpam-systemd. En ese caso, siguir una de las dos opciones siguientes.
+1.-
+# apt-get install --no-install-recommends runit getty-run
+Al reiniciar el sistema, en la pantalla de grub, pulsar la "E" para editar la entrada del menú predeterminada y añadir a la linea que empieza por "linux" la vatiable del kernel "ini" para que quede:
+ 	 linux /boot/vmlinuz-5.7.0-1-amd64 root=UUID=580a4d9-... ro quiet init=/lib/runi/runit-init
+Luego, pulsar "Ctrl+X" para arrancar o "B" si aún se usa Grub Legacy para iniciar el sistema. Los cambios realizados de esta forma no son permanentes, así que si algo sale mal, siempre se puede reiniciar con la configuración de inicio anterior que funcionaba correctamente. Una vez que ha arrancado correctamente con runit como init, se puede proceder a instalar el paquete runit-init.
+# apt-get --allow-remove-essential remove init
+# apt-get install runit-init
+# apt-get install elogind libpam-elogind libelogind0
+# shutdown -r now (reiniciar el sistema)
+2.-
+# apt-get --allow-remove-essential remove init (eliminar el metapackage init)
+# apt clean (borrar caché de apt)
+# apt-get --download-only install runit-init libpam-elogind (descargar todos los paquetes necesarios)
+# systemctl rescue (cambiar al modo usuario único)
+# apt install /var/cache/apt/archives/*.deb (instalar runit-init y todos los demás paquetes necesarios)
+# shutdown -r now (reiniciar el sistema)
+
+
 runlevel
 conocer el nivel de ejecución actual del sistema [gráfico, monousuario...]
 $ runlevel
