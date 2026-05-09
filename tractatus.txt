@@ -51825,6 +51825,15 @@ $ murphi2xml my_model.murphi > my_model_xml.xml (genera un modelo XML a partir d
 $ rumur-run my_model.murphi (ejecuta un modelo Murphi para verificar su corrección)
 
 
+runawk
+Envoltorio para el intérprete AWK que implementa un sistema de módulos y facilita la escritura de programas AWK independientes. Este paquete también proporciona más de 40 módulos que están disponibles en /usr/share/runawk/ y que implementan las funciones más comunes de cadenas, matrices y del sistema. Incluye las herramientas alt_getopt y alt_getopt.sh. Para activar módulos se añaden al script con la directiva "#use":
+	   #!/usr/bin/env runawk
+	   #use "abs.awk"
+	   #use "max.awk"
+	   ...
+$ runawk -f abs.awk programa.awk (mismo resultado que con la directiva #use si no se coloca en "programa.awk")
+
+
 runc
 cliente para ejecutar aplicaciones empaquetadas según el formato OCI [Open Container Initiative]. Permite ejecutar imágenes de contenedores que siguen este estándar, independientemente de si la imagen se creó con Docker, Buildah, Podman u otras herramientas que generen imágenes OCI. Comparado con Docker, runc ofrece una alternativa más minimalista y de bajo nivel para ejecutar contenedores.
 # runc run miimagen (ejecutar el contenedor disponible en el directorio actual)
