@@ -51923,6 +51923,13 @@ $ run-parts --reverse scritps (los ejecuta en orden inverso)
 $ run-parts --exit-on-error scripts (salir cuando muestre un código de salida distinto de cero)
 
 
+runoverssh
+Ejecuta comando o scripts de Bash a través de SSH en uno o más hosts.
+$ runoverssh -h host1 -c "ls -l" (ejecutar un comando en un host remoto)
+$ runoverssh -h host1,host2,host3 -f script.sh (ejecutar un script en múltiples hosts)
+$ runoverssh -h host1,host2 -c "echo 'Hola Mundo'" (ejecutar un comando con argumentos en múltiples hosts)
+
+
 ruplacer
 Reemplazar texto en archivos o directorios.
 $ ruplacer 'texto a reemplazar' 'texto de reemplazo' archivo
