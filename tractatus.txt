@@ -51887,6 +51887,24 @@ Luego, pulsar "Ctrl+X" para arrancar o "B" si aún se usa Grub Legacy para inici
 # shutdown -r now (reiniciar el sistema)
 
 
+rungetty
+Un getty de consola minimalista que puede ejecutar cualquier programa, no solo el login de inicio de sesión. Si se usa un programa diferente al de inicio de sesión, normalmente se ejecuta como nobody:nogroup o con el usuario/grupo especificado en la línea de comandos. getty es el proceso que "atiende" una consola de texto y prepara la pantalla para que se pueda iniciar sesión.
+$ rungetty --autologin USER tty4 (autologin en tty4 si la configuración del sistema lo permite)
+$ rungetty -u nobody -g nogroup tty3 /usr/bin/ip a (que no lance login en la tty3, sino "ip a", y lo ejecute con permisos restringidos sin indicar usuario/grupo)
+$ rungetty --autologin USER -u USER -g GRUPO_USER tty3 /usr/bin/ip a (ejecutar "ip a" en la tty3 con los datos del usuario del sistema)
+$ rungetty -d 2 --autologin USER -u USER -g GRUPO_USER tty3 /usr/bin/who (esperar 2 segundo a lanzar el comando)
+Con systemd lo más limpio es crear una override de getty@tty4.service y sustituir agetty por rungetty para entrar directamente como usuario en tty4.
+# systemctl edit getty@tty4.service
+Y añadir:
+	[Service]
+	ExecStart=
+	ExecStart=-/sbin/rungetty --autologin USER --noclear tty4
+Borrar primero "ExecStart=", luego redefinirlo, método normal de systemd para sobrescribir una unidad sin tocar el archivo original y --noclear evita limpiar la pantalla al iniciar..
+# systemctl daemon-reload (recargar el override)
+# systemctl restart getty@tty1.service (reiniciar)
+# journalctl -u getty@tty4.service -b (revisar el log del servicio)
+
+
 runlevel
 conocer el nivel de ejecución actual del sistema [gráfico, monousuario...]
 $ runlevel
