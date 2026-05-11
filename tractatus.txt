@@ -11787,10 +11787,14 @@ $ diffmon
 
 
 diffoscope
-Comparar de forma recursiva archivos de muchos tipos [binarios, tarbals, imágenes ISO, pdfs...]. Las diferencias se pueden mostrar como texto o HTML. Los diversos comparadores dependen de comandos externos.
-$ diffoscope --list-tools (lista los comandos expernos que se precisan)
-$ diffoscope --html salida.html archivo1.txt archivo2.txt
-$ diffoscope --text salida.txt archivo1.txt archivo2.txt
+Comparar de forma recursiva archivos de muchos tipos [binarios, tarbals, imágenes ISO, pdfs, directorios...]. Los diversos comparadores dependen de comandos externos.
+$ diffoscope --debug paquete1.deb paquete2.deb (detectar diferencias byte a byte entre compilaciones y mostrando mensajes de depuración)
+$ diffoscope --no-default-limits --html salida.html file1 file2 (deshabilita la mayoría de los límites de salida y de cálculo de diferencias predeterminados y salida en html)
+$ diffoscope --txt salida.txt file1 file2 (con salida en texto plano. Otras opciones:  --restructured-text, --json y --markdown)
+$ diffoscopa --html-dir file1 file2 (escribe los informes HTML de varios archivos en el directorio especificado)
+$ diffoscope --profile file1 file2 (muestra la información de perfilado por pantalla)
+$ diffoscope --list-tools debian (mostrar las herramientas externas necesarias. Las opciones son arch, debian, FreeBSD, guix. Si no se especifica en la que se lanza la aplicación)
+$ diffoscope --list-missing-tools (mostrar las herramientas externas faltantes)
 
 
 diffpdf
@@ -51825,6 +51829,14 @@ $ murphi2xml my_model.murphi > my_model_xml.xml (genera un modelo XML a partir d
 $ rumur-run my_model.murphi (ejecuta un modelo Murphi para verificar su corrección)
 
 
+run-parts
+[debianutils]. Ejecuta todos los ejecutables que se encuentran en el directorio especificado.
+$ run-parts --list --regex '.*sh$' scripts (lista todos los .sh del directorio "scripts")
+$ run-parts --test --regex '^p.*sh$' scripts (lista los que se ejecutacian del directorio "scripts", que empiecen por "p" y terminen con "sh" pero no los ejecuta realmente)
+$ run-parts --reverse scritps (los ejecuta en orden inverso)
+$ run-parts --exit-on-error scripts (salir cuando muestre un código de salida distinto de cero)
+
+
 runawk
 Envoltorio para el intérprete AWK que implementa un sistema de módulos y facilita la escritura de programas AWK independientes. Este paquete también proporciona más de 40 módulos que están disponibles en /usr/share/runawk/ y que implementan las funciones más comunes de cadenas, matrices y del sistema. Incluye las herramientas alt_getopt y alt_getopt.sh. Para activar módulos se añaden al script con la directiva "#use":
 	   #!/usr/bin/env runawk
@@ -51915,19 +51927,56 @@ Herramienta que ejecuta un programa especificado y cuando se cierra, muestra en 
 $ runlim -o archivo chromium (guarda los datos en "archivo")
 
 
-run-parts
-[debianutils]. Ejecuta todos los ejecutables que se encuentran en el directorio especificado.
-$ run-parts --list --regex '.*sh$' scripts (lista todos los .sh del directorio "scripts")
-$ run-parts --test --regex '^p.*sh$' scripts (lista los que se ejecutacian del directorio "scripts", que empiecen por "p" y terminen con "sh" pero no los ejecuta realmente)
-$ run-parts --reverse scritps (los ejecuta en orden inverso)
-$ run-parts --exit-on-error scripts (salir cuando muestre un código de salida distinto de cero)
-
-
 runoverssh
 Ejecuta comando o scripts de Bash a través de SSH en uno o más hosts.
 $ runoverssh -h host1 -c "ls -l" (ejecutar un comando en un host remoto)
 $ runoverssh -h host1,host2,host3 -f script.sh (ejecutar un script en múltiples hosts)
 $ runoverssh -h host1,host2 -c "echo 'Hola Mundo'" (ejecutar un comando con argumentos en múltiples hosts)
+
+
+runsc
+Es el runtime de contenedores de gVisor, desarrollado por Google. Su propósito principal es proporcionar una capa extra de seguridad entre los procesos del contenedor y el kernel del host, implementando un kernel de usuario, en Go, que intercepta las llamadas al sistema antes de que lleguen al kernel real. La diferencia con runc [ver], el runtime estándar, es que runc deja que los procesos del contenedor llamen directamente al kernel del host. runsc interpone un kernel en espacio de usuario que reimplementa las syscalls, reduciendo drásticamente la superficie de ataque.
+# runsc install (integrar con Docker añadiendo "runsc" como runtime disponible)
+# systemctl restart docker (reiniciar docker
+# docker info | grep -A5 Runtimes (verificar que Docker lo reconoce)
+$ docker run --runtime=runsc ubuntu uname -r (ejecutar un contenedor con aislamiento gVisor. Una vez instalado como runtime de Docker, se usa con --runtime=runsc. Se verá algo como 4.4.0, el kernel simulado de gVisor, no el del host)
+$ docker run --runtime=runsc -p 8080:80 nginx (Nginx dentro de gVisor)
+$ docker run --runtime=runsc -it debian bash (contenedor interactivo)
+$ docker run --runtime=runsc ubuntu cat /proc/version (comprobar que el aislamiento funciona, mostrando la versión del kernel de gVisor, no la del host)
+$ runsc create --bundle /tmp/mi-contenedor mi-contenedor (crear sin arrancar, útil para preparar el entorno)
+$ runsc start mi-contenedor (arrancar el proceso principal)
+$ runsc state mi-contenedor (ver estado)
+$ runsc exec mi-contenedor /bin/bash (ejecutar un proceso adicional dentro del contenedor)
+$ runsc exec mi-contenedor ps aux
+$ runsc exec mi-contenedor ls /etc
+$ runsc exec --user 1000 mi-contenedor whoami (con usuario específico)
+$ runsc kill mi-contenedor TERM (parar gracefully [SIGTERM])
+$ runsc kill mi-contenedor KILL (forzar parada)
+$ runsc kill mi-contenedor 9 (señal numérica)
+$ runsc pause mi-contenedor (congelar todos los procesos)
+$ runsc resume mi-contenedor (reanudar)
+$ runsc events --interval 5 mi-contenedor (estadísticas en tiempo real [cada 5 segundos])
+$ runsc events mi-contenedor (esperar evento OOM)
+$ runsc list (listar contenedores gVisor activos)
+$ runsc checkpoint --image-path /tmp/checkpoint mi-contenedor (guardar el estado actual del contenedor a disco)
+$ runsc restore --bundle /tmp/mi-contenedor --image-path /tmp/checkpoint mi-contenedor-restaurado (restaurar desde el checkpoint)
+$ runsc port-forward mi-contenedor 8080:80 (reenviar puerto 8080 local al 80 del contenedor)
+$ runsc debug --stacks mi-contenedor (información de debug del sandbox [stacks, estadísticas internas])
+$ runsc usage mi-contenedor (ver uso de memoria por categorías)
+$ runsc help syscalls (ver compatibilidad de syscalls implementadas)
+$ runsc help platforms (ver plataformas de ejecución disponibles: ptrace, kvm, systrap...)
+$ runsc metric-server --exporter-prefix=runsc_ --metrics-export-address=:9090 (arrancar servidor HTTP de métricas Prometheus)
+$ runsc export-metrics mi-contenedor (exportar métricas del sandbox a stdout)
+$ runsc --platform=systrap run ... (cambiar plataforma de ejecución, systrap es la opción por defecto moderna)
+$ runsc --platform=kvm run ... (más rápido si se tiene virtualización anidada)
+$ runsc --debug --debug-log=/tmp/runsc.log run ... (modo debug con logs detallados)
+$ runsc --network=none run ... (desactivar red. Sandbox completamente aislado)
+$ runsc --root=/var/run/runsc list (cambiar el directorio raíz de estado de los contenedores)
+$ runsc help syscalls (ver estado de compatibilidad de cada syscalls. gvisor no implementa todas las de linux)
+1.-
+Generar la especificación OCI base y crea config.json con valores por defecto
+$ cd /tmp/mi-contenedor
+$ runsc spec
 
 
 ruplacer
