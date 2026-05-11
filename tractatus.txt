@@ -52009,6 +52009,18 @@ Produce una salida similar a who [ver], pero para la lista de hosts o todas las 
 # rusers -i (genera lista de usuarios registrados en máquinas remotas y ordenados de acuerdo con el tiempo de inactividad de cada máquina)
 
 
+rusersd
+Servidor que devuelve información sobre los usuarios que han iniciado sesión en el sistema escuchando peticiones de red, normalmente en el puerto 513 UDP.
+# rusersd (iniciar el servidor manualmente)
+# systemctl status rusersd (verificar que está corriendo)
+# ps aux | grep rusersd (lo mismo)
+# netstat -ulnp | grep rusersd (lo mismo)
+$ rusers nombre-del-servidor (desde otra máquina de la red, consultar quién está conectado)
+$ rusers -a (ver usuarios en todas las máquinas de la red [broadcast])
+No se recomienda en entornos de producción o redes públicas. Para consultas similares de forma más segura:
+$ ssh usuario@servidor "who"
+
+
 rustscan
 Escáner de puertos.
 $ rustscan -a 127.0.0.1,0.0.0.0 (escanear varias IP utilizando una lista separada por comas)
