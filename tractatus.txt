@@ -51994,6 +51994,12 @@ Muestra el estado de cada host en una red. El comando ruptime proporciona una l�
 # ruptime -u (ordena la lista por el número de usuarios)
 
 
+ruptimed
+Implementación extremadamente simplificada de ruptime el protocolo original de Berkeley, diseñada para ser ligera y fácil de configurar en redes pequeñas sin las complicaciones de los servicios RPC tradicionales. Es una reliquia de la computación distribuida de los 80, mantenida por su simplicidad y nostalgia.
+# ruptimed (poner en marcha el servidor. Escucha paquetes en el puerto UDP [513] y crea un pequeño archivo de texto por cada máquina en el directorio /var/spool/ruptime/)
+Las máquinas cliente deben tener instalado un agente que envíe la información como rwhod.
+
+
 rusers
 Produce una salida similar a who [ver], pero para la lista de hosts o todas las máquinas de la red local. Para cada host que responde a la consulta, se imprime el nombre del host con los nombres de los usuarios actualmente conectados. El comando rusers esperará un minuto para atrapar a los que responden tarde.
 # rusers (muestra unna lista de los usuarios de la red registrados en máquinas remotas)
