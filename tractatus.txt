@@ -52034,6 +52034,27 @@ No se recomienda en entornos de producción o redes públicas. Para consultas si
 $ ssh usuario@servidor "who"
 
 
+rush
+[Restricted User Shell]. Shell restringido cuyo objetivo principal es limitar estrictamente lo que un usuario remoto puede hacer al iniciar sesión en el sistema. A diferencia de bash o zsh, no ofrece un entorno interactivo completo: solo permite ejecutar los comandos que explícitamente se le autoricen en su archivo de configuración. El uso estándar consiste en crear acceso a un directorio objetivo en un entorno chroot, proporcionando normalmente combinaciones arbitrarias de scp, sftp, rsync, cvs, svn y git. Este shell restringido es una alternativa al conocido paquete rssh [ver], que ofrece capacidades similares.
+Ejemplo de configuración global:
+# nano /etc/rush.rc
+       # Comandos permitidos
+       command = "sftp"
+       command = "scp"
+       command = "rsync"
+       # Directorio de trabajo por defecto
+       # %u se reemplaza automáticamente por
+       # el nombre del usuario que inicia sesión.
+       path = "/home/%u"
+       # Umask para archivos creados
+       umask = "022"
+       # Registro de actividad
+       log = "/var/log/rush.log"
+$ rush -C all (Habilitar todas las comprobaciones de seguridad de la configuración)
+# usermod -s /usr/bin/rush nombre_usuario (que un usuario use rush al conectar por SSH)
+# echo "/usr/bin/rush" | sudo tee -a /etc/shells (el shell debe estar listado en /etc/shells para que SSH lo acepte, si no lo está se añáde manualmente)
+
+
 rustscan
 Escáner de puertos.
 $ rustscan -a 127.0.0.1,0.0.0.0 (escanear varias IP utilizando una lista separada por comas)
