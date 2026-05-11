@@ -52082,6 +52082,11 @@ $ rwall example.com message.txt (enviar un mensaje guardado en un archivo)
 Nota.- Para que rwall funcione correctamente, el demonio rpc.rwalld debe estar activo en el host remoto. Si el demonio no está activo, se recibirá un mensaje de error indicando que el programa RPC no está registrado.
 
 
+rwalld
+Demonio que tiene que estar activo en el servidor y en los hosts conectados para poder recibir mensajes.
+$ ps aux | grep rpc.rwalld
+
+
 rwho
 Produce una salida similar a who [ver], pero para todas las máquinas de la red local. La información de estado se emite una vez cada 3 minutos por cada host de la red que ejecuta el demonio rwhod. Cualquier actividad (como el inicio o el cierre de sesión de un usuario) que tenga lugar entre las emisiones no se refleja hasta la siguiente emisión.
 # rwho -a (Incluye todos los usuarios. Sin este indicador, los usuarios cuyas sesiones estén inactivas una hora o más no se incluyen en el informe)
