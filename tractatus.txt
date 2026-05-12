@@ -55285,8 +55285,17 @@ $ sr -elvi | less  (listar los sitios disponibles donde buscar)
 
 suricata
 Sistema de detección de intrusiones de red (IDS). Se basa en reglas para detectar una variedad de ataques/sondeos mediante la búsqueda de contenido de paquetes. Este nuevo motor admite la detección automática de múltiples subprocesos (IP, TCP, UDP, ICMP, HTTP, TLS, FTP y SMB), descompresión de Gzip y coincidencia rápida de IP.
+# systemctl status suricata.service (ver el estado del servicio)
 # suricata --list-runmodes (listar los run modos posibles)
 # suricata -c /etc/suricata/suricata.yaml -i eth0 -D (forma básica, activando el daemon)
+# suricata-update (actualizar las reglas)
+# suricata -T (test de la configuración)
+# suricata --build-info (información de compilación con la que se compiló el Suricata)
+# suricata --engine-analysis (imprimir informes sobre el análisis de diferentes secciones)
+# suricata --dump-config (vuelca la configuración cargada desde el archivo de configuración en la terminal)
+# suricata --dump-features (muestra las características proporcionadas por los módulos de Suricata)
+# suricata --list-app-layer-protos (enumerar todos los protocolos de capa de aplicación compatibles)
+# suricata --list-keywords=all | less (enumera todas las palabras clave de reglas admitidas)
 # tail -f /var/log/suricata/fast.log (comprobar las alertas)
 
 
