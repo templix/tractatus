@@ -52133,6 +52133,14 @@ $ urclock (muestra un reloj en la pantalla)
 $ urxvtd (activa el daemon que permite lanzar urxvtc)
 
 
+rygel
+Herramienta multimedia doméstica que permite compartir fácilmente audio, vídeo e imágenes, y controlar el reproductor multimedia en la red doméstica. En términos técnicos, funciona como un servidor multimedia UPnP AV y un renderizador multimedia implementados mediante un mecanismo de complementos.
+$ rygel -n localhost -p 5432 (establecer la interfaz de escucha [puede ser una IP] y un puerto)
+$ rygel -g 1 (establecer el nivel de registro individualmente para cada dominio. 1=crítico, 2=error, 3=advertencia, 4=información y 5=depuración)
+$ rygel -s (apaga una instancia de rygel que se esté ejecutando)
+$ rygel -D -t (los clientes UPnP no pueden eliminar archivos multimedia del servidor y deshabilita la transcodificación)
+
+
 rzip
 Compresor/descompresor. Crea los comprimidos con extensión .rz
 $ rzip archivo.txt (Substituye archivo.txt por archivo.txt.rz)
