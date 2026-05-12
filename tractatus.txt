@@ -52107,6 +52107,14 @@ Un archivo de configuración de ejemplo:
 Nota.- En distribuciones modernas el uso de rwho/ruptime es prácticamente obsoleto, ya que se prefiere ss, netstat, uptime, who -b, etc. Aún así, rwhod sigue presente y es útil en entornos donde se quiera un historial de usuarios remotos y la información de tiempo de arranque.
 
 
+rxp
+Herramienta para procesar y validar documentos XML.
+$ rxp archivo.xml (verificar si un archivo XML está bien formado. Si está bien formado, la salida no mostrará nada y si hay errores de sintaxis mostrará los detalles)
+$ rxp -s archivo.xml (suprimir la salida y solo ver los mensajes de error)
+$ rxp -V archivo.xml (valida el archivo)
+$ rxp -N -b archivo.xml (comprobar la sintaxis correcta del espacio de nombres del documento y se mostrarán los nombres de elementos y atributos cualificados con sus URI)
+
+
 rxvt
 Emulador de terminal
 $ rxvt -geometry 100x40 -e links2 http://google.es
