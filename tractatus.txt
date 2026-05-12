@@ -52092,6 +52092,21 @@ Produce una salida similar a who [ver], pero para todas las máquinas de la red 
 # rwho -a (Incluye todos los usuarios. Sin este indicador, los usuarios cuyas sesiones estén inactivas una hora o más no se incluyen en el informe)
 
 
+rwhod
+Servidor de estado del sistema que mantiene la base de datos utilizada por los programas rwho y ruptime. Sirve como base de datos para los clientes rwho y ruptime que descubren usuarios conectados remotamente y el tiempo de actividad de una máquina, respectivamente. Su funcionamiento se basa en la capacidad de transmitir mensajes a través de una red.
+Un archivo de configuración de ejemplo:
+# /etc/default/rwhod
+	RUN=yes                # Si se lanza automáticamente
+	DB=/var/db/rwho        # Base de datos donde se guardan los logs
+	SYSLOG=yes             # Loguear eventos en /var/log/script.log
+	SYSLOGTAG=rwhod        # Tag del syslog
+	NBUF=256               # Número de líneas en el buffer interno
+	VFLUSH=10              # Frecuencia de escritura
+# systemctl status rwhod (comprobar si está activo)
+# tail -f /var/log/script.log (comprobación de los logs)
+Nota.- En distribuciones modernas el uso de rwho/ruptime es prácticamente obsoleto, ya que se prefiere ss, netstat, uptime, who -b, etc. Aún así, rwhod sigue presente y es útil en entornos donde se quiera un historial de usuarios remotos y la información de tiempo de arranque.
+
+
 rxvt
 Emulador de terminal
 $ rxvt -geometry 100x40 -e links2 http://google.es
