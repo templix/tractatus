@@ -52248,6 +52248,14 @@ $ sac -a (información promedio)
 $ sac -U (por niveles de uso simultaneo)
 
 
+sacad
+Herramienta multiplataforma para descargar carátulas de álbumes sin intervención manual, ideal para integrar en scripts, reproductores de audio, etc. Incluye el ejecutable sacad_r y ambos comandos soportan los formatos JPEG y PNG para las carátulas descargadas. La herramienta utiliza varias fuentes para buscar las carátulas, como Deezer, Discogs, Last.fm e iTunes.
+$ sacad "metallica" "master of puppets" 600 AlbumArt.jpg (descargar carátula del álbum "Master of Puppets" de la banda "Metallica" con resolución aproximada de 600x600 píxeles y la guardará en el archivo AlbumArt.jpg)
+$ sacad_r library_directory 600 AlbumArt.jpg (escaneará el directorio library_directory y descargará las carátulas de todos los álbumes que no tengan una carátula asignada, utilizando los mismos parámetros que en el ejemplo anterior)
+$ sacad_r ~/biblioteca/musical 600 AlbumArt.jpg (escaneará recursivamente el directorio ~/biblioteca/musical y sus subdirectorios, descargando las carátulas de los álbumes que no tengan una carátula asignada y las guardará con el nombre AlbumArt.jpg)
+$ sacad_r /ruta/a/mi/biblioteca/musical 600 folder.jpg (similar al anterior, pero en lugar de guardar las carátulas con el nombre AlbumArt.jpg, las guardará con el nombre folder.jpg)
+
+
 sadf
 [sysstat]. Herramienta que se utiliza para mostrar los datos recogidos con diferentes herramientas de sysstat como sar, iostat, pidstat etc y que también soporta la exportación en diferentes formatos como CSV, XML, etc. Activar sysstat::
 # nano /etc/default/sysstat
@@ -55285,17 +55293,30 @@ $ sr -elvi | less  (listar los sitios disponibles donde buscar)
 
 suricata
 Sistema de detección de intrusiones de red (IDS). Se basa en reglas para detectar una variedad de ataques/sondeos mediante la búsqueda de contenido de paquetes. Este nuevo motor admite la detección automática de múltiples subprocesos (IP, TCP, UDP, ICMP, HTTP, TLS, FTP y SMB), descompresión de Gzip y coincidencia rápida de IP.
+Especificar la IP local en el archivo de configuración:
+# nano /etc/suricata/suricata.yaml
+vars:
+  address-groups:
+    HOME_NET: "[192.168.18.14/24]"
 # systemctl status suricata.service (ver el estado del servicio)
 # suricata --list-runmodes (listar los run modos posibles)
 # suricata -c /etc/suricata/suricata.yaml -i eth0 -D (forma básica, activando el daemon)
 # suricata-update (actualizar las reglas)
 # suricata -T (test de la configuración)
+# suricata -T -c /etc/suricata/suricata.yaml -v (lo mismo especificando archivo de configuración y con la máxima información)
 # suricata --build-info (información de compilación con la que se compiló el Suricata)
 # suricata --engine-analysis (imprimir informes sobre el análisis de diferentes secciones)
 # suricata --dump-config (vuelca la configuración cargada desde el archivo de configuración en la terminal)
 # suricata --dump-features (muestra las características proporcionadas por los módulos de Suricata)
 # suricata --list-app-layer-protos (enumerar todos los protocolos de capa de aplicación compatibles)
 # suricata --list-keywords=all | less (enumera todas las palabras clave de reglas admitidas)
+# suricata-update update-sources (ver las reglas disponibles y obtener el índice maestro de los hosts OISF)
+# suricata-update list-sources (revisar las reglas disponibles)
+# suricata-update list-enabled-sources (ver qué conjuntos de reglas están activos)
+# suricata-update enable-source oisf/trafficid (habilitar la regla "oisf/trafficid")
+# suricata-update (despues de cada modificación, actualizar las reglas)
+# nano /var/log/suricata/stats.log (estadísticas y análisis de rendimiento)
+# nano /var/lib/suricata/rules/suricata.rules (archivo de reglas)
 # tail -f /var/log/suricata/fast.log (comprobar las alertas)
 
 
