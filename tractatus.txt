@@ -52290,6 +52290,12 @@ $ sachesi -platform offscreen (ejecutar en modo sin interfaz gráfica)
 Nota.- La mayoría de funciones requieren interacción gráfica y conexión USB activa con un dispositivo BlackBerry 10 y el mantenimiento en Debian es limitado; el proyecto original en GitHub está inactivo desde 2018.
 
 
+sackd
+[Slurm Account Manager Daemon]. Demonio que gestiona la autenticación y las credenciales en un sistema Slurm. Slurm Workload Manager es un sistema de código abierto para la gestión de recursos de clúster y la planificación de tareas, diseñado para ser simple, escalable, portátil, tolerante a fallos e independiente de la interconexión.
+$ sackd -a (inicia el demonio de autenticación de Slurm)
+$ sackd -s (verificar el estado del demonio)
+
+
 sadf
 [sysstat]. Herramienta que se utiliza para mostrar los datos recogidos con diferentes herramientas de sysstat como sar, iostat, pidstat etc y que también soporta la exportación en diferentes formatos como CSV, XML, etc. Activar sysstat::
 # nano /etc/default/sysstat
@@ -52298,6 +52304,17 @@ ENABLED="true"
 # sadf -d (mostrar datos del archivo separados por punto y coma)
 # sadf -d /var/log/sysstat/sa19 -- -r (indica los parámetros de memoria)
 # sadf -x /var/log/sysstat/sa19 (exportar los datos a XML))
+
+
+safe-rm
+Herramienta que actúa como capa de seguridad sobre el comando rm estándar. Antes de ejecutar cualquier borrado, comprueba si el archivo o directorio está en una lista de exclusiones protegida; si es así, cancela la operación y avisa al usuario.
+$ ln -s /usr/local/bin/safe-rm /usr/local/bin/rm (reemplazar el comando rm)
+$ alias rm='safe-rm' (o con un alias)
+El archivo /etc/safe-rm.conf continene el listado, a uno por linea, de los archivo/directorios que no pueden ser borrados. Los archivos/directorios que no puede borrar un usuario concreto en ~/.config/safe-rm del ñdirectorio personal.
+$ echo "/home/USER/documentos-importantes" >> ~/.config/safe-rm (añadir una ruta específica del directorio personal)
+$ echo "/home/USER/fotos" >> ~/.config/safe-rm
+$ echo "/home/USER/fotos/*" >> ~/.config/safe-rm (permite usar comodines [*,?] en la lista de exclusiones)
+Nota.- Si se necesita borrar algo protegido a propósito, ha de usarse la ruta de rm original: /bin/rm o /usr/bin/rm.
 
 
 sagan
