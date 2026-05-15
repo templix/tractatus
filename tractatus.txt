@@ -52323,6 +52323,32 @@ Monitor de logs del sistema. El informe en /var/log/sagan/sagan.log
 # sagan -d malformed (de los malformados)
 
 
+sagan-rules
+Paquete que instala las reglas de sagan en /etc/sagan-rules. Sagan es un sistema de monitorización de registros de eventos y del sistema multihilo en tiempo real y un análisis de logs similar a Snort pero para logs en vez de paquetes de red. Sagan puede leer logs vía FIFO/pipe, archivos, JSON, syslog, etc, disparar alertas, tener bases de datos MySQL/PostgreSQL, SIEM [Prelude], email, etc y correlacionar eventos con umbrales, "after", flexbits, etc.
+# sagan -c /etc/sagan/sagan.conf -D   (ejecutar sagan como demonio)
+# sagan -c /etc/sagan/sagan.conf --debug syslog,engine (para pruebas)
+El paquete sagan-rules de debian está algo desactualizado, contine a fecha 5/2026, 188 reglas. El paquete de github contine 348:
+$ sudo git clone https://github.com/quadrantsec/sagan-rules.git /etc/sagan-rules (una vez desinstalado el paquete clonar el actualizado)
+1.-
+Ejemplo para crear una regla personalizada
+# nano /etc/sagan-rules/local.rules
+      alert any any -> any any (msg:"[LOCAL] Comando sudo sospechoso";
+      content:"sudo"; content:"root";
+      program: sudo;
+      classtype: suspicious-behavior;
+      sid:10000001; rev:1;)
+Breve explicación:
+alert --> nivel de alerta.
+content --> condiciones de búsqueda.
+program --> filtra por programa: sshd, sudo, etc.
+parse_src_ip, parse_dst_ip --> extrae IPs del log.
+classtype --> tipo: suspicious-behavior [comportamiento sospechoso]
+after, threshold --> correlación temporal.
+sid/rev --> identificador único de regla.
+itype:8 --> paquetes de solicitud de ping.
+flow:to_server,established --> la conexión ya debe estar establecida para activar la alerta.
+
+
 saidar
 Aplicación para mostrar estadísticas del sistema, tales cono de la CPU, procesos, carga, memoria, intercambio, I/O de red y de discos junto con su espacio libre. Pulsar "q" para salir.
 $ saidar -d 2 -c (actualización cada 2 segundos, por defecto son 3 y a color)
