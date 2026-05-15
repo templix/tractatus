@@ -52994,6 +52994,8 @@ sensors
 $ sensors (forma básica)
 $ sensors -A (No mostrando el adaptador para cada chip)
 $ watch -n1 sensors (ver temperatura de las CPUs)
+$ sensors | grep "^Core" | awk '{sum+=$3; count++} END {printf "%.1f°C", sum/count}' | tr -d '+' (media de temperatuda de los núcleos)
+$ sensors | grep -A2 "Core"
 
 
 sensors-conf-convert
@@ -55395,6 +55397,10 @@ vars:
 # nano /var/log/suricata/stats.log (estadísticas y análisis de rendimiento)
 # nano /var/lib/suricata/rules/suricata.rules (archivo de reglas)
 # tail -f /var/log/suricata/fast.log (comprobar las alertas)
+# grep "$(date +%Y-%m-%d)" /var/log/suricata/eve.json | jq 'select(.event_type=="alert") | .alert.signature' | sort | uniq -c | sort -nr (ver cuántas alertas de cada tipo se ha tenido hoy)
+# tail -f /var/log/suricata/eve.json | jq 'select(.event_type=="alert") | {hora: .timestamp, alerta: .alert.signature, gravedad: .alert.severity, src_ip: .src_ip, dst_ip: .dest_ip}' (ver intentos de ataque en directo)
+# sudo tail -f /var/log/suricata/eve.json | jq 'select(.src_ip=="192.168.18.14" and .event_type=="alert") | {hora: .timestamp, alerta: .alert.signature, gravedad: .alert.severity, dst_ip: .dest_ip}' (mirar si el equipo hace cosas raras)
+# grep "$(date +%Y-%m-%d)" /var/log/suricata/eve.json | jq 'select(.src_ip=="192.168.18.14" and .alert.severity <= 2) | .alert.signature' | sort | uniq -c (ver si ha hecho algo más grave en las últimas horas)
 
 
 suspend
@@ -56377,7 +56383,8 @@ $ themonospot video.avi
 
 
 thermald
-Demonio que monitorea y controla la temperatura en portátiles y tabletas con las últimas versiones de CPU de Intel. Una vez que la temperatura del sistema alcanza un cierto umbral, el daemon activa varios métodos de enfriamiento.
+Demonio que monitorea y controla la temperatura en ordenadores y tabletas con las últimas versiones de CPU de Intel. Una vez que la temperatura del sistema alcanza un cierto umbral, el daemon activa varios métodos de enfriamiento.
+# systemctl enable --now thermald (activar el servicio)
 
 
 thunar
