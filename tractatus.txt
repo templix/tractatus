@@ -52282,6 +52282,14 @@ $ sacc gopher://gopherproject.org (Gopher Project)
 $ sacc gopher://sdf.org (SDF Public Access)
 
 
+sachesi
+Está diseñado para interactuar con dispositivos BlackBerry 10, el programa se ejecuta en el PC y se comunica con el dispositivo móvil a través de USB. Permite instalar aplicaciones y firmware en dispositivos BlackBerry 10, realizar copias de seguridad, restaurar y borrar datos. El paquete contiene la versión de escritorio de la aplicación, que actúa como un cliente/host que controla el dispositivo BlackBerry conectado, no como una aplicación que se instala en el teléfono. Es una aplicación Qt con interfaz gráfica.
+$ sachesi -style fusion (ejecutar con estilo Qt específico)
+$ sachesi -lang es (forzar idioma)
+$ sachesi -platform offscreen (ejecutar en modo sin interfaz gráfica)
+Nota.- La mayoría de funciones requieren interacción gráfica y conexión USB activa con un dispositivo BlackBerry 10 y el mantenimiento en Debian es limitado; el proyecto original en GitHub está inactivo desde 2018.
+
+
 sadf
 [sysstat]. Herramienta que se utiliza para mostrar los datos recogidos con diferentes herramientas de sysstat como sar, iostat, pidstat etc y que también soporta la exportación en diferentes formatos como CSV, XML, etc. Activar sysstat::
 # nano /etc/default/sysstat
