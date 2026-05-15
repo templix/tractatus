@@ -52256,6 +52256,32 @@ $ sacad_r ~/biblioteca/musical 600 AlbumArt.jpg (escaneará recursivamente el di
 $ sacad_r /ruta/a/mi/biblioteca/musical 600 folder.jpg (similar al anterior, pero en lugar de guardar las carátulas con el nombre AlbumArt.jpg, las guardará con el nombre folder.jpg)
 
 
+sacc
+Cliente Gopher ligero para terminal. Permite navegar por servidores Gopher, un protocolo de Internet anterior a HTTP, orientado a menús jerárquicos de documentos directamente desde la línea de comandos. Gopher es puramente texto, no hay imágenes incrustadas, CSS ni JavaScript. Si se precisa salir de una conexión bloqueada, usar Ctrl+C.
+$ sacc gopher://gopher.floodgap.com (conectar a un servidor Gopher. Floodgap es uno de los servidores Gopher más conocidos y con mantenimiento activo)
+Una vez dentro, sacc muestra un menú de opciones donde se puede seleccionar una opción del menú [número 1-9], Enter para abrir el elemento específico y q para volver al menú anterior y salir.
+$ sacc gopher://gopher.floodgap.com/1/ (abrir un archivo o recurso específico. La barra final /1/ indica un directorio/menú en Gopher)
+$ sacc gopher://gopher.floodgap.com/0/welcome.txt (ver un archivo de texto directamente. El prefijo /0/ indica un archivo de texto plano)
+Nota.- Si sacc encuentra un tipo de archivo que no puede manejar directamente, por ejemplo, una imagen o un PDF, lo pasa a xdg-open para que el sistema lo abra con la aplicación predeterminada.
+Gopher usa un prefijo numérico para identificar tipos de contenido:
+       0 --> Archivo de texto
+       1 --> Directorio/Menú
+       2 --> Servidor CSO
+       3 --> Error
+       4 --> Binario (Mac)
+       5 --> Archivo DOS binario
+       6 --> Archivo UUEncoded
+       7 --> Búsqueda
+       8 --> Telnet
+       9 --> Binario genérico
+       g --> Imagen GIF
+       I --> Imagen genérica|
+Servidores Gopher activos para probar
+$ sacc gopher://gopher.floodgap.com (Floodgap (el más popular)
+$ sacc gopher://gopherproject.org (Gopher Project)
+$ sacc gopher://sdf.org (SDF Public Access)
+
+
 sadf
 [sysstat]. Herramienta que se utiliza para mostrar los datos recogidos con diferentes herramientas de sysstat como sar, iostat, pidstat etc y que también soporta la exportación en diferentes formatos como CSV, XML, etc. Activar sysstat::
 # nano /etc/default/sysstat
