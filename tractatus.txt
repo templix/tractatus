@@ -52317,6 +52317,30 @@ $ echo "/home/USER/fotos/*" >> ~/.config/safe-rm (permite usar comodines [*,?] e
 Nota.- Si se necesita borrar algo protegido a propósito, ha de usarse la ruta de rm original: /bin/rm o /usr/bin/rm.
 
 
+safe-vdash
+vdash es un panel de control basado en terminal para monitorizar los nodos, datos y comunicaciones de la Red Autónoma. Su función principal es vigilar logs de nodos en tiempo real y mostrar su actividad en una interfaz de terminal, más orientada a observación operativa que a administración profunda.
+$ safe-vdash logfile.txt (seguir un log de nodo)
+$ safe-vdash -d logfile.txt (mostrar también la ventana de depuración del primer log)
+$ safe-vdash -i logfile.txt (ignorar contenido previo ya existente en el fichero y empezar "limpio")
+$ safe-vdash logfile1.txt logfile2.txt (monitorizar varios logs a la vez)
+
+
+safecat
+Copia segura de la entrada estándar a un archivo. Es un programa que implementa el algoritmo maildir para copiar la entrada estándar en un archivo temporal y, solo cuando la escritura termina con éxito, lo "mueve" instantáneamente al destino final.
+$ mkdir -p ~/deposito/{tmp,new} (crear una estructura de directorios tipo maildir
+$ cat datos_importantes.log | safecat ~/deposito/tmp ~/deposito/new (lee de la entrada estándar y garantiza que el archivo final en ~/deposito/new sea íntegro)
+$ ./mi_script_de_datos.sh | safecat /var/log/app/tmp /var/log/app/new
+$ echo "Linux es genial" | safecat ~/deposito/tmp ~/deposito/new (si se ejecuta esto varias veces, se verá archivos distintos en /new)
+Nota.- Si se tiene diez procesos intentando escribir en el mismo directorio al mismo tiempo, safecat generará nombres de archivo únicos basados en el tiempo, el hostname y el PID. No se sobrescribirán entre ellos.
+
+
+safecopy
+Herramienta diseñada específicamente para recuperar datos de dispositivos dañados o con problemas de lectura, como discos duros, memorias USB, CDs, DVDs o cintas magnéticas. A diferencia de herramientas como dd [ver], que pueden fallar ante errores de E/S, safecopy intenta extraer la mayor cantidad de datos posible, incluso recurriendo a operaciones de bajo nivel y reintentos configurables para saltar o recuperar bloques defectuosos.
+$ safecopy --stage1 /dev/sdX ~/destino/imagen.img (prioriza la velocidad y evita reintentos en bloques malos)
+$ safecopy --stage3 /dev/sdX ~/destino/imagen.img (intenta recuperar todo lo posible, usando el máximo de reintentos y acceso de bajo nivel)
+$ safecopy --stage2 --continue /dev/sdX ~/destino/imagen.img (con una imagen parcial, se puede continuar la recuperación desde donde se quedó)
+
+
 sagan
 Monitor de logs del sistema. El informe en /var/log/sagan/sagan.log
 # sagan -d syslog -u user (del archivo syslog y el usuario especificado)
