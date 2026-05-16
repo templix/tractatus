@@ -52399,6 +52399,92 @@ Algunos atajos:
 	Ctrl + '-' (Disminuir la medida de la letra)
 
 
+samba
+Es una implementación libre y de código abierto del protocolo SMB/CIFS, el que usa Windows para compartir archivos e impresoras. Permite que un servidor Unix/Linux actúe como servidor de archivos e impresoras compatible con Windows, macOS y otros sistemas. Proporciona el servidor principal y algunas herramientas más específicas del servidor. Ver smbclient y samba-common-bin. Incluye las herramientas dumpmscat, mvxattr, oLschema2ldif, pdbedit, profiles, sharesec, smbstatus, eventlogadm, nmbd y smbd.
+# pdbedit -L -v (listar usuarios Samba)
+# pdbedit -u USER -v (mostrar información detallada de un usuario)
+# pdbedit -x USER (eliminar usuario Samba)
+# smbstatus (ver conexiones activas, usuarios y archivos abiertos)
+# smbstatus -S (ver solo los shares)
+# smbstatus -L (ver solo los locks)
+1.-
+Ejemplo básico de configuración y uso
+# nano /etc/samba/smb.conf
+       # ==================== GLOBAL SECTION ====================
+       #
+       [global]
+          workgroup = WORKGROUP
+   	  server string = Servidor Samba %v
+   	  server role = standalone server
+   	  security = user
+   	  map to guest = bad user
+   	  dns proxy = no
+        #
+  	  # Mejora el rendimiento y compatibilidad
+   	  client ntlmv2 auth = yes
+   	  restrict anonymous = 2
+	#
+   	  # Logging
+   	  log file = /var/log/samba/log.%m
+   	  max log size = 1000
+        #
+	# ==================== SHARES SECTION ====================
+	#
+	# Share básico de ejemplo (carpeta compartida)
+	[compartido]
+	   comment = Carpeta compartida básica
+   	   path = /srv/samba/compartido
+   	   browseable = yes
+   	   writable = yes
+   	   read only = no
+   	   guest ok = no                    # No permitir acceso sin usuario
+   	   force user = nobody              # Opcional: fuerza un usuario (cuidado)
+   	   create mask = 0664
+   	   directory mask = 0775
+   	   valid users = @sambausers        # Solo usuarios del grupo sambausers
+# mkdir -p /srv/samba/compartido (crear la carpeta y darle permisos)
+# chown -R nobody:nogroup /srv/samba/compartido
+# chmod -R 0775 /srv/samba/compartido
+# groupadd sambausers (crear el grupo)
+# usermod -aG sambausers tuusuario (y añadir usuarios)
+# smbpasswd -a tuusuario (añadir usuarios a Samba. Pedirá contraseña Samba)
+# smbpasswd -e tuusuario (activar el usuario)
+# testparm (validar la configuración)
+# systemctl restart smbd nmbd (reinicia Samba)
+# systemctl enable smbd nmbd
+2.-
+Ejemplo de configuración simple para pruebas rápidas
+# nano /etc/samba/smb.conf
+[global]
+   workgroup = WORKGROUP
+   security = user
+#
+[publico]
+   path = /srv/samba/publico
+   browseable = yes
+   writable = yes
+   guest ok = yes          # Cualquiera puede entrar (menos seguro)
+   read only = no
+
+
+samba-common-bin
+Contiene los binarios comunes que utilizan tanto el servidor samba como el cliente smbclient. Incluye las herramientas dbwrap_tool, net, nmblookup, samba-log-parser, samba-regedit, smbcontrol, smbpasswd, testparm y winexe
+# testparm (validar la configuración)
+# testparm -s (ver la configuración completa)
+# smbpasswd -a USER (añadir un usuario Samba, debe existir primero como usuario Unix)
+# smbpasswd USER (cambiar contraseña)
+# nmblookup -B 192.168.1.255 __SAMBA__ (buscar servidores Samba en la red)
+# nmblookup nombre-servidor (resolver un nombre NetBIOS)
+# nmblookup -S IP_DEL_SERVIDOR (ver tu propio nombre NetBIOS)
+# net share (ver shares del servidor local)
+# net user (ver usuarios conectados)
+# net ads join -U administrador (unirse a un dominio Active Directory)
+# net ads info (ver información del dominio)
+# smbcontrol smbd reload-config (recargar la configuración sin reiniciar)
+# samba-regedit (editar el registro de Samba estilo regedit)
+# samba-log-parser /var/log/samba/log.smbd (analizar logs)
+
+
 samhain
 Verificar integridad y un sistema de detección de intrusiones en grandes redes basadas en UNIX.  Después de la instalación, se debe revisar primero el fichero de configuración (por defecto /etc/samhainrc), especialmente con respecto a las direcciones de red como la dirección de correo electrónico y los ficheros/directorios que se quiera comprobar. Los logs en /var/log/samhain_log
 # samhain -t init -p info (inicializar la base de datos y mostrar mensajes de gravedad en la consola)
