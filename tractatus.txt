@@ -52378,6 +52378,10 @@ Aplicación para mostrar estadísticas del sistema, tales cono de la CPU, proces
 $ saidar -d 2 -c (actualización cada 2 segundos, por defecto son 3 y a color)
 
 
+sail-codecs
+Paquete que proporciona códecs de imagen SAIL de bajo nivel para el paquete gráfico sailcut.
+
+
 sakura
 Terminal
 # sakura -e tail -f /var/log/fail2ban (Lanzar una aplicación)
@@ -53810,6 +53814,16 @@ Una vez escogido el tema lo colocamos en /etc/slim.conf substituyéndolo por el 
 Si al usar systemd el sistema no para ni reinicia, modificar las lineas existentes por las siguientes:
 halt_cmd /usr/bin/systemctl halt
 reboot_cmd /usr/bin/systemctl reboot
+
+
+slinkwatch
+Utilidad para mantener automáticamente la lista de interfaces de red que suricata [ver] usa para capturar tráfico, según cuáles estén realmente activas en cada momento. En términos prácticos, slinkwatch vigila enlaces/interfases y reescribe una configuración auxiliar de suricata cuando cambia el estado de una interfaz; después intenta reiniciar suricata para aplicar el cambio.
+# systemctl status slinkwatch.service (comprobar el estado del servicio)
+$ slinkwatch make-config (crear archivo de configuración inicial desde las interfaces locales)
+$ slinkwatch makeman (crear páginas de manual)
+$ slinkwatch completion bash > /etc/bash_completion.d/slinkwatch
+$ slinkwatch completion bash
+$ slinkwatch run --help (muestra las opciones del servicio)
 
 
 slocate
