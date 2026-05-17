@@ -52515,9 +52515,15 @@ $ samdump2 -d -o salida /mnt/ntfs/WINDOWS/system32/config/system /mnt/ntfs/WINDO
 
 
 samhain
-Verificar integridad y un sistema de detección de intrusiones en grandes redes basadas en UNIX.  Después de la instalación, se debe revisar primero el fichero de configuración (por defecto /etc/samhainrc), especialmente con respecto a las direcciones de red como la dirección de correo electrónico y los ficheros/directorios que se quiera comprobar. Los logs en /var/log/samhain_log
-# samhain -t init -p info (inicializar la base de datos y mostrar mensajes de gravedad en la consola)
-# samhain -t check -D (iniciar samhain en modo demonio para revisar el sistema en intervalos especificados en el archivo de configuración)
+Sistema de verificación de integridad y detección de intrusiones en el host. Admite monitorización centralizada y potentes funciones de sigilo para ejecutarse sin ser detectado en memoria mediante esteganografía. Los avisos y alertas se registran por defecto en los logs del sistema, habitualmente en /var/log/samhain/samhain.log o a través de "journalctl -u samhain". El archivo de configuración en /etc/samhain/samhainrc
+# samhain -t init (inicializar. Crea una base de datos criptográfica de "huellas digitales" [hashes] de los archivo del sistema)
+# systemctl start samhain.service (arrancar el servicio. Si se ejecuta sin haber hecho el "init" suele dar errores porque el demonio busca una base de datos que aún no existe)
+# samhain -t check (comprobar la integridad. compara el estado actual del sistema con las huellas guardadas en el "init". Si alguien modificó /bin/login o /etc/passwd, Samhain lo detectará e informará de la intrusión)
+Nota.- Con systemctl corriendo ya ejecuta este check de forma periódica automaticamente sin necesidad de lanzarlo directamente.
+# samhain -t update (después de un "apt upgrade" muchos archivos legítimos habrán cambiado, este comando actualiza la base de datos)
+# samhain -d /var/lib/samhain/samhain_file (ver qué archivos tiene Samhain bajo vigilancia en su base de datos actual)
+# samhain --foreground -t check (ver qué hace Samhain en tiempo real sin que se convierta en un demonio oculto)
+# samhain -t update -i (actualización interactiva si se han modificado varios archivos y se quiere ir decidiendo uno a uno cuáles se aceptan y cuáles no en la base de datos)
 
 
 sane
