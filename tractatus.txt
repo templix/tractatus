@@ -52485,6 +52485,25 @@ Contiene los binarios comunes que utilizan tanto el servidor samba como el clien
 # samba-log-parser /var/log/samba/log.smbd (analizar logs)
 
 
+sambamba
+Herramienta escrita en lenguaje de programación D para trabajar con datos SAM [Sequence Alignment/Map] y BAM [Binary Alignment/Map], la versión binaria comprimida del SAM. SAM/BAM son el estándar de facto en bioinformática para almacenar alineamientos de secuencias genómicas.
+$ sambamba view -S -f bam input.sam -o output.bam (convertir SAM a BAM [comprimido])
+$ sambamba view -f sam input.bam > output.sam (de BAM a SAM [texto])
+$ sambamba view -f bam -F "mapped and mapping_quality >= 30" input.bam -o filtered.bam (solo lecturas mapeadas y con calidad de mapeo >= 30)
+$ sambamba view -H sample.markdup.bam | head (ver encabezado del BAM)
+$ sambamba view sample.markdup.bam | head (ver las primeras alineaciones)
+$ sambamba sort -o sorted.bam input.bam (ordenar por coordenadas)
+$ sambamba sort -t 8 -o sorted.bam input.bam (con más hilos [más rápido])
+$ sambamba index sorted.bam(crear índice. Genera sorted.bam.bai)
+$ sambamba markdup -t 8 --remove-duplicates input.bam markdup.bam (marcar duplicados)
+$ sambamba slice input.bam chr1:1000000-2000000 -o region.bam (extraer una región específica. Formato chr:ini-fin)
+$ sambamba slice -L regiones.bed input.bam -o extraido.bam (usando un archivo BED)
+$ sambamba flagstat input.bam (estadísticas generales)
+$ sambamba depth input.bam > depth.txt (profundidad de cobertura)
+$ sambamba depth -L genes.bed sample.markdup.bam (estadísticas de profundidad por región)
+$ sambamba subsample -p 0.1 input.bam -o subsample.bam (submuestrear)
+
+
 samhain
 Verificar integridad y un sistema de detección de intrusiones en grandes redes basadas en UNIX.  Después de la instalación, se debe revisar primero el fichero de configuración (por defecto /etc/samhainrc), especialmente con respecto a las direcciones de red como la dirección de correo electrónico y los ficheros/directorios que se quiera comprobar. Los logs en /var/log/samhain_log
 # samhain -t init -p info (inicializar la base de datos y mostrar mensajes de gravedad en la consola)
