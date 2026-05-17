@@ -52504,6 +52504,11 @@ $ sambamba depth -L genes.bed sample.markdup.bam (estadísticas de profundidad p
 $ sambamba subsample -p 0.1 input.bam -o subsample.bam (submuestrear)
 
 
+samblaster
+Programa rápido y flexible para marcar duplicados en archivos SAM de lecturas emparejadas agrupadas por ID de lectura.
+$ samblaster -a -i file.sam -o file1sam (aceptar marcas duplicadas que ya estén en el archivo de entrada file.sam y la salida en file1.sam)
+
+
 samhain
 Verificar integridad y un sistema de detección de intrusiones en grandes redes basadas en UNIX.  Después de la instalación, se debe revisar primero el fichero de configuración (por defecto /etc/samhainrc), especialmente con respecto a las direcciones de red como la dirección de correo electrónico y los ficheros/directorios que se quiera comprobar. Los logs en /var/log/samhain_log
 # samhain -t init -p info (inicializar la base de datos y mostrar mensajes de gravedad en la consola)
