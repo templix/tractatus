@@ -54623,26 +54623,26 @@ Algunas opciones:
 
 
 squid
-Proxy caché (intermediario para nuestra conexion a internet, guardando las paginas visualizadas en una caché)
-# cp /etc/squid3/squid.conf{,.defaults} (Realizar copia de seguridad de la configuración)
-# nano /etc/squid3/squid.conf
+Proxy caché. Intermediario para nuestra conexion a internet, guardando las paginas visualizadas en una caché. El archivo de logs en /var/log/squid/cache.log.
+# cp /etc/squid/squid.conf{,.defaults} (Realizar copia de seguridad de la configuración)
+# nano /etc/squid/squid.conf
 Modificamos/adaptamos los siguientes ajustes basicos:
-http_port 3128 #puerto de escucha
-cache_mem 100 MB #Tamaño memoria caché
-cache_dir ufs /var/spool/squid 700 16 256 #directorio y tamaño
-acl NuestraRed src 192.168.1.0/24 #Nombre y red a la que afecta
-http_access allow NuestraRed #permitir acceso a toda la red
-http_access allow deny all #Denegamos a los de fuera de la red
-auth_param basic /usr/lib/squid/ncsa_auth /etc/squid/passwd #ruta a usuarios
-auth_param basic realm “Mensaje de acceso” #mensaje al logearse
-auth_param basic children 5 #Procesos de autentificación
-auth_param basic basic credentialsttl 1 hours #tiempo
-# squid3 -k parse (Revisión de la sintaxis del archivo squid.conf)
+	http_port 3128 #puerto de escucha
+	cache_mem 100 MB #Tamaño memoria caché
+	cache_dir ufs /var/spool/squid 700 16 256 #directorio y tamaño
+	acl localnet src 192.168.1.0/24 #Nombre y red a la que afecta
+	http_access allow localhost #permitir acceso a toda la red
+	http_access allow deny all #Denegamos a los de fuera de la red
+	auth_param basic /usr/lib/squid/ncsa_auth /etc/squid/passwd #ruta a usuarios
+	auth_param basic realm “Mensaje de acceso” #mensaje al logearse
+	auth_param basic children 5 #Procesos de autentificación
+	auth_param basic basic credentialsttl 1 hours #tiempo
+# squid -k parse (Revisión de la sintaxis del archivo squid.conf)
 Después de las modificaciones reiniciar servicio:
-# /etc/init.d/squid3 restart
+# /etc/init.d/squid restart
 Configuración de usuarios (/etc/squid/passwd):
-# htpasswd -c /etc/squid3/passwd user1 (Crear archivo [-c] nombre de usuario y pedirá contraseña)
-# htpasswd /etc/squid3/passwd usuario2 (Sin parámetro -c porque el archivo ya está creado. Otro usuario y contraseña)
+# htpasswd -c /etc/squid/passwd user1 (Crear archivo [-c] nombre de usuario y pedirá contraseña)
+# htpasswd /etc/squid/passwd usuario2 (Sin parámetro -c porque el archivo ya está creado. Otro usuario y contraseña)
 
 
 srm
