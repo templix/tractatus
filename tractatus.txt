@@ -52556,6 +52556,47 @@ Garantiza que un mismo disco no pueda ser utilizado por más de una máquina vir
 # sanlock client release -r vm_disk_1 -s mycluster (liberar un bloqueo manualmente)
 
 
+sanoid
+Herramienta escrita en Perl diseñada para automatizar la creación, retención y monitorización de instantáneas [snapshots] en sistemas de archivos ZFS. Incluye las utilidades findoid y syncoid
+Crear el direcotorio
+# mkdir /etc/sanoid/
+Y en su interior colocar el archivo de configuración, una muestra podría ser:
+[data/home]
+	use_template = production
+[data/images]
+	use_template = production
+	recursive = yes
+	process_children_only = yes
+[data/images/win7]
+	hourly = 4
+#
+#############################
+# templates below this line #
+#############################
+
+[template_production]
+        frequently = 0
+        hourly = 36
+        daily = 30
+        weekly = 4
+        monthly = 3
+        yearly = 0
+        autosnap = yes
+        autoprune = yes
+"frequently", "hourly", "daily", etc. indican cuántas snapshots mantener, no cada cuánto crearlas. Añadir al crontab de root la tarea y procesará el archivo sanoid.conf, creará instantáneas y luego eliminará las que hayan caducado.
+# crontab -e
+* * * * * TZ=UTC /usr/local/bin/sanoid --cron
+# sanoid --cron (ejecución manual)
+# syncoid data/images/vm backup/images/vm (replicaría el sistema de archivos ZFS especificado desde el pool de datos al pool de copias de seguridad en el sistema local)
+# syncoid data/images/vm root@remotehost:backup/images/vm (replicaría el sistema de archivos desde el host remoto al sistema local a través de un túnel SSH)
+# findoid zpool1/datos(listar snapshots de un dataset)
+# findoid --after "2025-06-01" --before "2025-06-15" zpool1/datos (filtrar por rango de fechas)
+# findoid --match "autosnap_daily*" zpool1/vms (mostrar solo snapshots que coincidan con un patrón)
+# findoid --format json zpool1/datos (formato JSON para scripts)
+# journalctl -u sanoid -f (monitorización de logs)
+Nota.- Los snapshots creados por Sanoid suelen llevar el prefijo autosnap_ [ej. autosnap_daily-2026-05-18_00:00:00--00].
+
+
 sar
 [sysstat]. Controlando logs. Herramienta de monitorización del rendimiento. Cubre la mayoría de las áreas del sistema:  Uso de la CPU [opción -u, por defecto],  Colas de procesos y carga del sistema [opción -q],  Estadísticas por proceso [-x [PID | ALL]],  Creación de procesos [-c] y cambios de contexto [-w],  Actividad de los dispositivos de bloque [-d] y TTY [-y],  Uso de memoria y espacio de swap [-r],  Estadísticas de memoria [-R], de paginación [-B] y de swapping [-W],  Estadísticas de interrupciones [-I]. [/var/log/sysstat/sadd .-”dd” indica el dia]
 $ sar -q 10 3 (3 muestras cada 10')
