@@ -54625,10 +54625,10 @@ Algunas opciones:
 
 
 squid
-Proxy caché. Intermediario para nuestra conexion a internet, guardando las paginas visualizadas en una caché. El archivo de logs en /var/log/squid/cache.log.
-# cp /etc/squid/squid.conf{,.defaults} (Realizar copia de seguridad de la configuración)
-# nano /etc/squid/squid.conf
+Proxy HTTP/HTTPS con caché web, filtro de acceso, acelerador reverse proxy, balanceador simple, autenticador y limitador de ancho de banda
+# cp /etc/squid/squid.conf{,.defaults} (Realizar copia de seguridad de la configuración antes de modificarla)
 Modificamos/adaptamos los siguientes ajustes basicos:
+# nano /etc/squid/squid.conf
 	http_port 3128 #puerto de escucha
 	cache_mem 100 MB #Tamaño memoria caché
 	cache_dir ufs /var/spool/squid 700 16 256 #directorio y tamaño
@@ -54639,9 +54639,45 @@ Modificamos/adaptamos los siguientes ajustes basicos:
 	auth_param basic realm “Mensaje de acceso” #mensaje al logearse
 	auth_param basic children 5 #Procesos de autentificación
 	auth_param basic basic credentialsttl 1 hours #tiempo
-# squid -k parse (Revisión de la sintaxis del archivo squid.conf)
-Después de las modificaciones reiniciar servicio:
-# /etc/init.d/squid restart
+# squid -k parse (verifica el archivo de configuración sin arrancar)
+# systemctl start squid (arrancar el servicio)
+# grep -v '^#' /etc/squid/squid.conf | sed '/^$/d' (leer las configuración sin comentarios ni lineas en blanco)
+# egrep -v '^#|^$' /etc/squid/squid.conf (lo mismo)
+# squid -k reconfigure (recargar configuración sin reiniciar)
+# squid -k shutdown (parar Squid)
+# squid -z (inicializa estructura de almacenamiento)
+$ squid -v (ver módulos compilados)
+$ curl -x http://127.0.0.1:3128 https://example.com (usar el proxy con curl)
+$ tail -f /var/log/squid/access.log (ver logs en vivo)
+Algunos conceptos
+	TCP_HIT --> salió de caché
+	TCP_MISS --> descargado de internet
+	TCP_REFRESH_HIT --> caché validada
+	TCP_DENIED --> ACL bloqueó
+	NONE_NONE --> conexión rara/fallida
+1.-
+Ejemplo mínimo de un proxy LAN funcional
+# nano /etc/squid/squid.conf
+       http_port 3128
+       acl localnet src 192.168.1.0/24
+       http_access allow localnet
+       http_access deny all
+       cache_mem 512 MB
+       maximum_object_size 100 MB
+Permite la red local, bloquea el resto y cachea objetos grandes.
+2.-
+Ejemplo de bloquear una web
+# nano /etc/squid/squid.conf
+Colocar las dos lineas siguientes:
+	acl badsite dstdomain facebook.com
+	http_access deny badsite
+3.-
+Ejemplo de bloquear descargas
+# nano /etc/squid/squid.conf
+Colocar las dos lineas siguientes
+	acl downloads urlpath_regex \.iso$ \.mp4$
+	http_access deny downloads
+4.-
 Configuración de usuarios (/etc/squid/passwd):
 # htpasswd -c /etc/squid/passwd user1 (Crear archivo [-c] nombre de usuario y pedirá contraseña)
 # htpasswd /etc/squid/passwd usuario2 (Sin parámetro -c porque el archivo ya está creado. Otro usuario y contraseña)
