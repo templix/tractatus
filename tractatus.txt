@@ -52536,6 +52536,17 @@ $ sane-find-scanner (forma básica)
 $ sane-find-scanner -q (Imprime solo los dispositivos, sin comentarios)
 
 
+sanlock
+Garantiza que un mismo disco no pueda ser utilizado por más de una máquina virtual en ejecución simultáneamente, en ningún host de la red. Sanlock utiliza un mecanismo de leasing [arrendamiento] sobre espacios de almacenamiento compartido como LUNs de SAN, iSCSI, o almacenamiento en red. Cada host que quiere usar un recurso debe adquirir un lease [un bloqueo temporal] antes de acceder al disco. Si un host falla, el lease expira y otro host puede adquirirlo.
+# systemctl start sanlock (iniciar el servicio)
+# sanlock daemon -w 0 -G 1 -L 1 -C /dev/sdb (iniciar el servicio manualmente especificando el dispositivo de almacenamiento compartido)
+# sanlock direct init -s mycluster:0:/dev/sdb:0 (crear lockspace en un dispositivo compartido llamado "mycluster" donde sanlock almacenará sus metadatos)
+# sanlock client acquire -r vm_disk_1 -s mycluster -l /dev/sdb (adquirir un bloqueo para una máquina virtual específica)
+# sanlock client status (ver bloqueos activos)
+# sanlock client host_status -s mycluster (ver hosts en el lockspace)
+# sanlock client release -r vm_disk_1 -s mycluster (liberar un bloqueo manualmente)
+
+
 sar
 [sysstat]. Controlando logs. Herramienta de monitorización del rendimiento. Cubre la mayoría de las áreas del sistema:  Uso de la CPU [opción -u, por defecto],  Colas de procesos y carga del sistema [opción -q],  Estadísticas por proceso [-x [PID | ALL]],  Creación de procesos [-c] y cambios de contexto [-w],  Actividad de los dispositivos de bloque [-d] y TTY [-y],  Uso de memoria y espacio de swap [-r],  Estadísticas de memoria [-R], de paginación [-B] y de swapping [-W],  Estadísticas de interrupciones [-I]. [/var/log/sysstat/sadd .-”dd” indica el dia]
 $ sar -q 10 3 (3 muestras cada 10')
