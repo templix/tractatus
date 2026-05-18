@@ -2890,6 +2890,7 @@ Otros ejemplos:
 	$ awk '$1~/^DocumentRoot/{print $2}' /etc/apache2/sites-available/default (conocer la carpeta del servidor)
 	$ awk 'BEGIN { for (i = 1; i <= 7; i++) print int(101 * rand()) }' (Escribir 7 números aleatorios del 0 al 100)
 	$ awk ' { print "\"" $0 "\""} ' lista (Entrecomillar cada una de la lineas del archivo)
+	$ awk 'NF && $0 !~ /^#/' archivo (quitar comentarios y lineas en blanco de un archivo)
 Creación de scripts con awk:
 1.-
 Imprimir el simple "Hola mundo cruel"
@@ -23039,10 +23040,10 @@ $ grep -Fx -f archivo1 archivo2 (Mostrar líneas que aparezcan en dos archivos)
 $ grep cups /etc/services (Conocer el puerto por el que corre un servicio)
 $ grep 631 /etc/services (Conocer el servicio por el que corre un puerto)
 $ grep -s 'palabra' (Suprime los mensajes de error sobre ficheros que no existen o no se pueden leer)
-Buscar tres palabras al inicio de la linea [escapando la barra vertical] de un archivo:
-	$ mysqldump --help | grep ^routines\|^trigg\|^user -E
-1.- Borrar directorios y/o archivos dejando alguno [borrar todo menos DIR3 i los archivos que contengan "archi"]:
-$ ls | grep -v DIR3 | grep -v archi | xargs -d"\n" rm -rf
+$ grep -v '^#' /etc/squid/squid.conf | grep -v '^$' > archivo (quitar lineas en blanco y las que empiecen por # y guardar en un archivo)
+$ grep -Ev '^#|^$' /etc/squid/squid.conf > archivo (lo mismo)
+$ mysqldump --help | grep ^routines\|^trigg\|^user -E (buscar tres palabras al inicio de la linea [escapando la barra vertical] de un archivo)
+$ ls | grep -v DIR3 | grep -v archi | xargs -d"\n" rm -rf (borrar directorios y/o archivos dejando alguno [DIR3 i los archivos que contengan "archi"])
 
 
 grepcidr
@@ -53043,6 +53044,7 @@ $ sed -i '/plantilla/{x;p;x;}' listado.txt (Insertar una linea en blanco antes d
 $ sed -i '/plantilla/{x;p;x;G;}' listado.txt (Insertar una linea en blanco antes y dispues de aparecer un patron [plantilla])
 $ sed = listado.txt | sed 'N;s/\n/\t/' > listado-numerado.txt (Añadir número de linea al principio de cada una)
 $ sed '/./=' listado.txt | sed '/./N; s/\n/- /' > listado-numerado.txt (Añadir número de linea al principio si no está en blanco)
+$ sed '/^#/d;/^$/d' archivo > archivo-neto (quitar lineas en blanco y comentario y guardar en un archivo)
 
 
 see
