@@ -52536,6 +52536,15 @@ $ sane-find-scanner (forma básica)
 $ sane-find-scanner -q (Imprime solo los dispositivos, sin comentarios)
 
 
+sanlk-reset
+Demonio y cliente de reinicio de sanlock [ver]. Un host que ejecuta el demonio puede reiniciarse mediante un host que ejecuta el cliente, siempre que ambos mantengan acceso a un espacio de bloqueo sanlock común.
+# systemctl start sanlk-resetd (iniciar el demonio de reinicio en cada host del cluster)
+# sanlk-resetd -s mycluster -l /dev/sdb (manualmente. El demonio se registra en el lockspace y queda a la escucha de peticiones de reinicio)
+# sanlk-reset -r 2 -s mycluster (enviar reinicio remoto desde otro host)
+  	 -r, --reset --> ID del host objetivo. el host_id asignado en sanlock
+	 -s, --lockspace --> Nombre del lockspace compartido
+
+
 sanlock
 Garantiza que un mismo disco no pueda ser utilizado por más de una máquina virtual en ejecución simultáneamente, en ningún host de la red. Sanlock utiliza un mecanismo de leasing [arrendamiento] sobre espacios de almacenamiento compartido como LUNs de SAN, iSCSI, o almacenamiento en red. Cada host que quiere usar un recurso debe adquirir un lease [un bloqueo temporal] antes de acceder al disco. Si un host falla, el lease expira y otro host puede adquirirlo.
 # systemctl start sanlock (iniciar el servicio)
