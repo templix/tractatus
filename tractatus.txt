@@ -52639,6 +52639,23 @@ Se puede excluir usuarios o IPs de los informes editando los archivos:
 # nano /etc/sarg/exclude_hosts (lista de IPs o redes a excluir a uno por línea)
 
 
+sasa
+Herramienta escrita en C que implementa la activación por sockets [socket activation] de forma independiente a systemd. Este mecanismo, popularizado por systemd, consiste en: Un agente [sasa] abre y escucha en uno o varios sockets [TCP, UDP o UNIX], los servicios no se inician hasta que llega la primera conexión, cuando se recibe una conexión, sasa ejecuta el binario del servicio y le pasa los descriptores de archivo [FD] de los sockets y el servicio hereda los FDs y atiende la petición directamente.
+$ sasa --listen 127.0.0.1:3000 --exec /usr/bin/python3 -m http.server 8080 (servidor web bajo demanda, puerto no privilegiado)
+$ sasa --listen 0.0.0.0:9090 -v --user USER --group GROUP --chdir /opt/miapp --exec /opt/miapp/bin/mi-servicio (servicio como usuario sin privilegios)
+$ sasa --listen 0.0.0.0:3000 --listen unix:/run/miapp/app.sock --exec /usr/bin/miapp --socket-activation (Abre ambos sockets [TCP + UNIX domain socket] y los pasa al proceso hijo [FD 3, FD 4...])
+$ sasa --listen udp://0.0.0.0:514 --exec /usr/bin/syslog-ng -f /etc/miapp.conf (uso con UDP. Las conexiones no son "aceptadas" como en TCP, pero el FD se pasa igual para lectura/escritura)
+Explicación de los argmentos:
+	    --listen <addr> --> Socket a escuchar. Formatos: 0.0.0.0:8080, 127.0.0.1:3000, unix:/run/miapp.sock, [::]:443
+	    --exec <cmd> --> Comando a ejecutar cuando llegue una conexión
+	    --user USER --> Ejecutar el servicio con este usuario
+	    --group GROUP --> Grupo de ejecución
+	    --chdir <ruta> --> Directorio de trabajo del servicio
+	    --env <KEY=VAL> --> Variables de entorno a pasar al servicio
+	    --verbose, -v --> Modo depuración
+	    --keep-alive --> Mantener el proceso hijo vivo tras cerrar conexiones
+
+
 sash
 Sirve como un sustituto interactivo de /bin/sh, para usar cuando este no se puede utilizar. Incluye muchas utilidades estándar como rm, kill, mkdir, chown... Si esta instalado en el sistema y por algún problema este no puedira iniciarse, es posible que lo pueda reparar usando init=/bin/sash en el indicador de inicio.
 # sash (entrar en el prompt de la aplicación)
