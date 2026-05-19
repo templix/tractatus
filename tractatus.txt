@@ -52605,17 +52605,38 @@ $ sar -Ruy 5 2 (2 muestras cada 5')
 
 
 sarg
-Generador de informes html de análisis de Squid con campos para: usuarios, direcciones IP, bytes, sitios y tiempos. Algunas opciones del archivo de configuración:
-# nano /etc/sarg/sarg.conf
-Descomentamos o modificamos las lineas
-    output_dir /var/www/html/squid-reports
-    date_format e
-    overwrite_report no
-    resolve_ip yes
-    #mail_utility mailx
-    charset UTF-8
-# sarg -x (lanzar la aplicación)
-Aceder a los informes con el navegador en http://localhost/squid-reports
+[Squid Analysis Report Generator]. Herramienta que analiza los archivos de registro [logs] del proxy Squid y genera informes detallados en formato HTML. Estos informes permiten visualizar la actividad de navegación de los usuarios en la red: sitios visitados, direcciones IP, bytes transferidos, horarios de acceso, usuarios, descargas, sitios bloqueados, entre otros. El archivo de configuración es /etc/sarg/sarg.conf donde se tiene que verificar el archivo de logs de squid [/var/log/squid/access.log], directorio donde se guardarán los informes HTML [/var/www/html/squid-reports], además de otros parámetros como título, formato de hora [date_format e], convertir direcciones IP a nombre DNS [resolve_ip no] fuentes, colores... Se accede a los informes desde un navegador en http://localhost/squid-reports/
+# sarg (generar un reporte con todos los datos del log de Squid)
+# sarg -d 17/05/2026 (generar un reporte para una fecha específica)
+# sarg -d 17/05/2026-18/05/2026 (generar un reporte para un rango de fechas)
+# sarg -d 17/05/2026 -t 14:30 (generar un reporte para una hora específica. Puede especificarse solo la hora sin los minutos [-t 14])
+# sarg -x -o ~/reportes_squid (directorio de salida de informes)
+# sarg -x (generar informe)
+# sarg -x -d 17/05/2026 -u usuario1 (generar un reporte para un usuario y fecha específico y en modo debug)
+# sarg -d 17/05/2026 -s youtube.com (generar un reporte para un sitio web específico)
+# sarg -d 19/05/2026 -a 192.168.1.100 (generar un reporte para una IP específica)
+# sarg -l /otro/access.log (generar un reporte usando un archivo de log alternativo)
+# sarg -d 19/05/2026 -e admin@example.com (generar un reporte y enviar el resultado por email)
+1.-
+Configura Apache para servir el directorio de informes.
+# nano /etc/apache2/apache2.conf
+   Alias /squid-reports /var/www/html/squid-reports
+   <Directory /var/www/html/squid-reports>
+       Options Indexes FollowSymLinks
+       AllowOverride None
+       Require all granted
+   </Directory>
+# systemctl restart apache2 (reiniciar Apache)
+2.-
+Generar informes automáticamente: diarios, semanales, mensuales.
+# crontab -e
+Y agregar la línea:
+  	  59 23 * * * /usr/bin/sarg -d $(date +\%d/\%m/\%Y)
+Los informes automáticos se guardarán en los subdirectorios daily, weekly, monthly dentro de output_dir.
+3.-
+Se puede excluir usuarios o IPs de los informes editando los archivos:
+# nano /etc/sarg/exclude_users (lista de usuarios a excluir a uno por línea)
+# nano /etc/sarg/exclude_hosts (lista de IPs o redes a excluir a uno por línea)
 
 
 sash
