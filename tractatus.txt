@@ -17082,6 +17082,9 @@ Un ejemplo muestra de configuración para el servicio ssh:
 # fail2ban-client status sshd (comprobar bloqueos de ips por ataques a ssh)
 # fail2ban-client set mysqld-auth unbanip IP (borrar una ip bloqueada del servicio mysql-auth)
 # fail2ban-testcases (realizar un test general))
+# fail2ban-client -d (verifica que la sintaxis del archivo de configuración es correcta)
+# fail2ban-client status nginx-http-auth (ver si alguien ha sido baneado en una jaula específica)
+# fail2ban-client status apache-auth (lo mismo en la jaula de apache)
 1.-
 Bloquear errores w00tw00t.at.ISC.SANS en los logs de apache. En realidad estas peticiones no acaban en ningún ataque concreto. Estan producidos por el escaner de puertos Dfind que al generar sus peticiones coloca "w00tw00t.at.ISC.SANS.DFind".
 Crear el archivo:
@@ -31807,6 +31810,7 @@ Listar ficheros o procesos abiertos
 # lsof -i :631 | awk '{print $1,$2}' | sort -u  (muestra pid y demonio del puerto especificado)
 # lsof -t -i :22 (Muestra el pid del puerto especificado)
 # lsof -nPi | txt2html  > lsof.html (Mandar la salida a un html para visualizarlo por el navegador)
+# lsof -i | grep -E "ifconfig\.me|34.160.111.145" (monitoriza en tiempo real quien abre conexión a ifconfig.me)
 Opciones:
 	-P (Muestra los números de puerto en vez de la aplicación que corre en ellos)
 	-n (Para que no resuelva las IP de las conexiones)
@@ -45242,6 +45246,7 @@ $ ls ~/.config/polybar/ (ver listado de temas instalados)
 $ ~/.config/polybar/launch.sh --hack (lanzar polybar con el tema "hack")
 $ pkill polybar (para matar el proceso para probar nuevos temas)
 $ polybar -r (volver a cargar al modificar la configuración)
+$ polybar-msg cmd restart (lo mismo)
 $ polybar -m (listar monitores)
 $ polybar -p archivo.png (toma una instantanea png de la barra en la pantalla)
 Un ejemplo de como poner un script en la barra de estado:
@@ -55706,6 +55711,26 @@ vars:
 # tail -f /var/log/suricata/eve.json | jq 'select(.event_type=="alert") | {hora: .timestamp, alerta: .alert.signature, gravedad: .alert.severity, src_ip: .src_ip, dst_ip: .dest_ip}' (ver intentos de ataque en directo)
 # sudo tail -f /var/log/suricata/eve.json | jq 'select(.src_ip=="192.168.18.14" and .event_type=="alert") | {hora: .timestamp, alerta: .alert.signature, gravedad: .alert.severity, dst_ip: .dest_ip}' (mirar si el equipo hace cosas raras)
 # grep "$(date +%Y-%m-%d)" /var/log/suricata/eve.json | jq 'select(.src_ip=="192.168.18.14" and .alert.severity <= 2) | .alert.signature' | sort | uniq -c (ver si ha hecho algo más grave en las últimas horas)
+1.-
+Comprobaciones con ataques
+# jq 'select(.event_type=="alert") | .alert.signature' /var/log/suricata/eve.json | sort | uniq -c | sort -nr | head -10 (qué tipo de alertas son)
+# jq 'select(.event_type=="alert") | .src_ip' /var/log/suricata/eve.json | sort | uniq -c | sort -nr | head -10 (de dónde vienen. IPs origen)
+# jq 'select(.event_type=="alert") | .timestamp[11:13]' /var/log/suricata/eve.json | sort | uniq -c (si hay algún patrón horario)
+2.-
+Crear una regla local para que suricata ignore conexiones a ifconfig.me, como ejemplo.
+# nano /etc/suricata/rules/local.rules
+       # Ignorar completamente cualquier cosa relacionada con ifconfig.me (sin logs, sin alertas)
+       drop dns any any -> any any (msg:"IGNORED - ifconfig.me DNS"; dns.query; content:"ifconfig.me"; nocase; sid:9991001; rev:1;)
+       drop tcp any any -> any any (msg:"IGNORED - ifconfig.me directo"; content:"ifconfig.me"; nocase; sid:9991002; rev:1;)
+       # Ignorar APT (actualizaciones normales)
+       drop tcp any any -> any any (msg:"IGNORED - APT updates"; http.user_agent; content:"APT"; nocase; sid:9991003; rev:1;)
+# suricata -T -c /etc/suricata/suricata.yaml (recargar)
+# systemctl restart suricata (reiniciar el servicio)
+3.-
+Otras comprobaciones sobre quien abre conexiones ifconfig.me
+$ grep -r "ifconfig.me" /etc/cron* /var/spool/cron/ 2>/dev/null (buscar en todos los crontabs quien abre conexión a ifconfig.me)
+$ grep -r "ifconfig.me" ~/.* ~/.config/ ~/.local/ 2>/dev/null | grep -v ".cache" (buscar en servicios de systemd quien abre conexión a ifconfig.me)
+# grep -r "ifconfig.me" /etc/systemd/system/ 2>/dev/null (lo mismo)
 
 
 suspend
@@ -56316,6 +56341,7 @@ Capturar el trafico de la red.
 # tcpdump -n -i eth1 -X -s 200 port 9001 (de un puerto concreto)
 # tcpdump -v -i eth1 port 9001 | awk '{print$1,$2,$3}'
 # tcpdump port 9001 (Capturar todo el tráfico del puerto especificado)
+# timeout 60 tcpdump -i wlp2s0 -n host ifconfig.me -vv 2>/dev/null | grep -E "IP|Host" (capturar durante 1 minuto quién abre conexión a ifconfig.me)
 Algunas opciones:
 -n (Para no resolver las direcciones IP)
 -i (Indica la interfaz de red)
@@ -56690,6 +56716,17 @@ $ themonospot video.avi
 thermald
 Demonio que monitorea y controla la temperatura en ordenadores y tabletas con las últimas versiones de CPU de Intel. Una vez que la temperatura del sistema alcanza un cierto umbral, el daemon activa varios métodos de enfriamiento.
 # systemctl enable --now thermald (activar el servicio)
+1.-
+Para ejecutar thermald en modo adaptativo [adaptive] que aprende el comportamiento del sistema y ajusta dinámicamente la temperatura objetivo.
+# nano /etc/systemd/system/thermald.service
+[Service]
+Type=dbus
+SuccessExitStatus=2
+BusName=org.freedesktop.thermald
+ExecStart=/usr/sbin/thermald --systemd --dbus-enable --adaptive
+Restart=on-failure
+Añadir la sección al archivo creado. --dbus-enable permite que otras aplicaciones pregunten a thermald por el estado térmico.
+# systemctl restart thermald.service (reiniciar el servicio)
 
 
 thunar
