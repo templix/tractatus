@@ -17650,11 +17650,11 @@ $ fbv imagen
 
 fc
 Mostrar/abrir nuevamente el último comando/archivo abierto o ejecutado. La diferencia con history [ver] es que fc sólo muestra los ultimos comandos ejecutados y no todos.
-$ fc -l (Mostrar los últimos comandos usados por el usuario)
-$ fc 534 (Edita el comando con el pid 534 y lo ejecuta nuevamente)
-$ !! (Ejecuta el último comando)
-$ !n (Ejecuta el comando número n)
-$ !dialog (Ejecuta el último comando que empiece por dialog)
+$ fc -l (mostrar los últimos comandos usados por el usuario)
+$ fc 534 (edita con eleditor por defecto, el comando con el pid 534)
+$ !! (ejecuta el último comando)
+$ !n (ejecuta el comando número n)
+$ !dialog (ejecuta el último comando que empiece por dialog)
 
 
 fc-cache
@@ -59060,15 +59060,23 @@ Modificar parte de una variable:
 	echo ${a/geni/brut}
 	Linux es un sistema brutal
 Algunas de la variables globales:
-	$HOME  (ruta del directorio home del usuario)
-	$PATH    (directorios donde se encuentran los ejecutables)
-	$TERM    (tipo de la terminal)
-	$BASH    (ruta del interprete bash )
-	$PWD      (directorio actual)
-	$USER     (Usuario)
-	$HOSTNAME  (Nombre del equipo)
-	$HISTFILE (ruta para el histórico de comandos ejecutados)
-	$UID     (Número de usuario para el sistema)
+	$HOME (ruta del directorio home del usuario)
+	$PATH (directorios donde se encuentran los ejecutables)
+	$TERM (tipo de la terminal)
+	$BASH (ruta del interprete bash)
+	$PWD (directorio actual)
+	$USER (Usuario)
+	$HOSTNAME (Nombre del equipo)
+	$HISTFILE (ruta para el histórico de comandos)
+	$UID (Número de usuario para el sistema)
+	$HISTCMD (número de comandos en history)
+	$HOSTTYPE (arquitectura del pc)
+	$MACHTYPE (descripción más completa que HOSTTYPE)
+	$COLUMNS (número de columnas de la terminal actual)
+	$LINES (número de lineas de la terminal actual)
+	$HISTSIZE (cantidad de comandos a guardar en history)
+	$LANG (lenguaje por defecto y codificación de caracteres)
+	$LC_ALL (configuración regional)
 	$RANDOM (números aleatorios entre 0 y 32767)
 
 
