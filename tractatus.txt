@@ -52679,6 +52679,18 @@ sass-elisp
 Proporciona el modo emacs-lisp para el resaltado de sintaxis de Sass [Syntactically Awesome Style Sheets]. Sass es una extensión de CSS que agrega características como variables, anidamiento y funciones para hacer que la escritura de hojas de estilo sea más eficiente y mantenible. Al abrir un archivo Sass en Emacs se verá cómo se resalta automáticamente la sintaxis, con diferentes colores para selectores, propiedades, valores, comentarios, etc.
 
 
+sass-spec
+Herramienta utilizada para ejecutar la suite de pruebas oficial de Sass, conocida como "sass-spec". Esta suite de pruebas está diseñada para verificar que las diferentes implementaciones de Sass, como Dart Sass y LibSass [en fase de desuso y ya no se soporta activamente], se ajusten correctamente a la especificación del lenguaje Sass.
+En primer lugar tener instalado Node.js y en la raíz del repositorio de sass-spec
+$ npm install
+Y en sugundo lugar, para ejecutar las pruebas con Dart Sass, clonar su repositorio:
+$ git clone https://github.com/sass/dart-sass
+$ npm run sass-spec -- --dart /ruta/a/dart-sass (luego ejecutar las pruebas especificando la ruta a la implementación de Dart Sass)
+$ npm run sass-spec -- --libsass /ruta/a/libsass (ejecutar la suite de pruebas con LibSass aunque no recibe actualizaciones de características y podría no funcionar)
+$ npm run sass-spec -- --interactive (ejecutar la suite de pruebas en modo interactivo)
+Nota.- La mayoría de las pruebas en sass-spec están en formato HRX [Human-Readable XML], que facilita la revisión de las pruebas. Cada archivo HRX representa un directorio virtual con archivos de entrada [input.scss o input.sass] y archivos de salida [output.css] o de error [error].
+
+
 saytime
 Anuncia la hora actual en inglés a través de la tarjeta de sonido.
 $ saytime -t alsa -f %P%l%M%S (con la frase introductoria "The time is", y las horas en formato 12 horas, minutos y segundos)
