@@ -52748,6 +52748,13 @@ $ sbuild-update --chroot=path/to/chroot (lo mismo)
 $ sbuild-distupgrade --distribution stretch --chroot=/path/to/chroot (actualizar el entorno de construcción a una nueva versión de distribución)
 
 
+sbuild-qemu
+Herramientas diseñadas para facilitar el uso de sbuild con imágenes QEMU, permitiendo construir paquetes Debian en un entorno virtualizado. Incluye las herramientas sbuild-qemu-boot, sbuild-qemu-create y sbuild-qemu-update
+# sbuild-qemu-create --install-packages build-essential,debhelper -o /srv/sbuild/qemu/testing-autopkgtest-amd64.img testing http://ftp.fr.debian.org/debian (crea una imagen basada en el repositorio de Debian testing llamada testing-autopkgtest-amd64.img en el directorio /srv/sbuild/qemu/)
+# sbuild-qemu-boot /srv/sbuild/qemu/testing-autopkgtest-amd64.img (arranca la imagen testing-autopkgtest-amd64.img y abre una consola donde se puede interactuar con el sistema)
+# sbuild-qemu-update /srv/sbuild/qemu/testing-autopkgtest-amd64.img (actualiza la imagen con las últimas versiones de los paquetes disponibles en el repositorio de Debian testing)
+
+
 sbuild-schroot
 Herramienta para compilar paquetes binarios Debian a partir del código fuente. Utiliza el backend schroot, que ya no se usa en los buildd de Debian. Cambie al backend unshare. No requiere configuración previa ni tareas programadas regulares. Ver sbuild.
 
