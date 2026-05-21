@@ -52731,6 +52731,23 @@ $ sbt update --ivy com.example:my-library:1.0.0 (instalar una nueva dependencia 
 $ sbt depends (mostrra todas las dependencias instaladas en el proyecto)
 
 
+sbuild
+Herramienta para compilar paquetes binarios Debian a partir de su código fuente. Incluye los ejecutables sbuild-abort, sbuild-apt, sbuild-checkpackages, sbuild-clean, sbuild-createchroot, sbuild-distupgrade, sbuild-hold, sbuild-shell, sbuild-unhold, sbuild-update, sbuild-upgrade, sbuild-adduser y sbuild-destroychroot.
+$ sbuild --host-arch=amd64 package-name (construir el paquete package-name en una arquitectura amd64)
+$ sbuild-abort 1234 (abortat una construcción de paquete que está en progreso con el identificador id 1234)
+$ sbuild-apt update (actualiza los paquetes en el entorno de construcción)
+$ sbuild-apt install package-name (instalar paquetes específicos en el entorno de construcción)
+$ sbuild-checkpackages package-name (mostrará si package-name está instalado en el entorno de construcción y su versión)
+$ sbuild-clean --all (elimina todos los entornos de construcción creados)
+$ sbuild-createchroot --arch=amd64 --distribution=stretch (crear un entorno de construcción para construir paquetes en la distribución stretch para la arquitectura amd64)
+$ sbuild-hold package-name (marca un paquete como retenido [hold], evitando que sea actualizado durante la construcción)
+$ sbuild-shell (abre un shell dentro del entorno de construcción chroot)
+$ sbuild-unhold package-name (desmarca un paquete que estaba retenido)
+$ sbuild-update (actualiza el entorno de construcción chroot para reflejar cambios en la distribución o sistema de paquetes)
+$ sbuild-update --chroot=path/to/chroot (lo mismo)
+$ sbuild-distupgrade --distribution stretch --chroot=/path/to/chroot (actualizar el entorno de construcción a una nueva versión de distribución)
+
+
 sc
 Hoja de cálculo
 $ sc
