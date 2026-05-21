@@ -52711,6 +52711,19 @@ Escanea la red Tor y genera archivos de lista de ancho de banda
 # sbws cleanup (limpia los archivos v3bw anteriores en el directorio predeterminado v3bw)
 
 
+sbsigntool
+Herramientas de referencia para trabajar con el mecanismo de Secure Boot de UEFI que permiten firmar, verificar, modificar y gestionar las firmas criptográficas de binarios EFI [kernels, bootloaders, controladores, aplicaciones UEFI] en formato PE/COFF. Las herramientas son sbattach, sbkeysync, sbsiglist, sbsign, sbvarsign y sbverify
+# sbsign --key mi_clave.key --cert mi_certificado.crt --output vmlinuz-signed.efi vmlinuz (firma un kernel o bootloader. Añade una sección de firma al archivo PE. Solo funciona con binarios en formato PE/COFF por ejemplo vmlinuz, grubx64.efi y systemd-bootx64.efi)
+# sbverify --cert mi_certificado.crt vmlinuz-signed.efi (verifica la validez de las firmas incrustadas en un binario EFI)
+# sbattach --extract vmlinuz-signed.efi firma_extraida.bin (extraer la firma a un archivo)
+# sbattach --remove vmlinuz-signed.efi --output vmlinuz-unsigned.efi (eliminar todas las firmas para dejar el binario "limpio")
+# sbsiglist --owner $(uuidgen) --type x509 --output mi_db.siglist mi_certificado.crt (generar lista de firmas para la base db)
+# sbvarsign --key mi_clave.key --cert mi_certificado.crt --output db_update.auth mi_db.siglist (crear paquete firmado para actualizar db y ...)
+# cp db_update.auth /sys/firmware/efi/efivars/db-d719b2cb-3d3a-4596-a3bc-dad00e67656f (... para aplicarlo)
+# sbkeysync --keys-dir keys/ --verbose (sincroniza claves y certificados desde una estructura de directorios local hacia las variables EFI: PK, KEK, db, dbx)
+Nota.- Modificar PK o KEK fuera de Setup Mode puede dejar el sistema en estado de arranque bloqueado. Alternativa más segura para usuarios finales es mokutil [ver] que gestiona inscripciones a través de shim sin tocar PK/KEK directamente.
+
+
 sc
 Hoja de cálculo
 $ sc
