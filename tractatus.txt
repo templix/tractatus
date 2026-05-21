@@ -52724,6 +52724,13 @@ Herramientas de referencia para trabajar con el mecanismo de Secure Boot de UEFI
 Nota.- Modificar PK o KEK fuera de Setup Mode puede dejar el sistema en estado de arranque bloqueado. Alternativa más segura para usuarios finales es mokutil [ver] que gestiona inscripciones a través de shim sin tocar PK/KEK directamente.
 
 
+sbt-ivy
+Versión parcheada de Apache Ivy para sbt [Scala Build Tool]. Ivy es un gestor de dependencias que se utiliza principalmente en proyectos Java, aunque puede utilizarse para gestionar dependencias de cualquier tipo.
+$ sbt update --ivy (actualizar dependencias en un proyecto construido con SBT utilizando sbt-ivy)
+$ sbt update --ivy com.example:my-library:1.0.0 (instalar una nueva dependencia en un proyecto construido con SBT)
+$ sbt depends (mostrra todas las dependencias instaladas en el proyecto)
+
+
 sc
 Hoja de cálculo
 $ sc
