@@ -52786,7 +52786,7 @@ Teclas básicas:
 
 
 sc-im
-Calculadora de hoja de cálculo basada en texto con atajos de teclado similares a los de vi. Ver sc
+[Spreadsheet Calculator IMprovised]. Calculadora de hoja de cálculo basada en texto con atajos de teclado similares a los de VI y cuenta con la mayoría de las funciones de una hoja de cálculo pura, pero carece de características como la creación de gráficos y el guardado en formatos externos. Ver sc y vi para los atajos.
 
 
 scala
@@ -52797,6 +52797,32 @@ scalpel
 Recureprar archivos borrados.
 Editar el archivo /etc/scalpel/scalpel.conf y descomentamos la linea de la extensión que se quiere recuperar. P.e. para un .avi seria la linea 110. Guardar y arrancar la aplicación:
 # scalpel /dev/sda2 -o carpeta_recup (Se recuperará los avi de sda2 y se guardaran en carpeta_recup)
+
+
+scamper
+Herramienta diseñada para realizar mediciones de red a gran escala en internet, enfocándose en pruebas de rendimiento y seguridad como medir la latencia y pérdida de paquetes entre hosts. encontrar rutas de red, probar la capacidad de enrutamiento, reconocer patrones de tráfico de red y encontrar segmentos inestables de red.
+$ scamper -c -s -n 1000 -d 1.2.3.4 -p 80 -P 1 -t 10 (medir la latencia)
+  	  -c --> indica que se debe medir la latencia y la pérdida de paquetes
+	  -s --> especifica el destino en este caso, 1.2.3.4
+	  -n 1000 --> indica enviar 1000 paquetes
+	  -p 80 --> indica el puerto de destino, en este caso, el puerto HTTP por defecto
+	  -P 1 --> especifica el retraso entre paquetes, 1 ms en este caso
+	  -t 10 --> indica el tiempo total de ejecución de la prueba: 10 segundos
+$ scamper -c -S -n 100 -d 8.8.8.8 -p 80 (encontrar rutas de red, -S activa la función traceroute y ña Ó^de destomp el servidor DNS de goole)
+$ scamper -c -S -n 100 -d 8.8.8.8 -p 80 --trace-routes --max-hops 20 --timeout 500 --max-time 300 --max-packets 1000 (encontrar rutas alternativas y probar su estabilidad)
+  	  --trace-routes --> activa el seguimiento de rutas
+	  --max-hops 20 --> limita la profundidad del traceroute a 20 saltos
+	  --timeout 500 --> establece un tiempo de espera [timeout] de 500 ms por salto
+	  --max-time 300 --> limita el tiempo total de ejecución de la prueba a 300 segundos
+	  --max-packets 1000 --> limita el número total de paquetes enviados a 1000
+	  -n 10000 --> envía 10.000 paquetes
+$ scamper -c -n 10000 -d 1.2.3.4 -p 0 -P 0.1 -t 60 -M 100000 -m 100 -b 10000
+	  -p 0 --> indica el puerto, usualmente, el puerto 0 indica que no se usa un puerto específico
+	  -P 0.1 --> especifica un intervalo de 0.1 segundos entre paquetes
+	  -t 60 --> el tiempo total de la prueba es de 60 segundos
+	  -M 100000 --> establece un límite máximo de 100.000 bytes por paquete
+	  -m 100 --> indica el tamaño mínimo de paquete de 100 bytes
+	  -b 10000 --> es la banda ancha [throughput]) objetivo, 10.000 paquetes por segundo
 
 
 scan
