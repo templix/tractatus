@@ -52837,6 +52837,29 @@ scanadf
 $ scanadf -o %02d (con salida con dos dígitos [01, 02, 03...] por defecto: image-%04d [image-0001, image-0002...])
 
 
+scanbd
+Demonio que monitoriza los botones del escáner en busca de pulsaciones, cambios en el mando de función, u otros eventos como la inserción o extracción de papel. Al mismo tiempo, permite que las aplicaciones de escaneo accedan a los escáneres. Incluye la herramienta scanbm que en realidad es un enlace simbólico a scanbd y se puede llamar como scanbm o scanbd -m
+# systemctl status scanbd.service (comprobar si el servicio está activo)
+Los pasos son los siguientes:
+$ scanimage -L (verificar que sane funciona y detecta el escáner)
+Configurar la variable de entorno
+# nano /etc/scanbd/scanbd.conf (abrir el archivo de configuración)
+modificar la linea para que quede:
+	  saned_env  = { "SANE_CONFIG_DIR=/etc/scanbd/sane.d" }
+Y al final del archivo comentar todos los "include" menos el de muestra marca de escaner, en este caso HP
+       #include(scanner.d/avision.conf)
+       #include(scanner.d/fujitsu.conf)
+       include(scanner.d/hp.conf)
+       #include(scanner.d/pixma.conf)
+       #include(scanner.d/snapscan.conf)
+       #include(scanner.d/canon.conf)
+       #include(scanner.d/plustek.conf)
+# mkdir -p /etc/scanbd/sane.d (crear el directorio)
+# cp /etc/sane.d/*.conf /etc/scanbd/sane.d/ (en su interior copiar la configuración global de sane)
+# systemctl restart scanbd.service (reiniciar el servicio)
+# scanbd -f -d7 (probar si la comunicación con el escáner funciona)
+
+
 scanimage
 [sane, sane-utils]. Escanear. Por defecto genera archivos tiff y pnm.
 $ scanimage -L (Para conocer los datos del escaner)
