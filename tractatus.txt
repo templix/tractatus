@@ -52691,6 +52691,13 @@ $ npm run sass-spec -- --interactive (ejecutar la suite de pruebas en modo inter
 Nota.- La mayoría de las pruebas en sass-spec están en formato HRX [Human-Readable XML], que facilita la revisión de las pruebas. Cada archivo HRX representa un directorio virtual con archivos de entrada [input.scss o input.sass] y archivos de salida [output.css] o de error [error].
 
 
+sauce
+[Software Against Unsolicited Commercial Email)]. Servidor SMTP proxy diseñado para combatir el spam. No es un agente de transferencia de correo [MTA] completo, sino que se sitúa entre Internet y el MTA existente, como Exim, el único soportado oficialmente, para filtrar correo no deseado antes de que llegue al servidor de correo principal. Realiza comprobaciones agresivas sobre el correo entrante y sus fuentes, utiliza direcciones "cebo" [spambait] para que cuando alguien envíe correo a una de esas direcciónes sea bloqueado automáticamente él y su sitio web pues indican que el remitente está enviando spam ya que nadie debería conocer esa dirección, aplica retardo [greylisting] al correo de remitentes desconocidos para darles la oportunidad de caer en una trampa de cebo o para que sus cuentas sean canceladas y rechaza correo por deficiencias técnicas indicativas de spam o mala configuración.
+# systemctl status sauce (ver estado del servicio)
+# tail -f /var/log/sauce/sauce.log (revisar logs)
+Nota.- Si se precisa una solución anti-spam moderna y mantenida para un servidor de correo en producción es preferible Rspamd [ver] o SpamAssassin [ver], ya que sauce es un proyecto con poco mantenimiento.
+
+
 saytime
 Anuncia la hora actual en inglés a través de la tarjeta de sonido.
 $ saytime -t alsa -f %P%l%M%S (con la frase introductoria "The time is", y las horas en formato 12 horas, minutos y segundos)
