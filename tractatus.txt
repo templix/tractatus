@@ -53018,6 +53018,14 @@ $ make clean (limpiar caché)
 $ time make -j$(nproc) (recompila, rápida, usa caché)
 
 
+scdaemon
+[SmartCard Daemon]. Componente en segundo plano [daemon] del ecosistema GnuPG [GNU Privacy Guard]. Su función principal es servir de puente entre el agente de GPG [gpg-agent] y los dispositivos físicos de tarjetas inteligentes como las tarjetas OpenPGP, llaves de seguridad YubiKey, Nitrokey o el DNI electrónico en España.
+# scdaemon --server (inicia en modo servidor, esperando comandos en la entrada estándar)
+# scdaemon --multi-server (ejecutar en modo servidor con un socket adicional esperando comandos tanto en la entrada estándar como en un socket de dominio Unix adicional)
+# scdaemon --daemon (inicia scdaemon en modo de fondo, lo que evita que se ejecute accidentalmente en segundo plano)
+# scdaemon --homedir /ruta/directorio (establece el directorio de inicio en la ruta especificada. Si no se usa esta opción, el directorio de inicio predeterminado es ~/.gnupg)
+
+
 schroot
 Parecido a un chroot [ver] que se ha de usar como root, pero para usuarios normales. schroot permite el acceso a chroots para usuarios normales que utilizan el mismo mecanismo, pero con la comprobación de permisos y permite la configuración automática adicional del entorno chroot, como el montaje de sistemas de archivos adicionales y otras tareas de configuración.
 
