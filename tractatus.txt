@@ -52984,6 +52984,40 @@ Agente de monitorización y medición del consumo eléctrico y energético de lo
 # scaphandre json > medicion.json
 
 
+sccache
+Es una caché del compilador para la recompilación rápida de código C/C++/Rust. Acelera la recompilación al almacenar en caché compilaciones anteriores y detectar cuándo se está realizando la misma compilación del mismo código con los mismo parámetros..
+$ sccache gcc -c main.c -o main.o (compilar un archivo C directamente)
+$ sccache g++ -std=c++17 -O2 main.cpp -o main (compilar un archivo C++)
+$ sccache rustc main.rs (compilar con Rust)
+$ sccache --show-stats (ver estadísticas de la caché: aciertos, fallos, tamaño)
+$ sccache --start-server (iniciar el servidor manualmente aunque normalmente se inicia solo)
+$ sccache --stop-server (detener el servidor)
+$ rm -rf ~/.cache/sccache (con el servidor parado, borrar los archivos de caché)
+$ sccache --show-adv-stats (ver la configuración actual)
+$ sccache --show-stats | grep "Cache location" (ver la ruta de la caché local)
+Para proyectos es preferible configurar variables de entorno. Configurar sccache como compilador de C y C++
+$ export CC="sccache gcc"
+$ export CXX="sccache g++"
+O con clang
+$ export CC="sccache clang"
+$ export CXX="sccache clang++"
+Para Rust
+$ export RUSTC_WRAPPER=sccache
+Luego cuando se compila normalmente sccache actúa en segundo plano
+$ make
+$ cargo build
+Con Make sin modificar el Makefile
+$ make CC="sccache gcc" CXX="sccache g++" -j$(nproc)
+1.-
+Configurar para un proyecto C/C++
+$ cd mi-proyecto
+$ export CC="sccache gcc"
+$ export CXX="sccache g++"
+$ time make -j$(nproc) (primera compilación, lenta, guarda en caché)
+$ make clean (limpiar caché)
+$ time make -j$(nproc) (recompila, rápida, usa caché)
+
+
 schroot
 Parecido a un chroot [ver] que se ha de usar como root, pero para usuarios normales. schroot permite el acceso a chroots para usuarios normales que utilizan el mismo mecanismo, pero con la comprobación de permisos y permite la configuración automática adicional del entorno chroot, como el montaje de sistemas de archivos adicionales y otras tareas de configuración.
 
