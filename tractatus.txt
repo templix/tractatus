@@ -1075,6 +1075,38 @@ $ ant jar
 que generará el archivo miProyecto.jar en el directorio build/jar.
 
 
+antigravity
+Agente cli de inteligencia artificial de google.
+$ curl -fsSL https://antigravity.google/cli/install.sh | bash (descargar e instalar)
+$ agy (ejecutar)
+Algunos atajos de telcado
+enter --> Enviar mensaje o confirmar
+alt+enter, ctrl+j, shift+enter --> Insertar salto de línea
+ctrl+c, esc --> Volver atrás/cerrar
+ctrl+d --> Salir
+ctrl+z --> Suspender CLI
+ctrl+l --> Borrar la pantalla
+ctrl+v --> Pegar desde el portapapeles
+shift/alt+click --> Seleccionar y copiar texto
+pgup, shift+up --> Página arriba
+pgdown, shift+down --> Página abajo
+up --> Subir
+down --> Bajar
+left --> Mover a la izquierda/Pestaña anterior
+right --> Mover a la derecha/Pestaña siguiente
+ctrl+home --> Ir al principio
+ctrl+end --> Ir al final
+ctrl+_, ctrl+shift+- --> Deshacer
+ctrl+shift+z --> Rehacer
+y --> Confirmar si
+n --> Confirmar no
+ctrl+y --> Pegar desde el portapapeles
+e --> Editar comando
+↑/↓ --> Navegar
+←/→ --> Cambiar vista
+esc --> Cerrar
+
+
 antiword
 Conversor/lector de archivos .doc
 $ antiword archivo.doc | less (Visualiza un doc)
@@ -52874,12 +52906,19 @@ $ scanimage -A (ver todas las opciones de escaneo)
 
 
 scanlogd
-Detecta escaneos de puertos y escribe una línea por escaneo a través del mecanismo syslog. scanlogd solo registra escaneos de puertos. No los impide. Sólo envia información resumida al registro del sistema. Obviamente, la dirección de origen de los escaneos de puertos puede ser falsificada. No tome ninguna medida contra la fuente de los ataques a menos que haya otra evidencia disponible. Crear o  añadir al archivo:
-# nano /etc/syslog.conf
-La linea
-daemon.alert   /var/log/alert
-# systemctl restart scanlogd.service
-# systemctl status scanlogd.service
+Herramienta de detección de escaneo de puertos TCP y los registra en el sistema de logs. Un evento detectado puede parecerse a una línea resumida con IP de origen, destino y lista de puertos/flags, porque scanlogd registra "una línea por escaneo".
+# systemctl status scanlogd.service (ver el estado del servicio)
+# journalctl -u scanlogd -f (mostrar logs)
+# journalctl -u scanlogd --since today (lo mismo)
+# journalctl | grep -i scanlogd (lo mismo)
+# grep -i scanlogd /var/log/syslog /var/log/daemon.log /var/log/messages /var/log/alert* 2>/dev/null (escanear varios archivos en busca de logs de scanlogd)
+1.-
+Ejemplo para controlar su funcionamiento.
+En una terminal lanzar
+# journalctl -f | grep -i scanlogd
+Y en otra
+# nmap -Pn -sS -p 1-1000 "$(hostname -I | awk '{print $1}')"
+En la primera deberían aparecer los logs del scaneo de nmap.
 
 
 scanssh
