@@ -52965,6 +52965,18 @@ Scanea una lista de direcciones y redes en busca de servidores de protocolo SSH 
 # scanssh -u socks.example.com:9050 192.168.0.0/24 (usará SOCKS proxies para escanear la red especificada)
 # scanssh 'random(1000)/0.0.0.0/0' (escaneará aleatoriamente 1000 direcciones en la red 0.0.0.0/0)
 # scanssh 192.168.18.0/24 -I -r 3 (sin cadena de identificación ssh y 3 pruebas por segundo
+# scanssh -t 3 -c 150 -o salida hosts.txt (timeout de conexión de 3 segundo, por defecto 2 y número máximo de conexxiones simultaneas 150, por defecto 100 y guardar en "salida")
+#$ scanssh -p 22,2222,3218 -f open.csv hosts.tst (probar los puertos especificados y exportar sólo resultados "open" a un archivo en formato csv)
+hosts.txt contiene una lista de direcciones IP, netmasks o rangos a uno por linea, ejemplo:
+	  192.168.1.0/24
+	  10.0.0.5
+	  172.16.0.0/16
+
+
+scantv
+xawtv es un conjunto de software para ver y grabar canales de televisión y cámaras web. Este paquete proporciona una utilidad que escanea un conjunto de canales en busca de estaciones de televisión y guarda las encontradas en un archivo de configuración de xawtv (que también leen otras utilidades como fbtv). Además, intenta extraer los nombres de las estaciones a partir de los datos inter-frame (VBI). Precisa un dispositivo de TV o cámara web conectado.
+$ scantv -a -o tvscan (escaneo completo y guardar en "tvscan")
+$ scantv -i S-video -s (configura la entrada de S-video, por defecto Television y omite el escaneo de canales, solo escribe la norma y la tabla de frecuencias en el archivo de configuración)
 
 
 schroot
