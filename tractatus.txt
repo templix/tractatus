@@ -25603,16 +25603,28 @@ $ hp-levels -c -a '$' (en color y que use el simbolo "$" para el gráfico)
 
 
 hplip
-Soporte de HP para la mayoría de las impresoras de inyección de tinta HP y muchas LaserJets, tanto para escanear, enviar faxes y para el acceso a tarjetas fotográficas en la mayoría de las impresoras multifuncionales de la marca. Algunos de los comandos disponibles, a parte de algunos que estan directamente relacionados son: hp-align, hp-clean, hp-colorcal, hp-config_usb_printer, hp-firmware, hp-logcapture, hp-makeuri, hp-pkservice, hp-plugin, hp-probe, hp-query, hp-setup, hp-testpage y hp-timedate.
-# hp-setup -i (detecta automáticamente impresoras conectadas por USB y las configura en CUPS en modo interactivo)
-# hp-setup -i -b net (detecta automáticamente impresoras conectadas en red y las configura en CUPS)
-El asistente guiará paso a paso: Detecta la impresora, permite elegir el driver [PPD] adecuado e instalarlo automaticamente, instala plugins necesarios y registra la impresora en CUPS.
-
-
-hp-scan
-[hplip]. Herramienta de escaneo para una impresora HP.
-$ hp-scan -g -m color (scanea una HP en collor [gray para blanco y negro] y guarda el resultado por defecto con el nombre hpscan001.jpg)
-$ hp-scan -f scan.jpg --pdf=evince (guardarlo como scan.jpg y visualizarlo al final con evince)
+[HP Linux Imaging and Printing]. Paquete oficial de HP para Linux para el soporte de la mayoría de las impresoras de inyección de tinta HP y muchas LaserJets, tanto para escanear, enviar faxes y para el acceso a tarjetas fotográficas en la mayoría de las impresoras multifuncionales de la marca. Incluye los ejecutables hp-align, hp-check, hp-clean, hp-colorcal, hp-config_usb_printer, hp-doctor, hp-firmware, hp-info, hp-levels, hp-logcapture, hp-makeuri, hp-pkservice, hp-plugin, hp-probe, hp-query, hp-scan, hp-setup, hp-testpage y hp-timedate.
+$ hp-setup -i (detecta automáticamente impresoras conectadas por USB y las configura en CUPS en modo interactivo)
+$ hp-setup -i -b net (detecta automáticamente impresoras conectadas en red y las configura en CUPS)
+En el modo interactivo [-i], el asistente guiará paso a paso: Detecta la impresora, permite elegir el driver [PPD] adecuado e instalarlo automaticamente, instala plugins necesarios y registra la impresora en CUPS
+$ hp-scan (realizar escaneos directamente desde la línea de comandos en dispositivos multifunción HP, permitiendo ajustar la resolución, el formato de salida y el destino)
+$ hp-scan --dest=pdf --output=documento_escaneado.pdf (Escanear en formato PDF y guardar en un archivo)
+$ hp-scan --mode=color --res=300 --output=imagen.png ((escanear a 300 DPI en modo color)
+$ hp-info -g (muestra información detallada sobre el estado actual de la impresora, el modelo, la conexión y los trabajos en cola y en modo debug)
+$ hp-check -r -g -t (verifica que todas las dependencias de HPLIP estén instaladas y correctas, en modo debug y salida en texto plano)
+$ hp-doctor (diagnóstico general y reparación automática)
+$ hp-probe -b net (buscar dispositivos de red)
+$ hp-makeuri 192.168.1.150 (generar URI para una impresora de red con IP fija)
+$ hp-config_usb_printer (configurar automáticamente impresoras conectadas por USB cuando el sistema las detecta)
+$ hp-logcapture (recopilar los archivos de registro de HPLIP y del sistema de impresión en un archivo comprimido)
+$ hp-align (inicia el proceso de alineación de los cabezales de impresión o cartuchos)
+$ hp-clean (ejecuta el ciclo de limpieza de los inyectores de los cartuchos de tinta para solucionar problemas de impresión borrosa o con rayas)
+$ hp-colorcal (calibración de color en dispositivos de inyección de tinta compatibles)
+$ hp-testpage (envía una página de prueba especial a la impresora seleccionada para comprobar los márgenes, la calidad del color y que la comunicación sea correcta)
+$ hp-firmware -i (descarga e instala el firmware necesario directamente en la memoria RAM de aquellas impresoras que no conservan su firmware al apagarse)
+$ hp-levels -g (ver niveles de tinta)
+$ hp-query -d hp:/usb/HP_LaserJet?serial=12345 -q duplex (consultar si un modelo soporta impresión a doble cara)
+$ hp-timedate (sincroniza la fecha y hora internas del panel de una impresora multifunción HP con la hora actual del ordenador Linux)
 
 
 hpcc
