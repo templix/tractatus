@@ -52921,6 +52921,29 @@ Y en otra
 En la primera deberían aparecer los logs del scaneo de nmap.
 
 
+scanmem
+Herramienta que se utiliza para localizar la dirección de una variable y modificarla en un proceso en ejecución, normalmente en guegos.
+1.-
+Proceso
+Imaginemos un juego o programa ejecutándose por ejemplo, super_juego y se tiene 150 monedas y queremos cambiar esa cantidad a 999999 monedas.
+$ pgrep super_juego (buscar el PID en otra terminal)
+$ ps ax | grep super_juego (forma alternativa)
+# scanmem (iniciar consola interactiva con privilegios)
+  	> pid 12345 (conectar usando el PID obtenido)
+	> 150 (introducir la cantidad actual de monedas y pulsa Enter)
+scanmem dirá algo como "info: we currently have 45120 matches". Volver al juego y hacer una acción que cambie tus monedas. Por ejemplo, comprar algo para quedarse con 120 monedas y volver a la terminal de scanmem e ingresar el nuevo valor:
+        > 120
+scanmem  filtrará la lista anterior y dirá "info: we currently have 18 matches" o sea que el grupo se ha reducido a 18. Volver al juego y cambiar de nuevo las monedas, por ejemplo, ganar una recompensa y ahora tener 180.
+	> 180 (introducir el nuevo importe)
+Repetir la operación hasta que diga "we currently have 1 matches" con lo que se habrá lcalizado la dirección exacta
+	> list (ver las direcciones de memoria candidatas)
+	[ 0] 0x55bc08ae42b0 ... (el número entre corchetes  [ 0]  es el índice del elemento)
+	> set 0=999999 (cambiar el valor a 999999)
+Volver al juego y comprobar que el contador de monedas habrá cambiado inmediatamente a 999,999.
+        > exit (desconectar de forma segura sin cerrarlo)
+Nota.- Solo funciona de forma efectiva en procesos locales [offline]. En la gran mayoría de juegos multijugador online, los valores importantes se gestionan y validan en el servidor del juego, por lo que modificarlos localmente en la memoria RAM no tendrá efecto real o causará una desconexión/bloqueo de la cuenta.
+
+
 scanssh
 Scanea una lista de direcciones y redes en busca de servidores de protocolo SSH en ejecución y sus números de versión, así como puertos y servidores proxy abiertos.
 # scanssh 192.168.0.0/24 (escaneará toda la red 192.168.0.0/24 buscando servidores SSH en ejecución)
