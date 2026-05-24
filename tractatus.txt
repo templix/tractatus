@@ -12655,6 +12655,15 @@ Traducción y almacenamiento de direcciones IP de archivos de registro. Proporci
 # cat /var/log/dnshistory/* (ver todo el historial almacenado)
 
 
+dnsjit
+Combinación de diferentes herramientas relacionadas con DNS para capturar, analizar, recopilar estadísticas de mensajes y reproducir tráfico. ejemplos en /usr/share/doc/dnsjit/examples/
+En una terminal lanzar:
+# dnsjit /usr/share/doc/dnsjit/examples/capture.lua wlp2s0
+Y en otra
+# nmap -Pn -sS -p- 192.168.18.14
+Comprobar en la primera terminal la captura del comando nmap.
+
+
 dnsmap
 Herramienta que, mediante fuerza bruta, permite obtener los subdominios de un dominio.
 $ dnsmap url (forma básica)
