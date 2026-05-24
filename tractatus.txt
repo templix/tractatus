@@ -14851,6 +14851,17 @@ Aunque elogind es el daemon en sí, la interacción con él se realiza principal
 # loginctl lock-sessions (bloquear todas las sesiones activas)
 
 
+elvish
+Shell multiplataforma que combina características de un intérprete de comandos tradicional con un lenguaje de programación expresivo. Permite escribir scripts de manera más clara y concisa y organizar mejor las funciones y variables, evitando conflictos de nombres y soporta funciones que no necesitan un nombre explícito. Algunos ejemplos de uso:
+$ elvish buildinfo (información sobre elvish)
+$ elvish (entrar en la shell)
+> ls -l (Al igual que otras shells, se pueden ejecutar comandos del sistema)
+> $my-var = "Hola, Elvish" (definir una variable)
+> echo $my-var (usar la variable)
+> add = { |x y| $x + $y } (definir una función anónima)
+> echo (add 5 3) (usar la función. Imprime 8)
+
+
 emacs
 Tutorial completo en español: <http://www.nongnu.org/emacs-man-es/> . Mucho más que un editor [no un procesador]. Lo que sigue es un pequeño manual de primeros auxilios.
 Cuando Emacs abre un archivo lo abre en un buffer. Cuando leemos un fichero, lo que hacemos es copiar su contenido a una zona de memoria [a un buffer] y durante la edición lo que modificamos es esa zona de memoria, el fichero como tal permanece inalterado hasta que explícitamente demos la orden de grabar en el disco las modificaciones. Cuando emacs se inicia se abren dos búffers que no están asociados a ningún fichero: *scratch* y *messages* [En ambos el nombre empieza y acaba por un asterisco, lo que indica que no es un búffer asociado a un fichero]
@@ -33170,6 +33181,7 @@ En los argumentos del comando descrito en la página man, los corchetes indican 
 1.-
 Para crear una página man a partir de un .md:
 $ pandoc archivo.md -s -t man -o archivo.1
+$ man -l archivo.1 (ver el resultado)
 # mv archivo.1 /usr/local/share/man/ca/man1/ (si no estan los directorios "ca/man1" se crean. Pueden ser tambien "es/man1" para español)
 
 
@@ -53040,6 +53052,7 @@ scdaemon
 scdoc
 Herramienta diseñada para generar páginas man a partir de su propio formato de marcado similar a Markdown [.scd].
 $ scdoc < file.scd > file.1 (crea el archivo roff file.1 que es el que ha de copiarse al directorio de las páginas man)
+$ man -l file.1 (ver el resultado)
 $ manpath (para saber los directorios de las páginas man aunque el más apropiado para cosas personales es ~/.local/share/man/)
 
 
