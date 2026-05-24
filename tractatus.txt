@@ -33138,6 +33138,7 @@ Detector de malware.
 
 man
 Muestra la página del manual de un comando o aplicación.
+$ manpath (para saber los directorios de las páginas man)
 $ man -L es comando (especificando idioma si disponible)
 $ man -k permissions (Busca comandos que traten sobre “permissions”)
 $ man -k vnc ssh (Buscar sobre dos comandos)
@@ -33169,7 +33170,7 @@ En los argumentos del comando descrito en la página man, los corchetes indican 
 1.-
 Para crear una página man a partir de un .md:
 $ pandoc archivo.md -s -t man -o archivo.1
-# mv archivo.1 /usr/local/share/man/ca/man1/ (si no estan los directorios "ca/man1" se crean)
+# mv archivo.1 /usr/local/share/man/ca/man1/ (si no estan los directorios "ca/man1" se crean. Pueden ser tambien "es/man1" para español)
 
 
 man2html
@@ -42333,6 +42334,7 @@ $ pandoc texto.txt -o libro.epub (Convertir a epub)
 $ pandoc -f html -t markdown -o pagina.md pagina.html (Convertir de html a markdown)
 $ pandoc -f markdown -t latex -o texto_latex.tex texto_markdown.md (Convertir texto en markdown a latex)
 $ pandoc -f gfm -o salida.html entrada.txt (Desactiva el soporte de TEX a la hora de leer [no interpreta codigo TeX])
+$ pandoc file.md -s -t man -o file.1 (archivo de entrada, que genere una página man completa y que genere su salida en formato man para file.1)
 
 
 paplay
@@ -53033,6 +53035,12 @@ scdaemon
 # scdaemon --multi-server (ejecutar en modo servidor con un socket adicional esperando comandos tanto en la entrada estándar como en un socket de dominio Unix adicional)
 # scdaemon --daemon (inicia scdaemon en modo de fondo, lo que evita que se ejecute accidentalmente en segundo plano)
 # scdaemon --homedir /ruta/directorio (establece el directorio de inicio en la ruta especificada. Si no se usa esta opción, el directorio de inicio predeterminado es ~/.gnupg)
+
+
+scdoc
+Herramienta diseñada para generar páginas man a partir de su propio formato de marcado similar a Markdown [.scd].
+$ scdoc < file.scd > file.1 (crea el archivo roff file.1 que es el que ha de copiarse al directorio de las páginas man)
+$ manpath (para saber los directorios de las páginas man aunque el más apropiado para cosas personales es ~/.local/share/man/)
 
 
 schroot
