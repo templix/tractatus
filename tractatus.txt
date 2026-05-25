@@ -14725,6 +14725,25 @@ Otras opciones:
 	-w      Sólo coincidencia en palabras completas.
 
 
+eja
+Herramienta que funciona como un micro servidor web diseñado para servir contenido estático y dinámico generado por Lua con soporte integrado para sockets, bifurcaciones [forks] y acceso a la estructura subyacente del directorio. Descargar de github:
+$ git clone https://github.com/eja/eja.git
+$ cd eja
+Al ser un proyecto bastante viejo y algo abandonado antes del make, ha de modificarse la linea 136 el archivo eja.c:
+$ nano eja.c
+       ...
+       sa4=(struct sockaddr_in4 *)sa;
+       ...
+Y dejarla:
+       sa4=(struct sockaddr_in *)sa;
+Después compilarlo e instalarlo:
+$ make
+# make install
+Entrar en el directorio que se quiere compartir por la web y en su interior lanzar:
+$ eja --web
+Y en el navegador se visualizará el diretorio en la url 127.0.0.1:35248
+
+
 eject
 Abre/cierra la bandeja del cdrom
 $ eject /dev/cdrom0    (Abre)
