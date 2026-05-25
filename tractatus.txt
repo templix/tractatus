@@ -13522,6 +13522,16 @@ $ dq MX example.com (consultar un registro MX [Mail Exchange] de un dominio)
 $ dq NS example.como (mostrará los nombreservidores [NS] directamente asociados con "example.com" y seguirá las referencias si existen)
 
 
+draai
+Reproductor de música basado en MPD [Music Player Daemon] y contenedor de comandos mpc [Music Player Command]. La principale diferencias con mpc [ver] es que draai admite desvanecimientos suaves. Para iniciar la reproducción de música con draai ha de estar MPD configurado y funcionando. draai utiliza mpc internamente para comunicarse con MPD [ver]. Incluye los ejecutables dr_init, dr_permutate, dr_symlinks, dr_unsort y dr_watch
+$ mpd (activar el demonio)
+$ draai init (para empezar a usar el reproductor)
+$ draai listall | dr_permutate | draai add (crear una lista de reproducción y empezar a reproducirla)
+$ draai speek (muestra el estado de la canción actual y las próximas 30 pistas)
+$ draai play (empieza a reproducir seǵun la configuración de mpd)
+$ killall mpd (cerrar el servidor)
+
+
 dracut
 Crea un initramfs de arranque para paquetes del núcleo de Linux. El initramfs se carga junto con el núcleo y es responsable de montar el sistema de archivos raíz e iniciar el sistema de inicio principal.
 $ dracut --list-modules
