@@ -14321,7 +14321,7 @@ lrwxrwxrwx. 1 xxx xxx   xx xx xx xxxx  xx:xx x509-types -> /usr/share/easy-rsa/x
 $ ./easyrsa init-pki (inicializar la PKI: crea la carpeta pki/ y su estructura)
 $ ./easyrsa build-ca (crear la Certificate Authority)
 En el directorio pki/ se creará ca.crt, el certificado de la CA, private/ca.key, la clave privada de la CA y, además de la carpeta private/, las carpetas issued/, revoked/, certs_by_serial y reqs/.
-$ ./easyrsa build-server-full server nopass (certificado del servidor. Crea pki/reqs/server.req y pki/private/server.key)
+$ ./easyrsa build-server-full server nopass (certificado del servidor. Crea pki/reqs/server.req y pki/private/server.key. nopass sirve para no tener que poner la contraseña cada vez)
 $ ./easyrsa build-client-full cliente1 nopass (certificado de un cliente. Crea pki/reqs/cliente1.req y pki/private/cliente1.key)
 $ ./easyrsa gen-dh (parámetros Diffie-Hellman para OpenVPN. Crea pki/dh.pem)
 
@@ -53096,6 +53096,18 @@ Herramienta diseñada para generar páginas man a partir de su propio formato de
 $ scdoc < file.scd > file.1 (crea el archivo roff file.1 que es el que ha de copiarse al directorio de las páginas man)
 $ man -l file.1 (ver el resultado)
 $ manpath (para saber los directorios de las páginas man aunque el más apropiado para cosas personales es ~/.local/share/man/)
+
+
+scep
+[Simple Certificate Enrollment Protocol]. Implementa el servidor y el cliente del Protocolo SCEP utilizado para automatizar la emisión y gestión de certificados dentro de un entorno de infraestructura de clave pública [PKI] y está diseñado principalmente para la inscripción de certificados en dispositivos como enrutadores, conmutadores y otros dispositivos de red. Incluye las herramientas scepserver y scepclient. El proceso es el siguiente:
+$ mkdir depot  (crear un directorio para almacenar los certificados y llaves de la CA)
+$ cd depot
+$ scepserver ca -init -depot depot (inicializar una nueva CA dentro del directorio depot. Generará los archivos ca.pem [certificado público de la CA] y ca.key [clave privada de la CA])
+$ scepserver -depot depot -port 2016 -challenge=ClaveSecreta (levantar el servicio en el puerto 2016 con una contraseña para que no cualquiera pueda solicitar certificados a nuestra CA.
+El servidor ahora está escuchando peticiones en: http://localhost:2016/scep y desde otra terminal o máquina de la red, podemos usar scepclient para obtener un certificado firmado. El cliente genera su propia clave privada, envia el CSR al servidor SCEP usando la contraseña acordada y descarga el certificado emitido.
+$ scepclient -private-key client.key -server-url http://localhost:2016/scep -challenge ClaveSecreta -common-name "servidor-web.miempresa.local"
+Si client.key no existe, scepclient genera automáticamente una llave privada RSA por defecto de 2048 bits y se conecta al servidor para obtener de forma segura el certificado de la CA emisora y verificar su identidad. Genera un CSR con el Common Name [CN] especificado, lo firma digitalmente, lo cifra utilizando criptografía de sobre digital [PKCS#7] y lo envía al servidor HTTP que valida la clave, firma el CSR y devuelve el certificado final. El cliente guarda este certificado con el nombre de archivo correspondiente usualmente client.pem o scepclient.crt.
+$ scepclient -private-key mi-dispositivo.key -server-url https://pki.empresa.com/certsrv/mscep/mscep.dll -ca-fingerprint "A1:B2:C3:D4:E5:F6:...:E3:F4:55:66:77:88:99:AA:BB:CC" -challenge "TextoSecreto" -common-name "dispositivo-iot-01" (especifica la ruta de la clave privada del cliente. Si no existe, la crea, la URL del servidor de la SCEP, contraseña de un solo uso o precompartida para autorizar la firma y nombre distintivo [Common Name] del certificado solicitado)
 
 
 schroot
