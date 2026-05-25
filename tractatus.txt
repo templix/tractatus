@@ -36428,25 +36428,21 @@ mpd
 [Music Player Daemon]. Servidor de música ligero y flexible que se ejecuta como un daemon [proceso en segundo plano]. Permite reproducir archivos de audio en diversos formatos [Ogg-Vorbis, FLAC, MP3, Wave, AIFF]) y transmisiones en línea, además de gestionar listas de reproducción. MPD no tiene una interfaz gráfica propia, sino que se controla a través de clientes, como mpc [ver] o interfaces gráficas [ncmpcpp, Cantata, etc.]. También incluye reproducción sin interrupciones, salida con búfer y compatibilidad con crossfading.
 Ajustes en la configuración:
 # nano /etc/mpd.conf
-music_directory	"/home/usuario/Musica"
-playlist_directory "/home/usuario/.mpd/playlists"
-db_file	"/home/usuario/.mpd/mpd.db"
-log_file "/home/usuario/.mpd/mpd.log"
-pid_file "/home/usuario/.mpd/mpd.pid"
-state_file "/home/usuario/.mpd/mpdstate"
-sticker_file "/home/usuario/.mpd/sticker.sql"
-user "usuario"
-group "usuario"
-bind_to_address "localhost"
-port "6600"
-Crear los archivos mencionados en la configuración:
-$ touch /home/usuario/.mpd/playlists
-$ touch /home/usuario/.mpd/mpd.db
-$ touch /home/usuario/.mpd/mpd.log
-$ touch /home/usuario/.mpd/mpd.pid
-$ touch /home/usuario/.mpd/mpdstate
-Arrancar el demonio:
-$ mpd
+       music_directory	"/home/usuario/Musica"
+       playlist_directory "/home/usuario/.mpd/playlists"
+       db_file	"/home/usuario/.mpd/mpd.db"
+       log_file "/home/usuario/.mpd/mpd.log"
+       pid_file "/home/usuario/.mpd/mpd.pid"
+       state_file "/home/usuario/.mpd/mpdstate"
+       sticker_file "/home/usuario/.mpd/sticker.sql"
+       user "usuario"
+       group "usuario"
+       bind_to_address "localhost"
+       port "6600"
+Crear el directorio y los archivos mencionados en la configuración:
+$ mkdir -p ~/.mpd/playlists (crear los directorios)
+$ touch ~/.mpd/{mpd.db,mpd.log,mpd.pid,mpdstate} (crear los archivos)
+$ mpd (arrancar el demonio)
 
 
 mpeg3-utils
