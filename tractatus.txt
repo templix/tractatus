@@ -11739,6 +11739,13 @@ rm -f $TMPFILE
 dialog --infobox "$N tiene $E años" 3 50
 
 
+dicelab
+Herramienta que permite calcular la distribución estadística de tiradas de dados.
+$ echo "count (while x=(d6/6) do ((count <1 x)#(d6/6)))" | dicelab (cuenta el número de tiradas hasta que salga un 6)
+$ echo "high 1 low 2 3#d20" | dicelab (calcula la mediana de 3 dados de 20 caras)
+$ echo "let x = 7#d10 in high 1 (foreach y in 1..10 do sum (==y x))" | dicelab (lanza 7 dados de 10 caras y encuentra la mayor suma de dados idénticos)
+
+
 diceware
 Generador de frases de contraseña concatenando palabras seleccionadas al azar de un fichero con una lista de palabras que es opcional.
 $ diceware
