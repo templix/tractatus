@@ -11752,6 +11752,32 @@ $ diceware
 $ diceware -n 3 -c -s 4 -d ? (concatenando 3 palabras, con mayusculas, insertar 4 caracteres especiales y seprando las palabras con un ?)
 
 
+dico
+Cliente para hacer preguntas al servidor dicod [ver]. El servidor tiene que estar activo:
+# systemctl status dicod.service
+$ dico -D (saber todas las opciones de base de datos disponibles)
+$ dico emacs (conecta al servidor dicod en localhost, busca la palabra "emacs" en la base de datos por defecto e imprime la definición)
+$ dico emacs | less (con una salida larga usar la tuberia con less)
+$ dico -m -s prefix bash (encuentra todas las palabras que empiezan por bash)
+$ dico -m terminal (encontar palabras similares no definiciones)
+$ dico -v -d WordNet linux (buscar linux en la base de datos WordNet en modo debug)
+$ dico -d eng-spa command (buscar significado de command en la base de datos de inglés-español)
+$ dico -d spa-eng terminal (buscar terminal en la base de datos español-inglés)
+$ dico (entrar en la interfaz de dico)
+       dico> /computer (hacer una busqueda muestra las opciones numeradas. La deseada se pulsa el número y la define o traduce)
+       dico> .old (listar las bases de datos)
+       dico> .database eng-spa (cambiar la base de datos activa)
+       dico> .quit` (salir)
+
+
+dicod
+Servidor a la espera de las consultas de los clientes. Incluye los ejecutables dicodconfig y dictdconfig dos comandos que son, en esencia, el mismo programa. Su trabajo es automatizar la configuración del servidor dicod. Escanean el directorio /usr/share/dictd/ en busca de archivos de diccionario, generan un archivo de configuración normalmente /var/lib/dicod/dictorg-db.list que dicod puede leer para saber qué diccionarios tiene disponibles y en qué orden mostrarlos.
+# systemctl start dicod.service (activar el servicio)
+# dicodconfig -w (escribe la sección de la base de datos en /var/lib/dicod/dictorg-db.list)
+# dicodconfig -l (muestra como queda este archivo)
+# dicodconfig -o (muestra el orden en que se mostrarán los diccionarios)
+
+
 dict
 Diccionario en inglés.
 $ dict linux
