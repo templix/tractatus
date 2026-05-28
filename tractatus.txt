@@ -11772,7 +11772,10 @@ $ dico (entrar en la interfaz de dico)
 
 dicod
 Servidor a la espera de las consultas de los clientes. Incluye los ejecutables dicodconfig y dictdconfig dos comandos que son, en esencia, el mismo programa. Su trabajo es automatizar la configuración del servidor dicod. Escanean el directorio /usr/share/dictd/ en busca de archivos de diccionario, generan un archivo de configuración normalmente /var/lib/dicod/dictorg-db.list que dicod puede leer para saber qué diccionarios tiene disponibles y en qué orden mostrarlos.
-# systemctl start dicod.service (activar el servicio)
+En el archivo de configuración:
+# nano /etc/dicod.conf
+Descomentar la linea "include /var/lib/dicod/dictorg-db.list"
+# systemctl start dicod.service (activar el servicio. Cada modificación de la configuración requiere reiniciar el servicio)
 # dicodconfig -w (escribe la sección de la base de datos en /var/lib/dicod/dictorg-db.list)
 # dicodconfig -l (muestra como queda este archivo)
 # dicodconfig -o (muestra el orden en que se mostrarán los diccionarios)
