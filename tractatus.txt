@@ -53169,6 +53169,14 @@ Políticas de planificación principales
 Nota.- Usar prioridades altas puede congelar el sistema o que el ratón y el teclado dejen de responder.
 
 
+schema2ldif
+Herramienta para convertir esquemas de estilo OpenLDAP al formato LDIF. Incluye la herramienta ldap-schema-manager.
+$ schemasldif file > file.ldif
+$ ldap-schema-manager -i /etc/ldap/otherschema/myschema.ldif (insertar el esquema /etc/ldap/otherschema/myschema.ldif)
+$ ldap-schema-manager -i /etc/ldap/otherschema/myschema.schema (convertir /etc/ldap/otherschema/myschema.schema a formato ldif e insertarlo)
+$ ldap-schema-manager -m /etc/ldap/otherschema/myschema.schema (convierte /etc/ldap/otherschema/myschema.schema a formato ldif y reemplaza el esquema existente por este)
+
+
 schroot
 Parecido a un chroot [ver] que se ha de usar como root, pero para usuarios normales. schroot permite el acceso a chroots para usuarios normales que utilizan el mismo mecanismo, pero con la comprobación de permisos y permite la configuración automática adicional del entorno chroot, como el montaje de sistemas de archivos adicionales y otras tareas de configuración.
 
