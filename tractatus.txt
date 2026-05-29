@@ -53224,6 +53224,36 @@ Editor de programación basado en GTK con resaltado de sintaxis para muchos leng
 $ scite script.sh
 
 
+scons
+Alternativa a make en código python que ofrece una serie de funciones mejoradas, como la generación automática de dependencias y la compatibilidad con la caché de compilación integrada. Analiza los includes y deduce qué archivos se deben recompilar cuando cambian, almacena resultados compilados y evita recompilaciones innecesarias entre diferentes proyectos, todo código en Python: construir, analizar, reconfigurar, serializar el estado de construcción, se pueden crear ejecutables, librerías estáticas, compartidas, etc. y se integra bien con normas de empaquetado por ejemplo, para crear Debian packages.
+Un ejemplo:
+$ mkdir -p pruebas_scons/src
+$ cd pruebas_scons/
+$ nano SConstruct
+# Ruta del código fuente
+         src_dir = 'src'
+	 # Crear entorno con flags C++17 y advertencias
+	 env = Environment(
+	     CC='g++',
+    	     CXX='g++',
+    	     CXXFLAGS=['-std=c++17', '-Wall', '-Wextra'],
+    	     CPPPATH=[src_dir],            # incluir /src
+         )
+	 # Declaramos que queremos un ejecutable llamado linux
+	 env.Program(target='linux', source=[f'{src_dir}/main.cpp'])
+$ nano src/main.cpp`
+#include <iostream>
+	 int main() {
+	     std::cout << "¡Linux es un sistema genial!\n";
+    	     return 0;
+         }
+$ scons (compilar)
+$ scons -Q (compila sin imprimir cada comando [modo "quiet"])
+$ scons -n (muestra lo que haría [modo dry run])
+$ scons -c (limpia los archivos de salida como make clean)
+$ scons -j4 (compilación en paralelo 4 hilos)
+
+
 scout_realtime
 [rubygems]. Herramienta para monitorizar métricas del servidor Linux, ya sea en local o remoto via web. Muestra gráficos de la CPU, memoria, disco, red y procesos. Al ser una aplicación en Ruby ha de instalarse:
 # gem install scout_realtime
