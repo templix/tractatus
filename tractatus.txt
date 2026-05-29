@@ -53201,6 +53201,24 @@ science-all
 Selección predeterminada de tareas para Debian Science. Este paquete forma parte de Debian Science Pure Blend y al instalarlo se instalan todas las tareas necesarias para una instalación predeterminada de esta distribución.
 
 
+scilab-cli
+Paquete de software científico basado en matrices que incluye cientos de funciones matemáticas integradas, estructuras de datos avanzadas como polinomios, racionales, sistemas lineales, listas, etc. y diversas herramientas específicas para control, procesamiento de señales, etc. Para acceder a todas las funciones, se tiene que instalar el paquete GUI "scilab".
+$ scilab-cli -l es_ES --pretty-print (entra en el prompt de la aplicación y muestra el código con formato legible, la sintaxis estándar de Scilab). Algunos ejemplos:
+  	--> 3 * 5
+	--> 10 / 2
+	--> 2^3
+	--> x = 5
+	--> y = x * 3 +1
+	--> v = [1, 2, 3, 4, 5]
+	--> v * 2
+	--> v'
+	--> %pi * 2
+	--> quit
+$ scilab-cli -nb -e "disp(2+2)" (sin baner de entrada en el prompt y realizar la operación)
+$ scilab-cli -nb -e "x = [1:10]; disp(sum(x))" (lo mismo realizando la suma de todos los números del 1 al al)
+$ scilab-cli -f mi_script.sce (cuando las operaciones a realizar están en un fichero)
+
+
 scout_realtime
 [rubygems]. Herramienta para monitorizar métricas del servidor Linux, ya sea en local o remoto via web. Muestra gráficos de la CPU, memoria, disco, red y procesos. Al ser una aplicación en Ruby ha de instalarse:
 # gem install scout_realtime
