@@ -53182,23 +53182,14 @@ $ ldap-schema-manager -m /etc/ldap/otherschema/myschema.schema (convierte /etc/l
 
 schleuder-cli
 Interfaz de línea de comandos oficial de Schleuder, un gestor de listas de correo diseñado específicamente para comunicación grupal cifrada con GPG. Permite gestionar el ciclo completo de una lista: creación, configuración, suscripciones, claves GPG, políticas de cifrado, copias de seguridad y restauración. Mientras que la versión web [schleuder-web] ofrece una GUI para administración diaria, la CLI está pensada para automatización, scripting, servidores headless o administración remota por SSH. El archivo de configuración suele estar en /etc/schleuder/schleuder.yml.
-# schleuder-cli list (ver todas las listas configuradas)
-# schleuder-cli create seguridad@miorganización.org (vCrear una nueva lista. Debe coincidir con un alias de correo válido en la MTA)
-# schleuder-cli subscribe seguridad@miorganización.org ana@ejemplo.com (agregar un suscriptor)
-# schleuder-cli unsubscribe seguridad@miorganización.org ana@ejemplo.com (eliminar suscriptor)
-# schleuder-cli subscribers seguridad@miorganización.org (listar suscriptores)
-# schleuder-cli key seguridad@miorganización.org show (ver claves asociadas a la lista)
-# schleuder-cli key seguridad@miorganización.org add A1B2C3D4E5F6... (agregar una huella digital [fingerprint] a la lista)
-# schleuder-cli key seguridad@miorganización.org remove A1B2C3D4E5F6... (eliminar una clave)
-# schleuder-cli key seguridad@miorganización.org validate A1B2C3D4E5F6... (forzar validación de clave pendiente)
-# schleuder-cli config seguridad@miorganización.org show (ver configuración actual. La configuración se maneja en formato clave-valor)
-# schleuder-cli config seguridad@miorganización.org set encrypt_by_default true (modificar un parámetro)
-# schleuder-cli config seguridad@miorganización.org unset auto_reply (restaurar valor por defecto)
-# schleuder-cli dump seguridad@miorganización.org > backup_seguridad.yml (exportar toda la configuración y datos de una lista a un archivo)
-# schleuder-cli restore seguridad@miorganización.org < backup_seguridad.yml (restaurar desde backup, sobrescribe configuración existente))
-# schleuder-cli delete seguridad@miorganización.org (eliminar lista y sus datos, pide confirmación)
-# schleuder-cli --yes delete seguridad@miorganización.org (forzar eliminación sin prompt)
-# schleuder-cli key --help (ver información sobre un comando)
+# schleuder-cli lists list (ver todas las listas configuradas)
+# schleuder-cli subscriptions new seguridad@miorganización.org ana@ejemplo.com (agregar un suscriptor)
+# schleuder-cli subscriptions delete seguridad@miorganización.org ana@ejemplo.com (eliminar suscriptor)
+# schleuder-cli subscriptions list seguridad@miorganización.org (listar suscriptores)
+# schleuder-cli subscriptions show <list@hostname> <user@hostname> (información de usuario o listas)
+# schleuder-cli keys list seguridad@miorganización.org (ver claves asociadas a la lista)
+# schleuder-cli keys delete seguridad@miorganización.org A1B2C3D4E5F6... (eliminar la clave A1B2... de la lista)
+# schleuder-cli keys --help (ver información sobre un comando)
 Nota.- No configura el servidor de correo. Se debe asegurar que la MTA enrute las direcciones de la lista al pipeline de Schleuder.
 
 
