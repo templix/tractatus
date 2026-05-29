@@ -53254,6 +53254,14 @@ $ scons -c (limpia los archivos de salida como make clean)
 $ scons -j4 (compilación en paralelo 4 hilos)
 
 
+scour
+Módulo de Python que limpia exhaustivamente los archivos SVG, eliminando gran cantidad de información innecesaria que ciertas herramientas o autores incrustan en sus documentos. Incluye la herramienta dh_scour.
+$ scour -i input.svg -o output.svg (especificando archivo de entrada y salida)
+$ scour -i input.svg -o output.svg --enable-viewboxing (para una mejor compatibilidad con navegadores web)
+$ scour -i input.svg -o output.svg --enable-viewboxing --enable-id-stripping --enable-comment-stripping --shorten-ids --indent=none (máxima limpieza)
+$ scour -i input.svg -o output.svgz --enable-viewboxing --enable-id-stripping --enable-comment-stripping --shorten-ids --indent=none (máxima limpieza y salida en archivo SVGZ comprimido)
+
+
 scout_realtime
 [rubygems]. Herramienta para monitorizar métricas del servidor Linux, ya sea en local o remoto via web. Muestra gráficos de la CPU, memoria, disco, red y procesos. Al ser una aplicación en Ruby ha de instalarse:
 # gem install scout_realtime
