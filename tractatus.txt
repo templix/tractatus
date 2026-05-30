@@ -11787,6 +11787,18 @@ $ dict -D (ver los instalados)
 $ dict -d devil abracadabra (usar el instalado [devil] y buscar su entrada "abracadabra")
 
 
+dictfmt
+[dict dictd]. Utilidad para formatear un archivo para su uso con un servidor dictd. Esta utilidad convierte un archivo de entrada en una base de datos de diccionario que cumple con el protocolo DICT y crea un archivo de índice correspondiente. Incluye las herramientas dictfmt_index2suffix, dictfmt_index2word y dictunformat. Ver dict.
+El proceso para crear un diccionario personalizado es el siguiente:
+$ dictfmt -f --utf8 -s "Este es mi_dic" mi_dic < mi_dic.txt (el texto debe cumplir determinados protocolos de redacción. Crea .dict y .index)
+$ sudo cp mi_dic.dict mi_dic.index /usr/share/dictd/
+$ sudo dictzip /usr/share/dictd/mi_dic.dict
+$ sudo systemctl restart dictd
+$ dict -D | grep mi_dic
+$ dict -D (ver todos los diccionarios)
+$ dict -d mi_dic ifconfig (buscar en el diccionario mi_dic la palabra ifconfig)
+
+
 diction
 Utilidades para mejorar el estilo y la dicción en inglés y alemán. Incluye la aplicación style.
 $ echo "I am going to the store in order to buy some things that are necessary." | diction
