@@ -11739,6 +11739,24 @@ rm -f $TMPFILE
 dialog --infobox "$N tiene $E años" 3 50
 
 
+diatheke
+Herramienta de búsqueda y exploración de la Biblia. Precisa instalación de los módulos SWORD, normalmente se colocan en /usr/share/sword/modules/.
+$ dpkg -l | grep -vE 'password|Password' | grep sword (ver paquetes sword)
+$ diatheke -b system -k modulelist (lista de módulos disponibles)
+$ diatheke -b system -k bibliography (información detallada de cada módulo)
+$ diatheke -b system -k localelist (muestra los idiomas disponibles)
+$ diatheke -b engKJV2006eb -f plain -k "John 1:1" (usando el módulo engKJV2006eb, muestra el versículo juan 1:1 en inglés)
+$ diatheke -b engKJV2006eb -f HTML -k "John 1:1" > john.html (lo mismo y lo manda a un archivo html)
+$ diatheke -b spaRV1909eb -f plain -k "Gen 1:25-27" (versículos del genesis en español)
+$ diatheke -l es -b spaRV1909eb -f plain -k "Juan 3:16" (especificando el idioma, el módulo, salida texto plano y nombre del evangelista en español)
+Para varias consultas puede crearse un alias:
+$ alias biblia='diatheke -l es -b spaRV1909eb -f plain'
+Y luego:
+$ biblia -k Génesis 1:25-27
+$ biblia -k salmos 23
+$ biblia -k apocalipsis 22:21
+
+
 dicelab
 Herramienta que permite calcular la distribución estadística de tiradas de dados.
 $ echo "count (while x=(d6/6) do ((count <1 x)#(d6/6)))" | dicelab (cuenta el número de tiradas hasta que salga un 6)
