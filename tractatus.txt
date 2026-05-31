@@ -53285,6 +53285,26 @@ Si el monitoreo se realiza en remoto, ha de abrirse el puerto 5555 de la maquina
 $ cat .scout/scout_realtime.log
 
 
+scowl
+Colección de listas de palabras organizadas por popularidad, tamaños, categoría gramatical y otros factores diseñadas para su uso en correctores ortográficos. Los archivos dentro de /usr/share/dict/scowl/ son simples archivos de texto con una palabra por línea. El nombre de cada archivo da información aobre el contenido: El dialecto [american, british, canadian y australian], tipo de palabras [abbreviations, contractions, proper-names, words] y nivel de rareza [10, 20, 35, 40, ... 95, un número más bajo implica palabras más comunes; un número más alto incluye palabras más raras o técnicas. Por lo tanto, british-abbreviations.35 contiene abreviaciones del inglés británico de nivel de rareza 35 [nivel "pequeño"].
+$ grep -w hack /usr/share/dict/scowl/* (buscar en qué achivos esta la palabra "hack")
+$ cat /usr/share/dict/scowl/british-abbreviations.35 (ver contenido de archivo)
+La versión descargada de github, no la de debian, contiene el script mk-list que, si se entra en al directorio descargado, puede usarse:
+$ git clone https://github.com/en-wl/wordlist.git
+$ cd wordlist
+$ ./mk-list american 50 (genera una lista de palabras en inglés americano de nivel intermedio de rareza [50])
+$ ./mk-list american,british 60 > palabras.txt (combinar dos dialectos y mandarlo a un archivo)
+$ ./mk-list -v1 american 40 (incluir variantes de palabras como plurales, conjugaciones, etc.)
+$ ./mk-list -v2 american 60 (incluye más variantes: más formas verbales, plurales irregulares, etc.)
+$ ./mk-list -v american 60 (solo las palabras base)
+$ ./mk-list -f british 35 (muestra qué archivos se usarían para crear las palabras)
+1.-
+Crear un script para no depender de entrar en el dicrecotio scowl.
+$ nano scowl-list.sh
+#!/bin/bash
+cd ~/scowl-master && ./mk-list "$@"
+
+
 scp
 Copiar o transferir archivos o directorios entre una máquina remota y una local
 $ scp -r textos pepe@IP: (copiará el directorio "textos" al host remoto en el directorio del usuario)
