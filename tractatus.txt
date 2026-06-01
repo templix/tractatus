@@ -53485,6 +53485,14 @@ $ chmod +x miscript.sh
 $ ./miscript.sh
 
 
+scriptisto
+Herramienta que permite escribir scripts de un solo archivo en lenguajes que requieren compilación, obtención de dependencias o preprocesamiento. Funciona como un "shebang" para estos scripts, extrayendo las instrucciones de compilación de un comentario. Si se modifica un script, lo recompila y almacena el resultado en caché. Si ya se había compilado, lo convierte inmediatamente en un binario con una sobrecarga de menos de 1 ms.
+$ scriptisto ./script.c (forma básica)
+$ scriptisto build ./script.c (lo compila sin ejecutar)
+$ scriptisto new python-pip (ejemplo con un script en python-pip)
+$ scriptisto template edit rust (muestra una plantilla en rust)
+
+
 scrot
 Captura de pantalla
 $ scrot (Con los valores por defecto)
