@@ -53520,6 +53520,15 @@ Con estos datos lanzar:
 # scrounge-ntfs -m 6291456 -c 8 /dev/sdc 16787925 471607195
 
 
+scrub
+Herramienta utilizada para borrar datos de manera segura de un dispositivo de almacenamiento de manera que sea difícil o prácticamente imposible, recuperarlos. Sobrescribe los datos con patrones, lo que dificulta la recuperación incluso con software especializado. Es más segura, moderna y eficiente pero más lenta que shred [ver].
+# scrub /dev/sdb1 (borrar una partición)
+# scrub archivo.txt (borrar un archivo específico de manera segura)
+# scrub -n 3 /dev/sdb1 (especificando número de veces que se sobrescriben los datos)
+# scrub -t /dev/sdb1 (No generar datos aleatorios en paralelo con las operaciones de entrada/salida)
+# scrub -fp dod archivo.txt (limpieza incluso si el objetivo contiene una firma que indica que ya ha sido limpiado y especificar un patrón [dod]. Por defecto nnsa. Otras opciones bsi, gutmann, schneier, pfitzner7, pfitzner33, usarmy, fillzero, fillff, random, random2, old y fastold)
+
+
 sd
 Como el comando sed [ver] pero simplificado. Por ejemplo con sed, substituir "mañana" por "tarde" en un archivo de texto seria:
     $ sed s/mañana/tarde/g
