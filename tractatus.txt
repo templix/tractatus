@@ -53535,6 +53535,13 @@ $ scrypt enc -v -f file.txt file.enc
 -v implica la inclusión de tres argumentos: N = 2^logN, por defecto logN=19 [2^19= 524288], "r" ajusta el uso de memoria y ancho de banda en cada iteración. Multiplicar r aumenta proporcionalmente el uso de memoria y "p" es el número de hilos/secuencias independientes. En el ejemplo mostrado, la fórmula aproximada de memoria necesaria sería 128 × N × r bytes, en el ejemplo: 128 × 524288 × 8 = 536,870,912 bytes los 536 MB que muestra la salida. Esto significa que para probar una sola contraseña, un atacante necesita 536 MB de RAM, si intenta probar 10.000 contraseñas por segundo, necesitaría 10.000 × 536 MB ≈ 5.36 TB de RAM por segundo. Con Openssl, que usa PBKDF2 y sin memoria-hard, el atacante podría probar millones de contraseñas por segundo usando FPGA/GPU/ASIC, porque PBKDF2 usa muy poca RAM, en GPU ~10⁹ contraseñas/segundo. Con scrypt en el ejemplo, en GPU solo se puede probar ~10 contraseñas/segundo por cada 536 MB de RAM. Para llegar a 10⁹ intentos/segundo se necesitaría una granja con 100 TB de RAM.
 
 
+scsitools
+Colección de herramientas anticuadas para la gestión de hardware SCSI: scsi-config, scsi-spin, scsidev, scsiformat, scsiinfo y tk_scsiformat. Si estas herramientas no se usan correctamente pueden dañar el sistema.
+# systemctl status scsitools.service (comprobar el estado del servicio)
+# scsiinfo -d /dev/nvme0 (ver desperfectos del disco)
+# scsiinfo -a /dev/nvme0 (ver toda la información)
+
+
 sd
 Como el comando sed [ver] pero simplificado. Por ejemplo con sed, substituir "mañana" por "tarde" en un archivo de texto seria:
     $ sed s/mañana/tarde/g
