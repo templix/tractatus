@@ -53561,9 +53561,9 @@ $ sd2odf entrada.sd salida.odg (salida en .odg. Otras salida en ods y odp)
 
 
 sdate
-Genera la "fecha eterna" contando los dias pasados des de septiembre de 1993.
+Genera la "fecha eterna" contando los dias pasados des de septiembre de 1993. http://www.catb.org/~esr/jargon/html/S/September-that-never-ended.html.
 $ sdate
-  viernes, 11049 de setiembre de 1993, 07:47:43 CET
+     viernes, 11049 de setiembre de 1993, 07:47:43 CET
 
 
 sdcv
@@ -53573,7 +53573,57 @@ $ sdcv palabra (Buscar "palabra" en los direccionarios)
 
 
 sdf
-[Simple Document Format]. Sistema de desarrollo de documentos en una variedad de formatos desde una única fuente. Los formatos de salida admitidos son PostScript, PDF, HTML, plain text, POD, man pages, LaTeX, MIF, SGML, RTF,MIMS F6 help y MIMS HTX help. Incluye las aplicaciones fm2ps, mif2rtf, pod2sdf, poddiff, prn2ps, sdf, sdfapi, sdfbatch, sdfcli, sdfget y sdngen.
+[Simple Document Format]. Genera documentos de alta calidad en diversos formatos a partir de una única fuente. Los formatos de salida compatibles incluyen: PostScript, PDF, HTML, texto plano, POD, páginas man, LaTeX, MIF [Maker Interchange Format], SGML, ayuda de Windows, RTF [Rich Text Format], ayuda MIMS F6 y ayuda MIMS HTX. El paquete consta de los ejecutables fm2ps, mif2rtf, pod2sdf, poddiff, prn2ps, sdf, sdfapi, sdfbatch, sdfcli, sdfget y sdngen.
+$ sdf -2html manual.sdf (convertir a HTML)
+$ sdf -2txt -o txt manual.sdf (convertir a texto plano, guardando el resultado en un fichero)
+$ sdf -2latex_ -o tex manual.sdf (convertir a LaTeX)
+$ sdf +sdf2man_pod -o 1 micomando.sdf (generar man page vía POD)
+$ sdf -2html_ -ftoc=3 -o html manual.sdf (generar HTML con tabla de contenidos de 3 niveles)
+$ sdf -2topics -n1 -O ./salida/ manual.sdf (generar HTML dividido por temas [autosplit en nivel 1])
+$ sdf -P -N miapp.c (convertir código fuente C a SDF con numeración de líneas)
+$ sdf -2sdf_expand manual.sdf (previsualizar SDF expandido, sin convertir)
+$ sdf -2pdf_html -sa4 -SA4 manual.sdf (usar un estilo concreto y tamaño de página A4)
+$ sdfget miscript.pl (extraer documentación embebida de un script Perl con el reporte por defecto [default.sdg])
+$ sdfget -r apiref miscript.pl (usar un reporte específico para extraer la sección de la API)
+$ sdfget -o sdf miscript.pl (extraer y guardar en fichero .sdf)
+$ sdf -g apiref -2html miscript.pl (usarlo como pre-filtro desde sdf directamente)
+$ sdfapi MiModulo.pm (generar documentación API desde un módulo Perl)
+$ sdfapi -o sdf MiModulo.pm (guardar la salida en fichero .sdf)
+$ sdfapi MiModulo.pm | sdf -2html - (generar directamente en HTML)
+$ sdfapi -o sdf lib/*.pm (procesar múltiples módulos)
+$ sdfcli miherramienta (generar documentación SDF de la CLI de una herramienta propia)
+$ miherramienta --help | sdfcli - (leer la ayuda desde stdin cuando el comando no acepta -h)
+$ sdfcli -o sdf miherramienta (guardar en fichero .sdf)
+$ sdfcli -w 60 miherramienta (ajustar columna de wrap de opciones a 60)
+$ sdfcli miherramienta | sdf -2html - (generar SDF y convertirlo a HTML en un paso)
+$ sdfbatch -fmyfmts.doc -p *.doc (formatear e imprimir un conjunto de documentos .doc)
+$ sdfbatch -sdoc -Sd *.mif (convertir archivos MIF a formato binario de FrameMaker)
+$ sdfbatch -fvariable.mif -Fv -s *.doc (copiar variables de FrameMaker desde un archivo a otros)
+$ sdfbatch -u *.doc (solo actualizar referencias cruzadas sin imprimir)
+$ sdfbatch -n -fmyfmts.doc *.doc (generar el fichero fmbatch sin ejecutarlo [modo debug])
+$ fm2ps -pfile documento.doc (convertir un documento FrameMaker a PostScript)
+$ fm2ps -pfile -PA4 documento.doc (especificar tamaño de papel A4)
+$ fm2ps -fplantilla.doc -s documento.doc (importar formatos de otro documento y guardar)
+$ fm2ps -fplantilla.doc -Fpf -s documento.doc (importar solo formatos de párrafo y fuente)
+$ fm2ps -n -pfile *.doc (solo generar el fichero fmbatch sin ejecutarlo)
+$ fm2ps -u -pfile documento.doc (actualizar referencias antes de imprimir)
+$ prn2ps documento.prn > documento.ps (conversión básica de PRN a PS)
+$ prn2ps -o ps documento.prn (guardar directamente en fichero)
+$ prn2ps -o ps *.prn (procesar múltiples ficheros PRN)
+$ mif2rtf documento.mif (conversión básica de MIF a RTF)
+$ mif2rtf -o rtf documento.mif (guardar resultado en fichero RTF)
+$ mif2rtf -o rtf *.mif (procesar varios archivos MIF en lote)
+$ pod2sdf miscript.pl > miscript.sdf (convertir documentación POD a SDF)
+$ pod2sdf -o sdf miscript.pl (guardar en fichero .sdf automáticamente)
+$ pod2sdf miscript.pl | sdf -2html - (convertir y luego transformar a HTML)
+$ pod2sdf -o sdf lib/*.pm (procesar múltiples ficheros Perl con POD)
+$ pod2sdf miscript.pl | sdf +sdf2man_pod - (convertir a man page pasando por SDF)
+$ poddiff modulo_v1.pm modulo_v2.pm (comparar dos versiones de documentación POD)
+$ poddiff script_antiguo.pl script_nuevo.pl (comparar la documentación de dos scripts)
+$ poddiff -o diff modulo_v1.pod modulo_v2.pod (ver solo las secciones añadidas o eliminadas)
+$ sdngen manual.sdf (generar nombres únicos de nodo para la navegación hipertextual dentro de documentos SDF)
+$ sdngen -o sdn manual.sdf (guardar la salida)
+$ sdngen -o sdn *.sdf (procesar múltiples documentos)
 
 
 sdiff
