@@ -54051,9 +54051,20 @@ $ sftp USER@host
 
 
 sg3-utils
-Utilidades para dispositivos que utilizan el conjunto de comandos SCSI. Incluye las herramientas rescan-scsi-bus.sh, scsi_logging_level, scsi_mandat, scsi_readcap, scsi_ready, scsi_satl, scsi_start, scsi_stop, scsi_temperature, sg_bg_ctl, sg_compare_and_write, sg_copy_results, sg_dd, sg_decode_sense, sg_emc_trespass, sg_format, sg_get_config, sg_get_elem_status, sg_get_lba_status, sg_ident, sg_inq, sg_logs, sg_luns, sg_map, sg_map26, sg_modes, sg_opcodes, sg_persist, sg_prevent, sg_raw, sg_rbuf, sg_rdac, sg_read, sg_read_attr, sg_read_block_limits, sg_read_buffer, sg_read_long, sg_readcap, sg_reassign, sg_referrals, sg_rem_rest_elem, sg_rep_density, sg_rep_pip, sg_rep_zones, sg_requests, sg_reset, sg_reset_wp, sg_rmsn, sg_rtpg, sg_safte, sg_sanitize, sg_sat_datetime, sg_sat_identify, sg_sat_phy_event, sg_sat_read_gplog, sg_sat_set_features, sg_scan, sg_seek, sg_senddiag, sg_ses, sg_ses_microcode, sg_start, sg_stpg, sg_stream_ctl, sg_sync, sg_test_rwbuf, sg_timestamp, sg_turs, sg_unmap, sg_verify, sg_vpd, sg_wr_mode, sg_write_attr, sg_write_buffer, sg_write_long, sg_write_same, sg_write_verify, sg_write_x, sg_xcopy, sg_z_act_query, sg_zone, sginfo, sgm_dd y sgp_dd.
+Conjunto de utilidades para dispositivos del protocolo SCSI lo cual incluye discos SAS, SATA a través de capas de emulación, NVMe en ciertos contextos y cabinas de almacenamiento Fibre Channel. Excelente información en https://sg.danny.cz/sg/sg3_utils.html. Estas herramientas son rescan-scsi-bus.sh, scsi_logging_level, scsi_mandat, scsi_readcap, scsi_ready, scsi_satl, scsi_start, scsi_stop, scsi_temperature, sg_bg_ctl, sg_compare_and_write, sg_copy_results, sg_dd, sg_decode_sense, sg_emc_trespass, sg_format, sg_get_config, sg_get_elem_status, sg_get_lba_status, sg_ident, sg_inq, sg_logs, sg_luns, sg_map, sg_map26, sg_modes, sg_opcodes, sg_persist, sg_prevent, sg_raw, sg_rbuf, sg_rdac, sg_read, sg_read_attr, sg_read_block_limits, sg_read_buffer, sg_read_long, sg_readcap, sg_reassign, sg_referrals, sg_rem_rest_elem, sg_rep_density, sg_rep_pip, sg_rep_zones, sg_requests, sg_reset, sg_reset_wp, sg_rmsn, sg_rtpg, sg_safte, sg_sanitize, sg_sat_datetime, sg_sat_identify, sg_sat_phy_event, sg_sat_read_gplog, sg_sat_set_features, sg_scan, sg_seek, sg_senddiag, sg_ses, sg_ses_microcode, sg_start, sg_stpg, sg_stream_ctl, sg_sync, sg_test_rwbuf, sg_timestamp, sg_turs, sg_unmap, sg_verify, sg_vpd, sg_wr_mode, sg_write_attr, sg_write_buffer, sg_write_long, sg_write_same, sg_write_verify, sg_write_x, sg_xcopy, sg_z_act_query, sg_zone, sginfo, sgm_dd y sgp_dd.
+# sg_inq /dev/nvme0 (da el fabricante, el modelo, la versión del firmware y los números de serie del dispositivo)
+# sg_inq -e /dev/sdb (que se enumeren las páginas VPD disponibles)
+# sg_vpd /dev/nvme0 (lo mismo que sg_inq peromenos denso)
+# sg_turs /dev/sdb (saber si un disco está vivo, girando y listo para recibir datos, o si está fallando)
+# scsi_temperature /dev/sdb (ver la temperatura actual y la máxima permitida por el fabricante)
+# rescan-scsi-bus.sh (detección de nuevo hardware sin tener que reiniciar el servidor)
+# rescan-scsi-bus.sh -r (lo mismo si si han eliminado discos)
+# scsi_ready -w /dev/sdb (espera interactiva, bloqueando el terminal hasta que el dispositivo SCSI esté listo para operar, útil para scripts de arranque antes de montar unidades críticas)
+# scsi_stop /dev/sdb (apagar el motor del disco [spindle] para extraer el disco en cliente [hot-swap])
+# scsi_start /dev/sdb (encender)
 # sg_scan -i (identificar dispositivos /dev concectados)
 # sg_map -i (lo mismo)
+# sg_format --format /dev/sdb (formateo de bajo nivel a nivel de firmware del disco. Se usa para revivir discos que dan errores estructurales extraños. Tarda horas y, si se interrumpe, el disco queda inservible)
 
 
 sgpt
