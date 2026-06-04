@@ -58577,6 +58577,41 @@ Es el sistema de administración de dispositivos, que se encarga de detectar dis
 # systemd-hwdb -s update (devolver un valor de salida distinto de cero ante cualquier error de análisis al recargar)
 
 
+udevadm
+Herramienta de gestión de dispositivos del kernel Linux [udev]. Se encarga de gestionar los nodos de dispositivo en /dev/ de forma dinámica. Cuando se conecta un USB, una tarjeta de red, un disco... udev recibe un evento del kernel y ejecuta reglas para crear el nodo, asignar permisos, crear symlinks, lanzar scripts, etc.
+$ udevadm info /dev/nvme0 (información del dispositivo por su nodo)
+$ udevadm info --attribute-walk /dev/nvme0 (información de toda la jerarquía padre→hijo del dispositivo)
+$ udevadm info --path=/sys/class/net/wlp2s0 (por ruta sysfs)
+$ udevadm info --query=path /dev/sda (ver la ruta sysfs asociada a un dispositivo)
+$ udevadm info --query=property /dev/nvme0 (ver solo las propiedades)
+$ udevadm monitor (monitoriza todos los eventos del kernel y de udev según ocurren)
+$ udevadm monitor --kernel (solo eventos del kernel)
+$ udevadm monitor --udev (solo eventos procesados por udev)
+$ udevadm monitor --subsystem-match=usb (filtrar por subsistema usb)
+$ udevadm monitor --subsystem-match=block (filtrar por tipo de dispositivo)
+$ udevadm trigger (relanzar eventos de todos los dispositivos presentes, como si se acabasen de conectar para recargar reglas sin reiniciar)
+$ udevadm trigger --subsystem-match=block (relanzar solo dispositivos de bloque)
+$ udevadm trigger --name-match=sda (solo un dispositivo específico)
+$ udevadm trigger --dry-run (simular sin ejecutar realmente [dry-run])
+$ udevadm trigger --action=change (tipo de acción a simular: add, remove, change)
+$ udevadm settle (esperar indefinidamente a que terminen los eventos)
+$ udevadm settle --timeout=10 (con timeout: falla si no termina en 10 segundos)
+$ udevadm control --reload-rules (recargar las reglas .rules sin reiniciar)
+$ udevadm control --reload-rules && udevadm trigger (recargar reglas Y re-lanzar eventos)
+$ udevadm control --log-priority=debug (cambiar el nivel de log)
+$ udevadm control --log-priority=info (lo mismo)
+$ udevadm control --exit (detener el demonio)
+$ sudo udevadm control --reload-rules && sudo udevadm trigger (flujo común para relanzar todos los dispositivos)
+$ udevadm test /sys/bus/usb/devices/1-1 (simular evento "add" sobre un dispositivo)
+$ udevadm test --action=add /sys/class/block/sda (con una acción específica. La salida muestra exactamente qué reglas se aplican, en qué orden, y qué valores toman las variables)
+$ udevadm verify /etc/udev/rules.d/99-mi-regla.rules (verificar un archivo de reglas concreto para comprobar si tiene una sintaxis correcta)
+$ udevadm verify (verificar todos los archivos de reglas)
+$ udevadm wait /dev/sdb (esperar a que aparezca /dev/sdb)
+$ udevadm wait --timeout=5 /dev/disk/by-label/DATOS (lo mismo con timeout de 5 segundos)
+$ udevadm lock --device=/dev/sda -- fdisk /dev/sda (bloquear /dev/sda durante la ejecución de un comando)
+$ udevadm lock -d /dev/sda1 dd if=fs.raw of=/dev/sda1 (bloquea el dispositivo sda1 mientras se ejecuta el comando dd)
+
+
 udevil
 Monta y desmonta dispositivos extraíbles y recursos compartidos de red sin requerir una contraseña, muestra información del dispositivo y monitorea los cambios del dispositivo. Incluye el script de montaje automático devmon.
 $ udevil mount /dev/sda1
