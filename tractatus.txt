@@ -53637,6 +53637,25 @@ sdmem
 # sdmem -v -l -l (producirá un terminal llena de asteriscos **** para mostrar actividad mientras se sobrescribe el espacio libre en RAM)
 
 
+sdparm
+Herramienta que muestra y, en algunos casos, modifica los parámetros de los dispositivos SCSI. Además de los discos SCSI, entre estos dispositivos se incluyen las unidades de CD/DVD independientemente del tipo de transporte, las unidades de cinta SCSI y ATAPI y las carcasas SCSI. A diferencia de hdparm [ver], que está más orientado a ATA/IDE, sdparm trabaja con dispositivos que hablan SCSI o presentan una interfaz compatible con comandos SCSI.
+# lsscsi (identificar el dispositivo. Ver el comando)
+# sdparm /dev/sdX (muestra parámetros comunes del dispositivo. En algunos dispositivos se verá información de caché, lectura diferida, escritura en caché y otros campos relacionados)
+# sdparm -i /dev/sdX (visión general del dispositivo y ayuda a confirmar que está apuntando al nodo correcto)
+# sdparm --long /dev/sdX (muestra más detalle de los atributos)
+# sdparm --all /dev/sdX (intenta exponer toda la información disponible)
+# sdparm /dev/sda (ver parámetros de un disco)
+# sdparm --page=ca /dev/sda (consultar una página concreta en este caso la página caché)
+# sdparm --page=80 /dev/sdX (ver la página 80 de la VPD, que suele asociarse a la Unit Serial Number. También es muy común la 83, que contiene identificadores de dispositivo)
+# sdparm --vpd /dev/sdX (ver páginas VPD disponibles. Las páginas VPD que sirven para obtener información de identidad del dispositivo, no tanto de ajuste)
+# sdparm --set=WCE /dev/sda (intenta activar WCE [Write Cache Enable] en la página actual, si el dispositivo lo admite)
+# sdparm --set=WCE --save /dev/sda (cambiar y guardar para aplicar el cambio también de forma persistente, no solo en el estado actual)
+# sdparm -s WCE=1,RCD=0 -S /dev/sda (activar escritura y desactivar lectura diferida)
+# sdparm --command=eject /dev/sr0 (expulsar un DVD)
+# sdparm --command=close /dev/sr0 (cerrar la bandeja)
+Nota.- Cambiar parámetros de caché o modos del dispositivo puede afectar rendimiento y, en algunos casos, seguridad de datos si se usan valores inadecuados.
+
+
 seashells
 [python-pip]. Herramienta que canaliza la salida de un comando de la terminal a la web en tiempo real. Para instalar:
 # pip install seashells
