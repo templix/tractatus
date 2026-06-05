@@ -53651,6 +53651,12 @@ $ sdml draw archivo.sdm --diagram uml-class (generará un diagrama de clases UML
 $ sdml deps --input-file archivo.sdm (mostrará las dependencias de un módulo SDML especificado en el archivo archivo.sdm)
 
 
+sdop
+[Simple DocBook Processor]. Convertir documentos XML escritos en un subconjunto simplificado de DocBook directamente a formato PostScript [PS], que se puede convertir fácilmente a PDF, sin la necesidad de configuraciones complejas. A diferencia de las cadenas de herramientas tradicionales de DocBook que suelen requerir xsltproc, hojas de estilo XSLT, DTDs y a veces entornos Java como Apache FOP, sdop está escrito para ser minimalista: no valida contra un DTD, no descarga recursos de internet y no usa hojas de estilo externas.
+$ sdop -o doc.ps doc.xml (archivo de salida ps y la entrada en xml)
+$ ps2pdf doc.ps doc.pdf (si se precisa para el ps a pdf)
+
+
 sdparm
 Herramienta que muestra y, en algunos casos, modifica los parámetros de los dispositivos SCSI. Además de los discos SCSI, entre estos dispositivos se incluyen las unidades de CD/DVD independientemente del tipo de transporte, las unidades de cinta SCSI y ATAPI y las carcasas SCSI. A diferencia de hdparm [ver], que está más orientado a ATA/IDE, sdparm trabaja con dispositivos que hablan SCSI o presentan una interfaz compatible con comandos SCSI.
 # lsscsi (identificar el dispositivo. Ver el comando)
