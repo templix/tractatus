@@ -19176,16 +19176,22 @@ Instalar, obtener, administrar y ejecutar paquetes de aplicaciones, alojadas en 
 # flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 Reiniciar el sistema y ya podran usarse los argumentos especificos que procedan.
 $ flatpak update (actualizar las aplicaciones)
+$ flatpak update org.mozilla.firefox (actualizar una aplicación)
 $ flatpak list (listar aplicaciones instaladas)
+$ flatpak install whatsapp (instalar una aplicación)
 $ flatpak history (mostrar historial)
 $ flatpak config (lenguajes configurados)
 $ flatpak repair (reparar la instalación de flatpak)
-$ flatpak info (mostrar información de una aplicacion instalada)
-$ flatpak uninstall paquete (desinstalar una aplicacion)
-$ flatpak search paquete (buscar apliaciones)
-$ flatpak kill aplicacion (detener una aplicación flatpak en ejecución)
+$ flatpak repair --user (reparar solo las especificas del usuario que lanza el comando)
+$ flatpak repair --dry-run (simular una reparación sin tocar nada)
+$ flatpak info org.telegram.desktop (mostrar información de una aplicacion instalada)
+$ flatpak uninstall org.telegram.desktop (desinstalar una aplicacion)
+$ flatpak uninstall --unused (limpiar referencias que han dejado de ser necesarias)
+$ flatpak uninstall --delete-data org.gnome.gedit (eliminar una aplicación junto con su configuración, cachés y demás datos asociados)
+$ flatpak search org.mozilla.firefox (buscar apliaciones)
+$ flatpak kill org.mozilla.firefox (detener una aplicación flatpak en ejecución)
 $ flatpak ps (ver las aplicaiones faltpak ejecutándose)
-$ flatpak run aplicacion (ejecutar una aplicación flatpak)
+$ flatpak run org.mozilla.firefox (ejecutar una aplicación flatpak)
 
 
 flatzinc
@@ -53635,6 +53641,14 @@ sdmem
 [secure-delete]. Diseñado para eliminar los datos que pueden permanecer en la memoria RAM de forma segura y que no puedan ser recuperados. Es preciso recordar que en las SDRAMs los datos no se borran, sino que se mantienen estáticos y por tanto es fácil extraerles la información necesaria.
 # sdmem -f -v (en modo rápido [f] y verbose [v])
 # sdmem -v -l -l (producirá un terminal llena de asteriscos **** para mostrar actividad mientras se sobrescribe el espacio libre en RAM)
+
+
+sdml
+[Simple Domain Modeling Language]. Es una interfaz de línea de comandos para el lenguaje SDML, principalmente para la verificación y traducción de código fuente SDML a otros formatos. Es un lenguaje pequeño orientado a datos para construir, documentar y razonar sobre un modelo de dominio conceptual.
+$ sdml verify archivo.sdm (verificará la sintaxis y la validez del archivo)
+$ sdml convert archivo.sdm --output-format markdown (convertirá archivo.sdm al formato Markdown y generará un archivo de salida con la extensión .md9
+$ sdml draw archivo.sdm --diagram uml-class (generará un diagrama de clases UML a partir de archivo.sdm. Otras opciones de diagramas: concepts o entity-relationship)
+$ sdml deps --input-file archivo.sdm (mostrará las dependencias de un módulo SDML especificado en el archivo archivo.sdm)
 
 
 sdparm
