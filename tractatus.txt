@@ -32535,18 +32535,22 @@ $ lxpanelctl restart (recargar la configuración)
 $ lxpanelctl menu (comprobar que "cli" sale en el menú y que en él existe la aplicación "ip" y que acercando el puntero muestra eñ "comment")
 
 
+lxqt
+Metapaquete destinado a proporcionar todos los componentes de LXQt, además de algunos componentes recomendados, para ofrecer un entorno de escritorio con casi todas las funciones. LXQt es un entorno de escritorio avanzado, fácil de usar y rápido basado en tecnologías Qt. El archivo de configuración en ~/.config/lxqt/
+
+
 lxqt-globalkeys
 Gestor de atajos de lxqt. Es una aplicación con interfaz gráfica [lxqt-config-globalkeyshortcuts]
 Muestra del archivo de configuración de los atajos:
 $ nano ~/.config/lxqt/globalkeyshortcuts.conf
-[Meta%2BF.41]
-Comment=navegador
-Enabled=true
-Exec=firefox
-[Print.50]
-Comment=captura pantalla
-Enabled=true
-Exec=gnome-screenshot, -i
+       [Meta%2BF.41]
+       Comment=navegador
+       Enabled=true
+       Exec=firefox
+       [Print.50]
+       Comment=captura pantalla
+       Enabled=true
+       Exec=gnome-screenshot, -i
 Las teclas windows+f lanzará firefox y pulsar la tecla ImprPant realizará un pantallazo.
 
 
