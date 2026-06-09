@@ -11436,20 +11436,32 @@ Con el siguiente contenido:
        if (get_window_name() == "Mozilla Firefox") then
            set_workspace(2)
        end
-Para mover una ventana llamada "Terminal" a la esquina superior izquierda y cambiar su tamaño a 800x600 píxeles:
+$ nano ~/.config/devilspie2/terminal.lua
+Para que una ventana llamada "Terminal" se abra en la esquina superior izquierda y cambiar su tamaño a 800x600 píxeles:
 $ nano ~/.config/devilspie2/terminal.lua (crear el archivo)
        if (get_window_name() == "Terminal") then
            set_window_geometry(0, 0, 800, 600)
        end
-Para que la ventana llamada "Music Player" esté disponible en todos los espacios de trabajo:
+$ nano ~/.config/devilspie2/music_player.lua
+Que la ventana llamada "Music Player" esté disponible en todos los espacios de trabajo:
        if (get_window_name() == "Music Player") then
            pin_window()
        end
+$ $ nano ~/.config/devilspie2/gedit.lua
 Para aplicar reglas a todas las ventanas de "Gedit"
        if (get_application_name() == "gedit") then
            set_workspace(3)
            maximize()
        end
+Para que varias terminales se abran sin decoración
+$ nano ~/.config/devilspie2/terminales.lua
+if get_window_class() == "Sakura" or
+   get_window_class() == "Terminator" or
+   get_window_class() == "LXTerminal" or
+   get_window_class() == "xfce4-terminal" or
+   get_window_class() == "URxvt" then
+   undecorate_window()
+end
 $ devilspie2 --debug (ejecutar en modo de prueba para verificar que las reglas funcionan correctamente)
 Para que devilpie2 inicie al arrancar el pc, por ejemplo en LXDE:
 # nano /etc/xdg/lxsession/LXDE/autostart
