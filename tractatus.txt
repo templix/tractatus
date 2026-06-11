@@ -53702,6 +53702,22 @@ seabios
 Implementación de código abierto de un BIOS tradicional. Se utiliza comúnmente como el firmware de arranque en máquinas virtuales y en algunos sistemas embebidos. No es algo que se ejecute directamente desde la línea de comandos. Es un firmware que se ejecuta en la etapa de POST [Power On Self Test] de la computadora, antes de que se cargue el sistema operativo y no se recomienda reemplazar el BIOS/UEFI de la computadora personal con SeaBIOS, ya que podría causar problemas de arranque y estabilidad..
 
 
+seafile-cli
+Software de sincronización de archivos que permite a los usuarios compartirlos y trabajar en colaboración de forma segura y eficiente.
+$ seaf-cli start (inicia el demonio de Seafile)
+$ seaf-cli init (inicializa el directorio de configuración)
+$ seaf-cli stop (detiene el demonio)
+$ seaf-cli list-remote (lista las bibliotecas remotas)
+$ seaf-cli list (lista las bibliotecas locales)
+$ seaf-cli status (ver el estado de la sincronización)
+$ seaf-cli download biblioteca (descarga una biblioteca del servidor Seafile)
+$ seaf-cli download-by-name biblioteca (descarga una biblioteca definida por nombre del servidor Seafile)
+$ seaf-cli sync biblioteca (sincroniza una biblioteca con una carpeta existente)
+$ seaf-cli desync biblioteca (desincroniza una biblioteca con el servidor Seafile)
+$ seaf-cli create biblioteca (crea una biblioteca)
+$ seaf-cli config (configura el cliente de Seafile)
+
+
 seashells
 [python-pip]. Herramienta que canaliza la salida de un comando de la terminal a la web en tiempo real. Para instalar:
 # pip install seashells
