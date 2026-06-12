@@ -53795,6 +53795,15 @@ Abriendo el navegador y colocando la url que da la linea "serving at https://sea
 $ htop | seashells --delay 5 (con actualización automática cada espacio de tiempo indicado)
 
 
+seatd
+Demonio de control de acceso a dispositivos, cambio entre sesiones y la revocación de permisos cuando una sesión deja de estar activa. Coordina el acceso a dispositivos compartidos como pantalla, teclado y ratón para que aplicaciones gráficas puedan usarlos sin ejecutarse como root. En términos prácticos, sirve como backend minimalista para entornos Wayland u otros programas que necesiten acceso controlado a dispositivos de entrada/salida en una sesión de usuario. Incluye seatd-launch.
+# systemctl status seatd.service (comprobar si el servicio está activo)
+$ seatd-launch dbus-run-session sway (lanzar un compositor Wayland en una sesión aislada)
+$ seatd-launch dbus-run-session weston (lanzar Weston con su propia instancia temporal)
+$ seatd-launch dbus-run-session labwc -s foot (lanzar labwc con una terminal específica)
+Nota.- Si seatd.service está activo, el demonio ya está disponible para sesiones que lo usen como backend, sin necesidad de arrancarlo manualmente para cada aplicación.
+
+
 sed
 Permite borrar líneas, registros o sustituir cadenas de caracteres dentro de las líneas.
 Archivo base para ejemplo (Empleado -- Precio/hora -- Horas trabajadas – Cómo las cobra):
