@@ -29397,36 +29397,98 @@ $ ./install.sh
 
 
 kitty
-Emulador de terminal.
-Algunas combinaciones de teclas:
-    C+S+t --> Crear una pestaña nueva.
-    C+S+q --> Cerrar una pestaña.
-    C+S+→ --> Pestaña siguiente.
-    C+S+← --> Pesstaña anterior.
-    C+S+. --> Mover a la derecha la pestaña.
-    C+S+, --> Mover a la izquierda la pestaña.
-    C+S+enter --> Nueva ventana.
-    C+S+n --> Crear marco nuevo.
-    C+S+1 --> Mover foco a la ventana 1 (2,3,...)
-    C+S+l --> Cambiar la distribución de las ventanas
-La distribución de ventanas puede ser:
-    Fat: Ventana arriba ocupando todo el ancho y las demás abajo una al lado de la otra.
-    Grid: Todas las ventanas en una rejilla repartiendo el espacio entre todas.
-    Horizontal: Todas las ventanas unas al lado de las otras.
-    Stack: Las ventanas ocupando todo el marco.
-    Tall: Ventana en la izquierda ocupando todo el alto y el resto a la derecha una encima de otra.
-    Vertical: Ventanas todas apiladas unas encima de otras.
-Muestra de archivo de configuración:
+Emulador de terminal. kitten, incluido en el paquete, es un sistema de subventanas o scripts que actuan como extensiones de Kitty y que permiten extender las capacidades de la terminal sin salir de ella, como cambiar de temas, fuentes, ver imágenes directamente en la terminal, comparar archivos como diff [ver], conectar ssh... Todos los ejemplos se ejecutan dentro de la terminal kitty.
+$ kitten themes (ver temas disponibles)
+$ kitten choose-fonts (donde está la fuente disponible)
+$ kitty +list-fonts (seleccionar una fuente)
+$ kitty +kitten icat imagen.png (abrir una imagen)
+$ kitty +kitten ssh user@host (establecer una conexión ssh)
+$ kitty +kitten diff archivo1 archivo2 (ver diferencias)
+$ kitty +kitten (listado de kitten predeterminados)
+Algunos atajos
+Ctrl-Mayu enter (dividir la ventana horizontal. A la siguiente pulsación de "Ctrl-Mayu enter" se dividirá la ventana del foco en vertical)
+Ctrl-Mayu l (con las mismas ventanas de la pantalla, moverlas para una nueva distribución)
+Ctrl-Mayu w (cerrar una ventana. Si no queda ninguna cierra el panel)
+Ctrl-Mayu 1 (ir a la primera ventana)
+Ctrl-Mayu 3 (ir a la tercera)
+Ctrl-Mayu r (abre las opciones para dimensionar la ventana. Una vez realizada la redimención al pulsar "Esc" se acepta la nueva)
+	  Wider: hace la ventana más ancha y afecta las que están en la misma "columna".
+	  Narrower: hace la ventana menos ancha y afecta las que están en la misma "columna".
+	  Taller: hace más alta la ventana y afecta las que están en la misma "fila".
+	  Shorter: hace menos alta la ventana y afecta las que están en la misma "fila".
+	  Reset: deja las ventanas como estaban antes de que se comenzara a redimensionar.
+Ctrl-Mayu F2 (muestra la configuración que consta en el archivo ~/.config/kitty/kitty.conf)
+Ctrl-Mayu F5 (recargar la configuración si se ha modificado aunque en un principio no se necesita reiniciar Kitty ya que la terminal se recargará en tiempo real)
+Ctrl-Mayu Inicio (ir al principio del documento)
+Ctrl-Mayu Fin (ir al final del documento)
+Ctrl-Mayu t (crear un nuevo panel)
+Ctrl-Mayu q (cerrar un panel)
+Ctrl-Mayu flechas (cambiar entre paneles abiertos)
+Ctrl+Mayu c (copiar)
+Ctrl+Mayu v (pegar)
+Ctrl+Mayu s (pegar de selección)
+Ctrl+Mayu o (pasar selección a programa)
+1.-
+Instalar temas
+$ clone --depth 1 https://github.com/dexpota/kitty-themes.git ~/.config/kitty/kitty-themes
+$ cd ~/.config/kitty
+$ ln -s ./kitty-themes/themes/Floraverse.conf ~/.config/kitty/theme.conf
+Y añadir la línea al archivo de configuración kitty.conf:
+       include current-theme.conf
+$ kitty -o include="~/.config/kitty/kitty-themes/themes/Argonaut.conf" (cambiar al nuevo tema)
+2.-
+Crear un panel con ventanas personalizadas de tamaño distinto cada una
+Para a ajustar el tamaño de las ventanas, hay un detalle importante con el archivo ~/.config/kitty/mi_mosaico.conf: el comando layout afecta a toda la pestaña, no a ventanas individuales. Al poner "layout grid" o "layout tail", se está diciendo a Kitty que cambie las reglas del juego para todo el conjunto, layout splits permite tener más libertad.
 $ nano ~/.config/kitty/kitty.conf
-       font_family      monospace
-       font_size        12
-       enable_audio_bell no
-       shell bash
-       remember_window_size    yes
-       #initial_window_width  640
-       #initial_window_height 400
-       remember_window_position no
-       hide_window_decorations yes
+Añadir la linea:
+       enabled_layouts tall,grid,splits,stack
+$ nano ~/.config/kitty/mi_mosaico.conf
+       # Establecer el layout para esta pestaña
+       #layout tall
+       layout splits
+       # Primera ventana (la principal a la izquierda)
+       launch bash
+       # Segunda ventana (arriba a la derecha)
+       # vsplit para dividir verticalmente y --bias=65 para que la zona derecha ocupe el 55% del total
+       launch --location=vsplit --bias=55 bash
+       # tercera
+       #launch bash
+       # hsplit para cortar de forma horizontal la ventana donde estamos situados.
+       launch --location=hsplit --bias=40 bash
+       # Opcional: Crear una segunda pestaña con dos ventanas
+       new_tab Segunda pestaña
+       layout grid
+       launch bash
+       # Primera ventana (la principal a la izquierda)
+       launch bash
+Con "layout splits", se puede indicar a Kitty de forma explícita si la siguiente ventana se abra al lado [--location=vsplit] o debajo [--location=hsplit], y además el parámetro --bias sirve para decirle qué porcentaje de la pantalla se queda esa ventana.
+$ kitty --session ~/.config/kitty/mi_mosaico.conf (arrancar con el nuevo tipo de ventanas)
+Si se quiere que siempre que se abra Kitty aparezca con esa estructura:
+$ nano ~/.config/kitty/kitty.conf
+Y añadir la linea:
+       startup_session mi_mosaico.conf
+3.-
+Otros snippets de configuración útiles
+$ nano ~/.config/kitty/kitty.conf
+# ~/.config/kitty/kitty.conf
+	# fuente y tamaño
+	font_family      family="Hack"
+	bold_font        auto
+	italic_font      auto
+	bold_italic_font auto
+	font_size        12.0
+	# sin pitidos
+	enable_audio_bell no
+	# lineas en el historial
+	scrollback_lines 5000
+	# copiar texto con el mouse
+	copy_on_select yes
+4.-
+Integrar kitty con VTE en bash
+# Añadir al final de ~/.bashrc o ~/.zshrc
+  	if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
+	    source /etc/profile.d/vte.sh
+        fi
 
 
 kmod
