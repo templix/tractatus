@@ -53804,6 +53804,12 @@ $ seatd-launch dbus-run-session labwc -s foot (lanzar labwc con una terminal esp
 Nota.- Si seatd.service está activo, el demonio ya está disponible para sesiones que lo usen como backend, sin necesidad de arrancarlo manualmente para cada aplicación.
 
 
+seccomp
+Herramienta para interactuar con libseccomp, que permite enumerar fácilmente las llamadas al sistema en todas las arquitecturas compatibles.
+$ scmp_sys_resolver -a x86_64 -t 5 (la llamada número 5 y muestra su nombre)
+$ scmp_sys_resolver -a x86_64 -t fstat (con el nombre "fstat" y muestra su numero)
+
+
 sed
 Permite borrar líneas, registros o sustituir cadenas de caracteres dentro de las líneas.
 Archivo base para ejemplo (Empleado -- Precio/hora -- Horas trabajadas – Cómo las cobra):
