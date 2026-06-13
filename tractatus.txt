@@ -53824,6 +53824,21 @@ $ seccure-veridec -c p521 -i secreto.sc -o secreto_revelado.txt '#MT0bd}>y:R-w0R
 $ seccure-dh (pedirá una frase de paso, calculará un punto en la curva elíptica y devolverá una clave para compartir)
 
 
+secure-delete
+Herramientas para borrar archivos, liberar espacio en disco, memoria de intercambio y memoria RAM. La forma segura consiste en 1 pasada con 0x00, 5 aleatorias, 27 con valores especiales y 5 más aleatorias. Incluye las herramientas sdmem, sfill, srm y sswap.
+$ sdmem -v (eliminar datos de forma segura de la memória RAM y modo verbose)
+$ sdmem -f (modo rápido e inseguro ya que no utiliza /dev/urandom)
+S sdmem -l (dos pasadas la primera con 0x00 y la segunda aleatoria)
+$ sfill dir (borrar de forma segura los datos almacenados en el espacio disponible de los soportes)
+$ sfill /media/sda1 (lo mismo)
+$ sfill -i (borra solo el espacio libre de inodos, no el espacio libre del disco)
+$ sfill -l (borra solo el espacio libre del disco, no el espacio libre de inodos
+$ srm archivo (borrar de forma segura un archivo)
+$ srm -d -r dir (igorando los archivos "." y ".." y de forma recursiva un directorio)
+$ srm -l (solo con dos pasadas)
+$ sswap /dev/sda5 (de forma segura la partición swap que ha de estar desmontada)
+
+
 sed
 Permite borrar líneas, registros o sustituir cadenas de caracteres dentro de las líneas.
 Archivo base para ejemplo (Empleado -- Precio/hora -- Horas trabajadas – Cómo las cobra):
