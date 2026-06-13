@@ -53810,6 +53810,20 @@ $ scmp_sys_resolver -a x86_64 -t 5 (la llamada número 5 y muestra su nombre)
 $ scmp_sys_resolver -a x86_64 -t fstat (con el nombre "fstat" y muestra su numero)
 
 
+seccure
+Herramientas que implementan una selección de algoritmos asimétricos basados en criptografía de curva elíptica [ECC]. En particular, ofrece cifrado/descifrado de clave pública y generación/verificación de firmas. seccure es una herramienta ideal cuando se requiere criptografía asimétrica ligera, independiente de servidores de claves, certificados de revocación, la Red de Confianza o incluso archivos de configuración. Incluye las herramientas seccure-decrypt, seccure-dh, seccure-encrypt, seccure-key, seccure-sign, seccure-signcrypt, seccure-veridec y seccure-verify
+$ seccure-key -c p384 -v > clave_publica.pub (curva matemática que usará y en modo verbose para generar la clave pública y guardarla en un archivo. Si no se establece, sale por pantalla. Pide contraseña)
+las opciones para -c [curva matemática elíptica] son: p160, p192, p224, p256, p384 o p521. A mayor número, más seguridad y claves más largas. Por defectp p160.
+$ seccure-encrypt -m 40 -c p521 -i archivo.txt -o archivo.enc -v '#MT0bd}>y:R-w0Rl~w|el].i...>50c1.gVh+a~aLU' (encriptar el archivo con código de autentificación de 40 bytes y con la clave del apartado anterior entre comillas simples)
+seccure no solo cifra, sino que añade un código de autenticación de mensaje [MAC] para asegurar que nadie manipule el archivo cifrado. Con -m se define cuántos bytes se usan para este código que por defecto suelen ser 20 bytes. Rara vez se necesitará cambiar. Aquí se muestra como ejemplo.
+$ seccure-decrypt -m 40 -c p521 -i archivo.enc -o archivo_descifrado.txt -v (pregunta contraseña. Se deben de especificar las mismas opciones de -m y -c del encriptado)
+$ seccure-sign -c p521 -i archivo.txt -s archivo.txt.sig (crear una firma y guardarla en un archivo)
+$ seccure-verify -c p521 -i archivo.txt -s archivo.txt.sig '#MT0bd}>y:R-w0Rl~w|el].i...>50c1.gVh+a~aLU' (verificar que la firma sea correcta)
+$ seccure-signcrypt -c p521 -i archivo.txt -o secreto.sc -v '#MT0bd}>y:R-w0Rl~w|el].i...>50c1.gVh+a~aLU' (guardar el archivo encriptado en un archivo)
+$ seccure-veridec -c p521 -i secreto.sc -o secreto_revelado.txt '#MT0bd}>y:R-w0Rl~w|el].i...>50c1.gVh+a~aLU' (desencriptar y guardar en el archivo especificado)
+$ seccure-dh (pedirá una frase de paso, calculará un punto en la curva elíptica y devolverá una clave para compartir)
+
+
 sed
 Permite borrar líneas, registros o sustituir cadenas de caracteres dentro de las líneas.
 Archivo base para ejemplo (Empleado -- Precio/hora -- Horas trabajadas – Cómo las cobra):
