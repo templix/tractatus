@@ -53824,6 +53824,29 @@ $ seccure-veridec -c p521 -i secreto.sc -o secreto_revelado.txt '#MT0bd}>y:R-w0R
 $ seccure-dh (pedirá una frase de paso, calculará un punto en la curva elíptica y devolverá una clave para compartir)
 
 
+secnet
+Demonio de enrutador VPN que permite construir redes privadas virtuales distribuidas que abarcan múltiples sitios separados. Está diseñado específicamente para el caso donde una red privada conectando muchos hosts está "oculta" detrás de una única dirección IP enrutable a nivel global. Comunica enteramente usando UDP, por lo que funciona bien con pasarelas que implementan NAT [Network Address Translation]. El archivo de configuración por defecto es /etc/secnet/secnet.conf. Incluye la herramienta make-secnet-sites.
+# makdir /etc/secnet/ (crear el directorio de configuración)
+Ejemplo de como comienza un archivo de configuración mínimo. En esta, a continuación vendría los sites
+# nano /etc/secnet/secnet.conf
+# Configuración del sistema
+  	system {
+	    log logfile({
+            filename "/var/log/secnet.log";
+    	    });
+    	    userid "secnet";
+    	    pidfile "/var/run/secnet.pid";
+        };
+	# Resolutor DNS
+	resolver adns({});
+# systemctl status secnet (verificar el estado del servicio)
+# secnet -n -d -v (ejecutar en primer plano con depuración para troubleshooting)
+# secnet -s mis-sitios (especificar una clave de sitios diferente)
+# secnet --just-check-config (verificar la configuración antes de iniciar)
+# secnet (iniciar secnet con configuración por defecto)
+# tail -f /var/log/secnet.log (ver los logs en tiempo real)
+
+
 secrecy
 Herramienta que genera una clave AES aleatoria de la clave GPG para cifrar archivos. El resultado se guarda por defecto en ~/.libsecrecy/. La herramienta nunca almacena la clave AES en texto plano, sino cifrada con GPG. Ver comando gpg.
 $ gpg --list-secret-keys (verificar si de dispone de clave GPG. Una salida vacía significa que no existe ninguna clave. Si existe muestra el email usado cuando se creó)
