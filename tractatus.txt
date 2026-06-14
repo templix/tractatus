@@ -53841,6 +53841,14 @@ El destinatario necesitará tener su clave privada GPG asociada a amigo@ejemplo.
 $ secrecy importKey amigo@ejemplo.org < mi_clave_exportada.key
 
 
+secsipidx
+Herramienta y servidor API HTTP para verificar o generar identidades SIP seguras. Permite generar y verificar firmas de identidad SIP de acuerdo a los estándares STIR/SHAKEN.
+$ secsipidx -sign-full -orig-tn 493044448888 -dest-tn 493055559999 -attest A -x5u http://asipto.lab/stir/cert.pem -k ec256-private.pem (generar una identidad SIP firmada para una llamada desde el número +493044448888 al +493055559999 con nivel de atestación "A", utilizando la clave privada `ec256-private.pem` y el certificado en `http://asipto.lab/stir/cert.pem)
+$ secsipidx -check -fidentity identity.txt -fpubkey ec256-public.pem -expire 3600 (verifica la validez de la identidad SIP contenida en el archivo identity.txt utilizando la clave pública en ec256-public.pem. El token expira después de 3600 segundos)
+$ secsipidx -http-srv ":8090" -http-dir /secsipidx/http/public -fprvkey ec256-private.pem -fpubkey ec256-public.pem -expire 3600 -timeout 5 (unicia un servidor HTTP en el puerto 8090 que sirve archivos desde /secsipidx/http/public. Permite verificar identidades SIP enviando solicitudes HTTP, utiliza la clave privada ec256-private.pem y la clave pública ec256-public.pem. Los tokens expiran después de 3600 segundos y el timeout de las solicitudes HTTP es de 5 segundos)
+$ secsipidx -sign -header '{"alg":"ES256","typ":"passport"}' -payload '{"origTN":"493044448888","destTN":"493055559999","attest":"A"}' -k ec256-private.pem (genera una identidad SIP firmada utilizando los valores de encabezado y carga útil proporcionados en formato JSON y la clave privada ec256-private.pem)
+
+
 secure-delete
 Herramientas para borrar archivos, liberar espacio en disco, memoria de intercambio y memoria RAM. La forma segura consiste en 1 pasada con 0x00, 5 aleatorias, 27 con valores especiales y 5 más aleatorias. Incluye las herramientas sdmem, sfill, srm y sswap.
 $ sdmem -v (eliminar datos de forma segura de la memória RAM y modo verbose)
