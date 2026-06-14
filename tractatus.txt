@@ -53824,6 +53824,23 @@ $ seccure-veridec -c p521 -i secreto.sc -o secreto_revelado.txt '#MT0bd}>y:R-w0R
 $ seccure-dh (pedirá una frase de paso, calculará un punto en la curva elíptica y devolverá una clave para compartir)
 
 
+secrecy
+Herramienta que genera una clave AES aleatoria de la clave GPG para cifrar archivos. El resultado se guarda por defecto en ~/.libsecrecy/. La herramienta nunca almacena la clave AES en texto plano, sino cifrada con GPG. Ver comando gpg.
+$ gpg --list-secret-keys (verificar si de dispone de clave GPG. Una salida vacía significa que no existe ninguna clave. Si existe muestra el email usado cuando se creó)
+$ gpg --full-generate-key (crear la clave GPG si no se dispone de una)
+$ secrecy createKey AES256 USER@correo.es mykey (lanzar el comando con el mismo correo que el usado para crear la clave GPG. Devolverá un hash indicando que el proceso fue exitoso)
+$ secrecy listKeys (ver listado de claves disponibles)
+$ secrecy setDefaultKey mykey (establecerla como clave por defecto)
+$ secrecy encrypt '' < secreto.txt > secreto2.txt.encrypted (cifrar un archivo si se ha realizado el paso anterior)
+$ secrecy encrypt mykey < secreto.txt > secreto.txt.encrypted (cifrar un archivo si no se ha establecido la clve por defecto)
+$ secrecy decrypt < secreto.txt.encrypted > secreto.txt.decrypted (descifrar)
+1.-
+Exportar la clave para compartirla con alguien (por ejemplo, con `amigo@ejemplo.org`):
+$ secrecy exportKey mykey amigo@ejemplo.org > mi_clave_exportada.key
+El destinatario necesitará tener su clave privada GPG asociada a amigo@ejemplo.org y luego hacer
+$ secrecy importKey amigo@ejemplo.org < mi_clave_exportada.key
+
+
 secure-delete
 Herramientas para borrar archivos, liberar espacio en disco, memoria de intercambio y memoria RAM. La forma segura consiste en 1 pasada con 0x00, 5 aleatorias, 27 con valores especiales y 5 más aleatorias. Incluye las herramientas sdmem, sfill, srm y sswap.
 $ sdmem -v (eliminar datos de forma segura de la memória RAM y modo verbose)
