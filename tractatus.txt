@@ -53976,6 +53976,15 @@ $ sed '/./=' listado.txt | sed '/./N; s/\n/- /' > listado-numerado.txt (Añadir 
 $ sed '/^#/d;/^$/d' archivo > archivo-neto (quitar lineas en blanco y comentario y guardar en un archivo)
 
 
+sedsed
+Herramienta que permite depurar, indentar, tokenizar y convertir a HTML scripts sed.
+$ echo "Linux es un sistema genial" | sedsed -d -e 's/Linux/GNULinux/g' (muestra el PATT [pattern space, línea actual] y HOLD [hold space, buffer auxiliar] antes y después de cada comando)
+$ echo "Linux es un sistema genial" | sedsed -t 's/Linux/GNULinux/g' (muestra los tokens del script)
+$ sedsed -H -e 's/Linux/GNULinux/g' > script.html (genera una versión HTML con colores)
+$ sedsed -d -f script.sed archivo_entrada.txt (depurar un archivo de script completo)
+$ echo "Linux es un sistema genial" | sedsed -t -d 's/Linux/GNULinux/g' (en modo debug)
+
+
 see
 Forma de visualizar imagenes con imagemagic.
 $ see image.jpg
