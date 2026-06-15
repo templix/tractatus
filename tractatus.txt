@@ -53985,6 +53985,33 @@ $ sedsed -d -f script.sed archivo_entrada.txt (depurar un archivo de script comp
 $ echo "Linux es un sistema genial" | sedsed -t -d 's/Linux/GNULinux/g' (en modo debug)
 
 
+sedutil
+Esta es la herramienta de Drive Trust Alliance [DTA] para trabajar con unidades de autocifrado que cumplen con el estándar TCG OPAL 2.00. La herramienta incluye una imagen de autorización previa al arranque para desbloquear la unidad independientemente de las funciones de la BIOS. Incluye los ejecutables linuxpba y sedutil-cli
+# sedutil-cli --initialSetup "MiContraseñaSegura" /dev/nvme0 (configuración inicial. Establece la contraseña SID y Admin1 [iguales]. Activa Locking SP y configura un rango global de bloqueo)
+# sedutil-cli --scan (escanear todos los dispositivos y detectar cuáles son OPAL-compatibles)
+# sedutil-cli --query /dev/nvme0 (consultar la información de descubrimiento y las capacidades OPAL del disco)
+# sedutil-cli --isValidSED /dev/sda (verificar si un disco es SED)
+# sedutil-cli --printDefaultPassword /dev/nvme0 (mostrar la contraseña MSID [contraseña de fábrica, antes de configurar])
+# sedutil-cli --setSIDPassword "ContraseñaActual" "NuevaContraseña" /dev/nvme0 (cambiar la contraseña SID)
+# sedutil-cli --setAdmin1Pwd "ContraseñaActual" "NuevaContraseña" /dev/nvme0 (cambiar la contraseña de Admin1)
+# sedutil-cli --listLockingRanges "MiContraseña" /dev/nvme0 (listar todos los rangos de bloqueo. El rango 0 es el global [todo el disco])
+# sedutil-cli --listLockingRange 0 "MiContraseña" /dev/nvme0 (listar el rango global [0])
+# sedutil-cli --setupLockingRange 1 2048 1048576 "MiContraseña" /dev/nvme0 (configurar un rango personalizado [rango 1, desde sector 2048, longitud 1048576])
+# sedutil-cli --enableLockingRange 0 "MiContraseña" /dev/nvme0 (habilitar un rango de bloqueo)
+# sedutil-cli --disableLockingRange 0 "MiContraseña" /dev/nvme0 (deshabilitar un rango de bloqueo)
+# sedutil-cli --setLockingRange 0 LK "MiContraseña" /dev/nvme0  (cambiar estado del rango LK [bloqueado]) RW (, RO (solo lectura), LK (bloqueado)
+# sedutil-cli --setLockingRange 0 RW "MiContraseña" /dev/nvme0 (cambiar estado del rango RW [lectura/escritura]. Otra opción es RO [solo lectura])
+# sedutil-cli --eraseLockingRange 0 "MiContraseña" /dev/nvme0 (borrar [cripto-borrado] un rango. Genera nueva clave, datos anteriores irrecuperables)
+# sedutil-cli --setMBREnable on "MiContraseña" /dev/nvme0 (habilitar el MBR shadow. El disco presentará linuxpba al arrancar)
+# sedutil-cli --loadPBAimage "MiContraseña" /usr/share/sedutil/linuxpba.img /dev/nvme0 (cargar la imagen linuxpba en el Shadow MBR)
+# sedutil-cli --setMBRDone on "MiContraseña" /dev/nvme0 (marcar MBRDone=on indica que el PBA ya desbloqueó el disco y se puede arrancar el SO real)
+# sedutil-cli --setMBREnable off "MiContraseña" /dev/nvme0 (deshabilitar el MBR shadow [el disco arranca directamente sin pedir contraseña])
+# sedutil-cli --revertNoErase "MiContraseña" /dev/nvme0 (desactivar el Locking SP sin borrar datos [solo rango global])
+# sedutil-cli --revertTPer "MiContraseña" /dev/nvme0 (revertir a valores de fábrica [borrar todos los datos])
+# sedutil-cli --yesIreallywanttoERASEALLmydatausingthePSID "PSID1234567890ABCDEF" /dev/nvme0 (reset con PSID [impreso en la etiqueta física del disco]. Usar solo si se perdió la contraseña)
+Nota.- linuxpba es una imagen de autenticación previa al arranque que puede cargarse en el Shadow MBR de un disco cifrado. Esta imagen permite al usuario introducir su contraseña y desbloquear la unidad SED durante el proceso de arranque. No se ejecuta directamente desde el SO instalado. Es un mini-sistema Linux que el firmware del disco presenta en lugar del MBR real cuando el bloqueo está activo.
+
+
 see
 Forma de visualizar imagenes con imagemagic.
 $ see image.jpg
