@@ -54017,6 +54017,14 @@ Forma de visualizar imagenes con imagemagic.
 $ see image.jpg
 
 
+seek-bzip
+Herramienta para la decodificación de datos bzip2 mediante acceso aleatorio. Esto significa que en lugar de descomprimir todo el archivo bzip2 de principio a fin, seek-bzip puede acceder directamente a bloques específicos del archivo, lo que resulta en un acceso más rápido y eficiente a los datos.
+$ seek-bzip archivo.bz2 1000 (decodificará el bloque de la posición número 1000 del archivo archivo.bz2)
+$ seek-bzip archivo.bz2 5000000 > salida.txt (decodificará el bloque número 5000000 del archivo gran-archivo.bz2 y lo mandará a un archivo)
+$ seek-bzip archivo.bz2 1000-2000 (decodificará los bloques desde el 1000 hasta el 2000 del archivo archivo.bz2)
+Nota.- Requiere que el archivo bzip2 tenga un índice de bloques. Si el archivo no tiene este índice, seek-bzip no podrá acceder a los bloques de manera aleatoria.
+
+
 seeker
 Crea una página falsa que solicita la ubicación del usuario.
 # seeker (entra en modo interactivo)
