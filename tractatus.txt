@@ -54208,6 +54208,15 @@ $ echo "Estado del sistema: OK" | sendemail -f yo@ejemplo.com -t destino@ejemplo
 $ sendemail -f yo@ejemplo.com -t destino@ejemplo.com -u "Local" -m "Mensaje" -S (usar sendmail local en lugar de SMTP)
 
 
+sendip
+Herramienta para enviar paquetes IP arbitrarios. Cuenta con numerosas opciones para especificar el contenido de cada encabezado de un paquete RIP, TCP, UDP, ICMP o IPv4 e IPv6 sin procesar. También permite añadir cualquier dato al paquete. Las sumas de verificación se calculan automáticamente, pero si desea enviar sumas de verificación incorrectas, también es posible.
+# sendip -v -p ipv4 -is 192.168.1.50 -p icmp -it 8 192.168.1.1 (enviar un paquete ICMP como el que usa el comando ping, en modo detallado, capa de red, Ip de origen falsa [spoofing], capa de transporte/control tipo de ICMP [el 8 corresponde a "Echo Request"] y la IP de destino)
+# sendip -v -p ipv4 -p udp -us 5000 -ud 80 -d "HolaMundo" 192.168.1.20 (enviar datos aleatorios por UDP [Capa IPv4 + UDP + Datos] por el puerto 5000 en origen y 80 en el destino y la frase que viaja dentro del paquete)
+# sendip -v -p ipv4 -p tcp -ts 1234 -td 443 192.168.1.20 (especificando puerto de salida [1234] y puerto de destino [443])
+# sendip -v -p ipv4 -p udp -uc 0 192.168.1.20 (-uc 0 Fuerza a que el Checksum de la capa UDP sea 0 [inválido/incorrecto], en lugar de dejar que la herramienta lo calcule bien)
+Nota.- sendip solo envía el paquete, pero no muestra la respuesta del objetivo si es que responde.
+
+
 sendmail
 [libnet-ssleay-perl libio-socket-ssl-perl]. Herramienta que permite enviar correos a partir de un servidor externo (p.g gmail). El principal inconveniente es que la contraseña queda expuesta en texto plano en la terminal.
 $ sendmail -f nombrecuenta@gmail.com -t destinatario@hotmail.com -s smtp.gmail.com:587 -u "Asunto" -m "Cuerpo del mensaje" -a archivo_adjunto -v -xu nombrecuenta -xp clavecuenta -o tls=yes
@@ -57328,6 +57337,7 @@ Capturar el trafico de la red.
 # tcpdump -v -i eth1 port 9001 | awk '{print$1,$2,$3}'
 # tcpdump port 9001 (Capturar todo el tráfico del puerto especificado)
 # timeout 60 tcpdump -i wlp2s0 -n host ifconfig.me -vv 2>/dev/null | grep -E "IP|Host" (capturar durante 1 minuto quién abre conexión a ifconfig.me)
+# tcpdump -i enp1s0 icmp (poner a tcpdump a la escucha para tráfico icmp protocolo de control i diagnóstico utilizado para informar de errores de transmissión)
 Algunas opciones:
 -n (Para no resolver las direcciones IP)
 -i (Indica la interfaz de red)
