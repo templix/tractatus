@@ -54195,6 +54195,19 @@ Algunas teclas para navegación básica
 	Ctrl + c --> Cancelar la acción actual.
 
 
+sendemail
+Cliente de correo SMTP ligero escrito en Perl para enviar correos sin necesidad de un cliente de correo completo.
+$ sendemail -f remitente@ejemplo.com -t destinatario@ejemplo.com -u "Prueba" -m "Hola, esto es una prueba" -s smtp.servidor.com:587 (enviar correo. Si no se indica servidor, intenta usar localhost:25 que debe tener un MTA local escuchando)
+$ sendemail -f remitente@ejemplo.com -t destino@ejemplo.com -u "Correo autenticado" -m "Mensaje de prueba" -s smtp.ejemplo.com:587 -xu mi_usuario -xp mi_password -o tls=yes (i el servidor requiere autentificación y TLS)
+$ sendemail -f yo@ejemplo.com -t cliente1@ejemplo.com cliente2@ejemplo.com cliente3@ejemplo.com -u "Aviso" -m "Para varios destinatarios" -s smtp.ejemplo.com:587 (para varios destinatarios)
+$ sendemail -f yo@ejemplo.com -t destinatario@ejemplo.com -cc copia@ejemplo.com -u "Asunto" -m "Hola, esto va con copia" -s smtp.ejemplo.com:587 (con CC)
+$ sendemail -f yo@ejemplo.com -t destinatario@ejemplo.com -bcc copia_oculta@ejemplo.com -u "Asunto" -m "Mensaje con copia oculta" -s smtp.ejemplo.com:587 (con copia oculta [BCC])
+$ sendemail -f yo@ejemplo.com -t destino@ejemplo.com -u "Mensaje desde archivo" -o message-file=mensaje.txt -s smtp.ejemplo.com:587 (cuerpo del mensaje desde un archivo)
+$ sendemail -f yo@ejemplo.com -t destino@ejemplo.com -u "Varios adjuntos" -m "Adjunto varios archivos" -a sesion.pdf imagen.png datos.csv (adjuntar uno o varios archivo separados por espacio)
+$ echo "Estado del sistema: OK" | sendemail -f yo@ejemplo.com -t destino@ejemplo.com -u "Estado" -s smtp.ejemplo.com:587 (enviar desde la salida de un comando)
+$ sendemail -f yo@ejemplo.com -t destino@ejemplo.com -u "Local" -m "Mensaje" -S (usar sendmail local en lugar de SMTP)
+
+
 sendmail
 [libnet-ssleay-perl libio-socket-ssl-perl]. Herramienta que permite enviar correos a partir de un servidor externo (p.g gmail). El principal inconveniente es que la contraseña queda expuesta en texto plano en la terminal.
 $ sendmail -f nombrecuenta@gmail.com -t destinatario@hotmail.com -s smtp.gmail.com:587 -u "Asunto" -m "Cuerpo del mensaje" -a archivo_adjunto -v -xu nombrecuenta -xp clavecuenta -o tls=yes
