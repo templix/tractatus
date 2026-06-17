@@ -23231,6 +23231,7 @@ $ grep -v '^#' /etc/squid/squid.conf | grep -v '^$' > archivo (quitar lineas en 
 $ grep -Ev '^#|^$' /etc/squid/squid.conf > archivo (lo mismo)
 $ mysqldump --help | grep ^routines\|^trigg\|^user -E (buscar tres palabras al inicio de la linea [escapando la barra vertical] de un archivo)
 $ ls | grep -v DIR3 | grep -v archi | xargs -d"\n" rm -rf (borrar directorios y/o archivos dejando alguno [DIR3 i los archivos que contengan "archi"])
+$ ps aux | grep "[a]lerta_red.sh" (que el presente "grep" se excluia de la salida)
 
 
 grepcidr
@@ -54229,6 +54230,16 @@ Algunas opciones:
 -a archivo.pdf
 
 
+sendxmpp
+Script de Perl para enviar mensajes de texto XMPP [Jabber] de forma análoga a mail y sendmail para correo.
+Configuración básica
+$ nano ~/.sendxmpprc
+usuario@servidor.jabber.tld contraseña
+$ echo "Hola desde el servidor" | sendxmpp -t destinatario@servidor.jabber.tld (-t fuerza uso de TLS si el servidor lo soporta)
+$ echo "Esto es una prueba" | sendxmpp -t -u mygmailuser -o gmail.com -p 'mypass' destino@jabber.org (envía mensaje desde mygmailuser@gmail.com a destino@jabber.org)
+$ echo "Backup completado correctamente" | sendxmpp -t -u mygmailuser -o gmail.com -p 'mypass' admin1@jabber.org admin2@otrojabber.tld (enviar a varios destinatarios)
+
+
 sensible-utils
 Varios programas para seleccionar un navegador, editor o paginador.
 $ select-editor (muestra los editores disponibles  para seleccionar el deseado)
@@ -57338,6 +57349,7 @@ Capturar el trafico de la red.
 # tcpdump port 9001 (Capturar todo el tráfico del puerto especificado)
 # timeout 60 tcpdump -i wlp2s0 -n host ifconfig.me -vv 2>/dev/null | grep -E "IP|Host" (capturar durante 1 minuto quién abre conexión a ifconfig.me)
 # tcpdump -i enp1s0 icmp (poner a tcpdump a la escucha para tráfico icmp protocolo de control i diagnóstico utilizado para informar de errores de transmissión)
+# tcpdump -i enp1s0 -n -c 50 -q (información en tiempo real mostrando las últimas 50 IPs y puertos)
 Algunas opciones:
 -n (Para no resolver las direcciones IP)
 -i (Indica la interfaz de red)
