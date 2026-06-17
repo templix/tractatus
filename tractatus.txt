@@ -5020,6 +5020,23 @@ bvi
 Editor orientado a la visualización de archivos binarios basado en el editor de texto vi.
 
 
+bwbar
+Herramienta diseñada para mostrar visualmente el uso actual del ancho de banda en forma de una barra gráfica exportando el uso actual a png. Su funcionamiento principal está diseñado para ser un servicio que se ejecuta en segundo plano y actualiza los archivos automáticamente. Descomentar y completar en el archivo de configuración las opciones:
+# nano /etc/default/bwbar
+       # Directory to put files into
+       DIR=/var/www/html/bwbar
+       # Who to run as
+       RUNAS=www-data
+       # What are the options (eth0, scale of 1.5mbps)
+       OPTIONS="enp1s0 1.5"
+$ mkdir /var/www/html/bwbar (crear el directorio)
+$ sudo chown -R www-data:www-data /var/www/html/bwbar (crear usuario)
+$ sudo chmod 775 /var/www/html/bwbar (permisos)
+$ sudo systemctl restart bwbar.service (reiniciar el servicio)
+$ ls -l /var/www/html/bwbar/ (comprobar si funciona. Deben exister los archivo ubar.png y ubar.txt)
+Abrirlo con el navegador en localhost/bwbar
+
+
 bwm-ng
 Muestra uso del ancho de banda de nuestra conexión o de nuestros discos duros [por defecto en KB por cada medio segundo]
 # bwm-ng (Por defecto nos muestra el ancho de banda de las conexiones de red)
