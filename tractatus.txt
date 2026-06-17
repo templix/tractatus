@@ -1077,34 +1077,34 @@ que generará el archivo miProyecto.jar en el directorio build/jar.
 
 antigravity
 Agente cli de inteligencia artificial de google.
-$ curl -fsSL https://antigravity.google/cli/install.sh | bash (descargar e instalar)
+$ curl -fsSL https://antigravity.google/cli/install.sh | bash (descargar. Se instala en /home/USER/.local/bin/agy)
 $ agy (ejecutar)
 Algunos atajos de telcado
-enter --> Enviar mensaje o confirmar
-alt+enter, ctrl+j, shift+enter --> Insertar salto de línea
-ctrl+c, esc --> Volver atrás/cerrar
-ctrl+d --> Salir
-ctrl+z --> Suspender CLI
-ctrl+l --> Borrar la pantalla
-ctrl+v --> Pegar desde el portapapeles
-shift/alt+click --> Seleccionar y copiar texto
-pgup, shift+up --> Página arriba
-pgdown, shift+down --> Página abajo
-up --> Subir
-down --> Bajar
-left --> Mover a la izquierda/Pestaña anterior
-right --> Mover a la derecha/Pestaña siguiente
-ctrl+home --> Ir al principio
-ctrl+end --> Ir al final
-ctrl+_, ctrl+shift+- --> Deshacer
-ctrl+shift+z --> Rehacer
-y --> Confirmar si
-n --> Confirmar no
-ctrl+y --> Pegar desde el portapapeles
-e --> Editar comando
-↑/↓ --> Navegar
-←/→ --> Cambiar vista
-esc --> Cerrar
+	enter --> Enviar mensaje o confirmar
+	alt+enter, ctrl+j, shift+enter --> Insertar salto de línea
+	ctrl+c, esc --> Volver atrás/cerrar
+	ctrl+d --> Salir
+	ctrl+z --> Suspender CLI
+	ctrl+l --> Borrar la pantalla
+	ctrl+v --> Pegar desde el portapapeles
+	shift/alt+click --> Seleccionar y copiar texto
+	pgup, shift+up --> Página arriba
+	pgdown, shift+down --> Página abajo
+	up --> Subir
+	down --> Bajar
+	left --> Mover a la izquierda/Pestaña anterior
+	right --> Mover a la derecha/Pestaña siguiente
+	ctrl+home --> Ir al principio
+	ctrl+end --> Ir al final
+	ctrl+_, ctrl+shift+- --> Deshacer
+	ctrl+shift+z --> Rehacer
+	y --> Confirmar si
+	n --> Confirmar no
+	ctrl+y --> Pegar desde el portapapeles
+	e --> Editar comando
+	↑/↓ --> Navegar
+	←/→ --> Cambiar vista
+	esc --> Cerrar
 
 
 antiword
@@ -54275,12 +54275,30 @@ Dentro de senpai, los comandos empiezan por "/", algunos de los principales:
        /quit (salir del cliente)
 
 
+sensible-mda
+Utilidad auxiliar que actúa como un enrutador genérico de agentes de entrega de correo MDA [Mail Delivery Agent]. En una configuración tradicional de correo electrónico, el Agente de Transferencia de Correo [MTA] como  sendmail  o  postfix, recibe un correo y necesita entregárselo al usuario local en su buzón. Para ello, debe llamar a un MDA [como procmail o maildrop]. Con esta aplicación, el MTA simplemente llama a sensible-mda que busca automáticamente en el sistema qué MDAs compatibles están instalados y delega la entrega del correo al primero que encuentre en el siguiente orden de prioridad: procmail, maildrop, deliver o mail.local
+Para utilizar sensible-mda en sendmail:
+# nano /etc/mail/sendmail.mc
+Añadir la linea:
+       define(`LOCAL_MAILER_ARGS', `sensible-mda $g $u $h ${client_addr}')dnl
+Para usar sensible-mda con postfix
+# nano /etc/postfix/main.cf
+Añadir la linea
+	mailbox_command = sensible-mda
+1.-
+Simulación manual desde la terminal para comprobar si el correo funciona correctamente simulando una llamada de entrega a través de sensible-mda.
+$ echo -e "Subject: Prueba sensible-mda\n\nHola, esto es una prueba." | /usr/sbin/sensible-mda remitente@externo.com USER "" 127.0.0.1
+sensible-mda recibe el correo, busca cuál de los MDAs está disponible. Si, por ejemplo, detecta que procmail está instalado, ejecutará internamente un comando similar a este para realizar la
+entrega:
+	/usr/bin/procmail -f remitente@externo.com -d USER
+
+
 sensible-utils
 Varios programas para seleccionar un navegador, editor o paginador.
 $ select-editor (muestra los editores disponibles  para seleccionar el deseado)
 $ sensible-browser (abre el navegador presdeterminado)
 $ sensible-editor (abre el editor predeterminado)
-$ sensible-pager (abre como less u archivo de texto)
+$ sensible-pager (abre como less o archivo de texto)
 
 
 sensors
