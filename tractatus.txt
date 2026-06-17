@@ -54253,6 +54253,28 @@ $ stestr run senlin_tempest_plugin.tests.scenario.test_cluster_basic_ops (ejecut
 $ stestr last --html > senlin_test_results.html (generar un informe HTML detallado)s
 
 
+senpai
+Cliente IRC moderno para terminal, diseñado específicamente para funcionar de manera óptima con bouncers [servidores intermediarios que mantienen la conexión IRC activa cuando cierras el cliente]. No guarda logs localmente; en su lugar, recupera el historial directamente del servidor.
+Ejemplo mínimo de configuración:
+$ nano ~/.config/senpai/senpai.scfg
+       address chat.sr.ht
+       nickname tu_nick
+       password "tu_contraseña"
+       username mi_usuario
+       typings false  # opcional: desactiva indicadores de "escribiendo..."
+Si el archivo de configuración no existe, senpai lanza un asistente de configuración interactivo la primera vez que se ejecuta.
+$ password-cmd gopass show irc/<usuario> (obtener la contraseña desde un gestor de contraseñas)
+$ senpai (inicia el cliente con la configuración por defecto)
+$ senpai -nickname <nick> (sobrescribe el nickname de la configuración)
+$ senpai -debug (muestra todos los mensajes IRC enviados/recibidos)
+Dentro de senpai, los comandos empiezan por "/", algunos de los principales:
+       /join #canal (unirse a un canal)
+       /msg <usuario> <mensaje> (enviar mensaje privado)
+       /buffer <número> (cambiar al buffer indicado)
+       /help (mostrar ayuda de comandos disponibles)
+       /quit (salir del cliente)
+
+
 sensible-utils
 Varios programas para seleccionar un navegador, editor o paginador.
 $ select-editor (muestra los editores disponibles  para seleccionar el deseado)
