@@ -54240,6 +54240,19 @@ $ echo "Esto es una prueba" | sendxmpp -t -u mygmailuser -o gmail.com -p 'mypass
 $ echo "Backup completado correctamente" | sendxmpp -t -u mygmailuser -o gmail.com -p 'mypass' admin1@jabber.org admin2@otrojabber.tld (enviar a varios destinatarios)
 
 
+senlin-tempest-plugin
+Suite de pruebas de integración de OpenStack diseñadas para validar que la API y el comportamiento del servicio Senlin [servicio de Clustering y Auto-escalado] funcionan correctamente en un entorno OpenStack en ejecución. Se debe indicar a Tempest que el servicio Senlin está disponible
+# nano /etc/tempest.conf
+[service_available]
+# Indica a Tempest que debe ejecutar las pruebas de Senlin
+senlin = True
+$ stestr run senlin_tempest_plugin (dentro del directorio de tempest y con el entorno virtual activado, ejecutar solo las pruebas del plugin de Senlin)
+$ stestr run --serial senlin_tempest_plugin (ver la salida en vivo)
+$ tempest run --regex senlin_tempest_plugin (filtrar por el nombre del plugin)
+$ stestr run senlin_tempest_plugin.tests.scenario.test_cluster_basic_ops (ejecutar una sola clase o método de prueba)
+$ stestr last --html > senlin_test_results.html (generar un informe HTML detallado)s
+
+
 sensible-utils
 Varios programas para seleccionar un navegador, editor o paginador.
 $ select-editor (muestra los editores disponibles  para seleccionar el deseado)
