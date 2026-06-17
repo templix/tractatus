@@ -54321,6 +54321,11 @@ $ sensors
 $ sensors -f (Muestra la temperatura en grados Fahrenheit)
 
 
+sent
+[farbfeld]. Herramienta sencilla de presentación de diapositivas en texto plano para las X. Cada párrafo representa una diapositiva que se ajusta automaticamente al tamaño de la ventana y se centra; puede incluir imágenes a través de Farbfeld. El uso básico es muy simple: Flechas izquierda/derecha para moverse adelante/atras con las diapositivas, "q" para salir de la presentación y "r" para recargar la presentación si se ha modificado alguna diapositiva. El archivo de la presentación consta de párrafos, con una línea en blanco que separa cada párrafo [cada diapositiva]. Cada línea de entrada se interpreta literalmente, excepto los caracteres de control al principio de las líneas descritas a continuación: "@" Crear una diapositiva individual que contenga la imagen a la que apunta el nombre de archivo que sigue a "@", "#" es un comentario y se ignora en la presentación y "\" crea una línea de entrada usando los caracteres que siguen a la barra invertida sin interpretarlos.
+$ sent archivo.txt
+
+
 seq
 Crea secuencias de números.
 $ seq 7 12 (entre el 7 y el 12)
