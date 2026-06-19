@@ -23058,6 +23058,13 @@ Luego, recarga la configuración
 # gpgconf --reload all
 
 
+gpg-sq
+Implementación alternativa escrita en Rust de la herramienta de línea de comandos gpg [escrito en C] del proyecto GnuPG, desarrollada por el proyecto Sequoia PGP. Ofrece un sustituto directo, aunque no con todas las funciones, del programa gpg.
+$ gpg-sq -e archivo.txt > encript (encriptar un archivo)
+$ gpg-sq --clearsign archivo.txt (firmar un archivo)
+$ gpg-sq --verify archivo.txt.sig archivo.txt (verificar una firma)
+
+
 gpgconf
 Utilidad para consultar y modificar los archivos de configuración en el directorio .gnupg.
 $ gpgconf --reload gpg-agent (informar a gpg-agent de la nueva configuración)
