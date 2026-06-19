@@ -28869,6 +28869,23 @@ $ jupyter-serverextension enable nombre_extension (activa extensiones del servid
 $ jupyter-troubleshoot (verifica versiones, dependencias, errores)
 
 
+just
+Es un gestor de tareas o comandos que funciona de manera similar a "make". Permite definir tareas o comandos en un archivo de configuración .Justfile en el directorio del proyecto, que puede estar escrito en cualquier lenguaje de scripting, ya que "just" simplemente ejecuta los comandos definidos en ese archivo. Se usa para automatizar tareas repetitivas, como compilar código, ejecutar scripts, gestionar entornos, etc.
+Ejemplo simple de archivo justfile
+$ nano .justfile
+       actualizar:
+		 sudo apt update && sudo apt upgrade -y
+       #
+       resolv:
+		 cat /etc/resolv.conf
+       #
+       tty:
+		 tty
+$ just actualizar (ejecutará los comandos de la entrada "actualizar" del archivo .justfile)
+$ just tty (lo mismo de la entrada tty)
+$ just --choose (mostrar las posibles opciones de forma interactiva)
+
+
 k2pdfopt
 Herramienta de línea de comandos que se utiliza para optimizar archivos PDF y DJVU para su visualización en dispositivos electrónicos como lectores de libros electrónicos [e-readers] y smartphones. También puede ser utilizado para manipular archivos PDF de varias maneras, incluyendo el recorte, redimensionamiento, y la aplicación de OCR [Optical Character Recognition - Reconocimiento Óptico de Caracteres].
 $ k2pdfopt input.pdf output.pdf (convertirá el archivo input.pdf en un archivo optimizado output.pdf)
