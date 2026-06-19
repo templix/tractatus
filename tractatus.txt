@@ -1591,6 +1591,21 @@ Empleado para buscar en la base de datos provista por la lista de fuentes [dpkg 
 # apt-cache show login | grep Essential (ver si determinado paquete es esencial)
 
 
+apt-cacher-ng
+Es un servidor proxy HTTP local, por el puerto 3142, que se pone "en medio" entre apt y los repositorios de internet. La primera vez descarga del repositorio real y guarda una copia. Las siguientes veces o desde otras máquinas de la red, lo sirve desde el disco local, sin tocar internet.
+# systemctl status apt-cacher-ng.service (comprobar el estado del servicio)
+$ cat /etc/apt/apt.conf.d/*proxy* 2>/dev/null || echo "Sin configuración de proxy" (comprobar si apt usa el proxy)
+$ grep -i proxy /etc/apt/apt.conf 2>/dev/null (otra forma de verificarlo, si en la salida no aparece nada apt va directamente a internet y no a la caché)
+$ ls /var/cache/apt-cacher-ng/ (ver el almacen de paquetes descargados)
+$ du -sh /var/cache/apt-cacher-ng/ (ver cuánto espacio ocupa)
+1.-
+Que apt use el proxy
+# echo 'Acquire::http::Proxy "http://localhost:3142";' | sudo tee /etc/apt/apt.conf.d/01proxy (crear el archivo de configuración)
+# apt update (actualizar índices)
+# sudo journalctl -u apt-cacher-ng.service -f (inspeccionar los logs del caché)
+En otra terminal instalar un paquetey comprobar los logs del comando anterior. También existe una interfaz web de estadísticas en http://localhost:3142/acng-report.html.
+
+
 apt-clone
 Este paquete clona/restaura los paquetes instalados en un sistema por apt con el sources-list y las claves de los repositorios.
 # apt-clone clone paquetes (los guarda en el archivo paquetes)
