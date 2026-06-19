@@ -54409,6 +54409,24 @@ $ seq -s_ 7 12 (con un guión bajo entre cada número)
 $ seq -s'#' 0 $(tput cols) | tr -d '[:digit:]'  (Escribe una raya de “#” en toda la anchura de la terminal)
 
 
+ser2net
+[Serial to Network]. Demonio que actúa como un puente o proxy bidireccional entre puertos serie físicos como /dev/ttyS0 o USB como /dev/ttyUSB0 y puertos de red TCP o UDP. Permite que cualquier dispositivo conectado a un puerto serie de una máquina sea accesible desde la red local o Internet como si estuviera conectado directamente al cliente.
+Ejemplo de archivo de configuración:
+# nano /etc/ser2net/ser2net.yaml
+      # Define una cabecera opcional al conectar
+      define: &banner "\r\nConectado al puerto serie remoto \d\r\n\r\n"
+      connection: &con1
+      # Escucha en el puerto TCP 2001 usando protocolo Telnet:
+      accepter: telnet,2001
+      enable: on
+      options:
+      banner: *banner
+      # Redirige a /dev/ttyUSB0 a 115200 bps, 8 bits, sin paridad, 1 stop bit:
+      connector: serialdev,/dev/ttyUSB0,115200n81,local
+# systemctl restart ser2net (reinicia el servicio despues de modificar el archivo de configuracíon)
+# ser2net -d -n (con el servicio parado, ejecutar en primer plano con salida de logs a la consola)
+
+
 service
 Inicia o para servicios.
 # service apache2 start (Arranca apache2)
