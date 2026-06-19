@@ -10727,6 +10727,24 @@ Proporciona una serie de pequeñas utilidades que son utilizadas principalmente 
 ischroot, savelog, which.debianutils, add-shell, remove-shell y update-shells.
 
 
+debiman
+[mandoc apt-cacher-ng]. Herramienta para generar un repositorio HTML estático de páginas de manual. Debiman hace que las páginas de manual de Debian sean accesibles en un navegador web en localhost:8089. Incluye las herramientas debiman-auxserver [servidor auxiliar para manejar solicitudes de descarga y redireccionamientos de las páginas generadas], debiman-idx2rwmap [convierte índices en un mapa de redirección para enlazar páginas HTML generadas con ubicaciones específicas en el servidor] y debiman-minisrv [servidor web mínimo que puede usarse para servir las páginas generadas por debiman.].
+# systemctl status debiman-auxserver.service (comprobar estado del servicio)
+# systemctl status apt-cacher-ng.service (tambien tiene que estar activo)
+$ mkdir ~/man (crear el directorio de las manpages)
+$ debiman -serving_dir=/home/USER/man -sync_suites=stable -only_render_pkgs=linux-manual,manpages -remote_mirror=http://deb.debian.org/ (recargar linux-manual manpages, suite stable y
+especificar remote-mirror)
+$ debiman -serving_dir=/home/USER/man -sync_suites=stable-backports -only_render_pkgs=linux-manual,manpages -remote_mirror=http://deb.debian.org/
+$ debiman -serving_dir=/home/USER/man -only_render_pkgs=man-db,coreutils,bash,apt,linux-manual,manpages -remote_mirror=http://deb.debian.org/ (forma básica. Baja de la suite testing)
+Nota.- En "-sync_suites=" las opciones son stable, stable-baskports y testing y es mejor hacerlas por separado que juntas [-sync_suites=stable,stable-backports,testing]
+$ ls -l /home/tux/man/auxserver.idx (comprobar si se ha creado el archivo del índice)
+$ debiman-minisrv -serving_dir=/home/tux/man (inicia el servidor)
+Abrir el navegador y con http://localhost:8089 y ve verá la página de inicio de las páginas man.
+$ killall debiman-minisrv (cerrar el servidor)
+$ debiman -serving_dir=/home/tux/man -remote_mirror=http://deb.debian.org/ (de vez en cuando lanzar el comando para actualizar el directorio)
+Nota.- Si se interrumpe el proceso o con Ctrl-c al volver a lanzar el comando continua donde los dejó.
+
+
 debmirror
 Este programa descarga y mantiene un espejo local parcial de Debian. Puede reflejar cualquier combinación de arquitecturas, distribuciones y secciones. Los archivos se transfieren por FTP, HTTP, HFTP o rsync, y los grupos de paquetes son totalmente compatibles. También realiza el bloqueo y actualiza los archivos de seguimiento.
 # debmirror --method http --host ftp.debian.org --dist sid --dir /var/spool/apt-mirror/mirrors/sid --arch "amd64 i386" --ignoremissing --noverbose (crea un espejo del repositorio "sid" [desarrollo] para arquitecturas amd64 e i386 en el directorio especificado)
