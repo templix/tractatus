@@ -54437,6 +54437,69 @@ Biblioteca ligera en C para sintaxis RDF [Resource Description Framewor], una fa
 $ serdi -o turtle file.ttl > out.ttl (escribe la salida en sintaxis turtle en out.ttl con file.ttl de entrada. Otras opciones de sintaxis NQuads, NTriples y TriG)
 
 
+serf
+Herramienta de descubrimiento de nodos, detección de fallos y orquestación distribuida desarrollada por HashiCorp. Su función principal es mantener un grupo de máquinas informado sobre quién está vivo, quién ha caído y propagar eventos entre ellas.
+# systemctl status serf.service (comprobar estado del servicio)
+$ serf members (lista miembros del un cluster)
+$ serf monitor (muestra registros de un agente)
+$ serf members (miembros del clúster Serf. No está hablando de ningún servicio)
+Estados típicos son:
+	alive --> nodo accesible
+	failed --> no responde
+	left --> abandonó el clúster limpiamente
+	leaving --> está saliendo
+	none --> desconocido
+$ ps aux | grep [s]erf (comprobar si systemd lo lanzó)
+root      398907  0.1  0.2 1975332 17088 ?       Ssl  08:27   0:02 /usr/bin/serf agent -config-dir=/etc/serf/
+$ serf monitor (muestra los registros de transmisión desde un agente Serf)
+1.-
+Ejemplo real de uso. Imaginar tres servidores:
+	web1
+	web2
+	web3
+Arrancar Serf en cada uno:
+$ serf agent -node=web1
+$ serf agent -node=web2
+$ serf agent -node=web3
+En web2 y web3:
+$ serf join IP_DE_WEB1
+Y luego:
+$ serf members
+Podría mostrar:
+       web1  10.0.0.1:7946 alive
+       web2  10.0.0.2:7946 alive
+       web3  10.0.0.3:7946 alive
+Si web2 se apaga:
+       web1  alive
+       web2  failed
+       web3  alive
+Todos los nodos lo sabrán automáticamente.
+2.-
+$ serf event deploy (emitir un evento)
+Todos los nodos reciben "user-event: deploy" y pueden ejecutar scripts asociados:
+$ serf event backup
+3.-
+Consultas distribuidas
+$ serf query uptime (lanzado desde un nodo)
+Todos los nodos reciben la consulta y pueden responder, por ejemplo.
+      web1 -> 15 days
+      web2 -> 3 days
+      web3 -> 27 days
+Nota.- Serf no arranca ni para servicios. Si por ejemplo nginx tiene problemas. Lo que hace es generar eventos como:
+       web2 failed
+y entonces se puede reaccionar con:
+# systemctl restart nginx
+O con:
+systemctl start backup-nginx
+4.-
+Una prueba sencilla para ver cómo funciona sería abrir dos terminales:
+En la primera terminal:
+$ serf monitor
+Y en la segunda terminal:
+$ serf event hola
+Y en la primera terminal se verá aparecer los datos correspondientes
+
+
 service
 Inicia o para servicios.
 # service apache2 start (Arranca apache2)
