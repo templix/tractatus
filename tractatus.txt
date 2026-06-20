@@ -12555,6 +12555,16 @@ $ combine-dmk (lee una serie de archivos nombrados DMK-tt-h.DAT, donde tt es el 
 $ analyze-dmk file.dmk (lee una imagen DMK y imprime estadísticas sobre ella en la salida estándar)
 
 
+dmraid
+Está diseñado específicamente para Fake RAID/BIOS RAID. Lee los metadatos escritos por la BIOS en los discos y utiliza el "Device-Mapper" del kernel de Linux para crear dispositivos lógicos por ejemplo /dev/mapper/isw_abc123_Volume0, que el sistema puede montar y usar. Hoy en día, dmraid se considera una tecnología algo anticuada ya que las distribuciones modernas prefieren usar mdadm [ver] o los controladores nativos de hardware. Sin embargo, sigue siendo vital para recuperar datos de discos antiguos o sistemas dual-boot [Windows + Linux] que usan RAID de BIOS.
+# dmraid -r (descubrir y listar matrices RAID [Discos físicos])
+# dmraid -s (ver cómo ha agrupado dmraid esos discos en un dispositivo lógico)
+# dmraid -ay (al arrancar un live CD para rescatar un sistema o instalar linux en un Fake RAID, los volúmenes no estarán activos por defecto, el comando activa el conjunto RAID)
+# dmraid -an (desactivar un conjunto RAID)
+# dmraid -s -i (monitorizar si un disco ha fallado o si la sincronización está en curso)
+# dmraid -ay -t (probar sin realizar cambios)
+
+
 dmrc
 En algunas ocasiones al iniciar ubuntu aparece la siguiente nota:
 su archivo $HOME/.dmrc no tiene los permisos adecuados y sera ignorado. Esto causara que la sesion e idioma predeterminado no se guarden. El archivo deberia pertener al usuario y tener los permisos 644
@@ -34029,6 +34039,7 @@ Gestión de raids.
         --level=1 (Nivel 1 del RAID [dos discos uno espejo del otro)
         --raid-devices=2 (Número de dispositivos)
         /dev/sdb1 /dev/sdc1 (los dispositivos que vamos a usar)
+# mdadm --assemble --scan (leer los metadatos del RAID del dispositivo)
 
 
 mdbook
