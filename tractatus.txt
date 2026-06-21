@@ -19008,6 +19008,12 @@ protection all
 client all accept
 
 
+firehol-tools
+Herramientas adicionales para firehol [ver]: link-balancer, update-ipsets [descargar y actualizar conjuntos de IPs [ipsets] desde diversas fuentes] y vnetbuild. vnetbuild es para crear redes virtuales complejas.
+# update-ipsets --enable-all (gestor de listas de bloqueo. Bloquea todas las URL que determinadas webs publican sobre IPs conflictivas)
+# link-balancer (balanceo de carga de salida si se dispone, por ejemplo, de dos proveedores de internet. Precisa configuración en /etc/firehol/link-balancer.conf)
+
+
 firejail
 [firetools]. Programa que reduce el riesgo de violaciones de seguridad restringiendo el entorno de ejecución de aplicaciones no confiables encerrandolas en "jaulas" [sanbox] aisladas del sistema operativo, esto incluye al proceso y todos sus descendientes.
 $ firejail transmission-gtk
