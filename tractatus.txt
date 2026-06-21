@@ -54535,6 +54535,13 @@ $ serf event hola
 Y en la primera terminal se verá aparecer los datos correspondientes
 
 
+servefile
+Pequeño servidor HTTP diseñado para la transferencia temporal de archivos. Por defecto, el servidor redirige todas las solicitudes HTTP al archivo especificado, por lo que solo es necesario proporcionar la IP y el puerto a otro usuario para acceder a él.
+$ servefile archivo.txt (forma básica. Se servirá archivo.txt con la URL http://IP:8080/)
+$ servefile -p 5342 -a USER:PASS archivo.txt (especificando puerto y usuario y contraseña. archivo.txt se servirá en http://USER:PASS@IP:5342/)
+$ servefile -l ~/Docs (se abrirá el directorio ~/Docs con la URL http://IP:8080/)
+
+
 service
 Inicia o para servicios.
 # service apache2 start (Arranca apache2)
