@@ -16158,6 +16158,18 @@ $ escputil -M (ver modelos soportados)
 $ escputil -n (prueba de inyectores. Si se ven espacios, limpiar cabezales)
 
 
+esekeyd
+[ESE Key Daemon]. Demonio de teclado multimedia para Linux que permite asignar acciones a combinaciones de teclas específicas, incluyendo teclas multimedia y botones de control remoto. Incluye las aplicaciones keytest y learnkeys.
+# cp /usr/share/doc/esekeyd/examples/example.conf ~/.esekeyd.conf (copiar el archivo de ejemplo como configuracíon)
+# systemctl status esekeyd.service (ver el estado del demonio. Tiene que estar activo)
+El proceso es el siguiente
+# learnkeys ~/.esekeyd.conf (asignar acciones a las teclas multimedia)
+Presionar las teclas multimedia que se desea asignar y el programa pedirá que se ingrese el comando correspondiente para cada tecla. Cuando se haya presionado las teclas multimedia asignadas, se ejecutarán las acciones correspondientes según la configuración definida en ~/.esekeyd.conf.
+# systemctl restart esekeyd.service (reiniciar el demonio para que cargue la nueva configuración)
+# keytest
+Presionar cualquier tecla multimedia y observar la salida en la consola.
+
+
 esetroot
 [eterm-utils]. Configura el fondo de Eterm para transparencia con administradores de ventanas distintos a Enlightenment. kEsetroot se proporciona para KDE.
 $ esetroot -s /home/usuario/imagenes/imagen.jpg (Escala al tamaño de la pantalla)
