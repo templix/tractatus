@@ -9129,6 +9129,12 @@ create-cracklib-dict
 # create-cracklib-dict archivo
 
 
+createfp
+Biblioteca de detección de idiomas utilidazando la generación de huellas digitales. La presencia de ciertos patrones y variaciones con guiones bajos, ayuda a construir un perfil que puede ser comparado con perfiles conocidos de diferentes idiomas.
+$ cat texto.txt | createfp
+$ echo "linux es un sistema genial" | createfp
+
+
 cricket
 Es un motor de configuración, sondeo y visualización de datos integrado en la herramienta RRD. Consta de tres partes visibles para el usuario: cricket-compile [compila el árbol de configuración de Cricket [en /etc/cricket] en el formato leído por el recopilador. Normalmente se ejecuta después de editar los archivos en el árbol de configuración. No se necesitan opciones], collector [lee una configuración de /etc/cricket, compilada por el comando cricket-compile y recopila y almacena datos de acuerdo con la información que encuentra allí. Normalmente se ejecuta desde un trabajo cron] y grapher.cgi [muestra los datos recopilados por Cricket en un formato gráfico. Generalmente se accede a él mediante un navegador web en http://localhost/cgi-bin/cricket/grapher.cgi]. Documentación de la aplicación con el navegador abrir /usr/share/doc/cricket/html/index.html.
 
