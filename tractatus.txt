@@ -54551,6 +54551,22 @@ Inicia o para servicios.
 # service --status-all | grep + (los que estan en ejecución)
 
 
+service-wrapper
+Herramienta que facilita la instalación y gestión de aplicaciones Java como servicios o demonios. Permite que una aplicación Java se ejecute en segundo plano, se reinicie automáticamente en caso de bloqueo o colapso, y se gestione como un servicio del sistema operativo.
+$ wrapper:install --name=myapp --displayname="My Java Application" --description="This is my Java application running as a service" (registra la aplicación Java como un servicio del sistema)
+$ service myapp start (iniciar el servicio)
+$ service myapp stop (detener el servicio)
+$ service myapp status (verificar si el servicio está activo)
+
+
+session-token
+Script de línea de comandos para generar tokens de sesión. session-token es un script que, utilizando el módulo Session::Token, crea tokens de sesión, códigos de restablecimiento de contraseña, contraseñas temporales, identificadores aleatorios, etc.
+$ session-token -n 3 -l 25 (generar 3 tokens de 25 caracteres, por defecto 22)
+$ session-token -a "0123456789" -l 6 (generar un token de 6 caracteres numérico)
+$ session-token -a 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*' -l 15 (de 15 caracteres entre todos los mostrados)
+Nota.- En shells como Bash, el carácter ! dentro de comillas dobles ["..."] activa la expansión de historial [history expansion]. Bash intenta buscar en el historial de comandos recientes algo que empiece con los caracteres que siguen al signo de exclamación, lo que provoca un error, usar comillas simples preservan el valor literal de todos los caracteres.
+
+
 sestatus
 Devuelve el estado de SELinux y la política que se está usando. Ver selinux y getsenforce
 # sestatus
@@ -62991,7 +63007,8 @@ Sistema de monitorización de hosts y redes, inspirado en el sistema Big Brother
 xxd
 convertir textos de ASCII a hexadecimal o viceversa.
 $ xxd -p  (entra en el prompt de la aplicación. Teclear la palabra o frase y darle a intro para la conversión. Ctrl+c para salir del prompt)
-$ xxd -r -p  (Proceso inverso)
+$ xxd -r -p  (Proceso inverso, Entrar en el prompt  pegar la clave anterior, pulsar intro y mostrará la frase entrada)
+$ head -c 16 /dev/urandom | xxd -ps (crear 16 caracteres aleatorios)
 
 
 xxdiff
