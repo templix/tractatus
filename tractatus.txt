@@ -54712,6 +54712,23 @@ Opciones:
 -inversescreen on (Intercambia los colores del texto y el fondo)
 
 
+settle
+Herramienta que ayuda a gestionar la caja de fichas o fichero de tarjetas consistente en pequeños elementos de información almacenados en fichas o tarjetas de papel. Se utiliza metafóricamente para referirse a aplicaciones de conocimiento hipertextual que utilizan notas en texto plano.
+$ nano .config/settle/settle.yaml
+zettelkasten: /home/tux/zettelkasten
+template: ''
+$ settle -S (sincronizar el directorio de notas)
+$ settle compl bash > ~/.local/share/bash-completion/completions/settle (guardar el script en el directorio de autocompletado de bash)
+O en un archivo separado que se carga desde .bashrc
+$ settle compl bash > ~/.settle-completion.bash
+$ echo "source ~/.settle-completion.bash" >> ~/.bashrc
+$ settle sync (sincronizar)
+$ settle query -x python (buscar notas que contengan "python")
+$ settle query -x "python.*tutorial" (buscar con expresión regular)
+$ settle query -t varios (buscar por el título varios)
+$ settle ls tags (listar todo. Opciones tags, referencias, projects, ghosts, path, etc)
+
+
 setuid
 Configuración de permisos de un archivo que permite a un usuario ejecutar ese archivo o programa con el permiso del propietario de ese archivo
               $ ls -l /usr/bin/sudo
