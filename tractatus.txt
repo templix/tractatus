@@ -39759,7 +39759,13 @@ Veamos todo un proceso activando la opción y viendo como saltarsela:
 
 
 nodau
-sencillo programa para tomar notas basado en consola. Le permite crear, editar y ver notas fácilmente, y buscarlas por nombre o fecha
+Programa para tomar notas basado en consola. Le permite crear, editar y ver notas fácilmente, y buscarlas por nombre o fecha. Archivo de configuración:
+$ nano ~/.config/nodau/nodau.conf
+       force_builtin_editor = false
+       external_editor = nano
+       import_old_db = false
+Con "force_builtin_editor = true" se fuerza a usar el editor integrado de norau que acepta caracteres imprimibles estándar, la tecla intro y la tecla retroceso. No admite el movimiento del cursor con las teclas de flecha ni con el ratón. Para salir del editor y guardar la nota, se debe crear una nueva línea con solo un punto [.] o pulsar Escape. "force_builtin_editor = true" tiene prioridad sobre las configuraciones de $EDITOR y external_editor. Si "import_old_db = true" o no está configurado, nodau importará las notas de la base de datos 0.2.x a la base de datos 0.3.x, cosa innecesaria si no es que se trabaja con maquinas o conexiones antiguas.
+$ nodau rename linux varios
 $ nodau new linux (crear una nueva nota con el nombre "linux")
 $ nodau edit linux (editar la nota "linux")
 $ nodau list (listar todas las entradas)
@@ -39769,6 +39775,7 @@ $ nodau encrypt emacs (encriptar la nota "emacs". Pide contraseña y confirmaci�
 $ nodau decrypt emacs (pide contraseña y lo desencripta sin mostrar)
 $ nodau append linux (añadir datos a la entrada "linux" sin sobreescribirla)
 $ nodau del linux (elimina la nota "linux")
+$ nodau rename linux varios (renombrar una entrada)
 
 
 node
