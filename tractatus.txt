@@ -17091,11 +17091,16 @@ rastrea todas las ejecuciones de programas que ocurren en un sistema, o el subco
 
 
 extract
-Similar al conocido comando file [ver], puede mostrar metadatos de un archivo e imprimir los resultados en stdout.
+Similar al comando file [ver], puede mostrar metadatos de un archivo e imprimir los resultados en stdout.
 $ extract -L (mostrar todas las palabras clave)
 $ extract imagen.png (forma básica)
 $ extract -V -x mimetype imagen.png (excluir determinada palabra clave en la salida)
 $ extract -p "page count" archivo.pdf (imprimir solo la clave mencionada)
+
+
+extractpdfmark
+Programa que puede extraer el modo de página y los destinos nombrados como PDFmark de un PDF y obtener los archivos PDF pequeños que los conservan.
+$ extractpdfmark archivo.pdf > archivo.ps
 
 
 extrepo
