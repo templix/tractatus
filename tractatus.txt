@@ -54760,9 +54760,15 @@ $ setxkbmap es (configurarlo en español)
 $ setxkbmap -query (ver la configuración actual)
 
 
-seyon
-Programa de los años 90, diseñado para una época en la que la función principal de un ordenador conectado al exterior era hablar con módems telefónicos. Antes de Internet por Ethernet, Wi-Fi o fibra, era común hacer conectar un módem al puerto serie [/dev/ttyS0], marcar un número de teléfono, conectarse a otro ordenador remoto e interactuar con ese sistema mediante una terminal de texto. Seyon era una aplicación gráfica para X11 que integraba todo eso. Sin un módem o dispositivo serie conectado, muchas de sus características quedan ocultas o resultan inútiles hoy. Un equivalente actual podria ser lrzsz [ver]. Incluye seyon-emu.
-$ seyon-emu (abre un emulador de terminal)
+sexpp
+Herramienta de línea de comandos para leer, analizar y generar expresiones S en tres formatos, Avanzado [advanced], legible por humanos, con espacios [aa bb (cc dd)], Canónico [canonical], compacto, con prefijos de longitud [2:aa2:bb(2:cc2:dd] y Base64, codificación base64 del canónico [{KDI6YWEyOmJiKDI6Y2MyOmRkKSk=}]. Las expresiones S son estructuras de datos para representar datos complejos, como una variación de las expresiones S de LISP.
+$ sexpp (modo interactivo [-p] mostrando todos los formatos: genera formato avanzado [-a], base64 [-b], canónico [-c] y procesa repetidamente hasta pulsar Ctrl+C [-x])
+Un proceso de ejemplo podria ser
+$ echo '(aa bb (cc dd))' > entrada.txt
+$ sexpp -i entrada.txt -o salida.dat -b (convertir a formato base64)
+$ sexpp -i salida.dat -x -o nueva_salida.txt (convertir de base64 a formato legible)
+$ sexpp -i entrada.txt -a -b -c -p -w 0 (mostrar todos los formatos desde un archivo por pantalla sin límite de ancho máximo de linea [-w 0])
+$ echo '(config (usuario admin))' | sexpp -b
 
 
 sexy-bash-prompt
@@ -54774,6 +54780,11 @@ $ cd sexy-bash-prompt
 # make intall
 $ source ~/.bashrc
 Terminada la relectura de .bashrc, veremos los cambios al abrir una terminal.
+
+
+seyon
+Programa de los años 90, diseñado para una época en la que la función principal de un ordenador conectado al exterior era hablar con módems telefónicos. Antes de Internet por Ethernet, Wi-Fi o fibra, era común hacer conectar un módem al puerto serie [/dev/ttyS0], marcar un número de teléfono, conectarse a otro ordenador remoto e interactuar con ese sistema mediante una terminal de texto. Seyon era una aplicación gráfica para X11 que integraba todo eso. Sin un módem o dispositivo serie conectado, muchas de sus características quedan ocultas o resultan inútiles hoy. Un equivalente actual podria ser lrzsz [ver]. Incluye seyon-emu.
+$ seyon-emu (abre un emulador de terminal)
 
 
 sfdisk
