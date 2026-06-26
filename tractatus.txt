@@ -54837,12 +54837,25 @@ $ sfftobmp -j entrada.sff -o salida.jpg (convertir un archivo SFF a JPG)
 $ sfftobmp -t entrada.sff -o salida.tif (convertir un archivo SFF a TIFF)
 
 
+sfftw2
+[sfftw-dev]. Biblioteca para el cálculo de Transformadas Rápidas de Fourier [FFT] en una o más dimensiones. La versión 2 es muy antigua, para su usose recomienta usar libfftw3-dev y libfftw3-single3
+$ gcc mi_programa.c -o mi_programa -lsfftw -lm (compilar un programa que la use)
+$ gcc mi_programa.c -o mi_programa $(pkg-config --cflags --libs sfftw) (lo mismo)
+
+
 sfill
 [paquete secure-delete]. Borrado de todos los rastros de datos del espacio libre del disco. Parecidos parámetros de srm [ver]. Sobreescribe 38 veces el espacio.
 # sfill -f dir (Borrado rápito pero inseguro)
 # sfill -l dir (Como lanzar dos veces sfill -f)
 # sfill -i dir (Borrar solamente inodos en directorio)
 # sfill -zv dir (Sobreescribiendo ceros en el último borrado y mostrando el proceso)
+
+
+sfnt2woff-zopfli
+Crea archivos WOFF con compresión Zopfli. Versión modificada de la utilidad sfnt2woff que utiliza Zopfli como algoritmo de compresión en lugar de zlib. Incluye las herramientas sfnt2woff,
+sfnt2woff-zopfli, woff2sfnt y woff2sfnt-zopfli
+$ woff2sfnt-zopfli file.woff (decodificar el archivo woff)
+$ sfnt2woff-zopfli -n 20 file.otf (codificar un archivo otf a woff con 20 interacciones zopfli. Por defecto 15)
 
 
 sftp
