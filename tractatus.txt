@@ -54796,12 +54796,31 @@ Mostrar un listado de las particiones con sus características exactas.
 
 
 sfeed
-Analizador RSS y Atom y algunos programas de formato. Convierte fuentes RSS o Atom de XML a un archivo separado por TAB. Se incluyen programas de formateo para convertir este formato separado por TAB a varios otros formatos. También se incluyen algunos programas y scripts para importar y exportar OPML y para buscar, filtrar, fusionar y ordenar elementos del feed. Incluye las aplicaciones: sfeed_atom, sfeed_content, sfeed_curses, sfeed_frames, sfeed_gopher, sfeed_html, sfeed_markread, sfeed_mbox, sfeed_opml_export, sfeed_opml_import, sfeed_plain, sfeed_twtxt, sfeed_update, sfeed_web y sfeed_xmlenc
-$ mkdir -p "$HOME/.sfeed/feeds" (crear el directorio)
-$ sfeed_opml_import < file.opml > "$HOME/.sfeed/sfeedrc" (importar el listado de feeds)
-$ sfeed_update (actualizar feeds)
-$ sfeed_plain $HOME/.sfeed/feeds/* > "$HOME/.sfeed/feeds.txt" (exportar los feeds en formato txt)
-$ sfeed_curses ~/.sfeed/feeds/* (lanzar el lector)
+Convierte fuentes RSS o Atom de XML a un archivo en un formato de texto plano separado por tabulaciones e incluye programas de formato para convertir este formato separado por tabulaciones a otros formatos. También incluye programas y scripts para importar y exportar OPML, así como para obtener, filtrar, combinar y ordenar elementos de las fuentes: sfeed_atom, sfeed_content, sfeed_curses, sfeed_frames, sfeed_gopher, sfeed_html, sfeed_json, sfeed_markread, sfeed_mbox, sfeed_opml_export, sfeed_opml_import, sfeed_plain, sfeed_twtxt, sfeed_update, sfeed_web y sfeed_xmlenc.
+Ejemplo de archivo de feeds:
+$ nano $HOME/.sfeed/sfeedrc
+       feeds() {
+               feed "RT" "https://actualidad.rt.com/feeds/all.rss"
+               feed "meneame" "https://www.meneame.net/rss"
+               feed "linux kernel" "https://www.kernel.org/feeds/kdist.xml"
+               feed "xkcd" "https://xkcd.com/atom.xml"
+       }
+$ sfeed_update (actualiza los XML de los feeds en el directorio ~/.sfeed/feeds/ en formato TSV)
+El orden de los campos del formato TSV de sfeed es: `timestamp \t título \t enlace \t contenido \t tipo de contenido \t id \t autor \t categoría`
+$ curl -s https://news.ycombinator.com/rss | sfeed (descargar un feed y ver su salida en TSV)
+$ curl -s https://www.meneame.net | sfeed_web (extrae enlaces a feeds RSS/Atom desde una página web normal)
+$ cat .sfeed/feeds/xkcd | sfeed_atom > xkcd.xml (convierte el TSV a un feed Atom XML válido)
+$ cat ~/.sfeed/feeds/* | sfeed_html > mis_noticias.html (genera una página HTML estática a partir de los feeds desde la que se puede entrar en todos)
+$ cat ~/.sfeed/feeds/xkcd | sfeed_json (convierte el TSV a formato JSON)
+$ cat ~/.sfeed/feeds/xkcd | sfeed_content (muestra el contenido)
+s feed_xmlenc maneja la codificación de caracteres de los archivos XML [UTF-8, ISO-8859-1, etc.] sfeed_update lo usa internamente para asegurar que la salida siempre sea UTF-8 limpia. Rara vez se usa manualmente, pero se puede usar para corregir feeds con caracteres raros.
+$ cat ~/.sfeed/feeds/* | sfeed_mbox > ~/Mail/rss.mbox (convierte los feeds en un buzón de correo en formato mbox)
+$ cat ~/.sfeed/feeds/noticias_hacker | sfeed_plain | less (formatea el TSV en texto plano. Alinea los títulos y acorta las URLs)
+$ cat ~/.sfeed/feeds/miblog | sfeed_twtxt >> ~/.twtxt.txt (convierte los feeds al formato twtxt, un protocolo de microblogging descentralizado basado en texto plano)
+$ cat ~/.sfeed/feeds/* | sfeed_gopher > gophermap (genera un mapa Gopher)
+$ sfeed_curses ~/.sfeed/feeds/* (abrir el lector pasándole los archivos TSV. flechas para navegar, Enter para abrir el enlace en el navegador, y "o" para abrir el contenido)
+$ sfeed_opml_export < ~/.sfeed/sfeedrc > backup_suscripciones.opml (exportar las suscipciones)
+$ cat backup_suscripciones.opml | sfeed_opml_import >> ~/.sfeed/sfeedrc (importar las suscripciones)
 
 
 sfill
