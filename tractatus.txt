@@ -30464,6 +30464,12 @@ Este paquete contiene utilidades para analizar y configurar las capacidades de l
 # filecap
 
 
+libfftw3
+[libfftw3-dev libfftw3-single3]. Biblioteca para el cálculo de Transformadas Rápidas de Fourier [FFT] en una o más dimensiones. Version moderna de sfftw2.
+$ gcc mi_programa.c -o mi_programa -lfftw3f -lm (compilar con single precision en FFTW3)
+$ pkg-config --cflags --libs fftw3f (lo mismo)
+
+
 libmemcached-tools
 Conjunto de utilidades para interactuar y administrar servidores Memcached. Este toolkit está diseñado para ser eficiente en uso de memoria, seguro para subprocesos y ofrecer acceso completo a los métodos del servidor. Este paquete proporciona varias herramientas de línea de comandos: memcaslap, memccapable, memccat, memccp, memcdump, memcerror, memcexist, memcflush, memcparse, memcping, memcrm, memcslap, memcstat y memctouch.
 $ memccp --servers localhost archivo.txt (guarda el contenido de archivo.txt en Memcached y el nombre del archivo es la clave "archivo.txt")
