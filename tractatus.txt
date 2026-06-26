@@ -54823,6 +54823,14 @@ $ sfeed_opml_export < ~/.sfeed/sfeedrc > backup_suscripciones.opml (exportar las
 $ cat backup_suscripciones.opml | sfeed_opml_import >> ~/.sfeed/sfeedrc (importar las suscripciones)
 
 
+sfftobmp
+Herramienta para convertir SFF [Structured Fax File] a mapas de bits de Windows [BMP], mapas de bits portátiles [PBM], imágenes JPEG [JPG] e imágenes TIFF de una o varias páginas.
+$ sfftobmp -b entrada.sff -o salida.bmp (convertir un archivo SFF a BMP)
+$ sfftobmp -p entrada.sff -o salida.pbm (convertir un archivo SFF a PBM)
+$ sfftobmp -j entrada.sff -o salida.jpg (convertir un archivo SFF a JPG)
+$ sfftobmp -t entrada.sff -o salida.tif (convertir un archivo SFF a TIFF)
+
+
 sfill
 [paquete secure-delete]. Borrado de todos los rastros de datos del espacio libre del disco. Parecidos parámetros de srm [ver]. Sobreescribe 38 veces el espacio.
 # sfill -f dir (Borrado rápito pero inseguro)
