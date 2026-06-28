@@ -14922,6 +14922,15 @@ $ eja --web
 Y en el navegador se visualizará el diretorio en la url 127.0.0.1:35248
 
 
+ejecutable
+Directorios básicos donde se instalan los ejecutables en un sistema linux.
+/bin --> Directorio con ejecutables necesarios para levantar o reparar el sistema.
+/sbin --> Directorio con los comandos necesarios para bootear el sistema.
+/usr/bin --> Directorio principal para los archivos ejecutables por usuarios normales.
+/usr/local/bin --> Directorio por defecto para los programas que no son parte del sistema operativo pero son compilados o instalados por el usuario.
+/usr/local/sbin --> Similar al directorio /usr/local/bin pero para administración del sistema o que ejecuta solo el administrador.
+
+
 eject
 Abre/cierra la bandeja del cdrom
 $ eject /dev/cdrom0    (Abre)
@@ -42904,8 +42913,8 @@ $ patch -R -p0 < parche.patch (Deshace los cambios aplicados por el parche anter
 
 
 path
-Ruta para acceder a los datos contenidos en una unidad de almacenamiento.
-# echo $PATH | tr ':' '\\n'   (mostrará los dirs de los ejecutables)
+Variable de entorno que contiene una lista de directorios donde el sistema operativo busca archivos ejecutables para ejecutar comandos sin necesidad de escribir la ruta completa. Ver ejecutable.
+# echo $PATH | tr ':' '\n' (mostrará los dirs de los ejecutables)
 
 
 pathchk
