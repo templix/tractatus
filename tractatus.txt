@@ -18475,6 +18475,12 @@ $ file -z archivo.tar.xz (lo mismo)
 $ sudo file -s /dev/sda (un dispositivo especial
 
 
+file-hierarchy
+Esta página describe la estructura de un sistema Linux moderno. Esta jerarquía es una evolución de la estructura histórica de UNIX e incluye conceptos descritos en la especificación de la jerarquía del sistema de archivos y en la página man hier [ver], así como diversas extensiones documentadas en la especificación del directorio base XDG y en los directorios de usuario XDG.
+Establece restricciones y recomendaciones adicionales para separar la configuración predeterminada del proveedor de la configuración local, así como los archivos estáticos instalados, los datos persistentes y los archivos de tiempo de ejecución efímeros. Este documento no define la estructura de directorios de forma exhaustiva; solo documenta el esqueleto de un árbol de directorios, que se puede ampliar con directorios adicionales en niveles inferiores de la jerarquía. Algunos directorios, como /var/spool/, no se incluyen, aunque podría ser conveniente incluirlos en la estructura de un sistema operativo implementado. Algunos directorios se describen para garantizar la compatibilidad con las distribuciones Linux actuales, pero no se recomienda su uso. Las subsecciones que describen estos directorios están marcadas y muchas de las rutas descritas se pueden consultar con la herramienta systemd-path [ver], en los sistemas donde esta herramienta esté disponible. Las URL estan en la página man y no dispone de ejecutables ni argumentos.
+$ man file-hierarchy
+
+
 file2brl
 Convierta un archivo xml, html o de texto en un archivo braille.
 $ file2brl texto.txt text-braile.txt
@@ -57558,6 +57564,11 @@ Herramientas para almacenar en un formato estructurado y recuperar, con herramie
 $ coredumpctl list (lista de los volcados de memoria disponibles, junto con información sobre el proceso que falló)
 $ coredumpctl gdb <PID> (<PID> es el identificador del proceso que aparece en la lista de coredumpctl list. Esto abrirá gdb con el binario correspondiente y el core dump cargado)
 $ coredumpctl dump <PID> > mi_volcado.core (guardará el core dump en un archivo llamado mi_volcado.core)
+
+
+systemd-path
+Sistema de listas, consultas y rutas de usuario.
+$ systemd-path
 
 
 systemd-resolved
