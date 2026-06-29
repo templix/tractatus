@@ -54957,6 +54957,30 @@ $ sgpt "¿Cuál es la capital de Rumania?"
 $ sgpt "Explícame brevemente qué es una tabla hash en programación"
 
 
+sgrep
+[structured grep]. Herramienta para buscar patrones que opera sobre regiones de texto en lugar de líneas completas, lo que la hace especialmente potente para archivos con estructura definida como SGML, HTML, C, TeX, correos, etc. A diferencia de grep [ver], sgrep puede identificar bloques anidados, delimitados por etiquetas o caracteres específicos, y realizar consultas sobre esas regiones.
+$ sgrep -c '"id -u"' script (muestra la veces que sale el patrón "id -u")
+$ sgrep '"[" .. "]"' script (buscar todas las expresiones entre corchetes)
+$ sgrep '"case $1 in" ._ "esac"' script (buscar desde el inicio case... hasta justo antes del fin de esac)
+$ sgrep '"case $1 in" _. "esac"' script (muestra la región desde la continuación de case... hasta esac)
+$ sgrep '"case $1 in" __ "esac"' script (muestra la región desde la continuación de case hasta antes de esac)
+$ sgrep 'outer("{" .. "}" containing ("sort" or "nest"))' eval.c (encuentra los bloques {...} más externos que contienen "sort" o "nest")
+$ sgrep -o "%f:%r" '"\n" _. "\n" containing "sort" not containing "nest"' *.c (Muestra líneas con "sort" pero sin "nest", precedidas del nombre del archivo [%f] de todos los archivo .c del directorio. El patrón '"\n" _. "\n"` define una línea como desde un salto de línea hasta el siguiente)
+$ sgrep '"/*" quote "*/"' archivo.c (extraer comentarios estilo C. Empareja /* con */ más cercano)
+$ sgrep '"From:" .. "\n"' mailbox (muestra todas las líneas que empiezan con From:)
+$ sgrep '"if" not in ("/*" quote "*/" or ("\n#" .. "\n")) .. ("(" .. ")")' *.c (encuentra "if" seguido de su condición entre paréntesis, pero ignorando "if" dentro de comentarios "/* */" o líneas que empiezan con "#")
+$ sgrep '"<title>" .. "</title>"' archivo.html (extraer el contenido de etiquetas HTML específicas)
+Opciones útiles
+-l --> Formato largo: muestra número de región, archivo, posiciones
+-o "%f:%r" --> Formato de salida personalizado [`%f`=archivo, `%r`=texto, `%s`=inicio, `%e`=fin]
+-i --> Ignora mayúsculas/minúsculas
+-g html --> Usa el scanner HTML integrado
+-g sgml --> Usa el scanner SGML integrado
+-g xml --> Usa el scanner XML integrado
+-f archivo --> Lee la expresión de región desde un archivo
+-S --> [Modo stream] trata múltiples archivos como un solo flujo continuo [-S file1 file2 file3...]
+
+
 sh
 Interprete de comandos.
 $ sh -x script (ejecutará el script y mostrará todas la sentencias que se ejecutan con las variables y comodines ya expandidos)
