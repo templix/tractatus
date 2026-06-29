@@ -54940,6 +54940,17 @@ $ word_components (analiza el grafo de las palabras de 5 letras del idioma ingl�
 Nota.- En assign_lisa y miles_span, el programa dice cosas como: "Solved in 31246013 mems". Donald Knuth no mide el tiempo en milisegundos porque los procesadores cambian con los años, sino en "mems". Un "mem" es un acceso a la memoria de la computadora. Es la forma matemáticamente pura que inventó Knuth para comparar algoritmos: el algoritmo que use menos "mems" es el más eficiente, sin importar si se corre en una supercomputadora de 1993 o en una máquina de 2026.
 
 
+sgml-base
+Crea los directorios de infraestructura SGML [Standard Generalized Markup Language] y proporciona soporte para archivos de catálogo SGML. Los archivos de catálogo SGML son un estándar para definir lenguajes de marcado generalizados para documentos con independencia total del hardware y software utilizados y es el antecesor y base de XML y formatos como DocBook. Incluye los ejecutables update-catalog e install-sgmlcatalog [herramienta antigua sin uso en favor de update-catalog]. Crea la infrastructura de directorios: /etc/sgml, /usr/share/sgml/{declaration,dtd,entities,misc,stylesheet} y /usr/share/local/sgml/{declaration,dtd,entities,misc,stylesheet}
+$ install-sgmlcatalog --remove paquete (elimina entrada del catálogo transicional /etc/sgml/transitional.cat)
+$ update-catalog --quiet --add /etc/sgml/package.cat /usr/share/sgml/package/catalog (registrar el catálogo de un paquete)
+$ update-catalog --quiet --remove /etc/sgml/package.cat /usr/share/sgml/package/catalog (desinstalación)
+$ update-catalog --update-super (regenerar /etc/sgml/catalog el catálogo raíz que engloba todos los demás)
+$ update-catalog --test --add /etc/sgml/mi-catalogo.cat /ruta/al/catalogo (probar cambios sin aplicarlos)
+$ cat /etc/sgml/catalog (ver el contenido del super-catalog)
+Nota.- El archivo /etc/sgml/catalog no se edita manualmente. Se genera automáticamente con --update-super a partir de todos los archivos .cat o enlaces simbólicos a ellos que haya en /etc/sgml/.
+
+
 sgpt
 Es utilizado para realizar una sola consulta rápida con ChatGPT en el terminal. Este comando es útil cuando necesitas una respuesta breve o ejecutar una tarea simple.
 $ sgpt "¿Cuál es la capital de Rumania?"
