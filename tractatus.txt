@@ -11588,8 +11588,9 @@ $ dex -a
 
 
 df
-Mostrar información de las particiones
+[disk free]. Mostrar información de las particiones.
 $ df -h (los resultados en M y G, por defecto son en bytes)
+$ df -h /dev/nvme0n1p1 (de una partición especificada)
 $ df -a (de todas las particiones incluso las de 0 bloques)
 $ df -t vfat (de las particiones especificadas, en el caso las vfat)
 $ df -T (de todas las particiones y el tipo)
@@ -13914,10 +13915,10 @@ $ dtrx -l archivo.zip (Lista los archivos de archivo zip)
 
 
 du
-Mostrar el espacio usado por los directorios
+[disk usage]. Mostrar el espacio usado por los directorios
 $ du -a (Para todos los ficheros, no solo los directorios)
 $ du -h (Da los resultados en M y G, por defecto son en bytes)
-$ du -s (Muestra los totales del directorio o archivo especificados)
+$ du -s ~/Documentos (Muestra los totales del directorio especificado)
 $ du -x (Calcular tamaño sin sumar los puntos de montaje)
 $ du fichero (Muestra el tamaño de fichero)
 $ du | sort -rn | head (Mostrar los 10 archivos que más ocupan)
@@ -54987,6 +54988,10 @@ $ sh -x script (ejecutará el script y mostrará todas la sentencias que se ejec
 $ sh -n script (Chequea la sintaxis sin ejecutar el script. Si no encuentra errores devuelve vacio)
 $ sh -e script (Obliga a terminar el script aunque algún comando falle)
 $ sh -v script (Imprime las lineas de entrada según se leen)
+
+
+sha1cdsum
+Calcular e imprimir sumas de verificación SHA1 protegiéndose contra ataques de colisión conocidos. Este programa es una alternativa directa a sha1sum [ver] de coreutils. El paquete de debian tiene problemas de empaquetado y no dispone de ejecutable.
 
 
 shadow
