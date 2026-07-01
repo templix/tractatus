@@ -54994,6 +54994,16 @@ sha1cdsum
 Calcular e imprimir sumas de verificación SHA1 protegiéndose contra ataques de colisión conocidos. Este programa es una alternativa directa a sha1sum [ver] de coreutils. El paquete de debian tiene problemas de empaquetado y no dispone de ejecutable.
 
 
+shaarli
+Servicio web PHP que se instala en el propio servidor o en local, para gestionar los enlaces favoritos y sin base de datos.
+$ sudo apt-get install php-gd php-intl php-curl composer (instalar dependencias PHP)
+$ git clone https://github.com/shaarli/Shaarli.git /var/www/html/shaarli (descargar Shaarli desde GitHub)
+$ cd /var/www/html/shaarli
+$ composer install --no-dev (instalar dependencias con Composer)
+$ sudo chmod 777 -R /var/www/html/shaarli/ (permisos del directorio)
+Acceder vía navegador para completar la configuración inicial http://localhost/shaarli o el dominio que corresponda.
+
+
 shadow
 [/etc/shadow]. Es el archivo donde se guardan las contraseñas de todos los usuarios del sistema y normalmente se compone del nombre de usuario de la cuenta, seguido del hash del password. Como medida de seguridad, el sistema, después de generar el hash del password, agrega un salt y luego genera un nuevo hash. Este proceso funciona genera un algoritmo en un solo sentido, no hay forma de sacar ni "desencriptar" la contraseña real del hash. La única manera de intentar crackear esta contraseña es por medio de diccionarios o fuerza bruta.
 # cat /etc/shadow | grep USER (ver el Hash del usuario "USER")
