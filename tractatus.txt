@@ -55010,6 +55010,36 @@ shadow
 # cat /etc/shadow | grep -E 'USER|root' (ver el Hash del usuario "USER" y el de root)
 
 
+shamir
+describe una implementación estándar e interoperable del método de compartición de secretos de Shamir [Shamir's Secret Sharing - SSS]. SSS divide un secreto en partes únicas que se pueden distribuir entre los participantes y requiere un número mínimo específico de partes para reconstruir el secreto original. El conocimiento de menos partes de las requeridas no filtra información sobre el secreto.
+Unos procesos de ejemplo podrían ser:
+$ echo -n "linux es genial" | od -A n -t x2 | sed 's/ *//g' (crear un código hexadecimal de la frase)
+696c756e2078736567206e656169006c
+$ shamir create single --master-secret=696c756e2078736567206e656169006c (solo crea un grupo de palabras para establecer el "master-secret")
+  	 Using master secret: 696c756e2078736567206e656169006c
+	 Group 1 of 1 - 1 of 1 shares required:
+	 indicate biology academic academic deadline main romp thunder always anxiety miracle often leader visual warmth coal burden pitch bishop advocate
+$ shamir recover (recuperar el código hexadecimal. Han de entrarse las 20 palabras del comando anterior)
+  	 Enter a recovery share: indicate biology ...
+	 ✓ 1 of 1 shares needed from group indicate biology academic
+	 SUCCESS!
+	 Your master secret is: 696c756e2078736567206e656169006c
+Otro ejemplo con el mismo código pero más complejo:
+$ shamir create custom --master-secret=696c756e2078736567206e656169006c --group-threshold 2 --group 2 3 --group 3 5
+  	 Using master secret: 696c756e2078736567206e656169006c
+	 Group 1 of 2 - 2 of 3 shares required:
+	 fake heat acrobat echo afraid viral laden machine endorse texture lamp inform prune goat earth teacher bumpy scout cluster legal
+	 fake heat acrobat email budget weapon wrist likely trash rival deny easel grasp organize blimp withdraw pecan move keyboard uncover
+	 fake heat acrobat entrance debris umbrella language drug orange formal timely venture stay liquid hunting jacket theory package both afraid
+	 Group 2 of 2 - 3 of 5 shares required:
+	 fake heat beard eclipse bumpy hazard grant reject royal negative main purchase lobe emperor slim distance ultimate numb eyebrow pleasure
+	 fake heat beard emerald blind rainbow trip tofu lamp acid clogs daisy darkness spelling short headset jump year findings headset
+	 fake heat beard envelope dream acquire process keyboard render zero scout blanket work explain aquatic shaft cubic loyalty slow ting
+	 fake heat beard exact density tactics charity chemical agency guard have lyrics favorite story always oasis repair taught silver coding
+	 fake heat beard eyebrow depart painting admit pencil valuable knit network lips ending phantom quantity equation mouse dictate depict tadpole
+$ shamir recover (para mostrar el "master-secret" han de entrarse 2 de las 3 frases del primer grupo y 3 de las 5 frases del segundo grupo)
+
+
 shar
 [shareutils]. Producir un solo archivo a partir de muchos aunque sean todos distintos [png, html, txt, odtn binarios...]. Si se ejecuta un archivo shar recreará los archivos a partir de los que se generó. Tambien pueden extraerse con la aplicación unshar incluyda en shareutils
 $ shar * > datos.shar (empaqueta todos los archivos del directorio en el archivo datos.shar)
