@@ -59119,6 +59119,14 @@ $ tty-clock -r -s -C 2 (que rebote por los lados de la terminal y de color verde
 Nota.- Otros colores: 3: amarillo, 4: azul, 5: rosa, 6:turquesa, 7: blanco
 
 
+tty-share
+Compartir terminal por Internet en modo solo lectura. Quien ve la terminal a través del navegador no puede escribir comandos ni interferir en el equipo emisor. Para dejar de compartir, presionar "Ctrl c".
+$ tty-share
+	local session: http://localhost:8000/s/local/
+	Press Enter to continue!
+A partir de este momento todo lo que se teclee en la terminal aparecerá en el navegador. En el ejemplo anterior se trata de una sesión localpara una sesión remota la URL puede tener un parecido a https://IP/s/a1b2c3d4-e5f6-7890-abcd-1234567890ab.
+
+
 ttygif
 A partir de una grabación de una sesión tty con ttyrec [ver] crea un gif.
   $ ttygif file
