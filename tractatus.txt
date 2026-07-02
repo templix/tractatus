@@ -55040,6 +55040,13 @@ $ shamir create custom --master-secret=696c756e2078736567206e656169006c --group-
 $ shamir recover (para mostrar el "master-secret" han de entrarse 2 de las 3 frases del primer grupo y 3 de las 5 frases del segundo grupo)
 
 
+shanty
+Crea un archivo PostScript a partir de una imagen PNG o JPG y un archivo de texto, donde cada píxel de la imagen se convierte en un carácter del texto en el PostScript.
+$ shanty -i gnu.png -t archivo.txt -o salida.ps (forma básica)
+$ shanty -i gnu1.png -t pass.txt -s letter -d 1.7 -n GNU -o sortida.ps (tamaño letter, por defecto A4, densidad 1.7, por defecto 1.4 y título)
+Otros tamaños son "a2", "a3", "a4", "a5", "a6", "letter", "broadsheet", "ledger", "tabloid", "legal", "executive" y "36x36".
+
+
 shar
 [shareutils]. Producir un solo archivo a partir de muchos aunque sean todos distintos [png, html, txt, odtn binarios...]. Si se ejecuta un archivo shar recreará los archivos a partir de los que se generó. Tambien pueden extraerse con la aplicación unshar incluyda en shareutils
 $ shar * > datos.shar (empaqueta todos los archivos del directorio en el archivo datos.shar)
