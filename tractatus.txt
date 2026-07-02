@@ -55175,6 +55175,11 @@ $ shellcheck -s bash -e SC1003,SC2035 script.sh (especificando el lenguaje y exc
 Nota.- Los códigos de error generados pueden ser consultados en la Wiki del proyecto (<https://github.com/koalaman/shellcheck>) y por su código en <https://github.com/koalaman/shellcheck/wiki/Directive>
 
 
+shelldap
+Interfaz tipo shell para explorar servidores LDAP y editar su contenido. Permite explorar y editar un árbol LDAP como si fuera un sistema de archivos. Conserva el historial de comandos, tiene autocompletado lógico y almacenamiento en caché de credenciales.
+$ shelldap --server servidor.com
+
+
 shelltestrunner
 Herramienta para probar programas de línea de comandos [o comandos de shell arbitrarios]. Lee pruebas declarativas simples que especifican un comando, alguna entrada y la salida esperada, salida de error y estado de salida.
 $ shelltest -c script.sh (mostrando en color las anomalias)
