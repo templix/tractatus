@@ -55202,9 +55202,27 @@ $ ./ejemplo.sh (ejecuta todos los pasos sin preguntar)
 
 
 shelltestrunner
-Herramienta para probar programas de línea de comandos [o comandos de shell arbitrarios]. Lee pruebas declarativas simples que especifican un comando, alguna entrada y la salida esperada, salida de error y estado de salida.
-$ shelltest -c script.sh (mostrando en color las anomalias)
-$ shelltest -c dir/* (de todos los scripts del directorio)
+Herramienta escrita en Haskell para probar programas de línea de comandos de forma declarativa. Lee archivos de prueba donde se define un comando a ejecutar, entrada estándar opcional, y la salida estándar, salida de error y código de salida esperados. Luego ejecuta las pruebas, compara los resultados reales con los esperados y genera un informe. Ejemplo de su uso:
+$ nano ejemplos.test
+       # echo imprime su argumento en stdout, nada en stderr, y sale con 0
+       $ echo a
+       a
+       # cat con una opción inválida: nada en stdout, error en stderr, salida != 0
+       $ ls /home/$USER >/dev/null
+       $ echo $?
+       0
+       # Probar una API REST con curl y jq
+       $ curl -s https://jsonplaceholder.typicode.com/todos | jq '. | length'
+       >
+       200
+       >= //
+       # verificar que `find` encuentra algo bajo `/etc/X11/`
+       $ sudo find /etc -name xorg.conf.d
+       > /\/X11\//
+       >= //
+$ shelltest -c ejemplos.test (mostrar salida en color)
+$ shelltest --hide-successes ejemplos.test (solo muestra fallos)
+$ shelltest ejemplos.test -c -j8 -o1 --hide-successes (en color, 8 hilos en paralelo, 1 segundo por prueba y mostrar solo fallos)
 
 
 shelr
