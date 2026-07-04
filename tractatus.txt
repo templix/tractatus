@@ -55185,6 +55185,22 @@ Lanzador al estilo dmenu con muchas más funciones y un diseño mucho más senci
 $ shellex
 
 
+shellia
+Framework para escribir scripts de shell con ejecución interactiva paso a paso que ayuda a familiarizarse con ellos, revisarlos y encontrar comportamientos inesperados. Varios ejemplos en /usr/share/doc/shellia/examples/. El uso del comando:
+$ nano ejemplo.sh
+       . /usr/share/shellia/ia
+       echo "hola $(whoami)"
+       eval "$ia_init"
+       ia_add 'echo \"Linux es un sistema genial\"'
+       ia_add 'ip a'
+       ia_add 'echo Fin'
+       ia
+". /usr/share/shellia/ia" importa la colección de funciones y variables [ia_add, ia, $ia_init]. El script va registrando "pasos interactivos" mediante "ia_add" que no se ejecutan inmediatamente, más tarde "ia" los va ejecutando uno a uno preguntando al usuario. Las lineas no precedidas por "ia_add" se ejecutan normalmente sin preguntar. eval "$ia_init" es una variable de inicialización del entorno para que las funciones "ia_add" y "ia" queden correctamente preparadas. La comillas dobles ["] han de escaparse con una barra vertical invertida [\].
+$ chmod +x ejemplo.sh
+$ ./ejemplo.sh -i (ejecución de forma interactiva)
+$ ./ejemplo.sh (ejecuta todos los pasos sin preguntar)
+
+
 shelltestrunner
 Herramienta para probar programas de línea de comandos [o comandos de shell arbitrarios]. Lee pruebas declarativas simples que especifican un comando, alguna entrada y la salida esperada, salida de error y estado de salida.
 $ shelltest -c script.sh (mostrando en color las anomalias)
