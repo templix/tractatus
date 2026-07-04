@@ -55243,6 +55243,27 @@ $ shelr push last (Subirla a shelr.tv)
 $ shelr push last --private (Subirla a shelr.tv y mantenerla privada)
 
 
+sherlock
+Encuentra nombres de usuario en redes sociales. se basa en que los diseñadores del sitio proporcionen una URL única para cada nombre de usuario registrado. Para determinar si un nombre de usuario está disponible, Sherlock consulta esa URL y utiliza la respuesta para saber si ya existe un nombre de usuario registrado. Actualmente, la herramienta puede localizar usuarios en más de 300 redes sociales: Apple Developer, Arduino, Docker Hub, GitHub, GitLab, Facebook, BitcoinForum, CNET, IFTTT, Instagram, Play Store PyPI, Scribd, Telegram, TikTok, Tinder, etc.
+$ sherlock --site twitter USER (consultar en twitter)
+$ sherlock --print-all USER (consultar en todos los sites)
+$ sherlock --print-found --output salida USER (solo los que USER es activo y guardar salida)
+
+
+shfmt
+Herramienta escrita en Go que parsea shell scripts y los reformatea de manera consistente: indentación, espaciado, saltos de línea, alineación de comentarios, etc equivalente para shell de black [ver] para python.
+$ shfmt script.sh (muestra el script formateado por pantalla)
+$ shfmt -d script.sh (muestra las diferencias entre el script y el script formateado por pantalla)
+$ shfmt -w -ln bash script.sh (escribe el resultado directamente en el script en vez de por pantalla y especifica dialecto bash)
+$ shfmt -i 4 script.sh > script2.sh (aplica 4 espacios en vez de tablaciones y lo manda a un archivo)
+$ shfmt -l *.sh (muestra los archivo del directorio cuya sintaxis difiere de la standard)
+$ shfmt -w -l . (recorre el árbol de directorios buscando archivos que parezcan scripts de shell, por extensión .sh, .bash o por shebang y los formatea)
+$ shfmt -i 2 -ci -bn -w script.sh (indenta a 2 espacios, indenta las cláusulas "case", pone "then" y "do" en línea aparte en vez de la misma línea del "if" y "for" y lo escribe en el script)
+$ shfmt -s script.sh (simplificar código redundante eliminando subshells anidados innecesarios y expresiones aritméticas redundantes)
+$ shfmt -ln posix script.sh (si el script tiene sintaxis no-POSIX como arrays de bash, shfmt fallará el parseo y avisará, lo cual es útil como verificación de portabilidad)
+$ shfmt -w -i 2 -ci -sr script.sh (indentación de 2 espacios, cláusulas case indentadas y espacio tras redirecciones)
+
+
 shift
 En un script, permite desplazar los parámetros, de modo que el valor del 1er parámetro ($1) es reemplazado por el valor del 2do parámetro ($2), el del 2do parámetro ($2) por el del 3er parámetro ($3) y así sucesivamente. Veamos un ejemplo:
 	$ mkdir tmp (creamos directorio de trabajo)
