@@ -55201,6 +55201,19 @@ $ ./ejemplo.sh -i (ejecución de forma interactiva)
 $ ./ejemplo.sh (ejecuta todos los pasos sin preguntar)
 
 
+shellinabox
+Herramienta que actúa como un puente que traduce la interfaz de texto de una terminal de Linux a una interfaz gráfica web [HTML/CSS/JavaScript] en tiempo real, lo que permite acceder a la línea de comandos de un servidor remoto simplemente usando el navegador web de la computadora, tableta o teléfono, sin necesidad de instalar ningún cliente SSH. Por defecto, al instalarse, se crea el servicio shellinabox.service que se ejecuta en el puerto 4200.
+# systemctl status shellinabox.service (verificar que el servicio está activo)
+Entrar con el navegador en la página https://localhost:4200/, informará que la acción no es segura, se aceptan los riesgos y pedirá nombre de usuario y contraseña que son los del sistema y abrirá una shell como si se estuvicera en una terminal del sistema para entrar los comandos que procedan.
+Si se quiere acceder por HTTP simple aunque no sea seguro para entornos de producción, editar el archivo:
+# nano /etc/default/shellinabox
+Y añadir la linea:
+      SHELLINABOX_ARGS="--no-beep --disable-ssl"
+# systemctl restart shellinabox.service (reiniciar el servicio después de la modificación
+$ shellinaboxd -p 8080 --disable-ssl -s /htop:USER:USER:/usr/bin:htop (visualizar htop en el navegador en http://localhost:8080/htop
+$ shellinaboxd -p 8082 --disable-ssl -s /nano:tux:tux:/usr/bin:nano (lanzar el editor nano en http://localhost:8082/nano
+
+
 shelltestrunner
 Herramienta escrita en Haskell para probar programas de línea de comandos de forma declarativa. Lee archivos de prueba donde se define un comando a ejecutar, entrada estándar opcional, y la salida estándar, salida de error y código de salida esperados. Luego ejecuta las pruebas, compara los resultados reales con los esperados y genera un informe. Ejemplo de su uso:
 $ nano ejemplos.test
