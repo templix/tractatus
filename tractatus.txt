@@ -3312,6 +3312,18 @@ $ bash-it profile load mi_perfil (cargar el perfil llamado mi_perfil)
 $ bash-it profile rm mi_perfil (eliminar el perfil mi_perfil)
 
 
+bashbro
+Navegador de archivos web basado en Bash que permite navegar, transmitir [streaming], visualizar documentos y guardar archivos de forma remota a través de un navegador web. Es básicamente un servidor HTTP ligero escrito en Bash puro, ideal para entornos sin interfaz gráfica o para acceder a archivos desde cualquier dispositivo con navegador.
+$ bashbro -s -p 5555 (iniciar localmente en un puerto específico)
+Acceder desde tu navegador en http://localhost:5555 o http://<ip-local>:5555
+$ bashbro -s -p 6565 -j /tmp (solo permite acceder a /tmp en el puerto 6565)
+$ bashbro -s -p 6565 -j ~/Docs/archivo.pdf (solo permite acceder ak archivo especificado)
+1.-
+Para ejecutarlo en un servidor remoto via ssh
+$ ssh usuario@servidor-remoto ./bashbro -sp8080 -f ~/Docs
+Y acceder desde el navegador con http://<ip-del-servidor>:8080
+
+
 bashbug
 Guión del shell para ayudar al usuario a componer y enviar informes de fallos concernientes a bash en un formato normalizado. bashbug llama al editor por defecto o, si no está definido a emacs. El usuario debe rellenar los campos apropiados y salir del editor. Entonces, bashbug envía el informe a bug-bash@prep.ai.mit.edu. Si el informe no puede ser enviado, se guarda en el fichero dead.bashbug en el directorio del usuario. La plantilla del informe consiste en varias secciones. La primera proporciona información sobre la máquina, el sistema operativo, la versión de bash y el entorno de compilación. La segunda sección debería rellenarse con una descripción del fallo. La tercera sección debería ser una descripción de cómo reproducir el fallo y la cuarta sección, opcional, es para una correción que se proponga.
 $ bashbug
@@ -3376,6 +3388,13 @@ $ bashtop
 bastet
 Clon libre de Tetris que intenta calcular qué tan útiles son los bloques que necesitas y te da el peor posible.
 $ bastet
+
+
+batalert
+Notificaciones/alertas de batería que se muestra en el escritorio. Notifica cuando la batería está baja, por defecto < 10% o sobrecargada, por defecto > 90%
+Para que el ejecutable se lance cada 15 minutos, añadir como tarea cron la linea:
+       */15 * * * * batalert
+$ batalert (lanzarlo de forma manual)
 
 
 batcat
