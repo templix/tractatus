@@ -55277,6 +55277,21 @@ $ shfmt -ln posix script.sh (si el script tiene sintaxis no-POSIX como arrays de
 $ shfmt -w -i 2 -ci -sr script.sh (indentación de 2 espacios, cláusulas case indentadas y espacio tras redirecciones)
 
 
+shibboleth-sp-utils
+[libapache2-mod-shib]. Es un paquete basado en estándares para el inicio de sesión único en la web, ya sea a través de límites organizacionales o dentro de ellos. Soporta la autorización y el intercambio de atributos utilizando el protocolo OASIS SAML 2.0. Shibboleth permite a los sitios tomar decisiones de autorización informadas para el acceso individual a recursos en línea protegidos, al mismo tiempo que permite a los usuarios establecer sus identidades con sus sistemas de autenticación locales. Incluye los ejecutables mdquery, resolvertest, shib-metagen, shib-keygen, shib-seckeygen y shibd. Precisa configurar Apache /etc/apache2/sites-available/*.conf con "ShibRequestSetting" y "Require shibboleth".
+# systemctl status shibd.service (comprobar si está activo)
+# shib-keygen (generar claves por defecto, la primera vez)
+# shib-keygen -f -h sp.miempresa.edu -e https://sp.miempresa.edu/shibboleth (forzar regeneración y especificar hostname + entityID)
+# shib-keygen -o /dir/shib (generar en otro directorio)
+Crea /etc/shibboleth/sp-cert.pem [certificado público] y /etc/shibboleth/sp-key.pem [clave privada]
+# shib-metagen -h sp.miempresa.edu -e https://sp.miempresa.edu/shibboleth > metadata-sp.xml (generar metadata del SP)
+# shib-metagen -2 -h sp.miempresa.edu -e https://sp.miempresa.edu/shibboleth -c /etc/shibboleth/sp-cert.pem -o "Mi Empresa" -a "Admin/Apellido/admin@miempresa.edu" -s "Soporte/Apellido/soporte@miempresa.edu" > metadata-sp.xml (con más opciones: contactos, certificados, etc)
+El archivo "metadata-sp.xml" es el que se debe enviar al administrador del IdP o subir a un federation como SIR, InCommon, etc.
+# shib-seckeygen (rotación normal de claves de cifrado. Mantiene historial)
+# shib-seckeygen -h 30 -b 256 (lo mismo personalizado)
+# resolvertest -n urn:mace:dir:attribute-def:eduPersonPrincipalName -i https://idp.ejemplo.edu/idp/shibboleth -saml2 (probar el resolutor de atributos)
+
+
 shift
 En un script, permite desplazar los parámetros, de modo que el valor del 1er parámetro ($1) es reemplazado por el valor del 2do parámetro ($2), el del 2do parámetro ($2) por el del 3er parámetro ($3) y así sucesivamente. Veamos un ejemplo:
 	$ mkdir tmp (creamos directorio de trabajo)
