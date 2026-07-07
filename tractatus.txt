@@ -55335,6 +55335,45 @@ $ rm *.txt
 Y probamos con otro número de argumentos.
 
 
+shntool
+Herramienta multiusos para el procesamiento y la generación de informes de datos WAV. Soporta múltiples formatos de audio sin pérdida FLAC, APE, WavPack, AIFF, etc. a través de codificadores externos. Las utilidades son shncat, shncmp, shnconv, shncue, shnfix, shngen, shnhash, shninfo, shnjoin, shnlen, shnpad, shnsplit, shnstrip, shntool y shntrim.
+$ shntool -m (módulos soportados)
+$ shntool -f len (información de un módulo)
+$ shntool -a (argumentos de formato de archivo predeterminados)
+$ shnlen -w -D archivo.wav (suprime "warnings", con la máxima información y muestra duración, tamaño y propiedades)
+$ shnsplit -f album.cue album.wav (dividir WAV según hoja CUE y salida en WAV)
+$ shninfo track01.wav (muestra información exhaustiva del formato WAVE)
+$ shnsplit -f album.cue -o flac album.flac (dividir y convertir directamente a FLAC)
+$ shnsplit -f album.cue -t "%n - %t" album.wav (dividir con nombres personalizados usando campos CUE)
+$ shnsplit -f album.cue -x "2-4,7" album.wav (extraer solo tracks específicos)
+$ shnsplit -l 5:00 largo.wav (dividir en segmentos de 5 minutos)
+$ shnjoin track01.wav track02.wav track03.wav (unir varios archivos en uno solo. Genera joined.wav)
+$ shnjoin -o wav *.flac (unir todos los FLAC y salir como WAV)
+$ shnfix album.wav (corregir problemas de límites de sector)
+$ shnfix -c album.wav (verificar si necesita corrección sin modificar)
+$ shnpad album.wav ( rellenar al final para alinear a sector con silencio)
+$ shnpad -b album.wav (rellenar al principio)
+$ shntrim album.wav (recortar silencio de ambos extremos)
+$ shntrim -b album.wav (solo del principio)
+$ shntrim -e album.wav (solo del final)
+$ shnhash *.wav (MD5 de los datos WAVE. ignora metadatos)
+$ shnhash -s *.wav (SHA1)
+$ shnhash -c *.wav (huella compuesta de todo el conjunto)
+$ shncmp album1.wav album2.wav (comparar dos archivos WAVE)
+$ shncue track01.wav track02.wav track03.wav > album.cue (generar hoja CUE desde archivos individuales)
+$ shncue -s track01.wav track02.wav (generar puntos de división en bytes)
+$ shnconv -o flac album.wav (convertir WAV a FLAC)
+$ shnconv -o wav album.ape (convertir APE a WAV)
+$ shnconv -o ape album.flac (convertir FLAC a APE)
+$ shnstrip album.wav (eliminar chunks RIFF extra y normalizar cabecera. Genera album-stripped.wav)
+$ shngen -l 0:10 (generar 10 segundos de silencio)
+$ shngen -l 1:00 -o flac (generar 1 minuto de silencio en FLAC)
+$ shncat album.wav (volcar datos WAVE crudos a stdout)
+$ shncat -d album.wav (solo cabecera)
+$ shncat -e album.wav (solo datos sin cabecera)
+Nota.- shntool procesa los datos WAVE puros [PCM], no los metadatos.
+
+
 shodan
 Buscador no de sitios web como google, yahoo o bing, sinó de dispositivos conectados a la red [routers, impresoras, camaras ip...]. Precisa registro con lo que aumenta la cantidad de salidas de las busquedas de 10 [sin registro] a 50.
 Opciones generales en la barra de busquedas para usuarios sin cuenta pro:
