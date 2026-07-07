@@ -55506,6 +55506,11 @@ $ shred -fuv -n 50 archivo     (Lo mismo pero 50 veces)
 $ shred -u -z -n 20 archivo.txt  (suprime un archivo y reescribe el espacio 20 veces con ceros)
 
 
+shrinksafe
+Herramienta de compresión de JavaScript. Normalmente puede reducir el tamaño de los scripts en un tercio o más, dependiendo del estilo de programación. Muchas otras herramientas también reducen archivos JavaScript, pero ShrinkSafe en lugar de depender de expresiones regulares frágiles, se basa en Rhino, un intérprete de JavaScript. Esto permite transformar el código fuente de un archivo con mucha más confianza en que el script resultante funcionará de manera idéntica al archivo subido.
+$ shrinksafe original.js > compressed.js
+
+
 shtool
 Compilación de scripts de shell pequeños, estables y portátiles, en una única herramienta. Todos sus componentes se han utilizado en diversos proyectos de software libre y está diseñado para usarse dentro del código fuente de otros paquetes de software libre. Incluye actualmente las siguientes herramientas: echo, mdate, table, prop, move, install, mkdir, mkln, mkshadow, fixperm, rotate, tarball, subst, platform, arx, slo, scpp, version y path.
 
