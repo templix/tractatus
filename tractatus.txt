@@ -55521,6 +55521,11 @@ Reproducir un CD al azar. Precisa cdtool :
 $ for track in $(seq $(cdinfo | grep 'Number of tracks' | awk '{print $NF}') | shuf); do cdplay "$track"; done
 
 
+shunit2
+Marco de pruebas unitarias para scripts de shell basados en Bourne.
+$ cat script.sh | shunit2
+
+
 shutdown
 Apagar/reiniciar el pc.
 $ shutdown -h now    (apagar ya)
