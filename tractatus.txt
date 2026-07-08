@@ -39161,24 +39161,31 @@ Nota.- Otras codificaciones comunes: CP437, IBM437, CP850, ISO-8859-1.
 
 
 nftables
-Herramienta que proporciona filtrado y clasificación de paquetes que reemplaza frameworks existentes (iptables, ip6tables, arptables y ebtables). Podemos comprobar si la instalación se ha efectuado correctamente arrancando el modulo con:
+Herramienta que proporciona filtrado y clasificación de paquetes que reemplaza frameworks existentes [iptables, ip6tables, arptables y ebtables]. El archivo de configuración esta en  /etc/nftables.conf, que por defecto ya contiene una tabla simple de cortafuegos para ipv4/ipv6 llamada “inet filter”
 # modprobe nf_tables
-# modprobe nf_tables_ipv4
-Y verificando si está en uso:
-# lsmod | grep nf_tables
-Formas de uso:
-# nft list tables (ver el listado de tablas)
-# nft list tables ip (ver listado de la familia ip)
-# nft list table ip filter (ver el contenido de una tabla)
-# nft add table ip filter (agregar tablas)
-# nft delete table ip filter (eliminar tablas)
-# nft flush table ip filter (eliminar todas las reglas de una tabla)
-# nft add chain ip filter input { type filter hook input priority 0 \; } (agregar cadenas [nat, filter i route])
-# nft delete chain ip filter input (eliminar cadenas)
-# nft add rule ip filter input tcp dport 80 drop (agregar una regla)
-# nft delete rule ip filter input handle 2 (eliminar regla)
-# nft add rule filter input iifname eth0 tcp dport 80 counter accep (aceptar paquetes en el puerto 80)
+# systemctl status nftables.service (verificar el estado del servicio)
+# nft list ruleset (consultar reglas dadas de alta en el firewall)
+# nft list tables (ver el listado de todas las tablas)
+# nft list table inet filter (ver el contenido de una tabla)
+# nft add table ip filter (crear una tabla)
+# nft 'add chain ip filter input { type filter hook input priority 0; policy accept; }' (agregar cadenas para input  a la tabla "ip filter")
+# nft 'add chain ip filter output { type filter hook output priority 0; policy accept; }' (lo mismo para la salida output)
+# nft add rule ip filter input tcp dport 80 drop (agregar una regla de suprimir todas las entradas al puesto 80)
+# nft add rule ip filter input tcp dport 80 accept (volver a aceptar el tráfico en el puesto 80)
+# nft add rule ip filter input iifname eth0 tcp dport 80 counter accept (aceptar paquetes en el puerto 80 en la interfaz especificada)
 # nft add rule filter input tcp dport 1-1024 counter drop (bloquear tráfico en los puertos del 1 al 1024)
+# nft flush table ip filter (eliminar todas las reglas añadidas a la tabla "ip filter" manteniendo la tabla y los input y ouput básicos)
+# nft chain ip filter input { policy drop \; } (cambiar el input de la policy a drop en la tabla ip filter)
+# nft -a list ruleset (mostrar el número de cada regla)
+# nft delete rule ip filter input handle 2 (eliminar regla num 2 según el comando anterior)
+# nft delete table ip filter (eliminar tabla)
+# nft delete chain ip filter input (eliminar la cadena "input" de la tabla "ip filter")
+1.-
+Al reiniciar la máquina el cortafuego no mantiene el conjunto de reglas, elproceso para restaurarlas es crear una copia de seguridad:
+# echo "nft flush ruleset" > backup.nft
+# nft list ruleset >> backup.nft
+Restaurar las reglas del cortafuego:
+# nft -f backup.nft
 
 
 nfs
@@ -55466,6 +55473,7 @@ shove
 Herramienta de prueba para scripts de shell como sh, bash, dash, ksh y zsh con salida TAP.
 $ cat script.sh | shove
 $ cat script.sh | shove -s zsh (especificar la shell si no es la por defecto [bash])
+$ shove < script.sh (otra forma de lanzar el comando)
 
 
 show_all_colors
