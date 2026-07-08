@@ -55551,7 +55551,30 @@ $ shutdown -r now     (reiniciar ya)
 
 
 shutdown-at-night
-Programar apagados regulares de estaciones de trabajo. La secuencia de apagado se iniciará a través de CRON. Sin embargo, solo se apagarán las máquinas que aparezcan inactivas o sin uso. Las máquinas que estén en uso permanecerán en funcionamiento. El archivo de configuración en /usr/lib/shutdown-at-night/shutdown-at-night.
+Herramienta para programar apagados regulares de estaciones de trabajo por la noche y encenderlas cada mañana mediante nvram-wakeup, ACPI wakeup o wake-on-lan. La secuencia de apagado se iniciará mediante una tarea CRON que se activa cada hora después de las 16:00 [16:00, 17:00, 18:00, etc.]. Sin embargo, solo se apagarán las máquinas que parezcan inactivas o sin usar. Las máquinas que estén en uso permanecerán activas. Para el encendido matutino se usan métodos como nvram-wakeup [para hardware antiguo], ACPI wakeup [rtcwake] o Wake-on-LAN [desde un servidor central]. Una vez instalado, el cron se configura automáticamente, normalmente en /etc/cron.d/shutdown-at-night o similar.
+El archivo de configuración se crea y un ejemplo podria ser:
+# nano /etc/shutdown-at-night/shutdown-at-night
+         # Activar el apagado nocturno
+	 ENABLED=yes
+	 # Hora a partir de la cual empezar a comprobar (formato 24h)
+	 # Por defecto empieza después de las 16:00
+	 START_HOUR=16
+	 # Si no hay actividad en 30 minutos, se considera inactiva.
+	 IDLE_TIME=30
+	 # Métodos de wakeup permitidos, separados por espacio
+	 # Opciones comunes: nvram-wakeup acpi wol
+	 WAKEUP_METHODS="acpi wol"
+	 # (Opcional) Script personalizado para comprobar si la máquina está en uso
+	 # CHECK_SCRIPT=/usr/local/bin/custom-idle-check
+	 # (Opcional) No apagar si hay ciertos procesos corriendo
+	 # IGNORE_PROCESSES="sshd: user1 vim"
+	 # Comentario o nota
+	 # Esta máquina se apaga por la noche para ahorrar energía
+En muchas instalaciones el archivo puede ser tan simple como solo contener ENABLED=yes o incluso estar vacío ya que su presencia ya basta.
+Nota.- Para Wake-on-LAN, normalmente se configura también un archivo /etc/shutdown-at-night/clients en el servidor con las MACs de los clientes:
+         192.168.1.50  00:11:22:33:44:55
+  	 192.168.1.51  aa:bb:cc:dd:ee:ff
+# journalctl -u cron | grep shutdown-at-night (ver logs)
 
 
 sic
@@ -55561,6 +55584,36 @@ $ :j #channel (unirse a un canal)
 $ :m #channel/user "hola user" (enviar un mensaje a un usuario de un canal)
 $ :s #channel/user (establecer un canal o un usuario predeterminados)
 $ :l #channel (salir de un canal)
+
+
+siege
+Siege es una utilidad de pruebas de regresión y evaluación comparativa. Permite realizar pruebas de estrés en una URL con un número definido por el usuario de usuarios simulados, o bien, cargar varias URL en memoria y someterlas a estrés simultáneamente. El programa informa del número total de accesos registrados, los bytes transferidos, el tiempo de respuesta, la concurrencia y el estado de retorno. Siege es compatible con los protocolos HTTP/1.0 y 1.1, las directivas GET y POST, las cookies, el registro de transacciones y la autenticación básica. Sus funciones son configurables por usuario. Incluye los ejecutables bombardment, siege.config y siege2csv
+$ siege.config (crear el archivo de configuración, normalmente en ~/.siege/siege.conf)
+$ siege -c200 -r50 http://localhost (Simula 200 usuarios concurrentes, por defecto 255 y haciendo 50 peticiones cada uno por segundo)
+El resultado puede ser algo tipo:
+   	 Transactions:               20000 hits
+	 Availability:              100.00 %
+	 Elapsed time:                2.87 secs
+	 Data transferred:           85.00 MB
+	 Response time:                0.03 secs
+	 Transaction rate:         6968.64 trans/sec
+	 Throughput:               29.62 MB/sec
+	 Concurrency:              192.25
+	 Successful transactions:       20000
+	 Failed transactions:               0
+	 Longest transaction:            0.05
+	 Shortest transaction:            0.00
+Availability (100.00 %) --> El 100% de las peticiones se respondieron correctamente sin ningún error.
+Response time (0.03 secs) --> Tiempo medio de respuesta fue de apenas 30 milisegundos.
+Transaction rate (6968.64 trans/sec) --> Velocidad de procesamiento de casi 7,000 peticiones por segundo.
+Concurrency (192.25) --> De los 200 usuarios concurrentes, el servidor estuvo manteniendo casi todos activos a la vez de media (192).
+Longest transaction (0.05) / Shortest (0.00) --> La petición que más tardó solo demoró 50 milisegundos, y la más rápida menos de 10 milisegundos.
+$ $ siege -c500 -r100 -b http://localhost (eliminar el pequeño retraso entre peticiones)
+Nota.- A partir de c255, límite de usuario concurrentes, sale la nota:
+        WARNING: The number of users is capped at 255.  To increase this
+                limit, search your .siegerc file for 'limit' and change
+         	its value. Make sure you read the instructions there..
+Pero el proceso continua o bloquea la máquina.
 
 
 signos-comodines
