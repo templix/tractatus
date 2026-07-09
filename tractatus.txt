@@ -55616,6 +55616,23 @@ Nota.- A partir de c255, límite de usuario concurrentes, sale la nota:
 Pero el proceso continua o bloquea la máquina.
 
 
+sieve-connect
+Cliente para el protocolo MANAGESIEVE, tal como lo implementa timsieved en Cyrus IMAP. sieve-connect está diseñado para ser tanto una herramienta que se puede invocar desde scripts como un cliente interactivo eficiente. Sieve es un lenguaje de programación/scripting diseñado específicamente para filtrar correos electrónicos que actua como reglas que se puede crear en Gmail o Outlook, pero en código en el servidor y el protocolo MANAGESIEVE de red, que suele correr en el puerto 4190, permite a un cliente conectarse al servidor de correo para subir, borrar, activar, desactivar o listar scripts Sieve. Es el "FTP" de los filtros de correo.
+$ sieve-connect --user midireccion@midominio.com --server mail.midominio.com (conectar al servidor para gestionar los filtros manualmente del forma interactiva)
+  	MANAGESIEVE> list (ver listado. El que tenga un asterisco (*) al lado o aparezca resaltado, es el script activo actualmente)
+	MANAGESIEVE> put filtro_spam.sieve (subir un script local al servidor)
+	MANAGESIEVE> activate filtro_spam.sieve (activar el script que se ha subido)
+	MANAGESIEVE> get filtro_spam.sieve (ver el contenido de un script que está en el servidor)
+	MANAGESIEVE> delete vacation-msg (borrar un script)
+	MANAGESIEVE> quit (salir del modo interactivo)
+$ sieve-connect --user mi@dominio.com --server mail.dominio.com -e "put mi_filtro.sieve" -e "activate mi_filtro.sieve" (subir y activar un script sin modo interactivo)
+1.-
+Automatización con variables de entorno para scripts seguros
+$ export SIEVE_USER="mi@dominio.com"
+$ export SIEVE_PASSWD="MiContraseñaSuperSegura"
+$ sieve-connect --server mail.dominio.com -e "list"
+
+
 signos-comodines
 1
 	Tecla barra inclinada (\)
