@@ -55689,6 +55689,32 @@ $ signalbackup-tools backup_file.backup --crop conversation_name 2023-01-01 2023
 $ signalbackup-tools backup_file.backup --import signal_desktop_export.json (importar las conversaciones del archivo signal_desktop_export.json a backup_file.backup)
 
 
+signify
+Herramienta para gestionar la firma digital de archivos y mensajes con el algoritmo de firmas digitales BLAKE2b, que se utiliza para crear y verificar firmas digitales.
+Herramienta que permite generar una firma aleatoria a partir de un conjunto de reglas. Lee un fichero de "reglas", ~/.signify por defecto, y a partir de esas reglas, genera una firma de texto eligiendo aleatoriamente entre las opciones definidas. Un ejemplo de uso y su proceso podría ser:
+$ nano ~/.signify
+       % { weight=1
+       Muéstrame tu .emacs y te diré donde flojeas
+       % | weight=0.5
+       Un emacs mal configurado arruina la existencia
+       % | weight=0.8
+       Cualquier editor guarda archivos, emacs guarda la esencia
+       % | weight=0.9
+       emacs es un procesador de textos termonuclear
+       % }
+"weight" sirve para especificar distintos "pesos" para una frase, de 0.1, menos probabilidad de salir a 1, más probabilidad.
+$ rm -f ~/.signature (borrar el .signature si existe)
+$ signify --fifo=$HOME/.signature & (arrancar signify en segundo plano)
+Si se hacen varias pruebas como las anteriores ha de matarse el proceso anterior
+$ ps aux| grep [sig]nify
+$ kill ID (según el proceso anterior)
+Cada vez que se lance el comando:
+$ cat ~/.signature
+$ cat ~/.signature
+$ cat ~/.signature
+Mostrará una frase aleatoria de las mencionadas en .signify
+
+
 signify-openbsd
 Firmar y verificar archivos criptográficamente.
 $ signify-openbsd -G -p clave.pub -s clave.sec -c "Pequeñas pruebas de claves" (Crear un par de claves con un mensaje)
