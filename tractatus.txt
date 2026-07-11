@@ -55679,6 +55679,16 @@ $ siggen -M archivo.txt (el hash solo en MD5. -S para SHA, -C para CRC32 y -H pa
 $ siggen -a archivo.txt archivo2.txt (para dos archivos)
 
 
+signalbackup-tools
+Herramienta para trabajar con archivos de copia de seguridad generados por la aplicación Signal para Android. Permite volcar los componentes de la copia de seguridad descifrados a un directorio vacio o leer su contenido, empaquetarlo y cifrarlo nuevamente en un archivo de copia de seguridad válido. También se utiliza para reparar copias de seguridad dañadas.
+$ signalbackup-tools backup_file.backup ~/output_directory (descifrar backup_file.backup y guardar el contenido descifrado en ~/output_directory)
+$ signalbackup-tools backup_file.backup --list (muestra el contenido de la copia de seguridad sin descifrarla)
+$ signalbackup-tools --repair broken_backup_file.backup repaired_backup_file.backup (reparar broken_backup_file.backup y guardar la copia de seguridad reparada en repaired_backup_file.backup)
+$ signalbackup-tools backup_file.backup --export html (exportar el contenido de backup_file.backup a un archivo HTML)
+$ signalbackup-tools backup_file.backup --crop conversation_name 2023-01-01 2023-12-31 (generar copia de seguridad de las conversaciones de conversation_name entre las fechas especificadas)
+$ signalbackup-tools backup_file.backup --import signal_desktop_export.json (importar las conversaciones del archivo signal_desktop_export.json a backup_file.backup)
+
+
 signify-openbsd
 Firmar y verificar archivos criptográficamente.
 $ signify-openbsd -G -p clave.pub -s clave.sec -c "Pequeñas pruebas de claves" (Crear un par de claves con un mensaje)
