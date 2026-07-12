@@ -21195,6 +21195,7 @@ gdbus
 Herramienta para trabajar con objetos D-Bus [Desktop Bus], un sistema de comunicación entre procesos [IPC] que permite que diferentes aplicaciones se comuniquen entre sí en un entorno de escritorio o servidor, por ejemplo que un reproductor de música notifique a la barra de tareas que está reproduciendo una canción, o gestionar el brillo de la pantalla, el volumen, la red... D-Bus organiza la comunicación en objetos, que son entidades que exponen métodos [Funciones que pueden ser llamadas remotamente], señales [Eventos que notifican cambios o acciones] y propiedades [Valores que pueden ser leídos o modificados]. Cada objeto tiene una ruta [path] única, como /org/freedesktop/NetworkManager que podría exponer un método GetDevices para listar dispositivos de red, o emitir una señal DeviceAdded cuando se conecta un nuevo dispositivo.
 $ ls /usr/share/dbus-1/services/ (ver todos los servicios disponibles)
 $ gdbus introspect --system --dest org.freedesktop.NetworkManager --object-path /org/freedesktop/NetworkManager (inspeccionar los métodos, señales, propiedadesd del objeto de NetworkManager. Genera un xml con la información)
+$ gdbus introspect --session --dest com.google.code.AccountsSSO.SingleSignOn --object-path /com/google/code/AccountsSSO/SingleSignOn (mostrará las interfaces y métodos disponibles como registerNewIdentity, getIdentity, etc. que las aplicaciones usan para pedir credenciales)
 $ gdbus call --system --dest org.freedesktop.NetworkManager --object-path /org/freedesktop/NetworkManager --method org.freedesktop.NetworkManager.GetDevices (listar dispositivos de red)
 $ gdbus monitor --system --dest org.freedesktop.NetworkManager (monitorear NetworkManager en tiempo real y ver las interacciones con el objeto)
 $ gdbus wait --system org.freedesktop.NetworkManager (espera a que un servicio esté disponible en el bus)
@@ -55726,6 +55727,12 @@ Nota.- El archivo de clave privada ".sec" no debe compartirse con nadie. El arch
 
 signing-party
 Colección de herramientas para todo tipo de elementos relacionados con PGP/GnuPG. Dicha colección está integrada por los comandos caff, gpg-key2latex, gpg-key2ps, gpg-mailkeys, gpgdir, gpglist, gpgparticipants, gpgparticipants-filter, gpgparticipants-prefill, gpgsigs, gpgwrap, keyanalyze, keyart, keylookup, pgp-clean, pgp-fixkey, pgpring, process_keys, sig2dot y springgraph.
+
+
+signond
+Demonio que gestiona el marco para el almacenamiento de credenciales y el servicio de autenticación de cuentas y SSO [Single Sign-On - inicio de sesión único] para plataformas Linux y POSIX. Basicamente almacena contraseñas y tokens de autenticación para las aplicaciones del sistema. En lugar de que cada aplicación, como el cliente de correo, Nextcloud, o aplicaciones de chat guarden las contraseñas por su cuenta, estas piden a signond que las autentifique o que les entregue el "token" de acceso. Incluye la herramienta signonpluginprocess.
+$ signond & (iniciar el demonio en segundo plano. Normalmente, signond es iniciado automáticamente por D-Bus cuando una aplicación lo solicita)
+$ ps aux | grep [sig]nond (comprobar si está activo)
 
 
 sigtool
