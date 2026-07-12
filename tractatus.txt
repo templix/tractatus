@@ -61815,6 +61815,17 @@ Ctrl + Shift + p --> Mostrar número de los paneles
 Ctrl + Shift + c --> seleccionar sección y copiarla
 Ctrl + Shift + v --> pegar donde el cursor
 Ratón en bordes de panel y arrastrar para dimensionar los paneles del terminal
+El el interior de la terminal, algunos comando que pueden lanzarse con wsh que solo funciona en wave:
+$ wsh view file.png (ver imagen. Alt w para cerrarla)
+$ wsh view file.pdf (visualizar documento PDF)
+$ wsh view https://example.com (Incrustar página web en el panle)
+$ wsh edit file.txt (abrir archivo con el editor inline)
+$ wsh edit script.sh -m (ver un script maximizado)
+$ wsh getmeta (obtener metadatos del panel actual)
+$ wsh blocks list (listado de paneles)
+$ wsh workspace list (listado de las ventanas)
+$ wsh run --magnify -- htop (ejecutar comando en panel maximizado)
+$ wsh web open google.com (abrir una página web)
 
 
 wavemon
