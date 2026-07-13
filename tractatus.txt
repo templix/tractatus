@@ -55735,6 +55735,51 @@ $ signond & (iniciar el demonio en segundo plano. Normalmente, signond es inicia
 $ ps aux | grep [sig]nond (comprobar si está activo)
 
 
+sigsum-go
+[litetlog]. Herramientas para el registro público y transparente de sumas de verificación firmadas. Incluye las herramientas sigsum-key, sigsum-monitor, sigsum-submit, sigsum-token, sigsum-verify y sigsum-witness.
+$ go install sigsum.org/sigsum-go/cmd/sigsum-policy@v0.14.1 (instalar sigsum-policy que no está entre los ejecutables con debian)
+$ sudo ln -s ~/go/bin/sigsum-policy /usr/bin/ (en caso de no tener el directorio ~/go/bin en el path)
+1.-
+Una muestra del funcionamiento del comando
+$ mkdir pruebas_sigsum
+$ cd pruebas_sigsum
+$ sigsum-policy show sigsum-test1-2025 > sigsum-test1-2025 (para mostrar información sobre los registros confiables y los testigos y especificar qué política usar)
+$ sigsum-key generate -o submit-key (generar par de claves, la privada y la publica. Todas las firmas en Sigsum usan Ed25519)
+$ sigsum-key to-hash -k submit-key.pub (ver el hash de la clave pública)
+$ sigsum-key to-hex -k submit-key.pub (ver la clave pública en hex)
+$ cat << EOF > hello.py
+#!/usr/bin/env python3
+print("Hello, world!")
+EOF (crear un script para firmar y registrar su suma de verificación)
+$ sha256sum hello.py | cut -d' ' -f1 | basenc --base16 -d | sha256sum (firmar y enviar una suma de verificación de este archivo)
+$ sigsum-key generate -o rate-limit-key (generar clave para tokens de rate-limit)
+$ sigsum-policy show sigsum-test1-2025 (qué logs y testigos son de confianza y cuántos deben coincidir [quorum])
+La salida es parecida a: log 4644af2abd...5fe6 https://test.sigsum.org/barreleye, witness poc.sigsum.org/nisse 1c25f8a4...c6c, y una regla de quorum que exige que al menos 2 testigos confirmen que el log es append-only.
+$ sigsum-submit -k submit-key -p sigsum-test1-2025 hello.py (firmar y registrar hello.py usando la política de prueba. Genera hello.py.proof)
+$ sigsum-submit -k submit-key -p sigsum-test1-2025 -a rate-limit-key hello.py (lo mismo)
+$ sigsum-verify -k submit-key.pub -p sigsum-test1-2025 hello.py.proof <hello.py (verificar una prueba de registro y si todo va bien no existe salida)
+$ echo $? (verificación del comando anterior)
+Nota.- sigsum-verify acepta también un fichero con varias claves públicas, una por línea, ignorando líneas vacías o que empiecen por #.
+$ sigsum-verify -k claves_confiables.txt -P sigsum-test1-2025 hello.py.proof < hello.py
+$ sigsum-monitor --interval=10s -p sigsum-test1-2025 submit-key.pub (vigilar que la clave se usa en algún log. Descarga sumas de verificación firmadas de los logs listados en la política de confianza; mientras no se haya firmado y registrado nada solo se verá mensajes de depuración indicando 0 hojas nuevas. En cuanto se registra algo, el monitor imprime la entrada: index 1292 keyhash cd53cb...aa9 checksum 7138d3...039.)
+$ sigsum-token record -k rate-limit-key.pub (generar el registro TXT de DNS que hay que publicar para la clave de rate-limit)
+2.-
+Ejemplo 1
+$ echo -n "Linux es un sistema genial" | sigsum-key sign -k submit-key -n sigsum.org/v1/tree-leaf > firma.sig
+$ echo -n "Linux es un sistema genial" > msg
+$ sigsum-key verify -k submit-key.pub -n sigsum.org/v1/tree-leaf -s firma.sig < msg
+3.-
+Ejemplo 2
+$ sigsum-key generate -o rate-limit-key
+$ ls -1
+rate-limit-key
+rate-limit-key.pub
+$ cp rate-limit-key.pub log-key.pub
+$ sigsum-token create -k rate-limit-key -l log-key.pub (crear un token [firma] para un log concreto)
+$ sigsum-token create -k rate-limit-key -l log-key.pub -d midominio.org (igual, pero generando la cabecera HTTP completa)
+$ echo "c9aed3...1e80bb0de03" | sigsum-token verify -l log-key.pub (verificar el token recibido por stdin del comando anterior)
+
+
 sigtool
 Ver clamav
 
