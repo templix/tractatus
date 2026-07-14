@@ -34879,6 +34879,15 @@ $ metastore -a (cambia los metadatos de archivos/directorios para que coincidan 
 $ metastore -c && metastore -a (verifica si hay diferencias, y solo si las hay, las aplica)
 
 
+meteo-cli
+Script en Bash que recoge los datos de una estación metereológica de Meteoclimatic y muestra los datos en la terminal.
+$ cd ~/.local/bin (entrar en un directorio del path)
+$ wget https://codeberg.org/victorhck/meteo-cli/raw/commit/4467762c287fbe203f3c59430a2e1c935fe1ffd4/meteo-cli (descargar el ejecutable)
+$ chmod +x meteo-cli (dar permisos de ejecución)
+$ meteo-cli (pedirá código de la estación metereológica)
+Se entra https://www.meteoclimatic.net/ se selecciona la comunidad y la ciudad deseada. Se copia el ID que puede ser parecido a ESCAT1700000017800A y se coloca en la terminal. Quedará fijada en el archivo ~/.config/meteoclimatic.conf y así cada vez que se lance meteo-cli, no pedirá el código de la estación,
+
+
 mfoc
 [Mifare Offline Cracker]. Permite recuperar las claves de autenticación de las tarjetas de memoria MIFARE Classic. Se basa en un ataque criptográfico sin conexión que aprovecha una debilidad en el generador de números aleatorios de los chips MIFARE Classic. El proceso comienza intentando leer un sector de la tarjeta para el que ya se conoce al menos una clave. Si no se conoce ninguna clave, el programa suele empezar con las claves por defecto comunes. Al intentar la autenticación con una clave, la tarjeta responde con un valor cifrado. mfoc captura esta respuesta, que contiene información sobre un "nonce" [un valor aleatorio de un solo uso]. A partir de estos valores, mfoc realiza cálculos matemáticos para deducir las claves de otros sectores. Esto se debe a que el algoritmo de generación de nonces en estas tarjetas es débil y predecible. Una vez que se ha descifrado una clave, el programa puede usarla para autenticarse en ese sector, leer sus datos y, lo que es más importante, obtener más información para descifrar las claves de otros sectores. Este proceso se repite hasta que se han recuperado todas las claves de todos los sectores de la tarjeta. Requiere un lector NFC compatible y la tarjeta MIFARE Classic que se desea analizar.
 $ mfoc -O tarjeta.mfd (indica que se debe guardar la información del crackeo en el archivo especificado)
