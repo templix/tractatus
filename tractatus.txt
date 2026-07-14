@@ -55827,6 +55827,65 @@ $ sim_c *.c (resalta el código C duplicado en el directorio)
 $ sim_text texto1.txt texto2.txt (de dos textos)
 
 
+simplemonitor
+Monitoriza el estado de los hosts, espacio en disco, carga media, servicios, disponibilidad HTTP, etc. y la conectividad de red basada en las respuestas de ping. Archivo de configuración en /etc/simplemonitor/monitor.ini.
+# systemctl status simplemonitor (comprobar el estado del servicio)
+$ simplemonitor --dump-known-resources (imprimir los tipos de monitor, alerta y registrador cargados)
+$ cd /etc/simplemonitor (entrar en el directorio de configuración)
+# simplemonitor -f monitor.ini -v (ejecutar los comandos en el directorio de configuración)
+# simplemonitor -t -f monitor.ini (verificar la configuración sin ejecutarlo completamente)
+# simplemonitor --one-shot -f monitor.ini (ejecutar una sola vez)
+# simplemonitor -d -f monitor.ini (ver logs con más detalle)
+# simplemonitor -v -f monitor.ini (lo mismo)
+# tail -n 20 /var/log/simplemonitor/simplemonitor.log (verificar que el log se esté escribiendo)
+Ejemplo básico de monitors.ini
+# nano monitors.ini
+       [defaults]
+       type = host
+       tolerance = 2
+       #
+       [google]
+       type = host
+       host = 8.8.8.8
+       #
+       [webserver]
+       type = http
+       url = http://localhost
+       expect_code = 200
+       timeout = 10
+       #
+       [root-disk]
+       type = diskspace
+       partition = /
+       limit = 5G
+Ejemplo básico de monitor.ini
+# nano monitor.ini
+       [monitor]
+       interval=60
+       monitors=monitors.ini
+       #
+       [reporting]
+       loggers=logfile
+       # multiple loggers can be specified comma separated (without spaces): logfile,html
+       #
+       [logfile]
+       type=logfile
+       filename=/var/log/simplemonitor/simplemonitor.log
+       only_failures=1
+       #
+       # Rotation every 7 days
+       rotation_type=time
+       when=d
+       interval=7
+# systemctl restart simplemonitor.service (reiniciar el servicio despues de cada modificación)
+1.-
+Reinicia todo limpio:
+$ sudo systemctl stop simplemonitor
+$ sudo rm -f /etc/simplemonitor/state.json 2>/dev/null
+$ sudo systemctl start simplemonitor
+$ sudo journalctl -u simplemonitor -f (ver monitores en tiempo real)
+
+
 sinfo
 Monitoreo de clústeres que utiliza transmisiones de red para distribuir información sobre el estado de los nodos locales, incluido el uso de CPU y memoria, la carga de red y los cinco procesos principales. Consiste en un demonio que se ejecuta en cada nodo y una interfaz de usuario ncurses para monitorearlos.
 $ sinfo-client
