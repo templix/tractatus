@@ -55744,6 +55744,15 @@ $ signond & (iniciar el demonio en segundo plano. Normalmente, signond es inicia
 $ ps aux | grep [sig]nond (comprobar si está activo)
 
 
+sigrok-cli
+Software de adquisición de datos y decodificación de protocolos que permite la adquisición de muestras desde analizadores lógicos, osciloscopios, multímetros y otros dispositivos, así como la ejecución de decodificadores de protocolos sobre los datos de muestra ya sea desde el hardware o cargados desde archivos.
+$ sigrok-cli -L (muestra el listado de módulo, dispositivos y decodificadores compatibles)
+$ sigrok-cli --list-supported-wiki (muestra solo los decodificadores compatibles)
+$ sigrok-cli --scan (escanear dispositivos)
+$ sigrok-cli --show (muestra detalles del dispositivo/formato/decodificador)
+$ sigrok-cli --driver saleae-logic-pro --channels 0=Vcc,1=CS,2=MISO,3=MOSI,4=CLK --output-format binary --config samplerate=50m --continuous > data (precisa dispositivo conectado)
+
+
 sigsum-go
 [litetlog]. Herramientas para el registro público y transparente de sumas de verificación firmadas. Incluye las herramientas sigsum-key, sigsum-monitor, sigsum-submit, sigsum-token, sigsum-verify y sigsum-witness.
 $ go install sigsum.org/sigsum-go/cmd/sigsum-policy@v0.14.1 (instalar sigsum-policy que no está entre los ejecutables con debian)
