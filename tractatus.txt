@@ -55886,6 +55886,13 @@ $ sudo systemctl start simplemonitor
 $ sudo journalctl -u simplemonitor -f (ver monitores en tiempo real)
 
 
+simplesnap
+Herramienta para gestionar copias de seguridad incrementales entre sistemas de archivos ZFS. Incluye el ejecutable implesnapwrap.
+# simplesnap -s tank/data -d backuphost:/tank/backup (copia de seguridad completa del conjunto de datos tank/data en el sistema local y la transferirá al conjunto de datos tank/backup en el host remoto backuphost)
+# simplesnap -s tank/data -d backuphost:/tank/backup (después de la copia de seguridad inicial, las ejecuciones posteriores transferirán solo los cambios incrementales desde la última copia de seguridad realizada)
+# simplesnapwrap -s tank/data -d backuphost:/tank/backup (proporciona una interfaz más amigable y maneja algunos detalles adicionales, como la creación de instantáneas ZFS y la limpieza automática de instantáneas antiguas)
+
+
 simstring-bin
 Utilidad de búsqueda y recuperación aproximada de cadenas medida mediante el índice de similitud SIM [SImilarity Measure]. Permite crear una base de datos a partir de un archivo de texto. El funcionamiento del comando se aprecia mejor con un ejemplo. Crear un archivo de frutas a una por linea:
 $ cat <<EOF > frutas.txt
