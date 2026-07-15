@@ -55886,6 +55886,29 @@ $ sudo systemctl start simplemonitor
 $ sudo journalctl -u simplemonitor -f (ver monitores en tiempo real)
 
 
+simstring-bin
+Utilidad de búsqueda y recuperación aproximada de cadenas medida mediante el índice de similitud SIM [SImilarity Measure]. Permite crear una base de datos a partir de un archivo de texto. El funcionamiento del comando se aprecia mejor con un ejemplo. Crear un archivo de frutas a una por linea:
+$ cat <<EOF > frutas.txt
+manzana
+plátano
+albaricoque
+mandarina
+EOF
+$ simstring -u -b -d frutas.db < frutas.txt (construir la base de datos con soporte unicode [-u])
+$ simstring -u -e -d frutas.db (espera palabras mal escritas por teclado y va mostrando si existen en la base de datos de forma correcta. Ctrl D para terminal)
+  	 mandarrina
+	 mandarrina
+		mandarina
+	 1 strings retrieved (9,7e-05 sec)
+$ echo "albaricoqe" | simstring -u -e -d frutas.db
+         albaricoqe
+	        albaricoque
+         1 strings retrieved (0,000232 sec)
+$ echo "albaricuke" | simstring -t 0.5 -u -e -d frutas.db (especificar el umbral de error a 0.5, por defecto 0.7)
+$ echo "albaricuke" | simstring -s overlap -t 0.6 -u -e -d frutas.db (con coeficiente "overlad" [solapamiento] más permiso que el por defecto "cosine"
+$ simstring -n 4 -u -b -d frutas2.db < frutas.txt (construir la base de datos cambiando la longitud del n-grama a 4 [cuadrigramas])
+
+
 sinfo
 Monitoreo de clústeres que utiliza transmisiones de red para distribuir información sobre el estado de los nodos locales, incluido el uso de CPU y memoria, la carga de red y los cinco procesos principales. Consiste en un demonio que se ejecuta en cada nodo y una interfaz de usuario ncurses para monitorearlos.
 $ sinfo-client
