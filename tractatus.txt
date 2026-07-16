@@ -55887,7 +55887,7 @@ $ sudo journalctl -u simplemonitor -f (ver monitores en tiempo real)
 
 
 simplesnap
-Herramienta para gestionar copias de seguridad incrementales entre sistemas de archivos ZFS. Incluye el ejecutable implesnapwrap.
+Herramienta para gestionar copias de seguridad incrementales entre sistemas de archivos ZFS. Incluye el ejecutable implesnapwrap. ZFS es un sistema de archivos y administrador de volúmenes desarrollado originalmente por Sun Microsystems para su sistema operativo Solaris.
 # simplesnap -s tank/data -d backuphost:/tank/backup (copia de seguridad completa del conjunto de datos tank/data en el sistema local y la transferirá al conjunto de datos tank/backup en el host remoto backuphost)
 # simplesnap -s tank/data -d backuphost:/tank/backup (después de la copia de seguridad inicial, las ejecuciones posteriores transferirán solo los cambios incrementales desde la última copia de seguridad realizada)
 # simplesnapwrap -s tank/data -d backuphost:/tank/backup (proporciona una interfaz más amigable y maneja algunos detalles adicionales, como la creación de instantáneas ZFS y la limpieza automática de instantáneas antiguas)
@@ -55914,6 +55914,12 @@ $ echo "albaricoqe" | simstring -u -e -d frutas.db
 $ echo "albaricuke" | simstring -t 0.5 -u -e -d frutas.db (especificar el umbral de error a 0.5, por defecto 0.7)
 $ echo "albaricuke" | simstring -s overlap -t 0.6 -u -e -d frutas.db (con coeficiente "overlad" [solapamiento] más permiso que el por defecto "cosine"
 $ simstring -n 4 -u -b -d frutas2.db < frutas.txt (construir la base de datos cambiando la longitud del n-grama a 4 [cuadrigramas])
+
+
+since
+Función similar a tail que recuerda cuánto de un archivo se ha visto y muestra solo lo nuevo la siguiente vez que se vea. Ideal para ver archivos de registro, solo mostrará lo nuevo desde la última vez que se ejecutó.
+# since /var/log/boot.log (la primera vez lo mostrará, la segunda no mostrará nada hasta que se reinicie)
+# since /var/log/apache2/access_log
 
 
 sinfo
