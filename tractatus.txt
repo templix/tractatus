@@ -4132,10 +4132,10 @@ Generar libros de las páginas man.
 $ bookman -p -t “Paginas man” /usr/man/man1/* > man.pdf (en formato pdf [-p] y con título [-t])
 
 
-boot.log
+boot
 Archivo en el que se almacenan los logs de inicio de sesión [/var/log/boot.log].
 $ grep -i "fail" /var/log/boot.log | grep -v "fail2ban" (ver qué ha pasado en el inicio de sesión. No debería mostrar nada o solo errores reales)
-$ grep -iE "error|fail(ed)?|fatal" /var/log/boot.log | grep -v -i "fail2ban" (otra forma de comprobar si hay fallos reales)
+$ grep -iE "error|fail(ed)?|fatal" /var/log/boot.log | grep -v -i "fail2ban" (otra forma de comprobar si hay fallos reales descartando fail2ban para evitar errores con el fail del nombre)
 
 
 bootcd
@@ -52528,11 +52528,20 @@ $ rush -C all (Habilitar todas las comprobaciones de seguridad de la configuraci
 
 
 rustscan
-Escáner de puertos.
-$ rustscan -a 127.0.0.1,0.0.0.0 (escanear varias IP utilizando una lista separada por comas)
-$ rustscan -a www.google.com, 127.0.0.1 (escanear hosts)
-$ rustscan -a 127.0.0.1 -p 53 (escaneo de puertos individuales)
-$ rustscan -a 127.0.0.1 (todos los puertos del host)
+Escáner de puertos. Descargar con cargo:
+$ cargo install rustscan (se instala en ~/.cargo/bin. Colocar el directorio en el PATH o ejecutar con la ruta completa)
+Crear el archivo de configuración
+$ nano ~/.rustscan.toml
+Al menos con la linea:
+   	 ulimit = 5000
+$ rustscan -a 127.0.0.1,0.0.0.0 (escanear múltiples IPs usando una lista separada por comas)
+$ rustscan -a www.google.com (escanear un host)
+$ rustscan -r 1-4000 -a 127.0.0.1 (escanear un rango de puertos)
+$ rustscan -a 'hosts.txt' (escanear un archivo que contiene ua IP o Hots por linea)
+$ rustscan -a 127.0.0.1 -p 22 (escanear un puerto)
+$ rustscan -a 127.0.0.1 -p 22,80,121,65535 (escanear varios puertos)
+$ rustscan -a 127.0.0.1 -r 1-1000 --scan-order "Random" (escanear puertos del 1 al 1000 de forma aleatoria)
+$ rustscan -a 192.168.1.0/24 -t 500 -b 1500 -- -A
 
 
 rvm
