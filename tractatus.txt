@@ -8504,6 +8504,14 @@ Para establecer el mapa de teclado al inicio:
 # setupcon (aplica cambios si se han modificado sobre la marcha)
 
 
+console-log
+[exim4 syslog-ng]. Script de inicio [init script] en sistemas basados en systemd que se encarga de configurar el sistema para que los registros [logs] se muestren en consolas virtuales específicas. La configuración predeterminada coloca el mainlog de exim en tty8 y el syslog en tty9.
+# systemctl enable syslog-ng.service (activar el servicio syslog-ng)
+# systemctl enable exim4.service (activar el servicio exim)
+# systemctl status console-log.service (comprobar si el servicio console-log está activo)
+Reiniciar el sistema y los logs se veran en la tty9. Pulsando Ctrl X se podrá ascender en el listado para comprobar errores. Tambien pueden visualizarse en /var/log/syslog.
+
+
 consolochars
 Modificar las fuentes en las consolas [tty1-6]
 # consolechars -f fuentes
