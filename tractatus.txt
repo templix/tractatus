@@ -55951,6 +55951,28 @@ $ sinfo-client
 $ sinfod
 
 
+sinntp
+Cliente NNTP diseñado originalmente para funcionar en modo no interactivo. Incluye las herramientas nntp-get, nntp-list, nntp-pull y nntp-push. Para que los comandos sepan dónde conectarse, colocar en .bashrc la linea:
+	export NNTPSERVER="news.mi-servidor.com"
+$ nntp-list (listar todos los grupos de noticias del servidor)
+$ nntp-list | grep -i "linux" (buscar algo específico)
+$ nntp-list es.comp.os.linux (listar los artículos de un grupo específico)
+$ nntp-get '12345abc@news.ejemplo.com' > articulo.txt (descargar un artículo por su ID y guardarlo en un archivo de texto)
+$ nntp-get '<12345abc@news.ejemplo.com>' | less (leerlo directamente en la terminal)
+1.-
+Descargar todos los mensajes nuevos de un grupo a una carpeta local**
+Crear una carpeta para guardar los mensajes
+$ mkdir -p ~/Noticias/es.comp.os.linux
+Ejecutar el pull
+$ nntp-pull -s ~/Noticias/es.comp.os.linux es.comp.os.linux
+La primera vez que se ejecuta, descargará todos los artículos del grupo y los guardará como archivos individuales en el directorio. Las siguientes veces, solo descargará los nuevos.
+Para sincronizar cada hora con cron, colocar en crontab la linea:
+        0 * * * * nntp-pull -s /var/spool/news/misc.rural misc.rural
+2.-
+Tomar un archivo de texto con formato de correo electrónico estándar con cabeceras NNTP [Newsgroups, Subject, From] y cuerpo separados por una línea en blanco y lo publica en el servidor de Usenet.
+$ nntp-push < mi_post.txt (publicar el archivo en el servidor)
+
+
 sistema-gráfico
 Instalar las X en UbuntuServer
 # apt-get install ubuntu-desktop (Completo)
