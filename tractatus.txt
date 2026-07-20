@@ -55983,6 +55983,39 @@ $ sip-tester --register --proxy sip:servidor.com --from sip:usuario@mi-dominio.c
 $ sip-tester --concurrent 10 --call sip:destino@servidor.com --duration 60 (realiza 10 llamadas simultáneas con duración en segundos del test)
 
 
+sipcalc
+Avanzada calculadora de subredes IP. Su gran ventaja es su excelente y exhaustivo soporte para IPv6, además de su capacidad para leer la configuración directamente de una interfaz de red o resolver nombres de host [DNS].
+# sipcalc 192.168.18.17/24 (cálculo básico de una subred IPv4 con una dirección IP y su prefijo CIDR)
+Nota.- Aunque se le pase la IP ".17", sabe que la red empieza en ".0".
+# sipcalc enp1s0 (con un nombre de interfaz)
+# sipcalc -a -d google.com (proporciona toda la información posible sobre una dirección o interfaz y habilita la resolución de nombres)
+# sipcalc -i 182.168.1.20 (mostrar información de la dirección CIDR)
+# sipcalc 2001:db8:abcd::1/64 (información sobre IPv6)
+# sipcalc -e 192.168.1.0/24 (muestra la misma información pero en un formato estructurado de una sola línea por campo)
+
+
+sipcrack
+Extractor/descifrador de contraseñas SIP que permite capturar autenticaciones digest y realizar fuerza bruta sobre las contraseñas. sipdump guarda los resúmenes de autenticación SIP en un archivo y sipcrack descifra la contraseña del usuario mediante fuerza bruta utilizando el archivo generado por sipdump. SIP es el protocolo estándar para iniciar, mantener y terminar sesiones de comunicación en tiempo real, como llamadas VoIP. Cuando un dispositivo como un teléfono IP o un softphone se registra en un servidor SIP, utiliza autenticación digest, basado en MD5. sipcrack explota el hecho de que, si se captura el tráfico de red, se puede extraer el hash de autenticación y atacarlo offline.
+# sipdump -i eth0 capturas_sip.txt (capturar en vivo desde una interfaz)
+# sipdump -i eth0 -f "udp port 5060" volcado_sip.txt (capturar el tráfico)
+# sipdump -p captura_wireshark.pcap autenticaciones.txt (extraer de un archivo pcap existente)
+# sipcrack -w /usr/share/wordlists/rockyou.txt autenticaciones.txt (ataque con diccionario)
+# sipcrack -p 10000000 -w diccionario.txt autenticaciones.txt (ver progreso cada 10 millones de intentos)
+1.-
+Ataque con stdin encadenado con John the Ripper
+$ mkfifo tuberia
+$ john --incremental=alpha --stdout=6 > tuberia & sipcrack -s tuberia autenticaciones.txt
+
+
+sipgrep
+Herramienta para analizar, capturar y visualizar mensajes SIP, compatible con pcap para analizar, capturar, visualizar y solucionar problemas de señalización SIP en redes IP, permitiendo al usuario especificar expresiones regulares extendidas que coincidan con los encabezados SIP.
+$ sipgrep -i eth0 (capturar todo el tráfico SIP en una interfaz específica)
+$ sipgrep -i eth0 '1001' (ver solo los mensajes SIP donde aparezca el número "1001" ya sea en el campo From, To o Contact)
+$ sipgrep -i eth0 -H "User-Agent:.*Zoiper" (encontrar qué dispositivos están usando el software específico Zoiper)
+$ sipgrep -i eth0 "SIP/2.0 (404|503)" (buscar errores específicos)
+$ sipgrep -f captura_llamada.pcap "Call-ID: c2a3b4c5..." (analizar un archivo de captura previo .pcap)
+
+
 sistema-gráfico
 Instalar las X en UbuntuServer
 # apt-get install ubuntu-desktop (Completo)
