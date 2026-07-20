@@ -56016,6 +56016,35 @@ $ sipgrep -i eth0 "SIP/2.0 (404|503)" (buscar errores específicos)
 $ sipgrep -f captura_llamada.pcap "Call-ID: c2a3b4c5..." (analizar un archivo de captura previo .pcap)
 
 
+sipsak
+Herramienta diseñada para realizar pruebas en aplicaciones y dispositivos SIP [Session Initiation Protocol]. SIP es un protocolo utilizado principalmente para establecer, modificar y finalizar sesiones de comunicación en tiempo real, como llamadas VoIP, videollamadas, etc. Permite enviar mensajes SIP como INVITE, REGISTER, OPTIONS y analizar las respuestas, lo que es útil para verificar si un servidor SIP o un dispositivo SIP está funcionando correctamente.
+$ sipsak -v -s sip:192.168.1.10 (enviar una solicitud OPTIONS para verificar si un servidor SIP responde y en modo verbose)
+$ sipsak -v -s sip:192.168.1.10 -r sip:usuario@dominio.com -a password (enviar un mensaje SIP REGISTER para registrar un dispositivo [-r] y la contraseña  del servidor SIP)
+$ sipsak -v -s sip:destino@dominio.com -x (enviar una llamada INVITE [test de llamada] sin esperar respuesta [-x])
+$ sipsak -U -s sip:servidor_sip (envía una solicitud OPTIONS y analizar la respuesta)
+
+
+sipvicious
+Herramientas diseñadas específicamente para la auditoría de seguridad de sistemas de Voz sobre IP [VoIP] basados en el protocolo SIP [Session Initiation Protocol], esto incluye descubrir servidores, enumerar extensiones válidas, probar la fortaleza de las contraseñas y generar informes. SIP es el estándar de facto para pentesting en centralitas telefónicas como Asterisk, FreeSWITCH, 3CX, entre otras. Esta suite incluye cinco herramientas: svmap, svwar, svcrack, svreport y svcrash.
+$ svmap 192.168.1.0/24 (trata de descubrir servidores SIP [PBX, gateways, teléfonos IP] en una red. Envía peticiones OPTIONS o REGISTER para ver qué dispositivos responden)
+$ svmap 192.168.1.10-192.168.1.50 ( escanear un rango de IPs específico)
+$ svmap -p 5061 -s auditoria_voip 192.168.1.0/24 (escanear en un puerto no estándar y guardar los resultados en una sesión llamada "auditoria_voip")
+$ svmap -s test1 10.0.0.0/24 (buscar servidores en la red y guardar en sesión test1)
+$ svwar -s test1 -e 100-150 10.0.0.50 (buscar extensiones en el servidor encontrado [10.0.0.50] y añadir a test1)
+$ svwar -e 100-200 192.168.1.100 (enumerar un rango numérico de extensiones)
+$ svwar -d /usr/share/wordlists/voip_users.txt 192.168.1.100 (usar un diccionario de nombres de usuario)
+$ svwar -s auditoria_voip -e 100-200 192.168.1.100 (enumerar y guardar en la sesión de auditoría)
+$ svcrack -u 102 -r 0000-9999 192.168.1.100 (fuerza bruta numérica de un PINs de 4 dígitos contra la extensión 102)
+$ svcrack -s auditoria_voip -u 101 -d passwords.txt 192.168.1.100 (crackear y guardar la sesión)
+$ svcrack -u 101 -d /usr/share/wordlists/rockyou.txt 192.168.1.100 (ataque de diccionario contra la extensión 101)
+$ svreport list (listar todas las sesiones guardadas)
+$ svreport view -s auditoria_voip (ver los detalles de una sesión específica: qué servidores se encontraron, qué extensiones, qué contraseñas se crackearon)
+$ svreport export -s auditoria_voip -f csv -o resultados_voip.csv (exportar los resultados de la sesión a un archivo CSV)
+$ svreport export -s auditoria_voip -f html -o informe.html (exportar a formato HTML para un informe visual)
+$ svcrash 192.168.1.100 (enviar paquetes malformados a un servidor SIP específico para intentar bloquearlo)
+$ svcrash --auto (modo automático para detectar escáneres SIP en la red y los "crashea" automáticamente)
+
+
 sistema-gráfico
 Instalar las X en UbuntuServer
 # apt-get install ubuntu-desktop (Completo)
