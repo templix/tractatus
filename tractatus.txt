@@ -56045,6 +56045,13 @@ $ svcrash 192.168.1.100 (enviar paquetes malformados a un servidor SIP específi
 $ svcrash --auto (modo automático para detectar escáneres SIP en la red y los "crashea" automáticamente)
 
 
+siridb-server
+Base de datos de series temporales escalable que utiliza un mecanismo para operar sin un índice global y permite agregar recursos del servidor sobre la marcha. El lenguaje de consulta de SiriDB incluye la agrupación dinámica de series temporales para facilitar el análisis de grandes volúmenes de datos.
+# systemctl status siridb-server.service (comprobar estado del servicio)
+# siridb-server (iniciar con la configuración por defecto del archivo /etc/siridb/siridb.conf)
+# siridb-server -c /opt/mi-config/siridb.conf (iniciar con un archivo de configuración distinto)
+
+
 sistema-gráfico
 Instalar las X en UbuntuServer
 # apt-get install ubuntu-desktop (Completo)
@@ -56052,6 +56059,19 @@ Instalar las X en UbuntuServer
 # apt-get install language-pack-es language-pack-es-base language-pack-gnome-es language-pack-gnome-es-base language-selector language-support-es  (instalar los paquetes de idiomas en la instalación mínima))
 # apt-get install gksu gnome-system-tools gnome-nettool (herramientas de red  y paquetes necesarios en la instalación mínima)
 $ startx
+
+
+sisu
+[Structured Information Serialized Units]. Herramienta basada en lenguaje de marcado para la estructuración, publicación y búsqueda de documentos estáticos en colecciones de documentos. Utilizando la sintaxis de marcado de SiSU se puede generar diversos formatos de documento, la mayoría de los cuales comparten un sistema común de numeración de objetos para localizar el contenido, incluyendo texto plano, HTML, XHTML, XML, EPUB, texto OpenDocument (ODF:ODT), LaTeX y archivos PDF. Incluye los ejecutables sisu-concordance, sisu-epub, sisu-harvest, sisu-html, sisu-html-scroll, sisu-html-seg, sisu-odf, sisu-txt y sisu-webrick
+$ sisu-txt libro.sst (genera el documento en texto plano)
+$ sisu-html libro.sst (generador HTML)
+$ sisu-html-scroll libro.sst (genera una página HTML única y continua)
+$ sisu-html-seg libro.sst (genera HTML para cada subtítulo o párrafo)
+$ sisu-epub libro.sst (genera un archivo en formato EPUB)
+$ sisu-odf libro.sst (genera un documento de texto en formato OpenDocument Format [.odt])
+$ sisu-concordance libro.sst (genera un índice de concordancia, una lista de todas las palabras usadas en el texto, mostrando en qué número de objeto/segmento aparecen)
+$ sisu-harvest libro.sst (genera archivos de datos, normalmente en formato SQLite, XML o JSON, que contienen la información sobre la estructura del documento)
+$ sisu-webrick (levantar un servidor web local, usando la librería WEBrick de Ruby para navegar por los documentos SiSU que ya se han generado usando el navegador web)
 
 
 skdet
