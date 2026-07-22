@@ -1324,6 +1324,14 @@ Para que las aplicaciones no aparezcan con caracteres extraños y simbolos raros
 Y añadir las siguientes lineas:
 	AddDefaultCharset UTF-8
 	AddDefaultCharset latin1
+8.-
+Para, al lanzar la comprobación del archivo de configuración, suprimir la salida:
+# apache2ctl configtest
+AH00558: apache2: Could not reliably determine the server's fully qualified domain name, using 127.0.1.1. Set the 'ServerName' directive globally to suppress this message"
+# nano /etc/apache2/apache2.conf
+Y añadir la linea:
+  	 ServerName localhost
+# systemctl restart apache2
 
 
 apache2ctl
@@ -7254,8 +7262,9 @@ clamav
 Detecta troyanos, virus, malware y otras amenazas maliciosas.
 # freshclam -v (actualizar la lista de virus viendo detalles)
 # freshclam -d -c 24    (arranca el demonio que actualizará clamav 24 veces diarias- Maximo 50 veces diarias)
-# clamscan -ri    (Sin especificar directorio, escanear el del usuario)
+# clamscan -i    (Sin especificar directorio, escanear el del usuario)
 # clamscan -ri --remove /home/usuario  (escanea el directorio usuario, solo mostrando los infectados y los borra directamente)
+# clamscan -r /home /etc /var --infected (escanear solo los directorios especificados y mostrar solo los infectados)
 # clamscan -v -r -l test_clamav.txt  (revisa directorios y subdirectorios mostrando máxima información y manda el resultado a un archivo)
 # clamscan -v -r --bell --move=/home/usuario/cuarentena -l /var/log/clamav/clamav.log /media/win (aviso sonoro al detectar un virus, mandarlos a cuarentena y los logs en clamav.log)
 # sigtool --list-sigs > list (listado de virus y troyanos que detecta)
@@ -7274,7 +7283,7 @@ La salida debe incluir:
 3.-
 Para ver algún log concreto por ejemplo un error.
 $ clamscan -i -v -r /home/USER 2>&1 | tee /tmp/clamscan.log
-$ grep -iE 'error|cant|cannot|permission denied' /tmp/clamscan.log (buscar lineas con "error" o "can't"
+$ grep -iE 'error|cant|cannot|permission denied' /tmp/clamscan.log (buscar lineas con "error" o "can't")
 
 
 clamav-cvdupdate
@@ -22322,8 +22331,10 @@ Y que la variable $projectroot apunte al directorio donde esté el repositorio g
 Reiniciar Apache para aplicar los cambios:
 # systemctl restart apache2
 Y con el navegador acceder al repositorio: http://localhost/gitweb
-Nota.- Si Apache2 está instalado, la interfaz web se habilita automáticamente en http://localhost/gitweb en caso de que no lo haga, entrar en el directorio del proyecto git y lanzar:
+Nota.- Si Apache2 está instalado, la interfaz web puede que se habilite automáticamente en http://localhost/gitweb en caso de que no lo haga, entrar en el directorio del proyecto git y lanzar:
 $ git instaweb
+O:
+$ git instaweb --httpd apache2
 Y se abrirá directamente en una pestaña del navegador.
 
 
@@ -28788,6 +28799,7 @@ Sistema de registro [log] propio de systemd.
 # journalctl -b -1 (Muestra los mensajes del arranque anterior)
 # journalctl -b -2 (Muestra los mensajes desde los dos últimos arranques)
 # journalctl --list-boots (Muestra los últimos arranques guardados por el sistema. Si el sistema no guarda los registros de arranque hay que editar el fichero /etc/systemd/journald.conf y añadir/editar la línea Storage=persistent dentro de la sección [Journal])
+# journalctl -b -0 | grep -i "error\|failed\|warning" (buscar error/failed/warning en los logs del presente arranque)
 # journalctl -b 27487d1e4b1241df93a55949aef01161 (También se puede consultar los mensajes de un arranque en concreto poniendo el identificador que aparece con --list-boots)
 # journalctl -f (Seguir los mensajes nuevos)
 # journalctl -u sshd -f (seguir logs en tiempo real de un servicio concreto
