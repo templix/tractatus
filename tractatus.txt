@@ -40215,9 +40215,23 @@ Muestra el uso de la red.
 # ntopng -i tcp://192.168.1.1:5556 (especificando protocolo, host y puerto)
 
 
-ntpdate
-Actualiza la hora del sistema via NTP (Network Time Protocol)
-# ntpdate -u cl.pool.ntp.org
+ntpsec
+Programas de utilidad y demonio de Network Time Protocol [NTP], el protocolo de tiempo de red que se utiliza para mantener la precisión de los relojes de las computadoras, sincronizándolos a través de internet o una red local, o mediante un receptor de hardware preciso que interpreta señales horarias GPS, DCF-77 o similares. Archivo de configuración en /etc/ntpsec/ntp.conf. Incluye las herramientas ntpmon, ntpq y ntptrace.
+# systemctl status ntpd.service (comprobar si el servicio está activo)
+# systemctl restart ntpsec (se si modifica el archivo de configuración)
+$ ntpq -p (ver la lista de servidores peers)
+$ ntpq -c rv (muestra información como la versión de NTPsec, el stratum actual de la máquina, el tiempo sin sincronizarse [uptime], y la precisión del reloj local)
+$ ntpmon (monitor en tiempo real mostrando los peers, el offset actual, los paquetes enviados/recibidos y si hay alertas de fallo de sincronización. Salir pulsando q)
+$ ntpmon -h 192.168.1.100 (monitorización de un host remoto)
+$ ntptrace (seguir la cadena de sincronización desde la computadora hasta la fuente primaria de tiempo)
+$ ntptrace tock.espanix.net (rastrear desde un servidor específico)
+Nota.- Muchos servidores NTP públicos, como los del pool de NTP, bloquean las consultas de ntptrace por seguridad y privacidad, usando la bandera noquery en su configuración.
+
+
+ntpsec-ntpdate
+Actualiza la hora del sistema via NTP (Network Time Protocol). Incluye los ejecutables ntpdate y ntpdate-debian.
+# ntpdate -u cl.pool.ntp.org (especificando un servidor)
+# ntpdate-debian (sin especificarlo)
 
 
 number
