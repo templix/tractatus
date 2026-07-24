@@ -661,7 +661,8 @@ $ ls -al --color=force | aha --pink > ls.htm (ls coloreado y pasado a html)
 
 aide
 Sistema de detección de intrusos. No evita la intrusión, sólo informa que esta se ha producido y qué archivos fueron modificados. La primera vez que se ejecuta, crea una base de datos con los atributos, usuarios, permisos... de los archivos especificados aplicándoles una o varias funciones hash por lo que el mejor momento para instalar esta aplicación es con un sistema recien instalado.
-# aide -i (Crear la base de datos. Al iniciar por  primera vez y evitar: Couldn't open file /var/lib/aide/please-dont-call-aide-without-parameters/aide.db.new for writing)
+# touch /var/lib/aide/aide.db (crear el archivo de base de datos)
+# aide --config /etc/aide/aide.conf (crear la base de datos según el archivo de configuración de aide)
 # aide -u (Actualizar la base de datos)
 # aide -c (Hacer un chequeo del sistema para comprobar modificaciones)
 	Nota.- Los archivos de configuración: /etc/aide/aide.conf.d/, /etc/aide/aide.conf y /etc/default/aide
@@ -669,9 +670,9 @@ Sistema de detección de intrusos. No evita la intrusión, sólo informa que est
 
 airmon
 [aircrack-ng]. Utilidad que coloca la tarjeta de red en modo monitor.
-# airmon-ng start wlan0 (Iniciar el modo monitor)
-# airmon-ng stop wlan0 (Finalizarlo)
-# airmon-ng start wlan0 5 (Eespecificando un canal)
+# airmon-ng start wlan0 (iniciar el modo monitor)
+# airmon-ng stop wlan0 (finalizarlo)
+# airmon-ng start wlan0 5 (especificando un canal)
 	Nota.- Confirmar que la tarjeta está en modo monitor con iwconfig.
 
 
@@ -56682,6 +56683,7 @@ Pruebas de sonido para dispositivos alsa.
 $ speaker-test -c6 -t wav (probar altavoces usando voz [t])
 $ speaker-test (básico)
 $ speaker-test -Dplug:front -c2 (estereo)
+$ speaker-test -t sine -f 1000 -c 2 (otra forma de comprobar el sonido estereo)
 
 
 spd-conf
@@ -58114,6 +58116,7 @@ Otros ajustes que podemos hacer en este archivo que mejoran el rendimiento del s
 # echo "vm.watermark_scale_factor = 200" >> /etc/sysctl.conf (cantidad de información en la memoria que será paginada al disco)
 # echo "vm.dirty_ratio = 3" >> /etc/sysctl.conf (reducir la transferencia de la cantidad paginada)
 # sysctl -w kernel.perf_event_paranoid=1 (ajustar a usuarios regulares el acceso a eventos del kernel [ver linux-perf])
+# sysctl --system (aplicar cambios si se ha modificado el archivo de configuración)
 1.-
 Liberar memoria ram:
 # watch -n 1 free -m (Comprobar el estado actual)
@@ -60169,6 +60172,8 @@ Cortafuegos
 # ufw deny from 123.1.103.8 (denegar toda conexion de la ip especificada)
 # ufw allow 22 (abre el puerto 22)
 # ufw allow from 123.1.103.8 to any port 22 (Que la ip especificada pueda acceder al nuestro puerto 22)
+# ufw allow from 127.0.0.1 to 127.0.0.1 port 631 (permitir acceso local desde la misma máquina a cups)
+# ufw allow from 192.168.1.0/24 to any port 631 (permitir solo a la red local el uso de cups)
 # ufw delete allow 22 (anula la regla de abrir el puerto 22)
 # ufw allow 40000:44000/tcp (abrir un rango de puertos)
 # ufw delete deny 4662 (Elimina una regla)
