@@ -56087,6 +56087,22 @@ $ sisu-harvest libro.sst (genera archivos de datos, normalmente en formato SQLit
 $ sisu-webrick (levantar un servidor web local, usando la librería WEBrick de Ruby para navegar por los documentos SiSU que ya se han generado usando el navegador web)
 
 
+sitecopy
+Herramienta pensada para sincronizar un directorio local con un sitio web remoto usando protocolos como FTP, SFTP, WebDAV o HTTP. Su objetivo es que se pueda mantener una copia local de la web y “publicarla” en el servidor de forma cómoda, subiendo cambios y eliminando archivos remotos que ya no existen localmente.
+Ejemplo simple de configuración local. Otros ejemplos en /usr/share/sitecopy/examplerc:
+$ nano ~/.sitecopyrc
+site miweb
+  server ftp.midominio.com
+  protocol ftp
+  username USER
+  password mi_clave
+  remote /public_html
+  local /home/USER/web
+Nota.- Es mejor evitar poner la contraseña en claro y usar mecanismos más seguros.
+$ sitecopy -f ~/.sitecopyrc init miweb (que sitecopy registre el estado del sitio remoto)
+$ sitecopy -f ~/.sitecopyrc sync miweb (sincronizar todo lo que se modifique en /home/USER/web/ se reflejará en la web remota)
+
+
 skdet
 Busca rootkits y puertos abiertos. Descarga wget http://dvgevers.home.xs4all.nl/skdet/skdet
 # skdet -c (rootkits)
