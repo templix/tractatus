@@ -662,9 +662,16 @@ $ ls -al --color=force | aha --pink > ls.htm (ls coloreado y pasado a html)
 aide
 Sistema de detección de intrusos. No evita la intrusión, sólo informa que esta se ha producido y qué archivos fueron modificados. La primera vez que se ejecuta, crea una base de datos con los atributos, usuarios, permisos... de los archivos especificados aplicándoles una o varias funciones hash por lo que el mejor momento para instalar esta aplicación es con un sistema recien instalado.
 # touch /var/lib/aide/aide.db (crear el archivo de base de datos)
+# aideinit (otra forma de iniciar la aplicación)
 # aide --config /etc/aide/aide.conf (crear la base de datos según el archivo de configuración de aide)
 # aide -u --config /etc/aide/aide.conf (actualizar la base de datos)
 # aide -C --config /etc/aide/aide.conf (hacer un chequeo del sistema para comprobar modificaciones)
+Para excluir archivo añadirlos en el archivo de configuración precedidos de una "!"
+$ sudo nano /etc/aide/aide.conf
+       !/var/log
+       !/tmp
+       !/proc
+       !/dev
 
 
 airmon
@@ -32882,6 +32889,8 @@ Busca en el sistema posibles debilidades de configuración sin realizar ninguna 
 # lynis audit system remote <host> (Análisis de seguridad remoto)
 # lynis show (ver todos los argumentos adicionales)
 # lynis show tests (alguno de los argumentos del listado anterior. Ver todos los chequeos que realiza)
+# lynis audit system --quick | grep -E "WARNING|SUGGESTION" (crear un informe más limpio y solo lo que importa)
+# lynis audit system --warnings-only --no-colors | tee lynis_warnings.log (solo ver warnings)
 # lynis update info (descargar actualizaciones)
 # cat /var/log/lynis.log | grep Warning (ver las vulnerabilidades)
 # cat /var/log/lynis.log | grep Suggestion (ver sugerencias que nos realiza lynis)
