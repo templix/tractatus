@@ -663,9 +663,8 @@ aide
 Sistema de detección de intrusos. No evita la intrusión, sólo informa que esta se ha producido y qué archivos fueron modificados. La primera vez que se ejecuta, crea una base de datos con los atributos, usuarios, permisos... de los archivos especificados aplicándoles una o varias funciones hash por lo que el mejor momento para instalar esta aplicación es con un sistema recien instalado.
 # touch /var/lib/aide/aide.db (crear el archivo de base de datos)
 # aide --config /etc/aide/aide.conf (crear la base de datos según el archivo de configuración de aide)
-# aide -u (Actualizar la base de datos)
-# aide -c (Hacer un chequeo del sistema para comprobar modificaciones)
-	Nota.- Los archivos de configuración: /etc/aide/aide.conf.d/, /etc/aide/aide.conf y /etc/default/aide
+# aide -u --config /etc/aide/aide.conf (actualizar la base de datos)
+# aide -C --config /etc/aide/aide.conf (hacer un chequeo del sistema para comprobar modificaciones)
 
 
 airmon
@@ -51977,26 +51976,26 @@ $ rstcheck --config ~/.rstcheck.ini documento.rst
 
 rsync
 Sincronizar archivos o directorios. Trabajar con el directorio montado. En las rutas a copiar, no colocar * si queremos tambien copiar ficheros y directorios ocultos.
-$ rsync -av /home/usuario/Dropbox /home/usuario/Copias_seguridad/ (Copiar todo el directorio “Dropbox” en el directorio “Copias_seguridad”)
+$ rsync -avh /home/usuario/Dropbox /home/usuario/Copias_seguridad/ (Copiar todo el directorio “Dropbox” en el directorio “Copias_seguridad”)
 $ rsync -av --exclude=Dropbox /media/servidor /home/usuario/servidor/ (Sincronizar un servidor con un directorio local excluyendo el dir Dropbox)
 Nota.- Pueden excluirse varios directorios [--exclude=Dropbox --exclude=isos --exclcude=public ...]
-$ rsync -arvuz Documentos usuario@192.168.1.5:/home/usuario/ (Copiar el directorio en otra máquina)
-$ rsync -arvuz -e 'ssh -p 30567' Documentos usuario@192.168.1.5:/home/usuario/ (Copiar el directorio en otra máquina pero especificando otro puerto SSH)
-Algunas opciones:
-	-a (respaldar recursivamente directorios y subdirectorios)
-	-g (conserva el atributo “group” de los archivos originales)
-	-E (conserva el atributo “executable” del archivo originales)
-	-v (aumentar el nivel de información desplegado)
-	-z (comprime los datos que serán transferidos)
-	-h (mostrar salida entendible para humanos)
-	--exclude=tmp  (Excluir archivos o directorios. /tmp en este caso)
-	--delete-during  (Borrar los archivos de origen a medida que son transferidos)
-$ rsync -aHxv root@dirección_IP:/ /carpeta_destino --exclude=/dev --exclude=/proc --exclude=/sys --exclude=/tmp (copia/clonación en vivo de todo un sistema remoto a un directorio local. Se recomienda parar todos los servicios en ejecución de la máquina remota y repetir el comando varias veces hasta que no haya ningún fichero copiado, para evitar ficheros corrompidos. Se deben crear las carpetas "/dev", "/proc", "/sys" y "/tmp" en la carpeta de destino).
-$ rsync -avz --exclude-from 'rsync_exclude' /home/usuario/ /media/sda11/copa_seguridad (Copia de seguridad del /home/usuario a otra partición excluyendo los archivos especificados en el archivo rsync_exclude)
+$ rsync -avzh Documentos usuario@192.168.1.5:/home/usuario/ (Copiar el directorio en otra máquina)
+$ rsync -avz -e 'ssh -p 30567' Documentos usuario@192.168.1.5:/home/usuario/ (Copiar el directorio en otra máquina pero especificando otro puerto SSH)
+$ rsync -avhn --delete /home/usuario/Documentos /media/usuario/cb8bca9...2ab513/Documentos/ (simular [n] copiar el directorio especificado suprimiendo en destino lo que ya no está en origen)
+	-a --> respaldar recursivamente directorios y subdirectorios
+	-v --> aumentar el nivel de información desplegado
+	-h --> mostrar salida entendible para humanos
+	-z --> comprime los datos que serán transferidos
+$ rsync -avzh --exclude-from='rsync_exclude' /home/usuario/ /media/sda11/copa_seguridad (Copia de seguridad del /home/usuario a otra partición excluyendo los archivos especificados en el archivo rsync_exclude)
 Nota.- El formato del archivo rsync_exclude para excluir los ficheros ocultos [.*] todos los de la carpeta Dropbox y el video alien de la carpeta Videos será:
 	.*
 	Dropbox/*
 	Videos/alien
+$ rsync -avhW --partial --partial-dir=.rsync-partial --info=progress2 --exclude='.cache' --exclude='.Trash*' /home/tu_usuario/ /mnt/disco_externo/backup_home/ (copiar archivos enteros [W], que guarde resumen si se corta la conexión en .rsync-partial, muestre progreso y que excluia archivos)
+Nota.- Si el disco externo está formateado en FAT32 o exFAT, el parámetro -a fallará al intentar preservar permisos de Linux, ya que esos sistemas de archivos no los soportan. En ese caso, se cambia -a por -rlt.
+$ rsync -avh --backup-dir=~/archivos_anteriores --exclude='.cache' --exclude='.Trash*' /home/USER/ /mnt/disco_externo/backup_home/ (si un archivo cambió, la opción barckup-dir mueve la versión antigua del archivo al destino ~/archivos_anteriores
+$ rsync -avih --stats /home/USER/ /mnt/disco_externo/backup/ (resumen más detallado [stats] y la opción "i" muestra código de 11 caracteres por archivo explicando *exactamente* qué cambió)
+Nota.- Sin barra al final en el directorio de origen copia la carpeta misma en destino. Con barra final en el directorio de origen, copia el contenido de la carpeta en destino.
 
 
 rsyncrypto
