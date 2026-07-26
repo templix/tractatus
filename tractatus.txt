@@ -56188,6 +56188,17 @@ skel
 Directorio [/etc/skel/] que contiene ficheros y directorios que son automaticamente copiados al directorio personal al crear un nuevo usuario [ver useradd]. Las modificaciones que puedan realizarse en este directorio, ya sea añadiendo carpetas o modificando parámetros [en .bashrc, .profile...] no se aplicarán a usuarios existentes, sólo a los de nueva creación.
 
 
+sketch
+Lenguaje/programa de dibujo 3D orientado a generar ilustraciones lineales de objetos y escenas, pensado para producir salida en PSTricks o TikZ/PGF e integrarse muy bien con texto y matemáticas de TeX. No es un editor gráfico interactivo, sino un generador de dibujos a partir de una descripción textual. Su objetivo es crear dibujos "limpios", matemáticamente definidos, sin detalles innecesarios, algo muy útil para documentación técnica, libros y apuntes con LaTeX.
+$ sketch -T escena.sk -o escena.tex (produce el documento "escena.tex" listo para compilar con LaTeX)
+$ sketch -TT escena.sk -o escena.tex (forzar un documento orientado a TikZ)
+$ sketch -TTp escena.sk -o plantilla.tex (obtener la plantilla de documento en vez del render final. La opción p imprime la plantilla, T selecciona TikZ y con P sería PSTricks)
+$ sketch -t mi_plantilla.tex -o salida.tex escena.sk (usar una plantilla propia. La plantilla debe contener el marcador %SKETCH_OUTPUT%, que Sketch sustituye por el contenido generado)
+$ sketch -D color escena.sk -o color.tex (activar el color)
+$ sketch -U color escena.sk -o blanco_y_negro.tex (desactivarlo. permite tener una sola fuente y generar versiones distintas del mismo dibujo)
+$ sketch -V 2.10 escena.sk -o salida.tex (con una versión concreta de TikZ o PSTricks adapta la salida a diferencias entre versiones del paquete gráfico de TeX)
+
+
 skill
 Matar procesos.
 # skill -l (Lista las señales pque pueden usarse)
@@ -56216,6 +56227,15 @@ $ skopeo inspect docker://docker.io/fedora | jq '.RepoTags' (listar tags de un r
 $ skopeo inspect docker://docker.io/fedora:rawhide | jq '.Digest' (verificar digest de una imagen)
 $ podman run --rm quay.io/skopeo/stable inspect docker://imagen (correr Skopeo en un contenedor con Podman)
 Notas.- Transports comunes: docker:// (Docker registries), oci:// (OCI), dir:// (directorios locales), atomic:// (Atomic). Para registries inseguros, agregar "--no-creds".
+
+
+skylighting
+biblioteca de resaltado de sintaxis compatible con más de cien lenguajes. Skylighting pretende ser el sucesor de highlighting-kate y puede generar HTML y LaTeX.
+$ skylighting -l (lista las sintaxis de los lenguajes disponibles)
+$ skylighting -f html example.sh > example.html (convertir el archivo sh en html con resaltado de sintaxis)
+$ skylighting -f latex example.py > example.tex (genera un archivo LaTeX llamado "example.tex" que contendrá el código fuente resaltado con la sintaxis de Python)
+$ skylighting -s bash -f html archivo.sh > archivo.html (especificando el lenguaje de estrada)
+$ skylighting -C 256 -s bash -f html archivo.sh > auto.html (nivel de compatibilidad de color ANSI. Otras opciones auto, 16 y true)
 
 
 sl
