@@ -56162,6 +56162,28 @@ Busca rootkits y puertos abiertos. Descarga wget http://dvgevers.home.xs4all.nl/
 # skdet -s (puertos abiertos)
 
 
+skeema
+Herramienta para gestionar tablas y cambios de esquema en MySQL de forma declarativa mediante SQL puro. En lugar de escribir scripts de migración [ALTER TABLE, etc.] de forma imperativa, se define el estado deseado del esquema mediante archivos SQL puros con sentencias CREATE, generalmente un archivo por tabla, procedimiento o función. Skeema compara ese estado deseado con el estado real de la base de datos y genera/ejecuta automáticamente el DDL necesario para llegar a él. Completa documentación en https://www.skeema.io/docs/commands.
+$ skeema init -h mi.servidor.prod -u root -p -d schemas (inicializar el repositorio a partir de una base de datos de producción. Crea un directorio schemas/ con un archivo .skeema de configuración y subdirectorios por cada schema, cada uno con archivos .sql, uno por tabla/procedimiento)
+$ skeema add-environment development -h localhost -S /var/lib/mysql/mysql.sock -u root (añadir un entorno de desarrollo)
+$ skeema pull development (traer los cambios al repositorio)
+$ skeema lint (detecta problemas y opcionalmente reformatea)
+$ skeema format (solo reformatea los archivos)
+1.-
+Para modificar una tabla de forma declarativa, se edita el archivo de la tabla, por ejemplo product/users.sql y se cambia el CREATE TABLE al estado deseado:
+$ nano product/users.sql (modificar la definición CREATE TABLE)
+$ skeema diff (previsualiza el ALTER TABLE generado)
+$ skeema push (lo aplica a la BD)
+2.-
+Crear o eliminar una tabla.
+$ nano product/comments.sql (para crear añadir un nuevo archivo .sql con el CREATE TABLE)
+$ skeema diff
+$ skeema push
+$ rm product/tags.sql (para eliminar borrar el archivo .sql)
+$ skeema diff --allow-unsafe (--allow-unsafe es necesario para operaciones destructivas)
+$ skeema push --allow-unsafe
+
+
 skel
 Directorio [/etc/skel/] que contiene ficheros y directorios que son automaticamente copiados al directorio personal al crear un nuevo usuario [ver useradd]. Las modificaciones que puedan realizarse en este directorio, ya sea añadiendo carpetas o modificando parámetros [en .bashrc, .profile...] no se aplicarán a usuarios existentes, sólo a los de nueva creación.
 
