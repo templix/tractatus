@@ -56288,6 +56288,64 @@ Gestor de paquetes de Slackware sin resolución de dependencias. Como previa ant
 # slackpkg install-template (Instalar un slackware en un pc a partir de una plantilla))
 
 
+slapd
+Es el daemon standalone de OpenLDAP que escucha en el puerto 389 o 636 para LDAPS y atiende peticiones LDAP, el resto de herramientas son comandos offline: acceden directamente a la base de datos en disco [BDB/MDB] sin pasar por el protocolo LDAP, por eso casi todas necesitan que el daemon esté parado o al menos que no haya conflicto de bloqueo sobre la base de datos y casi todas necesitan root o pertenecer al grupo openldap para leer /etc/ldap/slapd.d y /var/lib/ldap. Incluye los ejecutables slapacl, slapadd, slapauth, slapcat, slapd, slapdn, slapindex, slapmodify, slappasswd, slapschema y slaptest.
+# systemctl status slapd.service (comprobar si está activo)
+# slapd -d 256 -h "ldap:/// ldapi:///" (parar el servicio con "systemctl stop" y lanzar en primer plano y con nivel de log 256 [ver cada conexión y operación]. Para pararlo Ctrl+c)
+# slaptest -F /etc/ldap/slapd.d -u (validar la configuración sin aplicar cambios [-u])
+# slaptest (lo mismo si no se modifica el directorio de configuración)
+# slappasswd (entrar nueva contraseña, por defecto {SSHA})
+# slappasswd -s "linux99" -h {SMD5} (entrar la contraseña en texto plano y que use el algoritmo MD5 [RFC 1321])
+# slapcat (volcar el archivo /etc/ldap/slapd.d/cn=config.ldif por pantalla)
+# slapcat -l ldif (volcarlo al archivo ldif)
+# slapcat -n 0 (ver la config completa)
+# slapcat -n 1 -l backup.ldif (volcar la base de datos num 1 al archivo backup)
+# slapadd -n 1 -w -l /tmp/mi_estructura.ldif (si LDIF no tiene entryUUID o entryCSN el argumento "-w" genera esos atributos automáticamente)
+# slapacl -D "cn=admin,dc=nodomain" -b "dc=nodomain" "entry/read" (identidad que hace la prueba [bind DN simulado], DN de la entrada objetivo y privilegio a comprobar)
+# slapauth -U admin (simular el proceso de autenticación/autorización SASL sin abrir conexión real)
+# slapauth -U admin -X "dn:cn=admin,dc=nodomain" (con identidad autorizada explícita)
+# slapdn "cn=admin,dc=nodomain" (comprueba si una cadena es un DN válido y cómo la normaliza el motor de OpenLDAP)
+# slapschema -n 1 (verifica que todo lo que ya hay guardado en la base de datos respeta las reglas de esquema. Si todo está bien, no imprime nada)
+# slapschema -n 1 -d 1 (lo mismo con más nivel de log)
+1.-
+Para importar un LDIF a la base de datos
+$ sudo systemctl stop slapd
+$ sudo slapadd -n 1 -l /tmp/backup.ldif
+$ sudo chown -R openldap:openldap /var/lib/ldap
+$ sudo systemctl start slapd
+2.-
+Al añadir un olcDbIndex nuevo, las entradas ya existentes han de reindexarse
+$ sudo systemctl stop slapd
+$ sudo slapindex -n 1
+$ sudo chown -R openldap:openldap /var/lib/ldap
+$ sudo systemctl start slapd
+3.-
+Añadir un índice nuevo vía ldapmodify sobre cn=config
+# ldapmodify -Y EXTERNAL -H ldapi:/// <<EOF
+dn: olcDatabase={1}mdb,cn=config
+changetype: modify
+add: olcDbIndex
+olcDbIndex: mail eq
+EOF
+Luego reindexar las entradas que ya había
+$ sudo systemctl stop slapd
+$ sudo slapindex -n 1
+$ sudo systemctl start slapd
+4.-
+Modificar sin pasar por LDAP
+slapmodify es más nuevo y aplica un LDIF de tipo changetype directamente sobre la base de datos offline, como si fuera un ldapmodify pero sin daemon:
+# systemctl stop slapd
+# cat > /tmp/cambio.ldif <<EOF
+dn: dc=nodomain
+changetype: modify
+add: description
+description: Directorio de pruebas
+EOF
+$ sudo slapmodify -n 1 -l /tmp/cambio.ldif
+$ sudo chown -R openldap:openldap /var/lib/ldap
+$ sudo systemctl start slapd
+
+
 slay
 Matar todos los procesos de un usuario.
 $ slay usuario
