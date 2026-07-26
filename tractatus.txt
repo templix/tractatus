@@ -56126,6 +56126,35 @@ $ sitecopy -f ~/.sitecopyrc init miweb (que sitecopy registre el estado del siti
 $ sitecopy -f ~/.sitecopyrc sync miweb (sincronizar todo lo que se modifique en /home/USER/web/ se reflejará en la web remota)
 
 
+sitesummary
+Instalado en un servidor, permite que cada máquina con sitesummari-client informe de su existencia enviando datos relevantes sobre su estado y configuración una vez diaria al servidor con sitesummary y este genera informes resumidos sobre cada hosts. El objetivo es centralizar la información de todas las máquinas de un sitio, permitiendo tener una visión general y actualizada del estado de la red, sin necesidad de acceder individualmente a cada equipo.
+En el servidor para la ubicación de los informes generados, por ejemplo, para Munin
+# nano /etc/sitesummary/collector.cfg
+  ...
+  MUNINDIR=/etc/munin
+  ...
+Hará que el servidor genere un archivo de configuración para Munin en `/var/lib/sitesummary/munin.conf`.
+Y en el cliente se puede configurar para que se ejecute al arrancar el sistema. Por ejemplo, en entornos LTSP, se puede añadir en:
+# nano /opt/ltsp-4.2/etc/rc.d
+  ...
+  RCFILE_01 = sitesummary-client start
+  ...
+Así, el cliente enviará su información al servidor cada vez que se inicie.
+Se accede a los informes generados en el directorio por defecto, /var/lib/sitesummary/. Para que el cliente envíe información diariamente, se suele configurar una tarea cron. Por ejemplo:
+# crontab -e
+Y añadir una línea como:
+  	 0 3 * * * /usr/sbin/sitesummary-client
+Que hará que el cliente envíe su informe al servidor cada día a las 3 AM.
+
+
+sixer
+Herramienta para automatizar mediante parches la migración de código Python 2 a código compatible con Python 2 y 3 usando la biblioteca six.
+$ sixer (muestra todas las operaciones posibles: all`, iteritems, itervalues, iterkeys, xrange, unicode...)
+$ sixer all mi_proyecto/ (recorre recursivamente mi_proyecto/ y aplica todos los parches que pueda)
+$ sixer xrange script.py > script3.py (solo convertirá xrange a six.moves.range y mostrará resultado en script3.py)
+$ sixer basestring,raw_imput script.py (convertirá basestring y raw_imput a six.string_types y six.moves.input en le script.py)
+
+
 skdet
 Busca rootkits y puertos abiertos. Descarga wget http://dvgevers.home.xs4all.nl/skdet/skdet
 # skdet -c (rootkits)
