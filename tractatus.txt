@@ -56347,9 +56347,11 @@ $ sudo systemctl start slapd
 
 
 slay
-Matar todos los procesos de un usuario.
-$ slay usuario
-$ slay -9 usuario
+Permite eliminar todos los procesos de un usuario específico.
+$ slay (muestra la ayuda)
+$ slay USER (forma básica)
+$ slay -9 USER  (specificando la señal)
+$ slay -clean USER ("eliminación limpia", primero se envía la señal TERM a los procesos y, después de 10 segundos, aquellos que aún no hayan finalizado se eliminan con KILL)
 
 
 sleep
@@ -56366,17 +56368,24 @@ Demonio que pone un portátil en modo de suspensión si no se está utilizando o
 
 
 sleepenh
-Programa especialmente diseñado para ejecutar algunas funciones periódicamente en un script de shell. No fue diseñado para ser preciso lanzarlo como un comando de consola, sino para ser útil en una secuencia que precisa "sleeps" sucesivos. Un ejemplo de scritp:
-#!/usr/bin/env bash
-#
-TIMESTAMP=$(sleepenh 0)
-while true; do
-# Imprimir en pantalla el texto
-echo -n "Linux es genial ";
-sleepenh 0;
-# mostrar cada 2 segundos el texto
-TIMESTAMP=$(sleepenh $TIMESTAMP 2.0);
-done
+Esperar hasta una fecha determinada con resolución de subsegundos. sleepenh es un programa de espera para scripts de shell que necesitan ejecutar un bucle que se repita a intervalos regulares, sin errores acumulativos. A continuación, se muestra un ejemplo de uso para aclarar su propósito. Este ejemplo envía 'A' a /dev/pts/3 cada 1,2 segundos. Abrir dos terminales y comprobar el número de /dev/pts/n con el comando tty [ver] y rectificar el número en el script.
+$ nano prueba.sh
+#!/bin/sh
+	TIMESTAMP=$(sleepenh 0)
+	while true; do
+	  # enviar el byte a /dev/pts3
+  	  echo -n "A" > /dev/pts/3;
+  	  #
+  	  # Simplemente imprime un mensaje en pantalla.
+  	  echo -n "Envié 'A' a /dev/pts/3, ahora es la hora ";
+  	  sleepenh 0;
+  	  #
+  	  # esperar el tiempo requerido (1'2 segundos)
+  	  TIMESTAMP=$(sleepenh $TIMESTAMP 1.200);
+        done
+$ chmod +x prueba.sh
+$ ./prueba.sh
+En la terminal donde se ha lanzado el scritp va mostrando el mensaje y en la otra se coloca una "A" cada 1,2 segundos.
 
 
 slim
@@ -60325,7 +60334,7 @@ $ udisks --monitor (Monitoriza la actividad del demonio. Muy útil para verifica
 
 
 udisks2
-Actualización del anterior comando. Demonio que permite operaciones como consultar, montar, desmontar, formatear o desconectar dispositivos de almacenamiento como discos duros o memorias USB.
+Actualización del anterior comando udisks. Demonio que permite operaciones como consultar, montar, desmontar, formatear o desconectar dispositivos de almacenamiento como discos duros o memorias USB.
 $ udisksctl status (comprobar todos los discos duros y usbs conectados)
 $ udisksctl status nvme0n1 (comprobar si determinado disco está conectado)
 $ udisksctl mount -b /dev/sdd1 (montar dispositivo. Equivalente al clásico mount /dev/sdd1)
