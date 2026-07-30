@@ -9104,6 +9104,11 @@ Biblioteca para detectar información del rendimiento de la CPU. Incluye las apl
 # watch -n1 "grep 'cpu MHz' /proc/cpuinfo" (refresca cada segundo la frecuencia real de cada núcleo de la CPU)
 
 
+cpuinfo2cpuid
+$ cpuinfo2cpuid < /proc/cpuinfo | cpuid -f - | grep -v 'false' (descartando las opciones false)
+$ cpuinfo2cpuid -vendor=GenuineIntel -family=6 -model=14 -stepping=10
+
+
 cpulimit
 Limitar el uso de la cpu para determinados procesos.
 # cpulimit -e yes -l 20 (el de “yes”a un 20% de la cpu. Valor entre 0 y 100)
