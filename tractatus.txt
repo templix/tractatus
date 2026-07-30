@@ -27870,6 +27870,19 @@ Detectar si se está ejecutando en un chroot. El estado de salida es:
 # ischroot -t (Salir con estado 0 si la detección no es posible.
 
 
+isenkram
+Este proceso de escritorio en segundo plano que se inicia de forma automatica al iniciar el sistema y escucha los eventos de udev para gestionar nuevo hardware. Cuando se detecta un nuevo hardware, se consultan las fuentes para asignar el hardware correspondiente y se muestra una notificación en la interfaz gráfica para sugerir que se instale los paquetes relevantes para el hardware detectado.
+$ isenkramd
+
+
+isenkram-cli
+Sugerencia de paquetes para instalar al insertar nuevo hardware. Herramientas para determinar qué paquetes instalar para usar los dispositivos de hardware disponibles. Este paquete también contiene los archivos de datos que relacionan el hardware con los paquetes. Incluye los ejecutables isenkram-lookup, isenkram-autoinstall-firmware y isenkram-pkginstall
+$ sudo isenkram-autoinstall-firmware
+$ isenkram-lookup (busca paquetes de hardware relevantes para la máquina)
+$ sudo find /sys/devices -name modalias -print0 | xargs -0 sort -u (localizar todas las cadenas de modalias)
+$ isenkram-pkginstall (consulta el hardware presente en la máquina y busca paquetes que serían útiles para dicho hardware en diversas fuentes)
+
+
 iso_8859-1
 El estándar ISO 8859-1 es un conjunto de caracteres codificados en octal, decimal y hexadecimal para el juego de caracteres ASCII que son los más utilizados por muchos idiomas de Europa occidental. También conocida como Latin1
 $ man iso_8859-1 (muestra los caracteres unicode)
