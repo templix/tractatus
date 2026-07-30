@@ -56356,6 +56356,20 @@ $ slay -9 USER  (specificando la señal)
 $ slay -clean USER ("eliminación limpia", primero se envía la señal TERM a los procesos y, después de 10 segundos, aquellos que aún no hayan finalizado se eliminan con KILL)
 
 
+slbackup
+Sistema de copia de seguridad diseñado para realizar copias de seguridad de múltiples clientes hacia un servidor, utilizando rdiff-backup [backups incrementales con preservación de versiones anteriores] como motor subyacente.
+# cat /etc/slbackup/slbackup.conf (verificar la configuración actual)
+Ejemplo del cron job para ejecutar el backup todos los días a la 1:00 AM. Crear el archivo:
+# nano /etc/cron.d/slbackup
+Y añadir la linea:
+00 01 * * * root if [ -x /usr/share/slbackup/slbackup-cron -a -f /etc/slbackup/slbackup.conf ]; then /usr/share/slbackup/slbackup-cron; fi
+# /usr/share/slbackup/slbackup-cron (ejecutar un backup manualmente)
+
+
+slbackup-php
+Interfaz web para el sitema de copia de seguridad de múltiples clientes con slbackup. Se accede en https://IP_servidor/slbackup-php/. Precisa https, con http se bloquea la página.
+
+
 sleep
 Esperar el tiempo especificado antes de lanzar un comando o aplicacion
 $ sleep 5s ; xwd -root -screen > pantalla.xwd   (Capturar la pantallas tras 5 segundos)
