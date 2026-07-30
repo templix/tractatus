@@ -35687,12 +35687,18 @@ $ mkalias show (Mostrar los comandos reales de todos los alias)
 
 
 mkcert
-Generar certificados SSL [protocolo seguro HTTPS] firmados localmente.
-$ apt install wget curl libnss3-tools
+[curl libnss3-tools]. Generar certificados SSL [protocolo seguro HTTPS] firmados localmente.
 $ mkcert -install (generar el Certificate of Authority [CA])
 $ mkcert -CAROOT (localizar donde se guarda el CA)
-$ mkcert localhost (generar el certificado para localhost)
-El comando anterior genera en el directorio donde se lanza los archivos localhost.pem y localhost-key.pem. A continuación crear el archivo:
+$ mkcert localhost (generar el certificado para localhost: localhost.pem y localhost-key.pem)
+$ sudo cp localhost.pem /etc/ssl/certs/ (copiar los certificados a los directorios /etc/ssl/ correspondientes)
+$ sudo cp localhost-key.pem /etc/ssl/private/
+$ sudo a2enmod ssl (activar módulos)
+$ sudo a2ensite default-ssl
+$ sudo a2enmod headers
+$ sudo systemctl reload apache2 (reiniciar apache)
+$ sudo systemctl restart apache2
+A continuación crear el archivo:
 # nano /etc/apache2/conf-available/ssl-params.conf
 Con el contenido:
     SSLCipherSuite EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH
@@ -35710,7 +35716,7 @@ Con el contenido:
     # Requires Apache >= 2.4.11
     SSLSessionTickets Off
 A continuación editar y modificar/añadir en el archivo:
-# ano /etc/apache2/sites-available/default-ssl.conf
+# nano /etc/apache2/sites-available/default-ssl.conf
 los poarámetros:
     ServerAdmin usuario@localhost
     ServerName localhost
@@ -35718,10 +35724,6 @@ Para redireccionar todo el tráfico http a cifrado SSL [https]
 # nano /etc/apache2/sites-available/000-default.conf
 Y en el apartado correspondiente descomentamos o modificamos la linea:
     Redirect permanent  "/" "https://localhost/"
-Habilitar los módulos de apache necesarios para SSL y el host virtual:
-    # a2enmod ssl
-    # a2enmod headers
-    # a2ensite default-ssl
 Comprobar que no existan errores de sintaxis en los archivos:
     # apache2ctl configtest
 # systemctl restart apache2 (reiniciar apache2)
@@ -57879,6 +57881,7 @@ sudo
 Utilidad que permite a un usuario ejecutar programas con privilegios de root. En algunas distros sólo el usuario creado durante la instalación puede ejecutar sudo con privilegios de root, los demás han de ser agregados al grupo admin. Incluye las aplicaciones: cvtsudoers [convertir entre formatos de archivo sudoers], sudoedit [Ejecutar comandos como otro usuario] y sudoreplay [enumera los registros de salida creados por sudo]
 $ sudo -k   (limpia la clave sudo introducida)
 $ sudo -u usuario comando   (ejecutar el comando como un usuario privilegiado distinto de root)
+$ sudo -E env "PATH=$PATH" prueba.sh (ejecutar un script cuando el path en el que está no coincide con el de root)
 $ sudo -l    (ver los permisos de sudo que tiene un usuario)
 $ sudo !! (Ejecutar el último comando con sudo)
 Pueden añadirse las siguientes lineas en /etc/sudoers:
