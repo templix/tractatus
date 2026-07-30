@@ -27877,10 +27877,37 @@ $ isenkramd
 
 isenkram-cli
 Sugerencia de paquetes para instalar al insertar nuevo hardware. Herramientas para determinar qué paquetes instalar para usar los dispositivos de hardware disponibles. Este paquete también contiene los archivos de datos que relacionan el hardware con los paquetes. Incluye los ejecutables isenkram-lookup, isenkram-autoinstall-firmware y isenkram-pkginstall
-$ sudo isenkram-autoinstall-firmware
+$ sudo isenkram-autoinstall-firmware (busca firmware solicitado por el kernel que no está presente en el sistema)
 $ isenkram-lookup (busca paquetes de hardware relevantes para la máquina)
 $ sudo find /sys/devices -name modalias -print0 | xargs -0 sort -u (localizar todas las cadenas de modalias)
 $ isenkram-pkginstall (consulta el hardware presente en la máquina y busca paquetes que serían útiles para dicho hardware en diversas fuentes)
+1.-
+Si algunos firmwares no existen en los repositorios, se puede clonar el repositorio de firmware de Linux:
+$ git clone git://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git
+$ cd linux-firmaware
+Y copiar los archivos que se necesita, por ejemplo de Realtek:
+$ sudo cp linux-firmware/rtl_bt/rtl8723* /lib/firmware/rtl_bt/
+$ sudo cp linux-firmware/rtl_bt/rtl8761* /lib/firmware/rtl_bt/
+O el repositorio de firmware de Realtek:
+$ git clone https://github.com/radxa/rtkbt.git
+$ cd rtkbt
+Los binarios se encuentran en el directorio rtkbt-firmware/lib/firmware y los subdirectorios rtkbt-firmware/lib/firmware/rtl_bl y rtkbt-firmware/lib/firmware/rtlbl pero sin la extensión .bin, pero pueden copiarse al sistema añadiendola:
+$ sudo cp rtkbr-firmware/lib/firmware/rtlbt/rtl8761a_config /lib/firmware/rtl_bt/rtl8761a_config.bin
+Si aún así el comando
+$ sudo isenkram-autoinstall-firmware
+Continua mostrando archivo faltantes, muchos son variantes compatibles, por ejemplo variantes del chip rtl8723:
+	 rtl8723cs_cg_config.bin --> rtl8723cs_cg_fw.bin (Variante CS-CG)
+	 rtl8723cs_vf_config.bin --> rtl8723cs_vf_fw.bin (Variante CS-VF)
+	 rtl8723ds_config.bin --> rtl8723ds_fw.bin (Variante DS)
+un "truco" habitual consiste en crear enlaces simbólicos para que el kernel use esos en lugar de los que pide, algunos ejemplos:
+$ sudo ln -s /lib/firmware/rtl_bt/rtl8723cs_xx_config.bin /lib/firmware/rtl_bt/rtl8723cs_cg_config.bin
+$ sudo ln -s /lib/firmware/rtl_bt/rtl8723cs_xx_config.bin /lib/firmware/rtl_bt/rtl8723cs_vf_config.bin
+$ sudo ln -s /lib/firmware/rtl_bt/rtl8723cs_xx_fw.bin /lib/firmware/rtl_bt/rtl8723cs_cg_fw.bin
+Comprobaciones sobre las modificaciones
+$ sudo systemctl status bluetooth (verificar el estado del Bluetooth)
+$ sudo dmesg | grep -i firmware | grep -i error ((comprobar si hay errores de firmware)
+$ sudo dmesg | grep -i bluetooth | tail -10 (comprobar que el Bluetooth se ha inicializado)
+$ sudo dmesg | grep -i "rtl.*bt\|bluetooth" | grep -i "firmware\|loading" (mirar los logs del kernel)
 
 
 iso_8859-1
