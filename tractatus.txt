@@ -58597,6 +58597,15 @@ muestra las últimas 10 lineas de un fichero (si no se especifica otra cantidad)
 # tail -s 5 archivo.log (Actualiza cada 5 segundos)
 
 
+tailspin
+Colorea los archivos de registro y los página como less [ver].
+# tspin /var/log/syslog (forma básica)
+# tspìn -p /var/log/syslog (mustra entero por pantalla sin paginar)
+# tspin -f /var/log/syslog (pulsando Ctrl-X se puede subir y bajar con las flechas. "q" para terminar)
+# tspin --enable dates -f /var/log/syslog (solo coloreando las fechas)
+# tspin --enable dates,paths -f /var/log/syslog (solo coloreando fechas y path)
+
+
 taktuk
 Permite ejecutar comandos en paralelo en un conjunto potencialmente grande de nodos remotos, usando ssh para conectarse a cada nodo.
 # taktuk -s -m host_remoto.com broadcast exec [ hostname ] (autopropagar [s] en host_remoto.com [m] el comando "hostname")
