@@ -56469,6 +56469,18 @@ $ hfind nsrl-md5.idx <hash_md5> (sgundo paso)
 $ mmcat imagen.dd 2 > particion2.raw (extrae el contenido en bruto de una partición completa señalada en mmls)
 
 
+slice
+Extrae segmentos predefinidos de un archivo ASCII. El programa de segmentación lee un archivo de entrada y divide su contenido ASCII en segmentos. Estos segmentos se determinan mediante bloques delimitadores, los cuales deben estar presentes en el archivo. El esquema de los segmentos es: entre corchetes colocar primero el nombre del segmento en mayúsculas, dos puntos, el texto que proceda y nuevamente dos puntos para terminar y cerrar el corchete. El ejemplo de texto podría ser:
+$ cat text.txt
+      Esto es texto libre que no pertenece a ningún segmento.
+      [A:Bash es lo más maravilloso del mundo...:]
+      [COSAS:... y puede que emacs le vaya a la zaga.:]
+      [B: y Linux es un sistema genial.:]
+$ slice -o B:- text.txt (muestra el segmento en pantalla)
+$ slice -o COSAS:salida text.txt (lo guarda en el archivo salida)
+$ slice -o A:salida -o COSAS:salida2 text.txt (guarda cada segmento en un archivo: salida y salida2)
+
+
 slim
 Gestor de sesiones ligero. La configuración en el archivo /etc/slim.conf
 $ slim -p /usr/share/slim/themes/tema_a_probar
@@ -58622,7 +58634,7 @@ Colorea los archivos de registro y los página como less [ver].
 # tspin /var/log/syslog (forma básica)
 # tspìn -p /var/log/syslog (mustra entero por pantalla sin paginar)
 # tspin -f /var/log/syslog (pulsando Ctrl-X se puede subir y bajar con las flechas. "q" para terminar)
-# tspin --enable dates -f /var/log/syslog (solo coloreando las fechas)
+# tspin --enable dates -f /var/log/syslog (solo coloreando las fechas. Las opciones son numbers, urls, pointers, dates, paths, quotes, key-value-pairs, uuids, ip-addresses, processes y json)
 # tspin --enable dates,paths -f /var/log/syslog (solo coloreando fechas y path)
 
 
