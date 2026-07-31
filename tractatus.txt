@@ -56449,6 +56449,26 @@ $ ./prueba.sh
 En la terminal donde se ha lanzado el scritp va mostrando el mensaje y en la otra se coloca una "A" cada 1,2 segundos.
 
 
+sleuthkit
+Herramientas para el análisis forense de datos de volumen y sistema de archivos [NTFS, FAT, exFAT, HFS+, Ext3, Ext4, UFS y YAFFS2] que permiten examinarlos de forma no intrusiva ya que estas herramientas no dependen del sistema operativo para procesarlos. Permiten examinar la distribución de discos y otros medios. También se pueden recuperar archivos eliminados, obtener información almacenada en espacios libres, examinar el registro de transacciones del sistema de archivos, ver la distribución de particiones en discos o imágenes, etc. Es compatible con particiones DOS, particiones BSD, particiones Mac, particiones Sun y discos GPT. Incluye las herramientas blkcalc, blkcat, blkls, blkstat, fcat, ffind, fiwalk, fls, fsstat, hfind, icat, ifind, ils, img_cat, img_stat, istat, jcat, jls, jpeg_extract, mactime, mmcat, mmls, mmstat, pstat, sigfind, sorter, srch_strings, tsk_comparedir, tsk_gettimes, tsk_imageinfo, tsk_loaddb, tsk_recover y usnjls.
+$ mmls imagen.dd (ver cómo está particionado el disco/imagen)
+$ fsstat -o 2048 imagen.dd (muestra metadatos generales: tipo de FS, tamaño de bloque, rangos de inodos, información de journal, etc. -o 2048 indica el offset en sectores obtenido con mmls)
+$ fls -o 2048 -r imagen.dd (equivalente forense a ls, pero puede recuperar entradas borradas y trabajar de forma recursiva sobre toda la estructura de directorios, incluidas rutas que ya no son accesibles vía el propio SO. El asterisco marca entradas borradas. El número tras ":" es el número de inodo, clave para el siguiente paso)
+$ icat -o 2048 imagen.dd 23 > recuperado.pdf (volcar el contenido de un archivo, incluso borrado, si los bloques no se han reutilizado sin depender de que el sistema de archivos esté montado)
+$ istat -o 2048 imagen.dd 23 (muestra timestamps MACB [Modified/Accessed/Changed/Born], permisos, punteros a bloques de datos, etc)
+$ ifind -o 2048 -n /Documents/informe.docx imagen.dd (buscar el inodo asociado a un nombre de archivo o bloque)
+$ blkls -o 2048 imagen.dd > espacio_libre.raw (extrae bloques de datos en bruto)
+$ blkcat -o 2048 imagen.dd 4520 > bloque.raw (extrae un bloque concreto por número de dirección:)
+$ fls -o 2048 -r -m / imagen.dd > cuerpo.txt (generar una línea de tiempo de actividad del sistema de archivos. Primer paso)
+$ mactime -b cuerpo.txt -d > timeline.csv (segundo paso)
+$ tsk_recover -a -o 2048 imagen.dd ~/salida/ (extrae automáticamente los archivo borrados [-a] de una imagen al directorio de destino)
+$ tsk_recover -o 2048 imagen.dd ~/salida/ (extrae automáticamente todos los archivos de una imagen a un directorio destino)
+$ srch_strings -t d imagen.dd | grep -i "password" (extracción de cadenas legibles)
+$ hfind -i nsrl-md5 NSRLFile.txt (compara hashes de archivos contra bases de datos conocidas (NSRL del NIST) para descartar rápidamente archivos conocidos y benignos del sistema operativo)
+$ hfind nsrl-md5.idx <hash_md5> (sgundo paso)
+$ mmcat imagen.dd 2 > particion2.raw (extrae el contenido en bruto de una partición completa señalada en mmls)
+
+
 slim
 Gestor de sesiones ligero. La configuración en el archivo /etc/slim.conf
 $ slim -p /usr/share/slim/themes/tema_a_probar
