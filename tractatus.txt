@@ -56500,13 +56500,21 @@ reboot_cmd /usr/bin/systemctl reboot
 
 
 slinkwatch
-Utilidad para mantener automáticamente la lista de interfaces de red que suricata [ver] usa para capturar tráfico, según cuáles estén realmente activas en cada momento. En términos prácticos, slinkwatch vigila enlaces/interfases y reescribe una configuración auxiliar de suricata cuando cambia el estado de una interfaz; después intenta reiniciar suricata para aplicar el cambio.
+[Suricata Link Watcher]. Utilidad para mantener automáticamente la lista de interfaces de red que suricata [ver] usa para capturar tráfico, según cuáles estén realmente activas en cada momento. En términos prácticos, slinkwatch vigila enlaces/interfases y reescribe una configuración auxiliar de suricata cuando cambia el estado de una interfaz; después intenta reiniciar suricata para aplicar el cambio.
 # systemctl status slinkwatch.service (comprobar el estado del servicio)
+$ grep -i 'eth0:1' /etc/suricata/suricata.yaml (verificar que la interfaz esté incluida)
+$ slinkwatch (leerá las interfaces activas, actualizará /etc/suricata/suricata.yaml y, según su configuración reiniciará Suricata)
 $ slinkwatch make-config (crear archivo de configuración inicial desde las interfaces locales)
 $ slinkwatch makeman (crear páginas de manual)
 $ slinkwatch completion bash > /etc/bash_completion.d/slinkwatch
 $ slinkwatch completion bash
 $ slinkwatch run --help (muestra las opciones del servicio)
+
+
+slirp
+es un emulador TCP/IP que convierte una cuenta de shell común en una cuenta (C)SLIP/PPP. Esto permite a los usuarios de shell utilizar aplicaciones de Internet avanzadas como Netscape, Mosaic, CUSeeMe, etc. Dado que hoy en día no se tiene un módem de 14.4k ni un ISP de los 90, estos ejemplos son ilustrativos de cómo se usaba en la línea de comandos del servidor remoto.
+$ slirp -b 28800 (indicar la velocidad del módem para calcular el tamaño de los paquetes y optimizar el rendimiento)
+$ slirp -P -b 57600 2> /dev/null & (ejecución en segundo plano y redirigiendo a un puerto)
 
 
 slocate
