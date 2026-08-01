@@ -7268,12 +7268,18 @@ $ clamassassin Fra-_12-24.pdf (analizar un adjunto a un correo)
 clamav
 Detecta troyanos, virus, malware y otras amenazas maliciosas.
 # freshclam -v (actualizar la lista de virus viendo detalles)
-# freshclam -d -c 24    (arranca el demonio que actualizará clamav 24 veces diarias- Maximo 50 veces diarias)
-# clamscan -i    (Sin especificar directorio, escanear el del usuario)
-# clamscan -ri --remove /home/usuario  (escanea el directorio usuario, solo mostrando los infectados y los borra directamente)
+# freshclam -d -c 24 (arranca el demonio que actualizará clamav 24 veces diarias- Maximo 50 veces diarias)
+# clamscan -i (Sin especificar directorio, escanear el del usuario y solo mostrar los infectados)
+# clamscan -ri --remove /home/usuario (escanea el directorio y subdirectorios del usuario, solo mostrando los infectados y los borra directamente)
 # clamscan -r /home /etc /var --infected (escanear solo los directorios especificados y mostrar solo los infectados)
 # clamscan -v -r -l test_clamav.txt  (revisa directorios y subdirectorios mostrando máxima información y manda el resultado a un archivo)
 # clamscan -v -r --bell --move=/home/usuario/cuarentena -l /var/log/clamav/clamav.log /media/win (aviso sonoro al detectar un virus, mandarlos a cuarentena y los logs en clamav.log)
+# clamscan -r --infected /home/USER/Descargas /home/USER/Documentos (escaneo de subdirectorios específicos)
+# clamscan -r --infected --max-filesize=50M --max-scansize=50M /home/USER (escaneo con límite de tamaño)
+# find /home/tux -type f -mtime -7 -exec clamscan --infected {} \; (escaneo de archivos recientes)
+# nice -n 19 sudo clamscan -r --infected /home/tux > scan_results.txt 2>&1 & (ejecuta el escaneo en segundo plano y con baja prioridad)
+# nice -n 19 clamscan -r -i --max-filesize=50M --max-scansize=50M --exclude-dir="^/home/USER/\.cache" --exclude-dir="^/home/USER/\.local/share/Trash" --exclude-dir="^/home/USER/\.npm" --exclude=".*\.tiff$" /home/USER (exluiendo directorios y archivos no necesarios para el escan)
+# nice -n 19 clamscan -r -i --max-filesize=50M --max-scansize=50M --exclude-dir="^/home/tux/\.(cache|local|npm|config|mozilla|thunderbird)" /home/USER (excluiendo directorios)
 # sigtool --list-sigs > list (listado de virus y troyanos que detecta)
 # clamdtop (monitorear análisis con ncurses)
 # clamconf (muestra la configuración completa)
@@ -56534,7 +56540,7 @@ $ slop
 
 
 slowhttptest
-Efectuar ataques Slow Http Dos
+Herramienta que simula algunos ataques de denegación de servicio en la capa de aplicación [Slow Http Dos].
 $ slowhttptest -c 1000 -H -g -o ataque -i 10 -r 200 -t GET -u http://192.168.1.154 -x 30 -p 3
 c (Número de conexiones con límite en 65539)
 H (ataque modo SlowLoris enviando paquetes sin completar)
