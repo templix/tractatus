@@ -56516,6 +56516,11 @@ $ slocate -c archivo.pdf (escribir solo el número de entradas coincidentes)
 $ slocate -l 5 archivo.txt (ver como máximo 5 coincidencias con archivo.txt)
 
 
+slop
+[SeLect OPeration]. Captura el cursor del ratón y lo convierte en una cruz, permite al usuario arrastrar para realizar una selección o hacer clic en una ventana mientras dibuja un recuadro a su alrededor, y finalmente imprime las dimensiones de la selección en la salida estándar.
+$ slop
+
+
 slowhttptest
 Efectuar ataques Slow Http Dos
 $ slowhttptest -c 1000 -H -g -o ataque -i 10 -r 200 -t GET -u http://192.168.1.154 -x 30 -p 3
@@ -63279,9 +63284,12 @@ $ curl wttr.in/Figueras,Gerona (especificando ciudad y provincia)
 $ curl -H 'Accept-Language: es' -s wttr.in/figueras,girona | sed -n '1,7p' (solo lo básico de una ciudad y en español)
 $ curl -H 'Accept-Language: es' -s wttr.in/sant+joan+de+les+abadesses,girona (para una ciudad con varias palabras)
 $ curl wttr.in/Moon?lang=es (ver estado de la luna y en español)
+$ curl wttr.in/Moon@2027-08-15 (el estado de la luna en la fecha mencionada
 $ curl wttr.in/~Eiffel+Tower (especificar algo que no es una población)
 $ curl wttr.in/@lapipaplena.org (la situación de un dominio)
 $ wget wttr.in/Figueras,Gerona.png (bajar una imagen de la población seleccionada)
+$ curl wttr.in/Olot,España?lang=es (forma simplificada para 3 dias y en español)
+$ curl wttr.in/Olot,España?0 (solo ver un resumen
 
 
 wuzz
