@@ -56517,6 +56517,10 @@ $ slirp -b 28800 (indicar la velocidad del módem para calcular el tamaño de lo
 $ slirp -P -b 57600 2> /dev/null & (ejecución en segundo plano y redirigiendo a un puerto)
 
 
+slirp4netns
+Herramienta que permite crear redes en modo usuario (sin necesidad de privilegios) para espacios de nombres de red en Linux. Es especialmente útil en entornos de contenedores o máquinas virtuales donde se quiere que un espacio de nombres tenga acceso a Internet sin requerir permisos elevados. Proporciona una interfaz de red en modo usuario mediante el uso de la pila TCP/IP implementada por slirp. Esto conecta un dispositivo TAP (una interfaz de red virtual) en el espacio de nombres de red a la pila TCP/IP en modo usuario, permitiendo que el espacio de nombres tenga conectividad a Internet. En muchas distribuciones, slirp4netns se usa automáticamente por herramientas como podman para proporcionar conectividad de red en contenedores sin privilegios
+
+
 slocate
 Buscador de archivo en el sistema. Por lo visto el desarrollador dejó de trabajar en el proyecto y las distribuciones evolucionaron, primero a mlocate y luego a plocate [ver]
 $ slocate -i archivo.sda (buscar sin considerar mayúsculas y minúsculas)
