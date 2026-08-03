@@ -103,13 +103,26 @@ Deshabilita sitios de apache.
 
 
 a2enmod
-Activa módulos de apache.
-# a2enmod defensible
-# a2enmod php8.2 (activar php en localhost)
+Activa módulos de apache. Ver apache2ctl.
+# a2enmod security2 (módulo útils para apache)
+# a2enmod evasive (otro módulo útil)
+# a2enmod php8.x (activar php en localhost. Sustituir la "x" por la versión correspondiente)
+Algunos módulos requieren configuración. Por ejemplo el módulo evasive:
+# nano /etc/apache2/mods-enabled/evasive.conf
+      DOSHashTableSize    2048
+      DOSPageCount        5
+      DOSSiteCount        100
+      DOSPageInterval     1
+      DOSSiteInterval     2
+      DOSBlockingPeriod   10
+      #DOSWhitelist
+      #DOSEmailNotify      you@yourdomain.com
+      #DOSSystemCommand    "su - someuser -c '/sbin/... %s ...'"
+      DOSLogDir           "/var/log/mod_evasive
 
 
 a2ensite
-Habilita sitios de apache. Crear link simbólico a  la carpeta sites-enabled.
+Habilita sitios de apache. Crear link simbólico a la carpeta sites-enabled.
 # a2ensite host_virtual.com
 
 
@@ -1343,11 +1356,14 @@ Y añadir la linea:
 
 apache2ctl
 [=apachectl] Controlar el funcionamiento y el estado del demonio apache.
-$ apache2ctl start (Inicia el demonio. Da error si ya se está ejecutando)
-$ apache2ctl stop (lño Detiene)
-$ apache2ctl restart (lo reinicia. Si no se está ejecutando, se inicia. Este comando verifica automáticamente los archivos de configuración para detectar los errores más obvios)
-$ apache2ctl fullstatus (muestra un informe de estado completo)
-$ apache2ctl status (muestra un breve informe de estado. Similar a la opción fullstatus, excepto que se omite la lista de solicitudes que se están atendiendo actualmente)
+# apachectl start (inicia el demonio. Da error si ya se está ejecutando)
+# systemctl start apache2.sevice (forma más correcta de iniciar la ejecución dle demonio)
+# apachectl stop (lo Detiene)
+# apachectl restart (lo reinicia. Si no se está ejecutando, se inicia. Este comando verifica automáticamente los archivos de configuración para detectar los errores más obvios)
+# apachectl fullstatus (muestra un informe de estado completo)
+# apachectl status (muestra un breve informe de estado. Similar a la opción fullstatus, excepto que se omite la lista de solicitudes que se están atendiendo actualmente)
+# apachectl -M (muestra todos los módulos de apache)
+# apachectl configtest (verifica el archivo dee configuración por si tiene errores)
 
 
 apacheds
@@ -56546,7 +56562,7 @@ c (Número de conexiones con límite en 65539)
 H (ataque modo SlowLoris enviando paquetes sin completar)
 B (ataque modo Slow POST sin terminar de enviar el cuerpo del mensaje)
 X (ataque modo Slow Read de lectura de las respuestas http lentas)
-g (Generr estadistica en formato html)
+g (Generar estadistica en formato html)
 o (Archivo de salida)
 i (Intervalo de datos por segundo por conexión)
 r (Conexiones por segundo)
@@ -56554,6 +56570,12 @@ t (Cabecera a utilizar)
 u (URL de destino)
 x (Longitud máxima de los datos)
 p (Tiempo de espera de respuesta http una vez el servidor se considera inaccesible)
+
+
+slowloris
+Herramienta de código abierto para realizar ataques de denegación de servicio (DoS) en servidores web. slowloris explota una vulnerabilidad en los servidores web llamada "Keep-Alive" para agotar los recursos del servidor y hacerlos inaccesibles.
+$ slowloris -v -p 22 -s 200 example.com (modo verboso, especificanto puerto, por defecto el 80 y usar 200 sockets simultaneos, por defecto 100)
+$ slowloris -x --proxy-host=proxy.example.com --proxy-port=1080 example.com (especificando proxy y puerto del proxy)
 
 
 slurm
