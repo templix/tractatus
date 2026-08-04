@@ -56578,6 +56578,25 @@ $ slowloris -v -p 22 -s 200 example.com (modo verboso, especificanto puerto, por
 $ slowloris -x --proxy-host=proxy.example.com --proxy-port=1080 example.com (especificando proxy y puerto del proxy)
 
 
+slrn
+es un lector de noticias con hilos y soporte para color, diseñado para leer noticias de usenet mediante NNTP o directamente de un repositorio local de forma rápida incluso en conexiones lentas. Incluye la herramienta slrn_getdescs. Primero procede registrarse en algún servidor como por ejemplo news.eternal-september.org o news.newsdemon.com, en este caso vamos a usar news.eternal-september.org. El archivo de configuración de forma básica:
+$ nano ~/.slrnrc
+       set username "USER"
+       set hostname "eternal-september.org"
+       server "news.eternal-september.org" ".jnewsrc"
+       set generate_message_id 0
+       nnrpaccess "news.eternal-september.org" "USER" "PASS"
+".jnewsrc" es el archivo donde se descargaran los mensajes, "generate-message_id" para desactivar la generación de Message-IDs ya que el dominio de internet local no es valido y "nnrpaccess" si no se quiere entrar cada vez usuario/contraseña.
+$ slrn -f ~/.jnewsrc --create (la primera vez se usa para crear el archivo donde se guardan los mensajes)
+$ slrnrc (se entra en usenet)
+$ slrn_getdescs (actualizar el archivo de descripciones de grupos de noticias. Solo se actualiza una vez por semana)
+Las teclas principales:
+Las flechas para moverse
+enter --> seleccionar una noticia, un grupo...
+/ --> buscar
+q --> salir
+
+
 slurm
 Monitoriza la interfaz de red
 # slurm -i eth0
