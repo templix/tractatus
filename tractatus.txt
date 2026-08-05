@@ -56573,9 +56573,21 @@ p (Tiempo de espera de respuesta http una vez el servidor se considera inaccesib
 
 
 slowloris
-Herramienta de código abierto para realizar ataques de denegación de servicio (DoS) en servidores web. slowloris explota una vulnerabilidad en los servidores web llamada "Keep-Alive" para agotar los recursos del servidor y hacerlos inaccesibles.
+
+Herramienta de código abierto para realizar ataques de denegación de servicio (DoS) en servidores web. slowloris explota una vulnerabilidad en los servidores web llamada "Keep-Alive" para agotar los recursos del servidor y hacerlos inaccesibles. Funciona abriendo conexiones parciales pero nunca las completa, como el servidor espera que se completen, mantiene esos sockets abiertos consumiendo memoria y recursos agotandolos en el servidor. Este proceso no genera tráfico masivo, no consume ancho de banda y no hace que el CPU se dispare, simplemente ocupa conexiones que el servidor no puede cerrar.
 $ slowloris -v -p 22 -s 200 example.com (modo verboso, especificanto puerto, por defecto el 80 y usar 200 sockets simultaneos, por defecto 100)
-$ slowloris -x --proxy-host=proxy.example.com --proxy-port=1080 example.com (especificando proxy y puerto del proxy)
+Algunas notas sobre la salida del comando:
+	Attacking localhost with 150 sockets. --> Conexiones iniciales
+	Creating sockets --> Abriendo conexiones
+	Sending keep-alive headers --> Manteniendo vivas las conexiones
+	Socket count: 150 --> Número de conexiones activas
+	Sending keep-alive headers --> Refrescando conexiones cada 15s
+	Creating 35 new sockets --> Reemplazando conexiones que murieron y ajustando para mantener el número objetivo
+$ netstat -an | grep :80 | grep -c ESTABLISHED (ver conexiones establecidas, incluyendo las "semiconectadas")
+$ netstat -an | grep :80 | wc -l (ver la cantidad de conexiones al puerto 80)
+$ ps aux | grep apache2 | wc -l (ver procesos del servidor web para Apache)
+$ ps aux | grep nginx | wc -l (ver procesos del servidor web para Nginx)
+$ slowloris -p 80 -s 5000 localhost (aumentando el número de conexiones simultáneas el ataque es más agresivo al puerto 80)
 
 
 slrn
@@ -60575,7 +60587,8 @@ ulimit
 Permite  visualizar o limitar los recursos del sistema.
 # ulimit -f 512000 (limita a los usuarios para que no puedan crear archivos de mayor tamaño que 512000 Kb [500 #Mb])
 $ ulimit -a   (ver todos los parámetros)
-$ ulimit -n (cantidad máxima de ficheros que se pueden abrir)
+$ ulimit -n (cantidad máxima de ficheros que se pueden abrir. Por defecto 1024)
+$ ulimit -n 65535 (aumentar la cantidad al máximo en la presente sesión)
 $ ulimit -SHn (ver la cantidad máxima de ficheros que se pueden abrir, blandos [por el usuario] y duros [por root])
 $ ulimit -Sn 10000 (modificarlo a 10000 mientras no se cierre la sesión)
 Parámetros:
@@ -60614,8 +60627,8 @@ Reiniciar
 En ciertas ocasiones, al procesar muchos archivos, se produce un error "for output (Too many open files)" porque se desborda el limite de 1024 k. Para solucionarlo:
 # nano /etc/security/limits.conf
 Y añadir las siguientes lineas:
-	*    soft    nofile    9000
-	*    hard    nofile    65000
+	*    soft    nofile    65535
+	*    hard    nofile    65535
 Los asteriscos pueden sustituirse por el nombre de usuario.
 3.-
 Limitar la cantidad de usuarios conectados al sistema:
