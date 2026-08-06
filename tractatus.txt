@@ -56613,6 +56613,12 @@ Monitoriza la interfaz de red
 # slurm -i eth0
 
 
+sm
+Muestra un texto breve a pantalla completa. Screen Message mostrará un mensaje de varias líneas, lo más grande posible, a pantalla completa y en blanco y negro por defecto.
+$ sm -f red -b green "Linux es genial" (con letras en rojo y fondo verde)
+$ sm -a 1 -n serif "Linux" (alinea a la izquierda [0 centrado y 2 a la derecha] con letra serif)
+
+
 smartmontools
 Comprobar el estado de los discos duros. Contiene los programas smartctl y smartd para controlar y supervisar los sistemas de almacenamiento mediante el sistema S.M.A.R.T. [Self-Monitoring, Analysis and Reporting Technology System]
 # smartctl --scan (información relevante sobre los dispositivos de almacenamiento disponibles)
