@@ -56573,7 +56573,6 @@ p (Tiempo de espera de respuesta http una vez el servidor se considera inaccesib
 
 
 slowloris
-
 Herramienta de código abierto para realizar ataques de denegación de servicio (DoS) en servidores web. slowloris explota una vulnerabilidad en los servidores web llamada "Keep-Alive" para agotar los recursos del servidor y hacerlos inaccesibles. Funciona abriendo conexiones parciales pero nunca las completa, como el servidor espera que se completen, mantiene esos sockets abiertos consumiendo memoria y recursos agotandolos en el servidor. Este proceso no genera tráfico masivo, no consume ancho de banda y no hace que el CPU se dispare, simplemente ocupa conexiones que el servidor no puede cerrar.
 $ slowloris -v -p 22 -s 200 example.com (modo verboso, especificanto puerto, por defecto el 80 y usar 200 sockets simultaneos, por defecto 100)
 Algunas notas sobre la salida del comando:
