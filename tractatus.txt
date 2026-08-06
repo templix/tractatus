@@ -53693,6 +53693,13 @@ $ scons -c (limpia los archivos de salida como make clean)
 $ scons -j4 (compilación en paralelo 4 hilos)
 
 
+scontrol
+Herramienta que se comunica con slurmctld [ver] para obtener información. No lanzan slurmctld directamente; simplemente le hacen una petición al demonio para obtener datos.
+$ scontrol show partitions (listar particiones disponibles)
+$ scontrol show node <nombre_del_nodo> (mostrar estado de un nodo concreto)
+$ scontrol show jobs (ver trabajos pendientes o en ejecución)
+
+
 scour
 Módulo de Python que limpia exhaustivamente los archivos SVG, eliminando gran cantidad de información innecesaria que ciertas herramientas o autores incrustan en sus documentos. Incluye la herramienta dh_scour.
 $ scour -i input.svg -o output.svg (especificando archivo de entrada y salida)
@@ -56635,6 +56642,12 @@ $ sluice -c 1 -e -f 2 -o -u -w -z -r 1M -m 10M (lo mismo, especificando tiempo d
 slurm
 Monitoriza la interfaz de red
 # slurm -i eth0
+
+
+slurmctld
+Demonio de gestión central del sistema de cola [job scheduler] Slurm Workload Manager. Su función principal es coordinar la distribución de trabajos [jobs] entre los nodos del cluster, gestionar el estado de los recursos [nodos, particiones, archivos de estado], y servir como punto de control único para todas las componentes de Slurm [slurmd, scontrol, sacct, etc.]. Incluye slurmctld-wlm, una variante del demonio diseñada específicamente para entornos Workload Manager [WLM]. Se mantiene ambos nombres para compatibilidad con versiones antiguas o con entornos específicos donde se prefiera esa denominación. Ver scontrol.
+# systemctl status slurmctld.service (comprobar si está activo y escucha en el puerto configurado, por defecto 6817)
+$ ps aux | grep slurmctld (buscar procesos cuyo nombre contenga slurmctld)
 
 
 sm
