@@ -56656,6 +56656,39 @@ $ sm -f red -b green "Linux es genial" (con letras en rojo y fondo verde)
 $ sm -a 1 -n serif "Linux" (alinea a la izquierda [0 centrado y 2 a la derecha] con letra serif)
 
 
+sma
+[sendmail-bin]. Programa que analiza las entradas de registro de Sendmail, normalmente en /var/log/mail.log y saca una tabla con quién mandó qué, cuánto pesaba, a quién, y cuánto tardó..
+$ sma (uso básico)
+$ sma -l /var/log/mail.log.1 (analizar un log específico en vez del de por defecto)
+$ sma -s (ordenar la salida por bytes en vez de por número de mensajes)
+$ sma -d ejemplo.com (sacar estadísticas solo de un dominio concreto)
+$ zcat /var/log/mail.log.2.gz | sma (combinarlo con zcat si los logs están rotados y comprimidos)
+$ sma > /tmp/informe_correo.txt (generar el informe y guardarlo para revisarlo)
+
+
+smallerc
+Compilador de C muy pequeño, de una sola pasada [single-pass], pensado sobre todo para programas sencillos, entornos limitados, docencia o experimentación y compatible con la mayoría de las versiones de C89 y C99. Un compilador normal, como GCC, hace varias fases de análisis y optimización. Un compilador de una sola pasada va leyendo el código fuente y generando salida casi al mismo tiempo. Incluye los ejecutables n2f, smlrc, smlrcc, smlrl y smlrpp, En paqueño ejemplo para ilustrar el compirlador.
+$ nano linux.c
+       #include <stdio.h>
+       int main(void)
+       {
+           puts("Linux es un sistema genial");
+	   return 0;
+       }
+$ smlrcc linux.c -o linux (forma básica que automatiza todo el proceso. Preprocesa hola.c con smlrpp, compila el resultado con smlrc, generando ensamblador, lo ensambla con NASM o FASM si se especifica y enlaza con smlrl, produciendo el ejecutable hola o hola.exe en DOS/Windows)
+$ smlrcc test.c -o test.exe (en DOS, compilar directamente a un ejecutable .exe)
+$ smallerc main.c util.c -o programa (compila y enlaza main.c y util.c, generando el ejecutable programa)
+$ smallerc -DDEBUG -DMAX_VAL=100 -I./include programa.c -o programa (pasar definiciones de macros con -D y directorios de cabeceras con -I)
+1.-
+El mismo proceso paso a paso:
+$ smlrpp hola.c hola.i (preprocesar)
+$ smlrc -SI ../include hola.i hola.asm (compilar a ensamblador [x86])
+$ nasm -f elf hola.asm -o hola.o (ensamblar con NASM)
+$ smlrcc -asm n2f hola.c -o hola (compilar a 32 bits y usar FASM)
+$ smlrl hola.o -o hola (enlazar)
+Nota.- Algunas funciones complejas de la biblioteca estándar, especialmente las que dependen mucho de macros o rasgos específicos de libc, pueden no funcionar igual que con GCC.
+
+
 smartmontools
 Comprobar el estado de los discos duros. Contiene los programas smartctl y smartd para controlar y supervisar los sistemas de almacenamiento mediante el sistema S.M.A.R.T. [Self-Monitoring, Analysis and Reporting Technology System]
 # smartctl --scan (información relevante sobre los dispositivos de almacenamiento disponibles)
