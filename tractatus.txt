@@ -56624,6 +56624,14 @@ Además del comando, se puede importar la función en scripts Python:
        print(slugify("Esto es un test ---"))
 
 
+sluice
+Herramienta para controlar la velocidad de transferencia de datos al leer desde la entrada estándar y escribir en la salida estándar. Permite simular diferentes velocidades de transferencia de E/S, lo cual puede ser útil para realizar pruebas de rendimiento y evaluar el comportamiento de sistemas bajo condiciones específicas.
+$ cat /dev/zero | sluice -r 64K -v -m 32M > /dev/null (genera ceros continuamente, velocidad de transferencia 64 KB/s, en modo detallado, especifica 32 M la cantidad de datos a procesar y lo manda a /dev/null)
+$ sluice -R -r 2M -T 1m -S -i 4K > myfifo (leer datos aleatorios desde /dev/urandom, velocidad de transferencia se limita a 2 MB/s, se ejecuta durante 1 minuto utilizando, mostrar estadísticas al final del flujo, especifica el tamaño de lectura/escritura de 4 KB y la salida se redirige a un archivo FIFO)
+$ sluice -z -r 1M -m 10M -t output.txt (generar ceros, velocidad de transferencia 1 MB/s, se procesan 10 MB de datos y la salida se manda a output.txt)
+$ sluice -c 1 -e -f 2 -o -u -w -z -r 1M -m 10M (lo mismo, especificando tiempo de retraso constante entre cada escritura, que omita errores de lectura, frecuencia de las actualizaciones estadísticas detalladas [2], que detecte desbordamientos y ajusta el tamaño del búfer de lectura/escritura para evitarlos [-o y -u] y que advierta si ocurren ráfagas continuas de subutilización de la velocidad de datos)
+
+
 slurm
 Monitoriza la interfaz de red
 # slurm -i eth0
