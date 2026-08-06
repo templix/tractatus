@@ -56608,6 +56608,22 @@ enter --> seleccionar una noticia, un grupo...
 q --> salir
 
 
+slugify
+Herramienta que convierte cualquier cadena de texto, incluyendo Unicode en un slug limpio: minúsculas, sin caracteres especiales, con separadores consistentes y seguro para usar en URLs.
+$ slugify "linux es genial ---"
+$ slugify --separator / "linux es genial ---" (cambia el separador de palabras, por defecto "-" por "/")
+$ echo "Linux es genial" | slugify --stdin
+$ slugify "影師嗎" (con caracteres Unicode [chino, cirílico...])
+$ slugify --allow-unicode "影師嗎"
+$ slugify --regex-pattern '[^-a-z0-9_]+' "___Esto es un test___" (expresiones regulares personalizadas)
+$ slugify --no-lowercase "Linux es un Sistema Genial" (mantener mayúsculas)
+1.-
+Uso como librería en Python.
+Además del comando, se puede importar la función en scripts Python:
+       from slugify import slugify
+       print(slugify("Esto es un test ---"))
+
+
 slurm
 Monitoriza la interfaz de red
 # slurm -i eth0
