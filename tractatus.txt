@@ -39620,6 +39620,7 @@ nl
 Muestra en pantalla un archivo de texto con las lineas numeradas. No modifica el archivo.
 $ nl fichero.txt
 $ nl fichero.txt > fichero_numerado.txt
+$ nl -ba archivo.txt | sed -n '2,7p' (muestra de la 2ª linea a la 7ª del archivo)
 
 
 nload
@@ -56687,6 +56688,52 @@ $ nasm -f elf hola.asm -o hola.o (ensamblar con NASM)
 $ smlrcc -asm n2f hola.c -o hola (compilar a 32 bits y usar FASM)
 $ smlrl hola.o -o hola (enlazar)
 Nota.- Algunas funciones complejas de la biblioteca estándar, especialmente las que dependen mucho de macros o rasgos específicos de libc, pueden no funcionar igual que con GCC.
+
+
+smartdns
+Servidor DNS local para obtener la IP más rápida. Acepta consultas DNS de clientes locales, obtiene los resultados de múltiples servidores DNS ascendentes y devuelve los resultados de acceso más rápidos a los clientes. Evita la saturación de DNS y mejora la velocidad de acceso a la red, además de ofrecer filtrado de anuncios de alto rendimiento.
+Ejemplo de archivo de configuración solo con las opciones sin comentar:
+# nano /etc/smartdns/smartdns.conf
+       bind [::]:53 # IPv4 y IPv6
+       cache-size -1 # automática
+       prefetch-domain yes
+       serve-expired yes
+       speed-check-mode ping,tcp:80,tcp:443
+       dualstack-ip-selection yes
+       log-level info
+       force-qtype-SOA 65
+       log-file /var/log/smartdns/smartdns.log
+       server 1.1.1.1 # Cloudflare
+       server 1.0.0.1 # Cloudflare
+       server 9.9.9.9 # Quad9
+       server 149.112.112.112 # Quad9
+       server 208.67.222.222 # Opendns
+       server 208.67.220.220 # Opendns
+       log-level info # nivel de logs
+       force-qtype-SOA 65
+       log-file /var/log/smartdns/smartdns.log # archivo de logs
+$ sudo systemctl status smartdns.service (comprobar el estado del servicio)
+$ sudo ss -lnp | grep smartdns (comprobar si está activo)
+$ host debian.org 127.0.0.1
+$ sudo smartdns -f -x
+$ sudo grep -E 'add server|request: debian.org|result: debian.org' /var/log/smartdns/smartdns.log | tail -30 (ver qué servidores upstream está utilizando SmartDNS)
+$ sudo grep -E 'dns_client.c:.*(request|result|server)' /var/log/smartdns/smartdns.log | tail -50
+$ dig @1.1.1.1 debian.org (probar una DNS, cloudflare en este caso)
+$ dig @114.114.114.114 debian.org (probar una DNS aunque no esté en el archivo de configuración para comprobar los msec)
+$ sudo grep -nE '^[[:space:]]*(server|group|server-name|speed-check-mode|response-mode|dualstack-ip-selection)' /etc/smartdns/smartdns.conf (ver los servidores del archivo de configuración)
+1.-
+Comprobar si funciona bien la aplicación
+En una terminal lanzar:
+$ sudo tail -f /var/log/smartdns/smartdns.log (ver logs)
+Y en otra:
+$ dig planet.debian.org
+Y comprobar como en la primera salen los datos del dig. Si se lanza dos veces la primera mostrará un 34 msec (el número varia) y la segunda vez 0 msec porque ya consulta caché.
+$ sudo grep -E 'server .*rtt|result: planet.debian.org, id: 0' /var/log/smartdns/smartdns.log | tail -30
+2.-
+script lanzado en la terminal para realizar varias pruebas, en este caso 5:
+       $ for i in 1 2 3 4 5; do
+            dig @208.67.222.222 planet.debian.org | grep "Query time"
+       done
 
 
 smartmontools
