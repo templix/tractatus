@@ -56730,6 +56730,15 @@ Nota- Tambien podemos lanzar
 Si el resultado es 1 es HDD si es 0 es SSD
 
 
+smb-nat
+Herramienta de Auditoría de NetBIOS. Esta herramienta puede realizar diversas comprobaciones de seguridad en servidores remotos que ejecutan servicios de compartición de archivos NetBIOS. Es capaz de enumerar recursos compartidos e intentar intrusiones utilizando una lista de usuarios y contraseñas proporcionada por el usuario.
+$ smb-nat -u /usr/share/smb-nat/userlist.txt -p /usr/share/smb-nat/passlist.txt 192.168.1.50 (leerá los usuarios de userlist.txt y las contraseñas de passlist.txt y comprobará cada usuario con todas las contraseñas)
+$ smb-nat 192.168.1.1-10 (Escanear las IPs desde la 1 hasta la 10)
+$ smb-nat 192.168.1.5,10,20-25 (Escanear la IP 5, la 10, y del 20 al 25)
+$ smb-nat -u /usr/share/smb-nat/userlist.txt -p /usr/share/smb-nat/passlist.txt -o resultados_audit.txt 192.168.1.1-254 (escanear la subred de la 1 a la 254 y guardar todo en resultados_audit.txt, además de mostrarlo por pantalla)
+nOTA.- fue escrito en los años 90 para Windows NT. Funciona exclusivamente sobre NetBIOS en puerto 139 y SMBv1. Windows desde Vista/7 y especialmente 10/11 deshabilita SMBv1 y las sesiones nulas por defecto por seguridad y para evitar WannaCry.
+
+
 smbclient
 Conectar recursos compartidos de windows desde linux.
 $ smbclient //192.168.1.155/compartido -U usuario (Después de ingresar usuario y contraseña entra en el prompt del recurso compartido)
