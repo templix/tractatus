@@ -56691,8 +56691,9 @@ Nota.- Algunas funciones complejas de la biblioteca estándar, especialmente las
 
 
 smartdns
-Servidor DNS local para obtener la IP más rápida. Acepta consultas DNS de clientes locales, obtiene los resultados de múltiples servidores DNS ascendentes y devuelve los resultados de acceso más rápidos a los clientes. Evita la saturación de DNS y mejora la velocidad de acceso a la red, además de ofrecer filtrado de anuncios de alto rendimiento.
-Ejemplo de archivo de configuración solo con las opciones sin comentar:
+Servidor DNS local para obtener la IP más rápida. Acepta consultas DNS de clientes locales, obtiene los resultados de múltiples servidores DNS ascendentes y devuelve los resultados de acceso más rápidos a los clientes. Evita la saturación de DNS y mejora la velocidad de acceso a la red, además de ofrecer filtrado de anuncios de alto rendimiento. En el archivo /etc/resolv.conf solo tiene que constar la linea:
+	 nameserver 127.0.0.1
+Y si la gestión de la red la realiza networkmanager [ver nmcli] se tiene que desactivar la actualización periódica del archivo /etc/resolv.conf. Ejemplo de archivo de configuración solo con las opciones sin comentar:
 # nano /etc/smartdns/smartdns.conf
        bind [::]:53 # IPv4 y IPv6
        cache-size -1 # automática
