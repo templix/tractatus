@@ -56805,6 +56805,37 @@ Monitorizar el estado de las conexiones del servidor samba.
 # smbstatus -L  (Listado de ficheros abiertos)
 
 
+smcroute
+Herramienta y demonio que permite gestionar rutas multicast en un sistema UNIX/Linux. Es especialmente útil en entornos donde se quiere definir rutas multicast estáticas y no se necesita o no se puede utilizar protocolos dinámicos como PIM, IGMP, o protocolos de ruteo multicast más complejos. Incluye los ejecutables smcroutectl y smcrouted
+Ejemplo de archivo de configuración:
+# nano /etc/smcroute.conf
+       # Reenviar el grupo 239.1.1.1 desde el origen 192.168.1.10,
+       # que entra por eth0, hacia eth1
+       mroute from eth0 group 239.1.1.1 source 192.168.1.10 to eth1
+       # Unirse a un grupo (para recibir tú mismo el tráfico, sin reenviar)
+       mgroup from eth0 group 239.5.5.5
+# smcrouted -d (arrancar el demonio en segundo plano)
+# systemctl status smcroute.service (lo mismo gestionado por systemd)
+# smcrouted -N (no leer /etc/smcroute.conf al arrancar)
+# smcrouted -f /ruta/a/otro.conf (usar un fichero de config alternativo)
+# smcrouted -n (no hacer fork y quedarse en foreground)
+# smcrouted -l debug (nivel de log más verboso)
+# smcroutectl add eth0 192.168.1.10 239.1.1.1 eth1 (controlar el demonio en caliente: los paquetes que salen de 192.168.1.10 hacia el grupo 239.1.1.1 y entra por eth0, reenvíalo por eth19)
+# smcroutectl add eth0 192.168.1.10 239.1.1.1 eth1 eth2 (con varias interfaces de salida)
+# smcroutectl remove eth0 192.168.1.10 239.1.1.1 (eliminar esa ruta)
+# smcroutectl join eth0 239.5.5.5 (unirse a un grupo. No reenvía nada, simplemente hace que la propia máquina reciba el tráfico de ese grupo por esa interfaz)
+# smcroutectl leave eth0 239.5.5.5 (dejar el grupo)
+# smcroutectl show (ver rutas y grupos activos ahora mismo en el demonio)
+# smcroutectl reload (recargar /etc/smcroute.conf sin reiniciar el demonio)
+# smcroutectl kill (matar el demonio)
+Nota sobre la explicación del comando:
+     smvroute -a <IFNAME> <SOURCE-IP> <MULTICAST-GROUP>  <IFNAME> [<IFNAME> ...]
+IFNAME (inbound) --> la interfaz por donde llega el tráfico multicast, ej. eth0.
+SOURCE-IP --> la IP unicast del emisor original del stream. Lo que en multicast se llama (S,G) — Source, Group). smcroute recomienda siempre especificar el origen si se conoce.
+MULTICAST-GROUP --> la dirección multicast por ej. 239.1.1.1, el "canal".
+IFNAME (outbound) --> una o varias interfaces por donde se debe *reenviar* ese tráfico, por ej. eth1, eth2.
+
+
 smem
 Informa del uso de la memoria.
 # smem -u (Por parte de los usuarios)
