@@ -56857,6 +56857,25 @@ Informa del uso de la memoria física en consideración con la memoria compartid
 # smemstat -g -p tmux,firefox57 (el resultado en gigabytes. -m en megabytes -k en kilobytes)
 
 
+smenu
+Herramienta que permite crear menús interactivos directamente en la terminal. Ejemplo con un script:
+$ nano distro.sh
+       #!/bin/bash
+       # Crear un menú de 4 opciones y guardar la selección en la variable RESPUESTA
+       echo "Escoger una distro: "
+       RESPUESTA=$(smenu <<EOF
+       Debian
+       "Linux Mint"
+       "Red Hard"
+       Opensuse
+       EOF
+       )
+       echo "Has elegido: $RESPUESTA"
+Despues de otorgar permisos de ejecución [+x] y ejecutarlo, mostrará una linea con las 4 opciones y con las flechas se podrá seleccionar la deseada, guardándose en la variable $RESPESTA.
+$ echo -e "A B C" | smenu (forma simple de comprobar el funcionamiento. Imprimirá las opciones y resaltará la seleccionada)
+$ selecc=$(\ls Documents/ | smenu) ; echo -e "Has seleccionado $selecc" (seleccionar un archivo de directorio especificado y lo guardará en $selecc)
+
+
 snap
 [snapd]. Formato de paquete universal desarrollado por Canonical que tienen como objetivo proporcionar una forma fácil y segura de distribuir software en cualquier distribución Linux, eliminando las dependencias del sistema y asegurando que las aplicaciones funcionen sin problemas en diferentes entornos porque incluyen todas las dependencias del paquete. Los paquetes de instalan en /snap/nombre_paquete y lo ejecutables en /snap/bin y pueden convivir junto a los del mismo nombre en el sistema. Si por ejemplo, lanzamos:
 $ emacs
