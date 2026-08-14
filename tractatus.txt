@@ -25455,96 +25455,6 @@ $ hledger -f finanzas.journal areg alquiler (ver un concepto)
 $ hledger -f finanzas.journal print (mostrar todas las entradas completas)
 
 
-ledger-web
-Ver ledger y hledger
-$ hledger-web -f finanzas.journal (muestra las finanzas en el navegador predeterminado)
-
-
-legit
-Extensión de Git para facilitar la manipulación de ramas al proporcionar varios comandos que ayudan a automatizar ciertas tareas con Git: cambio de rama fluido, sincronización del repositorio, creación y fusión de ramas y manipulación de ramas remotas.
-$ legit sync (sincroniza todas las ramas locales con sus equivalentes remotas, haciendo pull y push automáticamente)
-$ legit switch nombre_rama (cambia de una rama a otra, guardando automáticamente cambios sin commitear y restaurándolos al cambiar de rama)
-$ legit publish nombre_rama (sube una rama local al repositorio remoto y la configura para seguimiento)
-$ legit unpublish nombre_rama (elimina una rama remota y la desvincula de la local)
-$ legit graft rama_origen rama_destino (fusiona los cambios de una rama en otra de manera sencilla)
-$ legit new feature-y (crear nueva rama)
-$ legit publish feature-y (publicarla en el remoto)
-
-
-lego
-Cliente Let's Encrypt escrito en Go. Su función principal es solicitar, renovar y gestionar certificados TLS/SSL gratuitos para tus dominios para que el servidor web [Apache, Nginx, etc.] para activar HTTPS.
-$ lego --email tu@email.com --domains dominio.com --http --path ./certs run (tu correo, dominio para el que se pide el certificado, validaación http-01, donde se guardará y acción)
-Después de ejecutarlo, en ./certs/ se tendrá cert.pem [el certificado], key.pem [clave privada] y fullchain.pem [cert + cadena de confianza].
-$ lego --email tu@email.com --domains pep.cat --http --path ./certs renew (renovar el certificado)
-$ lego --email tu@email.com --dns cloudflare --domains www.dominio.com --path ./certs run (validación DNS. Requiere que la API key de Cloudflare este en las variables de entorno)
-$ lego --email tu@example.com --domains dominio.com --http --path ./certs --server https://acme-staging-v02.api.letsencrypt.org/directory run (probar en entorno staging. Evita el límite de peticiones durante pruebas)
-
-
-lektor
-Generador de sitios web estáticos basado en Python. Lektor es un generador de sitios web estáticos. Un proyecto Lektor consiste en una colección de archivos estáticos que pueden integrarse en varias páginas HTML individuales. Lektor también puede utilizarse como un CMS, proporcionando una interfaz de administración basada en navegador para editar el contenido del sitio web y crear nuevas páginas.
-$ lektor quickstart (lanza un asistente que pregunta nombre del proyecto, título, autor, carpeta de salida, idioma...)
-Crea una estructura tipo:
-        web-mia/
-        ├── content/           # Contenido del sitio en archivos .lr [Lektor Record]
-        ├── templates/         # Plantillas HTML (Jinja2)
-        ├── assets/            # CSS, JS, imágenes...
-        ├── models/            # Modelos de contenido
-        └── lektorproject      # Configuración
-$ cd web-mia
-$ lektor server (lanza un servidor local en http://127.0.0.1:5000 que se recarga automáticamente cuando se hacen cambios)
-Puedes tener una jerarquía como esta:
-        content/
-        ├── blog/
-        │   ├── post1/
-        │   │   └── contents.lr
-        │   ├── post2/
-        │   │   └── contents.lr
-        ├── about/
-        │   └── contents.lr
-        └── contents.lr         # homepage
-$ lektor build (genera todos los archivos HTML en web-mia/_build/ y esta carpeta kpuede subirse al servidor)
-Entrar en el editor con el navegador en http://127.0.0.1:5000/admin para acceder al CMS visual y desde ahí se puede añadir páginas, editar texto, subir imágenes...
-$ lektor deploy (subir al hosting si no está en local)
-
-
-levee
-Editor de pantalla extremadamente pequeña, basado en el editor "vi" de Unix pero que no tiene la mayoría de sus características como resaltado de sintaxis, múltiples ventanas, etc.
-Como está basado en vi, los comandos son muy similares, pero levee solo implementa un grupo muy reducido. Los más básicos son:
-        i --> Entrar en modo de inserción
-        Esc --> Volver al modo normal
-        h --> Mover cursor a la izquierda
-        j --> Mover cursor hacia abajo
-        k --> Mover cursor hacia arriba
-        l --> Mover cursor a la derecha
-        x --> Borrar el carácter bajo el cursor
-        dd --> Borrar la línea actual
-        :w --> Guardar el archivo
-        :q --> Salir del editor si no hay cambios sin guardar
-        :wq --> Guardar y salir
-        :q! --> Salir sin guardar los cambios
-
-
-lexicon
-Permite manipular registros DNS [A, AAAA, CNAME, MX, NS, TXT, SPF, SOA, SRV, LOC] en múltiples proveedores [Cloudflare, DigitalOcean, Namesilo, yandex, Route53...] de DNS de forma estandarizada. Es especialmente útil en automatización, como en la configuración de certificados SSL/TLS con Let's Encrypt, ya que permite crear, listar, actualizar y eliminar registros DNS de forma programática.
-$ lexicon cloudflare list example.com TXT (listar todos los registros txt de un dominio en Cloudflare)
-Si se usa variables de entorno para autenticación:
-        export LEXICON_CLOUDFLARE_USERNAME="myusername@example.com"
-        export LEXICON_CLOUDFLARE_TOKEN="cloudflare-api-token"
-$ lexicon cloudflare list example.com TXT
-$ lexicon cloudflare create www.example.com TXT --name="_acme-challenge.www.example.com." --content="challenge-token" (crear un registro txt para validar un dominio con Let's Encrypt)
-$ lexicon cloudflare create www.example.com TXT --name="_acme-challenge.www.example.com." --content="challenge-token" --ttl 600 (Lo mismo especificando el TTL)
-$ lexicon cloudflare update www.example.com TXT --identifier="cloudflare-record-id" --content="new-challenge-token" (actualizar registro txt con el identificador de registro obtenido con list)
-$ lexicon cloudflare delete www.example.com TXT --name="_acme-challenge.www.example.com." --content="challenge-token" (eliminar un registro txt)
-$ lexicon cloudflare delete www.example.com TXT --identifier="cloudflare-record-id" (lo mismo usando el identificador)
-$ lexicon auto create domain.net TXT --name foo --content bar (con un proveedor especial que lo detecta automáticamente)
-$ lexicon --help (lista completa de provedores)
-1.-
-Integrar lexicon con acme.sh para automatizar la emisión de certificados. Ejemplo para Namesilo que actualiza registros cada 15 minutos.
-        export PROVIDER=namesilo
-        export LEXICON_NAMESILO_TOKEN="namesilo-api-token"
-$ acme.sh --issue -d test.example.com --dns dns_lexicon --dnssleep 960 (espera 16 minutos para la propagación de DNS en Namesilo)
-
-
 hlins
 Herramienta para insertar enlaces de hipertexto en documentos HTML, utilizando una base de datos con entradas del formato "nombre = URL". Su principal característica es que no solo  permite reemplazar texto por una URL, sino que está diseñada para reconocer nombres de personas y convertirlos en enlaces a sus respectivas URLs, basándose en una base de datos predefinida.
 Crear la base de datos de nombres y URLs
@@ -30437,6 +30347,58 @@ $ ledger -f cuentas.ledger register ^Gastos --period "2025/02/04" (de un dia en 
 $ ledger -f cuentas.ledger cleared (informe de saldo especial que añade dos columnas adicionales)
 
 
+ledger-web
+Ver ledger y hledger
+$ hledger-web -f finanzas.journal (muestra las finanzas en el navegador predeterminado)
+
+
+legit
+Extensión de Git para facilitar la manipulación de ramas al proporcionar varios comandos que ayudan a automatizar ciertas tareas con Git: cambio de rama fluido, sincronización del repositorio, creación y fusión de ramas y manipulación de ramas remotas.
+$ legit sync (sincroniza todas las ramas locales con sus equivalentes remotas, haciendo pull y push automáticamente)
+$ legit switch nombre_rama (cambia de una rama a otra, guardando automáticamente cambios sin commitear y restaurándolos al cambiar de rama)
+$ legit publish nombre_rama (sube una rama local al repositorio remoto y la configura para seguimiento)
+$ legit unpublish nombre_rama (elimina una rama remota y la desvincula de la local)
+$ legit graft rama_origen rama_destino (fusiona los cambios de una rama en otra de manera sencilla)
+$ legit new feature-y (crear nueva rama)
+$ legit publish feature-y (publicarla en el remoto)
+
+
+lego
+Cliente Let's Encrypt escrito en Go. Su función principal es solicitar, renovar y gestionar certificados TLS/SSL gratuitos para tus dominios para que el servidor web [Apache, Nginx, etc.] para activar HTTPS.
+$ lego --email tu@email.com --domains dominio.com --http --path ./certs run (tu correo, dominio para el que se pide el certificado, validaación http-01, donde se guardará y acción)
+Después de ejecutarlo, en ./certs/ se tendrá cert.pem [el certificado], key.pem [clave privada] y fullchain.pem [cert + cadena de confianza].
+$ lego --email tu@email.com --domains pep.cat --http --path ./certs renew (renovar el certificado)
+$ lego --email tu@email.com --dns cloudflare --domains www.dominio.com --path ./certs run (validación DNS. Requiere que la API key de Cloudflare este en las variables de entorno)
+$ lego --email tu@example.com --domains dominio.com --http --path ./certs --server https://acme-staging-v02.api.letsencrypt.org/directory run (probar en entorno staging. Evita el límite de peticiones durante pruebas)
+
+
+lektor
+Generador de sitios web estáticos basado en Python. Lektor es un generador de sitios web estáticos. Un proyecto Lektor consiste en una colección de archivos estáticos que pueden integrarse en varias páginas HTML individuales. Lektor también puede utilizarse como un CMS, proporcionando una interfaz de administración basada en navegador para editar el contenido del sitio web y crear nuevas páginas.
+$ lektor quickstart (lanza un asistente que pregunta nombre del proyecto, título, autor, carpeta de salida, idioma...)
+Crea una estructura tipo:
+        web-mia/
+        ├── content/           # Contenido del sitio en archivos .lr [Lektor Record]
+        ├── templates/         # Plantillas HTML (Jinja2)
+        ├── assets/            # CSS, JS, imágenes...
+        ├── models/            # Modelos de contenido
+        └── lektorproject      # Configuración
+$ cd web-mia
+$ lektor server (lanza un servidor local en http://127.0.0.1:5000 que se recarga automáticamente cuando se hacen cambios)
+Puedes tener una jerarquía como esta:
+        content/
+        ├── blog/
+        │   ├── post1/
+        │   │   └── contents.lr
+        │   ├── post2/
+        │   │   └── contents.lr
+        ├── about/
+        │   └── contents.lr
+        └── contents.lr         # homepage
+$ lektor build (genera todos los archivos HTML en web-mia/_build/ y esta carpeta kpuede subirse al servidor)
+Entrar en el editor con el navegador en http://127.0.0.1:5000/admin para acceder al CMS visual y desde ahí se puede añadir páginas, editar texto, subir imágenes...
+$ lektor deploy (subir al hosting si no está en local)
+
+
 lemonbar
 Es una barra ligera basada en XCB. Ofrece cambio de color de primer plano/fondo, alineación de texto y subrayado/superposición de color, compatibilidad total con UTF-8 y consumo de memoria reducido.
 $ lemonbar -g 180x30 -B#ff0000 -F#42c24a (con la medida de la barra, color de fondo y color del texto especificados)
@@ -30522,6 +30484,44 @@ Ejemplo:
 	let x=1
 	let x+=1
 	echo $x
+
+
+levee
+Editor de pantalla extremadamente pequeña, basado en el editor "vi" de Unix pero que no tiene la mayoría de sus características como resaltado de sintaxis, múltiples ventanas, etc.
+Como está basado en vi, los comandos son muy similares, pero levee solo implementa un grupo muy reducido. Los más básicos son:
+        i --> Entrar en modo de inserción
+        Esc --> Volver al modo normal
+        h --> Mover cursor a la izquierda
+        j --> Mover cursor hacia abajo
+        k --> Mover cursor hacia arriba
+        l --> Mover cursor a la derecha
+        x --> Borrar el carácter bajo el cursor
+        dd --> Borrar la línea actual
+        :w --> Guardar el archivo
+        :q --> Salir del editor si no hay cambios sin guardar
+        :wq --> Guardar y salir
+        :q! --> Salir sin guardar los cambios
+
+
+lexicon
+Permite manipular registros DNS [A, AAAA, CNAME, MX, NS, TXT, SPF, SOA, SRV, LOC] en múltiples proveedores [Cloudflare, DigitalOcean, Namesilo, yandex, Route53...] de DNS de forma estandarizada. Es especialmente útil en automatización, como en la configuración de certificados SSL/TLS con Let's Encrypt, ya que permite crear, listar, actualizar y eliminar registros DNS de forma programática.
+$ lexicon cloudflare list example.com TXT (listar todos los registros txt de un dominio en Cloudflare)
+Si se usa variables de entorno para autenticación:
+        export LEXICON_CLOUDFLARE_USERNAME="myusername@example.com"
+        export LEXICON_CLOUDFLARE_TOKEN="cloudflare-api-token"
+$ lexicon cloudflare list example.com TXT
+$ lexicon cloudflare create www.example.com TXT --name="_acme-challenge.www.example.com." --content="challenge-token" (crear un registro txt para validar un dominio con Let's Encrypt)
+$ lexicon cloudflare create www.example.com TXT --name="_acme-challenge.www.example.com." --content="challenge-token" --ttl 600 (Lo mismo especificando el TTL)
+$ lexicon cloudflare update www.example.com TXT --identifier="cloudflare-record-id" --content="new-challenge-token" (actualizar registro txt con el identificador de registro obtenido con list)
+$ lexicon cloudflare delete www.example.com TXT --name="_acme-challenge.www.example.com." --content="challenge-token" (eliminar un registro txt)
+$ lexicon cloudflare delete www.example.com TXT --identifier="cloudflare-record-id" (lo mismo usando el identificador)
+$ lexicon auto create domain.net TXT --name foo --content bar (con un proveedor especial que lo detecta automáticamente)
+$ lexicon --help (lista completa de provedores)
+1.-
+Integrar lexicon con acme.sh para automatizar la emisión de certificados. Ejemplo para Namesilo que actualiza registros cada 15 minutos.
+        export PROVIDER=namesilo
+        export LEXICON_NAMESILO_TOKEN="namesilo-api-token"
+$ acme.sh --issue -d test.example.com --dns dns_lexicon --dnssleep 960 (espera 16 minutos para la propagación de DNS en Namesilo)
 
 
 lf
@@ -31375,6 +31375,15 @@ $ litmus http://dav.example.com/path/ jim 2518 (ejecutará todas las suites de p
 live-boot
 Conjunto de scripts y herramientas para iniciar un sistema operativo completamente funcional desde un medio extraíble como USB, CD/DVD o red, sin necesidad de instalarlo en el disco duro.
 Está diseñado para configurar el entorno de arranque en tiempo real, montando el sistema de archivos en memoria [RAM] o desde el dispositivo de almacenamiento, y no está pensado para ser instalado en un sistema convencional. Cuando se inicia una imagen Debian Live, los componentes de live-boot se encargan de detectar el medio de arranque [USB, CD, PXE, etc.], cargar el sistema de archivos raíz [squashfs, ext4, etc.] y configurar el entorno en memoria [tmpfs para persistencia opcional].
+
+
+live-build
+Componentes para la creación de sistemas Live. El proyecto Debian Live mantiene los componentes para crear sistemas Live basados en Debian, así como las imágenes oficiales de Debian Live.
+$ lb config --distribution stable --proposed-updates true --backports true (construir versión estable, con seguridad, actualizaciones, habilitadas por defecto, actualizaciones propuestas y backports)
+$ lb config --distribution sid (construir versión inestable, que no tiene actualizaciones ni secure-updates)
+$ lb config --archive-areas "main contrib non-free" (indicarr las tres áreas ya que solamente los paquetes contenidos en main son parte de la distribución Debian)
+$ lb config --mirror-bootstrap http://localhost/debian/ --mirror-chroot-security http://localhost/debian-security/ (ndicar las réplicas a utilizar. --mirror-chroot es utilizado como valor por defecto para la opción --mirror-bootstrap si esta no es especificada)
+$ lb config --mirror-binary http://mirror/debian/ --mirror-binary-security http://mirror/debian-security/ --mirror-binary-backports http://mirror/debian-backports/ (especificar propios valores, p0r defecto deb.debian.org)
 
 
 lksctp-tools
@@ -56872,7 +56881,7 @@ $ nano distro.sh
        )
        echo "Has elegido: $RESPUESTA"
 Despues de otorgar permisos de ejecución [+x] y ejecutarlo, mostrará una linea con las 4 opciones y con las flechas se podrá seleccionar la deseada, guardándose en la variable $RESPESTA.
-$ echo -e "A B C" | smenu (forma simple de comprobar el funcionamiento. Imprimirá las opciones y resaltará la seleccionada)
+$ echo -e "A B C" | smenu -l (forma simple de comprobar el funcionamiento. Imprimirá las opciones una por linea y resaltará la seleccionada)
 $ selecc=$(\ls Documents/ | smenu) ; echo -e "Has seleccionado $selecc" (seleccionar un archivo de directorio especificado y lo guardará en $selecc)
 
 
