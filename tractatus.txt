@@ -56892,6 +56892,16 @@ $ echo -e "A B C" | smenu -l (forma simple de comprobar el funcionamiento. Impri
 $ selecc=$(\ls Documents/ | smenu) ; echo -e "Has seleccionado $selecc" (seleccionar un archivo de directorio especificado y lo guardará en $selecc)
 
 
+smf-utils
+Herramienta interactiva para el manejo de archivos SMF ["*.mid"] parñticularmente útil para modificar archivos MIDI manualmente.
+$ smfsh (entrar en la interfaz de la aplicación)I
+smfsh> help (para ver todos los comandos disponibles)
+smfsh> load archivo.mid (carga el archivo especificado)
+smfshA track archivo.mid (muestra el número de pistas)
+smfsh> tempo archivo-mid (muestra el mapa de tempo)
+smfshA exit (salir de la interfaz)
+
+
 snap
 [snapd]. Formato de paquete universal desarrollado por Canonical que tienen como objetivo proporcionar una forma fácil y segura de distribuir software en cualquier distribución Linux, eliminando las dependencias del sistema y asegurando que las aplicaciones funcionen sin problemas en diferentes entornos porque incluyen todas las dependencias del paquete. Los paquetes de instalan en /snap/nombre_paquete y lo ejecutables en /snap/bin y pueden convivir junto a los del mismo nombre en el sistema. Si por ejemplo, lanzamos:
 $ emacs
