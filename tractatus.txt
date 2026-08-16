@@ -38098,39 +38098,42 @@ $ names -n 5 (genera 5 nombres)
 nano
 editor de texto.
 $ nano -wx texto (Abrir "texto" inhabilitando "final de linea" [wrap] y la ayuda [x])
-Nota.- "wrap" es la cantidad de caracteres de una linea y puede especificarse en los parámetros de nano.
-$ nano +10 archivo (abrir archivo y con el cursor en la linea 10)
-Archivo de configuración. Crear:
-$ touch .nanorc
+$ nano +100 archivo (abrir archivo y con el cursor en la linea 100)
+$ nano -Y sh script.sh (resaltar la sintaxis si no lo hace automaticamente)
+$ nano script.py script.sh archivo.txt (abrir varios archivos en bufrs istintos. Cambiar entre buffers con "Alt+,", al anterior y "Alt+." al siguiente)
+Copiar el archivo de configuración para modificaciones de usuario.
+$ cp /etc/nanorc ~/.config/nano/nanorc
+$ nano ~/.config/nano/nanorc
 Algunos parámetros a incluir:
-set backup (Guarde copias con la extensión ~)
-set linenumbers  (Muestra el número de lineas)
+set backup (guarde copias con la extensión ~)
+set linenumbers  (muestra el número de lineas)
 set casesensitive (distinguir mayúsculas y minúsculas en las búsquedas)
 set mouse (Habilita el uso del mouse. Precisa paquete gpm)
-set tabsize 4 (Número de espacios en la tabulación. Por defecto 8)
+set tabsize 6 (Número de espacios en la tabulación. Por defecto 4)
 set tabstospaces (convierte tabulaciones en espacios)
-set nohelp (inhabilitar la ayuda de forma permanente)
+set breaklonglines (ajustar el la texto de línea actual cuando sea demasiado larga)
+set nohelp (inhabilitar la ayuda que se muestra en la parte baja de la pantalla de forma permanente)
 set fill 60 (Número se caracteres por linea[wrap])
 set titlecolor red (título en rojo)
 Atajos
-	Ctrl + g (Menú ayuda)
-	Ctrl + j (Justificar el párrafo actual)
-	Ctrl + k (Cortar y guardar la línea actual)
-	Ctrl + m (Insertar un retorno de carro)
-	Ctrl + o (Escribir el fichero actual a disco)
-	Ctrl + v (Moverse hacia el final del documento)
-	Ctrl + w (Buscar una palabra en el texto)
-	[Ctrl + w] + [Ctrl + r] (Buscar palabra y reemplazarla por otra)
-	Ctrl + y (Moverse hacia el principio del documento)
-	Ctrl + x (Salir de nano)
-	Ctrl + d (Muestra número de palabras, lineas y caracteres)
-	Ctrl + A (Empezar a marcar text. Con las flechas completar el trozo)
-        Alt + 6 (Copiar el trozo marcado con Ctrl + A)
-	Ctrl + u (Pegar la linea copiada/cortada)
-	Mayu + Insert (Insertar del portapapeles)
-	Alt + m (Soporte para ratón habilitar/deshabilitar. Precisa paquete gpm)
-	Alt + y (Coloreado de sintaxis habilitar/deshabilitar)
-	Alt + x (Suprimir/añadir la ayuda del final de página)
+	Ctrl-g (Menú ayuda)
+	Ctrl-j (Justificar el párrafo actual)
+	Ctrl-k (Cortar y guardar la línea actual)
+	Ctrl-m (Insertar un retorno de carro)
+	Ctrl-o (Escribir el fichero actual a disco)
+	Ctrl-v (Moverse hacia el final del documento)
+	Ctrl-w (Buscar una palabra en el texto)
+	Ctrl-y (Moverse hacia el principio del documento)
+	Ctrl-x (Salir de nano)
+	Ctrl-d (Muestra número de palabras, lineas y caracteres)
+	Ctrl-A (Empezar a marcar texto. Con las flechas completar el trozo)
+        Alt-6 (Copiar el trozo marcado con Ctrl + A)
+	Ctrl-u (Pegar la linea copiada/cortada)
+	Mayu-Insert (Insertar del portapapeles)
+	Alt-m (Soporte para ratón habilitar/deshabilitar. Precisa paquete gpm)
+	Alt-y (Coloreado de sintaxis habilitar/deshabilitar)
+	Alt-x (Suprimir/añadir la ayuda del final de página)
+	Alt-n (mostrar/no mosrar números de página)
 1- Solución al problema:
 	$ nano .bashrc
 	Error reading /home/<username>/.nano_history: Permission denied
@@ -38145,11 +38148,11 @@ Y colocar la linea:
 
 
 nano-tiny
-es una versión especial y minimalista del programa nano [ver], diseñada para los disquetes de arranque o discos de emergencia de Debian.
+Es una versión especial y minimalista del programa nano [ver], diseñada para los disquetes de arranque o discos de emergencia de Debian.
 
 
 nanoc
-es un generador de sitios estáticos que toma archivos fuente como Markdown, HTML, Sass, etc, los procesa mediante reglas y produce un sitio web estático listo para ser desplegado. La clave es que el sitio generado es una colección de archivos HTML, CSS y JavaScript que no requieren una base de datos ni procesamiento del lado del servidor.
+Es un generador de sitios estáticos que toma archivos fuente como Markdown, HTML, Sass, etc, los procesa mediante reglas y produce un sitio web estático listo para ser desplegado. La clave es que el sitio generado es una colección de archivos HTML, CSS y JavaScript que no requieren una base de datos ni procesamiento del lado del servidor.
 $ mkdir blog
 $ nanoc create-site blog (crear la estructura del sitio)
       create  Gemfile
