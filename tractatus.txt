@@ -38101,6 +38101,9 @@ $ nano -wx texto (Abrir "texto" inhabilitando "final de linea" [wrap] y la ayuda
 $ nano +100 archivo (abrir archivo y con el cursor en la linea 100)
 $ nano -Y sh script.sh (resaltar la sintaxis si no lo hace automaticamente)
 $ nano script.py script.sh archivo.txt (abrir varios archivos en bufrs istintos. Cambiar entre buffers con "Alt+,", al anterior y "Alt+." al siguiente)
+$ nano --zero archivo.txt (sin barras de título, estado y ayuda)
+$ nano archivo.txt:125 (abrir archivo en la linearl 125)
+$ nano --modernbindings archivo.txt (usando los atajos modernos [^C para copiar, ^V para pegar...])
 Copiar el archivo de configuración para modificaciones de usuario.
 $ cp /etc/nanorc ~/.config/nano/nanorc
 $ nano ~/.config/nano/nanorc
@@ -56900,6 +56903,12 @@ smfsh> load archivo.mid (carga el archivo especificado)
 smfshA track archivo.mid (muestra el número de pistas)
 smfsh> tempo archivo-mid (muestra el mapa de tempo)
 smfshA exit (salir de la interfaz)
+
+
+smpeg-plaympeg
+biblioteca de reproductores de audio/vídeo MPEG.
+$ plaympeg archivo.wav
+$ plaympeg -l -2 archivo.mp3 (reproducir en bucle y a doble de tamaño)
 
 
 snap
