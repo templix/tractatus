@@ -56948,6 +56948,13 @@ $ findmnt / (verificar que el sistema de archivos permita la aplicación, si no 
 # snapper -c root delete 1 (eliminar instantáneas)
 
 
+snappy-tools
+Compresor/descompresor de archivos. Incluye unsnappy.
+% snappy archivo (comprime)
+$ snappy -d -i archivo.sz (descomprime ignorando los errores)
+$ unsnappy archivo.sn (descomprime)
+
+
 snapraid
 [mergerfs [ver] + snapraid]. Unir varios discos en uno lógico para añadir paridad y proteger los datos contra fallos de disco. El disco de paridad /mnt/paridad debe ser al menos tan grande como el disco más grande de datos.
 Ejemplo de configuración básica:
