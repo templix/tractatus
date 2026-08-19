@@ -56905,6 +56905,39 @@ smfsh> tempo archivo-mid (muestra el mapa de tempo)
 smfshA exit (salir de la interfaz)
 
 
+smitools
+[smistrip]. Herramientas que operan en archivos de módulos MIB [Management Information Base]. Las MIBs son archivos de texto estructurados, con una sintaxis muy estricta que definen los datos que se pueden monitorizar o configurar en un dispositivo de red como routers, switches, servidores, etc. Las herramientas son smidiff, smiquery, smilint, smicache, smixlate y smidump.
+$ smilint MI-MIB-CUSTOM.mib (validar una MIB básica mostrando errores y advertencias)
+$ smilint -l 2 MI-MIB-CUSTOM.mib (validar mostrando solo errores graves [nivel 1 y 2], ignorando warnings menores)
+$ smilint -s MI-MIB-CUSTOM.mib (validar de forma estricta según el estándar SMIv2 [Structure of Management Information])
+$ smidump -f xml IF-MIB (convertir una MIB a formato XML)
+$ smidump -f python IF-MIB (convertir a formato Python)
+$ smidump -f json IF-MIB (convertir a formato JSON)
+$ smidump -f smi IF-MIB > IF-MIB_regenerado.txt (volver a generar el archivo en formato SMI [texto plano estándar])
+Nota.- IF-MIB es una MIB estándar de interfaces de red que ya viene instalada en el sistema.
+$ smiquery sysDescr (ver toda la información disponible sobre el objeto "sysDescr")
+$ smiquery 1.3.6.1.2.1.1.1 (consultar información usando el OID numérico en lugar del nombre)
+$ smiquery -m ifDescr (ver a qué módulo [archivo MIB] pertenece un objeto)
+$ smiquery -l IF-MIB (listar todos los objetos [nodos] definidos en un módulo específico)
+$ smidiff MI-MIB-v1.mib MI-MIB-v2.mib (comparar una MIB antigua con una versión nueva descargada)
+$ smidiff SNMPv2-MIB SNMPv3-MIB (comparar dos módulos que ya están instalados en el sistema)
+$ smixlate sysUpTime (traducir un nombre textual a su OID numérico completo)
+$ smixlate 1.3.6.1.2.1.2.2.1.2 (traducir un OID numérico a su nombre textual)
+$ smixlate -i (se puede usar en modo interactivo, se escribe y traduce al pulsar Enter)
+$ smicache IF-MIB (descargar o actualizar una MIB específica a la caché local)
+$ $ smicache -v MI-MIB-CUSTOM.mib (forzar la descarga desde un repositorio específico)
+Nota.- En desuso de forma manual ya que Debian incluye un paquete llamado snmp-mibs-downloader que hace esto a nivel de sistema.
+
+
+smlsharp
+Compilador de la programación ML estándar. Se trata de varias extensiones prácticas, incluyendo una perfecta interoperabilidad con C, integración con SQL y compilación separada. Incluye los ejecutables smlformat, smllex, smlsharp y smlyacc
+$ smlformat -i input.sml -o output.sml (formatea el archivo input.sml y guarda el resultado en output.sml)
+$ smllex lexer.lex (genera un analizador léxico a partir de la especificación en lexer.lex)
+$ smlsharp -o program program.sml (compila el archivo program.sml y genera el ejecutable program)
+$ smlsharp -o program module1.o module2.o (compila varios módulos por separado y se enlazan con el ejecutable program)
+$ smlyacc grammar.y (genera un analizador sintáctico a partir de la especificación de gramática en grammar.y)
+
+
 smpeg-plaympeg
 biblioteca de reproductores de audio/vídeo MPEG.
 $ plaympeg archivo.wav
