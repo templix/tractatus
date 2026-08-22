@@ -56948,6 +56948,12 @@ $ plaympeg archivo.wav
 $ plaympeg -l -2 archivo.mp3 (reproducir en bucle y a doble de tamaño)
 
 
+sms4you
+Puerta de enlace personal que conecta SMS a XMPP o correo electrónico. sms4you reenvía mensajes desde y hacia SMS y se conecta con sms4you-xmpp o sms4you-email para elegir el otro medio de comunicación. No es un comando que se escribe en la terminal para enviar un SMS directamente como "echo "Hola" | sms4you". En su lugar, es un demonio que actúa como un puente o pasarela. Para que sms4you funcione, se necesita tres componentes: Un módem USB GSM/3G/4G, como los clásicos Huawei E3372 o Wavecom conectado al servidor que puede ser una Raspberry Pi, un servidor en casa, etc. con una tarjeta SIM activa, el demonio lee los comandos AT del puerto serial del módem, ej. /dev/ttyUSB0, para detectar SMS entrantes y enviar los salientes y el Backend [sms4you-email o sms4you-xmpp], l módulo que conecta el núcleo con el cliente de correo o el servidor de chat XMPP [Jabber]. El archivo de configuración se encuentran en /etc/sms4you/, donde se define el puerto serial del módem, las credenciales SMTP/IMAP si se usa el backend de correo, credenciales y servidor XMPP si usas el backend de chat y las reglas de enrutamiento para indicar quien está autorizado a enviar SMS.
+# systemctl start sms4you (comprobar el estado del servicio)
+# journalctl -u sms4you -f (ver los logs en tiempo real)
+
+
 snap
 [snapd]. Formato de paquete universal desarrollado por Canonical que tienen como objetivo proporcionar una forma fácil y segura de distribuir software en cualquier distribución Linux, eliminando las dependencias del sistema y asegurando que las aplicaciones funcionen sin problemas en diferentes entornos porque incluyen todas las dependencias del paquete. Los paquetes de instalan en /snap/nombre_paquete y lo ejecutables en /snap/bin y pueden convivir junto a los del mismo nombre en el sistema. Si por ejemplo, lanzamos:
 $ emacs
@@ -56972,7 +56978,7 @@ $ snap changes (ver si existen detalles de actualizaciones)
 
 
 snapper
-Herramienta que se utiliza para crear instantáneas del sistema [snapshots] antes o después de hacer cambios o actualizaciones en un sistema de archivos Btrfs. Además de la creación y eliminación de instantáneas, permite compararlas y revertir las diferencias entre ellas.
+Herramienta que se utiliza para crear instantáneas del sistema [snapshots] antes o después de hacer cambios o actualizaciones en un sistema de archivos Btrfs o LVM thin. Además de la creación y eliminación de instantáneas, permite compararlas y revertir las diferencias entre ellas.
 $ findmnt / (verificar que el sistema de archivos permita la aplicación, si no aparece btrfs no funciona)
 # snapper -c root create-config / (crear el archivo de configuración para los snapshots. Crea /etc/snapper/configs/root y permite administrar instantáneas del sistema raíz)
 # snapper -c root create --description «Instalación de GIMP» (crear una instantánea manualmente con la descripción)
@@ -56983,6 +56989,7 @@ $ findmnt / (verificar que el sistema de archivos permita la aplicación, si no 
 # snapper -c root undochange 1..2 /etc/nginx/nginx.conf (revertir un archivo)
 # systemctl enable --now snapper-timeline.timer (que se creen los puntos de restauración automáticamente)
 # snapper -c root delete 1 (eliminar instantáneas)
+Notas.- Solo funciona con sistemas de archivos que soportan instantáneas como Btrfs, LVM thin y revertir una instantánea puede afectar a todo el sistema.
 
 
 snappy-tools
