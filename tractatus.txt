@@ -58,9 +58,10 @@ Para el análisis del archivo dump.pcap se puede usar wireshark entre otros.
 
 
 7zip
-[7zip-rar]. Compresor/descompresor de archivos.
+[7zip-rar]. Compresor/descompresor de archivos. Incluye las herramientas 7z, 7za, 7zr y p7zip. Los cuatro ejecutables usan los mismos argumentos. 7zr y p7zip estan més en desuso, el primero porque solo su puede usar con formatos 7z y el segundo está su desarrollo está bandonado.
 $ 7z a fichero.7z fichero (Comprime)
 $ 7z e comprimido (Descomprime)
+$ 7za i (ver formatos soportados)
 $ 7z l comprimido (Muestra las propiedades)
 $ 7z t fichero_comprimido (Chequea contenido)
 $ 7z a -tgzip -p fichero.gz fichero (proteger con una contraseña)
@@ -28784,6 +28785,7 @@ Sistema de registro [log] propio de systemd.
 # journalctl -b -2 (Muestra los mensajes desde los dos últimos arranques)
 # journalctl --list-boots (Muestra los últimos arranques guardados por el sistema. Si el sistema no guarda los registros de arranque hay que editar el fichero /etc/systemd/journald.conf y añadir/editar la línea Storage=persistent dentro de la sección [Journal])
 # journalctl -b -0 | grep -i "error\|failed\|warning" (buscar error/failed/warning en los logs del presente arranque)
+# journalctl -b -u lightdm --no-pager | grep Failed (ver "Failed" del arranque del sistema respecto del programa lightdm)
 # journalctl -b 27487d1e4b1241df93a55949aef01161 (También se puede consultar los mensajes de un arranque en concreto poniendo el identificador que aparece con --list-boots)
 # journalctl -f (Seguir los mensajes nuevos)
 # journalctl -u sshd -f (seguir logs en tiempo real de un servicio concreto
@@ -28794,6 +28796,7 @@ Sistema de registro [log] propio de systemd.
 # journalctl --since yesterday (Muestra los mensajes des de el día de ayer. Los de hoy "today")
 # journalctl --since "2016-09-13" (Muestra los mensajes des de el día especificado en el formato YYYY-MM-DD)
 # journalctl --list-boots (muestra el historial de reinicios)
+# journalctl -b -p err..err --no-pager (ver mensajes del boot actual)
 1.-
 Hacer que el demonio syslog funcione con journal
 # systemctl enable syslog-ng
@@ -42827,6 +42830,7 @@ $ pactl set-sink-volume 0 -5%
 $ pactl set-sink-mute 0 toggle (silenciar)
 $ pactl list cards (información sobre la tarjeta de sonido)
 $ pactl info (información del dispositivo)
+$ pactl info | grep -E 'Server Name|Server String' (comprobar si determinado servicio está activo)
 
 
 pactree
@@ -58818,7 +58822,9 @@ systemctl
 # systemctl hibernate (Poner el sistema en hivernación)
 # systemctl (Listado de unidades activas)
 # systemctl --failed (Listado de unidades que han tenido problemas)
+# systemctl --user --failed (comprobar qué está intentando arrancar del usuario y falla)
 # systemctl list-units (Listado de unidades activas)
+# systemctl --user list-units (listadode unidades activas del usuario)
 # systemctl list-unit-files --all (listar todos los archivos de unidad instalados: enabled, disabled, static..)
 # systemctl list-units --type=target (listar targets activos)
 # systemctl list-units --type=service (servicios cargados)
@@ -58840,6 +58846,7 @@ systemctl
 # systemctl --type=service --state=running (los servicios que estan activos)
 # systemctl --type=service --state=running | grep cups.service (ver si un servicio está activo)
 # systemctl --type=service --state=failed,exited (ver estado de dos servicios)
+# systemctl --user --type=service | grep -E 'pipewire|pulse|wireplumber' (comprobar si determinados servicios del usuario están activos)
 1.-
 Para incorporar el arranque a grub2, modificar del archivo:
 # nano /etc/default/grub
