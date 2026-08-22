@@ -56964,6 +56964,17 @@ $ smtpping -f prueba.eml test@ejemplo.com @smtp.ejemplo.com (con un mensaje real
 $ smtpping -6 -H mail-client.ejemplo.local -c 10 test@ejemplo.com @smtp.ejemplo.com (forzar IPv6 y HELO personalizado y 10 pings)
 
 
+snac2
+[Simple Non-conforming ActivityPub Server]. Instancia de ActivityPub simple y minimalista que se ejecuta como un demonio, representado por un servidor httpd real habilitado para TLS y proporciona los servicios básicos para una instancia de Fediverse/ActivityPub: compartir mensajes y cosas desde/hacia otros sistemas como Mastodon, Pleroma, Friendica, Threads y cualquier otra plataforma del Fediverso. Tiene que crearse la estructura base del directorio donde se almacenarán las configuraciones y los datos de la instancia, normalmente en /var/lib/snac/.
+# systemctl status snac2.service (comprobar el estado del servicio)
+$ snac httpd /var/lib/snac (inicia el servicio para que empiece a escuchar peticiones HTTP/HTTPS e interactuar con el Fediverso. Normalmente se hace con systemctl)
+$ snac init /var/lib/snac (inicialización de la instancia)
+$ snac adduser /var/lib/snac mi_usuario (creación de un usuario. El comando te pedirá definir una contraseña y configurar algunos parámetros básicos del perfil)
+$ snac purge /var/lib/snac 30 (purgar publicaciones de más de 30 dias)
+$ snac follow /var/lib/snac mi_usuario https://mastodon.social/users/ejemplo (seguir a un usuario de Mastodon)
+$ snac passwd /var/lib/snac mi_usuario (restablecer la contraseña de un usuario)
+
+
 snap
 [snapd]. Formato de paquete universal desarrollado por Canonical que tienen como objetivo proporcionar una forma fácil y segura de distribuir software en cualquier distribución Linux, eliminando las dependencias del sistema y asegurando que las aplicaciones funcionen sin problemas en diferentes entornos porque incluyen todas las dependencias del paquete. Los paquetes de instalan en /snap/nombre_paquete y lo ejecutables en /snap/bin y pueden convivir junto a los del mismo nombre en el sistema. Si por ejemplo, lanzamos:
 $ emacs
