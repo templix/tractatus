@@ -56954,6 +56954,16 @@ Puerta de enlace personal que conecta SMS a XMPP o correo electrónico. sms4you 
 # journalctl -u sms4you -f (ver los logs en tiempo real)
 
 
+smtpping
+Herramienta para medir el retraso, la variación del retraso y el rendimiento del servidor SMTP. Está pensado específicamente para benchmarking y diagnóstico de rendimiento de MTAs, con opciones para paralelismo, tamaño de mensaje, intervalo entre pings, etc.
+$ smtpping test@ejemplo.com @smtp.ejemplo.com (conecta a smtp.ejemplo.com en el puerto 25, envía mensajes de prueba a test@ejemplo.com y muestra el tiempo de cada transacción SMTP. Interrumpir con Ctrl+C)
+$ smtpping -p 587 -c 20 test@ejemplo.com @smtp.ejemplo.com (usa el puerto 587 [submission],  envía 20 pings y termina automáticamente)
+$ smtpping -s 50 -c 10 test@ejemplo.com @smtp.ejemplo.com (mensajes de ~50 KB y 10 transacciones)
+$ smtpping -P 50 -r -w 0 test@ejemplo.com @10.2.0.31 (medir rendimiento. 50 procesos en paralelo, muestra mensajes por segundo y sin espera entre pings, el destinatario y el servidor)
+$ smtpping -f prueba.eml test@ejemplo.com @smtp.ejemplo.com (con un mensaje real. "prueba.eml" debe ser un mensaje válido RFC 822)
+$ smtpping -6 -H mail-client.ejemplo.local -c 10 test@ejemplo.com @smtp.ejemplo.com (forzar IPv6 y HELO personalizado y 10 pings)
+
+
 snap
 [snapd]. Formato de paquete universal desarrollado por Canonical que tienen como objetivo proporcionar una forma fácil y segura de distribuir software en cualquier distribución Linux, eliminando las dependencias del sistema y asegurando que las aplicaciones funcionen sin problemas en diferentes entornos porque incluyen todas las dependencias del paquete. Los paquetes de instalan en /snap/nombre_paquete y lo ejecutables en /snap/bin y pueden convivir junto a los del mismo nombre en el sistema. Si por ejemplo, lanzamos:
 $ emacs
