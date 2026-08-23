@@ -57064,6 +57064,12 @@ $ snarf lapipaplena.net (Creará un archivo index.html)
 $ snarf ftp://usuario:contraseña@servidor (Creará un archivo ftpindex.txt)
 
 
+sniffglue
+Herramienta de análisis de red desarrollada en Rust, diseñada para analizar paquetes de red de manera simultánea utilizando múltiples hilos lo que permite aprovechar al máximo todos los núcleos de la CPU.
+# sniffglue -n 4 (iniciar la aplicación utilizando la interfaz de red predeterminada del sistema y usando 4 hilos de nucleos de CPU, por defecto el total de nucleos de la CPU)
+# sniffglue -p --debugging -vvv (en modo promiscuo, mostrando los paquetes completamente analizados con todos los encabezados y con la sensibilidad del filtro en 3 de 4)
+
+
 sniffit
 Snifer de red. Dado que los informes los despliega en archivos de texto por cada dato, es preferible lanzar la aplicación desde dentro de una carpeta para no llenar todo el directorio de ficheros.
 # sniffit -s 192.168.1.2  (Captura todos los paquetes con origen en la IP)
