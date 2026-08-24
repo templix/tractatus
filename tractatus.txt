@@ -57153,6 +57153,12 @@ $ socat - TCP-LISTEN:25,crlf (emular un servidor de correo SMTP a mano)
 $ socat - /dev/ttyUSB0,raw,echo=0,crlf (conectar a un puerto serie)
 
 
+socket
+Herramienta para conexiones basadas en sockets TCP/UDP que se puede usar para crear demonios simples, tanto en modo independiente como en modo inetd, para conectarse a otros demonios, para redirigir puertos y para comunicación con otros servicios de red.
+$ socket -l -v -B 127.0.0.1 -p /bin/bash -s 9990 (lanzado en una terminal escucha en el puerto 9990 en modo verbose y muestra los datos recibidos)
+$ nc localhost 9990 (en otra terminal se lanza el comando y se la coneccion en la anterior terminal)
+
+
 socklist
 [procinfo]. Lista conectores de red abiertos (sockets), mostrando tipo, número de puerto y otros datos específicos.
 $ socklist
