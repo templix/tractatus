@@ -39269,18 +39269,53 @@ nfct
 
 nfdump
 Conjunto de herramientas esencial para el análisis de tráfico de red utilizando datos de NetFlow/IPFIX. Se requiere un proceso nfcapd por cada flujo de NetFlow. Incluye las aplicaciones nfanon, nfcapd, nfdump, nfexpire, nfpcapd, nfprofile, nfreplay y nftrack.
-$ nfdump -r /ruta/a/nfcapd.202511131800 (muestra el contenido de un archivo específico)
-$ nfdump -R /ruta/a/los/flujos (lee recursivamente todos los archivos de flujo en el directorio)
-$ nfdump -t 2025/11/13.18:00:00-2025/11/13.18:30:00 -R /ruta/ (muestra flujos dentro de un periodo de 30 minutos)
-$ nfdump -R /ruta/a/los/flujos 'proto tcp and src ip 192.168.1.10' (Flujos TCP de una IP de origen específica)
-$ nfdump -R /ruta/a/los/flujos 'dst port 80' (flujos con destino a un puerto HTTP [80])
-$ nfdump -R /ruta/a/los/flujos 'proto udp and bytes > 10k' (tráfico con más de 10.000 bytes y protocolo UDP)
-$ nfdump -R /ruta/a/los/flujos -s srcip/bytes -n 10 (estadísticas de las 10 IP de origen más activas, ordenadas por bytes)
-$ nfdump -R /ruta/a/los/flujos -s dstport/flows -n 5 (top 5 de puertos destino, ordenados por número de flujos)
-$ nfdump -R /ruta/a/los/flujos -A srcip,dstip (agregación por par [IP origen, IP destino]. Muestra el total de tráfico entre cada par de IP)
+$ nfdump -r nfcapd.202511131800 (muestra el contenido de un archivo específico)
+$ nfdump -R /var/cache/nfdump (lee recursivamente todos los archivos de flujo en el directorio)
+$ nfdump -t 2026/8/24.00:00:00-2026/08/25.20:30:00 -R /var/cache/nfdump (muestra flujos dentro del periodo especificado)
+$ nfdump -R /var/cache/nfdump -s srcip/bytes -n 10 (estadísticas de las 10 IP de origen más activas, ordenadas por bytes)
+$ nfdump -R /var/cache/nfdump -s dstport/flows -n 5 (top 5 de puertos destino, ordenados por número de flujos)
+$ nfdump -R /var/cache/nfdump -A srcip,dstip (agregación por par [IP origen, IP destino]. Muestra el total de tráfico entre cada par de IP)
+$ nfdump -R /var/cache/nfdump -T (ver los últimos flujos en tiempo real)
+$ nfdump -R /var/cache/nfdump "host 142.250.181.106" (ver solo tráfico hacia/desde una IP concreta)
+$ nfdump -R /var/cache/nfdump "proto udp" (ver solo tráfico UDP)
+$ nfdump -R /var/cache/nfdump 'proto tcp and src ip 192.168.1.10' (Flujos TCP de una IP de origen específica)
+$ nfdump -R /var/cache/nfdump 'proto udp and bytes > 10k' (tráfico con más de 10.000 bytes y protocolo UDP)
+$ nfdump -R /var/cache/nfdump 'dst port 80' (flujos con destino a un puerto HTTP [80])
+$ nfdump -R /var/cache/nfdump "port 443" (ver tráfico por un puerto)
+$ nfdump -R /var/cache/nfdump "port > 1024 and proto tcp" -O bytes (ver tráfico sospechoso  como puertos altos, conexiones raras...)
+$ nfdump -R /var/cache/nfdump "port 443" -O bytes -n 10 (puerto 443 ordenado por bytes)
+$ nfdump -R /var/cache/nfdump -s dstport -n 10 (top 10 de puertos destino con más tráfico)
+$ nfdump -R /var/cache/nfdump -s srcport -n 10 (top 10 de puertos origen con más tráfico)
+$ nfdump -R /var/cache/nfdump -s router (exportar la dirección IP del enrutador)
+$ nfdump -R /var/cache/nfdump -s dstport/bytes -n 10 (top 10 por puerto destino ordenado por bytes)
+$ nfdump -R /var/cache/nfdump -s port (los 10 puertos principales ordenados por flujo)
+$ nfdump -R /var/cache/nfdump "port 443" -s octets -n 10 (top 10 de tráfico de un puerto específico)
+$ nfdump -R /var/cache/nfdump -O bytes -n 10 (top 10 por bytes)
+$ nfdump -R /var/cache/nfdump -O packets -n 10 (top 10 por paquetes)
+$ nfdump -R /var/cache/nfdump -O flows -n 10 (top 10 por conexiones más activas)
+$ nfdump -R /var/cache/nfdump -O bps -n 10 (top 10 por ancho de banda)
+$ nfdump -R /var/cache/nfdump -g (imprime para cada archivo de flujo un resumen de una línea)
 $ nfcapd -D -p 9995 -l /var/flows/router1 (Ejecutar como demonio, recibir datos NetFlow en el puerto 9995 y guardarlos en el directorio /var/flows/router1)
 $ nfanon -r in.nf -w anon.nf -T 1 (anonimizar un archivo de flujo de entrada "in.nf", guardar el resultado anonimizado en "anon.nf" y utilizando el método de anonimización 1)
 $ nfexpire -e 7d -w /var/flows/router1 (limpiar archivos antiguos en /var/flows/router1, manteniendo solo los datos de los últimos 7 días)
+1.-
+Hacer una gráfica con nfdump y gnuplot:
+$ cd pruebas
+$ nfdump -R /var/cache/nfdump -g > trafico.csv (guardar la salida en un archivo)
+Crear un script de gnuplot
+$ cat > grafica.gp << 'EOF'
+set terminal png size 1200,600
+set output "trafico.png"
+set xdata time
+set timefmt "%Y-%m-%d %H:%M:%S"
+set format x "%H:%M"
+set xlabel "Hora"
+set ylabel "Bytes"
+set title "Tráfico de red por intervalo de 5 minutos"
+plot "trafico.csv" using 1:2 with lines title "Bytes"
+EOF
+$ gnuplot grafica.gp (generar la gráfica)
+Visualizar el archivo especificado en el comando cat [trafico.png] con cualquier programa visualizador de imagnes.
 
 
 nfdump-sflow
@@ -57188,7 +57223,32 @@ $ sockstat -U USER (las del usuario especificado)
 
 
 softflowd
-Analizador de tráfico de red basado en flujo capaz de exportar datos de Cisco Netflow. Rastrea los flujos de tráfico registrados escuchando en una interfaz de red o leyendo un archivo de captura de paquetes.
+Demonio que captura tráfico de red, en vivo desde una interfaz, o leyendo un .pcap y lo agrega en "flujos" [conjuntos de paquetes que comparten IP origen/destino, puertos, protocolo, etc.], igual que haría un router Cisco con NetFlow. Esos flujos los puede exportar por red usando los protocolos NetFlow v1/v5/v9 o IPFIX hacia un colector, o bien resumirlos internamente para consulta local.
+# systemctl status softflowd.service (comprobar el estado del servicio)
+# systemctl status nfdump.service (comprobar el estado del servicio del programa para procesar los datagramas)
+# softflowd -D -i enp1s0 -n 127.0.0.1:2055 -v 9 (capturar en modo debug todo lo que pase por la interfaz especificada, enviar paquetes compatibles con Cisco NetFlow [host:port] y con la versión 9)
+Nota.- Acepta 1, 5, 9 (NetFlow) o 10 (IPFIX). NetFlow v9/IPFIX son más flexibles, v5 es el más simple y compatible con herramientas antiguas.
+# sudo softflowd -D -i enp1s0 -n 127.0.0.1:2055 -v 9 -t tcp=300 -t udp=60 -t general=1800 -t maxlife=3600 (limitando el tiempo de inactividad de los flujos a los especificados)
+       tcp=300 --> timeout de inactividad TCP en segundos.
+       udp=60 --> timeout de inactividad UDP.
+       general=1800 --> timeout genérico para otros protocolos.
+       maxlife=3600 --> duración máxima absoluta de un flujo aunque siga activo.
+# softflowd -r captura.pcap -n 127.0.0.1:2055 (leer un archivo pcap en vez de capturar en vivo)
+# softflowd -D -i enp1s0 -n 127.0.0.1:2055 -m 8192 (modo debug y limitando el número de flujos en memoria)
+El comando softflowd, sin el parámetro -D, no produce salida en la terminal porque está enviando todos los datos, en este caso, a 127.0.0.1:2055. Se precisa de un programa escuchando en ese puerto para recibir y procesar estos datagramas NetFlow, sinó los datos simplemente se "pierden". El proceso completo con el programa nfdump[ver] es el siguiente:
+Para configurar nfdump, comprobar que la linea options está descomentada:
+# nano /etc/nfdump/default.conf
+         # escuchar en el puerto 2055, rotar cada 24 horas (86400 segundos)
+	 # que rote automaticamente, que comprima los archivos al rotar con gzip
+	 # y que mantenga los logs 30 dias y luego los borre.
+	 options='-l /var/cache/nfdump -p 2055 -t 86400 -w -z -e 30'
+# systemctl restart nfdump (si se ha modificado el archivo de configuración)
+# systemctl status nfdump-service (comprobar que el servicio esté activo)
+# ls -la /var/run/softflowd/default.ctl (ver si el socket de control existe)
+         lrwxrwxrwx 1 root root 22 25 d’ag.    08:36 /var/run/softflowd/default.ctl -> /var/run/softflowd.ctl
+# softflowd -i enp1s0 -n 127.0.0.1:2055 -v 9 -d (lanzar el comando)
+# softflowctl statistics (en otra terminal comprobar el flujo)
+# nfdump -R /var/cache/nfdump (ver el Summary)
 $ softflowd -i enp1s0 (que escuche en la interfaz enp1s0 y se ejecute solo en modo de recopilación de estadísticas)
 $ softflowd -i enp1s0 -n 10.1.0.2:4432 (de la interfaz enp1s0 y exporte datagramas a un recopilador que se ejecuta en 10.1.0.2 4432)
 $ softflowd -i enp1s0 -n 10.1.0.2:4432,10.1.0.3:4432 (de la interfaz y se exporten datagramas que se ejecutan en los puertos 4432 10.1.0.2 y 4432 10.1.0.3)
