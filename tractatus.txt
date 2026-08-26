@@ -57257,6 +57257,27 @@ $ softflowd -v 5 -i enp1s0 -n 10.1.0.2:4432 -m 65536 -t udp=1m30s (aumenta la ca
 $ softflowd -i enp1s0 -p /var/run/sfd.pid.enp1s0 -c /var/run/sfd.ctl.enp1s0 ( especifica ubicaciones alternativas para el socket de control y el archivo pid)
 
 
+softhsm2
+[opensc]. Implementación de un HSM [Hardware Security Module] genérico que proporciona un almacén criptográfico [token] al que se accede mediante la interfaz estándar PKCS#11. OpenDNSSEC es un sistema completo de firma de zonas DNSSEC, muy fácil de usar y que prioriza la estabilidad y la seguridad. Originalmente se desarrolló como parte del sistema de firma de zonas DNSSEC [OpenDNSSEC] pero se puede usar con cualquier aplicación compatible con PKCS#11: firma digital, cifrado, generación de claves, DNSSEC, certificados, etc. No es un HSM físico (no tiene protección de hardware contra extracción de claves), pero sirve muy bien para desarrollo, pruebas y entornos donde no se quiere o no se puede usar un HSM real. Incluye las aplicaciones softhsm2-dump-file, softhsm2-keyconv, softhsm2-migrate y softhsm2-util. El archivo de configuración en /etc/softhsm/softhsm2.conf.
+# softhsm2-util --show-slots (ver los slots disponibles)
+# softhsm2-util --init-token --slot 0 --label "MiToken" (inicializar un token. Pide contraseñas del administrador y del usuario de forma interactiva)
+# softhsm2-util --init-token --free --label "MiToken" --so-pin 1837799417 --pin linux (lo mismo entrando las contraseñas por consola. No aconsejable. so-pin es la del administrador y pin del usuario)
+Se puede volver a lanzar el "show-slots" para listar de nuevo los slots y ver el slot asignado
+# pkcs11-tool --module /usr/lib/x86_64-linux-gnu/softhsm/libsofthsm2.so --slot 1837799417 --pin linux --keypairgen --key-type rsa:2048 --id 01 --label "MiClaveRSA" (generar un par de claves RSA con pkcs11-tool. El slot se obtiene del show-slots y pin la contraseña entrada al inicializar el token, label el nombre de la clave)
+# softhsm2-util --import clave.pem --token "MiToken" --label "MiClaveImportada" --id A1B2 --pin linux (importar una clave privada en formato PKCS#8)
+# softhsm2-util --import clave.pem --token "MiToken" --label "MiClaveImportada" --id A1B2 --pin linux --file-pin <pin-del-archivo> (lo mismo si el archivo está cifrado)
+# softhsm2-util --delete-token --token "MiToken" (eliminar un token)
+# softhsm2-keyconv --in Kexample.com.+007+05474.private --out rsa.pem (convertir claves privadas del formato específico de BIND [archivos .private usados en DNSSEC] al formato estándar PKCS#8)
+# softhsm2-keyconv --in Kexample.com.+007+05474.private --out rsa.pem --pin PIN (lo mismo cifrando con este pin)
+# softhsm2-dump-file /var/lib/softhsm/tokens/e54c9587-60ac-2c30-5c01-d7d96d8a97f9/7742a212-3920-9ee2-07e1-1cfa67b26c4c.object (inspeccionar para ver su estructura interna)
+1.-
+El proceso para firmar datos es el siguiente
+$ cd pruebas
+$ echo "Linux es un sistema genial" > datos.txt (primero hashear)
+$ openssl dgst -sha256 -binary datos.txt > datos.sha256
+# pkcs11-tool --module /usr/lib/x86_64-linux-gnu/softhsm/libsofthsm2.so --slot 1837799417 --pin linux --sign --mechanism RSA-PKCS --id 01 --input-file datos.sha256 --output-file firma.bin
+
+
 somafm
 Escuchar cualquiera de las emisoras de somafm desde la terminal. Bajar el script de github y darle permisos
 $ wget https://raw.githubusercontent.com/rockymadden/somafm-cli/master/src/somafm
