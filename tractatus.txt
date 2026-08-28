@@ -4170,6 +4170,11 @@ $ grep -i "fail" /var/log/boot.log | grep -v "fail2ban" (ver qué ha pasado en e
 $ grep -iE "error|fail(ed)?|fatal" /var/log/boot.log | grep -v -i "fail2ban" (otra forma de comprobar si hay fallos reales descartando fail2ban para evitar errores con el fail del nombre)
 
 
+boot-info-script
+Genera un informe del entorno de arranque.
+# boot-info-script (genera el informe y lo guarda en /root/RESULTS.txt)
+
+
 bootcd
 Son herramientas que pueden copiar un sistema Debian en ejecución o montado. Se admiten diferentes configuraciones de arranque (efi, BIOS antiguo, arranque seguro). bootcdwrite crea un archivo ISO life-cd llamado bootcd usando verlayfs. Incluye las herramientas bootcd2chroot, bootcd2disk, bootcdbackup, bootcdmk2diskconf y bootcdwrite
 En el archivo de configuración se puede especificar los direcorios a excluir separados por espacio, deshabilitar ciertas comprobaciones para ahorrar tiempo y lugar donde se crea la ISO que por defecto es en /var/spool/bootcd/ t puede tener un tamaño de 30-40 GiB:
