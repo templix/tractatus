@@ -10480,7 +10480,7 @@ $ dd if=backup-mbr of=/dev/hda bs=512 count=1  (la restaura)
 $ dd if=mbr of=/dev/hda (Restaurarla)
 $ dd if=/dev/hda1 of=/dev/hda3 (copiar una partición)
 $ dd if=/hda of=/hdb bs=1M (copiar un disco en bloques de 1 mega)
-$ dd conv=noerror if=/dev/cdrom of=imagen_con_errores.img (Evitar que los errores impidan copiar datos. ütil en la recuperación de CDs o discos dañados)
+$ dd conv=noerror if=/dev/cdrom of=imagen_con_errores.img (Evitar que los errores impidan copiar datos. útil en la recuperación de CDs o discos dañados)
 $ dd if=/dev/sda of=/dev/sdb conv=noerror,sync (Realizar una copia exacta de una partición, evitando que los errores impidan copiarla)
 $ time dd if=/dev/zero of=TEST bs=4k count=512000  (Realizar un test de velocidad del disco duro)
 $ dd if=/dev/sda1 of=copia_seguridad.tar | pv  (copiar mostrando barra de progreso)
@@ -10490,6 +10490,8 @@ $ dd if=/dev/hda | gzip > /home/hda.bin.gz (Crear una imagen comprimida)
 $ dd bs=1M if=/dev/sda4 | ssh usuario@host 'dd of=/home/usuario/sda4.img' (crear una imagen de una partición local en un pc remoto)
 $ dd if=/dev/cdrom of=~/cd_image.iso (Crear una ISO del cd)
 # dd if=/dev/sda | pv | dd of=/dev/sdb bs=1M (Clonar partición viendo gráfico del proceso)
+# dd if=/dev/source of=/dev/destino bs=4M status=progress (clonar disco completo)
+# dd if=imagen.iso of=/dev/sda bs=4M status=progress && sync (clonar una iso para un usb boteable)
 
 
 ddate
