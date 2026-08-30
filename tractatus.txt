@@ -35863,8 +35863,11 @@ Formatear a sistema de archivos msdos
 
 
 mke2fs
-Formatear a sistema de archivos ext2
-# mke2fs -c /dev/fd0         (formatea a ext2 el floppy)
+Comando para formatear archivos a ext4. Es sustituto de los comandos: mkfs.ext2, mkfs.ext3 y kfs.ext4.
+$ ls -l /usr/sbin/mkfs.ext? (ver los enlaces simbólicos de los antiguos comandos al nuevo mke2fs)
+# mke2fs -c /dev/sda (Compruebe si el dispositivo contiene bloques defectuosos antes de crear el sistema de archivos en una prueba de lectura rápida)
+# mke2fs -c -c /dev/sda (lo mismo pero efectuará una prueba de lectura y escritura más lenta en lugar de una prueba de solo lectura rápida)
+# mkeefs /dev/sda (forma básica de crear un sistema de archivos ext4)
 
 
 mkeot
@@ -35880,7 +35883,6 @@ $ mkfifo canal
 $ echo "Linux es genial" > canal
 En otra terminal:
 $ cat canal (mostrará lo lanzado en la otra terminal)
-
 
 
 mkhomedir_helper
