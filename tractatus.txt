@@ -33530,6 +33530,20 @@ $ make (Generará el ejecutable HolaMundo)
 $ ./HolaMundo (lanzar el ejecutable)
 
 
+makebootfat
+Herramienta diseñada para facilitar la creación de discos USB de arranque con compatibilidad con BIOS antiguas, utilizando el sistema de archivos FAT y Syslinux. Detecta, particiona, formatea y llena el disco USB automáticamente sin intervención del usuario. Además, crea imágenes de disco compatibles con los tres estándares USB: FDD [Floppy Disk Drive], USB-HDD [Hard Disk Drive] y USB-ZIP [Zip Drive]. Esta herramienta está obsoleta, para crear usbs arrancables es preferible usar dd [ver].
+$ lsblk (para identificar el disco USB)
+El proceso sería:
+$ mkdir temp_iso
+$ sudo mount -o loop ~/isos/debian-13.0.0-amd64-netinst.iso temp_iso/
+$ mkdir contenido_debian
+$ cp -r temp_iso/* contenido_debian/
+$ sudo umount temp_iso
+$ sudo umount /dev/sda1
+$ sudo makebootfat -o /dev/sda -Y -b /usr/lib/syslinux/mbr/mbr.bin contenido_debian/
+$ sudo cp -r contenido_debian/* /media/tux/4A40-F624/
+
+
 makedumpfile
 Herramienta para crear imágenes de volcado de memoria [memory dumps] optimizados, eliminando información innecesaria como páginas de memoria libre, caché, etc, especialmente en escenarios de análisis de fallos del sistema como crash dumps del kernel. Se utiliza comúnmente junto con kdump [ver], el mecanismo de volcado de memoria del kernel en Linux. y obtiene los datos de /proc/vmcore, generado después de un kernel panic cuando kdump está activado y /dev/mem acceso directo a la memoria física, menos común hoy por razones de seguridad.
 # makedumpfile -c -d 31 /proc/vmcore /var/crash/dumpfile.20250405 (comprime el volcado usando zlib, páginas a excluir, volcado completo del kernel y archivo de salida)
