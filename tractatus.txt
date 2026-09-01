@@ -57305,6 +57305,23 @@ $ openssl dgst -sha256 -binary datos.txt > datos.sha256
 # pkcs11-tool --module /usr/lib/x86_64-linux-gnu/softhsm/libsofthsm2.so --slot 1837799417 --pin linux --sign --mechanism RSA-PKCS --id 01 --input-file datos.sha256 --output-file firma.bin
 
 
+solo1-cli
+Herramienta en Python para gestionar llaves de seguridad SoloKeys Solo 1, la primera llave FIDO2 de código abierto.  Permite operaciones como listar dispositivos, actualizar firmware, generar credenciales FIDO2, establecer o cambiar PIN, verificar autenticidad, obtener bytes aleatorios del TRNG integrado y resetear la llave. Puede ejecutarse como "solo" o "solo1".
+$ solo1 ls (listar dispositivos conectados mostrando las llaves detectadas en modo firmware o bootloader)
+$ solo1 key version (muestra versión del firmware en la llave)
+$ solo1 key wink (parpadeo del LED para confirmar que se está interactuando con la llave correcta)
+$ solo1 key verify (verificar autenticidad de la llave)
+$ solo1 key rng 32     # 32 bytes en hex (generar bytes aleatorios desde el TRNG de la llave)
+$ solo1 key set-pin (establecer pin la primera vez)
+$ solo1 key change-pin (cambiar PIN existente)
+$ solo1 key update (actualizar firmware)
+$ solo1 key make-credential --host ejemplo.com --user alice (crear una credencial y guarda el credential_id que devuelve)
+$ solo1 key challenge-response <credential_id> <challenge_hex> (usar esa credencial para generar una respuesta a un desafío)
+$ solo1 key make-credential --host tu-dominio --user tu-usuario (generar credenciales residentes)
+$ solo1 key reset (resetear la llave)
+Nota.- el reset FIDO solo está permitido durante ~10 segundos tras conectar la llave; si falla, desconéctarla y conéctarla de nuevo antes de ejecutar.
+
+
 somafm
 Escuchar cualquiera de las emisoras de somafm desde la terminal. Bajar el script de github y darle permisos
 $ wget https://raw.githubusercontent.com/rockymadden/somafm-cli/master/src/somafm
