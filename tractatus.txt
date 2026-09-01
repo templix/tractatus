@@ -57405,7 +57405,8 @@ Opciones
 
 sos
 Herramienta que recopila información sobre el hardware y la configuración del sistema.
-# sos --batch report (sin pedir datos de forma interactiva. Genera /tmp/sosreport-xxx-fecha-kwfazee.tar.xz)
+# sos report --batch -q (sin pedir datos de forma interactiva y mostrar solo errores. Genera /tmp/sosreport-xxx-fecha-xxxxxxx.tar.xz)
+# sos clean /tmp/sosreport-xxx-fecha-xxxxxx.tar.xz -q (crea varios archivos [obfuscated] en los que ofusca la información potencialmente sensible del sistema)
 
 
 sosreport
