@@ -4099,6 +4099,8 @@ $ gatttool -i (iniciar la aplicación en modo interactivo)
 $ gatttool --primary (Comprobación de los servicios disponibles del dispositivo BLE conectado)
 $ sdptool browse F2:C5:F2:0A:BF:C8 (Con su identificador buscar el canal a utilizar)
 $ obexftp -b F2:C5:F2:0A:BF:C8 -B 2 -p foto.jpg  (b, el dispositivo, B, el canal y p el archivo a mandar)
+$ bluetoothctl list (lista de controladores Bluetooth disponibles)
+$ bluetoothctl (entra en la interfaz de la aplicación. "help" para ver todos los comandos disponibles)
 Nota.- En el dispositivo deberemos aceptar la transferencia
 1.-
 En /etc/bluetooth/pin introducimos la clave de acceso, normalmente 1234.
@@ -11678,6 +11680,7 @@ $ df -h /dev/nvme0n1p1 (de una partición especificada)
 $ df -a (de todas las particiones incluso las de 0 bloques)
 $ df -t vfat (de las particiones especificadas, en el caso las vfat)
 $ df -T (de todas las particiones y el tipo)
+$ df -hT / (muestra datos del propio sistema de archivos)
 
 
 dfc
@@ -18790,6 +18793,7 @@ $ findmnt -s (en /etc/fstab)
 $ findmnt -s -t ext4 (Especificando una extensión concreta)
 $ findmnt -m (en /etc/mtab)
 $ findmnt -l (Los muestra como lista)
+$ findmnt -n -o FSTYPE / (muestra el tipo de sistema de archivo raiz)
 
 
 findmyhash
@@ -20331,12 +20335,12 @@ fscache
 
 
 fsck
-[recomendado dosfstools]. Reparar/chequear/formatear una partición no montada.
-# fsck -fy /dev/hda1
-# fsck.ext2 -vpf /dev/hda1 (Repara una partición ext2)
-# fsck.ext3 -vpf /dev/hda1 (Repara una partición ext3)
-# fsck -fpC 0 /dev/sda1
-# fsck.ext4 -cDfty -C 0 /dev/sda1
+[recomendado dosfstools]. Reparar/chequear una partición no montada.
+# fsck -f /dev/hda1 (repara el dispositivo)
+# fsck.ext2 -vpf /dev/hda1 (Repara un dispositivo formateado en ext2)
+# fsck.ext3 -vpf /dev/hda1 (Repara un dispositivo formateado en ext3)
+# fsck -fpC 0 /dev/sda1 (repara la partición mostrada)
+# fsck.ext4 -cDfty -C 0 /dev/sda1 (muestra información de todos los datos de la partición)
 # fsck.ext4 -vpf /dev/sda1 (Muestra información sobre una partición: fragmentación, inodos, bloques, archivos...)
 # fsck.vfat -w -r -l -a -v -t (Reparar particion FAT32 con dirty bit activado)
 Opciones:
@@ -35848,8 +35852,8 @@ $ mkchromecast --list (listar dispositivos disponibles)
 mkdir
 Crear directorios.
 $ mkdir -p A B C (Crea el directorio A en su interior el B y dentro de este el C)
-$ mkdir -m=rwx      (Especifica los permisos del directorio que se crea)
-$ mkdir -p -m=x /home/ct/videos/res/tot  (creará los nuevos directorios “videos”, “res” i “tot” y dará permisos de ejecución [x]  al usuario ct)
+$ mkdir -m=rwx (Especifica los permisos del directorio que se crea)
+$ mkdir -p -m=x /home/ct/videos/res/tot (creará los nuevos directorios “videos”, “res” i “tot” y dará permisos de ejecución [x]  al usuario ct)
 $ mkdir -p ~/docs/{1,2,3} (creará docs en el directorio del usuario y dentro los directorios 1,2 y 3)
 $ mkdir -p project/{lib/ext,bin,src,doc/{html,info,pdf},demo/stat/a} (creación de varios directorios y subdirectorios)
 $ mkdir uno dos tres (crear directorios "uno", "dos" y "tres")
@@ -35863,7 +35867,7 @@ Formatear a sistema de archivos msdos
 
 
 mke2fs
-Comando para formatear archivos a ext4. Es sustituto de los comandos: mkfs.ext2, mkfs.ext3 y kfs.ext4.
+Comando para formatear archivos a ext4. Es sustituto de los comandos: mkfs.ext2, mkfs.ext3 y mkfs.ext4.
 $ ls -l /usr/sbin/mkfs.ext? (ver los enlaces simbólicos de los antiguos comandos al nuevo mke2fs)
 # mke2fs -c /dev/sda (Compruebe si el dispositivo contiene bloques defectuosos antes de crear el sistema de archivos en una prueba de lectura rápida)
 # mke2fs -c -c /dev/sda (lo mismo pero efectuará una prueba de lectura y escritura más lenta en lugar de una prueba de solo lectura rápida)
@@ -57317,8 +57321,8 @@ $ curl -s -H 'Accept: application/json' https://somafm.com/channels.json | jq -r
 
 sonic
 Acelerar o ralentizar archivos wav de voz con una distorsión mínima.
-$ sonic -s 3.4 archivo_voz.wav archivo_voz_rapito.wav (aumentaría la velocidad de la entrada en un factor de 3,4 y escribir el resultado en archivo_voz_rapido.wav)
-$ sonic -s 2.5 -v 1.5 voz.wav voz_lenta.wav (ralentizar voz.wav en un factor de 2,5, aumentar volumen un 50% y el resultado en voz_lenta.wav)
+$ sonic -s 3.4 archivo_voz.wav archivo_voz_rapido.wav (aumentaría la velocidad de la entrada en un factor de 3,4 y escribir el resultado en archivo_voz_rapido.wav)
+$ sonic -s 0.5 -v 1.5 voz.wav voz_lenta.wav (ralentizar voz.wav a la mitad, aumentar volumen un 50% y el resultado en voz_lenta.wav)
 $ sonic -p 2.0 grave.wav aguda.wav (que una voz grave suene aguda)
 
 
