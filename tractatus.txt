@@ -19617,8 +19617,9 @@ Comprobación de sintaxis en emacs [ver emacs(37) y shellcheck]
 
 fmt
 Eliminar saltos de linea de un archivo y uniendo párrafos.
-$ fmt -w 80 fichero.txt (limitando el número de caracteres por linea)
-$ fmt -s 10 fichero.txt (solo une las lineas inferiores a 10 caracteres)
+$ fmt -w 80 archivp.txt (limitando el número de caracteres por linea)
+$ fmt -s 10 archivo.txt (solo une las lineas inferiores a 10 caracteres)
+$ fmt -w $(tput cols) frases.txt (ajusta el texto al ancho de la terminal sin cortar palabras en el extremo)
 
 
 fmtools
@@ -19665,7 +19666,18 @@ $ fntsample -f ../.fonts/Hack-Regular.ttf -d ../.fonts/Hack-Italic.ttf -o difere
 fold
 Formatea la salida de un archivo a una determinada longitud.
 $ fold archivo (a 80 caracteres por linea. Por defecto)
-$ fold  -w 100 -s archivo (100 caracteres por linea y que corte por los espacios entre palabras y no por las palabras)
+$ fold -w 100 -s archivo (100 caracteres por linea y que corte por los espacios entre palabras y no por las palabras)
+$ fold -s -w $(tput cols) file.txt (ajusta el texto al ancho de la terminal sin cortar palabras en el extremo)
+1.-
+Una función para colocar en ~/.bashrc:
+wrap() {
+    "$@" | fold -s -w $(tput cols)
+}
+Y lanzar los comandos:
+$ wrap cat archivo.txt
+$ wrap ps aux
+$ wrap grep --color=always "palabra" archivo.txt
+Y con cualquier comando precedido por la función "wrap" se mostrará con la anchura de la terminal y sin cortar palabras.
 
 
 fomp
