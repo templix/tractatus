@@ -57524,6 +57524,12 @@ Demonio que arranca una sola vez, deja todas las reglas de spamassassin cargadas
 $ ss -tlnp | grep 783 (verificar que está escuchando en localhost:783)
 
 
+spamoracle
+Herramienta estadística diseñada para analizar el contenido de mensajes de correo electrónico y determinar, con cierta probabilidad, si un mensaje es spam o no spam. El programa examina las palabras del mensaje y otros elementos y compara su frecuencia con la de un corpus de entrenamiento compuesto por: Correos legítimos [ham] y correos identificados como spam. El resultado se devuelve en el encabezado del correo [X-Spam], con un valor que puede ser "yes", que se considera spam, "no", que se considera legítimo y "unknown" que la herramienta no pudo determinar con suficiente confianza.
+$ spamoracle < mensaje.txt (analizar un correo)
+Nota.- En un entorno real, spamoracle no se ejecuta manualmente en la terminal para analizar mensajes reales, sino que forma parte de la cadena de procesamiento de correo.
+
+
 speaker-test
 Pruebas de sonido para dispositivos alsa.
 $ speaker-test -c6 -t wav (probar altavoces usando voz [t])
