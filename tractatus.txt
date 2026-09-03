@@ -12627,7 +12627,7 @@ Muestra toda la información de la máquina directamente de la BIOS
 # dmidecode -t 2 (información sobre la placa base)
 # dmidecode -t 4  (información sobre la CPU)
 # dmidecode --type=processor | grep -i -A 1 charac (si el procesador es de 32 o 64 bit)
-# dmidecode -t memory | grep Maxi | grep Capa (máximo  de memoria soportada)
+# dmidecode -t memory | grep -E "Maxi|Capa" (máximo de memoria soportada)
 
 
 dmitry
