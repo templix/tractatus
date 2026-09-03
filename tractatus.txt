@@ -57511,6 +57511,19 @@ $ nano ~/.spamassassin/user_prefs
        use_bayes 1
 
 
+spamc
+Es el cliente de spamassessin, un programa en C minúsculo que lee un mensaje por la entrada estándar, se lo envía a spamd, lo recibe ya analizado con cabeceras X-Spam-* y lo escribe en la salida estándar.
+$ spamc < correo.eml > correo_analizado.eml (analizar un correo)
+$ spamc -c < correo.eml (comprobar solo la puntuación. Si es spam muestra exit code 1)
+$ spamc -y < correo.eml (wer qué reglas se dispararon)
+
+
+spamd
+Demonio que arranca una sola vez, deja todas las reglas de spamassassin cargadas en memoria y se queda escuchando, por defecto en TCP 127.0.0.1:783. Reglas y configuraciones en /etc/mail/spamassassin/*.
+# systemctl status spamd.service (comprobar estado del servicio)
+$ ss -tlnp | grep 783 (verificar que está escuchando en localhost:783)
+
+
 speaker-test
 Pruebas de sonido para dispositivos alsa.
 $ speaker-test -c6 -t wav (probar altavoces usando voz [t])
