@@ -57538,6 +57538,13 @@ $ spamprobe -t mensaje.txt (clasificar un solo mensaje almacenado en un archivo)
 $ spamprobe -E (elimina la base de datos actual para reiniciar entrenamiento)
 
 
+spd-conf
+Herramienta simple para la configuración básica de speech-dispatcher y diagnóstico de problemas. El paquete speech-dispatcher proporciona una capa independiente para síntesis de voz y salida por altavoces, es compatible con varios sintetizadores de voz (software y hardware) a través de los diferentes backends de las aplicaciones.
+$ spd-conf -d -e (para mensajes y diagnosis de los problemas)
+$ spd-conf -d --test-pulse (test de pulse audio)
+s spd-conf -d --test-alsa (test de alsa)
+
+
 speaker-test
 Pruebas de sonido para dispositivos alsa.
 $ speaker-test -c6 -t wav (probar altavoces usando voz [t])
@@ -57546,11 +57553,10 @@ $ speaker-test -Dplug:front -c2 (estereo)
 $ speaker-test -t sine -f 1000 -c 2 (otra forma de comprobar el sonido estereo)
 
 
-spd-conf
-Herramienta simple para la configuración básica de speech-dispatcher y diagnóstico de problemas. El paquete speech-dispatcher proporciona una capa independiente para síntesis de voz y salida por altavoces, es compatible con varios sintetizadores de voz (software y hardware) a través de los diferentes backends de las aplicaciones.
-$ spd-conf -d -e (para mensajes y diagnosis de los problemas)
-$ spd-conf -d --test-pulse (test de pulse audio)
-s spd-conf -d --test-alsa (test de alsa)
+spectre-meltdown-checker
+Comprobador de vulnerabilidades y medidas de mitigación para Spectre y Meltdown. Un sencillo script de shell para determinar si la instalación de Linux es vulnerable a las tres vulnerabilidades CVE de "ejecución especulativa" que se hicieron públicas a principios de 2018.
+# spectre-meltdown-checker --disclaimer (muestra una nota en inglés donde explica el comando)
+# spectre-meltdown-checker --explain (lanza la comprobación)
 
 
 speedometer
