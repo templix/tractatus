@@ -57538,6 +57538,19 @@ $ spamprobe -t mensaje.txt (clasificar un solo mensaje almacenado en un archivo)
 $ spamprobe -E (elimina la base de datos actual para reiniciar entrenamiento)
 
 
+sparce
+Analizador semántico de archivos fuente. Proporciona una interfaz de compilador capaz de analizar la mayor parte del código C ANSI, así como muchas extensiones de GCC, y una colección de ejemplos de backends de compilador, incluyendo un analizador estático también llamado "sparse". Sparse proporciona un conjunto de anotaciones diseñadas para transmitir información semántica sobre los tipos, como a qué espacio de direcciones apuntan los punteros o qué bloqueos adquiere o libera una función. Sparse puede invocarse directamente como "sparse" o mediante el envoltorio "cgcc" del compilador C.
+$ sparse archivo.c (chequeo estático básico de un fichero)
+$ sparse -Wsparse-all archivo.c (activa todos los warnings)
+$ sparse -I/usr/include -D__KERNEL__ archivo.c (sustituir GCC por sparse)
+
+
+sparse-test-inspect
+Su función es inspeccionar/depurar el resultado de los tests de regresión de sparse, es decir, ayuda a los propios desarrolladores de sparse a ver qué salió mal cuando un test falla
+$ sparse-test-inspect nombre_del_test (muestra la salida esperada vs. la salida real para depurar cuando se está desarrollando o se actualiza la suite de tests tras un cambio en el código fuente)
+Nota.- En la práctica, si no se está hackeando el propio sparse, por ejemplo, añadiendo soporte para una nueva extensión de GCC, es raro que se necesite tocar, es una herramienta interna del proyecto, no algo pensado para analizar el código de aplicación.
+
+
 spd-conf
 Herramienta simple para la configuración básica de speech-dispatcher y diagnóstico de problemas. El paquete speech-dispatcher proporciona una capa independiente para síntesis de voz y salida por altavoces, es compatible con varios sintetizadores de voz (software y hardware) a través de los diferentes backends de las aplicaciones.
 $ spd-conf -d -e (para mensajes y diagnosis de los problemas)
