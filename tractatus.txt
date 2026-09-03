@@ -57557,6 +57557,14 @@ spectre-meltdown-checker
 Comprobador de vulnerabilidades y medidas de mitigación para Spectre y Meltdown. Un sencillo script de shell para determinar si la instalación de Linux es vulnerable a las tres vulnerabilidades CVE de "ejecución especulativa" que se hicieron públicas a principios de 2018.
 # spectre-meltdown-checker --disclaimer (muestra una nota en inglés donde explica el comando)
 # spectre-meltdown-checker --explain (lanza la comprobación)
+# spectre-meltdown-checker --hw-only (solo chequear la CPU)
+# spectre-meltdown-checker --sysfs-only (utilizar únicamente la interfaz /sys, no ejecutar las propias comprobaciones)
+# spectre-meltdown-checker --no-hw (omitir la información y las comprobaciones de la CPU si se está inspeccionando un kernel que no se ejecutará en este host)
+# spectre-meltdown-checker --cpu all (interactuar con CPUID y MSR de todos los núcleos de la CPU)
+# spectre-meltdown-checker --vmm yes (anular la detección de la presencia de un hipervisor, predeterminado auto, otra opción "no")
+# spectre-meltdown-checker --update-fwdb (actualiza la copia local de la base de datos de versiones de microcódigos de CPU)
+# spectre-meltdown-checker --update-builtin-fwdb (actualiza la base de datos integrada dentro del propio script)
+# spectre-meltdown-checker --dump-mock-data (se utiliza para simular una CPU en otro sistema, principalmente para depurar el script)
 
 
 speedometer
