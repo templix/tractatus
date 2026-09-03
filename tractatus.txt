@@ -57530,6 +57530,14 @@ $ spamoracle < mensaje.txt (analizar un correo)
 Nota.- En un entorno real, spamoracle no se ejecuta manualmente en la terminal para analizar mensajes reales, sino que forma parte de la cadena de procesamiento de correo.
 
 
+spamprobe
+Filtro de spam bayesiano que se utiliza para clasificar correos electrónicos como spam o no spam [ham] mediante el análisis estadístico del contenido del mensaje. Es especialmente útil en sistemas de correo donde qse uiere automatizar la detección de spam, aprendiendo a partir de ejemplos previos. spamprobe crea y mantiene una base de datos de palabras y su probabilidad de estar en correos spam o no spam. Cuando recibe un nuevo mensaje, calcula la probabilidad de que sea spam basándose en las palabras que contiene, y decide si filtrar o no el mensaje.
+$ spamprobe -L spam.txt (lee los correos del archivo especificado y actualiza la base de datos interna con las palabras encontradas en los mensajes spam)
+$ spamprobe -L ham.txt (entrenar con ejemplos de ham [no spam])
+$ spamprobe -t mensaje.txt (clasificar un solo mensaje almacenado en un archivo)
+$ spamprobe -E (elimina la base de datos actual para reiniciar entrenamiento)
+
+
 speaker-test
 Pruebas de sonido para dispositivos alsa.
 $ speaker-test -c6 -t wav (probar altavoces usando voz [t])
