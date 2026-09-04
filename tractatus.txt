@@ -57671,6 +57671,15 @@ $ firefox _build/html/index.html (ver el resultado con el navegador)
 $ make clean (para eliminar un post o modificar alguno antiguo)
 
 
+spi-tools
+Herramientas para facilitar el uso de dispositivos Linux spidev. Estas herramientas permiten configurar y comunicarse con dispositivos SPI de manera directa desde la terminal, sin necesidad de escribir programas complejos en C o Python. Incluye las aplicaciones spi-config y spi-pipe.
+# spi-config -d /dev/spidev0.0 -s 10000000 -m 0 -b 8 (configurar el dispositivo /dev/spidev0.0 a 10 MHz, modo 0, 8 bits por palabra)
+# spi-config -d /dev/spidev0.0 -q (consultar la configuración actual de /dev/spidev0.0)
+# spi-config -d /dev/spidev0.0 -s 10000000 -w & (configurar y mantener la configuración en segundo plano)
+# printf '\x01\x82\xF3' | spi-pipe -d /dev/spidev0.0 | hexdump -C (envía los bytes 0x01, 0x82, 0xF3 al dispositivo y muestra la respuesta en formato hexadecimal)
+# spi-pipe -d /dev/spidev0.0 -b 4 -n 40 < /dev/zero (enviar 40 palabras de 4 bits cada una desde /dev/zero al dispositivo)
+
+
 spigot
 Herramienta diseñada para calcular expresiones matemáticas con precisión arbitraria o exacta. A diferencia de las calculadoras tradicionales que usan punto flotante y sufren de errores de redondeo, spigot genera los dígitos de un número exacto uno a uno mediante algoritmos conocidos como spigot algorithms.
 $ spigot "pi" (va imprimiento dígitos hasta terminar con Ctrl-C)
