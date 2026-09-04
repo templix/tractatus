@@ -57704,6 +57704,39 @@ $ time spigot -d 10000 "pi" > /dev/null
 bc tarda más de un minuto, spigot medio segundo.
 
 
+spin
+Herramienta de verificación formal de aplicaciones de software multihilo. Para usar SPIN, se describe el comportamiento concurrente del software en un lenguaje especializado llamado PROMELA [PROcess MEta LAnguage].
+Un ejemplo de uso con dos procesos que intentan adquirir dos cerrojos (lockA y lockB), pero en orden diferente
+$ nano deadlock.pml
+      /* deadlock.pml */
+      bool lockA = false;
+      bool lockB = false;
+      active proctype Proceso1() {
+          /* Intenta adquirir A y luego B */
+          (lockA == false) -> lockA = true;
+          (lockB == false) -> lockB = true;
+          /* Sección crítica */
+          lockB = false;
+          lockA = false;
+      }
+      active proctype Proceso2() {
+          /* Intenta adquirir B y luego A (orden inverso -> potencial deadlock) */
+          (lockB == false) -> lockB = true;
+          (lockA == false) -> lockA = true;
+          /* Sección crítica */
+          lockA = false;
+          lockB = false;
+      }
+$ spin deadlock.pml (simulación rápida del modelo)
+$ gcc -o pan pan.c (generar el código C del analizador de protocolos [PAN])
+$ spin -a deadlock.pml (generar el código C del analizador de protocolos [PAN])
+$ gcc -o pan pan.c (compilar el analizador)
+$ ./pan (ejecutar la verificación formal)
+$ spin -t -p deadlock.pml (ver exactamente qué secuencia de pasos causó el problema)
+$ spin -p deadlock.pml (muestra la traza paso a paso de cada proceso)
+$ spin -g deadlock.pml (muestra los cambios en las variables globales durante la simulación)
+
+
 split
 Cortar archivos
 $ split -d -b 5M archivo otro_archivo. (Que tengan extensión con números: .00, .01, .02 [-d]. Trozos de 5 MB [-b], archivo de entrada y de salida terminado con un punto donde se añade la extension. En este ejemplo daría salidas tipo otro_archivo.00, otro_archivo.01....)
