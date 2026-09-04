@@ -50813,7 +50813,7 @@ Nota.- El comando comprueba si existe /sbin/resolvconf, si existe delega en él 
 
 
 resolvectl
-[systemd-resolve]. Herramienta para la administración de DNSs [Domain Name Service, son los responsables de traducir los nombres de dominio a sus respectivas IPs y viceversa]
+[systemd-resolved]. Herramienta para la administración de DNSs [Domain Name Service, son los responsables de traducir los nombres de dominio a sus respectivas IPs y viceversa]
 # resolvectl statistics (verificar estadísticas DNS)
 # resolvectl flush-caches (Vacía todas las cachés de registros de recursos DNS que el servicio mantiene localmente)
 # resolvectl status (configuración de DNS global actualmente vigente)
@@ -59160,7 +59160,7 @@ Es un administrador de sistemas y servicios para Linux. Ofrece potentes capacida
 
 
 systemd-analyze
-Analiza la secuencia de arranque en sistemas basados en systemd (Ver systemctl)
+[systemd]. Analiza la secuencia de arranque en sistemas basados en systemd (Ver systemctl)
 # systemd-analyze time (muestra el tiempo total del arranque del sistema, desglosando el tiempo en espacio de usuario, del kernel y en la carga del initrd)
 # systemd-analyze blame (servicios se montan durante el arranque)
 # systemd-analyze critical-chain (ver cuellos de botella en el arranque)
@@ -59207,6 +59207,11 @@ Para verificar el contenido de resolv.conf:
 
 systemd-tests
 Pruebas para systemd. Este paquete contiene los binarios de prueba. Estos binarios se utilizan principalmente para autopkgtest y no están diseñados para instalarse en sistemas de usuario estándar.
+
+
+systemd-timesyncd
+Servicio para sincronizar el reloj del sistema local con un servidor remoto Network Time Protocol [NTP].
+# systemctl status systemd-timesyncd.service (comprobar si está activo)
 
 
 systemtap
