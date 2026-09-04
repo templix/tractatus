@@ -57602,6 +57602,19 @@ $ speedtest --no-pre-allocate (probar la velocidad sin utilizar la geolocalizaci
 $ speedtest --share (Nos da una URL con la imagen en png de la conexión)
 
 
+speex
+Herramienta de audio para codificar y decodificar voz a bajas tasas de bits para aplicaciones como la voz sobre IP [VoIP]. Incluye las herramientas speexenc y speexdec.
+$ speexenc voz.wav voz.spx (comprimir [codificar] un archivo de audio)
+$ speexdec voz.spx voz_recuperada.wav (decodificar [descomprimir])
+$ speexenc --narrowband llamada_telefonica.wav llamada.spx (-n, codificar una grabación de teléfono antiguo [banda estrecha])
+$ speexenc --wideband audio_hd.wav audio_hd.spx (-w, codificar audio de mayor calidad, 16 kHz tipo Skype moderno o llamadas HD)
+$ speexenc --ultra-wideband audio_studio.wav audio.spx (-u, codificar a calidad 32 KHz)
+$ speexenc --quality 1 voz.wav voz_baja.spx (grabar con calidad muy baja (ideal para conexiones de internet muy lentas o satelitales. De 0 a 10, por defecto 8)
+$ speexenc --quality 8 voz.wav voz_alta.spx (calidad alta. Máxima comprensión pero calidad y mínima compresión mejor calidad)
+$ speexenc -w --vad --dtx --quality 6 grabacion_con_ruido.wav llamada_voip.spx (comprime en banda ancha, detecta los silencios, limpia ruido de fondo y calidad media-alta)
+Nota.- Esta herramienta está considerada obosoleta ya que fue reemplazada por el dódec "opus".
+
+
 spell
 Programa de corrección ortográfica que imprime cada palabra mal escrita en una línea independiente.
 $ spell archivo.txt (mostrará una lista de palabras mal escritas encontradas en el archivo)
