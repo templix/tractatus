@@ -57671,6 +57671,30 @@ $ firefox _build/html/index.html (ver el resultado con el navegador)
 $ make clean (para eliminar un post o modificar alguno antiguo)
 
 
+spigot
+Herramienta diseñada para calcular expresiones matemáticas con precisión arbitraria o exacta. A diferencia de las calculadoras tradicionales que usan punto flotante y sufren de errores de redondeo, spigot genera los dígitos de un número exacto uno a uno mediante algoritmos conocidos como spigot algorithms.
+$ spigot "pi" (va imprimiento dígitos hasta terminar con Ctrl-C)
+$ spigot -d 50 "e" (obtener una cantidad exacta de dígitos, en este caso los primeros 50 de "e")
+$ spigot -d 30 "sqrt(2)" (los primeros 30 dígitos de la raíz cuadrada de 2)
+$ spigot -d 20 "sin(pi / 4) + cos(pi / 4)" (20 dígitos al evaluar una expresión con funciones trigonométricas)
+$ spigot -d 40 "log(10, 2)" (40dígitos del logaritmo en base 10 de 2)
+$ spigot -b 16 -d 20 "pi" (Pi en hexadecimal [base 16])
+$ spigot -b 2 -d 30 "sqrt(3)" (raíz de 3 en base 2)
+Algunas sintaxis y funciones comunes
+	+, -, *, /, ^ --> Operadores aritméticos estándar
+	pi, e, phi --> Constantes de pi número de Euler y razón áurea
+	sqrt(x) --> Raíz cuadrada
+	sin(x), cos(x), tan(x) --> Funciones trigonométricas
+	asin(x), acos(x), atan(x) ..> Funciones trigonométricas inversas
+	exp(x), ln(x), log(base, x) --> Exponenciales y logaritmos
+1.-
+Ejemplo de rendimiento [Benchmark] entre bc y spigot.
+Calcular 10,000 dígitos de pi
+$ time bc -l <<< "scale=10000; 4*a(1)" > /dev/null
+$ time spigot -d 10000 "pi" > /dev/null
+bc tarda más de un minuto, spigot medio segundo.
+
+
 split
 Cortar archivos
 $ split -d -b 5M archivo otro_archivo. (Que tengan extensión con números: .00, .01, .02 [-d]. Trozos de 5 MB [-b], archivo de entrada y de salida terminado con un punto donde se añade la extension. En este ejemplo daría salidas tipo otro_archivo.00, otro_archivo.01....)
