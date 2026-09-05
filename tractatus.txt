@@ -57745,6 +57745,24 @@ $ ps aux | grep [sp]inner (comprobar si está activo)
 $ sudo strace -p PID -e write -v 2>&1 | head -20 (En la terminal pts4 con el PID anterior comprobar que si está está escribiendo)
 
 
+splint
+Herramienta para comprobar estáticamente programas C en busca de vulnerabilidades de seguridad y errores de codificación sin ejecutar ni compilar.
+Ejemplo en C de una variable sin inicializar
+$ nano programa.c
+       /* sin_iniciar.c */
+       int main(void)
+       {
+           int x;
+	   return x;   /* x nunca se asignó: valor indeterminado */
+       }
+$ splint programa.c (analizar un fichero)
+$ splint -strict programa.c (nivel máximo de comprobaciones)
+$ splint -weak prog.c (menos ruido)
+$ splint -checks prog.c (nivel intermedio)
+$ splint -strict prog.c (todo muy estricto)
+$ splint -posix-lib p.c (usar su biblioteca anotada de POSIX)
+
+
 split
 Cortar archivos
 $ split -d -b 5M archivo otro_archivo. (Que tengan extensión con números: .00, .01, .02 [-d]. Trozos de 5 MB [-b], archivo de entrada y de salida terminado con un punto donde se añade la extension. En este ejemplo daría salidas tipo otro_archivo.00, otro_archivo.01....)
