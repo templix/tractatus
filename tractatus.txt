@@ -46710,6 +46710,7 @@ $ printf "%s\t --> %s\n" "$A" "$B" (Dos variables en columnas tabuladas)
 $ printf "%s\n" Escribir cada palabra en una "nueva linea" (Pues eso, excepto las dos últimas entrecomilladas)
 $ printf "%06d\n" "$RANDOM" "$RANDOM" "$RANDOM" "$RANDOM" (Iguala las cuatro salidas de $RANDOM a 6 cifras con ceros delante[%06d])
 $ printf "%-10s %-10s %s\n", $1, $2, $3 (3 variables justificadas a la izquierda, las dos primeras con 10 caracteres)
+" printf "Linux es genial " > /dev/pts/4 (enviar una frase a otra terminal)
 Algunas opciones:
 %c (Imprime el primer carácter de una variable cadena)
 %d (Imprime un número decimal)
@@ -57735,6 +57736,13 @@ $ ./pan (ejecutar la verificación formal)
 $ spin -t -p deadlock.pml (ver exactamente qué secuencia de pasos causó el problema)
 $ spin -p deadlock.pml (muestra la traza paso a paso de cada proceso)
 $ spin -g deadlock.pml (muestra los cambios en las variables globales durante la simulación)
+
+
+spinner
+Envía pequeños paquetes nulos o un animado efecto de giro en ASCII para mantener el enlace activo. Su propósito es mantener una conexión activa a través de enrutadores que desconectan el enlace tras un periodo de inactividad.
+$ spinner -t /dev/pts/4 -n -u 65000 -F -l /var/log/spinner (envia caracteres sin salida visible a la terminal especificada cada 65000 microsegundos, sin crear archivo PID y ruta a los logs, desactivado por defecto)
+$ ps aux | grep [sp]inner (comprobar si está activo)
+$ sudo strace -p PID -e write -v 2>&1 | head -20 (En la terminal pts4 con el PID anterior comprobar que si está está escribiendo)
 
 
 split
