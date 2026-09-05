@@ -59254,6 +59254,45 @@ $ inkscape /run/log/bootchart-20250202-1707.svg (para visualizarlo)
 Nota.- El gráfico se almacena en /run/log/, por lo que se perderá tras un reinicio a menos que se copie en otro lugar.
 
 
+systemd-container
+Herramientas de systemd para gestionar contenedores ligeros basados en namespaces [nspawn] y, en menor medida, máquinas virtuales e imágenes. Incluye los ejecutables importctl, machinectl, portablectl, systemd-dissect y systemd-nspawn
+# systemd-nspawn -D /var/lib/machines/mi-debian (entrar en un árbol de directorios con una shell interactiva)
+# systemd-nspawn -bD /var/lib/machines/mi-debian (arrancar un sistema operativo completo si existe un init)
+# systemd-nspawn -M mi-debian (usar una imagen registrada por nombre)
+# systemd-nspawn -bD /ruta/al/arbol --private-network --private-users=pick (con red privada y usuario mapeado)
+# machinectl list (listar contenedores en ejecución)
+# machinectl list-images (listar imágenes disponibles)
+# machinectl start mi-contenedor (arrancar un contenedor, "stop" para parar y "reboot" para reiniciar)
+# machinectl login mi-contenedor (iniciar sesión)
+# machinectl shell mi-contenedor (abrir una shell)
+# machinectl shell mi-contenedor /bin/bash (lo mismo)
+# machinectl status mi-contenedor (ver estado detallado)
+# machinectl clone original nuevo (clonar, "rename" para renombrar)
+# machinectl remove imagen (eliminar)
+# importctl pull-tar -mN https://cloud-images.ubuntu.com/jammy/current/jammy-server-cloudimg-amd64-root.tar.xz (descargar una imagen tar de Ubuntu y registrarla)
+# importctl pull-raw -mN https://cloud-images.ubuntu.com/jammy/current/jammy-server-cloudimg-amd64-disk-kvm.img jammy (descargar imagen raw)
+# importctl import-tar mi-imagen.tar.xz nombre-local (importar un archivo local)
+# importctl export-raw -m mi-contenedor mi-contenedor.raw (exportar)
+Nota.- Después de importar se puede usar con systemd-nspawn -M nombre o machinectl start nombre.
+# portablectl list (listar imágenes portátiles disponibles)
+# portablectl attach /ruta/a/mi-servicio.raw (adjuntar una imagen)
+# portablectl attach mi-servicio (o por nombre si está en las rutas de búsqueda)
+# portablectl inspect mi-servicio (inspeccionar)
+# portablectl is-attached mi-servicio (comprobar si está adjuntada)
+# portablectl detach mi-servicio (desadjuntar)
+# systemd-dissect mi-imagen.raw (información general de la imagen)
+# systemd-dissect --mount mi-imagen.raw /mnt/imagen (montar la imagen)
+# systemd-dissect --umount /mnt/imagen (desmontar)
+# systemd-dissect --list mi-imagen.raw (listar contenido)
+# systemd-dissect --attach mi-imagen.raw (adjuntar a un dispositivo loop)
+# systemd-dissect --with mi-imagen.raw tar cz . > contenido.tar.gz (generar un tarball desde la imagen)
+# systemd-dissect --make-archive mi-imagen.raw contenido.tar.gz (lo mismo)
+1.-
+Ejemplo de creación de contenedor Debian con debootstrap
+# debootstrap trixie /var/lib/machines/debian-trixie
+# systemd-nspawn -bD /var/lib/machines/debian-trixie
+
+
 systemd-coredump
 Herramientas para almacenar en un formato estructurado y recuperar, con herramientas como gdb, volcados de memoria [core dumps] de aplicaciones que fallan. Estos volcados de memoria son instantáneas del espacio de memoria de un proceso en el momento en que se produce un fallo, y son útiles para el análisis de errores y la depuración y se almacenan en /var/lib/systemd/coredump/.
 $ coredumpctl list (lista de los volcados de memoria disponibles, junto con información sobre el proceso que falló)
