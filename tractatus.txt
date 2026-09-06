@@ -57802,6 +57802,13 @@ Los archivos de registro se crearán, en el directorio donde se ejecuta el scrip
 # split-logfile < /var/log/apache2/access.log (creará un archivo para cada ip distinta que encuentre en access.log por lo que es mejor lanzar el comando en un dir vacio)
 
 
+splitpatch
+Utilidad que permite dividir un parche o archivo diff en varias partes más pequeñas, ya sea por tamaño o por secciones específicas, permitiendo que cada fragmento sea un parche válido independiente..
+$ splitpatch -n 4 cambios.patch (generará archivos como part1.patch, part2.patch, part3.patch y part4.patch)
+$ splitpatch -l 10 cambios.patch (crea múltiples archivos, cada uno con hasta 10 líneas de cambios
+$ splitpatch -n 3 -l 20 cambios.patch (divide el parche en 3 partes, cada una con hasta 20 líneas)
+
+
 splitvt
 Lanzar dos shells simultaneas partiendo en dos ventanas una terminal.
 $ splitvt -t "linux es genial" -upper ls -lower top (Con un título [-t] lanzando un ls en la ventana superior y top en la inferior)
