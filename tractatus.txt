@@ -57763,6 +57763,31 @@ $ splint -strict prog.c (todo muy estricto)
 $ splint -posix-lib p.c (usar su biblioteca anotada de POSIX)
 
 
+spiped
+Utilidad para crear tuberías cifradas simétricamente y autenticadas punto a punto de manera transparente. Esto permite conectarse a una dirección, por ejemplo, un socket UNIX en localhost y establecer una conexión transparente con otra dirección, por ejemplo, un socket UNIX en un sistema diferente. spipe es una utilidad que actúa como cliente del protocolo spiped por lo que se conecta a un demonio spiped, recibiendo datos de la entrada estándar y escribiendo los datos leídos en la salida estándar.
+Requiere una clave simétrica precompartida que debe tener exactamente 32 bytes [256 bits] y debe copiarse de forma segura a ambas máquinas.
+# dd if=/dev/urandom bs=32 count=1 of=/etc/spiped/clave.key (el directorio y el archivo han de existir)
+# chmod 600 /etc/spiped/clave.key
+1.-
+Un ejemplo de funcionamiento.
+Supongamos que se tiene Redis corriendo en 127.0.0.1:6379 en el servidor 203.0.113.10 y se quiere que un cliente se conecte de forma segura a través de Internet.
+$ spiped -d -s [0.0.0.0]:8000 -t 127.0.0.1:6379 -k /etc/spiped/clave.key (el servidor descifra [-d] el tráfico que entra por el puerto público 8000 [-s] y lo envía a Redis local [-t] con clave compartda [-k])
+$ spiped -e -s 127.0.0.1:6379 -t 203.0.113.10:8000 -k /etc/spiped/clave.key (la máquina cliente abre el puerto local 6379 y envía el tráfico cifrado [-e] hacia el servidor remoto
+$ redis-cli -h 127.0.0.1 -p 6379 (en el cliente, basta con conectarse normalmente a localhost:6379)
+2.-
+Uso con sockets UNIX locales.
+spiped no se limita a sockets TCP, también soporta sockets UNIX. Esto permite exponer servicios locales sin abrir puertos TCP locales adicionales:
+$ spiped -d -s [0.0.0.0]:8000 -t /var/run/docker.sock -k /etc/spiped/clave.key (en el servidor)
+$ spiped -e -s /tmp/docker-remoto.sock -t 203.0.113.10:8000 -k /etc/spiped/clave.key (en el cliente)
+$ docker -H unix:///tmp/docker-remoto.sock ps (uso)
+3.-
+Un ejemplo de uso de la utilidad spipe para un backups por tubería
+La herramienta spipe no levanta un daemon escuchando un socket; en su lugar, actúa como un cliente inmediato de línea de comandos que lee de stdin y escribe en stdout.
+$ nc -l -p 7000 > backup_recibido.tar.gz &
+$ spiped -d -s [0.0.0.0]:9000 -t 127.0.0.1:7000 -k /etc/spiped/clave.key (levantar un demonio spiped que redirige el flujo descifrado al receptor)
+$ tar -czf - /var/www/html | spipe -t 198.51.100.5:9000 -k /etc/spiped/clave.key (en el cliente, empaquetar un directorio y enviarlo cifrado directamente a través de spipe)
+
+
 split
 Cortar archivos
 $ split -d -b 5M archivo otro_archivo. (Que tengan extensión con números: .00, .01, .02 [-d]. Trozos de 5 MB [-b], archivo de entrada y de salida terminado con un punto donde se añade la extension. En este ejemplo daría salidas tipo otro_archivo.00, otro_archivo.01....)
