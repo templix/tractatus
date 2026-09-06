@@ -57814,6 +57814,12 @@ Lanzar dos shells simultaneas partiendo en dos ventanas una terminal.
 $ splitvt -t "linux es genial" -upper ls -lower top (Con un título [-t] lanzando un ls en la ventana superior y top en la inferior)
 
 
+sploitscan
+Herramienta diseñada para consultar CVE [Common Vulnerabilities and Exposures - Vulnerabilidades y Exposiciones Comunes]. Consulta de exploits en https://www.exploit-db.com/.
+$ sploitscam CVE-2024-1709 -e html (genera un informe con nombre XXXXXXX_CVE-2024-1709_export.html)
+$ sploitscan CVE-2025-57819 CVE-2024-21413 -e json (consultar dos vulnerabilidades y generar un informe .json)
+
+
 sponge
 [moreutils]. Herramienta que guarda todo el contenido a escribir hasta que recibe el EOF y luego lo escribe por lo que permite procesar un fichero y reescribirlo en el propio fichero sin perdida de datos.
 $ tac archivo | sponge archivo (Lee al reves un archivo y lo guarda en el mismo archivo)
