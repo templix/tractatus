@@ -57842,6 +57842,34 @@ Nota.- El archivo subt.xml con un contenido:
 La fuente Arial.ttf ha de estar [o tener un enlace] en el directorio ~/.spumux
 
 
+sq
+Herramienta para OpenPGP, estructurada mediante subcomandos e implementada en Rust que ofrece algoritmos criptográficos modernos por defecto, como Ed25519 y Curve25519. Los subcomandos incluyen: help, decrypt, encrypt, sign, verify, armor, dearmor, autocrypt, inspect, key, keyring, certify y packet. La herramienta permite cifrado, descifrado, firma, verificación y certificación, y es interoperable con otras implementaciones importantes de OpenPGP como GnuPG.
+$ sq key generate --own-key --name USER --email USER@gmail.com (crear una clave autentificada para USER con el email especificado y la guarda en ~/.local/share/sequoia/keystore/softkeys/DE02509D1421...DAD721C68E212AB1BE.pgp)
+Nota.- Fingerprint es el identificador único de la clave principal
+$ sq pki link retract --cert=DE02509D1421...DAD721C68E212AB1BE --all (revocar una certificación con el número de su huella digital [Fingerprint] del comando anterior)
+$ sq cert export --cert=DE02509D1421...DAD721C68E212AB1BE > mi-clave_publica.asc (exportar la clave a un archivo)
+$ sq key export --cert=DE02509D1421...DAD721C68E212AB1BE > mi-clave_privada.asc
+$ sq network keyserver publish --cert=DE02509D1421...DAD721C68E212AB1BE (subir certificado [clave pública] a directorios públicos. Caduca a los 3 años y no permite borrarla)
+      hkps://keyserver.ubuntu.com: ok
+      hkps://keys.openpgp.org: ok
+      hkps://sks.pod01.fleetstreetops.com: ok
+      hkps://keys.mailvelope.com: ok
+$ sq key list (verificar las claves que existen)
+$ sq key delete --cert DE02509D1421...DAD721C68E212AB1BE (eliminar una clave)
+$ sq sign --signer-email=USER@gmail.com --signature-file=document.sig document.txt (firmar un documento con una firma separada)
+$ sq sign --signer-email=USER@gmail.com --message document.txt (con la firma incluida en el archivo)
+$ sq sign --signer-email=USER@gmail.com --cleartext document.txt (firma con texto claro)
+$ sq verify --signature-file=document.sig document.txt (verificar una firma separada)
+$ sq verify --message document.sig (verificar un mensaje con la firma incrustada)
+$ sq verify --signatures 1 --message document.sig (verificar con número de firma separadas)
+$ sq cert list (listar certificados)
+$ sq inspect --cert=C38D004AAD6...88AB89C8A33A877 (inspeccionar una clave)
+$ sq encrypt --for-email=USER@gmail.com --signer-email=USER@gmail.com document.txt --output document.gpg (encriptar las claves en un documento)
+$ sq decrypt document.gpg (desencriptar el archivo y sus claves)
+$ sq decrypt document.gpg --output archivo_descifrado.txt (mardar el contenido del archivo desencriptado a un archivo)
+$ sq encrypt --overwrite --for-email=USER@gmail.com --signer-email=USER@gmail.com document.txt --output document.gpg (si se tiene que reescribir un archivo gpg que ya existe)
+
+
 sqlite
 Gestor de bases de datos.
 $ sqlite (entrar en el prompt)
