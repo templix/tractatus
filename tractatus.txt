@@ -57870,6 +57870,28 @@ $ sq decrypt document.gpg --output archivo_descifrado.txt (mardar el contenido d
 $ sq encrypt --overwrite --for-email=USER@gmail.com --signer-email=USER@gmail.com document.txt --output document.gpg (si se tiene que reescribir un archivo gpg que ya existe)
 
 
+sqitch
+Gestión de cambios en bases de datos enfocado en la trazabilidad y el control de versiones de los cambios en el esquema de la base de datos, integrándose de forma natural con el flujo de trabajo de Git. Está diseñado para trabajar con Git. Cada cambio es un commit en el repositorio, y el historial de sqitch se sincroniza con el de Git.
+$ sqitch init mydb --engine pg (inicializar un proyecto sqitch para PostgreSQL)
+Se crea una estructura de directorios tipo:
+   	deploy/
+	revert/
+	verify/
+	sqitch.conf
+	sqitch.plan
+$ sqitch add users_table -n "Crear tabla de usuarios" (crear una tabla de usuarios)
+  	 Created deploy/users_table.sql
+	 Created revert/users_table.sql
+	 Created verify/users_table.sql
+	 Added "users_table" to sqitch.plan
+$ sqitch deploy db:pg:mydb (aplicar todos los cambios pendientes en el orden correcto)
+$ sqitch revert db:pg:mydb --to @HEAD~1 (deshacer el último cambio aplicado)
+$ sqitch log db:pg:mydb (ver el historial de cambios)
+$ sqitch tag v1.0 (crea un tag llamado "v1.0" en el historial)
+$ sqitch status db:pg:mydb (ver el estado actual)
+$ sqitch add posts_table -n "Crear tabla de posts" --requires users_table (crear una tabla "posts" que depende de "users" que asegure que users_table se aplique antes que posts_table)
+
+
 sqlite
 Gestor de bases de datos.
 $ sqlite (entrar en el prompt)
