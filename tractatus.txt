@@ -58036,12 +58036,8 @@ Utilidad para investigar sockets. Sustituye a netstat.
 
 
 sscg
-Crea certificados "autofirmados" más seguros.
-     $ sscg --country=ES --state=Girona --locality=Olot --organization=lapipaplena
-     Wrote service certificate key to /home/USER/service-key.pem
-     Wrote service certificate to /home/USER/service.pem
-     Wrote CA certificate to /home/USER/ca.crt
-     Wrote Diffie-Hellman parameters to /home/USER/dhparams.pem
+Generador de certificados SSL autofirmados.
+$ sscg -d --country=ES --state=Madrid --locality=Madrid --organization=lapipaplena --organizational-unit="Bash programmer" --email=lapipaplena@gmail.com --hostname=debian (crea los archivos ca.crt, debug-ca.csr, debug-client.csr, dhparams.pem, service-key.pem y service.pem en el directorio donde se lanza)
 
 
 ssconvert
