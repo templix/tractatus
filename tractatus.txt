@@ -57931,6 +57931,7 @@ $ sqlmap -u "http://objetivo.local/pagina.php?id=1" --batch --dbs (ejecutar en m
 
 squid
 Proxy HTTP/HTTPS con caché web, filtro de acceso, acelerador reverse proxy, balanceador simple, autenticador y limitador de ancho de banda
+# systemctl status squid.service (comprobar el estado del sevicio
 # cp /etc/squid/squid.conf{,.defaults} (Realizar copia de seguridad de la configuración antes de modificarla)
 Modificamos/adaptamos los siguientes ajustes basicos:
 # nano /etc/squid/squid.conf
@@ -57986,6 +57987,11 @@ Colocar las dos lineas siguientes
 Configuración de usuarios (/etc/squid/passwd):
 # htpasswd -c /etc/squid/passwd user1 (Crear archivo [-c] nombre de usuario y pedirá contraseña)
 # htpasswd /etc/squid/passwd usuario2 (Sin parámetro -c porque el archivo ya está creado. Otro usuario y contraseña)
+
+
+srg
+[Squid Report Generator]. Herramienta diseñada para procesa los archivos de registro del proxy Squid, normalmente access.log , manteniendo un alto nivel de detalle, incluyendo las URL visitadas por los usuarios y la hora de dichas visitas. SRG también incluye soporte para generar informes PHP que se pueden integrar con el sistema de autenticación existente, proporcionando así un acceso granular a los resultados.
+# srg -o informe.html /var/log/squid/access.log (crea el directorio informe.html y en su interior los informes)
 
 
 srm
