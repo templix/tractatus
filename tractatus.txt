@@ -12581,6 +12581,12 @@ $ dmarc-cat *.zip (procesará todos los archivos .zip en el directorio actual y 
 $ dmarc-cat report.zip | grep 'ip-address' (extraer solo las direcciones IP reportadas en los informes)
 
 
+dmarc-srg
+Analizador, visor y generador de informes resumidos en PHP para informes DMARC entrantes con un servidor de correo activo. Los php ejecutables están en /usr/share/dmarc-srg/utils/.
+# php /usr/share/dmarc-srg/utils/check_config.php (chequear la configuración)
+# php /usr/share/dmarc-srg/utils/reports_cleaner.php (limpiar reportes)
+
+
 dmesg
 Imprimir en pantalla los mensajes del kernel
 $ dmesg | grep -i 'error'   (lista los errores del kernel)
