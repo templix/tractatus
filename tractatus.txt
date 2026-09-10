@@ -59285,7 +59285,6 @@ syslinux-utils
 Conjunto de cargadores de arranque que actualmente admite sistemas de archivos DOS FAT y NTFS (SYSLINUX), sistemas de archivos Linux ext2/ext3/ext4, btrfs y xfs (EXTLINUX), arranques de red PXE (PXELINUX) o CD-ROM ISO 9660 (ISOLINUX). Contiene las utilidades auxiliares: gethostip, isohybrid, isohybrid.pl, lss16toppm, md5pass, memdiskfind, mkdiskimage, ppmtolss16, pxelinux-options, sha1pass y syslinux2ansi.
 
 
-
 syslogout
 Configuración diseñado para funcionar con bash para un mantenimiento de las partes del shell encargada de cerrar sesión y que permite o prohibe el cierre de sesión del shell para todos los usuarios del sistema de forma modular y centralizada. No es un ejecutable ni un daemon. Las configuraciones se encuentran en $HOME/.bash_logout, /etc/syslogout y /etc/syslogout.d/
 
@@ -59473,8 +59472,9 @@ Para verificar el contenido de resolv.conf:
 # cat /etc/resolv.conf
 
 
-systemd-tests
-Pruebas para systemd. Este paquete contiene los binarios de prueba. Estos binarios se utilizan principalmente para autopkgtest y no están diseñados para instalarse en sistemas de usuario estándar.
+systemd-test
+pruebas para systemd. Este paquete contiene los binarios de prueba que se utilizan principalmente para autopkgtest y no están destinados a instalarse en sistemas de usuarios convencionales.
+$ sudo python3 /usr/lib/systemd/tests/run-unit-tests.py
 
 
 systemd-timesyncd
