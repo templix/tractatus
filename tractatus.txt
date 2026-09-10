@@ -31949,8 +31949,7 @@ Mostrará todas las coincidencias. Ctrl-D para salir de la interfaz.
 
 
 lorem
-[libtext-lorem-perl]
-Crear textos aleatorios a partir del famoso lorem ipsum.
+[libtext-lorem-perl]. Crear textos aleatorios a partir del famoso lorem ipsum.
 $ lorem -p 4 (Generar 4 párrafos)
 $ lorem -w 10 (Generar 10 palabras)
 $ lorem -s 2 (Generar 2 sentencias)
@@ -58211,6 +58210,47 @@ Levanta VPNs con SSH y enruta tráfico a través de ellos
 # sshuttle -r usuario@servidor 0/0 (Ejecución básica para redireccionar la totalidad del tráfico)
 # sshuttle --dns -vvr usuario@servidor 0/0 (que las consultas DNS sean procesadas a través del servidor DNS del servidor al que se está conectado)
 # sshuttle --daemon usuario@servidor 0/0 --exclude 192.168.1.0/24 --exclude 90.173.123.64 (ejecutar el proceso en segundo plano y excluir una rango y una ip)
+
+
+ssdeep
+Calcula una firma basada en hashes fragmentarios activados por contexto, también conocidos como fuzzy hashes para cada archivo de entrada. Su objetivo es detectar archivos similares aunque no idénticos, no mostrar las diferencias línea a línea. ssdeep no hace un hash de todo el archivo de una vez como MD5 o SHA. En su lugar divide el archivo en trozos [chunks] de tamaño variable que se decide con un rolling hash que mira el contenido. Cuando el rolling hash detecta un punto de corte [trigger], cierra el trozo actual y empieza uno nuevo. De cada trozo se calcula un pequeño hash, normalmente 6 bits, que se codifica en Base64 y se concatenan todos esos pequeños hashes para obtener la firma fuzzy. Además genera dos firmas una con un blocksize y otra con el doble para poder comparar archivos de tamaños un poco diferentes.
+$ ssdeep lorem lorem2 (calcula el fuzzy hash de cada archivo y lo imprime)
+  	 ssdeep,1.1--blocksize:hash:hash,filename
+	 192:BptAG3oC+uXfptAG3oC+uXfptAG3oC+uXB:exucxucxuR,"/home/tux/AA2/2/lorem"
+	 192:B7tAG3oC+uXfptAG3oC+uXfptAG3oC+uXg:sxucxucxuQ,"/home/tux/AA2/2/lorem2"
+Tal como indica la salida el 192 es el tamaño de bloque siguen dos hash, el primero por el tamaño de bloques, el segundo por el doble de cantidad y el nombre del archivo.
+Nota.- A veces muestra: "Did not process files large enough to produce meaningful results" (No se procesaron archivos lo suficientemente grandes como para producir resultados significativos.)
+$ ssdeep -p lorem lorem2 (muestra la puntuación de similitud entre paréntesis y va de 0 a 100. Entre 90–100 son casi idénticos, entre 70–89, muy similares y < 50 similitud débil o nula)
+$ ssdeep lorem > hashes.txt (guardar un hash para comparar)
+$ ssdeep -m hashes.txt lorem2 (comparar el hash con otro archivo)
+$ ssdeep -r directorio/ (comparar los archivos de un directorio)
+$ ssdeep -d archivo1 archivo2 archivo3 archivo4 (comparar varios archivos)
+1.-
+Ejemplo muy simplificado del proceso
+Imaginemos un texto cortísimo:
+$ nano ejemplo.txt
+      Hola mundo como estas hoy
+La forma de actuar del comando ssdeep es, suponiendo un valor para blocksize = 3, los puntos de corte podrian ser:
+| Trozo | Contenido | Hash de 6 bits  | Carácter |
+|       |           | (simplificado)  |  Base64  |
+|-------|-----------|-----------------|----------|
+| 1     | Hola      | 12              | M        |
+| 2     | mundo     | 45              | t        |
+| 3     | como      | 7               | H        |
+| 4     | estas     | 28              | c        |
+| 5     | hoy       | 3               | D        |
+La firma principal con blocksize = 3 quedaría algo como:
+   	 3:MtHcD
+La segunda firma con blocksize doble [blocksize = 6] con menos trozos de corte:
+| Trozo | Contenido          | Hash  | Base64 |
+|-------|--------------------|-------|--------|
+| 1     | Hola mundo         | 33    | h      |
+| 2     | como estas hoy     | 19    | T      |
+Quedaría algo como:
+	 6:hT
+Y la salida de lanzar el comando ssdeep:
+     	 3:MtHcD:hT,"ejemplo.txt"
+Nota.- En los archivos reales ssdeep trabaja con bytes, los hashes son más largos y el blocksize se elige automáticamente según el tamaño del archivo.
 
 
 sslstrip
