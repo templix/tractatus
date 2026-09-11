@@ -58053,9 +58053,40 @@ Versión mejorada de GNU sed [ver] con algunos argumentos nuevos.
 
 
 ssft
-Biblioteca de funciones de Shell. La biblioteca define un conjunto de varias funciones y ha sido diseñada para usarse obteniendo el código de la biblioteca de otros scripts. El ejecutable incorpora .sh.
-$ ssft.sh -d (listado de funciones diponibles)
-$ ssft.sh -d ssft_file_selection (descripción de una función)
+Biblioteca de funciones de shell que debe cargarse mediante el comando "source" o "." desde otros scripts para mostrar mensajes y leer valores del usuario, ya sea en X utilizando zenity (por defecto) o kdialog o en consola utilizando dialog o texto plano. Si están varios instalados y se desea usar una interfaz específica se debe especificar en .bashrc con la linea:
+	   export SSFT_FRONTEND='dialog'
+$ ssft.sh -d (muestra el listado de funciones disponibles)
+$ ssft.sh -d ssft_read_string (información y forma de uso de la función especificada del listado anterior)
+1.-
+Un ejemplo básico de uso podría ser:
+$ nano prueba.sh
+	#!/bin/bash
+	# se aconseja colocar las dos siguientes lineas:
+	. ssft.sh || exit 1
+	[ -n "$SSFT_FRONTEND" ] || SSFT_FRONTEND="$( ssft_choose_frontend )"
+	#
+	ssft_read_string "Pregunta" "¿Cómo te llamas?"
+	ssft_display_message "Nombre" "$SSFT_RESULT"
+Nota.- Las variables que entra el usuario en el frontend se almacenan en la variable interna del comando SSFT_RESULT.
+2.-
+Otro ejemplo con más opciones:
+$ nano prueba2.sh
+        #!/bin/bash
+	. ssft.sh || exit 1
+	[ -n "$SSFT_FRONTEND" ] || SSFT_FRONTEND="$( ssft_choose_frontend )"
+	#
+	ssft_display_message "Nota" "Bienvenido a Bash."
+	ssft_read_string "Pregunta" "¿Cuál es tu nombre?"
+	if ssft_yesno "$SSFT_RESULT". "¿Quieres continuar?"; then
+	    ssft_display_message "Siguiente" "Vamos a continuar con el proceso."
+    	    ssft_select_multiple "Opciones" "¿Distro favorita?" "Ubuntu" "Debian" "Arch" "Red Hat"
+    	    ssft_display_message "Escogido" "$SSFT_RESULT"
+    	    ssft_show_file "File" /etc/resolv.conf
+    	    ssft_display_message "Nota" "Proceso terminado."
+        else
+	    ssft_display_message "Nota" "Operación cancelada."
+        fi
+        clear
 
 
 ssh
