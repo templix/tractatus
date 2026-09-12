@@ -58048,6 +58048,47 @@ $ ssconvert -E utf-8 entrada.xls salida.csv (Especificando una codificación par
 $ ssconvert --export-type=Gnumeric_stf:stf_assistant -O 'separator=| format=preserve charset=unicode' entrada.xls salida.csv (Especificando opcionalmente un exportador [--export-type] que permite exportar a txt, especificando un separador de campos que no sea el por defecto [el espacio] sinó la barra vertical [|], preservando el formato de las celdas del original [format], otras opciones de format son "automatic" [por defecto] y "raw" [sin formato] y con codificación de salida en unicode [por defecto UTF-8])
 
 
+ssdeep
+Calcula una firma basada en hashes fragmentarios activados por contexto, también conocidos como fuzzy hashes para cada archivo de entrada. Su objetivo es detectar archivos similares aunque no idénticos, no mostrar las diferencias línea a línea. ssdeep no hace un hash de todo el archivo de una vez como MD5 o SHA. En su lugar divide el archivo en trozos [chunks] de tamaño variable que se decide con un rolling hash que mira el contenido. Cuando el rolling hash detecta un punto de corte [trigger], cierra el trozo actual y empieza uno nuevo. De cada trozo se calcula un pequeño hash, normalmente 6 bits, que se codifica en Base64 y se concatenan todos esos pequeños hashes para obtener la firma fuzzy. Además genera dos firmas una con un blocksize y otra con el doble para poder comparar archivos de tamaños un poco diferentes.
+$ ssdeep lorem lorem2 (calcula el fuzzy hash de cada archivo y lo imprime)
+  	 ssdeep,1.1--blocksize:hash:hash,filename
+	 192:BptAG3oC+uXfptAG3oC+uXfptAG3oC+uXB:exucxucxuR,"/home/tux/AA2/2/lorem"
+	 192:B7tAG3oC+uXfptAG3oC+uXfptAG3oC+uXg:sxucxucxuQ,"/home/tux/AA2/2/lorem2"
+Tal como indica la salida el 192 es el tamaño de bloque siguen dos hash, el primero por el tamaño de bloques, el segundo por el doble de cantidad y el nombre del archivo.
+Nota.- A veces muestra: "Did not process files large enough to produce meaningful results" (No se procesaron archivos lo suficientemente grandes como para producir resultados significativos.)
+$ ssdeep -p lorem lorem2 (muestra la puntuación de similitud entre paréntesis y va de 0 a 100. Entre 90–100 son casi idénticos, entre 70–89, muy similares y < 50 similitud débil o nula)
+$ ssdeep lorem > hashes.txt (guardar un hash para comparar)
+$ ssdeep -m hashes.txt lorem2 (comparar el hash con otro archivo)
+$ ssdeep -r directorio/ (comparar los archivos de un directorio)
+$ ssdeep -d archivo1 archivo2 archivo3 archivo4 (comparar varios archivos)
+1.-
+Ejemplo muy simplificado del proceso
+Imaginemos un texto cortísimo:
+$ nano ejemplo.txt
+      Hola mundo como estas hoy
+La forma de actuar del comando ssdeep es, suponiendo un valor para blocksize = 3, los puntos de corte podrian ser:
+| Trozo | Contenido | Hash de 6 bits  | Carácter |
+|       |           | (simplificado)  |  Base64  |
+|-------|-----------|-----------------|----------|
+| 1     | Hola      | 12              | M        |
+| 2     | mundo     | 45              | t        |
+| 3     | como      | 7               | H        |
+| 4     | estas     | 28              | c        |
+| 5     | hoy       | 3               | D        |
+La firma principal con blocksize = 3 quedaría algo como:
+   	 3:MtHcD
+La segunda firma con blocksize doble [blocksize = 6] con menos trozos de corte:
+| Trozo | Contenido          | Hash  | Base64 |
+|-------|--------------------|-------|--------|
+| 1     | Hola mundo         | 33    | h      |
+| 2     | como estas hoy     | 19    | T      |
+Quedaría algo como:
+	 6:hT
+Y la salida de lanzar el comando ssdeep:
+     	 3:MtHcD:hT,"ejemplo.txt"
+Nota.- En los archivos reales ssdeep trabaja con bytes, los hashes son más largos y el blocksize se elige automáticamente según el tamaño del archivo.
+
+
 ssed
 Versión mejorada de GNU sed [ver] con algunos argumentos nuevos.
 
@@ -58215,6 +58256,20 @@ Después de reiniciar ssh, con el parámetro -X se visualizará la gui remota qu
 $ ssh -X usuario@host akregator
 
 
+ssh-keygen
+Creación, gestión y conversión de claves utilizadas para la autenticación de cliente y servidor. Cuando no se especifica ninguna opción, ssh-keygen genera un par de claves RSA de 2048 bits y solicita un nombre de clave y una frase de paso para proteger la clave privada. Las claves públicas se crean usando el mismo nombre base que la clave privada con una extensión .pub añadida. La ubicación de la clave se muestra cuando se completa la generación de claves. Ver ssh
+$ ssh-keygen -lvf ~/.ssh/known_hosts (Ver todas las huellas digitales y las imágenes randomart)
+$ ssh-keygen -t rsa -C newserver -f .ssh/newkey (Generar el par de llaves publica y privada. Caso de exitir preguntará si se sobreescribe)
+$ ssh-keygen -B -f .ssh/id_rsa.pub (Muestra la huella digital de la llave especificada en formato SHA-1)
+$ ssh-keygen -f "$HOME/.ssh/known_hosts" -R [La_URL.com_entre_corchetes]:22 (Suprimir un clave de un host por sufrir alguna modificación y el puerto)
+$ ssh-keygen -R HOST (Otra forma de suprimir una clave de un host modificado)
+1.-
+Para ver la huella digital cada vez que se ingresa en un host remoto:
+# nano /etc/ssh/ssh_config
+Descomentar la linea y dejarla:
+VisualHostKey yes
+
+
 sshd
 Demonio ssh
 $ sshd -t (Verificar si existen errores en el archivo de configuración)
@@ -58238,18 +58293,17 @@ Con el siguiente formato:
 	lapipaplena.net (Un host)
 
 
-ssh-keygen
-Creación, gestión y conversión de claves utilizadas para la autenticación de cliente y servidor. Cuando no se especifica ninguna opción, ssh-keygen genera un par de claves RSA de 2048 bits y solicita un nombre de clave y una frase de paso para proteger la clave privada. Las claves públicas se crean usando el mismo nombre base que la clave privada con una extensión .pub añadida. La ubicación de la clave se muestra cuando se completa la generación de claves. Ver ssh
-$ ssh-keygen -lvf ~/.ssh/known_hosts (Ver todas las huellas digitales y las imágenes randomart)
-$ ssh-keygen -t rsa -C newserver -f .ssh/newkey (Generar el par de llaves publica y privada. Caso de exitir preguntará si se sobreescribe)
-$ ssh-keygen -B -f .ssh/id_rsa.pub (Muestra la huella digital de la llave especificada en formato SHA-1)
-$ ssh-keygen -f "$HOME/.ssh/known_hosts" -R [La_URL.com_entre_corchetes]:22 (Suprimir un clave de un host por sufrir alguna modificación y el puerto)
-$ ssh-keygen -R HOST (Otra forma de suprimir una clave de un host modificado)
-1.-
-Para ver la huella digital cada vez que se ingresa en un host remoto:
-# nano /etc/ssh/ssh_config
-Descomentar la linea y dejarla:
-VisualHostKey yes
+sshoot
+Interfaz de línea de comandos para gestionar múltiples sesiones VPN de sshuttle. Es básicamente un wrapper que permite guardar perfiles de configuraciones de sshuttle como host, subredes, opciones extra con un nombre, y luego arrancarlos/pararlos como si fueran sesiones de VPN con un simple alias.
+$ sshoot create trabajo -r usuario@vpn.empresa.com 10.10.0.0/16 (crear un perfil llamado "trabajo" que apunta a una red interna)
+$ sshoot create casa -r usuario@miserver.com --dns -e "ssh -i ~/.ssh/id_casa" 192.168.1.0/24 (Crear otro perfil, para casa, con opciones extra)
+$ sshoot list (ver los perfiles guardados)
+$ sshoot start trabajo (arrancar una sesión)
+$ sshoot status (ver el estado de las sesiones activas)
+$ sshoot stop trabajo (parar una sesión)
+$ sshoot show trabajo (ver los detalles/configuración de un perfil concreto)
+$ sshoot modify trabajo --dns (modificar un perfil existente)
+$ sshoot delete casa (eliminar un perfil)
 
 
 sshpass
@@ -58259,51 +58313,14 @@ $ sshpass -p 1234 ssh -t usuario@host "echo 1234 | sudo -S namp 192.168.1.0/24" 
 
 
 sshuttle
-Levanta VPNs con SSH y enruta tráfico a través de ellos
-# sshuttle -r usuario@servidor 0/0 (Ejecución básica para redireccionar la totalidad del tráfico)
+Proxy transparente que reenvía tráfico a través de una conexión SSH normal, sin necesitar configurar OpenVPN, IPsec, etc. Solo necesita acceso SSH a una máquina remota, con Python instalado y todo el tráfico que se defina se enruta por ese túnel. Funciona creando reglas de iptables/nftables que capturan el tráfico local y lo redirigen a un proceso que corre en el servidor remoto vía SSH, simulando una VPN a nivel de capa 3 sin ser una VPN "real".
+$ sshuttle -r usuario@servidor.com 0.0.0.0/0 (enrutar el tráfico [0.0.0.0/0] a través del servidor remoto)
+$ sshuttle -r usuario@servidor.com 10.0.0.0/8 192.168.1.0/24 (enrutar solo una subred concreta)
+$ sshuttle -r usuario@servidor.com -D --pidfile=/tmp/sshuttle.pid 0.0.0.0/0 (modo demonio en background y logs en fichero)
+$ sshuttle -r usuario@servidor.com --dns 0.0.0.0/0 (incluir también resolución DNS a través del túnel)
+$ sshuttle -r usuario@servidor.com:2222 -e "ssh -i ~/.ssh/mi_clave" 0.0.0.0/0 (usando una clave SSH específica y puerto no estándar)
 # sshuttle --dns -vvr usuario@servidor 0/0 (que las consultas DNS sean procesadas a través del servidor DNS del servidor al que se está conectado)
 # sshuttle --daemon usuario@servidor 0/0 --exclude 192.168.1.0/24 --exclude 90.173.123.64 (ejecutar el proceso en segundo plano y excluir una rango y una ip)
-
-
-ssdeep
-Calcula una firma basada en hashes fragmentarios activados por contexto, también conocidos como fuzzy hashes para cada archivo de entrada. Su objetivo es detectar archivos similares aunque no idénticos, no mostrar las diferencias línea a línea. ssdeep no hace un hash de todo el archivo de una vez como MD5 o SHA. En su lugar divide el archivo en trozos [chunks] de tamaño variable que se decide con un rolling hash que mira el contenido. Cuando el rolling hash detecta un punto de corte [trigger], cierra el trozo actual y empieza uno nuevo. De cada trozo se calcula un pequeño hash, normalmente 6 bits, que se codifica en Base64 y se concatenan todos esos pequeños hashes para obtener la firma fuzzy. Además genera dos firmas una con un blocksize y otra con el doble para poder comparar archivos de tamaños un poco diferentes.
-$ ssdeep lorem lorem2 (calcula el fuzzy hash de cada archivo y lo imprime)
-  	 ssdeep,1.1--blocksize:hash:hash,filename
-	 192:BptAG3oC+uXfptAG3oC+uXfptAG3oC+uXB:exucxucxuR,"/home/tux/AA2/2/lorem"
-	 192:B7tAG3oC+uXfptAG3oC+uXfptAG3oC+uXg:sxucxucxuQ,"/home/tux/AA2/2/lorem2"
-Tal como indica la salida el 192 es el tamaño de bloque siguen dos hash, el primero por el tamaño de bloques, el segundo por el doble de cantidad y el nombre del archivo.
-Nota.- A veces muestra: "Did not process files large enough to produce meaningful results" (No se procesaron archivos lo suficientemente grandes como para producir resultados significativos.)
-$ ssdeep -p lorem lorem2 (muestra la puntuación de similitud entre paréntesis y va de 0 a 100. Entre 90–100 son casi idénticos, entre 70–89, muy similares y < 50 similitud débil o nula)
-$ ssdeep lorem > hashes.txt (guardar un hash para comparar)
-$ ssdeep -m hashes.txt lorem2 (comparar el hash con otro archivo)
-$ ssdeep -r directorio/ (comparar los archivos de un directorio)
-$ ssdeep -d archivo1 archivo2 archivo3 archivo4 (comparar varios archivos)
-1.-
-Ejemplo muy simplificado del proceso
-Imaginemos un texto cortísimo:
-$ nano ejemplo.txt
-      Hola mundo como estas hoy
-La forma de actuar del comando ssdeep es, suponiendo un valor para blocksize = 3, los puntos de corte podrian ser:
-| Trozo | Contenido | Hash de 6 bits  | Carácter |
-|       |           | (simplificado)  |  Base64  |
-|-------|-----------|-----------------|----------|
-| 1     | Hola      | 12              | M        |
-| 2     | mundo     | 45              | t        |
-| 3     | como      | 7               | H        |
-| 4     | estas     | 28              | c        |
-| 5     | hoy       | 3               | D        |
-La firma principal con blocksize = 3 quedaría algo como:
-   	 3:MtHcD
-La segunda firma con blocksize doble [blocksize = 6] con menos trozos de corte:
-| Trozo | Contenido          | Hash  | Base64 |
-|-------|--------------------|-------|--------|
-| 1     | Hola mundo         | 33    | h      |
-| 2     | como estas hoy     | 19    | T      |
-Quedaría algo como:
-	 6:hT
-Y la salida de lanzar el comando ssdeep:
-     	 3:MtHcD:hT,"ejemplo.txt"
-Nota.- En los archivos reales ssdeep trabaja con bytes, los hashes son más largos y el blocksize se elige automáticamente según el tamaño del archivo.
 
 
 sslstrip
