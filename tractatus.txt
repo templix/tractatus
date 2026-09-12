@@ -58328,6 +58328,15 @@ Envoltorio de debconf para OpenSSL que permite la instalación no supervisada de
 # make-ssl-cert -f -x 2 generate-default-snakeoil (forzando reescritura si existe, -n para no reescribir y que expire a los 2 dias, por defecto 3650)
 
 
+ssl-cert-check
+Herramienta que verifica la validez y la caducidad de certificados digitales. También puede comprobar archivos de certificados locales [.crt, .pem ...] y servidores remotos accesibles a través de la red.
+$ ssl-cert-check -c /usr/share/ca-certificates/mozilla/ACCVRAXX1.crt (mostrar fecha de expiración de un certificado)
+$ ssl-cert-check -d /usr/share/ca-certificates/mozilla (verificar todos los archivos de un directorio)
+$ ssl-cert-check -i -c /etc/ssl/certs/f081611a.0 (imprimir el emisor del certificado)
+$ ssl-cert-check -S -d /etc/ssl/certs/ (imprimir información de validación del directorio)
+$ ssl-cert-check -t pem -c /usr/share/ca-certificates/mozilla/ (especificando el tipo de certificado para verificar el directorio)
+
+
 sslstrip
 Herramienta para engañar al usuario haciéndole pensar que se encuentra en un sitio de Internet con cifrado SSL [HTTPS], cuando en realidad todos los datos están siendo transmitidos en abierto [HTTP].
 Configuración de reenvío de paquetes IP:
