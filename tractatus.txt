@@ -58323,6 +58323,11 @@ $ sshuttle -r usuario@servidor.com:2222 -e "ssh -i ~/.ssh/mi_clave" 0.0.0.0/0 (u
 # sshuttle --daemon usuario@servidor 0/0 --exclude 192.168.1.0/24 --exclude 90.173.123.64 (ejecutar el proceso en segundo plano y excluir una rango y una ip)
 
 
+ssl-cert
+Envoltorio de debconf para OpenSSL que permite la instalación no supervisada de paquetes que requieren crear certificados SSL suministrando las variables de usuario correctas.
+# make-ssl-cert -f -x 2 generate-default-snakeoil (forzando reescritura si existe, -n para no reescribir y que expire a los 2 dias, por defecto 3650)
+
+
 sslstrip
 Herramienta para engañar al usuario haciéndole pensar que se encuentra en un sitio de Internet con cifrado SSL [HTTPS], cuando en realidad todos los datos están siendo transmitidos en abierto [HTTP].
 Configuración de reenvío de paquetes IP:
