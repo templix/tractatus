@@ -58344,6 +58344,37 @@ $ ssldump -An -i eth0 port 443 (mostrar todos los campos sin resolver nombres de
 $ ssldump -Hq -i enp1s0 port 443 and host deb (escuchar el tráfico dirigido al servidor deb en el puerto 443 de la interfaz especificada, mostrando cabecera completa y en modo silencioso)
 
 
+sslh
+Herramienta útil en entornos donde se necesita multiplexar, es decir, manejar varias conexiones de protocolos diferentes a través del mismo puerto. Esto es especialmente útil en escenarios donde el puerto 443 [HTTPS] está bloqueado por firewalls o ISPs, pero se quiere usar también para otros servicios como SSH, OpenVPN, tinc o XMPP. Incluye las herramientas sslh-ev y sslh-select.
+Ejemplo de configuración para aceptar HTTPS, SSH y OpenVPN en el puerto 443:
+# nano /etc/sslh/sslh.conf
+       listen = 0.0.0.0:443
+       user = sslh
+       timeout = 15
+       # Servicios a detectar
+       protocols = ssh,openvpn,https
+       # Mapeo de servicios
+       ssh = 127.0.0.1:22
+       openvpn = 127.0.0.1:1194
+       https = 127.0.0.1:443
+# systemctl status sslh.service (comprobar estado del servicio)
+Desde el lado del cliente se debe apuntar al puerto 443 en vez del 22:
+$ ssh -p 443 usuario@tuservidor.com
+Nota.- La herramienta sslh-ev es una versión ligera de sslh y sslh-select más compatible con sistemas antiguos.
+
+
+Sobre el comando "sslscan" ¿podrías explicar y poner ejemplos de uso? Según la descripción en debian es una "herramienta que permite consultar servicios SSL/TLS, como HTTPS e informa sobre las versiones del protocolo, los conjuntos de cifrado, los intercambios de claves, los algoritmos de firma y los certificados en uso."
+sslscan
+herramienta que permite consultar servicios SSL/TLS, como HTTPS e informa sobre las versiones del protocolo, los conjuntos de cifrado, los intercambios de claves, los algoritmos de firma y los certificados en uso.
+$ sslscan 127.0.0.1:80 (del puerto 80 de la propia máquina)
+$ sslscan localhost (de localhost)
+$ sslscan --show-certificates 127.0.0.1:443  (Muestre la cadena de certificados completa)
+$ sslscan --tlsall 127.0.0.1:443 (comprobar solo los cifrados TLS)
+$ sslscan --ssl3 127.0.0.1:443 (comprobar únicamente si SSLv3 está habilitado)
+$ sslscan --show-ciphers (cifrados que soporta el comando)
+Nota.- sslscan no explota nada pero genera muchas conexiones en poco tiempo y queda registrado en los logs del servidor.
+
+
 sslstrip
 Herramienta para engañar al usuario haciéndole pensar que se encuentra en un sitio de Internet con cifrado SSL [HTTPS], cuando en realidad todos los datos están siendo transmitidos en abierto [HTTP].
 Configuración de reenvío de paquetes IP:
