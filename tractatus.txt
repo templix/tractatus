@@ -20163,6 +20163,7 @@ $ francine (prueba sin efecto real)
 free
 Listar la memoria RAM y swap utilizada y disponible
 $ free -m (muestra los resultados en megabytes)
+$ watch -n 1 free -m (muestra el estado de la memoria en tiempo real)
 
 
 freeboard
@@ -58335,6 +58336,12 @@ $ ssl-cert-check -d /usr/share/ca-certificates/mozilla (verificar todos los arch
 $ ssl-cert-check -i -c /etc/ssl/certs/f081611a.0 (imprimir el emisor del certificado)
 $ ssl-cert-check -S -d /etc/ssl/certs/ (imprimir información de validación del directorio)
 $ ssl-cert-check -t pem -c /usr/share/ca-certificates/mozilla/ (especificando el tipo de certificado para verificar el directorio)
+
+
+ssldump
+captura el tráfico de una red y lo analiza en busca de tráfico SSLv3/TLS, utilizado habitualmente para proteger conexiones TCP. Al identificar dicho tráfico, decodifica los resultados.
+$ ssldump -An -i eth0 port 443 (mostrar todos los campos sin resolver nombres de host de lo que entre por el puerto 443 en la interfaz eth0)
+$ ssldump -Hq -i enp1s0 port 443 and host deb (escuchar el tráfico dirigido al servidor deb en el puerto 443 de la interfaz especificada, mostrando cabecera completa y en modo silencioso)
 
 
 sslstrip
