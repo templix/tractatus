@@ -58430,8 +58430,8 @@ Modificar las lineas:
 	UseSTARTTLS=YES
 	AuthUser=correo@gmail.com
 	AuthPass=Contraseña_del_usuario_de_gmail
-A continuación establecer permisos:
-# chmod 640 /etc/ssmtp/ssmtp.conf
+Una vez configurado ssmtp, el comando mail usará ssmtp automáticamente.
+# chmod 640 /etc/ssmtp/ssmtp.conf (A continuación establecer permisos)
 # chown root:mail /etc/ssmtp/ssmtp.conf
 Lanzar la aplicación:
 # ssmtp fulano@hotmail.com
@@ -58522,6 +58522,14 @@ $ ssss-split -x -t 2 -n 4 -w fal -s 64 (la entrada se hará en modo hexadecimal,
 $ ssss-combine -t 2 (se entran dos de los cuatro fragmentos del comando anterior y mostrará el secreto introducido)
 $ ssss-split -t 2 -n 6 -w mus -s 0 > secret (mandar los fragmentos a un archivo)
 Nota.- El nivel de seguridad [-s] va de 8 a 1024. Si se omite o se da valor 0 el nivel se elige automaticamente según la longitud del secreto. El nivel de seguridad determina directamente la longitud de los fragmentos.
+
+
+sstp-client
+implementación cliente del protocolo SSTP [Secure Socket Tunneling Protocol] para Linux y Mac OS X que permite el acceso remoto a un servidor Microsoft Windows 2008 a través de una VPN SSTP, un protocolo de túnel de red desarrollado por Microsoft. Especificar que Windows Server 2008 ya no es compatible ni soportado por Microsoft desde enero de 2020. Usar herramientas específicas para este sistema operativo en entornos modernos puede conllevar riesgos de seguridad, ya que no reciben actualizaciones de parches ni soporte técnico.
+# sstp-client --server vpn.ejemplo.com --user usuario --password contraseña (conexión básica)
+# sstp-client --server vpn.ejemplo.com --ca-file ca.pem --cert cliente.crt --key cliente.key (conexión con autenticación por certificado)
+# sstp-client --disconnect (desconectar)
+# kill $(pgrep sstp-client) (matar el proceso)
 
 
 sswap
