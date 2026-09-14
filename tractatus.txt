@@ -58514,6 +58514,16 @@ $ chmod +x tests.sh
 $ ./ tests.sh
 
 
+ssss
+Implementación del esquema de compartición de secretos de Shamir. El conjunto de programas realiza ambas funciones: la generación de fragmentos para un secreto conocido y la reconstrucción de un secreto a partir de fragmentos proporcionados por el usuario. El esquema de compartición de secretos de Shamir permite dividir un secreto en fragmentos. Estos fragmentos pueden distribuirse posteriormente entre distintas personas. Cuando llega el momento de recuperar el secreto, es necesario combinar un número predeterminado de dichos fragmentos. Tanto el número total de fragmentos creados como la cantidad necesaria para recuperar el secreto se definen en el momento de la división. Incluye las herramientas ssss-combine y ssss-split
+$ ssss-split -t 3 -n 5 -w pass -s 0 -Q (Pide secreto. Precisa 3 fragmentos para reconstruir el secreto de los 5 que se generaran, con prefijo "pass", nivel de seguridad automático y modo extra silencioso)
+$ ssss-split -t 3 -n 6 -w res -s 128 -q (Pide secreto. 3 fragmentos para reconstruir el secreto de los 6 que se generan, con prefijo "res" nivel de seguridad de 128 bits y modo silencioso)
+$ ssss-split -x -t 2 -n 4 -w fal -s 64 (la entrada se hará en modo hexadecimal, 2 fragmentos para reconstruir el secreto de los 4 generados, con prefijo "fal" y nivel de seguridad de 64 bits)
+$ ssss-combine -t 2 (se entran dos de los cuatro fragmentos del comando anterior y mostrará el secreto introducido)
+$ ssss-split -t 2 -n 6 -w mus -s 0 > secret (mandar los fragmentos a un archivo)
+Nota.- El nivel de seguridad [-s] va de 8 a 1024. Si se omite o se da valor 0 el nivel se elige automaticamente según la longitud del secreto. El nivel de seguridad determina directamente la longitud de los fragmentos.
+
+
 sswap
 [secure-delete]. Borrado seguro de swap. Previamente desactivar con swapoff /dev/sda7 y al finalizar el proceso volver a activarla con swapon /dev/sda7 [Si no sabemos donde se encuentra la swap: cat /proc/swaps. Argumentos paracidos a srm [ver] y sfill [ver]. El espacio se sobreescribe 38 veces.
 $ sswap -f /dev/sda7 (Modo rápido e inseguro)
