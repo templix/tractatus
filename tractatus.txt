@@ -58543,6 +58543,26 @@ Terminal simple.
 $ st -t Reiniciar -e sudo init 6 (Abrir un terminal st con título para entrar la contraseña y reiniciar)
 
 
+st-console
+Herramienta para calcular estadísticas a partir de un archivo o de la entrada estándar. Permite calcular: suma, media aritmética, mediana, percentil, cuartil, desviación estándar o error estándar.
+Supongamos un archivo llamado datos.txt con los siguientes números a uno por línea
+$ nano datos.txt
+       10.5
+       20
+       30.7
+       40.3
+       50
+$ st-console --mean --sum datos.txt (muestra la suma y la media)
+$ st-console --summary datos.txt (muestra resumen que incluye el mínimo, el máximo, la media, y el primer y tercer cuartil [q1 - q3])
+$ st-console --n datos.txt (cantidad de elementos de la muestra)
+$ st-console --var --sem --nh datos.txt (muestra la varianza, el error estandar de la media y si mostrar el encabezado en la salida)
+$ echo -e "10\n20\n30\n40\n50" | st-console --summary (introduciendo datos directamente desde el terminal)
+$ st-console --complete datos.txt (todas las estadísticas completas)
+$ st-console --percentile=90 datos.txt (desviación de la media)
+$ st-console --to --complete datos.txt (muestra el resultado en lineas)
+$ seq 1 100 | st-console --summary (redirigir la salida del 1 al 100 al comando)
+
+
 stalonetray
 Applet para albergar el area de notificación.
 $ stalonetray -bg #A78B5C -d title -geometry 6x1-0+0 -i 30 (con el color especificado [-bg], decoración de ventana [-d], las medidas [6x1] y la situación en pantalla [-0+0, abajo, derecha])
