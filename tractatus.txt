@@ -58412,6 +58412,14 @@ Visionar en tiempo real los paquetes capturados:
 #  tail -f archivo.log
 
 
+ssmping
+Verificar y probar conectividad multicast en redes IPv4 e IPv6. Existen dos modelos de Multicast: ASM [Any-Source Multicast], el modelo tradicional que actua en el rango 224.0.0.0/4 y cualquiera puede enviar a un grupo, y los receptores se suscriben al grupo y.rRequiere IGMPv2/v3 y SSM [Source-Specific Multicast], l modelo moderno que actua en el rango 232.0.0.0/8 en IPv4 y los receptores se suscriben a un Origen/Grupo específico. Es más seguro y eficiente, pero requiere IGMPv3 o MLDv2 en IPv6 y enrutadores que soporten SSM. Incluye los ejecutables asmping, mcfirst y ssmpingd
+# ssmpingd -I eth0 (iniciar el demonio. Escucha en el puerto UDP 4321. Cuando un cliente le contacta, empieza a enviar paquetes al grupo SSM por defecto en el rango 232.x.x.x9)
+# ssmping -I eth0 192.168.1.100 (lanzado por el cliente para verificar si se puede recibir tráfico SSM des un servidor. La Ip es la servidor donde se ha lanzado el demonio)
+# asmping -I eth0 239.1.1.1 (en ASM no se necesita un servidor centralizado dedicado. En este caso se une al grupo especificado)
+# mcfirst -I eth0 239.1.1.1 (probar si un switch está haciendo bien la "IGMP Snooping" [fusión de multicast], espera el primer paquete y se cierra)
+
+
 ssmtp
 [mailutils]. Herramienta que permite enviar correos a partir de un servidor externo (p.g gmail). Como remitente constará "root" ya que, en algunas distros, es quien tiene que enviar los correos. Ajustes en el archivo de configuración:
 # nano /etc/ssmtp/ssmtp.conf
