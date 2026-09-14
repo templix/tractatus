@@ -58478,12 +58478,12 @@ Si los comandos devuelven información de usuario válida, SSSD funciona correct
 
 
 ssshtest
-Pruebas de bash sencillas y estúpidas. ssshtest es una serie de funciones de bash que facilitan la ejecución de pruebas de bash. Incluye funciones para comprobar la igualdad, determinar si una cadena está en la salida estándar (stdout), no en la salida estándar (stdout) o en la salida estándar (stderr). El proceso puede mostrarse con ejemplo de uso:
+Pruebas de bash sencillas y estúpidas. ssshtest es una serie de funciones de bash que facilitan la ejecución de pruebas de bash. Incluye funciones para comprobar la igualdad, determinar si una cadena está en la entrada estándar (stdin), ho en la salida estándar (stdout) o en la salida de error (stderr). El proceso puede mostrarse con ejemplo de uso:
 $ nano tests.sh
         #!/bin/bash
         #
         source ssshtest
-        # Si "linux" stá en la salida:
+        # Si "linux" está en la salida:
         run test_in_stdout bash -c "echo 'linux es un sistema genial'"
         assert_in_stdout "linux"
         # si no existe salida de error
@@ -58540,7 +58540,9 @@ $ sswap -lv /dev/sda7 (Como lanzar dos veces sswap -f y mostrando el proceso)
 
 st
 Terminal simple.
-$ st -t Reiniciar -e sudo init 6 (Abrir un terminal st con título para entrar la contraseña y reiniciar)
+En un lanzador de comandos como grun introducir:
+      st -t Reiniciar -e sudo init 6 (Abrir un terminal st con título para entrar la contraseña y reiniciar)
+$ st -g 120x20 -f "Liberation Mono:size=13" (con detrminadas medidas y la fuente y medida especificada)
 
 
 st-console
