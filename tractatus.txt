@@ -58380,7 +58380,6 @@ Diseñado para llevar a cabo ataques de tipo man-in-the-middle (MITM) contra con
 $ sslsniff -a -c /ruta/a/ca -s 4433 -w /tmp/sslsniff.log (usar modo CA/Authority, certificado/clave de la CA, puerto donde intercepta SSL y fichero de log)
 
 
-Sobre el comando "" ¿podrías explicar y poner ejemplos de uso? Según la descripción en debian ""
 sslsplit
 Proxy de interceptación TLS para realizar ataques de tipo man-in-the-middle contra conexiones de red cifradas. Las conexiones se interceptan de forma transparente a través de un motor de traducción de direcciones de red y se redirigen a SSLsplit que finaliza la conexión SSL/TLS e inicia una nueva conexión SSL/TLS hacia la dirección de destino original, registrando al mismo tiempo todos los datos transmitidos.
 Una prueba a nivel local de su funcionamiento podría ser:
