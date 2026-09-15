@@ -58680,6 +58680,24 @@ $ statgrab -M | grep disk (espacio o transferencias de disco en Megabytes)
 $ statgrab -u proc.running (muestra número de procesos en ejecución)
 
 
+statserial
+muestra una tabla de las señales de un puerto serie RS-232 estándar de 9 o 25 pines e indica el estado de las líneas de control de flujo [handshaking] muy útil para depurar problemas con puertos serie, módems, cables null-modem, dispositivos industriales, etc ya que te permite ver en tiempo real qué señales están activas [status 1] o inactivas [status 0].
+# statserial (sin especificar el dispositivo muestra el por defecto: /dev/ttyS0, /dev/ttyS1, /dev/ttyUSB0, /dev/ttyAMA0... de forma continua. Ctrl-C para terminar el prrceso)
+# statserial -n (una sola lectua)
+Explicación de los conceptos de la salida:
+DTR [Data Terminal Ready] --> El ordenador indica que está encendido, conectado y listo para comunicarse [1].
+RTS [Request To Send] --> El dispositivo está listo para enviar datos al dispositivo remoto [1].
+CTS [Clear To Send] --> El dispositivo del otro extremo no ha dado permiso todavía para recibir datos. Esperará a que esta línea cambie a 1 antes de transmitir por la línea TxD.
+DSR [Data Set Ready] --> Entrada. El dispositivo está listo o apagado
+DCD [ Data Carrier Detect] --> conexión establecida con el otro extremo de la línea telefónica [1]
+RI [Ring Indicator] --> Entrada. Hay una señal entrante [1]
+FG, TxD, RxD, GND --> Puede que aparezcan con un guion (-) porque statserial no puede medir su estado. TxD y RxD transmiten datos binarios a alta velocidad [pulsos de 1s y 0s] mientras que FG y GND son las tomas de tierra físicas.
+Direction [computer] Indica si la señal sale del ordenador [out] o si el ordenador la recibe desde el dispositivo externo [in].
+Pin (25) / Pin (9) dice el número de pin correspondiente si se está usando un conector físico clásico DB25 [25 pines] o el estándar moderno DB9 [9 pines].
+# statserial -d /dev/ttyUSB0 (estado como número decimal)
+# statserial -x /dev/ttyAMA0 (estado en hexadecimal)
+
+
 status
 Verifica si un servicio está activo o no.
 $ status ssh
