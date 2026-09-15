@@ -16106,6 +16106,8 @@ env
 Muestra las variables de entorno
 $ env | grep DISPLAY
 $ env | grep PATH | tr ':' '\n'
+$ env -0 > /tmp/mi_entorno.env (guardar el entorno actual en un archivo)
+$ env --env0-from=/tmp/mi_entorno.env bash (restaurar el entorno desde el archivo y ejecutar un comando)
 $ env | grep XDG_ (listar todas las variables XDG)
 Algunas opciones para grep: SHELL, USER, KEYBOARD, LANG..
 
@@ -58664,6 +58666,20 @@ $ statcvs -d /ruta/al/repositorio -g lineas (crear gráficos de evolución tempo
 $ statcvs -d /ruta/al/repositorio -o /ruta/de/salida (generar todos los informes y gráficos en un directorio de salida)
 
 
+statgrab
+Proporciona acceso a las estadísticas del sistema [CPU, memoria, interfaces de red, discos, procesos, etc.] mediante una interfaz al estilo sysctl que aplica métricas de forma jerárquica con claves separadas por puntos al estilo: clave.subclave = valor, por ejemplo net.ipv4.ip_forward = 1.
+$ statgrab (muestra todas las métricas disponibles)
+$ statgrab -l (lo mismo con formato etilo linux que es el por defecto)
+$ statgrab -b (lo mismo es estilo BSD)
+$ statgrab -u (solo muestra los valores. Ideal para scripts)
+$ statgrab -l | grep ^cpu (muestra el uso de CPU espresado en porcentajes)
+$ statgrab -l | grep ^mem (estadísticas de memoria)
+$ statgrab -G -l | grep ^mem (lo mismo con salida en Gigabytes. -M la muestra en Megabytes)
+$ statgrab -u mem.free (solo ver los bytes libres de RAM)
+$ statgrab -M | grep disk (espacio o transferencias de disco en Megabytes)
+$ statgrab -u proc.running (muestra número de procesos en ejecución)
+
+
 status
 Verifica si un servicio está activo o no.
 $ status ssh
@@ -61714,18 +61730,19 @@ $ unalias -a (Suprime todos los alias)
 
 
 uname
-Informa de la ...
-$ uname -a (... versión instalada del kernel y otros datos)
-$ uname -m (... arquitectura de la máquina)
-$ uname -r (... versión instalada del kernel)
+Informa de estructura de la máquina
+$ uname -a (versión instalada del kernel y otros datos)
+$ uname -m (arquitectura de la máquina)
+$ uname -r (solo la versión instalada del kernel)
+$ uname --all-labeled (muestra la información del sistema en un formato más claro y etiquetado, con cada valor presentado en una línea separada)
 
 
 unar
 Extraer archivos de un paquete.
-        $ unar bashrc.tar
-        bashrc.tar: Gzip
-          bashrc... OK.
-          Successfully extracted to "./bashrc".
+$ unar bashrc.tar
+       bashrc.tar: Gzip
+       bashrc... OK.
+       Successfully extracted to "./bashrc".
 
 
 unattended-upgrades
