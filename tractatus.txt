@@ -58656,6 +58656,14 @@ $ stat / | awk '/Naixement: /{print $2 " " substr($3,1,5)}' (fecha de instalaci�
 Nota.- Si la instalación fue en castellano sustituir "Naixement" por "Creación" o "Bird" si en inglés)
 
 
+statcvs
+Herramienta de análisis estadístico diseñada para repositorios CVS [Concurrent Versions System] que genera informes y diversas tablas y gráficos que describen el desarrollo del proyecto, incluyendo métricas como la cantidad de líneas de código, contribución de desarrolladores, cambios en archivos, entre otros.
+$ statcvs -d /ruta/al/repositorio (generar un informe completode un repositorio CVS)
+$ statcvs -d /ruta/al/repositorio -c contribucion (generar un informe de contribución por desarrollador)
+$ statcvs -d /ruta/al/repositorio -g lineas (crear gráficos de evolución temporal de líneas de código)
+$ statcvs -d /ruta/al/repositorio -o /ruta/de/salida (generar todos los informes y gráficos en un directorio de salida)
+
+
 status
 Verifica si un servicio está activo o no.
 $ status ssh
