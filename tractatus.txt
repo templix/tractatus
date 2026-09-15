@@ -58633,6 +58633,12 @@ Iniciar sesión de escritorio LXDE. Por defecto, carga openbox, lxpanel, pcmanfm
 $ startlxde
 
 
+startpar
+ejecutar procesos en paralelo y multiplexar su salida. Utilizado por el ejecutor del sistema de arranque sysv-rc para ejecutar scripts de init.d en paralelo, asegurando al mismo tiempo que la salida de los scripts no se mezcle de forma caótica. Es una herramienta auxiliar del sistema de inicialización tradicional SysV init, su instalación en sistemas que utilizan systemd no es aconsejable ya que es muy probable que /sbin/init sea eliminado o quede en estado incorrecto y el sistema no pueda arrancar correctamente. Systemd y sysv init son sistemas de inicialización que se excluyen mutuamente. startpar es una herramienta interna que normalmente no se invoca de forma manual pero puede usarse en un entorno de prueba.
+$ startpar -p 4 /etc/rc2.d/ start (ejecutar 4 procesos simultaneos en el arranque)
+$ startpar -M start (utilizar el modo similar a make para procesar automàticament les dependències)
+
+
 startx
 Arrancar sistema gráfico
 $ startx -- :1 (una segunda sesión gráfica accesible en ^Alt + F8)
