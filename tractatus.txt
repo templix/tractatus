@@ -31172,15 +31172,20 @@ Nota.- Los gobernadores de frecuencia son algoritmos que deciden cómo escalar l
 # cpupower frequency-set -f 1.5GHz (establece la frecuencia de la CPU a 1.5 GHz. Se puede usar unidades como Hz, KHz, MHz, GHz)
 # cpupower idle-info (muestra los C-states [estados de inactividad] soportados por la CPU y las estadísticas de uso de cada uno)
 # cpupower idle-set -d 3 (deshabilitaría el C-state 3. Cuidado al modificar estas configuraciones, ya que pueden afectar el consumo de energía y la estabilidad del sistema)
+# intel-speed-select perf-profile info (comprobar si el procesador soporta tecnologias SST-PP [apagar algunos nucleos para que los restantes funionen más rápido] y SST-CP [asignar prioridad a algunos nucleos])
 # turbostat (que informe cada 5 segundos con datos como la frecuencia, el porcentaje de tiempo en diferentes C-states, la temperatura del núcleo y el consumo de energía)
+# turbostat --Summary 1 (resumen rápido y limpio del procesador sin desglosar nucleo por nucleo)
 # turbostat -i 10 (monitorizar estadísticas con un intervalo específico [cada 10 segundos])
 # turbostat --out ts.log sleep 60 (medir el impacto de un proceso específico. Ejecutar sleep 60 y luego guardar todas las estadísticas recopiladas durante ese tiempo en el archivo ts.log)
 # turbostat --quiet --show "PkgWatt","Busy%","Core","CoreTmp" -i 1 (mostrar métricas específicas: consumo de energía del paquete, el porcentaje de ocupación, el número de núcleos y temperatura del núcleo, actualizándose cada segundo y sin el encabezado inicial)
 # x86_energy_perf_policy --cpu all (mostrará el valor EPB [Energy-Performance Bias] actual para cada CPU)
 # x86_energy_perf_policy --cpu all --epb performance (indicará al procesador que priorice el rendimiento para todas las CPUs)
-Otras opciones: performance [máximo ahorro de energia y menos rendimiento], balance-performance, normal, balance-power y power [menos ahorro de energía y máximo rendimiento].
+Otras opciones: performance [mímino ahorro de energia y más rendimiento], balance-performance, normal, balance-power y power [más ahorro de energía y mínimo rendimiento].
 # x86_energy_perf_policy --cpu 0 --epb power (establecerá el EPB de la CPU 0 a "power", equivalente a 15, priorizando el ahorro de energía para ese núcleo)
 # x86_energy_perf_policy --hwp-enable 1 (habilitar Turbo Boost si está soportado. Una vez habilitado, a menudo requiere un reinicio del sistema para deshabilitarse)
+# x86_energy_perf_policy -r (configuración de la política actual de la CPU)
+# x86_energy_perf_policy balance-power (configurar la CPU para ahorrar energia)
+# x86_energy_perf_policy performance (configurar la CPU al máximo rendimiento. Por defecto "normal")
 # x86_energy_perf_policy --turbo-enable 0 (deshabilitar Turbo Boost)
 Nota.- Deshabilitar Turbo Boost puede reducir el consumo de energía y la temperatura máxima, a costa de un rendimiento máximo menor.
 En sistemas Intel modernos, el controlador intel_pstate es a menudo el predeterminado y el más eficiente para gestionar la frecuencia. Si se necesita un control más manual, por ejemplo, para usar el gobernador userspace, a veces es necesario deshabilitar intel_pstate en el arranque del kernel y usar acpi-cpufreq en su lugar. La forma básica para deshabilitarlo es:
