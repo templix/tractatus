@@ -40419,6 +40419,17 @@ Actualiza la hora del sistema via NTP (Network Time Protocol). Incluye los ejecu
 # ntpdate-debian (sin especificarlo)
 
 
+num-utils
+Conjunto de programas para manejar números desde la línea de comandos. Al igual que otras utilidades de línea de comandos, como grep, awk, sort, cut o etc estas utilidades funcionan con datos tanto de archivos estándar como de archivos. Inclye los siguientes ejecutables: numaverage [programa para calcular el promedio de números],  numbound [encuentra los números de límite mínimo y máximo de la entrada], numinterval [Muestra los intervalos numéricos entre cada número de una secuencia], numnormalize [Normaliza un conjunto de números entre 0 y 1 de forma predeterminada], numgrep [Como grep normal, pero para conjuntos de números], numprocess [Realiza operaciones matemáticas con números], numsum [Suma todos los números], numrandom [Genera un número aleatorio a partir de una expresión dada], numrange [Genera un conjunto de números en una expresión de rango] y numround [Redondea cada número según su valor]
+
+
+numactl
+herramienta que se utiliza para controlar la política NUMA [Non-Uniform Memory Access] de acceso no uniforme a la memoria para procesos y memoria compartida. Si solo existe un nodo, no se precisa utilizar el comando numactl para optimizar el rendimiento per optimitzar el rendiment.
+$ numactl -H --cpu-compress (muestra los rangos de CPU)
+$ numactl -H (comprobar cuantos nodos NUMA tiene el servidor y como están distribuidos los nucleos y la memoria)
+$ numactl -s (muestra el inventario de nodos disponibles en el sistema)
+
+
 number
 [bsd-games]. Muestra como se muestran los números en inglés.
 $ number -l 55
@@ -40443,10 +40454,6 @@ $ numfmt --from=auto --to=iec 1T
 numlockx
 Activar el bloqueo numerico al inicio:
 $ numlockx on/off  (activarlo/desactivarlo)
-
-
-num-utils
-Conjunto de programas para manejar números desde la línea de comandos. Al igual que otras utilidades de línea de comandos, como grep, awk, sort, cut o etc estas utilidades funcionan con datos tanto de archivos estándar como de archivos. Inclye los siguientes ejecutables: numaverage [programa para calcular el promedio de números],  numbound [encuentra los números de límite mínimo y máximo de la entrada], numinterval [Muestra los intervalos numéricos entre cada número de una secuencia], numnormalize [Normaliza un conjunto de números entre 0 y 1 de forma predeterminada], numgrep [Como grep normal, pero para conjuntos de números], numprocess [Realiza operaciones matemáticas con números], numsum [Suma todos los números], numrandom [Genera un número aleatorio a partir de una expresión dada], numrange [Genera un conjunto de números en una expresión de rango] y numround [Redondea cada número según su valor]
 
 
 nuspell
@@ -58822,13 +58829,22 @@ $ streamrippwer http://yp.shoutcast.com/sbin/tunein-station.pls?id=321414 -l 400
 
 
 stress
-Herramientas para realizar un test de carga del sistema.
-# stress -c 8 -i 4 -m 2 --vm-bytes 128M -t 20S
-Opciones:
--c (8 multiples ciclos infinitos de raices cuadradas para la cpu)
--i (Introduce 4 ciclos infinitos que ejecutan la llamada al sistema sync())
---hdd-bytes 3G (carga de escritura en disco de 3G. Opciones: B,K,M,G)
--t 20s (Tiempo que durará el proceso, 20 segundos. Opciones: s,m,h,d,y)
+Herramientas para realizar un test de carga del sistema, diseñada para generar carga artificial, pero no mide nada, solo dice si se han podido crear los procesos correctamente y si el sistema ha aguantado el tiempo especificado [10s].
+# stress -c 6 -t 10s (forma básica para 6 CPU durante 10 segundos)
+# stress -c 6 -i 4 --hdd-bytes 3G -t 10s (introduce 4 ciclos infinitos que ejecutan la llamada al sistema sync y con carga de escritura en disco de 3G)
+
+
+stress-ng
+Herramienta para someter a un equipo a carga y pruebas de estrés
+$ stress-ng --cpu 6 --cpu-method matrixprod -t 10s --metrics-brief
+$ stress-ng --vm 8 --vm-bytes 80% -t 1h  (ejecuta 8 procesos de estrés de memoria virtual que, en conjunto, utilizan el 80 % de la memoria disponible durante 1 hora)
+$ stress-ng --vm 50% -t 1h (ejecuta procesos de estrés de memoria virtual sobre el 50 % del número de CPU activas durante 1 hora)
+$ stress-ng --vm 200% -t 1h (ejecuta pruebas de estrés de memoria virtual en un número de procesos igual al doble de las CPU activas durante 1 hora)
+$ stress-ng --cpu 4 --io 2 --vm 1 --vm-bytes 1G --timeout 60s (se ejecuta durante 60 segundos con 4 procesos de estrés de CPU, 2 de E/S y 1 de memoria virtual [VM] utilizando 1 GB de memoria virtual)
+$ stress-ng --with cpu,matrix,vecmath,fp --seq 8 -t 1m (ejecuta 8 instancias de los estresores cpu, matrix, vecmath y fp secuencialmente, uno tras otro, durante 1 minuto por estresor)
+$ stress-ng --with cpu,matrix,vecmath,fp --permute 5 -t 10s (ejecuta permutaciones de 5 instancias de los estresores cpu, matrix, vecmath y fp secuencialmente, uno tras otro, durante 10 segundos por cada combinación de permutación)
+$ stress-ng --cpu 8 --cpu-ops 800000 (ejecuta 8 estresores de CPU y se detiene tras 800.000 operaciones "bogo")
+$ stress-ng --cpu 4 --cpu-method fft --cpu-ops 10000 --metrics-brief (ejecuta 4 procesos de estrés de CPU mediante FFT, se detiene tras 10.000 operaciones «bogo» y genera un resumen únicamente con los resultados de FFT)
 
 
 stressant
