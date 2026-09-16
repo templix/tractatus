@@ -32413,9 +32413,10 @@ Lanzar como root:
 
 
 lspci
-Para averiguar todos los dispositivos pci
+Para averiguar todos los dispositivos pci.
 $ lspci | grep Ethernet  (listar dispositivos pci relacionados con la red)
 $ lspci | grep VGA   (conocer la tarjeta gráfica)
+$ lspci -nnk (ver dispositivos PCIe y sus controladores: interfaces de red, controladoras RAID, adaptadores Fibre Channel, GPU ...)
 
 
 lspcmci
