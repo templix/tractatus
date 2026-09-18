@@ -58785,6 +58785,12 @@ $ stdsyslog -p archivo (archivo en el que escribir el ID)
 $ stdsyslog -p archivo -d 1:alert -d 2:crit -d 3:info programa
 
 
+stegcracker
+Utilidad de fuerza bruta para esteganografía destinada a descubrir datos ocultos en archivos. Su función principal es probar combinaciones de contraseñas o claves para descifrar datos ocultos en archivos que han sido modificados con herramientas como steghide, outguess, u otras que permiten esconder información dentro de imágenes, audio u otros archivos.
+$ stegcracker -o resultado file.jpg rockyou.txt (usar el diccionarios rockyou.txt [https://github.com/RykerWilder/rockyou.txt] sobre file.jpg y guardar la salida en "resultado")
+$ steghide info imagen.jpg (información sobre un .jpg. Pregunta "¿Intentar obtener información sobre los datos incrustados? (s/n)" responder "s")
+
+
 steghide
 Detectar y extraer mensajes incrustados dentro de una imagen o música
 $ steghide embed -cf imagen.jpg -ef archivo_texto  (incrustar un texto en una imagen)
