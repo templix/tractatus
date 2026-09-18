@@ -58758,6 +58758,19 @@ Verifica si un servicio está activo o no.
 $ status ssh
 
 
+stda
+[Simple Tools for Data Analysis]. Conjunto de utilidades diseñadas para realizar análisis básicos de series de datos numéricos unidimensionales como calcular sumas, promedios, integrales, derivadas e histogramas o distribuciones de datos numéricos unidimensionales, así como para representar gráficamente los resultados. Resultan especialmente útiles para análisis directos de series numéricas en los que no se requiere un enfoque analítico complejo. Incluye las herramientas maphimbu, mintegrate, mmval, muplot, nnum y prefield
+$ nnum 10 (genera números del 0 al 10)
+$ nnum 20 14 -2 (genera del 20 al 14 descontando 2 cada vez)
+$ echo -e "1\n2\n3\n4\n5" | mintegrate (calcular la suma)
+$ echo -e "1 1\n2 5\n3 4\n4 2\n5 1" | mintegrate -y2 (sumar los números de la segunda columna. -y1 para sumar los de la primera)
+$ echo -e "10\n25\n5\n50\n15" | mmval (encontrar mínimo y máximo)
+$ echo -e "1.2\n1.5\n1.8\n2.1\n2.4" | maphimbu -d0.5 > histograma (crear un histograma de frecuencias con ancho del bin 0.5 [tamaño])
+# maphimbu -rs2 /var/log/apache2/access.log (analizar un logfile de Apache para obtener una lista única de hosts ordenada por número de peticiones. -rs2  indica contar la frecuencia de aparición de los valores en la segunda columna)
+$ nnum -3.14159 3.14159 0.00001 "sin(x)" "%.17f %.7f" | maphimbu -d0.01 -x1 -ns1 | mintegrate -d0.01 -x1 -y3 -S (un ejemplo combinado)
+Nota.- Las  herramientas de stda no están diseñadas para precisión numérica extrema con números de punto flotante, son ideales para análisis exploratorios rápidos, no para análisis estadísticos rigurosos y requieren que los datos estén en formato de texto plano, una columna por valor o múltiples columnas separadas por espacios/tabs
+
+
 stdbuf
 Ejecutar comandos con operaciones modificadas para almacenamiento en búfer.
 $ tail -f /var/log/apache2/access.log | stdbuf -oL cut -d ' ' -f1 (ver accesos únicos)
