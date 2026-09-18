@@ -58743,6 +58743,16 @@ $ hashcat --stdout --markov-hcstat --markov-disable-entropy --markov-classic 10-
 $ sp64 diccionario.hcstat -o candidatas.txt (usar statsprocessor)
 
 
+statsvn
+Herramienta de análisis de código fuente basada en Java que procesa el historial de logs de un repositorio Subversion [SVN] y genera un sitio web estático completo [HTML] repleto de gráficos, estadísticas, métricas sobre la evolución del proyecto, líneas de código a lo largo del tiempo, la contribución de cada desarrollador, la evolución de módulos, directorios y archivos, los horarios y días en que se realizan la mayoría de las confirmaciones [check-ins], etc. Para funcionar correctamente, StatSVN necesita dos cosas en la máquina local: Una copia de trabajo [working copy] local del repositorio SVN y un archivo de texto con el historial de logs del repositorio generado con el comando de Subversion.
+$ svn update (estando dentro del directorio, obtener o actualizar la copia local)
+$ svn log --xml -v > svn.log (extraer el registro de cambios en formato XML o texto plano paso es imprescindible porque StatSVN analiza este archivo)
+$ statsvn svn.log (genera el informe HTML en el directorio donde se ejecuta el comando)
+$ statsvn -output-dir ./reporte_stats svn.log (genera el informe en el directorio especificado)
+$ statsvn -exclude "**/vendor/**;**/doc/**" svn.log (excluir directorios de documentación o librerías externas para no distorsionar las métricas de líneas de código)
+$ statsvn -include "**/trunk/**" svn.log (incluir solo una rama o subdirectorio)
+
+
 status
 Verifica si un servicio está activo o no.
 $ status ssh
