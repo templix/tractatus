@@ -36188,8 +36188,13 @@ mmsd-tng
 
 mmv
 Cambiar el sufijo del nombre de los archivos.
+$ mmv -n 'file-*.log' 'archivado-#1.log' (muestra el cambio sin llevarlo a efecto)
+$ mmv 'file-*.log' 'archivado-#1.log' (efectua el cambio)
+$ mmv '*.log' '#1.log.bak' (convertir todos los .log del directorio actual en .log.bak)
+$ mmv '*.txt' '#1.log' (renombrar todos los .txt del directorio a .log)
+$ mmv -x -v 'reporte-*.csv' 'copia-reporte-#1.csv' (realizar una copia conservando los originales)
 $ mmv "*.PNG" "#1.png"   (Renombrar todas las extensiones "PNG" a "png", conservándose el nombre que las precede.)
-$ mmv ";*.abc" "#1#2.cba" (Renombrar todas las extensiones "PNG" a "png" del directorio actual y sus subdirectorios)
+$ mmv ";*.abc" "#1#2.cba" (Renombrar todas las extensiones "abc" a "cba" del directorio actual y sus subdirectorios)
 # mmv “/;*.PNG” “#1#2.png” (Renombrar todos los ficheros del sistema)
 $ mmv "*.flv.mpg" "#1.mpg" (Renombrar todos los archivos terminados en .flv.mpg a .mpg)
 
@@ -58711,6 +58716,33 @@ Pin (25) / Pin (9) dice el número de pin correspondiente si se está usando un 
 # statserial -x /dev/ttyAMA0 (estado en hexadecimal)
 
 
+statsprocessor
+Herramienta especializada en la generación de palabras candidatas utilizando cadenas de Markov por posición. Está diseñada para trabajar con archivos en formato .hcstat, que son archivos estadísticos generados por herramientas como Hashcat [ver]. Estos archivos contienen información sobre la frecuencia y probabilidad de transición entre caracteres en un diccionario de entrada. Incluye los ejecuables sp32 y sp64. Un archivo con 14 millones de contraseñas se puede descargar de https://github.com/RykerWilder/rockyou.txt.
+$ sp64 --pw-min 5 --pw-max 5 hashcat.hcstat ?l?l?l?l?l | head -20 (mostrar las 20 primeras palabras de longitud máxima y mínima de 5 caracteres y usando solo letras manúsculas [l?])
+Las máscaras habituales:
+       ?l = a-z
+       ?u = A-Z
+       ?d = 0-9
+       ?s = símbolos (!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~)
+       ?a = todos los anteriores
+       ?h / ?H = hex
+       ?1 ... ?4 = charsets personalizados definidos con -1, -2, etc.
+       ?D = Alfabeto alemán
+       ?F = Alfabeto francés
+       ?R = caracteres rusos
+$ sp64 --pw-min 6 --pw-max 8 --threshold 16 hashcat.hcstat ?l?l?l?l?l?l?l?l > candidatos.txt (longitudes de 6 a 8 caracteres, con umbral bajo, más selectivo y mandarlo a un archivo)
+$ sp64 --pw-min 8 --pw-max 8 -1 ?l?d hashcat.hcstat ?1?1?1?1?1?1?1?1 (solo letras y algunos números)
+$ sp64 --combinations --pw-min 8 --pw-max 8 -t 20 hashcat.hcstat ?l?l?l?l?l?l?l?l (calcular cuántas combinaciones generaría sin generarlas)
+$ sp64 --pw-min 8 --pw-max 8 hashcat.hcstat ?l?l?l?l?l?l?l?l | aircrack-ng -w - captura.cap (Mandar a otro programa [aircrack-ng])
+1.-
+Ejemplo de descargar y preparar un diccionario
+$ git clone https://github.com/danielmiessler/SecLists.git (clonar SecLists)
+$ cd SecLists/Passwords (navegar a la carpeta de contraseñas)
+Seleccionar un diccionario por ejemplo Common-Credentials/10-million-password-list-top-10000.txt.
+$ hashcat --stdout --markov-hcstat --markov-disable-entropy --markov-classic 10-million-password-list-top-10000.txt > diccionario.hcstat (generar el archivo .hcstat)
+$ sp64 diccionario.hcstat -o candidatas.txt (usar statsprocessor)
+
+
 status
 Verifica si un servicio está activo o no.
 $ status ssh
@@ -65162,7 +65194,7 @@ xscreensaver
 [xscreensaver-screensaver-bsod]. Colección de salvapantallas. El paquete incluye el modo BSOD que muestra las populares Pantallas Azules de la Muerte de varios sistemas operativos.
 $ ls /usr/libexec/xscreensaver/ (Listar todas las opciones)
 $ /usr/libexec/xscreensaver/distort (Lanzando la opción distort)
-$ /usr/libexec/xscreensaver//bsod
+$ /usr/libexec/xscreensaver/bsod
 
 
 xsel
