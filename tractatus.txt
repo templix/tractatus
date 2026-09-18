@@ -58798,6 +58798,13 @@ $ steghide embed -cf archivo.wav -ef archivo_texto (incrustar un texto en un arc
 $ steghide extract -sf imagen.jpg  (extraer el archivo incrustado)
 
 
+stegosuite
+Herramienta de esteganografía para ocultar información en archivos de imagen. Los datos incrustados se cifran mediante AES y actualmente, los formatos de archivo compatibles son BMP, GIF, JPG y PNG.
+$ stegosuite embed -m "linux es genial" -k pass77 imagen.png (incrustar en una imagem una frase y especificar una contraseña. Crea imagen_embed.png)
+$ stegosuite extract -k pass77 imagen_embed.png (extraer el texto incrustado en la imagen generada)
+$ stegosuite capacity imagen.png (muestra la cantidad máxima de datos insertables)
+
+
 step
 Herramienta para construir, operar y automatizar sistemas y flujos de trabajo de Infraestructura de clave pública [PKI]. step actúa como interfaz front-end para Certificate Manager y step-ca, una autoridad de certificación [CA] X.509 y SSH en línea.
 $ wget https://dl.smallstep.com/cli/docs-cli-install/latest/step-cli_amd64.deb
