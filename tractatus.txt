@@ -58821,6 +58821,15 @@ $ stegsnow -C -p "213879" foto_steg.jpg (extraer el mensaje ocultado con contras
 $ stegsnow -C -Q -f file.txt foto.jpg foto_steg.jpg (ocultar el contenido de un archivo y en modo silencioso)
 
 
+stenc
+Gestor de cifrado de cintas SCSI [Small Computer System Interface]. stenc gestiona el cifrado en unidades de cinta LTO compatibles que cuentan con cifrado por hardware. Las cintas SCSI son unidades de almacenamiento de datos en cinta magnética que se conectan al ordenador o servidor mediante una interfaz SCSI. Es una tecnología antigua que ha quedado en desuso o ha sido reemplazada por interfaces más modernas como SAS, USB o almacenamiento en red.
+$ mt -f /dev/nst0 status (muestra si hay una cinta dentro, si está protegida contra escritura y la posición actual)
+$ mt -f /dev/nst0 rewind (regresa la cinta al inicio absoluto de la secuencia física)
+$ mt -f /dev/nst0 fsf 1 (pasa al siguiente bloque guardado)
+$ mt -f /dev/nst0 bsf 1 (retrocede a la marca de archivo anterior)
+$ mt -f /dev/nst0 offline (rebobina por completo la cinta y la expulsa físicamente de la lectora)
+
+
 step
 Herramienta para construir, operar y automatizar sistemas y flujos de trabajo de Infraestructura de clave pública [PKI]. step actúa como interfaz front-end para Certificate Manager y step-ca, una autoridad de certificación [CA] X.509 y SSH en línea.
 $ wget https://dl.smallstep.com/cli/docs-cli-install/latest/step-cli_amd64.deb
