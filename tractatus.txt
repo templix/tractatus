@@ -58805,6 +58805,22 @@ $ stegosuite extract -k pass77 imagen_embed.png (extraer el texto incrustado en 
 $ stegosuite capacity imagen.png (muestra la cantidad máxima de datos insertables)
 
 
+stegseek
+Descifrador de archivos cifrados con Steghide que permite extraer datos ocultos de archivos. Esta bifuración [fork] del proyecto original Steghide es miles de veces más rápido que otros descifradores y capaz de procesar millones de contraseñas por segundo. Stegseek también permite extraer metadatos de Steghide sin necesidad de contraseña, lo que sirve para comprobar si un archivo contiene datos ocultos mediante esta herramienta.
+$ stegseek --seed -sf foto.jpg salida (descifrar un archivo esteganográfico probando todos los patrones de incrustación y guardarlo en "salida")
+$ stegseek --crack -a -sf foto.jpg --wl dic.txt salida (Descifrar un archivo esteganográfico utilizando un diccionario [modo por defecto] y simplificando la salida [-a] para que sea más accesible para los lectores de pantalla)
+
+
+stegsnow
+Esta utilidad permite ocultar mensajes en texto ASCII añadiendo espacios en blanco al final de las líneas. Dado que los espacios y las tabulaciones generalmente no son visibles en los visores de texto, el mensaje queda oculto a la vista de observadores casuales. Además, si se utiliza el cifrado integrado, el mensaje no podrá leerse aunque llegue a detectarse.
+$ stegsnow -S -l 75 foto.jpg (mostrar la capacidad de almacenamiento aproximada de un archivo a 75 caracteres la linea)
+$ stegsnow -C -m "Linux es genial" -p "213879" foto.jpg foto_steg.jpg (ocultar mensaje en foto.jpg comprimiéndolo y cifrándolo [-C], con contraseña 213879 y resultado guardar en foto_steg.jpg)
+$ stegsnow -C foto_steg.jpg (extraer el mensaje si no se ha entrado contraseña al ocultarlo)
+$ stegsnow -C -l 75 -m "Linux es genial" foto.jpg foto_steg.jpg (comprimir un mensaje a 75 caracteres la linea)
+$ stegsnow -C -p "213879" foto_steg.jpg (extraer el mensaje ocultado con contraseña)
+$ stegsnow -C -Q -f file.txt foto.jpg foto_steg.jpg (ocultar el contenido de un archivo y en modo silencioso)
+
+
 step
 Herramienta para construir, operar y automatizar sistemas y flujos de trabajo de Infraestructura de clave pública [PKI]. step actúa como interfaz front-end para Certificate Manager y step-ca, una autoridad de certificación [CA] X.509 y SSH en línea.
 $ wget https://dl.smallstep.com/cli/docs-cli-install/latest/step-cli_amd64.deb
