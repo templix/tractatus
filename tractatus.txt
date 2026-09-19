@@ -58830,6 +58830,18 @@ $ mt -f /dev/nst0 bsf 1 (retrocede a la marca de archivo anterior)
 $ mt -f /dev/nst0 offline (rebobina por completo la cinta y la expulsa físicamente de la lectora)
 
 
+stenographer
+Utilidad de captura completa de paquetes diseñada para almacenar paquetes en disco con fines de detección de intrusiones y respuesta ante incidentes. Ofrece una implementación de alto rendimiento para la escritura de paquetes desde la tarjeta de red (NIC) al disco, gestiona la eliminación de archivos a medida que el disco se llena y proporciona métodos para recuperar rápida y fácilmente conjuntos específicos de paquetes. El archivo de configuración está en /etc/stenographer/config.
+$ sudo STENOREAD_HOST="127.0.0.1:1234" stenoread "host 192.168.17.18 and after 2026-09-19T20:00:00Z" -w captura_2.pcap (Capturar el tráfico del host de la última hora en un archivo pcap)
+$ sudo STENOREAD_HOST="127.0.0.1:1234" stenoread "port 80 and after 2026-09-19T20:00:00Z" -w captura_3.pcap (capturar el tráfico de un puerto la última hora y mandarlo a un archivo pcap)
+$ sudo stenoread "port 80 and before 2026-09-19T10:00:00Z and after 2026-09-19T09:00:00Z" (buscar tráfico hacia un puerto concreto en un rango de tiempo absoluto)
+$ sudo stenoread "net 10.0.0.0/24 and icmp" (buscar un protocolo específico procedente de una subred)
+$ sudo stenoread 'host 192.168.17.18 and port 1234' -w captura_4.pcap
+$ sudo stenoread 'host 127.0.0.1 and port 1235' 'tcp and port 80' -w captura_5.pcap (capturar el tráfico por el puerto 80 de localhost)
+$ sudo stenoread "host 192.168.18.17 and port 80' 'tcp and before 60m" -w captura_6.pcap (capturar el tráfico por el puerto 80 hasta 60 minutos antes)
+$ sudo stenoread "host 192.168.18.17 and port 80' 'tcp and after 120m" -w captura_7.pcap (capturarlo de los últimos 120 minutos)
+
+
 step
 Herramienta para construir, operar y automatizar sistemas y flujos de trabajo de Infraestructura de clave pública [PKI]. step actúa como interfaz front-end para Certificate Manager y step-ca, una autoridad de certificación [CA] X.509 y SSH en línea.
 $ wget https://dl.smallstep.com/cli/docs-cli-install/latest/step-cli_amd64.deb
