@@ -61315,16 +61315,25 @@ Inicializa los valores de la terminal. Ver reset.
 
 tshark
 [wireshark en modo consola]. Capturar paquetes y visualizarlos por pantalla:
-# tshark -n -i eth0 -s 1515
-# tshark -D (Ver las interfaces de red disponibles)
-# tshark -n -i eth0 -s 1515 -w archivo (Capturar información y pasarla a un archivo)
-# tshark -n -i eth0 -s 1515 -w -filesize:10000 -b 10 -w archivo (Lo mismo especificando medida máxima del archivo (-filesize:10000) y cuantidad de ficheros a crear (-b 10) en Mb
-# tshark -n -i eth0 -s 1515 -a duration:3600 -w archivo (Especificando el tiempo que durará - 1 hora)
-# tshark -n -t ad -r fitxer.lpc tcp (mostrar los mensajes del protocolo tcp)
-# tshark -ni eth0 'tcp port tuxapuntes.com/drupal/80' -R 'http.request.method == "GET"'  (ver todas las peticiones HTTP GET)
-Opciones:
--t   Para que salgan las marcas de tiempo real
--n  Inhabilita la resolución de nombres
+$ sudo tshark -s 0 -i eth0 (especifica una longitud de captura de 262144, de modo que se captura el paquete completo; es el valor predeterminado)
+$ sudo tshark -D (Ver las interfaces de red disponibles)
+$ sudo tshark -i eth0 -s 0 > captura.pcap (capturar información y pasarla a un archivo)
+$ sudo tshark -i enp1s0 -s 0 -S "u" > captura1.pcap (lo mismo especificando un separador de lineas por fecha UTC)
+Las opciones de -S son
+      "a"    para absoluto
+      "ad"   para absoluto con fecha YYYY-MM-DD
+      "adoy" para absoluto con fecha YYYY/DOY
+      "d"    para delta
+      "dd"   para delta mostrado
+      "e"    para época
+      "r"    para relativo
+      "u"    para absoluto UTC
+      "ud"   para absoluto UTC con fecha YYYY-MM-DD
+      "udoy" para absoluto UTC con fecha YYYY/DOY
+$ sudo tshark -i enp1s0 -s 0 -a duration:3600 > captura2.pcap (especificando el tiempo que durará la captura - 1 hora)
+$ sudo tshark -i eth0 -b duration:30 -a filesize:3000 > captura3.pcap (captura durante 30 segundos y una cantidad máxima de 3000 Kb
+$ sudo tshark -i enp1s0 -f "port 80" > captura3.pcap (capturar solo los que pasan por el puerto 80)
+$ sudo tshark -i enp1s0 -c 100 > captura4.pcap (limitar la captura a 100 paquetes)
 
 
 tsort
