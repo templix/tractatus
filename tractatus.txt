@@ -60380,6 +60380,14 @@ $ termsaver urlfetcher -u lapipaplena.org (Mostrará el código de la página in
 $ termsaver programmer -p script.sh (Mostrará el código indicado linea a linea)
 
 
+termshark
+Interfaz de usuario para terminal [TUI] construida alrededor de tshark [ver]. Mientras que tshark escupe texto plano y líneas infinitas, termshark da un entorno interactivo, visual y navegable usando el teclado, sin necesidad de salir de la consola ni de tener un entorno gráfico. La sintaxis es muy parecida a la de tshark.
+$ sudo termshark -i enp1s0 (abrirá la interfaz interactiva y se veran los paquetes en tiempo real. Cuando se cierra la pantalla muestra el archivo donde se ha guardado, normalmente en /root/.cache/termshark/pcaps/enp1s0-xxxxxx.pcap)
+$ termshark -r /root/.cache/termshark/pcaps/enp1s0-xxxxxx.pcap (se abrirá la captura pero en vista navegable)
+$ sudo termshark -i enp1s0 -Y=tcp (aplicar filtro para capturar)
+$ sudo termshark -r /root/.cache/termshark/pcaps/enp1s0-xxxxxxx.pcap tcp.port==22 (aplicar un filtro para ver determinado puerto en la captura)
+
+
 termtosvg
 Graba todo lo que vamos escribiendo en la terminal y sus salidas, en formato SVG, desde que lanzamos la aplicación hasta que escribamos "exit". La grabación se guarda en /tmp.
       $ termtosvg
@@ -61334,6 +61342,10 @@ $ sudo tshark -i enp1s0 -s 0 -a duration:3600 > captura2.pcap (especificando el 
 $ sudo tshark -i eth0 -b duration:30 -a filesize:3000 > captura3.pcap (captura durante 30 segundos y una cantidad máxima de 3000 Kb
 $ sudo tshark -i enp1s0 -f "port 80" > captura3.pcap (capturar solo los que pasan por el puerto 80)
 $ sudo tshark -i enp1s0 -c 100 > captura4.pcap (limitar la captura a 100 paquetes)
+$ sudo tshark -i 1 -f “dst port 80” (ver el tráfico web realizado en el puerto 80)
+$ sudo tshark -i 1 -f “host 192.168.18.17” (conocer el tráficode una IP)
+$ sudo tshark -i 1 -Y “tcp.port == 22” (capturar el tráfico de los paquetes que tienen como destino un servidor al que se accede remotamente por SSH)
+$ sudo shark -r ~/test.pcap (leer un archivo de resultados)
 
 
 tsort
