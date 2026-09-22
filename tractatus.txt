@@ -54968,7 +54968,7 @@ $ setcd -c 1 (establece el indicador de cierre automático: cierra la bandeja si
 
 
 setfacl
-Establece, modifica o elimina la lista de control de acceso a un archivo.
+[acl]. Establece, modifica o elimina la lista de control de acceso a un archivo.
 $ setfacl -m u:usuario:rx archivo (Conceder acceso de lectura y ejecución a un usuario sobre un archivo)
 $ setfacl -x u:usuario file (Eliminar el acceso a un archivo a un usuario)
 $ setfacl -b archivo (elimina toda la lista de control de acceso a archivo)
@@ -58033,6 +58033,27 @@ srptool
 # srptool --create-conf /etc/tpasswd.conf (crear el archivo de configuración)
 # srptool --passwd /etc/tpasswd --passwd-conf /etc/tpasswd.conf -u root (creará /etc/tpasswd y añadirá el usuario root. Pedirá contraseña)
 # srptool --passwd /etc/tpasswd --passwd-conf /etc/tpasswd.conf --verify -u root (entrar contraseña y verificar si coincide con la entrada en /etc/tpasswd obtendrá)
+
+
+stgit
+[STacked GIT]. Herramienta que gestiona una pila de parches encima de un repositorio git, igual que hacía quilt [ver], pero con la particularidad de que cada parche de la pila se representa internamente como un "commit" de git normal. Esto le permite combinar el flujo de trabajo parche a parche, reordenable y editable de quilt, con toda la infraestructura de git [ramas, remotos, git log, etc.]. En quilt se tiene una serie de ficheros ".patch" y un fichero "series" que indica el orden. En stgit, cada "parche" es un commit en una rama especial que stgit gestiona, y existe un puntero que marca hasta dónde están aplicados los parches. Los parches por debajo del puntero están aplicados; los que están por encima siguen "guardados" pero no aplicados.
+$ stg init (en el directorio git, inicializar stgit sin tocar el historial solo prepara los metadatos de stgit en .git/patches/)
+$ stg new arregla-bug-login -m "Corrige validación de sesión en login" (crea un parche vacío y lo aplica. Es equivalente a haber hecho "git commit" con el mensaje, pero editable)
+$ stg refresh (volcar los cambios dentro del parche actual. Es el equivalente a hacer "git commit --amend", pero pensado para el flujo de pila)
+$ stg series (ver el estado de la pila)
+$ stg push (aplica el siguiente parche de la pila)
+$ stg push -a (aplica todos los que queden)
+$ stg pop (desaplica el parche del top)
+$ stg pop -a (desaplica todos, dejando el árbol "limpio")
+$ stg goto nombre-parche (aplica/desaplica hasta dejar ese parche como top)
+$ stg sort (ordena alfabéticamente)
+$ stg float parche-x (mueve un parche concreto al top, por encima de los demás)
+$ stg show arregla-bug-login (como git show, pero sobre el parche)
+$ stg diff (diff del parche actualmente en top sin refrescar aún)
+$ stg edit -m "Nuevo mensaje" arregla-bug-login (editar mensaje/autor de un parche existente)
+$ stg squash parche1 parche2 (fusiona dos parches en uno)
+$ stg export -d salida/ (exportar la pila como archivo tipo quilt. Genera los .patch numerados y un fichero series, exactamente como esperaría quilt)
+$ stg commit -a (convertir la pila stgit en commits git "normales" sin gestión de stgit para dejar el historial fijo para hacer push)
 
 
 ss
