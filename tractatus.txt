@@ -58056,6 +58056,30 @@ $ stg export -d salida/ (exportar la pila como archivo tipo quilt. Genera los .p
 $ stg commit -a (convertir la pila stgit en commits git "normales" sin gestión de stgit para dejar el historial fijo para hacer push)
 
 
+stompserver
+Servidor de mensajería que implementa el protocolo STOMP [Simple Text Oriented Messaging Protocol], un protocolo simple y ligero que permite a los clientes enviar y recibir mensajes a través de colas [queues] o temas [topics]. Archivo de configuración en /etc/stompserver/stompserver.conf.
+# systemctl status stompserver.service (comprobar si está activo)
+$ stompserver -s memory (iniciar el servidor con almacenamiento en memoria)
+$ stompserver -s file -d /var/stomp/data (iniciar el servidor con almacenamiento en archivo)
+$ stompserver -s memory -u admin -p secret (iniciar el servidor con autenticación. Los clientes deben proporcionar el nombre de usuario "admin" y la contraseña "secret" para conectarse)
+$ stompserver -s activerecord -c "postgresql://user:password@localhost/stompdb" (iniciar el servidor con ActiveRecord, ejemplo con PostgreSQL)
+$ stompserver -s memory -m (inicia el servidor con almacenamiento en memoria y habilita la supervisión de colas)
+
+
+stone
+Repetidor de paquetes TCP/IP a nivel de aplicación. Actúa como intermediario, reenviando tráfico entre puntos finales. Sus casos de uso principales son atravesar firewalls [túnel], cifrar conexiones con SSL/TLS, proxy HTTP ligero y redirección de puertos
+$ stone example.com:80 8080 (escucha en el puerto 8080 local y reenvía al puerto 80 de ejemplo.com)
+$ stone mailserver_interno:25 2525 (permite conectarse al puerto 25 de un servidor interno desde fuera)
+$ stone --ssl example.com:443 8080 (el cliente cifra y envía por SSL)
+$ stone --ssl --server localhost:80 443(el servidor descifra y reenvía en claro)
+$ stone --proxy localhost:8080 (escucha en puerto 8080 como proxy HTTP y luego se configura el navegador para usar localhost:8080 como proxy)
+$ stone --udp dns_interno:53 53 (reenvía tráfico UDP del puerto 53)
+$ stone --server web_interno:80 8080 mail_interno:25 2525 ssh_interno:22 2222 (múltiples reenvíos simultáneos)
+$ stone --ssl servidor_remoto:443 12345 (la máquina A [extremo del túnel] escucha en claro, cifra hacia fuera)
+$ stone --ssl --server aplicacion_local:80 443 (la máquina B [otro extremo] escucha SSL, descifra hacia dentro)
+$ stone --accept 192.168.1.0/24 ejemplo.com:80 8080 (solo acepta conexiones desde 192.168.1.0/24)
+
+
 ss
 Utilidad para investigar sockets. Sustituye a netstat.
 # ss -r (resolviendo las IPs)
