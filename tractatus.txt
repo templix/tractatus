@@ -27250,6 +27250,16 @@ Carga modulos.
 # insmod módulo
 
 
+install
+[coreutils]. Herramienta que se utiliza para copiar archivos y establecer sus atributos, tales como los permisos, el propietario y el grupo.
+$ install -b -m 777 /dev/null file.txt (crear un archivo con permisos especificos)
+$ sudo install file.a file.b /home/USER/docs (copia los dos archivos file.? al directorio ~/docs)
+$ sudo install -C file.a file.b /homeUSER/docs (comparar los archivos antes de copiarlos. Si los archivos son idénticos, «install» no sobrescribirá el destino)
+$ sudo install -D -m 700 -o root /home/USER/docs (cambia el propietario al usuario y establece los permisos en 755
+$ install -m 600 -o USER -g USER /dev/null Dir (crear un directorio con permisos, propietario y grupo especificos)
+$ sudo install -m 750 /dev/null Dir (lanzado con "sudo" el usuario y grupo son root y root. Sin "sudo" conUSERR y USER)
+
+
 install-info
 Utilidad que se encarga de gestionar el índice centralizado de toda la documentación en formato info instalada en el sistema. Permite crear, modificar o eliminar entradas en el archivo /usr/share/info/ normalmente el directorio de documentación Info, haciéndolas accesibles para los lectores como el comando info. En sistemas Debian, el paquete suele reenvíar las opciones al programa real ginstall-info. Su función principal es facilitar la actualización de las entradas en el índice sin intervención manual y suele ejecutarse automáticamente durante la instalación o eliminación de paquetes, aunque también se puede usar manualmente.
 # install-info /usr/share/info/mi-prog.info /usr/share/info/dir (añade el contenido de menú especificado en el archivo mi-prog.info al índice general "dir" del sistema)
