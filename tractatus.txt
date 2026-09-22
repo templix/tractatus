@@ -58149,6 +58149,13 @@ $ bzip2 -dc /srv/backup/home/2026.09.22_15.00.00/USER/documento.txt.bz2 > /home/
 $ cp -a /srv/backup/home/2026.09.22_15.00.00/USER/documento.txt /home/USER/ (preservar atributos)
 
 
+strip-nondeterminism
+Biblioteca destinada a eliminar información no determinista como marcas de tiempo y el orden del sistema de archivos de diversos formatos de archivo y paquetes [ar, gzip, jar, zip].
+$ strip-nondeterminism -t gzip archivo.gzip (especificando el formato del archivo. Si no se especifica aplica el de la extensión del archivo si es que consta)
+$ strip-nondeterminism -T 1700000000 archivo.jar (establece la marcas de tiempo en el número de segundos indicado transcurridos desde el 1 de enero de 1970)
+Nota.- fecha actual: date %s - Transformar date unix a normal: date -d @1700000000 [ver date]
+
+
 ss
 Utilidad para investigar sockets. Sustituye a netstat.
 # ss -r (resolviendo las IPs)
