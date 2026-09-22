@@ -58080,6 +58080,64 @@ $ stone --ssl --server aplicacion_local:80 443 (la máquina B [otro extremo] esc
 $ stone --accept 192.168.1.0/24 ejemplo.com:80 8080 (solo acepta conexiones desde 192.168.1.0/24)
 
 
+storebackup
+Suite de herramientas Perl de backups incrementales mediante compresión, comprobación por hash y hard links. Copia jerarquías de directorios de forma recursiva a otra ubicación, organizándolas por fecha, se conservan los permisos, por lo que los usuarios con acceso al directorio de copia de seguridad pueden recuperar sus archivos por sí mismos. Por defecto utiliza bzip2 para comprimir determinados archivos y tiene una lista de extensiones que normalmente no comprime, como JPEG, PNG, MP3, etc. porque ya suelen estar comprimidas. Incluye los ejecutables llt, storeBackup, storeBackupCheckBackup, storeBackupConvertBackup, storeBackupDel, storeBackupMount, storeBackupRecover, storeBackupSearch, storeBackupUpdateBackup, storeBackupVersions, storeBackup_du y storeBackupls.
+$ storeBackup --sourceDir /home --backupDir /srv/backup (copia /home en /srv/bavkup/default [directorio "series" default por defecto])
+El repositorio queda organizado aproximadamente:
+   	   /srv/backup/
+	   └── default/
+	       ├── 2026.09.22_14.00.00/
+    	       ├── 2026.09.23_14.00.00/
+    	       └── 2026.09.24_14.00.00/
+$ storeBackup --sourceDir /etc --backupDir /srv/backup --series servidor01-etc (asignar un nombre a "series" más descriptivo)
+El resultado se parecería a:
+   	   /srv/backup/
+	   └── servidor01-etc/
+	       ├── 2026.09.22_14.00.00/
+    	       ├── 2026.09.23_14.00.00/
+	       ...
+Cada directorio de fecha pretende ser una copia completa y navegable. Si un archivo no ha cambiado, storeBackup no necesita copiar de nuevo sus datos: crea un hard link hacia la versión ya almacenada. Por eso cada copia parece completa, pero ocupa mucho menos espacio. Además, puede reconocer el mismo contenido aunque el archivo se haya movido, renombrado o copiado a otra ubicación.
+Se puede comprobar si un archivo no ha cambiado y ver que distintos backups apuntan al mismo objeto físico:
+$ ls -li /srv/backup/default/2026.09.22_15.00.00/etc/hosts /srv/backup/default/2026.09.23_15.00.00/etc/hosts
+     	 123456 -rw-r--r-- ... /.../2026.09.22.../etc/hosts
+	 123456 -rw-r--r-- ... /.../2026.09.23.../etc/hosts
+$ storeBackup --sourceDir /home --backupDir /srv/backup --addExceptSuffix '\.iso' --addExceptSuffix '\.qcow2' (añadir extensiones que no deben comprimirse)
+$ storeBackup --sourceDir /home --backupDir /srv/backup --exceptSuffix '\.zip' --exceptSuffix '\.jpg' --exceptSuffix '\.png' (sustituir completamente la lista predeterminada)
+$ storeBackup --sourceDir /home --backupDir /srv/backup --exceptSuffix '.*' (desactivar toda compresión)
+$ storeBackup --sourceDir /home --backupDir /srv/backup --checkCompr (examinar el contenido de los archivos y decidir si realmente compensa comprimirlos)
+$ storeBackup --sourceDir / --backupDir /srv/backup --series servidor01-root --exceptDirs 'proc' --exceptDirs 'sys' --exceptDirs 'dev' --exceptDirs 'srv/backup' --contExceptDirsErr (excluir directorios que no existan sin abortar)
+$ storeBackupCheckBackup --backupDir /srv/backup --series home (comprobar un backup)
+$ storeBackup_du --backupDir /srv/backup (inspeccionar el espacio)
+$ storeBackupDel --backupDir /srv/backup --series home --doNotDelete (comprobar borrado de un backup sin borrar)
+$ storeBackupDel --backupDir /srv/backup --series home (después de revisar la salida, ejecuta el borrado real)
+$ storeBackupVersions --backupDir /srv/backup --series home --file USER/documento.txt (localizar todas las versiones)
+$ storeBackup --sourceDir /home --backupDir /srv/backup --series home --keepRelative '1d 7d 31d 92d' --logFile /var/log/storeBackup-home.log --plusLogStdout (intenta conservar copias representativas de distintas edades: una reciente, otra de aproximadamente una semana, otra de aproximadamente un mes y otra de aproximadamente tres meses)
+1.-
+El proceso podria ser primero crear el repositorio
+# install -d -m 0700 /srv/backup
+$ storeBackup --sourceDir /etc --backupDir /srv/backup --series "$(hostname)-etc" --verbose --logFile /var/log/storeBackup-etc.log (ejecutar la copia dell directorio /etc)
+$ storeBackup --sourceDir /home/USER --backupDir /srv/backup --series mi-home --exceptDirs '.cache' --exceptDirs 'Downloads' (copia del directorio personal)
+Nota.- Las rutas indicadas en --exceptDirs son relativas a --sourceDir.
+2.-
+Cuando la línea de órdenes empieza a ser extensa, puede generase una plantilla:
+# storeBackup --generate /etc/storebackup.d/home.conf (luego editar para colocar los archivos a excluir, logs, etc)
+# storeBackup --file /etc/storebackup.d/home.conf (comprobar la configuración sin realizar la copia)
+Un ejemplo de plantilla podría ser:
+# nano /etc/storebackup.d/home.conf
+       sourceDir=/home
+       backupDir=/srv/backup
+       series=home
+       exceptDirs=.cache
+       exceptDirs=Downloads
+       keepRelative=1d 7d 31d 92d
+       logFile=/var/log/storeBackup-home.log
+3.-
+Para recuperar archivos no es necesaria la suite
+$ cp /srv/backup/home/2026.09.22_15.00.00/USER/documento.txt /home/USER/ (si el archivo está sin comprimir)
+$ bzip2 -dc /srv/backup/home/2026.09.22_15.00.00/USER/documento.txt.bz2 > /home/USER/documento.txt (si está comprimido con bzip2)
+$ cp -a /srv/backup/home/2026.09.22_15.00.00/USER/documento.txt /home/USER/ (preservar atributos)
+
+
 ss
 Utilidad para investigar sockets. Sustituye a netstat.
 # ss -r (resolviendo las IPs)
