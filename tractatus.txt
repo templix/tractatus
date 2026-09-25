@@ -1732,6 +1732,7 @@ apt-get
 # apt-get install --reinstall  paquete      (Reinstala un paquete)
 # apt-get install --only-upgrade firefox-esr (actualiza un solo paquete)
 # apt-get autoremove  (Borra paquetes huérfanos)
+# apt-get install --dry-run strongswan-charon (simular una instalación para ver consecuencias sin realizarla)
 # apt-get download paquete (descarga el deb del paquete especificado)
 # apt-get remove paquete        (Elimina un paquete)
 # apt-get remove --purge paquete  (Desinstala con archivos de configuración)
@@ -14988,7 +14989,7 @@ egrep
 	$ egrep -c '^#' /etc/fstab (Muestra el número de lineas comentadas)
 $ egrep -in "palabra" *.txt (busca “palabra” en todos los .txt del directorio)
 $ egrep 'UUID|proc' /etc/fstab (Muestra las lineas con las coincidencias)
-$ egrep --color '(vmx|svm)' /proc/cpuinfo (Averiguar si el equipo  admite la virtualización por hardware. Si el comando no devuelve nada es porque no lo soporta)
+$ egrep --color '(vmx|svm)' /proc/cpuinfo (Averiguar si el equipo  admite la virtualización por hardware. Si devuelve 0 o nada es porque no lo soporta)
 Otras opciones:
 	-h 	Muestra las líneas coincidentes pero no los nombres de archivo.
 	-i 	Ignora los cambios mayúsculas y minúsculas.
@@ -45205,6 +45206,10 @@ $ pkill -9 -t pts/3 (Mata procesos no basados en el PID. La terminal 3 en este c
 # pkill -9 -t tty1 (Mata la terminal tty1)
 # pkill -u `whoami` (Mata todos los procesos del usuario)
 # pkill -KILL -u usuario (lo mismo)
+1.-
+Para todos los procesos de determinado comando
+# pkill -CONT -f charon-systemd (activar todos los procesos parados del comando especificado para que puedan recibir la señal)
+# pkill -9 -f charon-systemd (matarlos con SIGKILL)
 
 
 pktanon
