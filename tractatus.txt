@@ -64286,6 +64286,58 @@ whiptail
 Muestra ventanas en consola. Parecido a dialog con menos opciones.
 
 
+wireguard
+[wireguard-tools]. Es una VPN innovadora que se ejecuta dentro del kernel de Linux y utiliza criptografía de última generación [el protocolo "Noise"]. La criptografía de última generación significa que no negocia cifrados [nada de elegir entre AES-128 o AES-256, RSA-2048 o RSA-4096, etc.]. Usa un conjunto fijo y moderno: Curve25519 para intercambio de claves, ChaCha20-Poly1305 para cifrado autenticado y BLAKE2s para hashing. Noise no es un protocolo único sino un framework para construir protocolos de intercambio de claves. Define "patrones de handshake" combinables como piezas de Lego criptográfico. Las claves públicas estáticas de ambas partes ya se conocen de antemano por eso en WireGuard se tiene que intercambiar public.key manualmente o por otro canal antes de conectar. No hay autoridad certificadora, no hay TLS-style CA: la confianza es que ambas partes conocen sus claves públicas respectivas. Incluye los ejecutables wg y wg-quick.
+$ mkdir wireguard (crear el directorio y entrar en él)
+$ wg genkey | tee private.key | wg pubkey > public.key (generar una clave privada y otra publica)
+$ sudo ip link add dev wg0 type wireguard (crear una interfaz)
+$ sudo wg show wg0 (ver solo una interfaz)
+$ sudo wg show (ver todas las interfaces si tenemos varias)
+$ sudo wg set wg0 private-key private.key (asignar clave privada)
+$ sudo wg-quick down wg0 (cierra el tunel)
+$ sudo wg-quick up wg0 (levanta el tunel, asigna IP, aplica rutas y PostUp)
+$ ip -4 a (comprobar que esté activo el servidor)
+$ ip r (comprobar las rutas que ha creado en el servidor y en el cliente)
+$ ping 10.0.0.1 -c 1 (realizar ping al servidor)
+$ traceroute 192.168.18.17 (comprobar que el tráfico va por el tunel)
+$ sudo systemctl enable --now wg-quick@wg0 (arranque automático al inicio del sistema)
+1.-
+Archivo de configuración con una sola máquina solo para pruebas.
+# nano /etc/wireguard/wg0.conf
+       [Interface]
+       PrivateKey = <La_clave_privada>
+       Address = 10.0.0.1/24
+       ListenPort = 51820
+       # Habilita forwarding + NAT al levantar/bajar la interfaz
+       PostUp = iptables -A FORWARD -i wg0 -j ACCEPT; iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+       PostDown = iptables -D FORWARD -i wg0 -j ACCEPT; iptables -t nat -D POSTROUTING -o eth0 -j MASQUERADE
+       #
+       [Peer]
+       PublicKey = <La_clave_publica>
+       AllowedIPs = 10.0.0.2/32
+$ chmod 600 /etc/wireguard/wg0.conf (proteger el archivo de configuración)
+2.-
+Archivo de configuración con dos máquinas aunque una sea virtual. En la que actua como servidor:
+# nano /etc/wireguard/wg0.conf
+       [Interface]
+       PrivateKey = <clave_privada_del_SERVIDOR>
+       ListenPort = 51820
+       #
+       [Peer]
+       PublicKey = <clave_pública_del_CLIENTE>
+       AllowedIPs = 10.0.0.2/32
+Y en el cliente:
+# nano /etc/wireguard/wg0.conf
+[Interface]
+PrivateKey = <clave_privada_del_CLIENTE>
+Address = 10.0.0.2/24
+#
+[Peer]
+PublicKey = <clave_pública_del_SERVIDOR>
+Endpoint = x.x.x.x:51820
+AllowedIPs = 0.0.0.0/0
+
+
 wireshark
 Capturar paquetes y visualizarlos por pantalla. Ver tshark
 
