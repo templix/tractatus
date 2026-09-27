@@ -5337,13 +5337,13 @@ $ caffeinate vlc (que mientras dure vlc no entre en suspensión de pantalla)
 
 
 cal
-Muestra el calendario del mes
+[ncal]. Muestra el calendario del mes. Ver ncal
 $ cal -y    (muestra todos los meses del año)
-$ cal -m 1995 (muestra año indicado comenzando las semanas por lunes [-m])
+$ cal -m 5 1995 (muestra el mes mayo [5] del año especificado)
+$ cal 05 2011 (lo mismo)
 $ cal 2011 (Muestra el año completo)
-$ cal 05 2011 (Muestra el mes del año especificado)
 $ cal -3  (Muestra el mes actual el anterior y el posterior)
-$ cal -m |grep -A7 -B7 --color=auto $(date +%d) (Muestra el mes actual y coloreado el día actual)
+$ cal -m 9 |grep -A7 -B7 --color=auto $(date +%d) (Muestra el mes 9 y coloreado el día actual)
 
 
 calamaris
@@ -38458,6 +38458,8 @@ $ ncal -m 2 (muestra el segundo mes del año)
 $ ncal -3 (muestra el anterior, el presente y el proximo)
 $ ncal -A 2 (los proximos tres meses [0,1 y 2])
 $ ncal -B 2 (los anteriores tres meses [2, 1 y 0])
+$ ncal -b -M 2026 (muestra el año en formato primer dia de la semana en lunes)
+$ ncal -b -m 9 -M 2026 (muestra el mes 9 del año 2026 en formato primer dia de la semana el lunes)
 
 
 ncaptool
@@ -43217,7 +43219,7 @@ $ patch -R -p0 < parche.patch (Deshace los cambios aplicados por el parche anter
 
 path
 Variable de entorno que contiene una lista de directorios donde el sistema operativo busca archivos ejecutables para ejecutar comandos sin necesidad de escribir la ruta completa. Ver ejecutable.
-# echo $PATH | tr ':' '\n' (mostrará los dirs de los ejecutables)
+# echo $PATH | tr : \\n (los mostrará uno por linea)
 
 
 pathchk
