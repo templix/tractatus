@@ -5344,6 +5344,7 @@ $ cal 05 2011 (lo mismo)
 $ cal 2011 (Muestra el año completo)
 $ cal -3  (Muestra el mes actual el anterior y el posterior)
 $ cal -m 9 |grep -A7 -B7 --color=auto $(date +%d) (Muestra el mes 9 y coloreado el día actual)
+$ paste <(cal 5 2018) <(cal 9 2026) (mostrar dos meses y años especificados del calendario uno al lado del otro)
 
 
 calamaris
@@ -21731,6 +21732,7 @@ Obtiene entradas de la base de datos administrativa (ahosts, passwd, group, host
 $ getent passwd (lista los usuarios creados en el sistema)
 $ getend group users (Ver los usuarios del grupo users)
 $ getent services 22 (Muestra el servicio que corre por el puerto especificado. Si no se especifica puerto los lista todos)
+$ getent hosts 8.8.8.8 (información de una ip)
 
 
 getfacl
@@ -39187,7 +39189,7 @@ Muestra información sobre las interfaces de red gestionadas por systemd-network
 Nota.- networkctl solo muestra información útil si se usa systemd-networkd como gestor de red, no si se usa NetworkManager o ifupdown.
 
 
-NetworkManager
+networkmanager
 Supervisa todas las conexiones de red y escoge automáticamente la mejor conexión para usar. El demonio NetworkManager intenta simplificar y automatizar al máximo la configuración y el funcionamiento de la red, gestionando la conexión de red principal y otras interfaces de red, como Ethernet, Wi-Fi y dispositivos de banda ancha móvil. Archivo de configuración en nano /etc/NetworkManager/NetworkManager.conf. Ver dns y nmcli.
 # NetworkManager --print-config (ver la configuración del servicio)
 $ NetworkManager --log-level=INFO (nivel en los logs, otras opciones son TRACE,DEBUG,WARN,ERR,OFF,KEEP)
@@ -55820,8 +55822,7 @@ shuf
 Genera numeros aleatorio y muestra lineas de archivo de forma aleatoria.
 $ shuf -n 4 /etc/fstab -o archivo (Muestra 4 lineas aleatorias del archivo y manda el resultado a "archivo")
 $ shuf -i 1-49 -n 6 (para la loto. Numeros aleatorios de 1 al 49 y que muestre 6)
--i [x-y]  rango de números
--n   Cantidad de numeros a visualizar
+$ shuf -n 2 /usr/share/dict/words | tr -dc [:alnum:] | tr '[:lower:]' '[:upper:]'; echo (genera dos palabras aleatorias juntas en mayúsculas)
 1.-
 Reproducir un CD al azar. Precisa cdtool :
 $ for track in $(seq $(cdinfo | grep 'Number of tracks' | awk '{print $NF}') | shuf); do cdplay "$track"; done
