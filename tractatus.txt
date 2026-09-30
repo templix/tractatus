@@ -28936,8 +28936,14 @@ $ jpnevulator --pass --tty /dev/ttyS0 --tty /dev/ttyS1 (leer y escribir en múlt
 
 
 jq
-Es un procesador de datos JSON. Puede segmentar, filtrar, mapear y transformar el formato con la misma facilidad con la que sed, awk, grep y similares permiten manipular texto.
-Supongamos un archivo .json con el siguiente contenido:
+Procesador JSON escrito en C que se usa para segmentar, filtrar, mapear y transformar datos estructurados. jq puede transformar el formato de datos que se tiene al que se deseas con muy poco esfuerzo.
+$ echo '{"nombre":"Ana","edad":30}' | jq '.nombre' (muestra el nombre [Ana])
+$ echo '[1,2,3]' | jq 'map(. * 2)' (multiplica por 2 y los coloca uno por linea)
+$ echo '[{"a":1},{"a":5}]' | jq '.[] | select(.a > 2)' (muestra el mayor que 2)
+$ jq < file.json (validar y formatear la salida JSON)
+$ cat file.json | jq  (validar y formatear la salida JSON)
+1.-
+Ejemplo con un archivo .json con el siguiente contenido:
 $ nano datos.json
        [
          {"nombre": "Ana", "edad": 25, "ciudad": "Madrid"},
@@ -39197,8 +39203,7 @@ $ NetworkManager --log-level=INFO (nivel en los logs, otras opciones son TRACE,D
 
 netwox
 Este comando proporciona un menú con más de 200 herramientas [sniffers, spoofing, udp/tcp clients/servers, scan, ping, DNS, FTP, HTTP, IRC, NNTP, SMTP, SNMP, SYSLOG, TELNET, TFTP] para encontrar y resolver problemas de red.
-# netwox (entrar en el menú)
-Control-c para cerrar el menú
+# netwox (entrar en el menú. Control-c para cerrar el menú)
 
 
 newgrp
@@ -66038,6 +66043,58 @@ Servidor y otros programas necesarios para implementar un servicio NIS [ver] par
 # rpc.ypxfrd (iniciar el demonio que acelera la transferencia de mapas NIS desde el servidor maestro a los esclavos)
 # yppush (enviar actualizaciones a todos los servidores esclavos)
 # yppush -h servidor_esclavo1 -h servidor_esclavo2 (enviar actualizaciones a servidores esclavos específicos)
+
+
+yq
+Lee documentos YAML, XML o TOML, los convierte a JSON internamente, se lo pasa a jq con un filtro y opcionalmente reconvierte el resultado al formato original. Incluye los ejecutables tomlq y xq-python
+$ yq . -y <example.json
+1.-
+Ejemplo con un archivo .yaml con salida JSON por defecto.
+$ nano compose.yaml
+       services:
+         web:
+    	   image: nginx:1.27
+    	   ports: ["8080:80"]
+  	 db:
+    	   image: postgres:16
+    	   environment:
+	      POSTGRES_PASSWORD: secreto
+$ yq '.services.web.image' compose.yaml (muestra la salida "nginx:1.27")
+$ yq -r '.services.web.image' compose.yaml (muestra nginx:1.27 sin comillas)
+$ yq -r '.services | keys[]' compose.yaml (muestra web, db uno por línea)
+$ yq -r '.services | to_entries[] | "\(.key): \(.value.image)"' compose.yaml (nombre de cada sertvicio con su imagen)
+$ yq -r '.services | to_entries[] | select(.value.environment) | .key' compose.yaml (solo servicio que define "environment")
+$ yq -y '.services.web.image = "nginx:1.28"' compose.yaml (cambiar la versión de la imagen)
+$ yq -y '.services.web.restart = "always"' compose.yaml (añadir un campo)
+$ yq -y 'del(.services.db.environment)' compose.yaml (borrar un campo)
+$ yq . compose.yaml > compose.json (convertir YAML a JSON)
+$ yq -c . compose.yaml (convertir a JSON compacto en una línea)
+$ yq -y . datos.json > datos.yaml (convertir JSON a YAML)
+$ yq -y --arg v "nginx:1.29" '.services.web.image = $v' compose.yaml (pasar variables al filtro)
+2.-
+Con un ejemplo de .toml
+$ nano pyproject.toml
+       [project]
+       name = "miapp"
+       version = "1.2.0"
+       dependencies = ["requests", "rich"]
+$ tomlq -r '.project.version' pyproject.toml (muestra 1.2.0)
+$ tomlq -r '.project.dependencies[]' pyproject.toml (muestra requests, rich)
+$ tomlq '.project' pyproject.toml (crea el JSON del bloque)
+$ tomlq -t '.project.version = "1.3.0"' pyproject.toml (modificar y salir en TOML)
+$ tomlq . pyproject.toml (muestra por pantalla de TOML a JSON)
+3.-
+Ejemplo con un xq-python [XML]
+$ nano feed.xml
+       <catalogo>
+         <libro id="1"><titulo>Dune</titulo><precio>12</precio></libro>
+  	 <libro id="2"><titulo>Neuromante</titulo><precio>9</precio></libro>
+       </catalogo>
+$ xq-python . feed.xml (ver estructura JSON por pantalla)
+$ xq-python -r '.catalogo.libro[].titulo' feed.xml (muestra Dune, Neuromante)
+$ xq-python -r '.catalogo.libro[] | select(.["@id"]=="2") | .titulo' feed.xml (solo muestra Neuromante)
+$ xq-python '[.catalogo.libro[].precio | tonumber] | add' feed.xml (muestra la suma de los precios [21])
+$ xq-python -x '.catalogo.libro[0].precio = "15"' feed.xml (modificar y volver a XML)
 
 
 yt-dlp
