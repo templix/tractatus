@@ -4192,6 +4192,8 @@ $ sudo nano /etc/systemd/system/rotar-boot-log.service
  ExecStart=/usr/sbin/logrotate -f /etc/logrotate.d/bootlog
 [Install]
  WantedBy=sysinit.target
+$ sudo systemctl daemon-reload
+$ sudo systemctl enable rotar-boot-log.service
 A partir del próximo reinicio, logrotate archivará el boot.log actual como boot.log.1 justo al empezar, y el archivo /var/log/boot.log principal solo contendrá la información del arranque actual.
 
 
@@ -31866,6 +31868,7 @@ logrotate
 Rotación, compresión y correos del sistema de logs.
 # logrotate -d /etc/logrotate.conf (Verificación del correcto funcionamiento)
 # logrotate -f /etc/logrotate.conf  (forzar la verificación)
+# logrotate /etc/logrotate.conf (realizar el rotado de forma manual)
 Ejemplo típico para rotar logs de fail2ban:
 # nano /etc/logrotate.d/fail2ban
 	/var/log/fail2ban.log {
