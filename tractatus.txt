@@ -54495,7 +54495,8 @@ $ sed -i '/plantilla/{x;p;x;G;}' listado.txt (Insertar una linea en blanco antes
 $ sed = listado.txt | sed 'N;s/\n/\t/' > listado-numerado.txt (Añadir número de linea al principio de cada una)
 $ sed '/./=' listado.txt | sed '/./N; s/\n/- /' > listado-numerado.txt (Añadir número de linea al principio si no está en blanco)
 $ sed '/^#/d;/^$/d' archivo > archivo-neto (quitar lineas en blanco y comentario y guardar en un archivo)
-$ sudo sed -n "$(sudo grep -n '^------------' /var/log/boot.log | tail -n 1 | cut -d: -f1),\$p" /var/log/boot.log > ultimo_boot.log (separar el último reinicio del resto de logs del archivo y mandarlo a un archivo)
+$ sudo sed -n "$(sudo grep -n '^------------' /var/log/boot.log | tail -n 1 | cut -d: -f1),\\$p" /var/log/boot.log > ultimo_boot.log (separar el último reinicio del resto de logs del archivo y mandarlo a un archivo)
+Nota.- en el último comando antes de $p va una barra invertida "\" no dos.
 
 
 sedsed
