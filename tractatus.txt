@@ -2960,18 +2960,19 @@ $ cat validar
 	$5 == "metálico" { print $1,$2 " ===> Cobra en metálico" }
 Se ejecuta con:
 	$ awk -f validar lista
-Aunque también podríamos añadir que lo ordenara por orden alfabetico del segundo campo (-k2) separado del primero por un espacio(-t” “):
-	$ awk -f validar lista | sort -t” “ -k2
+Aunque también podríamos añadir que lo ordenara por orden alfabetico del segundo campo (-k2) separado del primero por un espacio(-t" "):
+	$ awk -f validar lista | sort -t" " -k2
 Otros ejemplos:
-	$ awk '/d.[0-9]/{print $4}' /proc/partitions  (listar todas las particiones)
-	$ cat 1.txt | awk '{print$1”\t”$2}'  (tabulando la salida)
-	$ cat 1.txt | awk '!/#/{print $0}' > 2.txt  (Imprime todo menos las lineas comentadas y lo manda a un archivo)
-	$ cat 1.txt | awk 'BEGIN { FS="\n"; RS="" } { print $1 }' > lista.txt (Manda a un archivo las primeras lineas precedidas de una en blanco)
-	$ who | awk '{print $1}'  (Mostrar todos los usuarios registrados)
-	$ awk '$1~/^DocumentRoot/{print $2}' /etc/apache2/sites-available/default (conocer la carpeta del servidor)
-	$ awk 'BEGIN { for (i = 1; i <= 7; i++) print int(101 * rand()) }' (Escribir 7 números aleatorios del 0 al 100)
-	$ awk ' { print "\"" $0 "\""} ' lista (Entrecomillar cada una de la lineas del archivo)
-	$ awk 'NF && $0 !~ /^#/' archivo (quitar comentarios y lineas en blanco de un archivo)
+$ awk '/d.[0-9]/{print $4}' /proc/partitions  (listar todas las particiones)
+$ cat 1.txt | awk '{print$1”\t”$2}'  (tabulando la salida)
+$ cat 1.txt | awk '!/#/{print $0}' > 2.txt  (Imprime todo menos las lineas comentadas y lo manda a un archivo)
+$ cat 1.txt | awk 'BEGIN { FS="\n"; RS="" } { print $1 }' > lista.txt (Manda a un archivo las primeras lineas precedidas de una en blanco)
+$ who | awk '{print $1}'  (Mostrar todos los usuarios registrados)
+$ awk '$1~/^DocumentRoot/{print $2}' /etc/apache2/sites-available/default (conocer la carpeta del servidor)
+$ awk 'BEGIN { for (i = 1; i <= 7; i++) print int(101 * rand()) }' (Escribir 7 números aleatorios del 0 al 100)
+$ awk ' { print "\"" $0 "\""} ' lista (Entrecomillar cada una de la lineas del archivo)
+$ awk 'NF && $0 !~ /^#/' archivo (quitar comentarios y lineas en blanco de un archivo)
+$ sudo awk '/^-+ [A-Z][a-z]{2} / {p=1} p' /var/log/boot.log > ultimo_boot.log (separar el último reinicio del resto del archivo y mandarlo a un archivo)
 Creación de scripts con awk:
 1.-
 Imprimir el simple "Hola mundo cruel"
@@ -4171,6 +4172,27 @@ boot
 Archivo en el que se almacenan los logs de inicio de sesión [/var/log/boot.log].
 $ grep -i "fail" /var/log/boot.log | grep -v "fail2ban" (ver qué ha pasado en el inicio de sesión. No debería mostrar nada o solo errores reales)
 $ grep -iE "error|fail(ed)?|fatal" /var/log/boot.log | grep -v -i "fail2ban" (otra forma de comprobar si hay fallos reales descartando fail2ban para evitar errores con el fail del nombre)
+1.-
+Para que el archivo de /var/log/boot.log solo guarde el último reinicio y los anteriores los rote a log.1
+$ sudo nano /etc/logrotate.d/bootlog
+/var/log/boot.log {
+    missingok
+    notifempty
+    rotate 7
+    copytruncate
+}
+$ sudo nano /etc/systemd/system/rotar-boot-log.service
+[Unit]
+ Description=Rotar boot.log al inicio del sistema
+ DefaultDependencies=no
+ After=local-fs.target
+ Before=sysinit.target
+[Service]
+ Type=oneshot
+ ExecStart=/usr/sbin/logrotate -f /etc/logrotate.d/bootlog
+[Install]
+ WantedBy=sysinit.target
+A partir del próximo reinicio, logrotate archivará el boot.log actual como boot.log.1 justo al empezar, y el archivo /var/log/boot.log principal solo contendrá la información del arranque actual.
 
 
 boot-info-script
@@ -54470,6 +54492,7 @@ $ sed -i '/plantilla/{x;p;x;G;}' listado.txt (Insertar una linea en blanco antes
 $ sed = listado.txt | sed 'N;s/\n/\t/' > listado-numerado.txt (Añadir número de linea al principio de cada una)
 $ sed '/./=' listado.txt | sed '/./N; s/\n/- /' > listado-numerado.txt (Añadir número de linea al principio si no está en blanco)
 $ sed '/^#/d;/^$/d' archivo > archivo-neto (quitar lineas en blanco y comentario y guardar en un archivo)
+$ sudo sed -n "$(sudo grep -n '^------------' /var/log/boot.log | tail -n 1 | cut -d: -f1),\$p" /var/log/boot.log > ultimo_boot.log (separar el último reinicio del resto de logs del archivo y mandarlo a un archivo)
 
 
 sedsed
