@@ -59182,6 +59182,23 @@ stubble
 Pequeño stub de arranque EFI [Extensible Firmware Interface] para el kernel de Linux que integra árboles de dispositivos, una base de datos CHID y el propio kernel. El stub localiza el árbol de dispositivos correspondiente basándose en los CHID [Channel Handle IDentifiers] generados a partir de SMBIOS, un estándar que describe las características del sistema y lo carga antes de ejecutar el kernel integrado. Un stub es un programa o componente que sustituye a otro componente más complejo, o que actúa como una interfaz simplificada para probar o facilitar el desarrollo. Su función principal es mimicar el comportamiento de la pieza que representa o de la que depende, proporcionando una respuesta predefinida o funcionalidad básica que permite que el sistema funcione sin necesidad de la implementación completa o real. Es una herramienta específica dentro de los sistemas operativos que utilizan el EFI que recopila información de todo el hardware: disco, red, puertos, etc. antes de iniciar el kernel para el arranque del sistema cuando se utiliza Coreboot o firmware similar. En resumen stubble es un puente inicial entre el firmware EFI y el kernel de Linux. Su trabajo es "preparar el escenario": detectar el hardware usando CHID de SMBIOS, configurar los dispositivos y luego entregar el control al kernel de Linux para que arranque con toda la información necesaria ya disponible. No es un comando que se ejecute desde la terminal de un sistema Linux ya arrancado, su uso ocurre en un nivel mucho más bajo, durante el proceso de arranque del ordenador.
 
 
+stubby
+Demonio del resolutor stub de privacidad DNS. tubby y martDNS [ver] son reenvíos DNS que compiten por el puerto 53, no se complementan bien.
+# stubby -g (iniciar stubby como demonio)
+# stubby -i (validar el contenido de la configuración. Si es correcto termina con "Result: Config file syntax is valid.")
+# stubby -l (habilitar el registro de todos los logs)
+# stubby -v 7 (lo mismo)
+Las opciones de log:
+-v 0 --> Cuando el sistema es inutilizable
+-v 1 --> Cuando se debe actuar de inmediato
+-v 2 --> Cuando existen condiciones críticas
+-v 3 --> Cuando existe algún error
+-v 4 --> Cuando existe alguna adverténcia
+-v 5 --> Condiciones normales pero significativas
+-v 6 --> Mensajes informativos
+-v 7 --> Todos los mensajes
+
+
 stumpwm
 Gestor de ventanas atilado escrito en common lisp y que solo usa el teclado. Los mesajes de texto, por defecto, aparecen en la parte superior derecha de la pantalla. El archivo de configuración de los atajos está en /usr/share/common-lisp/source/stumpwm/bindings.lisp.
 Atajos:
