@@ -64817,6 +64817,25 @@ wspanish
 El paquete contiene una lista alfabética de algunas palabras en español. No pretender ser una lista de palabras completa y muchas palabras No están completamente expandidas. Se almacena en el directorio /usr/share/dict/
 
 
+wtmpdb
+Utilidad para mostrar información de inicio y cierre de sesión y reinicios del sistema. La información se guarda en una base de datos SQLite, por defecto /var/lib/wtmpdb/wtmp.db, lo que permite búsquedas rápidas, consultas SQL arbitrarias y rotado integrado.
+$ wtmpdb last (historial completo)
+$ wtmpdb last -n 5 (solo las 5 entradas más recientes)
+$ wtmpdb last -n 7 USER (las 7 últimas de un usuario concreto)
+$ wtmpdb last -n 4 tux tty (las 4 últimas del usuario especificado en las tty)
+$ wtmpdb last -F (con fechas y horas completas)
+$ wtmpdb last -F -n 6 (de las últimas 6 especificando las fechas concretas)
+$ wtmpdb last -s "2026-10-01" -t "2026-10-03" (especificando para determinados dias)
+$ wtmpdb last -s "2026-10-02" (solo los de determinado dia)
+$ wtmpdb rotate (rotar las bases de datos)
+$ wtmpdb boot (registrar arranque/apagado manualmente que rara vez se hace a mano; normalmente lo hacen las unidades de systemd
+$ wtmpdb shutdown (lo mismo)
+$ wtmpdb last shutdown (ver el último apagado con el usuario "shutdown")
+$ wtmpdb shutdown (el último apagado)
+$ wtmpdb last reboot (ver el último reinicio con el usuario "reboot")
+Nota.- El subcomando "reboot" se añadió en una versión posterior de wtmpdb y puede que Debian estable todavía no lo incluye, pero se puede filtrar por el pseudo-usuario "reboot".
+
+
 wttr
 Servicio de predicción meteorológica y fuentes de datos para la información del pronóstico del tiempo. Admite varios métodos de presentación (curl, httpie, wget, HTML para navegadores, png...)
 $ curl wttr.in/Figueras,Gerona (especificando ciudad y provincia)
