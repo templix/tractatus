@@ -59314,6 +59314,22 @@ $ stund -h 10.0.1.150 -a 10.0.1.151 (Si las direcciones IP de la tarjeta de red 
 $ stund -h 10.0.1.150 -a 10.0.1.151 -b (para desacoplar el proceso)
 
 
+stunnel4
+Túnel SSL universal para demonios de red. El programa stunnel está diseñado para funcionar como una capa de cifrado SSL entre un cliente remoto y un servidor local (que pueda iniciarse mediante inetd) o remoto. La idea es que, si tiene demonios que no soportan SSL ejecutándose en su sistema, puede configurarlos fácilmente para que se comuniquen con los clientes a través de un canal SSL seguro. Un ejemplo de archivo de configuración en /usr/share/doc/stunnel4/examples/stunnel.conf-sample que se puede copiar en el directorio y adaptarlo a las necesidades:
+# cp /usr/share/doc/stunnel4/examples/stunnel.conf-sample /etc/stunnel/stunnel.conf
+Un ejemplo de archivo de configuración:
+# /etc/stunnel/stunnel.conf
+   	   [mysql]
+	   accept = 3307
+	   connect = 127.0.0.1:3306
+	   cert = /etc/ssl/certs/mysql-selfsigned.pem
+	   key = /etc/ssl/private/mysql-selfsigned.key
+El cliente se conecta a https://servidor:3307, stunnel acepta la conexión TLS en el puerto 3307, descifra los datos y los envía a 127.0.0.1:3306, el MySQL local.  La respuesta de MySQL vuelve por el mismo camino y se cifra antes de entregarse al cliente.
+# stunnel4 /etc/stunnel/stunnel.conf (iniciar stunnel con este archivo)
+# sudo systemctl status stunnel4.service (comprobar si está activo)
+# ps aux | grep stunnel4 (otra forma de verificar si el proceso está corriendo)
+
+
 su
 Cambiar de usuario
 $ su -m           (Cambia de root [#] a usuario normal [$])
