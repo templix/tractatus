@@ -59290,6 +59290,30 @@ $ startx
 Y tendremos una sesion stumpwm en la tty8
 
 
+stun-client
+Cliente STUN [Simple Traversal of UDP through NATs]. Se utiliza para ayudar a los clientes situados tras un NAT a canalizar las llamadas entrantes. El servidor actúa como contraparte para ayudar al cliente a identificar el NAT y lograr que este abra los puertos adecuados. Este paquete instala únicamente el cliente. Si el equipo, está detrás de un NAT, pregunta a un servidor público: "¿con qué IP y puerto me ves tú?". El servidor responde y así se descubre la dirección pública con lo que se puede montar llamadas VoIP/SIP, P2P o WebRTC sin ir a ciegas. También sirve para clasificar el tipo de NAT que se tiene: full cone, restricted cone, port restricted o simétrico.
+$ stun stun.l.google.com:19302 (uso básico)
+       ...
+       Primary: Independent Mapping
+       ...
+Interpretar la salida:
+Independent Mapping --> usa la misma IP:puerto externo para todos los destinos. Es buena señal, es de tipo cone.
+Address/Port Dependent Mapping --> es un NAT simétrico, el más molesto para P2P.
+Filter --> indica quién puede enviar paquetes de vuelta: cualquiera, solo IPs que se han contactado, o IP+puerto exacto.
+preserves ports --> el NAT intenta mantener el puerto de origen.
+hairpin --> si se puede alcanzar la propia IP pública desde dentro de la red.
+$ stun -v -p 5060 stun.l.google.com (en modo verboso y fijando puerto UDP de origen local)
+$ stun stun.l.google.com 3478 (especificando el puerto del servidor)
+Nota.- El cliente usa el STUN antiguo y para clasificar el NAT necesita un servidor que soporte CHANGE-REQUEST. Los servidores públicos modernos, como stun.l.google.com:19302, solo hablan el STUN nuevo [RFC 5389] y muchas veces el test sale incompleto o falla. Si te pasa, no es que el NAT sea raro, es que el servidor es demasiado moderno para el cliente.
+
+
+stun-server
+Servidor STUN que ayuda a un dispositivo detrás de un enrutador a descubrir su dirección IP pública y su puerto externo. Listado de STUN públicos en https://gist.github.com/mondain/b0ec1cf5f60ae726202e.
+# sudo systemctl status stun.service (comprobar el estado del servicio)
+$ stund -h 10.0.1.150 -a 10.0.1.151 (Si las direcciones IP de la tarjeta de red [NIC] son 10.0.1.150 y 10.0.1.151, este sería el uso predeterminado)
+$ stund -h 10.0.1.150 -a 10.0.1.151 -b (para desacoplar el proceso)
+
+
 su
 Cambiar de usuario
 $ su -m           (Cambia de root [#] a usuario normal [$])
