@@ -33057,17 +33057,24 @@ $ lxterminal --working-directory=/home/USER/Documentos (brir la terminal en un d
 
 lynis
 Busca en el sistema posibles debilidades de configuración sin realizar ninguna modificación.
+$ git clone https://github.com/CISOfy/lynis (descargar la última versión si la de los repositorios no lo es)
 # lynis (Visualizar las opciones)
+# lynis show (argumentos adicionales)
+# lynis show commands (ver comandos disponibles)
+# lynis update check (comprobar la versión si es up-to-date o precisamos actualizar)
+# lynis -check-update (comprobar si existen actualizaciones)
 # lynis audit system --forensics (análisis forenses en un sistema en ejecución o montado)
 # lynix audit system --pentest (muestra puntos de interés para pruebas de penetración)
 # lynis audit system remote <host> (Análisis de seguridad remoto)
 # lynis show (ver todos los argumentos adicionales)
 # lynis show tests (alguno de los argumentos del listado anterior. Ver todos los chequeos que realiza)
+# lynis audit system -q (solo muestra los warnings)
 # lynis audit system --quick | grep -E "WARNING|SUGGESTION" (crear un informe más limpio y solo lo que importa)
 # lynis audit system --warnings-only --no-colors | tee lynis_warnings.log (solo ver warnings)
-# lynis update info (descargar actualizaciones)
+# lynis update info (informe de la versión)
 # cat /var/log/lynis.log | grep Warning (ver las vulnerabilidades)
 # cat /var/log/lynis.log | grep Suggestion (ver sugerencias que nos realiza lynis)
+# nano /var/log/lynis-report.dat (datos del informe)
 
 
 lynx
