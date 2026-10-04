@@ -59347,6 +59347,12 @@ $ su -c "!!" root (Ejecutar el último comando ejecutado como root)
 $ su - usuario (recarga todos los archivos del perfil del usuario y se reseteen todos los paths y alias. Si no se especifica usuario, por defecto es root)
 
 
+subarch-select
+Seleccione entre binarios según la compatibilidad con la microarquitectura x86. Elija un ejecutable basándose en las capacidades de la CPU. Invoque `subarch-select` con pares de argumentos que enumeren las características de la CPU (como las «flags» de `/proc/cpuinfo`) y la ruta del programa a ejecutar si se cumplen todas dichas características. La primera combinación de características que coincida con las capacidades del sistema determinará la ruta seleccionada. Los argumentos para el programa deben pasarse después de «--». También admite las microarquitecturas x86-64: x86-64-v2, x86-64-v3 y x86-64-v4.
+$ cat /proc/cpuinfo | grep flags (determinar qué flags tiene la CPU)
+$ subarch-select "sse4.2" "/usr/bin/program-sse4" "avx" "/usr/bin/program-avx" -- /usr/bin/program-default (si la CPU soporta sse4.2, se ejecuta /usr/bin/program-sse4, si soporta avx, se ejecuta /usr/bin/program-avx y si ninguna de esas características está presente, se ejecuta /usr/bin/program-default)
+
+
 sublime-text
 Editor. Descargar según arquitectura de http://www.sublimetext.com/2 o via ppa (Debian):
 $ wget http://blog.anantshri.info/content/uploads/2010/09/add-apt-repository.sh.txt
@@ -59363,6 +59369,25 @@ Ctrl + p (abrir cuadro de diálogo [goto anything] donde se entran las consultas
 Ctrl + ` (Ir a la consola de sublime text)
 Ctrl + Mayu + p (Acceder al control de paquetes. Entrando "Install package" se instalan nuevos plugins y con "Remove package" se desinstalan)
 Ctrl + n (Abrir nuevo documento)
+
+
+subliminal
+Herramienta de línea de comandos para buscar y descargar subtítulos de forma automática para archivos de vídeo. Subliminal utiliza múltiples proveedores [Addic7ed, OpenSubtitles, OpenSubtitles.com, Podnapisi, TvSubtitles, Gestdown, NapiProjekt, etc.] para ofrecer a los usuarios una amplia variedad de opciones y aumentar las probabilidades de encontrar los subtítulos que mejor se ajusten al contenido.
+$ subliminal download -l es Mi.Pelicula.2023.1080p.mkv (descargar subtítulos en español para un archivo concreto)
+$ subliminal download --debug -l es Mi.Pelicula.2023.1080p.mkv (si un subtítulo no se descarga para ver qué está pasando)
+$ subliminal download -l es -a 1w /ruta/a/mis/series/ (solo vídeos recientes de la última semana. Tambien acepta 12h [últimas 12 horas], 2d [2 dias], 1w2d [1 semana y 2 dias], etc)
+$ subliminal download -l es -f archivo.mkv (forzar la descarga aunque ya exista subtítulo)
+
+
+sublist3r
+contiene una herramienta de seguridad en Python diseñada para enumerar subdominios de sitios web usando exclusivamente fuentes públicas [OSINT]. Ayuda a los especialistas en pruebas de penetración y a los cazadores de errores a recopilar subdominios del dominio objetivo a través de la red. Sublist3r enumera subdominios utilizando diversos motores de búsqueda, como Google, Yahoo, Bing, Baidu y Ask. Asimismo, emplea servicios como Netcraft, Virustotal, ThreatCrowd, DNSdumpster y ReverseDNS para dicha tarea.
+$ sublist3r -d ejemplo.com (enumerar subdominios de ejemplo.com)
+$ sublist3r -d ejemplo.com -p 443 (especificar puerto para validar, por defecto 80)
+$ sublist3r -d ejemplo.com -o subdominios.txt (guardar la salida en un archivo)
+$ sublist3r -d ejemplo.com -b -w /usr/share/wordlists/subdomains.txt (activa fuerza bruta [-b] y usar diccionario, más lento, más resultados)
+$ sublist3r -d ejemplo.com -v (habilitar logs detallados)
+$ sublist3r -d ejemplo.com -e google,yahoo (habilitar motores especificos)
+Nota.- El proyecto está poco mantenido y algunos motores han dejado de funcionar, Google scraping es frágil.
 
 
 subnetcalc
