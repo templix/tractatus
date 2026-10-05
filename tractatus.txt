@@ -59461,6 +59461,22 @@ $ xssstate -i (estado del protector de pantalla en X11 en milisegundos)
 $ xssstate -s (estado actual del protector de pantalla. "on" activo, "off" no activo, "disabled" desactivado)
 
 
+sucrack
+Herramienta multihilo para el descifrado por fuerza bruta de cuentas de usuario locales a través de su.
+$ sucrak -a -c -w 3 -u USER_CAMBIO -l x wordlist (usar códigos de escape ANSI para una visualización estética de las estadísticas, mostrar estadísticas si se pulsa una tecla distinta de «q», 3 hilos de ejcución, cuenta de usuario a la que cambiar, aplicar todas las reglas y archivo de palabras)
+Las reglas pueden ser:
+    	A = todos los caracteres en mayúsculas
+	F = primer carácter en mayúsculas
+	L = último carácter en mayúsculas
+	a = todos los caracteres en minúsculas
+	f = primer carácter en minúsculas
+	l = último carácter en minúsculas
+	D = anteponer un dígito
+	d = añadir un dígito al final
+	e = caracteres estilo «1337»
+	x = todas las reglas
+
+
 sudo
 Utilidad que permite a un usuario ejecutar programas con privilegios de root. En algunas distros sólo el usuario creado durante la instalación puede ejecutar sudo con privilegios de root, los demás han de ser agregados al grupo admin. Incluye las aplicaciones: cvtsudoers [convertir entre formatos de archivo sudoers], sudoedit [Ejecutar comandos como otro usuario] y sudoreplay [enumera los registros de salida creados por sudo]
 $ sudo -k   (limpia la clave sudo introducida)
