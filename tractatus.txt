@@ -22123,6 +22123,7 @@ Notaa.- No todos los cargadores de arranque admiten todas las características d
 gh
 GitHub CLI, la herramienta oficial de línea de comandos de GitHub.
 $ gh auth login (autenticar gh y Git con GitHub)
+$ gh auth status (ver el estado de la autentificación)
 $ gh repo list (listar repositorios)
 $ gh repo create nombre-repo --private (crear un nuevo repositorio)
 $ gh repo clone repo (clonar un repositorio)
@@ -22242,7 +22243,8 @@ $ git config --global credential.helper cache (guarda la contraseña en caché)
 $ git config --global credential.helper 'cache --timeout=3600' (guarda la contraseña durante una hora)
 $ git rm archivo (Eliminar archivo)
 $ git fetch origin (este comando junto con el siguiente elimina todos los cambios locales y pone la versión del servidor)
-$ git reset --hard origin/master
+$ git reset --hard origin/master (dejar el repositorio exactamente como estaba antes si se hacian pruebas)
+$ git reset --hard HEAD~1 (lo mismo)
 $ git diff --color-words archivo1 archivo2  (Mostrar las diferencias en color)
 $ git instaweb --httpd=webrick (Abre el proyecto con navegador en localhost:1234)
 $ git instaweb --httpd=webrick --stop (Cierra la visualización del proyecto con el navegador)
@@ -59555,6 +59557,17 @@ Añadimos la ruta al final del usuario que queremos monitorizar:
 # sudosh (Inicia la grabación de todo lo que ocurre en la consola)
 # sudosh-replay (Muestra las grabaciones archivadas en /var/log/sudosh/)
 # sudosh-replay templix-root-script-1353428989-Eji70wlZOAuIE4HM (Reproduce la escogida)
+
+
+sugarjar
+Herramienta que trabaja fundamentalmente con la historia y las ramas locales de Git, no con la API de GitHub. Actua como un "wrapper" o asistente para tareas que normalmente requerirían múltiples comandos de `git` o llamadas directas a la API de GitHub.
+$ sj binfo (muestra la historia de la rama actual)
+$ sj binfo master (lo mismo)
+$ sj --log-level debug binfo (en modo debug)
+$ sj smartlog (mira todas las ramas y construye una representación de la historia)
+$ sj debuginfo (mostrar configuración)
+$ git reset --hard HEAD~1 (dejar el repositorio exactamente como estaba antes de hacer pruebas)
+$ sed -n '1,160p' /usr/share/rubygems-integration/all/gems/sugarjar-2.0.1/lib/sugarjar/commands/branch.rb (ver 160 lineas de logs para ver si existen problemas)
 
 
 sulogin
