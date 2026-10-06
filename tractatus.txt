@@ -2219,8 +2219,8 @@ ascii
 $ man ascii (muestra la tabla de caracteres)
 $ ¾ (ctrl-shift-u be intro)
 $ æ (ctrl-shift-u e6 intro)
-Una curiosidad de ascii:
-$ ssh -o StrictHostKeyChecking=no watch.ascii.theater
+$ for i in {1..256};do printf '%3d %b\n' $i \\0$((i/64*100+i%64/8*10+i%8));done|cat -t|column -c$((${COLUMNS:-80}/2)) (todos los caracteres ascii)
+$ ssh -o StrictHostKeyChecking=no watch.ascii.theater (una curiosidad de ascii)
 
 
 ascii-image-converter
@@ -22257,6 +22257,7 @@ $ git instaweb --httpd=webrick (Abre el proyecto con navegador en localhost:1234
 $ git instaweb --httpd=webrick --stop (Cierra la visualización del proyecto con el navegador)
 $ git commit --amend (editar el último commit para modificarlo)
 $ git fsck (verificar el repositorio git con el local)
+$ o=0; git log --oneline | while read l; do printf "%+9s %s\n" "HEAD~${o}" "$l"; o=$(($o+1)); done | less (lista los desplazamientos desde HEAD con git log)
 1.-
 Indicar a git archivos o directorios que quedemos excluir del control de versiones.
 $ touch .gitignore (Crear el fichero en el directorio raiz del proyecto)
@@ -28863,7 +28864,7 @@ Sistema de registro [log] propio de systemd.
 # journalctl -b -0 (Muestra los mensajes del arranque actual)
 # journalctl -b -1 (Muestra los mensajes del arranque anterior)
 # journalctl -b -2 (Muestra los mensajes desde los dos últimos arranques)
-# journalctl --list-boots (Muestra los últimos arranques guardados por el sistema. Si el sistema no guarda los registros de arranque hay que editar el fichero /etc/systemd/journald.conf y añadir/editar la línea Storage=persistent dentro de la sección [Journal])
+# journalctl --list-boots (listar reinicios. Si el sistema no los guarda hay que editar el fichero /etc/systemd/journald.conf y añadir/editar la línea Storage=persistent dentro de la sección [Journal])
 # journalctl -b -0 | grep -i "error\|failed\|warning" (buscar error/failed/warning en los logs del presente arranque)
 # journalctl -b -u lightdm --no-pager | grep Failed (ver "Failed" del arranque del sistema respecto del programa lightdm)
 # journalctl -b 27487d1e4b1241df93a55949aef01161 (También se puede consultar los mensajes de un arranque en concreto poniendo el identificador que aparece con --list-boots)
@@ -28877,6 +28878,7 @@ Sistema de registro [log] propio de systemd.
 # journalctl --since "2016-09-13" (Muestra los mensajes des de el día especificado en el formato YYYY-MM-DD)
 # journalctl --list-boots (muestra el historial de reinicios)
 # journalctl -b -p err..err --no-pager (ver mensajes del boot actual)
+# journalctl --no-pager --since today --grep 'fail|error|fatal' --output json | jq '._EXE' | sort | uniq -c | sort --numeric --reverse --key 1 (encontrar los errores más recientes)
 1.-
 Hacer que el demonio syslog funcione con journal
 # systemctl enable syslog-ng
@@ -46827,12 +46829,21 @@ $ printf "%06d\n" "$RANDOM" "$RANDOM" "$RANDOM" "$RANDOM" (Iguala las cuatro sal
 $ printf "%-10s %-10s %s\n", $1, $2, $3 (3 variables justificadas a la izquierda, las dos primeras con 10 caracteres)
 " printf "Linux es genial " > /dev/pts/4 (enviar una frase a otra terminal)
 Algunas opciones:
-%c (Imprime el primer carácter de una variable cadena)
-%d (Imprime un número decimal)
-%s (Cadena)
-%b (Interpreta las secuencias de escape del argumento cadena)
-%q (Escribe el argumento cadena de forma que pueda ser usado como entrada a otro comando)
-%% (Escribe % literal)
+	%c (Imprime el primer carácter de una variable cadena)
+	%d (Imprime un número decimal)
+	%s (Cadena)
+	%b (Interpreta las secuencias de escape del argumento cadena)
+	%q (Escribe el argumento cadena de forma que pueda ser usado como entrada a otro comando)
+	%% (Escribe % literal)
+Algunas curiosidades con el comando:
+$ a=+; printf "%s" $_{1..080}"$a" $'\n' (Repite cualquier cadena o carácter n veces sin espacios entre ellos. Imprime la variable "$a" 80 veces con un salto de línea al final)
+$ printf -vl "%${COLUMNS:-`tput cols 2>&-||echo 80`}s\n" && echo ${l// /-}; (crear una linea de guiones)
+$ printf "\U$(printf '%x' $((RANDOM%79+128512)) )" ; echo (mostrar un icono aleatorio en la terminal)
+$ printf "%`tput cols`s"|sed "s/ /_/g" (genera una linea horizontal)
+$ printf -v _hr "%*s" $(tput cols) && echo ${_hr// /${1-_}} (lo mismo)
+$ printf '%*s\n' "${COLUMNS:-80}" '' | tr ' ' "${1-_}" (lo mismo)
+$ printf "%.s*" {1..40}; printf "\n" (linea separadora con asteriscos)
+$ printf "\e[38;5;1m"; while true; do printf "\e[?5h A L E R T %s\n" "$(date)"; sleep 0.1; printf "\e[?5l"; read -r -s -n1 -t1 && printf "\e[39m" && break; done (genera una alerta hasta que se pulsa una tecla)
 
 
 prips
@@ -48883,6 +48894,12 @@ $ cdvdcontrol -d /dev/sr0 --sm-dvd-rd 8 (limitar velocidad de lectura DVD a 8x)
 $ readdvd -d /dev/sr0 -o imagen.iso (leer discos protegidos o dañados)
 $ readdvd -d /dev/sr0 -d /dev/sr1 -o imagen.iso (lectura multihilo, más rápida si hay múltiples unidades)
 $ psxtool (abre la interfaz gráfica)
+
+
+qr
+Código de barras bidimensional que puede ser escaneado por una cámara de smartphone o un lector de códigos QR. Contiene información que puede ser leída e interpretada digitalmente, como las URL de sitios web, datos de contacto u otros tipos de datos. Ver grterminal, qrencode, qrterminal y phpqrcode. Algunos ejemplos en terminal sin usar comandos específicos:
+$ printf 'Linux es un sistema genial' | curl -F-=\<- qrenco.de
+$ echo "http://lapipaplena.wordpress.com" | curl -F-=\<- qrenco.de
 
 
 qrencode
