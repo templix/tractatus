@@ -30012,17 +30012,24 @@ $ tiffsplittiles mapa_historico.tif 256 256 mapa_tile (dividir mapa_historico.ti
 
 last
 [lastlog2]. Muestra la ultima vez que se conecto un usuario [/var/log/wtmp].
-$ last -n 10 (Muestra los últimos 10 eventos. )
+$ last -n 10 (muestra los últimos 10 eventos)
+$ last 10 (lo mismo)
 $ last reboot (la útima vez que se reinició)
-$ last -i (Mostrando la ip)
+$ last -i (mostrando la ip)
 $ last tty1 (que lo hizo a la tty1)
 $ last usuario (que se conectó “usuario”)
-$ last -f /media/sda2/var/log/wtmp (Analizar el acceso de otro sistema)
+$ last -f /media/sda2/var/log/wtmp (analizar el acceso de otro sistema)
 
 
 lastb
-Muestra los intentos de conexión fallidos (/var/log/btmp)
-# lastb   -20 (Muestra los últimos 20 intentos fallidos en logearse)
+Muestra los intentos de conexión fallidos (/var/log/btmp) Ver last.
+# lastb (listar intentos de inicio de sesión fallidos)
+# lastb -s 2026-09-14 (listar inicios de sesión fallidos desde una fecha determinada)
+# lastb -t 2026-10-01  (listar inicios de sesión fallidos hasta una fecha determinada)
+# lastb -p 2026-10-06 12:30 (mostrar usuarios presentes en un momento específico)
+# lastb -d (resolver direcciones IP a nombres de host)
+# lastb -n 10 (limitar la salida a un número específico de entradas)
+# lastb -F (mostrar marcas de tiempo completas, incluyendo año y segundos)
 
 
 lastcomm
