@@ -59608,6 +59608,18 @@ $ git reset --hard HEAD~1 (dejar el repositorio exactamente como estaba antes de
 $ sed -n '1,160p' /usr/share/rubygems-integration/all/gems/sugarjar-2.0.1/lib/sugarjar/commands/branch.rb (ver 160 lineas de logs para ver si existen problemas)
 
 
+sugarplum
+Herramienta anti-spam basada en Perl que genera direcciones de correo falsas y páginas web dinámicas diseñadas específicamente para detectar bots cosechadores de emails [email harvesters/spambots], envenenar bases de datos con direcciones inválidas y "Waste their time" [hacer perder el tiempo]. El Spambot llega a un sitio web, visita el sitio y les sirve el tarpit, es decir, obtiene cientos de emails falsos, los añade a su lista para mandar nuevos spam y la lista queda contaminada con basura. Se trata de una herramienta antigua, de los 2000, los spambots modernos son más sofisticados y algunos harvesters ya detectan páginas trampa. Esta herramienta cuando se instala ya viene configurada para apache en el directorio /etc/apache2/conf-available/sugarplum.conf y sugarplum en /usr/lib/cgi-bin/sugarplum/poison
+# a2enmod cgid (activar el módulo caso de no estarlo)
+# a2enconf sugarplum (activar el módulo sugarplum)
+# a2enmod rewrite (activar el módulo rewrite)
+# systemctl restart apache2 (reiniciar Apache)
+$ curl -I http://localhost/sugarplum/ (comprobar si apache está ejecutando el script sugarplum. Correcto si aparece algo parecido a "HTTP/1.1 200 OK0")
+$ curl -A "EmailSiphon" http://localhost/ (otra forma de comprobarlo haciendo ver que somos un bot extractor de correo EmailSiphon. Si la terminal se cuelga o escupe lineas llenas de direcciones de correo, funciona el comando)
+# tail -f /var/log/apache2/error.log (comprobar ssi existen problemas)
+Nota.- Si existe activado el módulo Modsecurity [security2] ek scruot sugarplum queda bloqueado.
+
+
 sulogin
 permite el ingreso del superusuario al sistema. Suele ser invocado por init cuando el sistema entra en el modo monousuario.
 
