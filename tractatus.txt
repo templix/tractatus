@@ -22234,13 +22234,20 @@ $ git clone ssh://usuario@host.com/home/templix/repositorio repositorio (Clonar 
 $ git config -l (Comprobar todos los parámetros configurados)
 $ git config user.email (comrpobar el mail del usuario)
 $ git config remote.origin.url (Ver cual es el repositorio remoto)
-$ git log (Ver historial de commits)
-$ git log --oneline (ver el historial y cada entrada en una linea)
-$ git log --pretty=oneline (Mostrar listado de push a uno por linea pero de forma completa)
-$ git status (Comprobar si se han efectuado cambios)
+$ git config --global user.password "password" (poner la contraseña)
+$ git config --global user.mail "email" (poner el email)
 $ git config --global credential.helper store (que git guarde usuario y contraseña para siempre)
 $ git config --global credential.helper cache (guarda la contraseña en caché)
 $ git config --global credential.helper 'cache --timeout=3600' (guarda la contraseña durante una hora)
+$ git config --global user.name "username" (poner un nombre de identificación)
+$ git config --help (Mostrar ayuda de un comando)
+$ git log (Ver historial de commits)
+$ git log --oneline (ver el historial y cada entrada en una linea)
+$ git log --pretty=oneline (Mostrar listado de push a uno por linea pero de forma completa)
+$ git log | nl -w9 -v0 --body-numbering='pcommit\ [0-9a-f]\{40\}' | sed 's/^ \+\([0-9]\+\)\s\+/HEAD~\1 /' (Muestra el registro de git con desplazamientos relativos a HEAD)
+$ git log --oneline | nl -v0 | sed 's/^ \+/&HEAD~/' (muestra el registro de git (en orden inverso) indicando la referencia relativa a HEAD)
+$ git log --pretty=oneline | wc -l (muestra el número de commits realizados en un repositorio Git)
+$ git status (Comprobar si se han efectuado cambios)
 $ git rm archivo (Eliminar archivo)
 $ git fetch origin (este comando junto con el siguiente elimina todos los cambios locales y pone la versión del servidor)
 $ git reset --hard origin/master (dejar el repositorio exactamente como estaba antes si se hacian pruebas)
@@ -22248,11 +22255,7 @@ $ git reset --hard HEAD~1 (lo mismo)
 $ git diff --color-words archivo1 archivo2  (Mostrar las diferencias en color)
 $ git instaweb --httpd=webrick (Abre el proyecto con navegador en localhost:1234)
 $ git instaweb --httpd=webrick --stop (Cierra la visualización del proyecto con el navegador)
-$ git config --help (Mostrar ayuda de un comando)
 $ git commit --amend (editar el último commit para modificarlo)
-$ git config --global user.name "username" (poner un nombre de identificación)
-$ git config --global user.password "password" (poner la contraseña)
-$ git config --global user.mail "email" (poner el email)
 $ git fsck (verificar el repositorio git con el local)
 1.-
 Indicar a git archivos o directorios que quedemos excluir del control de versiones.
@@ -34034,6 +34037,17 @@ Dar de alta un nuevo sitio para rastrear y se obtiene el código de seguimiento 
           })();
         </script>
 Copiar y pegar el código anterior dentro de la etiqueta <head> o <body> de cada página del sitio web que se quiera analizar. Cada vez que un usuario visite una página con este código, se registrará la visita en la instancia de Matomo y en el panel de control de Matomo en el navegador se podrán ver los informes de tráfico, comportamiento de los usuarios, conversiones, y más.
+
+
+matrix
+Salvapantallas tipo el que se muestra en la película del mismo nombre. Varias muestras:
+$ perl -e '$|=1;print" "x rand 35,rand 2|0 while 1' (un matrix de unos y ceros)
+$ echo -e "\e[32m"; while :; do printf '%*c' $(($RANDOM % 30)) $(($RANDOM % 2)); done
+$ yes 'c=(" " " " " " 0 1); printf "${c[RANDOM%5]}"' | bash
+$ perl -e 'use Term::ANSIColor;$|++; while (1) { print color("green")," " x (rand(35) + 1), int(rand(2)), color("reset") }'
+$ perl -e '$|++; while (1) { print " " x (rand(35) + 1), int(rand(2)) }'
+$ echo -e "\e[32m"; while :; do for i in {1..16}; do r=`echo -e "\x$(echo $(($(($RANDOM % 26)) + $(echo $([[ $(($RANDOM % 3)) == 1 ]] && echo -n 48 || echo -n $([[ $(($RANDOM % 3)) == 2 ]] && echo -n 97 || echo -n 65))))) 16 o p | dc)"`; if [[ $(($RANDOM % 5)) == 1 ]]; then if [[ $(($RANDOM % 4)) == 1 ]]; then v+="\e[1m $r   "; else v+="\e[2m $r   "; fi; else v+="     "; fi; done; echo -e "$v"; v=""; done
+$ while (true) ; do pwgen 1 ; done
 
 
 mawk
