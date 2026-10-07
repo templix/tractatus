@@ -1613,14 +1613,15 @@ Agregar un cd-rom archivo sources.list.
 
 apt-cache
 Empleado para buscar en la base de datos provista por la lista de fuentes [dpkg solo busca los contenidos de los paquetes instalados].
-# apt-cache search paquete       (Busca en la cache paquete)
-# apt-cache show paquete         (Muestra la descripción completa del paquete)
-# apt-cache showpkg paquete   (Muestra su relación con otros paquetes)
-# apt-cache depends paquete    (Muestra las dependencias del paquete)
-# apt-cache rdepend paquete     (Muestra dependencias inversas del paquete)
-# apt-cache policy paquete       (Ver vesiones de paquetes y la versión instalada)
+# apt-cache search paquete (Busca en la cache paquete)
+# apt-cache show paquete (Muestra la descripción completa del paquete)
+# apt-cache showpkg paquete (Muestra su relación con otros paquetes)
+# apt-cache depends paquete (Muestra las dependencias del paquete)
+# apt-cache rdepend paquete (Muestra dependencias inversas del paquete)
+# apt-cache policy paquete (Ver vesiones de paquetes y la versión instalada)
 # apt-cache search dummy | grep -i "dummy package" | wc -l (identificar cuantos paquetes de transición estan instalados en el sistema)
 # apt-cache show login | grep Essential (ver si determinado paquete es esencial)
+# apt-cache pkgnames linux-image-7. (ver todos los paquetes con este prefijo)
 
 
 apt-cacher-ng
@@ -5929,11 +5930,11 @@ $ cat /var/log/apache2/access.log | ccze -A
 
 cd
 Moverse a un directorio
-$ cd     (entra al directorio personal estes donde estes)
-$ cd ~   (entra al direcotorio personal estes donde estes)
-$ cd ..  (baja un nivel)
+$ cd (entra al directorio personal estes donde estes)
+$ cd ~ (entra al direcotorio personal estes donde estes)
+$ cd .. (baja un nivel)
 $ cd ../.. (baja dos niveles)
-$ cd -   (entra en el último directorio en el que se ha estado)
+$ cd - (entra en el último directorio en el que se ha estado)
 
 
 cd-discid
@@ -19994,7 +19995,7 @@ $ fort-validator --repo <ruta_del_repositorio> (validar un repositorio RPKI loca
 
 
 fortune-anarchism
-Mostrar frases anarquistas aleatorias.
+Mostrar frases anarquistas aleatorias en inglés.
 $ fortune /usr/share/games/fortunes/anarchism
 
 
@@ -20018,7 +20019,7 @@ $ unstr frases.txt.dat frases.txt (invierte el proceso de strfile. A partir del 
 
 
 fortunes
-[fortunes-es fortunes-es-off]. Mostrar frases aleatorias.
+[fortunes-es fortunes-es-off]. Mostrar frases aleatorias. Ver fortune-anarchism.
 $ fortune
 $ fortune -l (muestra citas largas en inglés)
 $ fortune -s (citas cortas en inglés)
@@ -20030,6 +20031,7 @@ $ fortune /usr/share/games/fortunes/es/amistad.fortunes
 $ fortune /usr/share/games/fortunes/es/asimov.fortunes
 $ fortune /usr/share/games/fortunes/es/ciencia.fortunes
 $ fortune /usr/share/games/fortunes/es/deprimente.fortunes
+$ fortune /usr/share/games/fortunes/es/arte.fortunes | cowsay -f tux (con pipe al comando cowsay [ver])
 
 
 fossil
@@ -22259,6 +22261,7 @@ $ git diff --color-words archivo1 archivo2  (Mostrar las diferencias en color)
 $ git instaweb --httpd=webrick (Abre el proyecto con navegador en localhost:1234)
 $ git instaweb --httpd=webrick --stop (Cierra la visualización del proyecto con el navegador)
 $ git commit --amend (editar el último commit para modificarlo)
+$ git commit --allow-empty-message --message "" (crear un commit sin mensaje)
 $ git fsck (verificar el repositorio git con el local)
 $ o=0; git log --oneline | while read l; do printf "%+9s %s\n" "HEAD~${o}" "$l"; o=$(($o+1)); done | less (lista los desplazamientos desde HEAD con git log)
 1.-
@@ -33783,6 +33786,7 @@ $ man -k permissions (Busca comandos que traten sobre “permissions”)
 $ man -k vnc ssh (Buscar sobre dos comandos)
 $ man -t ls > ls.pdf (Formateado para salida pdf)
 $ man -t ls | ps2pdf -&gt; /home/usuario/ls.pdf (Lo mismo)
+$ man -H ip > ip.html (imprimir página de manual en formato HTML, mandarlo a un archivo y la abre directamente en el navegador)
 $ man 2 read (Especificando la sección del manual. Por defecto la 1)
 Secciones:
 Sección 1: Comandos generales
@@ -62016,8 +62020,8 @@ La política de Debian exige que los cambios de los usuarios en los archivos de 
 
 uchardet
 Detecta la codificación de un texto.
-        $ uchardet texto.txt
-        UTF-8
+$ uchardet texto.txt
+       UTF-8
 
 
 udev
@@ -65231,6 +65235,12 @@ $ xclock (analogico)
 $ xclock -d (digital)
 
 
+xcowsay
+Un cowsay [ver] para las X.
+$ xcowsay "linux es genial" (forma básica)
+$ xcowsay --image=/home/USER/Images/gnu.png -t 10 "Linux es genial" (usar un logo del directorio, que se muestre en pantalla 10 segundos mostrando el texto especificado)
+
+
 xcwd
 Herramienta que abre una terminal de la ventana enfocada. Cambia el directorio de trabajo para la conexión a la ruta solicitada. Si, por ejemplo, tenemos thunar con la dirección /var/www/html/tractatus, y abrimos una terminal y tecleamos:
 $ urxvt -cd "$(xcwd)"
@@ -65646,9 +65656,9 @@ $ xprop -display :0 -spy | grep "WM_NAME(STRING)"  (Sobre el navegador, mostrar�
 xrandr
 Cambiar la resolución de pantalla.
 $ xrandr  (muestra la resolución usada, la máxima, la mínima y todas las posibles. La marcada con un "*" es la usada y la “+” es la optima)
-$ xrandr | grep \* | cut -d' ' -f4 (otra forma de ver la resolución usada)
-$ xrandr -s 1280x1024    (modificar la resolución)
-$ xrandr -r 76   (modificar la tasa de refresco)
+$ xrandr | grep '*' | cut -d' ' -f4 (otra forma de ver la resolución usada)
+$ xrandr -s 1280x1024 (modificar la resolución)
+$ xrandr -r 76 (modificar la tasa de refresco)
 $ xrandr --auto (configurar proyectores externos)
 $ xrandr -q | awk -F'current' -F',' 'NR==1 {gsub("( |current)","");print $2}'  (solo muestra la resolución usada)
 $ xrandr -q | grep -w Screen (muestra la mínima, la usada y la máxima)
