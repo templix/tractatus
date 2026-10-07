@@ -22247,6 +22247,9 @@ $ git log --pretty=oneline (Mostrar listado de push a uno por linea pero de form
 $ git log | nl -w9 -v0 --body-numbering='pcommit\ [0-9a-f]\{40\}' | sed 's/^ \+\([0-9]\+\)\s\+/HEAD~\1 /' (Muestra el registro de git con desplazamientos relativos a HEAD)
 $ git log --oneline | nl -v0 | sed 's/^ \+/&HEAD~/' (muestra el registro de git (en orden inverso) indicando la referencia relativa a HEAD)
 $ git log --pretty=oneline | wc -l (muestra el número de commits realizados en un repositorio Git)
+$ git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Cblue - %cn %Creset' --abbrev-commit --date=relative (muestra el registro de git de forma atractiva)
+$ git log -i --grep='termino_a_buscar' (buscar en los logs)
+$ git log -p --name-only --follow tractatus.txt (Obtener el historial completo de commits de Git para un archivo específico)
 $ git status (Comprobar si se han efectuado cambios)
 $ git rm archivo (Eliminar archivo)
 $ git fetch origin (este comando junto con el siguiente elimina todos los cambios locales y pone la versión del servidor)
@@ -48596,6 +48599,8 @@ Lenguaje de programación
 $ python3 (abre la shell de python para introducir comandos)
 $ python3 -c 'print "x"*50'  (escribe una linea xxxxx de 50 caracteres)
 $ python3 -m http.server (abre un servidor web en localhost puerto 8000)
+$ python3 -m http.server --bind localhost $(shuf -i 49152-65000 -n1) (crear un servidor web en el presente directorio en un puerto aleatorio)
+$ python3 -m http.server 8888 (crear un servidor web del directorio actual en el puerto 8888)
 $ python3 -m smtpd -n -c DebuggingServer localhost:25 (iniciar un servidor de correos en el puerto especificado)
 $ python3 -m pyftpdlib.ftpserver (inicia servidor ftp)
 $ python3 -m webbrowser http://web.com (abre una página en el navegador)
@@ -65722,6 +65727,7 @@ $ xsel --clipboard > archivo.txt (Volcar el contenido del portapapeles)
 $ cat /etc/apt/sources.list | xsel -b  (Copiar al portapapeles)
 $ xsel --clipboard  (Pegar lo copiado)
 $ xsel --clipboard --clear (borrar el contenido del portapapeles)
+$ xsel -bc (lo mismo)
 
 
 xset
