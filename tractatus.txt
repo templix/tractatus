@@ -2220,7 +2220,7 @@ ascii
 $ man ascii (muestra la tabla de caracteres)
 $ ¾ (ctrl-shift-u be intro)
 $ æ (ctrl-shift-u e6 intro)
-$ for i in {1..256};do printf '%3d %b\n' $i \\0$((i/64*100+i%64/8*10+i%8));done|cat -t|column -c$((${COLUMNS:-80}/2)) (todos los caracteres ascii)
+$ for i in {1..256};do p=" $i";echo -e "${p: -3} \\0$(($i/64*100+$i%64/8*10+$i%8))";done|cat -t|column -c120 (todos los caracteres ascii)
 $ ssh -o StrictHostKeyChecking=no watch.ascii.theater (una curiosidad de ascii)
 
 
@@ -26180,6 +26180,7 @@ Se puede minificar así:
 htop
 Muestra el consumo de CPU, RAM y SWAP y debajo de estos los diferentes procesos  organizados por defecto de mayor a menor consumo de CPU. Pulsando “u” podremos introducir el usuario a monitorizar y pulsando “k” e introduciendo el PID, mataremos el proceso.
 $ htop
+$ htop -p `pgrep firefox` (ver solo lo que consume una aplicación)
 
 
 htpasswd
@@ -28980,7 +28981,14 @@ $ jpnevulator --pass --tty /dev/ttyS0 --tty /dev/ttyS1 (leer y escribir en múlt
 
 jq
 Procesador JSON escrito en C que se usa para segmentar, filtrar, mapear y transformar datos estructurados. jq puede transformar el formato de datos que se tiene al que se deseas con muy poco esfuerzo.
-$ echo '{"nombre":"Ana","edad":30}' | jq '.nombre' (muestra el nombre [Ana])
+$ echo '{"datos":{"nombre":"Lorenzo","edad":50,"tags":["linux","ia"]}}' | jq '.datos' (muestra toda la estructura bien presentada)
+$ echo '{"datos":{"nombre":"Lorenzo","edad":50,"tags":["linux","ia"]}}' | jq -r '.datos.nombre' (solo muestra el nombre sin las comillas)
+$ echo '{"nombre":"Ana","edad":30}' | jq '.nombre' (muestra el nombre [Ana] con las comillas)
+$ echo '["a","b","c","d","e"]' | jq '.[0]' (muestra el primer elemento: "a")
+$ echo '["a","b","c","d","e"]' | jq '.[-1]' (muestra el último elemento: "e")
+$ echo '["a","b","c","d","e"]' | jq '.[]' (muestra "a" "b" "c" "d" "e")
+$ echo '["a","b","c","d","e"]' | jq '.[0:4]' (muestra del primero al cuarto: "a", "b", "c" y "d")
+$ echo '["a","b","c","d","e"]' | jq '.[2:]' (muestra del tercero al final)
 $ echo '[1,2,3]' | jq 'map(. * 2)' (multiplica por 2 y los coloca uno por linea)
 $ echo '[{"a":1},{"a":5}]' | jq '.[] | select(.a > 2)' (muestra el mayor que 2)
 $ jq < file.json (validar y formatear la salida JSON)
@@ -58896,11 +58904,11 @@ $ startx -- :1 (una segunda sesión gráfica accesible en ^Alt + F8)
 stat
 Estadísticas de archivo, directorios y sistemas
 # stat /etc/passwd
-# stat -c '%A %a' /etc/passwd (Mostrar los permisos de forma clásica i en formato octal)
+# stat -c '%A %a' /etc/passwd (Mostrar los permisos de forma clásica y en formato octal)
 # stat /usr
 # stat -f /
 $ stat -c "%s" archivo (medida del archivo)
-$ stat -c '%n %U:%G-%a' * (Mostrar nombre archivo, propietario, grupo y permisos en formato octal)
+$ stat -c '%n %U:%G-%a' * (Mostrar nombre archivo, propietario, grupo y permisos en formato octal de todos los archivos del directorio)
 $ stat / | awk '/Naixement: /{print $2 " " substr($3,1,5)}' (fecha de instalación del sistema)
 Nota.- Si la instalación fue en castellano sustituir "Naixement" por "Creación" o "Bird" si en inglés)
 
@@ -59701,7 +59709,7 @@ Esc (Stop )
 	^o (Ver código fuente)
 
 
-surfraw (sr)
+surfraw
 Buscador de significados en la web. Antes de usar, especificar los navegadores que se usarán en teminal y en las X, mostrando la ruta absoluta a los ejecutables:
 # nano /etc/xdg/surfraw/conf
 	...
@@ -59809,6 +59817,11 @@ $ sv hup nginx (reiniciar un servicio si ya está en ejecución)
 $ sv force-stop nginx (forzar parar un servicio)
 $ sv reload nom_del_servei (recargar la configuración de un servicio sin pararlo)
 $ sv status /etc/service/* (listar servicios)
+
+
+svg2ttf
+Convierte fuentes SVG a fuentes TTF.
+$ svg2ttf entrada.svg salida.ttf
 
 
 swap
