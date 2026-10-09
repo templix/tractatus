@@ -40595,6 +40595,23 @@ $ nuttcp -s IP (que la ip especificada sea el receptor)
 $ nuettcp - IP (que la ip especificada sea el transmisor)
 
 
+nvidia-settings
+Herramienta oficial para configurar y consultar parámetros del controlador gráficos NVIDIA.
+$ nvidia-settings -q gpucoretemp (ver la temperatura actual de la tarjeta)
+$ nvidia-settings -q gpucoretemp -t | awk '{s+=$1}END{print s/NR}' RS=" " (imprimir la temperatura media del núcleo de la GPU)
+$ nvidia-settings -q NvidiaDriverVersion (ver la versión del controlador de NVIDIA instalado)
+$ nvidia-settings -q all (listar todos los atributos disponibles que se puede consultar o modificar)
+$ nvidia-settings --load-config-only (cargar la configuración guardada al iniciar el sistema)
+Muchas opciones como modificar las velocidades de los ventiladores o hacer overclocking están bloqueadas por defecto por razones de seguridad. Para desbloquearlas, es necesario generar o editar el archivo de configuración de X11 agregando la opción Coolbits, dicho se puede hacer ejecutando el siguiente comando como superusuario y reiniciando el entorno gráfico:
+# nvidia-xconfig --cool-bits=4
+El número 4 habilita el control manual del ventilador; otros números habilitan el overclocking de memoria o núcleo.
+1.-
+Para controlar la velocidad del ventilador manualmente:
+$ nvidia-settings -a "[gpu:0]/GPUFanControlState=1"
+Luego, se fija la velocidad del ventilador al 60%
+$ nvidia-settings -a "[fan:0]/GPUTargetFanSpeed=60"
+
+
 nvme-cli
 [NVM Express]. Herramienta para interactuar con unidades de almacenamiento NVMe [Non-Volatile Memory Express], que son SSDs modernos conectados directamente a través del bus PCIe. Esta herramienta permite consultar información del dispositivo, realizar pruebas de rendimiento, actualizar firmware, gestionar espacios de nombres, etc.
 # nvme list (mostrar todos los controladores NVMe y sus espacios de nombres)
@@ -65371,6 +65388,7 @@ Ejemplo en un script [que abra una nueva pestaña, escriba “ifconfig” y puls
 xdpyinfo
 Muestra información de las DPI disponibles de la sesión de Xorg actual.
 $ xdpyinfo
+$ xdpyinfo | grep dimensions | awk '{print $2}' (obtiene la resolución de pantalla de X11)
 
 
 xephyr
