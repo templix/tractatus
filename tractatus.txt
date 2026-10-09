@@ -12105,13 +12105,14 @@ Nota.-Los otros programas ya están comentados en sus entradas,
 dig
 [dnsutils]. Realizar consultas a los servidores DNS
 $ dig tuxapuntes.com
-$ dig telefonica.net DNS  (Mostrando los servidores DNS del dominio)
-$ dig -x 74.220.215.64 (Resolución inversa)
+$ dig +short tuxapuntes.com (muestra la ip del dominio mencionado)
+$ dig telefonica.net DNS  (mostrando los servidores DNS del dominio)
+$ dig -x 74.220.215.64 (resolución inversa)
 Nota.- Los datos importantes en la “ANSWER SECTION”
 $ dig +short myip.opendns.com @resolver1.opendns.com (muestra IP externa)
-$ dig tuxapuntes.com somedomainname.net axfr   (mirar si un dominio es susceptible de ataques axfr)
-$ dig +trace tuxapuntes.com (Ver saltos de la petición hasta el servidor)
-$ dig ANY tuxapuntes.com (Consultar todos los registros de la zona DNS)
+$ dig tuxapuntes.com somedomainname.net axfr (mirar si un dominio es susceptible de ataques axfr)
+$ dig +trace tuxapuntes.com (ver saltos de la petición hasta el servidor)
+$ dig ANY tuxapuntes.com (consultar todos los registros de la zona DNS)
 
 
 digimend
@@ -27476,6 +27477,7 @@ muestra estadísticas de la CPU y de la entrada y salida de los dispositivos y p
 $ iostat -x sda -d 1 6 (6 reportes con 1 segundo de intervalo sobre el disco sda. Suprimiendo la última cifra [6] continuará reportando datos hasta finalizar con Ctrl+c)
 $ iostat -d 3 (actualizará resultados cada 3 segundos)
 $ iostat -p sda (Ver estadisticas de un disco concreto con sus particiones)
+$ iostat -d -x 5 2 (actualizará dos veces con 5 segundos de diferencia)
 
 
 iotop
@@ -41139,6 +41141,7 @@ Una vez subido por primera vez el sitio, las siguientes modificaciones se reflej
 od
 Vuelca ficheros en octal
 $ od -x fichero
+$ od -An -N1 -tu1 /dev/random (muestra número aleatorio entre 1 y 256. Obtiene un byte de /dev/random, cuya fuente es el grupo de entropía del kernel)
 $ cat texto.txt | od -x texto.octal
 
 
@@ -60291,6 +60294,7 @@ $ t1unmac fuente_mac.bin > fuente.pfb (extrae la fuente del archivo fuente_mac.b
 tac
 Muestra el fichero por consola, al revés. De la última linea a la primera
 $ tac archivo.txt
+$ tac ~/.bash_history | grep -w comando (muestra el historial de bash mostrando primero las ejecuciones más recientes)
 
 
 tail
