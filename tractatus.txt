@@ -30775,6 +30775,7 @@ $ nano .bashrc
 Añadir las siguientes dos lineas:
 alias alert_helper='history|tail -n1|sed -e "s/^\s*[0-9]\+\s*//" -e "s/;\s*alert$//"'
 alias alert='notify-send -i /usr/share/icons/gnome/32×32/apps/gnome-terminal.png "[$?] $(alert_helper)"'
+alias gedit='notify-send "Abriendo..." "Se ha lanzado gedit" && gedit' (si se quiere probar el comando al lanzar una aplicación)
 Guardar y recargar bashrc:
 $ source .bashrc
 Otros ejemplos:
@@ -44487,6 +44488,7 @@ $ journalctl -u pgqd.service (ver logs)
 pgrep
 Examina los procesos en ejecución y enumera los identificadores de cada proceso [PID].
 $ pgrep emacs
+$ pgrep -lt firefox (muestra todos los procesos relacionados con firefox)
 $ pgrep httpd
 $ pgrep -l -G group (del grupo especificado)
 $ pgrep -l -u user (del usuario especificado)
@@ -60501,6 +60503,9 @@ Capturar el trafico de la red.
 # timeout 60 tcpdump -i wlp2s0 -n host ifconfig.me -vv 2>/dev/null | grep -E "IP|Host" (capturar durante 1 minuto quién abre conexión a ifconfig.me)
 # tcpdump -i enp1s0 icmp (poner a tcpdump a la escucha para tráfico icmp protocolo de control i diagnóstico utilizado para informar de errores de transmissión)
 # tcpdump -i enp1s0 -n -c 50 -q (información en tiempo real mostrando las últimas 50 IPs y puertos)
+# tcpdump -r /var/log/network/daemonlogger.1791638583.pcap (ver todo el contenido de un .pcap)
+# tcpdump -r /var/log/network/daemonlogger.1791638583.pcap "udp port 53" (ver solo peticiones DNS de las páginas buscadas en un .pcap)
+# tcpdump -r /var/log/network/daemonlogger.1791638583.pcap "host 8.8.8.8" (ver solo tráfico con una IP externa, ej. los servidores de Google 8.8.8.8 de un .pcap)
 Algunas opciones:
 -n (Para no resolver las direcciones IP)
 -i (Indica la interfaz de red)
@@ -61918,6 +61923,7 @@ tune2fs
 # tune2fs -m 1 /dev/sda1 (modificar el espacio reservado para root al 1%. Por defecto es del 5%. Ver dumpe2fs)
 # tune2fs -O ^has_journal /dev/sda1 (Desactivar journaling en una partición)
 # tune2fs -O has_journal /dev/sda1 (Activar journaling)
+# tune2fs -l $(df -h / |(read; awk '{print $1; exit}')) | grep -i created (muestra la antigüedad de la instalación de Linux)
 1.-
 Convertir sistema de archivos de ext3 a ext4. Desde un livecd o una partición no montada :
 # tune2fs -O extents,uninit_bg,dir_index /dev/sdax (convertir)
