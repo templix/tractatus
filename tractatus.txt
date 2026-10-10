@@ -9950,10 +9950,15 @@ Nota.- El script tiene que estar diseñado para funcionar como un demonio, por e
 
 
 daemonlogger
-Registrador de paquetes y un demonio de soft tap. Es capaz de funcionar en dos modos: rastreando paquetes y registrándolos directamente en el disco o en Reflect mode [modo de "soft tap" - toque suave] donde refleja los paquetes en otra interfaz, útil para la monitorización en tiempo real sin interrumpir el tráfico de red. Daemonlogger se puede ejecutar en primer plano o en segundo plano como un demonio.
-$ daemonlogger -i eth0 -f /var/log/packets.log (captura paquetes de una interfaz de red y los registra en un archivo en el disco)
-$ daemonlogger -i eth0 -o eth1 (refleja los paquetes capturados [eth0] a otra interfaz de red [eth1])
-$ daemonlogger -i eth0 -f /var/log/packets.log -o eth1 (captura los paquetes de eth0, los registra en /var/log/packets.log y también los envia a eth1)
+Herramienta de seguridad y administración de redes que funciona como un capturador de tráfico de red ligero, diseñado especialmente para correr en segundo plano de forma eficiente. Captura el tráfico que pasa por una tarjeta de red y lo guarda en archivos .pcap para analizarlo con posterioridad con wireshark (GUI) o tcpdump [ver].
+# mkdir /var/log/network/ (crear el directorio donde guardar los .pcap)
+# daemonlogger -i eth0 -l /var/log/network/ -n auditoria -d (capturar tráfico básico en segundo plano y guardarlo en /var/log/network con nombre auditorio.xxxxxxx.pcap. Para detener Ctrl + C)
+# daemonlogger -i eth0 -l /var/log/network/ -r -M 80 (-r activa el modo ringbuffer que es cuando el almacenamiento llega a un límite, borra los archivos más viejos y limita el almacenamiento al 80% de la capacidad del volumen)
+# daemonlogger -i eth0 -l /var/log/network/ -s 104857600 (que cierre el archivo actual y abra uno nuevo cada 100 Megabytes [104,857,600 bytes]. Por defecto a 2147483648 bytes [2 Gigabytes])
+# daemonlogger -i eth0 -o eth1 (desviar todo el tráfico en eth0 hacia otra máquina conectada en eth1)
+# daemonlogger -i eth0 -l /var/log/network/ "port 80 and host 192.168.1.50" (filtrar tráfico específico [Filtros BPF])
+# tcpdump -i enp1s0 -l -A "tcp port 80" | grep --line-buffered -E "Host:|User-Agent:|GET |POST " (ver strings en vivo)
+# tcpdump -Xnr /var/log/network/daemonlogger.1791638583.pcap "tcp port 853" -c 4 (comprobar si la salida está cifrada)
 
 
 daemontools
@@ -60506,6 +60511,8 @@ Capturar el trafico de la red.
 # tcpdump -r /var/log/network/daemonlogger.1791638583.pcap (ver todo el contenido de un .pcap)
 # tcpdump -r /var/log/network/daemonlogger.1791638583.pcap "udp port 53" (ver solo peticiones DNS de las páginas buscadas en un .pcap)
 # tcpdump -r /var/log/network/daemonlogger.1791638583.pcap "host 8.8.8.8" (ver solo tráfico con una IP externa, ej. los servidores de Google 8.8.8.8 de un .pcap)
+# tcpdump -i enp1s0 -l -A "tcp port 80" | grep --line-buffered -E "Host:|User-Agent:|GET |POST " (ver strings en vivo)
+# tcpdump -Xnr /var/log/network/daemonlogger.1791638583.pcap "tcp port 853" -c 4 (comprobar si la salida está cifrada)
 Algunas opciones:
 -n (Para no resolver las direcciones IP)
 -i (Indica la interfaz de red)
