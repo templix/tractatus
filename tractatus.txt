@@ -40306,9 +40306,10 @@ $ normalizer text.txt
 $ normalizer -n text.txt (normaliza el archivo de entrada. Si no se establece, el programa no escribe nada.)
 
 
-notify
+notify-send
 [libnotify-bin]. Aviso o notificación que lanza el sistema al producirse un evento o terminar una tarea.
-$ notify-send "Linux es un sistema genial" -t 5000
+$ notify-send Nota "Linux es un sistema genial" -t 0 (que salga la nota y no se cierre hasta que la cierre el usuario)
+$ notify-send -u critical -t 10 Nota "Reiniciar" (con la etiqueta critical durante 10 segundos)
 Un ejemplo de uso para algunas tareas:
 $ nano .bashrc
 Añadir las siguientes dos lineas:
@@ -40320,9 +40321,11 @@ Otros ejemplos:
 $ find /home/$USER -iname *.jpg; notify-send "El comando ha terminado su labor."
 $ sleep 10; alert
 $ find /home/$USER -iname *.jpg; notify-send -i gtk-dialog-warning -t 4000 "ATENCIÓN" "El comando find ha terminado..."
-opciones:
--i especifica el icono a usar
--t tiempo en milisegundos que se mostrará la nota
+
+
+notify-osd
+Demonio que muestra notificaciones emergentes que las dibuja en la pantalla de forma pasiva y minimalista que normalmente como una burbuja translúcida en la esquina superior derecha que no interrumpe el foco de tus ventanas y desaparece sola. Escucha en el bus de sesión del D-Bus las peticiones de notificación que envían las aplicaciones o scripts del sistema y las renderiza en pantalla bajo un diseño estricto, una sola burbuja a la vez, estilo heads-up display. No admite botones interactivos ni florituras solo muestra texto y opcionalmente un icono.
+$ pgrep -la notify-osd (comprobar si está activo- Ver pgrep)
 
 
 notus-scanner
