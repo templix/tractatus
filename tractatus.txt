@@ -30770,6 +30770,17 @@ Envía notificaciones al escritorio.
 $ notify-send "linux es genial" (muestra el texto en la pantalla duante 10 segundos)
 $ notify-send -u normal -t 0 Nota "linux es genial" (con etiqueta "normal" y mostrar la nota hasta que el usuario la cierre)
 $ notify-send -u critical -t 20 Nota "Reiniciar el sistema" (con etiqueta "critical" y mostrar la nota 20 segundos)
+Un ejemplo de uso para algunas tareas:
+$ nano .bashrc
+Añadir las siguientes dos lineas:
+alias alert_helper='history|tail -n1|sed -e "s/^\s*[0-9]\+\s*//" -e "s/;\s*alert$//"'
+alias alert='notify-send -i /usr/share/icons/gnome/32×32/apps/gnome-terminal.png "[$?] $(alert_helper)"'
+Guardar y recargar bashrc:
+$ source .bashrc
+Otros ejemplos:
+$ find /home/$USER -iname *.jpg; notify-send "El comando ha terminado su labor."
+$ sleep 10; alert
+$ find /home/$USER -iname *.jpg; notify-send -i gtk-dialog-warning -t 4000 "ATENCIÓN" "El comando find ha terminado..."
 
 
 libpam-tmpdir
@@ -40307,20 +40318,7 @@ $ normalizer -n text.txt (normaliza el archivo de entrada. Si no se establece, e
 
 
 notify-send
-[libnotify-bin]. Aviso o notificación que lanza el sistema al producirse un evento o terminar una tarea.
-$ notify-send Nota "Linux es un sistema genial" -t 0 (que salga la nota y no se cierre hasta que la cierre el usuario)
-$ notify-send -u critical -t 10 Nota "Reiniciar" (con la etiqueta critical durante 10 segundos)
-Un ejemplo de uso para algunas tareas:
-$ nano .bashrc
-Añadir las siguientes dos lineas:
-alias alert_helper='history|tail -n1|sed -e "s/^\s*[0-9]\+\s*//" -e "s/;\s*alert$//"'
-alias alert='notify-send -i /usr/share/icons/gnome/32×32/apps/gnome-terminal.png "[$?] $(alert_helper)"'
-Guardar y recargar bashrc:
-$ source .bashrc
-Otros ejemplos:
-$ find /home/$USER -iname *.jpg; notify-send "El comando ha terminado su labor."
-$ sleep 10; alert
-$ find /home/$USER -iname *.jpg; notify-send -i gtk-dialog-warning -t 4000 "ATENCIÓN" "El comando find ha terminado..."
+Ver libnotify-bin. Aviso o notificación que lanza el sistema al producirse un evento o terminar una tarea.
 
 
 notify-osd
