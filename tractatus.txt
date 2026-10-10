@@ -26378,9 +26378,15 @@ Configuración como servicio en el servidor para que hts se ejecute automáticam
 
 
 httrack
-[WebHTTrack]. Crea en local una copia navegable de una web que puede visualizarse con un navegador sin necesidad de conexión a internet.
-$ httrack sitio_escogido.com (Crea en el directorio personal una carpeta "sitio_escogido.com" con todos loa datos descargados del sitio original)
-$ httrack sitio_escogido.com -O /root/descargas/pelis (Especificando lugar de descarga)
+Crea en local una copia navegable de una web que puede visualizarse con un navegador sin necesidad de conexión a internet. Existe la versión web WebHTTrack [verr].
+$ httrack "https://www.commandlinefu.com/commands/browse/" -O ~/websites/ -s0 (descargar un sitio en websites/ ignorando robots.txt [no aconsejable])
+$ ls websites
+backblue.gif  fade.gif	hts-cache  hts-log.txt	index.html  www.commandlinefu.com
+$ httrack "https://www.commandlinefu.com/commands/browse/" -O ~/websites/ "+*.www.commandlinefu.com/*" -v (limitar al dominio y sus subdominios, con filtro explícito, "+" incluir y "-" para excluir y de forma detallada)
+$ httrack "https://ejemplo.com" -O ~/websites/ejemplo -r4 -c4 -A50000 (limitar profundidad [4], conexiones simultáneas [4] y limitar velocidad de descarga [bytesxsegundo])
+$ httrack "https://ejemplo.com" -O ~/websites/ejemplo "-*.zip" "-*.iso" "-*.mp4" (excluir tipos de archivo pesados)
+$ httrack --update (dentro del directorio del proyecto, actualizar una copia ya realizada bajando solo lo nuevo o modificado)
+$ httrack --continue (reanudar una descarga interrumpida)
 
 
 hub
@@ -64239,6 +64245,11 @@ webfsd
 Sencillo servidor HTTP para contenido estático. Carece de archivos de configuración por lo que todas sus funcionalidades se pueden controlar por parámetro. Acceso por navegador con http://url_o_ip:puerto.
 $ webfsd -r /home/usuario/videos -p 12001 (Compartir el directorio "videos" por el puerto 12001 y actuando como demonio. Matar el proceso con killall webfsd)
 $ webfsd -F -r /home/usuario/videos -p 12001 -b pepe:1234 (Solicitando nombre de usuario y contraseña y sin actuar como demonio [-F]. Matar el proceso con Ctrl+c)
+
+
+webhttrack
+Interfaz web para la herramienta httrack [ver] que sirve para descargar un sitio completo [HTML, imágenes, CSS, etc.] y reescribe los enlaces para que se pueda navegar offline desde el disco. Arranca htsserver, incluido en el mismo paquete y que es un mini servidor web que escucha solo en local [localhost] en un puerto libre, abre el navegador apuntando a ese servidor y cuando se cierra la sesión con el botón Exit de la interfaz, apaga el servidor.
+$ webhttrack (abre en el navegador la interfaz. Seguir las indicaciones)
 
 
 webkit2pdf
