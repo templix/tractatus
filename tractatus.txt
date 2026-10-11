@@ -13694,18 +13694,19 @@ Gestor de programario de distros derivadas de Debian
 $ dpkg -l inkscape  (Conocer si un paquete está instalado y su versión)
 # dpkg -l 'emacs*' (listará todos los paquetes instalados o no, cuyo nombre coincida con el argumento pasado)
 # dpkg -l 'emacs*' | grep '^un' (Mostrar los no instalados)
-# dpkg -S fichero    (Muestra a qué paquete pertenece un fichero)
-# dpkg --get-selections   (Muestra todos los paquetes instalados en el sistema)
+# dpkg -S fichero (muestra a qué paquete pertenece un fichero)
+# dpkg --get-selections (muestra todos los paquetes instalados en el sistema)
+# dpkg --get-selections | grep -Evw 'deinstall$' | cut -f1 | sort -u | xargs (lo mismo)
 # dpkg --get-selections | cut -f1 (Lo mismo más fino)
-# dpkg --get-selections > lista.txt    (Los manda a un fichero)
+# dpkg --get-selections > lista.txt (Los manda a un fichero)
 # dpkg --get-selections | grep python (muestra todos los paquetes python)
-# dpkg -l > llistat.txt      (Manda a un fichero todos los paquetes Debian)
-# dpkg --status paquete  (Info, dependencias, recomendaciones, sugerencias)
+# dpkg -l > llistat.txt (manda a un fichero todos los paquetes Debian)
+# dpkg --status paquete (info, dependencias, recomendaciones, sugerencias)
 # dpkg -install paquete --force-conflicts (instalar un paquete conflicitivo)
 # dpkg --print-architecture (mostrar la arquitectura de un pc)
 # dpkg --configure -a  (R. inconsistencias o procesos despues de un cuelgue)
 # dpkg -i --force-overwrite /var/cache/apt/archives/paquete.deb (forzar install)
-# dpkg -b deb paquete.deb (Convertir la carpeta “deb” en un archivo “.deb”)
+# dpkg -b deb paquete.deb (convertir la carpeta “deb” en un archivo “.deb”)
 # dpkg -L util-linux | grep -E '/bin/|/sbin/' (ver los ejecutables de un paquete)
 # dpkg -l 'linux-*' | sed '/^ii/!d;/'"$(uname -r | sed "s/\(.*\)-\([^0-9]\+\)/\1/")"'/d;s/^[^ ]* [^ ]* \([^ ]*\).*/\1/;/[0-9]/!d' (listar todos los kernels instalados, excepto el actual)
 # for a in $(sudo dpkg --get-selections|cut -f1); do dpkg-repack $a|awk '{if (system("sleep .5 && exit 2") != 2) exit; print}';done (guarda una copia de todos los paquetes tal como están instalados y configurados en el sistema)
@@ -16154,6 +16155,7 @@ $ env | grep DISPLAY
 $ env | grep PATH | tr ':' '\n'
 $ env -0 > /tmp/mi_entorno.env (guardar el entorno actual en un archivo)
 $ env --env0-from=/tmp/mi_entorno.env bash (restaurar el entorno desde el archivo y ejecutar un comando)
+$ env | sed 's/\(.*\)=\(.*\)/: ${\1:="\2"}/' > mydefaults.bash (guardar entorno actual como un conjunto de valores predeterminados)
 $ env | grep XDG_ (listar todas las variables XDG)
 Algunas opciones para grep: SHELL, USER, KEYBOARD, LANG..
 
@@ -18748,42 +18750,43 @@ $ fincore -b text1.txt text2.html
 
 find
 Buscar archivos o directorios
-$ find / -iname archivo     (Busca en / archivo sin distinguir minusculas y mayusculas)
-$ find /home -name *.png -print      (Buscará en /home todos los archivos “.png” y mostrará la ruta)
+$ find / -iname archivo (busca en / archivo sin distinguir minusculas y mayusculas)
+$ find /home -name *.png -print (buscará en /home todos los archivos “.png” y mostrará la ruta)
 $ find . -name "*.bak" -exec rm {} \; (buscará en el directorio todos los acabados en .bak y los borrará. la instrucción "-exec" seguido del comando a ejecutar. los corchetes {} se refiere a los ficheros que find ha encontrado y la barra invertida seguido de punto y coma \; indica el final de la instrucción)
-$ find . ! -iname “*.png” ! -name “*.jpg”  (Buscar en el directorio actual todos los archivos menos los acabados en png y jpg)
+$ find . ! -iname “*.png” ! -name “*.jpg” (buscar en el directorio actual todos los archivos menos los acabados en png y jpg)
 $ find . -type f -iname '*.txt' -o -iname '*.pdf' (buscar en el directorio actual y subdirectorios todos los .txt y los .pdf)
-$ find . -amin -15 (Buscar los que se ha accedido en los últimos 15 minutos)
-$ find . -atime 15 (Buscar los que se accedió por última vez hace 15 dias)
-$ find / -amin -10 (Los que se ha accedido los últimos 10 minutos)
-$ find . -type f  (Buscar ficheros)
-$ find . -type d  (Buscar directorios)
+$ find . -amin -15 (buscar los que se ha accedido en los últimos 15 minutos)
+$ find . -atime 15 (buscar los que se accedió por última vez hace 15 dias)
+$ find / -amin -10 (los que se ha accedido los últimos 10 minutos)
+$ find . -type f  (buscar ficheros)
+$ find . -type d  (buscar directorios)
 $ find / -iname fichero 2>/dev/null  (buscar redireccionando los avisos de permiso denegado a /dev/null)
-$ find . -iname "*.txt" -or -iname "*.odt" -exec cp {} documentos \; (Buscar los txt y los odt y copiarlos a la carpeta documentos)
-$ find . -type d -exec chmod 0755 {} \; (Cambiar permisos de todos los directorios y subdirectorios)
-$ find . -type f -exec chmod 0644 {} \; (Cambiar permisos de todos los ficheros del directorio y de los subdirectorios)
+$ find -executable -type f (mostrar ejecutables en el presente directorio)
+$ find . -iname "*.txt" -or -iname "*.odt" -exec cp {} documentos \; (buscar los txt y los odt y copiarlos a la carpeta documentos)
+$ find . -type d -exec chmod 0755 {} \; (cambiar permisos de todos los directorios y subdirectorios)
+$ find . -type f -exec chmod 0644 {} \; (cambiar permisos de todos los ficheros del directorio y de los subdirectorios)
 $ find . -type f -iname "*.bak" | xargs rm (buscar los ficheros acabados en .bak y borrarlos. xargs hace lo mismo que exec pero usando una tuberia.)
 $ find /home/usuario -name * | xargs grep "tractatus" (buscar cadena de caracteres "tractatus" dentro de todos los archivos de /home/usuario)
-$ find /home/usuario -iname '*.bak' -delete (Otra forma de borrar todos los .bak de un directorio)
+$ find /home/usuario -iname '*.bak' -delete (otra forma de borrar todos los .bak de un directorio)
 $ find . -type f -iname *.sla (buscará los ficheros .sla)
-$ find . -type f -mtime 0 (Buscará los ficheros creados o modificados hoy)
-$ find / -type f -mtime -1 -print (Los modificados las últimas 24 horas)
-$ find / -mtime +2 -print (Los modificados hace más de dos dias)
-$ find -L . -type l  (Buscar enlaces rotos)
+$ find . -type f -mtime 0 (buscará los ficheros creados o modificados hoy)
+$ find / -type f -mtime -1 -print (los modificados las últimas 24 horas)
+$ find / -mtime +2 -print (los modificados hace más de dos dias)
+$ find -L . -type l  (buscar enlaces rotos)
 $ find -name "#*#" -print -delete (suprimir todos los que empiecen por *)
 $ find -name "*~undo-tree~" -print -delete (en emacs todos los bufers que han dejado rastros *undo-tree*)
 $ find . –type l (lo mismo)
-$ find . -type l -delete (eliminat todos los enlaces rotos)
+$ find . -type l -delete (eliminar todos los enlaces rotos)
 $ find . -type f -size +300k > masde300k.txt (buscar .sh mayores de 300k)
 $ find ./ -name .svn -exec rm -rf {} \; (eliminar todos los directorios y subdirectorios subversión)
-$ find . -name "*.html" -exec grep -i -H "Tractatus elementalis" {} \; (Buscar en todos los archivos html del directorio actual con un texto concreto)
-$ find . -name \*.txt -exec sed -i "s/cosa/casa/g" {} \; (Substituir “cosa” por “casa” en todos los .txt del presente directorio)
-$ find ~/ -depth -type f -empty (Buscar archivos vacios. Con -type d buscará directorios vacios)
-$ find / -name "algo" -a ! -path "/media/servidor/*" -exec echo {} \; 2>/dev/null (Buscar "algo" descartando el directorio /media/servidor/)
-$ find /home/usuario -iname '*.odt' -exec cp '{}' /home/usuario/Documentos \; (Copiar todos los odt a la carpeta Documentos)
-$ find . -type f -amin -5 ! -path "./.*" (Buscar ficheros modificados los últimos 5 minutos descartando los ocultos)
+$ find . -name "*.html" -exec grep -i -H "Tractatus elementalis" {} \; (buscar en todos los archivos html del directorio actual con un texto concreto)
+$ find . -name \*.txt -exec sed -i "s/cosa/casa/g" {} \; (substituir “cosa” por “casa” en todos los .txt del presente directorio)
+$ find ~/ -depth -type f -empty (buscar archivos vacios. Con -type d buscará directorios vacios)
+$ find / -name "algo" -a ! -path "/media/servidor/*" -exec echo {} \; 2>/dev/null (buscar "algo" descartando el directorio /media/servidor/)
+$ find /home/usuario -iname '*.odt' -exec cp '{}' /home/usuario/Documentos \; (copiar todos los odt a la carpeta Documentos)
+$ find . -type f -amin -5 ! -path "./.*" (buscar ficheros modificados los últimos 5 minutos descartando los ocultos)
 $ find . ! -name "plantilla*" -type f -delete | find . ! -name HTMLS -type d -delete (borrar todos menos los "plantilla*" y el directorio "HTMLS")
-$ find -L /sys/bus/pci/devices/*/ata*/host*/target* -maxdepth 3 -name "sd*" 2>/dev/null | egrep block |egrep --colour '(ata[0-9]*)|(sd.*)' (Encontrar qué /dev/sda, sdb, etc. corresponde al ATA/SATA declarado en dmesg, etc para determinar qué disco duro es)
+$ find -L /sys/bus/pci/devices/*/ata*/host*/target* -maxdepth 3 -name "sd*" 2>/dev/null | egrep block |egrep --colour '(ata[0-9]*)|(sd.*)' (encontrar qué /dev/sda, sdb, etc. corresponde al ATA/SATA declarado en dmesg, etc para determinar qué disco duro es)
 
 
 findbugs
@@ -22279,6 +22282,7 @@ $ git instaweb --httpd=webrick --stop (Cierra la visualización del proyecto con
 $ git commit --amend (editar el último commit para modificarlo)
 $ git commit --allow-empty-message --message "" (crear un commit sin mensaje)
 $ git fsck (verificar el repositorio git con el local)
+$ git log | grep Date | awk '{print " : "$4" "$3" "$6}' | uniq -c (número de commits por día)
 $ o=0; git log --oneline | while read l; do printf "%+9s %s\n" "HEAD~${o}" "$l"; o=$(($o+1)); done | less (lista los desplazamientos desde HEAD con git log)
 1.-
 Indicar a git archivos o directorios que quedemos excluir del control de versiones.
@@ -25481,6 +25485,8 @@ $ history -a (Guardar el historial sin cerrar la sesión)
 $ echo $HISTCMD (número de comandos registrados en history y este tambien queda reflejado en history)
 $ history -d $HISTCMD && ip a (ejecuta "ip a" pero no se muestra en el historial)
 $ ip a # un comentario (en history aparecerá "ip a # un comentario")
+$ sort ~/.bash_history|uniq -c|sort -n|tail -n 10 (consultar los comandos más utilizados en el historial de Bash)
+$ cp -a ~/.bash_history ~/.bash_history.bak && perl -ne 'print unless $seen{$_}++' ~/.bash_history.bak >~/.bash_history (Eliminar entradas duplicadas de un mismo comando en .bash_history conservando el orden cronológico y copia seguridad)
 $ echo "" > ~/.bash_history && history -c (borrar el historial completo)
 1.-
 Borrar el historial automáticamente al cerrar la sesión de terminal
@@ -27390,8 +27396,9 @@ Paquete de herramientas para depurar el controlador gráfico de Intel. Las herra
 # intel_audio_dump (vuelca la configuración de los registros de audio)
 # i915-perf-configs -l (lista las configuraciones del kernel)
 # intel_backlight (mostrar el nivel de brillo de la pantalla interactuando con el controlador del panel)
-# $ intel_stepping (muestra la revisión física del chip: código de identificación de Intel, ID de la GPU y revisión del modelo)
-# # intel_tiling_detect (cómo la GPU organiza los píxeles en la memoria RAM [VRAM])
+# intel_stepping (muestra la revisión física del chip: código de identificación de Intel, ID de la GPU y revisión del modelo)
+# cat /sys/devices/cpu/caps/pmu_name (imprime la familia de arquitectura de la CPU Intel)
+# intel_tiling_detect (cómo la GPU organiza los píxeles en la memoria RAM [VRAM])
 Notas.- Algunos comando como "intel_reg write", intel_firmware_decode o intel_bios_dumper pueden interactuar directamente con los registros del hardware o el firmware por tanto es preferible no tocarlos a menos que se sepa exactamente lo que se hace. intel_forcewaked es un demonio que obliga a la GPU a permanecer en un estado de "despierto" evitando que entre en ahorro de energía por lo que el portátil se calentará más y la batería durará menos.
 
 
@@ -29467,6 +29474,8 @@ Cuando el sistema se bloquea, el kernel de volcado arrancará vía kexec y guard
 
 
 kernel
+Núcleo, es decir, pieza central y más esencial del sistema operativo. El kernel se encarga de actuar como intermediario entre el hardware y el software.
+$ curl -s https://www.kernel.org/releases.json | jq '.latest_stable.version' -r (mostrar versión del kernel)
 1.-
 Suprimir kernels antiguos
 # uname -r   (para conocer el último)
@@ -32294,32 +32303,34 @@ $ rz (dejaba al sistema remoto esperando un archivo enviado desde una terminal l
 
 ls
 Listar archivos de un directorio.
-$ ls -i (Muestra todos los archivos no ocultos)
-$ ls -a (Muestra todos los archivos, incluso los ocultos)
-$ ls -l (Muestra permisos, último acceso i propietarios)
+$ ls -i (muestra todos los archivos no ocultos)
+$ ls -a (muestra todos los archivos, incluso los ocultos)
+$ ls -l (muestra permisos, último acceso i propietarios)
 $ ls -1 (muestra en un listado)
-$ ls -F (Muestra a continuación de cada elemento si se trata de un directorio [/], un ejecutable [*] o un enlace [@])
-$ ls -F | grep '/$' (Lista solo directorios)
-$ ls -F | grep -v '/$' (Lista solo los archivos)
+$ ls -F (muestra a continuación de cada elemento si se trata de un directorio [/], un ejecutable [*] o un enlace [@])
+$ ls -F | grep '/$' (lista solo directorios)
+$ ls -F | grep -v '/$' (lista solo los archivos)
 $ ls -C (mostrar el listado en columnas)
-$ ls -L (En los enlaces, se muestra el archivo al que apuntan)
-$ ls -l PID (Muestra qué está corriendo con el PID especificado)
+$ ls -L (en los enlaces, se muestra el archivo al que apuntan)
+$ ls -l PID (muestra qué está corriendo con el PID especificado)
 $ ls -R	(recursivamente)
 $ ls -Z (listar visualizando los contextos en selinux [ver])
-$ ls -s	(Muestra el tamaño)
+$ ls -s	(muestra el tamaño)
 $ ls -h (muestra tamaño en formato legible [KB, MB, GB])
-$ ls -S (Lista por tamaño)
-$ ls ../ (Listar los archivos del directorio anterior)
+$ ls -S (lista por tamaño)
+$ ls ../ (listar los archivos del directorio anterior)
 $ ls -t	(lista por fecha de modificación de más nuevo a más viejo)
-$ ls /boot /usr (Lista los dos directorios especificados)
+$ ls /boot /usr (lista los dos directorios especificados)
 $ ls -ad *.sh (lista los terminados en .sh)
-$ ls *.{odt,txt} (Lista los de las extensiones mencionadas)
-$ ls -ad */ (Lista sólo los directorios)
+$ ls *.{odt,txt} (lista los de las extensiones mencionadas)
+$ ls -ad */ (lista sólo los directorios)
 $ ls -alL /home/usuario/videos
 $ ls -l /lib/modules (muestra los kernels instalados)
-$ ls | xargs rm (Eliminar todos los archivos)
-$ ls @(*.sh|*.txt) (Sólo mostrará las extensiones especificadas. Precisa activación de los comodines extendidos de bash con: shopt -s extglob)
-$ ls !(*.sh|*.txt) | xargs rm (Elimina todos menos los mencionados)
+$ ls | xargs rm (eliminar todos los archivos)
+$ ls @(*.sh|*.txt) (sólo mostrará las extensiones especificadas. Precisa activación de los comodines extendidos de bash con: shopt -s extglob)
+$ ls !(*.sh|*.txt) | xargs rm (elimina todos menos los mencionados)
+$ ls -al --time-style=+%D| grep `date +%D` (listar archivos abiertos hoy en el presente directorio)
+$ ls -alt | awk '{if (system("sleep .5 && exit 2") != 2) exit; print}' (que cada salida se demore medio segundo)
 
 
 lsat
@@ -39244,7 +39255,8 @@ Proto.- protocolo, Recv-Q.- paquetes recibidos, Send-Q.- paquetes enviados, Loca
 # netstat -atu | grep '*.*'   (Ver todos los servicios que ofrece la máquina)
 # netstat -ta  (Lista los servidores que estén corriendo en el sistema)
 # netstat -rn  (Muestra la tabla de enrutamiento)
-# netstat  -an (Máxima información de nuestra conexión)
+# netstat -an (Máxima información de nuestra conexión)
+# netstat -an | grep ESTABLISHED | awk '{print$5}' | awk -F : '{print$1}' | sort | uniq -c | sort -r (verificar la conexión del número máximo de IP)
 # netstat  -i (Tablas de Interfaces de red)
 # netstat -e (información extendida)
 # netstat -p (numero de PID y servicio que está corriendo)
@@ -39267,6 +39279,8 @@ Proto.- protocolo, Recv-Q.- paquetes recibidos, Send-Q.- paquetes enviados, Loca
 # netstat -plan | grep :80 |  grep ESTABLISHED | awk {'print $5'} | cut -d: -f 1 | sort | uniq -c | sort -n (Otra forma de mostralas)
 # netstat -plan | grep :80 | awk {'print $5'} | cut -d: -f 1 | sort | uniq -c | sort -n (número de peticiones al puerto 80 por cada IP)
 # netstat -ntu | tail -n +3 | awk '{print $5}' | sed 's/:[0-9]*$//' | sort | uniq -c | sort -rn (Mostrar conexiones TCP ordenadas por Host)
+# netstat -np | grep -v ^unix (examinar los procesos que generan tráfico)
+# netstat -tup -W | column -t (mostrar las URL completas en la salida)
 # netstat -plutn
 Explicación de los Flags:
 	G (La ruta utiliza una pasarela)
@@ -43364,7 +43378,7 @@ $ patch -R -p0 < parche.patch (Deshace los cambios aplicados por el parche anter
 
 path
 Variable de entorno que contiene una lista de directorios donde el sistema operativo busca archivos ejecutables para ejecutar comandos sin necesidad de escribir la ruta completa. Ver ejecutable.
-# echo $PATH | tr : \\n (los mostrará uno por linea)
+# echo $PATH | tr ':' '\n' (los mostrará uno por linea)
 
 
 pathchk
@@ -47489,6 +47503,9 @@ $ ps axo pid=,stat= | awk '$2~/^Z/ { print $1 }' (Ver PID de los procesos zombie
 $ ps -a (muestra lo que se está ejecutando en ttys conocidas)
 $ ps -p $(ps -o ppid= -p $$) -o comm= (da el nombre de la terminal que está corriendo: tilda, kitty, lxterminal...)
 $ ps aux | awk '{arr[$1]+=$4}; END {for (i in arr) {print i,arr[i]}}' | sort -hk2 | tail -10 | grep $USER (muestra porcentaje de consumo de memoria del usuario)
+$ watch -n 1 'ps -eo pid,ppid,cmd,%mem,%cpu --sort=-%mem | head' (monitoreo de procesos en tiempo real)
+$ ps axo state,ppid | awk '!/PPID/$1~"Z"{print $2}' | xargs -r kill -9 (matar todos los procesos zombis)
+$ ps axo pid=,stat= | awk '$2~/^Z/ { print $1 }' (imprime una lista de los PID de todos los procesos zombi)
 $ ps -o pid,comm (muestra el PID y el comando que lo ejecuta)
 flags:
 	USER (usuario que ejecuta el proceso)
@@ -60502,21 +60519,21 @@ Capturar el trafico de la red.
 # tcpdump -n -r archivo -c 4 (analizar ficheros)
 # tcpdump -n -r archivo udp (filtrar por protocolos - udp, tcp, icmp, arp ...)
 # tcpdump -n -r archivo -c 2 not tcp (con operadores booleanos [not, and]. Ver las 2 primeras capturas que no sean tcp)
-# tcpdump -n -r archivo -c 2 not tcp and not udp (Ver las 2 primeras capturas que no sean tcp ni udp)
-# tcpdump -n -r archivo -c 2 tpc and dst port 25 (Ver las 2 primeras capturas tcp y dst con destino al puerto 25)
+# tcpdump -n -r archivo -c 2 not tcp and not udp (ver las 2 primeras capturas que no sean tcp ni udp)
+# tcpdump -n -r archivo -c 2 tpc and dst port 25 (ver las 2 primeras capturas tcp y dst con destino al puerto 25)
 # tcpdump -enni eth0 (info de la capa de enlace y MACs origen y destino)
-# tcpdump host 192.168.1.3 (Capturar todo el tráfico del host especificado)
-# tcpdump src net 192.168.1.0/28 (Especificando una red)
-# tcpdump src host 192.168.1.3 (Solo lo que salga de la IP especificada)
+# tcpdump host 192.168.1.3 (capturar todo el tráfico del host especificado)
+# tcpdump src net 192.168.1.0/28 (especificando una red)
+# tcpdump src host 192.168.1.3 (solo lo que salga de la IP especificada)
 # tcpdump dst port 23 (Todo el trafico que vaya dirigido al puerto 23)
-# tcpdump udp and dst port 53 (Capturar tráfico de comunicación con las DNS)
-# tcpdump tcp and not port 80 (Capturar todo el tráfico excepto el web)
-# tcpdump tcp and port 80 (Capturar solo el web)
+# tcpdump udp and dst port 53 (capturar tráfico de comunicación con las DNS)
+# tcpdump tcp and not port 80 (capturar todo el tráfico excepto el web)
+# tcpdump tcp and port 80 (capturar solo el web)
 # tcpdump -i eth0 port not 80 and host www.google.com (Para saber si google manda “cosas” por otros puertos que no sean el 80)
-# tcpdump -n -i eth1 -X tcp (Ver información del contenido de los paquetes)
-# tcpdump ether src 01:20:21:00:00:B2 (Captura tráfico de la mac)
+# tcpdump -n -i eth1 -X tcp (ver información del contenido de los paquetes)
+# tcpdump ether src 01:20:21:00:00:B2 (captura tráfico de la mac)
 # tcpdump udp and dst port 53 (Capturar peticiones DNS)
-# tcpdump tcp and (port 22 or port 23) (Capturar el tráfico telnet y ssh)
+# tcpdump tcp and (port 22 or port 23) (capturar el tráfico telnet y ssh)
 # tcpdump portrange 21-23 (tráfico origen/destino de los puertos 21, 22 o 23)
 # tcpdump -n -i eth1 -X -s 200 port 9001 (de un puerto concreto)
 # tcpdump -v -i eth1 port 9001 | awk '{print$1,$2,$3}'
@@ -60528,6 +60545,9 @@ Capturar el trafico de la red.
 # tcpdump -r /var/log/network/daemonlogger.1791638583.pcap "udp port 53" (ver solo peticiones DNS de las páginas buscadas en un .pcap)
 # tcpdump -r /var/log/network/daemonlogger.1791638583.pcap "host 8.8.8.8" (ver solo tráfico con una IP externa, ej. los servidores de Google 8.8.8.8 de un .pcap)
 # tcpdump -i enp1s0 -l -A "tcp port 80" | grep --line-buffered -E "Host:|User-Agent:|GET |POST " (ver strings en vivo)
+$ sudo tcpdump -v -s 0 -A -n -l | egrep -i "POST /|pwd=|passwd=|password=|Host:" (extraer contraseñas HTTP en solicitudes POST)
+$ sudo tcpdump port http or port ftp or port smtp or port imap or port pop3 or port telnet -l -A | egrep -i -B5 'pass=|pwd=|log=|login=|user=|username=|pw=|passw=|passwd=|password=|pass:|user:|username:|password:|login:|pass |user ' (capturar todas las contraseñas en texto plano)
+$ sudo tcpdump -nn -v port ftp or ftp-data (capturar credenciales y comandos FTP)
 # tcpdump -Xnr /var/log/network/daemonlogger.1791638583.pcap "tcp port 853" -c 4 (comprobar si la salida está cifrada)
 Algunas opciones:
 -n (Para no resolver las direcciones IP)
@@ -61491,6 +61511,8 @@ $ tput colors (colores admitidos en la terminal)
 $ tput bold (activar negrita)
 $ tput setaf 1 (foreground rojo si la term lo soporta)
 $ tput setab 4 (background azul)
+$ tput setaf 1;tput rev;h=$(tput lines);w=$[$(tput cols)/6];c=$(seq -ws '_____|' $[$w+1]|tr -d "0-9");for a in $(seq $[$h/2]);do echo $c;echo ${c//|___/___|};done;tput cup 0;toilet -t -f bigmono12 "BASH";tput cup $h (un muro en pantalla)
+$ while sleep 1; do tput sc; tput cup 0 $(($(tput cols)-11));echo -e "\e[31m`date +%T`\e[39m"; tput rc; done & (muestra la hora en el extremo de la consola)
 
 
 tr
