@@ -3675,8 +3675,9 @@ bind
 Para probar combinaciones de teclas que no queremos almacenar de forma permanente en el archivo .inputrc (ver)
 $ bind "\"\C-x\C-g\": dump-functions" (asignará las teclas Ctrl+x Ctrl+g para ver las funciones readline)
 $ bind -P (listado de asignación de teclas de cada función readline)
-$ bind -l (Otra forma de ver el listado)
-$ bind -p (Otra forma)
+$ bind -P | grep -v "is not" | sed -e 's/can be found on/:/' | column -s: -t (muestra todas las combinaciones de teclas disponibles en bash)
+$ bind -l (otra forma de ver el listado)
+$ bind -p (otra forma)
 $ bind -x "\"\C-l\": ls -la" (asignar combinaciones de teclas que ejecutan comandos. ls -la al pulsar Ctrl+l)
 
 
@@ -9163,6 +9164,10 @@ Biblioteca para detectar información del rendimiento de la CPU. Incluye las apl
 # cpu-info
 # cpuid-dump
 # isa-info
+# watch grep \"cpu MHz\" /proc/cpuinfo (monitor de CPU en tiempo real)
+# grep -cE "^processor" /proc/cpuinfo (numero de cpus del sistema)
+# egrep -c '(vmx|svm)' /proc/cpuinfo (comprobar si la virtualización está disponible)
+# echo "$(( $(( $(grep 'physical id' '/proc/cpuinfo' | uniq | wc -l) * $(grep 'core id' '/proc/cpuinfo' | wc -l) )) * 2 + 1 ))" (calcular el límite de carga de la CPU)
 # watch -n1 "grep 'cpu MHz' /proc/cpuinfo" (refresca cada segundo la frecuencia real de cada núcleo de la CPU)
 
 
@@ -11017,6 +11022,7 @@ Efectúa una evaluación de seguridad del sistema y muestra las vulnerabilidades
 # debsecan  --suite buster --format report --update-history (escaneos)
 # debsecan  --suite buster --only-fixed (otro tipo de escaneo)
 # debsecan --update-history (actualizar el archivo histórico después de la presentación de informes)
+# debsecan --format detail (enumera las vulnerabilidades de Debian conocidas en el sistema)
 
 
 debsigs
@@ -12124,6 +12130,7 @@ $ dig +short myip.opendns.com @resolver1.opendns.com (muestra IP externa)
 $ dig tuxapuntes.com somedomainname.net axfr (mirar si un dominio es susceptible de ataques axfr)
 $ dig +trace tuxapuntes.com (ver saltos de la petición hasta el servidor)
 $ dig ANY tuxapuntes.com (consultar todos los registros de la zona DNS)
+$ dig +short which.opendns.com txt @208.67.220.220 (comprueba si el proveedor de servicios de Internet [ISP] está interceptando las consultas DNS. Una respuesta tipo «#.abc» es correcta; algo parecido a «I am not an OpenDNS resolver» No)
 
 
 digimend
@@ -23016,6 +23023,7 @@ programa que imprime en la salida estándar todo el texto que puede leer de cual
 $ mkdir ocrdb
 $ gocr -d 2 -p ./ocrdb/ -m 256 -m 130 kapcha.jpg (El aprendizaje. Lanzar varias veces)
 $ gocr -p ocrdb/ -m 2 kapcha.jpg (Comprobar si el programa lo resuelve solo)
+$ gocr -i imagen.png (extraer texto de una imagen [Lector OCR])
 
 
 gocryptfs
@@ -32359,6 +32367,7 @@ $ lsblk -a /dev/sda
 $ lsblk -f /dev/sda (mostrando etiquetas, uuids y puntos de montaje)
 $ lsblk -m /dev/sda (mostrando propietarios, grupos y permisos)
 $ lsblk -o name,size (mostrar solo el nombre y volumen)
+$ lsblk -o name,fstype,mountpoint,size (mostrar particiones, extensión, puntos de montaje y medidas)
 
 
 lsb-release
@@ -39997,18 +40006,20 @@ Actualizaciones:
 	--script-updatedb (Actualiza los scripts de la base de datos)
 Ejemplos:
 # nmap -iR 10000 -p 80 (Selecciona objetivos al azar por el puerto 80)
-# nmap -sP IP  (Sondeo Ping. Para detectar equipos de una red)
-# nmap -P0 IP  (Asume que todos los objetivos están vivos)
-# nmap -PS -p 137-139 IP  (Análisis TCP de los puertos indicados)
-# nmap -PE IP  (Análisis ICMP del tipo echo)
-# nmap -PI IP     (Utiliza paquetes icmp para determinar que hosts están conectados y es especial si deseas hacer un scan a través de un firewall)
-# nmap -sF IP     (Analisis sigiloso)
-# nmap -sW IP    (especial para máquinas windous)
-# nmap -sX IP     (Análisis Xmas)
-# nmap -sS -A -p 1-65535 IP  (escanear todos los puertos [-p...] TCP [-sS] y detectar las versiones del software [-A] de forma silenciosa)
-# nmap --version-all IP  (Utilizar todas las sondas con intensidad 9 -máxima)
-# nmap -p 1-65535 --open localhost  (lista de puertos abiertos)
-# nmap -p 80 hostname  (determina si el puerto 80 está abierto)
+# nmap -sP "$(ip -4 -o route get 1 | cut -d ' ' -f 7)"/24 | grep report | cut -d ' ' -f 5- (muestra los hosts activos en la misma red que la máquina local, junto con sus nombres de host y direcciones IP)
+# nmap -p0-65535 IP -T5 (Escaneo rápido de todos los puertos)
+# nmap -sP IP (Sondeo Ping. Para detectar equipos de una red)
+# nmap -P0 IP (Asume que todos los objetivos están vivos)
+# nmap -PS -p 137-139 IP (Análisis TCP de los puertos indicados)
+# nmap -PE IP (Análisis ICMP del tipo echo)
+# nmap -PI IP (Utiliza paquetes icmp para determinar que hosts están conectados y es especial si deseas hacer un scan a través de un firewall)
+# nmap -sF IP (Analisis sigiloso)
+# nmap -sW IP (especial para máquinas windous)
+# nmap -sX IP (Análisis Xmas)
+# nmap -sS -A -p 1-65535 IP (escanear todos los puertos [-p...] TCP [-sS] y detectar las versiones del software [-A] de forma silenciosa)
+# nmap --version-all IP (Utilizar todas las sondas con intensidad 9 -máxima)
+# nmap -p 1-65535 --open localhost (lista de puertos abiertos)
+# nmap -p 80 hostname (determina si el puerto 80 está abierto)
 # nmap -sn 192.168.1.0/24 (descubrir máquinas conectadas de una red)
 # nmap -v -sP 192.168.1.0/24 | grep down | wc -l (Ips disponibles en una red)
 # nmap -p- localhost (rastrear todos los puertos)
@@ -43379,6 +43390,7 @@ $ patch -R -p0 < parche.patch (Deshace los cambios aplicados por el parche anter
 path
 Variable de entorno que contiene una lista de directorios donde el sistema operativo busca archivos ejecutables para ejecutar comandos sin necesidad de escribir la ruta completa. Ver ejecutable.
 # echo $PATH | tr ':' '\n' (los mostrará uno por linea)
+# $ echo -e ${PATH//:/\\n} (lo mismo)
 
 
 pathchk
@@ -49459,6 +49471,7 @@ $ echo $RANDOM (Cualquier número aleatorio dentro del rango)
 $ echo $((RANDOM%20)) (Obtener un número de 0 a 20)
 $ echo $((5+RANDOM%15)) (Obtener un número de 5 a 15)
 $ VARIABLE=`echo $(($RANDOM))`
+$ while true; do sleep .15; head /dev/urandom | tr -dc A-Za-z0-9; done (cadena de texto aleatoria continua)
 
 
 randombytes
@@ -62227,6 +62240,7 @@ uefi
 ufw
 Cortafuegos
 # ufw enable (activar el cortafuegos. “disable” para desactivarlo)
+# if grep ENABLED=yes /etc/ufw/ufw.conf>/dev/null; then echo "activo"; else echo "inactivo"; fi (comprobar si está activo)
 # ufw deny 4662 (bloquea el puerto)
 # ufw deny from 123.1.103.8 (denegar toda conexion de la ip especificada)
 # ufw allow 22 (abre el puerto 22)
@@ -65130,7 +65144,7 @@ $ curl wttr.in/~Eiffel+Tower (especificar algo que no es una población)
 $ curl wttr.in/@lapipaplena.org (la situación de un dominio)
 $ wget wttr.in/Figueras,Gerona.png (bajar una imagen de la población seleccionada)
 $ curl wttr.in/Olot,España?lang=es (forma simplificada para 3 dias y en español)
-$ curl wttr.in/Olot,España?0 (solo ver un resumen
+$ curl wttr.in/Olot,España?0 (solo ver un resumen)
 
 
 wuzz
