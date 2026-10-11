@@ -14360,7 +14360,7 @@ $ dvdtape -o /ruta/salida -i dvd_master.iso --verify (verificación para asegura
 
 
 dvgrab
-Catura de videos desde una cámara digital DV.
+Captura de videos desde una cámara digital DV.
 Previas:
 # modprobe rw1394
 # chmod o+rw /dev/raw1394
@@ -55997,11 +55997,11 @@ $ cat script.sh | shunit2
 
 shutdown
 Apagar/reiniciar el pc.
-$ shutdown -h now    (apagar ya)
-$ shutdown -r now     (reiniciar ya)
+$ shutdown -h now (apagar ya)
+$ shutdown -r now (reiniciar ya)
 # shutdown -h +20 (apagado dentro de 20 minutos)
-# shutdown -c   (anula la cuenta regresiva anterior)
-# shutdown -rF now  (forzar fsck en el reinicio)
+# shutdown -c (anula la cuenta regresiva anterior)
+# shutdown -rF now (forzar fsck en el reinicio)
 # shutdown -h $((60 * 4)) (Apagar dentro de 4 horas)
 # shutdown -h 20:30 -k "Se apagará a las 20 horas 30 minutos" (apagar a las 20,30 y mandando un mensaje a los usuarios)
 
@@ -59593,12 +59593,13 @@ Las reglas pueden ser:
 
 sudo
 Utilidad que permite a un usuario ejecutar programas con privilegios de root. En algunas distros sólo el usuario creado durante la instalación puede ejecutar sudo con privilegios de root, los demás han de ser agregados al grupo admin. Incluye las aplicaciones: cvtsudoers [convertir entre formatos de archivo sudoers], sudoedit [Ejecutar comandos como otro usuario] y sudoreplay [enumera los registros de salida creados por sudo]
-$ sudo -k   (limpia la clave sudo introducida)
+$ sudo -k (limpia la clave sudo introducida)
 $ sudo -u usuario comando   (ejecutar el comando como un usuario privilegiado distinto de root)
 $ sudo -E env "PATH=$PATH" prueba.sh (ejecutar un script cuando el path en el que está no coincide con el de root)
-$ sudo -l    (ver los permisos de sudo que tiene un usuario)
-$ sudo !! (Ejecutar el último comando con sudo)
-$ sudo bash -c "cd /usr/local/bin;bash" (entrar en un dirctorio como root)
+$ sudo -l (ver los permisos de sudo que tiene un usuario)
+$ sudo !! (ejecutar el último comando con sudo)
+$ sudo !-1 (lo mismo)
+$ sudo bash -c "cd /usr/local/bin;bash" (entrar en un directorio como root)
 $ #!/usr/bin/sudo /bin/bash (ejecutar todo el script de shell como root)
 Pueden añadirse las siguientes lineas en /etc/sudoers:
 	Defaults passprompt=”mi frase solicitando la contraseña...”
