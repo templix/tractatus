@@ -3778,6 +3778,7 @@ bios
 [Basic Input Output System]. Estándar de facto que define la interfaz de firmware para computadoras IBM PC compatibles. El firmware del BIOS es instalado dentro de la computadora personal, y es el primer programa que se ejecuta cuando se enciende la computadora. Su propósito fundamental es iniciar y probar el hardware del sistema y cargar un gestor de arranque o un sistema operativo desde un dispositivo de almacenamiento de datos. Fué usado por las computadoras desde los años 80 hasta el 2002 aproximadamente. Ver efibootmgr.
 # efibootmgr (comprobar si el pc está basado en BIOS o UEFI. En este caso en BIOS)
         EFI variables are not supported on this system.
+$ [[ -d "/sys/firmware/efi" ]] && echo "UEFI" || echo "BIOS" (ver si botea con uefi o bios)
 
 
 biosdecode
@@ -8177,6 +8178,7 @@ $ comm -12 archivo 1 archivo2 (Elimina las columnas 1 y 2. Solo muestra la 3, o 
 command
 Cuando introducimos un comando en Bash el orden de preferencia en la búsqueda del símbolo por parte de Bash es: Primero las funciones, luego los comandos internos y por último los ficheros de scripts y ejecutables. command hace que no se busquen alias ni nombres de funciones, sólo comandos internos y comandos de fichero. Si tenemos una función llamada ls() y queremos que se ejecute el comando ls y no la función:
 $ command ls
+$ command -v ifconfig (comprueba si existe el comando "ifconfig". Si existe muestra la ruta al ejecutable)
 
 
 command-not-found
@@ -10000,6 +10002,10 @@ Inicia svscanboot desde inittab y proporciona el directorio /etc/service/ para q
 # daemontools-run /etc/service/myservice status (verificar el estado de un servicio específico)
 # daemontools-run /etc/service/myservice stop (detener un servicio)
 # daemontools-run /etc/service/myservice restart (reiniciar un servicio)
+
+
+dahdi
+[Digium Asterisk Hardware Device Interface]. Utilidades para utilizar los módulos del kernel DAHDI, una interfaz de controladores y software para el núcleo de Linux que permite conectar hardware de telefonía tradicional [RTCP/PSTN] con la centralita IP Asterisk. Incluye las herramientas astribank_allow, astribank_hexload, astribank_is_starting, astribank_tool, dahdi-sethdlc, dahdi_cfg, dahdi_genconf, dahdi_hardware, dahdi_maint, dahdi_monitor, dahdi_registration, dahdi_scan, dahdi_span_assignments, dahdi_span_types, dahdi_test, dahdi_tool, dahdi_waitfor_span_assignments, fxotune, lsdahdi, twinstar, xpp_blink y xpp_sync.
 
 
 dansguardian
@@ -13701,6 +13707,8 @@ $ dpkg -l inkscape  (Conocer si un paquete está instalado y su versión)
 # dpkg -i --force-overwrite /var/cache/apt/archives/paquete.deb (forzar install)
 # dpkg -b deb paquete.deb (Convertir la carpeta “deb” en un archivo “.deb”)
 # dpkg -L util-linux | grep -E '/bin/|/sbin/' (ver los ejecutables de un paquete)
+# dpkg -l 'linux-*' | sed '/^ii/!d;/'"$(uname -r | sed "s/\(.*\)-\([^0-9]\+\)/\1/")"'/d;s/^[^ ]* [^ ]* \([^ ]*\).*/\1/;/[0-9]/!d' (listar todos los kernels instalados, excepto el actual)
+# for a in $(sudo dpkg --get-selections|cut -f1); do dpkg-repack $a|awk '{if (system("sleep .5 && exit 2") != 2) exit; print}';done (guarda una copia de todos los paquetes tal como están instalados y configurados en el sistema)
 1.-
 En ocasiones, algún paquete medio o mal instalado puede bloquear la aplicación. En estos casos puede usarse:
 # rm /var/lib/apt/lists/* -vf
@@ -25454,6 +25462,7 @@ Convierte un archivo ASCII HINT, generalmente con la extensión .hint, en un arc
 history
 Lista los comandos utilizados por el usuario.
 $ history 20 (lista los últimos 20)
+$ history | awk '{$1="";print substr($0,2)}' (mostrar el historial sin números de línea)
 $ history -c (elimina el historial de la memoria)
 $ history -c ; history -w (limpieza definitiva)
 $ history -d 125 ; history -w (eliminar la orden 125 y guardar cambios, útil si se escribió la contraseña y esta queda visible en el historial)
@@ -31904,6 +31913,7 @@ $ loginctl lock-sessions (pide contraseña y suspende pantalla)
 $ loignctl -a (muestra las propiedades de sesión/usuario independientemente de si están configuradas o no)
 $ loginctl list-users (lista los usuarios con sesión abierta)
 $ loginctl -psessions (muestra todas las sesiones abiertas)
+$ loginctl show-session $XDG_SESSION_ID -p Type (muestra si se usa wayland o X11)
 $ loginctl seat-status (muestra todos los procesos que están relacionados con el asiento)
 Nota.- "Seat" permite conectar varios conjuntos de hardware (ratón, teclado, pantalla) y utilizarlo por varios usuarios al mismo tiempo. Por lo general, esta función no se utiliza y la utilidad muestra solo un "asiento".
 
@@ -32335,8 +32345,9 @@ Muestra información de los dispositivo montados.
 $ lsblk (los muestra todos)
 $ lsblk -f | grep nvme (solo los reales mostrando su uid)
 $ lsblk -a /dev/sda
-$ lsblk -f /dev/sda (Mostrando etiquetas, uuids y puntos de montaje)
-$ lsblk -m /dev/sda (Mostrando propietarios, grupos y permisos)
+$ lsblk -f /dev/sda (mostrando etiquetas, uuids y puntos de montaje)
+$ lsblk -m /dev/sda (mostrando propietarios, grupos y permisos)
+$ lsblk -o name,size (mostrar solo el nombre y volumen)
 
 
 lsb-release
@@ -32357,14 +32368,8 @@ lscpu
 Muestra información sobre la cpu
 Algunos conceptos útiles:
 $ lscpu (muestra modelo, núcleos, hilos, frecuencia base y máxima...)
-        ...
-        Architecture:            x86_64
-        ...
-        CPU(s):                  6
-        ...
-        CPU(s) scaling MHz:      28%
-        CPU max MHz:             4000,0000
-        CPU min MHz:             800,0000
+$ lscpu | egrep 'Model name|Socket|Thread|NUMA|CPU\(s\)' (mostrar información concreta de la CPU)
+Algunos flags de la salida:
 Architecture --> la arquitectura del pc
 CPU(s) --> número de CPUs del pc
 CPU(s) scaling MHz --> frecuencia actual en ese instante.
@@ -38957,7 +38962,6 @@ $ ./configure
 $ make DFLAGS=" -DTELNET -DGAPING_SECURITY_HOLE"
 # make install
 $ nc -v -v -z 192.168.2.5 21 22 25 110 5900 (que se conecte a la IP, envie más información [-v por duplicado], que no envie ningún dato [-z] y que lo haga por los puertos mencionados [21,22,25,110,5900])
-$ nc -l -p 3001 -e /bin/bash  (Que esté a la escucha [-l] en el puerto 3001 [-p] y que, cuando haya conexión, ejecute nuestra shell bash [-e ....])
 $ nc IP_servidor 3001  (desde el cliente, conectamos con el servidor y todo lo que escribamos se enviará al bash del servidor y lo que nos responda aparecerá en nuestra pantallla. Para terminar la conexión CTROL-C)
 $ telnet -l usuario IP_o_nombre_host 3001 (Otra forma de establecer la conexión.)
 $ nc -l -p 3000 > archivo (Dejar el servidor listo para recibir un archivo)
@@ -39882,6 +39886,7 @@ Muestra en pantalla un archivo de texto con las lineas numeradas. No modifica el
 $ nl fichero.txt
 $ nl fichero.txt > fichero_numerado.txt
 $ nl -ba archivo.txt | sed -n '2,7p' (muestra de la 2ª linea a la 7ª del archivo)
+$ nl archivo.txt | tail -n 1 | awk '{print$1}' (muestra el número de lineas del archivoo)
 
 
 nload
@@ -41648,6 +41653,7 @@ open
 [xdg-open] Abrir archivos o URLs con la aplicación predeterminada.
 $ open http://google.com (abre con el navegador predeterminado)
 $ open archivo.txt (con el editor predeterminado)
+$ open . (abrir el directorio de la presente terminal)
 
 
 openbox
@@ -42093,6 +42099,7 @@ $ openssl list -cipher-commands (listado de opciones de encritado)
 $ openssl enc -aes-256-cbc -pbkdf2 -iter 100000 -in entrada -out salida.enc (encriptar con el cifrador mencionado, uso de un algoritmo moderno para derivar la clave desde la contraseña y aumenta la seguridad)
 $ openssl genrsa -out clave.pem 4096 (generar la clave privada y la pública y se guardan en clave.pem)
 $ openssl rsa -in clave.pem -out clave.pub.pem -outform PEM -pubout (extraer la clave pública del archivo anterior y guardarla en clave.pu.pem)
+$ openssl s_client -showcerts -connect google.com:443 </dev/null 2>/dev/null|openssl x509 -outform PEM > google.com.cer (descargar el certificado en formato PEM [SSL/TLS] desde un servidor web HTTPS)
 
 
 opensysusers
@@ -47481,6 +47488,7 @@ $ ps -p $$ (informa del pid de la propia terminal)
 $ ps axo pid=,stat= | awk '$2~/^Z/ { print $1 }' (Ver PID de los procesos zombies)
 $ ps -a (muestra lo que se está ejecutando en ttys conocidas)
 $ ps -p $(ps -o ppid= -p $$) -o comm= (da el nombre de la terminal que está corriendo: tilda, kitty, lxterminal...)
+$ ps aux | awk '{arr[$1]+=$4}; END {for (i in arr) {print i,arr[i]}}' | sort -hk2 | tail -10 | grep $USER (muestra porcentaje de consumo de memoria del usuario)
 $ ps -o pid,comm (muestra el PID y el comando que lo ejecuta)
 flags:
 	USER (usuario que ejecuta el proceso)
@@ -48887,6 +48895,7 @@ $ qpdf --empty --pages entrada.pdf 1-5 -- salida.pdf (Extraer las primeras cinco
 $ qpdf --empty --pages entrada.pdf z-1 -- salida.pdf (Reordenar las páginas de un documento en orden inverso)
 $ qpdf --empty --pages doc1.pdf 1-z doc2.pdf 1-6 -- salida.pdf (Unir todo un documento con las 6 primeras páginas de otro)
 $ qpdf --optimize-images entrada.pdf salida.pdf (optimiza las imágenes del PDF para optimizar el tamaño del archivo. Útil para documentos escaneados con xsane u otros programas)
+$ qpdf --pages entrada.pdf 1-z -- --empty salida.pdf (eliminar metadatos de un archivo PDF)
 
 
 qperf
@@ -54968,6 +54977,8 @@ $ seq 7 2 12 (entre el 7 y el 12 con un incremento de 2 en 2)
 $ seq -w 7 12 (entre el 7 y el 12 con el mismo tamaño)
 $ seq -s_ 7 12 (con un guión bajo entre cada número)
 $ seq -s'#' 0 $(tput cols) | tr -d '[:digit:]'  (Escribe una raya de “#” en toda la anchura de la terminal)
+$ seq 1000 |parallel -j30 --bar '(echo {};sleep 0.1)' (crea barras de progreso que cubran toda la ventana hasta llegar a 1000)
+$ time seq 65535 | parallel -k --joblog portscan -j9 --pipe --cat -j200% -n9000 --tagstring '\033[30;3{=$_=++$::color%8=}m' 'nc -vz localhost $(head -n1 {})-$(tail -n1 {})' (escáner de puertos ultrarrápido)
 
 
 ser2net
@@ -59587,6 +59598,8 @@ $ sudo -u usuario comando   (ejecutar el comando como un usuario privilegiado di
 $ sudo -E env "PATH=$PATH" prueba.sh (ejecutar un script cuando el path en el que está no coincide con el de root)
 $ sudo -l    (ver los permisos de sudo que tiene un usuario)
 $ sudo !! (Ejecutar el último comando con sudo)
+$ sudo bash -c "cd /usr/local/bin;bash" (entrar en un dirctorio como root)
+$ #!/usr/bin/sudo /bin/bash (ejecutar todo el script de shell como root)
 Pueden añadirse las siguientes lineas en /etc/sudoers:
 	Defaults passprompt=”mi frase solicitando la contraseña...”
 	Defaults badpass_message=”mi frase si se entra erronea...”
@@ -59942,7 +59955,9 @@ Tambien es posible un swatchdog por log con configuraciones distintas:
 $ swatchdog -c ~/.sw_auth.rc   -t /var/log/auth.log   --daemon
 $ swatchdog -c ~/.sw_msgs.rc   -t /var/log/messages   --daemon
 $ swatchdog -c ~/.sw_nginx.rc  -t /var/log/nginx/site1/access_log --daemon
-$ swatchdog -c ~/.swatchdogrc -t '/var/log/messages /var/log/auth.log' --tail-program-name=/usr/bin/tail --tail-args='-F' --pid-file=/run/swatchdog-logs.pid --daemon (archivo de configuración sobre dos archivos de registro [messages y auth.log], usar tail con el argumento -F, guardar el pid en el directorio especificado y arctivar el demonio)
+$ echo c > /proc/sysrq-trigger (forzar un kernel panic muy útil para comprobar si el watchdog funciona correctamente)
+$ swatchdog -c ~/.swatchdogrc -t '/var/log/messages /var/log/auth.log' --tail-program-name=/usr/bin/tail --tail-args='-F' --pid-file=/run/swatchdog-logs.pid --daemon (archivo de configuración sobre dos archivos de registro [messages y
+auth.log], usar tail con el argumento -F, guardar el pid en el directorio especificado y arctivar el demonio)
 Nota.- Si se usa --daemon, al recibir HUP o ALRM no recarga la config, simplemente termina; se tiene que relanzar.
 1.-
 Activar/desactivar el servicio con systemd
@@ -62590,6 +62605,7 @@ unshare
 # unshare --mount bash (en la nueva shell, se puede ejecutar "mkdir /tmp/mount" y luego "mount --bind /tmp /tmp/mount" y solo será visible dentro de esta shell y desaparecerá al salir)
 # unshare --mount --pid --fork --net --user --map-root-user bash (inicia una nueva shell con sus propios namespaces de montaje, PID, red y usuario root)
 # unshare --mount --pid --fork --net --user bash (lo mismo sin convertirse en root)
+# unshare -r --fork --pid unshare -r --fork --pid --mount-proc bash (emular un entorno de root sin Fakeroot ni privilegios)
 Nota.- El flag "--map-root-user" permite que el usuario que ejecuta el comando, incluso si no es root, se "mapee" como root dentro del nuevo namespace. Esto significa que dentro de la shell, tendrá privilegios de root para ese namespace, pero no en el sistema principal. Esto es una técnica común utilizada por herramientas de seguridad y sandboxing para limitar el daño potencial de un proceso malicioso.
 
 
@@ -62826,7 +62842,7 @@ $ upower -v (Chequeo de la bateria)
 
 uptime
 Tiempo transcurrido desde que se arrancó el sistema
-$ uptime -s (Muestra dia, hora, minuto y segondo que arranco el sistema)
+$ uptime -s (Muestra dia, hora, minuto y segundo que arranco el sistema)
 $ uptime -p (Muestra el tiempo transcurrido desde que arrancó el sistema)
 
 
