@@ -92,6 +92,10 @@ Ejemplo 1: Montar un sistema de archivos v9fs
 # 9mount -o trans=net,port=5640,ro <servidor>:<ruta> <punto_de_montaje> (montar con "ro" establece el sistema de archivos como solo lectura)
 
 
+a2boot
+Servidor de arranque por red para ordenadores Apple IIe e IIGS antiguos. Permite a los clientes compatibles arrancar en ProDOS o GS/OS a través de una red AppleTalk. Es funcionalmente comparable al software de arranque por red para Apple II incluido en las primeras versiones de AppleShare File Server para Macintosh. Sirve para correr un servidor en Linux que facilite archivos de arranque a ordenadores Apple II usando el protocolo AppleTalk o similares.
+
+
 a2dismod
 Desactiva modulos de apache.
 # a2dismod (Lista los módulos y pregunta cual desactivar)
@@ -3413,6 +3417,11 @@ Para que el history indique fecha y hora en la que se ha lanzado el comando:
 5.-
 Para guardar en /root un fichero de histórico por cada uno de los usuarios que se hayan pasado a root.
 	export HISTFILE=/root/.bash_hist-$(who am i | awk '{print $1}';exit)
+6.-
+Que las modificaciones de ~/.bashrc tengan efecto inmediato:
+$ bashrc-reload() { builtin exec bash ; }
+Puede crearse un alias en .bashrc
+      alias sbrr='bashrc-reload() { builtin exec bash ; }'
 
 
 bashtop
@@ -9164,6 +9173,7 @@ Biblioteca para detectar información del rendimiento de la CPU. Incluye las apl
 # cpu-info
 # cpuid-dump
 # isa-info
+# grep " lm " /proc/cpuinfo > /dev/null && echo "64-bit" || echo "32-bit" (comprobar si el equipo es 32 o 64 bits)
 # watch grep \"cpu MHz\" /proc/cpuinfo (monitor de CPU en tiempo real)
 # grep -cE "^processor" /proc/cpuinfo (numero de cpus del sistema)
 # egrep -c '(vmx|svm)' /proc/cpuinfo (comprobar si la virtualización está disponible)
@@ -13716,6 +13726,7 @@ $ dpkg -l inkscape  (Conocer si un paquete está instalado y su versión)
 # dpkg -b deb paquete.deb (convertir la carpeta “deb” en un archivo “.deb”)
 # dpkg -L util-linux | grep -E '/bin/|/sbin/' (ver los ejecutables de un paquete)
 # dpkg -l 'linux-*' | sed '/^ii/!d;/'"$(uname -r | sed "s/\(.*\)-\([^0-9]\+\)/\1/")"'/d;s/^[^ ]* [^ ]* \([^ ]*\).*/\1/;/[0-9]/!d' (listar todos los kernels instalados, excepto el actual)
+# dpkg -S "$(readlink -e $(which w))" (encontrar el nombre del paquete que instaló un comando de shell específico. En este caso el comando "w")
 # for a in $(sudo dpkg --get-selections|cut -f1); do dpkg-repack $a|awk '{if (system("sleep .5 && exit 2") != 2) exit; print}';done (guarda una copia de todos los paquetes tal como están instalados y configurados en el sistema)
 1.-
 En ocasiones, algún paquete medio o mal instalado puede bloquear la aplicación. En estos casos puede usarse:
@@ -17048,6 +17059,11 @@ $ explain -e EPERM unlink open (no realizar una operación por falta de permisos
           does not have the appropriate privileges to use the unlink system call
 
 
+exploit
+Software, un fragmento de datos o una secuencia de comandos que aprovecha un error o una vulnerabilidad de una aplicación o sistema y lo convierte en vulnerable, permitiendo a un atacante algún tipo de acceso y/o control del equipo.
+$ x="() { :; }; echo x" bash -c : (Comprueba si bash es vulnerable al exploit ShellShock. Si muestra «x», la shell es vulnerable. Si no se obtiene ninguna salida, significa que se está protegido)
+
+
 export
 Exporta, almacena y lista variables. Para que los cambios sean permanentes, colocar la linea en .bashrc.
 $ export -p (mostrar todas las variables)
@@ -18103,7 +18119,8 @@ $ fchdir /ust/local/bin (devolverá 1)
 
 fc-list
 Listar todas las fuentes disponibles.
-$ fc-list | cut -d ':' -f 1 | sort -u  (de forma más clara)
+$ fc-list | cut -d ':' -f 1 | sort -u (mostrando el lugar donde está instalada)
+$ fc-list | cut -d ':' -f 2 | sort -u (numerar solo los nombres de todas las fuentes instaladas en el sistema)
 $ fc-list > lista_fuentes.txt   (redirigir la lista de fuentes a un fichero)
 $ fc-list | wc -l  (muestra el número de fuentes disponibles)
 $ fc-list : family (listado de fuentes instaladas sin información de ruta)
@@ -19934,7 +19951,14 @@ Del 1 al 10 de 2 en 2:
 	do
 		rm -fr $a
 	done
-
+7.-
+	#!/bin/bash
+	# tabla de multiplicar
+	for y in {1..10}; do for x in {1..10};
+	do
+		echo -n "| $x*$y=$((y*x)) "
+	done
+	echo; done | column -t
 
 foremancli
 Herramienta que permite buscar y acceder a toda la información de nodos [servidores, máquinas virtuales, etc.] almacenada en un servidor Foreman. Permite consultar datos como hosts, facts de Puppet/Ansible, parámetros, grupos, etc., y formatear la salida en texto plano, JSON o YAML.
@@ -27558,6 +27582,7 @@ $ ip route add 192.168.1.0/24 via 192.168.0.33 (redirigir una red a un pc)
 $ ip route show (Información)
 $ ip route add 192.168.2.0/24 via 192.168.1.10 (Añadir una red a una puerta de enlace)
 $ ip route list 0/0 (buscar la puerta de enlace predeterminada)
+$ ip -4 route list 0/0 (muestra datos del gateway por defecto)
 $ ip -f inet addr show eth0 (información de la dirección ip)
 Nota.- Verificar que /etc/resolv contenga una linea con el servidor DNS tipo: nameserver 8.8.8.8 [para las DNS de google] o la 127.0.0.1
 
@@ -32528,25 +32553,26 @@ $ lsns -l
 
 lsof
 Listar ficheros o procesos abiertos
-# lsof -i :4662  (servicios usados por el puerto 4662 aunque esten a la escucha)
-# lsof -X (Desactiva la identifiación de conexiones)
-# lsof -i@lapipaplena.homelinux.com  (verificar conexiones con una máquina)
-# lsof -i@88.25.114.11   (lo mismo pero especificando la ip)
-# lsof -i | grep ssh  (Para que muestre solo los que usan el protocolo ssh)
-# lsof +D /var/log  (Mostrar los servicios que tiene abierto un directorio)
-# lsof fichero  (Muestra los servicios que tiene abiertos fichero)
-# lsof -nPi TCP   (Muestra los eventos de red de las conexiones TCP)
-# lsof -p PID  (Ficheros que tiene abierto determinado proceso)
-# lsof -N      (Muestra los archivos NFS abiertos)
-# lsof -c firefox   (Muestra los ficheros abiertos por firefox)
+# lsof -i :4662 (servicios usados por el puerto 4662 aunque esten a la escucha)
+# lsof -X (desactiva la identifiación de conexiones)
+# lsof -i@lapipaplena.homelinux.com (verificar conexiones con una máquina)
+# lsof -i@88.25.114.11 (lo mismo pero especificando la ip)
+# lsof -i | grep ssh (para que muestre solo los que usan el protocolo ssh)
+# lsof +D /var/log (mostrar los servicios que tiene abierto un directorio)
+# lsof fichero (muestra los servicios que tiene abiertos fichero)
+# lsof -nPi TCP (muestra los eventos de red de las conexiones TCP)
+# lsof -p PID (ficheros que tiene abierto determinado proceso)
+# lsof -N (muestra los archivos NFS abiertos)
+# lsof -c firefox (muestra los ficheros abiertos por firefox)
 # lsof -P -i -n -sTCP:LISTEN (listado de puertos en LISTEN)
 # lsof -i -P | grep -i "listen" (otra forma de listarlos)
+# lsof -Pnl -i (listar puertos abiertos)
 # lsof -i tcp -i udp  (lista puertos tcp y udp abiertos)
-# lsof -Pni | grep LISTEN   (chequear puertos abiertos)
-# lsof -c bash -r  (Monitorizar un proceso)
-# lsof -i :631 | awk '{print $1,$2}' | sort -u  (muestra pid y demonio del puerto especificado)
-# lsof -t -i :22 (Muestra el pid del puerto especificado)
-# lsof -nPi | txt2html  > lsof.html (Mandar la salida a un html para visualizarlo por el navegador)
+# lsof -Pni | grep LISTEN (chequear puertos abiertos)
+# lsof -c bash -r (monitorizar un proceso)
+# lsof -i :631 | awk '{print $1,$2}' | sort -u (muestra pid y demonio del puerto especificado)
+# lsof -t -i :22 (muestra el pid del puerto especificado)
+# lsof -nPi | txt2html  > lsof.html (mandar la salida a un html para visualizarlo por el navegador)
 # lsof -i | grep -E "ifconfig\.me|34.160.111.145" (monitoriza en tiempo real quien abre conexión a ifconfig.me)
 Opciones:
 	-P (Muestra los números de puerto en vez de la aplicación que corre en ellos)
@@ -48258,6 +48284,7 @@ Herramientas para integrar el protocolo de almacenamiento de contraseñas SPHINX
 pwdx
 Informa del directorio actual de uno o varios procesos.
 $ pwdx pid pid pid
+$ pwdx $(pgrep chromium) (obtener el directorio de trabajo actual de un proceso)
 
 
 pwgen
@@ -60497,6 +60524,18 @@ $ tbench -t 60 8 localhost (ejecuta la prueba durante 60 segundos con 8 clientes
 $ tbench 8 servidor-remoto (simula 8 clientes conectándose a un servidor remoto)
 
 
+tboot
+Módulo para un arranque medido y verificado de un núcleo de sistema operativo o un monitor de máquina virtual [VMM]. Se trata de un pequeño cargador previo al kernel que GRUB lanza primero y que usa "Intel TXT" para hacer un "measured launch" [medición en TPM] y, opcionalmente, un verified launch [comprobación de hashes del kernel/initramfs antes de continuar]. Si TXT no está disponible o está mal configurado, normalmente arranca el kernel directamente sin aplicar la protección. Precisa hardware y firmware compatibles: CPU Intel con TXT, BIOS/UEFI con TPM, TXT, VT-x y VT-d habilitados, módulo SINIT ACM correcto para el chipset/CPU [algunos equipos ya está integrado en el firmware[ y, cuestión importante, el tboot clásico se implementa vía CSM y no es compatible con Secure Boot; su soporte UEFI es limitado.
+# txt-stat (consulta el estado TXT tras el arranque; es la primera comprobación práctica)
+# lcp2_mlehash (calcula el hash del MLE, normalmente /boot/tboot.gz, para incluirlo en la política LCP)
+# lcp2_crtpolelt (crea un elemento de política TXT: mle, pconf o custom, este último envuelve la política de tboot)
+# lcp2_crtpollist  (agrupa elementos en una lista LCP y puede firmarla)
+# lcp2_crtpol (genera la política LCP final [list.pol] y el archivo de datos para GRUB [list.data])
+# tb_polgen (crea y modifica la "Verified Launch Policy" propia de tboot: hashes y cmdline del kernel/initramfs)
+# txt-acminfo (muestra información de un módulo SINIT ACM)
+# txt-parse_err (descodifica el código de error tras un "TXT abort")
+
+
 tc
 Controlar, clasificar, dar forma y programar el tráfico de la red.
 # tc qdisc
@@ -64020,6 +64059,7 @@ $ mplayer "dvb://NombreDelCanal" (reproducir un canal específico con mplayer)
 w3m
 Navegador
 $ w3m -v URL (Para visualizar las url con imágenes en las tty)
+$ w3m -dump http://www.commandlinefu.com/commands/random/plaintext (muestra un consejo aleatorio cada vez que se abre una terminal. Se puede agregar a .bashrc y obtener un consejo aleatorio cada vez que abras una terminal)
 Algunos atajos:
     H (ayuda)
     q (Salir)
