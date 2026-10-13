@@ -59944,6 +59944,80 @@ $ svn2cl https://svn.apache.org/repos/asf/subversion/trunk/tools/client-side -o 
 $ svn2cl (dentro del proyecto genera el archivo "ChangeLog")
 
 
+svn2git
+Herramienta en Ruby para migrar proyectos de SVN a Git
+$ svn2git http://svn.ejemplo.com/repos/mi-proyecto --authors autores.txt --trunk /trunk --branches /branches --tags /tags
+$ svn2git http://svn.ejemplo.com/repos/proyecto --rootistrunk (layout no estándar)
+
+
+svn-all-fast-export
+Herramienta que convierte repositorios SVN completos a Git usando el formato fast-import. Su rasgo distintivo es que se configura mediante un archivo de reglas declarativo, lo que le da un control muy fino sobre cómo se mapean los directorios SVN a ramas y tags de Git. No se le pasan opciones por línea de comandos para el mapeo, se escribe un fichero de reglas y se invoca.
+Para un layout SVN estándar: trunk/, branches/, tags/:
+$ cd ~/project/
+$ nano reglas.rules
+create repository mi-proyecto.git
+end repository
+match /trunk/
+  repository mi-proyecto.git
+  branch master
+match /branches/([^/]+)/
+  repository mi-proyecto.git
+  branch \1
+match /tags/([^/]+)/
+  repository mi-proyecto.git
+  branch \1
+  substitute branch /refs/tags/\1
+Con un proyecto de layout no estándar: todo en la raíz, sin trunk:
+$ nano reglas.rules
+create repository app.git
+end repository
+match /
+  repository app.git
+  branch master
+Ejemplo de autores.txt:
+$ nano autores.txt
+jdoe = Juan Doe <jdoe@empresa.com>
+mgarcia = María García <mgarcia@empresa.com>
+Para dividir un solo repositorio SVN en varios repos Git:
+$ nano reglas.rules
+create repository libfoo.git
+end repository
+match /libfoo/
+  repository libfoo.git
+  branch master
+  prefix /
+$ svn-all-fast-export --identity-file=autores.txt --stats --rules=reglas.rules ~/project/repositorio.svn ("stats" muestra estadísticas de la convesación)
+1.-
+Ejemplo completo de sesión:
+$ cd project
+$ git init --bare project.git (en el directorio del proyecto, inicia el repositorio git)
+$ svn-all-fast-export --identity-file=autores.txt --rules=reglas.rules --svn-branches --empty-dirs /srv/svn/project
+$ git log --oneline --graph --all | head (verificación)
+
+
+svn-buildpackage
+Programas auxiliares para mantener paquetes Debian con Subversion. Dichos programas son svn-do, svn-inject, svn-upgrade y uclean. Estas herramientas fueron el estándar absoluto para el empaquetado de Debian hasta la primera década del los 2000, permitiendo gestionar el código fuente original [upstream], los parches de Debian y la construcción del paquete usando un repositorio SVN. Hoy en día la mayoría de las distribuciones ha migrado casi por completo a Git, por lo que svn-buildpackage se considera tecnología obsoleta, el estandar actual es git-buildpackage [gbp].
+$ svn-buildpackage (construcción básica, firmará los cambios con GPG)
+$ svn-buildpackage -us -uc (construcción para pruebas locales, omite la firma GPG del .changes y .buildinfo)
+$ svn-buildpackage --svn-builder="sudo pbuilder build" (usar un constructor específico como pbuilder para construir en un entorno chroot limpio)
+$ svn-inject miapp_1.0-1.dsc svn+ssh://usuario@svn.debian.org/svn/pkg-miapp/ (inyectar el paquete en el repositorio SVN de Debian o uno local y creará automáticamente /trunk/miapp/ y /tags/upstream/1.0/)
+$ svn-upgrade --verbose ../miapp_2.0.orig.tar.gz (subirá la nueva versión a tags/upstream/2.0 y actualizará trunk)
+$ svn-do debuild -us -uc -i\.svn (compilar el paquete en un directorio temporal sin ensuciar el SVN)
+$ svn-do $SHELL (entrar en una shell dentro del directorio temporal exportado para inspeccionar)
+$ svn-do make check (ejecutar la suite de tests del software en un entorno limpio)
+$ uclean < miapp-2.0.tar.gz > miapp-2.0.cleaned.tar.gz (limpiar un tarball y guardar el resultado en un nuevo archivo)
+
+
+svn-load
+Herramienta complementaria de Subversion que permite importar código fuente desde un directorio local a un repositorio SVN, detectando cambios entre versiones y facilitando el mantenimiento de ramas de código externo [vendor branches]. Su característica más ñimportante es que no está pensado no solo para la primera importación, sino también para actualizar repetidamente una versión del código sin perder el historial de cambios ni la información de los archivos que se han movido.
+$ svn mkdir svn+ssh://svn.example.org/repos/mi-proyecto/vendor -m "Crear directorio de proveedores" (comprobar que existe el repositorio y crear, si es necesario, la estructura de directorios correspondiente)
+$ svn mkdir svn+ssh://svn.example.org/repos/mi-proyecto/vendor/current -m "Crear directorio de la versión actual" (crear el directorio para la versión actual si todavía no existe)
+$ svn-load svn+ssh://svn.example.org/repos/mi-proyecto vendor/current /tmp/libfoo-2.4 (importa el código fuente, utiliza el contenido de /tmp/libfoo-2.4 para establecer el contenido de vendor/current)
+$ svn-load svn+ssh://svn.example.org/repos/mi-proyecto vendor/current /tmp/libfoo-2.5 (actualizar de la versión 2.4 a la 2.5)
+$ svn log -v svn+ssh://svn.example.org/repos/mi-proyecto/vendor/current (verificar la revisión)
+$ svn status (comprobar el estado del repositorio)
+
+
 svn-tools
 Diversas herramientas relacionadas con Apache Subversion: fsfs-access-map, fsfs-stats, svn-backup-dumps, svn-bisect, svn-clean, svn-hot-backup, svn-mergeinfo-normalizer, svn-populate-node-origins-index, svn-vendor, svn_apply_autoprops, svn_load_dirs, svnraisetreeconflict y svnwrap0. Ver subversion.
 
