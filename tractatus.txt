@@ -32364,6 +32364,8 @@ $ ls @(*.sh|*.txt) (sólo mostrará las extensiones especificadas. Precisa activ
 $ ls !(*.sh|*.txt) | xargs rm (elimina todos menos los mencionados)
 $ ls -al --time-style=+%D| grep `date +%D` (listar archivos abiertos hoy en el presente directorio)
 $ ls -alt | awk '{if (system("sleep .5 && exit 2") != 2) exit; print}' (que cada salida se demore medio segundo)
+$ ls files | sed 's/\.[^.]*$//' (ocultar la extensión de los archivos de un directorio)
+$ ls files | sed 's/\.html$//' (solo ocultar las extensiones de los .html)
 
 
 lsat
@@ -48506,6 +48508,30 @@ $ nano ejemplo.py
 $ pyflakes ejemplo.py (ejecutar el análisis estando en el directorio de ejemplo.py)
 $ pyflakes *.py (verificar todo un proyecto recursivamente)
 Nota.- Dependiendo de la shell, quizás precise activar "shopt -s globstar" en bash primero, o simplemente listar las carpetas: pyflakes src/ tests/.
+
+
+pygmentize
+[python3-pygments]. Herramiente en Python que colorea código fuente y otros textos estructurados con soporte para unos 500 lenguajes y formatos.
+$ pygmentize -L styles (listar estilos disponibles)
+$ pygmentize -L lexers (listar lenguajes)
+$ pygmentize -L formatters (listar formatos de salida)
+$ pygmentize -L filters (listar filtros)
+$ pygmentize -S monokai -f html -a .highlight > monokai.css (generar el CSS de un estilo)
+$ pygmentize -N script (muestra  el estilo que usaria en un script sin extensión)
+$ pygmentize -C < script (lo mismo)
+$ pygmentize script.sh (resaltar un archivo. Detecta el lenguaje por la extensión)
+$ pygmentize -l python -f terminal256 script.py (forzar lenguaje y características de la terminal)
+$ curl -s https://example.com | pygmentize -l html (de una URL)
+$ cat /etc/fstab | pygmentize -l ini (cuando el archivo no tiene extensión ha de especificarse)
+$ pygmentize -O linenos=1 script.py (mostrando números de línea)
+$ pygmentize -f html -O full,style=monokai -o salida.html script.py (forzando salida en html, varias opciones separadas por comas, nombre de la salida y el escript a colorear)
+$ pygmentize -f png -o codigo.png script.py (convierte a png coloreado)
+$ pygmentize -l pytb /var/log/boot.log
+$ pygmentize -f latex -o codigo.tex script.py
+$ pygmentize -f terminal256 -O style=dracula script.py (usar un estilo concreto en terminal)
+$ pygmentize -f png -O font_name="DejaVu Sans Mono",font_size=16 -o out.png script.py (cambiar la fuente en imágenes)
+$ pygmentize -g -f terminal256 -O style=dracula script (adivinar lenguaje [-g])
+$ pygmentize -l bash -F gobble -f terminal256 -O style=dracula script (aplicando un filtro [-F])
 
 
 pygopherd
