@@ -60084,6 +60084,14 @@ svn-tools
 Diversas herramientas relacionadas con Apache Subversion: fsfs-access-map, fsfs-stats, svn-backup-dumps, svn-bisect, svn-clean, svn-hot-backup, svn-mergeinfo-normalizer, svn-populate-node-origins-index, svn-vendor, svn_apply_autoprops, svn_load_dirs, svnraisetreeconflict y svnwrap0. Ver subversion.
 
 
+swak
+[SWiss Army Knife]. Herramienta de prueba para servidores SMTP [Simple Mail Transfer Protocol] que permite enviar correos electrónicos a través de un servidor SMTP y probar su funcionamiento.
+$ swaks --to destinatario@example.com --from remitente@example.com --server smtp.example.com --h-Subject "Asunto de prueba" --data "Este es el cuerpo del mensaje"
+$ swaks --to destinatario@example.com --from remitente@example.com --server smtp.example.com --auth PLAIN --auth-user USER --auth-pass PASS (si precisa usuario y contraseña)
+$ swaks --to destinatario@example.com --from remitente@example.com --server smtp.example.com --tls (asegurar que la conexión al servidor sea segura)
+$ swaks --to destinatario@example.com --from remitente@example.com --server smtp.example.com --attach archivo.txt (con un adjunto)
+
+
 swap
 Tambien llamado memoria de intercambio o memoria virtual, es la que se sirve del espacio en el disco duro en lugar del módulo de memoria. Las aplicaciones usan la memoria RAM para ejecutarse en el ordenador cuando no hay muchas ejecutandose pero si hay muchas o estas necesitan mucha RAM o no hay RAM suficiente para todas es cuando entra en acción la swap. Una de las desventajas de utilizar la swap es que el sistema se vuelve más lento ya que la velocidad de intercambio de información entre un disco duro y la RAM es abismalmente diferente. La memoria RAM es unas 1000 veces más rápida que un SSD y 100.000 veces más rápida que un HDD. El tamaño de una swap en un equipo con una memoria de 8 GB o más, como norma general es 2GB. Reservar para la swap más de 2 GB es esteril pero aunque un equipo no tenga 8 GB de memoria es aconsejable no dejar una swap inferior a 1GB.
 1.-
