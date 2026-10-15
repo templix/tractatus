@@ -1718,6 +1718,7 @@ Buscar un paquete que contiene un fichero o ver el contenido de un paquete. Una 
 # apt-file search ifconfig
 # apt-file list ifconfig
 # apt-file list util-linux | grep -E '/bin/|/sbin/' (ver los ejecutables de un paquete)
+# apt-file --package-only search /lib/firmware (muestra todo el firmware disponible que se puede obtener, no libre en un sistema Debian)
 
 
 apt-ftparchive
@@ -25057,6 +25058,7 @@ $ head /var/log/apache2/access.log
 $ head -50 /var/log/maillog  (las primeras 50)
 $ head -5 archivo1 archivo2 (Muestra las 5 primeras lineas de los dos archivos)
 $ head -c 100 imagen.jpg | file - (ver los primeros 100 bytes de una imagen)
+$ head -c13 /dev/urandom|base64|tr -d '=' (generar contraseña de 18 caracteres aleatorios)
 
 
 headache
@@ -32539,6 +32541,7 @@ lsmod
 Listar todos los módulos cargados del kernel, y alguna información adicional de ellos.
 $ lsmod
 $ cat /proc/modules (otra forma)
+$ lsmod | tail -n +2 | cut -d' ' -f1 | xargs modinfo | egrep '^file|^desc|^dep' | sed -e'/^dep/s/$/\n/g' (y otra)
 
 
 lsmount
@@ -39943,6 +39946,35 @@ $ nl archivo.txt | tail -n 1 | awk '{print$1}' (muestra el número de lineas del
 nload
 Monitor de tráfico de red
 # nload
+
+
+nls
+Herramienta rápida y multiplataforma para listar archivos.
+$ go install github.com/nolight132/nls/cmd/nls@latest (instalar)
+$ nls -a (listar todos los archivos y directorios incluido los ocultos)
+$ nls -A (lo mismo pero excluye los directorios especiales: . y ..)
+$ nls -l (además de los campos habituales,muestra permisos, propietario, grupo, número de enlaces y otros datos del sistema de archivos)
+$ nls -h (mostrar tamaño en formato legible)
+$ nls -P (muestra tamaño completo de los directorios)
+$ nls -S (ordena los resultados según tamaño)
+$ nls -t (ordenar según fecha de modificación)
+$ nls --group-directories-first -p -B (mostrar primero los directorios luego los archivos, a los directorios añadirles la barra [/] y ocultar las entradas que terminan en ~)
+Archivo de configuración:
+$ nano /.config/nls/config.toml
+default_columns = ["id", "name", "size", "modified", "permissions", "owner", "group"]
+[icons]
+ enabled = true
+ special_icons = true
+[dir_size]
+ enabled = true
+ default_depth = 0
+ timing = "balanced"
+[git]
+ color_entries = true
+[render]
+# Muestra los nombres de los destinos de los enlaces simbólicos en modo tabla.
+# La opción «-l» fuerza que se muestren siempre.
+ expand_symlinks = false
 
 
 nm
@@ -48178,6 +48210,7 @@ Moverse al directorio especificado, como con cd, pero el directorio anterior se 
 [/lib/init/rw/apache2]$ popd (retrocedemos un directorio en la pila)
 [/var/www]$ popd (retrocedemos otro directorio de la pila)
 [/usr/share/apache2/icons]$ dirs (nos informa de la pila de directorios en cada momento)
+$ pushd ~/project/dir_git ; git pull ; popd (entrar en el directorio git, lanzar un "git pull" y volver al directorio anterior)
 
 
 put-dns
@@ -48532,6 +48565,7 @@ $ pygmentize -f terminal256 -O style=dracula script.py (usar un estilo concreto 
 $ pygmentize -f png -O font_name="DejaVu Sans Mono",font_size=16 -o out.png script.py (cambiar la fuente en imágenes)
 $ pygmentize -g -f terminal256 -O style=dracula script (adivinar lenguaje [-g])
 $ pygmentize -l bash -F gobble -f terminal256 -O style=dracula script (aplicando un filtro [-F])
+$ pygmentize -l debcontrol -f terminal256 -O style=monokai,linenos=1 /etc/apt/sources.list.d/debian.sources (especificando lenguaje, clase de terminal, estilo y numeración de lineas)
 
 
 pygopherd
@@ -61591,6 +61625,7 @@ $ touch file{1..9}{a..z} (Crear los archivos del filea1 al filez9)
 $ touch a b c d (Crear varios archivos)
 $ touch -c archivo (Si “archivo” existe no lo creará)
 $ touch -a archivo (modifica el último acceso al archivo. Comprobar con $ stat archivo)
+$ touch ~/.hushlogin (silenciar el mensaje del día [MOTD])
 
 
 tpp
@@ -62239,6 +62274,8 @@ Un ejemplo de uso en un script:
 	typeset -i suma
 	suma=7+5
 	echo $suma
+$ typeset -F (muestra el nombre de todas las funciones de .bashrc y .bash_profile)
+$ typeset -f (muestra el cuerpo de todas las funcines)
 
 
 tzdiff
