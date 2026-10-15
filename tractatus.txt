@@ -1608,6 +1608,10 @@ Añadir al sources list la linea:
 # apt modernize-source (actualizar los repositorios a la nueva versión de apt)
 # apt update
 # apt -y install firefox firefox-l10n-es-es (instalar)
+3.-
+Existen paquetes, como lynis, que en sus instrucciones aconsejan lanzar:
+$ echo 'Acquire::Languages "none";' | sudo tee /etc/apt/apt.conf.d/99disable-translations
+Esto indica que APT no descargue los índices de traducciones. Al faltar estos índices, Synaptic acababa mostrando únicamente la descripción breve disponible en la información del paquete, por tanto es preferible no lanzarla.
 
 
 apt-cdrom
@@ -13792,7 +13796,8 @@ $ dpkg-query -l gedit (muestra arquitectura, versión y descripción de gedit)
 $ dpkg-query -W paquete (ver versión de un paquete)
 $ dpkg-query -L gedit (archivos instalados en el sistema desde el nombre del paquete)
 $ dpkg-query -s gedit (muestra el estado del paquete)
-$ dpkg-query -W --showformat='${Installed-Size}\t${Package}\n' | sort -nr | less (listar todos los paquetes instalados)
+$ dpkg-query -W --showformat='${Installed-Size}\t${Package}\n' | sort -nr | less (listar todos los paquetes instalados por orden alfabético)
+$ dpkg-query -Wf '${Package} - ${Version}\n' | sort -n (mostrar todos los paquetes instalados y sus versiones por orden alfabético)
 
 
 dpkg-reconfigure
@@ -22316,6 +22321,7 @@ $ git commit --allow-empty-message --message "" (crear un commit sin mensaje)
 $ git fsck (verificar el repositorio git con el local)
 $ git log | grep Date | awk '{print " : "$4" "$3" "$6}' | uniq -c (número de commits por día)
 $ o=0; git log --oneline | while read l; do printf "%+9s %s\n" "HEAD~${o}" "$l"; o=$(($o+1)); done | less (lista los desplazamientos desde HEAD con git log)
+$ git shortlog -s | sort -rn | head (lLos diez colaboradores más activos en repositorios Git)
 1.-
 Indicar a git archivos o directorios que quedemos excluir del control de versiones.
 $ touch .gitignore (Crear el fichero en el directorio raiz del proyecto)
@@ -60084,7 +60090,7 @@ svn-tools
 Diversas herramientas relacionadas con Apache Subversion: fsfs-access-map, fsfs-stats, svn-backup-dumps, svn-bisect, svn-clean, svn-hot-backup, svn-mergeinfo-normalizer, svn-populate-node-origins-index, svn-vendor, svn_apply_autoprops, svn_load_dirs, svnraisetreeconflict y svnwrap0. Ver subversion.
 
 
-swak
+swaks
 [SWiss Army Knife]. Herramienta de prueba para servidores SMTP [Simple Mail Transfer Protocol] que permite enviar correos electrónicos a través de un servidor SMTP y probar su funcionamiento.
 $ swaks --to destinatario@example.com --from remitente@example.com --server smtp.example.com --h-Subject "Asunto de prueba" --data "Este es el cuerpo del mensaje"
 $ swaks --to destinatario@example.com --from remitente@example.com --server smtp.example.com --auth PLAIN --auth-user USER --auth-pass PASS (si precisa usuario y contraseña)
@@ -60176,6 +60182,19 @@ Activar/desactivar el servicio con systemd
 # systemctl enable swatchdog.service (activar el servicio al inicio del sistema)
 # systemctl start swatchdog.service (activar el servicio)
 # systemctl status swatchdog.service (ver el estado)
+
+
+sweeper
+Permite eliminar rápidamente información temporal, como las cookies de páginas web, el historial del navegador o la lista de documentos abiertos recientemente. Es la utilidad de limpieza de KDE.
+$ sweeper --automatic (limpiar todo sin confirmación)
+$ sweeper --cookies --webcache (limpiar solo cookies y caché web)
+$ sweeper --recentdocuments (limpiar historial de documentos recientes)
+$ sweeper --commandhistory (limpiar todo el historial de comandos de bash)
+$ sweeper --thumbnails (limpiar thumbnails en caché)
+$ sweeper --webcache (elimina caché del navegador)
+$ sweeper --webhistory (elimina historial de navegación)
+$ sweeoer --clipboard (vacía el portapapeles)
+$ sweeper --all (activa todas las opciones de limpieza)
 
 
 swisswatch
@@ -60364,6 +60383,7 @@ systemctl
 # systemctl --type=service --state=running | grep cups.service (ver si un servicio está activo)
 # systemctl --type=service --state=failed,exited (ver estado de dos servicios)
 # systemctl --user --type=service | grep -E 'pipewire|pulse|wireplumber' (comprobar si determinados servicios del usuario están activos)
+# systemctl --failed | head -n -6 | tail -n -1 (mostrar unidades fallidas en systemd)
 1.-
 Para incorporar el arranque a grub2, modificar del archivo:
 # nano /etc/default/grub
