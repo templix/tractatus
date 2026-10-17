@@ -8239,18 +8239,17 @@ $ compface -d imagen.xcfaced > imagen_descomprimida.xbm (descomprimir)
 
 
 compgen
-Comando para listar comandos disponibles.
-$ compgen -c (Lista todos los comandos)
+Herramienta para listar comandos disponibles.
+$ compgen -c (lista todos los comandos)
 $ compgen -ac (lista de todos los comandos y alias)
-$ compgen -a (Lista los alias)
+$ compgen -a (lista los alias)
 $ compgen -b (lista los comandos internos de bash)
 $ compgen -k (lista palabras reservadas)
 $ compgen -A function (lista las funciones)
 $ compgen -c | grep sudo (las que hacen referencia a sudo)
-$ compgen -a
-$ compgen -c ls
-$ compgen -c rm
-$ compgen -A signal
+$ compgen -c ls (lista comandos que empiezan por ls)
+$ compgen -c rm (que empiecen por rm)
+$ compgen -A signal (lista las señales)
 
 
 compilar
