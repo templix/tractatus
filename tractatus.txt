@@ -1241,6 +1241,7 @@ Conjunto de utilidades para la administración de puntos de acceso inalámbricos
 
 apache2
 Ajustes de apache2
+$ apache2 -l (ver los módulos cargados en Apache)
 # apache2ctl -M    (Visualizar todos los modulos de apache)
 # apache2ctl -S (visualizar el estatus de apache)
 # apache2ctl -t  (Comprobar que la configuracion de apache va bien)
@@ -22321,7 +22322,8 @@ $ git commit --allow-empty-message --message "" (crear un commit sin mensaje)
 $ git fsck (verificar el repositorio git con el local)
 $ git log | grep Date | awk '{print " : "$4" "$3" "$6}' | uniq -c (número de commits por día)
 $ o=0; git log --oneline | while read l; do printf "%+9s %s\n" "HEAD~${o}" "$l"; o=$(($o+1)); done | less (lista los desplazamientos desde HEAD con git log)
-$ git shortlog -s | sort -rn | head (lLos diez colaboradores más activos en repositorios Git)
+$ git shortlog -s | sort -rn | head (los diez colaboradores más activos en repositorios Git)
+$ git log --graph --oneline --all --decorate --color (git tree con color y nombres de etiquetas/ramas)
 1.-
 Indicar a git archivos o directorios que quedemos excluir del control de versiones.
 $ touch .gitignore (Crear el fichero en el directorio raiz del proyecto)
@@ -26301,6 +26303,7 @@ $ httpd -t  (realiza un test de los archivos de configuración [Syntax OK])
 $ httpd -h  (muestra las opciones)
 $ httpd -v (versión de apache)
 $ httpd -V (versión y parámetros compilados)
+$ httpd -M ((ver los módulos cargados en Apache)
 
 
 httpdirfs
