@@ -60235,6 +60235,13 @@ Visor de imágenes con las funciones básicas necesarias para una visualización
 $ sxiv imagen.png
 
 
+symlinks
+La herramienta «symlinks» examina directorios en busca de enlaces simbólicos y los enumera en la salida estándar (stdout). Cada enlace va precedido de una clasificación: relativo, absoluto, huérfano («dangling»), desordenado («messy»), excesivamente largo («lengthy») o perteneciente a otro sistema de archivos («other_fs»). «Symlinks» también permite convertir enlaces absolutos (dentro del mismo sistema de archivos) en enlaces relativos, así como eliminar enlaces desordenados o huérfanos.
+$ symlinks -tvr /home/USER (comprobar qué acciones se realizarían si se utilizara la opción -c, muestra todos los enlaces simbólicos y de forma recursiva)
+$ symlinks -c /home/USER (convierte los enlaces absolutos en enlaces relativos. Los enlaces modificados mediante aparecen marcados con el prefijo «changed» en la salida)
+$ symlinks -d /home/USER (elimina los enlaces rotos)
+
+
 synaptic
 Interfaz gráfica para apt, sistema de gestión de paquetes basadas en Debian.
 Atajos de teclado:
