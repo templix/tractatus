@@ -9984,35 +9984,24 @@ Herramienta de seguridad y administración de redes que funciona como un captura
 
 
 daemontools
-Colección de herramientas para administrar y supervisar servicios UNIX: envdir, envuidgid, fghack, multilog, pgrphack, readproctitle, setlock, setuidgid, softlimit, supervise, svc, svok, svscan, svscanboot, svstat, tai64n y tai64nlocal
-- envdir permite configurar las variables de entorno de un programa a partir de archivos en un directorio, por ejemplo con un directorio myenv con los archivos:
-$ ls mienv
-     VAR1 (contenido: "valor1")
-     VAR2 (contenido: "valor2")
-Se puede ejecutar:
+Colección de herramientas para administrar y supervisar servicios UNIX: envdir, envuidgid, fghack, multilog, pgrphack, readproctitle, setlock, setuidgid, softlimit, supervise, svc, svok, svscan, svscanboot, svstat, tai64n y tai64nlocal.
 $ envdir ./myenv env (imprimirá las variables de entorno configuradas: VAR1=valor1 y VAR2=valor2)
-- envuidgid configura las variables de entorno UID y GID basadas en el usuario especificado.
 $ envuidgid nobody env (imprimirá las variables UID y GID para el usuario nobody)
-- fghack permite que un programa en segundo plano use la terminal estándar.
 $ fghack your-daemon (redirigirá la salida de un programa daemon a tu terminal
-- multilog es una herramienta para registrar mensajes de forma eficiente.
 $ myservice | multilog t ./logs (escribirá los mensajes en el directorio ./logs y aplicará la opción t para incluir marcas de tiempo)
-- pgrphack ayuda a ejecutar un programa sin que sea el líder de su grupo de procesos.
-$ pgrphack myprogram (cambia el grupo de procesos para nno causar problemas con otros supervisores)
-- setuidgid ejecuta un programa como un usuario específico, configurando las variables UID y GID.
+$ pgrphack myprogram (cambia el grupo de procesos para no causar problemas con otros supervisores)
 $ setuidgid nobody ls -la (ejecutará ls -la como el usuario nobody)
-- supervise supervisa un servicio ejecutándolo continuamente y reiniciándolo si falla.
+$ supervise (supervisa un servicio ejecutándolo continuamente y reiniciándolo si falla)
 Crear un directorio que contenga un script run para iniciar el servicio.
 $ cat ~/service/myservice
       #!/bin/sh
       exec myprogram
 $ supervise ~/service/myservice
-- svok comprueba si un servicio supervisado por supervise está funcionando.
-$ svok /service/myservice (devuelve un código de salida 0 si el servicio está activo)
-- svc controla un servicio supervisado: iniciar, detener, recargar, etc.
-$ svc -u /service/myservice (-u inicia el servicio, -d lo detiene y -t lo reinicia)
-- svscan escanea un directorio para supervisar todos los servicios contenidos en él.
+$ svok ~/service/myservice (comprueba si un servicio supervisado por supervise está funcionando)
+$ svok ~/service/myservice (devuelve un código de salida 0 si el servicio está activo)
+$ svc -u /service/myservice (-u inicia el servicio, -d lo detiene, -t lo reinicia, -p lo pausa, -c reinicia, -k lo mata y -x termina supervise cuando el servicio salga)
 $ svscan /service (escanea el directorio, busca subdirectorios con scripts run, y los supervisa)
+$ svstat /etc/service/* (consulta de estado)
 
 
 daemontools-run
@@ -60136,39 +60125,26 @@ Complemento del sistema que adapta de forma continua y automática el espacio de
 $ systemctl status swapspace.service (comprobar si está activo)
 
 
-swatchdog
-Diseñado para monitorizar la actividad del sistema a partir de un archivo de configuración que contiene los patrones que se deben buscar y las acciones que se deben realizar al encontrarlos.
-Ejemplo básico de configuración para vigilar /var/log/auth.log:
-$ nano ~/.swatchdogrc
-watchfor /Failed password for/
-  echo
-  exec /home/tux/bin/swatchdogrc.sh "$0"
-watchfor /FAILED/
-  echo red
-  throttle 300, lines=10
-  mail=admin@correo.com, subject="Failed Login Attempt"
-watchfor /ssh.*: Failed password/
-  echo
-  bell
-watchfor /segfault|kernel panic/
-  throttle 00:05:00
-  exec /home/tux/bin/fyi_kernel.sh "$0"
-throttle 300, lines=10 enviará un correo electrónico cada 300 segundos, incluso si el error ocurre más de 10 veces en ese período, throttle 00:05:00 indica que como máximo avise 1 vez cada 5 minutos y el archivo que se lanza con el exec para mostrar un texto en pantalla y hasta que no se cierre permanece en la pantalla. Ver fyi:
-$ nano ~/bin/swatchdog.sh
-       #!/bin/bash
-       msg="$*"
-       fyi -t 0 -i "/home/tux/Imatges/logos/gnu.png" "$msg"
-$ swatchdog -c ~/.swatchdogrc -t /var/log/auth.log --daemon (ejecutar Swatchdog en modo demonio)
-$ swatchdog -c ~/.swatchdogrc -t /var/log/secure
-$ swatchdog -c ~/.swatchdogrc -t '/var/log/nginx/site1/access_log /var/log/messages /var/log/auth.log' --daemon (ejecutar varios procesos para supervisar varios archivos de registro)
-Tambien es posible un swatchdog por log con configuraciones distintas:
-$ swatchdog -c ~/.sw_auth.rc   -t /var/log/auth.log   --daemon
-$ swatchdog -c ~/.sw_msgs.rc   -t /var/log/messages   --daemon
-$ swatchdog -c ~/.sw_nginx.rc  -t /var/log/nginx/site1/access_log --daemon
-$ echo c > /proc/sysrq-trigger (forzar un kernel panic muy útil para comprobar si el watchdog funciona correctamente)
-$ swatchdog -c ~/.swatchdogrc -t '/var/log/messages /var/log/auth.log' --tail-program-name=/usr/bin/tail --tail-args='-F' --pid-file=/run/swatchdog-logs.pid --daemon (archivo de configuración sobre dos archivos de registro [messages y
-auth.log], usar tail con el argumento -F, guardar el pid en el directorio especificado y arctivar el demonio)
-Nota.- Si se usa --daemon, al recibir HUP o ALRM no recarga la config, simplemente termina; se tiene que relanzar.
+swatch
+[swatchdog]. Visualizador de archivos de registro con coincidencia mediante expresiones regulares, resaltado y puntos de enlace [hooks] diseñado para supervisar la actividad del sistema y ejecutar acciones automáticamente cuando aparecen. Es especialmente útil para supervisar la actividad de un servidor, detectar intentos de acceso sospechosos, identificar errores y recibir avisos sin tener que revisar los registros manualmente. Ejemplo básico del proceso para detectar errores:
+Crear el archivo de configuración
+nano ~/.swatchdogrc
+watchfor /error/i
+    echo red
+    exec fyi -t 0 "existen errores"
+watchfor /failed/i
+    echo green
+    exec fyi -t 0 "existen faileds"
+watchfor /error/i buscará la palabra error, sin distinguir entre mayúsculas y minúsculas, echo red mostrará la línea coincidente en rojo, lo mismo con la palabra failed y la mostrará en verde y mostrar en pantalla una nota con el texto que se indica y permanezca hasta que el usuario no la cierre, cosa que no es necesario realizar porque la nota se va actualizando si detecta nuevos errores y fallos, actualizando un contador.
+$ sudo --preserve-env=HOME,TERM swatchdog -c $HOME/.swatchdogrc -t /var/log/syslog --daemon (ejecutar swatchdog en modo demonio)
+$ sudo --preserve-env=HOME,TERM swatchdog -c $HOME/.swatchdogrc -t /var/log/syslog (lanzar la aplicación indicando su archivo de configuración y los logs a controlar en modo interactivo)
+$ sudo --preserve-env=HOME,TERM swatchdog -c $HOME/.swatchdogrc -f /var/log/syslog (ver salida leyendo el archivo de logs desde el principio [-f])
+Para comprobar el funcionamiento, en una terminal lanzar:
+$ sudo --preserve-env=HOME,TERM swatchdog -c $HOME/.swatchdogrc -t /var/log/syslog
+y dejarla abierta, abrir otra terminal y lanzar:
+$ logger "Este es un mensaje de prueba con un error simulado"
+$ logger "Este otro mensaje de failed en el sistema"
+En la primera terminal aparecerá el primer mensaje en rojo y el segundo en verde.
 1.-
 Activar/desactivar el servicio con systemd
 # nano /etc/systemd/system/swatchdog.service
@@ -60177,7 +60153,7 @@ Activar/desactivar el servicio con systemd
  After=network.target syslog.target
 [Service]
  Type=simple
- ExecStart=/usr/bin/swatchdog -c /home/tux/.swatchdogrc -t /var/log/syslog
+ ExecStart=sudo --preserve-env=HOME,TERM /usr/bin/swatchdog -c /home/tux/.swatchdogrc -t /var/log/syslog
  Restart=on-failure
 [Install]
  WantedBy=multi-user.target
@@ -60230,6 +60206,27 @@ Notas.- La aplicación es case sensitive. Las teclas más importantes para los a
 $ xbindkeys -k (se abrirá un cuadro en la pantalla y al teclearla, la teminal mostrará su nombre)
 $ pkill -USR1 sxhkd (actualizar después de modificar el archivo de configuación)
 $ sxhkd -c ~/.config/sxhkd/sxhkdrc & (lanzarlo directamente si no se ha colocado en autostart)
+
+
+sxid
+Comprobación de archivos y directorios con SUID/SGID. Este programa se ejecuta como una tarea programada [/etc/cron.daily/sxid] que queda registrada cuando see instala. Básicamente, realiza un seguimiento de cualquier cambio en los archivos y directorios que tengan activados los bits SUID o SGID. Si aparecen elementos nuevos, si alguno pierde estos bits, o si se modifican sus permisos u otros atributos, el programa informa de dichos cambios. También es posible ejecutarlo manualmente para realizar comprobaciones puntuales. El seguimiento de los archivos con SUID/SGID se lleva a cabo mediante sumas de verificación (checksums) SHA-256 lo que permite detectar si los archivos han sido modificados. .
+Configuración básica:
+$ sudo sed '/^#/d;/^$/d' /etc/sxid.conf
+       SEARCH = "/"
+       EXCLUDE = "/cdrom /floppy /media /mnt /proc /sys"
+       EMAIL = "root"
+       ALWAYS_NOTIFY = "no"
+       LOG_FILE = "/var/log/sxid.log"
+       KEEP_LOGS = "5"
+       ALWAYS_ROTATE = "no"
+       FORBIDDEN = "/home /tmp"
+       ENFORCE = "no"
+       LISTALL = "no"
+       IGNORE_DIRS = "/home"
+# sxid (ejecución normal)
+# sxid -k /usr/local/bin (comprobación puntual)
+# sxid -l (listar todos los SUID/SGID encontrados)
+# less /var/log/sxid.log (ver el último informe)
 
 
 sxiv
@@ -66793,6 +66790,7 @@ $ zforce archivo archivo
 
 zgrep
 imprime las líneas que cumplan la expresión regula sobre ficheros comprimidos (Ver grep)
+$ zgrep --color=always 'get install' /var/log/apt/history.log* (buscar paquetes instalados)
 
 
 zile
