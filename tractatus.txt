@@ -18470,7 +18470,9 @@ $ ffmpeg -itsoffset -4 -i video.avi -vcodec mjpeg -vframes 1 -an -f rawvideo -s 
 $ ffmpeg -ss 5 -i video.mpegi -vframes 1 -s 320x240 thumb.jpg (lo mismo)
 $ ffmpeg -i http://192.168.1.115/img/video.asf -vcodec copy -b 900k salida.asf (Grabar un video de una ubicación en la red [cámara ip])
 $ ffmpeg -i ./PELICULA_ENTRADA.MOV -s 800x450 -vcodec libxvid -acodec aac -strict experimental -ac 2 -r 25 -ab 44100 -b 500k -aspect 16:9 fichero_salida.mp4 (Convertir un vídeo a un formato reconocido por Android)
-1. Unir varios videos
+$ ffprobe video.flv (obtener nformación sobre un vídeo)
+1.-
+Unir varios videos
 $ ffmpeg -i video1.avi -sameq video1.mpeg (Primero convertirlos a mpeg))
 $ ffmpeg -i video2.avi -sameq video2.mpeg
 $ cat video1.mpeg video2.mpeg > nuevo_video.mpeg (Unir los videos resultantes usando cat)
@@ -25501,7 +25503,7 @@ $ history -c (elimina el historial de la memoria)
 $ history -c ; history -w (limpieza definitiva)
 $ history -d 125 ; history -w (eliminar la orden 125 y guardar cambios, útil si se escribió la contraseña y esta queda visible en el historial)
 $ history -w (escribe todos los comandos ejecutados hasta el momento en el history)
-$ history -d 100-125 (eliminar las ordenes de la 100 a la 125. Para guardar los cambios los cambios lanzar despues siempre: history -w)
+$ history -d 100-125 (eliminar las ordenes de la 100 a la 125. Para guardar los cambios lanzar despues siempre: history -w)
 $ history -s who (añadir un comando al history sin ejecutarlo)
 $ history -n (con varias ventanas de terminal activas, carga las nuevas entradas de todas las terminales)
 $ history | awk '{print $2}' | sort | uniq -c | sort -rn | head -10 (lista los 10 comandos más usados y numero de veces)
@@ -60209,7 +60211,7 @@ $ sxhkd -c ~/.config/sxhkd/sxhkdrc & (lanzarlo directamente si no se ha colocado
 
 
 sxid
-Comprobación de archivos y directorios con SUID/SGID. Este programa se ejecuta como una tarea programada [/etc/cron.daily/sxid] que queda registrada cuando see instala. Básicamente, realiza un seguimiento de cualquier cambio en los archivos y directorios que tengan activados los bits SUID o SGID. Si aparecen elementos nuevos, si alguno pierde estos bits, o si se modifican sus permisos u otros atributos, el programa informa de dichos cambios. También es posible ejecutarlo manualmente para realizar comprobaciones puntuales. El seguimiento de los archivos con SUID/SGID se lleva a cabo mediante sumas de verificación (checksums) SHA-256 lo que permite detectar si los archivos han sido modificados. .
+Comprobación de archivos y directorios con SUID/SGID. Este programa se ejecuta como una tarea programada [/etc/cron.daily/sxid] que queda registrada cuando see instala. Básicamente, realiza un seguimiento de cualquier cambio en los archivos y directorios que tengan activados los bits SUID o SGID. Si aparecen elementos nuevos, si alguno pierde estos bits, o si se modifican sus permisos u otros atributos, el programa informa de dichos cambios. También es posible ejecutarlo manualmente para realizar comprobaciones puntuales. El seguimiento de los archivos con SUID/SGID se lleva a cabo mediante sumas de verificación (checksums) SHA-256 lo que permite detectar si los archivos han sido modificados.
 Configuración básica:
 $ sudo sed '/^#/d;/^$/d' /etc/sxid.conf
        SEARCH = "/"
