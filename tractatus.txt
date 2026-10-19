@@ -16768,6 +16768,11 @@ Mostrar vista previa de impresión para documentos PostScript y PDF.
 $ evince-previewer archivo.pdf
 
 
+evince-thumbnailer
+Crear miniaturas en formato PNG a partir de documentos PostScript y PDF. Normalmente están en /usr/share/thumbnailers/
+$ evince-thumbnailer --size=600 book.pdf book.png (con 600 de tamaño vertical de la miniatura)
+
+
 evtest
 Utilidad para monitorizar eventos de dispositivos de entrada mostrando todos los eventos que genera como determinar las asignaciones de botones del ratón, mapas de teclas de teclados exóticos y pantallas táctiles. Se utiliza habitualmente para depurar problemas con dispositivos de entrada en X.Org. evtest se encuentra en modo de mantenimiento y no soporta todas las características de los últimos núcleos; se debería utilizar en su lugar evemu-record del paquete evemu-tools [ver].
 
@@ -43751,6 +43756,7 @@ Opciones:
 pdftocairo
 Convierte spáginas de un pdf a cualquiera de los siguientes formatos de imagen: PNG, JPEG, TIFF, PDF, PS, EPS, SVG y Windows Printer
 $ pdftocairo -f 1 -l 3 -r 200 -png archivo.pdf (creará 3 .png de la primera página [-f 1]  a la tercera [-l 3] a 200 de resolución [por defecto 150] del archivo.pdf)
+$ pdftocairo -pdf archivo.pdf archivo_limpio.pdf (limpia un pdf)
 
 
 pdftohtml
@@ -43763,6 +43769,11 @@ $ pdftohtml -c archivo.pdf (Crea una página cada una del pdf)
 pdftoipe
 Convierte imágenes en formato PDF a un archivo XML legible por el editor ipe.
 $ pdftoipe -literal archivo.pdf (permitir marcado Latex en objetos de texto y generar archivo.ipe)
+
+
+pdftoppm
+Crea miniaturas de un pdf.
+$ pdftoppm -png -r 200 -f 1 -l 1 archivo.pdf archivo.png (crea la miniatura de la primera página y 200 de resolución, por defecto 150)
 
 
 pdftops
