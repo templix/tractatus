@@ -43526,6 +43526,33 @@ $ patool repack archivo.zip archivo.rar (reparar un .zip y guardar como .rar)
 $ patool recompress archivo.rar (recomprimir un archivo)
 
 
+pax-utils
+Conjunto de utilidades destinadas a binarios en formato ELF [Executable and Linkable Format] que es el formato estándar de ejecutables y librerías en Linux. Permite examinar archivos binarios ELF y procesos en ejecución en busca de aspectos que podrían ser relevantes al utilizar binarios ELF junto con PaX, tales como la presencia de código que no sea independiente de la posición [non-PIC] o el uso de una pila [stack] o un montón [heap] ejecutables. Este paquete instala: dumpelf, lddtree, pspax, scanelf, scanmacho y symtree.
+$ scanelf --nobanner --recursive --quiet --soname --format "+S#f" (proporciona una lista de nombres de objetos compartidos [sonames] exportados por un árbol de directorios determinado)
+$ scanelf -a /bin/ls (ver todo lo relevante de un binario)
+$ scanelf -n /bin/ls (librerías NEEDED)
+$ scanelf -e /usr/bin/ (buscar binarios con PILA EJECUTABLE en un directorio)
+$ scanelf -X /lib/x86_64-linux-gnu/ (buscar TEXTREL, código non-PIC reubicado)
+$ scanelf -qRN libpcre2-8.so.0 /usr/bin/ (búscar qué binarios de /usr/bin dependen de una librería)
+$ scanelf -s strlen /bin/ls (buscar qué binario importa un símbolo concreto)
+$ scanelf -qRE /usr/ (escaneo recursivo y silencioso de un árbol completo)
+$ scanelf -eqR /opt/miaplicacion/ (verificar que ningún binario nuevo introdujo pila ejecutable)
+$ scanelf -qa /usr/bin/ | awk '{print $2, $8, $NF}' (auditoría ráp61;8001;1cida de endurecimiento de todo /usr/bin [¿PIE? ¿BIND NOW?])
+$ scanelf -qRN libssl.so.3 /usr/ -R (saber quién la usa una libreria)
+$ lddtree /bin/ls (muestra las dependencias directas)
+$ lddtree -l /bin/ls (lista plana)
+$ lddtree /ruta/binario_roto (depurar "error while loading shared libraries")
+$ pspax (examina los procesos vivos y su estado de memoria)
+$ pspax -w -u $USER (solo mostrar procesos vivos de un usuario)
+$ pspax -p 1898 (solo de un PID especificado)
+$ pspax | grep -v w^x (procesos sospechosos con memoria ejecutable inusual)
+$ symtree /bin/ls (combina lddtree y scanelf, muestra el árbol de dependencias y, para cada librería, qué símbolos concretos [funciones/variables] consume el binario)
+$ scanmacho -i /Applications/Foo.app/Contents/MacOS/Foo (info general)
+$ scanmacho -R /Applications (escaneo recursivo)
+$ scanmacho -Rn /Applications | grep libssl (quién usa OpenSSL)
+Nota.- scanmacho solo reporta Mach-O. Útil si se administra servidores macOS o se analiza binarios de iOS:
+
+
 pbzip2
 Comprensión en paralelo que puede usarse en máquinas de más de un nucleo. Las opciones de uso son las mismas que bzip2.
 
