@@ -23814,6 +23814,10 @@ load --> Inserta múltiples registros en la tabla Documents y cada documento tie
 Nota.- La búsqueda de "texto completo" permite buscar palabras o frases dentro de un conjunto de datos de texto, considerando no solo coincidencias exactas, sino también variaciones, sinónimos, o formas flexionadas de las palabras, por ejemplo, "corriendo" y "correr". A diferencia de una búsqueda simple, que busca coincidencias literales y puede ser lenta en grandes conjuntos de datos, la búsqueda de texto completo utiliza "índices invertidos" para acelerar las consultas. Estos índices almacenan un mapeo de palabras a sus ubicaciones en los documentos, lo que permite búsquedas rápidas y relevantes.
 
 
+groovy
+Lenguaje dinámico y ágil para la JVM [ava Virtual Machine] que combina muchas características excelentes de lenguajes como Python, Ruby y Smalltalk y con una sintaxis similar a la de Java.
+
+
 gross
 Es un servidor de listas grises [Greylisting] que es una técnica utilizada para reducir el spam en servidores de correo electrónico, que temporalmente rechaza cualquier correo de un remitente desconocido. Si el correo es legítimo, el servidor de correo del remitente intentará reenviarlo después de un tiempo, y entonces será aceptado. Los servidores de spam generalmente no intentan reenviar el correo. La configuración en /etc/grossd.conf.
 1.-
@@ -60331,6 +60335,24 @@ La herramienta «symlinks» examina directorios en busca de enlaces simbólicos 
 $ symlinks -tvr /home/USER (comprobar qué acciones se realizarían si se utilizara la opción -c, muestra todos los enlaces simbólicos y de forma recursiva)
 $ symlinks -c /home/USER (convierte los enlaces absolutos en enlaces relativos. Los enlaces modificados mediante aparecen marcados con el prefijo «changed» en la salida)
 $ symlinks -d /home/USER (elimina los enlaces rotos)
+
+
+synadm
+Herramienta de administración para Synapse, diseñada para ejecutarse tanto en el host donde corre la instancia de Synapse como en una máquina remota que tenga acceso al puerto de la API de Synapse. Lo único que hace es enviar peticiones HTTP a /_synapse/admin/..., y por eso funciona igual en el servidor que desde otra máquina con acceso a ese puerto. Si se está en el propio servidor, la URL de la API, normalmente es http://localhost:8008
+$ synadm config  (pregunta de forma interactiva el usuario admin, el token, la URL base y el dominio del homeserver y lo guarda todo en ~/.config/synadm.yaml [precisa permisos 600])
+$ synadm config -s  (revisar la configuración anteriror)
+$ synadm --help (ver comandos disponibles)
+$ synadm user list (listar usuarios)
+$ synadm user list -n alice (buscar por nombre)
+$ synadm user details @alice:example.org (ver los detalles de un usuario)
+$ synadm user password @alice:example.org (cambiar la contraseña)
+$ synadm user modify @alice:example.org --admin (hacer admin a un usuario)
+$ synadm user deactivate @alice:example.org (desactivar una cuenta)
+$ synadm room list (listar salas)
+$ synadm room details '!abcdef:example.org' (detalles de una sala concreta)
+$ synadm room members '!abcdef:example.org' ( miembros de una sala)
+$ synadm regtok list (ver tokens de registro)
+$ synadm regtok new (crear un tokens de registro)
 
 
 synapse
