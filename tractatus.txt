@@ -22723,6 +22723,58 @@ $ gmount google_docs juan@gmail.com -d (sincronizar la carpeta google_docs con l
 $ gumount google_docs (Desmontar la carpeta)
 
 
+gmrun
+Lanzador de aplicaciones repleto de funcionalidades, diseñado para su uso en X11 y basado en el kit de herramientas GTK+. Un ejemplo de dichas funcionalidades con sus descripciones como comentarios podría ser:
+$ nano ~/.gmrumrc
+       # Ancho de la ventana (la altura se ajusta automáticamente al texto)
+       Width = 450
+       # que salga centrado
+       Top = 400
+       Left = 500
+       # número de comando a recordar
+       History = 100
+       # mostrar el último comando entrado. 0 para vacio
+       ShowLast = 0
+       # Mostrar archivos ocultos al autocompletar
+       ShowDotFiles = 0
+       # tiempo en milisegundos para autocompletar
+       TabTimeout = 0
+       # emulador de terminal predeterminado
+       Terminal = qterminal
+       TermExec = ${Terminal} -e
+       # comandos que se abriran dentro de la terminal predeterminada
+       AlwaysInTerm = telnet tmux lynx mc nano man info htop update-alternatives
+       URL_v = firefox %u
+       # atajo d:xxxx buscar xxxx en duckduckgo
+       URL_d = firefox https://duckduckgo.com
+       # atajo g:xxxx buscar en google
+       URL_g = firefox https://google.com
+       # atajo x:xxxx buscar la wikipedia
+       URL_w = firefox https://wikipedia.org
+       # atajo news:liferea
+       URL_news = liferea
+       # atajo man:xxxx abrirá la página man de xxxx
+       URL_man = ${TermExec} 'man %s'
+       # atajo info:xxxx abrir la página info
+       URL_info = ${TermExec} 'info %s'
+       # atajo t:nombre abrirá tmux con dos paneles con "nombre"
+       URL_t = blackbox-terminal -e /home/tux/bin/launch_tmux.sh %s
+El contenido del script que abre una terminal con tmux y dos paneles horizontales es:
+$ nano bin/launch_tmux,sh
+       #!/bin/bash
+       # Script para lanzar tmux con dos paneles apilados
+       SESION="${1:-defecto}"
+       #
+       # Iniciamos tmux con una nueva sesión en segundo plano (-d)
+       tmux new-session -d -s "$SESION"
+       #
+       # Dividimos el primer panel horizontalmente (arriba y abajo -> -v)
+       tmux split-window -v -t "$SESION":0
+       #
+       # Nos acoplamos a la sesión recién creada
+       tmux attach-session -t "$SESION"
+
+
 gnokii
 Herramienta que permite la comunicación con teléfonos móviles, principalmente modelos antiguos de Nokia y Symbian, mediante cables serie, USB, infrarrojos o Bluetooth. Su propósito es acceder a funciones del teléfono como la gestión de mensajes SMS, la agenda de contactos, el calendario, entre otros. Para consultar la lista de teléfonos compatibles: http://wiki.gnokii.org
 Configurar el archivo con información sobre el modelo de teléfono y cómo está conectado, por ejemplo, USB, serie, Bluetooth.
@@ -60252,6 +60304,11 @@ La herramienta «symlinks» examina directorios en busca de enlaces simbólicos 
 $ symlinks -tvr /home/USER (comprobar qué acciones se realizarían si se utilizara la opción -c, muestra todos los enlaces simbólicos y de forma recursiva)
 $ symlinks -c /home/USER (convierte los enlaces absolutos en enlaces relativos. Los enlaces modificados mediante aparecen marcados con el prefijo «changed» en la salida)
 $ symlinks -d /home/USER (elimina los enlaces rotos)
+
+
+synapse
+Lanzador de aplicaciones semántico escrito en Vala, así como un buscador de archivo tradicional su potencia radica en que utiliza el motor Zeitgeist para registrar tu actividad [aplicaciones usadas, documentos abiertos, búsquedas] y así ofrecer resultados contextuales, relevantes antes de terminar de escribir.
+$ synapse -s (activar la aplicación. Lanzar en un lanzador de aplicaciones como grun o como aplicación de inicio de sesión. Se muestra con Ctrl + Espacio)
 
 
 synaptic
