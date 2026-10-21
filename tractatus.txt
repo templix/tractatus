@@ -32954,6 +32954,16 @@ Una de las ventajas de LVM es la capacidad de redimensionar volúmenes lógicos 
 # pvremove /dev/sdX (eliminar un volumen físico al que primero se ha eliminado cualquier grupo de volúmenes al que pertenezca)
 
 
+lvs
+[Logical Volume Management]. Su función principal es mostrar información sobre los volúmenes lógicos que están configurados en el sistema, lo que incluye detalles como el tamaño de los volúmenes, su estado, el nombre del grupo de volúmenes al que pertenecen y otros atributos.
+# lvs (mostrar una lista de todos los volúmenes lógicos en el sistema)
+# lvs -o +devices (información más detallada sobre los volúmenes lógicos)
+# lvs -o +devices --units g (ver salida en formato de tabla)
+# lvs my_volume (filtrar por nombre de volumen o grupo de vVolúmenes)
+# lvs vg_name (ver todos los volúmenes de un grupo específico)
+# lvs -o lv_name,lv_size --units m vg_data (listar dos volúmenes lógicos del grupo de volúmenes vr_data)
+
+
 lwatch
 Herramienta para monitorear y analizar logs en sistemas que usan syslog o syslog-ng con expresiones regulares [PCRE], colorearlos y mostrarlos de forma que la información importante se pueda ver a simple vista.
 $ lwatch /var/log/syslog (monitorear logs en tiempo real similar a tail -f pero con colores)
@@ -43441,6 +43451,35 @@ paste
 Combina archivos, juntando las primeras lineas con las primeras, las segundas con las segundas...
 	$ paste 1.txt 2.txt > 3.txt
 	$ paste -d'\n' 1.txt 2.txt > 3.txt (con un salto de linea para cada linea)
+
+
+pastebinit
+herramienta que permite publicar texto en un *pastebin*: Se le pasa un archivo o la salida de un comando y devuelve una URL pública para compartir. Incluye las herramientas pbget, pbput y pbputs.
+$ pastebinit archivo (publicar un archivo)
+$ journalctl -b -p err | pastebinit (publicar la salida de un comando)
+$ uname -a; lspci -k; lsblk -f | pastebinit (estado del sistema)
+# nft list ruleset | pastebinit (reglas de firewall)
+$ journalctl -b -p err --no-pager | pastebinit (últimos errores del sistema)
+$ pastebinit -l (listar servicios disponibles)
+$ pastebinit -i backup.sh -f bash -a "admin" -t "Script de backup" -b https://paste.debian.net (publicar un script con formato Bash, con autor, título y especificando servicio pastebin)
+$ pbput /ruta/al/archivo.tar.gz (subir un archivo binario o de texto)
+$ pbput ~/proyecto/configs (subir un directorio completo)
+# dmesg | pbput (subir la salida de un comando)
+$ pbget http://pastebin.com/p43gJv6Z (recuperar texto publicado desde stdin)
+$ pbget http://pastebin.com/BstNzasK ~/descargas (recuperar un archivo o directorio y extraerlo en una carpeta. Si se omite destino, crea uno temporal e indica la ruta.)
+$ pbputs /etc/shadow (cifrado simétrico, pedirá una contraseña)
+$ pbputs informe.conf tu-correo@example.com (cifrado y firma para un destinatario GPG)
+# nft list ruleset | pbputs (cifrar la salida de un comando)
+$ journalctl -b -p warning --no-pager | pastebinit -t "Errores de arranque" -f text (flujo típico para pedir ayuda en un foro o IRC)
+1.-
+Se puede crear un archivo de configuración persistente para no repetir opciones:
+$ nano ~/.pastebinit.xml
+<pastebinit>
+    <pastebin>paste.debian.net</pastebin>
+    <author>tu_usuario</author>
+    <format>text</format>
+    <private>1</private>
+</pastebinit>
 
 
 patat
