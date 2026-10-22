@@ -1613,6 +1613,11 @@ Añadir al sources list la linea:
 Existen paquetes, como lynis, que en sus instrucciones aconsejan lanzar:
 $ echo 'Acquire::Languages "none";' | sudo tee /etc/apt/apt.conf.d/99disable-translations
 Esto indica que APT no descargue los índices de traducciones. Al faltar estos índices, Synaptic acababa mostrando únicamente la descripción breve disponible en la información del paquete, por tanto es preferible no lanzarla.
+4.-
+Comprobar la modificación de un paquete concreto
+apt-get download apache2
+dpkg-deb -x apache2_*.deb /tmp/apache2-orig
+diff -u /tmp/apache2-orig/etc/apache2/apache2.conf /etc/apache2/apache2.conf
 
 
 apt-cdrom
@@ -11044,6 +11049,14 @@ Verificar la integridad de los ficheros.
 # cat log.txt | grep "mismatch" | cut -d " " -f4 | uniq > reinstall.txt (A partir del archivo anterior, listar los que se han de reinstalar)
 # debsums -s | grep "mismatch" | cut -d " " -f4 | uniq > reinstall.txt (Lo mismo)
 # apt-get install --reinstall `(cat reinstall.txt)`  (para instalarlos a partir del listado)
+# debsums -ce (ver archivos de configuración del sistema que se han modificado)
+# debsums -ca (ver todos los archivos modificados del sistema)
+1-.-
+Para ver todos los archivos del sistema que difieren por MD5 de los originales:
+# debsums -c | while read f; do
+  echo "=== $f ==="
+  dpkg -S "$f" 2>/dev/null | head -1
+done
 
 
 debtags
@@ -13787,6 +13800,7 @@ $ dpkg-query -L gedit (archivos instalados en el sistema desde el nombre del paq
 $ dpkg-query -s gedit (muestra el estado del paquete)
 $ dpkg-query -W --showformat='${Installed-Size}\t${Package}\n' | sort -nr | less (listar todos los paquetes instalados por orden alfabético)
 $ dpkg-query -Wf '${Package} - ${Version}\n' | sort -n (mostrar todos los paquetes instalados y sus versiones por orden alfabético)
+$ dpkg-query -W -f='${Conffiles}\n' ansiweather (ver si un archivo es conffile protegido y se ha modificado por el usuario)
 
 
 dpkg-reconfigure
@@ -60502,6 +60516,17 @@ sysdig
 # sysdig -c httplog (visualización de registros HTTP)
 # sysdig -c topprocs_cpu (monitoreo de procesos por uso de CPU)
 # sysdig -c spy_users (monitoreo de la actividad de los usuarios)
+
+
+sysfs
+Sistema de archivos virtual, montado por convención en el directorio /sys, que ofrece una estructura jerárquica de los dispositivos del sistema y de los objetos gestionados por el núcleo de Linux [kobjects]. Además, proporciona un archivo de configuración, /etc/sysfs.conf, que permite establecer cómodamente los atributos de sysfs durante el arranque del sistema, mediante un script de inicialización. A diferencia de otros sistemas de archivos virtuales como /proc, sysfs está diseñado específicamente para reflejar la topología del hardware, los controladores [drivers], los buses y sus atributos asociados, permitiendo tanto la consulta de información en tiempo real como la modificación directa de parámetros del kernel. El archivo de configuración en /etc/sysfs.conf. Incluye los ejecutables systool y update-sysfs.
+$ cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor (consultar el gobernador de frecuencia actual de la CPU)
+$ echo "powersave" | sudo tee /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor (modificar el comportamiento del hardware en caliente)
+$ systool (listar todos los tipos de buses, clases y dispositivos raíz del sistema)
+$ systool -b pci -v (ver información detallada y todos los atributos de los dispositivos conectados al bus PCI)
+$ systool -c net -v (consultar los dispositivos pertenecientes a una clase específica, por ejemplo, interfaces de red)
+$ systool -m usbcore -v (inspeccionar los parámetros de un módulo concreto del kernel, por ejemplo, usbcore)
+Nota.- El comando update-sysfs se ejecuta automáticamente durante el arranque del sistema mediante los scripts de inicialización de sysfsutils, aunque también puede invocarse manualmente con privilegios de superusuario para aplicar los cambios en el archivo de configuración.
 
 
 syslinux
