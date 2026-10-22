@@ -60434,10 +60434,29 @@ $ sync
 # sync; init 0 (Sincronizar y apagar el equipo)
 
 
+syncache
+Caché con límite de tiempo y segura para entornos multihilo [thread-safe] en Ruby. SynCache almacena objetos en caché dentro de un hash protegido por un mecanismo avanzado de bloqueo de dos niveles
+$ syncache-drb (iniciar el servidor de caché y se ejecutará en druby://*:9000)
+$ syncache-drb --foreground (que no guarde nada, ni cambio de usuario, ni PID ni nada a syslog)
+$ syncache-drb --ttl 3600 --size 5000 (establecer un tiempo de vida de 1 hora para las entradas de caché y un tamaño máximo de 5000 entradas, por defecto 24 horas y 10000)
+$ syncache-drb --debug --error-log /var/log/syncache_error.log (con mensajes de depuración y en el archivo especificado en lugar de en syslog)
+
+
 synclient
 Consultar/modificar las opciones del touchpad
 $ synclient -l (Ver la configuración)
 $ synclient TapButton1=1 TapButton2=2 VertEdgeScroll=1 (Activar el click y el escroll. Para hacerlo permanente poner la linea en el inicio [en fluxbox sería en /.fluxbox/startup]
+
+
+syncthing
+Herramienta de sincronización descentralizada, lo que significa que los archivos viajan directamente entre dispositivos sin pasar por un servidor en la nube. Aunque su gestión principal se realiza a través de una interfaz web, el comando syncthing en la terminal es el núcleo que permite iniciar el servicio, gestionar la configuración y diagnosticar problemas.
+$ syncthing serve (inicia el servicio en http://127.0.0.1:8384 y se abre la interfez web en el navegador)
+$ syncthing --no-browser (iniciar Syncthing sin abrir el navegador)
+$ syncthing --paths (ver las rutas de configuración, datos y logs)
+$ syncthing --paused (inicia todos los dispositivos y carpetas en estado pausado)
+$ syncthing --reset-database (fuerza un re-escaneo completo de todas las carpetas y reconstruye la base de datos desde cero)
+$ ssh -L 9090:localhost:8384 usuario@servidor-remoto (acceder a la interfaz web desde otro equipo mediante túnel SSH con lo cual se podrá abrir http://localhost:9090 en local para gestionar el Syncthing del servidor remoto)
+$ syncthing --audit (habilitar el registro detallado y persistente de todos los cambios y actividades)
 
 
 sysbench
