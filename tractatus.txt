@@ -60726,6 +60726,17 @@ $ coredumpctl gdb <PID> (<PID> es el identificador del proceso que aparece en la
 $ coredumpctl dump <PID> > mi_volcado.core (guardará el core dump en un archivo llamado mi_volcado.core)
 
 
+systemd-oomd
+Servicio del sistema que utiliza cgroups-v2 y la información de presión del sistema para supervisar los procesos y tomar medidas antes de que se produzca una situación de falta de memoria [OOM] en el espacio del núcleo.
+# systemctl status systemd-oomd (consultar el estado del servicio)
+$ systemctl is-enabled systemd-oomd (comporbar si está habilitado)
+$ systemctl is-active systemd-oomd (comporbar si está en ejecución)
+# oomctl (muestra información)
+# oomctl dump (comprobar qué muestra la herramienta)
+# systemctl show systemd-oomd -p MainPID -p Type -p BusName -p ExecStart -p FragmentPath (comprobar el proceso y su configuración)
+# busctl --system list | grep -E 'oom1|oomd' (comprobar si D-Bus ve el servicio)
+
+
 systemd-path
 Sistema de listas, consultas y rutas de usuario.
 $ systemd-path
