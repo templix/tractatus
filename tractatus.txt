@@ -60546,10 +60546,18 @@ sysnews
 Programa para mostrar noticias entre usuarios del sistema. Cada noticia se encuentra en un archivo independiente en el directorio /var/lib/sysnews. Cualquier persona con permiso de escritura en este directorio puede crear un archivo news.
 $ nano /var/lib/sysnews/noticia (enviar noticia, por ejemplo con el texto: ¡Atención! Se ha actualizado el kernel del sistema. Reinicie para aplicar cambios)
 $ rm /var/lib/sysnews/noticia (eliminar el archivo, cuando ya no es relevante)
+$ news (leer noticias no leidas, si ya se han leido no las muestra)
 $ news -a (muestra todas las noticias, incluyendo las ya leídas)
 $ news -s (número de artículos de noticias)
 $ news -n -l (muestra solo los nombres de los artículos de noticias y uno por linea)
 $ news -e 10 -x noticia1 noticia3 (que las noticias caduquen a los 10 dias excepto noticia1 y noticia3)
+
+
+sysprof
+es un perfilador de CPU basado en muestreo que utiliza ptrace en el núcleo de Linux para analizar el sistema completo, no solo una aplicación individual. Sysprof gestiona bibliotecas compartidas y no requiere recompilar las aplicaciones; de hecho, ni siquiera es necesario reiniciarlas. Una de sus características principales es que analiza todos los procesos en ejecución, no solo una aplicación individual. Incluye las herramientas sysprof-agent, sysprof-cat y sysprof-cli
+# systemctl status sysprof3.service (comprobar si está activo)
+# sysprof-cli analisis (iniciar la aplicación y guardar los resultados en "analisis")
+# sysprof-cat analisis | less (mostrar los resultados)
 
 
 sysstat
