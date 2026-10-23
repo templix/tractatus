@@ -5093,6 +5093,7 @@ Monitorear de D-bus
 # busctl --unique
 # busctl --show-machine
 # busctl --quiet
+# busctl --system list | grep firefox (comprobar si D-Bus ve un servicio)
 
 
 bustle-pcap
@@ -60724,6 +60725,13 @@ Herramientas para almacenar en un formato estructurado y recuperar, con herramie
 $ coredumpctl list (lista de los volcados de memoria disponibles, junto con información sobre el proceso que falló)
 $ coredumpctl gdb <PID> (<PID> es el identificador del proceso que aparece en la lista de coredumpctl list. Esto abrirá gdb con el binario correspondiente y el core dump cargado)
 $ coredumpctl dump <PID> > mi_volcado.core (guardará el core dump en un archivo llamado mi_volcado.core)
+
+
+systemd-homed
+es un servicio del sistema diseñado para gestionar directorios personales. Este paquete incluye el servicio «homed», un módulo PAM para montar automáticamente los directorios personales al iniciar sesión el usuario, así como herramientas y documentación. Incluye los ejecutables homectl y systemd-home-fallback-shell
+$ homectl create waldo --real-name="Waldo McWaldo" -G wheel --disk-size=500M (crear un usuario «waldo» en el grupo «wheel» y asignarle 500 MiB de espacio en disco)
+$ homectl create wally --real-name="Wally McWally" --image-path=/dev/disk/by-id/usb-SanDisk_Ultra_Fit_476fff954b2b5c44-0:0 --tasks-max=500 (crear un usuario «wally» en una memoria USB y asignarle un máximo de 500 tareas simultáneas)
+$ homectl update odlaw --nice=5 --setenv=SOME=THING (Cambiar nivel de prioridad [nice level] del usuario «odlaw» a +5 y asegurar que la variable de entorno $SOME esté definida con el valor «THING» para dicho usuario al iniciar sesión)
 
 
 systemd-oomd
