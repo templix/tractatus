@@ -60560,6 +60560,12 @@ es un perfilador de CPU basado en muestreo que utiliza ptrace en el núcleo de L
 # sysprof-cat analisis | less (mostrar los resultados)
 
 
+sysprofile
+Mecanismo modular de configuración del shell a nivel de sistema. Un mecanismo de configuración sencillo y centralizado que permite un mantenimiento flexible de los componentes específicos del shell al iniciar sesión en un sistema Debian. Los ejemplos [plantillas] están en /usr/share/doc/sysprofile/examples/etc/sysprofile.d/ y puede que algunos ya se tengan en ~/.bashrc. Para que tengan efecto han de copiarse en:
+# sudo cp /usr/share/doc/sysprofile/examples/etc/sysprofile.d/* /etc/sysprofile.d/
+Para copiarlos todos y luego editarlos para terminar de pulirlos o solo copiar los que interesen.
+
+
 sysstat
 Herramientas para monitorear el rendimiento del sistema, permitiendo ver estadísticas sobre CPU, memoria, disco, red, procesos, etc. Incluye cifsiostat, iostat, mpstat, pidstat, sadf, sar.sysstat y tapestat
 $ iostat -x 2 3 (muestra estadísticas extendidas de E/S cada 2 segundos, 3 veces)
@@ -60656,6 +60662,10 @@ systemd-analyze
 # systemd-analyze critical-chain (ver cuellos de botella en el arranque)
 # systemd-analyze plot > archivo.svg (mostrar un gráfico con los tiempos del arranque)
 # systemd-analyze dump (volcar todo el arranque)
+
+
+systemd-boot
+Gestor de arranque UEFI sencillo. Ofrece un menú en modo texto para seleccionar la entrada con la que iniciar el sistema, así como un editor para la línea de comandos del núcleo. Es compatible únicamente con sistemas que cuentan con firmware UEFI y su instalación conlleva su configuración e instalación en la partición del sistema EFI.
 
 
 systemd-bootchart
