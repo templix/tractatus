@@ -60486,9 +60486,9 @@ $ sysbench --test=cpu --cpu-max-prime=50000 --num-threads=6 run (Con este test m
 
 sysctl
 Muestra la configuración de los parámetros del kernel
-# sysctl -a | more (Muestra todas las [muchisimas] variables)
-# sysctl fs.file-max     (máximo de ficheros que pueden abrirse en el sistema)
-# sysctl fs.file-max=256000   (modificarlo a 256000)
+# sysctl -a | more (muestra todas las [muchisimas] variables)
+# sysctl fs.file-max (máximo de ficheros que pueden abrirse en el sistema)
+# sysctl fs.file-max=256000 (modificarlo a 256000)
 # sysctl -w vm.swappiness=10 (usar más memoria RAM y menos SWAP)
 # sysctl kernel.panic=5 (forzar reinicio a los 5 segundos despues de un kernel panic)
 Para hacer los cambios permanentes añadir las lineas al archivo /etc/sysctl.conf:
@@ -60565,6 +60565,37 @@ sysprofile
 Mecanismo modular de configuración del shell a nivel de sistema. Un mecanismo de configuración sencillo y centralizado que permite un mantenimiento flexible de los componentes específicos del shell al iniciar sesión en un sistema Debian. Los ejemplos [plantillas] están en /usr/share/doc/sysprofile/examples/etc/sysprofile.d/ y puede que algunos ya se tengan en ~/.bashrc. Para que tengan efecto han de copiarse en:
 # sudo cp /usr/share/doc/sysprofile/examples/etc/sysprofile.d/* /etc/sysprofile.d/
 Para copiarlos todos y luego editarlos para terminar de pulirlos o solo copiar los que interesen.
+
+
+sysrq
+Combinación de teclas que el kernel de Linux reconoce incluso cuando el sistema está muy colgado o no responde. Permite enviar comandos de bajo nivel directamente al kernel para intentar recuperar el sistema, sincronizar discos, desmontar sistemas de archivos, reiniciar, etc, sin depender de procesos de usuario que puedan estar bloqueados. Normalmente está asociado a las teclas Atl + Impr Pant [Print Screen, PrtSC...] más la tecla de lo que se quiere hacer. Las teclas más habituales para pulsar despues de Atl + Print son:
+s [Sync] --> intenta sincronizar todos los sistemas de archivos montados.
+u [Umount] --> intenta remontar todos los sistemas de archivos en solo lectura
+b [Reboot] --> reinicia el sistema inmediatamente sin sync ni umount.
+o [Poweroff] --> apaga el sistema.
+e [Term] --> envía SIGTERM a todos los procesos excepto init.
+i [Kill] --> envía SIGKILL a todos los procesos excepto init.
+k [SAK] --> mata todos los programas de la consola virtual actual.
+r [Unraw] --> restaura el teclado al modo normal.
+0-9 --> cambia el nivel de log de la consola.
+h --> muestra ayuda
+Estas letras también se pueden ejecutar sin "Atl + Print" escribiendo:
+# echo b > /proc/sysrq-trigger
+Una secuencia clásica para reiniciar un sistema colgado de forma más segura es llamado "REISUB" que significa que manteniendo pulsadas las teclas Alt + Print pulsar r, e, i, s, u, b :
+
+
+sysrqd
+Demonio diseñado para gestionar Linux SysRq [System Request] en equipos remotos. Permite ejecutar los comandos SysRq [ver] habituales [sync, umount, reboot, poweroff, sak, term, etc.] de forma remota. Escucha en el puerto TCP 4094, la autenticación se hace con una contraseña en claro, no cifrada y escribe los comandos recibidos directamente en /proc/sysrq-trigger.
+Para crear el archivo de contraseña:
+# echo "contraseña_secreta" | sudo tee /etc/sysrqd.secret
+# chmod 0600 /etc/sysrqd.secret
+# systemctl restart sysrqd.service (reiniciar el servicio después de cualquier modificación)
+Y desde otra máquina o la misma:
+$ telnet IP 4094
+Pedirá contraseña y aparecerá el prompt de sysrq donde entrar las letras de la acción que se quiera realizar.
+       sysrq> b (reboot)
+       sysrq> q (salir del prompt)
+Nota.- La contraseña viaja en claro. Usar solo en redes de confianza o permitiendo solo IPs concretas al puerto 4094. Los comandos "e" (term) e "i" (kill) matan todos los procesos, incluido el propio sysrqd.
 
 
 sysstat
