@@ -60808,6 +60808,37 @@ Servicio para sincronizar el reloj del sistema local con un servidor remoto Netw
 # systemctl status systemd-timesyncd.service (comprobar si está activo)
 
 
+systemd-ukify
+Herramienta para crear imágenes de núcleo unificadas [Unified Kernel Images]. Proporciona ukify, un script que combina una imagen de núcleo [kernel] y un initrd con una línea de comandos en una imagen de núcleo unificada  [UKI]. Una Unified Kernel Image es un único ejecutable EFI [un .efi] que empaqueta, en secciones PE, todo lo necesario para arrancar:
+# ukify build --linux=/boot/vmlinuz-$(uname -r) --initrd=/boot/initrd.img-$(uname -r) --cmdline='root=UUID=xxxx-xxxx ro quiet' --output=/boot/efi/EFI/Linux/debian-$(uname -r).efi (construir una UKI básica)
+# ukify build --linux=/boot/vmlinuz-$(uname -r) --initrd=/boot/initrd.img-$(uname -r) --cmdline='root=UUID=xxxx-xxxx ro quiet' (lo mismo pero genera el fichero junto al kernel con sufijo .unsigned.efi o similar)
+# ukify build --linux=/boot/vmlinuz-$(uname -r) --initrd=/boot/initrd.img-$(uname -r) --cmdline=@/proc/cmdline --output=/tmp/test.efi (reutilizar la cmdline con la que se ha arrancado)
+# ukify build --linux=/boot/vmlinuz-$(uname -r) --initrd=/boot/intel-ucode.img --initrd=/boot/initrd.img-$(uname -r) --cmdline=@/etc/kernel/cmdline --output=/boot/efi/EFI/Linux/debian.efi (Pasando varios "--initrd" se concatenan en orden)
+# ukify build --linux=/boot/vmlinuz-$(uname -r) --initrd=/boot/initrd.img-$(uname -r) --cmdline=@/etc/kernel/cmdline --secureboot-private-key=/etc/keys/db.key --secureboot-certificate=/etc/keys/db.crt --output=/boot/efi/EFI/Linux/debian-signed.efi (firmar para Secure Boot)
+# ukify genkey --config=/etc/kernel/uki.conf (generar un par de claves de prueba)
+# ukify inspect /boot/efi/EFI/Linux/debian.efi (inspeccionar una UKI)
+# ukify inspect /boot/efi/EFI/Linux/debian.efi --extract=cmdline,initrd --output=/tmp/ukitest (muestra secciones, tamaños, cmdline, versión del kernel, etc. Para extraer secciones a ficheros:)
+
+
+systemd-userdbd
+Gestor dinámico de usuarios y grupos. systemd-userdbd es un servicio del sistema que canaliza las consultas de usuarios y grupos hacia todos los servicios locales que proporcionan al sistema definiciones de registros en formato JSON. Además, genera registros de usuarios y grupos en formato JSON a partir de los registros tradicionales de UNIX/glibc NSS, garantizando así una compatibilidad total con versiones anteriores. También puede incorporar registros de usuarios y grupos definidos de forma estática en formato JSON a partir de archivos de configuración adicionales.
+# systemctl status systemd-userdbd.service (comprobar si el servicio está activo)
+$ userdbctl user USER (muestra información del perfil del usuario USER)
+$ userdbctl user ubuntu root nobody (de múltiples usuarios)
+$ userdbctl user USER --output=table (lo muestra en formato JSON)
+$ userdbctl user ubuntu -o json (formato JSON como salida)
+$ userdbctl group wheel (muestra información sobre el grupo wheel)
+$ userdbctl group sudo adm wheel (de múltiples grupos)
+$ userdbctl group sudo --output=table (muestra información en formato tabla)
+$ userdbctl users-in-group audio (usuarios que pertenecen al grupo audio)
+$ userdbctl users-in-group video cdrom (los usuarios que pertenecen a dos grupos)
+$ userdbctl groups-of-user USER (grupos de los que es miembro el usuario USER)
+$ userdbctl groups-of-user USER pulse (grupos de los son miembros dos usuarios)
+$ userdbctl ssh-authorized-keys USER (claves SSH del usuario USER)
+$ userdbctl user USER --output=table --service=ldap --no-legend (información del usuario USER, salida como tabla, proveedor específico en lugar de todo y no mostrar cabeceras ni pie de página)
+$ userdbctl user USER --output=json --service=ldap (del usuario USER, salida en JSON y el proveedor LDAP)
+
+
 systemtap
 Proporciona una infraestructura que simplifica la recopilación de información sobre el sistema Linux en ejecución. Esto facilita el diagnóstico de problemas de rendimiento, análisis de cuellos de botella y depuración de problemas complejos. Incluye los ejecutables stap, stap-prep, stap-profile-annotate, stap-report y stapbpf
 Proceso previo
