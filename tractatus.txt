@@ -32071,6 +32071,7 @@ Rotación, compresión y correos del sistema de logs.
 # logrotate -d /etc/logrotate.conf (Verificación del correcto funcionamiento)
 # logrotate -f /etc/logrotate.conf  (forzar la verificación)
 # logrotate /etc/logrotate.conf (realizar el rotado de forma manual)
+# logrotate /etc/logrotate.conf --debug (probar el archivo de configuración)
 Ejemplo típico para rotar logs de fail2ban:
 # nano /etc/logrotate.d/fail2ban
 	/var/log/fail2ban.log {
@@ -60840,17 +60841,38 @@ $ userdbctl user USER --output=json --service=ldap (del usuario USER, salida en 
 
 
 systemtap
-Proporciona una infraestructura que simplifica la recopilación de información sobre el sistema Linux en ejecución. Esto facilita el diagnóstico de problemas de rendimiento, análisis de cuellos de botella y depuración de problemas complejos. Incluye los ejecutables stap, stap-prep, stap-profile-annotate, stap-report y stapbpf
-Proceso previo
+Herramienta de diagnóstico y análisis dinámico del kernel de Linux. Permite observar lo que ocurre dentro del sistema mientras está funcionando, sin tener que modificar el código fuente del kernel ni reiniciar el equipo para cada investigación. Las aplicaciones incluidas en esta paquete con stap, stap-prep, stap-profile-annotate, stap-report y stapbpf
+Procesos previos;
 # apt install linux-headers-$(uname -r) (instalar los headers del kernel)
 # apt install linux-image-$(uname -r)-dbg (en algunos casos también se necesita los símbolos de depuración)
 # sysctl -w kernel.perf_event_paranoid=-1
 # sysctl -w kernel.kptr_restrict=0
-# stap-prep (herramienta de preparación que intenta instalar automáticamente los paquetes necesarios)
-# ls -la /lib/modules/$(uname -r)/build/ (verificar que existe el directorio de headers)
-# ls -la /lib/modules/$(uname -r)/build/.config (verificar el archivo .config)
-A pesar de los bugs de este comando alguna prueba si funciona:
-# stap -l 'syscall.*' (listar probes disponibles)
+# stap --dump-probe-types (lista de los tipos de sonda y puntos de salida admitidos)
+# stap --dump-probe-aliases (lista de todos los alias de sonda encontrados en los archivos de biblioteca )
+# stap-prep (el primer paso es comprobar si el sistema está preparado)
+# stap -e 'probe begin { println("SystemTap funciona") }' (comprobar que SystemTap funciona. Si falla, puede estar relacionado con las dependencias, los permisos o la configuración del kernel)
+# stap-report > report.txt (guardar el reporte en un archivo)
+# stap --runtime=bpf -p4 -e 'probe begin { printf("Linux es genial!\n"); exit() }' (generar un módulo y muestra su nombre)
+# stapbpf ./stap_28784.bo (luego, con el nombre del comando anterior, ejecutar con la ruta de acceso al módulo)
+# stap --bpf -e 'probe begin { printf("Bash es genial\n"); exit() }' (que stap gestione automáticamente el backend)
+# stap -l 'syscall.*' (consultar las llamadas al sistema que se pueden instrumentar)
+# stap-profile-annotate -x PID (analizar un proceso ya existente)
+1.-
+Para contar las llamadas al sistema [system calls] por proceso
+Son las operaciones mediante las que un programa solicita servicios al kernel: abrir archivos, leer datos, crear procesos, entre otras.
+Este ejemplo sirve para detectar procesos que generan una cantidad elevada de actividad en el kernel. No mide directamente el tiempo de CPU consumido por cada proceso ni identifica por sí solo la causa del problema.
+Crea el archivo:
+$ nano syscalls.stp
+       global llamadas
+       probe syscall.* {
+           llamadas[execname()]++
+       }
+       probe end {
+           foreach (proceso in llamadas-)
+	        printf("%-20s %d\n", proceso, llamadas[proceso])
+       }
+$ chmod +x syscalls.stp
+# stap -i syscalls.stp (ejecutarlo)
 
 
 systune
