@@ -3774,6 +3774,7 @@ $ binstats -temp=/tmp (de un directorio)
 
 binutils
 Los programas en este paquete se utilizan para ensamblar, vincular y manipular archivos binarios y de objeto. Pueden ser utilizados en conjunto con un compilador y varias bibliotecas para construir programas. Consta de la siguientes aplicaciones: addr2line, ar, as, c++filt, dwp, elfedit, gold, gprof, ld, ld.bfd, ld.gold, nm, objcopy, objdump, ranlib, readelf, size, strings y strip
+$ readelf -n /bin/ls | grep -A4 build.id (muestra el apartado "build.id" del comando especificado)
 
 
 binwalk
@@ -15207,6 +15208,16 @@ El programa imprimirá el contenido del archivo config.txt y su tamaño.
 
 elfutils
 Conjunto de utilidades para gestionar objetos ELF. Las utilidades lleban el prefijo "eu-" [ElfUtils] porque algunas coinciden en el nombre con algunas del comando binutils [ver] y se hace para que sus ejecutables no sobrescriban o entren en conflicto. Las más importantes son: eu-ld (un enlazador), eu-nm (para listar los símbolos de archivos objeto), eu-size (para listar el tamaño de las secciones de un archivo objeto o de un archivo de almacenamiento), eu-strip (para descartar símbolos), eu-readelf (para visualizar las estructuras internas de un archivo ELF) y eu-elflint (para verificar que los archivos ELF estén bien formados. Todas las incluidas en el comando son: eu-addr2line, eu-ar, eu-elfclassify, eu-elfcmp, eu-elfcompress, eu-elflint, eu-findtextrel, eu-make-debug-archive, eu-nm, eu-objdump, eu-ranlib, eu-readelf, eu-size, eu-srcfiles, eu-stack, eu-strings, eu-strip y eu-unstrip.
+$ eu-readelf --debug-dump=info /ruta/a/tu/binario (volcar la información de las secciones de depuración [DWARF])
+$ eu-nm /bin/ls | head -20 (listar todos los símbolos de un ejecutable)
+$ eu-nm -n --defined-only /bin/ls (mostrar solo los símbolos definidos, no externos, ordenados por dirección)
+$ eu-strip -f /tmp/binario.debug /ruta/al/binario_original (crear una copia "strippeada" de un binario, separando los debug symbols en otro archivo)
+$ eu-unstrip /ruta/al/binario_strippeado /ruta/al/binario.debug -o /tmp/binario_completo (combinar un binario strippeado con su archivo .debug para poder analizarlo)
+$ eu-stack -p <PID> (ver el backtrace de un proceso vivo)
+$ eu-stack --core /ruta/al/core.dump (ver el backtrace de todos los hilos de un core dump)
+$ eu-elflint /bin/ls (comprobar si un binario cumple estrictamente con el estándar ELF)
+$ eu-elfcompress /ruta/al/archivo.debug (comprimir las secciones de depuración de un archivo .debug)
+$ eu-addr2line -e /bin/ls -f -C 0x4005d6 (traducir una dirección de memoria, por ej. 0x4005d6 a su línea de código fuente)
 
 
 elinks
@@ -60890,14 +60901,42 @@ systune
 Este programa escribe los parámetros del núcleo, previamente guardados en un archivo de configuración, en el sistema de archivos /proc. Esto permite ajustar el rendimiento del kernel sin volver a compilarlo. Systune se inicia después de la mayoría de los demonios y otros scripts de init.d, por lo que puede usarse como sysctl de "segunda etapa".
 
 
-sysvbanner
-Muestra, horizontalmente, un texto de 'banner' de la misma manera que lo hace el banner de System V. Este paquete proporciona los comandos banner y sysvbanner
-$ sysvbanner linux
+sysv-rc
+Mecanismo de cambio de nivel de ejecución [runlevel] similar a SysV. Este paquete proporciona soporte para el sistema tipo System-V para el arranque, el cambio de niveles de ejecución y el apagado, configurado mediante enlaces simbólicos en /etc/rcX.d/.
+$ ls -l /etc/rc2.d/ (ver qué servicios arrancan en nivel 2)
+     ...
+     lrwxrwxrwx 1 root root 26  6 de juny  06:18 K01clamav-freshclam -> ../init.d/clamav-freshclam
+     lrwxrwxrwx 1 root root 14  5 de juny  20:18 K01cups -> ../init.d/cups
+     ...
+     lrwxrwxrwx 1 root root 17  5 de juny  20:18 S01anacron -> ../init.d/anacron
+     lrwxrwxrwx 1 root root 17  5 d’ag.    11:42 S01apache2 -> ../init.d/apache2
+     ...
+$ ls -l /etc/rc3.d/ (ver los que arrancan ennivel 3)
+Significado de cada nivel:
+0 --> Apagado
+1 --> Modo monousuario [rescate]
+2-5 --> Multiusuario, en Debian son idénticos por defecto
+6 --> Reinicio
+S --> Arranque inicial del sistema
+$ runlevel (ver en qué nivel se está)
+# telinit 1 (cambiar de nivel [solo tiene sentido real con sysvinit como init], 1 es a modo rescate)
+# telinit 2 (volver a multiusuario)
+# /etc/init.d/ssh restart (controlar un servicio puntualmente)
+# update-rc.d miservicio defaults (crea los enlaces S y K)
+# update-rc.d miservicio disable (lo desactiva sin borrarlo)
+# update-rc.d miservicio enable (lo activa)
+# update-rc.d -f miservicio remove (elimina los enlaces)
+Nota.- Si el sistema usa systemd, todo esto sigue funcionando por compatibilidad: systemd-sysv-generator convierte los scripts de /etc/init.d/ en unidades de systemd. Pero ya no son el mecanismo principal de arranque.
 
 
 sysv-rc-conf
 Gestionar el arranque de las aplicaciones al inicio.
 # sysv-rc-conf
+
+
+sysvbanner
+Muestra, horizontalmente, un texto de 'banner' de la misma manera que lo hace el banner de System V. Este paquete proporciona los comandos banner y sysvbanner
+$ sysvbanner linux
 
 
 t1utils
@@ -60921,10 +60960,31 @@ t2n
 Herramienta para comunicarse con el cerebro [ladrillo] LEGO Mindstorms NXT, set programable fabricado por LEGO, a través del puerto USB, lo que permite comprobar el nivel de batería, imprimir información de NXT, listar archivos, subir archivos y  descargar archivos.
 
 
+t3highlight
+Funciones para el resaltado de sintaxis en distintos tipos de archivos de texto.
+$ t3highlight -L (muestra una lista de idiomas de origen y estilos de salida disponibles)
+$ t3highlight -l shell script.sh (colorear un script de bash)
+$ t3highlight -l css -s html archivo (colorear un css con el estilo de html)
+
+
+t50
+Herramienta de inyección de paquetes multiprotocolo con soporte para TCP, UDP, ICMP, IGMPv2, IGMPv3, EGP, DCCP, RSVP, RIPv1, RIPv2, GRE, ESP, AH, EIGRP y OSPF.
+$ t50 -l (lista los protocolos soportados)
+$ t50 192.168.0.100 --threshold 500 (envía 500 paquetes a un destino, por defecto 1000)
+$ t50 192.168.0 --flood (inundar los objetivos desde 192.168.0.1 hasta 192.168.0.254 con paquetes TCP
+$ t50 192.168 --flood -p t50 --shuffle --turbo (nunda los objetivos, desde 192.168.0.1 hasta 192.168.255.254, con todos los protocolos que T50 puede ofrecer, en un orden aleatorio y utilizando el modo «Turbo»)
+
+
 tac
 Muestra el fichero por consola, al revés. De la última linea a la primera
 $ tac archivo.txt
-$ tac ~/.bash_history | grep -w comando (muestra el historial de bash mostrando primero las ejecuciones más recientes)
+$ history | tac (muestra el historial de bash mostrando primero los primeros comandos)
+
+
+tack
+Herramienta de diagnóstico diseñada para crear y verificar la corrección de los archivos terminfo
+$ tack (abre el promt interactivo. Si no se especifica, se utilizará la variable de entorno $TERM)
+$ tack -dl aterm (abre el promt interactivo con el archivo de depuración debug.log abierto y el archivo de registro tack.log tambien abierto)
 
 
 tail
@@ -60939,7 +60999,7 @@ muestra las últimas 10 lineas de un fichero (si no se especifica otra cantidad)
 tailspin
 Colorea los archivos de registro y los página como less [ver].
 # tspin /var/log/syslog (forma básica)
-# tspìn -p /var/log/syslog (mustra entero por pantalla sin paginar)
+# tspìn -p /var/log/syslog (muestra entero por pantalla sin paginar)
 # tspin -f /var/log/syslog (pulsando Ctrl-X se puede subir y bajar con las flechas. "q" para terminar)
 # tspin --enable dates -f /var/log/syslog (solo coloreando las fechas. Las opciones son numbers, urls, pointers, dates, paths, quotes, key-value-pairs, uuids, ip-addresses, processes y json)
 # tspin --enable dates,paths -f /var/log/syslog (solo coloreando fechas y path)
