@@ -32072,6 +32072,8 @@ Rotación, compresión y correos del sistema de logs.
 # logrotate -f /etc/logrotate.conf  (forzar la verificación)
 # logrotate /etc/logrotate.conf (realizar el rotado de forma manual)
 # logrotate /etc/logrotate.conf --debug (probar el archivo de configuración)
+# logrotate /etc/logrotate.d/rsyslog (rotar un solo registro)
+$ cat /var/lib/logrotate/status (comprobar el estado de rotación de los registros)
 Ejemplo típico para rotar logs de fail2ban:
 # nano /etc/logrotate.d/fail2ban
 	/var/log/fail2ban.log {
@@ -60873,6 +60875,11 @@ $ nano syscalls.stp
        }
 $ chmod +x syscalls.stp
 # stap -i syscalls.stp (ejecutarlo)
+
+
+systray-mdstat
+Es un icono en la bandeja del sistema que indica el estado de los RAID por software de Linux locales, configurados mediante mdadm, comprobando periódicamente si existen cambios, especialmente fallos en /proc/mdstat. Este programa está pensado para equipos de escritorio o portátiles que utilizan una configuración RAID por software y que no cuentan con monitorización remota.
+$ systray-mdstat
 
 
 systune
