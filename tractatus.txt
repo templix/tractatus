@@ -60913,11 +60913,11 @@ $ ls -l /etc/rc2.d/ (ver qué servicios arrancan en nivel 2)
      ...
 $ ls -l /etc/rc3.d/ (ver los que arrancan ennivel 3)
 Significado de cada nivel:
-0 --> Apagado
-1 --> Modo monousuario [rescate]
-2-5 --> Multiusuario, en Debian son idénticos por defecto
-6 --> Reinicio
-S --> Arranque inicial del sistema
+      0 --> Apagado
+      1 --> Modo monousuario [rescate]
+      2-5 --> Multiusuario, en Debian son idénticos por defecto
+      6 --> Reinicio
+      S --> Arranque inicial del sistema
 $ runlevel (ver en qué nivel se está)
 # telinit 1 (cambiar de nivel [solo tiene sentido real con sysvinit como init], 1 es a modo rescate)
 # telinit 2 (volver a multiusuario)
