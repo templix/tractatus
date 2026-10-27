@@ -11093,6 +11093,13 @@ Nota.- El nodo lanzando:
        # stat /var/log/syslog
 
 
+debuginfod
+Es el ecosistema de elfutils que permite obtener automáticamente símbolos de depuración, binarios y código fuente asociado a un ELF mediante su Build ID, evitando instalar manualmente paquetes -dbg/dbgsym para analizar un backtrace o un core dump. Cada binario ELF compilado normalmente lleva una nota `GNU_BUILD_ID`, un identificador hexadecimal que enlaza el ejecutable con sus símbolos de depuración y fuentes. El daemon indexa archivos ELF/DWARF y archivos .deb, .rpm, etc. y los expone por HTTP; debuginfod-find es el cliente de línea de comandos.
+$ export DEBUGINFOD_URLS="https://debuginfod.debian.net" ; debuginfod-find debuginfo /usr/bin/ls
+$ readelf -n /bin/ls | grep -A4 build.id
+$ debuginfod -F -d /var/lib/debuginfod/index.sqlite -p 8002 -v /opt/builds (indexa archivos ELF/DWARF sueltos, base de datos SQLite del índice, puerto HTTP; 8002 es el valor por defecto y más detalle en el log)
+
+
 debvm
 Herramienta que se usa para facilitar la creación y ejecución de entornos de prueba aislados para software en sistemas basados en Debian. Utiliza QEMU, un emulador y virtualizador de hardware, para crear estos entornos de forma que las pruebas se realicen en un entorno controlado sin interferir con el sistema operativo principal. Incluye las herramientas debvm-create y debvm-run.
 $ debvm-create my-test-vm (generará una máquina virtual llamada my-test-vm con la configuración predeterminada)
@@ -30221,6 +30228,7 @@ $ lastcomm root (Del usuario root)
 lastlog
 Ver el momento exacto que los usuarios han entrado por última vez
 $ lastlog -u usuario  (solo ver a "usuario")
+$ lastlog -a (muestra los registros de último inicio de sesión)
 
 
 lastpass
@@ -61020,10 +61028,37 @@ $ talk usuario ttyx  (Conectar con usuarios locales)
 $ talk usuario@IP_o_Host (Con un usuario remoto [UNIX])
 
 
+tang
+Servicio que utiliza para desbloquear datos cifrados en función de que un equipo pueda acceder a un servidor concreto de la red, sin que ese servidor tenga que almacenar contraseñas ni custodiar las claves privadas de los usuarios. Ofrece una alternativa segura, anónima y sin estado a los servicios de custodia de claves. Su uso más habitual es con LUKS y Clevis, para automatizar el desbloqueo de discos cifrados durante el arranque de un servidor Linux. La idea importante es que en vez de introducir una contraseña manualmente cada vez que se arranca un servidor, se pueda configurar para que desbloquee el disco automáticamente cuando se tenga acceso a un servidor tang autorizado.
+Un ejemplo práctico: La infraestructura siguiente:
+- Servidor Tang: 192.168.1.10
+- Servidor Debian con disco cifrado: 192.168.1.20
+- El servicio Tang será accesible en http://192.168.1.10.
+En el servidor Tang se instala el paquete y se comprueba que está activo:
+# sudo systemctl status tangd.socket
+Para verificar desde el cliente que el servidor responde, se puede consultar su directorio de claves públicas:
+$ curl http://192.168.1.10/adv
+Si está funcionando, se obtiene un documento JSON con información criptográfica pública que no es una contraseña ni una clave privada.
+Antes de asociar un disco entero a Tang se puede probar el mecanismo con un texto. Para ello, se instala Clevis en el cliente Debian:
+# apt install clevis clevis-luks
+$ echo "Este es un mensaje secreto" | clevis encrypt tang '{"url":"http://192.168.1.10"}' > mensaje.jwe
+La primera vez, Clevis mostrará las claves anunciadas por Tang y pedirá que se confirme si se confía en ellas. Después, descifra el mensaje:
+$ clevis decrypt < mensaje.jwe
+No se ha tenido que introducir una contraseña para descifrar el mensaje.
+
+
 tapestat
 [sysstat]. Utilidad para supervisar la actividad de las unidades de cinta conectadas a un sistema.
 # tapestat -y (omitir el tiempo transcurrido desde que se inició el sistema)
 # tapestat --human (presentación en formato legible [23M, 55k...])
+
+
+tappy
+Herramientas para trabajar con el protocolo TAP [Test Anything Protocol]. TAP es un protocolo de pruebas basado en líneas, diseñado para registrar datos de pruebas de manera estandarizada mostrándolo con el estilo clásico de unittest de Python: puntitos, "F" para fallos, resumen y un código de salida útil.
+$ script.sh | tappy
+$ cat archivo.txt | tappy
+$ bats --tap script.sh | teppy (Bats [tests en bash] tiene modo)
+$ prove -v t/ 2>&1 | tappy (prove, de Perl, también habla TAP)
 
 
 taptempo
