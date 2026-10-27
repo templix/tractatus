@@ -61109,6 +61109,13 @@ $ tarcat file1.tar file2.tar file3.tar
 $ tarcat file1.txt file2.txt file3.txt
 
 
+tardiff
+Herramienta sencilla que compara el contenido de dos archivos tar (tarballs) e informa, principalmente, sobre las diferencias en las listas de archivos que existen entre ellos.
+$ tardiff -m archivo.tar archivo2.tar (informar sobre todos los archivos modificados, incluidos aquellos presentes en ambos archivos tar)
+$ tardiff -l archivo.tar.gz archivo2.tar.gz (listar todos los archivos, incluso aquellos que no han sufrido cambios)
+$ tardiff -m -s archivo.tar.bz2 archivo2.tar.bz2 (informar de todos los archivos modificados y generar estadísticas)
+
+
 tardy
 Se utiliza para manipular las cabeceras dentro de archivos comprimidos [.tar, .zip, etc].
 $ tardy -eXtract archivo.tar archivo
