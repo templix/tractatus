@@ -61136,6 +61136,7 @@ $ tart -k (detener el daemon)
 $ tart -d (ver firma sin modificarla)
 $ tart -a (añadir nueva frase sin editar el archivo a mano)
 $ tart -cust (desactivar las líneas personalizadas si se quiere solo la frase aleatoria)
+$ tart +n (aladir la fecha en la firma)
 
 
 task
@@ -61165,6 +61166,17 @@ Interfaz para la instalación de grupos de paquetes relacionados con un propósi
 # tasksel --list (mostrará una lista de todos los paquetes disponibles)
 # tasksel install lxde-desktop (instalar un determinado escritorio)
 # tasksel remove lxde-desktop (desinstalarlo)
+
+
+tasty-discover
+Detección y ejecución automáticas de pruebas para el framework Tasty. No dispone de página man ni help ya que está diseñado para ser invocado automáticamente por el preprocesador de GHC, el compilador de Haskell, durante la compilación, y no directamente por el usuario desde la terminal. Cuando se ejecuta a mano sin los argumentos obligatorios: src, _ y dst, el programa se limita a mostrar su sintaxis básica:
+$ tasty-discover
+Usage: tasty-discover src _ dst [OPTION...]
+Donde:
+	src --> El directorio o archivo fuente donde buscar los tests.
+	_ --> Un argumento literal separador que usa el preprocesador.
+	dst --> El archivo de salida donde genera el código Haskell con los tests descubiertos.
+Escanea el código en busca de funciones con prefijos específicos y las agrupa sin que se tengan que añadir manualmente a los archivos de configuración Cabal o Hpack.
 
 
 tbench
