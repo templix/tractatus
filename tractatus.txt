@@ -61168,6 +61168,17 @@ Interfaz para la instalación de grupos de paquetes relacionados con un propósi
 # tasksel remove lxde-desktop (desinstalarlo)
 
 
+tasksh
+Tasksh es un comando de shell que encapsula los comandos de Taskwarrior. Su objetivo es facilitar el acceso a Taskwarrior.
+$ tasksh (entrar en el prompt del comando)
+tasksh> list (listar)
+tasksh> review [N] (sesión de revisión de tareas, con límite opcional tras N tareas)
+tasksh> exec ip a (cualquier comando de shell. También se puede usar "!ip a")
+tasksh> help (ayuda)
+tasksh> diagnostics (diagnóstico)
+tasksh> quit (fin de la sesión. También se puede usar "exit")
+
+
 tasty-discover
 Detección y ejecución automáticas de pruebas para el framework Tasty. No dispone de página man ni help ya que está diseñado para ser invocado automáticamente por el preprocesador de GHC, el compilador de Haskell, durante la compilación, y no directamente por el usuario desde la terminal. Cuando se ejecuta a mano sin los argumentos obligatorios: src, _ y dst, el programa se limita a mostrar su sintaxis básica:
 $ tasty-discover
