@@ -61126,6 +61126,18 @@ $ tardy --strip 2 archive.tar (elimina los dos primeros niveles de directorios e
 $ tardy --create --modify /new/path/ /nuevo.tar file1 file2 (crea nuevo.tar donde los archivos file1 y file2 se encuentran bajo /new/path/)
 
 
+tart
+Un generador de firmas de correo electrónico versátil y repleto de funcionalidades. Entre las características de TaRT (The Automatic Random Tagline) se incluyen: frases aleatorias, una funcionalidad opcional de demonio (daemon), visualización de la fecha actual, diseño de firma personalizado y la posibilidad de incluir frases específicas para «fechas especiales». La sintaxis de la línea de comandos es sencilla y está bien explicada. TaRT está diseñado para ejecutarse como un demonio independiente, a través de crontab o desde el script de inicio de sesión.
+$ tart --setup (crear la estructñura básica
+$ tart (ejecutar utilizando la configuración predeterminada)
+$ tart +q (ejecutar en modo silencioso)
+$ tart --daemon 300 (ejecutar como un demonio y generar una nueva firma cada 5 minutos)
+$ tart -k (detener el daemon)
+$ tart -d (ver firma sin modificarla)
+$ tart -a (añadir nueva frase sin editar el archivo a mano)
+$ tart -cust (desactivar las líneas personalizadas si se quiere solo la frase aleatoria)
+
+
 task
 [taskwarrior]. Gestor de tareas minimalista.
 $ task add Titulo Entrada (añadir una tarea)
