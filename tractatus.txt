@@ -61199,7 +61199,8 @@ $ tbench 8 servidor-remoto (simula 8 clientes conectándose a un servidor remoto
 
 
 tboot
-Módulo para un arranque medido y verificado de un núcleo de sistema operativo o un monitor de máquina virtual [VMM]. Se trata de un pequeño cargador previo al kernel que GRUB lanza primero y que usa "Intel TXT" para hacer un "measured launch" [medición en TPM] y, opcionalmente, un verified launch [comprobación de hashes del kernel/initramfs antes de continuar]. Si TXT no está disponible o está mal configurado, normalmente arranca el kernel directamente sin aplicar la protección. Precisa hardware y firmware compatibles: CPU Intel con TXT, BIOS/UEFI con TPM, TXT, VT-x y VT-d habilitados, módulo SINIT ACM correcto para el chipset/CPU [algunos equipos ya está integrado en el firmware[ y, cuestión importante, el tboot clásico se implementa vía CSM y no es compatible con Secure Boot; su soporte UEFI es limitado.
+[Trusted Boot]. Módulo de código abierto, previo al núcleo o VMM, que utiliza la tecnología Intel Trusted Execution Technology para llevar a cabo un inicio medido y verificado de un núcleo de sistema operativo o VMM mediante DRTM [Dynamic Root of Trust Measurement] que usa la instrucción especial del CPU GETSEC[SENTER] para entrar en un entorno de lanzamiento medido que no puede ser influido por el software que corría antes [BIOS/UEFI o bootloader]. tboot se carga como si fuera el "kernel" desde GRUB, mediante multiboot2, prepara el entorno TXT, lanza el kernel real de Linux o Xen y lo mide. Los scripts que se instalan con el paquete [/etc/default/grub-tboot y /etc/grub.d/20_linux_tboot] añaden entradas extra en el menú de GRUB, normalmente un submenú "tboot...". No cambian la entrada por defecto ni sustituyen el arranque normal. Incluye los ejecutables lcp2_crtpoln, lcp2_crtpolelt, lcp2_crtpollist, lcp2_mlehash, tb_polgen, txt-acminfo, txt-parse_err y txt-stat.
+Nota.- No es compatible con Secure Boot ya que tboot no está firmado para la cadena UEFI Secure Boot y precisa hardware y firmware compatibles: CPU Intel con TXT, BIOS/UEFI con TPM, TXT, VT-x y VT-d habilitados, módulo SINIT ACM correcto para el chipset/CPU.
 # txt-stat (consulta el estado TXT tras el arranque; es la primera comprobación práctica)
 # lcp2_mlehash (calcula el hash del MLE, normalmente /boot/tboot.gz, para incluirlo en la política LCP)
 # lcp2_crtpolelt (crea un elemento de política TXT: mle, pconf o custom, este último envuelve la política de tboot)
@@ -61228,6 +61229,11 @@ $ nano hola.c
             return 0;
         }
 $ tcc hola.c -run (compila el archivo C y lo ejecuta directamente sin generar ejecutables intermedios)
+
+
+tcl
+Lenguaje de scripting interpretado, potente, integrable y multiplataforma.
+$ tclsh (entrar en el prompt del lenguaje)
 
 
 tcpbench
