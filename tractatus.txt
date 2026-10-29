@@ -61304,6 +61304,19 @@ Programa que captura los datos transmitidos como parte de conexiones [flujos] TC
 # tcpflow -c port 80 | grep Host  (accesos a Apache por segundo en tiempo real)
 
 
+tcplay
+Implementación de TrueCrypt y VeraCrypt basada en dm-crypt, gratuita bajo licencia BSD, estable y prácticamente completa que incluye soporte para múltiples archivos de clave, cifrado en cascada, etc. Esta implementación permite montar tanto volúmenes de sistema como volúmenes estándar de TrueCrypt, así como abrir volúmenes ocultos o acceder a un volumen externo protegiendo, al mismo tiempo, un volumen oculto. También ofrece la posibilidad de crear volúmenes, incluidos volúmenes ocultos, entre otras funciones. Dado que tcplay utiliza dm-crypt, aprovecha al máximo cualquier soporte de cifrado o descifrado por hardware disponible una vez que el volumen ha sido montado.
+# truncate -s 500M ~/secreto.tc (reservar un archivo de 500 MB)
+# tcplay -c -d ~/secreto.tc (crear el volumen cifrado. Pregunta contraseña, cifrado, etc.)
+# tcplay -c -d ~/secreto.tc -a SHA512 -b AES-256-XTS (elegir algoritmos explícitamente)
+# tcplay -c -d ~/secreto.tc -b AES-256-XTS,TWOFISH-256-XTS (cascada de cifrados)
+# tcplay -m secreto -d ~/secreto.tc (mapear)
+# tcplay -i -d ~/secreto.tc (ver información de un volumen cerrado)
+# tcplay -j secreto (ver información de un volumen ya mapeado)
+# tcplay -c -d ~/secreto.tc --hidden (crear un volumen oculto dentro de uno externo ya existente. Pedirá contraseña del volumen externo, luego el tamaño y los datos del oculto)
+# tcplay -m señuelo -d ~/secreto.tc --protect-hidden (pedirá primero la contraseña del externo y luego la del oculto, para saber qué zona proteger. Tras esto se puede escribir en el externo con seguridad.)
+
+
 tcpick
 Muestra información sobre conexiones, carga, datos FTP, HTTPS, download...
 # tcpick -i eth0 -C (con color)
@@ -61315,6 +61328,13 @@ tcpkill
 # tcpkill -i eth1 host www.facebook.com (imposibilitará entrar en facebook)
 # tcpkill -i eth0 host www.facebook twitter.com (especificar varias urls separadas por un espacio)
 # tcpkill -i eth0 port 22 (especificando un puerto)
+
+
+tcpreen
+Herramienta, falta de mantenimiento, para supervisar y analizar los datos transmitidos entre clientes y servidores a través de flujos de datos orientados a conexión, como las sesiones TCP; es compatible con TCP tanto sobre IPv4 como sobre IPv6.
+# tcpreen -i eth0 (capturar todo el tráfico TCP en la interfaz eth0 y mostrar en pantalla)
+# tcpreen -i eth0 src host 192.168.1.25 and dst host 10.0.0.44 and tcp port 443 ( captar solo conexiones hacia/desde un servidor [ej: 192.168.1.25 -> 10.0.0.44] en puerto 443 [HTTPS])
+Nota.- Una alternativa más funcional es tcpdump [ver].
 
 
 tcpstat
