@@ -61244,20 +61244,22 @@ $ tcpbench 127.0.0.1
 
 tcpdump
 Capturar el trafico de la red.
-# tcpdump -D (Ver las distintas redes disponibles)
-# tcpdump -nni any (Capturar todas las interfaces de red del equipo)
-# tcpdump -n -i eth0 -s 1515 -w archivo (que la información se guarde en archivo)
+# tcpdump -D (ver las distintas redes disponibles)
+# tcpdump -nni any (capturar todas las interfaces de red del equipo sin resolver las DNS [-n o -nn])
+# tcpdump -n -i eth0 -s 1515 -w archivo (sin resolver DNS, de la interfaz eth0, especificar el volumen de la parte del paquete que queremos capturar y que se guarde en archivo)
 # tcpdump -n -i eth0 -s 1515 -l | tee archivo (verlo en pantalla y que se guarde en archivo)
-# tcpdump -n -r archivo -c 4 (analizar ficheros)
+# tcpdump -i eth0 -nn -s 0 port 443 (de la interfaz eth0, sin ressolver IPs, mostrar todo el paquete y filtrar solo HTTPS)
+# tcpdump -i eth0 -w captura.pcap (guardar en captura.pcap)
+# tcpdump -n -r archivo -c 4 (analizar fichero [-r] y cantidad de mensajes a visualizar 4)
 # tcpdump -n -r archivo udp (filtrar por protocolos - udp, tcp, icmp, arp ...)
 # tcpdump -n -r archivo -c 2 not tcp (con operadores booleanos [not, and]. Ver las 2 primeras capturas que no sean tcp)
 # tcpdump -n -r archivo -c 2 not tcp and not udp (ver las 2 primeras capturas que no sean tcp ni udp)
 # tcpdump -n -r archivo -c 2 tpc and dst port 25 (ver las 2 primeras capturas tcp y dst con destino al puerto 25)
 # tcpdump -enni eth0 (info de la capa de enlace y MACs origen y destino)
 # tcpdump host 192.168.1.3 (capturar todo el tráfico del host especificado)
-# tcpdump src net 192.168.1.0/28 (especificando una red)
+# tcpdump -p src net 192.168.1.0/28 (especificando una IP de origen y en modo promiscuo [-p])
 # tcpdump src host 192.168.1.3 (solo lo que salga de la IP especificada)
-# tcpdump dst port 23 (Todo el trafico que vaya dirigido al puerto 23)
+# tcpdump dst port 23 (todo el trafico que vaya dirigido al puerto 23)
 # tcpdump udp and dst port 53 (capturar tráfico de comunicación con las DNS)
 # tcpdump tcp and not port 80 (capturar todo el tráfico excepto el web)
 # tcpdump tcp and port 80 (capturar solo el web)
@@ -61281,16 +61283,6 @@ $ sudo tcpdump -v -s 0 -A -n -l | egrep -i "POST /|pwd=|passwd=|password=|Host:"
 $ sudo tcpdump port http or port ftp or port smtp or port imap or port pop3 or port telnet -l -A | egrep -i -B5 'pass=|pwd=|log=|login=|user=|username=|pw=|passw=|passwd=|password=|pass:|user:|username:|password:|login:|pass |user ' (capturar todas las contraseñas en texto plano)
 $ sudo tcpdump -nn -v port ftp or ftp-data (capturar credenciales y comandos FTP)
 # tcpdump -Xnr /var/log/network/daemonlogger.1791638583.pcap "tcp port 853" -c 4 (comprobar si la salida está cifrada)
-Algunas opciones:
--n (Para no resolver las direcciones IP)
--i (Indica la interfaz de red)
--s (volumen de la parte del paquete que queremos capturar [1515 es suficiente])
--c (cantidad de mensajes a visualizar)
--p (no cambia la interfaz a modo promiscuo)
--x (ver los contenidos de los paquetes)
--r archivo (Para leer los datos de un archivo guardado con la opción -w)
-src (Dirección y puerto origen)
-dst (Dirección y puerto destino)
 1.-
 Ejemplo de un proceso:
 # tcpdump -nni eth0 'port 80' -w /tmp/port.80 (Capturar el tráfico por el puerto 80 y mandarlo a un archivo)
@@ -61419,6 +61411,52 @@ Algunas teclas de control:
 p (Pausar)
 q (salir)
 s (Cada vez que se pulsa la letra cambia a alguna de las 3 opciones de ordenación: sin ordenar (por defecto), por categoría y por bytes)
+
+
+tcputils
+Colección de programas destinados a crear, aceptar, reenviar e inspeccionar conexiones TCP directamente desde scripts de shell. Incluye mini-inetd, getpeername, tcpbug, tcpconnect y tcplisten y una pequeña biblioteca auxiliar para trabajar con sockets TCP/IP.
+$ printf 'GET / HTTP/1.0\r\nHost: localhost\r\n\r\n' | tcpconnect localhost 80 (envía una petición HTTP mínima al puerto 80 y muestra la respuesta del servidor en la terminal)
+$ timeout 3 tcpconnect 192.168.1.10 22 </dev/null (si termina sin error, hubo una conexión TCP exitosa; timeout evita que el script se quede bloqueado si el puerto no responde)
+1.-
+$ tcplisten 9000 (dejar a la escucha en un puerto local)
+Desde otra terminal:
+$ echo "Linux es un sistema genial" | tcpconnect 127.0.0.1 9000
+El texto se mostrará en la primera terrminal.
+2.-
+Como pequeño servidor
+$ mini-inetd 9000 /bin/date (dejar a la escucha)
+En otra terminal:
+$ tcpconnect 127.0.0.1 9000
+En esta terminal se recibirá la salida de date.
+3.-
+Servidor que ejecuta un script
+$ nano saludo.sh
+#!/bin/sh
+echo "Hola, cliente."
+echo "Tu conexión fue atendida por mini-inetd."
+$ chmod +x saluda.sh
+$ mini-inetd 9000 ./saludo.sh
+Y en la otra terminal:
+$ tcpconnect 127.0.0.1 9000
+Para ver el texto del script.
+4.-
+Intermediar una conexión a un servidor web local
+$ tcpbug 8080 127.0.0.1 80
+Luego, en lugar de conectar directamente al puerto 80:
+$ printf 'Linux es genial' | tcpconnect 127.0.0.1 8080
+El tráfico pasa por tcpbug, que puede servir para depurar qué envía el cliente y qué responde el servidor.
+5.-
+Registrar quién se conecta
+$ registro.sh
+#!/bin/sh
+peer="$(getpeername)"
+echo "Conexion desde: $peer" >> /tmp/conexiones.log
+echo "Conexion registrada."
+$ chmod +x registtro.sh
+$ mini-inetd 9000 ./registro.sh (arrancar el servicio)
+Desde otro terminal:
+$ tcpconnect 127.0.0.1 9000
+$ cat /tmp/conexiones.log (consultar el registro)
 
 
 tdc
