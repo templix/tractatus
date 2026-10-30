@@ -61459,6 +61459,17 @@ $ tcpconnect 127.0.0.1 9000
 $ cat /tmp/conexiones.log (consultar el registro)
 
 
+tcs
+traduce conjuntos de caracteres de una codificación a otra. Las codificaciones admitidas incluyen utf (ISO utf-8), ascii, ISO 8859-[123456789], koi8, jis-kanji, ujis, ms-kanji, jis, gb, big5, unicode, tis, msdos y atari.
+$ tcs -lv (ver lista de conjuntos soportados)
+$ echo "Niña, ¿quieres café?" | tcs -c -s -f utf -t unicode (solo caracteres convertidos correctamente, no reportar errores de conversión, codificación de entrada [-f] y de salida [-t]
+
+
+tcsh
+[Tenex C SHell]. Versión mejorada del C shell de Berkeley.
+$ tcsh (entrar en el prompt)
+
+
 tdc
 Reloj acoplable simple y pequeño. Es una herramienta útil para escritoprios OpenBox, FVWM, Enlightenment o ion3. Puede usar cualquier formato de fecha POSIX.
 $ tdc (formato básico solo mostrando hora, minuto y segundo)
