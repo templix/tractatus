@@ -61337,6 +61337,63 @@ Herramienta, falta de mantenimiento, para supervisar y analizar los datos transm
 Nota.- Una alternativa más funcional es tcpdump [ver].
 
 
+tcpreplay
+tiene como objetivo probar el rendimiento de un NIDS, sistema de detección de intrusos en red, mediante la reproducción de tráfico de red real dentro del cual es posible ocultar ataques. Tcpreplay permite controlar la velocidad a la que se reproduce el tráfico y es capaz de procesar cualquier traza de tcpdump. A diferencia del tráfico artificial generado mediante programación —que no pone a prueba la inspección de aplicaciones o protocolos propia de un NIDS, ni reproduce las anomalías del mundo real presentes en redes en producción (rutas asimétricas, ráfagas o pausas en el tráfico, fragmentación, retransmisiones, etc.)—, Tcpreplay permite una replicación exacta del tráfico real observado en redes reales. El conjunto incluye los ejecutables tcpprep, tcprewrite, tcpreplay-edit y tcpbridge, y admite el uso de cap61;8001;1cturas basadas en el formato pcap. Incluye los ejecutables tcpbridge, tcpcapinfo, tcpliveplay, tcpprep, tcpreplay, tcpreplay-edit y tcprewrite.
+# tcpreplay -i eth0 captura.pcap (reproducción básica: respeta los tiempos originales de la captura)
+# tcpreplay -i eth0 -t captura.pcap (máxima velocidad posible, sin respetar tiempos)
+# tcpreplay -i eth0 --multiplier=2.0 captura.pcap (doble de rápido que la captura original)
+# tcpreplay -i eth0 --multiplier=0.5 captura.pcap (50% de la velocidad original)
+# tcpreplay -i eth0 --mbps=50 captura.pcap (fijar el ancho de banda exacto: 50 Mbps)
+# tcpreplay -i eth0 --pps=200 captura.pcap (fijar tasa en paquetes por segundo: 200 pps)
+# tcpreplay -i eth0 --loop=0 captura.pcap (reproducir en bucle infinito)
+# tcpreplay -i eth0 -l 100 -K captura.pcap (reproducir 100 veces, prestando los paquetes en RAM para mejor rendimiento)
+# tcpreplay -i eth0 -L 500000 --duration=60 captura.pcap (máximo 500.000 paquetes o 60 segundos, lo que ocurra antes)
+# tcpreplay -i eth0 -l 50 --unique-ip captura.pcap (en cada vuelta reescribir las IPs para generar flujos "nuevos" para que el NIDS no vea siempre los mismos flujos)
+# tcpreplay -i eth0 --stats=1 captura.pcap (estadísticas en tiempo real: Imprime pps, Mbps, flujos activos y paquetes enviados/fallidos cada segundo)
+# tcpreplay -i eth0 --include=P:1-5,9,72- captura.pcap (reproducir solo una parte de la traza: Solo los paquetes 1-5, 9 y del 72 al final)
+# tcpreplay -i eth0 --exclude=P:50 captura.pcap (todos menos el paquete 50)
+# tcpprep --auto=client --pcap=captura.pcap --cachefile=captura.cache (clasificar el pcap: quién es cliente y quién servidor)
+# tcpreplay -c captura.cache -i eth1 -I eth2 captura.pcap (reproducir tráfico del cliente por eth1 y del servidor por eth2)
+# tcpreplay -i eth1 -I eth2 --dualfile ida.pcap vuelta.pcap (con dos pcaps de un tap, uno por dirección)
+# mergecap -w escenario.pcap contexto-limpio.pcap ataque-cve-xxxx.pcap (mezclar un pcap limpio con pcaps de ataque respetando los timestamps reales para que el ataque quede "enterrado" en tráfico normal)
+# tcpreplay -i eth0 --mbps=100 --stats=1 escenario.pcap (reproducir el escenario completo frente al NIDS a 100 Mbps y ...)
+# tail -f /var/log/suricata/eve.json | jq 'select(.event_type=="alert")' (... luego revisar las alertas del sensor, p. ej. en Suricata)
+# tcpreplay -i eth0 --netmap -t captura.pcap (con tarjetas compatibles con netmap, para alcanzar tasa de línea [>1 Gbps])
+
+
+tcpspy
+Herramienta de monitorización de conexiones TCP/IP en sistemas Linux que permite registrar qué usuarios y procesos establecen conexiones de red, desde qué dirección y puerto local, hacia qué dirección y puerto remoto y, opcionalmente, qué ejecutable está asociado a cada conexión. Su utilidad principal es auditar la actividad de red del sistema, investigar conexiones inesperadas y comprobar qué servicios o programas se comunican con otros equipos.
+# systemctl status tcpspy.service (comprobar estado del servicio)
+# tcpspy -d (que el programa permanezca en primer plano y envíe los registros a la salida estándar, en lugar de ejecutarse en segundo plano y escribirlos en syslog. Ctrl+C para detenerlo)
+Si en otra terminal se lanza:
+$ curl https://curl.se/docs/sslcerts.html
+En la primera se verá la salida.
+# tcpspy -d -p (en modo depuración y que incluya el ejecutable. Los resultados se muestran en pantalla, sin la opción -d los resultados va a syslog)
+# tcpspy -d -e 'user "USER" and rport "ssh"' (registra solo las conexiones que cumplen que la conexión pertenezca al usuario USER y que sea al puerto remoto por ssh)
+# tcpspy -d -e 'rport 443' (registrar conexiones cuyo puerto remoto sea el 443 independientemente del usuario)
+# tcpspy -d -e 'raddr 203.10.24.10' (detectar conexiones a una IP concreta)
+# tcpspy -d -e 'laddr 192.168.1.10' (detectar conexiones a una IP local concreta)
+# tcpspy -d -e 'user "tux" and exe "curl"' (especificando el usuario USER y que ejecute "curl")
+# tcpspy -d -e 'user "USER" and rport "https"' (especificando usuario USER y por el puerto 443)
+# tcpspy -d -e 'not raddr 10.0.0.0/255.0.0.0 and rport 25 and (user "bob" or user "joe")' (Registrar las conexiones realizadas por los usuarios «bob» o «joe» al puerto remoto 25 en máquinas que no forman parte de la intranet especifica)
+# tcpspy -d -e 'user "USER" and rport 443 and raddr 192.168.1.0/24' (registrar las conexiones del usuario USER hacia el puerto remoto 443, pero únicamente cuando se dirijan a una red concreta)
+# tcpspy -d -e 'raddr 192.168.1.0/24' (investigar un rango de red completo)
+# tcpspy -d -p -e 'exe "/usr/bin/curl"' (observar las conexiones de un ejecutable especifico)
+# tcpspy -d -e '(user "ana" or user "marc") and rport 443' (registrar las conexiones del usuario `ana` o del usuario `marc` hacia el puerto remoto 443)
+# tcpspy -d -I 100 (reducir el intervalo de explotación a 100 ms, por defecto, se actualiza cada 1000 milisegundos [1 segundo])
+1.-
+Guardar reglas en un archivo:
+# nano /etc/tcpspy.rules
+# Conexiones HTTPS
+rport 443
+# Conexiones SSH del usuario ana
+user "ana" and rport "ssh"
+# Conexiones hacia una red concreta
+raddr 192.168.1.0/24
+Despues se puede ejecutar:
+# tcpspy -d -f /etc/tcpspy.rules
+
+
 tcpstat
 Informa de estadísticas de la red al igual que vmstat [ver] lo hace para las estadísticas del sistema. El valor predeterminado es 5 segundos.
 # smemstat 4 3 (monitorear 3 veces cada 4 segundos)
