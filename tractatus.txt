@@ -61475,6 +61475,19 @@ tcvt
 $ sudo tcvt nano /var/log/syslog (en una terminal maximizada lanzar el comando)
 
 
+tdb-tools
+API de base de datos sencilla, modelada a partir de la estructura de GDBM [Gnu DataBase Manager], que a diferencia de esta TDB [Trivial DataBase] permite múltiples escritores, mediante mecanismos adecuados de bloqueo y transacciones. GDBM es una librería muy antigua y sencilla para crear bases de datos locales. Funciona como un diccionario gigante guardado en un solo archivo. Es un archivo binario con la estructura clave-valor no una base de datos relacional como MySQL o PostgreSQL con tablas, filas y columnas. TDB permite que decenas de procesos lean y escriban al mismo tiempo. Lo hace mediante bloqueos internos. Si un proceso está modificando el archivo, TDB pone en espera a otros procesos hasta que el primer proceso termine evitando que los datos se mezclen y corrompan el archivo. Si no terminó de escribir los registros, por un apagón o reinicio del servidor, descarta los cambios y deja el archivo exactamente como estaba antes.  El archivo nunca queda roto. Los archivos .tdb son binarios y no pueden abrirse con cat o nano. Las herramientas de tdb-tools sirven para inspeccionar, respaldar y migrar estos archivos. Incluye las herramientas tdbbackup.tdbtools, tdbdump, tdbrestore y tdbtool
+$ tdbtool usuarios.tdb (abrir el prompt con el archivo)
+tdb> keys (listará todas las claves guardadas en el archivo)
+tdb> show nombre_usuario (mostrará el valor guardado bajo esa clave)
+tdb> store nueva_clave nuevo_valor (inserta o modifica un dato manualmente)
+tdb> delete clave_a_borrar (borra un registro)
+tdb> quit (salir del prompt)
+$ tdbdump usuarios.tdb > respaldo_texto.txt (vuelca el contenido a un archivo de texto)
+$ tdbrestore usuarios_nuevo.tdb < respaldo_texto.txt (crear un nuevo archivo .tdb a partir del texto plano con el formato exacto que genera tdbdump)
+$ tdbbackup usuarios.tdb (crea una copia de seguridad y verifica la integridad del archivo)
+
+
 tdc
 Reloj acoplable simple y pequeño. Es una herramienta útil para escritoprios OpenBox, FVWM, Enlightenment o ion3. Puede usar cualquier formato de fecha POSIX.
 $ tdc (formato básico solo mostrando hora, minuto y segundo)
