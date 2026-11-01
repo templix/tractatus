@@ -61497,6 +61497,36 @@ Si al lanzar la aplicación la salida es: "Couldn't open X", lanzar-la:
 $ export DISPLAY=:0 ; tdc
 
 
+tealdeer
+Páginas de manual simplificadas, basadas en ejemplos y desarrolladas por la comunidad de forma colaborativa.
+$ tldr --seed-config (crear el archivo de configuración en /home/$USER/.config/tealdeer/config.toml)
+$ tldr -u (actualiza la base de datos)
+$ tldr -c (limpia la base de datos)
+$ tldr -l (lista todos los comando disponibles)
+$ tldr --color always ip (muestra en color la información del comando ip. Otras opciones para --color son auto y never [nunca])
+$ tldr --pager -L es ls (usa el paginador para mostrar la salida y en español si esta disponible)
+$ tldr -p macos ls (lo muestra para el sistema macos. Otras opciones: sunos, windows, android, freebsd, netbsd, openbsd)
+$ tldr --show-paths (muestra las rutas de archivos y directorios utilizadas por tealdeer)
+$ tldr -r -q ls (muestra el Markdown sin formato en lugar de generarlo y suprime los mensajes informativos)
+
+
+teckit
+Herramientas para la conversión de codificación. Ofrece un formato sencillo para describir la correspondencia entre codificaciones heredadas de 8 bits y Unicode, y un conjunto de utilidades basadas en dichas descripciones para convertir texto entre codificaciones de 8 bits y Unicode. Incluye los ejecutables sfconv, teckit_compile y txtconv. Ejemplo con una tabla de mapeo, crear el archivo:
+$ nano latin-a-unicode.map
+       LHSName "latin-a"
+       RHSName "UNICODE"
+       pass(Unicode)
+       U+0061 > U+00E1   ; a -> á
+       U+0065 > U+00E9   ; e -> é
+       U+0069 > U+00ED   ; i -> í
+       U+006F > U+00F3   ; o -> ó
+       U+0075 > U+00FA   ; u -> ú
+$ teckit_compile latin-a-unicode.map -o latin-a-unicode.tec (compilarlo. Genera el archivo de salida .tec)
+$ txtconv -t latin-a-unicode.tec -i entrada.txt -o salida-unicode.txt (convertir texto a Unicode [UTF-8])
+$ txtconv -r -t latin-a-unicode.tec -i unicode.txt -o legado.txt (conversión inversa de Unicode a la codificación antigua)
+$ sfconv -t mi-codificacion.tec -i corpus-legado.sfm -o corpus-unicode.sfm (convertir desde una codificación heredada sfm a Unicode con)
+
+
 teclado
 Ver setxkbmap.
 Achivo de configuración:
@@ -62012,14 +62042,6 @@ tiv
 Visor de imágenes de alta resolución que utiliza colores ANSI RGB de 24 bits y caracteres Unicode en bloque, los cuales crean una celda de 4x8 píxeles por cada carácter. Gracias al uso de estos caracteres Unicode en bloque, se puede obtener una imagen de mayor resolución en el mismo espacio de pantalla.
 $ tiv archivo.png (forma básica)
 $ tiv -2 zrchivo.jpeg(usar colores de 256 bits)
-
-
-tldr
-Muestra información de un comando como las páginas man pero más simplificada,como si fueran versiones resumidas de man com más ejemplos.
-$ tldr -u (actualizar base de datos. Lanzarlo periodicamente)
-$ tldr ip
-$ tldr --color tar
-$ tldr -L es tldr (mostrará información en español si está disponible)
 
 
 tleds
