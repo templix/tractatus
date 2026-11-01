@@ -61493,6 +61493,8 @@ Reloj acoplable simple y pequeño. Es una herramienta útil para escritoprios Op
 $ tdc (formato básico solo mostrando hora, minuto y segundo)
 $ tdc -w 120 -f "%d/%m/%Y %H:%M" -ce -cl grey40 (con medida especificada [por defecto 64], determinado formato del dia [f] en el calendario [ce] y color grey40 [cl])
 $ tdc -w 230 -f "%d %b %Y %T" (Otra presentación)
+Si al lanzar la aplicación la salida es: "Couldn't open X", lanzar-la:
+$ export DISPLAY=:0 ; tdc
 
 
 teclado
