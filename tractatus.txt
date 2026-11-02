@@ -61639,6 +61639,16 @@ Programa de monitorización que actua a partir de un archivo de configuración, 
 # tenshi -C -c /etc/tenshi/tenshi.conf (comprobar el archivo de configuración. Con salida vacia es que está correcto)
 
 
+tercpp
+Herramienta para evaluar el rendimiento de la traducción automática. Utiliza la métrica de tasa de error de traducción [Translation Error Rate - TER] para medir las distancias de edición entre las traducciones y las referencias. El proceso que realiza este comando pude opservarse con dos textos, uno con un par de frases traducidas del inglés con un traductor y otro con las traducciones que un usuario pree que son más correctas:
+$ tercpp --noTxtIds -P -s -r nota.txt -h nota2.txt (no usar identificadores por línea, ignorar signos de puntuación y mayúsculas y la traducción mecánica y la humana)
+$ tercpp --noTxtIds -r nota -h nota2 (ejecución más simple)
+  	 Total TER: 0.782609 (18/23)
+18/23 --> 18 es el total de ediciones acumuladas que se necesitaron para transformar la hipótesis [nota2] en la referencia [nota] y 23 es el número de palabras del texto de referencia [nota].
+0.782609 --> Es el puntaje TER, resultado de dividir 18/23, lo que significa que la traducción automática tiene una tasa de error del 78.26% respecto a la referencia humana.
+Nota.- El TER mide distancias de edición mecánicas, es decir cuántas palabras hay que quitar, poner o mover frente a una única oración de referencia fija. No evalúa si una frase es semánticamente correcta, fluida o un sinónimo válido; solo comprueba si las palabras coinciden literalmente con la referencia que se ha dado pero eso no significa que el resultado de la traducción sea mejor en un caso o en el otro.
+
+
 term
 [$TERM]. La variable de entorno $TERM no dice qué emulador de terminal se usa [sakura, lxterminal, etc.], sino qué tipo de terminal lógico se está emulando, es decir: le dice al sistema qué capacidades gráficas y de control puede esperar la terminal [¿Soporta colores? ¿Cuántos?, ¿Mueve el cursor con códigos ANSI?, ¿Entiende secuencias para limpiar la pantalla o resaltar texto?]. Los emuladores de terminal [sakura, lxterminal, terminator, guake, etc.] emulan un terminal clásico de hardware, la mayoría compatible con xterm, un estandar de facto que soporta colores extendidos [xterm-256color] y entiende casi todas las secuencias ANSI modernas.
 $ infocmp xterm-256color (lista enorme de las capacidades del tipo especificado)
