@@ -60323,7 +60323,7 @@ $ systemctl status swapspace.service (comprobar si está activo)
 swatch
 [swatchdog]. Visualizador de archivos de registro con coincidencia mediante expresiones regulares, resaltado y puntos de enlace [hooks] diseñado para supervisar la actividad del sistema y ejecutar acciones automáticamente cuando aparecen. Es especialmente útil para supervisar la actividad de un servidor, detectar intentos de acceso sospechosos, identificar errores y recibir avisos sin tener que revisar los registros manualmente. Ejemplo básico del proceso para detectar errores:
 Crear el archivo de configuración
-nano ~/.swatchdogrc
+$ nano ~/.swatchdogrc
 watchfor /error/i
     echo red
     exec fyi -t 0 "existen errores"
@@ -61631,6 +61631,12 @@ tempfile
 $ tempfile
 $ tempfile -p 4463 (lo crea con un prefijo especificado. El resultado es parecido a /tmp/4463pAawmz)
 $ tempfile -s nota (lo crea con un sufijo especificado. El resualtado es parecido a /tmp/fileKpYlf4nota)
+
+
+tenshi
+Programa de monitorización que actua a partir de un archivo de configuración, diseñado para supervisar uno o más archivos de registro, como /var/log/auth.log o /var/log/syslog en busca de líneas que coincidan con expresiones regulares definidas por el usuario e informar sobre dichas coincidencias. El programa precisa los dos archivos mencionados, que se instalan con rsyslog ya que necesita logs en texto plano, si el sistema usa solo journald no funcionará o tendrá que apuntar a otros archivos en su configuración a fin de que se ejecute correctamente el demonio para monitorizar logs.
+# systemctl status tenshi (comprobar el estado de la aplicación)
+# tenshi -C -c /etc/tenshi/tenshi.conf (comprobar el archivo de configuración. Con salida vacia es que está correcto)
 
 
 term
