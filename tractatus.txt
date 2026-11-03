@@ -61767,13 +61767,28 @@ $ tyq imagen1.jpg imagen2.jpg imagen3.jpg (va abriendo las imagenes especificada
 
 
 termit
-Emulador de terminal con soporte para múltiples pestañas, codificación de conmutación, sesiones, combinaciones de teclas configurables, lenguaje Lua incorporado y título de ventana dinámica similar a xterm.
+Emulador de terminal con soporte para múltiples pestañas, codificación de conmutación, sesiones, combinaciones de teclas configurables, lenguaje Lua incorporado y título de ventana dinámica similar a xterm. El archivo de configuración básico en:
+# nano /etc/xdg/termit/rc.lua
+...
+defaults.font = 'Monospace 12'
+defaults.geometry = '110x20'
+defaults.hideSingleTab = true
+defaults.showScrollbar = false
+defaults.fillTabbar = false
+defaults.hideMenubar = true
+...
+$ termit
 
 
 termite
 Emulador de terminal.
 $ termite --geometry=900x150 (Especificando medidas)
 $ termite -e htop (Ejecutar una aplicación)
+
+
+termonad
+Emulador de terminal configurable en Haskell extremadamente personalizable y ofrece puntos de extensión [hooks] para modificar su comportamiento predeterminado
+$ termonad
 
 
 termsaver
