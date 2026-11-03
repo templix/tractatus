@@ -61697,9 +61697,9 @@ $ tdcompare salida nueva_salida (muestra las diferencias entre las dos sesiones 
 $ tdview salida (visualizar el contenido de una grabación sin reproducirla en la terminal)
 
 
-terminal
-Nombre de la consola propia de xfce. El archivo de configuración se encuentra en:
-$ nano .config/Terminal/terminalrc
+terminal.app
+Ofrece emulación de terminal en un entorno GNUstep proporcionando terminales con soporte de color y tipos de letra configurables; además, permite a los usuarios configurar utilidades de shell como servicios de GNUstep.
+$ Terminal (lanzar la terminal. La "T" es mayúscula)
 
 
 terminalize
@@ -61745,10 +61745,25 @@ Combinaciones de teclas:
               Ctrl c         Cierra la aplicación
 
 
+terminfo
+ofrece una implementación escrita íntegramente en Go para leer información de la base de datos terminfo, un formato de almacenamiento de información sobre la capacidad de varios tipos de terminales. Esta base de datos permite que las aplicaciones manejen las características de la terminal sin preocuparse por los detalles específicos de cada uno.
+$ go-infocmp xterm (obtener la descripción de un terminal específico)
+$ go-infocmp -x vt100 (información extendida)
+
+
 terminology
-Emulador de terminal para sistemas Linux/BSD/UNIX que usa EFL. Se usa como su emulador de terminal vt100 normal con todas las características habituales, como compatibilidad con 256 colores. Terminology está diseñada para emular Xterm en la mayoría de los aspectos.
-$ terminology (arrancar el emulador)
-$ tycat imagen.png (muestra la imgen en el emulador)
+Emulador de terminal gráfico basado en EFL [Enlightenment Foundation Libraries]. Emula un terminal tipo VT100 ligeramente ampliado, con extensiones adicionales y elementos visuales avanzados. EFL es un conjunto de bibliotecas gráficas: Evas, Elementary, Edje, Emotion, etc. creadas originalmente para el escritorio Enlightenment. Al estar basado en EFL, Terminology no es un emulador de terminal "clásico" como xterm o gnome-terminal, que dependen de toolkits más tradicionales. Puede mostrar contenido gráfico avanzado "dentro" de la propia terminal: imágenes, vídeos, PDFs, SVG, fondos animados, transparencias, etc. Incluye las herramientas tyalpha, tybg, tycat, tyls, typop, tyq y tysend utilidades que hablan con Terminology dentro de la terminal mediante secuencias de escape especiales. Fuera de Terminology no tienen efecto.
+$ terminology (abrir la terminal)
+En su interior:
+$ tyls -a (listar archivos incluidos los ocultos)
+$ tyalpha off (terminal sin transparéncia. "on" con transparencia)
+$ tyalpha 50 (con el 50% de transparéncia)
+$ tybg ~/Images/gnu.png (muestra una imagen de fondo en la terminal)
+$ tybg (quita el fondo y vuelve al por defecto)
+$ tycat video.mp4 (ver un video en la terminal)
+$ typop imagen.jpg (abre la imagen en otra ventana
+$ typop video.mp4 (muestra en una nueva terminal el video)
+$ tyq imagen1.jpg imagen2.jpg imagen3.jpg (va abriendo las imagenes especificadas y al clicarlas va cambiando)
 
 
 termit
