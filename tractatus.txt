@@ -61843,6 +61843,8 @@ tesseract-ocr
 [tesseract-ocr-cat tesseract-ocr-spa]. Herramienta para el reconocimiento óptico de caracteres [OCR] lo que significa que es capaz de "leer" el texto que hay dentro de una imagen y convertirlo en texto digital editable. Incluye los ejecutables ambiguous_words, classifier_tester, cntraining, combine_lang_model, combine_tessdata, dawg2wordlist, lstmeval, lstmtraining, merge_unicharsets, mftraining, set_unicharset_properties, shapeclustering, tesseract, text2image, unicharset_extractor y wordlist2dawg.
 $ tesseract --list-langs (lista los lenguajes instalados en el sistema. Si se precisa uno no instalado, existen paquetes tesseract-ocr-xxxx)
 $ tesseract documento.jpg salida -l spa (creará salida.txt, la extensión .txt la añade la aplicación, y en español. Sin especificar lenguaje por defecto en inglés)
+$ tesseract imagen.png salida -l spa pdf (crea un PDF ejecutable [searchable PDF] en el que coloca una capa invisible de texto digitalizado justo encima de la imagen y de este modo, visualmente se ve la foto exacta de imagen.png, pero se puede pasar el ratón, seleccionar las palabras, copiarlas o buscar texto con Ctrl + F)
+Nota.- Las herramientas secundarias sirven para "entrenar" a tesseract para que reconozca letra gótica, tipogracfia medieval, etc. y algunas como mftraining, cntraining, shapeclustering y unicharset_extractor está en desuso pero se siguen incluyendo por compatibilidad con sistemas antiguos.
 
 
 test
@@ -61877,6 +61879,20 @@ $ testasciidoc update --number 1 --backend html5 (generar o actualizar los archi
 testdisk
 [photorec]. Escaneo y reparación de particiones.
 $ testdisk /list (Muestra todas las particiones incluso las no montadas)
+
+
+testssl.sh
+Herramienta que analiza el servicio de un servidor, en cualquier puerto, para auditar servicios de red que utilicen cifrado TLS/SSL. Detecta si el servidor permite versiones obsoletas e inseguras oo utiliza las modernas [TLS 1.2 TLS 1.3], identifica qué algoritmos de cifrado soporta el servidor y señala cuáles son débiles, comprueba fallos de seguridad históricos y recientes y valida la cadena de confianza, fechas de expiración, claves débiles, algoritmos de firma y soporte para características como HOCSP u OCSP Stapling.
+$ testssl -b (Muestra el banner que incluye licencia, condiciones de uso, versión, versión de OpenSSL detectada, ruta de acceso,  número de cifrados de OpenSSL, fecha de compilación y arquitectura)
+$ testssl dominio.com (realizará una auditoría exhaustiva de todas las pruebas disponibles en el puerto por defecto, el 443 para HTTPS)
+$ testssl dominio.com:8443 (analizar un puerto específico)
+$ testssl --fast localhost:631 (analisis rapido, aunque no se recomienda su uso porque puede tener algunos efectos secundarios no deseados)
+$ testssl -U dominio.com (saber si el servidor es vulnerable a fallos críticos conocidos)
+$ testssl -E midominio.com (muestra una lista detallada de los algoritmos de cifrado soportados por el servidor y evalúa su seguridad individualmente)
+$ testssl --jsonfile resultado.json dominio.com (guardar los resultados en un archivo json)
+$ testssl -t ftp localhost (comprobar un servicio concreto)
+$ testssl --logfile informe.log localhost:631 (guardar en un archivo de texto plano)
+Nota.- testssl utiliza un código de colorespara interpretar los resultados: Verde  [OK,  no vulnerable] Indica configuraciones correctas y seguras, Amarillo [WARN] Avisa de configuraciones potencialmente peligrosas o obsoletas que deberían actualizarse y Rojo [No OK, vulnerable] Alerta roja sobre vulnerabilidades críticas activas o cifrados sumamente inseguros que deben corregirse de inmediato.
 
 
 texi2html
