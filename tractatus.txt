@@ -61825,6 +61825,20 @@ La visualizamos, por ejemplo:
 $ firefox /tmp/termtosvg_6nxfvxdm.svg
 
 
+teseq
+Herramienta para analizar archivos que contienen caracteres y secuencias de control de terminal; su función es mostrar dichas secuencias junto con su significado en un formato legible. Está diseñada para facilitar la depuración de emuladores de terminal y de programas que hacen un uso intensivo de funciones avanzadas, como el movimiento del cursor, el uso de colores y otros efectos visuales. Incluye la herramienta reseq.
+$ printf 'hola \e[1;31mmundo\e[0m\n' | teseq (se verá texto normal en unas líneas y, en otras, las secuencias de control identificadas: ESC, CSI, etc.)
+$ printf '\e[2J\e[H\e[32mverde\e[0m\n' | teseq -D --color (añade descripción en inglés de cada secuencia y colorea la salida para distinguir texto de secuencias)
+$ ls --color=always | teseq -D --color | less (depurar la salida de un programa con descripción, colores y paginado)
+$ teseq -D --color script.sh (lo mismo de un script)
+$ teseq archivo1 archivo2 (forma básica. Sin el archivo de salida archivo2, se muestra por pantalla)
+Todo el proceso de analizar el archivo y volverlo a su forma original podría ser:
+$ teseq -D --color archivo1.txt archivo2.txt (lo guarda en archivo2.txt)
+$ nano archivo2.txt (y modificar lo que se crea)
+$ reseq archivo2.txt archivo3.txt (revierte la traducción de teseq y reconstruye los bytes originales y guardar en archivo3.txt)
+$ cat archivo3.txt (comprobar)
+
+
 test
 Comprobar tipos de archivos y comparar valores, devolviendo 1 si es cierto y o si es falsa.
 Sobre ficheros:
