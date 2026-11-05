@@ -61839,6 +61839,12 @@ $ reseq archivo2.txt archivo3.txt (revierte la traducción de teseq y reconstruy
 $ cat archivo3.txt (comprobar)
 
 
+tesseract-ocr
+[tesseract-ocr-cat tesseract-ocr-spa]. Herramienta para el reconocimiento óptico de caracteres [OCR] lo que significa que es capaz de "leer" el texto que hay dentro de una imagen y convertirlo en texto digital editable. Incluye los ejecutables ambiguous_words, classifier_tester, cntraining, combine_lang_model, combine_tessdata, dawg2wordlist, lstmeval, lstmtraining, merge_unicharsets, mftraining, set_unicharset_properties, shapeclustering, tesseract, text2image, unicharset_extractor y wordlist2dawg.
+$ tesseract --list-langs (lista los lenguajes instalados en el sistema. Si se precisa uno no instalado, existen paquetes tesseract-ocr-xxxx)
+$ tesseract documento.jpg salida -l spa (creará salida.txt, la extensión .txt la añade la aplicación, y en español. Sin especificar lenguaje por defecto en inglés)
+
+
 test
 Comprobar tipos de archivos y comparar valores, devolviendo 1 si es cierto y o si es falsa.
 Sobre ficheros:
