@@ -61895,6 +61895,32 @@ $ testssl --logfile informe.log localhost:631 (guardar en un archivo de texto pl
 Nota.- testssl utiliza un código de colorespara interpretar los resultados: Verde  [OK,  no vulnerable] Indica configuraciones correctas y seguras, Amarillo [WARN] Avisa de configuraciones potencialmente peligrosas o obsoletas que deberían actualizarse y Rojo [No OK, vulnerable] Alerta roja sobre vulnerabilidades críticas activas o cifrados sumamente inseguros que deben corregirse de inmediato.
 
 
+testu01-bin
+Utilidad auxiliar para programar y documentar código fuente mediante una técnica denominada programación literaria [literate programming]. El programa toma un documento escrito en LaTeX o TeX y extrae de él los fragmentos de código fuente que están delimitados por \code que indica el comienzo de un fragmento de código y \endcode que indica el final del fragmento.
+Ejemplo práctico: generar un programa en C manteniendo su documentación junto con el código.
+$ nano ejemplo.tex
+       \documentclass{article}
+       \begin{document}
+       \section{Linux es un sistema genial}
+       Este programa muestra un mensaje por pantalla.
+       \code
+       #include <stdio.h>
+       int main(void)
+       {
+           printf("Linux es un sistema genial!\n");
+   	   return 0;
+       }
+       \endcode
+       \section{Explicación}
+       La función main es el punto de entrada
+       del programa.
+       \end{document}
+$ testu01-tcode ejemplo.tex ejemplo.c (ejecutar el comando. General ejemplo.c)
+$ gcc ejemplo.c -o ejemplo (compilarlo)
+$ ./ejemplo (ejecutarlo:)
+La característica del comando testu01-bin es que en un único documento tenemos tanto la explicación como el código fuente real.
+
+
 texi2html
 Pasar archivos infotex a html.
 $ texi2html archivo.texi
