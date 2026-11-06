@@ -61939,9 +61939,20 @@ $ tgpt (iniciar la conversación)
 
 
 thefuck
-Muestra a partir de una serie de reglas de coincidencia algun comando que se ha escrito mal en la terminal o del que solo se han escrito unas letras puestas. Una vez puesta la posible coincidencia, con "intro" se acepta, con las fechas muestras otras posibles coincidencias y con C-c se aborta.
-$ thefuck hp-s
-$ thefuck mkder
+Herramienta que corrige errores tipográficos o de memoria que comete el usuario en la línea de comandos. Su uso típico es: se escribe un comando mal, falla, se escribe fuck, y propone el comando corregido. Despues de instalar, hay que añadir el alias a la shell, añadiendo a ~/bashrc la linea:
+	    eval "$(thefuck --alias please)"
+$ source ~/.bashrc (recargar la configuración o reiniciar)
+S please ifconifg (pregunta al que te refieres si hay varios parecidos)
+$ please -y ifconifg (rectifica el comando y lo ejecuta)
+1.-
+El proceso habitual es como sigue:
+Lee el último comando del historial de la shell y su salida, lo compara contra una serie de reglas de coincidencia [más de 90], genera el comando corregido, lo muestra y espera confirmación: Enter para ejecutarlo, Ctrl+C para cancelar y flechas para ver otras sugerencias si hay varias.
+$ apt install vim
+Error: No se pudo abrir el archivo de bloqueo /var/lib/dpkg/lock-frontend - open (13: Permiso denegado)
+$ please
+sudo apt install vim [enter/↑/↓/ctrl+c]
+Tambien puede lanzarse y que se ejecute sin preguntar:
+$ please -y
 
 
 themonospot
