@@ -61966,6 +61966,7 @@ $ themonospot video.avi
 
 thermald
 Demonio que monitorea y controla la temperatura en ordenadores y tabletas con las últimas versiones de CPU de Intel. Una vez que la temperatura del sistema alcanza un cierto umbral, el daemon activa varios métodos de enfriamiento.
+# thermald --loglevel=debug --exclusive-control --systemd (mostrar en logs el máximo nivel de detalle, controlador térmico exclusivo y asumir que es iniciado por systemd)
 # systemctl enable --now thermald (activar el servicio)
 1.-
 Para ejecutar thermald en modo adaptativo [adaptive] que aprende el comportamiento del sistema y ajusta dinámicamente la temperatura objetivo.
