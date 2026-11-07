@@ -61975,6 +61975,8 @@ thermald
 Demonio que monitorea y controla la temperatura en ordenadores y tabletas con las últimas versiones de CPU de Intel. Una vez que la temperatura del sistema alcanza un cierto umbral, el daemon activa varios métodos de enfriamiento.
 # thermald --loglevel=debug --exclusive-control --systemd (mostrar en logs el máximo nivel de detalle, controlador térmico exclusivo y asumir que es iniciado por systemd)
 # systemctl enable --now thermald (activar el servicio)
+$ sensors (observar la temperatura real. Ver "sensors")
+$ cat /sys/class/thermal/thermal_zone*/temp (otra forma de observar la temperatura en milésimas de grado. 62000 equivale a 62ºC)
 1.-
 Para ejecutar thermald en modo adaptativo [adaptive] que aprende el comportamiento del sistema y ajusta dinámicamente la temperatura objetivo.
 # nano /etc/systemd/system/thermald.service
@@ -61986,6 +61988,67 @@ ExecStart=/usr/sbin/thermald --systemd --dbus-enable --adaptive
 Restart=on-failure
 Añadir la sección al archivo creado. --dbus-enable permite que otras aplicaciones pregunten a thermald por el estado térmico.
 # systemctl restart thermald.service (reiniciar el servicio)
+2.-
+Para evitar el error "error: could not parse file /etc/thermald/thermal-conf.xml"
+Crear el archivo con el siguiente contenido;
+# nano /etc/thermald/thermal-conf.xml
+<?xml version="1.0"?>
+<ThermalConfiguration>
+  <Platform>
+    <Name>Intel Desktop CPU</Name>
+    <ProductName>*</ProductName>
+    <Preference>QUIET</Preference>
+    <ThermalZones>
+      <ThermalZone>
+        <Type>cpu</Type>
+        <TripPoints>
+          <TripPoint>
+            <SensorType>x86_pkg_temp</SensorType>
+            <Temperature>85000</Temperature>
+            <type>passive</type>
+            <ControlType>SEQUENTIAL</ControlType>
+            <CoolingDevice>
+              <index>1</index>
+              <type>rapl_controller</type>
+              <influence>100</influence>
+              <SamplingPeriod>5</SamplingPeriod>
+            </CoolingDevice>
+          </TripPoint>
+        </TripPoints>
+      </ThermalZone>
+    </ThermalZones>
+  </Platform>
+</ThermalConfiguration>
+Esta configuración indica a thermald que, si el sensor de temperatura del paquete CPU [x86_pkg_temp] llega a 85 C, active refrigeración pasiva mediante el controlador RAPL, que limita consumo/potencia y suele traducirse en una reducción de frecuencia. las temperaturas se expresan en milésimas de grado Celsius [85000 equivale a 85 °C]. Después validar el XML y reiniciar el servicio:
+# xmllint --noout /etc/thermald/thermal-conf.xml
+# systemctl restart thermald
+# journalctl -u thermald -b --no-pager | grep -i -E 'thermal-conf|error|warn'
+Significado de las etiquetas
+<Platform> --> Define una política para un tipo de plataforma; "*" significa “cualquiera”.
+<Preference>QUIET</Preference> --> Prioriza menos ruido/temperatura frente al máximo rendimiento.
+<ThermalZone> --> Agrupa un sensor y las acciones que deben ejecutarse.
+<SensorType>x86_pkg_temp</SensorType> --> Sensor de temperatura del paquete/procesador.
+<Temperature>85000</Temperature> --> Umbral de activación: 85 °C. Para un PC de sobremesa es un valor razonable y conservador
+<type>passive</type> --> Enfría reduciendo rendimiento, en vez de aumentar un ventilador.
+<CoolingDevice> --> Mecanismo concreto usado para enfriar, aquí "rapl_controller".
+
+
+thin
+Servidor web de aplicaciones Ruby basado en Rack. Esto significa que necesita una aplicación Ruby en ejecución que le indique cómo responder a las peticiones HTTP. Precisa archivo config.ru.
+$ thin install (para ser gestionado por systemd)
+# systemctl status thin.service (comprobar su estado después del comando anterior)
+Un ejemplo de uso podría ser:
+$ mkdir ~/server_thin && cd ~/server_thin
+$ nano config.ru
+# config.ru
+	# Esta es una aplicación Rack mínima.
+	run Proc.new { |env|
+	  [200, {"Content-Type" => "text/plain"}, ["¡Hola! Thin está funcionando correctamente.\n"]]
+        }
+$ thin start -d (arrancarlo en modo demonio. Por defecto en localhost:3000)
+$ thin start -C ~/server_thin (especificar un directorio)
+$ thin start -p 8080 -a 127.0.0.1 (cambiar el puerto y la dirección de escucha)
+$ thin start -S /tmp/thin.sock (usar un socket Unix ideal para conectar con Nginx como proxy inverso)
 
 
 thunar
