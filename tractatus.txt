@@ -62051,6 +62051,20 @@ $ thin start -p 8080 -a 127.0.0.1 (cambiar el puerto y la dirección de escucha)
 $ thin start -S /tmp/thin.sock (usar un socket Unix ideal para conectar con Nginx como proxy inverso)
 
 
+thin-provisioning-tools
+Herramientas para gestionar los metadatos del objetivo thin (thin target) de device-mapper. Este objetivo permite utilizar un único almacenamiento subyacente para múltiples volúmenes con aprovisionamiento ligero. Es posible crear numerosas instantáneas (snapshots) a partir de dichos volúmenes. Las herramientas permiten verificar la coherencia de los metadatos, reparar información dañada, así como volcar o restaurar los metadatos en formato textual. Incluye las herramientas cache_check, cache_dump, cache_metadata_size, cache_repair, cache_restore, cache_writeback, era_check, era_dump, era_invalidate, era_restore, pdata_tools, thin_check, thin_delta, thin_dump, thin_ls, thin_metadata_pack, thin_metadata_size, thin_metadata_unpack, thin_migrate, thin_repair, thin_restore, thin_rmap y thin_trim.
+# thin_check /dev/mapper/vg0-tpool_tmeta (comprobar la coherencia de los metadatos de un thin pool de LVM si es satisfactoria, devuelve un código de salida cero)
+# thin_dump /ruta/metadata (exporta los metadatos binarios a una representación legible, normalmente XML)
+# thin_dump /dev/mapper/vg_thin_data > /root/thin_backup/dump.metadata (hacer un dump de los metadatos a un archivo)
+# thin_repair -i /ruta/metadata-mal -o /ruta/metadata-bien (lee los metadatos de entrada, intenta repararlos y escribe el resultado en otro archivo o dispositivo)
+# thin_meta_size /dev/mapper/vg_thin_data (ver tamaño de metadatos)
+# thin_ls (listar todos los dispositivos de tipo thin target en el sistema)
+# thin_restore /dev/mapper/vg_thin_data < /root/thin_backup/dump.metadata (restaurar metadatos desde un dump previo. El dispositivo debe estar offline o inusable)
+# thin_migrate /dev/mapper/old_backend_data /dev/sdb (migrar un dispositivo thin-provisioned de un backend a otro. Requiere montar el nuevo backend, ejemplo: /dev/sdb y luego migrar)
+# thin_trim /dev/mapper/vg_thin_data (liberar espacio libre mediante TRIM)
+# thin_repair /dev/mapper/vg_thin_data (reparar metadatos inconsistentes, si /dev/mapper/vg_thin_data no se monta)
+
+
 thunar
 Escritorio.
 $ thunar -B (Con varios ficheros seleccionados, al pulsar F2 se abre la ventana para renombrarlos)
