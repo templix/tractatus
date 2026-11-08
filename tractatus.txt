@@ -62192,10 +62192,26 @@ $ tidy -m -asxhtml fichero.html ( Convierte un html a xhtml )
 $ tidy -m -ashtml fichero.xhtml  ( Convierte un xhtml a html)
 
 
+tig
+Interfaz en modo texto para el sistema de control de versiones Git. Puede utilizarse para explorar el historial y el contenido de un repositorio.
+$ git rev-list --author=USER_GIT HEAD | tig show --stdin
+$ tig status (vista de estado)
+$ tig show (abre la vista de diferencias)
+$ tig log (muestra los logs completos)
+$ tig reflog (muestra listado de logs)
+$ tig refs (se muestran todas las referencias)
+$ tig +10 (muestra el décimo commit anterior resaltado
+$ tig grep TEMA (buscar TEMA en eñ repositorio git)
+
+
 tiger
 Chequear vulnerabilidades del sistema. Informe en /var/log/tiger
 # tiger  (Sin parámetros, escanea todo el sistema)
 # tiger -H -l /home/user/logs (crear un html con los resultados y guardarlo en el directorio “logs”)
+
+
+tiger-otheros
+Contiene los scripts destinados a sistemas operativos basados en Unix distintos de Linux que se incluyen en la distribución original de la aplicación Tiger. En Debian, estos scripts se empaquetan por separado, ya que la mayoría de los usuarios no los necesita para ejecutar Tiger.
 
 
 tightvncserver
