@@ -62065,6 +62065,43 @@ Herramientas para gestionar los metadatos del objetivo thin (thin target) de dev
 # thin_repair /dev/mapper/vg_thin_data (reparar metadatos inconsistentes, si /dev/mapper/vg_thin_data no se monta)
 
 
+thinkfan
+Programa sencillo y ligero para el control de ventiladores que se basa en archivos de configuración que han solucionarse en cada máquina:
+# nano /etc/thinkfan.conf
+sensors:
+  - hwmon: /sys/class/hwmon
+    name: coretemp
+    indices:
+fans:
+  - tpacpi: /proc/acpi/ibm/fan
+levels:
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+Modificar el archivo thinkfan.service con las dos lineas que se muestran:
+# nano /lib/systemd/system/thinkfan.service
+       ...
+       Type=simple
+       ExecStart=/usr/sbin/thinkfan -n
+       ...
+Y el archivo thinkfan:
+# nano /etc/default/thinkfan
+       START=yes
+       THINKFAN_ARGS=""
+       DAEMON_ARGS=""
+Ejecutar los siguientes comandos para limpiar residuos, caso de que existan y arrancar la aplicación:
+# rm -f /run/thinkfan.pid
+# systemctl daemon-reload
+# systemctl reset-failed thinkfan.service
+# systemctl restart thinkfan.service
+# systemctl status thinkfan.service (comprobar el estado)
+
+
 thunar
 Escritorio.
 $ thunar -B (Con varios ficheros seleccionados, al pulsar F2 se abre la ventana para renombrarlos)
@@ -62110,6 +62147,35 @@ Cliente de mensajeria. Algunos atajos:
 	Ctrl w (Cerrar ventana)
 	Ctrl r (Responder al mensaje al remitente)
 	Ctrl q (Salir)
+
+
+ticgit
+Sistema de seguimiento de incidencias basado en el sistema de control de versiones Git. Las incidencias se almacenan en una rama independiente llamada «ticgit» dentro de un repositorio Git, el cual puede ponerse a disposición en un servidor público junto con el código fuente del proyecto sin ensuciar su árbol de trabajo. Para ejecutar todos los comandos se precisa estar en el directorio del proyecto.
+$ ti list (la primera vez que se lanza crea la rama ticgit-ng automáticamente)
+$ ti list (luego listar las abiertas. Los números no son permanentes; cambian cada vez que se lista)
+$ ti list -s open,hold,resolved (listar también las que están en hold o resolved)
+$ ti list --states open,hold (lo mismo)
+$ ti list -t bug filtrar por etiqueta)
+$ ti new (crear una incidencia de forma interactiva)
+$ ti new -t "El parser falla con entrada vacía" (crear con título directamente)
+$ ti show d7f2d8 (ver detalles usando el TicId)
+$ ti show 1 (ver detalles usando el número de la última lista)
+$ ti checkout d7f2d8 (marcar una incidencia como actual)
+$ ti checkout 1 (lo mismo)
+$ ti sync (sincronizar con el remoto por defecto origin)
+$ ti sync origin (sincronizar especificando rama)
+Los siguientes comandos actúan sobre la incidencia actual
+$ ti tag bug
+$ ti tag feature -d (eliminar etiqueta)
+$ ti assign -u yo@ejemplo.com (asignar la incidencia a alguien)
+$ ti comment "Reproduce solo en producción" (añadir comentario)
+$ ti state resolved (cambia el estado: (open, resolved, invalid, hold)
+$ ti points 3 (asigna puntos de estimación/prioridad)
+
+
+ticgitweb
+Inicia un servidor web que permite ver, abrir y modificar incidencias gestionadas mediante el sistema de seguimiento de incidencias ticgit [ver]. Se ejecuta  desde el interior de un directorio de trabajo de Git y el programa indicará en qué puerto está escuchando.
+$ ticgitweb
 
 
 tidy
