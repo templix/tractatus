@@ -27734,30 +27734,42 @@ Se utiliza para realizar cálculos relacionados con direcciones IP y subredes. P
 # ipcalc 10.0.0.0/16 (mostrar el rango de hosts disponibles en una subred)
 
 
+ipcmk
+[util-linux]. Permite crear objetos de comunicación entre procesos (IPC) de tipo POSIX y System V: segmentos de memoria compartida, colas de mensajes y semáforos. Ver ipcrm e ipcs
+$ ipcmk -M 80 (crear un segmento de 80 bytes)
+$ ipcmk -Q (ver cola de mensajes)
+$ ipcmk -M 4KiB -p 0600 (crear memoria compartida solo accesible al dueño)
+$ ipcmk -S 5 (crear array de 5 semáforos)
+$ ipcmk -m 64 -n /demo_shm (-n es obligatorio para POSIX. Las opciones son las mismas en minúsculas)
+$ ipcmk -q -n /demo_mq
+$ ipcmk -s -n /demo_sem
+
+
 ipcrm
-Permite eliminar la comunicación entre procesos [ver ipcs]. Si paramos el programa con un Ctrl-C o simplemente sale de forma anormal, el recurso [la memoria compartida] no se libera y queda en el sistema. Con este comando es posible borrarla.
-# ipcrm -m 950288 (eliminar un segmento de memoria compartida)
+Permite eliminar la comunicación entre procesos [ver ipcs]. Si paramos el programa con un Ctrl-C o simplemente sale de forma anormal, el recurso [la memoria compartida] no se libera y queda en el sistema. Con este comando es posible borrarla. Ver ipcs e ipcmk
+# ipcrm -m 950288 (eliminar un segmento de memoria compartida especificado)
+$ ipcrm -q 950288 (matar la cola especificada en System V por id, -s  para semáforo)
+$ ipcrm --posix-shmem /demo_shm (eliminar en POSIX por nombre)
+$ ipcrm --all=shm (borrar de golpe todos (shm|pshm|msg|sem|...)
+$ ipcs -u (resumen para verificar que quedó limpio)
 Nota.- La forma de saber el número de segmento es lanzando:
 $ ipcs -s
 
 
 ipcs
-Informa sobre la comunicación entre procesos [espacios de memoria, buffers, semaforos..] listando los recursos compartidos que están creados en ese momento. Ver ipcrm. La columna "shmid" muestra el ID, la "owner" el propietario, "perms" los permisos y "bytes" el tamaño en bytes
+Informa sobre la comunicación entre procesos [espacios de memoria, buffers, semaforos..] listando los recursos compartidos que están creados en ese momento. La columna "shmid" muestra el ID, la "owner" el propietario, "perms" los permisos y "bytes" el tamaño en bytes. Ver ipcrm e ipcmk.
+# ipcs (informa de todos. con la opción -a igual)
 # ipcs -s | grep postgres  (Muestra los recursos compartidos de postgres)
 # ipcs -lm (determinar los limites de memoria compartida del sistema)
-# ipcs -ls (Límites actuales del contador que se utiliza para acceder a los recursos compartidos del sistema)
-# ipcs -u  (Proporciona información sobre la comunicación entre procesos)
+# ipcs -lq (verificar los límites de la cola)
+# ipcs -ls (Límites actuales del contador que se utiliza para acceder a los semáforos)
+# ipcs -u  (vexsrificar que está limpio)
 # ipcs -m (despliega los segmentos de memoria compartida)
 # ipcs -mu (muestra un breve resumen)
 # ipcs -ml (muestra los límites en contraposición a los valores actuales)
 # ipcs -m -i 950288 (obtener detalle de un segmento de memoria compartida [valor shmid])
 # ipcs -s (Muestra los semforos en el sistema)
-Algunas opciones:
--m  (segmentos de memoria compartida )
--q   (colas de mensajes )
--s   (matrices de semáforos )
--a   (todos. Opción por defecto)
--p   (pid)
+# ipcs -p 55234 (por su pid)
 
 
 iperf
