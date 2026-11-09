@@ -38899,7 +38899,7 @@ Contiene las definiciones básicas de tipos de terminal. Ver ncurses-bin.
 
 
 ncurses-bin
-Programas y páginas de manual relacionados con terminales. Las rutinas de la biblioteca ncurses ofrecen un método independiente de la terminal para actualizar las pantallas de caracteres con una optimización razonable. Este paquete contiene los programas utilizados para manipular la base de datos terminfo y las entradas individuales de terminfo, así como algunos programas para reiniciar terminales, entre otras funciones. Incluye las aplicaciones clear [ver], infocmp [ver], tabs, tic, toe [ver], tput [ver] y tset [ver]  .
+Programas y páginas de manual relacionados con terminales. Las rutinas de la biblioteca ncurses ofrecen un método independiente de la terminal para actualizar las pantallas de caracteres con una optimización razonable. Este paquete contiene los programas utilizados para manipular la base de datos terminfo y las entradas individuales de terminfo, así como algunos programas para reiniciar terminales, entre otras funciones. Incluye las aplicaciones clear [ver], infocmp [ver], tabs, tic [ver], toe [ver], tput [ver] y tset [ver]  .
 $ tabs 4 (tabuladores cada 4 columnas)
 $ tabs -d (restaurar configuración por defecto)
 1.-
@@ -62159,6 +62159,55 @@ Cliente de mensajeria. Algunos atajos:
 	Ctrl w (Cerrar ventana)
 	Ctrl r (Responder al mensaje al remitente)
 	Ctrl q (Salir)
+
+
+tic
+[ncurses-bin]. Traduce un archivo terminfo desde su formato fuente a un formato compilado. Su función principal es transformar una descripción textual de un terminal en un archivo binario que las aplicaciones puedan consultar para conocer sus características y capacidades. En Linux existen diferentes tipos de terminales y no todos tienen las mismas capacidades, algunos admiten colores, otros permiten posicionar el cursor, algunos soportan secuencias de escape especiales, etc. Las aplicaciones que utilizan ncurses por ejemplo, htop, nano, vim o dialog, necesitan conocer esas capacidades para funcionar correctamente y para ello utilizan una base de datos llamada terminfo. Esta base de datos contiene descripciones de los terminales, identificados mediante nombres como: xterm, xterm-256color, screen, tmux... y tic permite crear nuevas entradas o compilar las existentes. Ver ncurses-bin.
+$ tic xterm-256color.ti (compila las descripciones incluidas en el archivo y almacena las entradas resultantes en la base de datos terminfo correspondiente)
+$ tic -c terminal.ti (comprobar si el contenido del archivo es correcto)
+$ tic terminal.ti (compila las entradas definidas en terminal.ti)
+$ tic -o /tmp/terminfo terminal.ti (para realizar pruebas o desarrollar una descripción personalizada especificar donde almacenar los archivos compilados).
+$ tic -o ~/.terminfo terminal.ti (lo mismo para nuestro usuario)
+$ tic -v terminal.ti (muestra información sobre el proceso de compilación)
+$ tic -v3 terminal.ti (aumentar el nivel de detalle)
+1.-
+Ejemplo de terminal ficticio
+$ nano mi-terminal.ti
+mi-terminal|Mi terminal personalizado,
+    am,
+    cols#80,
+    lines#24,
+    clear=\E[H\E[2J,
+    cup=\E[%i%p1%d;%p2%dH,
+    colors#8,
+    pairs#64,
+Significado de este archivo:
+mi-terminal --> Nombre del terminal
+am --> Permite el ajuste automático de línea
+cols#80 --> Tiene 80 columnas
+lines#24 --> Tiene 24 líneas
+clear --> Secuencia para limpiar la pantalla
+cup --> Secuencia para posicionar el cursor
+colors#8 --> Admite 8 colores
+pairs#64 --> Admite 64 combinaciones de colores
+Nota.- Las capacidades se escriben utilizando una sintaxis específica:
+# --> indica un valor numérico.
+= --> indica una cadena de caracteres.
+Las capacidades booleanas se indican simplemente por su nombre.
+Luego hacer el proceso:
+$ tic -c mi-terminal.ti (comprobar el archivo)
+$ tic -o ~/.terminfo mi-terminal.ti (si no hay errores, lo compilamos)
+Para probarlo:
+$ export TERM=mi-terminal
+Consultar el terminal actual:
+$ echo $TERM (consultar la terminal actual)
+$ infocmp mi-terminal (consultar las capacidades de lna entrada: muestra la descripción terminfo en formato legible)
+Consultar si las salidas coinciden con los que se han puesto en el archivo de mi-terminal.ti
+$ tput cols
+$ tput lines
+$ tput colors
+Al terminar las pruebas, para recuperar el valor anterior de TERM:
+$ export TERM=xterm-256color
 
 
 ticgit
