@@ -30946,8 +30946,8 @@ $ pam-tmpdir-helper
 
 
 libreoffice
-[myspell-ca myspell-es]
-Suite ofimática. Ver lo..
+[myspell-ca myspell-es]. Suite ofimática. Ver lo [lowriter, loffice, localc, lomath, lodraw, loimpress y loweb]
+$ libreoffice --convert-to "pdf" tractatus.txt (pasar un txt a pdf)
 1.-
 Cambiar de pantalla de inicio
 $ wget http://gnome-look.org/CONTENT/content-files/140076-libreoffice_splash.tar.gz
@@ -62243,6 +62243,21 @@ Devuelve el tiempo de ejecución de un comando o aplicación.
 $ time netstat -anpt
 # time nmap -sS www.tuxapuntes.com
 $ time echo "scale=5000; 4*a(1)" | bc -l -q (Calcula 5000 decimales de pi para comprobar velocidad del procesador)
+
+
+time-decode
+Decodificador/codificador de marcas de tiempo, fechas/horas y UUID. Los formatos admitidos abarcan desde los más habituales como los de tipo Unix en segundos o milisegundos o el formato FILETIME de Microsoft hasta otros más específicos, como los UUID de las cargas útiles [payloads] de Metasploit.
+$ time-decode --unix 1631902084 (convertir a una fecha concreta, en este caso algo como 2021-09-17 18:08:04 UTC)
+$ time-decode --umil 1631951802869 (Unix expresada en milisegundos)
+$ time-decode --ft 132000000000000000 (FILETIME de Microsoft)
+$ time-decode --chrome 13275000000000000 (tiempo de Google Chrome [WebKit])
+$ time-decode --mac 654321098 (Mac Absolute Time)
+$ time-decode --active 132000000000000000 (Active Directory / LDAP)
+$ time-decode --timestamp (ver la fecha/hora actual en todos los formatos)
+$ time-decode --timestamp "2020-09-17 20:00:00.123" (lo mismo especificando fecha/hora especificos)
+$ time-decode --timestamp "2017-06-02 13:14:15 -5" (especificando zona horaria [-5])
+$ time-decode --uu b54adc00-67f9-11d9-9669-0800200c9a66 (extraer la fecha de un UUID de versión 1, que lleva un timestamp dentro)
+Nota.- Si el resultado cae en 1601 o en 1970, casi seguro que se está usando el formato equivocado ya que esos son los "años cero" de FILETIME y Unix.
 
 
 timedatectl
