@@ -62392,6 +62392,63 @@ Lector de noticias Usenet a pantalla completa. Puede leer noticias de forma loca
 $ tin -r (abre la interfaz de la aplicación)
 
 
+tinc
+Es un demonio que permite crear una red privada virtual (VPN). Un mismo demonio puede gestionar múltiples conexiones, por lo que es posible crear una VPN completa utilizando únicamente un demonio en cada equipo participante. tinc no funciona como una VPN comercial, estilo NordVPN o CyberGhost, cuyo objetivo es capturar todo el tráfico web, cifrarlo y sacarlo a internet a través de un servidor remoto sinó para crear redes privadas superpuestas. Su único trabajo es crear un "conducto virtual" exclusivo para las IPs que pertenezcan a un rango concreto. En el ejemplo siguiente, el rango 10.0.0.0/24. El proceso para crear una VPN local pdría ser:
+$ ip addr show  (si no se ve ninguna interfaz nueva, normalmente llamada tun0 o tap0, el PC no está dentro de la VPN)
+# tincd -c /etc/tinc -k (detener el servicio. Si está gestionado por systemd detenerlo tambien con systemctl stop)
+# systemctl status tinc.service (comprobar estado)
+# mkdir -p /etc/tinc/localvpn/hosts (crear una estructura para una red llamada "localvpn")
+# nano /etc/tinc/localvpn/tinc.conf (crear el archivo de configuración principal)
+       Name = mi_nodo_local
+       Device = /dev/net/tun
+       AddressFamily = ipv4
+# nano /etc/tinc/localvpn/hosts/mi_nodo_local (crear el archivo de identidad del host)
+Subnet = 10.0.0.1/32
+# tincd -n localvpn -K (genera las claves dentro de esa red específica)
+Cuando pregunte las rutas, presiona Enter para que guarde automáticamente la clave privada en /etc/tinc/localvpn/rsa_key.priv y añada la pública al final del archivo hosts/mi_nodo_local creado en el paso anterior.
+# nano /etc/tinc/localvpn/tinc-up (crear el archivo para que tinc sepa la IP que debe asignar al sistema cuando la red se encienda
+       #!/bin/sh
+       ip link set $INTERFACE up
+       ip addr add 10.0.0.1/24 dev $INTERFACE
+# chmod +x /etc/tinc/localvpn/tinc-up (dar permisos de ejecución para que tinc no lo ignore)
+# tincd -n localvpn -D -d 3 (arrancar tinc en modo interactivo para ver si está activo)
+$ ip addr show (comprobar la interfaz nueva llamada localvpn con la IP 10.0.0.1)
+$ ping 10.0.0.1 (hacer ping a la propia infraestructura de VPN local)
+Si se entra a google.com, IP 142.250.200.46, el sistema operativo mira sus tablas de rutas, ve que esa IP no pertenece al rango 10.0.0.X y envía el tráfico por la puerta de enlace normal, eth0, enp1s0... Si se accede a 10.0.0.1 o a cualquier otra IP del rango 10.0.0.1/24, el sistema operativo sabrá inmediatamente que ese tráfico debe ir cifrado a través de la interfaz localvpn. Para conectar dos entornos en el mismo PC sin usar Docker ni VirtualBox ni KVM, sinó haciendolo dentro del mismo sistema operativo, seguir los pasos siguientes:
+# mkdir -p /etc/tinc/localvpn2/hosts (crear el directorio para el segundo nodo al que se llamará nodo_dos)
+# nano /etc/tinc/localvpn2/tinc.conf (configurar el archivo principal del segundo nodo)
+       Name = nodo_dos
+       Device = /dev/net/tun
+       AddressFamily = ipv4
+       ConnectTo = mi_nodo_local
+ConnectTo indica el nombre simbólico del primer nodo al que nos queremos conectar.
+# nano /etc/tinc/localvpn2/hosts/nodo_dos (crear el archivo de identidad para este segundo nodo)
+       Subnet = 10.0.0.2/32
+       Port = 656
+Para que tinc funcione, ambos nodos deben tener las llaves públicas del otro.
+# cp /etc/tinc/localvpn/hosts/mi_nodo_local /etc/tinc/localvpn2/hosts/ (copiar el archivo de identidad del primer nodo a la carpeta de este segundo nodo)
+Modificar esa copia para decirle al segundo nodo dónde encontrar físicamente al primero ya que por defecto buscaría en la red externa y necesitamos que busque en tu propia máquina. Editar /etc/tinc/localvpn2/hosts/mi_nodo_local y añadir las líneas Address y Port al principio:
+# nano /etc/tinc/localvpn2/hosts/mi_nodo_local
+       Address = 127.0.0.1
+       Port = 655
+       Subnet = 10.0.0.1/32
+Continua con la llave del primer nodo. Añadir las mismas dos lineas al archivo del otro nodo /etc/tinc/localvpn/hosts/mi_nodo_local.
+# cp /etc/tinc/localvpn2/hosts/nodo_dos /etc/tinc/localvpn/hosts/ (dar una copia de la identidad del segundo nodo al primero)
+# cp /etc/tinc/localvpn/hosts/mi_nodo_local /etc/tinc/localvpn2/hosts/ (copiar el archivo de identidad del primer nodo a la carpeta del segundo nodo)
+# tincd -n localvpn2 -K ((genera las claves dentro de esa red específica)
+Presionar Enter en las dos preguntas para guardar los archivos por defecto en /etc/tinc/localvpn2/.
+# cp /etc/tinc/localvpn2/hosts/nodo_dos /etc/tinc/localvpn/hosts/ (volver a copiar para actualizarlo con las llaves publicas)
+# nano /etc/tinc/localvpn2/tinc-up (crear el script de red tinc-up para el Segundo Nodo)
+       #!/bin/sh
+       ip link set $INTERFACE up
+       ip addr add 10.0.0.2/24 dev $INTERFACE
+# chmod +x /etc/tinc/localvpn2/tinc-up (darle permisos de ejecución)
+Una prueba rápida para ver el navegador usar la VPN es levantar un mini servidor web temporal escuchando únicamente en la IP del segundo nodo [10.0.0.2]:
+$ python3 -m http.server 8080 --bind 10.0.0.2
+Entrar en el navegador a la dirección http://10.0.0.2:8080 y se verá los archivos de la carpeta en el navegador y el tráfico va del navegador a la interfaz localvpn,  cifrado por tinc, interfaz localvpn2 y al servidor web. Si se mira las terminales de tincd, se verá actividad de paquetes [Sending PACKET / Got PACKET] en tiempo real.
+# killall tincd -9 (matar conexión de forma rápida)
+
+
 tinfoleak
 [tweepy]Mostrar información de twitter sobre un nick concreto. Descarga: <http://vicenteaguileradiaz.com/tools/>
 registro en twitter:
