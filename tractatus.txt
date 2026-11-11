@@ -61151,27 +61151,6 @@ $ tart -cust (desactivar las líneas personalizadas si se quiere solo la frase a
 $ tart +n (aladir la fecha en la firma)
 
 
-task
-[taskwarrior]. Gestor de tareas minimalista.
-$ task add Titulo Entrada (añadir una tarea)
-$ task list (ver la lista de tareas)
-$ task 1 done (marcar una entrada como completada)
-$ task add project:DocsPendientes Titulo Entrada (organizar en proyectos)
-$ task add recur:monthly (programar tareas que se repiten en el tiempo)
-$ task add pri:H Titulo Entrada (establecer prioridades: H=high, M=medium, L=low)
-$ $ task all (ver incluso las taareas vencidas)
-$ task 5 start (indicar que la tarea 5 ha empazado)
-$ task 5 modify due:'2024-12-15' (o que la dejamos para otro dia)
-$ task project:DocsPendientes (ver todas las tareas dentro del proyecto mencionado)
-$ task -tag list (lista todas las tareas sin el tag "tag")
-$ task +tag list (lista todas las tareas con el tag "tag")
-$ task long (ver las tareas en formato largo)
-$ task +WEEK list (lista las tareas con el deadline de esta semana)
-$ task +DUETODAY list (lista todas las tareas con el deadline de hoy)
-$ task due.after:yesterday and due.before:thursday (filtraar de forma más especifica)
-$ task 5 project:DocsPendientes (añadir a la tarea 5 al proyecto DocsPendientes)
-
-
 tasksel
 Interfaz para la instalación de grupos de paquetes relacionados con un propósito común, como pilas LAMP, servidores de correo, entornos de escritorio...
 # tasksel (abre la interfaz)
@@ -61189,6 +61168,42 @@ tasksh> exec ip a (cualquier comando de shell. También se puede usar "!ip a")
 tasksh> help (ayuda)
 tasksh> diagnostics (diagnóstico)
 tasksh> quit (fin de la sesión. También se puede usar "exit")
+
+
+taskwarrior
+Gestor de listas de tareas basado en consola. Para modificar colores en ~/.taskrc
+$ task add Revisar el código del script de automatización (entrar una tarea)
+$ task list (visualizar las tareas)
+$ task all (ver incluso las tareas vencidas)
+$ task 1 done (marcar la tarea IP 1 como completada)
+$ task 2 delete (borrar la tarea con ID 2 según "task list")
+$ task add pro:Trabajo Enviar el reporte mensual antes del viernes (poner un nombre de proyecto a una tarea)
+$ task add pro:Trabajo due:friday Entregar el proyecto final (añadir fecha limite de una tarea. Acepta: tomorrow, friday, eom [end of month], o fechas normales como 2026-11-15 todo en inglés)
+$ task project:Trabajo list (ver solo las tareas de un proyecto específico)
+$ task long (expande las columnas y muestra las anotaciones completas desplegadas justo debajo de la tarea directamente en el listado principal)
+$ task undo (deshacer la última acción)
+$ task add recur:monthly (programar tareas que se repiten en el tiempo)
+$ task 1 modify pro:Importante (si no la tenia, añadir a la tarea ID 1 en el apartado proyecto la palabra "Importante")
+$ task mensual list (buscar cualquier tarea que contenga "mensual")
+$ task mensual (lo mismo mostrando las notas añadidas)
+$ task project.none: list (buscar tareas que no sean de un proyecto)
+$ task 1 modify pri:H (asignar a la tarea 1 prioridades: H [High/Alta], M [Medium/Media] o L [Low/Baja])
+$ task add pri:H Titulo Entrada (lo mismo con una estrada nueva)
+$ task 2 annotate "subir apuntes de bash a github" (añadir a la tarea ID 2 una anotación. Coloca en la tarea 2 "[1]")
+$ task completed (historial de tareas completadas)
+$ task status:deleted list (ver las tareas eliminadas)
+$ task history (ver el historial de las tareas añadidas, completadas y eliminadas)
+$ task 1 3 modify project:Trabajo (meter las tareas 1 y 3 en el proyecto Trabajo)
+$ task 1 info (radiografía completa de la tarea)
+$ task 5 start (indicar que la tarea 5 ha empazado)
+$ task 5 modify due:'2024-12-15' (o que la dejamos para otro dia)
+$ task project:DocsPendientes (ver todas las tareas dentro del proyecto mencionado)
+$ task -tag list (lista todas las tareas sin el tag "tag")
+$ task +tag list (lista todas las tareas con el tag "tag")
+$ task +WEEK list (lista las tareas con el deadline de esta semana)
+$ task +DUETODAY list (lista todas las tareas con el deadline de hoy)
+$ task due.after:yesterday and due.before:thursday (filtraar de forma más especifica)
+$ task 5 project:DocsPendientes (añadir a la tarea 5 al proyecto DocsPendientes)
 
 
 tasty-discover
