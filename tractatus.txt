@@ -27260,8 +27260,10 @@ Lanzar el sniffer de conversaciones msn:
 
 
 imv
-[renameutils]. Permite renombrar interactivamente los nombres de los archivos uno por uno.
-$ imv dir/archivo.txt
+Visor de imágenes para X11 y Wayland, dirigido a usuarios de gestores de ventanas en mosaico y admite decenas de formatos de imagen, incluyendo PNG, BMP, JPEG, TIFF, SVG y HEIF. Sus ejecutables son imv-dir, imvirt, imvirt-report, imv-msg, imv-wayland y imv-x11.
+$ imv-x11 archivo.gif (mostrar un gif)
+$ imv-dir Images/ (ver las imágenes de un directorio)
+$ imvirt-report captura.png (obtener un informe de la imagen)
 
 
 inadyn
@@ -51051,6 +51053,18 @@ Substituir parte del nombre de unos archivos ("DSC") por otro ("Fotos")
 	$ rename 's/DSC/Fotos/' *.jpg
 	$ ls
 	Fotos_8362.jpg Fotos_8374.jpg Fotos_8378.jpg Fotos_9112.jpg
+
+
+renameutils
+Conjunto de programas diseñados para facilitar el cambio de nombre de archivos. Los programas son deurlname, icp, imv, qcp y qmv.
+$ qmv (abre todas los archivo del directorio en un editor y pueden modificarse los que se deseen)
+1.-
+Proceso renombrando un archivo
+$ touch file\ con\ espacios.txt
+$ ls
+'file con espacios.txt'
+$ imv file\ con\ espacios.txt
+> file con espacios.txt (se modifica esta linea renombrando al archivo)
 
 
 renattach
