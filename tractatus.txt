@@ -9799,6 +9799,7 @@ $ curl ipinfo.io/183.61.164.202 (Conocer datos de una ip)
 $ curl icanhazip.com (Conocer la IP externa)
 $ curl ifconfig.me (lo mismo)
 $ curl -u usuario:clave --silent "https://mail.google.com/mail/feed/atom" | perl -ne 'print "\t" if /<name>/; print "$2\n" if /<(title|name)>(.*)<\/\1>/;' (visualizar todos los mensajes no leidos de gmail)
+$ curl -s https://ipinfo.io (mostrará en formato JSON la ciudad [city], región [region], país [country], proveedor [org], código postal, IP... de la conexión)
 $ curl -s 'http://geoiplookup.wikimedia.org/' | sed 's/^.*=\s*//' | python3 -mjson.tool (muestra la situación geográfica)
 $ curl -s http://geoiplookup.wikimedia.org/ | python3 -c 'import sys, json, string, webbrowser; webbrowser.open(string.Template("http://maps.google.com/maps?q=$lat,$lon").substitute(json.loads(sys.stdin.read().split("=")[-1])))' (Lo mismo pero abriendo una pestaña en el navegador)
 $ curl -s http://www.census.gov/popclock/data/population/world | awk -F'[:,]' '{print $7}' (Muestra el número de habitantes de la tierra)
@@ -62393,7 +62394,7 @@ $ tin -r (abre la interfaz de la aplicación)
 
 
 tinc
-Es un demonio que permite crear una red privada virtual (VPN). Un mismo demonio puede gestionar múltiples conexiones, por lo que es posible crear una VPN completa utilizando únicamente un demonio en cada equipo participante. tinc no funciona como una VPN comercial, estilo NordVPN o CyberGhost, cuyo objetivo es capturar todo el tráfico web, cifrarlo y sacarlo a internet a través de un servidor remoto sinó para crear redes privadas superpuestas. Su único trabajo es crear un "conducto virtual" exclusivo para las IPs que pertenezcan a un rango concreto. En el ejemplo siguiente, el rango 10.0.0.0/24. El proceso para crear una VPN local pdría ser:
+Es un demonio que permite crear una red privada virtual (VPN). Un mismo demonio puede gestionar múltiples conexiones, por lo que es posible crear una VPN completa utilizando únicamente un demonio en cada equipo participante. tinc no funciona como una VPN comercial, estilo NordVPN o CyberGhost, cuyo objetivo es capturar todo el tráfico web, cifrarlo y sacarlo a internet a través de un servidor remoto sinó para crear redes privadas superpuestas. Su único trabajo es crear un "conducto virtual" exclusivo para las IPs que pertenezcan a un rango concreto. En el ejemplo siguiente, el rango 10.0.0.0/24. El proceso para crear una VPN local podría ser:
 $ ip addr show  (si no se ve ninguna interfaz nueva, normalmente llamada tun0 o tap0, el PC no está dentro de la VPN)
 # tincd -c /etc/tinc -k (detener el servicio. Si está gestionado por systemd detenerlo tambien con systemctl stop)
 # systemctl status tinc.service (comprobar estado)
@@ -62662,6 +62663,29 @@ windows:
       - ip a
       - df -h
 $ tmuxp load mi_tmux2.yaml (para lanzarlo)
+
+
+todo.txt-base
+Permite gestionar tareas con un contexto detallado mediante un archivo de texto plano. Incluye las herramientas backuptodo, cdtodo, edittodo, listtodo, todo.txt, todo.txt-base y vitodo.
+$ todo.txt --info (muestra donde está el archivo de tareas y el ejecutable)
+$ topydo add Comprar agua en el super +familia @bebidas (añadir una nueva entrada en el archivo de tareas con los tag del proyecto "familia" y el contexto "bebidas"
+$ topydo add Mirar como estamos de agua (nueva entrada sin prioridad ni tags)
+$ edittodo (edita el archivo de tareas con el editor por defecto)
+$ listtodo (genera un .odt y lo abre con las tareas @ [por contexto])
+$ listtodo -t (lo imprime en terminal)
+$ listtodo -t -p B (solo tareas (B) y superiores (A) con el tag @, en terminal)
+S listtodo -t -p A (solo las (A) con el tag @ en terminal)
+$ backuptodo -b ~/respaldos/todo -n 10 (copia de seguridad, guardada en el archivo especificado y cantidad de copias a guardar, ideal para meter en un cron)
+$ topydo ls (lista todas las tareas el archivo todo.txt)
+$ topydo ls familia (lista las tareas con el tag "familia")
+$ topydo append 9 y postres (añade a la entrada 9 el texto mencionado)
+$ topydo del 9 (elimina la tarea número 9)
+$ topydo depri 8 (suprimir la prioridad de la tarea 8)
+$ topydo do 3 6 (marca como completadas las tareas 3 y 5 y "topydo ls" ya no las mostrará)
+$ topydo lscon (listado de los contextos [@])
+$ topydo lsprj (lista los proyextos [+]
+$ topydo pri 6 B (coloca la prioridad (B) a la tarea núm 6)
+$ topydo revert 6 (revierte la prioridad puesta antes a la que tenia)
 
 
 toe
