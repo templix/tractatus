@@ -62478,6 +62478,12 @@ $ python tinfoleak.py -n usuario -f palabra (Mostrar publicaiones del usuario qu
 $ python tinfoleak.py -n usuario -bsgthmc 1000 --sdate 2014/10/01 --stime 08:00:00 -etime 22:00:00 (Mostrar información básica del usuario, apps, hashtags usados, menciones, coordenadas, fehca y hora de cada twit, analizando los últimos 1000 twits desde la fehca especificada y en la franja horaria de 8 a 22 horas)
 
 
+tint2
+Panel o barra de tareas sencillo, diseñado específicamente para Openbox 3, aunque también funciona con otros gestores de ventanas. Ejemplos de configuración en /usr/share/doc/tint2/html/manual.html.
+$ tint2
+$ tint2 -c ~/.config/tint2/tint2.conf (especificando el archivo de configuración)
+
+
 tinycdb
 Es parte de una biblioteca que permite trabajar con bases de datos de solo lectura llamadas CDB [Constant DataBase - datos constantes]. Una vez que se crea una base de datos CDB, no se puede modificar.
 $ cdb -d ejemplo.cdb > extraidos.dat (extrae los datos almacenados en "ejemplo.cdb" y los guarda en el nuevo archivo "extraidos.dat")
@@ -62491,6 +62497,11 @@ clave2 valor2
 clave3 valor3
 $ cdbmake base.cdb < data.txt (se crea la base de datos)
 $ cdb -r base.cdb clave1 (busca un valor asociado a una clave específica)
+
+
+tinymembench
+Herramienta sencilla para evaluar el rendimiento de la memoria que intenta medir el ancho de banda máximo de los accesos secuenciales a memoria y la latencia de los accesos aleatorios. El ancho de banda se mide ejecutando código ensamblador diferente para los bloques de memoria alineados y probando distintas estrategias de precarga.
+$ tinymembench
 
 
 tinyproxy
