@@ -24186,20 +24186,17 @@ gsettings
 Herramienta de configuración. Equivalente a gconftool-2 [gconf-editor] pero para gnome3 [dconf-editor]
 $ gsettings set com.canonical.indicator.session show-real-name-on-panel false (Borrar el nombre del panel de unity)
 $ gsettings set com.canonical.indicator.sound blacklisted-media-players "['xmms2']" (añadir aplicaciones en el menú de sonido)
-Opciones
-help (Muestra informacion)
-list-schemas (Lista de esquemas instalados)
-list-relocatable-schemas (Lista los que pueden ser modificados)
-list-keys (Lista las claves de un esquema)
-list-children	 (lista los procesos hijos de un esquema)
-list-recursively (Lista claves y valores recursivamente)
-range (Consulta el rango de la clave)
-get (Obtine el valor de una clave)
-set (Establece el valor de una clave)
-reset (Reinicia el valor de la clave)
-reset-recursively (Reinicia los valores de todo un esquema)
-writable (Comprueba si un clave es modificable)
-monitor (Hace un seguimiento por si hay cambios)
+$ gsettings list-schemas (Lista de esquemas instalados)
+$ gsettings list-relocatable-schemas (Lista los que pueden ser modificados)
+$ gsettings list-recursively (Lista claves y valores recursivamente)
+1.-
+Activar proxy del sistema a nivel de entorno de escritorio de Gnome
+$ gsettings set org.gnome.system.proxy mode 'manual'
+$ gsettings set org.gnome.system.proxy.http host '127.0.0.1'
+$ gsettings set org.gnome.system.proxy.http port 8888
+$ gsettings set org.gnome.system.proxy.https host '127.0.0.1'
+$ gsettings set org.gnome.system.proxy.https port 8888
+$ gsettings set org.gnome.system.proxy mode 'none' (desactivarlo y volver al estado normal)
 
 
 gsm-utils
@@ -62517,15 +62514,21 @@ Cuando se quiera usar con el navegador entrar los datos del proxy en Opciones --
 
 
 tiptop
-Herramienta que proporciona una vista dinámica en tiempo real de las tareas que se ejecutan en el sistema. A menos que tiptop sea ejecutado por root, el usuario solo puede monitorear las tareas que posee.
-$ tiptop (arrancar el monitoreo. "q" para cerrar)
-# tiptop -u USER (las de un usuario)
+Herramienta de monitorización del rendimiento para Linux. Ofrece una vista dinámica en tiempo real de las tareas que se ejecutan en el sistema. Tiptop es muy similar a la utilidad top [ver], pero la mayor parte de la información que muestra proviene de contadores de hardware.
+# tiptop (arrancar el monitoreo. "q" para cerrar)
+# tiptop -b -n 4 (inicia en modo por lotes [batch mode] y muestra 4 interacciones. Sin el parámetro -n se ejecuta indefinidamente hasta terminarlo con Ctrl-C)
+# tiptop -c (muestra la línea de comandos de la tarea en lugar de su nombre)
+# tiptop -d 1.5 (intervalo de tiempo entre actualizaciones un segundo y medio)
+# tiptop -i -E docs/errores (muestra las tareas inactivas y especifica el archivo donde se registran los errores)
+# tiptop --list-screens (lista pantallas disponibles)
+# tiptop -u USER -o salida (muestra únicamente las tareas que pertenecen a USER y especifica el nombre de archivo para la salida del modo por lotes)
+# tiptop -U --timestamp (muestra el propietario de cada tarea y pone una marca de tiempo al principio de cada fila en el modo por lotes. En el modo en tiempo real, la marca se sitúa en la parte inferior de la pantalla)
 
 
 tiv
 Visor de imágenes de alta resolución que utiliza colores ANSI RGB de 24 bits y caracteres Unicode en bloque, los cuales crean una celda de 4x8 píxeles por cada carácter. Gracias al uso de estos caracteres Unicode en bloque, se puede obtener una imagen de mayor resolución en el mismo espacio de pantalla.
 $ tiv archivo.png (forma básica)
-$ tiv -2 zrchivo.jpeg(usar colores de 256 bits)
+$ tiv -2 archivo.jpeg (usar colores de 256 bits)
 
 
 tleds
