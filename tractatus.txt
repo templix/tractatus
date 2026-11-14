@@ -34951,6 +34951,13 @@ $ memstat -p PID
 
 memtest86
 [memtest86+]. Software diseñado para encontrar problemas que pueden afectar a los módulos de memoria RAM del equipo. La aplicación requiere iniciarse independiente del sistema operativo y consiste en escribir una serie de datos con 9 patrones de escritura distintos a la totalidad de direcciones de la memoria RAM. Una vez realizada la escritura se leerá el contenido escrito en la memoria RAM y se comprobará que sea el mismo que el contenido original. La duración del test es infinita y por lo tanto deberemos ser nosotros mismos cuando decidimos pararlo, o sea que cada "pasada" significa escribir y leer los 9 patrones de escritura distintos una vez. Si se realizan 3 "pasadas" significa repetir el test completo 3 veces. Si no se desactiva la opción se encuentra en el gestor de arranque grub [ver]
+1.-
+Activar memtest en el menú grub
+Una vez instalado memtest86+ crea el archivo /etc/grub.d/20_memtest86+.
+# sudo chmod +x /etc/grub.d/20_memtest86+ (darle permisos de ejecución)
+Revisar que no esté desactivado en la configuración general abriendo /etc/default/grub y que no aparezca la linea GRUB_DISABLE_MEMTEST=true. Si aparece, o borrarla o cambiar a false
+# update-grub (actualizar la configuración de GRUB)
+Reiniciar y comprobar que ya sale en el menú de inicio de grub.
 
 
 memtester
