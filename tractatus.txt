@@ -62631,6 +62631,36 @@ $ tirex-status --once --extended (mostrar información más detallada)
 # tirex-batch --prio=5 map=osm z=10 x=512 y=341 (solicita un trabajo para esa ubicación y nivel de zoom, siempre que exista una capa osm correctamente configurada)
 
 
+titantools
+Herramientas pensadas para reforzar la seguridad de equipos bastión. Su filosofía es ofrecer herramientas pequeñas, especializadas y auditables, en lugar de soluciones complejas como sudo completo cuando solo se necesita un subconjunto de funcionalidad.Ofrece dos herramientas incluidas en el paquete noshell y runas. noshell es un shell que no permite ejecutar ningún comando. Se asigna como shell de login a cuentas que deben existir en el sistema pero que nunca deben tener una sesión interactiva. /bin/false termina con código de salida 1, sin dejar rastro, /usr/sbin/nologin muestra un mensaje pero no registra el intento de forma útil pero noshell registra el intento de login en syslog lo que facilita la detección de intrusiones y es más difícil de eludir mediante trucos con ~/.rhosts, SSH keys mal configuradas, etc.
+# adduser --system --shell /usr/sbin/noshell --home /srv/miapp miapp (crear una cuenta de servicio con noshell)
+# chsh -s /usr/sbin/noshell ftpuser (cambiar el shell de una cuenta existente)
+$ echo "/usr/sbin/noshell" | sudo tee -a /etc/shells (añadirlo a shells por si algún programa como ftpd o chsh exige que el shell aparezca en /etc/shell)
+$ grep noshell /var/log/auth.log (muestra quién ha intentado o conseguido usar cuentas de servicio)
+El comando runas se basa en el archivo de configuración que puede tener un contenido como:
+# nano /etc/runas.conf
+root : juan : /etc/init.d/apache2 restart
+root : juan : /etc/init.d/apache2 reload
+root : pedro : /usr/bin/apt update
+root : pedro : /usr/bin/apt upgrade
+Nota.- Preferible usar rutas absolutas para los ejecutables.
+Permite al usuario juan ejecutar los comandos "apache2 restart" y "reload" como usuario root y al usuario pedro los comandos "apt update" y "upgrade". Lanzar el comando como juan:
+$ runas root /etc/init.d/apache2 restart
+Y si se está logeado como pedro:
+$ runas root /usr/bin/apt update
+1.-
+Combinado runas con noshell
+Imaginar una cuenta backup con shell noshell, es decir que no puede loguearse, pero se quiere que el operador juan pueda lanzar manualmente una copia de seguridad como backup:
+# nano /etc/passwd
+...
+backup:x:1001:1001::/var/backups:/usr/sbin/noshell
+...
+# nano /etc/runas.conf
+backup : juan : /usr/local/bin/run-backup.sh
+$ runas backup /usr/local/bin/run-backup.sh
+El operador ejecuta el script con los permisos de backup, pero nunca puede abrir una shell interactiva como backup porque noshell lo impide.
+
+
 tiv
 Visor de imágenes de alta resolución que utiliza colores ANSI RGB de 24 bits y caracteres Unicode en bloque, los cuales crean una celda de 4x8 píxeles por cada carácter. Gracias al uso de estos caracteres Unicode en bloque, se puede obtener una imagen de mayor resolución en el mismo espacio de pantalla.
 $ tiv archivo.png (forma básica)
