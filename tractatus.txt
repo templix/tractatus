@@ -62502,15 +62502,102 @@ $ tinymembench
 
 
 tinyproxy
-Crear un proxy HTTP. editar el archivo de configuración:
+Proxy HTTP ligero, sin caché y con opción de anonimización que consume muy pocos recursos del sistema. Al no tener caché, su uso principal es para control de acceso, filtrado de URLs, anonimización o como proxy de salida para entornos restringidos. Tinyproxy también se puede configurar para anonimizar las solicitudes HTTP permitiendo excepciones por encabezado.
+# systemctl status tinyproxy.service (comprobar su estado. Tras la instalación, el servicio arrancará automáticamente, pero por defecto solo escucha en 127.0.0.1 [localhost])
+1.-
+Función bash para alternar entre usar o no proxy en la terminal
+Akadir a ~/.bashrc el código siguiente:
+#!/usr/bin/env bash
+toggle_proxy() {
+    if [ -z "${http_proxy:-}" ]; then
+        export http_proxy="http://127.0.0.1:8888"
+        export https_proxy="http://127.0.0.1:8888"
+        echo "✅ Proxy Tinyproxy ACTIVADO en esta sesión."
+    else
+        unset http_proxy https_proxy
+        echo "❌ Proxy DESACTIVADO."
+    fi
+}
+$ source ~/.bashrc
+Al escribir toggle_proxy en la terminal, se cambia el estado de las variables de entorno.
+2.-
+Ejemplos de un filtro y de la configuración del comando.
+Un filtro a modo de ejemplo
+   # nano /etc/tinyproxy/filter
+   # Lista negra de dominios a bloquear
+   # Cada línea es una expresión regular que se aplica a la URL completa
+   # Bloquear trackers de Google
+   google-analytics\.com
+   doubleclick\.net
+   # Bloquear anuncios comunes
+   ads\.
+   tracker\.
+   analytics\.
+Algunas de la opciones:
 # nano /etc/tinyproxy/tinyproxy.conf
-descomentar las lineas:
-	Allow 127.0.0.1 (Si solo queremos conexión en nuestra máquina)
-	Port 5023 (modificar el puerto). Por defecto 8888)
-	DisableViaHeader Yes (Desactivar la cabecera)
-# etc/init.d/tinyproxy restart (Reiniciar el servicio)
-Los errores se almacenan en /var/log/tinyproxy/tinyproxy.log
-Cuando se quiera usar con el navegador entrar los datos del proxy en Opciones -- Avanzado -- Red
+   Port 8888
+   Listen O 0.0.0.0 # para escuchar en todas las interfaces
+   Filter "/etc/tinyproxy/filter" # usar filtro personalizado
+   Allow 127.0.0.1
+   Allow ::1
+   Allow 192.168.18.0/24  # <-- ESTO ES OBLIGATORIO, si no, bloquea lau propia IP
+   DisableViaHeader Yes # Opcional: Ocultar que se está usando un proxy
+   FilterDefaultDeny No # NO bloquea por defecto, solo lo que está en la lista
+   FilterExtended Yes # Usa expresiones regulares extendidas
+   FilterCaseSensitive No # No distingue mayúsculas/minúsculas
+   FilterURLs Yes # Filtra la URL completa, no solo el dominio
+$ sudo systemctl restart tinyproxy (despues de modificar el archivo, reiniciar el servicio)
+
+
+tinyssh
+Servidor SSH muy pequeño y restringido pensado para ofrecer acceso remoto seguro con una superficie de código y de funcionalidades mínima, no para sustituir a OpenSSH en usos avanzados. Solo admite criptografía segura con un nivel de seguridad mínimo de 128 bits y protección frente a ataques de temporización basados en caché, incluyendo ED25519, X25519/Curve25519 y CHACHA20POLY1305 e implementa exclusivamente la autenticación mediante clave pública; no admite autenticación por contraseña ni basada en el host ni reenvío de puertos/X11/agent, compresión ni el protocolo SSH1. tinysshd es solo el demonio/servidor; el cliente SSH habitual sigue siendo, por ejemplo, ssh de OpenSSH.
+# systemctl enable --now tinysshd.socket (arrancar el servidor con la forma recomendada por la página de manual es usar activación por socket)
+La unidad tinysshd.socket escucha en el puerto 22 y lanza una instancia por conexión; tinysshd-makekey se ejecuta previamente si el directorio de claves no existe.
+# tinysshd-makekey /etc/tinyssh/sshkeydir (crea las claves de host que TinySSH usará para identificarse ante los clientes)
+# tinysshd-printkey /etc/tinyssh/sshkeydir (ver la huella de la clave del servidor)
+# systemctl status tinysshd.socket (comprobar si está activo)
+# ss -ltnp | grep ':22' (otra forma de verificarlo)
+# tinysshd -e '/usr/bin/git-shell' /etc/tinyssh/sshkeydir (permitir ejecutar solo un comando concreto)
+# tinysshd -x sftp=/usr/libexec/openssh/sftp-server /etc/tinyssh/sshkeydir (TinySSH no incluye un programa sftp, pero puede delegar el subsistema al binario de OpenSSH si está instalado)
+$ sftp ana@192.168.1.50 (y después se podrá usar el comando habitual)
+# tinysshd -l -v /etc/tinyssh/sshkeydir (envía los mensajes a syslog y ejecuta en primer plano con mensajes detallados)
+# busybox tcpsvd 0 22 tinysshd -v /etc/tinyssh/sshkeydir (tcpsvd acepta conexiones TCP en el puerto 22 y pasa cada conexión a tinysshd)
+$ ssh ana@192.168.1.50 (conexión desde un cliente de forma normal
+$ ssh -p 2222 ana@192.168.1.50 (si TinySSH escucha en otro puerto)
+La autenticación debe realizarse con la clave privada Ed25519 correspondiente a la pública incluida en authorized_keys; si no está disponible, la conexión no podrá autenticarse por contraseña.
+
+
+tio
+Herramienta para dispositivos serie que ofrece una interfaz directa, basada en línea de comandos y archivos de configuración, para conectar fácilmente con dispositivos serie TTY y realizar operaciones básicas de entrada/salida (E/S). Incluye soporte para la transferencia de archivos mediante los protocolos X-modem e Y-modem, RS-485, reasignación de caracteres [NL, CR, etc.], modo hexadecimal, marcas de tiempo, registro en archivo, redireccionamiento a través de tuberías y sockets, así como soporte para scripts en Lua. Además, es capaz de reconectarse automáticamente a dispositivos TTY que desaparecen de forma intermitente, como ocurre, por ejemplo, con los convertidores de USB a serie.
+# usermod -aG dialout $USER (para acceder a /dev/ttyUSB0 o /dev/ttyACM0 sin ser root, el usuario debe estar en el grupo dialout. Reiniciar la sesión)
+$ tio -L (ver qué dispositivos hay)
+$ tio -b 9600 /dev/ttyUSB0 (conectar)
+$ tio -b 57600 -d 8 -p none -s 1 /dev/ttyACM0 (cambiar todos los parámetros)
+$ tio -f hard /dev/ttyUSB0 (control de flujo [hard|soft|none])
+$ tio -t -l --log-file ~/arduino.log /dev/ttyACM0 (marcas de tiempo y log a archivo)
+$ tio -m INLCRNL /dev/ttyUSB0 (reasignar caracteres. Convierte NL entrante en CR+NL)
+$ tio -m ODELBS /dev/ttyUSB0 (reasignar caracteres. de Delete a Backspace al enviar)
+$ tio -x /dev/ttyUSB0 (reconexión automática que viene activada por defecto. Si se desenchufa y se vuelve a enchufar el conversor, tio retoma la sesión)
+$ tio -n (desactivar la reconexión automática)
+$ tio -e /dev/ttyUSB0 (realizar un erco local si el dispositivo no devuelve lo que se escribe)
+$ tio --script "expect('login:'); send('root\n')" /dev/ttyUSB0 ((automatizar un login con lua)
+$ tio --script-file login.lua (o desde un archivo)
+$ tio /dev/ttyUSB0 < comandos.txt (enviar datos sin interactuar)
+Dentro de la interfaz de tio una vez conectados, los atajos son:
+Ctrl-t ? --> Lista de atajos
+Ctrl-t q --> Salir
+Ctrl-t c --> Mostrar la configuración actual
+Ctrl-t e --> Activar/desactivar eco local
+Ctrl-t h --> Modo hexadecimal
+Ctrl-t t --> Marcas de tiempo
+Ctrl-t f --> Activar/desactivar registro en archivo
+Ctrl-t l --> Limpiar pantalla
+Ctrl-t b --> Enviar señal break
+Ctrl-t s --> Estadísticas (bytes enviados/recibidos)
+Ctrl-t x --> Enviar archivo por XMODEM
+Ctrl-t y --> Enviar archivo por YMODEM
+Ctrl-t r --> Ejecutar un script Lua
+Ctrl-t t t --> Enviar un Ctrl-t literal
 
 
 tiptop
