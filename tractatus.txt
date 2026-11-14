@@ -62612,6 +62612,18 @@ Herramienta de monitorización del rendimiento para Linux. Ofrece una vista din�
 # tiptop -U --timestamp (muestra el propietario de cada tarea y pone una marca de tiempo al principio de cada fila en el modo por lotes. En el modo en tiempo real, la marca se sitúa en la parte inferior de la pantalla)
 
 
+tirex
+Conjunto de herramientas para administrar un servidor de generación de mosaicos cartográficos, especialmente mosaicos ráster utilizados en mapas web. Por ejemplo, cuando se visualiza un mapa de OpenStreetMap en una página web, normalmente no se genera una imagen completa del territorio cada vez que se accede. El mapa se divide en pequeñas imágenes cuadradas [tiles], que se generan previamente o bajo demanda y se almacenan en disco. Un ráster consta de una matriz de celdas o píxeles organizadas en filas y columnas o una cuadrícula en la que cada celda contiene un valor que representa información, como la temperatura. Los rásteres son fotografías aéreas digitales, imágenes de satélite, imágenes digitales o incluso mapas escaneados. Su función principal es coordinar la generación de imágenes de mapas a partir de datos geográficos y almacenarlas en una caché para que puedan servirse posteriormente sin tener que volver a renderizarlas. Ejemplos de configuración en /etc/tirex/renderer/mapnik/tirex-example.conf, Estas herramientas son tirex-backend-manager, tirex-batch, tirex-check-config, tirex-master, tirex-rendering-control, tirex-send, tirex-status, tirex-tiledir-check y tirex-tiledir-stat.
+# systemctl status tirex-master (comprobar si está activo)
+$ tirex-check-config (comprobar si la configuración de Tirex presenta errores o advertencias)
+$ tirex-status (muestra el estado del sistema y las colas de trabajos)
+$ tirex-status --once --extended (mostrar información más detallada)
+# tirex-master --debug --foreground (que se ejecute en primer plano para observar los mensajes de depuración)
+# systemctl status tirex-backend-manager (si se utiliza Mapnik, el backend correspondiente es el que ejecutará Mapnik para producir los mosaicos, comprobar si está activo)
+# tirex-batch --prio=1 map=test z=0 x=0 y=0 ((prioridad del trabajo, nombre de la capa o mapa configurado, nivel de zoom, y coordenadas horizontal y vertical)
+# tirex-batch --prio=5 map=osm z=10 x=512 y=341 (solicita un trabajo para esa ubicación y nivel de zoom, siempre que exista una capa osm correctamente configurada)
+
+
 tiv
 Visor de imágenes de alta resolución que utiliza colores ANSI RGB de 24 bits y caracteres Unicode en bloque, los cuales crean una celda de 4x8 píxeles por cada carácter. Gracias al uso de estos caracteres Unicode en bloque, se puede obtener una imagen de mayor resolución en el mismo espacio de pantalla.
 $ tiv archivo.png (forma básica)
