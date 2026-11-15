@@ -62710,6 +62710,10 @@ set ::tkcon::OPT(maineval) {
 }
 
 
+tkdad
+Extensión que añade capacidades nativas de "arrastrar y soltar" al kit de herramientas Tk.
+
+
 tleds
 Monitoreo del tráfico de red con los leds del teclado. Si el teclado posee los 3 leds de arriba del teclado numérico puede simularse las luces del router con esta aplicación.
 # tleds -d 10 wlan0 (con actualización cada 10 milisegundos)
@@ -62733,6 +62737,43 @@ Otras opciones:
 	-r (de la radio)
 	-t (temperaturas)
 	-w (errores)
+
+
+tlsrouter
+Herramienta que se utiliza para dirigir conexiones TLS [Transport Layer Security] a diferentes servidores basándose en varias reglas, como el encabezado Host de una petición HTTP o el nombre de servidor SNI [Server Name Indication]. Esto es útil en implementaciones donde múltiples servicios TLS están corriendo en el mismo puerto, como un servidor que sirve a varios dominios.
+1.-
+Un ejemplo de uso podría ser: dos servicios, uno corriendo en service1.example.com y otro en service2.example.com. Crear el archivo de configuración:
+$ sudo nano /etc/tlsrouter/config.yml
+services:
+  - name: "service1"
+    match:
+      host: "service1.example.com"
+    upstream:
+      addr: "127.0.0.1:8081"  # Dirección del servicio 1
+
+  - name: "service2"
+    match:
+      host: "service2.example.com"
+    upstream:
+      addr: "127.0.0.1:8082"  # Dirección del servicio 2
+$ tlsrouter -conf /etc/tlsrouter/config.yml (iniciar el servicio)
+2.-
+Ejemplo de configuración para el uso con SNI
+$ sudo nano /etc/tlsrouter/config.yml
+services:
+  - name: "service1"
+    match:
+      sni: "service1.example.com"
+    upstream:
+      addr: "127.0.0.1:8081"
+
+  - name: "service2"
+    match:
+      sni: "service2.example.com"
+    upstream:
+      addr: "127.0.0.1:8082"
+$ tlsrouter -conf /etc/tlsrouter/config.yml (iniciar el servicio)
+$ tlsrouter -config /etc/tlsrouter/config.yml -listen 5432 (especificar puerto cuando no es el por defecto 443)
 
 
 tml
