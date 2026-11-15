@@ -62667,6 +62667,49 @@ $ tiv archivo.png (forma básica)
 $ tiv -2 archivo.jpeg (usar colores de 256 bits)
 
 
+tkcon
+Consola interactiva mejorada para el desarrollo en Tcl. TkCon es un intérprete y consola para Tcl, lo que lo hace ideal para experimentar de forma interactiva con programas escritos en Tcl y Tk. Un archivo de configuración para una terminal sin adornos, barra de desplazamiento, menús, historial y sin las lineas que salen al abrir la terrminal podría ser:
+$ nano ~/.tkconrc
+tkcon font Monospace 13;
+set ::tkcon::COLOR(prompt) white
+set ::tkcon::COLOR(stdin) white
+set ::tkcon::COLOR(stdout) white
+set ::tkcon::COLOR(bg) black
+set ::tkcon::COLOR(cursor) white
+set ::tkcon::OPT(prompt1) {deb > }
+set ::tkcon::OPT(rows) 25
+set ::tkcon::OPT(cols) 120
+set ::tkcon::OPT(history) 200
+set ::tkcon::OPT(showstatusbar) 0
+set ::tkcon::OPT(showmenu) 0
+set ::tkcon::OPT(usehistory) 0
+after idle {
+    catch {grid remove $::tkcon::PRIV(scrolly)}
+    after idle {
+        ::tkcon::Prompt
+    }
+}
+set ::tkcon::OPT(maineval) {
+    rename ::puts ::tkcon::original_puts
+    proc ::puts {args} {
+        if {[llength $args] == 1} {
+            set msg [lindex $args 0]
+            if {[string match "buffer line limit:*" $msg]} {
+                return
+            }
+        }
+        tailcall ::tkcon::original_puts {*}$args
+    }
+    rename ::tkcon::Prompt ::tkcon::PromptOriginal
+    proc ::tkcon::Prompt {{pre {}} {post {}} {prompt {}}} {
+        if {[string match "*console display active (Tcl*" $pre]} {
+            return
+        }
+        tailcall ::tkcon::PromptOriginal $pre $post $prompt
+    }
+}
+
+
 tleds
 Monitoreo del tráfico de red con los leds del teclado. Si el teclado posee los 3 leds de arriba del teclado numérico puede simularse las luces del router con esta aplicación.
 # tleds -d 10 wlan0 (con actualización cada 10 milisegundos)
