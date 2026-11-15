@@ -62774,6 +62774,53 @@ $ tlsrouter -conf /etc/tlsrouter/config.yml (iniciar el servicio)
 $ tlsrouter -config /etc/tlsrouter/config.yml -listen 5432 (especificar un puerto cuando no es el por defecto 443)
 
 
+tmate
+Multiplexor de terminal que permite compartir una terminal con uno o varios colaboradores que precisan tener un token generado de forma aleatoria para unirse a una sesión. tmate es una versión modificada de tmux y utiliza la misma configuración, incluyendo atajos de teclado, esquemas de color, etc. Al arrancarlo, en vez de crear solo una sesión local, abre una conexión SSH hacia un servidor relay, por defecto ssh.tmate.io y te da unas cadenas de conexión únicas. Quien tenga esa cadena se une a la terminal, sin necesidad de abrir puertos, tocar el router ni tener IP pública, porque la conexión sale desde tu máquina hacia el relay.
+$ tmate (arranca una sesión tipo tmux)
+         ssh session:      ssh AbCdEfGhIjKlMnOp@nyc1.tmate.io
+         ssh session (RO): ssh XyZ123...@nyc1.tmate.io
+	 web session:      https://tmate.io/t/AbCdEf...
+	 web session (RO): https://tmate.io/t/XyZ123...
+Normal -->: el colaborador puede escribir.
+RO (read-only) --> solo mira. Ideal para demos o para enseñar sin riesgo de que toquen nada.
+web --> se puede ver desde el navegador.
+$ ssh AbCdEfGhIjKlMnOp@nyc1.tmate.io (el colaborador se conecta)
+$ tmate show-messages (si se te pierde el mensaje de la barra)
+$ tmate display -p '#{tmate_ssh}' (para una sola cadena)
+$ tmate display -p '#{tmate_ssh_ro}'
+$ tmate display -p '#{tmate_web}'
+$ tmate display -p '#{tmate_web_ro}'
+$ tmate -S /tmp/tmate.sock new-session -d (crear sesión en segundo plano con un socket propio)
+$ tmate -S /tmp/tmate.sock wait tmate-ready (esperar a que la conexión con el relay esté lista)
+$ tmate -S /tmp/tmate.sock display -p '#{tmate_ssh}' (sacar los enlaces)
+$ tmate -S /tmp/tmate.sock display -p '#{tmate_ssh_ro}'
+$ tmate -S /tmp/tmate.sock attach (unirte a esa sesión)
+$ tmate -F (modo foreground: sin UI, solo mantiene la sesión)
+$ tmate -k API_KEY -n mi-sesion (sesión con nombre fijo: requiere API key de tmate.io)
+El cliente debe apuntar al servidor. Configurar el cliente:
+$ nano ~/.tmate.conf
+       set -g tmate-authorized-keys "~/.ssh/authorized_keys" (restringir por clave SSH)
+       set -g tmate-server-host "mi.servidor.com"
+       set -g tmate-server-port 2222
+       set -g tmate-server-ed25519-fingerprint "SHA256:..."
+Como es tmux por debajo, los atajos son los de siempre: prefijo Ctrl-b
+     Ctrl-b d --> desconectar la sesión pero sigue viva
+     Ctrl-b c --> nueva ventana
+     Ctrl-b % / `Ctrl-b " --> dividir panel
+     exit --> en la última ventana: cierra la sesión y revoca los enlaces
+Nota.- Los enlaces son válidos solo mientras la sesión esté viva; al cerrarla, se acabó.
+
+
+tmate-ssh-server
+Este paquete contiene el servidor de tmate que juntos forman el sistema cliente/servidor. tmate-ssh-server es el servidor relay. Es el que recibe la conexión del cliente y la de los invitados, y hace de puente entre ambos. Cuando se usa tmate sin configurar nada, el cliente se conecta al servidor público ssh.tmate.io, que ejecuta precisamente este software. Este paquete permite montar el propio servidor en lugar de depender del público. Para ejecutarlo precisa como mínimo un directorio con claves de host [RSA y ed25519], que se generan con "ssh-keygen", un puerto SSH libre y accesible desde los clientes e invitados distinto del 22 si ya se tiene sshd ahí, el ejemplo habitual es el 2222 y un hostname o IP al que se pueda llegar desde ambos lados.
+Un ejemplo orientativo:
+$ mkdir -p ~/tmate-keys
+$ ssh-keygen -t ed25519 -f ~/tmate-keys/ssh_host_ed25519_key -N ''
+$ ssh-keygen -t rsa -f ~/tmate-keys/ssh_host_rsa_key -N ''
+$ tmate-ssh-server -k ~/tmate-keys -h mi.servidor.com -p 2222
+$ ssh-keygen -lf ~/tmate-keys/ssh_host_ed25519_key.pub (el cliente verifica que habla con el servidor y no con otro. Si se omites, tmate avisará de que no puede verificar la identidad del relay)
+
+
 tml
 Programa que facilita la salida de texto con color y formato en la terminal.
 $ echo "<bold><yellow># Título grande en amarillo negrita</yellow></bold>" | tml (título con colores y estilos. Probar diferencia sin el pipe)
