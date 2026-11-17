@@ -62976,21 +62976,42 @@ Si además queremos modificar que para dividir horizontalmente se realice con Ct
 tmuxinator
 Gema de ruby que permite definir pestañas, paneles y comandos que correrán en cada uno de los paneles de una sesión tmux. Cada proyecto guarda su configuración en un archivo .yml en el directorio ~/.tmuxinator. En el archivo .bashrc ha de constar la variable $EDITOR [export EDITOR=/usr/bin/vim, nano o el que sea]
 $ tmuxinator new proyecto1 (Crear un proyecto)
-$ tmuxinator proyecto1 (Abrir un proyecto)
+$ tmuxinator start proyecto1 (Abrir un proyecto)
+$ tmuxinator proyecto1 (lo mismo)
 $ tmuxinator open proyecto1 (Editar un proyecto)
 $ tmuxinator list (Listar todos los proyectos)
+$ tmuxinator debug proyecto1 (muestra como se genera internamente la sesión. Permite ver si el layout se está pasando correctamente a tmux o si hay algún problema de indentación en el YAML)
 $ tmuxinator delete proyecto1 (Suprimir un proyecto)
 $ tmuxinator doctor (Ver problemas en la configuración)
 $ tmuxinator implode (Suprimir todos los proyectos)
-Muestra de un archivo.yml:
+$ tmuxinator stop plantilla1 (matar el tmuxinator plantilla1 abierto)
+$ tmuxinator copy plantilla1 plantilla5 (copiar la plantilla1 a plantilla5 y editar esta)
+Las plantillas de guardan por defecto en el directorio ~/.config/tmuxinator/
+Muestra de un archivo.yml (la indentación es muy importante):
 	name: proyecto1
 	root: ~/
-		windows:
-			- editor:
-			layout: main-vertical
-			panes:
-				- top
-				- who; pwd
+	windows:
+	  - editor:
+	      layout: main-vertical
+	      panes:
+	        - top
+		- who; pwd
+1.-
+Abrir una ventana con distintos panels cada uno con una medida distinta.
+$ tmux new -s temp (arrancar una sesión temporal)
+Dividir la pantalla exactamente como se quiere usando los atajos habituales, que por defecto son Ctrl+b % para dividir en vertical y Ctrl+b " para dividir en horizontal y ajustar el tamaño de cada panel, con Ctrl+b + flechas o arrastrando con el ratón si está activo. Dentro de esa misma sesión, ejecutar este comando para imprimir la cadena de layout exacta con su checksum válido:
+$ tmux list-windows -F "#{window_layout}"
+       25e0,213x52,0,0{...
+Copiar la cadena que devuelva la pantalla que empezará por 4 caracteres hexadecimales seguidos de una coma y cerrar la sesión temporal con
+$ tmux kill-session -t temp
+$ tmuxinator edit plantilla1
+Y pegar en el apartado "layout" la cadena copiada
+windows:
+  - panel-principal:
+      layout: 25e0,213x52,0,0{...
+      panes:
+        - sudo tail -30 /var/log/boot.log
+...
 
 
 tmuxp
@@ -63030,6 +63051,22 @@ windows:
       - ip a
       - df -h
 $ tmuxp load mi_tmux2.yaml (para lanzarlo)
+
+
+tmux-plugin-manager
+Gestor de plugins para tmux. Utiliza git para instalar o actualizar plugins. Preferible la instalación de github.
+$ mkdir -p ~/.tmux/plugins/tmp
+$ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+Y en la configuración de tmux añadir al final las lineas:
+$ nano ~/.tmux.conf
+...
+set -g @plugin 'tmux-plugins/tpm'
+set -g @plugin 'tmux-plugins/tmux-sensible'
+run '~/.tmux/plugins/tpm/tpm'
+Una vez reiniciado.
+$ tmux show-environment -g TMUX_PLUGIN_MANAGER_PATH (comprobar si devuelve la ruta ~/.tmux/plugins/)
+$ ~/.tmux/plugins/tpm/bin/update_plugins all (con tmux corriendo recargar los plugins)
+Y dentro de tmux al pulsar Ctrl-b I muestra "TMUX environment reloaded." instala plugins nuevos. Ctrl-b U los actualiza y Alt+u actualiza solo el plugin bajo el cursor.
 
 
 todo.txt-base
