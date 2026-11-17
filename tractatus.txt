@@ -62821,6 +62821,17 @@ $ tmate-ssh-server -k ~/tmate-keys -h mi.servidor.com -p 2222
 $ ssh-keygen -lf ~/tmate-keys/ssh_host_ed25519_key.pub (el cliente verifica que habla con el servidor y no con otro. Si se omites, tmate avisará de que no puede verificar la identidad del relay)
 
 
+tmexpand
+Es un script de procesamiento de macros de texto escrito en S-Lang cuyo propósito es facilitar la creación de documentos de texto plano, HTML y SGML a partir de archivos de entrada que contienen macros especiales. Requiere el editor jed. Si no se indica archivo de salida o se usa "-", escribe en la salida estándar. Si no se indica entrada o se usa "-", lee de la entrada estándar. El proceso es el siguiente:
+$ mkdir pruebas
+$ cd pruebas
+$ cp /usr/share/doc/tmexpand/examples/help.tm .
+$ tmexpand help.tm help1.hlp
+Comprobar como se ha modificado .tm y convertido en .hlp
+$ cat help.tm
+$ cat help.hlp
+
+
 tml
 Programa que facilita la salida de texto con color y formato en la terminal.
 $ echo "<bold><yellow># Título grande en amarillo negrita</yellow></bold>" | tml (título con colores y estilos. Probar diferencia sin el pipe)
@@ -62828,6 +62839,36 @@ $ echo "Normal, <italic>cursiva</italic>, <underline>subrayado</underline>, <dim
 $ echo "<bold><red_bg><white>ERROR con fondo rojo y texto blanco</white></red_bg></bold>" | tml
 $ echo "Esto es <red>rojo</red>, <green>verde</green> y <blue>azul</blue>." | tml (texto coloreado)
 $ echo "<bold><green>ERROR con texto </green><underline><red>rojo</red></underline></bold>" | tml
+
+
+tmpl
+Interfaz para la biblioteca text/template de Go que puede utilizarse proporcionando un conjunto de datos codificados en formato JSON y una lista de rutas a plantillas que terminen con la extensión ".tmpl". Las plantillas se procesan y los resultados se guardan en un archivo cuyo nombre resulta de eliminar la extensión ".tmpl" del nombre original
+1.-
+Ejemplo con un array
+$ nano lista.txt.tmpl
+       # Lista de elementos:
+       {{range .}}
+       - {{.}}
+       {{end}}
+$ tmpl -data '["manzana","pera","naranja"]' lista.txt.tmpl (generar el archivo lista.txt)
+$ cat lista.txt
+      # Lista de elementos:
+      - manzana
+      - pera
+      - naranja
+2.-
+Ejemplo con objeto [mapa]
+$ nano config.conf.tmpl
+      # Configuración generada
+      host = {{.host}}
+      port = {{.port}}
+      debug = {{.debug}}
+$ tmpl -data '{"host":"localhost","port":8080,"debug":true}' config.conf.tmpl (generar el archivo)
+$ cat config.conf
+      # Configuración generada
+      host = localhost
+      port = 8080
+      debug = true
 
 
 tmpfs
