@@ -62878,6 +62878,39 @@ Permite asignar parte de la memoria física para ser utilizada como una partici�
 Comprobar con df -k [ver] o mount [ver] su correcto montaje
 
 
+tmpreaper
+Elimina archivos de los directorios en función de su antigüedad. El programa realiza una búsqueda recursiva en el directorio, sin seguir enlaces simbólicos y elimina aquellos archivos a los que no se ha accedido durante un periodo de tiempo especificado por el usuario. Es posible proteger determinados archivos frente a la eliminación mediante el uso de patrones de shell. El programa no eliminará archivos que pertenezcan al usuario efectivo (EUID) del proceso y que no tengan activado el bit de escritura («w»), a menos que se indique explícitamente lo contrario. Tampoco no elimina enlaces simbólicos, sockets, tuberías con nombre (FIFO) ni archivos especiales, salvo que se utilice una opción específica en la línea de comandos que lo permita: --symlinks o --all. ADVERTENCIA: No ejecutar sobre el directorio raíz (/). El programa no incluye protecciones frente a esta acción. El archivo de configuración /etc/tmpreaper.conf. El readme (/usr/share/doc/tmpreaper/README.security.gz) aconseja deshabilitar la ejecución automática estableciendo la linea a false:
+# nano /etc/tmpreaper.conf
+...
+SHOWWARNING=false
+..
+Pero esta acción no desactiva tmpreaper. Solo silencia el aviso de seguridad que muestra el script diario; el borrado automático mediante /etc/cron.daily/tmpreaper seguirá ocurriendo salvo que se desactive ese script o el paquete. tmpreaper recorre recursivamente los directorios indicados y borra archivos y directorios vacíos cuya última fecha de acceso [atime] sea más antigua que el umbral configurado; por omisión, 7 días.
+# chmod -x /etc/cron.daily/tmpreaper (desactivar la ejecución automática: Lo más seguro)
+# ls -l /etc/cron.daily/tmpreaper (comprobar que ya no es ejecutable)
+# chmod +x /etc/cron.daily/tmpreaper (si se quiere volver a reactivar)
+Una muestra de configuración muy conservadora
+# nano /etc/tmpreaper.conf
+       # No mostrar el aviso: NO equivale a desactivar tmpreaper.
+       SHOWWARNING=false
+       # Edad mínima antes de borrar: 30 días.
+       # Usa atime por defecto; es el comportamiento documentado de tmpreaper.
+       TMPREAPER_TIME=30d
+       # Directorios que limpiará. Nunca incluir "/".
+       TMPREAPER_DIRS='/tmp/. /var/tmp/.'
+       # Patrones adicionales que nunca deben borrarse.
+       TMPREAPER_PROTECT_EXTRA='/tmp/.X11-unix/* /tmp/.ICE-unix/* /tmp/.font-unix/* /tmp/.XIM-unix/* /tmp/.Test-unix/*'
+       # Retardo aleatorio máximo antes de empezar, en segundos.
+       TMPREAPER_DELAY=256
+       # No añadir opciones adicionales salvo que se sepa exactamente qué hacen.
+       TMPREAPER_ADDITIONALOPTIONS=''
+# tmpreaper --test --verbose --showdeleted 30d /tmp /var/tmp (probar sin borrar nada, modo verbose e imprime las órdenes equivalentes a rm y rmdir que habría ejecutado)
+# tmpreaper 30d /tmp (borrar de verdad archivos que cumplan las normas en /tmp)
+# tmpreaper --test --verbose --protect '/tmp/mi-carpeta-importante*' 30d /tmp (A parte de lo especificado en el archivo de configuración, proteger un patrón concreto)
+# tmpreaper --test --verbose --mtime --showdeleted 30d /tmp (simular el borrar según fecha de modificación, no de acceso)
+# tmpreaper --verbose 30d /tmp /var/tmp (si el resultado de --test parece correcto, realizar la operación de borrado)
+Nota.- No usar "--force" ya que puede eliminar ficheros sin bit de escritura propiedad del usuario efectivo y no desactivar --runtime; por defecto limita la ejecución a unos 55 segundos y ayuda a prevenir condiciones de carrera entre instancias.
+
+
 tmux
 Terminal multiplexor
 $ tmux (lanzar la aplicación)
