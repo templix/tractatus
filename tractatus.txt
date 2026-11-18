@@ -63069,6 +63069,51 @@ $ ~/.tmux/plugins/tpm/bin/update_plugins all (con tmux corriendo recargar los pl
 Y dentro de tmux al pulsar Ctrl-b I muestra "TMUX environment reloaded." instala plugins nuevos. Ctrl-b U los actualiza y Alt+u actualiza solo el plugin bajo el cursor.
 
 
+tnat64
+proporciona acceso de red transparente a hosts IPv4 mediante NAT64 en sistemas que solo utilizan IPv6. tnat64 intercepta las llamadas que realizan las aplicaciones para establecer conexiones TCP y, cuando es necesario, actúa como proxy de forma transparente. Esto permite que las aplicaciones existentes, que carecen de soporte para IPv6, sigan pudiendo acceder a la red sin necesidad de realizar modificaciones. Incluye el ejecutable tnat64-validateconf.
+$ tnat64 on (añade la biblioteca tnat64 a LD_PRELOAD. Todas las aplicaciones que se ejecuten pasarán automáticamente por NAT64)
+$ source /usr/bin/tnat64 (cargar el script de shell en la sesión actual para que el comando anterior tenga efecto)
+$ tnat64 off (elimina la biblioteca tnat64 de LD_PRELOAD)
+$ tnat64 show (muestra el valor actual de la variable LD_PRELOAD)
+$ tnat64 (crea una nueva sesión de shell con LD_PRELOAD configurado para incluir tnat64)
+
+
+tnef
+Herramienta para trabajar con archivos adjuntos en el formato TNEF [Transport Neutral Encapsulation Format], que es un formato utilizado principalmente por Microsoft Outlook para enviar correos electrónicos con archivos adjuntos complejos. Este formato puede incluir no solo archivos comunes, sino también metadatos y otros elementos específicos de Outlook que no son fácilmente accesibles desde otros clientes de correo.
+$ tnef --debug -f archivo.dat (habilitar la salida de depuración y extraer todos los archivos adjuntos del archivo mencionado)
+$ tnef -v -t archivo.dat (enumera los archivos adjuntos, sin extraerlos y mostrando además la longitud del archivo en bytes y su fecha antes del resto de la información)
+$ tnef --list-with-mime-types archivo.dat (Igual que la opción -t, pero además muestra el tipo MIME y el ID de contenido de cada archivo después del nombre y la ruta del archivo)
+
+
+tnftp
+Cliente FTP mejorado.
+$ tnftp ftp.ejemplo.org (iniciar sesión interactiva, pedirá usuario y contraseña)
+ftp> ls (listar archivos remotos)
+ftp> cd pub/documentos (cambiar de directorio remoto)
+ftp> lcd ~/descargas (cambiar directorio local)
+ftp> get archivo.zip (descargar)
+ftp> put informe.pdf (subir)
+ftp> mget *.txt (descargar varios. Pregunta por cada uno)
+ftp> mput *.jpg (subir varios)
+ftp> prompt (desactivar confirmación en mget/mput)
+ftp> binary (modo binario)
+ftp> ascii (modo texto)
+ftp> reget archivo.zip (reanudar descarga interrumpida)
+ftp> help (lista de comandos)
+ftp> bye (salir)
+$ tnftp ftp://ftp.ejemplo.org/pub/archivo.zip (descarga directa desde URL)
+$ tnftp ftp://usuario:mipassword@ftp.ejemplo.org/pub/archivo.zip (con usuario y contraseña)
+$ tnftp -V ftp://ftp.ejemplo.org/pub/lista.txt (descarga silenciosa sin salida informativa y la barra de progreso)
+$ tnftp ftp://ftp.ejemplo.org/pub/datos.csv | grep "2026" > filtrado.csv (piping de un archivo remoto a un comando local. El contenido remoto se procesa sin guardar el original en disco)
+$ tnftp -P 2121 ftp.ejemplo.org (usando un puerto distinto al 21)
+$ tnftp ftp.ejemplo.org <<EOF (enviar un binario con una sola linea)
+user usuario mipassword
+binary
+get archivo.zip
+bye
+EOF
+
+
 todo.txt-base
 Permite gestionar tareas con un contexto detallado mediante un archivo de texto plano. Incluye las herramientas backuptodo, cdtodo, edittodo, listtodo, todo.txt, todo.txt-base y vitodo.
 $ todo.txt --info (muestra donde está el archivo de tareas y el ejecutable)
