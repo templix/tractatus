@@ -63137,6 +63137,59 @@ $ topydo pri 6 B (coloca la prioridad (B) a la tarea núm 6)
 $ topydo revert 6 (revierte la prioridad puesta antes a la que tenia)
 
 
+todoman
+Gestor de tareas sencillo, basado en estándares y que se almacenan en archivos iCalendar, lo que permite sincronizarlas mediante CalDAV utilizando, por ejemplo, vdirsyncer. Todoman no guarda las tareas en un formato propio ni en una BD: cada tarea es un archivo ".ics", un VTODO de iCalendar dentro de un directorio. A ese conjunto de directorios con ".ics" se le llama "vdir", y es el mismo formato que usan khal y vdirsyncer.
+# apt install vdirsyncer khal (para sincronizar y para el calendario)
+$ mkdir -p ~/.config/todoman/
+$ nano .config/todoman/config.py
+       # apunta a al directorio para la lista de tareas
+       path = "~/.local/share/calendars/*"
+       date_format = "%d-%m-%Y"
+       time_format = "%H:%M"
+       # sin default_list pedirá -l cada vez que se cree una tarea si hay varias listas
+       default_list = "Personal"
+       # Vencimiento por defecto de las tareas nuevas, en horas (0 = sin fecha)
+       default_due = 0
+$ mkdir -p ~/.local/share/calendars/personal (crear una categoria)
+$ echo "Personal" > ~/.local/share/calendars/personal/displayname
+$ echo "#f4b801" > ~/.local/share/calendars/personal/color (que el nombre de la categoria se vea en amarillo)
+$ mkdir -p ~/.local/share/calendars/varios (Crear una nueva categoria)
+$ echo "Varios" > ~/.local/share/calendars/varios/displayname
+$ echo "#ff0000" > ~/.local/share/calendars/varios/color (que el nombre de la categoria se vea en rojo)
+Realizar entradas según categoria:
+$ todoman new -l Varios "Preparar informe mensual"
+$ todoman new "Estudiar bash" (sin especificar categoria se coloca en la establecida en default_list, la personal)
+$ todoman new "Asistir a conferencia de emacs" -l Personal (se coloca en la categoria especificada)
+$ todoman new "Instalar nuevo linux al vecino" -l Varios (igual)
+$ todoman new "Comprar leche" -l varios --due tomorrow (lista "varios" y especificando cuando ha de hacerse la tarea)
+$ todoman new "Informe trimestral" -l varios --due "2026-11-25 17:00" --priority high (especificando lista, cuando y prioridad)
+Las opciones de prioridad son low, medium o high (bajo, medio y alto).
+$ todoman new "Preparar presentación" -l varios --start "next monday" --due "in 10 days" (especificando lista, empezar el "proximo lunes" y terminada en 10 dias)
+$ todoman new -l Personal -i (nueva entrada con el editor predeterminado de modo interactivo entrando los datos a mano)
+$ todoman list (listar todas las tareas pendientes de todas las listas)
+$ todoman list varios (listar solo las de la lista "varios")
+$ todoman list --start after 18:11:26 (ver tareas después del dia mencionado)
+$ todoman list --due 6 (mostras tareas con fecha límite dentro de 6 horas)
+$ todoman list --grep emacs (ver las tareas que contengan la palabra "emacs")
+$ todoman list -s any (mostrar todas las tareas)
+Los estados válidos son: needs-action [requiere acción], cancelled, completed, in-p [en proceso] y any
+$ todoman list --sort start (ordenar tareas según campos)
+Los campos pueden ser: start, due, priority, completed_at, created_at, percent_complete, last_modified, description, location, status, summary, uid, rrule, sequence, categories y dtstamp.
+$ todoman list --status COMPLETED (mostrar las tareas completadas)
+$ todoman list --status CANCELLED (mostrar las canceladas)
+$ todoman list --sort due (ordenar por las que se tiene que realizar dentro de más dias)
+$ todoman list --sort due --no-reverse (ordenar por las más proximas a realizar)
+$ todoman list --startable (mostrar solo las tareas que se pueden comenzar hoy)
+$ todoman show 3 (mostrar detalles de la tarea 3)
+$ todoman done 3 (marcar como completada la tarea 3)
+$ todoman done 4 5 6 (marcas como completadas la 4, 5 y 6)
+$ todoman delete 7 (borrar la tarea 7)
+$ todoman flush (eliminar todas las completadas)
+$ todoman edit 8 --due "19:11:26" (añadir fecha de realización a la tarea 8)
+$ todoman edit 6 --priority medium (añadir o modificar la prioridad de la tarea 6)
+$ todoman edit -i 9 (editar con el editor predeterminado la tarea 9 para modificarla a mano)
+
+
 toe
 Enumera todos los tipos de terminal disponibles por nombre principal con descripciones. Más de 1800.
 $ toe -a -s (informe sobre todas las bases de datos de terminal y una columna con entradas pertenecientes a una base de datos de terminal determinada.)
