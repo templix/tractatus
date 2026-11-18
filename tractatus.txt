@@ -63097,6 +63097,14 @@ Enumera todos los tipos de terminal disponibles por nombre principal con descrip
 $ toe -a -s (informe sobre todas las bases de datos de terminal y una columna con entradas pertenecientes a una base de datos de terminal determinada.)
 
 
+tofrodos
+Convierte archivos de texto entre los formatos DOS y Unix. Tradicionalmente, los archivos de texto en formato DOS utilizan pares CR/LF (retorno de carro/salto de línea) como delimitadores de fin de línea, mientras que los archivos de texto en formato Unix emplean únicamente LF (salto de línea) para finalizar cada línea.
+$ fromdos -d -b archivo_dos (convertir archivo de texto de formato DOS a formato Unix y crea una copia de seguridad añadiendo la extensión .bak)
+$ fromdos -d -e archivo_dos (convertir de dos a Unix y que se detenga por completo si se produce algún error)
+$ todos -f -u -b archivo_unix (forzar la conversión de un archivo de texto de formato Unix a formato DOS y crea una copia de seguridad añadiendo la extensión .bak)
+$ todos -o -u archivo_unix (sobrescribe el archivo original, sin crear copia de seguridad. Este es el comportamiento predeterminado)
+
+
 toilet
 (figlet mejorado). Edición de banners
 $ toilet -f future -F gay texto
@@ -63108,6 +63116,14 @@ Opciones
 -t (se adapta al ancho de la terminal)
 -S (letras más juntas. Por defecto es -s)
 -o (más juntas)
+
+
+tokei
+Muestra estadísticas sobre un código. Tokei indica el número de archivos y el total de líneas que contienen, desglosando el código, los comentarios y las líneas en blanco según el lenguaje de programación.
+$ tokei -l (listado de lenguajes que acepta)
+$ tokei -C -f script1.sh script.py script.yml (mostrar estadisticas sobre archivos individuales)
+$ tokei -o json script.sh (la salida en json. Otras opciones en cbor y yaml)
+$ tokei -C -f bin/* (mostrar de todo el directorio)
 
 
 tomb
