@@ -63520,6 +63520,26 @@ $ tracker3 info archivo (mostrará información de archivo)
 $ tracker3 tag archivo (muestra la etiqueta de archivo)
 
 
+tractor
+Configuración de un proxy de enrutamiento tipo onion para la sesión de usuario.
+$ tractor start (inicia onion routing)
+$ tractor stop (detiene onion routing)
+$ tractor newid (proporciona al usuario una nueva identidad)
+$ tractor restart (reinicia)
+$ tractor set (configura el proxy)
+$ tractor unset (elimina la configuración del proxy)
+$ tractor killtor (finaliza todos los procesos de Tor del usuario)
+Comprobación de que el proxy está configurado:
+$ gsettings get org.gnome.system.proxy mode
+'manual'
+$ gsettings get org.gnome.system.proxy.socks host
+'127.0.0.1'
+$ gsettings get org.gnome.system.proxy.socks port
+9052
+Si la salida de estos comando hubiera sido "none", el proxy no está activado.
+$ curl --socks5-hostname 127.0.0.1:9052 https://check.torproject.org/api/ip (con los datos de las salidas anteriores comprobar que se está detras de un proxy porque la IP no coincidirá con la real)
+
+
 trafshow
 [netliag[. Es un programa interactivo que reúne el tráfico de red de todas las interfaces con capacidad de libpcap para acumularlo en la memoria caché.
 # trafshow -R 1 -p (actualizar cada segundo y no poner en modo promiscuo)
