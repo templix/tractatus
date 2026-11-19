@@ -45127,14 +45127,14 @@ muestra el Pid del programa si está activo.
 
 pidstat
 [sysstat]. Muestra información relacionada con los procesos del sistema.
-$ pidstat  (informa del uso de la CPU)
-$ pidstat -u  (lo mismo)
+$ pidstat (informa del uso de la CPU)
+$ pidstat -u (lo mismo)
 $ pidstat -u 5 (muestra uso de CPU por proceso cada 5 segundos)
-$ pidstat -d  (Muestra la tasa de lectura/escritura a los medios fisicos)
-$ pidstat -p 1234  (Especifica que solo deseas analizar el proceso 1234)
-$ pidstat -C comando  (Similar a -p pero indicando el nombre del proceso)
-$ pidstat -r  (Muestra el uso de memoria de los procesos y errores de 	paginación en la memoria de los procesos -page faults-).
-$ pidstat -I  (En sistemas multicore, indica la CPU en la que se ejecuta el 	comando)
+$ pidstat -d (muestra la tasa de lectura/escritura a los medios fisicos)
+$ pidstat -p 1234  (especifica que solo deseas analizar el proceso 1234)
+$ pidstat -C comando (similar a -p pero indicando el nombre del proceso)
+$ pidstat -r (muestra el uso de memoria de los procesos y errores de paginación en la memoria de los procesos -page faults-).
+$ pidstat -I (en sistemas multicore, indica la CPU en la que se ejecuta el comando)
 $ pidstat -d 5 2 ("5" es el intervalo de tiempo y "2" el número de veces que ejecutara el comando. Cuando haya llegado al número de ejecuciones, se parará y mostrará una media con los valores obtenidos)
 $ pidstat -d 5 (omitiendo el numero de veces a ejecutar para producir un bucle infinito. Parar con ^C)
 
@@ -63281,6 +63281,21 @@ TIME+.-	 Cuanto tiempo lleva el proceso en el sistema.
 COMMAND.- Nombre del procesos y sus parametros.
 PPID.-		 PID del proceso padre.
 UID.-		 ID del usuario que ha ejecutado el proceso.
+
+
+topline
+Herramienta para registrar patrones de uso de la CPU, diseñada para equipos con un gran número de núcleos.
+$ topline (monitorizar en tiempo real. Detener con Ctrl+C)
+$ topline -i 5 -o carga-5s.log (genera una muestra cada 5 segundos y la guarda en un archivo)
+$ topline -o sesion.log sleep 20s (genera copia.log con la muestra mientras se ejecuta el comando "sleep 20s")
+$ topline -l script.sh (organiza la salida del programa línea por línea, evitando que se mezcle con los datos de topline. Los resultados aparecerán intercalados en líneas separadas)
+$ topline -d sleep 10s (muestra el resultado cuando termina el comando)
+Los resultados pueden verse:
+      nvme(⢀) (▁█▁▃▃▂)
+      nvme(⣀) (▂█▁▁▃▄)
+      nvme(⣀) (▂█▁▂▃▂)
+      nvme(⣀) (▂█▁▁▄▂)
+El significado es que la CPU está usando símbolos de barras (▂, ▁, ▃, █), lo que indica CPUs sin SMT [Systems Management Facility]. Los símbolos más altos, especialmente "█", representan mayor utilización; "▁" y "▂" indican poca carga. Los puntos ("⡀", "⣀") corresponden a hyperthreads, una implementación propia de Intel de la tecnología de multihilo simultáneo SMT, utilizada para mejorar la paralelización de los cálculos, es decir, la ejecución de múltiples tareas de forma simultánea en microprocesadores de arquitectura x86.
 
 
 toplip
