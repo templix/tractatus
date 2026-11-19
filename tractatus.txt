@@ -63311,6 +63311,14 @@ $ toplip -m imagen.jpg archivo.txt > imagen_crip.jpg
 $ toplip -d imagen_crip.png > archivo.txt
 
 
+topplot
+Genera gráficos a partir de la información extraída de los registros de top.
+$ top -b -d 2 -n 30 > top.log (hacer la captura de paquetes con top)
+$ topplot -f top.log (ejecución básica para generar el gráfico)
+$ topplot -l -f top.log (enumera los procesos registrados en los registros superiores al generar el gráfico)
+$ topplot -f top.log "firefox" (filtrar por un proceso concreto)
+
+
 tor
 [The Onion Router]. Sistema de comunicación anónima de baja latencia que consiste en que la ruta pasa desde el origen a través de un conjunto de repetidores y negocian un "circuito virtual" a través de la red, donde cada repetidor conoce a su predecesor y sucesor, pero no a los demás. Básicamente, Tor proporciona una red distribuida de repetidores. Los usuarios rebotan sus flujos TCP [tráfico web, FTP, SSH, etc.] entre los repetidores, y los destinatarios, observadores e incluso los propios repetidores tienen dificultades para saber qué usuarios se conectaron a qué destinos. Por sí solo, tor no sirve como navegador ni envía tráfico HTTP directamente. Funciona como un servicio que escucha en un puerto, normalmente el 9050 o 9150, y espera que otro programa como curl, wget, o un navegador lo use como proxy.
 $ curl --socks5 127.0.0.1:9050 https://api.ipify.org (devolverá una IP de un nodo de salida Tor, no la IP real)
