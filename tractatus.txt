@@ -63388,6 +63388,21 @@ $ touch -a archivo (modifica el último acceso al archivo. Comprobar con $ stat 
 $ touch ~/.hushlogin (silenciar el mensaje del día [MOTD])
 
 
+tox
+Herramienta de línea de comandos para Python que automatiza la creación de entornos virtuales [virtualenv] y la ejecución de pruebas u otros comandos en ellos que se puede utilizar para: verificar que el paquete se instale correctamente con diferentes versiones e intérpretes de Python, ejecutar las pruebas en cada uno de los entornos, configurando la herramienta de pruebas de tu elección y actuar como interfaz para servidores de integración continua (CI), reduciendo considerablemente el código repetitivo (boilerplate) y unificando las pruebas de integración continua con las pruebas ejecutadas desde la terminal.
+$ tox (ejecuta todos los entornos definidos en env_list)
+$ tox list (lista los entornos disponibles)
+$ tox run -e 3.13 (ejecuta solo el entorno de Python 3.13)
+$ tox run -e 3.12,lint (ejecuta varios entornos, secuencialmente)
+$ tox run-parallel -e 3.12,3.13 (ejecuta en paralelo)
+$ tox p -e 3.12,3.13 (lo mismo)
+$ tox -e lint -- src/mymodule.py (pasa argumentos extra al comando)
+$ tox --recreate (fuerza la recreación de los entornos virtuales)
+$ tox exec -e 3.13 -- python (abre un shell de Python dentro del entorno)
+$ tox exec -e 3.13 -- pip list (ejecuta un comando dentro del entorno)
+$ tox quickstart (genera un archivo de configuración inicial interactivamente)
+
+
 tpp
 Presentaciones en terminal.
 --title Este_es_el_titulo   (titulo de la presentación)
@@ -65189,6 +65204,28 @@ uuu
 # uuu -b emmc_all imx-boot-imx8mnddr4evk-fspi.bin-flash_ddr4_evk_flexspi fsl-image-gui-imx8mnddr4evk.sdcard (flashear imagen Yocto completa en eMMC)
 # uuu -b emmc_all imx-boot-imx8mp-evk-sd.bin-flash_singleboot imx8mp-evk-scmi.dtb Image core-image-base-imx8mp-evk.rootfs.tar.bz2 (lo mismo)
 # uuu LF6.6.3_1.0.0-mx8mp.zip (lo mismo con un paquete .zip oficial de NXP)
+
+
+uv
+Gestor de paquetes y proyectos de Python extremadamente rápido, escrito en Rust.
+$ uv new proyecto (crear un nuevo proyecto. Crea la estructura en el directorio incluido el archivo pyproject.toml que contiene la configuración necesaria para construir y distribuir el proyecto)
+$ cd proyecto (entrar en el directorio)
+$ uv init (iniciar el proyecto)
+$ uv add fastapi uvicorn (instalar librerias. Crea .venv, pyproject.toml y uv.lock)
+$ uv sync (sincronizar)
+$ uv export --format pylock.toml (generar el requeriments.txt moderno pylock.toml)
+$ uv install (instalar dependencias)
+$ uv add -r requirements.txt (genera pyproject.toml y uv.lock)
+$ uv venv (crear un entorno virtual Python)
+$ uv add --dev pytest (instala pytest como dependencia de desarrollo, actualizando los archivos uv.lock y pyproject.toml de manera adecuada)
+$ uv python install 3.13 (instalar una versión concreta de python)
+$ uv activate (activar un entorno virtual)
+$ uv remove pytest (desinstalar un paquete)
+$ uv update (actualizar dependencias)
+$ uv build (genera los artefactos de distribución que se guardan en el directorio dist/ por defecto)
+$ uv publish --token token (sube estos artefactos a PyPI)
+$ uv cache clean (limpiar caché)
+$ uv pip list (ver deps)
 
 
 uz
