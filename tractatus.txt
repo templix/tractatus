@@ -8394,6 +8394,21 @@ Calculadora.
 $ concalc 5*3 (Sin especificar números se accede al promt interactivo)
 
 
+conda
+Gestor de paquetes y gestión de entornos escrito en Python.
+$ conda env list (ver los entornos creados en el equipo)
+$ conda create --name prueba (crear un entorno nuevo)
+$ conda create --name prueba python numpy pandas (añadir paquetes al crear un entorno)
+$ conda create -n py27 python:2.7 (crear un entorno con una versión especifica de python)
+$ conda activate (restablecer el entorno actual como predeterminado)
+$ conda deactivate (desactivar un entorno)
+$ conda remove --name py27 --all (eliminarlo. Previamente seactivarlo)
+$ conda info --envs (ver una lista de todos tus entornos)
+$ conda install pandas (instalar el paquete pandas en el entorno predeterminado)
+$ conda install numpy pandas matplotlib (instalar varios paquetes)
+$ conda update conda (actualizar la aplicación)
+
+
 condure
 Servicio que administra las conexiones de red para los protocolos HTTP/1 y WebSockets, en nombre de las aplicaciones del servidor, con el fin de permitir el control de las conexiones desde múltiples procesos.
 Crear un archivo de configuración, que a modo de ejemplo podría ser:
