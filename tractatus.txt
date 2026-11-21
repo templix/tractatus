@@ -63629,11 +63629,52 @@ $ po2json -i es.po -t en.json -o es.json (una vez traducido se convierte de vuel
 $ pretranslate --tm=memoria_traducciones.po -i nueva_plantilla.pot -o borrador_es.po (con una base de datos de traducciones anteriores rellena automáticamente las cadenas nuevas que coincida)
 
 
-transmission-remote-cli
-Comando para conectar con un servidor de descargas de transmission y gestionarlo.
-$ transmission-remote-cli (conectar con transmission. Mira los ajustes de .config/transmission-remote-cli/settings.cfg)
-$ transmission-remote-cli -f ruta/settings.cfg (especificar ruta fichero configuración)
-$ transmission-remote-cli --create-config (Crea un archivo de configuración de ejemplo dentro de .config/transmission-remote-cli/settings.cfg)
+transmission-cli
+[transmission-daemon]. Conjunto de clientes BitTorrent ligeros. Son transmission-cli, transmission-create, transmission-edit, transmission-remote y transmission-show. Para uso normal se recomienda el daemon + transmission-remote.
+# systemctl status transmission-daemon.service (comprobar si está activo)
+$ transmission-cli archivo.torrent (descargar un .torrent)
+$ transmission-cli "magnet:?xt=urn:btih:HASH..." (descargar un magnet)
+$ transmission-cli -w /ruta/descargas archivo.torrent (especificar directorio de descarga)
+$ transmission-cli -d 500 archivo.torrent (Limitar velocidad de descarga EN KB/s)
+$ transmission-cli -u 50 archivo.torrent (Limitar subida)
+$ transmission-cli -er archivo.torrent (requerir cifrado. Otras opciones de cifrado -ep [preferido] y -et [tolerado])
+$ transmission-cli -p 51414 archivo.torrent (Puerto personalizado)
+$ transmission-cli -v archivo.torrent (verifica los datos descargados del torrent)
+$ transmission-create -o miarchivo.torrent -t http://tracker.ejemplo.com/announce /ruta/al/archivo_o_carpeta (crear torrent básico que guarda en el directorio actual)
+$ transmission-create -o miarchivo.torrent -t http://tracker1.ejemplo.com/announce -t http://tracker2.ejemplo.com/announce /ruta/carpeta (con varios trackers)
+$ transmission-create -p -c "Mi comentario" -s 2048 -o privado.torrent -t https://tracker.privado.com/announce /ruta/datos (torrent privado más comentario más tamaño de pieza personalizado)
+$ transmission-create --anonymize -o anonimo.torrent -t http://tracker... /ruta (anonimizar: sin "created by" ni fecha)
+$ transmission-edit -a http://nuevo-tracker.com/announce archivo.torrent (añadir un tracker)
+$ transmission-edit -d http://tracker-viejo.com/announce archivo.torrent (eliminar un tracker)
+$ transmission-edit -r "vieja-passkey" "nueva-passkey" archivo.torrent (reemplazar texto en las URLs)
+$ transmission-edit -r "vieja-passkey" "nueva-passkey" ~/.config/transmission/torrents/*.torrent (aplicar a muchos torrents)
+$ transmission-show archivo.torrent (muestra metadatos: nombre, tamaño, piezas, trackers, archivos, etc)
+$ transmission-show -m archivo.torrent (generar enlace magnet)
+$ transmission-show -s archivo.torrent (hacer scrape a los trackers [cuántos seeds/peers hay])
+$ transmission-remote -l (listar torrents)
+$ transmission-remote -a archivo.torrent (añadir un .torrent)
+$ transmission-remote -a "magnet:?xt=urn:btih:..." (añadir un magnet)
+$ transmission-remote -a archivo.torrent -w /ruta/descargas (añadir y especificar directorio de descarga)
+$ transmission-remote -a ~/Descargas/*.torrent (añadir varios torrents de un directorio)
+$ transmission-remote -t 3 -i (información detallada de un torrent por ID. Puede usarse varios [-t 1,3,5], un rango [-t 1-5] o por los que estan activos [-t active])
+$ transmission-remote -t 3 -f (listar archivos de un torrent)
+$ transmission-remote -t 3 -s (iniciar)
+$ transmission-remote -t 3 -S (parar)
+$ transmission-remote -t all -s (iniciar todos)
+$ transmission-remote -t all -S (para todos)
+$ transmission-remote -t 3 -r (eliminar torrent [mantiene archivos])
+$ transmission-remote -t 3 -rad (eliminar torrent más los archivos descargados)
+$ transmission-remote -t 3 --verify (verificar integridad)
+$ transmission-remote -t 3 --move /nueva/ruta (mover datos a otro directorio)
+$ transmission-remote -d 2000 -u 100 (estableciendo límites globales de velocidad en KB/s)
+$ transmission-remote -D -U (sin límites)
+$ transmission-remote -w /nueva/carpeta/descargas (cambiar directorio de descarga por defecto)
+$ transmission-remote -t 3 -sr 2.0 (cambiar ratio de seeding)
+$ transmission-remote -n usuario:contraseña -l (autentificarse con usuario/contraseña)
+$ transmission-remote host:9091 -n usuario:pass -l (servidor remoto)
+$ export TR_AUTH=usuario:contraseña (usando variable de entorno)
+$ transmission-remote -l
+$ transmission-remote -l | grep 100% | awk '{print $1}' | paste -sd, | xargs -I{} transmission-remote -t {} -r (eliminar todos los torrents terminados al 100%)
 
 
 trap
