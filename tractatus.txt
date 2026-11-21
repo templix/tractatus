@@ -63617,6 +63617,18 @@ $ trans -I -b :es (traducir varias frases seguidas en modo interactivo. Salir co
 $ trans -b -p :ja "Konichiwa" (reproducir audio de la traducción, requiere reproductor como mpv, mplayer o mpg123)
 
 
+translate-toolkit
+Conjunto de herramientas para la localización de software. El software incluye programas para convertir diversos formatos de localización al formato estándar PO, herramientas para gestionar y verificar archivos PO, así como utilidades para realizar recuentos de palabras, combinar traducciones y efectuar diversas comprobaciones en archivos PO. Los formatos de almacenamiento de localización compatibles incluyen: DTD, properties, GSI/SDF de OpenOffice.org, CSV, MO, .ts de Qt y, por supuesto, PO y XLIFF. Para utilizar funciones o formatos específicos, es necesario instalar paquetes adicionales; estos se detallan en la sección de recomendaciones («Recommends») del paquete python3-translate. Incluye las herramientas android2po, build_tmdb, csv2po, csv2tbx, dtd2po, flatxml2po, html2po, ical2po, idml2po, ini2po, json2po, junitmsgfmt, md2po, moz2po, mozfunny2prop, mozlang2po, msghack, odf2xliff, oo2po, oo2xliff, php2po, phppo2pypo, po2csv, po2dtd, po2flatxml, po2html, po2ical, po2idml, po2ini, po2json, po2md, po2moz, po2mozlang, po2oo, po2php, po2prop, po2rc, po2resx, po2sub, po2symb, po2tiki, po2tmx, po2ts, po2txt, po2web2py, po2wordfast, po2xliff, po2yaml, poclean, pocommentclean, pocompendium, pocompile, poconflicts, pocount, podebug, pofilter, pogrep, pomerge, pomigrate2, popuretext, poreencode, porestructure, posegment, posplit, poswap, pot2po, poterminology, pretranslate, prop2mozfunny, prop2po, pydiff, pypo2phppo, rc2po, resx2po, sub2po, symb2po, tbx2po, tiki2po, tmserver, ts2po, txt2po, web2py2po, xliff2odf, xliff2oo, xliff2po y yaml2po.
+$ pocount es.po (ejemplo básico)
+$ find . -name "*.po" -print0 | xargs -0 pocount (generar un reporte rápido de todo un proyecto)
+$ pofilter --test=variables,xmltags es.po errores_es.po (extrae solo las traducciones que tienen errores de variables o etiquetas XML a un nuevo archivo que si está vacio significa que ha pasado la traducción))
+$ pogrep --search=msgid "error" original.po solo_errores.po (buscar todas las cadenas que contengan la palabra "error" en el texto original y extraerlas a un nuevo archivo PO)
+$ pomerge -t nuevo.pot -i viejo.po -o actualizado.po (fusiona la traducción antigua [viejo.po] con la nueva plantilla del desarrollador [nuevo.pot] para generar la base de trabajo actualizada [actualizado.po])
+$ json2po -i en.json -o es.po (convertir un JSON en inglés a un PO para traducirlo)
+$ po2json -i es.po -t en.json -o es.json (una vez traducido se convierte de vuelta a JSON. -t en.json actúa como plantilla para mantener las claves/estructura original del JSON intacta)
+$ pretranslate --tm=memoria_traducciones.po -i nueva_plantilla.pot -o borrador_es.po (con una base de datos de traducciones anteriores rellena automáticamente las cadenas nuevas que coincida)
+
+
 transmission-remote-cli
 Comando para conectar con un servidor de descargas de transmission y gestionarlo.
 $ transmission-remote-cli (conectar con transmission. Mira los ajustes de .config/transmission-remote-cli/settings.cfg)
