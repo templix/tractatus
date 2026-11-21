@@ -63600,6 +63600,23 @@ $ transip -l miusuario -u --api-key ~/decrypted_key --domain-name example.com --
 $ transip -l miusuario -d --api-key ~/decrypted_key --domain-name example.com --entry-name testentry --entry-type A --entry-content 127.0.0.1 (borrar un registro)
 
 
+translate-shell
+Utilidad que permite traducir textos, archivos, páginas web y usar diccionarios desde cualquiera motor de traducción: Google Translate, opción predeterminada, Bing Translator, Yandex.Translate y Apertium.
+$ trans -S (listar los motores de traducción disponibles)
+$ trans "Hello, how are you?" (traduce del inglés al idioma del sistema)
+$ trans -b :es "The terminal makes workflows faster" (traducción directa al español)
+$ trans -b en:ca "Good morning, have a nice day" (traducir de inglés a catalán en modo breve)
+$ trans -b -e apertium es:ca "Hoy vamos a la montaña" (usar Apertium entre español y catalán)
+$ trans -b -e bing :es "Machine learning models" (usar Bing Translator)
+$ trans -b -e yandex :fr "Where is the train station?" (usar Yandex.Translate)
+$ trans -b :es+fr+de "Open source software" (varias traducciones simultaneas)
+$ echo "Build succeeded with 0 warnings" | trans -b :es (usando pipe)
+$ trans -b :es -i notas_en.txt -o notas_es.txt (traducir un archivo de texto y guardar el resultado en otro archivo)
+$ trans -b :es file://notas_en.txt (sintaxis abreviada con URI file://)
+$ trans -I -b :es (traducir varias frases seguidas en modo interactivo. Salir con Ctrl-D)
+$ trans -b -p :ja "Konichiwa" (reproducir audio de la traducción, requiere reproductor como mpv, mplayer o mpg123)
+
+
 transmission-remote-cli
 Comando para conectar con un servidor de descargas de transmission y gestionarlo.
 $ transmission-remote-cli (conectar con transmission. Mira los ajustes de .config/transmission-remote-cli/settings.cfg)
