@@ -63592,6 +63592,14 @@ $ trans -S (motores de traducción disponibles)
 $ trans -i entrada.txt -o salida.txt (especificando un archivo con el texto de entrada y que muestre la traducción en salida.txt)
 
 
+transip
+Herramienta de línea de comandos para el proveedor de DNS TransIP. Este paquete proporciona una interfaz de línea de comandos, implementada en Python, para el proveedor de DNS TransIP. Permite a los usuarios crear, modificar y eliminar registros DNS desde la línea de comandos. Precisa cuenta en el dominio transip.eu.
+$ transip -l miusuario --api-key ~/decrypted_key (listar tus dominios)
+$ transip -l miusuario --api-key ~/decrypted_key -s --domain-name example.com (ver los registros DNS de un dominio)
+$ transip -l miusuario -u --api-key ~/decrypted_key --domain-name example.com --entry-name testentry --entry-expire 86400 --entry-type A --entry-content 127.0.0.1 (añadir o actualizar un registro)
+$ transip -l miusuario -d --api-key ~/decrypted_key --domain-name example.com --entry-name testentry --entry-type A --entry-content 127.0.0.1 (borrar un registro)
+
+
 transmission-remote-cli
 Comando para conectar con un servidor de descargas de transmission y gestionarlo.
 $ transmission-remote-cli (conectar con transmission. Mira los ajustes de .config/transmission-remote-cli/settings.cfg)
