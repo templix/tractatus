@@ -63718,6 +63718,26 @@ $ trawldb --edit ~/mis_recursos (guardar los recursos actuales en un archivo)
 $ trawldb --load archivo_sin_macros --nocpp (por defecto, trawldb procesa directivas como #include o #define. Si el archivo no las usa o se quiere cargar tal cual)
 
 
+tre-agrep
+Utilidad que permite realizar búsquedas de cadena de texto utilizando expresiones regulares aproximadas lo que significa que no solo busca coincidencias exactas, sino que permite errores de coincidencia, lo que es muy útil cuando se busca texto que puede estar mal escrito o cuando las variaciones pueden ser relevantes.
+$ tre-agrep -e "palabra" -E 1 -i text.txt (buscar "palabra" con 1 error como máximo y sin tener en cuenta mayúsculas/minúsculas del texto.txt)
+$ tre-agrep -n -k "palabra" texto.txt (indicar el número de linea y buscar "palabra" literal en texto.txt)
+$ tre-agrep -1 -D 1 "palabr" texto.txt (como máximo 1 error y 1 letra faltante)
+$ tre-agrep -E 1 -D 1 "palebr" texto.txt (lo mismo)
+$ tre-agrep -I 1 -E 2 "palebras" texto.txt (con 1 letra de más y dos errores)
+
+
+tre-command
+Alternativa al comando tree [ver] que, siempre que es posible, utiliza "git ls-files" como fuente para obtener la lista de archivos. tre también permite crear alias de shell que, al ejecutarse, abre el archivo asociado con el editor predetermina
+$ tre (marca todos los archivos y directorios con un número y lo guarda en /tmp/tre_aliases_$USER. Sin especificar lista el directorio y actual)
+$ e2 (editará el archivo marcado con el número 2 del anterior listado con el editor del sistema [$EDITOR])
+$ tre -a (mostrando tambien los ocultos)
+$ tre -d (solo muestra directorios)
+$ tre -d -l 2 (solo muestra directorios con una profundidad de 2)
+$ tre -l 2 --color always DIR (con una profundidad de 2 directorios y en color)
+$ tre -c automatic -j (marca los archivo y directorio del directorio actual, en color auto y muestra salida en json. Otras opciones para -c  always y never)
+
+
 tree
 Lista archivos y directorios en forma de arbol.
 $ tree -d (Sólo los directorios de la presente carpeta)
