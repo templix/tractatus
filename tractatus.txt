@@ -63705,6 +63705,19 @@ $ trash-rm *.txt (borrar todos los txt de la papelera)
 $ trash-empty (Vacia la papelera)
 
 
+trawld
+Demonio para el almacenamiento y la gestión de recursos de configuración. Trawl es una herramienta de gestión de recursos concebida como una alternativa a xrdb [ver] que es independiente de la sesión; es decir, funciona tanto en X11 como en Wayland.
+$ systemctl --user status trawld (ver estado del servicio como usuario normal)
+
+
+trawldb
+Interfaz de línea de comandos para gestionar recursos de configuración almacenados por trawld. Los "recursos de configuración" son conjuntos de pares clave-valor que definen preferencias de la interfaz como colores, fuentes, tamaños, etc. para las aplicaciones. Un ejemplo podría ser el archivo ~/.Xresources
+$ trawldb --load ~/.Xresources (cargar un archivo de recursos sin sobrescribir lo que ya existe)
+$ trawldb --merge ~/.Xresources (fusionar un archivo de recursos sobrescribiendo valores existentes)
+$ trawldb --edit ~/mis_recursos (guardar los recursos actuales en un archivo)
+$ trawldb --load archivo_sin_macros --nocpp (por defecto, trawldb procesa directivas como #include o #define. Si el archivo no las usa o se quiere cargar tal cual)
+
+
 tree
 Lista archivos y directorios en forma de arbol.
 $ tree -d (Sólo los directorios de la presente carpeta)
