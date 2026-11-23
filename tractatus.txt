@@ -63757,11 +63757,75 @@ $ trickled -d 50 -u 30 (Lanzar la limitación como demonio con lo que todas las 
 $ trickle wget http://www.genbeta.com
 
 
+triggerhappy
+supervisa los dispositivos de entrada conectados en busca de determinadas pulsaciones de teclas u otros eventos de entrada y, cuando estos ocurren, ejecuta comandos configurados. A diferencia de otros demonios de teclas de acceso rápido, funciona como un servicio persistente a nivel de sistema; por lo tanto, puede utilizarse incluso fuera del contexto de una sesión de usuario o de una sesión de X11. Lee directamente los dispositivos /dev/input/event* del kernel: teclados, ratones, mandos, botones de portátil, mandos IR... y ejecuta un comando cuando detecta un evento concreto. Incluye los ejecutables th-cmd y thd,
+# systemctl status triggerhappy.service (comprobar si el servicio está activo)
+$ thd --listevents (lista todos los nombres de eventos conocidos)
+# thd --dump /dev/input/event* (muestra en vivo lo que generan los dispositivos al pulsar teclas. Salir pulsando Ctrl-C)
+# thd --normalize (normaliza los eventos REL y ABS)
+$ cat /proc/bus/input/devices (para saber qué "eventN" es cada dispositivo)
+$ ls -l /dev/input/by-id/ (lo mismo más simplificado)
+# th-cmd --socket /run/thd.socket --add /dev/input/event7 (añadir un dispositivo nuevo al demonio en marcha)
+# th-cmd --socket /run/thd.socket --remove /dev/input/event7 (quitarlo)
+# th-cmd --socket /run/thd.socket --clear (elimina todos los dispositivos del demonio en ejecución)
+# th-cmd --socket /run/thd.socket --disable (deshabilita la ejecución de disparadores [triggers])
+# th-cmd --socket /run/thd.socket --enable (vuelve a habilitar la ejecución de disparadores)
+1.-
+Crear, por ejemplo, un archivo de atajos
+# nano /etc/triggerhappy/triggers.d/mis-atajos.conf
+       # Volumen (1 = pulsar, 2 = mantener pulsado)
+       KEY_VOLUMEUP        1   /usr/bin/amixer -q set Master 5%+
+       KEY_VOLUMEUP        2   /usr/bin/amixer -q set Master 5%+
+       KEY_VOLUMEDOWN      1   /usr/bin/amixer -q set Master 5%-
+       KEY_VOLUMEDOWN      2   /usr/bin/amixer -q set Master 5%-
+       KEY_MUTE            1   /usr/bin/amixer -q set Master toggle
+       # Multimedia con mpc (MPD)
+       KEY_PLAYPAUSE       1   /usr/bin/mpc toggle
+       KEY_NEXTSONG        1   /usr/bin/mpc next
+       # Una tecla que solo escribe en un log para probar
+       KEY_F9              1   /bin/sh -c 'echo "F9 $(date)" >> /tmp/th.log'
+# systemctl restart triggerhappy (aplicar los cambios)
+
+
 trimage
 Herramienta para optimizar los archivos de imagen para sitios web, utilizando optipng, pngcrush, advpng y jpegoptim, dependiendo del tipo de archivo (actualmente, los archivos PNG y JPG son compatibles). Todos los archivos de imagen se comprimen sin pérdidas en los niveles de compresión más altos disponibles y EXIF y otros metadatos se eliminan.
 $ trimage -f image.png (un archivo)
 $ trimage -f *.png (varios)
 $ trimage -d imagenes (un directorio)
+
+
+trinity
+Invoca llamadas al sistema [syscalls] de forma aleatoria, utilizando argumentos que no lo son del todo. Se trata de un fuzzer, que es una herramienta de pruebas mediante datos aleatorios o malformados, diseñado específicamente para encontrar errores [bugs] y vulnerabilidades de seguridad en el kernel de Linux. Este programa puede corromper gravemente los archivos, incluidos aquellos que se encuentren en recursos compartidos de red montados y sobre los cuales se tengan permisos de escritura. Asimismo, puede generar paquetes de red que causen interrupciones en la red local ya que a diferencia de un fuzzer "tonto" que envía datos puramente aleatorios, los cuales el kernel rechaza al instante en la primera comprobación, trinity es semi-inteligente, por ejemplo si una llamada al sistema espera un descriptor de archivo, trinity abre archivos reales en /dev, /proc, /sys, etc. y le pasa ese descriptor o si espera un número, le pasa valores extremos, negativos, potencias de dos o direcciones de memoria válidas pero inesperadas. El objetivo es lograr pasar las primeras capas de validación del kernel para provocar un Kernel Panic [cuelgue total del sistema], corrupción de memoria o escalada de privilegios. Para probar trinity sin riesgo, se debe aislar por completo utilizando una Máquina Virtual QEMU/KVM, VirtualBox.. desechable, sin carpetas compartidas con el anfitrión y con la red desconectada o en modo solo anfitrión/aislada. Además, se recomienda ejecutarlo como un usuario sin privilegios [nobody], nunca como root.
+$ trinity (lanza múltiples procesos hijo ejecutando llamadas al azar de forma indefinida. Muy destructiva para el entorno)
+$ trinity -c ioctl (probar una única llamada al sistema específica)
+$ trinity -n (muestra por pantalla qué llamadas y argumentos generaría, pero sin invocarlas realmente en el kernel. Es la única forma segura de verlo en acción en un sistema real)
+$ trinity -C 2 -N 1000 -x socket (ejecuta solo 2 procesos hijo y se detiene tras realizar 1000 llamadas, evitando llamadas de red)
+$ trinity -V /tmp/trinity_test (restringe las operaciones de archivos a una carpeta temporal específica para intentar contener el daño)
+
+
+trippy
+Herramienta de diagnóstico de red con interfaz de texto (TUI). Combina `traceroute` y `ping` en una sola herramienta, con una interfaz de texto intuitiva, gráficos y mapas. A diferencia de ejecutar un traceroute estático o un ping aislado, trippy envía sondas de forma continua y muestra en una interfaz interactiva la pérdida de paquetes, latencia: actual, media, mejor, peor y desviación estándar, rutas múltiples [ECMP], información de ASN y gráficos/histogramas de muestras por salto.
+$ trip --print-locales (muestra todas las configuraciones regionales de TUI disponibles)
+$ trip --print-config-template (Imprimir un archivo de configuración TOML de plantilla)
+$ trip --print-tui-binding-commands (imprimir todos los comandos TUI que se pueden asignar)
+$ trip --print-tui-theme-items (imprimir todos los elementos del tema TUI)
+$ trip --tui-preserve-screen (conservar la pantalla al salir)
+$ trip --dns-lookup-as-info (consultar información sobre sistemas autónomos [autonomous system - AS] durante las consultas DNS)
+$ trip --dns-resolve-all (realizar un seguimiento hacia todas las direcciones IP obtenidas mediante la resolución DNS)
+$ trip --unprivileged (realizar un seguimiento sin necesidad de privilegios elevados en las plataformas compatibles)
+$ trip google.es (inicia el trazado continuo hacia google.es y abre la interfaz en terminal con métricas en tiempo real)
+$ trip yahoo.com google.com 1.1.1.1 (trazar varios destinos a la vez lo que permite comparar simultáneamente el su comportamiento)
+$ trip example.com -p tcp -P 443 (envía sondas TCP apuntando al puerto 443 [HTTPS], lo que ayuda a diagnosticar bloqueos o latencias en servicios web cuando el ICMP clásico no refleja el tráfico real)
+$ trip example.com -p udp -R dublin -S 5000 -P 3500 (usa UDP con estrategia de balanceo de rutas [dublin o paris] y puertos fijos para mantener el flujo consistente a través de rutas ECMP)
+$ trip -6 example.com (fuerza el uso de IPv6)
+$ trip example.com --addr-family ipv6-then-ipv4 (define el orden de preferencia y respaldo entre IPv6 e IPv4)
+$ trip example.com -r cloudflare -z (realiza resoluciones DNS mediante 1.1.1.1 y muestra información de Sistema Autónomo para identificar qué proveedor o red opera cada salto)
+$ trip example.com --geoip-mmdb-file /ruta/a/GeoLite2-City.mmdb --tui-geoip-mode short (muestra datos geográficos [short, long o location] a partir de un archivo MMDB local)
+$ trip example.com -m json -C 10 > reporte_red.json (generar un reporte en JSON, Markdown o CSV tras 10 ciclos)
+$ trip example.com -m markdown -C 5 (ejecuta un número determinado de ciclos y genera una salida estructurada en vez de mantener la TUI abierta)
+$ trip example.com -i 250ms -g 50ms (ajusta la duración mínima de cada ronda [-i] y el tiempo de espera adicional para respuestas ICMP tardías)
+Claves rápidas para leer los resultados al diagnosticar:
+Pérdida solo en un salto intermedio, pero 0.0% en el destino final, muchas veces indica que un router limita la tasa de respuestas ICMP dirigidas a sí mismo [rate limiting], no necesariamente que esté descartando tráfico en tránsito y Pérdida y salto de latencia que persiste desde un punto hasta el destino apunta con mayor probabilidad a congestión real o pérdida efectiva en ese tramo de la ruta.
 
 
 tripwire
