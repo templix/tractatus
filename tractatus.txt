@@ -63849,6 +63849,45 @@ $ trocla delete usuario1 plain (eliminar la contraseña de usuario1 y la muestra
 $ trocla create usuario1 plain 'encode: sha512crypt'
 
 
+trojan
+Proxy que ayuda a eludir cortafuegos y emplea diversos protocolos sobre TLS para evitar tanto la detección activa o pasiva como las limitaciones de calidad de servicio [QoS] impuestas por los proveedores de servicios de Internet [ISP]. Su objetivo es ocultar un servicio proxy tras un servicio HTTPS convencional y hacer que sea indistinguible, a nivel de red, de una visita a un sitio web HTTPS legítimo; por eso se usa habitualmente para sortear censura, cortafuegos o límites de QoS ya que afirman que es indetectable. El archivo de configuración puede tener un contenido parecido a
+# nano /etc/trojan/config.json
+{
+    "run_type": "server",
+    "local_addr": "0.0.0.0",
+    "local_port": 443,
+    "remote_addr": "127.0.0.1",
+    "remote_port": 80,
+    "password": [
+        "CKNEoWX+...KT2Sh0=",
+        "kpU/iRmX6I...CUP6uxw="
+    ],
+    "log_level": 1,
+    "ssl": {
+        "cert": "/etc/trojan/tls/certificate.crt",
+        "key": "/etc/trojan/tls/private.key",
+        "key_password": "",
+          "verify": true,
+          "verify_hostname": true,
+	  ...
+Si el servicio Trojan corre como otro usuario, se sustituye "trojan" por el usuario real del servicio:
+$ systemctl cat trojan | grep -E 'User|ExecStart' (conocer el nombre de usuario que corre el servicio)
+$ openssl rand -base64 32 (crear las contraseñas paa colocarlas en "password":...)
+# openssl req -new -x509 -key /etc/trojan/tls/private.key -sha256 -days 3650 -out /etc/trojan/tls/certificate.crt -subj "/CN=IP_servidor" -addext "subjectAltName=IP:IP_servidor" (generar la clave si solo se accede por IP)
+$ sudo openssl x509 -noout -modulus -in /etc/trojan/tls/certificate.crt | openssl sha256 (comprobar que el certificado y la clave coinciden; ambos deben producir el mismo módulo)
+$ sudo openssl rsa -noout -modulus -in /etc/trojan/tls/private.key | openssl sha256
+$ sudo python3 -m json.tool /etc/trojan/config.json >/dev/null && echo "JSON válido" (Luego validar el JSON)
+$ sudo systemctl restart trojan (reiniciar el servicio)
+$ sudo systemctl status trojan --no-pager (comprobar estado)
+Para un certificado autofirmado, el cliente debe verificar el certificado. La forma segura es copiar solo certificate.crt al cliente y configurar:
+"ssl": {
+  "verify": true,
+  "verify_hostname": true,
+  "cert": "/ruta/al/certificate.crt"
+}
+Trojan indica que, con verify: true, el cliente puede usar el mismo certificado del servidor como ancla de confianza.
+
+
 trscripts
 Scripts para recodificar archivos de texto y fuentes BDF, Los ejecutables del comando son trbdf y trcs
 $ trbdf -l (enumera todos los conjuntos de códigos conocidos)
