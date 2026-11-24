@@ -63849,6 +63849,17 @@ $ trocla delete usuario1 plain (eliminar la contraseña de usuario1 y la muestra
 $ trocla create usuario1 plain 'encode: sha512crypt'
 
 
+trscripts
+Scripts para recodificar archivos de texto y fuentes BDF, Los ejecutables del comando son trbdf y trcs
+$ trbdf -l (enumera todos los conjuntos de códigos conocidos)
+$ trcs -fcyrillic -t koi8-r letter.txt (convierte el archivo letter.txt de ISO-8859-5 [cirílico] a KOI8-R y envía el resultado a la salida estándar)
+1.-
+Proceso para la creación de un script
+$ trcs --from cp437 --to=mik --gen-script >ibm2mik (genera el script ibm2mik para realizar la conversión de CP437 a MIK)
+Despues de otorgar los permisos correspondientes, lanzar el script:
+$ ibm2mik screen.txt (convierte el archivo screen.txt de CP437 a MIK. Envía el resultado a la salida estándar)
+
+
 true
 No realiza absolutamente nada de los comandos que le siguen.
 $ true rm * (no elimina nada)
