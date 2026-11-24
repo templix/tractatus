@@ -42330,6 +42330,9 @@ $ openssl enc -aes-256-cbc -pbkdf2 -iter 100000 -in entrada -out salida.enc (enc
 $ openssl genrsa -out clave.pem 4096 (generar la clave privada y la pública y se guardan en clave.pem)
 $ openssl rsa -in clave.pem -out clave.pub.pem -outform PEM -pubout (extraer la clave pública del archivo anterior y guardarla en clave.pu.pem)
 $ openssl s_client -showcerts -connect google.com:443 </dev/null 2>/dev/null|openssl x509 -outform PEM > google.com.cer (descargar el certificado en formato PEM [SSL/TLS] desde un servidor web HTTPS)
+$ openssl req -newkey rsa:2048 -nodes -keyout server-key.pem -out server.csr -subj "/CN=localhost" (crear clave y petición [CSR] para el servidor)
+$ printf "subjectAltName=DNS:localhost,IP:127.0.0.1" > san.ext (primer paso para firmar con la CA)
+$ openssl x509 -req -in server.csr -CA rootCA.pem -CAkey rootCA-key.pem -CAcreateserial -out server.pem -days 90 -extfile san.ext (firmar con la CA)
 
 
 opensysusers
@@ -64012,12 +64015,22 @@ $ trurl --url-file urllist.txt (leer muchas URLs desde un fichero)
 
 
 truststore
-Aplicación escrita en Go para la instalación local de certificados de desarrollo. Es un archivo que contiene certificados de autoridades de certificación [CA] en las que se confía. Cuando los clientes HTTPS como navegadores o herramientas de línea de comandos, encuentran un certificado de servidor firmado por una CA presente en el truststore [almacen de confianza[, consideran que la conexión es segura y confiable.
-$ truststore -all certificate.crt (instalar o desinstalar en el sistema, en los almacenes de confianza de Firefox y de Java)
-$ truststore -firefox certificate.crt (instalar o desinstalar en el almacén de confianza de Firefox)
-$ truststore -java certificate.crt (instalar o desinstalar en el almacén de confianza de Java)
-$ truststore -no-system certificate.crt (deshabilita la instalación o desinstalación en el almacén de confianza del sistema)
-$ truststore -v -uninstall firefox (en modo verboso y desinstalar el certificado indicado)
+Aplicación escrita en Go para la instalación local de certificados de desarrollo.
+A modo de muestra, se crea una CA de prueba:
+$ openssl req -x509 -newkey rsa:4096 -nodes -days 365 -keyout rootCA-key.pem -out rootCA.pem -subj "/CN=Mi CA de desarrollo" (crea rootCA-key.pem  rootCA.pem)
+$ truststore rootCA.pem (por defecto en el sistema)
+$ truststore -no-system -firefox rootCA.pem (solo en firefox)
+$ truststore -no-system -java rootCA.pem (solo en Java)
+$ truststore -all -v rootCA.pem (en todos y salida detallada)
+$ truststore -all -uninstall rootCA.pem (desinstalar de todos)
+$ truststore -no-system -uninstall -firefox rootCA.pem (desinstalar el certificado del navegador y no toca los otros)
+
+
+trydiffoscope
+diffoscope intenta llegar al fondo de qué es lo que hace que dos archivos o directorios sean diferentes. Desempaqueta de forma recursiva diversos tipos de archivos comprimidos y transforma distintos formatos binarios en una representación más legible para los humanos, con el fin de compararlos. Puede comparar, con la misma facilidad, dos archivos tar, imágenes ISO o documentos PDF. Las diferencias pueden mostrarse en un informe en formato de texto o HTML.
+$ trydiffoscope --text salida.txt archivo1.pdf archivo2.pdf (mostrar las diferencias de los dos archivos y guardar en salida.txt)
+$ trydiffoscope --html salida.html archivo1.tar archivo2.tar (mostrar las diferencias de los dos archivos y guardar en salida.html)
+$ trydiffoscope -u -w imagen1.iso imagen2,iso (mostrarlos diferencias en URL y abrirla con el navegador)
 
 
 ts
