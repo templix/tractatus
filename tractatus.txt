@@ -64011,6 +64011,15 @@ $ trurl "https://fake.host/hello#frag" --set user=::moo:: --json (salida en JSON
 $ trurl --url-file urllist.txt (leer muchas URLs desde un fichero)
 
 
+truststore
+Aplicación escrita en Go para la instalación local de certificados de desarrollo. Es un archivo que contiene certificados de autoridades de certificación [CA] en las que se confía. Cuando los clientes HTTPS como navegadores o herramientas de línea de comandos, encuentran un certificado de servidor firmado por una CA presente en el truststore [almacen de confianza[, consideran que la conexión es segura y confiable.
+$ truststore -all certificate.crt (instalar o desinstalar en el sistema, en los almacenes de confianza de Firefox y de Java)
+$ truststore -firefox certificate.crt (instalar o desinstalar en el almacén de confianza de Firefox)
+$ truststore -java certificate.crt (instalar o desinstalar en el almacén de confianza de Java)
+$ truststore -no-system certificate.crt (deshabilita la instalación o desinstalación en el almacén de confianza del sistema)
+$ truststore -v -uninstall firefox (en modo verboso y desinstalar el certificado indicado)
+
+
 ts
 [moreutils]
 Añade una marca de tiempo al principio de cada línea de entrada.
