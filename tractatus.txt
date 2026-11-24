@@ -63941,6 +63941,26 @@ $ truncate -s +60k archivo.txt (Aumentar archivo.txt a 60 k)
 $ truncate -s 0 archivo.txt (Borrar todo el contenido de archivo.txt)
 
 
+trurl
+Herramienta para analizar, manipular y generar URLs de forma fiable. Está pensada especialmente para scripts de shell, donde manipular URLs con sed, awk o expresiones regulares suele ser frágil y propenso a errores. trurl conoce las URL y cada URL consta de hasta diez "componentes" separados e independientes. Estos componentes se pueden extraer, eliminar y actualizar con trurl y se denominan por sus respectivos nombres: esquema, usuario, contraseña, opciones, host, puerto, ruta, consulta, fragmento y ID de zona.
+$ trurl https://www.dee%61pl.com/es/translator%74 (arreglar una URL)
+$ trurl "ftp.ex%61mple.com/" (lo mismo)
+$ trurl --url https://curl.se --set host=example.com (cambiar un hostname)
+$ trurl --set scheme=ftp --set host=example.com (crear una URL desde cero)
+$ trurl --url https://curl.se/we/../are.html --set port=8080 (cambiar el puerto y normaliza la ruta eliminando "../")
+$ trurl --url https://curl.se/we/are.html --get '{path}' (extraer componente --get)
+$ trurl --url https://curl.se/we/are.html --get '{port}' (lo mismo, en te caso el puerto)
+$ trurl --url "https://example.com?a=home&here=now" -g '{query:a}' (extrae el componente "g")
+$ trurl --url https://curl.se/hello --append path=you (añadir segmento de path)
+$ trurl --url "https://curl.se?name=hello" --append query=search=string (añadir segmento de query)
+$ trurl --url https://curl.se/we/are.html --redirect here.html (redirigir)
+$ trurl --url https://curl.se/we/are/here.html --redirect "../next.html" (lo mismo)
+$ trurl "https://curl.se?search=hey&utm_source=tracker&utm_medium=email" --trim query="utm_*" (eliminar parámetros de tracking)
+$ trurl "https://example.com?b=a&c=b&a=c" --sort-query (ordenar los parámetros de la query)
+$ trurl "https://fake.host/hello#frag" --set user=::moo:: --json (salida en JSON)
+$ trurl --url-file urllist.txt (leer muchas URLs desde un fichero)
+
+
 ts
 [moreutils]
 Añade una marca de tiempo al principio de cada línea de entrada.
