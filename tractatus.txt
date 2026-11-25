@@ -23644,6 +23644,22 @@ $ ip a | grcat conf.ip
 $ ping -c 3 google.com | grcat conf.ping
 
 
+greetd
+demonio gestor de inicio de sesión, minimalista y flexible, que no asume nada sobre lo que se desea ejecutar. Después de que Linux ya ha arrancado, tuigreetd [ver] pide usuario y contraseña para abrir el escritorio o terminal. Sustituye a gestores de inicio de sesión como GDM, SDDM o LightDM. La configuración básica está en /etc/greetd/config.toml y el usuario por defecto es _greetd pero puede ser greetd. El proceso para cambiar el gestor de inicio de sesión a greetd es:
+# systemctl status display-manager (comprobar cual es el inicio de sesión actual)
+# systemctl disable lightdm.service (deshabilitarlo. En caso de que sea lightdm)
+# systemctl disable sddm.service (en el caso de que sea sddm)
+$ id _greetd (verificar el usuario)
+# systemctl enable greetd (activar el servicio)
+$ reboot (reiniciar)
+Si se quisiera entrar en el sistema sin colocar contraseña, añadir las siguientes lineas el archivo de configuración:
+# nano /etc/greetd/config.toml
+[initial_session]
+command = "startx"
+user = "USER"
+Modificar USER por el usuario correspondiente.
+
+
 grep
 Lee la entrada estándar o un archivo e imprime las líneas que cumplan el patrón. Ver expresiones regulares
 $ grep -c 'UUID' /etc/fstab (Muestra sólo el número de líneas que coinciden con el patron)
@@ -64359,6 +64375,10 @@ s      Guardar todos los cambios.
 ?      Mostrar la ayuda.
 q      Salir de tudu guardando los últimos cambios.
 Q      Salir de tudu sin guardar nada.
+
+
+tuigreed
+Interfaz gráfica de inicio de sesión para greetd [ver], un gestor de inicio de sesión [login manager] minimalista y flexible para Linux que actúa como demonio de autenticación mediante PAM y delega la interfaz visual a distintos greeters externos. No impone qué sesión iniciar ni qué compositor o entorno usar, por lo que es habitual en configuraciones de Wayland, como Sway o Hyprland y sesiones en consola.
 
 
 tune2fs
