@@ -64039,6 +64039,14 @@ Añade una marca de tiempo al principio de cada línea de entrada.
 $ ts (Escribir cualquier cosa y al darle al intro mostrará la marca del tiempo y lo escrito)
 
 
+tsctp
+[lksctp-tools]. Herramienta para verificar que el kernel de Linux tiene el soporte para SCTP (Stream Control Transmission Protocol) cargado y funcionando, y para probar la conectividad básica entre dos puntos. SCTP es un protocolo de transporte alternativa a TCP y UDP, diseñado originalmente para la telefonía IP [SIGTRAN], pero que ofrece ventajas como multi-homing que una conexión puede usar múltiples IPs de red y multi-streaming que evita el bloqueo de cabecera que sufre TCP.
+$ tsctp -l -P 5000 (iniciar un servidor SCTP que escuche en todas las interfaces en el puerto 5000)
+$ tsctp -l -H 192.168.1.10 -P 5000 (lo mismo con un IP especifica)
+$ tsctp -h 127.0.0.1 -p 5000 (en otra terminal o en otra máquina, conectar el cliente al servidor)
+Si la pila SCTP del kernel del servidor está bien y hay conectividad, el cliente enviará una ráfaga de datos de prueba al servidor y ambos procesos terminarán mostrando estadísticas básicas de la transferencia [tiempo, bytes, throughput].
+
+
 tsduck
 Conjunto de herramientas y plugins agrupados bajo el nombre del ejecutable principal: tsp [Transport Stream Processor]. Su filosofía es proporcionar una arquitectura modular y extensible para flujos de transporte MPEG. TSDuck se utiliza en sistemas de televisión digital para pruebas, monitorización, integración, depuración, laboratorios y demostraciones.
 $ tslsdvb -v (identificar los adaptadores)
@@ -64084,6 +64092,28 @@ $ sudo tshark -i 1 -Y “tcp.port == 22” (capturar el tráfico de los paquetes
 $ sudo shark -r ~/test.pcap (leer un archivo de resultados)
 
 
+tsocks
+Permite enrutar de forma transparente el tráfico TCP saliente de aplicaciones que no soportan SOCKS de forma nativa a través de un servidor SOCKS v4 o v5. Funciona inyectando la librería compartida libtsocks.so mediante LD_PRELOAD para interceptar las llamadas connect() del sistema: si la IP destino no pertenece a una red declarada como local, redirige la conexión al proxy SOCKS definido en la configuración, por defecto en ~/.tsocks.conf o /etc/tsocks.conf. Incluye los ejecutables inspectsocks, saveme, tsocks y validateconf. Comprobar la configuración para que contenga como mínimo las siguientes lineas:
+# nano /etc/tsocks.conf
+       # Redes accesibles directamente sin pasar por el proxy SOCKS
+       local = 192.168.1.0/255.255.255.0
+       local = 127.0.0.0/255.0.0.0
+       # Servidor SOCKS por defecto (por ejemplo, un túnel SSH dinámico en el puerto 1080)
+       server = 127.0.0.1
+       server_type = 5
+       server_port = 1080
+$ tsocks curl -I https://example.com (ejecutar un único comando a través del proxy)
+$ tsocks ssh usuario@servidor-remoto.ejemplo.org (lo mismo con una sesión ssh)
+$ source tsocks on (activar la sesión actual)
+$ tsocks show (comprobar salida: LD_PRELOAD="libtsocks.so")
+$ source tsocks off (desactivar el enrutado)
+$ validateconf (comprueba la sintaxis y coherencia del archivo de configuración)
+$ validateconf -f /etc/tsocks.conf -t 93.184.216.34:80 (validar un archivo concreto y simular un destino)
+$ validateconf -t 192.168.1.50:22 (lo mismo)
+$ inspectsocks 127.0.0.1 1080 (consultar un proxy SOCKS en una IP y puerto y determinar qué versión del protocolo soporta: SOCKS 4 o 5)
+$ sudo saveme (eliminar /etc/ld.so.preload en caso de fallo crítico por quedar corrupto o provocar fallos en comandos dinámicos)
+
+
 tsort
 realiza una ordenación topológica. Escribe una lista totalmente ordenada de acuerdo con el orden parcial del fichero especificado.
 $ tsort archivo.txt
@@ -64115,7 +64145,7 @@ Compartir terminal por Internet en modo solo lectura. Quien ve la terminal a tra
 $ tty-share
 	local session: http://localhost:8000/s/local/
 	Press Enter to continue!
-A partir de este momento todo lo que se teclee en la terminal aparecerá en el navegador. En el ejemplo anterior se trata de una sesión localpara una sesión remota la URL puede tener un parecido a https://IP/s/a1b2c3d4-e5f6-7890-abcd-1234567890ab.
+A partir de este momento todo lo que se teclee en la terminal aparecerá en el navegador. En el ejemplo anterior se trata de una sesión local para una sesión remota la URL puede tener un parecido a https://IP/s/a1b2c3d4-e5f6-7890-abcd-1234567890ab.
 
 
 ttygif
