@@ -64209,6 +64209,11 @@ $ tty-clock -r -s -C 2 (que rebote por los lados de la terminal y de color verde
 Nota.- Otros colores: 3: amarillo, 4: azul, 5: rosa, 6:turquesa, 7: blanco
 
 
+tty-record
+herramienta que registra una sesión de terminal o, más concretamente, cualquier comando que se ejecute con ella y guarda el resultado en un archivo HTML autónomo que puede visualizarse en un navegador.
+$ tty-record -command zsh -max-win-size 150x40 -output grabado.html (usando zsh, predeterminado bash, dimensión de la ventana, por defecto 200x50 y archivo con la salida, predeterminado recording.html)
+
+
 tty-share
 Compartir terminal por Internet en modo solo lectura. Quien ve la terminal a través del navegador no puede escribir comandos ni interferir en el equipo emisor. Para dejar de compartir, presionar "Ctrl c".
 $ tty-share
@@ -64224,9 +64229,19 @@ A partir de una grabación de una sesión tty con ttyrec [ver] crea un gif.
   Created: tty.gif in the current directory!
 
 
+ttyload
+Gráficos codificados por colores del promedio de carga de la CPU. Utiliza secuencias de escape ANSI/ASCII para la manipulación de la pantalla y la aplicación de color a los distintos gráficos.
+$ ttyload
+
+
 ttylog
 Imprime todo lo que proviene de un dispositivo serie a la salida estándar. Se puede especificar el dispositivo y la velocidad en baudios y se puede establecer un tiempo de espera en lugar de simplemente finalizar el proceso para detenerlo.
 $ ttylog -t 60 -d /dev/ttyS0 (lo que proviene del dispositivo especificado durante 60 segundos)
+
+
+ttyplot
+toma datos de la entrada estándar o de una tubería y los representa gráficamente en modo texto dentro de una terminal, en tiempo real
+$ seq 0 0.1 10 | ttyplot -t números -c % (ver una secuencia de números del 0 al 10, incrementando en 0.1 en cada paso, colocar el título indicado y usar el caracter "%". "q" para salir)
 
 
 ttyrec
@@ -64317,6 +64332,33 @@ $ find / -name archivo > encontrado 2> errores &
 $ find / -name archivo >& encontrado-errores.txt (Otra forma de redirigir a dos archivos [encontrado y errores.txt])
 Indicando que la salida del comando find (las rutas en donde encontró el “archivo ”) se almacene en el archivo “encontrado” y que si existe errores en la ejecución del comando (no tiene permisos para entrar a buscar en algún
 directorio) el error se almacene en el archivo “errores”. Adicionalmente enviamos el comando a background para poder hacer uso de la terminal mientras se realiza el proceso.
+
+
+tudu
+Lista de tareas jerárquica para la línea de comandos. Cada tarea cuenta con: Título, descripción detallada, fecha límite y avisa cuando se acerca, categorías y prioridades.
+$ tudu (entrar en la interfaz de la aplicación)
+Algunos de los atajos:
+J      Mover una tarea una posición hacia abajo.
+K      Mover una tarea una posición hacia arriba.
+m      Marcar una tarea como completada.
+dd     Eliminar una tarea.
+dt     Eliminar la fecha límite de la tarea.
+df     Eliminar la prioridad de la tarea.
+dS     Eliminar la fecha programada de la tarea.
+o      Añadir una nueva tarea.
+a      Editar el título de la tarea.
+t      Editar la fecha límite.
+f      Establecer la prioridad de la tarea.
+C      Añadir o modificar la categoría de la tarea.
+e      Editar el texto de la descripción de la tarea.
+x      Desplazar la ventana de texto hacia arriba.
+z      Desplazar la ventana de texto hacia abajo.
+S      Editar la fecha programada de la tarea.
+M      Ocultar o mostrar las tareas marcadas como completadas.
+s      Guardar todos los cambios.
+?      Mostrar la ayuda.
+q      Salir de tudu guardando los últimos cambios.
+Q      Salir de tudu sin guardar nada.
 
 
 tune2fs
