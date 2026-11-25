@@ -64119,6 +64119,75 @@ realiza una ordenación topológica. Escribe una lista totalmente ordenada de ac
 $ tsort archivo.txt
 
 
+tstools
+Conjunto de herramientas para inspeccionar, convertir y manipular flujos MPEG principalmente el formato Transport Stream (TS) que se utiliza habitualmente para la distribución de datos por cable y satélite y el formato Program Stream (PS) que se emplea, por lo general, para el almacenamiento de datos en DVD. Incluye las herramientas es2ts, esdots, esfilter, esmerge, esreport, esreverse, m2ts2ts, pcapreport, ps2ts, psdots, psreport, rtp2264, stream_type, ts2es, ts_packet_insert, tsdvbsub, tsfilter.tstools, tsinfo, tsplay, tsreport y tsserve.
+$ stream_type -v video.mpg (activa modo veboso y muestra si un archivo es TS, PS, ES MPEG-2, ES H.264 o PES)
+$ tsinfo -v grabacion.ts (muestra programas, PIDs, tipos de flujo y PID de PCR)
+$ tsreport grabacion.ts (inspecciona paquetes TS: número de paquetes, PIDs, PAT/PMT, PES, PCR, PTS/DTS y continuidad de contadores)
+$ tsreport -v -max 20 grabacion.ts (muesta primeros 20 paquetes, con detalle)
+$ tsreport -timing -max 500 grabacion.ts (analizar PCR y ritmo de bytes)
+$ tsreport -cnt 0x68 grabacion.ts (detectar huecos o repeticiones en el PID 0x68)
+$ esreport -max 5 video.264 (analiza las primeras 5 unidades ES de un vídeo H.264)
+$ esreport -frames -max 5 video.m2v (analiza las primeras 5 imágenes de un ES MPEG-2)
+$ psreport pelicula.mpg (muestra resumen de un archivo MPEG-PS)
+$ psreport -v -max 3 pelicula.mpg (muestra detalle de los primeros 3 paquetes PS)
+$ esdots -v video.264 (genera una representación compacta de la estructura del flujo)
+$ esdots -gop -fr 30 video.264
+$ psdots -v pelicula.mpg -max 100
+$ es2ts video.264 video.ts (convertir vídeo H.264 a TS)
+$ es2ts -h264 video.raw video.ts (forzar interpretación H.264)
+$ es2ts video.264 -host norton (enviar el TS por TCP al host "norton")
+$ ts2es -video -stdout original.ts | es2ts -stdin -pid 0x99 nuevo.ts (extraer vídeo de un TS y reempaquetarlo en otro PID)
+$ ps2ts pelicula.mpg pelicula.ts (convierte Program Stream a Transport Stream)
+$ ps2ts -noaudio pelicula.mpg pelicula-video.ts (sin audio)
+$ ps2ts -dolby atsc pelicula.mpg pelicula.ts (AC-3 conforme a ATSC en lugar de DVB)
+$ ts2es -video grabacion.ts video.es (extraer el primer vídeo)
+$ ts2es -audio grabacion.ts audio.es (extraer el primer audio)
+$ ts2es -pid 0x68 grabacion.ts flujo.es (extraer por PID)
+$ ts2es -pes pelicula.mpg video.es (extraer ES desde un archivo PS)
+$ m2ts2ts grabacion.m2ts grabacion.ts (convierte un archivo M2TS, el formato BDAV/MPEG-2 TS usado habitualmente en Blu-ray y algunas cámaras, a un TS convencional)
+$ esmerge video.264 audio.aac resultado.ts (une un ES de vídeo H.264 con un ES de audio AAC ADTS y produce un TS)
+$ esfilter -copy video.es recorte.es -max 2000 (copiar las primeras 2000 unidades ES)
+$ esfilter -strip video.es solo-i.es (conservar solo fotogramas I/IDR)
+$ esfilter -filter video.es rapido.es -max 2000 (avance rápido aproximado de 8x)
+$ esfilter -filter -freq 4 -tsout video.es rapido.ts (avance rápido de 4x y salida TS)
+$ esreverse video.264 inverso.264 (genera reproducción rápida hacia atrás. Por defecto conserva aproximadamente uno de cada ocho fotogramas de referencia. Solo procesa el vídeo, no el audio)
+$ esreverse video.264 -tsout inverso.ts
+$ esreverse -pes original.ts -tsout inverso.ts
+$ tsfilter.tstools entrada.ts salida.ts (conservar, descartar o reescribir componentes del TS antes de analizarlos o remultiplexarlos)
+$ tsplay video.ts 235.1.1.1:1234 (multicast UDP en 235.1.1.1:1234)
+$ tsplay video.ts 235.1.1.1:1234 -loop (reproducción en bucle)
+$ tsplay video.ts -tcp receptor (enviar por TCP)
+$ tsplay video.ts 235.1.1.1:1234 -mcastif 192.168.1.20 (elegir interfaz para multicast)
+$ tsplay video.ts 235.1.1.1:1234 -hd (ajuste para HD)
+$ tsserve pelicula.mpg (servir un archivo en el puerto 88)
+$ tsserve -port 8889 -0 pelicula.mpg -1 video.ts -2 noticias.ts (servir varios archivos en el puerto 8889)
+Un cliente puede enviar comandos de un carácter: "p" pausa, "n" reproducción normal, "f" avance rápido, "r" retroceso, ">" y "<" saltos, y "q" para cerrar.
+Nota.- Formatos
+ES --> Flujo elemental: vídeo o audio sin la envoltura de contenedor. Datos de códec, por ejemplo H.264 o AAC
+PS --> Program Stream: agrupa ES en un contenedor orientado a almacenamiento: DVD, archivos .mpg
+TS --> Transport Stream: paquetes de 188 bytes con PIDs, PCR, PAT/PMT, apto para transporte y emisión: DVB, satélite, cable, IPTV
+
+
+tth
+Traduce fuentes en TeX estándar o LaTeX a documentos HTML
+$ tth <file.tex >file.html (convertir .tex a .html)
+
+
+tthsum
+genera o verifica sumas de comprobación TTH
+$ tthsum arhivo (forma básica)
+$ tthsum -b archivo.bin (No realiza ninguna acción, se usa -b para tratar los archivos binarios de forma distinta a los archivos de texto)
+$ tthsum -p -m archivo (muestra el proceso y utiliza mmap en lugar de read para leer el contenido de los archivos que se van a procesar)
+$ tthsum -v -w file1 file2 file3 > lista.txt
+$ tthsum -v -w  -c lista.txt file1 file2 file3 (modo detallado, emite adverténcias ante lineas con formato incorrecto y comprueba los archivos de lista-txt con el listado)
+
+
+ttm
+traduce fuentes en TeX o LaTeX a documentos HTML, representando las expresiones matemáticas en formato MathML.
+$ ttm <file.tex >file.xml (convertir el .tex con expresiones matemáticas a .xml de forma correcta)
+
+
 ttv
 Webcam en consola y ascii.
 
