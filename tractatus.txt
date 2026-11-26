@@ -64479,6 +64479,12 @@ Herramienta que realiza un seguimiento y genera informes sobre el historial y la
 # tuptime -n (muestra varios parámetros)
 
 
+turbosearch
+Script en Python, de tipo fuerza bruta, que busca palabras clave en archivos de texto y devuelve las líneas que las contienen.
+$ turbosearch -t http://127.0.0.1/ -w /usr/share/wordlists/dirb/common.txt (búsqueda básica de directorios web)
+$ turbosearch -t http://ejemplo.com/ -w /usr/share/wordlists/dirb/common.txt -T 32 --find "Admin,Login,Welcome" -v (Url objetivo, archivo de palabras a probar, 32 hilos en paralelo, palabras a probar en el servidor y modo verboso)
+
+
 tv3
 Descarga de videos de tv3.cat.
 $ wget http://www.gnulinux.cat/dev/tv3.tar.gz
