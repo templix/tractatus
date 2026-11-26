@@ -64444,6 +64444,24 @@ Demonio que ajusta dinámicamente la configuración del sistema. Lo hace monitor
 # tuned-adm --balanced (perfil ajustado de carácter general no especializado)
 
 
+tuned-utils
+utilidades para realizar ajustes precisos, depurar el sistema y gestionar los perfiles de tuned [ver].
+1.-
+Personalizar un perfil de ahorro de energía
+$ sudo powertop2tuned miperfil (iniciará PowerTOP para el análisis y generará el archivo de configuración en /etc/tuned/miperfil/)
+Editar manualmente la configuración ya que el archivo generado contiene todas las recomendaciones de PowerTOP, pero por defecto están comentadas y descomentar las que procedan:
+$ sudo nano /etc/tuned/profiles/miperfil/tuned.conf
+Por ejemplo, para activar la gestión de energía del enlace SATA, descomentar la linea:
+/sys/class/scsi_host/host2/link_power_management_policy=med_power_with_dipm
+$ sudo powertop2tuned --input mireporte.html miperfil (activar el nuevo perfil)
+
+
+tuned-utils-systemtap
+Scripts de SystemTap para la monitorización manual y detallada de estadísticas de disco y red. Los scripts son diskdevstat, netdevstat, scomes y varnetload
+# diskdevstat 2 60 (observar durante 60 segundos actualizando cada 2. Por defecto se actualiza cada 5 segundos y se ejecuta dutante un dia)
+# netdevstat 2 60 (lo mismo pero para observar la actividad de la red)
+
+
 tuptime
 Herramienta que realiza un seguimiento y genera informes sobre el historial y las estadísticas del sistema en tiempo real, preservando los registros de tiempo de actividad y de inactividad entre los apagados.
 # systemctl status tuptime.service (comprobar estado del servicio)
