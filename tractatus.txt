@@ -64385,6 +64385,33 @@ tumbler
 proporciona soporte para la creación de miniaturas (thumbnails) para diversos tipos de archivos y URIs [Identificadores Uniformes de Recursos]. Se utiliza principalmente en entornos de escritorio como XFCE para generar imágenes en miniatura de archivos multimedia, documentos, y otros tipos de contenido que pueden ser representados visualmente. Cuando una aplicación, como un gestor de archivos, necesita una miniatura para un archivo, por ejemplo, una imagen o video, envía una solicitud a Tumbler oficialmente a través del bus de D-Bus. Esta solicitud generalmente incluye el URI del archivo y el tipo MIME asociado.
 
 
+tuna
+Herramienta diseñada para ajustar en caliente el comportamiento de procesos, hilos del kernel, interrupciones (IRQ) y afinidad de CPU en sistemas Linux. Permite cambiar la política de planificación, la prioridad de planificación y la afinidad con el procesador tanto para procesos como para sus hilos. Asimismo, permite modificar la afinidad con el procesador para las interrupciones, aislar CPU y distribuir hilos o IRQ entre distintas CPU.
+$ tuna show_threads | less (ver el estado actual de todos los procesos)
+$ tuna show_threads -t 'https*' (que aectan al servicio https)
+$ tuna show_threads -t 1035868,1022235 (a los PID especificados)
+$ tuna show_irqs (listar IRQs y su afinidad)
+$ tuna show_irqs -q 'eth*' (solo las de Ethernet)
+$ tuna isolate -c 0 (aislar la CPU 0 [todo se mueve fuera de ella])
+$ tuna isolate -c 2,3 (aislar las CPUs 2 y 3)
+$ tuna isolate -S 1 (aislar todo un socket de CPU)
+$ tuna move -c 0,1 -t 'ssh*' (mover todos los procesos ssh a las CPUs 0 y 1)
+$ tuna move -c 3 -q 'eth0*' (mover las IRQs de la tarjeta de red a la CPU 3)
+$ tuna -U (operaciones que no afectarán a los hilos de usuario)
+$ tuna -K (operaciones que no afectarán a los hilos del núcleo)
+$ tuna priority FIFO:80 -t 12345 (poner un proceso en política FIFO con prioridad 80)
+$ tuna priority RR:50 -t 'mi_aplicacion*' (política Round-Robin con prioridad 50)
+$ tuna priority :40 -t 12345 (solo cambiar la prioridad manteniendo la política actual. Políticas posibles: OTHER (normal), FIFO, RR, BATCH.)
+$ tuna run -c 4-7 -p FIFO:90 "mi_app --opcion" (lanzar una aplicación en las CPUs 4-7 con política FIFO:90)
+$ tuna include -c 0 (permitir de nuevo que los hilos usen una CPU previamente aislada)
+$ tuna save mi_config.txt (guardar la configuración actual de hilos del kernel)
+$ tuna apply mi_config.txt (aplicar un perfil guardado)
+1.-
+Distribuir (spread) de forma equilibrada
+$ tuna isolate -S 2 (primero aislar el socket 2)
+$ tuna spread -q 'eth*' -S 2 (luego distribuir las IRQs de Ethernet entre las CPUs del socket 2)
+
+
 tune2fs
 [tunefs]. Chequeo de la tabla de particiones
 # tune2fs -c 80 /dev/sda1 (cada 80 reinicios)
@@ -64408,10 +64435,13 @@ Convertir sistema de archivos de ext3 a ext4. Desde un livecd o una partición n
 
 
 tuned
-Demonio que ajusta dinámicamente la configuración del sistema. Lo hace monitoreando periódicamente el uso de varios componentes del sistema y en base a esa información, los componentes se colocarán en modos de ahorro de energía más bajos o más altos para adaptarse a su uso.
+Demonio que ajusta dinámicamente la configuración del sistema. Lo hace monitoreando periódicamente el uso de varios componentes del sistema y en base a esa información, los componentes se colocarán en modos de ahorro de energía más bajos o más altos para adaptarse a su uso. Incluye la herramienta tuned-adm.
 # systemctl status tuned.service (comprobar si está activo)
 # tuned (lanzarlo si no está activo)
 # tuned-adm list (listado de componentes que pueden optimizarse manualmente)
+# tuned-adm --auto_profile (habilita el modo de selección automática de perfil y cambia al perfil recomendado)
+# tuned-adm --recomend (recomienda un perfil adecuado para su sistema. Las reglas predeterminadas recomiendan perfiles orientados a obtener el mejor rendimiento)
+# tuned-adm --balanced (perfil ajustado de carácter general no especializado)
 
 
 tuptime
