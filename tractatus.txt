@@ -64381,6 +64381,10 @@ tuigreed
 Interfaz gráfica de inicio de sesión para greetd [ver], un gestor de inicio de sesión [login manager] minimalista y flexible para Linux que actúa como demonio de autenticación mediante PAM y delega la interfaz visual a distintos greeters externos. No impone qué sesión iniciar ni qué compositor o entorno usar, por lo que es habitual en configuraciones de Wayland, como Sway o Hyprland y sesiones en consola.
 
 
+tumbler
+proporciona soporte para la creación de miniaturas (thumbnails) para diversos tipos de archivos y URIs [Identificadores Uniformes de Recursos]. Se utiliza principalmente en entornos de escritorio como XFCE para generar imágenes en miniatura de archivos multimedia, documentos, y otros tipos de contenido que pueden ser representados visualmente. Cuando una aplicación, como un gestor de archivos, necesita una miniatura para un archivo, por ejemplo, una imagen o video, envía una solicitud a Tumbler oficialmente a través del bus de D-Bus. Esta solicitud generalmente incluye el URI del archivo y el tipo MIME asociado.
+
+
 tune2fs
 [tunefs]. Chequeo de la tabla de particiones
 # tune2fs -c 80 /dev/sda1 (cada 80 reinicios)
@@ -64411,10 +64415,20 @@ Demonio que ajusta dinámicamente la configuración del sistema. Lo hace monitor
 
 
 tuptime
-Mostrar el tiempo que esta encendido el sistema.
-$ tuptime -l -e (desde que se encendió)
-$ tuptime -n (muestra varios parámetros)
-$ tuptime -k (tiempo de actividad del kermel)
+Herramienta que realiza un seguimiento y genera informes sobre el historial y las estadísticas del sistema en tiempo real, preservando los registros de tiempo de actividad y de inactividad entre los apagados.
+# systemctl status tuptime.service (comprobar estado del servicio)
+# tuptime (salida predeterminada)
+# tuptime -t (muestra la vida útil del sistema en forma de tabla)
+# tuptime -l (muestra la vida útil del sistema en forma de lista)
+# tuptime -k (añade versión del kernel a la salida)
+# tuptime --csv (genera un informe en formato CSV)
+# tuptime -s (muestra el tiempo en segundos y en formato epoch [tiempo Unix])
+# tuptime -d '%H:%M:%S %d-%m-%Y' (cambia el formato de fecha y hora. Por defecto, la salida utiliza la configuración regional del sistema)
+# tuptime --tsince -31557600 (genera un informe desde hace un año)
+# tuptime -g (verificar el apagado correcto)
+# tuptime -v -A 2 -b -e 2 (salida detallada, limite de inicios 2, mostrar el boot IP y 2 números decimales en los porcentajes)
+# tuptime -p (muestra los estados de energía [ejecución + suspensión])
+# tuptime -n (muestra varios parámetros)
 
 
 tv3
