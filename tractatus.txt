@@ -7122,6 +7122,17 @@ $ chpst -u www-data -D /var/www/ /usr/sbin/nginx (ejecuta Nginx en un entorno ch
 $ chpst -c 100 /usr/bin/python script.py (uso de CPU al 100% [que el proceso podrá usar completamente un núcleo de la CPU])
 
 
+chr
+Editor de texto para terminal.
+$ chr archivo.txt
+Algunos atajos
+Shift+teclas de flecha --> seleccionar texto
+Ctrl+C --> copiar selección
+Ctrl+V --A pegar selección
+Alt+F --> abre el menú
+Ctrl+Q --> salir
+
+
 chromium
 Navegador web. El perfil por defecto está en /home/usuario/.config/chromium, para crear nuevos perfiles [El inicio del parámetro son 2 guiones]:
 $ mkdir /home/usuario/.config/chromium-dos
@@ -64439,9 +64450,12 @@ Demonio que ajusta dinámicamente la configuración del sistema. Lo hace monitor
 # systemctl status tuned.service (comprobar si está activo)
 # tuned (lanzarlo si no está activo)
 # tuned-adm list (listado de componentes que pueden optimizarse manualmente)
-# tuned-adm --auto_profile (habilita el modo de selección automática de perfil y cambia al perfil recomendado)
-# tuned-adm --recomend (recomienda un perfil adecuado para su sistema. Las reglas predeterminadas recomiendan perfiles orientados a obtener el mejor rendimiento)
-# tuned-adm --balanced (perfil ajustado de carácter general no especializado)
+# tuned-adm auto_profile (habilita el modo de selección automática de perfil y cambia al perfil recomendado)
+# tuned-adm recommend (recomienda un perfil adecuado para su sistema. Las reglas predeterminadas recomiendan perfiles orientados a obtener el mejor rendimiento)
+# tuned-adm balanced (perfil ajustado de carácter general no especializado)
+# tuned-adm active (ver qué perfil tenemos activo)
+# tuned-adm profile latency-performance (cambiar a perfil "latency-performance")
+# tail -f /var/log/tuned/tuned.log (ver los logs)
 
 
 tuned-utils
