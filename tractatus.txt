@@ -64610,6 +64610,14 @@ twm
 Gestor de ventanas para el sistema X Window. Ofrece barras de título, ventanas con formas personalizadas, diversas modalidades de gestión de iconos, funciones de macro definidas por el usuario, enfoque de teclado basado en clics o en la posición del puntero, así como la posibilidad de asignar teclas y botones del puntero a acciones específicas definidas por el usuario.
 
 
+twms
+[Tiny Web Map Service]. Servidor ligero escrito en Python que actúa como puente y caché entre mapas teselados (TMS) y servicios de mapas web estándar (WMS). Toda su lógica y definición de capas residen en su archivo de configuración, mientras que el comando solo sirve para arrancar el servicio. El puerto es el único argumento que acepta el comando y si no se especifica o se establece en la configuración, por defecto es 8080. El archivo de configuración en/etc/twms/twms.conf.
+# systemctl status twms.service (comprobar si está activo)
+$ twms 8080 (levantar el servicio localmente en el puerto 8080 para conectarlo a QGIS o JOSM)
+$ nohup twms 8000 > /var/log/twms.log 2>&1 & (en un servidor se puede lanzar en segundo plano redirigiendo los logs)
+$ firefox http://localhost:8080/?SERVICE=WMS&REQUEST=GetCapabilities (petición de capacidades para comprobar en el navegador que funciona)
+
+
 txt2html
 Convertir texto a html.
 $ txt2html archivo.txt --outfile archivo.html
