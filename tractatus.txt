@@ -56343,6 +56343,20 @@ Otros archivos de configuración:
 /etc/shorewall/zones
 
 
+shot-scraper
+Captura de pantalla de una web al completo. Instalación:
+# apt install tor
+# rm /usr/lib/python3.13/EXTERNALLY-MANAGED
+$ pip install shot-scraper
+$ export PATH=$PATH:/home/fanta/.local/bin
+$ shot-scraper install
+$ shot-scraper install -b firefox
+Sacar una captura de una web:
+$ shot-scraper https://fanta.56k.es -b firefox (crea fanta-56k-es.png que puede abrirse con cualquier visor de imágenes)
+$ shot-scraper https://fanta.56k.es -b chromium
+$ shot-scraper https://lapipaplena.wordpress.com -b firefox
+
+
 shove
 Herramienta de prueba para scripts de shell como sh, bash, dash, ksh y zsh con salida TAP.
 $ cat script.sh | shove

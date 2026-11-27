@@ -2,4 +2,4 @@ El Tractatus és un compendi d'apunts, exposats per ordre alfabètic, recopilat 
 
 El Tractatus es un compendio de apuntes, expuestos por orden alfabético, recopilado (desde 2004) por los miembros de La Pipa Plena de Figueras (Gerona) a lo largo de estos años fruto de muchísimas charlas, veladas y noches de insomnio navegando por las redes en busca de utilidades, comandos, curiosidades, trucos, tesoros y soluciones brillantes para derrumbar los penúltimos muros que cualquier usuario GNU/Linux pueda encontrarse a lo largo de su inmersión en este apasionante y maravilloso mundo. Básicamente el tratatus es un documento de texto (si, un .txt) gestionado por un script de bash y emacs.
 
-Número de entradas en el tractatus: 5499
+Número de entradas en el tractatus: 5500
