@@ -30260,7 +30260,7 @@ $ lablie render etiqueta.svg datos.yaml --output-dir etiquetas/ (creará archivo
 
 lame
 Cambiar formatos de audio
-$ lame entrada.wav salida.mp3 (forma básica de pasar de .wwav a .mp3)
+$ lame entrada.wav salida.mp3 (forma básica de pasar de .wav a .mp3)
 $ lame -h -m j tema.wav tema.mp3  (otra forma de pasar de .wav a .mp3)
 $ lame -h -m j --nogap *.wav (pasar lote de wav a mp3)
 $ lame -h --decode tema.mp3 tema.wav (pasar de mp3 a wav)
@@ -64630,6 +64630,18 @@ twms
 $ twms 8080 (levantar el servicio localmente en el puerto 8080 para conectarlo a QGIS o JOSM)
 $ nohup twms 8000 > /var/log/twms.log 2>&1 & (en un servidor se puede lanzar en segundo plano redirigiendo los logs)
 $ firefox http://localhost:8080/?SERVICE=WMS&REQUEST=GetCapabilities (petición de capacidades para comprobar en el navegador que funciona)
+
+
+twolame
+Codificador MPEG Audio Layer 2 optimizado. Genera archivos de audio en formato MP2. Este formato [.mp2] sigue siendo muy usado en radiodifusión digital [DAB], televisión digital [DVB] y algunos sistemas de distribución de audio profesional, aunque el MP3 lo superó en uso general en PCs e Internet. Su sintaxis es muy similar a la del codificador MP3 lame [ver], por lo que puede servir como reemplazo en muchos casos especialmente cuando hay problemas de patentes con MP3.
+$ twolame cancion.wav (codificación básica. Genera cancion.mp2)
+$ twolame -b 160 -m j audio.aiff audio_160.mp2 (bitrate concreto y joint stereo. El bitrate por defecto en estereo a 44.1/48 kHz es 192 kbps)
+$ twolame -v -P 2 entrada.wav salida.mp2 (modo VBR)
+$ twolame -P 2 -V -5 entrada.wav salida.mp2 (VBR favoreciendo bitrates más bajos)
+$ sox sonido_11025.aiff -t raw -r 16000 - | twolame -r -s 16000 - - > salida.mp2 (codificar desde un pipe con sox)
+$ twolame -a -b 128 estereo.wav mono.mp2 (solo mono a 128 kbps)
+$ twolame -r -s 44100 -N 2 entrada.raw salida.mp2 (entrada raw PCM)
+Nota.- La biblioteca libtwolame, la usan programas como VLC, GStreamer, Audacity, etc., para codificar a MP2.
 
 
 txt2html
