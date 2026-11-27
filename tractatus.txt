@@ -64554,6 +64554,20 @@ Atajos
 	Mays + t (Siempre encima)
 
 
+twatch
+Monitorea rastreadores de torrents basada en expresiones regulares y descarga automáticamente nuevos torrents así como información sobre ellos, mediante filtros personalizables. twatch no es, por sí mismo, un cliente BitTorrent como qBittorrent o Transmission. Su función principal es localizar y obtener los torrents. La descarga del contenido al que apuntan esos archivos corresponde al cliente BitTorrent. Ejemplos en /usr/share/doc/twatch/examples.
+$ twatch --verbose --execute proyecto.xml (ejecutar mostrando información detallada)
+
+
+tweeper
+Herramienta de extracción web [web scraper] para convertir sitios compatibles, como Twitter.com, Instagram.com, Facebook.com, Dilbert y Pump.io a formato RSS para que se pueda seguir publicaciones sin tener que visitar directamente cada plataforma, sin iniciar sesión ni estar suscrito a dichas redes. Tweeper convierte la información pública a formato RSS, de modo que pueda ser consultada y recopilada mediante un lector de feeds.
+$ tweeper "https://www.instagram.com/nombre_de_usuario/" (obtener el contenido de una cuenta pública de un usuario de Instagram)
+$ tweeper "https://www.facebook.com/nombre_de_pagina/" (de un usuario de facebook)
+$ tweeper "https://www.instagram.com/nombre_de_usuario/" > instagram.xml (guardar el resultado en un archivo)
+$ tweeper "https://www.instagram.com/nombre_de_usuario/" | xmllint --format - (comprobar si la salida tiene formato XML válido. Ver xmllint)
+Nota.- No es una API oficial de las redes sociales y no permite acceder a contenido privado ni sustituye una sesión autenticada.
+
+
 twidge
 Twittear desde la linea de consola.
 twidge setup (Configuración inicial)
