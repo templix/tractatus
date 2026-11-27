@@ -64658,6 +64658,19 @@ $ cd /usr/share/man/man1
 $ bookman -p -t "Referencias gtk" gtk4* > ~/gtk.pdf
 
 
+txt2regex
+Herramienta de terminal que guía paso a paso mediante preguntas interactivas para construir una expresión regular, sin necesidad de dominar la sintaxis. Su valor diferencial es que genera la expresión adaptada al dialecto del programa que se vaya a usar: grep, sed, awk, perl, python, vim, php, procmail, emacs y hasta más de 20 programas, porque la sintaxis de regex varía bastante entre ellos.
+$ txt2regex (entra en modo interactivo)
+$ txt2regex --all (muestra cómo se vería la misma regex en todos los programas soportados)
+$ txt2regex --prog sed,grep,perl (restringe la salida a los programas que interesan)
+$ txt2regex --showmeta (tabla de referencia rápida con la sintaxis de los metacaracteres por programa)
+$ txt2regex --showstr (equivalente, pero para clases de caracteres y cadenas)
+$ txt2regex --history 0,1,2 (reconstruye una regex a partir de respuestas previas guardadas)
+$ txt2regex --whitebg (ajustan los colores al fondo de la terminal)
+$ txt2regex --blackbg (lo mismo)
+$ txt2regex --history 0,2 --prog sed,awk,python (ver una "historia" de respuestas traducida a sed, awk y python)
+
+
 txt2tags
 Convertir archivos de texto a distintos formatos.
 $ txt2tags -t html fichero.txt   (convierte .txt en .html)
