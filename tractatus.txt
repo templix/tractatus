@@ -7796,6 +7796,12 @@ $ clzip --test archivo.lzma (verifica si el archivo comprimido está intacto sin
 $ cluncompress archivo.lzma (descomprimir archivos creados con clzip)
 
 
+cmake
+Opciones de compilación de binarios. Substituto de ./configure. Se encarga de encontrar todas las dependencias necesarias y las opciones personalizadas de compilación
+# cmake -L (Ver listado de opciones)
+# cmake -LHA (Complementar el listado con una descripción breve y visualizar las variables privadas)
+
+
 cmark
 Es la implementación de referencia de C de CommonMark, una versión racionalizada de la sintaxis Markdown
 $ cmark input.md > output.html (convierte input.md al formato HTML y lo guarda en output.html)
@@ -7803,6 +7809,14 @@ $ cmark input.md | cmark-pdf > output.pdf (convierte input.md al formato PDF y l
 $ echo "# Título" | cmark --smart (muestra cómo se renderiza el Markdown en la salida estándar)
 $ cmark --smart --xhtml input.md > output.html (usa opciones adicionales para mejorar la conversión)
 $ cat input.md | cmark --gfm > output.html (filtra el contenido de un archivo y luego lo procesa con cmark)
+
+
+cmatrix
+Salvapantallas estilo matrix
+$ cmatrix -u 9 -B -C blue  (A velocidad lenta [0-9], usando todos los caracteres y especificando color [green, red, blue, white, yellow, cyan, magenta y black]
+Nota.- Si durante la ejecución se pulsan las teclas siguientes, se cambia al color indicado:
+! (rojo) @ (verde)# (amarillo) $ (azul) % (magenta) ^ (cyam) & (blanco) ) (negro)
+Nota.- En la pantalla gráfica de screensaver, puede estar referenciada como GLMatrix o XMatrix
 
 
 cmdreader
@@ -7866,6 +7880,68 @@ $ cmdtest echo_tests
       +something else
       test 1/1
       0/1 tests OK, 1 failures
+
+
+cmospwd
+Herramienta para descifrar contraseñas almacenadas en CMOS que se utilizan para acceder a la configuración BIOS de una computadora. Esta aplicación debería funcionar de inmediato en la mayoría de los sistemas modernos, pero es posible que algunas BIOS más complejas no sean compatibles o requieran pasos adicionales.
+# cmospwd -c "contraseña_cmos" (descifrar con una contraseña específica)
+# cmospwd -p "palabra_secreta" (probar diferentes contraseña)
+# cmospwd -d (volcar información por pantalla)
+Tambien se puede arrancar con un cd-live [System rescue] y modificar la entrada del kernel del menú de opciones de grub para iniciar una shell [rw init=/bin/bash]
+# cmospwd /d   (pasar la información por pantalla)
+# cmospwd /k   (resetear)
+# cmospwd /d /w bios.back  (copia de seguridad)
+# cmospwd /l bios.back (Ver el contenido de la copia de seguridad)
+# cmospwd /r bios.back  (restablecer la copia de seguridad)
+
+
+cmp
+Compara dos ficheros octeto a octeto.
+$ cmp fichero1 fichero2
+
+
+cmt
+[Computer Music Toolkit]. Colección de complementos compatibles con LADSPA que solo se pueden usar en aplicaciones host como sweep.
+
+
+cmus
+Reproductor de música.
+$ cmus --plugins (Listado de plugins disponibles)
+$ cmus
+Algunas teclas de control:
+	1 (Muestra la biblioteca)
+	2 (Muestra la biblioteca ordenada según los criterios del usuario)
+	4 (Muestra la cola de pistas que se reproducirá)
+	5 (Navegar por los directorios)
+	7 (Muestra todas las teclas de control)
+	enter (reproducir la canción))
+	+ (Sube el volumen un 10%)
+	- (Baja el volumen un 10%)
+	a (Añadir canción al listado)
+	b (siguiente canción)
+	c (Pausar la reproducción
+	i (Estando con la opción 5, muestra los directorios ocultos)
+	r (Repetir canción)
+	q (salir)
+Para empezar agregar la ruta al directorio de música:
+	:add ~/música/
+Listado de temas de colores disponibles en /usr/share/cmus. Para modificar el esquema de colores:
+	:colorscheme cyan
+Para que el cambio sea permanente:
+$ nano .cmus/rc
+Y colocar la linea:
+	colorscheme cyan
+
+
+cnetworkmanager
+Información sobre conexiones de red
+$ cnetworkmanager -d (información sobre las tarjetas de red)
+$ cnetworkmanager -c (conexión activa)
+$ cnetworkmanager -s (lista todas la conexiónes guardadas)
+$ cnetworkmanager -u (Lista configuración de usuario de la conexión)
+$ cnetworkmanager --state  (estado de la conexión)
+$ cnetworkmanager -a (Lista puntos de acceso)
+$ cnetworkmanager -w true/false  (activar/desactivar la conexión)
 
 
 cobertura
@@ -7940,6 +8016,17 @@ $ codespell -e .py . (verificar en el presente directorio solo los archivos .py)
 $ codespell -L palabra1,palabra2 -e .sh . (igonorar las palabras mencionadas en todos los .sh del directorio)
 
 
+codificación
+[de caracteres]. En documentos html, colocar según proceda al inicio del documento la linea:
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+
+
+cog
+Pequeño navegador web de una sola ventana basado en WPE WebKit sin interfaz de usuario por lo que sus capacidades son limitadas comparadas con navegadores modernos y solo es útil para uso específico o como herramienta desarrollo web.
+$ cog https://www.example.com
+
+
 coinst
 Este paquete es útil cuando se está interesado en analizar la co-instalabilidad de paquetes en un repositorio de paquetes grande. Un conjunto de paquetes se denomina co-instalable si se puede ampliar a un conjunto que satisface todas las relaciones entre paquetes (dependencias, conflictos, etc.). Esta herramienta reduce un repositorio a uno mucho más pequeño, su llamado núcleo de co-instalabilidad, que se comporta exactamente igual en lo que respecta a la co-instalabilidad de paquetes. Esto se logra: - eliminando todas las relaciones que no son relevantes para este propósito - identificando todos los paquetes que se comportan de la misma manera. El núcleo es típicamente órdenes de magnitud más pequeño que el repositorio original.
 Requiere un archivo Packages para analizar la co-instalabilidad de paquetes. Puede obtenerse este archivo desde el repositorio de Debian o Ubuntu:
@@ -7951,6 +8038,16 @@ $ coinst-scheck -f modelo.cmodel --incompatible (muestra los pares de paquetes q
 $ coinst-scheck -f modelo.cmodel --unsatisfied (ayuda a identificar problemas específicos relacionados con las dependencias)
 $ coinst-scc -f modelo.cmodel > componentes.txt (genera un archivo componentes.txt con los detalles de los componentes)
 $ coinst-scheck -f modelo.cmodel --graph | dot -Tpng -o conflictos.png (genera un archivo conflictos.png que muestra visualmente las relaciones entre paquetes y sus conflictos)
+
+
+col
+Normalmente este comando se utiliza para eliminar caracteres raros o no necesarios relacionados con el formato al imprimir a txt páginas man.
+$ man less | col -b > less.txt
+
+
+collectd
+Demonio que recopila información del sistema periódicamentes. Las estadísticas se actualizan cada 10 segundos de forma predeterminada y pueden modificarse en el archivo /etc/collectd/collectd.conf. Ejemplos de configuraciónes en /usr/share/doc/collectd/examples/. Los datos recogidos se visualizan en http://localhost/server-status
+# systemctl start collectd.service (pide contraseña de forma gráfica y activa el demonio)
 
 
 collectl
@@ -7970,130 +8067,6 @@ $ colmap compute_pose_and_timeshift --database my_project.db (calcular la estruc
 $ colmap per --database my_project.db --output_path /ruta/a/salir/mapper_output (calcular las coordenadas 3D de los puntos)
 $ colmap mvs --database my_project.db --input_path /ruta/a/salir/mapper_output --output_path /ruta/a/salir/mvs_output (calcular el modelo de profundidad)
 $ colmap viewer --mvs-output /ruta/a/salir/mvs_output (visualizar los resultados)
-
-
-colores
-Cuadro de colores. Las primeras dos cifras [0;30] afectan al color de las letras de la terminal, las segundas [0;40], una decena superior que las anteriores, corresponden al color de fondo.
-	Negro          0;30	0;40
-	Gris Obscuro   1;30	1;40
-	Rojo           0;31	0;41
-	Rojo Claro     1;31	1;41
-	Verde          0;32	0;42
-	Verde Claro    1;32	1;42
-	Café           0;33	0;43
-	Amarillo       1;33	1;43
-	Azul           0;34	0;44
-	Azul Claro     1;34	1;44
-	Purpura        0;35	0;45
-	Fucsia         1;35	1;45
-	Cyan           0;36	0;46
-	Cyan Claro     1;36	1;46
-	Gris Claro     0;37	0;47
-	Blanco         1;37	1;47
-Nota.- Si se omite el el 0 o el 1 por defecto es el 0
-Algunso ejemplos:
-$ echo -e "\e[1;33;44mlinux es un sistema genial" (En azul toda la linea)
-$ echo -e "\e[0;34mAtención:\e[1;32m linux es un\e[0;31m sistema genial" (En azul, verde y rojo sin fondo)
-$ echo -e "\e[1;33;40mLinux es un sistema genial" (En amarillo y con fondo gris toda la linea)
-$ echo -e "\e[1;37;1;41mLinux es un sistema genial\e[0m" (En blanco y fondo rojo hasta el final del texto  ...\e[0m")
-$ echo -e "\e[33;40mAtención:\e[34;41m linux es un\e[37;42m sistema genial\e[0m" (café con fondo gris, azul y fondo rojo y blanco con fondo verde y terminando el colorido al final del texto)
-
-
-cmake
-Opciones de compilación de binarios. Substituto de ./configure. Se encarga de encontrar todas las dependencias necesarias y las opciones personalizadas de compilación
-# cmake -L (Ver listado de opciones)
-# cmake -LHA (Complementar el listado con una descripción breve y visualizar las variables privadas)
-
-
-cmatrix
-Salvapantallas estilo matrix
-$ cmatrix -u 9 -B -C blue  (A velocidad lenta [0-9], usando todos los caracteres y especificando color [green, red, blue, white, yellow, cyan, magenta y black]
-Nota.- Si durante la ejecución se pulsan las teclas siguientes, se cambia al color indicado:
-! (rojo) @ (verde)# (amarillo) $ (azul) % (magenta) ^ (cyam) & (blanco) ) (negro)
-Nota.- En la pantalla gráfica de screensaver, puede estar referenciada como GLMatrix o XMatrix
-
-
-cmospwd
-Herramienta para descifrar contraseñas almacenadas en CMOS que se utilizan para acceder a la configuración BIOS de una computadora. Esta aplicación debería funcionar de inmediato en la mayoría de los sistemas modernos, pero es posible que algunas BIOS más complejas no sean compatibles o requieran pasos adicionales.
-# cmospwd -c "contraseña_cmos" (descifrar con una contraseña específica)
-# cmospwd -p "palabra_secreta" (probar diferentes contraseña)
-# cmospwd -d (volcar información por pantalla)
-Tambien se puede arrancar con un cd-live [System rescue] y modificar la entrada del kernel del menú de opciones de grub para iniciar una shell [rw init=/bin/bash]
-# cmospwd /d   (pasar la información por pantalla)
-# cmospwd /k   (resetear)
-# cmospwd /d /w bios.back  (copia de seguridad)
-# cmospwd /l bios.back (Ver el contenido de la copia de seguridad)
-# cmospwd /r bios.back  (restablecer la copia de seguridad)
-
-
-cmp
-Compara dos ficheros octeto a octeto.
-$ cmp fichero1 fichero2
-
-
-cmus
-Reproductor de música.
-$ cmus --plugins (Listado de plugins disponibles)
-$ cmus
-Algunas teclas de control:
-	1 (Muestra la biblioteca)
-	2 (Muestra la biblioteca ordenada según los criterios del usuario)
-	4 (Muestra la cola de pistas que se reproducirá)
-	5 (Navegar por los directorios)
-	7 (Muestra todas las teclas de control)
-	enter (reproducir la canción))
-	+ (Sube el volumen un 10%)
-	- (Baja el volumen un 10%)
-	a (Añadir canción al listado)
-	b (siguiente canción)
-	c (Pausar la reproducción
-	i (Estando con la opción 5, muestra los directorios ocultos)
-	r (Repetir canción)
-	q (salir)
-Para empezar agregar la ruta al directorio de música:
-	:add ~/música/
-Listado de temas de colores disponibles en /usr/share/cmus. Para modificar el esquema de colores:
-	:colorscheme cyan
-Para que el cambio sea permanente:
-$ nano .cmus/rc
-Y colocar la linea:
-	colorscheme cyan
-
-
-cmt
-[Computer Music Toolkit]. Colección de complementos compatibles con LADSPA que solo se pueden usar en aplicaciones host como sweep.
-
-
-cnetworkmanager
-Información sobre conexiones de red
-$ cnetworkmanager -d (información sobre las tarjetas de red)
-$ cnetworkmanager -c (conexión activa)
-$ cnetworkmanager -s (lista todas la conexiónes guardadas)
-$ cnetworkmanager -u (Lista configuración de usuario de la conexión)
-$ cnetworkmanager --state  (estado de la conexión)
-$ cnetworkmanager -a (Lista puntos de acceso)
-$ cnetworkmanager -w true/false  (activar/desactivar la conexión)
-
-
-codificación
-[de caracteres]. En documentos html, colocar según proceda al inicio del documento la linea:
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-
-
-cog
-Pequeño navegador web de una sola ventana basado en WPE WebKit sin interfaz de usuario por lo que sus capacidades son limitadas comparadas con navegadores modernos y solo es útil para uso específico o como herramienta desarrollo web.
-$ cog https://www.example.com
-
-
-col
-Normalmente este comando se utiliza para eliminar caracteres raros o no necesarios relacionados con el formato al imprimir a txt páginas man.
-$ man less | col -b > less.txt
-
-
-collectd
-Demonio que recopila información del sistema periódicamentes. Las estadísticas se actualizan cada 10 segundos de forma predeterminada y pueden modificarse en el archivo /etc/collectd/collectd.conf. Ejemplos de configuraciónes en /usr/share/doc/collectd/examples/. Los datos recogidos se visualizan en http://localhost/server-status
-# systemctl start collectd.service (pide contraseña de forma gráfica y activa el demonio)
 
 
 colord
@@ -8121,6 +8094,33 @@ $ colordiff-git archivo1 archivo2
 colored_dmesg
 Como dmesg pero coloreado. El algunas distros el guión en medio [colored-dmesg]
 $ colored_dmesg
+
+
+colores
+Cuadro de colores. Las primeras dos cifras [0;30] afectan al color de las letras de la terminal, las segundas [0;40], una decena superior que las anteriores, corresponden al color de fondo.
+	Negro          0;30	0;40
+	Gris Obscuro   1;30	1;40
+	Rojo           0;31	0;41
+	Rojo Claro     1;31	1;41
+	Verde          0;32	0;42
+	Verde Claro    1;32	1;42
+	Café           0;33	0;43
+	Amarillo       1;33	1;43
+	Azul           0;34	0;44
+	Azul Claro     1;34	1;44
+	Purpura        0;35	0;45
+	Fucsia         1;35	1;45
+	Cyan           0;36	0;46
+	Cyan Claro     1;36	1;46
+	Gris Claro     0;37	0;47
+	Blanco         1;37	1;47
+Nota.- Si se omite el el 0 o el 1 por defecto es el 0
+Algunso ejemplos:
+$ echo -e "\e[1;33;44mlinux es un sistema genial" (En azul toda la linea)
+$ echo -e "\e[0;34mAtención:\e[1;32m linux es un\e[0;31m sistema genial" (En azul, verde y rojo sin fondo)
+$ echo -e "\e[1;33;40mLinux es un sistema genial" (En amarillo y con fondo gris toda la linea)
+$ echo -e "\e[1;37;1;41mLinux es un sistema genial\e[0m" (En blanco y fondo rojo hasta el final del texto  ...\e[0m")
+$ echo -e "\e[33;40mAtención:\e[34;41m linux es un\e[37;42m sistema genial\e[0m" (café con fondo gris, azul y fondo rojo y blanco con fondo verde y terminando el colorido al final del texto)
 
 
 colorize
@@ -9228,6 +9228,32 @@ cpulimit
 Limitar el uso de la cpu para determinados procesos.
 # cpulimit -e yes -l 20 (el de “yes”a un 20% de la cpu. Valor entre 0 y 100)
 # cpulimit -p PID -l 50 (el proceso con el numero PID al 50%)
+
+
+cpuset
+Aplicación que permite reservar núcleos de CPU y nodos de memoria específicos para ejecutar procesos críticos sin interrupciones del resto del sistema, lo que se conoce como CPU shielding o aislamiento. Incluye el comando llamado cset, que permite manipular los cpusets en el sistema y proporciona funciones de mayor nivel, tales como la implementación y el control de una configuración básica de aislamiento de CPU [CPU shielding]. La utilidad cpuset solo es compatible con cgroup v1.
+$ grep -E "cgroup" /proc/mounts (comprobar versión de cgroup. Si la salida muestra cgroup2 el comando no es compatible)
+# cset shield --cpu=2-3 (reservar los núcleos 2 y 3 exclusivamente para determinadas aplicaciones críticas)
+Nota.- El núcleo 0 suele dejarse para el sistema porque gestiona interrupciones de hardware.
+# cset shield --cpu=2-3 --kthread=on (los hilos del kernel que pueden moverse se desplazan al grupo system, este comando fuerza que también se muevan los hilos que no son del kernel [kthreads])
+# cset shield --exec /usr/bin/mi_programa_critico --argumento1 (ejecutar un programa en las CPUs reservadas)
+# cset shield --shield --pid 1234 (mover por su PID un proceso que ya está en ejecución a las CPU reservadas)
+# cset shield --unshield --pid 1234 (sacar un proceso de las CPU reservadas y devolverlo al grupo del sistema)
+# cset shield (ver el estado actual de las CPU reservadas y qué procesos hay dentro)
+# cset shield --reset (desactivar las CPU reservadas y devolver todas las CPUs a la normalidad)
+# cset set --list (listar todos los cpusets actuales)
+# cset set --cpu=1-2 --mem=0 --set=basedatos (crear un nuevo cpuset llamado basedatos asignándole las CPUs 1 y 2, y el nodo de memoria 0)
+# cset set --destroy --set=basedatos (eliminar un cpuset)
+Una vez creados los grupos con cset set, se usa "cset proc" para meter o sacar aplicaciones en ellos:
+# cset proc --set=basedatos --exec /usr/sbin/mysqld (lanzar un comando nuevo dentro de un set específico)
+# cset proc --move --pid=5678 --toset=basedatos (mover un proceso existente [PID 5678] a ese set)
+# cset proc --list --set=basedatos (ver qué procesos están corriendo dentro de un set)
+Nota.- Los cambios no son permanentes, si se reinicia el ordenador, los cpusets desaparecen. Para que se apliquen al arrancar, se tendrá que crear un servicio de systemd o un script de inicio.
+Los comandos de ayuda:
+$ cset shield --help
+$ cset set --help
+$ cset proc --help
+$ firefox /usr/share/doc/cpuset/tutorial.html (tutorial)
 
 
 cpustat
@@ -28042,6 +28068,12 @@ Paquete que contiene una colección de programas utilizados para operaciones de 
     - icmp_redirect - Sistema de redireccionamiento ICMP
     - timestamp - Solicitante de marca de tiempo ICMP
     - dhcpx - "ejercitador" del servidor DHCP
+
+
+irqbalance
+Demonio encargado de distribuir las interrupciones entre varias CPU, lo que puede mejorar el rendimiento y el equilibrio de E/S en sistemas SMP [Symmetric MultiProcessing] un tipo de arquitectura de computadoras en la que dos o más unidades de procesamiento comparten una única memoria central. Este paquete resulta especialmente útil en sistemas con procesadores multinúcleo, ya que, por lo general, las interrupciones solo son atendidas por el primer núcleo. Incluye el ejecutable irqbalance-ui.
+# irqbalance-ui (muestra cómo se distribuyen las IRQ entre las CPU en un momento dado y permite configurar el intervalo de pausa, así como restringir (excluir) determinadas IRQ o CPU durante la ejecución)
+# irqbalance -d -j (que muestre información adicional de depuración y habilite una salida de registro optimizada para systemd-journal)
 
 
 irssi
