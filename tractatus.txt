@@ -64700,6 +64700,14 @@ $ typeset -F (muestra el nombre de todas las funciones de .bashrc y .bash_profil
 $ typeset -f (muestra el cuerpo de todas las funcines)
 
 
+tzdata
+Contiene los datos necesarios para implementar la hora local estándar en diversas ubicaciones representativas de todo el mundo y se actualiza periódicamente para reflejar los cambios que se realizan. Su función no es "ejecutar" la hora por sí solo, sino suministrar las reglas históricas y vigentes en cada zona horaria: cambios de horario de verano/invierno, desfases respecto a UTC y cambios políticos, para que la biblioteca estándar del sistema [glibc] y las utilidades del sistema operativo puedan calcular la hora local.
+$ TZ="America/Argentina/Buenos_Aires" date (comprobar qué hora es en otra zona sin cambiar la configuración global del equipo)
+$ TZ="UTC" date (comprobar la diferencia respecto al domando "date" solo)
+$ ls /usr/share/zoneinfo/Europe (listar zonas disponibles)
+# dpkg-reconfigure tzdata (reconfigurar el paquete tzdata de forma interactiva)
+
+
 tzdiff
 Mostrar zona horaria local.
 $ tzdiff -n 1 -N -H Europe/Madrid (mostrar hora local)
@@ -69180,6 +69188,7 @@ $ zdiff archivo1 archivo2
 zdump
 Visualiza la zona horaria especificada.
 $ zdump Madrid
+$ zdump -v Europe/Madrid | grep 2027 (ver las transiciones de horario de verano e invierno contenidas en un archivo de zona)
 
 
 zegrep
