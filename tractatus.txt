@@ -64708,6 +64708,10 @@ $ ls /usr/share/zoneinfo/Europe (listar zonas disponibles)
 # dpkg-reconfigure tzdata (reconfigurar el paquete tzdata de forma interactiva)
 
 
+tzdata-legacy
+Incluye zonas horarias calculadas según el Tiempo Atómico Internacional (TAI) con un desfase de -10 segundos (TAI-10s) respecto a las zonas horarias normales [POSIX/UTC]. Su instalación añade datos que la mayoría de equipos modernos ya no necesitan y es mejor instalarlo solo cuando algún programa o configuración antigua o externa lo pide.
+
+
 tzdiff
 Mostrar zona horaria local.
 $ tzdiff -n 1 -N -H Europe/Madrid (mostrar hora local)
